@@ -1,0 +1,25 @@
+#' automatic palette adjustment (for small number of categories)
+#' 
+#' @name gpal
+#' @param n the number of variables/factors over which the palette is to paint
+#' @param dark Should a dark palette be used? (Only available for n=2)
+#' @author Hugh Parsonage
+#' @export
+#' @return A vector of HTML colours to be used.
+
+gpal <- function(n, dark = FALSE){
+  grattan.palette <- list(pal.1, pal.2, pal.3, pal.4, pal.5, pal.6)
+  if(n > 6){
+    stop('No palette available for that number of categories.', '\n', 'Consider using `palette = "Oranges"`')
+  }
+  if(dark) {
+    if (n == 2){
+      pal.2dark
+    } else {
+      warning("no dark option for palette, choosing light option... ", n)
+      grattan.palette[[n]]
+    }             
+  } else {
+    grattan.palette[[n]]
+  }
+}

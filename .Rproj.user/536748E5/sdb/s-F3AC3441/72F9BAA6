@@ -1,0 +1,17 @@
+{
+    "contents" : "#' The grey palette\n#' \n#' @name Grey palette\n#' @export \n\ngrey.pal <- c(\n  rgb(217,217,217, maxColorValue=256),\n  rgb(174,174,174, maxColorValue=256),\n  rgb(130,130,130, maxColorValue=256),\n  rgb(87, 87, 87, maxColorValue=256),\n  rgb(43, 43, 43, maxColorValue=256),\n  \"black\"\n)",
+    "created" : 1423132073842.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3018932056",
+    "id" : "72F9BAA6",
+    "lastKnownWriteTime" : 1423132220,
+    "path" : "C:/Users/Hugh/Dropbox (Grattan Institute)/Other/package-grattan/grattan/R/grey.pal.R",
+    "project_path" : "R/grey.pal.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

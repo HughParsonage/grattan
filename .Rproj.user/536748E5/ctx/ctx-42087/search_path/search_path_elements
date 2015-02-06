@@ -1,0 +1,14 @@
+.GlobalEnv
+package:grattan
+package:ggplot2
+devtools_shims
+package:devtools
+tools:rstudio
+package:stats
+package:graphics
+package:grDevices
+package:utils
+package:datasets
+package:methods
+Autoloads
+package:base

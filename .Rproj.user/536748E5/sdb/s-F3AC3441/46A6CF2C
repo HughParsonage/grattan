@@ -1,0 +1,17 @@
+{
+    "contents" : "#' A theme for use with ggplots\n#' \n#' @name theme_huh\n#' \n\ntheme_hugh <- function(base_size = 20, base_family = \"\") {\n  theme_classic(base_size = base_size, base_family = base_family) %+replace%\n    theme(\n      \n      # Base elements which are not used directly but inherited by others\n      line =              element_line(colour = '#DADADA', size = 0.5, \n                                       linetype = 1, lineend = \"butt\"),\n      rect =              element_rect(fill = \"#F0F0F0\", colour = \"#F0F0F0\", \n                                       size = 0.5, linetype = 1),\n      text =              element_text(family = base_family, face = \"plain\",\n                                       colour = \"#000000\", size = base_size,\n                                       hjust = 0.5, vjust = 0.5, angle = 0, \n                                       lineheight = 0.9),\n      \n      # Modified inheritance structure of text element\n      #       plot.title =        element_text(size = rel(1.0), family = '' , \n      #                                        face = '', hjust = -0.05, \n      #                                        vjust = 1.5, colour = '#3B3B3B'),\n      plot.title = element_text(hjust = 0, vjust = 1.5),\n      # Puts x lab at the far right\n      axis.title.x =      element_text(hjust = 1, vjust = -0.33),\n      axis.title.y =      element_blank(),\n      axis.text =         element_text(),\n      axis.line =         element_line(color = \"black\"),\n      axis.ticks.length = grid::unit(0.3, \"lines\"),\n      axis.ticks.margin = grid::unit(0.5, \"lines\"), \n      \n      # Modified inheritance structure of line element\n      axis.ticks =        element_line(color = \"black\"),\n      panel.grid.major =  element_line(),\n      panel.grid.major.x = element_blank(),\n      panel.grid.minor =  element_blank(),\n      \n      # Modified inheritance structure of rect element\n      plot.background =   element_blank(),\n      panel.background =  element_rect(colour = NA, fill=\"white\"),\n      legend.key =        element_rect(fill='white'),\n      \n      # Modifiying legend.position\n      legend.position = 'none',\n      legend.background = element_rect(fill = NA, colour = NA),\n      strip.background = element_rect(fill = \"white\"),\n      \n      complete = TRUE\n    )\n}",
+    "created" : 1423132552096.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2534048539",
+    "id" : "46A6CF2C",
+    "lastKnownWriteTime" : 1423132683,
+    "path" : "C:/Users/Hugh/Dropbox (Grattan Institute)/Other/package-grattan/grattan/R/theme_hugh.R",
+    "project_path" : "R/theme_hugh.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

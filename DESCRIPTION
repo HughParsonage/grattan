@@ -1,0 +1,10 @@
+Package: grattan
+Type: Package
+Title: For ease of creating charts in the style of Grattan Institute
+Version: 0.1
+Date: 2015-02-05
+Author: Hugh Parsonage
+Maintainer: Who to complain to <hugh.parsonage@grattaninstitute.edu.au>
+Description: 
+License: 
+Imports: grDevices, RColorBrewer, ggplot2, scales, gridExtra

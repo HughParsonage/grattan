@@ -1,0 +1,16 @@
+{
+    "contents" : "Package: grattan\nType: Package\nTitle: For ease of creating charts in the style of Grattan Institute\nVersion: 0.1\nDate: 2015-02-05\nAuthor: Hugh Parsonage\nMaintainer: Who to complain to <hugh.parsonage@grattaninstitute.edu.au>\nDescription: \nLicense: \nImports: grDevices, RColorBrewer, ggplot2, scales, gridExtra\n",
+    "created" : 1423130175388.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "839951506",
+    "id" : "989CF242",
+    "lastKnownWriteTime" : 1423131538,
+    "path" : "C:/Users/Hugh/Dropbox (Grattan Institute)/Other/package-grattan/grattan/DESCRIPTION",
+    "project_path" : "DESCRIPTION",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "dcf"
+}

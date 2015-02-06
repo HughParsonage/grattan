@@ -1,0 +1,17 @@
+{
+    "contents" : "#' The extended colour palette\n#' \n#' @name gpalx\n#' @param n a positive integer\n#' @details This function interpolates the original Grattan palette for a large (possibly infinite) number of factors.  \n#' @return A vector of n HTML colours.\n\ngpalx <- function(n) grDevices::colorRampPalette(colors = pal.6)(n)",
+    "created" : 1423131310851.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "371931275",
+    "id" : "9107D962",
+    "lastKnownWriteTime" : 1423132067,
+    "path" : "C:/Users/Hugh/Dropbox (Grattan Institute)/Other/package-grattan/grattan/R/gpalx.R",
+    "project_path" : "R/gpalx.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
