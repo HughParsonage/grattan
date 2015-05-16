@@ -5,13 +5,14 @@
 \alias{grattan_waterfall}
 \title{Create waterfall charts}
 \usage{
-grattan_waterfall(.data = NULL, values, labels, calc_total = FALSE,
-  total_axis_text = "Total", total_rect_color = gpal(6)[1],
-  total_rect_text_color = "white", fill_colours = gpalx(length(values)),
-  fill_by_sign = TRUE, dark = FALSE, rect_width = 0.7,
-  rect_border = "black", draw_lines = TRUE, lines_anchors = c("centre",
-  "centre"), linetype = "dashed", draw_axis.x = "behind",
-  ggplot_object_name = "mywaterfall")
+grattan_waterfall(.data = NULL, values, labels, rect_text_labels = values,
+  rect_text_labels_anchor = "centre", calc_total = FALSE,
+  total_axis_text = "Total", total_rect_text = sum(values),
+  total_rect_color = gpal(6)[1], total_rect_text_color = "white",
+  fill_colours = gpalx(length(values)), fill_by_sign = TRUE, dark = FALSE,
+  rect_width = 0.7, rect_border = "black", draw_lines = TRUE,
+  lines_anchors = c("centre", "centre"), linetype = "dashed",
+  draw_axis.x = "behind", ggplot_object_name = "mywaterfall")
 }
 \arguments{
 \item{.data}{a placeholder for piped operations; cannot be used}
@@ -20,9 +21,15 @@ grattan_waterfall(.data = NULL, values, labels, calc_total = FALSE,
 
 \item{labels}{the labels corresponding to each vector, marked on the x-axis}
 
+\item{rect_text_labels}{(character) a character vector of the same length as values that are placed on the rectangles}
+
+\item{rect_text_labels_anchor}{(character) How should rect_text_labels be positioned. In future releases, we might have support for north or south anchors, or for directed positioning (negative down, positive up) etc. For now, only centre is supported.}
+
 \item{calc_total}{(logical) should the final pool of the waterfall be calculated (and placed on the chart)}
 
 \item{total_axis_text}{(character) the text appearing on the axis underneath the total rectangle}
+
+\item{total_rect_text}{(character) the text in the middle of the rectangle of the total rectangle}
 
 \item{total_rect_color}{the color of the final rectangle}
 
