@@ -15,7 +15,7 @@ grattan_waterfall(.data = NULL, values, labels, rect_text_labels = values,
   draw_axis.x = "behind", ggplot_object_name = "mywaterfall")
 }
 \arguments{
-\item{.data}{a placeholder for piped operations; cannot be used}
+\item{.data}{a data frame containing two columns, one with the values, the other with the labels}
 
 \item{values}{a numeric vector making up the heights of the rectangles in the waterfall}
 
