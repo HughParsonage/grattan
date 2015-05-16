@@ -6,6 +6,7 @@
 #' @param labels the labels corresponding to each vector, marked on the x-axis
 #' @param rect_text_labels (character) a character vector of the same length as values that are placed on the rectangles 
 #' @param rect_text_labels_anchor (character) How should rect_text_labels be positioned. In future releases, we might have support for north or south anchors, or for directed positioning (negative down, positive up) etc. For now, only centre is supported.
+#' @param put_rect_text_outside_when_value_below (numeric) the text labels accompanying a rectangle of this height will be placed outside the box: below if it's negative; above if it's positive.
 #' @param calc_total (logical) should the final pool of the waterfall be calculated (and placed on the chart)
 #' @param total_axis_text (character) the text appearing on the axis underneath the total rectangle
 #' @param total_rect_text (character) the text in the middle of the rectangle of the total rectangle
@@ -26,6 +27,7 @@ grattan_waterfall <- function(.data = NULL,
                               values, labels, 
                               rect_text_labels = values,
                               rect_text_labels_anchor = "centre",
+                              put_rect_text_outside_when_value_below = 0.05*(max(cumsum(values)) - min(cumsum(values))),
                               calc_total = FALSE,
                               total_axis_text = "Total",
                               total_rect_text = sum(values),
@@ -53,13 +55,12 @@ grattan_waterfall <- function(.data = NULL,
     } else {
       stop(".data should have two columns, one numeric, the other character or factor")
     }
-  } 
-  
-  if(!is.null(.data) && !missing(values) && !missing(labels))
-    warning(".data and values and labels supplied, .data ignored")
-  else {
-    values <- .data_values
-    labels <- as.character(.data_labels)
+    if(!missing(values) && !missing(labels))
+      warning(".data and values and labels supplied, .data ignored")
+    else {
+      values <- .data_values
+      labels <- as.character(.data_labels)
+    }
   }
   
   if(!(length(values) == length(labels) && 
@@ -76,7 +77,9 @@ grattan_waterfall <- function(.data = NULL,
   
   # fill by sign means rectangles' fill colour is given by whether they are going up or down
   if(fill_by_sign)
-    fill_colours <- ifelse(values >= 0, gpal(2, dark=dark)[2], gpal(2, dark=dark)[1])
+    fill_colours <- ifelse(values >= 0, 
+                           gpal(2, dark=dark)[2], 
+                           gpal(2, dark=dark)[1])
   
   if (!(grepl("^[lrc]", lines_anchors[1]) && grepl("^[lrc]", lines_anchors[2])))  # left right center
     stop("lines_anchors must be a pair of any of the following: left, right, centre")
@@ -136,15 +139,28 @@ grattan_waterfall <- function(.data = NULL,
   rect_text_labels
   
   for (i in seq_along(values)){
-    p <- p + ggplot2::annotate("text",
-                               x = i,
-                               y = 0.5 * (north_edge[i] + south_edge[i]),
-                               label = ifelse(rect_text_labels[i] == values[i],
-                                              ifelse(values[i] < 0,
-                                                     paste0("\U2212", -1 * values[i]),
-                                                     values[i]),
-                                              rect_text_labels[i]),
-                               size = 7.14)
+    if(abs(values[i]) > put_rect_text_outside_when_value_below){
+      p <- p + ggplot2::annotate("text",
+                                 x = i,
+                                 y = 0.5 * (north_edge[i] + south_edge[i]),
+                                 label = ifelse(rect_text_labels[i] == values[i],
+                                                ifelse(values[i] < 0,
+                                                       paste0("\U2212", -1 * values[i]),
+                                                       values[i]),
+                                                rect_text_labels[i]),
+                                 size = 7.14)
+    } else {
+      p <- p + ggplot2::annotate("text",
+                                 x = i,
+                                 y = north_edge[i],
+                                 label = ifelse(rect_text_labels[i] == values[i],
+                                                ifelse(values[i] < 0,
+                                                       paste0("\U2212", -1 * values[i]),
+                                                       values[i]),
+                                                rect_text_labels[i]),
+                                 vjust = ifelse(values[i] >= 0, -0.2, 1.2),
+                                 size = 7.14)
+    }
   }
   
   
