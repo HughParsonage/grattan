@@ -30,7 +30,7 @@ grattan_waterfall <- function(.data = NULL,
                               draw_lines = TRUE,
                               lines_anchors = c("centre", "centre"),
                               linetype = "dashed",
-                              ggplot_object_name = "w"){
+                              ggplot_object_name = "mywaterfall"){
   if(!is.null(.data))
     warning(".data argument not yet supported")
   
@@ -121,13 +121,15 @@ grattan_waterfall <- function(.data = NULL,
                                        north_edge[number_of_rectangles]),
                         color = total_rect_text_color,
                         size = 7.14) + 
-      ggplot2::annotate("segment",
+      scale_x_discrete(labels = c(labels, "Total"))
+    if (draw_lines){
+      p <- p + ggplot2::annotate("segment",
                         x = number_of_rectangles - anchor_left,
-                        xend = number_of_rectangle + 1 + anchor_right,
+                        xend = number_of_rectangles + 1 + anchor_right,
                         y = north_edge[number_of_rectangles],
                         yend = north_edge[number_of_rectangles],
-                        linetype = linetype) + 
-      scale_x_discrete(labels = c(labels, "Total"))
+                        linetype = linetype) 
+    }
   } else {
     p <- p + scale_x_discrete(labels = labels)
   }
