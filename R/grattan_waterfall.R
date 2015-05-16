@@ -1,7 +1,7 @@
 #' Create waterfall charts
 #' 
 #' @name grattan waterfall
-#' @param .data a placeholder for piped operations; cannot be used
+#' @param .data a data frame containing two columns, one with the values, the other with the labels
 #' @param values a numeric vector making up the heights of the rectangles in the waterfall
 #' @param labels the labels corresponding to each vector, marked on the x-axis
 #' @param rect_text_labels (character) a character vector of the same length as values that are placed on the rectangles 
@@ -41,11 +41,31 @@ grattan_waterfall <- function(.data = NULL,
                               linetype = "dashed",
                               draw_axis.x = "behind",
                               ggplot_object_name = "mywaterfall"){
-  if(!is.null(.data))
-    warning(".data argument not yet supported")
+  if(!is.null(.data)){
+    if(ncol(.data) == 2 && 
+       sum(
+         c("character" %in% sapply(.data, class), 
+           "factor"    %in% sapply(.data, class), 
+           "numeric"   %in% sapply(.data, class))
+           ) == 2){
+      .data_values <- .data[ ,which(sapply(.data, class) == "numeric")]
+      .data_labels <- .data[ ,which(sapply(.data, class) != "numeric")]
+    } else {
+      stop(".data should have two columns, one numeric, the other character or factor")
+    }
+  } 
   
-  if(!(length(values) == length(labels) && length(labels) == length(fill_colours) && length(values) == length(rect_text_labels)))
-    stop("values, labels, fill_colours, and rect_text_labels must all  have same length")
+  if(!is.null(.data) && !missing(values) && !missing(labels))
+    warning(".data and values and labels supplied, .data ignored")
+  else {
+    values <- .data_values
+    labels <- as.character(.data_labels)
+  }
+  
+  if(!(length(values) == length(labels) && 
+       length(labels) == length(fill_colours) && 
+       length(values) == length(rect_text_labels)))
+    stop("values, labels, fill_colours, and rect_text_labels must all have same length")
   
   if(rect_width > 1)
     warning("rect_Width > 1, your chart may look terrible")
