@@ -6,13 +6,15 @@
 \title{Create waterfall charts}
 \usage{
 grattan_waterfall(.data = NULL, values, labels, rect_text_labels = values,
-  rect_text_labels_anchor = "centre", calc_total = FALSE,
-  total_axis_text = "Total", total_rect_text = sum(values),
-  total_rect_color = gpal(6)[1], total_rect_text_color = "white",
-  fill_colours = gpalx(length(values)), fill_by_sign = TRUE, dark = FALSE,
-  rect_width = 0.7, rect_border = "black", draw_lines = TRUE,
-  lines_anchors = c("centre", "centre"), linetype = "dashed",
-  draw_axis.x = "behind", ggplot_object_name = "mywaterfall")
+  rect_text_labels_anchor = "centre",
+  put_rect_text_outside_when_value_below = 0.05 * (max(cumsum(values)) -
+  min(cumsum(values))), calc_total = FALSE, total_axis_text = "Total",
+  total_rect_text = sum(values), total_rect_color = gpal(6)[1],
+  total_rect_text_color = "white", fill_colours = gpalx(length(values)),
+  fill_by_sign = TRUE, dark = FALSE, rect_width = 0.7,
+  rect_border = "black", draw_lines = TRUE, lines_anchors = c("centre",
+  "centre"), linetype = "dashed", draw_axis.x = "behind",
+  ggplot_object_name = "mywaterfall")
 }
 \arguments{
 \item{.data}{a data frame containing two columns, one with the values, the other with the labels}
@@ -24,6 +26,8 @@ grattan_waterfall(.data = NULL, values, labels, rect_text_labels = values,
 \item{rect_text_labels}{(character) a character vector of the same length as values that are placed on the rectangles}
 
 \item{rect_text_labels_anchor}{(character) How should rect_text_labels be positioned. In future releases, we might have support for north or south anchors, or for directed positioning (negative down, positive up) etc. For now, only centre is supported.}
+
+\item{put_rect_text_outside_when_value_below}{(numeric) the text labels accompanying a rectangle of this height will be placed outside the box: below if it's negative; above if it's positive.}
 
 \item{calc_total}{(logical) should the final pool of the waterfall be calculated (and placed on the chart)}
 
