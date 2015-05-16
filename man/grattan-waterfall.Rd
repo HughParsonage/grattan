@@ -6,11 +6,12 @@
 \title{Create waterfall charts}
 \usage{
 grattan_waterfall(.data = NULL, values, labels, calc_total = FALSE,
-  total_rect_color = gpal(6)[1], total_rect_text_color = "white",
-  fill_colours = gpalx(length(values)), fill_by_sign = TRUE, dark = FALSE,
-  rect_width = 0.7, rect_border = "black", draw_lines = TRUE,
-  lines_anchors = c("centre", "centre"), linetype = "dashed",
-  ggplot_object_name = "p")
+  total_axis_text = "Total", total_rect_color = gpal(6)[1],
+  total_rect_text_color = "white", fill_colours = gpalx(length(values)),
+  fill_by_sign = TRUE, dark = FALSE, rect_width = 0.7,
+  rect_border = "black", draw_lines = TRUE, lines_anchors = c("centre",
+  "centre"), linetype = "dashed", draw_axis.x = "behind",
+  ggplot_object_name = "mywaterfall")
 }
 \arguments{
 \item{.data}{a placeholder for piped operations; cannot be used}
@@ -20,6 +21,8 @@ grattan_waterfall(.data = NULL, values, labels, calc_total = FALSE,
 \item{labels}{the labels corresponding to each vector, marked on the x-axis}
 
 \item{calc_total}{(logical) should the final pool of the waterfall be calculated (and placed on the chart)}
+
+\item{total_axis_text}{(character) the text appearing on the axis underneath the total rectangle}
 
 \item{total_rect_color}{the color of the final rectangle}
 
@@ -38,6 +41,8 @@ grattan_waterfall(.data = NULL, values, labels, calc_total = FALSE,
 \item{lines_anchors}{a character vector of length two specifying the horizontal placement of the drawn lines relative to the preceding and successive rectangles, respectively}
 
 \item{linetype}{the linetype for the draw_lines}
+
+\item{draw_axis.x}{(character) one of "none", "behind", "front" whether to draw an x.axis line and whether to draw it behind or in front of the rectangles, default is behind}
 
 \item{ggplot_object_name}{(character) a quoted valid object name to which ggplot layers may be addded after the function has run}
 }

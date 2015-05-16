@@ -5,6 +5,7 @@
 #' @param values a numeric vector making up the heights of the rectangles in the waterfall
 #' @param labels the labels corresponding to each vector, marked on the x-axis
 #' @param calc_total (logical) should the final pool of the waterfall be calculated (and placed on the chart)
+#' @param total_axis_text (character) the text appearing on the axis underneath the total rectangle
 #' @param total_rect_color the color of the final rectangle
 #' @param total_rect_text_color the color of the final rectangle's label text
 #' @param fill_by_sign (logical) should positive and negative values each have the same colour?
@@ -14,12 +15,14 @@
 #' @param draw_lines (logical) should lines be drawn between successive rectangles
 #' @param linetype the linetype for the draw_lines
 #' @param lines_anchors a character vector of length two specifying the horizontal placement of the drawn lines relative to the preceding and successive rectangles, respectively
+#' @param draw_axis.x (character) one of "none", "behind", "front" whether to draw an x.axis line and whether to draw it behind or in front of the rectangles, default is behind
 #' @param ggplot_object_name (character) a quoted valid object name to which ggplot layers may be addded after the function has run
 
 
 grattan_waterfall <- function(.data = NULL,
                               values, labels, 
                               calc_total = FALSE,
+                              total_axis_text = "Total",
                               total_rect_color = gpal(6)[1],
                               total_rect_text_color = "white",
                               fill_colours = gpalx(length(values)),
@@ -30,6 +33,7 @@ grattan_waterfall <- function(.data = NULL,
                               draw_lines = TRUE,
                               lines_anchors = c("centre", "centre"),
                               linetype = "dashed",
+                              draw_axis.x = "behind",
                               ggplot_object_name = "mywaterfall"){
   if(!is.null(.data))
     warning(".data argument not yet supported")
@@ -72,13 +76,17 @@ grattan_waterfall <- function(.data = NULL,
     grattan::theme_hugh() +
     ggplot2::theme(axis.title = element_blank())
   } else {
-    p <- ggplot2::ggplot(data.frame(x = c(labels, "Total"),
+    p <- ggplot2::ggplot(data.frame(x = c(labels, total_axis_text),
                                     y = c(values, north_edge[number_of_rectangles])
                                     ), 
                                     aes(x = x, y = y)) + 
       ggplot2::geom_blank() + 
       grattan::theme_hugh() +
       ggplot2::theme(axis.title = element_blank())
+  }
+  
+  if (grepl("behind", draw_axis.x)){
+    p <- p + geom_hline(yintercept = 0)
   }
   
   for (i in seq_along(values)){
@@ -121,7 +129,7 @@ grattan_waterfall <- function(.data = NULL,
                                        north_edge[number_of_rectangles]),
                         color = total_rect_text_color,
                         size = 7.14) + 
-      scale_x_discrete(labels = c(labels, "Total"))
+      scale_x_discrete(labels = c(labels, total_axis_text))
     if (draw_lines){
       p <- p + ggplot2::annotate("segment",
                         x = number_of_rectangles - anchor_left,
@@ -133,6 +141,11 @@ grattan_waterfall <- function(.data = NULL,
   } else {
     p <- p + scale_x_discrete(labels = labels)
   }
+  
+  if (grepl("front", draw_axis.x)){
+    p <- p + geom_hline(yintercept = 0)
+  }
+  
   print(p)
   # Allow modifications beyond the function call
   assign(ggplot_object_name, p, inherits = TRUE)
