@@ -10,7 +10,7 @@
 gpal <- function(n, dark = FALSE){
   grattan.palette <- list(pal.1, pal.2, pal.3, pal.4, pal.5, pal.6)
   if(n > 6){
-    stop('No palette available for that number of categories.', '\n', 'Consider using `palette = "Oranges"`')
+    stop('No palette available for that number of categories.', '\n', 'Consider using gpalx')
   }
   if(dark) {
     if (n == 2){
