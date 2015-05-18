@@ -4,7 +4,11 @@
 #' @param outname the clean(er) text file that is carried out by this process
 #' 
 
-clean_bibtex_output_from_endnote <- function(filename, outname = paste0("cleaned-", filename)){
+clean_bibtex_output_from_endnote <- function(filename, 
+                                             outname = paste0(gsub("(.*)\\.txt$", "\\1", filename), "cleaned.txt")){
+  if (!grepl("\\.txt$", filename))
+    stop("filename must end in .txt (i.e. be a text file)")
+  
 raw <- readLines(filename)
 
 startlines <- grep("\\@[a-z]+\\{\\s*$", raw)
@@ -36,7 +40,19 @@ for (i in startlines){
   }
   
   if (!is.na(next_yearline)){
-    group_year <- gsub("^.*\\{([12][0-9]{1,3})\\}.*$", "\\1", raw[next_yearline])
+    if(grepl("^.*\\{([12][0-9]{1,3})\\}.*$", raw[next_yearline])){
+      group_year <- gsub("^.*\\{([12][0-9]{1,3})\\}.*$", "\\1", raw[next_yearline])
+    } else {
+      message("Weird year for this key, trying something...")
+      group_year <- gsub("^\\s*([a-zA-Z0-9]+)\\s*.*$", 
+                         "\\1", 
+                         gsub("^.*\\{(.*)\\}.*$",
+                              "\\1", 
+                              raw[next_yearline])
+      )
+      if(is.na(group_year) || length(group_year) == 0)
+        group_year <- "nd"
+    }
   } else {
     group_year <- "nd"
   }
@@ -64,6 +80,8 @@ for (i in startlines){
     } else {
       plausible_key <- paste0(plausible_key, letters[key_siblings + 1])
     }
+    key_chain <- key_chain
+    key_chain_prefixes <- key_chain_prefixes
   }
   
   clean[i] <- gsub("(\\@[a-z]+\\{)\\s*$", "\\1", raw[i])
