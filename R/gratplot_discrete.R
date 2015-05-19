@@ -8,6 +8,7 @@ gratplot_discrete <- function(...){
     scale_fill_discrete_grattan()
 }
 
-grplot <- function(...){
-  gratplot_discrete(...)
+grplot <- function(..., theme.dots = ...){
+  gratplot_discrete(...) + 
+    theme_grattan()
 }
