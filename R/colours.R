@@ -4,6 +4,7 @@
 #' The Grattan principal orange
 #' @name colours
 delayedAssign("Orange", rgb(243,144,29, maxColorValue=256))
+delayedAssign("OrangeBackground", rgb(254,240,222, maxColorValue = 256))
 delayedAssign("theGrey", rgb(106,115,123, maxColorValue=256))
 
 delayedAssign("col.1", "#FFE07F") # Lightest yellow
