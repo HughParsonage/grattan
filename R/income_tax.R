@@ -53,23 +53,21 @@ income_tax <- function(income, fy.year = "2012-13"){
     # medicare.levy 
     
     
-    if (income <= ML.lower){
-      medicare.levy <- 0
-    } 
-    if (income > ML.lower && income <= ML.upper){
-      medicare.levy <- 0.10 * (income - 20542)
-    }
-    
-    if (income > ML.upper){
-      medicare.levy <- income * (ifelse(income <= 84000,
-                                        0,
-                                        ifelse(income <= 97000,
-                                               0.01,
-                                               ifelse(income <= 130000,
-                                                      0.0125,
-                                                      0.0150))) + 
-                                   medicare.base.rate)
-    }
+    medicare.levy <- ifelse (income <= ML.lower,
+                             0,
+                             ifelse(income > ML.lower & income <= ML.upper,
+                                    0.10 * (income - 20542),
+                                    income * (ifelse(income <= 84000,
+                                                     0,
+                                                     ifelse(income <= 97000,
+                                                            0.01,
+                                                            ifelse(income <= 130000,
+                                                                   0.0125,
+                                                                   0.0150))) + 
+                                                medicare.base.rate)
+                             )
+    )
+                             
     return(pmax(tax + medicare.levy - LITO, 0))
   }
   
