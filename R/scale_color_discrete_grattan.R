@@ -1,4 +1,4 @@
-#' 
+#' scale color scale for grattan (uses the palette)
 #' @export
 #' @param a function controlling the colors
 

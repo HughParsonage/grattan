@@ -1,6 +1,9 @@
 #' a wage inflator
 #' 
 #' @param wage the amount to be inflated (1 by default)
+#' @param from_fy a character string of the form "2012-13" representing the FY ending that the wage index is to be taken (i.e. Q4 in that year). FY year must be 1996-97 or later.
+#' @param to_fy the FY ending that the wage index is to be taken
+#' @return the wage inflation between the two years
 
 wage_inflator <- function(wage = 1, from_fy, to_fy){
   wage.url <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LABOUR_PRICE_INDEX/1.THRPEB.7.-.0.30.Q/ABS?startTime=1997"

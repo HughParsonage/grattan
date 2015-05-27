@@ -2,7 +2,7 @@
 % Please edit documentation in R/scale_color_discrete_grattan.R
 \name{scale_color_discrete_grattan}
 \alias{scale_color_discrete_grattan}
-\title{}
+\title{scale color scale for grattan (uses the palette)}
 \usage{
 scale_color_discrete_grattan(...)
 }
@@ -10,6 +10,6 @@ scale_color_discrete_grattan(...)
 \item{a}{function controlling the colors}
 }
 \description{
-
+scale color scale for grattan (uses the palette)
 }
 
