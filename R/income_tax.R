@@ -19,14 +19,21 @@ income_tax <- function(income, fy.year = "2012-13"){
     medicare.levy <- ifelse(income < 20542,0, 
                             ifelse(income < 24167, (income - 20542)*.1,
                                    0.015*income))
-    # doesn't include surcharge yet.
-    warning("Medicare Surcharge not included yet")
+    # https://www.ato.gov.au/Individuals/Medicare-levy/Medicare-levy-surcharge/
+    medicare.surcharge <- income * ifelse(income <= 88000,
+                                          0,
+                                          ifelse(income <= 102000,
+                                                 0.01,
+                                                 ifelse(income <= 136000,
+                                                        0.0125,
+                                                        0.015)))
+    
     
     LITO <- ifelse(income < 37000, 445,
                    ifelse(income < 66667, 445 - ((income - 37000)*0.015),
                           0))
     
-    return(pmax(tax + medicare.levy - LITO, 0))
+    return(pmax(tax + medicare.levy + medicare.surcharge - LITO, 0))
     
   }
   
