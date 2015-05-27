@@ -13,7 +13,7 @@ income_tax <- function(income, fy.year = "2012-13"){
     tax <- ifelse(income < 18200, 0, 
                   ifelse(income < 37000, (income-18200)*0.19, 
                          ifelse(income < 80000, 3572 + (income - 37000)*0.325,
-                                ifelse(income<180000, 17547 + (income - 80000)*0.37, 
+                                ifelse(income<180000, 17547 + 0.37*(income - 80000), 
                                        54547 + 0.45*(income - 180000)))))
     #ATO
     medicare.levy <- ifelse(income < 20542,0, 
@@ -48,7 +48,7 @@ income_tax <- function(income, fy.year = "2012-13"){
                          ifelse(income < 80000, 
                                 3572 + 0.325*(income - 37000),
                                 ifelse(income < 180000, 
-                                       17547 + 0.39*(income - 80000), 
+                                       17547 + 0.37*(income - 80000), 
                                        54547 + 0.45*(income - 180000)))))
     # medicare.levy 
     
