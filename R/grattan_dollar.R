@@ -3,10 +3,11 @@
 #' @details makes negative ten Gs appears as -\$10,000 instead of \$-10,000
 
 # from scales
-grattan_dollar <- function (x) 
+grattan_dollar <- function (x, digits = 0) 
 {
   #
-  commaz <- format(x, nsmall = nsmall, trim = TRUE, big.mark = ",", 
+  nsmall <- digits
+  commaz <- format(abs(x), nsmall = nsmall, trim = TRUE, big.mark = ",", 
                    scientific = FALSE, digits = 1L)
   
   ifelse(x < 0, 
