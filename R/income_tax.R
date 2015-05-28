@@ -9,7 +9,7 @@
 
 income_tax <- function(income, fy.year = "2012-13"){
   if (fy.year == "2017-18"){
-    warning("Uhh, you're apply a (plausible) tax rate to 2017-18.")
+    warning("Uhh, you're applying a (plausible) tax rate to 2017-18.")
     tax <- ifelse(income < 18200, 0, 
                   ifelse(income < 37000, (income-18200)*0.19, 
                          ifelse(income < 80000, 3572 + (income - 37000)*0.325,
