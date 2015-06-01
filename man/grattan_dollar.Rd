@@ -4,7 +4,7 @@
 \alias{grattan_dollar}
 \title{dollar scales}
 \usage{
-grattan_dollar(x)
+grattan_dollar(x, digits = 0)
 }
 \description{
 dollar scales

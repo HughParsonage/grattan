@@ -22,7 +22,8 @@ wage_inflator <- function(wage = 1, from_fy, to_fy){
   to_fy_year <- 1 + as.numeric(gsub("^.*([12][0-9]{3}).*$", "\\1", to_fy)) 
   to_fy_as_quarter <- paste0(to_fy_year, "-", "Q4")
   
-  wages[wages$obsTime == to_fy_as_quarter, ]$obsValue / 
-    wages[wages$obsTime == from_fy_as_quarter, ]$obsValue
+  wage * 
+    wages[wages$obsTime == to_fy_as_quarter, ]$obsValue / 
+      wages[wages$obsTime == from_fy_as_quarter, ]$obsValue
 
 }
