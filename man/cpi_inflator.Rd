@@ -8,11 +8,11 @@ cpi_inflator(from_nominal_price = 1, from_fy, to_fy = "2013-14",
   adjustment = "none")
 }
 \arguments{
-\item{from_nominal_price}{(numeric) the price to be inflated}
+\item{from_nominal_price}{(numeric) the price (or vector of prices) to be inflated}
 
-\item{from_fy}{(character) a string in the form "2012-13" representing the financial year contemporaneous to the from_nominal_price.}
+\item{from_fy}{(character) a character vector with each element in the form "2012-13" representing the financial year contemporaneous to the from_nominal_price.}
 
-\item{to_fy}{(character) a string in the form "2012-13" representing the financial year that prices are to be inflated.}
+\item{to_fy}{(character) a character vector with each element in the form "2012-13" representing the financial year that prices are to be inflated.}
 }
 \value{
 the value of from_nominal_price in real (to_fy) dollars.

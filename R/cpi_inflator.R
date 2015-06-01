@@ -2,12 +2,15 @@
 #' 
 #' @name cpi_inflator
 #' @export true
-#' @param from_nominal_price (numeric) the price to be inflated
-#' @param from_fy (character) a string in the form "2012-13" representing the financial year contemporaneous to the from_nominal_price. 
-#' @param to_fy (character) a string in the form "2012-13" representing the financial year that prices are to be inflated. 
+#' @param from_nominal_price (numeric) the price (or vector of prices) to be inflated
+#' @param from_fy (character) a character vector with each element in the form "2012-13" representing the financial year contemporaneous to the from_nominal_price. 
+#' @param to_fy (character) a character vector with each element in the form "2012-13" representing the financial year that prices are to be inflated. 
 #' @return the value of from_nominal_price in real (to_fy) dollars.
 
 cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2013-14", adjustment = "none"){
+  if((!require(dplyr)) || (!require(magrittr)))
+    stop("dplyr and magrittr required")
+  
   cpi.url <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.10001.10+20.Q/ABS?startTime=1948&endTime=2015"
   cpi.url.seasonal.adjustment <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999901.10+20.Q/ABS?startTime=1948&endTime=2015"
   cpi.url.trimmed.mean <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999902.10+20.Q/ABS?startTime=1948&endTime=2015"
@@ -32,18 +35,42 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2013-14", adj
     warning("No data without rsdmx")
   }
   
+  # maps 2013-14 to 2014
   from_fy_year <- 1 + as.numeric(gsub("^.*([12][0-9]{3}).*$", "\\1", from_fy)) 
   from_fy_as_quarter <- paste0(from_fy_year, "-", "Q4")
   
   to_fy_year <- 1 + as.numeric(gsub("^.*([12][0-9]{3}).*$", "\\1", to_fy)) 
   to_fy_as_quarter <- paste0(to_fy_year, "-", "Q4")
   
-  if(!(from_fy_as_quarter %in% cpi$obsTime)) 
+  if(any(!(from_fy_as_quarter %in% cpi$obsTime)))
     stop("From date not in ABS CPI data.")
-  if(!(to_fy_as_quarter %in% cpi$obsTime))
-    stop("To date not in ABS CPI data")
+  if(any(!(to_fy_as_quarter %in% cpi$obsTime)))
+    stop("To date not in ABS CPI data.")
+  
+  if(length(from_nominal_price) > 1){
+    
+    temp.df <- dplyr::mutate(cpi[grepl("Q4$", cpi$obsTime), ], 
+                             fy.year.start = as.numeric(gsub(".Q[1-4]$", "", obsTime)),
+                             fy.year.end = substr(fy.year.start + 1, 3, 4),
+                             fy.year = paste0(fy.year.start, "-", fy.year.end))
+    
+    cpi.when.to_fy <- filter(temp.df, fy.year == to_fy) %>% 
+      mutate(to_index = obsValue) %$%
+      to_index
+    
+    data.frame(from_nominal_price = from_nominal_price,
+               from_fy = from_fy, 
+               stringsAsFactors = FALSE) %>%
+      dplyr::left_join(temp.df, by = c("from_fy" = "fy.year")) %>%
+      dplyr::mutate(from_index = obsValue) %>%
+      dplyr::mutate(to_index = cpi.when.to_fy) %>%
+      dplyr::mutate(inflator = from_nominal_price * to_index/obsValue) %$%
+      return(inflator)
+  } else { 
+
   
   price * 
     (cpi[cpi$obsTime == to_fy_as_quarter, ]$obsValue / 
       cpi[cpi$obsTime == from_fy_as_quarter, ]$obsValue)
+  }
 }
