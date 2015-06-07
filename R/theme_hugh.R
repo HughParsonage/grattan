@@ -3,7 +3,7 @@
 #' @name theme_huh
 #' 
 
-theme_hugh <- function(base_size = 20, base_family = "") {
+theme_hugh <- function(base_size = 24, base_family = "") {
   theme_classic(base_size = base_size, base_family = base_family) %+replace%
     theme(
       
@@ -38,7 +38,7 @@ theme_hugh <- function(base_size = 20, base_family = "") {
       
       # Modified inheritance structure of rect element
       plot.background =   element_blank(),
-      panel.background =  element_rect(colour = NA, fill="white"),
+      panel.background =  element_blank(),
       legend.key =        element_rect(fill='white'),
       
       # Modifiying legend.position
