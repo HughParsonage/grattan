@@ -3,7 +3,7 @@
 #' @name theme_huh
 #' 
 
-theme_hugh <- function(base_size = 24, base_family = "") {
+theme_hugh <- function(base_size = 22, base_family = "") {
   theme_classic(base_size = base_size, base_family = base_family) %+replace%
     theme(
       
