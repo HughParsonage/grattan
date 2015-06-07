@@ -38,6 +38,7 @@ theme_hugh <- function(base_size = 22, base_family = "") {
       
       # Modified inheritance structure of rect element
       plot.background =   element_blank(),
+      plot.margin = grid::unit(c(0.1,0.1,0.1,0.1), "lines"),
       panel.background =  element_blank(),
       legend.key =        element_rect(fill='white'),
       
