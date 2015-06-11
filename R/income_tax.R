@@ -1,13 +1,13 @@
 #' tax function
 #' 
 #' @param income the personal assessable income
-#' @param ML.lower the lower medicare threshold
-#' @param ML.upper the upper medicare threshold
+#' @param age the individual's age
+#' @param fy.year the financial year in which the income was earned
 #' @export 
 #' @author Various
 #' @return the total personal income tax payable
 
-income_tax <- function(income, fy.year = "2012-13"){
+income_tax <- function(income, age = 44, fy.year = "2012-13"){
   if (fy.year == "2017-18"){
     warning("Uhh, you're applying a (plausible) tax rate to 2017-18.")
     tax <- ifelse(income < 18200, 0, 
@@ -19,12 +19,20 @@ income_tax <- function(income, fy.year = "2012-13"){
     # Assumed the levy will go.
     temp.budget.repair.levy <- 0
     
-    medicare.levy <- ifelse(income < 20542, 
-                            0,
-                            ifelse(income <= 20542,
-                                   0.1 * (income - 20542),
-                                   0.02 * income))
-    
+    # includes SAPTO now
+    medicare.levy <- ifelse(age >= 65,
+                            ifelse(income < 32279,
+                                   0,
+                                   ifelse(income < 37975,
+                                          0.1 * (income - 32279),
+                                          0.02 * income)),
+                            ifelse(income < 20542, 
+                                   0,
+                                   ifelse(income <= 20542,
+                                          0.1 * (income - 20542),
+                                          0.02 * income))
+    )
+                            
     # We assume no-one pays the medicare surcharge
     medicare.surcharge <- 0 * income * ifelse(income <= 88000,
                                           0,

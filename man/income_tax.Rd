@@ -4,14 +4,14 @@
 \alias{income_tax}
 \title{tax function}
 \usage{
-income_tax(income, fy.year = "2012-13")
+income_tax(income, age = 44, fy.year = "2012-13")
 }
 \arguments{
 \item{income}{the personal assessable income}
 
-\item{ML.lower}{the lower medicare threshold}
+\item{age}{the individual's age}
 
-\item{ML.upper}{the upper medicare threshold}
+\item{fy.year}{the financial year in which the income was earned}
 }
 \value{
 the total personal income tax payable
