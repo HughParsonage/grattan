@@ -69,7 +69,7 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2013-14", adj
   } else { 
 
   
-  price * 
+  from_nominal_price * 
     (cpi[cpi$obsTime == to_fy_as_quarter, ]$obsValue / 
       cpi[cpi$obsTime == from_fy_as_quarter, ]$obsValue)
   }
