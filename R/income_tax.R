@@ -153,7 +153,7 @@ income_tax <- function(income, age = 44, fy.year = "2012-13"){
   }
   
   
-  if (fy.year == "2011-12"){
+  if (fy.year %in% c("2011-12", "2010-11")){
     tax <- ifelse(income < 6000, 0, 
                   ifelse(income < 37000, (income - 6000) * 0.15, 
                          ifelse(income < 80000, 4650 + (income - 37000) * 0.30,
@@ -165,9 +165,13 @@ income_tax <- function(income, age = 44, fy.year = "2012-13"){
                             ifelse(income < 22829, (income - 19405)*.1,
                                    0.015*income))
     #Plunky
+    if (fy.year == "2011-12"){
     flood.levy <- ifelse(income < 50000, 0,
                          ifelse(income < 100000, (income - 50000) * 0.005, 
                                 250 + (income - 100000)*0.01))
+    } else {
+    flood.levy <- 0
+    }
     
     LITO <- ifelse(income < 30000, 1500,
                    ifelse(income < 65000, 1500 - ((income - 30000)*0.04),
