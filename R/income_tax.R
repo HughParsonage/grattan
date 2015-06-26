@@ -179,4 +179,37 @@ income_tax <- function(income, age = 44, fy.year = "2012-13"){
     
     return(pmax(tax + medicare.levy + flood.levy - LITO, 0))
   }
+  
+  if (fy.year == "2009-10"){
+    tax <- ifelse(income < 6000,
+                  0,
+                  ifelse(income < 35e3,
+                         0.15 * (income - 6000),
+                         ifelse(income < 80e3,
+                                4350 + 0.30*(income - 35e3),
+                                ifelse(income < 180e3,
+                                       17850 + 0.38*(income - 80e3),
+                                       55850 + 0.45*(income - 180e3))
+                         )
+                  )
+    )
+    
+    medicare.levy <- ifelse(income < 18840, 
+                            0, 
+                            ifelse(income < 22164,
+                                   0.100*(income - 18840),
+                                   0.015*income)
+    )
+    
+    
+    # http://www.lewistaxation.com.au/tax/historic-tax/low-income-tax-offset-historical
+    LITO <- ifelse(income < 30e3,
+                   1350,
+                   ifelse(income < 63750,
+                          1350 - 0.04*(income - 30e3),
+                          0))
+    
+    return(pmax(tax + medicare.levy  - LITO, 0))
+    
+  }
 }
