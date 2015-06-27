@@ -8,6 +8,11 @@
 #' @return the total personal income tax payable
 
 income_tax <- function(income, age = 44, fy.year = "2012-13"){
+  # If not applicable:
+  LITO <- 0
+  medicare.levy <- 0.015 * income
+  flood.levy <- 0
+  
   if (fy.year == "2017-18"){
     warning("Uhh, you're applying a (plausible) tax rate to 2017-18.")
     tax <- ifelse(income < 18200, 0, 
@@ -46,7 +51,7 @@ income_tax <- function(income, age = 44, fy.year = "2012-13"){
                    ifelse(income < 66667, 445 - ((income - 37000)*0.015),
                           0))
     
-    return(pmax(tax + temp.budget.repair.levy + medicare.levy + medicare.surcharge - LITO, 0))
+    return(as.integer(floor(pmax(tax + temp.budget.repair.levy + medicare.levy + medicare.surcharge - LITO, 0))))
   }
   
   if (fy.year == "2014-15"){
@@ -76,7 +81,7 @@ income_tax <- function(income, age = 44, fy.year = "2012-13"){
                    ifelse(income < 66667, 445 - ((income - 37000)*0.015),
                           0))
     
-    return(pmax(tax + temp.budget.repair.levy + medicare.levy + medicare.surcharge - LITO, 0))
+    return(as.integer(floor(pmax(tax + temp.budget.repair.levy + medicare.levy + medicare.surcharge - LITO, 0))))
   }
   
 
@@ -107,7 +112,7 @@ income_tax <- function(income, age = 44, fy.year = "2012-13"){
                    ifelse(income < 66667, 445 - ((income - 37000)*0.015),
                           0))
     
-    return(pmax(tax + medicare.levy + medicare.surcharge - LITO, 0))
+    return(as.integer(floor(pmax(tax + medicare.levy + medicare.surcharge - LITO, 0))))
     
   }
   
@@ -177,7 +182,7 @@ income_tax <- function(income, age = 44, fy.year = "2012-13"){
                    ifelse(income < 65000, 1500 - ((income - 30000)*0.04),
                           0))
     
-    return(pmax(tax + medicare.levy + flood.levy - LITO, 0))
+    
   }
   
   if (fy.year == "2009-10"){
@@ -212,4 +217,112 @@ income_tax <- function(income, age = 44, fy.year = "2012-13"){
     return(pmax(tax + medicare.levy  - LITO, 0))
     
   }
+  
+  if (fy.year == "2008-09"){
+    tax <- ifelse(income < 6000,
+                  0,
+                  ifelse(income < 34000,
+                         0.15 * (income - 6000),
+                         ifelse(income < 80000,
+                                4200 + 0.30*(income - 34000),
+                                ifelse(income < 180e3,
+                                       18000 + 0.40*(income - 80000),
+                                       58000 + 0.45*(income - 180e3)))))
+    
+    LITO <- ifelse(income < 30e3,
+                   1200,
+                   ifelse(income < 60e3,
+                          1200 - 0.04 * (income - 30e3),
+                          0))
+  }
+  
+  if (fy.year == "2007-08"){
+    tax <- ifelse(income < 6000,
+                  0,
+                  ifelse(income < 30e3,
+                         0.15 * (income - 6000),
+                         ifelse(income < 75e3,
+                                3600 + 0.30*(income - 30e3),
+                                ifelse(income < 150e3,
+                                       17100 + 0.40*(income - 75e3),
+                                       47100 + 0.45*(income - 150e3)))))
+    
+    LITO <- ifelse(income < 30e3,
+                   750,
+                   ifelse(income < 48750,
+                          750 - 0.04 * (income - 30e3),
+                          0))
+    
+    
+  }
+  
+  if (fy.year == "2006-07"){
+    tax <- ifelse(income < 6000,
+                  0,
+                  ifelse(income < 25e3,
+                         0.15 * (income - 6000),
+                         ifelse(income < 75e3,
+                                2850 + 0.30 * (income - 25e3),
+                                ifelse(income < 150e3,
+                                       17850 + 0.40 * (income - 75e3),
+                                       47850 + 0.45 * (income - 150e3)))))
+    
+    LITO <- ifelse(income < 25e3,
+                   600,
+                   ifelse(income < 40e3,
+                          600 - 0.04 * (income - 25e3),
+                          0))
+  }
+  
+  if (fy.year == "2005-06"){
+    tax <- ifelse(income < 6000,
+                  0,
+                  ifelse(income < 21600,
+                         0.15 * (income - 6000),
+                         ifelse(income < 63e3,
+                                2340 + 0.30*(income - 21600),
+                                ifelse(income < 95e3,
+                                       14760 + 0.42*(income - 63e3),
+                                       28200 + 0.47*(income - 95e3)))))
+  }
+  
+  if (fy.year == "2004-05"){
+    tax <- ifelse(income < 6000,
+                  0,
+                  ifelse(income < 21600,
+                         0.17 * (income - 6000),
+                         ifelse(income < 58e3,
+                                2652 + 0.30*(income - 21601),
+                                ifelse(income < 70e3,
+                                       13572 + 0.42*(income - 58e3),
+                                       18612 + 0.47*(income - 70e3)))))
+  }
+  
+  if (fy.year == "2004-05"){
+    tax <- ifelse(income < 6000,
+                  0,
+                  ifelse(income < 21600,
+                         0.17*(income - 6000),
+                         ifelse(income < 52000,
+                                2652 + 0.30*(income - 21601),
+                                ifelse(income < 62500,
+                                       11772 + 0.42*(income - 52000),
+                                       16182 + 0.47*(income - 62500)))))
+  }
+  
+  if (fy.year == "2003-04"){
+    tax <- ifelse(income < 6000,
+                  0,
+                  ifelse(income < 21600,
+                         0.17*(income - 6000),
+                         ifelse(income < 52e3,
+                                2652 + 0.30 * (income - 21600),
+                                ifelse(income < 62500,
+                                       11771 + 0.42*(income - 52000),
+                                       16182 + 0.47*(income - 62500)))))
+  }
+  
+  #
+  #
+  return(as.integer(floor(pmax(tax + medicare.levy + flood.levy - LITO, 0))))
 }
