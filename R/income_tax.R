@@ -3,11 +3,12 @@
 #' @param income the personal assessable income
 #' @param age the individual's age
 #' @param fy.year the financial year in which the income was earned
+#' @param return.mode use numeric or integer
 #' @export 
 #' @author Various
 #' @return the total personal income tax payable
 
-income_tax <- function(income, age = 44, fy.year = "2012-13"){
+income_tax <- function(income, age = 44, fy.year = "2012-13", return.mode = "numeric"){
   # If not applicable:
   LITO <- 0
   medicare.levy <- 0.015 * income
@@ -51,7 +52,7 @@ income_tax <- function(income, age = 44, fy.year = "2012-13"){
                    ifelse(income < 66667, 445 - ((income - 37000)*0.015),
                           0))
     
-    return(as.integer(floor(pmax(tax + temp.budget.repair.levy + medicare.levy + medicare.surcharge - LITO, 0))))
+    out <- pmax(tax + temp.budget.repair.levy + medicare.levy + medicare.surcharge - LITO, 0)
   }
   
   if (fy.year == "2014-15"){
@@ -81,7 +82,7 @@ income_tax <- function(income, age = 44, fy.year = "2012-13"){
                    ifelse(income < 66667, 445 - ((income - 37000)*0.015),
                           0))
     
-    return(as.integer(floor(pmax(tax + temp.budget.repair.levy + medicare.levy + medicare.surcharge - LITO, 0))))
+    out <- pmax(tax + temp.budget.repair.levy + medicare.levy + medicare.surcharge - LITO, 0)
   }
   
 
@@ -112,7 +113,7 @@ income_tax <- function(income, age = 44, fy.year = "2012-13"){
                    ifelse(income < 66667, 445 - ((income - 37000)*0.015),
                           0))
     
-    return(as.integer(floor(pmax(tax + medicare.levy + medicare.surcharge - LITO, 0))))
+    out <- pmax(tax + medicare.levy + medicare.surcharge - LITO, 0)
     
   }
   
@@ -154,7 +155,7 @@ income_tax <- function(income, age = 44, fy.year = "2012-13"){
                              )
     )
                              
-    return(as.integer(floor(pmax(tax + medicare.levy - LITO, 0))))
+    out <- pmax(tax + medicare.levy - LITO, 0)
   }
   
   
@@ -214,7 +215,7 @@ income_tax <- function(income, age = 44, fy.year = "2012-13"){
                           1350 - 0.04*(income - 30e3),
                           0))
     
-    return(pmax(tax + medicare.levy  - LITO, 0))
+    out <- pmax(tax + medicare.levy  - LITO, 0)
     
   }
   
@@ -324,5 +325,9 @@ income_tax <- function(income, age = 44, fy.year = "2012-13"){
   
   #
   #
-  return(as.integer(floor(pmax(tax + medicare.levy + flood.levy - LITO, 0))))
+  out <- pmax(tax + medicare.levy + flood.levy - LITO, 0)
+  if (return.mode == "integer")
+    return(as.integer(floor(out)))
+  else
+    return(out)
 }

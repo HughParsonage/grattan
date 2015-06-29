@@ -4,7 +4,7 @@
 \alias{income_tax}
 \title{tax function}
 \usage{
-income_tax(income, age = 44, fy.year = "2012-13")
+income_tax(income, age = 44, fy.year = "2012-13", return.mode = "numeric")
 }
 \arguments{
 \item{income}{the personal assessable income}
@@ -12,6 +12,8 @@ income_tax(income, age = 44, fy.year = "2012-13")
 \item{age}{the individual's age}
 
 \item{fy.year}{the financial year in which the income was earned}
+
+\item{return.mode}{use numeric or integer}
 }
 \value{
 the total personal income tax payable
