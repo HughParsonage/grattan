@@ -144,14 +144,7 @@ income_tax <- function(income, age = 44, fy.year = "2012-13", return.mode = "num
                              0,
                              ifelse(income > ML.lower & income <= ML.upper,
                                     0.10 * (income - 20542),
-                                    income * (ifelse(income <= 84000,
-                                                     0,
-                                                     ifelse(income <= 97000,
-                                                            0.01,
-                                                            ifelse(income <= 130000,
-                                                                   0.0125,
-                                                                   0.0150))) + 
-                                                medicare.base.rate)
+                                    0.015 * income
                              )
     )
                              
