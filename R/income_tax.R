@@ -154,7 +154,7 @@ income_tax <- function(income, age = 44, fy.year = "2012-13"){
                              )
     )
                              
-    return(pmax(tax + medicare.levy - LITO, 0))
+    return(as.integer(floor(pmax(tax + medicare.levy - LITO, 0))))
   }
   
   
