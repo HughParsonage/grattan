@@ -3,7 +3,7 @@
 #' @name theme_huh
 #' 
 
-theme_hugh <- function(base_size = 20, base_family = "") {
+theme_hugh <- function(base_size = 23, base_family = "") {
   theme_classic(base_size = base_size, base_family = base_family) %+replace%
     theme(
       
@@ -38,7 +38,7 @@ theme_hugh <- function(base_size = 20, base_family = "") {
       
       # Modified inheritance structure of rect element
       plot.background =   element_blank(),
-      plot.margin = grid::unit(c(0.5,0.1,0.5,0.00), "lines"),
+      plot.margin = grid::unit(c(0.7,0.1,0.5,0.00), "lines"),
       panel.background =  element_blank(),
       legend.key =        element_rect(fill='white'),
       
