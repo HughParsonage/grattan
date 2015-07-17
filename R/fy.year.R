@@ -16,7 +16,7 @@ fy.year <- function(yr_ending){
 yr2fy <- function(...) fy.year(...)
 
 fy2yr <- function(fy.yr){
-  if(is.fy(fy.yr))
+  if(!is.fy(fy.yr))
     stop("Doesn't look like a FY.")
   else
     1 + as.integer(gsub("^.*([12][0-9]{3}).?[0-9]{2}.*$", "\\1", fy.yr))
