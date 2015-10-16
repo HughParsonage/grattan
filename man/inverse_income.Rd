@@ -2,17 +2,19 @@
 % Please edit documentation in R/inverse_income.R
 \name{inverse_income}
 \alias{inverse_income}
-\title{Inverse income tax function}
+\title{Inverse income tax functions}
 \usage{
-inverse_income(tax, fy.year = "2012-13")
+inverse_income(...)
 }
 \arguments{
 \item{tax}{the tax payable}
+
+\item{zero.tax.income}{("maximum", "zero", numeric()) Given that many incomes map to zero taxes, the \code{income_tax} function is not invertible there. As a consequence, the inverse function's value must be specified for tax = 0. "maximum" returns the maximum integer income one can have with a zero tax liability; "zero" returns zero for any tax of zero. The value can also be specified explicitly.}
 }
 \value{
 the taxable income (integer) given the tax payable for the financial year, acurrate to the nearest integer
 }
 \description{
-Inverse income tax function
+Inverse income tax functions
 }
 
