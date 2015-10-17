@@ -6,8 +6,8 @@
 #' 
 
 inverse_income <- 
-  function(tax, fy.year, zero.tax.income) 
-    inverse_income_lookup3(tax, fy.year = "2012-13", zero.tax.income = c("maximum", "zero", "uniform", numeric(1)))
+  function(tax, fy.year = "2012-13", zero.tax.income = c("maximum", "zero", "uniform", numeric(1))) 
+    inverse_income_lookup3(tax, fy.year = fy.year, zero.tax.income = zero.tax.income)
 
 inverse_income_while <- function(tax, fy.year = "2012-13"){
   income <- 0L
