@@ -6,8 +6,13 @@
 #' 
 
 inverse_income <- 
-  function(tax, fy.year = "2012-13", zero.tax.income = c("maximum", "zero", "uniform", numeric(1))) 
-    inverse_income_lookup3(tax, fy.year = fy.year, zero.tax.income = zero.tax.income)
+  function(tax, fy.year = "2012-13", zero.tax.income = c("maximum", "zero", "uniform", numeric(1))){ 
+    zero.tax.income <- zero.tax.income[1]
+    if (length(tax) > 1)
+      inverse_income_lookup3(tax, fy.year = fy.year, zero.tax.income = zero.tax.income)
+    else
+      inverse_income_lengthone(tax, fy.year = fy.year, zero.tax.income = zero.tax.income)
+  }
 
 inverse_income_while <- function(tax, fy.year = "2012-13"){
   income <- 0L
@@ -24,6 +29,32 @@ inverse_income_while <- function(tax, fy.year = "2012-13"){
   return(income)
 }
 
+inverse_income_lengthone <- function(tax, fy.year = "2012-13", zero.tax.income = c("maximum", "zero", "uniform", numeric(1))){
+  if (tax == 0){
+    if (zero.tax.income == "zero"){
+      out <- 0L
+    } else {
+      if (is.numeric(zero.tax.income)){
+        out <- zero.tax.income
+      } else {
+        maximum.zero.tax.income <- inverse_income_while(0, fy.year = fy.year)
+        if(zero.tax.income == "maximum"){
+          out <- maximum.zero.tax.income
+        } else {
+          if (zero.tax.income == "uniform"){
+            out <- sample(0:maximum.zero.tax.income, size = 1L)
+          }
+        }
+        
+      }
+    }
+  } else {
+    out <- inverse_income_while(tax, fy.year = fy.year)
+  }
+  
+  return(out)
+}
+  
 inverse_income_lookup <- function(tax, fy.year = "2012-13", zero.tax = "maximum"){
   income.range <- seq(0L, max(ceiling(max(tax) * 3), 100000L), by = 1L)
   
