@@ -4,12 +4,12 @@
 \alias{inverse_income}
 \title{Inverse income tax functions}
 \usage{
-inverse_income(...)
+inverse_income(tax, fy.year, zero.tax.income)
 }
 \arguments{
 \item{tax}{the tax payable}
 
-\item{zero.tax.income}{("maximum", "zero", numeric()) Given that many incomes map to zero taxes, the \code{income_tax} function is not invertible there. As a consequence, the inverse function's value must be specified for tax = 0. "maximum" returns the maximum integer income one can have with a zero tax liability; "zero" returns zero for any tax of zero. The value can also be specified explicitly.}
+\item{zero.tax.income}{("maximum", "zero", "uniform", numeric()) Given that many incomes map to zero taxes, the \code{income_tax} function is not invertible there. As a consequence, the inverse function's value must be specified for tax = 0. "maximum" returns the maximum integer income one can have with a zero tax liability; "zero" returns zero for any tax of zero; "uniform" provides a random integer from zero to the maximum income with a zero tax. The value can also be specified explicitly.}
 }
 \value{
 the taxable income (integer) given the tax payable for the financial year, acurrate to the nearest integer
