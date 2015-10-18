@@ -15,18 +15,22 @@ inverse_income <-
   }
 
 inverse_income_while <- function(tax, fy.year = "2012-13"){
-  income <- 0L
-  while(grattan::income_tax(income, fy.year = fy.year) <= tax){
-    income <- income + 1000L
+  if(is.na(tax))
+    return(tax)
+  else {
+    income <- 0L
+    while(grattan::income_tax(income, fy.year = fy.year) <= tax){
+      income <- income + 1000L
+    }
+    
+    income <- income - 999L
+    
+    while(grattan::income_tax(income, fy.year = fy.year) <= tax){
+      income <- income + 1L
+    }
+    
+    return(income)
   }
-  
-  income <- income - 999L
-  
-  while(grattan::income_tax(income, fy.year = fy.year) <= tax){
-    income <- income + 1L
-  }
-  
-  return(income)
 }
 
 inverse_income_lengthone <- function(tax, fy.year = "2012-13", zero.tax.income = c("maximum", "zero", "uniform", numeric(1))){
@@ -82,8 +86,10 @@ inverse_income_lookup2 <- function(tax, fy.year = "2012-13", zero.tax = "maximum
 }
 
 inverse_income_lookup3 <- function(tax, fy.year = "2012-13", zero.tax.income = "maximum"){
+  NAs <- is.na(tax)
+  tax <- ifelse(NAs, 1L, tax)
   # This function creates a lookup table of incomes taxes 
-  zeroes <- tax == 0
+  zeroes <- !NAs & tax == 0
   # We now designate the range of incomes to search over. 
   # Always check up to $100,000. There, the ratio of income to 
   # tax is at most 3.79 and decreases thereafter (2012-13).
@@ -114,6 +120,8 @@ inverse_income_lookup3 <- function(tax, fy.year = "2012-13", zero.tax.income = "
       }
     }
   }
+  # keep the NAs
+  out[NAs] <- NA
   return(out)
 }
 
