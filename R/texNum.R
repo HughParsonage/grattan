@@ -18,7 +18,7 @@ texNum <- function(number, sig.figs = 3L){
   
   
   if(n.digits <= 6){
-    prefix <- prettyNum(round(number, sig.figs - n.digits - 1))
+    prefix <- prettyNum(round(number, sig.figs - n.digits - 1), big.mark = ",")
   } else
     prefix <- format(round(number, (1 + n.digits %% 3) - n.digits), scientific = FALSE)
   
