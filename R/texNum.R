@@ -13,10 +13,19 @@ texNum <- function(number, sig.figs = 3L){
   suffix <- NULL
   out <- number
   
-  rounded.number <- format(round(num, (1 + n.digits %% 3) - n.digits), scientific = FALSE)
+  if (n.digits < sig.figs)
+    return(number)
+  
+  
+  if(n.digits <= 6){
+    prefix <- prettyNum(round(number, sig.figs - n.digits - 1))
+  } else
+    prefix <- format(round(number, (1 + n.digits %% 3) - n.digits), scientific = FALSE)
+  
   
   if (n.digits > 6){
-    abbrev.number <- substr(number, 0, 1 + n.digits %% 3)
+    # prefix <- substr(number, 0, 1 + n.digits %% 3)
+    prefix <- substr(number, 0, sig.figs)
     suffix <- "million"
     
     if (n.digits > 8){
@@ -26,7 +35,8 @@ texNum <- function(number, sig.figs = 3L){
     if (n.digits > 12){
       suffix <- "trillion"
     }
-    out <- paste0(abbrev.number, "~", suffix)
+    
   }
+  out <- paste0(prefix, "~", suffix)
   return(out)
 }
