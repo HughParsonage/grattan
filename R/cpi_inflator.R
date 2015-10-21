@@ -37,10 +37,10 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2013-14", adj
   
   # maps 2013-14 to 2014
   from_fy_year <- 1 + as.numeric(gsub("^.*([12][0-9]{3}).*$", "\\1", from_fy)) 
-  from_fy_as_quarter <- paste0(from_fy_year, "-", "Q4")
+  from_fy_as_quarter <- paste0(from_fy_year, "-", "Q2")
   
   to_fy_year <- 1 + as.numeric(gsub("^.*([12][0-9]{3}).*$", "\\1", to_fy)) 
-  to_fy_as_quarter <- paste0(to_fy_year, "-", "Q4")
+  to_fy_as_quarter <- paste0(to_fy_year, "-", "Q2")
   
   if(any(!(from_fy_as_quarter %in% cpi$obsTime)))
     stop("From date not in ABS CPI data.")
@@ -49,7 +49,7 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2013-14", adj
   
   if(length(from_nominal_price) > 1){
     
-    temp.df <- dplyr::mutate(cpi[grepl("Q4$", cpi$obsTime), ], 
+    temp.df <- dplyr::mutate(cpi[grepl("Q2$", cpi$obsTime), ], 
                              fy.year.start = as.numeric(gsub(".Q[1-4]$", "", obsTime)),
                              fy.year.end = substr(fy.year.start + 1, 3, 4),
                              fy.year = paste0(fy.year.start, "-", fy.year.end))
@@ -69,7 +69,7 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2013-14", adj
   } else { 
 
   
-  price * 
+  from_nominal_price * 
     (cpi[cpi$obsTime == to_fy_as_quarter, ]$obsValue / 
       cpi[cpi$obsTime == from_fy_as_quarter, ]$obsValue)
   }
