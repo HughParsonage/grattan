@@ -11,9 +11,9 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2013-14", adj
   if((!require(dplyr)) || (!require(magrittr)))
     stop("dplyr and magrittr required")
   
-  cpi.url <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.10001.10+20.Q/ABS?startTime=1948&endTime=2015"
-  cpi.url.seasonal.adjustment <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999901.10+20.Q/ABS?startTime=1948&endTime=2015"
-  cpi.url.trimmed.mean <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999902.10+20.Q/ABS?startTime=1948&endTime=2015"
+  cpi.url <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.10001.10+20.Q/ABS?startTime=1948&endTime=2016"
+  cpi.url.seasonal.adjustment <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999901.10+20.Q/ABS?startTime=1948&endTime=2016"
+  cpi.url.trimmed.mean <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999902.10+20.Q/ABS?startTime=1948&endTime=2016"
   
   if(grepl("none", adjustment)){
     url <- cpi.url
@@ -69,7 +69,7 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2013-14", adj
   } else { 
 
   
-  from_nominal_price * 
+  price * 
     (cpi[cpi$obsTime == to_fy_as_quarter, ]$obsValue / 
       cpi[cpi$obsTime == from_fy_as_quarter, ]$obsValue)
   }
