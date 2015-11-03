@@ -17,10 +17,16 @@ wage_inflator <- function(wage = 1, from_fy, to_fy){
   }
   
   from_fy_year <- 1 + as.numeric(gsub("^.*([12][0-9]{3}).*$", "\\1", from_fy)) 
-  from_fy_as_quarter <- paste0(from_fy_year, "-", "Q4")
+  from_fy_as_quarter <- paste0(from_fy_year, "-", "Q2")
+  
+  if(!(from_fy_as_quarter %in% wages$obsTime))
+    stop("from_fy not in ABS data")
   
   to_fy_year <- 1 + as.numeric(gsub("^.*([12][0-9]{3}).*$", "\\1", to_fy)) 
-  to_fy_as_quarter <- paste0(to_fy_year, "-", "Q4")
+  to_fy_as_quarter <- paste0(to_fy_year, "-", "Q2")
+  
+  if(!(to_fy_as_quarter %in% wages$obsTime))
+    stop("to_fy not in ABS data")
   
   wage * 
     wages[wages$obsTime == to_fy_as_quarter, ]$obsValue / 
