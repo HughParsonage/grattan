@@ -14,7 +14,7 @@ income_tax <- function(income, age = 44, fy.year = "2012-13", return.mode = "num
   medicare.levy <- 0.015 * income
   flood.levy <- 0
   
-  if (fy.year == "2017-18"){
+  if (fy.year == "2017-18" | fy.year == "2015-16"){
     warning("Uhh, you're applying a (plausible) tax rate to 2017-18.")
     tax <- ifelse(income < 18200, 0, 
                   ifelse(income < 37000, (income-18200)*0.19, 
@@ -26,27 +26,26 @@ income_tax <- function(income, age = 44, fy.year = "2012-13", return.mode = "num
     temp.budget.repair.levy <- 0
     
     # includes SAPTO now
-    medicare.levy <- ifelse(age >= 65,
-                            ifelse(income < 32279,
-                                   0,
-                                   ifelse(income < 37975,
-                                          0.1 * (income - 32279),
-                                          0.02 * income)),
-                            ifelse(income < 20542, 
-                                   0,
-                                   ifelse(income <= 20542,
-                                          0.1 * (income - 20542),
-                                          0.02 * income))
-    )
-                            
-    # We assume no-one pays the medicare surcharge
-    medicare.surcharge <- 0 * income * ifelse(income <= 88000,
-                                          0,
-                                          ifelse(income <= 102000,
-                                                 0.01,
-                                                 ifelse(income <= 136000,
-                                                        0.0125,
-                                                        0.015)))
+#     medicare.levy <- ifelse(age >= 65,
+#                             ifelse(income < 32279,
+#                                    0,
+#                                    ifelse(income < 37975,
+#                                           0.1 * (income - 32279),
+#                                           0.02 * income)),
+#                             ifelse(income < 20542, 
+#                                    0,
+#                                    ifelse(income <= 20542,
+#                                           0.1 * (income - 20542),
+#                                           0.02 * income))
+#     )
+#     
+    medicare.levy <- ifelse(income < 20896,
+                            0,
+                            ifelse(income < 26121,
+                                   0.10 * (income - 20896),
+                                   0.20 * income))
+    
+    medicare.surcharge <- 0
     
     LITO <- ifelse(income < 37000, 445,
                    ifelse(income < 66667, 445 - ((income - 37000)*0.015),
@@ -318,7 +317,11 @@ income_tax <- function(income, age = 44, fy.year = "2012-13", return.mode = "num
   
   #
   #
-  out <- pmax(tax + medicare.levy + flood.levy - LITO, 0)
+  
+  if (fy.year %in% grattan::yr2fy(2004:2010))
+    out <- pmax(tax + medicare.levy + flood.levy - LITO, 0)
+  
+  
   if (return.mode == "integer")
     return(as.integer(floor(out)))
   else
