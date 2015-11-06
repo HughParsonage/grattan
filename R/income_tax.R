@@ -8,7 +8,8 @@
 #' @author Various
 #' @return the total personal income tax payable
 
-income_tax <- function(income, age = 44, fy.year = "2012-13", return.mode = "numeric", temp.budget.repair.levy = TRUE){
+income_tax <- function(income, fy.year = "2012-13", return.mode = "numeric", include.temp.budget.repair.levy = TRUE, age = 44){
+  stopifnot(missing(age))
   # If not applicable:
   LITO <- 0
   medicare.levy <- 0.015 * income
@@ -23,8 +24,8 @@ income_tax <- function(income, age = 44, fy.year = "2012-13", return.mode = "num
                                        54547 + 0.45*(income - 180000)))))
     
     # Assumed the levy will go.
-    if (temp.budget.repair.levy){
-      temp.budget.repair.levy <- income * ifelse(income > 180000, 0.02, 0)
+    if (include.temp.budget.repair.levy){
+      temp.budget.repair.levy <- (income - 180000) * ifelse(income > 180000, 0.02, 0)
     } else {
       temp.budget.repair.levy <- 0
     }
@@ -67,8 +68,8 @@ income_tax <- function(income, age = 44, fy.year = "2012-13", return.mode = "num
                                        54547 + 0.45*(income - 180000)))))
     
     # Assumed the levy will go.
-    if (temp.budget.repair.levy){
-      temp.budget.repair.levy <- income * ifelse(income > 180000, 0.02, 0)
+    if (include.temp.budget.repair.levy){
+      temp.budget.repair.levy <- (income - 180000) * ifelse(income > 180000, 0.02, 0)
     } else {
       temp.budget.repair.levy <- 0
     }
@@ -110,8 +111,8 @@ income_tax <- function(income, age = 44, fy.year = "2012-13", return.mode = "num
                                 ifelse(income < 180000, 17547 + 0.37*(income - 80000), 
                                        54547 + 0.45*(income - 180000)))))
     
-    if (temp.budget.repair.levy){
-      temp.budget.repair.levy <- income * ifelse(income > 180000, 0.02, 0)
+    if (include.temp.budget.repair.levy){
+      temp.budget.repair.levy <- (income - 180000) * ifelse(income > 180000, 0.02, 0)
     } else {
       temp.budget.repair.levy <- 0
     }
@@ -370,7 +371,10 @@ income_tax <- function(income, age = 44, fy.year = "2012-13", return.mode = "num
   
   #
   #
-  out <- pmax(tax + medicare.levy + flood.levy - LITO, 0)
+  
+  if(fy.year <= "2008-09")
+    out <- pmax(tax + medicare.levy + flood.levy - LITO, 0)
+  
   if (return.mode == "integer")
     return(as.integer(floor(out)))
   else
