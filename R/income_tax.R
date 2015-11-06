@@ -8,7 +8,7 @@
 #' @author Various
 #' @return the total personal income tax payable
 
-income_tax <- function(income, age = 44, fy.year = "2012-13", return.mode = "numeric", temp.budget.repair.levy = TRUE){
+income_tax <- function(income, age = 44, fy.year = "2012-13", return.mode = "numeric"){
   # If not applicable:
   LITO <- 0
   medicare.levy <- 0.015 * income
@@ -23,11 +23,7 @@ income_tax <- function(income, age = 44, fy.year = "2012-13", return.mode = "num
                                        54547 + 0.45*(income - 180000)))))
     
     # Assumed the levy will go.
-    if (temp.budget.repair.levy){
-      temp.budget.repair.levy <- income * ifelse(income > 180000, 0.02, 0)
-    } else {
-      temp.budget.repair.levy <- 0
-    }
+    temp.budget.repair.levy <- 0
     
     # includes SAPTO now
     medicare.levy <- ifelse(age >= 65,
@@ -59,50 +55,6 @@ income_tax <- function(income, age = 44, fy.year = "2012-13", return.mode = "num
     out <- pmax(tax + temp.budget.repair.levy + medicare.levy + medicare.surcharge - LITO, 0)
   }
   
-  if (fy.year == "2015-16"){
-    tax <- ifelse(income < 18200, 0, 
-                  ifelse(income < 37000, (income-18200)*0.19, 
-                         ifelse(income < 80000, 3572 + (income - 37000)*0.325,
-                                ifelse(income < 180000, 17547 + 0.37*(income - 80000), 
-                                       54547 + 0.45*(income - 180000)))))
-    
-    # Assumed the levy will go.
-    if (temp.budget.repair.levy){
-      temp.budget.repair.levy <- income * ifelse(income > 180000, 0.02, 0)
-    } else {
-      temp.budget.repair.levy <- 0
-    }
-    
-    # includes SAPTO now
-    medicare.levy <- ifelse(age >= 65,
-                            ifelse(income < 32279,
-                                   0,
-                                   ifelse(income < 37975,
-                                          0.1 * (income - 32279),
-                                          0.02 * income)),
-                            ifelse(income < 20542, 
-                                   0,
-                                   ifelse(income <= 20542,
-                                          0.1 * (income - 20542),
-                                          0.02 * income))
-    )
-    
-    # We assume no-one pays the medicare surcharge
-    medicare.surcharge <- 0 * income * ifelse(income <= 88000,
-                                              0,
-                                              ifelse(income <= 102000,
-                                                     0.01,
-                                                     ifelse(income <= 136000,
-                                                            0.0125,
-                                                            0.015)))
-    
-    LITO <- ifelse(income < 37000, 445,
-                   ifelse(income < 66667, 445 - ((income - 37000)*0.015),
-                          0))
-    
-    out <- pmax(tax + temp.budget.repair.levy + medicare.levy + medicare.surcharge - LITO, 0)
-  }
-  
   if (fy.year == "2014-15"){
     tax <- ifelse(income < 18200, 0, 
                   ifelse(income < 37000, (income-18200)*0.19, 
@@ -110,11 +62,7 @@ income_tax <- function(income, age = 44, fy.year = "2012-13", return.mode = "num
                                 ifelse(income < 180000, 17547 + 0.37*(income - 80000), 
                                        54547 + 0.45*(income - 180000)))))
     
-    if (temp.budget.repair.levy){
-      temp.budget.repair.levy <- income * ifelse(income > 180000, 0.02, 0)
-    } else {
-      temp.budget.repair.levy <- 0
-    }
+    temp.budget.repair.levy <- income * ifelse(income > 180000, 0.02, 0)
     
     medicare.levy <- ifelse(income < 20542, 
                             0,
