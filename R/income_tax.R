@@ -8,7 +8,7 @@
 #' @author Various
 #' @return the total personal income tax payable
 
-income_tax <- function(income, age = 44, fy.year = "2012-13", return.mode = "numeric"){
+income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44){
   # If not applicable:
   LITO <- 0
   medicare.levy <- 0.015 * income
@@ -23,7 +23,13 @@ income_tax <- function(income, age = 44, fy.year = "2012-13", return.mode = "num
                                        54547 + 0.45*(income - 180000)))))
     
     # Assumed the levy will go.
-    temp.budget.repair.levy <- 0
+    if(isTRUE(include.temp.budget.repair.levy)){
+      temp.budget.repair.levy <- ifelse(income < 180e3,
+                                        0,
+                                        0.02 * (income - 180e3))
+    } else {
+      temp.budget.repair.levy <- 0
+    }
     
     # includes SAPTO now
 #     medicare.levy <- ifelse(age >= 65,
@@ -61,7 +67,13 @@ income_tax <- function(income, age = 44, fy.year = "2012-13", return.mode = "num
                                 ifelse(income < 180000, 17547 + 0.37*(income - 80000), 
                                        54547 + 0.45*(income - 180000)))))
     
-    temp.budget.repair.levy <- income * ifelse(income > 180000, 0.02, 0)
+    if(isTRUE(include.temp.budget.repair.levy)){
+      temp.budget.repair.levy <- ifelse(income < 180e3,
+                                        0,
+                                        0.02 * (income - 180e3))
+    } else {
+      temp.budget.repair.levy <- 0
+    }
     
     medicare.levy <- ifelse(income < 20542, 
                             0,
