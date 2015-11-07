@@ -49,7 +49,7 @@ income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.l
                             0,
                             ifelse(income < 26121,
                                    0.10 * (income - 20896),
-                                   0.20 * income))
+                                   0.02 * income))
     
     medicare.surcharge <- 0
     
