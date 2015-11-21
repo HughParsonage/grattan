@@ -8,9 +8,10 @@
 #' @author Various
 #' @return the total personal income tax payable
 
-income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44){
+income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44, age_group, is.single = TRUE){
   # If not applicable:
   LITO <- 0
+  SAPTO <- grattan:::.sapto(income, age, age_group, is.single, fy.year = fy.year)
   medicare.levy <- 0.015 * income
   flood.levy <- 0
   
@@ -31,20 +32,6 @@ income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.l
       temp.budget.repair.levy <- 0
     }
     
-    # includes SAPTO now
-#     medicare.levy <- ifelse(age >= 65,
-#                             ifelse(income < 32279,
-#                                    0,
-#                                    ifelse(income < 37975,
-#                                           0.1 * (income - 32279),
-#                                           0.02 * income)),
-#                             ifelse(income < 20542, 
-#                                    0,
-#                                    ifelse(income <= 20542,
-#                                           0.1 * (income - 20542),
-#                                           0.02 * income))
-#     )
-#     
     medicare.levy <- ifelse(income < 20896,
                             0,
                             ifelse(income < 26121,
@@ -57,7 +44,7 @@ income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.l
                    ifelse(income < 66667, 445 - ((income - 37000)*0.015),
                           0))
     
-    out <- pmax(tax + temp.budget.repair.levy + medicare.levy + medicare.surcharge - LITO, 0)
+    out <- pmax(tax + temp.budget.repair.levy + medicare.levy + medicare.surcharge - LITO - SAPTO, 0)
   }
   
   if (fy.year == "2014-15"){
@@ -93,7 +80,7 @@ income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.l
                    ifelse(income < 66667, 445 - ((income - 37000)*0.015),
                           0))
     
-    out <- pmax(tax + temp.budget.repair.levy + medicare.levy + medicare.surcharge - LITO, 0)
+    out <- pmax(tax + temp.budget.repair.levy + medicare.levy + medicare.surcharge - LITO - SAPTO, 0)
   }
   
 
@@ -124,7 +111,7 @@ income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.l
                    ifelse(income < 66667, 445 - ((income - 37000)*0.015),
                           0))
     
-    out <- pmax(tax + medicare.levy + medicare.surcharge - LITO, 0)
+    out <- pmax(tax + medicare.levy + medicare.surcharge - LITO - SAPTO, 0)
     
   }
   
@@ -159,7 +146,7 @@ income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.l
                              )
     )
                              
-    out <- pmax(tax + medicare.levy - LITO, 0)
+    out <- pmax(tax + medicare.levy - LITO - SAPTO, 0)
   }
   
   
