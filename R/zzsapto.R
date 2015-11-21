@@ -18,8 +18,7 @@
   }
   
   if(!missing(age) && !missing(age_group)){
-    stopifnot(all(!is.na(age)), all(!is.na(age_group)))
-    over65 <- age >= 65 | age_group >= "65 to 69"
+    over65 <- ifelse(xor(age >= 65, age_group >= "65 to 69"), NA, age >= 65)
   }
   ifelse(!over65,
          0,
