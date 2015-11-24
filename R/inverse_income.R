@@ -6,8 +6,12 @@
 #' 
 
 inverse_income <- 
-  function(tax, fy.year = "2012-13", zero.tax.income = c("maximum", "zero", "uniform", numeric(1)), ...){ 
+  function(tax, fy.year = "2012-13", zero.tax.income = c("maximum", "zero", "uniform", numeric(1)), ...){
+    if(any(tax) < 0)
+      stop("tax must be nonnegative")
+    
     zero.tax.income <- zero.tax.income[1]
+    
     if (length(tax) > 1)
       inverse_income_lookup3(tax, fy.year = fy.year, zero.tax.income = zero.tax.income, ...)
     else
