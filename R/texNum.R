@@ -5,6 +5,8 @@
 
 texNum <- function(number, sig.figs = 3L){
   stopifnot(is.numeric(number))
+  is.negative <- number < 0
+  number <- abs(number)
   n.digits <- floor(log10(number))
   
   if (number == 0)
@@ -38,5 +40,7 @@ texNum <- function(number, sig.figs = 3L){
     
   }
   out <- paste0(prefix, "~", suffix)
+  if(is.negative)
+    out <- paste0($-$, out)
   return(out)
 }
