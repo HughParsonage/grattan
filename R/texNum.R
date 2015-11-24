@@ -41,6 +41,6 @@ texNum <- function(number, sig.figs = 3L){
   }
   out <- paste0(prefix, "~", suffix)
   if(is.negative)
-    out <- paste0($-$, out)
+    out <- paste0("$-$", out)
   return(out)
 }
