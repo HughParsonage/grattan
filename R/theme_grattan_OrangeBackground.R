@@ -17,7 +17,8 @@ theme_grattan_OrangeBackground <- function(base_size = 24, base_family = "") {
       text =              element_text(family = base_family, face = "plain",
                                        colour = "#000000", size = base_size,
                                        hjust = 0.5, vjust = 0.5, angle = 0, 
-                                       lineheight = 0.9),
+                                       lineheight = 0.9, 
+                                       margin = margin(), debug = FALSE),
       
       # Modified inheritance structure of text element
       #       plot.title =        element_text(size = rel(1.0), family = '' , 
@@ -29,8 +30,7 @@ theme_grattan_OrangeBackground <- function(base_size = 24, base_family = "") {
       axis.title.y =      element_blank(),
       axis.text =         element_text(),
       axis.line =         element_line(color = "black"),
-      axis.ticks.length = grid::unit(0.3, "lines"),
-      axis.ticks.margin = grid::unit(0.5, "lines"), 
+      axis.ticks.length = grid::unit(0.3, "lines"), 
       
       # Modified inheritance structure of line element
       axis.ticks =        element_line(color = "black"),
