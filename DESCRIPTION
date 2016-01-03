@@ -7,5 +7,11 @@ Author: Hugh Parsonage
 Maintainer: Who to complain to <hugh.parsonage@grattaninstitute.edu.au>
 Description: 
 License: 
-Depends: data.table, ggplot2
-Imports: grDevices, RColorBrewer, ggplot2, scales, gridExtra, data.table
+
+Imports: 
+  grDevices, 
+  RColorBrewer, 
+  ggplot2 (>= 2.0.0), 
+  scales, 
+  gridExtra, 
+  data.table
