@@ -173,7 +173,8 @@ income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.l
     LITO <- ifelse(income < 30000, 1500,
                    ifelse(income < 65000, 1500 - ((income - 30000)*0.04),
                           0))
-    
+                          
+    out <- pmax(tax + medicare.levy + flood.levy - LITO - SAPTO, 0)
     
   }
   
