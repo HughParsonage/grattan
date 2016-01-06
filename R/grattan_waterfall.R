@@ -5,6 +5,7 @@
 #' @param values a numeric vector making up the heights of the rectangles in the waterfall
 #' @param labels the labels corresponding to each vector, marked on the x-axis
 #' @param rect_text_labels (character) a character vector of the same length as values that are placed on the rectangles 
+#' @param rect_text_size size of the text in the rectangles
 #' @param rect_text_labels_anchor (character) How should rect_text_labels be positioned. In future releases, we might have support for north or south anchors, or for directed positioning (negative down, positive up) etc. For now, only centre is supported.
 #' @param put_rect_text_outside_when_value_below (numeric) the text labels accompanying a rectangle of this height will be placed outside the box: below if it's negative; above if it's positive.
 #' @param calc_total (logical) should the final pool of the waterfall be calculated (and placed on the chart)
@@ -26,6 +27,7 @@
 grattan_waterfall <- function(.data = NULL,
                               values, labels, 
                               rect_text_labels = values,
+                              rect_text_size = 7.14,
                               rect_text_labels_anchor = "centre",
                               put_rect_text_outside_when_value_below = 0.05*(max(cumsum(values)) - min(cumsum(values))),
                               calc_total = FALSE,
@@ -148,7 +150,7 @@ grattan_waterfall <- function(.data = NULL,
                                                        paste0("\U2212", -1 * values[i]),
                                                        values[i]),
                                                 rect_text_labels[i]),
-                                 size = 7.14)
+                                 size = rect_text_size)
     } else {
       p <- p + ggplot2::annotate("text",
                                  x = i,
@@ -159,7 +161,7 @@ grattan_waterfall <- function(.data = NULL,
                                                        values[i]),
                                                 rect_text_labels[i]),
                                  vjust = ifelse(values[i] >= 0, -0.2, 1.2),
-                                 size = 7.14)
+                                 size = rect_text_size)
     }
   }
   
@@ -181,7 +183,7 @@ grattan_waterfall <- function(.data = NULL,
                                               north_edge[number_of_rectangles]),
                                        total_rect_text),
                         color = total_rect_text_color,
-                        size = 7.14) + 
+                        size = rect_text_size) + 
       ggplot2::scale_x_discrete(labels = c(labels, total_axis_text))
     if (draw_lines){
       p <- p + ggplot2::annotate("segment",
