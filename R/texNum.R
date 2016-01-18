@@ -38,6 +38,10 @@ texNum <- function(number, sig.figs = 2L){
         suffix <- "trillion"
       }
       
+      if (n.digits > 15){
+        prefix <- signif(number / 10^12, digits = sig.figs)
+      }
+      
     }
     out <- paste0(prefix, "~", suffix)
     if(is.negative)
