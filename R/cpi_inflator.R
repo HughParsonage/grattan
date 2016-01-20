@@ -7,7 +7,7 @@
 #' @param to_fy (character) a character vector with each element in the form "2012-13" representing the financial year that prices are to be inflated. 
 #' @return the value of from_nominal_price in real (to_fy) dollars.
 
-cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2013-14", adjustment = "none"){
+cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15", adjustment = "none"){
   if((!require(dplyr)) || (!require(magrittr)))
     stop("dplyr and magrittr required")
   
