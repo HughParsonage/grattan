@@ -7,7 +7,7 @@
 #' @export
 #' @return A vector of HTML colours to be used.
 
-gpal <- function(n, dark = FALSE){
+gpal <- function(n, dark = TRUE){
   grattan.palette <- list(pal.1, pal.2, pal.3, pal.4, pal.5, pal.6)
   if(n > 6){
     if(n > 9)
