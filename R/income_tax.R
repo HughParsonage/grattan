@@ -4,9 +4,16 @@
 #' @param age the individual's age
 #' @param fy.year the financial year in which the income was earned
 #' @param return.mode use numeric or integer
+#' @param allow.forecasts should dates beyond 2014-15 be permitted?
 #' @export 
 #' @author Various
 #' @return the total personal income tax payable
+
+income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44, age_group, is.single = TRUE, allow.forecasts = FALSE){
+  fy_years <- unique(fy.year)
+  
+  
+}
 
 income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44, age_group, is.single = TRUE){
   # If not applicable:
@@ -290,18 +297,7 @@ income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.l
                                        13572 + 0.42*(income - 58e3),
                                        18612 + 0.47*(income - 70e3)))))
   }
-  
-  if (fy.year == "2004-05"){
-    tax <- ifelse(income < 6000,
-                  0,
-                  ifelse(income < 21600,
-                         0.17*(income - 6000),
-                         ifelse(income < 52000,
-                                2652 + 0.30*(income - 21601),
-                                ifelse(income < 62500,
-                                       11772 + 0.42*(income - 52000),
-                                       16182 + 0.47*(income - 62500)))))
-  }
+
   
   if (fy.year == "2003-04"){
     tax <- ifelse(income < 6000,
