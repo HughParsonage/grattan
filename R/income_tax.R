@@ -11,6 +11,9 @@
 
 income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44, age_group, is.single = TRUE, allow.forecasts = FALSE){
   fy_years <- unique(fy.year)
+#   tax_tbl <- data.table::fread("./data/tax-brackets-and-marginal-rates-by-fy.tsv")
+#   devtools::use_data(tax_tbl, tax_tbl, internal = TRUE)
+  tax <- 
   
   
 }
