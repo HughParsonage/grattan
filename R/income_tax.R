@@ -9,6 +9,49 @@
 #' @author Various
 #' @return the total personal income tax payable
 
+library(dplyr)
+library(magrittr)
+library(grattan)
+library(data.table)
+
+
+.income_tax <- function(income, fy.year){
+  # Don't like vector recycling
+  if(length(income) != length(fy.year) && (length(income) > 1 || length(fy.year) > 1)){
+    stop("Lengths of income and fy.year must be the same length, or length one")
+  }
+  
+  temp <- 
+    tax_tbl %>%
+    group_by(fy_year) %>%
+    mutate(bracket_gap = lower_bracket - lag(lower_bracket, default = 0),
+           tax_at = cumsum(lag(marginal_rate, default = 0) * bracket_gap)) %>%
+    mutate(income = lower_bracket) %>%
+    setkey(fy_year, income) %>%
+    select(fy_year, income, lower_bracket, marginal_rate, tax_at)
+  
+  
+  input <- data.table::data.table(income = income, fy_year = fy.year) %>% setkey(fy_year, income)
+  
+  tax_fun <- function(income, fy.year){
+    
+    temp[input, roll = Inf][,tax := tax_at + (income - lower_bracket) * marginal_rate]
+    temp$tax
+  }
+  
+  .lito <- function(income, fy.year){
+    data.table:::merge.data.table(.lito_tbl, input, by = "fy_year") %$%
+    {
+      pmaxC(max_lito - (income - min_bracket) * lito_taper, 0)
+    }
+  }
+  
+  medicare_levy <- function(income, fy.year){
+    
+  }
+  .lito(income, fy.year)
+}
+
 income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44, age_group, is.single = TRUE, allow.forecasts = FALSE){
   fy_years <- unique(fy.year)
 #   tax_tbl <- data.table::fread("./data/tax-brackets-and-marginal-rates-by-fy.tsv")
@@ -173,11 +216,11 @@ income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.l
                                    0.015*income))
     #Plunky
     if (fy.year == "2011-12"){
-    flood.levy <- ifelse(income < 50000, 0,
-                         ifelse(income < 100000, (income - 50000) * 0.005, 
-                                250 + (income - 100000)*0.01))
+      flood.levy <- ifelse(income < 50000, 0,
+                           ifelse(income < 100000, (income - 50000) * 0.005, 
+                                  250 + (income - 100000)*0.01))
     } else {
-    flood.levy <- 0
+      flood.levy <- 0
     }
     
     LITO <- ifelse(income < 30000, 1500,
