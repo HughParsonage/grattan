@@ -15,13 +15,16 @@ library(grattan)
 library(data.table)
 
 
-.income_tax <- function(income, fy.year){
+.income_tax <- function(income, fy.year, sapto.eligible = FALSE, individual = TRUE){
   # Don't like vector recycling
   if(length(income) != length(fy.year) && (length(income) > 1 || length(fy.year) > 1)){
     stop("Lengths of income and fy.year must be the same length, or length one")
   }
-  
-  temp <- 
+
+  # tax_table2 provides the raw tax tables, but also the amount
+  # of tax paid at each bracket, to make the rolling join 
+  # calculation later a one liner.
+  tax_table2 <- 
     tax_tbl %>%
     group_by(fy_year) %>%
     mutate(bracket_gap = lower_bracket - lag(lower_bracket, default = 0),
@@ -30,13 +33,10 @@ library(data.table)
     setkey(fy_year, income) %>%
     select(fy_year, income, lower_bracket, marginal_rate, tax_at)
   
-  
   input <- data.table::data.table(income = income, fy_year = fy.year) %>% setkey(fy_year, income)
   
   tax_fun <- function(income, fy.year){
-    
-    temp[input, roll = Inf][,tax := tax_at + (income - lower_bracket) * marginal_rate]
-    temp$tax
+    tax_table2[input, roll = Inf][,tax := tax_at + (income - lower_bracket) * marginal_rate]$tax
   }
   
   .lito <- function(income, fy.year){
@@ -46,10 +46,13 @@ library(data.table)
     }
   }
   
-  medicare_levy <- function(income, fy.year){
-    
+  medicare_levy <- function(income, fy.year, individual = individual){
+    stopifnot(!individual)
+    medicare_tables[input][order(fy_year, income)][,medicare_levy := pminV(pmaxC(taper * (income - lower_bracket), 
+                                                                                 0), 
+                                                                           rate * income)]
   }
-  .lito(income, fy.year)
+  pmaxC(tax_fun(income, fy.year, individual = individual) + medicare_levy(income, fy.year) - .lito(income, fy.year)
 }
 
 income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44, age_group, is.single = TRUE, allow.forecasts = FALSE){
