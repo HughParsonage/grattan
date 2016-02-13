@@ -16,20 +16,20 @@
 # library(data.table)
 
 
-.income_tax <- function(income, fy.year = "2012-13", brackets, marginal_rates, 
+.income_tax <- function(income, fy.year, manual_brackets = FALSE, brackets, marginal_rates, 
                         sapto.eligible = FALSE, family_status = "individual"){
   # Don't like vector recycling
   if(length(income) != length(fy.year) && length(income) > 1 && length(fy.year) > 1){
     stop("Lengths of income, fy.year must be the same, or length one")
   }
+  ord <- rank(income, ties.method = "first")
 
   # tax_table2 provides the raw tax tables, but also the amount
   # of tax paid at each bracket, to make the rolling join 
   # calculation later a one liner.
   
   # Only one of fy.year and (brackets & marginal rates) may be provided
-  if(!is.null(fy.year)){
-    stopifnot(missing(marginal_rates))
+  if(!manual_brackets){
     tax_table2 <- 
       tax_tbl %>%
       group_by(fy_year) %>%
@@ -41,7 +41,7 @@
     stopifnot(!missing(marginal_rates))
     tax_table2 <- 
       data.table::data.table(
-        fy_year = NA,
+        fy_year = fy.year,
         lower_bracket = brackets,
         marginal_rate = marginal_rates
       ) %>% 
@@ -90,13 +90,15 @@
       medicare_levy
   }
   
-  pmaxC(tax_fun(income, fy.year = fy.year) + 
-          medicare_levy(income, fy.year = fy.year, sapto.eligible = sapto.eligible) - 
-          .lito(income, fy.year) - 
-          sapto(rebate_income = rebate_income(income), 
-                fy.year = fy.year, 
-                family_status = "single"), 
-        0)
+  out <- pmaxC(tax_fun(income, fy.year = fy.year) + 
+                 medicare_levy(income, fy.year = fy.year, sapto.eligible = sapto.eligible) - 
+                 .lito(income, fy.year) - 
+                 sapto(rebate_income = rebate_income(income), 
+                       fy.year = fy.year, 
+                       family_status = "single"), 
+               0)
+  
+  out[ord]
 }
 
 income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44, age_group, is.single = TRUE, allow.forecasts = FALSE){

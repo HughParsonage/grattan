@@ -7,9 +7,8 @@
   setkey(fy_year)
 
 .sapto_tbl <- 
-  readxl::read_excel("./data/SAPTO-rates.xlsx", sheet = 1) %>%
-  data.table %>%
-  setkey(fy_year, family_status, rebate_income)
+  readxl::read_excel("./data/SAPTO-rates.xlsx", sheet = 1)
+
 
 devtools::use_data(.lito_tbl, tax_tbl, 
                    .medicare.tbl.indiv, 
