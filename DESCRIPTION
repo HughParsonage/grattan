@@ -15,5 +15,6 @@ Imports:
     ggplot2 (>= 2.0.0),
     scales,
     gridExtra,
-    data.table
+    data.table,
+    Rcpp
 RoxygenNote: 5.0.1

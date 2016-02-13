@@ -29,6 +29,18 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// pminV
+NumericVector pminV(NumericVector x, NumericVector y);
+RcppExport SEXP grattan_pminV(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    __result = Rcpp::wrap(pminV(x, y));
+    return __result;
+END_RCPP
+}
 // squish_cpp
 NumericVector squish_cpp(NumericVector x, double a, double b);
 RcppExport SEXP grattan_squish_cpp(SEXP xSEXP, SEXP aSEXP, SEXP bSEXP) {
