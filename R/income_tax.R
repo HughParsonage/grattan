@@ -15,9 +15,35 @@
 # #library(grattan)
 # library(data.table)
 
+new_income_tax <- function(income, sapto.eligible, family_status, age, 
+                           brackets, marginal_rates, 
+                           medicare, .medicare.dots){
+  
+  tax_table2 <- 
+    data.table::data.table(
+      fy_year = fy.year,
+      lower_bracket = brackets,
+      marginal_rate = marginal_rates
+    ) %>% 
+    dplyr::mutate(tax_at = cumsum(lag(marginal_rate, default = 0) * (lower_bracket - lag(lower_bracket, default = 0)))) %>%
+    dplyr::mutate(income = lower_bracket) %>%
+    data.table::setkey(fy_year, income) %>%
+    dplyr::select(fy_year, income, lower_bracket, marginal_rate, tax_at)
+  
+  input <- 
+    data.table::data.table(ordering = 1:length(income),
+                           income = income, 
+                           sapto.eligible = sapto.eligible, 
+                           family_status = family_status,
+                           age = age)
+  
+}
 
-.income_tax <- function(income, fy.year, manual_brackets = FALSE, brackets, marginal_rates, 
-                        sapto.eligible = FALSE, family_status = "individual"){
+# .income_tax uses real data (e.g. tax stats)
+.income_tax <- function(income, fy.year, 
+                        sapto.eligible = FALSE, family_status = "individual",
+                        age, 
+                        temp.budget.repair.levy = TRUE){
   # Don't like vector recycling
   if(length(income) != length(fy.year) && length(income) > 1 && length(fy.year) > 1){
     stop("Lengths of income, fy.year must be the same, or length one")
@@ -28,28 +54,13 @@
   # of tax paid at each bracket, to make the rolling join 
   # calculation later a one liner.
   
-  # Only one of fy.year and (brackets & marginal rates) may be provided
-  if(!manual_brackets){
-    tax_table2 <- 
-      tax_tbl %>%
-      group_by(fy_year) %>%
-      mutate(tax_at = cumsum(lag(marginal_rate, default = 0) * (lower_bracket - lag(lower_bracket, default = 0)))) %>%
-      mutate(income = lower_bracket) %>%
-      setkey(fy_year, income) %>%
-      select(fy_year, income, lower_bracket, marginal_rate, tax_at)
-  } else {
-    stopifnot(!missing(marginal_rates))
-    tax_table2 <- 
-      data.table::data.table(
-        fy_year = fy.year,
-        lower_bracket = brackets,
-        marginal_rate = marginal_rates
-      ) %>% 
-      mutate(tax_at = cumsum(lag(marginal_rate, default = 0) * (lower_bracket - lag(lower_bracket, default = 0)))) %>%
-      mutate(income = lower_bracket) %>%
-      setkey(fy_year, income) %>%
-      select(fy_year, income, lower_bracket, marginal_rate, tax_at)
-  }
+  tax_table2 <- 
+    tax_tbl %>%
+    group_by(fy_year) %>%
+    mutate(tax_at = cumsum(lag(marginal_rate, default = 0) * (lower_bracket - lag(lower_bracket, default = 0)))) %>%
+    mutate(income = lower_bracket) %>%
+    setkey(fy_year, income) %>%
+    select(fy_year, income, lower_bracket, marginal_rate, tax_at)
   
   input <- data.table::data.table(income = income, 
                                   fy_year = fy.year) %>% 
@@ -81,9 +92,7 @@
                            sapto = sapto.eligible, 
                            family_status = family_status) %>%
       inner_join(medicare.tbl.indiv, 
-                 by = c("fy_year"
-                        ,"sapto"
-                 )) %>%
+                 by = c("fy_year", "sapto")) %>%
       mutate(medicare_levy = pminV(pmaxC(taper * (income - lower_bracket), 
                                          0), 
                                    rate * income)) %$%
@@ -94,7 +103,8 @@
                  medicare_levy(income, fy.year = fy.year, sapto.eligible = sapto.eligible) - 
                  .lito(income, fy.year) - 
                  sapto(rebate_income = rebate_income(income), 
-                       fy.year = fy.year, 
+                       fy.year = fy.year,
+                       sapto.eligible = sapto.eligible,
                        family_status = "single"), 
                0)
   
