@@ -9,12 +9,12 @@
 #' @source \url{https://www.ato.gov.au/Individuals/Tax-return/2015/Tax-return/Tax-offset-questions-T1-T2/Rebate-income-2015/}
 
 rebate_income <- function(Taxable_Income, 
-                          Rptbl_Empr_spr_cont_amt,
+                          Rptbl_Empr_spr_cont_amt = 0,
                           All_deductible_super_contr = 0,
-                          Net_fincl_invstmt_lss_amt, 
-                          Net_rent_amt, 
-                          Rep_frng_ben_amt){
-  .add <- function(x) Reduce("+", x)
+                          Net_fincl_invstmt_lss_amt = 0, 
+                          Net_rent_amt = 0, 
+                          Rep_frng_ben_amt = 0){
+  .add <- function(...) Reduce("+", list(...))
   .add(Taxable_Income,
        Rptbl_Empr_spr_cont_amt, 
        All_deductible_super_contr,
