@@ -8,11 +8,13 @@ Author: Hugh Parsonage
 Maintainer: Who to complain to <hugh.parsonage@grattaninstitute.edu.au>
 Description: 
 License: GPL-2
+LinkingTo: Rcpp
 Imports:
     grDevices,
     RColorBrewer,
     ggplot2 (>= 2.0.0),
     scales,
     gridExtra,
-    data.table
+    data.table,
+    Rcpp
 RoxygenNote: 5.0.1

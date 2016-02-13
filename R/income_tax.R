@@ -3,10 +3,112 @@
 #' @param income the personal assessable income
 #' @param age the individual's age
 #' @param fy.year the financial year in which the income was earned
+#' @param brackets a numeric vector designating the lower boundaries of tax brackets
 #' @param return.mode use numeric or integer
+#' @param allow.forecasts should dates beyond 2014-15 be permitted?
 #' @export 
 #' @author Various
 #' @return the total personal income tax payable
+
+# library(dplyr)
+# library(magrittr)
+# #library(grattan)
+# library(data.table)
+
+
+.income_tax <- function(income, fy.year, manual_brackets = FALSE, brackets, marginal_rates, 
+                        sapto.eligible = FALSE, family_status = "individual"){
+  # Don't like vector recycling
+  if(length(income) != length(fy.year) && length(income) > 1 && length(fy.year) > 1){
+    stop("Lengths of income, fy.year must be the same, or length one")
+  }
+  ord <- rank(income, ties.method = "first")
+
+  # tax_table2 provides the raw tax tables, but also the amount
+  # of tax paid at each bracket, to make the rolling join 
+  # calculation later a one liner.
+  
+  # Only one of fy.year and (brackets & marginal rates) may be provided
+  if(!manual_brackets){
+    tax_table2 <- 
+      tax_tbl %>%
+      group_by(fy_year) %>%
+      mutate(tax_at = cumsum(lag(marginal_rate, default = 0) * (lower_bracket - lag(lower_bracket, default = 0)))) %>%
+      mutate(income = lower_bracket) %>%
+      setkey(fy_year, income) %>%
+      select(fy_year, income, lower_bracket, marginal_rate, tax_at)
+  } else {
+    stopifnot(!missing(marginal_rates))
+    tax_table2 <- 
+      data.table::data.table(
+        fy_year = fy.year,
+        lower_bracket = brackets,
+        marginal_rate = marginal_rates
+      ) %>% 
+      mutate(tax_at = cumsum(lag(marginal_rate, default = 0) * (lower_bracket - lag(lower_bracket, default = 0)))) %>%
+      mutate(income = lower_bracket) %>%
+      setkey(fy_year, income) %>%
+      select(fy_year, income, lower_bracket, marginal_rate, tax_at)
+  }
+  
+  input <- data.table::data.table(income = income, 
+                                  fy_year = fy.year) %>% 
+    data.table::setkey(fy_year, income)
+  
+  tax_fun <- function(income, fy.year){
+    tax_table2[input, roll = Inf][,tax := tax_at + (income - lower_bracket) * marginal_rate] %$%
+      tax
+  }
+  
+  .lito <- function(income, fy.year){
+    data.table:::merge.data.table(.lito_tbl, input, by = "fy_year") %$%
+    {
+      pmaxC(max_lito - (income - min_bracket) * lito_taper, 0)
+    }
+  }
+
+  
+  medicare_levy <- function(income, fy.year,
+                            sapto.eligible,
+                            family_status = "individual"){
+    # Temporary. The system table should have sapto
+    medicare.tbl.indiv <- 
+      .medicare.tbl.indiv %>%
+      mutate(sapto = as.logical(sato))
+    
+    data.table::data.table(income = income, 
+                           fy_year = fy.year,
+                           sapto = sapto.eligible, 
+                           family_status = family_status) %>%
+      inner_join(medicare.tbl.indiv, 
+                 by = c("fy_year"
+                        ,"sapto"
+                 )) %>%
+      mutate(medicare_levy = pminV(pmaxC(taper * (income - lower_bracket), 
+                                         0), 
+                                   rate * income)) %$%
+      medicare_levy
+  }
+  
+  out <- pmaxC(tax_fun(income, fy.year = fy.year) + 
+                 medicare_levy(income, fy.year = fy.year, sapto.eligible = sapto.eligible) - 
+                 .lito(income, fy.year) - 
+                 sapto(rebate_income = rebate_income(income), 
+                       fy.year = fy.year, 
+                       family_status = "single"), 
+               0)
+  
+  out[ord]
+}
+
+income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44, age_group, is.single = TRUE, allow.forecasts = FALSE){
+  fy_years <- unique(fy.year)
+#   tax_tbl <- data.table::fread("./data/tax-brackets-and-marginal-rates-by-fy.tsv")
+#   devtools::use_data(tax_tbl, tax_tbl, internal = TRUE)
+  tax <- NULL
+  
+  
+}
 
 income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44, age_group, is.single = TRUE){
   # If not applicable:
@@ -163,11 +265,11 @@ income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.l
                                    0.015*income))
     #Plunky
     if (fy.year == "2011-12"){
-    flood.levy <- ifelse(income < 50000, 0,
-                         ifelse(income < 100000, (income - 50000) * 0.005, 
-                                250 + (income - 100000)*0.01))
+      flood.levy <- ifelse(income < 50000, 0,
+                           ifelse(income < 100000, (income - 50000) * 0.005, 
+                                  250 + (income - 100000)*0.01))
     } else {
-    flood.levy <- 0
+      flood.levy <- 0
     }
     
     LITO <- ifelse(income < 30000, 1500,
@@ -290,18 +392,7 @@ income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.l
                                        13572 + 0.42*(income - 58e3),
                                        18612 + 0.47*(income - 70e3)))))
   }
-  
-  if (fy.year == "2004-05"){
-    tax <- ifelse(income < 6000,
-                  0,
-                  ifelse(income < 21600,
-                         0.17*(income - 6000),
-                         ifelse(income < 52000,
-                                2652 + 0.30*(income - 21601),
-                                ifelse(income < 62500,
-                                       11772 + 0.42*(income - 52000),
-                                       16182 + 0.47*(income - 62500)))))
-  }
+
   
   if (fy.year == "2003-04"){
     tax <- ifelse(income < 6000,

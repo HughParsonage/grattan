@@ -5,7 +5,7 @@
 #' @return the amount that will offset one's estimated tax
 
 
-.sapto <- function(income, age, age_group, is.single = TRUE, fy.year = "2012-13"){
+.sapto <- function(rebate_income, fy.year = "2012-13", age, age_group, family_status){
   if (missing(age) && missing(age_group))
     stop("At least one of 'age' and 'age_group' must be provided")
   
