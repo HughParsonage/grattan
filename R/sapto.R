@@ -1,11 +1,14 @@
 #' Senior Australians and Pensioner Tax Offset
 
-sapto <- function(rebate_income, fy_year, family_status = "single"){
-  input <- data.table::data.table(fy_year = fy_year, 
-                                  family_status = family_status, 
-                                  rebate_income = rebate_income, 
-                                  key = c("fy_year", "family_status", "rebate_income"))
-  setkey(.sapto_tbl, fy_year, family_status, rebate_income)
+sapto <- function(rebate_income, fy.year, family_status = "single"){
+  input <- dplyr::data_frame(fy_year = fy.year, 
+                             family_status = family_status, 
+                             rebate_income = rebate_income)
   
-  .sapto_tbl[input, roll = Inf]
+  dplyr::left_join(input, .sapto_tbl, 
+                   by = c("fy_year", "family_status")) %>%
+    dplyr::mutate(sapto = pmaxC(pminV(max_offset, 
+                                      upper_threshold * taper_rate - rebate_income * taper_rate),
+                                0)) %$%
+    sapto
 }
