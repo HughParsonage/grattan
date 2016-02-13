@@ -7,6 +7,7 @@ Author: Hugh Parsonage
 Maintainer: Who to complain to <hugh.parsonage@grattaninstitute.edu.au>
 Description: 
 License: GPL-2
+LinkingTo: Rcpp
 Imports: 
   grDevices, 
   RColorBrewer, 

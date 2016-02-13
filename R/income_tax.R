@@ -9,10 +9,10 @@
 #' @author Various
 #' @return the total personal income tax payable
 
-library(dplyr)
-library(magrittr)
-library(grattan)
-library(data.table)
+# library(dplyr)
+# library(magrittr)
+# #library(grattan)
+# library(data.table)
 
 
 .income_tax <- function(income, fy.year, sapto.eligible = FALSE, individual = TRUE){
@@ -24,6 +24,7 @@ library(data.table)
   # tax_table2 provides the raw tax tables, but also the amount
   # of tax paid at each bracket, to make the rolling join 
   # calculation later a one liner.
+  microbenchmark::microbenchmark(
   tax_table2 <- 
     tax_tbl %>%
     group_by(fy_year) %>%
@@ -32,6 +33,7 @@ library(data.table)
     mutate(income = lower_bracket) %>%
     setkey(fy_year, income) %>%
     select(fy_year, income, lower_bracket, marginal_rate, tax_at)
+  )
   
   input <- data.table::data.table(income = income, fy_year = fy.year) %>% setkey(fy_year, income)
   
@@ -52,14 +54,15 @@ library(data.table)
                                                                                  0), 
                                                                            rate * income)]
   }
-  pmaxC(tax_fun(income, fy.year, individual = individual) + medicare_levy(income, fy.year) - .lito(income, fy.year)
+  pmaxC(tax_fun(income, fy.year, individual = individual) + medicare_levy(income, fy.year) - .lito(income, fy.year),
+        0)
 }
 
 income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44, age_group, is.single = TRUE, allow.forecasts = FALSE){
   fy_years <- unique(fy.year)
 #   tax_tbl <- data.table::fread("./data/tax-brackets-and-marginal-rates-by-fy.tsv")
 #   devtools::use_data(tax_tbl, tax_tbl, internal = TRUE)
-  tax <- 
+  tax <- NULL
   
   
 }
