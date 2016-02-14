@@ -16,5 +16,7 @@ Imports:
     scales,
     gridExtra,
     data.table,
+    dplyr,
+    magrittr,
     Rcpp
 RoxygenNote: 5.0.1
