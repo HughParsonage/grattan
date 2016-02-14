@@ -4,7 +4,7 @@
 \alias{texNum}
 \title{Convert number to English prose}
 \usage{
-texNum(number, sig.figs = 3L)
+texNum(number, sig.figs = 2L)
 }
 \arguments{
 \item{sig.figs}{(not used)}

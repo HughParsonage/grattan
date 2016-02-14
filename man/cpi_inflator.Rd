@@ -4,7 +4,7 @@
 \alias{cpi_inflator}
 \title{CPI inflator}
 \usage{
-cpi_inflator(from_nominal_price = 1, from_fy, to_fy = "2013-14",
+cpi_inflator(from_nominal_price = 1, from_fy, to_fy = "2014-15",
   adjustment = "none")
 }
 \arguments{
