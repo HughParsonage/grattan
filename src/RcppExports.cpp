@@ -5,6 +5,19 @@
 
 using namespace Rcpp;
 
+// pmax3
+NumericVector pmax3(NumericVector x, NumericVector y, NumericVector z);
+RcppExport SEXP grattan_pmax3(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type z(zSEXP);
+    __result = Rcpp::wrap(pmax3(x, y, z));
+    return __result;
+END_RCPP
+}
 // pmaxC
 NumericVector pmaxC(NumericVector x, double a);
 RcppExport SEXP grattan_pmaxC(SEXP xSEXP, SEXP aSEXP) {
