@@ -10,34 +10,6 @@
 #' @author Various
 #' @return the total personal income tax payable
 
-# library(dplyr)
-# library(magrittr)
-# #library(grattan)
-# library(data.table)
-
-new_income_tax <- function(income, sapto.eligible, family_status, age, 
-                           brackets, marginal_rates, 
-                           medicare, .medicare.dots){
-  
-  tax_table2 <- 
-    data.table::data.table(
-      fy_year = fy.year,
-      lower_bracket = brackets,
-      marginal_rate = marginal_rates
-    ) %>% 
-    dplyr::mutate(tax_at = cumsum(lag(marginal_rate, default = 0) * (lower_bracket - lag(lower_bracket, default = 0)))) %>%
-    dplyr::mutate(income = lower_bracket) %>%
-    data.table::setkey(fy_year, income) %>%
-    dplyr::select(fy_year, income, lower_bracket, marginal_rate, tax_at)
-  
-  input <- 
-    data.table::data.table(ordering = 1:length(income),
-                           income = income, 
-                           sapto.eligible = sapto.eligible, 
-                           family_status = family_status,
-                           age = age)
-  
-}
 
 # .income_tax uses real data (e.g. tax stats)
 .income_tax <- function(income, fy.year, 
