@@ -3,10 +3,10 @@
 #' Simply hardcodes the allowed colours. 
 #' The Grattan principal orange
 #' @name colours
-delayedAssign("Orange", rgb(243,144,29, maxColorValue=256))
-delayedAssign("OrangeBackground", rgb(254,240,222, maxColorValue = 256))
+delayedAssign("Orange", grDevices::rgb(243,144,29, maxColorValue=256))
+delayedAssign("OrangeBackground", grDevices::rgb(254,240,222, maxColorValue = 256))
 delayedAssign("DarkOrange", "#D4582A")  # Dark orange
-delayedAssign("theGrey", rgb(106,115,123, maxColorValue=256))
+delayedAssign("theGrey", grDevices::rgb(106,115,123, maxColorValue=256))
 
 delayedAssign("col.1", "#FFE07F") # Lightest yellow
 delayedAssign("col.2", "#FFC35A") # light yellow

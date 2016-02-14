@@ -6,9 +6,9 @@ Version: 0.2.0.1
 Date: 2015-02-05
 Author: Hugh Parsonage
 Maintainer: Who to complain to <hugh.parsonage@grattaninstitute.edu.au>
-Description: 
+Description: The original goal of this package was to simply hold the colours of the Grattan palette. 
+Depends: R (>= 2.10)
 License: GPL-2
-LinkingTo: Rcpp
 Imports:
     grDevices,
     RColorBrewer,
@@ -18,5 +18,6 @@ Imports:
     data.table,
     dplyr,
     magrittr,
-    Rcpp
+    Rcpp (>= 0.12.3)
+LinkingTo: Rcpp
 RoxygenNote: 5.0.1
