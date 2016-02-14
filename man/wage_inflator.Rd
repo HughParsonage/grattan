@@ -9,7 +9,7 @@ wage_inflator(wage = 1, from_fy, to_fy)
 \arguments{
 \item{wage}{the amount to be inflated (1 by default)}
 
-\item{from_fy}{a character string of the form "2012-13" representing the FY ending that the wage index is to be taken (i.e. Q4 in that year). FY year must be 1996-97 or later.}
+\item{from_fy}{a character vector of the form "2012-13" representing the FY ending that the wage index is to be taken (i.e. Q4 in that year). FY year must be 1996-97 or later.}
 
 \item{to_fy}{the FY ending that the wage index is to be taken}
 }
