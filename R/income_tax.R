@@ -7,7 +7,7 @@
 #' @param return.mode use numeric or integer
 #' @param allow.forecasts should dates beyond 2014-15 be permitted?
 #' @export 
-#' @author Various
+#' @author Tim Cameron, Brendan Coates, Hugh Parsonage
 #' @return the total personal income tax payable
 
 
