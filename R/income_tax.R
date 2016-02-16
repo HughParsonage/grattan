@@ -12,9 +12,14 @@
 
 
 # .income_tax uses real data (e.g. tax stats)
-.income_tax <- function(income, fy.year, 
-                        sapto.eligible = FALSE, family_status = "individual",
-                        age, 
+.income_tax <- function(income, 
+                        fy.year, 
+                        age = 42, # answer to life, more importantly < 65.
+                        sapto.eligible = FALSE,
+                        sapto = sapto(rebate_income = income, 
+                                      fy.year = fy.year, 
+                                      sapto.eligible = age >= 65),
+                        family_status = "individual",
                         temp.budget.repair.levy = TRUE){
   # Don't like vector recycling
   if(length(income) != length(fy.year) && length(income) > 1 && length(fy.year) > 1){
@@ -26,27 +31,40 @@
   # of tax paid at each bracket, to make the rolling join 
   # calculation later a one liner.
   
-  tax_table2 <- 
+  tax_table2 <<- 
     tax_tbl %>%
-    group_by(fy_year) %>%
-    mutate(tax_at = cumsum(lag(marginal_rate, default = 0) * (lower_bracket - lag(lower_bracket, default = 0)))) %>%
-    mutate(income = lower_bracket) %>%
-    setkey(fy_year, income) %>%
-    select(fy_year, income, lower_bracket, marginal_rate, tax_at)
+    dplyr::group_by(fy_year) %>%
+    dplyr::mutate(tax_at = cumsum(lag(marginal_rate, 
+                                      default = 0) * (lower_bracket - lag(lower_bracket, 
+                                                                          default = 0)))) %>%
+    dplyr::mutate(income = lower_bracket) %>%
+    data.table::setkey(fy_year, income) %>%
+    dplyr::select(fy_year, income, lower_bracket, marginal_rate, tax_at)
   
-  input <- data.table::data.table(income = income, 
-                                  fy_year = fy.year) %>% 
+  input <<- 
+    data.table::data.table(income = income, 
+                           fy_year = fy.year) %>% 
+    dplyr::mutate(ordering = 1:n()) 
+  
+  input.keyed <-
+    # potentially expensive. Another way would be 
+    # to add an argument such as data.table.copy = FALSE
+    # to allow different way to preserve the order
+    data.table::copy(input) %>%
     data.table::setkey(fy_year, income)
   
   tax_fun <- function(income, fy.year){
-    tax_table2[input, roll = Inf][,tax := tax_at + (income - lower_bracket) * marginal_rate] %$%
+    tax_table2[input.keyed, roll = Inf][,tax := tax_at + (income - lower_bracket) * marginal_rate][order(ordering)] %$%
       tax
   }
   
   .lito <- function(income, fy.year){
-    data.table:::merge.data.table(.lito_tbl, input, by = "fy_year") %$%
+    data.table:::merge.data.table(grattan:::.lito_tbl, input, by = "fy_year", 
+                                  # sort set to FALSE to avoid the key ruining the order
+                                  sort = FALSE) %$%
     {
-      pmaxC(max_lito - (income - min_bracket) * lito_taper, 0)
+      pminV(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
+            max_lito)
     }
   }
 
@@ -56,40 +74,32 @@
                             family_status = "individual"){
     # Temporary. The system table should have sapto
     medicare.tbl.indiv <- 
-      .medicare.tbl.indiv %>%
-      mutate(sapto = as.logical(sato))
+      grattan:::.medicare.tbl.indiv %>%
+      dplyr::mutate(sapto = as.logical(sato))
     
     data.table::data.table(income = income, 
                            fy_year = fy.year,
                            sapto = sapto.eligible, 
                            family_status = family_status) %>%
-      inner_join(medicare.tbl.indiv, 
-                 by = c("fy_year", "sapto")) %>%
-      mutate(medicare_levy = pminV(pmaxC(taper * (income - lower_bracket), 
-                                         0), 
+      dplyr::inner_join(medicare.tbl.indiv, 
+                        by = c("fy_year", "sapto")) %>%
+      dplyr::mutate(medicare_levy = pminV(pmaxC(taper * (income - lower_bracket), 
+                                                0), 
                                    rate * income)) %$%
       medicare_levy
   }
   
+  base_tax. <<- tax_fun(income, fy.year = fy.year)
+  medicare_levy. <<- medicare_levy(income, fy.year = fy.year, sapto.eligible = sapto.eligible)
+  lito. <<- .lito(income, fy.year)
+  sapto. <<- sapto
+  
   out <- pmaxC(tax_fun(income, fy.year = fy.year) + 
                  medicare_levy(income, fy.year = fy.year, sapto.eligible = sapto.eligible) - 
-                 .lito(income, fy.year) - 
-                 sapto(rebate_income = rebate_income(income), 
-                       fy.year = fy.year,
-                       sapto.eligible = sapto.eligible,
-                       family_status = "single"), 
+                 .lito(income, fy.year) - sapto, 
                0)
   
-  out[ord]
-}
-
-income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44, age_group, is.single = TRUE, allow.forecasts = FALSE){
-  fy_years <- unique(fy.year)
-#   tax_tbl <- data.table::fread("./data/tax-brackets-and-marginal-rates-by-fy.tsv")
-#   devtools::use_data(tax_tbl, tax_tbl, internal = TRUE)
-  tax <- NULL
-  
-  
+  out
 }
 
 income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44, age_group, is.single = TRUE){
