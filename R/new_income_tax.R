@@ -76,5 +76,6 @@ new_income_tax <- function(income,
                 sapto_upper_threshold * sapto_taper_rate - sapto_rebate_income * sapto_taper_rate),
           0)
   
-  base_tax + medicare_levy - lito - (age > 65) * sapto
+  pmaxC(base_tax + medicare_levy - lito - (age > 65) * sapto,
+        0)
 }
