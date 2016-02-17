@@ -32,7 +32,7 @@
   # calculation later a one liner.
   
   tax_table2 <<- 
-    tax_tbl %>%
+    grattan:::.tax_tbl %>%
     dplyr::group_by(fy_year) %>%
     dplyr::mutate(tax_at = cumsum(lag(marginal_rate, 
                                       default = 0) * (lower_bracket - lag(lower_bracket, 
