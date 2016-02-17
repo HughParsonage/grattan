@@ -1,11 +1,12 @@
 #' A theme for use with ggplots
 #' 
-#' @name theme_huh
+#' @name theme_hugh
 #' 
 
 theme_hugh <- function(base_size = 23, base_family = "") {
-  theme_classic(base_size = base_size, base_family = base_family) %+replace%
-    theme(
+  ggplot2::theme_classic(base_size = base_size, 
+                         base_family = base_family) %+replace%
+    ggplot2::theme(
       
       # Base elements which are not used directly but inherited by others
       line =              element_line(colour = '#DADADA', size = 0.5, 
@@ -16,15 +17,11 @@ theme_hugh <- function(base_size = 23, base_family = "") {
                                        colour = "#000000", size = base_size,
                                        hjust = 0.5, vjust = 0.5, angle = 0, 
                                        lineheight = 0.9, 
-                                       margin = margin(), debug = FALSE),
-      
-      # Modified inheritance structure of text element
-      #       plot.title =        element_text(size = rel(1.0), family = '' , 
-      #                                        face = '', hjust = -0.05, 
-      #                                        vjust = 1.5, colour = '#3B3B3B'),
+                                       margin = ggplot2::margin(), debug = FALSE),
       plot.title = element_text(hjust = 0, vjust = 1.5),
       # Puts x lab at the far right
-      axis.title.x =      element_text(hjust = 1, vjust = -0.33),
+      axis.title.x =      element_text(hjust = 1, vjust = -0.33, 
+                                       margin = ggplot2::margin(t = 5.5, b = 5.5)),
       axis.title.y =      element_blank(),
       axis.text =         element_text(),
       axis.line =         element_line(color = "black"),
