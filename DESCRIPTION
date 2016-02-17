@@ -17,6 +17,7 @@ Imports:
     gridExtra,
     data.table,
     dplyr,
+    rsdmx,
     magrittr,
     Rcpp (>= 0.12.3)
 LinkingTo: Rcpp
