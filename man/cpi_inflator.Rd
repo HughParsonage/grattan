@@ -5,7 +5,7 @@
 \title{CPI inflator}
 \usage{
 cpi_inflator(from_nominal_price = 1, from_fy, to_fy = "2014-15",
-  adjustment = "none")
+  adjustment = "none", useABSConnection = FALSE)
 }
 \arguments{
 \item{from_nominal_price}{(numeric) the price (or vector of prices) to be inflated}
@@ -13,6 +13,10 @@ cpi_inflator(from_nominal_price = 1, from_fy, to_fy = "2014-15",
 \item{from_fy}{(character) a character vector with each element in the form "2012-13" representing the financial year contemporaneous to the from_nominal_price.}
 
 \item{to_fy}{(character) a character vector with each element in the form "2012-13" representing the financial year that prices are to be inflated.}
+
+\item{adjustment}{What CPI index to use ("none" = raw series, "seasonal", or "trimmed" [mean]).}
+
+\item{useABSConnection}{Should the function connect with ABS.Stat via an SDMX connection? By default set to \code{FALSE} in which case a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.}
 }
 \value{
 the value of from_nominal_price in real (to_fy) dollars.
