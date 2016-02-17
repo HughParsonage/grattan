@@ -12,9 +12,15 @@
 .sapto_tbl <- 
   readxl::read_excel("./data/SAPTO-rates.xlsx", sheet = 1)
 
-.cpi_unadj <- data.table::as.data.table(cpi)  
-.cpi_seasonal_adjustment <- data.table::as.data.table(cpi) 
-.cpi_trimmed <- data.table::as.data.table(cpi) 
+# Manually
+.cpi_unadj <- 
+  data.table::fread("./data/cpi-unadjusted-manual.tsv")
+
+.cpi_seasonal_adjustment <- 
+  data.table::fread("./data/cpi-seasonally-adjusted-manual.tsv") # bump
+
+.cpi_trimmed <-
+  data.table::fread("./data/cpi-trimmed-mean-manual.tsv")
 
 
 devtools::use_data(.lito_tbl, 
