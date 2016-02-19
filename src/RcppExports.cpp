@@ -42,6 +42,18 @@ BEGIN_RCPP
     return __result;
 END_RCPP
 }
+// pminC
+NumericVector pminC(NumericVector x, double a);
+RcppExport SEXP grattan_pminC(SEXP xSEXP, SEXP aSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject __result;
+    Rcpp::RNGScope __rngScope;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type a(aSEXP);
+    __result = Rcpp::wrap(pminC(x, a));
+    return __result;
+END_RCPP
+}
 // pminV
 NumericVector pminV(NumericVector x, NumericVector y);
 RcppExport SEXP grattan_pminV(SEXP xSEXP, SEXP ySEXP) {
