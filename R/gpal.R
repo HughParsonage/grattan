@@ -17,11 +17,11 @@ gpal <- function(n, dark = TRUE){
       warning("I'm going off-piste: The Palette Of Nine is thine. May John have mercy on your soul.")
     }
   }
-  if(dark) {
+  if(!dark) {
     if (n == 2){
-      pal.2dark
+      pal.2
     } else {
-      warning("no dark option for palette, choosing light option... ", n)
+      warning("no light option for palette ", n)
       grattan.palette[[n]]
     }             
   } else {
