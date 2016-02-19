@@ -13,6 +13,10 @@ pmaxV <- function(x, y) {
     .Call('grattan_pmaxV', PACKAGE = 'grattan', x, y)
 }
 
+pminC <- function(x, a) {
+    .Call('grattan_pminC', PACKAGE = 'grattan', x, a)
+}
+
 pminV <- function(x, y) {
     .Call('grattan_pminV', PACKAGE = 'grattan', x, y)
 }
