@@ -22,6 +22,9 @@
 .cpi_trimmed <-
   data.table::fread("./data/cpi-trimmed-mean-manual.tsv")
 
+.wages_trend <- 
+  data.table::fread("./data/wages-trend.tsv")
+
 
 devtools::use_data(.lito_tbl, 
                    .tax_tbl, 
@@ -30,4 +33,5 @@ devtools::use_data(.lito_tbl,
                    .cpi_unadj,
                    .cpi_seasonal_adjustment,
                    .cpi_trimmed,
+                   .wages_trend,
                    internal = TRUE, overwrite = TRUE)

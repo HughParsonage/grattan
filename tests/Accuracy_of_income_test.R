@@ -5,7 +5,9 @@ library(grattan)
 # True value of personal income tax receipts was $159.021 billion
 # 5506.0 - Taxation Revenue, Australia, 2013-14
 
-
+library(dplyr)
+library(magrittr)
+library(data.table)
 
 # basic taxable income to tax
 test1 <- 
