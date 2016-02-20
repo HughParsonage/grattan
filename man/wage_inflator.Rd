@@ -4,7 +4,8 @@
 \alias{wage_inflator}
 \title{a wage inflator}
 \usage{
-wage_inflator(wage = 1, from_fy, to_fy, useABSConnection = FALSE)
+wage_inflator(wage = 1, from_fy, to_fy, useABSConnection = FALSE,
+  allow.projection = TRUE)
 }
 \arguments{
 \item{wage}{the amount to be inflated (1 by default)}

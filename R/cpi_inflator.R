@@ -11,43 +11,41 @@
 
 cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15", 
                          adjustment = "none",
-                         useABSConnection = FALSE){
+                         useABSConnection = FALSE,
+                         allow.projection = TRUE){
+  if (any(is.na(from_fy)) || any(is.na(to_fy))){
+    stop("from_fy and to_fy contain NAs. Filter before applying.")
+  }
   # Don't like vector recycling
   # http://stackoverflow.com/a/9335687/1664978
-  dotList <- list(from_nominal_price, from_fy, to_fy)
-  vdot <- sapply(dotList, length)
-  max.length <- max(vdot)
-  if(any((vdot != 1L & vdot != max.length))){
-    stop("Inputs must be of equal length, or length 1")
-  }
+  prohibit_vector_recycling(from_nominal_price, from_fy, to_fy)
   
-  cpi.url <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.10001.10+20.Q/ABS?startTime=1948&endTime=2016"
-  cpi.url.seasonal.adjustment <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999901.10+20.Q/ABS?startTime=1948&endTime=2016"
-  cpi.url.trimmed.mean <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999902.10+20.Q/ABS?startTime=1948&endTime=2016"
-  
-  if(grepl("none", adjustment)){
-    url <- cpi.url
-  }
-  if(grepl("season", adjustment)){
-    url <- cpi.url.seasonal.adjustment
-  }
-  if(grepl("trimmed", adjustment)){
-    url <- cpi.url.trimmed.mean
-  }
-  
-  
-  if(useABSConnection) {
+  if (useABSConnection) {
+    cpi.url <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.10001.10+20.Q/ABS?startTime=1948&endTime=2016"
+    cpi.url.seasonal.adjustment <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999901.10+20.Q/ABS?startTime=1948&endTime=2016"
+    cpi.url.trimmed.mean <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999902.10+20.Q/ABS?startTime=1948&endTime=2016"
+    
+    if (grepl("none", adjustment)){
+      url <- cpi.url
+    }
+    if (grepl("season", adjustment)){
+      url <- cpi.url.seasonal.adjustment
+    }
+    if (grepl("trimmed", adjustment)){
+      url <- cpi.url.trimmed.mean
+    }
+    
     cpi <- rsdmx::readSDMX(url)
     message("Using ABS sdmx connection")
     cpi <- as.data.frame(cpi)
   } else {
-    if(grepl("none", adjustment)){
+    if (grepl("none", adjustment)){
       cpi <- grattan:::.cpi_unadj
     }
-    if(grepl("season", adjustment)){
+    if (grepl("season", adjustment)){
       cpi <- grattan:::.cpi_seasonal_adjustment
     }
-    if(grepl("trimmed", adjustment)){
+    if (grepl("trimmed", adjustment)){
       cpi <- grattan:::.cpi_trimmed
     }
   }
@@ -61,6 +59,24 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
     data.table::data.table(from_nominal_price = from_nominal_price,
                            from_fy = from_fy,
                            to_fy = to_fy)
+  
+  if (!allow.projection && !all(to_fy %in% cpi.indices$fy_year)){
+    stop("Not all elements of to_fy are in CPI data.")
+  }
+  # else allow NAs to propagate
+  
+  # Use forecast::forecast to inflate forward
+  if (allow.projection && !all(to_fy %in% cpi.indices$fy_year)){
+    # Number of years beyond the data our forecast must reach
+    years.beyond <- max(fy2yr(to_fy)) - max(fy2yr(cpi.indices$fy_year))
+    cpi_index_forecast <- cpi.indices %$% forecast::forecast(obsValue, h = years.beyond) %$% as.numeric(mean)
+    cpi.indices.new <- 
+      data.table::data.table(fy_year = yr2fy(seq(max(fy2yr(cpi.indices$fy_year)) + 1,
+                                                 max(fy2yr(to_fy)),
+                                                 by = 1L)),
+                             obsValue = cpi_index_forecast)
+    cpi.indices <- data.table::rbindlist(list(cpi.indices, cpi.indices.new), use.names = TRUE, fill = TRUE)
+  }
   
   output <- 
     input %>%
