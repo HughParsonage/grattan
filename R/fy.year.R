@@ -38,3 +38,10 @@ fy2date <- function(x){
     as.Date(date)
   }
 }
+
+date2fy <- function(date){
+  assertthat::is.date(date)
+  ifelse(lubridate::month(date) < 7, 
+         yr2fy(lubridate::year(date)), 
+         yr2fy(lubridate::year(date) + 1))
+}

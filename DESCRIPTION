@@ -18,6 +18,9 @@ Imports:
     data.table,
     dplyr,
     rsdmx,
+    forecast,
+    lubridate,
+    assertthat,
     magrittr,
     Rcpp (>= 0.12.3)
 LinkingTo: Rcpp
