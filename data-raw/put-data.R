@@ -25,6 +25,9 @@
 .wages_trend <- 
   data.table::fread("./data/wages-trend.tsv")
 
+.lf_trend <- 
+  data.table::fread("./data/lf-trend.tsv")
+
 
 devtools::use_data(.lito_tbl, 
                    .tax_tbl, 
@@ -34,4 +37,5 @@ devtools::use_data(.lito_tbl,
                    .cpi_seasonal_adjustment,
                    .cpi_trimmed,
                    .wages_trend,
+                   .lf_trend,
                    internal = TRUE, overwrite = TRUE)
