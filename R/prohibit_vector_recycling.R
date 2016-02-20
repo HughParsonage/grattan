@@ -3,7 +3,7 @@
 #' Tests (harshly) whether the vectors can be recycled safely.
 #' 
 #' @param ... A list of vectors
-#' @return An error message if the vectors are of different length (unless that length is 1).
+#' @return An error message if the vectors are of different length (unless the alternative length is 1).
 #' @examples 
 #' # Returns nothing because they are of the same length
 #' prohibit_vector_recycling(c(2, 2), c(2, 2))
@@ -15,9 +15,9 @@
 
 prohibit_vector_recycling <- function(...){
   # http://stackoverflow.com/a/9335687/1664978
-  lengths <- sapply(list(...), length)
-  max.length <- max(lengths)
-  if (any((lengths != 1L & lengths != max.length))){
+  lengths <- vapply(list(...), FUN = length, FUN.VALUE = 0L)
+  max.length <- pmax.int(lengths)
+  if (any(lengths != 1L & lengths != max.length)){
     stop("Inputs must be of equal length, or length 1")
   }
 }
