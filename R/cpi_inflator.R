@@ -12,6 +12,15 @@
 cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15", 
                          adjustment = "none",
                          useABSConnection = FALSE){
+  # Don't like vector recycling
+  # http://stackoverflow.com/a/9335687/1664978
+  dotList <- list(from_nominal_price, from_fy, to_fy)
+  vdot <- sapply(dotList, length)
+  max.length <- max(vdot)
+  if(any((vdot != 1L & vdot != max.length))){
+    stop("Inputs must be of equal length, or length 1")
+  }
+  
   cpi.url <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.10001.10+20.Q/ABS?startTime=1948&endTime=2016"
   cpi.url.seasonal.adjustment <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999901.10+20.Q/ABS?startTime=1948&endTime=2016"
   cpi.url.trimmed.mean <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999902.10+20.Q/ABS?startTime=1948&endTime=2016"

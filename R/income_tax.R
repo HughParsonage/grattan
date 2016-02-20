@@ -22,8 +22,13 @@
                         family_status = "individual",
                         temp.budget.repair.levy = TRUE){
   # Don't like vector recycling
-  if(length(income) != length(fy.year) && length(income) > 1 && length(fy.year) > 1){
-    stop("Lengths of income, fy.year must be the same, or length one")
+  # Don't like vector recycling
+  # http://stackoverflow.com/a/9335687/1664978
+  dotList <- list(income, fy.year)
+  vdot <- sapply(dotList, length)
+  max.length <- max(vdot)
+  if(any((vdot != 1L & vdot != max.length))){
+    stop("Inputs must be of equal length, or length 1")
   }
   ord <- rank(income, ties.method = "first")
 
