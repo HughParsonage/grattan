@@ -13,7 +13,7 @@ prohibit_vector_recycling(...)
 \item{...}{A list of vectors}
 }
 \value{
-An error message if the vectors are of different length (unless that length is 1).
+An error message if the vectors are of different length (unless the alternative length is 1).
 }
 \description{
 Tests (harshly) whether the vectors can be recycled safely.
