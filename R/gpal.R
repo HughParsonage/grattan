@@ -8,7 +8,7 @@
 #' @return A vector of HTML colours to be used.
 
 gpal <- function(n, dark = TRUE){
-  grattan.palette <- list(pal.1, pal.2, pal.3, pal.4, pal.5, pal.6)
+  grattan.palette <- list(pal.1, pal.2dark, pal.3, pal.4, pal.5, pal.6)
   if(n > 6){
     if(n > 9)
       stop('No palette available for that number of categories.', '\n', 'Consider using gpalx')
