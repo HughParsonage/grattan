@@ -5,31 +5,27 @@
 #' @param fy.year the financial year in which the income was earned
 #' @param brackets a numeric vector designating the lower boundaries of tax brackets
 #' @param return.mode use numeric or integer
+#' @param .dots.ATO A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files.
 #' @param allow.forecasts should dates beyond 2014-15 be permitted?
 #' @export 
 #' @author Tim Cameron, Brendan Coates, Hugh Parsonage
 #' @return the total personal income tax payable
 
 
-# .income_tax uses real data (e.g. tax stats)
+# .income_tax is inflexible: returns the tax payable in the fy.year; no scope for policy change.
 .income_tax <- function(income, 
                         fy.year, 
                         age = 42, # answer to life, more importantly < 65.
-                        sapto.eligible = FALSE,
-                        sapto = sapto(rebate_income = income, 
-                                      fy.year = fy.year, 
-                                      sapto.eligible = age >= 65),
                         family_status = "individual",
+                        sapto.eligible = age >= 65,
+                        .dots.ATO = NULL,
                         temp.budget.repair.levy = TRUE){
   # Don't like vector recycling
   # Don't like vector recycling
   # http://stackoverflow.com/a/9335687/1664978
-  dotList <- list(income, fy.year)
-  vdot <- sapply(dotList, length)
-  max.length <- max(vdot)
-  if(any((vdot != 1L & vdot != max.length))){
-    stop("Inputs must be of equal length, or length 1")
-  }
+  prohibit_vector_recycling(income, fy.year)
+  
+  # Record order.
   ord <- rank(income, ties.method = "first")
 
   # tax_table2 provides the raw tax tables, but also the amount
@@ -51,7 +47,7 @@
                            fy_year = fy.year) %>% 
     dplyr::mutate(ordering = 1:n()) 
   
-  input.keyed <-
+  input.keyed <<-
     # potentially expensive. Another way would be 
     # to add an argument such as data.table.copy = FALSE
     # to allow different way to preserve the order
@@ -97,11 +93,21 @@
   base_tax. <<- tax_fun(income, fy.year = fy.year)
   medicare_levy. <<- medicare_levy(income, fy.year = fy.year, sapto.eligible = sapto.eligible)
   lito. <<- .lito(income, fy.year)
-  sapto. <<- sapto
+  if (!is.null(.dots.ATO) && !missing(.dots.ATO)){
+    sapto. <<- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income,
+                                                                 Rptbl_Empr_spr_cont_amt = .dots.ATO$Rptbl_Empr_spr_cont_amt,
+                                                                 Net_fincl_invstmt_lss_amt = .dots.ATO$Net_fincl_invstmt_lss_amt,
+                                                                 Net_rent_amt = .dots.ATO$Net_rent_amt,
+                                                                 Rep_frng_ben_amt = .dots.ATO$Rep_frng_ben_amt), 
+                                   fy.year = fy.year, 
+                                   sapto.eligible = TRUE)
+  } else {
+    sapto. <<- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income), 
+                                      fy.year = fy.year, 
+                                      sapto.eligible = TRUE)
+  }
   
-  out <- pmaxC(tax_fun(income, fy.year = fy.year) + 
-                 medicare_levy(income, fy.year = fy.year, sapto.eligible = sapto.eligible) - 
-                 .lito(income, fy.year) - sapto, 
+  out <- pmaxC(base_tax. + medicare_levy. - lito. - sapto., 
                0)
   
   out
