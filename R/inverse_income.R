@@ -18,12 +18,40 @@ inverse_income <-
       inverse_income_lengthone(tax, fy.year = fy.year, zero.tax.income = zero.tax.income, ...)
   }
 
-inverse_income_while <- function(tax, fy.year = "2012-13", ...){
-  if(is.na(tax))
+inverse_income_radix <- function(tax, fy.year = "2012-13", ...){
+  stopifnot(length(tax) == 1L)
+  if (is.na(tax))
     return(tax)
   else {
     income <- 0L
-    while(grattan::income_tax(income, fy.year = fy.year, ...) <= tax){
+    step <- 2^15
+    while (grattan::income_tax(income, fy.year = fy.year, ...) <= tax){
+      income <- income + step
+    }
+    step <- step / 2
+    
+    income <- income - 2^14
+    diff <- grattan::income_tax(income, fy.year = fy.year, ...) - tax
+    
+    while (step > 0.25 || abs(diff) > 1){
+      if (diff < 0){
+        income <- income + step
+      } else {
+        income <- income - step
+      }
+      diff <- grattan::income_tax(income, fy.year = fy.year, ...) - tax
+      step <- step / 2
+    }
+    income
+  }
+}
+
+inverse_income_while <- function(tax, fy.year = "2012-13", ...){
+  if (is.na(tax))
+    return(tax)
+  else {
+    income <- 0L
+    while (grattan::income_tax(income, fy.year = fy.year, ...) <= tax){
       income <- income + 1000L
     }
     
