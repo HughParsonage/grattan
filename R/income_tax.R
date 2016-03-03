@@ -26,13 +26,13 @@
   prohibit_vector_recycling(income, fy.year)
   
   # Record order.
-  ord <- rank(income, ties.method = "first")
+  # ord <- rank(income, ties.method = "first")
 
   # tax_table2 provides the raw tax tables, but also the amount
   # of tax paid at each bracket, to make the rolling join 
   # calculation later a one liner.
   
-  tax_table2 <<- 
+  tax_table2 <- 
     grattan:::.tax_tbl %>%
     dplyr::group_by(fy_year) %>%
     dplyr::mutate(tax_at = cumsum(lag(marginal_rate, 
@@ -42,12 +42,12 @@
     data.table::setkey(fy_year, income) %>%
     dplyr::select(fy_year, income, lower_bracket, marginal_rate, tax_at)
   
-  input <<- 
+  input <- 
     data.table::data.table(income = income, 
                            fy_year = fy.year) %>% 
     dplyr::mutate(ordering = 1:n()) 
   
-  input.keyed <<-
+  input.keyed <-
     # potentially expensive. Another way would be 
     # to add an argument such as data.table.copy = FALSE
     # to allow different way to preserve the order
@@ -82,11 +82,13 @@
                            fy_year = fy.year,
                            sapto = sapto.eligible, 
                            family_status = family_status) %>%
-      dplyr::inner_join(medicare.tbl.indiv, 
-                        by = c("fy_year", "sapto")) %>%
+      data.table:::merge.data.table(medicare.tbl.indiv, 
+                                    by = c("fy_year", "sapto"),
+                                    sort = FALSE, 
+                                    all.x = TRUE) %>%
       dplyr::mutate(medicare_levy = pminV(pmaxC(taper * (income - lower_bracket), 
                                                 0), 
-                                   rate * income)) %$%
+                                          rate * income)) %$%
       medicare_levy
   }
   
@@ -94,7 +96,7 @@
   medicare_levy. <<- medicare_levy(income, fy.year = fy.year, sapto.eligible = sapto.eligible)
   lito. <<- .lito(income, fy.year)
   if (!is.null(.dots.ATO) && !missing(.dots.ATO)){
-    sapto. <<- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income,
+    sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income,
                                                                  Rptbl_Empr_spr_cont_amt = .dots.ATO$Rptbl_Empr_spr_cont_amt,
                                                                  Net_fincl_invstmt_lss_amt = .dots.ATO$Net_fincl_invstmt_lss_amt,
                                                                  Net_rent_amt = .dots.ATO$Net_rent_amt,
@@ -102,15 +104,15 @@
                                    fy.year = fy.year, 
                                    sapto.eligible = TRUE)
   } else {
-    sapto. <<- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income), 
+    sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income), 
                                       fy.year = fy.year, 
                                       sapto.eligible = TRUE)
   }
   
-  out <- pmaxC(base_tax. + medicare_levy. - lito. - sapto., 
+  pmaxC(base_tax. + medicare_levy. - lito. - sapto., 
                0)
   
-  out
+  
 }
 
 income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44, age_group, is.single = TRUE){
