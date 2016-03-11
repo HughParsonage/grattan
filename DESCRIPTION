@@ -9,7 +9,7 @@ Maintainer: Who to complain to <hugh.parsonage@grattaninstitute.edu.au>
 Description: The original goal of this package was to simply hold the colours of the Grattan palette. 
 Depends: R (>= 2.10)
 License: GPL-2
-Imports:
+Imports: 
     grDevices,
     RColorBrewer,
     ggplot2 (>= 2.0.0),
@@ -23,5 +23,8 @@ Imports:
     assertthat,
     magrittr,
     Rcpp (>= 0.12.3)
+Remotes:
+    hadley/testthat
 LinkingTo: Rcpp
 RoxygenNote: 5.0.1
+Suggests: testthat
