@@ -23,8 +23,6 @@ Imports:
     assertthat,
     magrittr,
     Rcpp (>= 0.12.3)
-Remotes:
-    hadley/testthat
 LinkingTo: Rcpp
 RoxygenNote: 5.0.1
 Suggests: testthat
