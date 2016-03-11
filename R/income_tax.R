@@ -17,16 +17,13 @@
                         fy.year, 
                         age = 42, # answer to life, more importantly < 65.
                         family_status = "individual",
-                        sapto.eligible = age >= 65,
                         .dots.ATO = NULL,
                         temp.budget.repair.levy = TRUE){
-  # Don't like vector recycling
+  # Assume everyone of pension age is eligible for sapto.
+  sapto.eligible = age >= 65
   # Don't like vector recycling
   # http://stackoverflow.com/a/9335687/1664978
   prohibit_vector_recycling(income, fy.year)
-  
-  # Record order.
-  # ord <- rank(income, ties.method = "first")
 
   # tax_table2 provides the raw tax tables, but also the amount
   # of tax paid at each bracket, to make the rolling join 
@@ -92,9 +89,9 @@
       medicare_levy
   }
   
-  base_tax. <<- tax_fun(income, fy.year = fy.year)
-  medicare_levy. <<- medicare_levy(income, fy.year = fy.year, sapto.eligible = sapto.eligible)
-  lito. <<- .lito(income, fy.year)
+  base_tax. <- tax_fun(income, fy.year = fy.year)
+  medicare_levy. <- medicare_levy(income, fy.year = fy.year, sapto.eligible = sapto.eligible)
+  lito. <- .lito(income, fy.year)
   if (!is.null(.dots.ATO) && !missing(.dots.ATO)){
     sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income,
                                                                  Rptbl_Empr_spr_cont_amt = .dots.ATO$Rptbl_Empr_spr_cont_amt,
