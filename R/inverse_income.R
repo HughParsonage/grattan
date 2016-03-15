@@ -15,7 +15,7 @@ inverse_income <-
     if (length(tax) > 1)
       inverse_income_lookup3(tax, fy.year = fy.year, zero.tax.income = zero.tax.income, ...)
     else
-      inverse_income_lengthone(tax, fy.year = fy.year, zero.tax.income = zero.tax.income, ...)
+      inverse_income_radix(tax, fy.year = fy.year, zero.tax.income = zero.tax.income, ...)
   }
 
 inverse_income_radix <- function(tax, fy.year = "2012-13", ...){
