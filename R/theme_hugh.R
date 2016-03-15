@@ -24,9 +24,8 @@ theme_hugh <- function(base_size = 23, base_family = "") {
                                        margin = ggplot2::margin(t = 5.5, b = 5.5)),
       axis.title.y =      element_blank(),
       axis.text =         element_text(),
-      axis.line =         element_line(color = "black"),
+      axis.line =         element_line(color = "black", size = 1),
       axis.ticks.length = grid::unit(0.3, "lines"),
-      #axis.ticks.margin = grid::unit(0.5, "lines"), 
       
       # Modified inheritance structure of line element
       axis.ticks =        element_line(color = "black"),

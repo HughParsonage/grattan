@@ -28,6 +28,9 @@
 .lf_trend <- 
   data.table::fread("./data/lf-trend.tsv")
 
+.cgt_expenditures <- 
+  data.table::fread("./data/tax-expenditures-cgt-historical.tsv")
+
 
 devtools::use_data(.lito_tbl, 
                    .tax_tbl, 
@@ -38,4 +41,5 @@ devtools::use_data(.lito_tbl,
                    .cpi_trimmed,
                    .wages_trend,
                    .lf_trend,
+                   .cgt_expenditures,
                    internal = TRUE, overwrite = TRUE)
