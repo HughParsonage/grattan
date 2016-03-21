@@ -5,20 +5,25 @@
 #' @param fy.year the financial year in which the income was earned
 #' @param brackets a numeric vector designating the lower boundaries of tax brackets
 #' @param return.mode use numeric or integer
+#' @param sample_file (Not yet used) A sample file \code{data.table} for which the income tax payable is desired on each row.
 #' @param .dots.ATO A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files.
 #' @param allow.forecasts should dates beyond 2014-15 be permitted?
 #' @export 
 #' @author Tim Cameron, Brendan Coates, Hugh Parsonage
+#' @details The function .income_tax is inflexible by design. It is designed to guarantee the correct tax payable in a year.
 #' @return the total personal income tax payable
 
 
-# .income_tax is inflexible: returns the tax payable in the fy.year; no scope for policy change.
+# .income_tax is inflexible by design: returns the tax payable in the fy.year; no scope for policy change.
 .income_tax <- function(income, 
                         fy.year, 
                         age = 42, # answer to life, more importantly < 65.
                         family_status = "individual",
-                        .dots.ATO = NULL,
-                        temp.budget.repair.levy = TRUE){
+                        sample_file,
+                        .dots.ATO = NULL){
+  if (missing(fy.year)){
+    stop("fy.year is missing, with no default")
+  }
   # Assume everyone of pension age is eligible for sapto.
   sapto.eligible = age >= 65
   # Don't like vector recycling
@@ -94,22 +99,26 @@
   lito. <- .lito(income, fy.year)
   if (!is.null(.dots.ATO) && !missing(.dots.ATO)){
     sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income,
-                                                                 Rptbl_Empr_spr_cont_amt = .dots.ATO$Rptbl_Empr_spr_cont_amt,
-                                                                 Net_fincl_invstmt_lss_amt = .dots.ATO$Net_fincl_invstmt_lss_amt,
-                                                                 Net_rent_amt = .dots.ATO$Net_rent_amt,
-                                                                 Rep_frng_ben_amt = .dots.ATO$Rep_frng_ben_amt), 
-                                   fy.year = fy.year, 
-                                   sapto.eligible = TRUE)
+                                                                   Rptbl_Empr_spr_cont_amt = .dots.ATO$Rptbl_Empr_spr_cont_amt,
+                                                                   Net_fincl_invstmt_lss_amt = .dots.ATO$Net_fincl_invstmt_lss_amt,
+                                                                   Net_rent_amt = .dots.ATO$Net_rent_amt,
+                                                                   Rep_frng_ben_amt = .dots.ATO$Rep_frng_ben_amt), 
+                                     fy.year = fy.year, 
+                                     sapto.eligible = TRUE)
   } else {
     sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income), 
-                                      fy.year = fy.year, 
-                                      sapto.eligible = TRUE)
+                                     fy.year = fy.year, 
+                                     sapto.eligible = TRUE)
   }
   
-  pmaxC(base_tax. + medicare_levy. - lito. - sapto., 
-               0)
+  # https://www.legislation.gov.au/Details/C2014A00048
+  if (fy.year %in% c("2014-15", "2015-16", "2016-17"))
+    temp_budget_repair_levy. <- pmaxC(0.02 * (income - 180e3), 0)
+  else 
+    temp_budget_repair_levy. <- 0L
   
-  
+  pmaxC(base_tax. + medicare_levy. - lito. - sapto. + temp_budget_repair_levy., 
+        0)
 }
 
 income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44, age_group, is.single = TRUE){
@@ -119,7 +128,7 @@ income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.l
   medicare.levy <- 0.015 * income
   flood.levy <- 0
   
-  if (fy.year == "2017-18" | fy.year == "2015-16"){
+  if (fy.year == "2017-18" || fy.year == "2015-16"){
     warning("Uhh, you're applying a (plausible) tax rate to 2017-18.")
     tax <- ifelse(income < 18200, 0, 
                   ifelse(income < 37000, (income-18200)*0.19, 

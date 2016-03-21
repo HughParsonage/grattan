@@ -18,6 +18,7 @@ Imports:
     data.table,
     dplyr,
     rsdmx,
+    fastmatch,
     forecast,
     lubridate,
     assertthat,
