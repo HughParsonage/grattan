@@ -112,10 +112,9 @@
   }
   
   # https://www.legislation.gov.au/Details/C2014A00048
-  if (fy.year %in% c("2014-15", "2015-16", "2016-17"))
-    temp_budget_repair_levy. <- pmaxC(0.02 * (income - 180e3), 0)
-  else 
-    temp_budget_repair_levy. <- 0L
+  temp_budget_repair_levy. <- ifelse(fy.year %in% c("2014-15", "2015-16", "2016-17"), 
+                                     pmaxC(0.02 * (income - 180e3), 0), 
+                                     0)
   
   pmaxC(base_tax. + medicare_levy. - lito. - sapto. + temp_budget_repair_levy., 
         0)
