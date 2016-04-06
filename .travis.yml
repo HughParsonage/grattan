@@ -1,6 +1,5 @@
 language: r
 cache: packages
 
- ## For a GitHub package
- install:
+install:
   - ./travis-tool.sh install_github HughParsonage/taxstats
