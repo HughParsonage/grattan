@@ -1,9 +1,10 @@
 #' tax function
 #' 
+#' @name income_tax
 #' @param income the personal assessable income
-#' @param age the individual's age
 #' @param fy.year the financial year in which the income was earned
-#' @param brackets a numeric vector designating the lower boundaries of tax brackets
+#' @param age the individual's age
+#' @param family_status For medicare and sapto purposes. Still in development.
 #' @param return.mode use numeric or integer
 #' @param sample_file (Not yet used) A sample file \code{data.table} for which the income tax payable is desired on each row.
 #' @param .dots.ATO A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files.
@@ -19,20 +20,36 @@
 #' @return the total personal income tax payable
 #' @export 
 
-income_tax <- function(income, fy.year, age = 42, family_status = "individual", sample_file, .dots.ATO = NULL){
+income_tax <- function(income, fy.year, age = 42, family_status = "individual", sample_file, .dots.ATO = NULL, return.mode = "numeric", allow.forecasts = FALSE){
+  if (allow.forecasts || any(!(fy.year %in% tax_tbl$fy_year))){
+    stop("rolling income tax not intended for future years. Consider old_income_tax().")
+  }
   rolling_income_tax(income = income, fy.year = fy.year, age = age, family_status = family_status, sample_file = sample_file, .dots.ATO = .dots.ATO)
 }
 
 
-# .income_tax is inflexible by design: returns the tax payable in the fy.year; no scope for policy change.
+# rolling_income_tax is inflexible by design: returns the tax payable in the fy.year; no scope for policy change.
 rolling_income_tax <- function(income, 
-                        fy.year, 
-                        age = 42, # answer to life, more importantly < 65.
-                        family_status = "individual",
-                        sample_file,
-                        .dots.ATO = NULL){
+                               fy.year, 
+                               age = 42, # answer to life, more importantly < 65.
+                               family_status = "individual",
+                               sample_file,
+                               .dots.ATO = NULL, 
+                               return.mode = "numeric"){
+  # if(getRversion() >= "2.15.1")  utils::globalVariables(c(".obj1", "obj2"))
+  
+  # assign(c("fy_year", "marginal_rate", "lower_bracket", "tax_at", "n", "tax", "ordering", "max_lito", "min_bracket", "lito_taper", "sato", "taper", "rate", "max_offset", "upper_threshold", "taper_rate"), value = NULL)
+  
+  fy_year <- NULL; marginal_rate <- NULL; lower_bracket <- NULL; tax_at <- NULL; n <- NULL; tax <- NULL; ordering <- NULL; max_lito <- NULL; min_bracket <- NULL; lito_taper <- NULL; sato <- NULL; taper <- NULL; rate <- NULL; max_offset <- NULL; upper_threshold <- NULL; taper_rate <- NULL
+  
   if (missing(fy.year)){
     stop("fy.year is missing, with no default")
+  }
+  
+
+  
+  if (return.mode != "numeric"){
+    stop("return.mode must currently be set to numeric only")
   }
   # Assume everyone of pension age is eligible for sapto.
   sapto.eligible = age >= 65
@@ -71,7 +88,7 @@ rolling_income_tax <- function(income,
   }
   
   .lito <- function(income, fy.year){
-    data.table:::merge.data.table(lito_tbl, input, by = "fy_year", 
+    merge(lito_tbl, input, by = "fy_year", 
                                   # sort set to FALSE to avoid the key ruining the order
                                   sort = FALSE) %$%
     {
@@ -93,7 +110,7 @@ rolling_income_tax <- function(income,
                            fy_year = fy.year,
                            sapto = sapto.eligible, 
                            family_status = family_status) %>%
-      data.table:::merge.data.table(medicare_tbl_indiv, 
+      merge(medicare_tbl_indiv, 
                                     by = c("fy_year", "sapto"),
                                     sort = FALSE, 
                                     all.x = TRUE) %>%

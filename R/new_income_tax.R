@@ -33,6 +33,8 @@ new_income_tax <- function(income,
                            sapto_lower_threshold = 32279, 
                            sapto_upper_threshold = 50119,
                            sapto_taper_rate = sapto_max_offset/(sapto_upper_threshold - sapto_lower_threshold)){
+  # CRAN
+  marginal_rate <- NULL; lower_bracket <- NULL; tax_at <- NULL; tax <- NULL
   
   # Assume SAPTO eligibility is only a matter of age and income
   # and that every man is an island.

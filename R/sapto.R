@@ -1,6 +1,13 @@
 #' Senior Australians and Pensioner Tax Offset
+#' 
+#' @name sapto
+#' @param rebate_income The rebate income of the individual.
+#' @param fy.year The financial year in which sapto is to be calculated.
+#' @param sapto.eligible Is the individual eligible for sapto?
+#' @param family_status Family status of the individual.
 
 sapto <- function(rebate_income, fy.year, sapto.eligible, family_status = "single"){
+  upper_threshold <- NULL; taper_rate <- NULL; max_offset <- NULL
   input <- dplyr::data_frame(fy_year = fy.year, 
                              family_status = family_status, 
                              sapto.eligible = sapto.eligible,

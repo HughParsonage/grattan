@@ -2,7 +2,7 @@ Package: grattan
 Type: Package
 Title: Create charts in the style of the Grattan Insitute, Melbourne; perform
     common quantitative tasks for Australian policy analysts
-Version: 0.2.0.1
+Version: 0.3.0.1
 Date: 2015-02-05
 Author: Hugh Parsonage
 Maintainer: Who to complain to <hugh.parsonage@grattaninstitute.edu.au>
@@ -11,14 +11,10 @@ Depends: R (>= 2.10)
 License: GPL-2
 Imports: 
     grDevices,
-    RColorBrewer,
     ggplot2 (>= 2.0.0),
-    scales,
-    gridExtra,
     data.table,
     dplyr,
     rsdmx,
-    fastmatch,
     forecast,
     lubridate,
     assertthat,
@@ -27,8 +23,7 @@ Imports:
     knitr, 
     readr, 
     zoo, 
-    taxstats, 
     lazyeval
 LinkingTo: Rcpp
 RoxygenNote: 5.0.1
-Suggests: testthat
+Suggests: testthat, taxstats

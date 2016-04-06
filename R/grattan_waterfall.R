@@ -13,6 +13,7 @@
 #' @param total_rect_text (character) the text in the middle of the rectangle of the total rectangle
 #' @param total_rect_color the color of the final rectangle
 #' @param total_rect_text_color the color of the final rectangle's label text
+#' @param fill_colours Colours to be used to fill the rectangles, in order. Disregarded if \code{fill_by_sign} is \code{TRUE} (the default).
 #' @param fill_by_sign (logical) should positive and negative values each have the same colour?
 #' @param dark (logical) (only for fill_by_sign) should the dark palette be used?
 #' @param rect_width (numeric) the width of the rectangle, relative to the space between each label factor
@@ -102,7 +103,7 @@ grattan_waterfall <- function(.data = NULL,
   
   if (!calc_total){
   p <- ggplot2::ggplot(data.frame(x = labels,
-                                  y = values), ggplot2::aes(x = x, y = y)) + 
+                                  y = values), ggplot2::aes_string(x = "x", y = "y")) + 
     ggplot2::geom_blank() + 
     grattan::theme_hugh() +
     ggplot2::theme(axis.title = ggplot2::element_blank())
@@ -110,7 +111,7 @@ grattan_waterfall <- function(.data = NULL,
     p <- ggplot2::ggplot(data.frame(x = c(labels, total_axis_text),
                                     y = c(values, north_edge[number_of_rectangles])
                                     ), 
-                                    ggplot2::aes(x = x, y = y)) + 
+                                    ggplot2::aes_string(x = "x", y = "y")) + 
       ggplot2::geom_blank() + 
       grattan::theme_hugh() +
       ggplot2::theme(axis.title = ggplot2::element_blank())
@@ -203,5 +204,7 @@ grattan_waterfall <- function(.data = NULL,
   
   print(p)
   # Allow modifications beyond the function call
+  if (ggplot_object_name %in% ls(.GlobalEnv))
+    warning("Overwriting ", ggplot_object_name, " in global environment.")
   assign(ggplot_object_name, p, inherits = TRUE)
 }

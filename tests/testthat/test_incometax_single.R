@@ -1,8 +1,4 @@
-requireNamespace("grattan", quietly = TRUE)
-requireNamespace("taxstats", quietly = TRUE)
-requireNamespace("data.table", quietly = TRUE)
-requireNamespace("dplyr", quietly = TRUE)
-requireNamespace("magrittr", quietly = TRUE)
+
 context("Individual income tax")
 
 test_that("income_tax returns known results",{

@@ -31,8 +31,8 @@
   ifelse(!over65,
          0,
          ifelse(is.single,
-                pmin(2230, pmax(0, 2230 - (income - 32279) * 0.125)),
-                pmin(1602, pmax(0, 1602 - (income - 28974) * 0.125))
+                pmin(2230, pmaxC(2230 - (rebate_income - 32279) * 0.125, 0)),
+                pmin(1602, pmaxC(1602 - (rebate_income - 28974) * 0.125, 0))
                 )
          )
 }

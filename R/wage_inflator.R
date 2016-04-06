@@ -8,6 +8,10 @@
 #' @return the wage inflation between the two years
 
 wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, allow.projection = TRUE){
+  
+  # CRAN
+  obsTime <- NULL; obsValue <- NULL; to_index <- NULL; from_index <- NULL
+  
   if (any(is.na(from_fy)) || any(is.na(to_fy))){
     stop("from_fy and to_fy contain NAs. Filter before applying this function.")
   }
@@ -56,11 +60,9 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
   
   output <- 
     input %>%
-    data.table:::merge.data.table(wage.indices, by.x = "from_fy", by.y = "fy_year", sort = FALSE,
-                                  all.x = TRUE) %>%
+    merge(wage.indices, by.x = "from_fy", by.y = "fy_year", sort = FALSE, all.x = TRUE) %>%
     dplyr::rename(from_index = obsValue) %>%
-    data.table:::merge.data.table(wage.indices, by.x = "to_fy", by.y = "fy_year", sort = FALSE, 
-                                  all.x = TRUE) %>%
+    merge(wage.indices, by.x = "to_fy", by.y = "fy_year", sort = FALSE, all.x = TRUE) %>%
     dplyr::rename(to_index = obsValue) %>%
     dplyr::mutate(out = wage * (to_index/from_index)) 
   

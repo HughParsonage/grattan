@@ -41,6 +41,8 @@ grattan_waterfall(.data = NULL, values, labels, rect_text_labels = values,
 
 \item{total_rect_text_color}{the color of the final rectangle's label text}
 
+\item{fill_colours}{Colours to be used to fill the rectangles, in order. Disregarded if \code{fill_by_sign} is \code{TRUE} (the default).}
+
 \item{fill_by_sign}{(logical) should positive and negative values each have the same colour?}
 
 \item{dark}{(logical) (only for fill_by_sign) should the dark palette be used?}

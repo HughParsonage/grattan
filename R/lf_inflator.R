@@ -1,20 +1,31 @@
 #' Labour force inflators
 #' 
-#' @param labour.force a numeric vector
-#' @param from_date, to_date dates as a character vector
+#' @name lf_inflator
+#' @rdname lf_inflator
+#' @aliases lf_inflator_fy
+#' @param labour_force a numeric vector
+#' @param from_date The date of \code{labour_force}.
+#' @param to_date dates as a character vector
 #' @param from_fy Financial year of \code{labour_force}.
 #' @param to_fy Financial year for which the labour force is predicted.
 #' @param useABSConnection Should an sdmx connection be used to get ABS data?
 #' @param allow.projection Logical. Should projections be allowed?
 #' @param use.month A 2-character string for the month in which the labour force should be used.
-#' @return the relative labour force between to_date and for_date, multiplied by labour.force.
+#' @examples
+#' lf_inflator_fy(labour_force = 1, from_fy = "2012-13", to_fy = "2013-14")
+#' @return the relative labour force between to_date and for_date, multiplied by labour_force.
+#' @export lf_inflator lf_inflator_fy
 
 lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy, 
-                        useABSConnection = FALSE, allow.projection = TRUE, use.month = "01"){
+                           useABSConnection = FALSE, allow.projection = TRUE, use.month = "01"){
+  # CRAN
+  obsTime <- NULL; obsValue <- NULL; to_index <- NULL; from_index <- NULL
+  # pretty sure this is ok. Reflects  dplyr::mutate(fy_year = date2fy(obsTimeDate))
+  obsTimeDate <- NULL
   if (useABSConnection){
     lf.url.trend <- 
       "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1981"
-    lf <- rsdmx::readSDMX(lf.url)
+    lf <- rsdmx::readSDMX(lf.url.trend)
     lf.indices <- data.table::as.data.table(as.data.frame(lf))
   } else {
     lf.indices <- lf_trend
@@ -50,10 +61,10 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
   
   output <- 
     input %>%
-    data.table:::merge.data.table(lf.indices, by.x = "from_fy", by.y = "fy_year", sort = FALSE,
+    merge(lf.indices, by.x = "from_fy", by.y = "fy_year", sort = FALSE,
                                   all.x = TRUE) %>%
     dplyr::rename(from_index = obsValue) %>%
-    data.table:::merge.data.table(lf.indices, by.x = "to_fy", by.y = "fy_year", sort = FALSE, 
+    merge(lf.indices, by.x = "to_fy", by.y = "fy_year", sort = FALSE, 
                                   all.x = TRUE) %>%
     dplyr::rename(to_index = obsValue) %>%
     dplyr::mutate(out = labour_force * (to_index/from_index))
@@ -61,8 +72,10 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
   return(output$out)
 }
 
-
-lf_inflator <- function(labour.force = 1, from_date = "2013-06-30", to_date){
+#' @rdname lf_inflator
+#' @examples
+#' lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date = "2014-06-30")
+lf_inflator <- function(labour_force = 1, from_date = "2013-06-30", to_date){
   
   # lf original
   lf.url <- 
@@ -73,8 +86,8 @@ lf_inflator <- function(labour.force = 1, from_date = "2013-06-30", to_date){
   lf <- as.data.frame(lf)
   lf$obsTimeDate <- as.Date(paste0(lf$obsTime, "-01"), format = "%Y-%m-%d")
   
-  if (length(labour.force) == 1){
-    if(is.na(labour.force))
+  if (length(labour_force) == 1){
+    if(is.na(labour_force))
       return(NA)
     else {
       nearest_from_date <- as.Date(max(lf$obsTimeDate[lf$obsTimeDate <= from_date]))
@@ -85,11 +98,11 @@ lf_inflator <- function(labour.force = 1, from_date = "2013-06-30", to_date){
       if(difftime(to_date, nearest_to_date, units = "days") > 182)
         warning("To dates differ by more than 182 days")
       
-      from_labour.force <- lf$obsValue[lf$obsTimeDate == nearest_from_date]
-      to_labour.force <- lf$obsValue[lf$obsTimeDate == nearest_to_date]
+      from_labour_force <- lf$obsValue[lf$obsTimeDate == nearest_from_date]
+      to_labour_force <- lf$obsValue[lf$obsTimeDate == nearest_to_date]
       #
       #
-      return(labour.force * to_labour.force / from_labour.force)
+      return(labour_force * to_labour_force / from_labour_force)
     }
   } else {
     date_connector <- 
@@ -103,7 +116,7 @@ lf_inflator <- function(labour.force = 1, from_date = "2013-06-30", to_date){
       obsTimeDate = lf$obsTimeDate,
       obsValue = lf$obsValue
     )
-    data.table::setkey(LF, obsTimeDate)
+    data.table::setkeyv(LF, "obsTimeDate")
     
     data.table::setkey(date_connector, from_date)
     from_DT <- LF[date_connector, roll=Inf]
@@ -113,8 +126,8 @@ lf_inflator <- function(labour.force = 1, from_date = "2013-06-30", to_date){
     to_DT <- LF[date_connector, roll=Inf]
     data.table::setnames(to_DT, c("obsTimeDate", "obsValue"), c("to_Date", "to_LF"))
     
-    merged <- data.table:::merge.data.table(from_DT, to_DT, by = "altkey")
-    lf.ratio <- labour.force * merged$to_LF / merged$from_LF
+    merged <- merge(from_DT, to_DT, by = "altkey")
+    lf.ratio <- labour_force * merged$to_LF / merged$from_LF
     return(lf.ratio)
   }
 }

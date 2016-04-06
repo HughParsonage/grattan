@@ -8,12 +8,16 @@ inverse_income(tax, fy.year = "2012-13", zero.tax.income = c("maximum",
   "zero", "uniform", numeric(1)), ...)
 }
 \arguments{
-\item{tax}{the tax payable}
+\item{tax}{The tax payable.}
 
-\item{zero.tax.income}{("maximum", "zero", "uniform", numeric()) Given that many incomes map to zero taxes, the \code{income_tax} function is not invertible there. As a consequence, the inverse function's value must be specified for tax = 0. "maximum" returns the maximum integer income one can have with a zero tax liability; "zero" returns zero for any tax of zero; "uniform" provides a random integer from zero to the maximum income with a zero tax. The value can also be specified explicitly.}
+\item{fy.year}{The relevant financial year.}
+
+\item{zero.tax.income}{A character vector, ("maximum", "zero", "uniform", numeric(1)) Given that many incomes map to zero taxes, the \code{income_tax} function is not invertible there. As a consequence, the inverse function's value must be specified for tax = 0. "maximum" returns the maximum integer income one can have with a zero tax liability; "zero" returns zero for any tax of zero; "uniform" provides a random integer from zero to the maximum income with a zero tax. The value can also be specified explicitly.}
+
+\item{...}{Other arguments passed to \code{income_tax}.}
 }
 \value{
-the taxable income (integer) given the tax payable for the financial year, acurrate to the nearest integer
+The taxable income given the tax payable for the financial year, acurrate to the nearest integer
 }
 \description{
 Inverse income tax functions

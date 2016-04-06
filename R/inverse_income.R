@@ -1,8 +1,10 @@
 #' Inverse income tax functions
 #' 
-#' @param tax the tax payable 
-#' @param zero.tax.income ("maximum", "zero", "uniform", numeric()) Given that many incomes map to zero taxes, the \code{income_tax} function is not invertible there. As a consequence, the inverse function's value must be specified for tax = 0. "maximum" returns the maximum integer income one can have with a zero tax liability; "zero" returns zero for any tax of zero; "uniform" provides a random integer from zero to the maximum income with a zero tax. The value can also be specified explicitly.
-#' @return the taxable income (integer) given the tax payable for the financial year, acurrate to the nearest integer
+#' @param tax The tax payable.
+#' @param fy.year The relevant financial year.
+#' @param zero.tax.income A character vector, ("maximum", "zero", "uniform", numeric(1)) Given that many incomes map to zero taxes, the \code{income_tax} function is not invertible there. As a consequence, the inverse function's value must be specified for tax = 0. "maximum" returns the maximum integer income one can have with a zero tax liability; "zero" returns zero for any tax of zero; "uniform" provides a random integer from zero to the maximum income with a zero tax. The value can also be specified explicitly.
+#' @param ... Other arguments passed to \code{income_tax}.
+#' @return The taxable income given the tax payable for the financial year, acurrate to the nearest integer
 #' 
 
 inverse_income <- 
@@ -95,11 +97,11 @@ inverse_income_lookup <- function(tax, fy.year = "2012-13", zero.tax = "maximum"
   income.range <- seq(0L, max(ceiling(max(tax) * 3), 100000L), by = 1L)
   
   input <- data.table::data.table(taxes = tax)
-  temp <- data.table::setkey(
+  temp <- data.table::setkeyv(
     data.table::data.table(incomes = income.range, 
                            taxes = grattan::income_tax(income.range, 
                                                        fy.year = fy.year, ...)),
-    taxes)
+    "taxes")
   
   tbl <- temp[input, roll=-Inf]  # LOOCF, all taxes are invertible
   return(tbl$incomes)
@@ -110,10 +112,9 @@ inverse_income_lookup2 <- function(tax, fy.year = "2012-13", zero.tax = "maximum
   input <- data.table::data.table(taxes = tax)
   temp <- data.table::data.table(incomes = income.range)
   temp$taxes <- grattan::income_tax(temp$incomes, fy.year = fy.year, ...)
-  data.table::setkey(temp, taxes)
+  data.table::setkeyv(temp, "taxes")
   # LOOCF, all taxes are invertible
-  # tbl <- temp[input, roll=-Inf]  dispatches data.frame
-  tbl <- data.table:::`[.data.table`(temp, input, roll=-Inf)
+  tbl <- temp[input, roll = -Inf]
   return(tbl$incomes)
 }
 
@@ -129,9 +130,8 @@ inverse_income_lookup3 <- function(tax, fy.year = "2012-13", zero.tax.income = "
   input <- data.table::data.table(taxes = ifelse(zeroes, 1, tax))  # ensure a one-to-one relationship
   temp <- data.table::data.table(incomes = income.range)
   temp$taxes <- grattan::income_tax(temp$incomes, fy.year = fy.year, ...)
-  data.table::setkey(temp, taxes)
-  # tbl <- temp[input, roll=-Inf]  # LOOCF, all taxes are invertible
-  tbl <- data.table:::`[.data.table`(temp, input, roll=-Inf)
+  data.table::setkeyv(temp, "taxes")
+  tbl <- temp[input, roll=-Inf]  # LOOCF, all taxes are invertible
   
   out <- tbl$incomes
   # Take care of zeroes

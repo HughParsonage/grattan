@@ -6,6 +6,11 @@
 \usage{
 grattan_dollar(x, digits = 0)
 }
+\arguments{
+\item{x}{A numeric vector}
+
+\item{digits}{Minimum number of digits after the decimal point. (\code{nsmall} in \code{base::format}).}
+}
 \description{
 dollar scales
 }

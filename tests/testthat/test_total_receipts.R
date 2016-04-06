@@ -1,10 +1,10 @@
-# tests
+library(taxstats)
+library(data.table)
+library(dplyr)
+library(magrittr)
+
 context("Tax receipts")
-requireNamespace("grattan", quietly = TRUE)
-requireNamespace("taxstats", quietly = TRUE)
-requireNamespace("dplyr", quietly = TRUE)
-requireNamespace("data.table", quietly = TRUE)
-requireNamespace("magrittr", quietly = TRUE)
+
 # True value of personal income tax receipts was $159.021 billion
 # 5506.0 - Taxation Revenue, Australia, 2013-14
 actual_collections <- 159.021 * 10^9

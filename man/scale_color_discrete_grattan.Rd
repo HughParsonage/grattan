@@ -7,9 +7,12 @@
 scale_color_discrete_grattan(...)
 }
 \arguments{
-\item{a}{function controlling the colors}
+\item{...}{arguments passed to discrete_scale.}
 }
 \description{
 scale color scale for grattan (uses the palette)
+}
+\details{
+A function controlling the colors.
 }
 

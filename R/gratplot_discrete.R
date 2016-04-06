@@ -1,14 +1,13 @@
-#' attempt to harness ggplot but set as much to default as possible
+#' Attempt to harness ggplot but set as much to default as possible
 #' 
+#' @name grplot
+#' @param ... arguments passed to ggplot
+#' @export 
 #' 
 
-gratplot_discrete <- function(...){
+grplot <- function(...){
   ggplot2::ggplot(...) + 
     scale_color_discrete_grattan() + 
-    scale_fill_discrete_grattan()
-}
-
-grplot <- function(..., theme.dots = ...){
-  gratplot_discrete(...) + 
+    scale_fill_discrete_grattan() + 
     theme_grattan()
 }

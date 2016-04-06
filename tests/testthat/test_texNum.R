@@ -1,4 +1,4 @@
-requireNamespace("grattan", quietly = TRUE)
+
 context("texNum return correct")
 
 expect_equal(texNum(180000), "180,000")
