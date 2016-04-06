@@ -1,26 +1,48 @@
 #' Convenience functions for dealing with financial years
 #' 
+#' @name is.fy
+#' @aliases fy.year yr2fy fy2yr fy2date date2fy
 #' @param yr_ending An integer representing a year.
 #' @param fy.yr A string suspected to be a financial year.
 #' @param date A string or date for which the financial year is desired.
-#' @export
+#' @return For \code{is.fy}, a logical, whether its argument is a financial year. For \code{fy.year}, \code{yr2fy}, and \code{date2fy}, the financial year. For the inverses, a numeric corresponding to the year.
+#' @examples
+#' is.fy("2012-13")
+#' is.fy("2012-14")
+#' yr2fy(2012)
+#' fy2yr("2015-16")
+#' date2fy("2014-08-09")
+#' @export is.fy fy.year yr2fy fy2yr fy2date date2fy
+NULL
+
+
 
 is.fy <- function(fy.yr){
   # Allowed:
   #  2012-13
   #  201213
   # only
-  if(grepl("^([12][0-9]{3}).?[0-9]{2}$", fy.yr)){
+  ifelse(grepl("^([12][0-9]{3})[-\\s]?[0-9]{2}$", fy.yr), 
       # Are the years consecutive?
-      (as.integer(gsub("^([12][0-9]{3}).?[0-9]{2}$", "\\1", fy.yr)) + 1) %% 100 == gsub("^[12][0-9]{3}.?([0-9]{2})$", "\\1", fy.yr)
-  } else FALSE
+      (as.integer(gsub("^([12][0-9]{3})[-\\s]?[0-9]{2}$", "\\1", fy.yr)) + 1) %% 100 == as.numeric(gsub("^[12][0-9]{3}[-\\s]?([0-9]{2})$", "\\1", fy.yr)),
+      FALSE)
 }
+
+
+
 
 fy.year <- function(yr_ending){
   paste0(as.integer(yr_ending) - 1, "-", substr(yr_ending, 3, 4))
 }
 
-yr2fy <- function(yr_ending) fy.year(yr_ending)
+
+
+
+yr2fy <- function(yr_ending){
+  paste0(as.integer(yr_ending) - 1, "-", substr(yr_ending, 3, 4))
+}
+
+
 
 fy2yr <- function(fy.yr){
   if(any(!is.fy(fy.yr))){
@@ -30,6 +52,8 @@ fy2yr <- function(fy.yr){
   }
 }
 
+
+
 fy2date <- function(x){
   if(!any(is.fy(x))){
     stop("fy.yr contains non-FYs")
@@ -38,6 +62,8 @@ fy2date <- function(x){
     as.Date(date)
   }
 }
+
+
 
 date2fy <- function(date){
   assertthat::is.date(date)
