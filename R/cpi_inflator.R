@@ -14,7 +14,7 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
                          useABSConnection = FALSE,
                          allow.projection = TRUE){
   if (any(is.na(from_fy)) || any(is.na(to_fy))){
-    stop("from_fy and to_fy contain NAs. Filter before applying.")
+    stop("from_fy and to_fy contain NAs. Remove NAs before applying.")
   }
   # Don't like vector recycling
   # http://stackoverflow.com/a/9335687/1664978
@@ -52,7 +52,7 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
   
   cpi.indices <- 
     data.table::as.data.table(cpi) %>%
-    dplyr::filter(grepl("Q1", obsTime)) %>%
+    dplyr::filter_(grepl("Q1", "obsTime")) %>%
     dplyr::mutate(fy_year = yr2fy(sub("-Q1", "", obsTime, fixed = TRUE)))
   
   input <-
@@ -78,15 +78,23 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
     cpi.indices <- data.table::rbindlist(list(cpi.indices, cpi.indices.new), use.names = TRUE, fill = TRUE)
   }
   
+  hugh_frac <- function(.data, over, under, new_col_name){
+    # http://www.r-bloggers.com/using-mutate-from-dplyr-inside-a-function-getting-around-non-standard-evaluation/
+    mutate_call <- lazyeval::interp(~a/b, a = as.name(over), b = as.name(under))
+    .data %>%
+      mutate_(.dots = setNames(list(mutate_call), new_col_name))
+  }
+  
   output <- 
     input %>%
-    data.table:::merge.data.table(cpi.indices, by.x = "from_fy", by.y = "fy_year", sort = FALSE,
+    merge(cpi.indices, by.x = "from_fy", by.y = "fy_year", sort = FALSE,
                                   all.x = TRUE) %>%
-    dplyr::rename(from_index = obsValue) %>%
-    data.table:::merge.data.table(cpi.indices, by.x = "to_fy", by.y = "fy_year", sort = FALSE, 
+    data.table::setnames("obsValue", "from_index") %>%
+    merge(cpi.indices, by.x = "to_fy", by.y = "fy_year", sort = FALSE, 
                                   all.x = TRUE) %>%
-    dplyr::rename(to_index = obsValue) %>%
-    dplyr::mutate(out = from_nominal_price * (to_index/from_index))
+    data.table::setnames("obsValue", "to_index") %>%
+    hugh_frac("to_index", "from_index", "hugh_ratio")
+    dplyr::mutate(out = from_nominal_price * hugh_ratio)
   
   return(output$out)
 }

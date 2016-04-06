@@ -9,8 +9,6 @@
 
 
 cpi_inflator_quarters <- function(nominal.price, nominal.date, target.date, adjustment = "none"){
-  if((!require(data.table)) || (!require(magrittr)) || (!require(dplyr)))
-    stop("")
   
   if(!grepl("([0-9]{4}).(Q[1-4])", nominal.date) || !grepl("([0-9]{4}).(Q[1-4])", target.date))
     stop("Dates must be in quarters. e.g. 1066-Q2")
@@ -48,6 +46,5 @@ cpi_inflator_quarters <- function(nominal.price, nominal.date, target.date, adju
   data.table::setnames(cpi, c("nominal.date", "nominal.index"), c("target.date", "target.index"))
   nominal.tbl <- merge(cpi, nominal.tbl)
   
-  nominal.tbl %$%
-    {nominal.price * target.index / nominal.index}
+  nominal.tbl$nominal.price * nominal.tbl$target.index / nominal.tbl$nominal.indexs
 }

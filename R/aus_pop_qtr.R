@@ -8,9 +8,12 @@
 #' 
 
 aus_pop_qtr <- function(date_quarter, allow.projections = TRUE, fertility = "high", mortality = "high.LifeExpectancy"){
-  pop_data <- dplyr::select(data.table::data.table(as.data.frame(rsdmx::readSDMX("http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ERP_QUARTERLY/1.0.3.TT.Q/ABS?startTime=1981"))), obsTime, obsValue)
+  pop_data <- 
+    dplyr::select_(data.table::data.table(as.data.frame(rsdmx::readSDMX("http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ERP_QUARTERLY/1.0.3.TT.Q/ABS?startTime=1981"))), 
+                  .dots = c("obsTime", "obsValue"))
   
-  max_qtr <- max(pop_data$obsTime)
+  max_qtr <- 
+    max(pop_data$"obsTime")
   
   if (date_quarter > max_qtr){
     if (allow.projections){
@@ -36,12 +39,12 @@ aus_pop_qtr <- function(date_quarter, allow.projections = TRUE, fertility = "hig
       
       date_year <- as.numeric(gsub("^.*([0-9]{4}).*$", "\\1", date_quarter))
       
-      return(projections[projections$obsTime == date_year, ]$obsValue)
+      return(projections[projections$obsTime == date_year, ]$"obsValue")
     } else {
     warning("Using an earlier date than specified, viz. ", max_qtr)
-    return(pop_data[pop_data$obsTime == max_qtr, ]$obsValue)
+    return(pop_data[pop_data$obsTime == max_qtr, ]$"obsValue")
     }
   } else {
-    return(pop_data[pop_data$obsTime == date_quarter, ]$obsValue)
+    return(pop_data[pop_data$"obsTime" == date_quarter, ]$"obsValue")
   }
 }
