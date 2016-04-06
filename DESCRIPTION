@@ -23,7 +23,11 @@ Imports:
     lubridate,
     assertthat,
     magrittr,
-    Rcpp (>= 0.12.3)
+    Rcpp (>= 0.12.3), 
+    knitr, 
+    readr, 
+    zoo, 
+    taxstats
 LinkingTo: Rcpp
 RoxygenNote: 5.0.1
 Suggests: testthat

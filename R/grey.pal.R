@@ -1,7 +1,6 @@
 #' The grey palette
 #' 
-#' @name Grey palette
-#' @export 
+#' @name greys
 
 delayedAssign("grey.pal", c(
   grDevices::rgb(217,217,217, maxColorValue=256),

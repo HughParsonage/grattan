@@ -8,14 +8,24 @@
 #' @param sample_file (Not yet used) A sample file \code{data.table} for which the income tax payable is desired on each row.
 #' @param .dots.ATO A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files.
 #' @param allow.forecasts should dates beyond 2014-15 be permitted?
-#' @export 
 #' @author Tim Cameron, Brendan Coates, Hugh Parsonage
-#' @details The function .income_tax is inflexible by design. It is designed to guarantee the correct tax payable in a year.
+#' @details The function rolling is inflexible by design. It is designed to guarantee the correct tax payable in a year.
+#' @useDynLib grattan
+#' @importFrom Rcpp sourceCpp
+#' @importFrom magrittr %>%
+#' @importFrom magrittr %$%
+#' @importFrom magrittr %<>%
+#' @import data.table
 #' @return the total personal income tax payable
+#' @export 
+
+income_tax <- function(income, fy.year, age = 42, family_status = "individual", sample_file, .dots.ATO = NULL){
+  rolling_income_tax(income = income, fy.year = fy.year, age = age, family_status = family_status, sample_file = sample_file, .dots.ATO = .dots.ATO)
+}
 
 
 # .income_tax is inflexible by design: returns the tax payable in the fy.year; no scope for policy change.
-.income_tax <- function(income, 
+rolling_income_tax <- function(income, 
                         fy.year, 
                         age = 42, # answer to life, more importantly < 65.
                         family_status = "individual",
@@ -35,12 +45,11 @@
   # calculation later a one liner.
   
   tax_table2 <- 
-    grattan:::.tax_tbl %>%
+    tax_tbl %>%
     dplyr::group_by(fy_year) %>%
-    dplyr::mutate(tax_at = cumsum(lag(marginal_rate, 
-                                      default = 0) * (lower_bracket - lag(lower_bracket, 
-                                                                          default = 0)))) %>%
-    dplyr::mutate(income = lower_bracket) %>%
+    dplyr::mutate(
+      tax_at = cumsum(data.table::shift(marginal_rate, type = "lag", fill = 0) * (lower_bracket - data.table::shift(lower_bracket, type = "lag", fill = 0))),
+      income = lower_bracket) %>%
     data.table::setkey(fy_year, income) %>%
     dplyr::select(fy_year, income, lower_bracket, marginal_rate, tax_at)
   
@@ -62,7 +71,7 @@
   }
   
   .lito <- function(income, fy.year){
-    data.table:::merge.data.table(grattan:::.lito_tbl, input, by = "fy_year", 
+    data.table:::merge.data.table(lito_tbl, input, by = "fy_year", 
                                   # sort set to FALSE to avoid the key ruining the order
                                   sort = FALSE) %$%
     {
@@ -76,15 +85,15 @@
                             sapto.eligible,
                             family_status = "individual"){
     # Temporary. The system table should have sapto
-    medicare.tbl.indiv <- 
-      grattan:::.medicare.tbl.indiv %>%
+    medicare_tbl_indiv <- 
+      medicare_tbl_indiv %>%
       dplyr::mutate(sapto = as.logical(sato))
     
     data.table::data.table(income = income, 
                            fy_year = fy.year,
                            sapto = sapto.eligible, 
                            family_status = family_status) %>%
-      data.table:::merge.data.table(medicare.tbl.indiv, 
+      data.table:::merge.data.table(medicare_tbl_indiv, 
                                     by = c("fy_year", "sapto"),
                                     sort = FALSE, 
                                     all.x = TRUE) %>%
@@ -120,10 +129,10 @@
         0)
 }
 
-income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44, age_group, is.single = TRUE){
+old_income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44, age_group, is.single = TRUE){
   # If not applicable:
   LITO <- 0
-  SAPTO <- grattan:::.sapto(income, age, age_group, is.single, fy.year = fy.year)
+  SAPTO <- .sapto(income, age, age_group, is.single, fy.year = fy.year)
   medicare.levy <- 0.015 * income
   flood.levy <- 0
   

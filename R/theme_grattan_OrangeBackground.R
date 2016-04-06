@@ -1,9 +1,15 @@
 
-
 #' A theme for use with ggplots when the background needs to be Orange
 #' 
-#' @name theme_huh
-#' 
+#' @name theme_grattan_OrangeBackground
+#' @param base_size Size in points for the size of text.
+#' @param base_family Typeface.
+#' @importFrom ggplot2 %+replace%
+#' @importFrom ggplot2 element_line
+#' @importFrom ggplot2 element_rect
+#' @importFrom ggplot2 element_text
+#' @importFrom ggplot2 element_blank
+#' @export
 
 theme_grattan_OrangeBackground <- function(base_size = 24, base_family = "") {
   theme_classic(base_size = base_size, base_family = base_family) %+replace%

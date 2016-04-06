@@ -6,6 +6,11 @@
 \usage{
 theme_hugh(base_size = 23, base_family = "")
 }
+\arguments{
+\item{base_size}{Size in points for the size of text.}
+
+\item{base_family}{Typeface.}
+}
 \description{
 A theme for use with ggplots
 }

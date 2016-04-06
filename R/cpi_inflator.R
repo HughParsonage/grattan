@@ -1,7 +1,7 @@
 #' CPI inflator
 #' 
 #' @name cpi_inflator
-#' @export true
+#' @export 
 #' @param from_nominal_price (numeric) the price (or vector of prices) to be inflated
 #' @param from_fy (character) a character vector with each element in the form "2012-13" representing the financial year contemporaneous to the from_nominal_price. 
 #' @param to_fy (character) a character vector with each element in the form "2012-13" representing the financial year that prices are to be inflated. 
@@ -40,13 +40,13 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
     cpi <- as.data.frame(cpi)
   } else {
     if (grepl("none", adjustment)){
-      cpi <- grattan:::.cpi_unadj
+      cpi <- cpi_unadj
     }
     if (grepl("season", adjustment)){
-      cpi <- grattan:::.cpi_seasonal_adjustment
+      cpi <- cpi_seasonal_adjustment
     }
     if (grepl("trimmed", adjustment)){
-      cpi <- grattan:::.cpi_trimmed
+      cpi <- cpi_trimmed
     }
   }
   

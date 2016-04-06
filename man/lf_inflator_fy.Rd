@@ -8,6 +8,16 @@ lf_inflator_fy(labour_force = 1, from_fy = "2012-13", to_fy,
   useABSConnection = FALSE, allow.projection = TRUE, use.month = "01")
 }
 \arguments{
+\item{from_fy}{Financial year of \code{labour_force}.}
+
+\item{to_fy}{Financial year for which the labour force is predicted.}
+
+\item{useABSConnection}{Should an sdmx connection be used to get ABS data?}
+
+\item{allow.projection}{Logical. Should projections be allowed?}
+
+\item{use.month}{A 2-character string for the month in which the labour force should be used.}
+
 \item{labour.force}{a numeric vector}
 
 \item{from_date, }{to_date dates as a character vector}

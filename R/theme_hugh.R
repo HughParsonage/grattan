@@ -1,7 +1,14 @@
 #' A theme for use with ggplots
 #' 
 #' @name theme_hugh
-#' 
+#' @param base_size Size in points for the size of text.
+#' @param base_family Typeface.
+#' @importFrom ggplot2 %+replace%
+#' @importFrom ggplot2 element_line
+#' @importFrom ggplot2 element_rect
+#' @importFrom ggplot2 element_text
+#' @importFrom ggplot2 element_blank
+#' @export
 
 theme_hugh <- function(base_size = 23, base_family = "") {
   ggplot2::theme_classic(base_size = base_size, 
@@ -25,6 +32,8 @@ theme_hugh <- function(base_size = 23, base_family = "") {
       axis.title.y =      element_blank(),
       axis.text =         element_text(),
       axis.line =         element_line(color = "black", size = 1),
+      axis.line.x  = element_line(color = "black", size = 1), 
+      axis.line.y  = element_line(color = "black", size = 1),
       axis.ticks.length = grid::unit(0.3, "lines"),
       
       # Modified inheritance structure of line element

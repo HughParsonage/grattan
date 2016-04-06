@@ -6,6 +6,9 @@
 \usage{
 theme_grattan(...)
 }
+\arguments{
+\item{...}{arguments passed to \code{\link{theme_hugh}}.}
+}
 \description{
 theme_grattan
 }

@@ -8,7 +8,7 @@
 #' @return An estimate of the CGT payable in \code{to_fy}, inflated by relative tax expenditures. 
 
 CGT_inflator <- function(cgt = 1, from_fy, to_fy){
-  grattan:::.cgt_expenditures %T>%
+  cgt_expenditures %T>%
   {
     stopifnot(length(from_fy) == 1L, length(to_fy) == 1L, from_fy %in% .$FY, to_fy %in% .$FY) 
   } %>%

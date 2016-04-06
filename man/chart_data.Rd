@@ -4,7 +4,7 @@
 \alias{chart_data}
 \title{chart_data}
 \usage{
-Use this in a knitr chunk that produces a chart to get the chart data
+chart_data(.data)
 }
 \arguments{
 \item{.data}{A data frame suitable for \code{readr::write_csv}.}
@@ -14,5 +14,8 @@ If knitting, writes a csv of its named as the current chunk label. Otherwise, re
 }
 \description{
 convenience function for knitr chunks
+}
+\note{
+Use this in a knitr chunk that produces a chart to get the chart data
 }
 

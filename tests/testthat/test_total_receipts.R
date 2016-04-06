@@ -1,15 +1,13 @@
 # tests
-library(grattan)
 context("Tax receipts")
-
+library(grattan)
 library(taxstats)
+library(dplyr)
+library(data.table)
+library(magrittr)
 # True value of personal income tax receipts was $159.021 billion
 # 5506.0 - Taxation Revenue, Australia, 2013-14
 actual_collections <- 159.021 * 10^9
-
-library(dplyr)
-library(magrittr)
-library(data.table)
 
 prop_c <- function(actual, predicted){
   abs(predicted - actual) / actual
@@ -18,8 +16,8 @@ prop_c <- function(actual, predicted){
 # basic taxable income to tax
 test1 <- 
   sample_file_1213 %>%
-  mutate(tax0 = grattan::income_tax(Taxable_Income),
-         tax1 = grattan:::.income_tax(Taxable_Income, "2012-13", age = 42))
+  mutate(tax0 = income_tax(Taxable_Income, "2012-13"),
+         tax1 = income_tax(Taxable_Income, "2012-13", age = 42))
 
 expect_lte(prop_c(sum(test1$tax0) * 50, actual_collections), 0.02)
 expect_lte(prop_c(sum(test1$tax1) * 50, actual_collections), 0.02)
@@ -51,7 +49,7 @@ setkey(sample_file_1213, age_range)
 tax.collection <- 
   sample_file_1213[age_decoder] %$%
   {
-    sum(grattan:::.income_tax(income = Taxable_Income, fy.year = "2012-13", age = age)) * 50
+    sum(income_tax(income = Taxable_Income, fy.year = "2012-13", age = age)) * 50
   }
 
 expect_lte(abs(tax.collection - actual_collections)/actual_collections, expected = 0.01)

@@ -105,7 +105,7 @@ grattan_waterfall <- function(.data = NULL,
                                   y = values), ggplot2::aes(x = x, y = y)) + 
     ggplot2::geom_blank() + 
     grattan::theme_hugh() +
-    ggplot2::theme(axis.title = element_blank())
+    ggplot2::theme(axis.title = ggplot2::element_blank())
   } else {
     p <- ggplot2::ggplot(data.frame(x = c(labels, total_axis_text),
                                     y = c(values, north_edge[number_of_rectangles])
@@ -113,7 +113,7 @@ grattan_waterfall <- function(.data = NULL,
                                     ggplot2::aes(x = x, y = y)) + 
       ggplot2::geom_blank() + 
       grattan::theme_hugh() +
-      ggplot2::theme(axis.title = element_blank())
+      ggplot2::theme(axis.title = ggplot2::element_blank())
   }
   
   if (grepl("behind", draw_axis.x)){

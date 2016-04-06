@@ -21,7 +21,7 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
     wage.indices <- as.data.frame(wages)
   } else {
     # .wages_trend means the wage indices of the trend index
-    wage.indices <- grattan:::.wages_trend
+    wage.indices <- wages_trend
   }
   
   wage.indices <- 

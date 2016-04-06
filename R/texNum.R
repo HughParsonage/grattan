@@ -1,6 +1,6 @@
 #' Convert number to English prose
 #' 
-#' @param A single numeric vector.
+#' @param number A single numeric vector.
 #' @param sig.figs Significant figures to be displayed
 #' @param dollar Logical, should a LaTeX dollar sign (\code{\\$}) be prefixed.
 #' @param pre.phrase A length 2 character vector to insert a phrase before the number. The first element is the phrase to be used if the output rounds up before printing (i.e. the original number is smaller than the number printed); the second is the phrase to be used if the number rounds down. The default is \code{NULL}, i.e. no phrase inserted. If either string has a trailing tilde (e.g. \code{"almost~"}), the tilde separates the number and the phrase (as a LaTeX control sequence).

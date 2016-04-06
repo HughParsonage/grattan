@@ -2,6 +2,11 @@
 #' 
 #' @param labour.force a numeric vector
 #' @param from_date, to_date dates as a character vector
+#' @param from_fy Financial year of \code{labour_force}.
+#' @param to_fy Financial year for which the labour force is predicted.
+#' @param useABSConnection Should an sdmx connection be used to get ABS data?
+#' @param allow.projection Logical. Should projections be allowed?
+#' @param use.month A 2-character string for the month in which the labour force should be used.
 #' @return the relative labour force between to_date and for_date, multiplied by labour.force.
 
 lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy, 
@@ -12,7 +17,7 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     lf <- rsdmx::readSDMX(lf.url)
     lf.indices <- data.table::as.data.table(as.data.frame(lf))
   } else {
-    lf.indices <- grattan:::.lf_trend
+    lf.indices <- lf_trend
   }
   
   lf.indices <- 

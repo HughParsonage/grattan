@@ -4,7 +4,7 @@
 #' 
 #' @param .data A data frame suitable for \code{readr::write_csv}.
 #' @return If knitting, writes a csv of its named as the current chunk label. Otherwise, returns \code{.data} invisibly.
-#' @usage Use this in a knitr chunk that produces a chart to get the chart data 
+#' @note  Use this in a knitr chunk that produces a chart to get the chart data 
 
 chart_data <- function(.data){
   current_chunk_label <- knitr::opts_current$get(name = "label")
