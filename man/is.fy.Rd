@@ -2,17 +2,18 @@
 % Please edit documentation in R/fy.year.R
 \name{is.fy}
 \alias{is.fy}
-\title{Convenience function for creating FY}
+\title{Convenience functions for creating FY}
 \usage{
 is.fy(fy.yr)
 }
 \arguments{
-\item{yr_ending}{()}
-}
-\value{
-the financial year ("YYYY-YY") corresponding to June of \code{yr_ending}
+\item{fy.yr}{A string suspected to be a financial year.}
+
+\item{yr_ending}{An integer representing a year.}
+
+\item{date}{A string or date for which the financial year is desired.}
 }
 \description{
-Convenience function for creating FY
+Convenience functions for creating FY
 }
 
