@@ -7,12 +7,16 @@
 #' @param to_fy (character) a character vector with each element in the form "2012-13" representing the financial year that prices are to be inflated. 
 #' @param adjustment What CPI index to use ("none" = raw series, "seasonal", or "trimmed" [mean]).
 #' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? By default set to \code{FALSE} in which case a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.
+#' @param allow.projection Should projections beyond the ABS's data be allowed?
 #' @return the value of from_nominal_price in real (to_fy) dollars.
 
 cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15", 
                          adjustment = "none",
                          useABSConnection = FALSE,
                          allow.projection = TRUE){
+  # CRAN
+  obsTime <- NULL; obsValue <- NULL; to_index <- NULL; from_index <- NULL
+  
   if (any(is.na(from_fy)) || any(is.na(to_fy))){
     stop("from_fy and to_fy contain NAs. Remove NAs before applying.")
   }
@@ -52,7 +56,7 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
   
   cpi.indices <- 
     data.table::as.data.table(cpi) %>%
-    dplyr::filter_(grepl("Q1", "obsTime")) %>%
+    dplyr::filter(grepl("Q1", obsTime)) %>%
     dplyr::mutate(fy_year = yr2fy(sub("-Q1", "", obsTime, fixed = TRUE)))
   
   input <-
@@ -78,11 +82,12 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
     cpi.indices <- data.table::rbindlist(list(cpi.indices, cpi.indices.new), use.names = TRUE, fill = TRUE)
   }
   
-  hugh_frac <- function(.data, over, under, new_col_name){
+  # NSE
+  hugh_frac <- function(.data, front, over, under, new_col_name){
     # http://www.r-bloggers.com/using-mutate-from-dplyr-inside-a-function-getting-around-non-standard-evaluation/
-    mutate_call <- lazyeval::interp(~a/b, a = as.name(over), b = as.name(under))
+    mutate_call <- lazyeval::interp(~r*a/b, a = as.name(over), b = as.name(under), r = as.name(front))
     .data %>%
-      mutate_(.dots = setNames(list(mutate_call), new_col_name))
+      dplyr::mutate_(.dots = setNames(list(mutate_call), new_col_name))
   }
   
   output <- 
@@ -93,8 +98,7 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
     merge(cpi.indices, by.x = "to_fy", by.y = "fy_year", sort = FALSE, 
                                   all.x = TRUE) %>%
     data.table::setnames("obsValue", "to_index") %>%
-    hugh_frac("to_index", "from_index", "hugh_ratio")
-    dplyr::mutate(out = from_nominal_price * hugh_ratio)
+    hugh_frac("from_nominal_price", "to_index", "from_index", "out")
   
   return(output$out)
 }
