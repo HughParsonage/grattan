@@ -1,6 +1,6 @@
 #' Australia's population
 #' 
-#' @param date as character string(YYYY-QQ)
+#' @param date_quarter A character string (YYYY-QQ).
 #' @param allow.projections If the date is beyond the ABS's confirmed data, should a projection be used?
 #' @param fertility What fertility assumption should be used? (high, medium, low)
 #' @param mortality The assumption of future life expectancy. Should be \code{high.LifeExpectancy} or \code{medium.LifeExpectancy}.
