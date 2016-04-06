@@ -1,5 +1,8 @@
 language: r
 cache: packages
 
-install:
-  - ./travis-tool.sh install_github hughparsonage/taxstats
+r_github_packages:
+  - hughparsonage/taxstats
+  - jimhester/covr
+after_success:
+  - Rscript -e 'covr::codecov()'
