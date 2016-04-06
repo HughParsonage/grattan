@@ -3,6 +3,7 @@
 #' @param yr_ending An integer representing a year.
 #' @param fy.yr A string suspected to be a financial year.
 #' @param date A string or date for which the financial year is desired.
+#' @export
 
 is.fy <- function(fy.yr){
   # Allowed:
