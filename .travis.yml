@@ -1,8 +1,9 @@
 language: r
-cache: packages
+warnings_are_errors: true
 
 r_github_packages:
   - hughparsonage/taxstats
   - jimhester/covr
+
 after_success:
   - Rscript -e 'covr::codecov()'
