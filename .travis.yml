@@ -2,4 +2,4 @@ language: r
 cache: packages
 
 install:
-  - ./travis-tool.sh install_github hadley/testthat
+  - ./travis-tool.sh install_github hughparsonage/taxstats
