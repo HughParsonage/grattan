@@ -27,7 +27,8 @@ Imports:
     knitr, 
     readr, 
     zoo, 
-    taxstats
+    taxstats, 
+    lazyeval
 LinkingTo: Rcpp
 RoxygenNote: 5.0.1
 Suggests: testthat

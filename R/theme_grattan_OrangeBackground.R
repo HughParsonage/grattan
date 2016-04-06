@@ -9,6 +9,9 @@
 #' @importFrom ggplot2 element_rect
 #' @importFrom ggplot2 element_text
 #' @importFrom ggplot2 element_blank
+#' @importFrom ggplot2 margin
+#' @importFrom ggplot2 theme
+#' @importFrom ggplot2 theme_classic
 #' @export
 
 theme_grattan_OrangeBackground <- function(base_size = 24, base_family = "") {

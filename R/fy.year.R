@@ -1,4 +1,4 @@
-#' Convenience functions for creating FY
+#' Convenience functions for dealing with financial years
 #' 
 #' @param yr_ending An integer representing a year.
 #' @param fy.yr A string suspected to be a financial year.
@@ -20,7 +20,7 @@ fy.year <- function(yr_ending){
   paste0(as.integer(yr_ending) - 1, "-", substr(yr_ending, 3, 4))
 }
 
-yr2fy <- function(...) fy.year(...)
+yr2fy <- function(yr_ending) fy.year(yr_ending)
 
 fy2yr <- function(fy.yr){
   if(any(!is.fy(fy.yr))){
