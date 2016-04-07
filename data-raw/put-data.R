@@ -1,16 +1,24 @@
+# Income tax tables.
+
 tax_tbl <-
   data.table::fread("./data-raw/tax-brackets-and-marginal-rates-by-fy.tsv")
 
 lito_tbl <- 
-  data.table::setkey(data.table::fread("data/lito-info.tsv"), fy_year)
+  data.table::setkey(data.table::fread("./data-raw/lito-info.tsv"), fy_year)
 
 medicare_tbl_indiv <- 
   readxl::read_excel("./data-raw/medicare-tables.xlsx", sheet = "indiv") %>%
   data.table::as.data.table(.) %>%
-  data.table::setkey(fy_year)
+  data.table::setkey(fy_year, sato) %>%
+  # avoid cartesian joins
+  unique 
 
 sapto_tbl <- 
-  readxl::read_excel("./data-raw/SAPTO-rates.xlsx", sheet = 1)
+  readxl::read_excel("./data-raw/SAPTO-rates.xlsx", sheet = 1) %>% 
+  data.table::as.data.table(.) %>% 
+  data.table::setkey(fy_year, family_status) %>% 
+  # avoid cartesian joins in income_tax
+  unique
 
 # Manually
 cpi_unadj <- 

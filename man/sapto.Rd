@@ -4,12 +4,15 @@
 \alias{sapto}
 \title{Senior Australians and Pensioner Tax Offset}
 \usage{
-sapto(rebate_income, fy.year, sapto.eligible, family_status = "single")
+sapto(rebate_income, fy.year, fill = 0, sapto.eligible,
+  family_status = "single")
 }
 \arguments{
 \item{rebate_income}{The rebate income of the individual.}
 
 \item{fy.year}{The financial year in which sapto is to be calculated.}
+
+\item{fill}{If SAPTO was not applicable, what value should be used?}
 
 \item{sapto.eligible}{Is the individual eligible for sapto?}
 

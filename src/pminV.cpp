@@ -1,3 +1,12 @@
+//' @title Parallel maximum
+//' @description A faster \code{pmin()}.
+//'
+//' @name pminV
+//' @param x A numeric vector.
+//' @param y A numeric vector, the same length as x.
+//' @return The parallel maximum of the input values.
+//' @export pminV
+
 #include <Rcpp.h>
 using namespace Rcpp;
 

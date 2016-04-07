@@ -58,6 +58,16 @@ pminC <- function(x, a) {
     .Call('grattan_pminC', PACKAGE = 'grattan', x, a)
 }
 
+#' @title Parallel maximum
+#' @description A faster \code{pmin()}.
+#'
+#' @name pminV
+#' @param x A numeric vector.
+#' @param y A numeric vector, the same length as x.
+#' @return The parallel maximum of the input values.
+#' @export pminV
+NULL
+
 pminV <- function(x, y) {
     .Call('grattan_pminV', PACKAGE = 'grattan', x, y)
 }

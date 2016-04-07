@@ -22,8 +22,13 @@
 
 income_tax <- function(income, fy.year, age = 42, family_status = "individual", sample_file, .dots.ATO = NULL, return.mode = "numeric", allow.forecasts = FALSE){
   if (allow.forecasts || any(!(fy.year %in% tax_tbl$fy_year))){
-    stop("rolling income tax not intended for future years. Consider old_income_tax().")
+    stop("rolling income tax not intended for future years or years before 2003-04. Consider old_income_tax() or new_income_tax().")
   }
+  
+  if (any(income < 0)){
+    warning("Negative entries in income detected. These will have value NA.")
+  }
+  
   rolling_income_tax(income = income, fy.year = fy.year, age = age, family_status = family_status, sample_file = sample_file, .dots.ATO = .dots.ATO)
 }
 
@@ -36,10 +41,7 @@ rolling_income_tax <- function(income,
                                sample_file,
                                .dots.ATO = NULL, 
                                return.mode = "numeric"){
-  # if(getRversion() >= "2.15.1")  utils::globalVariables(c(".obj1", "obj2"))
-  
-  # assign(c("fy_year", "marginal_rate", "lower_bracket", "tax_at", "n", "tax", "ordering", "max_lito", "min_bracket", "lito_taper", "sato", "taper", "rate", "max_offset", "upper_threshold", "taper_rate"), value = NULL)
-  
+  # CRAN NOTE avoidance
   fy_year <- NULL; marginal_rate <- NULL; lower_bracket <- NULL; tax_at <- NULL; n <- NULL; tax <- NULL; ordering <- NULL; max_lito <- NULL; min_bracket <- NULL; lito_taper <- NULL; sato <- NULL; taper <- NULL; rate <- NULL; max_offset <- NULL; upper_threshold <- NULL; taper_rate <- NULL
   
   if (missing(fy.year)){
@@ -88,9 +90,13 @@ rolling_income_tax <- function(income,
   }
   
   .lito <- function(income, fy.year){
-    merge(lito_tbl, input, by = "fy_year", 
-                                  # sort set to FALSE to avoid the key ruining the order
-                                  sort = FALSE) %$%
+    merge(lito_tbl, 
+          input, 
+          by = "fy_year", 
+          # sort set to FALSE to avoid the key ruining the order
+          sort = FALSE, 
+          # right join because there may be no LITO
+          all.y = TRUE) %$%
     {
       pminV(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
             max_lito)
@@ -104,16 +110,19 @@ rolling_income_tax <- function(income,
     # Temporary. The system table should have sapto
     medicare_tbl_indiv <- 
       medicare_tbl_indiv %>%
-      dplyr::mutate(sapto = as.logical(sato))
+      dplyr::mutate(sapto = as.logical(sato), 
+                    family_status = "individual") %>%
+      data.table::setkeyv(c("fy_year", "sapto", "family_status")) %>%
+      unique
     
     data.table::data.table(income = income, 
                            fy_year = fy.year,
                            sapto = sapto.eligible, 
                            family_status = family_status) %>%
       merge(medicare_tbl_indiv, 
-                                    by = c("fy_year", "sapto"),
-                                    sort = FALSE, 
-                                    all.x = TRUE) %>%
+            by = c("fy_year", "sapto", "family_status"),
+            sort = FALSE, 
+            all.x = TRUE) %>%
       dplyr::mutate(medicare_levy = pminV(pmaxC(taper * (income - lower_bracket), 
                                                 0), 
                                           rate * income)) %$%
@@ -123,6 +132,7 @@ rolling_income_tax <- function(income,
   base_tax. <- tax_fun(income, fy.year = fy.year)
   medicare_levy. <- medicare_levy(income, fy.year = fy.year, sapto.eligible = sapto.eligible)
   lito. <- .lito(income, fy.year)
+  
   if (!is.null(.dots.ATO) && !missing(.dots.ATO)){
     sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income,
                                                                    Rptbl_Empr_spr_cont_amt = .dots.ATO$Rptbl_Empr_spr_cont_amt,
@@ -147,6 +157,7 @@ rolling_income_tax <- function(income,
 }
 
 old_income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44, age_group, is.single = TRUE){
+  stopifnot(length(fy.year) == 1L)
   # If not applicable:
   LITO <- 0
   SAPTO <- .sapto(income, age, age_group, is.single, fy.year = fy.year)
