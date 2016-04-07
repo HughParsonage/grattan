@@ -23,6 +23,7 @@
 #' @param lines_anchors a character vector of length two specifying the horizontal placement of the drawn lines relative to the preceding and successive rectangles, respectively
 #' @param draw_axis.x (character) one of "none", "behind", "front" whether to draw an x.axis line and whether to draw it behind or in front of the rectangles, default is behind
 #' @param ggplot_object_name (character) a quoted valid object name to which ggplot layers may be addded after the function has run
+#' @export
 
 
 grattan_waterfall <- function(.data = NULL,

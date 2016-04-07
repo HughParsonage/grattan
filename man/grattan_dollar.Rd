@@ -15,6 +15,6 @@ grattan_dollar(x, digits = 0)
 dollar scales
 }
 \details{
-makes negative ten Gs appears as -\$10,000 instead of \$-10,000
+Makes negative numbers appear as \eqn{-\$10,000} instead of \eqn{\$-10,000} in \code{scales::dollar}.
 }
 

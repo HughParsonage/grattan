@@ -35,6 +35,8 @@ Labour force inflators
 }
 \examples{
 lf_inflator_fy(labour_force = 1, from_fy = "2012-13", to_fy = "2013-14")
+\dontrun{
 lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date = "2014-06-30")
+}
 }
 

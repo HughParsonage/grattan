@@ -1,11 +1,19 @@
 #' Convert number to English prose
 #' 
+#' @description This takes an arbitrary numbers and prints like a human would transcribe it. Designed to be used within \code{\\Sexpr}.
+#' 
+#' @name texNum
+#' 
 #' @param number A single numeric vector.
 #' @param sig.figs Significant figures to be displayed
 #' @param dollar Logical, should a LaTeX dollar sign (\code{\\$}) be prefixed.
 #' @param pre.phrase A length 2 character vector to insert a phrase before the number. The first element is the phrase to be used if the output rounds up before printing (i.e. the original number is smaller than the number printed); the second is the phrase to be used if the number rounds down. The default is \code{NULL}, i.e. no phrase inserted. If either string has a trailing tilde (e.g. \code{"almost~"}), the tilde separates the number and the phrase (as a LaTeX control sequence).
+#' @examples 
+#' texNum(500e3)
+#' texNum(500e3 - 1, pre.phrase = c("almost", "over"))
+#' texNum(500e6)
 #' @return A character string representing the number as appropriate for English prose.
-#' 
+#' @export 
 
 texNum <- function(number, sig.figs = 3L, dollar = FALSE, pre.phrase = NULL){
   orig.number <- number

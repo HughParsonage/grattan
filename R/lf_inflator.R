@@ -74,7 +74,9 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
 
 #' @rdname lf_inflator
 #' @examples
+#' \dontrun{
 #' lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date = "2014-06-30")
+#' }
 lf_inflator <- function(labour_force = 1, from_date = "2013-06-30", to_date){
   
   # lf original

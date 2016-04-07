@@ -15,6 +15,7 @@
 #' @export
 
 theme_grattan_OrangeBackground <- function(base_size = 24, base_family = "") {
+  stopifnot(requireNamespace("grattan", quietly = TRUE))
   theme_classic(base_size = base_size, base_family = base_family) %+replace%
     theme(
       

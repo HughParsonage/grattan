@@ -3,12 +3,11 @@
 #' @name grattan_dollar
 #' @param x A numeric vector
 #' @param digits Minimum number of digits after the decimal point. (\code{nsmall} in \code{base::format}).
-#' @details makes negative ten Gs appears as -\$10,000 instead of \$-10,000
+#' @details Makes negative numbers appear as \eqn{-\$10,000} instead of \eqn{\$-10,000} in \code{scales::dollar}.
 #' @export
 
 # from scales
-grattan_dollar <- function (x, digits = 0) 
-{
+grattan_dollar <- function (x, digits = 0) {
   #
   nsmall <- digits
   commaz <- format(abs(x), nsmall = nsmall, trim = TRUE, big.mark = ",", 

@@ -27,3 +27,4 @@ Imports:
 LinkingTo: Rcpp
 RoxygenNote: 5.0.1
 Suggests: testthat, taxstats
+LazyData: true

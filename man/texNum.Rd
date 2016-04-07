@@ -19,6 +19,11 @@ texNum(number, sig.figs = 3L, dollar = FALSE, pre.phrase = NULL)
 A character string representing the number as appropriate for English prose.
 }
 \description{
-Convert number to English prose
+This takes an arbitrary numbers and prints like a human would transcribe it. Designed to be used within \code{\\Sexpr}.
+}
+\examples{
+texNum(500e3)
+texNum(500e3 - 1, pre.phrase = c("almost", "over"))
+texNum(500e6)
 }
 
