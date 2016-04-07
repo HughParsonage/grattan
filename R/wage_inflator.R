@@ -1,4 +1,5 @@
-#' a wage inflator
+#' @title A wage inflator
+#' @description Predicts what a wage could expect to grow to, between two financial years.
 #' 
 #' @param wage the amount to be inflated (1 by default)
 #' @param from_fy a character vector of the form "2012-13" representing the FY ending that the wage index is to be taken (i.e. Q4 in that year). FY year must be 1996-97 or later.
@@ -6,6 +7,7 @@
 #' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? By default set to \code{FALSE} in which case a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.
 #' @param allow.projection If set to \code{TRUE} the \code{forecast} package is used to project forward. If set to \code{FALSE}, any dates outside the range will return \code{NA}.
 #' @return the wage inflation between the two years
+#' @export
 
 wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, allow.projection = TRUE){
   

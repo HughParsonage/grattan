@@ -2,7 +2,7 @@
 % Please edit documentation in R/wage_inflator.R
 \name{wage_inflator}
 \alias{wage_inflator}
-\title{a wage inflator}
+\title{A wage inflator}
 \usage{
 wage_inflator(wage = 1, from_fy, to_fy, useABSConnection = FALSE,
   allow.projection = TRUE)
@@ -22,6 +22,6 @@ wage_inflator(wage = 1, from_fy, to_fy, useABSConnection = FALSE,
 the wage inflation between the two years
 }
 \description{
-a wage inflator
+Predicts what a wage could expect to grow to, between two financial years.
 }
 
