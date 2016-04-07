@@ -7,5 +7,5 @@
 
 gpalx <- function(n){
   stopifnot(requireNamespace("grattan", quietly = TRUE))
-  grDevices::colorRampPalette(colors = pal.6)(n)
+  grDevices::colorRampPalette(colors = grattan::pal.6)(n)
 }

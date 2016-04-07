@@ -9,18 +9,18 @@
 
 gpal <- function(n, dark = TRUE){
   stopifnot(requireNamespace("grattan", quietly = TRUE))
-  grattan.palette <- list(pal.1, pal.2dark, pal.3, pal.4, pal.5, pal.6)
+  grattan.palette <- list(grattan::pal.1, grattan::pal.2dark, grattan::pal.3, grattan::pal.4, grattan::pal.5, grattan::pal.6)
   if(n > 6){
     if(n > 9)
       stop('No palette available for that number of categories.', '\n', 'Consider using gpalx')
     else {
-      grattan.palette <- list(pal.1, pal.2, pal.3, pal.4, pal.5, pal.6, pal.7, pal.8, pal.9)
+      grattan.palette <- list(grattan::pal.1, grattan::pal.2, grattan::pal.3, grattan::pal.4, grattan::pal.5, grattan::pal.6, grattan::pal.7, grattan::pal.8, grattan::pal.9)
       warning("I'm going off-piste: The Palette Of Nine is thine. May John have mercy on your soul.")
     }
   }
   if(!dark) {
     if (n == 2){
-      pal.2
+      grattan::pal.2
     } else {
       warning("no light option for palette ", n)
       grattan.palette[[n]]
