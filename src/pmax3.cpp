@@ -23,7 +23,7 @@ NumericVector pmax3(NumericVector x, NumericVector y, NumericVector z) {
     double xi = x[i];
     double yi = y[i];
     double zi = z[i];
-    if (xi < yi && yi < zi){
+    if (xi < zi && yi < zi){
       out[i] = zi;
     } else {
       if (xi < yi){
