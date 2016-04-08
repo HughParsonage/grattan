@@ -15,7 +15,7 @@ test_that("income_tax is not NA for any years)", {
 })
 
 test_that("income_tax always returns the length of its arguments", {
-  LEN <- abs(ceiling(rcauchy(1)))
+  LEN <- ceiling(abs(rcauchy(1)))
   expect_equal(length(income_tax(runif(LEN, 0, 2e6), fy.year = sample(yr2fy(2004:2014), size = LEN, replace = TRUE))), LEN)
 })
 
