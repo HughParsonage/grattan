@@ -48,8 +48,6 @@ rolling_income_tax <- function(income,
     stop("fy.year is missing, with no default")
   }
   
-
-  
   if (return.mode != "numeric"){
     stop("return.mode must currently be set to numeric only")
   }
@@ -58,6 +56,7 @@ rolling_income_tax <- function(income,
   # Don't like vector recycling
   # http://stackoverflow.com/a/9335687/1664978
   prohibit_vector_recycling(income, fy.year)
+  prohibit_length0_vectors(income, fy.year)
 
   # tax_table2 provides the raw tax tables, but also the amount
   # of tax paid at each bracket, to make the rolling join 

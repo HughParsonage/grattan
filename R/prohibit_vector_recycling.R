@@ -3,7 +3,7 @@
 #' Tests (harshly) whether the vectors can be recycled safely.
 #' 
 #' @param ... A list of vectors
-#' @return An error message if the vectors are of different length (unless the alternative length is 1).
+#' @return An error message if the vectors are of different length (unless the alternative length is 1). 
 #' @examples 
 #' \dontrun{
 #' # Returns nothing because they are of the same length
