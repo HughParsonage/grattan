@@ -78,12 +78,12 @@ texNum <- function(number, sig.figs = 3L, dollar = FALSE, pre.phrase = NULL){
     # is the displayed number larger than the original?
     if (!is.null(pre.phrase)){
       out_larger <- prefix_val * suffix_val > orig.number
-      out <- 
+      
         if (out_larger) {
-          paste(pre.phrase[1], out, sep = if(grepl("~$", pre.phrase[1])) "" else " ")
+          out <- paste(pre.phrase[1], out, sep = if(grepl("~$", pre.phrase[1])) "" else " ")
         } else {
-          if (!isTRUE(all.equal(prefix_val * suffix_val , orig.number)))
-            paste(pre.phrase[2], out, sep = if(grepl("~$", pre.phrase[2])) "" else " ")
+          if (!isTRUE(all.equal(prefix_val * suffix_val, orig.number, tolerance = .Machine$double.eps)))
+            out <- paste(pre.phrase[2], out, sep = if(grepl("~$", pre.phrase[2])) "" else " ")
         }
       
     }
