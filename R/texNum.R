@@ -55,7 +55,7 @@ texNum <- function(number, sig.figs = 3L, dollar = FALSE, pre.phrase = NULL){
         suffix_val <- 10^9
       }
       
-      if (n.digits >= 12){
+      if (n.digits > 12){
         suffix <- "~trillion"
         suffix_val <- 10^12
       }
