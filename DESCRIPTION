@@ -23,7 +23,8 @@ Imports:
     knitr, 
     readr, 
     zoo, 
-    lazyeval
+    lazyeval, 
+    purrr
 LinkingTo: Rcpp
 RoxygenNote: 5.0.1
 Suggests: testthat, taxstats
