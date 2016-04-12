@@ -41,29 +41,21 @@ texNum <- function(number, sig.figs = 3L, dollar = FALSE, pre.phrase = NULL){
     if (n.digits <= 6){
       prefix_val <- round(number, sig.figs - n.digits - 1)
       prefix <- prettyNum(prefix_val, big.mark = ",", scientific = FALSE)
-    } 
-    
-    if (n.digits > 6){
+    } else {
       # Want to show only the number / 10^(multiple of 3) then the suffix multiplier
-      prefix_val <- signif(number/10 ^ (3 * (n.digits %/% 3)), digits = sig.figs)
+      suffix_val <- 10 ^ (3 * (n.digits %/% 3))
+      prefix_val <- signif(number/suffix_val, digits = sig.figs)
       prefix <- prefix_val
-      suffix <- "~million"
-      suffix_val <- 10^6
       
-      if (n.digits >= 9){
-        suffix <- "~billion"
-        suffix_val <- 10^9
-      }
-      
-      if (n.digits > 12){
-        suffix <- "~trillion"
-        suffix_val <- 10^12
-      }
-      
-      if (n.digits > 15){
+      if (suffix_val <= 10^12){
+      switch(log10(suffix_val) / 3 - 1, 
+             suffix <- "~million", 
+             suffix <- "~billion", 
+             suffix <- "~trillion")
+      } else {
         prefix <- signif(number / 10^12, digits = sig.figs)
+        suffix <- "~trillion"
       }
-      
     }
     
     if (dollar){
