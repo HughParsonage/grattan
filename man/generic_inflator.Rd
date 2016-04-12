@@ -4,12 +4,10 @@
 \alias{generic_inflator}
 \title{Generic inflator}
 \usage{
-generic_inflator(.sample_file, vars, h, fy.year.of.sample.file = "2012-13",
+generic_inflator(vars, h, fy.year.of.sample.file = "2012-13",
   nonzero = FALSE, estimator = "mean", pred_interval = 80)
 }
 \arguments{
-\item{.sample_file}{A \code{data.table} sample file containing variables for which inflators are desired.}
-
 \item{vars}{A character vector of those variables within \code{.sample_file} for which forecasts are desired.}
 
 \item{h}{An integer, how many years ahead should the inflator be targeted.}
@@ -21,6 +19,9 @@ generic_inflator(.sample_file, vars, h, fy.year.of.sample.file = "2012-13",
 \item{estimator}{What forecast element should be used: the point estimate (\code{"mean"}), or the \code{upper} or \code{lower} endpoint of a prediction interval?}
 
 \item{pred_interval}{If \code{estimator} is \code{upper} or \code{lower}, what prediction interval are these the end points of?}
+}
+\value{
+A data table of two columns: \code{variable} containing \code{vars} and \code{inflator} equal to the inflator to be applied to that variable to inflate it ahead \code{h} years.
 }
 \description{
 Generic inflator

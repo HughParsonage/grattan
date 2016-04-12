@@ -1,12 +1,12 @@
 #' Generic inflator
 #' 
-#' @param .sample_file A \code{data.table} sample file containing variables for which inflators are desired.
 #' @param vars A character vector of those variables within \code{.sample_file} for which forecasts are desired. 
 #' @param h An integer, how many years ahead should the inflator be targeted.
 #' @param fy.year.of.sample.file A string representing the financial year of \code{.sample_file}.
 #' @param nonzero Should the forecast be taken on all values, or just nonzero values?
 #' @param estimator What forecast element should be used: the point estimate (\code{"mean"}), or the \code{upper} or \code{lower} endpoint of a prediction interval?
 #' @param pred_interval If \code{estimator} is \code{upper} or \code{lower}, what prediction interval are these the end points of?
+#' @return A data table of two columns: \code{variable} containing \code{vars} and \code{inflator} equal to the inflator to be applied to that variable to inflate it ahead \code{h} years.
 #' @importFrom magrittr %>%
 #' @importFrom magrittr %<>%
 #' @importFrom magrittr %$%
@@ -14,14 +14,14 @@
 
 ## For each variable we want an arima/ets model 
 ## and to use that to forecast ahead.
-generic_inflator <- function(.sample_file, vars, h, fy.year.of.sample.file = "2012-13", nonzero = FALSE, estimator = "mean", pred_interval = 80){
-  if (h == 0){
-    return(.sample_file)
+generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzero = FALSE, estimator = "mean", pred_interval = 80){
+  if (h == 0L){
+    return(data.table::data.table(variable = vars, 
+                                  inflator = 1))
   }
   
   stopifnot(is.integer(h), 
             h >= 0, 
-            data.table::is.data.table(.sample_file), 
             is.fy(fy.year.of.sample.file))
   
   
@@ -59,14 +59,6 @@ generic_inflator <- function(.sample_file, vars, h, fy.year.of.sample.file = "20
     }
   }
   
-  select_which_ <- function(.data, Which, .and.dots){
-    which <- match.fun(Which)
-    if (!missing(.and.dots)){
-      dplyr::select_(.data, .dots = c(names(.data)[sapply(.data, which)] , .and.dots))
-    } else {
-      dplyr::select_(.data, .dots = names(.data)[sapply(.data, which)])
-    }
-  }
   
   last_over_first <- function(x){
     dplyr::last(x) / dplyr::first(x)

@@ -67,7 +67,7 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2012-13", WEI
                             wagey.cols, lfy.cols, cpiy.cols, derived.cols, Not.Inflated)
     
     generic.inflators <- 
-      generic_inflator(sample_file, vars = generic.cols, h = h, fy.year.of.sample.file = fy.year.of.sample.file)
+      generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = fy.year.of.sample.file)
     
     ## Inflate:
     if (TRUE){  # we may use this option later
