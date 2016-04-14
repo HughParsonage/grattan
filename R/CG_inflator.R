@@ -56,6 +56,7 @@ CG_inflator <- function(x = 1, from_fy, to_fy){
   prohibit_vector_recycling(x, from_fy, to_fy)
   stopifnot(is.numeric(x), all(is.fy(from_fy)), all(is.fy(to_fy)))
   
+
   input <- 
     data.table::data.table(cg = x, from_fy = from_fy, to_fy = to_fy)
   
