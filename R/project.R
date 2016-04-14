@@ -21,7 +21,8 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2012-13", WEI
     wage.inflator <- wage_inflator(1, from_fy = current.fy, to_fy = to.fy)
     lf.inflator <- lf_inflator_fy(from_fy = current.fy, to_fy = to.fy)
     cpi.inflator <- cpi_inflator(1, from_fy = current.fy, to_fy = to.fy)
-    CGT.inflator <- CGT_inflator(1, from_fy = current.fy, to_fy = to.fy)
+    # CGT.inflator <- CGT_inflator(1, from_fy = current.fy, to_fy = to.fy)
+    CG.inflator <- CGT_inflator(1, from_fy = current.fy, to_fy = to.fy)
     
     col.names <- names(sample_file)
     
@@ -81,7 +82,7 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2012-13", WEI
         data.table::set(sample_file, j = j, value = cpi.inflator * sample_file[[j]])
       
       for (j in which(col.names %in% CGTy.cols))
-        data.table::set(sample_file, j = j, value = CGT.inflator * sample_file[[j]])
+        data.table::set(sample_file, j = j, value = CG.inflator * sample_file[[j]])
       
       for (j in which(col.names %in% generic.cols)){
         stopifnot("variable" %in% names(generic.inflators))  ## super safe
