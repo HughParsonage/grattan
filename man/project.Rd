@@ -5,7 +5,8 @@
 \title{A function for simple projections of sample files}
 \usage{
 project(sample_file, h = 0L, fy.year.of.sample.file = "2012-13",
-  WEIGHT = 50L, excl_vars)
+  WEIGHT = 50L, excl_vars, forecast.dots = list(estimator = "mean",
+  pred_interval = 80))
 }
 \arguments{
 \item{sample_file}{A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.}
@@ -17,6 +18,8 @@ project(sample_file, h = 0L, fy.year.of.sample.file = "2012-13",
 \item{WEIGHT}{The sample weight for the sample file. (So a 2\% file has \code{WEIGHT} = 50.)}
 
 \item{excl_vars}{A character vector of column names in \code{sample_file} that should not be inflated. Columns not present in the 2013-14 sample file are not inflated and nor are the columns \code{Ind}, \code{Gender}, \code{age_range}, \code{Occ_code}, \code{Partner_status}, \code{Region}, \code{Lodgment_method}, and \code{PHI_Ind}.}
+
+\item{forecast.dots}{A list containing parameters to be passed to \code{generic_inflator}.}
 }
 \value{
 A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).
