@@ -20,6 +20,6 @@ prohibit_vector_recycling <- function(...){
   lengths <- vapply(list(...), FUN = length, FUN.VALUE = 0L)
   max.length <- max(lengths)
   if (any(lengths != 1L & lengths != max.length)){
-    stop("Inputs must be of equal length, or length 1")
+    stop("Only permissible vector lengths are 1 or the maximum (nrow) of the inputs.")
   }
 }
