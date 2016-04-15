@@ -9,3 +9,9 @@ select_which_ <- function(.data, Which, .and.dots){
     dplyr::select_(.data, .dots = names(.data)[sapply(.data, Which)])
   }
 }
+
+unselect_ <- function(.data, .dots){
+  all_names <- names(.data)
+  keeps <- names(.data)[!names(.data) %in% .dots]
+  dplyr::select_(.data, .dots = keeps)
+}
