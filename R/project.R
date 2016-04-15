@@ -5,11 +5,12 @@
 #' @param fy.year.of.sample.file The financial year of \code{sample_file}.
 #' @param WEIGHT The sample weight for the sample file. (So a 2\% file has \code{WEIGHT} = 50.)
 #' @param excl_vars A character vector of column names in \code{sample_file} that should not be inflated. Columns not present in the 2013-14 sample file are not inflated and nor are the columns \code{Ind}, \code{Gender}, \code{age_range}, \code{Occ_code}, \code{Partner_status}, \code{Region}, \code{Lodgment_method}, and \code{PHI_Ind}.
+#' @param forecast.dots A list containing parameters to be passed to \code{generic_inflator}.
 #' @return A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).
 #' @import data.table
 #' @export
 
-project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2012-13", WEIGHT = 50L, excl_vars){
+project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2012-13", WEIGHT = 50L, excl_vars, forecast.dots = list(estimator = "mean", pred_interval = 80)){
   stopifnot(is.integer(h), h >= 0L, data.table::is.data.table(sample_file))
   
   sample_file %<>% dplyr::mutate(WEIGHT = WEIGHT)
@@ -68,7 +69,8 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2012-13", WEI
                             wagey.cols, lfy.cols, cpiy.cols, derived.cols, Not.Inflated)
     
     generic.inflators <- 
-      generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = fy.year.of.sample.file)
+      generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = fy.year.of.sample.file, 
+                       estimator = forecast.dots$estimator, pred_interval = forecast.dots$pred_interval)
     
     ## Inflate:
     if (TRUE){  # we may use this option later
