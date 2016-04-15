@@ -8,14 +8,8 @@ CG_population_inflator <- function(x = 1, from_fy, to_fy){
   last_fy <- max(from_fy, to_fy)
   last_year <- fy2yr(last_fy)
   
-  unique_fys <- 
-    data.table::data.table(from_fy = from_fy, 
-                           to_fy = to_fy) %>%
-    data.table::setkey(from_fy, to_fy) %>%
-    unique(.)
-  
   input <- 
-    data.table::data.table(n_cg = x, from_fy = from_fy, to_fy = to_fy)
+    data.table::data.table(x = x, from_fy = from_fy, to_fy = to_fy)
   
   n_cg_history <- 
     data.table::as.data.table(taxstats::individuals_table1_201314) %>%
@@ -23,6 +17,7 @@ CG_population_inflator <- function(x = 1, from_fy, to_fy){
     dplyr::filter(!is.na(Count))  %>%
     dplyr::select(fy_year, n_CG = Count)
   
+  # Only attempt a forecast if required.
   if (last_year > 2014){
     population_forecast <- 
       forecast::forecast(n_cg_history$n_CG, h = last_year - 2014) 
@@ -47,7 +42,7 @@ CG_population_inflator <- function(x = 1, from_fy, to_fy){
     merge(out_tbl, by.x = "to_fy", by.y = "fy_year", all.x = TRUE, sort = FALSE) %>% 
     data.table::setnames("n_CG", "n_CG_to") %$%
     {
-      n_cg * n_CG_to / n_CG_from
+      x * n_CG_to / n_CG_from
     }
 }
   
@@ -55,27 +50,57 @@ CG_population_inflator <- function(x = 1, from_fy, to_fy){
 CG_inflator <- function(x = 1, from_fy, to_fy){
   prohibit_vector_recycling(x, from_fy, to_fy)
   stopifnot(is.numeric(x), all(is.fy(from_fy)), all(is.fy(to_fy)))
-  
 
   input <- 
-    data.table::data.table(cg = x, from_fy = from_fy, to_fy = to_fy)
+    data.table::data.table(x = x, from_fy = from_fy, to_fy = to_fy)
+  
+  # discounts
+  taxstats::sample_files_all %>%
+    dplyr::filter(Net_CG_amt > 0) %>%
+    dplyr::mutate(apparent_discount = round(1 - Net_CG_amt / Tot_CY_CG_amt, 1)) %>% 
+    dplyr::count(apparent_discount) %>%
+    dplyr::mutate(p = n / sum(n))
+  
+    revenue_foregone_from_sample_files <-
+      sample_files_all %>%
+      # for sapto purposes, only care whether or not >= 65
+      # turns out sapto has little effect. Somewhat surprising given 
+      # amount of CG in that age group: should verify.
+      # merge(age_range_decoder, by = "age_range") %>%
+      # mutate(age = ifelse(age_range_description %in% c("65 to 69", "70 and over"), 70, 42)) %>%
+      mutate(age = 42) %>% 
+      mutate(tax_no_discount = income_tax(Taxable_Income + ifelse(Tot_CY_CG_amt > 0, 
+                                                                  # only change if the discount seems to 
+                                                                  # be in effect
+                                                                  ifelse(1 - Net_CG_amt / Tot_CY_CG_amt > 0.49,
+                                                                         Net_CG_amt,
+                                                                         0), 
+                                                                  0), fy.year = fy.year, age = age),
+             actual_tax = income_tax(Taxable_Income, fy.year = fy.year, age = age)) %>%
+      group_by(fy.year) %>%
+      summarise(revenue_foregone = sum((tax_no_discount - actual_tax) * WEIGHT))
+    
+  
   
   cg_table <- 
     taxstats::sample_files_all %>%
     dplyr::select(fy.year, Taxable_Income, Net_CG_amt) %>%
     dplyr::filter(Net_CG_amt > 0) %>%
-    dplyr::mutate(marginal_rate_first = income_tax(Taxable_Income + 1, fy.year = fy.year) - income_tax(Taxable_Income, fy.year = fy.year)) %>%
+    dplyr::mutate(marginal_rate_first = income_tax(Taxable_Income + 1, 
+                                                   fy.year = fy.year) - income_tax(Taxable_Income, 
+                                                                                   fy.year = fy.year)) %>%
     dplyr::mutate(marginal_rate_last = (income_tax(Taxable_Income + Net_CG_amt, fy.year = fy.year) - income_tax(Taxable_Income, fy.year = fy.year)) / Net_CG_amt) %>%
     dplyr::group_by(fy.year) %>%
     dplyr::summarise(mean_mr1 = mean(marginal_rate_first), 
-              mean_wmr1 = weighted.mean(marginal_rate_first, Net_CG_amt), 
-              mean_mrL = mean(marginal_rate_last), 
-              mean_wmrL = weighted.mean(marginal_rate_last, Net_CG_amt)) %>% 
+                     mean_wmr1 = weighted.mean(marginal_rate_first, Net_CG_amt), 
+                     mean_mrL = mean(marginal_rate_last), 
+                     mean_wmrL = weighted.mean(marginal_rate_last, Net_CG_amt)) %>% 
     merge(cgt_expenditures, by.x = "fy.year", by.y = "FY", all = TRUE) %>% 
-    dplyr::select(-URL, -Projected) %>%
+    # dplyr::select_(.dots = c(-URL, -Projected) %>%
+    unselect_(.dots = c("URL", "Projected")) %>%
     dplyr::rename(revenue_foregone = CGT_discount_for_individuals_and_trusts_millions) %>%
     dplyr::mutate(revenue_foregone = revenue_foregone * 10^6,
-           zero_discount_Net_CG_total = revenue_foregone / mean(mean_wmrL, na.rm = TRUE)) %>%
+                  zero_discount_Net_CG_total = revenue_foregone / mean(mean_wmrL, na.rm = TRUE)) %>%
     dplyr::select(fy.year, zero_discount_Net_CG_total)
   
   raw_out <- 
@@ -85,15 +110,15 @@ CG_inflator <- function(x = 1, from_fy, to_fy){
     merge(cg_table, by.y = "fy.year", by.x = "to_fy", all.x = TRUE) %>%
     data.table::setnames("zero_discount_Net_CG_total", "to_cg") %$%
     {
-      cg * to_cg / from_cg
+      x * to_cg / from_cg
     }
   
+  # The tax expenditures reflect totals, not means, so we need to adjust for
+  # totals.
   raw_out / CG_population_inflator(1, from_fy = from_fy, to_fy = to_fy)
-  
-      
-      
-    
 }
+
+
 #   
 #   if (FALSE){
 #   net_cg_history <- 
@@ -143,12 +168,7 @@ CG_inflator <- function(x = 1, from_fy, to_fy){
 #   # the whole gain. (Since 50% discount.)
 # 
 #   
-#   revenue_foregone_from_sample_files <- 
-#     sample_files_all %>%
-#     mutate(tax_no_discount = income_tax(Taxable_Income + Net_CG_amt, fy.year = fy.year), 
-#            actual_tax = income_tax(Taxable_Income, fy.year = fy.year)) %>%
-#     group_by(fy.year) %>%
-#     summarise(revenue_foregone = sum((tax_no_discount - actual_tax) * WEIGHT))
+
 #     
 #   trusts_cgt_history <- 
 #     trusts_table1_201314 %>% 
