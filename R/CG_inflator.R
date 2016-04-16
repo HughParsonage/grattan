@@ -54,31 +54,31 @@ CG_inflator <- function(x = 1, from_fy, to_fy){
   input <- 
     data.table::data.table(x = x, from_fy = from_fy, to_fy = to_fy)
   
-  # discounts
-  taxstats::sample_files_all %>%
-    dplyr::filter(Net_CG_amt > 0) %>%
-    dplyr::mutate(apparent_discount = round(1 - Net_CG_amt / Tot_CY_CG_amt, 1)) %>% 
-    dplyr::count(apparent_discount) %>%
-    dplyr::mutate(p = n / sum(n))
-  
-    revenue_foregone_from_sample_files <-
-      sample_files_all %>%
-      # for sapto purposes, only care whether or not >= 65
-      # turns out sapto has little effect. Somewhat surprising given 
-      # amount of CG in that age group: should verify.
-      # merge(age_range_decoder, by = "age_range") %>%
-      # mutate(age = ifelse(age_range_description %in% c("65 to 69", "70 and over"), 70, 42)) %>%
-      mutate(age = 42) %>% 
-      mutate(tax_no_discount = income_tax(Taxable_Income + ifelse(Tot_CY_CG_amt > 0, 
-                                                                  # only change if the discount seems to 
-                                                                  # be in effect
-                                                                  ifelse(1 - Net_CG_amt / Tot_CY_CG_amt > 0.49,
-                                                                         Net_CG_amt,
-                                                                         0), 
-                                                                  0), fy.year = fy.year, age = age),
-             actual_tax = income_tax(Taxable_Income, fy.year = fy.year, age = age)) %>%
-      group_by(fy.year) %>%
-      summarise(revenue_foregone = sum((tax_no_discount - actual_tax) * WEIGHT))
+  # # discounts
+  # taxstats::sample_files_all %>%
+  #   dplyr::filter(Net_CG_amt > 0) %>%
+  #   dplyr::mutate(apparent_discount = round(1 - Net_CG_amt / Tot_CY_CG_amt, 1)) %>% 
+  #   dplyr::count(apparent_discount) %>%
+  #   dplyr::mutate(p = n / sum(n))
+  # 
+  #   revenue_foregone_from_sample_files <-
+  #     sample_files_all %>%
+  #     # for sapto purposes, only care whether or not >= 65
+  #     # turns out sapto has little effect. Somewhat surprising given 
+  #     # amount of CG in that age group: should verify.
+  #     # merge(age_range_decoder, by = "age_range") %>%
+  #     # mutate(age = ifelse(age_range_description %in% c("65 to 69", "70 and over"), 70, 42)) %>%
+  #     mutate(age = 42) %>% 
+  #     mutate(tax_no_discount = income_tax(Taxable_Income + ifelse(Tot_CY_CG_amt > 0, 
+  #                                                                 # only change if the discount seems to 
+  #                                                                 # be in effect
+  #                                                                 ifelse(1 - Net_CG_amt / Tot_CY_CG_amt > 0.49,
+  #                                                                        Net_CG_amt,
+  #                                                                        0), 
+  #                                                                 0), fy.year = fy.year, age = age),
+  #            actual_tax = income_tax(Taxable_Income, fy.year = fy.year, age = age)) %>%
+  #     group_by(fy.year) %>%
+  #     summarise(revenue_foregone = sum((tax_no_discount - actual_tax) * WEIGHT))
     
   
   
