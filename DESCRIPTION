@@ -24,7 +24,8 @@ Imports:
     readr, 
     zoo, 
     lazyeval, 
-    purrr
+    purrr, 
+    xtable
 LinkingTo: Rcpp
 RoxygenNote: 5.0.1
 Suggests: testthat, taxstats
