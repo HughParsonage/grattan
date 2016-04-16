@@ -4,6 +4,7 @@
 #' @param separator A regular expression that splits the top and bottom rows. If the separator is not found in the names of \code{.data}, the function returns an error (saying you should probably just use \code{print.xtable()})
 #' @param xtable.align Passed to \code{xtable}: Character vector of length equal to the number of columns of the resulting table, indicating the alignment of the corresponding columns.
 #' @param booktabs Should the tabular environment produced use booktabs? Set to TRUE for (my) convenience. This will cause an error if  \verb{\usepackage{booktabs}} has not been called in LaTeX.
+#' @param heading_command A (simple) LaTeX control sequence (properly escaped) to apply to each heading names.
 #' @param ... Arguments passed to \code{print.xtable}. You cannot pass \code{add.to.row}, \code{include.rownames}, or \code{include.colnames} as we make use of these options in this function.  
 #' @return Output intended for LaTeX. A table produced using xtable where groups of column names are put in the top row. 
 #' @author Hugh Parsonage
@@ -23,7 +24,11 @@
 #' print_2heading_xtable(example_df, separator = "__")
 #' @export
 
-print_2heading_xtable <- function(.data, separator = "__", xtable.align = NULL, booktabs = TRUE, ...){
+print_2heading_xtable <- function(.data, 
+                                  separator = "__", 
+                                  xtable.align = NULL, 
+                                  booktabs = TRUE, 
+                                  heading_command = "\\textbf", ...){
   orig_names <- names(.data)
   if (!any(grepl(separator, orig_names))){
     stop("No separator found in column names, so there is no point in using this function. Make sure you have specified the right separator; otherwise, just use print.xtable().")
@@ -69,13 +74,16 @@ print_2heading_xtable <- function(.data, separator = "__", xtable.align = NULL, 
   first_row <- 
     unique(double_row_column_names[1,])
   
+  first_row_formatted <- 
+    paste0(heading_command, "{", first_row, "}")
+  
   top_row <- character(length(first_row))
   
   # Could do paste0() directly but decided that it would 
   # avoid the point which is to add \multicolumn only to the rows that call for it.
   for (ii in seq_along(first_row)){
     if (first_row[ii] %in% top_headers){
-      top_row[ii] <- paste0("\\multicolumn{", top_headers_widths$Freq[ii], "}{c}{", first_row[ii], "}")
+      top_row[ii] <- paste0("\\multicolumn{", top_headers_widths$Freq[ii], "}{c}{", first_row_formatted[ii], "}")
     }
   }
   rm(ii)
@@ -93,7 +101,10 @@ print_2heading_xtable <- function(.data, separator = "__", xtable.align = NULL, 
     paste0(paste0(between_row, collapse = ""))
   
   for_latex_second_row <- 
-    paste0(paste0(double_row_column_names[2,], collapse = " & "), "\\\\")
+    paste0(heading_command, "{", double_row_column_names[2,], "}")
+  
+  for_latex_second_row <- 
+    paste0(paste0(for_latex_second_row, collapse = " & "), "\\\\")
   
   addtorow <- list()
   addtorow$pos <- list(0, 0, 0)
