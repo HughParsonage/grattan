@@ -35,6 +35,10 @@
     "from_cg", 
     "n_CG_to",
     "n_CG_from",
+    "revenue_foregone",
+    "mean_wmrL",
+    "zero_discount_Net_CG_total",
+    
     
     # Taxstats Table 1
     "Selected_items", 
