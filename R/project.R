@@ -23,7 +23,7 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2012-13", WEI
     lf.inflator <- lf_inflator_fy(from_fy = current.fy, to_fy = to.fy)
     cpi.inflator <- cpi_inflator(1, from_fy = current.fy, to_fy = to.fy)
     # CGT.inflator <- CGT_inflator(1, from_fy = current.fy, to_fy = to.fy)
-    CG.inflator <- CGT_inflator(1, from_fy = current.fy, to_fy = to.fy)
+    CG.inflator <- CG_inflator(1, from_fy = current.fy, to_fy = to.fy)
     
     col.names <- names(sample_file)
     
