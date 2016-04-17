@@ -1,10 +1,16 @@
-#' CG_inflator
+#' Forecasting capital gains
 #' 
+#' @name CG_population_inflator
 #' @param x To be inflated.
 #' @param from_fy,to_fy Financial years designating the inflation period.
-#' @return An estimate of \code{x} inflated in \code{to_fy}
+#' @param estimator One of \code{"mean"}, \code{"lower"}, \code{"upper"}. What estimator to use in forecasts. \code{"lower"} and \code{"upper"} give the lower and upper boundaries of the prediction interval,
+#' @param prediction_interval A single value specifying the prediction interval to be used if \code{estimator} is \code{"lower"} or \code{"upper"}. By default, \code{80}, i.e. an 80\% prediction interval.
+#' @return An estimate of \code{x} inflated to \code{to_fy}
 
-CG_population_inflator <- function(x = 1, from_fy, to_fy){
+CG_population_inflator <- function(x = 1, from_fy, to_fy, estimator = "mean", prediction_interval = 80){
+  stopifnot(all(is.fy(c(from_fy, to_fy))))
+  stopifnot(estimator %in% c("mean", "lower", "upper"))
+  
   last_fy <- max(from_fy, to_fy)
   last_year <- fy2yr(last_fy)
   
@@ -20,18 +26,37 @@ CG_population_inflator <- function(x = 1, from_fy, to_fy){
   # Only attempt a forecast if required.
   if (last_year > 2014){
     population_forecast <- 
-      forecast::forecast(n_cg_history$n_CG, h = last_year - 2014) 
+      forecast::forecast(n_cg_history$n_CG, h = last_year - 2014, level = prediction_interval) 
     
-    forecast_tbl <- 
-      data.table::data.table(
-        fy_year = yr2fy(2015:last_year),
-        n_CG = as.numeric(population_forecast$mean)
-      )
+    
+    switch(estimator == c("mean", 
+                          "lower", 
+                          "upper"),
+           forecast_tbl <- 
+             data.table::data.table(
+               fy_year = yr2fy(2015:last_year),
+               n_CG = as.numeric(population_forecast$mean)
+             ), 
+           
+           forecast_tbl <- 
+             data.table::data.table(
+               fy_year = yr2fy(2015:last_year),
+               n_CG = as.numeric(population_forecast$lower)
+             ), 
+           
+           forecast_tbl <- 
+             data.table::data.table(
+               fy_year = yr2fy(2015:last_year),
+               n_CG = as.numeric(population_forecast$upper)
+             )
+    )
+    
     out_tbl <- 
       rbind(forecast_tbl, 
             n_cg_history, 
             use.names = TRUE, 
             fill = TRUE)
+    
   } else {
     out_tbl <- n_cg_history
   }
@@ -46,8 +71,10 @@ CG_population_inflator <- function(x = 1, from_fy, to_fy){
     }
 }
   
+#' @rdname CG_population_inflator
+#' @param ... Passed to \code{CG_population_inflator}
 
-CG_inflator <- function(x = 1, from_fy, to_fy){
+CG_inflator <- function(x = 1, from_fy, to_fy, ...){
   prohibit_vector_recycling(x, from_fy, to_fy)
   stopifnot(is.numeric(x), all(is.fy(from_fy)), all(is.fy(to_fy)))
 
@@ -115,7 +142,7 @@ CG_inflator <- function(x = 1, from_fy, to_fy){
   
   # The tax expenditures reflect totals, not means, so we need to adjust for
   # totals.
-  raw_out / CG_population_inflator(1, from_fy = from_fy, to_fy = to_fy)
+  raw_out / CG_population_inflator(1, from_fy = from_fy, to_fy = to_fy, ...)
 }
 
 
