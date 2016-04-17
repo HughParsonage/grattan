@@ -29,9 +29,9 @@ CG_population_inflator <- function(x = 1, from_fy, to_fy, estimator = "mean", pr
       forecast::forecast(n_cg_history$n_CG, h = last_year - 2014, level = prediction_interval) 
     
     
-    switch(estimator == c("mean", 
-                          "lower", 
-                          "upper"),
+    switch(which(estimator == c("mean", 
+                                "lower", 
+                                "upper")),
            forecast_tbl <- 
              data.table::data.table(
                fy_year = yr2fy(2015:last_year),
