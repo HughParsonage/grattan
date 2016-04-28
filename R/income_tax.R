@@ -179,14 +179,17 @@ rolling_income_tax <- function(income,
                   fy.year = fy.year, 
                   sapto.eligible = sapto.eligible, 
                   family_status = if (missing(.dots.ATO) || "Spouse_adjusted_taxable_inc" %notin% names(.dots.ATO)){
-                    "individual"
+                    family_status
                   } else {
                     ifelse(.dots.ATO$Spouse_adjusted_taxable_inc > 0, "family", "individual")
                   }, 
                   n_dependants = n_dependants)
   lito. <- .lito(income, fy.year)
   
-  if (!is.null(.dots.ATO) && !missing(.dots.ATO)){
+  if (!is.null(.dots.ATO) && !missing(.dots.ATO) && all(c("Rptbl_Empr_spr_cont_amt",
+                                                          "Net_fincl_invstmt_lss_amt",
+                                                          "Net_rent_amt", 
+                                                          "Rep_frng_ben_amt") %in% names(.dots.ATO))){
     sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income,
                                                                    Rptbl_Empr_spr_cont_amt = .dots.ATO$Rptbl_Empr_spr_cont_amt,
                                                                    Net_fincl_invstmt_lss_amt = .dots.ATO$Net_fincl_invstmt_lss_amt,
