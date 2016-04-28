@@ -22,6 +22,10 @@
 #' @export 
 
 income_tax <- function(income, fy.year, age = 42, family_status = "individual", n_dependants = 0L, sample_file, .dots.ATO = NULL, return.mode = "numeric", allow.forecasts = FALSE){
+  if (missing(fy.year)){
+    stop("fy.year is missing, with no default")
+  }
+  
   if (any(!is.fy(fy.year))){
     bad <- which(!is.fy(fy.year))
     if (length(bad) > 5){
@@ -34,14 +38,28 @@ income_tax <- function(income, fy.year, age = 42, family_status = "individual", 
   }
   
   if (allow.forecasts || any(fy.year %notin% tax_tbl$fy_year)){
-    stop("rolling income tax not intended for future years or years before 2003-04. Consider old_income_tax() or new_income_tax().")
+    stop("rolling income tax not intended for future years or years before 2003-04. ",
+         "Consider old_income_tax() or new_income_tax().")
   }
   
   if (any(income < 0)){
     warning("Negative entries in income detected. These will have value NA.")
   }
   
-  rolling_income_tax(income = income, fy.year = fy.year, age = age, family_status = family_status, n_dependants = n_dependants, sample_file = sample_file, .dots.ATO = .dots.ATO)
+  if (!missing(.dots.ATO)){
+    if (!is.data.frame(.dots.ATO)){
+      stop(".dots.ATO should be a data frame/data table")
+    } else {
+      if (nrow(.dots.ATO) != length(income)){
+        stop("Number of rows of .dots.ATO does not match length of income.")
+      }
+    }
+    
+  }
+  
+  rolling_income_tax(income = income, fy.year = fy.year, age = age, 
+                     family_status = family_status, n_dependants = n_dependants, 
+                     sample_file = sample_file, .dots.ATO = .dots.ATO)
 }
 
 
@@ -57,9 +75,7 @@ rolling_income_tax <- function(income,
   # CRAN NOTE avoidance
   fy_year <- NULL; marginal_rate <- NULL; lower_bracket <- NULL; tax_at <- NULL; n <- NULL; tax <- NULL; ordering <- NULL; max_lito <- NULL; min_bracket <- NULL; lito_taper <- NULL; sato <- NULL; taper <- NULL; rate <- NULL; max_offset <- NULL; upper_threshold <- NULL; taper_rate <- NULL; medicare_income <- NULL; lower_up_for_each_child <- NULL;
   
-  if (missing(fy.year)){
-    stop("fy.year is missing, with no default")
-  }
+  
   
   if (return.mode != "numeric"){
     stop("return.mode must be set to numeric only. Future versions may allow differently.")
@@ -162,7 +178,11 @@ rolling_income_tax <- function(income,
                   },
                   fy.year = fy.year, 
                   sapto.eligible = sapto.eligible, 
-                  family_status = family_status, 
+                  family_status = if (missing(.dots.ATO) || "Spouse_adjusted_taxable_inc" %notin% names(.dots.ATO)){
+                    "individual"
+                  } else {
+                    ifelse(.dots.ATO$Spouse_adjusted_taxable_inc > 0, "family", "individual")
+                  }, 
                   n_dependants = n_dependants)
   lito. <- .lito(income, fy.year)
   
