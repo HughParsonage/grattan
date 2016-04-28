@@ -3,6 +3,7 @@ context("Individual income tax")
 
 test_that("income_tax returns known results",{
   
+  # All numbers are from the ATO comprehensive tax calculator. 
   expect_equal(income_tax(50e3, fy.year = "2012-13"), 8297)
   expect_equal(income_tax(60e3, fy.year = "2012-13"), 11847)
   expect_equal(income_tax(70e3, fy.year = "2012-13"), 15347)
@@ -13,6 +14,7 @@ test_that("income_tax returns known results",{
   expect_equal(income_tax(40e3, "2013-14", family_status = "family", n_dependants = 1L), 4394.70)
   # different rounding treatment.
   expect_equal(round(income_tax(40e3, "2013-14", family_status = "family", n_dependants = 0L, age = 66)), 2882)
+  expect_equal(income_tax(40e3, "2013-14", family_status = "family", n_dependants = 2L), 4747)
   
   expect_equal(income_tax(31993, fy.year = "2014-15"), 2815.53)
   expect_equal(income_tax(31993, fy.year = "2014-15", age = 70), 0)
