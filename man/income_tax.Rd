@@ -5,8 +5,8 @@
 \title{tax function}
 \usage{
 income_tax(income, fy.year, age = 42, family_status = "individual",
-  sample_file, .dots.ATO = NULL, return.mode = "numeric",
-  allow.forecasts = FALSE)
+  n_dependants = 0L, sample_file, .dots.ATO = NULL,
+  return.mode = "numeric", allow.forecasts = FALSE)
 }
 \arguments{
 \item{income}{the personal assessable income}
@@ -17,11 +17,13 @@ income_tax(income, fy.year, age = 42, family_status = "individual",
 
 \item{family_status}{For medicare and sapto purposes. Still in development.}
 
+\item{n_dependants}{An integer for the number of children of the taxpayer (for the purposes of the Medicare levy).}
+
 \item{sample_file}{(Not yet used) A sample file \code{data.table} for which the income tax payable is desired on each row.}
 
 \item{.dots.ATO}{A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files.}
 
-\item{return.mode}{use numeric or integer}
+\item{return.mode}{use numeric (integer not yet implemented).}
 
 \item{allow.forecasts}{should dates beyond 2014-15 be permitted?}
 }

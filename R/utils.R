@@ -15,3 +15,7 @@ unselect_ <- function(.data, .dots){
   keeps <- names(.data)[!names(.data) %in% .dots]
   dplyr::select_(.data, .dots = keeps)
 }
+
+`%notin%` <- function(x, y) {
+  !(x %in% y)
+}

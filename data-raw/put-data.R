@@ -5,14 +5,22 @@ tax_tbl <-
   data.table::fread("./data-raw/tax-brackets-and-marginal-rates-by-fy.tsv")
 
 lito_tbl <- 
-  data.table::setkey(data.table::fread("./data-raw/lito-info.tsv"), fy_year)
+  data.table::setkey(data.table::fread("./data-raw/lito-info.tsv", select = c("fy_year", "max_lito", "lito_taper", "min_bracket")), fy_year)
 
 medicare_tbl_indiv <- 
   readxl::read_excel("./data-raw/medicare-tables.xlsx", sheet = "indiv") %>%
-  data.table::as.data.table(.) %>%
-  data.table::setkey(fy_year, sato) %>%
+  data.table::as.data.table(.)
+
+medicare_tbl_families <- 
+  readxl::read_excel("./data-raw/medicare-tables.xlsx", sheet = "families") %>%
+  data.table::as.data.table(.)
+
+medicare_tbl <- 
+  data.table::rbindlist(list(medicare_tbl_indiv, medicare_tbl_families), use.names = TRUE, fill = TRUE) %>%
+  dplyr::mutate_each(funs(as.logical), sato, pto, sapto) %>%
+  data.table::setkey(fy_year, sapto, family_status) %>%
   # avoid cartesian joins
-  unique 
+  unique
 
 sapto_tbl <- 
   readxl::read_excel("./data-raw/SAPTO-rates.xlsx", sheet = 1) %>% 
@@ -42,7 +50,7 @@ cpi_unadj <-
   data.table::fread("./data-raw/cpi-unadjusted-manual.tsv")
 
 cpi_seasonal_adjustment <- 
-  data.table::fread("./data-raw/cpi-seasonally-adjusted-manual.tsv") # bump
+  data.table::fread("./data-raw/cpi-seasonally-adjusted-manual.tsv", select = c("obsTime", "obsValue")) 
 
 cpi_trimmed <-
   data.table::fread("./data-raw/cpi-trimmed-mean-manual.tsv")
@@ -59,7 +67,7 @@ cgt_expenditures <-
 
 devtools::use_data(lito_tbl, 
                    tax_tbl, 
-                   medicare_tbl_indiv, 
+                   medicare_tbl, 
                    sapto_tbl,
                    hecs_tbl,
                    cpi_unadj,
