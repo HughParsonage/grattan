@@ -5,7 +5,8 @@
 #' @param fy.year the financial year in which the income was earned
 #' @param age the individual's age
 #' @param family_status For medicare and sapto purposes. Still in development.
-#' @param return.mode use numeric or integer
+#' @param n_dependants An integer for the number of children of the taxpayer (for the purposes of the Medicare levy).
+#' @param return.mode use numeric (integer not yet implemented).
 #' @param sample_file (Not yet used) A sample file \code{data.table} for which the income tax payable is desired on each row.
 #' @param .dots.ATO A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files.
 #' @param allow.forecasts should dates beyond 2014-15 be permitted?
@@ -20,7 +21,7 @@
 #' @return the total personal income tax payable
 #' @export 
 
-income_tax <- function(income, fy.year, age = 42, family_status = "individual", sample_file, .dots.ATO = NULL, return.mode = "numeric", allow.forecasts = FALSE){
+income_tax <- function(income, fy.year, age = 42, family_status = "individual", n_dependants = 0L, sample_file, .dots.ATO = NULL, return.mode = "numeric", allow.forecasts = FALSE){
   if (any(!is.fy(fy.year))){
     bad <- which(!is.fy(fy.year))
     if (length(bad) > 5){
@@ -32,7 +33,7 @@ income_tax <- function(income, fy.year, age = 42, family_status = "individual", 
     }
   }
   
-  if (allow.forecasts || any(!(fy.year %in% tax_tbl$fy_year))){
+  if (allow.forecasts || any(fy.year %notin% tax_tbl$fy_year)){
     stop("rolling income tax not intended for future years or years before 2003-04. Consider old_income_tax() or new_income_tax().")
   }
   
@@ -40,34 +41,35 @@ income_tax <- function(income, fy.year, age = 42, family_status = "individual", 
     warning("Negative entries in income detected. These will have value NA.")
   }
   
-  rolling_income_tax(income = income, fy.year = fy.year, age = age, family_status = family_status, sample_file = sample_file, .dots.ATO = .dots.ATO)
+  rolling_income_tax(income = income, fy.year = fy.year, age = age, family_status = family_status, n_dependants = n_dependants, sample_file = sample_file, .dots.ATO = .dots.ATO)
 }
 
 
 # rolling_income_tax is inflexible by design: returns the tax payable in the fy.year; no scope for policy change.
 rolling_income_tax <- function(income, 
                                fy.year, 
-                               age = 42, # answer to life, more importantly < 65.
+                               age = 42, # answer to life, more importantly < 65, and so key to SAPTO, medicare
                                family_status = "individual",
+                               n_dependants = 0L,
                                sample_file,
                                .dots.ATO = NULL, 
                                return.mode = "numeric"){
   # CRAN NOTE avoidance
-  fy_year <- NULL; marginal_rate <- NULL; lower_bracket <- NULL; tax_at <- NULL; n <- NULL; tax <- NULL; ordering <- NULL; max_lito <- NULL; min_bracket <- NULL; lito_taper <- NULL; sato <- NULL; taper <- NULL; rate <- NULL; max_offset <- NULL; upper_threshold <- NULL; taper_rate <- NULL
+  fy_year <- NULL; marginal_rate <- NULL; lower_bracket <- NULL; tax_at <- NULL; n <- NULL; tax <- NULL; ordering <- NULL; max_lito <- NULL; min_bracket <- NULL; lito_taper <- NULL; sato <- NULL; taper <- NULL; rate <- NULL; max_offset <- NULL; upper_threshold <- NULL; taper_rate <- NULL; lower_up_for_each_child <- NULL;
   
   if (missing(fy.year)){
     stop("fy.year is missing, with no default")
   }
   
   if (return.mode != "numeric"){
-    stop("return.mode must currently be set to numeric only")
+    stop("return.mode must be set to numeric only. Future versions may allow differently.")
   }
   # Assume everyone of pension age is eligible for sapto.
   sapto.eligible = age >= 65
   # Don't like vector recycling
   # http://stackoverflow.com/a/9335687/1664978
-  prohibit_vector_recycling(income, fy.year)
-  prohibit_length0_vectors(income, fy.year)
+  prohibit_vector_recycling(income, fy.year, age, family_status, n_dependants)
+  prohibit_length0_vectors(income, fy.year, age, family_status, n_dependants)
 
   # tax_table2 provides the raw tax tables, but also the amount
   # of tax paid at each bracket, to make the rolling join 
@@ -114,33 +116,54 @@ rolling_income_tax <- function(income,
   }
 
   
-  medicare_levy <- function(income, fy.year,
+  medicare_levy <- function(income, 
+                            Spouse_income,
+                            fy.year,
                             sapto.eligible,
-                            family_status = "individual"){
-    # Temporary. The system table should have sapto
-    medicare_tbl_indiv <- 
-      medicare_tbl_indiv %>%
-      dplyr::mutate(sapto = as.logical(sato), 
-                    family_status = "individual") %>%
-      data.table::setkeyv(c("fy_year", "sapto", "family_status")) %>%
-      unique
-    
+                            family_status, 
+                            n_dependants){
     data.table::data.table(income = income, 
+                           Spouse_income = Spouse_income,
                            fy_year = fy.year,
                            sapto = sapto.eligible, 
                            family_status = family_status) %>%
-      merge(medicare_tbl_indiv, 
+      dplyr::mutate(
+        # Assume spouse income is included irrespective of Partner_status
+        # This appears to be the correct treatment (e.g. if the Partner dies 
+        # before the end of the tax year, they would have status 0 but 
+        # income that is relevant for medicare income).  There are details
+        # (such as if the partner is in gaol) that are overlooked here.
+        # 
+        # Enhancement: family taxable income should exclude super lump sums.
+        medicare_income = income + Spouse_income
+      ) %>%
+      merge(medicare_tbl, 
             by = c("fy_year", "sapto", "family_status"),
             sort = FALSE, 
             all.x = TRUE) %>%
-      dplyr::mutate(medicare_levy = pminV(pmaxC(taper * (income - lower_bracket), 
-                                                0), 
-                                          rate * income)) %$%
+      dplyr::mutate(
+        lower_bracket = lower_bracket + ifelse(!is.na(lower_up_for_each_child), 
+                                               lower_up_for_each_child * n_dependants, 
+                                               0L),
+        medicare_levy = pminV(pmaxC(taper * (medicare_income - lower_bracket),
+                                    0), 
+                              rate * income)
+        ) %$%
       medicare_levy
   }
   
   base_tax. <- tax_fun(income, fy.year = fy.year)
-  medicare_levy. <- medicare_levy(income, fy.year = fy.year, sapto.eligible = sapto.eligible)
+  medicare_levy. <- 
+    medicare_levy(income, 
+                  Spouse_income = if (missing(.dots.ATO) || "Spouse_adjusted_taxable_inc" %notin% names(.dots.ATO)){
+                    0
+                  } else {
+                    .dots.ATO$Spouse_adjusted_taxable_inc
+                  },
+                  fy.year = fy.year, 
+                  sapto.eligible = sapto.eligible, 
+                  family_status = family_status, 
+                  n_dependants = n_dependants)
   lito. <- .lito(income, fy.year)
   
   if (!is.null(.dots.ATO) && !missing(.dots.ATO)){
