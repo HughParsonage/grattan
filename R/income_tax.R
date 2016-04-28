@@ -21,6 +21,17 @@
 #' @export 
 
 income_tax <- function(income, fy.year, age = 42, family_status = "individual", sample_file, .dots.ATO = NULL, return.mode = "numeric", allow.forecasts = FALSE){
+  if (any(!is.fy(fy.year))){
+    bad <- which(!is.fy(fy.year))
+    if (length(bad) > 5){
+      stop("Entries ", bad[1:5], " (and others)", 
+           " were not in correct form.", "\n", "First bad entry: ", fy.year[bad[1]])
+    } else {
+      stop("Entries ", bad, 
+           " were not in correct form.", "\n", "First bad entry: ", fy.year[bad[1]])
+    }
+  }
+  
   if (allow.forecasts || any(!(fy.year %in% tax_tbl$fy_year))){
     stop("rolling income tax not intended for future years or years before 2003-04. Consider old_income_tax() or new_income_tax().")
   }
