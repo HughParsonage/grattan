@@ -4,7 +4,7 @@
 \alias{project_to}
 \title{A function for simple projections of sample files}
 \usage{
-project_to(sample_file, to_fy, fy.year.of.sample.file = "2012-13", ...)
+project_to(sample_file, to_fy, fy.year.of.sample.file = "2013-14", ...)
 }
 \arguments{
 \item{sample_file}{A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.}

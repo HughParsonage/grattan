@@ -10,7 +10,7 @@
 #' @import data.table
 #' @export
 
-project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2012-13", WEIGHT = 50L, excl_vars, forecast.dots = list(estimator = "mean", pred_interval = 80)){
+project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEIGHT = 50L, excl_vars, forecast.dots = list(estimator = "mean", pred_interval = 80)){
   stopifnot(is.integer(h), h >= 0L, data.table::is.data.table(sample_file))
   
   sample_file %<>% dplyr::mutate(WEIGHT = WEIGHT)

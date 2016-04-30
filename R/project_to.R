@@ -7,7 +7,7 @@
 #' @return A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).
 #' @export
 
-project_to <- function(sample_file, to_fy, fy.year.of.sample.file = "2012-13", ...){
+project_to <- function(sample_file, to_fy, fy.year.of.sample.file = "2013-14", ...){
   h <- as.integer(fy2yr(to_fy) - fy2yr(fy.year.of.sample.file))
   project(sample_file = sample_file, h = h, fy.year.of.sample.file = fy.year.of.sample.file, ...)
 }

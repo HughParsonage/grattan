@@ -4,7 +4,7 @@
 \alias{project}
 \title{A function for simple projections of sample files}
 \usage{
-project(sample_file, h = 0L, fy.year.of.sample.file = "2012-13",
+project(sample_file, h = 0L, fy.year.of.sample.file = "2013-14",
   WEIGHT = 50L, excl_vars, forecast.dots = list(estimator = "mean",
   pred_interval = 80))
 }
