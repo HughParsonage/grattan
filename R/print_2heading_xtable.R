@@ -65,7 +65,8 @@ print_2heading_xtable <- function(.data,
   }
   
   double_row_column_names <- 
-    rbind(gsub("^(.*)__(.*)$", "\\1", orig_names), gsub("^(.*)__(.*)$", "\\2", orig_names))
+    rbind(gsub(paste0("^(.*)", separator, "(.*)$"), "\\1", orig_names), 
+          gsub(paste0("^(.*)", separator, "(.*)$"), "\\2", orig_names))
   
   # factor etc in table to preserve order
   top_headers_widths <- 
