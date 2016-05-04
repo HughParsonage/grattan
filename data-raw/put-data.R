@@ -5,7 +5,10 @@ tax_tbl <-
   data.table::fread("./data-raw/tax-brackets-and-marginal-rates-by-fy.tsv")
 
 lito_tbl <- 
-  data.table::setkey(data.table::fread("./data-raw/lito-info.tsv", select = c("fy_year", "max_lito", "lito_taper", "min_bracket")), fy_year)
+  readxl::read_excel("./data-raw/lito-info.xlsx", sheet = 1) %>% dplyr::select(-source)
+
+lito_tbl %>% 
+  data.table::fwrite("./data-raw/lito-info.tsv", sep = "\t")
 
 medicare_tbl_indiv <- 
   readxl::read_excel("./data-raw/medicare-tables.xlsx", sheet = "indiv") %>%
@@ -22,12 +25,18 @@ medicare_tbl <-
   # avoid cartesian joins
   unique
 
+medicare_tbl %>% 
+  data.table::fwrite("medicare_tbl.tsv", sep = "\t")
+
 sapto_tbl <- 
   readxl::read_excel("./data-raw/SAPTO-rates.xlsx", sheet = 1) %>% 
   data.table::as.data.table(.) %>% 
   data.table::setkey(fy_year, family_status) %>% 
   # avoid cartesian joins in income_tax
   unique
+
+sapto_tbl %>%
+  data.table::fwrite("sapto_tbl.tsv", sep = "\t")
 
 hecs_tbl <- 
   openxlsx::readWorkbook("./data-raw/Historical HELP thresholds 1989 to 2015.xlsx", 
