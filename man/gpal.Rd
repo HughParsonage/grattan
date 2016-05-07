@@ -9,7 +9,9 @@ gpal(n, dark = TRUE, reverse = FALSE)
 \arguments{
 \item{n}{the number of variables/factors over which the palette is to paint}
 
-\item{dark}{Should a dark palette be used? (Only available for n=2)}
+\item{dark}{Should a dark palette be used? (Only available for n=2.)}
+
+\item{reverse}{(logical) Option to reverse the palette.}
 }
 \value{
 A vector of HTML colours to be used.

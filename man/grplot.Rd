@@ -8,6 +8,8 @@ grplot(..., reverse = FALSE)
 }
 \arguments{
 \item{...}{arguments passed to ggplot}
+
+\item{reverse}{(logical) Option to reverse the default palette.}
 }
 \description{
 Attempt to harness ggplot but set as much to default as possible

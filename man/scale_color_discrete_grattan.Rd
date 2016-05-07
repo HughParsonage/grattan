@@ -8,6 +8,8 @@ scale_color_discrete_grattan(..., reverse = FALSE)
 }
 \arguments{
 \item{...}{arguments passed to discrete_scale.}
+
+\item{reverse}{(logical) Option to reverse the palette.}
 }
 \description{
 scale color scale for grattan (uses the palette)
