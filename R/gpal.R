@@ -2,14 +2,16 @@
 #' 
 #' @name gpal
 #' @param n the number of variables/factors over which the palette is to paint
-#' @param dark Should a dark palette be used? (Only available for n=2)
+#' @param dark Should a dark palette be used? (Only available for n=2.)
+#' @param reverse (logical) Option to reverse the palette.
 #' @author Hugh Parsonage
 #' @export
 #' @return A vector of HTML colours to be used.
 
-gpal <- function(n, dark = TRUE){
+gpal <- function(n, dark = TRUE, reverse = FALSE){
   stopifnot(requireNamespace("grattan", quietly = TRUE))
   grattan.palette <- list(grattan::pal.1, grattan::pal.2dark, grattan::pal.3, grattan::pal.4, grattan::pal.5, grattan::pal.6)
+  
   if(n > 6){
     if(n > 9)
       stop('No palette available for that number of categories.', '\n', 'Consider using gpalx')
@@ -20,12 +22,17 @@ gpal <- function(n, dark = TRUE){
   }
   if(!dark) {
     if (n == 2){
-      grattan::pal.2
+      out <- grattan::pal.2
     } else {
       warning("no light option for palette ", n)
-      grattan.palette[[n]]
+      out <- grattan.palette[[n]]
     }             
   } else {
-    grattan.palette[[n]]
+    out <- grattan.palette[[n]]
+  }
+  if (reverse){
+    rev(out)
+  } else {
+    out
   }
 }

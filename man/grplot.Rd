@@ -4,7 +4,7 @@
 \alias{grplot}
 \title{Attempt to harness ggplot but set as much to default as possible}
 \usage{
-grplot(...)
+grplot(..., reverse = FALSE)
 }
 \arguments{
 \item{...}{arguments passed to ggplot}

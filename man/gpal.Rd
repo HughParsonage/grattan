@@ -4,7 +4,7 @@
 \alias{gpal}
 \title{automatic palette adjustment (for small number of categories)}
 \usage{
-gpal(n, dark = TRUE)
+gpal(n, dark = TRUE, reverse = FALSE)
 }
 \arguments{
 \item{n}{the number of variables/factors over which the palette is to paint}

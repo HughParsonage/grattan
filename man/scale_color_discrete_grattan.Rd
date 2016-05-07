@@ -4,7 +4,7 @@
 \alias{scale_color_discrete_grattan}
 \title{scale color scale for grattan (uses the palette)}
 \usage{
-scale_color_discrete_grattan(...)
+scale_color_discrete_grattan(..., reverse = FALSE)
 }
 \arguments{
 \item{...}{arguments passed to discrete_scale.}
