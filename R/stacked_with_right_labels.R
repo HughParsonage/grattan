@@ -2,11 +2,13 @@
 #' 
 #' @param .data A data frame, containing entries for \code{x}, \code{y}, and \code{fill}. \code{x} and \code{fill} must be ordered factors.
 #' @param geom The type of chart ("bar", "area").
+#' @param barwidth Passed to the \code{width} argument of \code{geom_bar}
 #' @param verbose Report the margin used (in grid:: 'lines').
 #' @param right_margin The amount of padding at right to use. The whole point of this function is to select a good right margin to allow space. But if the margin provided is wrong, it can be changed manually here.
 #' @param scale_y_args A list of arguments passed to r \code{ggplot2::scale_y_continuous}.
 #' @param scale_x_args A list of arguments passed to \code{ggplot2::scale_x_continuous}.
 #' @param theme.args A list of arguments passed to \code{ggplot2::theme}.
+#' @param nudge_up A numeric vector to be added every text y-coordinate.
 #' @return A chart with the labels in the right gutter 
 #' @importFrom graphics strwidth
 #' @examples 
@@ -20,17 +22,21 @@
 #' dat$y <- abs(rnorm(1:nrow(dat)))
 #' 
 #' stacked_bar_with_right_labels(dat)
+#' 
+#' 
 #' @export
 
 
 
 stacked_bar_with_right_labels <- function(.data, 
-                                          geom = "bar", 
+                                          geom = "bar",
+                                          barwidth,
                                           verbose = FALSE,
                                           right_margin = 0.5,
                                           scale_y_args, 
                                           scale_x_args, 
-                                          theme.args){
+                                          theme.args, 
+                                          nudge_up = 0){
   stopifnot(all(c("x", "y", "fill") %in% names(.data)))
   x = y = fill = text.label = text.x = text.y = NULL
   if(!is.factor(.data$fill) || !is.ordered(.data$fill)){
@@ -50,7 +56,7 @@ stacked_bar_with_right_labels <- function(.data,
     # all the way up the previous, then half of the corresponding height
     dplyr::arrange(fill) %>%
     dplyr::group_by(x) %>%
-    dplyr::mutate(text.y = -y/2 + cumsum(y), 
+    dplyr::mutate(text.y = -y/2 + cumsum(y) + nudge_up, 
                   text.x = max(as.numeric(.data$x)) + 0.5)
   
   
@@ -58,7 +64,7 @@ stacked_bar_with_right_labels <- function(.data,
     # longest spell between '\n <---> \n'
     strsplit(as.character(unique(.data$fill)), split = "\n") %>%
     unlist %>%
-    # actual character size in bold Arial
+    # actual character size in bold `Arial'
     strwidth(., units = "inches", font = 2, family = "sans") %>%
     max
   
@@ -75,19 +81,36 @@ stacked_bar_with_right_labels <- function(.data,
             'report any bad choices of mine as a bug.')
   }
   
+  ## Need to check whether the texts will overlap
+  
   if (geom == "bar"){
-    p <- 
-      grplot(.plot.data) + 
-      ggplot2::geom_bar(ggplot2::aes(x = x, y = y, fill = fill), stat = "identity") +
-      ggplot2::geom_text(ggplot2::aes(label = text.label, 
-                                      x = text.x,
-                                      y = text.y, 
-                                      colour = fill), 
-                         na.rm = TRUE,
-                         hjust = 0,
-                         lineheight = 0.9,
-                         size = 20/(14/5),
-                         fontface = "bold") 
+    if (missing(barwidth)){
+      p <- 
+        grplot(.plot.data) + 
+        ggplot2::geom_bar(ggplot2::aes(x = x, y = y, fill = fill), stat = "identity") +
+        ggplot2::geom_text(ggplot2::aes(label = text.label, 
+                                        x = text.x,
+                                        y = text.y, 
+                                        colour = fill), 
+                           na.rm = TRUE,
+                           hjust = 0,
+                           lineheight = 0.9,
+                           size = 20/(14/5),
+                           fontface = "bold") 
+    } else {
+      p <- 
+        grplot(.plot.data) + 
+        ggplot2::geom_bar(ggplot2::aes(x = x, y = y, fill = fill), stat = "identity", width = barwidth) +
+        ggplot2::geom_text(ggplot2::aes(label = text.label, 
+                                        x = text.x,
+                                        y = text.y, 
+                                        colour = fill), 
+                           na.rm = TRUE,
+                           hjust = 0,
+                           lineheight = 0.9,
+                           size = 20/(14/5),
+                           fontface = "bold") 
+    }
     if (!missing(scale_x_args)){
       p <- p + do.call(ggplot2::scale_x_discrete, args = scale_x_args)
     }
@@ -108,7 +131,7 @@ stacked_bar_with_right_labels <- function(.data,
       p <- p + do.call(theme, theme.args)
     }
   } else {
-    stop()
+    stop("You've asked for a geom which is not supported.")
   }
   grid::grid.newpage()
   gt <- ggplot2::ggplot_gtable(ggplot2::ggplot_build(p))

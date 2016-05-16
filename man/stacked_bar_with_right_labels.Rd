@@ -4,13 +4,16 @@
 \alias{stacked_bar_with_right_labels}
 \title{Stacked charts with labels at right}
 \usage{
-stacked_bar_with_right_labels(.data, geom = "bar", verbose = FALSE,
-  right_margin = 0.5, scale_y_args, scale_x_args, theme.args)
+stacked_bar_with_right_labels(.data, geom = "bar", barwidth,
+  verbose = FALSE, right_margin = 0.5, scale_y_args, scale_x_args,
+  theme.args, nudge_up = 0)
 }
 \arguments{
 \item{.data}{A data frame, containing entries for \code{x}, \code{y}, and \code{fill}. \code{x} and \code{fill} must be ordered factors.}
 
 \item{geom}{The type of chart ("bar", "area").}
+
+\item{barwidth}{Passed to the \code{width} argument of \code{geom_bar}.}
 
 \item{verbose}{Report the margin used (in grid:: 'lines').}
 
@@ -21,6 +24,8 @@ stacked_bar_with_right_labels(.data, geom = "bar", verbose = FALSE,
 \item{scale_x_args}{A list of arguments passed to \code{ggplot2::scale_x_continuous}.}
 
 \item{theme.args}{A list of arguments passed to \code{ggplot2::theme}.}
+
+\item{nudge_up}{A numeric vector to be added every text y-coordinate.}
 }
 \value{
 A chart with the labels in the right gutter
@@ -37,7 +42,5 @@ dat <- data.table::CJ(
                 ordered = TRUE)
 ) 
 dat$y <- abs(rnorm(1:nrow(dat)))
-
-stacked_bar_with_right_labels(dat)
 }
 
