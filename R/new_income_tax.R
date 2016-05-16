@@ -47,9 +47,8 @@ new_income_tax <- function(income,
       marginal_rate = c(0, marginal_rates)
     ) %>% 
     dplyr::mutate(
-      tax_at = cumsum(lag(marginal_rate, default = 0) * (lower_bracket - lag(lower_bracket, default = 0)))
-    ) %>%
-    dplyr::mutate(income = lower_bracket) %>%
+      tax_at = cumsum(data.table::shift(marginal_rate, type = "lag", fill = 0) * (lower_bracket - data.table::shift(lower_bracket, type = "lag", fill = 0))),
+      income = lower_bracket) %>%
     data.table::setkey(income) %>%
     dplyr::select(income, lower_bracket, marginal_rate, tax_at)
   

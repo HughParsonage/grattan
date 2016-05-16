@@ -119,9 +119,9 @@ CG_inflator <- function(x = 1, from_fy, to_fy, ...){
     dplyr::mutate(marginal_rate_last = (income_tax(Taxable_Income + Net_CG_amt, fy.year = fy.year) - income_tax(Taxable_Income, fy.year = fy.year)) / Net_CG_amt) %>%
     dplyr::group_by(fy.year) %>%
     dplyr::summarise(mean_mr1 = mean(marginal_rate_first), 
-                     mean_wmr1 = weighted.mean(marginal_rate_first, Net_CG_amt), 
+                     mean_wmr1 = stats::weighted.mean(marginal_rate_first, Net_CG_amt), 
                      mean_mrL = mean(marginal_rate_last), 
-                     mean_wmrL = weighted.mean(marginal_rate_last, Net_CG_amt)) %>% 
+                     mean_wmrL = stats::weighted.mean(marginal_rate_last, Net_CG_amt)) %>% 
     merge(cgt_expenditures, by.x = "fy.year", by.y = "FY", all = TRUE) %>% 
     # dplyr::select_(.dots = c(-URL, -Projected) %>%
     unselect_(.dots = c("URL", "Projected")) %>%

@@ -100,7 +100,7 @@ generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzer
     if (!any(is.na(x))){
       forecast::ets(x)
     } else {
-      forecast::auto.arima(ts(x))
+      forecast::auto.arima(stats::ts(x))
     }
   }
   

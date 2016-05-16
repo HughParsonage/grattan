@@ -87,7 +87,7 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
     # http://www.r-bloggers.com/using-mutate-from-dplyr-inside-a-function-getting-around-non-standard-evaluation/
     mutate_call <- lazyeval::interp(~r*a/b, a = as.name(over), b = as.name(under), r = as.name(front))
     .data %>%
-      dplyr::mutate_(.dots = setNames(list(mutate_call), new_col_name))
+      dplyr::mutate_(.dots = stats::setNames(list(mutate_call), new_col_name))
   }
   
   output <- 

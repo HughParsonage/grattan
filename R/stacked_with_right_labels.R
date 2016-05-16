@@ -8,6 +8,7 @@
 #' @param scale_x_args A list of arguments passed to \code{ggplot2::scale_x_continuous}.
 #' @param theme.args A list of arguments passed to \code{ggplot2::theme}.
 #' @return A chart with the labels in the right gutter 
+#' @importFrom graphics strwidth
 #' @examples 
 #' library(data.table)
 #' dat <- data.table::CJ(
@@ -109,7 +110,7 @@ stacked_bar_with_right_labels <- function(.data,
   } else {
     stop()
   }
-  dev.off()
+  grid::grid.newpage()
   gt <- ggplot2::ggplot_gtable(ggplot2::ggplot_build(p))
   gt$layout$clip[gt$layout$name == "panel"] <- "off"
   grid::grid.draw(gt)

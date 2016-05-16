@@ -24,7 +24,7 @@ npv <- function(rate, values) sum(values / (1 + rate)^seq_along(values))
 irr <- function(x, start=0.1) {
   t <- seq_along(x)-1
   f <- function(i) abs(sum(x/(1+i)^t))
-  return(nlm(f,start)$estimate)
+  return(stats::nlm(f, start)$estimate)
 }
 #' @rdname npv
 #' @examples
