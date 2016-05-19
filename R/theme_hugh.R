@@ -27,9 +27,9 @@ theme_hugh <- function(base_size = 23, base_family = "") {
                                        margin = ggplot2::margin(), debug = FALSE),
       plot.title = element_text(hjust = 0, vjust = 1.5),
       # Puts x lab in the centre, boldface
-      axis.title.x =      element_text(hjust = 0.5, vjust = -0.33, 
+      axis.title.x =      element_text(hjust = 0.5, vjust = 0, 
                                        face = "bold",
-                                       margin = ggplot2::margin(t = 5.5, b = 5.5)),
+                                       margin = ggplot2::margin(t = 11.5, b = 11.5)),
       axis.title.y =      element_blank(),
       axis.text =         element_text(),
       axis.line =         element_line(color = "black", size = 1),
