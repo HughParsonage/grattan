@@ -41,17 +41,21 @@ theme_hugh <- function(base_size = 23, base_family = "") {
       axis.ticks =        element_line(color = "black"),
       panel.grid.major =  element_line(),
       panel.grid.major.x = element_blank(),
+      panel.grid.major.y = element_line(),
       panel.grid.minor =  element_blank(),
       
       # Modified inheritance structure of rect element
       plot.background =   element_blank(),
       plot.margin = grid::unit(c(0.7,0.1,0.5,0.00), "lines"),
       panel.background =  element_blank(),
-      legend.key =        element_rect(fill='white'),
+      legend.key =        element_rect(fill='white', size = 0.5),
+      legend.key.size = grid:: unit(1.5, "lines"), 
+      legend.text = element_text(), 
       
       # Modifiying legend.position
       legend.position = 'none',
       legend.background = element_rect(fill = NA, colour = NA),
+      legend.title = element_text(face = "bold"),
       strip.background = element_rect(fill = "white"),
       
       complete = TRUE
