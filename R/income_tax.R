@@ -10,8 +10,8 @@
 #' @param sample_file (Not yet used) A sample file \code{data.table} for which the income tax payable is desired on each row.
 #' @param .dots.ATO A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files.
 #' @param allow.forecasts should dates beyond 2014-15 be permitted?
-#' @author Tim Cameron, Brendan Coates, Hugh Parsonage
-#' @details The function rolling is inflexible by design. It is designed to guarantee the correct tax payable in a year.
+#' @author Tim Cameron, Brendan Coates, Hugh Parsonage, William Young
+#' @details The function 'rolling' is inflexible by design. It is designed to guarantee the correct tax payable in a year.
 #' @useDynLib grattan
 #' @importFrom Rcpp sourceCpp
 #' @importFrom magrittr %>%
