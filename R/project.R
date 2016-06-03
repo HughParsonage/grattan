@@ -19,6 +19,8 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEI
   } else {
     current.fy <- fy.year.of.sample.file
     to.fy <- yr2fy(fy2yr(current.fy) + h)
+    # CGT expenditures is currently the bottleneck
+    stopifnot(all(to.fy %in% cgt_expenditures$FY))
     wage.inflator <- wage_inflator(1, from_fy = current.fy, to_fy = to.fy)
     lf.inflator <- lf_inflator_fy(from_fy = current.fy, to_fy = to.fy)
     cpi.inflator <- cpi_inflator(1, from_fy = current.fy, to_fy = to.fy)
@@ -79,6 +81,14 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEI
     
     ## Inflate:
     if (TRUE){  # we may use this option later
+      # make numeric to avoid overflow
+      if (h != 0L){
+        numeric.cols <- names(sample_file)[vapply(sample_file, is.numeric, TRUE)]
+        for (j in which(col.names %in% numeric.cols)){
+          data.table::set(sample_file, j = j, value = as.numeric(sample_file[[j]]))
+        }
+      }
+      
       for (j in which(col.names %in% wagey.cols))
         data.table::set(sample_file, j = j, value = wage.inflator * sample_file[[j]])
       

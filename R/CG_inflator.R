@@ -77,6 +77,9 @@ CG_population_inflator <- function(x = 1, from_fy, to_fy, estimator = "mean", pr
 CG_inflator <- function(x = 1, from_fy, to_fy, ...){
   prohibit_vector_recycling(x, from_fy, to_fy)
   stopifnot(is.numeric(x), all(is.fy(from_fy)), all(is.fy(to_fy)))
+  
+  # Else NAs.
+  stopifnot(all(to_fy %in% cgt_expenditures$FY), all(from_fy) %in% cgt_expenditures$FY)
 
   input <- 
     data.table::data.table(x = x, from_fy = from_fy, to_fy = to_fy)
