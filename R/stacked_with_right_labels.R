@@ -7,6 +7,8 @@
 #' @param right_margin The amount of padding at right to use. The whole point of this function is to select a good right margin to allow space. But if the margin provided is wrong, it can be changed manually here.
 #' @param scale_y_args A list of arguments passed to r \code{ggplot2::scale_y_continuous}.
 #' @param scale_x_args A list of arguments passed to \code{ggplot2::scale_x_continuous}.
+#' @param coord_cartesian_args A list of arguments passed to \code{ggplot2::coord_cartesian}.
+#' @param text_family Text family for theme and geom text. 
 #' @param theme.args A list of arguments passed to \code{ggplot2::theme}.
 #' @param nudge_up A numeric vector to be added every text y-coordinate.
 #' @return A chart with the labels in the right gutter 
@@ -34,7 +36,9 @@ stacked_bar_with_right_labels <- function(.data,
                                           verbose = FALSE,
                                           right_margin = 0.5,
                                           scale_y_args, 
-                                          scale_x_args, 
+                                          scale_x_args,
+                                          coord_cartesian_args,
+                                          text_family = "",
                                           theme.args, 
                                           nudge_up = 0){
   stopifnot(all(c("x", "y", "fill") %in% names(.data)))
@@ -87,6 +91,7 @@ stacked_bar_with_right_labels <- function(.data,
     if (missing(barwidth)){
       p <- 
         grplot(.plot.data) + 
+        theme_hugh(base_family = text_family) + 
         ggplot2::geom_bar(ggplot2::aes(x = x, y = y, fill = fill), stat = "identity") +
         ggplot2::geom_text(ggplot2::aes(label = text.label, 
                                         x = text.x,
@@ -95,11 +100,13 @@ stacked_bar_with_right_labels <- function(.data,
                            na.rm = TRUE,
                            hjust = 0,
                            lineheight = 0.9,
+                           family = text_family,
                            size = 20/(14/5),
                            fontface = "bold") 
     } else {
       p <- 
         grplot(.plot.data) + 
+        theme_hugh(base_family = text_family) + 
         ggplot2::geom_bar(ggplot2::aes(x = x, y = y, fill = fill), stat = "identity", width = barwidth) +
         ggplot2::geom_text(ggplot2::aes(label = text.label, 
                                         x = text.x,
@@ -108,6 +115,7 @@ stacked_bar_with_right_labels <- function(.data,
                            na.rm = TRUE,
                            hjust = 0,
                            lineheight = 0.9,
+                           family = text_family,
                            size = 20/(14/5),
                            fontface = "bold") 
     }
@@ -117,6 +125,10 @@ stacked_bar_with_right_labels <- function(.data,
     
     if (!missing(scale_y_args)){
       p <- p + do.call(ggplot2::scale_y_continuous, args = scale_y_args)
+    }
+    
+    if (!missing(coord_cartesian_args)){
+      p <- p + do.call(ggplot2::coord_cartesian, args = coord_cartesian_args)
     }
 
     if (missing(right_margin)){
