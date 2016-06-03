@@ -31,7 +31,12 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEI
                     "Alow_ben_amt",
                     "ETP_txbl_amt",
                     "Rptbl_Empr_spr_cont_amt", 
-                    "Non_emp_spr_amt")
+                    "Non_emp_spr_amt", 
+                    "MCS_Emplr_Contr", 
+                    "MCS_Prsnl_Contr", 
+                    "MCS_Othr_Contr")
+    
+    super.bal.col <- c("MCS_Ttl_Acnt_Bal")
     
     lfy.cols <- c("WEIGHT")
     
@@ -66,11 +71,11 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEI
     SetDiff <- function(...) Reduce(setdiff, list(...), right = FALSE)
     
     generic.cols <- SetDiff(col.names, 
-                            wagey.cols, lfy.cols, cpiy.cols, derived.cols, Not.Inflated)
+                            wagey.cols, super.bal.col, lfy.cols, cpiy.cols, derived.cols, Not.Inflated)
     
-    generic.inflators <- 
-      generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = fy.year.of.sample.file, 
-                       estimator = forecast.dots$estimator, pred_interval = forecast.dots$pred_interval)
+      generic.inflators <- 
+        generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = fy.year.of.sample.file, 
+                         estimator = forecast.dots$estimator, pred_interval = forecast.dots$pred_interval)
     
     ## Inflate:
     if (TRUE){  # we may use this option later
@@ -94,7 +99,11 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEI
                         value = generic.inflators[variable == nom]$inflator * sample_file[[j]])
       }
       
-      # Cosmetic: For line-breaking 
+      for (j in which(col.names %in% super.bal.col)){
+        data.table::set(sample_file, j = j, value = (1.05 ^ h) * sample_file[[j]])
+      }
+      
+      # Cosmetic: For line-breaking. Slower but easier to read.  
       .add <- function(...) Reduce("+", list(...))
       
       sample_file %>%
