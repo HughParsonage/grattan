@@ -208,8 +208,8 @@ rolling_income_tax <- function(income,
                                      pmaxC(0.02 * (income - 180e3), 0), 
                                      0)
   
-  pmaxC(base_tax. + medicare_levy. - lito. - sapto. + temp_budget_repair_levy., 
-        0)
+  pmaxC(base_tax. - lito. - sapto., 
+        0) + medicare_levy. + temp_budget_repair_levy.
 }
 
 old_income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44, age_group, is.single = TRUE){
