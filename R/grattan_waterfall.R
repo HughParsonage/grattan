@@ -22,7 +22,9 @@
 #' @param linetype the linetype for the draw_lines
 #' @param lines_anchors a character vector of length two specifying the horizontal placement of the drawn lines relative to the preceding and successive rectangles, respectively
 #' @param draw_axis.x (character) one of "none", "behind", "front" whether to draw an x.axis line and whether to draw it behind or in front of the rectangles, default is behind
-#' @param ggplot_object_name (character) a quoted valid object name to which ggplot layers may be addded after the function has run
+#' @param theme_text_family (character) Passed to the \code{text} argument in \code{ggplot2::theme}.
+#' @param print_plot (logical) Whether or not the plot should be printed. By default, \code{TRUE}, which means it cannot be assigned.
+#' @param ggplot_object_name (character) A quoted valid object name to which ggplot layers may be addded after the function has run. Ignored if \code{print} is \code{FALSE}.
 #' @export
 
 
@@ -46,6 +48,8 @@ grattan_waterfall <- function(.data = NULL,
                               lines_anchors = c("centre", "centre"),
                               linetype = "dashed",
                               draw_axis.x = "behind",
+                              theme_text_family = "", 
+                              print_plot = TRUE,
                               ggplot_object_name = "mywaterfall"){
   if(!is.null(.data)){
     if(ncol(.data) == 2 && 
@@ -106,7 +110,7 @@ grattan_waterfall <- function(.data = NULL,
   p <- ggplot2::ggplot(data.frame(x = labels,
                                   y = values), ggplot2::aes_string(x = "x", y = "y")) + 
     ggplot2::geom_blank() + 
-    grattan::theme_hugh() +
+    grattan::theme_hugh(base_family = theme_text_family) +
     ggplot2::theme(axis.title = ggplot2::element_blank())
   } else {
     p <- ggplot2::ggplot(data.frame(x = c(labels, total_axis_text),
@@ -114,7 +118,7 @@ grattan_waterfall <- function(.data = NULL,
                                     ), 
                                     ggplot2::aes_string(x = "x", y = "y")) + 
       ggplot2::geom_blank() + 
-      grattan::theme_hugh() +
+      grattan::theme_hugh(base_family = theme_text_family) +
       ggplot2::theme(axis.title = ggplot2::element_blank())
   }
   
@@ -140,13 +144,14 @@ grattan_waterfall <- function(.data = NULL,
     }
   }
   
-  rect_text_labels
+  # rect_text_labels
   
   for (i in seq_along(values)){
     if(abs(values[i]) > put_rect_text_outside_when_value_below){
       p <- p + ggplot2::annotate("text",
                                  x = i,
                                  y = 0.5 * (north_edge[i] + south_edge[i]),
+                                 family = theme_text_family,
                                  label = ifelse(rect_text_labels[i] == values[i],
                                                 ifelse(values[i] < 0,
                                                        paste0("\U2212", -1 * values[i]),
@@ -157,6 +162,7 @@ grattan_waterfall <- function(.data = NULL,
       p <- p + ggplot2::annotate("text",
                                  x = i,
                                  y = north_edge[i],
+                                 family = theme_text_family,
                                  label = ifelse(rect_text_labels[i] == values[i],
                                                 ifelse(values[i] < 0,
                                                        paste0("\U2212", -1 * values[i]),
@@ -179,6 +185,7 @@ grattan_waterfall <- function(.data = NULL,
       ggplot2::annotate("text",
                         x = number_of_rectangles + 1,
                         y = 0.5 * north_edge[number_of_rectangles],
+                        family = theme_text_family,
                         label = ifelse(total_rect_text == sum(values),
                                        ifelse(north_edge[number_of_rectangles] < 0,
                                               paste0("\U2212", -1 * north_edge[number_of_rectangles]),
@@ -202,10 +209,13 @@ grattan_waterfall <- function(.data = NULL,
   if (grepl("front", draw_axis.x)){
     p <- p + ggplot2::geom_hline(yintercept = 0)
   }
-  
-  print(p)
-  # Allow modifications beyond the function call
-  if (ggplot_object_name %in% ls(.GlobalEnv))
-    warning("Overwriting ", ggplot_object_name, " in global environment.")
-  assign(ggplot_object_name, p, inherits = TRUE)
+  if (print_plot){
+    # Allow modifications beyond the function call
+    if (ggplot_object_name %in% ls(.GlobalEnv))
+      warning("Overwriting ", ggplot_object_name, " in global environment.")
+    assign(ggplot_object_name, p, inherits = TRUE)
+    print(p)
+  } else {
+    return(p)
+  }
 }

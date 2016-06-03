@@ -14,6 +14,7 @@ grattan_waterfall(.data = NULL, values, labels, rect_text_labels = values,
   fill_by_sign = TRUE, dark = FALSE, rect_width = 0.7,
   rect_border = "black", draw_lines = TRUE, lines_anchors = c("centre",
   "centre"), linetype = "dashed", draw_axis.x = "behind",
+  theme_text_family = "", print_plot = TRUE,
   ggplot_object_name = "mywaterfall")
 }
 \arguments{
@@ -59,7 +60,11 @@ grattan_waterfall(.data = NULL, values, labels, rect_text_labels = values,
 
 \item{draw_axis.x}{(character) one of "none", "behind", "front" whether to draw an x.axis line and whether to draw it behind or in front of the rectangles, default is behind}
 
-\item{ggplot_object_name}{(character) a quoted valid object name to which ggplot layers may be addded after the function has run}
+\item{theme_text_family}{(character) Passed to the \code{text} argument in \code{ggplot2::theme}.}
+
+\item{print_plot}{(logical) Whether or not the plot should be printed. By default, \code{TRUE}, which means it cannot be assigned.}
+
+\item{ggplot_object_name}{(character) A quoted valid object name to which ggplot layers may be addded after the function has run. Ignored if \code{print} is \code{FALSE}.}
 }
 \description{
 Create waterfall charts
