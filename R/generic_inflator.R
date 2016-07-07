@@ -10,6 +10,7 @@
 #' @importFrom magrittr %>%
 #' @importFrom magrittr %<>%
 #' @importFrom magrittr %$%
+#' @importFrom data.table as.data.table
 #' @export
 
 ## For each variable we want an arima/ets model 
@@ -75,7 +76,7 @@ generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzer
       select_which_(is.numeric, "fy.year") %>%
       dplyr::group_by_("fy.year") %>%  
       dplyr::summarise_each(dplyr::funs(MeanNumeric)) 
-  } else {
+} else {
     # Forecast only on the mean of nonzero values
     mean_of_nonzero <- function(x){
       MeanNumeric(x[x > 0])
@@ -106,6 +107,7 @@ generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzer
   
   point_forecasts_by_var <- 
     mean_of_each_var %>%
+    data.table::as.data.table(.) %>%
     data.table::melt.data.table(id.vars = c("fy.year")) %>% 
     base::split(.$variable) %>%
     purrr::map(~forecaster(.$value)) %>%
@@ -114,14 +116,15 @@ generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzer
   
   # CRAN avoidance
   fy_year <- NULL
-  data.table::rbindlist(list(mean_of_each_var, 
+  data.table::rbindlist(list(data.table::as.data.table(mean_of_each_var), 
                              data.table::as.data.table(point_forecasts_by_var)), 
                         use.names = TRUE, 
                         fill = TRUE) %>%
-    dplyr::mutate(fy_year = yr2fy(1:.N - 1 + fy2yr(dplyr::first(fy.year)))) %>% 
+    .[ ,fy_year := yr2fy(1:.N - 1 + fy2yr(dplyr::first(fy.year)))] %>% 
     dplyr::filter(fy_year %in% c(fy.year.of.sample.file, dplyr::last(fy_year))) %>% 
     dplyr::summarise_each(dplyr::funs(last_over_first), -c(fy_year, fy.year)) %>%
-    data.table::melt.data.table(measure.vars = names(.), variable.name = "variable", value.name = "inflator")
+    data.table::as.data.table(.) %>%
+    data.table::melt.data.table(., measure.vars = names(.), variable.name = "variable", value.name = "inflator")
   
   ## We use inflators that we know to be useful. (Sw_amt is a wage inflator)
   ## Otherwise we use 

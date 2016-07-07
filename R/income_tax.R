@@ -97,13 +97,15 @@ rolling_income_tax <- function(income,
     dplyr::mutate(
       tax_at = cumsum(data.table::shift(marginal_rate, type = "lag", fill = 0) * (lower_bracket - data.table::shift(lower_bracket, type = "lag", fill = 0))),
       income = lower_bracket) %>%
-    data.table::setkey(fy_year, income) %>%
-    dplyr::select(fy_year, income, lower_bracket, marginal_rate, tax_at)
+    dplyr::select(fy_year, income, lower_bracket, marginal_rate, tax_at) %>%
+    data.table::as.data.table(.) %>%
+    data.table::setkey(fy_year, income) 
   
   input <- 
     data.table::data.table(income = income, 
-                           fy_year = fy.year) %>% 
-    dplyr::mutate(ordering = 1:n()) 
+                           fy_year = fy.year) 
+  
+  input <- input[ ,ordering := 1:.N]
   
   input.keyed <-
     # potentially expensive. Another way would be 
@@ -153,6 +155,7 @@ rolling_income_tax <- function(income,
         # Enhancement: family taxable income should exclude super lump sums.
         medicare_income = income + Spouse_income
       ) %>%
+      data.table::as.data.table(.) %>%
       merge(medicare_tbl, 
             by = c("fy_year", "sapto", "family_status"),
             sort = FALSE, 

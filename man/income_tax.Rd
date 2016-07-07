@@ -34,9 +34,9 @@ the total personal income tax payable
 tax function
 }
 \details{
-The function rolling is inflexible by design. It is designed to guarantee the correct tax payable in a year.
+The function 'rolling' is inflexible by design. It is designed to guarantee the correct tax payable in a year.
 }
 \author{
-Tim Cameron, Brendan Coates, Hugh Parsonage
+Tim Cameron, Brendan Coates, Hugh Parsonage, William Young
 }
 

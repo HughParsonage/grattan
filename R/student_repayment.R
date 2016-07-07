@@ -30,7 +30,7 @@ student_repayment <- function(repayment_income, fy.year, debt){
                            repayment_threshold = repayment_income, 
                            fy_year = fy.year, debt = debt) %>%
     # to preserve ordering
-    dplyr::mutate(ordering = seq.int(1, .N, by = 1L)) %>%
+    .[, ordering := seq.int(1, .N, by = 1L)] %>%
     data.table::setkeyv(c("fy_year", "repayment_threshold"))
   
   # repayment rate applies to the entire repayment income (not that > threshold, as it is for general tax).
