@@ -85,7 +85,6 @@ if (isTRUE(getOption("grattan.bigplot"))) {
                             margin = ggplot2::margin(), 
                             debug = FALSE),
         title = element_text(),
-        aspect.ratio = 4.472222/2.8444, 
         # Puts x lab in the centre, boldface
         axis.title.x = element_text(hjust = 0.5, vjust = 0, 
                                     face = "bold",
