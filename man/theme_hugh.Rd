@@ -3,9 +3,6 @@
 \name{theme_hugh}
 \alias{theme_hugh}
 \title{A theme for use with ggplots}
-\usage{
-theme_hugh(base_size = 23, base_family = "")
-}
 \arguments{
 \item{base_size}{Size in points for the size of text.}
 
