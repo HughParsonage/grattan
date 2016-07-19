@@ -19,3 +19,11 @@ unselect_ <- function(.data, .dots){
 `%notin%` <- function(x, y) {
   !(x %in% y)
 }
+
+as.numeric_unless_warning <- function(x){
+  tryCatch(as.numeric(x),
+           error = function(e) e,
+           warning = function(w){x}, 
+           finally = x)
+}
+
