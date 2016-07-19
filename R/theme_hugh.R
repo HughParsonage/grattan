@@ -92,9 +92,9 @@ if (isTRUE(getOption("grattan.bigplot"))) {
         # y-axis handled as a caption
         axis.title.y = element_blank(),
         axis.text = element_text(),
-        axis.line = element_line(color = "black", size = 1),
-        axis.line.x = element_line(color = "black", size = 1), 
-        axis.line.y = element_line(color = "black", size = 1),
+        axis.line = element_line(color = "black", size = 0.5),
+        axis.line.x = element_line(color = "black", size = 0.5), 
+        axis.line.y = element_line(color = "black", size = 0.5),
         axis.ticks.length = grid::unit(0.3, "lines"),
         
         # Modified inheritance structure of line element
