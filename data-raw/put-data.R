@@ -28,7 +28,7 @@ medicare_tbl <-
   unique
 
 medicare_tbl %>% 
-  readr::write_tsv("medicare_tbl.tsv")
+  readr::write_tsv("./data-raw/medicare_tbl.tsv")
 
 sapto_tbl <- 
   readxl::read_excel("./data-raw/SAPTO-rates.xlsx", sheet = 1) %>% 
@@ -38,7 +38,7 @@ sapto_tbl <-
   unique
 
 sapto_tbl %>%
-  readr::write_tsv("sapto_tbl.tsv")
+  readr::write_tsv("./data-raw/sapto_tbl.tsv")
 
 hecs_tbl <- 
   openxlsx::readWorkbook("./data-raw/Historical HELP thresholds 1989 to 2015.xlsx", 
