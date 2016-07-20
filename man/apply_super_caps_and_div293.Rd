@@ -9,7 +9,8 @@ apply_super_caps_and_div293(.sample.file,
   colname_div293_tax = "div293_tax",
   colname_new_Taxable_Income = "new_Taxable_Income",
   div293_threshold = 3e+05, cap = 25000, cap2 = 35000,
-  age_based_cap = TRUE, cap2_age = 59, ecc = FALSE, div293 = TRUE,
+  age_based_cap = TRUE, cap2_age = 59, ecc = FALSE,
+  use_other_contr = FALSE, div293 = TRUE,
   warn_if_colnames_overwritten = TRUE, drop_helpers = FALSE,
   copyDT = TRUE)
 }
@@ -33,6 +34,8 @@ apply_super_caps_and_div293(.sample.file,
 \item{cap2_age}{The age above which \code{cap2} applies.}
 
 \item{ecc}{(logical) Should an excess concessional contributions charge be calculated? (Not implemented.)}
+
+\item{use_other_contr}{Make a (poor) assumption that all 'Other contributions' (\code{MCS_Othr_Contr}) are concessional contributions. This may be a useful upper bound should such contributions be considered important.}
 
 \item{div293}{(logical) Should Division 293 tax be calculated? If FALSE, \code{.sample.file} is returned immediately, with a warning (that you're using this function pointlessly!).}
 

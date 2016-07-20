@@ -8,6 +8,7 @@
 #' @param div293_threshold The Division 293 threshold.
 #' @param cap The cap on concessional contributions for all taxpayers if \code{age_based_cap} is FALSE, or for those below the age threshold otherwise.
 #' @param cap2 The cap on concessional contributions for those above the age threshold. No effect if \code{age_based_cap} is FALSE.
+#' @param use_other_contr Make a (poor) assumption that all 'Other contributions' (\code{MCS_Othr_Contr}) are concessional contributions. This may be a useful upper bound should such contributions be considered important.
 #' @param age_based_cap Is the cap on concessional contributions age-based? 
 #' @param cap2_age The age above which \code{cap2} applies.
 #' @param ecc (logical) Should an excess concessional contributions charge be calculated? (Not implemented.)
