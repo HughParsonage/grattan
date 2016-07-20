@@ -157,6 +157,7 @@ apply_super_caps_and_div293 <- function(.sample.file,
 revenue_from_cap_and_div293 <- function(.sample.file, fy.year,
                                         new_cap = 30e3, new_cap2 = 35e3, new_age_based_cap = TRUE, new_cap2_age = 59, new_ecc = FALSE,
                                         new_div293_threshold = 300e3,
+                                        use_other_contr = FALSE,
                                         
                                         prv_cap = 30e3, prv_cap2 = 35e3, prv_age_based_cap = TRUE, prv_cap2_age = 59, prv_ecc = FALSE,
                                         prv_div293_threshold = 300e3){
@@ -173,6 +174,7 @@ revenue_from_cap_and_div293 <- function(.sample.file, fy.year,
                                              colname_div293_tax = "old_div293_tax", 
                                              colname_new_Taxable_Income = "old_Taxable_Income",
                                              div293_threshold = prv_div293_threshold, 
+                                             use_other_contr = use_other_contr,
                                              cap = prv_cap, cap2 = prv_cap2, age_based_cap = prv_age_based_cap, cap2_age = prv_cap2_age, ecc = prv_ecc,
                                              div293 = TRUE, warn_if_colnames_overwritten = FALSE, drop_helpers = TRUE, copyDT = FALSE)
   
@@ -190,6 +192,7 @@ revenue_from_cap_and_div293 <- function(.sample.file, fy.year,
                                                  colname_div293_tax = "new_div293_tax", 
                                                  colname_new_Taxable_Income = "new_Taxable_Income",
                                                  div293_threshold = new_div293_threshold, 
+                                                 use_other_contr = use_other_contr,
                                                  cap = new_cap, cap2 = new_cap2, age_based_cap = new_age_based_cap, cap2_age = new_cap2_age, ecc = new_ecc,
                                                  div293 = TRUE, warn_if_colnames_overwritten = FALSE, drop_helpers = TRUE, copyDT = FALSE)
   
