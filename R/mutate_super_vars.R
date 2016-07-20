@@ -104,7 +104,7 @@ apply_super_caps_and_div293 <- function(.sample.file,
     
     # if an age falls between an age group, we assume ambiguously aged individuals are NOT entitled to cap2.
     if (cap2_age < 65 && cap2_age >= 20){
-      cap2_age_group <<- paste0(ceiling(cap2_age / 5) * 5, " to ", ceiling(cap2_age / 5) * 5 + 4)
+      cap2_age_group <- paste0(ceiling(cap2_age / 5) * 5, " to ", ceiling(cap2_age / 5) * 5 + 4)
     } else {
       if (cap2_age >= 65){
         cap2_age_group <- "70 and over"
