@@ -25,6 +25,7 @@ apply_super_caps_and_div293 <- function(.sample.file,
                                         div293_threshold = 300e3, 
                                         # for low income tax contributions amount
                                         cap = 25e3, cap2 = 35e3, age_based_cap = TRUE, cap2_age = 59, ecc = FALSE,
+                                        use_other_contr = FALSE,
                                         div293 = TRUE, warn_if_colnames_overwritten = TRUE, drop_helpers = FALSE, copyDT = TRUE){
   # Todo/wontfix
   if (!identical(ecc, FALSE)) stop("ECC not implemented.")
@@ -76,8 +77,11 @@ apply_super_caps_and_div293 <- function(.sample.file,
   }
   
   # Concessional contributions
-  .sample.file[ , concessional_contributions := MCS_Emplr_Contr + Non_emp_spr_amt]
-  
+  if (use_other_contr){
+    .sample.file[ , concessional_contributions := MCS_Emplr_Contr + Non_emp_spr_amt + MCS_Othr_Contr]
+  } else {
+    .sample.file[ , concessional_contributions := MCS_Emplr_Contr + Non_emp_spr_amt]
+  }
   if (age_based_cap){
     if (!any("age_range_description" == names(.sample.file))){
       
