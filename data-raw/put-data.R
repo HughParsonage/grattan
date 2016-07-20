@@ -75,6 +75,109 @@ lf_trend <-
 cgt_expenditures <- 
   data.table::fread("./data-raw/tax-expenditures-cgt-historical.tsv")
 
+{
+  col.names <- names(sample_file_1314)
+  
+  wagey.cols <- c("Sw_amt", 
+                  "Alow_ben_amt",
+                  "ETP_txbl_amt",
+                  "Rptbl_Empr_spr_cont_amt", 
+                  "Non_emp_spr_amt", 
+                  "MCS_Emplr_Contr", 
+                  "MCS_Prsnl_Contr", 
+                  "MCS_Othr_Contr")
+  
+  super.bal.col <- c("MCS_Ttl_Acnt_Bal")
+  
+  lfy.cols <- c("WEIGHT")
+  
+  cpiy.cols <- c(grep("WRE", col.names, value = TRUE), # work-related expenses
+                 "Cost_tax_affairs_amt",
+                 "Other_Ded_amt")
+  
+  derived.cols <- c("Net_rent_amt",
+                    "Net_PP_BI_amt",
+                    "Net_NPP_BI_amt",
+                    "Tot_inc_amt",
+                    "Tot_ded_amt",
+                    "Taxable_Income")
+  
+  CGTy.cols <- c("Net_CG_amt", "Tot_CY_CG_amt")
+  
+  alien.cols <- col.names[!col.names %in% names(taxstats::sample_file_1314)]
+  Not.Inflated <- c("Ind", 
+                    "Gender",
+                    "age_range", 
+                    "Occ_code", 
+                    "Partner_status", 
+                    "Region", 
+                    "Lodgment_method", 
+                    "PHI_Ind", 
+                    alien.cols)
+  
+  SetDiff <- function(...) Reduce(setdiff, list(...), right = FALSE)
+  
+  generic.cols <<- SetDiff(col.names, 
+                           wagey.cols, super.bal.col, lfy.cols, cpiy.cols, derived.cols, Not.Inflated)
+  }
+generic_inflators <- 
+  lapply(1:10, 
+         function(h) dplyr::mutate(generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = "2013-14"), 
+                                   H = h)) %>% 
+  rbindlist(use.names = TRUE) %>%
+  mutate(fy_year = yr2fy(2014 + H)) %>%
+  rename(h = H)
+
+cg_inflators_1314 <- 
+{
+  cg_table <- 
+    taxstats::sample_files_all %>%
+    dplyr::select(fy.year, Taxable_Income, Net_CG_amt) %>%
+    dplyr::filter(Net_CG_amt > 0) %>%
+    dplyr::mutate(marginal_rate_first = income_tax(Taxable_Income + 1, 
+                                                   fy.year = fy.year) - income_tax(Taxable_Income, 
+                                                                                   fy.year = fy.year)) %>%
+    dplyr::mutate(marginal_rate_last = (income_tax(Taxable_Income + Net_CG_amt, fy.year = fy.year) - income_tax(Taxable_Income, fy.year = fy.year)) / Net_CG_amt) %>%
+    dplyr::group_by(fy.year) %>%
+    dplyr::summarise(mean_mr1 = mean(marginal_rate_first), 
+                     mean_wmr1 = stats::weighted.mean(marginal_rate_first, Net_CG_amt), 
+                     mean_mrL = mean(marginal_rate_last), 
+                     mean_wmrL = stats::weighted.mean(marginal_rate_last, Net_CG_amt)) %>% 
+    merge(grattan:::cgt_expenditures, by.x = "fy.year", by.y = "FY", all = TRUE) %>% 
+    # dplyr::select_(.dots = c(-URL, -Projected) %>%
+    grattan:::unselect_(.dots = c("URL", "Projected")) %>%
+    dplyr::rename(revenue_foregone = CGT_discount_for_individuals_and_trusts_millions) %>%
+    dplyr::mutate(revenue_foregone = revenue_foregone * 10^6,
+                  zero_discount_Net_CG_total = revenue_foregone / mean(mean_wmrL, na.rm = TRUE)) %>%
+    dplyr::select(fy.year, zero_discount_Net_CG_total)
+  
+  n_cg_history <- 
+    data.table::as.data.table(taxstats::individuals_table1_201314) %>%
+    dplyr::filter(Selected_items == "Net capital gain") %>%
+    dplyr::filter(!is.na(Count))  %>%
+    dplyr::select(fy_year, n_CG = Count)
+  
+  n_cg <- 
+    rbind(n_cg_history, 
+          data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 1:10),
+                     n_CG = as.numeric(forecast(n_cg_history$n_CG)$mean))
+          )
+  
+  cg <- 
+    rbind(as.data.table(cg_table), 
+          data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 1:10), 
+                     zero_discount_Net_CG_total = as.numeric(forecast(cg_table$zero_discount_Net_CG_total)$mean))
+    )
+  
+  cg_inf <- 
+    merge(n_cg, cg, by.x = "fy_year", by.y = "fy.year") %>% 
+    as.data.table
+  
+  cg_inf[, cg_inflator := zero_discount_Net_CG_total / n_CG]
+  cg_inf[, cg_inflator := cg_inflator / cg_inflator[cg_inf$fy_year == "2013-14"]]
+  cg_inf
+}
+
 
 devtools::use_data(lito_tbl, 
                    tax_tbl, 
@@ -87,5 +190,7 @@ devtools::use_data(lito_tbl,
                    wages_trend,
                    lf_trend,
                    cgt_expenditures,
+                   generic_inflators,
+                   cg_inflators_1314,
                    #
                    internal = TRUE, overwrite = TRUE)
