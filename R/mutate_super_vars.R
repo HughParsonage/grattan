@@ -36,7 +36,9 @@ apply_super_caps_and_div293 <- function(.sample.file,
     low_tax_contributions_div293 <- pre_tax_contributions <- rental_losses <-
     super_income_in_excess_of_cap <- surchargeable_income_div293 <-
     concessional_contributions <- new_Taxable_Income <- .new_Taxable_Income <-
-    excess_concessional_contributions <- NULL
+    excess_concessional_contributions <- SG_contributions <- 
+    salary_sacrifice_contributions <- personal_deductible_contributions <- 
+    non_concessional_contributions <- Taxable_income_for_ECT <- NULL
   
   if (copyDT){
     .sample.file <- data.table::copy(.sample.file)
@@ -211,7 +213,7 @@ revenue_from_cap_and_div293 <- function(.sample.file, fy.year,
 
 n_affected_from_cap_and_div293 <- function(...){
   revenue_from_cap_and_div293(...) %>%
-    {sum(abs(.[["prv_revenue"]] - .[["new_revenue"]]) > 1) * .[["WEIGHT"]][1]}
+  {sum(abs(.[["prv_revenue"]] - .[["new_revenue"]]) > 1) * .[["WEIGHT"]][1]}
 }
 
 
