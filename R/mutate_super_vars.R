@@ -193,7 +193,7 @@ revenue_from_cap_and_div293 <- function(.sample.file, fy.year,
   
   sample_file[, prv_revenue := income_tax(old_Taxable_Income, fy.year) + old_div293_tax]
   sample_file <- sample_file[, c("Ind", "prv_revenue"), with = FALSE]
-  data.table::setkey(sample_file, "Ind")
+  data.table::setkeyv(sample_file, "Ind")
   
   new_sample_file <- apply_super_caps_and_div293(.sample.file, 
                                                  colname_concessional = "new_concessional_contributions",
@@ -205,12 +205,12 @@ revenue_from_cap_and_div293 <- function(.sample.file, fy.year,
                                                  div293 = TRUE, warn_if_colnames_overwritten = FALSE, drop_helpers = TRUE, copyDT = FALSE)
   
   new_sample_file[, new_revenue := income_tax(new_Taxable_Income, fy.year) + new_div293_tax]
-  data.table::setkey(new_sample_file)
+  data.table::setkeyv(new_sample_file, "Ind")
   sample_file[new_sample_file]
 }
 
 n_affected_from_cap_and_div293 <- function(...){
-  revenue_from_cap_and_div293(...) %$%
+  revenue_from_cap_and_div293(...) %>%
     {sum(abs(.[["prv_revenue"]] - .[["new_revenue"]]) > 1) * .[["WEIGHT"]][1]}
 }
 
