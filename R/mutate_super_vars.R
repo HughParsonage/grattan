@@ -51,6 +51,9 @@ apply_super_caps_and_div293 <- function(.sample.file,
                     "low_tax_contributions_div293", "pre_tax_contributions", "rental_losses", 
                     "excess_concessional_contributions", "surchargeable_income_div293", 
                     "concessional_contributions", 
+                    "SG_contributions",
+                    "salary_sacrifice_contributions",
+                    "personal_deductible_contributions",
                     ".new_Taxable_Income")
   
   common.indices <- new_colnames %in% names(.sample.file)
@@ -77,12 +80,13 @@ apply_super_caps_and_div293 <- function(.sample.file,
     stop("The sample file you requested does not have the variables needed for this function.")
   }
   
+  .sample.file[ , SG_contributions := pmaxC(MCS_Emplr_Contr - Rptbl_Empr_spr_cont_amt, 0)]
+  .sample.file[ , salary_sacrifice_contributions := Rptbl_Empr_spr_cont_amt]
+  .sample.file[ , personal_deductible_contributions := Non_emp_spr_amt]
   # Concessional contributions
-  if (use_other_contr){
-    .sample.file[ , concessional_contributions := MCS_Emplr_Contr + Non_emp_spr_amt + MCS_Othr_Contr]
-  } else {
-    .sample.file[ , concessional_contributions := MCS_Emplr_Contr + Non_emp_spr_amt]
-  }
+  .sample.file[ , concessional_contributions := MCS_Emplr_Contr + Non_emp_spr_amt]
+  .sample.file[ , concessional_contributions := MCS_Prsnl_Contr - Non_emp_spr_amt]
+  
   if (age_based_cap){
     if (!any("age_range_description" == names(.sample.file))){
       
