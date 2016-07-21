@@ -87,7 +87,7 @@ apply_super_caps_and_div293 <- function(.sample.file,
   .sample.file[ , personal_deductible_contributions := Non_emp_spr_amt]
   # Concessional contributions
   .sample.file[ , concessional_contributions := MCS_Emplr_Contr + Non_emp_spr_amt]
-  .sample.file[ , non_concessional_contributions := MCS_Prsnl_Contr - Non_emp_spr_amt]
+  .sample.file[ , non_concessional_contributions := pmaxC(MCS_Prsnl_Contr - Non_emp_spr_amt, 0)]
   
   if (age_based_cap){
     if (!any("age_range_description" == names(.sample.file))){
