@@ -22,7 +22,7 @@
 apply_super_caps_and_div293 <- function(.sample.file, 
                                         colname_concessional = "concessional_contributions",
                                         colname_div293_tax = "div293_tax", 
-                                        colname_new_Taxable_Income = "new_Taxable_Income",
+                                        colname_new_Taxable_Income = "Taxable_income_for_ECT",
                                         div293_threshold = 300e3, 
                                         # for low income tax contributions amount
                                         cap = 25e3, cap2 = 35e3, age_based_cap = TRUE, cap2_age = 59, ecc = FALSE,
@@ -139,17 +139,16 @@ apply_super_caps_and_div293 <- function(.sample.file,
                                        0)]
   
   # Modify taxable income to reflect exceeding cap:
-  # Note dot (too much to ask that the column wouldn't already exist)
-  .sample.file[ , .new_Taxable_Income := Taxable_Income + excess_concessional_contributions]
+  .sample.file[ , Taxable_income_for_ECT := Taxable_Income + excess_concessional_contributions]
   
   
   data.table::setnames(.sample.file, "div293_tax", colname_div293_tax)
   data.table::setnames(.sample.file, "concessional_contributions", colname_concessional)
   if (!exists("orig_colname_new_Taxable_Income")){
-    data.table::setnames(.sample.file, ".new_Taxable_Income", colname_new_Taxable_Income)
+    data.table::setnames(.sample.file, "Taxable_income_for_ECT", colname_new_Taxable_Income)
   } else {
     .sample.file[ , Taxable_Income := NULL]
-    data.table::setnames(.sample.file, ".new_Taxable_Income", orig_colname_new_Taxable_Income)
+    data.table::setnames(.sample.file, "Taxable_income_for_ECT", orig_colname_new_Taxable_Income)
   }
   
   if (drop_helpers){
