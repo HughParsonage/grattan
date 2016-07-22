@@ -51,4 +51,7 @@ A data frame comprising the original sample file (\code{.sample.file}) with an e
 \description{
 Mutate a sample file to reflect particular caps on concessional contributions and applications of Division 293 tax.
 }
+\author{
+Hugh Parsonage, William Young
+}
 

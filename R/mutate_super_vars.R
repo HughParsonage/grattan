@@ -1,6 +1,7 @@
 #' @title Superannuation caps and Division 293 calculations
 #'
 #' @description Mutate a sample file to reflect particular caps on concessional contributions and applications of Division 293 tax.
+#' @author Hugh Parsonage, William Young
 #' @param .sample.file A data.table containing at least the variables \code{sample_file_1314} from the taxstats package.
 #' @param colname_concessional The name for concessional contributions.
 #' @param colname_div293_tax The name of the column containing the values of Division 293 tax payable for that taxpayer.
@@ -163,57 +164,3 @@ apply_super_caps_and_div293 <- function(.sample.file,
   
   return(.sample.file)
 }
-
-revenue_from_cap_and_div293 <- function(.sample.file, fy.year,
-                                        new_cap = 30e3, new_cap2 = 35e3, new_age_based_cap = TRUE, new_cap2_age = 59, new_ecc = FALSE,
-                                        new_div293_threshold = 300e3,
-                                        use_other_contr = FALSE,
-                                        
-                                        prv_cap = 30e3, prv_cap2 = 35e3, prv_age_based_cap = TRUE, prv_cap2_age = 59, prv_ecc = FALSE,
-                                        prv_div293_threshold = 300e3){
-  prv_revenue <- new_revenue <- NULL
-  if (!any("WEIGHT" == names(.sample.file))){
-    warning("WEIGHT not specified. Using WEIGHT=50 (assuming a 2% sample file).")
-    WEIGHT <- 50
-  } else {
-    WEIGHT <- .sample.file[["WEIGHT"]][[1]]
-  }
-  
-  sample_file <- apply_super_caps_and_div293(.sample.file, 
-                                             colname_concessional = "old_concessional_contributions",
-                                             colname_div293_tax = "old_div293_tax", 
-                                             colname_new_Taxable_Income = "old_Taxable_Income",
-                                             div293_threshold = prv_div293_threshold, 
-                                             use_other_contr = use_other_contr,
-                                             cap = prv_cap, cap2 = prv_cap2, age_based_cap = prv_age_based_cap, cap2_age = prv_cap2_age, ecc = prv_ecc,
-                                             div293 = TRUE, warn_if_colnames_overwritten = FALSE, drop_helpers = TRUE, copyDT = FALSE)
-  
-  new_Taxable_Income <- NULL
-  old_Taxable_Income <- NULL
-  old_div293_tax <- NULL
-  new_div293_tax <- NULL
-  
-  sample_file[, prv_revenue := income_tax(old_Taxable_Income, fy.year) + old_div293_tax]
-  sample_file <- sample_file[, c("Ind", "prv_revenue"), with = FALSE]
-  data.table::setkeyv(sample_file, "Ind")
-  
-  new_sample_file <- apply_super_caps_and_div293(.sample.file, 
-                                                 colname_concessional = "new_concessional_contributions",
-                                                 colname_div293_tax = "new_div293_tax", 
-                                                 colname_new_Taxable_Income = "new_Taxable_Income",
-                                                 div293_threshold = new_div293_threshold, 
-                                                 use_other_contr = use_other_contr,
-                                                 cap = new_cap, cap2 = new_cap2, age_based_cap = new_age_based_cap, cap2_age = new_cap2_age, ecc = new_ecc,
-                                                 div293 = TRUE, warn_if_colnames_overwritten = FALSE, drop_helpers = TRUE, copyDT = FALSE)
-  
-  new_sample_file[, new_revenue := income_tax(new_Taxable_Income, fy.year) + new_div293_tax]
-  data.table::setkeyv(new_sample_file, "Ind")
-  sample_file[new_sample_file]
-}
-
-n_affected_from_cap_and_div293 <- function(...){
-  revenue_from_cap_and_div293(...) %>%
-  {sum(abs(.[["prv_revenue"]] - .[["new_revenue"]]) > 1) * .[["WEIGHT"]][1]}
-}
-
-
