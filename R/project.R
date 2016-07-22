@@ -14,7 +14,7 @@
 project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEIGHT = 50L, excl_vars, forecast.dots = list(estimator = "mean", pred_interval = 80), .recalculate.inflators = FALSE){
   stopifnot(is.integer(h), h >= 0L, data.table::is.data.table(sample_file))
   
-  sample_file %<>% dplyr::mutate(WEIGHT = WEIGHT)
+  sample_file[, "WEIGHT" := list(WEIGHT)]
   if (h == 0){
     return(sample_file)
   } else {
@@ -158,6 +158,8 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEI
                              Cost_tax_affairs_amt,
                              Other_Ded_amt),
           Taxable_Income = pmaxC(Tot_inc_amt - Tot_ded_amt - PP_loss_claimed - NPP_loss_claimed, 0)
-          ) 
+          ) %>%
+        data.table::as.data.table(.)
+      
   } 
 }
