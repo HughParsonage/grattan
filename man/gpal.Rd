@@ -2,12 +2,12 @@
 % Please edit documentation in R/gpal.R
 \name{gpal}
 \alias{gpal}
-\title{automatic palette adjustment (for small number of categories)}
+\title{Automatic palette adjustment}
 \usage{
 gpal(n, dark = TRUE, reverse = FALSE)
 }
 \arguments{
-\item{n}{the number of variables/factors over which the palette is to paint}
+\item{n}{The number of variables/factors over which the palette is to paint.}
 
 \item{dark}{Should a dark palette be used? (Only available for n=2.)}
 
@@ -17,7 +17,7 @@ gpal(n, dark = TRUE, reverse = FALSE)
 A vector of HTML colours to be used.
 }
 \description{
-automatic palette adjustment (for small number of categories)
+Automatic palette adjustment
 }
 \author{
 Hugh Parsonage
