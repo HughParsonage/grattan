@@ -14,8 +14,11 @@ gpal <- function(n, dark = TRUE, reverse = FALSE){
   
   if(n > 6){
     if(n > 9){
-      out <- gpalx(n)
       message('No palette available for that number of categories.', '\n', 'Using gpalx')
+      if (reverse) 
+        return(gpalx(n)) 
+      else 
+        return(rev(gpalx(n)))
     } else {
       grattan.palette <- list(grattan::pal.1, grattan::pal.2, grattan::pal.3, grattan::pal.4, grattan::pal.5, grattan::pal.6, grattan::pal.7, grattan::pal.8, grattan::pal.9)
       message("I'm going off-piste: The Palette Of Nine is thine. May John have mercy on your soul.")
