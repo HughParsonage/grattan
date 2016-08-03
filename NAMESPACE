@@ -3,6 +3,8 @@
 export(CGT_inflator)
 export(apply_super_caps_and_div293)
 export(cpi_inflator)
+export(cpi_inflator_general_date)
+export(cpi_inflator_quarters)
 export(date2fy)
 export(fv)
 export(fy.year)
