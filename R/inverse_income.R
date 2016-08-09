@@ -5,20 +5,19 @@
 #' @param zero.tax.income A character vector, ("maximum", "zero", "uniform", numeric(1)) Given that many incomes map to zero taxes, the \code{income_tax} function is not invertible there. As a consequence, the inverse function's value must be specified for tax = 0. "maximum" returns the maximum integer income one can have with a zero tax liability; "zero" returns zero for any tax of zero; "uniform" provides a random integer from zero to the maximum income with a zero tax. The value can also be specified explicitly.
 #' @param ... Other arguments passed to \code{income_tax}.
 #' @return The taxable income given the tax payable for the financial year, acurrate to the nearest integer
+#' @export
 #' 
 
-inverse_income <- 
-  function(tax, fy.year = "2012-13", zero.tax.income = c("maximum", "zero", "uniform", numeric(1)), ...){
-    if(any(tax < 0))
-      stop("tax must be nonnegative")
-    
-    zero.tax.income <- zero.tax.income[1]
-    
-    if (length(tax) > 1)
-      inverse_income_lookup3(tax, fy.year = fy.year, zero.tax.income = zero.tax.income, ...)
-    else
-      inverse_income_radix(tax, fy.year = fy.year, zero.tax.income = zero.tax.income, ...)
-  }
+inverse_income <- function(tax, fy.year = "2012-13", zero.tax.income = c("maximum", "zero", "uniform", numeric(1)), ...){
+  zero.tax.income <- match.arg(zero.tax.income)
+  if(any(tax < 0))
+    stop("tax must be nonnegative")
+  
+  if (length(tax) > 1)
+    inverse_income_lookup3(tax, fy.year = fy.year, zero.tax.income = zero.tax.income, ...)
+  else
+    inverse_income_lengthone(tax, fy.year = fy.year, zero.tax.income = zero.tax.income, ...)
+}
 
 inverse_income_radix <- function(tax, fy.year = "2012-13", ...){
   stopifnot(length(tax) == 1L)
@@ -35,7 +34,7 @@ inverse_income_radix <- function(tax, fy.year = "2012-13", ...){
     income <- income - 2^14
     diff <- grattan::income_tax(income, fy.year = fy.year, ...) - tax
     
-    while (step > 0.25 || abs(diff) > 1){
+    while (step > 0.125 || abs(diff) > 1){
       if (diff < 0){
         income <- income + step
       } else {
@@ -87,7 +86,7 @@ inverse_income_lengthone <- function(tax, fy.year = "2012-13", zero.tax.income =
       }
     }
   } else {
-    out <- inverse_income_while(tax, fy.year = fy.year, ...)
+    out <- inverse_income_radix(tax, fy.year = fy.year, ...)
   }
   
   return(out)

@@ -1,6 +1,26 @@
 
 context("Individual income tax")
 
+test_that("income tax checks", {
+  # no fy.year
+  expect_error(income_tax(1), regexp = "fy.year is missing")
+  
+  # not fy
+  expect_error(income_tax(1, "2015-17"), regexp = "not in correct form")
+  
+  # not implemented
+  expect_error(income_tax(1, "2013-14", allow.forecasts = TRUE))
+  
+  # NA
+  expect_warning(income_tax(-1, "2013-14"), regexp = "Negative")
+  
+  # not a data frame
+  expect_error(income_tax(1, "2013-14", .dots.ATO = "foo"))
+  
+  # not implemented
+  expect_error(income_tax(1, "2013-14", return.mode = "integer"))
+})
+
 test_that("income_tax returns known results",{
   
   # All numbers are from the ATO comprehensive tax calculator. 

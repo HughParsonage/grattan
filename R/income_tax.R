@@ -59,7 +59,7 @@ income_tax <- function(income, fy.year, age = 42, family_status = "individual", 
   
   rolling_income_tax(income = income, fy.year = fy.year, age = age, 
                      family_status = family_status, n_dependants = n_dependants, 
-                     sample_file = sample_file, .dots.ATO = .dots.ATO)
+                     sample_file = sample_file, .dots.ATO = .dots.ATO, return.mode = return.mode)
 }
 
 
