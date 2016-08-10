@@ -5,6 +5,16 @@ test_that("Inverse single income matches.", {
   fy.year <- sample(yr2fy(2004:2015), size = 1)
   expect_true(abs(inverse_income(income_tax(income, fy.year), fy.year = fy.year, zero.tax.income = "maximum") - income) < 1/2, 
               info = paste0("income: ", income, "\n", "fy.year: ", fy.year))
+  
+  expect_true(abs(inverse_income_while(income_tax(income, fy.year), fy.year = fy.year) - income) < 3/2, 
+              info = paste0("income: ", income, "\n", "fy.year: ", fy.year))
+})
+
+test_that("Inverse income on zero", {
+  expect_gt(income_tax(inverse_income(0, "2012-13", zero.tax.income = "maximum") + 1, "2012-13"), 0)
+  expect_equal(inverse_income(0, "2014-15", zero.tax.income = 5), 5)
+  expect_equal(inverse_income(0, "2015-16", zero.tax.income = "zero"), 0)
+  expect_error(inverse_income(-1, "2015-16"))
 })
 
 test_that("Inverse long income matches.", {

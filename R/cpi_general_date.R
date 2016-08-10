@@ -11,8 +11,6 @@
 cpi_inflator_general_date <- function(from_nominal_price = 1, from_date, to_date, ...){
   # Check the nominal date
   if(all(grepl("^[12][0-9]{3}$", from_date))){
-
-    
     from_date <- paste0(from_date, "-Q4")
     message("CPI: Using Q4 for each year")
   } else {
@@ -35,8 +33,6 @@ cpi_inflator_general_date <- function(from_nominal_price = 1, from_date, to_date
   }
   # Target date
   if(all(grepl("^[12][0-9]{3}$", to_date))){
-
-    
     to_date <- paste0(to_date, "-Q4")
     message("CPI: Using Q4 for each year")
   } else {
@@ -48,14 +44,13 @@ cpi_inflator_general_date <- function(from_nominal_price = 1, from_date, to_date
     } else {
       
       if(all(!is.na(strptime(to_date, format = "%Y-%m-%d")))){
-
         to_date.qtr <- zoo::as.yearqtr(as.Date(to_date))
         to_date <- gsub("\\s", "-", to_date.qtr)
       } else {
         if(all(grepl("^[0-9]{4}.Q[1-4]$", to_date))){
           # Nothing to be done
         } else {
-          stop("Emergency stop: from_date could not be identified.")
+          stop("Emergency stop: to_date could not be identified.")
         }
       }
     }  

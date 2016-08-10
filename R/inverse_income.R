@@ -9,7 +9,9 @@
 #' 
 
 inverse_income <- function(tax, fy.year = "2012-13", zero.tax.income = c("maximum", "zero", "uniform", numeric(1)), ...){
-  zero.tax.income <- match.arg(zero.tax.income)
+  if (!is.numeric(zero.tax.income)){
+    zero.tax.income <- match.arg(zero.tax.income)
+  }
   if(any(tax < 0))
     stop("tax must be nonnegative")
   
