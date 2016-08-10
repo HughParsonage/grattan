@@ -133,6 +133,10 @@ stacked_bar_with_right_labels <- function(.data,
     if (!missing(coord_cartesian_args)){
       p <- p + do.call(ggplot2::coord_cartesian, args = coord_cartesian_args)
     }
+    
+    if (!missing(theme_grattan.args)){
+      p <- p + do.call(theme_hugh, theme_grattan.args)
+    }
 
     if (missing(right_margin)){
       p <- p + ggplot2::theme(plot.margin = grid::unit(c(0.7, label_max_width, 0.5, 0),
@@ -140,10 +144,6 @@ stacked_bar_with_right_labels <- function(.data,
     } else {
       p <- p + ggplot2::theme(plot.margin = grid::unit(c(0.7, right_margin, 0.5, 0), 
                                                        "lines"))
-    }
-    
-    if (!missing(theme_grattan.args)){
-      p <- p + do.call(theme_hugh, theme_grattan.args)
     }
     
     if (!missing(theme.args)){
