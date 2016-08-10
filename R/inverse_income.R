@@ -129,12 +129,14 @@ inverse_income_lookup3 <- function(tax, fy.year = "2012-13", zero.tax.income = "
   income.range <- seq(0L, max(ceiling(max(tax) * 3.79), 100000L), by = 1L)  
   input <- data.table::data.table(taxes = dplyr::if_else(zeroes, 1, tax))  # ensure a one-to-one relationship
   temp <- data.table::data.table(incomes = income.range)
-  temp[, taxes := income_tax(incomes, fy.year = fy.year, ...)]
+  # temp[, taxes := income_tax(incomes, fy.year = fy.year, ...)]
+  
+  temp[, "taxes" := lapply(.SD, income_tax, fy.year = fy.year), .SDcols = "incomes"]
   data.table::setkeyv(temp, "taxes")
   data.table::setkeyv(input, "taxes")
   tbl <- temp[input, roll=-Inf]  # LOOCF, all taxes are invertible
   
-  out <- tbl$incomes[oo]
+  out <- tbl[["incomes"]][oo]
   # Take care of zeroes
   if(any(zeroes)){
     if (zero.tax.income == "zero"){

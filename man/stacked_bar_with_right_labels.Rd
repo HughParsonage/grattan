@@ -6,7 +6,8 @@
 \usage{
 stacked_bar_with_right_labels(.data, geom = "bar", barwidth,
   verbose = FALSE, right_margin = 0.5, scale_y_args, scale_x_args,
-  coord_cartesian_args, text_family = "", theme.args, nudge_up = 0)
+  coord_cartesian_args, text_family = "", theme_grattan.args, theme.args,
+  nudge_up = 0)
 }
 \arguments{
 \item{.data}{A data frame, containing entries for \code{x}, \code{y}, and \code{fill}. \code{x} and \code{fill} must be ordered factors.}
@@ -26,6 +27,8 @@ stacked_bar_with_right_labels(.data, geom = "bar", barwidth,
 \item{coord_cartesian_args}{A list of arguments passed to \code{ggplot2::coord_cartesian}.}
 
 \item{text_family}{Text family for theme and geom text.}
+
+\item{theme_grattan.args}{Arguments passed to \code{theme_hugh}, an alias for \code{theme_grattan}. (For example, the \code{base_size}.)}
 
 \item{theme.args}{A list of arguments passed to \code{ggplot2::theme}.}
 
