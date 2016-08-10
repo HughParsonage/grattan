@@ -119,24 +119,26 @@ inverse_income_lookup2 <- function(tax, fy.year = "2012-13", zero.tax = "maximum
 
 inverse_income_lookup3 <- function(tax, fy.year = "2012-13", zero.tax.income = "maximum", ...){
   NAs <- is.na(tax)
-  tax <- ifelse(NAs, 1L, tax)
+  tax <- dplyr::if_else(NAs, 1, tax)
+  oo <- rank(tax, ties.method = "first")
   # This function creates a lookup table of incomes taxes 
   zeroes <- !NAs & tax == 0
   # We now designate the range of incomes to search over. 
   # Always check up to $100,000. There, the ratio of income to 
   # tax is at most 3.79 and decreases thereafter (2012-13).
   income.range <- seq(0L, max(ceiling(max(tax) * 3.79), 100000L), by = 1L)  
-  input <- data.table::data.table(taxes = ifelse(zeroes, 1, tax))  # ensure a one-to-one relationship
+  input <- data.table::data.table(taxes = dplyr::if_else(zeroes, 1, tax))  # ensure a one-to-one relationship
   temp <- data.table::data.table(incomes = income.range)
-  temp$taxes <- grattan::income_tax(temp$incomes, fy.year = fy.year, ...)
+  temp[, taxes := income_tax(incomes, fy.year = fy.year, ...)]
   data.table::setkeyv(temp, "taxes")
+  data.table::setkeyv(input, "taxes")
   tbl <- temp[input, roll=-Inf]  # LOOCF, all taxes are invertible
   
-  out <- tbl$incomes
+  out <- tbl$incomes[oo]
   # Take care of zeroes
   if(any(zeroes)){
     if (zero.tax.income == "zero"){
-      out[zeroes] <- 0L
+      out[zeroes] <- 0
     } else {
       if(is.numeric(zero.tax.income)){
         out[zeroes] <- zero.tax.income

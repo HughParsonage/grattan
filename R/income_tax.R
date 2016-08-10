@@ -17,6 +17,7 @@
 #' @importFrom magrittr %>%
 #' @importFrom magrittr %$%
 #' @importFrom magrittr %<>%
+#' @importFrom dplyr if_else
 #' @import data.table
 #' @return the total personal income tax payable
 #' @export 
@@ -86,6 +87,9 @@ rolling_income_tax <- function(income,
   # http://stackoverflow.com/a/9335687/1664978
   prohibit_vector_recycling(income, fy.year, age, family_status, n_dependants)
   prohibit_length0_vectors(income, fy.year, age, family_status, n_dependants)
+  
+  input.lengths <- vapply(list(income, fy.year, age, family_status, n_dependants), FUN = length, FUN.VALUE = integer(1))
+  max.length <- max(input.lengths)
 
   # tax_table2 provides the raw tax tables, but also the amount
   # of tax paid at each bracket, to make the rolling join 
@@ -184,9 +188,10 @@ rolling_income_tax <- function(income,
                   family_status = if (missing(.dots.ATO) || "Spouse_adjusted_taxable_inc" %notin% names(.dots.ATO)){
                     family_status
                   } else {
-                    ifelse(.dots.ATO$Spouse_adjusted_taxable_inc > 0, "family", "individual")
+                    if_else(.dots.ATO$Spouse_adjusted_taxable_inc > 0, "family", "individual")
                   }, 
                   n_dependants = n_dependants)
+  
   lito. <- .lito(income, fy.year)
   
   if (!is.null(.dots.ATO) && !missing(.dots.ATO) && all(c("Rptbl_Empr_spr_cont_amt",
@@ -207,9 +212,13 @@ rolling_income_tax <- function(income,
   }
   
   # https://www.legislation.gov.au/Details/C2014A00048
-  temp_budget_repair_levy. <- ifelse(fy.year %in% c("2014-15", "2015-16", "2016-17"), 
-                                     pmaxC(0.02 * (income - 180e3), 0), 
-                                     0)
+  # input[["fy_year"]] ensures it matches the length of income if length(fy.year) == 1.
+  # Also using dplyr::if_else for safety.
+  temp_budget_repair_levy. <- if_else(input[["fy_year"]] %in% c("2014-15", "2015-16", "2016-17"), 
+                                      pmaxC(0.02 * (income - 180e3), 0), 
+                                      0)
+  
+  
   
   pmaxC(base_tax. - lito. - sapto., 
         0) + medicare_levy. + temp_budget_repair_levy.
