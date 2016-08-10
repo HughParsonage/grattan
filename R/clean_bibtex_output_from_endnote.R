@@ -12,7 +12,7 @@ clean_bibtex_output_from_endnote <- function(filename,
 raw <- readLines(filename)
 
 startlines <- grep("\\@[a-z]+\\{\\s*$", raw)
-raw[startlines] <- ifelse(grepl("^\\@", raw[startlines]), 
+raw[startlines] <- if_else(grepl("^\\@", raw[startlines]), 
                           raw[startlines], 
                           gsub("^.*\\@", "@", raw[startlines]))
 authorlines <- grep("^\\s*(author)\\s*=", raw, ignore.case = TRUE)

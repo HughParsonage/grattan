@@ -13,7 +13,7 @@ grattan_dollar <- function (x, digits = 0) {
   commaz <- format(abs(x), nsmall = nsmall, trim = TRUE, big.mark = ",", 
                    scientific = FALSE, digits = 1L)
   
-  ifelse(x < 0, 
-         paste0("\U2212","$", commaz),
-         paste0("$", commaz))
+  if_else(x < 0, 
+          paste0("\U2212","$", commaz),
+          paste0("$", commaz))
 }

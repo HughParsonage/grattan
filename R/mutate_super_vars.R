@@ -121,7 +121,7 @@ apply_super_caps_and_div293 <- function(.sample.file,
       }
     }
     
-    .sample.file[ , concessional_cap := ifelse(age_range_description >= cap2_age_group, cap2, cap)]
+    .sample.file[ , concessional_cap := if_else(age_range_description >= cap2_age_group, cap2, cap)]
   } else {
     .sample.file[ , concessional_cap := cap]
   }
@@ -136,10 +136,10 @@ apply_super_caps_and_div293 <- function(.sample.file,
     .sample.file[ , low_tax_contributions_div293 := pmaxC(concessional_contributions - excess_concessional_contributions, 0)]
   }
   .sample.file[ , div293_income := surchargeable_income_div293 + low_tax_contributions_div293]
-  .sample.file[ , div293_tax := ifelse(div293_income > div293_threshold, 
-                                       0.15 * pminV(low_tax_contributions_div293, 
-                                                    pmaxC(div293_income - div293_threshold, 0)), 
-                                       0)]
+  .sample.file[ , div293_tax := if_else(div293_income > div293_threshold, 
+                                        0.15 * pminV(low_tax_contributions_div293, 
+                                                     pmaxC(div293_income - div293_threshold, 0)), 
+                                        0)]
   
   # Modify taxable income to reflect exceeding cap:
   .sample.file[ , Taxable_income_for_ECT := Taxable_Income + excess_concessional_contributions]

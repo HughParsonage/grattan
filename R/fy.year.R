@@ -22,10 +22,11 @@ is.fy <- function(fy.yr){
   #  2012-13
   #  201213
   # only
+  # ifelse allowable
   ifelse(grepl("^([12][0-9]{3})[-\\s]?[0-9]{2}$", fy.yr), 
-      # Are the years consecutive?
-      (as.integer(gsub("^([12][0-9]{3})[-\\s]?[0-9]{2}$", "\\1", fy.yr)) + 1) %% 100 == as.numeric(gsub("^[12][0-9]{3}[-\\s]?([0-9]{2})$", "\\1", fy.yr)),
-      FALSE)
+          # Are the years consecutive?
+          (as.integer(gsub("^([12][0-9]{3})[-\\s]?[0-9]{2}$", "\\1", fy.yr)) + 1) %% 100 == as.numeric(gsub("^[12][0-9]{3}[-\\s]?([0-9]{2})$", "\\1", fy.yr)),
+          FALSE)
 }
 
 
@@ -67,7 +68,7 @@ fy2date <- function(x){
 
 date2fy <- function(date){
   assertthat::is.date(date)
-  ifelse(lubridate::month(date) < 7, 
-         yr2fy(lubridate::year(date)), 
-         yr2fy(lubridate::year(date) + 1))
+  if_else(lubridate::month(date) < 7, 
+          yr2fy(lubridate::year(date)), 
+          yr2fy(lubridate::year(date) + 1))
 }

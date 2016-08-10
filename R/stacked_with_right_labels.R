@@ -9,6 +9,7 @@
 #' @param scale_x_args A list of arguments passed to \code{ggplot2::scale_x_continuous}.
 #' @param coord_cartesian_args A list of arguments passed to \code{ggplot2::coord_cartesian}.
 #' @param text_family Text family for theme and geom text. 
+#' @param theme_grattan.args Arguments passed to \code{theme_hugh}, an alias for \code{theme_grattan}. (For example, the \code{base_size}.)
 #' @param theme.args A list of arguments passed to \code{ggplot2::theme}.
 #' @param nudge_up A numeric vector to be added every text y-coordinate.
 #' @return A chart with the labels in the right gutter 
@@ -39,6 +40,7 @@ stacked_bar_with_right_labels <- function(.data,
                                           scale_x_args,
                                           coord_cartesian_args,
                                           text_family = "",
+                                          theme_grattan.args,
                                           theme.args, 
                                           nudge_up = 0){
   stopifnot(all(c("x", "y", "fill") %in% names(.data)))
@@ -53,9 +55,9 @@ stacked_bar_with_right_labels <- function(.data,
   .plot.data <- 
     .data %>%
     # our label should only appear at the last x
-    dplyr::mutate(text.label = ifelse(x == max(x), 
-                                      as.character(fill), 
-                                      NA_character_)) %>%
+    dplyr::mutate(text.label = if_else(x == max(x), 
+                                       as.character(fill), 
+                                       NA_character_)) %>%
     # it should be as high as the corresponding bar:
     # all the way up the previous, then half of the corresponding height
     dplyr::arrange(fill) %>%
@@ -74,7 +76,8 @@ stacked_bar_with_right_labels <- function(.data,
   
   # To convert to lines, use "X" as approximation
   eX <- strwidth("X", units = "inches")
-  label_max_width <- 1.01 * label_max_width / eX
+  # 1.01 actually seems too wide for Helvetica.
+  label_max_width <- 1.00 * label_max_width / eX
   if (verbose){
     message('I chose ', label_max_width, ' for the right margin.\n',
             'If my choice of margin is unsuitable for the label,\n',
@@ -137,6 +140,10 @@ stacked_bar_with_right_labels <- function(.data,
     } else {
       p <- p + ggplot2::theme(plot.margin = grid::unit(c(0.7, right_margin, 0.5, 0), 
                                                        "lines"))
+    }
+    
+    if (!missing(theme_grattan.args)){
+      p <- p + do.call(theme_hugh, theme_grattan.args)
     }
     
     if (!missing(theme.args)){
