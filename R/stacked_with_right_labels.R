@@ -6,7 +6,8 @@
 #' @param verbose Report the margin used (in grid:: 'lines').
 #' @param right_margin The amount of padding at right to use. The whole point of this function is to select a good right margin to allow space. But if the margin provided is wrong, it can be changed manually here.
 #' @param scale_y_args A list of arguments passed to r \code{ggplot2::scale_y_continuous}.
-#' @param scale_x_args A list of arguments passed to \code{ggplot2::scale_x_discrete}. If the first argument is "continuous", then the arguments passed to \code{ggplot2::scale_x_continuous}.
+#' @param x_continuous Should the x axis be continuous?
+#' @param scale_x_args A list of arguments passed to \code{ggplot2::scale_x_discrete}. If \code{x_continuous}, then the arguments passed to \code{ggplot2::scale_x_continuous}.
 #' @param coord_cartesian_args A list of arguments passed to \code{ggplot2::coord_cartesian}.
 #' @param text_family Text family for theme and geom text. 
 #' @param theme_grattan.args Arguments passed to \code{theme_hugh}, an alias for \code{theme_grattan}. (For example, the \code{base_size}.)
