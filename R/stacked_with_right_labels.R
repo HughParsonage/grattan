@@ -6,7 +6,7 @@
 #' @param verbose Report the margin used (in grid:: 'lines').
 #' @param right_margin The amount of padding at right to use. The whole point of this function is to select a good right margin to allow space. But if the margin provided is wrong, it can be changed manually here.
 #' @param scale_y_args A list of arguments passed to r \code{ggplot2::scale_y_continuous}.
-#' @param scale_x_args A list of arguments passed to \code{ggplot2::scale_x_continuous}.
+#' @param scale_x_args A list of arguments passed to \code{ggplot2::scale_x_discrete}. If the first argument is "continuous", then the arguments passed to \code{ggplot2::scale_x_continuous}.
 #' @param coord_cartesian_args A list of arguments passed to \code{ggplot2::coord_cartesian}.
 #' @param text_family Text family for theme and geom text. 
 #' @param theme_grattan.args Arguments passed to \code{theme_hugh}, an alias for \code{theme_grattan}. (For example, the \code{base_size}.)
@@ -36,7 +36,8 @@ stacked_bar_with_right_labels <- function(.data,
                                           barwidth,
                                           verbose = FALSE,
                                           right_margin = 0.5,
-                                          scale_y_args, 
+                                          scale_y_args,
+                                          x_continuous = FALSE,
                                           scale_x_args,
                                           coord_cartesian_args,
                                           text_family = "",
@@ -48,8 +49,14 @@ stacked_bar_with_right_labels <- function(.data,
   if(!is.factor(.data$fill) || !is.ordered(.data$fill)){
     stop("'fill' must be an ordered factor.")
   }
-  if(!is.factor(.data$x) || !is.ordered(.data$x)){
+  if (!x_continuous){
+    if (!is.factor(.data$x) || !is.ordered(.data$x)){
     stop("'x' must be an ordered factor.")
+    }
+  } else {
+    if (!is.numeric(.data$x)){
+      stop("x must be numeric")
+    }
   }
   
   .plot.data <- 
@@ -123,7 +130,11 @@ stacked_bar_with_right_labels <- function(.data,
                            fontface = "bold") 
     }
     if (!missing(scale_x_args)){
-      p <- p + do.call(ggplot2::scale_x_discrete, args = scale_x_args)
+      if (x_continuous){
+        p <- p + do.call(ggplot2::scale_x_continuous, args = scale_x_args)
+      } else {
+        p <- p + do.call(ggplot2::scale_x_discrete, args = scale_x_args)
+      }
     }
     
     if (!missing(scale_y_args)){

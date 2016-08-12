@@ -22,7 +22,7 @@ stacked_bar_with_right_labels(.data, geom = "bar", barwidth,
 
 \item{scale_y_args}{A list of arguments passed to r \code{ggplot2::scale_y_continuous}.}
 
-\item{scale_x_args}{A list of arguments passed to \code{ggplot2::scale_x_continuous}.}
+\item{scale_x_args}{A list of arguments passed to \code{ggplot2::scale_x_discrete}. If the first argument is "continuous", then the arguments passed to \code{ggplot2::scale_x_continuous}.}
 
 \item{coord_cartesian_args}{A list of arguments passed to \code{ggplot2::coord_cartesian}.}
 
