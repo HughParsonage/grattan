@@ -26,7 +26,7 @@ apply_super_caps_and_div293 <- function(.sample.file,
                                         colname_new_Taxable_Income = "Taxable_income_for_ECT",
                                         div293_threshold = 300e3, 
                                         # for low income tax contributions amount
-                                        cap = 25e3, cap2 = 35e3, age_based_cap = TRUE, cap2_age = 59, ecc = FALSE,
+                                        cap = 25e3, cap2 = 35e3, age_based_cap = TRUE, cap2_age = 49, ecc = FALSE,
                                         use_other_contr = FALSE,
                                         div293 = TRUE, warn_if_colnames_overwritten = TRUE, drop_helpers = FALSE, copyDT = TRUE){
   # Todo/wontfix
