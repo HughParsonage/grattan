@@ -52,7 +52,7 @@ medicare_levy <- function(income,
     .[ ,medicare_levy := pmaxC(medicare_levy - 
                                  (family_status == "family") *
                                  # pmaxC <= "(if any)" subs.8(2)(c) of Medicare Levy Act 1986
-                                 pmaxC(0.02 * lower_family_threshold - 0.08 * (family_income - lower_family_threshold), 0),
+                                 pmaxC(rate * lower_family_threshold - (taper - rate)  * (family_income - lower_family_threshold), 0),
                                0)] %>%
     .[["medicare_levy"]]
 }
