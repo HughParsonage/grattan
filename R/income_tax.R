@@ -136,44 +136,6 @@ rolling_income_tax <- function(income,
             max_lito)
     }
   }
-
-  
-  medicare_levy <- function(income, 
-                            Spouse_income,
-                            fy.year,
-                            sapto.eligible,
-                            family_status, 
-                            n_dependants){
-    data.table::data.table(income = income, 
-                           Spouse_income = Spouse_income,
-                           fy_year = fy.year,
-                           sapto = sapto.eligible, 
-                           family_status = family_status) %>%
-      dplyr::mutate(
-        # Assume spouse income is included irrespective of Partner_status
-        # This appears to be the correct treatment (e.g. if the Partner dies 
-        # before the end of the tax year, they would have status 0 but 
-        # income that is relevant for medicare income).  There are details
-        # (such as if the partner is in gaol) that are overlooked here.
-        # 
-        # Enhancement: family taxable income should exclude super lump sums.
-        medicare_income = income + Spouse_income
-      ) %>%
-      data.table::as.data.table(.) %>%
-      merge(medicare_tbl, 
-            by = c("fy_year", "sapto", "family_status"),
-            sort = FALSE, 
-            all.x = TRUE) %>%
-      dplyr::mutate(
-        lower_bracket = lower_bracket + ifelse(!is.na(lower_up_for_each_child), 
-                                               lower_up_for_each_child * n_dependants, 
-                                               0L),
-        medicare_levy = pminV(pmaxC(taper * (medicare_income - lower_bracket),
-                                    0), 
-                              rate * income)
-        ) %$%
-      medicare_levy
-  }
   
   base_tax. <- tax_fun(income, fy.year = fy.year)
   medicare_levy. <- 
