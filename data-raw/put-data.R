@@ -1,6 +1,11 @@
 # Income tax tables.
 library(magrittr)
 library(dplyr)
+library(forecast)
+library(data.table)
+library(taxstats)
+
+renew = FALSE
 
 tax_tbl <-
   data.table::fread("./data-raw/tax-brackets-and-marginal-rates-by-fy.tsv")
@@ -15,17 +20,17 @@ medicare_tbl_indiv <-
   readxl::read_excel("./data-raw/medicare-tables.xlsx", sheet = "indiv") %>%
   data.table::as.data.table(.)
 
-medicare_tbl_families <- 
-  readxl::read_excel("./data-raw/medicare-tables.xlsx", sheet = "families") %>%
-  data.table::as.data.table(.)
-
 medicare_tbl <- 
-  data.table::rbindlist(list(medicare_tbl_indiv, medicare_tbl_families), use.names = TRUE, fill = TRUE) %>%
+  medicare_tbl_indiv %>%
   dplyr::mutate_each(funs(as.logical), sato, pto, sapto) %>%
   data.table::as.data.table(.) %>%
   data.table::setkey(fy_year, sapto, family_status) %>%
   # avoid cartesian joins
   unique
+
+# To ensure faster versions of calculations do not evaluate NA.
+set(medicare_tbl, which(is.na(medicare_tbl[["lower_up_for_each_child"]])), "lower_up_for_each_child", 0)
+set(medicare_tbl, which(is.na(medicare_tbl[["upper_threshold"]])), "upper_threshold", 0)
 
 medicare_tbl %>% 
   readr::write_tsv("./data-raw/medicare_tbl.tsv")
@@ -120,16 +125,17 @@ cgt_expenditures <-
   generic.cols <<- SetDiff(col.names, 
                            wagey.cols, super.bal.col, lfy.cols, cpiy.cols, derived.cols, Not.Inflated)
   }
-generic_inflators <- 
+
+generic_inflators <- if (!renew) fread("./data-raw/generic_inflators.tsv") else {
   lapply(1:10, 
          function(h) dplyr::mutate(generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = "2013-14"), 
                                    H = h)) %>% 
   rbindlist(use.names = TRUE) %>%
   mutate(fy_year = yr2fy(2014 + H)) %>%
   rename(h = H)
+}
 
-cg_inflators_1314 <- 
-{
+cg_inflators_1314 <- if (!renew) fread("./data-raw/cg_inflators_1314.tsv") else {
   cg_table <- 
     taxstats::sample_files_all %>%
     dplyr::select(fy.year, Taxable_Income, Net_CG_amt) %>%
