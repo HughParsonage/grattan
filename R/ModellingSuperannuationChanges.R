@@ -22,11 +22,11 @@
 #' @export
 
 model_new_caps_and_div293 <- function(.sample.file, fy.year,
-                                      new_cap = 30e3, new_cap2 = 35e3, new_age_based_cap = TRUE, new_cap2_age = 59, new_ecc = FALSE,
+                                      new_cap = 30e3, new_cap2 = 35e3, new_age_based_cap = TRUE, new_cap2_age = 49, new_ecc = FALSE,
                                       new_div293_threshold = 300e3,
                                       use_other_contr = FALSE,
                                       
-                                      prv_cap = 30e3, prv_cap2 = 35e3, prv_age_based_cap = TRUE, prv_cap2_age = 59, prv_ecc = FALSE,
+                                      prv_cap = 30e3, prv_cap2 = 35e3, prv_age_based_cap = TRUE, prv_cap2_age = 49, prv_ecc = FALSE,
                                       prv_div293_threshold = 300e3){
   prv_revenue <- new_revenue <- NULL
   if (!any("WEIGHT" == names(.sample.file))){
