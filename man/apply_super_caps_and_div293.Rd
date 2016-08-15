@@ -44,6 +44,8 @@ apply_super_caps_and_div293(.sample.file,
 
 \item{.mu}{Exponential weight for WEIGHT. Should be set so \eqn{\lambda + \mu = 1}. Failure to do so is a warning.}
 
+\item{reweight_contr_match_ato}{(logical) Should WEIGHT be inflated so as to match aggregates?}
+
 \item{div293}{(logical) Should Division 293 tax be calculated? If FALSE, \code{.sample.file} is returned immediately, with a warning (that you're using this function pointlessly!).}
 
 \item{warn_if_colnames_overwritten}{(logical) Issue a warning if the construction of helper columns will overwrite existing column names in \code{.sample.file}.}
@@ -51,8 +53,6 @@ apply_super_caps_and_div293(.sample.file,
 \item{drop_helpers}{(logical) Should columns used in the calculation be dropped before the sample file is returned?}
 
 \item{copyDT}{(logical) Should the data table be \code{copy()}d? If the action of this data table is being compared, possibly useful.}
-
-\item{reweight_match_ato}{(logical) Should WEIGHT be inflated so as to match aggregates?}
 }
 \value{
 A data frame comprising the original sample file (\code{.sample.file}) with an extra column equalling the Division 293 tax payable by that taxpayer.

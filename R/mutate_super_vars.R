@@ -15,7 +15,7 @@
 #' @param use_other_contr Make a (poor) assumption that all 'Other contributions' (\code{MCS_Othr_Contr}) are concessional contributions. This may be a useful upper bound should such contributions be considered important.
 #' @param inflate_contr_match_ato (logical) Should concessional contributions be inflated to match aggregates in 2013-14? That is, should concessional contributions by multipled by \code{grattan:::super_contribution_inflator_1314}, which was defined to be: \deqn{\frac{\textrm{Total assessable contributions in SMSF and funds}}{\textrm{Total contributions in 2013-14 sample file}}}{Total assessable contributions in SMSF and funds / Total contributions in 2013-14 sample file.}. 
 #' @param .lambda Exponential weight applied to \code{concessional contributions}. 0 is equivalent to FALSE in \code{inflate_contr_match_ato}; 1 is equivalent to match.
-#' @param reweight_match_ato (logical) Should WEIGHT be inflated so as to match aggregates?
+#' @param reweight_contr_match_ato (logical) Should WEIGHT be inflated so as to match aggregates?
 #' @param .mu Exponential weight for WEIGHT. Should be set so \eqn{\lambda + \mu = 1}. Failure to do so is a warning.
 #' @param div293 (logical) Should Division 293 tax be calculated? If FALSE, \code{.sample.file} is returned immediately, with a warning (that you're using this function pointlessly!).
 #' @param warn_if_colnames_overwritten (logical) Issue a warning if the construction of helper columns will overwrite existing column names in \code{.sample.file}.
@@ -107,15 +107,16 @@ apply_super_caps_and_div293 <- function(.sample.file,
   .sample.file[ , non_concessional_contributions := pmaxC(MCS_Prsnl_Contr - Non_emp_spr_amt, 0)]
   
   if (reweight_contr_match_ato){
+    WEIGHT <- NULL
+    if (!any("WEIGHT" == names(.sample.file))){
+      warning("No WEIGHT found; using WEIGHT=50 in reweighting.")
+      .sample.file[ , WEIGHT := 50]
+    } 
     .sample.file[ , WEIGHT := WEIGHT * if_else(concessional_contributions > 0,
                                                (super_contribution_inflator_1314 ^ .mu), 
                                                1)]
   }
-  
-  
-  
-  
-  
+
   if (age_based_cap){
     if (!any("age_range_description" == names(.sample.file))){
       

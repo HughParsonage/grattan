@@ -12,7 +12,7 @@
 #' @param use_other_contr Should \code{MCS_Othr_Contr} be used to calculate Division 293 liabilities?
 #' @param inflate_contr_match_ato (logical) Should concessional contributions be inflated to match aggregates in 2013-14? That is, should concessional contributions by multipled by \code{grattan:::super_contribution_inflator_1314}, which was defined to be: \deqn{\frac{\textrm{Total assessable contributions in SMSF and funds}}{\textrm{Total contributions in 2013-14 sample file}}}{Total assessable contributions in SMSF and funds / Total contributions in 2013-14 sample file.}. 
 #' @param .lambda (For \code{inflate_contr_match_ato}.) 0 is equivalent to FALSE; 1 is equivalent to match.
-#' @param reweight_match_ato (logical) Should WEIGHT be inflated so as to match aggregates?
+#' @param reweight_contr_match_ato (logical) Should WEIGHT be inflated so as to match aggregates?
 #' @param .mu Exponential weight for WEIGHT. Should be set so \eqn{\lambda + \mu = 1}. Failure to do so is a warning.
 #' @param prv_cap The \strong{comparator} cap on concessional contributions for all taxpayers if \code{age_based_cap} is FALSE, or for those below the age threshold otherwise.
 #' @param prv_cap2 The \strong{comparator} cap on concessional contributions for those above the age threshold. No effect if \code{age_based_cap} is FALSE.

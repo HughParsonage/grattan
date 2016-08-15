@@ -24,7 +24,6 @@ Imports:
     readr, 
     zoo, 
     lazyeval, 
-    devtools,
     purrr, 
     xtable
 LinkingTo: Rcpp
