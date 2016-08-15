@@ -10,6 +10,7 @@
 #' @param new_ecc (logical) Should an excess concessional contributions charge be calculated? (Not implemented.)
 #' @param new_div293_threshold The \strong{proposed} Division 293 threshold. 
 #' @param use_other_contr Should \code{MCS_Othr_Contr} be used to calculate Division 293 liabilities?
+#' @param inflate_contr_match_ato (logical) Should concessional contributions be inflated to match aggregates in 2013-14? That is, should concessional contributions by multipled by \code{grattan:::super_contribution_inflator_1314}, which was defined to be: \deqn{\frac{\textrm{Total assessable contributions in SMSF and funds}}{\textrm{Total contributions in 2013-14 sample file}}}{Total assessable contributions in SMSF and funds / Total contributions in 2013-14 sample file.}. 
 #' @param prv_cap The \strong{comparator} cap on concessional contributions for all taxpayers if \code{age_based_cap} is FALSE, or for those below the age threshold otherwise.
 #' @param prv_cap2 The \strong{comparator} cap on concessional contributions for those above the age threshold. No effect if \code{age_based_cap} is FALSE.
 #' @param prv_age_based_cap Is the \strong{comparator} cap on concessional contributions age-based? 
@@ -24,7 +25,8 @@
 model_new_caps_and_div293 <- function(.sample.file, fy.year,
                                       new_cap = 30e3, new_cap2 = 35e3, new_age_based_cap = TRUE, new_cap2_age = 49, new_ecc = FALSE,
                                       new_div293_threshold = 300e3,
-                                      use_other_contr = FALSE,
+                                      use_other_contr = FALSE, 
+                                      inflate_contr_match_ato = FALSE,
                                       
                                       prv_cap = 30e3, prv_cap2 = 35e3, prv_age_based_cap = TRUE, prv_cap2_age = 49, prv_ecc = FALSE,
                                       prv_div293_threshold = 300e3){
@@ -41,6 +43,7 @@ model_new_caps_and_div293 <- function(.sample.file, fy.year,
                                              colname_new_Taxable_Income = "old_Taxable_Income",
                                              div293_threshold = prv_div293_threshold, 
                                              use_other_contr = use_other_contr,
+                                             inflate_contr_match_ato = inflate_contr_match_ato,
                                              cap = prv_cap, cap2 = prv_cap2, age_based_cap = prv_age_based_cap, cap2_age = prv_cap2_age, ecc = prv_ecc,
                                              div293 = TRUE, warn_if_colnames_overwritten = FALSE, drop_helpers = TRUE, copyDT = FALSE)
   
@@ -59,6 +62,7 @@ model_new_caps_and_div293 <- function(.sample.file, fy.year,
                                                  colname_new_Taxable_Income = "new_Taxable_Income",
                                                  div293_threshold = new_div293_threshold, 
                                                  use_other_contr = use_other_contr,
+                                                 inflate_contr_match_ato = inflate_contr_match_ato,
                                                  cap = new_cap, cap2 = new_cap2, age_based_cap = new_age_based_cap, cap2_age = new_cap2_age, ecc = new_ecc,
                                                  div293 = TRUE, warn_if_colnames_overwritten = FALSE, drop_helpers = TRUE, copyDT = FALSE)
   
