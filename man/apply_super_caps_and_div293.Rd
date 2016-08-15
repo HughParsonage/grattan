@@ -11,8 +11,9 @@ apply_super_caps_and_div293(.sample.file,
   div293_threshold = 3e+05, cap = 30000, cap2 = 35000,
   age_based_cap = TRUE, cap2_age = 49, ecc = FALSE,
   use_other_contr = FALSE, inflate_contr_match_ato = FALSE, .lambda = 1,
-  div293 = TRUE, warn_if_colnames_overwritten = TRUE,
-  drop_helpers = FALSE, copyDT = TRUE)
+  .mu = 1, reweight_contr_match_ato = FALSE, div293 = TRUE,
+  warn_if_colnames_overwritten = TRUE, drop_helpers = FALSE,
+  copyDT = TRUE)
 }
 \arguments{
 \item{.sample.file}{A data.table containing at least the variables \code{sample_file_1314} from the taxstats package.}
@@ -39,7 +40,9 @@ apply_super_caps_and_div293(.sample.file,
 
 \item{inflate_contr_match_ato}{(logical) Should concessional contributions be inflated to match aggregates in 2013-14? That is, should concessional contributions by multipled by \code{grattan:::super_contribution_inflator_1314}, which was defined to be: \deqn{\frac{\textrm{Total assessable contributions in SMSF and funds}}{\textrm{Total contributions in 2013-14 sample file}}}{Total assessable contributions in SMSF and funds / Total contributions in 2013-14 sample file.}.}
 
-\item{.lambda}{(For \code{inflate_contr_match_ato}.) 0 is equivalent to FALSE; 1 is equivalent to match.}
+\item{.lambda}{Exponential weight applied to \code{concessional contributions}. 0 is equivalent to FALSE in \code{inflate_contr_match_ato}; 1 is equivalent to match.}
+
+\item{.mu}{Exponential weight for WEIGHT. Should be set so \eqn{\lambda + \mu = 1}. Failure to do so is a warning.}
 
 \item{div293}{(logical) Should Division 293 tax be calculated? If FALSE, \code{.sample.file} is returned immediately, with a warning (that you're using this function pointlessly!).}
 
@@ -48,6 +51,8 @@ apply_super_caps_and_div293(.sample.file,
 \item{drop_helpers}{(logical) Should columns used in the calculation be dropped before the sample file is returned?}
 
 \item{copyDT}{(logical) Should the data table be \code{copy()}d? If the action of this data table is being compared, possibly useful.}
+
+\item{reweight_match_ato}{(logical) Should WEIGHT be inflated so as to match aggregates?}
 }
 \value{
 A data frame comprising the original sample file (\code{.sample.file}) with an extra column equalling the Division 293 tax payable by that taxpayer.
