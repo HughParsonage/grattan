@@ -116,11 +116,11 @@ n_affected_from_new_cap_and_div293 <- function(..., adverse_only = TRUE){
   # Less than a dollar change in revenue is no change
   if (adverse_only){
     model_new_caps_and_div293(...) %>%
-    {sum((.[["new_revenue"]] - .[["prv_revenue"]]) > 1) * .[["WEIGHT"]][1]}
+    {sum(((.[["new_revenue"]] - .[["prv_revenue"]]) > 1) * .[["WEIGHT"]][1])}
   } else {
     model_new_caps_and_div293(...) %>%
       # abs() means a decrease in tax will count
-    {sum(abs(.[["new_revenue"]] - .[["prv_revenue"]]) > 1) * .[["WEIGHT"]][1]}
+    {sum((abs(.[["new_revenue"]] - .[["prv_revenue"]]) > 1) * .[["WEIGHT"]][1])}
   }
 }
 
@@ -130,7 +130,7 @@ n_affected_from_new_cap_and_div293 <- function(..., adverse_only = TRUE){
 
 revenue_from_new_cap_and_div293 <- function(...){
   model_new_caps_and_div293(...) %>%
-  {sum((.[["new_revenue"]] - .[["prv_revenue"]])) * .[["WEIGHT"]][1]}
+  {sum((.[["new_revenue"]] - .[["prv_revenue"]]) * .[["WEIGHT"]][1])}
 }
 
 

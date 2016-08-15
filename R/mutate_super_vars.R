@@ -103,12 +103,16 @@ apply_super_caps_and_div293 <- function(.sample.file,
     .sample.file[ , Non_emp_spr_amt := Non_emp_spr_amt * (super_contribution_inflator_1314 ^ .lambda) ]
   }
   
-  if (reweight_contr_match_ato){
-    .sample.file[ , WEIGHT := WEIGHT * (super_contribution_inflator_1314 ^ .mu)]
-  }
-  
   .sample.file[ , concessional_contributions := MCS_Emplr_Contr + Non_emp_spr_amt]
   .sample.file[ , non_concessional_contributions := pmaxC(MCS_Prsnl_Contr - Non_emp_spr_amt, 0)]
+  
+  if (reweight_contr_match_ato){
+    .sample.file[ , WEIGHT := WEIGHT * if_else(concessional_contributions > 0,
+                                               (super_contribution_inflator_1314 ^ .mu), 
+                                               1)]
+  }
+  
+  
   
   
   
