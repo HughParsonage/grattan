@@ -3,6 +3,7 @@ library(magrittr)
 library(dplyr)
 library(forecast)
 library(data.table)
+library(dtplyr)
 library(taxstats)
 
 renew = FALSE
@@ -184,6 +185,37 @@ cg_inflators_1314 <- if (!renew) fread("./data-raw/cg_inflators_1314.tsv") else 
   cg_inf
 }
 
+super_contribution_inflator_1314 <- 
+{
+  sample_file_1314_concessional_contribution_total <- 
+    
+    apply_super_caps_and_div293(.sample.file = sample_file_1314,
+                                # 2013-14 policy settings
+                                div293_threshold = 300e3, 
+                                cap = 30e3, cap2 = 35e3, age_based_cap = TRUE, cap2_age = 49) %$%
+    sum(concessional_contributions) * 50
+  
+  # What do the ATO aggregate tables suggest should be the answer?
+  library(taxstats)
+  funds <- 
+    funds_table1_201314 %>%
+    filter(Selected_items == "Assessable contributions") %>%
+    select(fy_year, Assessable_contributions_funds = Sum) %>%
+    setkey(fy_year)
+  
+  smsfs <- 
+    funds_table2_smsf_201314 %>%
+    filter(Selected_items == "Assessable contributions") %>%
+    select(fy_year, Assessable_contributions_smsfs = Sum) %>%
+    setkey(fy_year)
+  
+  ato_aggregate_contributions <- 
+    smsfs[funds] %>%
+    mutate(total_contributions = Assessable_contributions_smsfs + Assessable_contributions_funds)
+  
+  ato_aggregate_contributions[fy_year == "2013-14"][["total_contributions"]] / sample_file_1314_concessional_contribution_total
+}
+
 
 devtools::use_data(lito_tbl, 
                    tax_tbl, 
@@ -198,5 +230,6 @@ devtools::use_data(lito_tbl,
                    cgt_expenditures,
                    generic_inflators,
                    cg_inflators_1314,
+                   super_contribution_inflator_1314,
                    #
                    internal = TRUE, overwrite = TRUE)

@@ -32,9 +32,8 @@ model_new_caps_and_div293 <- function(.sample.file, fy.year,
   if (!any("WEIGHT" == names(.sample.file))){
     warning("WEIGHT not specified. Using WEIGHT=50 (assuming a 2% sample file).")
     WEIGHT <- 50
-  } else {
-    WEIGHT <- .sample.file[["WEIGHT"]][[1]]
-  }
+    .sample.file[, WEIGHT := WEIGHT]
+  } 
   
   sample_file <- apply_super_caps_and_div293(.sample.file, 
                                              colname_concessional = "old_concessional_contributions",

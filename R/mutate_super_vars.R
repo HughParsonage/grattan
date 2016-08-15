@@ -9,10 +9,11 @@
 #' @param div293_threshold The Division 293 threshold.
 #' @param cap The cap on concessional contributions for all taxpayers if \code{age_based_cap} is FALSE, or for those below the age threshold otherwise.
 #' @param cap2 The cap on concessional contributions for those above the age threshold. No effect if \code{age_based_cap} is FALSE.
-#' @param use_other_contr Make a (poor) assumption that all 'Other contributions' (\code{MCS_Othr_Contr}) are concessional contributions. This may be a useful upper bound should such contributions be considered important.
 #' @param age_based_cap Is the cap on concessional contributions age-based? 
 #' @param cap2_age The age above which \code{cap2} applies.
 #' @param ecc (logical) Should an excess concessional contributions charge be calculated? (Not implemented.)
+#' @param use_other_contr Make a (poor) assumption that all 'Other contributions' (\code{MCS_Othr_Contr}) are concessional contributions. This may be a useful upper bound should such contributions be considered important.
+#' @param inflate_contr_match_ato (logical) Should concessional contributions be inflated to match aggregates in 2013-14? That is, should concessional contributions by multipled by \code{grattan:::super_contribution_inflator_1314}, which was defined to be: \deqn{\frac{\textrm{Total assessable contributions in SMSF and funds}}{\textrm{Total contributions in 2013-14 sample file}}}{Total assessable contributions in SMSF and funds / Total contributions in 2013-14 sample file.}. 
 #' @param div293 (logical) Should Division 293 tax be calculated? If FALSE, \code{.sample.file} is returned immediately, with a warning (that you're using this function pointlessly!).
 #' @param warn_if_colnames_overwritten (logical) Issue a warning if the construction of helper columns will overwrite existing column names in \code{.sample.file}.
 #' @param drop_helpers (logical) Should columns used in the calculation be dropped before the sample file is returned?
@@ -26,8 +27,9 @@ apply_super_caps_and_div293 <- function(.sample.file,
                                         colname_new_Taxable_Income = "Taxable_income_for_ECT",
                                         div293_threshold = 300e3, 
                                         # for low income tax contributions amount
-                                        cap = 25e3, cap2 = 35e3, age_based_cap = TRUE, cap2_age = 49, ecc = FALSE,
+                                        cap = 30e3, cap2 = 35e3, age_based_cap = TRUE, cap2_age = 49, ecc = FALSE,
                                         use_other_contr = FALSE,
+                                        inflate_contr_match_ato = FALSE,
                                         div293 = TRUE, warn_if_colnames_overwritten = TRUE, drop_helpers = FALSE, copyDT = TRUE){
   # Todo/wontfix
   if (!identical(ecc, FALSE)) stop("ECC not implemented.")
@@ -87,8 +89,14 @@ apply_super_caps_and_div293 <- function(.sample.file,
   .sample.file[ , salary_sacrifice_contributions := Rptbl_Empr_spr_cont_amt]
   .sample.file[ , personal_deductible_contributions := Non_emp_spr_amt]
   # Concessional contributions
+  if (inflate_contr_match_ato){
+    .sample.file[ , MCS_Emplr_Contr := MCS_Emplr_Contr * super_contribution_inflator_1314]
+    .sample.file[ , Non_emp_spr_amt := Non_emp_spr_amt * super_contribution_inflator_1314]
+  }
   .sample.file[ , concessional_contributions := MCS_Emplr_Contr + Non_emp_spr_amt]
   .sample.file[ , non_concessional_contributions := pmaxC(MCS_Prsnl_Contr - Non_emp_spr_amt, 0)]
+  
+  
   
   if (age_based_cap){
     if (!any("age_range_description" == names(.sample.file))){

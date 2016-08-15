@@ -42,7 +42,7 @@ test_that("new_medicare_levy matches", {
   sa <- sample_file_1314
   par_tbl <- 
     grattan:::medicare_tbl[fy_year == "2013-14"] %>%
-    rename(elderly = sapto)
+    setnames(old = "sapto", new = "elderly")
   
   expect_error(new_medicare_levy(parameter_table = as.data.frame(par_tbl)))
   
