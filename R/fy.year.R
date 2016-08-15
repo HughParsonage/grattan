@@ -21,15 +21,14 @@ is.fy <- function(fy.yr){
   # Allowed:
   #  2012-13
   #  201213
+  #  2012 13
   # only
-  # ifelse allowable
-  ifelse(grepl("^([12][0-9]{3})[-\\s]?[0-9]{2}$", fy.yr), 
+  # ifelse allowable (indeed optimal?)
+  ifelse(grepl("^([12][0-9]{3})[-\\s]?[0-9]{2}$", fy.yr, perl = TRUE), 
           # Are the years consecutive?
-          (as.integer(gsub("^([12][0-9]{3})[-\\s]?[0-9]{2}$", "\\1", fy.yr)) + 1) %% 100 == as.numeric(gsub("^[12][0-9]{3}[-\\s]?([0-9]{2})$", "\\1", fy.yr)),
+          (as.integer(gsub("^([12][0-9]{3})[-\\s]?[0-9]{2}$", "\\1", fy.yr, perl = TRUE)) + 1) %% 100 == as.numeric(gsub("^[12][0-9]{3}[-\\s]?([0-9]{2})$", "\\1", fy.yr, perl = TRUE)),
           FALSE)
 }
-
-
 
 
 fy.year <- function(yr_ending){
