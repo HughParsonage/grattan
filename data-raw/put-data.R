@@ -213,7 +213,7 @@ super_contribution_inflator_1314 <-
     smsfs[funds] %>%
     mutate(total_contributions = Assessable_contributions_smsfs + Assessable_contributions_funds)
   
-  ato_aggregate_contributions[fy_year == "2013-14"][["total_contributions"]] / sample_file_1314_concessional_contribution_total - 0.04
+  ato_aggregate_contributions[fy_year == "2013-14"][["total_contributions"]] / sample_file_1314_concessional_contribution_total
 }
 
 
