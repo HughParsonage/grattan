@@ -47,7 +47,7 @@ apply_super_caps_and_div293(.sample.file,
 
 \item{reweight_contr_match_ato}{(logical) Should WEIGHT be inflated so as to match aggregates?}
 
-\item{impute_zero_concess_contr}{Should zero concessional contributions be imputed using salary.}
+\item{impute_zero_concess_contr}{Should zero concessional contributions be imputed using salary?}
 
 \item{.min.Sw.for.SG}{The minimum salary required for super guarantee to be imputed.}
 
