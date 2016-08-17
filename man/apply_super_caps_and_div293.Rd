@@ -8,9 +8,10 @@ apply_super_caps_and_div293(.sample.file,
   colname_concessional = "concessional_contributions",
   colname_div293_tax = "div293_tax",
   colname_new_Taxable_Income = "Taxable_income_for_ECT",
-  div293_threshold = 3e+05, cap = 25000, cap2 = 35000,
-  age_based_cap = TRUE, cap2_age = 59, ecc = FALSE,
-  use_other_contr = FALSE, div293 = TRUE,
+  div293_threshold = 3e+05, cap = 30000, cap2 = 35000,
+  age_based_cap = TRUE, cap2_age = 49, ecc = FALSE,
+  use_other_contr = FALSE, inflate_contr_match_ato = FALSE, .lambda = 1,
+  .mu = 1, reweight_contr_match_ato = FALSE, div293 = TRUE,
   warn_if_colnames_overwritten = TRUE, drop_helpers = FALSE,
   copyDT = TRUE)
 }
@@ -37,6 +38,14 @@ apply_super_caps_and_div293(.sample.file,
 
 \item{use_other_contr}{Make a (poor) assumption that all 'Other contributions' (\code{MCS_Othr_Contr}) are concessional contributions. This may be a useful upper bound should such contributions be considered important.}
 
+\item{inflate_contr_match_ato}{(logical) Should concessional contributions be inflated to match aggregates in 2013-14? That is, should concessional contributions by multipled by \code{grattan:::super_contribution_inflator_1314}, which was defined to be: \deqn{\frac{\textrm{Total assessable contributions in SMSF and funds}}{\textrm{Total contributions in 2013-14 sample file}}}{Total assessable contributions in SMSF and funds / Total contributions in 2013-14 sample file.}.}
+
+\item{.lambda}{Exponential weight applied to \code{concessional contributions}. 0 is equivalent to FALSE in \code{inflate_contr_match_ato}; 1 is equivalent to match.}
+
+\item{.mu}{Exponential weight for WEIGHT. Should be set so \eqn{\lambda + \mu = 1}. Failure to do so is a warning.}
+
+\item{reweight_contr_match_ato}{(logical) Should WEIGHT be inflated so as to match aggregates?}
+
 \item{div293}{(logical) Should Division 293 tax be calculated? If FALSE, \code{.sample.file} is returned immediately, with a warning (that you're using this function pointlessly!).}
 
 \item{warn_if_colnames_overwritten}{(logical) Issue a warning if the construction of helper columns will overwrite existing column names in \code{.sample.file}.}
@@ -50,5 +59,8 @@ A data frame comprising the original sample file (\code{.sample.file}) with an e
 }
 \description{
 Mutate a sample file to reflect particular caps on concessional contributions and applications of Division 293 tax.
+}
+\author{
+Hugh Parsonage, William Young
 }
 

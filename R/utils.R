@@ -27,3 +27,11 @@ as.numeric_unless_warning <- function(x){
            finally = x)
 }
 
+# from testthat
+`%||%` <- function (a, b) {
+  if (is.null(a)) b else a
+}
+
+# Cosmetic: For line-breaking. Slower but easier to read.  
+.add <- function(...) Reduce("+", list(...))
+

@@ -1,51 +1,60 @@
 #' CPI for general dates
 #' 
-#' @param nominal.price (numeric) the nominal prices to be converted to a real price
-#' @param nominal.date (character, date-like) the 'date' contemporaneous to \code{nominal price}. The acceptable forms are 'YYYY', 'YYYY-YY' (financial year), 'YYYY-MM-DD'.
-#' @param target.date (character, date-like) the date at which the real price is valued (where the nominal price equals the real price). Same forms as for \code{nominal.date}
+#' @param from_nominal_price (numeric) the nominal prices to be converted to a real price
+#' @param from_date (character, date-like) the 'date' contemporaneous to \code{from_nominal_price}. The acceptable forms are 'YYYY', 'YYYY-YY' (financial year), 'YYYY-MM-DD', and 'YYYY-Q[1-4]' (quarters).
+#' @param to_date (character, date-like) the date at which the real price is valued (where the nominal price equals the real price). Same forms as for \code{from_date}
 #' @param ... other arguments passed to \code{cpi_inflator_quarters}
 #' 
-#' @return a vector of real prices in target.date dollars.
+#' @return a vector of real prices in to_date dollars.
+#' @export
 
-cpi_general_date <- function(nominal.price, nominal.date, target.date, ...){
-  # Check the date
-  if(all(grepl("^[12][0-9]{3}$", nominal.date))){
-    date.type <- "Y"
-    
-    nominal.date <- paste0(nominal.date, "-Q4")
+cpi_inflator_general_date <- function(from_nominal_price = 1, from_date, to_date, ...){
+  # Check the nominal date
+  if(all(grepl("^[12][0-9]{3}$", from_date))){
+    from_date <- paste0(from_date, "-Q4")
     message("CPI: Using Q4 for each year")
-  }
-  
-  if(all(grepl("^[12][0-9]{3}.[0-9]{2}$", nominal.date))){
-    date.type <- "FY"
-    year.ending <- as.numeric(gsub("([12][0-9]{3}).*$", "\\1", nominal.date)) + 1
-    nominal.date <- paste0(year.ending, "-Q4")
-  }
-  
-  if(all(!is.na(strptime(nominal.date, format = "%Y-%m-%d")))){
-    date.type <- "Date"
-    nominal.date.qtr <- zoo::as.yearqtr(as.Date(nominal.date)) + 0.5  # for july
-    nominal.date <- gsub("\\s", "-", nominal.date.qtr)
-  }
-  
-  if(all(grepl("^[12][0-9]{3}$", target.date))){
-    date.type <- "Y"
+  } else {
     
-    target.date <- paste0(target.date, "-Q4")
+    if(all(is.fy(from_date))){
+      from_date <- paste0(fy2yr(from_date), "-Q1")
+    } else {
+      
+      if(all(!is.na(strptime(from_date, format = "%Y-%m-%d")))){
+        from_date.qtr <- zoo::as.yearqtr(as.Date(from_date))
+        from_date <- gsub("\\s", "-", from_date.qtr)
+      } else {
+        if(all(grepl("^[0-9]{4}.Q[1-4]$", from_date))){
+          # Nothing to be done.
+        } else {
+          stop("Emergency stop: from_date could not be identified.")
+        }
+      }
+    }
+  }
+  # Target date
+  if(all(grepl("^[12][0-9]{3}$", to_date))){
+    to_date <- paste0(to_date, "-Q4")
     message("CPI: Using Q4 for each year")
+  } else {
+    
+    if(all(grepl("^[12][0-9]{3}.[0-9]{2}$", to_date))){
+
+      year.ending <- as.numeric(gsub("([12][0-9]{3}).*$", "\\1", to_date)) + 1
+      to_date <- paste0(year.ending, "-Q1")
+    } else {
+      
+      if(all(!is.na(strptime(to_date, format = "%Y-%m-%d")))){
+        to_date.qtr <- zoo::as.yearqtr(as.Date(to_date))
+        to_date <- gsub("\\s", "-", to_date.qtr)
+      } else {
+        if(all(grepl("^[0-9]{4}.Q[1-4]$", to_date))){
+          # Nothing to be done
+        } else {
+          stop("Emergency stop: to_date could not be identified.")
+        }
+      }
+    }  
   }
   
-  if(all(grepl("^[12][0-9]{3}.[0-9]{2}$", target.date))){
-    date.type <- "FY"
-    year.ending <- as.numeric(gsub("([12][0-9]{3}).*$", "\\1", target.date)) + 1
-    target.date <- paste0(year.ending, "-Q4")
-  }
-  
-  if(all(!is.na(strptime(target.date, format = "%Y-%m-%d")))){
-    date.type <- "Date"
-    target.date.qtr <- zoo::as.yearqtr(as.Date(target.date)) + 0.5  # for july
-    target.date <- gsub("\\s", "-", target.date.qtr)
-  }
-  
-  cpi_inflator_quarters(nominal.price=nominal.price, nominal.date=nominal.date, target.date=target.date, ...)
+  cpi_inflator_quarters(from_nominal_price = from_nominal_price, from_qtr = from_date, to_qtr = to_date, ...)
 }

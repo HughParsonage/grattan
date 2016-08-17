@@ -17,6 +17,7 @@
 #' @importFrom magrittr %>%
 #' @importFrom magrittr %$%
 #' @importFrom magrittr %<>%
+#' @importFrom dplyr if_else
 #' @import data.table
 #' @return the total personal income tax payable
 #' @export 
@@ -59,7 +60,7 @@ income_tax <- function(income, fy.year, age = 42, family_status = "individual", 
   
   rolling_income_tax(income = income, fy.year = fy.year, age = age, 
                      family_status = family_status, n_dependants = n_dependants, 
-                     sample_file = sample_file, .dots.ATO = .dots.ATO)
+                     sample_file = sample_file, .dots.ATO = .dots.ATO, return.mode = return.mode)
 }
 
 
@@ -86,6 +87,9 @@ rolling_income_tax <- function(income,
   # http://stackoverflow.com/a/9335687/1664978
   prohibit_vector_recycling(income, fy.year, age, family_status, n_dependants)
   prohibit_length0_vectors(income, fy.year, age, family_status, n_dependants)
+  
+  input.lengths <- vapply(list(income, fy.year, age, family_status, n_dependants), FUN = length, FUN.VALUE = integer(1))
+  max.length <- max(input.lengths)
 
   # tax_table2 provides the raw tax tables, but also the amount
   # of tax paid at each bracket, to make the rolling join 
@@ -132,44 +136,6 @@ rolling_income_tax <- function(income,
             max_lito)
     }
   }
-
-  
-  medicare_levy <- function(income, 
-                            Spouse_income,
-                            fy.year,
-                            sapto.eligible,
-                            family_status, 
-                            n_dependants){
-    data.table::data.table(income = income, 
-                           Spouse_income = Spouse_income,
-                           fy_year = fy.year,
-                           sapto = sapto.eligible, 
-                           family_status = family_status) %>%
-      dplyr::mutate(
-        # Assume spouse income is included irrespective of Partner_status
-        # This appears to be the correct treatment (e.g. if the Partner dies 
-        # before the end of the tax year, they would have status 0 but 
-        # income that is relevant for medicare income).  There are details
-        # (such as if the partner is in gaol) that are overlooked here.
-        # 
-        # Enhancement: family taxable income should exclude super lump sums.
-        medicare_income = income + Spouse_income
-      ) %>%
-      data.table::as.data.table(.) %>%
-      merge(medicare_tbl, 
-            by = c("fy_year", "sapto", "family_status"),
-            sort = FALSE, 
-            all.x = TRUE) %>%
-      dplyr::mutate(
-        lower_bracket = lower_bracket + ifelse(!is.na(lower_up_for_each_child), 
-                                               lower_up_for_each_child * n_dependants, 
-                                               0L),
-        medicare_levy = pminV(pmaxC(taper * (medicare_income - lower_bracket),
-                                    0), 
-                              rate * income)
-        ) %$%
-      medicare_levy
-  }
   
   base_tax. <- tax_fun(income, fy.year = fy.year)
   medicare_levy. <- 
@@ -184,9 +150,10 @@ rolling_income_tax <- function(income,
                   family_status = if (missing(.dots.ATO) || "Spouse_adjusted_taxable_inc" %notin% names(.dots.ATO)){
                     family_status
                   } else {
-                    ifelse(.dots.ATO$Spouse_adjusted_taxable_inc > 0, "family", "individual")
+                    if_else(.dots.ATO$Spouse_adjusted_taxable_inc > 0, "family", "individual")
                   }, 
                   n_dependants = n_dependants)
+  
   lito. <- .lito(income, fy.year)
   
   if (!is.null(.dots.ATO) && !missing(.dots.ATO) && all(c("Rptbl_Empr_spr_cont_amt",
@@ -207,320 +174,15 @@ rolling_income_tax <- function(income,
   }
   
   # https://www.legislation.gov.au/Details/C2014A00048
-  temp_budget_repair_levy. <- ifelse(fy.year %in% c("2014-15", "2015-16", "2016-17"), 
-                                     pmaxC(0.02 * (income - 180e3), 0), 
-                                     0)
+  # input[["fy_year"]] ensures it matches the length of income if length(fy.year) == 1.
+  # Also using dplyr::if_else for safety.
+  temp_budget_repair_levy. <- if_else(input[["fy_year"]] %in% c("2014-15", "2015-16", "2016-17"), 
+                                      pmaxC(0.02 * (income - 180e3), 0), 
+                                      0)
+  
+  
   
   pmaxC(base_tax. - lito. - sapto., 
         0) + medicare_levy. + temp_budget_repair_levy.
 }
 
-old_income_tax <- function(income, fy.year = "2012-13", include.temp.budget.repair.levy = FALSE, return.mode = "numeric", age = 44, age_group, is.single = TRUE){
-  stopifnot(length(fy.year) == 1L)
-  # If not applicable:
-  LITO <- 0
-  SAPTO <- .sapto(income, age, age_group, is.single, fy.year = fy.year)
-  medicare.levy <- 0.015 * income
-  flood.levy <- 0
-  
-  if (fy.year == "2017-18" || fy.year == "2015-16"){
-    warning("Uhh, you're applying a (plausible) tax rate to 2017-18.")
-    tax <- ifelse(income < 18200, 0, 
-                  ifelse(income < 37000, (income-18200)*0.19, 
-                         ifelse(income < 80000, 3572 + (income - 37000)*0.325,
-                                ifelse(income < 180000, 17547 + 0.37*(income - 80000), 
-                                       54547 + 0.45*(income - 180000)))))
-    
-    # Assumed the levy will go.
-    if(isTRUE(include.temp.budget.repair.levy)){
-      temp.budget.repair.levy <- ifelse(income < 180e3,
-                                        0,
-                                        0.02 * (income - 180e3))
-    } else {
-      temp.budget.repair.levy <- 0
-    }
-    
-    medicare.levy <- ifelse(income < 20896,
-                            0,
-                            ifelse(income < 26121,
-                                   0.10 * (income - 20896),
-                                   0.02 * income))
-    
-    medicare.surcharge <- 0
-    
-    LITO <- ifelse(income < 37000, 445,
-                   ifelse(income < 66667, 445 - ((income - 37000)*0.015),
-                          0))
-    
-    out <- pmax(tax + temp.budget.repair.levy + medicare.levy + medicare.surcharge - LITO - SAPTO, 0)
-  }
-  
-  if (fy.year == "2014-15"){
-    tax <- ifelse(income < 18200, 0, 
-                  ifelse(income < 37000, (income-18200)*0.19, 
-                         ifelse(income < 80000, 3572 + (income - 37000)*0.325,
-                                ifelse(income < 180000, 17547 + 0.37*(income - 80000), 
-                                       54547 + 0.45*(income - 180000)))))
-    
-    if(isTRUE(include.temp.budget.repair.levy)){
-      temp.budget.repair.levy <- ifelse(income < 180e3,
-                                        0,
-                                        0.02 * (income - 180e3))
-    } else {
-      temp.budget.repair.levy <- 0
-    }
-    
-    medicare.levy <- ifelse(income < 20542, 
-                            0,
-                            ifelse(income <= 20542,
-                                   0.1 * (income - 20542),
-                                   0.02 * income))
-    
-    # We assume no-one pays the medicare surcharge
-    medicare.surcharge <- 0 * income * ifelse(income <= 88000,
-                                          0,
-                                          ifelse(income <= 102000,
-                                                 0.01,
-                                                 ifelse(income <= 136000,
-                                                        0.0125,
-                                                        0.015)))
-    LITO <- ifelse(income < 37000, 445,
-                   ifelse(income < 66667, 445 - ((income - 37000)*0.015),
-                          0))
-    
-    out <- pmax(tax + temp.budget.repair.levy + medicare.levy + medicare.surcharge - LITO - SAPTO, 0)
-  }
-  
-
-  
-  if (fy.year == "2013-14"){
-    
-    tax <- ifelse(income < 18200, 0, 
-                  ifelse(income < 37000, (income-18200)*0.19, 
-                         ifelse(income < 80000, 3572 + (income - 37000)*0.325,
-                                ifelse(income<180000, 17547 + 0.37*(income - 80000), 
-                                       54547 + 0.45*(income - 180000)))))
-    #ATO
-    medicare.levy <- ifelse(income < 20542,0, 
-                            ifelse(income < 24167, (income - 20542)*.1,
-                                   0.015*income))
-    # https://www.ato.gov.au/Individuals/Medicare-levy/Medicare-levy-surcharge/
-    # no medicare surcharge
-    medicare.surcharge <- 0 * income * ifelse(income <= 88000,
-                                          0,
-                                          ifelse(income <= 102000,
-                                                 0.01,
-                                                 ifelse(income <= 136000,
-                                                        0.0125,
-                                                        0.015)))
-    
-    
-    LITO <- ifelse(income < 37000, 445,
-                   ifelse(income < 66667, 445 - ((income - 37000)*0.015),
-                          0))
-    
-    out <- pmax(tax + medicare.levy + medicare.surcharge - LITO - SAPTO, 0)
-    
-  }
-  
-  if (fy.year == "2012-13"){
-    ML.lower <- 20542
-    ML.upper <- 24167
-    medicare.base.rate <- 0.015
-    
-    LITO <- ifelse(income < 37000, 
-                   445,
-                   ifelse(income < 66667, 
-                          445 - ((income - 37000)*0.015),
-                          0))
-    
-    tax <- ifelse(income < 18200, 
-                  0, 
-                  ifelse(income < 37000, 
-                         0.19*(income - 18200), 
-                         ifelse(income < 80000, 
-                                3572 + 0.325*(income - 37000),
-                                ifelse(income < 180000, 
-                                       17547 + 0.37*(income - 80000), 
-                                       54547 + 0.45*(income - 180000)))))
-    # medicare.levy 
-    
-    
-    medicare.levy <- ifelse (income <= ML.lower,
-                             0,
-                             ifelse(income > ML.lower & income <= ML.upper,
-                                    0.10 * (income - 20542),
-                                    0.015 * income
-                             )
-    )
-                             
-    out <- pmax(tax + medicare.levy - LITO - SAPTO, 0)
-  }
-  
-  
-  if (fy.year %in% c("2011-12", "2010-11")){
-    tax <- ifelse(income < 6000, 0, 
-                  ifelse(income < 37000, (income - 6000) * 0.15, 
-                         ifelse(income < 80000, 4650 + (income - 37000) * 0.30,
-                                ifelse(income < 180000, 17550 + (income - 80000) * 0.37, 
-                                       54550 + 0.45*(income - 180000)))))
-    
-    #http://www.lewistaxation.com.au/tax/historic-tax/medicare-levy-historical
-    medicare.levy <- ifelse(income < 19405,0, 
-                            ifelse(income < 22829, (income - 19405)*.1,
-                                   0.015*income))
-    #Plunky
-    if (fy.year == "2011-12"){
-      flood.levy <- ifelse(income < 50000, 0,
-                           ifelse(income < 100000, (income - 50000) * 0.005, 
-                                  250 + (income - 100000)*0.01))
-    } else {
-      flood.levy <- 0
-    }
-    
-    LITO <- ifelse(income < 30000, 1500,
-                   ifelse(income < 65000, 1500 - ((income - 30000)*0.04),
-                          0))
-                          
-    out <- pmax(tax + medicare.levy + flood.levy - LITO - SAPTO, 0)
-    
-  }
-  
-  if (fy.year == "2009-10"){
-    tax <- ifelse(income < 6000,
-                  0,
-                  ifelse(income < 35e3,
-                         0.15 * (income - 6000),
-                         ifelse(income < 80e3,
-                                4350 + 0.30*(income - 35e3),
-                                ifelse(income < 180e3,
-                                       17850 + 0.38*(income - 80e3),
-                                       55850 + 0.45*(income - 180e3))
-                         )
-                  )
-    )
-    
-    medicare.levy <- ifelse(income < 18840, 
-                            0, 
-                            ifelse(income < 22164,
-                                   0.100*(income - 18840),
-                                   0.015*income)
-    )
-    
-    
-    # http://www.lewistaxation.com.au/tax/historic-tax/low-income-tax-offset-historical
-    LITO <- ifelse(income < 30e3,
-                   1350,
-                   ifelse(income < 63750,
-                          1350 - 0.04*(income - 30e3),
-                          0))
-    
-    out <- pmax(tax + medicare.levy  - LITO, 0)
-    
-  }
-  
-  if (fy.year == "2008-09"){
-    tax <- ifelse(income < 6000,
-                  0,
-                  ifelse(income < 34000,
-                         0.15 * (income - 6000),
-                         ifelse(income < 80000,
-                                4200 + 0.30*(income - 34000),
-                                ifelse(income < 180e3,
-                                       18000 + 0.40*(income - 80000),
-                                       58000 + 0.45*(income - 180e3)))))
-    
-    LITO <- ifelse(income < 30e3,
-                   1200,
-                   ifelse(income < 60e3,
-                          1200 - 0.04 * (income - 30e3),
-                          0))
-  }
-  
-  if (fy.year == "2007-08"){
-    tax <- ifelse(income < 6000,
-                  0,
-                  ifelse(income < 30e3,
-                         0.15 * (income - 6000),
-                         ifelse(income < 75e3,
-                                3600 + 0.30*(income - 30e3),
-                                ifelse(income < 150e3,
-                                       17100 + 0.40*(income - 75e3),
-                                       47100 + 0.45*(income - 150e3)))))
-    
-    LITO <- ifelse(income < 30e3,
-                   750,
-                   ifelse(income < 48750,
-                          750 - 0.04 * (income - 30e3),
-                          0))
-    
-    
-  }
-  
-  if (fy.year == "2006-07"){
-    tax <- ifelse(income < 6000,
-                  0,
-                  ifelse(income < 25e3,
-                         0.15 * (income - 6000),
-                         ifelse(income < 75e3,
-                                2850 + 0.30 * (income - 25e3),
-                                ifelse(income < 150e3,
-                                       17850 + 0.40 * (income - 75e3),
-                                       47850 + 0.45 * (income - 150e3)))))
-    
-    LITO <- ifelse(income < 25e3,
-                   600,
-                   ifelse(income < 40e3,
-                          600 - 0.04 * (income - 25e3),
-                          0))
-  }
-  
-  if (fy.year == "2005-06"){
-    tax <- ifelse(income < 6000,
-                  0,
-                  ifelse(income < 21600,
-                         0.15 * (income - 6000),
-                         ifelse(income < 63e3,
-                                2340 + 0.30*(income - 21600),
-                                ifelse(income < 95e3,
-                                       14760 + 0.42*(income - 63e3),
-                                       28200 + 0.47*(income - 95e3)))))
-  }
-  
-  if (fy.year == "2004-05"){
-    tax <- ifelse(income < 6000,
-                  0,
-                  ifelse(income < 21600,
-                         0.17 * (income - 6000),
-                         ifelse(income < 58e3,
-                                2652 + 0.30*(income - 21601),
-                                ifelse(income < 70e3,
-                                       13572 + 0.42*(income - 58e3),
-                                       18612 + 0.47*(income - 70e3)))))
-  }
-
-  
-  if (fy.year == "2003-04"){
-    tax <- ifelse(income < 6000,
-                  0,
-                  ifelse(income < 21600,
-                         0.17*(income - 6000),
-                         ifelse(income < 52e3,
-                                2652 + 0.30 * (income - 21600),
-                                ifelse(income < 62500,
-                                       11771 + 0.42*(income - 52000),
-                                       16182 + 0.47*(income - 62500)))))
-  }
-  
-  #
-  #
-  
-  if (fy.year %in% grattan::yr2fy(2004:2010))
-    out <- pmax(tax + medicare.levy + flood.levy - LITO, 0)
-  
-  
-  if (return.mode == "integer")
-    return(as.integer(floor(out)))
-  else
-    return(out)
-}

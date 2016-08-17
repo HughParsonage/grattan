@@ -53,6 +53,16 @@
     "Count", 
     "Sum"
     
-    ))
+    , 
+    
+    # dput(unique(c(names(grattan:::medicare_tbl), names(grattan:::sapto_tbl), names(grattan:::cgt_expenditures))))
+    c("fy_year", "sato", "pto", "sapto", "family_status", "lower_threshold", 
+      "family_income", 
+      "upper_threshold", "taper", "rate", "lower_family_threshold", 
+      "upper_family_threshold", "lower_up_for_each_child", "family_status_index", 
+      "max_offset", "taper_rate", "source", "FY", "CGT_discount_for_individuals_and_trusts_millions", 
+      "URL", "Projected")
+      )
+    )
   invisible()
 }

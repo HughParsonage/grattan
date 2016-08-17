@@ -6,14 +6,15 @@
 #' @param WEIGHT The sample weight for the sample file. (So a 2\% file has \code{WEIGHT} = 50.)
 #' @param excl_vars A character vector of column names in \code{sample_file} that should not be inflated. Columns not present in the 2013-14 sample file are not inflated and nor are the columns \code{Ind}, \code{Gender}, \code{age_range}, \code{Occ_code}, \code{Partner_status}, \code{Region}, \code{Lodgment_method}, and \code{PHI_Ind}.
 #' @param forecast.dots A list containing parameters to be passed to \code{generic_inflator}.
+#' @param .recalculate.inflators Should \code{generic_inflator()} or \code{CG_inflator} be called to project the other variables? Adds time.
 #' @return A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).
 #' @import data.table
 #' @export
 
-project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEIGHT = 50L, excl_vars, forecast.dots = list(estimator = "mean", pred_interval = 80)){
+project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEIGHT = 50L, excl_vars, forecast.dots = list(estimator = "mean", pred_interval = 80), .recalculate.inflators = FALSE){
   stopifnot(is.integer(h), h >= 0L, data.table::is.data.table(sample_file))
   
-  sample_file %<>% dplyr::mutate(WEIGHT = WEIGHT)
+  sample_file[, "WEIGHT" := list(WEIGHT)]
   if (h == 0){
     return(sample_file)
   } else {
@@ -25,7 +26,11 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEI
     lf.inflator <- lf_inflator_fy(from_fy = current.fy, to_fy = to.fy)
     cpi.inflator <- cpi_inflator(1, from_fy = current.fy, to_fy = to.fy)
     # CGT.inflator <- CGT_inflator(1, from_fy = current.fy, to_fy = to.fy)
-    CG.inflator <- CG_inflator(1, from_fy = current.fy, to_fy = to.fy)
+    if (.recalculate.inflators){
+      CG.inflator <- CG_inflator(1, from_fy = current.fy, to_fy = to.fy)
+    } else {
+      CG.inflator <- cg_inflators_1314[fy_year == to.fy][["cg_inflator"]]
+    }
     
     col.names <- names(sample_file)
     
@@ -75,12 +80,16 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEI
     generic.cols <- SetDiff(col.names, 
                             wagey.cols, super.bal.col, lfy.cols, cpiy.cols, derived.cols, Not.Inflated)
     
+    if (.recalculate.inflators){
       generic.inflators <- 
         generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = fy.year.of.sample.file, 
                          estimator = forecast.dots$estimator, pred_interval = forecast.dots$pred_interval)
+    } else {
+      generic.inflators <- dplyr::filter(generic_inflators, fy_year == to.fy)
+      generic.inflators <- data.table::as.data.table(generic.inflators)
+    }
     
     ## Inflate:
-    if (TRUE){  # we may use this option later
       # make numeric to avoid overflow
       if (h != 0L){
         numeric.cols <- names(sample_file)[vapply(sample_file, is.numeric, TRUE)]
@@ -112,9 +121,6 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEI
       for (j in which(col.names %in% super.bal.col)){
         data.table::set(sample_file, j = j, value = (1.05 ^ h) * sample_file[[j]])
       }
-      
-      # Cosmetic: For line-breaking. Slower but easier to read.  
-      .add <- function(...) Reduce("+", list(...))
       
       sample_file %>%
         dplyr::mutate(
@@ -152,28 +158,8 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEI
                              Cost_tax_affairs_amt,
                              Other_Ded_amt),
           Taxable_Income = pmaxC(Tot_inc_amt - Tot_ded_amt - PP_loss_claimed - NPP_loss_claimed, 0)
-          ) 
+          ) %>%
+        data.table::as.data.table(.)
       
-    } else {
-    
-    sample_file %>%
-      dplyr::mutate(
-        new_Sw_amt = wage.inflator * Sw_amt,
-        new_Taxable_Income = Taxable_Income + (new_Sw_amt - Sw_amt),
-        new_Rptbl_Empr_spr_cont_amt = Rptbl_Empr_spr_cont_amt * wage.inflator,
-        new_Non_emp_spr_amt = Non_emp_spr_amt * wage.inflator,
-        # inflate Spouse taxable income by the same amount by which Taxable Income was inflated
-        new_Spouse_adjusted_taxable_inc = Spouse_adjusted_taxable_inc * (mean(new_Taxable_Income) / mean(Taxable_Income)),
-        WEIGHT = WEIGHT * lf.inflator
-      ) %>%
-      dplyr::mutate(
-        Sw_amt = new_Sw_amt,
-        Rptbl_Empr_spr_cont_amt = new_Rptbl_Empr_spr_cont_amt,
-        Non_emp_spr_amt = new_Non_emp_spr_amt,
-        Taxable_Income = new_Taxable_Income,
-        Spouse_adjusted_taxable_inc = new_Spouse_adjusted_taxable_inc
-      ) %>%
-      dplyr::select(-starts_with("new"))
-    }
   } 
 }

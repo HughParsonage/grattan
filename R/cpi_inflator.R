@@ -11,7 +11,7 @@
 #' @return the value of from_nominal_price in real (to_fy) dollars.
 
 cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15", 
-                         adjustment = "none",
+                         adjustment = "seasonal",
                          useABSConnection = FALSE,
                          allow.projection = TRUE){
   # CRAN

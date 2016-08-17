@@ -85,9 +85,9 @@ grattan_waterfall <- function(.data = NULL,
   
   # fill by sign means rectangles' fill colour is given by whether they are going up or down
   if(fill_by_sign)
-    fill_colours <- ifelse(values >= 0, 
-                           gpal(2, dark=dark)[2], 
-                           gpal(2, dark=dark)[1])
+    fill_colours <- if_else(values >= 0, 
+                            gpal(2, dark=dark)[2], 
+                            gpal(2, dark=dark)[1])
   
   if (!(grepl("^[lrc]", lines_anchors[1]) && grepl("^[lrc]", lines_anchors[2])))  # left right center
     stop("lines_anchors must be a pair of any of the following: left, right, centre")

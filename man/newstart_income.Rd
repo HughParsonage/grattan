@@ -7,10 +7,10 @@
 newstart_income(fortnightly.income)
 }
 \arguments{
-\item{fortnightly.income}{income from other sources}
+\item{fortnightly.income}{income from other sources.}
 }
 \value{
-the amount the Newstart recipient would receive in total
+The amount the Newstart recipient would receive in total.
 }
 \description{
 Newstart income
