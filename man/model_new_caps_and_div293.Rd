@@ -9,10 +9,12 @@
 model_new_caps_and_div293(.sample.file, fy.year, new_cap = 30000,
   new_cap2 = 35000, new_age_based_cap = TRUE, new_cap2_age = 49,
   new_ecc = FALSE, new_div293_threshold = 3e+05, use_other_contr = FALSE,
-  inflate_contr_match_ato = FALSE, .lambda = 1,
-  reweight_contr_match_ato = FALSE, .mu = 1, prv_cap = 30000,
-  prv_cap2 = 35000, prv_age_based_cap = TRUE, prv_cap2_age = 49,
-  prv_ecc = FALSE, prv_div293_threshold = 3e+05)
+  inflate_contr_match_ato = FALSE, .lambda = 0,
+  reweight_contr_match_ato = TRUE, .mu = 1,
+  impute_zero_concess_contr = TRUE, .min.Sw.for.SG = 450 * 12,
+  .SG_rate = 0.0925, prv_cap = 30000, prv_cap2 = 35000,
+  prv_age_based_cap = TRUE, prv_cap2_age = 49, prv_ecc = FALSE,
+  prv_div293_threshold = 3e+05)
 
 n_affected_from_new_cap_and_div293(..., adverse_only = TRUE)
 
@@ -39,11 +41,17 @@ revenue_from_new_cap_and_div293(...)
 
 \item{inflate_contr_match_ato}{(logical) Should concessional contributions be inflated to match aggregates in 2013-14? That is, should concessional contributions by multipled by \code{grattan:::super_contribution_inflator_1314}, which was defined to be: \deqn{\frac{\textrm{Total assessable contributions in SMSF and funds}}{\textrm{Total contributions in 2013-14 sample file}}}{Total assessable contributions in SMSF and funds / Total contributions in 2013-14 sample file.}.}
 
-\item{.lambda}{(For \code{inflate_contr_match_ato}.) 0 is equivalent to FALSE; 1 is equivalent to match.}
+\item{.lambda}{Exponential weight applied to \code{concessional contributions}. 0 is equivalent to FALSE in \code{inflate_contr_match_ato}; 1 is equivalent to match.}
 
 \item{reweight_contr_match_ato}{(logical) Should WEIGHT be inflated so as to match aggregates?}
 
 \item{.mu}{Exponential weight for WEIGHT. Should be set so \eqn{\lambda + \mu = 1}. Failure to do so is a warning.}
+
+\item{impute_zero_concess_contr}{Should zero concessional contributions be imputed using salary?}
+
+\item{.min.Sw.for.SG}{The minimum salary required for super guarantee to be imputed.}
+
+\item{.SG_rate}{The super guarantee rate for imputation.}
 
 \item{prv_cap}{The \strong{comparator} cap on concessional contributions for all taxpayers if \code{age_based_cap} is FALSE, or for those below the age threshold otherwise.}
 

@@ -40,13 +40,16 @@ apply_super_caps_and_div293 <- function(.sample.file,
                                         ecc = FALSE,
                                         use_other_contr = FALSE,
                                         inflate_contr_match_ato = FALSE, 
-                                        .lambda = 1, 
+                                        .lambda = 0, 
+                                        reweight_contr_match_ato = TRUE,
                                         .mu = 1,
-                                        reweight_contr_match_ato = FALSE,
-                                        impute_zero_concess_contr = FALSE,
+                                        impute_zero_concess_contr = TRUE,
                                         .min.Sw.for.SG = 450 * 12,
                                         .SG_rate = 0.0925,
-                                        div293 = TRUE, warn_if_colnames_overwritten = TRUE, drop_helpers = FALSE, copyDT = TRUE){
+                                        div293 = TRUE, 
+                                        warn_if_colnames_overwritten = TRUE, 
+                                        drop_helpers = FALSE, 
+                                        copyDT = TRUE){
   # Todo/wontfix
   if (!identical(ecc, FALSE)) stop("ECC not implemented.")
   
