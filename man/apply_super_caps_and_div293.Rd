@@ -11,9 +11,10 @@ apply_super_caps_and_div293(.sample.file,
   div293_threshold = 3e+05, cap = 30000, cap2 = 35000,
   age_based_cap = TRUE, cap2_age = 49, ecc = FALSE,
   use_other_contr = FALSE, inflate_contr_match_ato = FALSE, .lambda = 1,
-  .mu = 1, reweight_contr_match_ato = FALSE, div293 = TRUE,
-  warn_if_colnames_overwritten = TRUE, drop_helpers = FALSE,
-  copyDT = TRUE)
+  .mu = 1, reweight_contr_match_ato = FALSE,
+  impute_zero_concess_contr = FALSE, .min.Sw.for.SG = 450 * 12,
+  .SG_rate = 0.0925, div293 = TRUE, warn_if_colnames_overwritten = TRUE,
+  drop_helpers = FALSE, copyDT = TRUE)
 }
 \arguments{
 \item{.sample.file}{A data.table containing at least the variables \code{sample_file_1314} from the taxstats package.}
@@ -45,6 +46,12 @@ apply_super_caps_and_div293(.sample.file,
 \item{.mu}{Exponential weight for WEIGHT. Should be set so \eqn{\lambda + \mu = 1}. Failure to do so is a warning.}
 
 \item{reweight_contr_match_ato}{(logical) Should WEIGHT be inflated so as to match aggregates?}
+
+\item{impute_zero_concess_contr}{Should zero concessional contributions be imputed using salary.}
+
+\item{.min.Sw.for.SG}{The minimum salary required for super guarantee to be imputed.}
+
+\item{.SG_rate}{The super guarantee rate for imputation.}
 
 \item{div293}{(logical) Should Division 293 tax be calculated? If FALSE, \code{.sample.file} is returned immediately, with a warning (that you're using this function pointlessly!).}
 

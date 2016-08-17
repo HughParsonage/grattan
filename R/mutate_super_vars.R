@@ -17,6 +17,9 @@
 #' @param .lambda Exponential weight applied to \code{concessional contributions}. 0 is equivalent to FALSE in \code{inflate_contr_match_ato}; 1 is equivalent to match.
 #' @param reweight_contr_match_ato (logical) Should WEIGHT be inflated so as to match aggregates?
 #' @param .mu Exponential weight for WEIGHT. Should be set so \eqn{\lambda + \mu = 1}. Failure to do so is a warning.
+#' @param impute_zero_concess_contr Should zero concessional contributions be imputed using salary.
+#' @param .min.Sw.for.SG The minimum salary required for super guarantee to be imputed.
+#' @param .SG_rate The super guarantee rate for imputation.
 #' @param div293 (logical) Should Division 293 tax be calculated? If FALSE, \code{.sample.file} is returned immediately, with a warning (that you're using this function pointlessly!).
 #' @param warn_if_colnames_overwritten (logical) Issue a warning if the construction of helper columns will overwrite existing column names in \code{.sample.file}.
 #' @param drop_helpers (logical) Should columns used in the calculation be dropped before the sample file is returned?
@@ -33,6 +36,9 @@ apply_super_caps_and_div293 <- function(.sample.file,
                                         cap = 30e3, cap2 = 35e3, age_based_cap = TRUE, cap2_age = 49, ecc = FALSE,
                                         use_other_contr = FALSE,
                                         inflate_contr_match_ato = FALSE, .lambda = 1, .mu = 1, reweight_contr_match_ato = FALSE,
+                                        impute_zero_concess_contr = FALSE,
+                                        .min.Sw.for.SG = 450 * 12,
+                                        .SG_rate = 0.0925,
                                         div293 = TRUE, warn_if_colnames_overwritten = TRUE, drop_helpers = FALSE, copyDT = TRUE){
   # Todo/wontfix
   if (!identical(ecc, FALSE)) stop("ECC not implemented.")
@@ -105,6 +111,21 @@ apply_super_caps_and_div293 <- function(.sample.file,
   
   .sample.file[ , concessional_contributions := MCS_Emplr_Contr + Non_emp_spr_amt]
   .sample.file[ , non_concessional_contributions := pmaxC(MCS_Prsnl_Contr - Non_emp_spr_amt, 0)]
+  
+  if (impute_zero_concess_contr){
+    # CRAN note avoidance.
+    Sw_amt <- Rptbl_Empr_spr_cont_amt <- NULL
+    
+    if (!all(c("Rptbl_Empr_spr_cont_amt", "Sw_amt") %in% names(.sample.file))){
+      stop("'Rptbl_Empr_spr_cont_amt' and 'Sw_amt' required to impute.")
+    }
+    # < 1 basically means == 0 while avoiding floating point arithmetic.
+    # Imputation method: if the concessional contributions are absent, yet salary is high, 
+    # replace the concessional contributions by super due SG and Rptbl_Empr_spr_cont_amt
+    .sample.file[ , concessional_contributions := if_else(concessional_contributions < 1 & Sw_amt > .min.Sw.for.SG, 
+                                                          as.double(Sw_amt * .SG_rate + Rptbl_Empr_spr_cont_amt), 
+                                                          as.double(concessional_contributions))]
+  }
   
   if (reweight_contr_match_ato){
     WEIGHT <- NULL
