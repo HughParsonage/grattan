@@ -9,8 +9,8 @@
 model_new_caps_and_div293(.sample.file, fy.year, new_cap = 30000,
   new_cap2 = 35000, new_age_based_cap = TRUE, new_cap2_age = 49,
   new_ecc = FALSE, new_div293_threshold = 3e+05, use_other_contr = FALSE,
-  inflate_contr_match_ato = FALSE, .lambda = 0,
-  reweight_contr_match_ato = TRUE, .mu = 1,
+  scale_contr_match_ato = FALSE, .lambda = 0,
+  reweight_late_lodgers = TRUE, .mu = 1.05,
   impute_zero_concess_contr = TRUE, .min.Sw.for.SG = 450 * 12,
   .SG_rate = 0.0925, prv_cap = 30000, prv_cap2 = 35000,
   prv_age_based_cap = TRUE, prv_cap2_age = 49, prv_ecc = FALSE,
@@ -39,13 +39,13 @@ revenue_from_new_cap_and_div293(...)
 
 \item{use_other_contr}{Should \code{MCS_Othr_Contr} be used to calculate Division 293 liabilities?}
 
-\item{inflate_contr_match_ato}{(logical) Should concessional contributions be inflated to match aggregates in 2013-14? That is, should concessional contributions by multipled by \code{grattan:::super_contribution_inflator_1314}, which was defined to be: \deqn{\frac{\textrm{Total assessable contributions in SMSF and funds}}{\textrm{Total contributions in 2013-14 sample file}}}{Total assessable contributions in SMSF and funds / Total contributions in 2013-14 sample file.}.}
+\item{scale_contr_match_ato}{(logical) Should concessional contributions be inflated to match aggregates in 2013-14? That is, should concessional contributions by multipled by \code{grattan:::super_contribution_inflator_1314}, which was defined to be: \deqn{\frac{\textrm{Total assessable contributions in SMSF and funds}}{\textrm{Total contributions in 2013-14 sample file}}}{Total assessable contributions in SMSF and funds / Total contributions in 2013-14 sample file.}.}
 
-\item{.lambda}{Exponential weight applied to \code{concessional contributions}. 0 is equivalent to FALSE in \code{inflate_contr_match_ato}; 1 is equivalent to match.}
+\item{.lambda}{Scalar weight applied to \code{concessional contributions}. \eqn{\lambda = 0} means no (extra) weight. \eqn{\lamba = 1} means contributions are inflated by the ratio of aggregates to the sample file's total. For \eqn{R = \textrm{actual} / \textrm{apparent}} then the contributions are scaled by \eqn{1 + \lambda(R - 1)}.}
 
-\item{reweight_contr_match_ato}{(logical) Should WEIGHT be inflated so as to match aggregates?}
+\item{reweight_late_lodgers}{(logical) Should WEIGHT be inflated to account for late lodgers?}
 
-\item{.mu}{Exponential weight for WEIGHT. Should be set so \eqn{\lambda + \mu = 1}. Failure to do so is a warning.}
+\item{.mu}{Scalar weight for WEIGHT. (\eqn{w' = \mu w}) No effect if \code{reweight_late_lodgers} is \code{FALSE}.}
 
 \item{impute_zero_concess_contr}{Should zero concessional contributions be imputed using salary?}
 

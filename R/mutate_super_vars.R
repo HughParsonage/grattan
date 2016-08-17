@@ -13,10 +13,10 @@
 #' @param cap2_age The age above which \code{cap2} applies.
 #' @param ecc (logical) Should an excess concessional contributions charge be calculated? (Not implemented.)
 #' @param use_other_contr Make a (poor) assumption that all 'Other contributions' (\code{MCS_Othr_Contr}) are concessional contributions. This may be a useful upper bound should such contributions be considered important.
-#' @param inflate_contr_match_ato (logical) Should concessional contributions be inflated to match aggregates in 2013-14? That is, should concessional contributions by multipled by \code{grattan:::super_contribution_inflator_1314}, which was defined to be: \deqn{\frac{\textrm{Total assessable contributions in SMSF and funds}}{\textrm{Total contributions in 2013-14 sample file}}}{Total assessable contributions in SMSF and funds / Total contributions in 2013-14 sample file.}. 
-#' @param .lambda Exponential weight applied to \code{concessional contributions}. 0 is equivalent to FALSE in \code{inflate_contr_match_ato}; 1 is equivalent to match.
-#' @param reweight_contr_match_ato (logical) Should WEIGHT be inflated so as to match aggregates?
-#' @param .mu Exponential weight for WEIGHT. Should be set so \eqn{\lambda + \mu = 1}. Failure to do so is a warning.
+#' @param scale_contr_match_ato (logical) Should concessional contributions be inflated to match aggregates in 2013-14? That is, should concessional contributions by multipled by \code{grattan:::super_contribution_inflator_1314}, which was defined to be: \deqn{\frac{\textrm{Total assessable contributions in SMSF and funds}}{\textrm{Total contributions in 2013-14 sample file}}}{Total assessable contributions in SMSF and funds / Total contributions in 2013-14 sample file.}. 
+#' @param .lambda Scalar weight applied to \code{concessional contributions}. \eqn{\lambda = 0} means no (extra) weight. \eqn{\lambda = 1} means contributions are inflated by the ratio of aggregates to the sample file's total. For \eqn{R = \textrm{actual} / \textrm{apparent}} then the contributions are scaled by \eqn{1 + \lambda(R - 1)}.
+#' @param reweight_late_lodgers (logical) Should WEIGHT be inflated to account for late lodgers?
+#' @param .mu Scalar weight for WEIGHT. (\eqn{w' = \mu w}) No effect if \code{reweight_late_lodgers} is \code{FALSE}.
 #' @param impute_zero_concess_contr Should zero concessional contributions be imputed using salary?
 #' @param .min.Sw.for.SG The minimum salary required for super guarantee to be imputed.
 #' @param .SG_rate The super guarantee rate for imputation.
@@ -39,11 +39,11 @@ apply_super_caps_and_div293 <- function(.sample.file,
                                         cap2_age = 49, 
                                         ecc = FALSE,
                                         use_other_contr = FALSE,
-                                        inflate_contr_match_ato = FALSE, 
+                                        scale_contr_match_ato = FALSE, 
                                         .lambda = 0, 
-                                        reweight_contr_match_ato = TRUE,
-                                        .mu = 1,
-                                        impute_zero_concess_contr = TRUE,
+                                        reweight_late_lodgers = FALSE,
+                                        .mu = 1.05,
+                                        impute_zero_concess_contr = FALSE,
                                         .min.Sw.for.SG = 450 * 12,
                                         .SG_rate = 0.0925,
                                         div293 = TRUE, 
@@ -107,16 +107,11 @@ apply_super_caps_and_div293 <- function(.sample.file,
   .sample.file[ , SG_contributions := pmaxC(MCS_Emplr_Contr - Rptbl_Empr_spr_cont_amt, 0)]
   .sample.file[ , salary_sacrifice_contributions := Rptbl_Empr_spr_cont_amt]
   .sample.file[ , personal_deductible_contributions := Non_emp_spr_amt]
-  # Concessional contributions
-  if (inflate_contr_match_ato && reweight_contr_match_ato){
-    if (abs(.lambda + .mu - 1) > .Machine$double.eps ^ 0.5){
-      warning(".lambda + .mu != 1\nWeighting may be wrong.")
-    }
-  }
   
-  if (inflate_contr_match_ato){
-    .sample.file[ , MCS_Emplr_Contr := MCS_Emplr_Contr * (super_contribution_inflator_1314 ^ .lambda) ]
-    .sample.file[ , Non_emp_spr_amt := Non_emp_spr_amt * (super_contribution_inflator_1314 ^ .lambda) ]
+  # Concessional contributions
+  if (scale_contr_match_ato){
+    .sample.file[ , MCS_Emplr_Contr := MCS_Emplr_Contr * (1 + (super_contribution_inflator_1314 - 1) * .lambda) ]
+    .sample.file[ , Non_emp_spr_amt := Non_emp_spr_amt * (1 + (super_contribution_inflator_1314 - 1) * .lambda) ]
   }
   
   .sample.file[ , concessional_contributions := MCS_Emplr_Contr + Non_emp_spr_amt]
@@ -136,15 +131,13 @@ apply_super_caps_and_div293 <- function(.sample.file,
                                                           as.double(concessional_contributions))]
   }
   
-  if (reweight_contr_match_ato){
+  if (reweight_late_lodgers){
     WEIGHT <- NULL
     if (!any("WEIGHT" == names(.sample.file))){
       warning("No WEIGHT found; using WEIGHT=50 in reweighting.")
       .sample.file[ , WEIGHT := 50]
     } 
-    .sample.file[ , WEIGHT := WEIGHT * if_else(concessional_contributions > 0,
-                                               (super_contribution_inflator_1314 ^ .mu), 
-                                               1)]
+    .sample.file[ , WEIGHT := WEIGHT * .mu]
   }
 
   if (age_based_cap){

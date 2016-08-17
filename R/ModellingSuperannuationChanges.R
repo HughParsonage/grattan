@@ -10,10 +10,10 @@
 #' @param new_ecc (logical) Should an excess concessional contributions charge be calculated? (Not implemented.)
 #' @param new_div293_threshold The \strong{proposed} Division 293 threshold. 
 #' @param use_other_contr Should \code{MCS_Othr_Contr} be used to calculate Division 293 liabilities?
-#' @param inflate_contr_match_ato (logical) Should concessional contributions be inflated to match aggregates in 2013-14? That is, should concessional contributions by multipled by \code{grattan:::super_contribution_inflator_1314}, which was defined to be: \deqn{\frac{\textrm{Total assessable contributions in SMSF and funds}}{\textrm{Total contributions in 2013-14 sample file}}}{Total assessable contributions in SMSF and funds / Total contributions in 2013-14 sample file.}. 
-#' @param .lambda Exponential weight applied to \code{concessional contributions}. 0 is equivalent to FALSE in \code{inflate_contr_match_ato}; 1 is equivalent to match.
-#' @param reweight_contr_match_ato (logical) Should WEIGHT be inflated so as to match aggregates?
-#' @param .mu Exponential weight for WEIGHT. Should be set so \eqn{\lambda + \mu = 1}. Failure to do so is a warning.
+#' @param scale_contr_match_ato (logical) Should concessional contributions be inflated to match aggregates in 2013-14? That is, should concessional contributions by multipled by \code{grattan:::super_contribution_inflator_1314}, which was defined to be: \deqn{\frac{\textrm{Total assessable contributions in SMSF and funds}}{\textrm{Total contributions in 2013-14 sample file}}}{Total assessable contributions in SMSF and funds / Total contributions in 2013-14 sample file.}. 
+#' @param .lambda Scalar weight applied to \code{concessional contributions}. \eqn{\lambda = 0} means no (extra) weight. \eqn{\lamba = 1} means contributions are inflated by the ratio of aggregates to the sample file's total. For \eqn{R = \textrm{actual} / \textrm{apparent}} then the contributions are scaled by \eqn{1 + \lambda(R - 1)}.
+#' @param reweight_late_lodgers (logical) Should WEIGHT be inflated to account for late lodgers?
+#' @param .mu Scalar weight for WEIGHT. (\eqn{w' = \mu w}) No effect if \code{reweight_late_lodgers} is \code{FALSE}.
 #' @param impute_zero_concess_contr Should zero concessional contributions be imputed using salary?
 #' @param .min.Sw.for.SG The minimum salary required for super guarantee to be imputed.
 #' @param .SG_rate The super guarantee rate for imputation.
@@ -38,10 +38,10 @@ model_new_caps_and_div293 <- function(.sample.file,
                                       new_div293_threshold = 300e3,
                                       
                                       use_other_contr = FALSE, 
-                                      inflate_contr_match_ato = FALSE, 
+                                      scale_contr_match_ato = FALSE, 
                                       .lambda = 0, 
-                                      reweight_contr_match_ato = TRUE,
-                                      .mu = 1,
+                                      reweight_late_lodgers = TRUE,
+                                      .mu = 1.05,
                                       impute_zero_concess_contr = TRUE,
                                       .min.Sw.for.SG = 450 * 12,
                                       .SG_rate = 0.0925, 
@@ -64,11 +64,16 @@ model_new_caps_and_div293 <- function(.sample.file,
                                              colname_div293_tax = "old_div293_tax", 
                                              colname_new_Taxable_Income = "old_Taxable_Income",
                                              div293_threshold = prv_div293_threshold, 
-                                             use_other_contr = use_other_contr,
-                                             inflate_contr_match_ato = inflate_contr_match_ato,
-                                             .lambda = .lambda,
-                                             reweight_contr_match_ato = reweight_contr_match_ato,
-                                             .mu = .mu, 
+                                             
+                                             use_other_contr = use_other_contr, 
+                                             scale_contr_match_ato = scale_contr_match_ato, 
+                                             .lambda = .lambda, 
+                                             reweight_late_lodgers = reweight_late_lodgers,
+                                             .mu = .mu,
+                                             impute_zero_concess_contr = impute_zero_concess_contr,
+                                             .min.Sw.for.SG = .min.Sw.for.SG,
+                                             .SG_rate = .SG_rate, 
+                                             
                                              cap = prv_cap, 
                                              cap2 = prv_cap2, 
                                              age_based_cap = prv_age_based_cap, 
@@ -95,11 +100,16 @@ model_new_caps_and_div293 <- function(.sample.file,
                                                  colname_div293_tax = "new_div293_tax", 
                                                  colname_new_Taxable_Income = "new_Taxable_Income",
                                                  div293_threshold = new_div293_threshold, 
-                                                 use_other_contr = use_other_contr,
-                                                 inflate_contr_match_ato = inflate_contr_match_ato,
-                                                 .lambda = .lambda,
-                                                 reweight_contr_match_ato = reweight_contr_match_ato,
+                                                 
+                                                 use_other_contr = use_other_contr, 
+                                                 scale_contr_match_ato = scale_contr_match_ato, 
+                                                 .lambda = .lambda, 
+                                                 reweight_late_lodgers = reweight_late_lodgers,
                                                  .mu = .mu,
+                                                 impute_zero_concess_contr = impute_zero_concess_contr,
+                                                 .min.Sw.for.SG = .min.Sw.for.SG,
+                                                 .SG_rate = .SG_rate, 
+                                                 
                                                  cap = new_cap, 
                                                  cap2 = new_cap2, 
                                                  age_based_cap = new_age_based_cap, 

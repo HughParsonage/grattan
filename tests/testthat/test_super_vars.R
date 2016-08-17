@@ -112,14 +112,14 @@ test_that("Imputed, reweighted sample file agrees with aggregates by no less tha
   
   ato_aggregate_contributions <- 
     smsfs[funds] %>%
-    mutate(total_contributions = Assessable_contributions_smsfs + Assessable_contributions_funds) %$%
+    mutate(total_contributions = Assessable_contributions_smsfs + Assessable_contributions_funds)
     
   
   # Now test imputation using defaults.
   imputed_concessional_contributions <- 
     sample_file_1314 %>%
     mutate(WEIGHT = 50) %>%
-    apply_super_caps_and_div293() %$%
+    apply_super_caps_and_div293(reweight_late_lodgers = TRUE, impute_zero_concess_contr = TRUE) %$%
     sum(concessional_contributions * WEIGHT)
   
   percentage_difference <- 
