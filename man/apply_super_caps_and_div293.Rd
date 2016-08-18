@@ -10,10 +10,11 @@ apply_super_caps_and_div293(.sample.file,
   colname_new_Taxable_Income = "Taxable_income_for_ECT",
   div293_threshold = 3e+05, cap = 30000, cap2 = 35000,
   age_based_cap = TRUE, cap2_age = 49, ecc = FALSE,
-  use_other_contr = FALSE, inflate_contr_match_ato = FALSE, .lambda = 1,
-  .mu = 1, reweight_contr_match_ato = FALSE, div293 = TRUE,
-  warn_if_colnames_overwritten = TRUE, drop_helpers = FALSE,
-  copyDT = TRUE)
+  use_other_contr = FALSE, scale_contr_match_ato = FALSE, .lambda = 0,
+  reweight_late_lodgers = FALSE, .mu = 1.05,
+  impute_zero_concess_contr = FALSE, .min.Sw.for.SG = 450 * 12,
+  .SG_rate = 0.0925, div293 = TRUE, warn_if_colnames_overwritten = TRUE,
+  drop_helpers = FALSE, copyDT = TRUE)
 }
 \arguments{
 \item{.sample.file}{A data.table containing at least the variables \code{sample_file_1314} from the taxstats package.}
@@ -38,13 +39,19 @@ apply_super_caps_and_div293(.sample.file,
 
 \item{use_other_contr}{Make a (poor) assumption that all 'Other contributions' (\code{MCS_Othr_Contr}) are concessional contributions. This may be a useful upper bound should such contributions be considered important.}
 
-\item{inflate_contr_match_ato}{(logical) Should concessional contributions be inflated to match aggregates in 2013-14? That is, should concessional contributions by multipled by \code{grattan:::super_contribution_inflator_1314}, which was defined to be: \deqn{\frac{\textrm{Total assessable contributions in SMSF and funds}}{\textrm{Total contributions in 2013-14 sample file}}}{Total assessable contributions in SMSF and funds / Total contributions in 2013-14 sample file.}.}
+\item{scale_contr_match_ato}{(logical) Should concessional contributions be inflated to match aggregates in 2013-14? That is, should concessional contributions by multipled by \code{grattan:::super_contribution_inflator_1314}, which was defined to be: \deqn{\frac{\textrm{Total assessable contributions in SMSF and funds}}{\textrm{Total contributions in 2013-14 sample file}}}{Total assessable contributions in SMSF and funds / Total contributions in 2013-14 sample file.}.}
 
-\item{.lambda}{Exponential weight applied to \code{concessional contributions}. 0 is equivalent to FALSE in \code{inflate_contr_match_ato}; 1 is equivalent to match.}
+\item{.lambda}{Scalar weight applied to \code{concessional contributions}. \eqn{\lambda = 0} means no (extra) weight. \eqn{\lambda = 1} means contributions are inflated by the ratio of aggregates to the sample file's total. For \eqn{R = \textrm{actual} / \textrm{apparent}} then the contributions are scaled by \eqn{1 + \lambda(R - 1)}.}
 
-\item{.mu}{Exponential weight for WEIGHT. Should be set so \eqn{\lambda + \mu = 1}. Failure to do so is a warning.}
+\item{reweight_late_lodgers}{(logical) Should WEIGHT be inflated to account for late lodgers?}
 
-\item{reweight_contr_match_ato}{(logical) Should WEIGHT be inflated so as to match aggregates?}
+\item{.mu}{Scalar weight for WEIGHT. (\eqn{w' = \mu w}) No effect if \code{reweight_late_lodgers} is \code{FALSE}.}
+
+\item{impute_zero_concess_contr}{Should zero concessional contributions be imputed using salary?}
+
+\item{.min.Sw.for.SG}{The minimum salary required for super guarantee to be imputed.}
+
+\item{.SG_rate}{The super guarantee rate for imputation.}
 
 \item{div293}{(logical) Should Division 293 tax be calculated? If FALSE, \code{.sample.file} is returned immediately, with a warning (that you're using this function pointlessly!).}
 

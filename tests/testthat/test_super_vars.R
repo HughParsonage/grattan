@@ -88,3 +88,43 @@ test_that("Counts for Div 293 at 250e3 not at odds with PBO", {
   # 110,000   130,000   150,000
   expect_true(between(n_adversely_affected_201718, 70e3, 130e3))
 })
+
+context("Reweighting and imputation successfully reconcile aggregates")
+
+test_that("Imputed, reweighted sample file agrees with aggregates by no less than 1%", {
+  library("taxstats")
+  library("data.table")
+  library("dplyr")
+  library("dtplyr")
+  library("magrittr")
+  
+  funds <- 
+    funds_table1_201314 %>%
+    filter(Selected_items == "Assessable contributions") %>%
+    select(fy_year, Assessable_contributions_funds = Sum) %>%
+    setkey(fy_year)
+  
+  smsfs <- 
+    funds_table2_smsf_201314 %>%
+    filter(Selected_items == "Assessable contributions") %>%
+    select(fy_year, Assessable_contributions_smsfs = Sum) %>%
+    setkey(fy_year)
+  
+  ato_aggregate_contributions <- 
+    smsfs[funds] %>%
+    mutate(total_contributions = Assessable_contributions_smsfs + Assessable_contributions_funds)
+    
+  
+  # Now test imputation using defaults.
+  imputed_concessional_contributions <- 
+    sample_file_1314 %>%
+    mutate(WEIGHT = 50) %>%
+    apply_super_caps_and_div293(reweight_late_lodgers = TRUE, impute_zero_concess_contr = TRUE) %$%
+    sum(concessional_contributions * WEIGHT)
+  
+  percentage_difference <- 
+    100 * abs(imputed_concessional_contributions / ato_aggregate_contributions[fy_year == "2013-14"][["total_contributions"]] - 1)
+  
+  expect_lt(percentage_difference, 1)
+})
+
