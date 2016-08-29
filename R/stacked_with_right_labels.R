@@ -70,7 +70,7 @@ stacked_bar_with_right_labels <- function(.data,
     # all the way up the previous, then half of the corresponding height
     dplyr::arrange(fill) %>%
     dplyr::group_by(x) %>%
-    dplyr::mutate(text.y = -y/2 + cumsum(y) + nudge_up) >%%
+    dplyr::mutate(text.y = -y/2 + cumsum(y) + nudge_up) %>%
     dplyr::ungroup(.) %>%
     dplyr::mutate(text.x = max(as.numeric(.data$x)) + 0.5)
   
