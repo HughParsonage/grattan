@@ -2,7 +2,7 @@ Package: grattan
 Type: Package
 Title: Create charts in the style of the Grattan Insitute, Melbourne; perform
     common quantitative tasks for Australian policy analysts
-Version: 0.3.0.7
+Version: 0.3.0.8
 Date: 2016-08-25
 Author: Hugh Parsonage
 Maintainer: Who to complain to <hugh.parsonage@grattaninstitute.edu.au>
