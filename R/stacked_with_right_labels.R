@@ -10,9 +10,12 @@
 #' @param scale_x_args A list of arguments passed to \code{ggplot2::scale_x_discrete}. If \code{x_continuous}, then the arguments passed to \code{ggplot2::scale_x_continuous}.
 #' @param coord_cartesian_args A list of arguments passed to \code{ggplot2::coord_cartesian}.
 #' @param text_family Text family for theme and geom text. 
+#' @param annotate_args Arguments passed to \code{ggplot2::annotate}.
 #' @param theme_grattan.args Arguments passed to \code{theme_hugh}, an alias for \code{theme_grattan}. (For example, the \code{base_size}.)
 #' @param theme.args A list of arguments passed to \code{ggplot2::theme}.
 #' @param nudge_up A numeric vector to be added every text y-coordinate.
+#' @param nudge_right Move text right in units of \code{x}.
+#' @param extra_left_spaces Number of space characters \code{" "} preceding the text labels. Extra space characters are added before every newline.
 #' @return A chart with the labels in the right gutter 
 #' @importFrom graphics strwidth
 #' @examples 
@@ -42,9 +45,12 @@ stacked_bar_with_right_labels <- function(.data,
                                           scale_x_args,
                                           coord_cartesian_args,
                                           text_family = "",
+                                          annotate_args,
                                           theme_grattan.args,
                                           theme.args, 
-                                          nudge_up = 0){
+                                          nudge_up = 0, 
+                                          nudge_right = 0.5, 
+                                          extra_left_spaces = 0L){
   stopifnot(all(c("x", "y", "fill") %in% names(.data)))
   x = y = fill = text.label = text.x = text.y = NULL
   if(!is.factor(.data$fill) || !is.ordered(.data$fill)){
@@ -64,7 +70,12 @@ stacked_bar_with_right_labels <- function(.data,
     .data %>%
     # our label should only appear at the last x
     dplyr::mutate(text.label = if_else(x == max(x), 
-                                       as.character(fill), 
+                                       paste0(paste0(rep(" ", extra_left_spaces), collapse = ""), 
+                                              gsub("\n", 
+                                                   # Add extra white space (push to right margin)
+                                                   paste0(rep(" ", extra_left_spaces), collapse = ""), 
+                                                   as.character(fill), 
+                                                   fixed = TRUE)),
                                        NA_character_)) %>%
     # it should be as high as the corresponding bar:
     # all the way up the previous, then half of the corresponding height
@@ -72,7 +83,7 @@ stacked_bar_with_right_labels <- function(.data,
     dplyr::group_by(x) %>%
     dplyr::mutate(text.y = -y/2 + cumsum(y) + nudge_up) %>%
     dplyr::ungroup(.) %>%
-    dplyr::mutate(text.x = max(as.numeric(.data$x)) + 0.5)
+    dplyr::mutate(text.x = max(as.numeric(.data$x)) + nudge_right)
   
   
   label_max_width <- 
@@ -145,6 +156,10 @@ stacked_bar_with_right_labels <- function(.data,
     
     if (!missing(coord_cartesian_args)){
       p <- p + do.call(ggplot2::coord_cartesian, args = coord_cartesian_args)
+    }
+    
+    if (!missing(annotate_args)){
+      p <- p + do.call(ggplot2::annotate, args = annotate_args)
     }
     
     if (!missing(theme_grattan.args)){
