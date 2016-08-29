@@ -10,7 +10,7 @@
 #' @param scale_x_args A list of arguments passed to \code{ggplot2::scale_x_discrete}. If \code{x_continuous}, then the arguments passed to \code{ggplot2::scale_x_continuous}.
 #' @param coord_cartesian_args A list of arguments passed to \code{ggplot2::coord_cartesian}.
 #' @param text_family Text family for theme and geom text. 
-#' @param annotate_args Arguments passed to \code{ggplot2::annotate}.
+#' @param Annotate_Args A list of list of arguments passed to \code{ggplot2::annotate}. Each element of the top-level list is an additional layer of \code{annotate}.
 #' @param theme_grattan.args Arguments passed to \code{theme_hugh}, an alias for \code{theme_grattan}. (For example, the \code{base_size}.)
 #' @param theme.args A list of arguments passed to \code{ggplot2::theme}.
 #' @param nudge_up A numeric vector to be added every text y-coordinate.
@@ -45,7 +45,7 @@ stacked_bar_with_right_labels <- function(.data,
                                           scale_x_args,
                                           coord_cartesian_args,
                                           text_family = "",
-                                          annotate_args,
+                                          Annotate_Args,
                                           theme_grattan.args,
                                           theme.args, 
                                           nudge_up = 0, 
@@ -158,8 +158,11 @@ stacked_bar_with_right_labels <- function(.data,
       p <- p + do.call(ggplot2::coord_cartesian, args = coord_cartesian_args)
     }
     
-    if (!missing(annotate_args)){
-      p <- p + do.call(ggplot2::annotate, args = annotate_args)
+    if (!missing(Annotate_Args)){
+      for (aa in seq_along(Annotate_Args)){
+        p <- p + do.call(ggplot2::annotate, args = Annotate_Args[[aa]])
+      }
+      rm(aa)
     }
     
     if (!missing(theme_grattan.args)){
