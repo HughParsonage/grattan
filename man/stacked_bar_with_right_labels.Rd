@@ -6,7 +6,7 @@
 \usage{
 stacked_bar_with_right_labels(.data, geom = "bar", barwidth,
   verbose = FALSE, right_margin = 0.5, scale_y_args, x_continuous = FALSE,
-  scale_x_args, coord_cartesian_args, text_family = "", annotate_args,
+  scale_x_args, coord_cartesian_args, text_family = "", Annotate_Args,
   theme_grattan.args, theme.args, nudge_up = 0, nudge_right = 0.5,
   extra_left_spaces = 0L)
 }
@@ -31,7 +31,7 @@ stacked_bar_with_right_labels(.data, geom = "bar", barwidth,
 
 \item{text_family}{Text family for theme and geom text.}
 
-\item{annotate_args}{Arguments passed to \code{ggplot2::annotate}.}
+\item{Annotate_Args}{A list of list of arguments passed to \code{ggplot2::annotate}. Each element of the top-level list is an additional layer of \code{annotate}.}
 
 \item{theme_grattan.args}{Arguments passed to \code{theme_hugh}, an alias for \code{theme_grattan}. (For example, the \code{base_size}.)}
 
