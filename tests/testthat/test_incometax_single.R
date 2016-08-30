@@ -24,6 +24,9 @@ test_that("income tax checks", {
 test_that("income_tax returns known results",{
   
   # All numbers are from the ATO comprehensive tax calculator. 
+  expect_equal(income_tax(30e3, fy.year = "2011-12"), 2550)
+  expect_equal(income_tax(20e3, fy.year = "2011-12"), 659.6)
+  
   expect_equal(income_tax(50e3, fy.year = "2012-13"), 8297)
   expect_equal(income_tax(60e3, fy.year = "2012-13"), 11847)
   expect_equal(income_tax(70e3, fy.year = "2012-13"), 15347)
