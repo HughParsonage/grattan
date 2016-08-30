@@ -73,7 +73,7 @@ stacked_bar_with_right_labels <- function(.data,
                                        paste0(paste0(rep(" ", extra_left_spaces), collapse = ""), 
                                               gsub("\n", 
                                                    # Add extra white space (push to right margin)
-                                                   paste0(paste0(rep(" ", extra_left_spaces), collapse = ""), "\n"),
+                                                   paste0("\n", paste0(rep(" ", extra_left_spaces), collapse = "")),
                                                    as.character(fill), 
                                                    fixed = TRUE)),
                                        NA_character_)) %>%
