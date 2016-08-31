@@ -32,7 +32,6 @@ apply_super_caps_and_div293 <- function(.sample.file,
                                         colname_div293_tax = "div293_tax", 
                                         colname_new_Taxable_Income = "Taxable_income_for_ECT",
                                         div293_threshold = 300e3, 
-                                        # for low income tax contributions amount
                                         cap = 30e3, 
                                         cap2 = 35e3, 
                                         age_based_cap = TRUE, 
