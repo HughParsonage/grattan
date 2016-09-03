@@ -62,7 +62,7 @@ apply_super_caps_and_div293(.sample.file,
 \item{copyDT}{(logical) Should the data table be \code{copy()}d? If the action of this data table is being compared, possibly useful.}
 }
 \value{
-A data frame comprising the original sample file (\code{.sample.file}) with an extra column equalling the Division 293 tax payable by that taxpayer.
+A data table comprising the original sample file (\code{.sample.file}) with extra superannuation policy-relevant variables for the policy specified by the function.
 }
 \description{
 Mutate a sample file to reflect particular caps on concessional contributions and applications of Division 293 tax.

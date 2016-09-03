@@ -24,7 +24,7 @@
 #' @param warn_if_colnames_overwritten (logical) Issue a warning if the construction of helper columns will overwrite existing column names in \code{.sample.file}.
 #' @param drop_helpers (logical) Should columns used in the calculation be dropped before the sample file is returned?
 #' @param copyDT (logical) Should the data table be \code{copy()}d? If the action of this data table is being compared, possibly useful.
-#' @return A data frame comprising the original sample file (\code{.sample.file}) with an extra column equalling the Division 293 tax payable by that taxpayer.
+#' @return A data table comprising the original sample file (\code{.sample.file}) with extra superannuation policy-relevant variables for the policy specified by the function.
 #' @export 
 
 apply_super_caps_and_div293 <- function(.sample.file, 
