@@ -5,6 +5,7 @@
 #' @param barwidth Passed to the \code{width} argument of \code{geom_bar}
 #' @param verbose Report the margin used (in grid:: 'lines').
 #' @param right_margin The amount of padding at right to use. The whole point of this function is to select a good right margin to allow space. But if the margin provided is wrong, it can be changed manually here.
+#' @param reverse (logical) Use the reverse palette.
 #' @param scale_y_args A list of arguments passed to r \code{ggplot2::scale_y_continuous}.
 #' @param x_continuous Should the x axis be continuous?
 #' @param scale_x_args A list of arguments passed to \code{ggplot2::scale_x_discrete}. If \code{x_continuous}, then the arguments passed to \code{ggplot2::scale_x_continuous}.
@@ -40,6 +41,7 @@ stacked_bar_with_right_labels <- function(.data,
                                           barwidth,
                                           verbose = FALSE,
                                           right_margin = 0.5,
+                                          reverse = FALSE,
                                           scale_y_args,
                                           x_continuous = FALSE,
                                           scale_x_args,
@@ -113,7 +115,7 @@ stacked_bar_with_right_labels <- function(.data,
   if (geom == "bar"){
     if (missing(barwidth)){
       p <- 
-        grplot(.plot.data) + 
+        grplot(.plot.data, reverse = reverse) + 
         theme_hugh(base_family = text_family) + 
         ggplot2::geom_bar(ggplot2::aes(x = x, y = y, fill = fill), stat = "identity") +
         ggplot2::geom_text(ggplot2::aes(label = text.label, 
@@ -128,7 +130,7 @@ stacked_bar_with_right_labels <- function(.data,
                            fontface = "bold") 
     } else {
       p <- 
-        grplot(.plot.data) + 
+        grplot(.plot.data, reverse = reverse) + 
         theme_hugh(base_family = text_family) + 
         ggplot2::geom_bar(ggplot2::aes(x = x, y = y, fill = fill), stat = "identity", width = barwidth) +
         ggplot2::geom_text(ggplot2::aes(label = text.label, 
