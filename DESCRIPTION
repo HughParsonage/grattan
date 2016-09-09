@@ -34,6 +34,7 @@ LinkingTo: Rcpp
 RoxygenNote: 5.0.1
 Suggests: testthat, taxstats,
     rmarkdown, 
-    dtplyr
+    dtplyr,
+    scales
 LazyData: true
 VignetteBuilder: knitr

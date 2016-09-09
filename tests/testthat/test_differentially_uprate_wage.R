@@ -1,0 +1,76 @@
+context("Differential uprating")
+
+require(taxstats)
+require(data.table)
+require(dplyr)
+require(dtplyr)
+
+
+test_that("Error handling", {
+  expect_error(differentially_uprate_wage(from_fy = "2015-16", to_fy = "2016-17"))
+  expect_error(differentially_uprate_wage(from_fy = "2015-16", to_fy = "2016-17"))
+})
+
+test_that("Differential uprate factor preserves order", {
+  x <- differentially_uprate_wage(c(0, 100e3), from_fy = "2013-14", to_fy = "2014-15")
+  
+  expect_lt(x[1], x[2])
+})
+
+test_that("Wage growth is higher for extreme salaries", {
+  extreme_tile <- sample(c(1:20, 80:100), size = 1)
+  moderate_tile <- sample(21:79, size = 1)
+  
+  from_year <- sample(2004:2014, size = 1)
+  to_year <- from_year + rpois(1, 4) + 1
+  
+  from_fy <- yr2fy(from_year)
+  to_fy <- yr2fy(to_year)
+  
+  salaries <- 
+    sample_files_all %>%
+    select(fy.year, Sw_amt) %>%
+    filter(fy.year == from_fy, Sw_amt > 0) %>%
+    mutate(tile = ntile(Sw_amt, 100))
+  
+  extreme_salary <- 
+    salaries %>%
+    filter(tile == extreme_tile) %$%
+    sample(Sw_amt, size = 1)
+  
+  moderate_salary <- 
+    salaries %>%
+    filter(tile == moderate_tile) %$%
+    sample(Sw_amt, size = 1)
+  
+  basic_inflation <- wage_inflator(c(extreme_salary, moderate_salary), from_fy = from_fy, to_fy = to_fy)
+  diffe_inflation <- differentially_uprate_wage(c(extreme_salary, moderate_salary), from_fy = from_fy, to_fy = to_fy)
+  
+  expect_true(diff(diffe_inflation / basic_inflation) < 0, 
+              info = as.character(
+                "extreme_tile = ", extreme_tile, "\n",
+                "moderate_tile = ", moderate_tile, "\n",
+                "from_fy = ", from_fy, "\n",
+                "to_fy = ", to_fy, "\n",
+                "extreme_salary = ", extreme_salary, "\n",
+                "moderate_salary = ", moderate_salary, "\n"
+              ))
+  
+})
+
+test_that("Differentially uprated wage growth is *up*", {
+  from_year <- sample(2004:2014, size = 1)
+  to_year <- from_year + rpois(1, 4) + 1
+  
+  from_fy <- yr2fy(from_year)
+  to_fy <- yr2fy(to_year)
+  
+  salary <- (abs(rlnorm(1, 11, 1)) + 1)
+  
+  expect_true(differentially_uprate_wage(salary, from_fy = from_fy, to_fy = to_fy) > salary, 
+              info = as.character(c("\n",
+                "salary = ", salary, "\n",
+                "from_fy = ", from_fy,  "\n",
+                "to_fy = ", to_fy, "\n"
+              )))
+})

@@ -216,6 +216,33 @@ super_contribution_inflator_1314 <-
   ato_aggregate_contributions[fy_year == "2013-14"][["total_contributions"]] / sample_file_1314_concessional_contribution_total
 }
 
+# differential uprating
+salary_by_fy_swtile <- 
+  sample_files_all %>%
+  select(fy.year, Sw_amt) %>%
+  filter(Sw_amt > 0) %>%
+  group_by(fy.year) %>%
+  mutate(Sw_amt_percentile = ntile(Sw_amt, 100)) %>%
+  ungroup %>%
+  group_by(fy.year, Sw_amt_percentile) %>%
+  summarise(average_salary = mean(Sw_amt), 
+            min_salary = min(Sw_amt)) %>%
+  ungroup %>%
+  setkey(Sw_amt_percentile)
+  
+
+differential_sw_uprates <- 
+  salary_by_fy_swtile %>%
+  ungroup %>%
+  arrange(Sw_amt_percentile, fy.year) %>%
+  group_by(Sw_amt_percentile) %>%
+  mutate(r_average_salary = average_salary / lag(average_salary) - 1) %>%
+  filter(fy.year != min(fy.year)) %>%
+  group_by(Sw_amt_percentile) %>%
+  summarise(avg_r = mean(r_average_salary)) %>% 
+  mutate(uprate_factor = avg_r / mean(avg_r)) %>%
+  select(Sw_amt_percentile, uprate_factor) %>%
+  setkey(Sw_amt_percentile)
 
 devtools::use_data(lito_tbl, 
                    tax_tbl, 
@@ -231,5 +258,8 @@ devtools::use_data(lito_tbl,
                    generic_inflators,
                    cg_inflators_1314,
                    super_contribution_inflator_1314,
+                   #
+                   salary_by_fy_swtile,
+                   differential_sw_uprates,
                    #
                    internal = TRUE, overwrite = TRUE)
