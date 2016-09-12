@@ -11,7 +11,6 @@
 #' @importFrom magrittr %<>%
 #' @importFrom magrittr %$%
 #' @importFrom data.table as.data.table
-#' @export
 
 ## For each variable we want an arima/ets model 
 ## and to use that to forecast ahead.
