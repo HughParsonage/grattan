@@ -74,3 +74,15 @@ test_that("Differentially uprated wage growth is *up*", {
                 "to_fy = ", to_fy, "\n"
               )))
 })
+
+test_that("Less than 0.1% of individuals move more than one percentile over 10 years", {
+  prop_move <- 
+    sample_file_1314 %>%
+    select(Sw_amt) %>%
+    mutate(percentile = ntile(Sw_amt, 100)) %>%
+    mutate(Sw_amt_2324 = differentially_uprate_wage(Sw_amt, "2013-14", "2023-24"), 
+           percentile_2324 = ntile(Sw_amt_2324, 100)) %$%
+    mean(percentile != percentile_2324)
+  
+  expect_lt(prop_move, 0.001)
+})
