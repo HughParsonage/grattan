@@ -16,4 +16,7 @@ differentially_uprate_wage(wage = 1, from_fy, to_fy)
 \description{
 Apply differential uprating to projections of the \code{Sw_amt} variable.
 }
+\author{
+Hugh Parsonage and William Young
+}
 
