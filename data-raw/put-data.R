@@ -240,9 +240,16 @@ differential_sw_uprates <-
   filter(fy.year != min(fy.year)) %>%
   group_by(Sw_amt_percentile) %>%
   summarise(avg_r = mean(r_average_salary)) %>% 
-  mutate(uprate_factor = avg_r / mean(avg_r)) %>%
-  select(Sw_amt_percentile, uprate_factor) %>%
+  mutate(uprate_factor_raw = avg_r / mean(avg_r)) %>%
+  select(Sw_amt_percentile, uprate_factor_raw) %>%
   setkey(Sw_amt_percentile)
+
+differential_sw_uprates %>%
+  # Span = 0.5 seems to be the point at which the curve has only 
+  # one local extremum.
+  # ggplot(., aes(x = Sw_amt_percentile, y = uprate_factor)) + geom_point() + stat_smooth(method = "loess", span = 0.45)
+  mutate(pred_loess = predict(loess(uprate_factor_raw ~ Sw_amt_percentile, data = ., span = 0.45), newdata = .)) %>% 
+  rename(uprate_factor = pred_loess)
 
 devtools::use_data(lito_tbl, 
                    tax_tbl, 
