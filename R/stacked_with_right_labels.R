@@ -6,6 +6,7 @@
 #' @param verbose Report the margin used (in grid:: 'lines').
 #' @param right_margin The amount of padding at right to use. The whole point of this function is to select a good right margin to allow space. But if the margin provided is wrong, it can be changed manually here.
 #' @param reverse (logical) Use the reverse palette.
+#' @param scale_fill_manual_args Arguments passed to \code{ggplot2::scale_fill_manual}.
 #' @param scale_y_args A list of arguments passed to r \code{ggplot2::scale_y_continuous}.
 #' @param x_continuous Should the x axis be continuous?
 #' @param scale_x_args A list of arguments passed to \code{ggplot2::scale_x_discrete}. If \code{x_continuous}, then the arguments passed to \code{ggplot2::scale_x_continuous}.
@@ -42,6 +43,7 @@ stacked_bar_with_right_labels <- function(.data,
                                           verbose = FALSE,
                                           right_margin = 0.5,
                                           reverse = FALSE,
+                                          scale_fill_manual_args, 
                                           scale_y_args,
                                           x_continuous = FALSE,
                                           scale_x_args,
@@ -144,6 +146,13 @@ stacked_bar_with_right_labels <- function(.data,
                            size = 20/(14/5),
                            fontface = "bold") 
     }
+    if (!missing(scale_fill_manual_args)){
+      if (!missing(reverse)){
+        warning("Both 'scale_fill_manual_args' and 'reverse' provided; 'reverse' will be ignored.")
+      }
+      p <- p + do.call(ggplot2::scale_fill_manual, args = scale_fill_manual_args)
+    }
+    
     if (!missing(scale_x_args)){
       if (x_continuous){
         p <- p + do.call(ggplot2::scale_x_continuous, args = scale_x_args)

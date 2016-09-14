@@ -5,10 +5,10 @@
 \title{Stacked charts with labels at right}
 \usage{
 stacked_bar_with_right_labels(.data, geom = "bar", barwidth,
-  verbose = FALSE, right_margin = 0.5, reverse = FALSE, scale_y_args,
-  x_continuous = FALSE, scale_x_args, coord_cartesian_args,
-  text_family = "", Annotate_Args, theme_grattan.args, theme.args,
-  nudge_up = 0, nudge_right = 0.5, extra_left_spaces = 0L)
+  verbose = FALSE, right_margin = 0.5, reverse = FALSE,
+  scale_fill_manual_args, scale_y_args, x_continuous = FALSE, scale_x_args,
+  coord_cartesian_args, text_family = "", Annotate_Args, theme_grattan.args,
+  theme.args, nudge_up = 0, nudge_right = 0.5, extra_left_spaces = 0L)
 }
 \arguments{
 \item{.data}{A data frame, containing entries for \code{x}, \code{y}, and \code{fill}. \code{x} and \code{fill} must be ordered factors.}
@@ -22,6 +22,8 @@ stacked_bar_with_right_labels(.data, geom = "bar", barwidth,
 \item{right_margin}{The amount of padding at right to use. The whole point of this function is to select a good right margin to allow space. But if the margin provided is wrong, it can be changed manually here.}
 
 \item{reverse}{(logical) Use the reverse palette.}
+
+\item{scale_fill_manual_args}{Arguments passed to \code{ggplot2::scale_fill_manual}.}
 
 \item{scale_y_args}{A list of arguments passed to r \code{ggplot2::scale_y_continuous}.}
 
