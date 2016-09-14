@@ -35,6 +35,7 @@ RoxygenNote: 5.0.1
 Suggests: testthat, taxstats,
     rmarkdown, 
     dtplyr,
-    scales
+    scales, 
+    broom
 LazyData: true
 VignetteBuilder: knitr
