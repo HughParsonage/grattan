@@ -10,7 +10,7 @@ weighted_ntile <- function(vector, weights = rep(1, length(vector)), n){
   are_zero <- function(x){
     x < .Machine$double.eps ^ 0.5
   }
-  
+  stopifnot(all(weights >= 0))
   if (any(weights %>% are_zero)){
     warning("Some weights are zero. Maximum ntile may be incorrect.")
   }
