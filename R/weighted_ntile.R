@@ -10,16 +10,26 @@ weighted_ntile <- function(vector, weights = rep(1, length(vector)), n){
   are_zero <- function(x){
     x < .Machine$double.eps ^ 0.5
   }
-  
+  stopifnot(all(weights >= 0))
   if (any(weights %>% are_zero)){
     warning("Some weights are zero. Maximum ntile may be incorrect.")
   }
   
-  ooo <- rank(vector, ties.method = "first", na.last = "keep")
-  out <- floor((n *(cumsum(dplyr::lag(weights[ooo], default = 0))[ooo] / sum(weights))) + 1)
+  # We need to sort `vector` first before cumsumming.
+  # CRAN NOTE avoidance
+  vec <- wts <- orig_order <- NULL
+  # 
+  out <- 
+    data.table(vec = vector, 
+               wts = weights) %>%
+    .[, orig_order := 1:.N] %>%
+    setorderv("vec") %>%
+    .[, out := as.integer(floor((n * cumsum(shift(x = wts, n = 1L, fill = 0)) / sum(wts)) + 1))] %>% 
+    setorderv("orig_order") %>%
+    .[["out"]]
+  
   if (any(out > n)){
     warning("Some ntiles greater than n = ", n)
-  } else {
-    return(out)
-  }
+  } 
+  out
 }

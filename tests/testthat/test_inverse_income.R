@@ -3,6 +3,13 @@ context("Test inverse income tax.")
 test_that("Inverse single income matches.", {
   income <- sample(1:1e6, size = 1)
   fy.year <- sample(yr2fy(2004:2015), size = 1)
+  
+  # Ignore cases where the tax is zero
+  while (income_tax(income, fy.year) < 1){
+    income <- sample(1:1e6, size = 1)
+    fy.year <- sample(yr2fy(2004:2015), size = 1)
+  }
+  
   expect_true(abs(inverse_income(income_tax(income, fy.year), fy.year = fy.year, zero.tax.income = "maximum") - income) < 1/2, 
               info = paste0("income: ", income, "\n", "fy.year: ", fy.year))
   
