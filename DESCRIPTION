@@ -36,6 +36,7 @@ Suggests: testthat, taxstats,
     rmarkdown, 
     dtplyr,
     scales, 
-    broom
+    broom, 
+    survey
 LazyData: true
 VignetteBuilder: knitr
