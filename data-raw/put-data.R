@@ -216,6 +216,38 @@ super_contribution_inflator_1314 <-
   ato_aggregate_contributions[fy_year == "2013-14"][["total_contributions"]] / sample_file_1314_concessional_contribution_total
 }
 
+# differential uprating
+salary_by_fy_swtile <- 
+  sample_files_all %>%
+  select(fy.year, Sw_amt) %>%
+  filter(Sw_amt > 0) %>%
+  group_by(fy.year) %>%
+  mutate(Sw_amt_percentile = ntile(Sw_amt, 100)) %>%
+  ungroup %>%
+  group_by(fy.year, Sw_amt_percentile) %>%
+  summarise(average_salary = mean(Sw_amt), 
+            min_salary = min(Sw_amt)) %>%
+  ungroup %>%
+  setkey(Sw_amt_percentile)
+  
+
+differential_sw_uprates <- 
+  salary_by_fy_swtile %>%
+  ungroup %>%
+  arrange(Sw_amt_percentile, fy.year) %>%
+  group_by(Sw_amt_percentile) %>%
+  mutate(r_average_salary = average_salary / lag(average_salary) - 1) %>%
+  filter(fy.year != min(fy.year)) %>%
+  group_by(Sw_amt_percentile) %>%
+  summarise(avg_r = mean(r_average_salary)) %>% 
+  mutate(uprate_factor_raw = avg_r / mean(avg_r)) %>%
+  select(Sw_amt_percentile, uprate_factor_raw) %>%
+  setkey(Sw_amt_percentile) %>%
+  # Span = 0.5 seems to be the point at which the curve has only 
+  # one local extremum.
+  # ggplot(., aes(x = Sw_amt_percentile, y = uprate_factor)) + geom_point() + stat_smooth(method = "loess", span = 0.45)
+  mutate(pred_loess = predict(loess(uprate_factor_raw ~ Sw_amt_percentile, data = ., span = 0.45), newdata = .)) %>% 
+  rename(uprate_factor = pred_loess)
 
 devtools::use_data(lito_tbl, 
                    tax_tbl, 
@@ -231,5 +263,8 @@ devtools::use_data(lito_tbl,
                    generic_inflators,
                    cg_inflators_1314,
                    super_contribution_inflator_1314,
+                   #
+                   salary_by_fy_swtile,
+                   differential_sw_uprates,
                    #
                    internal = TRUE, overwrite = TRUE)
