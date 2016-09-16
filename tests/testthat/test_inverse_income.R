@@ -22,6 +22,7 @@ test_that("Inverse income on zero", {
   expect_equal(inverse_income(0, "2014-15", zero.tax.income = 5), 5)
   expect_equal(inverse_income(0, "2015-16", zero.tax.income = "zero"), 0)
   expect_error(inverse_income(-1, "2015-16"))
+  expect_lte(inverse_income(0, "2014-15", zero.tax.income = "uniform"), inverse_income(0, "2014-15", zero.tax.income = "maximum"))
 })
 
 test_that("Inverse long income matches.", {
