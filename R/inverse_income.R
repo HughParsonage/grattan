@@ -28,13 +28,13 @@ inverse_income_radix <- function(tax, fy.year = "2012-13", ...){
   else {
     income <- 0L
     step <- 2^15
-    while (grattan::income_tax(income, fy.year = fy.year, ...) <= tax){
+    while (income_tax(income, fy.year = fy.year, ...) <= tax){
       income <- income + step
     }
     step <- step / 2
     
     income <- income - 2^14
-    diff <- grattan::income_tax(income, fy.year = fy.year, ...) - tax
+    diff <- income_tax(income, fy.year = fy.year, ...) - tax
     
     while (step > 0.125 || abs(diff) > 1){
       if (diff < 0){
@@ -42,7 +42,7 @@ inverse_income_radix <- function(tax, fy.year = "2012-13", ...){
       } else {
         income <- income - step
       }
-      diff <- grattan::income_tax(income, fy.year = fy.year, ...) - tax
+      diff <- income_tax(income, fy.year = fy.year, ...) - tax
       step <- step / 2
     }
     income
@@ -54,13 +54,13 @@ inverse_income_while <- function(tax, fy.year = "2012-13", ...){
     return(tax)
   else {
     income <- 0L
-    while (grattan::income_tax(income, fy.year = fy.year, ...) <= tax){
+    while (income_tax(income, fy.year = fy.year, ...) <= tax){
       income <- income + 1000L
     }
     
     income <- income - 999L
     
-    while(grattan::income_tax(income, fy.year = fy.year, ...) <= tax){
+    while(income_tax(income, fy.year = fy.year, ...) <= tax){
       income <- income + 1L
     }
     
@@ -97,26 +97,25 @@ inverse_income_lengthone <- function(tax, fy.year = "2012-13", zero.tax.income =
 inverse_income_lookup <- function(tax, fy.year = "2012-13", zero.tax = "maximum", ...){
   income.range <- seq(0L, max(ceiling(max(tax) * 3), 100000L), by = 1L)
   
-  input <- data.table::data.table(taxes = tax)
-  temp <- data.table::setkeyv(
-    data.table::data.table(incomes = income.range, 
-                           taxes = grattan::income_tax(income.range, 
-                                                       fy.year = fy.year, ...)),
-    "taxes")
+  input <- data.table(taxes = tax)
+  temp <- 
+    setkeyv(data.table(incomes = income.range, 
+                       taxes = income_tax(income.range, fy.year = fy.year, ...)),
+            "taxes")
   
   tbl <- temp[input, roll=-Inf]  # LOOCF, all taxes are invertible
-  return(tbl$incomes)
+  tbl[["incomes"]]
 }
 
 inverse_income_lookup2 <- function(tax, fy.year = "2012-13", zero.tax = "maximum", ...){
   income.range <- seq(0L, max(ceiling(max(tax) * 3), 100000L), by = 1L)
-  input <- data.table::data.table(taxes = tax)
-  temp <- data.table::data.table(incomes = income.range)
-  temp$taxes <- grattan::income_tax(temp$incomes, fy.year = fy.year, ...)
+  input <- data.table(taxes = tax)
+  temp <- data.table(incomes = income.range)
+  temp$taxes <- income_tax(temp$incomes, fy.year = fy.year, ...)
   data.table::setkeyv(temp, "taxes")
   # LOOCF, all taxes are invertible
   tbl <- temp[input, roll = -Inf]
-  return(tbl$incomes)
+  tbl$incomes
 }
 
 inverse_income_lookup3 <- function(tax, fy.year = "2012-13", zero.tax.income = "maximum", ...){
@@ -129,13 +128,13 @@ inverse_income_lookup3 <- function(tax, fy.year = "2012-13", zero.tax.income = "
   # Always check up to $100,000. There, the ratio of income to 
   # tax is at most 3.79 and decreases thereafter (2012-13).
   income.range <- seq(0L, max(ceiling(max(tax) * 3.79), 100000L), by = 1L)  
-  input <- data.table::data.table(taxes = dplyr::if_else(zeroes, 1, tax))  # ensure a one-to-one relationship
-  temp <- data.table::data.table(incomes = income.range)
+  input <- data.table(taxes = dplyr::if_else(zeroes, 1, tax))  # ensure a one-to-one relationship
+  temp <- data.table(incomes = income.range)
   # temp[, taxes := income_tax(incomes, fy.year = fy.year, ...)]
   
   temp[, "taxes" := lapply(.SD, income_tax, fy.year = fy.year), .SDcols = "incomes"]
-  data.table::setkeyv(temp, "taxes")
-  data.table::setkeyv(input, "taxes")
+  setkeyv(temp, "taxes")
+  setkeyv(input, "taxes")
   tbl <- temp[input, roll=-Inf]  # LOOCF, all taxes are invertible
   
   out <- tbl[["incomes"]][oo]
