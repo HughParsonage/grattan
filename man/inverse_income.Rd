@@ -17,9 +17,12 @@ inverse_income(tax, fy.year = "2012-13", zero.tax.income = c("maximum",
 \item{...}{Other arguments passed to \code{income_tax}.}
 }
 \value{
-The taxable income given the tax payable for the financial year, accurate to the nearest integer.
+The approximate taxable income given the tax payable for the financial year. See Details.
 }
 \description{
 Inverse income tax functions
+}
+\details{
+The number returned has an error of $2.
 }
 
