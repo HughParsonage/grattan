@@ -5,7 +5,8 @@
 \title{Medicare levy}
 \usage{
 medicare_levy(income, fy.year = "2013-14", Spouse_income = 0,
-  sapto.eligible = FALSE, family_status = "individual", n_dependants = 0)
+  sapto.eligible = FALSE, sato = NULL, pto = NULL,
+  family_status = "individual", n_dependants = 0)
 }
 \arguments{
 \item{income}{The taxable income. A vector of numeric values.}
@@ -14,7 +15,11 @@ medicare_levy(income, fy.year = "2013-14", Spouse_income = 0,
 
 \item{Spouse_income}{The spouse's adjusted income.}
 
-\item{sapto.eligible}{(logical) Is the taxpayer eligible for SAPTO?}
+\item{sapto.eligible}{(logical) Is the taxpayer eligible for SAPTO? See Details.}
+
+\item{sato}{Is the taxpayer eligible for the Senior Australians Tax Offset?}
+
+\item{pto}{Is the taxpayer eligible for the Pensions Tax Offset?}
 
 \item{family_status}{What is the taxpayer's family status: family or individual?}
 
@@ -27,6 +32,9 @@ The medicare levy payable for that taxpayer.
 The (actual) amount payable for the medicare levy.
 }
 \details{
-The actual medicare levy payable for such a taxpayer in that financial year.
+The Seniors and Pensioners Tax Offset was formed in 2012-13 as an amalgam of the Senior Australians Tax Offset and the Pensions Tax Offset. 
+Medicare rates before 2012-13 were different based on these offsets. 
+If \code{sato} and \code{pto} are \code{NULL}, \code{sapto.eligible} stands for eligibility for the \code{sato} and not \code{pto}.
+If \code{sato} or \code{pto} are not \code{NULL} for such years,
 }
 

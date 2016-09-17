@@ -7,7 +7,7 @@
 #' @param Spouse_income The spouse's adjusted income.
 #' @param sapto.eligible (logical) Is the taxpayer eligible for SAPTO? See Details.
 #' @param sato Is the taxpayer eligible for the Senior Australians Tax Offset?
-#' @param pto Is the taxpayer eligible for the Pensions Tax Offset? \code{sato} and \code{pto} must be 
+#' @param pto Is the taxpayer eligible for the Pensions Tax Offset?
 #' @param family_status What is the taxpayer's family status: family or individual?
 #' @param n_dependants Number of children dependant on the taxpayer.
 #' @return The medicare levy payable for that taxpayer.
