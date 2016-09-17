@@ -17,7 +17,10 @@
 #' @export lf_inflator lf_inflator_fy
 
 lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy, 
-                           useABSConnection = FALSE, allow.projection = TRUE, use.month = "01"){
+                           useABSConnection = FALSE, allow.projection = TRUE, 
+                           use.month = "01",
+                           forecast.series = c("mean", "upper", "lower"),
+                           forecast.level = 95) {
   # CRAN
   obsTime <- NULL; obsValue <- NULL; to_index <- NULL; from_index <- NULL
   # pretty sure this is ok. Reflects  dplyr::mutate(fy_year = date2fy(obsTimeDate))
@@ -31,41 +34,76 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     lf.indices <- lf_trend
   }
   
+  lf.indices %<>% dplyr::select_(., .dots = c("obsTime", "obsValue"))
+  
+  lf.indices[, obsDate := as.Date(sprintf("%s-01", obsTime))]
+  last.date.in.series <- last(lf.indices[["obsDate"]])
+  last.fy.in.series <- date2fy(last.date.in.series)
+  
+  if (!allow.projection && !all(to_fy <= last.fy.in.series)){
+    stop("Not all elements of to_fy are in CPI data.")
+  }
+  
+  # Use forecast::forecast to inflate forward
+  if (allow.projection && !all(to_fy <= last.fy.in.series)){
+    # Labour force is monthly
+    to_date <- fy2date(to_fy)
+    months.ahead <- 
+      12 * (year(to_date) - year(last.date.in.series)) + month(to_date) - month(last.date.in.series)
+    
+    forecast.series <- match.arg(forecast.series)
+    switch(forecast.series, 
+           "mean" = {
+             forecasts <- 
+               forecast::forecast(lf.indices[["obsValue"]], 
+                                  h = months.ahead, 
+                                  level = forecast.level) %>%
+               magrittr::use_series("mean") %>%
+               as.numeric 
+           }, 
+           "upper" = {
+             forecasts <- 
+               forecast::forecast(lf.indices[["obsValue"]], 
+                                  h = months.ahead, 
+                                  level = forecast.level) %>%
+               magrittr::use_series("upper") %>%
+               as.numeric 
+           }, 
+           "lower" = {
+             forecasts <- 
+               forecast::forecast(lf.indices[["obsValue"]], 
+                                  h = months.ahead, 
+                                  level = forecast.level) %>%
+               magrittr::use_series("lower") %>%
+               as.numeric
+           })
+    
+    lf.indices.new <- 
+      data.table(obsValue = forecasts, 
+                 obsDate =  seq.Date(last.date.in.series, to_date, by = "month")[-1]) %>%
+      mutate(obsTime = sprintf("%s-%02d", year(obsDate), month(obsDate)))
+    
+    
+    lf.indices <- data.table::rbindlist(list(lf.indices, lf.indices.new), use.names = TRUE, fill = TRUE)
+  }
+  
   lf.indices <- 
     lf.indices %>%
-    dplyr::mutate(obsTimeDate = as.Date(paste0(obsTime, "-01"), format = "%Y-%m-%d")) %>%
     dplyr::filter(substr(obsTime, 6, 7) == use.month) %>%
-    dplyr::mutate(fy_year = date2fy(obsTimeDate))
+    dplyr::mutate(fy_year = date2fy(obsDate))
   
   input <-
     data.table::data.table(labour_force = labour_force,
                            from_fy = from_fy,
                            to_fy = to_fy)
   
-  if (!allow.projection && !all(to_fy %in% lf.indices$fy_year)){
-    stop("Not all elements of to_fy are in CPI data.")
-  }
-  
-  # Use forecast::forecast to inflate forward
-  if (allow.projection && !all(to_fy %in% lf.indices$fy_year)){
-    # Number of years beyond the data our forecast must reach
-    years.beyond <- max(fy2yr(to_fy)) - max(fy2yr(lf.indices$fy_year))
-    lf_index_forecast <- lf.indices %$% forecast::forecast(obsValue, h = years.beyond) %$% as.numeric(mean)
-    lf.indices.new <- 
-      data.table::data.table(fy_year = yr2fy(seq(max(fy2yr(lf.indices$fy_year)) + 1,
-                                                 max(fy2yr(to_fy)),
-                                                 by = 1L)),
-                             obsValue = lf_index_forecast)
-    lf.indices <- data.table::rbindlist(list(lf.indices, lf.indices.new), use.names = TRUE, fill = TRUE)
-  }
-  
   output <- 
     input %>%
     merge(lf.indices, by.x = "from_fy", by.y = "fy_year", sort = FALSE,
-                                  all.x = TRUE) %>%
+          all.x = TRUE) %>%
     dplyr::rename(from_index = obsValue) %>%
     merge(lf.indices, by.x = "to_fy", by.y = "fy_year", sort = FALSE, 
-                                  all.x = TRUE) %>%
+          all.x = TRUE) %>%
     dplyr::rename(to_index = obsValue) %>%
     dplyr::mutate(out = labour_force * (to_index/from_index))
   
