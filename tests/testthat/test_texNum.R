@@ -15,3 +15,10 @@ test_that("texNum returns known results", {
   expect_true(texNum(380e9 - 1, pre.phrase = c("X", "Y")) %in% c("X 380~billion", "X 0.38~trillion"))
   expect_true(texNum(380e6) %in% c("380~million", "0.38~billion"))
 })
+
+context("grattan_dollar")
+
+test_that("grattan_dollar correct", {
+  expect_equal(grattan_dollar(100), "$100")
+  expect_equal(grattan_dollar(-100), paste0("\U2212", "$100"))
+})
