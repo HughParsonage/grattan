@@ -11,6 +11,13 @@ new_income_tax <- function(income,
   stopifnot(is.data.table(new_tax_tbl))
   stopifnot(all(c("lower_bracket", "marginal_rate") %in% names(new_tax_tbl)))
   
+  # CRAN avoidance 
+  marginal_rate <- 
+    lower_bracket <- 
+    tax_at <- 
+    ordering <- 
+    tax <- NULL
+  
   tax_table2 <- 
     new_tax_tbl %>%
     dplyr::mutate(
