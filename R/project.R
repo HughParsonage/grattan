@@ -129,43 +129,40 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEI
     }
     
     sample_file %>%
-      dplyr::mutate(
-        Net_rent_amt = Gross_rent_amt - Other_rent_ded_amt - Rent_int_ded_amt - Rent_cap_wks_amt,
-        Net_PP_BI_amt = Total_PP_BI_amt - Total_PP_BE_amt,
-        Net_NPP_BI_amt = Total_NPP_BI_amt - Total_NPP_BE_amt,
-        Tot_inc_amt = .add(Sw_amt,
-                           Alow_ben_amt,
-                           ETP_txbl_amt,
-                           Grs_int_amt,
-                           Aust_govt_pnsn_allw_amt,
-                           Unfranked_Div_amt,
-                           Frk_Div_amt,
-                           Dividends_franking_cr_amt,
-                           Net_rent_amt,
-                           Net_farm_management_amt,
-                           Net_PP_BI_amt,  ## Need to check exactly how this maps.
-                           Net_NPP_BI_amt,
-                           Net_CG_amt,  ## We cannot express this cleanly in terms of Tot_CG
-                           Net_PT_PP_dsn,
-                           Net_PT_NPP_dsn,
-                           Taxed_othr_pnsn_amt,
-                           Untaxed_othr_pnsn_amt,
-                           Other_foreign_inc_amt,
-                           Other_inc_amt),
-        Tot_ded_amt = .add(WRE_car_amt,
-                           WRE_trvl_amt,
-                           WRE_uniform_amt,
-                           WRE_self_amt,
-                           WRE_other_amt,
-                           Div_Ded_amt,
-                           Intrst_Ded_amt,
-                           Gift_amt,
-                           Non_emp_spr_amt,
-                           Cost_tax_affairs_amt,
-                           Other_Ded_amt),
-        Taxable_Income = pmaxC(Tot_inc_amt - Tot_ded_amt - PP_loss_claimed - NPP_loss_claimed, 0)
-      ) %>%
-      data.table::as.data.table(.)
+      .[, Net_rent_amt := Gross_rent_amt - Other_rent_ded_amt - Rent_int_ded_amt - Rent_cap_wks_amt] %>%
+      .[, Net_PP_BI_amt := Total_PP_BI_amt - Total_PP_BE_amt] %>%
+      .[, Net_NPP_BI_amt := Total_NPP_BI_amt - Total_NPP_BE_amt] %>%
+      .[, Tot_inc_amt := .add(Sw_amt,
+                              Alow_ben_amt,
+                              ETP_txbl_amt,
+                              Grs_int_amt,
+                              Aust_govt_pnsn_allw_amt,
+                              Unfranked_Div_amt,
+                              Frk_Div_amt,
+                              Dividends_franking_cr_amt,
+                              Net_rent_amt,
+                              Net_farm_management_amt,
+                              Net_PP_BI_amt,  ## Need to check exactly how this maps.
+                              Net_NPP_BI_amt,
+                              Net_CG_amt,  ## We cannot express this cleanly in terms of Tot_CG
+                              Net_PT_PP_dsn,
+                              Net_PT_NPP_dsn,
+                              Taxed_othr_pnsn_amt,
+                              Untaxed_othr_pnsn_amt,
+                              Other_foreign_inc_amt,
+                              Other_inc_amt)] %>%
+      .[, Tot_ded_amt := .add(WRE_car_amt,
+                              WRE_trvl_amt,
+                              WRE_uniform_amt,
+                              WRE_self_amt,
+                              WRE_other_amt,
+                              Div_Ded_amt,
+                              Intrst_Ded_amt,
+                              Gift_amt,
+                              Non_emp_spr_amt,
+                              Cost_tax_affairs_amt,
+                              Other_Ded_amt)] %>%
+      .[, Taxable_Income := pmaxC(Tot_inc_amt - Tot_ded_amt - PP_loss_claimed - NPP_loss_claimed, 0)] 
     
   } 
 }
