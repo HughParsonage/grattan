@@ -34,7 +34,9 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEI
     
     col.names <- names(sample_file)
     
-    wagey.cols <- c("Sw_amt", 
+    diff.uprate.wagey.cols <- "Sw_amt"
+    
+    wagey.cols <- c(
                     "Alow_ben_amt",
                     "ETP_txbl_amt",
                     "Rptbl_Empr_spr_cont_amt", 
@@ -91,11 +93,9 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEI
     
     ## Inflate:
     # make numeric to avoid overflow
-    if (h != 0L){
-      numeric.cols <- names(sample_file)[vapply(sample_file, is.numeric, TRUE)]
-      for (j in which(col.names %in% numeric.cols)){
-        data.table::set(sample_file, j = j, value = as.numeric(sample_file[[j]]))
-      }
+    numeric.cols <- names(sample_file)[vapply(sample_file, is.numeric, TRUE)]
+    for (j in which(col.names %in% numeric.cols)){
+      data.table::set(sample_file, j = j, value = as.numeric(sample_file[[j]]))
     }
     
     for (j in which(col.names %in% wagey.cols))
