@@ -11,6 +11,8 @@
 #' @param useABSConnection Should an sdmx connection be used to get ABS data?
 #' @param allow.projection Logical. Should projections be allowed?
 #' @param use.month A 2-character string for the month in which the labour force should be used.
+#' @param forecast.series Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals.
+#' @param forecast.level The prediction interval to be used if \code{forecast.series} is \code{upper} or \code{lower}. 
 #' @examples
 #' lf_inflator_fy(labour_force = 1, from_fy = "2012-13", to_fy = "2013-14")
 #' @return the relative labour force between to_date and for_date, multiplied by labour_force.
