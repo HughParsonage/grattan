@@ -34,6 +34,8 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEI
     
     col.names <- names(sample_file)
     
+    # Differential uprating not available for years outside:
+    stopifnot(fy.year.of.sample.file %in% yr2fy(2004:2014))
     diff.uprate.wagey.cols <- "Sw_amt"
     
     wagey.cols <- c(
@@ -80,7 +82,7 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEI
     SetDiff <- function(...) Reduce(setdiff, list(...), right = FALSE)
     
     generic.cols <- SetDiff(col.names, 
-                            wagey.cols, super.bal.col, lfy.cols, cpiy.cols, derived.cols, Not.Inflated)
+                            diff.uprate.wagey.cols, wagey.cols, super.bal.col, lfy.cols, cpiy.cols, derived.cols, Not.Inflated)
     
     if (.recalculate.inflators){
       generic.inflators <- 
@@ -94,9 +96,13 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEI
     ## Inflate:
     # make numeric to avoid overflow
     numeric.cols <- names(sample_file)[vapply(sample_file, is.numeric, TRUE)]
-    for (j in which(col.names %in% numeric.cols)){
+    for (j in which(col.names %in% numeric.cols))
       data.table::set(sample_file, j = j, value = as.numeric(sample_file[[j]]))
-    }
+    
+    
+    # Differential uprating:
+    for (j in which(col.names %in% diff.uprate.wagey.cols))
+      set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy))
     
     for (j in which(col.names %in% wagey.cols))
       data.table::set(sample_file, j = j, value = wage.inflator * sample_file[[j]])
