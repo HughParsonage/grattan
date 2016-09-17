@@ -4,7 +4,7 @@
 #' @param fy.year The relevant financial year.
 #' @param zero.tax.income A character vector, ("maximum", "zero", "uniform", numeric(1)) Given that many incomes map to zero taxes, the \code{income_tax} function is not invertible there. As a consequence, the inverse function's value must be specified for tax = 0. "maximum" returns the maximum integer income one can have with a zero tax liability; "zero" returns zero for any tax of zero; "uniform" provides a random integer from zero to the maximum income with a zero tax. The value can also be specified explicitly.
 #' @param ... Other arguments passed to \code{income_tax}.
-#' @return The taxable income given the tax payable for the financial year, acurrate to the nearest integer
+#' @return The taxable income given the tax payable for the financial year, accurate to the nearest integer.
 #' @export inverse_income
 #' 
 
@@ -16,9 +16,28 @@ inverse_income <- function(tax, fy.year = "2012-13", zero.tax.income = c("maximu
     stop("tax must be nonnegative")
   
   if (length(tax) > 1)
-    inverse_income_lookup3(tax, fy.year = fy.year, zero.tax.income = zero.tax.income, ...)
-  else
-    inverse_income_which_min(tax, fy.year = fy.year, zero.tax.income = zero.tax.income, ...)
+    out <- inverse_income_lookup3(tax, fy.year = fy.year, zero.tax.income = zero.tax.income, ...)
+  else {
+    if (tax < .Machine$double.eps ^ 0.5){
+      if (zero.tax.income == "zero"){
+        out <- 0
+      } else {
+        if (is.numeric(zero.tax.income)){
+          out <- zero.tax.income
+        } else {
+          if (zero.tax.income == "maximum"){
+            out <- inverse_income_which_min(tax, fy.year = fy.year, zero.tax.income = "maximum", ...)
+          } else {
+            out <- (sample(1:inverse_income_which_min(tax, fy.year = fy.year, zero.tax.income = zero.tax.income, ...), 
+                           size = 1))
+          }
+        }
+      }
+    } else {
+      out <- inverse_income_which_min(tax, fy.year = fy.year, zero.tax.income = zero.tax.income, ...)
+    }
+  }
+  out
 }
 
 inverse_income_radix <- function(tax, fy.year = "2012-13", ...){
@@ -162,6 +181,6 @@ inverse_income_lookup3 <- function(tax, fy.year = "2012-13", zero.tax.income = "
 }
 
 inverse_income_which_min <- function(tax, fy.year, zero.tax.income = "maximum", ...){
-  min(which(income_tax(1:(tax * 2 + 40e3), fy.year = fy.year, ...) > tax))
+  min(which(income_tax(1:(tax * 3 + 40e3), fy.year = fy.year, ...) > tax))
 }
 

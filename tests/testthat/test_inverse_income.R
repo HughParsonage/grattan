@@ -10,10 +10,7 @@ test_that("Inverse single income matches.", {
     fy.year <- sample(yr2fy(2004:2015), size = 1)
   }
   
-  expect_true(abs(inverse_income(income_tax(income, fy.year), fy.year = fy.year, zero.tax.income = "maximum") - income) < 1/2, 
-              info = paste0("income: ", income, "\n", "fy.year: ", fy.year))
-  
-  expect_true(abs(inverse_income_while(income_tax(income, fy.year), fy.year = fy.year) - income) < 3/2, 
+  expect_true(abs(inverse_income(round(income_tax(income, fy.year)), fy.year = fy.year, zero.tax.income = "maximum") - income) < 1/2, 
               info = paste0("income: ", income, "\n", "fy.year: ", fy.year))
 })
 
