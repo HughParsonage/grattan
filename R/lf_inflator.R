@@ -48,7 +48,7 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     date2fy
   
   if (!allow.projection && any(to_fy > last.full.fy.in.series)){
-    stop("Not all elements of to_fy are in CPI data.")
+    stop("Not all elements of to_fy are in labour force data.")
   }
   
   # Use forecast::forecast to inflate forward
