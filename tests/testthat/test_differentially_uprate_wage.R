@@ -19,7 +19,13 @@ test_that("Differential uprate factor preserves order", {
 
 test_that("Wage growth is higher for extreme salaries", {
   extreme_tile <- sample(c(1:20, 80:100), size = 1)
-  moderate_tile <- sample(21:79, size = 1)
+  
+  # Not comparing 20 with 79 or 21 with 80
+  if (extreme_tile < 50){
+    moderate_tile <- sample(21:49, size = 1)
+  } else {
+    moderate_tile <- sample(51:79, size = 1)
+  }
   
   from_year <- sample(2004:2014, size = 1)
   to_year <- from_year + rpois(1, 4) + 1
