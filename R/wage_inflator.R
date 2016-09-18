@@ -24,7 +24,7 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
   # Avoid vector recycling
   prohibit_vector_recycling(wage, from_fy, to_fy)
   
-  if(useABSConnection) {
+  if (useABSConnection) {
     wage.url <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LABOUR_PRICE_INDEX/1.THRPEB.7.-.0.30.Q/ABS?startTime=1997"
     wages <- rsdmx::readSDMX(wage.url)
     message("Using ABS sdmx connection")
@@ -55,7 +55,7 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
   # else allow NAs to propagate
   
   # Use forecast::forecast to inflate forward
-  if(allow.projection && to_fy > yr2fy(last.full.yr.in.series)){
+  if (allow.projection && to_fy > yr2fy(last.full.yr.in.series)){
     # Number of quarters beyond the data our forecast must reach
     quarters.ahead <- 
       4L * (fy2yr(to_fy) - last.full.yr.in.series) + 2L - last.quarter.in.series
