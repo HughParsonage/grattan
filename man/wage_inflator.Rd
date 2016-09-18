@@ -5,21 +5,26 @@
 \title{A wage inflator}
 \usage{
 wage_inflator(wage = 1, from_fy, to_fy, useABSConnection = FALSE,
-  allow.projection = TRUE)
+  allow.projection = TRUE, forecast.series = c("mean", "upper", "lower"),
+  forecast.level = 95)
 }
 \arguments{
-\item{wage}{the amount to be inflated (1 by default)}
+\item{wage}{The amount to be inflated (1 by default).}
 
-\item{from_fy}{a character vector of the form "2012-13" representing the FY ending that the wage index is to be taken (i.e. Q4 in that year). FY year must be 1996-97 or later.}
+\item{from_fy}{A character vector of the form "2012-13" representing the FY ending that the wage index is to be taken (i.e. Q4 in that year). FY year must be 1996-97 or later.}
 
-\item{to_fy}{the FY ending that the wage index is to be taken}
+\item{to_fy}{The FY ending that the wage index is to be taken.}
 
 \item{useABSConnection}{Should the function connect with ABS.Stat via an SDMX connection? By default set to \code{FALSE} in which case a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.}
 
-\item{allow.projection}{If set to \code{TRUE} the \code{forecast} package is used to project forward. If set to \code{FALSE}, any dates outside the range will return \code{NA}.}
+\item{allow.projection}{If set to \code{TRUE} the \code{forecast} package is used to project forward, if required.}
+
+\item{forecast.series}{Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals.}
+
+\item{forecast.level}{The prediction interval to be used if \code{forecast.series} is \code{upper} or \code{lower}.}
 }
 \value{
-the wage inflation between the two years
+The wage inflation between the two years.
 }
 \description{
 Predicts what a wage could expect to grow to, between two financial years.
