@@ -6,7 +6,7 @@
 \title{Labour force inflators}
 \usage{
 lf_inflator_fy(labour_force = 1, from_fy = "2012-13", to_fy,
-  useABSConnection = FALSE, allow.projection = TRUE, use.month = "01",
+  useABSConnection = FALSE, allow.projection = TRUE, use.month = 1L,
   forecast.series = c("mean", "upper", "lower"), forecast.level = 95)
 
 lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date)
@@ -22,7 +22,7 @@ lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date)
 
 \item{allow.projection}{Logical. Should projections be allowed?}
 
-\item{use.month}{A 2-character string for the month in which the labour force should be used.}
+\item{use.month}{An integer (corresponding to the output of \code{data.table::month}) representing the month of the series used for the inflation.}
 
 \item{forecast.series}{Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals.}
 

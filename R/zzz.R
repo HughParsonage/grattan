@@ -31,6 +31,9 @@
     # we use the magrittr pipe
     ".",
     
+    # to return
+    "out",
+    
     # generic.inflators
     "variable", 
     

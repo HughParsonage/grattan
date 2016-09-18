@@ -10,7 +10,7 @@
 #' @param to_fy Financial year for which the labour force is predicted.
 #' @param useABSConnection Should an sdmx connection be used to get ABS data?
 #' @param allow.projection Logical. Should projections be allowed?
-#' @param use.month A 2-character string for the month in which the labour force should be used.
+#' @param use.month An integer (corresponding to the output of \code{data.table::month}) representing the month of the series used for the inflation.
 #' @param forecast.series Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals.
 #' @param forecast.level The prediction interval to be used if \code{forecast.series} is \code{upper} or \code{lower}. 
 #' @examples
@@ -20,7 +20,7 @@
 
 lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy, 
                            useABSConnection = FALSE, allow.projection = TRUE, 
-                           use.month = "01",
+                           use.month = 1L,
                            forecast.series = c("mean", "upper", "lower"),
                            forecast.level = 95) {
   # CRAN
@@ -40,18 +40,23 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
   
   lf.indices[, obsDate := as.Date(sprintf("%s-01", obsTime))]
   last.date.in.series <- last(lf.indices[["obsDate"]])
-  last.fy.in.series <- date2fy(last.date.in.series)
+  last.full.fy.in.series <- 
+    lf.indices %>%
+    dplyr::filter(month(obsDate) == 6) %>%
+    .[["obsDate"]] %>%
+    last %>%
+    date2fy
   
-  if (!allow.projection && !all(to_fy <= last.fy.in.series)){
+  if (!allow.projection && any(to_fy > last.full.fy.in.series)){
     stop("Not all elements of to_fy are in CPI data.")
   }
   
   # Use forecast::forecast to inflate forward
-  if (allow.projection && !all(to_fy <= last.fy.in.series)){
+  if (allow.projection && to_fy > last.full.fy.in.series){
     # Labour force is monthly
     to_date <- fy2date(to_fy)
     months.ahead <- 
-      12 * (year(to_date) - year(last.date.in.series)) + month(to_date) - month(last.date.in.series)
+      12L * (year(to_date) - year(last.date.in.series)) + month(to_date) - month(last.date.in.series)
     
     forecast.series <- match.arg(forecast.series)
     switch(forecast.series, 
@@ -80,19 +85,22 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
                as.numeric
            })
     
+    obsDate <- NULL
     lf.indices.new <- 
       data.table(obsValue = forecasts, 
-                 obsDate =  seq.Date(last.date.in.series, to_date, by = "month")[-1]) %>%
-      mutate(obsTime = sprintf("%s-%02d", year(obsDate), month(obsDate)))
-    
-    
+                 obsDate  = seq.Date(last.date.in.series, to_date, by = "month")[-1]) %>%
+      .[, obsTime := sprintf("%s-%02d", year(obsDate), month(obsDate))]
+
     lf.indices <- data.table::rbindlist(list(lf.indices, lf.indices.new), use.names = TRUE, fill = TRUE)
   }
   
+  stopifnot(use.month %in% 1:12)
+  
   lf.indices <- 
     lf.indices %>%
-    dplyr::filter(substr(obsTime, 6, 7) == use.month) %>%
-    dplyr::mutate(fy_year = date2fy(obsDate))
+    .[month(obsDate) == use.month] %>%
+    .[, fy_year := date2fy(obsDate)]
+  
   
   input <-
     data.table::data.table(labour_force = labour_force,
@@ -103,13 +111,14 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     input %>%
     merge(lf.indices, by.x = "from_fy", by.y = "fy_year", sort = FALSE,
           all.x = TRUE) %>%
-    dplyr::rename(from_index = obsValue) %>%
+    setnames("obsValue", "from_index") %>%
     merge(lf.indices, by.x = "to_fy", by.y = "fy_year", sort = FALSE, 
           all.x = TRUE) %>%
-    dplyr::rename(to_index = obsValue) %>%
-    dplyr::mutate(out = labour_force * (to_index/from_index))
+    setnames("obsValue", "to_index") %>%
+    .[, out := labour_force * (to_index/from_index)]
+
   
-  return(output$out)
+  output[["out"]]
 }
 
 #' @rdname lf_inflator
