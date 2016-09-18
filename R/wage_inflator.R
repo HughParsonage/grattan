@@ -30,12 +30,17 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
     wage.indices <- wages_trend
   }
   
-  wage.indices <- 
-    data.table::as.data.table(wage.indices) %>%
-    dplyr::filter(grepl("Q1", obsTime)) %>%
-    dplyr::mutate(fy_year = yr2fy(sub("-Q1", "", obsTime, fixed = TRUE)))
+  obsDate <- NULL
+  wage.indices[, obsDate := as.Date(sprintf("%s-01", obsTime))]
+  last.date.in.series <- last(wage.indices[["obsDate"]])
+  last.full.fy.in.series <- 
+    wage.indices %>%
+    dplyr::filter(month(obsDate) == 6L) %>%
+    .[["obsDate"]] %>%
+    last %>%
+    date2fy
   
-  if(!allow.projection && !all(to_fy %in% wage.indices$fy_year)){
+  if (!allow.projection && any(to_fy > last.full.fy.in.series)){
     stop("Not all elements of to_fy are in wage index data.")
   }
   # else allow NAs to propagate
@@ -43,7 +48,11 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
   # Use forecast::forecast to inflate forward
   if(allow.projection && isTRUE(!all(to_fy %in% wage.indices$fy_year))){
     # Number of years beyond the data our forecast must reach
-    years.beyond <- max(fy2yr(to_fy)) - max(fy2yr(wage.indices$fy_year))
+    to_date <- fy2date(to_fy)
+    months.ahead <- 
+      12L * (year(to_date) - year(last.date.in.series)) + month(to_date) - month(last.date.in.series)
+    
+    
     wage_index_forecast <- wage.indices %$% forecast::forecast(obsValue, h = years.beyond) %$% as.numeric(mean)
     wage.indices.new <- 
       data.table::data.table(fy_year = yr2fy(seq(max(fy2yr(wage.indices$fy_year)) + 1,
