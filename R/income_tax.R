@@ -20,7 +20,7 @@
 #' @importFrom dplyr if_else
 #' @import data.table
 #' @return the total personal income tax payable
-#' @export 
+#' @export income_tax
 
 income_tax <- function(income, fy.year, age = 42, family_status = "individual", n_dependants = 0L, sample_file, .dots.ATO = NULL, return.mode = "numeric", allow.forecasts = FALSE){
   if (missing(fy.year)){
@@ -137,20 +137,31 @@ rolling_income_tax <- function(income,
     }
   }
   
+  for (j in which(vapply(.dots.ATO, FUN = is.double, logical(1)))){
+    set(.dots.ATO, j = j, value = as.integer(.dots.ATO[[j]]))
+  }
+  
   base_tax. <- tax_fun(income, fy.year = fy.year)
   medicare_levy. <- 
     medicare_levy(income, 
                   Spouse_income = if (missing(.dots.ATO) || "Spouse_adjusted_taxable_inc" %notin% names(.dots.ATO)){
                     0
                   } else {
-                    .dots.ATO$Spouse_adjusted_taxable_inc
+                    if_else(is.na(.dots.ATO[["Spouse_adjusted_taxable_inc"]]), 
+                            0L, 
+                            .dots.ATO[["Spouse_adjusted_taxable_inc"]])
                   },
                   fy.year = fy.year, 
                   sapto.eligible = sapto.eligible, 
                   family_status = if (missing(.dots.ATO) || "Spouse_adjusted_taxable_inc" %notin% names(.dots.ATO)){
                     family_status
                   } else {
-                    if_else(.dots.ATO$Spouse_adjusted_taxable_inc > 0, "family", "individual")
+                    # If one is NA, the other should not be
+                      if_else(if_else(is.na(.dots.ATO[["Spouse_adjusted_taxable_inc"]]), 
+                                      0L, 
+                                      .dots.ATO[["Spouse_adjusted_taxable_inc"]]) > 0, 
+                              "family", 
+                              "individual")
                   }, 
                   n_dependants = n_dependants)
   

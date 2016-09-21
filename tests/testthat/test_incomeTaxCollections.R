@@ -1,6 +1,28 @@
-library(taxstats)
-library(grattan)
-library(magrittr)
+context("Tax collections")
+
+test_that("income_tax collections in 2003-04 match final budget outcome by 1%", {
+  # http://www.budget.gov.au/2003-04/fbo/download/FBO_2003_04.pdf
+  final_budget_outcome_0304 <- 98.779 * 1e9
+  collections_0304 <- sum(income_tax(sample_file_0304[["Taxable_Income"]], 
+                                     fy.year = "2003-04", 
+                                     .dots.ATO = sample_file_0304, 
+                                     age = if_else(sample_file_0304$Birth_year < 2, 67, 42))) * 100 
+  
+  expect_lt(abs(collections_0304 - final_budget_outcome_0304) / final_budget_outcome_0304, 
+            0.01)
+})
+
+test_that("income_tax collections in 2006-07 match final budget outcome by 1%", {
+  # http://www.budget.gov.au/2006-07/fbo/download/FBO_2006-07.pdf
+  final_budget_outcome_0607 <- 117.614 * 1e9
+  collections_0607 <- sum(income_tax(sample_file_0607[["Taxable_Income"]], 
+                                     fy.year = "2006-07", 
+                                     .dots.ATO = sample_file_0607, 
+                                     age = if_else(sample_file_0607$Birth_year < 2, 67, 42))) * 100 
+  
+  expect_lt(abs(collections_0607 - final_budget_outcome_0607) / final_budget_outcome_0607, 
+            0.01)
+})
 
 context("Projected tax collections")
 
