@@ -6,7 +6,7 @@
 \usage{
 medicare_levy(income, fy.year = "2013-14", Spouse_income = 0,
   sapto.eligible = FALSE, sato = NULL, pto = NULL,
-  family_status = "individual", n_dependants = 0)
+  family_status = "individual", n_dependants = 0, .checks = TRUE)
 }
 \arguments{
 \item{income}{The taxable income. A vector of numeric values.}
@@ -24,6 +24,8 @@ medicare_levy(income, fy.year = "2013-14", Spouse_income = 0,
 \item{family_status}{What is the taxpayer's family status: family or individual?}
 
 \item{n_dependants}{Number of children dependant on the taxpayer.}
+
+\item{.checks}{Should checks of certain arguments be made? Provided to improve performance when checks are not necessary.}
 }
 \value{
 The medicare levy payable for that taxpayer.

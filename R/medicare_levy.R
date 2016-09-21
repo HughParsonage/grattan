@@ -10,6 +10,7 @@
 #' @param pto Is the taxpayer eligible for the Pensions Tax Offset?
 #' @param family_status What is the taxpayer's family status: family or individual?
 #' @param n_dependants Number of children dependant on the taxpayer.
+#' @param .checks Should checks of certain arguments be made? Provided to improve performance when checks are not necessary.
 #' @return The medicare levy payable for that taxpayer.
 #' @details The Seniors and Pensioners Tax Offset was formed in 2012-13 as an amalgam of the Senior Australians Tax Offset and the Pensions Tax Offset. 
 #' Medicare rates before 2012-13 were different based on these offsets. 
@@ -25,8 +26,11 @@ medicare_levy <- function(income,
                           sato = NULL,
                           pto = NULL,
                           family_status = "individual", 
-                          n_dependants = 0){
-  stopifnot(all(is.fy(fy.year)), all(family_status %in% c("family", "individual")))
+                          n_dependants = 0, 
+                          .checks = TRUE){
+  if (.checks)
+    stopifnot(all(is.fy(fy.year)), all(family_status %in% c("family", "individual")))
+  
   prohibit_vector_recycling(income, fy.year, family_status, Spouse_income, sapto.eligible, n_dependants)
   if (any(Spouse_income > 0 & family_status == "individual")){
     stop("If Spouse_income is nonzero, family_status cannot be 'individual'.")
