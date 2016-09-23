@@ -14,6 +14,7 @@ test_that("texNum returns known results", {
   expect_true(texNum(380e9) %in% c("380~billion", "0.38~trillion"))
   expect_true(texNum(380e9 - 1, pre.phrase = c("X", "Y")) %in% c("X 380~billion", "X 0.38~trillion"))
   expect_true(texNum(380e6) %in% c("380~million", "0.38~billion"))
+  expect_equal(texNum(1.25, dollar = TRUE), "\\$1.25")
 })
 
 context("grattan_dollar")

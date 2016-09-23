@@ -21,40 +21,36 @@ texNum <- function(number, sig.figs = 3L, dollar = FALSE, pre.phrase = NULL){
   is.negative <- number < 0
   number <- abs(number)
   if (number == 0){
+    warning("Returning 0")
     return(0)
   } else {
     n.digits <- ceiling(log10(number))
     
     suffix <- NULL
     suffix_val <- 1
-    out <- number
     
     if (n.digits < sig.figs){
-      if (!is.negative){
-        return(number)
-      } else {
-        return(paste0("$-$", number))
-      }
-    }
-    
-    
-    if (n.digits <= 6){
-      prefix_val <- round(number, sig.figs - n.digits - 1)
-      prefix <- prettyNum(prefix_val, big.mark = ",", scientific = FALSE)
+      prefix <- signif(x = number, digits = sig.figs)
     } else {
-      # Want to show only the number / 10^(multiple of 3) then the suffix multiplier
-      suffix_val <- 10 ^ (3 * (n.digits %/% 3))
-      prefix_val <- signif(number/suffix_val, digits = sig.figs)
-      prefix <- prefix_val
       
-      if (suffix_val <= 10^12){
-      switch(log10(suffix_val) / 3 - 1, 
-             suffix <- "~million", 
-             suffix <- "~billion", 
-             suffix <- "~trillion")
+      if (n.digits <= 6){
+        prefix_val <- round(number, sig.figs - n.digits - 1)
+        prefix <- prettyNum(prefix_val, big.mark = ",", scientific = FALSE)
       } else {
-        prefix <- signif(number / 10^12, digits = sig.figs)
-        suffix <- "~trillion"
+        # Want to show only the number / 10^(multiple of 3) then the suffix multiplier
+        suffix_val <- 10 ^ (3 * (n.digits %/% 3))
+        prefix_val <- signif(number/suffix_val, digits = sig.figs)
+        prefix <- prefix_val
+        
+        if (suffix_val <= 10^12){
+          switch(log10(suffix_val) / 3 - 1, 
+                 suffix <- "~million", 
+                 suffix <- "~billion", 
+                 suffix <- "~trillion")
+        } else {
+          prefix <- signif(number / 10^12, digits = sig.figs)
+          suffix <- "~trillion"
+        }
       }
     }
     
@@ -64,7 +60,7 @@ texNum <- function(number, sig.figs = 3L, dollar = FALSE, pre.phrase = NULL){
       out <- paste0(prefix, suffix)
     }
     
-    if(is.negative){
+    if (is.negative){
       out <- paste0("$-$", out)
     }
     # is the displayed number larger than the original?
