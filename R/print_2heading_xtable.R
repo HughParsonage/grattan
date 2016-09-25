@@ -5,6 +5,7 @@
 #' @param xtable.align Passed to \code{xtable}: Character vector of length equal to the number of columns of the resulting table, indicating the alignment of the corresponding columns.
 #' @param booktabs Should the tabular environment produced use booktabs? Set to TRUE for (my) convenience. This will cause an error if  \verb{\usepackage{booktabs}} has not been called in LaTeX.
 #' @param heading_command A (simple) LaTeX control sequence (properly escaped) to apply to each heading names.
+#' @param xtable.dots Arguments passed to \code{xtable::xtable}. Providing both \code{xtable.dots} and \code{xtable.align} is an error.
 #' @param ... Arguments passed to \code{print.xtable}. You cannot pass \code{add.to.row}, \code{include.rownames}, or \code{include.colnames} as we make use of these options in this function.  
 #' @return Output intended for LaTeX. A table produced using xtable where groups of column names are put in the top row. 
 #' @author Hugh Parsonage
@@ -28,7 +29,9 @@ print_2heading_xtable <- function(.data,
                                   separator = "__", 
                                   xtable.align = NULL, 
                                   booktabs = TRUE, 
-                                  heading_command = "\\textbf", ...){
+                                  heading_command = "\\textbf", 
+                                  xtable.dots = NULL,
+                                  ...){
   orig_names <- names(.data)
   if (!any(grepl(separator, orig_names))){
     stop("No separator found in column names, so there is no point in using this function. Make sure you have specified the right separator; otherwise, just use print.xtable().")
@@ -36,6 +39,10 @@ print_2heading_xtable <- function(.data,
   
   if (any(c("add.to.row", "include.colnames", "include.rownames") %in% names(list(...)))){
     stop("You should not pass add.to.row, include.colnames, or include.rownames to print.xtable() via this function.")
+  }
+  
+  if (!is.null(xtable.dots) && !is.null(xtable.align)){
+      stop("xtable.align and xtable.dots cannot be both be provided.")
   }
   
   
@@ -112,7 +119,13 @@ print_2heading_xtable <- function(.data,
   addtorow$command <- 
     paste0(paste0(c(for_latex_top_row, for_latex_between_row, for_latex_second_row)), "\n")
   
-  xtable::print.xtable(xtable::xtable(.data, align = xtable.align), 
+  if (is.null(xtable.dots)){
+    xt <- xtable::xtable(.data, align = xtable.align)
+  } else {
+    xt <- do.call(xtable::xtable, xtable.dots)
+  }
+  
+  xtable::print.xtable(xt, 
                        type = "latex",
                        add.to.row = addtorow, 
                        include.colnames = FALSE, 
