@@ -25,12 +25,12 @@ Since most variables relating to income increase due to inflation -- so any sens
 The most basic uprate method is the identity function, where the variables are not changed.
 
 Alternatively, the variables can be increased by a long-term inflation rate. 
-Even better, the variables can be increased by the relevant index. 
+Even better, we can use the relevant time series indices for the variables and inflate using that index. 
 For instance, salary and wage variables can be increased by the observed increase in the wage price index amd growth in the population of taxpayers by the labour force index.
 
 ## Differential uprating
 
-Basic uprating suffers some limitation. 
+Basic uprating suffers some limitations. 
 There are significant structural differences in how much individuals' incomes grow. 
 
 ```{r}
