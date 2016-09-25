@@ -23,6 +23,7 @@
 #'           Last__baz = 2:6,
 #'           last = 101:105)
 #' print_2heading_xtable(example_df, separator = "__")
+#' print_2heading_xtable(example_df, separator = "__", xtable.dots = list(caption = "My caption"))
 #' @export
 
 print_2heading_xtable <- function(.data, 
@@ -122,7 +123,7 @@ print_2heading_xtable <- function(.data,
   if (is.null(xtable.dots)){
     xt <- xtable::xtable(.data, align = xtable.align)
   } else {
-    xt <- do.call(xtable::xtable, xtable.dots)
+    xt <- do.call(function(...) xtable::xtable(.data, ...), xtable.dots)
   }
   
   xtable::print.xtable(xt, 

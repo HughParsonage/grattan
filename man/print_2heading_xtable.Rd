@@ -43,6 +43,7 @@ data.frame(yr = 2001:2005,
           Last__baz = 2:6,
           last = 101:105)
 print_2heading_xtable(example_df, separator = "__")
+print_2heading_xtable(example_df, separator = "__", xtable.dots = list(caption = "My caption"))
 }
 \author{
 Hugh Parsonage
