@@ -17,8 +17,8 @@ opts_chunk$set(echo = FALSE, message = FALSE, fig.width=7, fig.height=6)
 ```
 
 
-Since the most recent versions of data detailing population income and wealth (as is contained within the ATO's sample files) is typically years out-of-date on release, even current situation requires a forecast procedure. 
-Since most variables relating to income increase due to inflation, this procedure is called **uprating**.
+Since the most recent versions of data detailing population income and wealth (as is contained within the ATO's sample files) is typically years out-of-date on release, even understanding the present requires a forecast. 
+Since most variables relating to income increase due to inflation -- so any sensible forecast will increase the values relative to the past -- this procedure is often called **uprating**.
 
 ## Basic uprating
 
