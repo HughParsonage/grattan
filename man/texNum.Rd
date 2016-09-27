@@ -4,7 +4,8 @@
 \alias{texNum}
 \title{Convert number to English prose}
 \usage{
-texNum(number, sig.figs = 3L, dollar = FALSE, pre.phrase = NULL)
+texNum(number, sig.figs = 3L, dollar = FALSE, pre.phrase = NULL,
+  .suffix = NULL)
 }
 \arguments{
 \item{number}{A single numeric vector.}
@@ -14,6 +15,8 @@ texNum(number, sig.figs = 3L, dollar = FALSE, pre.phrase = NULL)
 \item{dollar}{Logical, should a LaTeX dollar sign (\code{\\$}) be prefixed.}
 
 \item{pre.phrase}{A length 2 character vector to insert a phrase before the number. The first element is the phrase to be used if the output rounds up before printing (i.e. the original number is smaller than the number printed); the second is the phrase to be used if the number rounds down. The default is \code{NULL}, i.e. no phrase inserted. If either string has a trailing tilde (e.g. \code{"almost~"}), the tilde separates the number and the phrase (as a LaTeX control sequence).}
+
+\item{.suffix}{Either \code{NULL} for an automatic suffix based on the magnitude of the number, or one of million, billion, trillion for a fixed suffix.}
 }
 \value{
 A character string representing the number as appropriate for English prose.
