@@ -5,7 +5,8 @@
 \title{Print LaTeX tables with headings over two lines}
 \usage{
 print_2heading_xtable(.data, separator = "__", xtable.align = NULL,
-  booktabs = TRUE, heading_command = "\\\\textbf", ...)
+  booktabs = TRUE, heading_command = "\\\\textbf", xtable.dots = NULL,
+  ...)
 }
 \arguments{
 \item{.data}{A data frame with at least some of the column names having a \code{separator}.}
@@ -17,6 +18,8 @@ print_2heading_xtable(.data, separator = "__", xtable.align = NULL,
 \item{booktabs}{Should the tabular environment produced use booktabs? Set to TRUE for (my) convenience. This will cause an error if  \verb{\usepackage{booktabs}} has not been called in LaTeX.}
 
 \item{heading_command}{A (simple) LaTeX control sequence (properly escaped) to apply to each heading names.}
+
+\item{xtable.dots}{Arguments passed to \code{xtable::xtable}. Providing both \code{xtable.dots} and \code{xtable.align} is an error.}
 
 \item{...}{Arguments passed to \code{print.xtable}. You cannot pass \code{add.to.row}, \code{include.rownames}, or \code{include.colnames} as we make use of these options in this function.}
 }
@@ -40,6 +43,7 @@ data.frame(yr = 2001:2005,
           Last__baz = 2:6,
           last = 101:105)
 print_2heading_xtable(example_df, separator = "__")
+print_2heading_xtable(example_df, separator = "__", xtable.dots = list(caption = "My caption"))
 }
 \author{
 Hugh Parsonage
