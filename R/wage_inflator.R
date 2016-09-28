@@ -49,16 +49,16 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
     .[["obsQtr"]] %>%
     last 
   
-  if (!allow.projection && to_fy > yr2fy(last.full.yr.in.series)){
+  if (!allow.projection && any(to_fy > yr2fy(last.full.yr.in.series))){
     stop("Not all elements of to_fy are in wage index data.")
   }
   # else allow NAs to propagate
   
   # Use forecast::forecast to inflate forward
-  if (allow.projection && to_fy > yr2fy(last.full.yr.in.series)){
+  if (allow.projection && any(to_fy > yr2fy(last.full.yr.in.series))){
     # Number of quarters beyond the data our forecast must reach
     quarters.ahead <- 
-      4L * (fy2yr(to_fy) - last.full.yr.in.series) + 2L - last.quarter.in.series
+      4L * (max(fy2yr(to_fy)) - last.full.yr.in.series) + 2L - last.quarter.in.series
     
     forecast.series <- match.arg(forecast.series)
     switch(forecast.series, 
