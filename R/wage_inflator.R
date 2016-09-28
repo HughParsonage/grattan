@@ -21,6 +21,7 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
   if (any(is.na(from_fy)) || any(is.na(to_fy))){
     stop("from_fy and to_fy contain NAs. Filter before applying this function.")
   }
+  
   # Avoid vector recycling
   prohibit_vector_recycling(wage, from_fy, to_fy)
   
@@ -48,6 +49,10 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
     wage.indices %>%
     .[["obsQtr"]] %>%
     last 
+  
+  if (any(from_fy < last.quarter.in.series)){
+    warning("Projection of from_fy terms not yet supported.")
+  }
   
   if (!allow.projection && any(to_fy > yr2fy(last.full.yr.in.series))){
     stop("Not all elements of to_fy are in wage index data.")
