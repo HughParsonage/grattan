@@ -35,9 +35,10 @@ test_that("Error handling", {
   expect_error(Grattan_frac(1.1))
 })
 
-test_that("Grattan_frac correct answers", {
+test_that("Ggrattan_frac correct answers", {
   expect_equal(Grattan_frac(0.51), "Over one-half") 
   expect_equal(Grattan_frac(0.49), "Almost one-half") 
   expect_equal(Grattan_frac(0.51, NULL), "One-half") 
   expect_equal(Grattan_frac(0.49, NULL), "One-half") 
+  expect_equal(grattan_frac(0.49, NULL), "one-half") 
 })
