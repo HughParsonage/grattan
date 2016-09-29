@@ -27,7 +27,7 @@ grattan_percent <- function(number, digits = 1, .percent.suffix = "~per~cent"){
 Grattan_frac <- function(number, hedges = c("Almost", "Over")){
   stopifnot(length(number) == 1L, abs(number) <= 1)
   
-  if (is.null(pre.phrase)){
+  if (is.null(hedges)){
     .avbl_fractions %>%
       .[which.min(abs(val - number))] %>%
       .[["Txt"]]
@@ -37,9 +37,9 @@ Grattan_frac <- function(number, hedges = c("Almost", "Over")){
       .[which.min(abs(val - number))] %>%
       .[["val"]]
     if (number < the_val){
-      sprintf("%s %s", pre.phrase[1], .avbl_fractions %>% .[which.min(abs(val - number))] %>% .[["txt"]])
+      sprintf("%s %s", hedges[1], .avbl_fractions %>% .[which.min(abs(val - number))] %>% .[["txt"]])
     } else {
-      sprintf("%s %s", pre.phrase[2], .avbl_fractions %>% .[which.min(abs(val - number))] %>% .[["txt"]])
+      sprintf("%s %s", hedges[2], .avbl_fractions %>% .[which.min(abs(val - number))] %>% .[["txt"]])
     }
   }
 }
