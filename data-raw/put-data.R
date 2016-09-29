@@ -5,6 +5,7 @@ library(forecast)
 library(data.table)
 library(dtplyr)
 library(taxstats)
+library(grattan)
 
 renew = FALSE
 
@@ -249,6 +250,16 @@ differential_sw_uprates <-
   mutate(pred_loess = predict(loess(uprate_factor_raw ~ Sw_amt_percentile, data = ., span = 0.45), newdata = .)) %>% 
   rename(uprate_factor = pred_loess)
 
+.avbl_fractions <-
+  # map between common fraction and English
+  data.table(val = c(1/10, 1/5, 1/4, 1/3, 1/2, 2/3, 3/4), 
+             txt = c("one-tenth", "one-fifth", "one-quarter", 
+                     "one-third", "one-half",
+                     "two-thirds", "three-quarters"), 
+             Txt = c("One-tenth", "One-fifth", "One-quarter", 
+                     "One-third", "One-half",
+                     "Two-thirds", "Three-quarters"))
+
 devtools::use_data(lito_tbl, 
                    tax_tbl, 
                    medicare_tbl, 
@@ -266,5 +277,7 @@ devtools::use_data(lito_tbl,
                    #
                    salary_by_fy_swtile,
                    differential_sw_uprates,
-                   #
+                   # possibly separable
+                   .avbl_fractions,
+                   
                    internal = TRUE, overwrite = TRUE)

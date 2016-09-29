@@ -23,3 +23,22 @@ test_that("grattan_dollar correct", {
   expect_equal(grattan_dollar(100), "$100")
   expect_equal(grattan_dollar(-100), paste0("\U2212", "$100"))
 })
+
+context("Small numbers correct")
+
+test_that("grattan_percent correct", {
+  expect_equal(grattan_percent(0.45, .percent.suffix = " per cent"), "45 per cent")
+})
+
+
+test_that("Error handling", {
+  expect_error(Grattan_frac(1.1))
+})
+
+test_that("Ggrattan_frac correct answers", {
+  expect_equal(Grattan_frac(0.51), "Over one-half") 
+  expect_equal(Grattan_frac(0.49), "Almost one-half") 
+  expect_equal(Grattan_frac(0.51, NULL), "One-half") 
+  expect_equal(Grattan_frac(0.49, NULL), "One-half") 
+  expect_equal(grattan_frac(0.49, NULL), "one-half") 
+})
