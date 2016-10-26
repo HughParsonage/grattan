@@ -34,8 +34,8 @@ as.numeric_unless_warning <- function(x){
 # Cosmetic: For line-breaking. Slower but easier to read.  
 .add <- function(...) Reduce("+", list(...))
 
-gforecast <- function(x, h, level = level) {
-  forecast::forecast(forecast::auto.arima(x), h = h, level = level)
+gforecast <- function(x, ...) {
+  forecast::forecast(forecast::auto.arima(x), ...)
 } 
 
 # NSE
