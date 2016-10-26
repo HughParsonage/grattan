@@ -5,8 +5,8 @@
 \title{CPI inflator}
 \usage{
 cpi_inflator(from_nominal_price = 1, from_fy, to_fy = "2014-15",
-  adjustment = "seasonal", useABSConnection = FALSE,
-  allow.projection = TRUE)
+  adjustment = c("seasonal", "none", "trimmed.mean"),
+  useABSConnection = FALSE, allow.projection = TRUE)
 }
 \arguments{
 \item{from_nominal_price}{(numeric) the price (or vector of prices) to be inflated}
