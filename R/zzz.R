@@ -1,10 +1,4 @@
 .onLoad <- function(libname = find.package("grattan"), pkgname = "grattan"){
-  op <- options()
-  op.grattan <- list(
-    grattan.bigplot = TRUE
-  )
-  toset <- !(names(op.grattan) %in% names(op))
-  if(any(toset)) options(op.grattan[toset])
   
   # CRAN Note avoidance
   if(getRversion() >= "2.15.1") 

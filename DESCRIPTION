@@ -1,9 +1,8 @@
 Package: grattan
 Type: Package
-Title: Create charts in the style of the Grattan Insitute, Melbourne; perform
-    common quantitative tasks for Australian policy analysts
-Version: 0.3.2.1
-Date: 2016-09-05
+Title: Perform common quantitative tasks for Australian analysts supporting Grattan Institute analyis. 
+Version: 0.4.0.1
+Date: 2016-10-26
 Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.parsonage+grattanPackage@grattaninstitute.edu.au"),
               person("Tim", "Cameron", role = "aut"),
               person("Brendan", "Coates", role = "aut"), 
