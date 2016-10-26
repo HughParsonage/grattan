@@ -65,19 +65,19 @@ hecs_tbl <-
 
 # Manually
 cpi_unadj <- 
-  data.table::fread("./data-raw/cpi-unadjusted-manual.tsv")
+  data.table::fread("./data-raw/cpi-unadjusted-manual.tsv", select = c("obsTime", "obsValue"))
 
 cpi_seasonal_adjustment <- 
   data.table::fread("./data-raw/cpi-seasonally-adjusted-manual.tsv", select = c("obsTime", "obsValue")) 
 
 cpi_trimmed <-
-  data.table::fread("./data-raw/cpi-trimmed-mean-manual.tsv")
+  data.table::fread("./data-raw/cpi-trimmed-mean-manual.tsv", select = c("obsTime", "obsValue"))
 
 wages_trend <- 
-  data.table::fread("./data-raw/wages-trend.tsv")
+  data.table::fread("./data-raw/wages-trend.tsv", select = c("obsTime", "obsValue"))
 
 lf_trend <- 
-  data.table::fread("./data-raw/lf-trend.tsv")
+  data.table::fread("./data-raw/lf-trend.tsv", select = c("obsTime", "obsValue"))
 
 cgt_expenditures <- 
   data.table::fread("./data-raw/tax-expenditures-cgt-historical.tsv")
