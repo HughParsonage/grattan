@@ -1,6 +1,6 @@
 Package: grattan
 Type: Package
-Title: Perform common quantitative tasks for Australian analysts supporting Grattan Institute analyis. 
+Title: Perform common quantitative tasks for Australian analysts supporting Grattan Institute analyis 
 Version: 0.4.0.1
 Date: 2016-10-26
 Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.parsonage+grattanPackage@grattaninstitute.edu.au"),
@@ -13,8 +13,6 @@ Description: The original goal of this package was to simply hold the colours of
 Depends: R (>= 2.10)
 License: GPL-2
 Imports:
-    grDevices,
-    ggplot2 (>= 2.0.0),
     data.table,
     dplyr,
     rsdmx,
@@ -23,19 +21,19 @@ Imports:
     assertthat,
     magrittr,
     Rcpp (>= 0.12.3), 
-    knitr, 
-    readr, 
     zoo, 
     lazyeval, 
-    purrr, 
-    xtable
+    purrr
 LinkingTo: Rcpp
 RoxygenNote: 5.0.1
-Suggests: testthat, taxstats,
+Suggests: testthat, 
+    taxstats,
     rmarkdown, 
     dtplyr,
+    ggplot2,
     scales, 
     broom, 
+    knitr,
     survey
 LazyData: true
 VignetteBuilder: knitr

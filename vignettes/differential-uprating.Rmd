@@ -80,7 +80,6 @@ average_salary_by_fy_swtile <-
     ggplot() + 
     geom_area(aes(x = `Salary percentile`, y = r_average_salary, group = fy.year, fill = fy.year), 
               se = FALSE, stat = "smooth", method = "loess") + 
-    scale_fill_manual(values = gpal(10)) + 
     theme_bw() + 
     theme(legend.position = "right", plot.background = element_blank()) + 
     geom_line(aes(x = `Salary percentile`, y = wage_growth_r, group = `Basic wage inflator`, color = `Basic wage inflator`),
@@ -110,7 +109,7 @@ differential_uprates <-
   mutate(avg_r_normed = avg_r / mean(avg_r))
 
 differential_uprates %>%
-  grplot(aes(x = `Salary percentile`, y = avg_r)) +
+  ggplot(aes(x = `Salary percentile`, y = avg_r)) +
   geom_line() + 
   scale_y_continuous(label = percent)
 ```
