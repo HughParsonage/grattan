@@ -59,15 +59,6 @@ generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzer
     }
   }
   
-  
-  last_over_first <- function(x){
-    dplyr::last(x) / dplyr::first(x)
-  }
-  
-  MeanNumeric <- function(x){
-    sum(as.numeric(x)) / length(x)
-  }
-  
   if (!nonzero){
     mean_of_each_var <- 
       taxstats::sample_files_all %>%
@@ -77,14 +68,6 @@ generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzer
       dplyr::summarise_each(dplyr::funs(MeanNumeric)) 
 } else {
     # Forecast only on the mean of nonzero values
-    mean_of_nonzero <- function(x){
-      MeanNumeric(x[x > 0])
-    }
-    
-    is.nonnegative <- function(vec){
-      is.numeric(vec) && !any(is.na(vec)) && all(vec >= 0)
-    }
-    
     mean_of_each_var <- 
       taxstats::sample_files_all %>%
       dplyr::select_(.dots = c("fy.year", vars)) %>%
