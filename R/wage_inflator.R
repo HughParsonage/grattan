@@ -69,25 +69,25 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
     switch(forecast.series, 
            "mean" = {
              forecasts <- 
-               forecast::forecast(wage.indices[["obsValue"]], 
-                                  h = quarters.ahead, 
-                                  level = forecast.level) %>%
+               gforecast(wage.indices[["obsValue"]], 
+                         h = quarters.ahead, 
+                         level = forecast.level) %>%
                magrittr::use_series("mean") %>%
                as.numeric 
            }, 
            "upper" = {
              forecasts <- 
-               forecast::forecast(wage.indices[["obsValue"]], 
-                                  h = quarters.ahead, 
-                                  level = forecast.level) %>%
+               gforecast(wage.indices[["obsValue"]], 
+                         h = quarters.ahead, 
+                         level = forecast.level) %>%
                magrittr::use_series("upper") %>%
                as.numeric 
            }, 
            "lower" = {
              forecasts <- 
-               forecast::forecast(wage.indices[["obsValue"]], 
-                                  h = quarters.ahead, 
-                                  level = forecast.level) %>%
+               gforecast(wage.indices[["obsValue"]], 
+                         h = quarters.ahead, 
+                         level = forecast.level) %>%
                magrittr::use_series("lower") %>%
                as.numeric
            })
@@ -120,10 +120,5 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
     setnames("obsValue", "to_index") %>%
     .[, out := wage * (to_index/from_index)]
   
-  
-  
-#   wage * 
-#     wages[wages$obsTime == to_fy_as_quarter, ]$obsValue / 
-#       wages[wages$obsTime == from_fy_as_quarter, ]$obsValue
   output[["out"]]
 }
