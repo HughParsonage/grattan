@@ -259,6 +259,19 @@ differential_sw_uprates <-
              Txt = c("One-tenth", "One-fifth", "One-quarter", 
                      "One-third", "One-half",
                      "Two-thirds", "Three-quarters"))
+rm_comma <- function(x) gsub("[^\\.0-9]", "", gsub(",", "", x, fixed = TRUE))
+
+# http://guides.dss.gov.au/guide-social-security-law/5/2/2/10
+base_rates_Age_pension_by_year <- 
+  fread("data-raw/max-basic-rates-of-pension-1963-2016.csv") %>%
+  mutate_all(funs(rm_comma)) %>%
+  setnames(1, "Date") %>%
+  mutate(Date = gsub(" Note .*$", "", Date, perl = TRUE), 
+         Date = as.Date(Date, format = "%d/%m/%Y")) %>%
+  filter(`Standard rate` != "Standard rate") %>%
+  select(Date, `Standard rate`, `Married rate`) %>%
+  mutate_each(funs(as.numeric), -Date) %>%
+  filter(complete.cases(.))
 
 devtools::use_data(lito_tbl, 
                    tax_tbl, 
@@ -279,5 +292,6 @@ devtools::use_data(lito_tbl,
                    differential_sw_uprates,
                    # possibly separable
                    .avbl_fractions,
+                   base_rates_Age_pension_by_year,
                    
                    internal = TRUE, overwrite = TRUE)
