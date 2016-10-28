@@ -3,9 +3,12 @@ library(magrittr)
 library(dplyr)
 library(forecast)
 library(data.table)
+library(tidyr)
 library(dtplyr)
 library(taxstats)
 library(grattan)
+library(readr)
+library(readxl)
 
 renew = FALSE
 
@@ -271,7 +274,14 @@ base_rates_Age_pension_by_year <-
   filter(`Standard rate` != "Standard rate") %>%
   select(Date, `Standard rate`, `Married rate`) %>%
   mutate_each(funs(as.numeric), -Date) %>%
-  filter(complete.cases(.))
+  filter(complete.cases(.)) %T>%
+  write_tsv("data-raw/max-basic-rates-of-pension-1963-2016.tsv") %>%
+  .[]
+
+Age_pension_assets_test <- 
+  read_excel("data-raw/Age-Pension-assets-test-1997-2016.xlsx", sheet = "clean") %>%
+  gather(type, assets_test, -Date) %>%
+  mutate(type = gsub("[^A-Za-z]", "", type))
 
 devtools::use_data(lito_tbl, 
                    tax_tbl, 
