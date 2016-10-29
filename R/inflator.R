@@ -3,7 +3,7 @@
 #' @param x The vector to be inflated.
 #' @param from The contemporaneous time of x. 
 #' @param to The target time to which x is to be inflated.
-#' @param inflator_table A \code{data.table} having columns 
+#' @param inflator_table A \code{data.table} having columns \code{Index} and \code{Time}. 
 #' @return A vector of inflated values.
 #' @export
 
@@ -11,17 +11,10 @@ general_inflator <- function(x = 1, from, to, inflator_table){
   prohibit_length0_vectors(x, from, to)
   prohibit_vector_recycling(x, from, to)
   stopifnot(all(c("Index", "Time") %in% names(inflator_table)))
+  stopifnot(is.numeric(Index))
   
   input <- 
     data.table(x = x, from = from, to = to)
-  
-  # NSE
-  inflator_frac <- function(.data, front, over, under, new_col_name){
-    # http://www.r-bloggers.com/using-mutate-from-dplyr-inside-a-function-getting-around-non-standard-evaluation/
-    mutate_call <- lazyeval::interp(~r*a/b, a = as.name(over), b = as.name(under), r = as.name(front))
-    .data %>%
-      dplyr::mutate_(.dots = stats::setNames(list(mutate_call), new_col_name))
-  }
   
   output <- 
     input %>%
