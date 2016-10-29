@@ -128,3 +128,40 @@ test_that("Imputed, reweighted sample file agrees with aggregates by no less tha
   expect_lt(percentage_difference, 1)
 })
 
+test_that("Error handling", {
+  sample_file <- sample_file_1314 %>% head(.) %>% as.data.frame(.)
+  expect_error(apply_super_caps_and_div293(sample_file), regexp = "data.table")
+  
+  sample_file_dt <- sample_file_1314 %>% copy %>% head %>% mutate(concessional_cap = 25e3)
+  expect_warning(apply_super_caps_and_div293(sample_file_dt))
+  
+  expect_warning(apply_super_caps_and_div293(sample_file_dt, colname_new_Taxable_Income = "Taxable_Income"), 
+                 regexp = "Dropping Taxable.Income")
+  
+  expect_error(apply_super_caps_and_div293(sample_file_1213), regexp = "does not have the variables needed")
+  
+  expect_warning(apply_super_caps_and_div293(sample_file_dt, colname_div293_tax = "Sw_amt"))
+  
+  sample_file_old <- sample_file_dt %>% copy %>% select(-Rptbl_Empr_spr_cont_amt)
+  
+  expect_error(apply_super_caps_and_div293(sample_file_old), regexp = "required to impute") 
+  
+  expect_warning(apply_super_caps_and_div293(sample_file_dt, reweight_late_lodgers = TRUE), regexp = "WEIGHT")
+  
+})
+
+
+test_that("Corner cases", {
+  n_low_age <- 
+    sample_file_1314 %>%
+    apply_super_caps_and_div293(cap2_age = 19) %$%
+    sum(concessional_cap == max(concessional_cap))
+    
+  n_high_age <- 
+    sample_file_1314 %>%
+    apply_super_caps_and_div293(cap2_age = 68) %$%
+    sum(concessional_cap == max(concessional_cap))
+  
+  expect_gte(n_low_age, n_high_age)
+})
+
