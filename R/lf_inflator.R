@@ -36,8 +36,6 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     lf.indices <- lf_trend
   }
   
-  lf.indices %<>% dplyr::select_(., .dots = c("obsTime", "obsValue"))
-  
   lf.indices[, obsDate := as.Date(sprintf("%s-01", obsTime))]
   last.date.in.series <- last(lf.indices[["obsDate"]])
   last.full.fy.in.series <- 
