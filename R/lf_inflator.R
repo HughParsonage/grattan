@@ -40,7 +40,8 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
   last.date.in.series <- last(lf.indices[["obsDate"]])
   last.full.fy.in.series <- 
     lf.indices %>%
-    dplyr::filter(month(obsDate) == 6) %>%
+    # month from data.table::
+    .[month(obsDate) == 6] %>%
     .[["obsDate"]] %>%
     last %>%
     date2fy
