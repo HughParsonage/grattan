@@ -84,32 +84,11 @@ CG_inflator <- function(x = 1, from_fy, to_fy, ...){
   input <- 
     data.table::data.table(x = x, from_fy = from_fy, to_fy = to_fy)
 
-  cg_table <- 
-    taxstats::sample_files_all %>%
-    dplyr::select(fy.year, Taxable_Income, Net_CG_amt) %>%
-    dplyr::filter(Net_CG_amt > 0) %>%
-    dplyr::mutate(marginal_rate_first = income_tax(Taxable_Income + 1, 
-                                                   fy.year = fy.year) - income_tax(Taxable_Income, 
-                                                                                   fy.year = fy.year)) %>%
-    dplyr::mutate(marginal_rate_last = (income_tax(Taxable_Income + Net_CG_amt, fy.year = fy.year) - income_tax(Taxable_Income, fy.year = fy.year)) / Net_CG_amt) %>%
-    dplyr::group_by(fy.year) %>%
-    dplyr::summarise(mean_mr1 = mean(marginal_rate_first), 
-                     mean_wmr1 = stats::weighted.mean(marginal_rate_first, Net_CG_amt), 
-                     mean_mrL = mean(marginal_rate_last), 
-                     mean_wmrL = stats::weighted.mean(marginal_rate_last, Net_CG_amt)) %>% 
-    merge(cgt_expenditures, by.x = "fy.year", by.y = "FY", all = TRUE) %>% 
-    # dplyr::select_(.dots = c(-URL, -Projected) %>%
-    unselect_(.dots = c("URL", "Projected")) %>%
-    dplyr::rename(revenue_foregone = CGT_discount_for_individuals_and_trusts_millions) %>%
-    dplyr::mutate(revenue_foregone = revenue_foregone * 10^6,
-                  zero_discount_Net_CG_total = revenue_foregone / mean(mean_wmrL, na.rm = TRUE)) %>%
-    dplyr::select(fy.year, zero_discount_Net_CG_total)
-  
   raw_out <- 
     input %>%
-    merge(cg_table, by.y = "fy.year", by.x = "from_fy", all.x = TRUE) %>%
+    merge(cg_inflators_1314, by.y = "fy.year", by.x = "from_fy", all.x = TRUE) %>%
     data.table::setnames("zero_discount_Net_CG_total", "from_cg") %>% 
-    merge(cg_table, by.y = "fy.year", by.x = "to_fy", all.x = TRUE) %>%
+    merge(cg_inflators_1314, by.y = "fy.year", by.x = "to_fy", all.x = TRUE) %>%
     data.table::setnames("zero_discount_Net_CG_total", "to_cg") %$%
     {
       x * to_cg / from_cg
