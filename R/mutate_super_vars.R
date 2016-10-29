@@ -104,7 +104,8 @@ apply_super_caps_and_div293 <- function(.sample.file,
   }
   
   .sample.file[ , SG_contributions := pmaxC(MCS_Emplr_Contr - Rptbl_Empr_spr_cont_amt, 0)]
-  .sample.file[ , salary_sacrifice_contributions := Rptbl_Empr_spr_cont_amt]
+  if ("Rptbl_Empr_spr_cont_amt" %in% names(.sample.file))
+    .sample.file[ , salary_sacrifice_contributions := Rptbl_Empr_spr_cont_amt]
   .sample.file[ , personal_deductible_contributions := Non_emp_spr_amt]
   
   # Concessional contributions
