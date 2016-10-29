@@ -26,3 +26,8 @@ test_that("upper and lower series produce higher and lower forecasts", {
 test_that("lf_inflator returns known results", {
   expect_equal(lf_inflator(from_date = "1981-01-01", to_date = "1981-02-01"), 1.00124729250057)
 })
+
+test_that("lf_inflator returns long", {
+  expect_equal(lf_inflator_fy(labour_force = c(1, 2), from_fy = "2010-11", to_fy = "2012-13"), 
+               c(1.02691290641353, 2.05382581282705))
+})
