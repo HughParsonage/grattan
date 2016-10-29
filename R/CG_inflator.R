@@ -86,9 +86,9 @@ CG_inflator <- function(x = 1, from_fy, to_fy, ...){
 
   raw_out <- 
     input %>%
-    merge(cg_inflators_1314, by.y = "fy.year", by.x = "from_fy", all.x = TRUE) %>%
+    merge(cg_inflators_1314, by.y = "fy_year", by.x = "from_fy", all.x = TRUE) %>%
     data.table::setnames("zero_discount_Net_CG_total", "from_cg") %>% 
-    merge(cg_inflators_1314, by.y = "fy.year", by.x = "to_fy", all.x = TRUE) %>%
+    merge(cg_inflators_1314, by.y = "fy_year", by.x = "to_fy", all.x = TRUE) %>%
     data.table::setnames("zero_discount_Net_CG_total", "to_cg") %$%
     {
       x * to_cg / from_cg
