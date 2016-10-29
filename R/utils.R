@@ -50,6 +50,15 @@ hugh_frac <- function(.data, front, over, under, new_col_name){
   }
 }
 
+# NSE
+inflator_frac <- function(.data, front, over, under, new_col_name){
+  # http://www.r-bloggers.com/using-mutate-from-dplyr-inside-a-function-getting-around-non-standard-evaluation/
+  mutate_call <- lazyeval::interp(~r*a/b, a = as.name(over), b = as.name(under), r = as.name(front))
+  .data %>%
+    dplyr::mutate_(.dots = stats::setNames(list(mutate_call), new_col_name)) %>%
+    as.data.table
+}
+
 last_over_first <- function(x){
   dplyr::last(x) / dplyr::first(x)
 }
