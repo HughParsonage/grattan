@@ -1,0 +1,28 @@
+context("lf inflator")
+
+test_that("Error handling", {
+  expect_error(lf_inflator_fy(from_fy = "2012-13", to_fy = "2099-00", allow.projection = FALSE), regexp = "to_fy are in labour force data")
+})
+
+test_that("upper and lower series produce higher and lower forecasts", {
+  expect_gte(lf_inflator_fy(labour_force = 1, 
+                            from_fy = "2012-13", 
+                            to_fy = "2018-19", 
+                            forecast.series = "upper"), 
+             lf_inflator_fy(labour_force = 1, 
+                            from_fy = "2012-13", 
+                            to_fy = "2018-19", 
+                            forecast.series = "mean"))
+  expect_lte(lf_inflator_fy(labour_force = 1, 
+                            from_fy = "2012-13", 
+                            to_fy = "2018-19", 
+                            forecast.series = "lower"), 
+             lf_inflator_fy(labour_force = 1, 
+                            from_fy = "2012-13", 
+                            to_fy = "2018-19", 
+                            forecast.series = "mean"))
+})
+
+test_that("lf_inflator returns known results", {
+  expect_equal(lf_inflator(from_date = "1981-01-01", to_date = "1981-02-01"), 1.00124729250057)
+})

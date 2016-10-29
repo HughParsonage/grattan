@@ -129,12 +129,17 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
 lf_inflator <- function(labour_force = 1, from_date = "2013-06-30", to_date, useABSConnection = FALSE){
   
   # lf original
-  lf.url <- 
-    "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.10.M/ABS?startTime=1981"
-  lf.url.trend <- 
-    "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1981"
-  lf <- rsdmx::readSDMX(lf.url)
-  lf <- as.data.frame(lf)
+  if (useABSConnection){
+    lf.url <- 
+      "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.10.M/ABS?startTime=1981"
+    lf.url.trend <- 
+      "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1981"
+    lf <- rsdmx::readSDMX(lf.url)
+    lf <- as.data.frame(lf)
+  } else {
+    lf <- lf_trend
+  }
+  
   lf$obsTimeDate <- as.Date(paste0(lf$obsTime, "-01"), format = "%Y-%m-%d")
   
   if (length(labour_force) == 1){
