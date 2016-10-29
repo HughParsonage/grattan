@@ -55,7 +55,9 @@ inflator <- function(x = 1, from, to, inflator_table, index.col = "Index", time.
       setkeyv("Time") %>%
       inflator_table[., roll = roll] %>%
       setnames("Index", "from_index") %>%
+      setnames("Time", "from_Time") %>%
       setnames("to", "Time") %>%
+      setkeyv("Time") %>%
       inflator_table[., roll = roll] %>%
       setnames("Index", "to_index") %>%
       inflator_frac("y", "to_index", "from_index", "out") %>%
