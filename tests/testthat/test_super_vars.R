@@ -163,5 +163,22 @@ test_that("Corner cases", {
     sum(concessional_cap == max(concessional_cap))
   
   expect_gte(n_low_age, n_high_age)
+  
+  expect_false("div293_income" %in% names(apply_super_caps_and_div293(sample_file_1314, drop_helpers = TRUE)))
+  
+  low_tax_contributions_no_Other_contr <- 
+    sample_file_1314 %>%
+    apply_super_caps_and_div293 %$%
+    sum(low_tax_contributions_div293)
+  
+  low_tax_contributions_with_Other_contr <- 
+    sample_file_1314 %>%
+    apply_super_caps_and_div293(use_other_contr = TRUE) %$%
+    sum(low_tax_contributions_div293)
+  
+  expect_gte(low_tax_contributions_with_Other_contr, low_tax_contributions_no_Other_contr)
 })
+
+
+
 
