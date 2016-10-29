@@ -80,7 +80,7 @@ generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzer
     # Consider using hybridf
     
     # Condition for ets / auto.arima
-    if (!any(is.na(x))){
+    if (!anyNA(x)){
       forecast::ets(x)
     } else {
       forecast::auto.arima(stats::ts(x))

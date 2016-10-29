@@ -18,7 +18,7 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
   # CRAN
   obsTime <- NULL; obsValue <- NULL; to_index <- NULL; from_index <- NULL
   
-  if (any(is.na(from_fy)) || any(is.na(to_fy))){
+  if (anyNA(from_fy) || anyNA(to_fy)){
     stop("from_fy and to_fy contain NAs. Filter before applying this function.")
   }
   

@@ -72,7 +72,7 @@ mean_of_nonzero <- function(x){
 }
 
 is.nonnegative <- function(vec){
-  is.numeric(vec) && !any(is.na(vec)) && all(vec >= 0)
+  is.numeric(vec) && !anyNA(vec) && all(vec >= 0)
 }
 
 
