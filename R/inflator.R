@@ -13,7 +13,6 @@
 inflator <- function(x = 1, from, to, inflator_table, index.col = "Index", time.col = "Time", roll = NULL){
   prohibit_length0_vectors(x, from, to)
   prohibit_vector_recycling(x, from, to)
-  stopifnot(is.numeric(Index))
   
   inflator_table <- 
     inflator_table %>%
@@ -26,14 +25,17 @@ inflator <- function(x = 1, from, to, inflator_table, index.col = "Index", time.
   
   if (any_from_after_to){
     # if from is after to, we want -1 (so it can be raised by that power)
-    out_power <- sign(to - from)  # vectorized
+    out_power <- sign({to > from} - 0.5)  # vectorized
     
-    from <- pmin(from, to)
-    to   <- pmax(to, from)
+    .from <- pmin(from, to)
+    .to   <- pmax(to, from)
+    
+    from <- .from
+    to <- .to
   }
   
   input <- 
-    data.table(x = x, from = from, to = to)
+    data.table(y = 1, from = from, to = to)
   
   if (is.null(roll)){
   output <- 
@@ -44,7 +46,7 @@ inflator <- function(x = 1, from, to, inflator_table, index.col = "Index", time.
     merge(inflator_table, by.x = "to", by.y = "Time", sort = FALSE, 
           all.x = TRUE) %>%
     setnames("Index", "to_index") %>%
-    inflator_frac("x", "to_index", "from_index", "out")
+    inflator_frac("y", "to_index", "from_index", "out")
   } else {
     output <- 
       input %>%
@@ -56,12 +58,13 @@ inflator <- function(x = 1, from, to, inflator_table, index.col = "Index", time.
       setnames("to", "Time") %>%
       inflator_table[., roll = roll] %>%
       setnames("Index", "to_index") %>%
-      inflator_frac("x", "to_index", "from_index", "out")
+      inflator_frac("y", "to_index", "from_index", "out") %>%
+      setorderv("order")
   }
   
   if (any_from_after_to){
-    output[["out"]] ^ out_power
+    x * output[["out"]] ^ out_power
   } else {
-    output[["out"]]
+    x * output[["out"]]
   }
 }

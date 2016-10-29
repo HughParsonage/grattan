@@ -20,7 +20,7 @@ inflator(x = 1, from, to, inflator_table, index.col = "Index",
 
 \item{time.col}{The column in \code{inflator_table} by which times are mapped.}
 
-\item{roll}{If \code{NULL}, inflation is calculated on}
+\item{roll}{If \code{NULL}, inflation is calculated only on exact matches in \code{inflator_table}. Otherwise, uses a rolling join. See \code{data.table::data.table}.}
 }
 \value{
 A vector of inflated values.
