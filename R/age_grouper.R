@@ -32,8 +32,6 @@ age_grouper <- function(age, interval = 10, min_age = 25, max_age = 75, breaks =
       stop("interval, min_age, max_age, can't be specified if breaks are.")
     }
     
-    prohibit_vector_recycling(labels[-1], breaks)
-    
     cut(age, 
         breaks = breaks, 
         labels = labels, 
