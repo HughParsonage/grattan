@@ -4,7 +4,8 @@
 \alias{inflator}
 \title{Inflate using a general index}
 \usage{
-inflator(x = 1, from, to, inflator_table)
+inflator(x = 1, from, to, inflator_table, index.col = "Index",
+  time.col = "Time", roll = NULL)
 }
 \arguments{
 \item{x}{The vector to be inflated.}
@@ -14,6 +15,12 @@ inflator(x = 1, from, to, inflator_table)
 \item{to}{The target time to which x is to be inflated.}
 
 \item{inflator_table}{A \code{data.table} having columns \code{Index} and \code{Time}.}
+
+\item{index.col}{The column in \code{inflator_table} containing the index used for inflation.}
+
+\item{time.col}{The column in \code{inflator_table} by which times are mapped.}
+
+\item{roll}{If \code{NULL}, inflation is calculated on}
 }
 \value{
 A vector of inflated values.
