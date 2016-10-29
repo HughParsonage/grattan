@@ -33,7 +33,7 @@ test_that("rolling inflator", {
     data.table::copy(.) %>%
     setnames(old = c("obsValue", "obsTime"), 
              new = c("Index", "Time")) %>%
-    mutate(Time = zoo::as.Date.yearqtr(as.yearqtr(Time, format = "%Y-Q%q"))) %>% .[]
+    mutate(Time = as.Date.yearqtr(as.yearqtr(Time, format = "%Y-Q%q"))) %>% .[]
   
   expect_equal(inflator(5, 
                         to = as.Date("2013-01-02"), 
