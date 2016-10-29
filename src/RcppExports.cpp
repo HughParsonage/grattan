@@ -66,16 +66,3 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// squish_cpp
-NumericVector squish_cpp(NumericVector x, double a, double b);
-RcppExport SEXP grattan_squish_cpp(SEXP xSEXP, SEXP aSEXP, SEXP bSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< double >::type a(aSEXP);
-    Rcpp::traits::input_parameter< double >::type b(bSEXP);
-    rcpp_result_gen = Rcpp::wrap(squish_cpp(x, a, b));
-    return rcpp_result_gen;
-END_RCPP
-}
