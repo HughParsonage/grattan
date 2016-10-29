@@ -29,7 +29,7 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
   obsTimeDate <- NULL
   if (useABSConnection){
     lf.url.trend <- 
-      "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1981"
+      "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1981"
     lf <- rsdmx::readSDMX(lf.url.trend)
     lf.indices <- data.table::as.data.table(as.data.frame(lf))
   } else {

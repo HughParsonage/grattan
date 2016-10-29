@@ -15,7 +15,7 @@ aus_pop_qtr <- function(date_quarter, allow.projections = TRUE, fertility = "hig
   max_qtr <- 
     max(pop_data$"obsTime")
   
-  if (date_quarter > max_qtr){
+  if (max(date_quarter) > max_qtr){
     if (allow.projections){
       if (fertility == "high")
         fertility_selector <- 1
