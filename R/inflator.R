@@ -7,7 +7,7 @@
 #' @return A vector of inflated values.
 #' @export
 
-general_inflator <- function(x = 1, from, to, inflator_table){
+inflator <- function(x = 1, from, to, inflator_table){
   prohibit_length0_vectors(x, from, to)
   prohibit_vector_recycling(x, from, to)
   stopifnot(all(c("Index", "Time") %in% names(inflator_table)))
