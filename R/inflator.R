@@ -13,6 +13,17 @@ general_inflator <- function(x = 1, from, to, inflator_table){
   stopifnot(all(c("Index", "Time") %in% names(inflator_table)))
   stopifnot(is.numeric(Index))
   
+  # Issue #24
+  any_from_after_to <- any(to < from)
+  
+  if (any_from_after_to){
+    # if from is after to, we want -1 (so it can be raised by that power)
+    out_power <- sign(to - from)  # vectorized
+    
+    from <- pmin(from, to)
+    to   <- pmax(to, from)
+  }
+  
   input <- 
     data.table(x = x, from = from, to = to)
   
@@ -26,5 +37,9 @@ general_inflator <- function(x = 1, from, to, inflator_table){
     setnames("Index", "to_index") %>%
     inflator_frac("x", "to_index", "from_index", "out")
   
-  output[["out"]]
+  if (any_from_after_to){
+    output[["out"]] ^ out_power
+  } else {
+    output[["out"]]
+  }
 }
