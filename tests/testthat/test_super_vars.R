@@ -142,9 +142,9 @@ test_that("Error handling", {
   
   expect_warning(apply_super_caps_and_div293(sample_file_dt, colname_div293_tax = "Sw_amt"))
   
-  sample_file_old <- sample_file_dt %>% copy %>% select(-Rptbl_Empr_spr_cont_amt)
+  sample_file_old <- sample_file_1314 %>% copy %>% select(-Rptbl_Empr_spr_cont_amt)
   
-  expect_error(apply_super_caps_and_div293(sample_file_old), regexp = "required to impute") 
+  expect_error(apply_super_caps_and_div293(sample_file_old, impute_zero_concess_contr = TRUE), regexp = "required to impute") 
   
   expect_warning(apply_super_caps_and_div293(sample_file_dt, reweight_late_lodgers = TRUE), regexp = "WEIGHT")
   

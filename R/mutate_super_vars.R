@@ -103,10 +103,13 @@ apply_super_caps_and_div293 <- function(.sample.file,
     stop("The sample file you requested does not have the variables needed for this function.")
   }
   
-  .sample.file[ , SG_contributions := pmaxC(MCS_Emplr_Contr - Rptbl_Empr_spr_cont_amt, 0)]
-  if ("Rptbl_Empr_spr_cont_amt" %in% names(.sample.file))
+  if ("Rptbl_Empr_spr_cont_amt" %in% names(.sample.file)){
+    .sample.file[ , SG_contributions := pmaxC(MCS_Emplr_Contr - Rptbl_Empr_spr_cont_amt, 0)]
     .sample.file[ , salary_sacrifice_contributions := Rptbl_Empr_spr_cont_amt]
-  .sample.file[ , personal_deductible_contributions := Non_emp_spr_amt]
+  }
+  
+  if ("Non_emp_spr_amt" %in% names(.sample.file))
+    .sample.file[ , personal_deductible_contributions := Non_emp_spr_amt]
   
   # Concessional contributions
   if (scale_contr_match_ato){
