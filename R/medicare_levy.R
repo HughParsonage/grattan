@@ -57,6 +57,10 @@ medicare_levy <- function(income,
     if (any(sato & pto)) {
       stop("pto and sato must not both be TRUE")
     }
+    sapto.eligible <- sato | pto
+    if (any(pto)){
+      warning("pto assumed to be FALSE")
+    }
   }
   
   
