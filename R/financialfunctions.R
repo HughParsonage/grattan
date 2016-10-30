@@ -20,7 +20,7 @@
 npv <- function(rate, values) sum(values / (1 + rate)^seq_along(values))
 #' @rdname npv
 #' @examples
-#' irr(x = 1, start = 0.1)
+#' irr(x = c(1, -1), start = 0.1)
 irr <- function(x, start=0.1) {
   if (uniqueN(sign(x)) != 2){
     stop("At least one value in 'x' must be negative and one must be positive.")
