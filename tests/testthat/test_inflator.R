@@ -28,12 +28,13 @@ test_that("Switching order of to and from causes inverse", {
 })
 
 test_that("rolling inflator", {
+  library(zoo)
   my_data <- 
     grattan:::cpi_seasonal_adjustment %>% 
     data.table::copy(.) %>%
     setnames(old = c("obsValue", "obsTime"), 
              new = c("Index", "Time")) %>%
-    mutate(Time = as.Date.yearqtr(as.yearqtr(Time, format = "%Y-Q%q"))) %>% .[]
+    mutate(Time = as.Date(as.yearqtr(Time, format = "%Y-Q%q"))) %>% .[]
   
   expect_equal(inflator(5, 
                         to = as.Date("2013-01-02"), 
