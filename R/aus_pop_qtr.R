@@ -4,19 +4,23 @@
 #' @param allow.projections If the date is beyond the ABS's confirmed data, should a projection be used?
 #' @param fertility What fertility assumption should be used? (high, medium, low)
 #' @param mortality The assumption of future life expectancy. Should be \code{high.LifeExpectancy} or \code{medium.LifeExpectancy}.
-#' @return the population at \code{date}, or at the year if a projections.
-#' 
+#' @return the population at \code{date_quarter}, or at the year if a projections.
+#' @export 
 
-aus_pop_qtr <- function(date_quarter, allow.projections = TRUE, fertility = "high", mortality = "high.LifeExpectancy"){
+aus_pop_qtr <- function(date_quarter, allow.projections = TRUE, 
+                        fertility = c("high", "medium", "low"), 
+                        mortality = c("high.LifeExpectancy", "medium.LifeExpectancy")){
   pop_data <- 
-    dplyr::select_(data.table::data.table(as.data.frame(rsdmx::readSDMX("http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/ERP_QUARTERLY/1.0.3.TT.Q/ABS?startTime=1981"))), 
+    dplyr::select_(data.table::as.data.table(as.data.frame(rsdmx::readSDMX("http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/ERP_QUARTERLY/1.0.3.TT.Q/ABS?startTime=1981"))), 
                   .dots = c("obsTime", "obsValue"))
   
   max_qtr <- 
-    max(pop_data$"obsTime")
+    max(pop_data[["obsTime"]])
   
   if (max(date_quarter) > max_qtr){
     if (allow.projections){
+      fertility <- match.arg(fertility)
+      mortality <- match.arg(mortality)
       if (fertility == "high")
         fertility_selector <- 1
       if (fertility == "medium")
@@ -29,7 +33,7 @@ aus_pop_qtr <- function(date_quarter, allow.projections = TRUE, fertility = "hig
       else 
         mortality_selector <- 2
       
-      projector_url <- paste0("http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/POP_PROJ_2011/",
+      projector_url <- paste0("http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/POP_PROJ_2011/",
                               "0.3.TT.",
                               fertility_selector, ".",
                               mortality_selector, ".",
@@ -39,12 +43,13 @@ aus_pop_qtr <- function(date_quarter, allow.projections = TRUE, fertility = "hig
       
       date_year <- as.numeric(gsub("^.*([0-9]{4}).*$", "\\1", date_quarter))
       
-      return(projections[projections$obsTime == date_year, ]$"obsValue")
+      return(projections[obsTime %in% date_year][["obsValue"]])
     } else {
-    warning("Using an earlier date than specified, viz. ", max_qtr)
-    return(pop_data[pop_data$obsTime == max_qtr, ]$"obsValue")
+      dates <- pmin(max_qtr, date_quarter)
+      warning("Using an earlier date than specified, viz. ", max_qtr)
+      return(pop_data[obsTime %in% dates][["obsValue"]])
     }
   } else {
-    return(pop_data[pop_data$"obsTime" == date_quarter, ]$"obsValue")
+    return(pop_data[obsTime %in% date_quarter][["obsValue"]])
   }
 }
