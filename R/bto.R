@@ -2,7 +2,7 @@
 #' @param benefit_amount The amount of Tax Offsetable benefit received by the taxpayer during the income year.
 #' @param fy.year The income year. 
 #' @return The beneficiary tax offset. 
-#' @section WARNING
+#' @section WARNING:
 #' This function disagrees with the ATO online calculator. 
 
 bto <- function(benefit_amount, fy.year){

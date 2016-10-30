@@ -12,9 +12,13 @@ bto(benefit_amount, fy.year)
 \item{fy.year}{The income year.}
 }
 \value{
-The beneficiary tax offset
+The beneficiary tax offset.
 }
 \description{
 Beneficiary tax offset
+}
+\section{WARNING}{
+
+This function disagrees with the ATO online calculator.
 }
 
