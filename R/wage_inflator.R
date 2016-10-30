@@ -29,7 +29,8 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
     wage.url <- "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LABOUR_PRICE_INDEX/1.THRPEB.7.-.0.30.Q/all?startTime=1997-Q3"
     wages <- rsdmx::readSDMX(wage.url)
     message("Using ABS sdmx connection")
-    wage.indices <- as.data.frame(wages)
+    wage.indices <- as.data.frame(wages) %>%
+      as.data.table
   } else {
     # .wages_trend means the wage indices of the trend index
     wage.indices <- copy(wages_trend)
