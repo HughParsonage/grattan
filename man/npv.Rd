@@ -24,9 +24,9 @@ pmt(rate, nper, pv, fv = 0, type = 0)
 
 \item{values}{Income stream.}
 
-\item{x}{TBD}
+\item{x}{Cash flow.}
 
-\item{start}{TBD}
+\item{start}{Initial guess to start the iterative process.}
 
 \item{nper}{Number of periods}
 
@@ -36,7 +36,7 @@ pmt(rate, nper, pv, fv = 0, type = 0)
 
 \item{type}{Factor.}
 
-\item{fv}{TBD}
+\item{fv}{Future value.}
 }
 \description{
 Financial functions
