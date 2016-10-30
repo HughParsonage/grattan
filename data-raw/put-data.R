@@ -133,7 +133,7 @@ cgt_expenditures <-
 
 generic_inflators <- if (!renew) fread("./data-raw/generic_inflators.tsv") else {
   lapply(1:10, 
-         function(h) dplyr::mutate(generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = "2013-14"), 
+         function(h) dplyr::mutate(grattan:::generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = "2013-14"), 
                                    H = h)) %>% 
   rbindlist(use.names = TRUE) %>%
   mutate(fy_year = yr2fy(2014 + H)) %>%
@@ -283,6 +283,9 @@ Age_pension_assets_test <-
   gather(type, assets_test, -Date) %>%
   mutate(type = gsub("[^A-Za-z]", "", type))
 
+bto_tbl <- 
+  read_excel("data-raw/beneficiary-tax-offset-by-fy.xlsx")
+
 devtools::use_data(lito_tbl, 
                    tax_tbl, 
                    medicare_tbl, 
@@ -303,5 +306,6 @@ devtools::use_data(lito_tbl,
                    # possibly separable
                    .avbl_fractions,
                    base_rates_Age_pension_by_year,
+                   bto_tbl,
                    
                    internal = TRUE, overwrite = TRUE)
