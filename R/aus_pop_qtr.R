@@ -39,7 +39,9 @@ aus_pop_qtr <- function(date_quarter, allow.projections = TRUE,
                               mortality_selector, ".",
                               "1.A/ABS?startTime=2012")
       
-      projections <- as.data.frame(rsdmx::readSDMX(projector_url))
+      projections <- 
+        as.data.frame(rsdmx::readSDMX(projector_url)) %>%
+        as.data.table
       
       date_year <- as.numeric(gsub("^.*([0-9]{4}).*$", "\\1", date_quarter))
       
