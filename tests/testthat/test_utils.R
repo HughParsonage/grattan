@@ -22,3 +22,11 @@ test_that("other utils", {
   expect_false(is.nonnegative(c(-1, 2, 3)))
 })
 
+test_that("prohibit_length0_vectors", {
+  expect_error(prohibit_length0_vectors(NULL, 1, 1:5))
+})
+
+test_that("prohibit_vector_recyling", {
+  expect_error(prohibit_vector_recycling(c(2, 2), 1, c(3, 3, 3)))
+})
+

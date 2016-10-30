@@ -3,6 +3,7 @@
 export(CGT_inflator)
 export(age_grouper)
 export(apply_super_caps_and_div293)
+export(aus_pop_qtr)
 export(cpi_inflator)
 export(cpi_inflator_general_date)
 export(cpi_inflator_quarters)

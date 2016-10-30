@@ -4,8 +4,9 @@
 \alias{aus_pop_qtr}
 \title{Australia's population}
 \usage{
-aus_pop_qtr(date_quarter, allow.projections = TRUE, fertility = "high",
-  mortality = "high.LifeExpectancy")
+aus_pop_qtr(date_quarter, allow.projections = TRUE, fertility = c("high",
+  "medium", "low"), mortality = c("high.LifeExpectancy",
+  "medium.LifeExpectancy"))
 }
 \arguments{
 \item{date_quarter}{A character string (YYYY-QQ).}
@@ -17,7 +18,7 @@ aus_pop_qtr(date_quarter, allow.projections = TRUE, fertility = "high",
 \item{mortality}{The assumption of future life expectancy. Should be \code{high.LifeExpectancy} or \code{medium.LifeExpectancy}.}
 }
 \value{
-the population at \code{date}, or at the year if a projections.
+the population at \code{date_quarter}, or at the year if a projections.
 }
 \description{
 Australia's population
