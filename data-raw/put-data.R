@@ -284,7 +284,9 @@ Age_pension_assets_test <-
   mutate(type = gsub("[^A-Za-z]", "", type))
 
 bto_tbl <- 
-  read_excel("data-raw/beneficiary-tax-offset-by-fy.xlsx")
+  read_excel("data-raw/beneficiary-tax-offset-by-fy.xlsx") %>%
+  as.data.table %>%
+  setkey(fy_year)
 
 devtools::use_data(lito_tbl, 
                    tax_tbl, 
