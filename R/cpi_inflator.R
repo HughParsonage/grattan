@@ -24,6 +24,8 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
   # http://stackoverflow.com/a/9335687/1664978
   prohibit_vector_recycling(from_nominal_price, from_fy, to_fy)
   
+  stopifnot(all(is.fy(from_fy)), all(is.fy(to_fy)))
+  
   adjustment <- match.arg(adjustment, several.ok = FALSE)
   
   if (useABSConnection) {
