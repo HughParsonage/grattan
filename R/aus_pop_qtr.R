@@ -10,9 +10,14 @@
 aus_pop_qtr <- function(date_quarter, allow.projections = TRUE, 
                         fertility = c("high", "medium", "low"), 
                         mortality = c("high.LifeExpectancy", "medium.LifeExpectancy")){
+  # CRAN Note avoidance
+  obsTime <- NULL
+  
   pop_data <- 
     dplyr::select_(data.table::as.data.table(as.data.frame(rsdmx::readSDMX("http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/ERP_QUARTERLY/1.0.3.TT.Q/ABS?startTime=1981"))), 
                   .dots = c("obsTime", "obsValue"))
+  
+  
   
   max_qtr <- 
     max(pop_data[["obsTime"]])
