@@ -92,20 +92,6 @@ rolling_income_tax <- function(income,
   
   input.lengths <- vapply(list(income, fy.year, age, family_status, n_dependants), FUN = length, FUN.VALUE = integer(1))
   max.length <- max(input.lengths)
-
-  # tax_table2 provides the raw tax tables, but also the amount
-  # of tax paid at each bracket, to make the rolling join 
-  # calculation later a one liner.
-  
-  tax_table2 <- 
-    tax_tbl %>%
-    dplyr::group_by(fy_year) %>%
-    dplyr::mutate(
-      tax_at = cumsum(data.table::shift(marginal_rate, type = "lag", fill = 0) * (lower_bracket - data.table::shift(lower_bracket, type = "lag", fill = 0))),
-      income = lower_bracket) %>%
-    dplyr::select(fy_year, income, lower_bracket, marginal_rate, tax_at) %>%
-    data.table::as.data.table(.) %>%
-    data.table::setkey(fy_year, income) 
   
   input <- 
     data.table::data.table(income = income, 

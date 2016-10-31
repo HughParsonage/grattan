@@ -15,6 +15,19 @@ renew = FALSE
 tax_tbl <-
   data.table::fread("./data-raw/tax-brackets-and-marginal-rates-by-fy.tsv")
 
+# tax_table2 provides the raw tax tables, but also the amount
+# of tax paid at each bracket, to make the rolling join 
+# calculation later a one liner.
+tax_table2 <- 
+  tax_tbl %>%
+  dplyr::group_by(fy_year) %>%
+  dplyr::mutate(
+    tax_at = cumsum(data.table::shift(marginal_rate, type = "lag", fill = 0) * (lower_bracket - data.table::shift(lower_bracket, type = "lag", fill = 0))),
+    income = lower_bracket) %>%
+  dplyr::select(fy_year, income, lower_bracket, marginal_rate, tax_at) %>%
+  data.table::as.data.table(.) %>%
+  data.table::setkey(fy_year, income) 
+
 lito_tbl <- 
   readxl::read_excel("./data-raw/lito-info.xlsx", sheet = 1) %>% dplyr::select(-source)
 
@@ -297,7 +310,8 @@ Age_pension_permissible_income_by_Date <-
   gather(type, permissible_income, -Date) %>%
   mutate(type = trimws(gsub("Permissible income ", "", gsub("[^A-Za-z]", " ", type))))
 
-devtools::use_data(lito_tbl, 
+devtools::use_data(tax_table2, 
+                   lito_tbl, 
                    tax_tbl, 
                    medicare_tbl, 
                    sapto_tbl,
