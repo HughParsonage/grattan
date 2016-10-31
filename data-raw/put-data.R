@@ -265,28 +265,37 @@ differential_sw_uprates <-
 rm_comma <- function(x) gsub("[^\\.0-9]", "", gsub(",", "", x, fixed = TRUE))
 
 # http://guides.dss.gov.au/guide-social-security-law/5/2/2/10
-base_rates_Age_pension_by_year <- 
-  fread("data-raw/max-basic-rates-of-pension-1963-2016.csv") %>%
-  mutate_all(funs(rm_comma)) %>%
-  setnames(1, "Date") %>%
-  mutate(Date = gsub(" Note .*$", "", Date, perl = TRUE), 
-         Date = as.Date(Date, format = "%d/%m/%Y")) %>%
-  filter(`Standard rate` != "Standard rate") %>%
-  select(Date, `Standard rate`, `Married rate`) %>%
-  mutate_each(funs(as.numeric), -Date) %>%
-  filter(complete.cases(.)) %T>%
-  write_tsv("data-raw/max-basic-rates-of-pension-1963-2016.tsv") %>%
-  .[]
+Age_pension_base_rates_by_year <- 
+  if (!file.exists("data-raw/max-basic-rates-of-pension-1963-2016.tsv")){
+    fread("data-raw/max-basic-rates-of-pension-1963-2016.csv") %>%
+      mutate_all(funs(rm_comma)) %>%
+      setnames(1, "Date") %>%
+      mutate(Date = gsub(" Note .*$", "", Date, perl = TRUE), 
+             Date = as.Date(Date, format = "%d/%m/%Y")) %>%
+      filter(`Standard rate` != "Standard rate") %>%
+      select(Date, `Standard rate`, `Married rate`) %>%
+      mutate_each(funs(as.numeric), -Date) %>%
+      filter(complete.cases(.)) %T>%
+      write_tsv("data-raw/max-basic-rates-of-pension-1963-2016.tsv") %>%
+      .[]
+  } else {
+    fread("data-raw/max-basic-rates-of-pension-1963-2016.tsv")
+  }
 
-Age_pension_assets_test <- 
+Age_pension_assets_test_by_year <- 
   read_excel("data-raw/Age-Pension-assets-test-1997-2016.xlsx", sheet = "clean") %>%
   gather(type, assets_test, -Date) %>%
-  mutate(type = gsub("[^A-Za-z]", "", type))
+  mutate(type = gsub("[^A-Za-z]", " ", type))
 
 bto_tbl <- 
   read_excel("data-raw/beneficiary-tax-offset-by-fy.xlsx") %>%
   as.data.table %>%
   setkey(fy_year)
+
+Age_pension_permissible_income_by_Date <- 
+  read_excel("data-raw/age-pension-permissible-income.xlsx") %>%
+  gather(type, permissible_income, -Date) %>%
+  mutate(type = trimws(gsub("Permissible income ", "", gsub("[^A-Za-z]", " ", type))))
 
 devtools::use_data(lito_tbl, 
                    tax_tbl, 
@@ -307,7 +316,9 @@ devtools::use_data(lito_tbl,
                    differential_sw_uprates,
                    # possibly separable
                    .avbl_fractions,
-                   base_rates_Age_pension_by_year,
+                   Age_pension_base_rates_by_year,
+                   Age_pension_assets_test_by_year,
+                   Age_pension_permissible_income_by_Date,
                    bto_tbl,
                    
                    internal = TRUE, overwrite = TRUE)
