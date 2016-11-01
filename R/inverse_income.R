@@ -44,6 +44,8 @@ inverse_income <- function(tax, fy.year = "2012-13", zero.tax.income = c("maximu
 inverse_income_lookup3 <- function(tax, fy.year = "2012-13", zero.tax.income = "maximum", ...){
   NAs <- is.na(tax)
   tax <- dplyr::if_else(NAs, 1, tax)
+  infs <- is.infinite(tax)
+  tax <- if_else(infs, 1, tax)
   oo <- rank(tax, ties.method = "first")
   # This function creates a lookup table of incomes taxes 
   zeroes <- !NAs & tax == 0
@@ -81,6 +83,7 @@ inverse_income_lookup3 <- function(tax, fy.year = "2012-13", zero.tax.income = "
   }
   # keep the NAs
   out[NAs] <- NA
+  out[infs] <- Inf
   return(out)
 }
 
