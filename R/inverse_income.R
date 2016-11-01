@@ -13,12 +13,12 @@ inverse_income <- function(tax, fy.year = "2012-13", zero.tax.income = c("maximu
   if (!is.numeric(zero.tax.income)){
     zero.tax.income <- match.arg(zero.tax.income)
   }
-  if(any(tax < 0))
+  if(any(tax[!is.na(tax)] < 0))
     stop("tax must be nonnegative")
   
-  if (length(tax) > 1)
+  if (length(tax) > 1){
     out <- inverse_income_lookup3(tax, fy.year = fy.year, zero.tax.income = zero.tax.income, ...)
-  else {
+  } else {
     if (tax < .Machine$double.eps ^ 0.5){
       if (zero.tax.income == "zero"){
         out <- 0
@@ -88,6 +88,7 @@ inverse_income_lookup3 <- function(tax, fy.year = "2012-13", zero.tax.income = "
 }
 
 inverse_income_which_min <- function(tax, fy.year, zero.tax.income = "maximum", ...){
+  if (is.infinite(tax)) return(Inf)
   min(which(income_tax(1:(tax * 3 + 40e3), fy.year = fy.year, ...) > tax))
 }
 
