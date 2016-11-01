@@ -10,7 +10,6 @@ new_medicare_levy(parameter_table)
 \item{parameter_table}{A \code{data.table} containing 
 \describe{
 \item{\code{switches}}{The value in a row specifying which different medicare function is to apply.}
-\item{\code{family_status}}{'family' for a different threshold for dependants}
 \item{\code{lower_threshold}}{What is the lower medicare threshold, below which no medicare levy is applied, above which a tapering rate applies.}
 \item{\code{taper}}{What is the taper above \code{lower_threshold}.}
 \item{\code{rate}}{The medicare levy applicable above the medicare thresholds.}
