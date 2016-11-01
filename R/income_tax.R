@@ -173,9 +173,7 @@ rolling_income_tax <- function(income,
   # https://www.legislation.gov.au/Details/C2014A00048
   # input[["fy_year"]] ensures it matches the length of income if length(fy.year) == 1.
   # Also using dplyr::if_else for safety.
-  temp_budget_repair_levy. <- if_else(input[["fy_year"]] %in% c("2014-15", "2015-16", "2016-17"), 
-                                      pmaxC(0.02 * (income - 180e3), 0), 
-                                      0)
+  temp_budget_repair_levy. <- (input[["fy_year"]] %in% c("2014-15", "2015-16", "2016-17") & income > 180e3) * (0.02 * (income - 180e3))
   
   
   
