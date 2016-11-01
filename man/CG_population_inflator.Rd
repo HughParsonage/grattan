@@ -17,7 +17,7 @@ CG_inflator(x = 1, from_fy, to_fy, forecast.series = "mean")
 \item{forecast.series}{One of \code{"mean"}, \code{"lower"}, \code{"upper"}. What estimator to use in forecasts. \code{"lower"} and \code{"upper"} give the lower and upper boundaries of the 95\% prediction interval.}
 }
 \value{
-For \code{CG_population_inflator}, the number of individuals estimated to incur capital gains in \code{fy_year} An estimate of \code{x} inflated to \code{to_fy}
+For \code{CG_population_inflator}, the number of individuals estimated to incur capital gains in \code{fy_year}. For \code{CG_inflator}, an estimate of \code{x} inflated to \code{to_fy}
 }
 \description{
 Forecasting capital gains
