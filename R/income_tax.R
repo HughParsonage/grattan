@@ -115,6 +115,8 @@ rolling_income_tax <- function(income,
   }
   
   .lito <- function(income, fy.year){
+    # CRAN NOTE avoidance
+    lito <- NULL
     lito_tbl[input] %>%
       .[,lito := pminV(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
                        max_lito)] %>%
