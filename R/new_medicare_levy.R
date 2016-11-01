@@ -4,27 +4,32 @@
 #' 
 #' @param parameter_table A \code{data.table} containing 
 #' \describe{
-#' \item{\code{elderly}}{A logical column whether to designate a different medicare.}
+#' \item{\code{switches}}{The value in a row specifying which different medicare function is to apply.}
 #' \item{\code{family_status}}{'family' for a different threshold for dependants}
 #' \item{\code{lower_threshold}}{What is the lower medicare threshold, below which no medicare levy is applied, above which a tapering rate applies.}
 #' \item{\code{taper}}{What is the taper above \code{lower_threshold}.}
 #' \item{\code{rate}}{The medicare levy applicable above the medicare thresholds.}
 #' \item{\code{lower_up_for_each_child}}{How much the lower threshold should increase with each \code{n_dependants}.}
+#' \item{\code{lower_family_threshold}}{The threshold as applied to families (i.e. couples)}
 #' }
-#' @param elderly_age_is What age does the elderly row apply?
 #' @return A function similar to \code{medicare_levy}.
 #' @import data.table
 #' @export
 #' 
 
-new_medicare_levy <- function(parameter_table, elderly_age_is = 65){
+new_medicare_levy <- function(parameter_table){
   stopifnot(is.data.table(parameter_table))
+  
+  if (!all(c("switches", "family_status", "lower_threshold", "taper", "rate", "lower_up_for_each_child", "lower_family_threshold") %in% names(parameter_table))){
+    stop("parameter_table must contain certain columns. See", "\n\t", "?new_medicare_levy")
+  }
   
   medicare_function <- function(income, 
                                 Spouse_income = 0,
                                 age = 42,
                                 family_status = "individual", 
-                                n_dependants = 0){
+                                n_dependants = 0, 
+                                switch){
     stopifnot(all(family_status %in% c("family", "individual")))
     prohibit_vector_recycling(income, family_status, Spouse_income, age, n_dependants)
     if (any(Spouse_income > 0 & family_status == "individual")){
@@ -33,8 +38,7 @@ new_medicare_levy <- function(parameter_table, elderly_age_is = 65){
     
     data.table(income = income, 
                Spouse_income = Spouse_income,
-               
-               elderly = age >= elderly_age_is, 
+               switches = switch, 
                family_status = family_status) %>%
       # Assume spouse income is included irrespective of Partner_status
       # This appears to be the correct treatment (e.g. if the Partner dies 
@@ -45,7 +49,7 @@ new_medicare_levy <- function(parameter_table, elderly_age_is = 65){
       # Enhancement: family taxable income should exclude super lump sums.
       .[ ,family_income := income + Spouse_income ] %>%
       merge(parameter_table, 
-            by = c("elderly"),
+            by = c("switches"),
             sort = FALSE, 
             all.x = TRUE) %>%
       # Levy in the case of small incomes (s.7 of Act)
