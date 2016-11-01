@@ -10,7 +10,7 @@ library(grattan)
 library(readr)
 library(readxl)
 
-renew = FALSE
+renew = TRUE
 
 tax_tbl <-
   data.table::fread("./data-raw/tax-brackets-and-marginal-rates-by-fy.tsv")
@@ -157,56 +157,89 @@ generic_inflators <- if (!renew) fread("./data-raw/generic_inflators.tsv") else 
 }
 
 cg_inflators_1314 <- if (!renew) fread("./data-raw/cg_inflators_1314.tsv") else {
-  cg_table <- 
-    taxstats::sample_files_all %>%
-    dplyr::select(fy.year, Taxable_Income, Net_CG_amt) %>%
-    dplyr::filter(Net_CG_amt > 0) %>%
-    dplyr::mutate(marginal_rate_first = income_tax(Taxable_Income + 1, 
-                                                   fy.year = fy.year) - income_tax(Taxable_Income, 
-                                                                                   fy.year = fy.year)) %>%
-    dplyr::mutate(marginal_rate_last = (income_tax(Taxable_Income + Net_CG_amt, fy.year = fy.year) - income_tax(Taxable_Income, fy.year = fy.year)) / Net_CG_amt) %>%
-    dplyr::group_by(fy.year) %>%
-    dplyr::summarise(mean_mr1 = mean(marginal_rate_first), 
-                     mean_wmr1 = stats::weighted.mean(marginal_rate_first, Net_CG_amt), 
-                     mean_mrL = mean(marginal_rate_last), 
-                     mean_wmrL = stats::weighted.mean(marginal_rate_last, Net_CG_amt)) %>% 
-    merge(grattan:::cgt_expenditures, by.x = "fy.year", by.y = "FY", all = TRUE) %>% 
-    # dplyr::select_(.dots = c(-URL, -Projected) %>%
-    grattan:::unselect_(.dots = c("URL", "Projected")) %>%
-    dplyr::rename(revenue_foregone = CGT_discount_for_individuals_and_trusts_millions) %>%
-    dplyr::mutate(revenue_foregone = revenue_foregone * 10^6,
-                  zero_discount_Net_CG_total = revenue_foregone / mean(mean_wmrL, na.rm = TRUE)) %>%
-    dplyr::select(fy.year, zero_discount_Net_CG_total)
+  get_cg_inf <- function(series = "mean"){
+    cg_table <- 
+      taxstats::sample_files_all %>%
+      dplyr::select(fy.year, Taxable_Income, Net_CG_amt) %>%
+      dplyr::filter(Net_CG_amt > 0) %>%
+      dplyr::mutate(marginal_rate_first = income_tax(Taxable_Income + 1, 
+                                                     fy.year = fy.year) - income_tax(Taxable_Income, 
+                                                                                     fy.year = fy.year)) %>%
+      dplyr::mutate(marginal_rate_last = (income_tax(Taxable_Income + Net_CG_amt, fy.year = fy.year) - income_tax(Taxable_Income, fy.year = fy.year)) / Net_CG_amt) %>%
+      dplyr::group_by(fy.year) %>%
+      dplyr::summarise(mean_mr1 = mean(marginal_rate_first), 
+                       mean_wmr1 = stats::weighted.mean(marginal_rate_first, Net_CG_amt), 
+                       mean_mrL = mean(marginal_rate_last), 
+                       mean_wmrL = stats::weighted.mean(marginal_rate_last, Net_CG_amt)) %>% 
+      merge(grattan:::cgt_expenditures, by.x = "fy.year", by.y = "FY", all = TRUE) %>% 
+      # dplyr::select_(.dots = c(-URL, -Projected) %>%
+      grattan:::unselect_(.dots = c("URL", "Projected")) %>%
+      dplyr::rename(revenue_foregone = CGT_discount_for_individuals_and_trusts_millions) %>%
+      dplyr::mutate(revenue_foregone = revenue_foregone * 10^6,
+                    zero_discount_Net_CG_total = revenue_foregone / mean(mean_wmrL, na.rm = TRUE)) %>%
+      dplyr::select(fy.year, zero_discount_Net_CG_total)
+    
+    n_cg_history <- 
+      data.table::as.data.table(taxstats::individuals_table1_201314) %>%
+      dplyr::filter(Selected_items == "Net capital gain") %>%
+      dplyr::filter(!is.na(Count))  %>%
+      dplyr::select(fy_year, n_CG = Count)
+    
+    forecaster <- function(...) forecast(...)  # gforecast terrible
+    
+    switch(series,
+           "mean" = {
+             n_cg <- 
+               rbind(n_cg_history, 
+                     data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 1:10),
+                                n_CG = as.numeric(forecaster(n_cg_history$n_CG, level = 95)$mean))
+               )
+             
+             cg <- 
+               rbind(as.data.table(cg_table), 
+                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 1:10), 
+                                zero_discount_Net_CG_total = as.numeric(forecaster(cg_table$zero_discount_Net_CG_total, level = 95)$mean)))
+             }, 
+             "lower" = {
+               n_cg <- 
+                 rbind(n_cg_history, 
+                       data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 1:10),
+                                  n_CG = as.numeric(forecaster(n_cg_history$n_CG, level = 95)$lower))
+                 )
+               
+               cg <-
+               rbind(as.data.table(cg_table), 
+                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 1:10), 
+                                zero_discount_Net_CG_total = as.numeric(forecaster(cg_table$zero_discount_Net_CG_total, level = 95)$lower)))
+             }, 
+             "upper" = {
+               n_cg <- 
+                 rbind(n_cg_history, 
+                       data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 1:10),
+                                  n_CG = as.numeric(forecaster(n_cg_history$n_CG, level = 95)$upper))
+                 )
+               
+               cg <-
+               rbind(as.data.table(cg_table), 
+                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 1:10), 
+                                zero_discount_Net_CG_total = as.numeric(forecaster(cg_table$zero_discount_Net_CG_total, level = 95)$upper)))
+             })
+    
+    cg_inf <- 
+      merge(n_cg, cg, by.x = "fy_year", by.y = "fy.year") %>% 
+      as.data.table
+    
+    cg_inf[, cg_inflator := zero_discount_Net_CG_total / n_CG]
+    cg_inf[, cg_inflator := cg_inflator / cg_inflator[cg_inf$fy_year == "2013-14"]]
+    cg_inf[, forecast.series := series]
+  }
+  lapply(c("lower", "mean", "upper"), get_cg_inf) %>%
+    rbindlist(use.names = TRUE)
   
-  n_cg_history <- 
-    data.table::as.data.table(taxstats::individuals_table1_201314) %>%
-    dplyr::filter(Selected_items == "Net capital gain") %>%
-    dplyr::filter(!is.na(Count))  %>%
-    dplyr::select(fy_year, n_CG = Count)
-  
-  n_cg <- 
-    rbind(n_cg_history, 
-          data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 1:10),
-                     n_CG = as.numeric(forecast(n_cg_history$n_CG)$mean))
-          )
-  
-  cg <- 
-    rbind(as.data.table(cg_table), 
-          data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 1:10), 
-                     zero_discount_Net_CG_total = as.numeric(forecast(cg_table$zero_discount_Net_CG_total)$mean))
-    )
-  
-  cg_inf <- 
-    merge(n_cg, cg, by.x = "fy_year", by.y = "fy.year") %>% 
-    as.data.table
-  
-  cg_inf[, cg_inflator := zero_discount_Net_CG_total / n_CG]
-  cg_inf[, cg_inflator := cg_inflator / cg_inflator[cg_inf$fy_year == "2013-14"]]
-  cg_inf
 }
-
-super_contribution_inflator_1314 <- 
-{
+  
+  super_contribution_inflator_1314 <- 
+  {
   sample_file_1314_concessional_contribution_total <- 
     
     apply_super_caps_and_div293(.sample.file = sample_file_1314,

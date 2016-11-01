@@ -3,13 +3,12 @@
 #' @name CG_population_inflator
 #' @param x To be inflated.
 #' @param from_fy,to_fy Financial years designating the inflation period.
-#' @param estimator One of \code{"mean"}, \code{"lower"}, \code{"upper"}. What estimator to use in forecasts. \code{"lower"} and \code{"upper"} give the lower and upper boundaries of the prediction interval,
-#' @param prediction_interval A single value specifying the prediction interval to be used if \code{estimator} is \code{"lower"} or \code{"upper"}. By default, \code{80}, i.e. an 80\% prediction interval.
-#' @return An estimate of \code{x} inflated to \code{to_fy}
+#' @param forecast.series One of \code{"mean"}, \code{"lower"}, \code{"upper"}. What estimator to use in forecasts. \code{"lower"} and \code{"upper"} give the lower and upper boundaries of the 95\% prediction interval.
+#' @return For \code{CG_population_inflator}, the number of individuals estimated to incur capital gains in \code{fy_year} An estimate of \code{x} inflated to \code{to_fy}
 
-CG_population_inflator <- function(x = 1, from_fy, to_fy, estimator = "mean", prediction_interval = 80){
+CG_population_inflator <- function(x = 1, from_fy, to_fy, forecast.series = "mean"){
   stopifnot(all(is.fy(c(from_fy, to_fy))))
-  stopifnot(estimator %in% c("mean", "lower", "upper"))
+  stopifnot(forecast.series %in% c("mean", "lower", "upper"))
   
   last_fy <- max(from_fy, to_fy)
   last_year <- fy2yr(last_fy)
@@ -18,47 +17,14 @@ CG_population_inflator <- function(x = 1, from_fy, to_fy, estimator = "mean", pr
     data.table::data.table(x = x, from_fy = from_fy, to_fy = to_fy)
   
   n_cg_history <- 
-    data.table::as.data.table(taxstats::individuals_table1_201314) %>%
-    dplyr::filter(Selected_items == "Net capital gain") %>%
-    dplyr::filter(!is.na(Count))  %>%
-    dplyr::select(fy_year, n_CG = Count)
+    cg_inflators_1314 %>%
+    copy
   
   # Only attempt a forecast if required.
-  if (last_year > 2014){
-    population_forecast <- 
-      forecast::forecast(n_cg_history$n_CG, h = last_year - 2014, level = prediction_interval) 
-    
-    
-    switch(which(estimator == c("mean", 
-                                "lower", 
-                                "upper")),
-           forecast_tbl <- 
-             data.table::data.table(
-               fy_year = yr2fy(2015:last_year),
-               n_CG = as.numeric(population_forecast$mean)
-             ), 
-           
-           forecast_tbl <- 
-             data.table::data.table(
-               fy_year = yr2fy(2015:last_year),
-               n_CG = as.numeric(population_forecast$lower)
-             ), 
-           
-           forecast_tbl <- 
-             data.table::data.table(
-               fy_year = yr2fy(2015:last_year),
-               n_CG = as.numeric(population_forecast$upper)
-             )
-    )
-    
-    out_tbl <- 
-      rbind(forecast_tbl, 
-            n_cg_history, 
-            use.names = TRUE, 
-            fill = TRUE)
-    
+  if (last_year > 2023){
+    out_tbl <- n_cg_history[forecast.series == forecast.series]
   } else {
-    out_tbl <- n_cg_history
+    out_tbl <- n_cg_history[forecast.series == "mean"]
   }
   
   input %>%
@@ -72,9 +38,8 @@ CG_population_inflator <- function(x = 1, from_fy, to_fy, estimator = "mean", pr
 }
   
 #' @rdname CG_population_inflator
-#' @param ... Passed to \code{CG_population_inflator}
 
-CG_inflator <- function(x = 1, from_fy, to_fy, ...){
+CG_inflator <- function(x = 1, from_fy, to_fy, forecast.series = "mean"){
   prohibit_vector_recycling(x, from_fy, to_fy)
   stopifnot(is.numeric(x), all(is.fy(from_fy)), all(is.fy(to_fy)))
   
@@ -82,112 +47,27 @@ CG_inflator <- function(x = 1, from_fy, to_fy, ...){
   stopifnot(all(to_fy %in% cgt_expenditures$FY), all(from_fy %in% cgt_expenditures$FY))
 
   input <- 
-    data.table::data.table(x = x, from_fy = from_fy, to_fy = to_fy)
+    data.table::data.table(x = x, from_fy = from_fy, to_fy = to_fy) %>% 
+    .[, ordering := 1:.N]
 
+  nse_forecast_series <- forecast.series
+  cg_inflators_tbl <- 
+    cg_inflators_1314 %>% 
+    copy %>% 
+    .[forecast.series == nse_forecast_series]
+  
   raw_out <- 
     input %>%
-    merge(cg_inflators_1314, by.y = "fy_year", by.x = "from_fy", all.x = TRUE) %>%
+    merge(cg_inflators_tbl, by.y = "fy_year", by.x = "from_fy", all.x = TRUE) %>%
     data.table::setnames("zero_discount_Net_CG_total", "from_cg") %>% 
-    merge(cg_inflators_1314, by.y = "fy_year", by.x = "to_fy", all.x = TRUE) %>%
-    data.table::setnames("zero_discount_Net_CG_total", "to_cg") %$%
+    merge(cg_inflators_tbl, by.y = "fy_year", by.x = "to_fy", all.x = TRUE) %>%
+    data.table::setnames("zero_discount_Net_CG_total", "to_cg") %>%
+    setorderv("ordering") %$%
     {
       x * to_cg / from_cg
     }
   
   # The tax expenditures reflect totals, not means, so we need to adjust for
   # totals.
-  raw_out / CG_population_inflator(1, from_fy = from_fy, to_fy = to_fy, ...)
+  raw_out / CG_population_inflator(1, from_fy = from_fy, to_fy = to_fy)
 }
-
-
-#   
-#   if (FALSE){
-#   net_cg_history <- 
-#     data.table::as.data.table(taxstats::individuals_table1_201314) %>%
-#     dplyr::filter(Selected_items == "Net capital gain") %>%
-#     # Ignore before 2000 (different policy)
-#     dplyr::filter(fy_year > "2000-01") %>%
-#     dplyr::mutate(Sum_r = Sum / data.table::shift(Sum, type = "lag"))
-#   
-#   tot_cg_history <- 
-#     data.table::as.data.table(taxstats::individuals_table1_201314) %>%
-#     dplyr::filter(Selected_items %in% c("Net capital gain", "Total current year capital gains")) %>%
-#     # Ignore before 2000 (different policy)
-#     dplyr::filter(fy_year > "2000-01") %>% 
-#     dplyr::select(-Count) %>%
-#     tidyr::spread(Selected_items, Sum) %>%
-#     dplyr::mutate(discount = 1 - `Net capital gain` / `Total current year capital gains`)
-#   
-#   net_cg_history %>%
-#     ungroup %>%
-#     mutate(Mean = Sum / Count) %>%
-#     mutate(Mean = Mean / last(Mean)) %$%
-#     forecast::forecast(Mean)
-#   
-#   n_cg_history <- 
-#     data.table::as.data.table(taxstats::individuals_table1_201314) %>%
-#     dplyr::filter(Selected_items == "Net capital gain") %$%
-#     plot(forecast(Count))
-#   
-#   
-#   } else {
-#     grattan:::cgt_expenditures %>%
-#       dplyr::mutate(cg_inflator = 1.)
-#     
-#     
-#   }
-#   
-#   x <- c(1, -1)
-#   from_fy <- c("2013-14", "2012-13")
-#   to_fy = c("2014-15", "2015-16")
-#   
-#   input <- 
-#     data.table::data.table(cg = x, from_fy = from_fy, to_fy = to_fy)
-#   
-#   # The Net CG amt under a zero discount is the revenue foregone 
-#   # divided by the average tax rate over the taxed portion of 
-#   # the whole gain. (Since 50% discount.)
-# 
-#   
-
-#     
-#   trusts_cgt_history <- 
-#     trusts_table1_201314 %>% 
-#     filter(grepl("Net capital gain", Selected_items)) %>%
-#     select(fy.year = fy_year, trusts_cg = Sum)
-#   
-#   individuals_cgt_history <- 
-#     individuals_table1_201314 %>% 
-#     filter(grepl("Net capital gain", Selected_items)) %>%
-#     select(fy.year = fy_year, individuals_cg = Sum)
-#   
-#   comparison_of_methods <- 
-#     revenue_foregone_from_sample_files %>%
-#     merge(grattan:::cgt_expenditures, by.x = "fy.year", by.y = "FY", all.y = TRUE) %>%
-#     select(-URL, -Projected) %>%
-#     merge(trusts_cgt_history, by = "fy.year", all = TRUE) %>%
-#     merge(individuals_cgt_history, by = "fy.year", all = TRUE) %>%
-#     mutate(revenue_foregone_Treasury = CGT_discount_for_individuals_and_trusts_millions * 10^6) %>%
-#     select(-CGT_discount_for_individuals_and_trusts_millions) %>%
-#     mutate(difference = revenue_foregone - revenue_foregone_Treasury) %>%
-#     mutate(more_trusts = ifelse(trusts_cg > individuals_cg, "trusts higher", "trusts lower"))
-#   
-#   comparison_of_methods %>%
-#     ggplot(aes(x = trusts_cg, y = difference)) + 
-#     geom_point() + 
-#     geom_smooth() + 
-#     coord_equal()
-#   
-#   comparison_of_methods %>%
-#     ggplot(aes(x = fy.year, y = difference, fill = factor(more_trusts))) + 
-#     geom_bar(stat = "identity") 
-#   
-#   comma_bn <- function(x) round(x/1e9, 1)
-#   
-#   comparison_of_methods %>% mutate_each(funs(comma_bn), -fy.year, -more_trusts) %>% .[]
-#   
-#   taxstats::sample_file_1314 %>%
-#     project(h = 1L) %>%
-#     # since 50% discount just add Net_CG_amt
-#     dplyr::mutate(Taxable_Income_no_discount = Taxable_Income + Net_CG_amt)
-# }

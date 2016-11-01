@@ -37,7 +37,7 @@ project <- function(sample_file,
     if (.recalculate.inflators){
       CG.inflator <- CG_inflator(1, from_fy = current.fy, to_fy = to.fy)
     } else {
-      CG.inflator <- cg_inflators_1314[fy_year == to.fy][["cg_inflator"]]
+      CG.inflator <- cg_inflators_1314[fy_year == to.fy & forecast.series == forecast.dots$estimator][["cg_inflator"]]
     }
     
     col.names <- names(sample_file)
