@@ -23,6 +23,6 @@ The approximate taxable income given the tax payable for the financial year. See
 Inverse income tax functions
 }
 \details{
-The number returned has an error of $2.
+This function has an error of $2.
 }
 

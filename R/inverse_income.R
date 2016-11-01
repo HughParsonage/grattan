@@ -5,7 +5,7 @@
 #' @param zero.tax.income A character vector, ("maximum", "zero", "uniform", numeric(1)) Given that many incomes map to zero taxes, the \code{income_tax} function is not invertible there. As a consequence, the inverse function's value must be specified for tax = 0. "maximum" returns the maximum integer income one can have with a zero tax liability; "zero" returns zero for any tax of zero; "uniform" provides a random integer from zero to the maximum income with a zero tax. The value can also be specified explicitly.
 #' @param ... Other arguments passed to \code{income_tax}.
 #' @return The approximate taxable income given the tax payable for the financial year. See Details.
-#' @details The number returned has an error of $2.
+#' @details This function has an error of $2.
 #' @export inverse_income
 #' 
 
