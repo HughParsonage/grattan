@@ -98,6 +98,7 @@ rolling_income_tax <- function(income,
                            fy_year = fy.year) 
   
   input <- input[ ,ordering := 1:.N]
+  setkeyv(input, "fy_year")
   
   input.keyed <-
     # potentially expensive. Another way would be 
@@ -107,22 +108,18 @@ rolling_income_tax <- function(income,
     data.table::setkey(fy_year, income)
   
   tax_fun <- function(income, fy.year){
-    tax_table2[input.keyed, roll = Inf][,tax := tax_at + (income - lower_bracket) * marginal_rate][order(ordering)] %$%
-      tax
+    tax_table2[input.keyed, roll = Inf] %>%
+      .[,tax := tax_at + (income - lower_bracket) * marginal_rate] %>%
+      setorderv("ordering") %>%
+      .[["tax"]]
   }
   
   .lito <- function(income, fy.year){
-    merge(lito_tbl, 
-          input, 
-          by = "fy_year", 
-          # sort set to FALSE to avoid the key ruining the order
-          sort = FALSE, 
-          # right join because there may be no LITO
-          all.y = TRUE) %$%
-    {
-      pminV(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
-            max_lito)
-    }
+    lito_tbl[input] %>%
+      .[,lito := pminV(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
+                       max_lito)] %>%
+      setorderv("ordering") %>%
+      .[["lito"]]
   }
   
   for (j in which(vapply(.dots.ATO, FUN = is.double, logical(1)))){

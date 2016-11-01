@@ -29,7 +29,10 @@ tax_table2 <-
   data.table::setkey(fy_year, income) 
 
 lito_tbl <- 
-  readxl::read_excel("./data-raw/lito-info.xlsx", sheet = 1) %>% dplyr::select(-source)
+  readxl::read_excel("./data-raw/lito-info.xlsx", sheet = 1) %>% 
+  dplyr::select(-source) %>%
+  as.data.table %>%
+  setkey("fy_year")
 
 lito_tbl %>% 
   readr::write_tsv("./data-raw/lito-info.tsv")
