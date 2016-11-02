@@ -4,8 +4,8 @@
 #' @param interval How big should the age range be. 25-34 means interval = 10.
 #' @param min_age What is the upper bound of the lowest bracket? (\code{min_age = 25} means 'Under 25' will be the lowest bracket.)
 #' @param max_age What is the lower bound of the highest bracket? (\code{max_age = 75} means '75+' will be the bracket.)
-#' @param breaks Specify breaks manuals.
-#' @param labels Specify the labels.
+#' @param breaks Specify breaks manually.
+#' @param labels Specify the labels manually.
 #' @return An ordered factor giving age ranges as specified. 
 #' @export
 

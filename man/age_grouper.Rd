@@ -16,9 +16,9 @@ age_grouper(age, interval = 10, min_age = 25, max_age = 75,
 
 \item{max_age}{What is the lower bound of the highest bracket? (\code{max_age = 75} means '75+' will be the bracket.)}
 
-\item{breaks}{Specify breaks manuals.}
+\item{breaks}{Specify breaks manually.}
 
-\item{labels}{Specify the labels.}
+\item{labels}{Specify the labels manually.}
 }
 \value{
 An ordered factor giving age ranges as specified.
