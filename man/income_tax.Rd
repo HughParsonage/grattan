@@ -5,8 +5,8 @@
 \title{Income tax payable}
 \usage{
 income_tax(income, fy.year, age = 42, family_status = "individual",
-  n_dependants = 0L, sample_file, .dots.ATO = NULL,
-  return.mode = c("numeric", "integer"), allow.forecasts = FALSE)
+  n_dependants = 0L, .dots.ATO = NULL, return.mode = c("numeric",
+  "integer"), allow.forecasts = FALSE)
 }
 \arguments{
 \item{income}{The individual assessable income.}
@@ -19,11 +19,9 @@ income_tax(income, fy.year, age = 42, family_status = "individual",
 
 \item{n_dependants}{An integer for the number of children of the taxpayer (for the purposes of the Medicare levy).}
 
-\item{sample_file}{(Not yet used) A sample file \code{data.table} for which the income tax payable is desired on each row.}
-
 \item{.dots.ATO}{A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files.}
 
-\item{return.mode}{use numeric (integer not yet implemented).}
+\item{return.mode}{The mode (numeric or integer) of the returned vector.}
 
 \item{allow.forecasts}{should dates beyond 2014-15 be permitted?}
 }
