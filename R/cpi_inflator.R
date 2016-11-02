@@ -8,7 +8,7 @@
 #' @param adjustment What CPI index to use ("none" = raw series, "seasonal", or "trimmed" [mean]).
 #' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? By default set to \code{FALSE} in which case a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.
 #' @param allow.projection Should projections beyond the ABS's data be allowed?
-#' @return the value of from_nominal_price in real (to_fy) dollars.
+#' @return The value of from_nominal_price in real (to_fy) dollars.
 
 cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15", 
                          adjustment = c("seasonal", "none", "trimmed.mean"),

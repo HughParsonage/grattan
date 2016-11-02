@@ -19,12 +19,9 @@ cpi_inflator_quarters(from_nominal_price, from_qtr, to_qtr,
 \item{useABSConnection}{Should the function connect with ABS.Stat via an SDMX connection? By default set to \code{FALSE} in which case a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.}
 }
 \value{
-a vector of real prices
+A vector of real prices.
 }
 \description{
 CPI inflator when dates are nice
-}
-\details{
-this uses the ABS stat SDMX interface, which will form the bulk of the execution time.
 }
 
