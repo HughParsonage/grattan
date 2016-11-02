@@ -13,7 +13,7 @@ project_to(sample_file, to_fy, fy.year.of.sample.file = "2013-14", ...)
 
 \item{fy.year.of.sample.file}{The financial year of \code{sample_file}.}
 
-\item{...}{Other arguments passed to \code{project}.}
+\item{...}{Other arguments passed to \code{\link{project}}.}
 }
 \value{
 A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).
