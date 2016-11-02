@@ -1,5 +1,5 @@
 #' Financial functions
-#' 
+#' @description Financial functions from Excel. These functions are equivalent to the Excel functions of the same name (in uppercase).
 #' @name npv
 #' @aliases irr fv pv pmt
 #' \url{http://cvs.moodle.org/contrib/patches/question_calculated_extended/calculated/packages/financial/financial_class.php?view=co}

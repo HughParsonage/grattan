@@ -39,7 +39,7 @@ pmt(rate, nper, pv, fv = 0, type = 0)
 \item{fv}{Future value.}
 }
 \description{
-Financial functions
+Financial functions from Excel. These functions are equivalent to the Excel functions of the same name (in uppercase).
 }
 \examples{
 npv(0.07, c(1, 2))
