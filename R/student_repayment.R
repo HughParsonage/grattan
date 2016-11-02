@@ -8,7 +8,7 @@
 #' @param debt The amount of student debt held.
 #' @return The repayment amount.
 #' @source \url{https://www.ato.gov.au/Rates/HELP,-TSL-and-SFSS-repayment-thresholds-and-rates/?page=2#HELP_repayment_thresholds_and_rates_2013_14}
-#' @author Ittima Cherastidtham, Hugh Parsonage
+#' @author Ittima Cherastidtham and Hugh Parsonage
 #' @export
 
 student_repayment <- function(repayment_income, fy.year, debt){

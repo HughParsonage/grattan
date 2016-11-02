@@ -24,6 +24,6 @@ The repayment amount.
 HELP / HECS repayment amounts
 }
 \author{
-Ittima Cherastidtham, Hugh Parsonage
+Ittima Cherastidtham and Hugh Parsonage
 }
 
