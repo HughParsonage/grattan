@@ -9,14 +9,14 @@ cpi_inflator_general_date(from_nominal_price = 1, from_date, to_date, ...)
 \arguments{
 \item{from_nominal_price}{(numeric) the nominal prices to be converted to a real price}
 
-\item{from_date}{(character, date-like) the 'date' contemporaneous to \code{from_nominal_price}. The acceptable forms are 'YYYY', 'YYYY-YY' (financial year), 'YYYY-MM-DD', and 'YYYY-Q[1-4]' (quarters).}
+\item{from_date}{(character, date-like) the 'date' contemporaneous to \code{from_nominal_price}. The acceptable forms are 'YYYY', 'YYYY-YY' (financial year), 'YYYY-MM-DD', and 'YYYY-Q[1-4]' (quarters). Note a vector cannot contain a mixture of date forms.}
 
 \item{to_date}{(character, date-like) the date at which the real price is valued (where the nominal price equals the real price). Same forms as for \code{from_date}}
 
 \item{...}{other arguments passed to \code{cpi_inflator_quarters}}
 }
 \value{
-a vector of real prices in to_date dollars.
+A vector of real prices in \code{to_date} dollars.
 }
 \description{
 CPI for general dates
