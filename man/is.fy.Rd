@@ -13,7 +13,7 @@
 
 \item{fy.yr}{A string suspected to be a financial year.}
 
-\item{date}{A string or date for which the financial year is desired.}
+\item{date}{A string or date for which the financial year is desired. Note that \code{yr2fy} does not check its argument is an integer.}
 }
 \value{
 For \code{is.fy}, a logical, whether its argument is a financial year. For \code{fy.year}, \code{yr2fy}, and \code{date2fy}, the financial year. For the inverses, a numeric corresponding to the year.
