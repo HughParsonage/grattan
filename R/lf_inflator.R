@@ -1,11 +1,12 @@
 #' Labour force inflators
 #' 
 #' @name lf_inflator
+#' @author Hugh Parsonage and Tim Cameron
 #' @rdname lf_inflator
 #' @aliases lf_inflator_fy
-#' @param labour_force a numeric vector
+#' @param labour_force A numeric vector.
 #' @param from_date The date of \code{labour_force}.
-#' @param to_date dates as a character vector
+#' @param to_date Dates as a character vector.
 #' @param from_fy Financial year of \code{labour_force}.
 #' @param to_fy Financial year for which the labour force is predicted.
 #' @param useABSConnection Should an sdmx connection be used to get ABS data?
@@ -13,10 +14,11 @@
 #' @param use.month An integer (corresponding to the output of \code{data.table::month}) representing the month of the series used for the inflation.
 #' @param forecast.series Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals.
 #' @param forecast.level The prediction interval to be used if \code{forecast.series} is \code{upper} or \code{lower}. 
+#' @source ABS Cat 6202.0 \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocument}.
 #' @details \code{lf_inflator} is used on dates. The underlying data series is available every month. 
 #' @examples
 #' lf_inflator_fy(labour_force = 1, from_fy = "2012-13", to_fy = "2013-14")
-#' @return the relative labour force between to_date and for_date, multiplied by labour_force.
+#' @return The relative labour force between \code{to_date} and \code{for_date}, multiplied by \code{labour_force}.
 #' @export lf_inflator lf_inflator_fy
 
 lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy, 
