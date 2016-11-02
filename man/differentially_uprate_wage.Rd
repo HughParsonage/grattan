@@ -9,12 +9,18 @@ differentially_uprate_wage(wage = 1, from_fy, to_fy)
 \arguments{
 \item{wage}{A numeric vector to be uprated.}
 
-\item{from_fy}{The financial year of the origin of the wage, which must be a financial year of an available sample file. (Not after 2013-14.)}
+\item{from_fy}{The financial year contemporaneous to wage, which must be a financial year of an available sample file -- in particular, not after 2013-14.}
 
 \item{to_fy}{The target of the uprating. Passed to \code{\link{wage_inflator}}.}
 }
+\value{
+The vector \code{wage} differentially uprated to \code{to_fy}.
+}
 \description{
 Apply differential uprating to projections of the \code{Sw_amt} variable.
+}
+\details{
+See \code{vignette("differential-uprating")}.
 }
 \author{
 Hugh Parsonage and William Young
