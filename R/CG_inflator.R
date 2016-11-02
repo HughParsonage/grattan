@@ -47,6 +47,8 @@ CG_inflator <- function(x = 1, from_fy, to_fy, forecast.series = "mean"){
   # Else NAs.
   stopifnot(all(to_fy %in% cgt_expenditures$FY), all(from_fy %in% cgt_expenditures$FY))
 
+  # CRAN Note avoidance
+  ordering <- NULL
   input <- 
     data.table::data.table(x = x, from_fy = from_fy, to_fy = to_fy) %>% 
     .[, ordering := 1:.N]
