@@ -1,4 +1,4 @@
-#' Senior Australians and Pensioner Tax Offset
+#' Seniors and Pensioner Tax Offset
 #' 
 #' @name sapto
 #' @param rebate_income The rebate income of the individual.
