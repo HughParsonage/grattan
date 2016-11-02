@@ -3,13 +3,10 @@
 #' @param vector The vector for which quantiles are desired.
 #' @param weights The weights associated with the vector. None should be \code{NA} or zero.
 #' @param n The number of quantiles desired.
-#' @return A vector of integers corresponding the ntiles.
+#' @return A vector of integers corresponding to the ntiles. (As in \code{dplyr::ntile}.)
 #' @export
 
 weighted_ntile <- function(vector, weights = rep(1, length(vector)), n){
-  are_zero <- function(x){
-    x < .Machine$double.eps ^ 0.5
-  }
   stopifnot(all(weights >= 0))
   if (any(weights %>% are_zero)){
     warning("Some weights are zero. Maximum ntile may be incorrect.")
