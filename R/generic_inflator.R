@@ -1,5 +1,5 @@
 #' Generic inflator
-#' 
+#' @description Used to inflate variables in the sample file when there is no clear existing index.
 #' @param vars A character vector of those variables within \code{.sample_file} for which forecasts are desired. 
 #' @param h An integer, how many years ahead should the inflator be targeted.
 #' @param fy.year.of.sample.file A string representing the financial year of \code{.sample_file}.
