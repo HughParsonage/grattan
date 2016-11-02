@@ -75,5 +75,8 @@ is.nonnegative <- function(vec){
   is.numeric(vec) && !anyNA(vec) && all(vec >= 0)
 }
 
+are_zero <- function(x){
+  x < .Machine$double.eps ^ 0.5
+}
 
 
