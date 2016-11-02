@@ -18,7 +18,7 @@
 #' @details \code{lf_inflator} is used on dates. The underlying data series is available every month. 
 #' @examples
 #' lf_inflator_fy(labour_force = 1, from_fy = "2012-13", to_fy = "2013-14")
-#' @return The relative labour force between \code{to_date} and \code{for_date}, multiplied by \code{labour_force}.
+#' @return The relative labour force between \code{to_date} and \code{for_date} or \code{to_fy} and \code{from_fy}, multiplied by \code{labour_force}.
 #' @export lf_inflator lf_inflator_fy
 
 lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy, 

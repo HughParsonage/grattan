@@ -37,7 +37,7 @@ lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date,
 \item{to_date}{Dates as a character vector.}
 }
 \value{
-The relative labour force between \code{to_date} and \code{for_date}, multiplied by \code{labour_force}.
+The relative labour force between \code{to_date} and \code{for_date} or \code{to_fy} and \code{from_fy}, multiplied by \code{labour_force}.
 }
 \description{
 Labour force inflators
