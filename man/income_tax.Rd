@@ -2,20 +2,20 @@
 % Please edit documentation in R/income_tax.R
 \name{income_tax}
 \alias{income_tax}
-\title{tax function}
+\title{Income tax payable}
 \usage{
 income_tax(income, fy.year, age = 42, family_status = "individual",
   n_dependants = 0L, sample_file, .dots.ATO = NULL,
-  return.mode = "numeric", allow.forecasts = FALSE)
+  return.mode = c("numeric", "integer"), allow.forecasts = FALSE)
 }
 \arguments{
-\item{income}{the personal assessable income}
+\item{income}{The individual assessable income.}
 
-\item{fy.year}{the financial year in which the income was earned}
+\item{fy.year}{The financial year in which the income was earned.}
 
-\item{age}{the individual's age}
+\item{age}{The individual's age.}
 
-\item{family_status}{For medicare and sapto purposes. Still in development.}
+\item{family_status}{For medicare and SAPTO purposes.}
 
 \item{n_dependants}{An integer for the number of children of the taxpayer (for the purposes of the Medicare levy).}
 
@@ -31,7 +31,7 @@ income_tax(income, fy.year, age = 42, family_status = "individual",
 the total personal income tax payable
 }
 \description{
-tax function
+Income tax payable
 }
 \details{
 The function 'rolling' is inflexible by design. It is designed to guarantee the correct tax payable in a year.

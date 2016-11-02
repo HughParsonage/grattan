@@ -16,9 +16,6 @@ test_that("income tax checks", {
   
   # not a data frame
   expect_error(income_tax(1, "2013-14", .dots.ATO = "foo"))
-  
-  # not implemented
-  expect_error(income_tax(1, "2013-14", return.mode = "integer"))
 })
 
 test_that("income_tax returns known results",{
@@ -26,6 +23,7 @@ test_that("income_tax returns known results",{
   # All numbers are from the ATO comprehensive tax calculator. 
   expect_equal(income_tax(30e3, fy.year = "2011-12"), 2550)
   expect_equal(income_tax(20e3, fy.year = "2011-12"), 659.6)
+  expect_equal(income_tax(20e3, fy.year = "2011-12", return.mode = "integer"), 659L)
   
   expect_equal(income_tax(50e3, fy.year = "2012-13"), 8297)
   expect_equal(income_tax(60e3, fy.year = "2012-13"), 11847)
