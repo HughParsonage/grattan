@@ -12,7 +12,7 @@
 age_grouper <- function(age, interval = 10, min_age = 25, max_age = 75, breaks = NULL, labels = NULL){
   if (is.null(breaks)){
     if (!missing(labels) || !is.null(labels)){
-      warning("breaks not specified, but labels is given.")
+      warning("breaks not specified, but labels is given (and will be ignored).")
     }
     
     cut(age, 
