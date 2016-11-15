@@ -10,7 +10,18 @@ library(grattan)
 library(readr)
 library(readxl)
 
-renew = TRUE
+renew = FALSE
+
+tax_tbl <- 
+  lapply(yr2fy(1990:2017), 
+         function(fy_year) {
+           read_excel("./data-raw/tax_brackets_and_marginal_rates.xlsx", sheet = fy_year) %>% mutate(fy_year = fy_year) %>% as.data.table
+         })  %>%
+  lapply(as.data.table) %>%
+  rbindlist %>%
+  setnames("lower_brackets", "lower_bracket") %>%
+  write_tsv("./data-raw/tax-brackets-and-marginal-rates-by-fy.tsv")
+  
 
 tax_tbl <-
   data.table::fread("./data-raw/tax-brackets-and-marginal-rates-by-fy.tsv")
