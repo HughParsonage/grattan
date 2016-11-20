@@ -2,13 +2,13 @@
 #' 
 #' @name income_tax
 #' @param income The individual assessable income.
-#' @param fy.year The financial year in which the income was earned.
+#' @param fy.year The financial year in which the income was earned. Only tax years from 2000-01 to 2016-17 are available. 
 #' @param age The individual's age.
 #' @param family_status For medicare and SAPTO purposes.
 #' @param n_dependants An integer for the number of children of the taxpayer (for the purposes of the Medicare levy).
 #' @param return.mode The mode (numeric or integer) of the returned vector.
 #' @param .dots.ATO A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files.
-#' @param allow.forecasts should dates beyond 2014-15 be permitted?
+#' @param allow.forecasts should dates beyond 2016-17 be permitted? Currently, not permitted.
 #' @author Tim Cameron, Brendan Coates, Hugh Parsonage, William Young
 #' @details The function 'rolling' is inflexible by design. It is designed to guarantee the correct tax payable in a year.
 #' @useDynLib grattan
@@ -26,7 +26,8 @@ income_tax <- function(income, fy.year, age = 42, family_status = "individual", 
     stop("fy.year is missing, with no default")
   }
   
-  if (any(fy.year %notin% c("2002-03", "2003-04", "2004-05", "2005-06", "2006-07", "2007-08", 
+  if (any(fy.year %notin% c("2000-01", "2001-02", 
+                            "2002-03", "2003-04", "2004-05", "2005-06", "2006-07", "2007-08", 
                             "2008-09", "2009-10", "2010-11", "2011-12", "2012-13", "2013-14", 
                             "2014-15", "2015-16", "2016-17", "2017-18", "2018-19", "2019-20"))) {
     bad <- which(!is.fy(fy.year))

@@ -149,9 +149,7 @@ differentially_uprate_wage_prototype <- function(wage = 1, from_fy, to_fy){
 
 ```
 
-## Todos:
 
-1. Account for variation in population year-on-year.
 
 
 

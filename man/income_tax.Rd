@@ -11,7 +11,7 @@ income_tax(income, fy.year, age = 42, family_status = "individual",
 \arguments{
 \item{income}{The individual assessable income.}
 
-\item{fy.year}{The financial year in which the income was earned.}
+\item{fy.year}{The financial year in which the income was earned. Only tax years from 2000-01 to 2016-17 are available.}
 
 \item{age}{The individual's age.}
 
@@ -23,7 +23,7 @@ income_tax(income, fy.year, age = 42, family_status = "individual",
 
 \item{return.mode}{The mode (numeric or integer) of the returned vector.}
 
-\item{allow.forecasts}{should dates beyond 2014-15 be permitted?}
+\item{allow.forecasts}{should dates beyond 2016-17 be permitted? Currently, not permitted.}
 }
 \value{
 the total personal income tax payable

@@ -10,7 +10,7 @@ library(grattan)
 library(readr)
 library(readxl)
 
-renew = FALSE
+renew = T
 
 tax_tbl <- 
   lapply(yr2fy(1990:2017), 
@@ -20,8 +20,8 @@ tax_tbl <-
   lapply(as.data.table) %>%
   rbindlist %>%
   setnames("lower_brackets", "lower_bracket") %>%
-  write_tsv("./data-raw/tax-brackets-and-marginal-rates-by-fy.tsv")
-  
+  select(fy_year, lower_bracket, marginal_rate) %>%
+  fwrite("./data-raw/tax-brackets-and-marginal-rates-by-fy.tsv", sep = "\t")
 
 tax_tbl <-
   data.table::fread("./data-raw/tax-brackets-and-marginal-rates-by-fy.tsv")
