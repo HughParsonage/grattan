@@ -54,7 +54,8 @@ inverse_income_lookup3 <- function(tax, fy.year = "2012-13", zero.tax.income = "
   # We now designate the range of incomes to search over. 
   # Always check up to $100,000. There, the ratio of income to 
   # tax is at most 3.79 and decreases thereafter (2012-13).
-  income.range <- seq(0L, max(ceiling(max(tax) * 3.79), 100000L), by = 1L)  
+  income.range <- seq(0L, max(ceiling(max(tax) * 3.79), 100000L), by = 1L) 
+  fy..year <- taxes <- NULL
   if (identical(list(...), list())){
     input <- data.table(taxes = dplyr::if_else(zeroes, if (is.integer(tax)) 1L else 1.0, tax),   # ensure a one-to-one relationship
                         fy..year = fy.year)
@@ -63,13 +64,14 @@ inverse_income_lookup3 <- function(tax, fy.year = "2012-13", zero.tax.income = "
                         fy..year = fy.year, 
                         ...)
   }
+  incomes <- NULL
   temp <- data.table(incomes = income.range, 
                      fy..year = fy.year)
   # temp[, taxes := income_tax(incomes, fy.year = fy.year, ...)]
   
   temp[, taxes := income_tax(incomes, fy.year = fy..year, ...)]
   setkeyv(temp, c("fy..year", "taxes"))
-  setkeyv(input, c("fy.year", "taxes"))
+  setkeyv(input, c("fy..year", "taxes"))
   tbl <- temp[input, roll=-Inf]  # LOOCF, all taxes are invertible
   
   out <- tbl[["incomes"]][oo]
