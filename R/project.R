@@ -20,7 +20,7 @@ project <- function(sample_file,
                     forecast.dots = list(estimator = "mean", pred_interval = 80), 
                     .recalculate.inflators = FALSE, 
                     .copyDT = TRUE){
-  stopifnot(is.integer(h), h >= 0L, data.table::is.data.table(sample_file))
+  stopifnot(is.integer(h), h >= 0L, is.data.table(sample_file))
   
   sample_file[, "WEIGHT" := list(WEIGHT)]
   if (h == 0){
