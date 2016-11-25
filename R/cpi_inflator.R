@@ -8,50 +8,45 @@
 #' @param adjustment What CPI index to use ("none" = raw series, "seasonal", or "trimmed" [mean]).
 #' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? By default set to \code{FALSE} in which case a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.
 #' @param allow.projection Should projections beyond the ABS's data be allowed?
-#' @return the value of from_nominal_price in real (to_fy) dollars.
+#' @return The value of from_nominal_price in real (to_fy) dollars.
 
 cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15", 
-                         adjustment = "seasonal",
+                         adjustment = c("seasonal", "none", "trimmed.mean"),
                          useABSConnection = FALSE,
                          allow.projection = TRUE){
   # CRAN
   obsTime <- NULL; obsValue <- NULL; to_index <- NULL; from_index <- NULL
   
-  if (any(is.na(from_fy)) || any(is.na(to_fy))){
+  if (anyNA(from_fy) || anyNA(to_fy)){
     stop("from_fy and to_fy contain NAs. Remove NAs before applying.")
   }
   # Don't like vector recycling
   # http://stackoverflow.com/a/9335687/1664978
   prohibit_vector_recycling(from_nominal_price, from_fy, to_fy)
   
+  stopifnot(all(is.fy(from_fy)), all(is.fy(to_fy)))
+  
+  adjustment <- match.arg(adjustment, several.ok = FALSE)
+  
   if (useABSConnection) {
-    cpi.url <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.10001.10+20.Q/ABS?startTime=1948&endTime=2016"
-    cpi.url.seasonal.adjustment <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999901.10+20.Q/ABS?startTime=1948&endTime=2016"
-    cpi.url.trimmed.mean <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999902.10+20.Q/ABS?startTime=1948&endTime=2016"
-    
-    if (grepl("none", adjustment)){
-      url <- cpi.url
-    }
-    if (grepl("season", adjustment)){
-      url <- cpi.url.seasonal.adjustment
-    }
-    if (grepl("trimmed", adjustment)){
-      url <- cpi.url.trimmed.mean
-    }
+    switch(adjustment, 
+           "none" = url <-     
+             "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.10001.10.Q/ABS?startTime=1948", 
+           
+           "seasonal" = url <- 
+             "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999901.10+20.Q/ABS?startTime=1948",
+           
+           "trimmed.mean" = url <- 
+             "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999902.10+20.Q/ABS?startTime=1948")
     
     cpi <- rsdmx::readSDMX(url)
     message("Using ABS sdmx connection")
     cpi <- as.data.frame(cpi)
   } else {
-    if (grepl("none", adjustment)){
-      cpi <- cpi_unadj
-    }
-    if (grepl("season", adjustment)){
-      cpi <- cpi_seasonal_adjustment
-    }
-    if (grepl("trimmed", adjustment)){
-      cpi <- cpi_trimmed
-    }
+    switch(adjustment, 
+           "none" = cpi <- cpi_unadj,
+           "seasonal" = cpi <- cpi_seasonal_adjustment,
+           "trimmed.mean" = cpi <- cpi_trimmed)
   }
   
   cpi.indices <- 
@@ -73,7 +68,7 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
   if (allow.projection && !all(to_fy %in% cpi.indices$fy_year)){
     # Number of years beyond the data our forecast must reach
     years.beyond <- max(fy2yr(to_fy)) - max(fy2yr(cpi.indices$fy_year))
-    cpi_index_forecast <- cpi.indices %$% forecast::forecast(obsValue, h = years.beyond) %$% as.numeric(mean)
+    cpi_index_forecast <- cpi.indices %$% gforecast(obsValue, h = years.beyond) %$% as.numeric(mean)
     cpi.indices.new <- 
       data.table::data.table(fy_year = yr2fy(seq(max(fy2yr(cpi.indices$fy_year)) + 1,
                                                  max(fy2yr(to_fy)),
@@ -82,21 +77,19 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
     cpi.indices <- data.table::rbindlist(list(cpi.indices, cpi.indices.new), use.names = TRUE, fill = TRUE)
   }
   
-  # NSE
-  hugh_frac <- function(.data, front, over, under, new_col_name){
-    # http://www.r-bloggers.com/using-mutate-from-dplyr-inside-a-function-getting-around-non-standard-evaluation/
-    mutate_call <- lazyeval::interp(~r*a/b, a = as.name(over), b = as.name(under), r = as.name(front))
-    .data %>%
-      dplyr::mutate_(.dots = stats::setNames(list(mutate_call), new_col_name))
-  }
-  
   output <- 
     input %>%
-    merge(cpi.indices, by.x = "from_fy", by.y = "fy_year", sort = FALSE,
-                                  all.x = TRUE) %>%
+    merge(cpi.indices, 
+          by.x = "from_fy", 
+          by.y = "fy_year", 
+          sort = FALSE,
+          all.x = TRUE) %>%
     data.table::setnames("obsValue", "from_index") %>%
-    merge(cpi.indices, by.x = "to_fy", by.y = "fy_year", sort = FALSE, 
-                                  all.x = TRUE) %>%
+    merge(cpi.indices, 
+          by.x = "to_fy", 
+          by.y = "fy_year", 
+          sort = FALSE, 
+          all.x = TRUE) %>%
     data.table::setnames("obsValue", "to_index") %>%
     hugh_frac("from_nominal_price", "to_index", "from_index", "out")
   

@@ -1,6 +1,6 @@
 #' Medicare levy
 #' 
-#' @description The (actual) amount payable for the medicare levy.
+#' @description The (actual) amount payable for the Medicare levy.
 #' 
 #' @param income The taxable income. A vector of numeric values.
 #' @param fy.year The financial year. A character vector satisfying \code{is.fy}.
@@ -11,11 +11,13 @@
 #' @param family_status What is the taxpayer's family status: family or individual?
 #' @param n_dependants Number of children dependant on the taxpayer.
 #' @param .checks Should checks of certain arguments be made? Provided to improve performance when checks are not necessary.
-#' @return The medicare levy payable for that taxpayer.
+#' @return The Medicare levy payable for that taxpayer.
 #' @details The Seniors and Pensioners Tax Offset was formed in 2012-13 as an amalgam of the Senior Australians Tax Offset and the Pensions Tax Offset. 
 #' Medicare rates before 2012-13 were different based on these offsets. 
+#' For most taxpayers, eligibility would be based on whether your age is over the pension age (currently 65).
 #' If \code{sato} and \code{pto} are \code{NULL}, \code{sapto.eligible} stands for eligibility for the \code{sato} and not \code{pto}.
-#' If \code{sato} or \code{pto} are not \code{NULL} for such years, 
+#' If \code{sato} or \code{pto} are not \code{NULL} for such years, only \code{sato} is currently considered. 
+#' Supplying \code{pto} independently is currently a warning.
 #' @export
 #' 
 
@@ -56,6 +58,10 @@ medicare_levy <- function(income,
     }
     if (any(sato & pto)) {
       stop("pto and sato must not both be TRUE")
+    }
+    sapto.eligible <- sato | pto
+    if (any(pto)){
+      warning("pto assumed to be FALSE")
     }
   }
   

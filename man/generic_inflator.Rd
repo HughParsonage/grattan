@@ -24,6 +24,6 @@ generic_inflator(vars, h, fy.year.of.sample.file = "2012-13",
 A data table of two columns: \code{variable} containing \code{vars} and \code{inflator} equal to the inflator to be applied to that variable to inflate it ahead \code{h} years.
 }
 \description{
-Generic inflator
+Used to inflate variables in the sample file when there is no clear existing index.
 }
 

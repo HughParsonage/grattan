@@ -72,7 +72,3 @@ pminV <- function(x, y) {
     .Call('grattan_pminV', PACKAGE = 'grattan', x, y)
 }
 
-squish_cpp <- function(x, a, b) {
-    .Call('grattan_squish_cpp', PACKAGE = 'grattan', x, a, b)
-}
-

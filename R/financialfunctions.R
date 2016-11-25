@@ -1,11 +1,11 @@
 #' Financial functions
-#' 
+#' @description Financial functions from Excel. These functions are equivalent to the Excel functions of the same name (in uppercase).
 #' @name npv
 #' @aliases irr fv pv pmt
 #' \url{http://cvs.moodle.org/contrib/patches/question_calculated_extended/calculated/packages/financial/financial_class.php?view=co}
-#' @param x TBD
-#' @param start TBD
-#' @param fv TBD
+#' @param x Cash flow.
+#' @param start Initial guess to start the iterative process.
+#' @param fv Future value.
 #' @param rate Discount or interest rate.
 #' @param values Income stream.
 #' @param nper Number of periods
@@ -20,8 +20,11 @@
 npv <- function(rate, values) sum(values / (1 + rate)^seq_along(values))
 #' @rdname npv
 #' @examples
-#' irr(x = 1, start = 0.1)
+#' irr(x = c(1, -1), start = 0.1)
 irr <- function(x, start=0.1) {
+  if (uniqueN(sign(x)) != 2){
+    stop("At least one value in 'x' must be negative and one must be positive.")
+  }
   t <- seq_along(x)-1
   f <- function(i) abs(sum(x/(1+i)^t))
   return(stats::nlm(f, start)$estimate)

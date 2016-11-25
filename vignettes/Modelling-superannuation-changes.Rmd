@@ -26,10 +26,32 @@ To obtain these results (say for 2017-18)
 
 ```{r}
 library(grattan)
+
+
+
 # stopifnot(packageVersion("grattan") >= package_version("0.3.0.2"))
 library(taxstats)
 library(data.table)  
 library(magrittr)
+#' dollar scales
+#' 
+#' @name grattan_dollar
+#' @param x A numeric vector
+#' @param digits Minimum number of digits after the decimal point. (\code{nsmall} in \code{base::format}).
+#' @details Makes negative numbers appear as \eqn{-\$10,000} instead of \eqn{\$-10,000} in \code{scales::dollar}.
+#' @export
+# from scales
+
+grattan_dollar <- function (x, digits = 0) {
+  #
+  nsmall <- digits
+  commaz <- format(abs(x), nsmall = nsmall, trim = TRUE, big.mark = ",", 
+                   scientific = FALSE, digits = 1L)
+  
+  dplyr::if_else(x < 0, 
+          paste0("\U2212","$", commaz),
+          paste0("$", commaz))
+}
 
 (new_revenue <- 
   sample_file_1314 %>%
@@ -94,7 +116,7 @@ new_sample_file_1718 %>%
   arrange(Taxable_Income_decile) %>%
   #
   mutate(`Taxable income decile` = factor(Taxable_Income_decile)) %>%
-  grplot(aes(x = `Taxable income decile`, y = `Average increase in tax`)) + 
+  ggplot(aes(x = `Taxable income decile`, y = `Average increase in tax`)) + 
   geom_bar(stat = "identity") + 
   
   # cosmetic:

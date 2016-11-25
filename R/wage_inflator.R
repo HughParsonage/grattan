@@ -18,7 +18,7 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
   # CRAN
   obsTime <- NULL; obsValue <- NULL; to_index <- NULL; from_index <- NULL
   
-  if (any(is.na(from_fy)) || any(is.na(to_fy))){
+  if (anyNA(from_fy) || anyNA(to_fy)){
     stop("from_fy and to_fy contain NAs. Filter before applying this function.")
   }
   
@@ -26,13 +26,14 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
   prohibit_vector_recycling(wage, from_fy, to_fy)
   
   if (useABSConnection) {
-    wage.url <- "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LABOUR_PRICE_INDEX/1.THRPEB.7.-.0.30.Q/ABS?startTime=1997"
+    wage.url <- "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LABOUR_PRICE_INDEX/1.THRPEB.7.-.0.30.Q/all?startTime=1997-Q3"
     wages <- rsdmx::readSDMX(wage.url)
     message("Using ABS sdmx connection")
-    wage.indices <- as.data.frame(wages)
+    wage.indices <- as.data.frame(wages) %>%
+      as.data.table
   } else {
     # .wages_trend means the wage indices of the trend index
-    wage.indices <- wages_trend
+    wage.indices <- copy(wages_trend)
   }
   
   obsDate <- NULL
@@ -50,7 +51,7 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
     .[["obsQtr"]] %>%
     last 
   
-  if (any(from_fy < last.quarter.in.series)){
+  if (any(from_fy > yr2fy(last.full.yr.in.series))){
     warning("Projection of from_fy terms not yet supported.")
   }
   
@@ -69,25 +70,25 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
     switch(forecast.series, 
            "mean" = {
              forecasts <- 
-               forecast::forecast(wage.indices[["obsValue"]], 
-                                  h = quarters.ahead, 
-                                  level = forecast.level) %>%
+               gforecast(wage.indices[["obsValue"]], 
+                         h = quarters.ahead, 
+                         level = forecast.level) %>%
                magrittr::use_series("mean") %>%
                as.numeric 
            }, 
            "upper" = {
              forecasts <- 
-               forecast::forecast(wage.indices[["obsValue"]], 
-                                  h = quarters.ahead, 
-                                  level = forecast.level) %>%
+               gforecast(wage.indices[["obsValue"]], 
+                         h = quarters.ahead, 
+                         level = forecast.level) %>%
                magrittr::use_series("upper") %>%
                as.numeric 
            }, 
            "lower" = {
              forecasts <- 
-               forecast::forecast(wage.indices[["obsValue"]], 
-                                  h = quarters.ahead, 
-                                  level = forecast.level) %>%
+               gforecast(wage.indices[["obsValue"]], 
+                         h = quarters.ahead, 
+                         level = forecast.level) %>%
                magrittr::use_series("lower") %>%
                as.numeric
            })
@@ -120,10 +121,5 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
     setnames("obsValue", "to_index") %>%
     .[, out := wage * (to_index/from_index)]
   
-  
-  
-#   wage * 
-#     wages[wages$obsTime == to_fy_as_quarter, ]$obsValue / 
-#       wages[wages$obsTime == from_fy_as_quarter, ]$obsValue
   output[["out"]]
 }

@@ -5,8 +5,8 @@
 \title{CPI inflator}
 \usage{
 cpi_inflator(from_nominal_price = 1, from_fy, to_fy = "2014-15",
-  adjustment = "seasonal", useABSConnection = FALSE,
-  allow.projection = TRUE)
+  adjustment = c("seasonal", "none", "trimmed.mean"),
+  useABSConnection = FALSE, allow.projection = TRUE)
 }
 \arguments{
 \item{from_nominal_price}{(numeric) the price (or vector of prices) to be inflated}
@@ -22,7 +22,7 @@ cpi_inflator(from_nominal_price = 1, from_fy, to_fy = "2014-15",
 \item{allow.projection}{Should projections beyond the ABS's data be allowed?}
 }
 \value{
-the value of from_nominal_price in real (to_fy) dollars.
+The value of from_nominal_price in real (to_fy) dollars.
 }
 \description{
 CPI inflator

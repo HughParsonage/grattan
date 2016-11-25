@@ -2,39 +2,38 @@
 % Please edit documentation in R/income_tax.R
 \name{income_tax}
 \alias{income_tax}
-\title{tax function}
+\title{Income tax payable}
 \usage{
 income_tax(income, fy.year, age = 42, family_status = "individual",
-  n_dependants = 0L, sample_file, .dots.ATO = NULL,
-  return.mode = "numeric", allow.forecasts = FALSE)
+  n_dependants = 0L, .dots.ATO = NULL, return.mode = c("numeric",
+  "integer"), allow.forecasts = FALSE)
 }
 \arguments{
-\item{income}{the personal assessable income}
+\item{income}{The individual assessable income.}
 
-\item{fy.year}{the financial year in which the income was earned}
+\item{fy.year}{The financial year in which the income was earned. Only tax years from 2000-01 to 2016-17 are available.}
 
-\item{age}{the individual's age}
+\item{age}{The individual's age.}
 
-\item{family_status}{For medicare and sapto purposes. Still in development.}
+\item{family_status}{For medicare and SAPTO purposes.}
 
 \item{n_dependants}{An integer for the number of children of the taxpayer (for the purposes of the Medicare levy).}
 
-\item{sample_file}{(Not yet used) A sample file \code{data.table} for which the income tax payable is desired on each row.}
+\item{.dots.ATO}{A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files. If \code{.dots.ATO} is a \code{data.table}, I recommend you enclose it with \code{copy()}.}
 
-\item{.dots.ATO}{A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files.}
+\item{return.mode}{The mode (numeric or integer) of the returned vector.}
 
-\item{return.mode}{use numeric (integer not yet implemented).}
-
-\item{allow.forecasts}{should dates beyond 2014-15 be permitted?}
+\item{allow.forecasts}{should dates beyond 2016-17 be permitted? Currently, not permitted.}
 }
 \value{
 the total personal income tax payable
 }
 \description{
-tax function
+Income tax payable
 }
 \details{
 The function 'rolling' is inflexible by design. It is designed to guarantee the correct tax payable in a year.
+For years preceding the introduction of SAPTO, the maximum offset is assumed to apply to those above pensionable age.
 }
 \author{
 Tim Cameron, Brendan Coates, Hugh Parsonage, William Young

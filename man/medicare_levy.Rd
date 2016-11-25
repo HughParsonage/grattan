@@ -28,15 +28,17 @@ medicare_levy(income, fy.year = "2013-14", Spouse_income = 0,
 \item{.checks}{Should checks of certain arguments be made? Provided to improve performance when checks are not necessary.}
 }
 \value{
-The medicare levy payable for that taxpayer.
+The Medicare levy payable for that taxpayer.
 }
 \description{
-The (actual) amount payable for the medicare levy.
+The (actual) amount payable for the Medicare levy.
 }
 \details{
 The Seniors and Pensioners Tax Offset was formed in 2012-13 as an amalgam of the Senior Australians Tax Offset and the Pensions Tax Offset. 
 Medicare rates before 2012-13 were different based on these offsets. 
+For most taxpayers, eligibility would be based on whether your age is over the pension age (currently 65).
 If \code{sato} and \code{pto} are \code{NULL}, \code{sapto.eligible} stands for eligibility for the \code{sato} and not \code{pto}.
-If \code{sato} or \code{pto} are not \code{NULL} for such years,
+If \code{sato} or \code{pto} are not \code{NULL} for such years, only \code{sato} is currently considered. 
+Supplying \code{pto} independently is currently a warning.
 }
 

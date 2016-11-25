@@ -14,7 +14,7 @@ weighted_ntile(vector, weights = rep(1, length(vector)), n)
 \item{n}{The number of quantiles desired.}
 }
 \value{
-A vector of integers corresponding the ntiles.
+A vector of integers corresponding to the ntiles. (As in \code{dplyr::ntile}.)
 }
 \description{
 Weighted quantiles

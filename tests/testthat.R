@@ -6,5 +6,6 @@ library(data.table)
 library(dtplyr)
 library(magrittr)
 library(survey)
+library(zoo)
 
 test_check("grattan")

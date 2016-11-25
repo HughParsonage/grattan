@@ -1,11 +1,12 @@
 #' Labour force inflators
 #' 
 #' @name lf_inflator
+#' @author Hugh Parsonage and Tim Cameron
 #' @rdname lf_inflator
 #' @aliases lf_inflator_fy
-#' @param labour_force a numeric vector
+#' @param labour_force A numeric vector.
 #' @param from_date The date of \code{labour_force}.
-#' @param to_date dates as a character vector
+#' @param to_date Dates as a character vector.
 #' @param from_fy Financial year of \code{labour_force}.
 #' @param to_fy Financial year for which the labour force is predicted.
 #' @param useABSConnection Should an sdmx connection be used to get ABS data?
@@ -13,9 +14,11 @@
 #' @param use.month An integer (corresponding to the output of \code{data.table::month}) representing the month of the series used for the inflation.
 #' @param forecast.series Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals.
 #' @param forecast.level The prediction interval to be used if \code{forecast.series} is \code{upper} or \code{lower}. 
+#' @source ABS Cat 6202.0 \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocument}.
+#' @details \code{lf_inflator} is used on dates. The underlying data series is available every month. 
 #' @examples
 #' lf_inflator_fy(labour_force = 1, from_fy = "2012-13", to_fy = "2013-14")
-#' @return the relative labour force between to_date and for_date, multiplied by labour_force.
+#' @return The relative labour force between \code{to_date} and \code{for_date} or \code{to_fy} and \code{from_fy}, multiplied by \code{labour_force}.
 #' @export lf_inflator lf_inflator_fy
 
 lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy, 
@@ -29,20 +32,19 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
   obsTimeDate <- NULL
   if (useABSConnection){
     lf.url.trend <- 
-      "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1981"
+      "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1981"
     lf <- rsdmx::readSDMX(lf.url.trend)
     lf.indices <- data.table::as.data.table(as.data.frame(lf))
   } else {
     lf.indices <- lf_trend
   }
   
-  lf.indices %<>% dplyr::select_(., .dots = c("obsTime", "obsValue"))
-  
   lf.indices[, obsDate := as.Date(sprintf("%s-01", obsTime))]
   last.date.in.series <- last(lf.indices[["obsDate"]])
   last.full.fy.in.series <- 
     lf.indices %>%
-    dplyr::filter(month(obsDate) == 6) %>%
+    # month from data.table::
+    .[month(obsDate) == 6] %>%
     .[["obsDate"]] %>%
     last %>%
     date2fy
@@ -126,60 +128,47 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
 #' \dontrun{
 #' lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date = "2014-06-30")
 #' }
-lf_inflator <- function(labour_force = 1, from_date = "2013-06-30", to_date){
+lf_inflator <- function(labour_force = 1, from_date = "2013-06-30", to_date, useABSConnection = FALSE){
   
   # lf original
-  lf.url <- 
-    "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.10.M/ABS?startTime=1981"
-  lf.url.trend <- 
-    "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1981"
-  lf <- rsdmx::readSDMX(lf.url)
-  lf <- as.data.frame(lf)
+  if (useABSConnection){
+    lf.url <- 
+      "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.10.M/ABS?startTime=1981"
+    lf.url.trend <- 
+      # "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978-02"
+      "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1981"
+    lf <- rsdmx::readSDMX(lf.url.trend)
+    lf <- as.data.frame(lf)
+  } else {
+    lf <- lf_trend
+  }
+  
   lf$obsTimeDate <- as.Date(paste0(lf$obsTime, "-01"), format = "%Y-%m-%d")
   
-  if (length(labour_force) == 1){
-    if(is.na(labour_force))
-      return(NA)
-    else {
-      nearest_from_date <- as.Date(max(lf$obsTimeDate[lf$obsTimeDate <= from_date]))
-      if(difftime(from_date, nearest_from_date, units = "days") > 182)
-        warning("From dates differ by more than 182 days")
-      
-      nearest_to_date <- as.Date(max(lf$obsTimeDate[lf$obsTimeDate <= to_date]))
-      if(difftime(to_date, nearest_to_date, units = "days") > 182)
-        warning("To dates differ by more than 182 days")
-      
-      from_labour_force <- lf$obsValue[lf$obsTimeDate == nearest_from_date]
-      to_labour_force <- lf$obsValue[lf$obsTimeDate == nearest_to_date]
-      #
-      #
-      return(labour_force * to_labour_force / from_labour_force)
-    }
-  } else {
-    date_connector <- 
-      data.table::data.table(
-        altkey = 1:length(from_date),
-        from_date = as.Date(from_date),
-        to_date = as.Date(to_date)
-      )
-    
-    LF <- data.table::data.table(
-      obsTimeDate = lf$obsTimeDate,
-      obsValue = lf$obsValue
+  
+  date_connector <- 
+    data.table::data.table(
+      altkey = 1:length(from_date),
+      from_date = as.Date(from_date),
+      to_date = as.Date(to_date)
     )
-    data.table::setkeyv(LF, "obsTimeDate")
-    
-    data.table::setkey(date_connector, from_date)
-    from_DT <- LF[date_connector, roll=Inf]
-    data.table::setnames(from_DT, c("obsTimeDate", "obsValue"), c("from_Date", "from_LF"))
-    
-    data.table::setkey(date_connector, to_date)
-    to_DT <- LF[date_connector, roll=Inf]
-    data.table::setnames(to_DT, c("obsTimeDate", "obsValue"), c("to_Date", "to_LF"))
-    
-    merged <- merge(from_DT, to_DT, by = "altkey")
-    lf.ratio <- labour_force * merged$to_LF / merged$from_LF
-    return(lf.ratio)
-  }
+  
+  LF <- data.table::data.table(
+    obsTimeDate = lf$obsTimeDate,
+    obsValue = lf$obsValue
+  )
+  data.table::setkeyv(LF, "obsTimeDate")
+  
+  data.table::setkey(date_connector, from_date)
+  from_DT <- LF[date_connector, roll=Inf]
+  data.table::setnames(from_DT, c("obsTimeDate", "obsValue"), c("from_Date", "from_LF"))
+  
+  data.table::setkey(date_connector, to_date)
+  to_DT <- LF[date_connector, roll=Inf]
+  data.table::setnames(to_DT, c("obsTimeDate", "obsValue"), c("to_Date", "to_LF"))
+  
+  merged <- merge(from_DT, to_DT, by = "altkey")
+  lf.ratio <- labour_force * merged$to_LF / merged$from_LF
+  return(lf.ratio)
 }
 

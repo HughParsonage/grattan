@@ -2,8 +2,10 @@
 #' @description Apply differential uprating to projections of the \code{Sw_amt} variable.
 #' @author Hugh Parsonage and William Young
 #' @param wage A numeric vector to be uprated.
-#' @param from_fy The financial year of the origin of the wage, which must be a financial year of an available sample file. (Not after 2013-14.)
+#' @param from_fy The financial year contemporaneous to wage, which must be a financial year of an available sample file -- in particular, not after 2013-14.
 #' @param to_fy The target of the uprating. Passed to \code{\link{wage_inflator}}.
+#' @return The vector \code{wage} differentially uprated to \code{to_fy}.
+#' @details See \code{vignette("differential-uprating")}.
 #' @export
 
 

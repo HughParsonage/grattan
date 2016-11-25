@@ -34,7 +34,9 @@ test_that("medicare_levy returns known values", {
   expect_equal(medicare_levy(income = 52e3, fy.year = "2015-16", sapto.eligible = TRUE , Spouse_income = 1e3, n_dependants = 1, family_status = "family"), 252.80)
   expect_equal(medicare_levy(income = 52e3, fy.year = "2015-16", sapto.eligible = TRUE , Spouse_income = 1e3, n_dependants = 2, family_status = "family"), 0)
   
-  
+  expect_equal(medicare_levy(20e3, "2004-05", sato = TRUE, pto = FALSE), 0)
+  expect_error(medicare_levy(20e3, "2004-05", sato = TRUE, pto = TRUE))
+  expect_warning(medicare_levy(20e3, "2004-05", sato = FALSE, pto = TRUE), regexp = "pto")
 })
 
 
@@ -42,11 +44,12 @@ test_that("new_medicare_levy matches", {
   sa <- sample_file_1314
   par_tbl <- 
     grattan:::medicare_tbl[fy_year == "2013-14"] %>%
-    setnames(old = "sapto", new = "elderly")
+    setnames(old = "sapto", new = "switches")
   
   expect_error(new_medicare_levy(parameter_table = as.data.frame(par_tbl)))
+  expect_error(new_medicare_levy(parameter_table = as.data.frame(par_tbl) %>% select(-taper)))
   
-  expect_equal(new_medicare_levy(par_tbl)(income = 23e3, age = 66, Spouse_income = 750, n_dependants = 0, family_status = "family"), 
+  expect_equal(new_medicare_levy(par_tbl)(income = 23e3, switch = FALSE, Spouse_income = 750, n_dependants = 0, family_status = "family"), 
                medicare_levy(income = 23e3, fy.year = "2015-16", sapto.eligible = TRUE , Spouse_income = 750, n_dependants = 0, family_status = "family"))
 })
 

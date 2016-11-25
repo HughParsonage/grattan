@@ -1,17 +1,17 @@
-#' tax function
+#' Income tax payable
 #' 
 #' @name income_tax
-#' @param income the personal assessable income
-#' @param fy.year the financial year in which the income was earned
-#' @param age the individual's age
-#' @param family_status For medicare and sapto purposes. Still in development.
+#' @param income The individual assessable income.
+#' @param fy.year The financial year in which the income was earned. Only tax years from 2000-01 to 2016-17 are available. 
+#' @param age The individual's age.
+#' @param family_status For medicare and SAPTO purposes.
 #' @param n_dependants An integer for the number of children of the taxpayer (for the purposes of the Medicare levy).
-#' @param return.mode use numeric (integer not yet implemented).
-#' @param sample_file (Not yet used) A sample file \code{data.table} for which the income tax payable is desired on each row.
-#' @param .dots.ATO A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files.
-#' @param allow.forecasts should dates beyond 2014-15 be permitted?
+#' @param return.mode The mode (numeric or integer) of the returned vector.
+#' @param .dots.ATO A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files. If \code{.dots.ATO} is a \code{data.table}, I recommend you enclose it with \code{copy()}.
+#' @param allow.forecasts should dates beyond 2016-17 be permitted? Currently, not permitted.
 #' @author Tim Cameron, Brendan Coates, Hugh Parsonage, William Young
 #' @details The function 'rolling' is inflexible by design. It is designed to guarantee the correct tax payable in a year.
+#' For years preceding the introduction of SAPTO, the maximum offset is assumed to apply to those above pensionable age. 
 #' @useDynLib grattan
 #' @importFrom Rcpp sourceCpp
 #' @importFrom magrittr %>%
@@ -22,12 +22,13 @@
 #' @return the total personal income tax payable
 #' @export income_tax
 
-income_tax <- function(income, fy.year, age = 42, family_status = "individual", n_dependants = 0L, sample_file, .dots.ATO = NULL, return.mode = "numeric", allow.forecasts = FALSE){
+income_tax <- function(income, fy.year, age = 42, family_status = "individual", n_dependants = 0L, .dots.ATO = NULL, return.mode = c("numeric", "integer"), allow.forecasts = FALSE){
   if (missing(fy.year)){
     stop("fy.year is missing, with no default")
   }
   
-  if (any(fy.year %notin% c("2002-03", "2003-04", "2004-05", "2005-06", "2006-07", "2007-08", 
+  if (any(fy.year %notin% c("2000-01", "2001-02", 
+                            "2002-03", "2003-04", "2004-05", "2005-06", "2006-07", "2007-08", 
                             "2008-09", "2009-10", "2010-11", "2011-12", "2012-13", "2013-14", 
                             "2014-15", "2015-16", "2016-17", "2017-18", "2018-19", "2019-20"))) {
     bad <- which(!is.fy(fy.year))
@@ -60,9 +61,19 @@ income_tax <- function(income, fy.year, age = 42, family_status = "individual", 
     
   }
   
-  rolling_income_tax(income = income, fy.year = fy.year, age = age, 
-                     family_status = family_status, n_dependants = n_dependants, 
-                     sample_file = sample_file, .dots.ATO = .dots.ATO, return.mode = return.mode)
+  out <- rolling_income_tax(income = income, fy.year = fy.year, age = age, 
+                            family_status = family_status, n_dependants = n_dependants, 
+                            .dots.ATO = .dots.ATO)
+  
+  return.mode <- match.arg(return.mode)
+  
+  switch(return.mode, 
+         "numeric" = {
+           return(out)
+         }, 
+         "integer" = {
+           return(as.integer(floor(out)))
+         })
 }
 
 
@@ -72,17 +83,10 @@ rolling_income_tax <- function(income,
                                age = 42, # answer to life, more importantly < 65, and so key to SAPTO, medicare
                                family_status = "individual",
                                n_dependants = 0L,
-                               sample_file,
-                               .dots.ATO = NULL, 
-                               return.mode = "numeric"){
+                               .dots.ATO = NULL){
   # CRAN NOTE avoidance
   fy_year <- NULL; marginal_rate <- NULL; lower_bracket <- NULL; tax_at <- NULL; n <- NULL; tax <- NULL; ordering <- NULL; max_lito <- NULL; min_bracket <- NULL; lito_taper <- NULL; sato <- NULL; taper <- NULL; rate <- NULL; max_offset <- NULL; upper_threshold <- NULL; taper_rate <- NULL; medicare_income <- NULL; lower_up_for_each_child <- NULL;
   
-  
-  
-  if (return.mode != "numeric"){
-    stop("return.mode must be set to numeric only. Future versions may allow differently.")
-  }
   # Assume everyone of pension age is eligible for sapto.
   sapto.eligible = age >= 65
   # Don't like vector recycling
@@ -92,26 +96,13 @@ rolling_income_tax <- function(income,
   
   input.lengths <- vapply(list(income, fy.year, age, family_status, n_dependants), FUN = length, FUN.VALUE = integer(1))
   max.length <- max(input.lengths)
-
-  # tax_table2 provides the raw tax tables, but also the amount
-  # of tax paid at each bracket, to make the rolling join 
-  # calculation later a one liner.
-  
-  tax_table2 <- 
-    tax_tbl %>%
-    dplyr::group_by(fy_year) %>%
-    dplyr::mutate(
-      tax_at = cumsum(data.table::shift(marginal_rate, type = "lag", fill = 0) * (lower_bracket - data.table::shift(lower_bracket, type = "lag", fill = 0))),
-      income = lower_bracket) %>%
-    dplyr::select(fy_year, income, lower_bracket, marginal_rate, tax_at) %>%
-    data.table::as.data.table(.) %>%
-    data.table::setkey(fy_year, income) 
   
   input <- 
     data.table::data.table(income = income, 
                            fy_year = fy.year) 
   
   input <- input[ ,ordering := 1:.N]
+  setkeyv(input, "fy_year")
   
   input.keyed <-
     # potentially expensive. Another way would be 
@@ -121,22 +112,20 @@ rolling_income_tax <- function(income,
     data.table::setkey(fy_year, income)
   
   tax_fun <- function(income, fy.year){
-    tax_table2[input.keyed, roll = Inf][,tax := tax_at + (income - lower_bracket) * marginal_rate][order(ordering)] %$%
-      tax
+    tax_table2[input.keyed, roll = Inf] %>%
+      .[,tax := tax_at + (income - lower_bracket) * marginal_rate] %>%
+      setorderv("ordering") %>%
+      .[["tax"]]
   }
   
   .lito <- function(income, fy.year){
-    merge(lito_tbl, 
-          input, 
-          by = "fy_year", 
-          # sort set to FALSE to avoid the key ruining the order
-          sort = FALSE, 
-          # right join because there may be no LITO
-          all.y = TRUE) %$%
-    {
-      pminV(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
-            max_lito)
-    }
+    # CRAN NOTE avoidance
+    lito <- NULL
+    lito_tbl[input] %>%
+      .[,lito := pminV(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
+                       max_lito)] %>%
+      setorderv("ordering") %>%
+      .[["lito"]]
   }
   
   for (j in which(vapply(.dots.ATO, FUN = is.double, logical(1)))){
@@ -190,11 +179,7 @@ rolling_income_tax <- function(income,
   # https://www.legislation.gov.au/Details/C2014A00048
   # input[["fy_year"]] ensures it matches the length of income if length(fy.year) == 1.
   # Also using dplyr::if_else for safety.
-  temp_budget_repair_levy. <- if_else(input[["fy_year"]] %in% c("2014-15", "2015-16", "2016-17"), 
-                                      pmaxC(0.02 * (income - 180e3), 0), 
-                                      0)
-  
-  
+  temp_budget_repair_levy. <- (input[["fy_year"]] %in% c("2014-15", "2015-16", "2016-17") & income > 180e3) * (0.02 * (income - 180e3))
   
   pmaxC(base_tax. - lito. - sapto., 
         0) + medicare_levy. + temp_budget_repair_levy.

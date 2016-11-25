@@ -14,6 +14,11 @@ test_that("Inverse single income matches.", {
               info = paste0("income: ", income, "\n", "fy.year: ", fy.year))
 })
 
+test_that("Infinites", {
+  expect_equal(inverse_income(Inf), Inf)
+  expect_equal(inverse_income(c(NA, 10e3, Inf)), c(NA, 54798, Inf))
+})
+
 test_that("Inverse income on zero", {
   expect_gt(income_tax(inverse_income(0, "2012-13", zero.tax.income = "maximum") + 1, "2012-13"), 0)
   expect_equal(inverse_income(0, "2014-15", zero.tax.income = 5), 5)

@@ -4,7 +4,7 @@
 #' @aliases fy.year yr2fy fy2yr fy2date date2fy
 #' @param yr_ending An integer representing a year.
 #' @param fy.yr A string suspected to be a financial year.
-#' @param date A string or date for which the financial year is desired.
+#' @param date A string or date for which the financial year is desired. Note that \code{yr2fy} does not check its argument is an integer.
 #' @return For \code{is.fy}, a logical, whether its argument is a financial year. For \code{fy.year}, \code{yr2fy}, and \code{date2fy}, the financial year. For the inverses, a numeric corresponding to the year.
 #' @examples
 #' is.fy("2012-13")

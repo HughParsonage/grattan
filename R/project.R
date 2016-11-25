@@ -7,12 +7,20 @@
 #' @param excl_vars A character vector of column names in \code{sample_file} that should not be inflated. Columns not present in the 2013-14 sample file are not inflated and nor are the columns \code{Ind}, \code{Gender}, \code{age_range}, \code{Occ_code}, \code{Partner_status}, \code{Region}, \code{Lodgment_method}, and \code{PHI_Ind}.
 #' @param forecast.dots A list containing parameters to be passed to \code{generic_inflator}.
 #' @param .recalculate.inflators Should \code{generic_inflator()} or \code{CG_inflator} be called to project the other variables? Adds time.
+#' @param .copyDT Should a \code{copy()} of \code{sample_file} be made? If set to FALSE, will update \code{sample_file}. 
 #' @return A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).
 #' @import data.table
 #' @export
 
-project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEIGHT = 50L, excl_vars, forecast.dots = list(estimator = "mean", pred_interval = 80), .recalculate.inflators = FALSE){
-  stopifnot(is.integer(h), h >= 0L, data.table::is.data.table(sample_file))
+project <- function(sample_file, 
+                    h = 0L, 
+                    fy.year.of.sample.file = "2013-14", 
+                    WEIGHT = 50L, 
+                    excl_vars, 
+                    forecast.dots = list(estimator = "mean", pred_interval = 80), 
+                    .recalculate.inflators = FALSE, 
+                    .copyDT = TRUE){
+  stopifnot(is.integer(h), h >= 0L, is.data.table(sample_file))
   
   sample_file[, "WEIGHT" := list(WEIGHT)]
   if (h == 0){
@@ -29,7 +37,9 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEI
     if (.recalculate.inflators){
       CG.inflator <- CG_inflator(1, from_fy = current.fy, to_fy = to.fy)
     } else {
-      CG.inflator <- cg_inflators_1314[fy_year == to.fy][["cg_inflator"]]
+      stopifnot("forecast.series" %in% names(cg_inflators_1314))
+      forecast.series <- NULL 
+      CG.inflator <- cg_inflators_1314[fy_year == to.fy & forecast.series == forecast.dots$estimator][["cg_inflator"]]
     }
     
     col.names <- names(sample_file)
@@ -64,7 +74,25 @@ project <- function(sample_file, h = 0L, fy.year.of.sample.file = "2013-14", WEI
     
     CGTy.cols <- c("Net_CG_amt", "Tot_CY_CG_amt")
     
-    alien.cols <- col.names[!col.names %in% names(taxstats::sample_file_1314)]
+    # names(taxstats::sample_file_1314)
+    alien.cols <- col.names[!col.names %in% c("Ind", "Gender", "age_range", "Occ_code", "Partner_status", 
+                                              "Region", "Lodgment_method", "PHI_Ind", "Sw_amt", "Alow_ben_amt", 
+                                              "ETP_txbl_amt", "Grs_int_amt", "Aust_govt_pnsn_allw_amt", "Unfranked_Div_amt", 
+                                              "Frk_Div_amt", "Dividends_franking_cr_amt", "Net_rent_amt", "Gross_rent_amt", 
+                                              "Other_rent_ded_amt", "Rent_int_ded_amt", "Rent_cap_wks_amt", 
+                                              "Net_farm_management_amt", "Net_PP_BI_amt", "Net_NPP_BI_amt", 
+                                              "Total_PP_BI_amt", "Total_NPP_BI_amt", "Total_PP_BE_amt", "Total_NPP_BE_amt", 
+                                              "Net_CG_amt", "Tot_CY_CG_amt", "Net_PT_PP_dsn", "Net_PT_NPP_dsn", 
+                                              "Taxed_othr_pnsn_amt", "Untaxed_othr_pnsn_amt", "Other_foreign_inc_amt", 
+                                              "Other_inc_amt", "Tot_inc_amt", "WRE_car_amt", "WRE_trvl_amt", 
+                                              "WRE_uniform_amt", "WRE_self_amt", "WRE_other_amt", "Div_Ded_amt", 
+                                              "Intrst_Ded_amt", "Gift_amt", "Non_emp_spr_amt", "Cost_tax_affairs_amt", 
+                                              "Other_Ded_amt", "Tot_ded_amt", "PP_loss_claimed", "NPP_loss_claimed", 
+                                              "Rep_frng_ben_amt", "Med_Exp_TO_amt", "Asbl_forgn_source_incm_amt", 
+                                              "Spouse_adjusted_taxable_inc", "Net_fincl_invstmt_lss_amt", "Rptbl_Empr_spr_cont_amt", 
+                                              "Cr_PAYG_ITI_amt", "TFN_amts_wheld_gr_intst_amt", "TFN_amts_wheld_divs_amt", 
+                                              "Hrs_to_prepare_BPI_cnt", "Taxable_Income", "Help_debt", "MCS_Emplr_Contr", 
+                                              "MCS_Prsnl_Contr", "MCS_Othr_Contr", "MCS_Ttl_Acnt_Bal")]
     Not.Inflated <- c("Ind", 
                       "Gender",
                       "age_range", 

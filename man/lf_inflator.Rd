@@ -4,15 +4,19 @@
 \alias{lf_inflator}
 \alias{lf_inflator_fy}
 \title{Labour force inflators}
+\source{
+ABS Cat 6202.0 \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocument}.
+}
 \usage{
 lf_inflator_fy(labour_force = 1, from_fy = "2012-13", to_fy,
   useABSConnection = FALSE, allow.projection = TRUE, use.month = 1L,
   forecast.series = c("mean", "upper", "lower"), forecast.level = 95)
 
-lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date)
+lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date,
+  useABSConnection = FALSE)
 }
 \arguments{
-\item{labour_force}{a numeric vector}
+\item{labour_force}{A numeric vector.}
 
 \item{from_fy}{Financial year of \code{labour_force}.}
 
@@ -30,18 +34,24 @@ lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date)
 
 \item{from_date}{The date of \code{labour_force}.}
 
-\item{to_date}{dates as a character vector}
+\item{to_date}{Dates as a character vector.}
 }
 \value{
-the relative labour force between to_date and for_date, multiplied by labour_force.
+The relative labour force between \code{to_date} and \code{for_date} or \code{to_fy} and \code{from_fy}, multiplied by \code{labour_force}.
 }
 \description{
 Labour force inflators
+}
+\details{
+\code{lf_inflator} is used on dates. The underlying data series is available every month.
 }
 \examples{
 lf_inflator_fy(labour_force = 1, from_fy = "2012-13", to_fy = "2013-14")
 \dontrun{
 lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date = "2014-06-30")
 }
+}
+\author{
+Hugh Parsonage and Tim Cameron
 }
 
