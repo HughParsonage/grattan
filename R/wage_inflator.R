@@ -51,7 +51,7 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
     .[["obsQtr"]] %>%
     last 
   
-  if (any(from_fy < last.quarter.in.series)){
+  if (any(from_fy > yr2fy(last.full.yr.in.series))){
     warning("Projection of from_fy terms not yet supported.")
   }
   
