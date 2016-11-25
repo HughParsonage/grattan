@@ -11,6 +11,7 @@
 #' @param allow.forecasts should dates beyond 2016-17 be permitted? Currently, not permitted.
 #' @author Tim Cameron, Brendan Coates, Hugh Parsonage, William Young
 #' @details The function 'rolling' is inflexible by design. It is designed to guarantee the correct tax payable in a year.
+#' For years preceding the introduction of SAPTO, the maximum offset is assumed to apply to those above pensionable age. 
 #' @useDynLib grattan
 #' @importFrom Rcpp sourceCpp
 #' @importFrom magrittr %>%

@@ -9,8 +9,11 @@ library(taxstats)
 library(grattan)
 library(readr)
 library(readxl)
+if (packageVersion("data.table") < package_version("1.9.8")){
+  fwrite <- function(..., sep = "\t") readr::write_tsv(...)
+}
 
-renew = T
+renew = F
 
 tax_tbl <- 
   lapply(yr2fy(1990:2017), 
@@ -70,6 +73,10 @@ medicare_tbl %>%
 sapto_tbl <- 
   readxl::read_excel("./data-raw/SAPTO-rates.xlsx", sheet = 1) %>% 
   data.table::as.data.table(.) %>% 
+  # Choose maximum
+  group_by(fy_year, family_status) %>%
+  filter(max_offset == max(max_offset)) %>%
+  as.data.table %>%
   data.table::setkey(fy_year, family_status) %>% 
   # avoid cartesian joins in income_tax
   unique
