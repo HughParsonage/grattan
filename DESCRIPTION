@@ -8,8 +8,8 @@ Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.p
               person("Brendan", "Coates", role = "aut"), 
               person("William", "Young", role = "aut"), 
               person("Ittima", "Cherastidtham", role = "dtc"))
-Maintainer: Who to complain to <hugh.parsonage@grattaninstitute.edu.au>
-Description: The original goal of this package was to simply hold the colours of the Grattan palette. 
+Maintainer: Hugh Parsonage <hugh.parsonage@grattaninstitute.edu.au>
+Description: A series of functions focused on costing and evaluating Australian tax policy in support of the Grattan Institute's Australian Perspectives program. 
 Depends: R (>= 2.10)
 License: GPL-2
 Imports:
@@ -35,6 +35,8 @@ Suggests: testthat,
     broom, 
     knitr,
     survey, 
-    viridis
+    viridis,
+    ggrepel
+Additional_repositories: https://github.com/HughParsonage/taxstats
 LazyData: true
 VignetteBuilder: knitr
