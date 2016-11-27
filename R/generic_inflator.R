@@ -41,10 +41,10 @@ generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzer
   }
   
   if (!nonzero){
-    mean_of_each_var <- select_(mean_of_each_taxstats_var, .dots = c("fy.year", vars))
+    mean_of_each_var <- dplyr::select_(mean_of_each_taxstats_var, .dots = c("fy.year", vars))
   } else {
     # Forecast only on the mean of nonzero values
-    mean_of_each_var <- select_(meanPositive_of_each_taxstats_var, .dots = c("fy.year", vars))
+    mean_of_each_var <- dplyr::select_(meanPositive_of_each_taxstats_var, .dots = c("fy.year", vars))
   }
   
   forecaster <- function(x){
