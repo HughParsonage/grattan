@@ -17,9 +17,9 @@ cpi_inflator_quarters <- function(from_nominal_price, from_qtr, to_qtr, adjustme
   to_qtr <- gsub("([0-9]{4}).?(Q[1-4])", "\\1-\\2", to_qtr)
   
   input <-
-    data.table::data.table(from_nominal_price = from_nominal_price,
-                           from_qtr = from_qtr,
-                           to_qtr = to_qtr)
+    data.table(from_nominal_price = from_nominal_price,
+               from_qtr = from_qtr,
+               to_qtr = to_qtr)
   
   if (useABSConnection){
     # Importing the cpi data
@@ -47,22 +47,15 @@ cpi_inflator_quarters <- function(from_nominal_price, from_qtr, to_qtr, adjustme
            "trimmed" = cpi.indices <- cpi_trimmed)
   }
   
-  hugh_frac <- function(.data, front, over, under, new_col_name){
-    # http://www.r-bloggers.com/using-mutate-from-dplyr-inside-a-function-getting-around-non-standard-evaluation/
-    mutate_call <- lazyeval::interp(~r*a/b, a = as.name(over), b = as.name(under), r = as.name(front))
-    .data %>%
-      dplyr::mutate_(.dots = stats::setNames(list(mutate_call), new_col_name))
-  }
-  
   output <- 
     input %>%
     merge(cpi.indices, by.x = "from_qtr", by.y = "obsTime", sort = FALSE,
           all.x = TRUE) %>%
-    data.table::setnames("obsValue", "from_index") %>%
+    setnames("obsValue", "from_index") %>%
     merge(cpi.indices, by.x = "to_qtr", by.y = "obsTime", sort = FALSE, 
           all.x = TRUE) %>%
-    data.table::setnames("obsValue", "to_index") %>%
-    hugh_frac("from_nominal_price", "to_index", "from_index", "out")
+    setnames("obsValue", "to_index") %>%
+    inflator_frac("from_nominal_price", "to_index", "from_index", "out")
   
   output[["out"]]
 }

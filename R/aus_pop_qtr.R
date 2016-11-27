@@ -15,7 +15,7 @@ aus_pop_qtr <- function(date_quarter,
   obsTime <- NULL
   
   pop_data <- 
-    dplyr::select_(data.table::as.data.table(as.data.frame(rsdmx::readSDMX("http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/ERP_QUARTERLY/1.0.3.TT.Q/ABS?startTime=1981"))), 
+    dplyr::select_(as.data.table(as.data.frame(rsdmx::readSDMX("http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/ERP_QUARTERLY/1.0.3.TT.Q/ABS?startTime=1981"))), 
                   .dots = c("obsTime", "obsValue"))
   
   

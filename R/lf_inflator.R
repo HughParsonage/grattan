@@ -34,7 +34,7 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     lf.url.trend <- 
       "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1981"
     lf <- rsdmx::readSDMX(lf.url.trend)
-    lf.indices <- data.table::as.data.table(as.data.frame(lf))
+    lf.indices <- as.data.table(as.data.frame(lf))
   } else {
     lf.indices <- lf_trend
   }
@@ -93,7 +93,7 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
                  obsDate  = seq.Date(last.date.in.series, to_date, by = "month")[-1]) %>%
       .[, obsTime := sprintf("%s-%02d", year(obsDate), month(obsDate))]
 
-    lf.indices <- data.table::rbindlist(list(lf.indices, lf.indices.new), use.names = TRUE, fill = TRUE)
+    lf.indices <- rbindlist(list(lf.indices, lf.indices.new), use.names = TRUE, fill = TRUE)
   }
   
   stopifnot(use.month %in% 1:12)
@@ -105,9 +105,9 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
   
   
   input <-
-    data.table::data.table(labour_force = labour_force,
-                           from_fy = from_fy,
-                           to_fy = to_fy)
+    data.table(labour_force = labour_force,
+               from_fy = from_fy,
+               to_fy = to_fy)
   
   output <- 
     input %>%
@@ -147,28 +147,23 @@ lf_inflator <- function(labour_force = 1, from_date = "2013-06-30", to_date, use
   
   
   date_connector <- 
-    data.table::data.table(
-      altkey = 1:length(from_date),
-      from_date = as.Date(from_date),
-      to_date = as.Date(to_date)
-    )
+    data.table(altkey = seq_along(from_date),
+               from_date = as.Date(from_date),
+               to_date = as.Date(to_date))
   
-  LF <- data.table::data.table(
-    obsTimeDate = lf$obsTimeDate,
-    obsValue = lf$obsValue
-  )
-  data.table::setkeyv(LF, "obsTimeDate")
+  LF <- data.table(obsTimeDate = lf$obsTimeDate,
+                   obsValue = lf$obsValue)
+  setkeyv(LF, "obsTimeDate")
   
-  data.table::setkey(date_connector, from_date)
+  setkey(date_connector, from_date)
   from_DT <- LF[date_connector, roll=Inf]
-  data.table::setnames(from_DT, c("obsTimeDate", "obsValue"), c("from_Date", "from_LF"))
+  setnames(from_DT, c("obsTimeDate", "obsValue"), c("from_Date", "from_LF"))
   
-  data.table::setkey(date_connector, to_date)
+  setkey(date_connector, to_date)
   to_DT <- LF[date_connector, roll=Inf]
-  data.table::setnames(to_DT, c("obsTimeDate", "obsValue"), c("to_Date", "to_LF"))
+  setnames(to_DT, c("obsTimeDate", "obsValue"), c("to_Date", "to_LF"))
   
   merged <- merge(from_DT, to_DT, by = "altkey")
-  lf.ratio <- labour_force * merged$to_LF / merged$from_LF
-  return(lf.ratio)
+  labour_force * merged$to_LF / merged$from_LF
 }
 

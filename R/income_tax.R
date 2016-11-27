@@ -43,7 +43,7 @@ income_tax <- function(income, fy.year, age = 42, family_status = "individual", 
   
   if (allow.forecasts || any(fy.year %notin% tax_tbl$fy_year)){
     stop("rolling income tax not intended for future years or years before 2003-04. ",
-         "Consider old_income_tax() or new_income_tax().")
+         "Consider new_income_tax().")
   }
   
   if (any(income < 0)){
@@ -98,8 +98,8 @@ rolling_income_tax <- function(income,
   max.length <- max(input.lengths)
   
   input <- 
-    data.table::data.table(income = income, 
-                           fy_year = fy.year) 
+    data.table(income = income, 
+               fy_year = fy.year) 
   
   input <- input[ ,ordering := 1:.N]
   setkeyv(input, "fy_year")
@@ -108,8 +108,8 @@ rolling_income_tax <- function(income,
     # potentially expensive. Another way would be 
     # to add an argument such as data.table.copy = FALSE
     # to allow different way to preserve the order
-    data.table::copy(input) %>%
-    data.table::setkey(fy_year, income)
+    copy(input) %>%
+    setkey(fy_year, income)
   
   tax_fun <- function(income, fy.year){
     tax_table2[input.keyed, roll = Inf] %>%
@@ -178,7 +178,6 @@ rolling_income_tax <- function(income,
   
   # https://www.legislation.gov.au/Details/C2014A00048
   # input[["fy_year"]] ensures it matches the length of income if length(fy.year) == 1.
-  # Also using dplyr::if_else for safety.
   temp_budget_repair_levy. <- (input[["fy_year"]] %in% c("2014-15", "2015-16", "2016-17") & income > 180e3) * (0.02 * (income - 180e3))
   
   pmaxC(base_tax. - lito. - sapto., 

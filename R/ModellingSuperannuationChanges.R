@@ -92,8 +92,8 @@ model_new_caps_and_div293 <- function(.sample.file,
   sample_file[, prv_revenue := income_tax(old_Taxable_Income, fy.year) + old_div293_tax]
   sample_file <- sample_file[, c("Ind", "prv_revenue", "old_concessional_contributions", "old_div293_tax", "div293_income"), with = FALSE]
   sample_file %>%
-    setnames("div293_income", "old_div293_income")
-  data.table::setkeyv(sample_file, "Ind")
+    setnames("div293_income", "old_div293_income") %>%
+    setkeyv("Ind")
   
   new_sample_file <- apply_super_caps_and_div293(.sample.file, 
                                                  colname_concessional = "new_concessional_contributions",
@@ -121,7 +121,7 @@ model_new_caps_and_div293 <- function(.sample.file,
                                                  copyDT = TRUE)
   
   new_sample_file[, new_revenue := income_tax(new_Taxable_Income, fy.year) + new_div293_tax]
-  data.table::setkeyv(new_sample_file, "Ind")
+  setkeyv(new_sample_file, "Ind")
   sample_file[new_sample_file]
 }
 

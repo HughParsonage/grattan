@@ -99,7 +99,7 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
                  obsValue = forecasts) %>%
       .[, obsYear := last(wage.indices[["obsYear"]]) + cumsum(obsQtr == 1L)]
       
-    wage.indices <- data.table::rbindlist(list(wage.indices, wage.indices.new), use.names = TRUE, fill = TRUE)
+    wage.indices <- rbindlist(list(wage.indices, wage.indices.new), use.names = TRUE, fill = TRUE)
   }
   
   wage.indices %<>%
@@ -107,9 +107,9 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
     .[, fy_year := yr2fy(obsYear)]
   
   input <-
-    data.table::data.table(wage = wage,
-                           from_fy = from_fy,
-                           to_fy = to_fy)
+    data.table(wage = wage,
+               from_fy = from_fy,
+               to_fy = to_fy)
   
   output <- 
     input %>%

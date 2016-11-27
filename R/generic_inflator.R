@@ -60,8 +60,8 @@ generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzer
   
   point_forecasts_by_var <- 
     mean_of_each_var %>%
-    data.table::as.data.table(.) %>%
-    data.table::melt.data.table(id.vars = c("fy.year")) %>% 
+    as.data.table(.) %>%
+    melt.data.table(id.vars = c("fy.year")) %>% 
     base::split(.$variable) %>%
     purrr::map(~forecaster(.$value)) %>%
     purrr::map(forecast_ahead_h) %>%

@@ -50,12 +50,12 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
   }
   
   cpi.indices <- 
-    data.table::as.data.table(cpi) %>%
+    as.data.table(cpi) %>%
     dplyr::filter(grepl("Q1", obsTime)) %>%
     dplyr::mutate(fy_year = yr2fy(sub("-Q1", "", obsTime, fixed = TRUE)))
   
   input <-
-    data.table::data.table(from_nominal_price = from_nominal_price,
+    data.table(from_nominal_price = from_nominal_price,
                            from_fy = from_fy,
                            to_fy = to_fy)
   
@@ -70,11 +70,11 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
     years.beyond <- max(fy2yr(to_fy)) - max(fy2yr(cpi.indices$fy_year))
     cpi_index_forecast <- cpi.indices %$% gforecast(obsValue, h = years.beyond) %$% as.numeric(mean)
     cpi.indices.new <- 
-      data.table::data.table(fy_year = yr2fy(seq(max(fy2yr(cpi.indices$fy_year)) + 1,
+      data.table(fy_year = yr2fy(seq(max(fy2yr(cpi.indices$fy_year)) + 1,
                                                  max(fy2yr(to_fy)),
                                                  by = 1L)),
                              obsValue = cpi_index_forecast)
-    cpi.indices <- data.table::rbindlist(list(cpi.indices, cpi.indices.new), use.names = TRUE, fill = TRUE)
+    cpi.indices <- rbindlist(list(cpi.indices, cpi.indices.new), use.names = TRUE, fill = TRUE)
   }
   
   output <- 
@@ -84,13 +84,13 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
           by.y = "fy_year", 
           sort = FALSE,
           all.x = TRUE) %>%
-    data.table::setnames("obsValue", "from_index") %>%
+    setnames("obsValue", "from_index") %>%
     merge(cpi.indices, 
           by.x = "to_fy", 
           by.y = "fy_year", 
           sort = FALSE, 
           all.x = TRUE) %>%
-    data.table::setnames("obsValue", "to_index") %>%
+    setnames("obsValue", "to_index") %>%
     hugh_frac("from_nominal_price", "to_index", "from_index", "out")
   
   return(output$out)

@@ -25,16 +25,20 @@ student_repayment <- function(repayment_income, fy.year, debt){
     }
   }
   input <- 
-    data.table::data.table(repayment_income = repayment_income, 
+    data.table(repayment_income = repayment_income, 
                            # for join.
                            repayment_threshold = repayment_income, 
                            fy_year = fy.year, debt = debt) %>%
     # to preserve ordering
     .[, ordering := seq.int(1, .N, by = 1L)] %>%
-    data.table::setkeyv(c("fy_year", "repayment_threshold"))
+    setkeyv(c("fy_year", "repayment_threshold"))
   
   # repayment rate applies to the entire repayment income (not that > threshold, as it is for general tax).
   # If the person's repayment rate extinguishes their debt, they only have to pay their debt back. This 
-  # also ensure that those with 0 debt do not have any liability
-  hecs_tbl[input, roll = Inf][ ,liability := pminV(repayment_rate * repayment_income, debt)][order(ordering)]$liability
+  # also obviated the need to ensure that those with 0 debt do not have any liability.
+  hecs_tbl %>%
+    .[input, roll = Inf] %>%
+    .[ ,liability := pminV(repayment_rate * repayment_income, debt)] %>%
+    .[order(ordering)] %>%
+    .[["liability"]]
 }

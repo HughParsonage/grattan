@@ -62,10 +62,10 @@ apply_super_caps_and_div293 <- function(.sample.file,
     non_concessional_contributions <- Taxable_income_for_ECT <- NULL
   
   if (copyDT){
-    .sample.file <- data.table::copy(.sample.file)
+    .sample.file <- copy(.sample.file)
   }
   
-  if (!data.table::is.data.table(.sample.file)){
+  if (!is.data.table(.sample.file)){
     stop(".sample.file must be a data.table")
   }
   
@@ -198,13 +198,13 @@ apply_super_caps_and_div293 <- function(.sample.file,
   .sample.file[ , Taxable_income_for_ECT := Taxable_Income + excess_concessional_contributions]
   
   
-  data.table::setnames(.sample.file, "div293_tax", colname_div293_tax)
-  data.table::setnames(.sample.file, "concessional_contributions", colname_concessional)
+  setnames(.sample.file, "div293_tax", colname_div293_tax)
+  setnames(.sample.file, "concessional_contributions", colname_concessional)
   if (!exists("orig_colname_new_Taxable_Income")){
-    data.table::setnames(.sample.file, "Taxable_income_for_ECT", colname_new_Taxable_Income)
+    setnames(.sample.file, "Taxable_income_for_ECT", colname_new_Taxable_Income)
   } else {
     .sample.file[ , Taxable_Income := NULL]
-    data.table::setnames(.sample.file, "Taxable_income_for_ECT", orig_colname_new_Taxable_Income)
+    setnames(.sample.file, "Taxable_income_for_ECT", orig_colname_new_Taxable_Income)
   }
   
   if (drop_helpers){

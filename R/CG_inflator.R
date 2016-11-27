@@ -15,7 +15,7 @@ CG_population_inflator <- function(x = 1, from_fy, to_fy, forecast.series = "mea
   last_year <- fy2yr(last_fy)
   
   input <- 
-    data.table::data.table(x = x, from_fy = from_fy, to_fy = to_fy)
+    data.table(x = x, from_fy = from_fy, to_fy = to_fy)
   
   n_cg_history <- 
     cg_inflators_1314 %>%
@@ -30,9 +30,9 @@ CG_population_inflator <- function(x = 1, from_fy, to_fy, forecast.series = "mea
   
   input %>%
     merge(out_tbl, by.x = "from_fy", by.y = "fy_year", all.x = TRUE, sort = FALSE) %>%
-    data.table::setnames("n_CG", "n_CG_from") %>% 
+    setnames("n_CG", "n_CG_from") %>% 
     merge(out_tbl, by.x = "to_fy", by.y = "fy_year", all.x = TRUE, sort = FALSE) %>% 
-    data.table::setnames("n_CG", "n_CG_to") %$%
+    setnames("n_CG", "n_CG_to") %$%
     {
       x * n_CG_to / n_CG_from
     }
@@ -50,7 +50,7 @@ CG_inflator <- function(x = 1, from_fy, to_fy, forecast.series = "mean"){
   # CRAN Note avoidance
   ordering <- NULL
   input <- 
-    data.table::data.table(x = x, from_fy = from_fy, to_fy = to_fy) %>% 
+    data.table(x = x, from_fy = from_fy, to_fy = to_fy) %>% 
     .[, ordering := 1:.N]
 
   nse_forecast_series <- forecast.series
@@ -62,9 +62,9 @@ CG_inflator <- function(x = 1, from_fy, to_fy, forecast.series = "mean"){
   raw_out <- 
     input %>%
     merge(cg_inflators_tbl, by.y = "fy_year", by.x = "from_fy", all.x = TRUE) %>%
-    data.table::setnames("zero_discount_Net_CG_total", "from_cg") %>% 
+    setnames("zero_discount_Net_CG_total", "from_cg") %>% 
     merge(cg_inflators_tbl, by.y = "fy_year", by.x = "to_fy", all.x = TRUE) %>%
-    data.table::setnames("zero_discount_Net_CG_total", "to_cg") %>%
+    setnames("zero_discount_Net_CG_total", "to_cg") %>%
     setorderv("ordering") %$%
     {
       x * to_cg / from_cg

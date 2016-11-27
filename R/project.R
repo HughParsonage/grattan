@@ -33,7 +33,6 @@ project <- function(sample_file,
     wage.inflator <- wage_inflator(1, from_fy = current.fy, to_fy = to.fy)
     lf.inflator <- lf_inflator_fy(from_fy = current.fy, to_fy = to.fy)
     cpi.inflator <- cpi_inflator(1, from_fy = current.fy, to_fy = to.fy)
-    # CGT.inflator <- CGT_inflator(1, from_fy = current.fy, to_fy = to.fy)
     if (.recalculate.inflators){
       CG.inflator <- CG_inflator(1, from_fy = current.fy, to_fy = to.fy)
     } else {
@@ -118,14 +117,14 @@ project <- function(sample_file,
                          estimator = forecast.dots$estimator, pred_interval = forecast.dots$pred_interval)
     } else {
       generic.inflators <- dplyr::filter(generic_inflators, fy_year == to.fy)
-      generic.inflators <- data.table::as.data.table(generic.inflators)
+      generic.inflators <- as.data.table(generic.inflators)
     }
     
     ## Inflate:
     # make numeric to avoid overflow
     numeric.cols <- names(sample_file)[vapply(sample_file, is.numeric, TRUE)]
     for (j in which(col.names %in% numeric.cols))
-      data.table::set(sample_file, j = j, value = as.numeric(sample_file[[j]]))
+      set(sample_file, j = j, value = as.numeric(sample_file[[j]]))
     
     
     # Differential uprating:
@@ -133,27 +132,27 @@ project <- function(sample_file,
       set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy))
     
     for (j in which(col.names %in% wagey.cols))
-      data.table::set(sample_file, j = j, value = wage.inflator * sample_file[[j]])
+      set(sample_file, j = j, value = wage.inflator * sample_file[[j]])
     
     for (j in which(col.names %in% lfy.cols))
-      data.table::set(sample_file, j = j, value = lf.inflator * sample_file[[j]])
+      set(sample_file, j = j, value = lf.inflator * sample_file[[j]])
     
     for (j in which(col.names %in% cpiy.cols))
-      data.table::set(sample_file, j = j, value = cpi.inflator * sample_file[[j]])
+      set(sample_file, j = j, value = cpi.inflator * sample_file[[j]])
     
     for (j in which(col.names %in% CGTy.cols))
-      data.table::set(sample_file, j = j, value = CG.inflator * sample_file[[j]])
+      set(sample_file, j = j, value = CG.inflator * sample_file[[j]])
     
     for (j in which(col.names %in% generic.cols)){
       stopifnot("variable" %in% names(generic.inflators))  ## super safe
       nom <- col.names[j]
-      data.table::set(sample_file, 
-                      j = j, 
-                      value = generic.inflators[variable == nom]$inflator * sample_file[[j]])
+      set(sample_file, 
+          j = j, 
+          value = generic.inflators[variable == nom]$inflator * sample_file[[j]])
     }
     
     for (j in which(col.names %in% super.bal.col)){
-      data.table::set(sample_file, j = j, value = (1.05 ^ h) * sample_file[[j]])
+      set(sample_file, j = j, value = (1.05 ^ h) * sample_file[[j]])
     }
     
     sample_file %>%
