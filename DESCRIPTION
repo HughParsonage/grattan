@@ -34,6 +34,7 @@ Suggests: testthat,
     scales, 
     broom, 
     knitr,
-    survey
+    survey, 
+    viridis
 LazyData: true
 VignetteBuilder: knitr
