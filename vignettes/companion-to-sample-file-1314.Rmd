@@ -1,0 +1,243 @@
+---
+title: "Companion to 2013-14 sample file"
+author: "Hugh Parsonage"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{companion-to-sample-file-1314}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r knitrOpts}
+options("scipen" = 99)
+library(knitr)
+opts_chunk$set(fig.width = 9, fig.height = 7)
+```
+
+```{r}
+FY.YEAR <- "2013-14"
+```
+
+```{r loadPackages}
+library(data.table)
+library(taxstats)
+library(grattan)
+library(dtplyr)
+library(dplyr)
+library(ggplot2)
+library(scales)
+library(magrittr)
+library(viridis)
+```
+
+```{r grattan_dollar}
+grattan_dollar <- function (x, digits = 0) {
+  #
+  nsmall <- digits
+  commaz <- format(abs(x), nsmall = nsmall, trim = TRUE, big.mark = ",", 
+                   scientific = FALSE, digits = 1L)
+  
+  if_else(x < 0, 
+          paste0("\U2212","$", commaz),
+          paste0("$", commaz))
+}
+```
+
+```{r load-sample-file}
+sample_file <- sample_files_all[fy.year == FY.YEAR]
+sample_file <- merge(sample_file, age_range_decoder, by = "age_range")
+PREV.FY.YEAR <- yr2fy(fy2yr(FY.YEAR) - 1)
+sample_file_prev <- sample_files_all[fy.year == PREV.FY.YEAR]
+sample_file_prev <- merge(sample_file_prev, age_range_decoder, by = "age_range")
+```
+
+```{r impute-ages}
+set.seed(48031)
+sample_file %<>%
+  group_by(age_range_description) %>%
+  mutate(min_age = ifelse(grepl("to", age_range_description), 
+                          as.numeric(stringr::str_extract(age_range_description, "^[0-9]{2}")), 
+                          ifelse(grepl("70", age_range_description),
+                                 70, 
+                                 15)),
+         max_age = min_age + 5, 
+         age_imp = runif(n(), min_age, max_age)) %>%
+  select(-min_age, -max_age)
+```
+
+```{r tax-bracket}
+sample_file %<>%
+  mutate(Tax_Bracket = cut(Taxable_Income, 
+                           breaks = c(-Inf, 18200, 37e3, 80e3, 180e3, Inf),
+                           include.lowest = TRUE, 
+                           labels = c("$0-$18,200", 
+                                      "$18,201-$37,000", 
+                                      "37,001-$80,000", 
+                                      "$80,001-$180,000", 
+                                      "$180,000+")))
+```
+
+```{r texNum}
+texNum <- function(number, sig.figs = 3L, dollar = FALSE, pre.phrase = NULL, .suffix = NULL){
+  orig.number <- number
+  stopifnot(is.numeric(number), length(number) == 1L)
+  is.negative <- number < 0
+  number <- abs(number)
+  if (number == 0){
+    warning("Returning 0")
+    return(0)
+  } else {
+    if (is.null(.suffix)){
+    n.digits <- ceiling(log10(number))
+    
+    suffix <- NULL
+    suffix_val <- 1
+    
+    if (n.digits < sig.figs){
+      prefix <- signif(x = number, digits = sig.figs)
+    } else {
+      
+      if (n.digits <= 6) {
+        prefix_val <- round(number, sig.figs - n.digits - 1)
+        prefix <- prettyNum(prefix_val, big.mark = ",", scientific = FALSE)
+      } else {
+        # Want to show only the number / 10^(multiple of 3) then the suffix multiplier
+        suffix_val <- 10 ^ (3 * ((n.digits %/% 3)))
+        prefix_val <- signif(number/suffix_val, digits = sig.figs)
+        prefix <- prefix_val
+        
+        if (suffix_val <= 10^12){
+          switch(log10(suffix_val) / 3 - 1,
+                 suffix <- "~million", 
+                 suffix <- "~billion", 
+                 suffix <- "~trillion")
+        } else {
+          prefix <- signif(number / 10^12, digits = sig.figs)
+          suffix <- "~trillion"
+        }
+      }
+    }
+    } else {
+      stopifnot(.suffix %in% c("million", "billion", "trillion"))
+      switch(.suffix, 
+             "million" = {
+              prefix <- signif(number / 10^6, digits = sig.figs)
+              suffix <- "~million"
+              suffix_val <- 10^6
+             }, 
+             "billion" = {
+               prefix <- signif(number / 10^9, digits = sig.figs)
+               suffix <- "~billion"
+               suffix_val <- 10^9
+             }, 
+             "trillion" = {
+               prefix <- signif(number / 10^12, digits = sig.figs)
+               suffix <- "~trillion"
+               suffix_val <- 10^12
+             })
+      prefix_val <- prefix
+    }
+    
+    if (dollar){
+      out <- paste0("\\$", prefix, suffix)
+    } else {
+      out <- paste0(prefix, suffix)
+    }
+    
+    if (is.negative){
+      # General LaTeX
+      out <- paste0("\\(-\\)", out)
+    }
+    # is the displayed number larger than the original?
+    if (!is.null(pre.phrase)){
+      out_larger <- prefix_val * suffix_val > orig.number
+      
+        if (out_larger) {
+          out <- paste(pre.phrase[1], out, sep = if(grepl("~$", pre.phrase[1])) "" else " ")
+        } else {
+          if (!isTRUE(all.equal(prefix_val * suffix_val, orig.number, tolerance = .Machine$double.eps)))
+            out <- paste(pre.phrase[2], out, sep = if(grepl("~$", pre.phrase[2])) "" else " ")
+        }
+      
+    }
+    return(out)
+  }
+}
+```
+
+There were `r texNum(sum(sample_file$WEIGHT), sig.figs = 3L)` taxpayers in `r FY.YEAR` in Australia. Of those, `r texNum(sum(sample_file[Taxable_Income == 0]$WEIGHT))` had zero taxable income (or a taxable loss). (... and so these ''taxpayers'' naturally paid no tax. Nor did the `r texNum(sum(sample_file[Taxable_Income < 18200]$WEIGHT), sig.figs = 2)` individuals below the tax-free threshold. For this report, a *taxpayer* is anyone who lodged a tax return, regardless of their tax liability. 
+
+```{r taxable-income-quantiles}
+tx_inc_q <- function(q){
+  quantile(sample_file$Taxable_Income, probs = q)
+}
+
+my_labs <- grattan_dollar(tx_inc_q((0:10)/10))
+my_labs[seq(2, 10, 2)] <- paste0("\n", my_labs[seq(2, 10, 2)])
+
+dens <- density(sample_file[Taxable_Income < tx_inc_q(0.95)]$Taxable_Income)
+DF <- with(dens, data.frame(x, y))
+
+sample_file %>%
+  mutate(Taxable_Income_decile = ntile(Taxable_Income, 10)) %>%
+  filter(between(Taxable_Income, 0, tx_inc_q(0.95))) %>%
+  ggplot(aes(x = Taxable_Income)) + 
+  geom_density() + 
+  scale_fill_viridis(discrete = TRUE) + 
+  scale_x_continuous("Taxable Income deciles", 
+                     labels = c(my_labs, grattan_dollar(tx_inc_q(0.95))),
+                     # limits = c(0, tx_inc_q(0.95)),
+                     breaks = c(tx_inc_q((0:10)/10), tx_inc_q(0.95))) + 
+  scale_y_continuous(expand = c(0,0)) +
+  theme(legend.position = "none", 
+        axis.line.y = element_blank(), 
+        axis.text.y = element_blank(), 
+        axis.title.y = element_blank())
+```
+
+```{r taxable-income-quantiles-filled}
+DF %>% 
+  mutate(Taxable_Income_decile = cut(x, 
+                                     breaks = quantile(sample_file$Taxable_Income,
+                                                       probs = c(0:10)/10), 
+                                     right = TRUE,
+                                     include.lowest = TRUE)) %>%
+  filter(between(x, -1, tx_inc_q(0.95) * 1.05)) %>%
+  {
+    ggplot(., aes(x = x, y = y)) + 
+      geom_area(color = "black", size = 1.45) +
+      geom_area(aes(x = x, y = y, 
+                    group = Taxable_Income_decile, 
+                    fill = factor(Taxable_Income_decile),
+                    color = factor(Taxable_Income_decile))) + 
+      scale_color_viridis(discrete = TRUE) + 
+      scale_fill_viridis(discrete = TRUE) + 
+      scale_x_continuous("Taxable Income deciles", 
+                         labels = c(my_labs, grattan_dollar(tx_inc_q(0.95))),
+                         expand = c(0,0),
+                         # limits = c(-1, tx_inc_q(0.95)*1.05),
+                         breaks = c(tx_inc_q((0:10)/10), tx_inc_q(0.95))) + 
+      scale_y_continuous(expand = c(0,0), limits = c(0, max(.$y) * 1.05)) +
+  theme(legend.position = "none", 
+        axis.line.y = element_blank(), 
+        axis.text.y = element_blank(), 
+        axis.title.y = element_blank())+ 
+      
+      annotate("text",
+               x = tx_inc_q(0.925), 
+               y = 2 * max(.$y[.$x > tx_inc_q(0.925)]),
+               size = 10/(14/5),
+               label = paste0("5% of taxpayers\nhad incomes\ngreater than\n", grattan_dollar(tx_inc_q(0.95))),
+               hjust = 0,
+               vjust = 0) + 
+      annotate("segment", 
+               arrow = arrow(type = "closed", length = unit(11, "pt"), angle = 20),
+               x = tx_inc_q(0.925), 
+               y = 1.9 * max(.$y[.$x > tx_inc_q(0.925)]),
+               size = 1,
+               xend = tx_inc_q(0.95),
+               yend = 1.9 * max(.$y[.$x > tx_inc_q(0.925)])) 
+  }
+```
+
