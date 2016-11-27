@@ -60,20 +60,10 @@ generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzer
   }
   
   if (!nonzero){
-    mean_of_each_var <- 
-      taxstats::sample_files_all %>%
-      dplyr::select_(.dots = c("fy.year", vars)) %>%
-      select_which_(is.numeric, "fy.year") %>%
-      dplyr::group_by_("fy.year") %>%  
-      dplyr::summarise_each(dplyr::funs(MeanNumeric)) 
+    mean_of_each_var <- mean_of_each_taxstats_var 
 } else {
     # Forecast only on the mean of nonzero values
-    mean_of_each_var <- 
-      taxstats::sample_files_all %>%
-      dplyr::select_(.dots = c("fy.year", vars)) %>%
-      select_which_(is.numeric, "fy.year") %>%
-      dplyr::group_by_("fy.year") %>%  
-      dplyr::summarise_each_(dplyr::funs(mean_of_nonzero))
+    mean_of_each_var <- meanPositive_of_each_taxstats_var
   }
   
   forecaster <- function(x){
@@ -96,25 +86,17 @@ generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzer
     purrr::map(forecast_ahead_h) %>%
     purrr::map(extract_estimator) 
   
-  # CRAN avoidance
+  # CRAN note avoidance
   fy_year <- NULL
-  data.table::rbindlist(list(data.table::as.data.table(mean_of_each_var), 
-                             data.table::as.data.table(point_forecasts_by_var)), 
-                        use.names = TRUE, 
-                        fill = TRUE) %>%
+  rbindlist(list(as.data.table(mean_of_each_var), 
+                 as.data.table(point_forecasts_by_var)), 
+            use.names = TRUE, 
+            fill = TRUE) %>%
     .[ ,fy_year := yr2fy(1:.N - 1 + fy2yr(dplyr::first(fy.year)))] %>% 
     dplyr::filter(fy_year %in% c(fy.year.of.sample.file, dplyr::last(fy_year))) %>% 
     dplyr::summarise_each(dplyr::funs(last_over_first), -c(fy_year, fy.year)) %>%
-    data.table::as.data.table(.) %>%
-    data.table::melt.data.table(., measure.vars = names(.), variable.name = "variable", value.name = "inflator")
-  
-  ## We use inflators that we know to be useful. (Sw_amt is a wage inflator)
-  ## Otherwise we use 
-  ## For those columns with nonnegative values, we use the inflator by var mean 0
-  ## For the remainder, inflator by var.
-  
-  ## The inflators look too large.
-
+    as.data.table(.) %>%
+    melt.data.table(., measure.vars = names(.), variable.name = "variable", value.name = "inflator")
 }
 
 

@@ -165,6 +165,31 @@ cgt_expenditures <-
                            wagey.cols, super.bal.col, lfy.cols, cpiy.cols, derived.cols, Not.Inflated)
   }
 
+select_which_ <- function(...) grattan:::select_which_(...)
+
+MeanNumeric <- function(x){
+  sum(as.numeric(x)) / length(x)
+}
+
+mean_of_nonzero <- function (x) {
+  MeanNumeric(x[x > 0])
+}
+
+
+mean_of_each_taxstats_var <- 
+  sample_files_all %>%
+  select_(.dots = c("fy.year", generic.cols)) %>%
+  select_which_(is.numeric, "fy.year") %>%
+  group_by_("fy.year") %>%  
+  summarise_each(funs(MeanNumeric)) 
+
+meanPositive_of_each_taxstats_var <- 
+  sample_files_all %>%
+  select_(.dots = c("fy.year", generic.cols)) %>%
+  select_which_(is.numeric, "fy.year") %>%
+  group_by_("fy.year") %>%  
+  summarise_each(funs(mean_of_nonzero))
+
 generic_inflators <- if (!renew) fread("./data-raw/generic_inflators.tsv") else {
   lapply(1:10, 
          function(h) dplyr::mutate(grattan:::generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = "2013-14"), 
@@ -376,6 +401,8 @@ devtools::use_data(tax_table2,
                    wages_trend,
                    lf_trend,
                    cgt_expenditures,
+                   mean_of_each_taxstats_var, 
+                   meanPositive_of_each_taxstats_var,
                    generic_inflators,
                    cg_inflators_1314,
                    super_contribution_inflator_1314,
