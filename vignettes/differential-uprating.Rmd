@@ -135,7 +135,7 @@ data_frame(wage = c(20e3, 50e3, 100e3)) %>%
 ```
 
 
-Note that `diferentially_update_wage` uses the 2003-04 to 2013-14 sample files to generate estimates of the shape of the U. So applying the function to any other vector may have surprising results. In particular, the distribution of the vector provided is not considered. Furthermore, the `from_fy` must be in the range `2003-04` to `2013-14`.
+Note that `differentially_update_wage` uses the 2003-04 to 2013-14 sample files to generate estimates of the shape of the U. So applying the function to any other vector may have surprising results. In particular, the distribution of the vector provided is not considered. Furthermore, the `from_fy` must be in the range `2003-04` to `2013-14`.
 
 
 

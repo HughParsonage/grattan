@@ -9,7 +9,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-## Naive, cheating project
+## How well does the project function work one year in advance?
 
 ```{r echo=FALSE}
 knitr::opts_chunk$set(fig.width = 6)
@@ -31,7 +31,9 @@ library(broom)
 ```{r}
 sample_file_1314_projected <- 
   sample_file_1213 %>%
-  project(h = 1L) %>% .[]
+  copy %>%
+  mutate(WEIGHT = 50) %>%
+  project(h = 1L, fy.year.of.sample.file = "2012-13", .recalculate.inflators = TRUE) %>% .[]
 ```
 
 This should be pretty damn close!
@@ -69,7 +71,12 @@ lapply(c("Sw_amt", "Net_rent_amt", "Net_CG_amt", "Tot_inc_amt", "Tot_ded_amt", "
   ggplot(aes(x = var, ymin = conf.low, ymax = conf.high, color = p.value > 0.05)) + 
   geom_errorbar() + 
   geom_hline(yintercept = 0)
-
-
 ```
+
+## Years not in sample files
+
+
+
+
+
 

@@ -15,9 +15,10 @@
 ## For each variable we want an arima/ets model 
 ## and to use that to forecast ahead.
 generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzero = FALSE, estimator = "mean", pred_interval = 80){
+  stopifnot(length(h) == 1L)
   if (h == 0L){
-    return(data.table::data.table(variable = vars, 
-                                  inflator = 1))
+    return(data.table(variable = vars, 
+                      inflator = 1))
   }
   
   stopifnot(is.integer(h), 
@@ -31,39 +32,19 @@ generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzer
   }
   
   extract_estimator <- function(.prev){
-    if (estimator == "mean")
-      as.numeric(magrittr::use_series(magrittr::extract(.prev, "mean"), "mean"))
-    
-    if (estimator == "upper")
-      magrittr::use_series(magrittr::extract(.prev, "upper"), "upper")
-    
-    if (estimator == "lower")
-      magrittr::use_series(magrittr::extract(.prev, "lower"), "lower")
-  }
-  
-  if (estimator == "mean"){
-    extract_estimator <- function(.prev){
-      as.numeric(magrittr::use_series(magrittr::extract(.prev, "mean"), "mean"))
-    }
-  } else {
-    if (estimator == "upper"){
-      extract_estimator <- function(.prev){
-        as.numeric(magrittr::use_series(magrittr::extract(.prev, "upper"), "upper"))
-      }
-    } else {
-      if (estimator == "lower"){
-        extract_estimator <- function(.prev){
-          as.numeric(magrittr::use_series(magrittr::extract(.prev, "lower"), "lower"))
-        }
-      }
-    }
+    switch(estimator, 
+           "mean"  = {out <- magrittr::use_series(magrittr::extract(.prev, "mean"), "mean")},
+           "upper" = {out <- magrittr::use_series(magrittr::extract(.prev, "upper"), "upper")},
+           "lower" = {out <- magrittr::use_series(magrittr::extract(.prev, "lower"), "lower")}
+    )
+    as.numeric(out)
   }
   
   if (!nonzero){
-    mean_of_each_var <- mean_of_each_taxstats_var 
-} else {
+    mean_of_each_var <- select_(mean_of_each_taxstats_var, .dots = c("fy.year", vars))
+  } else {
     # Forecast only on the mean of nonzero values
-    mean_of_each_var <- meanPositive_of_each_taxstats_var
+    mean_of_each_var <- select_(meanPositive_of_each_taxstats_var, .dots = c("fy.year", vars))
   }
   
   forecaster <- function(x){
@@ -93,6 +74,7 @@ generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzer
             use.names = TRUE, 
             fill = TRUE) %>%
     .[ ,fy_year := yr2fy(1:.N - 1 + fy2yr(dplyr::first(fy.year)))] %>% 
+    # last(fy_year) is the fy_year corresponding to h, the target. 
     dplyr::filter(fy_year %in% c(fy.year.of.sample.file, dplyr::last(fy_year))) %>% 
     dplyr::summarise_each(dplyr::funs(last_over_first), -c(fy_year, fy.year)) %>%
     as.data.table(.) %>%

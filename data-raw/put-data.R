@@ -178,14 +178,14 @@ mean_of_nonzero <- function (x) {
 
 mean_of_each_taxstats_var <- 
   sample_files_all %>%
-  select_(.dots = c("fy.year", generic.cols)) %>%
+  select_(.dots = c("fy.year", names(.))) %>%
   select_which_(is.numeric, "fy.year") %>%
   group_by_("fy.year") %>%  
   summarise_each(funs(MeanNumeric)) 
 
 meanPositive_of_each_taxstats_var <- 
   sample_files_all %>%
-  select_(.dots = c("fy.year", generic.cols)) %>%
+  select_(.dots = c("fy.year", names(.))) %>%
   select_which_(is.numeric, "fy.year") %>%
   group_by_("fy.year") %>%  
   summarise_each(funs(mean_of_nonzero))
@@ -277,7 +277,8 @@ cg_inflators_1314 <- if (!renew) fread("./data-raw/cg_inflators_1314.tsv") else 
     cg_inf[, forecast.series := series]
   }
   lapply(c("lower", "mean", "upper"), get_cg_inf) %>%
-    rbindlist(use.names = TRUE)
+    rbindlist(use.names = TRUE) %T>%
+    write_tsv("./data-raw/cg_inflators_1314.tsv")
   
 }
   
