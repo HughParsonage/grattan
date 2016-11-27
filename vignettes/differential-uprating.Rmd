@@ -32,6 +32,9 @@ For instance, salary and wage variables can be increased by the observed increas
 
 Basic uprating suffers some limitations. 
 There are significant structural differences in how much individuals' incomes grow. 
+High-income individuals tend to have higher than average wage growth. 
+Low-income individuals also have higher than average wage growth. 
+That is, the pattern of wage growth by wage is U-shaped. 
 
 ```{r}
 library(grattan)
@@ -91,8 +94,7 @@ average_salary_by_fy_swtile <-
     theme(legend.position = c(0, 1), 
           legend.title = element_blank(), 
           legend.key = element_blank(),
-          legend.justification = c(0, 1), 
-          legend.margin = unit(0.1, "lines"))
+          legend.justification = c(0, 1))
   
   # ggplotly(p)
   p
@@ -115,39 +117,25 @@ differential_uprates %>%
 ```
 
 
-**Differential uprating** is a method by which variables are uprated by a function of not only the time period and the type of variable, but of the variable's value too. 
+**Differential uprating** is a method by which variables are uprated by a function of not only the time period and the type of variable, but of the variable's value too. To differentially uprate salary, use `differentially_uprate_wage`:
 
-```{r}
-sw_100tiles <- 
-  sample_files_all %>%
-  setkey(fy.year, Sw_amt) %>%
-  select(fy.year, Sw_amt) %>%
-  filter(Sw_amt > 0) %>%
-  group_by(fy.year) %>%
-  mutate(`Salary percentile` = ntile(Sw_amt, 100)) %>%
-  ungroup %>%
-  group_by(fy.year, `Salary percentile`) %>%
-  summarise(min_sw = min(Sw_amt))
+```{r, echo=TRUE}
+data_frame(wage = c(20e3, 50e3, 100e3)) %>%
+  mutate(ordinary = wage_inflator(wage, from_fy = "2012-13", to_fy = "2013-14"), 
+         `change ordinary` = ordinary / wage - 1, 
+         differential = differentially_uprate_wage(wage, from_fy = "2012-13", to_fy = "2013-14"), 
+         `change differential` = differential / wage - 1
+         ) %>%
+  mutate(wage = dollar(wage),
+         ordinary = dollar(ordinary), 
+         differential = dollar(differential), 
+         `change ordinary` = percent(`change ordinary`), 
+         `change differential` = percent(`change differential`)) %>%
+  kable(align = rep("r", ncol(.)))
 ```
 
-```{r}
-differentially_uprate_wage_prototype <- function(wage = 1, from_fy, to_fy){
-  input <- 
-    data.table(fy.year = from_fy, 
-               wage = wage) %>%
-    mutate(`_order` = 1:n()) %>%
-    setkey(fy.year, wage)
-  
-  merge(differential_uprates, sw_100tiles, by = "Salary percentile") %>%
-    mutate(wage = min_sw) %>%
-    setkey(fy.year, wage) %>%
-    .[input, roll = "nearest"] %>%
-    mutate(x = (avg_r_normed * (wage_inflator(from_fy = from_fy, to_fy = to_fy) - 1) + 1) * wage) %>%
-    arrange(`_order`) %$%
-    x
-}
 
-```
+Note that `diferentially_update_wage` uses the 2003-04 to 2013-14 sample files to generate estimates of the shape of the U. So applying the function to any other vector may have surprising results. In particular, the distribution of the vector provided is not considered. Furthermore, the `from_fy` must be in the range `2003-04` to `2013-14`.
 
 
 
