@@ -390,6 +390,13 @@ Age_pension_permissible_income_by_Date <-
   gather(type, permissible_income, -Date) %>%
   mutate(type = trimws(gsub("Permissible income ", "", gsub("[^A-Za-z]", " ", type))))
 
+aust_pop_by_age_yearqtr <- 
+  fread("data-raw/Estim-Resi-Pop-by-age-1981-2016.csv", 
+        select = c("Age", "Time", "Value")) %>%
+  mutate(Date = as.Date(paste0("01-", Time), format = "%d-%b-%y")) %>%
+  select(Age, Date, Value) %>%
+  setkey(Age, Date)
+
 devtools::use_data(tax_table2, 
                    lito_tbl, 
                    tax_tbl, 
@@ -416,5 +423,6 @@ devtools::use_data(tax_table2,
                    Age_pension_assets_test_by_year,
                    Age_pension_permissible_income_by_Date,
                    bto_tbl,
+                   aust_pop_by_age_yearqtr,
                    
                    internal = TRUE, overwrite = TRUE)
