@@ -9,10 +9,13 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+## Prologue
+This vignette is a mirror of a small book prepared internally by Grattan Institute. The goal is to demonstrate how to perform simple analysis and create common charts. You will need the `taxstats` package available via `devtools::install_github('hughparsonage/taxstats')`.
+
 ```{r knitrOpts}
 options("scipen" = 99)
 library(knitr)
-opts_chunk$set(fig.width = 9, fig.height = 7)
+opts_chunk$set(fig.width = 9, fig.height = 6.5)
 ```
 
 ```{r}
@@ -20,7 +23,7 @@ FY.YEAR <- "2013-14"
 ```
 
 ```{r wsum}
-wsum <- function(x, w = WEIGHT){
+wsum <- function(x, w = 1){
   sum((x) * w)
 }
 ```
@@ -163,7 +166,9 @@ texNum <- function(number, sig.figs = 3L, dollar = FALSE, pre.phrase = NULL, .su
         if (out_larger) {
           out <- paste(pre.phrase[1], out, sep = if(grepl("~$", pre.phrase[1])) "" else " ")
         } else {
-          if (!isTRUE(all.equal(prefix_val * suffix_val, orig.number, tolerance = .Machine$double.eps)))
+          if (!isTRUE(all.equal(prefix_val * suffix_val, 
+                                orig.number, 
+                                tolerance = .Machine$double.eps)))
             out <- paste(pre.phrase[2], out, sep = if(grepl("~$", pre.phrase[2])) "" else " ")
         }
       
@@ -173,7 +178,7 @@ texNum <- function(number, sig.figs = 3L, dollar = FALSE, pre.phrase = NULL, .su
 }
 ```
 
-There were `r texNum(sum(sample_file$WEIGHT), sig.figs = 3L)` taxpayers in `r FY.YEAR` in Australia. Of those, `r texNum(sum(sample_file[Taxable_Income == 0]$WEIGHT))` had zero taxable income (or a taxable loss). (... and so these ''taxpayers'' naturally paid no tax. Nor did the `r texNum(sum(sample_file[Taxable_Income < 18200]$WEIGHT), sig.figs = 2)` individuals below the tax-free threshold. For this report, a *taxpayer* is anyone who lodged a tax return, regardless of their tax liability. 
+There were `r texNum(sum(sample_file$WEIGHT), sig.figs = 3L)` taxpayers in `r FY.YEAR` in Australia. Of those, `r texNum(sum(sample_file[Taxable_Income == 0]$WEIGHT))` had zero taxable income (or a taxable loss). (... and so these ''taxpayers'' naturally paid no tax. Nor did the `r texNum(sum(sample_file[Taxable_Income < 18200]$WEIGHT), sig.figs = 2)` individuals below the tax-free threshold. For this vignette, a *taxpayer* is anyone who lodged a tax return, regardless of their tax liability). 
 
 ```{r taxable-income-quantiles}
 tx_inc_q <- function(q){
@@ -430,15 +435,19 @@ sample_files_all %>%
          age_imp = runif(n(), min_age, max_age)) %>%
   select(-min_age, -max_age) %>%
   mutate(last_fy = fy.year == max(fy.year)) %>%
-  group_by(fy.year) %>%
+  group_by(`Tax year` = factor(fy.year)) %>%
   mutate(label = ifelse(age_imp == max(age_imp), fy.year, NA_character_),
          is_CG = Net_CG_amt > 0,
          label.y = mean(is_CG[age_imp > 71]), 
          Age = age_imp) %>%
          {
            
-           ggplot(., aes(x = Age, y = as.numeric(is_CG), color = factor(fy.year), group = factor(fy.year))) + 
+           ggplot(., aes(x = Age, 
+                         y = as.numeric(is_CG), 
+                         color = `Tax year`, 
+                         group = `Tax year`)) + 
              scale_y_continuous(label = percent) + 
+             ggtitle("Incidence of capital gains") +
              scale_color_viridis(discrete = TRUE) + 
              geom_line(stat = "smooth", method = "auto", se = FALSE, size = 1.2) +
              geom_label_repel(aes(label = label, y = label.y),
@@ -484,7 +493,8 @@ sample_files_all %>%
              scale_color_viridis(discrete = TRUE) + 
              geom_line(stat = "smooth", method = "auto", se = FALSE, size = 1.2) +
              scale_alpha_discrete(range = c(0.5, 1)) + 
-             geom_text(aes(label = label, y = label.y, size = last_fy, nudge_x = ifelse(last_fy, 1, 0)),
+             geom_text(aes(label = label, y = label.y, size = if_else(last_fy %in% c("2012-13", "2013-14"), 2, 1),
+                                                                      nudge_x = if_else(last_fy, 1, 0)),
                        hjust = 0, 
                        vjust = 0, 
                        fontface = "bold", 
