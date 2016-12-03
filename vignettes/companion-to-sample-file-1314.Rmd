@@ -30,7 +30,16 @@ wsum <- function(x, w = 1){
 
 ```{r loadPackages}
 library(data.table)
-library(taxstats)
+if (requireNamespace("taxstats", quietly = TRUE)){
+  library(taxstats)
+  get_sample_files_all(assign.env = .GlobalEnv)
+  sample_files_all <- sample_files_all
+} else {
+  install.packages("taxstats", repos = "https://hughparsonage.github.io/drat/", type = "source")
+  library(taxstats)
+  get_sample_files_all(.GlobalEnv)
+  sample_files_all <- sample_files_all
+}
 library(grattan)
 library(dtplyr)
 library(dplyr)
@@ -39,6 +48,11 @@ library(scales)
 library(magrittr)
 library(ggrepel)
 library(viridis)
+
+if (!exists("sample_files_all")){
+  stop("....")
+}
+
 ```
 
 ```{r grattan_dollar}
@@ -55,7 +69,7 @@ grattan_dollar <- function (x, digits = 0) {
 ```
 
 ```{r load-sample-file}
-sample_file <- sample_files_all[fy.year == FY.YEAR]
+sample_file <- sample_files_all %>% filter(fy.year == FY.YEAR)
 sample_file <- merge(sample_file, age_range_decoder, by = "age_range")
 PREV.FY.YEAR <- yr2fy(fy2yr(FY.YEAR) - 1)
 sample_file_prev <- sample_files_all[fy.year == PREV.FY.YEAR]
@@ -267,11 +281,11 @@ n_CGs_prev <-
 
 tot_CG_amt <- 
   sample_file %$%
-  sum(Tot_CY_CG_amt * WEIGHT)
+  sum(as.numeric(Tot_CY_CG_amt * WEIGHT))
 
 tot_Net_CG_amt <- 
   sample_file %$%
-  sum(Net_CG_amt * WEIGHT)
+  sum(as.numeric(Net_CG_amt * WEIGHT))
 
 tax_on_CG <- 
   sample_file %>%
