@@ -32,7 +32,7 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
   obsTimeDate <- NULL
   if (useABSConnection){
     lf.url.trend <- 
-      "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1981"
+      "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978"
     lf <- rsdmx::readSDMX(lf.url.trend)
     lf.indices <- as.data.table(as.data.frame(lf))
   } else {
@@ -129,21 +129,21 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
 #' lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date = "2014-06-30")
 #' }
 lf_inflator <- function(labour_force = 1, from_date = "2013-06-30", to_date, useABSConnection = FALSE){
-  
+  obsTimeDate <- obsTime <- NULL
   # lf original
   if (useABSConnection){
     lf.url <- 
       "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.10.M/ABS?startTime=1981"
     lf.url.trend <- 
       # "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978-02"
-      "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1981"
+      "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978"
     lf <- rsdmx::readSDMX(lf.url.trend)
-    lf <- as.data.frame(lf)
+    lf <- as.data.frame(lf) %>% as.data.table
   } else {
     lf <- lf_trend
   }
   
-  lf$obsTimeDate <- as.Date(paste0(lf$obsTime, "-01"), format = "%Y-%m-%d")
+  lf[ , obsTimeDate := as.Date(paste0(obsTime, "-01"), format = "%Y-%m-%d")]
   
   
   date_connector <- 
@@ -151,16 +151,14 @@ lf_inflator <- function(labour_force = 1, from_date = "2013-06-30", to_date, use
                from_date = as.Date(from_date),
                to_date = as.Date(to_date))
   
-  LF <- data.table(obsTimeDate = lf$obsTimeDate,
-                   obsValue = lf$obsValue)
-  setkeyv(LF, "obsTimeDate")
+  setkeyv(lf, "obsTimeDate")
   
   setkey(date_connector, from_date)
-  from_DT <- LF[date_connector, roll=Inf]
+  from_DT <- lf[date_connector, roll=Inf]
   setnames(from_DT, c("obsTimeDate", "obsValue"), c("from_Date", "from_LF"))
   
   setkey(date_connector, to_date)
-  to_DT <- LF[date_connector, roll=Inf]
+  to_DT <- lf[date_connector, roll=Inf]
   setnames(to_DT, c("obsTimeDate", "obsValue"), c("to_Date", "to_LF"))
   
   merged <- merge(from_DT, to_DT, by = "altkey")
