@@ -1,6 +1,7 @@
 context("utils")
 
 test_that("unselect_", {
+  skip_if_not_installed("taxstats") 
   y <- sample_file_1314 %>% copy %>% unselect_(.dots = "Sw_amt")
   z <- sample_file_1314 %>% copy %>% select(-Sw_amt)
   expect_identical(y, z)

@@ -1,26 +1,27 @@
 context("Superannuation variables")
 
-library(taxstats)
-library(magrittr)
-
 
 test_that("Div293 tax is bounded by cap @ 25k", {
+  skip_if_not_installed("taxstats") 
   cap1 <- 25e3
   new_sample_file <- apply_super_caps_and_div293(sample_file_1314, cap = cap1, age_based_cap = FALSE)
   expect_true(all(new_sample_file$div293_tax <= cap1 * 0.15 + .Machine$double.eps ^ 0.5))
 })
 test_that("Div293 tax is bounded by cap @ 20k", {
+  skip_if_not_installed("taxstats") 
   cap1 <- 20e3
   new_sample_file <- apply_super_caps_and_div293(sample_file_1314, cap = cap1, age_based_cap = FALSE)
   expect_true(all(new_sample_file$div293_tax <= cap1 * 0.15 + .Machine$double.eps ^ 0.5))
 })
 test_that("Div293 tax is bounded by cap @ 30k", {
+  skip_if_not_installed("taxstats") 
   cap1 <- 30e3
   new_sample_file <- apply_super_caps_and_div293(sample_file_1314, cap = cap1, age_based_cap = FALSE)
   expect_true(all(new_sample_file$div293_tax <= cap1 * 0.15 + .Machine$double.eps ^ 0.5), info = as.character(paste0("cap1 = ", cap1)))
 })
 
 test_that("Div293 tax is bounded by an arbitrary cap", {
+  skip_if_not_installed("taxstats") 
   caps <- sort(abs(rcauchy(2, location = 30e3, scale = 20e3)))
   cap1 <- caps[1]
   cap2 <- caps[2]
@@ -37,6 +38,7 @@ test_that("Div293 tax is bounded by an arbitrary cap", {
 
 # Adjusted Taxable Income (for surcharge purposes < 300e3)
 test_that("Surchargeable income and low tax contributions less than 300,000 implies no Div293 tax", {
+  skip_if_not_installed("taxstats") 
   caps <- sort(abs(rcauchy(2, location = 30e3, scale = 20e3)))
   cap1 <- caps[1]
   cap2 <- caps[2]
@@ -64,6 +66,7 @@ test_that("Surchargeable income and low tax contributions less than 300,000 impl
 })
 
 test_that("Counts for Div 293 at 250e3 not at odds with PBO", {
+  skip_if_not_installed("taxstats") 
   sample_file_1718 <- 
     sample_file_1314 %>%
     project_to(to_fy = "2017-18", fy.year.of.sample.file = "2013-14")
@@ -92,11 +95,7 @@ test_that("Counts for Div 293 at 250e3 not at odds with PBO", {
 context("Reweighting and imputation successfully reconcile aggregates")
 
 test_that("Imputed, reweighted sample file agrees with aggregates by no less than 1%", {
-  library("taxstats")
-  library("data.table")
-  library("dplyr")
-  library("dtplyr")
-  library("magrittr")
+  skip_if_not_installed("taxstats") 
   
   funds <- 
     funds_table1_201314 %>%
@@ -129,6 +128,7 @@ test_that("Imputed, reweighted sample file agrees with aggregates by no less tha
 })
 
 test_that("Error handling", {
+  skip_if_not_installed("taxstats") 
   sample_file <- sample_file_1314 %>% head(.) %>% as.data.frame(.)
   expect_error(apply_super_caps_and_div293(sample_file), regexp = "data.table")
   
@@ -152,6 +152,7 @@ test_that("Error handling", {
 
 
 test_that("Corner cases", {
+  skip_if_not_installed("taxstats") 
   n_low_age <- 
     sample_file_1314 %>%
     apply_super_caps_and_div293(cap2_age = 19) %$%

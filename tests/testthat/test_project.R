@@ -1,10 +1,7 @@
 context("project function")
 
-library(taxstats)
-library(magrittr)
-library(dplyr)
-
 test_that("Columns do not vanish", {
+  skip_if_not_installed("taxstats") 
   testH <- as.integer(sample(1:4, size = 1))
   y <- project(sample_file_1314, h = testH)
   all_zero <- function(x){

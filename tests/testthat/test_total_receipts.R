@@ -1,12 +1,7 @@
-library(taxstats)
-library(data.table)
-library(dplyr)
-# library(dtplyr)
-library(magrittr)
-
 context("Tax receipts")
 
 test_that("income_tax on individual sample file reflect historical collections", {
+  skip_if_not_installed("taxstats") 
   # testthat::skip_on_travis()
   
   # True value of personal income tax receipts was $159.021 billion
