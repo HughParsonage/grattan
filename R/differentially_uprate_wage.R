@@ -11,7 +11,7 @@
 #' from <- "2013-14"
 #' to <- "2016-17"
 #' differentially_uprate_wage(ws, from, to)
-#' differentially_uprate_wage(ws, from, to)) / wage_inflator(ws, from, to)
+#' differentially_uprate_wage(ws, from, to) / wage_inflator(ws, from, to)
 #' @export
 
 

@@ -19,4 +19,11 @@ A vector of integers corresponding to the ntiles. (As in \code{dplyr::ntile}.)
 \description{
 Weighted quantiles
 }
+\details{
+With a short-length vector, or with weights of a high variance, the results may be unexpected.
+}
+\examples{
+weighted_ntile(1:10, n = 5)
+weighted_ntile(1:10, weights = c(rep(4, 5), rep(1, 5)), n = 5)
+}
 
