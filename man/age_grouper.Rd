@@ -21,9 +21,13 @@ age_grouper(age, interval = 10, min_age = 25, max_age = 75,
 \item{labels}{Specify the labels manually.}
 }
 \value{
-An ordered factor giving age ranges as specified.
+An ordered factor giving age ranges (separated by hyphens) as specified.
 }
 \description{
 Age grouper
+}
+\examples{
+age_grouper(42)
+age_grouper(42, interval = 5, min_age = 20, max_age = 60)
 }
 
