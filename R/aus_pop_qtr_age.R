@@ -7,6 +7,8 @@
 #' This is passed to \code{data.table}'s join, so options other than \code{TRUE} and \code{FALSE} are available. 
 #' See \code{?data.table}.
 #' @return A \code{data.table} or \code{vector} with values of the estimated resident population.
+#' @examples 
+#' aus_pop_qtr_age(date = as.Date("2016-01-01"), age = 42)
 #' @export 
 
 aus_pop_qtr_age <- function(date = NULL, age = NULL, tbl = FALSE, roll = TRUE, roll.beyond = FALSE){

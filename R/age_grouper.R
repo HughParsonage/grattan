@@ -6,7 +6,10 @@
 #' @param max_age What is the lower bound of the highest bracket? (\code{max_age = 75} means '75+' will be the bracket.)
 #' @param breaks Specify breaks manually.
 #' @param labels Specify the labels manually.
-#' @return An ordered factor giving age ranges as specified. 
+#' @return An ordered factor giving age ranges (separated by hyphens) as specified. 
+#' @examples 
+#' age_grouper(42)
+#' age_grouper(42, interval = 5, min_age = 20, max_age = 60)
 #' @export
 
 age_grouper <- function(age, interval = 10, min_age = 25, max_age = 75, breaks = NULL, labels = NULL){

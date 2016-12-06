@@ -4,7 +4,11 @@
 #' @param weights The weights associated with the vector. None should be \code{NA} or zero.
 #' @param n The number of quantiles desired.
 #' @return A vector of integers corresponding to the ntiles. (As in \code{dplyr::ntile}.)
+#' @examples
+#' weighted_ntile(1:10, n = 5)
+#' weighted_ntile(1:10, weights = c(rep(4, 5), rep(1, 5)), n = 5)
 #' @export
+#' @details With a short-length vector, or with weights of a high variance, the results may be unexpected.
 
 weighted_ntile <- function(vector, weights = rep(1, length(vector)), n){
   stopifnot(all(weights >= 0))

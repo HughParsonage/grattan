@@ -26,4 +26,7 @@ A \code{data.table} or \code{vector} with values of the estimated resident popul
 \description{
 Australian estimated resident population by age and date
 }
+\examples{
+aus_pop_qtr_age(date = as.Date("2016-01-01"), age = 42)
+}
 

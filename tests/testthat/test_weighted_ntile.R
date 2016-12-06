@@ -15,7 +15,7 @@ test_that("weighted_ntiles on integers", {
 
 
 test_that("weighted_ntile agrees with svyquantile", {
-  set.seed(1)
+  set.seed(13)
   N <- 1e4
   wts <- pmax(round(abs(rnorm(N)), 2), 0.01) # pmax(,0.01) to ensure no nonzero weights
   val <- round(abs(rnorm(N)), 2) %>% sort

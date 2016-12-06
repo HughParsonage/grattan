@@ -27,4 +27,7 @@ The value of from_nominal_price in real (to_fy) dollars.
 \description{
 CPI inflator
 }
+\examples{
+cpi_inflator(100, from_fy = "2005-06", to_fy = "2014-15")
+}
 
