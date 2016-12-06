@@ -9,6 +9,15 @@
 #' @return The repayment amount.
 #' @source \url{https://www.ato.gov.au/Rates/HELP,-TSL-and-SFSS-repayment-thresholds-and-rates/?page=2#HELP_repayment_thresholds_and_rates_2013_14}
 #' @author Ittima Cherastidtham and Hugh Parsonage
+#' @examples 
+#' student_repayment(50e3, "2013-14", debt = 10e3) 
+#' # 0 since below the threshold
+#' 
+#' student_repayment(60e3, "2013-14", debt = 10e3)
+#' # above the threshold
+#' 
+#' student_repayment(60e3, "2013-14", debt = 0)
+#' # above the threshold, but no debt
 #' @export
 
 student_repayment <- function(repayment_income, fy.year, debt){

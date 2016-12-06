@@ -2,7 +2,7 @@
 % Please edit documentation in R/project.R
 \name{project}
 \alias{project}
-\title{A function for simple projections of sample files}
+\title{A function for simple projections of tables of Australian Taxation Office tax returns.}
 \usage{
 project(sample_file, h = 0L, fy.year.of.sample.file = "2013-14",
   WEIGHT = 50L, excl_vars, forecast.dots = list(estimator = "mean",
@@ -29,6 +29,14 @@ project(sample_file, h = 0L, fy.year.of.sample.file = "2013-14",
 A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).
 }
 \description{
-A function for simple projections of sample files
+A function for simple projections of tables of Australian Taxation Office tax returns.
+}
+\examples{
+if (requireNamespace("taxstats", quietly = TRUE) && requireNamespace("data.table", quietly = TRUE)){
+  library(taxstats)
+  library(data.table)
+  sample_file <- copy(sample_file_1314)
+  sample_file_1617 <- project(sample_file, h = 3L)  # to "2016-17"
+}
 }
 

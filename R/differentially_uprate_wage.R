@@ -6,6 +6,12 @@
 #' @param to_fy The target of the uprating. Passed to \code{\link{wage_inflator}}.
 #' @return The vector \code{wage} differentially uprated to \code{to_fy}.
 #' @details See \code{vignette("differential-uprating")}.
+#' @examples 
+#' ws <- c(20e3, 50e3, 100e3)
+#' from <- "2013-14"
+#' to <- "2016-17"
+#' differentially_uprate_wage(ws, from, to)
+#' differentially_uprate_wage(ws, from, to)) / wage_inflator(ws, from, to)
 #' @export
 
 

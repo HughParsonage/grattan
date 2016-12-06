@@ -1,4 +1,4 @@
-#' A function for simple projections of sample files
+#' A function for simple projections of tables of Australian Taxation Office tax returns.
 #' 
 #' @param sample_file A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.
 #' @param h An integer. How many years should the sample file be projected?
@@ -9,6 +9,13 @@
 #' @param .recalculate.inflators Should \code{generic_inflator()} or \code{CG_inflator} be called to project the other variables? Adds time.
 #' @param .copyDT Should a \code{copy()} of \code{sample_file} be made? If set to FALSE, will update \code{sample_file}. 
 #' @return A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).
+#' @examples 
+#' if (requireNamespace("taxstats", quietly = TRUE) && requireNamespace("data.table", quietly = TRUE)){
+#'   library(taxstats)
+#'   library(data.table)
+#'   sample_file <- copy(sample_file_1314)
+#'   sample_file_1617 <- project(sample_file, h = 3L)  # to "2016-17"
+#' }
 #' @import data.table
 #' @export
 
