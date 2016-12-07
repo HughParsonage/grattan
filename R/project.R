@@ -28,6 +28,9 @@ project <- function(sample_file,
                     .recalculate.inflators = FALSE, 
                     .copyDT = TRUE){
   stopifnot(is.integer(h), h >= 0L, is.data.table(sample_file))
+  if (copyDT){
+    sample_file <- copy(sample_file)
+  }
   
   sample_file[, "WEIGHT" := list(WEIGHT)]
   if (h == 0){
