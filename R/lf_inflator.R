@@ -64,25 +64,25 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     switch(forecast.series, 
            "mean" = {
              forecasts <- 
-               forecast::forecast(lf.indices[["obsValue"]], 
-                                  h = months.ahead, 
-                                  level = forecast.level) %>%
+               gforecast(lf.indices[["obsValue"]], 
+                         h = months.ahead, 
+                         level = forecast.level) %>%
                magrittr::use_series("mean") %>%
                as.numeric 
            }, 
            "upper" = {
              forecasts <- 
-               forecast::forecast(lf.indices[["obsValue"]], 
-                                  h = months.ahead, 
-                                  level = forecast.level) %>%
+               gforecast(lf.indices[["obsValue"]], 
+                         h = months.ahead, 
+                         level = forecast.level) %>%
                magrittr::use_series("upper") %>%
                as.numeric 
            }, 
            "lower" = {
              forecasts <- 
-               forecast::forecast(lf.indices[["obsValue"]], 
-                                  h = months.ahead, 
-                                  level = forecast.level) %>%
+               gforecast(lf.indices[["obsValue"]], 
+                         h = months.ahead, 
+                         level = forecast.level) %>%
                magrittr::use_series("lower") %>%
                as.numeric
            })

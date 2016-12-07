@@ -6,14 +6,18 @@
 #' @param to_fy The FY ending that the wage index is to be taken.
 #' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? By default set to \code{FALSE} in which case a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.
 #' @param allow.projection If set to \code{TRUE} the \code{forecast} package is used to project forward, if required. 
-#' @param forecast.series Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals.
-#' @param forecast.level The prediction interval to be used if \code{forecast.series} is \code{upper} or \code{lower}. 
+#' @param forecast.series Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals. A fourth option \code{custom} allows manual forecasts to be set.
+#' @param forecast.level The prediction interval to be used if \code{forecast.series} is \code{upper} or \code{lower}.
+#' @param custom.series If \code{forecast.series = 'custom'}, a \code{data.table} with two variables, \code{fy_year} and \code{r}. 
+#' The variable \code{fy_year} consists of all financial years between the last financial year in the (known) wage series and \code{to_fy} \strong{inclusive}.
+#' The variable \code{r} consists of rates of wage growth assumed in each \code{fy_year}, which must be 1 in the first year (to connect with the original wage series).
 #' @return The wage inflation between the two years.
 #' @export
 
 wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, allow.projection = TRUE, 
-                          forecast.series = c("mean", "upper", "lower"), 
-                          forecast.level = 95){
+                          forecast.series = c("mean", "upper", "lower", "custom"), 
+                          forecast.level = 95, 
+                          custom.series = NULL){
   
   # CRAN
   obsTime <- NULL; obsValue <- NULL; to_index <- NULL; from_index <- NULL
@@ -61,7 +65,7 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
   # else allow NAs to propagate
   
   # Use forecast::forecast to inflate forward
-  if (allow.projection && any(to_fy > yr2fy(last.full.yr.in.series))){
+  if (allow.projection && any(to_fy > yr2fy(last.full.yr.in.series)) && forecast.series != "custom"){
     # Number of quarters beyond the data our forecast must reach
     quarters.ahead <- 
       4L * (max(fy2yr(to_fy)) - last.full.yr.in.series) + 2L - last.quarter.in.series
@@ -104,7 +108,40 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
   
   wage.indices %<>%
     .[obsQtr == 2L] %>%
-    .[, fy_year := yr2fy(obsYear)]
+    .[, fy_year := yr2fy(obsYear)] %>%
+    .[, list(fy_year, obsValue)]
+  
+  wage.indicesX <<- wage.indices
+  
+  if (allow.projection && any(to_fy > yr2fy(last.full.yr.in.series)) && forecast.series == "custom"){
+    stopifnot(is.data.table(custom.series), 
+              all(c("fy_year", "r") %in% names(custom.series)))
+    r <- NULL
+    
+    first.fy.in.custom.series <- min(custom.series[["fy_year"]])
+    
+    if (first.fy.in.custom.series != yr2fy(last.full.yr.in.series)){
+      stop("The first fy in the custom series must be equal to ", yr2fy(last.full.yr.in.series))
+    }
+    
+    if (!(dplyr::near(custom.series[fy_year == first.fy.in.custom.series][["r"]], 0))){
+      stop("r must be 0 at fy_year = ", yr2fy(last.full.yr.in.series))
+    }
+    
+    if (any(custom.series[["r"]] > 1)){
+      message("Some r > 1 detected. This is unlikely rate of wage growth (r = 0.025 corresponds to 2.5% wage growth).")
+    }
+    
+    last.obsValue.in.series <- tail(wage.indices, 1L)[["obsValue"]]
+    
+    custom.series[, obsValue := last.obsValue.in.series * cumprod(1 + r)]
+    custom.series[fy_year != first.fy.in.custom.series]
+    
+    wage.indices <- rbindlist(list(wage.indices, 
+                                   custom.series[fy_year != first.fy.in.custom.series]), 
+                              use.names = TRUE, 
+                              fill = TRUE)
+  }
   
   input <-
     data.table(wage = wage,

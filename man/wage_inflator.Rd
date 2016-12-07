@@ -5,8 +5,8 @@
 \title{A wage inflator}
 \usage{
 wage_inflator(wage = 1, from_fy, to_fy, useABSConnection = FALSE,
-  allow.projection = TRUE, forecast.series = c("mean", "upper", "lower"),
-  forecast.level = 95)
+  allow.projection = TRUE, forecast.series = c("mean", "upper", "lower",
+  "custom"), forecast.level = 95, custom.series = NULL)
 }
 \arguments{
 \item{wage}{The amount to be inflated (1 by default).}
@@ -19,9 +19,13 @@ wage_inflator(wage = 1, from_fy, to_fy, useABSConnection = FALSE,
 
 \item{allow.projection}{If set to \code{TRUE} the \code{forecast} package is used to project forward, if required.}
 
-\item{forecast.series}{Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals.}
+\item{forecast.series}{Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals. A fourth option \code{custom} allows manual forecasts to be set.}
 
 \item{forecast.level}{The prediction interval to be used if \code{forecast.series} is \code{upper} or \code{lower}.}
+
+\item{custom.series}{If \code{forecast.series = 'custom'}, a \code{data.table} with two variables, \code{fy_year} and \code{r}. 
+The variable \code{fy_year} consists of all financial years between the last financial year in the (known) wage series and \code{to_fy} \strong{inclusive}.
+The variable \code{r} consists of rates of wage growth assumed in each \code{fy_year}, which must be 1 in the first year (to connect with the original wage series).}
 }
 \value{
 The wage inflation between the two years.

@@ -6,6 +6,7 @@
 #' @param WEIGHT The sample weight for the sample file. (So a 2\% file has \code{WEIGHT} = 50.)
 #' @param excl_vars A character vector of column names in \code{sample_file} that should not be inflated. Columns not present in the 2013-14 sample file are not inflated and nor are the columns \code{Ind}, \code{Gender}, \code{age_range}, \code{Occ_code}, \code{Partner_status}, \code{Region}, \code{Lodgment_method}, and \code{PHI_Ind}.
 #' @param forecast.dots A list containing parameters to be passed to \code{generic_inflator}.
+#' @param ... Arguments passed to \code{\link{wage_inflator}}.
 #' @param .recalculate.inflators Should \code{generic_inflator()} or \code{CG_inflator} be called to project the other variables? Adds time.
 #' @param .copyDT Should a \code{copy()} of \code{sample_file} be made? If set to FALSE, will update \code{sample_file}. 
 #' @return A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).
@@ -25,6 +26,7 @@ project <- function(sample_file,
                     WEIGHT = 50L, 
                     excl_vars, 
                     forecast.dots = list(estimator = "mean", pred_interval = 80), 
+                    ...,
                     .recalculate.inflators = FALSE, 
                     .copyDT = TRUE){
   stopifnot(is.integer(h), h >= 0L, is.data.table(sample_file))
@@ -33,6 +35,7 @@ project <- function(sample_file,
   }
   
   sample_file[, "WEIGHT" := list(WEIGHT)]
+  
   if (h == 0){
     return(sample_file)
   } else {
@@ -40,7 +43,7 @@ project <- function(sample_file,
     to.fy <- yr2fy(fy2yr(current.fy) + h)
     # CGT expenditures is currently the bottleneck. See data-raw/put-data.R
     stopifnot(all(to.fy %in% cg_inflators_1314$fy_year))
-    wage.inflator <- wage_inflator(1, from_fy = current.fy, to_fy = to.fy)
+    wage.inflator <- wage_inflator(1, from_fy = current.fy, to_fy = to.fy, ...)
     lf.inflator <- lf_inflator_fy(from_fy = current.fy, to_fy = to.fy)
     cpi.inflator <- cpi_inflator(1, from_fy = current.fy, to_fy = to.fy)
     if (.recalculate.inflators){
@@ -139,7 +142,7 @@ project <- function(sample_file,
     
     # Differential uprating:
     for (j in which(col.names %in% diff.uprate.wagey.cols))
-      set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy))
+      set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy, ...))
     
     for (j in which(col.names %in% wagey.cols))
       set(sample_file, j = j, value = wage.inflator * sample_file[[j]])

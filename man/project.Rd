@@ -6,7 +6,7 @@
 \usage{
 project(sample_file, h = 0L, fy.year.of.sample.file = "2013-14",
   WEIGHT = 50L, excl_vars, forecast.dots = list(estimator = "mean",
-  pred_interval = 80), .recalculate.inflators = FALSE, .copyDT = TRUE)
+  pred_interval = 80), ..., .recalculate.inflators = FALSE, .copyDT = TRUE)
 }
 \arguments{
 \item{sample_file}{A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.}
@@ -20,6 +20,8 @@ project(sample_file, h = 0L, fy.year.of.sample.file = "2013-14",
 \item{excl_vars}{A character vector of column names in \code{sample_file} that should not be inflated. Columns not present in the 2013-14 sample file are not inflated and nor are the columns \code{Ind}, \code{Gender}, \code{age_range}, \code{Occ_code}, \code{Partner_status}, \code{Region}, \code{Lodgment_method}, and \code{PHI_Ind}.}
 
 \item{forecast.dots}{A list containing parameters to be passed to \code{generic_inflator}.}
+
+\item{...}{Arguments passed to \code{\link{wage_inflator}}.}
 
 \item{.recalculate.inflators}{Should \code{generic_inflator()} or \code{CG_inflator} be called to project the other variables? Adds time.}
 

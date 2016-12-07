@@ -4,7 +4,7 @@
 \alias{differentially_uprate_wage}
 \title{Differential uprating}
 \usage{
-differentially_uprate_wage(wage = 1, from_fy, to_fy)
+differentially_uprate_wage(wage = 1, from_fy, to_fy, ...)
 }
 \arguments{
 \item{wage}{A numeric vector to be uprated.}
@@ -12,6 +12,8 @@ differentially_uprate_wage(wage = 1, from_fy, to_fy)
 \item{from_fy}{The financial year contemporaneous to wage, which must be a financial year of an available sample file -- in particular, not after 2013-14.}
 
 \item{to_fy}{The target of the uprating. Passed to \code{\link{wage_inflator}}.}
+
+\item{...}{Other arguments passed \code{\link{wage_inflator}}.}
 }
 \value{
 The vector \code{wage} differentially uprated to \code{to_fy}.
