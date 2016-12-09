@@ -18,4 +18,11 @@ test_that("ABS connection", {
                y)
 })
 
+test_that("Custom wage series", {
+  x <- wage_inflator(1, from_fy = "2015-16", to_fy = "2017-18", 
+                     forecast.series = "custom", wage.series = data.table(fy_year = c("2015-16", "2016-17", "2017-18"), 
+                                                                          r = c(0, 0, 0.10)))
+  expect_equal(x, 1.1)
+})
+
 
