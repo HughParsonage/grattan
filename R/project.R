@@ -27,7 +27,8 @@ project <- function(sample_file,
                     WEIGHT = 50L, 
                     excl_vars, 
                     forecast.dots = list(estimator = "mean", pred_interval = 80), 
-                    wage.series,
+                    wage.series = NULL,
+                    lf.series = NULL,
                     .recalculate.inflators = FALSE, 
                     .copyDT = TRUE){
   stopifnot(is.integer(h), h >= 0L, is.data.table(sample_file))
@@ -158,7 +159,8 @@ project <- function(sample_file,
     # Differential uprating:
     for (j in which(col.names %in% diff.uprate.wagey.cols)){
       if (is.null(wage.series)){
-        set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy, ...))
+        set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy, 
+                                                                   forecast.series = "custom", wage.series = wage.series))
       } else {
         set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy, 
                                                                    forecast.series = "custom", wage.series = wage.series))
