@@ -59,9 +59,9 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
   
   # Use forecast::forecast to inflate forward
   forecast.series <- match.arg(forecast.series)
-  if (allow.projection && to_fy > last.full.fy.in.series && forecast.series != "custom"){
+  if (allow.projection && any(to_fy > last.full.fy.in.series) && forecast.series != "custom"){
     # Labour force is monthly
-    to_date <- fy2date(to_fy)
+    to_date <- fy2date(max(to_fy))
     months.ahead <- 
       12L * (year(to_date) - year(last.date.in.series)) + month(to_date) - month(last.date.in.series)
     
@@ -110,7 +110,7 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     .[month(obsDate) == use.month] %>%
     .[, fy_year := date2fy(obsDate)]
   
-  if (allow.projection && to_fy > last.full.fy.in.series && forecast.series == "custom"){
+  if (allow.projection && any(to_fy > last.full.fy.in.series) && forecast.series == "custom"){
     stopifnot(is.data.table(lf.series), 
               all(c("fy_year", "r") %in% names(lf.series)))
     r <- NULL

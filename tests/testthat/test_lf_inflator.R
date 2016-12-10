@@ -35,6 +35,12 @@ test_that("lf_inflator returns long", {
                c(1.00124729250057, 0.998754261299966))
 })
 
+test_that("lf_inflator_fy accepts multiple dates", {
+  length_of <- length(lf_inflator_fy(labour_force = c(1, 2), from_fy = c("2010-11", "2012-13"), to_fy = c("2012-13", "2013-14")))
+  
+  expect_equal(length_of, 2)
+})
+
 test_that("ABS connection", {
   expect_equal(lf_inflator(from_date = c("1981-01-01", "1981-02-01"), to_date = c("1981-02-01", "1981-01-01"), useABSConnection = TRUE), 
                c(1.00124729250057, 0.998754261299966))
