@@ -33,11 +33,13 @@ lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date,
 
 \item{forecast.level}{The prediction interval to be used if \code{forecast.series} is \code{upper} or \code{lower}.}
 
+\item{lf.series}{If \code{forecast.series = 'custom'}, a \code{data.table} with two variables, \code{fy_year} and \code{r}. 
+The variable \code{fy_year} consists of all financial years between the last financial year in the (known) labour force series and \code{to_fy} \strong{inclusive}.
+The variable \code{r} consists of rates of labour force growth assumed in each \code{fy_year}, which must be 1 in the first year (to connect with the original labour force series).}
+
 \item{from_date}{The date of \code{labour_force}.}
 
 \item{to_date}{Dates as a character vector.}
-
-\item{lf.indices}{Custom.}
 }
 \value{
 The relative labour force between \code{to_date} and \code{for_date} or \code{to_fy} and \code{from_fy}, multiplied by \code{labour_force}.
