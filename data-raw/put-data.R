@@ -14,7 +14,7 @@ if (packageVersion("data.table") < package_version("1.9.8")){
   fwrite <- function(..., sep = "\t") readr::write_tsv(...)
 }
 
-renew = F
+renew = T
 
 tax_tbl <- 
   lapply(yr2fy(1990:2017), 
@@ -149,7 +149,7 @@ cgt_expenditures <-
   
   CGTy.cols <- c("Net_CG_amt", "Tot_CY_CG_amt")
   
-  alien.cols <- col.names[!col.names %in% names(taxstats::sample_file_1314)]
+  alien.cols <- col.names[!col.names %in% names(sample_file_1314)]
   Not.Inflated <- c("Ind", 
                     "Gender",
                     "age_range", 
@@ -203,7 +203,7 @@ generic_inflators <- if (!renew) fread("./data-raw/generic_inflators.tsv") else 
 cg_inflators_1314 <- if (!renew) fread("./data-raw/cg_inflators_1314.tsv") else {
   get_cg_inf <- function(series = "mean"){
     cg_table <- 
-      taxstats::sample_files_all %>%
+      sample_files_all %>%
       dplyr::select(fy.year, Taxable_Income, Net_CG_amt) %>%
       dplyr::filter(Net_CG_amt > 0) %>%
       dplyr::mutate(marginal_rate_first = income_tax(Taxable_Income + 1, 
@@ -224,7 +224,7 @@ cg_inflators_1314 <- if (!renew) fread("./data-raw/cg_inflators_1314.tsv") else 
       dplyr::select(fy.year, zero_discount_Net_CG_total)
     
     n_cg_history <- 
-      data.table::as.data.table(taxstats::individuals_table1_201314) %>%
+      data.table::as.data.table(individuals_table1_201314) %>%
       dplyr::filter(Selected_items == "Net capital gain") %>%
       dplyr::filter(!is.na(Count))  %>%
       dplyr::select(fy_year, n_CG = Count)
