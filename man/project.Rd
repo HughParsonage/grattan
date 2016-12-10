@@ -6,7 +6,8 @@
 \usage{
 project(sample_file, h = 0L, fy.year.of.sample.file = "2013-14",
   WEIGHT = 50L, excl_vars, forecast.dots = list(estimator = "mean",
-  pred_interval = 80), ..., .recalculate.inflators = FALSE, .copyDT = TRUE)
+  pred_interval = 80), wage.series, .recalculate.inflators = FALSE,
+  .copyDT = TRUE)
 }
 \arguments{
 \item{sample_file}{A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.}
@@ -21,11 +22,13 @@ project(sample_file, h = 0L, fy.year.of.sample.file = "2013-14",
 
 \item{forecast.dots}{A list containing parameters to be passed to \code{generic_inflator}.}
 
-\item{...}{Arguments passed to \code{\link{wage_inflator}}.}
+\item{wage.series}{See \code{\link{wage_inflator}}.}
 
 \item{.recalculate.inflators}{Should \code{generic_inflator()} or \code{CG_inflator} be called to project the other variables? Adds time.}
 
 \item{.copyDT}{Should a \code{copy()} of \code{sample_file} be made? If set to FALSE, will update \code{sample_file}.}
+
+\item{lf.series}{See \code{\link{lf_inflator_fy}}.}
 }
 \value{
 A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).

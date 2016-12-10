@@ -43,3 +43,11 @@ test_that("ABS connection", {
                lf_inflator(from_date = "1981-01-01", to_date = "1981-02-01", useABSConnection = TRUE)) 
                
 })
+
+
+test_that("Custom lf series", {
+  x <- lf_inflator_fy(1, from_fy = "2015-16", to_fy = "2017-18", 
+                      forecast.series = "custom", lf.series = data.table(fy_year = c("2015-16", "2016-17", "2017-18"), 
+                                                                         r = c(0, 0, 0.10)))
+  expect_equal(x, 1.1)
+})

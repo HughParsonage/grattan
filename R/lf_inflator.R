@@ -14,6 +14,7 @@
 #' @param use.month An integer (corresponding to the output of \code{data.table::month}) representing the month of the series used for the inflation.
 #' @param forecast.series Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals.
 #' @param forecast.level The prediction interval to be used if \code{forecast.series} is \code{upper} or \code{lower}. 
+#' @param lf.indices Custom.
 #' @source ABS Cat 6202.0 \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocument}.
 #' @details \code{lf_inflator} is used on dates. The underlying data series is available every month. 
 #' @examples
@@ -24,8 +25,9 @@
 lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy, 
                            useABSConnection = FALSE, allow.projection = TRUE, 
                            use.month = 1L,
-                           forecast.series = c("mean", "upper", "lower"),
-                           forecast.level = 95) {
+                           forecast.series = c("mean", "upper", "lower", "custom"),
+                           forecast.level = 95, 
+                           lf.series = NULL) {
   # CRAN
   obsTime <- NULL; obsValue <- NULL; to_index <- NULL; from_index <- NULL
   # pretty sure this is ok. Reflects  dplyr::mutate(fy_year = date2fy(obsTimeDate))
@@ -54,13 +56,13 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
   }
   
   # Use forecast::forecast to inflate forward
-  if (allow.projection && to_fy > last.full.fy.in.series){
+  forecast.series <- match.arg(forecast.series)
+  if (allow.projection && to_fy > last.full.fy.in.series && forecast.series != "custom"){
     # Labour force is monthly
     to_date <- fy2date(to_fy)
     months.ahead <- 
       12L * (year(to_date) - year(last.date.in.series)) + month(to_date) - month(last.date.in.series)
     
-    forecast.series <- match.arg(forecast.series)
     switch(forecast.series, 
            "mean" = {
              forecasts <- 
@@ -93,7 +95,10 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
                  obsDate  = seq.Date(last.date.in.series, to_date, by = "month")[-1]) %>%
       .[, obsTime := sprintf("%s-%02d", year(obsDate), month(obsDate))]
 
-    lf.indices <- rbindlist(list(lf.indices, lf.indices.new), use.names = TRUE, fill = TRUE)
+    lf.indices <- rbindlist(list(lf.indices, 
+                                 lf.indices.new), 
+                            use.names = TRUE, 
+                            fill = TRUE)
   }
   
   stopifnot(use.month %in% 1:12)
@@ -103,6 +108,35 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     .[month(obsDate) == use.month] %>%
     .[, fy_year := date2fy(obsDate)]
   
+  if (allow.projection && to_fy > last.full.fy.in.series && forecast.series == "custom"){
+    stopifnot(is.data.table(lf.series), 
+              all(c("fy_year", "r") %in% names(lf.series)))
+    r <- NULL
+    
+    first.fy.in.lf.series <- min(lf.series[["fy_year"]])
+    
+    if (first.fy.in.lf.series != last.full.fy.in.series){
+      stop("The first fy in the custom series must be equal to ", last.full.fy.in.series)
+    }
+    
+    if (!(dplyr::near(lf.series[fy_year == first.fy.in.lf.series][["r"]], 0))){
+      stop("r must be 0 at fy_year = ", last.full.fy.in.series)
+    }
+    
+    if (any(lf.indices[["r"]] > 1)){
+      message("Some r > 1 detected. This is unlikely rate of labour force growth (r = 0.025 corresponds to 2.5% growth).")
+    }
+    
+    last.obsValue.in.series <- tail(lf.indices, 1L)[["obsValue"]]
+    
+    lf.series[, obsValue := last.obsValue.in.series * cumprod(1 + r)]
+    lf.series[fy_year != first.fy.in.lf.series]
+    
+    lf.indices <- rbindlist(list(lf.indices, 
+                                 lf.series[fy_year != first.fy.in.lf.series]), 
+                            use.names = TRUE, 
+                            fill = TRUE)
+  }
   
   input <-
     data.table(labour_force = labour_force,

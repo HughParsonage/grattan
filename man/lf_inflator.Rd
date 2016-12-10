@@ -10,7 +10,8 @@ ABS Cat 6202.0 \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocume
 \usage{
 lf_inflator_fy(labour_force = 1, from_fy = "2012-13", to_fy,
   useABSConnection = FALSE, allow.projection = TRUE, use.month = 1L,
-  forecast.series = c("mean", "upper", "lower"), forecast.level = 95)
+  forecast.series = c("mean", "upper", "lower", "custom"),
+  forecast.level = 95, lf.series = NULL)
 
 lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date,
   useABSConnection = FALSE)
@@ -35,6 +36,8 @@ lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date,
 \item{from_date}{The date of \code{labour_force}.}
 
 \item{to_date}{Dates as a character vector.}
+
+\item{lf.indices}{Custom.}
 }
 \value{
 The relative labour force between \code{to_date} and \code{for_date} or \code{to_fy} and \code{from_fy}, multiplied by \code{labour_force}.
