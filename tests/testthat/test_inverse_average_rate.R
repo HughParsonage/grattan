@@ -6,6 +6,8 @@ test_that("Error handling", {
 
 
 test_that("Average tax rates correctly inverted", {
+  skip_on_cran()
+  
   income <- ceiling(abs(rlnorm(1, 11, 1)) + 1)
   fy.year <- sample(yr2fy(2004:2016), size = 1)
   age = sample(c(42, 67), size = 1)
@@ -22,6 +24,8 @@ test_that("Average tax rates correctly inverted", {
 })
 
 test_that("Average tax rates correctly inverted for 2003-04", {
+  skip_on_cran()
+  
   income <- ceiling(abs(rlnorm(1, 11, 1)) + 1)
   fy.year <- "2003-04"
   age = sample(c(42, 67), size = 1)
@@ -38,6 +42,8 @@ test_that("Average tax rates correctly inverted for 2003-04", {
 })
 
 test_that("Average tax rates correctly inverted for 2004-05", {
+  skip_on_cran()
+  
   income <- ceiling(abs(rlnorm(1, 11, 1)) + 1)
   fy.year <- "2004-05"
   age = sample(c(42, 67), size = 1)
@@ -54,6 +60,8 @@ test_that("Average tax rates correctly inverted for 2004-05", {
 })
 
 test_that("Average tax rates correctly inverted for 2005-06", {
+  skip_on_cran()
+  
   income <- ceiling(abs(rlnorm(1, 11, 1)) + 1)
   fy.year <- "2005-06"
   age = sample(c(42, 67), size = 1)
@@ -70,6 +78,8 @@ test_that("Average tax rates correctly inverted for 2005-06", {
 })
 
 test_that("Average tax rates correctly inverted for 2006-07", {
+  skip_on_cran()
+  
   income <- ceiling(abs(rlnorm(1, 11, 1)) + 1)
   fy.year <- "2006-07"
   age = sample(c(42, 67), size = 1)
@@ -86,6 +96,8 @@ test_that("Average tax rates correctly inverted for 2006-07", {
 })
 
 test_that("Average tax rates correctly inverted for 2007-08", {
+  skip_on_cran()
+  
   income <- ceiling(abs(rlnorm(1, 11, 1)) + 1)
   fy.year <- "2007-08"
   age = sample(c(42, 67), size = 1)
@@ -102,6 +114,8 @@ test_that("Average tax rates correctly inverted for 2007-08", {
 })
 
 test_that("Average tax rates correctly inverted for 2008-09", {
+  skip_on_cran()
+  
   income <- ceiling(abs(rlnorm(1, 11, 1)) + 1)
   fy.year <- "2008-09"
   age = sample(c(42, 67), size = 1)
@@ -118,6 +132,8 @@ test_that("Average tax rates correctly inverted for 2008-09", {
 })
 
 test_that("Average tax rates correctly inverted for 2009-10", {
+  skip_on_cran()
+  
   income <- ceiling(abs(rlnorm(1, 11, 1)) + 1)
   fy.year <- "2009-10"
   age = sample(c(42, 67), size = 1)

@@ -1,6 +1,8 @@
 context("Superannuation variables")
 
 
+
+
 test_that("Div293 tax is bounded by cap @ 25k", {
   skip_if_not_installed("taxstats") 
   cap1 <- 25e3
@@ -180,6 +182,9 @@ test_that("Corner cases", {
   expect_gte(low_tax_contributions_with_Other_contr, low_tax_contributions_no_Other_contr)
 })
 
+test_that("Warning with no WEIGHT.", {
+  expect_warning(revenue_from_new_cap_and_div293(sample_file_1314, fy.year = "2013-14"))
+})
 
 
 
