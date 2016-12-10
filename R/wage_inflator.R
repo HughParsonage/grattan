@@ -12,6 +12,7 @@
 #' The variable \code{fy_year} consists of all financial years between the last financial year in the (known) wage series and \code{to_fy} \strong{inclusive}.
 #' The variable \code{r} consists of rates of wage growth assumed in each \code{fy_year}, which must be 1 in the first year (to connect with the original wage series).
 #' @return The wage inflation between the two years.
+#' @importFrom utils tail
 #' @export
 
 wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, allow.projection = TRUE, 
