@@ -159,8 +159,7 @@ project <- function(sample_file,
     # Differential uprating:
     for (j in which(col.names %in% diff.uprate.wagey.cols)){
       if (is.null(wage.series)){
-        set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy, 
-                                                                   forecast.series = "custom", wage.series = wage.series))
+        set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy))
       } else {
         set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy, 
                                                                    forecast.series = "custom", wage.series = wage.series))
