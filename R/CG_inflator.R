@@ -17,16 +17,10 @@ CG_population_inflator <- function(x = 1, from_fy, to_fy, forecast.series = "mea
   input <- 
     data.table(x = x, from_fy = from_fy, to_fy = to_fy)
   
-  n_cg_history <- 
-    cg_inflators_1314 %>%
-    copy
+  nse_forecast_series <- forecast.series
   
-  # Only attempt a forecast if required.
-  if (last_year > 2023){
-    out_tbl <- n_cg_history[forecast.series == forecast.series]
-  } else {
-    out_tbl <- n_cg_history[forecast.series == "mean"]
-  }
+  n_cg_history <- 
+    cg_inflators_1314[forecast.series == nse_forecast_series]
   
   input %>%
     merge(out_tbl, by.x = "from_fy", by.y = "fy_year", all.x = TRUE, sort = FALSE) %>%
