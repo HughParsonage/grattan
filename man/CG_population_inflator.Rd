@@ -5,7 +5,8 @@
 \alias{CG_population_inflator}
 \title{Forecasting capital gains}
 \usage{
-CG_population_inflator(x = 1, from_fy, to_fy, forecast.series = "mean")
+CG_population_inflator(x = 1, from_fy, to_fy, forecast.series = "mean",
+  cg.series)
 
 CG_inflator(x = 1, from_fy, to_fy, forecast.series = "mean")
 }
@@ -15,6 +16,8 @@ CG_inflator(x = 1, from_fy, to_fy, forecast.series = "mean")
 \item{from_fy, to_fy}{Financial years designating the inflation period.}
 
 \item{forecast.series}{One of \code{"mean"}, \code{"lower"}, \code{"upper"}. What estimator to use in forecasts. \code{"lower"} and \code{"upper"} give the lower and upper boundaries of the 95\% prediction interval.}
+
+\item{cg.series}{(Not implemented.)}
 }
 \value{
 For \code{CG_population_inflator}, the number of individuals estimated to incur capital gains in \code{fy_year}. 

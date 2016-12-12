@@ -191,14 +191,33 @@ meanPositive_of_each_taxstats_var <-
   group_by_("fy.year") %>%  
   summarise_each(funs(mean_of_nonzero))
 
-generic_inflators <- if (!renew) fread("./data-raw/generic_inflators.tsv") else {
-  lapply(1:10, 
-         function(h) dplyr::mutate(grattan:::generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = "2013-14"), 
-                                   H = h)) %>% 
-  rbindlist(use.names = TRUE) %>%
-  mutate(fy_year = yr2fy(2014 + H)) %>%
-  rename(h = H)
-}
+generic_inflators_1314 <- 
+  if (!renew){
+    fread("./data-raw/generic_inflators_1314.tsv")
+  }  else {
+    lapply(1:10, 
+           function(h) dplyr::mutate(grattan:::generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = "2013-14"), 
+                                     H = h)) %>% 
+      rbindlist(use.names = TRUE) %>%
+      mutate(fy_year = yr2fy(2014 + H)) %>%
+      rename(h = H) %T>%
+      write_tsv("./data-raw/generic_inflators_1314.tsv") %>%
+      .[]
+  }
+
+generic_inflators_1213 <- 
+  if (!renew){
+    fread("./data-raw/generic_inflators_1213.tsv")
+  }  else {
+    lapply(1:10, 
+           function(h) dplyr::mutate(grattan:::generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = "2012-13"), 
+                                     H = h)) %>% 
+      rbindlist(use.names = TRUE) %>%
+      mutate(fy_year = yr2fy(2013 + H)) %>%
+      rename(h = H) %T>%
+      write_tsv("./data-raw/generic_inflators_1213.tsv") %>%
+      .[]
+  }
 
 cg_inflators_1314 <- if (!renew) fread("./data-raw/cg_inflators_1314.tsv") else {
   get_cg_inf <- function(series = "mean"){
@@ -279,8 +298,94 @@ cg_inflators_1314 <- if (!renew) fread("./data-raw/cg_inflators_1314.tsv") else 
   }
   lapply(c("lower", "mean", "upper"), get_cg_inf) %>%
     rbindlist(use.names = TRUE) %T>%
-    write_tsv("./data-raw/cg_inflators_1314.tsv")
-  
+    write_tsv("./data-raw/cg_inflators_1314.tsv") %>%
+    .[]
+}
+
+cg_inflators_1213 <- 
+  if (!renew) {
+    fread("./data-raw/cg_inflators_1213.tsv") 
+  } else {
+  get_cg_inf <- function(series = "mean"){
+    cg_table <- 
+      sample_files_all %>%
+      dplyr::select(fy.year, Taxable_Income, Net_CG_amt) %>%
+      dplyr::filter(Net_CG_amt > 0) %>%
+      dplyr::mutate(marginal_rate_first = income_tax(Taxable_Income + 1, 
+                                                     fy.year = fy.year) - income_tax(Taxable_Income, 
+                                                                                     fy.year = fy.year)) %>%
+      dplyr::mutate(marginal_rate_last = (income_tax(Taxable_Income + Net_CG_amt, fy.year = fy.year) - income_tax(Taxable_Income, fy.year = fy.year)) / Net_CG_amt) %>%
+      dplyr::group_by(fy.year) %>%
+      dplyr::summarise(mean_mr1 = mean(marginal_rate_first), 
+                       mean_wmr1 = stats::weighted.mean(marginal_rate_first, Net_CG_amt), 
+                       mean_mrL = mean(marginal_rate_last), 
+                       mean_wmrL = stats::weighted.mean(marginal_rate_last, Net_CG_amt)) %>% 
+      merge(grattan:::cgt_expenditures, by.x = "fy.year", by.y = "FY", all = TRUE) %>% 
+      # dplyr::select_(.dots = c(-URL, -Projected) %>%
+      grattan:::unselect_(.dots = c("URL", "Projected")) %>%
+      dplyr::rename(revenue_foregone = CGT_discount_for_individuals_and_trusts_millions) %>%
+      dplyr::mutate(revenue_foregone = revenue_foregone * 10^6,
+                    zero_discount_Net_CG_total = revenue_foregone / mean(mean_wmrL, na.rm = TRUE)) %>%
+      dplyr::select(fy.year, zero_discount_Net_CG_total)
+    
+    n_cg_history <- 
+      data.table::as.data.table(individuals_table1_201314) %>%
+      dplyr::filter(Selected_items == "Net capital gain") %>%
+      dplyr::filter(!is.na(Count))  %>%
+      dplyr::select(fy_year, n_CG = Count)
+    
+    forecaster <- function(object, ...) forecast(object, h = 11, ...)  # gforecast terrible
+    
+    switch(series,
+           "mean" = {
+             n_cg <- 
+               rbind(n_cg_history, 
+                     data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 0:10),
+                                n_CG = as.numeric(forecaster(n_cg_history$n_CG, level = 95)$mean))
+               )
+             
+             cg <- 
+               rbind(as.data.table(cg_table), 
+                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 0:10), 
+                                zero_discount_Net_CG_total = as.numeric(forecaster(cg_table$zero_discount_Net_CG_total, level = 95)$mean)))
+           }, 
+           "lower" = {
+             n_cg <- 
+               rbind(n_cg_history, 
+                     data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 0:10),
+                                n_CG = as.numeric(forecaster(n_cg_history$n_CG, level = 95)$lower))
+               )
+             
+             cg <-
+               rbind(as.data.table(cg_table), 
+                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 0:10), 
+                                zero_discount_Net_CG_total = as.numeric(forecaster(cg_table$zero_discount_Net_CG_total, level = 95)$lower)))
+           }, 
+           "upper" = {
+             n_cg <- 
+               rbind(n_cg_history, 
+                     data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 0:10),
+                                n_CG = as.numeric(forecaster(n_cg_history$n_CG, level = 95)$upper))
+               )
+             
+             cg <-
+               rbind(as.data.table(cg_table), 
+                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 0:10), 
+                                zero_discount_Net_CG_total = as.numeric(forecaster(cg_table$zero_discount_Net_CG_total, level = 95)$upper)))
+           })
+    
+    cg_inf <- 
+      merge(n_cg, cg, by.x = "fy_year", by.y = "fy.year") %>% 
+      as.data.table
+    
+    cg_inf[, cg_inflator := zero_discount_Net_CG_total / n_CG]
+    cg_inf[, cg_inflator := cg_inflator / cg_inflator[cg_inf$fy_year == "2012-13"]]
+    cg_inf[, forecast.series := series]
+  }
+  lapply(c("lower", "mean", "upper"), get_cg_inf) %>%
+    rbindlist(use.names = TRUE) %T>%
+    write_tsv("./data-raw/cg_inflators_1213.tsv") %>%
+    .[]
 }
   
   super_contribution_inflator_1314 <- 
@@ -412,8 +517,10 @@ devtools::use_data(tax_table2,
                    cgt_expenditures,
                    mean_of_each_taxstats_var, 
                    meanPositive_of_each_taxstats_var,
-                   generic_inflators,
+                   generic_inflators_1314,
+                   generic_inflators_1213,
                    cg_inflators_1314,
+                   cg_inflators_1213,
                    super_contribution_inflator_1314,
                    #
                    salary_by_fy_swtile,

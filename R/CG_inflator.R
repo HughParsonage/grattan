@@ -4,11 +4,15 @@
 #' @param x To be inflated.
 #' @param from_fy,to_fy Financial years designating the inflation period.
 #' @param forecast.series One of \code{"mean"}, \code{"lower"}, \code{"upper"}. What estimator to use in forecasts. \code{"lower"} and \code{"upper"} give the lower and upper boundaries of the 95\% prediction interval.
-#' @param cg.series
+#' @param cg.series (Not implemented.)
 #' @return For \code{CG_population_inflator}, the number of individuals estimated to incur capital gains in \code{fy_year}. 
 #' For \code{CG_inflator}, an estimate of the nominal value of (total) capital gains in \code{to_fy} relative to the nominal value in \code{from_fy}. 
 
-CG_population_inflator <- function(x = 1, from_fy, to_fy, forecast.series = "mean"){
+CG_population_inflator <- function(x = 1, 
+                                   from_fy, 
+                                   to_fy, 
+                                   forecast.series = "mean", 
+                                   cg.series){
   stopifnot(all(is.fy(c(from_fy, to_fy))))
   stopifnot(forecast.series %in% c("mean", "lower", "upper", "custom"))
   
@@ -18,11 +22,12 @@ CG_population_inflator <- function(x = 1, from_fy, to_fy, forecast.series = "mea
   input <- 
     data.table(x = x, from_fy = from_fy, to_fy = to_fy)
   
-  
   nse_forecast_series <- forecast.series
   
   out_tbl <- 
-    cg_inflators_1314[forecast.series == nse_forecast_series]
+    cg_inflators_1314 %>% 
+    copy %>%
+    .[forecast.series == nse_forecast_series]
   
   input %>%
     merge(out_tbl, by.x = "from_fy", by.y = "fy_year", all.x = TRUE, sort = FALSE) %>%

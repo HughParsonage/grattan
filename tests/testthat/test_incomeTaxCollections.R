@@ -31,17 +31,17 @@ context("Projected tax collections")
 test_that("Projections match collections", {
   skip_if_not_installed("taxstats") 
   collections_1314_proj.over.actual <- 
-    sample_file_1314 %>%
+    sample_file_1213 %>%
     # ABS: 166,027 million. Cat 5506
-    project_to(to_fy = "2013-14", fy.year.of.sample.file = "2013-14") %$%
+    project_to(to_fy = "2013-14", fy.year.of.sample.file = "2012-13") %$%
     abs(sum(income_tax(Taxable_Income, "2013-14", 
                        age = if_else(age_range <= 1, 67, 42), 
                        .dots.ATO = copy(.)) * WEIGHT)/ (166027 * 1e6) - 1) 
   
   collections_1415_proj.over.actual <- 
-    sample_file_1314 %>%
+    sample_file_1213 %>%
     # Budget papers http://www.budget.gov.au/2015-16/content/bp1/html/bp1_bs4-03.htm
-    project_to(to_fy = "2014-15", fy.year.of.sample.file = "2013-14") %$%
+    project_to(to_fy = "2014-15", fy.year.of.sample.file = "2012-13") %$%
     abs(sum(income_tax(Taxable_Income, 
                        "2014-15", 
                        age = if_else(age_range <= 1, 67, 42), 
@@ -50,9 +50,9 @@ test_that("Projections match collections", {
   # http://budget.gov.au/2016-17/content/bp1/download/bp1.pdf
   # Table 7
   collections_1516_proj.over.actual <- 
-    sample_file_1314 %>%
+    sample_file_1213 %>%
     # Budget papers http://www.budget.gov.au/2015-16/content/bp1/html/bp1_bs4-03.htm
-    project_to(to_fy = "2015-16", fy.year.of.sample.file = "2013-14") %$%
+    project_to(to_fy = "2015-16", fy.year.of.sample.file = "2012-13") %$%
     abs(sum(income_tax(Taxable_Income, 
                        "2015-16", 
                        age = if_else(age_range <= 1, 67, 42), 
@@ -61,9 +61,9 @@ test_that("Projections match collections", {
   # http://budget.gov.au/2016-17/content/bp1/download/bp1.pdf
   # Table 7
   collections_1617_proj.over.actual <- 
-    sample_file_1314 %>%
+    sample_file_1213 %>%
     # Budget papers http://www.budget.gov.au/2015-16/content/bp1/html/bp1_bs4-03.htm
-    project_to(to_fy = "2016-17", fy.year.of.sample.file = "2013-14") %$%
+    project_to(to_fy = "2016-17", fy.year.of.sample.file = "2012-13") %$%
     abs(sum(income_tax(Taxable_Income, 
                        "2016-17", 
                        age = if_else(age_range <= 1, 67, 42), 
