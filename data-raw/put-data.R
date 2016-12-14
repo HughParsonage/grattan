@@ -14,7 +14,7 @@ if (packageVersion("data.table") < package_version("1.9.8")){
   fwrite <- function(..., sep = "\t") readr::write_tsv(...)
 }
 
-renew = T
+renew <- TRUE
 
 tax_tbl <- 
   lapply(yr2fy(1990:2017), 
@@ -497,11 +497,15 @@ Age_pension_permissible_income_by_Date <-
   mutate(type = trimws(gsub("Permissible income ", "", gsub("[^A-Za-z]", " ", type))))
 
 aust_pop_by_age_yearqtr <- 
-  fread("data-raw/Estim-Resi-Pop-by-age-1981-2016.csv", 
+  fread("./data-raw/Estim-Resi-Pop-by-age-1981-2016.csv", 
         select = c("Age", "Time", "Value")) %>%
   mutate(Date = as.Date(paste0("01-", Time), format = "%d-%b-%y")) %>%
   select(Age, Date, Value) %>%
   setkey(Age, Date)
+
+abs_key_aggregates <- 
+  
+
 
 devtools::use_data(tax_table2, 
                    lito_tbl, 

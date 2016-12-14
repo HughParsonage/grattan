@@ -36,6 +36,10 @@ A sample file of the same number of rows as \code{sample_file} with inflated val
 \description{
 A function for simple projections of tables of Australian Taxation Office tax returns.
 }
+\details{
+We recommend you use \code{sample_file_1213}, rather than \code{sample_file_1314}, unless you need the superannuation variables, 
+as the latter suggests lower-than-recorded tax collections.
+}
 \examples{
 if (requireNamespace("taxstats", quietly = TRUE) && requireNamespace("data.table", quietly = TRUE)){
   library(taxstats)

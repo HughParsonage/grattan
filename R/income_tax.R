@@ -104,30 +104,23 @@ rolling_income_tax <- function(income,
   input <- input[ ,ordering := 1:.N]
   setkeyv(input, "fy_year")
   
-  input.keyed <-
-    # potentially expensive. Another way would be 
-    # to add an argument such as data.table.copy = FALSE
-    # to allow different way to preserve the order
-    copy(input) %>%
-    setkey(fy_year, income)
+  # input.keyed <-
+  #   # potentially expensive. Another way would be 
+  #   # to add an argument such as data.table.copy = FALSE
+  #   # to allow different way to preserve the order
+  #   copy(input) %>%
+  #   setkey(fy_year, income)
   
   tax_fun <- function(income, fy.year){
-    tax_table2[input.keyed, roll = Inf] %>%
+    setkey(input, fy_year, income)
+    
+    tax_table2[input, roll = Inf] %>%
       .[,tax := tax_at + (income - lower_bracket) * marginal_rate] %>%
       setorderv("ordering") %>%
       .[["tax"]]
   }
   
-  .lito <- function(income, fy.year){
-    # CRAN NOTE avoidance
-    lito <- NULL
-    lito_tbl[input] %>%
-      .[,lito := pminV(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
-                       max_lito)] %>%
-      setorderv("ordering") %>%
-      .[["lito"]]
-  }
-  
+  # If .dots.ATO  is NULL, for loops over zero-length vector
   for (j in which(vapply(.dots.ATO, FUN = is.double, logical(1)))){
     set(.dots.ATO, j = j, value = as.integer(.dots.ATO[[j]]))
   }
@@ -157,7 +150,7 @@ rolling_income_tax <- function(income,
                   n_dependants = n_dependants, 
                   .checks = FALSE)
   
-  lito. <- .lito(income, fy.year)
+  lito. <- .lito(input)
   
   if (!is.null(.dots.ATO) && !missing(.dots.ATO) && all(c("Rptbl_Empr_spr_cont_amt",
                                                           "Net_fincl_invstmt_lss_amt",
