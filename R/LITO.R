@@ -33,8 +33,14 @@ lito <- function(income,
                  max_lito = 445, 
                  lito_taper = 0.015, 
                  min_bracket = 37000){
-  pminV(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
-        max_lito)
+  if (length(max_lito) == 1L){
+    pminC(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
+          max_lito)
+  } else {
+    prohibit_unequal_length_vectors(income, max_lito, lito_taper, min_bracket)
+    pminV(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
+          max_lito)
+  }
 }
 
 
