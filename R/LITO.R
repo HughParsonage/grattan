@@ -37,6 +37,8 @@ lito <- function(income,
     pminC(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
           max_lito)
   } else {
+    # Need to guard against unequal length vectors passed to pminV. In particular
+    # there is a danger that max_lito will be single, but income won't.
     prohibit_unequal_length_vectors(income, max_lito, lito_taper, min_bracket)
     pminV(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
           max_lito)
