@@ -13,4 +13,4 @@ library(magrittr)
 library(survey)
 library(zoo)
 
-test_check("grattan", env = globalenv())
+test_check("grattan")
