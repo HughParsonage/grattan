@@ -5,6 +5,7 @@ if (requireNamespace("taxstats", quietly = TRUE)){
   library(taxstats)
   get_sample_files_all(globalenv())
   sample_files_all <- sample_files_all
+  
 }
 library(dplyr)
 library(dtplyr)
@@ -12,4 +13,4 @@ library(magrittr)
 library(survey)
 library(zoo)
 
-test_check("grattan")
+test_check("grattan", env = globalenv())

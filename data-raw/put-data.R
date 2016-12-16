@@ -19,7 +19,9 @@ renew <- TRUE
 tax_tbl <- 
   lapply(yr2fy(1990:2017), 
          function(fy_year) {
-           read_excel("./data-raw/tax_brackets_and_marginal_rates.xlsx", sheet = fy_year) %>% mutate(fy_year = fy_year) %>% as.data.table
+           read_excel("./data-raw/tax_brackets_and_marginal_rates.xlsx", sheet = fy_year) %>% 
+             mutate(fy_year = fy_year) %>% 
+             as.data.table
          })  %>%
   lapply(as.data.table) %>%
   rbindlist %>%
@@ -115,7 +117,21 @@ wages_trend <-
   data.table::fread("./data-raw/wages-trend.tsv", select = c("obsTime", "obsValue"))
 
 lf_trend <- 
-  data.table::fread("./data-raw/lf-trend.tsv", select = c("obsTime", "obsValue"))
+  tryCatch({
+    lf.url.trend <- 
+      # "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978-02"
+      "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978"
+    lf <- rsdmx::readSDMX(lf.url.trend)
+    lf <- 
+      as.data.frame(lf) %>% 
+      as.data.table %>%
+      select(obsTime, obsValue) %T>%
+      fwrite("./data-raw/lf-trend.tsv", sep = "\t")
+  }, 
+    error = function(e){
+      data.table::fread("./data-raw/lf-trend.tsv" 
+                        , select = c("obsTime", "obsValue"))
+    })
 
 cgt_expenditures <- 
   data.table::fread("./data-raw/tax-expenditures-cgt-historical.tsv")

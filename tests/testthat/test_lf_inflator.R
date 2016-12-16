@@ -32,7 +32,7 @@ test_that("lf_inflator returns long", {
                round(c(1.02691290641353, 2.05382581282705), 3))
   
   expect_equal(lf_inflator(from_date = c("1981-01-01", "1981-02-01"), to_date = c("1981-02-01", "1981-01-01")), 
-               c(1.00124729250057, 0.998754261299966))
+               c(1.00124729250057, 0.998754261299966), tol = 0.01)
 })
 
 test_that("lf_inflator_fy accepts multiple dates", {
