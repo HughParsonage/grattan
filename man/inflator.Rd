@@ -12,9 +12,9 @@ inflator(x = 1, from, to, inflator_table, index.col = "Index",
 
 \item{from}{The contemporaneous time of x.}
 
-\item{to}{The target time to which x is to be inflated.}
+\item{to}{The target time (in units of the \code{inflator_table}) to which x is to be inflated.}
 
-\item{inflator_table}{A \code{data.table} having columns \code{Index} and \code{Time}.}
+\item{inflator_table}{A \code{data.table} having columns \code{index.col} and \code{time.col}.}
 
 \item{index.col}{The column in \code{inflator_table} containing the index used for inflation.}
 
@@ -23,7 +23,8 @@ inflator(x = 1, from, to, inflator_table, index.col = "Index",
 \item{roll}{If \code{NULL}, inflation is calculated only on exact matches in \code{inflator_table}. Otherwise, uses a rolling join. See \code{data.table::data.table}.}
 }
 \value{
-A vector of inflated values.
+A vector of inflated values. For example, \code{inflator_table = grattan:::cpi_seasonal_adjustment}, 
+\code{index.col = "obsValue"}, \code{time.col = "obsTime"}, gives the CPI inflator.
 }
 \description{
 Inflate using a general index
