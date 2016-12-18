@@ -1,4 +1,5 @@
-# Income tax tables.
+# Data for internal use
+# Must be sourced after modification
 library(magrittr)
 library(dplyr)
 library(forecast)
@@ -6,10 +7,12 @@ library(data.table)
 library(tidyr)
 library(dtplyr)
 library(taxstats)
-get_sample_files_all(assign.env = .GlobalEnv)
+sample_files_all <- get_sample_files_all()
 library(grattan)
 library(readr)
 library(readxl)
+library(openxlsx)
+options("scipen" = 99)
 if (packageVersion("data.table") < package_version("1.9.8")){
   fwrite <- function(..., sep = "\t") readr::write_tsv(...)
 }
@@ -519,7 +522,30 @@ aust_pop_by_age_yearqtr <-
   select(Age, Date, Value) %>%
   setkey(Age, Date)
 
+
+# download.file(url = "http://www.ausstats.abs.gov.au/ausstats/meisubs.nsf/LatestTimeSeries/5206001_key_aggregates/$FILE/5206001_key_aggregates.xlsx", destfile = "")
+abs_key_aggregates_names <- 
+  read.xlsx("./data-raw/5206001_key_aggregates-2016-12-07-release.xlsx", sheet = "Data1", rows = c(2L, 10L))
+
+units_by_series_id <- 
+  data.table(Series_ID = as.character(abs_key_aggregates_names), 
+             units = names(abs_key_aggregates_names)) %>%
+  .[-1] %>%  # 'Series ID' and 'units'
+  mutate(multiply = if_else(grepl("million", units, ignore.case = TRUE), 
+                            10^6, 
+                            if_else(grepl("(percent)|(proportion)", units, ignore.case = TRUE), 
+                                    0.01, 
+                                    1)))
+
 abs_key_aggregates <- 
+  read_excel("data-raw/5206001_key_aggregates-2016-12-07-release.xlsx", sheet = "Data1", skip = 9) %>%
+  as.data.table %>%
+  melt.data.table(id.vars = "Series ID", variable.name = "Series_ID") %>%
+  setnames("Series ID", "Date") %>%
+  merge(units_by_series_id, by = "Series_ID", sort = FALSE) %>%
+  mutate(value = value * multiply, 
+         Date = as.Date(Date)) %>%
+  select(-units, -multiply)
   
 
 
@@ -552,5 +578,6 @@ devtools::use_data(tax_table2,
                    Age_pension_permissible_income_by_Date,
                    bto_tbl,
                    aust_pop_by_age_yearqtr,
+                   abs_key_aggregates,
                    
                    internal = TRUE, overwrite = TRUE)
