@@ -87,8 +87,13 @@ rolling_income_tax <- function(income,
   # CRAN NOTE avoidance
   fy_year <- NULL; marginal_rate <- NULL; lower_bracket <- NULL; tax_at <- NULL; n <- NULL; tax <- NULL; ordering <- NULL; max_lito <- NULL; min_bracket <- NULL; lito_taper <- NULL; sato <- NULL; taper <- NULL; rate <- NULL; max_offset <- NULL; upper_threshold <- NULL; taper_rate <- NULL; medicare_income <- NULL; lower_up_for_each_child <- NULL;
   
-  # Assume everyone of pension age is eligible for sapto.
-  sapto.eligible = age >= 65
+  if (missing(age) && !is.null(.dots.ATO) && "age_range" %in% names(.dots.ATO)){
+    # age_range: 0, 1  ===>  65 to 69, 70 and over
+    sapto.eligible <- .dots.ATO[["age_range"]] <= 1
+  } else {
+    # Assume everyone of pension age is eligible for sapto.
+    sapto.eligible <- age >= 65
+  }
   # Don't like vector recycling
   # http://stackoverflow.com/a/9335687/1664978
   prohibit_vector_recycling(income, fy.year, age, family_status, n_dependants)
