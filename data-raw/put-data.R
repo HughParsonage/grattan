@@ -545,7 +545,11 @@ abs_key_aggregates <-
   merge(units_by_series_id, by = "Series_ID", sort = FALSE) %>%
   mutate(value = value * multiply, 
          Date = as.Date(Date)) %>%
-  select(-units, -multiply)
+  select(-units, -multiply) %>%
+  # to limit size to only what is used
+  filter(Series_ID %in% c( "A2304350J"  # GDP
+                          ,"A2304354T"  # GNI
+                          ))
   
 
 
