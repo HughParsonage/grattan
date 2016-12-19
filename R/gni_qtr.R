@@ -1,4 +1,5 @@
 #' Gross National Income, Australia
+#' @name gni
 #' @description Gross national income, at contemporaneous prices (called 'current prices' by the ABS). 
 #' 
 #' @param date A Date vector or character coercible thereto.
@@ -10,8 +11,13 @@
 #' Dates or fy_year outside the available data is neither a warning nor an error, but \code{NA}.
 #' @source Australian Bureau of Statistics, Catalogue 5206.0. Series A2304354T.
 #' @export gni_qtr gni_fy
+NULL
 
+#' @rdname gni
 gni_qtr <- function(date, roll = "nearest"){
+  # CRAN NOTE avoidance
+  ordering <- Date <- Series_ID <- value <- NULL
+  
   input <-
     data.table(Date = if (assertthat::is.date(date)) date else as.Date(date)) %>%
     .[, ordering := 1:.N] %>%
@@ -20,13 +26,16 @@ gni_qtr <- function(date, roll = "nearest"){
   abs_key_aggregates %>%
     .[Series_ID == "A2304354T"] %>%
     setkeyv("Date") %>%
-    .[, orig_date := Date] %>%
     .[input, roll = roll] %>%
     setorderv("ordering") %>%
     .[["value"]]
 }
 
+#' @rdname gni
 gni_fy <- function(fy_year){
+  # CRAN NOTE avoidance
+  ordering <- Date <- Series_ID <- value <- NULL
+  
   input <- 
     data.table(fy_year = fy_year) %>%
     .[, ordering := 1:.N] %>%
@@ -37,7 +46,8 @@ gni_fy <- function(fy_year){
     .[Series_ID == "A2304354T"] %>%
     setkeyv("Date") %>%
     .[, fy_year := date2fy(Date)] %>%
-    .[, .(GNI = sum(value)), keyby = "fy_year"] %>%
+    .[, .(GNI = sum(value), 
+          quarters = .N), keyby = "fy_year"] %>%
     .[input] 
     
     if (any(output[["quarters"]] != 4L)){

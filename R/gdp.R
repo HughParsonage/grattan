@@ -1,4 +1,5 @@
 #' Gross Domestic Product, Australia
+#' @name gdp
 #' @description Gross domestic product, at contemporaneous prices (called 'current prices' by the ABS). 
 #' 
 #' @param date A Date vector or character coercible thereto.
@@ -10,9 +11,13 @@
 #' Dates or fy_year outside the available data is neither a warning nor an error, but \code{NA}.
 #' @source Australian Bureau of Statistics, Catalogue 5206.0. Series A2304350J.
 #' @export gdp_qtr gdp_fy
+NULL
 
-
+#' @rdname gdp
 gdp_qtr <- function(date, roll = "nearest"){
+  # CRAN NOTE avoidance
+  ordering <- Date <- Series_ID <- value <- NULL
+  
   input <-
     data.table(Date = if (assertthat::is.date(date)) date else as.Date(date)) %>%
     .[, ordering := 1:.N] %>%
@@ -21,13 +26,16 @@ gdp_qtr <- function(date, roll = "nearest"){
   abs_key_aggregates %>%
     .[Series_ID == "A2304350J"] %>%
     setkeyv("Date") %>%
-    .[, orig_date := Date] %>%
     .[input, roll = roll] %>%
     setorderv("ordering") %>%
     .[["value"]]
 }
 
+#' @rdname gdp
 gdp_fy <- function(fy_year){
+  # CRAN NOTE avoidance
+  ordering <- Date <- Series_ID <- value <- NULL
+  
   input <- 
     data.table(fy_year = fy_year) %>%
     .[, ordering := 1:.N] %>%
