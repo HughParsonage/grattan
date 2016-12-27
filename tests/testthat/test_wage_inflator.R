@@ -40,3 +40,26 @@ test_that("Custom wage series", {
                                                         r = c(0, 2.5, 10.0))))
 })
 
+test_that("from > to deflates and is not a warning", {
+  x <- wage_inflator(from_fy = c("2013-14", "2015-16", "2016-17", "2017-18"), 
+                     to_fy = "2017-18")
+  y <- wage_inflator(to_fy = c("2013-14", "2015-16", "2016-17", "2017-18"), 
+                     from_fy = "2017-18")
+  expect_equal(x, 1/y)
+})
+
+# Issue #24 in general:
+test_that("from > to deflates and is not a warning for inflators", {
+  x <- lf_inflator_fy(from_fy = c("2013-14", "2015-16", "2016-17", "2017-18"), 
+                     to_fy = "2017-18")
+  y <- lf_inflator_fy(to_fy = c("2013-14", "2015-16", "2016-17", "2017-18"), 
+                     from_fy = "2017-18")
+  expect_equal(x, 1/y)
+  
+  x <- cpi_inflator(from_fy = c("2013-14", "2015-16", "2016-17", "2017-18"), 
+                    to_fy = "2017-18")
+  y <- cpi_inflator(to_fy = c("2013-14", "2015-16", "2016-17", "2017-18"), 
+                    from_fy = "2017-18")
+  expect_equal(x, 1/y)
+})
+

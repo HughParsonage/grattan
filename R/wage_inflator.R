@@ -51,23 +51,32 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
     .[["obsYear"]] %>%
     last 
   
+  last.full.fy.in.series <- yr2fy(last.full.yr.in.series)
+  
   last.quarter.in.series <- 
     wage.indices %>%
     .[["obsQtr"]] %>%
     last 
   
-  if (any(from_fy > yr2fy(last.full.yr.in.series))){
-    warning("Projection of from_fy terms not yet supported.")
+  exponent <- rep(1L, length(from_fy))
+  if (any(from_fy > to_fy)){
+    exponent[from_fy > last.full.fy.in.series] <- -1L
+    
+    .from <- pmin(from_fy, to_fy)
+    .to   <- pmax(to_fy, from_fy)
+    
+    from_fy <- .from
+    to_fy <- .to
   }
   
-  if (!allow.projection && any(to_fy > yr2fy(last.full.yr.in.series))){
+  if (!allow.projection && any(to_fy > last.full.fy.in.series)){
     stop("Not all elements of to_fy are in wage index data.")
   }
   # else allow NAs to propagate
   
   # Use forecast::forecast to inflate forward
   forecast.series <- match.arg(forecast.series)
-  if (allow.projection && any(to_fy > yr2fy(last.full.yr.in.series)) && forecast.series != "custom"){
+  if (allow.projection && any(to_fy > last.full.fy.in.series) && forecast.series != "custom"){
     # Number of quarters beyond the data our forecast must reach
     quarters.ahead <- 
       4L * (max(fy2yr(to_fy)) - last.full.yr.in.series) + 2L - last.quarter.in.series
@@ -112,19 +121,19 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
     .[, fy_year := yr2fy(obsYear)] %>%
     .[, list(fy_year, obsValue)]
   
-  if (allow.projection && any(to_fy > yr2fy(last.full.yr.in.series)) && forecast.series == "custom"){
+  if (allow.projection && any(to_fy > last.full.fy.in.series) && forecast.series == "custom"){
     stopifnot(is.data.table(wage.series), 
               all(c("fy_year", "r") %in% names(wage.series)))
     r <- NULL
     
     first.fy.in.wage.series <- min(wage.series[["fy_year"]])
     
-    if (first.fy.in.wage.series != yr2fy(last.full.yr.in.series)){
-      stop("The first fy in the custom series must be equal to ", yr2fy(last.full.yr.in.series))
+    if (first.fy.in.wage.series != last.full.fy.in.series){
+      stop("The first fy in the custom series must be equal to ", last.full.fy.in.series)
     }
     
     if (!(dplyr::near(wage.series[fy_year == first.fy.in.wage.series][["r"]], 0))){
-      stop("r must be 0 at fy_year = ", yr2fy(last.full.yr.in.series))
+      stop("r must be 0 at fy_year = ", last.full.fy.in.series)
     }
     
     if (any(wage.series[["r"]] > 1)){
@@ -155,7 +164,7 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
     merge(wage.indices, by.x = "to_fy", by.y = "fy_year", sort = FALSE, 
           all.x = TRUE) %>%
     setnames("obsValue", "to_index") %>%
-    .[, out := wage * (to_index/from_index)]
+    .[, out := wage * (to_index/from_index) ^ exponent]
   
   output[["out"]]
 }
