@@ -9,7 +9,7 @@
 
 cpi_inflator_quarters <- function(from_nominal_price, from_qtr, to_qtr, adjustment = "seasonal", useABSConnection = FALSE){
   
-  if(!all(grepl("([0-9]{4}).?(Q[1-4])", from_qtr)) || !all(grepl("([0-9]{4}).?(Q[1-4])", to_qtr)))
+  if (!all(grepl("([0-9]{4}).?(Q[1-4])", from_qtr)) || !all(grepl("([0-9]{4}).?(Q[1-4])", to_qtr)))
     stop("Dates must be in quarters. e.g. 1066-Q2")
   
   # Ensure date in ABS quarters 1066-Q2 form
@@ -27,10 +27,10 @@ cpi_inflator_quarters <- function(from_nominal_price, from_qtr, to_qtr, adjustme
     cpi.url.seasonal.adjustment <- "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999901.10+20.Q/ABS?startTime=1948"
     cpi.url.trimmed.mean <- "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999902.10+20.Q/ABS?startTime=1948"
     
-    if(grepl("none", adjustment)){
+    if (grepl("none", adjustment)){
       url <- cpi.url
     }
-    if(grepl("season", adjustment)){
+    if (grepl("season", adjustment)){
       url <- cpi.url.seasonal.adjustment
     }
     if(grepl("trimmed", adjustment)){

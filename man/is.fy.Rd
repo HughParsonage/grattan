@@ -16,7 +16,10 @@
 \item{date}{A string or date for which the financial year is desired. Note that \code{yr2fy} does not check its argument is an integer.}
 }
 \value{
-For \code{is.fy}, a logical, whether its argument is a financial year. For \code{fy.year}, \code{yr2fy}, and \code{date2fy}, the financial year. For the inverses, a numeric corresponding to the year.
+For \code{is.fy}, a logical, whether its argument is a financial year.
+The following forms are allowed: \code{2012-13}, \code{201213}, \code{2012 13}, only.
+For \code{fy.year}, \code{yr2fy}, and \code{date2fy}, the financial year. 
+For the inverses, a numeric corresponding to the year.
 }
 \description{
 Convenience functions for dealing with financial years
