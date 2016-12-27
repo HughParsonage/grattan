@@ -45,21 +45,26 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
   
   lf.indices[, obsDate := as.Date(sprintf("%s-01", obsTime))]
   last.date.in.series <- last(lf.indices[["obsDate"]])
-  last.full.fy.in.series <- 
+  
+  last_full_yr_in_series <- 
     lf.indices %>%
     # month from data.table::
     .[month(obsDate) == 6] %>%
     .[["obsDate"]] %>%
     last %>%
-    date2fy
+    lubridate::year(.)
   
-  if (!allow.projection && any(to_fy > last.full.fy.in.series)){
+  last_full_fy_in_series <- 
+    last_full_yr_in_series %>%
+    yr2fy(.)
+  
+  if (!allow.projection && any(to_fy > last_full_fy_in_series)){
     stop("Not all elements of to_fy are in labour force data.")
   }
   
   # Use forecast::forecast to inflate forward
   forecast.series <- match.arg(forecast.series)
-  if (allow.projection && any(to_fy > last.full.fy.in.series) && forecast.series != "custom"){
+  if (allow.projection && any(to_fy > last_full_fy_in_series) && forecast.series != "custom"){
     # Labour force is monthly
     to_date <- fy2date(max(to_fy))
     months.ahead <- 
@@ -110,34 +115,52 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     .[month(obsDate) == use.month] %>%
     .[, fy_year := date2fy(obsDate)]
   
-  if (allow.projection && any(to_fy > last.full.fy.in.series) && forecast.series == "custom"){
-    stopifnot(is.data.table(lf.series), 
-              all(c("fy_year", "r") %in% names(lf.series)))
-    r <- NULL
-    
-    first.fy.in.lf.series <- min(lf.series[["fy_year"]])
-    
-    if (first.fy.in.lf.series != last.full.fy.in.series){
-      stop("The first fy in the custom series must be equal to ", last.full.fy.in.series)
+  if (allow.projection && any(to_fy > last_full_fy_in_series) && forecast.series == "custom"){
+    if (!is.data.table(lf.series)){
+      if (length(lf.series) == 1L){
+        years_required <- seq.int(from = last_full_yr_in_series + 1, 
+                                  to = fy2yr(max(to_fy)))
+        
+        lf.series <- data.table(fy_year = yr2fy(years_required), 
+                                r = lf.series)
+      } else {
+        stop("lf.series must be either a length-one vector", 
+             " or a data.table.")
+      }
+    } else {
+      stopifnot(all(c("fy_year", "r") %in% names(lf.series)))
+      r <- NULL
+      
+      
+      first_fy_in_lf_series <- min(lf.series[["fy_year"]])
+      
+      if (first_fy_in_lf_series != yr2fy(last_full_yr_in_series + 1)){
+        stop("The first fy in the custom series must be equal to ", yr2fy(last_full_yr_in_series + 1))
+      }
+      
+      # Determine whether the dates are a regular sequence (no gaps)
+      input_series_fys <- lf.series[["fy_year"]]
+      expected_fy_sequence <- yr2fy(seq.int(from = last_full_yr_in_series + 1, 
+                                            to = last_full_yr_in_series + nrow(lf.series)))
+      
+      if (!identical(input_series_fys, expected_fy_sequence)){
+        stop("lf.series$fy_year should be ", dput(expected_fy_sequence), ".")
+      }
     }
     
-    if (!(dplyr::near(lf.series[fy_year == first.fy.in.lf.series][["r"]], 0))){
-      stop("r must be 0 at fy_year = ", last.full.fy.in.series)
+    if (any(lf.series[["r"]] > 1)){
+      message("Some r > 1 in lf.series.",
+              "This is unlikely rate of wage growth (r = 0.025 corresponds to 2.5% wage growth).")
     }
     
-    if (any(lf.indices[["r"]] > 1)){
-      message("Some r > 1 detected. This is unlikely rate of labour force growth (r = 0.025 corresponds to 2.5% growth).")
-    }
+    last_obsValue_in_actual_series <- last(lf.indices[["obsValue"]])
     
-    last.obsValue.in.series <- tail(lf.indices, 1L)[["obsValue"]]
-    
-    lf.series[, obsValue := last.obsValue.in.series * cumprod(1 + r)]
-    lf.series[fy_year != first.fy.in.lf.series]
+    lf.series[, obsValue := last_obsValue_in_actual_series * cumprod(1 + r)]
     
     lf.indices <- rbindlist(list(lf.indices, 
-                                 lf.series[fy_year != first.fy.in.lf.series]), 
-                            use.names = TRUE, 
-                            fill = TRUE)
+                                 lf.series), 
+                              use.names = TRUE, 
+                              fill = TRUE)
   }
   
   input <-

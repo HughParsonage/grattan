@@ -23,14 +23,17 @@ wage_inflator(wage = 1, from_fy, to_fy, useABSConnection = FALSE,
 
 \item{forecast.level}{The prediction interval to be used if \code{forecast.series} is \code{upper} or \code{lower}.}
 
-\item{wage.series}{If \code{forecast.series = 'custom'}, a \code{data.table} with two variables, \code{fy_year} and \code{r}. 
-The variable \code{fy_year} consists of all financial years between the last financial year in the (known) wage series and \code{to_fy} \strong{inclusive}.
-The variable \code{r} consists of rates of wage growth assumed in each \code{fy_year}, which must be 1 in the first year (to connect with the original wage series).}
+\item{wage.series}{If \code{forecast.series = 'custom'}, how future years should be inflated. 
+The future wage series can be provided in two ways: 
+(1) a single value, to be the assumed rate of wage inflation in years beyond the known series, or 
+(2) a \code{data.table} with two variables, \code{fy_year} and \code{r}. If (2), 
+the variable \code{fy_year} must be a vector of all financial years after the last financial year in the (known) wage series and the latest \code{to_fy} \strong{inclusive}.
+The variable \code{r} consists of rates of wage growth assumed in each \code{fy_year}.}
 }
 \value{
 The wage inflation between the two years.
 }
 \description{
-Predicts what a wage could expect to grow to, between two financial years.
+Predicts the inflation of hourly rates of pay, between two financial years.
 }
 
