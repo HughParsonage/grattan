@@ -10,7 +10,8 @@ ABS Cat 6202.0 \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocume
 \usage{
 lf_inflator_fy(labour_force = 1, from_fy = "2012-13", to_fy,
   useABSConnection = FALSE, allow.projection = TRUE, use.month = 1L,
-  forecast.series = c("mean", "upper", "lower"), forecast.level = 95)
+  forecast.series = c("mean", "upper", "lower", "custom"),
+  forecast.level = 95, lf.series = NULL)
 
 lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date,
   useABSConnection = FALSE)
@@ -31,6 +32,10 @@ lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date,
 \item{forecast.series}{Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals.}
 
 \item{forecast.level}{The prediction interval to be used if \code{forecast.series} is \code{upper} or \code{lower}.}
+
+\item{lf.series}{If \code{forecast.series = 'custom'}, a \code{data.table} with two variables, \code{fy_year} and \code{r}. 
+The variable \code{fy_year} consists of all financial years between the last financial year in the (known) labour force series and \code{to_fy} \strong{inclusive}.
+The variable \code{r} consists of rates of labour force growth assumed in each \code{fy_year}, which must be 1 in the first year (to connect with the original labour force series).}
 
 \item{from_date}{The date of \code{labour_force}.}
 

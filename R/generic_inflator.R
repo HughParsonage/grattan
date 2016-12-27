@@ -33,10 +33,15 @@ generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzer
   
   extract_estimator <- function(.prev){
     switch(estimator, 
-           "mean"  = {out <- magrittr::use_series(magrittr::extract(.prev, "mean"), "mean")},
-           "upper" = {out <- magrittr::use_series(magrittr::extract(.prev, "upper"), "upper")},
-           "lower" = {out <- magrittr::use_series(magrittr::extract(.prev, "lower"), "lower")}
-    )
+           "mean"  = {
+             out <- magrittr::use_series(magrittr::extract(.prev, "mean"), "mean")
+           },
+           "upper" = {
+             out <- magrittr::use_series(magrittr::extract(.prev, "upper"), "upper")
+           },
+           "lower" = {
+             out <- magrittr::use_series(magrittr::extract(.prev, "lower"), "lower")
+           })
     as.numeric(out)
   }
   
@@ -73,7 +78,7 @@ generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzer
                  as.data.table(point_forecasts_by_var)), 
             use.names = TRUE, 
             fill = TRUE) %>%
-    .[ ,fy_year := yr2fy(1:.N - 1 + fy2yr(dplyr::first(fy.year)))] %>% 
+    .[, fy_year := yr2fy(1:.N - 1 + fy2yr(dplyr::first(fy.year)))] %>% 
     # last(fy_year) is the fy_year corresponding to h, the target. 
     dplyr::filter(fy_year %in% c(fy.year.of.sample.file, dplyr::last(fy_year))) %>% 
     dplyr::summarise_each(dplyr::funs(last_over_first), -c(fy_year, fy.year)) %>%

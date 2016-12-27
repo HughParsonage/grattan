@@ -6,9 +6,13 @@
 #' @param WEIGHT The sample weight for the sample file. (So a 2\% file has \code{WEIGHT} = 50.)
 #' @param excl_vars A character vector of column names in \code{sample_file} that should not be inflated. Columns not present in the 2013-14 sample file are not inflated and nor are the columns \code{Ind}, \code{Gender}, \code{age_range}, \code{Occ_code}, \code{Partner_status}, \code{Region}, \code{Lodgment_method}, and \code{PHI_Ind}.
 #' @param forecast.dots A list containing parameters to be passed to \code{generic_inflator}.
+#' @param wage.series See \code{\link{wage_inflator}}.
+#' @param lf.series See \code{\link{lf_inflator_fy}}.
 #' @param .recalculate.inflators Should \code{generic_inflator()} or \code{CG_inflator} be called to project the other variables? Adds time.
 #' @param .copyDT Should a \code{copy()} of \code{sample_file} be made? If set to FALSE, will update \code{sample_file}. 
 #' @return A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).
+#' @details We recommend you use \code{sample_file_1213}, rather than \code{sample_file_1314}, unless you need the superannuation variables, 
+#' as the latter suggests lower-than-recorded tax collections. 
 #' @examples 
 #' if (requireNamespace("taxstats", quietly = TRUE) && requireNamespace("data.table", quietly = TRUE)){
 #'   library(taxstats)
@@ -25,27 +29,53 @@ project <- function(sample_file,
                     WEIGHT = 50L, 
                     excl_vars, 
                     forecast.dots = list(estimator = "mean", pred_interval = 80), 
+                    wage.series = NULL,
+                    lf.series = NULL,
                     .recalculate.inflators = FALSE, 
                     .copyDT = TRUE){
   stopifnot(is.integer(h), h >= 0L, is.data.table(sample_file))
+  if (.copyDT){
+    sample_file <- copy(sample_file)
+  }
   
   sample_file[, "WEIGHT" := list(WEIGHT)]
+  
   if (h == 0){
     return(sample_file)
   } else {
     current.fy <- fy.year.of.sample.file
     to.fy <- yr2fy(fy2yr(current.fy) + h)
-    # CGT expenditures is currently the bottleneck. See data-raw/put-data.R
-    stopifnot(all(to.fy %in% cg_inflators_1314$fy_year))
-    wage.inflator <- wage_inflator(1, from_fy = current.fy, to_fy = to.fy)
-    lf.inflator <- lf_inflator_fy(from_fy = current.fy, to_fy = to.fy)
+    
+    if (is.null(wage.series)){
+      wage.inflator <- wage_inflator(1, from_fy = current.fy, to_fy = to.fy)
+    } else {
+      wage.inflator <- wage_inflator(1, from_fy = current.fy, to_fy = to.fy, 
+                                     forecast.series = "custom", wage.series = wage.series)
+    }
+    
+    if (is.null(lf.series)){
+      lf.inflator <- lf_inflator_fy(from_fy = current.fy, to_fy = to.fy)
+    } else {
+      lf.inflator <- lf_inflator_fy(from_fy = current.fy, to_fy = to.fy, 
+                                    forecast.series = "custom", lf.series = lf.series)
+    }
+    
+    
     cpi.inflator <- cpi_inflator(1, from_fy = current.fy, to_fy = to.fy)
     if (.recalculate.inflators){
       CG.inflator <- CG_inflator(1, from_fy = current.fy, to_fy = to.fy)
     } else {
-      stopifnot("forecast.series" %in% names(cg_inflators_1314))
-      forecast.series <- NULL 
-      CG.inflator <- cg_inflators_1314[fy_year == to.fy & forecast.series == forecast.dots$estimator][["cg_inflator"]]
+      if (current.fy %notin% c("2012-13", "2013-14")){
+        stop("Precalculated inflators only available when projecting from 2012-13 or 2013-14.")
+      } else {
+        cg_inflators <- 
+          switch(current.fy, 
+                 "2012-13" = cg_inflators_1213, 
+                 "2013-14" = cg_inflators_1314)
+        stopifnot("forecast.series" %in% names(cg_inflators))
+        forecast.series <- NULL 
+        CG.inflator <- cg_inflators[fy_year == to.fy & forecast.series == forecast.dots$estimator][["cg_inflator"]]
+      } 
     }
     
     col.names <- names(sample_file)
@@ -123,7 +153,11 @@ project <- function(sample_file,
         generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = fy.year.of.sample.file, 
                          estimator = forecast.dots$estimator, pred_interval = forecast.dots$pred_interval)
     } else {
-      generic.inflators <- dplyr::filter(generic_inflators, fy_year == to.fy)
+      switch(current.fy, 
+             "2012-13" = generic.inflators <- dplyr::filter(generic_inflators_1213, fy_year == to.fy), 
+             "2013-14" = generic.inflators <- dplyr::filter(generic_inflators_1314, fy_year == to.fy), 
+             stop("Precalculated inflators only available when projecting from 2012-13 or 2013-14.")
+      )
       generic.inflators <- as.data.table(generic.inflators)
     }
     
@@ -135,8 +169,14 @@ project <- function(sample_file,
     
     
     # Differential uprating:
-    for (j in which(col.names %in% diff.uprate.wagey.cols))
-      set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy))
+    for (j in which(col.names %in% diff.uprate.wagey.cols)){
+      if (is.null(wage.series)){
+        set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy))
+      } else {
+        set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy, 
+                                                                   forecast.series = "custom", wage.series = wage.series))
+      }
+    }
     
     for (j in which(col.names %in% wagey.cols))
       set(sample_file, j = j, value = wage.inflator * sample_file[[j]])

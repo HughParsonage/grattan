@@ -29,6 +29,8 @@ test_that("Wage growth is higher for extreme salaries", {
   from_fy <- yr2fy(from_year)
   to_fy <- yr2fy(to_year)
   
+  invisible(sample_files_all)
+  
   salaries <- 
     sample_files_all %>%
     select(fy.year, Sw_amt) %>%

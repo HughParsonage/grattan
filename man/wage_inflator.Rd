@@ -2,11 +2,11 @@
 % Please edit documentation in R/wage_inflator.R
 \name{wage_inflator}
 \alias{wage_inflator}
-\title{A wage inflator}
+\title{Inflation using the Wage Price Index.}
 \usage{
 wage_inflator(wage = 1, from_fy, to_fy, useABSConnection = FALSE,
-  allow.projection = TRUE, forecast.series = c("mean", "upper", "lower"),
-  forecast.level = 95)
+  allow.projection = TRUE, forecast.series = c("mean", "upper", "lower",
+  "custom"), forecast.level = 95, wage.series = NULL)
 }
 \arguments{
 \item{wage}{The amount to be inflated (1 by default).}
@@ -19,14 +19,21 @@ wage_inflator(wage = 1, from_fy, to_fy, useABSConnection = FALSE,
 
 \item{allow.projection}{If set to \code{TRUE} the \code{forecast} package is used to project forward, if required.}
 
-\item{forecast.series}{Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals.}
+\item{forecast.series}{Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals. A fourth option \code{custom} allows manual forecasts to be set.}
 
 \item{forecast.level}{The prediction interval to be used if \code{forecast.series} is \code{upper} or \code{lower}.}
+
+\item{wage.series}{If \code{forecast.series = 'custom'}, how future years should be inflated. 
+The future wage series can be provided in two ways: 
+(1) a single value, to be the assumed rate of wage inflation in years beyond the known series, or 
+(2) a \code{data.table} with two variables, \code{fy_year} and \code{r}. If (2), 
+the variable \code{fy_year} must be a vector of all financial years after the last financial year in the (known) wage series and the latest \code{to_fy} \strong{inclusive}.
+The variable \code{r} consists of rates of wage growth assumed in each \code{fy_year}.}
 }
 \value{
 The wage inflation between the two years.
 }
 \description{
-Predicts what a wage could expect to grow to, between two financial years.
+Predicts the inflation of hourly rates of pay, between two financial years.
 }
 

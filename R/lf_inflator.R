@@ -14,6 +14,9 @@
 #' @param use.month An integer (corresponding to the output of \code{data.table::month}) representing the month of the series used for the inflation.
 #' @param forecast.series Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals.
 #' @param forecast.level The prediction interval to be used if \code{forecast.series} is \code{upper} or \code{lower}. 
+#' @param lf.series If \code{forecast.series = 'custom'}, a \code{data.table} with two variables, \code{fy_year} and \code{r}. 
+#' The variable \code{fy_year} consists of all financial years between the last financial year in the (known) labour force series and \code{to_fy} \strong{inclusive}.
+#' The variable \code{r} consists of rates of labour force growth assumed in each \code{fy_year}, which must be 1 in the first year (to connect with the original labour force series).
 #' @source ABS Cat 6202.0 \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocument}.
 #' @details \code{lf_inflator} is used on dates. The underlying data series is available every month. 
 #' @examples
@@ -24,8 +27,9 @@
 lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy, 
                            useABSConnection = FALSE, allow.projection = TRUE, 
                            use.month = 1L,
-                           forecast.series = c("mean", "upper", "lower"),
-                           forecast.level = 95) {
+                           forecast.series = c("mean", "upper", "lower", "custom"),
+                           forecast.level = 95, 
+                           lf.series = NULL) {
   # CRAN
   obsTime <- NULL; obsValue <- NULL; to_index <- NULL; from_index <- NULL
   # pretty sure this is ok. Reflects  dplyr::mutate(fy_year = date2fy(obsTimeDate))
@@ -41,48 +45,53 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
   
   lf.indices[, obsDate := as.Date(sprintf("%s-01", obsTime))]
   last.date.in.series <- last(lf.indices[["obsDate"]])
-  last.full.fy.in.series <- 
+  
+  last_full_yr_in_series <- 
     lf.indices %>%
     # month from data.table::
     .[month(obsDate) == 6] %>%
     .[["obsDate"]] %>%
     last %>%
-    date2fy
+    lubridate::year(.)
   
-  if (!allow.projection && any(to_fy > last.full.fy.in.series)){
+  last_full_fy_in_series <- 
+    last_full_yr_in_series %>%
+    yr2fy(.)
+  
+  if (!allow.projection && any(to_fy > last_full_fy_in_series)){
     stop("Not all elements of to_fy are in labour force data.")
   }
   
   # Use forecast::forecast to inflate forward
-  if (allow.projection && to_fy > last.full.fy.in.series){
+  forecast.series <- match.arg(forecast.series)
+  if (allow.projection && any(to_fy > last_full_fy_in_series) && forecast.series != "custom"){
     # Labour force is monthly
-    to_date <- fy2date(to_fy)
+    to_date <- fy2date(max(to_fy))
     months.ahead <- 
       12L * (year(to_date) - year(last.date.in.series)) + month(to_date) - month(last.date.in.series)
     
-    forecast.series <- match.arg(forecast.series)
     switch(forecast.series, 
            "mean" = {
              forecasts <- 
-               forecast::forecast(lf.indices[["obsValue"]], 
-                                  h = months.ahead, 
-                                  level = forecast.level) %>%
+               gforecast(lf.indices[["obsValue"]], 
+                         h = months.ahead, 
+                         level = forecast.level) %>%
                magrittr::use_series("mean") %>%
                as.numeric 
            }, 
            "upper" = {
              forecasts <- 
-               forecast::forecast(lf.indices[["obsValue"]], 
-                                  h = months.ahead, 
-                                  level = forecast.level) %>%
+               gforecast(lf.indices[["obsValue"]], 
+                         h = months.ahead, 
+                         level = forecast.level) %>%
                magrittr::use_series("upper") %>%
                as.numeric 
            }, 
            "lower" = {
              forecasts <- 
-               forecast::forecast(lf.indices[["obsValue"]], 
-                                  h = months.ahead, 
-                                  level = forecast.level) %>%
+               gforecast(lf.indices[["obsValue"]], 
+                         h = months.ahead, 
+                         level = forecast.level) %>%
                magrittr::use_series("lower") %>%
                as.numeric
            })
@@ -93,7 +102,10 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
                  obsDate  = seq.Date(last.date.in.series, to_date, by = "month")[-1]) %>%
       .[, obsTime := sprintf("%s-%02d", year(obsDate), month(obsDate))]
 
-    lf.indices <- rbindlist(list(lf.indices, lf.indices.new), use.names = TRUE, fill = TRUE)
+    lf.indices <- rbindlist(list(lf.indices, 
+                                 lf.indices.new), 
+                            use.names = TRUE, 
+                            fill = TRUE)
   }
   
   stopifnot(use.month %in% 1:12)
@@ -103,6 +115,53 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     .[month(obsDate) == use.month] %>%
     .[, fy_year := date2fy(obsDate)]
   
+  if (allow.projection && any(to_fy > last_full_fy_in_series) && forecast.series == "custom"){
+    if (!is.data.table(lf.series)){
+      if (length(lf.series) == 1L){
+        years_required <- seq.int(from = last_full_yr_in_series + 1, 
+                                  to = fy2yr(max(to_fy)))
+        
+        lf.series <- data.table(fy_year = yr2fy(years_required), 
+                                r = lf.series)
+      } else {
+        stop("lf.series must be either a length-one vector", 
+             " or a data.table.")
+      }
+    } else {
+      stopifnot(all(c("fy_year", "r") %in% names(lf.series)))
+      r <- NULL
+      
+      
+      first_fy_in_lf_series <- min(lf.series[["fy_year"]])
+      
+      if (first_fy_in_lf_series != yr2fy(last_full_yr_in_series + 1)){
+        stop("The first fy in the custom series must be equal to ", yr2fy(last_full_yr_in_series + 1))
+      }
+      
+      # Determine whether the dates are a regular sequence (no gaps)
+      input_series_fys <- lf.series[["fy_year"]]
+      expected_fy_sequence <- yr2fy(seq.int(from = last_full_yr_in_series + 1, 
+                                            to = last_full_yr_in_series + nrow(lf.series)))
+      
+      if (!identical(input_series_fys, expected_fy_sequence)){
+        stop("lf.series$fy_year should be ", dput(expected_fy_sequence), ".")
+      }
+    }
+    
+    if (any(lf.series[["r"]] > 1)){
+      message("Some r > 1 in lf.series.",
+              "This is unlikely rate of wage growth (r = 0.025 corresponds to 2.5% wage growth).")
+    }
+    
+    last_obsValue_in_actual_series <- last(lf.indices[["obsValue"]])
+    
+    lf.series[, obsValue := last_obsValue_in_actual_series * cumprod(1 + r)]
+    
+    lf.indices <- rbindlist(list(lf.indices, 
+                                 lf.series), 
+                              use.names = TRUE, 
+                              fill = TRUE)
+  }
   
   input <-
     data.table(labour_force = labour_force,

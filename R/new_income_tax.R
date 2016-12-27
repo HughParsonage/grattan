@@ -30,7 +30,7 @@ new_income_tax <- function(income,
   input <- 
     data.table(income = income) 
   
-  input <- input[ ,ordering := 1:.N]
+  input <- input[, ordering := 1:.N]
   
   input.keyed <-
     # potentially expensive. Another way would be 
@@ -41,7 +41,7 @@ new_income_tax <- function(income,
   
   tax_fun <- function(income){
     tax_table2[input.keyed, roll = Inf] %>%
-      .[,tax := tax_at + (income - lower_bracket) * marginal_rate] %>%
+      .[, tax := tax_at + (income - lower_bracket) * marginal_rate] %>%
       .[order(ordering)] %>%
       .[["tax"]]
   }

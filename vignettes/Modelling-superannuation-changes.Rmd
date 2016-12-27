@@ -29,11 +29,11 @@ library(grattan)
 library(data.table)
 if (requireNamespace("taxstats", quietly = TRUE)){
   library(taxstats)
-  get_sample_files_all()
+  sample_files_all <- get_sample_files_all()
 } else {
   install.packages("taxstats", repos = "https://hughparsonage.github.io/drat/", type = "source")
   library(taxstats)
-  get_sample_files_all()
+  sample_files_all <- get_sample_files_all()
 }
 library(magrittr)
 #' dollar scales

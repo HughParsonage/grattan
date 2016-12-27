@@ -2,12 +2,13 @@
 #' 
 #' @param x The vector to be inflated.
 #' @param from The contemporaneous time of x. 
-#' @param to The target time to which x is to be inflated.
-#' @param inflator_table A \code{data.table} having columns \code{Index} and \code{Time}. 
+#' @param to The target time (in units of the \code{inflator_table}) to which x is to be inflated.
+#' @param inflator_table A \code{data.table} having columns \code{index.col} and \code{time.col}. 
 #' @param index.col The column in \code{inflator_table} containing the index used for inflation.
 #' @param time.col The column in \code{inflator_table} by which times are mapped. 
 #' @param roll If \code{NULL}, inflation is calculated only on exact matches in \code{inflator_table}. Otherwise, uses a rolling join. See \code{data.table::data.table}.
-#' @return A vector of inflated values.
+#' @return A vector of inflated values. For example, \code{inflator_table = grattan:::cpi_seasonal_adjustment}, 
+#' \code{index.col = "obsValue"}, \code{time.col = "obsTime"}, gives the CPI inflator.
 #' @export
 
 inflator <- function(x = 1, from, to, inflator_table, index.col = "Index", time.col = "Time", roll = NULL){
@@ -25,7 +26,7 @@ inflator <- function(x = 1, from, to, inflator_table, index.col = "Index", time.
   
   if (any_from_after_to){
     # if from is after to, we want -1 (so it can be raised by that power)
-    out_power <- sign({to > from} - 0.5)  # vectorized
+    out_power <- sign((to > from) - 0.5)  # vectorized
     
     .from <- pmin(from, to)
     .to   <- pmax(to, from)

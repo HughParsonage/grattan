@@ -58,7 +58,9 @@
       "upper_threshold", "taper", "rate", "lower_family_threshold", 
       "upper_family_threshold", "lower_up_for_each_child", "family_status_index", 
       "max_offset", "taper_rate", "source", "FY", "CGT_discount_for_individuals_and_trusts_millions", 
-      "URL", "Projected")
+      "URL", "Projected"), 
+    # lito_tbl
+    "max_lito", "min_bracket", "lito_taper"
       )
     )
   invisible()

@@ -9,6 +9,7 @@
 # produced vignettes
 vignettes/*.html
 vignettes/*.pdf
+vignettes/*.R
 .Rproj.user
 *.o
 *.dll
