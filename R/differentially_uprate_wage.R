@@ -17,8 +17,10 @@
 
 
 differentially_uprate_wage <- function(wage = 1, from_fy, to_fy, ...){
-  stopifnot(all(from_fy %in% c("2003-04", "2004-05", "2005-06", "2006-07", "2007-08", "2008-09", 
-                               "2009-10", "2010-11", "2011-12", "2012-13", "2013-14")))
+  stopifnot(all(from_fy %in% c("2003-04", "2004-05", "2005-06", 
+                               "2006-07", "2007-08", "2008-09", 
+                               "2009-10", "2010-11", "2011-12", 
+                               "2012-13", "2013-14")))
   input <- 
     data.table(fy.year = from_fy, 
                wage = wage) %>%
@@ -27,8 +29,9 @@ differentially_uprate_wage <- function(wage = 1, from_fy, to_fy, ...){
     setkeyv(cols = c("fy.year", "wage"))
   
   `_order` <- NULL
-  
-  assertthat::validate_that(assertthat::has_name(differential_sw_uprates, "uprate_factor"))
+  differential_sw_uprates %>%
+    assertthat::has_name(., "uprate_factor") %>%
+    assertthat::validate_that(.)
   uprate_factor <- NULL
   `_out` <- NULL
   

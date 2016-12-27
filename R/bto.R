@@ -17,7 +17,7 @@ bto <- function(benefit_amount, fy.year){
   input <- 
     data.table(benefit_amount = floor(benefit_amount), 
                fy_year = fy.year) %>%
-    .[ ,order := 1:.N] %>%
+    .[, order := 1:.N] %>%
     setkeyv("fy_year")
   
   

@@ -51,7 +51,9 @@ gni_fy <- function(fy_year){
     .[input] 
     
     if (any(output[["quarters"]] != 4L)){
-      warning("Incomplete data for some fy_years. Dates before 1959 or in the very recent past will not be reliable.")
+      warning("Incomplete data for some fy_years. ",
+              "Dates before 1959 or in the very recent ",
+              "past will not be reliable.")
     }
   
     output %>%

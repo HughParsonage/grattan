@@ -12,33 +12,38 @@
 #' age_grouper(42, interval = 5, min_age = 20, max_age = 60)
 #' @export
 
-age_grouper <- function(age, interval = 10, min_age = 25, max_age = 75, breaks = NULL, labels = NULL){
+age_grouper <- function(age, 
+                        interval = 10,
+                        min_age = 25,
+                        max_age = 75,
+                        breaks = NULL,
+                        labels = NULL){
   if (is.null(breaks)){
     if (!missing(labels) || !is.null(labels)){
       warning("breaks not specified, but labels is given (and will be ignored).")
     }
     
     cut(age, 
-        breaks = c(-Inf, 
-                   seq(min_age, max_age, by = interval), 
+        breaks = c(-Inf,
+                   seq(min_age, max_age, by = interval),
                    Inf), 
         labels = c(paste0("Below\n", min_age),
-                   paste(seq(min_age, max_age - interval, by = interval), 
-                         seq(min_age + interval - 1, max_age - 1, by = interval), 
+                   paste(seq(min_age, max_age - interval, by = interval),
+                         seq(min_age + interval - 1, max_age - 1, by = interval),
                          sep = "-"), 
                    paste0(max_age, "+")), 
         right = FALSE,  # 25-34 not 26-35
-        include.lowest = TRUE, 
+        include.lowest = TRUE,
         ordered_result = TRUE)
   } else {
     if (!missing(interval) || !missing(min_age) || !missing(max_age)){
       stop("interval, min_age, max_age, can't be specified if breaks are.")
     }
     
-    cut(age, 
-        breaks = breaks, 
-        labels = labels, 
-        right = FALSE, 
+    cut(age,
+        breaks = breaks,
+        labels = labels,
+        right = FALSE,
         include.lowest = TRUE,
         ordered_result = TRUE)
   }

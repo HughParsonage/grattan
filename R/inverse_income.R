@@ -15,7 +15,7 @@ inverse_income <- function(tax, fy.year = "2012-13", zero.tax.income = c("maximu
   if (!is.numeric(zero.tax.income)){
     zero.tax.income <- match.arg(zero.tax.income)
   }
-  if(any(tax[!is.na(tax)] < 0))
+  if (any(tax[!is.na(tax)] < 0))
     stop("tax must be nonnegative")
   
   if (max_lengths > 1){
@@ -57,10 +57,14 @@ inverse_income_lookup3 <- function(tax, fy.year = "2012-13", zero.tax.income = "
   income.range <- seq(0L, max(ceiling(max(tax) * 3.79), 100000L), by = 1L) 
   fy..year <- taxes <- NULL
   if (identical(list(...), list())){
-    input <- data.table(taxes = dplyr::if_else(zeroes, if (is.integer(tax)) 1L else 1.0, tax),   # ensure a one-to-one relationship
+    input <- data.table(taxes = dplyr::if_else(zeroes,
+                                               if (is.integer(tax)) 1L else 1.0, 
+                                               tax),   # ensure a one-to-one relationship
                         fy..year = fy.year)
   } else {
-    input <- data.table(taxes = dplyr::if_else(zeroes, if (is.integer(tax)) 1L else 1.0, tax),   # ensure a one-to-one relationship
+    input <- data.table(taxes = dplyr::if_else(zeroes,
+                                               if (is.integer(tax)) 1L else 1.0,
+                                               tax),   # ensure a one-to-one relationship
                         fy..year = fy.year, 
                         ...)
   }

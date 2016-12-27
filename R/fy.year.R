@@ -5,7 +5,10 @@
 #' @param yr_ending An integer representing a year.
 #' @param fy.yr A string suspected to be a financial year.
 #' @param date A string or date for which the financial year is desired. Note that \code{yr2fy} does not check its argument is an integer.
-#' @return For \code{is.fy}, a logical, whether its argument is a financial year. For \code{fy.year}, \code{yr2fy}, and \code{date2fy}, the financial year. For the inverses, a numeric corresponding to the year.
+#' @return For \code{is.fy}, a logical, whether its argument is a financial year.
+#' The following forms are allowed: \code{2012-13}, \code{201213}, \code{2012 13}, only.
+#' For \code{fy.year}, \code{yr2fy}, and \code{date2fy}, the financial year. 
+#' For the inverses, a numeric corresponding to the year.
 #' @examples
 #' is.fy("2012-13")
 #' is.fy("2012-14")
@@ -18,12 +21,6 @@ NULL
 
 
 is.fy <- function(fy.yr){
-  # Allowed:
-  #  2012-13
-  #  201213
-  #  2012 13
-  # only
-  # ifelse allowable (indeed optimal?)
   out <- logical(length(fy.yr))
   potential_fys <- grepl("^([12][0-9]{3})[-\\s]?[0-9]{2}$", fy.yr, perl = TRUE)
   out[potential_fys] <- 

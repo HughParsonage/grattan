@@ -35,30 +35,30 @@ aus_pop_qtr_age <- function(date = NULL, age = NULL, tbl = FALSE, roll = TRUE, r
     }
   } else {
     if (is.null(age)){
-      input <- 
+      input <-
         data.table(Date = date, 
                    Age = 1:100) %>%
         .[, ordering := 1:.N] %>%
         setkey(Age, Date)
       
-      out <- 
+      out <-
         aust_pop_by_age_yearqtr[input, roll = roll] %>%
         setorderv("ordering")
     } else {
       ordering <- NULL
-      input <- 
-        data.table(Date = date, 
+      input <-
+        data.table(Date = date,
                    Age = age) %>%
         .[, ordering := 1:.N] %>%
         setkey(Age, Date)
       
-      out <- 
+      out <-
         aust_pop_by_age_yearqtr[input, roll = roll] %>%
-        setorderv("ordering") 
+        setorderv("ordering")
     }
     out[, ordering := NULL]
   }
-  
+
   if (tbl){
     return(out[])
   } else {

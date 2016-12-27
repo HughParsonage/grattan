@@ -7,16 +7,20 @@
 #' @return The population at \code{date_quarter}, or at the year if a projections.
 #' @export 
 
-aus_pop_qtr <- function(date_quarter, 
-                        allow.projections = TRUE, 
-                        fertility = c("high", "medium", "low"), 
-                        mortality = c("high.LifeExpectancy", "medium.LifeExpectancy")){
+aus_pop_qtr <- function(date_quarter,
+                        allow.projections = TRUE,
+                        fertility = c("high", "medium", "low"),
+                        mortality = c("high.LifeExpectancy", 
+                                      "medium.LifeExpectancy")){
   # CRAN Note avoidance
   obsTime <- NULL
   
   pop_data <- 
-    dplyr::select_(as.data.table(as.data.frame(rsdmx::readSDMX("http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/ERP_QUARTERLY/1.0.3.TT.Q/ABS?startTime=1981"))), 
-                  .dots = c("obsTime", "obsValue"))
+    "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/ERP_QUARTERLY/1.0.3.TT.Q/ABS?startTime=1981" %>%
+    rsdmx::readSDMX(.) %>%
+    as.data.frame %>%
+    as.data.table %>%
+    .[, .(obsTime, obsValue)]
   
   
   
@@ -39,11 +43,12 @@ aus_pop_qtr <- function(date_quarter,
       else 
         mortality_selector <- 2
       
-      projector_url <- paste0("http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/POP_PROJ_2011/",
-                              "0.3.TT.",
-                              fertility_selector, ".",
-                              mortality_selector, ".",
-                              "1.A/ABS?startTime=2012")
+      projector_url <- 
+        paste0("http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/POP_PROJ_2011/",
+               "0.3.TT.",
+               fertility_selector, ".",
+               mortality_selector, ".",
+               "1.A/ABS?startTime=2012")
       
       projections <- 
         as.data.frame(rsdmx::readSDMX(projector_url)) %>%

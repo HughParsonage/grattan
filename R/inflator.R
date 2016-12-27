@@ -26,7 +26,7 @@ inflator <- function(x = 1, from, to, inflator_table, index.col = "Index", time.
   
   if (any_from_after_to){
     # if from is after to, we want -1 (so it can be raised by that power)
-    out_power <- sign({to > from} - 0.5)  # vectorized
+    out_power <- sign((to > from) - 0.5)  # vectorized
     
     .from <- pmin(from, to)
     .to   <- pmax(to, from)
