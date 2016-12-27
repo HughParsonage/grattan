@@ -46,19 +46,19 @@ new_medicare_levy <- function(parameter_table){
       # (such as if the partner is in gaol) that are overlooked here.
       # 
       # Enhancement: family taxable income should exclude super lump sums.
-      .[ ,family_income := income + Spouse_income ] %>%
+      .[, family_income := income + Spouse_income ] %>%
       merge(parameter_table, 
             by = c("switches"),
             sort = FALSE, 
             all.x = TRUE) %>%
       # Levy in the case of small incomes (s.7 of Act)
-      .[ ,medicare_levy := pminV(pmaxC(taper * (income - lower_threshold),
+      .[, medicare_levy := pminV(pmaxC(taper * (income - lower_threshold),
                                        0), 
                                  rate * income)] %>%
       # Person who has spouse or dependants
       ## subs.8(5) of Act
-      .[ ,lower_family_threshold := lower_family_threshold + n_dependants * lower_up_for_each_child] %>%
-      .[ ,medicare_levy := pmaxC(medicare_levy - 
+      .[, lower_family_threshold := lower_family_threshold + n_dependants * lower_up_for_each_child] %>%
+      .[, medicare_levy := pmaxC(medicare_levy - 
                                    (family_status == "family") *
                                    # pmaxC <= "(if any)" subs.8(2)(c) of Medicare Levy Act 1986
                                    pmaxC(0.02 * lower_family_threshold - 0.08 * (family_income - lower_family_threshold), 0),

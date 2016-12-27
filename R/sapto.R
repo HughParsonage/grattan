@@ -8,7 +8,11 @@
 #' @param family_status Family status of the individual.
 #' @export
 
-sapto <- function(rebate_income, fy.year, fill = 0, sapto.eligible = TRUE, family_status = "single"){
+sapto <- function(rebate_income,
+                  fy.year,
+                  fill = 0,
+                  sapto.eligible = TRUE,
+                  family_status = "single"){
   upper_threshold <- taper_rate <- max_offset <- NULL
   input <- data.table(fy_year = fy.year, 
                       family_status = family_status, 
@@ -21,9 +25,9 @@ sapto <- function(rebate_income, fy.year, fill = 0, sapto.eligible = TRUE, famil
   
   out <- 
     sapto_tbl[input] %>%
-    .[,sapto := pmaxC(pminV(max_offset, 
-                           upper_threshold * taper_rate - rebate_income * taper_rate),
-                     0)] %>%
+    .[, sapto := pmaxC(pminV(max_offset, 
+                             upper_threshold * taper_rate - rebate_income * taper_rate),
+                       0)] %>%
     setkey(ordering) %>%
     unique %>%
     .[["sapto"]]
