@@ -20,24 +20,32 @@ test_that("ABS connection", {
 
 test_that("Custom wage series", {
   x <- wage_inflator(1, from_fy = "2015-16", to_fy = "2017-18", 
-                     forecast.series = "custom", wage.series = data.table(fy_year = c("2015-16", "2016-17", "2017-18"), 
-                                                                          r = c(0, 0, 0.10)))
+                     forecast.series = "custom",
+                     wage.series = data.table(fy_year = c("2016-17", "2017-18"), 
+                                              r = c(0, 0.10)))
   expect_equal(x, 1.1)
   
-  expect_error(wage_inflator(1, from_fy = "2015-16", to_fy = "2017-18", 
-               forecast.series = "custom", 
-               wage.series = data.table(fy_year = c("2016-17", "2017-18"), 
-                                        r = c(0, 0.1))))
+  y <- wage_inflator(1, from_fy = "2015-16", to_fy = "2019-20", 
+                     forecast.series = "custom", 
+                     wage.series = 0.1)
   
+  expect_equal(y, 1.1^4)
+})
+  
+test_that("Custom wage series error handling", {
   expect_error(wage_inflator(1, from_fy = "2015-16", to_fy = "2017-18", 
                forecast.series = "custom", 
                wage.series = data.table(fy_year = c("2015-16", "2016-17", "2017-18"), 
                                         r = c(42, 0.1, 0.1))))
   
+  expect_error(wage_inflator(1, from_fy = "2015-16", to_fy = "2017-18", 
+                             forecast.series = "custom", 
+                             wage.series = c(1, 2)))
+  
   expect_message(wage_inflator(1, from_fy = "2015-16", to_fy = "2017-18", 
                                forecast.series = "custom", 
-                               wage.series = data.table(fy_year = c("2015-16", "2016-17", "2017-18"), 
-                                                        r = c(0, 2.5, 10.0))))
+                               wage.series = data.table(fy_year = c("2016-17", "2017-18"), 
+                                                        r = c(2.5, 10.0))))
 })
 
 test_that("from > to deflates and is not a warning", {

@@ -1,5 +1,5 @@
 #' @title Inflation using the Wage Price Index.
-#' @description Predicts what a wage could expect to grow to, between two financial years.
+#' @description Predicts the inflation of hourly rates of pay, between two financial years.
 #' 
 #' @param wage The amount to be inflated (1 by default).
 #' @param from_fy A character vector of the form "2012-13" representing the FY ending that the wage index is to be taken (i.e. Q4 in that year). FY year must be 1996-97 or later.
@@ -8,11 +8,13 @@
 #' @param allow.projection If set to \code{TRUE} the \code{forecast} package is used to project forward, if required. 
 #' @param forecast.series Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals. A fourth option \code{custom} allows manual forecasts to be set.
 #' @param forecast.level The prediction interval to be used if \code{forecast.series} is \code{upper} or \code{lower}.
-#' @param wage.series If \code{forecast.series = 'custom'}, a \code{data.table} with two variables, \code{fy_year} and \code{r}. 
-#' The variable \code{fy_year} consists of all financial years between the last financial year in the (known) wage series and \code{to_fy} \strong{inclusive}.
-#' The variable \code{r} consists of rates of wage growth assumed in each \code{fy_year}, which must be 1 in the first year (to connect with the original wage series).
+#' @param wage.series If \code{forecast.series = 'custom'}, how future years should be inflated. 
+#' The future wage series can be provided in two ways: 
+#' (1) a single value, to be the assumed rate of wage inflation in years beyond the known series, or 
+#' (2) a \code{data.table} with two variables, \code{fy_year} and \code{r}. If (2), 
+#' the variable \code{fy_year} must be a vector of all financial years after the last financial year in the (known) wage series and the latest \code{to_fy} \strong{inclusive}.
+#' The variable \code{r} consists of rates of wage growth assumed in each \code{fy_year}.
 #' @return The wage inflation between the two years.
-#' @importFrom utils tail
 #' @export
 
 wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, allow.projection = TRUE, 
@@ -45,13 +47,13 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
   wage.indices[, obsYear := as.integer(sub("([12][0-9]{3}).Q([1-4])", "\\1", obsTime, perl = TRUE))]
   wage.indices[, obsQtr  := as.integer(sub("([12][0-9]{3}).Q([1-4])", "\\2", obsTime, perl = TRUE))]
   
-  last.full.yr.in.series <- 
+  last_full_yr_in_series <- 
     wage.indices %>%
     dplyr::filter(obsQtr == 2L) %>%
     .[["obsYear"]] %>%
     last 
   
-  last.full.fy.in.series <- yr2fy(last.full.yr.in.series)
+  last_full_fy_in_series <- yr2fy(last_full_yr_in_series)
   
   last.quarter.in.series <- 
     wage.indices %>%
@@ -60,7 +62,7 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
   
   exponent <- rep(1L, length(from_fy))
   if (any(from_fy > to_fy)){
-    exponent[from_fy > last.full.fy.in.series] <- -1L
+    exponent[from_fy > last_full_fy_in_series] <- -1L
     
     .from <- pmin(from_fy, to_fy)
     .to   <- pmax(to_fy, from_fy)
@@ -69,17 +71,17 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
     to_fy <- .to
   }
   
-  if (!allow.projection && any(to_fy > last.full.fy.in.series)){
+  if (!allow.projection && any(to_fy > last_full_fy_in_series)){
     stop("Not all elements of to_fy are in wage index data.")
   }
   # else allow NAs to propagate
   
   # Use forecast::forecast to inflate forward
   forecast.series <- match.arg(forecast.series)
-  if (allow.projection && any(to_fy > last.full.fy.in.series) && forecast.series != "custom"){
+  if (allow.projection && any(to_fy > last_full_fy_in_series) && forecast.series != "custom"){
     # Number of quarters beyond the data our forecast must reach
     quarters.ahead <- 
-      4L * (max(fy2yr(to_fy)) - last.full.yr.in.series) + 2L - last.quarter.in.series
+      4L * (max(fy2yr(to_fy)) - last_full_yr_in_series) + 2L - last.quarter.in.series
     
     switch(forecast.series, 
            "mean" = {
@@ -121,32 +123,50 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
     .[, fy_year := yr2fy(obsYear)] %>%
     .[, list(fy_year, obsValue)]
   
-  if (allow.projection && any(to_fy > last.full.fy.in.series) && forecast.series == "custom"){
-    stopifnot(is.data.table(wage.series), 
-              all(c("fy_year", "r") %in% names(wage.series)))
-    r <- NULL
-    
-    first.fy.in.wage.series <- min(wage.series[["fy_year"]])
-    
-    if (first.fy.in.wage.series != last.full.fy.in.series){
-      stop("The first fy in the custom series must be equal to ", last.full.fy.in.series)
-    }
-    
-    if (!(dplyr::near(wage.series[fy_year == first.fy.in.wage.series][["r"]], 0))){
-      stop("r must be 0 at fy_year = ", last.full.fy.in.series)
+  if (allow.projection && any(to_fy > last_full_fy_in_series) && forecast.series == "custom"){
+    if (!is.data.table(wage.series)){
+      if (length(wage.series) == 1L){
+        years_required <- seq.int(from = last_full_yr_in_series + 1, 
+                                  to = fy2yr(max(to_fy)))
+        
+        wage.series <- data.table(fy_year = yr2fy(years_required), 
+                                  r = wage.series)
+      } else {
+        stop("wage.series must be either a length-one vector", 
+             " or a data.table.")
+      }
+    } else {
+      stopifnot(all(c("fy_year", "r") %in% names(wage.series)))
+      r <- NULL
+      
+      
+      first_fy_in_wage_series <- min(wage.series[["fy_year"]])
+      
+      if (first_fy_in_wage_series != yr2fy(last_full_yr_in_series + 1)){
+        stop("The first fy in the custom series must be equal to ", yr2fy(last_full_yr_in_series + 1))
+      }
+      
+      # Determine whether the dates are a regular sequence (no gaps)
+      input_series_fys <- wage.series[["fy_year"]]
+      expected_fy_sequence <- yr2fy(seq.int(from = last_full_yr_in_series + 1, 
+                                            to  = last_full_yr_in_series + nrow(wage.series)))
+      
+      if (!identical(input_series_fys, expected_fy_sequence)){
+        stop("wage.series$fy_year should be ", dput(expected_fy_sequence), ".")
+      }
     }
     
     if (any(wage.series[["r"]] > 1)){
-      message("Some r > 1 detected. This is unlikely rate of wage growth (r = 0.025 corresponds to 2.5% wage growth).")
+      message("Some r > 1 in wage.series.",
+              "This is unlikely rate of wage growth (r = 0.025 corresponds to 2.5% wage growth).")
     }
     
-    last.obsValue.in.series <- tail(wage.indices, 1L)[["obsValue"]]
+    last_obsValue_in_actual_series <- last(wage.indices[["obsValue"]])
     
-    wage.series[, obsValue := last.obsValue.in.series * cumprod(1 + r)]
-    wage.series[fy_year != first.fy.in.wage.series]
+    wage.series[, obsValue := last_obsValue_in_actual_series * cumprod(1 + r)]
     
     wage.indices <- rbindlist(list(wage.indices, 
-                                   wage.series[fy_year != first.fy.in.wage.series]), 
+                                   wage.series), 
                               use.names = TRUE, 
                               fill = TRUE)
   }
