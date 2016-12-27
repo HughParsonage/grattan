@@ -35,6 +35,9 @@ test_that("medicare_levy returns known values", {
   expect_equal(medicare_levy(income = 52e3, fy.year = "2015-16", sapto.eligible = TRUE , Spouse_income = 1e3, n_dependants = 2, family_status = "family"), 0)
   
   expect_equal(medicare_levy(20e3, "2004-05", sato = TRUE, pto = FALSE), 0)
+  expect_equal(medicare_levy(16e3, "2001-02"), 240)
+  expect_equal(medicare_levy(16e3, "2001-02", sapto.eligible = TRUE), 0)
+  
   expect_error(medicare_levy(20e3, "2004-05", sato = TRUE, pto = TRUE))
   expect_warning(medicare_levy(20e3, "2004-05", sato = FALSE, pto = TRUE), regexp = "pto")
 })
