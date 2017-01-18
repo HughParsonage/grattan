@@ -183,6 +183,7 @@ test_that("Corner cases", {
 })
 
 test_that("Warning with no WEIGHT.", {
+  skip_if_not_installed("taxstats")
   expect_warning(revenue_from_new_cap_and_div293(sample_file_1314, fy.year = "2013-14"))
 })
 
