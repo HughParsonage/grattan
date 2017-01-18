@@ -13,7 +13,7 @@ aus_pop_qtr <- function(date_quarter,
                         mortality = c("high.LifeExpectancy", 
                                       "medium.LifeExpectancy")){
   # CRAN Note avoidance
-  obsTime <- NULL
+  obsTime <- obsValue <- NULL
   
   pop_data <- 
     "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/ERP_QUARTERLY/1.0.3.TT.Q/ABS?startTime=1981" %>%
