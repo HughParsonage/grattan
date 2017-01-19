@@ -15,7 +15,7 @@ output:
  
 ---
  
-[![Last-changedate](https://img.shields.io/badge/last%20change-`r gsub('-', '--', Sys.Date())`-yellowgreen.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-`r gsub('-', '--', Sys.Date())`-orange.svg)](/commits/master)
 
 # grattan
 
