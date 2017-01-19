@@ -1,9 +1,9 @@
 Package: grattan
 Type: Package
 Title: Perform Common Quantitative Tasks for Australian Analysts and to Support Grattan Institute Analysis 
-Version: 1.3.0.2
-Date: 2016-12-27
-Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.parsonage+grattanPackage@gmail.com"),
+Version: 1.3.0.3
+Date: 2016-01-18
+Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.parsonage@gmail.com"),
               person("Tim", "Cameron", role = "aut"),
               person("Brendan", "Coates", role = "aut"), 
               person("William", "Young", role = "aut"), 
