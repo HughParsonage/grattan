@@ -1,4 +1,5 @@
 .onLoad <- function(libname = find.package("grattan"), pkgname = "grattan"){
+  
   # CRAN Note avoidance
   if(getRversion() >= "2.15.1") 
     utils::globalVariables(
@@ -24,6 +25,9 @@
     # we use the magrittr pipe
     ".",
     
+    # to return
+    "out",
+    
     # generic.inflators
     "variable", 
     
@@ -46,6 +50,18 @@
     "Count", 
     "Sum"
     
-    ))
-  NULL
+    , 
+    
+    # dput(unique(c(names(grattan:::medicare_tbl), names(grattan:::sapto_tbl), names(grattan:::cgt_expenditures))))
+    c("fy_year", "sato", "pto", "sapto", "family_status", "lower_threshold", 
+      "family_income", 
+      "upper_threshold", "taper", "rate", "lower_family_threshold", 
+      "upper_family_threshold", "lower_up_for_each_child", "family_status_index", 
+      "max_offset", "taper_rate", "source", "FY", "CGT_discount_for_individuals_and_trusts_millions", 
+      "URL", "Projected"), 
+    # lito_tbl
+    "max_lito", "min_bracket", "lito_taper"
+      )
+    )
+  invisible()
 }

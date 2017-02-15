@@ -14,3 +14,11 @@ test_that("is.fy() returns FALSE on non-FYs", {
   expect_false(is.fy("12-13"))
 })
 
+test_that("Other fy utils", {
+  expect_equal(fy.year(2012), "2011-12")
+  # Not an FY
+  expect_error(fy2yr("2014-16"))
+  expect_error(fy2date("2014-16"))
+  
+  expect_equal(fy2date("2012-13"), as.Date("2013-06-30"))
+})

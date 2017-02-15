@@ -4,8 +4,11 @@
 #' @aliases fy.year yr2fy fy2yr fy2date date2fy
 #' @param yr_ending An integer representing a year.
 #' @param fy.yr A string suspected to be a financial year.
-#' @param date A string or date for which the financial year is desired.
-#' @return For \code{is.fy}, a logical, whether its argument is a financial year. For \code{fy.year}, \code{yr2fy}, and \code{date2fy}, the financial year. For the inverses, a numeric corresponding to the year.
+#' @param date A string or date for which the financial year is desired. Note that \code{yr2fy} does not check its argument is an integer.
+#' @return For \code{is.fy}, a logical, whether its argument is a financial year.
+#' The following forms are allowed: \code{2012-13}, \code{201213}, \code{2012 13}, only.
+#' For \code{fy.year}, \code{yr2fy}, and \code{date2fy}, the financial year. 
+#' For the inverses, a numeric corresponding to the year.
 #' @examples
 #' is.fy("2012-13")
 #' is.fy("2012-14")
@@ -18,17 +21,12 @@ NULL
 
 
 is.fy <- function(fy.yr){
-  # Allowed:
-  #  2012-13
-  #  201213
-  # only
-  ifelse(grepl("^([12][0-9]{3})[-\\s]?[0-9]{2}$", fy.yr), 
-      # Are the years consecutive?
-      (as.integer(gsub("^([12][0-9]{3})[-\\s]?[0-9]{2}$", "\\1", fy.yr)) + 1) %% 100 == as.numeric(gsub("^[12][0-9]{3}[-\\s]?([0-9]{2})$", "\\1", fy.yr)),
-      FALSE)
+  out <- logical(length(fy.yr))
+  potential_fys <- grepl("^([12][0-9]{3})[-\\s]?[0-9]{2}$", fy.yr, perl = TRUE)
+  out[potential_fys] <- 
+    (as.double(sub("^([12][0-9]{3})[-\\s]?[0-9]{2}$", "\\1", fy.yr[potential_fys], perl = TRUE)) + 1) %% 100 == as.numeric(sub("^[12][0-9]{3}[-\\s]?([0-9]{2})$", "\\1", fy.yr[potential_fys], perl = TRUE))
+  out
 }
-
-
 
 
 fy.year <- function(yr_ending){
@@ -45,7 +43,7 @@ yr2fy <- function(yr_ending){
 
 
 fy2yr <- function(fy.yr){
-  if(any(!is.fy(fy.yr))){
+  if (any(!is.fy(fy.yr))){
     stop("fy.yr contains non-FYs")
   } else  {
     1 + as.integer(gsub("^.*([12][0-9]{3}).?[0-9]{2}.*$", "\\1", fy.yr))
@@ -55,7 +53,7 @@ fy2yr <- function(fy.yr){
 
 
 fy2date <- function(x){
-  if(!any(is.fy(x))){
+  if (!any(is.fy(x))){
     stop("fy.yr contains non-FYs")
   } else {
     date <- paste0(as.numeric(gsub("^([1-9][0-9]{3}).*", "\\1", x)) + 1, "-06-30") 
@@ -66,8 +64,7 @@ fy2date <- function(x){
 
 
 date2fy <- function(date){
-  assertthat::is.date(date)
-  ifelse(lubridate::month(date) < 7, 
-         yr2fy(lubridate::year(date)), 
-         yr2fy(lubridate::year(date) + 1))
+  if_else(lubridate::month(date) < 7, 
+          yr2fy(lubridate::year(date)), 
+          yr2fy(lubridate::year(date) + 1))
 }

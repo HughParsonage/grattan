@@ -2,9 +2,9 @@
 % Please edit documentation in R/sapto.R
 \name{sapto}
 \alias{sapto}
-\title{Senior Australians and Pensioner Tax Offset}
+\title{Seniors and Pensioner Tax Offset}
 \usage{
-sapto(rebate_income, fy.year, fill = 0, sapto.eligible,
+sapto(rebate_income, fy.year, fill = 0, sapto.eligible = TRUE,
   family_status = "single")
 }
 \arguments{
@@ -19,6 +19,6 @@ sapto(rebate_income, fy.year, fill = 0, sapto.eligible,
 \item{family_status}{Family status of the individual.}
 }
 \description{
-Senior Australians and Pensioner Tax Offset
+Seniors and Pensioner Tax Offset
 }
 

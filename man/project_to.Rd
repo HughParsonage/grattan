@@ -4,7 +4,7 @@
 \alias{project_to}
 \title{A function for simple projections of sample files}
 \usage{
-project_to(sample_file, to_fy, fy.year.of.sample.file = "2012-13", ...)
+project_to(sample_file, to_fy, fy.year.of.sample.file = "2013-14", ...)
 }
 \arguments{
 \item{sample_file}{A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.}
@@ -13,7 +13,7 @@ project_to(sample_file, to_fy, fy.year.of.sample.file = "2012-13", ...)
 
 \item{fy.year.of.sample.file}{The financial year of \code{sample_file}.}
 
-\item{...}{Other arguments passed to \code{project}.}
+\item{...}{Other arguments passed to \code{\link{project}}.}
 }
 \value{
 A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).

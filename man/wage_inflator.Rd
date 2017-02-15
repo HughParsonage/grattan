@@ -2,26 +2,38 @@
 % Please edit documentation in R/wage_inflator.R
 \name{wage_inflator}
 \alias{wage_inflator}
-\title{A wage inflator}
+\title{Inflation using the Wage Price Index.}
 \usage{
 wage_inflator(wage = 1, from_fy, to_fy, useABSConnection = FALSE,
-  allow.projection = TRUE)
+  allow.projection = TRUE, forecast.series = c("mean", "upper", "lower",
+  "custom"), forecast.level = 95, wage.series = NULL)
 }
 \arguments{
-\item{wage}{the amount to be inflated (1 by default)}
+\item{wage}{The amount to be inflated (1 by default).}
 
-\item{from_fy}{a character vector of the form "2012-13" representing the FY ending that the wage index is to be taken (i.e. Q4 in that year). FY year must be 1996-97 or later.}
+\item{from_fy}{A character vector of the form "2012-13" representing the FY ending that the wage index is to be taken (i.e. Q4 in that year). FY year must be 1996-97 or later.}
 
-\item{to_fy}{the FY ending that the wage index is to be taken}
+\item{to_fy}{The FY ending that the wage index is to be taken.}
 
 \item{useABSConnection}{Should the function connect with ABS.Stat via an SDMX connection? By default set to \code{FALSE} in which case a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.}
 
-\item{allow.projection}{If set to \code{TRUE} the \code{forecast} package is used to project forward. If set to \code{FALSE}, any dates outside the range will return \code{NA}.}
+\item{allow.projection}{If set to \code{TRUE} the \code{forecast} package is used to project forward, if required.}
+
+\item{forecast.series}{Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals. A fourth option \code{custom} allows manual forecasts to be set.}
+
+\item{forecast.level}{The prediction interval to be used if \code{forecast.series} is \code{upper} or \code{lower}.}
+
+\item{wage.series}{If \code{forecast.series = 'custom'}, how future years should be inflated. 
+The future wage series can be provided in two ways: 
+(1) a single value, to be the assumed rate of wage inflation in years beyond the known series, or 
+(2) a \code{data.table} with two variables, \code{fy_year} and \code{r}. If (2), 
+the variable \code{fy_year} must be a vector of all financial years after the last financial year in the (known) wage series and the latest \code{to_fy} \strong{inclusive}.
+The variable \code{r} consists of rates of wage growth assumed in each \code{fy_year}.}
 }
 \value{
-the wage inflation between the two years
+The wage inflation between the two years.
 }
 \description{
-Predicts what a wage could expect to grow to, between two financial years.
+Predicts the inflation of hourly rates of pay, between two financial years.
 }
 

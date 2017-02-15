@@ -5,24 +5,23 @@
 \alias{CG_population_inflator}
 \title{Forecasting capital gains}
 \usage{
-CG_population_inflator(x = 1, from_fy, to_fy, estimator = "mean",
-  prediction_interval = 80)
+CG_population_inflator(x = 1, from_fy, to_fy, forecast.series = "mean",
+  cg.series)
 
-CG_inflator(x = 1, from_fy, to_fy, ...)
+CG_inflator(x = 1, from_fy, to_fy, forecast.series = "mean")
 }
 \arguments{
 \item{x}{To be inflated.}
 
 \item{from_fy, to_fy}{Financial years designating the inflation period.}
 
-\item{estimator}{One of \code{"mean"}, \code{"lower"}, \code{"upper"}. What estimator to use in forecasts. \code{"lower"} and \code{"upper"} give the lower and upper boundaries of the prediction interval,}
+\item{forecast.series}{One of \code{"mean"}, \code{"lower"}, \code{"upper"}. What estimator to use in forecasts. \code{"lower"} and \code{"upper"} give the lower and upper boundaries of the 95\% prediction interval.}
 
-\item{prediction_interval}{A single value specifying the prediction interval to be used if \code{estimator} is \code{"lower"} or \code{"upper"}. By default, \code{80}, i.e. an 80\% prediction interval.}
-
-\item{...}{Passed to \code{CG_population_inflator}}
+\item{cg.series}{(Not implemented.)}
 }
 \value{
-An estimate of \code{x} inflated to \code{to_fy}
+For \code{CG_population_inflator}, the number of individuals estimated to incur capital gains in \code{fy_year}. 
+For \code{CG_inflator}, an estimate of the nominal value of (total) capital gains in \code{to_fy} relative to the nominal value in \code{from_fy}.
 }
 \description{
 Forecasting capital gains

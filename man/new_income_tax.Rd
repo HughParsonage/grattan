@@ -5,47 +5,15 @@
 \title{New income tax payable
 Income tax payable with new tax brackets, tax rates etc}
 \usage{
-new_income_tax(income, sapto_rebate_income = income, age = 42, brackets,
-  marginal_rates, medicare.lower = 20542, medicare.upper = 24167,
-  medicare.rate = 0.02, medicare.taper = (medicare.upper *
-  medicare.rate)/(medicare.upper - medicare.lower), max_lito = 445,
-  lito_taper = 0.015, lito_min_bracket = 37000, sapto_max_offset = 2230,
-  sapto_lower_threshold = 32279, sapto_upper_threshold = 50119,
-  sapto_taper_rate = sapto_max_offset/(sapto_upper_threshold -
-  sapto_lower_threshold))
+new_income_tax(income, new_tax_tbl)
 }
 \arguments{
 \item{income}{A vector of taxable incomes.}
 
-\item{sapto_rebate_income}{A vector of the rebate income (for SAPTO). By default, this is equal to income. See \code{?rebate_income}.}
-
-\item{age}{A numeric vector of ages, in years.}
-
-\item{brackets}{A numeric vector giving the (lower boundaries of the) tax brackets that determine the base rate of tax paid. The first entry should be the tax-free threshold; that is, do not start with 0.}
-
-\item{marginal_rates}{A numeric vector giving the marginal rates of tax to determine the base rate of tax paid. The rates correspond to the brackets above the tax-free threshold. \code{marginal_rates[i]} is the marginal rate of tax for the bracket \code{[brackets[i], brackets[i + 1]}. In particular, do not include zero as the first entry.}
-
-\item{medicare.lower}{A single value providing the threshold of \code{income} at and below which no medicare levy is payable.}
-
-\item{medicare.upper}{A single value providing the upper threshold of \code{income} below which the medicare levy reduction for low-income earners applies, and above which the full medicare levy applies. If you do not wish to have a medicare levy reduction, set this to be \code{medicare.lower} but be sure to set \code{medicare.taper} to a fixed number.}
-
-\item{medicare.rate}{The rate at which the medicare levy is applied to taxable income. This was 2\% in 2015-16.}
-
-\item{medicare.taper}{The rate at which the medicare levy increases for every dollar of taxable income above \code{medicare.lower}. By default it is equal to the implicit taper rate -- that is, the rate determined by the \code{medicare.lower} and \code{medicare.upper} parameters and the \code{medicare.rate}.}
-
-\item{max_lito}{A single value, representing the maximum low-income tax offset available.}
-
-\item{lito_taper}{The rate at which the tax offsets reduces with every dollar increase in taxable income.}
-
-\item{lito_min_bracket}{A single value, representing the taxable income at which the lito_taper starts to apply.}
-
-\item{sapto_max_offset}{The maximum value of the seniors and pensioners offset.}
-
-\item{sapto_lower_threshold}{The maximum taxable income for which \code{sapto_max_offset} is available}
-
-\item{sapto_upper_threshold}{The value above which no SAPTO is available.}
-
-\item{sapto_taper_rate}{The rate at which the sapto reduces for every dollar of \code{income} above \code{sapto_lower_threshold}. By default, it is determined by \code{sapto_lower_threshold} and \code{sapto_upper_threshold}.}
+\item{new_tax_tbl}{A \code{data.table} with columns \code{lower_bracket} and \code{marginal_rate} for the new brackets and marginal rates.}
+}
+\value{
+The income according to the new parameters.
 }
 \description{
 New income tax payable

@@ -1,11 +1,7 @@
-library(taxstats)
-library(data.table)
-library(dplyr)
-library(magrittr)
-
 context("Tax receipts")
 
 test_that("income_tax on individual sample file reflect historical collections", {
+  skip_if_not_installed("taxstats") 
   # testthat::skip_on_travis()
   
   # True value of personal income tax receipts was $159.021 billion
@@ -20,7 +16,8 @@ test_that("income_tax on individual sample file reflect historical collections",
   test1 <- 
     sample_file_1213 %>%
     mutate(tax0 = income_tax(Taxable_Income, "2012-13"),
-           tax1 = income_tax(Taxable_Income, "2012-13", age = 42))
+           tax1 = income_tax(Taxable_Income, "2012-13", age = 42)) %>%
+    as.data.table
   
   expect_lte(prop_c(sum(test1$tax0) * 50, actual_collections), 0.02)
   expect_lte(prop_c(sum(test1$tax1) * 50, actual_collections), 0.02)
@@ -47,6 +44,7 @@ test_that("income_tax on individual sample file reflect historical collections",
     as.data.table %>%
     setnames(old = names(.), new = c("age_range", "age")) %>%
     mutate(age = sub("\\sto.*$", "", age)) %>%
+    as.data.table %>%
     setkey(age_range)
   setkey(sample_file_1213, age_range)
   tax.collection <- 

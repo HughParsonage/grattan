@@ -8,7 +8,16 @@
 #' @param debt The amount of student debt held.
 #' @return The repayment amount.
 #' @source \url{https://www.ato.gov.au/Rates/HELP,-TSL-and-SFSS-repayment-thresholds-and-rates/?page=2#HELP_repayment_thresholds_and_rates_2013_14}
-#' @author Ittima Cherastidtham, Hugh Parsonage
+#' @author Ittima Cherastidtham and Hugh Parsonage
+#' @examples 
+#' student_repayment(50e3, "2013-14", debt = 10e3) 
+#' # 0 since below the threshold
+#' 
+#' student_repayment(60e3, "2013-14", debt = 10e3)
+#' # above the threshold
+#' 
+#' student_repayment(60e3, "2013-14", debt = 0)
+#' # above the threshold, but no debt
 #' @export
 
 student_repayment <- function(repayment_income, fy.year, debt){
@@ -25,16 +34,20 @@ student_repayment <- function(repayment_income, fy.year, debt){
     }
   }
   input <- 
-    data.table::data.table(repayment_income = repayment_income, 
+    data.table(repayment_income = repayment_income, 
                            # for join.
                            repayment_threshold = repayment_income, 
                            fy_year = fy.year, debt = debt) %>%
     # to preserve ordering
-    dplyr::mutate(ordering = seq.int(1, .N, by = 1L)) %>%
-    data.table::setkeyv(c("fy_year", "repayment_threshold"))
+    .[, ordering := seq.int(1, .N, by = 1L)] %>%
+    setkeyv(c("fy_year", "repayment_threshold"))
   
   # repayment rate applies to the entire repayment income (not that > threshold, as it is for general tax).
   # If the person's repayment rate extinguishes their debt, they only have to pay their debt back. This 
-  # also ensure that those with 0 debt do not have any liability
-  hecs_tbl[input, roll = Inf][ ,liability := pminV(repayment_rate * repayment_income, debt)][order(ordering)]$liability
+  # also obviated the need to ensure that those with 0 debt do not have any liability.
+  hecs_tbl %>%
+    .[input, roll = Inf] %>%
+    .[ ,liability := pminV(repayment_rate * repayment_income, debt)] %>%
+    .[order(ordering)] %>%
+    .[["liability"]]
 }

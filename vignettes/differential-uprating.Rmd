@@ -1,0 +1,151 @@
+---
+title: "Differential uprating: more precise projections of population income"
+author: "Hugh Parsonage and William Young"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+# bibliography: bibliography.bib
+# csl: vancouver-superscript-brackets-only-year.csl
+vignette: >
+  %\VignetteIndexEntry{Differential Uprating}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, echo=FALSE}
+library(knitr)
+opts_chunk$set(echo = FALSE, message = FALSE, fig.width=7, fig.height=6)
+```
+
+
+Since the most recent versions of data detailing population income and wealth (as is contained within the ATO's sample files) is typically years out-of-date on release, even understanding the present requires a forecast. 
+Since most variables relating to income increase due to inflation -- so any sensible forecast will increase the values relative to the past -- this procedure is often called **uprating**.
+
+## Basic uprating
+
+The most basic uprate method is the identity function, where the variables are not changed.
+
+Alternatively, the variables can be increased by a long-term inflation rate. 
+Even better, we can use the relevant time series indices for the variables and inflate using that index. 
+For instance, salary and wage variables can be increased by the observed increase in the wage price index amd growth in the population of taxpayers by the labour force index.
+
+## Differential uprating
+
+Basic uprating suffers some limitations. 
+There are significant structural differences in how much individuals' incomes grow. 
+High-income individuals tend to have higher than average wage growth. 
+Low-income individuals also have higher than average wage growth. 
+That is, the pattern of wage growth by wage is U-shaped. 
+
+```{r}
+library(grattan)
+library(data.table)
+if (requireNamespace("taxstats", quietly = TRUE)){
+  library(taxstats)
+  sample_files_all <- get_sample_files_all()
+} else {
+  install.packages("taxstats", repos = "https://hughparsonage.github.io/drat/", type = "source")
+  library(taxstats)
+  sample_files_all <- get_sample_files_all()
+}
+library(dplyr)
+library(dtplyr)
+library(magrittr)
+library(ggplot2)
+library(scales)
+# library(grid)
+# library(gridExtra)
+# library(plotly)
+```
+
+```{r}
+wage_r_by_fy <- 
+  data.table(fy.year = yr2fy(2005:2014)) %>%
+  mutate(lag_fy = yr2fy(2004:2013)) %>%
+  mutate(wage_growth_r = wage_inflator(from_fy = lag_fy, to_fy = fy.year) - 1)
+```
+
+
+```{r, fig.width=7, fig.height=6}
+average_salary_by_fy_swtile <- 
+  sample_files_all %>%
+  select(fy.year, Sw_amt) %>%
+  filter(Sw_amt > 0) %>%
+  group_by(fy.year) %>%
+  mutate(`Salary percentile` = ntile(Sw_amt, 100)) %>%
+  ungroup %>%
+  group_by(fy.year, `Salary percentile`) %>%
+  summarise(average_salary = mean(Sw_amt)) %>%
+  ungroup %>%
+  arrange(`Salary percentile`, fy.year) %>%
+  group_by(`Salary percentile`) %>%
+  mutate(r_average_salary = average_salary / lag(average_salary) - 1) %>%
+  filter(fy.year != min(fy.year))
+
+{
+  p <- 
+    average_salary_by_fy_swtile %>%  # NA
+    ungroup %>%
+    merge(wage_r_by_fy, by = "fy.year") %>%
+    mutate(`Basic wage inflator` = "Basic wage inflator") %>%
+    ggplot() + 
+    geom_area(aes(x = `Salary percentile`, y = r_average_salary, group = fy.year, fill = fy.year), 
+              se = FALSE, stat = "smooth", method = "loess") + 
+    theme_bw() + 
+    theme(legend.position = "right", plot.background = element_blank()) + 
+    geom_line(aes(x = `Salary percentile`, y = wage_growth_r, group = `Basic wage inflator`, color = `Basic wage inflator`),
+              size = 1.125) + 
+    scale_color_manual(values = "black") +
+    scale_y_continuous(name = "Salary rate of increase", label = percent) + 
+    facet_wrap(~fy.year, ncol = 5) +
+    guides(fill = FALSE) + 
+    theme(legend.position = c(0, 1), 
+          legend.title = element_blank(), 
+          legend.key = element_blank(),
+          legend.justification = c(0, 1))
+  
+  # ggplotly(p)
+  p
+}
+
+```
+
+
+```{r}
+differential_uprates <- 
+  average_salary_by_fy_swtile %>%
+  group_by(`Salary percentile`) %>%
+  summarise(avg_r = mean(r_average_salary)) %>% 
+  mutate(avg_r_normed = avg_r / mean(avg_r))
+
+differential_uprates %>%
+  ggplot(aes(x = `Salary percentile`, y = avg_r)) +
+  geom_line() + 
+  scale_y_continuous(label = percent)
+```
+
+
+**Differential uprating** is a method by which variables are uprated by a function of not only the time period and the type of variable, but of the variable's value too. To differentially uprate salary, use `differentially_uprate_wage`:
+
+```{r, echo=TRUE}
+data_frame(wage = c(20e3, 50e3, 100e3)) %>%
+  mutate(ordinary = wage_inflator(wage, from_fy = "2012-13", to_fy = "2013-14"), 
+         `change ordinary` = ordinary / wage - 1, 
+         differential = differentially_uprate_wage(wage, from_fy = "2012-13", to_fy = "2013-14"), 
+         `change differential` = differential / wage - 1
+         ) %>%
+  mutate(wage = dollar(wage),
+         ordinary = dollar(ordinary), 
+         differential = dollar(differential), 
+         `change ordinary` = percent(`change ordinary`), 
+         `change differential` = percent(`change differential`)) %>%
+  kable(align = rep("r", ncol(.)))
+```
+
+
+Note that `differentially_update_wage` uses the 2003-04 to 2013-14 sample files to generate estimates of the shape of the U. So applying the function to any other vector may have surprising results. In particular, the distribution of the vector provided is not considered. Furthermore, the `from_fy` must be in the range `2003-04` to `2013-14`.
+
+
+
+
+
+

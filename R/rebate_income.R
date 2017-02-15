@@ -20,5 +20,5 @@ rebate_income <- function(Taxable_Income,
        All_deductible_super_contr,
        Net_fincl_invstmt_lss_amt,
        -1 * pmin(Net_rent_amt, 0),
-       floor(Rep_frng_ben_amt * 0.535))
+       floor(Rep_frng_ben_amt * 0.51))
 }
