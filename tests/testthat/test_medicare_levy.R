@@ -39,6 +39,11 @@ test_that("medicare_levy returns known values", {
   expect_equal(medicare_levy(16e3, "2001-02", sapto.eligible = TRUE), 0)
 })
 
+test_that("Medicare family income 2015-16", {
+  expect_equal(medicare_levy(17630, family_status = "family", Spouse_income = 17630, fy.year = "2015-16"), 0)
+  expect_equal(medicare_levy(18000, family_status = "family", Spouse_income = 18000, fy.year = "2015-16"), 0)
+})
+
 test_that("Medicare with dependants", {
   # skip("Issue 50 unresolved")
   expect_equal(medicare_levy(26000, fy.year = '2014-15', Spouse_income = 26000, n_dependants = 1, family_status = 'family'), 510.40)

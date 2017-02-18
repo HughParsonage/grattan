@@ -14,4 +14,3 @@ The parallel maximum of the input values.
 \description{
 A faster \code{pmax()}.
 }
-

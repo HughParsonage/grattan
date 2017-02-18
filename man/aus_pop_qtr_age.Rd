@@ -29,4 +29,3 @@ Australian estimated resident population by age and date
 \examples{
 aus_pop_qtr_age(date = as.Date("2016-01-01"), age = 42)
 }
-

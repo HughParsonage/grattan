@@ -19,4 +19,3 @@ max_super_contr_base
 Data maximum super contribution base.
 }
 \keyword{datasets}
-

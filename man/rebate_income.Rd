@@ -27,4 +27,3 @@ rebate_income(Taxable_Income, Rptbl_Empr_spr_cont_amt = 0,
 \description{
 Rebate income
 }
-

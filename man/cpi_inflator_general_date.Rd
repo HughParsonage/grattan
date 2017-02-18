@@ -21,4 +21,3 @@ A vector of real prices in \code{to_date} dollars.
 \description{
 CPI for general dates
 }
-

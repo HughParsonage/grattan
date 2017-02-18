@@ -48,4 +48,3 @@ if (requireNamespace("taxstats", quietly = TRUE) && requireNamespace("data.table
   sample_file_1617 <- project(sample_file, h = 3L)  # to "2016-17"
 }
 }
-

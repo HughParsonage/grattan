@@ -41,4 +41,3 @@ If \code{sato} and \code{pto} are \code{NULL}, \code{sapto.eligible} stands for 
 If \code{sato} or \code{pto} are not \code{NULL} for such years, only \code{sato} is currently considered. 
 Supplying \code{pto} independently is currently a warning.
 }
-

@@ -15,4 +15,3 @@ An error message if any of vector has zero length.
 \description{
 Tests whether any vectors have zero length.
 }
-

@@ -3,6 +3,7 @@
 \name{lf_inflator}
 \alias{lf_inflator}
 \alias{lf_inflator_fy}
+\alias{lf_inflator}
 \title{Labour force inflators}
 \source{
 ABS Cat 6202.0 \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocument}.
@@ -59,4 +60,3 @@ lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date = "2014-06-30")
 \author{
 Hugh Parsonage and Tim Cameron
 }
-

@@ -12,4 +12,3 @@ The parallel maximum of the vectors.
 \description{
 Returns the parallel maximum of three
 }
-

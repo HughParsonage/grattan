@@ -15,4 +15,3 @@ An error message unless all of \code{...} have the same length in which case \co
 \description{
 Tests whether all vectors have the same length.
 }
-
