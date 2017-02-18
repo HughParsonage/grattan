@@ -66,6 +66,7 @@ medicare_levy <- function(income,
   }
   
   
+  income_share <- NULL
   
   data.table(income = income, 
              Spouse_income = Spouse_income,
