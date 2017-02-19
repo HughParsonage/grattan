@@ -36,4 +36,3 @@ The wage inflation between the two years.
 \description{
 Predicts the inflation of hourly rates of pay, between two financial years.
 }
-

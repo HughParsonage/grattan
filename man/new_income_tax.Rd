@@ -19,4 +19,3 @@ The income according to the new parameters.
 New income tax payable
 Income tax payable with new tax brackets, tax rates etc
 }
-

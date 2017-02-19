@@ -2,8 +2,8 @@
 % Please edit documentation in R/gdp.R
 \name{gdp}
 \alias{gdp}
-\alias{gdp_fy}
 \alias{gdp_qtr}
+\alias{gdp_fy}
 \title{Gross Domestic Product, Australia}
 \source{
 Australian Bureau of Statistics, Catalogue 5206.0. Series A2304350J.
@@ -29,4 +29,3 @@ Dates or fy_year outside the available data is neither a warning nor an error, b
 \description{
 Gross domestic product, at contemporaneous prices (called 'current prices' by the ABS).
 }
-

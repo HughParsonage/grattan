@@ -36,4 +36,3 @@ student_repayment(60e3, "2013-14", debt = 0)
 \author{
 Ittima Cherastidtham and Hugh Parsonage
 }
-

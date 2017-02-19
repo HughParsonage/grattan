@@ -53,12 +53,13 @@ test_that("ABS connection", {
 
 
 test_that("Custom lf series", {
-  x <- lf_inflator_fy(1, from_fy = "2015-16", to_fy = "2017-18", 
-                      forecast.series = "custom", lf.series = data.table(fy_year = c("2016-17", "2017-18"), 
-                                                                         r = c(0, 0.10)))
+  x <- lf_inflator_fy(1, from_fy = "2017-18", to_fy = "2018-19", 
+                      forecast.series = "custom",
+                      lf.series = data.table(fy_year = c("2016-17", "2017-18", "2018-19"), 
+                                             r = c(0, 0, 0.10)))
   expect_equal(x, 1.1)
   
-  y <- lf_inflator_fy(1, from_fy = "2015-16", to_fy = "2017-18", 
+  y <- lf_inflator_fy(1, from_fy = "2022-23", to_fy = "2024-25", 
                       forecast.series = "custom", lf.series = 0.10)
   
   expect_equal(y, 1.1^2)

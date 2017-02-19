@@ -70,4 +70,3 @@ Mutate a sample file to reflect particular caps on concessional contributions an
 \author{
 Hugh Parsonage, William Young
 }
-

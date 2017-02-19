@@ -23,4 +23,3 @@ The population at \code{date_quarter}, or at the year if a projections.
 \description{
 Australia's population
 }
-

@@ -66,6 +66,7 @@ medicare_levy <- function(income,
   }
   
   
+  income_share <- NULL
   
   data.table(income = income, 
              Spouse_income = Spouse_income,
@@ -86,17 +87,21 @@ medicare_levy <- function(income,
           by = c("fy_year", "sapto", "sato", "pto"),
           sort = FALSE, 
           all.x = TRUE) %>%
-    # Levy in the case of small incomes (s.7 of Act)
-    .[ ,medicare_levy := pminV(pmaxC(taper * (income - lower_threshold),
-                                     0), 
-                               rate * income)] %>%
+    
     # Person who has spouse or dependants
     ## subs.8(5) of Act
-    .[ ,lower_family_threshold := lower_family_threshold + n_dependants * lower_up_for_each_child] %>%
-    .[ ,medicare_levy := pmaxC(medicare_levy - 
-                                 (family_status == "family") *
-                                 # pmaxC <= "(if any)" subs.8(2)(c) of Medicare Levy Act 1986
-                                 pmaxC(rate * lower_family_threshold - (taper - rate)  * (family_income - lower_family_threshold), 0),
-                               0)] %>%
+    .[, lower_family_threshold := lower_family_threshold + n_dependants * lower_up_for_each_child] %>%
+    .[, upper_family_threshold := upper_family_threshold + n_dependants * lower_up_for_each_child] %>%
+    .[, income_share := if_else(Spouse_income > 0, income / (income + Spouse_income), 1)] %>%
+    # Levy in the case of small incomes (s.7 of Act)
+    .[, medicare_levy := if_else(family_status == "family" & family_income <= upper_family_threshold,
+                                 # subs.8(2)(c) of Medicare Levy Act 1986
+                                 income_share * pminV(pmaxC(taper * (family_income - lower_family_threshold), 
+                                                            0), 
+                                                      rate * family_income),
+                                 pminV(pmaxC(taper * (income - lower_threshold),
+                                             0), 
+                                       rate * income))] %>%
+    
     .[["medicare_levy"]]
 }

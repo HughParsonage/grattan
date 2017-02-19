@@ -28,4 +28,3 @@ prohibit_vector_recycling(c(2, 2), 1)
 prohibit_vector_recycling(c(2, 2), 1, c(3, 3, 3))
 }
 }
-

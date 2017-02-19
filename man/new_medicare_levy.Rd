@@ -23,4 +23,3 @@ A function similar to \code{medicare_levy}.
 \description{
 Use a different way to calculate medicare levy.
 }
-

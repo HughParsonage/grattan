@@ -25,4 +25,3 @@ Inverse income tax functions
 \details{
 This function has an error of $2.
 }
-

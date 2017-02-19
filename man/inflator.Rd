@@ -29,4 +29,3 @@ A vector of inflated values. For example, \code{inflator_table = grattan:::cpi_s
 \description{
 Inflate using a general index
 }
-

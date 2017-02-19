@@ -24,4 +24,3 @@ A vector of real prices.
 \description{
 CPI inflator when dates are nice
 }
-

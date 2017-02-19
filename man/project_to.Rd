@@ -21,4 +21,3 @@ A sample file of the same number of rows as \code{sample_file} with inflated val
 \description{
 A function for simple projections of sample files
 }
-

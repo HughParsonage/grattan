@@ -22,4 +22,3 @@ Inverse average tax rate
 \examples{
 inverse_average_rate(0.2, fy.year = "2014-15")
 }
-

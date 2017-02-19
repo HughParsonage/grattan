@@ -17,4 +17,3 @@ A faster \code{pmin()}.
 \note{
 This function will always be faster than \code{pmin(x, a)} when \code{a} is a single value, but can be slower than \code{pmin.int(x, a)} when \code{x} is short. Use this function when comparing a numeric vector with a single value.
 }
-

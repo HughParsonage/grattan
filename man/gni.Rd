@@ -2,8 +2,8 @@
 % Please edit documentation in R/gni_qtr.R
 \name{gni}
 \alias{gni}
-\alias{gni_fy}
 \alias{gni_qtr}
+\alias{gni_fy}
 \title{Gross National Income, Australia}
 \source{
 Australian Bureau of Statistics, Catalogue 5206.0. Series A2304354T.
@@ -29,4 +29,3 @@ Dates or fy_year outside the available data is neither a warning nor an error, b
 \description{
 Gross national income, at contemporaneous prices (called 'current prices' by the ABS).
 }
-

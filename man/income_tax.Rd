@@ -38,4 +38,3 @@ For years preceding the introduction of SAPTO, the maximum offset is assumed to 
 \author{
 Tim Cameron, Brendan Coates, Hugh Parsonage, William Young
 }
-

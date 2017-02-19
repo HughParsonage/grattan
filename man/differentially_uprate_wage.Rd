@@ -34,4 +34,3 @@ differentially_uprate_wage(ws, from, to) / wage_inflator(ws, from, to)
 \author{
 Hugh Parsonage and William Young
 }
-
