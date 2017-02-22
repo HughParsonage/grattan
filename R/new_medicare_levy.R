@@ -29,9 +29,9 @@ new_medicare_levy <- function(parameter_table){
                                 family_status = "individual", 
                                 n_dependants = 0, 
                                 switch){
-    stopifnot(all(is.fy(fy.year)), all(family_status %in% c("family", "individual")))
+    stopifnot(all(family_status %in% c("family", "individual")))
+    prohibit_vector_recycling(income, family_status, Spouse_income, age, n_dependants)
     
-    prohibit_vector_recycling(income, fy.year, family_status, Spouse_income, sapto.eligible, n_dependants)
     if (any(Spouse_income > 0 & family_status == "individual")){
       stop("If Spouse_income is nonzero, family_status cannot be 'individual'.")
     }
