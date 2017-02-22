@@ -1,6 +1,6 @@
 #' Income tax payable as a function of SAPTO
 #' 
-#' @name income_tax
+#' @name income_tax_sapto
 #' @param income The individual assessable income.
 #' @param fy.year The financial year in which the income was earned. Only tax years from 2000-01 to 2016-17 are available. 
 #' @param age The individual's age.
@@ -13,13 +13,12 @@
 #' @details Used to cost simple changes SAPTO.
 #' @export income_tax_sapto
 
-
 income_tax_sapto <- function(income,
                              fy.year,
                              age = 42,
                              family_status = "individual",
                              n_dependants = 0L,
-                             .dots.ATO = NULL
+                             .dots.ATO = NULL,
                              return.mode = c("numeric", "integer"),
                              allow.forecasts = FALSE,
                              sapto.eligible, 
