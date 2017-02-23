@@ -65,7 +65,8 @@ medicare_tbl <-
   medicare_tbl_indiv %>%
   dplyr::mutate_each(funs(as.logical), sato, pto, sapto) %>%
   data.table::as.data.table(.) %>%
-  data.table::setkey(fy_year, sapto) %>%
+  mutate(family_status = "individual") %>%
+  data.table::setkey(fy_year, sapto, family_status) %>%
   # avoid cartesian joins
   unique(by = key(.))
 
