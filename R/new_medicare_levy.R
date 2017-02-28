@@ -36,6 +36,9 @@ new_medicare_levy <- function(parameter_table){
       stop("If Spouse_income is nonzero, family_status cannot be 'individual'.")
     }
     
+    # CRAN NOTE avoidance
+    income_share <- NULL
+    
     data.table(income = income, 
                Spouse_income = Spouse_income,
                switches = switch, 

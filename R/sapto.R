@@ -31,7 +31,7 @@ sapto <- function(rebate_income,
   setkeyv(input, c("fy_year", "family_status"))
   
   
-  my_printer <- function(x){print(x); x}
+  partner_sapto <- NULL
   
   out <- 
     sapto_tbl[input] %>%
