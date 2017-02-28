@@ -2,10 +2,10 @@
 % Please edit documentation in R/new_sapto.R
 \name{new_sapto}
 \alias{new_sapto}
-\title{New SAPTO thresholds}
+\title{SAPTO with user-defined thresholds}
 \usage{
-new_sapto(rebate_income, new_sapto_tbl, sapto.eligible = TRUE, fill = 0,
-  family_status = "single")
+new_sapto(rebate_income, new_sapto_tbl, sapto.eligible = TRUE,
+  Spouse_income = 0, fill = 0, family_status = "single")
 }
 \arguments{
 \item{rebate_income}{The rebate income of the individual.}
@@ -14,10 +14,12 @@ new_sapto(rebate_income, new_sapto_tbl, sapto.eligible = TRUE, fill = 0,
 
 \item{sapto.eligible}{Is the individual eligible for sapto?}
 
+\item{Spouse_income}{Spouse income whose unutilized SAPTO may be added to the current taxpayer. Must match \code{family_status}; i.e. can only be nonzero when \code{family_status != "single"}.}
+
 \item{fill}{If SAPTO was not applicable, what value should be used?}
 
 \item{family_status}{Family status of the individual.}
 }
 \description{
-New SAPTO thresholds
+SAPTO with user-defined thresholds
 }
