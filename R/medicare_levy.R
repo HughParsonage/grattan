@@ -30,10 +30,10 @@ medicare_levy <- function(income,
                           family_status = "individual", 
                           n_dependants = 0, 
                           .checks = TRUE){
-  if (.checks)
+  if (.checks){
     stopifnot(all(is.fy(fy.year)), all(family_status %in% c("family", "individual")))
-  
-  prohibit_vector_recycling(income, fy.year, family_status, Spouse_income, sapto.eligible, n_dependants)
+    prohibit_vector_recycling(income, fy.year, family_status, Spouse_income, sapto.eligible, n_dependants)
+  }
   if (any(Spouse_income > 0 & family_status == "individual")){
     stop("If Spouse_income is nonzero, family_status cannot be 'individual'.")
   }
