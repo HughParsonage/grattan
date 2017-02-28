@@ -65,3 +65,7 @@
     )
   invisible()
 }
+
+.onUnload <- function (libpath) {
+  library.dynam.unload("grattan", libpath)
+}
