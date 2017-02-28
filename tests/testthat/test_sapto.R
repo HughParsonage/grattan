@@ -1,8 +1,17 @@
 context("SAPTO")
 
+test_that("SAPTO for singles", {
+  sapto(33279, fy.year = "2015-16")
+})
+
 
 test_that("SAPTO for partners", {
-  sapto(25000, fy.year = "2015-16", )
+  expect_equal(sapto(28794, fy.year = "2015-16", Spouse_income = 1e-6, family_status = "married"), 
+               1602)
+  expect_equal(sapto(28794, fy.year = "2015-16", Spouse_income = 28794, family_status = "married"), 
+               1602)
+  expect_equal(sapto(29794, fy.year = "2015-16", Spouse_income = 28794, family_status = "married"), 
+               1477)
 })
 
 test_that("New SAPTO matches old SAPTO", {
