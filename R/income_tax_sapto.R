@@ -27,26 +27,15 @@ income_tax_sapto <- function(income,
                              medicare.sapto.eligible, 
                              new_sapto_tbl = NULL){
   # CRAN NOTE avoidance
-  fy_year <- marginal_rate <- lower_bracket <- tax_at <- n <- tax <- ordering <- max_lito <- min_bracket <- lito_taper <- sato <- taper <- rate <- max_offset <- upper_threshold <- taper_rate <- medicare_income <- lower_up_for_each_child <-
+  fy_year <- marginal_rate <- lower_bracket <- tax_at <- n <- tax <- ordering <- max_lito <- min_bracket <- lito_taper <- sato <- taper <- rate <- max_offset <- upper_threshold <- taper_rate <- medicare_income <- lower_up_for_each_child <-NULL
   
   if (missing(sapto.eligible)){
-    if (missing(age) && !is.null(.dots.ATO) && "age_range" %in% names(.dots.ATO)){
-      # age_range: 0, 1  ===>  65 to 69, 70 and over
-      sapto.eligible <- .dots.ATO[["age_range"]] <= 1
-    } else {
-      # Assume everyone of pension age is eligible for sapto.
-      sapto.eligible <- age >= 65
-    }
+    # Assume everyone of pension age is eligible for sapto.
+    sapto.eligible <- age >= 65
   }
   
   if (missing(medicare.sapto.eligible)){
-    if (missing(age) && !is.null(.dots.ATO) && "age_range" %in% names(.dots.ATO)){
-      # age_range: 0, 1  ===>  65 to 69, 70 and over
-      medicare.sapto.eligible <- .dots.ATO[["age_range"]] <= 1
-    } else {
-      # Assume everyone of pension age is eligible for sapto.
-      medicare.sapto.eligible <- age >= 65
-    }
+    medicare.sapto.eligible <- sapto.eligible
   }
   
   # Don't like vector recycling
