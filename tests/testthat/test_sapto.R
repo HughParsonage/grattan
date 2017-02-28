@@ -6,11 +6,11 @@ test_that("SAPTO for singles", {
 
 
 test_that("SAPTO for partners", {
-  expect_equal(sapto(28794, fy.year = "2015-16", Spouse_income = 1e-6, family_status = "married"), 
+  expect_equal(sapto(28974, fy.year = "2015-16", Spouse_income = 1e-6, family_status = "married"), 
                1602)
-  expect_equal(sapto(28794, fy.year = "2015-16", Spouse_income = 28794, family_status = "married"), 
+  expect_equal(sapto(28974, fy.year = "2015-16", Spouse_income = 28974, family_status = "married"), 
                1602)
-  expect_equal(sapto(29794, fy.year = "2015-16", Spouse_income = 28794, family_status = "married"), 
+  expect_equal(sapto(29974, fy.year = "2015-16", Spouse_income = 28974, family_status = "married"), 
                1477)
 })
 

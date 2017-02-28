@@ -48,7 +48,7 @@ sapto <- function(rebate_income,
     .[, sapto_value := sapto_value + pminC(max_offset - (family_status != "single") * partner_sapto, 0)] %>%
     setkey(ordering) %>%
     unique(by = key(.)) %>%
-    my_printer %>%
+    # my_printer %>%
     .[["sapto_value"]]
   
   # Eligibility for SAPTO
