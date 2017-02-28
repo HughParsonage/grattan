@@ -5,7 +5,8 @@
 #' @param fy.year The financial year in which sapto is to be calculated.
 #' @param fill If SAPTO was not applicable, what value should be used?
 #' @param sapto.eligible Is the individual eligible for sapto?
-#' @param family_status Family status of the individual.
+#' @param Spouse_income Spouse income whose unutilized SAPTO may be added to the current taxpayer. Must match \code{family_status}; i.e. can only be nonzero when \code{family_status != "single"}.
+#' @param family_status Family status of the individual. 
 #' @export
 
 sapto <- function(rebate_income,

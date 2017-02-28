@@ -16,6 +16,8 @@ sapto(rebate_income, fy.year, fill = 0, sapto.eligible = TRUE,
 
 \item{sapto.eligible}{Is the individual eligible for sapto?}
 
+\item{Spouse_income}{Spouse income whose unutilized SAPTO may be added to the current taxpayer. Must match \code{family_status}; i.e. can only be nonzero when \code{family_status != "single"}.}
+
 \item{family_status}{Family status of the individual.}
 }
 \description{
