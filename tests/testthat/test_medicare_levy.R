@@ -6,6 +6,19 @@ test_that("medicare_levy does not respond to invalid", {
   expect_error(medicare_levy(income = 123, fy.year = "2015-16", sapto.eligible = FALSE, Spouse_income = 1e3, n_dependants = 0, family_status = "individual"))
 })
 
+test_that("medicare_levy monotonic", {
+  expect_lte(medicare_levy(income = 29000,
+                           fy.year = "2015-16",
+                           Spouse_income = 29000,
+                           sapto.eligible = TRUE, 
+                           family_status = "family"), 
+             medicare_levy(income = 30000,
+                           fy.year = "2015-16",
+                           Spouse_income = 30000,
+                           sapto.eligible = TRUE, 
+                           family_status = "family"))
+} )
+
 test_that("medicare_levy returns known values", {
   # https://www.ato.gov.au/calculators-and-tools/medicare-levy/
   expect_equal(medicare_levy(income = 40e3, fy.year = "2013-14", sapto.eligible = TRUE , family_status = "family", n_dependants = 1), 0)
@@ -15,10 +28,19 @@ test_that("medicare_levy returns known values", {
   expect_equal(medicare_levy(income = 23e3, fy.year = "2015-16", sapto.eligible = FALSE, Spouse_income = 0e3, n_dependants = 0, family_status = "individual"), 166.50)
   expect_equal(medicare_levy(income = 23e3, fy.year = "2015-16", sapto.eligible = TRUE , Spouse_income = 0e3, n_dependants = 0, family_status = "individual"), 0)
   expect_equal(medicare_levy(income = 23e3, fy.year = "2015-16", sapto.eligible = FALSE, Spouse_income = 750, n_dependants = 0, family_status = "family"), 0)
-  expect_equal(medicare_levy(income = 23e3, fy.year = "2015-16", sapto.eligible = TRUE , Spouse_income = 750, n_dependants = 0, family_status = "family"), 0)
+  expect_equal(medicare_levy(income = 23e3, fy.year = "2015-16", sapto.eligible = TRUE , Spouse_income = 750, n_dependants = 0, family_status = "family"), 0)  
   # 37000
   expect_equal(medicare_levy(income = 37e3, fy.year = "2015-16", sapto.eligible = FALSE, Spouse_income = 0e3, n_dependants = 0, family_status = "individual"), 740)
   expect_equal(medicare_levy(income = 37e3, fy.year = "2015-16", sapto.eligible = TRUE , Spouse_income = 0e3, n_dependants = 0, family_status = "individual"), 326.20)
+  
+  # Proximity of thresholds 
+  expect_equal(medicare_levy(income = 33739,
+                             fy.year = "2015-16",
+                             Spouse_income = 30000,
+                             sapto.eligible = TRUE, 
+                             family_status = "family"),
+               0.1)
+  
   # 46000
   expect_equal(medicare_levy(income = 46e3, fy.year = "2015-16", sapto.eligible = FALSE, Spouse_income = 0e3, n_dependants = 0, family_status = "individual"), 920)
   expect_equal(medicare_levy(income = 46e3, fy.year = "2015-16", sapto.eligible = TRUE , Spouse_income = 0e3, n_dependants = 0, family_status = "individual"), 920)

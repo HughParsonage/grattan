@@ -61,7 +61,7 @@ new_medicare_levy <- function(parameter_table){
       .[, upper_family_threshold := upper_family_threshold + n_dependants * lower_up_for_each_child] %>%
       .[, income_share := if_else(Spouse_income > 0, income / (income + Spouse_income), 1)] %>%
       # Levy in the case of small incomes (s.7 of Act)
-      .[, medicare_levy := if_else(family_status == "family" & family_income <= upper_family_threshold,
+      .[, medicare_levy := if_else(family_status == "family" & family_income <= upper_family_threshold & income > lower_threshold,
                                    # subs.8(2)(c) of Medicare Levy Act 1986
                                    income_share * pminV(pmaxC(taper * (family_income - lower_family_threshold), 
                                                               0), 
