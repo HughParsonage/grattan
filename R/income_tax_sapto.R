@@ -9,7 +9,7 @@
 #' @param return.mode The mode (numeric or integer) of the returned vector.
 #' @param .dots.ATO A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files. If \code{.dots.ATO} is a \code{data.table}, I recommend you enclose it with \code{copy()}.
 #' @param allow.forecasts should dates beyond 2016-17 be permitted? Currently, not permitted.
-#' @author Tim Cameron, Brendan Coates, Hugh Parsonage, William Young
+#' @param new_sapto_tbl If not \code{NULL}, supplied to \code{\link{new_sapto}}. Otherwise, \code{fy.year} is passed to \code{\link{sapto}}.
 #' @details Used to cost simple changes SAPTO.
 #' @export income_tax_sapto
 
@@ -22,7 +22,8 @@ income_tax_sapto <- function(income,
                              return.mode = c("numeric", "integer"),
                              allow.forecasts = FALSE,
                              sapto.eligible, 
-                             medicare.sapto.eligible){
+                             medicare.sapto.eligible, 
+                             new_sapto_tbl = NULL){
   # CRAN NOTE avoidance
   fy_year <- marginal_rate <- lower_bracket <- tax_at <- n <- tax <- ordering <- max_lito <- min_bracket <- lito_taper <- sato <- taper <- rate <- max_offset <- upper_threshold <- taper_rate <- medicare_income <- lower_up_for_each_child <-
   
@@ -113,17 +114,36 @@ income_tax_sapto <- function(income,
                                                           "Net_fincl_invstmt_lss_amt",
                                                           "Net_rent_amt", 
                                                           "Rep_frng_ben_amt") %in% names(.dots.ATO))){
-    sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income,
-                                                                   Rptbl_Empr_spr_cont_amt = .dots.ATO$Rptbl_Empr_spr_cont_amt,
-                                                                   Net_fincl_invstmt_lss_amt = .dots.ATO$Net_fincl_invstmt_lss_amt,
-                                                                   Net_rent_amt = .dots.ATO$Net_rent_amt,
-                                                                   Rep_frng_ben_amt = .dots.ATO$Rep_frng_ben_amt), 
-                                     fy.year = fy.year, 
-                                     sapto.eligible = TRUE)
+    if (is.null(new_sapto_tbl)){
+      sapto. <-
+        sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income,
+                                                             Rptbl_Empr_spr_cont_amt = .dots.ATO$Rptbl_Empr_spr_cont_amt,
+                                                             Net_fincl_invstmt_lss_amt = .dots.ATO$Net_fincl_invstmt_lss_amt,
+                                                             Net_rent_amt = .dots.ATO$Net_rent_amt,
+                                                             Rep_frng_ben_amt = .dots.ATO$Rep_frng_ben_amt), 
+                               fy.year = fy.year, 
+                               sapto.eligible = TRUE)
+    } else {
+      sapto. <-
+        sapto.eligible * new_sapto(rebate_income = rebate_income(Taxable_Income = income,
+                                                                 Rptbl_Empr_spr_cont_amt = .dots.ATO$Rptbl_Empr_spr_cont_amt,
+                                                                 Net_fincl_invstmt_lss_amt = .dots.ATO$Net_fincl_invstmt_lss_amt,
+                                                                 Net_rent_amt = .dots.ATO$Net_rent_amt,
+                                                                 Rep_frng_ben_amt = .dots.ATO$Rep_frng_ben_amt),
+                                   new_sapto_tbl = new_sapto_tbl, 
+                                   sapto.eligible = TRUE)
+    }
   } else {
-    sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income), 
-                                     fy.year = fy.year, 
-                                     sapto.eligible = TRUE)
+    if (is.null(new_sapto_tbl)){
+      sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income), 
+                                       fy.year = fy.year, 
+                                       sapto.eligible = TRUE)
+    } else {
+      sapto. <-
+        sapto.eligible * new_sapto(rebate_income = rebate_income(Taxable_Income = income), 
+                                   new_sapto_tbl = new_sapto_tbl, 
+                                   sapto.eligible = TRUE)
+    }
   }
   
   # https://www.legislation.gov.au/Details/C2014A00048

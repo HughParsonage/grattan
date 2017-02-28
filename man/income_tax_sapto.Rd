@@ -7,7 +7,7 @@
 income_tax_sapto(income, fy.year, age = 42, family_status = "individual",
   n_dependants = 0L, .dots.ATO = NULL, return.mode = c("numeric",
   "integer"), allow.forecasts = FALSE, sapto.eligible,
-  medicare.sapto.eligible)
+  medicare.sapto.eligible, new_sapto_tbl = NULL)
 }
 \arguments{
 \item{income}{The individual assessable income.}
@@ -25,13 +25,12 @@ income_tax_sapto(income, fy.year, age = 42, family_status = "individual",
 \item{return.mode}{The mode (numeric or integer) of the returned vector.}
 
 \item{allow.forecasts}{should dates beyond 2016-17 be permitted? Currently, not permitted.}
+
+\item{new_sapto_tbl}{If not \code{NULL}, supplied to \code{\link{new_sapto}}. Otherwise, \code{fy.year} is passed to \code{\link{sapto}}.}
 }
 \description{
 Income tax payable as a function of SAPTO
 }
 \details{
 Used to cost simple changes SAPTO.
-}
-\author{
-Tim Cameron, Brendan Coates, Hugh Parsonage, William Young
 }
