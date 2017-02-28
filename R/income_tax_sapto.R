@@ -75,26 +75,25 @@ income_tax_sapto <- function(income,
   }
   
   base_tax. <- tax_fun(income, fy.year = fy.year)
+  
+  if (missing(.dots.ATO) || "Spouse_adjusted_taxable_inc" %notin% names(.dots.ATO)){
+    the_spouse_income <- 0L
+  } else {
+    the_spouse_income <- .dots.ATO[["Spouse_adjusted_taxable_inc"]]
+    the_spouse_income[is.na(the_spouse_income)] <- 0L
+  }
+  
   medicare_levy. <- 
     medicare_levy(income, 
-                  Spouse_income = if (missing(.dots.ATO) || "Spouse_adjusted_taxable_inc" %notin% names(.dots.ATO)){
-                    0
-                  } else {
-                    if_else(is.na(.dots.ATO[["Spouse_adjusted_taxable_inc"]]), 
-                            0L, 
-                            .dots.ATO[["Spouse_adjusted_taxable_inc"]])
-                  },
+                  Spouse_income = the_spouse_income,
                   fy.year = fy.year, 
-                  sapto.eligible = medicare.sapto.eligible, 
+                  sapto.eligible = sapto.eligible, 
                   family_status = if (missing(.dots.ATO) || "Spouse_adjusted_taxable_inc" %notin% names(.dots.ATO)){
                     family_status
                   } else {
-                    # If one is NA, the other should not be
-                    if_else(if_else(is.na(.dots.ATO[["Spouse_adjusted_taxable_inc"]]), 
-                                    0L, 
-                                    .dots.ATO[["Spouse_adjusted_taxable_inc"]]) > 0, 
-                            "family", 
-                            "individual")
+                    FS <- rep_len("individual", max.length)
+                    FS[the_spouse_income > 0] <- "family"
+                    FS
                   }, 
                   n_dependants = n_dependants, 
                   .checks = FALSE)
@@ -106,22 +105,33 @@ income_tax_sapto <- function(income,
                                                           "Net_rent_amt", 
                                                           "Rep_frng_ben_amt") %in% names(.dots.ATO))){
     if (is.null(new_sapto_tbl)){
-      sapto. <-
-        sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income,
-                                                             Rptbl_Empr_spr_cont_amt = .dots.ATO$Rptbl_Empr_spr_cont_amt,
-                                                             Net_fincl_invstmt_lss_amt = .dots.ATO$Net_fincl_invstmt_lss_amt,
-                                                             Net_rent_amt = .dots.ATO$Net_rent_amt,
-                                                             Rep_frng_ben_amt = .dots.ATO$Rep_frng_ben_amt), 
-                               fy.year = fy.year, 
-                               sapto.eligible = TRUE)
+      sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income,
+                                                                     Rptbl_Empr_spr_cont_amt = .dots.ATO[["Rptbl_Empr_spr_cont_amt"]],
+                                                                     Net_fincl_invstmt_lss_amt = .dots.ATO[["Net_fincl_invstmt_lss_amt"]],
+                                                                     Net_rent_amt = .dots.ATO[["Net_rent_amt"]],
+                                                                     Rep_frng_ben_amt = .dots.ATO[["Rep_frng_ben_amt"]]), 
+                                       fy.year = fy.year,
+                                       Spouse_income = the_spouse_income,
+                                       family_status = {
+                                         FS_sapto <- rep_len("single", max.length)
+                                         FS_sapto[the_spouse_income > 0] <- "married"
+                                         FS_sapto
+                                       },
+                                       sapto.eligible = TRUE)
     } else {
       sapto. <-
         sapto.eligible * new_sapto(rebate_income = rebate_income(Taxable_Income = income,
-                                                                 Rptbl_Empr_spr_cont_amt = .dots.ATO$Rptbl_Empr_spr_cont_amt,
-                                                                 Net_fincl_invstmt_lss_amt = .dots.ATO$Net_fincl_invstmt_lss_amt,
-                                                                 Net_rent_amt = .dots.ATO$Net_rent_amt,
-                                                                 Rep_frng_ben_amt = .dots.ATO$Rep_frng_ben_amt),
+                                                                     Rptbl_Empr_spr_cont_amt = .dots.ATO[["Rptbl_Empr_spr_cont_amt"]],
+                                                                     Net_fincl_invstmt_lss_amt = .dots.ATO[["Net_fincl_invstmt_lss_amt"]],
+                                                                     Net_rent_amt = .dots.ATO[["Net_rent_amt"]],
+                                                                     Rep_frng_ben_amt = .dots.ATO[["Rep_frng_ben_amt"]]), 
                                    new_sapto_tbl = new_sapto_tbl, 
+                                   Spouse_income = the_spouse_income,
+                                   family_status = {
+                                     FS_sapto <- rep_len("single", max.length)
+                                     FS_sapto[the_spouse_income > 0] <- "married"
+                                     FS_sapto
+                                   },
                                    sapto.eligible = TRUE)
     }
   } else {
