@@ -23,12 +23,18 @@ new_sapto <- function(rebate_income,
   
   out <- 
     new_sapto_tbl[input] %>%
-    .[, sapto := pmaxC(pminV(max_offset, 
-                             upper_threshold * taper_rate - rebate_income * taper_rate),
-                       0)] %>%
+    .[, sapto_value := pmaxC(pminV(max_offset, 
+                                   max_offset + lower_threshold * taper_rate - rebate_income * taper_rate),
+                             0)] %>%
+    .[, partner_sapto := pmaxC(pminV(max_offset, 
+                                     max_offset + lower_threshold * taper_rate - rebate_income * taper_rate),
+                               0)] %>%
+    # Transfer unutilized SAPTO:
+    .[, sapto_value := sapto_value + pminC(max_offset - (family_status != "single") * partner_sapto, 0)] %>%
     setkey(ordering) %>%
-    unique %>%
-    .[["sapto"]]
+    unique(by = key(.)) %>%
+    # my_printer %>%
+    .[["sapto_value"]]
   
   # Eligibility for SAPTO
   out[!sapto.eligible] <- 0
