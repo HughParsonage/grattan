@@ -34,8 +34,6 @@ sapto <- function(rebate_income,
   
   partner_sapto <- sapto_value <- NULL
   
-  my_printer <- function(x){print(x); x}
-  
   out <- 
     sapto_tbl[input] %>%
     .[, sapto_value := pmaxC(pminV(max_offset, 
