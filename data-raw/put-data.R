@@ -65,9 +65,10 @@ medicare_tbl <-
   medicare_tbl_indiv %>%
   dplyr::mutate_each(funs(as.logical), sato, pto, sapto) %>%
   data.table::as.data.table(.) %>%
-  data.table::setkey(fy_year, sapto, family_status) %>%
+  # mutate(family_status = "individual") %>%
+  data.table::setkey(fy_year, sapto) %>%
   # avoid cartesian joins
-  unique
+  unique()
 
 # To ensure faster versions of calculations do not evaluate NA.
 set(medicare_tbl, which(is.na(medicare_tbl[["lower_up_for_each_child"]])), "lower_up_for_each_child", 0)

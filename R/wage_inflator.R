@@ -111,7 +111,7 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
     
     obsQtr <- obsYear <- NULL
     wage.indices.new <- 
-      data.table(obsQtr   = (seq(last(wage.indices[["obsQtr"]]) + 1, length.out = quarters.ahead, by = 1) %% 4) + 1, 
+      data.table(obsQtr   = (seq(last(wage.indices[["obsQtr"]]), length.out = quarters.ahead, by = 1) %% 4) + 1, 
                  obsValue = forecasts) %>%
       .[, obsYear := last(wage.indices[["obsYear"]]) + cumsum(obsQtr == 1L)]
       
