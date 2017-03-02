@@ -17,8 +17,7 @@ new_sapto <- function(rebate_income,
   stopifnot(all(family_status %chin% c("single", "married")))
   
   upper_threshold <- taper_rate <- max_offset <- NULL
-  input <- data.table(fy_year = fy.year, 
-                      family_status = family_status, 
+  input <- data.table(family_status = family_status, 
                       sapto.eligible = sapto.eligible,
                       rebate_income = rebate_income,
                       Spouse_income = Spouse_income)
@@ -62,7 +61,6 @@ new_sapto <- function(rebate_income,
                                if_else(rebate_income < GG, CC, JJ))] %>%
     setkey(ordering) %>%
     unique(by = key(.)) %>%
-    # my_printer %>%
     .[["sapto_value"]]
   
   # Eligibility for SAPTO
