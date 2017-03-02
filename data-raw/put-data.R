@@ -80,6 +80,8 @@ medicare_tbl %>%
 sapto_tbl <- 
   readxl::read_excel("./data-raw/SAPTO-rates.xlsx", sheet = 1) %>% 
   data.table::as.data.table(.) %>% 
+  mutate(max_offset = if_else(family_status == "single", max_offset, max_offset * 2),
+         lower_threshold = if_else(family_status == "single", lower_threshold, lower_threshold * 2)) %>%
   # Choose maximum
   group_by(fy_year, family_status) %>%
   filter(max_offset == max(max_offset)) %>%

@@ -14,6 +14,8 @@ new_sapto <- function(rebate_income,
                       Spouse_income = 0,
                       fill = 0,
                       family_status = "single"){
+  stopifnot(all(family_status %chin% c("single", "married")))
+  
   upper_threshold <- taper_rate <- max_offset <- NULL
   input <- data.table(fy_year = fy.year, 
                       family_status = family_status, 
@@ -33,7 +35,7 @@ new_sapto <- function(rebate_income,
                                    max_offset + lower_threshold * taper_rate - rebate_income * taper_rate),
                              0)] %>%
     .[, partner_sapto := pmaxC(pminV(max_offset, 
-                                     max_offset + lower_threshold * taper_rate - rebate_income * taper_rate),
+                                     max_offset + lower_threshold * taper_rate - Spouse_income * taper_rate),
                                0)] %>%
     # Transfer unutilized SAPTO:
     .[, sapto_value := sapto_value + pminC(max_offset - (family_status != "single") * partner_sapto, 0)] %>%
