@@ -79,7 +79,7 @@ test_that("New SAPTO matches old SAPTO", {
 })
 
 test_that("New SAPTO matches old SAPTO for SAPTO", {
-  skip("v")
+  # skip("v")
   expect_equal(new_sapto(33000, Spouse_income = 33000, family_status = "married",
                          new_sapto_tbl = copy(grattan:::sapto_tbl) %>% filter(fy_year == "2016-17") %>% setkeyv("family_status")), 
                sapto(33000, "2016-17", Spouse_income = 33000, family_status = "married"))
@@ -92,7 +92,7 @@ test_that("New SAPTO matches old SAPTO for SAPTO", {
 })
 
 test_that("Works for ATO sample file", {
-  skip("v")
+  # skip("v")
   skip_if_not_installed("taxstats")
   s1314 <- sample_file_1314 %>% copy
   tax_with_sapto_fn <-
