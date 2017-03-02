@@ -22,6 +22,8 @@ sapto <- function(rebate_income,
                       rebate_income = rebate_income,
                       Spouse_income = Spouse_income)
   
+  stopifnot(all(family_status %chin% c("single", "married")))
+  
   if (any(Spouse_income > 0 & family_status == "single")){
     stop("family_status may be 'single' if and only if Spouse_income > 0.")
   }
@@ -34,16 +36,39 @@ sapto <- function(rebate_income,
   
   partner_sapto <- sapto_value <- NULL
   
+  my_printer <- function(x){print(x); x}
+  
   out <- 
     sapto_tbl[input] %>%
+    .[, sapto_income := if_else(family_status == "married",
+                                rebate_income + Spouse_income, 
+                                rebate_income)] %>%
     .[, sapto_value := pmaxC(pminV(max_offset, 
-                                   max_offset + lower_threshold * taper_rate - rebate_income * taper_rate),
-                       0)] %>%
-    .[, partner_sapto := pmaxC(pminV(max_offset, 
-                                     max_offset + lower_threshold * taper_rate - rebate_income * taper_rate),
-                               0)] %>%
+                                   max_offset + lower_threshold * taper_rate - sapto_income * taper_rate),
+                             0)] %>%
+    # https://www.ato.gov.au/individuals/income-and-deductions/in-detail/transferring-the-seniors-and-pensioners-tax-offset/
+    .[, partner_unused_sapto := pmaxC(pminV(max_offset / 2,
+                                            max_offset / 2 + taper_rate * lower_threshold / 2 - taper_rate * Spouse_income), 
+                                      0)] %>%
     # Transfer unutilized SAPTO:
-    .[, sapto_value := sapto_value + pminC(max_offset - (family_status != "single") * partner_sapto, 0)] %>%
+    .[, lito := 445] %>%
+    .[, AA := rebate_income] %>%
+    .[, BB := max_offset / 2] %>%
+    .[, CC := BB + partner_unused_sapto] %>% 
+    .[, DD := CC + lito] %>%
+    .[, EE := DD / 0.19] %>%
+    .[, FF := EE + 18200] %>%
+    # https://www.ato.gov.au/law/view/document?DocID=TXR/TR9331/NAT/ATO/00001&PiT=99991231235958
+    .[, GG := 18200 + DD / 0.19] %>%
+    # ATO calculator suggests this was intended:
+    # .[, GG := 37230] %>%
+    .[, HH := pmaxC(AA - GG, 0)] %>%
+    .[, II := HH / 8] %>%
+    .[, JJ := pmaxC(CC - II, 0)] %>% 
+    .[, testz := rebate_income + Spouse_income < lower_threshold] %>%
+    .[, sapto_value := if_else(family_status == "single",
+                               sapto_value,
+                               if_else(rebate_income < GG, CC, JJ))] %>%
     setkey(ordering) %>%
     unique(by = key(.)) %>%
     # my_printer %>%
