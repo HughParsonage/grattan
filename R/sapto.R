@@ -34,9 +34,10 @@ sapto <- function(rebate_income,
   setkeyv(input, c("fy_year", "family_status"))
   
   
-  partner_sapto <- sapto_value <- NULL
-  
-  my_printer <- function(x){print(x); x}
+  partner_sapto <- sapto_value <- 
+    sapto_income <- partner_unused_sapto <-
+    AA <- BB <- CC <- DD <- EE <- FF <-
+    GG <- HH <- II <- JJ <- NULL
   
   out <- 
     sapto_tbl[input] %>%
@@ -65,7 +66,6 @@ sapto <- function(rebate_income,
     .[, HH := pmaxC(AA - GG, 0)] %>%
     .[, II := HH / 8] %>%
     .[, JJ := pmaxC(CC - II, 0)] %>% 
-    .[, testz := rebate_income + Spouse_income < lower_threshold] %>%
     .[, sapto_value := if_else(family_status == "single",
                                sapto_value,
                                if_else(rebate_income < GG, CC, JJ))] %>%
