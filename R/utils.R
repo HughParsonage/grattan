@@ -60,7 +60,11 @@ inflator_frac <- function(.data, front, over, under, new_col_name){
 }
 
 last_over_first <- function(x){
-  dplyr::last(x) / dplyr::first(x)
+  if (is.numeric(x)){
+    last(x) / first(x)
+  } else {
+    x
+  }
 }
 
 MeanNumeric <- function(x){

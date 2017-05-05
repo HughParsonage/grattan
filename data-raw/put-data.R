@@ -553,7 +553,71 @@ abs_key_aggregates <-
   filter(Series_ID %in% c( "A2304350J"  # GDP
                           ,"A2304354T"  # GNI
                           ))
+
+abs_residential_property_price_Syd <-
+  fread("http://ausmacrodata.org/Data/6416.0/rppisrppiinpcoq.csv") %>%
+  select(1:2) %>%
+  setnames(names(.)[2], "Syd")
   
+abs_residential_property_price_Mel <-
+  fread("http://ausmacrodata.org/Data/6416.0/rppimrppiinpcoq.csv") %>%
+  select(1:2) %>%
+  setnames(names(.)[2], "Mel")
+  
+abs_residential_property_price_Bne <-
+  fread("http://ausmacrodata.org/Data/6416.0/rppibrppiinpcoq.csv") %>%
+  select(1:2) %>%
+  setnames(names(.)[2], "Bne")
+  
+abs_residential_property_price_Per <-
+  fread("http://ausmacrodata.org/Data/6416.0/rppiprppiinpcoq.csv") %>%
+  select(1:2) %>%
+  setnames(names(.)[2], "Per")
+  
+abs_residential_property_price_Adl <-
+  fread("http://ausmacrodata.org/Data/6416.0/rppiprppiinpcoq.csv") %>%
+  select(1:2) %>%
+  setnames(names(.)[2], "Adl")
+  
+abs_residential_property_price_Hob <-
+  fread("http://ausmacrodata.org/Data/6416.0/rppihrppiinpcoq.csv") %>%
+  select(1:2) %>%
+  setnames(names(.)[2], "Hob")
+  
+abs_residential_property_price_Cbr <-
+  fread("http://ausmacrodata.org/Data/6416.0/rppicrppiinpcoq.csv") %>%
+  select(1:2) %>%
+  setnames(names(.)[2], "Cbr")
+  
+abs_residential_property_price_Drw <-
+  fread("http://ausmacrodata.org/Data/6416.0/rppidrppiinpcoq.csv") %>%
+  select(1:2) %>%
+  setnames(names(.)[2], "Drw")
+  
+abs_residential_property_price_AVG <-
+  fread("http://ausmacrodata.org/Data/6416.0/rppiwaeccrppiinpcoq.csv") %>%
+  select(1:2) %>%
+  setnames(names(.)[2], "AVG")
+
+residential_property_prices <- 
+  Reduce(f = function(X, Y) merge(X, Y, by = "V1"),
+         mget(ls(pattern = "^abs_residential_property_"))) %>%
+  setnames("V1", "Date") %>%
+  mutate(Date = as.Date(paste0("01/", Date), "%d/%m/%Y")) %>%
+  select(Date,
+         Sydney = Syd,
+         Melbourne = Mel,
+         Brisbane = Bne,
+         Perth = Per,
+         Adelaide = Adl,
+         Hobart = Hob,
+         Canberra = Cbr,
+         Darwin = Drw,
+         `Australia (weighted average)` = AVG) %>%
+  .[order(Date)] %>%
+  melt.data.table(id.vars = "Date", variable.name = "City", value.name = "Residential_property_price_index")
+
+devtools::use_data(abs_residential_property_prices)
 
 
 devtools::use_data(tax_table2, 

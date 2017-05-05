@@ -46,10 +46,10 @@ generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzer
   }
   
   if (!nonzero){
-    mean_of_each_var <- dplyr::select_(mean_of_each_taxstats_var, .dots = c("fy.year", vars))
+    mean_of_each_var <- mean_of_each_taxstats_var[, .SD, .SDcols = c("fy.year", vars)]
   } else {
     # Forecast only on the mean of nonzero values
-    mean_of_each_var <- dplyr::select_(meanPositive_of_each_taxstats_var, .dots = c("fy.year", vars))
+    mean_of_each_var <- meanPositive_of_each_taxstats_var[, .SD, .SDcols = c("fy.year", vars)]
   }
   
   forecaster <- function(x){
@@ -78,12 +78,11 @@ generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzer
                  as.data.table(point_forecasts_by_var)), 
             use.names = TRUE, 
             fill = TRUE) %>%
-    .[, fy_year := yr2fy(1:.N - 1 + fy2yr(dplyr::first(fy.year)))] %>% 
+    .[, fy_year := yr2fy(1:.N - 1 + fy2yr(first(fy.year)))] %>% 
     # last(fy_year) is the fy_year corresponding to h, the target. 
-    dplyr::filter(fy_year %in% c(fy.year.of.sample.file, dplyr::last(fy_year))) %>% 
-    dplyr::summarise_each(dplyr::funs(last_over_first), -c(fy_year, fy.year)) %>%
-    as.data.table(.) %>%
-    melt.data.table(., measure.vars = names(.), variable.name = "variable", value.name = "inflator")
+    .[fy_year %in% c(fy.year.of.sample.file, last(fy_year))] %>% 
+    .[, lapply(.SD, last_over_first), .SDcols = vars] %>%
+    melt.data.table(measure.vars = names(.), variable.name = "variable", value.name = "inflator")
 }
 
 

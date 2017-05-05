@@ -20,11 +20,10 @@ new_income_tax <- function(income,
   
   tax_table2 <- 
     new_tax_tbl %>%
-    dplyr::mutate(
-      tax_at = cumsum(shift(marginal_rate, type = "lag", fill = 0) * (lower_bracket - shift(lower_bracket, type = "lag", fill = 0))),
-      income = lower_bracket) %>%
-    dplyr::select(income, lower_bracket, marginal_rate, tax_at) %>%
-    as.data.table(.) %>%
+    copy %>%
+    .[, tax_at := cumsum(shift(marginal_rate, type = "lag", fill = 0) * (lower_bracket - shift(lower_bracket, type = "lag", fill = 0)))] %>%
+    .[, income := lower_bracket] %>%
+    .[, list(income, lower_bracket, marginal_rate, tax_at)] %>%
     setkeyv("income") 
   
   input <- 

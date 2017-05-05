@@ -53,8 +53,8 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
   
   cpi.indices <- 
     as.data.table(cpi) %>%
-    dplyr::filter(grepl("Q1", obsTime)) %>%
-    dplyr::mutate(fy_year = yr2fy(sub("-Q1", "", obsTime, fixed = TRUE)))
+    .[grepl("Q1", obsTime)] %>%
+    .[, fy_year := yr2fy(sub("-Q1", "", obsTime, fixed = TRUE))]
   
   input <-
     data.table(from_nominal_price = from_nominal_price,

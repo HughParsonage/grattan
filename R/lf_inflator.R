@@ -32,7 +32,6 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
                            lf.series = NULL) {
   # CRAN
   obsTime <- NULL; obsValue <- NULL; to_index <- NULL; from_index <- NULL
-  # pretty sure this is ok. Reflects  dplyr::mutate(fy_year = date2fy(obsTimeDate))
   obsTimeDate <- NULL
   if (useABSConnection){
     lf.url.trend <- 
