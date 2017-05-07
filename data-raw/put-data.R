@@ -555,7 +555,7 @@ abs_key_aggregates <-
                           ))
 
 abs_residential_property_price_Syd <-
-  fread("http://ausmacrodata.org/Data/6416.0/rppisrppiinpcoq.csv") %>%
+  fread("http://ausmacrodata.org/Data/6416.0/rppisrppiinpcoq.csv", select = c("date", "value")) %>%
   select(1:2) %>%
   setnames(names(.)[2], "Syd")
   
