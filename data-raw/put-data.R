@@ -601,7 +601,7 @@ residential_property_prices <-
   .[order(Date)] %>%
   melt.data.table(id.vars = "Date", variable.name = "City", value.name = "Residential_property_price_index")
 
-devtools::use_data(residential_property_prices)
+devtools::use_data(residential_property_prices, overwrite = TRUE)
 
 
 devtools::use_data(tax_table2, 
