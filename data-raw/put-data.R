@@ -52,7 +52,8 @@ lito_tbl <-
   readxl::read_excel("./data-raw/lito-info.xlsx", sheet = 1) %>% 
   dplyr::select(-source) %>%
   as.data.table %>%
-  setkey("fy_year")
+  setkeyv("fy_year") %>%
+  unique(by = key(.))
 
 lito_tbl %>% 
   readr::write_tsv("./data-raw/lito-info.tsv")
