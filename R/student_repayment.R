@@ -7,7 +7,9 @@
 #' @param fy.year The financial year \code{repayment_income} was earned.
 #' @param debt The amount of student debt held.
 #' @return The repayment amount.
-#' @source \url{https://www.ato.gov.au/Rates/HELP,-TSL-and-SFSS-repayment-thresholds-and-rates/?page=2#HELP_repayment_thresholds_and_rates_2013_14}
+#' @source \url{https://www.ato.gov.au/Rates/HELP,-TSL-and-SFSS-repayment-thresholds-and-rates/?page=2#HELP_repayment_thresholds_and_rates_2013_14}m
+#' \url{https://docs.education.gov.au/system/files/doc/other/ed17-0138_-_he_-_glossy_budget_report_acc.pdf}
+#' @details The student repayments for \code{fy.year = '2018-19'} assume the measures in Budget 2017 will pass.
 #' @author Ittima Cherastidtham and Hugh Parsonage
 #' @examples 
 #' student_repayment(50e3, "2013-14", debt = 10e3) 

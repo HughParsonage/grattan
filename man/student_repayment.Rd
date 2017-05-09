@@ -4,7 +4,8 @@
 \alias{student_repayment}
 \title{HELP / HECS repayment amounts}
 \source{
-\url{https://www.ato.gov.au/Rates/HELP,-TSL-and-SFSS-repayment-thresholds-and-rates/?page=2#HELP_repayment_thresholds_and_rates_2013_14}
+\url{https://www.ato.gov.au/Rates/HELP,-TSL-and-SFSS-repayment-thresholds-and-rates/?page=2#HELP_repayment_thresholds_and_rates_2013_14}m
+\url{https://docs.education.gov.au/system/files/doc/other/ed17-0138_-_he_-_glossy_budget_report_acc.pdf}
 }
 \usage{
 student_repayment(repayment_income, fy.year, debt)
@@ -22,6 +23,9 @@ The repayment amount.
 }
 \description{
 HELP / HECS repayment amounts
+}
+\details{
+The student repayments for \code{fy.year = '2018-19'} assume the measures in Budget 2017 will pass.
 }
 \examples{
 student_repayment(50e3, "2013-14", debt = 10e3) 
