@@ -20,7 +20,7 @@ if (packageVersion("data.table") < package_version("1.9.8")){
 renew <- TRUE
 
 tax_tbl <- 
-  lapply(yr2fy(1990:2017), 
+  lapply(yr2fy(1990:2020), 
          function(fy_year) {
            read_excel("./data-raw/tax_brackets_and_marginal_rates.xlsx", sheet = fy_year) %>% 
              mutate(fy_year = fy_year) %>% 
@@ -94,20 +94,8 @@ sapto_tbl %>%
   readr::write_tsv("./data-raw/sapto_tbl.tsv")
 
 hecs_tbl <- 
-  openxlsx::readWorkbook("./data-raw/Historical HELP thresholds 1989 to 2015.xlsx", 
-                         sheet = "Actual historical threshold", 
-                         rows = c(4:33), check.names = FALSE, colNames = TRUE) %>%
-  # repayment rate looks like "7.5%" in Excel which is stored as 0.075 (approximately)
-  tidyr::gather(repayment_rate, repayment_threshold, -Year) %>%
-  dplyr::mutate(repayment_rate = as.numeric(repayment_rate)) %>%
-  dplyr::filter(!is.na(repayment_threshold)) %>%
-  data.table::as.data.table(.) %>%
-  data.table::setnames(., "Year", "fy_year") %>%
-  # need to explicitly state 0.
-  {
-    data.table::rbindlist(list(., data.table::data.table(fy_year = unique(.$fy_year), repayment_rate = 0, repayment_threshold = -Inf))) 
-  } %>%
-  data.table::setkey(fy_year, repayment_threshold)
+  fread("./data-raw/Student-repayment-thresholds-HELP.tsv") %>%
+  setkey(fy_year, repayment_threshold)
 
 # Manually
 cpi_unadj <- 
@@ -554,55 +542,51 @@ abs_key_aggregates <-
                           ,"A2304354T"  # GNI
                           ))
 
+read_csv_2col <- function(...) {
+  suppressMessages(suppressWarnings(read_csv(...))) %>% select(1:2) %>% setDT
+}
+
 abs_residential_property_price_Syd <-
-  fread("http://ausmacrodata.org/Data/6416.0/rppisrppiinpcoq.csv", select = c("date", "value")) %>%
-  select(1:2) %>%
+  read_csv_2col("http://ausmacrodata.org/Data/6416.0/rppisrppiinpcoq.csv") %>%
   setnames(names(.)[2], "Syd")
   
 abs_residential_property_price_Mel <-
-  fread("http://ausmacrodata.org/Data/6416.0/rppimrppiinpcoq.csv") %>%
-  select(1:2) %>%
+  read_csv_2col("http://ausmacrodata.org/Data/6416.0/rppimrppiinpcoq.csv") %>%
   setnames(names(.)[2], "Mel")
   
 abs_residential_property_price_Bne <-
-  fread("http://ausmacrodata.org/Data/6416.0/rppibrppiinpcoq.csv") %>%
-  select(1:2) %>%
+  read_csv_2col("http://ausmacrodata.org/Data/6416.0/rppibrppiinpcoq.csv") %>%
   setnames(names(.)[2], "Bne")
   
 abs_residential_property_price_Per <-
-  fread("http://ausmacrodata.org/Data/6416.0/rppiprppiinpcoq.csv") %>%
-  select(1:2) %>%
+  read_csv_2col("http://ausmacrodata.org/Data/6416.0/rppiprppiinpcoq.csv") %>%
   setnames(names(.)[2], "Per")
   
 abs_residential_property_price_Adl <-
-  fread("http://ausmacrodata.org/Data/6416.0/rppiprppiinpcoq.csv") %>%
+  read_csv_2col("http://ausmacrodata.org/Data/6416.0/rppiprppiinpcoq.csv") %>%
   select(1:2) %>%
   setnames(names(.)[2], "Adl")
   
 abs_residential_property_price_Hob <-
-  fread("http://ausmacrodata.org/Data/6416.0/rppihrppiinpcoq.csv") %>%
-  select(1:2) %>%
+  read_csv_2col("http://ausmacrodata.org/Data/6416.0/rppihrppiinpcoq.csv") %>%
   setnames(names(.)[2], "Hob")
   
 abs_residential_property_price_Cbr <-
-  fread("http://ausmacrodata.org/Data/6416.0/rppicrppiinpcoq.csv") %>%
-  select(1:2) %>%
+  read_csv_2col("http://ausmacrodata.org/Data/6416.0/rppicrppiinpcoq.csv") %>%
   setnames(names(.)[2], "Cbr")
   
 abs_residential_property_price_Drw <-
-  fread("http://ausmacrodata.org/Data/6416.0/rppidrppiinpcoq.csv") %>%
-  select(1:2) %>%
+  read_csv_2col("http://ausmacrodata.org/Data/6416.0/rppidrppiinpcoq.csv") %>%
   setnames(names(.)[2], "Drw")
   
 abs_residential_property_price_AVG <-
-  fread("http://ausmacrodata.org/Data/6416.0/rppiwaeccrppiinpcoq.csv") %>%
-  select(1:2) %>%
+  read_csv_2col("http://ausmacrodata.org/Data/6416.0/rppiwaeccrppiinpcoq.csv") %>%
   setnames(names(.)[2], "AVG")
 
 residential_property_prices <- 
-  Reduce(f = function(X, Y) merge(X, Y, by = "V1"),
+  Reduce(f = function(X, Y) merge(X, Y, by = names(X)[1]),
          mget(ls(pattern = "^abs_residential_property_"))) %>%
-  setnames("V1", "Date") %>%
+  setnames(1, "Date") %>%
   mutate(Date = as.Date(paste0("01/", Date), "%d/%m/%Y")) %>%
   select(Date,
          Sydney = Syd,
