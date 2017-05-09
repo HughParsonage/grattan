@@ -114,7 +114,7 @@ rolling_income_tax <- function(income,
   #   setkey(fy_year, income)
   
   tax_fun <- function(income, fy.year){
-    setkey(input, fy_year, income)
+    setkeyv(input, c("fy_year", "income"))
     
     tax_table2[input, roll = Inf] %>%
       .[, tax := tax_at + (income - lower_bracket) * marginal_rate] %>%
