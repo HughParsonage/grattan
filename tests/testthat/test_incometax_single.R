@@ -47,7 +47,8 @@ test_that("income_tax returns known results",{
 })
 
 test_that("income_tax is not NA for any years)", {
-  expect_false(any(is.na(income_tax(50e3, fy.year = yr2fy(2004:2015)))))
+  # i.e. works for all the years we guarantee
+  expect_false(any(is.na(income_tax(50e3, fy.year = yr2fy(2001:2020)))))
 })
 
 test_that("income_tax is not NA for 2003-04", {

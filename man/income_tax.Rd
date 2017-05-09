@@ -11,11 +11,12 @@ income_tax(income, fy.year, age = 42, family_status = "individual",
 \arguments{
 \item{income}{The individual assessable income.}
 
-\item{fy.year}{The financial year in which the income was earned. Only tax years from 2000-01 to 2016-17 are available.}
+\item{fy.year}{The financial year in which the income was earned. Tax years 2000-01 to 2016-17 are provided, as well as the tax years 2017-18 to 2019-20, for convenience, under the assumption the 2017 Budget measures will pass. 
+In particular, the tax payable is calculated under the assumption that the rate of the Medicare levy will rise to 2.5\% in the 2019-20 tax year.}
 
 \item{age}{The individual's age.}
 
-\item{family_status}{For medicare and SAPTO purposes.}
+\item{family_status}{For Medicare and SAPTO purposes.}
 
 \item{n_dependants}{An integer for the number of children of the taxpayer (for the purposes of the Medicare levy).}
 
@@ -23,7 +24,7 @@ income_tax(income, fy.year, age = 42, family_status = "individual",
 
 \item{return.mode}{The mode (numeric or integer) of the returned vector.}
 
-\item{allow.forecasts}{should dates beyond 2016-17 be permitted? Currently, not permitted.}
+\item{allow.forecasts}{should dates beyond 2019-20 be permitted? Currently, not permitted.}
 }
 \value{
 the total personal income tax payable
