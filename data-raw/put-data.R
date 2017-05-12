@@ -505,7 +505,18 @@ bto_tbl <-
 Age_pension_permissible_income_by_Date <- 
   read_excel("data-raw/age-pension-permissible-income.xlsx") %>%
   gather(type, permissible_income, -Date) %>%
-  mutate(type = trimws(gsub("Permissible income ", "", gsub("[^A-Za-z]", " ", type))))
+  mutate(type = trimws(gsub("Permissible income ", "", gsub("[^A-Za-z]", " ", type)))) %>%
+  setDT
+
+Age_pension_deeming_rates_by_Date <-
+  # http://guides.dss.gov.au/guide-social-security-law/4/4/1/10
+  read_excel("data-raw/Age-Pension-deeming-rates-1996-2016.xlsx") %>%
+  setDT %>%
+  melt.data.table(id.vars = c("Date", "deeming_rate_below", "deeming_rate_above"),
+                  variable.name = "type", value.name = "threshold") %>%
+  .[, Date := as.Date(Date)] %>%
+  .[, type := gsub("_", " ", gsub("threshold_", "", type, fixed = TRUE))] %>%
+  .[, .(Date, type, threshold, deeming_rate_below, deeming_rate_above)]
 
 aust_pop_by_age_yearqtr <- 
   fread("./data-raw/Estim-Resi-Pop-by-age-1981-2016.csv", 
@@ -631,6 +642,7 @@ devtools::use_data(tax_table2,
                    .avbl_fractions,
                    Age_pension_base_rates_by_year,
                    Age_pension_assets_test_by_year,
+                   Age_pension_deeming_rates_by_Date,
                    Age_pension_permissible_income_by_Date,
                    bto_tbl,
                    aust_pop_by_age_yearqtr,
