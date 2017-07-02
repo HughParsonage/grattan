@@ -109,7 +109,18 @@ cpi_trimmed <-
   data.table::fread("./data-raw/cpi-trimmed-mean-manual.tsv", select = c("obsTime", "obsValue"))
 
 wages_trend <- 
-  data.table::fread("./data-raw/wages-trend.tsv", select = c("obsTime", "obsValue"))
+  tryCatch({
+    wage.url <- "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LABOUR_PRICE_INDEX/1.THRPEB.7.-.0.30.Q/all?startTime=1997-Q3"
+    wages <- rsdmx::readSDMX(wage.url)
+    message("Using ABS sdmx connection")
+    wage.indices <- 
+      as.data.frame(wages) %>% 
+      select(obsTime, obsValue) %>%
+      as.data.table
+  },
+  error = function(e) {
+    data.table::fread("./data-raw/wages-trend.tsv", select = c("obsTime", "obsValue"))
+  })
 
 lf_trend <- 
   tryCatch({
@@ -123,10 +134,10 @@ lf_trend <-
       select(obsTime, obsValue) %T>%
       fwrite("./data-raw/lf-trend.tsv", sep = "\t")
   }, 
-    error = function(e){
-      data.table::fread("./data-raw/lf-trend.tsv" 
-                        , select = c("obsTime", "obsValue"))
-    })
+  error = function(e){
+    data.table::fread("./data-raw/lf-trend.tsv" 
+                      , select = c("obsTime", "obsValue"))
+  })
 
 cgt_expenditures <- 
   data.table::fread("./data-raw/tax-expenditures-cgt-historical.tsv")
