@@ -494,7 +494,8 @@ sample_files_all %>%
          age_imp = runif(n(), min_age, max_age)) %>%
   select(-min_age, -max_age) %>%
   filter(Net_CG_amt > 0) %>%
-  group_by(fy.year, Age = round(age_imp)) %>%
+  mutate(Age = round(age_imp)) %>%
+  group_by(fy.year) %>%
   summarise(mean_Net_CG = mean(Net_CG_amt), 
             sd_Net_CG = sd(Net_CG_amt)) %>%
   ungroup %>%
