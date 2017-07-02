@@ -16,7 +16,7 @@ income_tax_sapto(income, fy.year, age = 42, family_status = "individual",
 
 \item{age}{The individual's age.}
 
-\item{family_status}{For medicare and SAPTO purposes.}
+\item{family_status}{For Medicare and SAPTO purposes.}
 
 \item{n_dependants}{An integer for the number of children of the taxpayer (for the purposes of the Medicare levy).}
 
@@ -26,9 +26,9 @@ income_tax_sapto(income, fy.year, age = 42, family_status = "individual",
 
 \item{allow.forecasts}{should dates beyond 2016-17 be permitted? Currently, not permitted.}
 
-\item{sapto.eligible}{Specify explicitly the eligiblity for SAPTO. If missing, defaults to ages over 65.}
+\item{sapto.eligible}{Specify explicitly the eligibility for SAPTO. If missing, defaults to ages over 65.}
 
-\item{medicare.sapto.eligible}{Specify explicitly the eligiblity for SAPTO with respect to the medicare levy for low-income earners. If missing, defaults to ages over 65.}
+\item{medicare.sapto.eligible}{Specify explicitly the eligiblity for SAPTO with respect to the Medicare levy for low-income earners. If missing, defaults to ages over 65.}
 
 \item{new_sapto_tbl}{If not \code{NULL}, supplied to \code{\link{new_sapto}}. Otherwise, \code{fy.year} is passed to \code{\link{sapto}}.}
 }
@@ -36,5 +36,5 @@ income_tax_sapto(income, fy.year, age = 42, family_status = "individual",
 Income tax payable as a function of SAPTO
 }
 \details{
-Used to cost simple changes SAPTO.
+Used to cost simple changes to SAPTO.
 }

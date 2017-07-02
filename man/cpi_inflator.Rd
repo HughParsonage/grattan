@@ -22,7 +22,7 @@ cpi_inflator(from_nominal_price = 1, from_fy, to_fy = "2014-15",
 \item{allow.projection}{Should projections beyond the ABS's data be allowed?}
 }
 \value{
-The value of from_nominal_price in real (to_fy) dollars.
+The value of from_nominal_price in real (\code{to_fy}) dollars.
 }
 \description{
 CPI inflator

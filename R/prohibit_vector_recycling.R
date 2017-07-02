@@ -1,4 +1,4 @@
-#' Prohibit vector recyling
+#' Prohibit vector recycling
 #' 
 #' Tests (harshly) whether the vectors can be recycled safely.
 #' 

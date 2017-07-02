@@ -1,6 +1,6 @@
 #' Grattan package
 #' 
-#' Colours, charts, and other common quant tasks
+#' Colours, charts, and other common quantative tasks for Australia tax analysts
 #' 
 #' @name grattan-package
 #' @aliases grattan

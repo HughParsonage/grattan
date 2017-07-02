@@ -10,7 +10,7 @@
 #' @param allow.projection Should projections beyond the ABS's data be allowed?
 #' @examples 
 #' cpi_inflator(100, from_fy = "2005-06", to_fy = "2014-15")
-#' @return The value of from_nominal_price in real (to_fy) dollars.
+#' @return The value of from_nominal_price in real (\code{to_fy}) dollars.
 
 cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15", 
                          adjustment = c("seasonal", "none", "trimmed.mean"),

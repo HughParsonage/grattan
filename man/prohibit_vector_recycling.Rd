@@ -2,7 +2,7 @@
 % Please edit documentation in R/prohibit_vector_recycling.R
 \name{prohibit_vector_recycling}
 \alias{prohibit_vector_recycling}
-\title{Prohibit vector recyling}
+\title{Prohibit vector recycling}
 \source{
 \url{http://stackoverflow.com/a/9335687/1664978}
 }
