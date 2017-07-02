@@ -345,7 +345,8 @@ avg_marginal_rate_b4_CG <-
          age_imp >= 20) %>%
   mutate(Taxable_Income_b4_CG = pmaxC(Taxable_Income - Net_CG_amt, 0),
          marginal_rate_b4_CG = income_tax(Taxable_Income_b4_CG + 1, fy.year = FY.YEAR) - income_tax(Taxable_Income_b4_CG, fy.year = FY.YEAR)) %>%
-  group_by(is_in_workforce = between(age_imp, 20, 65)) %>%
+  mutate(is_in_workforce = between(age_imp, 20, 65)) %>%
+  group_by(is_in_workforce) %>%
   summarise(avg_marginal_rate_weighted = weighted.mean(marginal_rate_b4_CG, Net_CG_amt), 
             avg_marginal_Rate = mean(marginal_rate_b4_CG))
 
@@ -381,7 +382,8 @@ sample_file %>%
   select(Tot_CY_CG_amt, Net_CG_amt, WEIGHT) %>%
   filter(Tot_CY_CG_amt > 0) %>%
   mutate(apparent_discount = Net_CG_amt / Tot_CY_CG_amt) %>%
-  group_by(apparent_discount_round = round(apparent_discount * cgt_ratio_res, 0) / cgt_ratio_res) %>%
+  mutate(apparent_discount_round = round(apparent_discount * cgt_ratio_res, 0) / cgt_ratio_res) %>%
+  group_by(apparent_discount_round) %>%
   summarise(n_taxpayers = sum(WEIGHT), 
             n_taxpayers_by_val = sum(WEIGHT * Tot_CY_CG_amt)) %>%
   rename(`Ratio of Net capital gains to Total capital gains` = apparent_discount_round) %>%
@@ -447,8 +449,9 @@ sample_files_all %>%
          age_imp = runif(n(), min_age, max_age)) %>%
   select(-min_age, -max_age) %>%
   mutate(last_fy = fy.year == max(fy.year)) %>%
-  group_by(`Tax year` = factor(fy.year)) %>%
-  mutate(label = ifelse(age_imp == max(age_imp), fy.year, NA_character_),
+  mutate(`Tax year` = factor(fy.year)) %>%
+  group_by(`Tax year`) %>%
+  mutate(label = if_else(age_imp == max(age_imp), fy.year, NA_character_),
          is_CG = Net_CG_amt > 0,
          label.y = mean(is_CG[age_imp > 71]), 
          Age = age_imp) %>%
@@ -619,13 +622,14 @@ sample_file %>%
 ```{r NG-by-tax-bracket}
 NG_by_taxBracket <-
   sample_file %>%
-  group_by(Tax_bracket = cut(Taxable_Income, 
+  mutate(Tax_bracket = cut(Taxable_Income, 
                              breaks = c(-Inf, 18200, 37e3, 80e3, 180e3, Inf),
                              labels = c("$0-$18,200", "$18,201-$37,000", 
                                         "$37,001-$80,000", "$80,001-$180,000", 
                                         "Over $180,000"),
                              ordered_results = TRUE,
                              include.lowest = TRUE)) %>%
+  group_by(Tax_bracket) %>%
   summarise(n_NG = wsum(Net_rent_amt < 0, WEIGHT), 
             n = sum(WEIGHT)) %>%
   arrange(Tax_bracket)
@@ -649,7 +653,7 @@ NG_by_taxBracket_tax_benefit <-
          tax_current = income_tax(Taxable_Income, fy.year = FY.YEAR),
          tax_noNG = income_tax(Taxable_Income_noNG, fy.year = FY.YEAR),
          change = tax_noNG - tax_current) %>%
-  group_by(Tax_bracket = cut(Taxable_Income, 
+  mutate(Tax_bracket = cut(Taxable_Income, 
                              breaks = c(-Inf, 18200, 37e3, 80e3, 180e3, Inf),
                              labels = c("$0-$18,200", 
                                         "$18,201-$37,000", 
@@ -658,6 +662,7 @@ NG_by_taxBracket_tax_benefit <-
                                         "Over $180,000"),
                              ordered_results = TRUE,
                              include.lowest = TRUE)) %>%
+  group_by(Tax_bracket) %>%
   summarise(total_tax_change = sum(change * WEIGHT),
             avg_tax_change = mean(change)) %>%
   arrange(Tax_bracket)
@@ -678,7 +683,8 @@ NG_by_taxBracket_tax_benefit %>%
 ```{r NG-by-taxable-income-decile}
 NG_by_taxable_income_decile <- 
   sample_file %>%
-  group_by(Taxable_Income_decile = ntile(Taxable_Income, 10)) %>%
+  mutate(Taxable_Income_decile = ntile(Taxable_Income, 10)) %>%
+  group_by(Taxable_Income_decile) %>%
   summarise(n_NG = wsum(Net_rent_amt < 0, WEIGHT), 
             n = sum(WEIGHT)) %>%
   arrange(Taxable_Income_decile) 
@@ -703,7 +709,8 @@ NG_tax_benefit_taxable_income_decile <-
          tax_current = income_tax(Taxable_Income, fy.year = FY.YEAR),
          tax_noNG = income_tax(Taxable_Income_noNG, fy.year = FY.YEAR),
          change = tax_noNG - tax_current) %>%
-  group_by(Taxable_Income_decile = ntile(Taxable_Income, 10)) %>%
+  mutate(Taxable_Income_decile = ntile(Taxable_Income, 10)) %>%
+  group_by(Taxable_Income_decile) %>%
   summarise(tax_diff = sum(change * WEIGHT)) %>% 
   ungroup %>%
   mutate(tax_diff_prop = tax_diff / sum(tax_diff)) %>%
@@ -717,7 +724,8 @@ NG_tax_benefit_taxable_income_decile_noNG <-
          tax_current = income_tax(Taxable_Income, fy.year = FY.YEAR),
          tax_noNG = income_tax(Taxable_Income_noNG, fy.year = FY.YEAR),
          change = tax_noNG - tax_current) %>%
-  group_by(Taxable_Income_decile = ntile(Taxable_Income_noNG, 10)) %>%
+  mutate(Taxable_Income_decile = ntile(Taxable_Income_noNG, 10)) %>%
+  group_by(Taxable_Income_decile) %>%
   summarise(tax_diff = sum(change * WEIGHT)) %>%
   ungroup %>%
   mutate(tax_diff_prop = tax_diff / sum(tax_diff)) %>%
@@ -745,7 +753,8 @@ NG_tax_benefit_taxable_income_decile_prev <-
          tax_current = income_tax(Taxable_Income, fy.year = FY.YEAR),
          tax_noNG = income_tax(Taxable_Income_noNG, fy.year = FY.YEAR),
          change = tax_noNG - tax_current) %>%
-  group_by(Taxable_Income_decile = ntile(Taxable_Income, 10)) %>%
+  mutate(Taxable_Income_decile = ntile(Taxable_Income, 10)) %>%
+  group_by(Taxable_Income_decile) %>%
   summarise(tax_diff = sum(change * WEIGHT)) %>% 
   ungroup %>%
   mutate(tax_diff_prop = tax_diff / sum(tax_diff)) %>%
@@ -759,8 +768,8 @@ NG_tax_benefit_taxable_income_decile_noNG_prev <-
          tax_current = income_tax(Taxable_Income, fy.year = FY.YEAR),
          tax_noNG = income_tax(Taxable_Income_noNG, fy.year = FY.YEAR),
          change = tax_noNG - tax_current) %>%
-  group_by(Taxable_Income_decile = ntile(Taxable_Income_noNG, 10)) %>%
-  summarise(tax_diff = sum(change * WEIGHT)) %>%
+  mutate(Taxable_Income_decile = ntile(Taxable_Income, 10)) %>%
+  group_by(Taxable_Income_decile) %>%  summarise(tax_diff = sum(change * WEIGHT)) %>%
   ungroup %>%
   mutate(tax_diff_prop = tax_diff / sum(tax_diff)) %>%
   arrange(Taxable_Income_decile) %>%
@@ -845,8 +854,9 @@ sample_file %>%
                  0, 
                  upper_ylim <<- quantile(.$Tot_inc_amt_NoNG[.$Tot_inc_amt_NoNG > 0], probs = 0.95))) %>%
   
-  group_by(Age = age_res * round(age_imp / age_res), 
-           `Total Income (before NG)` = inc_res * round(Tot_inc_amt_NoNG / inc_res)) %>%
+  mutate(Age = age_res * round(age_imp / age_res), 
+         `Total Income (before NG)` = inc_res * round(Tot_inc_amt_NoNG / inc_res)) %>%
+  group_by(Age, `Total Income (before NG)`) %>%
   summarise(n_NG = sum((Net_rent_amt < 0) * WEIGHT), 
             prop_NG = mean(Net_rent_amt < 0),
             tot_tax_benefit = sum(change * WEIGHT), 
@@ -881,8 +891,9 @@ sample_file %>%
                  0, 
                  upper_ylim <<- quantile(.$Tot_inc_amt_NoNG[.$Tot_inc_amt_NoNG > 0], probs = 0.95))) %>%
   
-  group_by(Age = age_res * round(age_imp / age_res), 
-           `Total Income (before NG)` = inc_res * round(Tot_inc_amt_NoNG / inc_res)) %>%
+  mutate(Age = age_res * round(age_imp / age_res), 
+         `Total Income (before NG)` = inc_res * round(Tot_inc_amt_NoNG / inc_res)) %>%
+  group_by(Age, `Total Income (before NG)`) %>%
   summarise(n_NG = sum((Net_rent_amt < 0) * WEIGHT), 
             prop_NG = mean(Net_rent_amt < 0),
             tot_tax_benefit = sum(change * WEIGHT), 

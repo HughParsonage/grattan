@@ -105,7 +105,8 @@ library(dplyr)
 library(dtplyr)  # for data.table
 
 new_sample_file_1718 %>%
-  group_by(Taxable_Income_decile = ntile(Taxable_Income, 10)) %>%
+  mutate(Taxable_Income_decile = ntile(Taxable_Income, 10)) %>%
+  group_by(Taxable_Income_decile) %>%
   summarise(`Average increase in tax` = round(mean(new_revenue - prv_revenue), 2)) %>%
   arrange(Taxable_Income_decile) %>%
   kable
@@ -114,7 +115,8 @@ new_sample_file_1718 %>%
 ```{r}
 library(ggplot2)
 new_sample_file_1718 %>%
-  group_by(Taxable_Income_decile = ntile(Taxable_Income, 10)) %>%
+  mutate(Taxable_Income_decile = ntile(Taxable_Income, 10)) %>%
+  group_by(Taxable_Income_decile) %>%
   summarise(`Average increase in tax` = mean(new_revenue - prv_revenue)) %>%
   arrange(Taxable_Income_decile) %>%
   #
