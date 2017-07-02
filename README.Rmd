@@ -20,3 +20,14 @@ output:
 # grattan
 
 Perform Common Quantitative Tasks for Australian Analysts and to Support Grattan Institute Analysis 
+
+
+## NEWS
+
+### 2017-07-02
+
+* Update wage and labour force data
+* Fix breaking build due to change in dplyr API
+
+
+

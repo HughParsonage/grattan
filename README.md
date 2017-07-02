@@ -6,9 +6,17 @@
 
 ------------------------------------------------------------------------
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2017--02--20-orange.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2017--07--02-orange.svg)](/commits/master)
 
 grattan
 =======
 
 Perform Common Quantitative Tasks for Australian Analysts and to Support Grattan Institute Analysis
+
+NEWS
+----
+
+### 2017-07-02
+
+-   Update wage and labour force data
+-   Fix breaking build due to change in dplyr API
