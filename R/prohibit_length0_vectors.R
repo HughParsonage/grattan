@@ -3,7 +3,7 @@
 #' Tests whether any vectors have zero length.
 #' 
 #' @param ... A list of vectors
-#' @return An error message if any of vector has zero length.
+#' @return An error message if any of the vectors \code{...} have zero length.
 
 prohibit_length0_vectors <- function(...){
   lengths <- vapply(list(...), FUN = length, FUN.VALUE = 0L)
