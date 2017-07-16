@@ -40,10 +40,8 @@ sapto <- function(rebate_income,
     GG <- HH <- II <- JJ <- NULL
   
   out <- 
-    sapto_tbl[input] %>%
-    .[, sapto_income := if_else(family_status == "married",
-                                rebate_income + Spouse_income, 
-                                rebate_income)] %>%
+    sapto_tbl[input, on = c("fy_year", "family_status")] %>%
+    .[, sapto_income := rebate_income + (family_status == "married") * Spouse_income] %>%
     .[, sapto_value := pmaxC(pminV(max_offset, 
                                    max_offset + lower_threshold * taper_rate - sapto_income * taper_rate),
                              0)] %>%
@@ -66,16 +64,14 @@ sapto <- function(rebate_income,
     .[, HH := pmaxC(AA - GG, 0)] %>%
     .[, II := HH / 8] %>%
     .[, JJ := pmaxC(CC - II, 0)] %>% 
-    .[, sapto_value := if_else(family_status == "single",
-                               sapto_value,
-                               if_else(rebate_income < GG, CC, JJ))] %>%
-    setkey(ordering) %>%
-    unique(by = key(.)) %>%
+    .[family_status != "single",
+      sapto_value := JJ] %>%
+    .[family_status != "single" & rebate_income < GG,
+      sapto_value := CC] %>%
+    unique(by = "ordering") %>%
+    # Eligibility for SAPTO
+    .[(!sapto.eligible), sapto_value := 0] %>%
+    .[is.na(sapto_value), sapto_value := fill] %>%
     # my_printer %>%
     .[["sapto_value"]]
-  
-  # Eligibility for SAPTO
-  out[!sapto.eligible] <- 0
-  out[is.na(out)] <- fill
-  out
 }
