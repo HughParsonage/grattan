@@ -20,7 +20,6 @@
 #' @param impute_zero_concess_contr Should zero concessional contributions be imputed using salary?
 #' @param .min.Sw.for.SG The minimum salary required for super guarantee to be imputed.
 #' @param .SG_rate The super guarantee rate for imputation.
-#' @param div293 (logical) Should Division 293 tax be calculated? If FALSE, \code{.sample.file} is returned immediately, with a warning (that you're using this function pointlessly!).
 #' @param warn_if_colnames_overwritten (logical) Issue a warning if the construction of helper columns will overwrite existing column names in \code{.sample.file}.
 #' @param drop_helpers (logical) Should columns used in the calculation be dropped before the sample file is returned?
 #' @param copyDT (logical) Should the data table be \code{copy()}d? If the action of this data table is being compared, possibly useful.
@@ -45,7 +44,6 @@ apply_super_caps_and_div293 <- function(.sample.file,
                                         impute_zero_concess_contr = FALSE,
                                         .min.Sw.for.SG = 450 * 12,
                                         .SG_rate = 0.0925,
-                                        div293 = TRUE, 
                                         warn_if_colnames_overwritten = TRUE, 
                                         drop_helpers = FALSE, 
                                         copyDT = TRUE){

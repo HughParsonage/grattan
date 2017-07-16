@@ -5,8 +5,8 @@
 \title{Income tax payable as a function of SAPTO}
 \usage{
 income_tax_sapto(income, fy.year, age = 42, family_status = "individual",
-  n_dependants = 0L, .dots.ATO = NULL, return.mode = c("numeric",
-  "integer"), allow.forecasts = FALSE, sapto.eligible,
+  n_dependants = 0L, return.mode = c("numeric", "integer"),
+  .dots.ATO = NULL, allow.forecasts = FALSE, sapto.eligible,
   medicare.sapto.eligible, new_sapto_tbl = NULL)
 }
 \arguments{
@@ -20,9 +20,9 @@ income_tax_sapto(income, fy.year, age = 42, family_status = "individual",
 
 \item{n_dependants}{An integer for the number of children of the taxpayer (for the purposes of the Medicare levy).}
 
-\item{.dots.ATO}{A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files. If \code{.dots.ATO} is a \code{data.table}, I recommend you enclose it with \code{copy()}.}
-
 \item{return.mode}{The mode (numeric or integer) of the returned vector.}
+
+\item{.dots.ATO}{A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files. If \code{.dots.ATO} is a \code{data.table}, I recommend you enclose it with \code{copy()}.}
 
 \item{allow.forecasts}{should dates beyond 2016-17 be permitted? Currently, not permitted.}
 

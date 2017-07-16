@@ -10,7 +10,7 @@ prohibit_length0_vectors(...)
 \item{...}{A list of vectors}
 }
 \value{
-An error message if any of vector has zero length.
+An error message if any of the vectors \code{...} have zero length.
 }
 \description{
 Tests whether any vectors have zero length.

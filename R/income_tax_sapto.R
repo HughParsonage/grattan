@@ -20,12 +20,18 @@ income_tax_sapto <- function(income,
                              age = 42,
                              family_status = "individual",
                              n_dependants = 0L,
-                             .dots.ATO = NULL,
                              return.mode = c("numeric", "integer"),
+                             .dots.ATO = NULL,
                              allow.forecasts = FALSE,
                              sapto.eligible, 
                              medicare.sapto.eligible, 
                              new_sapto_tbl = NULL){
+  if (!identical(allow.forecasts, FALSE)) {
+    .NotYetUsed("allow.forecasts")
+  }
+  
+  return.mode <- match.arg(return.mode)
+  
   # CRAN NOTE avoidance
   fy_year <- marginal_rate <- lower_bracket <- tax_at <- n <- tax <- ordering <- max_lito <- min_bracket <- lito_taper <- sato <- taper <- rate <- max_offset <- upper_threshold <- taper_rate <- medicare_income <- lower_up_for_each_child <-NULL
   
@@ -151,8 +157,11 @@ income_tax_sapto <- function(income,
   # input[["fy_year"]] ensures it matches the length of income if length(fy.year) == 1.
   temp_budget_repair_levy. <- (input[["fy_year"]] %in% c("2014-15", "2015-16", "2016-17") & income > 180e3) * (0.02 * (income - 180e3))
   
-  pmaxC(base_tax. - lito. - sapto., 
-        0) + medicare_levy. + temp_budget_repair_levy.
+  switch(return.mode,
+         "integer" = as.integer(pmaxC(base_tax. - lito. - sapto., 
+                                       0) + medicare_levy. + temp_budget_repair_levy.),
+         pmaxC(base_tax. - lito. - sapto., 
+               0) + medicare_levy. + temp_budget_repair_levy.)
 }
 
 

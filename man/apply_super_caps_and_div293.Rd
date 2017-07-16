@@ -13,7 +13,7 @@ apply_super_caps_and_div293(.sample.file,
   use_other_contr = FALSE, scale_contr_match_ato = FALSE, .lambda = 0,
   reweight_late_lodgers = FALSE, .mu = 1.05,
   impute_zero_concess_contr = FALSE, .min.Sw.for.SG = 450 * 12,
-  .SG_rate = 0.0925, div293 = TRUE, warn_if_colnames_overwritten = TRUE,
+  .SG_rate = 0.0925, warn_if_colnames_overwritten = TRUE,
   drop_helpers = FALSE, copyDT = TRUE)
 }
 \arguments{
@@ -52,8 +52,6 @@ apply_super_caps_and_div293(.sample.file,
 \item{.min.Sw.for.SG}{The minimum salary required for super guarantee to be imputed.}
 
 \item{.SG_rate}{The super guarantee rate for imputation.}
-
-\item{div293}{(logical) Should Division 293 tax be calculated? If FALSE, \code{.sample.file} is returned immediately, with a warning (that you're using this function pointlessly!).}
 
 \item{warn_if_colnames_overwritten}{(logical) Issue a warning if the construction of helper columns will overwrite existing column names in \code{.sample.file}.}
 

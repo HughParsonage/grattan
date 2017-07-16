@@ -4,7 +4,9 @@ warnings_are_errors: true
 
 r_github_packages:
   - hughparsonage/taxstats
+  - hughparsonage/formalCoverage
   - jimhester/covr
 
 after_success:
+  - Rscript -e 'formalCoverage::formalPackageCoverage()'
   - Rscript -e 'covr::codecov()'
