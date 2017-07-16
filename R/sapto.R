@@ -31,8 +31,6 @@ sapto <- function(rebate_income,
   ordering <- NULL
   input[, ordering := 1:.N]
   
-  setkeyv(input, c("fy_year", "family_status"))
-  
   
   partner_sapto <- sapto_value <- 
     sapto_income <- partner_unused_sapto <-
