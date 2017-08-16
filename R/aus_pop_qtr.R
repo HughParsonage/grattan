@@ -34,7 +34,7 @@ aus_pop_qtr <- function(date_quarter,
       }
       
       next_year <- as.integer(substr(max_qtr, 0, 4))
-      Quarter <- NULL
+      Quarter <- Year <- NULL
       
       new_pop_data <-
         data.table(obsValue = as.double(gforecast(pop_data[["obsValue"]], h = h)[["mean"]]),

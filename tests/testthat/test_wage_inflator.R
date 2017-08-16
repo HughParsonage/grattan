@@ -11,13 +11,6 @@ test_that("upper/lower higher/lower", {
              wage_inflator(from_fy = "2013-14", to_fy = "2030-31", forecast.series = "lower"))
 })
 
-test_that("ABS connection", {
-  x <- wage_inflator(1, from_fy = "2001-02", to_fy = "2002-03")
-  y <- wage_inflator(1, from_fy = "2001-02", to_fy = "2002-03", useABSConnection = TRUE)
-  expect_equal(x, 
-               y)
-})
-
 test_that("Custom wage series", {
   
   y <- wage_inflator(1, from_fy = "2017-18", to_fy = "2020-21", 
@@ -29,18 +22,21 @@ test_that("Custom wage series", {
   
 test_that("Custom wage series error handling", {
   expect_error(wage_inflator(1, from_fy = "2015-16", to_fy = "2017-18", 
-               forecast.series = "custom", 
-               wage.series = data.table(fy_year = c("2015-16", "2016-17", "2017-18"), 
-                                        r = c(42, 0.1, 0.1))))
+                             forecast.series = "custom", 
+                             wage.series = data.table(fy_year = c("2015-16", "2016-17", "2017-18"), 
+                                                      r = c(42, 0.1, 0.1))),
+               regexp = "first fy in the custom series")
   
   expect_error(wage_inflator(1, from_fy = "2015-16", to_fy = "2017-18", 
                              forecast.series = "custom", 
-                             wage.series = c(1, 2)))
+                             wage.series = c(1, 2)),
+               regexp = "length-one vector or a data.table")
   
-  expect_message(wage_inflator(1, from_fy = "2015-16", to_fy = "2017-18", 
+  expect_message(wage_inflator(1, from_fy = "2015-16", to_fy = "2018-19", 
                                forecast.series = "custom", 
-                               wage.series = data.table(fy_year = c("2016-17", "2017-18"), 
-                                                        r = c(2.5, 10.0))))
+                               wage.series = data.table(fy_year = c("2017-18", "2018-19"), 
+                                                        r = c(2.5, 10.0))),
+                 regexp = "unlikely")
 })
 
 test_that("from > to deflates and is not a warning", {
