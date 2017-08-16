@@ -9,7 +9,7 @@
 #' @param to_date Dates as a character vector.
 #' @param from_fy Financial year of \code{labour_force}.
 #' @param to_fy Financial year for which the labour force is predicted.
-#' @param useABSConnection Should an sdmx connection be used to get ABS data?
+#' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. The internal data was updated on 2017-08-16.
 #' @param allow.projection Logical. Should projections be allowed?
 #' @param use.month An integer (corresponding to the output of \code{data.table::month}) representing the month of the series used for the inflation.
 #' @param forecast.series Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals.
