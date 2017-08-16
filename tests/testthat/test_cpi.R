@@ -33,11 +33,3 @@ test_that("cpi returns reasonable forecasts", {
   expect_lt(cpi_inflator(from_nominal_price = 1, from_fy = "2012-13", to_fy = "2015-16", adjustment = "none", useABSConnection = FALSE, allow.projection = TRUE), 
             1.06)
 })
-
-test_that("ABS connection", {
-  expect_equal(cpi_inflator(from_fy = "2010-11", to_fy = "2011-12", adjustment = "none"), 
-               cpi_inflator(from_fy = "2010-11", to_fy = "2011-12", useABSConnection = TRUE, adjustment = "none"))
-  
-  expect_equal(cpi_inflator_quarters(1, from_qtr = "2010-Q1", to_qtr = "2011-Q2", adjustment = "none"), 
-               cpi_inflator_quarters(1, from_qtr = "2010-Q1", to_qtr = "2011-Q2", useABSConnection = TRUE, adjustment = "none"))
-})

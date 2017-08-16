@@ -31,3 +31,9 @@ test_that("prohibit_vector_recyling", {
   expect_error(prohibit_vector_recycling(c(2, 2), 1, c(3, 3, 3)))
 })
 
+test_that("qtrs_ahead", {
+  expect_equal(qtrs_ahead("2016-Q1", "2017-Q1"), 4)
+  expect_equal(qtrs_ahead("2016-Q1", "2016-Q3"), 2)
+  expect_equal(qtrs_ahead("2016-Q1", "2017-Q2"), 5)
+})
+

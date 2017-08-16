@@ -2,61 +2,50 @@
 #' 
 #' @param date_quarter A character string (YYYY-QQ).
 #' @param allow.projections If the date is beyond the ABS's confirmed data, should a projection be used?
-#' @param fertility What fertility assumption should be used? Must be one of high, medium, low.
-#' @param mortality The assumption of future life expectancy. Must be \code{high.LifeExpectancy} or \code{medium.LifeExpectancy}.
-#' @return The population at \code{date_quarter}, or at the year if a projections.
+#' @return The population at \code{date_quarter}, or at the most recent year in the data if projections are disallowed.
 #' @export 
 
 aus_pop_qtr <- function(date_quarter,
-                        allow.projections = TRUE,
-                        fertility = c("high", "medium", "low"),
-                        mortality = c("high.LifeExpectancy", 
-                                      "medium.LifeExpectancy")){
+                        allow.projections = TRUE){
   # CRAN Note avoidance
   obsTime <- obsValue <- NULL
+  if (any(!grepl("^[12][0-9]{3}-Q[1-4]$", date_quarter))) {
+    bad_qtrs <- which(!grepl("^[12][0-9]{3}-Q[1-4]$", date_quarter))
+    switch(min(length(bad_qtrs), 3),
+           stop("Entry ", bad_qtrs, " was not in the correct form."),
+           stop("Entries ", bad_qtrs[1], " and ", bad_qtrs[2], " were not in the correct form."),
+           stop("Entry ", bad_qtrs[1], " were not in the right form. ", 
+                "There were ", length(bad_qtrs) - 1,
+                "other bad entries."))
+  }
   
-  pop_data <- 
-    "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/ERP_QUARTERLY/1.0.3.TT.Q/ABS?startTime=1981" %>%
-    rsdmx::readSDMX(.) %>%
-    as.data.frame %>%
-    as.data.table %>%
-    .[, .(obsTime, obsValue)]
+  pop_data <- aus_pop_by_yearqtr
   
+  max_qtr <- max(pop_data[["obsTime"]])
+  max_date_quarter <- max(date_quarter)
   
-  
-  max_qtr <- 
-    max(pop_data[["obsTime"]])
-  
-  if (max(date_quarter) > max_qtr){
-    if (allow.projections){
-      fertility <- match.arg(fertility)
-      mortality <- match.arg(mortality)
-      if (fertility == "high")
-        fertility_selector <- 1
-      if (fertility == "medium")
-        fertility_selector <- 2
-      if (fertility == "low")
-        fertility_selector <- 3
+  if (max_date_quarter > max_qtr){
+    if (allow.projections) {
+      h <- qtrs_ahead(max_qtr, max_date_quarter)
+      if (substr(max_qtr, 7, 7) == "4") {
+        next_qtr <- 1L 
+      } else {
+        next_qtr <- as.integer(substr(max_qtr, 7, 7)) + 1
+      }
       
-      if (mortality == "high.LifeExpectancy")
-        mortality_selector <- 1
-      else 
-        mortality_selector <- 2
+      next_year <- as.integer(substr(max_qtr, 0, 4))
+      Quarter <- NULL
       
-      projector_url <- 
-        paste0("http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/POP_PROJ_2011/",
-               "0.3.TT.",
-               fertility_selector, ".",
-               mortality_selector, ".",
-               "1.A/ABS?startTime=2012")
-      
-      projections <- 
-        as.data.frame(rsdmx::readSDMX(projector_url)) %>%
-        as.data.table
-      
-      date_year <- as.numeric(gsub("^.*([0-9]{4}).*$", "\\1", date_quarter))
-      
-      return(projections[obsTime %in% date_year][["obsValue"]])
+      new_pop_data <-
+        data.table(obsValue = as.double(gforecast(pop_data[["obsValue"]], h = h)[["mean"]]),
+                   Quarter = rep((next_qtr + 0:3) %% 4, length.out = h)) %>%
+        .[Quarter == 0, Quarter := 4] %>%
+        # If next_year = next_year + 1, cumsum(Quarter == 1) will add one immediately
+        .[, Year := next_year + cumsum(Quarter == 1)] %>%
+        .[, obsTime := paste0(Year, "-Q", Quarter)] %>%
+        .[, .(obsTime, obsValue)] %>%
+        rbind(pop_data, .)
+      return(new_pop_data[obsTime %in% date_quarter][["obsValue"]])
     } else {
       dates <- pmin(max_qtr, date_quarter)
       warning("Using an earlier date than specified, viz. ", max_qtr)

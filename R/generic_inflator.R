@@ -7,10 +7,6 @@
 #' @param estimator What forecast element should be used: the point estimate (\code{"mean"}), or the \code{upper} or \code{lower} endpoint of a prediction interval?
 #' @param pred_interval If \code{estimator} is \code{upper} or \code{lower}, what prediction interval are these the end points of?
 #' @return A data table of two columns: \code{variable} containing \code{vars} and \code{inflator} equal to the inflator to be applied to that variable to inflate it ahead \code{h} years.
-#' @importFrom magrittr %>%
-#' @importFrom magrittr %<>%
-#' @importFrom magrittr %$%
-#' @importFrom data.table as.data.table
 
 ## For each variable we want an arima/ets model 
 ## and to use that to forecast ahead.

@@ -19,17 +19,12 @@ test_that("ABS connection", {
 })
 
 test_that("Custom wage series", {
-  x <- wage_inflator(1, from_fy = "2015-16", to_fy = "2017-18", 
-                     forecast.series = "custom",
-                     wage.series = data.table(fy_year = c("2016-17", "2017-18"), 
-                                              r = c(0, 0.10)))
-  expect_equal(x, 1.1)
   
-  y <- wage_inflator(1, from_fy = "2015-16", to_fy = "2019-20", 
+  y <- wage_inflator(1, from_fy = "2017-18", to_fy = "2020-21", 
                      forecast.series = "custom", 
                      wage.series = 0.1)
   
-  expect_equal(y, 1.1^4)
+  expect_equal(y, 1.1^3)
 })
   
 test_that("Custom wage series error handling", {

@@ -4,21 +4,15 @@
 \alias{aus_pop_qtr}
 \title{Australia's population}
 \usage{
-aus_pop_qtr(date_quarter, allow.projections = TRUE, fertility = c("high",
-  "medium", "low"), mortality = c("high.LifeExpectancy",
-  "medium.LifeExpectancy"))
+aus_pop_qtr(date_quarter, allow.projections = TRUE)
 }
 \arguments{
 \item{date_quarter}{A character string (YYYY-QQ).}
 
 \item{allow.projections}{If the date is beyond the ABS's confirmed data, should a projection be used?}
-
-\item{fertility}{What fertility assumption should be used? Must be one of high, medium, low.}
-
-\item{mortality}{The assumption of future life expectancy. Must be \code{high.LifeExpectancy} or \code{medium.LifeExpectancy}.}
 }
 \value{
-The population at \code{date_quarter}, or at the year if a projections.
+The population at \code{date_quarter}, or at the most recent year in the data if projections are disallowed.
 }
 \description{
 Australia's population

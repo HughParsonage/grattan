@@ -529,6 +529,9 @@ Age_pension_deeming_rates_by_Date <-
   .[, type := gsub("_", " ", gsub("threshold_", "", type, fixed = TRUE))] %>%
   .[, .(Date, type, threshold, deeming_rate_below, deeming_rate_above)]
 
+aus_pop_by_yearqtr <- 
+  fread("./data-raw/Estim-Res-Pop-1981-2017.tsv")
+
 aust_pop_by_age_yearqtr <- 
   fread("./data-raw/Estim-Resi-Pop-by-age-1981-2016.csv", 
         select = c("Age", "Time", "Value")) %>%
@@ -656,6 +659,7 @@ devtools::use_data(tax_table2,
                    Age_pension_deeming_rates_by_Date,
                    Age_pension_permissible_income_by_Date,
                    bto_tbl,
+                   aus_pop_by_yearqtr,
                    aust_pop_by_age_yearqtr,
                    abs_key_aggregates,
                    
