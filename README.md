@@ -2,11 +2,11 @@
 
 ------------------------------------------------------------------------
 
-[![minimal R version](https://img.shields.io/badge/R%3E%3D-2.10-6666ff.svg)](https://cran.r-project.org/) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/grattan)](https://cran.r-project.org/package=grattan) [![packageversion](https://img.shields.io/badge/Package%20version-1.4.0.2-orange.svg?style=flat-square)](commits/master)
+[![minimal R version](https://img.shields.io/badge/R%3E%3D-2.10-6666ff.svg)](https://cran.r-project.org/) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/grattan)](https://cran.r-project.org/package=grattan) [![packageversion](https://img.shields.io/badge/Package%20version-1.5.1.1-orange.svg?style=flat-square)](commits/master)
 
 ------------------------------------------------------------------------
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2017--07--02-orange.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2017--08--16-orange.svg)](/commits/master)
 
 grattan
 =======
@@ -15,6 +15,10 @@ Perform Common Quantitative Tasks for Australian Analysts and to Support Grattan
 
 NEWS
 ----
+
+### 2017-08-16
+
+-   Update wage, CPI, labour force data
 
 ### 2017-07-02
 

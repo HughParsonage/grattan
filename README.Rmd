@@ -24,6 +24,9 @@ Perform Common Quantitative Tasks for Australian Analysts and to Support Grattan
 
 ## NEWS
 
+### 2017-08-16
+* Update wage, CPI, labour force data
+
 ### 2017-07-02
 
 * Update wage and labour force data
