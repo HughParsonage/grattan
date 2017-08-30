@@ -9,5 +9,5 @@
 
 * The NOTE is with respect to the 'taxstats' package not being a mainstream repository;
   its inclusion satisfies the CRAN repository policy, as in previous versions.
-* This is a package update to fix a segfault in another package which arises in one of this package's unit test.
+* This is a package update to fix a segfault in another package which arises in one of this package's unit tests.
 
