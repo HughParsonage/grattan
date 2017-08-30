@@ -12,6 +12,7 @@ library(grattan)
 library(readr)
 library(readxl)
 library(openxlsx)
+library(hutils)
 options("scipen" = 99)
 if (packageVersion("data.table") < package_version("1.9.8")){
   fwrite <- function(..., sep = "\t") readr::write_tsv(...)
@@ -64,12 +65,12 @@ medicare_tbl_indiv <-
 
 medicare_tbl <- 
   medicare_tbl_indiv %>%
-  dplyr::mutate_each(funs(as.logical), sato, pto, sapto) %>%
-  data.table::as.data.table(.) %>%
-  # mutate(family_status = "individual") %>%
+  .[, sato := as.logical(sato)] %>%
+  .[, pto := as.logical(pto)] %>%
+  .[, sapto := as.logical(sapto)] %>%
   data.table::setkey(fy_year, sapto) %>%
   # avoid cartesian joins
-  unique()
+  unique
 
 # To ensure faster versions of calculations do not evaluate NA.
 set(medicare_tbl, which(is.na(medicare_tbl[["lower_up_for_each_child"]])), "lower_up_for_each_child", 0)
@@ -130,7 +131,8 @@ lf_trend <-
     lf <- rsdmx::readSDMX(lf.url.trend)
     lf <- 
       as.data.frame(lf) %>% 
-      as.data.table %>%
+      as.data.table %T>%
+      stopifnot(nrow(.) > 0) %>%
       select(obsTime, obsValue) %T>%
       fwrite("./data-raw/lf-trend.tsv", sep = "\t")
   }, 
@@ -188,7 +190,6 @@ cgt_expenditures <-
                            wagey.cols, super.bal.col, lfy.cols, cpiy.cols, derived.cols, Not.Inflated)
   }
 
-select_which_ <- function(...) grattan:::select_which_(...)
 
 MeanNumeric <- function(x){
   sum(as.numeric(x)) / length(x)
@@ -201,17 +202,15 @@ mean_of_nonzero <- function (x) {
 
 mean_of_each_taxstats_var <- 
   sample_files_all %>%
-  select_(.dots = c("fy.year", names(.))) %>%
-  select_which_(is.numeric, "fy.year") %>%
-  group_by_("fy.year") %>%  
-  summarise_each(funs(MeanNumeric)) 
+  .[, .SD, .SDcols = c("fy.year", names(.))] %>%
+  select_which(is.numeric, .and.dots = "fy.year") %>%
+  .[, lapply(.SD, MeanNumeric), by = "fy.year"]
 
 meanPositive_of_each_taxstats_var <- 
   sample_files_all %>%
-  select_(.dots = c("fy.year", names(.))) %>%
-  select_which_(is.numeric, "fy.year") %>%
-  group_by_("fy.year") %>%  
-  summarise_each(funs(mean_of_nonzero))
+  .[, .SD, .SDcols = c("fy.year", names(.))] %>%
+  select_which(is.numeric, .and.dots = "fy.year") %>%
+  .[, lapply(.SD, mean_of_nonzero), by = "fy.year"]
 
 generic_inflators_1314 <- 
   if (!renew){
