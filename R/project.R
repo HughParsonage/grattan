@@ -145,10 +145,8 @@ project <- function(sample_file,
       Not.Inflated <- c(Not.Inflated, excl_vars)
     }
     
-    SetDiff <- function(...) Reduce(setdiff, list(...), right = FALSE)
-    
-    generic.cols <- SetDiff(col.names, 
-                            diff.uprate.wagey.cols, wagey.cols, super.bal.col, lfy.cols, cpiy.cols, derived.cols, Not.Inflated)
+    generic.cols <- 
+      col.names[!col.names %chin% c(diff.uprate.wagey.cols, wagey.cols, super.bal.col, lfy.cols, cpiy.cols, derived.cols, Not.Inflated)]
     
     if (.recalculate.inflators){
       generic.inflators <- 

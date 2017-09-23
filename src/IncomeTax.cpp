@@ -12,6 +12,8 @@ using namespace Rcpp;
 //
 
 //' @title IncomeTax
+//' @description Calculates the ordinary tax payable given income and tax thresholds and rates.
+//' Basic, designed for performance.
 //' @name IncomeTax
 //' @param x Taxable income.
 //' @param thresholds Lower brackets of the tax tables.

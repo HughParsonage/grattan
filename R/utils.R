@@ -35,24 +35,11 @@ gforecast <- function(x, ...) {
 } 
 
 # NSE
-hugh_frac <- function(.data, front, over, under, new_col_name){
-  # http://www.r-bloggers.com/using-mutate-from-dplyr-inside-a-function-getting-around-non-standard-evaluation/
-  mutate_call <- lazyeval::interp(~r*a/b, a = as.name(over), b = as.name(under), r = as.name(front))
-  out <- 
-    .data %>%
-    dplyr::mutate_(.dots = stats::setNames(list(mutate_call), new_col_name))
-  if (is.data.table(.data)){
-    setDT(out)
-  }
-}
-
-# NSE
 inflator_frac <- function(.data, front, over, under, new_col_name){
-  # http://www.r-bloggers.com/using-mutate-from-dplyr-inside-a-function-getting-around-non-standard-evaluation/
-  mutate_call <- lazyeval::interp(~r*a/b, a = as.name(over), b = as.name(under), r = as.name(front))
-  .data %>%
-    dplyr::mutate_(.dots = stats::setNames(list(mutate_call), new_col_name)) %>%
-    as.data.table
+  # Will only be invoked where these vars don't exist
+  setnames(.data, c(front, over, under), c("r", "a", "b"))
+  r <- a <- b <- NULL
+  .data[, (new_col_name) := r * a / b]
 }
 
 last_over_first <- function(x){

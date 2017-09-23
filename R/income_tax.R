@@ -18,6 +18,7 @@
 #' @importFrom magrittr %>%
 #' @importFrom magrittr %$%
 #' @importFrom magrittr %<>%
+#' @importFrom magrittr and
 #' @importFrom hutils if_else
 #' @import data.table
 #' @return the total personal income tax payable

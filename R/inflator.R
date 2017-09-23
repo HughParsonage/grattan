@@ -17,6 +17,7 @@ inflator <- function(x = 1, from, to, inflator_table, index.col = "Index", time.
   
   inflator_table <- 
     inflator_table %>%
+    # Possibly locked binding
     as.data.table %>%
     setnames(c(index.col, time.col), c("Index", "Time")) %>%
     setkeyv("Time")
@@ -36,22 +37,23 @@ inflator <- function(x = 1, from, to, inflator_table, index.col = "Index", time.
   }
   
   input <- 
-    data.table(y = 1, from = from, to = to)
+    data.table(y = 1, from = from, to = to,
+               # merging can reorder
+               order = seq_along(from))
   
   if (is.null(roll)){
-  output <- 
-    input %>%
-    merge(inflator_table, by.x = "from", by.y = "Time", sort = FALSE,
-          all.x = TRUE) %>%
-    setnames("Index", "from_index") %>%
-    merge(inflator_table, by.x = "to", by.y = "Time", sort = FALSE, 
-          all.x = TRUE) %>%
-    setnames("Index", "to_index") %>%
-    inflator_frac("y", "to_index", "from_index", "out")
+    output <- 
+      input %>%
+      merge(inflator_table, by.x = "from", by.y = "Time",
+            all.x = TRUE) %>%
+      setnames("Index", "from_index") %>%
+      merge(inflator_table, by.x = "to", by.y = "Time", 
+            all.x = TRUE) %>%
+      setnames("Index", "to_index") %>%
+      inflator_frac("y", "to_index", "from_index", "out")
   } else {
     output <- 
       input %>%
-      .[, order := 1:.N] %>%
       setnames("from", "Time") %>%
       setkeyv("Time") %>%
       inflator_table[., roll = roll] %>%
@@ -61,9 +63,11 @@ inflator <- function(x = 1, from, to, inflator_table, index.col = "Index", time.
       setkeyv("Time") %>%
       inflator_table[., roll = roll] %>%
       setnames("Index", "to_index") %>%
-      inflator_frac("y", "to_index", "from_index", "out") %>%
-      setorderv("order")
+      inflator_frac("y", "to_index", "from_index", "out")
+      
   }
+  
+  setorderv(output, "order")
   
   if (any_from_after_to){
     x * output[["out"]] ^ out_power

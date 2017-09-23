@@ -10,3 +10,7 @@
 
 \item{rates}{Marginal rates}
 }
+\description{
+Calculates the ordinary tax payable given income and tax thresholds and rates.
+Basic, designed for performance.
+}

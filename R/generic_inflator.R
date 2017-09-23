@@ -70,11 +70,11 @@ generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzer
   
   # CRAN note avoidance
   fy_year <- NULL
-  rbindlist(list(as.data.table(mean_of_each_var), 
-                 as.data.table(point_forecasts_by_var)), 
+  rbindlist(list(mean_of_each_var, 
+                 point_forecasts_by_var), 
             use.names = TRUE, 
             fill = TRUE) %>%
-    .[, fy_year := yr2fy(1:.N - 1 + fy2yr(first(fy.year)))] %>% 
+    .[, fy_year := yr2fy(seq_len(.N) - 1 + fy2yr(first(fy.year)))] %>% 
     # last(fy_year) is the fy_year corresponding to h, the target. 
     .[fy_year %in% c(fy.year.of.sample.file, last(fy_year))] %>% 
     .[, lapply(.SD, last_over_first), .SDcols = vars] %>%

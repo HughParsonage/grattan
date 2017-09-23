@@ -2,6 +2,8 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' @title IncomeTax
+#' @description Calculates the ordinary tax payable given income and tax thresholds and rates.
+#' Basic, designed for performance.
 #' @name IncomeTax
 #' @param x Taxable income.
 #' @param thresholds Lower brackets of the tax tables.
