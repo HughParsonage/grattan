@@ -3,7 +3,11 @@
 #' @name student_repayment
 #' 
 #' @param repayment_income The repayment income of the individual, equal to 
-#' \deqn{{Taxable Income} + {Total net investment loss (incl Net rental loss)} + {reportable fringe benefits amounts} + {Reportable super contributions} + {exempt foreign income}}
+#' \deqn{\text{Taxable Income} +\cr 
+#' {Total net investment loss (incl Net rental loss)} +\cr
+#'  {reportable fringe benefits amounts} +\cr
+#'  {Reportable super contributions} +\cr
+#'  {exempt foreign income}}
 #' @param fy.year The financial year \code{repayment_income} was earned.
 #' @param debt The amount of student debt held.
 #' @return The repayment amount.

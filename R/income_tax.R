@@ -13,14 +13,6 @@
 #' @author Tim Cameron, Brendan Coates, Hugh Parsonage, William Young
 #' @details The function 'rolling' is inflexible by design. It is designed to guarantee the correct tax payable in a year.
 #' For years preceding the introduction of SAPTO, the maximum offset is assumed to apply to those above pensionable age. 
-#' @useDynLib grattan
-#' @importFrom Rcpp sourceCpp
-#' @importFrom magrittr %>%
-#' @importFrom magrittr %$%
-#' @importFrom magrittr %<>%
-#' @importFrom magrittr and
-#' @importFrom hutils if_else
-#' @import data.table
 #' @return the total personal income tax payable
 #' @export income_tax
 

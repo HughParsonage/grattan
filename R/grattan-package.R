@@ -8,5 +8,18 @@
 #' @title The grattan package.
 #' @author \email{hugh.parsonage+grattanpackage@@grattan.edu.au}
 #' @keywords package
+#' @importFrom hutils if_else
+#' @importFrom hutils OR
+#' @importFrom hutils NEITHER
+#' @importFrom hutils AND
+
+#' @importFrom magrittr %>%
+#' @importFrom magrittr %$%
+#' @importFrom magrittr %<>%
+#' @importFrom magrittr and
+
+#' @importFrom Rcpp sourceCpp
 #' @importFrom stats complete.cases
-NULL
+#' @import data.table
+#' @useDynLib grattan, .registration = TRUE
+"_PACKAGE"

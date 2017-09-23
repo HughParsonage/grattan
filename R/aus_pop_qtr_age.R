@@ -13,10 +13,14 @@
 
 aus_pop_qtr_age <- function(date = NULL, age = NULL, tbl = FALSE, roll = TRUE, roll.beyond = FALSE){
   if (!is.null(date)){
-    stopifnot(all(is(date, "Date")))
+    stopifnot(all(inherits(date, "Date")))
+    
+    if (length(date) > 1 && 
+        length(age) > 1 && 
+        length(date) != length(age)) {
+      stop("If 'date' and 'age' have lengths > 1 they must have the same length.")
+    }
   }
-  
-  prohibit_vector_recycling(date, age)
   
   if (!is.null(age)){
     stopifnot(is.numeric(age),
@@ -24,7 +28,10 @@ aus_pop_qtr_age <- function(date = NULL, age = NULL, tbl = FALSE, roll = TRUE, r
               all(age <= 100))
   }
   
-  if (!identical(roll, FALSE) && !roll.beyond && isTRUE(date > max(aust_pop_by_age_yearqtr$Date) || date < min(aust_pop_by_age_yearqtr$Date))){
+  if (AND(NEITHER(identical(roll, FALSE),
+                  roll.beyond),
+          NEITHER(is.null(date),
+                  all(date %between% range(aust_pop_by_age_yearqtr[["Date"]]))))) {
     warning("Rolling join used beyond the limit of data.")
   }
   # CRAN note avoidance

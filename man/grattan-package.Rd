@@ -3,6 +3,7 @@
 \docType{package}
 \name{grattan-package}
 \alias{grattan-package}
+\alias{_PACKAGE}
 \alias{grattan}
 \title{The grattan package.}
 \description{
@@ -10,6 +11,14 @@ Grattan package
 }
 \details{
 Colours, charts, and other common quantative tasks for Australia tax analysts
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/HughParsonage/grattan}
+  \item Report bugs at \url{https://github.com/HughParsonage/grattan/issues}
+}
+
 }
 \author{
 \email{hugh.parsonage+grattanpackage@grattan.edu.au}
