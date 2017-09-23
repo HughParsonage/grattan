@@ -20,6 +20,11 @@ unselect_ <- function(.data, .dots){
   !(x %in% y)
 }
 
+# from dplyr::near
+near <- function (x, y, tol = .Machine$double.eps^0.5) {
+  abs(x - y) < tol
+}
+
 as.numeric_unless_warning <- function(x){
   tryCatch(as.numeric(x),
            error = function(e) e,

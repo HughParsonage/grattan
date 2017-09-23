@@ -153,19 +153,19 @@ project <- function(sample_file,
         generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = fy.year.of.sample.file, 
                          estimator = forecast.dots$estimator, pred_interval = forecast.dots$pred_interval)
     } else {
-      switch(current.fy, 
-             "2012-13" = generic.inflators <- dplyr::filter(generic_inflators_1213, fy_year == to.fy), 
-             "2013-14" = generic.inflators <- dplyr::filter(generic_inflators_1314, fy_year == to.fy), 
-             stop("Precalculated inflators only available when projecting from 2012-13 or 2013-14.")
-      )
-      generic.inflators <- as.data.table(generic.inflators)
+      generic.inflators <- 
+        switch(current.fy, 
+               "2012-13" = as.data.table(generic_inflators_1213)[fy_year == to.fy], 
+               "2013-14" = as.data.table(generic_inflators_1314)[fy_year == to.fy], 
+               stop("Precalculated inflators only available when projecting from 2012-13 or 2013-14."))
     }
     
     ## Inflate:
     # make numeric to avoid overflow
     numeric.cols <- names(sample_file)[vapply(sample_file, is.numeric, TRUE)]
-    for (j in which(col.names %in% numeric.cols))
+    for (j in which(col.names %in% numeric.cols)) {
       set(sample_file, j = j, value = as.numeric(sample_file[[j]]))
+    }
     
     
     # Differential uprating:

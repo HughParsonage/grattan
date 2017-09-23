@@ -39,7 +39,7 @@ irr <- function(x, start = 0.1){
 fv <- function(rate, nper, pmt, pv = 0.0, type = 0) {
   pvif <- (1 + rate) ^ nper # Present value interest factor
   fvifa <- 
-    if_else(dplyr::near(rate, 0), 
+    if_else(near(rate, 0), 
             nper, 
             ((1 + rate) ^ nper - 1) / rate)
   return(-1 * ((pv * pvif) + pmt * (1.0 + rate * type) * fvifa))
@@ -50,7 +50,7 @@ fv <- function(rate, nper, pmt, pv = 0.0, type = 0) {
 pv <- function(rate, nper, pmt, fv = 0.0, type = 0) {
   pvif <- (1 + rate) ^ nper # Present value interest factor
   fvifa <- 
-    if_else(dplyr::near(rate, 0), 
+    if_else(near(rate, 0), 
             nper, 
             ((1 + rate) ^ nper - 1) / rate)
   return((-fv - pmt * (1.0 + rate * type) * fvifa) / pvif)
