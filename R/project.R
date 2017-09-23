@@ -111,7 +111,7 @@ project <- function(sample_file,
     CGTy.cols <- c("Net_CG_amt", "Tot_CY_CG_amt")
     
     # names(taxstats::sample_file_1314)
-    alien.cols <- col.names[!col.names %in% c("Ind", "Gender", "age_range", "Occ_code", "Partner_status", 
+    alien.cols <- col.names[!col.names %chin% c("Ind", "Gender", "age_range", "Occ_code", "Partner_status", 
                                               "Region", "Lodgment_method", "PHI_Ind", "Sw_amt", "Alow_ben_amt", 
                                               "ETP_txbl_amt", "Grs_int_amt", "Aust_govt_pnsn_allw_amt", "Unfranked_Div_amt", 
                                               "Frk_Div_amt", "Dividends_franking_cr_amt", "Net_rent_amt", "Gross_rent_amt", 
@@ -162,14 +162,14 @@ project <- function(sample_file,
     
     ## Inflate:
     # make numeric to avoid overflow
-    numeric.cols <- names(sample_file)[vapply(sample_file, is.numeric, TRUE)]
-    for (j in which(col.names %in% numeric.cols)) {
-      set(sample_file, j = j, value = as.numeric(sample_file[[j]]))
+    integer.cols <- names(sample_file)[vapply(sample_file, is.integer, TRUE)]
+    for (j in which(col.names %chin% integer.cols)) {
+      set(sample_file, j = j, value = as.double(.subset2(sample_file, j)))
     }
     
     
     # Differential uprating:
-    for (j in which(col.names %in% diff.uprate.wagey.cols)){
+    for (j in which(col.names %chin% diff.uprate.wagey.cols)){
       if (is.null(wage.series)){
         set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy))
       } else {
@@ -178,19 +178,19 @@ project <- function(sample_file,
       }
     }
     
-    for (j in which(col.names %in% wagey.cols))
+    for (j in which(col.names %chin% wagey.cols))
       set(sample_file, j = j, value = wage.inflator * sample_file[[j]])
     
-    for (j in which(col.names %in% lfy.cols))
+    for (j in which(col.names %chin% lfy.cols))
       set(sample_file, j = j, value = lf.inflator * sample_file[[j]])
     
-    for (j in which(col.names %in% cpiy.cols))
+    for (j in which(col.names %chin% cpiy.cols))
       set(sample_file, j = j, value = cpi.inflator * sample_file[[j]])
     
-    for (j in which(col.names %in% CGTy.cols))
+    for (j in which(col.names %chin% CGTy.cols))
       set(sample_file, j = j, value = CG.inflator * sample_file[[j]])
     
-    for (j in which(col.names %in% generic.cols)){
+    for (j in which(col.names %chin% generic.cols)){
       stopifnot("variable" %in% names(generic.inflators))  ## super safe
       nom <- col.names[j]
       set(sample_file, 
