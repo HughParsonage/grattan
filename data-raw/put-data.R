@@ -11,6 +11,7 @@ sample_files_all <- get_sample_files_all()
 library(grattan)
 library(readr)
 library(readxl)
+library(tidyxl)
 library(openxlsx)
 library(hutils)
 options("scipen" = 99)
@@ -627,6 +628,10 @@ residential_property_prices <-
   melt.data.table(id.vars = "Date", variable.name = "City", value.name = "Residential_property_price_index")
 
 devtools::use_data(residential_property_prices, overwrite = TRUE)
+
+
+
+
 
 
 devtools::use_data(tax_table2, 
