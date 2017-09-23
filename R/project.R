@@ -43,6 +43,8 @@ project <- function(sample_file,
   if (h == 0){
     return(sample_file)
   } else {
+    # NSE e.g inflators[h == h]
+    H <- h
     current.fy <- fy.year.of.sample.file
     to.fy <- yr2fy(fy2yr(current.fy) + h)
     
@@ -155,8 +157,8 @@ project <- function(sample_file,
     } else {
       generic.inflators <- 
         switch(current.fy, 
-               "2012-13" = as.data.table(generic_inflators_1213)[fy_year == to.fy], 
-               "2013-14" = as.data.table(generic_inflators_1314)[fy_year == to.fy], 
+               "2012-13" = as.data.table(generic_inflators_1213)[and(fy_year == to.fy, h == H)], 
+               "2013-14" = as.data.table(generic_inflators_1314)[and(fy_year == to.fy, h == H)], 
                stop("Precalculated inflators only available when projecting from 2012-13 or 2013-14."))
     }
     
