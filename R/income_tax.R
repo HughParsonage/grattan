@@ -18,7 +18,7 @@
 #' @importFrom magrittr %>%
 #' @importFrom magrittr %$%
 #' @importFrom magrittr %<>%
-#' @importFrom dplyr if_else
+#' @importFrom hutils if_else
 #' @import data.table
 #' @return the total personal income tax payable
 #' @export income_tax
@@ -51,7 +51,7 @@ income_tax <- function(income, fy.year, age = 42, family_status = "individual", 
     warning("Negative entries in income detected. These will have value NA.")
   }
   
-  if (!missing(.dots.ATO)){
+  if (!is.null(.dots.ATO)){
     if (!is.data.frame(.dots.ATO)){
       stop(".dots.ATO should be a data frame/data table")
     } else {
@@ -103,8 +103,8 @@ rolling_income_tax <- function(income,
     data.table(income = income, 
                fy_year = fy.year) 
   
-  input <- input[ ,ordering := 1:.N]
-  setkeyv(input, "fy_year")
+  input[, ordering := seq_len(.N)]
+  setkeyv(input, c("fy_year", "income"))
   
   # input.keyed <-
   #   # potentially expensive. Another way would be 
@@ -113,24 +113,27 @@ rolling_income_tax <- function(income,
   #   copy(input) %>%
   #   setkey(fy_year, income)
   
-  tax_fun <- function(income, fy.year){
-    setkeyv(input, c("fy_year", "income"))
-    
+  # tax_fun <- function(income, fy.year){
+  #   tax_table2[input, roll = Inf] %>%
+  #     .[, tax := tax_at + (income - lower_bracket) * marginal_rate] %>%
+  #     setorderv("ordering") %>%
+  #     .[["tax"]]
+  # }
+  
+  base_tax. <- 
     tax_table2[input, roll = Inf] %>%
-      .[, tax := tax_at + (income - lower_bracket) * marginal_rate] %>%
-      setorderv("ordering") %>%
-      .[["tax"]]
-  }
+    .[, tax := tax_at + (income - lower_bracket) * marginal_rate] %>%
+    setorderv("ordering") %>%
+    .[["tax"]]
+  
+  setkeyv(input, "fy_year")  # for .lito below
   
   # If .dots.ATO  is NULL, for loops over zero-length vector
   for (j in which(vapply(.dots.ATO, FUN = is.double, logical(1)))){
     set(.dots.ATO, j = j, value = as.integer(.dots.ATO[[j]]))
   }
   
-  base_tax. <- tax_fun(income, fy.year = fy.year)
-  
-  
-  if (missing(.dots.ATO) || "Spouse_adjusted_taxable_inc" %notin% names(.dots.ATO)){
+  if (is.null(.dots.ATO) || "Spouse_adjusted_taxable_inc" %notin% names(.dots.ATO)){
     the_spouse_income <- 0L
   } else {
     the_spouse_income <- .dots.ATO[["Spouse_adjusted_taxable_inc"]]
@@ -142,7 +145,7 @@ rolling_income_tax <- function(income,
                   Spouse_income = the_spouse_income,
                   fy.year = fy.year, 
                   sapto.eligible = sapto.eligible, 
-                  family_status = if (missing(.dots.ATO) || "Spouse_adjusted_taxable_inc" %notin% names(.dots.ATO)){
+                  family_status = if (is.null(.dots.ATO) || "Spouse_adjusted_taxable_inc" %notin% names(.dots.ATO)){
                     family_status
                   } else {
                     FS <- rep_len("individual", max.length)
@@ -154,10 +157,10 @@ rolling_income_tax <- function(income,
   
   lito. <- .lito(input)
   
-  if (!is.null(.dots.ATO) && !missing(.dots.ATO) && all(c("Rptbl_Empr_spr_cont_amt",
-                                                          "Net_fincl_invstmt_lss_amt",
-                                                          "Net_rent_amt", 
-                                                          "Rep_frng_ben_amt") %in% names(.dots.ATO))){
+  if (!is.null(.dots.ATO) && all(c("Rptbl_Empr_spr_cont_amt",
+                                   "Net_fincl_invstmt_lss_amt",
+                                   "Net_rent_amt", 
+                                   "Rep_frng_ben_amt") %chin% names(.dots.ATO))){
     sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income,
                                                                    Rptbl_Empr_spr_cont_amt = .dots.ATO[["Rptbl_Empr_spr_cont_amt"]],
                                                                    Net_fincl_invstmt_lss_amt = .dots.ATO[["Net_fincl_invstmt_lss_amt"]],

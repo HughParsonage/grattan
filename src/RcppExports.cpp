@@ -5,9 +5,22 @@
 
 using namespace Rcpp;
 
+// IncomeTax
+NumericVector IncomeTax(NumericVector x, NumericVector thresholds, NumericVector rates);
+RcppExport SEXP _grattan_IncomeTax(SEXP xSEXP, SEXP thresholdsSEXP, SEXP ratesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type thresholds(thresholdsSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type rates(ratesSEXP);
+    rcpp_result_gen = Rcpp::wrap(IncomeTax(x, thresholds, rates));
+    return rcpp_result_gen;
+END_RCPP
+}
 // pmax3
 NumericVector pmax3(NumericVector x, NumericVector y, NumericVector z);
-RcppExport SEXP grattan_pmax3(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP) {
+RcppExport SEXP _grattan_pmax3(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -20,7 +33,7 @@ END_RCPP
 }
 // pmaxC
 NumericVector pmaxC(NumericVector x, double a);
-RcppExport SEXP grattan_pmaxC(SEXP xSEXP, SEXP aSEXP) {
+RcppExport SEXP _grattan_pmaxC(SEXP xSEXP, SEXP aSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -32,7 +45,7 @@ END_RCPP
 }
 // pmaxV
 NumericVector pmaxV(NumericVector x, NumericVector y);
-RcppExport SEXP grattan_pmaxV(SEXP xSEXP, SEXP ySEXP) {
+RcppExport SEXP _grattan_pmaxV(SEXP xSEXP, SEXP ySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -44,7 +57,7 @@ END_RCPP
 }
 // pminC
 NumericVector pminC(NumericVector x, double a);
-RcppExport SEXP grattan_pminC(SEXP xSEXP, SEXP aSEXP) {
+RcppExport SEXP _grattan_pminC(SEXP xSEXP, SEXP aSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -56,7 +69,7 @@ END_RCPP
 }
 // pminV
 NumericVector pminV(NumericVector x, NumericVector y);
-RcppExport SEXP grattan_pminV(SEXP xSEXP, SEXP ySEXP) {
+RcppExport SEXP _grattan_pminV(SEXP xSEXP, SEXP ySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
