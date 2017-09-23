@@ -79,21 +79,7 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
     cpi.indices <- rbindlist(list(cpi.indices, cpi.indices.new), use.names = TRUE, fill = TRUE)
   }
   
-  output <- 
-    input %>%
-    merge(cpi.indices, 
-          by.x = "from_fy", 
-          by.y = "fy_year", 
-          sort = FALSE,
-          all.x = TRUE) %>%
-    setnames("obsValue", "from_index") %>%
-    merge(cpi.indices, 
-          by.x = "to_fy", 
-          by.y = "fy_year", 
-          sort = FALSE, 
-          all.x = TRUE) %>%
-    setnames("obsValue", "to_index") %>%
-    hugh_frac("from_nominal_price", "to_index", "from_index", "out")
-  
-  return(output$out)
+  inflator(from_nominal_price, from = from_fy, to = to_fy, inflator_table = cpi.indices,
+           index.col = "obsValue", 
+           time.col = "fy_year")
 }
