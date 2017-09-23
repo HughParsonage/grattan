@@ -1,19 +1,10 @@
 
 # select columns satisfying a condition
 
-select_which_ <- function(.data, Which, .and.dots){
-  Which <- match.fun(Which)
-  if (!missing(.and.dots)){
-    dplyr::select_(.data, .dots = c(names(.data)[vapply(.data, Which, logical(1))], .and.dots))
-  } else {
-    dplyr::select_(.data, .dots = names(.data)[vapply(.data, Which, logical(1))])
-  }
-}
+select_which_ <- hutils::select_which
 
-unselect_ <- function(.data, .dots){
-  all_names <- names(.data)
-  keeps <- names(.data)[!names(.data) %in% .dots]
-  dplyr::select_(.data, .dots = keeps)
+unselect_ <- function(.data, .dots) {
+  hutils::drop_cols(.data, vars = .dots)
 }
 
 `%notin%` <- function(x, y) {
