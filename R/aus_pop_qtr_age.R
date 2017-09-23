@@ -13,7 +13,13 @@
 
 aus_pop_qtr_age <- function(date = NULL, age = NULL, tbl = FALSE, roll = TRUE, roll.beyond = FALSE){
   if (!is.null(date)){
-    stopifnot(all(lubridate::is.Date(date)))
+    stopifnot(all(inherits(date, "Date")))
+    
+    if (length(date) > 1 && 
+        length(age) > 1 && 
+        length(date) != length(age)) {
+      stop("If 'date' and 'age' have lengths > 1 they must have the same length.")
+    }
   }
   
   if (!is.null(age)){
@@ -22,7 +28,10 @@ aus_pop_qtr_age <- function(date = NULL, age = NULL, tbl = FALSE, roll = TRUE, r
               all(age <= 100))
   }
   
-  if (!identical(roll, FALSE) && !roll.beyond && isTRUE(date > max(aust_pop_by_age_yearqtr$Date) || date < min(aust_pop_by_age_yearqtr$Date))){
+  if (AND(NEITHER(identical(roll, FALSE),
+                  roll.beyond),
+          NEITHER(is.null(date),
+                  all(date %between% range(aust_pop_by_age_yearqtr[["Date"]]))))) {
     warning("Rolling join used beyond the limit of data.")
   }
   # CRAN note avoidance
@@ -37,8 +46,8 @@ aus_pop_qtr_age <- function(date = NULL, age = NULL, tbl = FALSE, roll = TRUE, r
     if (is.null(age)){
       input <-
         data.table(Date = date, 
-                   Age = 1:100) %>%
-        .[, ordering := 1:.N] %>%
+                   Age = seq_len(100),
+                   ordering = seq_len(100)) %>%
         setkey(Age, Date)
       
       out <-
@@ -49,7 +58,9 @@ aus_pop_qtr_age <- function(date = NULL, age = NULL, tbl = FALSE, roll = TRUE, r
       input <-
         data.table(Date = date,
                    Age = age) %>%
-        .[, ordering := 1:.N] %>%
+        # We know they are of equal length, or 
+        # of length-one. But not which is which.
+        .[, ordering := seq_len(.N)] %>%
         setkey(Age, Date)
       
       out <-

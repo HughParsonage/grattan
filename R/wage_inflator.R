@@ -49,7 +49,7 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
   
   last_full_yr_in_series <- 
     wage.indices %>%
-    dplyr::filter(obsQtr == 2L) %>%
+    .[obsQtr == 2L, .SD, .SDcols = "obsYear"] %>%
     .[["obsYear"]] %>%
     last 
   
@@ -60,7 +60,7 @@ wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, al
     .[["obsQtr"]] %>%
     last 
   
-  exponent <- rep(1L, length(from_fy))
+  exponent <- rep_len(1L, length(from_fy))
   if (any(from_fy > to_fy)){
     exponent[from_fy > last_full_fy_in_series] <- -1L
     

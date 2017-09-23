@@ -45,7 +45,7 @@ inverse_income <- function(tax, fy.year = "2012-13", zero.tax.income = c("maximu
 
 inverse_income_lookup3 <- function(tax, fy.year = "2012-13", zero.tax.income = "maximum", ...){
   NAs <- is.na(tax)
-  tax <- dplyr::if_else(NAs, if (is.integer(tax)) 1L else 1.0, tax)
+  tax <- if_else(NAs, if (is.integer(tax)) 1L else 1.0, tax)
   infs <- is.infinite(tax)
   tax <- if_else(infs, if (is.integer(tax)) 1L else 1.0, tax)
   oo <- rank(tax, ties.method = "first")
@@ -57,14 +57,14 @@ inverse_income_lookup3 <- function(tax, fy.year = "2012-13", zero.tax.income = "
   income.range <- seq(0L, max(ceiling(max(tax) * 3.79), 100000L), by = 1L) 
   fy..year <- taxes <- NULL
   if (identical(list(...), list())){
-    input <- data.table(taxes = dplyr::if_else(zeroes,
-                                               if (is.integer(tax)) 1L else 1.0, 
-                                               tax),   # ensure a one-to-one relationship
+    input <- data.table(taxes = if_else(zeroes,
+                                        if (is.integer(tax)) 1L else 1.0, 
+                                        tax),   # ensure a one-to-one relationship
                         fy..year = fy.year)
   } else {
-    input <- data.table(taxes = dplyr::if_else(zeroes,
-                                               if (is.integer(tax)) 1L else 1.0,
-                                               tax),   # ensure a one-to-one relationship
+    input <- data.table(taxes = if_else(zeroes,
+                                        if (is.integer(tax)) 1L else 1.0,
+                                        tax),   # ensure a one-to-one relationship
                         fy..year = fy.year, 
                         ...)
   }

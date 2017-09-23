@@ -43,6 +43,8 @@ project <- function(sample_file,
   if (h == 0){
     return(sample_file)
   } else {
+    # NSE e.g inflators[h == h]
+    H <- h
     current.fy <- fy.year.of.sample.file
     to.fy <- yr2fy(fy2yr(current.fy) + h)
     
@@ -111,7 +113,7 @@ project <- function(sample_file,
     CGTy.cols <- c("Net_CG_amt", "Tot_CY_CG_amt")
     
     # names(taxstats::sample_file_1314)
-    alien.cols <- col.names[!col.names %in% c("Ind", "Gender", "age_range", "Occ_code", "Partner_status", 
+    alien.cols <- col.names[!col.names %chin% c("Ind", "Gender", "age_range", "Occ_code", "Partner_status", 
                                               "Region", "Lodgment_method", "PHI_Ind", "Sw_amt", "Alow_ben_amt", 
                                               "ETP_txbl_amt", "Grs_int_amt", "Aust_govt_pnsn_allw_amt", "Unfranked_Div_amt", 
                                               "Frk_Div_amt", "Dividends_franking_cr_amt", "Net_rent_amt", "Gross_rent_amt", 
@@ -143,33 +145,31 @@ project <- function(sample_file,
       Not.Inflated <- c(Not.Inflated, excl_vars)
     }
     
-    SetDiff <- function(...) Reduce(setdiff, list(...), right = FALSE)
-    
-    generic.cols <- SetDiff(col.names, 
-                            diff.uprate.wagey.cols, wagey.cols, super.bal.col, lfy.cols, cpiy.cols, derived.cols, Not.Inflated)
+    generic.cols <- 
+      col.names[!col.names %chin% c(diff.uprate.wagey.cols, wagey.cols, super.bal.col, lfy.cols, cpiy.cols, derived.cols, Not.Inflated)]
     
     if (.recalculate.inflators){
       generic.inflators <- 
         generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = fy.year.of.sample.file, 
                          estimator = forecast.dots$estimator, pred_interval = forecast.dots$pred_interval)
     } else {
-      switch(current.fy, 
-             "2012-13" = generic.inflators <- dplyr::filter(generic_inflators_1213, fy_year == to.fy), 
-             "2013-14" = generic.inflators <- dplyr::filter(generic_inflators_1314, fy_year == to.fy), 
-             stop("Precalculated inflators only available when projecting from 2012-13 or 2013-14.")
-      )
-      generic.inflators <- as.data.table(generic.inflators)
+      generic.inflators <- 
+        switch(current.fy, 
+               "2012-13" = as.data.table(generic_inflators_1213)[and(fy_year == to.fy, h == H)], 
+               "2013-14" = as.data.table(generic_inflators_1314)[and(fy_year == to.fy, h == H)], 
+               stop("Precalculated inflators only available when projecting from 2012-13 or 2013-14."))
     }
     
     ## Inflate:
     # make numeric to avoid overflow
-    numeric.cols <- names(sample_file)[vapply(sample_file, is.numeric, TRUE)]
-    for (j in which(col.names %in% numeric.cols))
-      set(sample_file, j = j, value = as.numeric(sample_file[[j]]))
+    integer.cols <- names(sample_file)[vapply(sample_file, is.integer, TRUE)]
+    for (j in which(col.names %chin% integer.cols)) {
+      set(sample_file, j = j, value = as.double(.subset2(sample_file, j)))
+    }
     
     
     # Differential uprating:
-    for (j in which(col.names %in% diff.uprate.wagey.cols)){
+    for (j in which(col.names %chin% diff.uprate.wagey.cols)){
       if (is.null(wage.series)){
         set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy))
       } else {
@@ -178,19 +178,19 @@ project <- function(sample_file,
       }
     }
     
-    for (j in which(col.names %in% wagey.cols))
+    for (j in which(col.names %chin% wagey.cols))
       set(sample_file, j = j, value = wage.inflator * sample_file[[j]])
     
-    for (j in which(col.names %in% lfy.cols))
+    for (j in which(col.names %chin% lfy.cols))
       set(sample_file, j = j, value = lf.inflator * sample_file[[j]])
     
-    for (j in which(col.names %in% cpiy.cols))
+    for (j in which(col.names %chin% cpiy.cols))
       set(sample_file, j = j, value = cpi.inflator * sample_file[[j]])
     
-    for (j in which(col.names %in% CGTy.cols))
+    for (j in which(col.names %chin% CGTy.cols))
       set(sample_file, j = j, value = CG.inflator * sample_file[[j]])
     
-    for (j in which(col.names %in% generic.cols)){
+    for (j in which(col.names %chin% generic.cols)){
       stopifnot("variable" %in% names(generic.inflators))  ## super safe
       nom <- col.names[j]
       set(sample_file, 

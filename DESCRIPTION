@@ -16,22 +16,19 @@ Depends: R (>= 2.10)
 License: GPL-2
 Imports:
     data.table,
-    dplyr (>= 0.5.0),
     hutils,
     rsdmx,
     forecast,
-    lubridate,
     assertthat,
     magrittr,
     Rcpp (>= 0.12.3),
-    zoo, 
-    lazyeval, 
-    purrr
+    zoo
 LinkingTo: 
     Rcpp,
 RoxygenNote: 6.0.1
 Suggests: testthat, 
     taxstats,
+    dplyr,
     rmarkdown, 
     dtplyr,
     ggplot2,

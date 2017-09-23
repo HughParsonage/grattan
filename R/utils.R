@@ -1,23 +1,19 @@
 
 # select columns satisfying a condition
 
-select_which_ <- function(.data, Which, .and.dots){
-  Which <- match.fun(Which)
-  if (!missing(.and.dots)){
-    dplyr::select_(.data, .dots = c(names(.data)[vapply(.data, Which, logical(1))], .and.dots))
-  } else {
-    dplyr::select_(.data, .dots = names(.data)[vapply(.data, Which, logical(1))])
-  }
-}
+select_which_ <- hutils::select_which
 
-unselect_ <- function(.data, .dots){
-  all_names <- names(.data)
-  keeps <- names(.data)[!names(.data) %in% .dots]
-  dplyr::select_(.data, .dots = keeps)
+unselect_ <- function(.data, .dots) {
+  hutils::drop_cols(.data, vars = .dots)
 }
 
 `%notin%` <- function(x, y) {
   !(x %in% y)
+}
+
+# from dplyr::near
+near <- function (x, y, tol = .Machine$double.eps^0.5) {
+  abs(x - y) < tol
 }
 
 as.numeric_unless_warning <- function(x){
@@ -39,24 +35,11 @@ gforecast <- function(x, ...) {
 } 
 
 # NSE
-hugh_frac <- function(.data, front, over, under, new_col_name){
-  # http://www.r-bloggers.com/using-mutate-from-dplyr-inside-a-function-getting-around-non-standard-evaluation/
-  mutate_call <- lazyeval::interp(~r*a/b, a = as.name(over), b = as.name(under), r = as.name(front))
-  out <- 
-    .data %>%
-    dplyr::mutate_(.dots = stats::setNames(list(mutate_call), new_col_name))
-  if (is.data.table(.data)){
-    setDT(out)
-  }
-}
-
-# NSE
 inflator_frac <- function(.data, front, over, under, new_col_name){
-  # http://www.r-bloggers.com/using-mutate-from-dplyr-inside-a-function-getting-around-non-standard-evaluation/
-  mutate_call <- lazyeval::interp(~r*a/b, a = as.name(over), b = as.name(under), r = as.name(front))
-  .data %>%
-    dplyr::mutate_(.dots = stats::setNames(list(mutate_call), new_col_name)) %>%
-    as.data.table
+  # Will only be invoked where these vars don't exist
+  setnames(.data, c(front, over, under), c("r", "a", "b"))
+  r <- a <- b <- NULL
+  .data[, (new_col_name) := r * a / b]
 }
 
 last_over_first <- function(x){

@@ -127,7 +127,7 @@ apply_super_caps_and_div293 <- function(.sample.file,
     }
     # Imputation method: if the concessional contributions are absent, yet salary is high, 
     # replace the concessional contributions by super due SG and Rptbl_Empr_spr_cont_amt
-    .sample.file[ , concessional_contributions := if_else(dplyr::near(concessional_contributions, 0) & Sw_amt > .min.Sw.for.SG, 
+    .sample.file[ , concessional_contributions := if_else(near(concessional_contributions, 0) & Sw_amt > .min.Sw.for.SG, 
                                                           as.double(Sw_amt * .SG_rate + Rptbl_Empr_spr_cont_amt), 
                                                           as.double(concessional_contributions))]
   }

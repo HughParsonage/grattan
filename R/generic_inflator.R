@@ -10,7 +10,12 @@
 
 ## For each variable we want an arima/ets model 
 ## and to use that to forecast ahead.
-generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzero = FALSE, estimator = "mean", pred_interval = 80){
+generic_inflator <- function(vars,
+                             h,
+                             fy.year.of.sample.file = "2012-13",
+                             nonzero = FALSE,
+                             estimator = "mean",
+                             pred_interval = 80) {
   stopifnot(length(h) == 1L)
   if (h == 0L){
     return(data.table(variable = vars, 
@@ -21,6 +26,18 @@ generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzer
             h >= 0, 
             is.fy(fy.year.of.sample.file))
   
+  vars_only_in_201314 <- c("MCS_Emplr_Contr", 
+                           "MCS_Prsnl_Contr",
+                           "MCS_Othr_Contr",
+                           "MCS_Ttl_Acnt_Bal")
+  
+  switch(fy.year.of.sample.file, 
+         "2012-13" = if (any(vars_only_in_201314 %chin% vars)) {
+           stop("You have requested a projection / inflator of ",
+                vars[vars %in% vars_only_in_201314],
+                " but this variable ",
+                "was not present till the 2013-14 sample file.")
+         })
   
   
   forecast_ahead_h <- function(object, ...){
@@ -48,37 +65,35 @@ generic_inflator <- function(vars, h, fy.year.of.sample.file = "2012-13", nonzer
     mean_of_each_var <- meanPositive_of_each_taxstats_var[, .SD, .SDcols = c("fy.year", vars)]
   }
   
-  forecaster <- function(x){
+  forecaster <- function(x) {
     # Consider using hybridf
     
     # Condition for ets / auto.arima
-    if (!anyNA(x)){
-      forecast::ets(x)
-    } else {
+    if (anyNA(x)) {
       forecast::auto.arima(stats::ts(x))
+    } else {
+      forecast::ets(x)
     }
   }
   
+  forecast_and_extract <- function(fy.year, value) {
+    max_year <- max(fy2yr(fy.year))
+    list(fy_year = c(fy.year, yr2fy(max_year + seq_len(h))),
+         value = c(value, extract_estimator(forecast_ahead_h(forecaster(value)))))
+  }
+  
+  # from melt.data.table
+  value <- NULL
+  
   point_forecasts_by_var <- 
     mean_of_each_var %>%
-    as.data.table(.) %>%
-    melt.data.table(id.vars = c("fy.year")) %>% 
-    base::split(.$variable) %>%
-    purrr::map(~forecaster(.$value)) %>%
-    purrr::map(forecast_ahead_h) %>%
-    purrr::map(extract_estimator) 
-  
-  # CRAN note avoidance
-  fy_year <- NULL
-  rbindlist(list(as.data.table(mean_of_each_var), 
-                 as.data.table(point_forecasts_by_var)), 
-            use.names = TRUE, 
-            fill = TRUE) %>%
-    .[, fy_year := yr2fy(1:.N - 1 + fy2yr(first(fy.year)))] %>% 
-    # last(fy_year) is the fy_year corresponding to h, the target. 
-    .[fy_year %in% c(fy.year.of.sample.file, last(fy_year))] %>% 
-    .[, lapply(.SD, last_over_first), .SDcols = vars] %>%
-    melt.data.table(measure.vars = names(.), variable.name = "variable", value.name = "inflator")
+    setDT %>%
+    melt.data.table(id.vars = c("fy.year"), variable.factor = FALSE) %>%
+    .[, forecast_and_extract(fy.year, value), by = "variable"] %>%
+    .[complete.cases(.)] %>%
+    setorderv("fy_year") %>%
+    .[fy_year >= fy.year.of.sample.file] %>%
+    .[, .(inflator = last_over_first(value)), by = "variable"]
 }
 
 

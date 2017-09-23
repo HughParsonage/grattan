@@ -2,6 +2,8 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' @title IncomeTax
+#' @description Calculates the ordinary tax payable given income and tax thresholds and rates.
+#' Basic, designed for performance.
 #' @name IncomeTax
 #' @param x Taxable income.
 #' @param thresholds Lower brackets of the tax tables.
@@ -10,7 +12,7 @@
 NULL
 
 IncomeTax <- function(x, thresholds, rates) {
-    .Call('_grattan_IncomeTax', PACKAGE = 'grattan', x, thresholds, rates)
+    .Call(`_grattan_IncomeTax`, x, thresholds, rates)
 }
 
 #' @title Threeway parallel maximum
@@ -23,7 +25,7 @@ IncomeTax <- function(x, thresholds, rates) {
 NULL
 
 pmax3 <- function(x, y, z) {
-    .Call('_grattan_pmax3', PACKAGE = 'grattan', x, y, z)
+    .Call(`_grattan_pmax3`, x, y, z)
 }
 
 #' @title Parallel maximum
@@ -38,7 +40,7 @@ pmax3 <- function(x, y, z) {
 NULL
 
 pmaxC <- function(x, a) {
-    .Call('_grattan_pmaxC', PACKAGE = 'grattan', x, a)
+    .Call(`_grattan_pmaxC`, x, a)
 }
 
 #' @title Parallel maximum
@@ -52,7 +54,7 @@ pmaxC <- function(x, a) {
 NULL
 
 pmaxV <- function(x, y) {
-    .Call('_grattan_pmaxV', PACKAGE = 'grattan', x, y)
+    .Call(`_grattan_pmaxV`, x, y)
 }
 
 #' @title Parallel maximum
@@ -67,7 +69,7 @@ pmaxV <- function(x, y) {
 NULL
 
 pminC <- function(x, a) {
-    .Call('_grattan_pminC', PACKAGE = 'grattan', x, a)
+    .Call(`_grattan_pminC`, x, a)
 }
 
 #' @title Parallel maximum
@@ -81,6 +83,6 @@ pminC <- function(x, a) {
 NULL
 
 pminV <- function(x, y) {
-    .Call('_grattan_pminV', PACKAGE = 'grattan', x, y)
+    .Call(`_grattan_pminV`, x, y)
 }
 

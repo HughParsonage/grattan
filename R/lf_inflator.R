@@ -51,7 +51,7 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     .[month(obsDate) == 6] %>%
     .[["obsDate"]] %>%
     last %>%
-    lubridate::year(.)
+    year
   
   last_full_fy_in_series <- 
     last_full_yr_in_series %>%
@@ -107,7 +107,7 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
                             fill = TRUE)
   }
   
-  stopifnot(use.month %in% 1:12)
+  stopifnot(use.month %between% c(1, 12))
   
   lf.indices <- 
     lf.indices %>%
