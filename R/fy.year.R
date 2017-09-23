@@ -64,7 +64,7 @@ fy2date <- function(x){
 
 
 date2fy <- function(date){
-  if_else(lubridate::month(date) < 7, 
-          yr2fy(lubridate::year(date)), 
-          yr2fy(lubridate::year(date) + 1))
+  if_else(month(date) < 7, 
+          yr2fy(year(date)), 
+          yr2fy(year(date) + 1))
 }

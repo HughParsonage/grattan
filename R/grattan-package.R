@@ -8,4 +8,5 @@
 #' @title The grattan package.
 #' @author \email{hugh.parsonage+grattanpackage@@grattan.edu.au}
 #' @keywords package
-
+#' @importFrom stats complete.cases
+NULL

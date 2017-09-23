@@ -13,8 +13,10 @@
 
 aus_pop_qtr_age <- function(date = NULL, age = NULL, tbl = FALSE, roll = TRUE, roll.beyond = FALSE){
   if (!is.null(date)){
-    stopifnot(all(lubridate::is.Date(date)))
+    stopifnot(all(is(date, "Date")))
   }
+  
+  prohibit_vector_recycling(date, age)
   
   if (!is.null(age)){
     stopifnot(is.numeric(age),
@@ -37,8 +39,8 @@ aus_pop_qtr_age <- function(date = NULL, age = NULL, tbl = FALSE, roll = TRUE, r
     if (is.null(age)){
       input <-
         data.table(Date = date, 
-                   Age = 1:100) %>%
-        .[, ordering := 1:.N] %>%
+                   Age = seq_len(100),
+                   ordering = seq_len(100)) %>%
         setkey(Age, Date)
       
       out <-
@@ -49,7 +51,9 @@ aus_pop_qtr_age <- function(date = NULL, age = NULL, tbl = FALSE, roll = TRUE, r
       input <-
         data.table(Date = date,
                    Age = age) %>%
-        .[, ordering := 1:.N] %>%
+        # We know they are of equal length, or 
+        # of length-one. But not which is which.
+        .[, ordering := seq_len(.N)] %>%
         setkey(Age, Date)
       
       out <-
