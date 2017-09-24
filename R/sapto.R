@@ -22,15 +22,11 @@ sapto <- function(rebate_income,
                       rebate_income = rebate_income,
                       Spouse_income = Spouse_income)
   
-  stopifnot(all(family_status %chin% c("single", "married")))
+  stopifnot(all(family_status %fin% c("single", "married")))
   
   if (any(Spouse_income > 0 & family_status == "single")){
     stop("family_status may be 'single' if and only if Spouse_income > 0.")
   }
-  
-  ordering <- NULL
-  input[, ordering := 1:.N]
-  
   
   partner_sapto <- sapto_value <- 
     sapto_income <- partner_unused_sapto <-
@@ -69,10 +65,9 @@ sapto <- function(rebate_income,
       sapto_value := JJ] %>%
     .[family_status != "single" & rebate_income < GG,
       sapto_value := CC] %>%
-    unique(by = "ordering") %>%
     # Eligibility for SAPTO
-    .[(!sapto.eligible), sapto_value := 0] %>%
-    .[is.na(sapto_value), sapto_value := fill] %>%
     # my_printer %>%
     .[["sapto_value"]]
+  
+  sapto.eligible * coalesce(out, fill)
 }
