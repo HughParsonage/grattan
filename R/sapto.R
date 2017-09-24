@@ -54,7 +54,10 @@ sapto <- function(rebate_income,
     .[, CC := BB + partner_unused_sapto] %>% 
     .[, DD := CC + lito] %>%
     .[, EE := DD / 0.19] %>%
-    .[, FF := EE + 18200] %>%
+    
+    
+    # .[, FF := EE + 18200] %>% # not used
+    
     # https://www.ato.gov.au/law/view/document?DocID=TXR/TR9331/NAT/ATO/00001&PiT=99991231235958
     .[, GG := 18200 + DD / 0.19] %>%
     # ATO calculator suggests this was intended:

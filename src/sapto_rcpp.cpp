@@ -1,19 +1,24 @@
 #include <Rcpp.h>
 #include "grattan.h"
+using namespace Rcpp;
 
 
 //' @title SAPTO in C++
 //' @name sapto_rcpp
-//' @param 
+//' @param RebateIncome,MaxOffset,LowerThreshold,ThresholdRate,TaperRate,SpouseIncome,FamilyStatus As in \code{\link{sapto}}.
+//' @export sapto_rcpp
 // [[Rcpp::export]]
 NumericVector sapto_rcpp(NumericVector RebateIncome,
-                        NumericVector MaxOffset,
-                        NumericVector LowerThreshold,
-                        NumericVector ThresholdRate,
-                        NumericVector TaperRate,
-                        LogicalVector SaptoEligible,
-                        NumericVector SpouseIncome,
-                        StringVector FamilyStatus) {
+                         NumericVector MaxOffset,
+                         NumericVector LowerThreshold,
+                         NumericVector ThresholdRate,
+                         NumericVector TaperRate,
+                         LogicalVector SaptoEligible,
+                         NumericVector SpouseIncome,
+                         StringVector FamilyStatus) {
+  
+  
+  
   int n = RebateIncome.length();
   NumericVector out(n);
   
@@ -24,19 +29,19 @@ NumericVector sapto_rcpp(NumericVector RebateIncome,
   double tpk = 0;
   bool sek = false;
   double sik = 0;
-  const char* fsk = "";
+  std::string fsk = "";
   
-  for (k = 0; k < n; ++k) {
+  for (int k = 0; k < n; ++k) {
     rik = RebateIncome[k];
     mok = MaxOffset[k];
     ltk = LowerThreshold[k];
     thk = ThresholdRate[k];
     tpk = TaperRate[k];
     sek = SaptoEligible[k];
-    sik = SpouseIncome[l];
+    sik = SpouseIncome[k];
     fsk = FamilyStatus[k];
     
-    out[i] = sapto_rcpp_singleton(rik, mok, ltk, thk, tpk, sek, sik, fsk);                               FamilyStatus[i]);
+    out[k] = sapto_rcpp_singleton(rik,mok,ltk,thk,tpk,sek,sik,fsk);
   }
   return out;
 }

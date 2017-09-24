@@ -22,11 +22,12 @@ double sapto_rcpp_singleton(double rebate_income,
                             double taper_rate,
                             bool sapto_eligible = true,
                             double Spouse_income = 0,
-                            const char* family_status = "single") {
+                            std::string family_status = "single") {
   double sapto = 0;
   if (sapto_eligible) {
+    const char * fs = family_status.c_str();
     double sapto_income = rebate_income;
-    if (strcmp(family_status, "married") == 0) {
+    if (strcmp(fs, "married") == 0) {
       sapto_income += Spouse_income;
     }
     double sapto_value = max_offset;
@@ -37,7 +38,7 @@ double sapto_rcpp_singleton(double rebate_income,
     }
     
     double partner_unused_sapto = 0;
-    if (strcmp(family_status, "married") == 0) {
+    if (strcmp(fs, "married") == 0) {
       partner_unused_sapto += max_offset / 2;
       partner_unused_sapto += taper_rate * lower_threshold / 2;
       partner_unused_sapto -= taper_rate * Spouse_income;
@@ -48,8 +49,8 @@ double sapto_rcpp_singleton(double rebate_income,
     double BB = max_offset / 2;
     double CC = BB + partner_unused_sapto; 
     double DD = CC + lito;
-    double EE = DD / 0.19;
-    double FF = EE + 18200;
+    // double EE = DD / 0.19;
+    // double FF = EE + 18200;
     // # https://www.ato.gov.au/law/view/document?DocID=TXR/TR9331/NAT/ATO/00001&PiT=99991231235958
     double GG = 18200 + DD / 0.19;
     // # ATO calculator suggests this was intended:
@@ -64,7 +65,7 @@ double sapto_rcpp_singleton(double rebate_income,
       JJ = 0;
     }
     
-    if (strcmp(family_status, "married") == 0) {
+    if (strcmp(fs, "married") == 0) {
       sapto_value = JJ;
       if (rebate_income < GG) {
         sapto_value = CC;
