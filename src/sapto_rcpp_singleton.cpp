@@ -11,14 +11,14 @@ using namespace Rcpp;
 //   http://gallery.rcpp.org/
 //
 
-//' SAPTO
-//' @name sapto_rcpp
-//' 
+//' SAPTO singleton
+//' @name sapto_rcpp_singleton
+//' @param rebate,rebate_income,max_offset,lower_threshold,taper_rate,sapto_eligible,Spouse_income,family_status As in \code{sapto}.
+//' @export
 // [[Rcpp::export]]
 double sapto_rcpp_singleton(double rebate_income,
                             double max_offset,
                             double lower_threshold,
-                            double threshold_rate,
                             double taper_rate,
                             bool sapto_eligible = true,
                             double Spouse_income = 0,

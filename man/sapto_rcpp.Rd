@@ -2,20 +2,11 @@
 % Please edit documentation in R/RcppExports.R
 \name{sapto_rcpp}
 \alias{sapto_rcpp}
-\alias{sapto_rcpp}
-\alias{sapto_rcpp_singleton}
 \title{SAPTO in C++}
 \usage{
-sapto_rcpp(RebateIncome, MaxOffset, LowerThreshold, ThresholdRate, TaperRate,
-  SaptoEligible, SpouseIncome, FamilyStatus)
-
-sapto_rcpp_singleton(rebate_income, max_offset, lower_threshold, threshold_rate,
-  taper_rate, sapto_eligible = TRUE, Spouse_income = 0,
-  family_status = "single")
+sapto_rcpp(RebateIncome, MaxOffset, LowerThreshold, TaperRate, SaptoEligible,
+  SpouseIncome, FamilyStatus)
 }
 \arguments{
-\item{RebateIncome, MaxOffset, LowerThreshold, ThresholdRate, TaperRate, SpouseIncome, FamilyStatus}{As in \code{\link{sapto}}.}
-}
-\description{
-SAPTO
+\item{RebateIncome, MaxOffset, LowerThreshold, TaperRate, SaptoEligible, SpouseIncome, FamilyStatus}{As in \code{\link{sapto}}.}
 }

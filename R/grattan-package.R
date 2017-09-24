@@ -9,6 +9,7 @@
 #' @author \email{hugh.parsonage+grattanpackage@@grattan.edu.au}
 #' @keywords package
 #' @importFrom hutils if_else
+#' @importFrom hutils coalesce
 #' @importFrom hutils OR
 #' @importFrom hutils NEITHER
 #' @importFrom hutils AND

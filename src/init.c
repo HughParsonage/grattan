@@ -14,7 +14,8 @@ extern SEXP _grattan_pmaxC(SEXP, SEXP);
 extern SEXP _grattan_pmaxV(SEXP, SEXP);
 extern SEXP _grattan_pminC(SEXP, SEXP);
 extern SEXP _grattan_pminV(SEXP, SEXP);
-extern SEXP _grattan_sapto_rcpp(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP _grattan_sapto_rcpp(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP _grattan_sapto_rcpp_singleton(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
   {"_grattan_pmax3", (DL_FUNC) &_grattan_pmax3, 3},
@@ -23,7 +24,8 @@ static const R_CallMethodDef CallEntries[] = {
   {"_grattan_pmaxV", (DL_FUNC) &_grattan_pmaxV, 2},
   {"_grattan_pminC", (DL_FUNC) &_grattan_pminC, 2},
   {"_grattan_pminV", (DL_FUNC) &_grattan_pminV, 2},
-  {"_grattan_sapto_rcpp", (DL_FUNC) &_grattan_pminV, 8},
+  {"_grattan_sapto_rcpp", (DL_FUNC) &_grattan_sapto_rcpp, 7},
+  {"_grattan_sapto_rcpp_singleton", (DL_FUNC) &_grattan_sapto_rcpp_singleton, 7},
   {NULL, NULL, 0}
 };
 

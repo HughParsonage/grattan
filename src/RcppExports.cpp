@@ -80,38 +80,36 @@ BEGIN_RCPP
 END_RCPP
 }
 // sapto_rcpp
-NumericVector sapto_rcpp(NumericVector RebateIncome, NumericVector MaxOffset, NumericVector LowerThreshold, NumericVector ThresholdRate, NumericVector TaperRate, LogicalVector SaptoEligible, NumericVector SpouseIncome, StringVector FamilyStatus);
-RcppExport SEXP _grattan_sapto_rcpp(SEXP RebateIncomeSEXP, SEXP MaxOffsetSEXP, SEXP LowerThresholdSEXP, SEXP ThresholdRateSEXP, SEXP TaperRateSEXP, SEXP SaptoEligibleSEXP, SEXP SpouseIncomeSEXP, SEXP FamilyStatusSEXP) {
+NumericVector sapto_rcpp(NumericVector RebateIncome, NumericVector MaxOffset, NumericVector LowerThreshold, NumericVector TaperRate, LogicalVector SaptoEligible, NumericVector SpouseIncome, StringVector FamilyStatus);
+RcppExport SEXP _grattan_sapto_rcpp(SEXP RebateIncomeSEXP, SEXP MaxOffsetSEXP, SEXP LowerThresholdSEXP, SEXP TaperRateSEXP, SEXP SaptoEligibleSEXP, SEXP SpouseIncomeSEXP, SEXP FamilyStatusSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type RebateIncome(RebateIncomeSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type MaxOffset(MaxOffsetSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type LowerThreshold(LowerThresholdSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type ThresholdRate(ThresholdRateSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type TaperRate(TaperRateSEXP);
     Rcpp::traits::input_parameter< LogicalVector >::type SaptoEligible(SaptoEligibleSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type SpouseIncome(SpouseIncomeSEXP);
     Rcpp::traits::input_parameter< StringVector >::type FamilyStatus(FamilyStatusSEXP);
-    rcpp_result_gen = Rcpp::wrap(sapto_rcpp(RebateIncome, MaxOffset, LowerThreshold, ThresholdRate, TaperRate, SaptoEligible, SpouseIncome, FamilyStatus));
+    rcpp_result_gen = Rcpp::wrap(sapto_rcpp(RebateIncome, MaxOffset, LowerThreshold, TaperRate, SaptoEligible, SpouseIncome, FamilyStatus));
     return rcpp_result_gen;
 END_RCPP
 }
 // sapto_rcpp_singleton
-double sapto_rcpp_singleton(double rebate_income, double max_offset, double lower_threshold, double threshold_rate, double taper_rate, bool sapto_eligible, double Spouse_income, std::string family_status);
-RcppExport SEXP _grattan_sapto_rcpp_singleton(SEXP rebate_incomeSEXP, SEXP max_offsetSEXP, SEXP lower_thresholdSEXP, SEXP threshold_rateSEXP, SEXP taper_rateSEXP, SEXP sapto_eligibleSEXP, SEXP Spouse_incomeSEXP, SEXP family_statusSEXP) {
+double sapto_rcpp_singleton(double rebate_income, double max_offset, double lower_threshold, double taper_rate, bool sapto_eligible, double Spouse_income, std::string family_status);
+RcppExport SEXP _grattan_sapto_rcpp_singleton(SEXP rebate_incomeSEXP, SEXP max_offsetSEXP, SEXP lower_thresholdSEXP, SEXP taper_rateSEXP, SEXP sapto_eligibleSEXP, SEXP Spouse_incomeSEXP, SEXP family_statusSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< double >::type rebate_income(rebate_incomeSEXP);
     Rcpp::traits::input_parameter< double >::type max_offset(max_offsetSEXP);
     Rcpp::traits::input_parameter< double >::type lower_threshold(lower_thresholdSEXP);
-    Rcpp::traits::input_parameter< double >::type threshold_rate(threshold_rateSEXP);
     Rcpp::traits::input_parameter< double >::type taper_rate(taper_rateSEXP);
     Rcpp::traits::input_parameter< bool >::type sapto_eligible(sapto_eligibleSEXP);
     Rcpp::traits::input_parameter< double >::type Spouse_income(Spouse_incomeSEXP);
     Rcpp::traits::input_parameter< std::string >::type family_status(family_statusSEXP);
-    rcpp_result_gen = Rcpp::wrap(sapto_rcpp_singleton(rebate_income, max_offset, lower_threshold, threshold_rate, taper_rate, sapto_eligible, Spouse_income, family_status));
+    rcpp_result_gen = Rcpp::wrap(sapto_rcpp_singleton(rebate_income, max_offset, lower_threshold, taper_rate, sapto_eligible, Spouse_income, family_status));
     return rcpp_result_gen;
 END_RCPP
 }
