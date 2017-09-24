@@ -18,6 +18,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// Offset
+NumericVector Offset(NumericVector x, double y, double a, double m);
+RcppExport SEXP _grattan_Offset(SEXP xSEXP, SEXP ySEXP, SEXP aSEXP, SEXP mSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type y(ySEXP);
+    Rcpp::traits::input_parameter< double >::type a(aSEXP);
+    Rcpp::traits::input_parameter< double >::type m(mSEXP);
+    rcpp_result_gen = Rcpp::wrap(Offset(x, y, a, m));
+    return rcpp_result_gen;
+END_RCPP
+}
 // pmax3
 NumericVector pmax3(NumericVector x, NumericVector y, NumericVector z);
 RcppExport SEXP _grattan_pmax3(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP) {

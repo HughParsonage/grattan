@@ -15,6 +15,19 @@ IncomeTax <- function(x, thresholds, rates) {
     .Call(`_grattan_IncomeTax`, x, thresholds, rates)
 }
 
+#' @title General offset in C++
+#' @name Offset
+#' @param x A vector of incomes etc.
+#' @param y The maximum offset available; the offset when \code{x} is zero.
+#' @param a The maximum value of \code{x}.
+#' @param m The taper rate (the \strong{negative} slope).
+#' @export Offset
+NULL
+
+Offset <- function(x, y, a, m) {
+    .Call(`_grattan_Offset`, x, y, a, m)
+}
+
 #' @title Threeway parallel maximum
 #' @description Returns the parallel maximum of three 
 #' 
