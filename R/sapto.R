@@ -41,7 +41,7 @@ sapto <- function(rebate_income,
     #                      fms <- family_status == "single" 1706.769 2020.293 2601.043
     
     
-    stopifnot(all(family_status %fin% c("single", "married")))
+    stopifnot(all(family_status %chin% c("single", "married")))
     
     if ("single" %chin% family_status[is_married]) {
       stop("family_status may be 'single' if and only if Spouse_income > 0.")
