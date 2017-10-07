@@ -68,6 +68,9 @@ medicare_levy <- function(income,
   
   income_share <- NULL
   
+  # if (AND(length(fy.year) == 1L,
+  #         AND(length(sapto.eligible) == 1L,
+  
   data.table(income = income, 
              Spouse_income = Spouse_income,
              fy_year = fy.year,
@@ -82,11 +85,8 @@ medicare_levy <- function(income,
     # (such as if the partner is in gaol) that are overlooked here.
     # 
     # Enhancement: family taxable income should exclude super lump sums.
-    .[ ,family_income := income + Spouse_income ] %>%
-    merge(medicare_tbl, 
-          by = c("fy_year", "sapto", "sato", "pto"),
-          sort = FALSE, 
-          all.x = TRUE) %>%
+    .[, family_income := income + Spouse_income ] %>%
+    medicare_tbl[., on = c("fy_year", "sapto", "sato", "pto")] %>%
     
     # Person who has spouse or dependants
     ## subs.8(5) of Act
