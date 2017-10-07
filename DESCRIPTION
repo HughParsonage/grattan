@@ -22,9 +22,11 @@ Imports:
     assertthat,
     magrittr,
     Rcpp (>= 0.12.3),
+    RcppParallel,
     zoo
 LinkingTo: 
     Rcpp,
+    RcppParallel
 RoxygenNote: 6.0.1
 Suggests: testthat, 
     taxstats,
@@ -41,3 +43,4 @@ Suggests: testthat,
 Additional_repositories: https://hughparsonage.github.io/drat/
 LazyData: true
 VignetteBuilder: knitr
+SystemRequirements: GNU make

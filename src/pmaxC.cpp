@@ -9,21 +9,67 @@
 //' @export pmaxC
 
 #include <Rcpp.h>
+#include <RcppParallel.h>
 using namespace Rcpp;
 
-// [[Rcpp::export]]
-NumericVector pmaxC(NumericVector x, double a) {
-  int n = x.length();
-  NumericVector out(n);
-  
-  for (int i = 0; i < n; ++i) {
-    double xi = x[i];
-    if (xi < a) {
-      out[i] = a;
-    } else {
-      out[i] = xi;
+struct Pmax : public RcppParallel::Worker {
+  struct Apply {
+    double mx;
+    Apply(double mx_)
+      : mx(mx_)
+    {}
+    
+    double operator()(const double x) const 
+    {
+      return x > mx ? x : mx;
     }
-  }
+  };
   
-  return out;
-}
+  const RcppParallel::RVector<double> input;
+  RcppParallel::RVector<double> output;
+  
+  Apply f; 
+  
+  Pmax(const Rcpp::NumericVector input_,
+       Rcpp::NumericVector output_,
+       double mx_) 
+    : input(input_), output(output_), f(mx_)
+  {}
+  
+  void operator()(std::size_t begin, std::size_t end)
+  {
+    std::transform(
+      input.begin() + begin,
+      input.begin() + end,
+      output.begin() + begin,
+      f
+    );
+  }
+};
+
+// [[Rcpp::export]]
+Rcpp::NumericVector pmaxC(Rcpp::NumericVector x, double a)
+{
+  Rcpp::NumericVector res = Rcpp::no_init_vector(x.size());
+  Pmax p(x, res, a);
+  RcppParallel::parallelFor(0, x.size(), p);
+  
+  return res;
+} 
+
+// NumericVector pmaxC(NumericVector x, double a) {
+//   int n = x.length();
+//   NumericVector out(n);
+//   
+//   for (int i = 0; i < n; ++i) {
+//     double xi = x[i];
+//     if (xi < a) {
+//       out[i] = a;
+//     } else {
+//       out[i] = xi;
+//     }
+//   }
+//   
+//   return out;
+// }
+
