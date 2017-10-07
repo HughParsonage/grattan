@@ -4,6 +4,7 @@ using namespace Rcpp;
 
 
 //' @title SAPTO in C++
+//' @description An implementation of SAPTO in C++.
 //' @name sapto_rcpp
 //' @param RebateIncome,MaxOffset,LowerThreshold,TaperRate,SaptoEligible,SpouseIncome,FamilyStatus As in \code{\link{sapto}}.
 //' @export

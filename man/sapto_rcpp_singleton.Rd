@@ -8,8 +8,8 @@ sapto_rcpp_singleton(rebate_income, max_offset, lower_threshold, taper_rate,
   sapto_eligible = TRUE, Spouse_income = 0, family_status = "single")
 }
 \arguments{
-\item{rebate, rebate_income, max_offset, lower_threshold, taper_rate, sapto_eligible, Spouse_income, family_status}{As in \code{sapto}.}
+\item{rebate_income, max_offset, lower_threshold, taper_rate, sapto_eligible, Spouse_income, family_status}{As in \code{sapto}.}
 }
 \description{
-SAPTO singleton
+Length-one version of \code{SAPTO} in C++.
 }

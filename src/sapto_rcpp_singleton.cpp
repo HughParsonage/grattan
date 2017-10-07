@@ -13,7 +13,8 @@ using namespace Rcpp;
 
 //' SAPTO singleton
 //' @name sapto_rcpp_singleton
-//' @param rebate,rebate_income,max_offset,lower_threshold,taper_rate,sapto_eligible,Spouse_income,family_status As in \code{sapto}.
+//' @description Length-one version of \code{SAPTO} in C++.
+//' @param rebate_income,max_offset,lower_threshold,taper_rate,sapto_eligible,Spouse_income,family_status As in \code{sapto}.
 //' @export
 // [[Rcpp::export]]
 double sapto_rcpp_singleton(double rebate_income,

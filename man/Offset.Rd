@@ -12,3 +12,6 @@
 
 \item{m}{The taper rate (the \strong{negative} slope).}
 }
+\description{
+Calculate the offset given a threshold, a maximum offset, and a taper.
+}

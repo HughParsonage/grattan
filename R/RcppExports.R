@@ -17,6 +17,7 @@ IncomeTax <- function(x, thresholds, rates) {
 
 #' @title General offset in C++
 #' @name Offset
+#' @description Calculate the offset given a threshold, a maximum offset, and a taper. 
 #' @param x A vector of incomes etc.
 #' @param y The maximum offset available; the offset when \code{x} is zero.
 #' @param a The maximum value of \code{x}.
@@ -100,6 +101,7 @@ pminV <- function(x, y) {
 }
 
 #' @title SAPTO in C++
+#' @description An implementation of SAPTO in C++.
 #' @name sapto_rcpp
 #' @param RebateIncome,MaxOffset,LowerThreshold,TaperRate,SaptoEligible,SpouseIncome,FamilyStatus As in \code{\link{sapto}}.
 #' @export
@@ -109,7 +111,8 @@ sapto_rcpp <- function(RebateIncome, MaxOffset, LowerThreshold, TaperRate, Sapto
 
 #' SAPTO singleton
 #' @name sapto_rcpp_singleton
-#' @param rebate,rebate_income,max_offset,lower_threshold,taper_rate,sapto_eligible,Spouse_income,family_status As in \code{sapto}.
+#' @description Length-one version of \code{SAPTO} in C++.
+#' @param rebate_income,max_offset,lower_threshold,taper_rate,sapto_eligible,Spouse_income,family_status As in \code{sapto}.
 #' @export
 sapto_rcpp_singleton <- function(rebate_income, max_offset, lower_threshold, taper_rate, sapto_eligible = TRUE, Spouse_income = 0, family_status = "single") {
     .Call(`_grattan_sapto_rcpp_singleton`, rebate_income, max_offset, lower_threshold, taper_rate, sapto_eligible, Spouse_income, family_status)

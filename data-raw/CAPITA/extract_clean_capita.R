@@ -1,4 +1,7 @@
-library(zoo)
+library(data.table)
+library(magrittr)
+library(tidyxl)
+library(unpivotr)
 
 clean_CAPITA_sheet <- function(input, debug = NULL) {
   sheetDT <- as.data.table(input)
@@ -130,6 +133,42 @@ capita <-
     }
   }) %>%
   rbindlist
+
+
+get_headers <- function(input) {
+  sheetDT <- as.data.table(input)
+  
+  sheetDT[row <= 7, .(row, col, character)] %>%
+    .[, is_raw_header := if_else(row == 7L, "raw", "above")] %>%
+    setorder(col, -row) %>%
+    .[, character_filled_right := zoo::na.locf(character, na.rm = FALSE), by = row] %>%
+    .[, character_filled_left := zoo::na.locf(character, na.rm = FALSE, fromLast = TRUE), by = row] %>%
+    .[, character_filled := coalesce(character_filled_right, character_filled_left)] %>%
+    .[, row_as_char := paste0("R", row)] %>%
+    dcast.data.table(col ~ row_as_char, value.var = "character_filled") %>%
+    setcolorder(rev(names(.))) %>%
+    setnames("R7", "raw_name")
+}
+
+capita_headers <- 
+  lapply(K, function(k) {
+    sheet_nom <- names(CAPITA_data)[k]
+    if (sheet_nom != "Contents") {
+      capita_tables[[k]] <- 
+        get_headers(CAPITA_data[[k]]) %>%
+        .[, "sheet_name" := sheet_nom] %>%
+        .[, "k" := k]
+    }
+  }) %>%
+  rbindlist(use.names = TRUE, fill = TRUE)
+
+
+
+
+
+
+
+
 
 
 

@@ -9,6 +9,7 @@ using namespace Rcpp;
 
 //' @title General offset in C++
 //' @name Offset
+//' @description Calculate the offset given a threshold, a maximum offset, and a taper. 
 //' @param x A vector of incomes etc.
 //' @param y The maximum offset available; the offset when \code{x} is zero.
 //' @param a The maximum value of \code{x}.
