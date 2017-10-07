@@ -150,27 +150,31 @@ rolling_income_tax <- function(income,
   
   lito. <- .lito(input)
   
-  if (!is.null(.dots.ATO) && all(c("Rptbl_Empr_spr_cont_amt",
-                                   "Net_fincl_invstmt_lss_amt",
-                                   "Net_rent_amt", 
-                                   "Rep_frng_ben_amt") %chin% names(.dots.ATO))){
-    sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income,
-                                                                   Rptbl_Empr_spr_cont_amt = .dots.ATO[["Rptbl_Empr_spr_cont_amt"]],
-                                                                   Net_fincl_invstmt_lss_amt = .dots.ATO[["Net_fincl_invstmt_lss_amt"]],
-                                                                   Net_rent_amt = .dots.ATO[["Net_rent_amt"]],
-                                                                   Rep_frng_ben_amt = .dots.ATO[["Rep_frng_ben_amt"]]), 
-                                     fy.year = fy.year,
-                                     Spouse_income = the_spouse_income,
-                                     family_status = {
-                                       FS_sapto <- rep_len("single", max.length)
-                                       FS_sapto[the_spouse_income > 0] <- "married"
-                                       FS_sapto
-                                     },
-                                     sapto.eligible = TRUE)
+  if (any(sapto.eligible)) {
+    if (!is.null(.dots.ATO) && all(c("Rptbl_Empr_spr_cont_amt",
+                                     "Net_fincl_invstmt_lss_amt",
+                                     "Net_rent_amt", 
+                                     "Rep_frng_ben_amt") %chin% names(.dots.ATO))) {
+      sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income,
+                                                                     Rptbl_Empr_spr_cont_amt = .dots.ATO[["Rptbl_Empr_spr_cont_amt"]],
+                                                                     Net_fincl_invstmt_lss_amt = .dots.ATO[["Net_fincl_invstmt_lss_amt"]],
+                                                                     Net_rent_amt = .dots.ATO[["Net_rent_amt"]],
+                                                                     Rep_frng_ben_amt = .dots.ATO[["Rep_frng_ben_amt"]]), 
+                                       fy.year = fy.year,
+                                       Spouse_income = the_spouse_income,
+                                       family_status = {
+                                         FS_sapto <- rep_len("single", max.length)
+                                         FS_sapto[the_spouse_income > 0] <- "married"
+                                         FS_sapto
+                                       },
+                                       sapto.eligible = TRUE)
+    } else {
+      sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income), 
+                                       fy.year = fy.year, 
+                                       sapto.eligible = TRUE)
+    }
   } else {
-    sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income), 
-                                     fy.year = fy.year, 
-                                     sapto.eligible = TRUE)
+    sapto. <- 0
   }
   
   # https://www.legislation.gov.au/Details/C2014A00048
