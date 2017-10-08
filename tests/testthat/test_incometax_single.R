@@ -16,6 +16,13 @@ test_that("income tax checks", {
   
   # not a data frame
   expect_error(income_tax(1, "2013-14", .dots.ATO = "foo"))
+  
+  # multiple fy.years
+  expect_error(income_tax(1:6, 
+                          fy.year = letters[1:6]))
+  
+  expect_error(income_tax(50e3, "2013-14", .dots.ATO = data.frame(x = 1:5)), 
+               regexp = "Number of rows")
 })
 
 test_that("income_tax returns known results",{
