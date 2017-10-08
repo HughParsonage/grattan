@@ -74,7 +74,7 @@ income_tax <- function(income, fy.year, age = 42, family_status = "individual", 
 # rolling_income_tax is inflexible by design: returns the tax payable in the fy.year; no scope for policy change.
 rolling_income_tax <- function(income, 
                                fy.year, 
-                               age = 42, # answer to life, more importantly < 65, and so key to SAPTO, medicare
+                               age = NULL, # answer to life, more importantly < 65, and so key to SAPTO, medicare
                                family_status = "individual",
                                n_dependants = 0L,
                                .dots.ATO = NULL){
@@ -82,7 +82,15 @@ rolling_income_tax <- function(income,
   fy_year <- NULL; marginal_rate <- NULL; lower_bracket <- NULL; tax_at <- NULL; n <- NULL; tax <- NULL; ordering <- NULL; max_lito <- NULL; min_bracket <- NULL; lito_taper <- NULL; sato <- NULL; taper <- NULL; rate <- NULL; max_offset <- NULL; upper_threshold <- NULL; taper_rate <- NULL; medicare_income <- NULL; lower_up_for_each_child <- NULL;
   
   # Assume everyone of pension age is eligible for sapto.
-  sapto.eligible <- age >= 65
+  if (is.null(.dots.ATO) || "age_range" %notin% names(.dots.ATO)) {
+    if (is.null(age)) {
+      sapto.eligible <- FALSE
+    } else {
+      sapto.eligible <- age >= 65
+    }
+  } else {
+    sapto.eligible <- .subset2(.dots.ATO, "age_range") <= 1L
+  }
   
   # Don't like vector recycling
   # http://stackoverflow.com/a/9335687/1664978
