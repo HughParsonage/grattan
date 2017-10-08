@@ -4,9 +4,10 @@
 #' @param rate1 The coefficient in Division 2, section 13(2) of the Income Tax Assessment (1936 Act) Regulation 2015
 #' (the regulations).
 #' @param benefit_threshold The amount of benefits above which the offset applies.
-#' @param rate2 The second coefficient in section 13(3) of the regulations.
 #' @param tax_threshold The \emph{threshold at the upper conclusion of the lowest marginal tax rate} in the
 #' words of the section 13(3) of the regulations.
+#' @param rate2 The second coefficient in section 13(3) of the regulations.
+
 #' @return The beneficiary tax offset. 
 #' @section WARNING:
 #' This function disagrees with the ATO online calculator. 

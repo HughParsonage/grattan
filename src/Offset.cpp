@@ -12,7 +12,7 @@ using namespace Rcpp;
 //' @description Calculate the offset given a threshold, a maximum offset, and a taper. 
 //' @param x A vector of incomes etc.
 //' @param y The maximum offset available; the offset when \code{x} is zero.
-//' @param a The maximum value of \code{x}.
+//' @param a The maximum value of \code{x} at which the maximum offset is available.
 //' @param m The taper rate (the \strong{negative} slope).
 //' @export Offset
 

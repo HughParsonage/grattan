@@ -8,7 +8,7 @@
 
 \item{y}{The maximum offset available; the offset when \code{x} is zero.}
 
-\item{a}{The maximum value of \code{x}.}
+\item{a}{The maximum value of \code{x} at which the maximum offset is available.}
 
 \item{m}{The taper rate (the \strong{negative} slope).}
 }
