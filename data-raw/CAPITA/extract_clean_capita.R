@@ -2,6 +2,7 @@ library(data.table)
 library(magrittr)
 library(tidyxl)
 library(unpivotr)
+library(hutils)
 
 clean_CAPITA_sheet <- function(input, debug = NULL) {
   sheetDT <- as.data.table(input)
