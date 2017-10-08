@@ -13,7 +13,20 @@
 #' @author Tim Cameron, Brendan Coates, Hugh Parsonage, William Young
 #' @details The function 'rolling' is inflexible by design. It is designed to guarantee the correct tax payable in a year.
 #' For years preceding the introduction of SAPTO, the maximum offset is assumed to apply to those above pensionable age. 
-#' @return the total personal income tax payable
+#' @return The total personal income tax payable.
+#' @examples 
+#' 
+#' income_tax(50e3, "2013-14")
+#' 
+#' ## Calculate tax for each lodger in the 2013-14 sample file.
+#' if (requireNamespace("taxstats", quietly = TRUE)) {
+#'   library(data.table)
+#'   library(taxstats)
+#'   
+#'   s1314 <- as.data.table(sample_file_1314)
+#'   s1314[, tax := income_tax(Taxable_Income, "2013-14", .dots.ATO = s1314)]
+#' }
+#' 
 #' @export income_tax
 
 income_tax <- function(income, fy.year, age = 42, family_status = "individual", n_dependants = 0L, .dots.ATO = NULL, return.mode = c("numeric", "integer"), allow.forecasts = FALSE){
