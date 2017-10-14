@@ -38,8 +38,9 @@ NumericVector sapto_rcpp(NumericVector RebateIncome,
     sek = SaptoEligible[k];
     sik = SpouseIncome[k];
     fsk = FamilyStatus[k];
-    
-    out[k] = sapto_rcpp_singleton(rik,mok,ltk,tpk,sek,sik,fsk);
+    if (sek) {
+      out[k] = sapto_rcpp_singleton(rik,mok,ltk,tpk,sek,sik,fsk);
+    }
   }
   return out;
 }

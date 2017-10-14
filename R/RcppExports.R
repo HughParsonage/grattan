@@ -15,6 +15,66 @@ IncomeTax <- function(x, thresholds, rates) {
     .Call(`_grattan_IncomeTax`, x, thresholds, rates)
 }
 
+#' @title Medicare levy in C++
+#' @description Medicare levy. Experimental function in C++, equivalent to \code{\link{medicare_levy}}.
+#' @name MedicareLevy
+#' @param income,SpouseIncome,SaptoEligible,isFamily,nDependants,lowerThreshold,upperThreshold,lowerFamilyThreshold,upperFamilyThreshold,lowerUpForEachChild As in \code{medicare_levy}.
+#' @param rate,taper The parameters for the specific year or hypothetical requested.
+#' @export MedicareLevy 
+NULL
+
+MedicareLevy201213Sapto <- function(income, SpouseIncome, isFamily, NDependants) {
+    .Call(`_grattan_MedicareLevy201213Sapto`, income, SpouseIncome, isFamily, NDependants)
+}
+
+MedicareLevy201213NoSapto <- function(income, SpouseIncome, isFamily, NDependants) {
+    .Call(`_grattan_MedicareLevy201213NoSapto`, income, SpouseIncome, isFamily, NDependants)
+}
+
+MedicareLevy201314Sapto <- function(income, SpouseIncome, isFamily, NDependants) {
+    .Call(`_grattan_MedicareLevy201314Sapto`, income, SpouseIncome, isFamily, NDependants)
+}
+
+MedicareLevy201314NoSapto <- function(income, SpouseIncome, isFamily, NDependants) {
+    .Call(`_grattan_MedicareLevy201314NoSapto`, income, SpouseIncome, isFamily, NDependants)
+}
+
+MedicareLevy201415Sapto <- function(income, SpouseIncome, isFamily, NDependants) {
+    .Call(`_grattan_MedicareLevy201415Sapto`, income, SpouseIncome, isFamily, NDependants)
+}
+
+MedicareLevy201415NoSapto <- function(income, SpouseIncome, isFamily, NDependants) {
+    .Call(`_grattan_MedicareLevy201415NoSapto`, income, SpouseIncome, isFamily, NDependants)
+}
+
+MedicareLevy201516Sapto <- function(income, SpouseIncome, isFamily, NDependants) {
+    .Call(`_grattan_MedicareLevy201516Sapto`, income, SpouseIncome, isFamily, NDependants)
+}
+
+MedicareLevy201516NoSapto <- function(income, SpouseIncome, isFamily, NDependants) {
+    .Call(`_grattan_MedicareLevy201516NoSapto`, income, SpouseIncome, isFamily, NDependants)
+}
+
+MedicareLevy201617Sapto <- function(income, SpouseIncome, isFamily, NDependants) {
+    .Call(`_grattan_MedicareLevy201617Sapto`, income, SpouseIncome, isFamily, NDependants)
+}
+
+MedicareLevy201617NoSapto <- function(income, SpouseIncome, isFamily, NDependants) {
+    .Call(`_grattan_MedicareLevy201617NoSapto`, income, SpouseIncome, isFamily, NDependants)
+}
+
+MedicareLevy201718Sapto <- function(income, SpouseIncome, isFamily, NDependants) {
+    .Call(`_grattan_MedicareLevy201718Sapto`, income, SpouseIncome, isFamily, NDependants)
+}
+
+MedicareLevy201718NoSapto <- function(income, SpouseIncome, isFamily, NDependants) {
+    .Call(`_grattan_MedicareLevy201718NoSapto`, income, SpouseIncome, isFamily, NDependants)
+}
+
+MedicareLevy <- function(income, lowerThreshold, upperThreshold, SpouseIncome, isFamily, NDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild, rate = 0.02, taper = 0.1) {
+    .Call(`_grattan_MedicareLevy`, income, lowerThreshold, upperThreshold, SpouseIncome, isFamily, NDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild, rate, taper)
+}
+
 #' @title General offset in C++
 #' @name Offset
 #' @description Calculate the offset given a threshold, a maximum offset, and a taper. 
@@ -116,5 +176,16 @@ sapto_rcpp <- function(RebateIncome, MaxOffset, LowerThreshold, TaperRate, Sapto
 #' @export
 sapto_rcpp_singleton <- function(rebate_income, max_offset, lower_threshold, taper_rate, sapto_eligible = TRUE, Spouse_income = 0, family_status = "single") {
     .Call(`_grattan_sapto_rcpp_singleton`, rebate_income, max_offset, lower_threshold, taper_rate, sapto_eligible, Spouse_income, family_status)
+}
+
+#' @title SAPTO for specific years in C++
+#' @name sapto_rcpp_yr
+#' @description Fast way to calculate SAPTO for multiple people when the year is known in advance. Speed is by cheating and entering in the year's parameters literally.
+#' @param RebateIncome,IsMarried,SpouseIncome As in \code{\link{sapto}}.
+#' @export sapto_rcpp_yr
+NULL
+
+sapto_rcpp_yr <- function(RebateIncome, IsMarried, SpouseIncome, yr) {
+    .Call(`_grattan_sapto_rcpp_yr`, RebateIncome, IsMarried, SpouseIncome, yr)
 }
 
