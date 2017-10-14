@@ -4,7 +4,7 @@
 \alias{income_tax}
 \title{Income tax payable}
 \usage{
-income_tax(income, fy.year, age = 42, family_status = "individual",
+income_tax(income, fy.year, age = NULL, family_status = "individual",
   n_dependants = 0L, .dots.ATO = NULL, return.mode = c("numeric",
   "integer"), allow.forecasts = FALSE)
 }

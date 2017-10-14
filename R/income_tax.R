@@ -29,7 +29,7 @@
 #' 
 #' @export income_tax
 
-income_tax <- function(income, fy.year, age = 42, family_status = "individual", n_dependants = 0L, .dots.ATO = NULL, return.mode = c("numeric", "integer"), allow.forecasts = FALSE){
+income_tax <- function(income, fy.year, age = NULL, family_status = "individual", n_dependants = 0L, .dots.ATO = NULL, return.mode = c("numeric", "integer"), allow.forecasts = FALSE){
   if (missing(fy.year)){
     stop("fy.year is missing, with no default")
   }
@@ -94,15 +94,39 @@ rolling_income_tax <- function(income,
   # CRAN NOTE avoidance
   fy_year <- NULL; marginal_rate <- NULL; lower_bracket <- NULL; tax_at <- NULL; n <- NULL; tax <- NULL; ordering <- NULL; max_lito <- NULL; min_bracket <- NULL; lito_taper <- NULL; sato <- NULL; taper <- NULL; rate <- NULL; max_offset <- NULL; upper_threshold <- NULL; taper_rate <- NULL; medicare_income <- NULL; lower_up_for_each_child <- NULL;
   
+  .dots.ATO.noms <- names(.dots.ATO)
+  
   # Assume everyone of pension age is eligible for sapto.
-  if (is.null(.dots.ATO) || "age_range" %notin% names(.dots.ATO)) {
+  if (OR(is.null(.dots.ATO),
+         AND("age_range" %notin% .dots.ATO.noms,
+             "Birth_year" %notin% .dots.ATO.noms))) {
     if (is.null(age)) {
       sapto.eligible <- FALSE
     } else {
       sapto.eligible <- age >= 65
     }
   } else {
-    sapto.eligible <- .subset2(.dots.ATO, "age_range") <= 1L
+    if ("age_range" %chin% .dots.ATO.noms) {
+      if ("Birth_year" %chin% .dots.ATO.noms) {
+        sapto.eligible <- coalesce(between(.subset2(.dots.ATO, "age_range"), 0L, 1L), 
+                                   between(.subset2(.dots.ATO, "Birth_year"), 0L, 1L),
+                                   FALSE)
+      } else {
+        sapto.eligible <- coalesce(between(.subset2(.dots.ATO, "age_range"), 0L, 1L), FALSE)  
+      }
+    } else {
+      if ("Birth_year" %chin% .dots.ATO.noms) {
+        sapto.eligible <- coalesce(between(.subset2(.dots.ATO, "Birth_year"), 0L, 1L), FALSE)
+      } else {
+        stop("`.dots.ATO` was supplied, but did not contain columns 'age_range' or 'Birth_year'. ",
+             "`dots.ATO` needs to be a sample file with the original names. Ensure `.dots.ATO` ",
+             "has either of those names.")
+      }
+    }
+  }
+  
+  if (is.null(age)) {
+    age <- 42
   }
   
   # Don't like vector recycling
@@ -172,27 +196,30 @@ rolling_income_tax <- function(income,
   lito. <- .lito(input)
   
   if (any(sapto.eligible)) {
+    sapto. <- double(max.length)
     if (!is.null(.dots.ATO) && all(c("Rptbl_Empr_spr_cont_amt",
                                      "Net_fincl_invstmt_lss_amt",
                                      "Net_rent_amt", 
                                      "Rep_frng_ben_amt") %chin% names(.dots.ATO))) {
-      sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income,
-                                                                     Rptbl_Empr_spr_cont_amt = .dots.ATO[["Rptbl_Empr_spr_cont_amt"]],
-                                                                     Net_fincl_invstmt_lss_amt = .dots.ATO[["Net_fincl_invstmt_lss_amt"]],
-                                                                     Net_rent_amt = .dots.ATO[["Net_rent_amt"]],
-                                                                     Rep_frng_ben_amt = .dots.ATO[["Rep_frng_ben_amt"]]), 
-                                       fy.year = fy.year,
-                                       Spouse_income = the_spouse_income,
-                                       family_status = {
-                                         FS_sapto <- rep_len("single", max.length)
-                                         FS_sapto[the_spouse_income > 0] <- "married"
-                                         FS_sapto
-                                       },
-                                       sapto.eligible = TRUE)
+      sapto.[sapto.eligible] <-
+        sapto(rebate_income = rebate_income(Taxable_Income = income[sapto.eligible],
+                                            Rptbl_Empr_spr_cont_amt = .dots.ATO[sapto.eligible][["Rptbl_Empr_spr_cont_amt"]],
+                                            Net_fincl_invstmt_lss_amt = .dots.ATO[sapto.eligible][["Net_fincl_invstmt_lss_amt"]],
+                                            Net_rent_amt = .dots.ATO[sapto.eligible][["Net_rent_amt"]],
+                                            Rep_frng_ben_amt = .dots.ATO[sapto.eligible][["Rep_frng_ben_amt"]]), 
+              fy.year = if (length(fy.year) > 1) fy.year[sapto.eligible] else fy.year,
+              Spouse_income = the_spouse_income[sapto.eligible],
+              family_status = {
+                FS_sapto <- rep_len("single", max.length)
+                FS_sapto[the_spouse_income > 0] <- "married"
+                FS_sapto[sapto.eligible]
+              },
+              sapto.eligible = TRUE)
     } else {
-      sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income), 
-                                       fy.year = fy.year, 
-                                       sapto.eligible = TRUE)
+      sapto.[sapto.eligible] <- 
+        sapto(rebate_income = rebate_income(Taxable_Income = income[sapto.eligible]), 
+              fy.year = if (length(fy.year) > 1) fy.year[sapto.eligible] else fy.year,
+              sapto.eligible = TRUE)
     }
   } else {
     sapto. <- 0
@@ -205,4 +232,101 @@ rolling_income_tax <- function(income,
   pmaxC(base_tax. - lito. - sapto., 
         0) + medicare_levy. + temp_budget_repair_levy.
 }
+
+income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = NULL, n_dependants = 0L) {
+  # Assume everyone of pension age is eligible for sapto.
+  .dots.ATO.noms <- names(.dots.ATO)
+  
+  if (is.null(sapto.eligible)) {
+    if (is.null(.dots.ATO) || "age_range" %notin% .dots.ATO.noms) {
+      sapto.eligible <- FALSE
+    } else {
+      sapto.eligible <- .subset2(.dots.ATO, "age_range") <= 1L
+    }
+  }
+  
+  max.length <- length(income)
+  if (is.null(.dots.ATO) || "Spouse_adjusted_taxable_inc" %notin% .dots.ATO.noms) {
+    SpouseIncome <- double(max.length)
+    isFamily <- logical(max.length)
+  } else {
+    SpouseIncome <- .subset2(.dots.ATO, "Spouse_adjusted_taxable_inc")
+    isFamily <- SpouseIncome > 0
+  }
+  
+  if (length(n_dependants) == 1L) {
+    n_dependants <- rep_len(n_dependants, max.length)
+  }
+  
+  
+  switch(fy.year,
+         "2013-14" = {
+           base_tax. <- 
+             IncomeTax(income, 
+                       thresholds = c(0, 18200, 37000, 80000, 180000),
+                       rates = c(0, 0.19, 0.325, 0.37, 0.45))
+           
+           if (any(sapto.eligible)) {
+             if (length(sapto.eligible) != 1L) {
+               medicare_levy. <- double(max.length)
+               medicare_levy.[sapto.eligible] <- 
+                 MedicareLevy201314Sapto(income[sapto.eligible],
+                                         SpouseIncome = SpouseIncome[sapto.eligible],
+                                         isFamily = isFamily[sapto.eligible],
+                                         NDependants = n_dependants[sapto.eligible])
+               
+               medicare_levy.[!sapto.eligible] <- 
+                 MedicareLevy201314NoSapto(income[!sapto.eligible],
+                                           SpouseIncome = SpouseIncome[!sapto.eligible],
+                                           isFamily = isFamily[!sapto.eligible],
+                                           NDependants = n_dependants[!sapto.eligible])
+               
+             } else {
+               medicare_levy. <-
+                 MedicareLevy201314Sapto(income, SpouseIncome = SpouseIncome, isFamily = isFamily, NDependants = n_dependants)
+             }
+             
+             if (AND(!is.null(.dots.ATO),
+                     all(c("Rptbl_Empr_spr_cont_amt",
+                           "Net_fincl_invstmt_lss_amt",
+                           "Net_rent_amt", 
+                           "Rep_frng_ben_amt") %chin% .dots.ATO.noms))) {
+               sapto. <- double(max.length)
+               sapto.[sapto.eligible] <-
+                 sapto(rebate_income = rebate_income(Taxable_Income = income[sapto.eligible],
+                                                          Rptbl_Empr_spr_cont_amt = .dots.ATO[sapto.eligible][["Rptbl_Empr_spr_cont_amt"]],
+                                                          Net_fincl_invstmt_lss_amt = .dots.ATO[sapto.eligible][["Net_fincl_invstmt_lss_amt"]],
+                                                          Net_rent_amt = .dots.ATO[sapto.eligible][["Net_rent_amt"]],
+                                                          Rep_frng_ben_amt = .dots.ATO[sapto.eligible][["Rep_frng_ben_amt"]]), 
+                            Spouse_income = SpouseIncome[sapto.eligible],
+                            family_status = {
+                              FS_sapto <- rep_len("single", max.length)
+                              FS_sapto[SpouseIncome > 0] <- "married"
+                              FS_sapto[sapto.eligible]
+                            },
+                            sapto.eligible = TRUE)
+             } else {
+               sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income), 
+                                                fy.year = fy.year, 
+                                                sapto.eligible = TRUE)
+             }
+           } else {
+             medicare_levy. <-
+               MedicareLevy201314NoSapto(income = income,
+                                         SpouseIncome = SpouseIncome,
+                                         isFamily = isFamily)
+             
+             sapto. <- 0
+           }
+           
+           lito. <- pminC(pmaxC(445 - (income - 37000) * 0.015, 0),
+                          445)
+           
+           pmaxC(base_tax. - lito. - sapto., 0) + medicare_levy.
+             
+         })
+}
+
+
+
 
