@@ -64,12 +64,12 @@ sapto <- function(rebate_income,
                                             max_offset / 2 + taper_rate * lower_threshold / 2 - taper_rate * Spouse_income), 
                                       0)] %>%
     # Transfer unutilized SAPTO:
-    .[, lito := 445] %>%
-    .[, AA := rebate_income] %>%
-    .[, BB := max_offset / 2] %>%
-    .[, CC := BB + partner_unused_sapto] %>% 
-    .[, DD := CC + lito] %>%
-    .[, EE := DD / 0.19] %>%
+    .[(is_married), lito := 445] %>%
+    .[(is_married), AA := rebate_income] %>%
+    .[(is_married), BB := max_offset / 2] %>%
+    .[(is_married), CC := BB + partner_unused_sapto] %>% 
+    .[(is_married), DD := CC + lito] %>%
+    .[(is_married), EE := DD / 0.19] %>%
     
     
     # .[, FF := EE + 18200] %>% # not used
@@ -78,9 +78,9 @@ sapto <- function(rebate_income,
     .[, GG := 18200 + DD / 0.19] %>%
     # ATO calculator suggests this was intended:
     # .[, GG := 37230] %>%
-    .[, HH := pmaxC(AA - GG, 0)] %>%
-    .[, II := HH / 8] %>%
-    .[, JJ := pmaxC(CC - II, 0)] %>% 
+    .[(is_married), HH := pmaxC(AA - GG, 0)] %>%
+    .[(is_married), II := HH / 8] %>%
+    .[(is_married), JJ := pmaxC(CC - II, 0)] %>% 
     .[(is_married),
       sapto_value := JJ] %>%
     .[is_married & rebate_income < GG,
@@ -90,4 +90,5 @@ sapto <- function(rebate_income,
     .[["sapto_value"]]
   
   sapto.eligible * coalesce(out, fill)
+
 }
