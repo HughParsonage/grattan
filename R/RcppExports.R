@@ -119,7 +119,7 @@ pminV <- function(x, y) {
 #' @title SAPTO in C++
 #' @description An implementation of SAPTO in C++.
 #' @name sapto_rcpp
-#' @param RebateIncome,MaxOffset,LowerThreshold,TaperRate,SaptoEligible,SpouseIncome,FamilyStatus As in \code{\link{sapto}}.
+#' @param RebateIncome,MaxOffset,LowerThreshold,TaperRate,SaptoEligible,SpouseIncome,IsMarried As in \code{\link{sapto}}.
 #' @export
 sapto_rcpp <- function(RebateIncome, MaxOffset, LowerThreshold, TaperRate, SaptoEligible, SpouseIncome, IsMarried) {
     .Call(`_grattan_sapto_rcpp`, RebateIncome, MaxOffset, LowerThreshold, TaperRate, SaptoEligible, SpouseIncome, IsMarried)
@@ -128,7 +128,7 @@ sapto_rcpp <- function(RebateIncome, MaxOffset, LowerThreshold, TaperRate, Sapto
 #' SAPTO singleton
 #' @name sapto_rcpp_singleton
 #' @description Length-one version of \code{SAPTO} in C++.
-#' @param rebate_income,max_offset,lower_threshold,taper_rate,sapto_eligible,Spouse_income,family_status As in \code{sapto}.
+#' @param rebate_income,max_offset,lower_threshold,taper_rate,sapto_eligible,Spouse_income,is_married As in \code{\link{sapto}}.
 #' @export
 sapto_rcpp_singleton <- function(rebate_income, max_offset, lower_threshold, taper_rate, sapto_eligible, Spouse_income, is_married) {
     .Call(`_grattan_sapto_rcpp_singleton`, rebate_income, max_offset, lower_threshold, taper_rate, sapto_eligible, Spouse_income, is_married)

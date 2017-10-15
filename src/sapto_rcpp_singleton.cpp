@@ -4,7 +4,7 @@ using namespace Rcpp;
 //' SAPTO singleton
 //' @name sapto_rcpp_singleton
 //' @description Length-one version of \code{SAPTO} in C++.
-//' @param rebate_income,max_offset,lower_threshold,taper_rate,sapto_eligible,Spouse_income,family_status As in \code{sapto}.
+//' @param rebate_income,max_offset,lower_threshold,taper_rate,sapto_eligible,Spouse_income,is_married As in \code{\link{sapto}}.
 //' @export
 // [[Rcpp::export]]
 double sapto_rcpp_singleton(double rebate_income, double max_offset, double lower_threshold, double taper_rate, bool sapto_eligible, double Spouse_income, bool is_married) {

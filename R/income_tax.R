@@ -29,10 +29,60 @@
 #' 
 #' @export income_tax
 
-income_tax <- function(income, fy.year, age = NULL, family_status = "individual", n_dependants = 0L, .dots.ATO = NULL, return.mode = c("numeric", "integer"), allow.forecasts = FALSE){
+income_tax <- function(income,
+                       fy.year,
+                       age = NULL,
+                       family_status = "individual",
+                       n_dependants = 0L,
+                       .dots.ATO = NULL,
+                       return.mode = c("numeric", "integer"),
+                       allow.forecasts = FALSE) {
   if (missing(fy.year)){
     stop("fy.year is missing, with no default")
   }
+  
+  if (!is.null(.dots.ATO)) {
+    if (!is.data.frame(.dots.ATO)) {
+      stop(".dots.ATO should be a data frame/data table")
+    } else {
+      if (nrow(.dots.ATO) != length(income)){
+        stop("Number of rows of .dots.ATO does not match length of income.")
+      }
+    }
+  }
+  
+  if (identical(fy.year, "2013-14") &&
+      is.null(age)) {
+    out <- income_tax_cpp(income, fy.year = "2013-14", .dots.ATO = .dots.ATO)
+  } else {
+    out <- rolling_income_tax(income = income,
+                              fy.year = fy.year,
+                              age = age, 
+                              family_status = family_status,
+                              n_dependants = n_dependants, 
+                              .dots.ATO = .dots.ATO,
+                              allow.forecasts = allow.forecasts)
+  }
+  return.mode <- match.arg(return.mode)
+  
+  switch(return.mode, 
+         "numeric" = {
+           return(out)
+         }, 
+         "integer" = {
+           return(as.integer(floor(out)))
+         })
+}
+
+
+# rolling_income_tax is inflexible by design: returns the tax payable in the fy.year; no scope for policy change.
+rolling_income_tax <- function(income, 
+                               fy.year, 
+                               age = NULL, # answer to life, more importantly < 65, and so key to SAPTO, medicare
+                               family_status = "individual",
+                               n_dependants = 0L,
+                               .dots.ATO = NULL,
+                               allow.forecasts = FALSE) {
   
   if (!all(fy.year %chin% c("2000-01", "2001-02", 
                             "2002-03", "2003-04", "2004-05", "2005-06", "2006-07", "2007-08", 
@@ -57,40 +107,6 @@ income_tax <- function(income, fy.year, age = NULL, family_status = "individual"
     warning("Negative entries in income detected. These will have value NA.")
   }
   
-  if (!is.null(.dots.ATO)){
-    if (!is.data.frame(.dots.ATO)){
-      stop(".dots.ATO should be a data frame/data table")
-    } else {
-      if (nrow(.dots.ATO) != length(income)){
-        stop("Number of rows of .dots.ATO does not match length of income.")
-      }
-    }
-    
-  }
-  
-  out <- rolling_income_tax(income = income, fy.year = fy.year, age = age, 
-                            family_status = family_status, n_dependants = n_dependants, 
-                            .dots.ATO = .dots.ATO)
-  
-  return.mode <- match.arg(return.mode)
-  
-  switch(return.mode, 
-         "numeric" = {
-           return(out)
-         }, 
-         "integer" = {
-           return(as.integer(floor(out)))
-         })
-}
-
-
-# rolling_income_tax is inflexible by design: returns the tax payable in the fy.year; no scope for policy change.
-rolling_income_tax <- function(income, 
-                               fy.year, 
-                               age = NULL, # answer to life, more importantly < 65, and so key to SAPTO, medicare
-                               family_status = "individual",
-                               n_dependants = 0L,
-                               .dots.ATO = NULL){
   # CRAN NOTE avoidance
   fy_year <- NULL; marginal_rate <- NULL; lower_bracket <- NULL; tax_at <- NULL; n <- NULL; tax <- NULL; ordering <- NULL; max_lito <- NULL; min_bracket <- NULL; lito_taper <- NULL; sato <- NULL; taper <- NULL; rate <- NULL; max_offset <- NULL; upper_threshold <- NULL; taper_rate <- NULL; medicare_income <- NULL; lower_up_for_each_child <- NULL;
   
@@ -331,7 +347,6 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
                            "Rep_frng_ben_amt") %chin% .dots.ATO.noms))) {
                sapto. <- double(max.length)
                .dAse <- .dots.ATO[which_sapto]
-               REBATE_INCOME <- double(max.length)
                
                sapto.[which_sapto] <-
                  sapto_rcpp_yr(RebateIncome = rebate_income(Taxable_Income = income[which_sapto],
@@ -342,17 +357,7 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
                                SpouseIncome = SpouseIncome_sapto_eligible,
                                IsMarried = SpouseIncome_sapto_eligible > 0,
                                yr = 2014L)
-               
-               REBATE_INCOME[which_sapto] <-
-                 rebate_income(Taxable_Income = income[which_sapto],
-                               Rptbl_Empr_spr_cont_amt = .dAse[["Rptbl_Empr_spr_cont_amt"]],
-                               Net_fincl_invstmt_lss_amt = .dAse[["Net_fincl_invstmt_lss_amt"]],
-                               Net_rent_amt = .dAse[["Net_rent_amt"]],
-                               Rep_frng_ben_amt = .dAse[["Rep_frng_ben_amt"]])
-               
-               assign("WHICH_SAPTO", which_sapto, envir = .GlobalEnv)
-               assign("REBATE_INCOME", REBATE_INCOME, envir = .GlobalEnv)
-               assign("SAPTO", sapto., envir = .GlobalEnv)
+
              } else {
                sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income), 
                                                 fy.year = fy.year, 

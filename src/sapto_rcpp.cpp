@@ -6,7 +6,7 @@ using namespace Rcpp;
 //' @title SAPTO in C++
 //' @description An implementation of SAPTO in C++.
 //' @name sapto_rcpp
-//' @param RebateIncome,MaxOffset,LowerThreshold,TaperRate,SaptoEligible,SpouseIncome,FamilyStatus As in \code{\link{sapto}}.
+//' @param RebateIncome,MaxOffset,LowerThreshold,TaperRate,SaptoEligible,SpouseIncome,IsMarried As in \code{\link{sapto}}.
 //' @export
 // [[Rcpp::export]]
 NumericVector sapto_rcpp(NumericVector RebateIncome,
