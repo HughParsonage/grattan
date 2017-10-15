@@ -18,171 +18,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// MedicareLevy201213Sapto
-NumericVector MedicareLevy201213Sapto(NumericVector income, NumericVector SpouseIncome, LogicalVector isFamily, IntegerVector NDependants);
-RcppExport SEXP _grattan_MedicareLevy201213Sapto(SEXP incomeSEXP, SEXP SpouseIncomeSEXP, SEXP isFamilySEXP, SEXP NDependantsSEXP) {
+// MedicareLevySaptoYear
+NumericVector MedicareLevySaptoYear(NumericVector income, NumericVector SpouseIncome, IntegerVector NDependants, bool sapto, int yr);
+RcppExport SEXP _grattan_MedicareLevySaptoYear(SEXP incomeSEXP, SEXP SpouseIncomeSEXP, SEXP NDependantsSEXP, SEXP saptoSEXP, SEXP yrSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type income(incomeSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type SpouseIncome(SpouseIncomeSEXP);
-    Rcpp::traits::input_parameter< LogicalVector >::type isFamily(isFamilySEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type NDependants(NDependantsSEXP);
-    rcpp_result_gen = Rcpp::wrap(MedicareLevy201213Sapto(income, SpouseIncome, isFamily, NDependants));
-    return rcpp_result_gen;
-END_RCPP
-}
-// MedicareLevy201213NoSapto
-NumericVector MedicareLevy201213NoSapto(NumericVector income, NumericVector SpouseIncome, LogicalVector isFamily, IntegerVector NDependants);
-RcppExport SEXP _grattan_MedicareLevy201213NoSapto(SEXP incomeSEXP, SEXP SpouseIncomeSEXP, SEXP isFamilySEXP, SEXP NDependantsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type income(incomeSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type SpouseIncome(SpouseIncomeSEXP);
-    Rcpp::traits::input_parameter< LogicalVector >::type isFamily(isFamilySEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type NDependants(NDependantsSEXP);
-    rcpp_result_gen = Rcpp::wrap(MedicareLevy201213NoSapto(income, SpouseIncome, isFamily, NDependants));
-    return rcpp_result_gen;
-END_RCPP
-}
-// MedicareLevy201314Sapto
-NumericVector MedicareLevy201314Sapto(NumericVector income, NumericVector SpouseIncome, LogicalVector isFamily, IntegerVector NDependants);
-RcppExport SEXP _grattan_MedicareLevy201314Sapto(SEXP incomeSEXP, SEXP SpouseIncomeSEXP, SEXP isFamilySEXP, SEXP NDependantsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type income(incomeSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type SpouseIncome(SpouseIncomeSEXP);
-    Rcpp::traits::input_parameter< LogicalVector >::type isFamily(isFamilySEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type NDependants(NDependantsSEXP);
-    rcpp_result_gen = Rcpp::wrap(MedicareLevy201314Sapto(income, SpouseIncome, isFamily, NDependants));
-    return rcpp_result_gen;
-END_RCPP
-}
-// MedicareLevy201314NoSapto
-NumericVector MedicareLevy201314NoSapto(NumericVector income, NumericVector SpouseIncome, LogicalVector isFamily, IntegerVector NDependants);
-RcppExport SEXP _grattan_MedicareLevy201314NoSapto(SEXP incomeSEXP, SEXP SpouseIncomeSEXP, SEXP isFamilySEXP, SEXP NDependantsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type income(incomeSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type SpouseIncome(SpouseIncomeSEXP);
-    Rcpp::traits::input_parameter< LogicalVector >::type isFamily(isFamilySEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type NDependants(NDependantsSEXP);
-    rcpp_result_gen = Rcpp::wrap(MedicareLevy201314NoSapto(income, SpouseIncome, isFamily, NDependants));
-    return rcpp_result_gen;
-END_RCPP
-}
-// MedicareLevy201415Sapto
-NumericVector MedicareLevy201415Sapto(NumericVector income, NumericVector SpouseIncome, LogicalVector isFamily, IntegerVector NDependants);
-RcppExport SEXP _grattan_MedicareLevy201415Sapto(SEXP incomeSEXP, SEXP SpouseIncomeSEXP, SEXP isFamilySEXP, SEXP NDependantsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type income(incomeSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type SpouseIncome(SpouseIncomeSEXP);
-    Rcpp::traits::input_parameter< LogicalVector >::type isFamily(isFamilySEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type NDependants(NDependantsSEXP);
-    rcpp_result_gen = Rcpp::wrap(MedicareLevy201415Sapto(income, SpouseIncome, isFamily, NDependants));
-    return rcpp_result_gen;
-END_RCPP
-}
-// MedicareLevy201415NoSapto
-NumericVector MedicareLevy201415NoSapto(NumericVector income, NumericVector SpouseIncome, LogicalVector isFamily, IntegerVector NDependants);
-RcppExport SEXP _grattan_MedicareLevy201415NoSapto(SEXP incomeSEXP, SEXP SpouseIncomeSEXP, SEXP isFamilySEXP, SEXP NDependantsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type income(incomeSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type SpouseIncome(SpouseIncomeSEXP);
-    Rcpp::traits::input_parameter< LogicalVector >::type isFamily(isFamilySEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type NDependants(NDependantsSEXP);
-    rcpp_result_gen = Rcpp::wrap(MedicareLevy201415NoSapto(income, SpouseIncome, isFamily, NDependants));
-    return rcpp_result_gen;
-END_RCPP
-}
-// MedicareLevy201516Sapto
-NumericVector MedicareLevy201516Sapto(NumericVector income, NumericVector SpouseIncome, LogicalVector isFamily, IntegerVector NDependants);
-RcppExport SEXP _grattan_MedicareLevy201516Sapto(SEXP incomeSEXP, SEXP SpouseIncomeSEXP, SEXP isFamilySEXP, SEXP NDependantsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type income(incomeSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type SpouseIncome(SpouseIncomeSEXP);
-    Rcpp::traits::input_parameter< LogicalVector >::type isFamily(isFamilySEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type NDependants(NDependantsSEXP);
-    rcpp_result_gen = Rcpp::wrap(MedicareLevy201516Sapto(income, SpouseIncome, isFamily, NDependants));
-    return rcpp_result_gen;
-END_RCPP
-}
-// MedicareLevy201516NoSapto
-NumericVector MedicareLevy201516NoSapto(NumericVector income, NumericVector SpouseIncome, LogicalVector isFamily, IntegerVector NDependants);
-RcppExport SEXP _grattan_MedicareLevy201516NoSapto(SEXP incomeSEXP, SEXP SpouseIncomeSEXP, SEXP isFamilySEXP, SEXP NDependantsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type income(incomeSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type SpouseIncome(SpouseIncomeSEXP);
-    Rcpp::traits::input_parameter< LogicalVector >::type isFamily(isFamilySEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type NDependants(NDependantsSEXP);
-    rcpp_result_gen = Rcpp::wrap(MedicareLevy201516NoSapto(income, SpouseIncome, isFamily, NDependants));
-    return rcpp_result_gen;
-END_RCPP
-}
-// MedicareLevy201617Sapto
-NumericVector MedicareLevy201617Sapto(NumericVector income, NumericVector SpouseIncome, LogicalVector isFamily, IntegerVector NDependants);
-RcppExport SEXP _grattan_MedicareLevy201617Sapto(SEXP incomeSEXP, SEXP SpouseIncomeSEXP, SEXP isFamilySEXP, SEXP NDependantsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type income(incomeSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type SpouseIncome(SpouseIncomeSEXP);
-    Rcpp::traits::input_parameter< LogicalVector >::type isFamily(isFamilySEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type NDependants(NDependantsSEXP);
-    rcpp_result_gen = Rcpp::wrap(MedicareLevy201617Sapto(income, SpouseIncome, isFamily, NDependants));
-    return rcpp_result_gen;
-END_RCPP
-}
-// MedicareLevy201617NoSapto
-NumericVector MedicareLevy201617NoSapto(NumericVector income, NumericVector SpouseIncome, LogicalVector isFamily, IntegerVector NDependants);
-RcppExport SEXP _grattan_MedicareLevy201617NoSapto(SEXP incomeSEXP, SEXP SpouseIncomeSEXP, SEXP isFamilySEXP, SEXP NDependantsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type income(incomeSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type SpouseIncome(SpouseIncomeSEXP);
-    Rcpp::traits::input_parameter< LogicalVector >::type isFamily(isFamilySEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type NDependants(NDependantsSEXP);
-    rcpp_result_gen = Rcpp::wrap(MedicareLevy201617NoSapto(income, SpouseIncome, isFamily, NDependants));
-    return rcpp_result_gen;
-END_RCPP
-}
-// MedicareLevy201718Sapto
-NumericVector MedicareLevy201718Sapto(NumericVector income, NumericVector SpouseIncome, LogicalVector isFamily, IntegerVector NDependants);
-RcppExport SEXP _grattan_MedicareLevy201718Sapto(SEXP incomeSEXP, SEXP SpouseIncomeSEXP, SEXP isFamilySEXP, SEXP NDependantsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type income(incomeSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type SpouseIncome(SpouseIncomeSEXP);
-    Rcpp::traits::input_parameter< LogicalVector >::type isFamily(isFamilySEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type NDependants(NDependantsSEXP);
-    rcpp_result_gen = Rcpp::wrap(MedicareLevy201718Sapto(income, SpouseIncome, isFamily, NDependants));
-    return rcpp_result_gen;
-END_RCPP
-}
-// MedicareLevy201718NoSapto
-NumericVector MedicareLevy201718NoSapto(NumericVector income, NumericVector SpouseIncome, LogicalVector isFamily, IntegerVector NDependants);
-RcppExport SEXP _grattan_MedicareLevy201718NoSapto(SEXP incomeSEXP, SEXP SpouseIncomeSEXP, SEXP isFamilySEXP, SEXP NDependantsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type income(incomeSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type SpouseIncome(SpouseIncomeSEXP);
-    Rcpp::traits::input_parameter< LogicalVector >::type isFamily(isFamilySEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type NDependants(NDependantsSEXP);
-    rcpp_result_gen = Rcpp::wrap(MedicareLevy201718NoSapto(income, SpouseIncome, isFamily, NDependants));
+    Rcpp::traits::input_parameter< bool >::type sapto(saptoSEXP);
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(MedicareLevySaptoYear(income, SpouseIncome, NDependants, sapto, yr));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -283,8 +130,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // sapto_rcpp
-NumericVector sapto_rcpp(NumericVector RebateIncome, NumericVector MaxOffset, NumericVector LowerThreshold, NumericVector TaperRate, LogicalVector SaptoEligible, NumericVector SpouseIncome, StringVector FamilyStatus);
-RcppExport SEXP _grattan_sapto_rcpp(SEXP RebateIncomeSEXP, SEXP MaxOffsetSEXP, SEXP LowerThresholdSEXP, SEXP TaperRateSEXP, SEXP SaptoEligibleSEXP, SEXP SpouseIncomeSEXP, SEXP FamilyStatusSEXP) {
+NumericVector sapto_rcpp(NumericVector RebateIncome, NumericVector MaxOffset, NumericVector LowerThreshold, NumericVector TaperRate, LogicalVector SaptoEligible, NumericVector SpouseIncome, LogicalVector IsMarried);
+RcppExport SEXP _grattan_sapto_rcpp(SEXP RebateIncomeSEXP, SEXP MaxOffsetSEXP, SEXP LowerThresholdSEXP, SEXP TaperRateSEXP, SEXP SaptoEligibleSEXP, SEXP SpouseIncomeSEXP, SEXP IsMarriedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -294,14 +141,14 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type TaperRate(TaperRateSEXP);
     Rcpp::traits::input_parameter< LogicalVector >::type SaptoEligible(SaptoEligibleSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type SpouseIncome(SpouseIncomeSEXP);
-    Rcpp::traits::input_parameter< StringVector >::type FamilyStatus(FamilyStatusSEXP);
-    rcpp_result_gen = Rcpp::wrap(sapto_rcpp(RebateIncome, MaxOffset, LowerThreshold, TaperRate, SaptoEligible, SpouseIncome, FamilyStatus));
+    Rcpp::traits::input_parameter< LogicalVector >::type IsMarried(IsMarriedSEXP);
+    rcpp_result_gen = Rcpp::wrap(sapto_rcpp(RebateIncome, MaxOffset, LowerThreshold, TaperRate, SaptoEligible, SpouseIncome, IsMarried));
     return rcpp_result_gen;
 END_RCPP
 }
 // sapto_rcpp_singleton
-double sapto_rcpp_singleton(double rebate_income, double max_offset, double lower_threshold, double taper_rate, bool sapto_eligible, double Spouse_income, std::string family_status);
-RcppExport SEXP _grattan_sapto_rcpp_singleton(SEXP rebate_incomeSEXP, SEXP max_offsetSEXP, SEXP lower_thresholdSEXP, SEXP taper_rateSEXP, SEXP sapto_eligibleSEXP, SEXP Spouse_incomeSEXP, SEXP family_statusSEXP) {
+double sapto_rcpp_singleton(double rebate_income, double max_offset, double lower_threshold, double taper_rate, bool sapto_eligible, double Spouse_income, bool is_married);
+RcppExport SEXP _grattan_sapto_rcpp_singleton(SEXP rebate_incomeSEXP, SEXP max_offsetSEXP, SEXP lower_thresholdSEXP, SEXP taper_rateSEXP, SEXP sapto_eligibleSEXP, SEXP Spouse_incomeSEXP, SEXP is_marriedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -311,22 +158,36 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type taper_rate(taper_rateSEXP);
     Rcpp::traits::input_parameter< bool >::type sapto_eligible(sapto_eligibleSEXP);
     Rcpp::traits::input_parameter< double >::type Spouse_income(Spouse_incomeSEXP);
-    Rcpp::traits::input_parameter< std::string >::type family_status(family_statusSEXP);
-    rcpp_result_gen = Rcpp::wrap(sapto_rcpp_singleton(rebate_income, max_offset, lower_threshold, taper_rate, sapto_eligible, Spouse_income, family_status));
+    Rcpp::traits::input_parameter< bool >::type is_married(is_marriedSEXP);
+    rcpp_result_gen = Rcpp::wrap(sapto_rcpp_singleton(rebate_income, max_offset, lower_threshold, taper_rate, sapto_eligible, Spouse_income, is_married));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sapto_rcpp_yr_singleton
+double sapto_rcpp_yr_singleton(double rebateIncome, bool isMarried, double spouseIncome, int yr);
+RcppExport SEXP _grattan_sapto_rcpp_yr_singleton(SEXP rebateIncomeSEXP, SEXP isMarriedSEXP, SEXP spouseIncomeSEXP, SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type rebateIncome(rebateIncomeSEXP);
+    Rcpp::traits::input_parameter< bool >::type isMarried(isMarriedSEXP);
+    Rcpp::traits::input_parameter< double >::type spouseIncome(spouseIncomeSEXP);
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(sapto_rcpp_yr_singleton(rebateIncome, isMarried, spouseIncome, yr));
     return rcpp_result_gen;
 END_RCPP
 }
 // sapto_rcpp_yr
-NumericVector sapto_rcpp_yr(NumericVector RebateIncome, LogicalVector IsMarried, NumericVector SpouseIncome, int yr);
-RcppExport SEXP _grattan_sapto_rcpp_yr(SEXP RebateIncomeSEXP, SEXP IsMarriedSEXP, SEXP SpouseIncomeSEXP, SEXP yrSEXP) {
+NumericVector sapto_rcpp_yr(NumericVector RebateIncome, NumericVector SpouseIncome, LogicalVector IsMarried, int yr);
+RcppExport SEXP _grattan_sapto_rcpp_yr(SEXP RebateIncomeSEXP, SEXP SpouseIncomeSEXP, SEXP IsMarriedSEXP, SEXP yrSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type RebateIncome(RebateIncomeSEXP);
-    Rcpp::traits::input_parameter< LogicalVector >::type IsMarried(IsMarriedSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type SpouseIncome(SpouseIncomeSEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type IsMarried(IsMarriedSEXP);
     Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
-    rcpp_result_gen = Rcpp::wrap(sapto_rcpp_yr(RebateIncome, IsMarried, SpouseIncome, yr));
+    rcpp_result_gen = Rcpp::wrap(sapto_rcpp_yr(RebateIncome, SpouseIncome, IsMarried, yr));
     return rcpp_result_gen;
 END_RCPP
 }

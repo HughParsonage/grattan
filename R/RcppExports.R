@@ -23,52 +23,8 @@ IncomeTax <- function(x, thresholds, rates) {
 #' @export MedicareLevy 
 NULL
 
-MedicareLevy201213Sapto <- function(income, SpouseIncome, isFamily, NDependants) {
-    .Call(`_grattan_MedicareLevy201213Sapto`, income, SpouseIncome, isFamily, NDependants)
-}
-
-MedicareLevy201213NoSapto <- function(income, SpouseIncome, isFamily, NDependants) {
-    .Call(`_grattan_MedicareLevy201213NoSapto`, income, SpouseIncome, isFamily, NDependants)
-}
-
-MedicareLevy201314Sapto <- function(income, SpouseIncome, isFamily, NDependants) {
-    .Call(`_grattan_MedicareLevy201314Sapto`, income, SpouseIncome, isFamily, NDependants)
-}
-
-MedicareLevy201314NoSapto <- function(income, SpouseIncome, isFamily, NDependants) {
-    .Call(`_grattan_MedicareLevy201314NoSapto`, income, SpouseIncome, isFamily, NDependants)
-}
-
-MedicareLevy201415Sapto <- function(income, SpouseIncome, isFamily, NDependants) {
-    .Call(`_grattan_MedicareLevy201415Sapto`, income, SpouseIncome, isFamily, NDependants)
-}
-
-MedicareLevy201415NoSapto <- function(income, SpouseIncome, isFamily, NDependants) {
-    .Call(`_grattan_MedicareLevy201415NoSapto`, income, SpouseIncome, isFamily, NDependants)
-}
-
-MedicareLevy201516Sapto <- function(income, SpouseIncome, isFamily, NDependants) {
-    .Call(`_grattan_MedicareLevy201516Sapto`, income, SpouseIncome, isFamily, NDependants)
-}
-
-MedicareLevy201516NoSapto <- function(income, SpouseIncome, isFamily, NDependants) {
-    .Call(`_grattan_MedicareLevy201516NoSapto`, income, SpouseIncome, isFamily, NDependants)
-}
-
-MedicareLevy201617Sapto <- function(income, SpouseIncome, isFamily, NDependants) {
-    .Call(`_grattan_MedicareLevy201617Sapto`, income, SpouseIncome, isFamily, NDependants)
-}
-
-MedicareLevy201617NoSapto <- function(income, SpouseIncome, isFamily, NDependants) {
-    .Call(`_grattan_MedicareLevy201617NoSapto`, income, SpouseIncome, isFamily, NDependants)
-}
-
-MedicareLevy201718Sapto <- function(income, SpouseIncome, isFamily, NDependants) {
-    .Call(`_grattan_MedicareLevy201718Sapto`, income, SpouseIncome, isFamily, NDependants)
-}
-
-MedicareLevy201718NoSapto <- function(income, SpouseIncome, isFamily, NDependants) {
-    .Call(`_grattan_MedicareLevy201718NoSapto`, income, SpouseIncome, isFamily, NDependants)
+MedicareLevySaptoYear <- function(income, SpouseIncome, NDependants, sapto, yr) {
+    .Call(`_grattan_MedicareLevySaptoYear`, income, SpouseIncome, NDependants, sapto, yr)
 }
 
 MedicareLevy <- function(income, lowerThreshold, upperThreshold, SpouseIncome, isFamily, NDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild, rate = 0.02, taper = 0.1) {
@@ -165,8 +121,8 @@ pminV <- function(x, y) {
 #' @name sapto_rcpp
 #' @param RebateIncome,MaxOffset,LowerThreshold,TaperRate,SaptoEligible,SpouseIncome,FamilyStatus As in \code{\link{sapto}}.
 #' @export
-sapto_rcpp <- function(RebateIncome, MaxOffset, LowerThreshold, TaperRate, SaptoEligible, SpouseIncome, FamilyStatus) {
-    .Call(`_grattan_sapto_rcpp`, RebateIncome, MaxOffset, LowerThreshold, TaperRate, SaptoEligible, SpouseIncome, FamilyStatus)
+sapto_rcpp <- function(RebateIncome, MaxOffset, LowerThreshold, TaperRate, SaptoEligible, SpouseIncome, IsMarried) {
+    .Call(`_grattan_sapto_rcpp`, RebateIncome, MaxOffset, LowerThreshold, TaperRate, SaptoEligible, SpouseIncome, IsMarried)
 }
 
 #' SAPTO singleton
@@ -174,8 +130,8 @@ sapto_rcpp <- function(RebateIncome, MaxOffset, LowerThreshold, TaperRate, Sapto
 #' @description Length-one version of \code{SAPTO} in C++.
 #' @param rebate_income,max_offset,lower_threshold,taper_rate,sapto_eligible,Spouse_income,family_status As in \code{sapto}.
 #' @export
-sapto_rcpp_singleton <- function(rebate_income, max_offset, lower_threshold, taper_rate, sapto_eligible = TRUE, Spouse_income = 0, family_status = "single") {
-    .Call(`_grattan_sapto_rcpp_singleton`, rebate_income, max_offset, lower_threshold, taper_rate, sapto_eligible, Spouse_income, family_status)
+sapto_rcpp_singleton <- function(rebate_income, max_offset, lower_threshold, taper_rate, sapto_eligible, Spouse_income, is_married) {
+    .Call(`_grattan_sapto_rcpp_singleton`, rebate_income, max_offset, lower_threshold, taper_rate, sapto_eligible, Spouse_income, is_married)
 }
 
 #' @title SAPTO for specific years in C++
@@ -185,7 +141,11 @@ sapto_rcpp_singleton <- function(rebate_income, max_offset, lower_threshold, tap
 #' @export sapto_rcpp_yr
 NULL
 
-sapto_rcpp_yr <- function(RebateIncome, IsMarried, SpouseIncome, yr) {
-    .Call(`_grattan_sapto_rcpp_yr`, RebateIncome, IsMarried, SpouseIncome, yr)
+sapto_rcpp_yr_singleton <- function(rebateIncome, isMarried, spouseIncome, yr) {
+    .Call(`_grattan_sapto_rcpp_yr_singleton`, rebateIncome, isMarried, spouseIncome, yr)
+}
+
+sapto_rcpp_yr <- function(RebateIncome, SpouseIncome, IsMarried, yr) {
+    .Call(`_grattan_sapto_rcpp_yr`, RebateIncome, SpouseIncome, IsMarried, yr)
 }
 

@@ -15,7 +15,7 @@ NumericVector sapto_rcpp(NumericVector RebateIncome,
                          NumericVector TaperRate,
                          LogicalVector SaptoEligible,
                          NumericVector SpouseIncome,
-                         StringVector FamilyStatus) {
+                         LogicalVector IsMarried) {
   
   
   
@@ -28,7 +28,7 @@ NumericVector sapto_rcpp(NumericVector RebateIncome,
   double tpk = 0;
   bool sek = false;
   double sik = 0;
-  std::string fsk = "";
+  bool imk = false;
   
   for (int k = 0; k < n; ++k) {
     rik = RebateIncome[k];
@@ -37,9 +37,9 @@ NumericVector sapto_rcpp(NumericVector RebateIncome,
     tpk = TaperRate[k];
     sek = SaptoEligible[k];
     sik = SpouseIncome[k];
-    fsk = FamilyStatus[k];
+    imk = IsMarried[k];
     if (sek) {
-      out[k] = sapto_rcpp_singleton(rik,mok,ltk,tpk,sek,sik,fsk);
+      out[k] = sapto_rcpp_singleton(rik,mok,ltk,tpk,sek,sik,imk);
     }
   }
   return out;

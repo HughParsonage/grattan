@@ -18,7 +18,7 @@ sapto <- function(rebate_income,
                   Spouse_income = 0,
                   family_status = "single", 
                   .check = TRUE) {
-  upper_threshold <- taper_rate <- max_offset <- NULL
+  taper_rate <- max_offset <- lower_threshold <- NULL
   is_married <- Spouse_income > 0
   input <- data.table(fy_year = fy.year, 
                       family_status = family_status, 
@@ -48,34 +48,34 @@ sapto <- function(rebate_income,
     }
   }
   
-  partner_sapto <- sapto_value <- 
+  sapto_value <- 
     sapto_income <- partner_unused_sapto <-
-    AA <- BB <- CC <- DD <- EE <- FF <-
-    GG <- HH <- II <- JJ <- NULL
+    AA <- BB <- CC <- DD <- 
+    GG <- HH <- II <- JJ <- . <- NULL
   
   out <- 
     sapto_tbl[input, on = c("fy_year", "family_status")] %>%
-    .[, sapto_income := rebate_income + is_married * Spouse_income] %>%
+    .[, sapto_income := rebate_income + Spouse_income] %>%
     .[, sapto_value := pmaxC(pminV(max_offset, 
                                    max_offset + lower_threshold * taper_rate - sapto_income * taper_rate),
                              0)] %>%
     # https://www.ato.gov.au/individuals/income-and-deductions/in-detail/transferring-the-seniors-and-pensioners-tax-offset/
-    .[, partner_unused_sapto := pmaxC(pminV(max_offset / 2,
-                                            max_offset / 2 + taper_rate * lower_threshold / 2 - taper_rate * Spouse_income), 
-                                      0)] %>%
+    .[(is_married), partner_unused_sapto := pmaxC(pminV(max_offset / 2,
+                                                        max_offset / 2 + taper_rate * lower_threshold / 2 - taper_rate * Spouse_income), 
+                                                  0)] %>%
     # Transfer unutilized SAPTO:
     .[(is_married), lito := 445] %>%
     .[(is_married), AA := rebate_income] %>%
     .[(is_married), BB := max_offset / 2] %>%
     .[(is_married), CC := BB + partner_unused_sapto] %>% 
     .[(is_married), DD := CC + lito] %>%
-    .[(is_married), EE := DD / 0.19] %>%
+    # .[(is_married), EE := DD / 0.19] %>%
     
     
     # .[, FF := EE + 18200] %>% # not used
     
     # https://www.ato.gov.au/law/view/document?DocID=TXR/TR9331/NAT/ATO/00001&PiT=99991231235958
-    .[, GG := 18200 + DD / 0.19] %>%
+    .[(is_married), GG := 18200 + DD / 0.19] %>%
     # ATO calculator suggests this was intended:
     # .[, GG := 37230] %>%
     .[(is_married), HH := pmaxC(AA - GG, 0)] %>%

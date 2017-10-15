@@ -17,17 +17,9 @@ extern SEXP _grattan_pminV(SEXP, SEXP);
 extern SEXP _grattan_sapto_rcpp(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP _grattan_sapto_rcpp_yr(SEXP, SEXP, SEXP, SEXP);
 extern SEXP _grattan_sapto_rcpp_singleton(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP _grattan_sapto_rcpp_yr_singleton(SEXP, SEXP, SEXP, SEXP);
 extern SEXP _grattan_MedicareLevy(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP _grattan_MedicareLevy201314Sapto(SEXP, SEXP, SEXP, SEXP);
-extern SEXP _grattan_MedicareLevy201314NoSapto(SEXP, SEXP, SEXP, SEXP);
-extern SEXP _grattan_MedicareLevy201213Sapto(SEXP, SEXP, SEXP, SEXP);
-extern SEXP _grattan_MedicareLevy201213NoSapto(SEXP, SEXP, SEXP, SEXP);
-extern SEXP _grattan_MedicareLevy201415Sapto(SEXP, SEXP, SEXP, SEXP);
-extern SEXP _grattan_MedicareLevy201415NoSapto(SEXP, SEXP, SEXP, SEXP);
-extern SEXP _grattan_MedicareLevy201617Sapto(SEXP, SEXP, SEXP, SEXP);
-extern SEXP _grattan_MedicareLevy201617NoSapto(SEXP, SEXP, SEXP, SEXP);
-extern SEXP _grattan_MedicareLevy201718Sapto(SEXP, SEXP, SEXP, SEXP);
-extern SEXP _grattan_MedicareLevy201718NoSapto(SEXP, SEXP, SEXP, SEXP);
+extern SEXP _grattan_MedicareLevySaptoYear(SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP _grattan_Offset(SEXP, SEXP, SEXP, SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
@@ -39,19 +31,9 @@ static const R_CallMethodDef CallEntries[] = {
   {"_grattan_pminV", (DL_FUNC) &_grattan_pminV, 2},
   {"_grattan_sapto_rcpp", (DL_FUNC) &_grattan_sapto_rcpp, 7},
   {"_grattan_sapto_rcpp_singleton", (DL_FUNC) &_grattan_sapto_rcpp_singleton, 7},
+  {"_grattan_sapto_rcpp_yr_singleton", (DL_FUNC) &_grattan_sapto_rcpp_yr_singleton, 4},
   {"_grattan_MedicareLevy", (DL_FUNC) &_grattan_MedicareLevy, 11},
-  {"_grattan_MedicareLevy201213Sapto", (DL_FUNC) &_grattan_MedicareLevy201314NoSapto, 4},
-  {"_grattan_MedicareLevy201213NoSapto", (DL_FUNC) &_grattan_MedicareLevy201314NoSapto, 4},
-  {"_grattan_MedicareLevy201314Sapto", (DL_FUNC) &_grattan_MedicareLevy201314NoSapto, 4},
-  {"_grattan_MedicareLevy201314NoSapto", (DL_FUNC) &_grattan_MedicareLevy201314NoSapto, 4},
-  {"_grattan_MedicareLevy201415Sapto", (DL_FUNC) &_grattan_MedicareLevy201314NoSapto, 4},
-  {"_grattan_MedicareLevy201415NoSapto", (DL_FUNC) &_grattan_MedicareLevy201314NoSapto, 4},
-  {"_grattan_MedicareLevy201516Sapto", (DL_FUNC) &_grattan_MedicareLevy201314NoSapto, 4},
-  {"_grattan_MedicareLevy201516NoSapto", (DL_FUNC) &_grattan_MedicareLevy201314NoSapto, 4},
-  {"_grattan_MedicareLevy201617Sapto", (DL_FUNC) &_grattan_MedicareLevy201314NoSapto, 4},
-  {"_grattan_MedicareLevy201617NoSapto", (DL_FUNC) &_grattan_MedicareLevy201314NoSapto, 4},
-  {"_grattan_MedicareLevy201718Sapto", (DL_FUNC) &_grattan_MedicareLevy201314NoSapto, 4},
-  {"_grattan_MedicareLevy201718NoSapto", (DL_FUNC) &_grattan_MedicareLevy201314NoSapto, 4},
+  {"_grattan_MedicareLevySaptoYear", (DL_FUNC) &_grattan_MedicareLevySaptoYear, 5},
   {"_grattan_sapto_rcpp_yr", (DL_FUNC) &_grattan_sapto_rcpp_yr, 4},
   {"_grattan_Offset", (DL_FUNC) &_grattan_Offset, 4},
   {NULL, NULL, 0}

@@ -5,7 +5,7 @@
 \title{SAPTO singleton}
 \usage{
 sapto_rcpp_singleton(rebate_income, max_offset, lower_threshold, taper_rate,
-  sapto_eligible = TRUE, Spouse_income = 0, family_status = "single")
+  sapto_eligible, Spouse_income, is_married)
 }
 \arguments{
 \item{rebate_income, max_offset, lower_threshold, taper_rate, sapto_eligible, Spouse_income, family_status}{As in \code{sapto}.}

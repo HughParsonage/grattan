@@ -5,7 +5,7 @@
 \title{SAPTO in C++}
 \usage{
 sapto_rcpp(RebateIncome, MaxOffset, LowerThreshold, TaperRate, SaptoEligible,
-  SpouseIncome, FamilyStatus)
+  SpouseIncome, IsMarried)
 }
 \arguments{
 \item{RebateIncome, MaxOffset, LowerThreshold, TaperRate, SaptoEligible, SpouseIncome, FamilyStatus}{As in \code{\link{sapto}}.}
