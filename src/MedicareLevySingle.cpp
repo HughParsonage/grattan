@@ -1,6 +1,7 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+// [[Rcpp::export]]
 double MedicareLevySingle(double income, double lowerThreshold, double upperThreshold, double rate = 0.02, double taper = 0.2, double SpouseIncome = 0, bool isFamily = false, int nDependants = 0, double lowerFamilyThreshold = 46000, double upperFamilyThreshold = 54119, double lowerUpForEachChild = 3306) {
   double familyIncome = income;
   familyIncome += SpouseIncome;
@@ -67,8 +68,8 @@ NumericVector MedicareLevySaptoYear(NumericVector income,
       // mismatch is found.
       double ii = income[i];
       double sii = SpouseIncome[i];
-      bool ifi = sii > 0;
       int ndi = NDependants[i];
+      bool ifi = sii > 0 || ndi > 0;
       switch (yr) {
       case 2013:
         out[i] = MedicareLevySingle(ii, 32279, 37976, 0.015, 0.1, sii, ifi, ndi, 46000, 54119, 3094);
@@ -96,8 +97,8 @@ NumericVector MedicareLevySaptoYear(NumericVector income,
     for (int i = 0; i < n; ++i) {
       double ii = income[i];
       double sii = SpouseIncome[i];
-      bool ifi = sii > 0;
       int ndi = NDependants[i];
+      bool ifi = sii > 0 || ndi > 0;
       switch (yr) {
       case 2013:
         out[i] = MedicareLevySingle(ii, 20542, 24168, 0.015, 0.1, sii, ifi, ndi, 33693, 39640, 3094);

@@ -23,6 +23,10 @@ IncomeTax <- function(x, thresholds, rates) {
 #' @export MedicareLevy 
 NULL
 
+MedicareLevySingle <- function(income, lowerThreshold, upperThreshold, rate = 0.02, taper = 0.2, SpouseIncome = 0, isFamily = FALSE, nDependants = 0L, lowerFamilyThreshold = 46000, upperFamilyThreshold = 54119, lowerUpForEachChild = 3306) {
+    .Call(`_grattan_MedicareLevySingle`, income, lowerThreshold, upperThreshold, rate, taper, SpouseIncome, isFamily, nDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild)
+}
+
 MedicareLevySaptoYear <- function(income, SpouseIncome, NDependants, sapto, yr) {
     .Call(`_grattan_MedicareLevySaptoYear`, income, SpouseIncome, NDependants, sapto, yr)
 }

@@ -18,6 +18,27 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// MedicareLevySingle
+double MedicareLevySingle(double income, double lowerThreshold, double upperThreshold, double rate, double taper, double SpouseIncome, bool isFamily, int nDependants, double lowerFamilyThreshold, double upperFamilyThreshold, double lowerUpForEachChild);
+RcppExport SEXP _grattan_MedicareLevySingle(SEXP incomeSEXP, SEXP lowerThresholdSEXP, SEXP upperThresholdSEXP, SEXP rateSEXP, SEXP taperSEXP, SEXP SpouseIncomeSEXP, SEXP isFamilySEXP, SEXP nDependantsSEXP, SEXP lowerFamilyThresholdSEXP, SEXP upperFamilyThresholdSEXP, SEXP lowerUpForEachChildSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type income(incomeSEXP);
+    Rcpp::traits::input_parameter< double >::type lowerThreshold(lowerThresholdSEXP);
+    Rcpp::traits::input_parameter< double >::type upperThreshold(upperThresholdSEXP);
+    Rcpp::traits::input_parameter< double >::type rate(rateSEXP);
+    Rcpp::traits::input_parameter< double >::type taper(taperSEXP);
+    Rcpp::traits::input_parameter< double >::type SpouseIncome(SpouseIncomeSEXP);
+    Rcpp::traits::input_parameter< bool >::type isFamily(isFamilySEXP);
+    Rcpp::traits::input_parameter< int >::type nDependants(nDependantsSEXP);
+    Rcpp::traits::input_parameter< double >::type lowerFamilyThreshold(lowerFamilyThresholdSEXP);
+    Rcpp::traits::input_parameter< double >::type upperFamilyThreshold(upperFamilyThresholdSEXP);
+    Rcpp::traits::input_parameter< double >::type lowerUpForEachChild(lowerUpForEachChildSEXP);
+    rcpp_result_gen = Rcpp::wrap(MedicareLevySingle(income, lowerThreshold, upperThreshold, rate, taper, SpouseIncome, isFamily, nDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild));
+    return rcpp_result_gen;
+END_RCPP
+}
 // MedicareLevySaptoYear
 NumericVector MedicareLevySaptoYear(NumericVector income, NumericVector SpouseIncome, IntegerVector NDependants, bool sapto, int yr);
 RcppExport SEXP _grattan_MedicareLevySaptoYear(SEXP incomeSEXP, SEXP SpouseIncomeSEXP, SEXP NDependantsSEXP, SEXP saptoSEXP, SEXP yrSEXP) {

@@ -53,7 +53,10 @@ income_tax <- function(income,
   
   if (identical(fy.year, "2013-14") &&
       is.null(age)) {
-    out <- income_tax_cpp(income, fy.year = "2013-14", .dots.ATO = .dots.ATO)
+    out <- income_tax_cpp(income,
+                          fy.year = "2013-14",
+                          .dots.ATO = .dots.ATO,
+                          n_dependants = n_dependants)
   } else {
     out <- rolling_income_tax(income = income,
                               fy.year = fy.year,
@@ -280,7 +283,7 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
         } else {
           stop("`.dots.ATO` was supplied, but did not contain columns 'age_range' or 'Birth_year'. ",
                "`dots.ATO` needs to be a sample file with the original names. Ensure `.dots.ATO` ",
-               "has either of those names.")
+               "has either 'age_range' or 'Birth_year' among its columns.")
         }
       }
     }
@@ -295,7 +298,7 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
     isFamily <- SpouseIncome > 0
   }
   
-  if (length(n_dependants) == 1L) {
+  if (max.length > 1 && length(n_dependants) == 1L) {
     n_dependants <- rep_len(n_dependants, max.length)
   }
   
@@ -365,11 +368,11 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
              }
            } else {
              medicare_levy. <-
-               MedicareLevy201314NoSapto(income = income,
-                                         SpouseIncome = SpouseIncome,
-                                         isFamily = isFamily,
-                                         NDependants = n_dependants)
-             
+               MedicareLevySaptoYear(income = income,
+                                     SpouseIncome = SpouseIncome,
+                                     NDependants = n_dependants,
+                                     FALSE,
+                                     2014L)
              sapto. <- 0
            }
            
