@@ -91,6 +91,10 @@ rolling_income_tax <- function(income,
                             "2002-03", "2003-04", "2004-05", "2005-06", "2006-07", "2007-08", 
                             "2008-09", "2009-10", "2010-11", "2011-12", "2012-13", "2013-14", 
                             "2014-15", "2015-16", "2016-17", "2017-18", "2018-19", "2019-20"))) {
+    if (allow.forecasts || any(fy.year %notin% tax_tbl[["fy_year"]])){
+      stop("rolling income tax not intended for future years or years before 2003-04. ",
+           "Consider new_income_tax().")
+    }
     bad <- which(!is.fy(fy.year))
     if (length(bad) > 5){
       stop("Entries ", bad[1:5], " (and others)", 
@@ -99,11 +103,6 @@ rolling_income_tax <- function(income,
       stop("Entries ", bad, 
            " were not in correct form.", "\n", "First bad entry: ", fy.year[bad[1]])
     }
-  }
-  
-  if (allow.forecasts || any(fy.year %notin% tax_tbl[["fy_year"]])){
-    stop("rolling income tax not intended for future years or years before 2003-04. ",
-         "Consider new_income_tax().")
   }
   
   if (any(income < 0)){
