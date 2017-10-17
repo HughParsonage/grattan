@@ -14,13 +14,21 @@
 #' (2) a \code{data.table} with two variables, \code{fy_year} and \code{r}. If (2), 
 #' the variable \code{fy_year} must be a vector of all financial years after the last financial year in the (known) wage series and the latest \code{to_fy} \strong{inclusive}.
 #' The variable \code{r} consists of rates of wage growth assumed in each \code{fy_year}.
+#' 
+#' 
+#' 
+#' 
 #' @return The wage inflation between the two years.
 #' @export
 
-wage_inflator <- function(wage = 1, from_fy, to_fy, useABSConnection = FALSE, allow.projection = TRUE, 
+wage_inflator <- function(wage = 1, 
+                          from_fy, 
+                          to_fy, 
+                          useABSConnection = FALSE,
+                          allow.projection = TRUE, 
                           forecast.series = c("mean", "upper", "lower", "custom"), 
                           forecast.level = 95, 
-                          wage.series = NULL){
+                          wage.series = NULL) {
   
   # CRAN
   obsTime <- obsValue <- to_index <- from_index <- NULL

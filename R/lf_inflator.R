@@ -21,6 +21,14 @@
 #' @details \code{lf_inflator} is used on dates. The underlying data series is available every month. 
 #' @examples
 #' lf_inflator_fy(labour_force = 1, from_fy = "2012-13", to_fy = "2013-14")
+#' 
+#' library(data.table)
+#' # Custom 1% growth over 2017-18 -> 2018.19
+#' lf_inflator_fy(from_fy = "2017-18",
+#'                to_fy = "2018-19",
+#'                forecast.series = "custom", 
+#'                lf.series = data.table(fy_year = c("2017-18", "2018-19"),
+#'                                       r = c(0, 0.01)))
 #' @return The relative labour force between \code{to_date} and \code{for_date} or \code{to_fy} and \code{from_fy}, multiplied by \code{labour_force}.
 #' @export lf_inflator lf_inflator_fy
 
@@ -38,6 +46,9 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
       "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978"
     lf <- rsdmx::readSDMX(lf.url.trend)
     lf.indices <- as.data.table(as.data.frame(lf))
+    if (nrow(lf.indices) == 0) {
+      stop("Unable to establish SDMX connection to stat.data.abs.gov.au")
+    }
   } else {
     lf.indices <- lf_trend
   }
@@ -63,11 +74,14 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
   
   # Use forecast::forecast to inflate forward
   forecast.series <- match.arg(forecast.series)
-  if (allow.projection && any(to_fy > last_full_fy_in_series) && forecast.series != "custom"){
+  if (AND(allow.projection,
+          AND(any(to_fy > last_full_fy_in_series),
+              forecast.series != "custom"))) {
     # Labour force is monthly
     to_date <- fy2date(max(to_fy))
     months.ahead <- 
-      12L * (year(to_date) - year(last.date.in.series)) + month(to_date) - month(last.date.in.series)
+      12L * (year(to_date) - year(last.date.in.series)) +
+      month(to_date) - month(last.date.in.series)
     
     switch(forecast.series, 
            "mean" = {
@@ -98,7 +112,9 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     obsDate <- NULL
     lf.indices.new <- 
       data.table(obsValue = forecasts, 
-                 obsDate  = seq.Date(last.date.in.series, to_date, by = "month")[-1]) %>%
+                 obsDate  = seq.Date(last.date.in.series,
+                                     to_date,
+                                     by = "month")[-1]) %>%
       .[, obsTime := sprintf("%s-%02d", year(obsDate), month(obsDate))]
 
     lf.indices <- rbindlist(list(lf.indices, 
@@ -114,7 +130,9 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     .[month(obsDate) == use.month] %>%
     .[, fy_year := date2fy(obsDate)]
   
-  if (allow.projection && any(to_fy > last_full_fy_in_series) && forecast.series == "custom"){
+  if (AND(allow.projection,
+          AND(any(to_fy > last_full_fy_in_series),
+              forecast.series == "custom"))) {
     if (!is.data.table(lf.series)){
       if (length(lf.series) == 1L){
         years_required <- seq.int(from = last_full_yr_in_series + 1, 
@@ -134,13 +152,15 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
       first_fy_in_lf_series <- min(lf.series[["fy_year"]])
       
       if (first_fy_in_lf_series != yr2fy(last_full_yr_in_series + 1)){
-        stop("The first fy in the custom series must be equal to ", yr2fy(last_full_yr_in_series + 1))
+        stop("The first fy in the custom series must be equal to ",
+             yr2fy(last_full_yr_in_series + 1))
       }
       
       # Determine whether the dates are a regular sequence (no gaps)
       input_series_fys <- lf.series[["fy_year"]]
-      expected_fy_sequence <- yr2fy(seq.int(from = last_full_yr_in_series + 1, 
-                                            to = last_full_yr_in_series + nrow(lf.series)))
+      expected_fy_sequence <-
+        yr2fy(seq.int(from = last_full_yr_in_series + 1, 
+                      to = last_full_yr_in_series + nrow(lf.series)))
       
       if (!identical(input_series_fys, expected_fy_sequence)){
         stop("lf.series$fy_year should be ", dput(expected_fy_sequence), ".")
@@ -149,7 +169,8 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     
     if (any(lf.series[["r"]] > 1)){
       message("Some r > 1 in lf.series.",
-              "This is unlikely rate of wage growth (r = 0.025 corresponds to 2.5% wage growth).")
+              "This is unlikely rate of wage growth ", 
+              "(r = 0.025 corresponds to 2.5% wage growth).")
     }
     
     last_obsValue_in_actual_series <- last(lf.indices[["obsValue"]])
@@ -186,12 +207,13 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
 #' \dontrun{
 #' lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date = "2014-06-30")
 #' }
-lf_inflator <- function(labour_force = 1, from_date = "2013-06-30", to_date, useABSConnection = FALSE){
+lf_inflator <- function(labour_force = 1,
+                        from_date = "2013-06-30",
+                        to_date,
+                        useABSConnection = FALSE) {
   obsTimeDate <- obsTime <- NULL
   # lf original
-  if (useABSConnection){
-    lf.url <- 
-      "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.10.M/ABS?startTime=1981"
+  if (useABSConnection) {
     lf.url.trend <- 
       # "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978-02"
       "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978"

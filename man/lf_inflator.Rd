@@ -53,6 +53,14 @@ Labour force inflators
 }
 \examples{
 lf_inflator_fy(labour_force = 1, from_fy = "2012-13", to_fy = "2013-14")
+
+library(data.table)
+# Custom 1\% growth over 2017-18 -> 2018.19
+lf_inflator_fy(from_fy = "2017-18",
+               to_fy = "2018-19",
+               forecast.series = "custom", 
+               lf.series = data.table(fy_year = c("2017-18", "2018-19"),
+                                      r = c(0, 0.01)))
 \dontrun{
 lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date = "2014-06-30")
 }
