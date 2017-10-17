@@ -28,7 +28,16 @@ The future wage series can be provided in two ways:
 (1) a single value, to be the assumed rate of wage inflation in years beyond the known series, or 
 (2) a \code{data.table} with two variables, \code{fy_year} and \code{r}. If (2), 
 the variable \code{fy_year} must be a vector of all financial years after the last financial year in the (known) wage series and the latest \code{to_fy} \strong{inclusive}.
-The variable \code{r} consists of rates of wage growth assumed in each \code{fy_year}.}
+The variable \code{r} consists of rates of wage growth assumed in each \code{fy_year}.
+
+# Wage inflation
+wage_inflator(from_fy = "2013-14", to_fy = "2014-15")
+
+# Custom wage inflation
+wage_inflator(from_fy = "2016-17",
+              to_fy = "2017-18",
+              forecast.series = "custom",
+              wage.series = 0.05)}
 }
 \value{
 The wage inflation between the two years.
