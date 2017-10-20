@@ -301,13 +301,15 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
     n_dependants <- rep_len(n_dependants, max.length)
   }
   
-  
+
   switch(fy.year,
          "2013-14" = {
            base_tax. <- 
              IncomeTax(income, 
                        thresholds = c(0, 18200, 37000, 80000, 180000),
                        rates = c(0, 0.19, 0.325, 0.37, 0.45))
+           
+           Year.int <- 2014L
            
            if (any(sapto.eligible)) {
              # Use this a lot, saves 0.5ms each time
@@ -323,14 +325,14 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
                                        SpouseIncome = SpouseIncome_sapto_eligible,
                                        NDependants = n_dependants[which_sapto], 
                                        TRUE, 
-                                       2014L)
+                                       Year.int)
                
                medicare_levy.[which_not_sapto] <- 
                  MedicareLevySaptoYear(income[which_not_sapto],
                                        SpouseIncome = SpouseIncome[which_not_sapto],
                                        NDependants = n_dependants[which_not_sapto],
                                        FALSE,
-                                       2014L)
+                                       Year.int)
                
              } else {
                # All are SAPTO.
@@ -339,7 +341,7 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
                                        SpouseIncome = SpouseIncome,
                                        NDependants = n_dependants,
                                        TRUE, 
-                                       2014L)
+                                       Year.int)
              }
              
              if (AND(!is.null(.dots.ATO),
@@ -358,7 +360,7 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
                                                             Rep_frng_ben_amt = .dAse[["Rep_frng_ben_amt"]]),
                                SpouseIncome = SpouseIncome_sapto_eligible,
                                IsMarried = SpouseIncome_sapto_eligible > 0,
-                               yr = 2014L)
+                               yr = Year.int)
 
              } else {
                sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income), 
@@ -371,7 +373,7 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
                                      SpouseIncome = SpouseIncome,
                                      NDependants = n_dependants,
                                      FALSE,
-                                     2014L)
+                                     Year.int)
              sapto. <- 0
            }
            
