@@ -1,3 +1,10 @@
+
+# 1.5.2.1
+
+# grattan 1.5.2.0
+### 2017-10-19
+* New internal C++ functions for `income_tax`, and related functions
+
 # grattan 1.5.1.2
 ### 2017-10-15
 * Optional argument `age` in `income_tax` now `NULL` rather than `42`.  

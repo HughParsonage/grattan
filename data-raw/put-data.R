@@ -513,6 +513,8 @@ bto_tbl <-
   as.data.table %>%
   setkey(fy_year)
 
+fwrite(bto_tbl, "data-raw/bto_tbl.tsv", sep = "\t")
+
 Age_pension_permissible_income_by_Date <- 
   read_excel("data-raw/age-pension-permissible-income.xlsx") %>%
   gather(type, permissible_income, -Date) %>%
