@@ -1,9 +1,12 @@
 
-# 1.5.2.1
+# 1.5.2.3
+### 2017-10-21
+* Update labour-force data
 
 # grattan 1.5.2.0
 ### 2017-10-19
 * New internal C++ functions for `income_tax`, and related functions
+* BTO function now uses tax scales from the *Income Tax Regulations*
 
 # grattan 1.5.1.2
 ### 2017-10-15
