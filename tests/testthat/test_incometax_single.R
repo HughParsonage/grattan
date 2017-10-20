@@ -9,13 +9,20 @@ test_that("income tax checks", {
   expect_error(income_tax(1, "2015-17"), regexp = "not in correct form")
   
   # not implemented
-  expect_error(income_tax(1, "2013-14", allow.forecasts = TRUE))
+  expect_error(income_tax(1, "2030-31", allow.forecasts = TRUE))
   
   # NA
-  expect_warning(income_tax(-1, "2013-14"), regexp = "Negative")
+  expect_warning(income_tax(-1, "2014-15"), regexp = "Negative")
   
   # not a data frame
   expect_error(income_tax(1, "2013-14", .dots.ATO = "foo"))
+  
+  # multiple fy.years
+  expect_error(income_tax(1:6, 
+                          fy.year = letters[1:6]))
+  
+  expect_error(income_tax(50e3, "2013-14", .dots.ATO = data.frame(x = 1:5)), 
+               regexp = "Number of rows")
 })
 
 test_that("income_tax returns known results",{

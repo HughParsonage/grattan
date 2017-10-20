@@ -4,12 +4,23 @@
 \alias{bto}
 \title{Beneficiary tax offset}
 \usage{
-bto(benefit_amount, fy.year)
+bto(benefit_amount, fy.year = NULL, rate1 = 0.15,
+  benefit_threshold = 6000, tax_threshold = 37000, rate2 = 0.15)
 }
 \arguments{
 \item{benefit_amount}{The amount of Tax Offsetable benefit received by the taxpayer during the income year.}
 
-\item{fy.year}{The income year.}
+\item{fy.year}{The income year. Not used by default.}
+
+\item{rate1}{The coefficient in Division 2, section 13(2) of the Income Tax Assessment (1936 Act) Regulation 2015
+(the regulations).}
+
+\item{benefit_threshold}{The amount of benefits above which the offset applies.}
+
+\item{tax_threshold}{The \emph{threshold at the upper conclusion of the lowest marginal tax rate} in the
+words of the section 13(3) of the regulations.}
+
+\item{rate2}{The second coefficient in section 13(3) of the regulations.}
 }
 \value{
 The beneficiary tax offset.

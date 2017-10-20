@@ -5,7 +5,7 @@
 \title{Seniors and Pensioner Tax Offset}
 \usage{
 sapto(rebate_income, fy.year, fill = 0, sapto.eligible = TRUE,
-  Spouse_income = 0, family_status = "single")
+  Spouse_income = 0, family_status = "single", .check = TRUE)
 }
 \arguments{
 \item{rebate_income}{The rebate income of the individual.}
@@ -19,6 +19,9 @@ sapto(rebate_income, fy.year, fill = 0, sapto.eligible = TRUE,
 \item{Spouse_income}{Spouse income whose unutilized SAPTO may be added to the current taxpayer. Must match \code{family_status}; i.e. can only be nonzero when \code{family_status != "single"}.}
 
 \item{family_status}{Family status of the individual.}
+
+\item{.check}{Run checks for consistency of values. For example, ensuring no 
+single individuals have positive \code{Spouse_income}.}
 }
 \description{
 Seniors and Pensioner Tax Offset

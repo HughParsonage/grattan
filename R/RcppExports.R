@@ -15,6 +15,40 @@ IncomeTax <- function(x, thresholds, rates) {
     .Call(`_grattan_IncomeTax`, x, thresholds, rates)
 }
 
+#' @title Medicare levy in C++
+#' @description Medicare levy. Experimental function in C++, equivalent to \code{\link{medicare_levy}}.
+#' @name MedicareLevy
+#' @param income,SpouseIncome,SaptoEligible,isFamily,nDependants,lowerThreshold,upperThreshold,lowerFamilyThreshold,upperFamilyThreshold,lowerUpForEachChild As in \code{medicare_levy}.
+#' @param rate,taper The parameters for the specific year or hypothetical requested.
+#' @export MedicareLevy 
+NULL
+
+MedicareLevySingle <- function(income, lowerThreshold, upperThreshold, rate = 0.02, taper = 0.2, SpouseIncome = 0, isFamily = FALSE, nDependants = 0L, lowerFamilyThreshold = 46000, upperFamilyThreshold = 54119, lowerUpForEachChild = 3306) {
+    .Call(`_grattan_MedicareLevySingle`, income, lowerThreshold, upperThreshold, rate, taper, SpouseIncome, isFamily, nDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild)
+}
+
+MedicareLevySaptoYear <- function(income, SpouseIncome, NDependants, sapto, yr) {
+    .Call(`_grattan_MedicareLevySaptoYear`, income, SpouseIncome, NDependants, sapto, yr)
+}
+
+MedicareLevy <- function(income, lowerThreshold, upperThreshold, SpouseIncome, isFamily, NDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild, rate = 0.02, taper = 0.1) {
+    .Call(`_grattan_MedicareLevy`, income, lowerThreshold, upperThreshold, SpouseIncome, isFamily, NDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild, rate, taper)
+}
+
+#' @title General offset in C++
+#' @name Offset
+#' @description Calculate the offset given a threshold, a maximum offset, and a taper. 
+#' @param x A vector of incomes etc.
+#' @param y The maximum offset available; the offset when \code{x} is zero.
+#' @param a The maximum value of \code{x} at which the maximum offset is available.
+#' @param m The taper rate (the \strong{negative} slope).
+#' @export Offset
+NULL
+
+Offset <- function(x, y, a, m) {
+    .Call(`_grattan_Offset`, x, y, a, m)
+}
+
 #' @title Threeway parallel maximum
 #' @description Returns the parallel maximum of three 
 #' 
@@ -84,5 +118,38 @@ NULL
 
 pminV <- function(x, y) {
     .Call(`_grattan_pminV`, x, y)
+}
+
+#' @title SAPTO in C++
+#' @description An implementation of SAPTO in C++.
+#' @name sapto_rcpp
+#' @param RebateIncome,MaxOffset,LowerThreshold,TaperRate,SaptoEligible,SpouseIncome,IsMarried As in \code{\link{sapto}}.
+#' @export
+sapto_rcpp <- function(RebateIncome, MaxOffset, LowerThreshold, TaperRate, SaptoEligible, SpouseIncome, IsMarried) {
+    .Call(`_grattan_sapto_rcpp`, RebateIncome, MaxOffset, LowerThreshold, TaperRate, SaptoEligible, SpouseIncome, IsMarried)
+}
+
+#' SAPTO singleton
+#' @name sapto_rcpp_singleton
+#' @description Length-one version of \code{SAPTO} in C++.
+#' @param rebate_income,max_offset,lower_threshold,taper_rate,sapto_eligible,Spouse_income,is_married As in \code{\link{sapto}}.
+#' @export
+sapto_rcpp_singleton <- function(rebate_income, max_offset, lower_threshold, taper_rate, sapto_eligible, Spouse_income, is_married) {
+    .Call(`_grattan_sapto_rcpp_singleton`, rebate_income, max_offset, lower_threshold, taper_rate, sapto_eligible, Spouse_income, is_married)
+}
+
+#' @title SAPTO for specific years in C++
+#' @name sapto_rcpp_yr
+#' @description Fast way to calculate SAPTO for multiple people when the year is known in advance. Speed is by cheating and entering in the year's parameters literally.
+#' @param RebateIncome,IsMarried,SpouseIncome As in \code{\link{sapto}}.
+#' @export sapto_rcpp_yr
+NULL
+
+sapto_rcpp_yr_singleton <- function(rebateIncome, isMarried, spouseIncome, yr) {
+    .Call(`_grattan_sapto_rcpp_yr_singleton`, rebateIncome, isMarried, spouseIncome, yr)
+}
+
+sapto_rcpp_yr <- function(RebateIncome, SpouseIncome, IsMarried, yr) {
+    .Call(`_grattan_sapto_rcpp_yr`, RebateIncome, SpouseIncome, IsMarried, yr)
 }
 

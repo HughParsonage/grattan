@@ -9,6 +9,7 @@
 #' @author \email{hugh.parsonage+grattanpackage@@grattan.edu.au}
 #' @keywords package
 #' @importFrom hutils if_else
+#' @importFrom hutils coalesce
 #' @importFrom hutils OR
 #' @importFrom hutils NEITHER
 #' @importFrom hutils AND
@@ -19,7 +20,10 @@
 #' @importFrom magrittr and
 
 #' @importFrom Rcpp sourceCpp
+#' @importFrom RcppParallel RcppParallelLibs
 #' @importFrom stats complete.cases
+#' 
+#' 
 #' @import data.table
 #' @useDynLib grattan, .registration = TRUE
 "_PACKAGE"
