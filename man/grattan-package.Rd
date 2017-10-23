@@ -10,7 +10,7 @@
 Grattan package
 }
 \details{
-Colours, charts, and other common quantative tasks for Australia tax analysts
+Colours, charts, and other common quantitative tasks for Australia tax analysts
 }
 \seealso{
 Useful links:

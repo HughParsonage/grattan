@@ -28,7 +28,7 @@ income_tax_sapto(income, fy.year, age = 42, family_status = "individual",
 
 \item{sapto.eligible}{Specify explicitly the eligibility for SAPTO. If missing, defaults to ages over 65.}
 
-\item{medicare.sapto.eligible}{Specify explicitly the eligiblity for SAPTO with respect to the Medicare levy for low-income earners. If missing, defaults to ages over 65.}
+\item{medicare.sapto.eligible}{Specify explicitly the eligibility for SAPTO with respect to the Medicare levy for low-income earners. If missing, defaults to ages over 65.}
 
 \item{new_sapto_tbl}{If not \code{NULL}, supplied to \code{\link{new_sapto}}. Otherwise, \code{fy.year} is passed to \code{\link{sapto}}.}
 }
