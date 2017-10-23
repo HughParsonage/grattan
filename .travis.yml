@@ -4,6 +4,12 @@ r:
 - release
 cache: packages
 warnings_are_errors: true
+r_check_args: '--use-valgrind'
+
+addons:
+  apt:
+    packages:
+      - valgrind
 
 r_github_packages:
   - hughparsonage/taxstats
