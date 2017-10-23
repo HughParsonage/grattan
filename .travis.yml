@@ -1,6 +1,7 @@
 language: r
 r:
 - devel
+- release
 cache: packages
 warnings_are_errors: true
 
