@@ -2,11 +2,11 @@
 
 ------------------------------------------------------------------------
 
-[![minimal R version](https://img.shields.io/badge/R%3E%3D-2.10-6666ff.svg)](https://cran.r-project.org/) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/grattan)](https://cran.r-project.org/package=grattan) [![packageversion](https://img.shields.io/badge/Package%20version-1.5.1.2-orange.svg?style=flat-square)](commits/master)
+[![minimal R version](https://img.shields.io/badge/R%3E%3D-2.10-6666ff.svg)](https://cran.r-project.org/) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/grattan)](https://cran.r-project.org/package=grattan) [![packageversion](https://img.shields.io/badge/Package%20version-1.5.2.3-orange.svg?style=flat-square)](commits/master)
 
 ------------------------------------------------------------------------
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2017--08--30-orange.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2017--10--24-orange.svg)](/commits/master)
 
 grattan
 =======
@@ -16,8 +16,28 @@ Perform Common Quantitative Tasks for Australian Analysts and to Support Grattan
 NEWS
 ====
 
+1.5.2.3
+=======
+
+### 2017-10-21
+
+-   Update labour-force data
+
+grattan 1.5.2.0
+===============
+
+### 2017-10-19
+
+-   New internal C++ functions for `income_tax`, and related functions
+-   BTO function now uses tax scales from the *Income Tax Regulations*
+
 grattan 1.5.1.2
 ===============
+
+### 2017-10-15
+
+-   Optional argument `age` in `income_tax` now `NULL` rather than `42`.
+    The default argument continues to result in SAPTO being not applied if `.dots.ATO`. However, if `.dots.ATO` is supplied (and the age variable has not been removed from it), the individuals' SAPTO eligibility is determined by the age variable in `.dots.ATO`, rather than setting each individual's SAPTO to 0.
 
 ### 2017-08-30
 
