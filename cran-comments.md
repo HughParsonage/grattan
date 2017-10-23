@@ -9,6 +9,11 @@
 
 * This is a package update to reflect updated data
 
+* The suggestions from previous submission have been implemented: 
+  - The Title has been changed to be shorter and more informative
+  - The authors from `financialfunctions.R` have been included as contributors
+  - The packages in the Description: field have been enclosed in single quotes.
+
 * The first NOTE is with respect to the 'taxstats' package not being a mainstream repository;
   its inclusion satisfies the CRAN repository policy, as in previous versions.
   
