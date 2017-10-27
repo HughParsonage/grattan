@@ -43,8 +43,23 @@ test_that("lf_inflator_fy accepts multiple dates", {
 })
 
 test_that("Custom lf series", {
+  expect_message(lf_inflator_fy(from_fy = "2022-23", 
+                                to_fy = "2024-25",
+                                forecast.series = "custom",
+                                lf.series = 2),
+                 regexp = "unlikely")
+  
   y <- lf_inflator_fy(1, from_fy = "2022-23", to_fy = "2024-25", 
                       forecast.series = "custom", lf.series = 0.10)
   
   expect_equal(y, 1.1^2)
+  
+  y_custom_series <-
+    lf_inflator_fy(from_fy = "2016-17",
+                   to_fy = "2017-18",
+                   forecast.series = "custom",
+                   lf.series = data.table(fy_year = c("2017-18"),
+                                          r = c(0.123)))
+  
+  expect_equal(y_custom_series, 1.123)
 })
