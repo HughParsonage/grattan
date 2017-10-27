@@ -1,5 +1,9 @@
 # Data for internal use
 # Must be sourced after modification
+library(rsdmx)
+if (packageVersion("rsdmx") < package_version("0.5.10")) {
+  warning("rsdmx will not properly connect to ABS for versions of rsdmx before 0.5.10")
+}
 library(magrittr)
 library(dplyr)
 library(forecast)
@@ -102,13 +106,50 @@ hecs_tbl <-
 
 # Manually
 cpi_unadj <- 
-  data.table::fread("./data-raw/cpi-unadjusted-manual.tsv", select = c("obsTime", "obsValue"))
+  tryCatch({
+    url <- "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.10001.10.Q/ABS?startTime=1948"
+    cpi <- rsdmx::readSDMX(url)
+    message("Using ABS sdmx connection")
+    as.data.frame(cpi) %>%
+      as.data.table %>%
+      .[, list(obsTime, obsValue)] %T>%
+      fwrite("data-raw/cpi-unadjusted-manual.tsv", sep = "\t") %>%
+      .[]
+  },
+  error = function(e) {
+    fread("./data-raw/cpi-unadjusted-manual.tsv")
+  })
 
-cpi_seasonal_adjustment <- 
-  data.table::fread("./data-raw/cpi-seasonally-adjusted-manual.tsv", select = c("obsTime", "obsValue")) 
+cpi_seasonal_adjustment <-
+  tryCatch({
+    url <- "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999901.10+20.Q/ABS?startTime=1948"
+    cpi <- rsdmx::readSDMX(url)
+    message("Using ABS sdmx connection")
+    as.data.frame(cpi) %>%
+      as.data.table %>%
+      .[, list(obsTime, obsValue)] %T>%
+      fwrite("data-raw/cpi-seasonally-adjusted-manual.tsv", sep = "\t") %>%
+      .[]
+  },
+  error = function(e) {
+    fread("./data-raw/cpi-seasonally-adjusted-manual.tsv")
+  })
 
 cpi_trimmed <-
-  data.table::fread("./data-raw/cpi-trimmed-mean-manual.tsv", select = c("obsTime", "obsValue"))
+  tryCatch({
+    url <- "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999902.10+20.Q/ABS?startTime=1948"
+    cpi <- rsdmx::readSDMX(url)
+    message("Using ABS sdmx connection")
+    as.data.frame(cpi) %>%
+      as.data.table %>%
+      .[, list(obsTime, obsValue)] %T>%
+      fwrite("data-raw/cpi-trimmed-mean-manual.tsv", sep = "\t") %>%
+      .[]
+  },
+  error = function(e) {
+    fread("./data-raw/cpi-seasonally-adjusted-manual.tsv")
+  })
+
 
 wages_trend <- 
   tryCatch({
@@ -117,12 +158,16 @@ wages_trend <-
     message("Using ABS sdmx connection")
     wage.indices <- 
       as.data.frame(wages) %>% 
-      select(obsTime, obsValue) %>%
-      as.data.table
+      as.data.table %>%
+      .[, list(obsTime, obsValue)]
+    fwrite(wage.indices, "./data-raw/wages-trend.tsv", sep = "\t")
+    wage.indices
   },
   error = function(e) {
     data.table::fread("./data-raw/wages-trend.tsv", select = c("obsTime", "obsValue"))
   })
+
+stopifnot(is.data.table(wages_trend))
 
 lf_trend <- 
   tryCatch({
