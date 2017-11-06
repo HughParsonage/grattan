@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="shortlink" href="../../../node/4842" />
+<link rel="canonical" href="9" />
+<meta name="viewport" content="width=device-width" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>2.3.9 DAPP Claim Interactions with Other PLP or DAPP Claims | Paid Parental Leave Guide</title>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"dz4S9R4_qq2jtz_zWBVrmzMVTG4wBUwV2ZivFqxQQA8","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/paid-parental-leave-guide\/2\/3\/9":true}});
+//--><!]]>
+</script>
+<!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
+</head>
+<body class="">
+<ul class="offleft" id="top">
+<li><a href="9#navigation">Skip to navigation</a></li>
+<li><a href="9#content">Skip to main content</a></li>
+</ul>
+<nav id="global">
+	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
+<div class="menu-block">
+<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
+<li class="leaf has-children menu-mlid-513"><a href="../../../child-support-guide">Child Support Guide</a></li>
+<li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="last leaf has-children active-trail menu-mlid-490"><a href="../../../paid-parental-leave-guide" class="active-trail">Paid Parental Leave Guide</a></li>
+</ul></div></nav>
+<header role="banner">
+	<a href="../../../index.html" rel="home"><img src="../../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
+<p class="site-name">Guides to Social Policy Law</p>
+<form class="search-form" role="search" action="9" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
+  <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
+ <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-wZ1okSKEwRsx13lH0oa-HKQkS0B5S6RrSOdRDI7h3yo" />
+<input type="hidden" name="form_id" value="search_block_form" />
+</div></form>	<h2>Paid Parental Leave Guide</h2>
+<p>Version 1.45 - Released 14 August 2017</p>
+	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
+</header>
+<div id="contentwrap">
+	<nav role="navigation" id="navigation">
+	<div class="menu-block">
+<ul class="menu"><li class="first leaf menu-mlid-7284"><a href="../../../paid-parental-leave-guide" title="">Using the Paid Parental Leave Guide</a></li>
+<li class="collapsed menu-mlid-492"><a href="../../updates">What&#039;s New</a></li>
+<li class="collapsed menu-mlid-1320"><a href="../../1">1 Key Terms &amp; Principles</a></li>
+<li class="expanded active-trail menu-mlid-1321"><a href="../../2" class="active-trail">2 Eligibility for PLP &amp; DAPP</a><ul class="menu"><li class="first collapsed menu-mlid-1091"><a href="../1">2.1 Differences between PLP &amp; DAPP</a></li>
+<li class="collapsed menu-mlid-1092"><a href="../2">2.2 PLP Eligibility</a></li>
+<li class="last expanded active-trail menu-mlid-1093"><a href="../3" class="active-trail">2.3 DAPP Eligibility</a><ul class="menu"><li class="first leaf menu-mlid-1041"><a href="1">2.3.1 DAPP Eligibility Overview</a></li>
+<li class="collapsed menu-mlid-1042"><a href="2">2.3.2 PPL Scheme Work Test for DAPP</a></li>
+<li class="collapsed menu-mlid-1043"><a href="3">2.3.3 PPL Scheme Income Test for DAPP</a></li>
+<li class="collapsed menu-mlid-1044"><a href="4">2.3.4 PPL Scheme Australian Residency Test &amp; Absences from Australia for DAPP</a></li>
+<li class="leaf menu-mlid-1045"><a href="5">2.3.5 Caring for a Child for DAPP</a></li>
+<li class="leaf menu-mlid-1046"><a href="6">2.3.6 Not Working &amp; Not on Paid Leave for DAPP</a></li>
+<li class="collapsed menu-mlid-1047"><a href="7">2.3.7 Who Can Claim DAPP</a></li>
+<li class="leaf menu-mlid-1048"><a href="8">2.3.8 DAPP Period</a></li>
+<li class="last leaf active-trail active menu-mlid-1049"><a href="9" class="active-trail active">2.3.9 DAPP Claim Interactions with Other PLP or DAPP Claims</a></li>
+</ul></li>
+</ul></li>
+<li class="collapsed menu-mlid-1322"><a href="../../3">3 Rate Calculation for PLP &amp; DAPP</a></li>
+<li class="collapsed menu-mlid-1323"><a href="../../4">4 Claims &amp; Payments for PLP</a></li>
+<li class="collapsed menu-mlid-1324"><a href="../../5">5 Claims &amp; Payments for DAPP</a></li>
+<li class="collapsed menu-mlid-1325"><a href="../../6">6 Determinations</a></li>
+<li class="collapsed menu-mlid-1326"><a href="../../7">7 Compliance &amp; Enforcement</a></li>
+<li class="collapsed menu-mlid-1327"><a href="../../8">8 Review of Decisions</a></li>
+<li class="collapsed menu-mlid-1328"><a href="../../9">9 Miscellaneous</a></li>
+<li class="leaf menu-mlid-1317"><a href="../../acronyms">Acronym List</a></li>
+<li class="leaf menu-mlid-7162"><a href="../../keywords">Keyword Index</a></li>
+<li class="leaf menu-mlid-7369"><a href="../../act-references">Act Reference Index</a></li>
+<li class="last leaf menu-mlid-7170"><a href="../../sitemap">Site Map</a></li>
+</ul></div>	</nav>
+	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a> &raquo; <a href="../../2" class="active-trail">2 Eligibility for PLP &amp; DAPP</a> &raquo; <a href="../3" class="active-trail">2.3 DAPP Eligibility</a> &raquo; 2.3.9 DAPP Claim Interactions with Other PLP or DAPP Claims</div>
+<div id="utility">
+	
+<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/paid-parental-leave-guide/2/3/9"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="content" role="main">
+<article id="node-4842">
+<h1 >2.3.9 DAPP Claim Interactions with Other PLP or DAPP Claims</h1>
+<h2>Introduction</h2>
+<p>A person can claim <a href="../../acronyms#dapp" title="Dad and partner pay">DAPP</a>, regardless of whether there is also a claim for <a href="../../acronyms#plp" title="Parental leave pay">PLP</a>, <a href="../../acronyms#nbs" title="Newborn supplement">NBS</a> or <a href="../../acronyms#sbp" title="Stillborn baby payment">SBP</a> for the child. If a person receives DAPP, this does not make a person ineligible for any other family assistance payment. However there are some restrictions where multiple DAPP claims are made or other PLP claims exist for the child.</p>
+<h2>DAPP already paid</h2>
+<p>DAPP can only be paid once per child. A person will not be eligible for DAPP if that person or another person is payable for DAPP in relation to that child.</p>
+<p>For example, in the scenario where the biological parents have separated and the mother has re-partnered, only the biological father OR the mother's new partner can claim DAPP.</p>
+<p><strong>Exception:</strong> In certain prescribed circumstances, 2 people may, if eligible, receive DAPP for the same child. In the case of adoption DAPP can be paid once, to the biological father or the birth mother's partner, and once to the partner of the adopting parent for the same child. In the case of surrogacy, DAPP can be paid once to the birth mother's partner, and once to the partner of the person providing primary care for the child born of a surrogacy arrangement. In circumstances where there is a new primary caregiver for a child because the birth mother and their partner are incapable of caring for the child (<a href="../../1/1/i/05">1.1.I.05</a>), DAPP can be paid once to the biological father or birth mother's partner, and once to the partner of the child's new primary carer. Additional eligibility criteria apply for people who claim DAPP in prescribed circumstances (<a href="7/10">2.3.7.10</a>).</p>
+<h2>Family claiming DAPP &amp; PLP</h2>
+<p>Both DAPP and PLP can be taken at the same time (e.g. DAPP may be payable to a father at the same time that PLP is payable to a mother) for the one child by 2 separate people at the same time. A family cannot receive more than 20 weeks DAPP and PLP combined for a birth or adoption event.</p>
+<h2>One person claiming both DAPP &amp; PLP</h2>
+<p>One person is able to claim both PLP and DAPP for the same child. However, the PLP and DAPP periods (<a href="8">2.3.8</a>) must be taken at different times. A person cannot be paid more than 18 weeks DAPP and PLP combined for the child, or for more than 1 child in a multiple birth or multiple adoption event.</p>
+<p>If a person is receiving DAPP for 1 child and PLP for another child (not part of a multiple birth or adoption), the DAPP and PLP periods can be taken at the same time.</p>
+<h2>One person claiming DAPP twice</h2>
+<p>A person can only claim DAPP once per child.</p>
+<p>One person is able to claim DAPP for more than 1 child, provided they are not part of a multiple birth or adoption. However, the 2 DAPP periods (<a href="8">2.3.8</a>) cannot be taken at the same time.</p>
+<p>Where there is a multiple birth or adoption (e.g. twins), DAPP is only paid for 1 child.</p>
+<h2>Multiple birth &amp; multiple adoption events</h2>
+<p>The 18 week limit per person and the 20 week limit per family apply in the same way for single births (and adoptions) and multiple births (and adoptions). This is consistent with the nature of payments under the <a href="../../acronyms#ppl" title="Paid parental leave">PPL</a> scheme, i.e. that they assist a parent to take up to 18 weeks (PLP) and/or up to 2 weeks (DAPP) away from work. PLP and DAPP are payments for working parents rather than per child payments.</p>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2010A00104" title="Paid Parental Leave Act 2010">PPLAct</a> section 115BE Multiple births, section 115BF Dad and partner pay is already payable to the person etc., section 115CB(5) Not eligible-overlap with PPL period, section 115CB(6) Not eligible-overlap with DAPP period for another child, section 115CB(7) Not eligible-excess days</p>
+<p><strong>Policy reference:</strong> PPL Guide <a href="1">2.3.1</a> DAPP Eligibility Overview, <a href="2">2.3.2</a> PPL Scheme Work Test for DAPP, <a href="3">2.3.3</a> PPL Scheme Income Test for DAPP, <a href="4">2.3.4</a> PPL Scheme Australian Residency Test &amp; Absences from Australia for DAPP, <a href="5">2.3.5</a> Caring for a Child for DAPP, <a href="6">2.3.6</a> Not Working &amp; Not on Paid Leave for DAPP, <a href="7">2.3.7</a> Who can claim DAPP, <a href="8">2.3.8</a> DAPP Period, <a href="../../6/3/2">6.3.2</a> Payability Determinations for DAPP</p>
+<p>FA Guide <a href="../../../family-assistance-guide/1/2/18">1.2.18</a> Newborn Supplement (NBS) - Description, <a href="../../../family-assistance-guide/1/2/19">1.2.19</a> Stillborn Baby Payment (SBP) - Description</p>
+</div>
+</article>	<div id="view-last-reviewed-date">
+		
+		  
+      Last reviewed:     1 July 2016  	</div>
+</div></div>
+<footer role="contentinfo" id="footer">
+	<ul class="menu"><li class="first leaf"><a href="../../../contact-us">Contact us</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/copyright-disclaimer" title="">Copyright &amp; Disclaimer</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/privacy-policy" title="">Privacy</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
+<li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
+</ul></footer>
+<script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+</body>
+</html>

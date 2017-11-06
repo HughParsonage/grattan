@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="shortlink" href="../../node/6568" />
+<link rel="canonical" href="10" />
+<meta name="viewport" content="width=device-width" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>3.10 Determining the SIFS Rate | Family Assistance Guide</title>
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
+<script type="text/javascript" src="../../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
+<script type="text/javascript" src="../../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<script type="text/javascript" src="../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"qTj4EFbs8BtqdKzfF2hWH-dfiHyADm0-lEpKPhUfCLA","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/family-assistance-guide\/3\/10":true}});
+//--><!]]>
+</script>
+<!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
+</head>
+<body class="">
+<ul class="offleft" id="top">
+<li><a href="10#navigation">Skip to navigation</a></li>
+<li><a href="10#content">Skip to main content</a></li>
+</ul>
+<nav id="global">
+	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
+<div class="menu-block">
+<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<li class="leaf menu-mlid-7597"><a href="../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
+<li class="leaf has-children menu-mlid-513"><a href="../../child-support-guide">Child Support Guide</a></li>
+<li class="leaf has-children active-trail menu-mlid-491"><a href="../../family-assistance-guide" class="active-trail">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="last leaf has-children menu-mlid-490"><a href="../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+</ul></div></nav>
+<header role="banner">
+	<a href="../../index.html" rel="home"><img src="../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
+<p class="site-name">Guides to Social Policy Law</p>
+<form class="search-form" role="search" action="10" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
+  <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
+ <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-in_5m_MiBA80Gz7_TdsxF1REt1WNprIdLfdHYO2CM34" />
+<input type="hidden" name="form_id" value="search_block_form" />
+</div></form>	<h2>Family Assistance Guide</h2>
+<p>Version 1.198 - Released 20 September 2017</p>
+	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
+</header>
+<div id="contentwrap">
+	<nav role="navigation" id="navigation">
+	<div class="menu-block">
+<ul class="menu"><li class="first leaf menu-mlid-7283"><a href="../../family-assistance-guide" title="">Using the Family Assistance Guide</a></li>
+<li class="collapsed menu-mlid-2274"><a href="../updates">What&#039;s New</a></li>
+<li class="collapsed menu-mlid-2266"><a href="../1">1 Key Terms &amp; Principles</a></li>
+<li class="collapsed menu-mlid-2267"><a href="../2">2 Eligibility</a></li>
+<li class="expanded active-trail menu-mlid-2268"><a href="../3" class="active-trail">3 Rate Calculation</a><ul class="menu"><li class="first collapsed menu-mlid-1826"><a href="1">3.1 FTB Rate Calculation</a></li>
+<li class="collapsed menu-mlid-1829"><a href="2">3.2 Adjusted Taxable Income</a></li>
+<li class="leaf menu-mlid-1830"><a href="3">3.3 Number not currently in use</a></li>
+<li class="leaf menu-mlid-1831"><a href="4">3.4 Number not currently in use</a></li>
+<li class="collapsed menu-mlid-1832"><a href="5">3.5 CCB Rate Calculation</a></li>
+<li class="collapsed menu-mlid-1833"><a href="6">3.6 Historical Rates</a></li>
+<li class="collapsed menu-mlid-1837"><a href="7">3.7 JETCCFA Rate Calculation</a></li>
+<li class="collapsed menu-mlid-1834"><a href="8">3.8 CCR Rate Calculation</a></li>
+<li class="leaf menu-mlid-1835"><a href="9">3.9 SKB Rate</a></li>
+<li class="leaf active-trail active menu-mlid-1827"><a href="10" class="active-trail active">3.10 Determining the SIFS Rate</a></li>
+<li class="leaf menu-mlid-1836"><a href="11">3.11 NBS Rate</a></li>
+<li class="last leaf menu-mlid-1828"><a href="12">3.12 SBP Rate</a></li>
+</ul></li>
+<li class="collapsed menu-mlid-2269"><a href="../4">4 Claims &amp; Payments</a></li>
+<li class="collapsed menu-mlid-2270"><a href="../5">5 Gathering Information</a></li>
+<li class="collapsed menu-mlid-2271"><a href="../6">6 Review &amp; Reconciliation</a></li>
+<li class="collapsed menu-mlid-2272"><a href="../7">7 Debts</a></li>
+<li class="collapsed menu-mlid-2273"><a href="../8">8 Transitional Arrangements</a></li>
+<li class="leaf menu-mlid-2264"><a href="../acronyms">Acronym List</a></li>
+<li class="leaf menu-mlid-7296"><a href="../keywords">Keyword Index</a></li>
+<li class="leaf menu-mlid-7371"><a href="../act-references">Act Reference Index</a></li>
+<li class="last leaf menu-mlid-7169"><a href="../sitemap">Site Map</a></li>
+</ul></div>	</nav>
+	<div id="breadcrumb"><a href="../../index.html">Home</a> &raquo; <a href="../../family-assistance-guide">Family Assistance Guide</a> &raquo; <a href="../3" class="active-trail">3 Rate Calculation</a> &raquo; 3.10 Determining the SIFS Rate</div>
+<div id="utility">
+	
+<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/family-assistance-guide/3/10"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="content" role="main">
+<article id="node-6568">
+<h1 >3.10 Determining the SIFS Rate</h1>
+<h2>Introduction</h2>
+<p>From 1 July 2017, <a href="../acronyms#sifs" title="Single income family supplement">SIFS</a> will be closed to new recipients. Grandfathering arrangements will permit eligible recipients with entitlement to SIFS at 30 June 2017 to continue to receive SIFS as long as they continuously remain eligible for the payment. See <a href="../2/11/1">2.11.1</a></p>
+<p>The SIFS provides assistance of up to $300 a year to individuals or couples who have a qualifying child (<a href="../2/11/2">2.11.2</a>), where the main income earner has a taxable income (<a href="../1/1/t/50">1.1.T.50</a>) between $68,000 and $150,000. If there is a secondary earner in the family, their income needs to be below $18,000.</p>
+<ul><li>The annual rate of SIFS is calculated based on taxable income.</li>
+<li>For couples, there is a primary earner income test and a secondary earner income test.</li>
+<li>For sole parents, there is only a primary earner income test.</li>
+<li>There will be no indexation (<a href="../1/1/i/80">1.1.I.80</a>) of the maximum rate or income threshold amounts.</li>
+</ul><h2>Primary earner income test</h2>
+<p>The primary earner in a couple is the member whose taxable income is the higher.</p>
+<p>The rate of SIFS is nil for taxable income of $68,000 or less.</p>
+<p>For each dollar above $68,000, SIFS entitlement increases by $0.025 until the maximum rate of $300 is reached at $80,000.</p>
+<p>The SIFS rate then stays at $300 between $80,000 and $120,000.</p>
+<p>For each dollar above $120,000, the SIFS rate decreases by $0.01 until it is reduced to nil at $150,000.</p>
+<h2>Secondary earner income test</h2>
+<p>The secondary earner is the member of a couple whose taxable income is the lower.</p>
+<p>If the SIFS rate payable after the primary earner income test (the provisional rate) is more than zero, the secondary earner income test is then applied to work out any reduction of the provisional rate.</p>
+<p>There is no SIFS reduction where the secondary earner's taxable income is $16,000 or less.</p>
+<p>For each dollar above $16,000, the SIFS rate decreases by $0.15 until the provisional rate is reduced to nil.</p>
+<p>The income level at which the provisional rate is reduced to nil varies depending on the amount of the provisional rate.</p>
+<p>If the provisional rate is the maximum rate of $300, the provisional rate would be reduced to nil at $18,000.</p>
+<p>If a couple has the same taxable income, the same amount of taxable income is used in the primary earner income test and the secondary earner income test. As the primary earner test phases in at $68,000 and the secondary earner text phases out at $18,000, if the incomes were the same, only one condition would be met and accordingly the resulting rate is nil.</p>
+<h2>Determining the rate of SIFS</h2>
+<p>An individual's entitlement to <a href="../acronyms#ftb" title="Family tax benefit">FTB</a> based on at least one FTB child or an individual's effective claim for SIFS would result in a SIFS determination after the end of the particular income year. However, a determination would not be made in relation to a period in the income year until an assessment has been made of the taxable income for that income year of:</p>
+<ul><li>the individual entitled to FTB or claiming SIFS if the individual is required to lodge an income tax return for that year, and</li>
+<li>the individual's partner in that period if the partner is required to lodge an income tax return for that year. (This refers to the individual's partner at any time during that year).</li>
+</ul><h2>Method of determining rate of SIFS</h2>
+<p>FA(Admin)Act subsection 84(G)4 sets out the method statement that applies where the main income earner's taxable income (rounded down to the nearest dollar) is more than $68,000 and less than $150,000.</p>
+<p>Step 1 requires working out the main income earner's taxable income.</p>
+<p>Step 2 provides that the main income earner's taxable income is reduced by $68,000.</p>
+<p>Step 3 multiplies the amount established in Step 2 by 0.025.</p>
+<p>Step 4 provides that, if the amount in step 3 is less than or equal to $300, this is the individual's provisional component.</p>
+<p>Step 5 provides that, if the amount in step 3 is greater than $300, the provisional component is $300 if the main income earner's taxable income exceeds $80,000 but does not exceed $120,000, or, if their taxable income exceeds $120,000, the provisional component is $300 less $0.01 for each dollar of the excess.</p>
+<p>Step 6 provides that, if the individual is not a member of a couple, the annual rate of SIFS is the provisional component.</p>
+<p>Step 7 provides that, if the individual is a member of a couple, then the annual rate is the provisional component less any reduction under step 8.</p>
+<p>Step 8 provides that, if the low income earner's taxable income (rounded down to the nearest dollar) is greater than $16,000, the provisional component is reduced by $0.15 for each dollar of the excess.</p>
+<div class="example">
+<p><strong>Example: </strong>George has one qualifying child. George was not a member of a couple from 1 July until 25 December 2016 (178 days). George was a member of a couple with Mildred from 26 December until 30 June 2017 (187 days). George has a taxable income of $125,000 and is the primary income earner. Mildred had a taxable income of $17,000 and was the secondary income earner during their partnership.</p>
+<p>Determination of rate:</p>
+<ul><li>Step 1: main income earner = $125,000</li>
+<li>Step 2: $125,000 - $68,000 = $57,000</li>
+<li>Step 3: $57,000 × 0.025 = $1,425</li>
+<li>Step 4: provisional amount = $300 (because $1450 is greater than $300)</li>
+<li>Step 5: main income earner's taxable income of $125,000 exceeds $120,000 by $5,000
+<ul><li>$5,000 × $0.01 = $50</li>
+<li>$300 - $50 = $250</li>
+<li>Provisional component = $250</li>
+<li>$250 ÷ 365 days = $0.69</li>
+<li>178 days × $0.69 = $122.82 (for the period when George was single)</li>
+</ul></li>
+<li>Step 6: as the secondary income earner's taxable income of $17,000 is greater than $16,000 by $1,000, this reduces the provisional component by:
+<ul><li>$1,000 × $0.15 = $150</li>
+</ul></li>
+<li>Step 7: annual rate is the provisional component of $250 less reduction under step 6:
+<ul><li>$250 - $150 = $100</li>
+<li>$100 ÷ 365 days = $0.28</li>
+<li>187 days × $0.28 = $52.36 (for the period when George was partnered)</li>
+</ul></li>
+<li>Total SIFS payment to George = $122.82 + $52.36 = $175.18</li>
+</ul></div>
+<h2>Daily rate of SIFS</h2>
+<p>An annual rate of SIFS is calculated and then converted to a daily rate by dividing by 365, always rounding up to the nearest cent.</p>
+<p>An individual's SIFS payment is then the sum of the daily SIFS rates for the applicable days in the relevant financial year, as calculated above.</p>
+<h2>Shared care</h2>
+<p>Where more than one adult has care of a qualifying SIFS child for at least 35% of the time, this child is in a shared care relationship (<a href="../2/1/1/20">2.1.1.20</a>). Each individual's percentage of care does not affect their rate of SIFS. This means that SIFS is paid at the appropriate income tested rate regardless of shared care. The maximum amount of SIFS an individual can receive per relevant period is up to around $300, however a singular child may be the qualifying SIFS child for more than one individual.</p>
+<h2>Blended rates</h2>
+<p>Where a couple in a blended family (<a href="../1/1/b/30">1.1.B.30</a>) is eligible for SIFS, each member is eligible to receive a percentage of the total SIFS payment attracted by the family.</p>
+<p>The total SIFS payment attracted by the family is split according to the blended family percentages that applied daily throughout the relevant financial year using existing family assistance blended family rules.</p>
+<p>The total maximum SIFS payment received by a blended family in a given financial year is up to around $300.</p>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00490" title="A New Tax System (Family Assistance) Act 1999">FAAct</a> section 57G When an individual is eligible for SIFS in normal circumstances, section 84G Rate of SIFS</p>
+<p><a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 65K Need for a claim, section 65KA How to claim, section 65KB Tax file number requirement to be satisfied for claims for a past period, section 65KK Determination of past period entitlement claim, section 65KP Payment of SIFS-no claim required, section 65KQ Payment of SIFS-claim required, section 65KR Secretary's power to request tax file numbers</p>
+<p><strong>Policy reference:</strong> FA Guide <a href="../2/11">2.11</a> SIFS Eligibility, <a href="../6/4">6.4</a> Reconciliation</p>
+</div>
+</article>	<div id="view-last-reviewed-date">
+		
+		  
+      Last reviewed:     3 July 2017  	</div>
+</div></div>
+<footer role="contentinfo" id="footer">
+	<ul class="menu"><li class="first leaf"><a href="../../contact-us">Contact us</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/copyright-disclaimer" title="">Copyright &amp; Disclaimer</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/privacy-policy" title="">Privacy</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
+<li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
+</ul></footer>
+<script type="text/javascript" src="../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+</body>
+</html>

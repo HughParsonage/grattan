@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="shortlink" href="../../../../node/15998" />
+<link rel="canonical" href="40" />
+<meta name="viewport" content="width=device-width" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>5.4.6.40 Formula for Calculating Special Employment Advance Payments | Guide to Social Security Law</title>
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
+<script type="text/javascript" src="../../../../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"-9_j27J6r2ablHzDuN6_xuWWHixxy8lrxubryRdOnjs","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/guide-social-security-law\/5\/4\/6\/40":true}});
+//--><!]]>
+</script>
+<!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
+</head>
+<body class="">
+<ul class="offleft" id="top">
+<li><a href="40#navigation">Skip to navigation</a></li>
+<li><a href="40#content">Skip to main content</a></li>
+</ul>
+<nav id="global">
+	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
+<div class="menu-block">
+<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<li class="leaf menu-mlid-7597"><a href="../../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
+<li class="leaf has-children menu-mlid-513"><a href="../../../../child-support-guide">Child Support Guide</a></li>
+<li class="leaf has-children menu-mlid-491"><a href="../../../../family-assistance-guide">Family Assistance Guide</a></li>
+<li class="leaf has-children active-trail menu-mlid-489"><a href="../../../../guide-social-security-law.1" class="active-trail">Guide to Social Security Law</a></li>
+<li class="last leaf has-children menu-mlid-490"><a href="../../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+</ul></div></nav>
+<header role="banner">
+	<a href="../../../../index.html" rel="home"><img src="../../../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
+<p class="site-name">Guides to Social Policy Law</p>
+<form class="search-form" role="search" action="40" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
+  <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
+ <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-Pz5tgXqnPMgzhPhus5vYxkBnxSFejnEKcCszEZct604" />
+<input type="hidden" name="form_id" value="search_block_form" />
+</div></form>	<h2>Guide to Social Security Law</h2>
+<p>Version 1.237 - Released 19 October 2017</p>
+	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
+</header>
+<div id="contentwrap">
+	<nav role="navigation" id="navigation">
+	<div class="menu-block">
+<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../../../../guide-social-security-law.1" title="">Using the Guide to Social Security Law</a></li>
+<li class="collapsed menu-mlid-493"><a href="../../../updates">What&#039;s New</a></li>
+<li class="collapsed menu-mlid-2295"><a href="../../../1">1 Key Terms &amp; Principles</a></li>
+<li class="collapsed menu-mlid-2294"><a href="../../../2">2 Claim Verification</a></li>
+<li class="collapsed menu-mlid-2293"><a href="../../../3">3 Qualification &amp; Payability</a></li>
+<li class="collapsed menu-mlid-2292"><a href="../../../4">4 Income &amp; Assets</a></li>
+<li class="expanded active-trail menu-mlid-2291"><a href="../../../5" class="active-trail">5 Payment Rates</a><ul class="menu"><li class="first collapsed menu-mlid-2946"><a href="../../1">5.1 Current Rates</a></li>
+<li class="collapsed menu-mlid-3005"><a href="../../2">5.2 Historical Rates</a></li>
+<li class="collapsed menu-mlid-3058"><a href="../../3">5.3 Taxation</a></li>
+<li class="expanded active-trail menu-mlid-3063"><a href="../../4" class="active-trail">5.4 Advance Payments</a><ul class="menu"><li class="first collapsed menu-mlid-3064"><a href="../1">5.4.1 Social Security Entitlement Advance Payment</a></li>
+<li class="leaf menu-mlid-3072"><a href="../2">5.4.2 Number not currently in use</a></li>
+<li class="leaf menu-mlid-3073"><a href="../3">5.4.3 PhA Advance Payment</a></li>
+<li class="leaf menu-mlid-3074"><a href="../4">5.4.4 EEP Advance Payment</a></li>
+<li class="leaf menu-mlid-3075"><a href="../5">5.4.5 MOB Advance Payment</a></li>
+<li class="last expanded active-trail menu-mlid-3076"><a href="../6" class="active-trail">5.4.6 Special Employment Advance Payments</a><ul class="menu"><li class="first leaf menu-mlid-3077"><a href="10">5.4.6.10 Qualification for Special Employment Advance Payments</a></li>
+<li class="leaf menu-mlid-3078"><a href="20">5.4.6.20 SEA - Return to Work Claims</a></li>
+<li class="leaf menu-mlid-3079"><a href="30">5.4.6.30 SEA - Income Not Received Claims</a></li>
+<li class="leaf active-trail active menu-mlid-3080"><a href="40" class="active-trail active">5.4.6.40 Formula for Calculating Special Employment Advance Payments</a></li>
+<li class="last leaf menu-mlid-3081"><a href="50">5.4.6.50 Repayment of Special Employment Advance Payments</a></li>
+</ul></li>
+</ul></li>
+<li class="last collapsed menu-mlid-3082"><a href="../../5">5.5 Samples of Rate Calculations</a></li>
+</ul></li>
+<li class="collapsed menu-mlid-2290"><a href="../../../6">6 Reviews, Debts &amp; Payment Recovery</a></li>
+<li class="collapsed menu-mlid-2289"><a href="../../../7">7 Portability &amp; CFP</a></li>
+<li class="collapsed menu-mlid-2288"><a href="../../../8">8 Administration Act Provisions</a></li>
+<li class="collapsed menu-mlid-2278"><a href="../../../9">9 Visas, Entitlements &amp; Assurances of Support</a></li>
+<li class="collapsed menu-mlid-2296"><a href="../../../10">10 Australian Social Security Agreements</a></li>
+<li class="collapsed menu-mlid-2297"><a href="../../../11">11 Income Management</a></li>
+<li class="leaf menu-mlid-2298"><a href="../../../acronyms">Acronym List</a></li>
+<li class="leaf menu-mlid-7297"><a href="../../../keywords">Keyword Index</a></li>
+<li class="leaf menu-mlid-7372"><a href="../../../act-references">Act Reference Index</a></li>
+<li class="last leaf menu-mlid-7168"><a href="../../../sitemap">Site Map</a></li>
+</ul></div>	</nav>
+	<div id="breadcrumb"><a href="../../../../index.html">Home</a> &raquo; <a href="../../../../guide-social-security-law.1">Guide to Social Security Law</a> &raquo; <a href="../../../5" class="active-trail">5 Payment Rates</a> &raquo; <a href="../../4" class="active-trail">5.4 Advance Payments</a> &raquo; <a href="../6" class="active-trail">5.4.6 Special Employment Advance Payments</a> &raquo; 5.4.6.40 Formula for Calculating Special Employment Advance Payments</div>
+<div id="utility">
+	
+<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/guide-social-security-law/5/4/6/40"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="content" role="main">
+<article id="node-15998">
+<h1 >5.4.6.40 Formula for Calculating Special Employment Advance Payments</h1>
+<h2>Minimum &amp; maximum <a href="../../../acronyms#sea" title="Special employment advance">SEA</a> payable</h2>
+<p>The minimum amount payable as a SEA is $50.00. The maximum amount payable is $500.00.</p>
+<h2>Income earned but not received - calculating the SEA</h2>
+<p>The total amount of the SEA payable to the recipient is the smallest of the following amounts:</p>
+<ul><li>the amount requested, or</li>
+<li>the reduction in basic entitlement caused by the unreceived income in the relevant fortnight after taking into account any working credits or income bank which can offset the unreceived income, or</li>
+<li>$500.00, or</li>
+<li>if the recipient already has a SEA, the difference between the outstanding SEA amount and $500.00.</li>
+</ul><div class="example">
+<p><strong>Example: </strong>A single recipient entitled to $325.70 basic <a href="../../../acronyms#nsa" title="Newstart allowance">NSA</a> has earned $500.00 but has not received it. The recipient already has an outstanding SEA of $150.00. The recipient has applied for a SEA of $400.00. The recipient is entitled to the smallest of the following amounts:</p>
+<ul><li>amount requested = $400.00, or</li>
+<li>reduction in basic entitlement = $292.00 (Under the benefit income test (<a href="../../../4/2/2">4.2.2</a>)), or</li>
+<li>$500.00, or</li>
+<li>$500.00 less the current outstanding SEA amount of $150.00 = $350.00.</li>
+</ul><p>In this example the recipient would be paid a SEA of $292.00.</p>
+</div>
+<div class="reference">
+<p><strong>Policy reference:</strong> SS Guide <a href="../../../3/1/11/30">3.1.11.30</a> Working Credit Depletion</p>
+</div>
+<h2>Recipients who do not receive their income over more than one fortnight</h2>
+<p>Recipients may receive more than one instalment of a SEA over sequential fortnights, if there is a period of time over which they earn but do not receive income. The amount of SEA may never exceed $500.00 (see <a href="50">5.4.6.50</a> for information on repayment of the SEA).</p>
+<div class="example">
+<p><strong>Example:</strong></p>
+<ul><li>Fortnight 1: A single recipient entitled to $325.70 basic NSA has earned $350.00 but has not received it. The recipient applies for and receives a SEA of $180.00.</li>
+<li>Fortnight 2: The recipient earns $600.00 but does not receive it. The recipient applies for and receives a SEA of $320.00. Total balance of SEA is $500.00.</li>
+<li>Fortnight 3: The recipient cannot apply for any additional SEA as the balance is $500.00.</li>
+</ul></div>
+<h2>Definite offer of employment - calculating the SEA</h2>
+<p>The total amount of the SEA payable to the recipient is the smallest of the following amounts:</p>
+<ul><li>amount requested, or</li>
+<li>the amount of financial assistance actually required by the recipient to take up the employment, or</li>
+<li>$500.00, or</li>
+<li>if the recipient already has a SEA, the difference between the outstanding SEA amount and $500.00.</li>
+</ul><h2>Definite offer of employment - effect of liquid assets</h2>
+<p>A recipient who is not a member of a couple will have their SEA reduced if their liquid assets exceed their fortnightly maximum payment rate (<a href="../../../1/1/m/54">1.1.M.54</a>). The SEA payable will be reduced by the amount of the excess liquid assets.</p>
+<p>A recipient who is a member of a couple will have their SEA reduced if their combined liquid assets exceed twice the recipient's fortnightly maximum payment rate. The SEA payable will be reduced by the amount of the excess liquid assets.</p>
+<div class="example">
+<p><strong>Example: </strong>A single recipient in receipt of NSA applies for a SEA of $500.00 to take up employment. The recipient's maximum payment rate (basic rate of NSA plus <a href="../../../acronyms#ra" title="Rent assistance">RA</a>) is $350.00. The recipient has $500.00 liquid assets. The liquid assets exceed the recipient's maximum payment rate by $150.00. The recipient would therefore only qualify for $350.00 SEA. (Amount requested = $500.00, less liquid assets excess of $150.00).</p>
+</div>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 14A Social security benefit liquid assets test definitions</p>
+</div>
+<h2>Definite offer of employment - SEA &amp; recipient's available funds do not cover the actual expense</h2>
+<p>Where a recipient has a definite offer of employment and the amount of SEA does not cover the expenses of taking up the employment, the recipient must demonstrate that the SEA combined with their own financial resources would enable them to take up the employment. In effect a SEA cannot be paid if the recipient cannot demonstrate that it will enable them to take up the job.</p>
+<div class="example">
+<p><strong>Example:</strong> recipient with outstanding SEA amount of $350.00 has a definite offer of work. To commence work, the recipient must purchase work tools costing $250.00. These are essential to taking up the work. The recipient is only qualified for a SEA of $150.00. The recipient will only be paid the SEA if it can be demonstrated that they can access the additional $100.00, and the required purchase can be made.</p>
+</div>
+</article>	<div id="view-last-reviewed-date">
+		
+		  
+      Last reviewed:     1 July 2015  	</div>
+</div></div>
+<footer role="contentinfo" id="footer">
+	<ul class="menu"><li class="first leaf"><a href="../../../../contact-us">Contact us</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/copyright-disclaimer" title="">Copyright &amp; Disclaimer</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/privacy-policy" title="">Privacy</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
+<li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
+</ul></footer>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+</body>
+</html>

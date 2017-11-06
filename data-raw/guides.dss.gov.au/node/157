@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="shortlink" href="157" />
+<link rel="canonical" href="../child-support-guide/4/3/3" />
+<meta name="viewport" content="width=device-width" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>4.3.3 Implementing Court Orders Made under the Child Support Legislation | Guides to Social Policy Law</title>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
+<script type="text/javascript" src="../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"BQWkQYh8jTVp-8ZJvh08cdP81qsBZVmbTXtzovUicOg","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/157":true}});
+//--><!]]>
+</script>
+<!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
+</head>
+<body class="">
+<ul class="offleft" id="top">
+<li><a href="157#navigation">Skip to navigation</a></li>
+<li><a href="157#content">Skip to main content</a></li>
+</ul>
+<nav id="global">
+	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
+<div class="menu-block">
+<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<li class="leaf menu-mlid-7597"><a href="../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
+<li class="leaf has-children active-trail menu-mlid-513"><a href="../child-support-guide" class="active-trail">Child Support Guide</a></li>
+<li class="leaf has-children menu-mlid-491"><a href="../family-assistance-guide">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="last leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+</ul></div></nav>
+<header role="banner">
+	<a href="../index.html" rel="home"><img src="../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
+<p class="site-name">Guides to Social Policy Law</p>
+<form class="search-form" role="search" action="157" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
+  <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
+ <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-YvVvGW0qgpi9C3vsQzn6YOcjZhOfzZySrRsE3KBwuwo" />
+<input type="hidden" name="form_id" value="search_block_form" />
+</div></form>	<h2>Child Support Guide</h2>
+<p>Version 4.27 - Released 20 September 2017</p>
+	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
+</header>
+<div id="contentwrap">
+	<nav role="navigation" id="navigation">
+	<div class="menu-block">
+<ul class="menu"><li class="first leaf menu-mlid-7286"><a href="../child-support-guide" title="">Using the Child Support Guide</a></li>
+<li class="collapsed menu-mlid-514"><a href="../child-support-guide/updates">What&#039;s New</a></li>
+<li class="collapsed menu-mlid-515"><a href="../child-support-guide/1">1 About the Scheme</a></li>
+<li class="collapsed menu-mlid-518"><a href="../child-support-guide/2">2 Child Support Assessments</a></li>
+<li class="collapsed menu-mlid-555"><a href="../child-support-guide/3">3 Registrable Maintenance Liabilities</a></li>
+<li class="expanded active-trail menu-mlid-637"><a href="../child-support-guide/4" class="active-trail">4 Objecting, Seeking a Review, Appealing &amp; Applying to Court</a><ul class="menu"><li class="first collapsed menu-mlid-638"><a href="../child-support-guide/4/1" title="This chapter describes the objections process in the Child Support (Registration and Collection) Act 1988 and what parents can do if they think the Registrar has made a wrong decision on their case.">4.1 Objections</a></li>
+<li class="collapsed menu-mlid-647"><a href="../child-support-guide/4/2" title="A parent can apply to the AAT for an AAT first review of most objection decisions made by the Registrar. This chapter explains which decisions the AAT can review and the process involved.">4.2 External Review Applications to the AAT</a></li>
+<li class="last expanded active-trail menu-mlid-657"><a href="../child-support-guide/4/3" title="This chapter explains:
+•what court applications a parent can make if they are not satisfied with the Registrar&#039;s decisions or an outcome of the AAT first or second review of a decision. This includes applications under the child support legislation and the Administrative Decisions (Judicial Review) Act 1977,
+•the orders a court can make on those applications,
+•orders that a court may make under the FL Act that affect a child support assessment or the details entered in the Register..." class="active-trail">4.3 Court Applications, Appeals &amp; Orders</a><ul class="menu"><li class="first leaf menu-mlid-659"><a href="../child-support-guide/4/3/1">4.3.1 Overview</a></li>
+<li class="leaf menu-mlid-660"><a href="../child-support-guide/4/3/2">4.3.2 Applications &amp; Orders about Decisions under the CSA Act</a></li>
+<li class="leaf active-trail active menu-mlid-661"><a href="../child-support-guide/4/3/3" class="active-trail active">4.3.3 Implementing Court Orders Made under the Child Support Legislation</a></li>
+<li class="leaf menu-mlid-662"><a href="../child-support-guide/4/3/4">4.3.4 FL Act Orders Affecting a Child Support Assessment</a></li>
+<li class="leaf menu-mlid-663"><a href="../child-support-guide/4/3/5">4.3.5 Effect of a Court Order for Maintenance of an Eligible Child Where There is no Assessment</a></li>
+<li class="leaf menu-mlid-664"><a href="../child-support-guide/4/3/6">4.3.6 Appealing AAT Decisions</a></li>
+<li class="last leaf menu-mlid-665"><a href="../child-support-guide/4/3/7">4.3.7 The Administrative Decisions (Judicial Review) Act 1977</a></li>
+</ul></li>
+</ul></li>
+<li class="collapsed menu-mlid-678"><a href="../child-support-guide/5">5 Collecting Child Support</a></li>
+<li class="collapsed menu-mlid-716"><a href="../child-support-guide/6">6 Administration</a></li>
+<li class="leaf menu-mlid-10696"><a href="../child-support-guide/acronyms">Acronym List</a></li>
+<li class="leaf menu-mlid-7193"><a href="../child-support-guide/keywords" title="">Keyword Index</a></li>
+<li class="last leaf menu-mlid-7167"><a href="../child-support-guide/sitemap">Site Map</a></li>
+</ul></div>	</nav>
+	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../child-support-guide">Child Support Guide</a> &raquo; <a href="../child-support-guide/4" class="active-trail">4 Objecting, Seeking a Review, Appealing &amp; Applying to Court</a> &raquo; <a href="../child-support-guide/4/3" title="This chapter explains:
+•what court applications a parent can make if they are not satisfied with the Registrar&#039;s decisions or an outcome of the AAT first or second review of a decision. This includes applications under the child support legislation and the Administrative Decisions (Judicial Review) Act 1977,
+•the orders a court can make on those applications,
+•orders that a court may make under the FL Act that affect a child support assessment or the details entered in the Register..." class="active-trail">4.3 Court Applications, Appeals &amp; Orders</a> &raquo; 4.3.3 Implementing Court Orders Made under the Child Support Legislation</div>
+<div id="utility">
+	
+<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/node/157"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="content" role="main">
+<article id="node-157">
+<h1 >4.3.3 Implementing Court Orders Made under the Child Support Legislation</h1>
+<h2>Context</h2>
+<p>When notified of an order that affects an assessment, the Registrar must take any action necessary to amend the child support assessment to give effect to the order. This section explains how the Registrar gives effect to specific kinds of court orders.</p>
+<div class="reference">
+<h2>Act references</h2>
+<p><a href="https://www.legislation.gov.au/Series/C2004A03872" title="Child Support (Assessment) Act 1989">CSA Act</a> section 108, section 113, section 119, section 127, section 138, section 142</p>
+<p><a href="https://www.legislation.gov.au/Series/C2004A03596" title="Child Support (Registration and Collection) Act 1988">CSRC Act</a> Part VIIIB</p>
+</div>
+<h2>On this page</h2>
+<p>This section explains how the Registrar gives effect to specific kinds of court orders, including</p>
+<ul><li><a href="157#courtordersbecomefinal">when court orders become final</a></li>
+<li><a href="157#ordersforaperiodicamount">orders for a periodic amount</a></li>
+<li><a href="157#ordersreducingtheassessment">orders reducing the assessment to nil</a></li>
+<li><a href="157#anordertoreducearrears">an order to reduce arrears under the CSA Act</a></li>
+<li><a href="157#ordersvaryingsetting">orders varying, setting aside or nullifying an earlier order</a></li>
+<li><a href="157#orderstheregistrarcannot">orders the Registrar cannot implement</a></li>
+<li><a href="157#severabilityofclauses">severability of clauses in an order</a></li>
+</ul><p>The section also discusses</p>
+<ul><li><a href="157#enddatesoforders">end dates of orders to change the assessment</a></li>
+<li><a href="157#theeffectofanagreement">effect of an agreement on an order to change the assessment</a></li>
+<li><a href="157#terminatingevents">terminating events &amp; change of assessment orders</a></li>
+<li><a href="157#settingarateofchild">setting a rate of child support for more than one child</a></li>
+<li><a href="157#unemploymentclauses">unemployment clauses</a></li>
+<li><a href="157#selfsupportingchildren">self-supporting children</a></li>
+<li><a href="157#childreninfulltime">children in full-time education</a></li>
+<li><a href="157#ordersandnotations">orders and notations</a></li>
+<li><a href="157#recitals">recitals</a></li>
+</ul><h2 id="courtordersbecomefinal">When court orders become final</h2>
+<p>When a court's decision under the child support legislation becomes final, the Registrar must take any action necessary to amend the child support assessment to give effect to the order. However, the Registrar will generally give effect to a court order as soon as possible after being notified of the provisions of the court order, without waiting for the order to become final. If the order is changed following an appeal, the Registrar will amend the child support assessment again to reflect the terms of the later order.</p>
+<p>An order of a single Judge or Magistrate becomes final at the end of the period allowed by the court rules for appealing against that to a higher court. This is usually 28 days. An order of the full bench of the Family Court will become final 30 days after it is made unless an application is made to the High Court for special leave to appeal.</p>
+<p><strong>Note:</strong> An order made by consent of the parties is an order of a court, and not a child support agreement.</p>
+<h2 id="ordersforaperiodicamount">Orders for a periodic amount</h2>
+<p>An order may say that a parent must pay a periodic amount but not state whether the order is made under the CSA Act or if it is an order for a change to the assessment. The Registrar will interpret such orders as orders to change the assessment unless there is an indication to the contrary. If there is a heading on the order that suggests it is made under the provisions of the FL Act the case officer should obtain a copy of the application to check whether the applicant applied for a departure order.</p>
+<p>The Registrar will give effect to an order for a change to the assessment even if there has not been a change of assessment decision and/or an objection decision or if the Registrar is not aware of any <a href="../child-support-guide/acronyms#aat" title="Administrative Appeals Tribunal">AAT</a> first review of an objection decision. The Registrar will accept, without further investigation that the court has acted correctly in making the order, unless there is any further order stating that the order is invalid or cannot be enforced. The court may have been considering other matters such as a property settlement and so it was not necessary for the parent concerned to seek a departure from the assessments by making an application to the Registrar, to object to an earlier decision under Part 6A of the CSA Act or to seek an AAT review.</p>
+<h2 id="ordersreducingtheassessment">Orders reducing the assessment to nil</h2>
+<p>The Registrar cannot make a change of assessment decision which has the effect of reducing the annual rate of child support below the minimum annual rate for that period (section 98SA). However, the court may make such orders and the Registrar will give effect to them (section 66(8)).</p>
+<h2 id="anordertoreducearrears">An order to reduce arrears under the CSA Act</h2>
+<p>A departure order or agreement may purport to discharge arrears where an assessment has been made under the CSA Act. The child support legislation does not expressly provide for arrears to be discharged but the Registrar will give effect to these orders and agreements where possible by varying the rate of child support for a specified period. To avoid any uncertainty a departure order or agreement which seeks to discharge arrears should set the rate of child support for the period equal to the amount which has already been paid.</p>
+<h2 id="ordersvaryingsetting">Orders varying, setting aside or nullifying a particular order</h2>
+<p>The CSA Act does not provide for a parent to apply to have a previous court order varied or set aside. However, the same effect can be obtained by applying for a change to the assessment. If a court makes such an order, the Registrar will interpret it to be an order to change the child support assessment and make appropriate amendments to the assessment.</p>
+<p>If a court makes an order that nullifies an earlier order, this means that the earlier order should not have been made and has no legal effect. The Registrar will amend the assessment as if the earlier order had not been made.</p>
+<h2 id="orderstheregistrarcannot">Orders the Registrar cannot implement</h2>
+<p>If the Registrar cannot give effect to an order, the parents, and if appropriate, their legal representatives, must be advised. They must also be advised that they have the right to object (<a href="../child-support-guide/4/1">4.1</a>) under Part VII of the CSRC Act if they consider that the particulars of their assessment are incorrect because the Registrar did not give effect to the order.</p>
+<h2 id="severabilityofclauses">Severability of clauses in an order</h2>
+<p>An agreement or court order that contains clauses that can be accepted or registered under the child support legislation may also contain clauses that cannot be accepted or registered under the legislation. The clauses that could normally be registered or accepted cannot be registered or accepted if doing so, without registering the other clauses, would change their meaning or change the essential nature of the order or agreement. They are said to be 'not severable' from the other clauses and the application for acceptance or registration of the entire order or agreement must be refused.</p>
+<p>The Registrar will advise both parents if there are clauses which cannot be accepted or registered and discuss alternative options.</p>
+<h2 id="enddatesoforders">End dates of orders to change the assessment</h2>
+<p>An order changing the assessment has effect until: a terminating event occurs (section 142); or a further departure order is made; or the end date or occurrence of an event specified in the order.</p>
+<h2 id="theeffectofanagreement">Effect of an agreement on an order to change the assessment</h2>
+<p>When the Registrar accepts a child support agreement which includes provisions:</p>
+<ul><li>for one party to pay periodic child support to another,</li>
+<li>varying the rate at which periodic child support is already payable, or</li>
+<li>agreeing any other matter that can be included in an order made by the Court under Division 4 of Part 7,</li>
+</ul><p>the agreement has the same effect as a new court order and can replace or otherwise affect an existing court order (section 95(2)).</p>
+<h2 id="terminatingevents">Terminating events &amp; change of assessment orders</h2>
+<p>A terminating event (<a href="../child-support-guide/2/10/3">2.10.3</a>) may happen in relation to all or some of the children covered by the assessment subject to a court order that changes the assessment. The order ceases to be in force as of the date of the terminating event (CSA Act section 142, CSRC Act section 111H). The order will remain in force for any child not affected by the terminating event.</p>
+<p>If a parent reapplies for an administrative assessment after a terminating event (for example, because a child who had left their care later returns to their care), the Registrar will use the formula and not the departure order when a new assessment is made for the child for whom the assessment ended.</p>
+<p>Where a departure order is in force that covers only some of the children of the relationship, or where the order has ceased to be in force for some of the children, the Registrar will make a 'mixed assessment'. Some of the children will be assessed in accordance with the departure order and others in accordance with the child support formula, as appropriate.</p>
+<h2 id="settingarateofchild">Setting a rate of child support for more than one child</h2>
+<p>Ideally, a court order that sets a rate of child support for more than one child will state how much is payable for each of the children. In the absence of such a statement, the Registrar cannot apportion the amount between the children. The child support assessment will continue to reflect the full amount payable under the order when a terminating event happens in relation to one or more of the children.</p>
+<h2 id="unemploymentclauses">Unemployment clauses</h2>
+<p>Court orders and agreements can suspend or reduce the liability when a parent is unemployed. Where a clause is ambiguous or uncertain, the Registrar will discuss the problem with both parents to try to obtain agreement about the intention of the clause. If the parents are unable to agree on the intention of the clause, the Registrar will take the following issues into account when interpreting the court order.</p>
+<p>For the liability to be varied when a parent becomes unemployed, the Registrar must be able to determine the person's employment status. The Registrar will accept that a parent is unemployed if they receive a social security benefit or pension, in the absence of any evidence to the contrary. Where the parent does not receive a benefit or pension, the Registrar will consider statements made by the parent and documentary evidence such as a certificate of separation.</p>
+<p>Many court orders and agreements allow for a reduced liability during periods when a parent is 'in receipt of unemployment benefits'. A difficulty arises when a parent is not employed but is not receiving an unemployment benefit, or is receiving another type of benefit. A broad interpretation will be given to the term 'unemployment benefits'. The Registrar may apply such a clause where the person is receiving a social security benefit or pension as a result of not being in employment (e.g. Disability Support Pension or Sickness Allowance). However, if a parent is receiving benefits but their employment hasn't been terminated the parent is still employed.</p>
+<p>A parent may be unable to work because of a work related injury, and receive periodic compensation payments. The Registrar will determine if the parent is still employed by their employer. If the employment contract has been terminated, the Registrar will accept that the person is 'unemployed' despite being in receipt of payments which may be greater than those payable to unemployed welfare beneficiaries.</p>
+<p>A court can make an order that varied a parent's liability in a current period of unemployment, or one that applies during any period of unemployment.</p>
+<div class="example">
+<p><strong>Examples</strong></p>
+<p>'The amount payable is to be reduced to $10 per week until F gains full-time employment' applies to F's current period of unemployment.</p>
+<p>'The amount payable is to be reduced to $10 per week during periods when F is not in full-time employment' applies whenever F is unemployed after the date of the order.</p>
+</div>
+<h2 id="selfsupportingchildren">Self-supporting children</h2>
+<p>Orders and agreements sometimes contain a provision providing for a reduction in child support payable if the child is self-supporting. Where a clause is ambiguous or uncertain the problem will be discussed with both parents to obtain agreement about the intention of the clause. If the parents are unable to agree on the intention of the clause, the Registrar will interpret the clause in the following way.</p>
+<p>The Registrar must be satisfied that the child is, in fact, supporting himself or herself. The Registrar will not consider whether or not the child is capable of being self-supporting or should be self-supporting (although this may provide a reason for a change of assessment in appropriate cases).</p>
+<p>In determining whether a child is self-supporting, the Registrar will determine the child's actual income and whether the child is paying for his or her basic living expenses without financial support from another person. Basic living expenses include accommodation, food, household utilities and transport costs. The Registrar will disregard social security payments the child is receiving except where the child is not living with the payee. If the child is also making lifestyle choices which would not be available without an independent source of income (for example, buying a car), the child is more likely to be self-supporting.</p>
+<p>If the child is living away from home, the Registrar will consider whether the payee continues to have care and control of the child or whether the child is living independently from the payee and meeting their own costs. The Registrar will consider whether there has been a terminating event.</p>
+<p>If the child continues to live with the payee, they will be self-supporting if they pay a reasonable contribution towards household expenses including accommodation, utilities and food and groceries or if they pay board equal to this amount to the payee. If the child is living with the payee but is not contributing towards those household expenses or is making a nominal contribution only, the Registrar will find that the child is not self-supporting.</p>
+<h2 id="childreninfulltime">Children in full-time education</h2>
+<p>Orders sometimes state that they are to operate until a child ceases to be in full-time education or until they finish a particular level of education such as secondary schooling. Where a clause is ambiguous or uncertain the problem will be discussed with both parents to try to obtain agreement about the intention of the clause. If the parents are unable to agree on the intention of the clause, the Registrar will consider the following issues when interpreting the clause.</p>
+<p>Some institutions such as TAFE offer a range of courses from secondary education to vocational training and higher education courses. Tertiary education involves a distinct qualification, a certificate, diploma or degree, rather than matriculation or vocational training. The Registrar will ask for evidence from the payee about the child's student status. If the child is still at school, the Registrar will find that the child is in full-time education.</p>
+<p>If the child has finished school and is studying at an institution that considers the child as a full-time student, the Registrar will generally accept that the child is in full-time education.</p>
+<h2 id="ordersandnotations">Orders &amp; notations</h2>
+<p>An order for a change to the assessment made by consent under Part 7 of the CSA Act can sometimes contain notations, notes or annotations to draw attention to actions the parents have taken or will take in the future. Whilst a notation can indicate the parents' intentions, they are not orders and cannot be registered or vary an assessment.</p>
+<p>Such notations, however, may refer to the payment of expenses and support a proposition that a parent has agreed that they are separately or jointly responsible for certain payments. They may, therefore, form part of the evidence the Registrar considers in determining the parties' intentions for purposes such as non-agency payments or change of assessment matters.</p>
+<h2 id="recitals">Recitals</h2>
+<p>An order may contain information in the form of recitals. Recitals, generally, are statements setting out the facts and providing background that are considered by a court when making the order. Recitals often include a statement indicating the intention of the parties, however, recitals are usually not a legally binding part of the order. Recitals are often helpful when interpreting the order if there is any ambiguity in the clauses and words used in the order.</p>
+</article>	<div id="view-last-reviewed-date">
+		
+		  
+      Last reviewed:     15 August 2016  	</div>
+</div></div>
+<footer role="contentinfo" id="footer">
+	<ul class="menu"><li class="first leaf"><a href="../contact-us">Contact us</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/copyright-disclaimer" title="">Copyright &amp; Disclaimer</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/privacy-policy" title="">Privacy</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
+<li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
+</ul></footer>
+<script type="text/javascript" src="../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+</body>
+</html>
