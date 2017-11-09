@@ -1,5 +1,6 @@
 # Data for internal use
 # Must be sourced after modification
+library(htmltab)
 library(rsdmx)
 if (packageVersion("rsdmx") < package_version("0.5.10")) {
   warning("rsdmx will not properly connect to ABS for versions of rsdmx before 0.5.10")
@@ -672,12 +673,47 @@ residential_property_prices <-
          Darwin = Drw,
          `Australia (weighted average)` = AVG) %>%
   .[order(Date)] %>%
-  melt.data.table(id.vars = "Date", variable.name = "City", value.name = "Residential_property_price_index")
+  melt.data.table(id.vars = "Date",
+                  variable.name = "City",
+                  value.name = "Residential_property_price_index")
 
 devtools::use_data(residential_property_prices, overwrite = TRUE)
 
+NewstartRatesTable.raw <-
+  "http://guides.dss.gov.au/guide-social-security-law/5/2/1/20" %>%
+  htmltab::htmltab(which = '//*[@id="node-16056"]/table[11]')
 
+newstart_rates_table <-
+  NewstartTable.raw %>%
+  as.data.table %>%
+  # Only include entries following the heading within the table
+  .[seq_len(.N) > which(Date %pin% "From 1 July 1991.*became")] %>%
+  .[, Rate := sub(" Note P", "", Rate, fixed = TRUE)] %>%
+  .[, Date := as.Date(Date, format = "%d/%m/%Y")] %>%
+  .[, Rate := as.numeric(Rate)] %T>%
+  fwrite("data-raw/Newstart-allowance-rates.tsv", sep = "\t") %>%
+  .[] 
 
+newstart_income_test <-
+  # http://guides.dss.gov.au/guide-social-security-law/4/10/2
+  fread(input = 
+          paste0(
+"
+Date  income_free_area  income_threshold
+2015-07-01  102 252
+2014-03-20  100 250
+2013-01-01  62  250
+2006-07-01  62  250
+2000-07-01  60  140
+")) %>%
+  melt.data.table(id.vars = "Date",
+                  value.name = "income") %>%
+  .[, taper := 0.5] %>%
+  .[variable == "income_threshold", taper := 0.6] %>%
+  setkey(Date, income) %>%
+  .[]
+
+  
 
 
 
