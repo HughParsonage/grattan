@@ -7,6 +7,11 @@
 #' @param to_fy (character) a character vector with each element in the form "2012-13" representing the financial year that prices are to be inflated. 
 #' @param adjustment What CPI index to use ("none" = raw series, "seasonal", or "trimmed" [mean]).
 #' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. The internal data was updated on 2017-08-16.
+#' 
+#' There was a bug in \code{rsdmx 0.5-9} that prevented this working reliably.
+#' As this argument is the only to use \code{rsdmx}, version \code{0.5-10} is not a strict
+#' dependency, but users would be well-advised to use it. 
+#' 
 #' @param allow.projection Should projections beyond the ABS's data be allowed?
 #' @examples 
 #' cpi_inflator(100, from_fy = "2005-06", to_fy = "2014-15")
