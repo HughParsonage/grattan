@@ -173,13 +173,14 @@ lf_trend <-
   tryCatch({
     lf.url.trend <- 
       # "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978-02"
-      "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978"
+      # "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978"
+      "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/all?startTime=1978-02"
     lf <- rsdmx::readSDMX(lf.url.trend)
     lf <- 
       as.data.frame(lf) %>% 
       as.data.table %T>%
-      stopifnot(nrow(.) > 0) %>%
-      select(obsTime, obsValue) %T>%
+      {stopifnot(nrow(.) > 0)} %>%
+      .[, .(obsTime, obsValue = as.integer(obsValue * 1000))] %T>%
       fwrite("./data-raw/lf-trend.tsv", sep = "\t")
   }, 
   error = function(e){
