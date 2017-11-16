@@ -683,12 +683,19 @@ NewstartRatesTable.raw <-
   "http://guides.dss.gov.au/guide-social-security-law/5/2/1/20" %>%
   htmltab::htmltab(which = '//*[@id="node-16056"]/table[11]')
 
+NewstartRatesOver21Single1991 <-
+  "http://guides.dss.gov.au/guide-social-security-law/5/2/1/20" %>%
+  htmltab::htmltab(which = '//*[@id="node-16056"]/table[9]')
+
 newstart_rates_table <-
-  NewstartTable.raw %>%
+  NewstartRatesOver21Single1991 %>%
   as.data.table %>%
+  .[, is_single := TRUE] %>%
+  .[, min_age := 21] %>%
+  .[, max_age := Inf] %>%
   # Only include entries following the heading within the table
   .[seq_len(.N) > which(Date %pin% "From 1 July 1991.*became")] %>%
-  .[, Rate := sub(" Note P", "", Rate, fixed = TRUE)] %>%
+  .[, Rate := sub(" Note [MN]", "", Rate, perl = TRUE)] %>%
   .[, Date := as.Date(Date, format = "%d/%m/%Y")] %>%
   .[, Rate := as.numeric(Rate)] %T>%
   fwrite("data-raw/Newstart-allowance-rates.tsv", sep = "\t") %>%
@@ -696,21 +703,26 @@ newstart_rates_table <-
 
 newstart_income_test <-
   # http://guides.dss.gov.au/guide-social-security-law/4/10/2
-  fread(input = 
-          paste0(
-"
+  fread(input = "
 Date  income_free_area  income_threshold
 2015-07-01  102 252
 2014-03-20  100 250
 2013-01-01  62  250
 2006-07-01  62  250
 2000-07-01  60  140
-")) %>%
+") %>%
+  .[, Date := as.Date(Date)] %>%
+  setkey(Date) %>%
+  .[newstart_rates_table, roll = TRUE] %>%
+  .[, max_income_allowed := (10 / 4) * (Rate - 0.5 * (income_threshold - income_free_area))] %>%
+  .[]
   melt.data.table(id.vars = "Date",
                   value.name = "income") %>%
   .[, taper := 0.5] %>%
   .[variable == "income_threshold", taper := 0.6] %>%
-  setkey(Date, income) %>%
+  
+  setkey(Date, income) %T>%
+  fwrite("newstart-income-test.tsv", sep = "\t") %>% 
   .[]
 
   

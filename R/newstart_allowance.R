@@ -88,7 +88,9 @@ newstart_allowance <- function(ordinary_income,
   }
   
 }
-if (partner_re)
+
+if (FALSE) {
+# if (partner_re)
 
   
   
@@ -128,39 +130,39 @@ if (partner_re)
     # 
     # Add amount A and amount B
     
-    RESULT: THE ORDINARY INCOME REDUCTION.
-    Go to Step 5
-    
-    4C	
-    For any income of $104.00 and over, multiply by 0.4.
-    
-    RESULT: THE ORDINARY INCOME REDUCTION.
-    Go to step 7.
-    
-    4D	
-    For any income between $104.00 and $254.00 pf, multiply by 0.5. The result is amount A.
-    
-    For remaining income above $254.00 pf, multiply by 0.6. The result is amount B.
-    
-    Add amount A and amount B.
-    
-    RESULT: THE ORDINARY INCOME REDUCTION.
-    5	
-    If the person is a member of a couple, determine the excess partner income
-    
-    (see the tables under the previous headings for an explanation of this concept).
-    
-    6	
-    Multiply the excess partner income by 0.6.
-    
-    RESULT: THE PARTNER INCOME REDUCTION.
-    
-    7	
-    Determine the person's income reduction by adding:
-      
-      the person's ordinary income reduction
-    the partner income reduction.
-    RESULT: THE PERSON'S INCOME REDUCTION.
+    # RESULT: THE ORDINARY INCOME REDUCTION.
+    # Go to Step 5
+    # 
+    # 4C	
+    # For any income of $104.00 and over, multiply by 0.4.
+    # 
+    # RESULT: THE ORDINARY INCOME REDUCTION.
+    # Go to step 7.
+    # 
+    # 4D	
+    # For any income between $104.00 and $254.00 pf, multiply by 0.5. The result is amount A.
+    # 
+    # For remaining income above $254.00 pf, multiply by 0.6. The result is amount B.
+    # 
+    # Add amount A and amount B.
+    # 
+    # RESULT: THE ORDINARY INCOME REDUCTION.
+    # 5	
+    # If the person is a member of a couple, determine the excess partner income
+    # 
+    # (see the tables under the previous headings for an explanation of this concept).
+    # 
+    # 6	
+    # Multiply the excess partner income by 0.6.
+    # 
+    # RESULT: THE PARTNER INCOME REDUCTION.
+    # 
+    # 7	
+    # Determine the person's income reduction by adding:
+    #   
+    #   the person's ordinary income reduction
+    # the partner income reduction.
+    # RESULT: THE PERSON'S INCOME REDUCTION.
+# }
 }
-
 
