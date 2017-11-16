@@ -43,8 +43,13 @@ if (requireNamespace("taxstats", quietly = TRUE)){
   library(taxstats)
   sample_files_all <- get_sample_files_all()
 } else {
-  install.packages("taxstats", repos = "https://hughparsonage.github.io/drat/", type = "source")
-  library(taxstats)
+  templib <- tempfile()
+  hutils::provide.dir(templib)
+  install.packages("taxstats",
+                   lib = templib,
+                   repos = "https://hughparsonage.github.io/drat/",
+                   type = "source")
+  library("taxstats", lib.loc = templib)
   sample_files_all <- get_sample_files_all()
 }
 library(dplyr)
