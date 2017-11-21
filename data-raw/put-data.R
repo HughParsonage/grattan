@@ -701,6 +701,15 @@ newstart_rates_table <-
   fwrite("data-raw/Newstart-allowance-rates.tsv", sep = "\t") %>%
   .[] 
 
+CPI_July2015 <- function(income_free_area, Date) {
+  {
+    100L * cpi_inflator_general_date(from_date = "2015-07-01",
+                                                 to_date = Date)
+  } %>%
+    ceiling %>%
+    as.integer
+}
+
 newstart_income_test <-
   # http://guides.dss.gov.au/guide-social-security-law/4/10/2
   fread(input = "
@@ -714,15 +723,11 @@ Date  income_free_area  income_threshold
   .[, Date := as.Date(Date)] %>%
   setkey(Date) %>%
   .[newstart_rates_table, roll = TRUE] %>%
+  .[Date > "2015-07-01", 
+    income_free_area := CPI_July2015(income_free_area, Date)] %>%
   .[, max_income_allowed := (10 / 4) * (Rate - 0.5 * (income_threshold - income_free_area))] %>%
-  .[]
-  melt.data.table(id.vars = "Date",
-                  value.name = "income") %>%
-  .[, taper := 0.5] %>%
-  .[variable == "income_threshold", taper := 0.6] %>%
-  
-  setkey(Date, income) %T>%
-  fwrite("newstart-income-test.tsv", sep = "\t") %>% 
+  .[] %T>%
+  fwrite("data-raw/newstart-income-test.tsv", sep = "\t") %>% 
   .[]
 
   

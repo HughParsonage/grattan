@@ -4,9 +4,12 @@
 \alias{youth_allowance}
 \title{Youth allowance}
 \usage{
-youth_allowance(ordinary_income, age = 18, eligible_if_over22 = FALSE,
-  is_single = TRUE, living_at_home = FALSE, has_children = FALSE,
-  isjspceoalfofcoahodeoc = FALSE, per = "fortnight")
+youth_allowance(ordinary_income, fy.year, age = 18,
+  eligible_if_over22 = FALSE, is_single = TRUE, living_at_home = FALSE,
+  has_children = FALSE, isjspceoalfofcoahodeoc = FALSE, per = "fortnight",
+  taper1 = 0.5, taper2 = 0.6, FT_YA_student_lower = 437,
+  FT_YA_student_upper = 524, FT_YA_jobseeker_lower = 143,
+  FT_YA_jobseeker_upper = 250, excess_partner_income_mu = 0.6)
 }
 \arguments{
 \item{eligible_if_over22}{To be eligible for Youth Allowance while over 22, recipients must either commence full-time study or an Australian apprenticeship having been in receipt of an income support payment for at least 6 out of the last 9 months since turning 22, or study an approved course in English where English is not their first language.}

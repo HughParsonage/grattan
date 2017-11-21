@@ -7,47 +7,81 @@
 
 
 youth_allowance <- function(ordinary_income,
+                            fy.year,
                             age = 18,
                             eligible_if_over22 = FALSE,
                             is_single = TRUE,
                             living_at_home = FALSE,
                             has_children = FALSE,
                             isjspceoalfofcoahodeoc = FALSE,
-                            per = "fortnight") {
+                            per = "fortnight",
+                            taper1 = 0.5,
+                            taper2 = 0.6,
+                            FT_YA_student_lower = 437,
+                            FT_YA_student_upper = 524,
+                            FT_YA_jobseeker_lower = 143,
+                            FT_YA_jobseeker_upper = 250,
+                            excess_partner_income_mu = 0.6) {
   stopifnot(per == "fortnight")
   
-  max_rate_September_2017 <- 
-    if_else(and(age >= 22,
-                eligible_if_over22),
-            if_else(is_single,
-                    if_else(living_at_home,
-                            353.50,
-                            531.60),
-                    480.50),
-            # Under 22
-            if_else(is_single,
-                    if_else(and(age %between% c(16, 17), 
-                                living_at_home),
-                            239.50,
-                            if_else(and(age >= 18, 
+  max_rate_September_2017 <-
+    if_else(ordinary_income > Inf,
+            0,
+            if_else(and(age >= 22,
+                        eligible_if_over22),
+                    if_else(is_single,
+                            if_else(living_at_home,
+                                    353.50,
+                                    531.60),
+                            480.50),
+                    # Under 22
+                    if_else(is_single,
+                            if_else(and(age %between% c(16, 17), 
                                         living_at_home),
-                                    288.10,
-                                    if_else(and(age >= 16,
-                                                !living_at_home),
-                                            437.50,
-                                            if_else(has_children,
-                                                    573.30,
-                                                    if_else(isjspceoalfofcoahodeoc,
-                                                            752.60,
-                                                            NA_real_))))),
-                    # is partnered
-                    if_else(has_children,
-                            480.50,
-                            437.50)))
+                                    239.50,
+                                    if_else(and(age >= 18, 
+                                                living_at_home),
+                                            288.10,
+                                            if_else(and(age >= 16,
+                                                        !living_at_home),
+                                                    437.50,
+                                                    if_else(has_children,
+                                                            573.30,
+                                                            if_else(isjspceoalfofcoahodeoc,
+                                                                    752.60,
+                                                                    NA_real_))))),
+                            # is partnered
+                            if_else(has_children,
+                                    480.50,
+                                    437.50))))
   
   if (anyNA(max_rate_September_2017)) {
-    stop("Unknown recipient status for youth_allowance() at index ", which(is.na(max_rate_September_2017)), " . Check arguments.")
+    stop("Unknown recipient status for youth_allowance() at index ",
+         which(is.na(max_rate_September_2017)),
+         " . Check arguments.")
   }
   max_rate_September_2017
+  
+  # Benefit test
+  # http://guides.dss.gov.au/guide-social-security-law/4/2/2
+  # 2
+  ordinary_income_free_area <- 
+    cpi_inflator(100, from_fy = "2014-15", to_fy = fy.year)
+  
+  ordinary_income_excess <- pmaxC(ordinary_income - ordinary_income_free_area)
+  
+  
+  # 3
+  ordinary_income_reduction <- 
+    pmaxC(taper1 * (ordinary_income - FT_YA_student_lower) +
+            (taper2 - taper1) * (ordinary_income - FT_YA_jobseeker_upper),
+          0)
+  
+  excess_partner_income <- 0
+  
+  max_rate_September_2017 - 
+    ordinary_income_reduction +
+    excess_partner_income_mu * excess_partner_income
+  
   
 }
