@@ -63,3 +63,18 @@ test_that("Custom lf series", {
   
   expect_equal(y_custom_series, 1.123)
 })
+
+test_that("ABS connection", {
+  skip_if_not(packageVersion("rsdmx") >= package_version("0.5.10"))
+  internal_ans <- lf_inflator_fy(from_fy = "2012-13", to_fy = "2013-14")
+  external_ans <- lf_inflator_fy(from_fy = "2012-13", to_fy = "2013-14",
+                                 useABSConnection = TRUE)
+  
+  expect_equal(internal_ans, external_ans, tol = 0.0001)
+  
+  internal_ans <- lf_inflator(from_date = "2009-06-30", to_date = "2014-06-30")
+  external_ans <- lf_inflator(from_date = "2009-06-30", to_date = "2014-06-30",
+                              useABSConnection = TRUE)
+  
+  expect_equal(internal_ans, external_ans, tol = 0.0001)
+})

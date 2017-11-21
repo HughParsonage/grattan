@@ -62,3 +62,15 @@ test_that("from > to deflates and is not a warning for inflators", {
   expect_equal(x, 1/y)
 })
 
+test_that("ABS connection", {
+  skip_if_not(packageVersion("rsdmx") >= package_version("0.5.10"))
+  internal_ans <- wage_inflator(from_fy = "2012-13", 
+                                to_fy = "2013-14",
+                                useABSConnection = FALSE)
+  external_ans <- wage_inflator(from_fy = "2012-13", 
+                               to_fy = "2013-14",
+                               useABSConnection = TRUE)
+  
+  expect_equal(internal_ans, external_ans, tol = 0.00001)
+})
+

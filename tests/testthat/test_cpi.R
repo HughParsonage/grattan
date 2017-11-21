@@ -61,6 +61,7 @@ test_that("cpi_inflator_general_date messages", {
 })
 
 test_that("cpi returns reasonable forecasts", {
+  skip_if_not(packageVersion("rsdmx") >= package_version("0.5.10"))
   expect_gt(cpi_inflator(from_nominal_price = 1,
                          from_fy = "2012-13",
                          to_fy = "2015-16",
@@ -75,4 +76,41 @@ test_that("cpi returns reasonable forecasts", {
                          useABSConnection = FALSE,
                          allow.projection = TRUE), 
             1.06)
+})
+
+test_that("ABS connection", {
+  internal_ans <- cpi_inflator(from_fy = "2012-13", 
+                               to_fy = "2013-14", 
+                               adjustment = "none", 
+                               useABSConnection = FALSE)
+  external_ans <- cpi_inflator(from_fy = "2012-13", 
+                               to_fy = "2013-14", 
+                               adjustment = "none", 
+                               useABSConnection = TRUE)
+  
+  expect_equal(internal_ans, external_ans, tol = 0.0001)
+  
+  
+  internal_ans <- cpi_inflator(from_fy = "2012-13", 
+                               to_fy = "2013-14", 
+                               adjustment = "seasonal", 
+                               useABSConnection = FALSE)
+  external_ans <- cpi_inflator(from_fy = "2012-13", 
+                               to_fy = "2013-14", 
+                               adjustment = "seasonal", 
+                               useABSConnection = TRUE)
+  
+  expect_equal(internal_ans, external_ans, tol = 0.0001)
+  
+  
+  internal_ans <- cpi_inflator(from_fy = "2012-13", 
+                               to_fy = "2013-14", 
+                               adjustment = "trimmed", 
+                               useABSConnection = FALSE)
+  external_ans <- cpi_inflator(from_fy = "2012-13", 
+                               to_fy = "2013-14", 
+                               adjustment = "trimmed", 
+                               useABSConnection = TRUE)
+  
+  expect_equal(internal_ans, external_ans, tol = 0.0001)
 })
