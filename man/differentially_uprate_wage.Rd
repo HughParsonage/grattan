@@ -30,6 +30,22 @@ from <- "2013-14"
 to <- "2016-17"
 differentially_uprate_wage(ws, from, to)
 differentially_uprate_wage(ws, from, to) / wage_inflator(ws, from, to)
+
+# Use a wage series:
+if (requireNamespace("taxstats", quietly = TRUE)) {
+  library(data.table)
+  library(taxstats)
+  WageGrowth <- data.table(fy_year = c("2017-18", "2018-19"),
+                           r = c(0.0, 0.1))
+  Wage201314 <- sample_file_1314[["Sw_amt"]]
+  
+  data.table(Wage_201314 = Wage201314,
+             Wage_201819 = 
+               differentially_uprate_wage(Wage201314, 
+                                          from_fy = "2013-14",
+                                          to_fy = "2018-19",
+                                          wage.series = WageGrowth))
+}
 }
 \author{
 Hugh Parsonage and William Young
