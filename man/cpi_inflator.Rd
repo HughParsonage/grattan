@@ -17,7 +17,9 @@ cpi_inflator(from_nominal_price = 1, from_fy, to_fy = "2014-15",
 
 \item{adjustment}{What CPI index to use ("none" = raw series, "seasonal", or "trimmed" [mean]).}
 
-\item{useABSConnection}{Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. The internal data was updated on 2017-08-16.}
+\item{useABSConnection}{Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. 
+The internal data is up-to-date as of 2017-Q3. 
+If using \code{useABSConnection = TRUE}, ensure you have \code{rsdmx (>= 0.5-10)} up-to-date.}
 
 \item{allow.projection}{Should projections beyond the ABS's data be allowed?}
 }

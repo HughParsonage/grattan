@@ -1,4 +1,10 @@
 # 1.5.2.5
+### 2017-11-16
+* Update wage data to 2017-Q3
+* Update labour force data to 2017-09
+* (internal) The `lf_trend` internal data table used to report the labour force in thousands of persons, as the ABS does. This seemed a bit strange, so now `obsValue` uses integers (i.e. just the labour force). 
+* Vignettes now install `taxstats` to a temporary directory if not already installed, rather than the user or system's library.
+
 ### 2017-10-27
 * Update CPI data
 * Fix wage data
