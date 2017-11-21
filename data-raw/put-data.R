@@ -302,7 +302,7 @@ cg_inflators_1314 <- if (!renew) fread("./data-raw/cg_inflators_1314.tsv") else 
                        mean_wmr1 = stats::weighted.mean(marginal_rate_first, Net_CG_amt), 
                        mean_mrL = mean(marginal_rate_last), 
                        mean_wmrL = stats::weighted.mean(marginal_rate_last, Net_CG_amt)) %>% 
-      merge(grattan:::cgt_expenditures, by.x = "fy.year", by.y = "FY", all = TRUE) %>% 
+      merge(cgt_expenditures, by.x = "fy.year", by.y = "FY", all = TRUE) %>% 
       # dplyr::select_(.dots = c(-URL, -Projected) %>%
       grattan:::unselect_(.dots = c("URL", "Projected")) %>%
       dplyr::rename(revenue_foregone = CGT_discount_for_individuals_and_trusts_millions) %>%
@@ -388,7 +388,7 @@ cg_inflators_1213 <-
                        mean_wmr1 = stats::weighted.mean(marginal_rate_first, Net_CG_amt), 
                        mean_mrL = mean(marginal_rate_last), 
                        mean_wmrL = stats::weighted.mean(marginal_rate_last, Net_CG_amt)) %>% 
-      merge(grattan:::cgt_expenditures, by.x = "fy.year", by.y = "FY", all = TRUE) %>% 
+      merge(cgt_expenditures, by.x = "fy.year", by.y = "FY", all = TRUE) %>% 
       # dplyr::select_(.dots = c(-URL, -Projected) %>%
       grattan:::unselect_(.dots = c("URL", "Projected")) %>%
       dplyr::rename(revenue_foregone = CGT_discount_for_individuals_and_trusts_millions) %>%
