@@ -5,7 +5,8 @@
 #' @param n_dependants The number of dependants for each entry in \code{sample_file}.
 #' @param ordinary_tax_thresholds A numeric vector specifying the lower bounds of the brackets for "ordinary tax" as defined by the Regulations.
 #' The first element should be zero if there is a tax-free threshold.
-#' @param ordinary_tax_rates The marginal rates of ordinary tax. The first element should be zero if there is a tax-free threshold.
+#' @param ordinary_tax_rates The marginal rates of ordinary tax. The first element should be zero if there is a tax-free threshold. 
+#' Since the temporary budget repair levy was imposed on a discrete tax bracket when it applied, it is not included in this function.
 #' @param medicare_levy_lower_threshold Minimum taxable income at which the Medicare levy will be applied.
 #' @param medicare_levy_upper_threshold Minimum taxable income at which the Medicare levy will be applied at the full Medicare levy rate (2\% in 2015-16). Between this threshold and the \code{medicare_levy_lower_threshold}, a tapered rate applies, starting from zero and climbing to \code{medicare_levy_rate}. 
 #' @param medicare_levy_taper The taper that applies between the \code{_lower} and \code{_upper} thresholds.
@@ -21,6 +22,8 @@
 #' @param sapto_max_offset The maximum offset available through SAPTO. 
 #' @param sapto_lower_threshold The threshold at which SAPTO begins to reduce (from \code{sapto_max_offset}).
 #' @param sapto_taper The taper rate beyond \code{sapto_lower_threshold}.
+#' @details 
+#' 
 #' @export
 
 
@@ -85,9 +88,11 @@ model_income_tax <- function(sample_file,
     Rates <-  ordinary_tax_rates %||% tax_table2_fy[["marginal_rate"]]
     
     if (length(Thresholds) != length(Rates)) {
-      stop("`ordinary_tax_thresholds` and `ordinary_tax_rates` are both not NULL but have different lengths. ",
+      stop("`ordinary_tax_thresholds` and `ordinary_tax_rates` have different lengths. ",
            "Specify numeric vectors of equal length (or NULL).")
     }
+    
+    
     
     base_tax. <- IncomeTax(income,
                            thresholds = Thresholds,
@@ -97,7 +102,7 @@ model_income_tax <- function(sample_file,
       tax_table2[input, roll = Inf] %>%
       .[, .(ordering, tax = tax_at + (income - lower_bracket) * marginal_rate)] %>%
       setorderv("ordering") %>%
-      .[["tax"]]
+      .subset2("tax")
   }
   
   

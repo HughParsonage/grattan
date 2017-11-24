@@ -1,3 +1,10 @@
+
+# 1.5.3.0
+### 2017-11-25
+* Include the small business tax offset as a standalone function and within `income_tax`.
+* (internal) Extend `prohibit_vector_recycling` to return the maximum permissible length of a list of vectors.
+* New function `model_income_tax`. 
+
 # 1.5.2.5
 ### 2017-11-16
 * Update wage data to 2017-Q3
