@@ -344,6 +344,8 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
                                        Year.int)
              }
              
+             
+             
              if (AND(!is.null(.dots.ATO),
                      all(c("Rptbl_Empr_spr_cont_amt",
                            "Net_fincl_invstmt_lss_amt",
