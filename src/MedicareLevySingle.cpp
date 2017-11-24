@@ -47,7 +47,7 @@ double MedicareLevySingle(double income, double lowerThreshold, double upperThre
 //' @title Medicare levy in C++
 //' @description Medicare levy. Experimental function in C++, equivalent to \code{\link{medicare_levy}}.
 //' @name MedicareLevy
-//' @param income,SpouseIncome,SaptoEligible,isFamily,nDependants,lowerThreshold,upperThreshold,lowerFamilyThreshold,upperFamilyThreshold,lowerUpForEachChild As in \code{medicare_levy}.
+//' @param income,SpouseIncome,SaptoEligible,isFamily,NDependants,lowerThreshold,upperThreshold,lowerFamilyThreshold,upperFamilyThreshold,lowerUpForEachChild As in \code{medicare_levy}.
 //' @param rate,taper The parameters for the specific year or hypothetical requested.
 //' @export MedicareLevy 
 

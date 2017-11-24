@@ -4,7 +4,7 @@
 \alias{MedicareLevy}
 \title{Medicare levy in C++}
 \arguments{
-\item{income, SpouseIncome, SaptoEligible, isFamily, nDependants, lowerThreshold, upperThreshold, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild}{As in \code{medicare_levy}.}
+\item{income, SpouseIncome, SaptoEligible, isFamily, NDependants, lowerThreshold, upperThreshold, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild}{As in \code{medicare_levy}.}
 
 \item{rate, taper}{The parameters for the specific year or hypothetical requested.}
 }
