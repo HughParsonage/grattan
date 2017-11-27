@@ -124,7 +124,9 @@ model_income_tax <- function(sample_file,
       .subset2("tax")
     
     temp_budget_repair_levy. <-
-      and(input[["fy_year"]] %chin% c("2014-15", "2015-16", "2016-17"), income > 180e3) * (0.02 * (income - 180e3))
+      and(input[["fy_year"]] %chin% c("2014-15", "2015-16", "2016-17"),
+          income > 180e3) * 
+      (0.02 * (income - 180e3))
     
     base_tax. <- base_tax. + temp_budget_repair_levy. 
   }
@@ -199,50 +201,50 @@ model_income_tax <- function(sample_file,
                   min_bracket = lito_taper %||% lito_fy[["min_bracket"]])
   }
   
-  sapto_args <- mget(grep("^sapto_(?!eligible)", arguments, perl = TRUE, value = TRUE))
   
-  if (is.null(sapto_eligible) || any(sapto_eligible)) {
+  
+  sapto. <- double(max.length)
+  if (any(sapto_eligible)) {
+    sapto_args <- mget(grep("^sapto_(?!eligible)", arguments, perl = TRUE, value = TRUE))
     rebate_income_over_eligible <-
       rebate_income(Taxable_Income = income[sapto_eligible],
                     Rptbl_Empr_spr_cont_amt = .dots.ATO[sapto_eligible][["Rptbl_Empr_spr_cont_amt"]],
                     Net_fincl_invstmt_lss_amt = .dots.ATO[sapto_eligible][["Net_fincl_invstmt_lss_amt"]],
                     Net_rent_amt = .dots.ATO[sapto_eligible][["Net_rent_amt"]],
                     Rep_frng_ben_amt = .dots.ATO[sapto_eligible][["Rep_frng_ben_amt"]])
-  }
-  
-  sapto. <- double(max.length)
-  if (all(vapply(sapto_args, is.null, FALSE))) {
-    if (AND(!is.null(.dots.ATO),
-            all(c("Rptbl_Empr_spr_cont_amt",
-                  "Net_fincl_invstmt_lss_amt",
-                  "Net_rent_amt", 
-                  "Rep_frng_ben_amt") %chin% names(.dots.ATO)))) {
-      
-      sapto.[sapto_eligible] <-
-        sapto(rebate_income = rebate_income_over_eligible, 
-              fy.year = if (length(baseline_fy) > 1) baseline_fy[sapto_eligible] else baseline_fy,
-              Spouse_income = the_spouse_income[sapto_eligible],
-              family_status = {
-                FS_sapto <- rep_len("single", max.length)
-                FS_sapto[the_spouse_income > 0] <- "married"
-                FS_sapto[sapto_eligible]
-              },
-              sapto.eligible = TRUE)
+    if (all(vapply(sapto_args, is.null, FALSE))) {
+      if (AND(!is.null(.dots.ATO),
+              all(c("Rptbl_Empr_spr_cont_amt",
+                    "Net_fincl_invstmt_lss_amt",
+                    "Net_rent_amt", 
+                    "Rep_frng_ben_amt") %chin% names(.dots.ATO)))) {
+        
+        sapto.[sapto_eligible] <-
+          sapto(rebate_income = rebate_income_over_eligible, 
+                fy.year = if (length(baseline_fy) > 1) baseline_fy[sapto_eligible] else baseline_fy,
+                Spouse_income = the_spouse_income[sapto_eligible],
+                family_status = {
+                  FS_sapto <- rep_len("single", max.length)
+                  FS_sapto[the_spouse_income > 0] <- "married"
+                  FS_sapto[sapto_eligible]
+                },
+                sapto.eligible = TRUE)
+      } else {
+        sapto.[sapto_eligible] <- 
+          sapto(rebate_income = rebate_income(Taxable_Income = income[sapto_eligible]), 
+                fy.year = if (length(baseline_fy) > 1) baseline_fy[sapto_eligible] else baseline_fy,
+                sapto.eligible = TRUE)
+      }
     } else {
-      sapto.[sapto_eligible] <- 
-        sapto(rebate_income = rebate_income(Taxable_Income = income[sapto_eligible]), 
-              fy.year = if (length(baseline_fy) > 1) baseline_fy[sapto_eligible] else baseline_fy,
-              sapto.eligible = TRUE)
+      sapto. <- 
+        sapto_rcpp(RebateIncome = rebate_income_over_eligible,
+                   MaxOffset = sapto_max_offset,
+                   LowerThreshold = sapto_lower_threshold ,
+                   TaperRate = sapto_taper,
+                   SaptoEligible = sapto_eligible,
+                   IsMarried = the_spouse_income > 0,
+                   SpouseIncome = the_spouse_income)
     }
-  } else {
-    sapto. <- 
-      sapto_rcpp(RebateIncome = rebate_income_over_eligible,
-                 MaxOffset = sapto_max_offset,
-                 LowerThreshold = sapto_lower_threshold ,
-                 TaperRate = sapto_taper,
-                 SaptoEligible = sapto_eligible,
-                 IsMarried = the_spouse_income > 0,
-                 SpouseIncome = the_spouse_income)
   }
   
   pmaxC(base_tax. - lito. - sapto., 0) + medicare_levy.
