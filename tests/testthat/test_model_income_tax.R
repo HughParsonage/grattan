@@ -45,4 +45,19 @@ test_that("Increase in a rate results in more tax", {
   
 })
 
+test_that("exclude = <options>", {
+  skip_if_not_installed("taxstats")
+  library(taxstats)
+  s1314 <- copy(sample_file_1314)
+  
+  no_sapto_1314 <-
+    s1314[, tx := model_income_tax(copy(s1314), "2013-14", exclude = "sapto")] %>%
+    .[, tx2 := income_tax(Taxable_Income, "2013-14", .dots.ATO = copy(s1314))] %>%
+    .[]
+  
+  expect_true(all(no_sapto_1314[tx != tx2][["age_range"]] <= 1))
+  expect_equal(nrow(no_sapto_1314[and(age_range > 1, tx != tx2)]), 0)
+  
+})
+
 
