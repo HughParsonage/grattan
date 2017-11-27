@@ -1,7 +1,12 @@
 #' Modelled Income Tax
-#' @description The income tax payable if tax settings are changed.
+#' @description The income tax payable if tax settings are changed. 
 #' @param sample_file A sample file having at least as many variables as the 2012-13 sample file.
 #' @param baseline_fy If a parameter is not selected, the parameter's value in this tax year is used.
+#' @param exclude A character vector specifying which womponents of the income tax to \emph{exclude}. 
+#' Multiple values are allowed. 
+#' The special value \code{"nothing"} means no components are excluded. 
+#' If present at the first position of \code{exclude} (the default) it takes precedence and no components are excluded; 
+#' elsewhere it has no effect.
 #' @param n_dependants The number of dependants for each entry in \code{sample_file}.
 #' @param ordinary_tax_thresholds A numeric vector specifying the lower bounds of the brackets for "ordinary tax" as defined by the Regulations.
 #' The first element should be zero if there is a tax-free threshold.
@@ -22,7 +27,6 @@
 #' @param sapto_max_offset The maximum offset available through SAPTO. 
 #' @param sapto_lower_threshold The threshold at which SAPTO begins to reduce (from \code{sapto_max_offset}).
 #' @param sapto_taper The taper rate beyond \code{sapto_lower_threshold}.
-#' @details 
 #' 
 #' @export
 
@@ -30,6 +34,7 @@
 
 model_income_tax <- function(sample_file,
                              baseline_fy,
+                             exclude = c("nothing", "ordinary_tax", "medicare_levy", "lito", "sapto"),
                              n_dependants = 0L,
                              
                              ordinary_tax_thresholds = NULL,
@@ -52,7 +57,18 @@ model_income_tax <- function(sample_file,
                              sapto_lower_threshold = NULL,
                              sapto_taper = NULL) {
   arguments <- ls()
+  if (!is.null(exclude) && exclude[1L] != "nothing") {
+    exclude <- match.arg(exclude, several.ok = TRUE)
+  }
   
+  `%|||%` <- function(lhs, rhs) {
+    if (is.null(lhs)) {
+      rep_len(rhs, max.length)
+    } else {
+      rep_len(lhs, max.length)
+    }
+  }
+    
   stopifnot(is.data.table(sample_file))
   .dots.ATO <- sample_file
   income <- sample_file[["Taxable_Income"]]
@@ -61,17 +77,19 @@ model_income_tax <- function(sample_file,
          "yet it is required for this function.")
   }
   
+  max.length <- length(income)
+  prohibit_vector_recycling(income, n_dependants, baseline_fy)
+  
   if (is.null(sapto_eligible)) {
     if ("age_range" %chin% names(sample_file)) {
       sapto_eligible <- .subset2(sample_file, "age_range") <= 1L
     } else {
       warning("Assuming everyone is ineligible for SAPTO.")
-      sapto_eligible <- FALSE
+      sapto_eligible <- logical(max.length)
     }
   }
   
-  max.length <- length(income)
-  prohibit_vector_recycling(income, n_dependants, baseline_fy)
+  ordering <- NULL
   
   input <-
     data.table(income = income,
@@ -92,17 +110,23 @@ model_income_tax <- function(sample_file,
            "Specify numeric vectors of equal length (or NULL).")
     }
     
-    
-    
-    base_tax. <- IncomeTax(income,
-                           thresholds = Thresholds,
-                           rates = Rates)
+    base_tax. <-
+      IncomeTax(income,
+                thresholds = Thresholds,
+                rates = Rates)
   } else {
+    tax_at <- lower_bracket <- marginal_rate <- NULL
+    
     base_tax. <- 
       tax_table2[input, roll = Inf] %>%
       .[, .(ordering, tax = tax_at + (income - lower_bracket) * marginal_rate)] %>%
       setorderv("ordering") %>%
       .subset2("tax")
+    
+    temp_budget_repair_levy. <-
+      and(input[["fy_year"]] %chin% c("2014-15", "2015-16", "2016-17"), income > 180e3) * (0.02 * (income - 180e3))
+    
+    base_tax. <- base_tax. + temp_budget_repair_levy. 
   }
   
   
@@ -140,25 +164,26 @@ model_income_tax <- function(sample_file,
                     .checks = FALSE)
     
   } else {
-    medicare_tbl_fy <- medicare_tbl[input, on = c("fy_year", "sapto==SaptoEligible")]
-    
+    medicare_tbl_fy <- 
+      medicare_tbl[input, on = c("fy_year", "sapto==SaptoEligible")] %>%
+      setorderv("ordering")
+
     medicare_levy. <-
       MedicareLevy(income = income,
                    
-                   lowerThreshold = medicare_levy_lower_threshold %||% medicare_tbl_fy[["lower_threshold"]],
-                   upperThreshold = medicare_levy_upper_threshold %||% medicare_tbl_fy[["upper_threshold"]],
+                   lowerThreshold = medicare_levy_lower_threshold %|||% medicare_tbl_fy[["lower_threshold"]],
+                   upperThreshold = medicare_levy_upper_threshold %|||% medicare_tbl_fy[["upper_threshold"]],
                    
                    SpouseIncome = the_spouse_income,
-                   SaptoEligible = sapto_eligible,
                    isFamily = the_spouse_income > 0,
-                   NDependants = if (length(n_dependants) > 1) rep_len(n_dependants, max.length) else n_dependants,
+                   NDependants = if (length(n_dependants) == 1) rep_len(n_dependants, max.length) else n_dependants,
                    
-                   lowerFamilyThreshold = medicare_levy_lower_family_threshold  %||% medicare_tbl_fy[["lower_family_threshold"]],
-                   upperFamilyThreshold = medicare_levy_upper_family_threshold  %||% medicare_tbl_fy[["upper_family_threshold"]],
-                   lowerUpForEachChild  = medicare_levy_lower_up_for_each_child %||% medicare_tbl_fy[["lower_up_for_each_child"]], 
+                   lowerFamilyThreshold = medicare_levy_lower_family_threshold  %|||% medicare_tbl_fy[["lower_family_threshold"]],
+                   upperFamilyThreshold = medicare_levy_upper_family_threshold  %|||% medicare_tbl_fy[["upper_family_threshold"]],
+                   lowerUpForEachChild  = medicare_levy_lower_up_for_each_child %|||% medicare_tbl_fy[["lower_up_for_each_child"]], 
                    
-                   rate = medicare_levy_rate %||% medicare_tbl_fy[["rate"]],
-                   taper = medicare_levy_taper %||% medicare_tbl_fy[["taper"]])
+                   rate = medicare_levy_rate %|||% medicare_tbl_fy[["rate"]],
+                   taper = medicare_levy_taper %|||% medicare_tbl_fy[["taper"]])
   }
   
   lito_args <- mget(grep("^lito_", arguments, perl = TRUE, value = TRUE))

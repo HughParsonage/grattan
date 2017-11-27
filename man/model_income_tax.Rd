@@ -4,7 +4,8 @@
 \alias{model_income_tax}
 \title{Modelled Income Tax}
 \usage{
-model_income_tax(sample_file, baseline_fy, n_dependants = 0L,
+model_income_tax(sample_file, baseline_fy, exclude = c("nothing",
+  "ordinary_tax", "medicare_levy", "lito", "sapto"), n_dependants = 0L,
   ordinary_tax_thresholds = NULL, ordinary_tax_rates = NULL,
   medicare_levy_lower_threshold = NULL,
   medicare_levy_upper_threshold = NULL, medicare_levy_taper = NULL,
@@ -20,12 +21,19 @@ model_income_tax(sample_file, baseline_fy, n_dependants = 0L,
 
 \item{baseline_fy}{If a parameter is not selected, the parameter's value in this tax year is used.}
 
+\item{exclude}{A character vector specifying which womponents of the income tax to \emph{exclude}. 
+Multiple values are allowed. 
+The special value \code{"nothing"} means no components are excluded. 
+If present at the first position of \code{exclude} (the default) it takes precedence and no components are excluded; 
+elsewhere it has no effect.}
+
 \item{n_dependants}{The number of dependants for each entry in \code{sample_file}.}
 
 \item{ordinary_tax_thresholds}{A numeric vector specifying the lower bounds of the brackets for "ordinary tax" as defined by the Regulations.
 The first element should be zero if there is a tax-free threshold.}
 
-\item{ordinary_tax_rates}{The marginal rates of ordinary tax. The first element should be zero if there is a tax-free threshold.}
+\item{ordinary_tax_rates}{The marginal rates of ordinary tax. The first element should be zero if there is a tax-free threshold. 
+Since the temporary budget repair levy was imposed on a discrete tax bracket when it applied, it is not included in this function.}
 
 \item{medicare_levy_lower_threshold}{Minimum taxable income at which the Medicare levy will be applied.}
 

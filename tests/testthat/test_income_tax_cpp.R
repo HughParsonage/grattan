@@ -3,6 +3,7 @@ context("Income tax in C++")
 test_that("Equivalence in 2013-14 sample file", {
   skip_if_not_installed("taxstats")
   library(data.table)
+  library(taxstats)
   s1314 <- copy(sample_file_1314)
   tx <- .subset2(s1314, "Taxable_Income")
   
