@@ -1,6 +1,6 @@
 #' Gross Domestic Product, Australia
 #' @name gdp
-#' @description Gross domestic product, at contemporaneous prices (called 'current prices' by the ABS). 
+#' @description Gross domestic product, at contemporaneous prices (called \sQuote{current prices} by the ABS). 
 #' 
 #' @param date A Date vector or character coercible thereto.
 #' @param fy_year Character vector of financial years.
@@ -20,7 +20,7 @@ gdp_qtr <- function(date, roll = "nearest"){
   
   input <-
     data.table(Date = if (assertthat::is.date(date)) date else as.Date(date)) %>%
-    .[, ordering := 1:.N] %>%
+    .[, ordering := .I] %>%
     setkeyv("Date") 
   # A2304350J is the Series ID for Gross domestic product: Current prices
   abs_key_aggregates %>%
