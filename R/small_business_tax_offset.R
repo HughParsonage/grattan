@@ -5,8 +5,10 @@
 #' For example, in 2015-16, an individual with an assessable income of \$100,000 had a basic tax liability of 
 #' approximately \$25,000.
 #' 
-#' @param total_net_business_income Total net business income within the meaning of the Act. For most taxpayers, this is simply any net income from a business they own (or their share of net income from a business in which they have an interest). The only difference being in the calculation of the net business income of some minors (vide Division 6AA of Part III of the Act).
+#' @param total_net_small_business_income Total net business income within the meaning of the Act. For most taxpayers, this is simply any net income from a business they own (or their share of net income from a business in which they have an interest). The only difference being in the calculation of the net business income of some minors (vide Division 6AA of Part III of the Act).
 #' @param fy_year The financial year for which the small business tax offset is to apply.
+#' @param tax_discount If you do not wish to use the legislated discount rate from a particular \code{fy_year}, 
+#' you can specify it via \code{tax_discount}. If both are provided, \code{tax_discount} prevails, with a warning.
 #' @source
 #' Basic income tax method s4-10(3) \url{http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html}.
 #' Explanatory memorandum \url{http://parlinfo.aph.gov.au/parlInfo/download/legislation/ems/r5494_ems_0a26ca86-9c3f-4ffa-9b81-219ac09be454/upload_pdf/503041.pdf}.
@@ -18,7 +20,7 @@ small_business_tax_offset <- function(taxable_income,
                                       total_net_small_business_income,
                                       fy_year = NULL,
                                       tax_discount = NULL) {
-  if (fy_year < "2015-16") {
+  if (!is.null(fy_year) && fy_year < "2015-16") {
     return(0)
   } else {
     
@@ -58,6 +60,11 @@ small_business_tax_offset <- function(taxable_income,
         stop("length(tax_discount) = ", length(tax_discount), ", ", 
              "but the only permissible lengths are 1 or ", max.length, ". ", 
              "Provide a single value or a value for every observation.")
+      }
+      
+      if (!is.null(fy_year)) {
+        warning("Both `fy_year` and `tax_discount` are provided. ",
+                "`fy_year` will be ignored.")
       }
       smbto_p <- tax_discount
     }

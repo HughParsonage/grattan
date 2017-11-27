@@ -19,9 +19,12 @@ small_business_tax_offset(taxable_income, basic_income_tax_liability,
 For example, in 2015-16, an individual with an assessable income of \$100,000 had a basic tax liability of 
 approximately \$25,000.}
 
+\item{total_net_small_business_income}{Total net business income within the meaning of the Act. For most taxpayers, this is simply any net income from a business they own (or their share of net income from a business in which they have an interest). The only difference being in the calculation of the net business income of some minors (vide Division 6AA of Part III of the Act).}
+
 \item{fy_year}{The financial year for which the small business tax offset is to apply.}
 
-\item{total_net_business_income}{Total net business income within the meaning of the Act. For most taxpayers, this is simply any net income from a business they own (or their share of net income from a business in which they have an interest). The only difference being in the calculation of the net business income of some minors (vide Division 6AA of Part III of the Act).}
+\item{tax_discount}{If you do not wish to use the legislated discount rate from a particular \code{fy_year}, 
+you can specify it via \code{tax_discount}. If both are provided, \code{tax_discount} prevails, with a warning.}
 }
 \description{
 Small Business Tax Offset
