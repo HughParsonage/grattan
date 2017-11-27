@@ -12,4 +12,4 @@ r_github_packages:
 
 after_success:
   - Rscript -e 'formalCoverage::formalPackageCoverage()'
-  - if (["$TRAVIS_R_VERSION_STRING" == "release"]); then Rscript -e 'covr::codecov(line_exclusions = "R/zzz.R")'; fi
+  - if (["$TRAVIS_R_VERSION_STRING" == 'release']); then Rscript -e 'covr::codecov(line_exclusions = "R/zzz.R")'; fi
