@@ -18,7 +18,7 @@ IncomeTax <- function(x, thresholds, rates) {
 #' @title Medicare levy in C++
 #' @description Medicare levy. Experimental function in C++, equivalent to \code{\link{medicare_levy}}.
 #' @name MedicareLevy
-#' @param income,SpouseIncome,SaptoEligible,isFamily,NDependants,lowerThreshold,upperThreshold,lowerFamilyThreshold,upperFamilyThreshold,lowerUpForEachChild As in \code{medicare_levy}.
+#' @param income,SpouseIncome,isFamily,NDependants,lowerThreshold,upperThreshold,lowerFamilyThreshold,upperFamilyThreshold,lowerUpForEachChild As in \code{medicare_levy}.
 #' @param rate,taper The parameters for the specific year or hypothetical requested.
 #' @export MedicareLevy 
 NULL
@@ -31,7 +31,7 @@ MedicareLevySaptoYear <- function(income, SpouseIncome, NDependants, sapto, yr) 
     .Call(`_grattan_MedicareLevySaptoYear`, income, SpouseIncome, NDependants, sapto, yr)
 }
 
-MedicareLevy <- function(income, lowerThreshold, upperThreshold, SpouseIncome, isFamily, NDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild, rate = 0.02, taper = 0.1) {
+MedicareLevy <- function(income, lowerThreshold, upperThreshold, SpouseIncome, isFamily, NDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild, rate, taper) {
     .Call(`_grattan_MedicareLevy`, income, lowerThreshold, upperThreshold, SpouseIncome, isFamily, NDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild, rate, taper)
 }
 

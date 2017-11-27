@@ -55,22 +55,22 @@ BEGIN_RCPP
 END_RCPP
 }
 // MedicareLevy
-NumericVector MedicareLevy(NumericVector income, double lowerThreshold, double upperThreshold, NumericVector SpouseIncome, LogicalVector isFamily, IntegerVector NDependants, double lowerFamilyThreshold, double upperFamilyThreshold, double lowerUpForEachChild, double rate, double taper);
+NumericVector MedicareLevy(NumericVector income, NumericVector lowerThreshold, NumericVector upperThreshold, NumericVector SpouseIncome, LogicalVector isFamily, IntegerVector NDependants, NumericVector lowerFamilyThreshold, NumericVector upperFamilyThreshold, NumericVector lowerUpForEachChild, NumericVector rate, NumericVector taper);
 RcppExport SEXP _grattan_MedicareLevy(SEXP incomeSEXP, SEXP lowerThresholdSEXP, SEXP upperThresholdSEXP, SEXP SpouseIncomeSEXP, SEXP isFamilySEXP, SEXP NDependantsSEXP, SEXP lowerFamilyThresholdSEXP, SEXP upperFamilyThresholdSEXP, SEXP lowerUpForEachChildSEXP, SEXP rateSEXP, SEXP taperSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type income(incomeSEXP);
-    Rcpp::traits::input_parameter< double >::type lowerThreshold(lowerThresholdSEXP);
-    Rcpp::traits::input_parameter< double >::type upperThreshold(upperThresholdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lowerThreshold(lowerThresholdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type upperThreshold(upperThresholdSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type SpouseIncome(SpouseIncomeSEXP);
     Rcpp::traits::input_parameter< LogicalVector >::type isFamily(isFamilySEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type NDependants(NDependantsSEXP);
-    Rcpp::traits::input_parameter< double >::type lowerFamilyThreshold(lowerFamilyThresholdSEXP);
-    Rcpp::traits::input_parameter< double >::type upperFamilyThreshold(upperFamilyThresholdSEXP);
-    Rcpp::traits::input_parameter< double >::type lowerUpForEachChild(lowerUpForEachChildSEXP);
-    Rcpp::traits::input_parameter< double >::type rate(rateSEXP);
-    Rcpp::traits::input_parameter< double >::type taper(taperSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lowerFamilyThreshold(lowerFamilyThresholdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type upperFamilyThreshold(upperFamilyThresholdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lowerUpForEachChild(lowerUpForEachChildSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type rate(rateSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type taper(taperSEXP);
     rcpp_result_gen = Rcpp::wrap(MedicareLevy(income, lowerThreshold, upperThreshold, SpouseIncome, isFamily, NDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild, rate, taper));
     return rcpp_result_gen;
 END_RCPP
