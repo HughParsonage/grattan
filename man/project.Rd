@@ -22,7 +22,7 @@ project(sample_file, h = 0L, fy.year.of.sample.file = "2013-14",
 
 \item{forecast.dots}{A list containing parameters to be passed to \code{generic_inflator}.}
 
-\item{wage.series}{See \code{\link{wage_inflator}}.}
+\item{wage.series}{See \code{\link{wage_inflator}}. Note that the \code{Sw_amt} will uprated by \code{\link{differentially_uprate_wage}}.}
 
 \item{lf.series}{See \code{\link{lf_inflator_fy}}.}
 
@@ -38,13 +38,18 @@ A function for simple projections of tables of Australian Taxation Office tax re
 }
 \details{
 We recommend you use \code{sample_file_1213}, rather than \code{sample_file_1314}, unless you need the superannuation variables, 
-as the latter suggests lower-than-recorded tax collections.
+as the latter suggests lower-than-recorded tax collections. 
+
+Superannuation variables are inflated by a fixed rate of 5\% p.a.
 }
 \examples{
-if (requireNamespace("taxstats", quietly = TRUE) && requireNamespace("data.table", quietly = TRUE)){
+if (requireNamespace("taxstats", quietly = TRUE) &&
+    requireNamespace("data.table", quietly = TRUE)) {
   library(taxstats)
   library(data.table)
   sample_file <- copy(sample_file_1314)
-  sample_file_1617 <- project(sample_file, h = 3L)  # to "2016-17"
+  sample_file_1617 <- project(sample_file,
+                              h = 3L, # to "2016-17"
+                              fy.year.of.sample.file = "2013-14")  
 }
 }
