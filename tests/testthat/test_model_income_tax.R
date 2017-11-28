@@ -63,8 +63,19 @@ test_that("Increase in a rate results in more tax", {
   
   unchanged_indices <- which(sample_file_1314_copy$Taxable_Income < 180e3)
   expect_false(any(new_tax[unchanged_indices] > original[unchanged_indices] + 1))
+})
+
+test_that("Medicare options", {
+  library(taxstats)
+  sample_file_1314_copy <- copy(sample_file_1314)
+  original <- income_tax(sample_file_1314$Taxable_Income,
+                         fy.year = "2013-14",
+                         .dots.ATO = copy(sample_file_1314))
   
-  
+  more_medicare_levy <-
+    model_income_tax(sample_file_1314_copy,
+                     baseline_fy = "2013-14",
+                     medicare_levy_taper = 0.05)
 })
 
 test_that("exclude = <options>", {

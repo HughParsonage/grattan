@@ -169,7 +169,90 @@ model_income_tax <- function(sample_file,
     medicare_tbl_fy <- 
       medicare_tbl[input, on = c("fy_year", "sapto==SaptoEligible")] %>%
       setorderv("ordering")
-
+    
+    # When a parameter is selected it must satisfy the 
+    # conditions of the low-income area
+    
+    #    |                   .
+    #    |              .
+    # rb |         .
+    #    |       /
+    #    |      /
+    #    |-----/
+    #    0   a  b
+    # 
+    # t(b - a) = rb
+    #
+    
+    # Here, we test whether or not the conditions are so satisfied; 
+    # if not, we fix one of the parameters that is not specified to
+    # satisfy the relation
+    
+    ma <- medicare_levy_lower_threshold %|||% medicare_tbl_fy[["lower_threshold"]]
+    mb <- medicare_levy_upper_threshold %|||% medicare_tbl_fy[["upper_threshold"]]
+    mt <- medicare_levy_taper %|||% medicare_tbl_fy[["taper"]]
+    mr <- medicare_levy_rate  %|||% medicare_tbl_fy[["rate"]]
+    
+    ma <- as.integer(ma)
+    mb <- as.integer(mb - 1)
+    
+    null_medicare_args <- vapply(medicare_args, is.null, FALSE)
+    
+    medicare_parameter_roots <- abs(mt * (mb - ma) - mr * mb)
+    
+    if (any(medicare_parameter_roots[sapto_eligible] > 1)) {
+      # model is misspecified in respect of offsets etc
+      
+      warning_if_misspecified <- function(the_arg) {
+        val <- switch(the_arg, 
+                      "medicare_levy_upper_threshold" = mb, 
+                      "medicare_levy_lower_threshold" = ma, 
+                      "medicare_levy_taper" = mt,
+                      "medicare_levy_rate" = mr) %>%
+          .[sapto_eligible]
+        
+        if (uniqueN(val) == 1L) {
+          warning("`", the_arg, "` was not specified, but is inconsistent with other parameters.\n", 
+                  "Set\n\t", the_arg, " = ", round(val[1]),
+                  call. = FALSE)
+        } else {
+          warning("`", the_arg, "` was not specified, but is inconsistent with other parameters. ",
+                  "\t", paste0(head(unique(round(val))), collapse = "\n\t"), "\n",
+                  uniqueN(val),
+                  call. = FALSE)
+        }
+      }
+      
+      if (is.null(medicare_levy_upper_threshold)) {
+        mb <- mt * ma / (mt - mr)
+        warning_if_misspecified("medicare_levy_upper_threshold")
+        
+      } else {
+        
+        if (is.null(medicare_levy_lower_threshold)) {
+          ma <- mb - mr / mt
+          warning_if_misspecified("medicare_levy_lower_threshold")
+          
+        } else {
+          
+          if (is.null(medicare_levy_taper)) {
+            mt <- mr * mb / (mb - ma)
+            warning_if_misspecified("medicare_levy_taper")
+            
+          } else {
+            
+            if (is.null(medicare_levy_rate)) {
+              mr <- mt * (mb - ma) / mb
+              warning_if_misspecified("medicare_levy_rate")
+            } # alternative not reachable
+          }
+        }
+      }
+    }
+    
+    
+    
+    
     medicare_levy. <-
       MedicareLevy(income = income,
                    
