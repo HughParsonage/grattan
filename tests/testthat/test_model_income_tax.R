@@ -72,10 +72,39 @@ test_that("Medicare options", {
                          fy.year = "2013-14",
                          .dots.ATO = copy(sample_file_1314))
   
-  more_medicare_levy <-
-    model_income_tax(sample_file_1314_copy,
-                     baseline_fy = "2013-14",
-                     medicare_levy_taper = 0.05)
+  expect_warning(model_income_tax(sample_file_1314_copy,
+                                  baseline_fy = "2013-14",
+                                  
+                                  # In 2013-14, the rate was 0.015
+                                  medicare_levy_rate = 0.02), 
+                 regexp = "medicare_levy_upper_threshold = 40349",
+                 fixed = TRUE)
+  
+  sample_file_1314_if_2pc_ML <-
+    sample_file_1314 %>%
+    copy %>%
+    .[, old_tax := income_tax(Taxable_Income, "2013-14", .dots.ATO = .)] %>%
+    .[, new_tax := model_income_tax(sample_file_1314_copy,
+                                    baseline_fy = "2013-14",
+                                    medicare_levy_upper_threshold = 40349,
+                                    medicare_levy_rate = 0.02)] %>%
+    .[]
+  
+  min_unchanged <- 
+    sample_file_1314_if_2pc_ML[new_tax != old_tax,
+                               .(min_TI = min(Taxable_Income))] %>%
+    .subset2("min_TI")
+  
+  expect_equal(min_unchanged, 24168)
+  
+  
+  first_above100k <- 
+    sample_file_1314_if_2pc_ML[Taxable_Income >= 100e3] %>%
+    .[order(Taxable_Income), .(difference = first(new_tax - old_tax),
+                               first_abv = first(Taxable_Income))]
+  
+  expect_equal(first_above100k$difference, 0.005 * first_above100k$first)
+  
 })
 
 test_that("exclude = <options>", {
