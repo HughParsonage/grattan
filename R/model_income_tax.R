@@ -213,11 +213,11 @@ model_income_tax <- function(sample_file,
         
         if (uniqueN(val) == 1L) {
           warning("`", the_arg, "` was not specified, but is inconsistent with other parameters.\n", 
-                  "Set\n\t", the_arg, " = ", round(val[1]),
+                  "Set\n\t", the_arg, " = ", round(val[1], digits = if (val[1] < 1) 2 else 0),
                   call. = FALSE)
         } else {
           warning("`", the_arg, "` was not specified, but is inconsistent with other parameters. ",
-                  "\t", paste0(head(unique(round(val))), collapse = "\n\t"), "\n",
+                  "\t", paste0(utils::head(unique(round(val))), collapse = "\n\t"), "\n",
                   uniqueN(val),
                   call. = FALSE)
         }
@@ -256,8 +256,8 @@ model_income_tax <- function(sample_file,
     medicare_levy. <-
       MedicareLevy(income = income,
                    
-                   lowerThreshold = medicare_levy_lower_threshold %|||% medicare_tbl_fy[["lower_threshold"]],
-                   upperThreshold = medicare_levy_upper_threshold %|||% medicare_tbl_fy[["upper_threshold"]],
+                   lowerThreshold = ma,
+                   upperThreshold = mb,
                    
                    SpouseIncome = the_spouse_income,
                    isFamily = the_spouse_income > 0,
@@ -267,8 +267,8 @@ model_income_tax <- function(sample_file,
                    upperFamilyThreshold = medicare_levy_upper_family_threshold  %|||% medicare_tbl_fy[["upper_family_threshold"]],
                    lowerUpForEachChild  = medicare_levy_lower_up_for_each_child %|||% medicare_tbl_fy[["lower_up_for_each_child"]], 
                    
-                   rate = medicare_levy_rate %|||% medicare_tbl_fy[["rate"]],
-                   taper = medicare_levy_taper %|||% medicare_tbl_fy[["taper"]])
+                   rate = mr,
+                   taper = mt)
   }
   
   lito_args <- mget(grep("^lito_", arguments, perl = TRUE, value = TRUE))

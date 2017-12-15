@@ -17,6 +17,8 @@
 #' @importFrom hutils NEITHER
 #' @importFrom hutils AND
 
+#' @importFrom fastmatch %fin%
+
 #' @importFrom magrittr %>%
 #' @importFrom magrittr %$%
 #' @importFrom magrittr %<>%
