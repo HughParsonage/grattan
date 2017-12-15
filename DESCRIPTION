@@ -20,6 +20,7 @@ Imports:
     data.table,
     hutils,
     rsdmx,
+    fastmatch,
     forecast,
     assertthat,
     magrittr,
