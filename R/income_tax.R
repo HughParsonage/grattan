@@ -245,10 +245,28 @@ rolling_income_tax <- function(income,
   
   # https://www.legislation.gov.au/Details/C2014A00048
   # input[["fy_year"]] ensures it matches the length of income if length(fy.year) == 1.
-  temp_budget_repair_levy. <- (input[["fy_year"]] %chin% c("2014-15", "2015-16", "2016-17") & income > 180e3) * (0.02 * (income - 180e3))
+  if (any(c("2014-15", "2015-16", "2016-17") %fin% .subset2(input, "fy_year"))) {
+    temp_budget_repair_levy. <-
+      0.02 * pmaxC(income - 180e3, 0) *
+      {.subset2(input, "fy_year") %chin% c("2014-15", "2015-16", "2016-17")}
+  } else {
+    temp_budget_repair_levy. <- 0
+  }
+  
+  if (any("2011-12" %fin% .subset2(input, "fy_year"))) {
+    flood_levy. <- 
+      0.005 *
+      {.subset2(input, "fy_year") == "2011-12"} * 
+      {pmaxC(income - 50e3, 0) + pmaxC(income - 100e3, 0)}
+  } else {
+    flood_levy. <- 0
+  }
   
   pmaxC(base_tax. - lito. - sapto., 
-        0) + medicare_levy. + temp_budget_repair_levy.
+        0) +
+    medicare_levy. +
+    temp_budget_repair_levy. +
+    flood_levy.
 }
 
 
