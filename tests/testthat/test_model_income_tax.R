@@ -105,6 +105,16 @@ test_that("Medicare options", {
   
   expect_equal(first_above100k$difference, 0.005 * first_above100k$first)
   
+  shift_thresholds <- 
+    sample_file_1314_copy %>%
+    copy %>%
+    .[, old_tax := income_tax(Taxable_Income, "2013-14", .dots.ATO = .)] %>%
+    .[, new_tax := model_income_tax(.,
+                                    baseline_fy = "2013-14",
+                                    medicare_levy_lower_threshold = 21542,
+                                    medicare_levy_upper_threshold = 25343)] %>%
+    .[]
+  
 })
 
 test_that("exclude = <options>", {

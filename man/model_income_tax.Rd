@@ -6,8 +6,8 @@
 \usage{
 model_income_tax(sample_file, baseline_fy, exclude = c("nothing",
   "ordinary_tax", "medicare_levy", "lito", "sapto"), n_dependants = 0L,
-  ordinary_tax_thresholds = NULL, ordinary_tax_rates = NULL,
-  medicare_levy_lower_threshold = NULL,
+  elasticity_of_taxable_income = NULL, ordinary_tax_thresholds = NULL,
+  ordinary_tax_rates = NULL, medicare_levy_lower_threshold = NULL,
   medicare_levy_upper_threshold = NULL, medicare_levy_taper = NULL,
   medicare_levy_rate = NULL, medicare_levy_lower_family_threshold = NULL,
   medicare_levy_upper_family_threshold = NULL,
@@ -28,6 +28,17 @@ If present at the first position of \code{exclude} (the default) it takes preced
 elsewhere it has no effect.}
 
 \item{n_dependants}{The number of dependants for each entry in \code{sample_file}.}
+
+\item{elasticity_of_taxable_income}{Either \code{NULL} (the default), or a numeric vector the same length of \code{sample_file} (or length-1) providing the elasticity of taxable income for each observation in \code{sample_file}; 
+\deqn{\frac{\Delta z / z}{\Delta \tau / (1 - \tau)}} 
+where \eqn{z} is taxable income and \eqn{\tau} is tax payable.
+
+For example, if, for a given taxpayer,
+the tax settings would otherwise result in a 2\% decrease of disposable income
+under the tax settings to be modelled, and \code{elasticity_of_taxable_income} is set to 0.1,
+the \code{Taxable_Income} is reduced by 0.2\% before the tax rates are applied.
+
+If \code{NULL}, an elasticity of 0 is used.}
 
 \item{ordinary_tax_thresholds}{A numeric vector specifying the lower bounds of the brackets for "ordinary tax" as defined by the Regulations.
 The first element should be zero if there is a tax-free threshold.}

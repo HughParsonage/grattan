@@ -2,6 +2,16 @@
 #' @description The income tax payable if tax settings are changed. 
 #' @param sample_file A sample file having at least as many variables as the 2012-13 sample file.
 #' @param baseline_fy If a parameter is not selected, the parameter's value in this tax year is used.
+#' @param elasticity_of_taxable_income Either \code{NULL} (the default), or a numeric vector the same length of \code{sample_file} (or length-1) providing the elasticity of taxable income for each observation in \code{sample_file}; 
+#' \deqn{\frac{\Delta z / z}{\Delta \tau / (1 - \tau)}} 
+#' where \eqn{z} is taxable income and \eqn{\tau} is tax payable.
+#' 
+#' For example, if, for a given taxpayer,
+#' the tax settings would otherwise result in a 2\% decrease of disposable income
+#' under the tax settings to be modelled, and \code{elasticity_of_taxable_income} is set to 0.1,
+#' the \code{Taxable_Income} is reduced by 0.2\% before the tax rates are applied.
+#' 
+#' If \code{NULL}, an elasticity of 0 is used. 
 #' @param exclude A character vector specifying which womponents of the income tax to \emph{exclude}. 
 #' Multiple values are allowed. 
 #' The special value \code{"nothing"} means no components are excluded. 
@@ -36,6 +46,7 @@ model_income_tax <- function(sample_file,
                              baseline_fy,
                              exclude = c("nothing", "ordinary_tax", "medicare_levy", "lito", "sapto"),
                              n_dependants = 0L,
+                             elasticity_of_taxable_income = NULL,
                              
                              ordinary_tax_thresholds = NULL,
                              ordinary_tax_rates = NULL,
@@ -57,6 +68,8 @@ model_income_tax <- function(sample_file,
                              sapto_lower_threshold = NULL,
                              sapto_taper = NULL) {
   arguments <- ls()
+  argument_vals <- as.list(environment())
+  
   if (!is.null(exclude) && exclude[1L] != "nothing") {
     exclude <- match.arg(exclude, several.ok = TRUE)
   }
@@ -79,6 +92,8 @@ model_income_tax <- function(sample_file,
   
   max.length <- length(income)
   prohibit_vector_recycling(income, n_dependants, baseline_fy)
+  
+  old_tax <- income_tax(income, fy.year = baseline_fy, .dots.ATO = copy(.dots.ATO))
   
   if (is.null(sapto_eligible)) {
     if ("age_range" %chin% names(sample_file)) {
@@ -196,8 +211,6 @@ model_income_tax <- function(sample_file,
     ma <- as.integer(ma)
     mb <- as.integer(mb - 1)
     
-    null_medicare_args <- vapply(medicare_args, is.null, FALSE)
-    
     medicare_parameter_roots <- abs(mt * (mb - ma) - mr * mb)
     
     if (any(medicare_parameter_roots[sapto_eligible] > 1)) {
@@ -212,8 +225,10 @@ model_income_tax <- function(sample_file,
           .[sapto_eligible]
         
         if (uniqueN(val) == 1L) {
-          warning("`", the_arg, "` was not specified, but is inconsistent with other parameters.\n", 
-                  "Set\n\t", the_arg, " = ", round(val[1], digits = if (val[1] < 1) 2 else 0),
+          warning("`", the_arg, "` was not specified, ",
+                  "but is inconsistent with other parameters.\n", 
+                  "Set\n\t",
+                  the_arg, " = ", round(val[1], digits = if (val[1] < 1) 2 else 0),
                   call. = FALSE)
         } else {
           warning("`", the_arg, "` was not specified, but is inconsistent with other parameters. ",
@@ -244,7 +259,9 @@ model_income_tax <- function(sample_file,
             if (is.null(medicare_levy_rate)) {
               mr <- mt * (mb - ma) / mb
               warning_if_misspecified("medicare_levy_rate")
-            } # alternative not reachable
+              # alternative not reachable
+            } else stop("ERR # e59ed9845068f337d6653a7cc00401e1dbeeda7d. ",
+                        "Please contact `grattan` package maintainer.") 
           }
         }
       }
@@ -330,6 +347,38 @@ model_income_tax <- function(sample_file,
     }
   }
   
-  pmaxC(base_tax. - lito. - sapto., 0) + medicare_levy.
+  new_tax <- pmaxC(base_tax. - lito. - sapto., 0) + medicare_levy.
+  
+  # Elasticity of Taxable Income
+  ## 
+  if (!is.null(elasticity_of_taxable_income)) {
+    # Change in net income
+    new_taxable_income <-
+      income * (1 - elasticity_of_taxable_income * (new_tax - old_tax) / (income - old_tax)) %>%
+      coalesce(0)
+    
+    if (anyNA(new_taxable_income) || identical(as.double(new_taxable_income), as.double(income))) {
+      stop("NAs: ", sum(is.na(new_taxable_income)), call. = FALSE)
+    }
+    
+    new_argument_vals <-
+      argument_vals %>%
+      .[!names(argument_vals) %in% c("arguments", "elasticity_of_taxable_income", "sample_file")]
+    
+    new_sample_file <- copy(sample_file)
+    new_sample_file[, Taxable_Income := as.double(new_taxable_income)]
+    
+    .model_income_tax <- function(...) {
+      model_income_tax(sample_file = new_sample_file,
+                       elasticity_of_taxable_income = NULL, 
+                       ...)
+    }
+    
+    new_tax <- do.call(.model_income_tax, new_argument_vals)
+  }
+  
+  new_tax
 }
+
+
 
