@@ -262,8 +262,46 @@ rolling_income_tax <- function(income,
     flood_levy. <- 0
   }
   
-  pmaxC(base_tax. - lito. - sapto., 
-        0) +
+  # http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html
+  S4.10_basic_income_tax_liability <- pmaxC(base_tax. - lito. - sapto., 0)
+  
+  
+  Tot_net_small_business_inc <- 0
+  .aggregated_turnover <- 0
+  
+  if ("Tot_net_small_business_inc" %chin% names(.dots.ATO)){
+    Tot_net_small_business_inc <-
+      .subset2(.dots.ATO, "Tot_net_small_business_inc")
+    
+  } else {
+    if (all(c("Total_PP_BE_amt", 
+              "Total_PP_BI_amt", 
+              "Total_NPP_BE_amt",
+              "Total_NPP_BI_amt") %chin% names(.dots.ATO))) {
+      Tot_net_small_business_inc <-
+        .dots.ATO %>%
+        .[, `:=`(Tot_net_small_business_inc,
+                 Total_PP_BE_amt +
+                   Total_PP_BI_amt +
+                   Total_NPP_BE_amt +
+                   Total_NPP_BI_amt)] %>%
+        .subset2("Tot_net_small_business_inc")
+      
+      .aggregated_turnover <-
+        .subset2(.dots.ATO, "Total_PP_BI_amt") + 
+        .subset2(.dots.ATO, "Total_NPP_BI_amt")
+    }
+  }
+  
+  sbto. <-
+    small_business_tax_offset(taxable_income = income,
+                              basic_income_tax_liability = S4.10_basic_income_tax_liability,
+                              aggregated_turnover = .aggregated_turnover,
+                              total_net_small_business_income = Tot_net_small_business_inc,
+                              fy_year = fy.year)
+  
+  S4.10_basic_income_tax_liability -
+    sbto. +
     medicare_levy. +
     temp_budget_repair_levy. +
     flood_levy.

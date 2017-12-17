@@ -9,7 +9,8 @@ Explanatory memorandum \url{http://parlinfo.aph.gov.au/parlInfo/download/legisla
 }
 \usage{
 small_business_tax_offset(taxable_income, basic_income_tax_liability,
-  total_net_small_business_income, fy_year = NULL, tax_discount = NULL)
+  aggregated_turnover, total_net_small_business_income, fy_year = NULL,
+  tax_discount = NULL)
 }
 \arguments{
 \item{taxable_income}{Individual's assessable income.}
@@ -18,6 +19,23 @@ small_business_tax_offset(taxable_income, basic_income_tax_liability,
 \if{latex}{\deqn{\mathrm{Income\;Tax} = \mathrm{Taxable\;income\times\mathrm{Rate}-\mathrm{Tax\;offsets}}}}
 For example, in 2015-16, an individual with an assessable income of \$100,000 had a basic tax liability of 
 approximately \$25,000.}
+
+\item{aggregated_turnover}{A numeric vector the same length as \code{taxable_income}.
+Only used to determine whether or not the offset is applicable; that is, the offset only
+applies if aggregated turnover is less than \$2M.
+
+Aggregated turnover of a taxpayer is the sum of the following:
+\itemize{
+\item{the taxpayer's annual turnover for the income year,}
+\item{the annual turnover of any entity connected with the taxpayer's, for that part of the income year that the entity is connected with the taxpayer's}
+\item{the annual turnover of any entity that is an affiliate of the taxpayer, for that part of the income year that the entity is affiliated with the taxpayer's}
+\item{When you calculate aggregated turnover for an income year, do not include either:}
+\itemize{
+\item{the annual turnover of other entities for any period of time that the entities are either not connected with the taxpayer or are not the taxpayer's affiliate, or}
+\item{amounts resulting from any dealings between these entities for that part of the income year that the entity is connected or affiliated with the taxpayer.}
+}
+}
+<https://www.ato.gov.au/Business/Research-and-development-tax-incentive/Claiming-the-tax-offset/Steps-to-claiming-the-tax-offset/Step-3---Calculate-your-aggregated-turnover/>}
 
 \item{total_net_small_business_income}{Total net business income within the meaning of the Act. For most taxpayers, this is simply any net income from a business they own (or their share of net income from a business in which they have an interest). The only difference being in the calculation of the net business income of some minors (vide Division 6AA of Part III of the Act).}
 

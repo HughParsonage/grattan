@@ -21,7 +21,7 @@ model_income_tax(sample_file, baseline_fy, exclude = c("nothing",
 
 \item{baseline_fy}{If a parameter is not selected, the parameter's value in this tax year is used.}
 
-\item{exclude}{A character vector specifying which womponents of the income tax to \emph{exclude}. 
+\item{exclude}{A character vector specifying which omponents of the income tax to \emph{exclude}. 
 Multiple values are allowed. 
 The special value \code{"nothing"} means no components are excluded. 
 If present at the first position of \code{exclude} (the default) it takes precedence and no components are excluded; 
