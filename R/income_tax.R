@@ -300,8 +300,8 @@ rolling_income_tax <- function(income,
                               total_net_small_business_income = Tot_net_small_business_inc,
                               fy_year = fy.year)
   
-  S4.10_basic_income_tax_liability -
-    sbto. +
+  # SBTO is non-refundable (Para 1.6 of explanatory memo)
+  pmaxC(S4.10_basic_income_tax_liability - sbto., 0) +
     medicare_levy. +
     temp_budget_repair_levy. +
     flood_levy.
