@@ -12,7 +12,7 @@
 #' the \code{Taxable_Income} is reduced by 0.2\% before the tax rates are applied.
 #' 
 #' If \code{NULL}, an elasticity of 0 is used. 
-#' @param exclude A character vector specifying which womponents of the income tax to \emph{exclude}. 
+#' @param exclude A character vector specifying which omponents of the income tax to \emph{exclude}. 
 #' Multiple values are allowed. 
 #' The special value \code{"nothing"} means no components are excluded. 
 #' If present at the first position of \code{exclude} (the default) it takes precedence and no components are excluded; 
