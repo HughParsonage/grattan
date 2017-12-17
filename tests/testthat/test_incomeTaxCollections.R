@@ -62,12 +62,13 @@ test_that("Projections match collections", {
   # Table 7
   collections_1617_proj.over.actual <- 
     sample_file_1213 %>%
-    # Budget papers http://www.budget.gov.au/2015-16/content/bp1/html/bp1_bs4-03.htm
+    # Budget papers http://www.budget.gov.au/2015-16/content/bp1/html/bp1_bs4-03.htm 196950M
+    # FBO: 193863M
     project_to(to_fy = "2016-17", fy.year.of.sample.file = "2012-13") %$%
     abs(sum(income_tax(Taxable_Income, 
                        "2016-17", 
                        age = if_else(age_range <= 1, 67, 42), 
-                       .dots.ATO = copy(.)) * WEIGHT) / (196950 * 1e6) - 1)
+                       .dots.ATO = copy(.)) * WEIGHT) / (193863 * 1e6) - 1)
   
   expect_lt(collections_1314_proj.over.actual, 0.05)
   expect_lt(collections_1415_proj.over.actual, 0.05)
