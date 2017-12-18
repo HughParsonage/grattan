@@ -51,10 +51,14 @@ income_tax <- function(income,
     }
   }
   
-  if (identical(fy.year, "2013-14") &&
-      is.null(age)) {
+  if (is.null(age) &&
+      length(fy.year) == 1L &&
+      fy.year %chin% c("2012-13", "2013-14", 
+                       "2014-15", "2015-16",
+                       "2016-17", "2017-18",
+                       "2018-19", "2019-20")) {
     out <- income_tax_cpp(income,
-                          fy.year = "2013-14",
+                          fy.year = fy.year,
                           .dots.ATO = .dots.ATO,
                           n_dependants = n_dependants)
   } else {
@@ -105,9 +109,7 @@ rolling_income_tax <- function(income,
     }
   }
   
-  if (any(income < 0)){
-    warning("Negative entries in income detected. These will have value NA.")
-  }
+
   
   # CRAN NOTE avoidance
   fy_year <- NULL; marginal_rate <- NULL; lower_bracket <- NULL; tax_at <- NULL; n <- NULL; tax <- NULL; ordering <- NULL; max_lito <- NULL; min_bracket <- NULL; lito_taper <- NULL; sato <- NULL; taper <- NULL; rate <- NULL; max_offset <- NULL; upper_threshold <- NULL; taper_rate <- NULL; medicare_income <- NULL; lower_up_for_each_child <- NULL;
@@ -152,6 +154,7 @@ rolling_income_tax <- function(income,
   prohibit_vector_recycling(income, fy.year, age, family_status, n_dependants)
   prohibit_length0_vectors(income, fy.year, age, family_status, n_dependants)
   
+  # Also lengths() -- but doesn't appear to be faster, despite being so advertised 
   input.lengths <- vapply(list(income, fy.year, age, family_status, n_dependants), FUN = length, FUN.VALUE = integer(1))
   max.length <- max(input.lengths)
   
@@ -265,40 +268,16 @@ rolling_income_tax <- function(income,
   # http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html
   S4.10_basic_income_tax_liability <- pmaxC(base_tax. - lito. - sapto., 0)
   
-  
-  Tot_net_small_business_inc <- 0
-  .aggregated_turnover <- 0
-  
-  if ("Tot_net_small_business_inc" %chin% names(.dots.ATO)){
-    Tot_net_small_business_inc <-
-      .subset2(.dots.ATO, "Tot_net_small_business_inc")
-    
+  # SBTO can only be calculated off .dots.ATO
+  if (is.null(.dots.ATO)) {
+    sbto. <- 0
   } else {
-    if (all(c("Total_PP_BE_amt", 
-              "Total_PP_BI_amt", 
-              "Total_NPP_BE_amt",
-              "Total_NPP_BI_amt") %chin% names(.dots.ATO))) {
-      Tot_net_small_business_inc <-
-        .dots.ATO %>%
-        .[, `:=`(Tot_net_small_business_inc,
-                 Total_PP_BE_amt +
-                   Total_PP_BI_amt +
-                   Total_NPP_BE_amt +
-                   Total_NPP_BI_amt)] %>%
-        .subset2("Tot_net_small_business_inc")
-      
-      .aggregated_turnover <-
-        .subset2(.dots.ATO, "Total_PP_BI_amt") + 
-        .subset2(.dots.ATO, "Total_NPP_BI_amt")
-    }
+    sbto. <-
+      small_business_tax_offset(taxable_income = income,
+                                basic_income_tax_liability = S4.10_basic_income_tax_liability,
+                                .dots.ATO = .dots.ATO,
+                                fy_year = fy.year)
   }
-  
-  sbto. <-
-    small_business_tax_offset(taxable_income = income,
-                              basic_income_tax_liability = S4.10_basic_income_tax_liability,
-                              aggregated_turnover = .aggregated_turnover,
-                              total_net_small_business_income = Tot_net_small_business_inc,
-                              fy_year = fy.year)
   
   # SBTO is non-refundable (Para 1.6 of explanatory memo)
   pmaxC(S4.10_basic_income_tax_liability - sbto., 0) +
@@ -357,90 +336,141 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
     n_dependants <- rep_len(n_dependants, max.length)
   }
   
+  if (length(fy.year) != 1L) {
+    stop("`fy.year` was length-",
+         prettyNum(length(fy.year), big.mark = ","), ". ",
+         "Use a single-length financial year in `income_tax_cpp()` ",
+         "or use `income_tax()`.",
+         call. = FALSE)
+  }
+  
+  if (fy.year < "2012-13") {
+    stop("`fy.year` was ", fy.year, ". ",
+         "Use a single financial year from 2012-13 onwards ", 
+         "or use `income_tax()`.", 
+         call. = FALSE)
+  }
+  
+  base_tax. <- 
+    IncomeTax(income, 
+              thresholds = c(0, 18200, 37000,
+                             if (fy.year < "2016-17") 80e3 else 87e3,
+                             180000),
+              rates = c(0, 0.19, 0.325, 0.37, 
+                        # Temp budget repair levy
+                        if (fy.year %chin% c("2014-15", "2015-16", "2016-17")) 0.47 else 0.45))
+  
+  lito. <- pminC(pmaxC(445 - (income - 37000) * 0.015, 0),
+                 445)
 
   switch(fy.year,
+         "2012-13" = {
+           Year.int <- 2013L
+         },
          "2013-14" = {
-           base_tax. <- 
-             IncomeTax(income, 
-                       thresholds = c(0, 18200, 37000, 80000, 180000),
-                       rates = c(0, 0.19, 0.325, 0.37, 0.45))
-           
            Year.int <- 2014L
-           
-           if (any(sapto.eligible)) {
-             # Use this a lot, saves 0.5ms each time
-             which_sapto <- which(sapto.eligible)
-             which_not_sapto <- which(!sapto.eligible)
-             
-             SpouseIncome_sapto_eligible <- SpouseIncome[which_sapto]
-             
-             if (length(sapto.eligible) != 1L) {
-               medicare_levy. <- double(max.length)
-               medicare_levy.[which_sapto] <- 
-                 MedicareLevySaptoYear(income[which_sapto],
-                                       SpouseIncome = SpouseIncome_sapto_eligible,
-                                       NDependants = n_dependants[which_sapto], 
-                                       TRUE, 
-                                       Year.int)
-               
-               medicare_levy.[which_not_sapto] <- 
-                 MedicareLevySaptoYear(income[which_not_sapto],
-                                       SpouseIncome = SpouseIncome[which_not_sapto],
-                                       NDependants = n_dependants[which_not_sapto],
-                                       FALSE,
-                                       Year.int)
-               
-             } else {
-               # All are SAPTO.
-               medicare_levy. <-
-                 MedicareLevySaptoYear(income,
-                                       SpouseIncome = SpouseIncome,
-                                       NDependants = n_dependants,
-                                       TRUE, 
-                                       Year.int)
-             }
-             
-             
-             
-             if (AND(!is.null(.dots.ATO),
-                     all(c("Rptbl_Empr_spr_cont_amt",
-                           "Net_fincl_invstmt_lss_amt",
-                           "Net_rent_amt", 
-                           "Rep_frng_ben_amt") %chin% .dots.ATO.noms))) {
-               sapto. <- double(max.length)
-               .dAse <- .dots.ATO[which_sapto]
-               
-               sapto.[which_sapto] <-
-                 sapto_rcpp_yr(RebateIncome = rebate_income(Taxable_Income = income[which_sapto],
-                                                            Rptbl_Empr_spr_cont_amt = .dAse[["Rptbl_Empr_spr_cont_amt"]],
-                                                            Net_fincl_invstmt_lss_amt = .dAse[["Net_fincl_invstmt_lss_amt"]],
-                                                            Net_rent_amt = .dAse[["Net_rent_amt"]],
-                                                            Rep_frng_ben_amt = .dAse[["Rep_frng_ben_amt"]]),
-                               SpouseIncome = SpouseIncome_sapto_eligible,
-                               IsMarried = SpouseIncome_sapto_eligible > 0,
-                               yr = Year.int)
-
-             } else {
-               sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income), 
-                                                fy.year = fy.year, 
-                                                sapto.eligible = TRUE)
-             }
-           } else {
-             medicare_levy. <-
-               MedicareLevySaptoYear(income = income,
-                                     SpouseIncome = SpouseIncome,
-                                     NDependants = n_dependants,
-                                     FALSE,
-                                     Year.int)
-             sapto. <- 0
-           }
-           
-           lito. <- pminC(pmaxC(445 - (income - 37000) * 0.015, 0),
-                          445)
-           
-           pmaxC(base_tax. - lito. - sapto., 0) + medicare_levy.
-             
-         })
+         },
+         "2014-15" = {
+           Year.int <- 2015L
+         },
+         "2015-16" = {
+           Year.int <- 2016L
+         },
+         "2016-17" = {
+           Year.int <- 2017L
+         },
+         "2017-18" = {
+           Year.int <- 2018L
+         },
+         "2018-19" = {
+           Year.int <- 2019L
+         }, 
+         "2019-20" = {
+           Year.int <- 2020L
+         },
+         stop("`fy.year` was ", fy.year, ". ",
+              "Use a single financial year from 2012-13 onwards ", 
+              "or use `income_tax()`.", 
+              call. = FALSE))
+  
+  if (any(sapto.eligible)) {
+    # Use this a lot, saves 0.5ms each time
+    which_sapto <- which(sapto.eligible)
+    which_not_sapto <- which(!sapto.eligible)
+    
+    SpouseIncome_sapto_eligible <- SpouseIncome[which_sapto]
+    
+    if (length(sapto.eligible) != 1L) {
+      medicare_levy. <- double(max.length)
+      medicare_levy.[which_sapto] <- 
+        MedicareLevySaptoYear(income[which_sapto],
+                              SpouseIncome = SpouseIncome_sapto_eligible,
+                              NDependants = n_dependants[which_sapto], 
+                              TRUE, 
+                              Year.int)
+      
+      medicare_levy.[which_not_sapto] <- 
+        MedicareLevySaptoYear(income[which_not_sapto],
+                              SpouseIncome = SpouseIncome[which_not_sapto],
+                              NDependants = n_dependants[which_not_sapto],
+                              FALSE,
+                              Year.int)
+      
+    } else {
+      # All are SAPTO.
+      medicare_levy. <-
+        MedicareLevySaptoYear(income,
+                              SpouseIncome = SpouseIncome,
+                              NDependants = n_dependants,
+                              TRUE, 
+                              Year.int)
+    }
+    
+    
+    
+    if (AND(!is.null(.dots.ATO),
+            all(c("Rptbl_Empr_spr_cont_amt",
+                  "Net_fincl_invstmt_lss_amt",
+                  "Net_rent_amt", 
+                  "Rep_frng_ben_amt") %chin% .dots.ATO.noms))) {
+      sapto. <- double(max.length)
+      .dAse <- .dots.ATO[which_sapto]
+      
+      sapto.[which_sapto] <-
+        sapto_rcpp_yr(RebateIncome = rebate_income(Taxable_Income = income[which_sapto],
+                                                   Rptbl_Empr_spr_cont_amt = .dAse[["Rptbl_Empr_spr_cont_amt"]],
+                                                   Net_fincl_invstmt_lss_amt = .dAse[["Net_fincl_invstmt_lss_amt"]],
+                                                   Net_rent_amt = .dAse[["Net_rent_amt"]],
+                                                   Rep_frng_ben_amt = .dAse[["Rep_frng_ben_amt"]]),
+                      SpouseIncome = SpouseIncome_sapto_eligible,
+                      IsMarried = SpouseIncome_sapto_eligible > 0,
+                      yr = Year.int)
+      
+    } else {
+      sapto. <- sapto.eligible * sapto(rebate_income = rebate_income(Taxable_Income = income), 
+                                       fy.year = fy.year, 
+                                       sapto.eligible = TRUE)
+    }
+  } else {
+    medicare_levy. <-
+      MedicareLevySaptoYear(income = income,
+                            SpouseIncome = SpouseIncome,
+                            NDependants = n_dependants,
+                            FALSE,
+                            Year.int)
+    sapto. <- 0
+  }
+  
+  
+  
+  out <- pmaxC(base_tax. - lito. - sapto., 0) + medicare_levy.
+  if (any(income < 0)) {
+    warning("Negative entries in income detected. These will have value NA.")
+    out[income < 0] <- switch(storage.mode(out), 
+                              "integer" = NA_integer_,
+                              "double" = NA_real_)
+  }
+  out
 }
 
 
