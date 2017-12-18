@@ -5,6 +5,17 @@
 #' For example, in 2015-16, an individual with an assessable income of \$100,000 had a basic tax liability of 
 #' approximately \$25,000.
 #' 
+#' @param .dots.ATO A \code{data.table} of tax returns.
+#' If provided, it must contain the variables
+#'  \code{Total_PP_BE_amt},
+#'  \code{Total_PP_BI_amt},
+#'  \code{Total_NPP_BE_amt},
+#'  \code{Total_NPP_BI_amt}.
+#' If both \code{.dots.ATO} and either \code{aggregated_turnover} or \code{total_net_small_business_income} are provided, 
+#' \code{.dots.ATO} takes precedence, with a warning.
+#' 
+#' If \code{.dots.ATO} contains the variable \code{Tot_net_small_business_inc}, it is used instead of the income variables.
+#' 
 #' @param aggregated_turnover A numeric vector the same length as \code{taxable_income}.
 #' Only used to determine whether or not the offset is applicable; that is, the offset only
 #' applies if aggregated turnover is less than \$2M.
@@ -33,19 +44,57 @@
 
 small_business_tax_offset <- function(taxable_income,
                                       basic_income_tax_liability,
-                                      aggregated_turnover,
-                                      total_net_small_business_income,
+                                      .dots.ATO = NULL,
+                                      aggregated_turnover = NULL,
+                                      total_net_small_business_income = NULL,
                                       fy_year = NULL,
                                       tax_discount = NULL) {
+  
   if (!is.null(fy_year) && fy_year < "2015-16") {
     return(0)
   } else {
-    
-    max.length <-
-      prohibit_vector_recycling.MAXLENGTH(taxable_income,
-                                          basic_income_tax_liability,
-                                          aggregated_turnover,
-                                          total_net_small_business_income)
+    if (!is.null(.dots.ATO)) {
+      if (!is.null(aggregated_turnover)) {
+        warning("Both `.dots.ATO` and `aggregated_turnover` were provided. ",
+                "`aggregated_turnover` will be ignored.")
+      }
+      if (!is.null(total_net_small_business_income)) {
+        warning("Both `.dots.ATO` and `total_net_small_business_income` were provided. ",
+                "`total_net_small_business_income` will be ignored.")
+      }
+      
+      if (all(c("Total_PP_BE_amt", 
+                "Total_PP_BI_amt", 
+                "Total_NPP_BE_amt",
+                "Total_NPP_BI_amt") %chin% names(.dots.ATO))) {
+        aggregated_turnover <-
+          .subset2(.dots.ATO, "Total_PP_BI_amt") + 
+          .subset2(.dots.ATO, "Total_NPP_BI_amt")
+        
+        if ("Tot_net_small_business_inc" %chin% names(.dots.ATO)) {
+          total_net_small_business_income <-
+            .subset2(.dots.ATO, "Tot_net_small_business_inc")
+        } else {
+          total_net_small_business_income <-
+            aggregated_turnover -
+            .subset2(.dots.ATO, "Total_PP_BE_amt") - 
+            .subset2(.dots.ATO, "Total_NPP_BE_amt")
+        }
+      } else {
+        stop("\n`.dots.ATO` was provided but does not contain the necessary variables. ", 
+             "Ensure `.dots.ATO`, if provided, has the following variables:\n\n\t",
+             paste0(c("Total_PP_BE_amt", 
+                      "Total_PP_BI_amt", 
+                      "Total_NPP_BE_amt",
+                      "Total_NPP_BI_amt"), sep = "\n\t"))
+      }
+    } else {
+      max.length <-
+        prohibit_vector_recycling.MAXLENGTH(taxable_income,
+                                            basic_income_tax_liability,
+                                            aggregated_turnover,
+                                            total_net_small_business_income)
+    }
     
     # See explanatory memorandum: p. 16
     prop_business_income <- total_net_small_business_income / taxable_income

@@ -9,7 +9,8 @@ Explanatory memorandum \url{http://parlinfo.aph.gov.au/parlInfo/download/legisla
 }
 \usage{
 small_business_tax_offset(taxable_income, basic_income_tax_liability,
-  aggregated_turnover, total_net_small_business_income, fy_year = NULL,
+  .dots.ATO = NULL, aggregated_turnover = NULL,
+  total_net_small_business_income = NULL, fy_year = NULL,
   tax_discount = NULL)
 }
 \arguments{
@@ -19,6 +20,17 @@ small_business_tax_offset(taxable_income, basic_income_tax_liability,
 \if{latex}{\deqn{\mathrm{Income\;Tax} = \mathrm{Taxable\;income\times\mathrm{Rate}-\mathrm{Tax\;offsets}}}}
 For example, in 2015-16, an individual with an assessable income of \$100,000 had a basic tax liability of 
 approximately \$25,000.}
+
+\item{.dots.ATO}{A \code{data.table} of tax returns.
+If provided, it must contain the variables
+ \code{Total_PP_BE_amt},
+ \code{Total_PP_BI_amt},
+ \code{Total_NPP_BE_amt},
+ \code{Total_NPP_BI_amt}.
+If both \code{.dots.ATO} and either \code{aggregated_turnover} or \code{total_net_small_business_income} are provided, 
+\code{.dots.ATO} takes precedence, with a warning.
+
+If \code{.dots.ATO} contains the variable \code{Tot_net_small_business_inc}, it is used instead of the income variables.}
 
 \item{aggregated_turnover}{A numeric vector the same length as \code{taxable_income}.
 Only used to determine whether or not the offset is applicable; that is, the offset only
