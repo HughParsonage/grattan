@@ -49,7 +49,8 @@ double MedicareLevySingle(double income, double lowerThreshold, double upperThre
 //' @name MedicareLevy
 //' @param income,SpouseIncome,isFamily,NDependants,lowerThreshold,upperThreshold,lowerFamilyThreshold,upperFamilyThreshold,lowerUpForEachChild As in \code{medicare_levy}.
 //' @param rate,taper The parameters for the specific year or hypothetical requested.
-//' @export MedicareLevy 
+//' @export MedicareLevy
+//' @details For \code{yr > 2018}, the 2017-18 values are used.
 
 // MedicareLevy201314NoSapto MedicareLevy201314Sapto MedicareLevy201213NoSapto MedicareLevy201213Sapto MedicareLevy201415NoSapto MedicareLevy201415Sapto MedicareLevy201516NoSapto MedicareLevy201516Sapto MedicareLevy201617NoSapto MedicareLevy201617Sapto MedicareLevy201718NoSapto MedicareLevy201718Sapto
 
@@ -90,7 +91,8 @@ NumericVector MedicareLevySaptoYear(NumericVector income,
         out[i] = MedicareLevySingle(ii, 34244, 42806, 0.020, 0.1, sii, ifi, ndi, 47670, 59589, 3306);
         break;
       default:
-        stop("SAPTO not defined for yr provided.");
+        out[i] = MedicareLevySingle(ii, 34244, 42806, 0.020, 0.1, sii, ifi, ndi, 47670, 59589, 3306);
+        break;
       }
     }
   } else {
@@ -119,7 +121,8 @@ NumericVector MedicareLevySaptoYear(NumericVector income,
         out[i] = MedicareLevySingle(ii, 21655, 27070, 0.020, 0.1, sii, ifi, ndi, 36541, 44077, 3356);
         break;
       default:
-        stop("SAPTO not defined for yr provided.");
+        out[i] = MedicareLevySingle(ii, 21655, 27070, 0.020, 0.1, sii, ifi, ndi, 36541, 44077, 3356);
+        break;
       }
     }
   }

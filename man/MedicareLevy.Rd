@@ -11,3 +11,6 @@
 \description{
 Medicare levy. Experimental function in C++, equivalent to \code{\link{medicare_levy}}.
 }
+\details{
+For \code{yr > 2018}, the 2017-18 values are used.
+}
