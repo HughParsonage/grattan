@@ -51,6 +51,9 @@ income_tax <- function(income,
     }
   }
   
+  # Absolutely necessary
+  .dots.ATO <- copy(.dots.ATO)
+  
   if (is.null(age) &&
       length(fy.year) == 1L &&
       fy.year %chin% c("2012-13", "2013-14", 
