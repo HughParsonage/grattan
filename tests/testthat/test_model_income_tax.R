@@ -123,7 +123,10 @@ test_that("exclude = <options>", {
   s1314 <- copy(sample_file_1314)
   
   no_sapto_1314 <-
-    s1314[, tx := model_income_tax(copy(s1314), "2013-14", exclude = "sapto")] %>%
+    s1314[, tx := model_income_tax(copy(s1314),
+                                   "2013-14",
+                                   exclude = "sapto",
+                                   return. = "tax")] %>%
     .[, tx2 := income_tax(Taxable_Income, "2013-14", .dots.ATO = copy(s1314))] %>%
     .[]
   
