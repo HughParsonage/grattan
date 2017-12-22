@@ -14,7 +14,7 @@ model_income_tax(sample_file, baseline_fy, exclude = c("nothing",
   medicare_levy_lower_up_for_each_child = NULL, lito_max_offset = NULL,
   lito_taper = NULL, lito_min_bracket = NULL, sapto_eligible = NULL,
   sapto_max_offset = NULL, sapto_lower_threshold = NULL,
-  sapto_taper = NULL)
+  sapto_taper = NULL, return. = c("tax", "sample_file"))
 }
 \arguments{
 \item{sample_file}{A sample file having at least as many variables as the 2012-13 sample file.}
@@ -73,6 +73,10 @@ If \code{NULL}, the default, then eligibility is determined by \code{age_range} 
 \item{sapto_lower_threshold}{The threshold at which SAPTO begins to reduce (from \code{sapto_max_offset}).}
 
 \item{sapto_taper}{The taper rate beyond \code{sapto_lower_threshold}.}
+
+\item{return.}{What should the function return? One of \code{tax} or \code{sample_file}. 
+If \code{tax}, the tax payable under the settings; if \code{sample_file}, the \code{sample_file},
+but with variables \code{tax} and possibly \code{new_taxable_income}.}
 }
 \description{
 The income tax payable if tax settings are changed.

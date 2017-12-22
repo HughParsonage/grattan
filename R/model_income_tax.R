@@ -37,6 +37,9 @@
 #' @param sapto_max_offset The maximum offset available through SAPTO. 
 #' @param sapto_lower_threshold The threshold at which SAPTO begins to reduce (from \code{sapto_max_offset}).
 #' @param sapto_taper The taper rate beyond \code{sapto_lower_threshold}.
+#' @param return. What should the function return? One of \code{tax} or \code{sample_file}. 
+#' If \code{tax}, the tax payable under the settings; if \code{sample_file}, the \code{sample_file},
+#' but with variables \code{tax} and possibly \code{new_taxable_income}. 
 #' 
 #' @export
 
@@ -66,9 +69,11 @@ model_income_tax <- function(sample_file,
                              sapto_eligible = NULL,
                              sapto_max_offset = NULL,
                              sapto_lower_threshold = NULL,
-                             sapto_taper = NULL) {
+                             sapto_taper = NULL, 
+                             return. = c("tax", "sample_file")) {
   arguments <- ls()
   argument_vals <- as.list(environment())
+  return. <- match.arg(return.)
   
   if (!is.null(exclude) && exclude[1L] != "nothing") {
     exclude <- match.arg(exclude, several.ok = TRUE)
@@ -357,27 +362,39 @@ model_income_tax <- function(sample_file,
       income * (1 - elasticity_of_taxable_income * (new_tax - old_tax) / (income - old_tax)) %>%
       coalesce(0)
     
+    sample_file[, new_taxable_income := new_taxable_income]
+    
     if (anyNA(new_taxable_income) || identical(as.double(new_taxable_income), as.double(income))) {
       stop("NAs: ", sum(is.na(new_taxable_income)), call. = FALSE)
     }
     
     new_argument_vals <-
       argument_vals %>%
-      .[!names(argument_vals) %in% c("arguments", "elasticity_of_taxable_income", "sample_file")]
+      .[!names(argument_vals) %in% c("arguments",
+                                     "elasticity_of_taxable_income",
+                                     "sample_file",
+                                     "return.")]
     
     new_sample_file <- copy(sample_file)
     new_sample_file[, Taxable_Income := as.double(new_taxable_income)]
     
     .model_income_tax <- function(...) {
       model_income_tax(sample_file = new_sample_file,
-                       elasticity_of_taxable_income = NULL, 
+                       elasticity_of_taxable_income = NULL,
+                       return. = "tax",
                        ...)
     }
     
     new_tax <- do.call(.model_income_tax, new_argument_vals)
+    sample_file[, new_tax := new_tax]
+    rm(new_sample_file)
+  } else {
+    sample_file[, new_tax := new_tax]
   }
   
-  new_tax
+  switch(return.,
+         "tax" = new_tax,
+         "sample_file" = sample_file)
 }
 
 
