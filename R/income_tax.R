@@ -361,7 +361,9 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
                              180000),
               rates = c(0, 0.19, 0.325, 0.37, 
                         # Temp budget repair levy
-                        if (fy.year %chin% c("2014-15", "2015-16", "2016-17")) 0.47 else 0.45))
+                        if (OR(fy.year == "2014-15",
+                               OR(fy.year == "2015-16",
+                                  fy.year == "2016-17"))) 0.47 else 0.45))
   
   lito. <- pminC(pmaxC(445 - (income - 37000) * 0.015, 0),
                  445)
