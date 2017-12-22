@@ -20,7 +20,8 @@ IncomeTax <- function(x, thresholds, rates) {
 #' @name MedicareLevy
 #' @param income,SpouseIncome,isFamily,NDependants,lowerThreshold,upperThreshold,lowerFamilyThreshold,upperFamilyThreshold,lowerUpForEachChild As in \code{medicare_levy}.
 #' @param rate,taper The parameters for the specific year or hypothetical requested.
-#' @export MedicareLevy 
+#' @export MedicareLevy
+#' @details For \code{yr > 2018}, the 2017-18 values are used.
 NULL
 
 MedicareLevySingle <- function(income, lowerThreshold, upperThreshold, rate = 0.02, taper = 0.2, SpouseIncome = 0, isFamily = FALSE, nDependants = 0L, lowerFamilyThreshold = 46000, upperFamilyThreshold = 54119, lowerUpForEachChild = 3306) {
