@@ -130,6 +130,16 @@ test_that("Medicare options", {
 test_that("Medicare families", {
   s1617 <- project(sample_file_1314, h = 3L)
   
+  for (j in seq_along(s1617)) {
+    if (is.double(s1617[[j]])) {
+      set(s1617, j = j, value = as.integer(s1617[[j]]))
+    }
+  }
+  
+  s1617_orig <- 
+    copy(s1617) %>%
+    .[, orig_tax := income_tax(Taxable_Income, "2016-17", .dots.ATO = s1617)]
+  
   expect_warning(model_income_tax(s1617, 
                                   "2016-17",
                                   medicare_levy_lower_family_threshold = 35000, 
@@ -142,6 +152,9 @@ test_that("Medicare families", {
                      "2016-17",
                      medicare_levy_lower_family_threshold = 35000,
                      medicare_levy_upper_family_threshold = 43750)
+  single_idx <- which(s1617$Spouse_adjusted_taxable_inc == 0)
+  expect_equal(s1617_orig$orig_tax[single_idx],
+               s1617_modelled[single_idx])
   
 })
 
