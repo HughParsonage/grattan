@@ -12,14 +12,6 @@ test_that("Error handling", {
   expect_error(model_income_tax(s_no_ti, "2013-14"),
                regexp = "Taxable_Income")
   
-  # s_no_age <-
-  #   sample_file_1314_copy %>%
-  #   copy %>%
-  #   .[, age_range := 40]
-  # 
-  # expect_warning(model_income_tax(s_no_age, "2013-14"), 
-  #                regexp = "Assuming everyone is ineligible for SAPTO.")
-  
   
 })
 
@@ -148,7 +140,8 @@ test_that("Medicare families", {
   s1617_modelled <-
     model_income_tax(s1617, 
                      "2016-17",
-                     medicare_levy_lower_family_threshold = 35000)
+                     medicare_levy_lower_family_threshold = 35000,
+                     medicare_levy_upper_family_threshold = 43750)
   
 })
 
