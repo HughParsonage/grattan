@@ -120,12 +120,8 @@ model_income_tax <- function(sample_file,
          paste0(absent_cols, collapse = "\n\t"), ".\n")
   }
   
-  
   income <- sample_file[["Taxable_Income"]]
-  if (is.null(income)) {
-    stop("`sample_file` does not contain a column `Taxable_Income`, ", 
-         "yet it is required for this function.")
-  }
+
   
   max.length <- length(income)
   prohibit_vector_recycling(income, n_dependants, baseline_fy)
@@ -141,6 +137,14 @@ model_income_tax <- function(sample_file,
     } else {
       warning("Assuming everyone is ineligible for SAPTO.")
       sapto_eligible <- logical(max.length)
+    }
+  } else {
+    if (!is.logical(sapto_eligible)) {
+      stop("`sapto_eligible` must be a logical vector.")
+    }
+    if (length(sapto_eligible) != 1L && length(sapto_eligible) != max.length) {
+      stop("`sapto_eligible` was length ", length(sapto_eligible), ". ",
+           "Ensure `sapto_eligible` has length ", max.length, "(i.e. nrow(sample_file)) or length one.")
     }
   }
   
@@ -436,10 +440,12 @@ model_income_tax <- function(sample_file,
       }
     }
     
-    ma[sapto_eligible] <- msa[sapto_eligible]
-    mb[sapto_eligible] <- msb[sapto_eligible]
-    mfa[sapto_eligible] <- mfsa[sapto_eligible]
-    mfb[sapto_eligible] <- mfsb[sapto_eligible]
+    if (any(sapto_eligible)) {
+      ma[sapto_eligible] <- msa[sapto_eligible]
+      mb[sapto_eligible] <- msb[sapto_eligible]
+      mfa[sapto_eligible] <- mfsa[sapto_eligible]
+      mfb[sapto_eligible] <- mfsb[sapto_eligible]
+    }
     
     medicare_levy. <-
       MedicareLevy(income = income,
