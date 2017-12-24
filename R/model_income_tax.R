@@ -320,7 +320,10 @@ model_income_tax <- function(sample_file,
               }
             }
           }
-        } else {
+        }
+        
+        if (any(medicare_parameter_roots[and(the_spouse_income == 0L,
+                                             sapto_eligible)] > 1)) {
           # SAPTO non-families
           if (is.null(medicare_levy_upper_sapto_threshold)) {
             msb <- mt * msa / (mt - mr)
@@ -343,7 +346,7 @@ model_income_tax <- function(sample_file,
                    " change too).")
             }
           }
-        } 
+        }
       }
       
       if (any(medicare_parameter_roots[the_spouse_income > 0L] > 1)) {
@@ -371,8 +374,11 @@ model_income_tax <- function(sample_file,
                    " change too).")
             }
           }
-        } else {
-          # Family - SAPTO
+        }
+        
+        # Family - SAPTO
+        if (any(medicare_parameter_roots[and(the_spouse_income > 0L,
+                                             sapto_eligible)] > 1)) {
           if (is.null(medicare_levy_upper_family_sapto_threshold)) {
             mfsb <- mt * mfsa / (mt - mr)
             warning_if_misspecified("medicare_levy_upper_family_sapto_threshold")
@@ -399,8 +405,10 @@ model_income_tax <- function(sample_file,
       }
     }
     
-    
-    
+    ma[sapto_eligible] <- msa[sapto_eligible]
+    mb[sapto_eligible] <- msb[sapto_eligible]
+    mfa[sapto_eligible] <- mfb[sapto_eligible]
+    mfb[sapto_eligible] <- mfb[sapto_eligible]
     
     medicare_levy. <-
       MedicareLevy(income = income,
