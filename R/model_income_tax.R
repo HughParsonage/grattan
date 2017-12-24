@@ -395,7 +395,7 @@ model_income_tax <- function(sample_file,
           } else {
             
             if (is.null(medicare_levy_lower_family_threshold)) {
-              mfa <- mfb - mr / mt
+              mfa <- mfb * (mt - mr) / mt
               warning_if_misspecified("medicare_levy_lower_family_threshold")
               
             } else {
@@ -421,7 +421,7 @@ model_income_tax <- function(sample_file,
           } else {
             
             if (is.null(medicare_levy_lower_family_sapto_threshold)) {
-              mfsa <- mfsb - mr / mt
+              mfsa <- mfsb * (mt - mr) / mt
               warning_if_misspecified("medicare_levy_lower_family_sapto_threshold")
               
             } else {
