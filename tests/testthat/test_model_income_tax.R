@@ -167,7 +167,11 @@ test_that("Elasticity of taxable income", {
     model_income_tax(copy(s12131314),
                      "2016-17",
                      medicare_levy_rate = 0.025, 
-                     medicare_levy_upper_threshold = 44984, 
+                     medicare_levy_lower_threshold = 22499,
+                     medicare_levy_upper_threshold = 30e3, 
+                     medicare_levy_upper_sapto_threshold = 44984,
+                     medicare_levy_upper_family_threshold = 48001,
+                     medicare_levy_upper_family_sapto_threshold = 62621,
                      return. = "sample_file") %>%
     .[, .(Ind,
           Taxable_Income,
@@ -179,7 +183,11 @@ test_that("Elasticity of taxable income", {
                      "2016-17",
                      elasticity_of_taxable_income = 0.5,
                      medicare_levy_rate = 0.025,
-                     medicare_levy_upper_threshold = 44984, 
+                     medicare_levy_upper_threshold = 30e3, 
+                     medicare_levy_lower_threshold = 22499,
+                     medicare_levy_upper_sapto_threshold = 44984,
+                     medicare_levy_upper_family_threshold = 48001,
+                     medicare_levy_upper_family_sapto_threshold = 62621,
                      return = "sample_file")
   elasticity_0.5 <-
     elasticity_0.5[, .(Ind,
@@ -193,7 +201,11 @@ test_that("Elasticity of taxable income", {
                      "2016-17",
                      elasticity_of_taxable_income = 1,
                      medicare_levy_rate = 0.025,
-                     medicare_levy_upper_threshold = 44984, 
+                     medicare_levy_upper_threshold = 30e3, 
+                     medicare_levy_lower_threshold = 22499,
+                     medicare_levy_upper_sapto_threshold = 44984,
+                     medicare_levy_upper_family_threshold = 48001,
+                     medicare_levy_upper_family_sapto_threshold = 62621,
                      return. = "sample_file")
   elasticity_1.0 <- 
     elasticity_1.0[, .(Ind,
