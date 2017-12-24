@@ -10,20 +10,20 @@ test_that("Error handling", {
     .[, Taxable_Income := NULL]
   
   expect_error(model_income_tax(s_no_ti, "2013-14"),
-               regexp = "does not contain a column.*Taxable_Income")
+               regexp = "Taxable_Income")
   
-  s_no_age <-
-    sample_file_1314_copy %>%
-    copy %>%
-    .[, age_range := NULL]
-  
-  expect_warning(model_income_tax(s_no_age, "2013-14"), 
-                 regexp = "Assuming everyone is ineligible for SAPTO.")
+  # s_no_age <-
+  #   sample_file_1314_copy %>%
+  #   copy %>%
+  #   .[, age_range := 40]
+  # 
+  # expect_warning(model_income_tax(s_no_age, "2013-14"), 
+  #                regexp = "Assuming everyone is ineligible for SAPTO.")
   
   
 })
 
-test_that("La plus ca meme la plus ca meme", {
+test_that("La plus ca meme la plus ca meme: ordinary tax", {
   skip_if_not_installed("taxstats")
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
@@ -35,16 +35,27 @@ test_that("La plus ca meme la plus ca meme", {
                               ordinary_tax_rates = c(0, 0.19, 0.325, 0.37, 0.45))
   
   expect_equal(new_tax, original)
+})
   
+test_that("La plus ca meme la plus ca meme: medicare levy", {
+  library(taxstats)
+  sample_file_1314_copy <- copy(sample_file_1314)
   
+  original <- 
+    income_tax(sample_file_1314_copy$Taxable_Income,
+               fy.year = "2013-14",
+               .dots.ATO = copy(sample_file_1314_copy))
   
-  original <- income_tax(sample_file_1314$Taxable_Income, "2013-14", .dots.ATO = copy(sample_file_1314))
+  sample_file_manual_ML <-
+    model_income_tax(copy(sample_file_1314_copy),
+                     baseline_fy = "2013-14",
+                     medicare_levy_rate = 0.015, 
+                     return = "sample_file")
   
-  new_tax <- model_income_tax(sample_file_1314_copy,
-                              baseline_fy = "2013-14",
-                              medicare_levy_rate = 0.015)
+  expect_true(is.double(new_tax2))
+  expect_equal(new_tax2, original)
   
-  expect_equal(new_tax, original)
+  expect_equal(sample_file_manual_ML[["new_tax"]], original)
 })
 
 test_that("Increase in a rate results in more tax", {
@@ -77,7 +88,7 @@ test_that("Medicare options", {
                                   
                                   # In 2013-14, the rate was 0.015
                                   medicare_levy_rate = 0.02), 
-                 regexp = "medicare_levy_upper_threshold = 40349",
+                 regexp = "medicare_levy_upper_threshold = 25678",
                  fixed = TRUE)
   
   sample_file_1314_if_2pc_ML <-
@@ -86,13 +97,19 @@ test_that("Medicare options", {
     .[, old_tax := income_tax(Taxable_Income, "2013-14", .dots.ATO = .)] %>%
     .[, new_tax := model_income_tax(sample_file_1314_copy,
                                     baseline_fy = "2013-14",
-                                    medicare_levy_upper_threshold = 40349,
+                                    medicare_levy_upper_threshold = 25678,
+                                    medicare_levy_upper_sapto_threshold = 40349,
+                                    medicare_levy_upper_family_threshold = 42959,
+                                    medicare_levy_upper_family_sapto_threshold = 57500,
                                     medicare_levy_rate = 0.02)] %>%
     .[]
   
   min_unchanged <- 
-    sample_file_1314_if_2pc_ML[new_tax != old_tax,
-                               .(min_TI = min(Taxable_Income))] %>%
+    sample_file_1314_if_2pc_ML %>%
+    .[Spouse_adjusted_taxable_inc == 0] %>%
+    .[age_range > 1] %>%
+    .[new_tax != old_tax,
+      .(min_TI = min(Taxable_Income))] %>%
     .subset2("min_TI")
   
   expect_equal(min_unchanged, 24168)
@@ -117,11 +134,28 @@ test_that("Medicare options", {
   
 })
 
+
+test_that("Medicare families", {
+  s1617 <- project(sample_file_1314, h = 3L)
+  
+  expect_warning(model_income_tax(s1617, 
+                                  "2016-17",
+                                  medicare_levy_lower_family_threshold = 35000, 
+                                  return = "sample_file"),
+                 regexp = "`medicare_levy_upper_family_threshold` was not specified",
+                 fixed = TRUE)
+  
+  s1617_modelled <-
+    model_income_tax(s1617, 
+                     "2016-17",
+                     medicare_levy_lower_family_threshold = 35000)
+  
+})
+
 test_that("Elasticity of taxable income", {
   s12131314 <- 
-    copy(sample_files_all) %>%
-    setkey(Ind) %>%
-    .[()]
+    copy(sample_file_1213) %>%
+    .[Ind %% 3 == 0]
   
   no_elasticity <- 
     model_income_tax(copy(s12131314),
@@ -166,6 +200,5 @@ test_that("Elasticity of taxable income", {
   no_elasticity[elasticity_0.5[elasticity_1.0, on = "Ind"], on = "Ind"]
   
 })
-
 
 

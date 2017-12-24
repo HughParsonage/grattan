@@ -93,6 +93,34 @@ model_income_tax <- function(sample_file,
     
   stopifnot(is.data.table(sample_file))
   .dots.ATO <- sample_file
+  sample_file_noms <- copy(names(sample_file))
+  
+  s1213_noms <-
+    c("Ind", "Gender", "age_range", "Occ_code", "Partner_status", 
+      "Region", "Lodgment_method", "PHI_Ind", "Sw_amt", "Alow_ben_amt", 
+      "ETP_txbl_amt", "Grs_int_amt", "Aust_govt_pnsn_allw_amt", "Unfranked_Div_amt", 
+      "Frk_Div_amt", "Dividends_franking_cr_amt", "Net_rent_amt", "Gross_rent_amt", 
+      "Other_rent_ded_amt", "Rent_int_ded_amt", "Rent_cap_wks_amt", 
+      "Net_farm_management_amt", "Net_PP_BI_amt", "Net_NPP_BI_amt", 
+      "Total_PP_BI_amt", "Total_NPP_BI_amt", "Total_PP_BE_amt", "Total_NPP_BE_amt", 
+      "Net_CG_amt", "Tot_CY_CG_amt", "Net_PT_PP_dsn", "Net_PT_NPP_dsn", 
+      "Taxed_othr_pnsn_amt", "Untaxed_othr_pnsn_amt", "Other_foreign_inc_amt", 
+      "Other_inc_amt", "Tot_inc_amt", "WRE_car_amt", "WRE_trvl_amt", 
+      "WRE_uniform_amt", "WRE_self_amt", "WRE_other_amt", "Div_Ded_amt", 
+      "Intrst_Ded_amt", "Gift_amt", "Non_emp_spr_amt", "Cost_tax_affairs_amt", 
+      "Other_Ded_amt", "Tot_ded_amt", "PP_loss_claimed", "NPP_loss_claimed", 
+      "Rep_frng_ben_amt", "Med_Exp_TO_amt", "Asbl_forgn_source_incm_amt", 
+      "Spouse_adjusted_taxable_inc", "Net_fincl_invstmt_lss_amt", "Rptbl_Empr_spr_cont_amt", 
+      "Cr_PAYG_ITI_amt", "TFN_amts_wheld_gr_intst_amt", "TFN_amts_wheld_divs_amt", 
+      "Hrs_to_prepare_BPI_cnt", "Taxable_Income", "Help_debt")
+  
+  if (!all(s1213_noms %chin% sample_file_noms)) {
+    absent_cols <- setdiff(s1213_noms, sample_file_noms)
+    stop("`sample_file` lacked the following required columns:\n\t",
+         paste0(absent_cols, collapse = "\n\t"), ".\n")
+  }
+  
+  
   income <- sample_file[["Taxable_Income"]]
   if (is.null(income)) {
     stop("`sample_file` does not contain a column `Taxable_Income`, ", 
@@ -261,15 +289,18 @@ model_income_tax <- function(sample_file,
       # model is misspecified in respect of offsets etc
       
       warning_if_misspecified <- function(the_arg) {
+        se <- sapto_eligible
+        f. <- the_spouse_income > 0
+        nor <- function(x, y) and(!x, !y)
         val <- switch(the_arg, 
-                      "medicare_levy_upper_threshold" = mb, 
-                      "medicare_levy_lower_threshold" = ma, 
-                      "medicare_levy_upper_sapto_threshold" = msb, 
-                      "medicare_levy_lower_sapto_threshold" = msa, 
-                      "medicare_levy_upper_family_threshold" = mfb, 
-                      "medicare_levy_lower_family_threshold" = mfa, 
-                      "medicare_levy_upper_family_sapto_threshold" = mfsb, 
-                      "medicare_levy_lower_family_sapto_threshold" = mfsa, 
+                      "medicare_levy_upper_threshold" = mb[nor(se, f.)], 
+                      "medicare_levy_lower_threshold" = ma[nor(se, f.)], 
+                      "medicare_levy_upper_sapto_threshold" = msb[se & !f.], 
+                      "medicare_levy_lower_sapto_threshold" = msa[se & !f.], 
+                      "medicare_levy_upper_family_threshold" = mfb[!se & f.], 
+                      "medicare_levy_lower_family_threshold" = mfa[!se & f.], 
+                      "medicare_levy_upper_family_sapto_threshold" = mfsb[se & f.], 
+                      "medicare_levy_lower_family_sapto_threshold" = mfsa[se & f.], 
                       "medicare_levy_taper" = mt,
                       "medicare_levy_rate" = mr)
         
@@ -407,8 +438,8 @@ model_income_tax <- function(sample_file,
     
     ma[sapto_eligible] <- msa[sapto_eligible]
     mb[sapto_eligible] <- msb[sapto_eligible]
-    mfa[sapto_eligible] <- mfb[sapto_eligible]
-    mfb[sapto_eligible] <- mfb[sapto_eligible]
+    mfa[sapto_eligible] <- mfsa[sapto_eligible]
+    mfb[sapto_eligible] <- mfsb[sapto_eligible]
     
     medicare_levy. <-
       MedicareLevy(income = income,
@@ -488,6 +519,7 @@ model_income_tax <- function(sample_file,
   }
   
   new_tax <- pmaxC(base_tax. - lito. - sapto., 0) + medicare_levy.
+  new_tax2 <<- new_tax
   
   # Elasticity of Taxable Income
   ## 
@@ -522,7 +554,7 @@ model_income_tax <- function(sample_file,
     
     new_tax <- do.call(.model_income_tax, new_argument_vals)
   } 
-  sample_file[, new_tax := new_tax]
+  sample_file[, new_tax := as.double(new_tax)]
   
   
   switch(return.,
