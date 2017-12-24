@@ -117,22 +117,55 @@ test_that("Medicare options", {
   
 })
 
-test_that("exclude = <options>", {
-  skip_if_not_installed("taxstats")
-  library(taxstats)
-  s1314 <- copy(sample_file_1314)
+test_that("Elasticity of taxable income", {
+  s12131314 <- 
+    copy(sample_files_all) %>%
+    setkey(Ind) %>%
+    .[()]
   
-  no_sapto_1314 <-
-    s1314[, tx := model_income_tax(copy(s1314),
-                                   "2013-14",
-                                   exclude = "sapto",
-                                   return. = "tax")] %>%
-    .[, tx2 := income_tax(Taxable_Income, "2013-14", .dots.ATO = copy(s1314))] %>%
-    .[]
+  no_elasticity <- 
+    model_income_tax(copy(s12131314),
+                     "2016-17",
+                     medicare_levy_rate = 0.025, 
+                     medicare_levy_upper_threshold = 44984, 
+                     return. = "sample_file") %>%
+    .[, .(Ind,
+          Taxable_Income,
+          old_tax = income_tax(Taxable_Income, "2016-17", .dots.ATO = .),
+          new_tax)]
   
-  expect_true(all(no_sapto_1314[tx != tx2][["age_range"]] <= 1))
-  expect_equal(nrow(no_sapto_1314[and(age_range > 1, tx != tx2)]), 0)
+  elasticity_0.5 <-
+    model_income_tax(copy(s12131314),
+                     "2016-17",
+                     elasticity_of_taxable_income = 0.5,
+                     medicare_levy_rate = 0.025,
+                     medicare_levy_upper_threshold = 44984, 
+                     return = "sample_file")
+  elasticity_0.5 <-
+    elasticity_0.5[, .(Ind,
+                       Taxable_Income_e.5 = Taxable_Income,
+                       old_tax = income_tax(Taxable_Income, "2016-17", .dots.ATO = copy(elasticity_0.5)),
+                       new_taxable_income_e.5 = new_taxable_income,
+                       new_tax_e.5 = new_tax)]
+  
+  elasticity_1.0 <-
+    model_income_tax(copy(s12131314),
+                     "2016-17",
+                     elasticity_of_taxable_income = 1,
+                     medicare_levy_rate = 0.025,
+                     medicare_levy_upper_threshold = 44984, 
+                     return. = "sample_file")
+  elasticity_1.0 <- 
+    elasticity_1.0[, .(Ind,
+                       Taxable_Income_e1 = Taxable_Income,
+                       old_tax_e1 = income_tax(Taxable_Income, "2016-17", .dots.ATO = copy(elasticity_1.0)),
+                       new_taxable_income_e1 = new_taxable_income,
+                       new_tax_e1 = new_tax)]
+  
+  
+  no_elasticity[elasticity_0.5[elasticity_1.0, on = "Ind"], on = "Ind"]
   
 })
+
 
 

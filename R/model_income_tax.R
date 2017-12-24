@@ -12,11 +12,6 @@
 #' the \code{Taxable_Income} is reduced by 0.2\% before the tax rates are applied.
 #' 
 #' If \code{NULL}, an elasticity of 0 is used. 
-#' @param exclude A character vector specifying which omponents of the income tax to \emph{exclude}. 
-#' Multiple values are allowed. 
-#' The special value \code{"nothing"} means no components are excluded. 
-#' If present at the first position of \code{exclude} (the default) it takes precedence and no components are excluded; 
-#' elsewhere it has no effect.
 #' @param n_dependants The number of dependants for each entry in \code{sample_file}.
 #' @param ordinary_tax_thresholds A numeric vector specifying the lower bounds of the brackets for "ordinary tax" as defined by the Regulations.
 #' The first element should be zero if there is a tax-free threshold.
@@ -47,7 +42,6 @@
 
 model_income_tax <- function(sample_file,
                              baseline_fy,
-                             exclude = c("nothing", "ordinary_tax", "medicare_levy", "lito", "sapto"),
                              n_dependants = 0L,
                              elasticity_of_taxable_income = NULL,
                              
@@ -75,10 +69,6 @@ model_income_tax <- function(sample_file,
   argument_vals <- as.list(environment())
   return. <- match.arg(return.)
   
-  if (!is.null(exclude) && exclude[1L] != "nothing") {
-    exclude <- match.arg(exclude, several.ok = TRUE)
-  }
-  
   `%|||%` <- function(lhs, rhs) {
     if (is.null(lhs)) {
       rep_len(rhs, max.length)
@@ -98,7 +88,10 @@ model_income_tax <- function(sample_file,
   max.length <- length(income)
   prohibit_vector_recycling(income, n_dependants, baseline_fy)
   
-  old_tax <- income_tax(income, fy.year = baseline_fy, .dots.ATO = copy(.dots.ATO))
+  old_tax <- income_tax(income,
+                        fy.year = baseline_fy,
+                        .dots.ATO = copy(.dots.ATO),
+                        n_dependants = n_dependants)
   
   if (is.null(sapto_eligible)) {
     if ("age_range" %chin% names(sample_file)) {
@@ -206,7 +199,8 @@ model_income_tax <- function(sample_file,
     
     # Here, we test whether or not the conditions are so satisfied; 
     # if not, we fix one of the parameters that is not specified to
-    # satisfy the relation
+    # satisfy the relation, with a warning and a prayer to change
+    # the relevant the parameter.
     
     ma <- medicare_levy_lower_threshold %|||% medicare_tbl_fy[["lower_threshold"]]
     mb <- medicare_levy_upper_threshold %|||% medicare_tbl_fy[["upper_threshold"]]
