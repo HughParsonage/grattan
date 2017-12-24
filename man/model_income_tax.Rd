@@ -4,13 +4,17 @@
 \alias{model_income_tax}
 \title{Modelled Income Tax}
 \usage{
-model_income_tax(sample_file, baseline_fy, exclude = c("nothing",
-  "ordinary_tax", "medicare_levy", "lito", "sapto"), n_dependants = 0L,
+model_income_tax(sample_file, baseline_fy, n_dependants = 0L,
   elasticity_of_taxable_income = NULL, ordinary_tax_thresholds = NULL,
-  ordinary_tax_rates = NULL, medicare_levy_lower_threshold = NULL,
-  medicare_levy_upper_threshold = NULL, medicare_levy_taper = NULL,
-  medicare_levy_rate = NULL, medicare_levy_lower_family_threshold = NULL,
+  ordinary_tax_rates = NULL, medicare_levy_taper = NULL,
+  medicare_levy_rate = NULL, medicare_levy_lower_threshold = NULL,
+  medicare_levy_upper_threshold = NULL,
+  medicare_levy_lower_sapto_threshold = NULL,
+  medicare_levy_upper_sapto_threshold = NULL,
+  medicare_levy_lower_family_threshold = NULL,
   medicare_levy_upper_family_threshold = NULL,
+  medicare_levy_lower_family_sapto_threshold = NULL,
+  medicare_levy_upper_family_sapto_threshold = NULL,
   medicare_levy_lower_up_for_each_child = NULL, lito_max_offset = NULL,
   lito_taper = NULL, lito_min_bracket = NULL, sapto_eligible = NULL,
   sapto_max_offset = NULL, sapto_lower_threshold = NULL,
@@ -20,12 +24,6 @@ model_income_tax(sample_file, baseline_fy, exclude = c("nothing",
 \item{sample_file}{A sample file having at least as many variables as the 2012-13 sample file.}
 
 \item{baseline_fy}{If a parameter is not selected, the parameter's value in this tax year is used.}
-
-\item{exclude}{A character vector specifying which omponents of the income tax to \emph{exclude}. 
-Multiple values are allowed. 
-The special value \code{"nothing"} means no components are excluded. 
-If present at the first position of \code{exclude} (the default) it takes precedence and no components are excluded; 
-elsewhere it has no effect.}
 
 \item{n_dependants}{The number of dependants for each entry in \code{sample_file}.}
 
@@ -46,15 +44,19 @@ The first element should be zero if there is a tax-free threshold.}
 \item{ordinary_tax_rates}{The marginal rates of ordinary tax. The first element should be zero if there is a tax-free threshold. 
 Since the temporary budget repair levy was imposed on a discrete tax bracket when it applied, it is not included in this function.}
 
-\item{medicare_levy_lower_threshold}{Minimum taxable income at which the Medicare levy will be applied.}
-
-\item{medicare_levy_upper_threshold}{Minimum taxable income at which the Medicare levy will be applied at the full Medicare levy rate (2\% in 2015-16). Between this threshold and the \code{medicare_levy_lower_threshold}, a tapered rate applies, starting from zero and climbing to \code{medicare_levy_rate}.}
-
 \item{medicare_levy_taper}{The taper that applies between the \code{_lower} and \code{_upper} thresholds.}
 
 \item{medicare_levy_rate}{The ordinary rate of the Medicare levy for taxable incomes above \code{medicare_levy_upper_threshold}.}
 
+\item{medicare_levy_lower_threshold}{Minimum taxable income at which the Medicare levy will be applied.}
+
+\item{medicare_levy_upper_threshold}{Minimum taxable income at which the Medicare levy will be applied at the full Medicare levy rate (2\% in 2015-16). Between this threshold and the \code{medicare_levy_lower_threshold}, a tapered rate applies, starting from zero and climbing to \code{medicare_levy_rate}.}
+
+\item{medicare_levy_lower_sapto_threshold, medicare_levy_upper_sapto_threshold}{The equivalent values for SAPTO-eligible individuals (not families).}
+
 \item{medicare_levy_lower_family_threshold, medicare_levy_upper_family_threshold}{The equivalent values for families.}
+
+\item{medicare_levy_lower_family_sapto_threshold, medicare_levy_upper_family_sapto_threshold}{The equivalent values for SAPTO-eligible individuals in a family.}
 
 \item{medicare_levy_lower_up_for_each_child}{The amount to add to the \code{_family_threshold}s for each dependant child.}
 

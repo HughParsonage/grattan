@@ -17,11 +17,16 @@
 #' The first element should be zero if there is a tax-free threshold.
 #' @param ordinary_tax_rates The marginal rates of ordinary tax. The first element should be zero if there is a tax-free threshold. 
 #' Since the temporary budget repair levy was imposed on a discrete tax bracket when it applied, it is not included in this function.
-#' @param medicare_levy_lower_threshold Minimum taxable income at which the Medicare levy will be applied.
-#' @param medicare_levy_upper_threshold Minimum taxable income at which the Medicare levy will be applied at the full Medicare levy rate (2\% in 2015-16). Between this threshold and the \code{medicare_levy_lower_threshold}, a tapered rate applies, starting from zero and climbing to \code{medicare_levy_rate}. 
+
 #' @param medicare_levy_taper The taper that applies between the \code{_lower} and \code{_upper} thresholds.
 #' @param medicare_levy_rate The ordinary rate of the Medicare levy for taxable incomes above \code{medicare_levy_upper_threshold}.
+
+#' @param medicare_levy_lower_threshold Minimum taxable income at which the Medicare levy will be applied.
+#' @param medicare_levy_upper_threshold Minimum taxable income at which the Medicare levy will be applied at the full Medicare levy rate (2\% in 2015-16). Between this threshold and the \code{medicare_levy_lower_threshold}, a tapered rate applies, starting from zero and climbing to \code{medicare_levy_rate}. 
+
 #' @param medicare_levy_lower_family_threshold,medicare_levy_upper_family_threshold The equivalent values for families.
+#' @param medicare_levy_lower_sapto_threshold,medicare_levy_upper_sapto_threshold The equivalent values for SAPTO-eligible individuals (not families).
+#' @param medicare_levy_lower_family_sapto_threshold,medicare_levy_upper_family_sapto_threshold The equivalent values for SAPTO-eligible individuals in a family.
 #' @param medicare_levy_lower_up_for_each_child The amount to add to the \code{_family_threshold}s for each dependant child.
 #' @param lito_max_offset The maximum offset available for low incomes.
 #' @param lito_taper The taper to apply beyond \code{lito_min_bracket}.
@@ -48,13 +53,22 @@ model_income_tax <- function(sample_file,
                              ordinary_tax_thresholds = NULL,
                              ordinary_tax_rates = NULL,
                              
-                             medicare_levy_lower_threshold = NULL,
-                             medicare_levy_upper_threshold = NULL,
+                             
                              medicare_levy_taper = NULL, 
                              medicare_levy_rate = NULL,
+                             medicare_levy_lower_threshold = NULL,
+                             medicare_levy_upper_threshold = NULL,
+                             
+                             medicare_levy_lower_sapto_threshold = NULL,
+                             medicare_levy_upper_sapto_threshold = NULL,
+                             
                              medicare_levy_lower_family_threshold = NULL,
                              medicare_levy_upper_family_threshold = NULL,
+                             
+                             medicare_levy_lower_family_sapto_threshold = NULL,
+                             medicare_levy_upper_family_sapto_threshold = NULL,
                              medicare_levy_lower_up_for_each_child = NULL,
+                             
                              
                              lito_max_offset = NULL,
                              lito_taper = NULL,
@@ -202,26 +216,62 @@ model_income_tax <- function(sample_file,
     # satisfy the relation, with a warning and a prayer to change
     # the relevant the parameter.
     
+    
+    # Individuals
     ma <- medicare_levy_lower_threshold %|||% medicare_tbl_fy[["lower_threshold"]]
     mb <- medicare_levy_upper_threshold %|||% medicare_tbl_fy[["upper_threshold"]]
     mt <- medicare_levy_taper %|||% medicare_tbl_fy[["taper"]]
     mr <- medicare_levy_rate  %|||% medicare_tbl_fy[["rate"]]
     
+    # Individuals - SAPTO
+    # N.B. medicare_tbl_fy[["lower/upper_threshold"]] since the join above correctly identifies which ones
+    msa <- medicare_levy_lower_sapto_threshold %|||% medicare_tbl_fy[["lower_threshold"]]
+    msa <- medicare_levy_upper_sapto_threshold %|||% medicare_tbl_fy[["upper_threshold"]]
+    
     ma <- as.integer(ma)
+    msa <- as.integer(msa)
     mb <- as.integer(mb - 1)
+    msb <- as.integer(msb - 1)
     
-    medicare_parameter_roots <- abs(mt * (mb - ma) - mr * mb)
     
-    if (any(medicare_parameter_roots[sapto_eligible] > 1)) {
+    # Families
+    mfa <- medicare_levy_lower_family_threshold %|||% medicare_tbl_fy[["lower_family_threshold"]]
+    mfb <- medicare_levy_upper_family_threshold %|||% medicare_tbl_fy[["upper_family_threshold"]]
+    
+    # Families - SAPTO
+    mfsa <- medicare_levy_lower_family_sapto_threshold %|||% medicare_tbl_fy[["lower_family_threshold"]]
+    mfsa <- medicare_levy_upper_family_sapto_threshold %|||% medicare_tbl_fy[["upper_family_threshold"]]
+    
+    mfa <- as.integer(mfa)
+    mfb <- as.integer(mfb - 1)
+    mfsa <- as.integer(mfsa)
+    mfsb <- as.integer(mfsb - 1)
+    
+    
+    medicare_parameter_roots <- 
+      if_else(sapto_eligible,
+              if_else(the_spouse_income > 0,
+                      abs(mt * (mfsb - mfsa) - mr * mfsb),
+                      abs(mt * (msb - msa) - mr * msb)),
+              if_else(the_spouse_income > 0,
+                      abs(mt * (mfb - mfa) - mr * mfb),
+                      abs(mt * (mb - ma) - mr * mb)))
+    
+    if (any(medicare_parameter_roots > 1)) {
       # model is misspecified in respect of offsets etc
       
       warning_if_misspecified <- function(the_arg) {
         val <- switch(the_arg, 
                       "medicare_levy_upper_threshold" = mb, 
                       "medicare_levy_lower_threshold" = ma, 
+                      "medicare_levy_upper_sapto_threshold" = msb, 
+                      "medicare_levy_lower_sapto_threshold" = msa, 
+                      "medicare_levy_upper_family_threshold" = mfb, 
+                      "medicare_levy_lower_family_threshold" = mfa, 
+                      "medicare_levy_upper_family_sapto_threshold" = mfsb, 
+                      "medicare_levy_lower_family_sapto_threshold" = mfsa, 
                       "medicare_levy_taper" = mt,
-                      "medicare_levy_rate" = mr) %>%
-          .[sapto_eligible]
+                      "medicare_levy_rate" = mr)
         
         if (uniqueN(val) == 1L) {
           warning("`", the_arg, "` was not specified, ",
@@ -231,37 +281,119 @@ model_income_tax <- function(sample_file,
                   call. = FALSE)
         } else {
           warning("`", the_arg, "` was not specified, but is inconsistent with other parameters. ",
-                  "\t", paste0(utils::head(unique(round(val))), collapse = "\n\t"), "\n",
-                  uniqueN(val),
+                  "\n\t", paste0(utils::head(unique(round(val))), collapse = "\n\t"), "\n",
                   call. = FALSE)
         }
       }
       
-      if (is.null(medicare_levy_upper_threshold)) {
-        mb <- mt * ma / (mt - mr)
-        warning_if_misspecified("medicare_levy_upper_threshold")
-        
-      } else {
-        
-        if (is.null(medicare_levy_lower_threshold)) {
-          ma <- mb - mr / mt
-          warning_if_misspecified("medicare_levy_lower_threshold")
-          
-        } else {
-          
-          if (is.null(medicare_levy_taper)) {
-            mt <- mr * mb / (mb - ma)
-            warning_if_misspecified("medicare_levy_taper")
+      # Could be a problem with the individual parameter changes, or 
+      # with the family ones. Do one at a time.
+      if (any(medicare_parameter_roots[the_spouse_income == 0L] > 1)) {
+        if (any(medicare_parameter_roots[and(the_spouse_income == 0L,
+                                             !sapto_eligible)] > 1)) {
+          # Individual thresholds
+          if (is.null(medicare_levy_upper_threshold)) {
+            mb <- mt * ma / (mt - mr)
+            warning_if_misspecified("medicare_levy_upper_threshold")
             
           } else {
             
-            if (is.null(medicare_levy_rate)) {
-              mr <- mt * (mb - ma) / mb
-              warning_if_misspecified("medicare_levy_rate")
-              # alternative not reachable
-            } else stop("ERR # e59ed9845068f337d6653a7cc00401e1dbeeda7d. ",
-                        "Please contact `grattan` package maintainer.") 
+            if (is.null(medicare_levy_lower_threshold)) {
+              ma <- mb * (mt - mr) / mt
+              warning_if_misspecified("medicare_levy_lower_threshold")
+              
+            } else {
+              
+              if (is.null(medicare_levy_taper)) {
+                mt <- mr * mb / (mb - ma)
+                warning_if_misspecified("medicare_levy_taper")
+                
+              } else {
+                
+                if (is.null(medicare_levy_rate)) {
+                  mr <- mt * (mb - ma) / mb
+                  warning_if_misspecified("medicare_levy_rate")
+                  # alternative not reachable
+                } else stop("ERR # e59ed9845068f337d6653a7cc00401e1dbeeda7d. ",
+                            "Please contact `grattan` package maintainer.") 
+              }
+            }
           }
+        } else {
+          # SAPTO non-families
+          if (is.null(medicare_levy_upper_sapto_threshold)) {
+            msb <- mt * msa / (mt - mr)
+            warning_if_misspecified("medicare_levy_upper_sapto_threshold")
+            
+          } else {
+            
+            if (is.null(medicare_levy_lower_sapto_threshold)) {
+              msa <- msb * (mt - mr) / mt
+              warning_if_misspecified("medicare_levy_lower_sapto_threshold")
+              
+            } else {
+              stop("Medicare levy parameter mismatch could not be safely resolved.\n\n",
+                   "`medicare_levy_upper_sapto_threshold` and ",
+                   "`medicare_levy_lower_sapto_threshold` were both supplied, ",
+                   "but imply a Medicare taper rate of\n\t",
+                   round(mr * msb / (msb - msa), 3), "\t (to 3 decimal places)\n",
+                   "Either supply Medicare levy parameters compatible with this taper rate, ",
+                   "or change `medicare_levy_taper` (which may force other parameters to", 
+                   " change too).")
+            }
+          }
+        } 
+      }
+      
+      if (any(medicare_parameter_roots[the_spouse_income > 0L] > 1)) {
+        # Family thresholds only
+        if (any(medicare_parameter_roots[and(the_spouse_income > 0L,
+                                             !sapto_eligible)] > 1)) {
+          if (is.null(medicare_levy_upper_family_threshold)) {
+            mfb <- mt * mfa / (mt - mr)
+            warning_if_misspecified("medicare_levy_upper_family_threshold")
+            
+          } else {
+            
+            if (is.null(medicare_levy_lower_family_threshold)) {
+              mfa <- mfb - mr / mt
+              warning_if_misspecified("medicare_levy_lower_family_threshold")
+              
+            } else {
+              stop("Medicare levy parameter mismatch could not be safely resolved.\n\n",
+                   "`medicare_levy_upper_family_threshold` and ",
+                   "`medicare_levy_lower_family_threshold` were both supplied, ",
+                   "but imply a Medicare taper rate of\n\t",
+                   round(mr * mfb / (mfb - mfa), 3), "\t (to 3 decimal places)\n",
+                   "Either supply Medicare levy parameters compatible with this taper rate, ",
+                   "or change `medicare_levy_taper` (which may force other parameters to", 
+                   " change too).")
+            }
+          }
+        } else {
+          # Family - SAPTO
+          if (is.null(medicare_levy_upper_family_sapto_threshold)) {
+            mfsb <- mt * mfsa / (mt - mr)
+            warning_if_misspecified("medicare_levy_upper_family_sapto_threshold")
+            
+          } else {
+            
+            if (is.null(medicare_levy_lower_family_sapto_threshold)) {
+              mfsa <- mfsb - mr / mt
+              warning_if_misspecified("medicare_levy_lower_family_sapto_threshold")
+              
+            } else {
+              stop("Medicare levy parameter mismatch could not be safely resolved.\n\n",
+                   "`medicare_levy_upper_family_sapto_threshold` and ",
+                   "`medicare_levy_lower_family_sapto_threshold` were both supplied, ",
+                   "but imply a Medicare taper rate of\n\t",
+                   round(mr * mfsb / (mfsb - mfa), 3), "\t (to 3 decimal places)\n",
+                   "Either supply Medicare levy parameters compatible with this taper rate, ",
+                   "or change `medicare_levy_taper` (which may force other parameters to", 
+                   " change too).")
+            }
+          }
+          
         }
       }
     }
@@ -279,8 +411,8 @@ model_income_tax <- function(sample_file,
                    isFamily = the_spouse_income > 0,
                    NDependants = if (length(n_dependants) == 1) rep_len(n_dependants, max.length) else n_dependants,
                    
-                   lowerFamilyThreshold = medicare_levy_lower_family_threshold  %|||% medicare_tbl_fy[["lower_family_threshold"]],
-                   upperFamilyThreshold = medicare_levy_upper_family_threshold  %|||% medicare_tbl_fy[["upper_family_threshold"]],
+                   lowerFamilyThreshold = mfa,
+                   upperFamilyThreshold = mfb,
                    lowerUpForEachChild  = medicare_levy_lower_up_for_each_child %|||% medicare_tbl_fy[["lower_up_for_each_child"]], 
                    
                    rate = mr,
@@ -380,11 +512,9 @@ model_income_tax <- function(sample_file,
     }
     
     new_tax <- do.call(.model_income_tax, new_argument_vals)
-    sample_file[, new_tax := new_tax]
-    rm(new_sample_file)
-  } else {
-    sample_file[, new_tax := new_tax]
-  }
+  } 
+  sample_file[, new_tax := new_tax]
+  
   
   switch(return.,
          "tax" = new_tax,
