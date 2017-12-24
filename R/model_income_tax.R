@@ -275,12 +275,13 @@ model_income_tax <- function(sample_file,
         
         if (uniqueN(val) == 1L) {
           warning("`", the_arg, "` was not specified, ",
-                  "but is inconsistent with other parameters.\n", 
-                  "Set\n\t",
+                  "but its default value would be inconsistent with the parameters that were specified.\n", 
+                  "Its value has been set to:\n\t",
                   the_arg, " = ", round(val[1], digits = if (val[1] < 1) 2 else 0),
                   call. = FALSE)
         } else {
-          warning("`", the_arg, "` was not specified, but is inconsistent with other parameters. ",
+          warning("`", the_arg, "` was not specified, ",
+                  "but its default value would be inconsistent with the parameters that were specified.\n", 
                   "\n\t", paste0(utils::head(unique(round(val))), collapse = "\n\t"), "\n",
                   call. = FALSE)
         }
