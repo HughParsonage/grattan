@@ -226,7 +226,7 @@ model_income_tax <- function(sample_file,
     # Individuals - SAPTO
     # N.B. medicare_tbl_fy[["lower/upper_threshold"]] since the join above correctly identifies which ones
     msa <- medicare_levy_lower_sapto_threshold %|||% medicare_tbl_fy[["lower_threshold"]]
-    msa <- medicare_levy_upper_sapto_threshold %|||% medicare_tbl_fy[["upper_threshold"]]
+    msb <- medicare_levy_upper_sapto_threshold %|||% medicare_tbl_fy[["upper_threshold"]]
     
     ma <- as.integer(ma)
     msa <- as.integer(msa)
@@ -240,7 +240,7 @@ model_income_tax <- function(sample_file,
     
     # Families - SAPTO
     mfsa <- medicare_levy_lower_family_sapto_threshold %|||% medicare_tbl_fy[["lower_family_threshold"]]
-    mfsa <- medicare_levy_upper_family_sapto_threshold %|||% medicare_tbl_fy[["upper_family_threshold"]]
+    mfsb <- medicare_levy_upper_family_sapto_threshold %|||% medicare_tbl_fy[["upper_family_threshold"]]
     
     mfa <- as.integer(mfa)
     mfb <- as.integer(mfb - 1)
