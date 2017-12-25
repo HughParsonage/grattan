@@ -639,9 +639,7 @@ abs_key_aggregates <-
   #                      )]
   .[]
 
-fwrite(abs_key_aggregates, "data-raw/abs_key_aggregates.tsv", sep = "\t")
-
-file.remove("data-raw/5206001_key_aggregates-latest-release.xls")
+fwrite(abs_key_aggregates, "data-raw/abs_key_aggregates.tsv", sep = "\t", )
 
 read_csv_2col <- function(...) {
   suppressMessages(suppressWarnings(read_csv(...))) %>% select(1:2) %>% setDT
