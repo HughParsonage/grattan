@@ -14,6 +14,7 @@
 #' @details The income test for long-term employed persons above 60 happens to be the same as 
 #' that for singles with dependants, so calculating the benefit payable for such 
 #' individuals can be performed by setting \code{has_partner = FALSE, has_dependant = TRUE}.
+#' @export
 
 unemployment_benefit <- function(income = 0,
                                  assets = 0,
@@ -43,7 +44,7 @@ unemployment_benefit <- function(income = 0,
              "There were ",
              length(i), " invalid entries (", length(i) / length(fy.year), "%).\n\n",
              "First invalid FY:\n\t", fy.year[i1], "\n",
-             "at position ", i)
+             "at position ", i, ".")
       } else {
         if (length(fy.year) == 1L) {
           stop("`fy.year` set to '", fy.year, "', which is not a valid FY. ",
@@ -104,9 +105,9 @@ unemployment_benefit <- function(income = 0,
     # Do asset test during
     .[, out := 0] %>%
     # assets ok?
-    .[, ok := asset_cutout > assets]
+    .[, ok := asset_cutout > assets] %>%
     .[(ok), out := MBR + ES] %>%
-    .[(ok), out := out - taper_1 * pmaxC(income - IncomeThreshold_1, 0)] %>%
+    .[(ok), out := out - taper_1 * pmaxC(pminV(income, IncomeThreshold_2) - IncomeThreshold_1, 0)] %>%
     .[(ok), out := out - taper_2 * pmaxC(income - IncomeThreshold_2, 0)]
     
   .subset2(output, "out")

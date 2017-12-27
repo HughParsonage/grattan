@@ -588,10 +588,12 @@ aust_pop_by_age_yearqtr <-
   select(Age, Date, Value) %>%
   setkey(Age, Date)
 
-download.file("http://www.ausstats.abs.gov.au/ausstats/meisubs.nsf/LatestTimeSeries/5206001_key_aggregates/$FILE/5206001_key_aggregates.xls",
-              mode = "wb",
-              destfile = "data-raw/5206001_key_aggregates-latest-release.xls")
+abs_key_aggregates_url_status <- 
+  download.file("http://www.ausstats.abs.gov.au/ausstats/meisubs.nsf/LatestTimeSeries/5206001_key_aggregates/$FILE/5206001_key_aggregates.xls",
+                mode = "wb",
+                destfile = "data-raw/5206001_key_aggregates-latest-release.xls")
 
+if (!abs_key_aggregates_url_status) {
 # abs_key_aggregates_names <- 
 #   read_excel("data-raw/5206001_key_aggregates-latest-release.xls",
 #              sheet = "Data1",
@@ -640,7 +642,16 @@ abs_key_aggregates <-
   #                      )]
   .[]
 
-fwrite(abs_key_aggregates, "data-raw/abs_key_aggregates.tsv", sep = "\t", )
+fwrite(abs_key_aggregates, "data-raw/abs_key_aggregates.tsv", sep = "\t")
+} else {
+  abs_key_aggregates <- fread("data-raw/abs_key_aggregates.tsv")
+  if (as.double(difftime(Sys.Date(),
+                         as.Date(last(abs_key_aggregates[["Date"]])),
+                         units = "days")) > 182) {
+    stop("ABS key aggregates too old.\nLast date:\t", last(abs_key_aggregates[["Date"]]))
+  }
+  
+}
 
 read_csv_2col <- function(...) {
   suppressMessages(suppressWarnings(read_csv(...))) %>% select(1:2) %>% setDT
@@ -758,10 +769,7 @@ Date  income_free_area  income_threshold
 
 source("./data-raw/CAPITA/extract_clean_capita.R")
 
-  
 
-
-if (FALSE) {
 devtools::use_data(tax_table2, 
                    lito_tbl, 
                    tax_tbl, 
@@ -795,5 +803,10 @@ devtools::use_data(tax_table2,
                    aust_pop_by_age_yearqtr,
                    abs_key_aggregates,
                    
+                   unemployment_income_tests,
+                   unemployment_annual_rates,
+                   unemployment_assets_tests,
+                   
+                   rent_assistance_rates,
+                   
                    internal = TRUE, overwrite = TRUE)
-}

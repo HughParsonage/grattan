@@ -273,6 +273,38 @@ unemployment_income_tests <-
                    value.var = c("IncomeThreshold", "taper"),
                    sep = "_")
 
+rent_assistance_table <-
+  capita[sheet_name == "RentA_A"] %>%
+  .[capita_headers, on = c("sheet_name", "col"), nomatch = 0] %>%
+  drop_empty_cols %>%
+  drop_constant_cols %>%
+  .[R6 == "No deps", nDependants := 0L] %>%
+  .[R6 == "1-2 deps", nDependants := 1L] %>%
+  .[R6 == "> 2 deps", nDependants := 3L] %>%
+  .[, HasPartner := R5 %ein% "Married"] %>%
+  .[,
+    .(fy_year = date2fy(end_date),
+      R2,
+      HasPartner,
+      nDependants,
+      value)]
+
+# assert constant
+rent_assistance_table[R2 == "Proportion of rent paid by RA"] %>%
+  .[, .(fy_year, value)] %$%
+  stopifnot(all(value == 0.75))
+
+rent_assistance_rates <-
+  rent_assistance_table[R2 != "Proportion of rent paid by RA"] %>%
+  .[, value := round(value, 2)] %>%
+  dcast.data.table(... ~ R2, value.var = "value") %>%
+  setnames(c("Maximum rent assistance payable",
+             "Minimum rent paid for rent allowance to be payable"),
+           c("max_rate",
+             "min_rent")) %>%
+  .[]
+
+
 
 
 
