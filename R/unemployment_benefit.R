@@ -85,6 +85,10 @@ unemployment_benefit <- function(income = 0,
                HasDependant = has_dependant, 
                HomeOwner = is_home_owner)
   
+  MBR <- ES <- 
+    taper_1 <- taper_2 <-
+    IncomeThreshold_1 <- IncomeThreshold_2 <- NULL
+  
   output <-
     unemployment_income_tests[input,
                               on = c("fy_year",
