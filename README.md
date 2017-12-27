@@ -2,19 +2,34 @@
 
 ------------------------------------------------------------------------
 
-[![minimal R version](https://img.shields.io/badge/R%3E%3D-2.10-6666ff.svg)](https://cran.r-project.org/) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/grattan)](https://cran.r-project.org/package=grattan) [![packageversion](https://img.shields.io/badge/Package%20version-1.5.2.3-orange.svg?style=flat-square)](commits/master)
+[![minimal R version](https://img.shields.io/badge/R%3E%3D-2.10-6666ff.svg)](https://cran.r-project.org/) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/grattan)](https://cran.r-project.org/package=grattan) [![packageversion](https://img.shields.io/badge/Package%20version-1.5.2.5-orange.svg?style=flat-square)](commits/master)
 
 ------------------------------------------------------------------------
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2017--10--24-orange.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2017--11--16-orange.svg)](/commits/master)
 
 grattan
 =======
 
-Perform Common Quantitative Tasks for Australian Analysts and to Support Grattan Institute Analysis
+Australian Tax Policy Analysis
 
 NEWS
 ====
+
+1.5.2.5
+=======
+
+### 2017-11-16
+
+-   Update wage data to 2017-Q3
+-   Update labour force data to 2017-09
+-   (internal) The `lf_trend` internal data table used to report the labour force in thousands of persons, as the ABS does. This seemed a bit strange, so now `obsValue` uses integers (i.e. just the labour force).
+-   Vignettes now install `taxstats` to a temporary directory if not already installed, rather than the user or system's library.
+
+### 2017-10-27
+
+-   Update CPI data
+-   Fix wage data
 
 1.5.2.3
 =======
@@ -52,3 +67,32 @@ grattan 1.5.1.2
 
 -   Update wage and labour force data
 -   Fix breaking build due to change in dplyr API
+
+CRAN Notes
+==========
+
+Test environments
+-----------------
+
+-   local Windows install, MRAN 3.4.2
+-   ubuntu 12.04 (on travis-ci), R devel and release <https://travis-ci.org/HughParsonage/grattan>
+-   win-builder (devel) <https://win-builder.r-project.org/Mer51d990tOv/00check.log>
+
+-   This is a package update to:
+-   fix vignettes to comply with CRAN policy
+-   reflect recent data
+
+R CMD check results
+-------------------
+
+0 errors | 0 warnings | 2 notes
+
+-   The first NOTE is with respect to the 'taxstats' package not being a mainstream repository; its inclusion satisfies the CRAN repository policy, as in previous versions.
+
+The NOTE also recommends including the URL <https://hughparsonage.github.io/drat/> in angle brackets; however, this NOTE is spurious as the URL is within R code.
+
+-   The second NOTE refers to GNU make as a SystemRequirements. This is a modest requirement and is necessary to run RcppParallel.
+
+In addition:
+
+-   There are two 'Additional issues' in which undefined behaviour is detected via `clang-UBSAN` and `gcc-UBSAN`. These issues arise due to an issue with `RcppParallel`. The maintainers of `RcppParallel` appears to fixed these issues in a development version (downstream of <https://github.com/RcppCore/RcppParallel/pull/48>); however this version is yet to reach CRAN. Accordingly, there are no changes in my package addressing these issues.

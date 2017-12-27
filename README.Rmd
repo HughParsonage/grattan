@@ -21,11 +21,16 @@ output:
 
 # grattan
 
-Perform Common Quantitative Tasks for Australian Analysts and to Support Grattan Institute Analysis 
+Australian Tax Policy Analysis
 
 # NEWS
-```{r, results='asis', echo=FALSE}
+```{r NEWS, results='asis', echo=FALSE}
 cat(readLines("NEWS.md"), sep = "\n")
+```
+
+# CRAN Notes
+```{r CRAN-comments, results='asis', echo=FALSE}
+cat(readLines("cran-comments.md"), sep = "\n")
 ```
 
 

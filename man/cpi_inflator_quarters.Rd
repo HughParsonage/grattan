@@ -14,9 +14,11 @@ cpi_inflator_quarters(from_nominal_price, from_qtr, to_qtr,
 
 \item{to_qtr}{(date in quarters) the date to be inflated to, where nominal price = real price. Must be of the form "YYYY-Qq" e.g. "1066-Q2".}
 
-\item{adjustment}{Should there be an adjustment made to the index? Adjustments include 'none' (no adjustment), 'seasonal', or 'trimmed mean'.}
+\item{adjustment}{Should there be an adjustment made to the index? Adjustments include 'none' (no adjustment), 'seasonal', or 'trimmed mean'. By default, \code{seasonal}.}
 
-\item{useABSConnection}{Should the function connect with ABS.Stat via an SDMX connection? By default set to \code{FALSE} in which case a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.}
+\item{useABSConnection}{Should the function connect with ABS.Stat via an SDMX connection? By default set to \code{FALSE} in which case a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.
+The internal data is up-to-date as of 2017-Q3. 
+If using \code{useABSConnection = TRUE}, ensure you have \code{rsdmx (>= 0.5-10)} up-to-date.}
 }
 \value{
 A vector of real prices.

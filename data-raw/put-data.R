@@ -174,13 +174,14 @@ lf_trend <-
   tryCatch({
     lf.url.trend <- 
       # "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978-02"
-      "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978"
+      # "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978"
+      "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/all?startTime=1978-02"
     lf <- rsdmx::readSDMX(lf.url.trend)
     lf <- 
       as.data.frame(lf) %>% 
       as.data.table %T>%
-      stopifnot(nrow(.) > 0) %>%
-      select(obsTime, obsValue) %T>%
+      {stopifnot(nrow(.) > 0)} %>%
+      .[, .(obsTime, obsValue = as.integer(obsValue * 1000))] %T>%
       fwrite("./data-raw/lf-trend.tsv", sep = "\t")
   }, 
   error = function(e){
@@ -302,7 +303,7 @@ cg_inflators_1314 <- if (!renew) fread("./data-raw/cg_inflators_1314.tsv") else 
                        mean_wmr1 = stats::weighted.mean(marginal_rate_first, Net_CG_amt), 
                        mean_mrL = mean(marginal_rate_last), 
                        mean_wmrL = stats::weighted.mean(marginal_rate_last, Net_CG_amt)) %>% 
-      merge(grattan:::cgt_expenditures, by.x = "fy.year", by.y = "FY", all = TRUE) %>% 
+      merge(cgt_expenditures, by.x = "fy.year", by.y = "FY", all = TRUE) %>% 
       # dplyr::select_(.dots = c(-URL, -Projected) %>%
       grattan:::unselect_(.dots = c("URL", "Projected")) %>%
       dplyr::rename(revenue_foregone = CGT_discount_for_individuals_and_trusts_millions) %>%
@@ -388,7 +389,7 @@ cg_inflators_1213 <-
                        mean_wmr1 = stats::weighted.mean(marginal_rate_first, Net_CG_amt), 
                        mean_mrL = mean(marginal_rate_last), 
                        mean_wmrL = stats::weighted.mean(marginal_rate_last, Net_CG_amt)) %>% 
-      merge(grattan:::cgt_expenditures, by.x = "fy.year", by.y = "FY", all = TRUE) %>% 
+      merge(cgt_expenditures, by.x = "fy.year", by.y = "FY", all = TRUE) %>% 
       # dplyr::select_(.dots = c(-URL, -Projected) %>%
       grattan:::unselect_(.dots = c("URL", "Projected")) %>%
       dplyr::rename(revenue_foregone = CGT_discount_for_individuals_and_trusts_millions) %>%

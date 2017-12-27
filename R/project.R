@@ -38,6 +38,22 @@ project <- function(sample_file,
     sample_file <- copy(sample_file)
   }
   
+  # It's been a common error of mine to switch sample files
+  # without updating the fy.year.of.sample.file
+  switch(fy.year.of.sample.file, 
+         "2012-13" = {
+           if (nrow(sample_file) != 254318) {
+             warning("nrow(sample_file) != 254318. Should you choose a different fy.year.of.sample.file?")
+           }
+         },
+         "2013-14" = {
+           if (nrow(sample_file) != 258774) {
+             warning("nrow(sample_file) != 254318. Should you choose a different fy.year.of.sample.file?")
+           }
+         },
+         stop("`fy.year.of.sample.file` must be '2012-13' or '2013-14'.")
+         )
+  
   sample_file[, "WEIGHT" := list(WEIGHT)]
   
   if (h == 0){
