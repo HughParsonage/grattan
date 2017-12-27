@@ -94,18 +94,20 @@ unemployment_benefit <- function(income = 0,
                               on = c("fy_year",
                                      "HasPartner",
                                      "HasDependant")] %>%
-    unemployment_table_annual[., on = c("fy_year",
+    unemployment_annual_rates[., on = c("fy_year",
                                         "HasPartner", 
                                         "HasDependant")] %>%
-    unemployment_asset_cutouts[.,
-                               on = c("fy_year", 
-                                      "HasPartner",
-                                      "HomeOwner")] %>%
+    unemployment_assets_tests[.,
+                              on = c("fy_year", 
+                                     "HasPartner",
+                                     "HomeOwner")] %>%
     # Do asset test during
     .[, out := 0] %>%
-    .[asset_cutout > assets, out := MBR + ES] %>%
-    .[asset_cutout > assets, out := out - taper_1 * pmaxC(income - IncomeThreshold_1, 0)] %>%
-    .[asset_cutout > assets, out := out - taper_2 * pmaxC(income - IncomeThreshold_2, 0)]
+    # assets ok?
+    .[, ok := asset_cutout > assets]
+    .[(ok), out := MBR + ES] %>%
+    .[(ok), out := out - taper_1 * pmaxC(income - IncomeThreshold_1, 0)] %>%
+    .[(ok), out := out - taper_2 * pmaxC(income - IncomeThreshold_2, 0)]
     
   .subset2(output, "out")
 }
