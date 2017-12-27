@@ -588,34 +588,59 @@ aust_pop_by_age_yearqtr <-
   select(Age, Date, Value) %>%
   setkey(Age, Date)
 
+download.file("http://www.ausstats.abs.gov.au/ausstats/meisubs.nsf/LatestTimeSeries/5206001_key_aggregates/$FILE/5206001_key_aggregates.xls",
+              mode = "wb",
+              destfile = "data-raw/5206001_key_aggregates-latest-release.xls")
 
-# download.file(url = "http://www.ausstats.abs.gov.au/ausstats/meisubs.nsf/LatestTimeSeries/5206001_key_aggregates/$FILE/5206001_key_aggregates.xlsx", destfile = "")
-abs_key_aggregates_names <- 
-  read.xlsx("./data-raw/5206001_key_aggregates-2016-12-07-release.xlsx", sheet = "Data1", rows = c(2L, 10L))
+# abs_key_aggregates_names <- 
+#   read_excel("data-raw/5206001_key_aggregates-latest-release.xls",
+#              sheet = "Data1",
+#              range = cell_rows(2:10)) %>%
+#   dplyr::filter(Unit == "Series ID")
+# 
+# units_by_series_id <- 
+#   data.table(Series_ID = as.character(abs_key_aggregates_names), 
+#              units = names(abs_key_aggregates_names)) %>%
+#   .[Series_ID != "Series ID"] %>%  # 'Series ID' and 'units'
+#   .[, units := sub("__.*$", "", units, perl = TRUE)] %>%
 
-units_by_series_id <- 
-  data.table(Series_ID = as.character(abs_key_aggregates_names), 
-             units = names(abs_key_aggregates_names)) %>%
-  .[-1] %>%  # 'Series ID' and 'units'
-  mutate(multiply = if_else(grepl("million", units, ignore.case = TRUE), 
-                            10^6, 
-                            if_else(grepl("(percent)|(proportion)", units, ignore.case = TRUE), 
-                                    0.01, 
-                                    1)))
+
+abs_key_aggregates_metadata <-
+  read_excel("data-raw/5206001_key_aggregates-latest-release.xls", sheet = "Index", skip = 10) %>%
+  as.data.table %>%
+  .[, list(Description = `Data Item Description`,
+           Series_ID = `Series ID`,
+           Series_type = `Series Type`,
+           Unit,
+           Freq = Freq.)] %>%
+  .[!is.na(Series_ID)] %>%
+  .[, c("Description", "PostColon") := tstrsplit(Description, split = ":", fixed = TRUE)] %>%
+  .[!grepl("Commonwealth of Australia", Description, fixed = TRUE)] %>%
+  .[, multiply := if_else(grepl("million", Unit, ignore.case = TRUE),
+                          10^6,
+                          if_else(grepl("(percent)|(proportion)", Unit, ignore.case = TRUE),
+                                  0.01,
+                                  1))] %>%
+  .[]
 
 abs_key_aggregates <- 
-  read_excel("data-raw/5206001_key_aggregates-2016-12-07-release.xlsx", sheet = "Data1", skip = 9) %>%
+  read_excel("data-raw/5206001_key_aggregates-latest-release.xls", sheet = "Data1", skip = 9) %>%
   as.data.table %>%
-  melt.data.table(id.vars = "Series ID", variable.name = "Series_ID") %>%
+  melt.data.table(id.vars = "Series ID",
+                  variable.name = "Series_ID") %>%
   setnames("Series ID", "Date") %>%
-  merge(units_by_series_id, by = "Series_ID", sort = FALSE) %>%
-  mutate(value = value * multiply, 
-         Date = as.Date(Date)) %>%
-  select(-units, -multiply) %>%
+  merge(abs_key_aggregates_metadata, by = "Series_ID", sort = FALSE) %>%
+  .[, list(Series_ID,
+           # Description,
+           Date = as.Date(Date),
+           value = value * multiply)] %>%
   # to limit size to only what is used
-  filter(Series_ID %in% c( "A2304350J"  # GDP
-                          ,"A2304354T"  # GNI
-                          ))
+  # .[Series_ID %chin% c("A2304350J"   # GDP
+  #                      ,"A2304354T"  # GNI
+  #                      )]
+  .[]
+
+fwrite(abs_key_aggregates, "data-raw/abs_key_aggregates.tsv", sep = "\t", )
 
 read_csv_2col <- function(...) {
   suppressMessages(suppressWarnings(read_csv(...))) %>% select(1:2) %>% setDT
