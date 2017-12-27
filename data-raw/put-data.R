@@ -24,7 +24,7 @@ if (packageVersion("data.table") < package_version("1.9.8")){
   fwrite <- function(..., sep = "\t") readr::write_tsv(...)
 }
 
-renew <- TRUE
+renew <- FALSE
 
 tax_tbl <- 
   lapply(yr2fy(1990:2020), 
@@ -730,7 +730,7 @@ newstart_rates_table <-
 CPI_July2015 <- function(income_free_area, Date) {
   {
     100L * cpi_inflator_general_date(from_date = "2015-07-01",
-                                                 to_date = Date)
+                                     to_date = Date)
   } %>%
     ceiling %>%
     as.integer
@@ -756,10 +756,12 @@ Date  income_free_area  income_threshold
   fwrite("data-raw/newstart-income-test.tsv", sep = "\t") %>% 
   .[]
 
+source("./data-raw/CAPITA/extract_clean_capita.R")
+
   
 
 
-
+if (FALSE) {
 devtools::use_data(tax_table2, 
                    lito_tbl, 
                    tax_tbl, 
@@ -794,3 +796,4 @@ devtools::use_data(tax_table2,
                    abs_key_aggregates,
                    
                    internal = TRUE, overwrite = TRUE)
+}
