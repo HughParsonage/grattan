@@ -3,6 +3,7 @@ library(magrittr)
 library(tidyxl)
 library(unpivotr)
 library(hutils)
+library(grattan)
 
 clean_CAPITA_sheet <- function(input, debug = NULL) {
   sheetDT <- as.data.table(input)
@@ -162,6 +163,115 @@ capita_headers <-
     }
   }) %>%
   rbindlist(use.names = TRUE, fill = TRUE)
+
+assert_drop60plus_ok <- function(DT) {
+  #' @return Asserts that the allowances for
+  #' Singles with dependants and singles (60 + and long-term recipient)
+  #' are identical
+  #' 
+  #' 
+  stopifnot("col" %in% names(DT))
+  
+  Keeps <- DT[col %between% c(6, 7)]
+  Drops <- DT[col %between% c(9, 10)]
+  
+  if (!identical(Keeps[["value"]],
+                 Drops[["value"]])) {
+    stop("`With Dependents` not identical to `60+ and long term recipient`")
+  }
+  
+  DT[!between(col, 9, 11)]
+}
+
+unemployment_table_annual <-
+  capita[sheet_name == "Unemployment_A"] %>%
+  .[!grepl("^not_used", raw_name)] %>%
+  .[capita_headers, on = c("sheet_name", "col"), nomatch = 0] %T>%
+  {stopifnot(all(.$raw_name == .$i.raw_name))} %>%
+  .[R1 == "Period" | R2 %pin% c("Period", "NewStart Allowance,")] %>%
+  assert_drop60plus_ok %>%
+  .[, .(fy_year = yr2fy(year(end_date)),
+        HasPartner = R3 %ein% "Married",
+        HasDependant = R4 %enotin% "No Dependents",
+        Component = R6,
+        value = round(value, 2))] %>%
+  unique %>%
+  dcast.data.table(... ~ Component, value.var = "value")
+
+
+# Give up
+unemployment_table_means_tests_annual <-
+  capita[sheet_name == "Unemployment_A"] %>%
+  .[!grepl("^not_used", raw_name)] %>%
+  .[capita_headers, on = c("sheet_name", "col"), nomatch = 0] %T>%
+  {stopifnot(all(.$raw_name == .$i.raw_name))} %>%
+  .[R1 == "Period" | R1 == "Means Tests"] %>%
+  .[, fy_year := yr2fy(year(end_date))] %>%
+  drop_constant_cols %>%
+  .[]
+
+unemployment_asset_cutouts <-
+  capita[sheet_name == "Unemployment_A"] %>%
+  .[capita_headers, on = c("sheet_name", "col"), nomatch = 0] %>%
+  .[R2 == "Asset Cutout"] %>%
+  drop_constant_cols %>%
+  .[,
+    list(fy_year = date2fy(end_date),
+         HasPartner = R3 == "Married",
+         HomeOwner = R4 == "Home owner",
+         asset_cutout = value)] %>%
+  setkey(fy_year, HasPartner, HomeOwner) %>%
+  .[]
+
+unemployment_income_thresholds <- 
+  capita[sheet_name == "Unemployment_A"] %>%
+  .[!grepl("^not_used", raw_name)] %>%
+  .[capita_headers, on = c("sheet_name", "col"), nomatch = 0] %>%
+  .[R2 == "Income tests"] %>%
+  .[, i.raw_name := NULL] %>%
+  .[raw_name %chin% c("UnempThr1F", "UnempThr2F")] %>%
+  drop_constant_cols %>%
+  .[, .(fy_year = date2fy(end_date),
+        TaperNumber = as.integer(gsub("[^0-9]", "", raw_name)),
+        IncomeThreshold = as.integer(floor(value)))]
+
+unemployment_income_tapers <- 
+  capita[sheet_name == "Unemployment_A"] %>%
+  .[!grepl("^not_used", raw_name)] %>%
+  .[capita_headers, on = c("sheet_name", "col"), nomatch = 0] %>%
+  .[R2 == "Income tests"] %>%
+  .[, i.raw_name := NULL] %>%
+  .[raw_name %chin% c("UnempTpr1", "UnempTpr2","UnempSingDepsTpr1", "UnempSingDepsTpr2")] %>%
+  drop_constant_cols %>%
+  .[, .(fy_year = date2fy(end_date),
+        R5,
+        TaperNumber = as.integer(R6 == "Upper") + 1L,
+        raw_name,
+        value)] %>%
+  .[, HasPartner := grepl("Couples", R5)] %>%
+  .[, HasDependant := R5 == "Singles with Dependents"] %>%
+  {
+    dot <- .
+    Couples_with_dependants <- dot[(HasPartner)]
+    Couples_with_dependants[, R5 := "Couples with Dependants"]
+    rbind(dot, Couples_with_dependants[, HasDependant := TRUE])
+  } %>%
+  {
+    dot <- .
+    Singles_without_dependants <- dot[R5 %ein% "Couples and Singles Without Deps"]
+    Singles_without_dependants[, R5 := "Singles without Dependants"]
+    Singles_without_dependants[, HasPartner := FALSE]
+    rbind(dot, Singles_without_dependants[, HasDependant := FALSE])
+  } %>%
+  .[order(fy_year, value, HasPartner, HasDependant, TaperNumber),
+    .(fy_year, HasPartner, HasDependant, TaperNumber, taper = value)]
+
+unemployment_income_tests <-
+  unemployment_income_thresholds[unemployment_income_tapers,
+                                 on = c("fy_year", "TaperNumber")] %>%
+  dcast.data.table(fy_year + HasPartner + HasDependant ~ TaperNumber,
+                   value.var = c("IncomeThreshold", "taper"),
+                   sep = "_")
 
 
 
