@@ -183,7 +183,7 @@ assert_drop60plus_ok <- function(DT) {
   DT[!between(col, 9, 11)]
 }
 
-unemployment_table_annual <-
+unemployment_annual_rates <-
   capita[sheet_name == "Unemployment_A"] %>%
   .[!grepl("^not_used", raw_name)] %>%
   .[capita_headers, on = c("sheet_name", "col"), nomatch = 0] %T>%
@@ -210,7 +210,7 @@ unemployment_table_means_tests_annual <-
   drop_constant_cols %>%
   .[]
 
-unemployment_asset_cutouts <-
+unemployment_assets_tests <-
   capita[sheet_name == "Unemployment_A"] %>%
   .[capita_headers, on = c("sheet_name", "col"), nomatch = 0] %>%
   .[R2 == "Asset Cutout"] %>%
