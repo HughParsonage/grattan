@@ -191,6 +191,7 @@ unemployment_benefit <- function(income = 0,
     }
   
   # Do asset test during
+  out <- ok <- NULL
   output %>%
     .[, out := 0] %>%
     # assets ok?
