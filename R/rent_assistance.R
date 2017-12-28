@@ -17,7 +17,8 @@
 #' @export
 
 rent_assistance <- function(fortnightly_rent = Inf,
-                            fy.year = NULL, 
+                            fy.year = NULL,
+                            Date = NULL,
                             n_dependants = 0L,
                             has_partner = FALSE,
                             .prop_rent_paid_by_RA = 0.75,
@@ -25,20 +26,44 @@ rent_assistance <- function(fortnightly_rent = Inf,
                             min_rent = NULL) {
   
   if (is.null(max_rate) && is.null(min_rent)) {
-    if (is.null(fy.year)) {
-      fy.year <- date2fy(Sys.Date())
-      message('`fy.year` not set, so defaulting to fy.year = "', fy.year, '"')
+    if (is.null(Date)) {
+      if (is.null(fy.year)) {
+        fy.year <- date2fy(Sys.Date())
+        message('`fy.year` not set, so defaulting to fy.year = "', fy.year, '"')
+      }
+      
+      permitted_fys <- 
+        c("1999-00", "2000-01", "2001-02", "2002-03", "2003-04", "2004-05", 
+          "2005-06", "2006-07", "2007-08", "2008-09", "2009-10", "2010-11", 
+          "2011-12", "2012-13", "2013-14", "2014-15", "2015-16", "2016-17", 
+          "2017-18", "2018-19", "2019-20", "2020-21")
+      
+      verify_fys_permitted(fy.year, permitted_fys)
+      
+      prohibit_vector_recycling(fy.year, n_dependants, has_partner, fortnightly_rent)
+    } else {
+      if (!inherits(Date, "Date")) {
+        Date <-
+          tryCatch(as.Date(Date),
+                   # To avoid arcane error messages when the method is dispatched
+                   error = function(e) {
+                     stop("`Date` was supplied to `rent_assistance()`, ",
+                          "but is neither a Date object ",
+                          "nor safely coercible as such.\n\n", 
+                          "When attempting `as.Date(Date)`, encountered the error:\n\t", e$m, 
+                          call. = FALSE)
+                   })
+      }
+      
+      if (!all(between(year(Date), 2000L, 2021L))) {
+        i_bad_date <- which(!between(year(Date), 2000L, 2021L))
+        first_bad_date_i <- i_bad_date[1]
+        first_bad_date <- Date[first_bad_date_i]
+        stop("`Date` had value ", first_bad_date, " at position ", first_bad_date_i, ". ",
+             "Ensure `Date` only includes dates between 2000 and 2021.")
+      }
+      prohibit_vector_recycling(Date, n_dependants, has_partner, fortnightly_rent)
     }
-    
-    permitted_fys <- 
-      c("1999-00", "2000-01", "2001-02", "2002-03", "2003-04", "2004-05", 
-        "2005-06", "2006-07", "2007-08", "2008-09", "2009-10", "2010-11", 
-        "2011-12", "2012-13", "2013-14", "2014-15", "2015-16", "2016-17", 
-        "2017-18", "2018-19", "2019-20", "2020-21")
-    
-    verify_fys_permitted(fy.year, permitted_fys)
-    
-    prohibit_vector_recycling(fy.year, n_dependants, has_partner, fortnightly_rent)
     
     if (!is.integer(n_dependants)) {
       if (!is.double(n_dependants)) {
@@ -55,26 +80,51 @@ rent_assistance <- function(fortnightly_rent = Inf,
     # Actual calculation:
     
     input <- 
-      data.table(fy_year = fy.year,
+      data.table(fy_year = fy.year %||% Date,
                  HasPartner = has_partner,
                  nDependants = n_dependants,
                  Rent = fortnightly_rent)
+    
     input[, "ordering" := .I]
-    setkeyv(input,
-            c("fy_year",
-              "HasPartner",
-              "nDependants"))
+    
+    if (is.null(fy.year)) {
+      setnames(input, "fy_year", "Date")
+      setkeyv(input,
+              c("HasPartner",
+                "nDependants",
+                "Date"))
+      
+      multiple <- 1
+      
+      output <- 
+        rent_assistance_rates_by_date[input,
+                                      on = c("HasPartner",
+                                             "nDependants",
+                                             "Date"), 
+                                      roll = TRUE]
+    } else {
+      setkeyv(input,
+              c("fy_year",
+                "HasPartner",
+                "nDependants"))
+      
+      multiple <- 26
+      
+      output <- 
+        rent_assistance_rates[input,
+                              on = c("fy_year",
+                                     "HasPartner",
+                                     "nDependants"), 
+                              roll = TRUE]
+    }
+    
     ra <- 
-      rent_assistance_rates[input,
-                            on = c("fy_year",
-                                   "HasPartner",
-                                   "nDependants"), 
-                            roll = TRUE] %>%
+      output %>%
       .[, "out" := pminV(.prop_rent_paid_by_RA * pmaxC(Rent - min_rent, 0),
-                      max_rate)] %>%
+                         max_rate)] %>%
       setorderv("ordering") %>%
       .subset2("out")
-    
+    ra <- ra * multiple
   } else {
     
     if (is.null(max_rate)) {
