@@ -389,6 +389,40 @@ rent_assistance_rates <-
 
 
 
+rent_assistance_table_by_date <-
+  capita[sheet_name == "RentA"] %>%
+  .[capita_headers, on = c("sheet_name", "col"), nomatch = 0] %>%
+  drop_empty_cols %>%
+  drop_constant_cols %>%
+  .[R6 == "No deps", nDependants := 0L] %>%
+  .[R6 == "1-2 deps", nDependants := 1L] %>%
+  .[R6 == "> 2 deps", nDependants := 3L] %>%
+  .[, HasPartner := R5 %ein% "Married"] %>%
+  .[,
+    .(Date = as.Date(end_date),
+      R2,
+      HasPartner,
+      nDependants,
+      value)]
+
+# assert constant
+rent_assistance_table_by_date[R2 == "Proportion of rent paid by RA"] %>%
+  .[, .(Date, value)] %$%
+  stopifnot(all(value == 0.75))
+
+rent_assistance_rates_by_date <-
+  rent_assistance_table_by_date[R2 != "Proportion of rent paid by RA"] %>%
+  .[, value := round(value, 2)] %>%
+  dcast.data.table(... ~ R2, value.var = "value") %>%
+  setnames(c("Maximum rent assistance payable",
+             "Minimum rent paid for rent allowance to be payable"),
+           c("max_rate",
+             "min_rent")) %>%
+  setkeyv(c("HasPartner",
+            "nDependants",
+            "Date")) %>%
+  .[]
+
 
 
 

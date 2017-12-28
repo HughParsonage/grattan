@@ -811,5 +811,6 @@ devtools::use_data(tax_table2,
                    unemployment_assets_tests_by_date,
                    
                    rent_assistance_rates,
+                   rent_assistance_rates_by_date,
                    
                    internal = TRUE, overwrite = TRUE)
