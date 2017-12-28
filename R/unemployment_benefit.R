@@ -50,15 +50,17 @@ unemployment_benefit <- function(income = 0,
       message("`fy.year` not set, so using fy.year = ", fy.year)
     }
     
-    if (length(fy.year) != 1L || 
-        length(fy.year) != max.length) {
+    if (length(fy.year) != max.length &&
+        max.length != 1L) {
       
       Lengths <- 
-        lengths(list(income,
-                     assets,
-                     has_partner,
-                     has_dependant,
-                     is_home_owner))
+        vapply(list(income,
+                    assets,
+                    has_partner,
+                    has_dependant,
+                    is_home_owner),
+               length,
+               integer(1))
       
       stop("`fy.year` had length ", length(fy.year), ". ",
            "Ensure it has length-1 or length-", max.length, ", ",
@@ -78,6 +80,24 @@ unemployment_benefit <- function(income = 0,
     verify_fys_permitted(fy.year, permitted_fys)
     
   } else {
+    if (length(Date) != max.length &&
+        max.length != 1L) {
+      
+      Lengths <- 
+        vapply(list(income,
+                    assets,
+                    has_partner,
+                    has_dependant,
+                    is_home_owner),
+               length,
+               integer(1))
+      
+      stop("`Date` had length ", length(Date), ". ",
+           "Ensure it has length-1 or length-", max.length, ", ",
+           "the maximum of the lengths of the arguments ",
+           "length(", names(Lengths)[which.max(Lengths)], ").")
+    }
+    
     if (!inherits(Date, "Date")) {
       Date <-
         tryCatch(as.Date(Date),
