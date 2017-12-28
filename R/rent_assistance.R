@@ -103,7 +103,7 @@ rent_assistance <- function(fortnightly_rent = Inf,
                                       on = c("HasPartner",
                                              "nDependants",
                                              "Date"), 
-                                      roll = TRUE]
+                                      roll = -Inf]
     } else {
       setkeyv(input,
               c("fy_year",

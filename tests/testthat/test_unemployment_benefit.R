@@ -3,10 +3,21 @@ context("Unemployment benefit")
 # http://guides.dss.gov.au/guide-social-security-law/5/5/2/10
 test_that("DSS examples", {
   out <- 
-    unemployment_benefit(income = 300, fy.year = date2fy("2017-09-20")) + 
+    unemployment_benefit(income = 300, fy.year = date2fy("2017-09-20")) / 26 + 
     rent_assistance(fy.year = date2fy("2017-09-20"))
   
   expect_equal(out, 579.33)
+  
+  outc <- 
+    unemployment_benefit(income = 300, Date = "2017-09-20") + 
+    rent_assistance(Date = "2017-09-20")
+  
+  outd <- 
+    unemployment_benefit(income = 300, Date = as.Date("2017-09-20")) + 
+    rent_assistance(Date = as.Date("2017-09-20"))
+  
+  expect_equal(outc, outd)
+  expect_equal(outc, 578)
     
 })
 
