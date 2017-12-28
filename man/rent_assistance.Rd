@@ -12,7 +12,11 @@ rent_assistance(fortnightly_rent = Inf, fy.year = NULL, Date = NULL,
 \item{fortnightly_rent}{The fortnightly rent paid by each individual. By default, infinity, so the maximum rent assistance is returned by default, since rent assistance is capped at a maximum rate.}
 
 \item{fy.year}{(character) The financial year over which rent assistance is to be calculated.
-When left as \code{NULL}, defaults to the user's financial year, unless \code{max_rate} and \code{min_rent} are both set.}
+When left as \code{NULL}, defaults to the user's financial year, unless \code{max_rate} and \code{min_rent} are both set. If \code{fy.year} is set, the annual payment is provided.}
+
+\item{Date}{(Date vector or coercible to such) An alternative to \code{fy.year}.
+If both \code{fy.year} and \code{Date} are provided, \code{fy.year} is ignored, with a warning. 
+If \code{Date} is used, the fortnightly rent assistance is provided.}
 
 \item{n_dependants}{(integer) Number of dependent children. By default, \code{0L}, so no children.}
 
@@ -24,12 +28,28 @@ the internal table.}
 
 \item{max_rate}{If not \code{NULL}, a numeric vector indicating for each individual the maximum rent assistance payable.}
 
-\item{min_rent}{If not \code{NULL}, the minimum fortnightly rent above which rent assistance is payable. \code{max_rate} and \code{min_rent} must not be used when \code{fy.year} is set.}
+\item{min_rent}{If not \code{NULL}, a numeric vector indicating for each individual the minimum fortnightly rent above which rent assistance is payable. \code{max_rate} and \code{min_rent} must not be used when \code{fy.year} is set.}
 }
 \value{
-The rent assistance payable for each individual. 
+If \code{fy.year} is used, the annual rent assistance payable for each individual; 
+if \code{Date} is used, the \emph{fortnightly} rent assistance payable.
 If the arguments cannot be recycled safely, the function errors.
 }
 \description{
 The rent assistance to each individual payable by financial year.
+}
+\examples{
+# current annual rent assistance
+rent_assistance()  
+
+# current fortnightly payment
+rent_assistance(Date = Sys.Date())  
+
+# zero since no rent
+rent_assistance(0, Date = "2016-01-02") 
+
+# Rent assistance is payable at 75c for every dollar over min rent
+rent_assistance(101, max_rate = 500, min_rent = 100)
+rent_assistance(500, max_rate = 500, min_rent = 100)
+
 }

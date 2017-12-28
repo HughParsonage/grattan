@@ -34,4 +34,8 @@ test_that("Error handling", {
   
   expect_error(unemployment_benefit(income = 300, fy.year = c("1995-96", "2015-16")),
                regexp = "fy.year.*were not within the allowed range")
+  
+  
+  expect_warning(rent_assistance(Date = "2017-09-20", fy.year = "2017-18"),
+                 regexp = "Both `Date` and `fy.year` were set. `fy.year` will be ignored.")
 })

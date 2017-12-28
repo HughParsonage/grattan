@@ -2,7 +2,10 @@
 #' @description The rent assistance to each individual payable by financial year.
 #' @param fortnightly_rent The fortnightly rent paid by each individual. By default, infinity, so the maximum rent assistance is returned by default, since rent assistance is capped at a maximum rate.
 #' @param fy.year (character) The financial year over which rent assistance is to be calculated.
-#' When left as \code{NULL}, defaults to the user's financial year, unless \code{max_rate} and \code{min_rent} are both set.
+#' When left as \code{NULL}, defaults to the user's financial year, unless \code{max_rate} and \code{min_rent} are both set. If \code{fy.year} is set, the annual payment is provided.
+#' @param Date (Date vector or coercible to such) An alternative to \code{fy.year}.
+#'  If both \code{fy.year} and \code{Date} are provided, \code{fy.year} is ignored, with a warning. 
+#'  If \code{Date} is used, the fortnightly rent assistance is provided.
 #' @param n_dependants (integer) Number of dependent children. By default, \code{0L}, so no children.
 #' @param has_partner (logical) Is each individual married? By default, \code{FALSE}.
 
@@ -10,10 +13,26 @@
 #' Since it so happens that this value is constant over the period, it is set here rather than being added to 
 #' the internal table.
 #' @param max_rate If not \code{NULL}, a numeric vector indicating for each individual the maximum rent assistance payable.
-#' @param min_rent If not \code{NULL}, the minimum fortnightly rent above which rent assistance is payable. \code{max_rate} and \code{min_rent} must not be used when \code{fy.year} is set.
+#' @param min_rent If not \code{NULL}, a numeric vector indicating for each individual the minimum fortnightly rent above which rent assistance is payable. \code{max_rate} and \code{min_rent} must not be used when \code{fy.year} is set.
 #' 
-#' @return The rent assistance payable for each individual. 
+#' @return If \code{fy.year} is used, the annual rent assistance payable for each individual; 
+#' if \code{Date} is used, the \emph{fortnightly} rent assistance payable.
 #' If the arguments cannot be recycled safely, the function errors. 
+#' 
+#' @examples 
+#' # current annual rent assistance
+#' rent_assistance()  
+#' 
+#' # current fortnightly payment
+#' rent_assistance(Date = Sys.Date())  
+#' 
+#' # zero since no rent
+#' rent_assistance(0, Date = "2016-01-02") 
+#' 
+#' # Rent assistance is payable at 75c for every dollar over min rent
+#' rent_assistance(101, max_rate = 500, min_rent = 100)
+#' rent_assistance(500, max_rate = 500, min_rent = 100)
+#' 
 #' @export
 
 rent_assistance <- function(fortnightly_rent = Inf,
@@ -42,6 +61,12 @@ rent_assistance <- function(fortnightly_rent = Inf,
       
       prohibit_vector_recycling(fy.year, n_dependants, has_partner, fortnightly_rent)
     } else {
+      if (!is.null(fy.year)) {
+        warning("Both `Date` and `fy.year` were set. ",
+                "`fy.year` will be ignored.")
+        fy.year <- NULL
+      }
+      
       if (!inherits(Date, "Date")) {
         Date <-
           tryCatch(as.Date(Date),
