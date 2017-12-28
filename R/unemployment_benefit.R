@@ -4,6 +4,7 @@
 #' @param income Numeric vector of fortnightly income for the income test. 
 #' @param assets Numeric vector of the value of assets. By default, \code{income} and \code{assets} are both zero, thus returning the maximum benefit payable.
 #' @param fy.year A character vector of valid financial years between "2000-01" and "2020-21" specifying which financial year the allowance is to be calculated.
+#' @param Date (Date vector or coercible to such). An alternative to \code{fy.year} to specify the period over which the allowance is calculated.
 #' @param has_partner (logical vector, default: \code{FALSE}) Does the individual have a partner?
 #' @param has_dependant (logical vectpr, default: \code{FALSE}) Does the indvidiual have any dependant children?
 #' @param is_home_owner (logical vector, default: \code{FALSE}) Does the individual own their own home?
@@ -18,68 +19,167 @@
 
 unemployment_benefit <- function(income = 0,
                                  assets = 0,
-                                 fy.year,
-                                 
+                                 fy.year = NULL,
+                                 Date = NULL,
                                  has_partner = FALSE,
                                  has_dependant = FALSE,
                                  is_home_owner = FALSE) {
-  if (missing(fy.year)) {
-    stop("`fy.year` is missing, with no default.")
+  
+  # TODO: delete once the other branch MAXLENGTH
+  prohibit_vector_recycling.MAXLENGTH <- function(...) {
+    # http://stackoverflow.com/a/9335687/1664978
+    lengths <- vapply(list(...), FUN = length, FUN.VALUE = 0L)
+    max.length <- max(lengths)
+    if (any(lengths != 1L & lengths != max.length)){
+      stop("Only permissible vector lengths are 1 or the maximum (nrow) of the inputs.")
+    } else {
+      invisible(max.length)
+    }
   }
   
-  permitted_fys <-
-    c("2000-01", "2001-02", "2002-03",
-      "2003-04", "2004-05", "2005-06", 
-      "2006-07", "2007-08", "2008-09",
-      "2009-10", "2010-11", "2011-12", 
-      "2012-13", "2013-14", "2014-15",
-      "2015-16", "2016-17", "2017-18", 
-      "2018-19", "2019-20", "2020-21")
+  max.length <- 
+    prohibit_vector_recycling.MAXLENGTH(income,
+                                        assets,
+                                        has_partner,
+                                        has_dependant,
+                                        is_home_owner)
   
-  verify_fys_permitted(fy.year, permitted_fys)
-  
-  prohibit_vector_recycling(income,
-                            assets,
-                            fy.year,
-                            has_partner,
-                            has_dependant,
-                            is_home_owner)
+  if (is.null(Date)) {
+    if (is.null(fy.year)) {
+      fy.year <- date2fy(Sys.Date())
+      message("`fy.year` not set, so using fy.year = ", fy.year)
+    }
+    
+    if (length(fy.year) != 1L || 
+        length(fy.year) != max.length) {
+      
+      Lengths <- 
+        lengths(list(income,
+                     assets,
+                     has_partner,
+                     has_dependant,
+                     is_home_owner))
+      
+      stop("`fy.year` had length ", length(fy.year), ". ",
+           "Ensure it has length-1 or length-", max.length, ", ",
+           "the maximum of the lengths of the arguments ",
+           "length(", names(Lengths)[which.max(Lengths)], ").")
+    }
+    
+    permitted_fys <-
+      c("2000-01", "2001-02", "2002-03",
+        "2003-04", "2004-05", "2005-06", 
+        "2006-07", "2007-08", "2008-09",
+        "2009-10", "2010-11", "2011-12", 
+        "2012-13", "2013-14", "2014-15",
+        "2015-16", "2016-17", "2017-18", 
+        "2018-19", "2019-20", "2020-21")
+    
+    verify_fys_permitted(fy.year, permitted_fys)
+    
+  } else {
+    if (!inherits(Date, "Date")) {
+      Date <-
+        tryCatch(as.Date(Date),
+                 # To avoid arcane error messages when the method is dispatched
+                 error = function(e) {
+                   stop("`Date` was supplied to `unemployment_benefits()`, ",
+                        "but is neither a Date object ",
+                        "nor safely coercible as such.\n\n", 
+                        "When attempting `as.Date(Date)`, encountered the error:\n\t", e$m, 
+                        call. = FALSE)
+                 })
+    }
+    
+    if (!all(between(year(Date), 2000L, 2020L))) {
+      i_bad_date <- which(!between(year(Date), 2000L, 2020L))
+      first_bad_date_i <- i_bad_date[1]
+      first_bad_date <- Date[first_bad_date_i]
+      stop("`Date` had value ", first_bad_date, " at position ", first_bad_date_i, ". ",
+           "Ensure `Date` only includes dates between 2000 and 2020.")
+    }
+  }
   
   input <- 
     data.table(income, 
                assets, 
-               fy_year = fy.year, 
+               fy_or_date = fy.year %||% Date, 
                HasPartner = has_partner,
                HasDependant = has_dependant, 
                HomeOwner = is_home_owner)
+  input[, "ordering" := .I]
+  setnames(input,
+           "fy_or_date", 
+           if (is.null(Date)) "fy_year" else "Date")
+  
+  
   
   MBR <- ES <- 
     taper_1 <- taper_2 <-
     IncomeThreshold_1 <- IncomeThreshold_2 <- 
     asset_cutout <- NULL
   
+  if (is.null(Date)) {
+    output <-
+      unemployment_income_tests[input,
+                                on = c("fy_year",
+                                       "HasPartner",
+                                       "HasDependant")] %>%
+      unemployment_annual_rates[., on = c("fy_year",
+                                          "HasPartner", 
+                                          "HasDependant")] %>%
+      unemployment_assets_tests[.,
+                                on = c("fy_year", 
+                                       "HasPartner",
+                                       "HomeOwner")]
+  } else {
+    setkeyv(input,
+            c("HasPartner",
+              "HasDependant",
+              "Date"))
+    output <-
+      unemployment_income_tests_by_date[input,
+                                on = c("HasPartner",
+                                       "HasDependant",
+                                       "Date"),
+                                roll = -Inf]
+    output <-
+      unemployment_rates_by_date[output,
+                                 on = c("HasPartner", 
+                                        "HasDependant",
+                                        "Date"),
+                                 roll = -Inf]
+    setkeyv(input,
+            c("HasPartner",
+              "HomeOwner",
+              "Date"))
+    output <- 
+      unemployment_assets_tests_by_date[output,
+                                        on = c("HasPartner",
+                                               "HomeOwner", 
+                                               "Date"),
+                                        roll = -Inf]
+    setorderv(output, "ordering")
+  }
+
+  multiple <- 
+    if (is.null(Date)) {
+      # number of fortnights in a financial year
+      26
+    } else {
+      1
+    }
   
-  output <-
-    unemployment_income_tests[input,
-                              on = c("fy_year",
-                                     "HasPartner",
-                                     "HasDependant")] %>%
-    unemployment_annual_rates[., on = c("fy_year",
-                                        "HasPartner", 
-                                        "HasDependant")] %>%
-    unemployment_assets_tests[.,
-                              on = c("fy_year", 
-                                     "HasPartner",
-                                     "HomeOwner")] %>%
-    # Do asset test during
+  # Do asset test during
+  output %>%
     .[, out := 0] %>%
     # assets ok?
     .[, ok := asset_cutout > assets] %>%
     .[(ok), out := MBR + ES] %>%
     .[(ok), out := out - taper_1 * pmaxC(pminV(income, IncomeThreshold_2) - IncomeThreshold_1, 0)] %>%
-    .[(ok), out := out - taper_2 * pmaxC(income - IncomeThreshold_2, 0)]
+    .[(ok), out := out - taper_2 * pmaxC(income - IncomeThreshold_2, 0)] %>%
     
-  .subset2(output, "out")
+    .subset2("out") * multiple
 }
 
 

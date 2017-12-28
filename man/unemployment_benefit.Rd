@@ -4,8 +4,9 @@
 \alias{unemployment_benefit}
 \title{Unemployment benefit}
 \usage{
-unemployment_benefit(income = 0, assets = 0, fy.year, has_partner = FALSE,
-  has_dependant = FALSE, is_home_owner = FALSE)
+unemployment_benefit(income = 0, assets = 0, fy.year = NULL,
+  Date = NULL, has_partner = FALSE, has_dependant = FALSE,
+  is_home_owner = FALSE)
 }
 \arguments{
 \item{income}{Numeric vector of fortnightly income for the income test.}
@@ -13,6 +14,8 @@ unemployment_benefit(income = 0, assets = 0, fy.year, has_partner = FALSE,
 \item{assets}{Numeric vector of the value of assets. By default, \code{income} and \code{assets} are both zero, thus returning the maximum benefit payable.}
 
 \item{fy.year}{A character vector of valid financial years between "2000-01" and "2020-21" specifying which financial year the allowance is to be calculated.}
+
+\item{Date}{(Date vector or coercible to such). An alternative to \code{fy.year} to specify the period over which the allowance is calculated.}
 
 \item{has_partner}{(logical vector, default: \code{FALSE}) Does the individual have a partner?}
 

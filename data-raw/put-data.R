@@ -806,6 +806,9 @@ devtools::use_data(tax_table2,
                    unemployment_income_tests,
                    unemployment_annual_rates,
                    unemployment_assets_tests,
+                   unemployment_income_tests_by_date,
+                   unemployment_rates_by_date,
+                   unemployment_assets_tests_by_date,
                    
                    rent_assistance_rates,
                    
