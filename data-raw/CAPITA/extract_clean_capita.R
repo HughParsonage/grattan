@@ -112,29 +112,49 @@ clean_CAPITA_sheet <- function(input, debug = NULL) {
   out
 }
 
-CAPITA <- 
-switch(basename(getwd()),
-       "grattan" = tidy_xlsx("./data-raw/CAPITA/CPS-v17-09-12.xlsx"),
-       "data-raw" = tidy_xlsx("./CAPITA/CPS-v17-09-12.xlsx"),
-       "CAPITA" = tidy_xlsx("CPS-v17-09-12.xlsx"))
-
-CAPITA_data <- CAPITA[["data"]]
-
-capita_tables <- list(length(CAPITA_data))
-K <- seq_along(CAPITA_data)[names(CAPITA_data) != "Contents"]
-
-
-capita <- 
-  lapply(K, function(k) {
-    sheet_nom <- names(CAPITA_data)[k]
-    if (sheet_nom != "Contents") {
-      capita_tables[[k]] <- 
-        clean_CAPITA_sheet(CAPITA_data[[k]], debug = k) %>%
-        .[, "sheet_name" := sheet_nom] %>%
-        .[, "k" := k]
-    }
-  }) %>%
-  rbindlist
+if (!file.exists("data-raw/CAPITA/capita.tsv")) {
+  tidy_xlsx <- function (path, sheets = NA) {
+    # .Deprecated(msg = paste("'tidy_xlsx()' is deprecated.", "Use 'xlsx_cells()' or 'xlsx_formats()' instead.", 
+    #                         sep = "\n"))
+    path <- tidyxl:::check_file(path)
+    all_sheets <- tidyxl:::utils_xlsx_sheet_files(path)
+    sheets <- tidyxl:::check_sheets(sheets, path)
+    formats <- tidyxl:::xlsx_formats_(path)
+    cells <- tidyxl:::xlsx_cells_(path, sheets$sheet_path, sheets$name, 
+                                  sheets$comments_path)
+    cells$sheet <- factor(cells$sheet, levels = sheets$name)
+    cells_list <- split(cells, cells$sheet)
+    cells_list <- lapply(cells_list, function(x) x[, -1])
+    list(data = cells_list, formats = formats)
+  }
+  
+  CAPITA <- 
+    switch(basename(getwd()),
+           "grattan" = tidy_xlsx("./data-raw/CAPITA/CPS-v17-09-12.xlsx"),
+           "data-raw" = tidy_xlsx("./CAPITA/CPS-v17-09-12.xlsx"),
+           "CAPITA" = tidy_xlsx("CPS-v17-09-12.xlsx"))
+  
+  CAPITA_data <- CAPITA[["data"]]
+  
+  capita_tables <- list(length(CAPITA_data))
+  K <- seq_along(CAPITA_data)[names(CAPITA_data) != "Contents"]
+  
+  
+  capita <- 
+    lapply(K, function(k) {
+      sheet_nom <- names(CAPITA_data)[k]
+      if (sheet_nom != "Contents") {
+        capita_tables[[k]] <- 
+          clean_CAPITA_sheet(CAPITA_data[[k]], debug = k) %>%
+          .[, "sheet_name" := sheet_nom] %>%
+          .[, "k" := k]
+      }
+    }) %>%
+    rbindlist
+} else {
+  stopifnot(basename(getwd()) == "grattan")
+  fwrite(capita, "data-raw/CAPITA/capita.tsv", sep = "\t")
+}
 
 
 get_headers <- function(input) {
@@ -424,6 +444,16 @@ rent_assistance_rates_by_date <-
   .[]
 
 
+youth_unemployment_rates <-
+  capita[sheet_name == "YouthUnemployment_A"] %>%
+  .[capita_headers, on = c("sheet_name", "col"), nomatch = 0] %>%
+  .[col %between% match(c("C", "T"), LETTERS)] %>%
+  drop_constant_cols() %>%
+  .[] %>%
+  dcast.data.table(... ~ raw_name, value.var = "value", na.rm = TRUE) %>%
+  drop_empty_cols %>%
+  drop_constant_cols %>%
+  .[]
 
 
 
