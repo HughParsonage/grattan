@@ -51,7 +51,7 @@ differentially_uprate_wage <- function(wage = 1, from_fy, to_fy, ...){
   uprate_factor <- NULL
   `_out` <- NULL
   
-  differential_sw_uprates[salary_by_fy_swtile] %>%
+  differential_sw_uprates[salary_by_fy_swtile, on = "Sw_amt_percentile"] %>%
     setnames(old = "min_salary", new = "wage") %>%
     setkeyv(cols = c("fy.year", "wage")) %>%
     .[input, roll = "nearest"] %>%
