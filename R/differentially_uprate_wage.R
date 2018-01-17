@@ -36,7 +36,7 @@ differentially_uprate_wage <- function(wage = 1, from_fy, to_fy, ...){
   stopifnot(all(from_fy %in% c("2003-04", "2004-05", "2005-06", 
                                "2006-07", "2007-08", "2008-09", 
                                "2009-10", "2010-11", "2011-12", 
-                               "2012-13", "2013-14")))
+                               "2012-13", "2013-14", "2014-15")))
   input <- 
     data.table(fy.year = from_fy, 
                wage = wage) %>%

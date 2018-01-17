@@ -18,6 +18,7 @@
 #' @details We recommend you use \code{sample_file_1213} over \code{sample_file_1314}, unless you need the superannuation variables, 
 #' as the latter suggests lower-than-recorded tax collections. 
 #' @examples 
+#' # install.packages('taxstats', repos = 'https://hughparsonage.github.io/drat')
 #' if (requireNamespace("taxstats", quietly = TRUE) && requireNamespace("data.table", quietly = TRUE)){
 #'   library(taxstats)
 #'   library(data.table)
@@ -47,13 +48,16 @@ project <- function(sample_file,
     # It's been a common error of mine to switch sample files
     # without updating the fy.year.of.sample.file
     if (is.null(fy.year.of.sample.file)) {
-      fy.year.of.sample.file <- match(nrow(sample_file), c(254318L, 258774L, 263339L))
+      fy.year.of.sample.file <-
+        match(nrow(sample_file), c(254318L, 258774L, 263339L))
       if (is.na(fy.year.of.sample.file)) {
         stop("`fy.year.of.sample.file` was not provided, and its value could not be ",
              "inferred from nrow(sample_file) = ", nrow(sample_file), ". Either use ", 
              "a 2% sample file of the years 2012-13, 2013-14, or 2014-15 or ", 
              "supply `fy.year.of.sample.file` manually.")
       }
+      fy.year.of.sample.file <- 
+        c("2012-13", "2013-14", "2014-15")[fy.year.of.sample.file]
     }
     
     
@@ -72,7 +76,7 @@ project <- function(sample_file,
              if (nrow(sample_file) != 263339) {
                warning("nrow(sample_file) != 263339. Should you choose a different fy.year.of.sample.file?")
              }
-           }
+           },
            stop("`fy.year.of.sample.file` must be '2012-13', '2013-14', or '2014-15'."))
   }
   
@@ -102,7 +106,7 @@ project <- function(sample_file,
     
     
     cpi.inflator <- cpi_inflator(1, from_fy = current.fy, to_fy = to.fy)
-    if (.recalculate.inflators){
+    if (.recalculate.inflators) {
       CG.inflator <- CG_inflator(1, from_fy = current.fy, to_fy = to.fy)
     } else {
       if (current.fy %notin% c("2012-13", "2013-14", "2014-15")){
@@ -122,7 +126,6 @@ project <- function(sample_file,
     col.names <- names(sample_file)
     
     # Differential uprating not available for years outside:
-    stopifnot(fy.year.of.sample.file %in% yr2fy(2004:2014))
     diff.uprate.wagey.cols <- "Sw_amt"
     
     wagey.cols <- c(
@@ -196,7 +199,7 @@ project <- function(sample_file,
         switch(current.fy, 
                "2012-13" = as.data.table(generic_inflators_1213)[and(fy_year == to.fy, h == H)], 
                "2013-14" = as.data.table(generic_inflators_1314)[and(fy_year == to.fy, h == H)], 
-               "2014-15" = as.data.table(generic_inflators_1515)[and(fy_year == to.fy, h == H)], 
+               "2014-15" = as.data.table(generic_inflators_1415)[and(fy_year == to.fy, h == H)], 
                stop("Precalculated inflators only available when projecting from 2012-13, 2013-14, or 2014-15."))
     }
     
@@ -276,7 +279,8 @@ project <- function(sample_file,
                               Non_emp_spr_amt,
                               Cost_tax_affairs_amt,
                               Other_Ded_amt)] %>%
-      .[, Taxable_Income := pmaxC(Tot_inc_amt - Tot_ded_amt - PP_loss_claimed - NPP_loss_claimed, 0)] 
+      .[, Taxable_Income := pmaxC(Tot_inc_amt - Tot_ded_amt - PP_loss_claimed - NPP_loss_claimed, 0)] %>%
+      .[]
     
   } 
 }
