@@ -112,7 +112,8 @@ clean_CAPITA_sheet <- function(input, debug = NULL) {
   out
 }
 
-if (!file.exists("data-raw/CAPITA/capita.tsv")) {
+if (!file.exists("data-raw/CAPITA/capita.tsv") || 
+    !file.exists("data-raw/CAPITA/capita-headers.tsv")) {
   tidy_xlsx <- function (path, sheets = NA) {
     # .Deprecated(msg = paste("'tidy_xlsx()' is deprecated.", "Use 'xlsx_cells()' or 'xlsx_formats()' instead.", 
     #                         sep = "\n"))
@@ -151,38 +152,59 @@ if (!file.exists("data-raw/CAPITA/capita.tsv")) {
       }
     }) %>%
     rbindlist
-} else {
-  stopifnot(basename(getwd()) == "grattan")
-  fwrite(capita, "data-raw/CAPITA/capita.tsv", sep = "\t")
-}
-
-
-get_headers <- function(input) {
-  sheetDT <- as.data.table(input)
   
-  sheetDT[row <= 7, .(row, col, character)] %>%
-    .[, is_raw_header := if_else(row == 7L, "raw", "above")] %>%
-    setorder(col, -row) %>%
-    .[, character_filled_right := zoo::na.locf(character, na.rm = FALSE), by = row] %>%
-    .[, character_filled_left := zoo::na.locf(character, na.rm = FALSE, fromLast = TRUE), by = row] %>%
-    .[, character_filled := coalesce(character_filled_right, character_filled_left)] %>%
-    .[, row_as_char := paste0("R", row)] %>%
-    dcast.data.table(col ~ row_as_char, value.var = "character_filled") %>%
-    setcolorder(rev(names(.))) %>%
-    setnames("R7", "raw_name")
+  get_headers <- function(input) {
+    sheetDT <- as.data.table(input)
+    
+    sheetDT[row <= 7, .(row, col, character)] %>%
+      .[, is_raw_header := if_else(row == 7L, "raw", "above")] %>%
+      setorder(col, -row) %>%
+      .[, character_filled_right := zoo::na.locf(character, na.rm = FALSE), by = row] %>%
+      .[, character_filled_left := zoo::na.locf(character, na.rm = FALSE, fromLast = TRUE), by = row] %>%
+      .[, character_filled := coalesce(character_filled_right, character_filled_left)] %>%
+      .[, row_as_char := paste0("R", row)] %>%
+      dcast.data.table(col ~ row_as_char, value.var = "character_filled") %>%
+      setcolorder(rev(names(.))) %>%
+      setnames("R7", "raw_name")
+  }
+  
+  capita_headers <- 
+    lapply(K, function(k) {
+      sheet_nom <- names(CAPITA_data)[k]
+      if (sheet_nom != "Contents") {
+        capita_tables[[k]] <- 
+          get_headers(CAPITA_data[[k]]) %>%
+          .[, "sheet_name" := sheet_nom] %>%
+          .[, "k" := k]
+      }
+    }) %>%
+    rbindlist(use.names = TRUE, fill = TRUE) 
+  
+  fwrite(capita_headers, "data-raw/CAPITA/capita-headers.tsv", sep = "\t")
+  
+  # stopifnot(basename(getwd()) == "grattan")
+  # fwrite(capita, "data-raw/CAPITA/capita.tsv", sep = "\t")
+} else {
+  capita <- fread("data-raw/CAPITA/capita.tsv", sep = "\t", na.strings = c("NA", ""))
+  capita_headers <- fread("data-raw/CAPITA/capita-headers.tsv", na.strings = c("NA", ""))
 }
 
-capita_headers <- 
-  lapply(K, function(k) {
-    sheet_nom <- names(CAPITA_data)[k]
-    if (sheet_nom != "Contents") {
-      capita_tables[[k]] <- 
-        get_headers(CAPITA_data[[k]]) %>%
-        .[, "sheet_name" := sheet_nom] %>%
-        .[, "k" := k]
-    }
-  }) %>%
-  rbindlist(use.names = TRUE, fill = TRUE)
+cols2COL <- function(x) {
+  w0 <- which(x <= 26)
+  w1 <- which(x >= 27)
+  x0 <- x[w0]
+  x1 <- x[w1]
+  out <- character(length(x))
+  out[w0] <- LETTERS[x0]
+  out[w1] <- paste0(LETTERS[x1 %/% 26], LETTERS[x1 %% 26])
+  out
+}
+
+capita[, COL := cols2COL(col)]
+
+
+
+
 
 assert_drop60plus_ok <- function(DT) {
   #' @return Asserts that the allowances for
@@ -443,22 +465,45 @@ rent_assistance_rates_by_date <-
             "Date")) %>%
   .[]
 
+youth_annual_rates <- 
+  capita[sheet_name == "YouthUnemployment_A"] %>%
+  .[capita_headers, on = c("sheet_name", "col"), nomatch = 0] %>%
+  .[COL <= "X"] %>%
+  .[and(col %% 3 != 2, COL %notin% c("U", "V", "W", "X"))] %>%
+  .[, .(fy_year = date2fy(end_date), col, COL, R6, value)] %>%
+  .[, HasDependant := COL > "N"] %>%
+  .[, HasPartner := COL %between% c("L", "Q")] %>%
+  .[, LivesAtHome := COL %between% c("C", "G")] %>%
+  .[, Age16or17 := COL %chin% c("C", "D")] %>%
+  .[R6 %ein% c("MBR", "ES")] %>%
+  .[, c("COL", "col") := NULL] %>%
+  .[] %>%
+  dcast.data.table(... ~ R6, value.var = "value") %>%
+  .[]
+
+youth_income_tests <- 
+  capita[sheet_name == "YouthUnemployment_A"] %>%
+  .[COL %chin% c("U", "V", "W", "X"),
+    .(start_date, end_date, col, COL, value)] %>%
+  .[, variable_type := if_else(COL %chin% c("U", "V"),
+                               "IncomeThreshold", 
+                               "taper")] %>%
+  .[, TaperNo := col %% 2 + 1] %>%
+  .[, fy_year := date2fy(end_date)] %>%
+  dcast.data.table(fy_year ~ variable_type + TaperNo, value.var = "value") %>%
+  .[, IncomeThreshold_1 := as.integer(IncomeThreshold_1)] %>%
+  .[, IncomeThreshold_2 := as.integer(IncomeThreshold_2)] %>%
+  .[]
 
 youth_unemployment_rates <-
   capita[sheet_name == "YouthUnemployment_A"] %>%
   .[capita_headers, on = c("sheet_name", "col"), nomatch = 0] %>%
   .[col %between% match(c("C", "T"), LETTERS)] %>%
   drop_constant_cols() %>%
-  .[] %>%
-  dcast.data.table(... ~ raw_name, value.var = "value", na.rm = TRUE) %>%
-  drop_empty_cols %>%
-  drop_constant_cols %>%
+  .[, HasDependant := R3 %ein% c("Coupled With Children", "Sole parents")] %>%
+  .[, HasPartner := R3 %ein% c("Coupled Without Children", "Coupled With Children")] %>%
+  .[, LivesAtHome := R3 %ein% "Dependent At Home"] %>%
   .[]
-
-
-
-
-
 
 
 

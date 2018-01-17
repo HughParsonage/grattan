@@ -813,4 +813,7 @@ devtools::use_data(tax_table2,
                    rent_assistance_rates,
                    rent_assistance_rates_by_date,
                    
+                   youth_income_tests,
+                   youth_annual_rates,
+                   
                    internal = TRUE, overwrite = TRUE)

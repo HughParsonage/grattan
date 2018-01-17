@@ -1,30 +1,29 @@
-#' Unemployment benefit
-#' @description Calculates the unemployment benefit (Newstart Allowance) payable for individuals in the specified financial year(s), 
-#' given each individual's income and assets, and whether they are married, have children, or own their own home.
+#' Youth unemployment
 #' @param income Numeric vector of fortnightly income for the income test. 
 #' @param assets Numeric vector of the value of assets. By default, \code{income} and \code{assets} are both zero, thus returning the maximum benefit payable.
 #' @param fy.year A character vector of valid financial years between "2000-01" and "2020-21" specifying which financial year the allowance is to be calculated.
 #' @param Date (Date vector or coercible to such). An alternative to \code{fy.year} to specify the period over which the allowance is calculated.
-#' @param has_partner (logical vector, default: \code{FALSE}) Does the individual have a partner?
-#' @param has_dependant (logical vectpr, default: \code{FALSE}) Does the indvidiual have any dependant children?
-#' @param is_home_owner (logical vector, default: \code{FALSE}) Does the individual own their own home?
+#' @param has_partner (logical, default: \code{FALSE}) Does the individual have a partner?
+#' @param has_dependant (logical, default: \code{FALSE}) Does the indvidiual have any dependant children?
+#' @param age Age (only determines whether the 16-17 age or 18 or over rates will apply).
+#' @param lives_at_home (logical, default: \code{FALSE}) Is the individual a dependant who lives at home?
+#' @param unemployed (logical, default: \code{FALSE}) Is the individual unemployed?
 #' @return The fortnightly unemployment benefit payable for each entry. 
 #' The function is vectorized over its arguments, with any length-1 argument
 #' recycled. (Other vector recycling is not supported and will result in an error.)
 #' 
-#' @details The income test for long-term employed persons above 60 happens to be the same as 
-#' that for singles with dependants, so calculating the benefit payable for such 
-#' individuals can be performed by setting \code{has_partner = FALSE, has_dependant = TRUE}.
 #' @export
 
-unemployment_benefit <- function(income = 0,
-                                 assets = 0,
-                                 fy.year = NULL,
-                                 Date = NULL,
-                                 has_partner = FALSE,
-                                 has_dependant = FALSE,
-                                 is_home_owner = FALSE) {
-  
+youth_unemployment <- function(income = 0,
+                               assets = 0,
+                               fy.year = NULL,
+                               Date = NULL,
+                               has_partner = FALSE,
+                               has_dependant = FALSE,
+                               age = 23,
+                               lives_at_home = FALSE,
+                               independent = TRUE,
+                               unemployed = FALSE) {
   # TODO: delete once the other branch MAXLENGTH
   prohibit_vector_recycling.MAXLENGTH <- function(...) {
     # http://stackoverflow.com/a/9335687/1664978
@@ -42,7 +41,7 @@ unemployment_benefit <- function(income = 0,
                                         assets,
                                         has_partner,
                                         has_dependant,
-                                        is_home_owner)
+                                        lives_at_home)
   
   if (is.null(Date)) {
     if (is.null(fy.year)) {
@@ -120,68 +119,23 @@ unemployment_benefit <- function(income = 0,
     }
   }
   
-  input <- 
-    data.table(income, 
-               assets, 
-               fy_or_date = fy.year %||% Date, 
+  input <-
+    data.table(income = income,
+               assets = assets,
+               fy_year = fy.year %||% date2fy(Date), 
+               Age = age,
+               Age16or17 = age %between% c(16, 17),
                HasPartner = has_partner,
-               HasDependant = has_dependant, 
-               HomeOwner = is_home_owner)
+               HasDependant = has_dependant,
+               LivesAtHome = lives_at_home, 
+               Unemployed = unemployed,
+               Independent = independent)
   input[, "ordering" := .I]
-  setnames(input,
-           "fy_or_date", 
-           if (is.null(Date)) "fy_year" else "Date")
-  
-  
   
   MBR <- ES <- 
     taper_1 <- taper_2 <-
-    IncomeThreshold_1 <- IncomeThreshold_2 <- 
-    asset_cutout <- NULL
+    IncomeThreshold_1 <- IncomeThreshold_2 <- NULL
   
-  if (is.null(Date)) {
-    output <-
-      unemployment_income_tests[input,
-                                on = c("fy_year",
-                                       "HasPartner",
-                                       "HasDependant")] %>%
-      unemployment_annual_rates[., on = c("fy_year",
-                                          "HasPartner", 
-                                          "HasDependant")] %>%
-      unemployment_assets_tests[.,
-                                on = c("fy_year", 
-                                       "HasPartner",
-                                       "HomeOwner")]
-  } else {
-    setkeyv(input,
-            c("HasPartner",
-              "HasDependant",
-              "Date"))
-    output <-
-      unemployment_income_tests_by_date[input,
-                                on = c("HasPartner",
-                                       "HasDependant",
-                                       "Date"),
-                                roll = -Inf]
-    output <-
-      unemployment_rates_by_date[output,
-                                 on = c("HasPartner", 
-                                        "HasDependant",
-                                        "Date"),
-                                 roll = -Inf]
-    setkeyv(input,
-            c("HasPartner",
-              "HomeOwner",
-              "Date"))
-    output <- 
-      unemployment_assets_tests_by_date[output,
-                                        on = c("HasPartner",
-                                               "HomeOwner", 
-                                               "Date"),
-                                        roll = -Inf]
-    setorderv(output, "ordering")
-  }
-
   multiple <- 
     if (is.null(Date)) {
       # number of fortnights in a financial year
@@ -190,20 +144,23 @@ unemployment_benefit <- function(income = 0,
       1
     }
   
-  # Do asset test during
   out <- ok <- NULL
-  output %>%
+  
+  output <-
+    youth_income_tests[input, on = c("fy_year")] %>%
+    youth_annual_rates[., on = c("fy_year",
+                                 "HasPartner", 
+                                 "HasDependant",
+                                 "LivesAtHome")] %>%
     .[, out := 0] %>%
-    # assets ok?
-    .[, ok := asset_cutout > assets] %>%
+    .[Age >= 21 + (fy_year >= "2012-13"), Independent := TRUE] %>%
+    .[, ok := or(Independent, coalesce(Unemployed, FALSE))] %>%
     .[(ok), out := MBR + ES] %>%
     .[(ok), out := out - taper_1 * pmaxC(pminV(income, IncomeThreshold_2) - IncomeThreshold_1,
                                          0)] %>%
     .[(ok), out := out - taper_2 * pmaxC(income - IncomeThreshold_2,
-                                         0)] %>%
+                                         0)]
     
-    .subset2("out") * multiple
+  .subset2(output, "out") * multiple
 }
-
-
 
