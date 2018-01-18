@@ -14,7 +14,6 @@ test_that("Columns do not vanish", {
 
 test_that("Warnings", {
   skip_if_not_installed("taxstats")
-  expect_warning(project(sample_file_1213, h = 1L), regexp = "nrow")
   expect_warning(project(sample_file_1314, h = 1L, fy.year.of.sample.file = "2012-13"), regexp = "nrow")
   expect_error(project(sample_file_1314, h = 1L, fy.year.of.sample.file = "2011-12"),
                regexp = "2012.13.*2013.14")

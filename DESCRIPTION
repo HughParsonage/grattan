@@ -13,7 +13,11 @@ Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.p
 Maintainer: Hugh Parsonage <hugh.parsonage@gmail.com>
 URL: https://github.com/HughParsonage/grattan
 BugReports: https://github.com/HughParsonage/grattan/issues
-Description: A series of functions focused on costing and evaluating Australian tax policy in support of the Grattan Institute's Australian Perspectives program. For access to the 'taxstats' package, please run install.packages("taxstats", repos = "https://hughparsonage.github.io/drat/", type = "source"). N.B. The 'taxstats' package is approximately 50 MB.
+Description: Utilities for costing and evaluating Australian tax policy, including high-performance tax and transfer calculators,
+    a fast method of projecting tax collections, and an interface to common indices from the Australian Bureau of Statistics. 
+    Written to support Grattan Institute's Australian Perspectives program. For access to the 'taxstats' package, please run
+    install.packages("taxstats", repos = "https://hughparsonage.github.io/drat/", type = "source").
+    N.B. The 'taxstats' package is approximately 50 MB.
 Depends: R (>= 2.10)
 License: GPL-2
 Imports:
@@ -31,7 +35,7 @@ LinkingTo:
     RcppParallel
 RoxygenNote: 6.0.1
 Suggests: testthat, 
-    taxstats,
+    taxstats (>= 0.0.5),
     dplyr,
     rmarkdown, 
     dtplyr,
