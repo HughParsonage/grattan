@@ -134,7 +134,7 @@ test_that("Medicare warnings", {
                                   medicare_levy_lower_threshold = 20e3,
                                   medicare_levy_taper = 0.06,
                                   medicare_levy_rate = 0.02), 
-                 regexp = "medicare_levy_upper_sapto_threshold = 48417",
+                 regexp = "medicare_levy_upper_sapto_threshold = 48419",
                  fixed = TRUE)
   
   expect_warning(model_income_tax(sample_file_1314_copy,
