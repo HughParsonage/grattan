@@ -78,7 +78,7 @@ model_income_tax <- function(sample_file,
                              sapto_max_offset = NULL,
                              sapto_lower_threshold = NULL,
                              sapto_taper = NULL, 
-                             return. = c("tax", "sample_file")) {
+                             return. = c("sample_file", "tax")) {
   arguments <- ls()
   argument_vals <- as.list(environment())
   return. <- match.arg(return.)
@@ -110,7 +110,8 @@ model_income_tax <- function(sample_file,
       "Intrst_Ded_amt", "Gift_amt", "Non_emp_spr_amt", "Cost_tax_affairs_amt", 
       "Other_Ded_amt", "Tot_ded_amt", "PP_loss_claimed", "NPP_loss_claimed", 
       "Rep_frng_ben_amt", "Med_Exp_TO_amt", "Asbl_forgn_source_incm_amt", 
-      "Spouse_adjusted_taxable_inc", "Net_fincl_invstmt_lss_amt", "Rptbl_Empr_spr_cont_amt", 
+      # "Spouse_adjusted_taxable_inc",
+      "Net_fincl_invstmt_lss_amt", "Rptbl_Empr_spr_cont_amt", 
       "Cr_PAYG_ITI_amt", "TFN_amts_wheld_gr_intst_amt", "TFN_amts_wheld_divs_amt", 
       "Hrs_to_prepare_BPI_cnt", "Taxable_Income", "Help_debt")
   
@@ -214,9 +215,7 @@ model_income_tax <- function(sample_file,
                     Spouse_income = the_spouse_income,
                     fy.year = baseline_fy, 
                     sapto.eligible = sapto_eligible, 
-                    family_status = if (is.null(.dots.ATO) || "Spouse_adjusted_taxable_inc" %notin% names(.dots.ATO)) {
-                      family_status
-                    } else {
+                    family_status = {
                       FS <- rep_len("individual", max.length)
                       FS[the_spouse_income > 0] <- "family"
                       FS
@@ -525,7 +524,7 @@ model_income_tax <- function(sample_file,
   }
   
   new_tax <- pmaxC(base_tax. - lito. - sapto., 0) + medicare_levy.
-  new_tax2 <<- new_tax
+  # new_tax2 <<- new_tax
   
   # Elasticity of Taxable Income
   ## 
