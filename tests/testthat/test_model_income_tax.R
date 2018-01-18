@@ -24,7 +24,8 @@ test_that("La plus ca meme la plus ca meme: ordinary tax", {
   new_tax <- model_income_tax(sample_file_1314_copy,
                               baseline_fy = "2013-14",
                               ordinary_tax_thresholds = c(0, 18200, 37e3, 80e3, 180e3),
-                              ordinary_tax_rates = c(0, 0.19, 0.325, 0.37, 0.45))
+                              ordinary_tax_rates = c(0, 0.19, 0.325, 0.37, 0.45)) %>%
+    .subset2("new_tax")
   
   expect_equal(new_tax, original)
 })
@@ -38,16 +39,13 @@ test_that("La plus ca meme la plus ca meme: medicare levy", {
                fy.year = "2013-14",
                .dots.ATO = copy(sample_file_1314_copy))
   
-  sample_file_manual_ML <-
+  new_tax2 <-
     model_income_tax(copy(sample_file_1314_copy),
                      baseline_fy = "2013-14",
                      medicare_levy_rate = 0.015, 
-                     return = "sample_file")
+                     return. = "tax")
   
-  expect_true(is.double(new_tax2))
   expect_equal(new_tax2, original)
-  
-  expect_equal(sample_file_manual_ML[["new_tax"]], original)
 })
 
 test_that("Increase in a rate results in more tax", {
@@ -56,11 +54,13 @@ test_that("Increase in a rate results in more tax", {
   sample_file_1314_copy <- copy(sample_file_1314)
   original <- income_tax(sample_file_1314$Taxable_Income, "2013-14", .dots.ATO = copy(sample_file_1314))
   
-  new_tax <- model_income_tax(sample_file_1314_copy,
-                              baseline_fy = "2013-14",
-                              ordinary_tax_thresholds = c(0, 18200, 37e3, 80e3, 180e3),
-                              ordinary_tax_rates = c(0, 0.19, 0.325, 0.37,
-                                                     0.46))
+  new_tax <-
+    model_income_tax(sample_file_1314_copy,
+                     baseline_fy = "2013-14",
+                     ordinary_tax_thresholds = c(0, 18200, 37e3, 80e3, 180e3),
+                     ordinary_tax_rates = c(0, 0.19, 0.325, 0.37,
+                                            0.46)) %>%
+    .subset2("new_tax")
   
   expect_true(all(new_tax >= original))
   
@@ -93,7 +93,8 @@ test_that("Medicare options", {
                                     medicare_levy_upper_sapto_threshold = 40349,
                                     medicare_levy_upper_family_threshold = 42959,
                                     medicare_levy_upper_family_sapto_threshold = 57500,
-                                    medicare_levy_rate = 0.02)] %>%
+                                    medicare_levy_rate = 0.02, 
+                                    return. = "tax")] %>%
     .[]
   
   min_unchanged <- 
@@ -121,7 +122,8 @@ test_that("Medicare options", {
     .[, new_tax := model_income_tax(.,
                                     baseline_fy = "2013-14",
                                     medicare_levy_lower_threshold = 21542,
-                                    medicare_levy_upper_threshold = 25343)] %>%
+                                    medicare_levy_upper_threshold = 25343,
+                                    return. = "tax")] %>%
     .[]
   
 })
@@ -151,7 +153,8 @@ test_that("Medicare families", {
     model_income_tax(s1617, 
                      "2016-17",
                      medicare_levy_lower_family_threshold = 35000,
-                     medicare_levy_upper_family_threshold = 43750)
+                     medicare_levy_upper_family_threshold = 43750,
+                     return. = "tax")
   single_idx <- which(s1617$Spouse_adjusted_taxable_inc == 0)
   expect_equal(s1617_orig$orig_tax[single_idx],
                s1617_modelled[single_idx])

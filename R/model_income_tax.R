@@ -542,10 +542,10 @@ model_income_tax <- function(sample_file,
     
     new_argument_vals <-
       argument_vals %>%
-      .[!names(argument_vals) %in% c("arguments",
-                                     "elasticity_of_taxable_income",
-                                     "sample_file",
-                                     "return.")]
+      .[names(argument_vals) %notin% c("arguments",
+                                       "elasticity_of_taxable_income",
+                                       "sample_file",
+                                       "return.")]
     
     new_sample_file <- copy(sample_file)
     new_sample_file[, Taxable_Income := as.double(new_taxable_income)]
