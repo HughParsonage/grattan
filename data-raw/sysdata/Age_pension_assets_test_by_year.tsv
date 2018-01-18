@@ -1,0 +1,121 @@
+Date	type	assets_test
+1997-07-01T00:00:00Z	HomeownersSingle	125750
+1998-07-01T00:00:00Z	HomeownersSingle	125750
+1999-07-01T00:00:00Z	HomeownersSingle	127750
+2000-07-01T00:00:00Z	HomeownersSingle	133250
+2001-07-01T00:00:00Z	HomeownersSingle	141000
+2002-07-01T00:00:00Z	HomeownersSingle	145250
+2003-07-01T00:00:00Z	HomeownersSingle	149500
+2004-07-01T00:00:00Z	HomeownersSingle	153000
+2005-07-01T00:00:00Z	HomeownersSingle	157000
+2006-07-01T00:00:00Z	HomeownersSingle	161500
+2007-07-01T00:00:00Z	HomeownersSingle	166750
+2008-07-01T00:00:00Z	HomeownersSingle	171750
+2009-07-01T00:00:00Z	HomeownersSingle	178000
+2010-07-01T00:00:00Z	HomeownersSingle	181750
+2011-07-01T00:00:00Z	HomeownersSingle	186750
+2012-07-01T00:00:00Z	HomeownersSingle	192500
+2013-07-01T00:00:00Z	HomeownersSingle	196750
+2014-07-01T00:00:00Z	HomeownersSingle	202000
+2015-07-01T00:00:00Z	HomeownersSingle	205500
+2016-07-01T00:00:00Z	HomeownersSingle	209000
+1997-07-01T00:00:00Z	HomeownersCouple	178500
+1998-07-01T00:00:00Z	HomeownersCouple	178500
+1999-07-01T00:00:00Z	HomeownersCouple	181500
+2000-07-01T00:00:00Z	HomeownersCouple	189500
+2001-07-01T00:00:00Z	HomeownersCouple	200500
+2002-07-01T00:00:00Z	HomeownersCouple	206500
+2003-07-01T00:00:00Z	HomeownersCouple	212500
+2004-07-01T00:00:00Z	HomeownersCouple	217500
+2005-07-01T00:00:00Z	HomeownersCouple	223000
+2006-07-01T00:00:00Z	HomeownersCouple	229000
+2007-07-01T00:00:00Z	HomeownersCouple	236500
+2008-07-01T00:00:00Z	HomeownersCouple	243500
+2009-07-01T00:00:00Z	HomeownersCouple	252500
+2010-07-01T00:00:00Z	HomeownersCouple	258000
+2011-07-01T00:00:00Z	HomeownersCouple	265000
+2012-07-01T00:00:00Z	HomeownersCouple	273000
+2013-07-01T00:00:00Z	HomeownersCouple	279000
+2014-07-01T00:00:00Z	HomeownersCouple	286500
+2015-07-01T00:00:00Z	HomeownersCouple	291500
+2016-07-01T00:00:00Z	HomeownersCouple	296500
+1997-07-01T00:00:00Z	HomeownersIllness Separated Couple	178500
+1998-07-01T00:00:00Z	HomeownersIllness Separated Couple	178500
+1999-07-01T00:00:00Z	HomeownersIllness Separated Couple	181500
+2000-07-01T00:00:00Z	HomeownersIllness Separated Couple	189500
+2001-07-01T00:00:00Z	HomeownersIllness Separated Couple	200500
+2002-07-01T00:00:00Z	HomeownersIllness Separated Couple	206500
+2003-07-01T00:00:00Z	HomeownersIllness Separated Couple	212500
+2004-07-01T00:00:00Z	HomeownersIllness Separated Couple	217500
+2005-07-01T00:00:00Z	HomeownersIllness Separated Couple	223000
+2006-07-01T00:00:00Z	HomeownersIllness Separated Couple	229000
+2007-07-01T00:00:00Z	HomeownersIllness Separated Couple	236500
+2008-07-01T00:00:00Z	HomeownersIllness Separated Couple	243500
+2009-07-01T00:00:00Z	HomeownersIllness Separated Couple	252500
+2010-07-01T00:00:00Z	HomeownersIllness Separated Couple	258000
+2011-07-01T00:00:00Z	HomeownersIllness Separated Couple	265000
+2012-07-01T00:00:00Z	HomeownersIllness Separated Couple	273000
+2013-07-01T00:00:00Z	HomeownersIllness Separated Couple	279000
+2014-07-01T00:00:00Z	HomeownersIllness Separated Couple	286500
+2015-07-01T00:00:00Z	HomeownersIllness Separated Couple	291500
+2016-07-01T00:00:00Z	HomeownersIllness Separated Couple	296500
+1997-07-01T00:00:00Z	Non homeownersSingle	215750
+1998-07-01T00:00:00Z	Non homeownersSingle	215750
+1999-07-01T00:00:00Z	Non homeownersSingle	219250
+2000-07-01T00:00:00Z	Non homeownersSingle	228750
+2001-07-01T00:00:00Z	Non homeownersSingle	242000
+2002-07-01T00:00:00Z	Non homeownersSingle	249750
+2003-07-01T00:00:00Z	Non homeownersSingle	257500
+2004-07-01T00:00:00Z	Non homeownersSingle	263500
+2005-07-01T00:00:00Z	Non homeownersSingle	270500
+2006-07-01T00:00:00Z	Non homeownersSingle	278500
+2007-07-01T00:00:00Z	Non homeownersSingle	287750
+2008-07-01T00:00:00Z	Non homeownersSingle	296250
+2009-07-01T00:00:00Z	Non homeownersSingle	307000
+2010-07-01T00:00:00Z	Non homeownersSingle	313250
+2011-07-01T00:00:00Z	Non homeownersSingle	321750
+2012-07-01T00:00:00Z	Non homeownersSingle	332000
+2013-07-01T00:00:00Z	Non homeownersSingle	339250
+2014-07-01T00:00:00Z	Non homeownersSingle	348500
+2015-07-01T00:00:00Z	Non homeownersSingle	354500
+2016-07-01T00:00:00Z	Non homeownersSingle	360500
+1997-07-01T00:00:00Z	Non homeownersCouple	268500
+1998-07-01T00:00:00Z	Non homeownersCouple	268500
+1999-07-01T00:00:00Z	Non homeownersCouple	273000
+2000-07-01T00:00:00Z	Non homeownersCouple	285000
+2001-07-01T00:00:00Z	Non homeownersCouple	301500
+2002-07-01T00:00:00Z	Non homeownersCouple	311000
+2003-07-01T00:00:00Z	Non homeownersCouple	320500
+2004-07-01T00:00:00Z	Non homeownersCouple	328000
+2005-07-01T00:00:00Z	Non homeownersCouple	336500
+2006-07-01T00:00:00Z	Non homeownersCouple	346000
+2007-07-01T00:00:00Z	Non homeownersCouple	357500
+2008-07-01T00:00:00Z	Non homeownersCouple	368000
+2009-07-01T00:00:00Z	Non homeownersCouple	381500
+2010-07-01T00:00:00Z	Non homeownersCouple	389500
+2011-07-01T00:00:00Z	Non homeownersCouple	4e+05
+2012-07-01T00:00:00Z	Non homeownersCouple	412500
+2013-07-01T00:00:00Z	Non homeownersCouple	421500
+2014-07-01T00:00:00Z	Non homeownersCouple	433000
+2015-07-01T00:00:00Z	Non homeownersCouple	440500
+2016-07-01T00:00:00Z	Non homeownersCouple	448000
+1997-07-01T00:00:00Z	Non homeownersIllness Separated Couple	268500
+1998-07-01T00:00:00Z	Non homeownersIllness Separated Couple	268500
+1999-07-01T00:00:00Z	Non homeownersIllness Separated Couple	273000
+2000-07-01T00:00:00Z	Non homeownersIllness Separated Couple	285000
+2001-07-01T00:00:00Z	Non homeownersIllness Separated Couple	301500
+2002-07-01T00:00:00Z	Non homeownersIllness Separated Couple	311000
+2003-07-01T00:00:00Z	Non homeownersIllness Separated Couple	320500
+2004-07-01T00:00:00Z	Non homeownersIllness Separated Couple	328000
+2005-07-01T00:00:00Z	Non homeownersIllness Separated Couple	336500
+2006-07-01T00:00:00Z	Non homeownersIllness Separated Couple	346000
+2007-07-01T00:00:00Z	Non homeownersIllness Separated Couple	357500
+2008-07-01T00:00:00Z	Non homeownersIllness Separated Couple	368000
+2009-07-01T00:00:00Z	Non homeownersIllness Separated Couple	381500
+2010-07-01T00:00:00Z	Non homeownersIllness Separated Couple	389500
+2011-07-01T00:00:00Z	Non homeownersIllness Separated Couple	4e+05
+2012-07-01T00:00:00Z	Non homeownersIllness Separated Couple	412500
+2013-07-01T00:00:00Z	Non homeownersIllness Separated Couple	421500
+2014-07-01T00:00:00Z	Non homeownersIllness Separated Couple	433000
+2015-07-01T00:00:00Z	Non homeownersIllness Separated Couple	440500
+2016-07-01T00:00:00Z	Non homeownersIllness Separated Couple	448000

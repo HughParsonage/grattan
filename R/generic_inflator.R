@@ -18,7 +18,7 @@ generic_inflator <- function(vars,
                              estimator = "mean",
                              pred_interval = 80) {
   stopifnot(length(h) == 1L)
-  if (h == 0L){
+  if (h == 0L) {
     return(data.table(variable = vars, 
                       inflator = 1))
   }
