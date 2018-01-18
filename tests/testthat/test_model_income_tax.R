@@ -13,6 +13,24 @@ test_that("Error handling", {
                regexp = "Taxable_Income")
   
   
+  library(taxstats)
+  expect_error(model_income_tax(sample_file_1314_copy,
+                                baseline_fy = "2013-14",
+                                sapto_eligible = "wrong"),
+               regexp = "sapto_eligible.*not a logical vector")
+  
+  expect_error(model_income_tax(sample_file_1314_copy,
+                                baseline_fy = "2013-14",
+                                sapto_eligible = c(FALSE, TRUE)),
+               regexp = "sapto_eligible. was length 2")
+  
+  expect_error(model_income_tax(sample_file_1314_copy,
+                                baseline_fy = "2013-14",
+                                ordinary_tax_thresholds = c(0, 18200, 30e3),
+                                ordinary_tax_rates = c(0, 0.19)),
+               regexp = "ordinary_tax_thresholds.*different lengths")
+  
+  
 })
 
 test_that("La plus ca meme la plus ca meme: ordinary tax", {

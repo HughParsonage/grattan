@@ -141,7 +141,7 @@ model_income_tax <- function(sample_file,
     }
   } else {
     if (!is.logical(sapto_eligible)) {
-      stop("`sapto_eligible` must be a logical vector.")
+      stop("`sapto_eligible` was not a logical vector.")
     }
     if (length(sapto_eligible) != 1L && length(sapto_eligible) != max.length) {
       stop("`sapto_eligible` was length ", length(sapto_eligible), ". ",
