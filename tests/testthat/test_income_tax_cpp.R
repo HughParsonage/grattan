@@ -16,3 +16,16 @@ test_that("Equivalence in 2013-14 sample file", {
   expect_equal(tax_rolling, tax_cpp)
   
 })
+
+test_that("sapto_rcpp", {
+  out <- 
+    sapto_rcpp(c(25e3, 35e3),
+               MaxOffset = c(2e3, 3e3),
+               LowerThreshold = c(20e3, 20e3),
+               TaperRate = c(0.125, 0.125),
+               SaptoEligible = c(TRUE, FALSE),
+               SpouseIncome = c(0, 0),
+               IsMarried = c(FALSE, TRUE))
+  
+  expect_equal(out, c(1375, 0))
+})
