@@ -28,6 +28,12 @@ test_that("Error handling", {
                                 ordinary_tax_rates = c(0, 0.19)),
                regexp = "ordinary_tax_thresholds.*different lengths")
   
+  expect_warning(model_income_tax(drop_col(copy(sample_file_1314_copy), "age_range"),
+                                  baseline_fy = "2013-14",
+                                  ordinary_tax_thresholds = c(0, 18200, 37e3, 80e3, 180e3),
+                                  ordinary_tax_rates = c(0, 0.19, 0.325, 0.37, 0.45)),
+                 regexp = "Assuming everyone is ineligible for SAPTO.")
+  
   
 })
 
@@ -313,6 +319,36 @@ test_that("SAPTO modelled", {
                      medicare_levy_lower_sapto_threshold = 32277,
                      medicare_levy_upper_family_threshold = 51551,
                      medicare_levy_upper_family_sapto_threshold = 69000)
+})
+
+test_that("SAPTO without variables for rebate income", {
+  library(taxstats)
+  sample_file_1415_a <- copy(sample_file_1415_synth)
+  sample_file_1415_a[, c("Rptbl_Empr_spr_cont_amt",
+                         "Net_fincl_invstmt_lss_amt",
+                         "Net_rent_amt",
+                         "Rep_frng_ben_amt") := NULL]
+  
+  result <- model_income_tax(sample_file_1415_a, sapto_max_offset = 2000)
+})
+
+test_that("LITO", {
+  skip_if_not_installed("taxstats")
+  library(taxstats)
+  sample_file_1213_copy <- copy(sample_file_1213)
+  
+  old_taxes <-
+    copy(sample_file_1213_copy) %>%
+    .[, old_tax := income_tax(Taxable_Income, "2012-13", .dots.ATO = sample_file_1213_copy)] %>%
+    .subset2("old_tax")
+  
+  new_taxes <- 
+    model_income_tax(sample_file_1213_copy, 
+                     baseline_fy = "2012-13",
+                     lito_max_offset = 500,
+                     return. = "tax")
+  
+  expect_true(all(new_taxes <= old_taxes))
 })
 
 

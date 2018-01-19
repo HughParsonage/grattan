@@ -510,28 +510,16 @@ model_income_tax <- function(sample_file,
                       Net_rent_amt = .dots.ATO[sapto_eligible][["Net_rent_amt"]],
                       Rep_frng_ben_amt = .dots.ATO[sapto_eligible][["Rep_frng_ben_amt"]])
       
-      if (AND(!is.null(.dots.ATO),
-              all(c("Rptbl_Empr_spr_cont_amt",
-                    "Net_fincl_invstmt_lss_amt",
-                    "Net_rent_amt", 
-                    "Rep_frng_ben_amt") %chin% names(.dots.ATO)))) {
-        
-        sapto.[sapto_eligible] <-
-          sapto(rebate_income = rebate_income_over_eligible, 
-                fy.year = if (length(baseline_fy) > 1) baseline_fy[sapto_eligible] else baseline_fy,
-                Spouse_income = the_spouse_income[sapto_eligible],
-                family_status = {
-                  FS_sapto <- rep_len("single", max.length)
-                  FS_sapto[the_spouse_income > 0] <- "married"
-                  FS_sapto[sapto_eligible]
-                },
-                sapto.eligible = TRUE)
-      } else {
-        sapto.[sapto_eligible] <- 
-          sapto(rebate_income = rebate_income(Taxable_Income = income[sapto_eligible]), 
-                fy.year = if (length(baseline_fy) > 1) baseline_fy[sapto_eligible] else baseline_fy,
-                sapto.eligible = TRUE)
-      }
+      sapto.[sapto_eligible] <-
+        sapto(rebate_income = rebate_income_over_eligible, 
+              fy.year = if (length(baseline_fy) > 1) baseline_fy[sapto_eligible] else baseline_fy,
+              Spouse_income = the_spouse_income[sapto_eligible],
+              family_status = {
+                FS_sapto <- rep_len("single", max.length)
+                FS_sapto[the_spouse_income > 0] <- "married"
+                FS_sapto[sapto_eligible]
+              },
+              sapto.eligible = TRUE)
     } else {
       sapto_tbl_fy <- sapto_tbl[fy_year == baseline_fy]
       sapto_married_fy <- sapto_tbl_fy[family_status == "married"]
@@ -586,9 +574,7 @@ model_income_tax <- function(sample_file,
     
     sample_file[, new_taxable_income := new_taxable_income]
     
-    if (anyNA(new_taxable_income) || identical(as.double(new_taxable_income), as.double(income))) {
-      stop("NAs: ", sum(is.na(new_taxable_income)), call. = FALSE)
-    }
+    if (anyNA(new_taxable_income) || identical(as.double(new_taxable_income), as.double(income))) stop("NAs: ", sum(is.na(new_taxable_income)), call. = FALSE)
     
     new_argument_vals <-
       argument_vals %>%
