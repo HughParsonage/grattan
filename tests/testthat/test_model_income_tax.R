@@ -284,8 +284,8 @@ test_that("SAPTO modelled", {
   sample_file_1415_copy <- copy(sample_file_1415_synth)
   
   result <- 
-    model_income_tax(sample_file_1314_copy,
-                     baseline_fy = "2013-14",
+    model_income_tax(sample_file_1415_copy,
+                     baseline_fy = "2014-15",
                      
                      # In 2013-14, the rate was 0.015
                      medicare_levy_upper_threshold = 30e3,
@@ -295,9 +295,6 @@ test_that("SAPTO modelled", {
                      medicare_levy_upper_sapto_threshold = 48417,
                      medicare_levy_upper_family_threshold = 51551,
                      medicare_levy_upper_family_sapto_threshold = 69000)
-  
-  result <- 
-    model_income_tax(sample_file_1314_copy)
 })
 
 
