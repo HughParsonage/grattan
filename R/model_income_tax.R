@@ -90,7 +90,7 @@ model_income_tax <- function(sample_file,
       rep_len(lhs, max.length)
     }
   }
-    
+  
   stopifnot(is.data.table(sample_file))
   .dots.ATO <- sample_file
   sample_file_noms <- copy(names(sample_file))
@@ -122,7 +122,7 @@ model_income_tax <- function(sample_file,
   }
   
   income <- sample_file[["Taxable_Income"]]
-
+  
   
   max.length <- length(income)
   prohibit_vector_recycling(income, n_dependants, baseline_fy)
@@ -199,7 +199,7 @@ model_income_tax <- function(sample_file,
   }
   
   if (is.null(.dots.ATO) || "Spouse_adjusted_taxable_inc" %notin% names(.dots.ATO)) {
-    the_spouse_income <- 0L
+    the_spouse_income <- integer(max.length)
   } else {
     the_spouse_income <- .dots.ATO[["Spouse_adjusted_taxable_inc"]]
     the_spouse_income[is.na(the_spouse_income)] <- 0L
@@ -500,13 +500,16 @@ model_income_tax <- function(sample_file,
   sapto. <- double(max.length)
   if (any(sapto_eligible)) {
     sapto_args <- mget(grep("^sapto_(?!eligible)", arguments, perl = TRUE, value = TRUE))
-    rebate_income_over_eligible <-
-      rebate_income(Taxable_Income = income[sapto_eligible],
-                    Rptbl_Empr_spr_cont_amt = .dots.ATO[sapto_eligible][["Rptbl_Empr_spr_cont_amt"]],
-                    Net_fincl_invstmt_lss_amt = .dots.ATO[sapto_eligible][["Net_fincl_invstmt_lss_amt"]],
-                    Net_rent_amt = .dots.ATO[sapto_eligible][["Net_rent_amt"]],
-                    Rep_frng_ben_amt = .dots.ATO[sapto_eligible][["Rep_frng_ben_amt"]])
+    
     if (all(vapply(sapto_args, is.null, FALSE))) {
+      
+      rebate_income_over_eligible <-
+        rebate_income(Taxable_Income = income[sapto_eligible],
+                      Rptbl_Empr_spr_cont_amt = .dots.ATO[sapto_eligible][["Rptbl_Empr_spr_cont_amt"]],
+                      Net_fincl_invstmt_lss_amt = .dots.ATO[sapto_eligible][["Net_fincl_invstmt_lss_amt"]],
+                      Net_rent_amt = .dots.ATO[sapto_eligible][["Net_rent_amt"]],
+                      Rep_frng_ben_amt = .dots.ATO[sapto_eligible][["Rep_frng_ben_amt"]])
+      
       if (AND(!is.null(.dots.ATO),
               all(c("Rptbl_Empr_spr_cont_amt",
                     "Net_fincl_invstmt_lss_amt",
@@ -533,26 +536,40 @@ model_income_tax <- function(sample_file,
       sapto_tbl_fy <- sapto_tbl[fy_year == baseline_fy]
       sapto_married_fy <- sapto_tbl_fy[family_status == "married"]
       sapto_single_fy <- sapto_tbl_fy[family_status == "single"]
-      married_sapto <- sapto_eligible & the_spouse_income > 0
-      single_sapto <- sapto_eligible & the_spouse_income == 0
+      sapto_married <- sapto_eligible & the_spouse_income > 0L
+      sapto_single  <- sapto_eligible & the_spouse_income == 0L
       
-      sapto.[married_sapto] <- 
-        sapto_rcpp(RebateIncome   = rebate_income_over_eligible[married_sapto],
-                   MaxOffset      =      sapto_max_offset[married_sapto] %|||% sapto_married_fy[["max_offset"]],
-                   LowerThreshold = sapto_lower_threshold[married_sapto] %|||% sapto_married_fy[["lower_threshold"]],
-                   TaperRate      =           sapto_taper[married_sapto] %|||% sapto_married_fy[["taper_rate"]],
+      rebate_income_married_eligible <-
+        rebate_income(Taxable_Income = income[sapto_married],
+                      Rptbl_Empr_spr_cont_amt =   .dots.ATO[sapto_married][["Rptbl_Empr_spr_cont_amt"]],
+                      Net_fincl_invstmt_lss_amt = .dots.ATO[sapto_married][["Net_fincl_invstmt_lss_amt"]],
+                      Net_rent_amt =              .dots.ATO[sapto_married][["Net_rent_amt"]],
+                      Rep_frng_ben_amt =          .dots.ATO[sapto_married][["Rep_frng_ben_amt"]])
+      
+      rebate_income_single_eligible <-
+        rebate_income(Taxable_Income = income[sapto_single],
+                      Rptbl_Empr_spr_cont_amt =   .dots.ATO[sapto_single][["Rptbl_Empr_spr_cont_amt"]],
+                      Net_fincl_invstmt_lss_amt = .dots.ATO[sapto_single][["Net_fincl_invstmt_lss_amt"]],
+                      Net_rent_amt =              .dots.ATO[sapto_single][["Net_rent_amt"]],
+                      Rep_frng_ben_amt =          .dots.ATO[sapto_single][["Rep_frng_ben_amt"]])
+      
+      sapto.[sapto_married] <- 
+        sapto_rcpp(RebateIncome   = rebate_income_married_eligible,
+                   MaxOffset      =      sapto_max_offset[sapto_married] %|||% sapto_married_fy[["max_offset"]],
+                   LowerThreshold = sapto_lower_threshold[sapto_married] %|||% sapto_married_fy[["lower_threshold"]],
+                   TaperRate      =           sapto_taper[sapto_married] %|||% sapto_married_fy[["taper_rate"]],
                    SaptoEligible  = TRUE,
                    IsMarried      = TRUE,
-                   SpouseIncome   = the_spouse_income[married_sapto])
+                   SpouseIncome   = the_spouse_income[sapto_married])
       
-      sapto.[single_sapto] <- 
-        sapto_rcpp(RebateIncome   = rebate_income_over_eligible[single_sapto],
-                   MaxOffset      =      sapto_max_offset[single_sapto] %|||% sapto_single_fy[["max_offset"]],
-                   LowerThreshold = sapto_lower_threshold[single_sapto] %|||% sapto_single_fy[["lower_threshold"]],
-                   TaperRate      =           sapto_taper[single_sapto] %|||% sapto_single_fy[["taper_rate"]],
+      sapto.[sapto_single] <- 
+        sapto_rcpp(RebateIncome   = rebate_income_single_eligible,
+                   MaxOffset      =      sapto_max_offset[sapto_single] %|||% sapto_single_fy[["max_offset"]],
+                   LowerThreshold = sapto_lower_threshold[sapto_single] %|||% sapto_single_fy[["lower_threshold"]],
+                   TaperRate      =           sapto_taper[sapto_single] %|||% sapto_single_fy[["taper_rate"]],
                    SaptoEligible  = TRUE,
                    IsMarried      = FALSE,
-                   SpouseIncome   = the_spouse_income[single_sapto])
+                   SpouseIncome   = the_spouse_income[sapto_single])
     }
   }
   
@@ -581,7 +598,7 @@ model_income_tax <- function(sample_file,
                                        "return.")]
     
     new_sample_file <- copy(sample_file)
-    new_sample_file[, Taxable_Income := as.double(new_taxable_income)]
+    new_sample_file[, "Taxable_Income" := as.double(new_taxable_income)]
     
     .model_income_tax <- function(...) {
       model_income_tax(sample_file = new_sample_file,

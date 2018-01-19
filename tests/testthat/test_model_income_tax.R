@@ -12,8 +12,6 @@ test_that("Error handling", {
   expect_error(model_income_tax(s_no_ti, "2013-14"),
                regexp = "Taxable_Income")
   
-  
-  library(taxstats)
   expect_error(model_income_tax(sample_file_1314_copy,
                                 baseline_fy = "2013-14",
                                 sapto_eligible = "wrong"),
@@ -159,6 +157,7 @@ test_that("Medicare warnings", {
                                 medicare_levy_lower_threshold = 20e3,
                                 medicare_levy_taper = 0.06,
                                 medicare_levy_rate = 0.02,
+                                medicare_levy_upper_sapto_threshold = 48419,
                                 medicare_levy_lower_family_threshold = 48417,
                                 medicare_levy_upper_family_threshold = 51551), 
                  regexp = "`medicare_levy_upper_family_threshold` and `medicare_levy_lower_family_threshold` were both supplied",
@@ -283,16 +282,35 @@ test_that("SAPTO modelled", {
   library(taxstats)
   sample_file_1415_copy <- copy(sample_file_1415_synth)
   
+  expect_warning({
+    model_income_tax(sample_file_1415_copy,
+                     baseline_fy = "2014-15",
+                     
+                     # In 2013-14, the rate was 0.015
+                     medicare_levy_upper_threshold = 30e3,
+                     medicare_levy_lower_threshold = 20e3,
+                     sapto_max_offset = 4460,
+                     medicare_levy_taper = 0.06,
+                     medicare_levy_rate = 0.02,
+                     medicare_levy_upper_sapto_threshold = 48417,
+                     medicare_levy_upper_family_threshold = 51551,
+                     medicare_levy_upper_family_sapto_threshold = 69000)
+  },
+  regexp = "medicare_levy_lower_sapto_threshold = 32277",
+  fixed = TRUE)
+  
   result <- 
     model_income_tax(sample_file_1415_copy,
                      baseline_fy = "2014-15",
                      
                      # In 2013-14, the rate was 0.015
                      medicare_levy_upper_threshold = 30e3,
-                     medicare_levy_lower_threshold = 20e3, sapto_max_offset = 4460,
+                     medicare_levy_lower_threshold = 20e3,
+                     sapto_max_offset = 4460,
                      medicare_levy_taper = 0.06,
                      medicare_levy_rate = 0.02,
                      medicare_levy_upper_sapto_threshold = 48417,
+                     medicare_levy_lower_sapto_threshold = 32277,
                      medicare_levy_upper_family_threshold = 51551,
                      medicare_levy_upper_family_sapto_threshold = 69000)
 })

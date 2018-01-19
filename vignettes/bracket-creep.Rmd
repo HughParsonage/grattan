@@ -13,7 +13,7 @@ abstract: Using the package to create projections on bracket creep.
 date: "`r Sys.Date()`"
 output: rmarkdown::html_document
 vignette: >
-  %\VignetteIndexEntry{bracket-creep}
+  %\VignetteIndexEntry{Bracket creep}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

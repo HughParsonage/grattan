@@ -4,13 +4,12 @@ author: "Hugh Parsonage"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Super}
+  %\VignetteIndexEntry{Modelling superannuation changes}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, echo=FALSE}
-
 required_packages <-
   c("testthat", 
     "taxstats",
