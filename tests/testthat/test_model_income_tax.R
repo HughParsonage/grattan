@@ -306,6 +306,24 @@ test_that("SAPTO modelled", {
   regexp = "medicare_levy_lower_sapto_threshold = 32277",
   fixed = TRUE)
   
+  
+  expect_error({
+    model_income_tax(sample_file_1415_copy,
+                     baseline_fy = "2014-15",
+                     
+                     # In 2013-14, the rate was 0.015
+                     medicare_levy_upper_threshold = 30e3,
+                     medicare_levy_lower_threshold = 20e3,
+                     sapto_max_offset = 4460,
+                     medicare_levy_taper = 0.06,
+                     medicare_levy_rate = 0.02,
+                     medicare_levy_upper_sapto_threshold = 50e3,
+                     medicare_levy_lower_sapto_threshold = 32277,
+                     medicare_levy_upper_family_threshold = 51551,
+                     medicare_levy_upper_family_sapto_threshold = 69000)
+  }, 
+  regexp = "Medicare levy parameter mismatch could not be safely resolved.*medicare_levy_upper_sapto_threshold")
+  
   result <- 
     model_income_tax(sample_file_1415_copy,
                      baseline_fy = "2014-15",
