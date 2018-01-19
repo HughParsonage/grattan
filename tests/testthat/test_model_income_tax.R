@@ -3,6 +3,7 @@ context("model_income_tax")
 test_that("Error handling", {
   skip_if_not_installed("taxstats")
   library(taxstats)
+  library(hutils)
   sample_file_1314_copy <- copy(sample_file_1314)
   s_no_ti <- 
     sample_file_1314_copy %>%
@@ -395,13 +396,63 @@ test_that("Elasticity of taxable income", {
   elasticity_1.0 <- 
     elasticity_1.0[, .(Ind,
                        Taxable_Income_e1 = Taxable_Income,
-                       old_tax_e1 = income_tax(Taxable_Income, "2016-17", .dots.ATO = copy(elasticity_1.0)),
+                       old_tax_e1 = income_tax(Taxable_Income, "2016-17",
+                                               .dots.ATO = copy(elasticity_1.0)),
                        new_taxable_income_e1 = new_taxable_income,
                        new_tax_e1 = new_tax)]
   
+  result <- 
+    no_elasticity[elasticity_0.5[elasticity_1.0, on = "Ind"], on = "Ind"]
   
-  no_elasticity[elasticity_0.5[elasticity_1.0, on = "Ind"], on = "Ind"]
+  result[, old_private_income := Taxable_Income - old_tax]
+  result[, private_income_zero := Taxable_Income - new_tax]
+  result[, private_income_half := new_taxable_income_e.5 - new_tax_e.5]
+  result[, private_income_full := new_taxable_income_e1 - new_tax_e1]
   
+  result[private_income_zero != private_income_half]
+  
+})
+
+
+test_that("Elasticity 0 vs 1", {
+  skip_if_not_installed("taxstats")
+  library(taxstats)
+  s1415 <- 
+    copy(sample_file_1415_synth) %>%
+    .[, old_tax := income_tax(Taxable_Income, "2014-15", .dots.ATO = .)] %>%
+    unique(by = "Ind")
+  
+  s1415E0 <-
+    model_income_tax(copy(s1415),
+                     baseline_fy = "2014-15",
+                     ordinary_tax_rates = c(0, 0.19, 0.325, 0.37, 0.50)) %>%
+    .[, .(Ind,
+          Taxable_Income_E0 = Taxable_Income,
+          new_tax_E0 = new_tax)]
+  
+  s1415E1 <-
+    model_income_tax(copy(s1415),
+                     baseline_fy = "2014-15",
+                     ordinary_tax_rates = c(0, 0.19, 0.325, 0.37, 0.50),
+                     elasticity_of_taxable_income = 1) %>%
+    .[, .(Ind,
+          Taxable_Income_E1 = Taxable_Income,
+          new_taxable_income_E1 = new_taxable_income,
+          new_tax_E1 = new_tax)]
+  
+  result <- 
+    s1415E0[s1415E1, on = "Ind"] %>%
+    setcolorder(sort(names(.))) %>%
+    .[s1415[, .(Ind, old_ti = Taxable_Income, old_tax)], on = "Ind"] %>%
+    setkey(old_ti) %>%
+    .[old_ti > 190e3] %>%
+    .[, old_private_income := old_ti - old_tax] %>%
+    .[, new_private_income0 := Taxable_Income_E0 - new_tax_E0] %>%
+    .[, new_private_income1 := new_taxable_income_E1 - new_tax_E1] %>%
+    .[, lapply(.SD, round)] %>%
+    .[]
+  
+  expect_true(all(result$new_tax_E0 > result$new_tax_e1))
 })
 
 
