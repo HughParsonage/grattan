@@ -248,6 +248,24 @@ test_that("Medicare options", {
                                     return. = "tax")] %>%
     .[]
   
+  expect_warning(model_income_tax(sample_file_1314_copy, 
+                                  medicare_levy_upper_family_sapto_threshold = 40e3 + 1,
+                                  baseline_fy = "2013-14"),
+                 regexp = "medicare_levy_lower_family_sapto_threshold = 33999")
+  
+  expect_error(model_income_tax(sample_file_1314_copy,
+                                baseline_fy = "2013-14",
+                                medicare_levy_lower_family_threshold = 30e3,
+                                medicare_levy_upper_family_threshold = 40e3,
+                                medicare_levy_lower_threshold = 20e3,
+                                medicare_levy_upper_threshold = 20833,
+                                medicare_levy_upper_sapto_threshold = 33624,
+                                medicare_levy_lower_sapto_threshold = 38399,
+                                medicare_levy_taper = 0.5,
+                                medicare_levy_rate = 0.02),
+               regexp = "`medicare_levy_upper_sapto_threshold` and `medicare_levy_lower_sapto_threshold` were both supplied, but imply a Medicare taper rate of",
+               fixed = TRUE)
+  
 })
 
 
