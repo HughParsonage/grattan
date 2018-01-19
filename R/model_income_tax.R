@@ -530,14 +530,29 @@ model_income_tax <- function(sample_file,
                 sapto.eligible = TRUE)
       }
     } else {
-      sapto. <- 
-        sapto_rcpp(RebateIncome = rebate_income_over_eligible,
-                   MaxOffset = sapto_max_offset,
-                   LowerThreshold = sapto_lower_threshold ,
-                   TaperRate = sapto_taper,
-                   SaptoEligible = sapto_eligible,
-                   IsMarried = the_spouse_income > 0,
-                   SpouseIncome = the_spouse_income)
+      sapto_tbl_fy <- sapto_tbl[fy_year == baseline_fy]
+      sapto_married_fy <- sapto_tbl_fy[family_status == "married"]
+      sapto_single_fy <- sapto_tbl_fy[family_status == "single"]
+      married_sapto <- sapto_eligible & the_spouse_income > 0
+      single_sapto <- sapto_eligible & the_spouse_income == 0
+      
+      sapto.[married_sapto] <- 
+        sapto_rcpp(RebateIncome   = rebate_income_over_eligible[married_sapto],
+                   MaxOffset      =      sapto_max_offset[married_sapto] %|||% sapto_married_fy[["max_offset"]],
+                   LowerThreshold = sapto_lower_threshold[married_sapto] %|||% sapto_married_fy[["lower_threshold"]],
+                   TaperRate      =           sapto_taper[married_sapto] %|||% sapto_married_fy[["taper_rate"]],
+                   SaptoEligible  = TRUE,
+                   IsMarried      = TRUE,
+                   SpouseIncome   = the_spouse_income[married_sapto])
+      
+      sapto.[single_sapto] <- 
+        sapto_rcpp(RebateIncome   = rebate_income_over_eligible[single_sapto],
+                   MaxOffset      =      sapto_max_offset[single_sapto] %|||% sapto_single_fy[["max_offset"]],
+                   LowerThreshold = sapto_lower_threshold[single_sapto] %|||% sapto_single_fy[["lower_threshold"]],
+                   TaperRate      =           sapto_taper[single_sapto] %|||% sapto_single_fy[["taper_rate"]],
+                   SaptoEligible  = TRUE,
+                   IsMarried      = FALSE,
+                   SpouseIncome   = the_spouse_income[single_sapto])
     }
   }
   
@@ -576,13 +591,11 @@ model_income_tax <- function(sample_file,
     }
     
     new_tax <- do.call(.model_income_tax, new_argument_vals)
-  } 
-  sample_file[, new_tax := as.double(new_tax)]
-  
+  }
   
   switch(return.,
          "tax" = new_tax,
-         "sample_file" = sample_file)
+         "sample_file" = sample_file[, new_tax := as.double(new_tax)])
 }
 
 

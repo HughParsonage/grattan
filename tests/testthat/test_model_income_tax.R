@@ -49,6 +49,7 @@ test_that("La plus ca meme la plus ca meme: ordinary tax", {
 })
   
 test_that("La plus ca meme la plus ca meme: medicare levy", {
+  skip_if_not_installed("taxstats")
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   
@@ -87,6 +88,7 @@ test_that("Increase in a rate results in more tax", {
 })
 
 test_that("Medicare warnings", {
+  skip_if_not_installed("taxstats")
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   expect_warning(model_income_tax(sample_file_1314_copy,
@@ -182,6 +184,7 @@ test_that("Medicare warnings", {
 })
 
 test_that("Medicare options", {
+  skip_if_not_installed("taxstats")
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   original <- income_tax(sample_file_1314$Taxable_Income,
@@ -243,6 +246,7 @@ test_that("Medicare options", {
 
 
 test_that("Medicare families", {
+  skip_if_not_installed("taxstats")
   s1617 <- project(sample_file_1314, h = 3L)
   
   for (j in seq_along(s1617)) {
@@ -274,7 +278,32 @@ test_that("Medicare families", {
   
 })
 
+test_that("SAPTO modelled", {
+  skip_if_not_installed("taxstats")
+  library(taxstats)
+  sample_file_1415_copy <- copy(sample_file_1415_synth)
+  
+  result <- 
+    model_income_tax(sample_file_1314_copy,
+                     baseline_fy = "2013-14",
+                     
+                     # In 2013-14, the rate was 0.015
+                     medicare_levy_upper_threshold = 30e3,
+                     medicare_levy_lower_threshold = 20e3, sapto_max_offset = 4460,
+                     medicare_levy_taper = 0.06,
+                     medicare_levy_rate = 0.02,
+                     medicare_levy_upper_sapto_threshold = 48417,
+                     medicare_levy_upper_family_threshold = 51551,
+                     medicare_levy_upper_family_sapto_threshold = 69000)
+  
+  result <- 
+    model_income_tax(sample_file_1314_copy)
+})
+
+
 test_that("Elasticity of taxable income", {
+  skip_if_not_installed("taxstats")
+  library(taxstats)
   s12131314 <- 
     copy(sample_file_1213) %>%
     .[Ind %% 3 == 0]
