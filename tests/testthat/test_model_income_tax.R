@@ -321,17 +321,6 @@ test_that("SAPTO modelled", {
                      medicare_levy_upper_family_sapto_threshold = 69000)
 })
 
-test_that("SAPTO without variables for rebate income", {
-  library(taxstats)
-  sample_file_1415_a <- copy(sample_file_1415_synth)
-  sample_file_1415_a[, c("Rptbl_Empr_spr_cont_amt",
-                         "Net_fincl_invstmt_lss_amt",
-                         "Net_rent_amt",
-                         "Rep_frng_ben_amt") := NULL]
-  
-  result <- model_income_tax(sample_file_1415_a, sapto_max_offset = 2000)
-})
-
 test_that("LITO", {
   skip_if_not_installed("taxstats")
   library(taxstats)

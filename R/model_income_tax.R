@@ -96,7 +96,9 @@ model_income_tax <- function(sample_file,
   sample_file_noms <- copy(names(sample_file))
   
   s1213_noms <-
-    c("Ind", "Gender", "age_range", "Occ_code", "Partner_status", 
+    c("Ind", "Gender",
+      # "age_range",
+      "Occ_code", "Partner_status", 
       "Region", "Lodgment_method", "PHI_Ind", "Sw_amt", "Alow_ben_amt", 
       "ETP_txbl_amt", "Grs_int_amt", "Aust_govt_pnsn_allw_amt", "Unfranked_Div_amt", 
       "Frk_Div_amt", "Dividends_franking_cr_amt", "Net_rent_amt", "Gross_rent_amt", 
