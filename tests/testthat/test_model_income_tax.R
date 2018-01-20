@@ -182,13 +182,13 @@ test_that("Medicare warnings", {
                                 medicare_levy_lower_family_threshold = pmaxC(sample_file_1314_copy[["Taxable_Income"]], 30e3),
                                 medicare_levy_upper_family_threshold = pmaxC(sample_file_1314_copy[["Taxable_Income"]] + 100, 40e3)), 
                regexp = "`medicare_levy_upper_family_threshold` and `medicare_levy_lower_family_threshold` were both supplied.*first 6 shown",
-               fixed = TRUE)
+               fixed = FALSE)
   
   expect_error(model_income_tax(sample_file_1314_copy,baseline_fy = "2013-14",
                                 medicare_levy_lower_family_sapto_threshold = 30e3,
                                 medicare_levy_upper_family_sapto_threshold = 35e3),
                regexp = "`medicare_levy_upper_family_sapto_threshold` and `medicare_levy_lower_family_sapto_threshold` were both supplied",
-               fixed = FALSE)
+               fixed = TRUE)
   
   expect_error(model_income_tax(sample_file_1314_copy,baseline_fy = "2013-14",
                                 medicare_levy_lower_family_sapto_threshold = pmaxC(sample_file_1314_copy[["Taxable_Income"]], 30e3),
@@ -210,6 +210,9 @@ test_that("Medicare warnings", {
                      medicare_levy_upper_family_sapto_threshold = 69000) %>%
     .[, old_tax := income_tax(Taxable_Income, "2013-14", .dots.ATO = sample_file_1314_copy)] %>%
     .[]
+  
+  # No error
+  expect_true(is.data.table(modeled_other))
   
   
   
