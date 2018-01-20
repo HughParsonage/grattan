@@ -458,7 +458,7 @@ model_income_tax <- function(sample_file,
               warning_if_misspecified("medicare_levy_lower_family_sapto_threshold")
               
             } else {
-              medicare_levy_taper_stop <- round(mr * mfsb / (mfsb - mfa), 3)
+              medicare_levy_taper_stop <- round(mr * mfsb / (mfsb - mfa), 3)[sapto_eligible]
               
               stop("Medicare levy parameter mismatch could not be safely resolved.\n\n",
                    "`medicare_levy_upper_family_sapto_threshold` and ",
