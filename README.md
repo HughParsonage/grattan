@@ -2,11 +2,11 @@
 
 ------------------------------------------------------------------------
 
-[![minimal R version](https://img.shields.io/badge/R%3E%3D-2.10-6666ff.svg)](https://cran.r-project.org/) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/grattan)](https://cran.r-project.org/package=grattan) [![packageversion](https://img.shields.io/badge/Package%20version-1.5.2.5-orange.svg?style=flat-square)](commits/master)
+[![minimal R version](https://img.shields.io/badge/R%3E%3D-2.10-6666ff.svg)](https://cran.r-project.org/) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/grattan)](https://cran.r-project.org/package=grattan) [![packageversion](https://img.shields.io/badge/Package%20version-1.5.3.0-orange.svg?style=flat-square)](commits/master)
 
 ------------------------------------------------------------------------
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2017--11--16-orange.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2018--01--20-orange.svg)](/commits/master)
 
 grattan
 =======
@@ -15,6 +15,30 @@ Australian Tax Policy Analysis
 
 NEWS
 ====
+
+1.5.3.0
+=======
+
+New features:
+-------------
+
+-   New function `model_income_tax` attempts provides every lever of the income tax system that are visible from the sample files. Users can model the sample file by changing single parameters to view their effects.
+
+Other user-visible changes
+--------------------------
+
+-   `project` and `project_to` no longer require `fy.year.of.sample.file`. However, it is expected to be compatible with the sample file provided. Failling to provide a sample file with the expected number of rows or not providing a sample file with a valid number of rows is a warning, which can be silenced by `check_fy_sample_file = FALSE`.
+
+Data:
+-----
+
+-   Update labour force data to November 2017
+-   Internal projection tables have been updated for the latest (2014-15) sample file.
+
+Other changes
+-------------
+
+-   `mgcv` was used but not declared in Suggests: Thanks to BDR for reporting.
 
 1.5.2.5
 =======
