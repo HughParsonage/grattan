@@ -10,6 +10,7 @@
 #' @param return.mode The mode (numeric or integer) of the returned vector.
 #' @param .dots.ATO A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files. If \code{.dots.ATO} is a \code{data.table}, I recommend you enclose it with \code{copy()}.
 #' @param allow.forecasts should dates beyond 2019-20 be permitted? Currently, not permitted.
+#' @param .debug (logical, default: \code{FALSE})  If \code{TRUE}, returns a \code{data.table} containing the components. (This argument and its result is liable to change in future versions, possibly without notice.)
 #' @author Tim Cameron, Brendan Coates, Hugh Parsonage, William Young
 #' @details The function 'rolling' is inflexible by design. It is designed to guarantee the correct tax payable in a year.
 #' For years preceding the introduction of SAPTO, the maximum offset is assumed to apply to those above pensionable age. 

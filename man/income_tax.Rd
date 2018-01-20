@@ -25,6 +25,8 @@ In particular, the tax payable is calculated under the assumption that the rate 
 \item{return.mode}{The mode (numeric or integer) of the returned vector.}
 
 \item{allow.forecasts}{should dates beyond 2019-20 be permitted? Currently, not permitted.}
+
+\item{.debug}{(logical, default: \code{FALSE})  If \code{TRUE}, returns a \code{data.table} containing the components. (This argument and its result is liable to change in future versions, possibly without notice.)}
 }
 \value{
 The total personal income tax payable.
