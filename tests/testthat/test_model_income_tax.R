@@ -387,7 +387,7 @@ test_that("SAPTO modelled", {
                      medicare_levy_upper_family_sapto_threshold = 69000)
   
   sapto_only_psnn <-
-    sample_file_1415_copy %>%
+    copy(sample_file_1415_synth) %>%
     project_to(to_fy = "2017-18") %>%
     .[, saptoEligible := Aust_govt_pnsn_allw_amt > 10e3] %>%
     model_income_tax(baseline_fy = "2017-18",
