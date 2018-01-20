@@ -36,7 +36,8 @@ income_tax <- function(income,
                        n_dependants = 0L,
                        .dots.ATO = NULL,
                        return.mode = c("numeric", "integer"),
-                       allow.forecasts = FALSE) {
+                       allow.forecasts = FALSE,
+                       .debug = FALSE) {
   if (missing(fy.year)){
     stop("fy.year is missing, with no default")
   }
@@ -63,7 +64,8 @@ income_tax <- function(income,
     out <- income_tax_cpp(income,
                           fy.year = fy.year,
                           .dots.ATO = .dots.ATO,
-                          n_dependants = n_dependants)
+                          n_dependants = n_dependants,
+                          .debug = .debug)
   } else {
     out <- rolling_income_tax(income = income,
                               fy.year = fy.year,
@@ -71,7 +73,8 @@ income_tax <- function(income,
                               family_status = family_status,
                               n_dependants = n_dependants, 
                               .dots.ATO = .dots.ATO,
-                              allow.forecasts = allow.forecasts)
+                              allow.forecasts = allow.forecasts, 
+                              .debug = .debug)
   }
   return.mode <- match.arg(return.mode)
   
@@ -92,7 +95,8 @@ rolling_income_tax <- function(income,
                                family_status = "individual",
                                n_dependants = 0L,
                                .dots.ATO = NULL,
-                               allow.forecasts = FALSE) {
+                               allow.forecasts = FALSE, 
+                               .debug = FALSE) {
   
   if (!all(fy.year %chin% c("2000-01", "2001-02", 
                             "2002-03", "2003-04", "2004-05", "2005-06", "2006-07", "2007-08", 
@@ -294,7 +298,7 @@ rolling_income_tax <- function(income,
 
 
 
-income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = NULL, n_dependants = 0L) {
+income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = NULL, n_dependants = 0L, .debug = FALSE) {
   # Assume everyone of pension age is eligible for sapto.
   .dots.ATO.noms <- names(.dots.ATO)
   
@@ -499,6 +503,23 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
                               "integer" = NA_integer_,
                               "double" = NA_real_)
   }
+  
+  if (.debug && is.data.table(.dots.ATO)) {
+    result <- 
+      copy(.dots.ATO) %>%
+      .[, base_tax := base_tax.] %>%
+      .[, "lito" := lito.] %>%
+      .[, "sapto" := sapto.] %>%
+      .[, "medicare_levy" := medicare_levy.] %>%
+      .[, "income_tax" := out]
+      
+    if (fy.year == "2011-12") {
+      result[, flood_levy := flood_levy.]
+    }
+    
+    return(result[])
+  }
+  
   out
 }
 
