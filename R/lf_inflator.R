@@ -133,8 +133,8 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
   if (AND(allow.projection,
           AND(any(to_fy > last_full_fy_in_series),
               forecast.series == "custom"))) {
-    if (!is.data.table(lf.series)){
-      if (length(lf.series) == 1L){
+    if (!is.data.table(lf.series)) {
+      if (length(lf.series) == 1L) {
         years_required <- seq.int(from = last_full_yr_in_series + 1, 
                                   to = fy2yr(max(to_fy)))
         

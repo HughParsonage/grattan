@@ -50,6 +50,13 @@ test_that("income_tax returns known results",{
   expect_equal(income_tax(41636, fy.year = "2014-15"), 5535.95, tolerance = 1)
   expect_equal(income_tax(26010, fy.year = "2014-15"), 1550.30, tolerance = 1)
   
+  # Test rolling now no longer the default
+  expect_equal(rolling_income_tax(31993, fy.year = "2014-15"), 2815.53)
+  expect_equal(rolling_income_tax(31993, fy.year = "2014-15", age = 70), 0)
+  expect_equal(rolling_income_tax(135288, fy.year = "2014-15"), 40709, tolerance = 1)
+  expect_equal(rolling_income_tax(41636, fy.year = "2014-15"), 5535.95, tolerance = 1)
+  expect_equal(rolling_income_tax(26010, fy.year = "2014-15"), 1550.30, tolerance = 1)
+  
   
 })
 

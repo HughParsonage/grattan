@@ -1,18 +1,23 @@
 #' Grattan package
 #' 
-#' Colours, charts, and other common quantitative tasks for Australia tax analysts
+#' Tax modelling and other common tasks for Australian policy analysts, 
+#' in support of the Grattan Institute, Melbourne. 
+#' <https://grattan.edu.au>
 #' 
 #' @name grattan-package
 #' @aliases grattan
 #' @docType package
 #' @title The grattan package.
 #' @author \email{hugh.parsonage+grattanpackage@@grattan.edu.au}
+#' @author \email{hugh.parsonage@@gmail.com}
 #' @keywords package
 #' @importFrom hutils if_else
 #' @importFrom hutils coalesce
 #' @importFrom hutils OR
 #' @importFrom hutils NEITHER
 #' @importFrom hutils AND
+
+#' @importFrom fastmatch %fin%
 
 #' @importFrom magrittr %>%
 #' @importFrom magrittr %$%
