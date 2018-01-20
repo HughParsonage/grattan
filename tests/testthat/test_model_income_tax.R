@@ -387,8 +387,16 @@ test_that("SAPTO modelled", {
     sample_file_1415_copy %>%
     project_to(to_fy = "2017-18") %>%
     .[, saptoEligible := Aust_govt_pnsn_allw_amt > 10e3] %>%
-    model_income_tax(baseline_fy = "2014-15",
-                     sapto_eligible = .$saptoEligible)
+    model_income_tax(baseline_fy = "2017-18",
+                     sapto_eligible = .$saptoEligible) %>%
+    .[, revenue := new_tax - baseline_tax] %>%
+    .[]
+  
+  revenue_sapto_pension <- 
+    sum(sapto_only_psnn$revenue) * 50 / 1e6
+  
+  expect_gt(revenue_sapto_pension, 200)
+  expect_lt(revenue_sapto_pension, 300)
   
   
 })
