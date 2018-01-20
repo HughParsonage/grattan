@@ -25,5 +25,24 @@ test_that("Use rolling income tax", {
   expect_equal(result1, result2)
 })
 
+test_that("Debugger", {
+  skip_if_not_installed("taxstats")
+  library(taxstats)
+  result <- 
+    income_tax(sample_file_1112$Taxable_Income,
+               "2013-14",
+               .dots.ATO = copy(sample_file_1112),
+               .debug = TRUE)
+  
+  expect_true(is.data.table(result))
+  expect_equal(result[["income_tax"]], 
+               income_tax(sample_file_1112$Taxable_Income, 
+                          "2013-14", 
+                          .dots.ATO = copy(sample_file_1112)))
+  
+  
+  
+})
+
 
 
