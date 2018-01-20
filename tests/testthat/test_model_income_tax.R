@@ -156,6 +156,18 @@ test_that("Medicare warnings", {
                  regexp = "medicare_levy_upper_family_threshold = 51551",
                  fixed = TRUE)
   
+  expect_warning(model_income_tax(sample_file_1314_copy,
+                                  baseline_fy = "2013-14",
+                                  medicare_levy_upper_family_threshold = pmaxC(sample_file_1314_copy[["Taxable_Income"]], 48417)), 
+                 regexp = "but its default values would be inconsistent with the parameters that were specified",
+                 fixed = TRUE)
+  
+  expect_warning(model_income_tax(sample_file_1314_copy,
+                                  baseline_fy = "2013-14",
+                                  medicare_levy_upper_family_threshold = pmaxC(sample_file_1314_copy[["Taxable_Income"]], 48417)), 
+                 regexp = "(First and last five shown.)",
+                 fixed = TRUE)
+  
   expect_error(model_income_tax(sample_file_1314_copy,
                                 baseline_fy = "2013-14",
                                 
@@ -190,10 +202,18 @@ test_that("Medicare warnings", {
                regexp = "`medicare_levy_upper_family_sapto_threshold` and `medicare_levy_lower_family_sapto_threshold` were both supplied",
                fixed = TRUE)
   
-  expect_error(model_income_tax(sample_file_1314_copy,baseline_fy = "2013-14",
+  expect_error(model_income_tax(sample_file_1314_copy,
+                                baseline_fy = "2013-14",
                                 medicare_levy_lower_family_sapto_threshold = pmaxC(sample_file_1314_copy[["Taxable_Income"]], 30e3),
                                 medicare_levy_upper_family_sapto_threshold = pmaxC(sample_file_1314_copy[["Taxable_Income"]] + 100, 40e3)),
                regexp = "`medicare_levy_upper_family_sapto_threshold` and `medicare_levy_lower_family_sapto_threshold` were both supplied.*first 6 shown",
+               fixed = FALSE)
+  
+  expect_error(model_income_tax(sample_file_1314_copy,
+                                baseline_fy = "2013-14",
+                                medicare_levy_upper_sapto_threshold = pmaxC(sample_file_1314_copy[["Taxable_Income"]], 30e3),
+                                medicare_levy_lower_sapto_threshold = pmaxC(sample_file_1314_copy[["Taxable_Income"]] + 100, 40e3)),
+               regexp = "`medicare_levy_upper_sapto_threshold` and `medicare_levy_lower_sapto_threshold` were both supplied.*first 6 shown",
                fixed = FALSE)
   
   modeled_other <-

@@ -326,8 +326,13 @@ model_income_tax <- function(sample_file,
                   call. = FALSE)
         } else {
           warning("`", the_arg, "` was not specified, ",
-                  "but its default value would be inconsistent with the parameters that were specified.\n", 
-                  "\n\t", paste0(utils::head(unique(round(val))), collapse = "\n\t"), "\n",
+                  "but its default values would be inconsistent with the parameters that were specified.\n",
+                  "Its values have been set to: ",
+                  "\n\t", paste0(utils::head(unique(round(val), 5)), 
+                                 "...", 
+                                 utils::tail(unique(round(val), 5)),
+                                 collapse = "\n\t"),
+                  "\n\t\t (First and last five shown.)",
                   call. = FALSE)
         }
       }
