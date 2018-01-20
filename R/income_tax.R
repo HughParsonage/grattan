@@ -466,9 +466,33 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
     sapto. <- 0
   }
   
+  if (fy.year == "2011-12") {
+    flood_levy. <- 
+      0.005 *
+      {pmaxC(income - 50e3, 0) + pmaxC(income - 100e3, 0)}
+  } else {
+    flood_levy. <- 0
+  }
   
+  # http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html
+  S4.10_basic_income_tax_liability <- pmaxC(base_tax. - lito. - sapto., 0)
   
-  out <- pmaxC(base_tax. - lito. - sapto., 0) + medicare_levy.
+  # SBTO can only be calculated off .dots.ATO
+  if (is.null(.dots.ATO)) {
+    sbto. <- 0
+  } else {
+    sbto. <-
+      small_business_tax_offset(taxable_income = income,
+                                basic_income_tax_liability = S4.10_basic_income_tax_liability,
+                                .dots.ATO = .dots.ATO,
+                                fy_year = fy.year)
+  }
+  
+  out <-
+    pmaxC(S4.10_basic_income_tax_liability - sbto., 0) +
+    medicare_levy. +
+    flood_levy.
+  
   if (any(income < 0)) {
     warning("Negative entries in income detected. These will have value NA.")
     out[income < 0] <- switch(storage.mode(out), 
