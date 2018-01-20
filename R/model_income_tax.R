@@ -453,11 +453,19 @@ model_income_tax <- function(sample_file,
               warning_if_misspecified("medicare_levy_lower_family_sapto_threshold")
               
             } else {
+              medicare_levy_taper_stop <- round(mr * mfsb / (mfsb - mfa), 3)
+              
               stop("Medicare levy parameter mismatch could not be safely resolved.\n\n",
                    "`medicare_levy_upper_family_sapto_threshold` and ",
                    "`medicare_levy_lower_family_sapto_threshold` were both supplied, ",
                    "but imply a Medicare taper rate of\n\t",
-                   round(mr * mfsb / (mfsb - mfa), 3), "\t (to 3 decimal places)\n",
+                   if (uniqueN(medicare_levy_taper_stop) == 1L) {
+                     unique(medicare_levy_taper_stop)
+                   } else {
+                     paste0(paste0(utils::head(unique(medicare_levy_taper_stop)),
+                                   collapse = "\n\t"),
+                            " (first 6 shown)")
+                   }, "\t (to 3 decimal places)\n",
                    "Either supply Medicare levy parameters compatible with this taper rate, ",
                    "or change `medicare_levy_taper` (which may force other parameters to", 
                    " change too).")
