@@ -9,7 +9,7 @@
 #' @param to_date Dates as a character vector.
 #' @param from_fy Financial year of \code{labour_force}.
 #' @param to_fy Financial year for which the labour force is predicted.
-#' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. The internal data was updated on 2017-08-16.
+#' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. The internal data was updated on 2018-01-20 to include data up to 2017-11-01.
 #' @param allow.projection Logical. Should projections be allowed?
 #' @param use.month An integer (corresponding to the output of \code{data.table::month}) representing the month of the series used for the inflation.
 #' @param forecast.series Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals.
@@ -133,8 +133,8 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
   if (AND(allow.projection,
           AND(any(to_fy > last_full_fy_in_series),
               forecast.series == "custom"))) {
-    if (!is.data.table(lf.series)){
-      if (length(lf.series) == 1L){
+    if (!is.data.table(lf.series)) {
+      if (length(lf.series) == 1L) {
         years_required <- seq.int(from = last_full_yr_in_series + 1, 
                                   to = fy2yr(max(to_fy)))
         

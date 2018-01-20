@@ -4,17 +4,18 @@
 \alias{project}
 \title{A function for simple projections of tables of Australian Taxation Office tax returns.}
 \usage{
-project(sample_file, h = 0L, fy.year.of.sample.file = "2013-14",
-  WEIGHT = 50L, excl_vars, forecast.dots = list(estimator = "mean",
-  pred_interval = 80), wage.series = NULL, lf.series = NULL,
-  .recalculate.inflators = FALSE, .copyDT = TRUE)
+project(sample_file, h = 0L, fy.year.of.sample.file = NULL, WEIGHT = 50L,
+  excl_vars, forecast.dots = list(estimator = "mean", pred_interval = 80),
+  wage.series = NULL, lf.series = NULL, .recalculate.inflators = FALSE,
+  .copyDT = TRUE, check_fy_sample_file = TRUE)
 }
 \arguments{
 \item{sample_file}{A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.}
 
 \item{h}{An integer. How many years should the sample file be projected?}
 
-\item{fy.year.of.sample.file}{The financial year of \code{sample_file}.}
+\item{fy.year.of.sample.file}{The financial year of \code{sample_file}. If \code{NULL}, the default, the number is inferred from the 
+number of rows of \code{sample_file} to be one of \code{2012-13}, \code{2013-14}, or \code{2014-15}.}
 
 \item{WEIGHT}{The sample weight for the sample file. (So a 2\% file has \code{WEIGHT} = 50.)}
 
@@ -22,13 +23,17 @@ project(sample_file, h = 0L, fy.year.of.sample.file = "2013-14",
 
 \item{forecast.dots}{A list containing parameters to be passed to \code{generic_inflator}.}
 
-\item{wage.series}{See \code{\link{wage_inflator}}.}
+\item{wage.series}{See \code{\link{wage_inflator}}. Note that the \code{Sw_amt} will uprated by \code{\link{differentially_uprate_wage}}.}
 
 \item{lf.series}{See \code{\link{lf_inflator_fy}}.}
 
-\item{.recalculate.inflators}{Should \code{generic_inflator()} or \code{CG_inflator} be called to project the other variables? Adds time.}
+\item{.recalculate.inflators}{(logical, default: \code{FALSE}. Should \code{generic_inflator()} or \code{CG_inflator} be called to project the other variables? Adds time.}
 
-\item{.copyDT}{Should a \code{copy()} of \code{sample_file} be made? If set to FALSE, will update \code{sample_file}.}
+\item{.copyDT}{(logical, default: \code{TRUE}) Should a \code{copy()} of \code{sample_file} be made? If set to \code{FALSE}, will update \code{sample_file}.}
+
+\item{check_fy_sample_file}{(logical, default: \code{TRUE}) Should \code{fy.year.of.sample.file} be checked against \code{sample_file}?
+By default, \code{TRUE}, an error is raised if the base is not 2012-13, 2013-14, or 2014-15 and a warning is raised if the 
+number of rows in \code{sample_file} is different to the known number of rows in the sample files.}
 }
 \value{
 A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).
@@ -37,14 +42,20 @@ A sample file of the same number of rows as \code{sample_file} with inflated val
 A function for simple projections of tables of Australian Taxation Office tax returns.
 }
 \details{
-We recommend you use \code{sample_file_1213}, rather than \code{sample_file_1314}, unless you need the superannuation variables, 
-as the latter suggests lower-than-recorded tax collections.
+We recommend you use \code{sample_file_1213} over \code{sample_file_1314}, unless you need the superannuation variables, 
+as the latter suggests lower-than-recorded tax collections. 
+
+Superannuation variables are inflated by a fixed rate of 5\% p.a.
 }
 \examples{
-if (requireNamespace("taxstats", quietly = TRUE) && requireNamespace("data.table", quietly = TRUE)){
+# install.packages('taxstats', repos = 'https://hughparsonage.github.io/drat')
+if (requireNamespace("taxstats", quietly = TRUE) &&
+    requireNamespace("data.table", quietly = TRUE)) {
   library(taxstats)
   library(data.table)
   sample_file <- copy(sample_file_1314)
-  sample_file_1617 <- project(sample_file, h = 3L)  # to "2016-17"
+  sample_file_1617 <- project(sample_file,
+                              h = 3L, # to "2016-17"
+                              fy.year.of.sample.file = "2013-14")  
 }
 }

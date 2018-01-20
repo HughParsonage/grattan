@@ -11,7 +11,19 @@ library(data.table)
 library(tidyr)
 library(dtplyr)
 library(taxstats)
-sample_files_all <- get_sample_files_all()
+
+if (requireNamespace("SampleFile1415", quietly = TRUE)) {
+  sample_file_1415 <- as.data.table(SampleFile1415::sample_file_1415)
+  sample_file_1415[, "fy.year" := "2014-15"]
+  sample_file_1415[, WEIGHT := 50L]
+  sample_files_all <-
+    rbindlist(list(get_sample_files_all(),
+                   sample_file_1415), 
+              use.names = TRUE, 
+              fill = TRUE)
+} else {
+  sample_files_all <- get_sample_files_all()
+}
 library(grattan)
 library(readr)
 library(readxl)
@@ -246,7 +258,6 @@ mean_of_nonzero <- function (x) {
   MeanNumeric(x[x > 0])
 }
 
-
 mean_of_each_taxstats_var <- 
   sample_files_all %>%
   .[, .SD, .SDcols = c("fy.year", names(.))] %>%
@@ -259,202 +270,181 @@ meanPositive_of_each_taxstats_var <-
   select_which(is.numeric, .and.dots = "fy.year") %>%
   .[, lapply(.SD, mean_of_nonzero), by = "fy.year"]
 
+round_if_num <- function(x, d = NULL) {
+  if (is.double(x)) {
+    if (is.null(d)) {
+      if (all(data.table::between(x, 0, 1))) {
+        round(x, 4)
+      } else {
+        round(x, 2)
+      }
+    } else {
+      round(x, d)
+    }
+  } else {
+    x
+  }
+}
+
+generic_inflators_1415 <- 
+  if (!renew){
+    fread("./data-raw/generic_inflators_1415.tsv")
+  } else {
+    lapply(1:10, 
+           function(h) {
+             grattan:::generic_inflator(vars = generic.cols,
+                                        h = h,
+                                        fy.year.of.sample.file = "2014-15") %>%
+             .[, H := h]
+           }) %>%
+      rbindlist(use.names = TRUE) %>%
+      .[, fy_year := yr2fy(2015 + H)] %>%
+      .[, lapply(.SD, round_if_num)] %>%
+      setnames("H", "h") %T>%
+      write_tsv("./data-raw/generic_inflators_1415.tsv") %>%
+      .[]
+  }
+
+
 generic_inflators_1314 <- 
   if (!renew){
     fread("./data-raw/generic_inflators_1314.tsv")
   }  else {
     lapply(1:10, 
-           function(h) dplyr::mutate(grattan:::generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = "2013-14"), 
-                                     H = h)) %>% 
+           function(h) {
+             grattan:::generic_inflator(vars = generic.cols,
+                                        h = h,
+                                        fy.year.of.sample.file = "2013-14") %>%
+               .[, H := h]
+           }) %>%
       rbindlist(use.names = TRUE) %>%
-      mutate(fy_year = yr2fy(2014 + H)) %>%
-      rename(h = H) %T>%
+      .[, fy_year := yr2fy(2014 + H)] %>%
+      .[, lapply(.SD, round_if_num)] %>%
+      setnames("H", "h") %T>%
       write_tsv("./data-raw/generic_inflators_1314.tsv") %>%
       .[]
+    
   }
 
 generic_inflators_1213 <- 
   if (!renew){
     fread("./data-raw/generic_inflators_1213.tsv")
-  }  else {
+  } else {
     lapply(1:10, 
-           function(h) dplyr::mutate(grattan:::generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = "2012-13"), 
-                                     H = h)) %>% 
+           function(h) {
+             grattan:::generic_inflator(vars = generic.cols,
+                                        h = h,
+                                        fy.year.of.sample.file = "2012-13") %>%
+               .[, H := h] 
+           }) %>%
       rbindlist(use.names = TRUE) %>%
-      mutate(fy_year = yr2fy(2013 + H)) %>%
-      rename(h = H) %T>%
+      .[, fy_year := yr2fy(2013 + H)] %>%
+      .[, lapply(.SD, round_if_num)] %>%
+      setnames("H", "h") %T>%
       write_tsv("./data-raw/generic_inflators_1213.tsv") %>%
       .[]
   }
 
-cg_inflators_1314 <- if (!renew) fread("./data-raw/cg_inflators_1314.tsv") else {
-  get_cg_inf <- function(series = "mean"){
+cg_inflators_1415 <- if (!renew) fread("./data-raw/cg_inflators_1415.tsv") else {
+  get_cg_inf <- function(series = "mean") {
+    
     cg_table <- 
       sample_files_all %>%
-      dplyr::select(fy.year, Taxable_Income, Net_CG_amt) %>%
-      dplyr::filter(Net_CG_amt > 0) %>%
-      dplyr::mutate(marginal_rate_first = income_tax(Taxable_Income + 1, 
-                                                     fy.year = fy.year) - income_tax(Taxable_Income, 
-                                                                                     fy.year = fy.year)) %>%
-      dplyr::mutate(marginal_rate_last = (income_tax(Taxable_Income + Net_CG_amt, fy.year = fy.year) - income_tax(Taxable_Income, fy.year = fy.year)) / Net_CG_amt) %>%
-      dplyr::group_by(fy.year) %>%
-      dplyr::summarise(mean_mr1 = mean(marginal_rate_first), 
-                       mean_wmr1 = stats::weighted.mean(marginal_rate_first, Net_CG_amt), 
-                       mean_mrL = mean(marginal_rate_last), 
-                       mean_wmrL = stats::weighted.mean(marginal_rate_last, Net_CG_amt)) %>% 
-      merge(grattan:::cgt_expenditures, by.x = "fy.year", by.y = "FY", all = TRUE) %>% 
-      # dplyr::select_(.dots = c(-URL, -Projected) %>%
-      grattan:::unselect_(.dots = c("URL", "Projected")) %>%
-      dplyr::rename(revenue_foregone = CGT_discount_for_individuals_and_trusts_millions) %>%
-      dplyr::mutate(revenue_foregone = revenue_foregone * 10^6,
-                    zero_discount_Net_CG_total = revenue_foregone / mean(mean_wmrL, na.rm = TRUE)) %>%
-      dplyr::select(fy.year, zero_discount_Net_CG_total)
+      .[Net_CG_amt > 0, .(fy.year, Taxable_Income, Net_CG_amt)] %>%
+      .[, marginal_rate_first := income_tax(Taxable_Income + 1, 
+                                            fy.year = fy.year) - income_tax(Taxable_Income, 
+                                                                            fy.year = fy.year)] %>%
+      .[, marginal_rate_last := (income_tax(Taxable_Income + Net_CG_amt, fy.year = fy.year) - income_tax(Taxable_Income, fy.year = fy.year)) / Net_CG_amt] %>%
+      .[, .(mean_mr1 = mean(marginal_rate_first), 
+            mean_wmr1 = stats::weighted.mean(marginal_rate_first, Net_CG_amt), 
+            mean_mrL = mean(marginal_rate_last), 
+            mean_wmrL = stats::weighted.mean(marginal_rate_last, Net_CG_amt)),
+        keyby = 'fy.year'] %>%
+      .[cgt_expenditures, on = "fy.year==FY"] %>%
+      drop_cols(c("URL", "Projected")) %>%
+      setkey(fy.year) %>%
+      setnames("CGT_discount_for_individuals_and_trusts_millions", "revenue_foregone") %>%
+      .[, .(fy.year,
+            zero_discount_Net_CG_total = revenue_foregone * 10^6 / mean(mean_wmrL, na.rm = TRUE))]
+    
+    individuals_table1_201415 <- 
+      if (!exists("individuals_table1_201415")) {
+        if (file.exists("~/taxstats/data-raw/2014-15/individuals_table1_201415.tsv")) {
+          fread("~/taxstats/data-raw/2014-15/individuals_table1_201415.tsv")
+        }
+      }
     
     n_cg_history <- 
-      data.table::as.data.table(individuals_table1_201314) %>%
-      dplyr::filter(Selected_items == "Net capital gain") %>%
-      dplyr::filter(!is.na(Count))  %>%
-      dplyr::select(fy_year, n_CG = Count)
+      as.data.table(individuals_table1_201415) %>%
+      .[Selected_items == "Net capital gain"] %>%
+      .[!is.na(Count)] %>%
+      .[, .(fy_year, n_CG = Count)]
     
-    forecaster <- function(...) forecast(...)  # gforecast terrible
+    forecaster <- function(object, ...) {
+      forecast(object, ...)
+    } # gforecast terrible
+    
+    
     
     switch(series,
            "mean" = {
              n_cg <- 
                rbind(n_cg_history, 
                      data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 1:10),
-                                n_CG = as.numeric(forecaster(n_cg_history$n_CG, level = 95)$mean))
-               )
+                                n_CG = exp(as.numeric(forecaster(log(n_cg_history$n_CG), level = 95)$mean))))
              
              cg <- 
                rbind(as.data.table(cg_table), 
                      data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 1:10), 
-                                zero_discount_Net_CG_total = as.numeric(forecaster(cg_table$zero_discount_Net_CG_total, level = 95)$mean)))
-             }, 
-             "lower" = {
-               n_cg <- 
-                 rbind(n_cg_history, 
-                       data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 1:10),
-                                  n_CG = as.numeric(forecaster(n_cg_history$n_CG, level = 95)$lower))
-                 )
-               
-               cg <-
-               rbind(as.data.table(cg_table), 
-                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 1:10), 
-                                zero_discount_Net_CG_total = as.numeric(forecaster(cg_table$zero_discount_Net_CG_total, level = 95)$lower)))
-             }, 
-             "upper" = {
-               n_cg <- 
-                 rbind(n_cg_history, 
-                       data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 1:10),
-                                  n_CG = as.numeric(forecaster(n_cg_history$n_CG, level = 95)$upper))
-                 )
-               
-               cg <-
-               rbind(as.data.table(cg_table), 
-                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 1:10), 
-                                zero_discount_Net_CG_total = as.numeric(forecaster(cg_table$zero_discount_Net_CG_total, level = 95)$upper)))
-             })
-    
-    cg_inf <- 
-      merge(n_cg, cg, by.x = "fy_year", by.y = "fy.year") %>% 
-      as.data.table
-    
-    cg_inf[, cg_inflator := zero_discount_Net_CG_total / n_CG]
-    cg_inf[, cg_inflator := cg_inflator / cg_inflator[cg_inf$fy_year == "2013-14"]]
-    cg_inf[, forecast.series := series]
-  }
-  lapply(c("lower", "mean", "upper"), get_cg_inf) %>%
-    rbindlist(use.names = TRUE) %T>%
-    write_tsv("./data-raw/cg_inflators_1314.tsv") %>%
-    .[]
-}
-
-cg_inflators_1213 <- 
-  if (!renew) {
-    fread("./data-raw/cg_inflators_1213.tsv") 
-  } else {
-  get_cg_inf <- function(series = "mean"){
-    cg_table <- 
-      sample_files_all %>%
-      dplyr::select(fy.year, Taxable_Income, Net_CG_amt) %>%
-      dplyr::filter(Net_CG_amt > 0) %>%
-      dplyr::mutate(marginal_rate_first = income_tax(Taxable_Income + 1, 
-                                                     fy.year = fy.year) - income_tax(Taxable_Income, 
-                                                                                     fy.year = fy.year)) %>%
-      dplyr::mutate(marginal_rate_last = (income_tax(Taxable_Income + Net_CG_amt, fy.year = fy.year) - income_tax(Taxable_Income, fy.year = fy.year)) / Net_CG_amt) %>%
-      dplyr::group_by(fy.year) %>%
-      dplyr::summarise(mean_mr1 = mean(marginal_rate_first), 
-                       mean_wmr1 = stats::weighted.mean(marginal_rate_first, Net_CG_amt), 
-                       mean_mrL = mean(marginal_rate_last), 
-                       mean_wmrL = stats::weighted.mean(marginal_rate_last, Net_CG_amt)) %>% 
-      merge(grattan:::cgt_expenditures, by.x = "fy.year", by.y = "FY", all = TRUE) %>% 
-      # dplyr::select_(.dots = c(-URL, -Projected) %>%
-      grattan:::unselect_(.dots = c("URL", "Projected")) %>%
-      dplyr::rename(revenue_foregone = CGT_discount_for_individuals_and_trusts_millions) %>%
-      dplyr::mutate(revenue_foregone = revenue_foregone * 10^6,
-                    zero_discount_Net_CG_total = revenue_foregone / mean(mean_wmrL, na.rm = TRUE)) %>%
-      dplyr::select(fy.year, zero_discount_Net_CG_total)
-    
-    n_cg_history <- 
-      data.table::as.data.table(individuals_table1_201314) %>%
-      dplyr::filter(Selected_items == "Net capital gain") %>%
-      dplyr::filter(!is.na(Count))  %>%
-      dplyr::select(fy_year, n_CG = Count)
-    
-    forecaster <- function(object, ...) forecast(object, h = 11, ...)  # gforecast terrible
-    
-    switch(series,
-           "mean" = {
-             n_cg <- 
-               rbind(n_cg_history, 
-                     data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 0:10),
-                                n_CG = as.numeric(forecaster(n_cg_history$n_CG, level = 95)$mean))
-               )
-             
-             cg <- 
-               rbind(as.data.table(cg_table), 
-                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 0:10), 
                                 zero_discount_Net_CG_total = as.numeric(forecaster(cg_table$zero_discount_Net_CG_total, level = 95)$mean)))
            }, 
            "lower" = {
              n_cg <- 
                rbind(n_cg_history, 
-                     data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 0:10),
-                                n_CG = as.numeric(forecaster(n_cg_history$n_CG, level = 95)$lower))
-               )
+                     data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 1:10),
+                                n_CG = exp(as.numeric(forecaster(log(n_cg_history$n_CG), level = 95)$lower))))
              
              cg <-
                rbind(as.data.table(cg_table), 
-                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 0:10), 
+                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 1:10), 
                                 zero_discount_Net_CG_total = as.numeric(forecaster(cg_table$zero_discount_Net_CG_total, level = 95)$lower)))
            }, 
            "upper" = {
              n_cg <- 
                rbind(n_cg_history, 
-                     data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 0:10),
-                                n_CG = as.numeric(forecaster(n_cg_history$n_CG, level = 95)$upper))
-               )
+                     data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 1:10),
+                                n_CG = exp(as.numeric(forecaster(log(n_cg_history$n_CG), level = 95)$upper))))
              
              cg <-
                rbind(as.data.table(cg_table), 
-                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 0:10), 
+                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 1:10), 
                                 zero_discount_Net_CG_total = as.numeric(forecaster(cg_table$zero_discount_Net_CG_total, level = 95)$upper)))
            })
     
-    cg_inf <- 
-      merge(n_cg, cg, by.x = "fy_year", by.y = "fy.year") %>% 
-      as.data.table
+    cg_inf <- n_cg[cg, on = "fy_year==fy.year", nomatch=0L]
     
     cg_inf[, cg_inflator := zero_discount_Net_CG_total / n_CG]
-    cg_inf[, cg_inflator := cg_inflator / cg_inflator[cg_inf$fy_year == "2012-13"]]
+    cg_inf[, cg_inflator := cg_inflator / cg_inflator[cg_inf$fy_year == "2014-15"]]
     cg_inf[, forecast.series := series]
   }
   lapply(c("lower", "mean", "upper"), get_cg_inf) %>%
-    rbindlist(use.names = TRUE) %T>%
-    write_tsv("./data-raw/cg_inflators_1213.tsv") %>%
+    rbindlist(use.names = TRUE) %>%
+    .[fy_year >= "2012-13"] %T>%
+    write_tsv("./data-raw/cg_inflators_1415.tsv") %>%
     .[]
 }
+
+cg_inflators_1314 <- 
+  cg_inflators_1415 %>%
+  copy %>%
+  .[, cg_inflator := cg_inflator / cg_inflator[cg_inflators_1415$fy_year == "2013-14"]] %>%
+  .[]
+
+cg_inflators_1213 <-
+  cg_inflators_1415 %>%
+  copy %>%
+  .[, cg_inflator := cg_inflator / cg_inflator[cg_inflators_1415$fy_year == "2012-13"]] %>%
+  .[]
   
   super_contribution_inflator_1314 <- 
   {
@@ -490,35 +480,31 @@ cg_inflators_1213 <-
 # differential uprating
 salary_by_fy_swtile <- 
   sample_files_all %>%
-  select(fy.year, Sw_amt) %>%
-  filter(Sw_amt > 0) %>%
-  group_by(fy.year) %>%
-  mutate(Sw_amt_percentile = ntile(Sw_amt, 100)) %>%
-  ungroup %>%
-  group_by(fy.year, Sw_amt_percentile) %>%
-  summarise(average_salary = mean(Sw_amt), 
-            min_salary = min(Sw_amt)) %>%
-  ungroup %>%
-  setkey(Sw_amt_percentile)
+  .[Sw_amt > 0, .(fy.year, Sw_amt)] %>%
+  .[, Sw_amt_percentile := ntile(Sw_amt, 100), keyby = "fy.year"] %>%
+  .[,
+    .(average_salary = mean(Sw_amt), 
+      min_salary = min(Sw_amt)),
+    keyby = .(fy.year, Sw_amt_percentile)] %>%
+  .[, average_salary := round(average_salary, 2L)] %>%
+  setkey(Sw_amt_percentile) %>%
+  .[]
   
 
 differential_sw_uprates <- 
   salary_by_fy_swtile %>%
-  ungroup %>%
-  arrange(Sw_amt_percentile, fy.year) %>%
-  group_by(Sw_amt_percentile) %>%
-  mutate(r_average_salary = average_salary / lag(average_salary) - 1) %>%
-  filter(fy.year != min(fy.year)) %>%
-  group_by(Sw_amt_percentile) %>%
-  summarise(avg_r = mean(r_average_salary)) %>% 
-  mutate(uprate_factor_raw = avg_r / mean(avg_r)) %>%
-  select(Sw_amt_percentile, uprate_factor_raw) %>%
+  copy %>%
+  setkey(Sw_amt_percentile, fy.year) %>%
+  .[, r_average_salary := average_salary / shift(average_salary) - 1, keyby = "Sw_amt_percentile"] %>%
+  .[fy.year != min(fy.year)] %>%
+  .[, .(avg_r = mean(r_average_salary)), keyby = "Sw_amt_percentile"] %>%
+  .[, .(Sw_amt_percentile, uprate_factor_raw = avg_r / mean(avg_r))] %>%
   setkey(Sw_amt_percentile) %>%
   # Span = 0.5 seems to be the point at which the curve has only 
   # one local extremum.
   # ggplot(., aes(x = Sw_amt_percentile, y = uprate_factor)) + geom_point() + stat_smooth(method = "loess", span = 0.45)
-  mutate(pred_loess = predict(loess(uprate_factor_raw ~ Sw_amt_percentile, data = ., span = 0.45), newdata = .)) %>% 
-  rename(uprate_factor = pred_loess)
+  .[, uprate_factor := predict(loess(uprate_factor_raw ~ Sw_amt_percentile, data = ., span = 0.40), newdata = .)] %>%
+  .[]
 
 .avbl_fractions <-
   # map between common fraction and English
@@ -552,7 +538,8 @@ Age_pension_base_rates_by_year <-
 Age_pension_assets_test_by_year <- 
   read_excel("data-raw/Age-Pension-assets-test-1997-2016.xlsx", sheet = "clean") %>%
   gather(type, assets_test, -Date) %>%
-  mutate(type = gsub("[^A-Za-z]", " ", type))
+  mutate(type = gsub("[^A-Za-z]", " ", type)) %>%
+  as.data.table
 
 bto_tbl <- 
   read_excel("data-raw/beneficiary-tax-offset-by-fy.xlsx") %>%
@@ -565,7 +552,7 @@ Age_pension_permissible_income_by_Date <-
   read_excel("data-raw/age-pension-permissible-income.xlsx") %>%
   gather(type, permissible_income, -Date) %>%
   mutate(type = trimws(gsub("Permissible income ", "", gsub("[^A-Za-z]", " ", type)))) %>%
-  setDT
+  as.data.table
 
 Age_pension_deeming_rates_by_Date <-
   # http://guides.dss.gov.au/guide-social-security-law/4/4/1/10
@@ -583,38 +570,64 @@ aus_pop_by_yearqtr <-
 aust_pop_by_age_yearqtr <- 
   fread("./data-raw/Estim-Resi-Pop-by-age-1981-2016.csv", 
         select = c("Age", "Time", "Value")) %>%
-  mutate(Date = as.Date(paste0("01-", Time), format = "%d-%b-%y")) %>%
-  select(Age, Date, Value) %>%
+  .[, .(Age, 
+        Date = as.Date(paste0("01-", Time), format = "%d-%b-%y"),
+        Value)] %>%
   setkey(Age, Date)
 
+download.file("http://www.ausstats.abs.gov.au/ausstats/meisubs.nsf/LatestTimeSeries/5206001_key_aggregates/$FILE/5206001_key_aggregates.xls",
+              mode = "wb",
+              destfile = "data-raw/5206001_key_aggregates-latest-release.xls")
 
-# download.file(url = "http://www.ausstats.abs.gov.au/ausstats/meisubs.nsf/LatestTimeSeries/5206001_key_aggregates/$FILE/5206001_key_aggregates.xlsx", destfile = "")
-abs_key_aggregates_names <- 
-  read.xlsx("./data-raw/5206001_key_aggregates-2016-12-07-release.xlsx", sheet = "Data1", rows = c(2L, 10L))
+# abs_key_aggregates_names <- 
+#   read_excel("data-raw/5206001_key_aggregates-latest-release.xls",
+#              sheet = "Data1",
+#              range = cell_rows(2:10)) %>%
+#   dplyr::filter(Unit == "Series ID")
+# 
+# units_by_series_id <- 
+#   data.table(Series_ID = as.character(abs_key_aggregates_names), 
+#              units = names(abs_key_aggregates_names)) %>%
+#   .[Series_ID != "Series ID"] %>%  # 'Series ID' and 'units'
+#   .[, units := sub("__.*$", "", units, perl = TRUE)] %>%
 
-units_by_series_id <- 
-  data.table(Series_ID = as.character(abs_key_aggregates_names), 
-             units = names(abs_key_aggregates_names)) %>%
-  .[-1] %>%  # 'Series ID' and 'units'
-  mutate(multiply = if_else(grepl("million", units, ignore.case = TRUE), 
-                            10^6, 
-                            if_else(grepl("(percent)|(proportion)", units, ignore.case = TRUE), 
-                                    0.01, 
-                                    1)))
+
+abs_key_aggregates_metadata <-
+  read_excel("data-raw/5206001_key_aggregates-latest-release.xls", sheet = "Index", skip = 10) %>%
+  as.data.table %>%
+  .[, list(Description = `Data Item Description`,
+           Series_ID = `Series ID`,
+           Series_type = `Series Type`,
+           Unit,
+           Freq = Freq.)] %>%
+  .[!is.na(Series_ID)] %>%
+  .[, c("Description", "PostColon") := tstrsplit(Description, split = ":", fixed = TRUE)] %>%
+  .[!grepl("Commonwealth of Australia", Description, fixed = TRUE)] %>%
+  .[, multiply := if_else(grepl("million", Unit, ignore.case = TRUE),
+                          10^6,
+                          if_else(grepl("(percent)|(proportion)", Unit, ignore.case = TRUE),
+                                  0.01,
+                                  1))] %>%
+  .[]
 
 abs_key_aggregates <- 
-  read_excel("data-raw/5206001_key_aggregates-2016-12-07-release.xlsx", sheet = "Data1", skip = 9) %>%
+  read_excel("data-raw/5206001_key_aggregates-latest-release.xls", sheet = "Data1", skip = 9) %>%
   as.data.table %>%
-  melt.data.table(id.vars = "Series ID", variable.name = "Series_ID") %>%
+  melt.data.table(id.vars = "Series ID",
+                  variable.name = "Series_ID") %>%
   setnames("Series ID", "Date") %>%
-  merge(units_by_series_id, by = "Series_ID", sort = FALSE) %>%
-  mutate(value = value * multiply, 
-         Date = as.Date(Date)) %>%
-  select(-units, -multiply) %>%
+  merge(abs_key_aggregates_metadata, by = "Series_ID", sort = FALSE) %>%
+  .[, list(Series_ID,
+           # Description,
+           Date = as.Date(Date),
+           value = value * multiply)] %>%
   # to limit size to only what is used
-  filter(Series_ID %in% c( "A2304350J"  # GDP
-                          ,"A2304354T"  # GNI
-                          ))
+  # .[Series_ID %chin% c("A2304350J"   # GDP
+  #                      ,"A2304354T"  # GNI
+  #                      )]
+  .[]
+
+fwrite(abs_key_aggregates, "data-raw/abs_key_aggregates.tsv", sep = "\t")
 
 read_csv_2col <- function(...) {
   suppressMessages(suppressWarnings(read_csv(...))) %>% select(1:2) %>% setDT
@@ -677,12 +690,37 @@ residential_property_prices <-
 
 devtools::use_data(residential_property_prices, overwrite = TRUE)
 
+do_dots <- function(...) {
+  eval(substitute(alist(...)))
+}
 
+provide.dir("data-raw/sysdata")
+fwrite_dots <- function(...) {
+  dotsL <- length(match.call(expand.dots = FALSE)$...)
+  Vs <- vapply(seq_len(dotsL),
+               function(x) deparse(do_dots(...)[[x]]),
+               character(1))
+  the_dots <- list(...)
+  
+  for (j in seq_len(dotsL)) {
+    cat(Vs[[j]], "\n")
+    if (is.data.frame(the_dots[[j]])) {
+      if (!identical(class(the_dots[[j]]), c("data.table", "data.frame"))) {
+        stop(class(the_dots[[j]]))
+      }
+      if (is.data.table(the_dots[[j]])) {
+        fwrite(the_dots[[j]], file.path("data-raw", "sysdata",  paste0(Vs[[j]], ".tsv")), sep = "\t")
+      }
+    }
+  }
+}
 
+use_and_write_data <- function(...) {
+  devtools::use_data(..., internal = TRUE, overwrite = TRUE)
+  fwrite_dots(...)
+}
 
-
-
-devtools::use_data(tax_table2, 
+use_and_write_data(tax_table2, 
                    lito_tbl, 
                    tax_tbl, 
                    medicare_tbl, 
@@ -696,8 +734,10 @@ devtools::use_data(tax_table2,
                    cgt_expenditures,
                    mean_of_each_taxstats_var, 
                    meanPositive_of_each_taxstats_var,
+                   generic_inflators_1415,
                    generic_inflators_1314,
                    generic_inflators_1213,
+                   cg_inflators_1415,
                    cg_inflators_1314,
                    cg_inflators_1213,
                    super_contribution_inflator_1314,
@@ -713,6 +753,4 @@ devtools::use_data(tax_table2,
                    bto_tbl,
                    aus_pop_by_yearqtr,
                    aust_pop_by_age_yearqtr,
-                   abs_key_aggregates,
-                   
-                   internal = TRUE, overwrite = TRUE)
+                   abs_key_aggregates)

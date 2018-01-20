@@ -22,6 +22,9 @@ NumericVector sapto_rcpp(NumericVector RebateIncome,
   int n = RebateIncome.length();
   NumericVector out(n);
   
+  int n1 = SaptoEligible.length();
+  int n2 = IsMarried.length();
+  
   double rik = 0;
   double mok = 0;
   double ltk = 0;
@@ -35,9 +38,17 @@ NumericVector sapto_rcpp(NumericVector RebateIncome,
     mok = MaxOffset[k];
     ltk = LowerThreshold[k];
     tpk = TaperRate[k];
-    sek = SaptoEligible[k];
+    if (n1 != n) {
+      sek = SaptoEligible[0];
+    } else {
+      sek = SaptoEligible[k];
+    }
     sik = SpouseIncome[k];
-    imk = IsMarried[k];
+    if (n2 != n) {
+      imk = IsMarried[0];
+    } else {
+      imk = IsMarried[k];
+    }
     if (sek) {
       out[k] = sapto_rcpp_singleton(rik,mok,ltk,tpk,sek,sik,imk);
     }

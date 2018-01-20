@@ -5,15 +5,13 @@ using namespace Rcpp;
 // [[Rcpp::export]]
 double sapto_rcpp_yr_singleton (double rebateIncome, bool isMarried, double spouseIncome, int yr) {
   double out = 0;
-  switch (yr) {
-  case 2014:
+  if (yr >= 2013) {
     if (isMarried) {
       out = sapto_rcpp_singleton(rebateIncome, 3204, 57948, 0.125, true, spouseIncome, true);
     } else {
       out = sapto_rcpp_singleton(rebateIncome, 2230, 32279, 0.125, true, 0, false);
     }
-    break;
-  default:
+  } else {
     out = 0;
   }
   return out;
