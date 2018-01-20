@@ -113,4 +113,46 @@ test_that("ABS connection", {
                                useABSConnection = TRUE)
   
   expect_equal(internal_ans, external_ans, tol = 0.0001)
+  
+  internal_ans <- cpi_inflator_quarters(100, 
+                                        from_qtr = "1960-Q1", 
+                                        to_qtr = "1961-Q1", 
+                                        adjustment = "trimmed", 
+                                        useABSConnection = FALSE)
+  external_ans <- cpi_inflator_quarters(100,
+                                        from_qtr = "1960-Q1", 
+                                        to_qtr = "1961-Q1", 
+                                        adjustment = "trimmed", 
+                                        useABSConnection = TRUE)
+  
+  expect_equal(internal_ans, external_ans, tol = 0.0001)
+  
+  
+  internal_ans <- cpi_inflator_quarters(100, 
+                                        from_qtr = "1960-Q1", 
+                                        to_qtr = "1961-Q1", 
+                                        adjustment = "seasonal", 
+                                        useABSConnection = FALSE)
+  external_ans <- cpi_inflator_quarters(100,
+                                        from_qtr = "1960-Q1", 
+                                        to_qtr = "1961-Q1", 
+                                        adjustment = "seasonal", 
+                                        useABSConnection = TRUE)
+  
+  expect_equal(internal_ans, external_ans, tol = 0.0001)
+  
+  
+  internal_ans <- cpi_inflator_quarters(100, 
+                                        from_qtr = "1960-Q1", 
+                                        to_qtr = "1961-Q1", 
+                                        adjustment = "none", 
+                                        useABSConnection = FALSE)
+  external_ans <- cpi_inflator_quarters(100,
+                                        from_qtr = "1960-Q1", 
+                                        to_qtr = "1961-Q1", 
+                                        adjustment = "none", 
+                                        useABSConnection = TRUE)
+  
+  expect_equal(internal_ans, external_ans, tol = 0.0001)
+  
 })
