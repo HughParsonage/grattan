@@ -251,7 +251,7 @@ test_that("Medicare options", {
   expect_warning(model_income_tax(sample_file_1314_copy, 
                                   medicare_levy_upper_family_sapto_threshold = 40e3 + 1,
                                   baseline_fy = "2013-14"),
-                 regexp = "medicare_levy_lower_family_sapto_threshold = 33999")
+                 regexp = "medicare_levy_lower_family_sapto_threshold = (33999|34000)")
   
   expect_error(model_income_tax(sample_file_1314_copy,
                                 baseline_fy = "2013-14",
@@ -383,7 +383,8 @@ test_that("Elasticity of taxable income", {
   library(taxstats)
   s12131314 <- 
     copy(sample_file_1213) %>%
-    .[Ind %% 3 == 0]
+    .[Ind %% 3 == 0] %>%
+    setkey(Ind)
   
   no_elasticity <- 
     model_income_tax(copy(s12131314),
@@ -445,7 +446,7 @@ test_that("Elasticity of taxable income", {
   result[, private_income_half := new_taxable_income_e.5 - new_tax_e.5]
   result[, private_income_full := new_taxable_income_e1 - new_tax_e1]
   
-  result[private_income_zero != private_income_half]
+  expect_gt(nrow(result), 0)
   
 })
 
