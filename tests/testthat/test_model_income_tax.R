@@ -356,6 +356,15 @@ test_that("SAPTO modelled", {
                      medicare_levy_lower_sapto_threshold = 32277,
                      medicare_levy_upper_family_threshold = 51551,
                      medicare_levy_upper_family_sapto_threshold = 69000)
+  
+  sapto_only_psnn <-
+    sample_file_1415_copy %>%
+    project_to(to_fy = "2017-18") %>%
+    .[, saptoEligible := Aust_govt_pnsn_allw_amt > 10e3] %>%
+    model_income_tax(baseline_fy = "2014-15",
+                     sapto_eligible = .$saptoEligible)
+  
+  
 })
 
 test_that("LITO", {
@@ -491,5 +500,7 @@ test_that("Elasticity 0 vs 1", {
   
   expect_true(all(result$new_tax_E0 > result$new_tax_e1))
 })
+
+
 
 

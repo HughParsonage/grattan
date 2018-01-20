@@ -37,6 +37,7 @@
 #' @param sapto_max_offset The maximum offset available through SAPTO. 
 #' @param sapto_lower_threshold The threshold at which SAPTO begins to reduce (from \code{sapto_max_offset}).
 #' @param sapto_taper The taper rate beyond \code{sapto_lower_threshold}.
+#' @param calc_baseline_tax (logical, default: \code{TRUE}) Should the income tax in \code{baseline_fy} be included as a column in the result?
 #' @param return. What should the function return? One of \code{tax} or \code{sample_file}. 
 #' If \code{tax}, the tax payable under the settings; if \code{sample_file}, the \code{sample_file},
 #' but with variables \code{tax} and possibly \code{new_taxable_income}. 
@@ -78,6 +79,7 @@ model_income_tax <- function(sample_file,
                              sapto_max_offset = NULL,
                              sapto_lower_threshold = NULL,
                              sapto_taper = NULL, 
+                             calc_baseline_tax = TRUE,
                              return. = c("sample_file", "tax")) {
   arguments <- ls()
   argument_vals <- as.list(environment())
@@ -125,6 +127,13 @@ model_income_tax <- function(sample_file,
   
   income <- sample_file[["Taxable_Income"]]
   
+  # Indicate baseline tax
+  if (calc_baseline_tax && identical(return., "sample_file")) {
+    sample_file[, "baseline_tax" := income_tax(income,
+                                               fy.year = baseline_fy,
+                                               .dots.ATO = sample_file,
+                                               n_dependants = n_dependants)]
+  }
   
   max.length <- length(income)
   prohibit_vector_recycling(income, n_dependants, baseline_fy)
@@ -583,6 +592,7 @@ model_income_tax <- function(sample_file,
       .[names(argument_vals) %notin% c("arguments",
                                        "elasticity_of_taxable_income",
                                        "sample_file",
+                                       "calc_baseline_tax",
                                        "return.")]
     
     new_sample_file <- copy(sample_file)
@@ -592,6 +602,7 @@ model_income_tax <- function(sample_file,
       model_income_tax(sample_file = new_sample_file,
                        elasticity_of_taxable_income = NULL,
                        return. = "tax",
+                       calc_baseline_tax = FALSE,
                        ...)
     }
     
