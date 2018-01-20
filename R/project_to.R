@@ -13,7 +13,7 @@ project_to <- function(sample_file, to_fy, fy.year.of.sample.file = NULL, ...) {
     fy.year.of.sample.file <-
       match(nrow(sample_file), c(254318L, 258774L, 263339L))
     if (is.na(fy.year.of.sample.file)) {
-      stop("`fy.year.of.sample.file` was not provided, and its value could not be ",
+      stop("`fy.year.of.sample.file` was not provided, yet its value could not be ",
            "inferred from nrow(sample_file) = ", nrow(sample_file), ". Either use ", 
            "a 2% sample file of the years 2012-13, 2013-14, or 2014-15 or ", 
            "supply `fy.year.of.sample.file` manually.")
