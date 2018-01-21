@@ -24,7 +24,7 @@ is.fy <- function(fy.yr){
   out <- logical(length(fy.yr))
   potential_fys <- grepl("^([12][0-9]{3})[-\\s]?[0-9]{2}$", fy.yr, perl = TRUE)
   out[potential_fys] <- 
-    (as.double(sub("^([12][0-9]{3})[-\\s]?[0-9]{2}$", "\\1", fy.yr[potential_fys], perl = TRUE)) + 1) %% 100 == as.numeric(sub("^[12][0-9]{3}[-\\s]?([0-9]{2})$", "\\1", fy.yr[potential_fys], perl = TRUE))
+    {as.integer(sub("^([12][0-9]{3})[-\\s]?[0-9]{2}$", "\\1", fy.yr[potential_fys], perl = TRUE)) + 1L} %% 100 == as.integer(sub("^[12][0-9]{3}[-\\s]?([0-9]{2})$", "\\1", fy.yr[potential_fys], perl = TRUE))
   out
 }
 
