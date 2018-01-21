@@ -96,6 +96,7 @@ test_that("Increase in a rate results in more tax", {
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   original <- income_tax(sample_file_1314$Taxable_Income, "2013-14", .dots.ATO = copy(sample_file_1314))
+  original <- round(original)
   
   new_tax <-
     model_income_tax(sample_file_1314_copy,
@@ -103,7 +104,8 @@ test_that("Increase in a rate results in more tax", {
                      ordinary_tax_thresholds = c(0, 18200, 37e3, 80e3, 180e3),
                      ordinary_tax_rates = c(0, 0.19, 0.325, 0.37,
                                             0.46)) %>%
-    .subset2("new_tax")
+    .subset2("new_tax") %>%
+    round
   
   expect_true(all(new_tax >= original))
   
@@ -450,13 +452,15 @@ test_that("LITO", {
   old_taxes <-
     copy(sample_file_1213_copy) %>%
     .[, old_tax := income_tax(Taxable_Income, "2012-13", .dots.ATO = sample_file_1213_copy)] %>%
-    .subset2("old_tax")
+    .subset2("old_tax") %>%
+    round
   
   new_taxes <- 
     model_income_tax(sample_file_1213_copy, 
                      baseline_fy = "2012-13",
                      lito_max_offset = 500,
-                     return. = "tax")
+                     return. = "tax") %>%
+    round
   
   expect_true(all(new_taxes <= old_taxes))
 })
