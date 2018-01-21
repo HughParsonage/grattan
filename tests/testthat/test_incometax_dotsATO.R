@@ -39,10 +39,4 @@ test_that("Debugger", {
                income_tax(sample_file_1112$Taxable_Income, 
                           "2013-14", 
                           .dots.ATO = copy(sample_file_1112)))
-  
-  
-  
 })
-
-
-
