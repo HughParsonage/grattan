@@ -52,6 +52,25 @@ test_that("La plus ca meme la plus ca meme: ordinary tax", {
   
   expect_equal(new_tax, original)
 })
+
+test_that("La plus ca meme la plus ca meme: la deluge", {
+  skip_if_not_installed("taxstats")
+  library(taxstats)
+  sample_file_1112_copy <- copy(sample_file_1112)
+  original <-
+    income_tax(sample_file_1112_copy$Taxable_Income,
+               "2011-12",
+               .dots.ATO = copy(sample_file_1112_copy))
+  
+  new_tax <-
+    model_income_tax(sample_file_1112_copy,
+                     baseline_fy = "2011-12",
+                     ordinary_tax_thresholds = c(0, 6000, 35e3, 80e3, 180e3),
+                     ordinary_tax_rates = c(0, 0.15, 0.30, 0.37, 0.45)) %>%
+    .subset2("new_tax")
+  
+  expect_equal(new_tax, original)
+})
   
 test_that("La plus ca meme la plus ca meme: medicare levy", {
   skip_if_not_installed("taxstats")

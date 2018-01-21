@@ -590,9 +590,7 @@ model_income_tax <- function(sample_file,
   new_tax <-
   {
     if (baseline_fy == "2011-12") {
-      flood_levy. <- 
-        0.005 *
-        {pmaxC(income - 50e3, 0) + pmaxC(income - 100e3, 0)}
+      flood_levy. <- 0.005 * {pmaxC(income - 50e3, 0) + pmaxC(income - 100e3, 0)}
     } else {
       flood_levy. <- 0
     }
@@ -601,15 +599,12 @@ model_income_tax <- function(sample_file,
     S4.10_basic_income_tax_liability <- pmaxC(base_tax. - lito. - sapto., 0)
     
     # SBTO can only be calculated off .dots.ATO
-    if (is.null(.dots.ATO)) {
-      sbto. <- 0
-    } else {
-      sbto. <-
-        small_business_tax_offset(taxable_income = income,
-                                  basic_income_tax_liability = S4.10_basic_income_tax_liability,
-                                  .dots.ATO = .dots.ATO,
-                                  fy_year = baseline_fy)
-    }
+    
+    sbto. <-
+      small_business_tax_offset(taxable_income = income,
+                                basic_income_tax_liability = S4.10_basic_income_tax_liability,
+                                .dots.ATO = .dots.ATO,
+                                fy_year = baseline_fy)
     
     pmaxC(S4.10_basic_income_tax_liability - sbto., 0) +
       medicare_levy. +
