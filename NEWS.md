@@ -1,4 +1,5 @@
-## 1.5.3.0
+## 1.5.3.1
+### 2018-01-22
 
 ### New features:
 * New function `model_income_tax` attempts provides every lever of the income tax system that are visible from the sample files. Users can model the sample file by changing single parameters to view their effects.

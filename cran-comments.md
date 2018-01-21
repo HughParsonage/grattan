@@ -1,10 +1,11 @@
 ## Test environments
 * local Windows install, CRAN 3.4.3
 * ubuntu 12.04 (on travis-ci), R devel and release <https://travis-ci.org/HughParsonage/grattan>
-* win-builder (devel) <https://win-builder.r-project.org/h3I4C4smWMXS/00check.log>
+* win-builder (devel)
 
 * This is a package update to:
   - fix package dependencies to comply with CRAN policy
+  - omit ephemeral winbuilder link
   - reflect recent data
 
 ## R CMD check results
