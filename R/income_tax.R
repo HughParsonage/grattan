@@ -143,13 +143,7 @@ rolling_income_tax <- function(income,
         sapto.eligible <- coalesce(between(.subset2(.dots.ATO, "age_range"), 0L, 1L), FALSE)  
       }
     } else {
-      if ("Birth_year" %chin% .dots.ATO.noms) {
-        sapto.eligible <- coalesce(between(.subset2(.dots.ATO, "Birth_year"), 0L, 1L), FALSE)
-      } else {
-        stop("`.dots.ATO` was supplied, but did not contain columns 'age_range' or 'Birth_year'. ",
-             "`dots.ATO` needs to be a sample file with the original names. Ensure `.dots.ATO` ",
-             "has either of those names.")
-      }
+      sapto.eligible <- coalesce(between(.subset2(.dots.ATO, "Birth_year"), 0L, 1L), FALSE)
     }
   }
   
