@@ -18,3 +18,11 @@ test_that("Warnings", {
   expect_error(project(sample_file_1314, h = 1L, fy.year.of.sample.file = "2011-12"),
                regexp = "2012.13.*2013.14")
 })
+
+test_that("Error handling", {
+  skip_if_not_installed("taxstats")
+  library(taxstats)
+  expect_error(project_to(sample_file_1112, "2013-14"),
+               regexp = "`fy.year.of.sample.file` was not provided, yet its value could not be inferred from nrow(sample_file) = 254273. Either use a 2% sample file of the years 2012-13, 2013-14, or 2014-15 or supply `fy.year.of.sample.file` manually.",
+               fixed = TRUE)
+})

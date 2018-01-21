@@ -10,6 +10,7 @@
 #' @param return.mode The mode (numeric or integer) of the returned vector.
 #' @param .dots.ATO A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files. If \code{.dots.ATO} is a \code{data.table}, I recommend you enclose it with \code{copy()}.
 #' @param allow.forecasts should dates beyond 2019-20 be permitted? Currently, not permitted.
+#' @param .debug (logical, default: \code{FALSE})  If \code{TRUE}, returns a \code{data.table} containing the components. (This argument and its result is liable to change in future versions, possibly without notice.)
 #' @author Tim Cameron, Brendan Coates, Hugh Parsonage, William Young
 #' @details The function 'rolling' is inflexible by design. It is designed to guarantee the correct tax payable in a year.
 #' For years preceding the introduction of SAPTO, the maximum offset is assumed to apply to those above pensionable age. 
@@ -36,7 +37,8 @@ income_tax <- function(income,
                        n_dependants = 0L,
                        .dots.ATO = NULL,
                        return.mode = c("numeric", "integer"),
-                       allow.forecasts = FALSE) {
+                       allow.forecasts = FALSE,
+                       .debug = FALSE) {
   if (missing(fy.year)){
     stop("fy.year is missing, with no default")
   }
@@ -63,7 +65,8 @@ income_tax <- function(income,
     out <- income_tax_cpp(income,
                           fy.year = fy.year,
                           .dots.ATO = .dots.ATO,
-                          n_dependants = n_dependants)
+                          n_dependants = n_dependants,
+                          .debug = .debug)
   } else {
     out <- rolling_income_tax(income = income,
                               fy.year = fy.year,
@@ -71,7 +74,8 @@ income_tax <- function(income,
                               family_status = family_status,
                               n_dependants = n_dependants, 
                               .dots.ATO = .dots.ATO,
-                              allow.forecasts = allow.forecasts)
+                              allow.forecasts = allow.forecasts, 
+                              .debug = .debug)
   }
   return.mode <- match.arg(return.mode)
   
@@ -92,7 +96,8 @@ rolling_income_tax <- function(income,
                                family_status = "individual",
                                n_dependants = 0L,
                                .dots.ATO = NULL,
-                               allow.forecasts = FALSE) {
+                               allow.forecasts = FALSE, 
+                               .debug = FALSE) {
   
   if (!all(fy.year %chin% c("2000-01", "2001-02", 
                             "2002-03", "2003-04", "2004-05", "2005-06", "2006-07", "2007-08", 
@@ -138,13 +143,7 @@ rolling_income_tax <- function(income,
         sapto.eligible <- coalesce(between(.subset2(.dots.ATO, "age_range"), 0L, 1L), FALSE)  
       }
     } else {
-      if ("Birth_year" %chin% .dots.ATO.noms) {
-        sapto.eligible <- coalesce(between(.subset2(.dots.ATO, "Birth_year"), 0L, 1L), FALSE)
-      } else {
-        stop("`.dots.ATO` was supplied, but did not contain columns 'age_range' or 'Birth_year'. ",
-             "`dots.ATO` needs to be a sample file with the original names. Ensure `.dots.ATO` ",
-             "has either of those names.")
-      }
+      sapto.eligible <- coalesce(between(.subset2(.dots.ATO, "Birth_year"), 0L, 1L), FALSE)
     }
   }
   
@@ -294,7 +293,7 @@ rolling_income_tax <- function(income,
 
 
 
-income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = NULL, n_dependants = 0L) {
+income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = NULL, n_dependants = 0L, .debug = FALSE) {
   # Assume everyone of pension age is eligible for sapto.
   .dots.ATO.noms <- names(.dots.ATO)
   
@@ -466,15 +465,51 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
     sapto. <- 0
   }
   
+  # 2011-12 is never used
+  flood_levy. <- 0
   
+  # http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html
+  S4.10_basic_income_tax_liability <- pmaxC(base_tax. - lito. - sapto., 0)
   
-  out <- pmaxC(base_tax. - lito. - sapto., 0) + medicare_levy.
+  # SBTO can only be calculated off .dots.ATO
+  if (is.null(.dots.ATO)) {
+    sbto. <- 0
+  } else {
+    sbto. <-
+      small_business_tax_offset(taxable_income = income,
+                                basic_income_tax_liability = S4.10_basic_income_tax_liability,
+                                .dots.ATO = .dots.ATO,
+                                fy_year = fy.year)
+  }
+  
+  out <-
+    pmaxC(S4.10_basic_income_tax_liability - sbto., 0) +
+    medicare_levy. +
+    flood_levy.
+  
   if (any(income < 0)) {
     warning("Negative entries in income detected. These will have value NA.")
     out[income < 0] <- switch(storage.mode(out), 
                               "integer" = NA_integer_,
                               "double" = NA_real_)
   }
+  
+  if (.debug && is.data.table(.dots.ATO)) {
+    result <- 
+      copy(.dots.ATO) %>%
+      .[, "base_tax" := base_tax.] %>%
+      .[, "lito" := lito.] %>%
+      .[, "sapto" := sapto.] %>%
+      .[, "medicare_levy" := medicare_levy.] %>%
+      .[, "income_tax" := out]
+      
+    # if (fy.year == "2011-12") {
+    #   result[, "flood_levy" := flood_levy.]
+    # }
+    
+    return(result[])
+  }
+  
   out
 }
 

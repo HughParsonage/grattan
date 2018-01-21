@@ -52,6 +52,25 @@ test_that("La plus ca meme la plus ca meme: ordinary tax", {
   
   expect_equal(new_tax, original)
 })
+
+test_that("La plus ca meme la plus ca meme: la deluge", {
+  skip_if_not_installed("taxstats")
+  library(taxstats)
+  sample_file_1112_copy <- copy(sample_file_1112)
+  original <-
+    income_tax(sample_file_1112_copy$Taxable_Income,
+               "2011-12",
+               .dots.ATO = copy(sample_file_1112_copy))
+  
+  new_tax <-
+    model_income_tax(sample_file_1112_copy,
+                     baseline_fy = "2011-12",
+                     ordinary_tax_thresholds = c(0, 6000, 35e3, 80e3, 180e3),
+                     ordinary_tax_rates = c(0, 0.15, 0.30, 0.37, 0.45)) %>%
+    .subset2("new_tax")
+  
+  expect_equal(new_tax, original)
+})
   
 test_that("La plus ca meme la plus ca meme: medicare levy", {
   skip_if_not_installed("taxstats")
@@ -405,23 +424,22 @@ test_that("SAPTO modelled", {
                      medicare_levy_lower_sapto_threshold = 32277,
                      medicare_levy_upper_family_threshold = 51551,
                      medicare_levy_upper_family_sapto_threshold = 69000)
+
   
   sapto_only_psnn <-
     copy(sample_file_1415_synth) %>%
-    project_to(to_fy = "2017-18") %>%
-    .[, saptoEligible := Aust_govt_pnsn_allw_amt > 10e3] %>%
-    model_income_tax(baseline_fy = "2017-18",
+    project_to(to_fy = "2016-17") %>%
+    .[, saptoEligible := and(age_range <= 1L, Aust_govt_pnsn_allw_amt > 1)] %>%
+    model_income_tax(baseline_fy = "2016-17",
                      sapto_eligible = .$saptoEligible) %>%
     .[, revenue := new_tax - baseline_tax] %>%
     .[]
   
   revenue_sapto_pension <- 
-    sum(sapto_only_psnn$revenue) * 50 / 1e6
+    sum(sapto_only_psnn$revenue * sapto_only_psnn$WEIGHT) / 1e6
   
   expect_gt(revenue_sapto_pension, 200)
-  expect_lt(revenue_sapto_pension, 300)
-  
-  
+  expect_lt(revenue_sapto_pension, 400)
 })
 
 test_that("LITO", {

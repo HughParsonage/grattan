@@ -156,7 +156,8 @@ model_income_tax <- function(sample_file,
     }
     if (length(sapto_eligible) != 1L && length(sapto_eligible) != max.length) {
       stop("`sapto_eligible` was length ", length(sapto_eligible), ". ",
-           "Ensure `sapto_eligible` has length ", max.length, "(i.e. nrow(sample_file)) or length one.")
+           "Ensure `sapto_eligible` has length ",
+           max.length, "(i.e. nrow(sample_file)) or length one.")
     }
   }
   
@@ -209,7 +210,8 @@ model_income_tax <- function(sample_file,
     set(.dots.ATO, j = j, value = as.integer(.dots.ATO[[j]]))
   }
   
-  if (is.null(.dots.ATO) || "Spouse_adjusted_taxable_inc" %notin% names(.dots.ATO)) {
+  if (is.null(.dots.ATO) ||
+      "Spouse_adjusted_taxable_inc" %notin% names(.dots.ATO)) {
     the_spouse_income <- integer(max.length)
   } else {
     the_spouse_income <- .dots.ATO[["Spouse_adjusted_taxable_inc"]]
@@ -585,15 +587,38 @@ model_income_tax <- function(sample_file,
     }
   }
   
-  new_tax <- pmaxC(base_tax. - lito. - sapto., 0) + medicare_levy.
+  new_tax <-
+  {
+    if (baseline_fy == "2011-12") {
+      flood_levy. <- 0.005 * {pmaxC(income - 50e3, 0) + pmaxC(income - 100e3, 0)}
+    } else {
+      flood_levy. <- 0
+    }
+    
+    # http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html
+    S4.10_basic_income_tax_liability <- pmaxC(base_tax. - lito. - sapto., 0)
+    
+    # SBTO can only be calculated off .dots.ATO
+    
+    sbto. <-
+      small_business_tax_offset(taxable_income = income,
+                                basic_income_tax_liability = S4.10_basic_income_tax_liability,
+                                .dots.ATO = .dots.ATO,
+                                fy_year = baseline_fy)
+    
+    pmaxC(S4.10_basic_income_tax_liability - sbto., 0) +
+      medicare_levy. +
+      flood_levy.
+  }
   # new_tax2 <<- new_tax
   
   # Elasticity of Taxable Income
   ## 
   if (!is.null(elasticity_of_taxable_income)) {
+    D_tax <- new_tax - old_tax
     # Change in net income
     new_taxable_income <-
-      income * (1 - elasticity_of_taxable_income * (new_tax - old_tax) / (income - old_tax)) %>%
+      income * (1 - elasticity_of_taxable_income * D_tax / (income - old_tax)) %>%
       coalesce(0)
     
     sample_file[, new_taxable_income := new_taxable_income]
