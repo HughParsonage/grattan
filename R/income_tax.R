@@ -471,13 +471,8 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
     sapto. <- 0
   }
   
-  if (fy.year == "2011-12") {
-    flood_levy. <- 
-      0.005 *
-      {pmaxC(income - 50e3, 0) + pmaxC(income - 100e3, 0)}
-  } else {
-    flood_levy. <- 0
-  }
+  # 2011-12 is never used
+  flood_levy. <- 0
   
   # http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html
   S4.10_basic_income_tax_liability <- pmaxC(base_tax. - lito. - sapto., 0)
@@ -508,15 +503,15 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
   if (.debug && is.data.table(.dots.ATO)) {
     result <- 
       copy(.dots.ATO) %>%
-      .[, base_tax := base_tax.] %>%
+      .[, "base_tax" := base_tax.] %>%
       .[, "lito" := lito.] %>%
       .[, "sapto" := sapto.] %>%
       .[, "medicare_levy" := medicare_levy.] %>%
       .[, "income_tax" := out]
       
-    if (fy.year == "2011-12") {
-      result[, flood_levy := flood_levy.]
-    }
+    # if (fy.year == "2011-12") {
+    #   result[, "flood_levy" := flood_levy.]
+    # }
     
     return(result[])
   }
