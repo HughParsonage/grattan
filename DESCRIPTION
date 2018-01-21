@@ -36,19 +36,21 @@ LinkingTo:
     Rcpp,
     RcppParallel
 RoxygenNote: 6.0.1
-Suggests: testthat, 
-    taxstats (>= 0.0.5),
+Suggests:
+    broom, 
     dplyr,
-    rmarkdown, 
     dtplyr,
     ggplot2,
+    ggrepel,
     mgcv,
-    scales, 
-    broom, 
     knitr,
-    survey, 
+    rmarkdown,
+    scales,
+    survey,
+    testthat, 
+    taxstats (>= 0.0.5),
     viridis,
-    ggrepel
+    yaml
 Additional_repositories: https://hughparsonage.github.io/drat/
 LazyData: true
 VignetteBuilder: knitr
