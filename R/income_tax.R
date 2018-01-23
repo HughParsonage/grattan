@@ -153,11 +153,9 @@ rolling_income_tax <- function(income,
   
   # Don't like vector recycling
   # http://stackoverflow.com/a/9335687/1664978
-  prohibit_vector_recycling(income, fy.year, age, family_status, n_dependants)
-  prohibit_length0_vectors(income, fy.year, age, family_status, n_dependants)
-  
   # Also lengths() -- but doesn't appear to be faster, despite being so advertised 
-  input.lengths <- vapply(list(income, fy.year, age, family_status, n_dependants), FUN = length, FUN.VALUE = integer(1))
+  input.lengths <-
+    prohibit_vector_recycling.MAXLENGTH(income, fy.year, age, family_status, n_dependants)
   max.length <- max(input.lengths)
   
   input <- 
@@ -197,7 +195,7 @@ rolling_income_tax <- function(income,
   if (is.null(.dots.ATO) || "Spouse_adjusted_taxable_inc" %notin% names(.dots.ATO)){
     the_spouse_income <- 0L
   } else {
-    the_spouse_income <- .dots.ATO[["Spouse_adjusted_taxable_inc"]]
+    the_spouse_income <- .subset2(.dots.ATO, "Spouse_adjusted_taxable_inc")
     the_spouse_income[is.na(the_spouse_income)] <- 0L
   }
   
