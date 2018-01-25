@@ -9,7 +9,6 @@ r_packages:
 - hutils
 
 r_github_packages:
-  - hughparsonage/taxstats
   - hughparsonage/formalCoverage
   - jimhester/covr
 
