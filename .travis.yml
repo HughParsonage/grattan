@@ -9,10 +9,10 @@ r_packages:
 - hutils
 
 r_github_packages:
-  - hughparsonage/taxstats
   - hughparsonage/formalCoverage
   - jimhester/covr
 
 after_success:
   - Rscript -e 'formalCoverage::formalPackageCoverage()'
+  - Rscript -e 'library(taxstats);library(data.table);print(sample_file_1415_synth)'
   - if [ $TRAVIS_R_VERSION_STRING == "release" ]; then Rscript -e 'covr::codecov(line_exclusions = "R/zzz.R")'; fi
