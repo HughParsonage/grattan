@@ -7,7 +7,7 @@
 #' @param WEIGHT The sample weight for the sample file. (So a 2\% file has \code{WEIGHT} = 50.)
 #' @param excl_vars A character vector of column names in \code{sample_file} that should not be inflated. Columns not present in the 2013-14 sample file are not inflated and nor are the columns \code{Ind}, \code{Gender}, \code{age_range}, \code{Occ_code}, \code{Partner_status}, \code{Region}, \code{Lodgment_method}, and \code{PHI_Ind}.
 #' @param forecast.dots A list containing parameters to be passed to \code{generic_inflator}.
-#' @param wage.series See \code{\link{wage_inflator}}.
+#' @param wage.series See \code{\link{wage_inflator}}. Note that the \code{Sw_amt} will uprated by \code{\link{differentially_uprate_wage}}.
 #' @param lf.series See \code{\link{lf_inflator_fy}}.
 #' @param .recalculate.inflators (logical, default: \code{FALSE}. Should \code{generic_inflator()} or \code{CG_inflator} be called to project the other variables? Adds time.
 #' @param .copyDT (logical, default: \code{TRUE}) Should a \code{copy()} of \code{sample_file} be made? If set to \code{FALSE}, will update \code{sample_file}. 
@@ -17,13 +17,18 @@
 #' @return A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).
 #' @details We recommend you use \code{sample_file_1213} over \code{sample_file_1314}, unless you need the superannuation variables, 
 #' as the latter suggests lower-than-recorded tax collections. 
+#' 
+#' Superannuation variables are inflated by a fixed rate of 5\% p.a.
 #' @examples 
 #' # install.packages('taxstats', repos = 'https://hughparsonage.github.io/drat')
-#' if (requireNamespace("taxstats", quietly = TRUE) && requireNamespace("data.table", quietly = TRUE)){
+#' if (requireNamespace("taxstats", quietly = TRUE) &&
+#'     requireNamespace("data.table", quietly = TRUE)) {
 #'   library(taxstats)
 #'   library(data.table)
 #'   sample_file <- copy(sample_file_1314)
-#'   sample_file_1617 <- project(sample_file, h = 3L)  # to "2016-17"
+#'   sample_file_1617 <- project(sample_file,
+#'                               h = 3L, # to "2016-17"
+#'                               fy.year.of.sample.file = "2013-14")  
 #' }
 #' @import data.table
 #' @export
@@ -119,7 +124,10 @@ project <- function(sample_file,
                  "2014-15" = cg_inflators_1415)
         stopifnot("forecast.series" %in% names(cg_inflators))
         forecast.series <- NULL 
-        CG.inflator <- cg_inflators[fy_year == to.fy & forecast.series == forecast.dots$estimator][["cg_inflator"]]
+        CG.inflator <- 
+          cg_inflators[fy_year == to.fy] %>%
+          .[forecast.series == forecast.dots$estimator] %>%
+          .subset2("cg_inflator")
       } 
     }
     

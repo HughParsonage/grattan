@@ -1,12 +1,12 @@
-[![Travis-CI](https://travis-ci.org/HughParsonage/formalCoverage.svg?branch=master)](https://travis-ci.org/HughParsonage/grattan?branch=master) [![Project Status: Active ? The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) [![codecov.io](https://codecov.io/github/HughParsonage/grattan/coverage.svg?branch=master)](https://codecov.io/github/HughParsonage/grattan?branch=master)
+[![Travis-CI](https://travis-ci.org/HughParsonage/grattan.svg?branch=master)](https://travis-ci.org/HughParsonage/grattan?branch=master) [![Project Status: Active ? The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) [![codecov.io](https://codecov.io/github/HughParsonage/grattan/coverage.svg?branch=master)](https://codecov.io/github/HughParsonage/grattan?branch=master)
 
 ------------------------------------------------------------------------
 
-[![minimal R version](https://img.shields.io/badge/R%3E%3D-2.10-6666ff.svg)](https://cran.r-project.org/) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/grattan)](https://cran.r-project.org/package=grattan) [![packageversion](https://img.shields.io/badge/Package%20version-1.5.2.5-orange.svg?style=flat-square)](commits/master)
+[![minimal R version](https://img.shields.io/badge/R%3E%3D-2.10-6666ff.svg)](https://cran.r-project.org/) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/grattan)](https://cran.r-project.org/package=grattan) [![packageversion](https://img.shields.io/badge/Package%20version-1.5.3.0-orange.svg?style=flat-square)](commits/master)
 
 ------------------------------------------------------------------------
 
-[![Last-changedate](https://img.shields.io/badge/last%20change-2017--11--16-orange.svg)](/commits/master)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2018--01--22-orange.svg)](/commits/master)
 
 grattan
 =======
@@ -16,8 +16,32 @@ Australian Tax Policy Analysis
 NEWS
 ====
 
+1.5.3.1
+-------
+
+### 2018-01-22
+
+### New features:
+
+-   New function `model_income_tax` attempts provides every lever of the income tax system that are visible from the sample files. Users can model the sample file by changing single parameters to view their effects.
+-   Include the small business tax offset as a standalone function and within `income_tax`.
+
+### Other user-visible changes
+
+-   `project` and `project_to` no longer require `fy.year.of.sample.file`. However, it is expected to be compatible with the sample file provided. Failling to provide a sample file with the expected number of rows or not providing a sample file with a valid number of rows is a warning, which can be silenced by `check_fy_sample_file = FALSE`.
+
+### Data:
+
+-   Update labour force data to November 2017
+-   Internal projection tables have been updated for the latest (2014-15) sample file.
+
+### Other changes
+
+-   `mgcv` was used but not declared in Suggests: Thanks to BDR for reporting.
+-   (internal) Extend `prohibit_vector_recycling` to return the maximum permissible length of a list of vectors.
+
 1.5.2.5
-=======
+-------
 
 ### 2017-11-16
 
@@ -32,22 +56,22 @@ NEWS
 -   Fix wage data
 
 1.5.2.3
-=======
+-------
 
 ### 2017-10-21
 
 -   Update labour-force data
 
-grattan 1.5.2.0
-===============
+1.5.2.0
+-------
 
 ### 2017-10-19
 
 -   New internal C++ functions for `income_tax`, and related functions
 -   BTO function now uses tax scales from the *Income Tax Regulations*
 
-grattan 1.5.1.2
-===============
+1.5.1.2
+-------
 
 ### 2017-10-15
 
@@ -74,12 +98,13 @@ CRAN Notes
 Test environments
 -----------------
 
--   local Windows install, MRAN 3.4.2
+-   local Windows install, CRAN 3.4.3
 -   ubuntu 12.04 (on travis-ci), R devel and release <https://travis-ci.org/HughParsonage/grattan>
--   win-builder (devel) <https://win-builder.r-project.org/Mer51d990tOv/00check.log>
+-   win-builder (devel)
 
 -   This is a package update to:
--   fix vignettes to comply with CRAN policy
+-   fix package dependencies to comply with CRAN policy
+-   omit ephemeral winbuilder link
 -   reflect recent data
 
 R CMD check results
@@ -87,7 +112,15 @@ R CMD check results
 
 0 errors | 0 warnings | 2 notes
 
--   The first NOTE is with respect to the 'taxstats' package not being a mainstream repository; its inclusion satisfies the CRAN repository policy, as in previous versions.
+-   The first NOTE is regarding CRAN incoming feasibility.
+
+> Possibly mis-spelled words in DESCRIPTION: indices (17:77)
+
+The spelling is correct.
+
+The other notes are unchanged from the previous release.
+
+-   With respect to the 'taxstats' package not being a mainstream repository, its inclusion satisfies the CRAN repository policy, as in previous versions.
 
 The NOTE also recommends including the URL <https://hughparsonage.github.io/drat/> in angle brackets; however, this NOTE is spurious as the URL is within R code.
 
@@ -95,4 +128,4 @@ The NOTE also recommends including the URL <https://hughparsonage.github.io/drat
 
 In addition:
 
--   There are two 'Additional issues' in which undefined behaviour is detected via `clang-UBSAN` and `gcc-UBSAN`. These issues arise due to an issue with `RcppParallel`. The maintainers of `RcppParallel` appears to fixed these issues in a development version (downstream of <https://github.com/RcppCore/RcppParallel/pull/48>); however this version is yet to reach CRAN. Accordingly, there are no changes in my package addressing these issues.
+-   There are two 'Additional issues' in which undefined behaviour is detected via `clang-UBSAN` and `gcc-UBSAN`. These issues arise due to an issue with `RcppParallel`. The maintainers of `RcppParallel` appears to fixed these issues in a development version however this version is yet to reach CRAN. Accordingly, there are no changes in my package addressing these issues.

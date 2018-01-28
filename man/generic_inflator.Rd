@@ -25,4 +25,5 @@ A data table of two columns: \code{variable} containing \code{vars} and \code{in
 }
 \description{
 Used to inflate variables in the sample file when there is no clear existing index.
+Note this is an unexported function: it is not available to the end-user.
 }

@@ -10,7 +10,9 @@
 Grattan package
 }
 \details{
-Colours, charts, and other common quantitative tasks for Australia tax analysts
+Tax modelling and other common tasks for Australian policy analysts, 
+in support of the Grattan Institute, Melbourne. 
+<https://grattan.edu.au>
 }
 \seealso{
 Useful links:
@@ -22,5 +24,7 @@ Useful links:
 }
 \author{
 \email{hugh.parsonage+grattanpackage@grattan.edu.au}
+
+\email{hugh.parsonage@gmail.com}
 }
 \keyword{package}

@@ -47,9 +47,10 @@ double MedicareLevySingle(double income, double lowerThreshold, double upperThre
 //' @title Medicare levy in C++
 //' @description Medicare levy. Experimental function in C++, equivalent to \code{\link{medicare_levy}}.
 //' @name MedicareLevy
-//' @param income,SpouseIncome,SaptoEligible,isFamily,nDependants,lowerThreshold,upperThreshold,lowerFamilyThreshold,upperFamilyThreshold,lowerUpForEachChild As in \code{medicare_levy}.
+//' @param income,SpouseIncome,isFamily,NDependants,lowerThreshold,upperThreshold,lowerFamilyThreshold,upperFamilyThreshold,lowerUpForEachChild As in \code{medicare_levy}.
 //' @param rate,taper The parameters for the specific year or hypothetical requested.
-//' @export MedicareLevy 
+//' @export MedicareLevy
+//' @details For \code{yr > 2018}, the 2017-18 values are used.
 
 // MedicareLevy201314NoSapto MedicareLevy201314Sapto MedicareLevy201213NoSapto MedicareLevy201213Sapto MedicareLevy201415NoSapto MedicareLevy201415Sapto MedicareLevy201516NoSapto MedicareLevy201516Sapto MedicareLevy201617NoSapto MedicareLevy201617Sapto MedicareLevy201718NoSapto MedicareLevy201718Sapto
 
@@ -90,7 +91,8 @@ NumericVector MedicareLevySaptoYear(NumericVector income,
         out[i] = MedicareLevySingle(ii, 34244, 42806, 0.020, 0.1, sii, ifi, ndi, 47670, 59589, 3306);
         break;
       default:
-        stop("SAPTO not defined for yr provided.");
+        out[i] = MedicareLevySingle(ii, 34244, 42806, 0.020, 0.1, sii, ifi, ndi, 47670, 59589, 3306);
+        break;
       }
     }
   } else {
@@ -119,7 +121,8 @@ NumericVector MedicareLevySaptoYear(NumericVector income,
         out[i] = MedicareLevySingle(ii, 21655, 27070, 0.020, 0.1, sii, ifi, ndi, 36541, 44077, 3356);
         break;
       default:
-        stop("SAPTO not defined for yr provided.");
+        out[i] = MedicareLevySingle(ii, 21655, 27070, 0.020, 0.1, sii, ifi, ndi, 36541, 44077, 3356);
+        break;
       }
     }
   }
@@ -127,19 +130,53 @@ NumericVector MedicareLevySaptoYear(NumericVector income,
 }
 
 // [[Rcpp::export]]
-NumericVector MedicareLevy(NumericVector income, double lowerThreshold, double upperThreshold, NumericVector SpouseIncome, LogicalVector isFamily, IntegerVector NDependants, double lowerFamilyThreshold, double upperFamilyThreshold, double lowerUpForEachChild, double rate = 0.02, double taper = 0.1) {
+NumericVector MedicareLevy(NumericVector income,
+                           NumericVector lowerThreshold,
+                           NumericVector upperThreshold,
+                           NumericVector SpouseIncome,
+                           LogicalVector isFamily,
+                           IntegerVector NDependants,
+                           NumericVector lowerFamilyThreshold,
+                           NumericVector upperFamilyThreshold,
+                           NumericVector lowerUpForEachChild,
+                           NumericVector rate,
+                           NumericVector taper) {
   int n = income.length();
+  
   NumericVector out(n);
   for (int i = 0; i < n; ++i) {
     double incomei = income[i];
+    double lowerThresholdi = lowerThreshold[i];
+    double upperThresholdi = upperThreshold[i];
+    double ratei = rate[i];
+    double taperi = taper[i];
     double SpouseIncomei = SpouseIncome[i];
     bool FamilyEligiblei = isFamily[i];
-    int nDependants = NDependants[i];
-    out[i] = MedicareLevySingle(incomei, lowerThreshold, upperThreshold, rate, taper, SpouseIncomei, FamilyEligiblei, nDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild);
+    int nDependantsi = NDependants[i];
+    double lowerFamilyThresholdi = lowerFamilyThreshold[i];
+    double upperFamilyThresholdi = upperFamilyThreshold[i];
+    double lowerUpForEachChildi = lowerUpForEachChild[i];
+    
+    out[i] = MedicareLevySingle(incomei, lowerThresholdi, upperThresholdi, ratei, taperi, SpouseIncomei, FamilyEligiblei, nDependantsi, lowerFamilyThresholdi, upperFamilyThresholdi, lowerUpForEachChildi);
   }
   return out;
 }
 
+
+// NumericVector MedicareLevy2(NumericVector income, double lowerThreshold, double upperThreshold, double rate, double taper, NumericVector SpouseIncome, LogicalVector isFamily, IntegerVector nDependants, double lowerFamilyThreshold = 46000, double upperFamilyThreshold = 54119, double lowerUpForEachChild = 3306) {
+//   int n = income.size();
+//   NumericVector out(n);
+//   
+//   for (int i = 0; i < n; ++i) {
+//     double ii = income[i];
+//     double sii = SpouseIncome[i];
+//     bool ifi = isFamily[i];
+//     int ndi = nDependants[i];
+//     out[i] = MedicareLevySingle(ii, lowerThreshold, upperThreshold, rate, taper, sii, ifi, ndi, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild);
+//   }
+//   
+//   return out;
+// }
 
 
 

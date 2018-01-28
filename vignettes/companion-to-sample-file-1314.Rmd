@@ -2,9 +2,10 @@
 title: "Companion to 2013-14 sample file"
 author: "Hugh Parsonage"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 	
+  rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{companion-to-sample-file-1314}
+  %\VignetteIndexEntry{Companion to 2013-14 sample file}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,7 +16,9 @@ This vignette is a mirror of a small book prepared internally by Grattan Institu
 ```{r knitrOpts}
 options("scipen" = 99)
 library(knitr)
-opts_chunk$set(fig.width = 9, fig.height = 6.5)
+opts_chunk$set(fig.width = 9,
+               fig.height = 6.5,
+               warn = FALSE)
 ```
 
 ```{r}
@@ -387,12 +390,12 @@ sample_file %>%
   select(Tot_CY_CG_amt, Net_CG_amt, WEIGHT) %>%
   filter(Tot_CY_CG_amt > 0) %>%
   mutate(apparent_discount = Net_CG_amt / Tot_CY_CG_amt) %>%
-  mutate(apparent_discount_round = round(apparent_discount * cgt_ratio_res, 0) / cgt_ratio_res) %>%
+  mutate(apparent_discount_round = round(apparent_discount * cgt_ratio_res) / cgt_ratio_res) %>%
   group_by(apparent_discount_round) %>%
   summarise(n_taxpayers = sum(WEIGHT), 
-            n_taxpayers_by_val = sum(WEIGHT * Tot_CY_CG_amt)) %>%
-  rename(`Ratio of Net capital gains to Total capital gains` = apparent_discount_round) %>%
-  ggplot(aes(x = `Ratio of Net capital gains to Total capital gains`, y = n_taxpayers_by_val)) + 
+            n_taxpayers_by_val = sum(as.double(WEIGHT * Tot_CY_CG_amt))) %>%
+  ggplot(aes(x = apparent_discount_round, y = n_taxpayers_by_val)) +
+  xlab("Ratio of Net capital gains to Total capital gains") +
   geom_bar(stat = "identity", width = 1/cgt_ratio_res) + 
   theme(axis.title.y = element_blank(),
         axis.ticks.y = element_blank(),
@@ -405,7 +408,9 @@ The average marginal tax rate of those with capital gains tax was `r latex_perce
 
 The net capital gains includes the CGT discount (and other discounts) applied to:
 $$\text{Total capital gains} - \text{Total capital losses (incl. from prev. years)}$$
-Comparing the ratio \textit{Total capital gains} of \textit{Net capital gains} can shed some light on the value of the discount and the impact of capital losses on tax and tax revenue. Of those with nonzero total capital gains, `r latex_percent(prop_no_CGT_discount)` had no discount and `r latex_percent(prop_100pc_CGT_discount)` paid no tax (or a 100\%\ discount). Some `r latex_percent(prop_50pc_CGT_discount)` had net capital gains of around 50\%\ of their total gains. Weighting these numbers by the value of total capital gains, \Sexpr{latex_percent(prop_no_CGT_discount_by_val)} of capital gains are taxed at the full marginal rate. \Vref{fig:CGT-discount-distribution} shows the distribution of this ratio. The deviance from 50\%\ is due to some gains being realized within 12 months and  (more commonly) capital losses.
+Comparing the ratio \textit{Total capital gains} of \textit{Net capital gains} can shed some light on the value of the discount and the impact of capital losses on tax and tax revenue. Of those with nonzero total capital gains, `r latex_percent(prop_no_CGT_discount)` had no discount and `r latex_percent(prop_100pc_CGT_discount)` paid no tax (or a 100\%\ discount). Some `r latex_percent(prop_50pc_CGT_discount)` had net capital gains of around 50\%\ of their total gains. Weighting these numbers by the value of total capital gains,
+`r latex_percent(prop_no_CGT_discount_by_val)` of capital gains are taxed at the full marginal rate.
+\Vref{fig:CGT-discount-distribution} shows the distribution of this ratio. The deviance from 50\%\ is due to some gains being realized within 12 months and  (more commonly) capital losses.
 
 ```{r CG-by-tax-bracket}
 CG_descriptive_by_bracket <- 
@@ -415,8 +420,8 @@ sample_file %>%
   group_by(Tax_Bracket) %>%
   summarise(n_taxpayers = sum(WEIGHT),
             n_CG = sum(WEIGHT[Net_CG_amt > 0]),
-            val_CG = sum(Tot_CY_CG_amt * WEIGHT), 
-            total_CGT = sum((tax - tax_wo_CG) * WEIGHT)) %>%
+            val_CG = sum(as.double(Tot_CY_CG_amt * WEIGHT)), 
+            total_CGT = sum(as.double((tax - tax_wo_CG) * WEIGHT))) %>%
   ungroup %>%
   arrange(Tax_Bracket) 
 ```

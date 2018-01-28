@@ -4,3 +4,7 @@
 ^\.travis\.yml$
 ^.*README\.Rmd$
 ^cran-comments\.md$
+^Roadmap\.Rnw$
+^Roadmap\.pdf$
+^grattan\.pdf$
+^appveyor\.yml$

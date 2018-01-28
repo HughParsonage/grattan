@@ -15,6 +15,7 @@
 #' the variable \code{fy_year} must be a vector of all financial years after the last financial year in the (known) wage series and the latest \code{to_fy} \strong{inclusive}.
 #' The variable \code{r} consists of rates of wage growth assumed in each \code{fy_year}.
 #' 
+#' @examples
 #' # Wage inflation
 #' wage_inflator(from_fy = "2013-14", to_fy = "2014-15")
 #' 

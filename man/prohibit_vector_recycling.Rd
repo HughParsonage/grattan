@@ -13,7 +13,10 @@ prohibit_vector_recycling(...)
 \item{...}{A list of vectors}
 }
 \value{
-An error message if the vectors are of different length (unless the alternative length is 1).
+An error message if the vectors are of different length (unless the alternative length is 1). 
+The functions differ in their return values on success: \code{prohibit_vector_recycling.MAXLENGTH} 
+returns the maximum of the lengths whereas \code{prohibit_vector_recyling} returns \code{NULL}. 
+(Both functions return their values invisibly.)
 }
 \description{
 Tests (harshly) whether the vectors can be recycled safely.

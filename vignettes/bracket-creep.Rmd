@@ -1,10 +1,19 @@
 ---
 title: "Bracket creep"
-author: "Danielle Wood and Hugh Parsonage"
+author:
+  - name: "Danielle Wood"
+    affiliation: Grattan Institute
+  - name: "Hugh Parsonage"
+    affiliation: Grattan Institute
+    
+lead_author_surname: Wood and Parsonage
+
+abstract: Using the package to create projections on bracket creep.
+
 date: "`r Sys.Date()`"
 output: rmarkdown::html_document
 vignette: >
-  %\VignetteIndexEntry{bracket-creep}
+  %\VignetteIndexEntry{Bracket creep}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -222,6 +231,8 @@ tax_delta <- function(bracket_number, rate_increase = -0.01) {
   new_rates <- orig_rates
   new_rates[bracket_number] <- new_rates[bracket_number] + rate_increase
     
+  # rebate_income is an internal function
+  .ri <- grattan:::rebate_income
   
   new_tax <- 
     sample_file_2021 %>%
@@ -234,11 +245,11 @@ tax_delta <- function(bracket_number, rate_increase = -0.01) {
                                        sapto.eligible = (age_range <= 1),
                                        family_status = if_else(Spouse_adjusted_taxable_inc > 0, "family", "individual"))] %>%
     .[, lito. := lito(Taxable_Income, max_lito = 445, lito_taper = 0.015, min_bracket = 37000)] %>%
-    .[, rebate_income := grattan:::rebate_income(Taxable_Income,
-                                                 Rptbl_Empr_spr_cont_amt = Rptbl_Empr_spr_cont_amt,
-                                                 Net_fincl_invstmt_lss_amt = Net_fincl_invstmt_lss_amt,
-                                                 Net_rent_amt = Net_rent_amt,
-                                                 Rep_frng_ben_amt = Rep_frng_ben_amt)] %>%
+    .[, rebate_income := .ri(Taxable_Income,
+                             Rptbl_Empr_spr_cont_amt = Rptbl_Empr_spr_cont_amt,
+                             Net_fincl_invstmt_lss_amt = Net_fincl_invstmt_lss_amt,
+                             Net_rent_amt = Net_rent_amt,
+                             Rep_frng_ben_amt = Rep_frng_ben_amt)] %>%
     .[, sapto. := sapto(rebate_income, fy.year = "2019-20", sapto.eligible = (age_range <= 1))] %>%
     .[, tax_payable := pmaxC(base_tax. - lito. - sapto., 0) + medicare_levy.] %>%
     .[, .(tax = sum(tax_payable), 

@@ -22,7 +22,7 @@ bto <- function(benefit_amount,
   if (is.null(fy.year) || all(fy.year > "2005-06")) {
     pmaxC(ceiling(rate1 * (benefit_amount - benefit_threshold) + rate2 * pmaxC(benefit_amount - tax_threshold, 0)), 0)
   } else {
-    fys_with_bto <- unique(bto_tbl[["fy_year"]])
+    fys_with_bto <- .subset2(bto_tbl, "fy_year")
     if (any(fy.year %notin% fys_with_bto)) {
       stop("fy.year must be in the range ", min(fys_with_bto), " to ", max(fys_with_bto))
     }
@@ -32,22 +32,22 @@ bto <- function(benefit_amount,
     
     input <- 
       data.table(benefit_amount = floor(benefit_amount), 
-                 fy_year = fy.year) %>%
-      .[, order := 1:.N] %>%
-      setkeyv("fy_year")
-    
-    
+                 fy_year = fy.year)
     
     # names(bto_tbl) for CRAN Note avoidance
-    fy_year <- lowest_marginal_rate <- tax_free_threshold <- next_threshold <- coefficient_abv_next_threshold <- NULL
+    lowest_marginal_rate <-
+      tax_free_threshold <-
+      next_threshold <-
+      coefficient_abv_next_threshold <- NULL
     
     output <- 
-      merge(input, bto_tbl) %>%
-      .[,bto := lowest_marginal_rate * (benefit_amount - tax_free_threshold) + coefficient_abv_next_threshold * pmaxC(benefit_amount - next_threshold, 0)] %>%
-      setorderv("order")
+      bto_tbl[input,
+              j = .(out = lowest_marginal_rate * (benefit_amount - tax_free_threshold) + 
+                      coefficient_abv_next_threshold * pmaxC(benefit_amount - next_threshold, 0)),
+              on = "fy_year"]
     
     # If the Tax Offset amount calculated using the above formulae is not a whole dollar amount, it is rounded 
     # up to the nearest whole dollar.
-    pmaxC(ceiling(output[["bto"]]), 0)
+    pmaxC(ceiling(.subset2(output, "out")), 0)
   }
 }

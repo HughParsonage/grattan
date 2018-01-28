@@ -10,5 +10,8 @@ test_that("BTO returns known results", {
   
   expect_equal(bto(10e3, rate1 = 0.1, benefit_threshold = 9e3), 
                100)
+  
+  bto_199697 <- bto(6008, "2005-06")
+  expect_equal(bto_199697, 2)
 })
 

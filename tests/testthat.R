@@ -2,7 +2,7 @@
 all.pkgs <- c("testthat", "dplyr", "dtplyr", "data.table", "magrittr", "survey", "zoo")
 
 
-if (all(vapply(all.pkgs, requireNamespace, logical(1), quietly = TRUE))){
+if (all(vapply(all.pkgs, requireNamespace, logical(1), quietly = TRUE))) {
   
   library(testthat)
   library(grattan)
@@ -17,6 +17,7 @@ if (all(vapply(all.pkgs, requireNamespace, logical(1), quietly = TRUE))){
   library(magrittr)
   library(survey)
   library(zoo)
+  library(hutils)
   
   test_check("grattan")
 }

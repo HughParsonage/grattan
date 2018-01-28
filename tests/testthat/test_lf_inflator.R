@@ -66,6 +66,8 @@ test_that("Custom lf series", {
 
 test_that("ABS connection", {
   skip_if_not(packageVersion("rsdmx") >= package_version("0.5.10"))
+  skip_on_cran()
+  skip_if_not(Sys.Date() > "2018-01-01")
   internal_ans <- lf_inflator_fy(from_fy = "2012-13", to_fy = "2013-14")
   external_ans <- lf_inflator_fy(from_fy = "2012-13", to_fy = "2013-14",
                                  useABSConnection = TRUE)
