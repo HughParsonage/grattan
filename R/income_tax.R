@@ -53,8 +53,7 @@ income_tax <- function(income,
     }
   }
   
-  # Absolutely necessary
-  .dots.ATO <- copy(.dots.ATO)
+ 
   
   if (is.null(age) &&
       length(fy.year) == 1L &&
@@ -68,12 +67,15 @@ income_tax <- function(income,
                           n_dependants = n_dependants,
                           .debug = .debug)
   } else {
+    # Absolutely necessary
+    .dots.ATO.copy <- copy(.dots.ATO)
+    
     out <- rolling_income_tax(income = income,
                               fy.year = fy.year,
                               age = age, 
                               family_status = family_status,
                               n_dependants = n_dependants, 
-                              .dots.ATO = .dots.ATO,
+                              .dots.ATO = .dots.ATO.copy,
                               allow.forecasts = allow.forecasts, 
                               .debug = .debug)
   }
@@ -196,7 +198,7 @@ rolling_income_tax <- function(income,
     the_spouse_income <- 0L
   } else {
     the_spouse_income <- .subset2(.dots.ATO, "Spouse_adjusted_taxable_inc")
-    the_spouse_income[is.na(the_spouse_income)] <- 0L
+    the_spouse_income[is.na(the_spouse_income)] <- if (is.double(the_spouse_income)) 0 else 0L
   }
   
   medicare_levy. <- 
