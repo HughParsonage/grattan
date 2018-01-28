@@ -17,7 +17,7 @@ cache:
 
 build_script:
   - travis-tool.sh install_deps
-  - Rscript -e install.packages("taxstats", repos = "https://hughparsonage.github.io/drat", type = "source")
+  - Rscript -e "\"install.packages('taxstats', repos = 'https://hughparsonage.github.io/drat', type = 'source')\""
 
 test_script:
   - travis-tool.sh run_tests
