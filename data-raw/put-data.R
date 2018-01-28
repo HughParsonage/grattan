@@ -367,11 +367,14 @@ cg_inflators_1415 <- if (!renew) fread("./data-raw/cg_inflators_1415.tsv") else 
       .[, .(fy.year,
             zero_discount_Net_CG_total = revenue_foregone * 10^6 / mean(mean_wmrL, na.rm = TRUE))]
     
-    individuals_table1_201415 <- 
+    
       if (!exists("individuals_table1_201415")) {
-        if (file.exists("~/taxstats/data-raw/2014-15/individuals_table1_201415.tsv")) {
-          fread("~/taxstats/data-raw/2014-15/individuals_table1_201415.tsv")
-        }
+        individuals_table1_201415 <- 
+          if (file.exists("~/taxstats/data-raw/2014-15/individuals_table1_201415.tsv")) {
+            fread("~/taxstats/data-raw/2014-15/individuals_table1_201415.tsv")
+          } else {
+            stop("individuals_table1_201415 does not exist.")
+          }
       }
     
     n_cg_history <- 

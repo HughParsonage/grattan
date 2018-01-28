@@ -17,6 +17,7 @@ cache:
 
 build_script:
   - travis-tool.sh install_deps
+  - cmd: Rscript -e "requireNamespace('taxstats', quietly = TRUE) || install.packages('taxstats', repos = 'https://hughparsonage.github.io/drat', type = 'source')"
 
 test_script:
   - travis-tool.sh run_tests
