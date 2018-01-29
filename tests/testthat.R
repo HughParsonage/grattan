@@ -18,6 +18,8 @@ if (all(vapply(all.pkgs, requireNamespace, logical(1), quietly = TRUE))) {
   library(survey)
   library(zoo)
   library(hutils)
+  library(RcppParallel)
+  setThreadOptions(numThreads = 2)
   
   test_check("grattan")
 }
