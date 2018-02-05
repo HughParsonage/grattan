@@ -19,6 +19,7 @@ after_success:
   - Rscript -e 'remove.packages("taxstats")'
   - Rscript -e 'install.packages(c("devtools", "roxygen2"))'
   - Rscript -e 'devtools::test()'
+  - Rscript -e 'install.packages("taxstats", repos = "https://hughparsonage.github.io/drat/", type = "source")'
   - Rscript -e 'install.packages("microbenchmark")'
   - Rscript -e 'download.file(url = "https://raw.githubusercontent.com/HughParsonage/TeXCheckR/master/tests/testthat/lint_bib_in.bib", destfile = "bib");microbenchmark::microbenchmark(readLines("bib"))'
   - Rscript -e 'bib <- readLines("bib", encoding = "UTF-8", n = 10);bib8910 <- bib[8:10];gsub("(\\w+)", "\\U\\1", bib8910, perl = TRUE)'
