@@ -17,7 +17,7 @@ after_success:
   - Rscript -e 'formalCoverage::formalPackageCoverage()'
   - Rscript -e 'library(taxstats);library(data.table);print(sample_file_1415_synth)'
   - Rscript -e 'remove.packages("taxstats")'
-  - Rscript -e 'install.packages(c("devtools", "roxygen2")'
+  - Rscript -e 'install.packages(c("devtools", "roxygen2"))'
   - Rscript -e 'devtools::test()'
   - Rscript -e 'install.packages("microbenchmark")'
   - Rscript -e 'download.file(url = "https://raw.githubusercontent.com/HughParsonage/TeXCheckR/master/tests/testthat/lint_bib_in.bib", destfile = "bib");microbenchmark::microbenchmark(readLines("bib"))'
