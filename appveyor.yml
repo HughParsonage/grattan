@@ -12,9 +12,11 @@ install:
 
 cache:
   - C:\RLibrary
-  
-before_install:
-  - export _R_CHECK_CRAN_INCOMING_=true
+
+environment:
+  global:
+    _R_CHECK_CRAN_INCOMING_: 1
+
 
 # Adapt as necessary starting from here
 
