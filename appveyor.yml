@@ -14,7 +14,7 @@ cache:
   - C:\RLibrary
   
 before_install:
-  export _R_CHECK_CRAN_INCOMING_=true
+  - export _R_CHECK_CRAN_INCOMING_=true
 
 # Adapt as necessary starting from here
 
