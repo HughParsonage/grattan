@@ -48,7 +48,7 @@ Suggests:
     scales,
     survey,
     testthat, 
-    taxstats (>= 0.0.5),
+    taxstats,
     viridis,
     yaml
 Additional_repositories: https://hughparsonage.github.io/drat/
