@@ -6,9 +6,8 @@ r:
 cache: packages
 warnings_are_errors: true
 
-env:
-  global:
-    - _R_CHECK_CRAN_INCOMING_=TRUE
+before_install:
+  export _R_CHECK_CRAN_INCOMING_=true
 
 r_packages: 
 - hutils
