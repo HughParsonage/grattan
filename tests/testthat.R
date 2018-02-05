@@ -10,7 +10,8 @@ if (all(vapply(all.pkgs, requireNamespace, logical(1), quietly = TRUE))) {
   library(dtplyr)
   
   library(data.table)
-  if (requireNamespace("taxstats", quietly = TRUE)){
+  if (requireNamespace("taxstats", quietly = TRUE) &&
+      packageVersion("taxstats") >= package_version("0.0.5")) {
     library(taxstats)
   }
   

@@ -32,7 +32,8 @@ library(ggplot2)
 library(hutils)
 library(magrittr)
 library(data.table)
-if (requireNamespace("taxstats", quietly = TRUE)){
+if (requireNamespace("taxstats", quietly = TRUE) &&
+    packageVersion("taxstats") >= package_version("0.0.5")) {
   library(taxstats)
 } else {
   templib <- tempfile()

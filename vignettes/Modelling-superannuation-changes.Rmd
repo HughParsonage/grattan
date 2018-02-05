@@ -44,7 +44,8 @@ To obtain these results (say for 2017-18)
 ```{r}
 library(grattan)
 library(data.table)
-if (requireNamespace("taxstats", quietly = TRUE)){
+if (requireNamespace("taxstats", quietly = TRUE) && 
+    packageVersion("taxstats") && package_version("0.0.5")) {
   library(taxstats)
   sample_files_all <- get_sample_files_all()
 } else {

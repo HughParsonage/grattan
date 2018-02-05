@@ -16,6 +16,8 @@ r_github_packages:
 after_success:
   - Rscript -e 'formalCoverage::formalPackageCoverage()'
   - Rscript -e 'library(taxstats);library(data.table);print(sample_file_1415_synth)'
+  - Rscript -e 'remove.packages("taxstats")'
+  - Rscript -e 'devtools::test()'
   - Rscript -e 'install.packages("microbenchmark")'
   - Rscript -e 'download.file(url = "https://raw.githubusercontent.com/HughParsonage/TeXCheckR/master/tests/testthat/lint_bib_in.bib", destfile = "bib");microbenchmark::microbenchmark(readLines("bib"))'
   - Rscript -e 'bib <- readLines("bib", encoding = "UTF-8", n = 10);bib8910 <- bib[8:10];gsub("(\\w+)", "\\U\\1", bib8910, perl = TRUE)'
