@@ -1,10 +1,14 @@
 language: r
 r:
 - oldrel
-- devel
 - release
+- devel
 cache: packages
 warnings_are_errors: true
+
+env:
+  global:
+    - _R_CHECK_CRAN_INCOMING_=TRUE
 
 r_packages: 
 - hutils
