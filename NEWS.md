@@ -1,7 +1,7 @@
 ## 1.5.3.2
 ### 2018-02-01
+* Labour force data
 * CRAN update to fix failure update of suggested packages.
-
 
 ## 1.5.3.1
 ### 2018-01-22
