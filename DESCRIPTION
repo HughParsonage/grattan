@@ -42,6 +42,7 @@ Suggests:
     dtplyr,
     ggplot2,
     ggrepel,
+    lattice,
     mgcv,
     knitr,
     rmarkdown,
