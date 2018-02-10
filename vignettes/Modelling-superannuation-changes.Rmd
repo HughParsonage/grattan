@@ -45,6 +45,8 @@ To obtain these results (say for 2017-18)
 library(grattan)
 library(hutils)
 library(data.table)
+```
+```{r loadTaxstats}
 if (requireNamespace("taxstats", quietly = TRUE) &&
     packageVersion("taxstats") >= package_version("0.0.5") &&
     !identical(Sys.getenv("NOT_CRAN"), "true")) {
@@ -58,6 +60,10 @@ if (requireNamespace("taxstats", quietly = TRUE) &&
                    type = "source")
   library("taxstats", lib.loc = templib)
 }
+
+```
+  
+```{r remaining-packages}
 library(magrittr)
 
 sample_files_all <-
