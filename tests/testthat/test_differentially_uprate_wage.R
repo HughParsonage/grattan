@@ -13,6 +13,7 @@ test_that("Differential uprate factor preserves order", {
 })
 
 test_that("Wage growth is higher for extreme salaries", {
+  skip_on_cran()
   skip_if_not_installed("taxstats") 
   extreme_tile <- sample(c(1:20, 80:100), size = 1)
   
@@ -81,6 +82,7 @@ test_that("Differentially uprated wage growth is *up*", {
 
 test_that("Less than 0.1% of individuals move more than one percentile over 10 years", {
   skip_if_not_installed("taxstats") 
+  skip_on_cran()
   prop_move <- 
     sample_file_1314 %>%
     select(Sw_amt) %>%
@@ -94,6 +96,7 @@ test_that("Less than 0.1% of individuals move more than one percentile over 10 y
 
 test_that("differential wage inflator is mean-preserving", {
   skip_if_not_installed("taxstats") 
+  skip_on_cran()
   salaries_1314 <- sample_file_1314$Sw_amt
 
   salaries_1314_vanilla <- wage_inflator(salaries_1314, from_fy = "2013-14", to_fy = "2015-16")
