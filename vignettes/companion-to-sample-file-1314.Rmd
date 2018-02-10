@@ -33,10 +33,10 @@ wsum <- function(x, w = 1){
 
 ```{r loadPackages}
 library(data.table)
+library(magrittr)
 if (requireNamespace("taxstats", quietly = TRUE) &&
     packageVersion("taxstats") >= package_version("0.0.5")) {
   library(taxstats)
-  sample_files_all <- get_sample_files_all()
 } else {
   templib <- tempfile()
   hutils::provide.dir(templib)
@@ -45,8 +45,20 @@ if (requireNamespace("taxstats", quietly = TRUE) &&
                    repos = "https://hughparsonage.github.io/drat/",
                    type = "source")
   library("taxstats", lib.loc = templib)
-  sample_files_all <- get_sample_files_all()
 }
+sample_files_all <-
+    rbindlist(lapply(list(`2003-04` = sample_file_0304, 
+                          `2004-05` = sample_file_0405, `2005-06` = sample_file_0506, 
+                          `2006-07` = sample_file_0607, `2007-08` = sample_file_0708, 
+                          `2008-09` = sample_file_0809, `2009-10` = sample_file_0910, 
+                          `2010-11` = sample_file_1011, `2011-12` = sample_file_1112, 
+                          `2012-13` = sample_file_1213, `2013-14` = sample_file_1314), 
+                     data.table::as.data.table),
+              use.names = TRUE,
+              fill = TRUE, 
+              idcol = "fy.year")
+sample_files_all[, WEIGHT := hutils::if_else(fy.year > '2010-11', 50L, 100L)]
+
 library(grattan)
 library(dtplyr)
 library(dplyr)
@@ -55,10 +67,6 @@ library(scales)
 library(magrittr)
 library(ggrepel)
 library(viridis)
-
-if (!exists("sample_files_all")){
-  stop("....")
-}
 
 ```
 
@@ -87,11 +95,11 @@ sample_file_prev <- merge(sample_file_prev, age_range_decoder, by = "age_range")
 set.seed(48031)
 sample_file %<>%
   group_by(age_range_description) %>%
-  mutate(min_age = ifelse(grepl("to", age_range_description), 
-                          as.numeric(gsub("^([0-9]{2}).*$", "\\1", age_range_description)), 
-                          ifelse(grepl("70", age_range_description),
-                                 70, 
-                                 15)),
+  mutate(min_age = if_else(grepl("to", age_range_description), 
+                           as.numeric(gsub("^([0-9]{2}).*$", "\\1", age_range_description)), 
+                           if_else(grepl("70", age_range_description),
+                                   70, 
+                                   15)),
          max_age = min_age + 5, 
          age_imp = runif(n(), min_age, max_age)) %>%
   select(-min_age, -max_age)
