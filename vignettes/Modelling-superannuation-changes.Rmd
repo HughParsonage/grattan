@@ -45,11 +45,12 @@ To obtain these results (say for 2017-18)
 library(grattan)
 library(hutils)
 library(data.table)
-if (requireNamespace("taxstats", quietly = TRUE) && 
-    packageVersion("taxstats") >= package_version("0.0.5")) {
+if (requireNamespace("taxstats", quietly = TRUE) &&
+    packageVersion("taxstats") >= package_version("0.0.5") &&
+    !identical(Sys.getenv("NOT_CRAN"), "true")) {
   library(taxstats)
 } else {
-  templib <- tempfile()
+  templib <- file.path(tempdir(), "model")
   hutils::provide.dir(templib)
   install.packages("taxstats",
                    lib = templib,

@@ -33,32 +33,35 @@ library(hutils)
 library(magrittr)
 library(data.table)
 if (requireNamespace("taxstats", quietly = TRUE) &&
-    packageVersion("taxstats") >= package_version("0.0.5")) {
+    packageVersion("taxstats") >= package_version("0.0.5") &&
+    !identical(Sys.getenv("NOT_CRAN"), "true")) {
   library(taxstats)
 } else {
-  templib <- tempfile()
+  templib <- file.path(tempdir(), "bracket")
   hutils::provide.dir(templib)
-  tryCatch({
-    install.packages("taxstats",
-                     quiet = TRUE,
-                     lib = templib,
-                     repos = "https://hughparsonage.github.io/drat/",
-                     type = "source")
-    library("taxstats", lib.loc = templib)
-  }, 
-  error = function(e) {
-    print(sessionInfo())
-    cat(Sys.time(), "\n")
-    e
-  })
+  install.packages("taxstats",
+                   quiet = TRUE,
+                   lib = templib,
+                   repos = "https://hughparsonage.github.io/drat2/",
+                   type = "source")
+  library("taxstats", lib.loc = templib)
 }
+
+
+
+
 sample_files_all <-
     rbindlist(lapply(list(`2003-04` = sample_file_0304, 
-                          `2004-05` = sample_file_0405, `2005-06` = sample_file_0506, 
-                          `2006-07` = sample_file_0607, `2007-08` = sample_file_0708, 
-                          `2008-09` = sample_file_0809, `2009-10` = sample_file_0910, 
-                          `2010-11` = sample_file_1011, `2011-12` = sample_file_1112, 
-                          `2012-13` = sample_file_1213, `2013-14` = sample_file_1314), 
+                          `2004-05` = sample_file_0405,
+                          `2005-06` = sample_file_0506, 
+                          `2006-07` = sample_file_0607,
+                          `2007-08` = sample_file_0708, 
+                          `2008-09` = sample_file_0809,
+                          `2009-10` = sample_file_0910, 
+                          `2010-11` = sample_file_1011,
+                          `2011-12` = sample_file_1112, 
+                          `2012-13` = sample_file_1213,
+                          `2013-14` = sample_file_1314), 
                      data.table::as.data.table),
               use.names = TRUE,
               fill = TRUE, 

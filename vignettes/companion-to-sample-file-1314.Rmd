@@ -35,10 +35,11 @@ wsum <- function(x, w = 1){
 library(data.table)
 library(magrittr)
 if (requireNamespace("taxstats", quietly = TRUE) &&
-    packageVersion("taxstats") >= package_version("0.0.5")) {
+    packageVersion("taxstats") >= package_version("0.0.5") &&
+    !identical(Sys.getenv("NOT_CRAN"), "true")) {
   library(taxstats)
 } else {
-  templib <- tempfile()
+  templib <- file.path(tempdir(), "companion")
   hutils::provide.dir(templib)
   install.packages("taxstats",
                    lib = templib,
