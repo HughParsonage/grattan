@@ -40,9 +40,9 @@ if (requireNamespace("taxstats", quietly = TRUE) &&
   templib <- file.path(tempdir(), "bracket")
   hutils::provide.dir(templib)
   install.packages("taxstats",
-                   quiet = TRUE,
+                   quiet = FALSE,
                    lib = templib,
-                   repos = "https://hughparsonage.github.io/drat2/",
+                   repos = "https://hughparsonage.github.io/drat/",
                    type = "source")
   library("taxstats", lib.loc = templib)
 }
