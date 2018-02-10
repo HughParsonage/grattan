@@ -41,8 +41,7 @@ if (requireNamespace("taxstats", quietly = TRUE) &&
   install.packages("taxstats",
                    quiet = TRUE,
                    lib = templib,
-                   repos = "https://hughparsonage.github.io/drat/",
-                   type = "source")
+                   repos = "https://hughparsonage.github.io/drat/")
   library("taxstats", lib.loc = templib)
 }
 library(grattan)
