@@ -38,11 +38,18 @@ if (requireNamespace("taxstats", quietly = TRUE) &&
 } else {
   templib <- tempfile()
   hutils::provide.dir(templib)
-  install.packages("taxstats",
-                   quiet = TRUE,
-                   lib = templib,
-                   repos = "https://hughparsonage.github.io/drat/")
-  library("taxstats", lib.loc = templib)
+  tryCatch({
+    install.packages("taxstats",
+                     quiet = TRUE,
+                     lib = templib,
+                     repos = "https://hughparsonage.github.io/drat/")
+    library("taxstats", lib.loc = templib)
+  }, 
+  error = function(e) {
+    print(sessionInfo())
+    cat(Sys.time(), "\n")
+    e
+  })
 }
 library(grattan)
 ```
