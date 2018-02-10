@@ -17,6 +17,13 @@ environment:
   global:
     _R_CHECK_CRAN_INCOMING_: 1
 
+  matrix:
+  - R_VERSION: release
+    R_ARCH: x64
+    
+  - R_VERSION: devel
+    R_ARCH: x64
+
 
 # Adapt as necessary starting from here
 

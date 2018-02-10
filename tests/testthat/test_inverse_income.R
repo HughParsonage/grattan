@@ -1,6 +1,7 @@
 context("Test inverse income tax.")
 
 test_that("Inverse single income matches.", {
+  skip_on_cran()
   income <- sample(1:500e3, size = 1)
   fy.year <- sample(yr2fy(2004:2015), size = 1)
   
@@ -28,6 +29,7 @@ test_that("Inverse income on zero", {
 })
 
 test_that("Inverse long income matches.", {
+  skip_on_cran()
   income <- sample(1:500e3, size = 2)
   fy.year <- sample(yr2fy(2004:2015), size = 1)
   while (any(income_tax(income, fy.year = fy.year) < 1)){
@@ -42,6 +44,7 @@ test_that("Inverse long income matches.", {
 })
 
 test_that("Previously failed long income matches.", {
+  skip_on_cran()
   income <- c(377840, 925203) #sample(1:1e6, size = 2)
   fy.year <- "2014-15" #  sample(yr2fy(2004:2015), size = 1)
   expect_true(all(abs(inverse_income(income_tax(income, fy.year = fy.year), fy.year = fy.year, zero.tax.income = "maximum") - income) < 1/2), 
@@ -49,6 +52,7 @@ test_that("Previously failed long income matches.", {
 })
 
 test_that("Inverse income long on zero", {
+  skip_on_cran()
   expect_true(all(abs(inverse_income(c(0, 0), "2012-13", zero.tax.income = "maximum") - 20542) < 2))
   expect_true(all(inverse_income(c(0, 0), "2014-15", zero.tax.income = 5) %>% near(5)))
   expect_true(all(inverse_income(c(0, 0), "2014-15", zero.tax.income = "zero") %>% dplyr::near(0)))
