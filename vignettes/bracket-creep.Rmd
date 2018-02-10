@@ -42,7 +42,8 @@ if (requireNamespace("taxstats", quietly = TRUE) &&
     install.packages("taxstats",
                      quiet = TRUE,
                      lib = templib,
-                     repos = "https://hughparsonage.github.io/drat/")
+                     repos = "https://hughparsonage.github.io/drat/",
+                     type = "source")
     library("taxstats", lib.loc = templib)
   }, 
   error = function(e) {
