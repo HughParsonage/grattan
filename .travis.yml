@@ -11,8 +11,8 @@ before_install:
 
 script:
 - export _R_CHECK_CRAN_INCOMING_=true
-- travis_wait 15 R CMD build .
-- travis_wait 15 R CMD check *tar.gz
+- R CMD build .
+- R CMD check *tar.gz
 
 r_github_packages:
   - hughparsonage/formalCoverage
