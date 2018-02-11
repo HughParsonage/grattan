@@ -21,7 +21,7 @@ r_github_packages:
 after_success:
   - Rscript -e 'formalCoverage::formalPackageCoverage()'
   - Rscript -e 'library(taxstats);library(data.table);print(sample_file_1415_synth)'
-  - Rscript -e 'library(taxstats);print(sample_file_0304)'
+  - Rscript -e 'library(taxstats);library(data.table);print(setDT(sample_file_0304))'
   - Rscript -e 'remove.packages("taxstats")'
   - Rscript -e 'install.packages(c("devtools", "roxygen2"))'
   - Rscript -e 'devtools::test()'

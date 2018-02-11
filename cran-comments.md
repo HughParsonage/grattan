@@ -2,9 +2,7 @@ This is an update as requested by CRAN.  The previous version of this package co
 
 The additional repository has been changed to include win-binaries on R 3.3, 3.4, and 3.5.
 
-Further, the vignette rebuilding has been set to reinstall 'taxstats' on CRAN as that seemed to be the only way to reliably pass CRAN checks.  In particular, the presence of 'taxstats' as indicated by `requireNamespace` did not reliably report whether the package was usable.  I am conscious that reinstalling a 50 MB package involves a fairly substantial use (some 5 minutes of check time in total) of the common resource that is the CRAN check farm.  If this is unacceptable, I will have to substantially rewrite the vignettes (which I will do if CRAN requests it, but won't be able to do immediately).
-
-Thank you for your patience.
+The vignettes have been collated to avoid reinstalling `taxstats` for each vignette.
 
 ## Test environments
 * local Windows install, CRAN 3.4.3 and R Under development (unstable) (2018-02-08 r74238)

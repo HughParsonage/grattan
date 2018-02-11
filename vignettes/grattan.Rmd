@@ -1,12 +1,12 @@
 ---
-title: "Grattan package"
+title: "Grattan Institute"
 author: "Hugh Parsonage"
 date: "`r Sys.Date()`"
 output: 
   rmarkdown::html_vignette:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{grattan}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
