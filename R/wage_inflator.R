@@ -214,3 +214,4 @@ wage_inflator <- function(wage = 1,
   
   output[["out"]]
 }
+

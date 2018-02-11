@@ -64,3 +64,4 @@ cpi_inflator_general_date <- function(from_nominal_price = 1,
                         to_qtr = to_date,
                         ...)
 }
+

@@ -75,3 +75,4 @@ inflator <- function(x = 1, from, to, inflator_table, index.col = "Index", time.
     x * output[["out"]]
   }
 }
+
