@@ -9,8 +9,10 @@ warnings_are_errors: true
 before_install:
   export _R_CHECK_CRAN_INCOMING_=true
 
-r_packages: 
-- hutils
+script:
+- export _R_CHECK_CRAN_INCOMING_=true
+- travis_wait 15 R CMD build .
+- travis_wait 15 R CMD check *tar.gz
 
 r_github_packages:
   - hughparsonage/formalCoverage
@@ -19,6 +21,7 @@ r_github_packages:
 after_success:
   - Rscript -e 'formalCoverage::formalPackageCoverage()'
   - Rscript -e 'library(taxstats);library(data.table);print(sample_file_1415_synth)'
+  - Rscript -e 'library(taxstats);print(sample_file_0304)'
   - Rscript -e 'remove.packages("taxstats")'
   - Rscript -e 'install.packages(c("devtools", "roxygen2"))'
   - Rscript -e 'devtools::test()'
