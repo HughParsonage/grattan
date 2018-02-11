@@ -1516,7 +1516,9 @@ c("Sw_amt",
 Other tests can be found in the `tests/` folder to compare the tax collections in those years. 
 
 
-
+```{r echo=FALSE}
+options("scipen" = 0)
+```
 
 
 
