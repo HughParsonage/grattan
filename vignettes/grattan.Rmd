@@ -37,14 +37,14 @@ library(knitr)
 library(hutils)
 library(magrittr)
 library(data.table)
-templib <- file.path(tempdir(check = TRUE), "grav")
+templib <- tempfile()
 hutils::provide.dir(templib)
 install.packages("taxstats",
                  quiet = FALSE,
                  lib = templib,
                  repos = "https://hughparsonage.github.io/drat/",
                  type = "source")
-library("taxstats", lib.loc = templib)
+library("taxstats", lib.loc = templib, verbose = TRUE, character.only = TRUE)
 
 sample_files_all <-
     rbindlist(lapply(list(`2003-04` = sample_file_0304, 
