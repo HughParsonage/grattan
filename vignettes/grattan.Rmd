@@ -37,20 +37,14 @@ library(knitr)
 library(hutils)
 library(magrittr)
 library(data.table)
-if (requireNamespace("taxstats", quietly = TRUE) &&
-    packageVersion("taxstats") >= package_version("0.0.5") &&
-    !identical(Sys.getenv("NOT_CRAN"), "true")) {
-  library(taxstats)
-} else {
-  templib <- file.path(tempdir(), "bracket")
-  hutils::provide.dir(templib)
-  install.packages("taxstats",
-                   quiet = FALSE,
-                   lib = templib,
-                   repos = "https://hughparsonage.github.io/drat/",
-                   type = "source")
-  library("taxstats", lib.loc = templib)
-}
+templib <- file.path(tempdir(check = TRUE), "grav")
+hutils::provide.dir(templib)
+install.packages("taxstats",
+                 quiet = FALSE,
+                 lib = templib,
+                 repos = "https://hughparsonage.github.io/drat/",
+                 type = "source")
+library("taxstats", lib.loc = templib)
 
 sample_files_all <-
     rbindlist(lapply(list(`2003-04` = sample_file_0304, 
@@ -1317,44 +1311,6 @@ High-income individuals tend to have higher than average wage growth.
 Low-income individuals also have higher than average wage growth. 
 That is, the pattern of wage growth by wage is U-shaped. 
 
-```{r}
-library(grattan)
-library(data.table)
-if (requireNamespace("taxstats", quietly = TRUE) &&
-    packageVersion("taxstats") >= package_version("0.0.5") &&
-    !identical(Sys.getenv("NOT_CRAN"), "true")) {
-  library(taxstats)
-} else {
-  templib <- file.path(tempdir(), "diff")
-  hutils::provide.dir(templib)
-  install.packages("taxstats",
-                   lib = templib,
-                   repos = "https://hughparsonage.github.io/drat/",
-                   type = "source")
-  library("taxstats", lib.loc = templib)
-}
-sample_files_all <-
-    rbindlist(lapply(list(`2003-04` = sample_file_0304, 
-                          `2004-05` = sample_file_0405, `2005-06` = sample_file_0506, 
-                          `2006-07` = sample_file_0607, `2007-08` = sample_file_0708, 
-                          `2008-09` = sample_file_0809, `2009-10` = sample_file_0910, 
-                          `2010-11` = sample_file_1011, `2011-12` = sample_file_1112, 
-                          `2012-13` = sample_file_1213, `2013-14` = sample_file_1314), 
-                     data.table::as.data.table),
-              use.names = TRUE,
-              fill = TRUE, 
-              idcol = "fy.year")
-sample_files_all[, WEIGHT := hutils::if_else(fy.year > '2010-11', 50L, 100L)]
-
-library(dplyr)
-library(dtplyr)
-library(magrittr)
-library(ggplot2)
-library(scales)
-# library(grid)
-# library(gridExtra)
-# library(plotly)
-```
 
 ```{r}
 wage_r_by_fy <- 
