@@ -22,7 +22,7 @@ This vignette collates the vignettes that were present before version 1.5.3.
 
 # Bracket creep
 
-```{r loadPackages}
+```{r loadPackages-1}
 library(broom)
 library(mgcv)
 library(lattice)
@@ -37,15 +37,28 @@ library(knitr)
 library(hutils)
 library(magrittr)
 library(data.table)
+```
+
+```{r loadPackages-2}
 templib <- tempfile()
 hutils::provide.dir(templib)
+```
+
+```{r loadPackages-3}
 install.packages("taxstats",
+                 dependencies = FALSE,
                  quiet = FALSE,
                  lib = templib,
+                 verbose = TRUE,
                  repos = "https://hughparsonage.github.io/drat/",
                  type = "source")
-library("taxstats", lib.loc = templib, verbose = TRUE, character.only = TRUE)
+```
 
+```{r loadPackages-4}
+library("taxstats", lib.loc = templib, verbose = TRUE, character.only = TRUE)
+```
+
+```{r sample_files_all}
 sample_files_all <-
     rbindlist(lapply(list(`2003-04` = sample_file_0304, 
                           `2004-05` = sample_file_0405,
@@ -64,6 +77,9 @@ sample_files_all <-
               idcol = "fy.year")
 sample_files_all[, WEIGHT := hutils::if_else(fy.year > '2010-11', 50L, 100L)]
 age_range_decoder <- as.data.table(age_range_decoder)
+````
+
+```{r load-grattan}
 library(grattan)
 ```
 
