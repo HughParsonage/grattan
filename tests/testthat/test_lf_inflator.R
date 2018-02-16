@@ -72,11 +72,11 @@ test_that("ABS connection", {
   external_ans <- lf_inflator_fy(from_fy = "2012-13", to_fy = "2013-14",
                                  useABSConnection = TRUE)
   
-  expect_equal(internal_ans, external_ans, tol = 0.0001)
+  expect_equal(internal_ans, external_ans, tol = 0.0005)
   
   internal_ans <- lf_inflator(from_date = "2009-06-30", to_date = "2014-06-30")
   external_ans <- lf_inflator(from_date = "2009-06-30", to_date = "2014-06-30",
                               useABSConnection = TRUE)
   
-  expect_equal(internal_ans, external_ans, tol = 0.0001)
+  expect_equal(internal_ans, external_ans, tol = 0.0005)
 })
