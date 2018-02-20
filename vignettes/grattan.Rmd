@@ -12,10 +12,10 @@ vignette: >
 ---
 
 ```{r setup, include = FALSE}
+library(knitr)
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  eval = requireNamespace("taxstats", quietly = TRUE) && packageVersion("taxstats") >= package_version("0.0.5")
+  comment = "#>"
 )
 ```
 
@@ -704,7 +704,7 @@ sample_file %>%
 ```{r}
 CG_descriptive_by_bracket %>% 
   # cosmetic
-  mutate(`Taxpayers` = comma(n_taxpayers),
+  mutate(Taxpayers = comma(n_taxpayers),
          `with CG` = comma(n_CG),
          `Total cap. gains ($)` = grattan_dollar(val_CG),
          `Total CGT ($)` = grattan_dollar(total_CGT)) %>%
