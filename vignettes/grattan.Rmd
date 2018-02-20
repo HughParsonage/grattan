@@ -24,7 +24,6 @@ This vignette collates the vignettes that were present before version 1.5.3.
 # Bracket creep
 
 ```{r loadPackages-1}
-library(broom)
 library(mgcv)
 library(lattice)
 library(dtplyr)
@@ -1479,10 +1478,11 @@ data.table(the_source = c("Actual",
 conf_int_of_t.test <- function(variable){
   t_test <- t.test(sample_file_1314[[variable]],
                    sample_file_1314_projected[[variable]])
-  t_test %>%
-    tidy(.) %>%
-    mutate(var = variable) %>%
-    as.data.table
+  
+  data.table(var = variable,
+             conf.low = t_test$conf.int[1],
+             conf.high = t_test$conf.int[2],
+             p.value = t_test$p.value)
 }
 
 c("Sw_amt",
