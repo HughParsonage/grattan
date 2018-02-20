@@ -104,7 +104,7 @@ test_that("differential wage inflator is mean-preserving", {
   
   t_test <- 
     stats::t.test(salaries_1314_vanilla, salaries_1314_differe, conf.level = 0.66) %>%
-    broom::tidy(.)
+    use_series("p.value")
 
-  expect_gt(t_test$p.value, 0.05)
+  expect_gt(t_test, 0.05)
 })
