@@ -340,6 +340,7 @@ test_that("Medicare options", {
 
 
 test_that("Medicare families", {
+  skip_on_cran()
   skip_if_not_installed("taxstats")
   s1617 <- project(sample_file_1314, h = 3L)
   
@@ -373,7 +374,8 @@ test_that("Medicare families", {
 })
 
 test_that("SAPTO modelled", {
-  skip_if_not_installed("taxstats")
+  skip_on_cran()
+  skip_if_not_installed("taxstats", minimum_version = "0.0.5")
   library(taxstats)
   sample_file_1415_copy <- copy(sample_file_1415_synth)
   
@@ -467,6 +469,7 @@ test_that("LITO", {
 
 
 test_that("Elasticity of taxable income", {
+  skip_on_cran()
   skip_if_not_installed("taxstats")
   library(taxstats)
   s12131314 <- 
@@ -540,7 +543,7 @@ test_that("Elasticity of taxable income", {
 
 
 test_that("Elasticity 0 vs 1", {
-  skip_if_not_installed("taxstats")
+  skip_if_not_installed("taxstats", minimum_version = "0.0.5")
   library(taxstats)
   s1415 <- 
     copy(sample_file_1415_synth) %>%
