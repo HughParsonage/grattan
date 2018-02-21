@@ -1,7 +1,7 @@
-## 1.5.3.2
-### 2018-02-01
-* Labour force data
-* CRAN update to fix failure update of suggested packages.
+## 1.5.3.6
+### 2018-02-21
+* Labour force data and wage price index updated to 2018-02-21.
+* Update as requested to fix failing unit tests relying on non-standard packages.
 
 ## 1.5.3.1
 ### 2018-01-22
