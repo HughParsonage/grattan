@@ -28,12 +28,14 @@ test_that("Switching order of to and from causes inverse", {
 })
 
 test_that("rolling inflator", {
+  skip_if_not_installed("dplyr")
+  skip_if_not_installed("zoo")
   my_data <- 
     grattan:::cpi_seasonal_adjustment %>% 
     data.table::copy(.) %>%
     setnames(old = c("obsValue", "obsTime"), 
              new = c("Index", "Time")) %>%
-    dplyr::mutate(., Time = as.Date(as.yearqtr(Time, format = "%Y-Q%q"))) %>% .[]
+    .[, Time := zoo::as.Date.yearqtr(zoo::as.yearqtr(Time, format = "%Y-Q%q"))]
   
   expect_equal(inflator(5, 
                         to = as.Date("2013-01-02"), 

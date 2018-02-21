@@ -55,11 +55,11 @@ test_that("Custom lf series", {
   expect_equal(y, 1.1^2)
   
   y_custom_series <-
-    lf_inflator_fy(from_fy = "2016-17",
-                   to_fy = "2017-18",
+    lf_inflator_fy(from_fy = "2017-18",
+                   to_fy = "2018-19",
                    forecast.series = "custom",
-                   lf.series = data.table(fy_year = c("2017-18"),
-                                          r = c(0.123)))
+                   lf.series = data.table(fy_year = c("2017-18", "2018-19"),
+                                          r = c(0, 0.123)))
   
   expect_equal(y_custom_series, 1.123)
 })

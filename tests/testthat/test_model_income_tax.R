@@ -1,7 +1,7 @@
 context("model_income_tax")
 
 test_that("Error handling", {
-  skip_if_not_installed("taxstats")
+  skip_if_not_installed("taxstats"); skip_on_cran()
   library(taxstats)
   library(hutils)
   sample_file_1314_copy <- copy(sample_file_1314)
@@ -39,7 +39,7 @@ test_that("Error handling", {
 })
 
 test_that("La plus ca meme la plus ca meme: ordinary tax", {
-  skip_if_not_installed("taxstats")
+  skip_if_not_installed("taxstats"); skip_on_cran()
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   original <- income_tax(sample_file_1314$Taxable_Income, "2013-14", .dots.ATO = copy(sample_file_1314))
@@ -54,7 +54,7 @@ test_that("La plus ca meme la plus ca meme: ordinary tax", {
 })
 
 test_that("La plus ca meme la plus ca meme: la deluge", {
-  skip_if_not_installed("taxstats")
+  skip_if_not_installed("taxstats"); skip_on_cran()
   library(taxstats)
   sample_file_1112_copy <- copy(sample_file_1112)
   original <-
@@ -73,7 +73,7 @@ test_that("La plus ca meme la plus ca meme: la deluge", {
 })
   
 test_that("La plus ca meme la plus ca meme: medicare levy", {
-  skip_if_not_installed("taxstats")
+  skip_if_not_installed("taxstats"); skip_on_cran()
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   
@@ -92,7 +92,7 @@ test_that("La plus ca meme la plus ca meme: medicare levy", {
 })
 
 test_that("Increase in a rate results in more tax", {
-  skip_if_not_installed("taxstats")
+  skip_if_not_installed("taxstats"); skip_on_cran()
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   original <- income_tax(sample_file_1314$Taxable_Income, "2013-14", .dots.ATO = copy(sample_file_1314))
@@ -114,7 +114,7 @@ test_that("Increase in a rate results in more tax", {
 })
 
 test_that("Medicare warnings", {
-  skip_if_not_installed("taxstats")
+  skip_if_not_installed("taxstats"); skip_on_cran()
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   expect_warning(model_income_tax(sample_file_1314_copy,
@@ -260,7 +260,7 @@ test_that("Medicare warnings", {
 })
 
 test_that("Medicare options", {
-  skip_if_not_installed("taxstats")
+  skip_if_not_installed("taxstats"); skip_on_cran()
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   original <- income_tax(sample_file_1314$Taxable_Income,
@@ -341,7 +341,7 @@ test_that("Medicare options", {
 
 test_that("Medicare families", {
   skip_on_cran()
-  skip_if_not_installed("taxstats")
+  skip_if_not_installed("taxstats"); skip_on_cran()
   s1617 <- project(sample_file_1314, h = 3L)
   
   for (j in seq_along(s1617)) {
@@ -447,7 +447,7 @@ test_that("SAPTO modelled", {
 })
 
 test_that("LITO", {
-  skip_if_not_installed("taxstats")
+  skip_if_not_installed("taxstats"); skip_on_cran()
   library(taxstats)
   sample_file_1213_copy <- copy(sample_file_1213)
   
@@ -470,7 +470,7 @@ test_that("LITO", {
 
 test_that("Elasticity of taxable income", {
   skip_on_cran()
-  skip_if_not_installed("taxstats")
+  skip_if_not_installed("taxstats"); skip_on_cran()
   library(taxstats)
   s12131314 <- 
     copy(sample_file_1213) %>%
