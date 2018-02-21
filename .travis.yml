@@ -3,6 +3,9 @@ r:
 - oldrel
 - release
 - devel
+r_check_args:
+- '--as-cran'
+- '--no-multiarch'
 cache: packages
 warnings_are_errors: true
 
@@ -26,9 +29,4 @@ after_success:
   - Rscript -e 'install.packages(c("devtools", "roxygen2"))'
   - Rscript -e 'devtools::test()'
   - Rscript -e 'install.packages("taxstats", repos = "https://hughparsonage.github.io/drat/", type = "source")'
-  - Rscript -e 'install.packages("microbenchmark")'
-  - Rscript -e 'download.file(url = "https://raw.githubusercontent.com/HughParsonage/TeXCheckR/master/tests/testthat/lint_bib_in.bib", destfile = "bib");microbenchmark::microbenchmark(readLines("bib"))'
-  - Rscript -e 'bib <- readLines("bib", encoding = "UTF-8", n = 10);bib8910 <- bib[8:10];gsub("(\\w+)", "\\U\\1", bib8910, perl = TRUE)'
-  - Rscript -e 'bib <- readLines("bib", encoding = "UTF-8", n = 10);bib8910 <- bib[8:10];gsub("(\\w+)", "\\U\\1\\E", bib8910, perl = TRUE)'
-  - Rscript -e 'cat(readLines("bib", encoding = "UTF-8"), sep = "\n")'
   - if [ $TRAVIS_R_VERSION_STRING == "release" ]; then Rscript -e 'covr::codecov(line_exclusions = "R/zzz.R")'; fi
