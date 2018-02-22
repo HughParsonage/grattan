@@ -7,7 +7,7 @@
 * Appveyor: dev and release.
 * winbuilder: dev and release.
 
-This is an update to skip tests that do not appear to run reliably on CRAN, following updates to dependencies. There was a single new NOTE indicating that the last submission was not long ago: this update was requested by CRAN.
+This is an update to skip tests that do not run reliably on CRAN, following updates to dependencies. There was a single new NOTE indicating that the last submission was not long ago: this update was requested by CRAN.
 
 NOTES:
 'Days since last update: 3'
