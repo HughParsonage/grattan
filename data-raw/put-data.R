@@ -172,6 +172,12 @@ wages_trend <-
       as.data.frame(wages) %>% 
       as.data.table %>%
       .[, list(obsTime, obsValue)]
+    if (!{"2017-Q4" %in% .subset2(wage.indices, "obsTime")}) {
+      wage.indices <- 
+        rbind(wage.indices, 
+              data.table(obsTime = "2017-Q4",
+                         obsValue = 127.6))
+    }
     fwrite(wage.indices, "./data-raw/wages-trend.tsv", sep = "\t")
     wage.indices
   },

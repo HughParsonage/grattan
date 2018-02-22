@@ -1,13 +1,3 @@
-[![Travis-CI](https://travis-ci.org/HughParsonage/grattan.svg?branch=master)](https://travis-ci.org/HughParsonage/grattan?branch=master) [![Project Status: Active ? The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) [![codecov.io](https://codecov.io/github/HughParsonage/grattan/coverage.svg?branch=master)](https://codecov.io/github/HughParsonage/grattan?branch=master)
-
-------------------------------------------------------------------------
-
-[![minimal R version](https://img.shields.io/badge/R%3E%3D-2.10-6666ff.svg)](https://cran.r-project.org/) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/grattan)](https://cran.r-project.org/package=grattan) [![packageversion](https://img.shields.io/badge/Package%20version-1.5.3.0-orange.svg?style=flat-square)](commits/master)
-
-------------------------------------------------------------------------
-
-[![Last-changedate](https://img.shields.io/badge/last%20change-2018--01--22-orange.svg)](/commits/master)
-
 grattan
 =======
 
@@ -16,6 +6,14 @@ Australian Tax Policy Analysis
 NEWS
 ====
 
+1.5.3.2
+-------
+
+### 2018-02-01
+
+-   Labour force data
+-   CRAN update to fix failure update of suggested packages.
+
 1.5.3.1
 -------
 
@@ -23,12 +21,12 @@ NEWS
 
 ### New features:
 
--   New function `model_income_tax` attempts provides every lever of the income tax system that are visible from the sample files. Users can model the sample file by changing single parameters to view their effects.
--   Include the small business tax offset as a standalone function and within `income_tax`.
+-   New function `model_income_tax` which attempts to provide every lever of the income tax system that is visible from the tax office's sample files. Users can model the sample file by changing single parameters to observe the effect on tax collections.
+-   `small_business_tax_offset`: Include the small business tax offset as a standalone function and within `income_tax`.
 
 ### Other user-visible changes
 
--   `project` and `project_to` no longer require `fy.year.of.sample.file`. However, it is expected to be compatible with the sample file provided. Failling to provide a sample file with the expected number of rows or not providing a sample file with a valid number of rows is a warning, which can be silenced by `check_fy_sample_file = FALSE`.
+-   `project` and `project_to` no longer require `fy.year.of.sample.file`. However, they expect the supplied `data.frame` to be compatible with the sample file provided. Failling to provide a sample file with the expected number of rows or not providing a sample file with a valid number of rows is a warning, which can be silenced by `check_fy_sample_file = FALSE`.
 
 ### Data:
 
@@ -95,17 +93,17 @@ NEWS
 CRAN Notes
 ==========
 
+This is an update as requested by CRAN. The previous version of this package coincided with an update to the 'taxstats' package. Due to an error on my part, tests which required the updated version did not first check for version sufficiency. All tests and vignettes requiring the latest version have been changed to skip if the version is insufficient; however, the 'taxstats' package may require reinstallation on CRAN.
+
 Test environments
 -----------------
 
 -   local Windows install, CRAN 3.4.3
--   ubuntu 12.04 (on travis-ci), R devel and release <https://travis-ci.org/HughParsonage/grattan>
+-   ubuntu 12.04 (on travis-ci), R devel, release, and old-release (R 3.3.3) <https://travis-ci.org/HughParsonage/grattan>
 -   win-builder (devel)
 
 -   This is a package update to:
--   fix package dependencies to comply with CRAN policy
--   omit ephemeral winbuilder link
--   reflect recent data
+-   fix broken tests
 
 R CMD check results
 -------------------

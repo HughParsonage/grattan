@@ -1,40 +1,28 @@
-## Test environments
-* local Windows install, CRAN 3.4.3
-* ubuntu 12.04 (on travis-ci), R devel and release <https://travis-ci.org/HughParsonage/grattan>
-* win-builder (devel)
+## Test results
+0 ERRORS | 0 WARNINGS | 1-3 NOTEs
 
-* This is a package update to:
-  - fix package dependencies to comply with CRAN policy
-  - omit ephemeral winbuilder link
-  - reflect recent data
+### Test environments:
+* Local Windows R 3.4.3
+* Travis-CI: R 3.3, 3.4, and dev
+* Appveyor: dev and release.
+* winbuilder: dev and release.
 
-## R CMD check results
+This is an update to skip tests that do not run reliably on CRAN, following updates to dependencies. There was a single new NOTE indicating that the last submission was not long ago: this update was requested by CRAN.
 
-0 errors | 0 warnings | 2 notes
-
-* The first NOTE is regarding CRAN incoming feasibility. 
-
-  > Possibly mis-spelled words in DESCRIPTION:
-  >   indices (17:77)
+NOTES:
+'Days since last update: 3'
+  ==> Update requested by CRAN.
   
-  The spelling is correct.
-  
-  The other notes are unchanged from the previous release.
+Possibly mis-spelled words in DESCRIPTION: ...
+  ==> Spellings are correct: 'repos' and 'taxstats' cannot be quoted as they are within R code.
 
-* With respect to the 'taxstats' package not being a mainstream repository, its inclusion satisfies the CRAN    repository policy, as in previous versions.
-  
-  The NOTE also recommends including the URL <https://hughparsonage.github.io/drat/> in angle brackets;
-  however, this NOTE is spurious as the URL is within R code.
-  
-* The second NOTE refers to GNU make as a SystemRequirements. 
-  This is a modest requirement and is necessary to run RcppParallel.
-  
-In addition:
+Suggests or Enhances not in mainstream repositories: ...
+  ==> Normal due to taxstats dependency
 
-* There are two 'Additional issues' in which undefined behaviour is detected via `clang-UBSAN` and `gcc-UBSAN`. 
-  These issues arise due to an issue with `RcppParallel`. 
-  The maintainers of `RcppParallel` appears to fixed these issues in a development version 
-  however this version is yet to reach CRAN.
-  Accordingly, there are no changes in my package addressing these issues. 
+GNU make is a SystemRequirements.
+  ==> Required.
+
+## Note to CRAN: moderately-large vignette
+The vignette is quite lengthy and, while it will run on CRAN, requires the installation of 'taxstats', a 58 MB source package, each time the package is checked. 
 
 

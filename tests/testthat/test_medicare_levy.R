@@ -97,9 +97,13 @@ test_that("Medicare error handling", {
 
 test_that("new_medicare_levy matches", {
   skip_if_not_installed("taxstats") 
+  skip_if_not_installed("dplyr")
+  library(dplyr)
+  library(taxstats)
   sa <- sample_file_1314
   par_tbl <- 
-    grattan:::medicare_tbl[fy_year == "2013-14"] %>%
+    as.data.table(grattan:::medicare_tbl) %>%
+    .[fy_year == "2013-14"] %>%
     setnames(old = "sapto", new = "switches")
   
   expect_error(new_medicare_levy(parameter_table = as.data.frame(par_tbl)))

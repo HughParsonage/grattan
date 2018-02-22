@@ -92,3 +92,4 @@ sapto <- function(rebate_income,
   sapto.eligible * coalesce(out, fill)
 
 }
+

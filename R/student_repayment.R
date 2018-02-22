@@ -57,3 +57,4 @@ student_repayment <- function(repayment_income, fy.year, debt){
     .[order(ordering)] %>%
     .[["liability"]]
 }
+

@@ -7,7 +7,7 @@
 #' @param to_fy (character) a character vector with each element in the form "2012-13" representing the financial year that prices are to be inflated. 
 #' @param adjustment What CPI index to use ("none" = raw series, "seasonal", or "trimmed" [mean]).
 #' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. 
-#' The internal data is up-to-date as of 2017-Q3. 
+#' The internal data is up-to-date as of 2017-Q4. 
 #' If using \code{useABSConnection = TRUE}, ensure you have \code{rsdmx (>= 0.5-10)} up-to-date.
 #' @param allow.projection Should projections beyond the ABS's data be allowed?
 #' @examples 

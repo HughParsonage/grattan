@@ -9,7 +9,7 @@
 #' @param to_date Dates as a character vector.
 #' @param from_fy Financial year of \code{labour_force}.
 #' @param to_fy Financial year for which the labour force is predicted.
-#' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. The internal data was updated on 2018-01-28 to include data up to 2017-12-01.
+#' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. The internal data was updated on 2018-02-21 to include data up to 2018-01-01.
 #' @param allow.projection Logical. Should projections be allowed?
 #' @param use.month An integer (corresponding to the output of \code{data.table::month}) representing the month of the series used for the inflation.
 #' @param forecast.series Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals.
@@ -177,10 +177,13 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     
     lf.series[, obsValue := last_obsValue_in_actual_series * cumprod(1 + r)]
     
-    lf.indices <- rbindlist(list(lf.indices, 
-                                 lf.series), 
-                              use.names = TRUE, 
-                              fill = TRUE)
+    lf.indices <-
+      rbindlist(list(lf.indices, 
+                     lf.series), 
+                use.names = TRUE, 
+                fill = TRUE) %>%
+      # Ensure the date falls appropriately
+      unique(by = "fy_year", fromLast = TRUE)
   }
   
   input <-
@@ -196,7 +199,7 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     merge(lf.indices, by.x = "to_fy", by.y = "fy_year", sort = FALSE, 
           all.x = TRUE) %>%
     setnames("obsValue", "to_index") %>%
-    .[, out := labour_force * (to_index/from_index)]
+    .[, "out" := labour_force * (to_index/from_index)]
 
   
   output[["out"]]

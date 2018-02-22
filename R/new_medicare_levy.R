@@ -75,3 +75,4 @@ new_medicare_levy <- function(parameter_table){
   
   return(medicare_function)
 }
+
