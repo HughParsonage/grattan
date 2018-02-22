@@ -501,7 +501,8 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
       .[, "lito" := lito.] %>%
       .[, "sapto" := sapto.] %>%
       .[, "medicare_levy" := medicare_levy.] %>%
-      .[, "income_tax" := out]
+      .[, "income_tax" := out] %>%
+      .[, "SBTO" := sbto.] 
       
     # if (fy.year == "2011-12") {
     #   result[, "flood_levy" := flood_levy.]
