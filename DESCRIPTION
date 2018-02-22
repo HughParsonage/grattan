@@ -29,12 +29,10 @@ Imports:
     assertthat,
     magrittr,
     Rcpp (>= 0.12.3),
-    RcppParallel,
     utils,
     zoo
 LinkingTo: 
-    Rcpp,
-    RcppParallel
+    Rcpp
 RoxygenNote: 6.0.1
 Suggests:
     dplyr,
