@@ -114,6 +114,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// pmax0
+NumericVector pmax0(NumericVector x);
+RcppExport SEXP _grattan_pmax0(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(pmax0(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // pmaxV
 NumericVector pmaxV(NumericVector x, NumericVector y);
 RcppExport SEXP _grattan_pmaxV(SEXP xSEXP, SEXP ySEXP) {
@@ -135,17 +146,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< double >::type a(aSEXP);
     rcpp_result_gen = Rcpp::wrap(pminC(x, a));
-    return rcpp_result_gen;
-END_RCPP
-}
-// pmax0
-NumericVector pmax0(NumericVector x);
-RcppExport SEXP _grattan_pmax0(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(pmax0(x));
     return rcpp_result_gen;
 END_RCPP
 }

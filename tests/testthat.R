@@ -31,9 +31,6 @@ if (all(vapply(all.pkgs, requireNamespace, logical(1L), quietly = TRUE))) {
   library(magrittr)
   library(survey)
   library(zoo)
- 
-  library(RcppParallel)
-  setThreadOptions(numThreads = 2)
   
   test_check("grattan")
 }
