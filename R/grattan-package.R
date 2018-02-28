@@ -25,7 +25,6 @@
 #' @importFrom magrittr and
 
 #' @importFrom Rcpp sourceCpp
-#' @importFrom RcppParallel RcppParallelLibs
 #' @importFrom stats complete.cases
 #' 
 #' 

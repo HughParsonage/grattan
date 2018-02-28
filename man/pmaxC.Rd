@@ -9,7 +9,7 @@
 \item{a}{A single numeric value.}
 }
 \value{
-The parallel maximum of the input values.
+The parallel maximum of the input values. \code{pmax0(x)} is shorthand for \code{pmaxC(x, 0)}, i.e. convert negative values in \code{x} to 0.
 }
 \description{
 A faster \code{pmax()}.
