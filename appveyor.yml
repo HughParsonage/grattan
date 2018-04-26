@@ -13,11 +13,23 @@ install:
 cache:
   - C:\RLibrary
 
+environment:
+  global:
+    _R_CHECK_CRAN_INCOMING_: 1
+
+  matrix:
+  - R_VERSION: release
+    R_ARCH: x64
+    
+  - R_VERSION: devel
+    R_ARCH: x64
+
+
 # Adapt as necessary starting from here
 
 build_script:
   - travis-tool.sh install_deps
-  - cmd: Rscript -e "install.packages('taxstats', repos = 'https://hughparsonage.github.io/drat', type = 'source')"
+  - cmd: Rscript -e "is.null(install.packages('taxstats', repos = 'https://hughparsonage.github.io/drat'))"
 
 test_script:
   - travis-tool.sh run_tests

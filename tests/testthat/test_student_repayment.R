@@ -23,3 +23,4 @@ test_that("Repayment never exceeds debt", {
   }
   expect_lte(student_repayment(repayment_income, fy.year, debt), debt)
 })
+

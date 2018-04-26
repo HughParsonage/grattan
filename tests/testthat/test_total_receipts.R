@@ -56,3 +56,4 @@ test_that("income_tax on individual sample file reflect historical collections",
   expect_lte(abs(tax.collection - actual_collections)/actual_collections, expected = 0.01)
   
 })
+

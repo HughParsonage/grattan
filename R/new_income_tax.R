@@ -47,3 +47,4 @@ new_income_tax <- function(income,
   
   tax_fun(income)
 }
+

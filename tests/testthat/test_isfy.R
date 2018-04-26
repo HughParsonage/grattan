@@ -22,3 +22,4 @@ test_that("Other fy utils", {
   
   expect_equal(fy2date("2012-13"), as.Date("2013-06-30"))
 })
+

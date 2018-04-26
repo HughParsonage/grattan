@@ -1,13 +1,21 @@
 language: r
 r:
 - oldrel
-- devel
 - release
+- devel
+r_check_args:
+- '--as-cran'
+- '--no-multiarch'
 cache: packages
 warnings_are_errors: true
 
-r_packages: 
-- hutils
+before_install:
+  export _R_CHECK_CRAN_INCOMING_=true
+
+script:
+- export _R_CHECK_CRAN_INCOMING_=true
+- R CMD build .
+- R CMD check *tar.gz
 
 r_github_packages:
   - hughparsonage/formalCoverage
@@ -16,5 +24,8 @@ r_github_packages:
 after_success:
   - Rscript -e 'formalCoverage::formalPackageCoverage()'
   - Rscript -e 'library(taxstats);library(data.table);print(sample_file_1415_synth)'
-  - Rscript -e 'bib <- readLines("https://raw.githubusercontent.com/HughParsonage/TeXCheckR/master/tests/testthat/lint_bib_in.bib", encoding = "UTF-8", n = 10);bib8910 <- bib[8:10];gsub("(\\w+)", "\\U\\1", bib8910, perl = TRUE)'
+  - Rscript -e 'remove.packages("taxstats")'
+  - Rscript -e 'install.packages(c("devtools", "roxygen2"))'
+  - Rscript -e 'devtools::test()'
+  - Rscript -e 'install.packages("taxstats", repos = "https://hughparsonage.github.io/drat/", type = "source")'
   - if [ $TRAVIS_R_VERSION_STRING == "release" ]; then Rscript -e 'covr::codecov(line_exclusions = "R/zzz.R")'; fi

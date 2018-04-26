@@ -9,7 +9,7 @@
 \item{a}{A single numeric value.}
 }
 \value{
-The parallel minimum of the input values.
+The parallel minimum of the input values. The \code{0} versions are shortcuts for \code{a = 0}.
 }
 \description{
 A faster \code{pmin()}.

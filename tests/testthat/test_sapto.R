@@ -68,12 +68,12 @@ test_that("SAPTO for partners", {
 
 test_that("New SAPTO matches old SAPTO", {
   skip("Government calculator using wrong thresholds")
-  expect_equal(new_sapto(33000, new_sapto_tbl = copy(grattan:::sapto_tbl) %>% filter(fy_year == "2016-17") %>% setkeyv("family_status")), 
+  expect_equal(new_sapto(33000, new_sapto_tbl = copy(grattan:::sapto_tbl)[fy_year == "2016-17"] %>% setkeyv("family_status")), 
                sapto(33000, "2016-17"))
   expect_equal(income_tax_sapto(33000,
                                 fy.year = "2016-17",
                                 sapto.eligible = TRUE,
-                                new_sapto_tbl = copy(grattan:::sapto_tbl) %>% filter(fy_year == "2016-17") %>% setkeyv("family_status"),
+                                new_sapto_tbl = copy(grattan:::sapto_tbl)[fy_year == "2016-17"] %>% setkeyv("family_status"),
                                 medicare.sapto.eligible = TRUE), 
                income_tax(33000, "2016-17", age = 67))
 })
@@ -81,7 +81,7 @@ test_that("New SAPTO matches old SAPTO", {
 test_that("New SAPTO matches old SAPTO for SAPTO", {
   # skip("v")
   expect_equal(new_sapto(33000, Spouse_income = 33000, family_status = "married",
-                         new_sapto_tbl = copy(grattan:::sapto_tbl) %>% filter(fy_year == "2016-17") %>% setkeyv("family_status")), 
+                         new_sapto_tbl = copy(grattan:::sapto_tbl)[fy_year == "2016-17"] %>% setkeyv("family_status")), 
                sapto(33000, "2016-17", Spouse_income = 33000, family_status = "married"))
   
   the_sapto_tbl <- copy(grattan:::sapto_tbl)
@@ -89,7 +89,7 @@ test_that("New SAPTO matches old SAPTO for SAPTO", {
   expect_equal(income_tax_sapto(33000,
                                 fy.year = "2016-17",
                                 sapto.eligible = TRUE,
-                                new_sapto_tbl = the_sapto_tbl %>% filter(fy_year == "2016-17") %>% setkeyv("family_status"),
+                                new_sapto_tbl = copy(grattan:::sapto_tbl)[fy_year == "2016-17"] %>% setkeyv("family_status"),
                                 medicare.sapto.eligible = TRUE), 
                income_tax(33000, "2016-17", age = 67))
 })
@@ -97,18 +97,21 @@ test_that("New SAPTO matches old SAPTO for SAPTO", {
 test_that("Works for ATO sample file", {
   # skip("v")
   skip_if_not_installed("taxstats")
+  skip_if_not_installed("dplyr")
+  skip_on_cran()
+  library(taxstats)
   s1314 <- sample_file_1314 %>% copy
   tax_with_sapto_fn <-
     income_tax_sapto(s1314$Taxable_Income, fy.year = "2013-14",
                      .dots.ATO = copy(s1314),
                      age = if_else(s1314$age_range <= 1, 67, 42),
-                     new_sapto_tbl = copy(grattan:::sapto_tbl) %>% filter(fy_year == "2013-14") %>% setkeyv("family_status"))
+                     new_sapto_tbl = copy(grattan:::sapto_tbl)[fy_year == "2016-17"] %>% setkeyv("family_status"))
   tax_with_base_fn <- income_tax(s1314$Taxable_Income,
                                  fy.year = "2013-14",
                                  .dots.ATO = copy(s1314),
                                  age = if_else(s1314$age_range <= 1, 67, 42))
   
-  expect_true(all(near(tax_with_base_fn, tax_with_sapto_fn)))
+  expect_true(all(dplyr::near(tax_with_base_fn, tax_with_sapto_fn)))
   
 })
 

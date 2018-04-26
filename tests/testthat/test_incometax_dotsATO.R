@@ -2,7 +2,10 @@ context(".dots.ATO")
 
 test_that("No NAs for sample_files_all", {
   skip_if_not_installed("taxstats") 
-  invisible(sample_files_all)
+  skip_on_cran()
+  skip_on_appveyor()
+  library(taxstats)
+  sample_files_all <- get_sample_files_all()
   expect_false(anyNA(income_tax(sample_files_all[["Taxable_Income"]], 
                                 fy.year = sample_files_all[["fy.year"]], 
                                 .dots.ATO = sample_files_all)))
@@ -10,6 +13,8 @@ test_that("No NAs for sample_files_all", {
 
 test_that("Use rolling income tax", {
   skip_if_not_installed("taxstats") 
+  skip_on_cran()
+  skip_on_appveyor()
   library(taxstats)
   sample_file_1314 <- copy(sample_file_1314)
   income <- sample_file_1314[["Taxable_Income"]]
@@ -27,6 +32,8 @@ test_that("Use rolling income tax", {
 
 test_that("Debugger", {
   skip_if_not_installed("taxstats")
+  skip_on_cran()
+  skip_on_appveyor()
   library(taxstats)
   result <- 
     income_tax(sample_file_1112$Taxable_Income,

@@ -1,29 +1,37 @@
 context("Superannuation variables")
 
-
-
-
 test_that("Div293 tax is bounded by cap @ 25k", {
   skip_if_not_installed("taxstats") 
+  library(taxstats)
   cap1 <- 25e3
-  new_sample_file <- apply_super_caps_and_div293(sample_file_1314, cap = cap1, age_based_cap = FALSE)
+  new_sample_file <- apply_super_caps_and_div293(sample_file_1314,
+                                                 cap = cap1,
+                                                 age_based_cap = FALSE)
   expect_true(all(new_sample_file$div293_tax <= cap1 * 0.15 + .Machine$double.eps ^ 0.5))
 })
 test_that("Div293 tax is bounded by cap @ 20k", {
   skip_if_not_installed("taxstats") 
+  library(taxstats)
   cap1 <- 20e3
-  new_sample_file <- apply_super_caps_and_div293(sample_file_1314, cap = cap1, age_based_cap = FALSE)
+  new_sample_file <-
+    apply_super_caps_and_div293(sample_file_1314, cap = cap1, age_based_cap = FALSE)
   expect_true(all(new_sample_file$div293_tax <= cap1 * 0.15 + .Machine$double.eps ^ 0.5))
 })
 test_that("Div293 tax is bounded by cap @ 30k", {
   skip_if_not_installed("taxstats") 
+  library(taxstats)
   cap1 <- 30e3
-  new_sample_file <- apply_super_caps_and_div293(sample_file_1314, cap = cap1, age_based_cap = FALSE)
-  expect_true(all(new_sample_file$div293_tax <= cap1 * 0.15 + .Machine$double.eps ^ 0.5), info = as.character(paste0("cap1 = ", cap1)))
+  new_sample_file <-
+    apply_super_caps_and_div293(sample_file_1314,
+                                cap = cap1,
+                                age_based_cap = FALSE)
+  expect_true(all(new_sample_file$div293_tax <= cap1 * 0.15 + .Machine$double.eps ^ 0.5),
+              info = as.character(paste0("cap1 = ", cap1)))
 })
 
 test_that("Div293 tax is bounded by an arbitrary cap", {
   skip_if_not_installed("taxstats") 
+  library(taxstats)
   caps <- sort(abs(rcauchy(2, location = 30e3, scale = 20e3)))
   cap1 <- caps[1]
   cap2 <- caps[2]
@@ -33,14 +41,18 @@ test_that("Div293 tax is bounded by an arbitrary cap", {
   cap2_age <- sample(25:65, size = 1)
   
   new_sample_file <- apply_super_caps_and_div293(sample_file_1314, 
-                                                 cap = cap1, cap2 = cap2, age_based_cap = age_based_cap, 
-                                                 div293_threshold = div293_threshold, cap2_age = cap2_age)
+                                                 cap = cap1,
+                                                 cap2 = cap2,
+                                                 age_based_cap = age_based_cap, 
+                                                 div293_threshold = div293_threshold,
+                                                 cap2_age = cap2_age)
   expect_true(all(new_sample_file$div293_tax <= new_sample_file$concessional_cap * 0.15 + .Machine$double.eps ^ 0.5), info = as.character(paste0("cap1 = ", cap1)))
 })
 
 # Adjusted Taxable Income (for surcharge purposes < 300e3)
 test_that("Surchargeable income and low tax contributions less than 300,000 implies no Div293 tax", {
-  skip_if_not_installed("taxstats") 
+  skip_if_not_installed("taxstats")
+  library(taxstats)
   caps <- sort(abs(rcauchy(2, location = 30e3, scale = 20e3)))
   cap1 <- caps[1]
   cap2 <- caps[2]
@@ -98,28 +110,31 @@ context("Reweighting and imputation successfully reconcile aggregates")
 
 test_that("Imputed, reweighted sample file agrees with aggregates by no less than 1%", {
   skip_if_not_installed("taxstats") 
+  library(taxstats)
+  library(magrittr)
   
   funds <- 
     funds_table1_201314 %>%
-    filter(Selected_items == "Assessable contributions") %>%
-    select(fy_year, Assessable_contributions_funds = Sum) %>%
+    .[Selected_items == "Assessable contributions"] %>%
+    .[, .(fy_year, Assessable_contributions_funds = Sum)] %>%
     setkey(fy_year)
   
   smsfs <- 
     funds_table2_smsf_201314 %>%
-    filter(Selected_items == "Assessable contributions") %>%
-    select(fy_year, Assessable_contributions_smsfs = Sum) %>%
+    .[Selected_items == "Assessable contributions"] %>%
+    .[, .(fy_year, Assessable_contributions_smsfs = Sum)] %>%
     setkey(fy_year)
   
   ato_aggregate_contributions <- 
     smsfs[funds] %>%
-    mutate(total_contributions = Assessable_contributions_smsfs + Assessable_contributions_funds)
+    .[, total_contributions := Assessable_contributions_smsfs + Assessable_contributions_funds]
     
   
   # Now test imputation using defaults.
   imputed_concessional_contributions <- 
     sample_file_1314 %>%
-    mutate(WEIGHT = 50) %>%
+    copy %>%
+    .[, WEIGHT := 50L] %>%
     apply_super_caps_and_div293(reweight_late_lodgers = TRUE, impute_zero_concess_contr = TRUE) %$%
     sum(concessional_contributions * WEIGHT)
   
@@ -131,30 +146,53 @@ test_that("Imputed, reweighted sample file agrees with aggregates by no less tha
 
 test_that("Error handling", {
   skip_if_not_installed("taxstats") 
-  sample_file <- sample_file_1314 %>% head(.) %>% as.data.frame(.)
-  expect_error(apply_super_caps_and_div293(sample_file), regexp = "data.table")
+  skip_if_not_installed("dplyr") 
+  library(taxstats)
+  library(dplyr)
+  sample_file <- 
+    sample_file_1314 %>%
+    head(.) %>% 
+    as.data.frame(.)
+  expect_error(apply_super_caps_and_div293(sample_file), 
+               regexp = "data.table")
   
-  sample_file_dt <- sample_file_1314 %>% copy %>% head %>% mutate(concessional_cap = 25e3)
+  sample_file_dt <-
+    sample_file_1314 %>%
+    head %>% 
+    .[, concessional_cap := 25e3]
+  
   expect_warning(apply_super_caps_and_div293(sample_file_dt))
   
-  expect_warning(apply_super_caps_and_div293(sample_file_dt, colname_new_Taxable_Income = "Taxable_Income"), 
+  expect_warning(apply_super_caps_and_div293(sample_file_dt,
+                                             colname_new_Taxable_Income = "Taxable_Income"), 
                  regexp = "Dropping Taxable.Income")
   
-  expect_error(apply_super_caps_and_div293(sample_file_1213), regexp = "does not have the variables needed")
+  expect_error(apply_super_caps_and_div293(sample_file_1213),
+               regexp = "does not have the variables needed")
   
-  expect_warning(apply_super_caps_and_div293(sample_file_dt, colname_div293_tax = "Sw_amt"))
+  expect_warning(apply_super_caps_and_div293(sample_file_dt,
+                                             colname_div293_tax = "Sw_amt"))
   
-  sample_file_old <- sample_file_1314 %>% copy %>% select(-Rptbl_Empr_spr_cont_amt)
+  sample_file_old <-
+    sample_file_1314 %>%
+    copy %>%
+    hutils::drop_col("Rptbl_Empr_spr_cont_amt")
   
-  expect_error(apply_super_caps_and_div293(sample_file_old, impute_zero_concess_contr = TRUE), regexp = "required to impute") 
+  expect_error(apply_super_caps_and_div293(sample_file_old,
+                                           impute_zero_concess_contr = TRUE),
+               regexp = "required to impute") 
   
-  expect_warning(apply_super_caps_and_div293(sample_file_dt, reweight_late_lodgers = TRUE), regexp = "WEIGHT")
+  expect_warning(apply_super_caps_and_div293(sample_file_dt,
+                                             reweight_late_lodgers = TRUE),
+                 regexp = "WEIGHT")
   
 })
 
 
 test_that("Corner cases", {
   skip_if_not_installed("taxstats") 
+  library(taxstats)
+  library(magrittr)
   n_low_age <- 
     sample_file_1314 %>%
     apply_super_caps_and_div293(cap2_age = 19) %$%
@@ -167,7 +205,8 @@ test_that("Corner cases", {
   
   expect_gte(n_low_age, n_high_age)
   
-  expect_false("div293_income" %in% names(apply_super_caps_and_div293(sample_file_1314, drop_helpers = TRUE)))
+  expect_false("div293_income" %in% names(apply_super_caps_and_div293(sample_file_1314,
+                                                                      drop_helpers = TRUE)))
   
   low_tax_contributions_no_Other_contr <- 
     sample_file_1314 %>%
@@ -179,11 +218,13 @@ test_that("Corner cases", {
     apply_super_caps_and_div293(use_other_contr = TRUE) %$%
     sum(low_tax_contributions_div293)
   
-  expect_gte(low_tax_contributions_with_Other_contr, low_tax_contributions_no_Other_contr)
+  expect_gte(low_tax_contributions_with_Other_contr,
+             low_tax_contributions_no_Other_contr)
 })
 
 test_that("Warning with no WEIGHT.", {
   skip_if_not_installed("taxstats")
+  library(taxstats)
   expect_warning(revenue_from_new_cap_and_div293(sample_file_1314, fy.year = "2013-14"))
 })
 

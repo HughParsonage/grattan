@@ -1,10 +1,13 @@
 context("utils")
 
 test_that("unselect_", {
-  skip_if_not_installed("taxstats") 
+  skip_if_not_installed("taxstats")
+  skip_if_not_installed("dplyr")
+  library(taxstats)
+  library(dplyr)
   y <- sample_file_1314 %>% copy %>% unselect_(.dots = "Sw_amt")
   z <- sample_file_1314 %>% copy %>% select(-Sw_amt)
-  expect_identical(y, z)
+  expect_equal(y, z)
 })
 
 test_that("as.numeric_unless_warning", {

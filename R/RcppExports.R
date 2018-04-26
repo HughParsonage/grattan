@@ -69,13 +69,17 @@ pmax3 <- function(x, y, z) {
 #' @name pmaxC
 #' @param x A numeric vector.
 #' @param a A single numeric value.
-#' @return The parallel maximum of the input values.
+#' @return The parallel maximum of the input values. \code{pmax0(x)} is shorthand for \code{pmaxC(x, 0)}, i.e. convert negative values in \code{x} to 0.
 #' @note This function will always be faster than \code{pmax(x, a)} when \code{a} is a single value, but can be slower than \code{pmax.int(x, a)} when \code{x} is short. Use this function when comparing a numeric vector with a single value.
 #' @export pmaxC
 NULL
 
 pmaxC <- function(x, a) {
     .Call(`_grattan_pmaxC`, x, a)
+}
+
+pmax0 <- function(x) {
+    .Call(`_grattan_pmax0`, x)
 }
 
 #' @title Parallel maximum
@@ -98,13 +102,17 @@ pmaxV <- function(x, y) {
 #' @name pminC
 #' @param x A numeric vector.
 #' @param a A single numeric value.
-#' @return The parallel minimum of the input values.
+#' @return The parallel minimum of the input values. The \code{0} versions are shortcuts for \code{a = 0}.
 #' @note This function will always be faster than \code{pmin(x, a)} when \code{a} is a single value, but can be slower than \code{pmin.int(x, a)} when \code{x} is short. Use this function when comparing a numeric vector with a single value.
 #' @export pminC
 NULL
 
 pminC <- function(x, a) {
     .Call(`_grattan_pminC`, x, a)
+}
+
+pmin0 <- function(x) {
+    .Call(`_grattan_pmin0`, x)
 }
 
 #' @title Parallel maximum

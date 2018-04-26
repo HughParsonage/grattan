@@ -135,8 +135,9 @@ small_business_tax_offset <- function(taxable_income,
       }
       smbto_p <- tax_discount
     }
-    
-    out <- pminC(prop_tax_for_biz * smbto_p, 1000)
+    out <- prop_tax_for_biz * smbto_p
+    out[is.nan(out)] <- 0
+    out <- pminC(out, 1000)
     
     # Only business with an aggregate annual turnover of less than $2M
     out[aggregated_turnover >= 2e6] <- 0

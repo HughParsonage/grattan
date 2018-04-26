@@ -11,3 +11,5 @@ test_that("New tax bracket function", {
                                                              foo = c(0L, 18200L, 37000L, 80000L, 180000L), 
                                                              bar = c(0, 0.19, 0.325, 0.37, 0.45))))
 })
+
+

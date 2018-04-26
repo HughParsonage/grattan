@@ -49,3 +49,4 @@ test_that("Error handling", {
   
   
 })
+
