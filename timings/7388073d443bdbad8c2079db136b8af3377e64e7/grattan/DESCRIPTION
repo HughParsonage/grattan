@@ -1,0 +1,30 @@
+Package: grattan
+Type: Package
+Title: Perform common quantitative tasks for Australian analysts
+        supporting Grattan Institute analysis
+Version: 0.4.0.1
+Date: 2016-10-26
+Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.parsonage+grattanPackage@grattaninstitute.edu.au"),
+              person("Tim", "Cameron", role = "aut"),
+              person("Brendan", "Coates", role = "aut"), 
+              person("William", "Young", role = "aut"), 
+              person("Ittima", "Cherastidtham", role = "dtc"))
+Maintainer: Who to complain to <hugh.parsonage@grattaninstitute.edu.au>
+Description: The original goal of this package was to simply hold the colours of the Grattan palette. 
+Depends: R (>= 2.10)
+License: GPL-2
+Imports: data.table, dplyr (>= 0.5.0), rsdmx, forecast, lubridate,
+        assertthat, magrittr, Rcpp (>= 0.12.3), zoo, lazyeval, purrr
+LinkingTo: Rcpp
+RoxygenNote: 5.0.1
+Suggests: testthat, taxstats, rmarkdown, dtplyr, ggplot2, scales,
+        broom, knitr, survey
+LazyData: true
+VignetteBuilder: knitr
+Author: Hugh Parsonage [aut, cre],
+  Tim Cameron [aut],
+  Brendan Coates [aut],
+  William Young [aut],
+  Ittima Cherastidtham [dtc]
+Built: R 3.4.3; x86_64-w64-mingw32; 2018-02-25 00:14:58 UTC; windows
+Archs: x64

@@ -1,0 +1,15 @@
+Package: grattan
+Type: Package
+Title: Create charts in the style of the Grattan Insitute, Melbourne;
+        perform common quantitative tasks for Australian policy
+        analysts
+Version: 0.2.0.1
+Date: 2015-02-05
+Author: Hugh Parsonage
+Maintainer: Who to complain to <hugh.parsonage@grattaninstitute.edu.au>
+Description: 
+License:
+Depends: data.table, ggplot2
+Imports: grDevices, RColorBrewer, ggplot2, scales, gridExtra,
+        data.table
+Built: R 3.4.3; ; 2018-02-25 00:43:37 UTC; windows

@@ -1,0 +1,9 @@
+Grey palette            The grey palette
+clean_bibtex_output_from_endnote
+                        endnote_to_bibtex
+colours                 The Grattan colours
+gpal                    automatic palette adjustment (for small number
+                        of categories)
+gpalx                   The extended colour palette
+grattan waterfall       Create waterfall charts
+theme_huh               A theme for use with ggplots

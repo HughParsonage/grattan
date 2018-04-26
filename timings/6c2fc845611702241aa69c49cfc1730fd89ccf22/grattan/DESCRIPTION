@@ -1,0 +1,20 @@
+Package: grattan
+Type: Package
+Title: Create charts in the style of the Grattan Insitute, Melbourne;
+        perform common quantitative tasks for Australian policy
+        analysts
+Version: 0.3.0.1
+Date: 2015-02-05
+Author: Hugh Parsonage
+Maintainer: Who to complain to <hugh.parsonage@grattaninstitute.edu.au>
+Description: The original goal of this package was to simply hold the colours of the Grattan palette. 
+Depends: R (>= 2.10)
+License: GPL-2
+Imports: grDevices, ggplot2 (>= 2.0.0), data.table, dplyr, rsdmx,
+        forecast, lubridate, assertthat, magrittr, Rcpp (>= 0.12.3),
+        knitr, readr, zoo, lazyeval
+LinkingTo: Rcpp
+RoxygenNote: 5.0.1
+Suggests: testthat, taxstats
+Built: R 3.4.3; x86_64-w64-mingw32; 2018-02-25 00:29:37 UTC; windows
+Archs: x64
