@@ -19,7 +19,7 @@ model_income_tax(sample_file, baseline_fy, n_dependants = 0L,
   lito_taper = NULL, lito_min_bracket = NULL, sapto_eligible = NULL,
   sapto_max_offset = NULL, sapto_lower_threshold = NULL,
   sapto_taper = NULL, calc_baseline_tax = TRUE, return. = c("sample_file",
-  "tax"))
+  "tax"), clear_tax_cols = TRUE)
 }
 \arguments{
 \item{sample_file}{A sample file having at least as many variables as the 2012-13 sample file.}
@@ -82,6 +82,8 @@ If \code{NULL}, the default, then eligibility is determined by \code{age_range} 
 \item{return.}{What should the function return? One of \code{tax} or \code{sample_file}. 
 If \code{tax}, the tax payable under the settings; if \code{sample_file}, the \code{sample_file},
 but with variables \code{tax} and possibly \code{new_taxable_income}.}
+
+\item{clear_tax_cols}{If \code{TRUE}, the default, then \code{return. = sample_file} implies any columns called \code{new_tax} or \code{baseline_tax} in \code{sample_file} are dropped silently.}
 }
 \description{
 The income tax payable if tax settings are changed.

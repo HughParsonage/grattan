@@ -41,6 +41,7 @@
 #' @param return. What should the function return? One of \code{tax} or \code{sample_file}. 
 #' If \code{tax}, the tax payable under the settings; if \code{sample_file}, the \code{sample_file},
 #' but with variables \code{tax} and possibly \code{new_taxable_income}. 
+#' @param clear_tax_cols If \code{TRUE}, the default, then \code{return. = sample_file} implies any columns called \code{new_tax} or \code{baseline_tax} in \code{sample_file} are dropped silently.
 #' 
 #' @export
 
@@ -80,7 +81,8 @@ model_income_tax <- function(sample_file,
                              sapto_lower_threshold = NULL,
                              sapto_taper = NULL, 
                              calc_baseline_tax = TRUE,
-                             return. = c("sample_file", "tax")) {
+                             return. = c("sample_file", "tax"),
+                             clear_tax_cols = TRUE) {
   arguments <- ls()
   argument_vals <- as.list(environment())
   return. <- match.arg(return.)
@@ -94,8 +96,19 @@ model_income_tax <- function(sample_file,
   }
   
   stopifnot(is.data.table(sample_file))
+  sample_file <- copy(sample_file)
   .dots.ATO <- sample_file
   sample_file_noms <- copy(names(sample_file))
+  
+  if (clear_tax_cols && return. == "sample_file") {
+    if ("new_tax" %chin% sample_file_noms) {
+      sample_file[, new_tax := NULL]
+    }
+    if ("baseline_tax" %chin% sample_file_noms) {
+      sample_file[, baseline_tax := NULL]
+    }
+  }
+  
   
   s1213_noms <-
     c("Ind", "Gender",

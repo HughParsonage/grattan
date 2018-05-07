@@ -2,8 +2,7 @@ context("Differential uprating")
 
 
 test_that("Error handling", {
-  expect_error(differentially_uprate_wage(from_fy = "2015-16", to_fy = "2016-17"))
-  expect_error(differentially_uprate_wage(from_fy = "2015-16", to_fy = "2016-17"))
+  expect_error(differentially_uprate_wage(from_fy = "2016-17", to_fy = "2017-18"))
 })
 
 test_that("Differential uprate factor preserves order", {

@@ -115,7 +115,12 @@ print.revenue_foregone <- function(x) {
 ```
 
 ```{r}
-s1819 <- project(sample_file_1415_synth, h = 4L)
+if (file.exists("~/ozTaxData/data-raw/2016_sample_file.csv")) {
+  sample_file_1516 <- fread("~/ozTaxData/data-raw/2016_sample_file.csv")
+  s1819 <- project(sample_file_1516, h = 3L, fy.year.of.sample.file = "2015-16")
+} else {
+  s1819 <- project(sample_file_1415_synth, h = 4L)
+}
 ```
 
 ```{r lito_models}
@@ -138,6 +143,17 @@ s1819_lito_double_offset <-
   model_income_tax(baseline_fy = "2018-19",
                    lito_max_offset = 445*2)
 
+s1819_lito_1000 <- 
+  s1819 %>% 
+  model_income_tax(baseline_fy = "2018-19", 
+                   lito_max_offset = 1000)
+s1819_lito_700_60k <- 
+  s1819 %>%
+  model_income_tax(baseline_fy = "2018-19",
+                   lito_max_offset = 700,
+                   lito_taper = 0.1)
+revenue_foregone(s1819_lito_700_60k)
+revenue_foregone(s1819_lito_1000)
 ```
 
 ### Doubling LITO?
