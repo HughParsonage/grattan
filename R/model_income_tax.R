@@ -102,10 +102,10 @@ model_income_tax <- function(sample_file,
   
   if (clear_tax_cols && return. == "sample_file") {
     if ("new_tax" %chin% sample_file_noms) {
-      sample_file[, new_tax := NULL]
+      sample_file[, "new_tax" := NULL]
     }
     if ("baseline_tax" %chin% sample_file_noms) {
-      sample_file[, baseline_tax := NULL]
+      sample_file[, "baseline_tax" := NULL]
     }
   }
   
