@@ -516,11 +516,10 @@ model_income_tax <- function(sample_file,
   } else {
     lito_fy <- lito_tbl[fy_year == baseline_fy]
     lito. <- lito(income,
-                  max_lito = lito_max_offset %||% lito_fy[["max_offset"]],
+                  max_lito = lito_max_offset %||% lito_fy[["max_lito"]],
                   lito_taper = lito_taper %||% lito_fy[["lito_taper"]],
-                  min_bracket = lito_taper %||% lito_fy[["min_bracket"]])
+                  min_bracket = lito_min_bracket %||% lito_fy[["min_bracket"]])
   }
-  
   
   
   sapto. <- double(max.length)

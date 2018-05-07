@@ -91,6 +91,25 @@ test_that("La plus ca meme la plus ca meme: medicare levy", {
   expect_equal(new_tax2, original)
 })
 
+test_that("La plus ca meme la plus ca meme: LITO", {
+  skip_if_not_installed("taxstats"); skip_on_cran()
+  library(taxstats)
+  sample_file_1314_copy <- copy(sample_file_1314)
+  
+  original <- 
+    income_tax(sample_file_1314_copy$Taxable_Income,
+               fy.year = "2013-14",
+               .dots.ATO = copy(sample_file_1314_copy))
+  
+  new_tax2 <-
+    model_income_tax(copy(sample_file_1314_copy),
+                     baseline_fy = "2013-14",
+                     lito_taper = 0.015, 
+                     return. = "tax")
+  
+  expect_equal(new_tax2, original)
+})
+
 test_that("Increase in a rate results in more tax", {
   skip_if_not_installed("taxstats"); skip_on_cran()
   library(taxstats)
