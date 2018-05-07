@@ -28,7 +28,6 @@ library(grattan)
 library(readr)
 library(readxl)
 library(tidyxl)
-library(openxlsx)
 library(hutils)
 options("scipen" = 99)
 if (packageVersion("data.table") < package_version("1.9.8")){
@@ -718,7 +717,8 @@ fwrite_dots <- function(...) {
         stop(class(the_dots[[j]]))
       }
       if (is.data.table(the_dots[[j]])) {
-        fwrite(the_dots[[j]], file.path("data-raw", "sysdata",  paste0(Vs[[j]], ".tsv")), sep = "\t")
+        fwrite(the_dots[[j]], file.path("data-raw", "sysdata",  paste0(Vs[[j]], ".tsv")), sep = "\t",
+               logical01 = TRUE)
       }
     }
   }
