@@ -16,7 +16,7 @@ script:
 # Current release build of data.table has conflict with R-dev
 - Rscript travisBeforeInstall.R
 - R CMD build --no-build-vignettes .
-- R CMD check --no-vignettes *tar.gz
+- R CMD check --no-vignettes --ignore-vignettes --no-manual *tar.gz
 
 r_github_packages:
   - hughparsonage/formalCoverage
