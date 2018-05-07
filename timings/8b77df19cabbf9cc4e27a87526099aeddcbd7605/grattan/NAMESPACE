@@ -1,0 +1,7 @@
+exportPattern("^[[:alpha:]]+")
+import(data.table)
+useDynLib(grattan)
+importFrom(magrittr,"%>%")
+importFrom(magrittr,"%$%")
+importFrom(magrittr,"%<>%")
+importFrom(Rcpp, evalCpp)

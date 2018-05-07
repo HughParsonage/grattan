@@ -1,0 +1,33 @@
+Package: grattan
+Type: Package
+Title: Perform Common Quantitative Tasks for Australian Analysts and to
+        Support Grattan Institute Analysis
+Version: 1.4.0.2
+Date: 2016-02-20
+Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.parsonage@gmail.com"),
+              person("Tim", "Cameron", role = "aut"),
+              person("Brendan", "Coates", role = "aut"), 
+              person("William", "Young", role = "aut"), 
+              person("Ittima", "Cherastidtham", role = "dtc"))
+Maintainer: Hugh Parsonage <hugh.parsonage@gmail.com>
+URL: https://github.com/HughParsonage/grattan
+BugReports: https://github.com/HughParsonage/grattan/issues
+Description: A series of functions focused on costing and evaluating Australian tax policy in support of the Grattan Institute's Australian Perspectives program. For access to the taxstats package, please run install.packages("taxstats", repos = "https://hughparsonage.github.io/drat/", type = "source"). N.B. The taxstats package is approximately 50 MB.
+Depends: R (>= 2.10)
+License: GPL-2
+Imports: data.table, dplyr (>= 0.5.0), rsdmx, forecast, lubridate,
+        assertthat, magrittr, Rcpp (>= 0.12.3), zoo, lazyeval, purrr
+LinkingTo: Rcpp
+RoxygenNote: 6.0.0
+Suggests: testthat, taxstats, rmarkdown, dtplyr, ggplot2, scales,
+        broom, knitr, survey, viridis, ggrepel
+Additional_repositories: https://hughparsonage.github.io/drat/
+LazyData: true
+VignetteBuilder: knitr
+Author: Hugh Parsonage [aut, cre],
+  Tim Cameron [aut],
+  Brendan Coates [aut],
+  William Young [aut],
+  Ittima Cherastidtham [dtc]
+Built: R 3.4.3; x86_64-w64-mingw32; 2018-02-25 00:07:20 UTC; windows
+Archs: x64
