@@ -8,4 +8,6 @@
 ^Roadmap\.pdf$
 ^grattan\.pdf$
 ^appveyor\.yml$
+^travisBeforeInstall.R$
 ^timings$
+
