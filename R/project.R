@@ -90,7 +90,7 @@ project <- function(sample_file,
            stop("`fy.year.of.sample.file` must be '2012-13', '2013-14', or '2014-15'."))
   }
   
-  if ("WEIGHT" %notchin% names(sample_file)) {
+  if ("WEIGHT" %notin% names(sample_file)) {
     sample_file[, "WEIGHT" := list(WEIGHT)]
   }
   

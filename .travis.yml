@@ -6,6 +6,7 @@ r:
 r_check_args:
 - '--as-cran'
 - '--no-multiarch'
+- '--no-vignettes'
 cache: packages
 warnings_are_errors: true
 

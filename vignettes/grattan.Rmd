@@ -147,11 +147,17 @@ s1819_lito_1000 <-
   s1819 %>% 
   model_income_tax(baseline_fy = "2018-19", 
                    lito_max_offset = 1000)
+s1819_lito_1000_singles <- 
+  s1819 %>% 
+  .[age_range > 1L & Partner_status == 0] %>%
+  model_income_tax(baseline_fy = "2018-19", 
+                   lito_max_offset = 1000)
+
 s1819_lito_700_60k <- 
   s1819 %>%
   model_income_tax(baseline_fy = "2018-19",
                    lito_max_offset = 700,
-                   lito_taper = 0.1)
+                   lito_taper = 0.03)
 revenue_foregone(s1819_lito_700_60k)
 revenue_foregone(s1819_lito_1000)
 ```
