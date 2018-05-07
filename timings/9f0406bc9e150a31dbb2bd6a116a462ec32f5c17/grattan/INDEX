@@ -1,0 +1,71 @@
+CG_population_inflator
+                        Forecasting capital gains
+IncomeTax               IncomeTax
+MedicareLevy            Medicare levy in C++
+Offset                  General offset in C++
+age_grouper             Age grouper
+apply_super_caps_and_div293
+                        Superannuation caps and Division 293
+                        calculations
+aus_pop_qtr             Australia's population
+aus_pop_qtr_age         Australian estimated resident population by age
+                        and date
+bto                     Beneficiary tax offset
+cpi_inflator            CPI inflator
+cpi_inflator_general_date
+                        CPI for general dates
+cpi_inflator_quarters   CPI inflator when dates are nice
+differentially_uprate_wage
+                        Differential uprating
+foreign_income_tax_offset
+                        Foreign Income Tax Offset
+gdp                     Gross Domestic Product, Australia
+generic_inflator        Generic inflator
+gni                     Gross National Income, Australia
+grattan-package         The grattan package.
+income_tax              Income tax payable
+income_tax_sapto        Income tax payable as a function of SAPTO
+inflator                Inflate using a general index
+inverse_average_rate    Inverse average tax rate
+inverse_income          Inverse income tax functions
+is.fy                   Convenience functions for dealing with
+                        financial years
+lf_inflator             Labour force inflators
+lito                    Low Income Tax Offset
+max_super_contr_base    Maximum superannuation contribution base
+medicare_levy           Medicare levy
+model_income_tax        Modelled Income Tax
+model_new_caps_and_div293
+                        Modelling superannuation changes
+new_income_tax          New income tax payable Income tax payable with
+                        new tax brackets, tax rates etc
+new_medicare_levy       New medicare levy
+new_sapto               SAPTO with user-defined thresholds
+npv                     Financial functions
+pmax3                   Threeway parallel maximum
+pmaxC                   Parallel maximum
+pmaxV                   Parallel maximum
+pminC                   Parallel maximum
+pminV                   Parallel maximum
+prohibit_length0_vectors
+                        Prohibit zero lengths
+prohibit_unequal_length_vectors
+                        Prohibit unequal length vectors
+prohibit_vector_recycling
+                        Prohibit vector recycling
+project                 A function for simple projections of tables of
+                        Australian Taxation Office tax returns.
+project_to              A function for simple projections of sample
+                        files
+rebate_income           Rebate income
+residential_property_prices
+                        Residential property prices in Australia
+sapto                   Seniors and Pensioner Tax Offset
+sapto_rcpp              SAPTO in C++
+sapto_rcpp_singleton    SAPTO singleton
+sapto_rcpp_yr           SAPTO for specific years in C++
+small_business_tax_offset
+                        Small Business Tax Offset
+student_repayment       HELP / HECS repayment amounts
+wage_inflator           Inflation using the Wage Price Index.
+weighted_ntile          Weighted quantiles

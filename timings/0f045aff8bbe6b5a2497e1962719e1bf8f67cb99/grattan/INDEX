@@ -1,0 +1,95 @@
+CGT_inflator            CGT inflator
+CG_population_inflator
+                        Forecasting capital gains
+DarkOrange              DarkOrange
+Orange                  Orange
+OrangeBackground        OrangeBackground
+age_grouper             Age grouper
+apply_super_caps_and_div293
+                        Superannuation caps and Division 293
+                        calculations
+aus_pop_qtr             Australia's population
+chart_data              chart_data
+clean_bibtex_output_from_endnote
+                        endnote_to_bibtex
+col.1                   col.1
+col.2                   col.2
+col.3                   col.3
+col.4                   col.4
+col.5                   col.5
+col.6                   col.6
+cpi_inflator            CPI inflator
+cpi_inflator_general_date
+                        CPI for general dates
+cpi_inflator_quarters   CPI inflator when dates are nice
+differentially_uprate_wage
+                        Differential uprating
+general_inflator        Inflate using a general index
+generic_inflator        Generic inflator
+gpal                    Automatic palette adjustment
+gpalx                   The extended colour palette
+grattan waterfall       Create waterfall charts
+grattan-package         Colours, charts, and other common quant tasks
+grattan_dollar          dollar scales
+grey.pal                grey.pal
+grplot                  Attempt to harness ggplot but set as much to
+                        default as possible
+income_tax              tax function
+inverse_average_rate    Inverse average tax rate
+inverse_income          Inverse income tax functions
+is.fy                   Convenience functions for dealing with
+                        financial years
+lf_inflator             Labour force inflators
+max_super_contr_base    Maximum superannuation contribution base
+medicare_levy           Medicare levy
+model_new_caps_and_div293
+                        Modelling superannuation changes
+mywaterfall             mywaterfall
+new_income_tax          New income tax payable Income tax payable with
+                        new tax brackets, tax rates etc
+new_medicare_levy       New medicare levy
+newstart_income         Newstart income
+npv                     Financial functions
+pal.1                   pal.1
+pal.2                   pal.2
+pal.2dark               pal.2dark
+pal.3                   pal.3
+pal.4                   pal.4
+pal.5                   pal.5
+pal.6                   pal.6
+pal.7                   pal.7
+pal.8                   pal.8
+pal.9                   pal.9
+pmax3                   Threeway parallel maximum
+pmaxC                   Parallel maximum
+pmaxV                   Parallel maximum
+pminC                   Parallel maximum
+pminV                   Parallel maximum
+print_2heading_xtable   Print LaTeX tables with headings over two lines
+prohibit_length0_vectors
+                        Prohibit zero lengths
+prohibit_vector_recycling
+                        Prohibit vector recyling
+project                 A function for simple projections of sample
+                        files
+project_to              A function for simple projections of sample
+                        files
+rebate_income           Rebate income
+sapto                   Senior Australians and Pensioner Tax Offset
+scale_color_discrete_grattan
+                        scale color scale for grattan (uses the
+                        palette)
+scale_fill_discrete_grattan
+                        scale fill scale for grattan (uses the palette)
+stacked_bar_with_right_labels
+                        Stacked charts with labels at right
+student_repayment       HELP / HECS repayment amounts
+texNum                  Convert number to English prose
+theGrey                 theGrey
+theme_grattan           theme_grattan
+theme_grattan_OrangeBackground
+                        A theme for use with ggplots when the
+                        background needs to be Orange
+theme_hugh              A theme for use with ggplots
+wage_inflator           A wage inflator
+weighted_ntile          Weighted quantiles
