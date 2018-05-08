@@ -1,3 +1,7 @@
+## 1.6.0.0
+### 2018-05-08
+* Never-legislated Medicare levy change in 2019-20 has been reverted
+
 ## 1.5.3.6
 ### 2018-02-21
 * Labour force data and wage price index updated to 2018-02-21.
