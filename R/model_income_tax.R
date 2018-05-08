@@ -76,6 +76,8 @@ model_income_tax <- function(sample_file,
                              lito_taper = NULL,
                              lito_min_bracket = NULL,
                              
+                             lamington = FALSE,
+                             
                              sapto_eligible = NULL,
                              sapto_max_offset = NULL,
                              sapto_lower_threshold = NULL,
@@ -607,8 +609,15 @@ model_income_tax <- function(sample_file,
       flood_levy. <- 0
     }
     
+    lamington_offset. <-
+      if (lamington) {
+        lmito(income, fy.year = baseline_fy)
+      } else {
+        0
+      }
+    
     # http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html
-    S4.10_basic_income_tax_liability <- pmaxC(base_tax. - lito. - sapto., 0)
+    S4.10_basic_income_tax_liability <- pmaxC(base_tax. - lito. - lamington_offset. - sapto., 0)
     
     # SBTO can only be calculated off .dots.ATO
     

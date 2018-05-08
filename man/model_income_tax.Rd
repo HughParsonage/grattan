@@ -16,10 +16,11 @@ model_income_tax(sample_file, baseline_fy, n_dependants = 0L,
   medicare_levy_lower_family_sapto_threshold = NULL,
   medicare_levy_upper_family_sapto_threshold = NULL,
   medicare_levy_lower_up_for_each_child = NULL, lito_max_offset = NULL,
-  lito_taper = NULL, lito_min_bracket = NULL, sapto_eligible = NULL,
-  sapto_max_offset = NULL, sapto_lower_threshold = NULL,
-  sapto_taper = NULL, calc_baseline_tax = TRUE, return. = c("sample_file",
-  "tax"), clear_tax_cols = TRUE)
+  lito_taper = NULL, lito_min_bracket = NULL, lamington = FALSE,
+  sapto_eligible = NULL, sapto_max_offset = NULL,
+  sapto_lower_threshold = NULL, sapto_taper = NULL,
+  calc_baseline_tax = TRUE, return. = c("sample_file", "tax"),
+  clear_tax_cols = TRUE)
 }
 \arguments{
 \item{sample_file}{A sample file having at least as many variables as the 2012-13 sample file.}

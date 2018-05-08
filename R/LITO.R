@@ -49,16 +49,24 @@ lito <- function(income,
 lmito <- function(income, 
                   first_offset = 200,
                   thresholds = c(37e3, 48e3, 90e3, 125333),
-                  taper = c(0, 0.03, 0, -0.015)) {
+                  taper = c(0, 0.03, 0, -0.015),
+                  fy.year = NULL) {
+  if (!is.null(fy.year) &&
+      !identical(fy.year, "2018-19") &&
+      !identical(fy.year, "2017-18")) {
+    stop("`fy.year` was not NULL or \"2018-19\". Only these values are supported")
+  }
+  
   stopifnot(length(thresholds) == length(taper))
-  out <- first_offset
-  for (i in seq_along(thresholds)) {
-    if (i != length(thresholds)) {
-      out <- out + pmaxC(pminC(income, thresholds[i + 1]) - thresholds[i], 0) * (taper[i + 1])
-    }
+  out <- first_offset  # auto recycling
+  for (i in seq_len(length(thresholds) - 1L)) {
+    out <- out + pmaxC(pminC(income, thresholds[i + 1L]) - thresholds[i], 0) * (taper[i + 1L])
   }
   out
 }
+
+
+
 
 
 

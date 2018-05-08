@@ -37,6 +37,7 @@ RoxygenNote: 6.0.1
 Suggests:
     dplyr,
     dtplyr,
+    fst (>= 0.8.4),
     ggplot2,
     ggrepel,
     knitr,
