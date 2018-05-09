@@ -197,7 +197,8 @@ medicare_levy_lower_up_for_each_child <- function(fy) {
   project(sample_file_1516,
           h = h,
           wage.series = if (use.Treasury) wage_forecasts,
-          lf.series = if (use.Treasury) lf_forecasts)
+          lf.series = if (use.Treasury) lf_forecasts) %>%
+    setkey(Taxable_Income)
 }
 
 
@@ -206,7 +207,7 @@ medicare_levy_lower_up_for_each_child <- function(fy) {
 .project_useGrattans <- lapply(1:15, .project_to, use.Treasury = FALSE)
 
 
-model_Budgets <- function(fy_year, use.Treasury = TRUE) { 
+model_Budgets <- function(fy_year, use.Treasury = TRUE, .debug = FALSE) { 
   h <- as.integer(fy2yr(fy_year) - 2016L)
   
   if (use.Treasury) {
@@ -226,7 +227,10 @@ model_Budgets <- function(fy_year, use.Treasury = TRUE) {
       medicare_levy_lower_up_for_each_child = medicare_levy_lower_up_for_each_child(fy_year),
       warn_upper_thresholds = FALSE,
       ...) %>%
-      .[, new_tax := as.integer(new_tax)] 
+      .[, new_tax := as.integer(new_tax)] %>%
+      .[, delta := new_tax - baseline_tax] %>%
+      setkey(Taxable_Income) %>%
+      .[]
   }
   
   list(Budget2018_baseline = model_income_tax(),
@@ -263,6 +267,51 @@ write.csv(round(sapply(Budget_1922, sapply, revenue_foregone, USE.NAMES = TRUE) 
 write.csv(round(sapply(Budget_1922_Grattan, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9, 2), 
           "vignettes/Budget201718-Grattan-summaries.csv")
 
+library(grattanCharts)
+lapply(Budget_1922, function(x) {
+  x[["Budget2018"]] %>%
+  setkey(Taxable_Income) %>%
+  .[, Quintile := factor(ceiling(5 * .I / .N),
+                                      levels = 1:5)] %>%
+  .[, .(avg_delta = mean(delta),
+        max_income = max(Taxable_Income),
+        avg_income = mean(Taxable_Income + 0)),
+    keyby = .(Quintile)]
+}) %>%
+  rbindlist(idcol = "fy_year") %>% 
+  .[, "Financial year ending" := fy2yr(fy_year)] %>%
+  .[, avg_delta := round(avg_delta, 2)] %>%
+  .[] %>%
+  grplot(aes(x = `Financial year ending`, y = avg_delta, fill = Quintile),
+         reverse = TRUE) +
+  geom_col(position = "dodge") + 
+  ggtitle("Average individual impact") +
+  scale_y_continuous(labels = grattan_dollar) + 
+  guides(fill = guide_legend(reverse = FALSE)) +
+  theme(legend.position = "right")
+
+lapply(Budget_1922, function(x) {
+  x[["Budget2018"]] %>%
+    setkey(Taxable_Income) %>%
+    .[, Quintile := factor(ceiling(5 * .I / .N),
+                           levels = 5:1)] %>%
+    .[, .(total_delta_bn = sum(delta * WEIGHT / 1e9),
+          max_income = max(Taxable_Income),
+          min_income = min(Taxable_Income),
+          avg_income = mean(Taxable_Income + 0)),
+      keyby = .(Quintile)]
+}) %>%
+  rbindlist(idcol = "fy_year") %>% 
+  .[, "Financial year ending" := fy2yr(fy_year)] %>%
+  .[, total_delta_bn := round(total_delta_bn, 2)] %>%
+  .[, avg_income := round(avg_income, 2)] %>%
+  .[] %T>%
+  fwrite("vignettes/budget2018-total-revenue-vs-fy-by-quintile.csv") %>%
+  grplot(aes(x = `Financial year ending`, y = total_delta_bn, fill = Quintile)) +
+  geom_col() + 
+  ggtitle("Total revenue foregone") +
+  guides(fill = guide_legend(reverse = TRUE)) +
+  theme(legend.position = "right")
 
 if (FALSE) {
 
