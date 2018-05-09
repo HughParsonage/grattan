@@ -624,9 +624,8 @@ model_income_tax <- function(sample_file,
    
       if (lito_202223) {
         lito. <- 
-          pmaxC(pminC(pmaxV(lito(income, max_lito = 645, lito_taper = 0.065, min_bracket = 37e3),
-                            lito(income, max_lito = 385, lito_taper = 0.015, min_bracket = 41e3)),
-                      0),
+          pmaxC(pmaxV(lito(income, max_lito = 645, lito_taper = 0.065, min_bracket = 37e3),
+                      lito(income, max_lito = 385, lito_taper = 0.015, min_bracket = 41e3)),
                 0)
       }
     
