@@ -19,8 +19,8 @@ model_income_tax(sample_file, baseline_fy, n_dependants = 0L,
   lito_taper = NULL, lito_min_bracket = NULL, lamington = FALSE,
   lito_202223 = FALSE, sapto_eligible = NULL, sapto_max_offset = NULL,
   sapto_lower_threshold = NULL, sapto_taper = NULL,
-  calc_baseline_tax = TRUE, return. = c("sample_file", "tax"),
-  clear_tax_cols = TRUE)
+  calc_baseline_tax = TRUE, return. = c("sample_file", "tax",
+  "sample_file.int"), clear_tax_cols = TRUE)
 }
 \arguments{
 \item{sample_file}{A sample file having at least as many variables as the 2012-13 sample file.}
@@ -84,9 +84,9 @@ If \code{NULL}, the default, then eligibility is determined by \code{age_range} 
 
 \item{calc_baseline_tax}{(logical, default: \code{TRUE}) Should the income tax in \code{baseline_fy} be included as a column in the result?}
 
-\item{return.}{What should the function return? One of \code{tax} or \code{sample_file}. 
+\item{return.}{What should the function return? One of \code{tax}, \code{sample_file}, or \code{sample_file.int}. 
 If \code{tax}, the tax payable under the settings; if \code{sample_file}, the \code{sample_file},
-but with variables \code{tax} and possibly \code{new_taxable_income}.}
+but with variables \code{tax} and possibly \code{new_taxable_income}; if \code{sample_file.int}, same as \code{sample_file} but \code{new_tax} is coerced to integer.}
 
 \item{clear_tax_cols}{If \code{TRUE}, the default, then \code{return. = sample_file} implies any columns called \code{new_tax} or \code{baseline_tax} in \code{sample_file} are dropped silently.}
 }

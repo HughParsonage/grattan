@@ -42,9 +42,9 @@
 #' @param sapto_lower_threshold The threshold at which SAPTO begins to reduce (from \code{sapto_max_offset}).
 #' @param sapto_taper The taper rate beyond \code{sapto_lower_threshold}.
 #' @param calc_baseline_tax (logical, default: \code{TRUE}) Should the income tax in \code{baseline_fy} be included as a column in the result?
-#' @param return. What should the function return? One of \code{tax} or \code{sample_file}. 
+#' @param return. What should the function return? One of \code{tax}, \code{sample_file}, or \code{sample_file.int}. 
 #' If \code{tax}, the tax payable under the settings; if \code{sample_file}, the \code{sample_file},
-#' but with variables \code{tax} and possibly \code{new_taxable_income}. 
+#' but with variables \code{tax} and possibly \code{new_taxable_income}; if \code{sample_file.int}, same as \code{sample_file} but \code{new_tax} is coerced to integer.
 #' @param clear_tax_cols If \code{TRUE}, the default, then \code{return. = sample_file} implies any columns called \code{new_tax} or \code{baseline_tax} in \code{sample_file} are dropped silently.
 #' 
 #' @export
@@ -88,7 +88,7 @@ model_income_tax <- function(sample_file,
                              sapto_lower_threshold = NULL,
                              sapto_taper = NULL, 
                              calc_baseline_tax = TRUE,
-                             return. = c("sample_file", "tax"),
+                             return. = c("sample_file", "tax", "sample_file.int"),
                              clear_tax_cols = TRUE) {
   arguments <- ls()
   argument_vals <- as.list(environment())
@@ -683,7 +683,8 @@ model_income_tax <- function(sample_file,
   
   switch(return.,
          "tax" = new_tax,
-         "sample_file" = sample_file[, new_tax := as.integer(new_tax)])
+         "sample_file" = set(sample_file, j = "new_tax", value = new_tax),
+         "sample_file.int" = set(sample_file, j = "new_tax", value = as.integer(new_tax)))
 }
 
 
