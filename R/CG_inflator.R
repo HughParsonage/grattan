@@ -25,7 +25,7 @@ CG_population_inflator <- function(x = 1,
   nse_forecast_series <- forecast.series
   
   out_tbl <- 
-    cg_inflators_1314 %>% 
+    cg_inflators_1516 %>% 
     copy %>%
     .[forecast.series == nse_forecast_series]
   
@@ -46,8 +46,8 @@ CG_inflator <- function(x = 1, from_fy, to_fy, forecast.series = "mean"){
   stopifnot(is.numeric(x), all(is.fy(from_fy)), all(is.fy(to_fy)))
   
   # Else NAs.
-  stopifnot(all(to_fy %in% cg_inflators_1314[["fy_year"]]),
-            all(from_fy %in% cg_inflators_1314[["fy_year"]]))
+  stopifnot(all(to_fy %in% cg_inflators_1516[["fy_year"]]),
+            all(from_fy %in% cg_inflators_1516[["fy_year"]]))
 
   # CRAN Note avoidance
   ordering <- NULL
@@ -57,7 +57,7 @@ CG_inflator <- function(x = 1, from_fy, to_fy, forecast.series = "mean"){
 
   nse_forecast_series <- forecast.series
   cg_inflators_tbl <- 
-    cg_inflators_1314 %>% 
+    cg_inflators_1516 %>% 
     copy %>% 
     .[forecast.series == nse_forecast_series]
   

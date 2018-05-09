@@ -17,7 +17,7 @@ model_income_tax(sample_file, baseline_fy, n_dependants = 0L,
   medicare_levy_upper_family_sapto_threshold = NULL,
   medicare_levy_lower_up_for_each_child = NULL, lito_max_offset = NULL,
   lito_taper = NULL, lito_min_bracket = NULL, lamington = FALSE,
-  sapto_eligible = NULL, sapto_max_offset = NULL,
+  lito_202223 = FALSE, sapto_eligible = NULL, sapto_max_offset = NULL,
   sapto_lower_threshold = NULL, sapto_taper = NULL,
   calc_baseline_tax = TRUE, return. = c("sample_file", "tax"),
   clear_tax_cols = TRUE)
@@ -67,6 +67,10 @@ Since the temporary budget repair levy was imposed on a discrete tax bracket whe
 \item{lito_taper}{The taper to apply beyond \code{lito_min_bracket}.}
 
 \item{lito_min_bracket}{The taxable income at which the value of the offset starts to reduce (from \code{lito_max_offset}).}
+
+\item{lamington}{The Low Middle Income Tax Offset proposed in the 2018 Budget.}
+
+\item{lito_202223}{The LITO proposed for 2022-23 proposed in the 2018 Budget.}
 
 \item{sapto_eligible}{Whether or not each taxpayer in \code{sample_file} is eligible for \code{SAPTO}. 
 If \code{NULL}, the default, then eligibility is determined by \code{age_range} in \code{sample_file};

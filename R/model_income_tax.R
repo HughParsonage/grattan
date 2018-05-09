@@ -31,6 +31,10 @@
 #' @param lito_max_offset The maximum offset available for low incomes.
 #' @param lito_taper The taper to apply beyond \code{lito_min_bracket}.
 #' @param lito_min_bracket The taxable income at which the value of the offset starts to reduce (from \code{lito_max_offset}).
+#' 
+#' @param lamington The Low Middle Income Tax Offset proposed in the 2018 Budget.
+#' @param lito_202223 The LITO proposed for 2022-23 proposed in the 2018 Budget.
+#' 
 #' @param sapto_eligible Whether or not each taxpayer in \code{sample_file} is eligible for \code{SAPTO}. 
 #' If \code{NULL}, the default, then eligibility is determined by \code{age_range} in \code{sample_file};
 #' \emph{i.e.}, if \code{age_range <= 1} then the taxpayer is assumed to be eligible for SAPTO.
@@ -77,6 +81,7 @@ model_income_tax <- function(sample_file,
                              lito_min_bracket = NULL,
                              
                              lamington = FALSE,
+                             lito_202223 = FALSE,
                              
                              sapto_eligible = NULL,
                              sapto_max_offset = NULL,
@@ -616,6 +621,15 @@ model_income_tax <- function(sample_file,
         0
       }
     
+   
+      if (lito_202223) {
+        lito. <- 
+          pmaxC(pminC(pmaxV(lito(income, max_lito = 645, lito_taper = 0.065, min_bracket = 37e3),
+                            lito(income, max_lito = 385, lito_taper = 0.015, min_bracket = 41e3)),
+                      0),
+                0)
+      }
+    
     # http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html
     S4.10_basic_income_tax_liability <- pmaxC(base_tax. - lito. - lamington_offset. - sapto., 0)
     
@@ -670,7 +684,7 @@ model_income_tax <- function(sample_file,
   
   switch(return.,
          "tax" = new_tax,
-         "sample_file" = sample_file[, new_tax := as.double(new_tax)])
+         "sample_file" = sample_file[, new_tax := as.integer(new_tax)])
 }
 
 

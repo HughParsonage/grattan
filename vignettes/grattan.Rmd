@@ -114,6 +114,13 @@ print.revenue_foregone <- function(x) {
 
 ```
 
+```{r decode_age_range}
+decode_age_range <- function(DT) {
+  stopifnot("age_range" %in% names(DT))
+  DT[age_range_decoder, on = "age_range"]
+}
+```
+
 ```{r}
 if (file.exists("~/ozTaxData/data-raw/2016_sample_file.csv")) {
   sample_file_1516 <- fread("~/ozTaxData/data-raw/2016_sample_file.csv")
@@ -121,6 +128,7 @@ if (file.exists("~/ozTaxData/data-raw/2016_sample_file.csv")) {
 } else {
   s1819 <- project(sample_file_1415_synth, h = 4L)
 }
+s1819 <- decode_age_range(s1819)
 ```
 
 ```{r lito_models}
@@ -162,6 +170,10 @@ revenue_foregone(s1819_lito_700_60k)
 revenue_foregone(s1819_lito_1000)
 ```
 
+```{r}
+
+```
+
 ### Doubling LITO?
 
 ```{r}
@@ -180,6 +192,8 @@ s1819_lito_double_offset %>%
   ggplot(aes(x = Taxable_Income_percentile, y = `Average tax rate`, color = variable)) + 
   geom_line()
 ```
+
+
 
 # Bracket creep
 

@@ -313,7 +313,7 @@ generic_inflators_1516 <-
   if (!renew){
     fread("./data-raw/generic_inflators_1516.tsv")
   } else {
-    lapply(1:10, 
+    lapply(1:15, 
            function(h) {
              grattan:::generic_inflator(vars = generic.cols,
                                         h = h,
@@ -520,7 +520,7 @@ cg_inflators_1516 <- if (!renew) fread("./data-raw/cg_inflators_1516.tsv") else 
       .[, .(fy_year, n_CG = Count)]
     
     forecaster <- function(object, ...) {
-      forecast(object, ...)
+      forecast(object, h = 15, ...)
     } # gforecast terrible
     
     
@@ -529,34 +529,34 @@ cg_inflators_1516 <- if (!renew) fread("./data-raw/cg_inflators_1516.tsv") else 
            "mean" = {
              n_cg <- 
                rbind(n_cg_history, 
-                     data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 1:10),
+                     data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 1:15),
                                 n_CG = exp(as.numeric(forecaster(log(n_cg_history$n_CG), level = 95)$mean))))
              
              cg <- 
                rbind(as.data.table(cg_table), 
-                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 1:10), 
+                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 1:15), 
                                 zero_discount_Net_CG_total = as.numeric(forecaster(cg_table$zero_discount_Net_CG_total, level = 95)$mean)))
            }, 
            "lower" = {
              n_cg <- 
                rbind(n_cg_history, 
-                     data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 1:10),
+                     data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 1:15),
                                 n_CG = exp(as.numeric(forecaster(log(n_cg_history$n_CG), level = 95)$lower))))
              
              cg <-
                rbind(as.data.table(cg_table), 
-                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 1:10), 
+                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 1:15), 
                                 zero_discount_Net_CG_total = as.numeric(forecaster(cg_table$zero_discount_Net_CG_total, level = 95)$lower)))
            }, 
            "upper" = {
              n_cg <- 
                rbind(n_cg_history, 
-                     data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 1:10),
+                     data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 1:15),
                                 n_CG = exp(as.numeric(forecaster(log(n_cg_history$n_CG), level = 95)$upper))))
              
              cg <-
                rbind(as.data.table(cg_table), 
-                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 1:10), 
+                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 1:15), 
                                 zero_discount_Net_CG_total = as.numeric(forecaster(cg_table$zero_discount_Net_CG_total, level = 95)$upper)))
            })
     
@@ -568,8 +568,8 @@ cg_inflators_1516 <- if (!renew) fread("./data-raw/cg_inflators_1516.tsv") else 
   }
   lapply(c("lower", "mean", "upper"), get_cg_inf) %>%
     rbindlist(use.names = TRUE) %>%
-    .[fy_year >= "2012-13"] %T>%
-    write_tsv("./data-raw/cg_inflators_1415.tsv") %>%
+    .[fy_year >= "2015-16"] %T>%
+    write_tsv("./data-raw/cg_inflators_1516.tsv") %>%
     .[]
 }
 
