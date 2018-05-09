@@ -568,7 +568,7 @@ cg_inflators_1516 <- if (!renew) fread("./data-raw/cg_inflators_1516.tsv") else 
   }
   lapply(c("lower", "mean", "upper"), get_cg_inf) %>%
     rbindlist(use.names = TRUE) %>%
-    .[fy_year >= "2015-16"] %T>%
+    .[fy_year >= "2012-13"] %T>%  # leave as 2012-13 to keep earlier years working
     write_tsv("./data-raw/cg_inflators_1516.tsv") %>%
     .[]
 }
