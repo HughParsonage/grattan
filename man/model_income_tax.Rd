@@ -20,7 +20,8 @@ model_income_tax(sample_file, baseline_fy, n_dependants = 0L,
   lito_202223 = FALSE, sapto_eligible = NULL, sapto_max_offset = NULL,
   sapto_lower_threshold = NULL, sapto_taper = NULL,
   calc_baseline_tax = TRUE, return. = c("sample_file", "tax",
-  "sample_file.int"), clear_tax_cols = TRUE)
+  "sample_file.int"), clear_tax_cols = TRUE, warn_upper_thresholds = TRUE,
+  .debug = FALSE)
 }
 \arguments{
 \item{sample_file}{A sample file having at least as many variables as the 2012-13 sample file.}
@@ -89,6 +90,10 @@ If \code{tax}, the tax payable under the settings; if \code{sample_file}, the \c
 but with variables \code{tax} and possibly \code{new_taxable_income}; if \code{sample_file.int}, same as \code{sample_file} but \code{new_tax} is coerced to integer.}
 
 \item{clear_tax_cols}{If \code{TRUE}, the default, then \code{return. = sample_file} implies any columns called \code{new_tax} or \code{baseline_tax} in \code{sample_file} are dropped silently.}
+
+\item{warn_upper_thresholds}{If \code{TRUE}, the default, then any inconsistency between \code{baseline_fy} and the upper thresholds result in a warning. Set to \code{FALSE}, if the \code{lower_threshold}s may take priority.}
+
+\item{.debug}{Return a data.table of \code{new_tax}.}
 }
 \description{
 The income tax payable if tax settings are changed.

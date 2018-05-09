@@ -48,7 +48,7 @@ lito <- function(income,
 
 lmito <- function(income, 
                   first_offset = 200,
-                  thresholds = c(37e3, 48e3, 90e3, 125333),
+                  thresholds = c(37e3, 48e3, 90e3, 125333+1/3),
                   taper = c(0, 0.03, 0, -0.015),
                   fy.year = NULL) {
   if (!is.null(fy.year) &&
@@ -62,7 +62,7 @@ lmito <- function(income,
   for (i in seq_len(length(thresholds) - 1L)) {
     out <- out + pmaxC(pminC(income, thresholds[i + 1L]) - thresholds[i], 0) * (taper[i + 1L])
   }
-  out
+  as.integer(out)
 }
 
 

@@ -46,6 +46,8 @@
 #' If \code{tax}, the tax payable under the settings; if \code{sample_file}, the \code{sample_file},
 #' but with variables \code{tax} and possibly \code{new_taxable_income}; if \code{sample_file.int}, same as \code{sample_file} but \code{new_tax} is coerced to integer.
 #' @param clear_tax_cols If \code{TRUE}, the default, then \code{return. = sample_file} implies any columns called \code{new_tax} or \code{baseline_tax} in \code{sample_file} are dropped silently.
+#' @param warn_upper_thresholds If \code{TRUE}, the default, then any inconsistency between \code{baseline_fy} and the upper thresholds result in a warning. Set to \code{FALSE}, if the \code{lower_threshold}s may take priority. 
+#' @param .debug Return a data.table of \code{new_tax}.
 #' 
 #' @export
 
@@ -89,7 +91,9 @@ model_income_tax <- function(sample_file,
                              sapto_taper = NULL, 
                              calc_baseline_tax = TRUE,
                              return. = c("sample_file", "tax", "sample_file.int"),
-                             clear_tax_cols = TRUE) {
+                             clear_tax_cols = TRUE,
+                             warn_upper_thresholds = TRUE,
+                             .debug = FALSE) {
   arguments <- ls()
   argument_vals <- as.list(environment())
   return. <- match.arg(return.)
@@ -340,22 +344,24 @@ model_income_tax <- function(sample_file,
                       "medicare_levy_taper" = mt,
                       "medicare_levy_rate" = mr)
         
-        if (uniqueN(val) == 1L) {
-          warning("`", the_arg, "` was not specified, ",
-                  "but its default value would be inconsistent with the parameters that were specified.\n", 
-                  "Its value has been set to:\n\t",
-                  the_arg, " = ", round(val[1], digits = if (val[1] < 1) 2 else 0),
-                  call. = FALSE)
-        } else {
-          warning("`", the_arg, "` was not specified, ",
-                  "but its default values would be inconsistent with the parameters that were specified.\n",
-                  "Its values have been set to: ",
-                  "\n\t", paste0(utils::head(unique(round(val), 5)), 
-                                 "...", 
-                                 utils::tail(unique(round(val), 5)),
-                                 collapse = "\n\t"),
-                  "\n\t\t (First and last five shown.)",
-                  call. = FALSE)
+        if (warn_upper_thresholds || !grepl("upper", the_arg)) {
+          if (uniqueN(val) == 1L) {
+            warning("`", the_arg, "` was not specified, ",
+                    "but its default value would be inconsistent with the parameters that were specified.\n", 
+                    "Its value has been set to:\n\t",
+                    the_arg, " = ", round(val[1], digits = if (val[1] < 1) 2 else 0),
+                    call. = FALSE)
+          } else {
+            warning("`", the_arg, "` was not specified, ",
+                    "but its default values would be inconsistent with the parameters that were specified.\n",
+                    "Its values have been set to: ",
+                    "\n\t", paste0(utils::head(unique(round(val), 5)), 
+                                   "...", 
+                                   utils::tail(unique(round(val), 5)),
+                                   collapse = "\n\t"),
+                    "\n\t\t (First and last five shown.)",
+                    call. = FALSE)
+          }
         }
       }
       
@@ -639,6 +645,10 @@ model_income_tax <- function(sample_file,
                                 basic_income_tax_liability = S4.10_basic_income_tax_liability,
                                 .dots.ATO = .dots.ATO,
                                 fy_year = baseline_fy)
+    
+    if (.debug) {
+      return(data.table(income, base_tax., lito., lamington_offset., sapto., sbto., medicare_levy.))
+    }
     
     pmaxC(S4.10_basic_income_tax_liability - sbto., 0) +
       medicare_levy. +

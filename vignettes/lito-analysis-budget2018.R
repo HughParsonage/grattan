@@ -37,6 +37,7 @@ hutils::provide.dir(templib)
 #         lib.loc = templib,
 #         verbose = TRUE,
 #         character.only = TRUE)
+library(taxstats)
 library(data.table)
 
 sample_file_1415 <- SampleFile1415::sample_file_1415
@@ -69,7 +70,7 @@ library(grattan)
 
 ## ------------------------------------------------------------------------
 revenue_foregone <- function(dt) {
-  out <- dt[, sum((new_tax - baseline_tax) * WEIGHT)]
+  out <- dt[, sum((as.integer(new_tax) - baseline_tax) * WEIGHT)]
   class(out) <- "revenue_foregone"
   out
 }
@@ -138,90 +139,132 @@ s1819_Budget_baseline <-
   model_income_tax(baseline_fy = "2017-18")
 
 wage_forecasts <- 
-  data.table(fy_year = yr2fy(2018:2027),
-             r = c(2.25, 2.75, 3.25, 3.5, 3.5, rep(3.5, 5)) / 100)
+  data.table(fy_year = yr2fy(2018:2028),
+             r = c(2.25, 2.75, 3.25, 3.5, 3.5, rep(3.5, 6)) / 100)
 lf_forecasts <- 
-  data.table(fy_year = yr2fy(2018:2027),
-             r = c(2.75, 1.50, 1.50, 1.50, 1.25, rep(1.25, 5)) / 100)
+  data.table(fy_year = yr2fy(2018:2028),
+             r = c(2.75, 1.50, 1.50, 1.50, 1.25, rep(1.25, 6)) / 100)
+
+
+ordinary_tax_rates <- function(h) {
+  if (h < 9) {
+    c(0, 0.19, 0.325, 0.37, 0.45)
+  } else {
+    c(0, 0.19, 0.325, 0.45)  
+  }
+}
+
+ordinary_tax_thresholds <- function(h) {
+  if (h < 7) {
+    c(0, 18200, 37e3, 90e3, 180e3)
+  } else if (h < 9) {
+    c(0, 18200, 41e3, 90e3, 180e3)
+  } else {
+    c(0, 18200, 41e3, 200e3)
+  }
+}
+
+.do_medicare_levy <- function(x2018, fy) {
+  stopifnot(length(fy) == 1L, is.fy(fy))
+  if (fy == "2018-19") {
+    return(x2018)
+  } else {
+    return(round(cpi_inflator(x2018, from_fy = "2018-19", to_fy = fy), -1))
+  }
+}
+
+medicare_levy_lower_threshold <- function(fy) {
+  .do_medicare_levy(21980, fy)
+}
+
+medicare_levy_lower_sapto_threshold <- function(fy) {
+  .do_medicare_levy(34758, fy)
+}
+
+medicare_levy_lower_family_threshold <- function(fy) {
+  .do_medicare_levy(48385, fy)
+}
+
+medicare_levy_lower_family_sapto_threshold <- function(fy) {
+  .do_medicare_levy(48385, fy)
+}
+
+medicare_levy_lower_up_for_each_child <- function(fy) {
+  .do_medicare_levy(3406, fy)
+}
+
+.project_to <- function(h, use.Treasury) {
+  project(sample_file_1516,
+          h = h,
+          wage.series = if (use.Treasury) wage_forecasts,
+          lf.series = if (use.Treasury) lf_forecasts)
+}
+
+
+
+.project_useTreasurys <- lapply(1:15, .project_to, use.Treasury = TRUE)
+.project_useGrattans <- lapply(1:15, .project_to, use.Treasury = FALSE)
 
 
 model_Budgets <- function(fy_year, use.Treasury = TRUE) { 
   h <- as.integer(fy2yr(fy_year) - 2016L)
   
-  # h = 4 => 19-20
-  s1920 <- project(sample_file_1516,
-                   h = h,
-                   wage.series = if (use.Treasury) wage_forecasts,
-                   lf.series = if (use.Treasury) lf_forecasts)
-  
-  ordinary_tax_rates <- function(h) {
-    if (h < 9) {
-      c(0, 0.19, 0.325, 0.37, 0.45)
-    } else {
-      c(0, 0.19, 0.325, 0.45)  
-    }
+  if (use.Treasury) {
+    s1920 <- .project_useTreasurys[[h]]
+  } else {
+    s1920 <- .project_useGrattans[[h]]
   }
   
-  ordinary_tax_thresholds <- function(h) {
-    if (h < 7) {
-      c(0, 18200, 37e3, 90e3, 180e3)
-    } else if (h < 9) {
-      c(0, 18200, 41e3, 90e3, 180e3)
-    } else {
-      c(0, 18200, 41e3, 200e3)
-    }
-    c(0, 
-      18200,
-      if (h < 7) 37e3 else 41e3,
-      if (h < 7) 90e3 else if (h < 9) 120e3 else 200e3,
-      if (h < 9) 180e3 else NULL)
+  model_income_tax <- function(...) {
+    grattan::model_income_tax(
+      sample_file = s1920, 
+      baseline_fy = "2017-18",
+      medicare_levy_lower_threshold = medicare_levy_lower_threshold(fy_year),
+      medicare_levy_lower_sapto_threshold = medicare_levy_lower_sapto_threshold(fy_year),
+      medicare_levy_lower_family_threshold = medicare_levy_lower_family_threshold(fy_year),
+      medicare_levy_lower_family_sapto_threshold = medicare_levy_lower_family_sapto_threshold(fy_year),
+      medicare_levy_lower_up_for_each_child = medicare_levy_lower_up_for_each_child(fy_year),
+      warn_upper_thresholds = FALSE,
+      ...) %>%
+      .[, new_tax := as.integer(new_tax)] 
   }
   
-  list(Budget2018_baseline = model_income_tax(s1920, baseline_fy = "2017-18"),
-       Budget2018_just_rates = model_income_tax(s1920,
-                                                baseline_fy = "2017-18",
-                                                ordinary_tax_rates =  ordinary_tax_rates(h),
+  list(Budget2018_baseline = model_income_tax(),
+       Budget2018_just_rates = model_income_tax(ordinary_tax_rates =  ordinary_tax_rates(h),
                                                 ordinary_tax_thresholds = ordinary_tax_thresholds(h),
                                                 lito_202223 = FALSE,
                                                 lamington = FALSE),
-       Budget2018_no_lamington = model_income_tax(s1920,
-                                                  baseline_fy = "2017-18",
-                                                  ordinary_tax_rates =  ordinary_tax_rates(h),
-                                                  ordinary_tax_thresholds = ordinary_tax_thresholds(h),
-                                                  lito_202223 = h > 6,
-                                                  lamington = FALSE),
-       Budget2018_just_LITO = model_income_tax(s1920,
-                                               baseline_fy = "2017-18",
-                                               ordinary_tax_rates =  ordinary_tax_rates(2L),
-                                               ordinary_tax_thresholds = ordinary_tax_thresholds(2L),
-                                               lito_202223 = h > 6,
+       Budget2018_just_LITO = model_income_tax(lito_202223 = h > 6,
                                                lamington = FALSE),
-       Budget2018_just_LITO_and_rates = model_income_tax(s1920,
-                                                         baseline_fy = "2017-18",
-                                                         ordinary_tax_rates =  ordinary_tax_rates(h),
+       Budget2018_just_LITO_and_rates = model_income_tax(ordinary_tax_rates =  ordinary_tax_rates(h),
                                                          ordinary_tax_thresholds = ordinary_tax_thresholds(h),
                                                          lito_202223 = h > 6,
                                                          lamington = FALSE),
-       
-       Budget2018_just_lamington = model_income_tax(s1920,
-                                                    baseline_fy = "2017-18",
-                                                    lamington = TRUE),
-       
-       Budget2018 = model_income_tax(s1920,
-                                       baseline_fy = "2017-18",
-                                       ordinary_tax_rates = ordinary_tax_rates(h),
-                                       ordinary_tax_thresholds = ordinary_tax_thresholds(h),
-                                       lito_202223 = h > 6,
-                                       lamington = TRUE))
+       Budget2018_just_lamington = model_income_tax(lamington = TRUE),
+       Budget2018 = model_income_tax(ordinary_tax_rates = ordinary_tax_rates(h),
+                                     ordinary_tax_thresholds = ordinary_tax_thresholds(h),
+                                     lito_202223 = h > 6,
+                                     lamington = TRUE))
 }
 
-Budget_1922 <- lapply(yr2fy(2019:2027), model_Budgets)
-Budget_1922_Grattan <- lapply(yr2fy(2019:2027), model_Budgets, use.Treasury = FALSE)
-names(Budget_1922) <- yr2fy(2019:2027)
-names(Budget_1922_Grattan) <- yr2fy(2019:2027)
+Budget_1922 <- lapply(yr2fy(2019:2028), model_Budgets)
+Budget_1922_Grattan <- lapply(yr2fy(2019:2028), model_Budgets, use.Treasury = FALSE)
+
+
+names(Budget_1922) <- yr2fy(2019:2028)
+names(Budget_1922_Grattan) <- yr2fy(2019:2028)
 round(sapply(Budget_1922, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9, 2)
+round(sapply(Budget_1922_Grattan, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9, 2)
+sapply(Budget_1922, sapply, revenue_foregone, USE.NAMES = TRUE) %>% rowSums %>% divide_by(1e9)
+sapply(Budget_1922_Grattan, sapply, revenue_foregone, USE.NAMES = TRUE) %>% rowSums %>% divide_by(1e9)
+
+write.csv(round(sapply(Budget_1922, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9, 2), 
+          "vignettes/Budget201718-summaries-2.csv")
+write.csv(round(sapply(Budget_1922_Grattan, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9, 2), 
+          "vignettes/Budget201718-Grattan-summaries.csv")
 
 
+if (FALSE) {
 
 
 
@@ -418,3 +461,4 @@ difference_2021_Budget %>%
   .[, decile := factor(decile)] %>%
   ggplot(aes(x = decile, y = ppt_increase)) + 
   geom_col()
+}
