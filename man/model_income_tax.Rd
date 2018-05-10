@@ -17,11 +17,11 @@ model_income_tax(sample_file, baseline_fy, n_dependants = 0L,
   medicare_levy_upper_family_sapto_threshold = NULL,
   medicare_levy_lower_up_for_each_child = NULL, lito_max_offset = NULL,
   lito_taper = NULL, lito_min_bracket = NULL, lamington = FALSE,
-  lito_202223 = FALSE, sapto_eligible = NULL, sapto_max_offset = NULL,
-  sapto_lower_threshold = NULL, sapto_taper = NULL,
-  calc_baseline_tax = TRUE, return. = c("sample_file", "tax",
-  "sample_file.int"), clear_tax_cols = TRUE, warn_upper_thresholds = TRUE,
-  .debug = FALSE)
+  lito_202223 = FALSE, watr = FALSE, sapto_eligible = NULL,
+  sapto_max_offset = NULL, sapto_lower_threshold = NULL,
+  sapto_taper = NULL, calc_baseline_tax = TRUE, return. = c("sample_file",
+  "tax", "sample_file.int"), clear_tax_cols = TRUE,
+  warn_upper_thresholds = TRUE, .debug = FALSE)
 }
 \arguments{
 \item{sample_file}{A sample file having at least as many variables as the 2012-13 sample file.}
@@ -72,6 +72,8 @@ Since the temporary budget repair levy was imposed on a discrete tax bracket whe
 \item{lamington}{The Low Middle Income Tax Offset proposed in the 2018 Budget.}
 
 \item{lito_202223}{The LITO proposed for 2022-23 proposed in the 2018 Budget.}
+
+\item{watr}{The "Worker Australian Tax Refund" proposed in the Opposition Leader's Budget Reply Speech 2018.}
 
 \item{sapto_eligible}{Whether or not each taxpayer in \code{sample_file} is eligible for \code{SAPTO}. 
 If \code{NULL}, the default, then eligibility is determined by \code{age_range} in \code{sample_file};

@@ -80,7 +80,10 @@ sample_files_all <-
               fill = TRUE, 
               idcol = "fy.year")
 sample_files_all[, WEIGHT := hutils::if_else(fy.year > '2010-11', 50L, 100L)]
-
+sample_files_all[is.na(age_range), age_range := Birth_year]
+sample_files_all[is.na(Othr_pnsn_amt), Othr_pnsn_amt := 0L]
+sample_files_all[is.na(Med_Exp_TO_amt), Med_Exp_TO_amt := 0L]
+sample_files_all[is.na(Spouse_adjusted_taxable_inc), Spouse_adjusted_taxable_inc := 0L]
 age_range_decoder <- as.data.table(age_range_decoder)
 
 ## ----load-grattan--------------------------------------------------------
@@ -139,6 +142,18 @@ print.revenue_foregone <- function(x, ...) {
   }
   print(res)
 }
+```
+
+```{r}
+## ------------------------------------------------------------------------
+s1617 <- 
+  if (file.exists("~/ozTaxData/data-raw/2016_sample_file.csv")) {
+    sample_file_1516 <- fread("~/ozTaxData/data-raw/2016_sample_file.csv")
+    project(sample_file_1516, h = 1L, fy.year.of.sample.file = "2015-16")
+  } else {
+    project(sample_file_1415_synth, h = 2L)
+  }
+s1617 <- model_income_tax(s1617, "2016-17")
 ```
 
 ```{r}
@@ -716,48 +731,114 @@ Grey <- function(fy) {
 ```
   
 ```{r avg_tax_rate_by_percentile_fy_year}
-sample_files_all[, tax := income_tax(Taxable_Income, fy.year = .BY[[1L]], .dots.ATO = .SD), keyby = "fy.year"][, avg_tax_rate := coalesce(tax / Taxable_Income, 0)]
+sample_files_all[, tax := income_tax(Taxable_Income, fy.year = fy.year, .dots.ATO = .SD), keyby = "fy.year"][, avg_tax_rate := coalesce(tax / Taxable_Income, 0)]
 sample_files_all %>%
   .[, Over65 := coalesce(age_range <= 1L, Birth_year <= 1L)] %>%
   .[, .(avg_tax_rate = mean(avg_tax_rate)), keyby = .(fy.year, Taxable_Income_percentile)] %>%
   setnames("fy.year", "fy_year") %>%
-  rbind(avg_tax_rates_by_percentile_facet_fy[id != "Current", .SD, .SDcols = c("id", names(.))],
+  rbind(avg_tax_rates_by_percentile_facet_fy[, .SD, .SDcols = c("id", names(.))],
         use.names = TRUE,
         fill = TRUE) %>%
   setkey(fy_year, Taxable_Income_percentile) %>%
-  .[] %>%
-  .[, avg_tax_rate_rel := avg_tax_rate - first(avg_tax_rate), keyby = .(Taxable_Income_percentile)] %>%
+  .[, z := fy_year %ein% "2017-18"] %>%
+  .[, avg_tax_rate_rel := avg_tax_rate - median(avg_tax_rate[z]),
+    keyby = .(Taxable_Income_percentile)] %>%
+
   .[, colour := if_else(is.na(id),
-                       grey(scale10(fy2yr(fy_year))), 
-                       if_else(id == "Baseline" & fy_year %in% c("2018-19", "2027-28"), 
-                               if_else(fy_year == "2018-19", 
-                                       gpal(6)[4],
-                                       gpal(6)[5]),
-                               if_else(fy_year == "2018-19", 
-                                       gpal(6)[1],
-                                       gpal(6)[2])))] %>%
+                        grey(0.5), 
+                        if_else(id == "Baseline" & fy_year %in% c("2018-19", "2027-28"), 
+                                if_else(fy_year == "2018-19", 
+                                        gpal(6)[4],
+                                        gpal(6)[5]),
+                                if_else(fy_year == "2018-19", 
+                                        gpal(6)[1],
+                                        gpal(6)[2])))] %>%
+  .[, alpha := if_else(is.na(id), 1.05 * scale01(fy2yr(fy_year)), 1)] %>%
+  .[fy_year %in% c("2004-05", "2013-14"), c("alpha", "colour") := list(0.8, "black")] %>%
   .[implies(!is.na(id), fy_year %in% c("2018-19", "2027-28"))] %>%
-  .[Taxable_Income_percentile == 100L & !is.na(id), label := paste0(id, "\n", as.character(fy_year))] %>% 
-  .[Taxable_Income_percentile == 95L & !is.na(id), label := ""] %>%
+  .[, size := 0.8] %>%
+  .[fy_year %in% c("2004-05", "2013-14"), size := 1.1] %>%
+  .[fy_year %in% c("2018-19", "2027-28"), size := 1.4] %>%
+  .[Taxable_Income_percentile == 50L & !is.na(id), label := paste0(id, "\n", as.character(fy_year))] %>% 
+  # .[Taxable_Income_percentile == 95L & !is.na(id), label := ""] %>%
   .[] %>%
   .[, group := paste0(fy_year, colour)] %>%
   .[, text := paste0(fy_year, " ", coalesce(id, ""), "\n",
                      formatC("Percentile: ", width = 24), Taxable_Income_percentile, "\n",
                      formatC("Avg. tax rate (03-04 = 0):", width = 24), " ", 100 * round(avg_tax_rate_rel, 4))] %>%
   .[] %>%
+  setnames("Taxable_Income_percentile", 
+           "Taxable income percentile") %T>%
+  fwrite("Average-tax-rates-relative-201718-vs-Taxable-income-percentile-by-FY.csv") %>%
   as.data.frame %>%
   # .[Over65==FALSE] %>%
-  grplot(aes(x = Taxable_Income_percentile,
+  grplot(aes(x = `Taxable income percentile`,
              y = avg_tax_rate_rel,
              colour = colour,
              group = group,
              text = text)) +
+  annotate("label",
+           x = 20,
+           y = 0.09, 
+           hjust = 1,
+           label.size = NA,
+           label = "2003-04",
+           fontface = "bold") +
+  annotate("label",
+           x = 25,
+           y = -0.04,
+           hjust = 1,
+           label.size = NA,
+           label = "2013-14",
+           fontface = "bold") +
   scale_color_identity() +
-  geom_line(size = 0.75, se = FALSE) +
+  scale_size_identity() +
+  scale_alpha_identity() +
+  geom_line(aes(alpha = alpha, size = size)) +
   # geom_blank(aes(x = 105, y = 0)) +
-  # geom_label_repel(aes(label = label), nudge_x = 2, force = 0.8, na.rm = TRUE) +
+  geom_label_repel(aes(label = label),
+                   nudge_x = 2, force = 0.8,
+                   na.rm = TRUE,
+                   fontface = "bold",
+                   label.size = NA) +
   scale_y_continuous(labels = percent) +
-  scale_color_identity()
+  ggtitle("Average tax rates relative to 2017-18") +
+  theme(legend.position = "right")
+```
+
+```{r}
+bound_models <- 
+  Budget_1922 %>% 
+  lapply(rbindlist, use.names = TRUE, fill = TRUE, idcol = "id") %>%
+  rbindlist(use.names = TRUE, fill = TRUE, idcol = "fy_year")
+```
+
+
+```{r progressivities}
+list(
+  {
+    sample_files_all %>%
+      .[, .(new_tax = tax), keyby = .(fy_year, Taxable_Income)] %>%
+      .[, id := "Current"] %>%
+      .[]
+  },
+  bound_models[, .(id, fy_year, Taxable_Income, new_tax)],
+  s1718[, .(id = "Current", fy_year = "2017-18", Taxable_Income, new_tax)],
+  s1617[, .(id = "Current", fy_year = "2016-17", Taxable_Income, new_tax)]
+) %>%
+  rbindlist(use.names = TRUE,
+            fill = TRUE)  %>%
+  .[, .(progressivity = progressivity(Taxable_Income, new_tax)), keyby = c("id", "fy_year")] %>%
+  .[id %chin% c("Budget2018", "Current", "Budget2018_baseline")] %>%
+  .[, Year := fy2yr(fy_year)] %>%
+  .[id == "Budget2018_baseline", id := "Baseline"] %>%
+  .[] %T>%
+  fwrite("Reynolds-Smolensky-vs-year.csv") %>%
+  grplot(aes(x = Year, y = progressivity, color = id, group = id)) + 
+  scale_x_continuous(breaks = c(2005, 2010, 2015, 2020, 2025)) +
+  geom_line() + 
+  theme(legend.position = "right",
+        legend.title = element_blank())
 ```
 
 

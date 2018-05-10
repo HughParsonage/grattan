@@ -34,6 +34,7 @@
 #' 
 #' @param lamington The Low Middle Income Tax Offset proposed in the 2018 Budget.
 #' @param lito_202223 The LITO proposed for 2022-23 proposed in the 2018 Budget.
+#' @param watr The "Worker Australian Tax Refund" proposed in the Opposition Leader's Budget Reply Speech 2018.
 #' 
 #' @param sapto_eligible Whether or not each taxpayer in \code{sample_file} is eligible for \code{SAPTO}. 
 #' If \code{NULL}, the default, then eligibility is determined by \code{age_range} in \code{sample_file};
@@ -84,6 +85,7 @@ model_income_tax <- function(sample_file,
                              
                              lamington = FALSE,
                              lito_202223 = FALSE,
+                             watr = FALSE,
                              
                              sapto_eligible = NULL,
                              sapto_max_offset = NULL,
@@ -629,6 +631,13 @@ model_income_tax <- function(sample_file,
         0
       }
     
+    watr. <- 
+      if (watr) {
+        watr(income)
+      } else {
+        0
+      }
+    
    
       if (lito_202223) {
         lito. <- 
@@ -638,7 +647,8 @@ model_income_tax <- function(sample_file,
       }
     
     # http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html
-    S4.10_basic_income_tax_liability <- pmaxC(base_tax. - lito. - lamington_offset. - sapto., 0)
+    S4.10_basic_income_tax_liability <- pmaxC(base_tax. - lito. - lamington_offset. -
+                                              watr. - sapto., 0)
     
     # SBTO can only be calculated off .dots.ATO
     
