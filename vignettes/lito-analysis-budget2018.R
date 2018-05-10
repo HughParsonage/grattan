@@ -164,6 +164,7 @@ ordinary_tax_thresholds <- function(h) {
   }
 }
 
+
 .do_medicare_levy <- function(x2018, fy) {
   stopifnot(length(fy) == 1L, is.fy(fy))
   if (fy == "2018-19") {
@@ -245,6 +246,10 @@ model_Budgets <- function(fy_year, use.Treasury = TRUE, .debug = FALSE) {
                                                          lito_202223 = h > 6,
                                                          lamington = FALSE),
        Budget2018_just_lamington = model_income_tax(lamington = TRUE),
+       Budget2018_lamington_plus_LITO = model_income_tax(lito_202223 = h > 6,
+                                                         lamington = TRUE),
+       Budget2018_lamington_plus_bracket1 = model_income_tax(lito_202223 = h > 6,
+                                                             lamington = TRUE),
        Budget2018 = model_income_tax(ordinary_tax_rates = ordinary_tax_rates(h),
                                      ordinary_tax_thresholds = ordinary_tax_thresholds(h),
                                      lito_202223 = h > 6,
@@ -275,6 +280,7 @@ lapply(Budget_1922, function(x) {
                                       levels = 1:5)] %>%
   .[, .(avg_delta = mean(delta),
         max_income = max(Taxable_Income),
+        min_income = min(Taxable_Income),
         avg_income = mean(Taxable_Income + 0)),
     keyby = .(Quintile)]
 }) %>%
@@ -288,30 +294,129 @@ lapply(Budget_1922, function(x) {
   ggtitle("Average individual impact") +
   scale_y_continuous(labels = grattan_dollar) + 
   guides(fill = guide_legend(reverse = FALSE)) +
+  theme(axis.line.x = element_line(size = 0.5),
+        legend.position = "right")
+
+Brackets <- 
+  data.table(Breaks = c(0, 37e3, 41e3, 87e3, 90e3, 120e3, 180e3, 200e3)) %>%
+  .[, Taxable_Income := as.integer(Breaks)] %>%
+  setkey(Taxable_Income)
+
+lapply(Budget_1922, function(x) {
+  x[["Budget2018"]] %>%
+    setkey(Taxable_Income) %>%
+    Brackets[., roll=TRUE] %>%
+    .[, .(avg_delta = mean(delta),
+          max_income = max(Taxable_Income),
+          avg_income = mean(Taxable_Income + 0)),
+      keyby = .(Breaks)]
+}) %>%
+  rbindlist(idcol = "fy_year") %>% 
+  .[, "Financial year ending" := fy2yr(fy_year)] %>%
+  .[, avg_delta := round(avg_delta, 2)] %>%
+  .[] %>%
+  .[, "Income bracket" := factor(Breaks,
+                                 levels = unique(Breaks),
+                                 labels = grattan_dollar(unique(Breaks)),
+                                 ordered = TRUE)] %>%
+  grplot(aes(x = `Financial year ending`, y = avg_delta, fill = `Income bracket`),
+         reverse = TRUE) +
+  geom_col() + 
+  ggtitle("Average individual impact") +
+  scale_y_continuous(labels = grattan_dollar) + 
+  guides(fill = guide_legend(reverse = TRUE)) +
   theme(legend.position = "right")
 
 lapply(Budget_1922, function(x) {
   x[["Budget2018"]] %>%
     setkey(Taxable_Income) %>%
-    .[, Quintile := factor(ceiling(5 * .I / .N),
-                           levels = 5:1)] %>%
-    .[, .(total_delta_bn = sum(delta * WEIGHT / 1e9),
+    Brackets[., roll=TRUE] %>%
+    .[, .(avg_delta = sum(delta * WEIGHT / 1e9),
           max_income = max(Taxable_Income),
-          min_income = min(Taxable_Income),
           avg_income = mean(Taxable_Income + 0)),
-      keyby = .(Quintile)]
+      keyby = .(Breaks)]
 }) %>%
   rbindlist(idcol = "fy_year") %>% 
   .[, "Financial year ending" := fy2yr(fy_year)] %>%
-  .[, total_delta_bn := round(total_delta_bn, 2)] %>%
-  .[, avg_income := round(avg_income, 2)] %>%
-  .[] %T>%
-  fwrite("vignettes/budget2018-total-revenue-vs-fy-by-quintile.csv") %>%
-  grplot(aes(x = `Financial year ending`, y = total_delta_bn, fill = Quintile)) +
+  .[, avg_delta := round(avg_delta, 2)] %>%
+  .[] %>%
+  .[, "Income bracket" := factor(Breaks,
+                                 levels = unique(Breaks),
+                                 labels = grattan_dollar(unique(Breaks)),
+                                 ordered = TRUE)] %>%
+  grplot(aes(x = `Financial year ending`, y = avg_delta, fill = `Income bracket`),
+         reverse = TRUE) +
   geom_col() + 
-  ggtitle("Total revenue foregone") +
+  ggtitle("Average individual impact") +
+  scale_y_continuous(labels = grattan_dollar) + 
   guides(fill = guide_legend(reverse = TRUE)) +
   theme(legend.position = "right")
+
+
+
+{
+  rbindlist(
+    list(
+      "Budget2018" = {
+        lapply(Budget_1922, function(x) {
+          x[["Budget2018"]] %>%
+            setkey(Taxable_Income) %>%
+            .[, .(avg_tax_rate = mean(coalesce(new_tax / Taxable_Income, 0)),
+                  total_tax = sum(new_tax * WEIGHT / 1e9),
+                  max_income = max(Taxable_Income),
+                  avg_income = mean(Taxable_Income + 0)),
+              keyby = .(Taxable_Income_percentile = weighted_ntile(Taxable_Income, n = 100))] %>%
+            .[, facet := "Budget 2018"]
+        }) %>% 
+          rbindlist(idcol = "fy_year",
+                    use.names = TRUE)
+      },
+      "Baseline" = {
+        lapply(Budget_1922, function(x) {
+          x[["Budget2018_baseline"]] %>%
+            setkey(Taxable_Income) %>%
+            .[, .(avg_tax_rate = mean(coalesce(new_tax / Taxable_Income, 0)),
+                  total_tax = sum(new_tax * WEIGHT / 1e9),
+                  max_income = max(Taxable_Income),
+                  avg_income = mean(Taxable_Income + 0)),
+              keyby = .(Taxable_Income_percentile = weighted_ntile(Taxable_Income, n = 100))] %>%
+            .[, facet := "Baseline"]
+        }) %>% 
+          rbindlist(idcol = "fy_year",
+                    use.names = TRUE)
+      },
+      "Current" = {
+        sample_file_1516 %>%
+          project(h = 2L, 
+                  fy.year.of.sample.file = "2015-16") %>%
+          model_income_tax("2017-18") %>%
+          # .[, tax := income_tax(Taxable_Income, "2017-18", .dots.ATO = .)] %>%
+          .[, .(avg_tax_rate = mean(coalesce(new_tax / Taxable_Income, 0)),
+                total_tax = sum(new_tax * WEIGHT / 1e9)), 
+            keyby = .(Taxable_Income_percentile = weighted_ntile(Taxable_Income, n = 100))] %>%
+          .[, facet := "2017-18"] %>%
+          .[, fy_year :=  "2017-18"]
+      }),
+      use.names = TRUE, fill = TRUE, 
+    idcol = "id")
+  } %>% 
+  .[, "Financial year ending" := fy2yr(fy_year)] %>%
+  .[fy_year %in% range(fy_year)] %>%
+  .[, .(facet, fy_year, Taxable_Income_percentile, avg_tax_rate, total_tax)] %>%
+  setnames("total_tax", "total_tax_bn") %T>%
+  fwrite(file = "vignettes/avg_tax_rates-by-facet-percentile.csv") %>%
+  # dumb don't care
+  .[, Quintile := weighted_ntile(Taxable_Income_percentile, n = 5), by = "facet"] %T>%
+  .[, .(total_tax_bn = sum(total_tax_bn)), keyby = .(facet, Quintile)] %>%
+  grplot(aes(x = Taxable_Income_percentile, y = avg_tax_rate, color = facet)) + 
+  geom_line() + 
+  xlab("Taxable income percentile") +
+  scale_y_continuous(labels = percent) +
+  theme(legend.position = c(0, 1),
+        axis.line.x = element_line(size = 0.5),
+        legend.title = element_blank(),
+        legend.justification = c(0, 1))
+
 
 if (FALSE) {
 

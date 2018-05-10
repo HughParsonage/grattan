@@ -227,11 +227,16 @@ model_income_tax <- function(sample_file,
     base_tax. <- base_tax. + temp_budget_repair_levy. 
   }
   
-  
+  WEIGHTj <- which(names(.dots.ATO) == "WEIGHT")
+  if (!length(WEIGHTj)) {
+    WEIGHTj <- 0L
+  }
   
   # If .dots.ATO  is NULL, for loops over zero-length vector
-  for (j in which(vapply(.dots.ATO, FUN = is.double, logical(1)))){
-    set(.dots.ATO, j = j, value = as.integer(.dots.ATO[[j]]))
+  for (j in which(vapply(.dots.ATO, FUN = is.double, logical(1)))) {
+    if (j != WEIGHTj) {
+      set(.dots.ATO, j = j, value = as.integer(.dots.ATO[[j]]))
+    }
   }
   
   if (is.null(.dots.ATO) ||
