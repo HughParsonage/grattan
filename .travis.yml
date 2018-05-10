@@ -10,7 +10,6 @@ r_check_args:
 cache: packages
 warnings_are_errors: true
 
-
 script:
 - export _R_CHECK_CRAN_INCOMING_=false
 # Current release build of data.table has conflict with R-dev
@@ -18,15 +17,17 @@ script:
 - R CMD build --no-build-vignettes .
 - R CMD check --no-vignettes --ignore-vignettes --no-manual *tar.gz
 
+
 r_github_packages:
   - hughparsonage/formalCoverage
   - jimhester/covr
 
 after_success:
   - Rscript -e 'formalCoverage::formalPackageCoverage()'
-  - Rscript -e 'library(taxstats);library(data.table);print(sample_file_1415_synth)'
-  - Rscript -e 'remove.packages("taxstats")'
+  - if [ $TRAVIS_R_VERSION_STRING == "release" ]; then Rscript -e 'covr::codecov(line_exclusions = "R/zzz.R")'; fi
+
+after_failure:
   - Rscript -e 'install.packages(c("devtools", "roxygen2"))'
   - Rscript -e 'devtools::test()'
   - Rscript -e 'install.packages("taxstats", repos = "https://hughparsonage.github.io/drat/", type = "source")'
-  - if [ $TRAVIS_R_VERSION_STRING == "release" ]; then Rscript -e 'covr::codecov(line_exclusions = "R/zzz.R")'; fi
+  
