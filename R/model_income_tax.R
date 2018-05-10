@@ -111,7 +111,7 @@ model_income_tax <- function(sample_file,
   .dots.ATO <- sample_file
   sample_file_noms <- copy(names(sample_file))
   
-  if (clear_tax_cols && return. == "sample_file") {
+  if (clear_tax_cols) {
     if ("new_tax" %chin% sample_file_noms) {
       sample_file[, "new_tax" := NULL]
     }
@@ -150,15 +150,6 @@ model_income_tax <- function(sample_file,
   }
   
   income <- sample_file[["Taxable_Income"]]
-  
-  # Indicate baseline tax
-  if (calc_baseline_tax && identical(return., "sample_file")) {
-    sample_file[, "baseline_tax" := income_tax(income,
-                                               fy.year = baseline_fy,
-                                               .dots.ATO = sample_file,
-                                               n_dependants = n_dependants)]
-  }
-  
   max.length <- length(income)
   prohibit_vector_recycling(income, n_dependants, baseline_fy)
   
@@ -166,6 +157,12 @@ model_income_tax <- function(sample_file,
                         fy.year = baseline_fy,
                         .dots.ATO = copy(.dots.ATO),
                         n_dependants = n_dependants)
+  
+  if (calc_baseline_tax) {
+    switch(return.,
+           "sample_file" = set(sample_file, j = "baseline_tax", value = old_tax),
+           "sample_file.int" = set(sample_file, j = "baseline_tax", value = as.integer(old_tax)))
+  }
   
   if (is.null(sapto_eligible)) {
     if ("age_range" %chin% names(sample_file)) {
