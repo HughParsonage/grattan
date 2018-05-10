@@ -9,15 +9,12 @@ r_check_args:
 cache: packages
 warnings_are_errors: true
 
-before_install:
-  export _R_CHECK_CRAN_INCOMING_=true
-
 
 
 script:
-- export _R_CHECK_CRAN_INCOMING_=true
+- export _R_CHECK_CRAN_INCOMING_=false
 # Current release build of data.table has conflict with R-dev
-- R travisBeforeInstall.R
+- Rscript travisBeforeInstall.R
 - R CMD build .
 - R CMD check *tar.gz
 
