@@ -17,7 +17,7 @@ before_install:
 script:
 - export _R_CHECK_CRAN_INCOMING_=true
 # Current release build of data.table has conflict with R-dev
-- R travisBeforeInstall.R
+- Rscript travisBeforeInstall.R
 - R CMD build .
 - R CMD check *tar.gz
 
