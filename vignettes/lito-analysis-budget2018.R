@@ -275,14 +275,15 @@ write.csv(round(sapply(Budget_1922_Grattan, sapply, revenue_foregone, USE.NAMES 
 library(grattanCharts)
 lapply(Budget_1922, function(x) {
   x[["Budget2018"]] %>%
-  setkey(Taxable_Income) %>%
-  .[, Quintile := factor(ceiling(5 * .I / .N),
-                                      levels = 1:5)] %>%
-  .[, .(avg_delta = mean(delta),
-        max_income = max(Taxable_Income),
-        min_income = min(Taxable_Income),
-        avg_income = mean(Taxable_Income + 0)),
-    keyby = .(Quintile)]
+    setkey(Taxable_Income) %>%
+    .[new_tax > 0] %>%
+    .[, Quintile := factor(ceiling(5 * .I / .N),
+                           levels = 1:5)] %>%
+    .[, .(avg_delta = mean(delta),
+          max_income = max(Taxable_Income),
+          min_income = min(Taxable_Income),
+          avg_income = mean(Taxable_Income + 0)),
+      keyby = .(Quintile)]
 }) %>%
   rbindlist(idcol = "fy_year") %>% 
   .[, "Financial year ending" := fy2yr(fy_year)] %>%
@@ -304,6 +305,7 @@ Brackets <-
 
 lapply(Budget_1922, function(x) {
   x[["Budget2018"]] %>%
+    .[new_tax > 0] %>%
     setkey(Taxable_Income) %>%
     Brackets[., roll=TRUE] %>%
     .[, .(avg_delta = mean(delta),
@@ -329,6 +331,7 @@ lapply(Budget_1922, function(x) {
 
 lapply(Budget_1922, function(x) {
   x[["Budget2018"]] %>%
+    .[new_tax > 0] %>%
     setkey(Taxable_Income) %>%
     Brackets[., roll=TRUE] %>%
     .[, .(avg_delta = sum(delta * WEIGHT / 1e9),
@@ -339,15 +342,14 @@ lapply(Budget_1922, function(x) {
   rbindlist(idcol = "fy_year") %>% 
   .[, "Financial year ending" := fy2yr(fy_year)] %>%
   .[, avg_delta := round(avg_delta, 2)] %>%
-  .[] %>%
-  .[, "Income bracket" := factor(Breaks,
+  .[order(-Breaks)] %>%
+  .[, "Incomes above" := factor(Breaks,
                                  levels = unique(Breaks),
                                  labels = grattan_dollar(unique(Breaks)),
                                  ordered = TRUE)] %>%
-  grplot(aes(x = `Financial year ending`, y = avg_delta, fill = `Income bracket`),
-         reverse = TRUE) +
+  grplot(aes(x = `Financial year ending`, y = avg_delta, fill = `Incomes above`)) +
   geom_col() + 
-  ggtitle("Average individual impact") +
+  ggtitle("Total revenue") +
   scale_y_continuous(labels = grattan_dollar) + 
   guides(fill = guide_legend(reverse = TRUE)) +
   theme(legend.position = "right")
@@ -360,9 +362,11 @@ lapply(Budget_1922, function(x) {
       "Budget2018" = {
         lapply(Budget_1922, function(x) {
           x[["Budget2018"]] %>%
+            .[new_tax > 0] %>%
             setkey(Taxable_Income) %>%
             .[, .(avg_tax_rate = mean(coalesce(new_tax / Taxable_Income, 0)),
                   total_tax = sum(new_tax * WEIGHT / 1e9),
+                  min_income = min(Taxable_Income),
                   max_income = max(Taxable_Income),
                   avg_income = mean(Taxable_Income + 0)),
               keyby = .(Taxable_Income_percentile = weighted_ntile(Taxable_Income, n = 100))] %>%
@@ -374,9 +378,11 @@ lapply(Budget_1922, function(x) {
       "Baseline" = {
         lapply(Budget_1922, function(x) {
           x[["Budget2018_baseline"]] %>%
+            .[new_tax > 0] %>%
             setkey(Taxable_Income) %>%
             .[, .(avg_tax_rate = mean(coalesce(new_tax / Taxable_Income, 0)),
                   total_tax = sum(new_tax * WEIGHT / 1e9),
+                  min_income = min(Taxable_Income),
                   max_income = max(Taxable_Income),
                   avg_income = mean(Taxable_Income + 0)),
               keyby = .(Taxable_Income_percentile = weighted_ntile(Taxable_Income, n = 100))] %>%
@@ -390,8 +396,11 @@ lapply(Budget_1922, function(x) {
           project(h = 2L, 
                   fy.year.of.sample.file = "2015-16") %>%
           model_income_tax("2017-18") %>%
+          .[new_tax > 0] %>%
           # .[, tax := income_tax(Taxable_Income, "2017-18", .dots.ATO = .)] %>%
           .[, .(avg_tax_rate = mean(coalesce(new_tax / Taxable_Income, 0)),
+                min_income = min(Taxable_Income),
+                max_income = max(Taxable_Income),
                 total_tax = sum(new_tax * WEIGHT / 1e9)), 
             keyby = .(Taxable_Income_percentile = weighted_ntile(Taxable_Income, n = 100))] %>%
           .[, facet := "2017-18"] %>%
@@ -402,12 +411,34 @@ lapply(Budget_1922, function(x) {
   } %>% 
   .[, "Financial year ending" := fy2yr(fy_year)] %>%
   .[fy_year %in% range(fy_year)] %>%
-  .[, .(facet, fy_year, Taxable_Income_percentile, avg_tax_rate, total_tax)] %>%
+  .[, .(facet, fy_year,
+        Taxable_Income_percentile,
+        min_income, max_income,
+        avg_tax_rate = round(avg_tax_rate, 3)
+        , total_tax = round(total_tax, 3))] %>%
   setnames("total_tax", "total_tax_bn") %T>%
   fwrite(file = "vignettes/avg_tax_rates-by-facet-percentile.csv") %>%
+  .[] %T>%
+  {
+    dot <- .
+    dot[, .(facet, fy_year, Taxable_Income_percentile, avg_tax_rate)] %>%
+      dcast.data.table(Taxable_Income_percentile ~ facet + fy_year,
+                       value.var = "avg_tax_rate") %>%
+      melt.data.table(id.vars = c("Taxable_Income_percentile", "2017-18_2017-18")) %>%
+      setnames("2017-18_2017-18", "T201718") %>%
+      .[, delta := value - T201718] %>%
+      fwrite("vignettes/change-in-tax-rate-vs-201718-by-percentile.csv")
+  } %>%
   # dumb don't care
-  .[, Quintile := weighted_ntile(Taxable_Income_percentile, n = 5), by = "facet"] %T>%
-  .[, .(total_tax_bn = sum(total_tax_bn)), keyby = .(facet, Quintile)] %>%
+  .[, Decile := weighted_ntile(Taxable_Income_percentile, n = 10), by = "facet"] %T>%
+  {
+    dot <- .
+    dot %>%
+      .[, .(total_tax_bn = sum(total_tax_bn)), keyby = .(facet, Decile)] %>%
+      .[, "% tax paid" := 100 * total_tax_bn / sum(total_tax_bn), keyby = "facet"] %>%
+      .[, lapply(.SD, signif, 3), keyby = .(facet, Decile)] %>%
+      fwrite("vignettes/prop-tax-paid-by-facet-decile.csv")
+  } %>%
   grplot(aes(x = Taxable_Income_percentile, y = avg_tax_rate, color = facet)) + 
   geom_line() + 
   xlab("Taxable income percentile") +
@@ -416,6 +447,10 @@ lapply(Budget_1922, function(x) {
         axis.line.x = element_line(size = 0.5),
         legend.title = element_blank(),
         legend.justification = c(0, 1))
+
+s1516 <- as.data.table(sample_file_1516)
+s1516[, tax := income_tax(Taxable_Income, "2017-18", .dots.ATO = s1516)]
+s1516[tax > 0, .(tot_tax = sum(tax)), keyby = .(quintile = weighted_ntile(Taxable_Income, n = 5))][, p := scales::percent(tot_tax / sum(tot_tax))][]
 
 
 if (FALSE) {
