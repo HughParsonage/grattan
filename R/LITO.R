@@ -66,7 +66,7 @@ lmito <- function(income,
 }
 
 watr <- function(income) {
-  lmito(income, first_offset = 350, taper = c(0, 0.525, 0, -0.2625))
+  pmaxC(lmito(income, first_offset = 350, taper = c(0, 0.0525, 0, -0.02625)), 0)
 }
 
 
