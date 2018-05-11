@@ -63,6 +63,25 @@
     "max_lito", "min_bracket", "lito_taper"
       )
     )
+  
+  try({
+    if (file.exists("R/zzz.R")) {
+      f_mtimes <- c(vapply(dir(path = "R", full.names = TRUE), file.mtime, double(1)),
+                    vapply(dir(path = "tests/testthat", full.names = TRUE), file.mtime, double(1)))
+      class(f_mtimes) <- "POSIXct"
+    } else if (file.exists(file.path(find.package("grattan"), "NAMESPACE"))) {
+      f_mtimes <- file.mtime(file.path(find.package("grattan"), "NAMESPACE"))
+    }
+    if (length(f_mtimes)) {
+      the_filemtime <- f_mtimes[which.max(f_mtimes)]
+      ago <- difftime(Sys.time(), the_filemtime)
+      file_name <- names(the_filemtime)
+      packageStartupMessage("Last change: ", basename(file_name), " at ", strftime(the_filemtime),
+                            " (", floor(ago), " ", attr(ago, "units"), " ago).")
+    }
+  })
+  
+  
   invisible()
 }
 
