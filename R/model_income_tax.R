@@ -34,7 +34,7 @@
 #' 
 #' @param lamington The Low Middle Income Tax Offset proposed in the 2018 Budget.
 #' @param lito_202223 The LITO proposed for 2022-23 proposed in the 2018 Budget.
-#' @param watr The "Worker Australian Tax Refund" proposed in the Opposition Leader's Budget Reply Speech 2018.
+#' @param watr The "Working Australian Tax Refund" proposed in the Opposition Leader's Budget Reply Speech 2018.
 #' 
 #' @param sapto_eligible Whether or not each taxpayer in \code{sample_file} is eligible for \code{SAPTO}. 
 #' If \code{NULL}, the default, then eligibility is determined by \code{age_range} in \code{sample_file};
@@ -42,6 +42,8 @@
 #' @param sapto_max_offset The maximum offset available through SAPTO. 
 #' @param sapto_lower_threshold The threshold at which SAPTO begins to reduce (from \code{sapto_max_offset}).
 #' @param sapto_taper The taper rate beyond \code{sapto_lower_threshold}.
+#' @param sbto_discount The \code{tax_discount} in \code{\link{small_business_tax_offset}}.
+#' 
 #' @param calc_baseline_tax (logical, default: \code{TRUE}) Should the income tax in \code{baseline_fy} be included as a column in the result?
 #' @param return. What should the function return? One of \code{tax}, \code{sample_file}, or \code{sample_file.int}. 
 #' If \code{tax}, the tax payable under the settings; if \code{sample_file}, the \code{sample_file},
@@ -91,6 +93,9 @@ model_income_tax <- function(sample_file,
                              sapto_max_offset = NULL,
                              sapto_lower_threshold = NULL,
                              sapto_taper = NULL, 
+                             
+                             sbto_discount = NULL,
+                             
                              calc_baseline_tax = TRUE,
                              return. = c("sample_file", "tax", "sample_file.int"),
                              clear_tax_cols = TRUE,
@@ -647,16 +652,16 @@ model_income_tax <- function(sample_file,
       }
     
     # http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html
-    S4.10_basic_income_tax_liability <- pmaxC(base_tax. - lito. - lamington_offset. -
-                                              watr. - sapto., 0)
+    S4.10_basic_income_tax_liability <-
+      pmaxC(base_tax. - lito. - lamington_offset. - watr. - sapto., 0)
     
     # SBTO can only be calculated off .dots.ATO
-    
     sbto. <-
       small_business_tax_offset(taxable_income = income,
                                 basic_income_tax_liability = S4.10_basic_income_tax_liability,
                                 .dots.ATO = .dots.ATO,
-                                fy_year = baseline_fy)
+                                fy_year = if (is.null(sbto_discount)) baseline_fy,
+                                tax_discount = sbto_discount)
     
     if (.debug) {
       return(data.table(income, base_tax., lito., lamington_offset., sapto., sbto., medicare_levy.))
@@ -676,8 +681,8 @@ model_income_tax <- function(sample_file,
     new_taxable_income <-
       income * (1 - elasticity_of_taxable_income * D_tax / (income - old_tax)) %>%
       coalesce(0)
-    
-    sample_file[, new_taxable_income := new_taxable_income]
+    hutils::drop_col(sample_file, "new_taxable_income")
+    sample_file[, "new_taxable_income" := new_taxable_income]
     
     if (anyNA(new_taxable_income) || identical(as.double(new_taxable_income), as.double(income))) stop("NAs: ", sum(is.na(new_taxable_income)), call. = FALSE)
     

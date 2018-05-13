@@ -19,9 +19,9 @@ model_income_tax(sample_file, baseline_fy, n_dependants = 0L,
   lito_taper = NULL, lito_min_bracket = NULL, lamington = FALSE,
   lito_202223 = FALSE, watr = FALSE, sapto_eligible = NULL,
   sapto_max_offset = NULL, sapto_lower_threshold = NULL,
-  sapto_taper = NULL, calc_baseline_tax = TRUE, return. = c("sample_file",
-  "tax", "sample_file.int"), clear_tax_cols = TRUE,
-  warn_upper_thresholds = TRUE, .debug = FALSE)
+  sapto_taper = NULL, sbto_discount = NULL, calc_baseline_tax = TRUE,
+  return. = c("sample_file", "tax", "sample_file.int"),
+  clear_tax_cols = TRUE, warn_upper_thresholds = TRUE, .debug = FALSE)
 }
 \arguments{
 \item{sample_file}{A sample file having at least as many variables as the 2012-13 sample file.}
@@ -73,7 +73,7 @@ Since the temporary budget repair levy was imposed on a discrete tax bracket whe
 
 \item{lito_202223}{The LITO proposed for 2022-23 proposed in the 2018 Budget.}
 
-\item{watr}{The "Worker Australian Tax Refund" proposed in the Opposition Leader's Budget Reply Speech 2018.}
+\item{watr}{The "Working Australian Tax Refund" proposed in the Opposition Leader's Budget Reply Speech 2018.}
 
 \item{sapto_eligible}{Whether or not each taxpayer in \code{sample_file} is eligible for \code{SAPTO}. 
 If \code{NULL}, the default, then eligibility is determined by \code{age_range} in \code{sample_file};
@@ -84,6 +84,8 @@ If \code{NULL}, the default, then eligibility is determined by \code{age_range} 
 \item{sapto_lower_threshold}{The threshold at which SAPTO begins to reduce (from \code{sapto_max_offset}).}
 
 \item{sapto_taper}{The taper rate beyond \code{sapto_lower_threshold}.}
+
+\item{sbto_discount}{The \code{tax_discount} in \code{\link{small_business_tax_offset}}.}
 
 \item{calc_baseline_tax}{(logical, default: \code{TRUE}) Should the income tax in \code{baseline_fy} be included as a column in the result?}
 
