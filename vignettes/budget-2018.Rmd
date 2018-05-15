@@ -923,6 +923,35 @@ list(
         legend.title = element_blank())
 ```
 
+```{r}
+avg_tax_rates_by_percentile_facet_fy_historical <- 
+  list(
+  {
+    sample_files_all %>%
+      .[, .(new_tax = tax), keyby = .(fy_year = fy.year, Taxable_Income)] %>%
+      .[, id := "Current"] %>%
+      .[]
+  },
+  bound_models[, .(id, fy_year, Taxable_Income, new_tax)],
+  s1718[, .(id = "Current", fy_year = "2017-18", Taxable_Income, new_tax)],
+  s1617[, .(id = "Current", fy_year = "2016-17", Taxable_Income, new_tax)]
+) %>%
+  rbindlist(use.names = TRUE,
+            fill = TRUE) %>%
+  .[, Taxable_Income_percentile := ntile(Taxable_Income, 100),
+    keyby = .(id, fy_year)] %>%
+  .[, new_avg_tax_rate := coalesce(new_tax / Taxable_Income, 0)] %>%
+  .[, .(new_avg_tax_rate = mean(new_avg_tax_rate)), 
+    keyby = .(fy_year, id, Taxable_Income_percentile)] %>%
+  .[] %>%
+  .[implies(id %pin% "_", endsWith(id, "baseline"))] %>%
+  .[id %pin% c("aseline", "urrent"), id := "Baseline/Current"] %>%
+  .[order(fy_year)] %>%
+  dcast(fy_year + id ~ Taxable_Income_percentile, value.var = "new_avg_tax_rate", FUN = identity) %T>%
+  fwrite("avg-tax-rate-wide-by-model-fy_year.tsv", quote = TRUE, sep = "\t") %>%
+  .[]
+```
+
 
 ## Effect of SBTO
 ```{r}
@@ -989,8 +1018,8 @@ while (r1 < 20 && revenue_foregone(alternative) > revenue_foregone(s202728_in_19
 }
 
 alternative %>%
-  .[, new_avg_tax_rate := coalesce(new_tax / Taxable_Income)] %>%
-  .[, old_avg_tax_rate := coalesce(baseline_tax / Taxable_Income)] %>%
+  .[, new_avg_tax_rate := coalesce(new_tax / Taxable_Income, 0)] %>%
+  .[, old_avg_tax_rate := coalesce(baseline_tax / Taxable_Income, 0)] %>%
   .[, delta := new_tax - baseline_tax] %>%
   .[, .(old_avg_tax_rate = mean(old_avg_tax_rate),
         new_avg_tax_rate = mean(new_avg_tax_rate),
@@ -1001,13 +1030,32 @@ alternative %>%
   ggplot(aes(x = Taxable_Income_percentile, y = value, color = variable)) + 
   geom_line()
 
+baseline_share <- 
+  bound_models[id == "Budget2018_baseline" & fy_year == "2027-28"] %>%
+  .[, .(total_delta = sum(delta)), keyby = .(Taxable_Income_percentile = ntile(Taxable_Income, 10))] %>%
+  .[, prop := total_delta / sum(total_delta)] 
+
+govt_share <- 
+  bound_models[id == "Budget2018" & fy_year == "2027-28"] %>%
+  .[, .(total_delta = sum(delta)), keyby = .(Taxable_Income_percentile = ntile(Taxable_Income, 10))] %>%
+  .[, prop := total_delta / sum(total_delta)] %>%
+  fwrite("prop-share-tax-benefit-govt-by-decile.csv")
+
+alternative_share <- 
+  alternative %>%
+  .[, .(total_delta = sum(delta)), keyby = .(Taxable_Income_percentile = ntile(Taxable_Income, 10))] %>%
+  .[, prop := total_delta / sum(total_delta)] %>%
+  fwrite("prop-share-tax-benefit-alternative-by-decile.csv")
+
 alternative %>%
-  .[, .(old_tot_tax_paid = sum(baseline_tax), 
-        new_tot_tax_paid = sum(new_tax), 
-        WEIGHT = sum(WEIGHT)), 
+  .[, .(old_tot_tax_paid = sum(baseline_tax * WEIGHT), 
+        new_tot_tax_paid = sum(new_tax * WEIGHT)), 
     keyby = .(Taxable_Income_decile = ntile(Taxable_Income, 10))] %>%
   .[] %>%
-  
+  melt.data.table(id.vars = key(.)) %>%
+  ggplot(aes(x = Taxable_Income_decile, y = value, fill = variable)) + 
+  geom_col(position = "dodge") + 
+  scale_y_continuous(labels = function(x) paste0(grattan_dollar(x / 1e9), " bn"))
 
 
 ```
