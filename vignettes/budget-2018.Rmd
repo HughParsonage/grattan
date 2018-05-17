@@ -18,6 +18,28 @@ knitr::opts_chunk$set(
   dev = "svg",
   eval = "pinp.cls" %in% dir()
 )
+if (isTRUE(getOption("knitr.in.progress"))) {
+  BUNDLE.CHART.DATA <- FALSE
+  .finished <- FALSE
+  chunktimings.txt <- "budget-2018-chunktimings.txt"
+  invisible(file.create(chunktimings.txt))
+  knitr::knit_hooks$set(timeit = function(before) {
+    if (before) {
+      assign(".current.time", value = Sys.time(), envir = .GlobalEnv)
+    }
+    else {
+      .duration <- formatC(as.numeric(round(difftime(Sys.time(), 
+                                                     .current.time, units = "secs"), 1)), format = "f", 
+                           flag = "#", digits = 1, width = 5)
+      if (!.finished) 
+        write(paste0(.duration, "\t", knitr::opts_current$get(name = "label")), 
+              file = chunktimings.txt, ncolumns = 1, append = TRUE)
+    }
+  })
+  knitr::opts_chunk$set(timeit = TRUE)
+  START.TIME <- Sys.time()
+}
+
 ```
 
 ```{r}
@@ -289,6 +311,7 @@ model_Budgets <- function(fy_year, use.Treasury = TRUE, .debug = FALSE) {
   }
   
   list(Budget2018_baseline = model_income_tax(),
+       Budget2018_baseline_brackets_cpi = model_income_tax(ordinary_tax_thresholds = cpi_inflator(ordinary_tax_thresholds(1), from_fy = "2017-18", to_fy = fy_year)),
        Budget2018_baseline_no_SBTO = model_income_tax(sbto_discount = 0),
        Budget2018_just_rates = model_income_tax(ordinary_tax_rates =  ordinary_tax_rates(h),
                                                 ordinary_tax_thresholds = ordinary_tax_thresholds(h),
@@ -1060,6 +1083,25 @@ alternative %>%
 
 ```
 
+```{r budget2018-total-revenue-vs-fy-by-quintile.csv}
+bound_models %>%
+  .[id == "Budget2018"] %>%
+  .[, Quintile := ntile(Taxable_Income, 5), keyby = "fy_year"] %>%
+  .[, .(total_delta_bn = sum((new_tax - baseline_tax) * WEIGHT / 1e9), 
+        max_income = max(Taxable_Income),
+        min_income = min(Taxable_Income), 
+        avg_income = mean(Taxable_Income)), 
+    keyby = c("fy_year", "Quintile")] %>%
+  .[, "Financial year ending" := fy2yr(.BY[[1]]), keyby = c("fy_year", "Quintile")] %>%
+  .[, total_delta_bn := round(total_delta_bn, 2), keyby = c("fy_year", "Quintile")] %>%
+  .[, avg_income := round(avg_income, 2), keyby = c("fy_year", "Quintile")] %>%
+  setorder(fy_year, -Quintile) %>%
+  fwrite("budget2018-total-revenue-vs-fy-by-quintile.csv")
+```
+
+```{r revenue_foregone2018-19-bracket-creep}
+print(revenue_foregone(Budget_1922[["2018-19"]][["Budget2018_baseline_brackets_cpi"]]))
+```
 
 
 
