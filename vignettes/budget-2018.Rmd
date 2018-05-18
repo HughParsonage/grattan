@@ -39,7 +39,7 @@ if (isTRUE(getOption("knitr.in.progress"))) {
   knitr::opts_chunk$set(timeit = TRUE)
   START.TIME <- Sys.time()
 }
-
+stopifnot(file.exists("../DESCRIPTION"))
 ```
 
 ```{r}
@@ -1101,6 +1101,20 @@ bound_models %>%
 
 ```{r revenue_foregone2018-19-bracket-creep}
 print(revenue_foregone(Budget_1922[["2018-19"]][["Budget2018_baseline_brackets_cpi"]]))
+```
+
+```{r}
+avg_tax_rate_by_percentile_brackets_cpi <-
+  lapply(Budget_1922, function(x) {
+    x[["Budget2018_baseline_brackets_cpi"]][, .(Taxable_Income, new_tax)]
+    }) %>%
+  rbindlist(use.names = TRUE, fill = TRUE, idcol = "fy_year") %>%
+  .[, avg_tax_rate := coalesce(new_tax / Taxable_Income, 0)] %>%
+  .[, .(avg_tax_rate = mean(avg_tax_rate)), 
+    keyby = .(fy_year, Taxable_Income_percentile = ntile(Taxable_Income, 100))]
+fwrite(avg_tax_rate_by_percentile_brackets_cpi,
+       "avg_tax_rate_by_percentile_brackets_cpi.csv")
+
 ```
 
 
