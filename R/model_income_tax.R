@@ -51,8 +51,17 @@
 #' but with variables \code{tax} and possibly \code{new_taxable_income}; if \code{sample_file.int}, same as \code{sample_file} but \code{new_tax} is coerced to integer.
 #' @param clear_tax_cols If \code{TRUE}, the default, then \code{return. = sample_file} implies any columns called \code{new_tax} or \code{baseline_tax} in \code{sample_file} are dropped silently.
 #' @param warn_upper_thresholds If \code{TRUE}, the default, then any inconsistency between \code{baseline_fy} and the upper thresholds result in a warning. Set to \code{FALSE}, if the \code{lower_threshold}s may take priority. 
-#' @param .debug Return a data.table of \code{new_tax}.
+#' @param .debug Return a data.table of \code{new_tax}. Experimental so cannot be relied in future versions.
 #' 
+#' @examples
+#' 
+#' # With new tax-free threshold of $20,000:
+#' if (!requireNamespace("taxstats", quietly = TRUE)) {
+#'   library(taxstats)
+#'   model_income_tax(sample_file_1314,
+#'                    ordinary_tax_brackets = c(0, 20e3, 37e3, 80e3, 180e3))
+#' 
+#' }
 #' @export
 
 
