@@ -1,7 +1,7 @@
 #' @title Residential property prices in Australia
 #' @name residential_property_prices
 #' @description Residential property prices indexes for the capital cities of Australia, and a weighted average for the whole country.
-#' @format A \code{data.table} of three columns and 486 observations:
+#' @format A \code{data.table} of three columns and 522 observations:
 #' \describe{
 #' \item{Date}{Date of the index}
 #' \item{City}{Capital city (or \code{Australia (weighted average)})}
