@@ -1,6 +1,7 @@
 context("Revenue foregone")
 
 test_that("Value of revenue_foregone", {
+  library(data.table)
   dt <- data.table(new_tax = rep(1, 100), 
                    baseline_tax = integer(100), 
                    WEIGHT = 1)
