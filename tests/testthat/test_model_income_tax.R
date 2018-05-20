@@ -632,7 +632,7 @@ test_that("Lamington", {
                      baseline_fy = "2017-18",
                      ordinary_tax_rates = c(0, 0.19, 0.325, 0.37, 0.45),
                      ordinary_tax_thresholds = c(0, 18200, 37e3, 90e3, 180e3),
-                     lamington = TRUE) %>%
+                     Budget2018_lamington = TRUE) %>%
     .[, .(Taxable_Income, new_tax, baseline_tax)] %>%
     .[, delta := as.integer(new_tax) - as.integer(baseline_tax)] %>%
     setkey(Taxable_Income) %>%

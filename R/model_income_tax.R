@@ -31,10 +31,11 @@
 #' @param lito_max_offset The maximum offset available for low incomes.
 #' @param lito_taper The taper to apply beyond \code{lito_min_bracket}.
 #' @param lito_min_bracket The taxable income at which the value of the offset starts to reduce (from \code{lito_max_offset}).
+#' @param lito_multi A list of two components, named \code{x} and \code{y}, giving the value of a \emph{replacement} for \code{lito} at specified points, which will be linked by a piecewise linear curve between the points specified. For example, to mimic LITO in 2015-16 (when the offset was \$445 for incomes below \$37,000, and afterwards tapered off to \$66,667), one would use \code{lito_multi = list(x = c(-Inf, 37e3, 200e3/3, Inf), y = c(445, 445, 0, 0))}. The reason the argument ends with \code{multi} is that it is intended to extend the original parameters of LITO so that multiple kinks (including ones of positive and negative gradients) can be modelled. 
 #' 
-#' @param lamington The Low Middle Income Tax Offset proposed in the 2018 Budget.
-#' @param lito_202223 The LITO proposed for 2022-23 proposed in the 2018 Budget.
-#' @param watr The "Working Australian Tax Refund" proposed in the Opposition Leader's Budget Reply Speech 2018.
+#' @param Budget2018_lamington The Low Middle Income Tax Offset proposed in the 2018 Budget.
+#' @param Budget2018_lito_202223 The LITO proposed for 2022-23 proposed in the 2018 Budget.
+#' @param Budget2018_watr The "Working Australian Tax Refund" proposed in the Opposition Leader's Budget Reply Speech 2018.
 #' 
 #' @param sapto_eligible Whether or not each taxpayer in \code{sample_file} is eligible for \code{SAPTO}. 
 #' If \code{NULL}, the default, then eligibility is determined by \code{age_range} in \code{sample_file};
@@ -84,10 +85,11 @@ model_income_tax <- function(sample_file,
                              lito_max_offset = NULL,
                              lito_taper = NULL,
                              lito_min_bracket = NULL,
+                             lito_multi = NULL,
                              
-                             lamington = FALSE,
-                             lito_202223 = FALSE,
-                             watr = FALSE,
+                             Budget2018_lamington = FALSE,
+                             Budget2018_lito_202223 = FALSE,
+                             Budget2018_watr = FALSE,
                              
                              sapto_eligible = NULL,
                              sapto_max_offset = NULL,
@@ -630,26 +632,55 @@ model_income_tax <- function(sample_file,
     }
     
     lamington_offset. <-
-      if (lamington) {
+      if (Budget2018_lamington) {
         lmito(income, fy.year = baseline_fy)
       } else {
         0
       }
     
     watr. <- 
-      if (watr) {
+      if (Budget2018_watr) {
         watr(income)
       } else {
         0
       }
     
-   
-      if (lito_202223) {
-        lito. <- 
-          pmaxC(pmaxV(lito(income, max_lito = 645, lito_taper = 0.065, min_bracket = 37e3),
-                      lito(income, max_lito = 385, lito_taper = 0.015, min_bracket = 41e3)),
-                0)
+    if (!is.null(lito_multi)) {
+      if (!is.null(lito_max_offset)) {
+        stop("`lito_multi` is not NULL, yet neither is `lito_max_offset`. ",
+             "Either set `lito_max_offset` to NULL or `lito_multi`.")
       }
+      if (!is.null(lito_taper)) {
+        stop("`lito_multi` is not NULL, yet neither is `lito_taper`. ",
+             "Either set `lito_taper` to NULL or `lito_multi`.")
+      }
+      if (!is.null(lito_min_bracket)) {
+        stop("`lito_multi` is not NULL, yet neither is `lito_min_bracket`. ",
+             "Either set `lito_min_bracket` to NULL or `lito_multi`.")
+      }
+      
+      if (!is.list(lito_multi)) {
+        stop("`lito_muli` had class ", class(lito_multi), ". Must be a list.")
+      }
+      if (!length(names(lito_multi))) {
+        stop("`lito_multi` had no names. ", 
+             "When `lito_multi` is set, it be a list with two elements named 'x' and 'y'.")
+      }
+      
+      if (!identical(names(lito_multi), c("x", "y"))) {
+        stop("`names(lito_multi) = ", paste0(names(lito_multi)[1:2], collapse = ","), "`. ", 
+             "Set the names as 'x' and 'y'.")
+      }
+      lito. <-
+        approxfun(x = lito_multi[["x"]], 
+                  y = lito_multi[["y"]])(income)
+      
+    } else if (Budget2018_lito_202223) {
+      lito. <- 
+        pmaxC(pmaxV(lito(income, max_lito = 645, lito_taper = 0.065, min_bracket = 37e3),
+                    lito(income, max_lito = 385, lito_taper = 0.015, min_bracket = 41e3)),
+              0)
+    }
     
     # http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html
     S4.10_basic_income_tax_liability <-

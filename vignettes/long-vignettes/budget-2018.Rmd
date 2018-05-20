@@ -117,11 +117,12 @@ ntile <- function(x, n) {
 coalesce <- hutils::coalesce
 
 sample_files_all[, Taxable_Income_percentile := ntile(Taxable_Income, 100)]
-
 ```
 
 ```{r sample_files_all}
-sample_files_all[, tax := income_tax(Taxable_Income, fy.year = fy.year, .dots.ATO = .SD), keyby = "fy.year"][, avg_tax_rate := coalesce(tax / Taxable_Income, 0)]
+sample_files_all %>%
+  .[, tax := income_tax(Taxable_Income, fy.year = .BY[[1L]], .dots.ATO = .SD), keyby = "fy.year"] %>%
+  .[, avg_tax_rate := coalesce(tax / Taxable_Income, 0)]
 ```
 
 ```{r revenue_foregone}
@@ -292,7 +293,10 @@ model_Budgets <- function(fy_year, use.Treasury = TRUE, .debug = FALSE) {
     s1920 <- .project_useGrattans[[h]]
   }
   
-  model_income_tax <- function(...) {
+  model_income_tax <- function(...,
+                               lamington = FALSE,
+                               lito_202223 = FALSE, 
+                               watr = FALSE) {
     grattan::model_income_tax(
       sample_file = s1920, 
       baseline_fy = "2017-18",
@@ -302,6 +306,9 @@ model_Budgets <- function(fy_year, use.Treasury = TRUE, .debug = FALSE) {
       medicare_levy_lower_family_sapto_threshold = medicare_levy_lower_family_sapto_threshold(fy_year),
       medicare_levy_lower_up_for_each_child = medicare_levy_lower_up_for_each_child(fy_year),
       warn_upper_thresholds = FALSE,
+      Budget2018_lamington = lamington,
+      Budget2018_lito_202223 = lito_202223,
+      Budget2018_watr = watr,
       ...) %>%
       .[, new_tax := as.integer(new_tax)] %>%
       .[, delta := new_tax - baseline_tax] %>%
@@ -717,21 +724,8 @@ avg_tax_rates_by_percentile_facet_fy %>%
   .[fy_year %in% c("2017-18", "2027-28")] %>%
   dcast.data.table(Decile ~ id + fy_year, value.var = "tot_tax") %>%
   .[, lapply(.SD, to_prop)] %>%
-  kable
+  kable(align = "rrrr")
 ```
-
-  Decile   2017-18   2027-28 (no change to tax rates)   2027-28 PIT Plan
-  -------- --------- ---------------------------------- ------------------
-  1        0         0                                  0
-  2        0         0.04                               0.01
-  3        0.4       0.8                                0.7
-  4        1.6       2.3                                2.1
-  5        3.4       4.3                                4.1
-  6        5.7       6.3                                6.2
-  7        8.5       8.7                                8.8
-  8        12.1      12.2                               12.3
-  9        17.8      17.9                               17.8
-  10       50.4      47.5                               47.9
   
 
 ```{r}
@@ -852,7 +846,7 @@ sample_files_all %>%
                                         gpal(6)[2])))] %>%
   .[, alpha := if_else(is.na(id), 1.05 * scale01(fy2yr(fy_year)), 1)] %>%
   # .[fy_year %in% c("2013-14"), c("alpha", "colour") := list(0.8, "black")] %>%
-  .[implies(!is.na(id), fy_year %in% c("2018-19", "2027-28"))] %>%
+  .[implies(!is.na(id), fy_year %in% c("2017-18", "2018-19", "2027-28"))] %>%
   .[, size := 0.8] %>%
   .[fy_year %in% c("2004-05", "2013-14"), size := 1.1] %>%
   .[fy_year %in% c("2018-19", "2027-28"), size := 1.4] %>%
@@ -1020,8 +1014,8 @@ s202728_in_1920 <-
                    "2017-18", 
                    ordinary_tax_rates = ordinary_tax_rates(10), 
                    ordinary_tax_thresholds = ordinary_tax_thresholds(10),
-                   lamington = TRUE,
-                   lito_202223 = TRUE)
+                   Budget2018_lamington = TRUE,
+                   Budget2018_lito_202223 = TRUE)
 alternative <- 
   model_income_tax(s1819, 
                    "2017-18", 

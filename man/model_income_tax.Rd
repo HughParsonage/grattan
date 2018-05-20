@@ -16,12 +16,13 @@ model_income_tax(sample_file, baseline_fy, n_dependants = 0L,
   medicare_levy_lower_family_sapto_threshold = NULL,
   medicare_levy_upper_family_sapto_threshold = NULL,
   medicare_levy_lower_up_for_each_child = NULL, lito_max_offset = NULL,
-  lito_taper = NULL, lito_min_bracket = NULL, lamington = FALSE,
-  lito_202223 = FALSE, watr = FALSE, sapto_eligible = NULL,
-  sapto_max_offset = NULL, sapto_lower_threshold = NULL,
-  sapto_taper = NULL, sbto_discount = NULL, calc_baseline_tax = TRUE,
-  return. = c("sample_file", "tax", "sample_file.int"),
-  clear_tax_cols = TRUE, warn_upper_thresholds = TRUE, .debug = FALSE)
+  lito_taper = NULL, lito_min_bracket = NULL, lito_multi = NULL,
+  Budget2018_lamington = FALSE, Budget2018_lito_202223 = FALSE,
+  Budget2018_watr = FALSE, sapto_eligible = NULL, sapto_max_offset = NULL,
+  sapto_lower_threshold = NULL, sapto_taper = NULL, sbto_discount = NULL,
+  calc_baseline_tax = TRUE, return. = c("sample_file", "tax",
+  "sample_file.int"), clear_tax_cols = TRUE, warn_upper_thresholds = TRUE,
+  .debug = FALSE)
 }
 \arguments{
 \item{sample_file}{A sample file having at least as many variables as the 2012-13 sample file.}
@@ -69,11 +70,13 @@ Since the temporary budget repair levy was imposed on a discrete tax bracket whe
 
 \item{lito_min_bracket}{The taxable income at which the value of the offset starts to reduce (from \code{lito_max_offset}).}
 
-\item{lamington}{The Low Middle Income Tax Offset proposed in the 2018 Budget.}
+\item{lito_multi}{A list of two components, named \code{x} and \code{y}, giving the value of a \emph{replacement} for \code{lito} at specified points, which will be linked by a piecewise linear curve between the points specified. For example, to mimic LITO in 2015-16 (when the offset was \$445 for incomes below \$37,000, and afterwards tapered off to \$66,667), one would use \code{lito_multi = list(x = c(-Inf, 37e3, 200e3/3, Inf), y = c(445, 445, 0, 0))}. The reason the argument ends with \code{multi} is that it is intended to extend the original parameters of LITO so that multiple kinks (including ones of positive and negative gradients) can be modelled.}
 
-\item{lito_202223}{The LITO proposed for 2022-23 proposed in the 2018 Budget.}
+\item{Budget2018_lamington}{The Low Middle Income Tax Offset proposed in the 2018 Budget.}
 
-\item{watr}{The "Working Australian Tax Refund" proposed in the Opposition Leader's Budget Reply Speech 2018.}
+\item{Budget2018_lito_202223}{The LITO proposed for 2022-23 proposed in the 2018 Budget.}
+
+\item{Budget2018_watr}{The "Working Australian Tax Refund" proposed in the Opposition Leader's Budget Reply Speech 2018.}
 
 \item{sapto_eligible}{Whether or not each taxpayer in \code{sample_file} is eligible for \code{SAPTO}. 
 If \code{NULL}, the default, then eligibility is determined by \code{age_range} in \code{sample_file};
