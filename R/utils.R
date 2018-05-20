@@ -11,6 +11,10 @@ unselect_ <- function(.data, .dots) {
   !(x %in% y)
 }
 
+is_knitting <- function() {
+  isTRUE(getOption('knitr.in.progress'))
+}
+
 # from dplyr::near
 near <- function (x, y, tol = .Machine$double.eps^0.5) {
   abs(x - y) < tol
@@ -58,8 +62,8 @@ mean_of_nonzero <- function(x){
   MeanNumeric(x[x > 0])
 }
 
-is.nonnegative <- function(vec){
-  is.numeric(vec) && !anyNA(vec) && all(vec >= 0)
+is.nonnegative <- function(vec) {
+  is.numeric(vec) && !anyNA(vec) && min(vec) >= 0
 }
 
 are_zero <- function(x){

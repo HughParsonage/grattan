@@ -78,8 +78,8 @@
       ago <- difftime(Sys.time(), the_filemtime)
       file_name <- names(the_filemtime)
       if (is.character(basename(file_name))) {
-        packageStartupMessage("Last change: ", basename(file_name), " at ", strftime(the_filemtime),
-                              " (", floor(ago), " ", attr(ago, "units"), " ago).")
+        gessage("Last change: ", basename(file_name), " at ", strftime(the_filemtime),
+                " (", floor(ago), " ", attr(ago, "units"), " ago).")
       }
     }
   }, 
@@ -87,6 +87,15 @@
   
   
   invisible()
+}
+
+gessage <- function(...) {
+  if (identical(Sys.info()[["user"]], "hughp") &&
+      file.exists("~/grattan_1.4.0.2.tar.gz")) {
+    packageStartupMessage(...)
+  } else {
+    NULL
+  }
 }
 
 .onUnload <- function (libpath) {
