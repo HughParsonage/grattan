@@ -2,10 +2,15 @@
 #' @param dt A \code{data.table}
 #' @param revenue_positive If \code{TRUE}, the default, tax increase (revenue) is positive and tax cuts are negative.
 #' @param digits If not \code{NULL}, affects the print method of the value.
-#' @export revenue_foregone print.revenue_foregone
+#' @export revenue_foregone
 
 revenue_foregone <- function(dt, revenue_positive = TRUE, digits = NULL) {
-  out <- dt[, sum((as.integer(new_tax) - baseline_tax) * WEIGHT)]
+  stopifnot(is.data.table(dt), 
+            "WEIGHT" %in% names(dt),
+            "new_tax" %in% names(dt),
+            "baseline_tax" %in% names(dt))
+  delta <- .subset2(dt, "WEIGHT") * (.subset2(dt, "new_tax") - .subset(dt, "baseline_tax"))
+  out <- sum(delta)
   if (!revenue_positive) {
     out <- -out
   }
@@ -15,7 +20,12 @@ revenue_foregone <- function(dt, revenue_positive = TRUE, digits = NULL) {
 }
 
 .revenue_foregone <- function(dt, revenue_positive = TRUE, digits = NULL) {
-  out <- dt[, sum((as.integer(new_tax) - baseline_tax) * WEIGHT)]
+  stopifnot(is.data.table(dt), 
+            "WEIGHT" %in% names(dt),
+            "new_tax" %in% names(dt),
+            "baseline_tax" %in% names(dt))
+  delta <- .subset2(dt, "WEIGHT") * (.subset2(dt, "new_tax") - .subset(dt, "baseline_tax"))
+  out <- sum(delta)
   if (!revenue_positive) {
     out <- -out
   }
@@ -24,6 +34,7 @@ revenue_foregone <- function(dt, revenue_positive = TRUE, digits = NULL) {
   out
 }
 
+#' @export
 print.revenue_foregone <- function(x, ...) {
   if (x < 0) {
     pre <- paste0("\u2212", if (is_knitting()) "\\$" else "$")
