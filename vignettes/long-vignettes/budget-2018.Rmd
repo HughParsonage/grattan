@@ -15,8 +15,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.width = 9,
   fig.height = 7,
-  dev = "svg",
-  eval = "pinp.cls" %in% dir()
+  dev = "svg"
 )
 if (isTRUE(getOption("knitr.in.progress"))) {
   BUNDLE.CHART.DATA <- FALSE
@@ -39,7 +38,7 @@ if (isTRUE(getOption("knitr.in.progress"))) {
   knitr::opts_chunk$set(timeit = TRUE)
   START.TIME <- Sys.time()
 }
-stopifnot(file.exists("../DESCRIPTION"))
+stopifnot(file.exists("../../DESCRIPTION"))
 ```
 
 ```{r}
