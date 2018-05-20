@@ -680,8 +680,8 @@ model_income_tax <- function(sample_file,
       lito_multi_x[which.max(lito_multi_x)] <- max(income)
       
       lito. <-
-        approxfun(x = lito_multi_x, 
-                  y = lito_multi_y)(income)
+        stats::approxfun(x = lito_multi_x, 
+                         y = lito_multi_y)(income)
       
     } else if (Budget2018_lito_202223) {
       lito. <- 
