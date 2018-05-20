@@ -660,7 +660,7 @@ model_income_tax <- function(sample_file,
       }
       
       if (!is.list(lito_multi)) {
-        stop("`lito_muli` had class ", class(lito_multi), ". Must be a list.")
+        stop("`lito_multi` had class ", class(lito_multi), ". Must be a list.")
       }
       if (!length(names(lito_multi))) {
         stop("`lito_multi` had no names. ", 
@@ -671,9 +671,17 @@ model_income_tax <- function(sample_file,
         stop("`names(lito_multi) = ", paste0(names(lito_multi)[1:2], collapse = ","), "`. ", 
              "Set the names as 'x' and 'y'.")
       }
+      
+      lito_multi_x <- lito_multi[["x"]]
+      lito_multi_y <- lito_multi[["y"]]
+      
+      # Infinity should be permitted, but won't work with approxfun
+      lito_multi_x[which.min(lito_multi_x)] <- min(income)
+      lito_multi_x[which.max(lito_multi_x)] <- max(income)
+      
       lito. <-
-        approxfun(x = lito_multi[["x"]], 
-                  y = lito_multi[["y"]])(income)
+        approxfun(x = lito_multi_x, 
+                  y = lito_multi_y)(income)
       
     } else if (Budget2018_lito_202223) {
       lito. <- 
