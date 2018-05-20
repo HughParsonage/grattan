@@ -129,7 +129,7 @@ model_income_tax <- function(sample_file,
   
   
   s1213_noms <-
-    c("Ind", "Gender",
+    c(#"Gender",
       # "age_range",
       "Occ_code", "Partner_status", 
       "Region", "Lodgment_method", "PHI_Ind", "Sw_amt", "Alow_ben_amt", 

@@ -3,6 +3,7 @@
 * Never-legislated Medicare levy change in 2019-20 has been reverted
 * New functions:
   * `progressivity()` for Gini-based measure of the progressivity of income tax
+  * `revenue_foregone()` as a convenenience for returning the revenue foregone from a modelled sample file.
 
 ## 1.5.3.6
 ### 2018-02-21
