@@ -1,8 +1,8 @@
 Package: grattan
 Type: Package
 Title: Australian Tax Policy Analysis
-Version: 1.5.3.7
-Date: 2018-02-22
+Version: 1.6.0.0
+Date: 2018-05-19
 Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.parsonage@gmail.com"),
               person("Tim", "Cameron", role = "aut"),
               person("Brendan", "Coates", role = "aut"), 
@@ -38,6 +38,7 @@ RoxygenNote: 6.0.1
 Suggests:
     dplyr,
     dtplyr,
+    fst (>= 0.8.4),
     ggplot2,
     ggrepel,
     knitr,

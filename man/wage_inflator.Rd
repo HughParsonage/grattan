@@ -15,7 +15,7 @@ wage_inflator(wage = 1, from_fy, to_fy, useABSConnection = FALSE,
 
 \item{to_fy}{The FY ending that the wage index is to be taken.}
 
-\item{useABSConnection}{Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. The internal data was updated on 2018-02-21 to include data up to 2017-Q4.}
+\item{useABSConnection}{Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. The internal data was updated on 2018-05-21 to include data up to 2018-Q1.}
 
 \item{allow.projection}{If set to \code{TRUE} the \code{forecast} package is used to project forward, if required.}
 

@@ -602,6 +602,114 @@ test_that("Elasticity 0 vs 1", {
   expect_true(all(result$new_tax_E0 > result$new_tax_e1))
 })
 
+test_that("Lamington", {
+  skip_on_cran()
+  skip_if_not_installed("taxstats", minimum_version = "0.0.5")
+  skip_if_not_installed("fst", minimum_version = "0.8.4")
+  temp.fst <- "~/SampleFile1819/sample_file_1819.fst"
+  library(data.table)
+  library(hutils)
+  library(magrittr)
+  if (!exists("sample_file_1819") || !is.data.table(sample_file_1819)) {
+    if (!file.exists("~/SampleFile1819/sample_file_1819.fst")) {
+      temp.fst <- tempfile(fileext = ".fst")
+      download.file('https://github.com/HughParsonage/SampleFile1819/raw/master/sample_file_1819.fst',
+                    mode = "wb", 
+                    destfile = temp.fst,
+                    quiet = TRUE)
+    }
+    sample_file_1819 <- fst::read_fst(temp.fst, as.data.table = TRUE)
+  }
+  
+  skip_if_not(exists("sample_file_1819"))
+  if (!"Ind" %in% names(sample_file_1819)) {
+    sample_file_1819[, Ind := .I]
+  }
+  
+  
+  s1819_Budget2018_lamington <- 
+    model_income_tax(sample_file_1819,
+                     baseline_fy = "2017-18",
+                     ordinary_tax_rates = c(0, 0.19, 0.325, 0.37, 0.45),
+                     ordinary_tax_thresholds = c(0, 18200, 37e3, 90e3, 180e3),
+                     Budget2018_lamington = TRUE) %>%
+    .[, .(Taxable_Income, new_tax, baseline_tax)] %>%
+    .[, delta := as.integer(new_tax) - as.integer(baseline_tax)] %>%
+    setkey(Taxable_Income) %>%
+    .[]
+  # https://budget.gov.au/2018-19/content/incometax.html
+  expect_equal(coalesce(as.double(s1819_Budget2018_lamington[.(c(23000, 37000, 50e3, 91e3, 200e3)), mult="first"][["delta"]]),
+                        c(-200, -200, -530, -650, -135)),
+               c(-200, -200, -530, -650, -135))
+  
+})
+
+test_that("Clear columns", {
+  skip_on_cran()
+  skip_if_not_installed("taxstats")
+  library(taxstats)
+  s1314 <- as.data.table(sample_file_1314)
+  s1314[, new_tax := 1][, baseline_tax := 2]
+  res <- model_income_tax(s1314, "2013-14", clear_tax_cols = TRUE)
+  expect_true(res[, max(new_tax)] > 1)
+})
+
+test_that("sample_file.int", {
+  skip_on_cran()
+  skip_if_not_installed("taxstats")
+  library(taxstats)
+  s1314 <- as.data.table(sample_file_1314)
+  res <- model_income_tax(s1314, "2013-14", return. = "sample_file.int")
+  expect_identical(res[["new_tax"]], res[["baseline_tax"]])
+})
+
+test_that("lito_multi", {
+  skip_on_cran()
+  skip_if_not_installed("taxstats")
+  library(taxstats)
+  s1314 <- as.data.table(sample_file_1314)
+  base <- model_income_tax(s1314, "2013-14")
+  
+  expect_error(model_income_tax(s1314, "2013-14",
+                                lito_max_offset = 445, 
+                                lito_multi = list()), 
+               regexp = "`lito_multi` is not NULL, yet neither is `lito_max_offset`.", 
+               fixed = TRUE)
+  expect_error(model_income_tax(s1314, "2013-14",
+                                lito_taper = 445, 
+                                lito_multi = list()), 
+               regexp = "`lito_multi` is not NULL, yet neither is `lito_taper`.", 
+               fixed = TRUE)
+  expect_error(model_income_tax(s1314, "2013-14",
+                                lito_min_bracket = 445, 
+                                lito_multi = list()), 
+               regexp = "`lito_multi` is not NULL, yet neither is `lito_min_bracket`.", 
+               fixed = TRUE)
+  expect_error(model_income_tax(s1314, "2013-14",
+                                lito_multi = 445), 
+               regexp = "`lito_multi` had class numeric. Must be a list.", 
+               fixed = TRUE)
+  expect_error(model_income_tax(s1314, "2013-14",
+                                lito_multi = list()), 
+               regexp = "`lito_multi` had no names.", 
+               fixed = TRUE)
+  expect_error(model_income_tax(s1314, "2013-14",
+                                lito_multi = list(a = 1, b = 2)), 
+               regexp = "Set the names as 'x' and 'y'.", 
+               fixed = TRUE)
+  
+  mult <- model_income_tax(s1314, "2013-14", 
+                           lito_multi = list(x = c(-Inf, 37e3, 200e3/3, Inf), 
+                                             y = c(445, 445, 0, 0)), 
+                           return. = "sample_file.int")
+  
+  
+  expect_identical(mult[["new_tax"]], mult[["baseline_tax"]])
+  
+})
+
+
+
 
 
 

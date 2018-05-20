@@ -63,7 +63,39 @@
     "max_lito", "min_bracket", "lito_taper"
       )
     )
+  
+  tryCatch({
+    f_mtimes <- 
+      if (file.exists("R/zzz.R")) {
+        c(vapply(dir(path = "R", full.names = TRUE), file.mtime, double(1)),
+          vapply(dir(path = "tests/testthat", full.names = TRUE), file.mtime, double(1)))
+      } else if (file.exists(file.path(find.package("grattan"), "NAMESPACE"))) {
+        sapply(file.path(find.package("grattan"), "NAMESPACE"), file.mtime)
+      }
+    if (length(f_mtimes)) {
+      class(f_mtimes) <- "POSIXct"
+      the_filemtime <- f_mtimes[which.max(f_mtimes)]
+      ago <- difftime(Sys.time(), the_filemtime)
+      file_name <- names(the_filemtime)
+      if (is.character(basename(file_name))) {
+        gessage("Last change: ", basename(file_name), " at ", strftime(the_filemtime),
+                " (", floor(ago), " ", attr(ago, "units"), " ago).")
+      }
+    }
+  }, 
+  error = function(e) NULL)
+  
+  
   invisible()
+}
+
+gessage <- function(...) {
+  if (identical(Sys.info()[["user"]], "hughp") &&
+      file.exists("~/grattan_1.4.0.2.tar.gz")) {
+    packageStartupMessage(...)
+  } else {
+    NULL
+  }
 }
 
 .onUnload <- function (libpath) {

@@ -16,10 +16,13 @@ model_income_tax(sample_file, baseline_fy, n_dependants = 0L,
   medicare_levy_lower_family_sapto_threshold = NULL,
   medicare_levy_upper_family_sapto_threshold = NULL,
   medicare_levy_lower_up_for_each_child = NULL, lito_max_offset = NULL,
-  lito_taper = NULL, lito_min_bracket = NULL, sapto_eligible = NULL,
-  sapto_max_offset = NULL, sapto_lower_threshold = NULL,
-  sapto_taper = NULL, calc_baseline_tax = TRUE, return. = c("sample_file",
-  "tax"))
+  lito_taper = NULL, lito_min_bracket = NULL, lito_multi = NULL,
+  Budget2018_lamington = FALSE, Budget2018_lito_202223 = FALSE,
+  Budget2018_watr = FALSE, sapto_eligible = NULL, sapto_max_offset = NULL,
+  sapto_lower_threshold = NULL, sapto_taper = NULL, sbto_discount = NULL,
+  calc_baseline_tax = TRUE, return. = c("sample_file", "tax",
+  "sample_file.int"), clear_tax_cols = TRUE, warn_upper_thresholds = TRUE,
+  .debug = FALSE)
 }
 \arguments{
 \item{sample_file}{A sample file having at least as many variables as the 2012-13 sample file.}
@@ -67,6 +70,14 @@ Since the temporary budget repair levy was imposed on a discrete tax bracket whe
 
 \item{lito_min_bracket}{The taxable income at which the value of the offset starts to reduce (from \code{lito_max_offset}).}
 
+\item{lito_multi}{A list of two components, named \code{x} and \code{y}, giving the value of a \emph{replacement} for \code{lito} at specified points, which will be linked by a piecewise linear curve between the points specified. For example, to mimic LITO in 2015-16 (when the offset was \$445 for incomes below \$37,000, and afterwards tapered off to \$66,667), one would use \code{lito_multi = list(x = c(-Inf, 37e3, 200e3/3, Inf), y = c(445, 445, 0, 0))}. The reason the argument ends with \code{multi} is that it is intended to extend the original parameters of LITO so that multiple kinks (including ones of positive and negative gradients) can be modelled.}
+
+\item{Budget2018_lamington}{The Low Middle Income Tax Offset proposed in the 2018 Budget.}
+
+\item{Budget2018_lito_202223}{The LITO proposed for 2022-23 proposed in the 2018 Budget.}
+
+\item{Budget2018_watr}{The "Working Australian Tax Refund" proposed in the Opposition Leader's Budget Reply Speech 2018.}
+
 \item{sapto_eligible}{Whether or not each taxpayer in \code{sample_file} is eligible for \code{SAPTO}. 
 If \code{NULL}, the default, then eligibility is determined by \code{age_range} in \code{sample_file};
 \emph{i.e.}, if \code{age_range <= 1} then the taxpayer is assumed to be eligible for SAPTO.}
@@ -77,12 +88,30 @@ If \code{NULL}, the default, then eligibility is determined by \code{age_range} 
 
 \item{sapto_taper}{The taper rate beyond \code{sapto_lower_threshold}.}
 
+\item{sbto_discount}{The \code{tax_discount} in \code{\link{small_business_tax_offset}}.}
+
 \item{calc_baseline_tax}{(logical, default: \code{TRUE}) Should the income tax in \code{baseline_fy} be included as a column in the result?}
 
-\item{return.}{What should the function return? One of \code{tax} or \code{sample_file}. 
+\item{return.}{What should the function return? One of \code{tax}, \code{sample_file}, or \code{sample_file.int}. 
 If \code{tax}, the tax payable under the settings; if \code{sample_file}, the \code{sample_file},
-but with variables \code{tax} and possibly \code{new_taxable_income}.}
+but with variables \code{tax} and possibly \code{new_taxable_income}; if \code{sample_file.int}, same as \code{sample_file} but \code{new_tax} is coerced to integer.}
+
+\item{clear_tax_cols}{If \code{TRUE}, the default, then \code{return. = sample_file} implies any columns called \code{new_tax} or \code{baseline_tax} in \code{sample_file} are dropped silently.}
+
+\item{warn_upper_thresholds}{If \code{TRUE}, the default, then any inconsistency between \code{baseline_fy} and the upper thresholds result in a warning. Set to \code{FALSE}, if the \code{lower_threshold}s may take priority.}
+
+\item{.debug}{Return a data.table of \code{new_tax}. Experimental so cannot be relied in future versions.}
 }
 \description{
 The income tax payable if tax settings are changed.
+}
+\examples{
+
+# With new tax-free threshold of $20,000:
+if (!requireNamespace("taxstats", quietly = TRUE)) {
+  library(taxstats)
+  model_income_tax(sample_file_1314,
+                   ordinary_tax_brackets = c(0, 20e3, 37e3, 80e3, 180e3))
+
+}
 }

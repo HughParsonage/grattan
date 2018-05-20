@@ -79,6 +79,7 @@ test_that("cpi returns reasonable forecasts", {
 })
 
 test_that("ABS connection", {
+  skip_on_cran()
   internal_ans <- cpi_inflator(from_fy = "2012-13", 
                                to_fy = "2013-14", 
                                adjustment = "none", 

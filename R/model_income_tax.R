@@ -31,17 +31,37 @@
 #' @param lito_max_offset The maximum offset available for low incomes.
 #' @param lito_taper The taper to apply beyond \code{lito_min_bracket}.
 #' @param lito_min_bracket The taxable income at which the value of the offset starts to reduce (from \code{lito_max_offset}).
+#' @param lito_multi A list of two components, named \code{x} and \code{y}, giving the value of a \emph{replacement} for \code{lito} at specified points, which will be linked by a piecewise linear curve between the points specified. For example, to mimic LITO in 2015-16 (when the offset was \$445 for incomes below \$37,000, and afterwards tapered off to \$66,667), one would use \code{lito_multi = list(x = c(-Inf, 37e3, 200e3/3, Inf), y = c(445, 445, 0, 0))}. The reason the argument ends with \code{multi} is that it is intended to extend the original parameters of LITO so that multiple kinks (including ones of positive and negative gradients) can be modelled. 
+#' 
+#' @param Budget2018_lamington The Low Middle Income Tax Offset proposed in the 2018 Budget.
+#' @param Budget2018_lito_202223 The LITO proposed for 2022-23 proposed in the 2018 Budget.
+#' @param Budget2018_watr The "Working Australian Tax Refund" proposed in the Opposition Leader's Budget Reply Speech 2018.
+#' 
 #' @param sapto_eligible Whether or not each taxpayer in \code{sample_file} is eligible for \code{SAPTO}. 
 #' If \code{NULL}, the default, then eligibility is determined by \code{age_range} in \code{sample_file};
 #' \emph{i.e.}, if \code{age_range <= 1} then the taxpayer is assumed to be eligible for SAPTO.
 #' @param sapto_max_offset The maximum offset available through SAPTO. 
 #' @param sapto_lower_threshold The threshold at which SAPTO begins to reduce (from \code{sapto_max_offset}).
 #' @param sapto_taper The taper rate beyond \code{sapto_lower_threshold}.
-#' @param calc_baseline_tax (logical, default: \code{TRUE}) Should the income tax in \code{baseline_fy} be included as a column in the result?
-#' @param return. What should the function return? One of \code{tax} or \code{sample_file}. 
-#' If \code{tax}, the tax payable under the settings; if \code{sample_file}, the \code{sample_file},
-#' but with variables \code{tax} and possibly \code{new_taxable_income}. 
+#' @param sbto_discount The \code{tax_discount} in \code{\link{small_business_tax_offset}}.
 #' 
+#' @param calc_baseline_tax (logical, default: \code{TRUE}) Should the income tax in \code{baseline_fy} be included as a column in the result?
+#' @param return. What should the function return? One of \code{tax}, \code{sample_file}, or \code{sample_file.int}. 
+#' If \code{tax}, the tax payable under the settings; if \code{sample_file}, the \code{sample_file},
+#' but with variables \code{tax} and possibly \code{new_taxable_income}; if \code{sample_file.int}, same as \code{sample_file} but \code{new_tax} is coerced to integer.
+#' @param clear_tax_cols If \code{TRUE}, the default, then \code{return. = sample_file} implies any columns called \code{new_tax} or \code{baseline_tax} in \code{sample_file} are dropped silently.
+#' @param warn_upper_thresholds If \code{TRUE}, the default, then any inconsistency between \code{baseline_fy} and the upper thresholds result in a warning. Set to \code{FALSE}, if the \code{lower_threshold}s may take priority. 
+#' @param .debug Return a data.table of \code{new_tax}. Experimental so cannot be relied in future versions.
+#' 
+#' @examples
+#' 
+#' # With new tax-free threshold of $20,000:
+#' if (!requireNamespace("taxstats", quietly = TRUE)) {
+#'   library(taxstats)
+#'   model_income_tax(sample_file_1314,
+#'                    ordinary_tax_brackets = c(0, 20e3, 37e3, 80e3, 180e3))
+#' 
+#' }
 #' @export
 
 
@@ -74,13 +94,24 @@ model_income_tax <- function(sample_file,
                              lito_max_offset = NULL,
                              lito_taper = NULL,
                              lito_min_bracket = NULL,
+                             lito_multi = NULL,
+                             
+                             Budget2018_lamington = FALSE,
+                             Budget2018_lito_202223 = FALSE,
+                             Budget2018_watr = FALSE,
                              
                              sapto_eligible = NULL,
                              sapto_max_offset = NULL,
                              sapto_lower_threshold = NULL,
                              sapto_taper = NULL, 
+                             
+                             sbto_discount = NULL,
+                             
                              calc_baseline_tax = TRUE,
-                             return. = c("sample_file", "tax")) {
+                             return. = c("sample_file", "tax", "sample_file.int"),
+                             clear_tax_cols = TRUE,
+                             warn_upper_thresholds = TRUE,
+                             .debug = FALSE) {
   arguments <- ls()
   argument_vals <- as.list(environment())
   return. <- match.arg(return.)
@@ -94,11 +125,22 @@ model_income_tax <- function(sample_file,
   }
   
   stopifnot(is.data.table(sample_file))
+  sample_file <- copy(sample_file)
   .dots.ATO <- sample_file
   sample_file_noms <- copy(names(sample_file))
   
+  if (clear_tax_cols) {
+    if ("new_tax" %chin% sample_file_noms) {
+      sample_file[, "new_tax" := NULL]
+    }
+    if ("baseline_tax" %chin% sample_file_noms) {
+      sample_file[, "baseline_tax" := NULL]
+    }
+  }
+  
+  
   s1213_noms <-
-    c("Ind", "Gender",
+    c(#"Gender",
       # "age_range",
       "Occ_code", "Partner_status", 
       "Region", "Lodgment_method", "PHI_Ind", "Sw_amt", "Alow_ben_amt", 
@@ -126,15 +168,6 @@ model_income_tax <- function(sample_file,
   }
   
   income <- sample_file[["Taxable_Income"]]
-  
-  # Indicate baseline tax
-  if (calc_baseline_tax && identical(return., "sample_file")) {
-    sample_file[, "baseline_tax" := income_tax(income,
-                                               fy.year = baseline_fy,
-                                               .dots.ATO = sample_file,
-                                               n_dependants = n_dependants)]
-  }
-  
   max.length <- length(income)
   prohibit_vector_recycling(income, n_dependants, baseline_fy)
   
@@ -142,6 +175,12 @@ model_income_tax <- function(sample_file,
                         fy.year = baseline_fy,
                         .dots.ATO = copy(.dots.ATO),
                         n_dependants = n_dependants)
+  
+  if (calc_baseline_tax) {
+    switch(return.,
+           "sample_file" = set(sample_file, j = "baseline_tax", value = old_tax),
+           "sample_file.int" = set(sample_file, j = "baseline_tax", value = as.integer(old_tax)))
+  }
   
   if (is.null(sapto_eligible)) {
     if ("age_range" %chin% names(sample_file)) {
@@ -203,11 +242,16 @@ model_income_tax <- function(sample_file,
     base_tax. <- base_tax. + temp_budget_repair_levy. 
   }
   
-  
+  WEIGHTj <- which(names(.dots.ATO) == "WEIGHT")
+  if (!length(WEIGHTj)) {
+    WEIGHTj <- 0L
+  }
   
   # If .dots.ATO  is NULL, for loops over zero-length vector
-  for (j in which(vapply(.dots.ATO, FUN = is.double, logical(1)))){
-    set(.dots.ATO, j = j, value = as.integer(.dots.ATO[[j]]))
+  for (j in which(vapply(.dots.ATO, FUN = is.double, logical(1)))) {
+    if (j != WEIGHTj) {
+      set(.dots.ATO, j = j, value = as.integer(.dots.ATO[[j]]))
+    }
   }
   
   if (is.null(.dots.ATO) ||
@@ -320,22 +364,24 @@ model_income_tax <- function(sample_file,
                       "medicare_levy_taper" = mt,
                       "medicare_levy_rate" = mr)
         
-        if (uniqueN(val) == 1L) {
-          warning("`", the_arg, "` was not specified, ",
-                  "but its default value would be inconsistent with the parameters that were specified.\n", 
-                  "Its value has been set to:\n\t",
-                  the_arg, " = ", round(val[1], digits = if (val[1] < 1) 2 else 0),
-                  call. = FALSE)
-        } else {
-          warning("`", the_arg, "` was not specified, ",
-                  "but its default values would be inconsistent with the parameters that were specified.\n",
-                  "Its values have been set to: ",
-                  "\n\t", paste0(utils::head(unique(round(val), 5)), 
-                                 "...", 
-                                 utils::tail(unique(round(val), 5)),
-                                 collapse = "\n\t"),
-                  "\n\t\t (First and last five shown.)",
-                  call. = FALSE)
+        if (warn_upper_thresholds || !grepl("upper", the_arg)) {
+          if (uniqueN(val) == 1L) {
+            warning("`", the_arg, "` was not specified, ",
+                    "but its default value would be inconsistent with the parameters that were specified.\n", 
+                    "Its value has been set to:\n\t",
+                    the_arg, " = ", round(val[1], digits = if (val[1] < 1) 2 else 0),
+                    call. = FALSE)
+          } else {
+            warning("`", the_arg, "` was not specified, ",
+                    "but its default values would be inconsistent with the parameters that were specified.\n",
+                    "Its values have been set to: ",
+                    "\n\t", paste0(utils::head(unique(round(val), 5)), 
+                                   "...", 
+                                   utils::tail(unique(round(val), 5)),
+                                   collapse = "\n\t"),
+                    "\n\t\t (First and last five shown.)",
+                    call. = FALSE)
+          }
         }
       }
       
@@ -594,16 +640,80 @@ model_income_tax <- function(sample_file,
       flood_levy. <- 0
     }
     
+    lamington_offset. <-
+      if (Budget2018_lamington) {
+        lmito(income, fy.year = baseline_fy)
+      } else {
+        0
+      }
+    
+    watr. <- 
+      if (Budget2018_watr) {
+        watr(income)
+      } else {
+        0
+      }
+    
+    if (!is.null(lito_multi)) {
+      if (!is.null(lito_max_offset)) {
+        stop("`lito_multi` is not NULL, yet neither is `lito_max_offset`. ",
+             "Either set `lito_max_offset` to NULL or `lito_multi`.")
+      }
+      if (!is.null(lito_taper)) {
+        stop("`lito_multi` is not NULL, yet neither is `lito_taper`. ",
+             "Either set `lito_taper` to NULL or `lito_multi`.")
+      }
+      if (!is.null(lito_min_bracket)) {
+        stop("`lito_multi` is not NULL, yet neither is `lito_min_bracket`. ",
+             "Either set `lito_min_bracket` to NULL or `lito_multi`.")
+      }
+      
+      if (!is.list(lito_multi)) {
+        stop("`lito_multi` had class ", class(lito_multi), ". Must be a list.")
+      }
+      if (!length(names(lito_multi))) {
+        stop("`lito_multi` had no names. ", 
+             "When `lito_multi` is set, it be a list with two elements named 'x' and 'y'.")
+      }
+      
+      if (!identical(names(lito_multi), c("x", "y"))) {
+        stop("`names(lito_multi) = ", paste0(names(lito_multi)[1:2], collapse = ","), "`. ", 
+             "Set the names as 'x' and 'y'.")
+      }
+      
+      lito_multi_x <- lito_multi[["x"]]
+      lito_multi_y <- lito_multi[["y"]]
+      
+      # Infinity should be permitted, but won't work with approxfun
+      lito_multi_x[which.min(lito_multi_x)] <- min(income)
+      lito_multi_x[which.max(lito_multi_x)] <- max(income)
+      
+      lito. <-
+        stats::approxfun(x = lito_multi_x, 
+                         y = lito_multi_y)(income)
+      
+    } else if (Budget2018_lito_202223) {
+      lito. <- 
+        pmaxC(pmaxV(lito(income, max_lito = 645, lito_taper = 0.065, min_bracket = 37e3),
+                    lito(income, max_lito = 385, lito_taper = 0.015, min_bracket = 41e3)),
+              0)
+    }
+    
     # http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html
-    S4.10_basic_income_tax_liability <- pmaxC(base_tax. - lito. - sapto., 0)
+    S4.10_basic_income_tax_liability <-
+      pmaxC(base_tax. - lito. - lamington_offset. - watr. - sapto., 0)
     
     # SBTO can only be calculated off .dots.ATO
-    
     sbto. <-
       small_business_tax_offset(taxable_income = income,
                                 basic_income_tax_liability = S4.10_basic_income_tax_liability,
                                 .dots.ATO = .dots.ATO,
-                                fy_year = baseline_fy)
+                                fy_year = if (is.null(sbto_discount)) baseline_fy,
+                                tax_discount = sbto_discount)
+    
+    if (.debug) {
+      return(data.table(income, base_tax., lito., lamington_offset., sapto., sbto., medicare_levy.))
+    }
     
     pmaxC(S4.10_basic_income_tax_liability - sbto., 0) +
       medicare_levy. +
@@ -619,8 +729,8 @@ model_income_tax <- function(sample_file,
     new_taxable_income <-
       income * (1 - elasticity_of_taxable_income * D_tax / (income - old_tax)) %>%
       coalesce(0)
-    
-    sample_file[, new_taxable_income := new_taxable_income]
+    hutils::drop_col(sample_file, "new_taxable_income")
+    sample_file[, "new_taxable_income" := new_taxable_income]
     
     if (anyNA(new_taxable_income) || identical(as.double(new_taxable_income), as.double(income))) stop("NAs: ", sum(is.na(new_taxable_income)), call. = FALSE)
     
@@ -648,7 +758,8 @@ model_income_tax <- function(sample_file,
   
   switch(return.,
          "tax" = new_tax,
-         "sample_file" = sample_file[, new_tax := as.double(new_tax)])
+         "sample_file" = set(sample_file, j = "new_tax", value = new_tax),
+         "sample_file.int" = set(sample_file, j = "new_tax", value = as.integer(new_tax)))
 }
 
 

@@ -54,7 +54,7 @@ project <- function(sample_file,
     # without updating the fy.year.of.sample.file
     if (is.null(fy.year.of.sample.file)) {
       fy.year.of.sample.file <-
-        match(nrow(sample_file), c(254318L, 258774L, 263339L))
+        match(nrow(sample_file), c(254318L, 258774L, 263339L, 269639L))
       if (is.na(fy.year.of.sample.file)) {
         stop("`fy.year.of.sample.file` was not provided, and its value could not be ",
              "inferred from nrow(sample_file) = ", nrow(sample_file), ". Either use ", 
@@ -62,7 +62,7 @@ project <- function(sample_file,
              "supply `fy.year.of.sample.file` manually.")
       }
       fy.year.of.sample.file <- 
-        c("2012-13", "2013-14", "2014-15")[fy.year.of.sample.file]
+        c("2012-13", "2013-14", "2014-15", "2015-16")[fy.year.of.sample.file]
     }
     
     
@@ -82,10 +82,25 @@ project <- function(sample_file,
                warning("nrow(sample_file) != 263339. Should you choose a different fy.year.of.sample.file?")
              }
            },
+           "2015-16" = {
+             if (nrow(sample_file) != 269639) {
+               warning("nrow(sample_file) != 269639. Should you choose a different fy.year.of.sample.file?")
+             }
+           },
            stop("`fy.year.of.sample.file` must be '2012-13', '2013-14', or '2014-15'."))
   }
   
-  sample_file[, "WEIGHT" := list(WEIGHT)]
+  if ("WEIGHT" %notin% names(sample_file)) {
+    sample_file[, "WEIGHT" := list(WEIGHT)]
+  }
+  
+  if (fy.year.of.sample.file == "2015-16") {
+    if ("Med_Exp_TO_amt" %chin% names(sample_file)) {
+      
+    } else {
+      sample_file[, Med_Exp_TO_amt := 0]
+    }
+  }
   
   if (h == 0){
     return(sample_file)
@@ -114,14 +129,16 @@ project <- function(sample_file,
     if (.recalculate.inflators) {
       CG.inflator <- CG_inflator(1, from_fy = current.fy, to_fy = to.fy)
     } else {
-      if (current.fy %notin% c("2012-13", "2013-14", "2014-15")){
-        stop("Precalculated inflators only available when projecting from 2012-13, 2013-14, or 2014-15.")
+      if (current.fy %notin% c("2012-13", "2013-14", "2014-15", "2015-16")){
+        stop("Precalculated inflators only available when projecting from ",
+             "2012-13, 2013-14, 2014-15, 2015-16.")
       } else {
         cg_inflators <- 
           switch(current.fy, 
                  "2012-13" = cg_inflators_1213, 
                  "2013-14" = cg_inflators_1314,
-                 "2014-15" = cg_inflators_1415)
+                 "2014-15" = cg_inflators_1415,
+                 "2015-16" = cg_inflators_1516)
         stopifnot("forecast.series" %in% names(cg_inflators))
         forecast.series <- NULL 
         CG.inflator <- 
@@ -208,7 +225,9 @@ project <- function(sample_file,
                "2012-13" = as.data.table(generic_inflators_1213)[and(fy_year == to.fy, h == H)], 
                "2013-14" = as.data.table(generic_inflators_1314)[and(fy_year == to.fy, h == H)], 
                "2014-15" = as.data.table(generic_inflators_1415)[and(fy_year == to.fy, h == H)], 
-               stop("Precalculated inflators only available when projecting from 2012-13, 2013-14, or 2014-15."))
+               "2015-16" = as.data.table(generic_inflators_1516)[and(fy_year == to.fy, h == H)], 
+               stop("Precalculated inflators only available when projecting from ",
+                    "2012-13, 2013-14, 2014-15, and 2015-16."))
     }
     
     ## Inflate:

@@ -1,3 +1,23 @@
+## 1.6.0.0
+### 2018-05-08
+* Never-legislated Medicare levy change in 2019-20 has been reverted
+* Budget 2018:
+  * `model_income_tax()` no longer coerces `WEIGHT` to integer.
+  * New arguments to support Budget 2018:
+    * `lito_multi` Permits multiple pieces to the linear offset.
+    * `Budget2018_lamington` The Low And Middle Income Tax Offset proposed in the Budget 2018 budget.
+    * `Budget2018_lito_202223` The proposed change to LITO from 2022-23.
+    * `Budget2018_watr` The offset proposed by the Opposition the Budget Reply.
+    * `sbto_discount` Allows modification of the small business tax offset.
+    * `clear_tax_cols` By default, old tax columns are deleted.
+    * `warn_upper_thresholds` If changed to `FALSE` allows the automatic changes to be applied without warning.
+* New functions:
+  * `progressivity()` for Gini-based measure of the progressivity of income tax
+  * `revenue_foregone()` as a convenenience for returning the revenue foregone from a modelled sample file.
+  
+* Routine changes:
+  * ABS data updated as of 2018-05-21.
+
 ## 1.5.3.6
 ### 2018-02-21
 * Labour force data and wage price index updated to 2018-02-21.

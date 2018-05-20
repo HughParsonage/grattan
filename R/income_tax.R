@@ -110,7 +110,7 @@ rolling_income_tax <- function(income,
            "Consider new_income_tax().")
     }
     bad <- which(!is.fy(fy.year))
-    if (length(bad) > 5){
+    if (length(bad) > 5) {
       stop("Entries ", bad[1:5], " (and others)", 
            " were not in correct form.", "\n", "First bad entry: ", fy.year[bad[1]])
     } else {

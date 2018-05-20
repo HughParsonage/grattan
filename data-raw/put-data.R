@@ -24,6 +24,16 @@ if (requireNamespace("SampleFile1415", quietly = TRUE)) {
 } else {
   sample_files_all <- get_sample_files_all()
 }
+if (requireNamespace("ozTaxData", quietly = TRUE)) {
+  sample_file_1516 <- as.data.table(ozTaxData::sample_15_16)
+  sample_file_1516[, fy.year := "2015-16"]
+  sample_file_1516[, WEIGHT := 50]
+  sample_files_all <- rbindlist(list(sample_files_all,
+                                     sample_file_1516),
+                                use.names = TRUE,
+                                fill = TRUE)
+}
+
 library(grattan)
 library(readr)
 library(readxl)
@@ -55,15 +65,23 @@ tax_tbl <-
 # tax_table2 provides the raw tax tables, but also the amount
 # of tax paid at each bracket, to make the rolling join 
 # calculation later a one liner.
+# tax_table2 <- 
+#   tax_tbl %>%
+#   dplyr::group_by(fy_year) %>%
+#   dplyr::mutate(
+#     tax_at = cumsum(data.table::shift(marginal_rate, type = "lag", fill = 0) * (lower_bracket - data.table::shift(lower_bracket, type = "lag", fill = 0))),
+#     income = lower_bracket) %>%
+#   .[, .(fy_year, income, lower_bracket, marginal_rate, tax_at)] %>%
+#   data.table::as.data.table(.) %>%
+#   data.table::setkey(fy_year, income)  # SETLENGHT ISSUE
+
+shift0 <- function(x) shift(x, fill = 0)
 tax_table2 <- 
   tax_tbl %>%
-  dplyr::group_by(fy_year) %>%
-  dplyr::mutate(
-    tax_at = cumsum(data.table::shift(marginal_rate, type = "lag", fill = 0) * (lower_bracket - data.table::shift(lower_bracket, type = "lag", fill = 0))),
-    income = lower_bracket) %>%
-  dplyr::select(fy_year, income, lower_bracket, marginal_rate, tax_at) %>%
-  data.table::as.data.table(.) %>%
-  data.table::setkey(fy_year, income) 
+  copy %>%
+  .[, tax_at := cumsum(shift0(marginal_rate) * (lower_bracket - shift0(lower_bracket))), by = "fy_year"] %>%
+  .[, .(fy_year, income = lower_bracket, lower_bracket, marginal_rate, tax_at)] %>%
+  setkey(fy_year, income)
 
 lito_tbl <- 
   readxl::read_excel("./data-raw/lito-info.xlsx", sheet = 1) %>% 
@@ -291,6 +309,25 @@ round_if_num <- function(x, d = NULL) {
   }
 }
 
+generic_inflators_1516 <- 
+  if (!renew){
+    fread("./data-raw/generic_inflators_1516.tsv")
+  } else {
+    lapply(1:15, 
+           function(h) {
+             grattan:::generic_inflator(vars = generic.cols,
+                                        h = h,
+                                        fy.year.of.sample.file = "2015-16") %>%
+               .[, H := h]
+           }) %>%
+      rbindlist(use.names = TRUE) %>%
+      .[, fy_year := yr2fy(2016 + H)] %>%
+      .[, lapply(.SD, round_if_num)] %>%
+      setnames("H", "h") %T>%
+      write_tsv("./data-raw/generic_inflators_1516.tsv") %>%
+      .[]
+  }
+
 generic_inflators_1415 <- 
   if (!renew){
     fread("./data-raw/generic_inflators_1415.tsv")
@@ -373,14 +410,14 @@ cg_inflators_1415 <- if (!renew) fread("./data-raw/cg_inflators_1415.tsv") else 
             zero_discount_Net_CG_total = revenue_foregone * 10^6 / mean(mean_wmrL, na.rm = TRUE))]
     
     
-      if (!exists("individuals_table1_201415")) {
-        individuals_table1_201415 <- 
-          if (file.exists("~/taxstats/data-raw/2014-15/individuals_table1_201415.tsv")) {
-            fread("~/taxstats/data-raw/2014-15/individuals_table1_201415.tsv")
-          } else {
-            stop("individuals_table1_201415 does not exist.")
-          }
-      }
+    if (!exists("individuals_table1_201415")) {
+      individuals_table1_201415 <- 
+        if (file.exists("~/taxstats/data-raw/2014-15/individuals_table1_201415.tsv")) {
+          fread("~/taxstats/data-raw/2014-15/individuals_table1_201415.tsv")
+        } else {
+          stop("individuals_table1_201415 does not exist.")
+        }
+    }
     
     n_cg_history <- 
       as.data.table(individuals_table1_201415) %>%
@@ -439,6 +476,100 @@ cg_inflators_1415 <- if (!renew) fread("./data-raw/cg_inflators_1415.tsv") else 
     rbindlist(use.names = TRUE) %>%
     .[fy_year >= "2012-13"] %T>%
     write_tsv("./data-raw/cg_inflators_1415.tsv") %>%
+    .[]
+}
+
+cg_inflators_1516 <- if (!renew) fread("./data-raw/cg_inflators_1516.tsv") else {
+  get_cg_inf <- function(series = "mean") {
+    marginal_rate <- function(tx, fy) {
+      income_tax(tx + 1, fy.year = fy) - income_tax(tx, fy.year = fy)
+    }
+    
+    
+    cg_table <- 
+      sample_files_all %>%
+      .[Net_CG_amt > 0, .(fy.year, Taxable_Income, Net_CG_amt)] %>%
+      .[, marginal_rate_first := marginal_rate(Taxable_Income, fy.year)] %>%
+      .[, marginal_rate_last := (income_tax(Taxable_Income + Net_CG_amt, fy.year = fy.year) - income_tax(Taxable_Income, fy.year = fy.year)) / Net_CG_amt] %>%
+      .[, .(mean_mr1 = mean(marginal_rate_first), 
+            mean_wmr1 = stats::weighted.mean(marginal_rate_first, Net_CG_amt), 
+            mean_mrL = mean(marginal_rate_last), 
+            mean_wmrL = stats::weighted.mean(marginal_rate_last, Net_CG_amt)),
+        keyby = 'fy.year'] %>%
+      .[cgt_expenditures, on = "fy.year==FY"] %>%
+      drop_cols(c("URL", "Projected")) %>%
+      setkey(fy.year) %>%
+      setnames("CGT_discount_for_individuals_and_trusts_millions", "revenue_foregone") %>%
+      .[, .(fy.year,
+            zero_discount_Net_CG_total = revenue_foregone * 10^6 / mean(mean_wmrL, na.rm = TRUE))]
+    
+    
+      if (!exists("individuals_table1_201516")) {
+        individuals_table1_201516 <- 
+          if (file.exists("~/taxstats/data-raw/2015-16/individuals_table1_201516.tsv")) {
+            fread("~/taxstats/data-raw/2015-16/individuals_table1_201516.tsv", na.strings = c("", "NA", "f"))
+          } else {
+            stop("individuals_table1_201516 does not exist.")
+          }
+      }
+    
+    n_cg_history <- 
+      as.data.table(individuals_table1_201516) %>%
+      .[Selected_items == "Net capital gain"] %>%
+      .[!is.na(Count)] %>%
+      .[, .(fy_year, n_CG = Count)]
+    
+    forecaster <- function(object, ...) {
+      forecast(object, h = 15, ...)
+    } # gforecast terrible
+    
+    
+    
+    switch(series,
+           "mean" = {
+             n_cg <- 
+               rbind(n_cg_history, 
+                     data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 1:15),
+                                n_CG = exp(as.numeric(forecaster(log(n_cg_history$n_CG), level = 95)$mean))))
+             
+             cg <- 
+               rbind(as.data.table(cg_table), 
+                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 1:15), 
+                                zero_discount_Net_CG_total = as.numeric(forecaster(cg_table$zero_discount_Net_CG_total, level = 95)$mean)))
+           }, 
+           "lower" = {
+             n_cg <- 
+               rbind(n_cg_history, 
+                     data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 1:15),
+                                n_CG = exp(as.numeric(forecaster(log(n_cg_history$n_CG), level = 95)$lower))))
+             
+             cg <-
+               rbind(as.data.table(cg_table), 
+                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 1:15), 
+                                zero_discount_Net_CG_total = as.numeric(forecaster(cg_table$zero_discount_Net_CG_total, level = 95)$lower)))
+           }, 
+           "upper" = {
+             n_cg <- 
+               rbind(n_cg_history, 
+                     data.table(fy_year = yr2fy(fy2yr(last(n_cg_history$fy_year)) + 1:15),
+                                n_CG = exp(as.numeric(forecaster(log(n_cg_history$n_CG), level = 95)$upper))))
+             
+             cg <-
+               rbind(as.data.table(cg_table), 
+                     data.table(fy.year = yr2fy(fy2yr(last(cg_table$fy.year)) + 1:15), 
+                                zero_discount_Net_CG_total = as.numeric(forecaster(cg_table$zero_discount_Net_CG_total, level = 95)$upper)))
+           })
+    
+    cg_inf <- n_cg[cg, on = "fy_year==fy.year", nomatch=0L]
+    
+    cg_inf[, cg_inflator := zero_discount_Net_CG_total / n_CG]
+    cg_inf[, cg_inflator := cg_inflator / cg_inflator[cg_inf$fy_year == "2015-16"]]
+    cg_inf[, forecast.series := series]
+  }
+  lapply(c("lower", "mean", "upper"), get_cg_inf) %>%
+    rbindlist(use.names = TRUE) %>%
+    .[fy_year >= "2012-13"] %T>%  # leave as 2012-13 to keep earlier years working
+    write_tsv("./data-raw/cg_inflators_1516.tsv") %>%
     .[]
 }
 
@@ -743,9 +874,11 @@ use_and_write_data(tax_table2,
                    cgt_expenditures,
                    mean_of_each_taxstats_var, 
                    meanPositive_of_each_taxstats_var,
+                   generic_inflators_1516,
                    generic_inflators_1415,
                    generic_inflators_1314,
                    generic_inflators_1213,
+                   cg_inflators_1516,
                    cg_inflators_1415,
                    cg_inflators_1314,
                    cg_inflators_1213,
