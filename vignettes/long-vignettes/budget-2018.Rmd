@@ -2,11 +2,9 @@
 title: "Budget 2018 modelling"
 author: "Hugh Parsonage"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Vignette Title}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+output:
+  rmarkdown::html_document:
+    toc: true
 ---
 
 ```{r setup, include = FALSE}
@@ -17,6 +15,22 @@ knitr::opts_chunk$set(
   fig.height = 7,
   dev = "svg"
 )
+if (FALSE) {
+  change_pngs <- function(html) {
+    html_lines <- readr::read_lines(html)
+    for (i in grep("Budget2018.atlas.*\\.png", html_lines)) {
+      html_lines[i] <- sub(".png", ".svg", html_lines[i], fixed = TRUE)
+    }
+    readr::write_lines(html_lines, html)
+  }
+  invisible(lapply(dir(path = "~/grattan/docs/articles/long-vignettes/", 
+                       pattern = "\\.html$", 
+                       full.names = TRUE), 
+                   change_pngs))
+  
+}
+
+
 if (isTRUE(getOption("knitr.in.progress"))) {
   BUNDLE.CHART.DATA <- FALSE
   .finished <- FALSE
@@ -42,8 +56,6 @@ stopifnot(file.exists("../../DESCRIPTION"))
 ```
 
 ```{r}
-
-## ----loadPackages-1------------------------------------------------------
 library(fastmatch)
 library(ggplot2)
 library(scales)
@@ -55,30 +67,14 @@ library(hutils)
 library(magrittr)
 library(data.table)
 library(grattanCharts)
-
-## ----loadPackages-2------------------------------------------------------
 templib <- tempfile()
 hutils::provide.dir(templib)
 
-# ## ----loadPackages-3------------------------------------------------------
-# install.packages("https://raw.githubusercontent.com/hughparsonage/drat/gh-pages/src/contrib/taxstats_0.0.5.1415.tar.gz",
-#                  dependencies = FALSE,
-#                  quiet = FALSE,
-#                  lib = templib,
-#                  verbose = TRUE,
-#                  repos = NULL)
-# 
-# ## ----loadPackages-4------------------------------------------------------
-# library("taxstats",
-#         lib.loc = templib,
-#         verbose = TRUE,
-#         character.only = TRUE)
 library(taxstats)
 
 sample_file_1415 <- SampleFile1415::sample_file_1415
 sample_file_1516 <- fread("~/ozTaxData/data-raw/2016_sample_file.csv", logical01 = FALSE)
 
-## ----sample_files_all----------------------------------------------------
 sample_files_all <-
     rbindlist(lapply(list(`2003-04` = sample_file_0304, 
                           `2004-05` = sample_file_0405,
@@ -1111,52 +1107,24 @@ fwrite(avg_tax_rate_by_percentile_brackets_cpi,
 ```
 
 
+```{r share-of-total-personal-income-tax-by-income-decile-by-fy-year}
+share201718_by_decile <- 
+  s1718[, .(total = sum(new_tax)), keyby = .(Decile = ntile(Taxable_Income, 10))] %>%
+  .[, "2017-18" := round(total / sum(total), 3) * 100] %>%
+  .[, total := NULL] 
 
+bound_models %>%
+  .[fy_year == "2027-28"] %>%
+  .[id %in% c("Budget2018_baseline", "Budget2018")] %>%
+  .[, Decile := ntile(Taxable_Income, 10), keyby = "id"] %>%
+  .[, .(total = sum(new_tax)), keyby = c("id", "Decile")] %>%
+  .[, share := round(total / sum(total), 3) * 100, keyby = "id"] %>%
+  .[]
+  .[, total := NULL] %>%
+  dcast(Decile ~ id, value.var = "share") %>%
+  .[share201718_by_decile, on = c("Decile")]
 
-# Alternative models
-
-
-
-**MEDIA **
-
-For comment please contact Danielle Wood (Budget Policy Program
-Director) or John Daley (CEO) by contacting 03 8344 3637
-
-**Background **
-
-In the 2018-19 Budget the Government announced major changes to the tax
-system. The three-stage plan (the PIT plan) will be implemented over
-seven years as below. Each of these changes in factored into the Grattan
-costing.
-
-**Step 1: Low and Middle Income Tax Offset ("Lamington") **
-
-Taxpayers earning between \$20,200 and \$125,000 will receive a
-temporary, non-refundable tax offset for 2018-19 to 2021-22, in addition
-to the Low Income Tax Offset (LITO). The new offset will provide tax
-relief of up to \$530 and it will be received as a lump sum payment at
-tax time.
-
-**Step 2: Changes to tax thresholds and Low Income Tax Offset **
-
-In 2018-19 the top threshold of the 32.5% tax bracket will be increased
-from \$87,000 to \$90,000.
-
-The top threshold for the 32.5% tax bracket will be moved again from
-\$90,000 to \$120,000 in 2022-23.
-
-In 2022-23 the low and middle-income tax offset will end. The top
-threshold of the 19% tax bracket will increase from \$37,000 to
-\$41,000, and LITO will increase from \$445 to \$645.
-
-**Step 3: Reducing the number of tax brackets from five to four**
-
-In 2024-25 the top threshold for the 32.5% tax bracket will increase to
-\$200,000, eradicating the 37% tax bracket entirely. This means
-taxpayers who earn between \$41,000 to \$200,000 will all face the same
-marginal tax rate -- 32.5%. Taxpayers earning more than \$200,000 will
-still pay 45 cents in the dollar.
-
+```
 
 
 
