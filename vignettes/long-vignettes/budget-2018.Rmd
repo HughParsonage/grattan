@@ -13,12 +13,13 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.width = 9,
   fig.height = 7,
-  dev = "svg"
+  dev = "svg",
+  fig.path = "./Budget2018-atlas/"
 )
 if (FALSE) {
   change_pngs <- function(html) {
     html_lines <- readr::read_lines(html)
-    for (i in grep("Budget2018.atlas.*\\.png", html_lines)) {
+    for (i in grep("((Budget2018.atlas)|(budget.2018_files)).*\\.png", html_lines)) {
       html_lines[i] <- sub(".png", ".svg", html_lines[i], fixed = TRUE)
     }
     readr::write_lines(html_lines, html)
