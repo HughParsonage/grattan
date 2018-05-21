@@ -1,20 +1,20 @@
-  4.9	unnamed-chunk-1
+  4.5	unnamed-chunk-1
   2.0	sample_files_all
   0.2	revenue_foregone
-  1.1	unnamed-chunk-2
-  1.5	unnamed-chunk-3
-  0.6	unnamed-chunk-4
+  1.0	unnamed-chunk-2
+  1.4	unnamed-chunk-3
+  0.7	unnamed-chunk-4
   0.0	unnamed-chunk-5
   0.0	do_medicare_levy
-  7.4	project_useTreasurys
-  8.9	.project_useGrattans
+  7.2	project_useTreasurys
+  8.8	.project_useGrattans
   0.0	model_Budgets
-230.3	unnamed-chunk-6
-  7.6	avg_individual_impact_by_Quintile_fy
+223.0	unnamed-chunk-6
+  7.1	avg_individual_impact_by_Quintile_fy
   0.5	unnamed-chunk-7
   0.1	unnamed-chunk-8
   0.0	unnamed-chunk-9
-  2.8	unnamed-chunk-10
+  2.5	unnamed-chunk-10
   0.0	unnamed-chunk-11
   0.0	unnamed-chunk-12
   0.0	unnamed-chunk-13
@@ -23,14 +23,17 @@
   0.0	unnamed-chunk-16
   0.0	unnamed-chunk-17
   0.5	unnamed-chunk-18
-  1.7	avg_tax_rate_by_percentile_fy_year_rel0304
- 44.6	unnamed-chunk-19
-  3.9	unnamed-chunk-20
- 12.0	progressivities
-  9.5	unnamed-chunk-21
-  9.6	unnamed-chunk-22
- 13.5	unnamed-chunk-23
-  9.2	unnamed-chunk-24
+  1.8	avg_tax_rate_by_percentile_fy_year_rel0304
+ 34.5	unnamed-chunk-19
+  4.0	unnamed-chunk-20
+ 10.9	progressivities
+  8.7	unnamed-chunk-21
+  9.9	unnamed-chunk-22
+ 13.2	unnamed-chunk-23
+  8.4	unnamed-chunk-24
   1.7	budget2018-total-revenue-vs-fy-by-quintile.csv
   0.0	revenue_foregone2018-19-bracket-creep
   0.4	unnamed-chunk-25
+  0.0	non_taxable_individuals
+  0.0	taxable_individuals_1718
+  0.5	unnamed-chunk-26

@@ -706,7 +706,7 @@ Share of total personal income tax paid by income decile (%)
 ```{r}
 to_prop <- function(x) {
   if (is.double(x)) {
-    grattan_percent(x / sum(x), .percent.suffix = "%")
+    grattan_percent(x / sum(x), .percent.suffix = "%", digits = 1)
   } else {
     x
   }
@@ -719,7 +719,8 @@ avg_tax_rates_by_percentile_facet_fy %>%
     keyby = .(id, fy_year, Decile = ntile(Taxable_Income_percentile, 10))] %>%
   .[fy_year %in% c("2017-18", "2027-28")] %>%
   dcast.data.table(Decile ~ id + fy_year, value.var = "tot_tax") %>%
-  .[, lapply(.SD, to_prop)] %>%
+  .[, lapply(.SD, to_prop)] %T>%
+  fwrite("share-total-personal-income-tax-per-decile.csv") %>%
   kable(align = "rrrr")
 ```
   
@@ -822,7 +823,6 @@ sample_files_all %>%
 
 ```{r avg_tax_rate_by_percentile_fy_year_rel0304}
 sample_files_all %>%
-  .[, Over65 := coalesce(age_range <= 1L, Birth_year <= 1L)] %>%
   .[, .(avg_tax_rate = mean(avg_tax_rate)), keyby = .(fy.year, Taxable_Income_percentile)] %>%
   setnames("fy.year", "fy_year") %>%
   rbind(avg_tax_rates_by_percentile_facet_fy[, .SD, .SDcols = c("id", names(.))],
@@ -1106,23 +1106,63 @@ fwrite(avg_tax_rate_by_percentile_brackets_cpi,
 
 ```
 
+```{r non_taxable_individuals}
+total_population_1516 <- 
+  aus_pop_qtr_age(date = as.Date("2016-01-01"),
+                  age = 15:100,
+                  tbl = TRUE) %$%
+  sum(Value) %>%
+  multiply_by(s1718[1][["WEIGHT"]] / 50)
+```
 
-```{r share-of-total-personal-income-tax-by-income-decile-by-fy-year}
-share201718_by_decile <- 
-  s1718[, .(total = sum(new_tax)), keyby = .(Decile = ntile(Taxable_Income, 10))] %>%
-  .[, "2017-18" := round(total / sum(total), 3) * 100] %>%
-  .[, total := NULL] 
+```{r taxable_individuals_1718}
+taxable_individuals_1718 <- s1718[, sum(WEIGHT)]
+```
 
-bound_models %>%
-  .[fy_year == "2027-28"] %>%
-  .[id %in% c("Budget2018_baseline", "Budget2018")] %>%
-  .[, Decile := ntile(Taxable_Income, 10), keyby = "id"] %>%
-  .[, .(total = sum(new_tax)), keyby = c("id", "Decile")] %>%
-  .[, share := round(total / sum(total), 3) * 100, keyby = "id"] %>%
+```{r}
+avg_tax_by_decile_allpersons201718 <- 
+  s1718[, .(new_tax, baseline_tax = as.double(baseline_tax), Taxable_Income, WEIGHT)] %>%
+  rbind(data.table(new_tax = 0,
+                   baseline_tax = 0,
+                   Taxable_Income = 0L,
+                   WEIGHT = total_population_1516 - taxable_individuals_1718), 
+        use.names = TRUE,
+        fill = TRUE) %>%
+  .[, Taxable_Income_decile := weighted_ntile(Taxable_Income, WEIGHT, 10)] %>%
+  .[, .(total = sum(new_tax)), keyby = "Taxable_Income_decile"] %>%
+  .[, share := round(total / sum(total), 3)] %>%
   .[]
-  .[, total := NULL] %>%
-  dcast(Decile ~ id, value.var = "share") %>%
-  .[share201718_by_decile, on = c("Decile")]
+
+wt_rel1718v202425 <- 
+  .project_useTreasurys[[2025-2016]][1][["WEIGHT"]] / s1718[1][["WEIGHT"]]
+
+avg_tax_by_decile_allpersons202425 <- 
+  Budget_1922[["2027-28"]][["Budget2018"]] %>%
+  rbind(data.table(new_tax = 0,
+                   baseline_tax = 0,
+                   Taxable_Income = 0L,
+                   WEIGHT = wt_rel1718v202425 * (total_population_1516 - taxable_individuals_1718)), 
+        use.names = TRUE, fill = TRUE) %>%
+  .[, Taxable_Income_decile := weighted_ntile(Taxable_Income, WEIGHT, 10)] %>%
+  .[, .(total = sum(new_tax)), keyby = "Taxable_Income_decile"] %>%
+  .[, share := round(total / sum(total), 3)] %>%
+  .[]
+
+wt_rel1718v202728 <- 
+  .project_useTreasurys[[12]][1][["WEIGHT"]] / s1718[1][["WEIGHT"]]
+
+avg_tax_by_decile_allpersons202728 <- 
+  Budget_1922[["2027-28"]][["Budget2018"]] %>%
+  rbind(data.table(new_tax = 0,
+                   baseline_tax = 0,
+                   Taxable_Income = 0L,
+                   WEIGHT = wt_rel1718v202728 * (total_population_1516 - taxable_individuals_1718)), 
+        use.names = TRUE, fill = TRUE) %>%
+  .[, Taxable_Income_decile := weighted_ntile(Taxable_Income, WEIGHT, 10)] %>%
+  .[, .(total = sum(new_tax)), keyby = "Taxable_Income_decile"] %>%
+  .[, share := round(total / sum(total), 3)] %>%
+  .[]
+
 
 ```
 
