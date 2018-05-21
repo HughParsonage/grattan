@@ -46,19 +46,6 @@ if (packageVersion("data.table") < package_version("1.9.8")){
 
 renew <- TRUE
 
-tax_tbl <- 
-  lapply(yr2fy(1990:2020), 
-         function(fy_year) {
-           read_excel("./data-raw/tax_brackets_and_marginal_rates.xlsx", sheet = fy_year) %>% 
-             mutate(fy_year = fy_year) %>% 
-             as.data.table
-         })  %>%
-  lapply(as.data.table) %>%
-  rbindlist %>%
-  setnames("lower_brackets", "lower_bracket") %>%
-  select(fy_year, lower_bracket, marginal_rate) %>%
-  fwrite("./data-raw/tax-brackets-and-marginal-rates-by-fy.tsv", sep = "\t")
-
 tax_tbl <-
   data.table::fread("./data-raw/tax-brackets-and-marginal-rates-by-fy.tsv")
 

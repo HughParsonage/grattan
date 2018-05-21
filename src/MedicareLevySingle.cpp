@@ -82,12 +82,15 @@ NumericVector MedicareLevySaptoYear(NumericVector income,
         out[i] = MedicareLevySingle(ii, 33044, 41306, 0.020, 0.1, sii, ifi, ndi, 46000, 57501, 3238);
         break;
       case 2016:
-        out[i] = MedicareLevySingle(ii, 33738, 42174, 0.020, 0.1, sii, ifi, ndi, 46966, 58709, 3238);
-        break;
-      case 2017:
         out[i] = MedicareLevySingle(ii, 33738, 42174, 0.020, 0.1, sii, ifi, ndi, 46966, 58709, 3306);
         break;
+      case 2017:
+        out[i] = MedicareLevySingle(ii, 34244, 42806, 0.020, 0.1, sii, ifi, ndi, 47670, 59589, 3356);
+        break;
       case 2018:
+        out[i] = MedicareLevySingle(ii, 34244, 42806, 0.020, 0.1, sii, ifi, ndi, 47670, 59589, 3306);
+        break;
+      case 2019:
         out[i] = MedicareLevySingle(ii, 34244, 42806, 0.020, 0.1, sii, ifi, ndi, 47670, 59589, 3306);
         break;
       default:
@@ -115,14 +118,14 @@ NumericVector MedicareLevySaptoYear(NumericVector income,
         out[i] = MedicareLevySingle(ii, 21335, 26670, 0.020, 0.1, sii, ifi, ndi, 35261, 44078, 3238);
         break;
       case 2017:
-        out[i] = MedicareLevySingle(ii, 21335, 26670, 0.020, 0.1, sii, ifi, ndi, 36001, 44077, 3306);
+        out[i] = MedicareLevySingle(ii, 21655, 27083, 0.020, 0.1, sii, ifi, ndi, 36541, 44077, 3356);
         break;
       case 2018:
-        out[i] = MedicareLevySingle(ii, 21655, 27070, 0.020, 0.1, sii, ifi, ndi, 36541, 44077, 3356);
+        out[i] = MedicareLevySingle(ii, 21980, 27476, 0.020, 0.1, sii, ifi, ndi, 37089, 44077, 3406);
         break;
       default:
-        out[i] = MedicareLevySingle(ii, 21655, 27070, 0.020, 0.1, sii, ifi, ndi, 36541, 44077, 3356);
-        break;
+        out[i] = MedicareLevySingle(ii, 21980, 27476, 0.020, 0.1, sii, ifi, ndi, 37089, 44077, 3406);
+      break;
       }
     }
   }
