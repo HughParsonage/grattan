@@ -121,30 +121,14 @@
 <span class="co">#&gt; The following object is masked from 'package:datasets':</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     Orange</span>
-
-## ----loadPackages-2------------------------------------------------------
 templib &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 hutils<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/hutils/topics/provide.dir">provide.dir</a></span>(templib)
 
-<span class="co"># ## ----loadPackages-3------------------------------------------------------</span>
-<span class="co"># install.packages("https://raw.githubusercontent.com/hughparsonage/drat/gh-pages/src/contrib/taxstats_0.0.5.1415.tar.gz",</span>
-<span class="co">#                  dependencies = FALSE,</span>
-<span class="co">#                  quiet = FALSE,</span>
-<span class="co">#                  lib = templib,</span>
-<span class="co">#                  verbose = TRUE,</span>
-<span class="co">#                  repos = NULL)</span>
-<span class="co"># </span>
-<span class="co"># ## ----loadPackages-4------------------------------------------------------</span>
-<span class="co"># library("taxstats",</span>
-<span class="co">#         lib.loc = templib,</span>
-<span class="co">#         verbose = TRUE,</span>
-<span class="co">#         character.only = TRUE)</span>
 <span class="kw">library</span>(taxstats)
 
 sample_file_<span class="dv">1415</span> &lt;-<span class="st"> </span>SampleFile1415<span class="op">::</span>sample_file_<span class="dv">1415</span>
 sample_file_<span class="dv">1516</span> &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">"~/ozTaxData/data-raw/2016_sample_file.csv"</span>, <span class="dt">logical01 =</span> <span class="ot">FALSE</span>)
 
-## ----sample_files_all----------------------------------------------------
 sample_files_all &lt;-
 <span class="st">    </span><span class="kw">rbindlist</span>(<span class="kw">lapply</span>(<span class="kw">list</span>(<span class="st">`</span><span class="dt">2003-04</span><span class="st">`</span> =<span class="st"> </span>sample_file_<span class="dv">0304</span>, 
                           <span class="st">`</span><span class="dt">2004-05</span><span class="st">`</span> =<span class="st"> </span>sample_file_<span class="dv">0405</span>,
@@ -172,7 +156,7 @@ age_range_decoder &lt;-<span class="st"> </span><span class="kw">as.data.table</
 
 ## ----load-grattan--------------------------------------------------------
 <span class="kw">library</span>(grattan)
-<span class="co">#&gt; Last change: NAMESPACE at 2018-05-20 19:27:53 (17 hours ago).</span>
+<span class="co">#&gt; Last change: NAMESPACE at 2018-05-20 19:27:53 (1 days ago).</span>
 
 ntile &lt;-<span class="st"> </span><span class="cf">function</span>(x, n) {
   <span class="cf">if</span> (<span class="kw">requireNamespace</span>(<span class="st">"dplyr"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {
@@ -516,7 +500,7 @@ avg_individual_impact_by_Quintile_fy <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">FALSE</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.line.x =</span> <span class="kw">element_line</span>(<span class="dt">size =</span> <span class="fl">0.5</span>),
         <span class="dt">legend.position =</span> <span class="st">"right"</span>)</code></pre></div>
-<p><img src="Budget2018-atlas/avg_individual_impact_by_Quintile_fy-1.svg" width="864"></p>
+<p><img src="budget-2018_files/figure-html/avg_individual_impact_by_Quintile_fy-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 Brackets &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">data.table</span>(<span class="dt">Breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">37e3</span>, <span class="fl">41e3</span>, <span class="fl">87e3</span>, <span class="fl">90e3</span>, <span class="fl">120e3</span>, <span class="fl">180e3</span>, <span class="fl">200e3</span>)) <span class="op">%&gt;%</span>
@@ -552,7 +536,7 @@ avg_individual_impact_by_Bracket_fy <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>)
 <span class="co">#&gt; I'm going off-piste: The Palette Of Nine is thine. May John have mercy on your soul.</span></code></pre></div>
-<p><img src="Budget2018-atlas/avg_individual_impact_by_Quintile_fy-2.svg" width="864"></p>
+<p><img src="budget-2018_files/figure-html/avg_individual_impact_by_Quintile_fy-2.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="kw">lapply</span>(Budget_<span class="dv">1922</span>, <span class="cf">function</span>(x) {
   x[[<span class="st">"Budget2018"</span>]] <span class="op">%&gt;%</span>
@@ -578,7 +562,7 @@ avg_individual_impact_by_Bracket_fy <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>)
 <span class="co">#&gt; I'm going off-piste: The Palette Of Nine is thine. May John have mercy on your soul.</span></code></pre></div>
-<p><img src="Budget2018-atlas/avg_individual_impact_by_Quintile_fy-3.svg" width="864"></p>
+<p><img src="budget-2018_files/figure-html/avg_individual_impact_by_Quintile_fy-3.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cost_by_policy &lt;-
 <span class="st">  </span><span class="kw">sapply</span>(Budget_<span class="dv">1922</span>, sapply, revenue_foregone, <span class="dt">USE.NAMES =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>rowSums <span class="op">%&gt;%</span>
@@ -685,7 +669,7 @@ avg_tax_rates_by_percentile_facet_fy <span class="op">%&gt;%</span>
         <span class="dt">axis.line.x =</span> <span class="kw">element_line</span>(<span class="dt">size =</span> <span class="fl">0.5</span>),
         <span class="dt">legend.title =</span> <span class="kw">element_blank</span>(),
         <span class="dt">legend.justification =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</code></pre></div>
-<p><img src="Budget2018-atlas/unnamed-chunk-10-1.svg" width="864"></p>
+<p><img src="budget-2018_files/figure-html/unnamed-chunk-10-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">decile2income &lt;-<span class="st"> </span><span class="cf">function</span>(d) {
   d &lt;-<span class="st"> </span><span class="kw">as.integer</span>(d)
   <span class="kw">grattan_dollar</span>(minIncome_by_decile[.(d)][[<span class="st">"minIncome"</span>]])
@@ -716,7 +700,7 @@ Qfy2Cut &lt;-<span class="st"> </span><span class="cf">function</span>(Quintile,
 <p>Share of total personal income tax paid by income decile (%)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">to_prop &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
   <span class="cf">if</span> (<span class="kw">is.double</span>(x)) {
-    <span class="kw">grattan_percent</span>(x <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(x), <span class="dt">.percent.suffix =</span> <span class="st">"%"</span>)
+    <span class="kw">grattan_percent</span>(x <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(x), <span class="dt">.percent.suffix =</span> <span class="st">"%"</span>, <span class="dt">digits =</span> <span class="dv">1</span>)
   } <span class="cf">else</span> {
     x
   }
@@ -726,7 +710,8 @@ Qfy2Cut &lt;-<span class="st"> </span><span class="cf">function</span>(Quintile,
     keyby =<span class="st"> </span>.(id, fy_year, <span class="dt">Decile =</span> <span class="kw">ntile</span>(Taxable_Income_percentile, <span class="dv">10</span>))] <span class="op">%&gt;%</span>
 <span class="st">  </span>.[fy_year <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"2017-18"</span>, <span class="st">"2027-28"</span>)] <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">dcast.data.table</span>(Decile <span class="op">~</span><span class="st"> </span>id <span class="op">+</span><span class="st"> </span>fy_year, <span class="dt">value.var =</span> <span class="st">"tot_tax"</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span>.[, <span class="kw">lapply</span>(.SD, to_prop)] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, <span class="kw">lapply</span>(.SD, to_prop)] <span class="op">%T&gt;%</span>
+<span class="st">  </span><span class="kw">fwrite</span>(<span class="st">"share-total-personal-income-tax-per-decile.csv"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">kable</span>(<span class="dt">align =</span> <span class="st">"rrrr"</span>)</code></pre></div>
 <table class="table">
 <thead><tr class="header">
@@ -886,9 +871,8 @@ scale10 &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>)
 <span class="co">#&gt; Scale for 'colour' is already present. Adding another scale for</span>
 <span class="co">#&gt; 'colour', which will replace the existing scale.</span></code></pre></div>
-<p><img src="Budget2018-atlas/unnamed-chunk-18-1.svg" width="864"></p>
+<p><img src="budget-2018_files/figure-html/unnamed-chunk-18-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_files_all <span class="op">%&gt;%</span>
-<span class="st">  </span>.[, Over65 <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">coalesce</span>(age_range <span class="op">&lt;=</span><span class="st"> </span>1L, Birth_year <span class="op">&lt;=</span><span class="st"> </span>1L)] <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, .(<span class="dt">avg_tax_rate =</span> <span class="kw">mean</span>(avg_tax_rate)), keyby =<span class="st"> </span>.(fy.year, Taxable_Income_percentile)] <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">setnames</span>(<span class="st">"fy.year"</span>, <span class="st">"fy_year"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">rbind</span>(avg_tax_rates_by_percentile_facet_fy[, .SD, <span class="dt">.SDcols =</span> <span class="kw">c</span>(<span class="st">"id"</span>, <span class="kw">names</span>(.))],
@@ -946,7 +930,7 @@ scale10 &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>fy_year)
 <span class="co">#&gt; Scale for 'colour' is already present. Adding another scale for</span>
 <span class="co">#&gt; 'colour', which will replace the existing scale.</span></code></pre></div>
-<p><img src="Budget2018-atlas/avg_tax_rate_by_percentile_fy_year_rel0304-1.svg" width="864"></p>
+<p><img src="budget-2018_files/figure-html/avg_tax_rate_by_percentile_fy_year_rel0304-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bound_models &lt;-<span class="st"> </span>
 <span class="st">  </span>Budget_<span class="dv">1922</span> <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">lapply</span>(rbindlist, <span class="dt">use.names =</span> <span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">idcol =</span> <span class="st">"id"</span>) <span class="op">%&gt;%</span>
@@ -968,7 +952,7 @@ bound_models_Grattan &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="st">"Taxable income"</span>, <span class="dt">labels =</span> grattan_dollar, <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">225e3</span>)) 
 <span class="co">#&gt; Warning: Removed 75 rows containing missing values (geom_path).</span></code></pre></div>
-<p><img src="Budget2018-atlas/unnamed-chunk-20-1.svg" width="864"></p>
+<p><img src="budget-2018_files/figure-html/unnamed-chunk-20-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list</span>(
   {
     sample_files_all <span class="op">%&gt;%</span>
@@ -994,7 +978,7 @@ bound_models_Grattan &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>,
         <span class="dt">legend.title =</span> <span class="kw">element_blank</span>())</code></pre></div>
-<p><img src="Budget2018-atlas/progressivities-1.svg" width="864"></p>
+<p><img src="budget-2018_files/figure-html/progressivities-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">avg_tax_rates_by_percentile_facet_fy_historical &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">list</span>(
   {
@@ -1039,7 +1023,7 @@ bound_models[id <span class="op">%ein%</span><span class="st"> </span><span clas
 <span class="st">  </span>.[, delta <span class="op">:</span><span class="er">=</span><span class="st"> `</span><span class="dt">With SBTO</span><span class="st">`</span> <span class="op">-</span><span class="st"> `</span><span class="dt">No SBTO</span><span class="st">`</span>] <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> fy_year, <span class="dt">y =</span> delta, <span class="dt">fill =</span> policy)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">"dodge"</span>)</code></pre></div>
-<p><img src="Budget2018-atlas/unnamed-chunk-22-1.svg" width="864"></p>
+<p><img src="budget-2018_files/figure-html/unnamed-chunk-22-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bound_models[id <span class="op">%ein%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"Budget2018"</span>, <span class="st">"ALP2018"</span>,
                         <span class="st">"Budget2018_no_SBTO"</span>, <span class="st">"ALP2018_no_SBTO"</span>,
                         <span class="st">"Budget2018_baseline"</span>, <span class="st">"Budget2018_baseline_no_SBTO"</span>)] <span class="op">%&gt;%</span>
@@ -1057,7 +1041,7 @@ bound_models[id <span class="op">%ein%</span><span class="st"> </span><span clas
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Taxable_Income_percentile, <span class="dt">y =</span> revi, <span class="dt">color =</span> fy_year)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>policy) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>() </code></pre></div>
-<p><img src="Budget2018-atlas/unnamed-chunk-23-1.svg" width="864"></p>
+<p><img src="budget-2018_files/figure-html/unnamed-chunk-23-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s202728_in_<span class="dv">1920</span> &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../../reference/model_income_tax.html">model_income_tax</a></span>(s1819,
                    <span class="st">"2017-18"</span>, 
@@ -1101,7 +1085,7 @@ alternative <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, variable <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">factor</span>(variable, <span class="dt">levels =</span> <span class="kw">unique</span>(.<span class="op">$</span>variable), <span class="dt">ordered =</span> <span class="ot">TRUE</span>)] <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Taxable_Income_percentile, <span class="dt">y =</span> value, <span class="dt">color =</span> variable)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
-<p><img src="Budget2018-atlas/unnamed-chunk-24-1.svg" width="864"></p>
+<p><img src="budget-2018_files/figure-html/unnamed-chunk-24-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 baseline_share &lt;-<span class="st"> </span>
 <span class="st">  </span>bound_models[id <span class="op">==</span><span class="st"> "Budget2018_baseline"</span> <span class="op">&amp;</span><span class="st"> </span>fy_year <span class="op">==</span><span class="st"> "2027-28"</span>] <span class="op">%&gt;%</span>
@@ -1129,7 +1113,7 @@ alternative <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Taxable_Income_decile, <span class="dt">y =</span> value, <span class="dt">fill =</span> variable)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">"dodge"</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> <span class="cf">function</span>(x) <span class="kw">paste0</span>(<span class="kw">grattan_dollar</span>(x <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>), <span class="st">" bn"</span>))</code></pre></div>
-<p><img src="Budget2018-atlas/unnamed-chunk-24-2.svg" width="864"></p>
+<p><img src="budget-2018_files/figure-html/unnamed-chunk-24-2.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bound_models <span class="op">%&gt;%</span>
 <span class="st">  </span>.[id <span class="op">==</span><span class="st"> "Budget2018"</span>] <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, Quintile <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ntile</span>(Taxable_Income, <span class="dv">5</span>), keyby =<span class="st"> "fy_year"</span>] <span class="op">%&gt;%</span>
@@ -1155,22 +1139,55 @@ alternative <span class="op">%&gt;%</span>
     keyby =<span class="st"> </span>.(fy_year, <span class="dt">Taxable_Income_percentile =</span> <span class="kw">ntile</span>(Taxable_Income, <span class="dv">100</span>))]
 <span class="kw">fwrite</span>(avg_tax_rate_by_percentile_brackets_cpi,
        <span class="st">"avg_tax_rate_by_percentile_brackets_cpi.csv"</span>)</code></pre></div>
-</div>
-<div id="alternative-models" class="section level1">
-<h1 class="hasAnchor">
-<a href="#alternative-models" class="anchor"></a>Alternative models</h1>
-<p><strong>MEDIA </strong></p>
-<p>For comment please contact Danielle Wood (Budget Policy Program Director) or John Daley (CEO) by contacting 03 8344 3637</p>
-<p><strong>Background </strong></p>
-<p>In the 2018-19 Budget the Government announced major changes to the tax system. The three-stage plan (the PIT plan) will be implemented over seven years as below. Each of these changes in factored into the Grattan costing.</p>
-<p><strong>Step 1: Low and Middle Income Tax Offset (“Lamington”) </strong></p>
-<p>Taxpayers earning between $20,200 and $125,000 will receive a temporary, non-refundable tax offset for 2018-19 to 2021-22, in addition to the Low Income Tax Offset (LITO). The new offset will provide tax relief of up to $530 and it will be received as a lump sum payment at tax time.</p>
-<p><strong>Step 2: Changes to tax thresholds and Low Income Tax Offset </strong></p>
-<p>In 2018-19 the top threshold of the 32.5% tax bracket will be increased from $87,000 to $90,000.</p>
-<p>The top threshold for the 32.5% tax bracket will be moved again from $90,000 to $120,000 in 2022-23.</p>
-<p>In 2022-23 the low and middle-income tax offset will end. The top threshold of the 19% tax bracket will increase from $37,000 to $41,000, and LITO will increase from $445 to $645.</p>
-<p><strong>Step 3: Reducing the number of tax brackets from five to four</strong></p>
-<p>In 2024-25 the top threshold for the 32.5% tax bracket will increase to $200,000, eradicating the 37% tax bracket entirely. This means taxpayers who earn between $41,000 to $200,000 will all face the same marginal tax rate – 32.5%. Taxpayers earning more than $200,000 will still pay 45 cents in the dollar.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">total_population_<span class="dv">1516</span> &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="../../reference/aus_pop_qtr_age.html">aus_pop_qtr_age</a></span>(<span class="dt">date =</span> <span class="kw">as.Date</span>(<span class="st">"2016-01-01"</span>),
+                  <span class="dt">age =</span> <span class="dv">15</span><span class="op">:</span><span class="dv">100</span>,
+                  <span class="dt">tbl =</span> <span class="ot">TRUE</span>) <span class="op">%$%</span>
+<span class="st">  </span><span class="kw">sum</span>(Value) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">multiply_by</span>(s1718[<span class="dv">1</span>][[<span class="st">"WEIGHT"</span>]] <span class="op">/</span><span class="st"> </span><span class="dv">50</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">taxable_individuals_<span class="dv">1718</span> &lt;-<span class="st"> </span>s1718[, <span class="kw">sum</span>(WEIGHT)]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">avg_tax_by_decile_allpersons201718 &lt;-<span class="st"> </span>
+<span class="st">  </span>s1718[, .(new_tax, <span class="dt">baseline_tax =</span> <span class="kw">as.double</span>(baseline_tax), Taxable_Income, WEIGHT)] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rbind</span>(<span class="kw">data.table</span>(<span class="dt">new_tax =</span> <span class="dv">0</span>,
+                   <span class="dt">baseline_tax =</span> <span class="dv">0</span>,
+                   <span class="dt">Taxable_Income =</span> 0L,
+                   <span class="dt">WEIGHT =</span> total_population_<span class="dv">1516</span> <span class="op">-</span><span class="st"> </span>taxable_individuals_<span class="dv">1718</span>), 
+        <span class="dt">use.names =</span> <span class="ot">TRUE</span>,
+        <span class="dt">fill =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, Taxable_Income_decile <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="../../reference/weighted_ntile.html">weighted_ntile</a></span>(Taxable_Income, WEIGHT, <span class="dv">10</span>)] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, .(<span class="dt">total =</span> <span class="kw">sum</span>(new_tax)), keyby =<span class="st"> "Taxable_Income_decile"</span>] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, share <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">round</span>(total <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(total), <span class="dv">3</span>)] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[]
+
+wt_rel1718v202425 &lt;-<span class="st"> </span>
+<span class="st">  </span>.project_useTreasurys[[<span class="dv">2025</span><span class="op">-</span><span class="dv">2016</span>]][<span class="dv">1</span>][[<span class="st">"WEIGHT"</span>]] <span class="op">/</span><span class="st"> </span>s1718[<span class="dv">1</span>][[<span class="st">"WEIGHT"</span>]]
+
+avg_tax_by_decile_allpersons202425 &lt;-<span class="st"> </span>
+<span class="st">  </span>Budget_<span class="dv">1922</span>[[<span class="st">"2027-28"</span>]][[<span class="st">"Budget2018"</span>]] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rbind</span>(<span class="kw">data.table</span>(<span class="dt">new_tax =</span> <span class="dv">0</span>,
+                   <span class="dt">baseline_tax =</span> <span class="dv">0</span>,
+                   <span class="dt">Taxable_Income =</span> 0L,
+                   <span class="dt">WEIGHT =</span> wt_rel1718v202425 <span class="op">*</span><span class="st"> </span>(total_population_<span class="dv">1516</span> <span class="op">-</span><span class="st"> </span>taxable_individuals_<span class="dv">1718</span>)), 
+        <span class="dt">use.names =</span> <span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, Taxable_Income_decile <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="../../reference/weighted_ntile.html">weighted_ntile</a></span>(Taxable_Income, WEIGHT, <span class="dv">10</span>)] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, .(<span class="dt">total =</span> <span class="kw">sum</span>(new_tax)), keyby =<span class="st"> "Taxable_Income_decile"</span>] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, share <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">round</span>(total <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(total), <span class="dv">3</span>)] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[]
+
+wt_rel1718v202728 &lt;-<span class="st"> </span>
+<span class="st">  </span>.project_useTreasurys[[<span class="dv">12</span>]][<span class="dv">1</span>][[<span class="st">"WEIGHT"</span>]] <span class="op">/</span><span class="st"> </span>s1718[<span class="dv">1</span>][[<span class="st">"WEIGHT"</span>]]
+
+avg_tax_by_decile_allpersons202728 &lt;-<span class="st"> </span>
+<span class="st">  </span>Budget_<span class="dv">1922</span>[[<span class="st">"2027-28"</span>]][[<span class="st">"Budget2018"</span>]] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rbind</span>(<span class="kw">data.table</span>(<span class="dt">new_tax =</span> <span class="dv">0</span>,
+                   <span class="dt">baseline_tax =</span> <span class="dv">0</span>,
+                   <span class="dt">Taxable_Income =</span> 0L,
+                   <span class="dt">WEIGHT =</span> wt_rel1718v202728 <span class="op">*</span><span class="st"> </span>(total_population_<span class="dv">1516</span> <span class="op">-</span><span class="st"> </span>taxable_individuals_<span class="dv">1718</span>)), 
+        <span class="dt">use.names =</span> <span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, Taxable_Income_decile <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="../../reference/weighted_ntile.html">weighted_ntile</a></span>(Taxable_Income, WEIGHT, <span class="dv">10</span>)] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, .(<span class="dt">total =</span> <span class="kw">sum</span>(new_tax)), keyby =<span class="st"> "Taxable_Income_decile"</span>] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, share <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">round</span>(total <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(total), <span class="dv">3</span>)] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[]</code></pre></div>
 </div>
   </div>
 
@@ -1180,7 +1197,6 @@ alternative <span class="op">%&gt;%</span>
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#effect-of-sbto">Effect of SBTO</a></li>
-      <li><a href="#alternative-models">Alternative models</a></li>
       </ul>
 </div>
       </div>
