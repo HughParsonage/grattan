@@ -500,7 +500,7 @@ avg_individual_impact_by_Quintile_fy <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">FALSE</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.line.x =</span> <span class="kw">element_line</span>(<span class="dt">size =</span> <span class="fl">0.5</span>),
         <span class="dt">legend.position =</span> <span class="st">"right"</span>)</code></pre></div>
-<p><img src="budget-2018_files/figure-html/avg_individual_impact_by_Quintile_fy-1.png" width="864"></p>
+<p><img src="budget-2018_files/figure-html/avg_individual_impact_by_Quintile_fy-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 Brackets &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">data.table</span>(<span class="dt">Breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">37e3</span>, <span class="fl">41e3</span>, <span class="fl">87e3</span>, <span class="fl">90e3</span>, <span class="fl">120e3</span>, <span class="fl">180e3</span>, <span class="fl">200e3</span>)) <span class="op">%&gt;%</span>
@@ -536,7 +536,7 @@ avg_individual_impact_by_Bracket_fy <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>)
 <span class="co">#&gt; I'm going off-piste: The Palette Of Nine is thine. May John have mercy on your soul.</span></code></pre></div>
-<p><img src="budget-2018_files/figure-html/avg_individual_impact_by_Quintile_fy-2.png" width="864"></p>
+<p><img src="budget-2018_files/figure-html/avg_individual_impact_by_Quintile_fy-2.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="kw">lapply</span>(Budget_<span class="dv">1922</span>, <span class="cf">function</span>(x) {
   x[[<span class="st">"Budget2018"</span>]] <span class="op">%&gt;%</span>
@@ -562,7 +562,7 @@ avg_individual_impact_by_Bracket_fy <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>)
 <span class="co">#&gt; I'm going off-piste: The Palette Of Nine is thine. May John have mercy on your soul.</span></code></pre></div>
-<p><img src="budget-2018_files/figure-html/avg_individual_impact_by_Quintile_fy-3.png" width="864"></p>
+<p><img src="budget-2018_files/figure-html/avg_individual_impact_by_Quintile_fy-3.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cost_by_policy &lt;-
 <span class="st">  </span><span class="kw">sapply</span>(Budget_<span class="dv">1922</span>, sapply, revenue_foregone, <span class="dt">USE.NAMES =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>rowSums <span class="op">%&gt;%</span>
@@ -669,7 +669,7 @@ avg_tax_rates_by_percentile_facet_fy <span class="op">%&gt;%</span>
         <span class="dt">axis.line.x =</span> <span class="kw">element_line</span>(<span class="dt">size =</span> <span class="fl">0.5</span>),
         <span class="dt">legend.title =</span> <span class="kw">element_blank</span>(),
         <span class="dt">legend.justification =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</code></pre></div>
-<p><img src="budget-2018_files/figure-html/unnamed-chunk-10-1.png" width="864"></p>
+<p><img src="budget-2018_files/figure-html/unnamed-chunk-10-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">decile2income &lt;-<span class="st"> </span><span class="cf">function</span>(d) {
   d &lt;-<span class="st"> </span><span class="kw">as.integer</span>(d)
   <span class="kw">grattan_dollar</span>(minIncome_by_decile[.(d)][[<span class="st">"minIncome"</span>]])
@@ -871,7 +871,7 @@ scale10 &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>)
 <span class="co">#&gt; Scale for 'colour' is already present. Adding another scale for</span>
 <span class="co">#&gt; 'colour', which will replace the existing scale.</span></code></pre></div>
-<p><img src="budget-2018_files/figure-html/unnamed-chunk-18-1.png" width="864"></p>
+<p><img src="budget-2018_files/figure-html/unnamed-chunk-18-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_files_all <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, .(<span class="dt">avg_tax_rate =</span> <span class="kw">mean</span>(avg_tax_rate)), keyby =<span class="st"> </span>.(fy.year, Taxable_Income_percentile)] <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">setnames</span>(<span class="st">"fy.year"</span>, <span class="st">"fy_year"</span>) <span class="op">%&gt;%</span>
@@ -930,7 +930,7 @@ scale10 &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>fy_year)
 <span class="co">#&gt; Scale for 'colour' is already present. Adding another scale for</span>
 <span class="co">#&gt; 'colour', which will replace the existing scale.</span></code></pre></div>
-<p><img src="budget-2018_files/figure-html/avg_tax_rate_by_percentile_fy_year_rel0304-1.png" width="864"></p>
+<p><img src="budget-2018_files/figure-html/avg_tax_rate_by_percentile_fy_year_rel0304-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bound_models &lt;-<span class="st"> </span>
 <span class="st">  </span>Budget_<span class="dv">1922</span> <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">lapply</span>(rbindlist, <span class="dt">use.names =</span> <span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">idcol =</span> <span class="st">"id"</span>) <span class="op">%&gt;%</span>
@@ -952,7 +952,7 @@ bound_models_Grattan &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="st">"Taxable income"</span>, <span class="dt">labels =</span> grattan_dollar, <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">225e3</span>)) 
 <span class="co">#&gt; Warning: Removed 75 rows containing missing values (geom_path).</span></code></pre></div>
-<p><img src="budget-2018_files/figure-html/unnamed-chunk-20-1.png" width="864"></p>
+<p><img src="budget-2018_files/figure-html/unnamed-chunk-20-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list</span>(
   {
     sample_files_all <span class="op">%&gt;%</span>
@@ -978,7 +978,7 @@ bound_models_Grattan &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>,
         <span class="dt">legend.title =</span> <span class="kw">element_blank</span>())</code></pre></div>
-<p><img src="budget-2018_files/figure-html/progressivities-1.png" width="864"></p>
+<p><img src="budget-2018_files/figure-html/progressivities-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">avg_tax_rates_by_percentile_facet_fy_historical &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">list</span>(
   {
@@ -1023,7 +1023,7 @@ bound_models[id <span class="op">%ein%</span><span class="st"> </span><span clas
 <span class="st">  </span>.[, delta <span class="op">:</span><span class="er">=</span><span class="st"> `</span><span class="dt">With SBTO</span><span class="st">`</span> <span class="op">-</span><span class="st"> `</span><span class="dt">No SBTO</span><span class="st">`</span>] <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> fy_year, <span class="dt">y =</span> delta, <span class="dt">fill =</span> policy)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">"dodge"</span>)</code></pre></div>
-<p><img src="budget-2018_files/figure-html/unnamed-chunk-22-1.png" width="864"></p>
+<p><img src="budget-2018_files/figure-html/unnamed-chunk-22-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bound_models[id <span class="op">%ein%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"Budget2018"</span>, <span class="st">"ALP2018"</span>,
                         <span class="st">"Budget2018_no_SBTO"</span>, <span class="st">"ALP2018_no_SBTO"</span>,
                         <span class="st">"Budget2018_baseline"</span>, <span class="st">"Budget2018_baseline_no_SBTO"</span>)] <span class="op">%&gt;%</span>
@@ -1041,7 +1041,7 @@ bound_models[id <span class="op">%ein%</span><span class="st"> </span><span clas
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Taxable_Income_percentile, <span class="dt">y =</span> revi, <span class="dt">color =</span> fy_year)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>policy) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>() </code></pre></div>
-<p><img src="budget-2018_files/figure-html/unnamed-chunk-23-1.png" width="864"></p>
+<p><img src="budget-2018_files/figure-html/unnamed-chunk-23-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s202728_in_<span class="dv">1920</span> &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../../reference/model_income_tax.html">model_income_tax</a></span>(s1819,
                    <span class="st">"2017-18"</span>, 
@@ -1085,7 +1085,7 @@ alternative <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, variable <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">factor</span>(variable, <span class="dt">levels =</span> <span class="kw">unique</span>(.<span class="op">$</span>variable), <span class="dt">ordered =</span> <span class="ot">TRUE</span>)] <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Taxable_Income_percentile, <span class="dt">y =</span> value, <span class="dt">color =</span> variable)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
-<p><img src="budget-2018_files/figure-html/unnamed-chunk-24-1.png" width="864"></p>
+<p><img src="budget-2018_files/figure-html/unnamed-chunk-24-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 baseline_share &lt;-<span class="st"> </span>
 <span class="st">  </span>bound_models[id <span class="op">==</span><span class="st"> "Budget2018_baseline"</span> <span class="op">&amp;</span><span class="st"> </span>fy_year <span class="op">==</span><span class="st"> "2027-28"</span>] <span class="op">%&gt;%</span>
@@ -1113,7 +1113,7 @@ alternative <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Taxable_Income_decile, <span class="dt">y =</span> value, <span class="dt">fill =</span> variable)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">"dodge"</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> <span class="cf">function</span>(x) <span class="kw">paste0</span>(<span class="kw">grattan_dollar</span>(x <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>), <span class="st">" bn"</span>))</code></pre></div>
-<p><img src="budget-2018_files/figure-html/unnamed-chunk-24-2.png" width="864"></p>
+<p><img src="budget-2018_files/figure-html/unnamed-chunk-24-2.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bound_models <span class="op">%&gt;%</span>
 <span class="st">  </span>.[id <span class="op">==</span><span class="st"> "Budget2018"</span>] <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, Quintile <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ntile</span>(Taxable_Income, <span class="dv">5</span>), keyby =<span class="st"> "fy_year"</span>] <span class="op">%&gt;%</span>
