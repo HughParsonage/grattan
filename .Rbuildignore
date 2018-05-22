@@ -10,6 +10,7 @@
 ^appveyor\.yml$
 ^travisBeforeInstall.R$
 ^timings$
+^docs$
 ^vignettes/lito-analysis-budget2018\\.R$
 
 ^vignettes/avg-impact-vs-fy-ending-vs-Quintile\.pptx$

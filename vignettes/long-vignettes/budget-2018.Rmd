@@ -343,18 +343,23 @@ model_Budgets <- function(fy_year, use.Treasury = TRUE, .debug = FALSE) {
        ALP2018_no_SBTO = model_income_tax(ordinary_tax_rates = ordinary_tax_rates(3), 
                                           ordinary_tax_thresholds = ordinary_tax_thresholds(3),
                                           sbto_discount = 0,
-                                          watr = TRUE),
+                                          watr = fy_year >= "2019-20"),
        ALP2018 = model_income_tax(ordinary_tax_rates = ordinary_tax_rates(3), 
                                   ordinary_tax_thresholds = ordinary_tax_thresholds(3),
-                                  watr = TRUE))
+                                  lamington = fy_year < "2019-02",
+                                  watr = fy_year >= "2019-20"))
 }
 ```
 
-```{r}
+```{r Budget_1922}
 Budget_1922 <- lapply(yr2fy(2019:2028), model_Budgets)
+```
+
+```{r Budget_1922_Grattan}
 Budget_1922_Grattan <- lapply(yr2fy(2019:2028), model_Budgets, use.Treasury = FALSE)
+```
 
-
+```{r Budget-summaries}
 names(Budget_1922) <- yr2fy(2019:2028)
 names(Budget_1922_Grattan) <- yr2fy(2019:2028)
 round(sapply(Budget_1922, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9, 2)
