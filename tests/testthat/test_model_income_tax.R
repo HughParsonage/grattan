@@ -383,12 +383,14 @@ test_that("Medicare families", {
   s1617_modelled <-
     model_income_tax(s1617, 
                      "2016-17",
+                     # ordinary_tax_rates = c(0, 0.19, 0.325, 0.37, 0.47), # temp budget repair levy
                      medicare_levy_lower_family_threshold = 35000,
                      medicare_levy_upper_family_threshold = 43750,
                      return. = "tax")
   single_idx <- which(s1617$Spouse_adjusted_taxable_inc == 0)
   expect_equal(s1617_orig$orig_tax[single_idx],
-               s1617_modelled[single_idx])
+               s1617_modelled[single_idx], 
+               tol = 1)
   
 })
 
@@ -503,8 +505,11 @@ test_that("Elasticity of taxable income", {
                      medicare_levy_lower_threshold = 22499,
                      medicare_levy_upper_threshold = 30e3, 
                      medicare_levy_upper_sapto_threshold = 44984,
+                     medicare_levy_lower_sapto_threshold = 33737,
                      medicare_levy_upper_family_threshold = 48001,
+                     medicare_levy_lower_family_threshold = 36000,
                      medicare_levy_upper_family_sapto_threshold = 62621,
+                     medicare_levy_lower_family_sapto_threshold = 46965,
                      return. = "sample_file") %>%
     .[, .(Ind,
           Taxable_Income,
@@ -518,7 +523,10 @@ test_that("Elasticity of taxable income", {
                      medicare_levy_rate = 0.025,
                      medicare_levy_upper_threshold = 30e3, 
                      medicare_levy_lower_threshold = 22499,
+                     medicare_levy_lower_sapto_threshold = 33737,
+                     medicare_levy_lower_family_threshold = 36000,
                      medicare_levy_upper_sapto_threshold = 44984,
+                     medicare_levy_lower_family_sapto_threshold = 46965,
                      medicare_levy_upper_family_threshold = 48001,
                      medicare_levy_upper_family_sapto_threshold = 62621,
                      return = "sample_file")
@@ -536,8 +544,11 @@ test_that("Elasticity of taxable income", {
                      medicare_levy_rate = 0.025,
                      medicare_levy_upper_threshold = 30e3, 
                      medicare_levy_lower_threshold = 22499,
+                     medicare_levy_lower_sapto_threshold = 33737,
                      medicare_levy_upper_sapto_threshold = 44984,
+                     medicare_levy_lower_family_threshold = 36000,
                      medicare_levy_upper_family_threshold = 48001,
+                     medicare_levy_lower_family_sapto_threshold = 46965,
                      medicare_levy_upper_family_sapto_threshold = 62621,
                      return. = "sample_file")
   elasticity_1.0 <- 
