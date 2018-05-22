@@ -24,7 +24,7 @@ IncomeTax <- function(x, thresholds, rates) {
 #' @details For \code{yr > 2018}, the 2017-18 values are used.
 NULL
 
-MedicareLevySingle <- function(income, lowerThreshold, upperThreshold, rate = 0.02, taper = 0.2, SpouseIncome = 0, isFamily = FALSE, nDependants = 0L, lowerFamilyThreshold = 46000, upperFamilyThreshold = 54119, lowerUpForEachChild = 3306) {
+MedicareLevySingle <- function(income, lowerThreshold, upperThreshold, rate = 0.02, taper = 0.1, SpouseIncome = 0, isFamily = FALSE, nDependants = 0L, lowerFamilyThreshold = 46000, upperFamilyThreshold = 54119, lowerUpForEachChild = 3306) {
     .Call(`_grattan_MedicareLevySingle`, income, lowerThreshold, upperThreshold, rate, taper, SpouseIncome, isFamily, nDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild)
 }
 

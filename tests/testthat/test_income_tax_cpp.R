@@ -39,6 +39,8 @@ test_that("Equivalence in 2013-14 sample file", {
   
   tax_cpp2 <-
     income_tax_cpp(tx, "2013-14", .dots.ATO = s1314)
+  tax_rolling <- 
+    rolling_income_tax(tx, "2013-14", .dots.ATO = s1314)
   expect_equal(tax_rolling, tax_cpp2)
   
   s1314[, "age_range" := NULL]

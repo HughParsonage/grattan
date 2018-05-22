@@ -1131,7 +1131,8 @@ avg_tax_by_decile_allpersons201718 <-
         fill = TRUE) %>%
   .[, Taxable_Income_decile := weighted_ntile(Taxable_Income, WEIGHT, 10)] %>%
   .[, .(total = sum(new_tax)), keyby = "Taxable_Income_decile"] %>%
-  .[, share := round(total / sum(total), 3)] %>%
+  .[, share := round(total / sum(total), 3)] %T>%
+  fwrite("avg_tax_by_decile_allpersons201718.csv") %>%
   .[]
 
 wt_rel1718v202425 <- 
@@ -1146,7 +1147,8 @@ avg_tax_by_decile_allpersons202425 <-
         use.names = TRUE, fill = TRUE) %>%
   .[, Taxable_Income_decile := weighted_ntile(Taxable_Income, WEIGHT, 10)] %>%
   .[, .(total = sum(new_tax)), keyby = "Taxable_Income_decile"] %>%
-  .[, share := round(total / sum(total), 3)] %>%
+  .[, share := round(total / sum(total), 3)] %T>%
+  fwrite("avg_tax_by_decile_allpersons202425.csv") %>%
   .[]
 
 wt_rel1718v202728 <- 
@@ -1161,8 +1163,10 @@ avg_tax_by_decile_allpersons202728 <-
         use.names = TRUE, fill = TRUE) %>%
   .[, Taxable_Income_decile := weighted_ntile(Taxable_Income, WEIGHT, 10)] %>%
   .[, .(total = sum(new_tax)), keyby = "Taxable_Income_decile"] %>%
-  .[, share := round(total / sum(total), 3)] %>%
+  .[, share := round(total / sum(total), 3)] %T>%
+  fwrite("avg_tax_by_decile_allpersons202728.csv") %>%
   .[]
+
 
 
 ```

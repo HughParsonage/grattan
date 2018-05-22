@@ -352,7 +352,7 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
   base_tax. <- 
     IncomeTax(income, 
               thresholds = c(0, 18200, 37000,
-                             if (fy.year < "2016-17") 80e3 else 87e3,
+                             if (fy.year < "2016-17") 80e3 else if (fy.year < "2018-19") 87e3 else 90e3,
                              180000),
               rates = c(0, 0.19, 0.325, 0.37, 
                         0.45))
@@ -481,7 +481,7 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
     flood_levy. 
   
   # temp budget repair levy
-  if (Year.int >= 2015L && Year.int <= 2017L) {
+  if (Year.int <= 2017L && Year.int >= 2015L) {
     out <- out + 0.02 * pmax0(income - 180e3)
   }
   
