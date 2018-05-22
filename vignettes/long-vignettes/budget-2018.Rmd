@@ -346,6 +346,7 @@ model_Budgets <- function(fy_year, use.Treasury = TRUE, .debug = FALSE) {
                                           watr = fy_year >= "2019-20"),
        ALP2018 = model_income_tax(ordinary_tax_rates = ordinary_tax_rates(3), 
                                   ordinary_tax_thresholds = ordinary_tax_thresholds(3),
+                                  lamington = fy_year < "2019-02",
                                   watr = fy_year >= "2019-20"))
 }
 ```
