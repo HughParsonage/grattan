@@ -111,6 +111,7 @@ The income tax payable if tax settings are changed.
 if (requireNamespace("taxstats", quietly = TRUE)) {
   library(taxstats)
   model_income_tax(sample_file_1314,
+                   "2013-14",
                    ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3))
 
 }
