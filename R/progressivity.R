@@ -27,6 +27,9 @@ progressivity <- function(income,
            Gz <- ineq::Gini(post_tax_income, corr = FALSE, na.rm = FALSE)
            Gy - Gz
          },
+         "Kakwani" = {
+           .NotYetUsed(measure)
+         },
         .NotYetUsed(measure))
 
 }
