@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 
 ## Budget 2018
 
-For a vignette from the Budget 2018 analysis, see: 
+For a vignette from the Budget 2018 analysis, see: <https://hughparsonage.github.io/grattan/articles/long-vignettes/budget-2018.html>
 
 
 This vignette collates the vignettes that were present before version 1.5.3.
@@ -84,7 +84,7 @@ sample_files_all <-
               idcol = "fy.year")
 sample_files_all[, WEIGHT := hutils::if_else(fy.year > '2010-11', 50L, 100L)]
 age_range_decoder <- as.data.table(age_range_decoder)
-````
+```
 
 ```{r load-grattan}
 library(grattan)
