@@ -273,11 +273,11 @@ medicare_levy_lower_up_for_each_child <- function(fy) {
 ```
 
 ```{r project_useTreasurys}
-.project_useTreasurys <- lapply(1:15, .project_to, use.Treasury = TRUE)
+.project_useTreasurys <- lapply(1:13, .project_to, use.Treasury = TRUE)
 ```
 
 ```{r .project_useGrattans}
-.project_useGrattans <- lapply(1:15, .project_to, use.Treasury = FALSE)
+.project_useGrattans <- lapply(1:13, .project_to, use.Treasury = FALSE)
 ```
 
 ```{r model_Budgets}
@@ -595,12 +595,16 @@ cost_decile_fy <- function(decile, fy) {
 }
 ```
 
+```{r texNumD}
+texNumD <- function(x) texNum(x, dollar = TRUE)
+```
+
 
 New Grattan Institute analysis highlights that most of the revenue
 reductions from the Turnbull Government's full Personal Income Tax Plan
 are the result of lower taxes on high-income earners. Once the
 three-stage plan -- including removing the 37c bracket -- is complete,
-**`r cost_in_202728_top20`** of the annual **`r cost_in_202728` cost** of the plan will
+**`r texNumD(abs(cost_in_202728_top20))`** of the annual **`r texNumD(abs(cost_in_202728))` cost** of the plan will
 result from collecting less tax from the top 20% of income earners, who
 currently have a taxable income of `r decile2income(8)` or more.
 
@@ -636,8 +640,8 @@ Middle Income Tax Offset ("the Lamington"). But once the plan is fully
 implemented in 2024-25, there are much bigger revenue reductions because
 the top of the 32.5 cent bracket increases first to \$120,000 and then
 to \$200,000 (removing the 37c bracket). In 2028, these bracket changes
-account for `r .revenue_foregone(Budget_1922[["2027-28"]][["Budget2018_just_rates"]], FALSE)`
-of the `r .revenue_foregone(Budget_1922[["2027-28"]][["Budget2018"]])` in lower revenue.
+account for `r texNumD(revenue_foregone(Budget_1922[["2027-28"]][["Budget2018_just_rates"]], FALSE))`
+of the `r texNumD(revenue_foregone(Budget_1922[["2027-28"]][["Budget2018"]]))` in lower revenue.
 
 
 
@@ -1174,6 +1178,54 @@ avg_tax_by_decile_allpersons202728 <-
 
 
 
+```
+
+
+```{r decile201718}
+decile201718 <- 
+  s1718[, .(new_tax, baseline_tax = as.double(baseline_tax), Taxable_Income, WEIGHT)] %>%
+  rbind(data.table(new_tax = 0,
+                   baseline_tax = 0,
+                   Taxable_Income = 0L,
+                   WEIGHT = total_population_1516 - sum(sample_files_all[fy.year == "2015-16"][["WEIGHT"]])), 
+        use.names = TRUE,
+        fill = TRUE) %>%
+  .[, Taxable_Income_decile := weighted_ntile(Taxable_Income, WEIGHT, 10)] %>%
+  .[, .(Taxable_Income = min(Taxable_Income),
+        tot = sum(baseline_tax * WEIGHT / 1e9)),
+    keyby = .(Taxable_Income_decile)] %>%
+  .[, min_Taxable_Income := round(Taxable_Income, -3)] %>%
+  .[, prop := tot / sum(tot)] %>%
+  setkey(Taxable_Income) %>%
+  .[]
+```
+
+```{r}
+Budget_1922[["2027-28"]][["Budget2018"]] %>%
+  rbind(data.table(new_tax = 0,
+                   baseline_tax = 0,
+                   Taxable_Income = 0L,
+                   WEIGHT = wt_rel1718v202728 * (total_population_1516 - taxable_individuals_1718)), 
+        use.names = TRUE, fill = TRUE) %>%
+  .[, .(new_tax, baseline_tax, Taxable_Income, WEIGHT)] %>%
+  setkey(Taxable_Income) %>%
+  decile201718[., roll = TRUE] %>%
+  .[, .(tot = sum(new_tax)), keyby = .(Taxable_Income_decile, min_Taxable_Income)] %>%
+  .[, prop := tot / sum(tot)] %>%
+  .[]
+
+Budget_1922[["2024-25"]][["Budget2018"]] %>%
+  rbind(data.table(new_tax = 0,
+                   baseline_tax = 0,
+                   Taxable_Income = 0L,
+                   WEIGHT = wt_rel1718v202728 * (total_population_1516 - taxable_individuals_1718)), 
+        use.names = TRUE, fill = TRUE) %>%
+  .[, .(new_tax, baseline_tax, Taxable_Income, WEIGHT)] %>%
+  setkey(Taxable_Income) %>%
+  decile201718[., roll = TRUE] %>%
+  .[, .(tot = sum(new_tax * WEIGHT / 1e9)), keyby = .(Taxable_Income_decile, min_Taxable_Income)] %>%
+  .[, prop := tot / sum(tot)] %>%
+  .[]
 ```
 
 

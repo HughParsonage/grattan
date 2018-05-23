@@ -173,7 +173,7 @@ model_income_tax <- function(sample_file,
   
   old_tax <- income_tax(income,
                         fy.year = baseline_fy,
-                        .dots.ATO = copy(.dots.ATO),
+                        .dots.ATO = .dots.ATO,
                         n_dependants = n_dependants)
   
   if (calc_baseline_tax) {
@@ -202,12 +202,20 @@ model_income_tax <- function(sample_file,
   
   ordering <- NULL
   
-  input <-
-    data.table(income = income,
-               fy_year = baseline_fy, 
-               SaptoEligible = sapto_eligible) %>%
-    .[, "ordering" := .I] %>%
-    setkeyv(c("fy_year", "income"))
+  if (identical(key(sample_file), "Taxable_Income")) {
+    input <- 
+      setDT(list(income = income, 
+                 fy_year = rep(baseline_fy, times = max.length),
+                 SaptoEligible = sapto_eligible))
+    setattr(input, "sorted", c("fy_year", "income"))
+  } else {
+    input <-
+      data.table(income = income,
+                 fy_year = baseline_fy, 
+                 SaptoEligible = sapto_eligible) %>%
+      .[, "ordering" := .I] %>%
+      setkeyv(c("fy_year", "income"))
+  }
   
   # Check base tax
   if (!is.null(ordinary_tax_thresholds) || !is.null(ordinary_tax_rates)) {
@@ -227,12 +235,18 @@ model_income_tax <- function(sample_file,
                 rates = Rates)
   } else {
     tax_at <- lower_bracket <- marginal_rate <- NULL
-    
-    base_tax. <- 
-      tax_table2[input, roll = Inf] %>%
-      .[, .(ordering, tax = tax_at + (income - lower_bracket) * marginal_rate)] %>%
-      setorderv("ordering") %>%
-      .subset2("tax")
+    if ("ordering" %chin% names(input)) {
+      base_tax. <- 
+        tax_table2[input, roll = Inf] %>%
+        .[, .(ordering, tax = tax_at + (income - lower_bracket) * marginal_rate)] %>%
+        setorderv("ordering") %>%
+        .subset2("tax")
+    } else {
+      base_tax. <- 
+        tax_table2[input, roll = Inf] %>%
+        .[, .(tax = tax_at + (income - lower_bracket) * marginal_rate)] %>%
+        .subset2("tax") 
+    }
     
     temp_budget_repair_levy. <-
       and(input[["fy_year"]] %chin% c("2014-15", "2015-16", "2016-17"),
@@ -282,8 +296,11 @@ model_income_tax <- function(sample_file,
     
   } else {
     medicare_tbl_fy <- 
-      medicare_tbl[input, on = c("fy_year", "sapto==SaptoEligible")] %>%
-      setorderv("ordering")
+      medicare_tbl[input, on = c("fy_year", "sapto==SaptoEligible")]
+    
+    if ("ordering" %chin% names(input)) {
+      setorderv(medicare_tbl_fy, "ordering")
+    }
     
     # When a parameter is selected it must satisfy the 
     # conditions of the low-income area

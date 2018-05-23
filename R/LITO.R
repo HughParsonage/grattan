@@ -20,11 +20,15 @@ NULL
 #' @rdname lito
 .lito <- function(input){
   income <- NULL
+  if ("ordering" %notin% names(input)) {
+    input[, ordering := .I]
+  } 
   lito_tbl[input] %>%
-    .[,lito := pminV(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
-                     max_lito)] %>%
+    .[, lito := pminV(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
+                      max_lito)] %>%
     setorderv("ordering") %>%
     .[["lito"]]
+  
 }
 
 

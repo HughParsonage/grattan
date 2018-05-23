@@ -471,7 +471,10 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
     sbto. <-
       small_business_tax_offset(taxable_income = income,
                                 basic_income_tax_liability = S4.10_basic_income_tax_liability,
-                                .dots.ATO = .dots.ATO,
+                                .dots.ATO = .dots.ATO[, .SD, .SDcols = c("Total_PP_BE_amt", 
+                                                                         "Total_PP_BI_amt", 
+                                                                         "Total_NPP_BE_amt",
+                                                                         "Total_NPP_BI_amt")],
                                 fy_year = fy.year)
   }
   
