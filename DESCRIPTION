@@ -49,6 +49,6 @@ Suggests:
     taxstats,
     viridis,
     yaml
-Additional_repositories: https://hughparsonage.github.io/drat/
+Additional_repositories: https://hughparsonage.github.io/tax-drat/
 LazyData: true
 VignetteBuilder: knitr

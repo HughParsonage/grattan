@@ -1,8 +1,8 @@
 ## Test results
-0 ERRORS | 0 WARNINGS | 1-3 NOTEs
+0 ERRORS | 0 WARNINGS | 1-2 NOTEs
 
 ### Test environments:
-* Local Windows CRAN 3.5.0:
+* Local Windows CRAN 3.5.0 and R-devel (r74750): 
 * Travis-CI: Ubuntu 14.04. R 3.4, 3.5, and dev (r74758)
 * Appveyor: dev (r74750) and release.
 * winbuilder: dev and release.
