@@ -21,7 +21,7 @@ NULL
 .lito <- function(input){
   income <- NULL
   if ("ordering" %notin% names(input)) {
-    input[, ordering := .I]
+    input[, "ordering" := .I]
   } 
   lito_tbl[input] %>%
     .[, lito := pminV(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
