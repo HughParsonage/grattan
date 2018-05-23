@@ -59,7 +59,7 @@
 #' if (requireNamespace("taxstats", quietly = TRUE)) {
 #'   library(taxstats)
 #'   model_income_tax(sample_file_1314,
-#'                    ordinary_tax_brackets = c(0, 20e3, 37e3, 80e3, 180e3))
+#'                    ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3))
 #' 
 #' }
 #' @export
