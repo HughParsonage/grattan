@@ -85,7 +85,7 @@
       <h1>Grattan Institute</h1>
                         <h4 class="author">Hugh Parsonage</h4>
             
-            <h4 class="date">2018-05-21</h4>
+            <h4 class="date">2018-05-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/HughParsonage/grattan/blob/master/vignettes/grattan.Rmd"><code>vignettes/grattan.Rmd</code></a></small>
       <div class="hidden name"><code>grattan.Rmd</code></div>
@@ -97,7 +97,7 @@
 <div id="budget-2018" class="section level2">
 <h2 class="hasAnchor">
 <a href="#budget-2018" class="anchor"></a>Budget 2018</h2>
-<p>For a vignette from the Budget 2018 analysis, see:</p>
+<p>For a vignette from the Budget 2018 analysis, see: <a href="https://hughparsonage.github.io/grattan/articles/long-vignettes/budget-2018.html" class="uri">https://hughparsonage.github.io/grattan/articles/long-vignettes/budget-2018.html</a></p>
 <p>This vignette collates the vignettes that were present before version 1.5.3.</p>
 </div>
 <div id="bracket-creep" class="section level1">
@@ -154,7 +154,7 @@ hutils<span class="op">::</span><span class="kw"><a href="http://www.rdocumentat
                  <span class="dt">verbose =</span> <span class="ot">TRUE</span>,
                  <span class="dt">repos =</span> <span class="ot">NULL</span>)
 <span class="co">#&gt; system (cmd0): C:/R/R-35~1.0/bin/x64/R CMD INSTALL</span>
-<span class="co">#&gt; 1): succeeded 'C:/R/R-35~1.0/bin/x64/R CMD INSTALL -l "C:\Users\hughp\AppData\Local\Temp\RtmpEHer7Y\file1754467e7c8a" "C:/Users/hughp/AppData/Local/Temp/RtmpEHer7Y/downloaded_packages/taxstats_0.0.5.1415.tar.gz"'</span></code></pre></div>
+<span class="co">#&gt; 1): succeeded 'C:/R/R-35~1.0/bin/x64/R CMD INSTALL -l "C:\Users\hughp\AppData\Local\Temp\RtmpKk71Iw\file53347f717ced" "C:/Users/hughp/AppData/Local/Temp/RtmpKk71Iw/downloaded_packages/taxstats_0.0.5.1415.tar.gz"'</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"taxstats"</span>,
         <span class="dt">lib.loc =</span> templib,
         <span class="dt">verbose =</span> <span class="ot">TRUE</span>,
@@ -178,7 +178,7 @@ hutils<span class="op">::</span><span class="kw"><a href="http://www.rdocumentat
 sample_files_all[, WEIGHT <span class="op">:</span><span class="er">=</span><span class="st"> </span>hutils<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/hutils/topics/if_else">if_else</a></span>(fy.year <span class="op">&gt;</span><span class="st"> '2010-11'</span>, 50L, 100L)]
 age_range_decoder &lt;-<span class="st"> </span><span class="kw">as.data.table</span>(age_range_decoder)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(grattan)
-<span class="co">#&gt; Last change: NAMESPACE at 2018-05-20 19:27:53 (1 days ago).</span></code></pre></div>
+<span class="co">#&gt; Last change: NAMESPACE at 2018-05-23 13:56:23 (1 days ago).</span></code></pre></div>
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
@@ -364,7 +364,7 @@ avg_tax_rate_2021_50k &lt;-<span class="st"> </span>
 }</code></pre></div>
 <p>which leads to the sentence and table in the op-ed:</p>
 <blockquote>
-<p>For example, if the government was to reduce the tax rate only in the middle (37,000-87,000) bracket from 32.5% to 30%, the promised $7.8 billion surplus in 2021 would all but be swallowed up by the 7.3 bn revenue loss.</p>
+<p>For example, if the government was to reduce the tax rate only in the middle (37,000-87,000) bracket from 32.5% to 30%, the promised $7.8 billion surplus in 2021 would all but be swallowed up by the 6.8 bn revenue loss.</p>
 </blockquote>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.table</span>(<span class="dt">tax_bracket =</span> <span class="kw">c</span>(<span class="st">"&lt;18,200"</span>,
                            <span class="st">"18,200-37,000"</span>,
@@ -385,19 +385,19 @@ avg_tax_rate_2021_50k &lt;-<span class="st"> </span>
 </tr>
 <tr class="even">
 <td align="left">18,200-37,000</td>
-<td align="right">1.70</td>
+<td align="right">1.24</td>
 </tr>
 <tr class="odd">
 <td align="left">37,000-87,000</td>
-<td align="right">2.73</td>
+<td align="right">2.26</td>
 </tr>
 <tr class="even">
 <td align="left">87,000-180,000</td>
-<td align="right">1.29</td>
+<td align="right">0.83</td>
 </tr>
 <tr class="odd">
 <td align="left">180,000+</td>
-<td align="right">0.90</td>
+<td align="right">0.44</td>
 </tr>
 </tbody>
 </table>
@@ -1548,7 +1548,7 @@ grattan_dollar &lt;-<span class="st"> </span><span class="cf">function</span> (x
 <span class="st">  </span><span class="kw"><a href="../reference/project_to.html">project_to</a></span>(<span class="dt">to_fy =</span> <span class="st">"2017-18"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span>as.data.table <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/model_new_caps_and_div293.html">revenue_from_new_cap_and_div293</a></span>(<span class="dt">new_cap =</span> <span class="fl">25e3</span>, <span class="dt">fy.year =</span> <span class="st">"2016-17"</span>, <span class="dt">new_age_based_cap =</span> <span class="ot">FALSE</span>, <span class="dt">new_div293_threshold =</span> <span class="fl">250e3</span>))
-<span class="co">#&gt; [1] 1199250206</span>
+<span class="co">#&gt; [1] 1199316778</span>
 
 <span class="kw">paste</span>(<span class="kw">grattan_dollar</span>(new_revenue <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>), <span class="st">"bn"</span>)
 <span class="co">#&gt; [1] "$1 bn"</span>
@@ -1603,15 +1603,15 @@ new_sample_file_<span class="dv">1718</span> <span class="op">%&gt;%</span>
 <tbody>
 <tr class="odd">
 <td align="right">1</td>
-<td align="right">1.68</td>
+<td align="right">1.67</td>
 </tr>
 <tr class="even">
 <td align="right">2</td>
-<td align="right">4.91</td>
+<td align="right">4.90</td>
 </tr>
 <tr class="odd">
 <td align="right">3</td>
-<td align="right">11.26</td>
+<td align="right">11.32</td>
 </tr>
 <tr class="even">
 <td align="right">4</td>

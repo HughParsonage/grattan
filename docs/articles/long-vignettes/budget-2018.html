@@ -85,7 +85,7 @@
       <h1>Budget 2018 modelling</h1>
                         <h4 class="author">Hugh Parsonage</h4>
             
-            <h4 class="date">2018-05-21</h4>
+            <h4 class="date">2018-05-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/HughParsonage/grattan/blob/master/vignettes/long-vignettes/budget-2018.Rmd"><code>vignettes/long-vignettes/budget-2018.Rmd</code></a></small>
       <div class="hidden name"><code>budget-2018.Rmd</code></div>
@@ -94,6 +94,15 @@
 
     
     
+<div id="introduction" class="section level2">
+<h2 class="hasAnchor">
+<a href="#introduction" class="anchor"></a>Introduction</h2>
+<p>This article outlines the calculations used in Grattan Institute’s tax modelling. The model is simple:</p>
+<ol style="list-style-type: decimal">
+<li>Project (“uprate”) the latest sample files to the years required</li>
+<li>Use <code>model_income_tax</code> with the required parameters.</li>
+</ol>
+<p>First load the packages we’ll need.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(fastmatch)
 <span class="kw">library</span>(ggplot2)
 <span class="kw">library</span>(scales)
@@ -122,9 +131,9 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt;     Orange</span>
 templib &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
-hutils<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/hutils/topics/provide.dir">provide.dir</a></span>(templib)
-
-<span class="kw">library</span>(taxstats)
+hutils<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/hutils/topics/provide.dir">provide.dir</a></span>(templib)</code></pre></div>
+<p>We also load the <code>taxstats</code> package. The other packages are private as the ATO has suppressed the information from the public: unfortunately, only approved institutions can use this data sets.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(taxstats)
 
 sample_file_<span class="dv">1415</span> &lt;-<span class="st"> </span>SampleFile1415<span class="op">::</span>sample_file_<span class="dv">1415</span>
 sample_file_<span class="dv">1516</span> &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">"~/ozTaxData/data-raw/2016_sample_file.csv"</span>, <span class="dt">logical01 =</span> <span class="ot">FALSE</span>)
@@ -156,7 +165,7 @@ age_range_decoder &lt;-<span class="st"> </span><span class="kw">as.data.table</
 
 ## ----load-grattan--------------------------------------------------------
 <span class="kw">library</span>(grattan)
-<span class="co">#&gt; Last change: NAMESPACE at 2018-05-20 19:27:53 (1 days ago).</span>
+<span class="co">#&gt; Last change: NAMESPACE at 2018-05-23 13:56:23 (1 days ago).</span>
 
 ntile &lt;-<span class="st"> </span><span class="cf">function</span>(x, n) {
   <span class="cf">if</span> (<span class="kw">requireNamespace</span>(<span class="st">"dplyr"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {
@@ -239,15 +248,15 @@ s1819 &lt;-<span class="st"> </span>
     <span class="kw"><a href="../../reference/project.html">project</a></span>(sample_file_1415_synth, <span class="dt">h =</span> 4L)
   } <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../../reference/model_income_tax.html">model_income_tax</a></span>(<span class="st">"2018-19"</span>)</code></pre></div>
+<p>These tables come from the Budget papers and will be passed to <code>project</code> so that the uprating can be set with fixed values. (By default <code>project</code> forecasts the series using the <code>forecast</code> package.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wage_forecasts &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">data.table</span>(<span class="dt">fy_year =</span> <span class="kw"><a href="../../reference/is.fy.html">yr2fy</a></span>(<span class="dv">2018</span><span class="op">:</span><span class="dv">2028</span>),
-             <span class="dt">r =</span> <span class="kw">c</span>(<span class="fl">2.25</span>, <span class="fl">2.75</span>, <span class="fl">3.25</span>, <span class="fl">3.5</span>, <span class="fl">3.5</span>, <span class="kw">rep</span>(<span class="fl">3.5</span>, <span class="dv">6</span>)) <span class="op">/</span><span class="st"> </span><span class="dv">100</span>)
-lf_forecasts &lt;-<span class="st"> </span>
+             <span class="dt">r =</span> <span class="kw">c</span>(<span class="fl">2.25</span>, <span class="fl">2.75</span>, <span class="fl">3.25</span>, <span class="fl">3.5</span>, <span class="fl">3.5</span>, <span class="kw">rep</span>(<span class="fl">3.5</span>, <span class="dv">6</span>)) <span class="op">/</span><span class="st"> </span><span class="dv">100</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lf_forecasts &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">data.table</span>(<span class="dt">fy_year =</span> <span class="kw"><a href="../../reference/is.fy.html">yr2fy</a></span>(<span class="dv">2018</span><span class="op">:</span><span class="dv">2028</span>),
-             <span class="dt">r =</span> <span class="kw">c</span>(<span class="fl">2.75</span>, <span class="fl">1.50</span>, <span class="fl">1.50</span>, <span class="fl">1.50</span>, <span class="fl">1.25</span>, <span class="kw">rep</span>(<span class="fl">1.25</span>, <span class="dv">6</span>)) <span class="op">/</span><span class="st"> </span><span class="dv">100</span>)
-
-
-ordinary_tax_rates &lt;-<span class="st"> </span><span class="cf">function</span>(h) {
+             <span class="dt">r =</span> <span class="kw">c</span>(<span class="fl">2.75</span>, <span class="fl">1.50</span>, <span class="fl">1.50</span>, <span class="fl">1.50</span>, <span class="fl">1.25</span>, <span class="kw">rep</span>(<span class="fl">1.25</span>, <span class="dv">6</span>)) <span class="op">/</span><span class="st"> </span><span class="dv">100</span>)</code></pre></div>
+<p>These are functions of years from 2015-16 that return the tax rates and tax thresholds that the Government has proposed in the Budget. They are used so that the out years can be modelled conveniently as a function of the year only.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ordinary_tax_rates &lt;-<span class="st"> </span><span class="cf">function</span>(h) {
   <span class="cf">if</span> (h <span class="op">&lt;</span><span class="st"> </span><span class="dv">9</span>) {
     <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">0.19</span>, <span class="fl">0.325</span>, <span class="fl">0.37</span>, <span class="fl">0.45</span>)
   } <span class="cf">else</span> {
@@ -264,6 +273,7 @@ ordinary_tax_thresholds &lt;-<span class="st"> </span><span class="cf">function<
     <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">18200</span>, <span class="fl">41e3</span>, <span class="fl">200e3</span>)
   }
 }</code></pre></div>
+<p>These functions increase the thresholds for the Medicare levy for low-income earners. Technically such measures have to be approved each financial year, but are as a matter of a routine.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#' @param x2018 A length-one for the 2018-19 number.</span>
 <span class="co">#' @param fy The financial year</span>
 .do_medicare_levy &lt;-<span class="st"> </span><span class="cf">function</span>(x2018, fy) {
@@ -302,15 +312,42 @@ medicare_levy_lower_up_for_each_child &lt;-<span class="st"> </span><span class=
           <span class="dt">lf.series =</span> <span class="cf">if</span> (use.Treasury) lf_forecasts) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">setkey</span>(Taxable_Income)
 }</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">.project_useTreasurys &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>, .project_to, <span class="dt">use.Treasury =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">.project_useGrattans &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>, .project_to, <span class="dt">use.Treasury =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_Budgets &lt;-<span class="st"> </span><span class="cf">function</span>(fy_year, <span class="dt">use.Treasury =</span> <span class="ot">TRUE</span>, <span class="dt">.debug =</span> <span class="ot">FALSE</span>) { 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">.project_useTreasurys &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">13</span>, .project_to, <span class="dt">use.Treasury =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">.project_useGrattans &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">13</span>, .project_to, <span class="dt">use.Treasury =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">wage_r80 &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">data.table</span>(<span class="dt">fy_year =</span> <span class="kw"><a href="../../reference/is.fy.html">yr2fy</a></span>(<span class="kw">c</span>(<span class="dv">2017</span><span class="op">:</span><span class="dv">2028</span>)),
+             <span class="dt">i =</span> <span class="kw"><a href="../../reference/wage_inflator.html">wage_inflator</a></span>(<span class="dt">from_fy =</span> <span class="st">"2015-16"</span>,
+                               <span class="dt">to_fy =</span> <span class="kw"><a href="../../reference/is.fy.html">yr2fy</a></span>(<span class="kw">c</span>(<span class="dv">2017</span><span class="op">:</span><span class="dv">2028</span>)),
+                               <span class="dt">forecast.level =</span> <span class="dv">80</span>,
+                               <span class="dt">forecast.series =</span> <span class="st">"upper"</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, r <span class="op">:</span><span class="er">=</span><span class="st"> </span>i <span class="op">/</span><span class="st"> </span><span class="kw">shift</span>(i) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[<span class="op">!</span><span class="kw">is.na</span>(r), .(fy_year, r)]
+  
+wage_r20 &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">data.table</span>(<span class="dt">fy_year =</span> <span class="kw"><a href="../../reference/is.fy.html">yr2fy</a></span>(<span class="kw">c</span>(<span class="dv">2017</span><span class="op">:</span><span class="dv">2028</span>)),
+             <span class="dt">i =</span> <span class="kw"><a href="../../reference/wage_inflator.html">wage_inflator</a></span>(<span class="dt">from_fy =</span> <span class="st">"2015-16"</span>,
+                               <span class="dt">to_fy =</span> <span class="kw"><a href="../../reference/is.fy.html">yr2fy</a></span>(<span class="kw">c</span>(<span class="dv">2017</span><span class="op">:</span><span class="dv">2028</span>)),
+                               <span class="dt">forecast.level =</span> <span class="dv">80</span>,
+                               <span class="dt">forecast.series =</span> <span class="st">"lower"</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, r <span class="op">:</span><span class="er">=</span><span class="st"> </span>i <span class="op">/</span><span class="st"> </span><span class="kw">shift</span>(i) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[<span class="op">!</span><span class="kw">is.na</span>(r), .(fy_year, r)]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">.project_useGrattans80 &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">13</span>, <span class="cf">function</span>(h) {
+  <span class="kw"><a href="../../reference/project.html">project</a></span>(sample_file_<span class="dv">1516</span>, <span class="dt">h =</span> h, <span class="dt">wage.series =</span> wage_r80)
+})</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">.project_useGrattans20 &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">13</span>, <span class="cf">function</span>(h) {
+  <span class="kw"><a href="../../reference/project.html">project</a></span>(sample_file_<span class="dv">1516</span>, <span class="dt">h =</span> h, <span class="dt">wage.series =</span> wage_r20)
+})</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_Budgets &lt;-<span class="st"> </span><span class="cf">function</span>(fy_year, <span class="dt">use.Treasury =</span> <span class="ot">TRUE</span>, <span class="dt">.debug =</span> <span class="ot">FALSE</span>, <span class="dt">level =</span> <span class="ot">NULL</span>) { 
   h &lt;-<span class="st"> </span><span class="kw">as.integer</span>(<span class="kw"><a href="../../reference/is.fy.html">fy2yr</a></span>(fy_year) <span class="op">-</span><span class="st"> </span>2016L)
   
   <span class="cf">if</span> (use.Treasury) {
     s1920 &lt;-<span class="st"> </span>.project_useTreasurys[[h]]
-  } <span class="cf">else</span> {
+  } <span class="cf">else</span> <span class="cf">if</span> (<span class="kw">is.null</span>(level)) {
     s1920 &lt;-<span class="st"> </span>.project_useGrattans[[h]]
+  } <span class="cf">else</span> <span class="cf">if</span> (level <span class="op">==</span><span class="st"> </span><span class="dv">20</span>) {
+    s1920 &lt;-<span class="st"> </span>.project_useGrattans20[[h]]
+  } <span class="cf">else</span> <span class="cf">if</span> (level <span class="op">==</span><span class="st"> </span><span class="dv">80</span>) {
+    s1920 &lt;-<span class="st"> </span>.project_useGrattans80[[h]]
   }
   
   model_income_tax &lt;-<span class="st"> </span><span class="cf">function</span>(...,
@@ -352,8 +389,6 @@ medicare_levy_lower_up_for_each_child &lt;-<span class="st"> </span><span class=
        <span class="dt">Budget2018_just_lamington =</span> <span class="kw"><a href="../../reference/model_income_tax.html">model_income_tax</a></span>(<span class="dt">lamington =</span> <span class="ot">TRUE</span>),
        <span class="dt">Budget2018_lamington_plus_LITO =</span> <span class="kw"><a href="../../reference/model_income_tax.html">model_income_tax</a></span>(<span class="dt">lito_202223 =</span> h <span class="op">&gt;</span><span class="st"> </span><span class="dv">6</span>,
                                                          <span class="dt">lamington =</span> fy_year <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"2018-19"</span>, <span class="st">"2019-20"</span>, <span class="st">"2020-21"</span>, <span class="st">"2021-22"</span>)),
-       <span class="dt">Budget2018_lamington_plus_bracket1 =</span> <span class="kw"><a href="../../reference/model_income_tax.html">model_income_tax</a></span>(<span class="dt">lito_202223 =</span> h <span class="op">&gt;</span><span class="st"> </span><span class="dv">6</span>,
-                                                             <span class="dt">lamington =</span> fy_year <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"2018-19"</span>, <span class="st">"2019-20"</span>, <span class="st">"2020-21"</span>, <span class="st">"2021-22"</span>)),
        <span class="dt">Budget2018_no_SBTO =</span> <span class="kw"><a href="../../reference/model_income_tax.html">model_income_tax</a></span>(<span class="dt">ordinary_tax_rates =</span> <span class="kw">ordinary_tax_rates</span>(h),
                                              <span class="dt">ordinary_tax_thresholds =</span> <span class="kw">ordinary_tax_thresholds</span>(h),
                                              <span class="dt">lito_202223 =</span> h <span class="op">&gt;</span><span class="st"> </span><span class="dv">6</span>,
@@ -366,110 +401,859 @@ medicare_levy_lower_up_for_each_child &lt;-<span class="st"> </span><span class=
        <span class="dt">ALP2018_no_SBTO =</span> <span class="kw"><a href="../../reference/model_income_tax.html">model_income_tax</a></span>(<span class="dt">ordinary_tax_rates =</span> <span class="kw">ordinary_tax_rates</span>(<span class="dv">3</span>), 
                                           <span class="dt">ordinary_tax_thresholds =</span> <span class="kw">ordinary_tax_thresholds</span>(<span class="dv">3</span>),
                                           <span class="dt">sbto_discount =</span> <span class="dv">0</span>,
-                                          <span class="dt">watr =</span> <span class="ot">TRUE</span>),
+                                          <span class="dt">watr =</span> fy_year <span class="op">&gt;=</span><span class="st"> "2019-20"</span>),
        <span class="dt">ALP2018 =</span> <span class="kw"><a href="../../reference/model_income_tax.html">model_income_tax</a></span>(<span class="dt">ordinary_tax_rates =</span> <span class="kw">ordinary_tax_rates</span>(<span class="dv">3</span>), 
                                   <span class="dt">ordinary_tax_thresholds =</span> <span class="kw">ordinary_tax_thresholds</span>(<span class="dv">3</span>),
-                                  <span class="dt">watr =</span> <span class="ot">TRUE</span>))
+                                  <span class="dt">lamington =</span> fy_year <span class="op">&lt;</span><span class="st"> "2019-02"</span>,
+                                  <span class="dt">watr =</span> fy_year <span class="op">&gt;=</span><span class="st"> "2019-20"</span>))
 }</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Budget_<span class="dv">1922</span> &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw"><a href="../../reference/is.fy.html">yr2fy</a></span>(<span class="dv">2019</span><span class="op">:</span><span class="dv">2028</span>), model_Budgets)
-Budget_1922_Grattan &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw"><a href="../../reference/is.fy.html">yr2fy</a></span>(<span class="dv">2019</span><span class="op">:</span><span class="dv">2028</span>), model_Budgets, <span class="dt">use.Treasury =</span> <span class="ot">FALSE</span>)
-
-
-<span class="kw">names</span>(Budget_<span class="dv">1922</span>) &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/is.fy.html">yr2fy</a></span>(<span class="dv">2019</span><span class="op">:</span><span class="dv">2028</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Budget_<span class="dv">1922</span> &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw"><a href="../../reference/is.fy.html">yr2fy</a></span>(<span class="dv">2019</span><span class="op">:</span><span class="dv">2028</span>), model_Budgets)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Budget_1922_Grattan &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw"><a href="../../reference/is.fy.html">yr2fy</a></span>(<span class="dv">2019</span><span class="op">:</span><span class="dv">2028</span>), model_Budgets, <span class="dt">use.Treasury =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Budget_1922_Grattan80 &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw"><a href="../../reference/is.fy.html">yr2fy</a></span>(<span class="dv">2019</span><span class="op">:</span><span class="dv">2028</span>), model_Budgets, <span class="dt">use.Treasury =</span> <span class="ot">FALSE</span>, 
+                                <span class="dt">level =</span> <span class="dv">80</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Budget_1922_Grattan20 &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="kw"><a href="../../reference/is.fy.html">yr2fy</a></span>(<span class="dv">2019</span><span class="op">:</span><span class="dv">2028</span>), model_Budgets, <span class="dt">use.Treasury =</span> <span class="ot">FALSE</span>, 
+                                <span class="dt">level =</span> <span class="dv">20</span>)</code></pre></div>
+<div id="costings-2018-19-to-2027-28-govt-and-grattan-forecasts" class="section level3">
+<h3 class="hasAnchor">
+<a href="#costings-2018-19-to-2027-28-govt-and-grattan-forecasts" class="anchor"></a>Costings 2018-19 to 2027-28 (Govt and Grattan forecasts)</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(Budget_<span class="dv">1922</span>) &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/is.fy.html">yr2fy</a></span>(<span class="dv">2019</span><span class="op">:</span><span class="dv">2028</span>)
 <span class="kw">names</span>(Budget_1922_Grattan) &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/is.fy.html">yr2fy</a></span>(<span class="dv">2019</span><span class="op">:</span><span class="dv">2028</span>)
-<span class="kw">round</span>(<span class="kw">sapply</span>(Budget_<span class="dv">1922</span>, sapply, revenue_foregone, <span class="dt">USE.NAMES =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>, <span class="dv">2</span>)
-<span class="co">#&gt;                                    2018-19 2019-20 2020-21 2021-22 2022-23</span>
-<span class="co">#&gt; Budget2018_baseline                  -0.04   -0.08   -0.12   -0.17   -0.21</span>
-<span class="co">#&gt; Budget2018_baseline_brackets_cpi     -2.31   -4.47   -6.78   -9.20  -11.77</span>
-<span class="co">#&gt; Budget2018_baseline_no_SBTO           0.15    0.11    0.07    0.03   -0.01</span>
-<span class="co">#&gt; Budget2018_just_rates                -0.42   -0.50   -0.58   -0.65   -5.92</span>
-<span class="co">#&gt; Budget2018_just_LITO                 -0.04   -0.08   -0.12   -0.17   -0.72</span>
-<span class="co">#&gt; Budget2018_just_LITO_and_rates       -0.42   -0.50   -0.58   -0.65   -6.43</span>
-<span class="co">#&gt; Budget2018_just_lamington            -3.83   -3.94   -4.04   -4.12   -4.20</span>
-<span class="co">#&gt; Budget2018_lamington_plus_LITO       -3.83   -3.94   -4.04   -4.12   -0.72</span>
-<span class="co">#&gt; Budget2018_lamington_plus_bracket1   -3.83   -3.94   -4.04   -4.12   -0.72</span>
-<span class="co">#&gt; Budget2018_no_SBTO                   -4.03   -4.17   -4.30   -4.41   -6.24</span>
-<span class="co">#&gt; Budget2018                           -4.22   -4.35   -4.49   -4.61   -6.43</span>
-<span class="co">#&gt; ALP2018_no_SBTO                      -6.86   -7.04   -7.22   -7.37   -7.50</span>
-<span class="co">#&gt; ALP2018                              -7.04   -7.22   -7.40   -7.55   -7.69</span>
-<span class="co">#&gt;                                    2023-24 2024-25 2025-26 2026-27 2027-28</span>
-<span class="co">#&gt; Budget2018_baseline                  -0.25   -0.28   -0.32   -0.35   -0.38</span>
-<span class="co">#&gt; Budget2018_baseline_brackets_cpi    -14.47  -17.32  -20.32  -23.48  -26.81</span>
-<span class="co">#&gt; Budget2018_baseline_no_SBTO          -0.05   -0.08   -0.11   -0.14   -0.17</span>
-<span class="co">#&gt; Budget2018_just_rates                -6.15  -17.45  -18.60  -19.83  -21.11</span>
-<span class="co">#&gt; Budget2018_just_LITO                 -0.75   -0.77   -0.80   -0.82   -0.84</span>
-<span class="co">#&gt; Budget2018_just_LITO_and_rates       -6.64  -17.93  -19.08  -20.30  -21.56</span>
-<span class="co">#&gt; Budget2018_just_lamington            -4.27   -4.33   -4.38   -4.43   -4.47</span>
-<span class="co">#&gt; Budget2018_lamington_plus_LITO       -0.75   -0.77   -0.80   -0.82   -0.84</span>
-<span class="co">#&gt; Budget2018_lamington_plus_bracket1   -0.75   -0.77   -0.80   -0.82   -0.84</span>
-<span class="co">#&gt; Budget2018_no_SBTO                   -6.45  -17.74  -18.88  -20.09  -21.36</span>
-<span class="co">#&gt; Budget2018                           -6.64  -17.93  -19.08  -20.30  -21.56</span>
-<span class="co">#&gt; ALP2018_no_SBTO                      -7.63   -7.74   -7.84   -7.94   -8.02</span>
-<span class="co">#&gt; ALP2018                              -7.82   -7.93   -8.04   -8.13   -8.22</span>
-<span class="kw">round</span>(<span class="kw">sapply</span>(Budget_1922_Grattan, sapply, revenue_foregone, <span class="dt">USE.NAMES =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>, <span class="dv">2</span>)
-<span class="co">#&gt;                                    2018-19 2019-20 2020-21 2021-22 2022-23</span>
-<span class="co">#&gt; Budget2018_baseline                  -0.04   -0.08   -0.12   -0.17   -0.22</span>
-<span class="co">#&gt; Budget2018_baseline_brackets_cpi     -2.23   -4.30   -6.48   -8.77  -11.16</span>
-<span class="co">#&gt; Budget2018_baseline_no_SBTO           0.15    0.11    0.07    0.03   -0.02</span>
-<span class="co">#&gt; Budget2018_just_rates                -0.41   -0.47   -0.54   -0.61   -5.67</span>
-<span class="co">#&gt; Budget2018_just_LITO                 -0.04   -0.08   -0.12   -0.17   -0.75</span>
-<span class="co">#&gt; Budget2018_just_LITO_and_rates       -0.41   -0.47   -0.54   -0.61   -6.21</span>
-<span class="co">#&gt; Budget2018_just_lamington            -3.73   -3.85   -3.98   -4.09   -4.21</span>
-<span class="co">#&gt; Budget2018_lamington_plus_LITO       -3.73   -3.85   -3.98   -4.09   -0.75</span>
-<span class="co">#&gt; Budget2018_lamington_plus_bracket1   -3.73   -3.85   -3.98   -4.09   -0.75</span>
-<span class="co">#&gt; Budget2018_no_SBTO                   -3.92   -4.07   -4.21   -4.34   -6.02</span>
-<span class="co">#&gt; Budget2018                           -4.10   -4.25   -4.39   -4.53   -6.21</span>
-<span class="co">#&gt; ALP2018_no_SBTO                      -6.68   -6.88   -7.08   -7.27   -7.46</span>
-<span class="co">#&gt; ALP2018                              -6.86   -7.06   -7.26   -7.45   -7.65</span>
-<span class="co">#&gt;                                    2023-24 2024-25 2025-26 2026-27 2027-28</span>
-<span class="co">#&gt; Budget2018_baseline                  -0.26   -0.31   -0.36   -0.41   -0.46</span>
-<span class="co">#&gt; Budget2018_baseline_brackets_cpi    -13.66  -16.26  -18.98  -21.80  -24.73</span>
-<span class="co">#&gt; Budget2018_baseline_no_SBTO          -0.06   -0.11   -0.15   -0.20   -0.24</span>
-<span class="co">#&gt; Budget2018_just_rates                -5.88  -15.20  -15.93  -16.69  -17.46</span>
-<span class="co">#&gt; Budget2018_just_LITO                 -0.80   -0.85   -0.90   -0.95   -1.00</span>
-<span class="co">#&gt; Budget2018_just_LITO_and_rates       -6.42  -15.73  -16.47  -17.23  -18.00</span>
-<span class="co">#&gt; Budget2018_just_lamington            -4.33   -4.44   -4.55   -4.67   -4.78</span>
-<span class="co">#&gt; Budget2018_lamington_plus_LITO       -0.80   -0.85   -0.90   -0.95   -1.00</span>
-<span class="co">#&gt; Budget2018_lamington_plus_bracket1   -0.80   -0.85   -0.90   -0.95   -1.00</span>
-<span class="co">#&gt; Budget2018_no_SBTO                   -6.23  -15.53  -16.27  -17.03  -17.80</span>
-<span class="co">#&gt; Budget2018                           -6.42  -15.73  -16.47  -17.23  -18.00</span>
-<span class="co">#&gt; ALP2018_no_SBTO                      -7.65   -7.83   -8.02   -8.20   -8.38</span>
-<span class="co">#&gt; ALP2018                              -7.84   -8.03   -8.21   -8.40   -8.58</span>
-<span class="kw">sapply</span>(Budget_<span class="dv">1922</span>, sapply, revenue_foregone, <span class="dt">USE.NAMES =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>rowSums <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">divide_by</span>(<span class="fl">1e9</span>)
-<span class="co">#&gt;                Budget2018_baseline   Budget2018_baseline_brackets_cpi </span>
-<span class="co">#&gt;                         -2.1968098                       -136.9327465 </span>
-<span class="co">#&gt;        Budget2018_baseline_no_SBTO              Budget2018_just_rates </span>
-<span class="co">#&gt;                         -0.1821207                        -91.2032879 </span>
-<span class="co">#&gt;               Budget2018_just_LITO     Budget2018_just_LITO_and_rates </span>
-<span class="co">#&gt;                         -5.0901557                        -94.0967036 </span>
-<span class="co">#&gt;          Budget2018_just_lamington     Budget2018_lamington_plus_LITO </span>
-<span class="co">#&gt;                        -41.9858430                        -20.6040033 </span>
-<span class="co">#&gt; Budget2018_lamington_plus_bracket1                 Budget2018_no_SBTO </span>
-<span class="co">#&gt;                        -20.6040033                       -107.6735276 </span>
-<span class="co">#&gt;                         Budget2018                    ALP2018_no_SBTO </span>
-<span class="co">#&gt;                       -109.6106066                        -75.1614029 </span>
-<span class="co">#&gt;                            ALP2018 </span>
-<span class="co">#&gt;                        -77.0462087</span>
-<span class="kw">sapply</span>(Budget_1922_Grattan, sapply, revenue_foregone, <span class="dt">USE.NAMES =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>rowSums <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">divide_by</span>(<span class="fl">1e9</span>)
-<span class="co">#&gt;                Budget2018_baseline   Budget2018_baseline_brackets_cpi </span>
-<span class="co">#&gt;                         -2.4397309                       -128.3685929 </span>
-<span class="co">#&gt;        Budget2018_baseline_no_SBTO              Budget2018_just_rates </span>
-<span class="co">#&gt;                         -0.4204452                        -78.8753908 </span>
-<span class="co">#&gt;               Budget2018_just_LITO     Budget2018_just_LITO_and_rates </span>
-<span class="co">#&gt;                         -5.6666253                        -82.1023484 </span>
-<span class="co">#&gt;          Budget2018_just_lamington     Budget2018_lamington_plus_LITO </span>
-<span class="co">#&gt;                        -42.6362173                        -20.9125415 </span>
-<span class="co">#&gt; Budget2018_lamington_plus_bracket1                 Budget2018_no_SBTO </span>
-<span class="co">#&gt;                        -20.9125415                        -95.4071680 </span>
-<span class="co">#&gt;                         Budget2018                    ALP2018_no_SBTO </span>
-<span class="co">#&gt;                        -97.3483290                        -75.4440053 </span>
-<span class="co">#&gt;                            ALP2018 </span>
-<span class="co">#&gt;                        -77.3334547</span>
-
+{<span class="kw">sapply</span>(Budget_<span class="dv">1922</span>, sapply, revenue_foregone, <span class="dt">USE.NAMES =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>} <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">round</span>(<span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">kable</span>(<span class="dt">caption =</span> <span class="st">"Budget costing under various settings, using the Budget paper's assumptions"</span>)</code></pre></div>
+<table class="table">
+<caption>Budget costing under various settings, using the Budget paper’s assumptions</caption>
+<thead><tr class="header">
+<th></th>
+<th align="right">2018-19</th>
+<th align="right">2019-20</th>
+<th align="right">2020-21</th>
+<th align="right">2021-22</th>
+<th align="right">2022-23</th>
+<th align="right">2023-24</th>
+<th align="right">2024-25</th>
+<th align="right">2025-26</th>
+<th align="right">2026-27</th>
+<th align="right">2027-28</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Budget2018_baseline</td>
+<td align="right">0.00</td>
+<td align="right">-0.05</td>
+<td align="right">-0.09</td>
+<td align="right">-0.13</td>
+<td align="right">-0.18</td>
+<td align="right">-0.22</td>
+<td align="right">-0.25</td>
+<td align="right">-0.29</td>
+<td align="right">-0.32</td>
+<td align="right">-0.35</td>
+</tr>
+<tr class="even">
+<td>Budget2018_baseline_brackets_cpi</td>
+<td align="right">-2.28</td>
+<td align="right">-4.44</td>
+<td align="right">-6.75</td>
+<td align="right">-9.17</td>
+<td align="right">-11.74</td>
+<td align="right">-14.44</td>
+<td align="right">-17.29</td>
+<td align="right">-20.29</td>
+<td align="right">-23.45</td>
+<td align="right">-26.78</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_baseline_no_SBTO</td>
+<td align="right">0.19</td>
+<td align="right">0.15</td>
+<td align="right">0.11</td>
+<td align="right">0.06</td>
+<td align="right">0.02</td>
+<td align="right">-0.01</td>
+<td align="right">-0.05</td>
+<td align="right">-0.08</td>
+<td align="right">-0.11</td>
+<td align="right">-0.14</td>
+</tr>
+<tr class="even">
+<td>Budget2018_just_rates</td>
+<td align="right">-0.39</td>
+<td align="right">-0.46</td>
+<td align="right">-0.54</td>
+<td align="right">-0.62</td>
+<td align="right">-5.89</td>
+<td align="right">-6.11</td>
+<td align="right">-17.42</td>
+<td align="right">-18.58</td>
+<td align="right">-19.80</td>
+<td align="right">-21.08</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_just_LITO</td>
+<td align="right">0.00</td>
+<td align="right">-0.05</td>
+<td align="right">-0.09</td>
+<td align="right">-0.13</td>
+<td align="right">-0.68</td>
+<td align="right">-0.71</td>
+<td align="right">-0.74</td>
+<td align="right">-0.77</td>
+<td align="right">-0.79</td>
+<td align="right">-0.81</td>
+</tr>
+<tr class="even">
+<td>Budget2018_just_LITO_and_rates</td>
+<td align="right">-0.39</td>
+<td align="right">-0.46</td>
+<td align="right">-0.54</td>
+<td align="right">-0.62</td>
+<td align="right">-6.39</td>
+<td align="right">-6.61</td>
+<td align="right">-17.90</td>
+<td align="right">-19.05</td>
+<td align="right">-20.27</td>
+<td align="right">-21.54</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_just_lamington</td>
+<td align="right">-3.79</td>
+<td align="right">-3.90</td>
+<td align="right">-4.00</td>
+<td align="right">-4.09</td>
+<td align="right">-4.17</td>
+<td align="right">-4.24</td>
+<td align="right">-4.30</td>
+<td align="right">-4.35</td>
+<td align="right">-4.40</td>
+<td align="right">-4.44</td>
+</tr>
+<tr class="even">
+<td>Budget2018_lamington_plus_LITO</td>
+<td align="right">-3.79</td>
+<td align="right">-3.90</td>
+<td align="right">-4.00</td>
+<td align="right">-4.09</td>
+<td align="right">-0.68</td>
+<td align="right">-0.71</td>
+<td align="right">-0.74</td>
+<td align="right">-0.77</td>
+<td align="right">-0.79</td>
+<td align="right">-0.81</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_no_SBTO</td>
+<td align="right">-4.00</td>
+<td align="right">-4.13</td>
+<td align="right">-4.27</td>
+<td align="right">-4.38</td>
+<td align="right">-6.20</td>
+<td align="right">-6.42</td>
+<td align="right">-17.71</td>
+<td align="right">-18.85</td>
+<td align="right">-20.07</td>
+<td align="right">-21.33</td>
+</tr>
+<tr class="even">
+<td>Budget2018</td>
+<td align="right">-4.18</td>
+<td align="right">-4.32</td>
+<td align="right">-4.45</td>
+<td align="right">-4.57</td>
+<td align="right">-6.39</td>
+<td align="right">-6.61</td>
+<td align="right">-17.90</td>
+<td align="right">-19.05</td>
+<td align="right">-20.27</td>
+<td align="right">-21.54</td>
+</tr>
+<tr class="odd">
+<td>ALP2018_no_SBTO</td>
+<td align="right">-0.20</td>
+<td align="right">-7.01</td>
+<td align="right">-7.19</td>
+<td align="right">-7.33</td>
+<td align="right">-7.47</td>
+<td align="right">-7.60</td>
+<td align="right">-7.71</td>
+<td align="right">-7.81</td>
+<td align="right">-7.91</td>
+<td align="right">-7.99</td>
+</tr>
+<tr class="even">
+<td>ALP2018</td>
+<td align="right">-4.18</td>
+<td align="right">-7.19</td>
+<td align="right">-7.37</td>
+<td align="right">-7.52</td>
+<td align="right">-7.66</td>
+<td align="right">-7.79</td>
+<td align="right">-7.90</td>
+<td align="right">-8.01</td>
+<td align="right">-8.10</td>
+<td align="right">-8.19</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kable</span>(<span class="kw">round</span>(<span class="kw">sapply</span>(Budget_1922_Grattan, sapply, revenue_foregone, <span class="dt">USE.NAMES =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>, <span class="dv">2</span>), 
+      <span class="dt">caption =</span> <span class="st">"Budget costing under various settings, using the default Grattan forecasts"</span>)</code></pre></div>
+<table class="table">
+<caption>Budget costing under various settings, using the default Grattan forecasts</caption>
+<thead><tr class="header">
+<th></th>
+<th align="right">2018-19</th>
+<th align="right">2019-20</th>
+<th align="right">2020-21</th>
+<th align="right">2021-22</th>
+<th align="right">2022-23</th>
+<th align="right">2023-24</th>
+<th align="right">2024-25</th>
+<th align="right">2025-26</th>
+<th align="right">2026-27</th>
+<th align="right">2027-28</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Budget2018_baseline</td>
+<td align="right">0.00</td>
+<td align="right">-0.05</td>
+<td align="right">-0.09</td>
+<td align="right">-0.14</td>
+<td align="right">-0.18</td>
+<td align="right">-0.23</td>
+<td align="right">-0.28</td>
+<td align="right">-0.33</td>
+<td align="right">-0.38</td>
+<td align="right">-0.43</td>
+</tr>
+<tr class="even">
+<td>Budget2018_baseline_brackets_cpi</td>
+<td align="right">-2.20</td>
+<td align="right">-4.27</td>
+<td align="right">-6.45</td>
+<td align="right">-8.73</td>
+<td align="right">-11.12</td>
+<td align="right">-13.62</td>
+<td align="right">-16.23</td>
+<td align="right">-18.94</td>
+<td align="right">-21.77</td>
+<td align="right">-24.69</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_baseline_no_SBTO</td>
+<td align="right">0.18</td>
+<td align="right">0.14</td>
+<td align="right">0.10</td>
+<td align="right">0.06</td>
+<td align="right">0.02</td>
+<td align="right">-0.03</td>
+<td align="right">-0.07</td>
+<td align="right">-0.12</td>
+<td align="right">-0.16</td>
+<td align="right">-0.21</td>
+</tr>
+<tr class="even">
+<td>Budget2018_just_rates</td>
+<td align="right">-0.37</td>
+<td align="right">-0.44</td>
+<td align="right">-0.51</td>
+<td align="right">-0.57</td>
+<td align="right">-5.64</td>
+<td align="right">-5.85</td>
+<td align="right">-15.16</td>
+<td align="right">-15.90</td>
+<td align="right">-16.66</td>
+<td align="right">-17.43</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_just_LITO</td>
+<td align="right">0.00</td>
+<td align="right">-0.05</td>
+<td align="right">-0.09</td>
+<td align="right">-0.14</td>
+<td align="right">-0.72</td>
+<td align="right">-0.77</td>
+<td align="right">-0.82</td>
+<td align="right">-0.87</td>
+<td align="right">-0.92</td>
+<td align="right">-0.97</td>
+</tr>
+<tr class="even">
+<td>Budget2018_just_LITO_and_rates</td>
+<td align="right">-0.37</td>
+<td align="right">-0.44</td>
+<td align="right">-0.51</td>
+<td align="right">-0.57</td>
+<td align="right">-6.17</td>
+<td align="right">-6.39</td>
+<td align="right">-15.70</td>
+<td align="right">-16.44</td>
+<td align="right">-17.20</td>
+<td align="right">-17.97</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_just_lamington</td>
+<td align="right">-3.70</td>
+<td align="right">-3.82</td>
+<td align="right">-3.94</td>
+<td align="right">-4.06</td>
+<td align="right">-4.18</td>
+<td align="right">-4.29</td>
+<td align="right">-4.41</td>
+<td align="right">-4.52</td>
+<td align="right">-4.63</td>
+<td align="right">-4.74</td>
+</tr>
+<tr class="even">
+<td>Budget2018_lamington_plus_LITO</td>
+<td align="right">-3.70</td>
+<td align="right">-3.82</td>
+<td align="right">-3.94</td>
+<td align="right">-4.06</td>
+<td align="right">-0.72</td>
+<td align="right">-0.77</td>
+<td align="right">-0.82</td>
+<td align="right">-0.87</td>
+<td align="right">-0.92</td>
+<td align="right">-0.97</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_no_SBTO</td>
+<td align="right">-3.89</td>
+<td align="right">-4.03</td>
+<td align="right">-4.17</td>
+<td align="right">-4.31</td>
+<td align="right">-5.98</td>
+<td align="right">-6.19</td>
+<td align="right">-15.50</td>
+<td align="right">-16.24</td>
+<td align="right">-16.99</td>
+<td align="right">-17.76</td>
+</tr>
+<tr class="even">
+<td>Budget2018</td>
+<td align="right">-4.07</td>
+<td align="right">-4.21</td>
+<td align="right">-4.36</td>
+<td align="right">-4.50</td>
+<td align="right">-6.17</td>
+<td align="right">-6.39</td>
+<td align="right">-15.70</td>
+<td align="right">-16.44</td>
+<td align="right">-17.20</td>
+<td align="right">-17.97</td>
+</tr>
+<tr class="odd">
+<td>ALP2018_no_SBTO</td>
+<td align="right">-0.19</td>
+<td align="right">-6.85</td>
+<td align="right">-7.04</td>
+<td align="right">-7.24</td>
+<td align="right">-7.43</td>
+<td align="right">-7.61</td>
+<td align="right">-7.80</td>
+<td align="right">-7.98</td>
+<td align="right">-8.16</td>
+<td align="right">-8.34</td>
+</tr>
+<tr class="even">
+<td>ALP2018</td>
+<td align="right">-4.07</td>
+<td align="right">-7.03</td>
+<td align="right">-7.23</td>
+<td align="right">-7.42</td>
+<td align="right">-7.61</td>
+<td align="right">-7.80</td>
+<td align="right">-7.99</td>
+<td align="right">-8.18</td>
+<td align="right">-8.36</td>
+<td align="right">-8.55</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(Budget_1922_Grattan80) &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/is.fy.html">yr2fy</a></span>(<span class="dv">2019</span><span class="op">:</span><span class="dv">2028</span>)
+<span class="kw">kable</span>(<span class="kw">round</span>(<span class="kw">sapply</span>(Budget_1922_Grattan80, sapply, revenue_foregone, <span class="dt">USE.NAMES =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>, <span class="dv">2</span>), 
+      <span class="dt">caption =</span> <span class="st">"Budget costing under various settings, using Grattan's 80% optimistic wage forecasts"</span>)</code></pre></div>
+<table class="table">
+<caption>Budget costing under various settings, using Grattan’s 80% optimistic wage forecasts</caption>
+<thead><tr class="header">
+<th></th>
+<th align="right">2018-19</th>
+<th align="right">2019-20</th>
+<th align="right">2020-21</th>
+<th align="right">2021-22</th>
+<th align="right">2022-23</th>
+<th align="right">2023-24</th>
+<th align="right">2024-25</th>
+<th align="right">2025-26</th>
+<th align="right">2026-27</th>
+<th align="right">2027-28</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Budget2018_baseline</td>
+<td align="right">0.00</td>
+<td align="right">-0.05</td>
+<td align="right">-0.09</td>
+<td align="right">-0.13</td>
+<td align="right">-0.18</td>
+<td align="right">-0.22</td>
+<td align="right">-0.27</td>
+<td align="right">-0.31</td>
+<td align="right">-0.35</td>
+<td align="right">-0.39</td>
+</tr>
+<tr class="even">
+<td>Budget2018_baseline_brackets_cpi</td>
+<td align="right">-2.21</td>
+<td align="right">-4.31</td>
+<td align="right">-6.54</td>
+<td align="right">-8.90</td>
+<td align="right">-11.41</td>
+<td align="right">-14.06</td>
+<td align="right">-16.85</td>
+<td align="right">-19.79</td>
+<td align="right">-22.89</td>
+<td align="right">-26.13</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_baseline_no_SBTO</td>
+<td align="right">0.18</td>
+<td align="right">0.14</td>
+<td align="right">0.10</td>
+<td align="right">0.06</td>
+<td align="right">0.02</td>
+<td align="right">-0.02</td>
+<td align="right">-0.06</td>
+<td align="right">-0.10</td>
+<td align="right">-0.14</td>
+<td align="right">-0.18</td>
+</tr>
+<tr class="even">
+<td>Budget2018_just_rates</td>
+<td align="right">-0.38</td>
+<td align="right">-0.45</td>
+<td align="right">-0.52</td>
+<td align="right">-0.59</td>
+<td align="right">-5.75</td>
+<td align="right">-6.00</td>
+<td align="right">-16.40</td>
+<td align="right">-17.42</td>
+<td align="right">-18.49</td>
+<td align="right">-19.60</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_just_LITO</td>
+<td align="right">0.00</td>
+<td align="right">-0.05</td>
+<td align="right">-0.09</td>
+<td align="right">-0.13</td>
+<td align="right">-0.70</td>
+<td align="right">-0.74</td>
+<td align="right">-0.78</td>
+<td align="right">-0.82</td>
+<td align="right">-0.86</td>
+<td align="right">-0.89</td>
+</tr>
+<tr class="even">
+<td>Budget2018_just_LITO_and_rates</td>
+<td align="right">-0.38</td>
+<td align="right">-0.45</td>
+<td align="right">-0.52</td>
+<td align="right">-0.59</td>
+<td align="right">-6.27</td>
+<td align="right">-6.51</td>
+<td align="right">-16.91</td>
+<td align="right">-17.93</td>
+<td align="right">-19.00</td>
+<td align="right">-20.10</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_just_lamington</td>
+<td align="right">-3.70</td>
+<td align="right">-3.82</td>
+<td align="right">-3.94</td>
+<td align="right">-4.05</td>
+<td align="right">-4.16</td>
+<td align="right">-4.27</td>
+<td align="right">-4.37</td>
+<td align="right">-4.46</td>
+<td align="right">-4.55</td>
+<td align="right">-4.64</td>
+</tr>
+<tr class="even">
+<td>Budget2018_lamington_plus_LITO</td>
+<td align="right">-3.70</td>
+<td align="right">-3.82</td>
+<td align="right">-3.94</td>
+<td align="right">-4.05</td>
+<td align="right">-0.70</td>
+<td align="right">-0.74</td>
+<td align="right">-0.78</td>
+<td align="right">-0.82</td>
+<td align="right">-0.86</td>
+<td align="right">-0.89</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_no_SBTO</td>
+<td align="right">-3.90</td>
+<td align="right">-4.04</td>
+<td align="right">-4.19</td>
+<td align="right">-4.32</td>
+<td align="right">-6.08</td>
+<td align="right">-6.32</td>
+<td align="right">-16.71</td>
+<td align="right">-17.73</td>
+<td align="right">-18.79</td>
+<td align="right">-19.89</td>
+</tr>
+<tr class="even">
+<td>Budget2018</td>
+<td align="right">-4.08</td>
+<td align="right">-4.22</td>
+<td align="right">-4.37</td>
+<td align="right">-4.51</td>
+<td align="right">-6.27</td>
+<td align="right">-6.51</td>
+<td align="right">-16.91</td>
+<td align="right">-17.93</td>
+<td align="right">-19.00</td>
+<td align="right">-20.10</td>
+</tr>
+<tr class="odd">
+<td>ALP2018_no_SBTO</td>
+<td align="right">-0.19</td>
+<td align="right">-6.86</td>
+<td align="right">-7.06</td>
+<td align="right">-7.25</td>
+<td align="right">-7.44</td>
+<td align="right">-7.62</td>
+<td align="right">-7.79</td>
+<td align="right">-7.95</td>
+<td align="right">-8.11</td>
+<td align="right">-8.26</td>
+</tr>
+<tr class="even">
+<td>ALP2018</td>
+<td align="right">-4.08</td>
+<td align="right">-7.04</td>
+<td align="right">-7.24</td>
+<td align="right">-7.43</td>
+<td align="right">-7.62</td>
+<td align="right">-7.81</td>
+<td align="right">-7.98</td>
+<td align="right">-8.15</td>
+<td align="right">-8.31</td>
+<td align="right">-8.46</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(Budget_1922_Grattan20) &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/is.fy.html">yr2fy</a></span>(<span class="dv">2019</span><span class="op">:</span><span class="dv">2028</span>)
+<span class="kw">kable</span>(<span class="kw">round</span>(<span class="kw">sapply</span>(Budget_1922_Grattan20, sapply, revenue_foregone, <span class="dt">USE.NAMES =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>, <span class="dv">2</span>), 
+      <span class="dt">caption =</span> <span class="st">"Budget costing under various settings, using Grattan's 20% pessimistic wage forecasts"</span>)</code></pre></div>
+<table class="table">
+<caption>Budget costing under various settings, using Grattan’s 20% pessimistic wage forecasts</caption>
+<thead><tr class="header">
+<th></th>
+<th align="right">2018-19</th>
+<th align="right">2019-20</th>
+<th align="right">2020-21</th>
+<th align="right">2021-22</th>
+<th align="right">2022-23</th>
+<th align="right">2023-24</th>
+<th align="right">2024-25</th>
+<th align="right">2025-26</th>
+<th align="right">2026-27</th>
+<th align="right">2027-28</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Budget2018_baseline</td>
+<td align="right">0.00</td>
+<td align="right">-0.05</td>
+<td align="right">-0.09</td>
+<td align="right">-0.14</td>
+<td align="right">-0.19</td>
+<td align="right">-0.24</td>
+<td align="right">-0.29</td>
+<td align="right">-0.34</td>
+<td align="right">-0.39</td>
+<td align="right">-0.45</td>
+</tr>
+<tr class="even">
+<td>Budget2018_baseline_brackets_cpi</td>
+<td align="right">-2.19</td>
+<td align="right">-4.23</td>
+<td align="right">-6.36</td>
+<td align="right">-8.55</td>
+<td align="right">-10.83</td>
+<td align="right">-13.17</td>
+<td align="right">-15.58</td>
+<td align="right">-18.04</td>
+<td align="right">-20.57</td>
+<td align="right">-23.15</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_baseline_no_SBTO</td>
+<td align="right">0.18</td>
+<td align="right">0.14</td>
+<td align="right">0.10</td>
+<td align="right">0.06</td>
+<td align="right">0.01</td>
+<td align="right">-0.03</td>
+<td align="right">-0.08</td>
+<td align="right">-0.13</td>
+<td align="right">-0.18</td>
+<td align="right">-0.23</td>
+</tr>
+<tr class="even">
+<td>Budget2018_just_rates</td>
+<td align="right">-0.37</td>
+<td align="right">-0.43</td>
+<td align="right">-0.49</td>
+<td align="right">-0.56</td>
+<td align="right">-5.51</td>
+<td align="right">-5.69</td>
+<td align="right">-13.95</td>
+<td align="right">-14.41</td>
+<td align="right">-14.86</td>
+<td align="right">-15.30</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_just_LITO</td>
+<td align="right">0.00</td>
+<td align="right">-0.05</td>
+<td align="right">-0.09</td>
+<td align="right">-0.14</td>
+<td align="right">-0.74</td>
+<td align="right">-0.79</td>
+<td align="right">-0.85</td>
+<td align="right">-0.91</td>
+<td align="right">-0.97</td>
+<td align="right">-1.03</td>
+</tr>
+<tr class="even">
+<td>Budget2018_just_LITO_and_rates</td>
+<td align="right">-0.37</td>
+<td align="right">-0.43</td>
+<td align="right">-0.49</td>
+<td align="right">-0.56</td>
+<td align="right">-6.06</td>
+<td align="right">-6.25</td>
+<td align="right">-14.52</td>
+<td align="right">-14.98</td>
+<td align="right">-15.44</td>
+<td align="right">-15.88</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_just_lamington</td>
+<td align="right">-3.70</td>
+<td align="right">-3.82</td>
+<td align="right">-3.94</td>
+<td align="right">-4.06</td>
+<td align="right">-4.18</td>
+<td align="right">-4.30</td>
+<td align="right">-4.42</td>
+<td align="right">-4.55</td>
+<td align="right">-4.67</td>
+<td align="right">-4.80</td>
+</tr>
+<tr class="even">
+<td>Budget2018_lamington_plus_LITO</td>
+<td align="right">-3.70</td>
+<td align="right">-3.82</td>
+<td align="right">-3.94</td>
+<td align="right">-4.06</td>
+<td align="right">-0.74</td>
+<td align="right">-0.79</td>
+<td align="right">-0.85</td>
+<td align="right">-0.91</td>
+<td align="right">-0.97</td>
+<td align="right">-1.03</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_no_SBTO</td>
+<td align="right">-3.89</td>
+<td align="right">-4.02</td>
+<td align="right">-4.16</td>
+<td align="right">-4.29</td>
+<td align="right">-5.87</td>
+<td align="right">-6.05</td>
+<td align="right">-14.32</td>
+<td align="right">-14.77</td>
+<td align="right">-15.23</td>
+<td align="right">-15.67</td>
+</tr>
+<tr class="even">
+<td>Budget2018</td>
+<td align="right">-4.07</td>
+<td align="right">-4.20</td>
+<td align="right">-4.34</td>
+<td align="right">-4.48</td>
+<td align="right">-6.06</td>
+<td align="right">-6.25</td>
+<td align="right">-14.52</td>
+<td align="right">-14.98</td>
+<td align="right">-15.44</td>
+<td align="right">-15.88</td>
+</tr>
+<tr class="odd">
+<td>ALP2018_no_SBTO</td>
+<td align="right">-0.18</td>
+<td align="right">-6.84</td>
+<td align="right">-7.03</td>
+<td align="right">-7.21</td>
+<td align="right">-7.40</td>
+<td align="right">-7.59</td>
+<td align="right">-7.78</td>
+<td align="right">-7.96</td>
+<td align="right">-8.15</td>
+<td align="right">-8.34</td>
+</tr>
+<tr class="even">
+<td>ALP2018</td>
+<td align="right">-4.07</td>
+<td align="right">-7.01</td>
+<td align="right">-7.21</td>
+<td align="right">-7.40</td>
+<td align="right">-7.59</td>
+<td align="right">-7.78</td>
+<td align="right">-7.97</td>
+<td align="right">-8.16</td>
+<td align="right">-8.35</td>
+<td align="right">-8.54</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>(Budget_<span class="dv">1922</span>, sapply, revenue_foregone, <span class="dt">USE.NAMES =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>rowSums <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">divide_by</span>(<span class="fl">1e9</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>kable</code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th></th>
+<th align="right">x</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Budget2018_baseline</td>
+<td align="right">-1.8812235</td>
+</tr>
+<tr class="even">
+<td>Budget2018_baseline_brackets_cpi</td>
+<td align="right">-136.6171602</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_baseline_no_SBTO</td>
+<td align="right">0.1334656</td>
+</tr>
+<tr class="even">
+<td>Budget2018_just_rates</td>
+<td align="right">-90.8877016</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_just_LITO</td>
+<td align="right">-4.7745694</td>
+</tr>
+<tr class="even">
+<td>Budget2018_just_LITO_and_rates</td>
+<td align="right">-93.7811173</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_just_lamington</td>
+<td align="right">-41.6702567</td>
+</tr>
+<tr class="even">
+<td>Budget2018_lamington_plus_LITO</td>
+<td align="right">-20.2884170</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_no_SBTO</td>
+<td align="right">-107.3579413</td>
+</tr>
+<tr class="even">
+<td>Budget2018</td>
+<td align="right">-109.2950203</td>
+</tr>
+<tr class="odd">
+<td>ALP2018_no_SBTO</td>
+<td align="right">-68.2179170</td>
+</tr>
+<tr class="even">
+<td>ALP2018</td>
+<td align="right">-73.9072620</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sapply</span>(Budget_1922_Grattan, sapply, revenue_foregone, <span class="dt">USE.NAMES =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>rowSums <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">divide_by</span>(<span class="fl">1e9</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>kable</code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th></th>
+<th align="right">x</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Budget2018_baseline</td>
+<td align="right">-2.0965981</td>
+</tr>
+<tr class="even">
+<td>Budget2018_baseline_brackets_cpi</td>
+<td align="right">-128.0254601</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_baseline_no_SBTO</td>
+<td align="right">-0.0773124</td>
+</tr>
+<tr class="even">
+<td>Budget2018_just_rates</td>
+<td align="right">-78.5322580</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_just_LITO</td>
+<td align="right">-5.3234925</td>
+</tr>
+<tr class="even">
+<td>Budget2018_just_LITO_and_rates</td>
+<td align="right">-81.7592156</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_just_lamington</td>
+<td align="right">-42.2930845</td>
+</tr>
+<tr class="even">
+<td>Budget2018_lamington_plus_LITO</td>
+<td align="right">-20.5694087</td>
+</tr>
+<tr class="odd">
+<td>Budget2018_no_SBTO</td>
+<td align="right">-95.0640352</td>
+</tr>
+<tr class="even">
+<td>Budget2018</td>
+<td align="right">-97.0051962</td>
+</tr>
+<tr class="odd">
+<td>ALP2018_no_SBTO</td>
+<td align="right">-68.6390267</td>
+</tr>
+<tr class="even">
+<td>ALP2018</td>
+<td align="right">-74.2376411</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="kw">write.csv</span>(<span class="kw">round</span>(<span class="kw">sapply</span>(Budget_<span class="dv">1922</span>, sapply, revenue_foregone, <span class="dt">USE.NAMES =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>, <span class="dv">2</span>), 
           <span class="st">"Budget201718-summaries-2.csv"</span>)
 <span class="kw">write.csv</span>(<span class="kw">round</span>(<span class="kw">sapply</span>(Budget_1922_Grattan, sapply, revenue_foregone, <span class="dt">USE.NAMES =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>, <span class="dv">2</span>), 
-          <span class="st">"Budget201718-Grattan-summaries.csv"</span>)</code></pre></div>
+          <span class="st">"Budget201718-Grattan-summaries.csv"</span>)
+<span class="kw">write.csv</span>(<span class="kw">round</span>(<span class="kw">sapply</span>(Budget_1922_Grattan80, sapply, revenue_foregone, <span class="dt">USE.NAMES =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>, <span class="dv">2</span>), 
+          <span class="st">"Budget201718-Grattan-summaries-80pc.csv"</span>)
+<span class="kw">write.csv</span>(<span class="kw">round</span>(<span class="kw">sapply</span>(Budget_1922_Grattan20, sapply, revenue_foregone, <span class="dt">USE.NAMES =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>, <span class="dv">2</span>), 
+          <span class="st">"Budget201718-Grattan-summaries-20pc.csv"</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">avg_individual_impact_by_Quintile_fy &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">lapply</span>(Budget_<span class="dv">1922</span>, <span class="cf">function</span>(x) {
     x[[<span class="st">"Budget2018"</span>]] <span class="op">%&gt;%</span>
@@ -500,7 +1284,7 @@ avg_individual_impact_by_Quintile_fy <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">FALSE</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.line.x =</span> <span class="kw">element_line</span>(<span class="dt">size =</span> <span class="fl">0.5</span>),
         <span class="dt">legend.position =</span> <span class="st">"right"</span>)</code></pre></div>
-<p><img src="budget-2018_files/figure-html/avg_individual_impact_by_Quintile_fy-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/avg_individual_impact_by_Quintile_fy-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 Brackets &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">data.table</span>(<span class="dt">Breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">37e3</span>, <span class="fl">41e3</span>, <span class="fl">87e3</span>, <span class="fl">90e3</span>, <span class="fl">120e3</span>, <span class="fl">180e3</span>, <span class="fl">200e3</span>)) <span class="op">%&gt;%</span>
@@ -536,7 +1320,7 @@ avg_individual_impact_by_Bracket_fy <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>)
 <span class="co">#&gt; I'm going off-piste: The Palette Of Nine is thine. May John have mercy on your soul.</span></code></pre></div>
-<p><img src="budget-2018_files/figure-html/avg_individual_impact_by_Quintile_fy-2.svg" width="864"></p>
+<p><img src="Budget2018-atlas/avg_individual_impact_by_Quintile_fy-2.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="kw">lapply</span>(Budget_<span class="dv">1922</span>, <span class="cf">function</span>(x) {
   x[[<span class="st">"Budget2018"</span>]] <span class="op">%&gt;%</span>
@@ -562,7 +1346,7 @@ avg_individual_impact_by_Bracket_fy <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>)
 <span class="co">#&gt; I'm going off-piste: The Palette Of Nine is thine. May John have mercy on your soul.</span></code></pre></div>
-<p><img src="budget-2018_files/figure-html/avg_individual_impact_by_Quintile_fy-3.svg" width="864"></p>
+<p><img src="Budget2018-atlas/avg_individual_impact_by_Quintile_fy-3.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cost_by_policy &lt;-
 <span class="st">  </span><span class="kw">sapply</span>(Budget_<span class="dv">1922</span>, sapply, revenue_foregone, <span class="dt">USE.NAMES =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>rowSums <span class="op">%&gt;%</span>
@@ -669,7 +1453,7 @@ avg_tax_rates_by_percentile_facet_fy <span class="op">%&gt;%</span>
         <span class="dt">axis.line.x =</span> <span class="kw">element_line</span>(<span class="dt">size =</span> <span class="fl">0.5</span>),
         <span class="dt">legend.title =</span> <span class="kw">element_blank</span>(),
         <span class="dt">legend.justification =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</code></pre></div>
-<p><img src="budget-2018_files/figure-html/unnamed-chunk-10-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/unnamed-chunk-12-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">decile2income &lt;-<span class="st"> </span><span class="cf">function</span>(d) {
   d &lt;-<span class="st"> </span><span class="kw">as.integer</span>(d)
   <span class="kw">grattan_dollar</span>(minIncome_by_decile[.(d)][[<span class="st">"minIncome"</span>]])
@@ -677,11 +1461,12 @@ avg_tax_rates_by_percentile_facet_fy <span class="op">%&gt;%</span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cost_decile_fy &lt;-<span class="st"> </span><span class="cf">function</span>(decile, fy) {
   
 }</code></pre></div>
-<p>New Grattan Institute analysis highlights that most of the revenue reductions from the Turnbull Government’s full Personal Income Tax Plan are the result of lower taxes on high-income earners. Once the three-stage plan – including removing the 37c bracket – is complete, <strong>-1.554812910^{10}</strong> of the annual <strong>-2.156273510^{10} cost</strong> of the plan will result from collecting less tax from the top 20% of income earners, who currently have a taxable income of $68,000 or more.</p>
-<p>The PIT plan will do little to unwind bracket creep’s gradual reduction of the progressivity of the tax system. Even with the PIT plan, average tax rates are forecast to be higher for all taxpayers in 2027-28 – except for very high-income earners who are effectively shielded from bracket creep by the plan. A taxpayer who earns $117,000 today (more than 90% of other taxpayers) will pay an average tax rate of 28.9% in 2027-28, unchanged from today. In contrast, average tax rates for middle-income earners will continue to rise. The average tax rate for a taxpayer who earns $27,000-a-year today (more than 30% of other taxpayers) will increase 6 percentage points (from 9.3% to 14.7% ). As a result, the highest-income taxpayers will bear a lower share of the total tax burden.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">texNumD &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">texNum</span>(x, <span class="dt">dollar =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p>New Grattan Institute analysis highlights that most of the revenue reductions from the Turnbull Government’s full Personal Income Tax Plan are the result of lower taxes on high-income earners. Once the three-stage plan – including removing the 37c bracket – is complete, <strong>$15.5~billion</strong> of the annual <strong>$21.5~billion cost</strong> of the plan will result from collecting less tax from the top 20% of income earners, who currently have a taxable income of $68,000 or more.</p>
+<p>The PIT plan will do little to unwind bracket creep’s gradual reduction of the progressivity of the tax system. Even with the PIT plan, average tax rates are forecast to be higher for all taxpayers in 2027-28 – except for very high-income earners who are effectively shielded from bracket creep by the plan. A taxpayer who earns $117,000 today (more than 90% of other taxpayers) will pay an average tax rate of 28.9% in 2027-28, unchanged from today. In contrast, average tax rates for middle-income earners will continue to rise. The average tax rate for a taxpayer who earns $27,000-a-year today (more than 30% of other taxpayers) will increase 6 percentage points (from 9.2% to 14.7% ). As a result, the highest-income taxpayers will bear a lower share of the total tax burden.</p>
 <p><strong>Costing and distributional analysis of PIT plan </strong></p>
 <p>The 2018-19 budget shows the annual cost of the PIT Plan until 2022. The Treasurer has indicated the ten-year cost of the plan is $140 billion. Grattan’s analysis shows the annual costs of the plan until 2028. The Grattan costing takes into account all elements of the PIT plan.</p>
-<p>Most of the revenue reductions until 2021-22 are a result of the Low and Middle Income Tax Offset (“the Lamington”). But once the plan is fully implemented in 2024-25, there are much bigger revenue reductions because the top of the 32.5 cent bracket increases first to $120,000 and then to $200,000 (removing the 37c bracket). In 2028, these bracket changes account for of the in lower revenue.</p>
+<p>Most of the revenue reductions until 2021-22 are a result of the Low and Middle Income Tax Offset (“the Lamington”). But once the plan is fully implemented in 2024-25, there are much bigger revenue reductions because the top of the 32.5 cent bracket increases first to $120,000 and then to $200,000 (removing the 37c bracket). In 2028, these bracket changes account for <span class="math inline">\(-\)</span>$21.1~billion of the <span class="math inline">\(-\)</span>$21.5~billion in lower revenue.</p>
 <p>Once fully implemented, most of the reduction in revenue under the PIT is retained by the top 20% of income earners, with a taxable income of $87,000 or more. In 2028, the reduction in tax collected from this group will account for <strong>$15 billion</strong> of the $25 billion cost of the plan.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Quintile and financial year to tax cut</span>
 Qfy2Cut &lt;-<span class="st"> </span><span class="cf">function</span>(Quintile, fy) {
@@ -871,7 +1656,7 @@ scale10 &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>)
 <span class="co">#&gt; Scale for 'colour' is already present. Adding another scale for</span>
 <span class="co">#&gt; 'colour', which will replace the existing scale.</span></code></pre></div>
-<p><img src="budget-2018_files/figure-html/unnamed-chunk-18-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/unnamed-chunk-20-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_files_all <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, .(<span class="dt">avg_tax_rate =</span> <span class="kw">mean</span>(avg_tax_rate)), keyby =<span class="st"> </span>.(fy.year, Taxable_Income_percentile)] <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">setnames</span>(<span class="st">"fy.year"</span>, <span class="st">"fy_year"</span>) <span class="op">%&gt;%</span>
@@ -930,7 +1715,7 @@ scale10 &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>fy_year)
 <span class="co">#&gt; Scale for 'colour' is already present. Adding another scale for</span>
 <span class="co">#&gt; 'colour', which will replace the existing scale.</span></code></pre></div>
-<p><img src="budget-2018_files/figure-html/avg_tax_rate_by_percentile_fy_year_rel0304-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/avg_tax_rate_by_percentile_fy_year_rel0304-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bound_models &lt;-<span class="st"> </span>
 <span class="st">  </span>Budget_<span class="dv">1922</span> <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">lapply</span>(rbindlist, <span class="dt">use.names =</span> <span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">idcol =</span> <span class="st">"id"</span>) <span class="op">%&gt;%</span>
@@ -952,7 +1737,7 @@ bound_models_Grattan &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="st">"Taxable income"</span>, <span class="dt">labels =</span> grattan_dollar, <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">225e3</span>)) 
 <span class="co">#&gt; Warning: Removed 75 rows containing missing values (geom_path).</span></code></pre></div>
-<p><img src="budget-2018_files/figure-html/unnamed-chunk-20-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/unnamed-chunk-22-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list</span>(
   {
     sample_files_all <span class="op">%&gt;%</span>
@@ -978,7 +1763,7 @@ bound_models_Grattan &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>,
         <span class="dt">legend.title =</span> <span class="kw">element_blank</span>())</code></pre></div>
-<p><img src="budget-2018_files/figure-html/progressivities-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/progressivities-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">avg_tax_rates_by_percentile_facet_fy_historical &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">list</span>(
   {
@@ -1005,6 +1790,8 @@ bound_models_Grattan &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">dcast</span>(fy_year <span class="op">+</span><span class="st"> </span>id <span class="op">~</span><span class="st"> </span>Taxable_Income_percentile, <span class="dt">value.var =</span> <span class="st">"new_avg_tax_rate"</span>, <span class="dt">FUN =</span> identity) <span class="op">%T&gt;%</span>
 <span class="st">  </span><span class="kw">fwrite</span>(<span class="st">"avg-tax-rate-wide-by-model-fy_year.tsv"</span>, <span class="dt">quote =</span> <span class="ot">TRUE</span>, <span class="dt">sep =</span> <span class="st">"</span><span class="ch">\t</span><span class="st">"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span>.[]</code></pre></div>
+</div>
+</div>
 <div id="effect-of-sbto" class="section level2">
 <h2 class="hasAnchor">
 <a href="#effect-of-sbto" class="anchor"></a>Effect of SBTO</h2>
@@ -1023,7 +1810,7 @@ bound_models[id <span class="op">%ein%</span><span class="st"> </span><span clas
 <span class="st">  </span>.[, delta <span class="op">:</span><span class="er">=</span><span class="st"> `</span><span class="dt">With SBTO</span><span class="st">`</span> <span class="op">-</span><span class="st"> `</span><span class="dt">No SBTO</span><span class="st">`</span>] <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> fy_year, <span class="dt">y =</span> delta, <span class="dt">fill =</span> policy)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">"dodge"</span>)</code></pre></div>
-<p><img src="budget-2018_files/figure-html/unnamed-chunk-22-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/unnamed-chunk-24-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bound_models[id <span class="op">%ein%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"Budget2018"</span>, <span class="st">"ALP2018"</span>,
                         <span class="st">"Budget2018_no_SBTO"</span>, <span class="st">"ALP2018_no_SBTO"</span>,
                         <span class="st">"Budget2018_baseline"</span>, <span class="st">"Budget2018_baseline_no_SBTO"</span>)] <span class="op">%&gt;%</span>
@@ -1041,7 +1828,7 @@ bound_models[id <span class="op">%ein%</span><span class="st"> </span><span clas
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Taxable_Income_percentile, <span class="dt">y =</span> revi, <span class="dt">color =</span> fy_year)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>policy) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>() </code></pre></div>
-<p><img src="budget-2018_files/figure-html/unnamed-chunk-23-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/unnamed-chunk-25-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s202728_in_<span class="dv">1920</span> &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../../reference/model_income_tax.html">model_income_tax</a></span>(s1819,
                    <span class="st">"2017-18"</span>, 
@@ -1085,7 +1872,7 @@ alternative <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, variable <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">factor</span>(variable, <span class="dt">levels =</span> <span class="kw">unique</span>(.<span class="op">$</span>variable), <span class="dt">ordered =</span> <span class="ot">TRUE</span>)] <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Taxable_Income_percentile, <span class="dt">y =</span> value, <span class="dt">color =</span> variable)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
-<p><img src="budget-2018_files/figure-html/unnamed-chunk-24-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/unnamed-chunk-26-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 baseline_share &lt;-<span class="st"> </span>
 <span class="st">  </span>bound_models[id <span class="op">==</span><span class="st"> "Budget2018_baseline"</span> <span class="op">&amp;</span><span class="st"> </span>fy_year <span class="op">==</span><span class="st"> "2027-28"</span>] <span class="op">%&gt;%</span>
@@ -1113,7 +1900,7 @@ alternative <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Taxable_Income_decile, <span class="dt">y =</span> value, <span class="dt">fill =</span> variable)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">"dodge"</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> <span class="cf">function</span>(x) <span class="kw">paste0</span>(<span class="kw">grattan_dollar</span>(x <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>), <span class="st">" bn"</span>))</code></pre></div>
-<p><img src="budget-2018_files/figure-html/unnamed-chunk-24-2.svg" width="864"></p>
+<p><img src="Budget2018-atlas/unnamed-chunk-26-2.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bound_models <span class="op">%&gt;%</span>
 <span class="st">  </span>.[id <span class="op">==</span><span class="st"> "Budget2018"</span>] <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, Quintile <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ntile</span>(Taxable_Income, <span class="dv">5</span>), keyby =<span class="st"> "fy_year"</span>] <span class="op">%&gt;%</span>
@@ -1156,7 +1943,8 @@ alternative <span class="op">%&gt;%</span>
         <span class="dt">fill =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, Taxable_Income_decile <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="../../reference/weighted_ntile.html">weighted_ntile</a></span>(Taxable_Income, WEIGHT, <span class="dv">10</span>)] <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, .(<span class="dt">total =</span> <span class="kw">sum</span>(new_tax)), keyby =<span class="st"> "Taxable_Income_decile"</span>] <span class="op">%&gt;%</span>
-<span class="st">  </span>.[, share <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">round</span>(total <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(total), <span class="dv">3</span>)] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, share <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">round</span>(total <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(total), <span class="dv">3</span>)] <span class="op">%T&gt;%</span>
+<span class="st">  </span><span class="kw">fwrite</span>(<span class="st">"avg_tax_by_decile_allpersons201718.csv"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span>.[]
 
 wt_rel1718v202425 &lt;-<span class="st"> </span>
@@ -1171,7 +1959,8 @@ avg_tax_by_decile_allpersons202425 &lt;-<span class="st"> </span>
         <span class="dt">use.names =</span> <span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, Taxable_Income_decile <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="../../reference/weighted_ntile.html">weighted_ntile</a></span>(Taxable_Income, WEIGHT, <span class="dv">10</span>)] <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, .(<span class="dt">total =</span> <span class="kw">sum</span>(new_tax)), keyby =<span class="st"> "Taxable_Income_decile"</span>] <span class="op">%&gt;%</span>
-<span class="st">  </span>.[, share <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">round</span>(total <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(total), <span class="dv">3</span>)] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, share <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">round</span>(total <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(total), <span class="dv">3</span>)] <span class="op">%T&gt;%</span>
+<span class="st">  </span><span class="kw">fwrite</span>(<span class="st">"avg_tax_by_decile_allpersons202425.csv"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span>.[]
 
 wt_rel1718v202728 &lt;-<span class="st"> </span>
@@ -1186,8 +1975,68 @@ avg_tax_by_decile_allpersons202728 &lt;-<span class="st"> </span>
         <span class="dt">use.names =</span> <span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, Taxable_Income_decile <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="../../reference/weighted_ntile.html">weighted_ntile</a></span>(Taxable_Income, WEIGHT, <span class="dv">10</span>)] <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, .(<span class="dt">total =</span> <span class="kw">sum</span>(new_tax)), keyby =<span class="st"> "Taxable_Income_decile"</span>] <span class="op">%&gt;%</span>
-<span class="st">  </span>.[, share <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">round</span>(total <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(total), <span class="dv">3</span>)] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, share <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">round</span>(total <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(total), <span class="dv">3</span>)] <span class="op">%T&gt;%</span>
+<span class="st">  </span><span class="kw">fwrite</span>(<span class="st">"avg_tax_by_decile_allpersons202728.csv"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span>.[]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">decile201718 &lt;-<span class="st"> </span>
+<span class="st">  </span>s1718[, .(new_tax, <span class="dt">baseline_tax =</span> <span class="kw">as.double</span>(baseline_tax), Taxable_Income, WEIGHT)] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rbind</span>(<span class="kw">data.table</span>(<span class="dt">new_tax =</span> <span class="dv">0</span>,
+                   <span class="dt">baseline_tax =</span> <span class="dv">0</span>,
+                   <span class="dt">Taxable_Income =</span> 0L,
+                   <span class="dt">WEIGHT =</span> total_population_<span class="dv">1516</span> <span class="op">-</span><span class="st"> </span><span class="kw">sum</span>(sample_files_all[fy.year <span class="op">==</span><span class="st"> "2015-16"</span>][[<span class="st">"WEIGHT"</span>]])), 
+        <span class="dt">use.names =</span> <span class="ot">TRUE</span>,
+        <span class="dt">fill =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, Taxable_Income_decile <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="../../reference/weighted_ntile.html">weighted_ntile</a></span>(Taxable_Income, WEIGHT, <span class="dv">10</span>)] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, .(<span class="dt">Taxable_Income =</span> <span class="kw">min</span>(Taxable_Income),
+        <span class="dt">tot =</span> <span class="kw">sum</span>(baseline_tax <span class="op">*</span><span class="st"> </span>WEIGHT <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>)),
+    keyby =<span class="st"> </span>.(Taxable_Income_decile)] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, min_Taxable_Income <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">round</span>(Taxable_Income, <span class="op">-</span><span class="dv">3</span>)] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, prop <span class="op">:</span><span class="er">=</span><span class="st"> </span>tot <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tot)] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">setkey</span>(Taxable_Income) <span class="op">%&gt;%</span>
+<span class="st">  </span>.[]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Budget_<span class="dv">1922</span>[[<span class="st">"2027-28"</span>]][[<span class="st">"Budget2018"</span>]] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rbind</span>(<span class="kw">data.table</span>(<span class="dt">new_tax =</span> <span class="dv">0</span>,
+                   <span class="dt">baseline_tax =</span> <span class="dv">0</span>,
+                   <span class="dt">Taxable_Income =</span> 0L,
+                   <span class="dt">WEIGHT =</span> wt_rel1718v202728 <span class="op">*</span><span class="st"> </span>(total_population_<span class="dv">1516</span> <span class="op">-</span><span class="st"> </span>taxable_individuals_<span class="dv">1718</span>)), 
+        <span class="dt">use.names =</span> <span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, .(new_tax, baseline_tax, Taxable_Income, WEIGHT)] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">setkey</span>(Taxable_Income) <span class="op">%&gt;%</span>
+<span class="st">  </span>decile201718[., roll =<span class="st"> </span><span class="ot">TRUE</span>] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, .(<span class="dt">tot =</span> <span class="kw">sum</span>(new_tax)), keyby =<span class="st"> </span>.(Taxable_Income_decile, min_Taxable_Income)] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, prop <span class="op">:</span><span class="er">=</span><span class="st"> </span>tot <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tot)] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[]
+<span class="co">#&gt;    Taxable_Income_decile min_Taxable_Income        tot         prop</span>
+<span class="co">#&gt; 1:                     1                  0          0 0.0000000000</span>
+<span class="co">#&gt; 2:                     4                  0          0 0.0000000000</span>
+<span class="co">#&gt; 3:                     5              11000     692756 0.0001179139</span>
+<span class="co">#&gt; 4:                     6              24000   56360042 0.0095930310</span>
+<span class="co">#&gt; 5:                     7              37000  167886456 0.0285759187</span>
+<span class="co">#&gt; 6:                     8              50000  438633631 0.0746597389</span>
+<span class="co">#&gt; 7:                     9              68000  854864491 0.1455063068</span>
+<span class="co">#&gt; 8:                    10              98000 4356665288 0.7415470907</span>
+
+Budget_<span class="dv">1922</span>[[<span class="st">"2024-25"</span>]][[<span class="st">"Budget2018"</span>]] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rbind</span>(<span class="kw">data.table</span>(<span class="dt">new_tax =</span> <span class="dv">0</span>,
+                   <span class="dt">baseline_tax =</span> <span class="dv">0</span>,
+                   <span class="dt">Taxable_Income =</span> 0L,
+                   <span class="dt">WEIGHT =</span> wt_rel1718v202728 <span class="op">*</span><span class="st"> </span>(total_population_<span class="dv">1516</span> <span class="op">-</span><span class="st"> </span>taxable_individuals_<span class="dv">1718</span>)), 
+        <span class="dt">use.names =</span> <span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, .(new_tax, baseline_tax, Taxable_Income, WEIGHT)] <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">setkey</span>(Taxable_Income) <span class="op">%&gt;%</span>
+<span class="st">  </span>decile201718[., roll =<span class="st"> </span><span class="ot">TRUE</span>] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, .(<span class="dt">tot =</span> <span class="kw">sum</span>(new_tax <span class="op">*</span><span class="st"> </span>WEIGHT <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>)), keyby =<span class="st"> </span>.(Taxable_Income_decile, min_Taxable_Income)] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, prop <span class="op">:</span><span class="er">=</span><span class="st"> </span>tot <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tot)] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[]
+<span class="co">#&gt;    Taxable_Income_decile min_Taxable_Income          tot         prop</span>
+<span class="co">#&gt; 1:                     1                  0   0.00000000 0.0000000000</span>
+<span class="co">#&gt; 2:                     4                  0   0.00000000 0.0000000000</span>
+<span class="co">#&gt; 3:                     5              11000   0.04636691 0.0001534935</span>
+<span class="co">#&gt; 4:                     6              24000   3.65400226 0.0120962487</span>
+<span class="co">#&gt; 5:                     7              37000  10.98884486 0.0363775910</span>
+<span class="co">#&gt; 6:                     8              50000  26.13241133 0.0865090174</span>
+<span class="co">#&gt; 7:                     9              68000  49.44407838 0.1636802125</span>
+<span class="co">#&gt; 8:                    10              98000 211.81160689 0.7011834370</span></code></pre></div>
 </div>
   </div>
 
@@ -1196,7 +2045,8 @@ avg_tax_by_decile_allpersons202728 &lt;-<span class="st"> </span>
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#effect-of-sbto">Effect of SBTO</a></li>
+<li><a href="#introduction">Introduction</a></li>
+      <li><a href="#effect-of-sbto">Effect of SBTO</a></li>
       </ul>
 </div>
       </div>

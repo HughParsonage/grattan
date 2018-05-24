@@ -7,6 +7,7 @@ output:
     toc: true
 ---
 
+
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -56,6 +57,19 @@ if (isTRUE(getOption("knitr.in.progress"))) {
 stopifnot(file.exists("../../DESCRIPTION"))
 ```
 
+## Introduction
+
+This article outlines the calculations used in Grattan Institute's tax modelling. 
+The model is simple:
+
+1. Project ("uprate") the latest sample files to the years required
+2. Use `model_income_tax` with the required parameters. 
+
+
+First load the packages we'll need.
+
+
+
 ```{r}
 library(fastmatch)
 library(ggplot2)
@@ -70,7 +84,12 @@ library(data.table)
 library(grattanCharts)
 templib <- tempfile()
 hutils::provide.dir(templib)
+```
 
+We also load the `taxstats` package. 
+The other packages are private as the ATO has suppressed the information from the public: unfortunately, only approved institutions can use this data sets.
+
+```{r}
 library(taxstats)
 
 sample_file_1415 <- SampleFile1415::sample_file_1415
@@ -203,15 +222,22 @@ s1819 <-
   model_income_tax("2018-19")
 ```
 
-```{r}
+These tables come from the Budget papers and will be passed to `project` so that the uprating can be set with fixed values. (By default `project` forecasts the series using the `forecast` package.)
+```{r wage_forecasts}
 wage_forecasts <- 
   data.table(fy_year = yr2fy(2018:2028),
              r = c(2.25, 2.75, 3.25, 3.5, 3.5, rep(3.5, 6)) / 100)
+```
+
+```{r lf_forecasts}
 lf_forecasts <- 
   data.table(fy_year = yr2fy(2018:2028),
              r = c(2.75, 1.50, 1.50, 1.50, 1.25, rep(1.25, 6)) / 100)
+```
 
+These are functions of years from 2015-16 that return the tax rates and tax thresholds that the Government has proposed in the Budget. They are used so that the out years can be modelled conveniently as a function of the year only.
 
+```{r}
 ordinary_tax_rates <- function(h) {
   if (h < 9) {
     c(0, 0.19, 0.325, 0.37, 0.45)
@@ -230,6 +256,9 @@ ordinary_tax_thresholds <- function(h) {
   }
 }
 ```
+
+These functions increase the thresholds for the Medicare levy for low-income earners. 
+Technically such measures have to be approved each financial year, but are as a matter of a routine.
 
 ```{r do_medicare_levy}
 #' @param x2018 A length-one for the 2018-19 number.
@@ -280,14 +309,51 @@ medicare_levy_lower_up_for_each_child <- function(fy) {
 .project_useGrattans <- lapply(1:13, .project_to, use.Treasury = FALSE)
 ```
 
+```{r}
+wage_r80 <- 
+  data.table(fy_year = yr2fy(c(2017:2028)),
+             i = wage_inflator(from_fy = "2015-16",
+                               to_fy = yr2fy(c(2017:2028)),
+                               forecast.level = 80,
+                               forecast.series = "upper")) %>%
+  .[, r := i / shift(i) - 1] %>%
+  .[!is.na(r), .(fy_year, r)]
+  
+wage_r20 <- 
+  data.table(fy_year = yr2fy(c(2017:2028)),
+             i = wage_inflator(from_fy = "2015-16",
+                               to_fy = yr2fy(c(2017:2028)),
+                               forecast.level = 80,
+                               forecast.series = "lower")) %>%
+  .[, r := i / shift(i) - 1] %>%
+  .[!is.na(r), .(fy_year, r)]
+```
+
+```{r .project_useGrattans80}
+.project_useGrattans80 <- lapply(1:13, function(h) {
+  project(sample_file_1516, h = h, wage.series = wage_r80)
+})
+```
+
+```{r .project_useGrattans20}
+.project_useGrattans20 <- lapply(1:13, function(h) {
+  project(sample_file_1516, h = h, wage.series = wage_r20)
+})
+```
+
+
 ```{r model_Budgets}
-model_Budgets <- function(fy_year, use.Treasury = TRUE, .debug = FALSE) { 
+model_Budgets <- function(fy_year, use.Treasury = TRUE, .debug = FALSE, level = NULL) { 
   h <- as.integer(fy2yr(fy_year) - 2016L)
   
   if (use.Treasury) {
     s1920 <- .project_useTreasurys[[h]]
-  } else {
+  } else if (is.null(level)) {
     s1920 <- .project_useGrattans[[h]]
+  } else if (level == 20) {
+    s1920 <- .project_useGrattans20[[h]]
+  } else if (level == 80) {
+    s1920 <- .project_useGrattans80[[h]]
   }
   
   model_income_tax <- function(...,
@@ -329,8 +395,6 @@ model_Budgets <- function(fy_year, use.Treasury = TRUE, .debug = FALSE) {
        Budget2018_just_lamington = model_income_tax(lamington = TRUE),
        Budget2018_lamington_plus_LITO = model_income_tax(lito_202223 = h > 6,
                                                          lamington = fy_year %in% c("2018-19", "2019-20", "2020-21", "2021-22")),
-       Budget2018_lamington_plus_bracket1 = model_income_tax(lito_202223 = h > 6,
-                                                             lamington = fy_year %in% c("2018-19", "2019-20", "2020-21", "2021-22")),
        Budget2018_no_SBTO = model_income_tax(ordinary_tax_rates = ordinary_tax_rates(h),
                                              ordinary_tax_thresholds = ordinary_tax_thresholds(h),
                                              lito_202223 = h > 6,
@@ -359,18 +423,62 @@ Budget_1922 <- lapply(yr2fy(2019:2028), model_Budgets)
 Budget_1922_Grattan <- lapply(yr2fy(2019:2028), model_Budgets, use.Treasury = FALSE)
 ```
 
+
+```{r Budget_1922_Grattan80}
+Budget_1922_Grattan80 <- lapply(yr2fy(2019:2028), model_Budgets, use.Treasury = FALSE, 
+                                level = 80)
+```
+
+```{r Budget_1922_Grattan20}
+Budget_1922_Grattan20 <- lapply(yr2fy(2019:2028), model_Budgets, use.Treasury = FALSE, 
+                                level = 20)
+```
+
+### Costings 2018-19 to 2027-28 (Govt and Grattan forecasts)
+
 ```{r Budget-summaries}
 names(Budget_1922) <- yr2fy(2019:2028)
 names(Budget_1922_Grattan) <- yr2fy(2019:2028)
-round(sapply(Budget_1922, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9, 2)
-round(sapply(Budget_1922_Grattan, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9, 2)
-sapply(Budget_1922, sapply, revenue_foregone, USE.NAMES = TRUE) %>% rowSums %>% divide_by(1e9)
-sapply(Budget_1922_Grattan, sapply, revenue_foregone, USE.NAMES = TRUE) %>% rowSums %>% divide_by(1e9)
+{sapply(Budget_1922, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9} %>%
+  round(2) %>%
+  kable(caption = "Budget costing under various settings, using the Budget paper's assumptions")
+```
+
+```{r Budget-summaries-Grattan}
+kable(round(sapply(Budget_1922_Grattan, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9, 2), 
+      caption = "Budget costing under various settings, using the default Grattan forecasts")
+```
+
+```{r Budget-summaries-Grattan-80}
+names(Budget_1922_Grattan80) <- yr2fy(2019:2028)
+kable(round(sapply(Budget_1922_Grattan80, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9, 2), 
+      caption = "Budget costing under various settings, using Grattan's 80% optimistic wage forecasts")
+```
+
+```{r Budget-summaries-Grattan-20}
+names(Budget_1922_Grattan20) <- yr2fy(2019:2028)
+kable(round(sapply(Budget_1922_Grattan20, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9, 2), 
+      caption = "Budget costing under various settings, using Grattan's 20% pessimistic wage forecasts")
+```
+
+```{r}
+sapply(Budget_1922, sapply, revenue_foregone, USE.NAMES = TRUE) %>%
+  rowSums %>%
+  divide_by(1e9) %>%
+  kable
+sapply(Budget_1922_Grattan, sapply, revenue_foregone, USE.NAMES = TRUE) %>%
+  rowSums %>% 
+  divide_by(1e9) %>%
+  kable
 
 write.csv(round(sapply(Budget_1922, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9, 2), 
           "Budget201718-summaries-2.csv")
 write.csv(round(sapply(Budget_1922_Grattan, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9, 2), 
           "Budget201718-Grattan-summaries.csv")
+write.csv(round(sapply(Budget_1922_Grattan80, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9, 2), 
+          "Budget201718-Grattan-summaries-80pc.csv")
+write.csv(round(sapply(Budget_1922_Grattan20, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9, 2), 
+          "Budget201718-Grattan-summaries-20pc.csv")
 ```
 
 ```{r avg_individual_impact_by_Quintile_fy}
