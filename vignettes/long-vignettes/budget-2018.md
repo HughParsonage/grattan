@@ -1,7 +1,7 @@
 ---
 title: "Budget 2018 modelling"
 author: "Hugh Parsonage"
-date: "`r Sys.Date()`"
+date: "2018-05-27"
 output:
   rmarkdown::html_document:
     toc: true
@@ -9,61 +9,16 @@ output:
     keep_md: true
 ---
 
-Width: `r getOption("width", "XXX")`.
-```{r opts}
+Width: 75.
+
+```r
 options(width = 100)
 ```
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.width = 9,
-  fig.height = 7,
-  dev = "svg",
-  fig.path = "./Budget2018-atlas/"
-)
-if (FALSE) {
-  change_pngs <- function(html) {
-    html_lines <- readr::read_lines(html)
-    for (i in grep("((Budget2018.atlas)|(budget.2018_files)).*\\.png", html_lines)) {
-      html_lines[i] <- sub(".png", ".svg", html_lines[i], fixed = TRUE)
-    }
-    readr::write_lines(html_lines, html)
-  }
-  invisible(lapply(dir(path = "~/grattan/docs/articles/long-vignettes/", 
-                       pattern = "\\.html$", 
-                       full.names = TRUE), 
-                   change_pngs))
-  
-}
 
 
-if (isTRUE(getOption("knitr.in.progress"))) {
-  BUNDLE.CHART.DATA <- FALSE
-  .finished <- FALSE
-  chunktimings.txt <- "budget-2018-chunktimings.txt"
-  invisible(file.create(chunktimings.txt))
-  knitr::knit_hooks$set(timeit = function(before) {
-    if (before) {
-      assign(".current.time", value = Sys.time(), envir = .GlobalEnv)
-    }
-    else {
-      .duration <- formatC(as.numeric(round(difftime(Sys.time(), 
-                                                     .current.time, units = "secs"), 1)), format = "f", 
-                           flag = "#", digits = 1, width = 5)
-      if (!.finished) 
-        write(paste0(.duration, "\t", knitr::opts_current$get(name = "label")), 
-              file = chunktimings.txt, ncolumns = 1, append = TRUE)
-    }
-  })
-  knitr::opts_chunk$set(timeit = TRUE)
-  START.TIME <- Sys.time()
-}
-stopifnot(file.exists("../../DESCRIPTION"))
-```
 
-```{r}
+```r
 grattan_percent <- function(number, digits = 1, .percent.suffix = " per cent") {
   grattanCharts::grattan_percent(number, digits, .percent.suffix)
 }
@@ -82,7 +37,8 @@ First load the packages we'll need.
 
 
 
-```{r}
+
+```r
 library(fastmatch)
 library(ggplot2)
 library(scales)
@@ -101,7 +57,8 @@ hutils::provide.dir(templib)
 We also load the `taxstats` package. 
 The other packages are private as the ATO has suppressed the information from the public: unfortunately, only approved institutions can use this data sets.
 
-```{r}
+
+```r
 library(taxstats)
 
 sample_file_1415 <- SampleFile1415::sample_file_1415
@@ -147,13 +104,15 @@ coalesce <- hutils::coalesce
 sample_files_all[, Taxable_Income_percentile := ntile(Taxable_Income, 100)]
 ```
 
-```{r sample_files_all}
+
+```r
 sample_files_all %>%
   .[, tax := income_tax(Taxable_Income, fy.year = .BY[[1L]], .dots.ATO = .SD), keyby = "fy.year"] %>%
   .[, avg_tax_rate := coalesce(tax / Taxable_Income, 0)]
 ```
 
-```{r revenue_foregone}
+
+```r
 revenue_foregone <- function(dt, revenue_positive = TRUE, digits = NULL) {
   out <- dt[, sum((as.integer(new_tax) - baseline_tax) * WEIGHT)]
   class(out) <- "revenue_foregone"
@@ -197,7 +156,8 @@ print.revenue_foregone <- function(x, ...) {
 }
 ```
 
-```{r}
+
+```r
 ## ------------------------------------------------------------------------
 s1617 <- 
   if (file.exists("~/ozTaxData/data-raw/2016_sample_file.csv")) {
@@ -209,7 +169,8 @@ s1617 <-
 s1617 <- model_income_tax(s1617, "2016-17")
 ```
 
-```{r}
+
+```r
 ## ------------------------------------------------------------------------
 s1718 <- 
   if (file.exists("~/ozTaxData/data-raw/2016_sample_file.csv")) {
@@ -222,7 +183,8 @@ s1718 <- model_income_tax(s1718, "2017-18")
 ```
 
 
-```{r}
+
+```r
 ## ------------------------------------------------------------------------
 s1819 <- 
   if (file.exists("~/ozTaxData/data-raw/2016_sample_file.csv")) {
@@ -235,13 +197,15 @@ s1819 <-
 ```
 
 These tables come from the Budget papers and will be passed to `project` so that the uprating can be set with fixed values. (By default `project` forecasts the series using the `forecast` package.)
-```{r wage_forecasts}
+
+```r
 wage_forecasts <- 
   data.table(fy_year = yr2fy(2018:2028),
              r = c(2.25, 2.75, 3.25, 3.5, 3.5, rep(3.5, 6)) / 100)
 ```
 
-```{r lf_forecasts}
+
+```r
 lf_forecasts <- 
   data.table(fy_year = yr2fy(2018:2028),
              r = c(2.75, 1.50, 1.50, 1.50, 1.25, rep(1.25, 6)) / 100)
@@ -249,7 +213,8 @@ lf_forecasts <-
 
 These are functions of years from 2015-16 that return the tax rates and tax thresholds that the Government has proposed in the Budget. They are used so that the out years can be modelled conveniently as a function of the year only.
 
-```{r}
+
+```r
 ordinary_tax_rates <- function(h) {
   if (h < 9) {
     c(0, 0.19, 0.325, 0.37, 0.45)
@@ -272,7 +237,8 @@ ordinary_tax_thresholds <- function(h) {
 These functions increase the thresholds for the Medicare levy for low-income earners. 
 Technically such measures have to be approved each financial year, but are as a matter of a routine.
 
-```{r do_medicare_levy}
+
+```r
 #' @param x2018 A length-one for the 2018-19 number.
 #' @param fy The financial year
 .do_medicare_levy <- function(x2018, fy) {
@@ -313,15 +279,18 @@ medicare_levy_lower_up_for_each_child <- function(fy) {
 }
 ```
 
-```{r project_useTreasurys}
+
+```r
 .project_useTreasurys <- lapply(1:13, .project_to, use.Treasury = TRUE)
 ```
 
-```{r .project_useGrattans}
+
+```r
 .project_useGrattans <- lapply(1:13, .project_to, use.Treasury = FALSE)
 ```
 
-```{r}
+
+```r
 wage_r80 <- 
   data.table(fy_year = yr2fy(c(2017:2028)),
              i = wage_inflator(from_fy = "2015-16",
@@ -341,25 +310,29 @@ wage_r20 <-
   .[!is.na(r), .(fy_year, r)]
 ```
 
-```{r .project_useGrattans80}
+
+```r
 .project_useGrattans80 <- lapply(1:13, function(h) {
   project(sample_file_1516, h = h, wage.series = wage_r80)
 })
 ```
 
-```{r .project_useGrattans20}
+
+```r
 .project_useGrattans20 <- lapply(1:13, function(h) {
   project(sample_file_1516, h = h, wage.series = wage_r20)
 })
 ```
 
-```{r .project_useGrattans2.75}
+
+```r
 .project_useGrattans2.75 <- lapply(1:13, function(h) {
   project(sample_file_1516, h = h, wage.series = 0.0275)
 })
 ```
 
-```{r model_Budgets}
+
+```r
 #' @param level Prediction interval level.
 #' @param wage.r A string like "2.75\%", the wage growth as a percentage.
 model_Budgets <- function(fy_year, 
@@ -458,33 +431,39 @@ model_Budgets <- function(fy_year,
 }
 ```
 
-```{r Budget_1922}
+
+```r
 Budget_1922 <- lapply(yr2fy(2019:2028), model_Budgets)
 ```
 
-```{r Budget_1922_Grattan}
+
+```r
 Budget_1922_Grattan <- lapply(yr2fy(2019:2028), model_Budgets, use.Treasury = FALSE)
 ```
 
 
-```{r Budget_1922_Grattan80}
+
+```r
 Budget_1922_Grattan80 <- lapply(yr2fy(2019:2028), model_Budgets, use.Treasury = FALSE, 
                                 level = 80)
 ```
 
-```{r Budget_1922_Grattan20}
+
+```r
 Budget_1922_Grattan20 <- lapply(yr2fy(2019:2028), model_Budgets, use.Treasury = FALSE, 
                                 level = 20)
 ```
 
-```{r Budget_1922_Grattan2.75}
+
+```r
 Budget_1922_Grattan2.75 <- lapply(yr2fy(2019:2028), model_Budgets, use.Treasury = FALSE, 
                                 wage.r = "2.75%")
 ```
 
 ### Costings 2018-19 to 2027-28 (Govt and Grattan forecasts)
 
-```{r Budget-summaries}
+
+```r
 names(Budget_1922) <- yr2fy(2019:2028)
 names(Budget_1922_Grattan) <- yr2fy(2019:2028)
 names(Budget_1922_Grattan2.75) <- yr2fy(2019:2028)
@@ -493,32 +472,144 @@ names(Budget_1922_Grattan2.75) <- yr2fy(2019:2028)
   kable(caption = "Budget costing under various settings, using the Budget paper's assumptions")
 ```
 
-```{r Budget-summaries-Grattan}
+
+
+|                                 | 2018-19| 2019-20| 2020-21| 2021-22| 2022-23| 2023-24| 2024-25| 2025-26| 2026-27| 2027-28|
+|:--------------------------------|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|
+|Budget2018_baseline              |    0.00|   -0.05|   -0.09|   -0.13|   -0.18|   -0.22|   -0.25|   -0.29|   -0.32|   -0.35|
+|Budget2018_baseline_brackets_cpi |   -2.28|   -4.44|   -6.75|   -9.17|  -11.74|  -14.44|  -17.29|  -20.29|  -23.45|  -26.78|
+|Budget2018_baseline_no_SBTO      |    0.19|    0.15|    0.11|    0.06|    0.02|   -0.01|   -0.05|   -0.08|   -0.11|   -0.14|
+|Budget2018_just_rates            |   -0.39|   -0.46|   -0.54|   -0.62|   -5.89|   -6.11|  -17.42|  -18.58|  -19.80|  -21.08|
+|Budget2018_just_LITO             |    0.00|   -0.05|   -0.09|   -0.13|   -0.68|   -0.71|   -0.74|   -0.77|   -0.79|   -0.81|
+|Budget2018_just_LITO_and_rates   |   -0.39|   -0.46|   -0.54|   -0.62|   -6.39|   -6.61|  -17.90|  -19.05|  -20.27|  -21.54|
+|Budget2018_just_lamington        |   -3.79|   -3.90|   -4.00|   -4.09|   -4.17|   -4.24|   -4.30|   -4.35|   -4.40|   -4.44|
+|Budget2018_lamington_plus_LITO   |   -3.79|   -3.90|   -4.00|   -4.09|   -0.68|   -0.71|   -0.74|   -0.77|   -0.79|   -0.81|
+|Budget2018_no_SBTO               |   -4.00|   -4.13|   -4.27|   -4.38|   -6.20|   -6.42|  -17.71|  -18.85|  -20.07|  -21.33|
+|Budget2018                       |   -4.18|   -4.32|   -4.45|   -4.57|   -6.39|   -6.61|  -17.90|  -19.05|  -20.27|  -21.54|
+|ALP2018_no_SBTO                  |   -0.20|   -7.01|   -7.19|   -7.33|   -7.47|   -7.60|   -7.71|   -7.81|   -7.91|   -7.99|
+|ALP2018                          |   -4.18|   -7.19|   -7.37|   -7.52|   -7.66|   -7.79|   -7.90|   -8.01|   -8.10|   -8.19|
+
+
+```r
 kable(round(sapply(Budget_1922_Grattan, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9, 2), 
       caption = "Budget costing under various settings, using the default Grattan forecasts")
 ```
 
-```{r Budget-summaries-Grattan-80}
+
+
+|                                 | 2018-19| 2019-20| 2020-21| 2021-22| 2022-23| 2023-24| 2024-25| 2025-26| 2026-27| 2027-28|
+|:--------------------------------|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|
+|Budget2018_baseline              |    0.00|   -0.05|   -0.09|   -0.14|   -0.18|   -0.23|   -0.28|   -0.33|   -0.38|   -0.43|
+|Budget2018_baseline_brackets_cpi |   -2.20|   -4.27|   -6.45|   -8.73|  -11.12|  -13.62|  -16.23|  -18.94|  -21.77|  -24.69|
+|Budget2018_baseline_no_SBTO      |    0.18|    0.14|    0.10|    0.06|    0.02|   -0.03|   -0.07|   -0.12|   -0.16|   -0.21|
+|Budget2018_just_rates            |   -0.37|   -0.44|   -0.51|   -0.57|   -5.64|   -5.85|  -15.16|  -15.90|  -16.66|  -17.43|
+|Budget2018_just_LITO             |    0.00|   -0.05|   -0.09|   -0.14|   -0.72|   -0.77|   -0.82|   -0.87|   -0.92|   -0.97|
+|Budget2018_just_LITO_and_rates   |   -0.37|   -0.44|   -0.51|   -0.57|   -6.17|   -6.39|  -15.70|  -16.44|  -17.20|  -17.97|
+|Budget2018_just_lamington        |   -3.70|   -3.82|   -3.94|   -4.06|   -4.18|   -4.29|   -4.41|   -4.52|   -4.63|   -4.74|
+|Budget2018_lamington_plus_LITO   |   -3.70|   -3.82|   -3.94|   -4.06|   -0.72|   -0.77|   -0.82|   -0.87|   -0.92|   -0.97|
+|Budget2018_no_SBTO               |   -3.89|   -4.03|   -4.17|   -4.31|   -5.98|   -6.19|  -15.50|  -16.24|  -16.99|  -17.76|
+|Budget2018                       |   -4.07|   -4.21|   -4.36|   -4.50|   -6.17|   -6.39|  -15.70|  -16.44|  -17.20|  -17.97|
+|ALP2018_no_SBTO                  |   -0.19|   -6.85|   -7.04|   -7.24|   -7.43|   -7.61|   -7.80|   -7.98|   -8.16|   -8.34|
+|ALP2018                          |   -4.07|   -7.03|   -7.23|   -7.42|   -7.61|   -7.80|   -7.99|   -8.18|   -8.36|   -8.55|
+
+
+```r
 names(Budget_1922_Grattan80) <- yr2fy(2019:2028)
 kable(round(sapply(Budget_1922_Grattan80, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9, 2), 
       caption = "Budget costing under various settings, using Grattan's 80% optimistic wage forecasts")
 ```
 
-```{r Budget-summaries-Grattan-20}
+
+
+|                                 | 2018-19| 2019-20| 2020-21| 2021-22| 2022-23| 2023-24| 2024-25| 2025-26| 2026-27| 2027-28|
+|:--------------------------------|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|
+|Budget2018_baseline              |    0.00|   -0.05|   -0.09|   -0.13|   -0.18|   -0.22|   -0.27|   -0.31|   -0.35|   -0.39|
+|Budget2018_baseline_brackets_cpi |   -2.21|   -4.31|   -6.54|   -8.90|  -11.41|  -14.06|  -16.85|  -19.79|  -22.89|  -26.13|
+|Budget2018_baseline_no_SBTO      |    0.18|    0.14|    0.10|    0.06|    0.02|   -0.02|   -0.06|   -0.10|   -0.14|   -0.18|
+|Budget2018_just_rates            |   -0.38|   -0.45|   -0.52|   -0.59|   -5.75|   -6.00|  -16.40|  -17.42|  -18.49|  -19.60|
+|Budget2018_just_LITO             |    0.00|   -0.05|   -0.09|   -0.13|   -0.70|   -0.74|   -0.78|   -0.82|   -0.86|   -0.89|
+|Budget2018_just_LITO_and_rates   |   -0.38|   -0.45|   -0.52|   -0.59|   -6.27|   -6.51|  -16.91|  -17.93|  -19.00|  -20.10|
+|Budget2018_just_lamington        |   -3.70|   -3.82|   -3.94|   -4.05|   -4.16|   -4.27|   -4.37|   -4.46|   -4.55|   -4.64|
+|Budget2018_lamington_plus_LITO   |   -3.70|   -3.82|   -3.94|   -4.05|   -0.70|   -0.74|   -0.78|   -0.82|   -0.86|   -0.89|
+|Budget2018_no_SBTO               |   -3.90|   -4.04|   -4.19|   -4.32|   -6.08|   -6.32|  -16.71|  -17.73|  -18.79|  -19.89|
+|Budget2018                       |   -4.08|   -4.22|   -4.37|   -4.51|   -6.27|   -6.51|  -16.91|  -17.93|  -19.00|  -20.10|
+|ALP2018_no_SBTO                  |   -0.19|   -6.86|   -7.06|   -7.25|   -7.44|   -7.62|   -7.79|   -7.95|   -8.11|   -8.26|
+|ALP2018                          |   -4.08|   -7.04|   -7.24|   -7.43|   -7.62|   -7.81|   -7.98|   -8.15|   -8.31|   -8.46|
+
+
+```r
 names(Budget_1922_Grattan20) <- yr2fy(2019:2028)
 kable(round(sapply(Budget_1922_Grattan20, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9, 2), 
       caption = "Budget costing under various settings, using Grattan's 20% pessimistic wage forecasts")
 ```
 
-```{r}
+
+
+|                                 | 2018-19| 2019-20| 2020-21| 2021-22| 2022-23| 2023-24| 2024-25| 2025-26| 2026-27| 2027-28|
+|:--------------------------------|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|
+|Budget2018_baseline              |    0.00|   -0.05|   -0.09|   -0.14|   -0.19|   -0.24|   -0.29|   -0.34|   -0.39|   -0.45|
+|Budget2018_baseline_brackets_cpi |   -2.19|   -4.23|   -6.36|   -8.55|  -10.83|  -13.17|  -15.58|  -18.04|  -20.57|  -23.15|
+|Budget2018_baseline_no_SBTO      |    0.18|    0.14|    0.10|    0.06|    0.01|   -0.03|   -0.08|   -0.13|   -0.18|   -0.23|
+|Budget2018_just_rates            |   -0.37|   -0.43|   -0.49|   -0.56|   -5.51|   -5.69|  -13.95|  -14.41|  -14.86|  -15.30|
+|Budget2018_just_LITO             |    0.00|   -0.05|   -0.09|   -0.14|   -0.74|   -0.79|   -0.85|   -0.91|   -0.97|   -1.03|
+|Budget2018_just_LITO_and_rates   |   -0.37|   -0.43|   -0.49|   -0.56|   -6.06|   -6.25|  -14.52|  -14.98|  -15.44|  -15.88|
+|Budget2018_just_lamington        |   -3.70|   -3.82|   -3.94|   -4.06|   -4.18|   -4.30|   -4.42|   -4.55|   -4.67|   -4.80|
+|Budget2018_lamington_plus_LITO   |   -3.70|   -3.82|   -3.94|   -4.06|   -0.74|   -0.79|   -0.85|   -0.91|   -0.97|   -1.03|
+|Budget2018_no_SBTO               |   -3.89|   -4.02|   -4.16|   -4.29|   -5.87|   -6.05|  -14.32|  -14.77|  -15.23|  -15.67|
+|Budget2018                       |   -4.07|   -4.20|   -4.34|   -4.48|   -6.06|   -6.25|  -14.52|  -14.98|  -15.44|  -15.88|
+|ALP2018_no_SBTO                  |   -0.18|   -6.84|   -7.03|   -7.21|   -7.40|   -7.59|   -7.78|   -7.96|   -8.15|   -8.34|
+|ALP2018                          |   -4.07|   -7.01|   -7.21|   -7.40|   -7.59|   -7.78|   -7.97|   -8.16|   -8.35|   -8.54|
+
+
+```r
 sapply(Budget_1922, sapply, revenue_foregone, USE.NAMES = TRUE) %>%
   rowSums %>%
   divide_by(1e9) %>%
   kable
+```
+
+
+
+|                                 |            x|
+|:--------------------------------|------------:|
+|Budget2018_baseline              |   -1.8812235|
+|Budget2018_baseline_brackets_cpi | -136.6171602|
+|Budget2018_baseline_no_SBTO      |    0.1334656|
+|Budget2018_just_rates            |  -90.8877016|
+|Budget2018_just_LITO             |   -4.7745694|
+|Budget2018_just_LITO_and_rates   |  -93.7811173|
+|Budget2018_just_lamington        |  -41.6702567|
+|Budget2018_lamington_plus_LITO   |  -20.2884170|
+|Budget2018_no_SBTO               | -107.3579413|
+|Budget2018                       | -109.2950203|
+|ALP2018_no_SBTO                  |  -68.2179170|
+|ALP2018                          |  -73.9072620|
+
+```r
 sapply(Budget_1922_Grattan, sapply, revenue_foregone, USE.NAMES = TRUE) %>%
   rowSums %>% 
   divide_by(1e9) %>%
   kable
+```
+
+
+
+|                                 |            x|
+|:--------------------------------|------------:|
+|Budget2018_baseline              |   -2.0965981|
+|Budget2018_baseline_brackets_cpi | -128.0254601|
+|Budget2018_baseline_no_SBTO      |   -0.0773124|
+|Budget2018_just_rates            |  -78.5322580|
+|Budget2018_just_LITO             |   -5.3234925|
+|Budget2018_just_LITO_and_rates   |  -81.7592156|
+|Budget2018_just_lamington        |  -42.2930845|
+|Budget2018_lamington_plus_LITO   |  -20.5694087|
+|Budget2018_no_SBTO               |  -95.0640352|
+|Budget2018                       |  -97.0051962|
+|ALP2018_no_SBTO                  |  -68.6390267|
+|ALP2018                          |  -74.2376411|
+
+```r
 
 write.csv(round(sapply(Budget_1922, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9, 2), 
           "Budget201718-summaries-2.csv")
@@ -530,7 +621,8 @@ write.csv(round(sapply(Budget_1922_Grattan20, sapply, revenue_foregone, USE.NAME
           "Budget201718-Grattan-summaries-20pc.csv")
 ```
 
-```{r avg_individual_impact_by_Quintile_fy}
+
+```r
 avg_individual_impact_by_Quintile_fy <- 
   lapply(Budget_1922, function(x) {
     x[["Budget2018"]] %>%
@@ -563,7 +655,10 @@ avg_individual_impact_by_Quintile_fy %>%
         legend.position = "right")
 ```
 
-```{r}
+![plot of chunk avg_individual_impact_by_Quintile_fy](./Budget2018-atlas/avg_individual_impact_by_Quintile_fy-1.svg)
+
+
+```r
 avg_individual_impact_by_Quintile_fy <- 
   lapply(Budget_1922_Grattan2.75, function(x) {
     x[["Budget2018"]] %>%
@@ -596,8 +691,11 @@ avg_individual_impact_by_Quintile_fy %>%
         legend.position = "right")
 ```
 
+![plot of chunk unnamed-chunk-10](./Budget2018-atlas/unnamed-chunk-10-1.svg)
 
-```{r}
+
+
+```r
 Brackets <- 
   data.table(Breaks = c(0, 37e3, 41e3, 87e3, 90e3, 120e3, 180e3, 200e3)) %>%
   .[, Taxable_Income := as.integer(Breaks)] %>%
@@ -631,6 +729,12 @@ avg_individual_impact_by_Bracket_fy %>%
   scale_y_continuous(labels = grattan_dollar) + 
   guides(fill = guide_legend(reverse = TRUE)) +
   theme(legend.position = "right")
+#> I'm going off-piste: The Palette Of Nine is thine. May John have mercy on your soul.
+```
+
+![plot of chunk unnamed-chunk-11](./Budget2018-atlas/unnamed-chunk-11-1.svg)
+
+```r
 
 lapply(Budget_1922, function(x) {
   x[["Budget2018"]] %>%
@@ -655,30 +759,37 @@ lapply(Budget_1922, function(x) {
   scale_y_continuous(labels = grattan_dollar) + 
   guides(fill = guide_legend(reverse = TRUE)) +
   theme(legend.position = "right")
+#> I'm going off-piste: The Palette Of Nine is thine. May John have mercy on your soul.
 ```
 
-```{r}
+![plot of chunk unnamed-chunk-11](./Budget2018-atlas/unnamed-chunk-11-2.svg)
+
+
+```r
 cost_by_policy <-
   sapply(Budget_1922, sapply, revenue_foregone, USE.NAMES = TRUE) %>% 
   rowSums %>%
   divide_by(1e9)
 ```
 
-```{r}
+
+```r
 cost_in_202728 <- revenue_foregone(Budget_1922[["2027-28"]][["Budget2018"]], FALSE, digits = 0)
 cost_in_202728_top20 <- 
   Budget_1922[["2027-28"]][["Budget2018"]][ntile(Taxable_Income, 100) >= 80] %>%
   revenue_foregone(revenue_positive = FALSE, digits = 0)
 ```
 
-```{r}
+
+```r
 minIncome_by_decile <- 
   s1718[, .(minIncome = min(Taxable_Income)), keyby = .(Decile = ntile(Taxable_Income, 10))] %>%
   .[, minIncome := as.integer(round(minIncome, -3))] %>%
   .[]
 ```
 
-```{r}
+
+```r
 avg_tax_rates_by_percentile_facet_fy <- 
 {
   rbindlist(
@@ -776,7 +887,8 @@ avg_tax_rates_by_percentile_facet_fy <-
   .[]
 ```
 
-```{r avg_tax_rates_by_percentile_Budget_202728_vs_201718}
+
+```r
 avg_tax_rates_by_percentile_facet_fy %>%
   .[facet %in% c("Baseline", "Budget 2018", "2017-18")] %>%
   .[fy_year %in% range(fy_year)] %T>%
@@ -809,7 +921,10 @@ avg_tax_rates_by_percentile_facet_fy %>%
         legend.justification = c(0, 1))
 ```
 
-```{r avg_tax_rates_by_percentile_Budget_202728_vs_201718_with_PI}
+![plot of chunk avg_tax_rates_by_percentile_Budget_202728_vs_201718](./Budget2018-atlas/avg_tax_rates_by_percentile_Budget_202728_vs_201718-1.svg)
+
+
+```r
 avg_tax_rates_by_percentile_facet_fy %>%
   .[facet %in% c("Baseline", "Budget 2018", "2017-18", 
                  "Budget 2018 (20% wage forecast)", 
@@ -846,17 +961,20 @@ avg_tax_rates_by_percentile_facet_fy %>%
         axis.line.x = element_line(size = 0.5),
         legend.title = element_blank(),
         legend.justification = c(1, 0))
-
 ```
 
-```{r}
+![plot of chunk avg_tax_rates_by_percentile_Budget_202728_vs_201718_with_PI](./Budget2018-atlas/avg_tax_rates_by_percentile_Budget_202728_vs_201718_with_PI-1.svg)
+
+
+```r
 decile2income <- function(d) {
   d <- as.integer(d)
   grattan_dollar(minIncome_by_decile[.(d)][["minIncome"]])
 }
 ```
 
-```{r texNumD}
+
+```r
 texNumD <- function(x) texNum(x, dollar = TRUE)
 ```
 
@@ -865,26 +983,26 @@ New Grattan Institute analysis highlights that most of the revenue
 reductions from the Turnbull Government's full Personal Income Tax Plan
 are the result of lower taxes on high-income earners. Once the
 three-stage plan -- including removing the 37c bracket -- is complete,
-**`r texNumD(abs(cost_in_202728_top20))`** of the annual **`r texNumD(abs(cost_in_202728))` cost** of the plan will
+**\$15.5~billion** of the annual **\$21.5~billion cost** of the plan will
 result from collecting less tax from the top 20% of income earners, who
-currently have a taxable income of `r decile2income(8)` or more.
+currently have a taxable income of $68,000 or more.
 
 The PIT plan will do little to unwind bracket creep's gradual reduction
 of the progressivity of the tax system. Even with the PIT plan, average
 tax rates are forecast to be higher for all taxpayers in 2027-28 --
 except for very high-income earners who are effectively shielded from
 bracket creep by the plan. A taxpayer who earns 
-`r decile2income(10)` 
+$117,000 
 today (more
 than 90% of other taxpayers) will pay an average tax rate of 
-`r avg_tax_rates_by_percentile_facet_fy[.("Budget2018", "2027-28", 90L)][['avg_tax_rate']] %>% percent` in
+28.9% in
 2027-28, unchanged from today. In contrast, average tax rates for
 middle-income earners will continue to rise. The average tax rate for a
-taxpayer who earns `r decile2income(4)`-a-year today (more than 30% of other
+taxpayer who earns $27,000-a-year today (more than 30% of other
 taxpayers) will increase 6 percentage points (from 
-`r avg_tax_rates_by_percentile_facet_fy[.("Current", "2017-18", 40L)][['avg_tax_rate']] %>% percent`
+9.2%
 to
-`r avg_tax_rates_by_percentile_facet_fy[.("Budget2018", "2027-28", 40L)][['avg_tax_rate']] %>% percent`
+14.7%
 ). As a
 result, the highest-income taxpayers will bear a lower share of the
 total tax burden.
@@ -901,8 +1019,8 @@ Middle Income Tax Offset ("the Lamington"). But once the plan is fully
 implemented in 2024-25, there are much bigger revenue reductions because
 the top of the 32.5 cent bracket increases first to \$120,000 and then
 to \$200,000 (removing the 37c bracket). In 2028, these bracket changes
-account for `r texNumD(revenue_foregone(Budget_1922[["2027-28"]][["Budget2018_just_rates"]], FALSE))`
-of the `r texNumD(revenue_foregone(Budget_1922[["2027-28"]][["Budget2018"]]))` in lower revenue.
+account for \(-\)\$21.1~billion
+of the \(-\)\$21.5~billion in lower revenue.
 
 
 
@@ -913,7 +1031,8 @@ group will account for **\$15 billion** of the \$25 billion cost of the
 plan.
 
 
-```{r}
+
+```r
 # Quintile and financial year to tax cut
 Qfy2Cut <- function(Quintile, fy) {
   q <- factor(as.integer(Quintile), levels = 1:5)
@@ -925,9 +1044,9 @@ Qfy2Cut <- function(Quintile, fy) {
 
 By 2024-25, the income tax cuts are much larger for high-income earners,
 both in absolute terms and as a proportion of income. Those in the top
-20 per cent will get an average tax cut of `r Qfy2Cut(5, "2027-28")` a year, compared to
-`r Qfy2Cut(2, "2027-28")` a year for someone in the second income quintile (`r decile2income(2)` -
-`r decile2income(3)`).
+20 per cent will get an average tax cut of $4,300 a year, compared to
+$400 a year for someone in the second income quintile ($9,000 -
+$19,000).
 
 
 
@@ -947,12 +1066,12 @@ no changes to rates or brackets over that period.
 But middle-income earners are not spared from bracket creep under the
 PIT plan. The average tax rate for a taxpayer at the 50^th^ percentile
 will still increase by 
-`r round(100 * (avg_tax_rates_by_percentile_facet_fy[.("Budget2018", "2027-28", 50L)][['avg_tax_rate']] - avg_tax_rates_by_percentile_facet_fy[.("Current", "2017-18", 50L)][['avg_tax_rate']]))`
+5
 percentage points
 (from 
-`r avg_tax_rates_by_percentile_facet_fy[.("Current", "2017-18", 50L)][['avg_tax_rate']] %>% percent`
+14.6%
 to 
-`r avg_tax_rates_by_percentile_facet_fy[.("Budget2018", "2027-28", 50L)][['avg_tax_rate']] %>% percent`
+19.1%
 )
 compared to
 2017-18. Without further changes, average tax rates will be higher for
@@ -974,7 +1093,8 @@ earners under PIT plan **
 
 Share of total personal income tax paid by income decile (%)
 
-```{r}
+
+```r
 to_prop <- function(x) {
   if (is.double(x)) {
     grattan_percent(x / sum(x), .percent.suffix = "%", digits = 1)
@@ -984,7 +1104,8 @@ to_prop <- function(x) {
 }
 ```
 
-```{r}
+
+```r
 avg_tax_rates_by_percentile_facet_fy %>%
   .[, .(tot_tax = sum(total_tax_bn)),
     keyby = .(id, fy_year, Decile = ntile(Taxable_Income_percentile, 10))] %>%
@@ -994,19 +1115,35 @@ avg_tax_rates_by_percentile_facet_fy %>%
   fwrite("share-total-personal-income-tax-per-decile.csv") %>%
   kable(align = "rrrr")
 ```
+
+
+
+| Decile| Baseline_2027-28| Budget2018_2027-28| Current_2017-18| Grattan 20%_2027-28| Grattan 80%_2027-28|
+|------:|----------------:|------------------:|---------------:|-------------------:|-------------------:|
+|      1|            0.00%|              0.00%|            0.0%|                0.0%|               0.00%|
+|      2|            0.04%|              0.02%|            0.0%|                0.0%|               0.01%|
+|      3|            0.84%|              0.81%|            0.4%|                0.4%|               0.71%|
+|      4|            2.33%|              2.26%|            1.6%|                1.7%|               2.10%|
+|      5|            4.29%|              4.30%|            3.4%|                3.5%|               4.13%|
+|      6|            6.25%|              6.38%|            5.8%|                5.8%|               6.26%|
+|      7|            8.67%|              8.92%|            8.5%|                8.6%|               8.86%|
+|      8|           12.20%|             12.33%|           12.1%|               12.1%|              12.30%|
+|      9|           17.88%|             17.65%|           17.8%|               17.6%|              17.67%|
+|     10|           47.49%|             47.33%|           50.4%|               50.2%|              47.97%|
   
 
-```{r}
+
+```r
 scale01 <- function(x) {
   (x - min(x)) / (max(x) - min(x))
 }
 scale10 <- function(x) {
   1 - scale01(x)
 }
-
 ```
 
-```{r}
+
+```r
 Grey <- function(fy) {
   Alpha <- 0.5 * scale10(fy2yr(fy))
   out <- grey(rep_len(1, length(fy)))
@@ -1017,7 +1154,8 @@ Grey <- function(fy) {
 }
 ```
 
-```{r}
+
+```r
 sample_files_all %>%
   .[, Over65 := coalesce(age_range <= 1L, Birth_year <= 1L)] %>%
   .[, .(avg_tax_rate = mean(avg_tax_rate)), keyby = .(fy.year, Taxable_Income_percentile)] %>%
@@ -1090,9 +1228,14 @@ sample_files_all %>%
   scale_y_continuous(labels = percent) +
   ggtitle("Average tax rates relative to 2017-18") +
   theme(legend.position = "right")
+#> Scale for 'colour' is already present. Adding another scale for 'colour', which will replace the
+#> existing scale.
 ```
 
-```{r avg_tax_rate_by_percentile_fy_year_rel0304}
+![plot of chunk unnamed-chunk-22](./Budget2018-atlas/unnamed-chunk-22-1.svg)
+
+
+```r
 sample_files_all %>%
   .[, .(avg_tax_rate = mean(avg_tax_rate)), keyby = .(fy.year, Taxable_Income_percentile)] %>%
   setnames("fy.year", "fy_year") %>%
@@ -1149,44 +1292,54 @@ sample_files_all %>%
   ggtitle("Average tax rates relative to 2003-04") +
   theme(legend.position = "right") + 
   facet_wrap(~fy_year)
+#> Scale for 'colour' is already present. Adding another scale for 'colour', which will replace the
+#> existing scale.
 ```
 
-```{r bound_models}
+![plot of chunk avg_tax_rate_by_percentile_fy_year_rel0304](./Budget2018-atlas/avg_tax_rate_by_percentile_fy_year_rel0304-1.svg)
+
+
+```r
 bound_models <- 
   Budget_1922 %>% 
   lapply(rbindlist, use.names = TRUE, fill = TRUE, idcol = "id") %>%
   rbindlist(use.names = TRUE, fill = TRUE, idcol = "fy_year")
 ```
 
-```{r bound_models_Grattan}
+
+```r
 bound_models_Grattan <- 
   Budget_1922_Grattan %>% 
   lapply(rbindlist, use.names = TRUE, fill = TRUE, idcol = "id") %>%
   rbindlist(use.names = TRUE, fill = TRUE, idcol = "fy_year")
 ```
 
-```{r bound_models_Grattan20}
+
+```r
 bound_models_Grattan20 <- 
   Budget_1922_Grattan20 %>% 
   lapply(rbindlist, use.names = TRUE, fill = TRUE, idcol = "id") %>%
   rbindlist(use.names = TRUE, fill = TRUE, idcol = "fy_year")
 ```
 
-```{r bound_models_Grattan80}
+
+```r
 bound_models_Grattan80 <- 
   Budget_1922_Grattan80 %>% 
   lapply(rbindlist, use.names = TRUE, fill = TRUE, idcol = "id") %>%
   rbindlist(use.names = TRUE, fill = TRUE, idcol = "fy_year")
 ```
 
-```{r bound_models_wage2.75}
+
+```r
 bound_models_wage2.75 <- 
   Budget_1922_Grattan2.75 %>% 
   lapply(rbindlist, use.names = TRUE, fill = TRUE, idcol = "id") %>%
   rbindlist(use.names = TRUE, fill = TRUE, idcol = "fy_year")
 ```
 
-```{r}
+
+```r
 bound_models %>%
   .[id == "ALP2018"] %>%
   .[, tax_saving := baseline_tax - new_tax] %>%
@@ -1199,12 +1352,16 @@ bound_models %>%
   grplot(aes(x = Taxable_Income, y = tax_saving, color = fy_year)) + 
   geom_line() +
   scale_x_continuous("Taxable income", labels = grattan_dollar, limits = c(0, 225e3)) 
+#> Warning: Removed 75 rows containing missing values (geom_path).
 ```
 
+![plot of chunk unnamed-chunk-23](./Budget2018-atlas/unnamed-chunk-23-1.svg)
 
 
 
-```{r progressivities}
+
+
+```r
 list(
   {
     sample_files_all %>%
@@ -1232,7 +1389,10 @@ list(
         legend.title = element_blank())
 ```
 
-```{r progressivity_80}
+![plot of chunk progressivities](./Budget2018-atlas/progressivities-1.svg)
+
+
+```r
 progressivity_80 <- 
   bound_models_Grattan80 %>%
   .[id == "Budget2018"] %>%
@@ -1240,7 +1400,8 @@ progressivity_80 <-
   .[]
 ```
 
-```{r progressivity_20}
+
+```r
 progressivity_20 <- 
   bound_models_Grattan20 %>%
   .[id == "Budget2018"] %>%
@@ -1248,7 +1409,8 @@ progressivity_20 <-
   .[]
 ```
 
-```{r progressivity2.75}
+
+```r
 progressivity2.75 <- 
   bound_models_wage2.75 %>%
   .[id == "Budget2018"] %>%
@@ -1257,7 +1419,8 @@ progressivity2.75 <-
   .[]
 ```
 
-```{r progressivity2-75-plot}
+
+```r
 rbindlist(list(progressivity2.75,
                fread("Reynolds-Smolensky-vs-year.csv")), 
           use.names = TRUE,
@@ -1274,7 +1437,10 @@ rbindlist(list(progressivity2.75,
         legend.title = element_blank())
 ```
 
-```{r}
+![plot of chunk progressivity2-75-plot](./Budget2018-atlas/progressivity2-75-plot-1.svg)
+
+
+```r
 avg_tax_rates_by_percentile_facet_fy_historical <- 
   list(
   {
@@ -1305,7 +1471,8 @@ avg_tax_rates_by_percentile_facet_fy_historical <-
 
 
 ## Effect of SBTO
-```{r}
+
+```r
 library(fastmatch)
 bound_models[id %ein% c("Budget2018", "ALP2018",
                         "Budget2018_no_SBTO", "ALP2018_no_SBTO",
@@ -1323,7 +1490,10 @@ bound_models[id %ein% c("Budget2018", "ALP2018",
   geom_col(position = "dodge")
 ```
 
-```{r}
+![plot of chunk unnamed-chunk-25](./Budget2018-atlas/unnamed-chunk-25-1.svg)
+
+
+```r
 bound_models[id %ein% c("Budget2018", "ALP2018",
                         "Budget2018_no_SBTO", "ALP2018_no_SBTO",
                         "Budget2018_baseline", "Budget2018_baseline_no_SBTO")] %>%
@@ -1343,7 +1513,10 @@ bound_models[id %ein% c("Budget2018", "ALP2018",
   geom_line() 
 ```
 
-```{r}
+![plot of chunk unnamed-chunk-26](./Budget2018-atlas/unnamed-chunk-26-1.svg)
+
+
+```r
 s202728_in_1920 <- 
   model_income_tax(s1819,
                    "2017-18", 
@@ -1367,6 +1540,13 @@ while (r1 < 20 && revenue_foregone(alternative) > revenue_foregone(s202728_in_19
                      ordinary_tax_rates = c(0, 0.19 - r1/200, 0.325 - r1/200, 0.37, 0.45), 
                      ordinary_tax_thresholds = c(0, 18200, 37000, 90000, 180000))
 }
+#> [1] "-\\$373 million"
+#> [1] "-\\$2.7 billion"
+#> [1] "-\\$4.9 billion"
+#> [1] "-\\$7.2 billion"
+#> [1] "-\\$9.5 billion"
+#> [1] "-\\$12 billion"
+#> [1] "-\\$14 billion"
 
 alternative %>%
   .[, new_avg_tax_rate := coalesce(new_tax / Taxable_Income, 0)] %>%
@@ -1380,6 +1560,11 @@ alternative %>%
   .[, variable := factor(variable, levels = unique(.$variable), ordered = TRUE)] %>%
   ggplot(aes(x = Taxable_Income_percentile, y = value, color = variable)) + 
   geom_line()
+```
+
+![plot of chunk unnamed-chunk-27](./Budget2018-atlas/unnamed-chunk-27-1.svg)
+
+```r
 
 baseline_share <- 
   bound_models[id == "Budget2018_baseline" & fy_year == "2027-28"] %>%
@@ -1409,7 +1594,10 @@ alternative %>%
   scale_y_continuous(labels = function(x) paste0(grattan_dollar(x / 1e9), " bn"))
 ```
 
-```{r budget2018-total-revenue-vs-fy-by-quintile.csv}
+![plot of chunk unnamed-chunk-27](./Budget2018-atlas/unnamed-chunk-27-2.svg)
+
+
+```r
 bound_models %>%
   .[id == "Budget2018"] %>%
   .[, Quintile := ntile(Taxable_Income, 5), keyby = "fy_year"] %>%
@@ -1425,11 +1613,14 @@ bound_models %>%
   fwrite("budget2018-total-revenue-vs-fy-by-quintile.csv")
 ```
 
-```{r revenue_foregone2018-19-bracket-creep}
+
+```r
 print(revenue_foregone(Budget_1922[["2018-19"]][["Budget2018_baseline_brackets_cpi"]]))
+#> [1] "-\\$2.3 billion"
 ```
 
-```{r}
+
+```r
 avg_tax_rate_by_percentile_brackets_cpi <-
   lapply(Budget_1922, function(x) {
     x[["Budget2018_baseline_brackets_cpi"]][, .(Taxable_Income, new_tax)]
@@ -1440,10 +1631,10 @@ avg_tax_rate_by_percentile_brackets_cpi <-
     keyby = .(fy_year, Taxable_Income_percentile = ntile(Taxable_Income, 100))]
 fwrite(avg_tax_rate_by_percentile_brackets_cpi,
        "avg_tax_rate_by_percentile_brackets_cpi.csv")
-
 ```
 
-```{r non_taxable_individuals}
+
+```r
 total_population_1516 <- 
   aus_pop_qtr_age(date = as.Date("2016-01-01"),
                   age = 15:100,
@@ -1452,11 +1643,13 @@ total_population_1516 <-
   multiply_by(s1718[1][["WEIGHT"]] / 50)
 ```
 
-```{r taxable_individuals_1718}
+
+```r
 taxable_individuals_1718 <- s1718[, sum(WEIGHT)]
 ```
 
-```{r}
+
+```r
 avg_tax_by_decile_allpersons201718 <- 
   s1718[, .(new_tax, baseline_tax = as.double(baseline_tax), Taxable_Income, WEIGHT)] %>%
   rbind(data.table(new_tax = 0,
@@ -1503,12 +1696,11 @@ avg_tax_by_decile_allpersons202728 <-
   fwrite("avg_tax_by_decile_allpersons202728.csv") %>%
   .[]
 
-
-
 ```
 
 
-```{r decile201718}
+
+```r
 decile201718 <- 
   s1718[, .(new_tax, baseline_tax = as.double(baseline_tax), Taxable_Income, WEIGHT)] %>%
   rbind(data.table(new_tax = 0,
@@ -1527,7 +1719,8 @@ decile201718 <-
   .[]
 ```
 
-```{r}
+
+```r
 Budget_1922[["2027-28"]][["Budget2018"]] %>%
   rbind(data.table(new_tax = 0,
                    baseline_tax = 0,
@@ -1540,6 +1733,15 @@ Budget_1922[["2027-28"]][["Budget2018"]] %>%
   .[, .(tot = sum(new_tax)), keyby = .(Taxable_Income_decile, min_Taxable_Income)] %>%
   .[, prop := tot / sum(tot)] %>%
   .[]
+#>    Taxable_Income_decile min_Taxable_Income        tot         prop
+#> 1:                     1                  0          0 0.0000000000
+#> 2:                     4                  0          0 0.0000000000
+#> 3:                     5              11000     692756 0.0001179139
+#> 4:                     6              24000   56360042 0.0095930310
+#> 5:                     7              37000  167886456 0.0285759187
+#> 6:                     8              50000  438633631 0.0746597389
+#> 7:                     9              68000  854864491 0.1455063068
+#> 8:                    10              98000 4356665288 0.7415470907
 
 Budget_1922[["2024-25"]][["Budget2018"]] %>%
   rbind(data.table(new_tax = 0,
@@ -1553,12 +1755,22 @@ Budget_1922[["2024-25"]][["Budget2018"]] %>%
   .[, .(tot = sum(new_tax * WEIGHT / 1e9)), keyby = .(Taxable_Income_decile, min_Taxable_Income)] %>%
   .[, prop := tot / sum(tot)] %>%
   .[]
+#>    Taxable_Income_decile min_Taxable_Income          tot         prop
+#> 1:                     1                  0   0.00000000 0.0000000000
+#> 2:                     4                  0   0.00000000 0.0000000000
+#> 3:                     5              11000   0.04636691 0.0001534935
+#> 4:                     6              24000   3.65400226 0.0120962487
+#> 5:                     7              37000  10.98884486 0.0363775910
+#> 6:                     8              50000  26.13241133 0.0865090174
+#> 7:                     9              68000  49.44407838 0.1636802125
+#> 8:                    10              98000 211.81160689 0.7011834370
 ```
 
 
 ## JD 'How not to sell a tax cut'
 
-```{r p_geq_120k_202728}
+
+```r
 p_geq_120k_202728 <- 
   bound_models[fy_year == "2027-28" & id == "Budget2018"] %$%
   mean(Taxable_Income > 120e3)
@@ -1568,7 +1780,8 @@ stopifnot(round(p_geq_120k_202728, 1) == 0.2)
 Of course, a tax cut of \$14 billion a year is a tricky sell when it benefits less than 2 in 10 of income earners in 2027-28. But the government has made its own life harder by using misleading statistics and not providing the numbers that could support its best argument.
 
 
-```{r}
+
+```r
 current_tax_paid_geq_180k <- 
   s1718 %>%
   .[, tax := income_tax(Taxable_Income, "2017-18", .dots.ATO = s1718)] %>%
@@ -1602,6 +1815,7 @@ prop_persons_geq180k_Budget202728 <-
   .[["prop"]]
 
 stopifnot(!exists("twice1"))
+#> Error in eval(expr, envir, enclos): !exists("twice1") is not TRUE
 twice1 <- 
   if (prop_persons_geq180k_Budget202728 / prop_persons_geq180k_201718 > 2) {
     "twice"
@@ -1610,9 +1824,10 @@ twice1 <-
   }
 ```
 
-Another tricky claim is that without change those earning over \$180,000 will go from paying `r current_tax_paid_geq_180k` to `r tax_paid_geq180k_Budget202728` of income tax. But this is sleight of hand: `r twice1` as many people could be expected to be earning this income -- so of course they will collectively pay a greater share of income tax.
+Another tricky claim is that without change those earning over \$180,000 will go from paying 32 per cent to 43 per cent of income tax. But this is sleight of hand: twice as many people could be expected to be earning this income -- so of course they will collectively pay a greater share of income tax.
 
-```{r}
+
+```r
 prop_tax_earnt_by_quintile_201718 <- 
   s1718[,
         .(tax_earnt_bn = sum(Taxable_Income * WEIGHT / 1e9)),
@@ -1634,9 +1849,9 @@ prop_tax_paid_by_quintile_202728_Budget <-
 ```
 
 The government's best and most honest argument is that the tax package as a whole won't materially change the progressivity of the income tax system. Without change, the top 20\% of income earners -- who earn 
-`r grattan_percent(prop_tax_earnt_by_quintile_201718[.(5L)][["prop"]])`
-per cent of taxable income -- will pay `r grattan_percent(prop_tax_paid_by_quintile_202728_baseline[.(5L)][["prop"]], digits = 3)` of income tax.
-And under the package they will pay `r grattan_percent(prop_tax_paid_by_quintile_202728_Budget[.(5L)][["prop"]], digits = 3)`.
+51 per cent
+per cent of taxable income -- will pay 65.4 per cent of income tax.
+And under the package they will pay 65 per cent.
 
 
 
