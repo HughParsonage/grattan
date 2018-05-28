@@ -623,7 +623,8 @@ avg_individual_impact_by_Bracket_fy %>%
   .[, "Income bracket" := factor(Breaks,
                                  levels = unique(Breaks),
                                  labels = grattan_dollar(unique(Breaks)),
-                                 ordered = TRUE)] %>%
+                                 ordered = TRUE)] %T>%
+  fwrite("Total-revenue-vs-fy-by-income-bracket.csv") %>%
   grplot(aes(x = `Financial year ending`, y = avg_delta, fill = `Income bracket`),
          reverse = TRUE) +
   geom_col() + 
@@ -631,7 +632,9 @@ avg_individual_impact_by_Bracket_fy %>%
   scale_y_continuous(labels = grattan_dollar) + 
   guides(fill = guide_legend(reverse = TRUE)) +
   theme(legend.position = "right")
+```
 
+```{r}
 lapply(Budget_1922, function(x) {
   x[["Budget2018"]] %>%
     setkey(Taxable_Income) %>%
@@ -648,7 +651,8 @@ lapply(Budget_1922, function(x) {
   .[, "Incomes above" := factor(Breaks,
                                 levels = unique(Breaks),
                                 labels = grattan_dollar(unique(Breaks)),
-                                ordered = TRUE)] %>%
+                                ordered = TRUE)] %T>%
+  fwrite("Total-revenue-vs-fy-by-incomes-above.csv") %>%
   grplot(aes(x = `Financial year ending`, y = avg_delta, fill = `Incomes above`)) +
   geom_col() + 
   ggtitle("Total revenue") +
@@ -1636,7 +1640,7 @@ prop_tax_paid_by_quintile_202728_Budget <-
 The government's best and most honest argument is that the tax package as a whole won't materially change the progressivity of the income tax system. Without change, the top 20\% of income earners -- who earn 
 `r grattan_percent(prop_tax_earnt_by_quintile_201718[.(5L)][["prop"]])`
 per cent of taxable income -- will pay `r grattan_percent(prop_tax_paid_by_quintile_202728_baseline[.(5L)][["prop"]], digits = 3)` of income tax.
-And under the package they will pay `r grattan_percent(prop_tax_paid_by_quintile_202728_Budget[.(5L)][["prop"]], digits = 3)`.
+And under the package they will pay `r grattan_percent(prop_tax_paid_by_quintile_202728_Budget[.(5L)][["prop"]], digits = 4)`.
 
 
 
