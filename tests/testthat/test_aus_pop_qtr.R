@@ -3,10 +3,11 @@ context("Aus pop qtr")
 test_that("Returns correct values", {
   expect_equal(aus_pop_qtr("2016-Q1"), 24122701)
   expect_gte(aus_pop_qtr("2018-Q1"), 24122701)
+  expect_gte(aus_pop_qtr("2018-Q4"), 25e6)
   # by age
   
   expect_equivalent(grattan:::aust_pop_by_age_yearqtr, aus_pop_qtr_age(tbl = TRUE))
-  expect_equal(aus_pop_qtr_age(age = 1), c(226775L, 228838L, 230676L, 232589L, 233901L, 235023L, 236046L, 
+  expect_equal(aus_pop_qtr_age(age = 1)[1:139], c(226775L, 228838L, 230676L, 232589L, 233901L, 235023L, 236046L, 
                                            237097L, 238209L, 239285L, 240219L, 241246L, 241007L, 240648L, 
                                            240264L, 239865L, 240552L, 241269L, 241865L, 242597L, 242144L, 
                                            241668L, 241309L, 241123L, 242094L, 242863L, 243728L, 244292L, 
@@ -25,7 +26,8 @@ test_that("Returns correct values", {
                                            292237L, 292749L, 293227L, 293410L, 294011L, 294311L, 294550L, 
                                            294616L, 294397L, 293969L, 293637L, 293110L, 296848L, 300623L, 
                                            304219L, 307681L, 308917L, 309894L, 310986L, 311858L, 310855L, 
-                                           309617L, 308503L, 307228L, 307658L, 307941L, 308384L))
+                                           309617L, 308503L, 307228L, 307658L, 307941L, 308384L),
+               tol = 1)
   expect_equal(aus_pop_qtr_age(date = as.Date("2015-01-01")), 
                c(309617L, 312599L, 306541L, 303699L, 305330L, 303537L, 300446L, 
                  297943L, 293234L, 286061L, 282031L, 279984L, 281517L, 284300L, 
@@ -40,13 +42,15 @@ test_that("Returns correct values", {
                  176760L, 165396L, 157278L, 147678L, 140354L, 132014L, 124122L, 
                  117245L, 109200L, 100965L, 94738L, 89194L, 85082L, 80922L, 74057L, 
                  66857L, 59752L, 52432L, 45257L, 38161L, 31289L, 25353L, 20199L, 
-                 15161L, 10386L, 6943L, 5041L, 3669L, 2590L, 4130L))
+                 15161L, 10386L, 6943L, 5041L, 3669L, 2590L, 4130L), 
+               tol = 10e3)
 })
 
 test_that("Multiple unordered", {
   expect_equal(aus_pop_qtr_age(date = as.Date(c("2015-12-01", "2013-12-01", "2014-12-01")), 
                                age = c(2, 1, 3)), 
-               c(311984, 309894, 306541))
+               c(311984, 309894, 306541), 
+               tol = 1000)
 })
 
 test_that("Rolls work as expected", {
@@ -59,6 +63,7 @@ test_that("Rolls work as expected", {
 test_that("Error handling", {
   expect_error(aus_pop_qtr("2016 Q0"), "Entry 1 was not in the correct form")
   expect_error(aus_pop_qtr(c("2016 Q0", "2016-Q2", "19999")), "Entries 1 and 3 were not in the correct form")
+  expect_error(aus_pop_qtr(c("2016 Q0", "2016-Q-", "19999")), "There were 2 other bad entries.")
   expect_error(aus_pop_qtr(c("2016 Q0", "2016 q1")), "Entries 1 and 2 were not in the correct form")
   
   expect_error(aus_pop_qtr_age(date = "2015-01-01"))

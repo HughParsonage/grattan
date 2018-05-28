@@ -14,9 +14,9 @@ aus_pop_qtr <- function(date_quarter,
     switch(min(length(bad_qtrs), 3),
            stop("Entry ", bad_qtrs, " was not in the correct form."),
            stop("Entries ", bad_qtrs[1], " and ", bad_qtrs[2], " were not in the correct form."),
-           stop("Entry ", bad_qtrs[1], " were not in the right form. ", 
+           stop("Entry ", bad_qtrs[1], " was not in the right form. ", 
                 "There were ", length(bad_qtrs) - 1,
-                "other bad entries."))
+                " other bad entries."))
   }
   
   pop_data <- aus_pop_by_yearqtr

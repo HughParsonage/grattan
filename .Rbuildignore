@@ -12,6 +12,7 @@
 ^timings$
 ^docs$
 ^vignettes/lito-analysis-budget2018\\.R$
+^vignettes/long-vignettes$
 
 ^vignettes/avg-impact-vs-fy-ending-vs-Quintile\.pptx$
 ^vignettes/avg_tax_rates-by-facet-percentile\.csv$

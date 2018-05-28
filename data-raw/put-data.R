@@ -690,15 +690,54 @@ Age_pension_deeming_rates_by_Date <-
   .[, type := gsub("_", " ", gsub("threshold_", "", type, fixed = TRUE))] %>%
   .[, .(Date, type, threshold, deeming_rate_below, deeming_rate_above)]
 
+.aus_pop_by_age_yearqtr <-
+  rsdmx::readSDMX(paste0("http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/ERP_QUARTERLY/1.0.3.0",
+                         paste0(c("", 1:100), collapse = "+"),
+                         ".Q/all?startTime=1981-Q3")) %>%
+  as.data.frame %>%
+  as.data.table 
+
+if ("AGE" %in% names(.aus_pop_by_age_yearqtr)) {
+  setnames(.aus_pop_by_age_yearqtr, "AGE", "Age")
+}
+
+if (nrow(.aus_pop_by_age_yearqtr) > 14e3L) {
+  fwrite(drop_constant_cols(.aus_pop_by_age_yearqtr), 
+         file = "./data-raw/Estim-Resi-Pop-by-age-1981-present.csv")
+}
+
+.aus_pop_by_yearqtr <-
+  rsdmx::readSDMX("http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/ERP_QUARTERLY/1.0.3.TT.Q/all?startTime=1981-Q3&endTime=2017-Q3") %>%
+  as.data.frame %>%
+  as.data.table
+
+
+
+if (nrow(.aus_pop_by_yearqtr) > 145) {
+  fwrite(drop_constant_cols(.aus_pop_by_yearqtr), 
+         file = "./data-raw/Estim-Res-Pop-1981-present.tsv",
+         sep = "\t")
+}
+
+austres_reshaped <- 
+  data.table(obsTime = paste0(floor(1971 + seq_along(austres) / 4),
+                              "-Q", 1 + seq_along(austres) %% 4),
+             obsValue = as.integer(1000 * as.numeric(austres))) %>%
+  .[obsTime < "1981-Q3"]
+
 aus_pop_by_yearqtr <- 
-  fread("./data-raw/Estim-Res-Pop-1981-2017.tsv")
+  rbind(austres_reshaped, 
+        fread("./data-raw/Estim-Res-Pop-1981-present.tsv")) %>%
+  setkey(obsTime)
 
 aust_pop_by_age_yearqtr <- 
-  fread("./data-raw/Estim-Resi-Pop-by-age-1981-2016.csv", 
-        select = c("Age", "Time", "Value")) %>%
+  fread("./data-raw/Estim-Resi-Pop-by-age-1981-present.csv") %>%
+  .[, Q := as.integer(substr(obsTime, 7, 7))] %>%
+  .[, Y := substr(obsTime, 0, 4)] %>%
+  .[, date_char := paste0("01-", month.name[(Q)*3], "-", Y)] %>%
   .[, .(Age, 
-        Date = as.Date(paste0("01-", Time), format = "%d-%b-%y"),
-        Value)] %>%
+        Date = as.Date(date_char, format = "%d-%B-%Y"),
+        Value = obsValue)] %>%
   setkey(Age, Date)
 
 download.file("http://www.ausstats.abs.gov.au/ausstats/meisubs.nsf/LatestTimeSeries/5206001_key_aggregates/$FILE/5206001_key_aggregates.xls",
