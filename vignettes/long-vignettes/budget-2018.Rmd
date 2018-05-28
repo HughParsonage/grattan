@@ -32,6 +32,9 @@ if (FALSE) {
     file.copy(svg,
               file.path("~/grattan/docs/articles/long-vignettes/Budget2018-atlas/", 
                         basename(svg)))
+    file.copy(svg,
+              file.path("~/grattan/docs/articles/long-vignettes/budget-2018_files/", 
+                        basename(svg)))
   }
   
   change_pngs <- function(html) {
