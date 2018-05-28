@@ -1,40 +1,41 @@
+  0.0	RUNTIME-CHECKS
   0.0	unnamed-chunk-1
-  0.6	unnamed-chunk-2
-  5.0	unnamed-chunk-3
-  2.2	sample_files_all
+  0.4	unnamed-chunk-2
+  4.4	unnamed-chunk-3
+  2.1	sample_files_all
   0.0	revenue_foregone
   1.0	unnamed-chunk-4
-  1.6	unnamed-chunk-5
+  1.4	unnamed-chunk-5
   0.6	unnamed-chunk-6
   0.0	wage_forecasts
   0.0	lf_forecasts
   0.0	unnamed-chunk-7
   0.0	do_medicare_levy
-  6.5	project_useTreasurys
-  7.7	.project_useGrattans
+  6.2	project_useTreasurys
+  7.6	.project_useGrattans
   0.1	unnamed-chunk-8
-  6.5	.project_useGrattans80
-  6.7	.project_useGrattans20
-  6.8	.project_useGrattans2.75
+  6.3	.project_useGrattans80
+  6.3	.project_useGrattans20
+  6.5	.project_useGrattans2.75
   0.0	model_Budgets
- 96.8	Budget_1922
-117.6	Budget_1922_Grattan
-146.2	Budget_1922_Grattan80
-167.4	Budget_1922_Grattan20
-186.6	Budget_1922_Grattan2.75
-  1.0	Budget-summaries
-  1.1	Budget-summaries-Grattan
+ 91.3	Budget_1922
+103.9	Budget_1922_Grattan
+130.1	Budget_1922_Grattan80
+145.3	Budget_1922_Grattan20
+167.1	Budget_1922_Grattan2.75
+  1.1	Budget-summaries
+  1.0	Budget-summaries-Grattan
   1.0	Budget-summaries-Grattan-80
-  1.0	Budget-summaries-Grattan-20
-  5.6	unnamed-chunk-9
-  3.1	avg_individual_impact_by_Quintile_fy
+  0.9	Budget-summaries-Grattan-20
+  5.3	unnamed-chunk-9
+  3.0	avg_individual_impact_by_Quintile_fy
   2.8	unnamed-chunk-10
-  3.9	unnamed-chunk-11
+  3.7	unnamed-chunk-11
   3.8	unnamed-chunk-12
-  1.0	unnamed-chunk-13
+  0.9	unnamed-chunk-13
   0.1	unnamed-chunk-14
-  0.1	unnamed-chunk-15
-  5.1	unnamed-chunk-16
+  0.0	unnamed-chunk-15
+  4.4	unnamed-chunk-16
   0.4	avg_tax_rates_by_percentile_Budget_202728_vs_201718
   0.4	avg_tax_rates_by_percentile_Budget_202728_vs_201718_with_PI
   0.0	unnamed-chunk-17
@@ -44,31 +45,31 @@
   0.0	unnamed-chunk-20
   0.0	unnamed-chunk-21
   0.0	unnamed-chunk-22
-  1.1	unnamed-chunk-23
-  1.5	avg_tax_rate_by_percentile_fy_year_rel0304
- 18.8	bound_models
- 18.8	bound_models_Grattan
- 19.4	bound_models_Grattan20
- 27.1	bound_models_Grattan80
- 52.1	bound_models_wage2.75
-  4.8	unnamed-chunk-24
- 14.3	progressivities
-  3.0	progressivity_80
-  2.9	progressivity_20
+  0.6	unnamed-chunk-23
+  1.6	avg_tax_rate_by_percentile_fy_year_rel0304
+ 18.9	bound_models
+ 18.5	bound_models_Grattan
+ 19.1	bound_models_Grattan20
+ 19.5	bound_models_Grattan80
+ 42.4	bound_models_wage2.75
+  8.7	unnamed-chunk-24
+ 13.8	progressivities
+  2.9	progressivity_80
+  3.1	progressivity_20
   3.2	progressivity2.75
   0.6	progressivity2-75-plot
- 10.6	unnamed-chunk-25
- 10.7	unnamed-chunk-26
- 15.7	unnamed-chunk-27
- 13.6	unnamed-chunk-28
-  2.1	budget2018-total-revenue-vs-fy-by-quintile.csv
+ 10.1	unnamed-chunk-25
+ 10.9	unnamed-chunk-26
+ 15.3	unnamed-chunk-27
+ 12.5	unnamed-chunk-28
+  2.0	budget2018-total-revenue-vs-fy-by-quintile.csv
   0.0	revenue_foregone2018-19-bracket-creep
-  0.6	unnamed-chunk-29
+  0.5	unnamed-chunk-29
   0.0	non_taxable_individuals
   0.0	taxable_individuals_1718
   0.7	unnamed-chunk-30
-  0.6	decile201718
-  0.7	unnamed-chunk-31
-  0.1	p_geq_120k_202728
+  0.2	decile201718
+  0.5	unnamed-chunk-31
+  0.4	p_geq_120k_202728
   1.0	unnamed-chunk-32
   0.2	unnamed-chunk-33

@@ -11,12 +11,13 @@ output:
 
 Width: `r getOption("width", "XXX")`.
 ```{r opts}
-options(width = 100)
+options(width = 110)
 ```
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  error = FALSE,
   comment = "#>",
   fig.width = 9,
   fig.height = 7,
@@ -24,6 +25,15 @@ knitr::opts_chunk$set(
   fig.path = "./Budget2018-atlas/"
 )
 if (FALSE) {
+  for (svg in dir(path = "~/grattan/vignettes/long-vignettes/Budget2018-atlas/", 
+                  pattern = "\\.svg$", 
+                  full.names = TRUE)) {
+    
+    file.copy(svg,
+              file.path("~/grattan/docs/articles/long-vignettes/Budget2018-atlas/", 
+                        basename(svg)))
+  }
+  
   change_pngs <- function(html) {
     html_lines <- readr::read_lines(html)
     for (i in grep("((Budget2018.atlas)|(budget.2018_files)).*\\.png", html_lines)) {
@@ -60,7 +70,11 @@ if (isTRUE(getOption("knitr.in.progress"))) {
   knitr::opts_chunk$set(timeit = TRUE)
   START.TIME <- Sys.time()
 }
+```
+
+```{r RUNTIME-CHECKS}
 stopifnot(file.exists("../../DESCRIPTION"))
+stopifnot(!isFALSE(getOption("knitr.use.stringr")))
 ```
 
 ```{r}
@@ -881,14 +895,15 @@ bracket creep by the plan. A taxpayer who earns
 `r decile2income(10)` 
 today (more
 than 90% of other taxpayers) will pay an average tax rate of 
-`r avg_tax_rates_by_percentile_facet_fy[.("Budget2018", "2027-28", 90L)][['avg_tax_rate']] %>% percent` in
-2027-28, unchanged from today. In contrast, average tax rates for
+`r avg_tax_rates_by_percentile_facet_fy[.("Budget2018", "2027-28", 90L)][['avg_tax_rate']] %>% grattan_percent` in
+2027-28, unchanged from today. 
+In contrast, average tax rates for
 middle-income earners will continue to rise. The average tax rate for a
 taxpayer who earns `r decile2income(4)`-a-year today (more than 30% of other
 taxpayers) will increase 6 percentage points (from 
-`r avg_tax_rates_by_percentile_facet_fy[.("Current", "2017-18", 40L)][['avg_tax_rate']] %>% percent`
+`r avg_tax_rates_by_percentile_facet_fy[.("Current", "2017-18", 40L)][['avg_tax_rate']] %>% grattan_percent`
 to
-`r avg_tax_rates_by_percentile_facet_fy[.("Budget2018", "2027-28", 40L)][['avg_tax_rate']] %>% percent`
+`r avg_tax_rates_by_percentile_facet_fy[.("Budget2018", "2027-28", 40L)][['avg_tax_rate']] %>% grattan_percent`
 ). As a
 result, the highest-income taxpayers will bear a lower share of the
 total tax burden.

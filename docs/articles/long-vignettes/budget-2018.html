@@ -87,15 +87,17 @@
             
             <h4 class="date">2018-05-28</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/HughParsonage/grattan/blob/master/vignettes/long-vignettes/vignettes/long-vignettes/budget-2018.Rmd"><code>vignettes/long-vignettes/vignettes/long-vignettes/budget-2018.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/HughParsonage/grattan/blob/master/vignettes/long-vignettes/budget-2018.Rmd"><code>vignettes/long-vignettes/budget-2018.Rmd</code></a></small>
       <div class="hidden name"><code>budget-2018.Rmd</code></div>
 
     </div>
 
     
     
-<p>Width: 75width“,”XXX“)`.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">width =</span> <span class="dv">100</span>)</code></pre></div>
+<p>Width: 75.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">width =</span> <span class="dv">110</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">stopifnot</span>(<span class="kw">file.exists</span>(<span class="st">"../../DESCRIPTION"</span>))
+<span class="kw">stopifnot</span>(<span class="op">!</span><span class="kw">isFALSE</span>(<span class="kw">getOption</span>(<span class="st">"knitr.use.stringr"</span>)))</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grattan_percent &lt;-<span class="st"> </span><span class="cf">function</span>(number, <span class="dt">digits =</span> <span class="dv">1</span>, <span class="dt">.percent.suffix =</span> <span class="st">" per cent"</span>) {
   grattanCharts<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/grattanCharts/topics/grattan_percent">grattan_percent</a></span>(number, digits, .percent.suffix)
 }</code></pre></div>
@@ -1324,7 +1326,7 @@ avg_individual_impact_by_Quintile_fy <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">FALSE</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.line.x =</span> <span class="kw">element_line</span>(<span class="dt">size =</span> <span class="fl">0.5</span>),
         <span class="dt">legend.position =</span> <span class="st">"right"</span>)</code></pre></div>
-<p><img src="Budget2018-atlas/avg_individual_impact_by_Quintile_fy-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/avg_individual_impact_by_Quintile_fy-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">avg_individual_impact_by_Quintile_fy &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">lapply</span>(Budget_1922_Grattan2.<span class="dv">75</span>, <span class="cf">function</span>(x) {
     x[[<span class="st">"Budget2018"</span>]] <span class="op">%&gt;%</span>
@@ -1355,7 +1357,7 @@ avg_individual_impact_by_Quintile_fy <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">FALSE</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.line.x =</span> <span class="kw">element_line</span>(<span class="dt">size =</span> <span class="fl">0.5</span>),
         <span class="dt">legend.position =</span> <span class="st">"right"</span>)</code></pre></div>
-<p><img src="Budget2018-atlas/unnamed-chunk-10-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/unnamed-chunk-10-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Brackets &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">data.table</span>(<span class="dt">Breaks =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">37e3</span>, <span class="fl">41e3</span>, <span class="fl">87e3</span>, <span class="fl">90e3</span>, <span class="fl">120e3</span>, <span class="fl">180e3</span>, <span class="fl">200e3</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, Taxable_Income <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">as.integer</span>(Breaks)] <span class="op">%&gt;%</span>
@@ -1391,7 +1393,7 @@ avg_individual_impact_by_Bracket_fy <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>)
 <span class="co">#&gt; I'm going off-piste: The Palette Of Nine is thine. May John have mercy on your soul.</span></code></pre></div>
-<p><img src="Budget2018-atlas/unnamed-chunk-11-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/unnamed-chunk-11-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(Budget_<span class="dv">1922</span>, <span class="cf">function</span>(x) {
   x[[<span class="st">"Budget2018"</span>]] <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">setkey</span>(Taxable_Income) <span class="op">%&gt;%</span>
@@ -1417,7 +1419,7 @@ avg_individual_impact_by_Bracket_fy <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>)
 <span class="co">#&gt; I'm going off-piste: The Palette Of Nine is thine. May John have mercy on your soul.</span></code></pre></div>
-<p><img src="Budget2018-atlas/unnamed-chunk-12-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/unnamed-chunk-12-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cost_by_policy &lt;-
 <span class="st">  </span><span class="kw">sapply</span>(Budget_<span class="dv">1922</span>, sapply, revenue_foregone, <span class="dt">USE.NAMES =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>rowSums <span class="op">%&gt;%</span>
@@ -1555,7 +1557,7 @@ cost_in_202728_top20 &lt;-<span class="st"> </span>
         <span class="dt">axis.line.x =</span> <span class="kw">element_line</span>(<span class="dt">size =</span> <span class="fl">0.5</span>),
         <span class="dt">legend.title =</span> <span class="kw">element_blank</span>(),
         <span class="dt">legend.justification =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</code></pre></div>
-<p><img src="Budget2018-atlas/avg_tax_rates_by_percentile_Budget_202728_vs_201718-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/avg_tax_rates_by_percentile_Budget_202728_vs_201718-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">avg_tax_rates_by_percentile_facet_fy <span class="op">%&gt;%</span>
 <span class="st">  </span>.[facet <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"Baseline"</span>, <span class="st">"Budget 2018"</span>, <span class="st">"2017-18"</span>, 
                  <span class="st">"Budget 2018 (20% wage forecast)"</span>, 
@@ -1592,16 +1594,17 @@ cost_in_202728_top20 &lt;-<span class="st"> </span>
         <span class="dt">axis.line.x =</span> <span class="kw">element_line</span>(<span class="dt">size =</span> <span class="fl">0.5</span>),
         <span class="dt">legend.title =</span> <span class="kw">element_blank</span>(),
         <span class="dt">legend.justification =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>))</code></pre></div>
-<p><img src="Budget2018-atlas/avg_tax_rates_by_percentile_Budget_202728_vs_201718_with_PI-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/avg_tax_rates_by_percentile_Budget_202728_vs_201718_with_PI-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">decile2income &lt;-<span class="st"> </span><span class="cf">function</span>(d) {
   d &lt;-<span class="st"> </span><span class="kw">as.integer</span>(d)
   <span class="kw">grattan_dollar</span>(minIncome_by_decile[.(d)][[<span class="st">"minIncome"</span>]])
 }</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">texNumD &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">texNum</span>(x, <span class="dt">dollar =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<p>New Grattan Institute analysis highlights that most of the revenue reductions from the Turnbull Government’s full Personal Income Tax Plan are the result of lower taxes on high-income earners. Once the three-stage plan – including removing the 37c bracket – is complete, <strong>$15.5~billion</strong> of the annual **$21.5~billion* of the plan will result from collecting less tax from the top 20% of income earners, who currently have a taxable income of $68,000 plan will do little to unwind bracket creep’s gradual reduction of the progressivity of the tax system. Even with the PIT plan, average tax rates are forecast to be higher for all taxpayers in 2027-28 – except for very high-income earners who are effectively shielded from bracket creep by the plan. A taxpayer who earns $117,000n 90% of other taxpayers) will pay an average tax rate of 28.9%y[.(“Budget2018”, “2027-28”, 90L)][[‘avg_tax_rate’]] %&gt;% percent<code>in 2027-28, unchanged from today. In contrast, average tax rates for middle-income earners will continue to rise. The average tax rate for a taxpayer who earns $27,000e than 30% of other taxpayers) will increase 6 percentage points (from  9.2%y[.("Current", "2017-18", 40L)][['avg_tax_rate']] %&gt;% percent</code> to 14.7%y[.(“Budget2018”, “2027-28”, 40L)][[‘avg_tax_rate’]] %&gt;% percent` ). As a result, the highest-income taxpayers will bear a lower share of the total tax burden.</p>
+<p>New Grattan Institute analysis highlights that most of the revenue reductions from the Turnbull Government’s full Personal Income Tax Plan are the result of lower taxes on high-income earners. Once the three-stage plan – including removing the 37c bracket – is complete, <strong>$15.5~billion</strong> of the annual <strong>$21.5~billion cost</strong> of the plan will result from collecting less tax from the top 20% of income earners, who currently have a taxable income of $68,000 or more.</p>
+<p>The PIT plan will do little to unwind bracket creep’s gradual reduction of the progressivity of the tax system. Even with the PIT plan, average tax rates are forecast to be higher for all taxpayers in 2027-28 – except for very high-income earners who are effectively shielded from bracket creep by the plan. A taxpayer who earns $117,000 today (more than 90% of other taxpayers) will pay an average tax rate of 29 per cent in 2027-28, unchanged from today. In contrast, average tax rates for middle-income earners will continue to rise. The average tax rate for a taxpayer who earns $27,000-a-year today (more than 30% of other taxpayers) will increase 6 percentage points (from 9 per cent to 15 per cent ). As a result, the highest-income taxpayers will bear a lower share of the total tax burden.</p>
 <p><strong>Costing and distributional analysis of PIT plan </strong></p>
 <p>The 2018-19 budget shows the annual cost of the PIT Plan until 2022. The Treasurer has indicated the ten-year cost of the plan is $140 billion. Grattan’s analysis shows the annual costs of the plan until 2028. The Grattan costing takes into account all elements of the PIT plan.</p>
-<p>Most of the revenue reductions until 2021-22 are a result of the Low and Middle Income Tax Offset (“the Lamington”). But once the plan is fully implemented in 2024-25, there are much bigger revenue reductions because the top of the 32.5 cent bracket increases first to $120,000 and then to $200,000 (removing the 37c bracket). In 2028, these bracket changes account for <span class="math inline">\(-\)</span>$21.1~billion2[[“2027-28”]][[“Budget2018_just_rates”]], FALSE))<code>of the \(-\)\$21.5~billion2[["2027-28"]][["Budget2018"]]))</code> in lower revenue.</p>
+<p>Most of the revenue reductions until 2021-22 are a result of the Low and Middle Income Tax Offset (“the Lamington”). But once the plan is fully implemented in 2024-25, there are much bigger revenue reductions because the top of the 32.5 cent bracket increases first to $120,000 and then to $200,000 (removing the 37c bracket). In 2028, these bracket changes account for <span class="math inline">\(-\)</span>$21.1~billion of the <span class="math inline">\(-\)</span>$21.5~billion in lower revenue.</p>
 <p>Once fully implemented, most of the reduction in revenue under the PIT is retained by the top 20% of income earners, with a taxable income of $87,000 or more. In 2028, the reduction in tax collected from this group will account for <strong>$15 billion</strong> of the $25 billion cost of the plan.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Quintile and financial year to tax cut</span>
 Qfy2Cut &lt;-<span class="st"> </span><span class="cf">function</span>(Quintile, fy) {
@@ -1609,10 +1612,11 @@ Qfy2Cut &lt;-<span class="st"> </span><span class="cf">function</span>(Quintile,
   ans &lt;-<span class="st"> </span><span class="op">-</span><span class="dv">1</span><span class="op">*</span>avg_individual_impact_by_Quintile_fy[.(fy, q)][[<span class="st">"avg_delta"</span>]]
   <span class="kw">grattan_dollar</span>(<span class="kw">round</span>(ans, <span class="op">-</span><span class="dv">2</span>))
 }</code></pre></div>
-<p>By 2024-25, the income tax cuts are much larger for high-income earners, both in absolute terms and as a proportion of income. Those in the top 20 per cent will get an average tax cut of $4,300 a year, compared to $400 a year for someone in the second income quintile ($9,0$19,000 <strong>Impact of the PIT plan on tax system progressivity</strong></p>
+<p>By 2024-25, the income tax cuts are much larger for high-income earners, both in absolute terms and as a proportion of income. Those in the top 20 per cent will get an average tax cut of $4,300 a year, compared to $400 a year for someone in the second income quintile ($9,000 - $19,000).</p>
+<p><strong>Impact of the PIT plan on tax system progressivity</strong></p>
 <p>Australia’s progressive tax system ensures that people with higher incomes pay higher average rates of personal income tax. Without changes to tax scales, bracket creep gradually increases average tax rates for all taxpayers. Middle-income earners are affected most in terms of higher average tax rates.</p>
 <p>The government claims the PIT plan protects middle-income Australians from bracket creep. Certainly the plan reduces average tax rates in 2027-28 for all taxpayers compared to what they would be if there were no changes to rates or brackets over that period.</p>
-<p>But middle-income earners are not spared from bracket creep under the PIT plan. The average tax rate for a taxpayer at the 50<sup>th</sup> percentile will still increase by 5ates_by_percentile_facet_fy[.(“Budget2018”, “2027-28”, 50L)][[‘avg_tax_rate’]] - avg_tax_rates_by_percentile_facet_fy[.(“Current”, “2017-18”, 50L)][[‘avg_tax_rate’]]))<code>percentage points (from  14.6%ntile_facet_fy[.("Current", "2017-18", 50L)][['avg_tax_rate']] %&gt;% percent</code> to 19.1%ntile_facet_fy[.(“Budget2018”, “2027-28”, 50L)][[‘avg_tax_rate’]] %&gt;% percent` ) compared to 2017-18. Without further changes, average tax rates will be higher for most taxpayers.</p>
+<p>But middle-income earners are not spared from bracket creep under the PIT plan. The average tax rate for a taxpayer at the 50<sup>th</sup> percentile will still increase by 5 percentage points (from 14.6% to 19.1% ) compared to 2017-18. Without further changes, average tax rates will be higher for most taxpayers.</p>
 <p>The exception is the top 10% of income earners. Average tax rates for those on the highest incomes are virtually unchanged under this plan.</p>
 <p>Once fully implemented, the PIT plan doesn’t change the progressivity of the tax system much. Overall, those on high incomes will pay a similar proportion of total tax revenues with or without the plan. But because of bracket creep, high income earners will be paying a lower proportion than today.</p>
 <p><strong>Table 1: Share of personal income tax paid falls for highest income earners under PIT plan </strong></p>
@@ -1810,9 +1814,9 @@ scale10 &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> percent) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">"Average tax rates relative to 2017-18"</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>)
-<span class="co">#&gt; Scale for 'colour' is already present. Adding another scale for 'colour', which will replace the</span>
-<span class="co">#&gt; existing scale.</span></code></pre></div>
-<p><img src="Budget2018-atlas/unnamed-chunk-23-1.svg" width="864"></p>
+<span class="co">#&gt; Scale for 'colour' is already present. Adding another scale for 'colour', which will replace the existing</span>
+<span class="co">#&gt; scale.</span></code></pre></div>
+<p><img src="Budget2018-atlas/unnamed-chunk-23-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_files_all <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, .(<span class="dt">avg_tax_rate =</span> <span class="kw">mean</span>(avg_tax_rate)), keyby =<span class="st"> </span>.(fy.year, Taxable_Income_percentile)] <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">setnames</span>(<span class="st">"fy.year"</span>, <span class="st">"fy_year"</span>) <span class="op">%&gt;%</span>
@@ -1869,9 +1873,9 @@ scale10 &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
 <span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">"Average tax rates relative to 2003-04"</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>fy_year)
-<span class="co">#&gt; Scale for 'colour' is already present. Adding another scale for 'colour', which will replace the</span>
-<span class="co">#&gt; existing scale.</span></code></pre></div>
-<p><img src="Budget2018-atlas/avg_tax_rate_by_percentile_fy_year_rel0304-1.svg" width="864"></p>
+<span class="co">#&gt; Scale for 'colour' is already present. Adding another scale for 'colour', which will replace the existing</span>
+<span class="co">#&gt; scale.</span></code></pre></div>
+<p><img src="Budget2018-atlas/avg_tax_rate_by_percentile_fy_year_rel0304-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bound_models &lt;-<span class="st"> </span>
 <span class="st">  </span>Budget_<span class="dv">1922</span> <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">lapply</span>(rbindlist, <span class="dt">use.names =</span> <span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">idcol =</span> <span class="st">"id"</span>) <span class="op">%&gt;%</span>
@@ -1905,7 +1909,7 @@ scale10 &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
 <span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="st">"Taxable income"</span>, <span class="dt">labels =</span> grattan_dollar, <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">225e3</span>)) 
 <span class="co">#&gt; Warning: Removed 75 rows containing missing values (geom_path).</span></code></pre></div>
-<p><img src="Budget2018-atlas/unnamed-chunk-24-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/unnamed-chunk-24-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list</span>(
   {
     sample_files_all <span class="op">%&gt;%</span>
@@ -1931,7 +1935,7 @@ scale10 &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
 <span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>,
         <span class="dt">legend.title =</span> <span class="kw">element_blank</span>())</code></pre></div>
-<p><img src="Budget2018-atlas/progressivities-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/progressivities-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">progressivity_<span class="dv">80</span> &lt;-<span class="st"> </span>
 <span class="st">  </span>bound_models_Grattan80 <span class="op">%&gt;%</span>
 <span class="st">  </span>.[id <span class="op">==</span><span class="st"> "Budget2018"</span>] <span class="op">%&gt;%</span>
@@ -1962,7 +1966,7 @@ scale10 &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
 <span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>,
         <span class="dt">legend.title =</span> <span class="kw">element_blank</span>())</code></pre></div>
-<p><img src="Budget2018-atlas/progressivity2-75-plot-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/progressivity2-75-plot-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">avg_tax_rates_by_percentile_facet_fy_historical &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">list</span>(
   {
@@ -2009,7 +2013,7 @@ bound_models[id <span class="op">%ein%</span><span class="st"> </span><span clas
 <span class="st">  </span>.[, delta <span class="op">:</span><span class="er">=</span><span class="st"> `</span><span class="dt">With SBTO</span><span class="st">`</span> <span class="op">-</span><span class="st"> `</span><span class="dt">No SBTO</span><span class="st">`</span>] <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> fy_year, <span class="dt">y =</span> delta, <span class="dt">fill =</span> policy)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">"dodge"</span>)</code></pre></div>
-<p><img src="Budget2018-atlas/unnamed-chunk-26-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/unnamed-chunk-26-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bound_models[id <span class="op">%ein%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"Budget2018"</span>, <span class="st">"ALP2018"</span>,
                         <span class="st">"Budget2018_no_SBTO"</span>, <span class="st">"ALP2018_no_SBTO"</span>,
                         <span class="st">"Budget2018_baseline"</span>, <span class="st">"Budget2018_baseline_no_SBTO"</span>)] <span class="op">%&gt;%</span>
@@ -2027,7 +2031,7 @@ bound_models[id <span class="op">%ein%</span><span class="st"> </span><span clas
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Taxable_Income_percentile, <span class="dt">y =</span> revi, <span class="dt">color =</span> fy_year)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>policy) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>() </code></pre></div>
-<p><img src="Budget2018-atlas/unnamed-chunk-27-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/unnamed-chunk-27-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s202728_in_<span class="dv">1920</span> &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw"><a href="../../reference/model_income_tax.html">model_income_tax</a></span>(s1819,
                    <span class="st">"2017-18"</span>, 
@@ -2071,7 +2075,7 @@ alternative <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, variable <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">factor</span>(variable, <span class="dt">levels =</span> <span class="kw">unique</span>(.<span class="op">$</span>variable), <span class="dt">ordered =</span> <span class="ot">TRUE</span>)] <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Taxable_Income_percentile, <span class="dt">y =</span> value, <span class="dt">color =</span> variable)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
-<p><img src="Budget2018-atlas/unnamed-chunk-28-1.svg" width="864"></p>
+<p><img src="Budget2018-atlas/unnamed-chunk-28-1.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 baseline_share &lt;-<span class="st"> </span>
 <span class="st">  </span>bound_models[id <span class="op">==</span><span class="st"> "Budget2018_baseline"</span> <span class="op">&amp;</span><span class="st"> </span>fy_year <span class="op">==</span><span class="st"> "2027-28"</span>] <span class="op">%&gt;%</span>
@@ -2099,7 +2103,7 @@ alternative <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Taxable_Income_decile, <span class="dt">y =</span> value, <span class="dt">fill =</span> variable)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">"dodge"</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> <span class="cf">function</span>(x) <span class="kw">paste0</span>(<span class="kw">grattan_dollar</span>(x <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>), <span class="st">" bn"</span>))</code></pre></div>
-<p><img src="Budget2018-atlas/unnamed-chunk-28-2.svg" width="864"></p>
+<p><img src="Budget2018-atlas/unnamed-chunk-28-2.png" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bound_models <span class="op">%&gt;%</span>
 <span class="st">  </span>.[id <span class="op">==</span><span class="st"> "Budget2018"</span>] <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, Quintile <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">ntile</span>(Taxable_Income, <span class="dv">5</span>), keyby =<span class="st"> "fy_year"</span>] <span class="op">%&gt;%</span>
@@ -2284,7 +2288,7 @@ twice1 &lt;-<span class="st"> </span>
   } <span class="cf">else</span> {
     twice1
   }</code></pre></div>
-<p>Another tricky claim is that without change those earning over $180,000 will go from paying 32 per cent to 43 per cent728` of income tax. But this is sleight of hand: twiceld be expected to be earning this income – so of course they will collectively pay a greater share of income tax.</p>
+<p>Another tricky claim is that without change those earning over $180,000 will go from paying 32 per cent to 43 per cent of income tax. But this is sleight of hand: twice as many people could be expected to be earning this income – so of course they will collectively pay a greater share of income tax.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">prop_tax_earnt_by_quintile_<span class="dv">201718</span> &lt;-<span class="st"> </span>
 <span class="st">  </span>s1718[,
         .(<span class="dt">tax_earnt_bn =</span> <span class="kw">sum</span>(Taxable_Income <span class="op">*</span><span class="st"> </span>WEIGHT <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>)),
@@ -2303,7 +2307,7 @@ prop_tax_paid_by_quintile_202728_Budget &lt;-<span class="st"> </span>
 <span class="st">  </span>.[, .(<span class="dt">tax_paid =</span> <span class="kw">sum</span>(<span class="kw">as.numeric</span>(new_tax))), keyby =<span class="st"> </span>.(<span class="dt">Quintile =</span> <span class="kw">ntile</span>(Taxable_Income, <span class="dv">5</span>))] <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, prop <span class="op">:</span><span class="er">=</span><span class="st"> </span>tax_paid <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tax_paid)] <span class="op">%&gt;%</span>
 <span class="st">  </span>.[]</code></pre></div>
-<p>The government’s best and most honest argument is that the tax package as a whole won’t materially change the progressivity of the income tax system. Without change, the top 20% of income earners – who earn 51 per cent per cent of taxable income – will pay 65.4 per centrop“]], digits = 3)<code>of income tax. And under the package they will pay 64.98 per centp"]], digits = 4)</code>.</p>
+<p>The government’s best and most honest argument is that the tax package as a whole won’t materially change the progressivity of the income tax system. Without change, the top 20% of income earners – who earn 51 per cent per cent of taxable income – will pay 65.4 per cent of income tax. And under the package they will pay 64.98 per cent.</p>
 </div>
   </div>
 
