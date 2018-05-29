@@ -3,9 +3,9 @@
 
 ### Test environments:
 * Local Windows CRAN 3.5.0 and R-devel (r74750): 
-* Travis-CI: Ubuntu 14.04. R 3.4, 3.5, and dev (r74758)
+* Travis-CI: Ubuntu 14.04. R 3.4, 3.5, and dev (r74786)
 * Appveyor: dev (r74750) and release.
-* winbuilder: dev and release.
+* winbuilder: dev (r74786) and release.
 
 
 
