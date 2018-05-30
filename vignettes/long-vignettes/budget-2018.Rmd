@@ -433,6 +433,7 @@ model_Budgets <- function(fy_year,
       Budget2018_lito_202223 = lito_202223,
       Budget2018_watr = watr,
       ...) %>%
+      .[, .(Ind, age_range, Total_PP_BE_amt, Total_NPP_BE_amt, Taxable_Income, new_tax, baseline_tax, WEIGHT)] %>%
       .[, new_tax := as.integer(new_tax)] %>%
       .[, delta := new_tax - baseline_tax] %>%
       setkey(Taxable_Income) %>%
@@ -452,7 +453,7 @@ model_Budgets <- function(fy_year,
                                                          ordinary_tax_thresholds = ordinary_tax_thresholds(h),
                                                          lito_202223 = h > 6,
                                                          lamington = FALSE),
-       Budget2018_just_lamington = model_income_tax(lamington = TRUE),
+       Budget2018_just_lamington = model_income_tax(lamington = fy_year %in% c("2018-19", "2019-20", "2020-21", "2021-22")),
        Budget2018_lamington_plus_LITO = model_income_tax(lito_202223 = h > 6,
                                                          lamington = fy_year %in% c("2018-19", "2019-20", "2020-21", "2021-22")),
        Budget2018_no_SBTO = model_income_tax(ordinary_tax_rates = ordinary_tax_rates(h),
@@ -1005,6 +1006,103 @@ to_prop <- function(x) {
   }
 }
 ```
+
+```{r}
+if ("tax" %notchin% names(s1718)) {
+  if ("new_tax" %chin% names(s1718)) {
+    s1718[, tax := new_tax + 0]
+  } else {
+    s1718[, tax := income_tax(Taxable_Income, "2017-18", .dots.ATO = .SD)]
+  }
+}
+```
+
+```{r share-total-pit-by-decile}
+ShareTaxPaid_by_Decile_id <- 
+  list("2017-18" = select_grep(s1718, "^(new_)?tax$", .and = "Taxable_Income"),
+       "2027-28 baseline" = Budget_1922[["2027-28"]][["Budget2018_baseline"]][, .(Taxable_Income, tax = new_tax)],
+       "2027-28 budget" = Budget_1922[["2027-28"]][["Budget2018"]][, .(Taxable_Income, tax = new_tax)]
+  ) %>%
+  rbindlist(use.names = TRUE,
+            fill = TRUE,
+            idcol = "id") %>%
+  .[, Decile := ntile(Taxable_Income, 10), keyby = "id"] %>%
+  .[, .(tot = sum(tax)), keyby = .(id, Decile)] %>%
+  .[, share := tot / sum(tot), keyby = "id"]
+
+ShareTaxPaid_by_Percentile_id <- 
+  list("2017-18" = select_grep(s1718, "^(new_)?tax$", .and = "Taxable_Income"),
+       "2027-28 baseline" = Budget_1922[["2027-28"]][["Budget2018_baseline"]][, .(Taxable_Income, tax = new_tax)],
+       "2027-28 budget" = Budget_1922[["2027-28"]][["Budget2018"]][, .(Taxable_Income, tax = new_tax)]
+  ) %>%
+  rbindlist(use.names = TRUE,
+            fill = TRUE,
+            idcol = "id") %>%
+  .[, Percentile := ntile(Taxable_Income, 100), keyby = "id"] %>%
+  .[, .(tot = sum(tax)), keyby = .(id, Percentile)] %>%
+  .[, share := tot / sum(tot), keyby = "id"]
+
+rbindlist(
+  list(ShareTaxPaid_by_Decile_id %>%
+         .[Decile != 10L] %>%
+         dcast(Decile ~ id, value.var = "share") %>%
+         .[, Decile := as.character(Decile)], 
+       ShareTaxPaid_by_Percentile_id %>%
+         .[Percentile > 90L] %>%
+         .[, .(share = sum(share)), 
+           by = .(id, Decile = 10L * (Percentile %/% 10L))] %>%
+         dcast(Decile ~ id, value.var = "share")),
+  use.names = TRUE,
+  fill = TRUE) %>%
+  .[Decile %enotin% as.character(1:9), Decile := if_else(Decile == 100, "1%", "91-99 perc.")] %>%
+  .[, lapply(.SD, round, 3), by = "Decile"] %T>%
+  fwrite("share-of-tot-income-tax-by-decile-top1pc-budget-wage-growth.csv") %>%
+  kable(align = "rrrr")
+```
+
+```{r share-total-pit-by-decile-275}
+ShareTaxPaid_by_Decile_id <- 
+  list("2017-18" = s1718[, .(Taxable_Income, tax)],
+       "2027-28 baseline" = Budget_1922_Grattan2.75[["2027-28"]][["Budget2018_baseline"]][, .(Taxable_Income, tax = new_tax)],
+       "2027-28 budget" = Budget_1922_Grattan2.75[["2027-28"]][["Budget2018"]][, .(Taxable_Income, tax = new_tax)]
+  ) %>%
+  rbindlist(use.names = TRUE,
+            fill = TRUE,
+            idcol = "id") %>%
+  .[, Decile := ntile(Taxable_Income, 10), keyby = "id"] %>%
+  .[, .(tot = sum(tax)), keyby = .(id, Decile)] %>%
+  .[, share := tot / sum(tot), keyby = "id"]
+
+ShareTaxPaid_by_Percentile_id <- 
+  list("2017-18" = s1718[, .(Taxable_Income, tax)],
+       "2027-28 baseline" = Budget_1922_Grattan2.75[["2027-28"]][["Budget2018_baseline"]][, .(Taxable_Income, tax = new_tax)],
+       "2027-28 budget" = Budget_1922_Grattan2.75[["2027-28"]][["Budget2018"]][, .(Taxable_Income, tax = new_tax)]
+  ) %>%
+  rbindlist(use.names = TRUE,
+            fill = TRUE,
+            idcol = "id") %>%
+  .[, Percentile := ntile(Taxable_Income, 100), keyby = "id"] %>%
+  .[, .(tot = sum(tax)), keyby = .(id, Percentile)] %>%
+  .[, share := tot / sum(tot), keyby = "id"]
+
+rbindlist(
+  list(ShareTaxPaid_by_Decile_id %>%
+         .[Decile != 10L] %>%
+         dcast(Decile ~ id, value.var = "share") %>%
+         .[, Decile := as.character(Decile)], 
+       ShareTaxPaid_by_Percentile_id %>%
+         .[Percentile > 90L] %>%
+         .[, .(share = sum(share)), 
+           by = .(id, Decile = 10L * (Percentile %/% 10L))] %>%
+         dcast(Decile ~ id, value.var = "share")),
+  use.names = TRUE,
+  fill = TRUE) %>%
+  .[Decile %enotin% as.character(1:9), Decile := if_else(Decile == 100, "1%", "91-99 perc.")] %>%
+  .[, lapply(.SD, round, 3), by = "Decile"] %T>%
+  fwrite("share-of-tot-income-tax-by-decile-top1pc-2-75-wage-growth.csv") %>%
+  kable(align = "rrrr")
+```
+
 
 ```{r}
 avg_tax_rates_by_percentile_facet_fy %>%
@@ -1660,5 +1758,36 @@ The government's best and most honest argument is that the tax package as a whol
 per cent of taxable income -- will pay `r grattan_percent(prop_tax_paid_by_quintile_202728_baseline[.(5L)][["prop"]], digits = 3)` of income tax.
 And under the package they will pay `r grattan_percent(prop_tax_paid_by_quintile_202728_Budget[.(5L)][["prop"]], digits = 4)`.
 
+## Applying timings
+
+We can apply timing issues: 85\% revenue is tax revenue and 15\% at the time of assessment for those under \$180,000; 75\% and 25\% at time of assessment.
+
+```{r bound_models_with_timings}
+# setindex(bound_models, id)
+bound_models_with_timings <- 
+  lapply(c(FALSE, TRUE), function(x) {
+    bound_models[id %in% "Budget2018",
+                 .(id,
+                   YearOfAssessment = x,
+                   fy_year2 = if (x) yr2fy(fy2yr(.BY[[1L]]) + x) else .BY[[1L]],
+                   Ind,
+                   Taxable_Income,
+                   delta,
+                   WEIGHT), 
+                 keyby = "fy_year"][, fy_year := NULL]
+  }) %>%
+  rbindlist() %>%
+  .[(Taxable_Income > 180e3), WEIGHT := if_else(YearOfAssessment, 0.25, 0.75) * WEIGHT] %>%
+  .[(Taxable_Income <= 180e3), WEIGHT := if_else(YearOfAssessment, 0.15, 0.85) * WEIGHT] %>%
+  .[, .(tot = sum(delta * WEIGHT / 1e9)), keyby = "fy_year2"]
+  
 
 
+
+```
+
+
+
+```{r session_info}
+devtools::session_info()
+```
