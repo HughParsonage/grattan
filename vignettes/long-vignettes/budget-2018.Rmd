@@ -279,7 +279,7 @@ ordinary_tax_thresholds <- function(h) {
   if (h < 7) {
     c(0, 18200, 37e3, 90e3, 180e3)
   } else if (h < 9) {
-    c(0, 18200, 41e3, 90e3, 180e3)
+    c(0, 18200, 41e3, 120e3, 180e3)
   } else {
     c(0, 18200, 41e3, 200e3)
   }
@@ -434,41 +434,30 @@ model_Budgets <- function(fy_year,
       Budget2018_watr = watr,
       ...) %>%
       .[, .(Ind, age_range, Total_PP_BE_amt, Total_NPP_BE_amt, Taxable_Income, new_tax, baseline_tax, WEIGHT)] %>%
+      setkey(Taxable_Income) %>%
       .[, new_tax := as.integer(new_tax)] %>%
       .[, delta := new_tax - baseline_tax] %>%
-      setkey(Taxable_Income) %>%
+      
       .[]
   }
   
   list(Budget2018_baseline = model_income_tax(),
+       Budget2018_medicare25 = model_income_tax(medicare_levy_rate = 0.025),
        Budget2018_baseline_brackets_cpi = model_income_tax(ordinary_tax_thresholds = cpi_inflator(ordinary_tax_thresholds(1), from_fy = "2017-18", to_fy = fy_year)),
-       Budget2018_baseline_no_SBTO = model_income_tax(sbto_discount = 0),
        Budget2018_just_rates = model_income_tax(ordinary_tax_rates =  ordinary_tax_rates(h),
                                                 ordinary_tax_thresholds = ordinary_tax_thresholds(h),
                                                 lito_202223 = FALSE,
                                                 lamington = FALSE),
-       Budget2018_just_LITO = model_income_tax(lito_202223 = h > 6,
-                                               lamington = FALSE),
-       Budget2018_just_LITO_and_rates = model_income_tax(ordinary_tax_rates =  ordinary_tax_rates(h),
-                                                         ordinary_tax_thresholds = ordinary_tax_thresholds(h),
-                                                         lito_202223 = h > 6,
-                                                         lamington = FALSE),
-       Budget2018_just_lamington = model_income_tax(lamington = fy_year %in% c("2018-19", "2019-20", "2020-21", "2021-22")),
        Budget2018_lamington_plus_LITO = model_income_tax(lito_202223 = h > 6,
                                                          lamington = fy_year %in% c("2018-19", "2019-20", "2020-21", "2021-22")),
-       Budget2018_no_SBTO = model_income_tax(ordinary_tax_rates = ordinary_tax_rates(h),
-                                             ordinary_tax_thresholds = ordinary_tax_thresholds(h),
-                                             lito_202223 = h > 6,
-                                             lamington = fy_year %in% c("2018-19", "2019-20", "2020-21", "2021-22"), 
-                                             sbto_discount = 0),
        Budget2018 = model_income_tax(ordinary_tax_rates = ordinary_tax_rates(h),
                                      ordinary_tax_thresholds = ordinary_tax_thresholds(h),
                                      lito_202223 = h > 6,
                                      lamington = fy_year %in% c("2018-19", "2019-20", "2020-21", "2021-22")),
-       ALP2018_no_SBTO = model_income_tax(ordinary_tax_rates = ordinary_tax_rates(3), 
-                                          ordinary_tax_thresholds = ordinary_tax_thresholds(3),
-                                          sbto_discount = 0,
-                                          watr = fy_year >= "2019-20"),
+       Budget2018_Step1and2 = model_income_tax(ordinary_tax_rates = ordinary_tax_rates(pmin(h, 8)), 
+                                               ordinary_tax_thresholds = ordinary_tax_thresholds(pmin(h, 8)),
+                                               lito_202223 = h > 6, 
+                                               lamington = fy_year %in% c("2018-19", "2019-20", "2020-21", "2021-22")),
        ALP2018 = model_income_tax(ordinary_tax_rates = ordinary_tax_rates(3), 
                                   ordinary_tax_thresholds = ordinary_tax_thresholds(3),
                                   lamington = fy_year < "2019-02",
@@ -478,6 +467,14 @@ model_Budgets <- function(fy_year,
 
 ```{r Budget_1922}
 Budget_1922 <- lapply(yr2fy(2019:2028), model_Budgets)
+names(Budget_1922) <- yr2fy(2019:2028)
+```
+
+```{r bound_models}
+bound_models <- 
+  Budget_1922 %>% 
+  lapply(rbindlist, use.names = TRUE, fill = TRUE, idcol = "id") %>%
+  rbindlist(use.names = TRUE, fill = TRUE, idcol = "fy_year")
 ```
 
 ```{r Budget_1922_Grattan}
@@ -503,7 +500,7 @@ Budget_1922_Grattan2.75 <- lapply(yr2fy(2019:2028), model_Budgets, use.Treasury 
 ### Costings 2018-19 to 2027-28 (Govt and Grattan forecasts)
 
 ```{r Budget-summaries}
-names(Budget_1922) <- yr2fy(2019:2028)
+
 names(Budget_1922_Grattan) <- yr2fy(2019:2028)
 names(Budget_1922_Grattan2.75) <- yr2fy(2019:2028)
 {sapply(Budget_1922, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9} %>%
@@ -1271,13 +1268,6 @@ sample_files_all %>%
   facet_wrap(~fy_year)
 ```
 
-```{r bound_models}
-bound_models <- 
-  Budget_1922 %>% 
-  lapply(rbindlist, use.names = TRUE, fill = TRUE, idcol = "id") %>%
-  rbindlist(use.names = TRUE, fill = TRUE, idcol = "fy_year")
-```
-
 ```{r bound_models_Grattan}
 bound_models_Grattan <- 
   Budget_1922_Grattan %>% 
@@ -1423,45 +1413,6 @@ avg_tax_rates_by_percentile_facet_fy_historical <-
   .[]
 ```
 
-
-## Effect of SBTO
-```{r}
-library(fastmatch)
-bound_models[id %ein% c("Budget2018", "ALP2018",
-                        "Budget2018_no_SBTO", "ALP2018_no_SBTO",
-                        "Budget2018_baseline", "Budget2018_baseline_no_SBTO")] %>%
-  .[, .(revenue = sum(delta), WEIGHT = first(WEIGHT)), keyby = .(id, fy_year)] %>%
-  .[, SBTO := if_else(endsWith(id, "no_SBTO"), "No SBTO", "With SBTO")] %>%
-  .[, policy := sub("_no_SBTO", "", id)] %>%
-  .[, revenue_bn := revenue * WEIGHT / 1e9] %>%
-  .[, revenue := NULL] %>%
-  .[, .(policy, fy_year, SBTO, revenue_bn)] %>%
-  .[] %>%
-  dcast(policy + fy_year ~ SBTO, value.var = "revenue_bn") %>%
-  .[, delta := `With SBTO` - `No SBTO`] %>%
-  ggplot(aes(x = fy_year, y = delta, fill = policy)) +
-  geom_col(position = "dodge")
-```
-
-```{r}
-bound_models[id %ein% c("Budget2018", "ALP2018",
-                        "Budget2018_no_SBTO", "ALP2018_no_SBTO",
-                        "Budget2018_baseline", "Budget2018_baseline_no_SBTO")] %>%
-  .[,
-    Taxable_Income_percentile := ntile(Taxable_Income + Total_PP_BE_amt + Total_NPP_BE_amt, 100),
-    keyby = .(id, fy_year)] %>%
-  .[, .(delta = sum(delta)), keyby = .(id, fy_year, Taxable_Income_percentile)] %>%
-  .[, p := coalesce(delta / sum(delta), 0), keyby = .(id, fy_year)] %>%
-  .[, delta := NULL] %>%
-  .[] %>%
-  .[, SBTO := tolower(endsWith(id, "_no_SBTO"))] %>%
-  .[, policy := sub("_no_SBTO", "", .BY[[1L]], fixed = TRUE), by = "id"] %>%
-  dcast(Taxable_Income_percentile + policy + fy_year ~ SBTO, value.var = "p") %>%
-  .[, revi := true - false] %>%
-  ggplot(aes(x = Taxable_Income_percentile, y = revi, color = fy_year)) + 
-  facet_wrap(~policy) +
-  geom_line() 
-```
 
 ```{r}
 s202728_in_1920 <- 
