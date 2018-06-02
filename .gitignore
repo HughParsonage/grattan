@@ -14,7 +14,6 @@ vignettes/*.R
 *.o
 *.dll
 inst/doc
-
 *.aux
 *.blg
 *.log
@@ -32,3 +31,4 @@ Example-report.txt
 *.lof
 Roadmap\.pdf
 Roadmap\.tex
+vignettes/long-vignettes/budget-2018_cache/*
