@@ -214,7 +214,7 @@ print.revenue_foregone <- function(x, ...) {
 }
 ```
 
-```{r}
+```{r s1617, cache=TRUE}
 ## ------------------------------------------------------------------------
 s1617 <- 
   if (file.exists("~/ozTaxData/data-raw/2016_sample_file.csv")) {
@@ -226,7 +226,7 @@ s1617 <-
 s1617 <- model_income_tax(s1617, "2016-17")
 ```
 
-```{r}
+```{r s1718, cache=TRUE}
 ## ------------------------------------------------------------------------
 s1718 <- 
   if (file.exists("~/ozTaxData/data-raw/2016_sample_file.csv")) {
@@ -239,7 +239,7 @@ s1718 <- model_income_tax(s1718, "2017-18")
 ```
 
 
-```{r}
+```{r s1819, cache=TRUE}
 ## ------------------------------------------------------------------------
 s1819 <- 
   if (file.exists("~/ozTaxData/data-raw/2016_sample_file.csv")) {
@@ -267,18 +267,18 @@ lf_forecasts <-
 These are functions of years from 2015-16 that return the tax rates and tax thresholds that the Government has proposed in the Budget. They are used so that the out years can be modelled conveniently as a function of the year only.
 
 ```{r}
-ordinary_tax_rates <- function(h) {
-  if (h < 9) {
+ordinary_tax_rates <- function(fy_year) {
+  if (fy_year < "2024-25") {
     c(0, 0.19, 0.325, 0.37, 0.45)
   } else {
     c(0, 0.19, 0.325, 0.45)  
   }
 }
 
-ordinary_tax_thresholds <- function(h) {
-  if (h < 7) {
+ordinary_tax_thresholds <- function(fy_year) {
+  if (fy_year < "2022-23") {
     c(0, 18200, 37e3, 90e3, 180e3)
-  } else if (h < 9) {
+  } else if (fy_year < "2024-25") {
     c(0, 18200, 41e3, 120e3, 180e3)
   } else {
     c(0, 18200, 41e3, 200e3)
@@ -297,7 +297,7 @@ Technically such measures have to be approved each financial year, but are as a 
   if (fy == "2018-19") {
     return(x2018)
   } else {
-    return(round(cpi_inflator(x2018, from_fy = "2018-19", to_fy = fy), -1))
+    return(round(cpi_inflator(x2018, from_fy = "2017-18", to_fy = fy), -1))
   }
 }
 
@@ -330,11 +330,11 @@ medicare_levy_lower_up_for_each_child <- function(fy) {
 }
 ```
 
-```{r project_useTreasurys}
+```{r project_useTreasurys, cache=TRUE}
 .project_useTreasurys <- lapply(1:13, .project_to, use.Treasury = TRUE)
 ```
 
-```{r .project_useGrattans}
+```{r .project_useGrattans, cache=TRUE}
 .project_useGrattans <- lapply(1:13, .project_to, use.Treasury = FALSE)
 ```
 
@@ -358,19 +358,19 @@ wage_r20 <-
   .[!is.na(r), .(fy_year, r)]
 ```
 
-```{r .project_useGrattans80}
+```{r .project_useGrattans80, cache=TRUE}
 .project_useGrattans80 <- lapply(1:13, function(h) {
   project(sample_file_1516, h = h, wage.series = wage_r80)
 })
 ```
 
-```{r .project_useGrattans20}
+```{r .project_useGrattans20, cache=TRUE}
 .project_useGrattans20 <- lapply(1:13, function(h) {
   project(sample_file_1516, h = h, wage.series = wage_r20)
 })
 ```
 
-```{r .project_useGrattans2.75}
+```{r .project_useGrattans2.75, cache=TRUE}
 .project_useGrattans2.75 <- lapply(1:13, function(h) {
   project(sample_file_1516, h = h, wage.series = 0.0275)
 })
@@ -441,27 +441,32 @@ model_Budgets <- function(fy_year,
       .[]
   }
   
-  list(Budget2018_baseline = model_income_tax(),
-       Budget2018_medicare25 = model_income_tax(medicare_levy_rate = 0.025),
-       Budget2018_baseline_brackets_cpi = model_income_tax(ordinary_tax_thresholds = cpi_inflator(ordinary_tax_thresholds(1), from_fy = "2017-18", to_fy = fy_year)),
-       Budget2018_just_rates = model_income_tax(ordinary_tax_rates =  ordinary_tax_rates(h),
-                                                ordinary_tax_thresholds = ordinary_tax_thresholds(h),
-                                                lito_202223 = FALSE,
-                                                lamington = FALSE),
-       Budget2018_lamington_plus_LITO = model_income_tax(lito_202223 = h > 6,
-                                                         lamington = fy_year %in% c("2018-19", "2019-20", "2020-21", "2021-22")),
-       Budget2018 = model_income_tax(ordinary_tax_rates = ordinary_tax_rates(h),
-                                     ordinary_tax_thresholds = ordinary_tax_thresholds(h),
-                                     lito_202223 = h > 6,
-                                     lamington = fy_year %in% c("2018-19", "2019-20", "2020-21", "2021-22")),
-       Budget2018_Step1and2 = model_income_tax(ordinary_tax_rates = ordinary_tax_rates(pmin(h, 8)), 
-                                               ordinary_tax_thresholds = ordinary_tax_thresholds(pmin(h, 8)),
-                                               lito_202223 = h > 6, 
-                                               lamington = fy_year %in% c("2018-19", "2019-20", "2020-21", "2021-22")),
-       ALP2018 = model_income_tax(ordinary_tax_rates = ordinary_tax_rates(3), 
-                                  ordinary_tax_thresholds = ordinary_tax_thresholds(3),
-                                  lamington = fy_year < "2019-02",
-                                  watr = fy_year >= "2019-20"))
+  list(
+    Budget2018_baseline = model_income_tax(),
+    Budget2018_medicare25 = model_income_tax(medicare_levy_rate = 0.015,
+                                             ordinary_tax_rates = ordinary_tax_rates(fy_year),
+                                             ordinary_tax_thresholds = ordinary_tax_thresholds(fy_year),
+                                             lito_202223 = fy_year >= "2022-23",
+                                             lamington = fy_year %in% c("2018-19", "2019-20", "2020-21", "2021-22")),
+    Budget2018_baseline_brackets_cpi = model_income_tax(ordinary_tax_thresholds = cpi_inflator(ordinary_tax_thresholds(1), from_fy = "2017-18", to_fy = fy_year)),
+    Budget2018_just_rates = model_income_tax(ordinary_tax_rates =  ordinary_tax_rates(fy_year),
+                                             ordinary_tax_thresholds = ordinary_tax_thresholds(fy_year),
+                                             lito_202223 = FALSE,
+                                             lamington = FALSE),
+    Budget2018_lamington_plus_LITO = model_income_tax(lito_202223 = fy_year >= "2022-23",
+                                                      lamington = fy_year %in% c("2018-19", "2019-20", "2020-21", "2021-22")),
+    Budget2018 = model_income_tax(ordinary_tax_rates = ordinary_tax_rates(fy_year),
+                                  ordinary_tax_thresholds = ordinary_tax_thresholds(fy_year),
+                                  lito_202223 = fy_year >= "2022-23",
+                                  lamington = fy_year %in% c("2018-19", "2019-20", "2020-21", "2021-22")),
+    Budget2018_Step1and2 = model_income_tax(ordinary_tax_rates = ordinary_tax_rates(pmin(fy_year, "2022-23")), 
+                                            ordinary_tax_thresholds = ordinary_tax_thresholds(pmin(fy_year, "2022-23")),
+                                            lito_202223 = fy_year >= "2022-23", 
+                                            lamington = fy_year %in% c("2018-19", "2019-20", "2020-21", "2021-22")),
+    ALP2018 = model_income_tax(ordinary_tax_rates = ordinary_tax_rates(pmin(fy_year, "2022-23")), 
+                               ordinary_tax_thresholds = ordinary_tax_thresholds(pmin(fy_year, "2022-23")),
+                               lamington = fy_year < "2019-02",
+                               watr = fy_year >= "2019-20"))
 }
 ```
 
