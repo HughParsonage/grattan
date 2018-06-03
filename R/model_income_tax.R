@@ -591,13 +591,19 @@ model_income_tax <- function(sample_file,
     sapto_args <- mget(grep("^sapto_(?!eligible)", arguments, perl = TRUE, value = TRUE))
     
     if (all(vapply(sapto_args, is.null, FALSE))) {
-      
+      # 
+      .dASE <- .dots.ATO[(sapto_eligible),
+                         .SD, 
+                         .SDcols = c("Rptbl_Empr_spr_cont_amt", 
+                                     "Net_fincl_invstmt_lss_amt",
+                                     "Net_rent_amt",
+                                     "Rep_frng_ben_amt")]
       rebate_income_over_eligible <-
         rebate_income(Taxable_Income = income[sapto_eligible],
-                      Rptbl_Empr_spr_cont_amt = .dots.ATO[sapto_eligible][["Rptbl_Empr_spr_cont_amt"]],
-                      Net_fincl_invstmt_lss_amt = .dots.ATO[sapto_eligible][["Net_fincl_invstmt_lss_amt"]],
-                      Net_rent_amt = .dots.ATO[sapto_eligible][["Net_rent_amt"]],
-                      Rep_frng_ben_amt = .dots.ATO[sapto_eligible][["Rep_frng_ben_amt"]])
+                      Rptbl_Empr_spr_cont_amt = .dASE[["Rptbl_Empr_spr_cont_amt"]],
+                      Net_fincl_invstmt_lss_amt = .dASE[["Net_fincl_invstmt_lss_amt"]],
+                      Net_rent_amt = .dASE[["Net_rent_amt"]],
+                      Rep_frng_ben_amt = .dASE[["Rep_frng_ben_amt"]])
       
       sapto.[sapto_eligible] <-
         sapto(rebate_income = rebate_income_over_eligible, 
