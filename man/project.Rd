@@ -7,7 +7,8 @@
 project(sample_file, h = 0L, fy.year.of.sample.file = NULL, WEIGHT = 50L,
   excl_vars, forecast.dots = list(estimator = "mean", pred_interval = 80),
   wage.series = NULL, lf.series = NULL, .recalculate.inflators = FALSE,
-  .copyDT = TRUE, check_fy_sample_file = TRUE)
+  .copyDT = TRUE, check_fy_sample_file = TRUE,
+  differentially_uprate_Sw = TRUE)
 }
 \arguments{
 \item{sample_file}{A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.}
@@ -34,6 +35,8 @@ number of rows of \code{sample_file} to be one of \code{2012-13}, \code{2013-14}
 \item{check_fy_sample_file}{(logical, default: \code{TRUE}) Should \code{fy.year.of.sample.file} be checked against \code{sample_file}?
 By default, \code{TRUE}, an error is raised if the base is not 2012-13, 2013-14, or 2014-15 and a warning is raised if the 
 number of rows in \code{sample_file} is different to the known number of rows in the sample files.}
+
+\item{differentially_uprate_Sw}{(logical, default: \code{TRUE}) Should the salary and wage column (\code{Sw_amt}) be differentially uprating using (\code{\link{differentially_uprate_wage}})?}
 }
 \value{
 A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).

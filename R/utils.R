@@ -11,6 +11,11 @@ unselect_ <- function(.data, .dots) {
   !(x %in% y)
 }
 
+anyIntersection <- function(x, y) {
+  max(match(x, y, nomatch = 0L)) &&
+    max(match(y, x, nomatch = 0L))
+}
+
 is_knitting <- function() {
   isTRUE(getOption('knitr.in.progress'))
 }

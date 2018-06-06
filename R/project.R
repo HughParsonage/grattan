@@ -14,6 +14,9 @@
 #' @param check_fy_sample_file (logical, default: \code{TRUE}) Should \code{fy.year.of.sample.file} be checked against \code{sample_file}?
 #' By default, \code{TRUE}, an error is raised if the base is not 2012-13, 2013-14, or 2014-15 and a warning is raised if the 
 #' number of rows in \code{sample_file} is different to the known number of rows in the sample files. 
+#' @param differentially_uprate_Sw (logical, default: \code{TRUE}) Should the salary and wage column (\code{Sw_amt}) be differentially uprating using (\code{\link{differentially_uprate_wage}})?
+#' 
+#' 
 #' @return A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).
 #' @details We recommend you use \code{sample_file_1213} over \code{sample_file_1314}, unless you need the superannuation variables, 
 #' as the latter suggests lower-than-recorded tax collections. 
@@ -43,7 +46,8 @@ project <- function(sample_file,
                     lf.series = NULL,
                     .recalculate.inflators = FALSE, 
                     .copyDT = TRUE,
-                    check_fy_sample_file = TRUE) {
+                    check_fy_sample_file = TRUE,
+                    differentially_uprate_Sw = TRUE) {
   stopifnot(is.integer(h), h >= 0L, is.data.table(sample_file))
   if (.copyDT) {
     sample_file <- copy(sample_file)
@@ -102,7 +106,7 @@ project <- function(sample_file,
     }
   }
   
-  if (h == 0){
+  if (h == 0) {
     return(sample_file)
   } else {
     # NSE e.g inflators[h == h]
@@ -151,9 +155,14 @@ project <- function(sample_file,
     col.names <- names(sample_file)
     
     # Differential uprating not available for years outside:
-    diff.uprate.wagey.cols <- "Sw_amt"
+    diff.uprate.wagey.cols <- 
+      if (differentially_uprate_Sw) {
+        "Sw_amt"
+      } else {
+        character(0L)
+      }
     
-    wagey.cols <- c(
+    wagey.cols <- c(if (!differentially_uprate_Sw) "Sw_amt",
                     "Alow_ben_amt",
                     "ETP_txbl_amt",
                     "Rptbl_Empr_spr_cont_amt", 
@@ -161,6 +170,8 @@ project <- function(sample_file,
                     "MCS_Emplr_Contr", 
                     "MCS_Prsnl_Contr", 
                     "MCS_Othr_Contr")
+    
+    
     
     super.bal.col <- c("MCS_Ttl_Acnt_Bal")
     
@@ -233,6 +244,7 @@ project <- function(sample_file,
     ## Inflate:
     # make numeric to avoid overflow
     integer.cols <- names(sample_file)[vapply(sample_file, is.integer, TRUE)]
+    integer.cols <- integer.cols[integer.cols %notin% c(Not.Inflated)]
     for (j in which(col.names %chin% integer.cols)) {
       set(sample_file, j = j, value = as.double(.subset2(sample_file, j)))
     }
