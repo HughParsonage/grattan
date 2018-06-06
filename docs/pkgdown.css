@@ -151,8 +151,7 @@ a.anchor {
 
 table {
   display: block;
-  overflow: visible;
-  width: 900px;
+  overflow: auto;
 }
 
 /* Syntax highlighting ---------------------------------------------------- */

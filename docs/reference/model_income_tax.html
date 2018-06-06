@@ -289,10 +289,11 @@ but with variables <code>tax</code> and possibly <code>new_taxable_income</code>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='co'># With new tax-free threshold of $20,000:</span>
-<span class='kw'>if</span> (!<span class='fu'>requireNamespace</span>(<span class='st'>"taxstats"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
+<span class='kw'>if</span> (<span class='fu'>requireNamespace</span>(<span class='st'>"taxstats"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
   <span class='fu'>library</span>(<span class='no'>taxstats</span>)
   <span class='fu'>model_income_tax</span>(<span class='no'>sample_file_1314</span>,
-                   <span class='kw'>ordinary_tax_brackets</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>20e3</span>, <span class='fl'>37e3</span>, <span class='fl'>80e3</span>, <span class='fl'>180e3</span>))
+                   <span class='st'>"2013-14"</span>,
+                   <span class='kw'>ordinary_tax_thresholds</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>20e3</span>, <span class='fl'>37e3</span>, <span class='fl'>80e3</span>, <span class='fl'>180e3</span>))
 
 }</div></pre>
   </div>

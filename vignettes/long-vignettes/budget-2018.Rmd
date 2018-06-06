@@ -476,10 +476,21 @@ names(Budget_1922) <- yr2fy(2019:2028)
 ```
 
 ```{r bound_models}
-bound_models <- 
+bound_models <-
   Budget_1922 %>% 
   lapply(rbindlist, use.names = TRUE, fill = TRUE, idcol = "id") %>%
   rbindlist(use.names = TRUE, fill = TRUE, idcol = "fy_year")
+bound_models[id %in% c("Budget2018", "Budget2018_Step1and2", "Budget2018_baseline"),
+             .SD,
+             .SDcols = c("id",
+                         "fy_year",
+                         "delta",
+                         "WEIGHT",
+                         "Taxable_Income", 
+                         "new_tax", 
+                         "baseline_tax")] %>%
+  fst::write_fst(path = "~/Budget-2018-Senate-submission/data/bound-models.fst", 
+                 compress = 100)
 ```
 
 ```{r Budget_1922_Grattan}
@@ -1558,7 +1569,7 @@ avg_tax_by_decile_allpersons202425 <-
                    WEIGHT = wt_rel1718v202425 * (total_population_1516 - taxable_individuals_1718)), 
         use.names = TRUE, fill = TRUE) %>%
   .[, Taxable_Income_decile := weighted_ntile(Taxable_Income, WEIGHT, 10)] %>%
-  .[, .(total = sum(new_tax)), keyby = "Taxable_Income_decile"] %>%
+  .[, .(total = sum(new_tax), min_income = min(Taxable_Income)), keyby = "Taxable_Income_decile"] %>%
   .[, share := round(total / sum(total), 3)] %T>%
   fwrite("avg_tax_by_decile_allpersons202425.csv") %>%
   .[]
@@ -1581,6 +1592,22 @@ avg_tax_by_decile_allpersons202728 <-
 
 
 
+```
+
+```{r allpersonsquintiles}
+avg_tax_by_quintile_allpersons201718 <- 
+  avg_tax_by_decile_allpersons201718 %>%
+  .[, .(total = sum(total)), keyby = .(Quintile = ceiling(Taxable_Income_decile / 2))] %>%
+  .[, share := total / sum(total)] %T>%
+  fwrite("avg_tax_by_quintile_allpersons201718.csv") %>%
+  .[]
+
+avg_tax_by_quintile_allpersons202425 <- 
+  avg_tax_by_decile_allpersons202425 %>%
+  .[, .(total = sum(total)), keyby = .(Quintile = ceiling(Taxable_Income_decile / 2))] %>%
+  .[, share := total / sum(total)] %T>%
+  fwrite("avg_tax_by_quintile_allpersons202425.csv") %>%
+  .[]
 ```
 
 
