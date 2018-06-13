@@ -10,9 +10,13 @@
 #' @export
 #' @details With a short-length vector, or with weights of a high variance, the results may be unexpected.
 
-weighted_ntile <- function(vector, weights = rep(1, length(vector)), n){
-  stopifnot(all(weights >= 0))
-  if (any(weights %>% are_zero)){
+weighted_ntile2 <- function(vector, weights = rep(1, length(vector)), n){
+  min_w <- min(weights)
+  if (min_w < 0) {
+    stop("`weights` contained negative values. Ensure `weights` is non-negative.")
+  }
+  
+  if (min_w == 0) {
     warning("Some weights are zero. Maximum ntile may be incorrect.")
   }
   
@@ -20,16 +24,27 @@ weighted_ntile <- function(vector, weights = rep(1, length(vector)), n){
   # CRAN NOTE avoidance
   vec <- wts <- orig_order <- NULL
   # 
+  .weight <- 
+    if (length(weights) == 0L) {
+      rep(1, length(vector))
+    } else if (length(weights) == 1L) {
+      rep(weights, length(vector))
+    } else if (length(weights) == length(vector)) {
+      weights
+    } else {
+      stop("`weights` must be length-one or length(vector).")
+    }
+  
   out <- 
-    data.table(vec = vector, 
-               wts = weights) %>%
-    .[, orig_order := 1:.N] %>%
+    setDT(list(vec = vector, 
+               wts = .weight,
+               orig_order = seq_along(vector))) %>%
     setorderv("vec") %>%
     .[, out := as.integer(floor((n * cumsum(shift(x = wts, n = 1L, fill = 0)) / sum(wts)) + 1))] %>% 
     setorderv("orig_order") %>%
     .[["out"]]
   
-  if (any(out > n)){
+  if (max(out) > n){
     warning("Some ntiles greater than n = ", n)
   } 
   out
