@@ -12,30 +12,30 @@
   0.0	model_Budgets
  56.2	Budget_1922
   4.6	bound_models
- 59.1	Budget_1922_Grattan
- 66.7	Budget_1922_Grattan80
- 68.0	Budget_1922_Grattan20
- 68.7	Budget_1922_Grattan2.75
-  0.3	Budget-summaries
-  0.2	Budget-summaries-Grattan
-  0.3	Budget-summaries-Grattan-80
+ 58.8	Budget_1922_Grattan
+ 66.6	Budget_1922_Grattan80
+ 67.7	Budget_1922_Grattan20
+ 68.5	Budget_1922_Grattan2.75
+  0.2	Budget-summaries
+  0.3	Budget-summaries-Grattan
+  0.2	Budget-summaries-Grattan-80
   0.2	Budget-summaries-Grattan-20
-  1.5	unnamed-chunk-6
-  3.0	avg_individual_impact_by_Quintile_fy
-  2.6	unnamed-chunk-7
+  1.4	unnamed-chunk-6
+  2.8	avg_individual_impact_by_Quintile_fy
+  2.9	unnamed-chunk-7
   0.8	unnamed-chunk-8
   0.8	unnamed-chunk-9
   0.2	unnamed-chunk-10
   0.0	unnamed-chunk-11
   0.3	unnamed-chunk-12
   2.2	unnamed-chunk-13
-  0.3	avg_tax_rates_by_percentile_Budget_202728_vs_201718
+  0.4	avg_tax_rates_by_percentile_Budget_202728_vs_201718
   0.4	avg_tax_rates_by_percentile_Budget_202728_vs_201718_with_PI
   0.0	unnamed-chunk-14
-  0.1	texNumD
+  0.0	texNumD
   0.0	unnamed-chunk-15
   0.0	unnamed-chunk-16
-  0.0	unnamed-chunk-17
+  0.2	unnamed-chunk-17
   0.2	share-total-pit-by-decile
   0.2	share-total-pit-by-decile-275
   0.0	unnamed-chunk-18
@@ -46,17 +46,17 @@
   1.6	bound_models_Grattan
   1.6	bound_models_Grattan20
   1.6	bound_models_Grattan80
-  3.0	bound_models_wage2.75
-  1.4	unnamed-chunk-22
-  6.3	progressivities
+  2.3	bound_models_wage2.75
+  1.3	unnamed-chunk-22
+  6.5	progressivities
   0.9	progressivity_80
   0.9	progressivity_20
   0.9	progressivity2.75
   0.4	progressivity2-75-plot
   5.2	unnamed-chunk-23
-  4.0	unnamed-chunk-24
+  3.9	unnamed-chunk-24
   0.5	budget2018-total-revenue-vs-fy-by-quintile.csv
-  0.4	revenue_foregone2018-19-bracket-creep
+  0.0	revenue_foregone2018-19-bracket-creep
   0.3	unnamed-chunk-25
   0.0	non_taxable_individuals
   0.0	taxable_individuals_1718
@@ -64,7 +64,7 @@
   0.0	allpersonsquintiles
   0.2	decile201718
   0.1	unnamed-chunk-27
-  5.3	s2728_various_wages
+  5.4	s2728_various_wages
   0.6	comparison-wage-assumptions
   0.0	p_geq_120k_202728
   0.2	unnamed-chunk-28
