@@ -40,3 +40,9 @@ test_that("qtrs_ahead", {
   expect_equal(qtrs_ahead("2016-Q1", "2017-Q2"), 5)
 })
 
+test_that("fast selector", {
+  library(data.table)
+  dt <- data.table(x = 1:5, y = 11:15, z = letters[1:5], key = "z")
+  expect_identical(.selector(dt, noms = c("z", "y")), 
+                   dt[, .(z, y)])
+})
