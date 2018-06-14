@@ -1,9 +1,14 @@
 context("Utilities")
 
-require(survey)
+test_that("Error handling", {
+  expect_error(weighted_ntile(stop("Not checked yet"), weights = -1), 
+               regex = "contained negative values")
+})
 
 test_that("weighted_ntiles on integers", {
   expect_equal(weighted_ntile(1:5, weights = rep(1, 5), n = 2), c(1, 1, 1, 2, 2))
+  expect_equal(weighted_ntile(1:5, weights = 1, n = 2), c(1, 1, 1, 2, 2))
+  expect_equal(weighted_ntile(1:5, weights = NULL, n = 2), c(1, 1, 1, 2, 2))
   expect_equal(weighted_ntile(1:5, weights = rep(1, 5), n = 5), c(1, 2, 3, 4, 5))
   expect_equal(weighted_ntile(vector = 5:1, weights = rep(1, 5), n = 5), rev(c(1, 2, 3, 4, 5)))
   
@@ -15,6 +20,11 @@ test_that("weighted_ntiles on integers", {
 
 
 test_that("weighted_ntile agrees with svyquantile", {
+  skip_if_not_installed("survey")
+  skip_if_not_installed("dplyr")
+  library(survey)
+  library(dplyr)
+  
   set.seed(13)
   N <- 1e4
   wts <- pmax(round(abs(rnorm(N)), 2), 0.01) # pmax(,0.01) to ensure no nonzero weights
