@@ -16,5 +16,7 @@ test_that("Expected output", {
                        id = 2)
   out2 <- compare_avg_tax_rates(rbind(newDT, newDT2), newDT)
   expect_equal(out2[["delta_avgTaxRate"]], rep(c(0.1, 0.2), 4))
+  out2 <- compare_avg_tax_rates(rbind(newDT, newDT2), newDT, ids = c(1, 2))
+  expect_equal(out2[["delta_avgTaxRate"]], rep(c(0.1, 0.2), 4))
 })
 
