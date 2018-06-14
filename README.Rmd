@@ -2,11 +2,92 @@
 output:
   md_document:
     variant: markdown_github
+    toc: true
 ---
 
 # grattan
 
 Australian Tax Policy Analysis
+
+# Overview
+```{r eval=FALSE}
+install.packages("grattan")
+```
+
+```{r loadPackages}
+library(grattan)
+```
+
+## `income_tax`
+Calculates the income tax for a given taxable income and financial year:
+
+```{r income_tax_1}
+income_tax(50e3, "2015-16")
+```
+
+### With sample files
+`income_tax` is designed to work well with the ATO's sample files. You can obtain the sample files from my repo:
+
+```{r install_taxstats}
+# install.packages("taxstats", repos = "https://hughparsonage.github.io/tax-drat")
+library(taxstats)
+
+library(data.table) 
+library(magrittr)
+```
+
+Simply pass the sample file to `.dots.ATO` and the complexities of things like Medicare levy and the Seniors and Pensioners Tax Offset are handled for you. For example:
+
+```{r income_tax_s1314}
+s1314 <- as.data.table(sample_file_1314)
+s1314 %>%
+  .[, tax := income_tax(Taxable_Income, "2013-14", .dots.ATO = s1314)] %>%
+  .[, .(Taxable_Income, tax)]
+```
+
+### Modelling changes to personal income tax
+While `income_tax` is designed to inflexibly return the tax payable as legislated, 
+`model_income_tax` is designed to calculate income tax when changes are made. For example,
+
+```{r model_income_tax}
+s1314 %>%
+  # reduce top threshold from 180,000 to 150,000
+  model_income_tax(ordinary_tax_thresholds = c(0, 18200, 37000, 80000, 
+                                               150e3), 
+                   baseline_fy = "2013-14") %>%
+  .[, .(Taxable_Income, baseline_tax, new_tax)]
+```
+
+
+## `project`
+Given a sample file, we can project forward a number of years
+
+```{r s1617}
+s1617 <- project(s1314, h = 3L)
+```
+
+or to a particular financial year
+
+```{r s1718}
+s1718 <- project_to(s1314, "2017-18")
+```
+
+Together with `model_income_tax`, this allows us to make point-predictions of future years. The function `revenue_foregone` prettily prints the resultant revenue:
+
+```{r model1819}
+sample_file_1314 %>%
+  project_to("2018-19") %>%
+  model_income_tax(ordinary_tax_thresholds = c(0, 18200, 37000, 87000, 
+                                               150e3), 
+                   baseline_fy = "2017-18") %>%
+  revenue_foregone
+
+```
+
+
+
+
+
 
 # NEWS
 ```{r NEWS, results='asis', echo=FALSE}
