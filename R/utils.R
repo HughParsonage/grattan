@@ -3,6 +3,16 @@
 
 select_which_ <- hutils::select_which
 
+# fast selector
+.selector <- function(dt, noms) {
+  dt_key <- key(dt)
+  out <- setnames(setDT(lapply(noms, function(v) .subset2(dt, v))), noms)
+  if (!is.null(dt_key)) {
+    setattr(out, "sorted", dt_key)
+  }
+  out
+}
+
 unselect_ <- function(.data, .dots) {
   hutils::drop_cols(.data, vars = .dots)
 }

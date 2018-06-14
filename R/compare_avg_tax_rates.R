@@ -1,12 +1,26 @@
-#' 
-#' @param dt1 The baseline sample file, containing at least the variables \code{Taxable_Income}, \code{new_tax}, and \code{baseline_tax}.
-#' @param ... Optionally, other sample files. 
+#' Compare average tax rates by percentile
+#' @description To determine the effects of bracket creep on a proposed tax policy,
+#' a common task is calculate the change in the average tax rates for each percentile.
+#' This function accepts a sample file and a baseline sample file, and returns a 100-row table
+#' giving the mean change in average tax rates for each percentile, compared to the baseline.
+#' @param DT A single \code{data.table} containing columns \code{new_tax},
+#' \code{Taxable_Income}, \code{baseline_tax}.
+#' @param baseDT A \code{data.table} of a single cross-section of taxpayers from
+#' which baseline percentiles can be produced. 
+#' @param by How to separate \code{DT} 
+#' @export
 
 
 compare_avg_tax_rates <- function(DT, baseDT, by = "id", ids = NULL) {
+  if (!is.data.table(DT)) {
+    DT <- as.data.table(DT)
+  }
   required_cols <- c("Taxable_Income", by,
                      "new_tax", "baseline_tax")
-  stopifnot(all(required_cols %chin% names(DT)))
+  if (!all(required_cols %chin% names(DT))) {
+    stop("Following names not present in DT:\n", 
+         paste0(setdiff(required_cols, names(DT)), collapse = "\t\n"))
+  }
   
   if (is.null(ids)) {
     out <- .selector(DT, required_cols)
@@ -40,6 +54,9 @@ compare_avg_tax_rates <- function(DT, baseDT, by = "id", ids = NULL) {
     .[]
   
 }
+
+
+
 
 
 

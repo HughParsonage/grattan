@@ -10,7 +10,7 @@
 #' @export
 #' @details With a short-length vector, or with weights of a high variance, the results may be unexpected.
 
-weighted_ntile2 <- function(vector, weights = rep(1, length(vector)), n){
+weighted_ntile <- function(vector, weights = rep(1, length(vector)), n){
   min_w <- min(weights)
   if (min_w < 0) {
     stop("`weights` contained negative values. Ensure `weights` is non-negative.")
