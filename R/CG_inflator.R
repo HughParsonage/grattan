@@ -13,7 +13,7 @@ CG_population_inflator <- function(x = 1,
                                    to_fy, 
                                    forecast.series = "mean", 
                                    cg.series){
-  stopifnot(all(is.fy(c(from_fy, to_fy))))
+  stopifnot(all_fy(c(from_fy, to_fy)))
   stopifnot(forecast.series %in% c("mean", "lower", "upper", "custom"))
   
   last_fy <- max(from_fy, to_fy)
@@ -43,7 +43,7 @@ CG_population_inflator <- function(x = 1,
 
 CG_inflator <- function(x = 1, from_fy, to_fy, forecast.series = "mean"){
   prohibit_vector_recycling(x, from_fy, to_fy)
-  stopifnot(is.numeric(x), all(is.fy(from_fy)), all(is.fy(to_fy)))
+  stopifnot(is.numeric(x), all_fy(from_fy), all_fy(to_fy))
   
   nse_forecast_series <- forecast.series
   cg_inflators_tbl <- 

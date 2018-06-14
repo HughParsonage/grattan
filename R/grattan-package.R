@@ -18,6 +18,7 @@
 #' @importFrom hutils AND
 
 #' @importFrom fastmatch %fin%
+#' @importFrom fastmatch fmatch
 
 #' @importFrom magrittr %>%
 #' @importFrom magrittr %$%

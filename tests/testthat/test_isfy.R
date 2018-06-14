@@ -23,3 +23,8 @@ test_that("Other fy utils", {
   expect_equal(fy2date("2012-13"), as.Date("2013-06-30"))
 })
 
+test_that("all_fy", {
+  expect_true(all_fy(c("2000-01", "2010-11", "2013-14", "2020-21")))
+})
+
+
