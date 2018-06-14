@@ -8,6 +8,7 @@
 #' @param baseDT A \code{data.table} of a single cross-section of taxpayers from
 #' which baseline percentiles can be produced. 
 #' @param by How to separate \code{DT} 
+#' @param ids Subset \code{DT} by \code{by}.
 #' @export
 
 
@@ -25,7 +26,12 @@ compare_avg_tax_rates <- function(DT, baseDT, by = "id", ids = NULL) {
   if (is.null(ids)) {
     out <- .selector(DT, required_cols)
   } else {
-    out <- DT[id %ein% ids, .SD, .SDcols = c(required_cols)]
+    if (identical(by, "id")) {
+      id <- NULL
+      out <- .selector(DT[id %ein% ids], required_cols)
+    } else {
+      out <- .selector(DT[eval(parse(text = id)) %ein% ids], required_cols)
+    }
   }
   
   out[, Taxable_Income_percentile := weighted_ntile(Taxable_Income, n = 100), keyby = c(by)]

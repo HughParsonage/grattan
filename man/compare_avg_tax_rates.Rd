@@ -14,6 +14,8 @@ compare_avg_tax_rates(DT, baseDT, by = "id", ids = NULL)
 which baseline percentiles can be produced.}
 
 \item{by}{How to separate \code{DT}}
+
+\item{ids}{Subset \code{DT} by \code{by}.}
 }
 \description{
 To determine the effects of bracket creep on a proposed tax policy,
