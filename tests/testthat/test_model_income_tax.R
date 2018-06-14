@@ -720,6 +720,18 @@ test_that("lito_multi", {
 })
 
 
+test_that("Keyed data.table", {
+  skip_on_cran()
+  skip_if_not_installed("taxstats")
+  library(taxstats)
+  s1314 <- as.data.table(sample_file_1314)
+  base <- model_income_tax(s1314, "2013-14", sbto_discount = 0.1)
+  setkey(s1314, Taxable_Income)
+  new <- model_income_tax(s1314, "2013-14", sbto_discount = 0.1)
+  setkey(new, NULL)
+  expect_identical(base[order(Taxable_Income)], new)
+})
+
 
 
 
