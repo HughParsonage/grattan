@@ -247,11 +247,11 @@ project <- function(sample_file,
   
   ## Inflate:
   # make numeric to avoid overflow
-  integer.cols <- names(sample_file)[vapply(sample_file, is.integer, TRUE)]
-  integer.cols <- integer.cols[integer.cols %notin% c(Not.Inflated)]
-  for (j in which(col.names %chin% integer.cols)) {
-    set(sample_file, j = j, value = as.double(.subset2(sample_file, j)))
-  }
+  # integer.cols <- names(sample_file)[vapply(sample_file, is.integer, TRUE)]
+  # integer.cols <- integer.cols[integer.cols %notin% c(Not.Inflated)]
+  # for (j in which(col.names %chin% integer.cols)) {
+  #   set(sample_file, j = j, value = as.double(.subset2(sample_file, j)))
+  # }
   
   
   # Differential uprating:
