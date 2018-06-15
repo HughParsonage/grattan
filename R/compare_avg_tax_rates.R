@@ -38,6 +38,7 @@ compare_avg_tax_rates <- function(DT, baseDT, by = "id", ids = NULL) {
     }
   }
   
+  Taxable_Income <- NULL
   out[, Taxable_Income_percentile := weighted_ntile(Taxable_Income, n = 100), keyby = c(by)]
   
   baseline_avgTaxRate_by_Percentile <- 
@@ -56,10 +57,11 @@ compare_avg_tax_rates <- function(DT, baseDT, by = "id", ids = NULL) {
     } else {
       stop("`baseDT` lacked a column `baseline_tax`.")
     }
+  new_avgTaxRate <- avgTaxRate <- new_avg_tax_rate <- new_tax <- NULL
   out[, new_avg_tax_rate := coalesce(new_tax / Taxable_Income, 0)]
   out[, .(new_avgTaxRate = mean(new_avg_tax_rate)), 
       keyby = c(by, "Taxable_Income_percentile")] %>%
-    baseline_avgTaxRate_by_Percentile[, on = "Taxable_Income_percentile"] %>%
+    baseline_avgTaxRate_by_Percentile[., on = "Taxable_Income_percentile"] %>%
     .[, delta_avgTaxRate := new_avgTaxRate - avgTaxRate] %>%
     .[]
   

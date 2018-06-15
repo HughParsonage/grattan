@@ -5,7 +5,7 @@ test_that("Errors", {
                regexp = "`from_fy` contained NAs. Remove NAs before applying.", 
                fixed = TRUE)
   expect_error(cpi_inflator(to_fy = NA, from_fy = "2013-14"), 
-               regexp = "`to` contained NAs. Remove NAs before applying.",
+               regexp = "`to_fy` contained NAs. Remove NAs before applying.",
                fixed = TRUE)
 })
 
