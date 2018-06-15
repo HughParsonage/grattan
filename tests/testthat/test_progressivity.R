@@ -1,5 +1,10 @@
 context("Progressivity")
 
+test_that("Error handling", {
+  expect_error(progressivity(measure = "Kakwani"))
+  expect_error(progressivity(measure = ""))
+})
+
 test_that("Simple examples", {
   I <- c(10e3, 20e3, 50e3, 100e3, 150e3) 
   # Regressive
