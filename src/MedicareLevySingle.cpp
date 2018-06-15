@@ -58,19 +58,38 @@ double MedicareLevySingle(double income, double lowerThreshold, double upperThre
 NumericVector MedicareLevySaptoYear(NumericVector income,
                                     NumericVector SpouseIncome,
                                     IntegerVector NDependants,
-                                    bool sapto,
+                                    LogicalVector SaptoEligible,
                                     int yr) {
   int n = income.length();
-  NumericVector out(n);
+  int n1 = SpouseIncome.length();
+  int n2 = NDependants.length();
+  int n3 = SaptoEligible.length();
   
-  if (sapto) {
-    for (int i = 0; i < n; ++i) {
+  bool r1 = n1 == n;
+  bool r2 = n2 == n;
+  bool r3 = n3 == n;
+  
+  NumericVector out(n);
+  double sii = SpouseIncome[0];
+  int ndi = NDependants[0];
+  bool sapto = SaptoEligible[0];
+  
+  for (int i = 0; i < n; ++i) {
+    double ii = income[i];
+    if (r1) {
+      sii = SpouseIncome[i];
+    }
+    if (r2) {
+      ndi = NDependants[i];
+    }
+    if (r3) {
+      sapto = SaptoEligible[i];
+    }
+    bool ifi = sii > 0 || ndi > 0;
+    if (sapto) {
       // Declare them explicitly so that any argument
       // mismatch is found.
-      double ii = income[i];
-      double sii = SpouseIncome[i];
-      int ndi = NDependants[i];
-      bool ifi = sii > 0 || ndi > 0;
+      
       switch (yr) {
       case 2013:
         out[i] = MedicareLevySingle(ii, 32279, 37976, 0.015, 0.1, sii, ifi, ndi, 46000, 54119, 3094);
@@ -95,15 +114,9 @@ NumericVector MedicareLevySaptoYear(NumericVector income,
         break;
       default:
         out[i] = MedicareLevySingle(ii, 34758, 43449, 0.020, 0.1, sii, ifi, ndi, 48385, 60483, 3406);
-        break;
+      break;
       }
-    }
-  } else {
-    for (int i = 0; i < n; ++i) {
-      double ii = income[i];
-      double sii = SpouseIncome[i];
-      int ndi = NDependants[i];
-      bool ifi = sii > 0 || ndi > 0;
+    } else {
       switch (yr) {
       case 2013:
         out[i] = MedicareLevySingle(ii, 20542, 24168, 0.015, 0.1, sii, ifi, ndi, 33693, 39640, 3094);

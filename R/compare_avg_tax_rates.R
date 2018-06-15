@@ -16,6 +16,10 @@ compare_avg_tax_rates <- function(DT, baseDT, by = "id", ids = NULL) {
   if (!is.data.table(DT)) {
     DT <- as.data.table(DT)
   }
+  if (!is.data.table(baseDT)) {
+    baseDT <- as.data.table(baseDT)
+  }
+  
   required_cols <- c("Taxable_Income", by,
                      "new_tax", "baseline_tax")
   if (!all(required_cols %chin% names(DT))) {
@@ -30,7 +34,7 @@ compare_avg_tax_rates <- function(DT, baseDT, by = "id", ids = NULL) {
       id <- NULL
       out <- .selector(DT[id %ein% ids], required_cols)
     } else {
-      out <- .selector(DT[eval(parse(text = id)) %ein% ids], required_cols)
+      out <- .selector(DT[eval(parse(text = by)) %ein% ids], required_cols)
     }
   }
   
