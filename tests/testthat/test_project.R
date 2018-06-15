@@ -1,19 +1,21 @@
 context("project function")
 
 test_that("Error handling", {
-  
+  skip_on_cran()
+  skip_if_not_installed("taxstats")
+  library(taxstats)
   expect_error(project(data.table(), h = 1L),
                regexp = "`fy.year.of.sample.file` was not provided, and its value could not be inferred from nrow(sample_file) = 0. Either use a 2% sample file of the years 2012-13, 2013-14, or 2014-15 or supply `fy.year.of.sample.file` manually.", 
                fixed = TRUE)
   
   
-  expect_warning(project(data.table(), h = 1L, fy.year.of.sample.file = "2013-14"), 
+  expect_warning(project(sample_file_1112, h = 1L, fy.year.of.sample.file = "2013-14"), 
                  regexp = "nrow(sample_file) != 254318.", 
                  fixed = TRUE)
-  expect_warning(project(data.table(), h = 1L, fy.year.of.sample.file = "2014-15"), 
+  expect_warning(project(sample_file_1112, h = 1L, fy.year.of.sample.file = "2014-15"), 
                  regexp = "nrow(sample_file) != 263339", 
                  fixed = TRUE)
-  expect_warning(project(data.table(), h = 1L, fy.year.of.sample.file = "2015-16"), 
+  expect_warning(project(sample_file_1112, h = 1L, fy.year.of.sample.file = "2015-16"), 
                  regexp = "nrow(sample_file) != 269639", 
                  fixed = TRUE)
 })
@@ -87,9 +89,12 @@ test_that("Coverage", {
   out2 <- project(hutils::drop_col(s1516, "Med_Exp_TO_amt"),
                  h = 1L,
                  .recalculate.inflators = TRUE)
-  expect_equal(out1, out2)
+  expect_equal(out1, out2, tol = 0.1)
   
-  expect_error(project(sample_file_1112, fy.year.of.sample.file = "2011-12", h = 1L),
+  expect_error(project(sample_file_1112,
+                       h = 1L,
+                       fy.year.of.sample.file = "2011-12",
+                       check_fy_sample_file = FALSE),
                regexp = "Precalculated inflators")
   
   out3 <- project(s1516, h = 1L, excl_vars = "Other_foreign_inc_amt")
