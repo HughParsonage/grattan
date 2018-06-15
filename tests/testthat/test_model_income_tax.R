@@ -732,6 +732,36 @@ test_that("Keyed data.table", {
   expect_identical(base[order(Taxable_Income)], new)
 })
 
+test_that("Budget2018", {
+  skip_on_cran()
+  skip_if_not_installed("taxstats")
+  library(taxstats)
+  s1314 <- as.data.table(sample_file_1314)
+  sWatr <- model_income_tax(s1314,
+                            baseline_fy =  "2013-14",
+                            Budget2018_watr = TRUE,
+                            return. = "sample_file.int")
+  out_10k <- 
+    sWatr[, .(delta = mean(new_tax - baseline_tax)),
+          keyby = .(Income = round(Taxable_Income, -4))]
+  expect_equal(out_10k[.(70e3), delta], -928)
+  expect_equal(out_10k[.(140e3), delta], 0)
+  
+  
+  sL2223 <- model_income_tax(s1314,
+                             baseline_fy =  "2013-14",
+                             Budget2018_lito_202223 = TRUE,
+                             return. = "sample_file.int")
+  sL2223[, delta := new_tax - baseline_tax]
+  expect_equal(sL2223[, min(delta)], -200)
+  
+  sL2223_10k <- 
+    sL2223[, .(delta = mean(new_tax - baseline_tax)),
+           keyby = .(Income = round(Taxable_Income, -4))]
+  expect_equal(sL2223_10k[delta < 0, Income], (2:4) * 10e3)
+  
+})
+
 
 
 
