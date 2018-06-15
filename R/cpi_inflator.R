@@ -19,10 +19,13 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
                          useABSConnection = FALSE,
                          allow.projection = TRUE){
   # CRAN
-  obsTime <- NULL; obsValue <- NULL; to_index <- NULL; from_index <- NULL
+  obsTime <- obsValue <- to_index <- from_index <- NULL
   
-  if (anyNA(from_fy) || anyNA(to_fy)){
-    stop("from_fy and to_fy contain NAs. Remove NAs before applying.")
+  if (anyNA(from_fy)) {
+    stop("`from_fy` contained NAs. Remove NAs before applying.")
+  } 
+  if (anyNA(to_fy)){
+    stop("`to_fy` contained NAs. Remove NAs before applying.")
   }
   # Don't like vector recycling
   # http://stackoverflow.com/a/9335687/1664978
