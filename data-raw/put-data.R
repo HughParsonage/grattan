@@ -886,6 +886,16 @@ use_and_write_data <- function(...) {
   fwrite_dots(...)
 }
 
+setkey(cg_inflators_1213, fy_year, forecast.series)
+setkey(cg_inflators_1314, fy_year, forecast.series)
+setkey(cg_inflators_1415, fy_year, forecast.series)
+setkey(cg_inflators_1516, fy_year, forecast.series)
+
+setkey(generic_inflators_1213[, fy_year := NULL], h, variable)
+setkey(generic_inflators_1314[, fy_year := NULL], h, variable)
+setkey(generic_inflators_1415[, fy_year := NULL], h, variable)
+setkey(generic_inflators_1516[, fy_year := NULL], h, variable)
+
 use_and_write_data(tax_table2, 
                    lito_tbl, 
                    tax_tbl, 

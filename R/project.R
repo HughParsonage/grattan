@@ -229,15 +229,18 @@ project <- function(sample_file,
   
   if (.recalculate.inflators){
     generic.inflators <- 
-      generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = fy.year.of.sample.file, 
-                       estimator = forecast.dots$estimator, pred_interval = forecast.dots$pred_interval)
+      generic_inflator(vars = generic.cols,
+                       h = h,
+                       fy.year.of.sample.file = fy.year.of.sample.file, 
+                       estimator = forecast.dots$estimator,
+                       pred_interval = forecast.dots$pred_interval)
   } else {
     generic.inflators <- 
       switch(current.fy, 
-             "2012-13" = as.data.table(generic_inflators_1213)[and(fy_year == to.fy, h == H)], 
-             "2013-14" = as.data.table(generic_inflators_1314)[and(fy_year == to.fy, h == H)], 
-             "2014-15" = as.data.table(generic_inflators_1415)[and(fy_year == to.fy, h == H)], 
-             "2015-16" = as.data.table(generic_inflators_1516)[and(fy_year == to.fy, h == H)], 
+             "2012-13" = generic_inflators_1213, 
+             "2013-14" = generic_inflators_1314, 
+             "2014-15" = generic_inflators_1415, 
+             "2015-16" = generic_inflators_1516, 
              stop("Precalculated inflators only available when projecting from ",
                   "2012-13, 2013-14, 2014-15, and 2015-16."))
   }
@@ -273,12 +276,20 @@ project <- function(sample_file,
   for (j in which(col.names %chin% CGTy.cols))
     set(sample_file, j = j, value = CG.inflator * sample_file[[j]])
   
-  for (j in which(col.names %chin% generic.cols)){
-    stopifnot("variable" %in% names(generic.inflators))  ## super safe
-    nom <- col.names[j]
-    set(sample_file, 
-        j = j, 
-        value = generic.inflators[variable == nom]$inflator * sample_file[[j]])
+  if (.recalculate.inflators) {
+    for (j in which(col.names %chin% generic.cols)){
+      stopifnot("variable" %in% names(generic.inflators))  ## super safe
+      nom <- col.names[j]
+      set(sample_file, 
+          j = j, 
+          value = generic.inflators[variable == nom]$inflator * sample_file[[j]])
+    }
+  } else {
+    stopifnot(identical(key(generic.inflators), c("h", "variable")))
+    for (v in generic.cols) {
+      set(sample_file, j = v,
+          value = generic.inflators[.(H, v), inflator] * .subset2(sample_file, v))
+    }
   }
   
   for (j in which(col.names %in% super.bal.col)){

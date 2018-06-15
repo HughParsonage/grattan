@@ -1,556 +1,556 @@
-variable	inflator	h	fy_year
-Grs_int_amt	1	1	2016-17
-Aust_govt_pnsn_allw_amt	1	1	2016-17
-Unfranked_Div_amt	1.02	1	2016-17
-Frk_Div_amt	1	1	2016-17
-Dividends_franking_cr_amt	1.07	1	2016-17
-Gross_rent_amt	1.05	1	2016-17
-Other_rent_ded_amt	1.04	1	2016-17
-Rent_int_ded_amt	1	1	2016-17
-Rent_cap_wks_amt	1.07	1	2016-17
-Net_farm_management_amt	0.71	1	2016-17
-Total_PP_BI_amt	0.76	1	2016-17
-Total_NPP_BI_amt	1.01	1	2016-17
-Total_PP_BE_amt	0.89	1	2016-17
-Total_NPP_BE_amt	1.13	1	2016-17
-Net_CG_amt	1	1	2016-17
-Tot_CY_CG_amt	1	1	2016-17
-Net_PT_PP_dsn	0.96	1	2016-17
-Net_PT_NPP_dsn	1.1	1	2016-17
-Taxed_othr_pnsn_amt	0.93	1	2016-17
-Untaxed_othr_pnsn_amt	1.04	1	2016-17
-Other_foreign_inc_amt	1.03	1	2016-17
-Other_inc_amt	0.98	1	2016-17
-Div_Ded_amt	0.9	1	2016-17
-Intrst_Ded_amt	1	1	2016-17
-Gift_amt	0.98	1	2016-17
-PP_loss_claimed	0.86	1	2016-17
-NPP_loss_claimed	1	1	2016-17
-Rep_frng_ben_amt	1.06	1	2016-17
-Asbl_forgn_source_incm_amt	0.92	1	2016-17
-Net_fincl_invstmt_lss_amt	1.35	1	2016-17
-Cr_PAYG_ITI_amt	0.96	1	2016-17
-TFN_amts_wheld_gr_intst_amt	1.02	1	2016-17
-TFN_amts_wheld_divs_amt	1.2	1	2016-17
-Hrs_to_prepare_BPI_cnt	2.58	1	2016-17
-Help_debt	1.1	1	2016-17
-Med_Exp_TO_amt	1	1	2016-17
-Spouse_adjusted_taxable_inc	1	1	2016-17
-Grs_int_amt	1	2	2017-18
-Aust_govt_pnsn_allw_amt	1	2	2017-18
-Unfranked_Div_amt	1.02	2	2017-18
-Frk_Div_amt	1	2	2017-18
-Dividends_franking_cr_amt	1.07	2	2017-18
-Gross_rent_amt	1.09	2	2017-18
-Other_rent_ded_amt	1.09	2	2017-18
-Rent_int_ded_amt	1	2	2017-18
-Rent_cap_wks_amt	1.13	2	2017-18
-Net_farm_management_amt	0.71	2	2017-18
-Total_PP_BI_amt	0.76	2	2017-18
-Total_NPP_BI_amt	1.01	2	2017-18
-Total_PP_BE_amt	0.89	2	2017-18
-Total_NPP_BE_amt	1.13	2	2017-18
-Net_CG_amt	1	2	2017-18
-Tot_CY_CG_amt	1	2	2017-18
-Net_PT_PP_dsn	0.96	2	2017-18
-Net_PT_NPP_dsn	1.14	2	2017-18
-Taxed_othr_pnsn_amt	0.93	2	2017-18
-Untaxed_othr_pnsn_amt	1.06	2	2017-18
-Other_foreign_inc_amt	1.03	2	2017-18
-Other_inc_amt	0.98	2	2017-18
-Div_Ded_amt	0.81	2	2017-18
-Intrst_Ded_amt	1	2	2017-18
-Gift_amt	0.98	2	2017-18
-PP_loss_claimed	0.86	2	2017-18
-NPP_loss_claimed	1	2	2017-18
-Rep_frng_ben_amt	1.1	2	2017-18
-Asbl_forgn_source_incm_amt	0.92	2	2017-18
-Net_fincl_invstmt_lss_amt	1.35	2	2017-18
-Cr_PAYG_ITI_amt	0.96	2	2017-18
-TFN_amts_wheld_gr_intst_amt	1.02	2	2017-18
-TFN_amts_wheld_divs_amt	1.2	2	2017-18
-Hrs_to_prepare_BPI_cnt	2.58	2	2017-18
-Help_debt	1.21	2	2017-18
-Med_Exp_TO_amt	0.96	2	2017-18
-Spouse_adjusted_taxable_inc	1	2	2017-18
-Grs_int_amt	1	3	2018-19
-Aust_govt_pnsn_allw_amt	1	3	2018-19
-Unfranked_Div_amt	1.02	3	2018-19
-Frk_Div_amt	1	3	2018-19
-Dividends_franking_cr_amt	1.07	3	2018-19
-Gross_rent_amt	1.14	3	2018-19
-Other_rent_ded_amt	1.13	3	2018-19
-Rent_int_ded_amt	1	3	2018-19
-Rent_cap_wks_amt	1.2	3	2018-19
-Net_farm_management_amt	0.71	3	2018-19
-Total_PP_BI_amt	0.76	3	2018-19
-Total_NPP_BI_amt	1.01	3	2018-19
-Total_PP_BE_amt	0.89	3	2018-19
-Total_NPP_BE_amt	1.13	3	2018-19
-Net_CG_amt	1	3	2018-19
-Tot_CY_CG_amt	1	3	2018-19
-Net_PT_PP_dsn	0.96	3	2018-19
-Net_PT_NPP_dsn	1.18	3	2018-19
-Taxed_othr_pnsn_amt	0.93	3	2018-19
-Untaxed_othr_pnsn_amt	1.1	3	2018-19
-Other_foreign_inc_amt	1.03	3	2018-19
-Other_inc_amt	0.98	3	2018-19
-Div_Ded_amt	0.71	3	2018-19
-Intrst_Ded_amt	1	3	2018-19
-Gift_amt	0.98	3	2018-19
-PP_loss_claimed	0.86	3	2018-19
-NPP_loss_claimed	1	3	2018-19
-Rep_frng_ben_amt	1.13	3	2018-19
-Asbl_forgn_source_incm_amt	0.92	3	2018-19
-Net_fincl_invstmt_lss_amt	1.35	3	2018-19
-Cr_PAYG_ITI_amt	0.96	3	2018-19
-TFN_amts_wheld_gr_intst_amt	1.02	3	2018-19
-TFN_amts_wheld_divs_amt	1.2	3	2018-19
-Hrs_to_prepare_BPI_cnt	2.58	3	2018-19
-Help_debt	1.31	3	2018-19
-Med_Exp_TO_amt	0.92	3	2018-19
-Spouse_adjusted_taxable_inc	1	3	2018-19
-Grs_int_amt	1	4	2019-20
-Aust_govt_pnsn_allw_amt	1	4	2019-20
-Unfranked_Div_amt	1.02	4	2019-20
-Frk_Div_amt	1	4	2019-20
-Dividends_franking_cr_amt	1.07	4	2019-20
-Gross_rent_amt	1.18	4	2019-20
-Other_rent_ded_amt	1.18	4	2019-20
-Rent_int_ded_amt	1	4	2019-20
-Rent_cap_wks_amt	1.26	4	2019-20
-Net_farm_management_amt	0.71	4	2019-20
-Total_PP_BI_amt	0.76	4	2019-20
-Total_NPP_BI_amt	1.01	4	2019-20
-Total_PP_BE_amt	0.89	4	2019-20
-Total_NPP_BE_amt	1.13	4	2019-20
-Net_CG_amt	1	4	2019-20
-Tot_CY_CG_amt	1	4	2019-20
-Net_PT_PP_dsn	0.96	4	2019-20
-Net_PT_NPP_dsn	1.22	4	2019-20
-Taxed_othr_pnsn_amt	0.93	4	2019-20
-Untaxed_othr_pnsn_amt	1.13	4	2019-20
-Other_foreign_inc_amt	1.03	4	2019-20
-Other_inc_amt	0.98	4	2019-20
-Div_Ded_amt	0.62	4	2019-20
-Intrst_Ded_amt	1	4	2019-20
-Gift_amt	0.98	4	2019-20
-PP_loss_claimed	0.86	4	2019-20
-NPP_loss_claimed	1	4	2019-20
-Rep_frng_ben_amt	1.17	4	2019-20
-Asbl_forgn_source_incm_amt	0.92	4	2019-20
-Net_fincl_invstmt_lss_amt	1.35	4	2019-20
-Cr_PAYG_ITI_amt	0.96	4	2019-20
-TFN_amts_wheld_gr_intst_amt	1.02	4	2019-20
-TFN_amts_wheld_divs_amt	1.2	4	2019-20
-Hrs_to_prepare_BPI_cnt	2.58	4	2019-20
-Help_debt	1.41	4	2019-20
-Med_Exp_TO_amt	0.88	4	2019-20
-Spouse_adjusted_taxable_inc	1	4	2019-20
-Grs_int_amt	1	5	2020-21
-Aust_govt_pnsn_allw_amt	1	5	2020-21
-Unfranked_Div_amt	1.02	5	2020-21
-Frk_Div_amt	1	5	2020-21
-Dividends_franking_cr_amt	1.07	5	2020-21
-Gross_rent_amt	1.23	5	2020-21
-Other_rent_ded_amt	1.22	5	2020-21
-Rent_int_ded_amt	1	5	2020-21
-Rent_cap_wks_amt	1.33	5	2020-21
-Net_farm_management_amt	0.71	5	2020-21
-Total_PP_BI_amt	0.76	5	2020-21
-Total_NPP_BI_amt	1.01	5	2020-21
-Total_PP_BE_amt	0.89	5	2020-21
-Total_NPP_BE_amt	1.13	5	2020-21
-Net_CG_amt	1	5	2020-21
-Tot_CY_CG_amt	1	5	2020-21
-Net_PT_PP_dsn	0.96	5	2020-21
-Net_PT_NPP_dsn	1.26	5	2020-21
-Taxed_othr_pnsn_amt	0.93	5	2020-21
-Untaxed_othr_pnsn_amt	1.16	5	2020-21
-Other_foreign_inc_amt	1.03	5	2020-21
-Other_inc_amt	0.98	5	2020-21
-Div_Ded_amt	0.52	5	2020-21
-Intrst_Ded_amt	1	5	2020-21
-Gift_amt	0.98	5	2020-21
-PP_loss_claimed	0.86	5	2020-21
-NPP_loss_claimed	1	5	2020-21
-Rep_frng_ben_amt	1.21	5	2020-21
-Asbl_forgn_source_incm_amt	0.92	5	2020-21
-Net_fincl_invstmt_lss_amt	1.35	5	2020-21
-Cr_PAYG_ITI_amt	0.96	5	2020-21
-TFN_amts_wheld_gr_intst_amt	1.02	5	2020-21
-TFN_amts_wheld_divs_amt	1.2	5	2020-21
-Hrs_to_prepare_BPI_cnt	2.58	5	2020-21
-Help_debt	1.52	5	2020-21
-Med_Exp_TO_amt	0.84	5	2020-21
-Spouse_adjusted_taxable_inc	1	5	2020-21
-Grs_int_amt	1	6	2021-22
-Aust_govt_pnsn_allw_amt	1	6	2021-22
-Unfranked_Div_amt	1.02	6	2021-22
-Frk_Div_amt	1	6	2021-22
-Dividends_franking_cr_amt	1.07	6	2021-22
-Gross_rent_amt	1.27	6	2021-22
-Other_rent_ded_amt	1.27	6	2021-22
-Rent_int_ded_amt	1	6	2021-22
-Rent_cap_wks_amt	1.39	6	2021-22
-Net_farm_management_amt	0.71	6	2021-22
-Total_PP_BI_amt	0.76	6	2021-22
-Total_NPP_BI_amt	1.01	6	2021-22
-Total_PP_BE_amt	0.89	6	2021-22
-Total_NPP_BE_amt	1.13	6	2021-22
-Net_CG_amt	1	6	2021-22
-Tot_CY_CG_amt	1	6	2021-22
-Net_PT_PP_dsn	0.96	6	2021-22
-Net_PT_NPP_dsn	1.3	6	2021-22
-Taxed_othr_pnsn_amt	0.93	6	2021-22
-Untaxed_othr_pnsn_amt	1.19	6	2021-22
-Other_foreign_inc_amt	1.03	6	2021-22
-Other_inc_amt	0.98	6	2021-22
-Div_Ded_amt	0.43	6	2021-22
-Intrst_Ded_amt	1	6	2021-22
-Gift_amt	0.98	6	2021-22
-PP_loss_claimed	0.86	6	2021-22
-NPP_loss_claimed	1	6	2021-22
-Rep_frng_ben_amt	1.25	6	2021-22
-Asbl_forgn_source_incm_amt	0.92	6	2021-22
-Net_fincl_invstmt_lss_amt	1.35	6	2021-22
-Cr_PAYG_ITI_amt	0.96	6	2021-22
-TFN_amts_wheld_gr_intst_amt	1.02	6	2021-22
-TFN_amts_wheld_divs_amt	1.2	6	2021-22
-Hrs_to_prepare_BPI_cnt	2.58	6	2021-22
-Help_debt	1.62	6	2021-22
-Med_Exp_TO_amt	0.81	6	2021-22
-Spouse_adjusted_taxable_inc	1	6	2021-22
-Grs_int_amt	1	7	2022-23
-Aust_govt_pnsn_allw_amt	1	7	2022-23
-Unfranked_Div_amt	1.02	7	2022-23
-Frk_Div_amt	1	7	2022-23
-Dividends_franking_cr_amt	1.07	7	2022-23
-Gross_rent_amt	1.32	7	2022-23
-Other_rent_ded_amt	1.31	7	2022-23
-Rent_int_ded_amt	1	7	2022-23
-Rent_cap_wks_amt	1.46	7	2022-23
-Net_farm_management_amt	0.71	7	2022-23
-Total_PP_BI_amt	0.76	7	2022-23
-Total_NPP_BI_amt	1.01	7	2022-23
-Total_PP_BE_amt	0.89	7	2022-23
-Total_NPP_BE_amt	1.13	7	2022-23
-Net_CG_amt	1	7	2022-23
-Tot_CY_CG_amt	1	7	2022-23
-Net_PT_PP_dsn	0.96	7	2022-23
-Net_PT_NPP_dsn	1.34	7	2022-23
-Taxed_othr_pnsn_amt	0.93	7	2022-23
-Untaxed_othr_pnsn_amt	1.22	7	2022-23
-Other_foreign_inc_amt	1.03	7	2022-23
-Other_inc_amt	0.98	7	2022-23
-Div_Ded_amt	0.33	7	2022-23
-Intrst_Ded_amt	1	7	2022-23
-Gift_amt	0.98	7	2022-23
-PP_loss_claimed	0.86	7	2022-23
-NPP_loss_claimed	1	7	2022-23
-Rep_frng_ben_amt	1.28	7	2022-23
-Asbl_forgn_source_incm_amt	0.92	7	2022-23
-Net_fincl_invstmt_lss_amt	1.35	7	2022-23
-Cr_PAYG_ITI_amt	0.96	7	2022-23
-TFN_amts_wheld_gr_intst_amt	1.02	7	2022-23
-TFN_amts_wheld_divs_amt	1.2	7	2022-23
-Hrs_to_prepare_BPI_cnt	2.58	7	2022-23
-Help_debt	1.72	7	2022-23
-Med_Exp_TO_amt	0.78	7	2022-23
-Spouse_adjusted_taxable_inc	1	7	2022-23
-Grs_int_amt	1	8	2023-24
-Aust_govt_pnsn_allw_amt	1	8	2023-24
-Unfranked_Div_amt	1.02	8	2023-24
-Frk_Div_amt	1	8	2023-24
-Dividends_franking_cr_amt	1.07	8	2023-24
-Gross_rent_amt	1.36	8	2023-24
-Other_rent_ded_amt	1.35	8	2023-24
-Rent_int_ded_amt	1	8	2023-24
-Rent_cap_wks_amt	1.53	8	2023-24
-Net_farm_management_amt	0.71	8	2023-24
-Total_PP_BI_amt	0.76	8	2023-24
-Total_NPP_BI_amt	1.01	8	2023-24
-Total_PP_BE_amt	0.89	8	2023-24
-Total_NPP_BE_amt	1.13	8	2023-24
-Net_CG_amt	1	8	2023-24
-Tot_CY_CG_amt	1	8	2023-24
-Net_PT_PP_dsn	0.96	8	2023-24
-Net_PT_NPP_dsn	1.38	8	2023-24
-Taxed_othr_pnsn_amt	0.93	8	2023-24
-Untaxed_othr_pnsn_amt	1.25	8	2023-24
-Other_foreign_inc_amt	1.03	8	2023-24
-Other_inc_amt	0.98	8	2023-24
-Div_Ded_amt	0.24	8	2023-24
-Intrst_Ded_amt	1	8	2023-24
-Gift_amt	0.98	8	2023-24
-PP_loss_claimed	0.86	8	2023-24
-NPP_loss_claimed	1	8	2023-24
-Rep_frng_ben_amt	1.32	8	2023-24
-Asbl_forgn_source_incm_amt	0.92	8	2023-24
-Net_fincl_invstmt_lss_amt	1.35	8	2023-24
-Cr_PAYG_ITI_amt	0.96	8	2023-24
-TFN_amts_wheld_gr_intst_amt	1.02	8	2023-24
-TFN_amts_wheld_divs_amt	1.2	8	2023-24
-Hrs_to_prepare_BPI_cnt	2.58	8	2023-24
-Help_debt	1.82	8	2023-24
-Med_Exp_TO_amt	0.74	8	2023-24
-Spouse_adjusted_taxable_inc	1	8	2023-24
-Grs_int_amt	1	9	2024-25
-Aust_govt_pnsn_allw_amt	1	9	2024-25
-Unfranked_Div_amt	1.02	9	2024-25
-Frk_Div_amt	1	9	2024-25
-Dividends_franking_cr_amt	1.07	9	2024-25
-Gross_rent_amt	1.41	9	2024-25
-Other_rent_ded_amt	1.4	9	2024-25
-Rent_int_ded_amt	1	9	2024-25
-Rent_cap_wks_amt	1.59	9	2024-25
-Net_farm_management_amt	0.71	9	2024-25
-Total_PP_BI_amt	0.76	9	2024-25
-Total_NPP_BI_amt	1.01	9	2024-25
-Total_PP_BE_amt	0.89	9	2024-25
-Total_NPP_BE_amt	1.13	9	2024-25
-Net_CG_amt	1	9	2024-25
-Tot_CY_CG_amt	1	9	2024-25
-Net_PT_PP_dsn	0.96	9	2024-25
-Net_PT_NPP_dsn	1.42	9	2024-25
-Taxed_othr_pnsn_amt	0.93	9	2024-25
-Untaxed_othr_pnsn_amt	1.29	9	2024-25
-Other_foreign_inc_amt	1.03	9	2024-25
-Other_inc_amt	0.98	9	2024-25
-Div_Ded_amt	0.14	9	2024-25
-Intrst_Ded_amt	1	9	2024-25
-Gift_amt	0.98	9	2024-25
-PP_loss_claimed	0.86	9	2024-25
-NPP_loss_claimed	1	9	2024-25
-Rep_frng_ben_amt	1.36	9	2024-25
-Asbl_forgn_source_incm_amt	0.92	9	2024-25
-Net_fincl_invstmt_lss_amt	1.35	9	2024-25
-Cr_PAYG_ITI_amt	0.96	9	2024-25
-TFN_amts_wheld_gr_intst_amt	1.02	9	2024-25
-TFN_amts_wheld_divs_amt	1.2	9	2024-25
-Hrs_to_prepare_BPI_cnt	2.58	9	2024-25
-Help_debt	1.93	9	2024-25
-Med_Exp_TO_amt	0.71	9	2024-25
-Spouse_adjusted_taxable_inc	1	9	2024-25
-Grs_int_amt	1	10	2025-26
-Aust_govt_pnsn_allw_amt	1	10	2025-26
-Unfranked_Div_amt	1.02	10	2025-26
-Frk_Div_amt	1	10	2025-26
-Dividends_franking_cr_amt	1.07	10	2025-26
-Gross_rent_amt	1.45	10	2025-26
-Other_rent_ded_amt	1.44	10	2025-26
-Rent_int_ded_amt	1	10	2025-26
-Rent_cap_wks_amt	1.66	10	2025-26
-Net_farm_management_amt	0.71	10	2025-26
-Total_PP_BI_amt	0.76	10	2025-26
-Total_NPP_BI_amt	1.01	10	2025-26
-Total_PP_BE_amt	0.89	10	2025-26
-Total_NPP_BE_amt	1.13	10	2025-26
-Net_CG_amt	1	10	2025-26
-Tot_CY_CG_amt	1	10	2025-26
-Net_PT_PP_dsn	0.96	10	2025-26
-Net_PT_NPP_dsn	1.46	10	2025-26
-Taxed_othr_pnsn_amt	0.93	10	2025-26
-Untaxed_othr_pnsn_amt	1.32	10	2025-26
-Other_foreign_inc_amt	1.03	10	2025-26
-Other_inc_amt	0.98	10	2025-26
-Div_Ded_amt	0.04	10	2025-26
-Intrst_Ded_amt	1	10	2025-26
-Gift_amt	0.98	10	2025-26
-PP_loss_claimed	0.86	10	2025-26
-NPP_loss_claimed	1	10	2025-26
-Rep_frng_ben_amt	1.4	10	2025-26
-Asbl_forgn_source_incm_amt	0.92	10	2025-26
-Net_fincl_invstmt_lss_amt	1.35	10	2025-26
-Cr_PAYG_ITI_amt	0.96	10	2025-26
-TFN_amts_wheld_gr_intst_amt	1.02	10	2025-26
-TFN_amts_wheld_divs_amt	1.2	10	2025-26
-Hrs_to_prepare_BPI_cnt	2.58	10	2025-26
-Help_debt	2.03	10	2025-26
-Med_Exp_TO_amt	0.68	10	2025-26
-Spouse_adjusted_taxable_inc	1	10	2025-26
-Grs_int_amt	1	11	2026-27
-Aust_govt_pnsn_allw_amt	1	11	2026-27
-Unfranked_Div_amt	1.02	11	2026-27
-Frk_Div_amt	1	11	2026-27
-Dividends_franking_cr_amt	1.07	11	2026-27
-Gross_rent_amt	1.5	11	2026-27
-Other_rent_ded_amt	1.49	11	2026-27
-Rent_int_ded_amt	1	11	2026-27
-Rent_cap_wks_amt	1.72	11	2026-27
-Net_farm_management_amt	0.71	11	2026-27
-Total_PP_BI_amt	0.76	11	2026-27
-Total_NPP_BI_amt	1.01	11	2026-27
-Total_PP_BE_amt	0.89	11	2026-27
-Total_NPP_BE_amt	1.13	11	2026-27
-Net_CG_amt	1	11	2026-27
-Tot_CY_CG_amt	1	11	2026-27
-Net_PT_PP_dsn	0.96	11	2026-27
-Net_PT_NPP_dsn	1.5	11	2026-27
-Taxed_othr_pnsn_amt	0.93	11	2026-27
-Untaxed_othr_pnsn_amt	1.35	11	2026-27
-Other_foreign_inc_amt	1.03	11	2026-27
-Other_inc_amt	0.98	11	2026-27
-Div_Ded_amt	-0.05	11	2026-27
-Intrst_Ded_amt	1	11	2026-27
-Gift_amt	0.98	11	2026-27
-PP_loss_claimed	0.86	11	2026-27
-NPP_loss_claimed	1	11	2026-27
-Rep_frng_ben_amt	1.43	11	2026-27
-Asbl_forgn_source_incm_amt	0.92	11	2026-27
-Net_fincl_invstmt_lss_amt	1.35	11	2026-27
-Cr_PAYG_ITI_amt	0.96	11	2026-27
-TFN_amts_wheld_gr_intst_amt	1.02	11	2026-27
-TFN_amts_wheld_divs_amt	1.2	11	2026-27
-Hrs_to_prepare_BPI_cnt	2.58	11	2026-27
-Help_debt	2.13	11	2026-27
-Med_Exp_TO_amt	0.65	11	2026-27
-Spouse_adjusted_taxable_inc	1	11	2026-27
-Grs_int_amt	1	12	2027-28
-Aust_govt_pnsn_allw_amt	1	12	2027-28
-Unfranked_Div_amt	1.02	12	2027-28
-Frk_Div_amt	1	12	2027-28
-Dividends_franking_cr_amt	1.07	12	2027-28
-Gross_rent_amt	1.54	12	2027-28
-Other_rent_ded_amt	1.53	12	2027-28
-Rent_int_ded_amt	1	12	2027-28
-Rent_cap_wks_amt	1.79	12	2027-28
-Net_farm_management_amt	0.71	12	2027-28
-Total_PP_BI_amt	0.76	12	2027-28
-Total_NPP_BI_amt	1.01	12	2027-28
-Total_PP_BE_amt	0.89	12	2027-28
-Total_NPP_BE_amt	1.13	12	2027-28
-Net_CG_amt	1	12	2027-28
-Tot_CY_CG_amt	1	12	2027-28
-Net_PT_PP_dsn	0.96	12	2027-28
-Net_PT_NPP_dsn	1.54	12	2027-28
-Taxed_othr_pnsn_amt	0.93	12	2027-28
-Untaxed_othr_pnsn_amt	1.38	12	2027-28
-Other_foreign_inc_amt	1.03	12	2027-28
-Other_inc_amt	0.98	12	2027-28
-Div_Ded_amt	-0.15	12	2027-28
-Intrst_Ded_amt	1	12	2027-28
-Gift_amt	0.98	12	2027-28
-PP_loss_claimed	0.86	12	2027-28
-NPP_loss_claimed	1	12	2027-28
-Rep_frng_ben_amt	1.47	12	2027-28
-Asbl_forgn_source_incm_amt	0.92	12	2027-28
-Net_fincl_invstmt_lss_amt	1.35	12	2027-28
-Cr_PAYG_ITI_amt	0.96	12	2027-28
-TFN_amts_wheld_gr_intst_amt	1.02	12	2027-28
-TFN_amts_wheld_divs_amt	1.2	12	2027-28
-Hrs_to_prepare_BPI_cnt	2.58	12	2027-28
-Help_debt	2.24	12	2027-28
-Med_Exp_TO_amt	0.63	12	2027-28
-Spouse_adjusted_taxable_inc	1	12	2027-28
-Grs_int_amt	1	13	2028-29
-Aust_govt_pnsn_allw_amt	1	13	2028-29
-Unfranked_Div_amt	1.02	13	2028-29
-Frk_Div_amt	1	13	2028-29
-Dividends_franking_cr_amt	1.07	13	2028-29
-Gross_rent_amt	1.59	13	2028-29
-Other_rent_ded_amt	1.58	13	2028-29
-Rent_int_ded_amt	1	13	2028-29
-Rent_cap_wks_amt	1.86	13	2028-29
-Net_farm_management_amt	0.71	13	2028-29
-Total_PP_BI_amt	0.76	13	2028-29
-Total_NPP_BI_amt	1.01	13	2028-29
-Total_PP_BE_amt	0.89	13	2028-29
-Total_NPP_BE_amt	1.13	13	2028-29
-Net_CG_amt	1	13	2028-29
-Tot_CY_CG_amt	1	13	2028-29
-Net_PT_PP_dsn	0.96	13	2028-29
-Net_PT_NPP_dsn	1.58	13	2028-29
-Taxed_othr_pnsn_amt	0.93	13	2028-29
-Untaxed_othr_pnsn_amt	1.41	13	2028-29
-Other_foreign_inc_amt	1.03	13	2028-29
-Other_inc_amt	0.98	13	2028-29
-Div_Ded_amt	-0.24	13	2028-29
-Intrst_Ded_amt	1	13	2028-29
-Gift_amt	0.98	13	2028-29
-PP_loss_claimed	0.86	13	2028-29
-NPP_loss_claimed	1	13	2028-29
-Rep_frng_ben_amt	1.51	13	2028-29
-Asbl_forgn_source_incm_amt	0.92	13	2028-29
-Net_fincl_invstmt_lss_amt	1.35	13	2028-29
-Cr_PAYG_ITI_amt	0.96	13	2028-29
-TFN_amts_wheld_gr_intst_amt	1.02	13	2028-29
-TFN_amts_wheld_divs_amt	1.2	13	2028-29
-Hrs_to_prepare_BPI_cnt	2.58	13	2028-29
-Help_debt	2.34	13	2028-29
-Med_Exp_TO_amt	0.6	13	2028-29
-Spouse_adjusted_taxable_inc	1	13	2028-29
-Grs_int_amt	1	14	2029-30
-Aust_govt_pnsn_allw_amt	1	14	2029-30
-Unfranked_Div_amt	1.02	14	2029-30
-Frk_Div_amt	1	14	2029-30
-Dividends_franking_cr_amt	1.07	14	2029-30
-Gross_rent_amt	1.63	14	2029-30
-Other_rent_ded_amt	1.62	14	2029-30
-Rent_int_ded_amt	1	14	2029-30
-Rent_cap_wks_amt	1.92	14	2029-30
-Net_farm_management_amt	0.71	14	2029-30
-Total_PP_BI_amt	0.76	14	2029-30
-Total_NPP_BI_amt	1.01	14	2029-30
-Total_PP_BE_amt	0.89	14	2029-30
-Total_NPP_BE_amt	1.13	14	2029-30
-Net_CG_amt	1	14	2029-30
-Tot_CY_CG_amt	1	14	2029-30
-Net_PT_PP_dsn	0.96	14	2029-30
-Net_PT_NPP_dsn	1.62	14	2029-30
-Taxed_othr_pnsn_amt	0.93	14	2029-30
-Untaxed_othr_pnsn_amt	1.44	14	2029-30
-Other_foreign_inc_amt	1.03	14	2029-30
-Other_inc_amt	0.98	14	2029-30
-Div_Ded_amt	-0.34	14	2029-30
-Intrst_Ded_amt	1	14	2029-30
-Gift_amt	0.98	14	2029-30
-PP_loss_claimed	0.86	14	2029-30
-NPP_loss_claimed	1	14	2029-30
-Rep_frng_ben_amt	1.55	14	2029-30
-Asbl_forgn_source_incm_amt	0.92	14	2029-30
-Net_fincl_invstmt_lss_amt	1.35	14	2029-30
-Cr_PAYG_ITI_amt	0.96	14	2029-30
-TFN_amts_wheld_gr_intst_amt	1.02	14	2029-30
-TFN_amts_wheld_divs_amt	1.2	14	2029-30
-Hrs_to_prepare_BPI_cnt	2.58	14	2029-30
-Help_debt	2.44	14	2029-30
-Med_Exp_TO_amt	0.58	14	2029-30
-Spouse_adjusted_taxable_inc	1	14	2029-30
-Grs_int_amt	1	15	2030-31
-Aust_govt_pnsn_allw_amt	1	15	2030-31
-Unfranked_Div_amt	1.02	15	2030-31
-Frk_Div_amt	1	15	2030-31
-Dividends_franking_cr_amt	1.07	15	2030-31
-Gross_rent_amt	1.68	15	2030-31
-Other_rent_ded_amt	1.66	15	2030-31
-Rent_int_ded_amt	1	15	2030-31
-Rent_cap_wks_amt	1.99	15	2030-31
-Net_farm_management_amt	0.71	15	2030-31
-Total_PP_BI_amt	0.76	15	2030-31
-Total_NPP_BI_amt	1.01	15	2030-31
-Total_PP_BE_amt	0.89	15	2030-31
-Total_NPP_BE_amt	1.13	15	2030-31
-Net_CG_amt	1	15	2030-31
-Tot_CY_CG_amt	1	15	2030-31
-Net_PT_PP_dsn	0.96	15	2030-31
-Net_PT_NPP_dsn	1.66	15	2030-31
-Taxed_othr_pnsn_amt	0.93	15	2030-31
-Untaxed_othr_pnsn_amt	1.48	15	2030-31
-Other_foreign_inc_amt	1.03	15	2030-31
-Other_inc_amt	0.98	15	2030-31
-Div_Ded_amt	-0.43	15	2030-31
-Intrst_Ded_amt	1	15	2030-31
-Gift_amt	0.98	15	2030-31
-PP_loss_claimed	0.86	15	2030-31
-NPP_loss_claimed	1	15	2030-31
-Rep_frng_ben_amt	1.59	15	2030-31
-Asbl_forgn_source_incm_amt	0.92	15	2030-31
-Net_fincl_invstmt_lss_amt	1.35	15	2030-31
-Cr_PAYG_ITI_amt	0.96	15	2030-31
-TFN_amts_wheld_gr_intst_amt	1.02	15	2030-31
-TFN_amts_wheld_divs_amt	1.2	15	2030-31
-Hrs_to_prepare_BPI_cnt	2.58	15	2030-31
-Help_debt	2.55	15	2030-31
-Med_Exp_TO_amt	0.55	15	2030-31
-Spouse_adjusted_taxable_inc	1	15	2030-31
+variable	inflator	h
+Asbl_forgn_source_incm_amt	0.92	1
+Aust_govt_pnsn_allw_amt	1	1
+Cr_PAYG_ITI_amt	0.96	1
+Div_Ded_amt	0.9	1
+Dividends_franking_cr_amt	1.07	1
+Frk_Div_amt	1	1
+Gift_amt	0.98	1
+Gross_rent_amt	1.05	1
+Grs_int_amt	1	1
+Help_debt	1.1	1
+Hrs_to_prepare_BPI_cnt	2.58	1
+Intrst_Ded_amt	1	1
+Med_Exp_TO_amt	1	1
+NPP_loss_claimed	1	1
+Net_CG_amt	1	1
+Net_PT_NPP_dsn	1.1	1
+Net_PT_PP_dsn	0.96	1
+Net_farm_management_amt	0.71	1
+Net_fincl_invstmt_lss_amt	1.35	1
+Other_foreign_inc_amt	1.03	1
+Other_inc_amt	0.98	1
+Other_rent_ded_amt	1.04	1
+PP_loss_claimed	0.86	1
+Rent_cap_wks_amt	1.07	1
+Rent_int_ded_amt	1	1
+Rep_frng_ben_amt	1.06	1
+Spouse_adjusted_taxable_inc	1	1
+TFN_amts_wheld_divs_amt	1.2	1
+TFN_amts_wheld_gr_intst_amt	1.02	1
+Taxed_othr_pnsn_amt	0.93	1
+Tot_CY_CG_amt	1	1
+Total_NPP_BE_amt	1.13	1
+Total_NPP_BI_amt	1.01	1
+Total_PP_BE_amt	0.89	1
+Total_PP_BI_amt	0.76	1
+Unfranked_Div_amt	1.02	1
+Untaxed_othr_pnsn_amt	1.04	1
+Asbl_forgn_source_incm_amt	0.92	2
+Aust_govt_pnsn_allw_amt	1	2
+Cr_PAYG_ITI_amt	0.96	2
+Div_Ded_amt	0.81	2
+Dividends_franking_cr_amt	1.07	2
+Frk_Div_amt	1	2
+Gift_amt	0.98	2
+Gross_rent_amt	1.09	2
+Grs_int_amt	1	2
+Help_debt	1.21	2
+Hrs_to_prepare_BPI_cnt	2.58	2
+Intrst_Ded_amt	1	2
+Med_Exp_TO_amt	0.96	2
+NPP_loss_claimed	1	2
+Net_CG_amt	1	2
+Net_PT_NPP_dsn	1.14	2
+Net_PT_PP_dsn	0.96	2
+Net_farm_management_amt	0.71	2
+Net_fincl_invstmt_lss_amt	1.35	2
+Other_foreign_inc_amt	1.03	2
+Other_inc_amt	0.98	2
+Other_rent_ded_amt	1.09	2
+PP_loss_claimed	0.86	2
+Rent_cap_wks_amt	1.13	2
+Rent_int_ded_amt	1	2
+Rep_frng_ben_amt	1.1	2
+Spouse_adjusted_taxable_inc	1	2
+TFN_amts_wheld_divs_amt	1.2	2
+TFN_amts_wheld_gr_intst_amt	1.02	2
+Taxed_othr_pnsn_amt	0.93	2
+Tot_CY_CG_amt	1	2
+Total_NPP_BE_amt	1.13	2
+Total_NPP_BI_amt	1.01	2
+Total_PP_BE_amt	0.89	2
+Total_PP_BI_amt	0.76	2
+Unfranked_Div_amt	1.02	2
+Untaxed_othr_pnsn_amt	1.06	2
+Asbl_forgn_source_incm_amt	0.92	3
+Aust_govt_pnsn_allw_amt	1	3
+Cr_PAYG_ITI_amt	0.96	3
+Div_Ded_amt	0.71	3
+Dividends_franking_cr_amt	1.07	3
+Frk_Div_amt	1	3
+Gift_amt	0.98	3
+Gross_rent_amt	1.14	3
+Grs_int_amt	1	3
+Help_debt	1.31	3
+Hrs_to_prepare_BPI_cnt	2.58	3
+Intrst_Ded_amt	1	3
+Med_Exp_TO_amt	0.92	3
+NPP_loss_claimed	1	3
+Net_CG_amt	1	3
+Net_PT_NPP_dsn	1.18	3
+Net_PT_PP_dsn	0.96	3
+Net_farm_management_amt	0.71	3
+Net_fincl_invstmt_lss_amt	1.35	3
+Other_foreign_inc_amt	1.03	3
+Other_inc_amt	0.98	3
+Other_rent_ded_amt	1.13	3
+PP_loss_claimed	0.86	3
+Rent_cap_wks_amt	1.2	3
+Rent_int_ded_amt	1	3
+Rep_frng_ben_amt	1.13	3
+Spouse_adjusted_taxable_inc	1	3
+TFN_amts_wheld_divs_amt	1.2	3
+TFN_amts_wheld_gr_intst_amt	1.02	3
+Taxed_othr_pnsn_amt	0.93	3
+Tot_CY_CG_amt	1	3
+Total_NPP_BE_amt	1.13	3
+Total_NPP_BI_amt	1.01	3
+Total_PP_BE_amt	0.89	3
+Total_PP_BI_amt	0.76	3
+Unfranked_Div_amt	1.02	3
+Untaxed_othr_pnsn_amt	1.1	3
+Asbl_forgn_source_incm_amt	0.92	4
+Aust_govt_pnsn_allw_amt	1	4
+Cr_PAYG_ITI_amt	0.96	4
+Div_Ded_amt	0.62	4
+Dividends_franking_cr_amt	1.07	4
+Frk_Div_amt	1	4
+Gift_amt	0.98	4
+Gross_rent_amt	1.18	4
+Grs_int_amt	1	4
+Help_debt	1.41	4
+Hrs_to_prepare_BPI_cnt	2.58	4
+Intrst_Ded_amt	1	4
+Med_Exp_TO_amt	0.88	4
+NPP_loss_claimed	1	4
+Net_CG_amt	1	4
+Net_PT_NPP_dsn	1.22	4
+Net_PT_PP_dsn	0.96	4
+Net_farm_management_amt	0.71	4
+Net_fincl_invstmt_lss_amt	1.35	4
+Other_foreign_inc_amt	1.03	4
+Other_inc_amt	0.98	4
+Other_rent_ded_amt	1.18	4
+PP_loss_claimed	0.86	4
+Rent_cap_wks_amt	1.26	4
+Rent_int_ded_amt	1	4
+Rep_frng_ben_amt	1.17	4
+Spouse_adjusted_taxable_inc	1	4
+TFN_amts_wheld_divs_amt	1.2	4
+TFN_amts_wheld_gr_intst_amt	1.02	4
+Taxed_othr_pnsn_amt	0.93	4
+Tot_CY_CG_amt	1	4
+Total_NPP_BE_amt	1.13	4
+Total_NPP_BI_amt	1.01	4
+Total_PP_BE_amt	0.89	4
+Total_PP_BI_amt	0.76	4
+Unfranked_Div_amt	1.02	4
+Untaxed_othr_pnsn_amt	1.13	4
+Asbl_forgn_source_incm_amt	0.92	5
+Aust_govt_pnsn_allw_amt	1	5
+Cr_PAYG_ITI_amt	0.96	5
+Div_Ded_amt	0.52	5
+Dividends_franking_cr_amt	1.07	5
+Frk_Div_amt	1	5
+Gift_amt	0.98	5
+Gross_rent_amt	1.23	5
+Grs_int_amt	1	5
+Help_debt	1.52	5
+Hrs_to_prepare_BPI_cnt	2.58	5
+Intrst_Ded_amt	1	5
+Med_Exp_TO_amt	0.84	5
+NPP_loss_claimed	1	5
+Net_CG_amt	1	5
+Net_PT_NPP_dsn	1.26	5
+Net_PT_PP_dsn	0.96	5
+Net_farm_management_amt	0.71	5
+Net_fincl_invstmt_lss_amt	1.35	5
+Other_foreign_inc_amt	1.03	5
+Other_inc_amt	0.98	5
+Other_rent_ded_amt	1.22	5
+PP_loss_claimed	0.86	5
+Rent_cap_wks_amt	1.33	5
+Rent_int_ded_amt	1	5
+Rep_frng_ben_amt	1.21	5
+Spouse_adjusted_taxable_inc	1	5
+TFN_amts_wheld_divs_amt	1.2	5
+TFN_amts_wheld_gr_intst_amt	1.02	5
+Taxed_othr_pnsn_amt	0.93	5
+Tot_CY_CG_amt	1	5
+Total_NPP_BE_amt	1.13	5
+Total_NPP_BI_amt	1.01	5
+Total_PP_BE_amt	0.89	5
+Total_PP_BI_amt	0.76	5
+Unfranked_Div_amt	1.02	5
+Untaxed_othr_pnsn_amt	1.16	5
+Asbl_forgn_source_incm_amt	0.92	6
+Aust_govt_pnsn_allw_amt	1	6
+Cr_PAYG_ITI_amt	0.96	6
+Div_Ded_amt	0.43	6
+Dividends_franking_cr_amt	1.07	6
+Frk_Div_amt	1	6
+Gift_amt	0.98	6
+Gross_rent_amt	1.27	6
+Grs_int_amt	1	6
+Help_debt	1.62	6
+Hrs_to_prepare_BPI_cnt	2.58	6
+Intrst_Ded_amt	1	6
+Med_Exp_TO_amt	0.81	6
+NPP_loss_claimed	1	6
+Net_CG_amt	1	6
+Net_PT_NPP_dsn	1.3	6
+Net_PT_PP_dsn	0.96	6
+Net_farm_management_amt	0.71	6
+Net_fincl_invstmt_lss_amt	1.35	6
+Other_foreign_inc_amt	1.03	6
+Other_inc_amt	0.98	6
+Other_rent_ded_amt	1.27	6
+PP_loss_claimed	0.86	6
+Rent_cap_wks_amt	1.39	6
+Rent_int_ded_amt	1	6
+Rep_frng_ben_amt	1.25	6
+Spouse_adjusted_taxable_inc	1	6
+TFN_amts_wheld_divs_amt	1.2	6
+TFN_amts_wheld_gr_intst_amt	1.02	6
+Taxed_othr_pnsn_amt	0.93	6
+Tot_CY_CG_amt	1	6
+Total_NPP_BE_amt	1.13	6
+Total_NPP_BI_amt	1.01	6
+Total_PP_BE_amt	0.89	6
+Total_PP_BI_amt	0.76	6
+Unfranked_Div_amt	1.02	6
+Untaxed_othr_pnsn_amt	1.19	6
+Asbl_forgn_source_incm_amt	0.92	7
+Aust_govt_pnsn_allw_amt	1	7
+Cr_PAYG_ITI_amt	0.96	7
+Div_Ded_amt	0.33	7
+Dividends_franking_cr_amt	1.07	7
+Frk_Div_amt	1	7
+Gift_amt	0.98	7
+Gross_rent_amt	1.32	7
+Grs_int_amt	1	7
+Help_debt	1.72	7
+Hrs_to_prepare_BPI_cnt	2.58	7
+Intrst_Ded_amt	1	7
+Med_Exp_TO_amt	0.78	7
+NPP_loss_claimed	1	7
+Net_CG_amt	1	7
+Net_PT_NPP_dsn	1.34	7
+Net_PT_PP_dsn	0.96	7
+Net_farm_management_amt	0.71	7
+Net_fincl_invstmt_lss_amt	1.35	7
+Other_foreign_inc_amt	1.03	7
+Other_inc_amt	0.98	7
+Other_rent_ded_amt	1.31	7
+PP_loss_claimed	0.86	7
+Rent_cap_wks_amt	1.46	7
+Rent_int_ded_amt	1	7
+Rep_frng_ben_amt	1.28	7
+Spouse_adjusted_taxable_inc	1	7
+TFN_amts_wheld_divs_amt	1.2	7
+TFN_amts_wheld_gr_intst_amt	1.02	7
+Taxed_othr_pnsn_amt	0.93	7
+Tot_CY_CG_amt	1	7
+Total_NPP_BE_amt	1.13	7
+Total_NPP_BI_amt	1.01	7
+Total_PP_BE_amt	0.89	7
+Total_PP_BI_amt	0.76	7
+Unfranked_Div_amt	1.02	7
+Untaxed_othr_pnsn_amt	1.22	7
+Asbl_forgn_source_incm_amt	0.92	8
+Aust_govt_pnsn_allw_amt	1	8
+Cr_PAYG_ITI_amt	0.96	8
+Div_Ded_amt	0.24	8
+Dividends_franking_cr_amt	1.07	8
+Frk_Div_amt	1	8
+Gift_amt	0.98	8
+Gross_rent_amt	1.36	8
+Grs_int_amt	1	8
+Help_debt	1.82	8
+Hrs_to_prepare_BPI_cnt	2.58	8
+Intrst_Ded_amt	1	8
+Med_Exp_TO_amt	0.74	8
+NPP_loss_claimed	1	8
+Net_CG_amt	1	8
+Net_PT_NPP_dsn	1.38	8
+Net_PT_PP_dsn	0.96	8
+Net_farm_management_amt	0.71	8
+Net_fincl_invstmt_lss_amt	1.35	8
+Other_foreign_inc_amt	1.03	8
+Other_inc_amt	0.98	8
+Other_rent_ded_amt	1.35	8
+PP_loss_claimed	0.86	8
+Rent_cap_wks_amt	1.53	8
+Rent_int_ded_amt	1	8
+Rep_frng_ben_amt	1.32	8
+Spouse_adjusted_taxable_inc	1	8
+TFN_amts_wheld_divs_amt	1.2	8
+TFN_amts_wheld_gr_intst_amt	1.02	8
+Taxed_othr_pnsn_amt	0.93	8
+Tot_CY_CG_amt	1	8
+Total_NPP_BE_amt	1.13	8
+Total_NPP_BI_amt	1.01	8
+Total_PP_BE_amt	0.89	8
+Total_PP_BI_amt	0.76	8
+Unfranked_Div_amt	1.02	8
+Untaxed_othr_pnsn_amt	1.25	8
+Asbl_forgn_source_incm_amt	0.92	9
+Aust_govt_pnsn_allw_amt	1	9
+Cr_PAYG_ITI_amt	0.96	9
+Div_Ded_amt	0.14	9
+Dividends_franking_cr_amt	1.07	9
+Frk_Div_amt	1	9
+Gift_amt	0.98	9
+Gross_rent_amt	1.41	9
+Grs_int_amt	1	9
+Help_debt	1.93	9
+Hrs_to_prepare_BPI_cnt	2.58	9
+Intrst_Ded_amt	1	9
+Med_Exp_TO_amt	0.71	9
+NPP_loss_claimed	1	9
+Net_CG_amt	1	9
+Net_PT_NPP_dsn	1.42	9
+Net_PT_PP_dsn	0.96	9
+Net_farm_management_amt	0.71	9
+Net_fincl_invstmt_lss_amt	1.35	9
+Other_foreign_inc_amt	1.03	9
+Other_inc_amt	0.98	9
+Other_rent_ded_amt	1.4	9
+PP_loss_claimed	0.86	9
+Rent_cap_wks_amt	1.59	9
+Rent_int_ded_amt	1	9
+Rep_frng_ben_amt	1.36	9
+Spouse_adjusted_taxable_inc	1	9
+TFN_amts_wheld_divs_amt	1.2	9
+TFN_amts_wheld_gr_intst_amt	1.02	9
+Taxed_othr_pnsn_amt	0.93	9
+Tot_CY_CG_amt	1	9
+Total_NPP_BE_amt	1.13	9
+Total_NPP_BI_amt	1.01	9
+Total_PP_BE_amt	0.89	9
+Total_PP_BI_amt	0.76	9
+Unfranked_Div_amt	1.02	9
+Untaxed_othr_pnsn_amt	1.29	9
+Asbl_forgn_source_incm_amt	0.92	10
+Aust_govt_pnsn_allw_amt	1	10
+Cr_PAYG_ITI_amt	0.96	10
+Div_Ded_amt	0.04	10
+Dividends_franking_cr_amt	1.07	10
+Frk_Div_amt	1	10
+Gift_amt	0.98	10
+Gross_rent_amt	1.45	10
+Grs_int_amt	1	10
+Help_debt	2.03	10
+Hrs_to_prepare_BPI_cnt	2.58	10
+Intrst_Ded_amt	1	10
+Med_Exp_TO_amt	0.68	10
+NPP_loss_claimed	1	10
+Net_CG_amt	1	10
+Net_PT_NPP_dsn	1.46	10
+Net_PT_PP_dsn	0.96	10
+Net_farm_management_amt	0.71	10
+Net_fincl_invstmt_lss_amt	1.35	10
+Other_foreign_inc_amt	1.03	10
+Other_inc_amt	0.98	10
+Other_rent_ded_amt	1.44	10
+PP_loss_claimed	0.86	10
+Rent_cap_wks_amt	1.66	10
+Rent_int_ded_amt	1	10
+Rep_frng_ben_amt	1.4	10
+Spouse_adjusted_taxable_inc	1	10
+TFN_amts_wheld_divs_amt	1.2	10
+TFN_amts_wheld_gr_intst_amt	1.02	10
+Taxed_othr_pnsn_amt	0.93	10
+Tot_CY_CG_amt	1	10
+Total_NPP_BE_amt	1.13	10
+Total_NPP_BI_amt	1.01	10
+Total_PP_BE_amt	0.89	10
+Total_PP_BI_amt	0.76	10
+Unfranked_Div_amt	1.02	10
+Untaxed_othr_pnsn_amt	1.32	10
+Asbl_forgn_source_incm_amt	0.92	11
+Aust_govt_pnsn_allw_amt	1	11
+Cr_PAYG_ITI_amt	0.96	11
+Div_Ded_amt	-0.05	11
+Dividends_franking_cr_amt	1.07	11
+Frk_Div_amt	1	11
+Gift_amt	0.98	11
+Gross_rent_amt	1.5	11
+Grs_int_amt	1	11
+Help_debt	2.13	11
+Hrs_to_prepare_BPI_cnt	2.58	11
+Intrst_Ded_amt	1	11
+Med_Exp_TO_amt	0.65	11
+NPP_loss_claimed	1	11
+Net_CG_amt	1	11
+Net_PT_NPP_dsn	1.5	11
+Net_PT_PP_dsn	0.96	11
+Net_farm_management_amt	0.71	11
+Net_fincl_invstmt_lss_amt	1.35	11
+Other_foreign_inc_amt	1.03	11
+Other_inc_amt	0.98	11
+Other_rent_ded_amt	1.49	11
+PP_loss_claimed	0.86	11
+Rent_cap_wks_amt	1.72	11
+Rent_int_ded_amt	1	11
+Rep_frng_ben_amt	1.43	11
+Spouse_adjusted_taxable_inc	1	11
+TFN_amts_wheld_divs_amt	1.2	11
+TFN_amts_wheld_gr_intst_amt	1.02	11
+Taxed_othr_pnsn_amt	0.93	11
+Tot_CY_CG_amt	1	11
+Total_NPP_BE_amt	1.13	11
+Total_NPP_BI_amt	1.01	11
+Total_PP_BE_amt	0.89	11
+Total_PP_BI_amt	0.76	11
+Unfranked_Div_amt	1.02	11
+Untaxed_othr_pnsn_amt	1.35	11
+Asbl_forgn_source_incm_amt	0.92	12
+Aust_govt_pnsn_allw_amt	1	12
+Cr_PAYG_ITI_amt	0.96	12
+Div_Ded_amt	-0.15	12
+Dividends_franking_cr_amt	1.07	12
+Frk_Div_amt	1	12
+Gift_amt	0.98	12
+Gross_rent_amt	1.54	12
+Grs_int_amt	1	12
+Help_debt	2.24	12
+Hrs_to_prepare_BPI_cnt	2.58	12
+Intrst_Ded_amt	1	12
+Med_Exp_TO_amt	0.63	12
+NPP_loss_claimed	1	12
+Net_CG_amt	1	12
+Net_PT_NPP_dsn	1.54	12
+Net_PT_PP_dsn	0.96	12
+Net_farm_management_amt	0.71	12
+Net_fincl_invstmt_lss_amt	1.35	12
+Other_foreign_inc_amt	1.03	12
+Other_inc_amt	0.98	12
+Other_rent_ded_amt	1.53	12
+PP_loss_claimed	0.86	12
+Rent_cap_wks_amt	1.79	12
+Rent_int_ded_amt	1	12
+Rep_frng_ben_amt	1.47	12
+Spouse_adjusted_taxable_inc	1	12
+TFN_amts_wheld_divs_amt	1.2	12
+TFN_amts_wheld_gr_intst_amt	1.02	12
+Taxed_othr_pnsn_amt	0.93	12
+Tot_CY_CG_amt	1	12
+Total_NPP_BE_amt	1.13	12
+Total_NPP_BI_amt	1.01	12
+Total_PP_BE_amt	0.89	12
+Total_PP_BI_amt	0.76	12
+Unfranked_Div_amt	1.02	12
+Untaxed_othr_pnsn_amt	1.38	12
+Asbl_forgn_source_incm_amt	0.92	13
+Aust_govt_pnsn_allw_amt	1	13
+Cr_PAYG_ITI_amt	0.96	13
+Div_Ded_amt	-0.24	13
+Dividends_franking_cr_amt	1.07	13
+Frk_Div_amt	1	13
+Gift_amt	0.98	13
+Gross_rent_amt	1.59	13
+Grs_int_amt	1	13
+Help_debt	2.34	13
+Hrs_to_prepare_BPI_cnt	2.58	13
+Intrst_Ded_amt	1	13
+Med_Exp_TO_amt	0.6	13
+NPP_loss_claimed	1	13
+Net_CG_amt	1	13
+Net_PT_NPP_dsn	1.58	13
+Net_PT_PP_dsn	0.96	13
+Net_farm_management_amt	0.71	13
+Net_fincl_invstmt_lss_amt	1.35	13
+Other_foreign_inc_amt	1.03	13
+Other_inc_amt	0.98	13
+Other_rent_ded_amt	1.58	13
+PP_loss_claimed	0.86	13
+Rent_cap_wks_amt	1.86	13
+Rent_int_ded_amt	1	13
+Rep_frng_ben_amt	1.51	13
+Spouse_adjusted_taxable_inc	1	13
+TFN_amts_wheld_divs_amt	1.2	13
+TFN_amts_wheld_gr_intst_amt	1.02	13
+Taxed_othr_pnsn_amt	0.93	13
+Tot_CY_CG_amt	1	13
+Total_NPP_BE_amt	1.13	13
+Total_NPP_BI_amt	1.01	13
+Total_PP_BE_amt	0.89	13
+Total_PP_BI_amt	0.76	13
+Unfranked_Div_amt	1.02	13
+Untaxed_othr_pnsn_amt	1.41	13
+Asbl_forgn_source_incm_amt	0.92	14
+Aust_govt_pnsn_allw_amt	1	14
+Cr_PAYG_ITI_amt	0.96	14
+Div_Ded_amt	-0.34	14
+Dividends_franking_cr_amt	1.07	14
+Frk_Div_amt	1	14
+Gift_amt	0.98	14
+Gross_rent_amt	1.63	14
+Grs_int_amt	1	14
+Help_debt	2.44	14
+Hrs_to_prepare_BPI_cnt	2.58	14
+Intrst_Ded_amt	1	14
+Med_Exp_TO_amt	0.58	14
+NPP_loss_claimed	1	14
+Net_CG_amt	1	14
+Net_PT_NPP_dsn	1.62	14
+Net_PT_PP_dsn	0.96	14
+Net_farm_management_amt	0.71	14
+Net_fincl_invstmt_lss_amt	1.35	14
+Other_foreign_inc_amt	1.03	14
+Other_inc_amt	0.98	14
+Other_rent_ded_amt	1.62	14
+PP_loss_claimed	0.86	14
+Rent_cap_wks_amt	1.92	14
+Rent_int_ded_amt	1	14
+Rep_frng_ben_amt	1.55	14
+Spouse_adjusted_taxable_inc	1	14
+TFN_amts_wheld_divs_amt	1.2	14
+TFN_amts_wheld_gr_intst_amt	1.02	14
+Taxed_othr_pnsn_amt	0.93	14
+Tot_CY_CG_amt	1	14
+Total_NPP_BE_amt	1.13	14
+Total_NPP_BI_amt	1.01	14
+Total_PP_BE_amt	0.89	14
+Total_PP_BI_amt	0.76	14
+Unfranked_Div_amt	1.02	14
+Untaxed_othr_pnsn_amt	1.44	14
+Asbl_forgn_source_incm_amt	0.92	15
+Aust_govt_pnsn_allw_amt	1	15
+Cr_PAYG_ITI_amt	0.96	15
+Div_Ded_amt	-0.43	15
+Dividends_franking_cr_amt	1.07	15
+Frk_Div_amt	1	15
+Gift_amt	0.98	15
+Gross_rent_amt	1.68	15
+Grs_int_amt	1	15
+Help_debt	2.55	15
+Hrs_to_prepare_BPI_cnt	2.58	15
+Intrst_Ded_amt	1	15
+Med_Exp_TO_amt	0.55	15
+NPP_loss_claimed	1	15
+Net_CG_amt	1	15
+Net_PT_NPP_dsn	1.66	15
+Net_PT_PP_dsn	0.96	15
+Net_farm_management_amt	0.71	15
+Net_fincl_invstmt_lss_amt	1.35	15
+Other_foreign_inc_amt	1.03	15
+Other_inc_amt	0.98	15
+Other_rent_ded_amt	1.66	15
+PP_loss_claimed	0.86	15
+Rent_cap_wks_amt	1.99	15
+Rent_int_ded_amt	1	15
+Rep_frng_ben_amt	1.59	15
+Spouse_adjusted_taxable_inc	1	15
+TFN_amts_wheld_divs_amt	1.2	15
+TFN_amts_wheld_gr_intst_amt	1.02	15
+Taxed_othr_pnsn_amt	0.93	15
+Tot_CY_CG_amt	1	15
+Total_NPP_BE_amt	1.13	15
+Total_NPP_BI_amt	1.01	15
+Total_PP_BE_amt	0.89	15
+Total_PP_BI_amt	0.76	15
+Unfranked_Div_amt	1.02	15
+Untaxed_othr_pnsn_amt	1.48	15
