@@ -94,6 +94,10 @@ project <- function(sample_file,
            stop("`fy.year.of.sample.file` must be '2012-13', '2013-14', or '2014-15'."))
   }
   
+  if (h == 0) {
+    return(sample_file)
+  }
+  
   if ("WEIGHT" %notin% names(sample_file)) {
     sample_file[, "WEIGHT" := list(WEIGHT)]
   }
@@ -106,92 +110,89 @@ project <- function(sample_file,
     }
   }
   
-  if (h == 0) {
-    return(sample_file)
+  
+  # NSE e.g inflators[h == h]
+  H <- h
+  current.fy <- fy.year.of.sample.file
+  to.fy <- yr2fy(fy2yr(current.fy) + h)
+  
+  if (is.null(wage.series)){
+    wage.inflator <- wage_inflator(1, from_fy = current.fy, to_fy = to.fy)
   } else {
-    # NSE e.g inflators[h == h]
-    H <- h
-    current.fy <- fy.year.of.sample.file
-    to.fy <- yr2fy(fy2yr(current.fy) + h)
-    
-    if (is.null(wage.series)){
-      wage.inflator <- wage_inflator(1, from_fy = current.fy, to_fy = to.fy)
+    wage.inflator <- wage_inflator(1, from_fy = current.fy, to_fy = to.fy, 
+                                   forecast.series = "custom", wage.series = wage.series)
+  }
+  
+  if (is.null(lf.series)){
+    lf.inflator <- lf_inflator_fy(from_fy = current.fy, to_fy = to.fy)
+  } else {
+    lf.inflator <- lf_inflator_fy(from_fy = current.fy, to_fy = to.fy, 
+                                  forecast.series = "custom", lf.series = lf.series)
+  }
+  
+  
+  cpi.inflator <- cpi_inflator(1, from_fy = current.fy, to_fy = to.fy)
+  if (.recalculate.inflators) {
+    CG.inflator <- CG_inflator(1, from_fy = current.fy, to_fy = to.fy)
+  } else {
+    if (current.fy %notin% c("2012-13", "2013-14", "2014-15", "2015-16")){
+      stop("Precalculated inflators only available when projecting from ",
+           "2012-13, 2013-14, 2014-15, 2015-16.")
     } else {
-      wage.inflator <- wage_inflator(1, from_fy = current.fy, to_fy = to.fy, 
-                                     forecast.series = "custom", wage.series = wage.series)
-    }
-    
-    if (is.null(lf.series)){
-      lf.inflator <- lf_inflator_fy(from_fy = current.fy, to_fy = to.fy)
+      cg_inflators <- 
+        switch(current.fy, 
+               "2012-13" = cg_inflators_1213, 
+               "2013-14" = cg_inflators_1314,
+               "2014-15" = cg_inflators_1415,
+               "2015-16" = cg_inflators_1516)
+      stopifnot("forecast.series" %in% names(cg_inflators))
+      forecast.series <- NULL 
+      CG.inflator <- 
+        cg_inflators[.(to.fy, forecast.dots$estimator)] %>%
+        .subset2("cg_inflator")
+    } 
+  }
+  
+  col.names <- names(sample_file)
+  
+  # Differential uprating not available for years outside:
+  diff.uprate.wagey.cols <- 
+    if (differentially_uprate_Sw) {
+      "Sw_amt"
     } else {
-      lf.inflator <- lf_inflator_fy(from_fy = current.fy, to_fy = to.fy, 
-                                    forecast.series = "custom", lf.series = lf.series)
+      character(0L)
     }
-    
-    
-    cpi.inflator <- cpi_inflator(1, from_fy = current.fy, to_fy = to.fy)
-    if (.recalculate.inflators) {
-      CG.inflator <- CG_inflator(1, from_fy = current.fy, to_fy = to.fy)
-    } else {
-      if (current.fy %notin% c("2012-13", "2013-14", "2014-15", "2015-16")){
-        stop("Precalculated inflators only available when projecting from ",
-             "2012-13, 2013-14, 2014-15, 2015-16.")
-      } else {
-        cg_inflators <- 
-          switch(current.fy, 
-                 "2012-13" = cg_inflators_1213, 
-                 "2013-14" = cg_inflators_1314,
-                 "2014-15" = cg_inflators_1415,
-                 "2015-16" = cg_inflators_1516)
-        stopifnot("forecast.series" %in% names(cg_inflators))
-        forecast.series <- NULL 
-        CG.inflator <- 
-          cg_inflators[fy_year == to.fy] %>%
-          .[forecast.series == forecast.dots$estimator] %>%
-          .subset2("cg_inflator")
-      } 
-    }
-    
-    col.names <- names(sample_file)
-    
-    # Differential uprating not available for years outside:
-    diff.uprate.wagey.cols <- 
-      if (differentially_uprate_Sw) {
-        "Sw_amt"
-      } else {
-        character(0L)
-      }
-    
-    wagey.cols <- c(if (!differentially_uprate_Sw) "Sw_amt",
-                    "Alow_ben_amt",
-                    "ETP_txbl_amt",
-                    "Rptbl_Empr_spr_cont_amt", 
-                    "Non_emp_spr_amt", 
-                    "MCS_Emplr_Contr", 
-                    "MCS_Prsnl_Contr", 
-                    "MCS_Othr_Contr")
-    
-    
-    
-    super.bal.col <- c("MCS_Ttl_Acnt_Bal")
-    
-    lfy.cols <- c("WEIGHT")
-    
-    cpiy.cols <- c(grep("WRE", col.names, value = TRUE), # work-related expenses
-                   "Cost_tax_affairs_amt",
-                   "Other_Ded_amt")
-    
-    derived.cols <- c("Net_rent_amt",
-                      "Net_PP_BI_amt",
-                      "Net_NPP_BI_amt",
-                      "Tot_inc_amt",
-                      "Tot_ded_amt",
-                      "Taxable_Income")
-    
-    CGTy.cols <- c("Net_CG_amt", "Tot_CY_CG_amt")
-    
-    # names(taxstats::sample_file_1314)
-    alien.cols <- col.names[!col.names %chin% c("Ind", "Gender", "age_range", "Occ_code", "Partner_status", 
+  
+  wagey.cols <- c(if (!differentially_uprate_Sw) "Sw_amt",
+                  "Alow_ben_amt",
+                  "ETP_txbl_amt",
+                  "Rptbl_Empr_spr_cont_amt", 
+                  "Non_emp_spr_amt", 
+                  "MCS_Emplr_Contr", 
+                  "MCS_Prsnl_Contr", 
+                  "MCS_Othr_Contr")
+  
+  
+  
+  super.bal.col <- c("MCS_Ttl_Acnt_Bal")
+  
+  lfy.cols <- c("WEIGHT")
+  
+  cpiy.cols <- c(grep("WRE", col.names, value = TRUE), # work-related expenses
+                 "Cost_tax_affairs_amt",
+                 "Other_Ded_amt")
+  
+  derived.cols <- c("Net_rent_amt",
+                    "Net_PP_BI_amt",
+                    "Net_NPP_BI_amt",
+                    "Tot_inc_amt",
+                    "Tot_ded_amt",
+                    "Taxable_Income")
+  
+  CGTy.cols <- c("Net_CG_amt", "Tot_CY_CG_amt")
+  
+  # names(taxstats::sample_file_1314)
+  alien.cols <- col.names[!col.names %chin% c("Ind", "Gender", "age_range", "Occ_code", "Partner_status", 
                                               "Region", "Lodgment_method", "PHI_Ind", "Sw_amt", "Alow_ben_amt", 
                                               "ETP_txbl_amt", "Grs_int_amt", "Aust_govt_pnsn_allw_amt", "Unfranked_Div_amt", 
                                               "Frk_Div_amt", "Dividends_franking_cr_amt", "Net_rent_amt", "Gross_rent_amt", 
@@ -209,118 +210,116 @@ project <- function(sample_file,
                                               "Cr_PAYG_ITI_amt", "TFN_amts_wheld_gr_intst_amt", "TFN_amts_wheld_divs_amt", 
                                               "Hrs_to_prepare_BPI_cnt", "Taxable_Income", "Help_debt", "MCS_Emplr_Contr", 
                                               "MCS_Prsnl_Contr", "MCS_Othr_Contr", "MCS_Ttl_Acnt_Bal")]
-    Not.Inflated <- c("Ind", 
-                      "Gender",
-                      "age_range", 
-                      "Occ_code", 
-                      "Partner_status", 
-                      "Region", 
-                      "Lodgment_method", 
-                      "PHI_Ind", 
-                      alien.cols)
-    
-    if(!missing(excl_vars)){
-      Not.Inflated <- c(Not.Inflated, excl_vars)
-    }
-    
-    generic.cols <- 
-      col.names[!col.names %chin% c(diff.uprate.wagey.cols, wagey.cols, super.bal.col, lfy.cols, cpiy.cols, derived.cols, Not.Inflated)]
-    
-    if (.recalculate.inflators){
-      generic.inflators <- 
-        generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = fy.year.of.sample.file, 
-                         estimator = forecast.dots$estimator, pred_interval = forecast.dots$pred_interval)
+  Not.Inflated <- c("Ind", 
+                    "Gender",
+                    "age_range", 
+                    "Occ_code", 
+                    "Partner_status", 
+                    "Region", 
+                    "Lodgment_method", 
+                    "PHI_Ind", 
+                    alien.cols)
+  
+  if(!missing(excl_vars)){
+    Not.Inflated <- c(Not.Inflated, excl_vars)
+  }
+  
+  generic.cols <- 
+    col.names[!col.names %chin% c(diff.uprate.wagey.cols, wagey.cols, super.bal.col, lfy.cols, cpiy.cols, derived.cols, Not.Inflated)]
+  
+  if (.recalculate.inflators){
+    generic.inflators <- 
+      generic_inflator(vars = generic.cols, h = h, fy.year.of.sample.file = fy.year.of.sample.file, 
+                       estimator = forecast.dots$estimator, pred_interval = forecast.dots$pred_interval)
+  } else {
+    generic.inflators <- 
+      switch(current.fy, 
+             "2012-13" = as.data.table(generic_inflators_1213)[and(fy_year == to.fy, h == H)], 
+             "2013-14" = as.data.table(generic_inflators_1314)[and(fy_year == to.fy, h == H)], 
+             "2014-15" = as.data.table(generic_inflators_1415)[and(fy_year == to.fy, h == H)], 
+             "2015-16" = as.data.table(generic_inflators_1516)[and(fy_year == to.fy, h == H)], 
+             stop("Precalculated inflators only available when projecting from ",
+                  "2012-13, 2013-14, 2014-15, and 2015-16."))
+  }
+  
+  ## Inflate:
+  # make numeric to avoid overflow
+  integer.cols <- names(sample_file)[vapply(sample_file, is.integer, TRUE)]
+  integer.cols <- integer.cols[integer.cols %notin% c(Not.Inflated)]
+  for (j in which(col.names %chin% integer.cols)) {
+    set(sample_file, j = j, value = as.double(.subset2(sample_file, j)))
+  }
+  
+  
+  # Differential uprating:
+  for (j in which(col.names %chin% diff.uprate.wagey.cols)){
+    if (is.null(wage.series)){
+      set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy))
     } else {
-      generic.inflators <- 
-        switch(current.fy, 
-               "2012-13" = as.data.table(generic_inflators_1213)[and(fy_year == to.fy, h == H)], 
-               "2013-14" = as.data.table(generic_inflators_1314)[and(fy_year == to.fy, h == H)], 
-               "2014-15" = as.data.table(generic_inflators_1415)[and(fy_year == to.fy, h == H)], 
-               "2015-16" = as.data.table(generic_inflators_1516)[and(fy_year == to.fy, h == H)], 
-               stop("Precalculated inflators only available when projecting from ",
-                    "2012-13, 2013-14, 2014-15, and 2015-16."))
+      set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy, 
+                                                                 forecast.series = "custom", wage.series = wage.series))
     }
-    
-    ## Inflate:
-    # make numeric to avoid overflow
-    integer.cols <- names(sample_file)[vapply(sample_file, is.integer, TRUE)]
-    integer.cols <- integer.cols[integer.cols %notin% c(Not.Inflated)]
-    for (j in which(col.names %chin% integer.cols)) {
-      set(sample_file, j = j, value = as.double(.subset2(sample_file, j)))
-    }
-    
-    
-    # Differential uprating:
-    for (j in which(col.names %chin% diff.uprate.wagey.cols)){
-      if (is.null(wage.series)){
-        set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy))
-      } else {
-        set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy, 
-                                                                   forecast.series = "custom", wage.series = wage.series))
-      }
-    }
-    
-    for (j in which(col.names %chin% wagey.cols))
-      set(sample_file, j = j, value = wage.inflator * sample_file[[j]])
-    
-    for (j in which(col.names %chin% lfy.cols))
-      set(sample_file, j = j, value = lf.inflator * sample_file[[j]])
-    
-    for (j in which(col.names %chin% cpiy.cols))
-      set(sample_file, j = j, value = cpi.inflator * sample_file[[j]])
-    
-    for (j in which(col.names %chin% CGTy.cols))
-      set(sample_file, j = j, value = CG.inflator * sample_file[[j]])
-    
-    for (j in which(col.names %chin% generic.cols)){
-      stopifnot("variable" %in% names(generic.inflators))  ## super safe
-      nom <- col.names[j]
-      set(sample_file, 
-          j = j, 
-          value = generic.inflators[variable == nom]$inflator * sample_file[[j]])
-    }
-    
-    for (j in which(col.names %in% super.bal.col)){
-      set(sample_file, j = j, value = (1.05 ^ h) * sample_file[[j]])
-    }
-    
-    sample_file %>%
-      .[, Net_rent_amt := Gross_rent_amt - Other_rent_ded_amt - Rent_int_ded_amt - Rent_cap_wks_amt] %>%
-      .[, Net_PP_BI_amt := Total_PP_BI_amt - Total_PP_BE_amt] %>%
-      .[, Net_NPP_BI_amt := Total_NPP_BI_amt - Total_NPP_BE_amt] %>%
-      .[, Tot_inc_amt := .add(Sw_amt,
-                              Alow_ben_amt,
-                              ETP_txbl_amt,
-                              Grs_int_amt,
-                              Aust_govt_pnsn_allw_amt,
-                              Unfranked_Div_amt,
-                              Frk_Div_amt,
-                              Dividends_franking_cr_amt,
-                              Net_rent_amt,
-                              Net_farm_management_amt,
-                              Net_PP_BI_amt,  ## Need to check exactly how this maps.
-                              Net_NPP_BI_amt,
-                              Net_CG_amt,  ## We cannot express this cleanly in terms of Tot_CG
-                              Net_PT_PP_dsn,
-                              Net_PT_NPP_dsn,
-                              Taxed_othr_pnsn_amt,
-                              Untaxed_othr_pnsn_amt,
-                              Other_foreign_inc_amt,
-                              Other_inc_amt)] %>%
-      .[, Tot_ded_amt := .add(WRE_car_amt,
-                              WRE_trvl_amt,
-                              WRE_uniform_amt,
-                              WRE_self_amt,
-                              WRE_other_amt,
-                              Div_Ded_amt,
-                              Intrst_Ded_amt,
-                              Gift_amt,
-                              Non_emp_spr_amt,
-                              Cost_tax_affairs_amt,
-                              Other_Ded_amt)] %>%
-      .[, Taxable_Income := pmaxC(Tot_inc_amt - Tot_ded_amt - PP_loss_claimed - NPP_loss_claimed, 0)] %>%
-      .[]
-    
-  } 
+  }
+  
+  for (j in which(col.names %chin% wagey.cols))
+    set(sample_file, j = j, value = wage.inflator * sample_file[[j]])
+  
+  for (j in which(col.names %chin% lfy.cols))
+    set(sample_file, j = j, value = lf.inflator * sample_file[[j]])
+  
+  for (j in which(col.names %chin% cpiy.cols))
+    set(sample_file, j = j, value = cpi.inflator * sample_file[[j]])
+  
+  for (j in which(col.names %chin% CGTy.cols))
+    set(sample_file, j = j, value = CG.inflator * sample_file[[j]])
+  
+  for (j in which(col.names %chin% generic.cols)){
+    stopifnot("variable" %in% names(generic.inflators))  ## super safe
+    nom <- col.names[j]
+    set(sample_file, 
+        j = j, 
+        value = generic.inflators[variable == nom]$inflator * sample_file[[j]])
+  }
+  
+  for (j in which(col.names %in% super.bal.col)){
+    set(sample_file, j = j, value = (1.05 ^ h) * sample_file[[j]])
+  }
+  
+  sample_file %>%
+    .[, Net_rent_amt := Gross_rent_amt - Other_rent_ded_amt - Rent_int_ded_amt - Rent_cap_wks_amt] %>%
+    .[, Net_PP_BI_amt := Total_PP_BI_amt - Total_PP_BE_amt] %>%
+    .[, Net_NPP_BI_amt := Total_NPP_BI_amt - Total_NPP_BE_amt] %>%
+    .[, Tot_inc_amt := .add(Sw_amt,
+                            Alow_ben_amt,
+                            ETP_txbl_amt,
+                            Grs_int_amt,
+                            Aust_govt_pnsn_allw_amt,
+                            Unfranked_Div_amt,
+                            Frk_Div_amt,
+                            Dividends_franking_cr_amt,
+                            Net_rent_amt,
+                            Net_farm_management_amt,
+                            Net_PP_BI_amt,  ## Need to check exactly how this maps.
+                            Net_NPP_BI_amt,
+                            Net_CG_amt,  ## We cannot express this cleanly in terms of Tot_CG
+                            Net_PT_PP_dsn,
+                            Net_PT_NPP_dsn,
+                            Taxed_othr_pnsn_amt,
+                            Untaxed_othr_pnsn_amt,
+                            Other_foreign_inc_amt,
+                            Other_inc_amt)] %>%
+    .[, Tot_ded_amt := .add(WRE_car_amt,
+                            WRE_trvl_amt,
+                            WRE_uniform_amt,
+                            WRE_self_amt,
+                            WRE_other_amt,
+                            Div_Ded_amt,
+                            Intrst_Ded_amt,
+                            Gift_amt,
+                            Non_emp_spr_amt,
+                            Cost_tax_affairs_amt,
+                            Other_Ded_amt)] %>%
+    .[, Taxable_Income := pmaxC(Tot_inc_amt - Tot_ded_amt - PP_loss_claimed - NPP_loss_claimed, 0)] %>%
+    .[]
 }
 
