@@ -1,7 +1,21 @@
 context("lf inflator")
 
 test_that("Error handling", {
-  expect_error(lf_inflator_fy(from_fy = "2012-13", to_fy = "2099-00", allow.projection = FALSE), regexp = "to_fy are in labour force data")
+  expect_error(lf_inflator_fy(from_fy = "2012-13", to_fy = "2099-00", allow.projection = FALSE),
+               regexp = "to_fy are in labour force data")
+  expect_error(lf_inflator_fy(from_fy = "2012-13", to_fy = "2025-26", 
+                              allow.projection = TRUE, 
+                              forecast.series = "custom", 
+                              lf.series = c(1:2)), 
+               regexp = "lf.series must be either a length-one vector", 
+               fixed = TRUE)
+  expect_error(lf_inflator_fy(from_fy = "2012-13", to_fy = "2025-26", 
+                              allow.projection = TRUE, 
+                              forecast.series = "custom", 
+                              lf.series = data.table(fy_year = "2013-14", 
+                                                     r = 0.2)), 
+               regexp = "The first fy in the custom series must be equal to", 
+               fixed = TRUE)
 })
 
 test_that("upper and lower series produce higher and lower forecasts", {

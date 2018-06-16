@@ -45,10 +45,11 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     lf.url.trend <- 
       "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978"
     lf <- rsdmx::readSDMX(lf.url.trend)
-    lf.indices <- as.data.table(as.data.frame(lf))
+    lf.indices <- as.data.frame(lf)
     if (nrow(lf.indices) == 0) {
       stop("Unable to establish SDMX connection to stat.data.abs.gov.au")
     }
+    lf.indices <- as.data.table(lf.indices)
   } else {
     lf.indices <- lf_trend
   }
@@ -56,17 +57,15 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
   lf.indices[, obsDate := as.Date(sprintf("%s-01", obsTime))]
   last.date.in.series <- last(lf.indices[["obsDate"]])
   
+  obsDate <- NULL
   last_full_yr_in_series <- 
     lf.indices %>%
     # month from data.table::
-    .[month(obsDate) == 6] %>%
-    .[["obsDate"]] %>%
+    .[month(obsDate) == 6L, obsDate] %>%
     last %>%
     year
   
-  last_full_fy_in_series <- 
-    last_full_yr_in_series %>%
-    yr2fy(.)
+  last_full_fy_in_series <- yr2fy(last_full_yr_in_series)
   
   if (!allow.projection && any(to_fy > last_full_fy_in_series)){
     stop("Not all elements of to_fy are in labour force data.")
@@ -123,7 +122,7 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
                             fill = TRUE)
   }
   
-  stopifnot(use.month %between% c(1, 12))
+  stopifnot(use.month %between% c(1L, 12L))
   
   lf.indices <- 
     lf.indices %>%

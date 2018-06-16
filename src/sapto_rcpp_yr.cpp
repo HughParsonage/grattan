@@ -11,8 +11,6 @@ double sapto_rcpp_yr_singleton (double rebateIncome, bool isMarried, double spou
     } else {
       out = sapto_rcpp_singleton(rebateIncome, 2230, 32279, 0.125, true, 0, false);
     }
-  } else {
-    out = 0;
   }
   return out;
 }
