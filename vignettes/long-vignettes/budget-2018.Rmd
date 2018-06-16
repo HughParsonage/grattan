@@ -1553,7 +1553,9 @@ avg_tax_by_decile_allpersons201718 <-
         use.names = TRUE,
         fill = TRUE) %>%
   .[, Taxable_Income_decile := weighted_ntile(Taxable_Income, WEIGHT, 10)] %>%
-  .[, .(total = sum(new_tax)), keyby = "Taxable_Income_decile"] %>%
+  .[, .(total = sum(new_tax), 
+        min_income = min(Taxable_Income),
+        tot_adults = sum(WEIGHT)), keyby = "Taxable_Income_decile"] %>%
   .[, share := round(total / sum(total), 3)] %T>%
   fwrite("avg_tax_by_decile_allpersons201718.csv") %>%
   .[]
@@ -1569,7 +1571,9 @@ avg_tax_by_decile_allpersons202425 <-
                    WEIGHT = wt_rel1718v202425 * (total_population_1516 - taxable_individuals_1718)), 
         use.names = TRUE, fill = TRUE) %>%
   .[, Taxable_Income_decile := weighted_ntile(Taxable_Income, WEIGHT, 10)] %>%
-  .[, .(total = sum(new_tax), min_income = min(Taxable_Income)), keyby = "Taxable_Income_decile"] %>%
+  .[, .(total = sum(new_tax), 
+        min_income = min(Taxable_Income),
+        tot_adults = sum(WEIGHT)), keyby = "Taxable_Income_decile"] %>%
   .[, share := round(total / sum(total), 3)] %T>%
   fwrite("avg_tax_by_decile_allpersons202425.csv") %>%
   .[]
@@ -1585,7 +1589,9 @@ avg_tax_by_decile_allpersons202728 <-
                    WEIGHT = wt_rel1718v202728 * (total_population_1516 - taxable_individuals_1718)), 
         use.names = TRUE, fill = TRUE) %>%
   .[, Taxable_Income_decile := weighted_ntile(Taxable_Income, WEIGHT, 10)] %>%
-  .[, .(total = sum(new_tax)), keyby = "Taxable_Income_decile"] %>%
+  .[, .(total = sum(new_tax), 
+        min_income = min(Taxable_Income),
+        tot_adults = sum(WEIGHT)), keyby = "Taxable_Income_decile"] %>%
   .[, share := round(total / sum(total), 3)] %T>%
   fwrite("avg_tax_by_decile_allpersons202728.csv") %>%
   .[]
@@ -1656,6 +1662,47 @@ Budget_1922[["2024-25"]][["Budget2018"]] %>%
   .[, .(tot = sum(new_tax * WEIGHT / 1e9)), keyby = .(Taxable_Income_decile, min_Taxable_Income)] %>%
   .[, prop := tot / sum(tot)] %>%
   .[]
+```
+
+```{r s2728_various_wages}
+s2728_various_wages <- 
+  lapply(c(0.02, 0.025, 0.03, 0.035), function(wage_r) {
+  project(sample_file_1516, h = 12L, wage.series = wage_r) %>%
+  grattan::model_income_tax(
+      baseline_fy = "2017-18",
+      medicare_levy_lower_threshold = medicare_levy_lower_threshold("2027-28"),
+      medicare_levy_lower_sapto_threshold = medicare_levy_lower_sapto_threshold("2027-28"),
+      medicare_levy_lower_family_threshold = medicare_levy_lower_family_threshold("2027-28"),
+      medicare_levy_lower_family_sapto_threshold = medicare_levy_lower_family_sapto_threshold("2027-28"),
+      medicare_levy_lower_up_for_each_child = medicare_levy_lower_up_for_each_child("2027-28"),
+      warn_upper_thresholds = FALSE,
+      Budget2018_lamington = FALSE,
+      Budget2018_lito_202223 = TRUE,
+      Budget2018_watr = FALSE,
+      ordinary_tax_thresholds = ordinary_tax_thresholds("2027-28"),
+      ordinary_tax_rates = ordinary_tax_rates("2027-28")) %>%
+      .[, .(Ind, age_range, Total_PP_BE_amt, Total_NPP_BE_amt, Taxable_Income, new_tax, baseline_tax, WEIGHT, id = wage_r)] 
+  }) %>%
+  rbindlist(use.names = TRUE, fill = TRUE) %>%
+  .[, new_tax := as.integer(new_tax)] %>%
+  .[, delta := new_tax - baseline_tax]
+
+```
+
+```{r comparison-wage-assumptions}
+compare_avg_tax_rates(s2728_various_wages, s1718[, baseline_tax := tax]) %>%
+  .[, "Wage assumption" := factor(percent(id))] %T>%
+  fwrite("compare-avg-tax-rates-2027-28-wage-assumptions.csv") %>%
+  grplot(aes(x = Taxable_Income_percentile,
+             y = delta_avgTaxRate,
+             color = `Wage assumption`,
+             group = `Wage assumption`)) +
+  geom_line() + 
+  xlab("Taxable Income percentile") +
+  guides(color = guide_legend(reverse = TRUE)) +
+  theme(legend.position = c(1, 1), 
+        legend.justification = c(1, 1))
+
 ```
 
 

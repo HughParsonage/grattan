@@ -1,5 +1,14 @@
 context("Inflators return correct results")
 
+test_that("Errors", {
+  expect_error(cpi_inflator(from_fy = NA, to_fy = "2013-14"), 
+               regexp = "`from_fy` contained NAs. Remove NAs before applying.", 
+               fixed = TRUE)
+  expect_error(cpi_inflator(to_fy = NA, from_fy = "2013-14"), 
+               regexp = "`to_fy` contained NAs. Remove NAs before applying.",
+               fixed = TRUE)
+})
+
 test_that("cpi returns known results", {
   expect_gt(cpi_inflator(from_nominal_price = 1,
                          from_fy = "2012-13",

@@ -220,10 +220,17 @@ model_income_tax <- function(sample_file,
   
   # Check base tax
   if (!is.null(ordinary_tax_thresholds) || !is.null(ordinary_tax_rates)) {
-    tax_table2_fy <- tax_table2[fy_year == baseline_fy]
     
-    Thresholds <- ordinary_tax_thresholds %||% tax_table2_fy[["lower_bracket"]]
-    Rates <-  ordinary_tax_rates %||% tax_table2_fy[["marginal_rate"]]
+    # accessing the baseline rates is expensive if not necessary
+    if (is.null(ordinary_tax_thresholds) || is.null(ordinary_tax_rates)) {
+      tax_table2_fy <- tax_table2[fy_year == baseline_fy]
+      
+      Thresholds <- ordinary_tax_thresholds %||% tax_table2_fy[["lower_bracket"]]
+      Rates <-  ordinary_tax_rates %||% tax_table2_fy[["marginal_rate"]]
+    } else {
+      Thresholds <- ordinary_tax_thresholds
+      Rates <- ordinary_tax_rates
+    }
     
     if (length(Thresholds) != length(Rates)) {
       stop("`ordinary_tax_thresholds` and `ordinary_tax_rates` have different lengths. ",

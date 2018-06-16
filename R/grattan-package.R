@@ -16,6 +16,7 @@
 #' @importFrom hutils OR
 #' @importFrom hutils NEITHER
 #' @importFrom hutils AND
+#' @importFrom hutils %ein%
 
 #' @importFrom fastmatch %fin%
 #' @importFrom fastmatch fmatch

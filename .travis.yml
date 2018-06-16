@@ -1,21 +1,24 @@
 language: r
-r:
-- oldrel
-- release
-- devel
 r_check_args:
-- '--as-cran'
 - '--no-multiarch'
 - '--no-vignettes'
+r:
+  - oldrel
+  - release
+  - devel
+
 cache: packages
 warnings_are_errors: true
+
+
 
 script:
 - export _R_CHECK_CRAN_INCOMING_=false
 # Current release build of data.table has conflict with R-dev
 - Rscript travisBeforeInstall.R
 - R CMD build --no-build-vignettes .
-- R CMD check --no-vignettes --ignore-vignettes --no-manual *tar.gz
+-  if [ $TRAVIS_R_VERSION_STRING == "devel" ]; then R CMD check --no-vignettes --ignore-vignettes --no-manual --as-cran *tar.gz; fi
+-  if [ $TRAVIS_R_VERSION_STRING != "devel" ]; then R CMD check --no-vignettes --ignore-vignettes --no-manual *tar.gz; fi
 
 
 r_github_packages:
@@ -23,7 +26,7 @@ r_github_packages:
   - jimhester/covr
 
 after_success:
-  - Rscript -e 'formalCoverage::formalPackageCoverage()'
+  - Rscript -e 'Sys.time()'
   - if [ $TRAVIS_R_VERSION_STRING == "release" ]; then Rscript -e 'covr::codecov(line_exclusions = "R/zzz.R")'; fi
 
 after_failure:

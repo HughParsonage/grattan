@@ -28,8 +28,8 @@ MedicareLevySingle <- function(income, lowerThreshold, upperThreshold, rate = 0.
     .Call(`_grattan_MedicareLevySingle`, income, lowerThreshold, upperThreshold, rate, taper, SpouseIncome, isFamily, nDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild)
 }
 
-MedicareLevySaptoYear <- function(income, SpouseIncome, NDependants, sapto, yr) {
-    .Call(`_grattan_MedicareLevySaptoYear`, income, SpouseIncome, NDependants, sapto, yr)
+MedicareLevySaptoYear <- function(income, SpouseIncome, NDependants, SaptoEligible, yr) {
+    .Call(`_grattan_MedicareLevySaptoYear`, income, SpouseIncome, NDependants, SaptoEligible, yr)
 }
 
 MedicareLevy <- function(income, lowerThreshold, upperThreshold, SpouseIncome, isFamily, NDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild, rate, taper) {

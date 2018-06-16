@@ -19,21 +19,6 @@ revenue_foregone <- function(dt, revenue_positive = TRUE, digits = NULL) {
   out
 }
 
-.revenue_foregone <- function(dt, revenue_positive = TRUE, digits = NULL) {
-  stopifnot(is.data.table(dt), 
-            "WEIGHT" %in% names(dt),
-            "new_tax" %in% names(dt),
-            "baseline_tax" %in% names(dt))
-  delta <- .subset2(dt, "WEIGHT") * (.subset2(dt, "new_tax") - .subset2(dt, "baseline_tax"))
-  out <- sum(delta)
-  if (!revenue_positive) {
-    out <- -out
-  }
-  class(out) <- "revenue_foregone"
-  setattr(out, "digits", digits)
-  out
-}
-
 #' @export
 print.revenue_foregone <- function(x, ...) {
   if (x < 0) {
