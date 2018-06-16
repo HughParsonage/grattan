@@ -896,6 +896,8 @@ setkey(generic_inflators_1314[, fy_year := NULL], h, variable)
 setkey(generic_inflators_1415[, fy_year := NULL], h, variable)
 setkey(generic_inflators_1516[, fy_year := NULL], h, variable)
 
+setkey(wages_trend, obsTime)
+
 use_and_write_data(tax_table2, 
                    lito_tbl, 
                    tax_tbl, 
