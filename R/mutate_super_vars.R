@@ -150,21 +150,20 @@ apply_super_caps_and_div293 <- function(.sample.file,
       # to enjoy decoding of age variable.  A bit strange (as it is very likely that
       # the user, who must have a sample file, would be using taxstats as well).
       
-      if (OR(NOR(isTRUE(requireNamespace("taxstats", quietly = TRUE)),
-                 exists("age_range_decoder")),
-             identical(Sys.getenv("TRAVIS_DISALLOW_TAXSTATS"), "TRUE"))) {
-        age_range_decoder <- 
-          structure(list(age_range = c(11L, 10L, 9L, 8L, 7L, 6L, 5L, 4L, 3L, 2L, 1L, 0L), 
-                         age_range_description = structure(1:12, 
-                                                           .Label = c("under 20",  "20 to 24", "25 to 29", "30 to 34", "35 to 39", "40 to 44", "45 to 49",  "50 to 54", "55 to 59", "60 to 64", "65 to 69", "70 and over"), 
-                                                           class = c("ordered", "factor"))), 
-                    .Names = c("age_range", "age_range_description"), 
-                    class = c("data.frame", "data.table"), 
-                    row.names = c(NA, -12L))
-        alloc.col(age_range_decoder)
-        
-      }
-      .sample.file <- merge(.sample.file, age_range_decoder, by = "age_range")
+      age_range_decoder2 <- 
+        data.table(age_range = 0:11,
+                   age_range_description = c("70 and over",
+                                             paste0(seq(65, 20, by = -5), 
+                                                    " to ", 
+                                                    seq(69, 24, by = -5)), 
+                                             "under 20"),
+                   key = "age_range") %>%
+        .[, age_range_description := factor(age_range_description, 
+                                            levels = unique(rev(age_range_description)), 
+                                            ordered = TRUE)]
+      
+      
+      .sample.file <- merge(.sample.file, age_range_decoder2, by = "age_range")
     }
     
     # if an age falls between an age group, we assume ambiguously aged individuals are NOT entitled to cap2.

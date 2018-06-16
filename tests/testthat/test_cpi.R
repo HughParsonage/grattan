@@ -13,7 +13,7 @@ test_that("Errors", {
                fixed = TRUE)
   expect_error(cpi_inflator(from_fy = "2013-14", to_fy = c("2015-16", "2040-41"),
                             allow.projection = FALSE), 
-               regexp = "`to_fy contains 2040-41` yet `allow.projection = FALSE`.", 
+               regexp = "`to_fy` contains 2040-41, yet `allow.projection = FALSE`.", 
                fixed = TRUE)
 })
 

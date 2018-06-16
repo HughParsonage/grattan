@@ -3,7 +3,7 @@
 
 select_which_ <- hutils::select_which
 
-# fast selector
+# fast selector, shallow copy
 .selector <- function(dt, noms) {
   dt_key <- key(dt)
   out <- setnames(setDT(lapply(noms, function(v) .subset2(dt, v))), noms)

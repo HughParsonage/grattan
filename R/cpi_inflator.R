@@ -32,8 +32,11 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
   max.length <- 
     prohibit_vector_recycling.MAXLENGTH(from_nominal_price, from_fy, to_fy)
   
-  if (max.length == 1L && as.integer(substr(to_fy, 0L, 4L)))
-  stopifnot(all_fy(from_fy), all_fy(to_fy))
+  if (max.length == 1L && as.integer(substr(to_fy, 0L, 4L)) < 2031L) {
+    stopifnot(all_fy(from_fy), all_fy(to_fy))
+  } else {
+    stopifnot(all_fy(from_fy), all(is.fy(to_fy)))
+  }
   
   adjustment <- match.arg(adjustment, several.ok = FALSE)
   
