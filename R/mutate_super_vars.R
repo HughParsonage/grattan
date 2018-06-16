@@ -149,7 +149,10 @@ apply_super_caps_and_div293 <- function(.sample.file,
       # Following step to avoid having to require taxstats being attached (installed)
       # to enjoy decoding of age variable.  A bit strange (as it is very likely that
       # the user, who must have a sample file, would be using taxstats as well).
-      if (!isTRUE(requireNamespace("taxstats")) && !exists("age_range_decoder")){
+      
+      if (OR(NOR(isTRUE(requireNamespace("taxstats", quietly = TRUE)),
+                 exists("age_range_decoder")),
+             identical(Sys.getenv("TRAVIS_DISALLOW_TAXSTATS"), "TRUE"))) {
         age_range_decoder <- 
           structure(list(age_range = c(11L, 10L, 9L, 8L, 7L, 6L, 5L, 4L, 3L, 2L, 1L, 0L), 
                          age_range_description = structure(1:12, 

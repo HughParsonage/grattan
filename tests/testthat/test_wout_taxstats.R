@@ -10,15 +10,10 @@ test_that("mutate_super_vars", {
   if (requireNamespace("taxstats", quietly = TRUE)) {
     s1314 <- as.data.table(taxstats::sample_file_1314)
     res <- apply_super_caps_and_div293(s1314)
-    if ("taxstats" %in% .packages()) {
-      detach("package:taxstats", unload = TRUE)
-    } else if (isNamespaceLoaded("taxstats")) {
-      unloadNamespace("taxstats")
-    }
-    remove.packages("taxstats")
   }
   
   # age range decoder
+  Sys.setenv("TRAVIS_DISALLOW_TAXSTATS" = "TRUE")
   res_wout_taxstats <- apply_super_caps_and_div293(s1314)
   expect_equal(res_wout_taxstats, res)
   
