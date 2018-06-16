@@ -98,12 +98,16 @@ test_that("Results with .dots.ATO", {
   expect_equal(sbto_s1314[Ind == 106934L, sbto], 1000)
   expect_equal(sbto_s1314[Ind == 48540L, as.integer(sbto)], 16L)
   
-  
+  dt <- data.table(Taxable_Income = 100e3, 
+                   Total_PP_BE_amt = 1e6,
+                   Total_PP_BI_amt = 0,
+                   Total_NPP_BE_amt = 0,
+                   Total_NPP_BI_amt = 0,
+                   Tot_net_small_business_inc = 50e3)
   
   expect_equal(small_business_tax_offset(100e3,
                                          basic_income_tax_liability = 25e3,
-                                         aggregated_turnover = 1e6,
-                                         total_net_small_business_income =  50e3,
+                                         .dots.ATO = dt,
                                          fy_year = "2015-16"),
                625)
 })

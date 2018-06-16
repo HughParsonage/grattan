@@ -25,7 +25,7 @@ test_that("Equivalence in 2013-14 sample file", {
   }
   
   for (fy in c("2013-14", "2014-15", "2015-16", "2016-17", 
-               "2017-18", "2019-20")) {
+               "2017-18", "2018-19", "2019-20")) {
     tax_rolling <- 
       rolling_income_tax(tx, fy, .dots.ATO = s1314)
     
@@ -51,6 +51,12 @@ test_that("Equivalence in 2013-14 sample file", {
   s1314[, age_range := 0L]
   expect_equal(income_tax(tx, rep_along("2013-14", tx), .dots.ATO = s1314), 
                income_tax_cpp(tx, "2013-14", .dots.ATO = s1314))
+  
+  expect_equal(income_tax(tx, rep_along("2013-14", tx), .dots.ATO = s1314), 
+               income_tax_cpp(tx, "2013-14", sapto.eligible = TRUE, .dots.ATO = s1314))
+  
+  expect_equal(income_tax(tx, rep_along("2013-14", tx), sapto.eligible = as.logical(s1314$Gender), .dots.ATO = NULL), 
+               income_tax_cpp(tx, "2013-14", sapto.eligible = as.logical(s1314$Gender), .dots.ATO = NULL))
   
   
 })
