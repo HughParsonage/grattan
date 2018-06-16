@@ -48,7 +48,9 @@ apply_super_caps_and_div293 <- function(.sample.file,
                                         drop_helpers = FALSE, 
                                         copyDT = TRUE){
   # Todo/wontfix
-  if (!identical(ecc, FALSE)) stop("ECC not implemented.")
+  if (!identical(ecc, FALSE)) {
+    stop("ECC not implemented.")
+  }
   
   # CRAN NOTE avoidance
   age_range_description <- concessional_cap <- div293_income <- div293_tax <-
@@ -110,7 +112,7 @@ apply_super_caps_and_div293 <- function(.sample.file,
     .sample.file[ , personal_deductible_contributions := Non_emp_spr_amt]
   
   # Concessional contributions
-  if (scale_contr_match_ato){
+  if (scale_contr_match_ato) {
     .sample.file[ , MCS_Emplr_Contr := MCS_Emplr_Contr * (1 + (super_contribution_inflator_1314 - 1) * .lambda) ]
     .sample.file[ , Non_emp_spr_amt := Non_emp_spr_amt * (1 + (super_contribution_inflator_1314 - 1) * .lambda) ]
   }

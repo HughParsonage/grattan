@@ -1,5 +1,10 @@
 context("Superannuation variables")
 
+test_that("Error handling", {
+  expect_error(apply_super_caps_and_div293(ecc = TRUE), 
+               regexp = "ECC not implemented.")
+})
+
 test_that("Div293 tax is bounded by cap @ 25k", {
   skip_if_not_installed("taxstats") 
   library(taxstats)
@@ -129,11 +134,11 @@ test_that("Imputed, reweighted sample file agrees with aggregates by no less tha
     smsfs[funds] %>%
     .[, total_contributions := Assessable_contributions_smsfs + Assessable_contributions_funds]
     
+  s1314 <- as.data.table(sample_file_1314)
   
   # Now test imputation using defaults.
   imputed_concessional_contributions <- 
-    sample_file_1314 %>%
-    copy %>%
+    s1314 %>%
     .[, WEIGHT := 50L] %>%
     apply_super_caps_and_div293(reweight_late_lodgers = TRUE, impute_zero_concess_contr = TRUE) %$%
     sum(concessional_contributions * WEIGHT)
@@ -142,6 +147,13 @@ test_that("Imputed, reweighted sample file agrees with aggregates by no less tha
     100 * abs(imputed_concessional_contributions / ato_aggregate_contributions[fy_year == "2013-14"][["total_contributions"]] - 1)
   
   expect_lt(percentage_difference, 1)
+  
+  expect_lte(apply_super_caps_and_div293(s1314, scale_contr_match_ato = FALSE)[, sum(MCS_Emplr_Contr)] * 1.11,
+             apply_super_caps_and_div293(s1314, scale_contr_match_ato = TRUE, .lambda = 1)[, sum(MCS_Emplr_Contr)])
+  expect_gte(apply_super_caps_and_div293(s1314, scale_contr_match_ato = FALSE)[, sum(MCS_Emplr_Contr)] * 1.12,
+             apply_super_caps_and_div293(s1314, scale_contr_match_ato = TRUE, .lambda = 1)[, sum(MCS_Emplr_Contr)])
+  
+  
 })
 
 test_that("Error handling", {
