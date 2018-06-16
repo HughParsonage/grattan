@@ -46,7 +46,7 @@ compare_avg_tax_rates <- function(DT, baseDT, by = "id", ids = NULL) {
       min_by <- populations[pop == min_pop]
       stop("`DT` contained a column 'WEIGHT', yet for ", 
            "", by, " = ", min_by[[by]],
-           ", sum(WEIGHT) = ", prettyNum(min_pop, big.mark = ","), ". ", 
+           ", sum(WEIGHT) = ", format(min_pop, big.mark = ",", scientific = FALSE), ". ", 
            "Since this is less than 10 000 000, it is assumed to be a coding error. ", 
            "(Did you use the wrong column '", by, "'?)")
     }
@@ -54,7 +54,7 @@ compare_avg_tax_rates <- function(DT, baseDT, by = "id", ids = NULL) {
       max_by <- populations[pop == max_pop]
       stop("`DT` contained a column 'WEIGHT', yet for ", 
            "", by, " = ", max_by[[by]],
-           ", sum(WEIGHT) = ", prettyNum(max_pop, big.mark = ","), ". ", 
+           ", sum(WEIGHT) = ", format(max_pop, big.mark = ",", scientific = FALSE), ". ", 
            "Since this is greater than 20 000 000, it is assumed to be a coding error. ", 
            "(Did you use the wrong column '", by, "'?)")
     }
