@@ -96,6 +96,9 @@ small_business_tax_offset <- function(taxable_income,
                                             total_net_small_business_income)
     }
     
+    # 1.26 explanatory memorandum
+    total_net_small_business_income <- pmax0(total_net_small_business_income)
+    
     # See explanatory memorandum: p. 16
     prop_business_income <- total_net_small_business_income / taxable_income
     prop_tax_for_biz <- prop_business_income * basic_income_tax_liability 
