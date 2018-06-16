@@ -113,3 +113,22 @@ test_that("new_medicare_levy matches", {
                medicare_levy(income = 23e3, fy.year = "2015-16", sapto.eligible = TRUE , Spouse_income = 750, n_dependants = 0, family_status = "family"))
 })
 
+
+test_that("Medicare levy C++ constant", {
+  expect_equal(MedicareLevySaptoYear(47900, 15e3, 1L, TRUE, 2017), 
+               medicare_levy(47900,
+                             fy.year = "2016-17",
+                             sapto.eligible = TRUE,
+                             Spouse_income = 15e3,
+                             n_dependants = 1L,
+                             family_status = "family"))
+  
+  expect_equal(MedicareLevySaptoYear(47900, 15e3, 1L, TRUE, 2019), 
+               medicare_levy(47900,
+                             fy.year = "2018-19",
+                             sapto.eligible = TRUE,
+                             Spouse_income = 15e3,
+                             n_dependants = 1L,
+                             family_status = "family"))
+})
+
