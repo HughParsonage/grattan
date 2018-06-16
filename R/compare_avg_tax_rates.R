@@ -38,7 +38,7 @@ compare_avg_tax_rates <- function(DT, baseDT, by = "id", ids = NULL) {
     }
   }
   
-  Taxable_Income <- NULL
+  Taxable_Income <- Taxable_Income_percentile <- NULL
   out[, Taxable_Income_percentile := weighted_ntile(Taxable_Income, n = 100), keyby = c(by)]
   
   baseline_avgTaxRate_by_Percentile <- 
