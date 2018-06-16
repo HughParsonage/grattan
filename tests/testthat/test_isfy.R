@@ -27,4 +27,8 @@ test_that("all_fy", {
   expect_true(all_fy(c("2000-01", "2010-11", "2013-14", "2020-21")))
 })
 
+test_that("is_fy2", {
+  expect_true(all(is_fy2(c("2000-01", "2010-11", "2013-14", "2020-21"))))
+})
+
 

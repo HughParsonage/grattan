@@ -92,6 +92,23 @@ test_that("New SAPTO matches old SAPTO for SAPTO", {
                                 new_sapto_tbl = copy(grattan:::sapto_tbl)[fy_year == "2016-17"] %>% setkeyv("family_status"),
                                 medicare.sapto.eligible = TRUE), 
                income_tax(33000, "2016-17", age = 67))
+  
+})
+
+test_that("income_tax_sapto", {
+  expect_error(income_tax_sapto(allow.forecasts = TRUE),
+               regexp = "not used")
+  skip_on_cran()
+  skip_if_not_installed("taxstats", minimum_version = "0.0.5")
+  library(taxstats)
+  s1314 <- as.data.table(sample_file_1314)
+  expect_equal(s1314[, income_tax(Taxable_Income, "2013-14", .dots.ATO = .SD)], 
+               s1314[, income_tax_sapto(Taxable_Income, "2013-14", sapto.eligible = age_range <= 1, .dots.ATO = .SD)])
+  expect_equal(s1314[, income_tax(Taxable_Income, "2013-14", .dots.ATO = NULL)], 
+               s1314[, income_tax_sapto(Taxable_Income, "2013-14", .dots.ATO = NULL)])
+  expect_equal(s1314[, income_tax(Taxable_Income, "2013-14", return.mode = "integer")],
+               s1314[, income_tax_sapto(Taxable_Income, "2013-14", return.mode = "integer")])
+  
 })
 
 test_that("Works for ATO sample file", {
