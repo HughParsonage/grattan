@@ -17,8 +17,8 @@ script:
 # Current release build of data.table has conflict with R-dev
 - Rscript travisBeforeInstall.R
 - R CMD build --no-build-vignettes .
--  if [ $TRAVIS_R_VERSION_STRING == "devel" ]; then R CMD check --no-vignettes --ignore-vignettes --no-manual --as-cran *tar.gz
--  if [ $TRAVIS_R_VERSION_STRING != "devel" ]; then R CMD check --no-vignettes --ignore-vignettes --no-manual *tar.gz
+-  if [ $TRAVIS_R_VERSION_STRING == "devel" ]; then R CMD check --no-vignettes --ignore-vignettes --no-manual --as-cran *tar.gz; fi
+-  if [ $TRAVIS_R_VERSION_STRING != "devel" ]; then R CMD check --no-vignettes --ignore-vignettes --no-manual *tar.gz; fi
 
 
 r_github_packages:
