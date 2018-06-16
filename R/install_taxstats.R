@@ -12,7 +12,7 @@ install_taxstats <- function(...) {
       }
     }
   }
-  utils::install.packages(c("taxstats", "taxstats1516"),
+  utils::install.packages(c("taxstats"),
                           repos = "https://hughparsonage.github.io/tax-drat",
                           type = "source", 
                           ...)

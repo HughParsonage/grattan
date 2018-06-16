@@ -78,13 +78,39 @@ Together with `model_income_tax`, this allows us to make point-predictions of fu
 ```{r model1819}
 sample_file_1314 %>%
   project_to("2018-19") %>%
-  model_income_tax(ordinary_tax_thresholds = c(0, 18200, 37000, 87000, 
-                                               150e3), 
-                   baseline_fy = "2017-18") %>%
+  model_income_tax(baseline_fy = "2017-18",
+                   ordinary_tax_thresholds = c(0, 18200, 37000, 87000, 
+                                               150e3)) %>%
   revenue_foregone
-
 ```
 
+### `compare_avg_tax_rates`:
+
+Create comparison of average tax rates:
+
+```{r}
+lapply(list("30k" = 30e3,
+            "37k" = 37e3,
+            "42k" = 42e3),
+       function(T2) {
+         model_income_tax(s1718,
+                          baseline_fy = "2017-18",
+                          ordinary_tax_thresholds = c(0, 
+                                                      18200,
+                                                      T2,
+                                                      87000, 
+                                                      180e3))
+       }) %>%
+  rbindlist(idcol = "id") %>%
+  compare_avg_tax_rates(baseDT = .[id == "37k"]) %>%
+  ggplot(aes(x = Taxable_Income_percentile,
+             y = delta_avgTaxRate,
+             color = id,
+             group = id)) + 
+  geom_line()
+```
+
+## Access ABS data
 
 
 

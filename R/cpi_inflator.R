@@ -17,7 +17,7 @@
 cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15", 
                          adjustment = c("seasonal", "none", "trimmed.mean"),
                          useABSConnection = FALSE,
-                         allow.projection = TRUE){
+                         allow.projection = TRUE) {
   # CRAN
   obsTime <- obsValue <- to_index <- from_index <- NULL
   
@@ -29,8 +29,10 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
   }
   # Don't like vector recycling
   # http://stackoverflow.com/a/9335687/1664978
-  prohibit_vector_recycling(from_nominal_price, from_fy, to_fy)
+  max.length <- 
+    prohibit_vector_recycling.MAXLENGTH(from_nominal_price, from_fy, to_fy)
   
+  if (max.length == 1L && as.integer(substr(to_fy, 0L, 4L)))
   stopifnot(all_fy(from_fy), all_fy(to_fy))
   
   adjustment <- match.arg(adjustment, several.ok = FALSE)
@@ -66,8 +68,19 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
                            from_fy = from_fy,
                            to_fy = to_fy)
   
-  if (!allow.projection && !all(to_fy %in% cpi.indices$fy_year)){
-    stop("Not all elements of to_fy are in CPI data.")
+  if (!allow.projection && !all(to_fy %in% cpi.indices$fy_year)) {
+    if (length(to_fy) == 1L) {
+      stop("`to_fy = ", to_fy, "` yet `allow.projection = FALSE`. ", 
+           "The latest to_fy that may be used is ", max(cpi.indices$fy_year), ". ", 
+           "Set `allow.projection = TRUE` or ensure `to_fy` is earlier than ", 
+           max(cpi.indices$fy), ".")
+    } else {
+      first_late_fy <- first(to_fy[to_fy %notin% cpi.indices$fy_year])
+      stop("`to_fy` contains ", first_late_fy, ", yet `allow.projection = FALSE`. ", 
+           "The latest to_fy that may be used is ", max(cpi.indices$fy_year), ". ",
+           "Set `allow.projection = TRUE` or ensure `to_fy` is earlier than ", 
+           max(cpi.indices$fy), ".")
+    }
   }
   # else allow NAs to propagate
   

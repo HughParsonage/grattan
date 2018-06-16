@@ -7,6 +7,14 @@ test_that("Errors", {
   expect_error(cpi_inflator(to_fy = NA, from_fy = "2013-14"), 
                regexp = "`to_fy` contained NAs. Remove NAs before applying.",
                fixed = TRUE)
+  expect_error(cpi_inflator(from_fy = "2013-14", to_fy = "2040-41",
+                            allow.projection = FALSE), 
+               regexp = "`to_fy = 2040-41` yet `allow.projection = FALSE`.", 
+               fixed = TRUE)
+  expect_error(cpi_inflator(from_fy = "2013-14", to_fy = c("2015-16", "2040-41"),
+                            allow.projection = FALSE), 
+               regexp = "`to_fy contains 2040-41` yet `allow.projection = FALSE`.", 
+               fixed = TRUE)
 })
 
 test_that("cpi returns known results", {

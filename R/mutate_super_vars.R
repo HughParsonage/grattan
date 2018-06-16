@@ -161,6 +161,7 @@ apply_super_caps_and_div293 <- function(.sample.file,
                     .Names = c("age_range", "age_range_description"), 
                     class = c("data.frame", "data.table"), 
                     row.names = c(NA, -12L))
+        alloc.col(age_range_decoder)
         
       }
       .sample.file <- merge(.sample.file, age_range_decoder, by = "age_range")
