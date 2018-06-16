@@ -16,6 +16,8 @@ test_that("Error handling", {
   expect_error(compare_avg_tax_rates(dt1, dt2), 
                regexp = "`baseDT` lacked a column `baseline_tax`.", 
                fixed = TRUE)
+  compare_avg_tax_rates(dt1, dt1[, WEIGHT := 1])
+  
 })
 
 test_that("data.frame", {

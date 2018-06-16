@@ -2,12 +2,10 @@ language: r
 r_check_args:
 - '--no-multiarch'
 - '--no-vignettes'
-matrix:
-  include:
-  - r: oldrel
-  - r: release
-  - r: devel
-    r_check_args: '--as-cran'
+r:
+  - oldrel
+  - release
+  - devel
 
 cache: packages
 warnings_are_errors: true
@@ -19,7 +17,8 @@ script:
 # Current release build of data.table has conflict with R-dev
 - Rscript travisBeforeInstall.R
 - R CMD build --no-build-vignettes .
-- R CMD check --no-vignettes --ignore-vignettes --no-manual *tar.gz
+-  if [ $TRAVIS_R_VERSION_STRING == "devel" ]; then R CMD check --no-vignettes --ignore-vignettes --no-manual --as-cran *tar.gz
+-  if [ $TRAVIS_R_VERSION_STRING != "devel" ]; then R CMD check --no-vignettes --ignore-vignettes --no-manual *tar.gz
 
 
 r_github_packages:

@@ -38,6 +38,36 @@ compare_avg_tax_rates <- function(DT, baseDT, by = "id", ids = NULL) {
     }
   }
   
+  if ("WEIGHT" %chin% names(DT)) {
+    populations <- DT[, .(pop = sum(WEIGHT)), keyby = c(by)]
+    min_pop <- populations[, min(pop)]
+    max_pop <- populations[, max(pop)]
+    if (min_pop < 10e6) {
+      min_by <- populations[pop == min_pop]
+      stop("`DT` contained a column 'WEIGHT', yet for ", 
+           "", by, " = ", min_by[[by]],
+           ", sum(WEIGHT) = ", prettyNum(min_pop, big.mark = ","), ". ", 
+           "Since this is less than 10 000 000, it is assumed to be a coding error. ", 
+           "(Did you use the wrong column '", by, "'?)")
+    }
+    if (max_pop > 20e6) {
+      max_by <- populations[pop == max_pop]
+      stop("`DT` contained a column 'WEIGHT', yet for ", 
+           "", by, " = ", max_by[[by]],
+           ", sum(WEIGHT) = ", prettyNum(max_pop, big.mark = ","), ". ", 
+           "Since this is greater than 20 000 000, it is assumed to be a coding error. ", 
+           "(Did you use the wrong column '", by, "'?)")
+    }
+  }
+  
+  if ("WEIGHT" %chin% names(baseDT)) {
+    base_population <- baseDT[, sum(WEIGHT)]
+    if (base_population < 10e6 || base_population > 20e6) {
+      stop("`baseDT` had a column called 'WEIGHT', yet sum(WEIGHT) was ",
+           "not between 10,000,000 and 20,000,000, likely a coding error.")
+    }
+  }
+  
   Taxable_Income <- Taxable_Income_percentile <- NULL
   out[, Taxable_Income_percentile := weighted_ntile(Taxable_Income, n = 100), keyby = c(by)]
   
