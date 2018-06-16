@@ -8,11 +8,11 @@ install_taxstats <- function(...) {
     dots <- list(...)
     if ("lib" %in% names(dots)) {
       if (!requireNamespace("data.table", lib.loc = dots$lib)) {
-        install.packages("data.table", lib = dots$lib, ...)
+        utils::install.packages("data.table", lib = dots$lib, ...)
       }
     }
   }
-  utils::install.packages("taxstats",
+  utils::install.packages(c("taxstats", "taxstats1516"),
                           repos = "https://hughparsonage.github.io/tax-drat",
                           type = "source", 
                           ...)
