@@ -14,6 +14,7 @@
 #' @importFrom hutils if_else
 #' @importFrom hutils coalesce
 #' @importFrom hutils OR
+#' @importFrom hutils NOR
 #' @importFrom hutils NEITHER
 #' @importFrom hutils AND
 #' @importFrom hutils %ein%
