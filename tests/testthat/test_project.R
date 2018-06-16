@@ -33,6 +33,7 @@ test_that("h = 0", {
   library(taxstats)
   s1314 <- as.data.table(sample_file_1314)
   expect_identical(s1314, project(s1314, h = 0L))
+  expect_identical(s1314, project(as.data.frame(s1314), h = 0L))
 })
 
 test_that("Columns do not vanish", {
@@ -109,6 +110,7 @@ test_that("Coverage", {
                   .recalculate.inflators = FALSE)
   out2 <- project(hutils::drop_col(s1516, "Med_Exp_TO_amt"),
                  h = 1L,
+                 fy.year.of.sample.file = "2015-16",
                  .recalculate.inflators = TRUE)
   expect_equal(out1, out2, tol = 0.1)
   

@@ -47,6 +47,7 @@ Suggests:
     survey,
     testthat, 
     taxstats,
+    taxstats1516,
     viridis,
     yaml
 Additional_repositories: https://hughparsonage.github.io/tax-drat/
