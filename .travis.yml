@@ -1,11 +1,14 @@
 language: r
-r:
-- oldrel
-- release
-- devel
 r_check_args:
 - '--no-multiarch'
 - '--no-vignettes'
+matrix:
+  include:
+  - r: oldrel
+  - r: release
+  - r: devel
+    r_check_args: '--as-cran'
+
 cache: packages
 warnings_are_errors: true
 
