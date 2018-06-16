@@ -3,6 +3,7 @@ output:
   md_document:
     variant: markdown_github
     toc: true
+    toc_depth: 2
 ---
 
 # grattan
@@ -45,7 +46,7 @@ s1314 %>%
   .[, .(Taxable_Income, tax)]
 ```
 
-### Modelling changes to personal income tax
+## `model_income_tax`: modelling changes to personal income tax
 While `income_tax` is designed to inflexibly return the tax payable as legislated, 
 `model_income_tax` is designed to calculate income tax when changes are made. For example,
 

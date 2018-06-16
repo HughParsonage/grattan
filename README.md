@@ -1,35 +1,18 @@
 -   [grattan](#grattan)
 -   [Overview](#overview)
     -   [`income_tax`](#income_tax)
-        -   [With sample files](#with-sample-files)
-        -   [Modelling changes to personal income tax](#modelling-changes-to-personal-income-tax)
     -   [`project`](#project)
 -   [NEWS](#news)
-    -   [1.6.0.0](#section)
-        -   [2018-05-08](#section-1)
-    -   [1.5.3.6](#section-2)
-        -   [2018-02-21](#section-3)
-    -   [1.5.3.1](#section-4)
-        -   [2018-01-22](#section-5)
-        -   [New features:](#new-features)
-        -   [Other user-visible changes](#other-user-visible-changes)
-        -   [Data:](#data)
-        -   [Other changes](#other-changes)
-    -   [1.5.2.5](#section-6)
-        -   [2017-11-16](#section-7)
-        -   [2017-10-27](#section-8)
-    -   [1.5.2.3](#section-9)
-        -   [2017-10-21](#section-10)
-    -   [1.5.2.0](#section-11)
-        -   [2017-10-19](#section-12)
-    -   [1.5.1.2](#section-13)
-        -   [2017-10-15](#section-14)
-        -   [2017-08-30](#section-15)
-        -   [2017-08-16](#section-16)
-        -   [2017-07-02](#section-17)
+    -   [1.6.1.0](#section)
+    -   [1.6.0.0](#section-1)
+    -   [1.5.3.6](#section-3)
+    -   [1.5.3.1](#section-5)
+    -   [1.5.2.5](#section-7)
+    -   [1.5.2.3](#section-10)
+    -   [1.5.2.0](#section-12)
+    -   [1.5.1.2](#section-14)
 -   [CRAN Notes](#cran-notes)
     -   [Test results](#test-results)
-        -   [Test environments:](#test-environments)
     -   [Note to CRAN: moderately-large vignette](#note-to-cran-moderately-large-vignette)
 
 grattan
@@ -48,7 +31,7 @@ install.packages("grattan")
 library(grattan)
 ```
 
-    ## Last change: model_income_tax.R at 2018-06-14 16:47:31 (49 mins ago).
+    ## Last change: test_income_tax_cpp.R at 2018-06-16 18:21:21 (58 mins ago).
 
 `income_tax`
 ------------
@@ -151,6 +134,16 @@ sample_file_1314 %>%
 
 NEWS
 ====
+
+1.6.1.0
+-------
+
+-   New functions:
+    -   `compare_avg_tax_rates`: create a difference in average tax rates between multiple models and a baseline tax, by percentile.
+    -   `install_taxstats()` for convenience.
+-   Bug fixes:
+    -   `small_business_tax_offset()` is now always positive, fixing the original misinterpretation of the legislation whereby negative business income resulted in a negative offset.
+-   `taxstats1516` is now a suggested dependency.
 
 1.6.0.0
 -------
