@@ -27,7 +27,7 @@ r_github_packages:
   - jimhester/covr
 
 after_success:
-  - Rscript -e 'formalCoverage::formalPackageCoverage()'
+  - Rscript -e 'Sys.time()'
   - if [ $TRAVIS_R_VERSION_STRING == "release" ]; then Rscript -e 'covr::codecov(line_exclusions = "R/zzz.R")'; fi
 
 after_failure:
