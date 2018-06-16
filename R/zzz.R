@@ -53,7 +53,7 @@
     , 
     
     # dput(unique(c(names(grattan:::medicare_tbl), names(grattan:::sapto_tbl), names(grattan:::cgt_expenditures))))
-    c("fy_year", "sato", "pto", "sapto", "family_status", "lower_threshold", 
+    c("sato", "pto", "sapto", "family_status", "lower_threshold", 
       "family_income", 
       "upper_threshold", "taper", "rate", "lower_family_threshold", 
       "upper_family_threshold", "lower_up_for_each_child", "family_status_index", 
@@ -86,7 +86,7 @@
   error = function(e) NULL)
   
   
-  invisible()
+  invisible(NULL)
 }
 
 gessage <- function(...) {
