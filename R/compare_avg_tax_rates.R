@@ -62,7 +62,7 @@ compare_avg_tax_rates <- function(DT, baseDT, by = "id", ids = NULL) {
   out[, .(new_avgTaxRate = mean(new_avg_tax_rate)), 
       keyby = c(by, "Taxable_Income_percentile")] %>%
     baseline_avgTaxRate_by_Percentile[., on = "Taxable_Income_percentile"] %>%
-    .[, delta_avgTaxRate := new_avgTaxRate - avgTaxRate] %>%
+    .[, 'delta_avgTaxRate' := new_avgTaxRate - avgTaxRate] %>%
     .[]
   
 }

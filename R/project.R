@@ -48,10 +48,52 @@ project <- function(sample_file,
                     .copyDT = TRUE,
                     check_fy_sample_file = TRUE,
                     differentially_uprate_Sw = TRUE) {
-  stopifnot(is.integer(h), h >= 0L, is.data.table(sample_file))
+  if (length(h) != 1L) {
+    stop("`h` had length-", length(h), ", ", 
+         "but must be a length-1 positive integer.")
+  }
+  
+  if (!is.integer(h)) {
+    htxt <- deparse(substitute(h))
+    if (is.double(h)) {
+      if (grepl("^[0-9]+$", htxt)) {
+        hadvised <- paste0(htxt, "L")
+        stop("`h = ", htxt, "` was type double, but must be type integer. ", 
+             "(Did you mean `h = ", hadvised, "`?)\n\n",
+             "Change h to a length-one integer. ",
+             "For example, to project two years ahead, use `h = 2L`, not `h = 2`.")
+      } else {
+        stop("`h = ", htxt, "` was type double, but must be type integer. ", 
+             "Change h to a length-one integer. ",
+             "For example, to project two years ahead, use `h = 2L`, not `h = 2`.")
+      }
+    } else {
+      stop("`h = ", htxt, "` was type ", typeof(h), ", but must be type integer. ", 
+           "Change h to a length-one nonnegative integer.")
+    }
+  }
+  if (anyNA(h)) {
+    stop("`h = NA`. This is not permitted. ", 
+         "Change h to a length-one nonnegative integer.")
+  }
+  if (h < 0L) {
+    stop("`h = ", h, "`, but must be a nonnegative integer. ",
+         "Change h to a nonnegative integer.")
+  }
+  
+  if (!is.data.table(sample_file)) {
+    if (is.data.frame(sample_file)) {
+      sample_file <- as.data.table(sample_file)
+    } else {
+      stop("`sample_file` was of class ", class(sample_file)[1L], ", but must be a data.table. ", 
+           "Ensure `sample_file`` is a data.frame with the same structure as the ATO's sample files.")
+    }
+  }
+  
   if (.copyDT) {
     sample_file <- copy(sample_file)
   }
+  
   
   if (check_fy_sample_file) {
     # It's been a common error of mine to switch sample files

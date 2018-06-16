@@ -1,23 +1,30 @@
 context("project function")
 
+
+
 test_that("Error handling", {
-  skip_on_cran()
-  skip_if_not_installed("taxstats")
-  library(taxstats)
-  expect_error(project(data.table(), h = 1L),
-               regexp = "`fy.year.of.sample.file` was not provided, and its value could not be inferred from nrow(sample_file) = 0. Either use a 2% sample file of the years 2012-13, 2013-14, or 2014-15 or supply `fy.year.of.sample.file` manually.", 
+  a <- "foo"
+  expect_error(project(a, 1:2), 
+               regexp = "`h` had length-2, but must be a length-1 positive integer.", 
                fixed = TRUE)
-  
-  
-  expect_warning(project(sample_file_1112, h = 1L, fy.year.of.sample.file = "2013-14"), 
-                 regexp = "nrow(sample_file) != 254318.", 
-                 fixed = TRUE)
-  expect_warning(project(sample_file_1112, h = 1L, fy.year.of.sample.file = "2014-15"), 
-                 regexp = "nrow(sample_file) != 263339", 
-                 fixed = TRUE)
-  expect_warning(project(sample_file_1112, h = 1L, fy.year.of.sample.file = "2015-16"), 
-                 regexp = "nrow(sample_file) != 269639", 
-                 fixed = TRUE)
+  expect_error(project(a, 1), 
+               regexp = "`h = 1` was type double, but must be type integer. (Did you mean `h = 1L`?)", 
+               fixed = TRUE)
+  expect_error(project(a, 1.5), 
+               regexp = "`h = 1.5` was type double, but must be type integer.", 
+               fixed = TRUE)
+  expect_error(project(a, "x"), 
+               regexp = '`h = "x"` was type character, but must be type integer.', 
+               fixed = TRUE)
+  expect_error(project(a, NA_integer_), 
+               regexp = '`h = NA`. This is not permitted.', 
+               fixed = TRUE)
+  expect_error(project(a, -1L), 
+               regexp = '`h = -1`, but must be a nonnegative integer. Change h to a nonnegative integer.', 
+               fixed = TRUE)
+  expect_error(project(a, 1L), 
+               regexp = "`sample_file` was of class character, but must be a data.table.", 
+               fixed = TRUE)
 })
 
 test_that("h = 0", {
@@ -49,10 +56,24 @@ test_that("Warnings", {
                regexp = "2012.13.*2013.14")
 })
 
-test_that("Error handling", {
+test_that("Error handling (sample files)", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
   library(taxstats)
+  expect_error(project(data.table(), h = 1L),
+               regexp = "`fy.year.of.sample.file` was not provided, and its value could not be inferred from nrow(sample_file) = 0. Either use a 2% sample file of the years 2012-13, 2013-14, or 2014-15 or supply `fy.year.of.sample.file` manually.", 
+               fixed = TRUE)
+  
+  
+  expect_warning(project(sample_file_1112, h = 1L, fy.year.of.sample.file = "2013-14"), 
+                 regexp = "nrow(sample_file) != 254318.", 
+                 fixed = TRUE)
+  expect_warning(project(sample_file_1112, h = 1L, fy.year.of.sample.file = "2014-15"), 
+                 regexp = "nrow(sample_file) != 263339", 
+                 fixed = TRUE)
+  expect_warning(project(sample_file_1112, h = 1L, fy.year.of.sample.file = "2015-16"), 
+                 regexp = "nrow(sample_file) != 269639", 
+                 fixed = TRUE)
   expect_error(project_to(sample_file_1112, "2013-14"),
                regexp = "`fy.year.of.sample.file` was not provided, yet its value could not be inferred from nrow(sample_file) = 254273. Either use a 2% sample file of the years 2012-13, 2013-14, or 2014-15 or supply `fy.year.of.sample.file` manually.",
                fixed = TRUE)

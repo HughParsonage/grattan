@@ -4,11 +4,12 @@ r:
 - release
 - devel
 r_check_args:
-- '--as-cran'
 - '--no-multiarch'
 - '--no-vignettes'
 cache: packages
 warnings_are_errors: true
+
+
 
 script:
 - export _R_CHECK_CRAN_INCOMING_=false
