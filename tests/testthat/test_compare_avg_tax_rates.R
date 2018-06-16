@@ -16,7 +16,12 @@ test_that("Error handling", {
   expect_error(compare_avg_tax_rates(dt1, dt2), 
                regexp = "`baseDT` lacked a column `baseline_tax`.", 
                fixed = TRUE)
-  compare_avg_tax_rates(dt1, dt1[, WEIGHT := 1])
+  expect_error(compare_avg_tax_rates(dt1, dt1[, WEIGHT := 1]), 
+               regexp = "`DT` contained a column 'WEIGHT', yet for id = 1, sum(WEIGHT) = 4.", 
+               fixed = TRUE)
+  expect_error(compare_avg_tax_rates(dt1, dt1[, WEIGHT := 10e6]), 
+               regexp = "`DT` contained a column 'WEIGHT', yet for id = 1, sum(WEIGHT) = 40,000,000.", 
+               fixed = TRUE)
   
 })
 
