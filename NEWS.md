@@ -1,3 +1,12 @@
+## 1.6.1.0
+* New functions:
+    - `compare_avg_tax_rates`: create a difference in average tax rates between multiple models and a baseline tax, by percentile.
+    - `install_taxstats()` for convenience.
+* Bug fixes:
+    - `small_business_tax_offset()` is now always positive, fixing the original misinterpretation of the legislation whereby negative business income resulted in a negative offset.
+* `taxstats1516` is now a suggested dependency.
+
+
 ## 1.6.0.0
 ### 2018-05-08
 * Never-legislated Medicare levy change in 2019-20 has been reverted
