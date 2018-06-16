@@ -39,6 +39,7 @@ compare_avg_tax_rates <- function(DT, baseDT, by = "id", ids = NULL) {
   }
   
   if ("WEIGHT" %chin% names(DT)) {
+    pop <- WEIGHT <- NULL
     populations <- DT[, .(pop = sum(WEIGHT)), keyby = c(by)]
     min_pop <- populations[, min(pop)]
     max_pop <- populations[, max(pop)]
@@ -61,6 +62,7 @@ compare_avg_tax_rates <- function(DT, baseDT, by = "id", ids = NULL) {
   }
   
   if ("WEIGHT" %chin% names(baseDT)) {
+    WEIGHT <- NULL
     base_population <- baseDT[, sum(WEIGHT)]
     if (base_population < 10e6 || base_population > 20e6) {
       stop("`baseDT` had a column called 'WEIGHT', yet sum(WEIGHT) was ",
