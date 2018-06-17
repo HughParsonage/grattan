@@ -9,12 +9,10 @@ output:
     keep_md: true
 ---
 
-Width: `r getOption("width", "XXX")`.
-```{r opts}
-options(width = 110)
-```
+
 
 ```{r setup, include = FALSE}
+options(width = 110)
 knitr::opts_chunk$set(
   collapse = TRUE,
   error = FALSE,
@@ -1702,6 +1700,23 @@ compare_avg_tax_rates(s2728_various_wages, s1718[, baseline_tax := tax]) %>%
   guides(color = guide_legend(reverse = TRUE)) +
   theme(legend.position = c(1, 1), 
         legend.justification = c(1, 1))
+
+```
+
+```{r comparison-lf-assumptions}
+s2024_Deloitte_LF_growth <- 
+  project(sample_file_1516, h = 9L, lf.series = 0.0135) %>%
+  model_income_tax(baseline_fy = "2017-18", 
+                   ordinary_tax_thresholds = ordinary_tax_thresholds("2024-25"), 
+                   ordinary_tax_rates = ordinary_tax_rates("2024-25"),
+                   Budget2018_lito_202223 = TRUE,
+                   medicare_levy_lower_threshold = medicare_levy_lower_threshold("2024-25"), 
+                   medicare_levy_upper_threshold = 31175,
+                   medicare_levy_lower_sapto_threshold = medicare_levy_lower_sapto_threshold("2024-25"), 
+                   medicare_levy_upper_sapto_threshold = 49300,
+                   medicare_levy_lower_family_threshold = medicare_levy_lower_family_threshold("2024-25"), 
+                   medicare_levy_lower_family_sapto_threshold = medicare_levy_lower_family_sapto_threshold("2024-25"))
+
 
 ```
 
