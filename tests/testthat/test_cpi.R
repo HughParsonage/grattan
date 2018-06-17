@@ -15,6 +15,9 @@ test_that("Errors", {
                             allow.projection = FALSE), 
                regexp = "`to_fy` contains 2040-41, yet `allow.projection = FALSE`.", 
                fixed = TRUE)
+  expect_error(cpi_inflator_quarters(from_qtr = "2015-Q1", to_qtr = "2015-01-01"), 
+               regexp = "Dates must be in quarters.", 
+               fixed = TRUE)
 })
 
 test_that("cpi returns known results", {

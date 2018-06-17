@@ -4,6 +4,19 @@ test_that("SAPTO for singles", {
   sapto(33279, fy.year = "2015-16")
 })
 
+test_that("Error handling", {
+  expect_error(sapto(25e3, 
+                     fy.year = "2016-17", 
+                     family_status = "single",
+                     Spouse_income = 100),
+               regexp = "Whenever `Spouse_income` is positive,")
+  expect_error(sapto(rep(25e3, 2),
+                     fy.year = "2016-17", 
+                     family_status = rep("single", 2),
+                     Spouse_income = 100),
+               regexp = "Whenever `Spouse_income` is positive,")
+})
+
 
 test_that("SAPTO for partners", {
   skip("Govt calculator using wrong thresholds")
@@ -108,6 +121,9 @@ test_that("income_tax_sapto", {
                s1314[, income_tax_sapto(Taxable_Income, "2013-14", .dots.ATO = NULL)])
   expect_equal(s1314[, income_tax(Taxable_Income, "2013-14", return.mode = "integer")],
                s1314[, income_tax_sapto(Taxable_Income, "2013-14", return.mode = "integer")])
+  s1314[, Taxable_Income := as.double(Taxable_Income)]
+  expect_equal(s1314[, income_tax(Taxable_Income, "2013-14", .dots.ATO = s1314)], 
+               s1314[, income_tax_sapto(Taxable_Income, "2013-14", sapto.eligible = age_range <= 1, .dots.ATO = s1314)])
   
 })
 

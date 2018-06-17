@@ -16,5 +16,7 @@ test_that("Value of revenue_foregone", {
   dt[, WEIGHT := 2.25e8]
   expect_output(print(revenue_foregone(dt)), '[1] "$22 billion"', fixed = TRUE)
   expect_equal(print.revenue_foregone(revenue_foregone(dt, FALSE)), paste0("\u2212", "$22 billion"))
+  dt[, WEIGHT := 2.0155e8]
+  expect_equal(print.revenue_foregone(revenue_foregone(dt, TRUE, digits = 6)), paste0("$20.155 billion"))
 })
 

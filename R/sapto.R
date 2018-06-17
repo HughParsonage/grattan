@@ -44,7 +44,15 @@ sapto <- function(rebate_income,
     stopifnot(all(family_status %chin% c("single", "married")))
     
     if ("single" %chin% family_status[is_married]) {
-      stop("family_status may be 'single' if and only if Spouse_income > 0.")
+      if (length(family_status) == 1L) {
+        stop("`family_status = 'single'` yet `Spouse_income > 0`. ", 
+             "Whenever `Spouse_income` is positive, `family_status` must be set to 'married'.")
+      } else {
+        first_bad <- which(family_status == "single" & is_married)
+        stop("In entry ", first_bad, " `family_status = 'single' ", 
+             "yet Spouse_income > 0 for that entry. ",
+             "Whenever `Spouse_income` is positive, `family_status` must be set to 'married'.")
+      }
     }
   }
   
@@ -53,8 +61,10 @@ sapto <- function(rebate_income,
     AA <- BB <- CC <- DD <- 
     GG <- HH <- II <- JJ <- . <- NULL
   
+  out_tbl <- sapto_tbl[input, on = c("fy_year", "family_status")]
+  setindex(out_tbl, is_married)
   out <- 
-    sapto_tbl[input, on = c("fy_year", "family_status")] %>%
+    out_tbl %>%
     .[, sapto_income := rebate_income + Spouse_income] %>%
     .[, sapto_value := pmaxC(pminV(max_offset, 
                                    max_offset + lower_threshold * taper_rate - sapto_income * taper_rate),
