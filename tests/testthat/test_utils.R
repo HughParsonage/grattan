@@ -24,8 +24,8 @@ test_that("anyIntersection", {
 })
 
 test_that("last_over_first", {
-  expect_equal(1:5, 5L)
-  expect_equal(letters[1:5], letters[1:5])
+  expect_equal(last_over_first(1:5), 5L)
+  expect_equal(last_over_first(letters[1:5]), letters[1:5])
   expect_true(all(are_zero(c(0, 0.1 + 0.2 - 0.3))))
 })
 

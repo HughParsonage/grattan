@@ -16,9 +16,11 @@ test_that("Inverse single income matches.", {
   
   
   expect_equal(inverse_average_rate(0.097, "2003-04"), 15974, tol = 2)
+  expect_error(inverse_average_rate(0.5, "2008-09", .max = 100), 
+               regexp = "Stopping search")
 })
 
-test_that("Infinites", {
+test_that("Infinities", {
   expect_equal(inverse_income(Inf), Inf)
   expect_equal(inverse_income(c(NA, 10e3, Inf)), c(NA, 54798, Inf))
 })
