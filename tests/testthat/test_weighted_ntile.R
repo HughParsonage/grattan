@@ -3,6 +3,9 @@ context("Utilities")
 test_that("Error handling", {
   expect_error(weighted_ntile(stop("Not checked yet"), weights = -1), 
                regex = "contained negative values")
+  expect_error(weighted_ntile(1:10, 1:5, n = 10), 
+               regexp = "`weights` must be length-one or length(vector)", 
+               fixed = TRUE)
 })
 
 test_that("weighted_ntiles on integers", {

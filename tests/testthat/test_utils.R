@@ -60,3 +60,8 @@ test_that("fast selector", {
   expect_identical(.selector(dt, noms = c("z", "y")), 
                    dt[, .(z, y)])
 })
+
+test_that("koffset", {
+  expect_equal(koffset(37000 + 1:10, c(0, 37e3, 66667, Inf), c(445, 445, 0, 0)), 
+               lito(37000 + 1:10))
+})
