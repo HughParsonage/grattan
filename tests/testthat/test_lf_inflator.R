@@ -16,6 +16,13 @@ test_that("Error handling", {
                                                      r = 0.2)), 
                regexp = "The first fy in the custom series must be equal to", 
                fixed = TRUE)
+  expect_error(lf_inflator_fy(from_fy = "2017-18",
+                              to_fy = "2018-19",
+                              forecast.series = "custom",
+                              lf.series = data.table(fy_year = c("2017-18", "2017-18"),
+                                                     r = c(0, 0.123))), 
+               regexp = 'lf.series$fy_year should be c("2017-18", "2018-19").', 
+               fixed = TRUE)
 })
 
 test_that("upper and lower series produce higher and lower forecasts", {

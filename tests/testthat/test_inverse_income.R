@@ -65,9 +65,9 @@ test_that("Inverse income long on zero", {
 })
 
 test_that("Other arguments passed to income_tax", {
-  expect_equal(25e3, inverse_income(income_tax(25e3, "2013-14", age = 70),
-                                    fy.year = "2013-14",
-                                    age = 70), 
+  expect_equal(25e3, inverse_income_lookup3(income_tax(25e3, "2013-14", age = 70),
+                                            fy.year = "2013-14",
+                                            age = 70), 
                tol = 5/2)
   
 })

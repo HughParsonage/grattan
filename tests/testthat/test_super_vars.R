@@ -109,6 +109,24 @@ test_that("Counts for Div 293 at 250e3 not at odds with PBO", {
   # 2017-18   2018-19   2019-20
   # 110,000   130,000   150,000
   expect_true(between(n_adversely_affected_201718, 70e3, 130e3))
+  
+  n_affected_201718 <- 
+    n_affected_from_new_cap_and_div293(.sample.file = sample_file_1718, 
+                                       # PBO issued estimate in 2015-16
+                                       fy.year = "2015-16", 
+                                       new_cap = 30e3, new_cap2 = 35e3, new_age_based_cap = TRUE, 
+                                       new_cap2_age = 49,
+                                       new_ecc = FALSE, 
+                                       new_div293_threshold = 250e3, 
+                                       
+                                       use_other_contr = FALSE,
+                                       prv_cap = 30000, prv_cap2 = 35000, prv_age_based_cap = TRUE,
+                                       prv_cap2_age = 49, 
+                                       prv_ecc = FALSE, 
+                                       prv_div293_threshold = 300e3,
+                                       adverse_only = FALSE)
+  expect_true(between(n_affected_201718, 70e3, 130e3))
+  
 })
 
 context("Reweighting and imputation successfully reconcile aggregates")

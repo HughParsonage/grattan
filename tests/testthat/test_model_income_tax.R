@@ -763,6 +763,20 @@ test_that("Budget2018", {
 })
 
 
+test_that("Debugger", {
+  skip_on_cran()
+  skip_if_not_installed("taxstats1516")
+  library(data.table)
+  library(taxstats1516)
+  s1516 <- as.data.table(sample_file_1516_synth)
+  s1516[, Med_Exp_TO_amt := 0]
+  o <- model_income_tax(s1516[, Med_Exp_TO_amt := 0], "2016-17", .debug = TRUE)
+  expect_equal(names(o), c("income", "base_tax.", "lito.", "lamington_offset.", "sapto.", 
+                           "sbto.", "medicare_levy."))
+})
+
+
+
 
 
 
