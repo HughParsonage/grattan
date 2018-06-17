@@ -98,6 +98,29 @@ test_that("Switch off differentially uprating", {
   expect_gt(swa_sorted[floor(0.25 * len)], swb_sorted[floor(0.25 * len)])
 })
 
+test_that("Custom lf/wage series", {
+  skip_on_cran()
+  skip_if_not_installed("taxstats")
+  library(taxstats)
+  s1314 <- as.data.table(sample_file_1314)
+  s2021 <- project(s1314, h = 7L)
+  s2021_LA <- project(s1314, h = 7L, lf.series = 0.0)
+  s2021_LB <- project(s1314, h = 7L, lf.series = 0.1)
+  expect_lt(s2021_LA[, sum(WEIGHT)], 
+            s2021[, sum(WEIGHT)])
+  expect_gt(s2021_LB[, sum(WEIGHT)], 
+            s2021[, sum(WEIGHT)])
+  
+  s2021_WA <- project(s1314, h = 7L, wage.series = 0.0)
+  s2021_WB <- project(s1314, h = 7L, wage.series = 0.035)
+  expect_lt(s2021_WA[, mean(Sw_amt)], 
+            s2021[, mean(Sw_amt)])
+  expect_gt(s2021_WB[, mean(Sw_amt)], 
+            s2021[, mean(Sw_amt)])
+  
+  
+})
+
 test_that("Coverage", {
   skip_on_cran()
   skip_if_not_installed("taxstats1516")
