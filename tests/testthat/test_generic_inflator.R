@@ -16,6 +16,10 @@ test_that("generic inflator doesn't fail!", {
 test_that("generic inflator gives higher/lower for upper/lower", {
   expect_gte(generic_inflator(vars = "Sw_amt", h = 1L, estimator = "mean")[["inflator"]], 
              generic_inflator(vars = "Sw_amt", h = 1L, estimator = "lower")[["inflator"]])
+  expect_gte(generic_inflator(vars = "MCS_Emplr_Contr", h = 1L,
+                              fy.year.of.sample.file = "2013-14", nonzero = TRUE)[["inflator"]], 
+             generic_inflator(vars = "MCS_Emplr_Contr", h = 1L,
+                              fy.year.of.sample.file = "2013-14", nonzero = FALSE)[["inflator"]])
   
   expect_lte(generic_inflator(vars = "Sw_amt", h = 1L, estimator = "mean")[["inflator"]], 
              generic_inflator(vars = "Sw_amt", h = 1L, estimator = "upper")[["inflator"]])
