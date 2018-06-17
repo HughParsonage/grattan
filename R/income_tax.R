@@ -431,14 +431,16 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
                   "Net_rent_amt", 
                   "Rep_frng_ben_amt") %chin% .dots.ATO.noms))) {
       sapto. <- double(max.length)
-      .dAse <- .dots.ATO[which_sapto]
+      .dAse <- function(v) {
+        .dots.ATO[which_sapto, eval(parse(text = v))]
+      }
       
       sapto.[which_sapto] <-
         sapto_rcpp_yr(RebateIncome = rebate_income(Taxable_Income = income[which_sapto],
-                                                   Rptbl_Empr_spr_cont_amt = .dAse[["Rptbl_Empr_spr_cont_amt"]],
-                                                   Net_fincl_invstmt_lss_amt = .dAse[["Net_fincl_invstmt_lss_amt"]],
-                                                   Net_rent_amt = .dAse[["Net_rent_amt"]],
-                                                   Rep_frng_ben_amt = .dAse[["Rep_frng_ben_amt"]]),
+                                                   Rptbl_Empr_spr_cont_amt = .dAse("Rptbl_Empr_spr_cont_amt"),
+                                                   Net_fincl_invstmt_lss_amt = .dAse("Net_fincl_invstmt_lss_amt"),
+                                                   Net_rent_amt = .dAse("Net_rent_amt"),
+                                                   Rep_frng_ben_amt = .dAse("Rep_frng_ben_amt")),
                       SpouseIncome = SpouseIncome_sapto_eligible,
                       IsMarried = SpouseIncome_sapto_eligible > 0,
                       yr = Year.int)

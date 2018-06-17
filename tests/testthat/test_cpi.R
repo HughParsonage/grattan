@@ -80,12 +80,29 @@ test_that("cpi_inflator_general_date messages", {
 test_that("cpi returns reasonable forecasts", {
   skip_if_not(packageVersion("rsdmx") >= package_version("0.5.10"))
   expect_gt(cpi_inflator(from_nominal_price = 1,
-                         from_fy = "2012-13",
-                         to_fy = "2015-16",
+                         from_fy = "2016-17",
+                         to_fy = "2018-19",
                          adjustment = "none",
                          useABSConnection = FALSE,
                          allow.projection = TRUE), 
-            1.05)
+            cpi_inflator(from_nominal_price = 1,
+                         from_fy = "2016-17",
+                         to_fy = "2017-18",
+                         adjustment = "none",
+                         useABSConnection = FALSE,
+                         allow.projection = TRUE))
+  expect_gt(cpi_inflator(from_nominal_price = 1,
+                         from_fy = "2016-17",
+                         to_fy = "2018-19",
+                         adjustment = "none",
+                         useABSConnection = FALSE,
+                         allow.projection = TRUE), 
+            cpi_inflator(from_nominal_price = 1,
+                         from_fy = "2016-17",
+                         to_fy = "2017-18",
+                         adjustment = "none",
+                         useABSConnection = TRUE,
+                         allow.projection = FALSE))
   expect_lt(cpi_inflator(from_nominal_price = 1,
                          from_fy = "2012-13",
                          to_fy = "2015-16",
