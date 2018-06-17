@@ -4,6 +4,8 @@ test_that("medicare_levy does not respond to invalid", {
   expect_error(medicare_levy(income = 123, fy.year = c("2015-16", "2015-17")))
   expect_error(medicare_levy(income = 123, fy.year = "2014-15", family_status = "couple"))
   expect_error(medicare_levy(income = 123, fy.year = "2015-16", sapto.eligible = FALSE, Spouse_income = 1e3, n_dependants = 0, family_status = "individual"))
+  
+  
 })
 
 test_that("medicare_levy monotonic", {
@@ -119,9 +121,22 @@ test_that("new_medicare_levy matches", {
                              Spouse_income = 750,
                              n_dependants = 0,
                              family_status = "family"))
+  expect_error(new_medicare_levy(par_tbl)(25e3,  
+                                          family_status = "individual",
+                                          switch = FALSE,
+                                          Spouse_income = 100),
+               regexp = "Whenever `Spouse_income` is positive,")
+  expect_error(new_medicare_levy(par_tbl)(rep(25e3, 2),
+                                          family_status = rep("individual", 2),
+                                          switch = TRUE,
+                                          Spouse_income = 100),
+               regexp = "Whenever `Spouse_income` is positive,")
+  
   expect_error(new_medicare_levy(parameter_table = as.data.frame(par_tbl)))
   expect_error(new_medicare_levy(parameter_table = drop_cols(par_tbl, "taper")),
                regexp = "parameter_table must contain certain columns")
+  
+  
 })
 
 
