@@ -1,9 +1,17 @@
 context("Wage inflator")
 
 test_that("Error handling", {
+  skip_on_cran()
   expect_error(wage_inflator(from_fy = NA, to_fy = "2015-16"))
   
   expect_error(wage_inflator(1, from_fy = "2013-14", to_fy = "2045-46", allow.projection = FALSE), regexp = "wage index data")
+  expect_error(wage_inflator(from_fy = "2017-18",
+                              to_fy = "2018-19",
+                              forecast.series = "custom",
+                              wage.series = data.table(fy_year = c("2017-18", "2017-18"),
+                                                     r = c(0, 0.123))), 
+               regexp = 'wage.series$fy_year should be c("2017-18", "2018-19").', 
+               fixed = TRUE)
 })
 
 test_that("upper/lower higher/lower", {

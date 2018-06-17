@@ -1,6 +1,7 @@
 context("lf inflator")
 
 test_that("Error handling", {
+  skip_on_cran()
   expect_error(lf_inflator_fy(from_fy = "2012-13", to_fy = "2099-00", allow.projection = FALSE),
                regexp = "to_fy are in labour force data")
   expect_error(lf_inflator_fy(from_fy = "2012-13", to_fy = "2025-26", 
