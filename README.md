@@ -1,7 +1,9 @@
 -   [grattan](#grattan)
 -   [Overview](#overview)
     -   [`income_tax`](#income_tax)
+    -   [`model_income_tax`: modelling changes to personal income tax](#model_income_tax-modelling-changes-to-personal-income-tax)
     -   [`project`](#project)
+    -   [Access ABS data](#access-abs-data)
 -   [NEWS](#news)
     -   [1.6.1.0](#section)
     -   [1.6.0.0](#section-1)
@@ -14,6 +16,8 @@
 -   [CRAN Notes](#cran-notes)
     -   [Test results](#test-results)
     -   [Note to CRAN: moderately-large vignette](#note-to-cran-moderately-large-vignette)
+
+[![Coverage status](https://codecov.io/gh/HughParsonage/grattan/branch/master/graph/badge.svg)](https://codecov.io/github/HughParsonage/grattan?branch=master) [![Build Status](https://travis-ci.org/hughparsonage/grattan.svg?branch=master)](https://travis-ci.org/hughparsonage/grattan)
 
 grattan
 =======
@@ -31,7 +35,7 @@ install.packages("grattan")
 library(grattan)
 ```
 
-    ## Last change: test_income_tax_cpp.R at 2018-06-16 18:21:21 (58 mins ago).
+    ## Last change: test_weighted_ntile.R at 2018-06-17 19:08:13 (3 hours ago).
 
 `income_tax`
 ------------
@@ -54,6 +58,7 @@ library(taxstats)
 
 library(data.table) 
 library(magrittr)
+library(ggplot2)
 ```
 
 Simply pass the sample file to `.dots.ATO` and the complexities of things like Medicare levy and the Seniors and Pensioners Tax Offset are handled for you. For example:
@@ -78,7 +83,8 @@ s1314 %>%
     ## 258773:           5134     0.000
     ## 258774:          46368  7007.640
 
-### Modelling changes to personal income tax
+`model_income_tax`: modelling changes to personal income tax
+------------------------------------------------------------
 
 While `income_tax` is designed to inflexibly return the tax payable as legislated, `model_income_tax` is designed to calculate income tax when changes are made. For example,
 
@@ -124,13 +130,44 @@ Together with `model_income_tax`, this allows us to make point-predictions of fu
 ``` r
 sample_file_1314 %>%
   project_to("2018-19") %>%
-  model_income_tax(ordinary_tax_thresholds = c(0, 18200, 37000, 87000, 
-                                               150e3), 
-                   baseline_fy = "2017-18") %>%
+  model_income_tax(baseline_fy = "2017-18",
+                   ordinary_tax_thresholds = c(0, 18200, 37000, 87000, 
+                                               150e3)) %>%
   revenue_foregone
 ```
 
     ## [1] "$1.7 billion"
+
+### `compare_avg_tax_rates`:
+
+Create comparison of average tax rates:
+
+``` r
+lapply(list("30k" = 30e3,
+            "37k" = 37e3,
+            "42k" = 42e3),
+       function(T2) {
+         model_income_tax(s1718,
+                          baseline_fy = "2017-18",
+                          ordinary_tax_thresholds = c(0, 
+                                                      18200,
+                                                      T2,
+                                                      87000, 
+                                                      180e3))
+       }) %>%
+  rbindlist(idcol = "id") %>%
+  compare_avg_tax_rates(baseDT = .[id == "37k"]) %>%
+  ggplot(aes(x = Taxable_Income_percentile,
+             y = delta_avgTaxRate,
+             color = id,
+             group = id)) + 
+  geom_line()
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-2-1.png)
+
+Access ABS data
+---------------
 
 NEWS
 ====

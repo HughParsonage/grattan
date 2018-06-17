@@ -6,6 +6,10 @@ output:
     toc_depth: 2
 ---
 
+
+[![Coverage status](https://codecov.io/gh/HughParsonage/grattan/branch/master/graph/badge.svg)](https://codecov.io/github/HughParsonage/grattan?branch=master)
+[![Build Status](https://travis-ci.org/hughparsonage/grattan.svg?branch=master)](https://travis-ci.org/hughparsonage/grattan)
+
 # grattan
 
 Australian Tax Policy Analysis
@@ -35,6 +39,7 @@ library(taxstats)
 
 library(data.table) 
 library(magrittr)
+library(ggplot2)
 ```
 
 Simply pass the sample file to `.dots.ATO` and the complexities of things like Medicare levy and the Seniors and Pensioners Tax Offset are handled for you. For example:
