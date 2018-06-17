@@ -17,7 +17,7 @@
     -   [Test results](#test-results)
     -   [Note to CRAN: moderately-large vignette](#note-to-cran-moderately-large-vignette)
 
-[![Coverage status](https://codecov.io/gh/HughParsonage/grattan/branch/master/graph/badge.svg)](https://codecov.io/github/HughParsonage/grattan?branch=master) [![Build Status](https://travis-ci.org/hughparsonage/grattan.svg?branch=master)](https://travis-ci.org/hughparsonage/grattan)
+[![Coverage status](https://codecov.io/gh/HughParsonage/grattan/branch/master/graph/badge.svg)](https://codecov.io/github/HughParsonage/grattan?branch=master) [![Build Status](https://travis-ci.org/HughParsonage/grattan.svg?branch=master)](https://travis-ci.org/HughParsonage/grattan)
 
 grattan
 =======
