@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Modelled Income Tax</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for model_income_tax {grattan}"><tr><td>model_income_tax {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Modelled Income Tax</h2>
+
+<h3>Description</h3>
+
+<p>The income tax payable if tax settings are changed.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+model_income_tax(sample_file, baseline_fy, n_dependants = 0L,
+  elasticity_of_taxable_income = NULL, ordinary_tax_thresholds = NULL,
+  ordinary_tax_rates = NULL, medicare_levy_taper = NULL,
+  medicare_levy_rate = NULL, medicare_levy_lower_threshold = NULL,
+  medicare_levy_upper_threshold = NULL,
+  medicare_levy_lower_sapto_threshold = NULL,
+  medicare_levy_upper_sapto_threshold = NULL,
+  medicare_levy_lower_family_threshold = NULL,
+  medicare_levy_upper_family_threshold = NULL,
+  medicare_levy_lower_family_sapto_threshold = NULL,
+  medicare_levy_upper_family_sapto_threshold = NULL,
+  medicare_levy_lower_up_for_each_child = NULL, lito_max_offset = NULL,
+  lito_taper = NULL, lito_min_bracket = NULL, lito_multi = NULL,
+  Budget2018_lamington = FALSE, Budget2018_lito_202223 = FALSE,
+  Budget2018_watr = FALSE, sapto_eligible = NULL, sapto_max_offset = NULL,
+  sapto_lower_threshold = NULL, sapto_taper = NULL, sbto_discount = NULL,
+  calc_baseline_tax = TRUE, return. = c("sample_file", "tax",
+  "sample_file.int"), clear_tax_cols = TRUE, warn_upper_thresholds = TRUE,
+  .debug = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>sample_file</code></td>
+<td>
+<p>A sample file having at least as many variables as the 2012-13 sample file.</p>
+</td></tr>
+<tr valign="top"><td><code>baseline_fy</code></td>
+<td>
+<p>If a parameter is not selected, the parameter's value in this tax year is used.</p>
+</td></tr>
+<tr valign="top"><td><code>n_dependants</code></td>
+<td>
+<p>The number of dependants for each entry in <code>sample_file</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>elasticity_of_taxable_income</code></td>
+<td>
+<p>Either <code>NULL</code> (the default), or a numeric vector the same length of <code>sample_file</code> (or length-1) providing the elasticity of taxable income for each observation in <code>sample_file</code>; 
+</p>
+<p style="text-align: center;"><i>\frac{&Delta; z / z}{&Delta; &tau; / (1 - &tau;)}</i></p>
+ 
+<p>where <i>z</i> is taxable income and <i>&tau;</i> is tax payable.
+</p>
+<p>For example, if, for a given taxpayer,
+the tax settings would otherwise result in a 2% decrease of disposable income
+under the tax settings to be modelled, and <code>elasticity_of_taxable_income</code> is set to 0.1,
+the <code>Taxable_Income</code> is reduced by 0.2% before the tax rates are applied.
+</p>
+<p>If <code>NULL</code>, an elasticity of 0 is used.</p>
+</td></tr>
+<tr valign="top"><td><code>ordinary_tax_thresholds</code></td>
+<td>
+<p>A numeric vector specifying the lower bounds of the brackets for &quot;ordinary tax&quot; as defined by the Regulations.
+The first element should be zero if there is a tax-free threshold.</p>
+</td></tr>
+<tr valign="top"><td><code>ordinary_tax_rates</code></td>
+<td>
+<p>The marginal rates of ordinary tax. The first element should be zero if there is a tax-free threshold. 
+Since the temporary budget repair levy was imposed on a discrete tax bracket when it applied, it is not included in this function.</p>
+</td></tr>
+<tr valign="top"><td><code>medicare_levy_taper</code></td>
+<td>
+<p>The taper that applies between the <code>_lower</code> and <code>_upper</code> thresholds.</p>
+</td></tr>
+<tr valign="top"><td><code>medicare_levy_rate</code></td>
+<td>
+<p>The ordinary rate of the Medicare levy for taxable incomes above <code>medicare_levy_upper_threshold</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>medicare_levy_lower_threshold</code></td>
+<td>
+<p>Minimum taxable income at which the Medicare levy will be applied.</p>
+</td></tr>
+<tr valign="top"><td><code>medicare_levy_upper_threshold</code></td>
+<td>
+<p>Minimum taxable income at which the Medicare levy will be applied at the full Medicare levy rate (2% in 2015-16). Between this threshold and the <code>medicare_levy_lower_threshold</code>, a tapered rate applies, starting from zero and climbing to <code>medicare_levy_rate</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>medicare_levy_lower_sapto_threshold, medicare_levy_upper_sapto_threshold</code></td>
+<td>
+<p>The equivalent values for SAPTO-eligible individuals (not families).</p>
+</td></tr>
+<tr valign="top"><td><code>medicare_levy_lower_family_threshold, medicare_levy_upper_family_threshold</code></td>
+<td>
+<p>The equivalent values for families.</p>
+</td></tr>
+<tr valign="top"><td><code>medicare_levy_lower_family_sapto_threshold, medicare_levy_upper_family_sapto_threshold</code></td>
+<td>
+<p>The equivalent values for SAPTO-eligible individuals in a family.</p>
+</td></tr>
+<tr valign="top"><td><code>medicare_levy_lower_up_for_each_child</code></td>
+<td>
+<p>The amount to add to the <code>_family_threshold</code>s for each dependant child.</p>
+</td></tr>
+<tr valign="top"><td><code>lito_max_offset</code></td>
+<td>
+<p>The maximum offset available for low incomes.</p>
+</td></tr>
+<tr valign="top"><td><code>lito_taper</code></td>
+<td>
+<p>The taper to apply beyond <code>lito_min_bracket</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>lito_min_bracket</code></td>
+<td>
+<p>The taxable income at which the value of the offset starts to reduce (from <code>lito_max_offset</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>lito_multi</code></td>
+<td>
+<p>A list of two components, named <code>x</code> and <code>y</code>, giving the value of a <em>replacement</em> for <code>lito</code> at specified points, which will be linked by a piecewise linear curve between the points specified. For example, to mimic LITO in 2015-16 (when the offset was \$445 for incomes below \$37,000, and afterwards tapered off to \$66,667), one would use <code>lito_multi = list(x = c(-Inf, 37e3, 200e3/3, Inf), y = c(445, 445, 0, 0))</code>. The reason the argument ends with <code>multi</code> is that it is intended to extend the original parameters of LITO so that multiple kinks (including ones of positive and negative gradients) can be modelled.</p>
+</td></tr>
+<tr valign="top"><td><code>Budget2018_lamington</code></td>
+<td>
+<p>The Low Middle Income Tax Offset proposed in the 2018 Budget.</p>
+</td></tr>
+<tr valign="top"><td><code>Budget2018_lito_202223</code></td>
+<td>
+<p>The LITO proposed for 2022-23 proposed in the 2018 Budget.</p>
+</td></tr>
+<tr valign="top"><td><code>Budget2018_watr</code></td>
+<td>
+<p>The &quot;Working Australian Tax Refund&quot; proposed in the Opposition Leader's Budget Reply Speech 2018.</p>
+</td></tr>
+<tr valign="top"><td><code>sapto_eligible</code></td>
+<td>
+<p>Whether or not each taxpayer in <code>sample_file</code> is eligible for <code>SAPTO</code>. 
+If <code>NULL</code>, the default, then eligibility is determined by <code>age_range</code> in <code>sample_file</code>;
+<em>i.e.</em>, if <code>age_range &lt;= 1</code> then the taxpayer is assumed to be eligible for SAPTO.</p>
+</td></tr>
+<tr valign="top"><td><code>sapto_max_offset</code></td>
+<td>
+<p>The maximum offset available through SAPTO.</p>
+</td></tr>
+<tr valign="top"><td><code>sapto_lower_threshold</code></td>
+<td>
+<p>The threshold at which SAPTO begins to reduce (from <code>sapto_max_offset</code>).</p>
+</td></tr>
+<tr valign="top"><td><code>sapto_taper</code></td>
+<td>
+<p>The taper rate beyond <code>sapto_lower_threshold</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>sbto_discount</code></td>
+<td>
+<p>The <code>tax_discount</code> in <code><a href="small_business_tax_offset.html">small_business_tax_offset</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>calc_baseline_tax</code></td>
+<td>
+<p>(logical, default: <code>TRUE</code>) Should the income tax in <code>baseline_fy</code> be included as a column in the result?</p>
+</td></tr>
+<tr valign="top"><td><code>return.</code></td>
+<td>
+<p>What should the function return? One of <code>tax</code>, <code>sample_file</code>, or <code>sample_file.int</code>. 
+If <code>tax</code>, the tax payable under the settings; if <code>sample_file</code>, the <code>sample_file</code>,
+but with variables <code>tax</code> and possibly <code>new_taxable_income</code>; if <code>sample_file.int</code>, same as <code>sample_file</code> but <code>new_tax</code> is coerced to integer.</p>
+</td></tr>
+<tr valign="top"><td><code>clear_tax_cols</code></td>
+<td>
+<p>If <code>TRUE</code>, the default, then <code>return. = sample_file</code> implies any columns called <code>new_tax</code> or <code>baseline_tax</code> in <code>sample_file</code> are dropped silently.</p>
+</td></tr>
+<tr valign="top"><td><code>warn_upper_thresholds</code></td>
+<td>
+<p>If <code>TRUE</code>, the default, then any inconsistency between <code>baseline_fy</code> and the upper thresholds result in a warning. Set to <code>FALSE</code>, if the <code>lower_threshold</code>s may take priority.</p>
+</td></tr>
+<tr valign="top"><td><code>.debug</code></td>
+<td>
+<p>Return a data.table of <code>new_tax</code>. Experimental so cannot be relied in future versions.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+# With new tax-free threshold of $20,000:
+if (!requireNamespace("taxstats", quietly = TRUE)) {
+  library(taxstats)
+  model_income_tax(sample_file_1314,
+                   ordinary_tax_brackets = c(0, 20e3, 37e3, 80e3, 180e3))
+
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

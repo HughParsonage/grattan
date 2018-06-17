@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Gross Domestic Product, Australia</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for gdp {grattan}"><tr><td>gdp {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Gross Domestic Product, Australia</h2>
+
+<h3>Description</h3>
+
+<p>Gross domestic product, at contemporaneous prices (called &lsquo;current prices&rsquo; by the ABS).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+gdp_qtr(date, roll = "nearest")
+
+gdp_fy(fy_year)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>date</code></td>
+<td>
+<p>A Date vector or character coercible thereto.</p>
+</td></tr>
+<tr valign="top"><td><code>roll</code></td>
+<td>
+<p>Passed to <code>data.table</code> when joining.</p>
+</td></tr>
+<tr valign="top"><td><code>fy_year</code></td>
+<td>
+<p>Character vector of financial years.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>For <code>gdp_qtr</code>, the quarterly GDP for the quarter date nearest (or otherwise using <code>roll</code>). 
+For <code>gdp_fy</code> the sum over the quarters in the financial year provided. 
+If <code>fy_year</code> would provide incomplete data (i.e. only sum three or fewer quarters), a warning is issued.
+Dates or fy_year outside the available data is neither a warning nor an error, but <code>NA</code>.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Australian Bureau of Statistics, Catalogue 5206.0. Series A2304350J.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

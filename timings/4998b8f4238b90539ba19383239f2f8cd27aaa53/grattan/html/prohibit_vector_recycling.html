@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Prohibit vector recycling</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for prohibit_vector_recycling {grattan}"><tr><td>prohibit_vector_recycling {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Prohibit vector recycling</h2>
+
+<h3>Description</h3>
+
+<p>Tests (harshly) whether the vectors can be recycled safely.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+prohibit_vector_recycling(...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>A list of vectors</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An error message if the vectors are of different length (unless the alternative length is 1). 
+The functions differ in their return values on success: <code>prohibit_vector_recycling.MAXLENGTH</code> 
+returns the maximum of the lengths whereas <code>prohibit_vector_recyling</code> returns <code>NULL</code>. 
+(Both functions return their values invisibly.)
+</p>
+
+
+<h3>Source</h3>
+
+<p><a href="http://stackoverflow.com/a/9335687/1664978">http://stackoverflow.com/a/9335687/1664978</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+# Returns nothing because they are of the same length
+prohibit_vector_recycling(c(2, 2), c(2, 2))
+# Returns nothing also, because the only different length is 1
+prohibit_vector_recycling(c(2, 2), 1)
+# Returns an error:
+prohibit_vector_recycling(c(2, 2), 1, c(3, 3, 3))
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

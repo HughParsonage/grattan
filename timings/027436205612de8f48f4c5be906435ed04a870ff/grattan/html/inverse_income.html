@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Inverse income tax functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for inverse_income {grattan}"><tr><td>inverse_income {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Inverse income tax functions</h2>
+
+<h3>Description</h3>
+
+<p>Inverse income tax functions
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inverse_income(tax, fy.year = "2012-13", zero.tax.income = c("maximum",
+  "zero", "uniform", numeric(1)), ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>tax</code></td>
+<td>
+<p>The tax payable.</p>
+</td></tr>
+<tr valign="top"><td><code>fy.year</code></td>
+<td>
+<p>The relevant financial year.</p>
+</td></tr>
+<tr valign="top"><td><code>zero.tax.income</code></td>
+<td>
+<p>A character vector, (&quot;maximum&quot;, &quot;zero&quot;, &quot;uniform&quot;, numeric(1)) Given that many incomes map to zero taxes, the <code>income_tax</code> function is not invertible there. As a consequence, the inverse function's value must be specified for tax = 0. &quot;maximum&quot; returns the maximum integer income one can have with a zero tax liability; &quot;zero&quot; returns zero for any tax of zero; &quot;uniform&quot; provides a random integer from zero to the maximum income with a zero tax. The value can also be specified explicitly.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments passed to <code>income_tax</code>. If <code>tax</code> or <code>fy.year</code> are vectors, these should be named vectors.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function has an error of $2.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The approximate taxable income given the tax payable for the financial year. See Details.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

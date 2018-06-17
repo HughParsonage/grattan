@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Labour force inflators</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for lf_inflator {grattan}"><tr><td>lf_inflator {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Labour force inflators</h2>
+
+<h3>Description</h3>
+
+<p>Labour force inflators
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+lf_inflator_fy(labour_force = 1, from_fy = "2012-13", to_fy,
+  useABSConnection = FALSE, allow.projection = TRUE, use.month = 1L,
+  forecast.series = c("mean", "upper", "lower", "custom"),
+  forecast.level = 95, lf.series = NULL)
+
+lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date,
+  useABSConnection = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>labour_force</code></td>
+<td>
+<p>A numeric vector.</p>
+</td></tr>
+<tr valign="top"><td><code>from_fy</code></td>
+<td>
+<p>Financial year of <code>labour_force</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>to_fy</code></td>
+<td>
+<p>Financial year for which the labour force is predicted.</p>
+</td></tr>
+<tr valign="top"><td><code>useABSConnection</code></td>
+<td>
+<p>Should the function connect with ABS.Stat via an SDMX connection? If <code>FALSE</code> (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. The internal data was updated on 2018-05-21 to include data up to 2018-04-01.</p>
+</td></tr>
+<tr valign="top"><td><code>allow.projection</code></td>
+<td>
+<p>Logical. Should projections be allowed?</p>
+</td></tr>
+<tr valign="top"><td><code>use.month</code></td>
+<td>
+<p>An integer (corresponding to the output of <code>data.table::month</code>) representing the month of the series used for the inflation.</p>
+</td></tr>
+<tr valign="top"><td><code>forecast.series</code></td>
+<td>
+<p>Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals.</p>
+</td></tr>
+<tr valign="top"><td><code>forecast.level</code></td>
+<td>
+<p>The prediction interval to be used if <code>forecast.series</code> is <code>upper</code> or <code>lower</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>lf.series</code></td>
+<td>
+<p>If <code>forecast.series = 'custom'</code>, a <code>data.table</code> with two variables, <code>fy_year</code> and <code>r</code>. 
+The variable <code>fy_year</code> consists of all financial years between the last financial year in the (known) labour force series and <code>to_fy</code> <strong>inclusive</strong>.
+The variable <code>r</code> consists of rates of labour force growth assumed in each <code>fy_year</code>, which must be 1 in the first year (to connect with the original labour force series).</p>
+</td></tr>
+<tr valign="top"><td><code>from_date</code></td>
+<td>
+<p>The date of <code>labour_force</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>to_date</code></td>
+<td>
+<p>Dates as a character vector.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>lf_inflator</code> is used on dates. The underlying data series is available every month.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The relative labour force between <code>to_date</code> and <code>for_date</code> or <code>to_fy</code> and <code>from_fy</code>, multiplied by <code>labour_force</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Hugh Parsonage and Tim Cameron
+</p>
+
+
+<h3>Source</h3>
+
+<p>ABS Cat 6202.0 <a href="http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocument">http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocument</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+lf_inflator_fy(labour_force = 1, from_fy = "2012-13", to_fy = "2013-14")
+
+library(data.table)
+# Custom 1% growth over 2017-18 -&gt; 2018.19
+lf_inflator_fy(from_fy = "2017-18",
+               to_fy = "2018-19",
+               forecast.series = "custom", 
+               lf.series = data.table(fy_year = c("2017-18", "2018-19"),
+                                      r = c(0, 0.01)))
+## Not run: 
+lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date = "2014-06-30")
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

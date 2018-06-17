@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Age grouper</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for age_grouper {grattan}"><tr><td>age_grouper {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Age grouper</h2>
+
+<h3>Description</h3>
+
+<p>Age grouper
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+age_grouper(age, interval = 10, min_age = 25, max_age = 75,
+  breaks = NULL, labels = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>age</code></td>
+<td>
+<p>A numeric age (in years).</p>
+</td></tr>
+<tr valign="top"><td><code>interval</code></td>
+<td>
+<p>How big should the age range be. 25-34 means interval = 10.</p>
+</td></tr>
+<tr valign="top"><td><code>min_age</code></td>
+<td>
+<p>What is the upper bound of the lowest bracket? (<code>min_age = 25</code> means 'Under 25' will be the lowest bracket.)</p>
+</td></tr>
+<tr valign="top"><td><code>max_age</code></td>
+<td>
+<p>What is the lower bound of the highest bracket? (<code>max_age = 75</code> means '75+' will be the bracket.)</p>
+</td></tr>
+<tr valign="top"><td><code>breaks</code></td>
+<td>
+<p>Specify breaks manually.</p>
+</td></tr>
+<tr valign="top"><td><code>labels</code></td>
+<td>
+<p>Specify the labels manually.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An ordered factor giving age ranges (separated by hyphens) as specified.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+age_grouper(42)
+age_grouper(42, interval = 5, min_age = 20, max_age = 60)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

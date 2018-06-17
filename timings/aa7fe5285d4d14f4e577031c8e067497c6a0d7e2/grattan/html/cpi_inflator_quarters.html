@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: CPI inflator when dates are nice</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for cpi_inflator_quarters {grattan}"><tr><td>cpi_inflator_quarters {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>CPI inflator when dates are nice</h2>
+
+<h3>Description</h3>
+
+<p>CPI inflator when dates are nice
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+cpi_inflator_quarters(from_nominal_price, from_qtr, to_qtr,
+  adjustment = c("seasonal", "trimmed", "none"), useABSConnection = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>from_nominal_price</code></td>
+<td>
+<p>(numeric) the nominal prices to be converted to a real price</p>
+</td></tr>
+<tr valign="top"><td><code>from_qtr</code></td>
+<td>
+<p>(date in quarters) the dates contemporaneous to the prices in from_nominal_price. Must be of the form &quot;YYYY-Qq&quot; e.g. &quot;1066-Q2&quot;. Q1 = Mar, Q2 = Jun, Q3 = Sep, Q4 = Dec.</p>
+</td></tr>
+<tr valign="top"><td><code>to_qtr</code></td>
+<td>
+<p>(date in quarters) the date to be inflated to, where nominal price = real price. Must be of the form &quot;YYYY-Qq&quot; e.g. &quot;1066-Q2&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>adjustment</code></td>
+<td>
+<p>Should there be an adjustment made to the index? Adjustments include 'none' (no adjustment), 'seasonal', or 'trimmed' [referring to trimmed mean]. By default, <code>seasonal</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>useABSConnection</code></td>
+<td>
+<p>Should the function connect with ABS.Stat via an SDMX connection? By default set to <code>FALSE</code> in which case a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.
+The internal data is up-to-date as of 2018-Q1. 
+If using <code>useABSConnection = TRUE</code>, ensure you have <code>rsdmx (&gt;= 0.5-10)</code> up-to-date.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A vector of real prices.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

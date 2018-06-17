@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: A function for simple projections of tables of Australian...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for project {grattan}"><tr><td>project {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>A function for simple projections of tables of Australian Taxation Office tax returns.</h2>
+
+<h3>Description</h3>
+
+<p>A function for simple projections of tables of Australian Taxation Office tax returns.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+project(sample_file, h = 0L, fy.year.of.sample.file = NULL, WEIGHT = 50L,
+  excl_vars, forecast.dots = list(estimator = "mean", pred_interval = 80),
+  wage.series = NULL, lf.series = NULL, .recalculate.inflators = FALSE,
+  .copyDT = TRUE, check_fy_sample_file = TRUE,
+  differentially_uprate_Sw = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>sample_file</code></td>
+<td>
+<p>A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.</p>
+</td></tr>
+<tr valign="top"><td><code>h</code></td>
+<td>
+<p>An integer. How many years should the sample file be projected?</p>
+</td></tr>
+<tr valign="top"><td><code>fy.year.of.sample.file</code></td>
+<td>
+<p>The financial year of <code>sample_file</code>. If <code>NULL</code>, the default, the number is inferred from the 
+number of rows of <code>sample_file</code> to be one of <code>2012-13</code>, <code>2013-14</code>, or <code>2014-15</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>WEIGHT</code></td>
+<td>
+<p>The sample weight for the sample file. (So a 2% file has <code>WEIGHT</code> = 50.)</p>
+</td></tr>
+<tr valign="top"><td><code>excl_vars</code></td>
+<td>
+<p>A character vector of column names in <code>sample_file</code> that should not be inflated. Columns not present in the 2013-14 sample file are not inflated and nor are the columns <code>Ind</code>, <code>Gender</code>, <code>age_range</code>, <code>Occ_code</code>, <code>Partner_status</code>, <code>Region</code>, <code>Lodgment_method</code>, and <code>PHI_Ind</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>forecast.dots</code></td>
+<td>
+<p>A list containing parameters to be passed to <code>generic_inflator</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>wage.series</code></td>
+<td>
+<p>See <code><a href="wage_inflator.html">wage_inflator</a></code>. Note that the <code>Sw_amt</code> will uprated by <code><a href="differentially_uprate_wage.html">differentially_uprate_wage</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>lf.series</code></td>
+<td>
+<p>See <code><a href="lf_inflator.html">lf_inflator_fy</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>.recalculate.inflators</code></td>
+<td>
+<p>(logical, default: <code>FALSE</code>. Should <code>generic_inflator()</code> or <code>CG_inflator</code> be called to project the other variables? Adds time.</p>
+</td></tr>
+<tr valign="top"><td><code>.copyDT</code></td>
+<td>
+<p>(logical, default: <code>TRUE</code>) Should a <code>copy()</code> of <code>sample_file</code> be made? If set to <code>FALSE</code>, will update <code>sample_file</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>check_fy_sample_file</code></td>
+<td>
+<p>(logical, default: <code>TRUE</code>) Should <code>fy.year.of.sample.file</code> be checked against <code>sample_file</code>?
+By default, <code>TRUE</code>, an error is raised if the base is not 2012-13, 2013-14, or 2014-15 and a warning is raised if the 
+number of rows in <code>sample_file</code> is different to the known number of rows in the sample files.</p>
+</td></tr>
+<tr valign="top"><td><code>differentially_uprate_Sw</code></td>
+<td>
+<p>(logical, default: <code>TRUE</code>) Should the salary and wage column (<code>Sw_amt</code>) be differentially uprating using (<code><a href="differentially_uprate_wage.html">differentially_uprate_wage</a></code>)?</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>We recommend you use <code>sample_file_1213</code> over <code>sample_file_1314</code>, unless you need the superannuation variables, 
+as the latter suggests lower-than-recorded tax collections. 
+</p>
+<p>Superannuation variables are inflated by a fixed rate of 5% p.a.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A sample file of the same number of rows as <code>sample_file</code> with inflated values (including WEIGHT).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# install.packages('taxstats', repos = 'https://hughparsonage.github.io/drat')
+if (requireNamespace("taxstats", quietly = TRUE) &amp;&amp;
+    requireNamespace("data.table", quietly = TRUE)) {
+  library(taxstats)
+  library(data.table)
+  sample_file &lt;- copy(sample_file_1314)
+  sample_file_1617 &lt;- project(sample_file,
+                              h = 3L, # to "2016-17"
+                              fy.year.of.sample.file = "2013-14")  
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

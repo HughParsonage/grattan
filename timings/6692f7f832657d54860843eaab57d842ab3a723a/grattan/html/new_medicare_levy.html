@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: New medicare levy</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for new_medicare_levy {grattan}"><tr><td>new_medicare_levy {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>New medicare levy</h2>
+
+<h3>Description</h3>
+
+<p>Use a different way to calculate medicare levy.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+new_medicare_levy(parameter_table)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>parameter_table</code></td>
+<td>
+<p>A <code>data.table</code> containing 
+</p>
+
+<dl>
+<dt><code>switches</code></dt><dd><p>The value in a row specifying which different medicare function is to apply.</p>
+</dd>
+<dt><code>lower_threshold</code></dt><dd><p>What is the lower medicare threshold, below which no medicare levy is applied, above which a tapering rate applies.</p>
+</dd>
+<dt><code>taper</code></dt><dd><p>What is the taper above <code>lower_threshold</code>.</p>
+</dd>
+<dt><code>rate</code></dt><dd><p>The medicare levy applicable above the medicare thresholds.</p>
+</dd>
+<dt><code>lower_up_for_each_child</code></dt><dd><p>How much the lower threshold should increase with each <code>n_dependants</code>.</p>
+</dd>
+<dt><code>lower_family_threshold</code></dt><dd><p>The threshold as applied to families (i.e. couples)</p>
+</dd>
+</dl>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A function similar to <code>medicare_levy</code>.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

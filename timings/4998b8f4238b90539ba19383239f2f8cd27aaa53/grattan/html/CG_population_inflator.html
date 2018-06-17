@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Forecasting capital gains</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for CG_population_inflator {grattan}"><tr><td>CG_population_inflator {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Forecasting capital gains</h2>
+
+<h3>Description</h3>
+
+<p>Forecasting capital gains
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+CG_population_inflator(x = 1, from_fy, to_fy, forecast.series = "mean",
+  cg.series)
+
+CG_inflator(x = 1, from_fy, to_fy, forecast.series = "mean")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>To be inflated.</p>
+</td></tr>
+<tr valign="top"><td><code>from_fy, to_fy</code></td>
+<td>
+<p>Financial years designating the inflation period.</p>
+</td></tr>
+<tr valign="top"><td><code>forecast.series</code></td>
+<td>
+<p>One of <code>"mean"</code>, <code>"lower"</code>, <code>"upper"</code>. What estimator to use in forecasts. <code>"lower"</code> and <code>"upper"</code> give the lower and upper boundaries of the 95% prediction interval.</p>
+</td></tr>
+<tr valign="top"><td><code>cg.series</code></td>
+<td>
+<p>(Not implemented.)</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>For <code>CG_population_inflator</code>, the number of individuals estimated to incur capital gains in <code>fy_year</code>. 
+For <code>CG_inflator</code>, an estimate of the nominal value of (total) capital gains in <code>to_fy</code> relative to the nominal value in <code>from_fy</code>.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

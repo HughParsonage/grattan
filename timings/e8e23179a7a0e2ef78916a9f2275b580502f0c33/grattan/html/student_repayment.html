@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: HELP / HECS repayment amounts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for student_repayment {grattan}"><tr><td>student_repayment {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>HELP / HECS repayment amounts</h2>
+
+<h3>Description</h3>
+
+<p>HELP / HECS repayment amounts
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+student_repayment(repayment_income, fy.year, debt)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>repayment_income</code></td>
+<td>
+<p>The repayment income of the individual, equal to 
+Taxable Income +
+Total net investment loss (incl Net rental loss) +
+reportable fringe benefits amounts +
+Reportable super contributions +
+exempt foreign income</p>
+</td></tr>
+<tr valign="top"><td><code>fy.year</code></td>
+<td>
+<p>The financial year <code>repayment_income</code> was earned.</p>
+</td></tr>
+<tr valign="top"><td><code>debt</code></td>
+<td>
+<p>The amount of student debt held.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The student repayments for <code>fy.year = '2018-19'</code> assume the measures in Budget 2017 will pass.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The repayment amount.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Ittima Cherastidtham and Hugh Parsonage
+</p>
+
+
+<h3>Source</h3>
+
+<p><a href="https://www.ato.gov.au/Rates/HELP,-TSL-and-SFSS-repayment-thresholds-and-rates/?page=2#HELP_repayment_thresholds_and_rates_2013_14">https://www.ato.gov.au/Rates/HELP,-TSL-and-SFSS-repayment-thresholds-and-rates/?page=2#HELP_repayment_thresholds_and_rates_2013_14</a>m
+<a href="https://docs.education.gov.au/system/files/doc/other/ed17-0138_-_he_-_glossy_budget_report_acc.pdf">https://docs.education.gov.au/system/files/doc/other/ed17-0138_-_he_-_glossy_budget_report_acc.pdf</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+student_repayment(50e3, "2013-14", debt = 10e3) 
+# 0 since below the threshold
+
+student_repayment(60e3, "2013-14", debt = 10e3)
+# above the threshold
+
+student_repayment(60e3, "2013-14", debt = 0)
+# above the threshold, but no debt
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

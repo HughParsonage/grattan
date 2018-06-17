@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compute the progressivity</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for progressivity {grattan}"><tr><td>progressivity {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compute the progressivity</h2>
+
+<h3>Description</h3>
+
+<p>Compute the progressivity
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+progressivity(income, tax, measure = c("Reynolds-Smolensky", "Kakwani"))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>income</code></td>
+<td>
+<p>Pre-tax income.</p>
+</td></tr>
+<tr valign="top"><td><code>tax</code></td>
+<td>
+<p>Tax paid.</p>
+</td></tr>
+<tr valign="top"><td><code>measure</code></td>
+<td>
+<p>Currently, only &quot;Reynolds-Smolensky&quot; progressivity is calculated:
+</p>
+<p style="text-align: center;"><i>G_Y - G_Z</i></p>
+<p> where <i>G_Y</i> is the Gini coefficient of <code>income</code>
+and <i>G_X</i> is the Gini coefficient of post-tax income.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The progressivity measure. Positive for progressive tax systems, and higher the
+value the more progressive the system.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+I &lt;- c(10e3, 20e3, 50e3, 100e3, 150e3)
+progressivity(I, 0.3 * I) # zero
+progressivity(I, income_tax(I, "2017-18"))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

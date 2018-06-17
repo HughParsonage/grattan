@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Inflation using the Wage Price Index.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for wage_inflator {grattan}"><tr><td>wage_inflator {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Inflation using the Wage Price Index.</h2>
+
+<h3>Description</h3>
+
+<p>Predicts the inflation of hourly rates of pay, between two financial years.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+wage_inflator(wage = 1, from_fy, to_fy, useABSConnection = FALSE,
+  allow.projection = TRUE, forecast.series = c("mean", "upper", "lower",
+  "custom"), forecast.level = 95, wage.series = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>wage</code></td>
+<td>
+<p>The amount to be inflated (1 by default).</p>
+</td></tr>
+<tr valign="top"><td><code>from_fy</code></td>
+<td>
+<p>A character vector of the form &quot;2012-13&quot; representing the FY ending that the wage index is to be taken (i.e. Q4 in that year). FY year must be 1996-97 or later.</p>
+</td></tr>
+<tr valign="top"><td><code>to_fy</code></td>
+<td>
+<p>The FY ending that the wage index is to be taken.</p>
+</td></tr>
+<tr valign="top"><td><code>useABSConnection</code></td>
+<td>
+<p>Should the function connect with ABS.Stat via an SDMX connection? If <code>FALSE</code> (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. The internal data was updated on 2018-05-21 to include data up to 2018-Q1.</p>
+</td></tr>
+<tr valign="top"><td><code>allow.projection</code></td>
+<td>
+<p>If set to <code>TRUE</code> the <code>forecast</code> package is used to project forward, if required.</p>
+</td></tr>
+<tr valign="top"><td><code>forecast.series</code></td>
+<td>
+<p>Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals. A fourth option <code>custom</code> allows manual forecasts to be set.</p>
+</td></tr>
+<tr valign="top"><td><code>forecast.level</code></td>
+<td>
+<p>The prediction interval to be used if <code>forecast.series</code> is <code>upper</code> or <code>lower</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>wage.series</code></td>
+<td>
+<p>If <code>forecast.series = 'custom'</code>, how future years should be inflated. 
+The future wage series can be provided in two ways: 
+(1) a single value, to be the assumed rate of wage inflation in years beyond the known series, or 
+(2) a <code>data.table</code> with two variables, <code>fy_year</code> and <code>r</code>. If (2), 
+the variable <code>fy_year</code> must be a vector of all financial years after the last financial year in the (known) wage series and the latest <code>to_fy</code> <strong>inclusive</strong>.
+The variable <code>r</code> consists of rates of wage growth assumed in each <code>fy_year</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The wage inflation between the two years.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# Wage inflation
+wage_inflator(from_fy = "2013-14", to_fy = "2014-15")
+
+# Custom wage inflation
+wage_inflator(from_fy = "2016-17",
+              to_fy = "2017-18",
+              forecast.series = "custom",
+              wage.series = 0.05)
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

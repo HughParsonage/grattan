@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Inflate using a general index</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for inflator {grattan}"><tr><td>inflator {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Inflate using a general index</h2>
+
+<h3>Description</h3>
+
+<p>Inflate using a general index
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+inflator(x = 1, from, to, inflator_table, index.col = "Index",
+  time.col = "Time", roll = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>The vector to be inflated.</p>
+</td></tr>
+<tr valign="top"><td><code>from</code></td>
+<td>
+<p>The contemporaneous time of x.</p>
+</td></tr>
+<tr valign="top"><td><code>to</code></td>
+<td>
+<p>The target time (in units of the <code>inflator_table</code>) to which x is to be inflated.</p>
+</td></tr>
+<tr valign="top"><td><code>inflator_table</code></td>
+<td>
+<p>A <code>data.table</code> having columns <code>index.col</code> and <code>time.col</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>index.col</code></td>
+<td>
+<p>The column in <code>inflator_table</code> containing the index used for inflation.</p>
+</td></tr>
+<tr valign="top"><td><code>time.col</code></td>
+<td>
+<p>The column in <code>inflator_table</code> by which times are mapped.</p>
+</td></tr>
+<tr valign="top"><td><code>roll</code></td>
+<td>
+<p>If <code>NULL</code>, inflation is calculated only on exact matches in <code>inflator_table</code>. Otherwise, uses a rolling join. See <code>data.table::data.table</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A vector of inflated values. For example, <code>inflator_table = grattan:::cpi_seasonal_adjustment</code>, 
+<code>index.col = "obsValue"</code>, <code>time.col = "obsTime"</code>, gives the CPI inflator.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

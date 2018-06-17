@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Compare average tax rates by percentile</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for compare_avg_tax_rates {grattan}"><tr><td>compare_avg_tax_rates {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Compare average tax rates by percentile</h2>
+
+<h3>Description</h3>
+
+<p>To determine the effects of bracket creep on a proposed tax policy,
+a common task is calculate the change in the average tax rates for each percentile.
+This function accepts a sample file and a baseline sample file, and returns a 100-row table
+giving the mean change in average tax rates for each percentile, compared to the baseline.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+compare_avg_tax_rates(DT, baseDT, by = "id", ids = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>DT</code></td>
+<td>
+<p>A single <code>data.table</code> containing columns <code>new_tax</code>,
+<code>Taxable_Income</code>, <code>baseline_tax</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>baseDT</code></td>
+<td>
+<p>A <code>data.table</code> of a single cross-section of taxpayers from
+which baseline percentiles can be produced.</p>
+</td></tr>
+<tr valign="top"><td><code>by</code></td>
+<td>
+<p>How to separate <code>DT</code></p>
+</td></tr>
+<tr valign="top"><td><code>ids</code></td>
+<td>
+<p>Subset <code>DT</code> by <code>by</code>.</p>
+</td></tr>
+</table>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

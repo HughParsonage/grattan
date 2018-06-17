@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Parallel maximum</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for pmaxC {grattan}"><tr><td>pmaxC {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Parallel maximum</h2>
+
+<h3>Description</h3>
+
+<p>A faster <code>pmax()</code>.
+</p>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A numeric vector.</p>
+</td></tr>
+<tr valign="top"><td><code>a</code></td>
+<td>
+<p>A single numeric value.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The parallel maximum of the input values. <code>pmax0(x)</code> is shorthand for <code>pmaxC(x, 0)</code>, i.e. convert negative values in <code>x</code> to 0.
+</p>
+
+
+<h3>Note</h3>
+
+<p>This function will always be faster than <code>pmax(x, a)</code> when <code>a</code> is a single value, but can be slower than <code>pmax.int(x, a)</code> when <code>x</code> is short. Use this function when comparing a numeric vector with a single value.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

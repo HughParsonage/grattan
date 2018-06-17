@@ -1,0 +1,39 @@
+Package: grattan
+Type: Package
+Title: Australian Tax Policy Analysis
+Version: 1.6.0.0
+Date: 2018-05-19
+Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.parsonage@gmail.com"),
+              person("Tim", "Cameron", role = "aut"),
+              person("Brendan", "Coates", role = "aut"), 
+              person("William", "Young", role = "aut"), 
+              person("Ittima", "Cherastidtham", role = "dtc"),
+              person("W.", "Karsten", role = "ctb"),
+              person("M.", "Enrique Garcia", role = "ctb"))
+Maintainer: Hugh Parsonage <hugh.parsonage@gmail.com>
+URL: https://github.com/HughParsonage/grattan
+BugReports: https://github.com/HughParsonage/grattan/issues
+Description: Utilities for costing and evaluating Australian tax policy, including high-performance tax and transfer calculators, a fast method of projecting tax collections, and an interface to common indices from the Australian Bureau of Statistics.  Written to support Grattan Institute's Australian Perspectives program. For access to the 'taxstats' package, please run
+ install.packages("taxstats", repos = "https://hughparsonage.github.io/tax-drat/", type = "source"). 
+ N.B. The 'taxstats' package is approximately 50 MB.
+Depends: R (>= 3.3.0)
+License: GPL-2
+Imports: data.table, hutils, ineq, rsdmx, fastmatch, forecast,
+        assertthat, magrittr, Rcpp (>= 0.12.3), utils, zoo
+LinkingTo: Rcpp
+RoxygenNote: 6.0.1
+Suggests: dplyr, dtplyr, fst (>= 0.8.4), ggplot2, ggrepel, knitr,
+        lattice, mgcv, rmarkdown, scales, survey, testthat, taxstats,
+        taxstats1516, viridis, yaml
+Additional_repositories: https://hughparsonage.github.io/tax-drat/
+LazyData: true
+VignetteBuilder: knitr
+Author: Hugh Parsonage [aut, cre],
+  Tim Cameron [aut],
+  Brendan Coates [aut],
+  William Young [aut],
+  Ittima Cherastidtham [dtc],
+  W. Karsten [ctb],
+  M. Enrique Garcia [ctb]
+Built: R 3.5.0; x86_64-w64-mingw32; 2018-06-17 09:12:54 UTC; windows
+Archs: i386, x64

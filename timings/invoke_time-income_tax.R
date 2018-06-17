@@ -1,12 +1,13 @@
 library(data.table)
-# setwd("..")
-# income_tax_commits <- system('git log --follow R/income_tax.R', intern = TRUE)
-# setwd("timings")
+setwd("..")
+income_tax_commits <- system('git log --follow R/income_tax.R', intern = TRUE)
+setwd("timings")
 
-commits <- 
+commits_all <- 
   data.table(Date = anytime::anytime(sub("Date:\\s+", "", 
                                          income_tax_commits[startsWith(income_tax_commits, "Date:")])),
              commit = sub("commit ", "", income_tax_commits[startsWith(income_tax_commits, "commit")]))
+commits <- commits_all[Date > "2018-05-07"]
 
 for (i in 1:nrow(commits)) {
   c <- commits[i][["commit"]]
@@ -15,7 +16,9 @@ for (i in 1:nrow(commits)) {
 }
 
 if (FALSE) {
-  lapply(dir(pattern = "^income-tax.*csv$"),
-         fread) %>%
-    rbindlist(use.names = TRUE, fill = TRUE)
+  timings <- 
+    lapply(dir(pattern = "^income-tax.*[tc]sv$"),
+           fread) %>%
+    rbindlist(use.names = TRUE, fill = TRUE) %>%
+    .[commits_all, on = "commit"]
 }
