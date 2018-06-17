@@ -71,4 +71,6 @@ test_that("Error handling", {
   expect_error(aus_pop_qtr_age(age = 101))
   expect_error(aus_pop_qtr_age(age = -99))
   expect_warning(aus_pop_qtr_age(date = as.Date("2099-01-01"), age = 1, roll = TRUE, roll.beyond = FALSE))
+  expect_warning(aus_pop_qtr("2050-Q1", allow.projections = FALSE),
+                 regexp = "Using an earlier date than specified")
 })
