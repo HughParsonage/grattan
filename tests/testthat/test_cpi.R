@@ -15,6 +15,9 @@ test_that("Errors", {
                             allow.projection = FALSE), 
                regexp = "`to_fy` contains 2040-41, yet `allow.projection = FALSE`.", 
                fixed = TRUE)
+  expect_error(cpi_inflator_quarters(from_qtr = "2015-Q1", to_qtr = "2015-01-01"), 
+               regexp = "Dates must be in quarters.", 
+               fixed = TRUE)
 })
 
 test_that("cpi returns known results", {
@@ -68,6 +71,12 @@ test_that("cpi_inflator_general_date same as cpi_inflator when diverged", {
                                          to_date = "2015-01-01",
                                          adjustment = "none",
                                          useABSConnection = FALSE))
+  expect_equal(cpi_inflator_general_date(from_date = "2014-Q1", 
+                                         to_date = "2015-Q1", 
+                                         useABSConnection = FALSE), 
+               cpi_inflator_general_date(from_date = "2014-01-01", 
+                                         to_date = "2015-01-01", 
+                                         useABSConnection = FALSE))
 })
 
 test_that("cpi_inflator_general_date messages", {
@@ -75,6 +84,10 @@ test_that("cpi_inflator_general_date messages", {
                                            to_date = "2014"))
   expect_error(cpi_inflator_general_date(from_date = "2015-Q5",
                                          to_date = "2016-Q5"))
+  expect_error(cpi_inflator_general_date(from_date = "2016-Q2",
+                                         to_date = "QFG"),
+               regexp = "Emergency stop: to_date",
+               fixed = TRUE)
 })
 
 test_that("cpi returns reasonable forecasts", {

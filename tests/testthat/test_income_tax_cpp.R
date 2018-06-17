@@ -61,6 +61,11 @@ test_that("Equivalence in 2013-14 sample file", {
   
 })
 
+test_that("Single sapto.eligible", {
+  expect_equal(income_tax_cpp(50e3, "2013-14", sapto.eligible = TRUE), 
+               rolling_income_tax(50e3, "2013-14", age = 70))
+})
+
 
 test_that("sapto_rcpp", {
   out <- 

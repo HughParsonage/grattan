@@ -177,7 +177,7 @@ wage_inflator <- function(wage = 1,
                       to  = last_full_yr_in_series + nrow(wage.series)))
       
       if (!identical(input_series_fys, expected_fy_sequence)){
-        stop("wage.series$fy_year should be ", dput(expected_fy_sequence), ".")
+        stop("wage.series$fy_year should be ", deparse(expected_fy_sequence), ".")
       }
     }
     

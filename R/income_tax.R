@@ -316,7 +316,9 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
       } else {
         if ("Birth_year" %chin% .dots.ATO.noms) {
           sapto.eligible <- coalesce(between(.subset2(.dots.ATO, "Birth_year"), 0L, 1L), FALSE)
+          # nocov start
         } else stop("Not reachable. Please report: income_tax_cpp:319.")
+        # nocov end
       }
     }
   }

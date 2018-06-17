@@ -71,4 +71,12 @@ test_that("Error handling", {
   expect_error(aus_pop_qtr_age(age = 101))
   expect_error(aus_pop_qtr_age(age = -99))
   expect_warning(aus_pop_qtr_age(date = as.Date("2099-01-01"), age = 1, roll = TRUE, roll.beyond = FALSE))
+  expect_warning(aus_pop_qtr("2050-Q1", allow.projections = FALSE),
+                 regexp = "Using an earlier date than specified")
+  expect_error(aus_pop_qtr_age(age = 50:52, date = rep(as.Date("2015-01-01"), 2)), 
+               regexp = "`date` and `age` can only have different lengths when the smaller length is 1.", 
+               fixed = TRUE)
+  expect_error(aus_pop_qtr_age(age = 50:51, date = rep(as.Date("2015-01-01"), 3)), 
+               regexp = "`date` and `age` can only have different lengths when the smaller length is 1.", 
+               fixed = TRUE)
 })

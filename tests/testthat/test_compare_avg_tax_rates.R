@@ -19,8 +19,12 @@ test_that("Error handling", {
   expect_error(compare_avg_tax_rates(dt1, dt1[, WEIGHT := 1]), 
                regexp = "`DT` contained a column 'WEIGHT', yet for id = 1, sum(WEIGHT) = 4.", 
                fixed = TRUE)
-  expect_error(compare_avg_tax_rates(dt1, dt1[, WEIGHT := 10e6]), 
+  dt2 <- copy(dt1[, WEIGHT := NULL])
+  expect_error(compare_avg_tax_rates(dt1[, WEIGHT := 10e6], dt2), 
                regexp = "`DT` contained a column 'WEIGHT', yet for id = 1, sum(WEIGHT) = 40,000,000.", 
+               fixed = TRUE)
+  expect_error(compare_avg_tax_rates(dt2, dt1[, WEIGHT := 10e6]), 
+               regexp = "`baseDT` had a column called 'WEIGHT', yet sum(WEIGHT) was not between 10,000,000 and 20,000,000, likely a coding error.", 
                fixed = TRUE)
   
 })

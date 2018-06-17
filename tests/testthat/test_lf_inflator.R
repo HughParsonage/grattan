@@ -1,6 +1,7 @@
 context("lf inflator")
 
 test_that("Error handling", {
+  skip_on_cran()
   expect_error(lf_inflator_fy(from_fy = "2012-13", to_fy = "2099-00", allow.projection = FALSE),
                regexp = "to_fy are in labour force data")
   expect_error(lf_inflator_fy(from_fy = "2012-13", to_fy = "2025-26", 
@@ -15,6 +16,13 @@ test_that("Error handling", {
                               lf.series = data.table(fy_year = "2013-14", 
                                                      r = 0.2)), 
                regexp = "The first fy in the custom series must be equal to", 
+               fixed = TRUE)
+  expect_error(lf_inflator_fy(from_fy = "2017-18",
+                              to_fy = "2018-19",
+                              forecast.series = "custom",
+                              lf.series = data.table(fy_year = c("2017-18", "2017-18"),
+                                                     r = c(0, 0.123))), 
+               regexp = 'lf.series$fy_year should be c("2017-18", "2018-19").', 
                fixed = TRUE)
 })
 

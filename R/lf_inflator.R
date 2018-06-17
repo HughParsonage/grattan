@@ -46,9 +46,11 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
       "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978"
     lf <- rsdmx::readSDMX(lf.url.trend)
     lf.indices <- as.data.frame(lf)
+    # nocov start
     if (nrow(lf.indices) == 0) {
       stop("Unable to establish SDMX connection to stat.data.abs.gov.au")
     }
+    # nocov end
     lf.indices <- as.data.table(lf.indices)
   } else {
     lf.indices <- lf_trend
@@ -162,7 +164,7 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
                       to = last_full_yr_in_series + nrow(lf.series)))
       
       if (!identical(input_series_fys, expected_fy_sequence)){
-        stop("lf.series$fy_year should be ", dput(expected_fy_sequence), ".")
+        stop("lf.series$fy_year should be ", deparse(expected_fy_sequence), ".")
       }
     }
     

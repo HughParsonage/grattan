@@ -437,9 +437,11 @@ model_income_tax <- function(sample_file,
                 if (is.null(medicare_levy_rate)) {
                   mr <- mt * (mb - ma) / mb
                   warning_if_misspecified("medicare_levy_rate")
+                  # nocov start
                   # alternative not reachable
                 } else stop("ERR # e59ed9845068f337d6653a7cc00401e1dbeeda7d. ",
                             "Please contact `grattan` package maintainer.") 
+                # nocov end
               }
             }
           }
@@ -763,7 +765,9 @@ model_income_tax <- function(sample_file,
     hutils::drop_col(sample_file, "new_taxable_income")
     sample_file[, "new_taxable_income" := new_taxable_income]
     
+    # nocov start
     if (anyNA(new_taxable_income) || identical(as.double(new_taxable_income), as.double(income))) stop("NAs: ", sum(is.na(new_taxable_income)), call. = FALSE)
+    # nocov end
     
     new_argument_vals <-
       argument_vals %>%

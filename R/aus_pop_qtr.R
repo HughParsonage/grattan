@@ -27,11 +27,13 @@ aus_pop_qtr <- function(date_quarter,
   if (max_date_quarter > max_qtr){
     if (allow.projections) {
       h <- qtrs_ahead(max_qtr, max_date_quarter)
+      # nocov start
       if (substr(max_qtr, 7, 7) == "4") {
         next_qtr <- 1L 
       } else {
-        next_qtr <- as.integer(substr(max_qtr, 7, 7)) + 1
+        next_qtr <- as.integer(substr(max_qtr, 7, 7)) + 1L
       }
+      # nocov end
       
       next_year <- as.integer(substr(max_qtr, 0, 4))
       Quarter <- Year <- NULL
