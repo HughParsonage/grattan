@@ -29,8 +29,7 @@ progressivity <- function(income,
          },
          "Kakwani" = {
            .NotYetUsed(measure)
-         },
-        .NotYetUsed(measure))
+         })
 
 }
 

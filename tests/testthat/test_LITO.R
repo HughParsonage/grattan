@@ -2,6 +2,8 @@ context("LITO")
 
 test_that("Error handling", {
   expect_error(lito(30e3, max_lito = c(445, 450)))
+  expect_error(lmito(30e3, fy.year = "2011-12"), 
+               regexp = "fy.year.*Only these values are supported")
 })
 
 test_that("LITO", {

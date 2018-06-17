@@ -17,6 +17,18 @@ test_that("as.numeric_unless_warning", {
   expect_equal(as.numeric_unless_warning(y), y)
 })
 
+test_that("anyIntersection", {
+  expect_true(anyIntersection(1:5, 5:10))
+  expect_false(anyIntersection(NA, FALSE))
+  expect_false(anyIntersection(letters[1:5], LETTERS[1:5]))
+})
+
+test_that("last_over_first", {
+  expect_equal(1:5, 5L)
+  expect_equal(letters[1:5], letters[1:5])
+  expect_true(all(are_zero(c(0, 0.1 + 0.2 - 0.3))))
+})
+
 test_that("coalesce", {
   expect_equal(NULL %||% 3, 3)
 })
@@ -32,6 +44,8 @@ test_that("prohibit_length0_vectors", {
 
 test_that("prohibit_vector_recyling", {
   expect_error(prohibit_vector_recycling(c(2, 2), 1, c(3, 3, 3)))
+  expect_error(prohibit_vector_recycling.MAXLENGTH(c(2, 2), 1, c(3, 3, 3)))
+  expect_equal(prohibit_vector_recycling.MAXLENGTH(c(2, 2), 1:2, 1), 2L)
 })
 
 test_that("qtrs_ahead", {
