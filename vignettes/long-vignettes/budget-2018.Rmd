@@ -11,8 +11,8 @@ output:
 
 
 
-```{r setup, include = FALSE}
-options(width = 110)
+```{r setup, include = FALSE, cache=FALSE}
+options(width = 110) # for kables (?)
 knitr::opts_chunk$set(
   collapse = TRUE,
   error = FALSE,
@@ -23,32 +23,34 @@ knitr::opts_chunk$set(
   fig.path = "./Budget2018-atlas/"
 )
 if (FALSE) {
-  stopifnot(file.exists("~/grattan/DESCRIPTION"))
-  pkgdown::build_site(pkg = "~/grattan")
-  for (svg in dir(path = "~/grattan/vignettes/long-vignettes/Budget2018-atlas/", 
-                  pattern = "\\.svg$", 
-                  full.names = TRUE)) {
-    
-    file.copy(svg,
-              file.path("~/grattan/docs/articles/long-vignettes/Budget2018-atlas/", 
-                        basename(svg)))
-    file.copy(svg,
-              file.path("~/grattan/docs/articles/long-vignettes/budget-2018_files/", 
-                        basename(svg)))
-  }
-  
-  change_pngs <- function(html) {
-    html_lines <- readr::read_lines(html)
-    for (i in grep("((Budget2018.atlas)|(budget.2018_files)).*\\.png", html_lines)) {
-      html_lines[i] <- sub(".png", ".svg", html_lines[i], fixed = TRUE)
+  if (interactive() && !is_knitting()) {
+    stopifnot(file.exists("~/grattan/DESCRIPTION"))
+    pkgdown::build_site(pkg = "../..", lazy = TRUE)
+    for (svg in dir(path = "~/grattan/vignettes/long-vignettes/Budget2018-atlas/", 
+                    pattern = "\\.svg$", 
+                    full.names = TRUE)) {
+      
+      file.copy(svg,
+                file.path("~/grattan/docs/articles/long-vignettes/Budget2018-atlas/", 
+                          basename(svg)))
+      file.copy(svg,
+                file.path("~/grattan/docs/articles/long-vignettes/budget-2018_files/", 
+                          basename(svg)))
     }
-    readr::write_lines(html_lines, html)
+    
+    change_pngs <- function(html) {
+      html_lines <- readr::read_lines(html)
+      for (i in grep("((Budget2018.atlas)|(budget.2018_files)).*\\.png", html_lines)) {
+        html_lines[i] <- sub(".png", ".svg", html_lines[i], fixed = TRUE)
+      }
+      readr::write_lines(html_lines, html)
+    }
+    invisible(lapply(dir(path = "~/grattan/docs/articles/long-vignettes/", 
+                         pattern = "\\.html$", 
+                         full.names = TRUE), 
+                     change_pngs))
+    
   }
-  invisible(lapply(dir(path = "~/grattan/docs/articles/long-vignettes/", 
-                       pattern = "\\.html$", 
-                       full.names = TRUE), 
-                   change_pngs))
-  
 }
 
 
@@ -757,9 +759,10 @@ cost_by_policy <-
 ```
 
 ```{r}
-cost_in_202728 <- revenue_foregone(Budget_1922[["2027-28"]][["Budget2018"]], FALSE, digits = 0)
+cost_in_202728 <- revenue_foregone(bound_models[.("2027-28", "Budget2018")], FALSE, digits = 0)
 cost_in_202728_top20 <- 
-  Budget_1922[["2027-28"]][["Budget2018"]][ntile(Taxable_Income, 100) >= 80] %>%
+  bound_models[.("2027-28", "Budget2018")] %>%
+  .[ntile(Taxable_Income, 100) >= 80] %>%
   revenue_foregone(revenue_positive = FALSE, digits = 0)
 ```
 
@@ -994,8 +997,8 @@ Middle Income Tax Offset ("the Lamington"). But once the plan is fully
 implemented in 2024-25, there are much bigger revenue reductions because
 the top of the 32.5 cent bracket increases first to \$120,000 and then
 to \$200,000 (removing the 37c bracket). In 2028, these bracket changes
-account for `r texNumD(revenue_foregone(Budget_1922[["2027-28"]][["Budget2018_just_rates"]], FALSE))`
-of the `r texNumD(revenue_foregone(Budget_1922[["2027-28"]][["Budget2018"]]))` in lower revenue.
+account for `r texNumD(revenue_foregone(bound_models[.("2027-28", "Budget2018_just_rates")], FALSE))`
+of the `r texNumD(revenue_foregone(bound_models[.("2027-28", "Budget2018")]))` in lower revenue.
 
 
 
@@ -1054,16 +1057,13 @@ most taxpayers.
 The exception is the top 10% of income earners. Average tax rates for
 those on the highest incomes are virtually unchanged under this plan.
 
-
-
 Once fully implemented, the PIT plan doesn't change the progressivity of
 the tax system much. Overall, those on high incomes will pay a similar
 proportion of total tax revenues with or without the plan. But because
 of bracket creep, high income earners will be paying a lower proportion
 than today.
 
-**Table 1: Share of personal income tax paid falls for highest income
-earners under PIT plan **
+**Table 1: Share of personal income tax paid falls for highest income earners under PIT plan**
 
 Share of total personal income tax paid by income decile (%)
 
@@ -1090,8 +1090,8 @@ if ("tax" %notchin% names(s1718)) {
 ```{r share-total-pit-by-decile}
 ShareTaxPaid_by_Decile_id <- 
   list("2017-18" = select_grep(s1718, "^(new_)?tax$", .and = "Taxable_Income"),
-       "2027-28 baseline" = Budget_1922[["2027-28"]][["Budget2018_baseline"]][, .(Taxable_Income, tax = new_tax)],
-       "2027-28 budget" = Budget_1922[["2027-28"]][["Budget2018"]][, .(Taxable_Income, tax = new_tax)]
+       "2027-28 baseline" = bound_models[.("2027-28", "Budget2018_baseline"), .(Taxable_Income, tax = new_tax)],
+       "2027-28 budget" = bound_models[.("2027-28", "Budget2018_baseline"), .(Taxable_Income, tax = new_tax)]
   ) %>%
   rbindlist(use.names = TRUE,
             fill = TRUE,
@@ -1102,8 +1102,8 @@ ShareTaxPaid_by_Decile_id <-
 
 ShareTaxPaid_by_Percentile_id <- 
   list("2017-18" = select_grep(s1718, "^(new_)?tax$", .and = "Taxable_Income"),
-       "2027-28 baseline" = Budget_1922[["2027-28"]][["Budget2018_baseline"]][, .(Taxable_Income, tax = new_tax)],
-       "2027-28 budget" = Budget_1922[["2027-28"]][["Budget2018"]][, .(Taxable_Income, tax = new_tax)]
+       "2027-28 baseline" = bound_models[.("2027-28", "Budget2018_baseline"), .(Taxable_Income, tax = new_tax)],
+       "2027-28 budget" = bound_models[.("2027-28", "Budget2018_baseline"), .(Taxable_Income, tax = new_tax)]
   ) %>%
   rbindlist(use.names = TRUE,
             fill = TRUE,
@@ -1133,8 +1133,8 @@ rbindlist(
 ```{r share-total-pit-by-decile-275}
 ShareTaxPaid_by_Decile_id <- 
   list("2017-18" = s1718[, .(Taxable_Income, tax)],
-       "2027-28 baseline" = Budget_1922_Grattan2.75[["2027-28"]][["Budget2018_baseline"]][, .(Taxable_Income, tax = new_tax)],
-       "2027-28 budget" = Budget_1922_Grattan2.75[["2027-28"]][["Budget2018"]][, .(Taxable_Income, tax = new_tax)]
+       "2027-28 baseline" = bound_models_wage2.75[.("2027-28", "Budget2018_baseline"), .(Taxable_Income, tax = new_tax)],
+       "2027-28 budget" = bound_models_wage2.75[.("2027-28", "Budget2018"), .(Taxable_Income, tax = new_tax)]
   ) %>%
   rbindlist(use.names = TRUE,
             fill = TRUE,
@@ -1145,8 +1145,8 @@ ShareTaxPaid_by_Decile_id <-
 
 ShareTaxPaid_by_Percentile_id <- 
   list("2017-18" = s1718[, .(Taxable_Income, tax)],
-       "2027-28 baseline" = Budget_1922_Grattan2.75[["2027-28"]][["Budget2018_baseline"]][, .(Taxable_Income, tax = new_tax)],
-       "2027-28 budget" = Budget_1922_Grattan2.75[["2027-28"]][["Budget2018"]][, .(Taxable_Income, tax = new_tax)]
+       "2027-28 baseline" = bound_models_wage2.75[.("2027-28", "Budget2018_baseline"), .(Taxable_Income, tax = new_tax)],
+       "2027-28 budget" = bound_models_wage2.75[.("2027-28", "Budget2018"), .(Taxable_Income, tax = new_tax)]
   ) %>%
   rbindlist(use.names = TRUE,
             fill = TRUE,
@@ -1542,11 +1542,12 @@ bound_models %>%
 ```
 
 ```{r revenue_foregone2018-19-bracket-creep}
-print(revenue_foregone(Budget_1922[["2018-19"]][["Budget2018_baseline_brackets_cpi"]]))
+print(revenue_foregone(bound_models[.("2018-19", "Budget2018_baseline_brackets_cpi")]))
 ```
 
 ```{r}
 avg_tax_rate_by_percentile_brackets_cpi <-
+  
   lapply(Budget_1922, function(x) {
     x[["Budget2018_baseline_brackets_cpi"]][, .(Taxable_Income, new_tax)]
     }) %>%
@@ -1593,7 +1594,7 @@ wt_rel1718v202425 <-
   .project_useTreasurys[[2025-2016]][1][["WEIGHT"]] / s1718[1][["WEIGHT"]]
 
 avg_tax_by_decile_allpersons202425 <- 
-  Budget_1922[["2027-28"]][["Budget2018"]] %>%
+  bound_models[.("2027-28", "Budget2018")] %>%
   rbind(data.table(new_tax = 0,
                    baseline_tax = 0,
                    Taxable_Income = 0L,
@@ -1611,7 +1612,7 @@ wt_rel1718v202728 <-
   .project_useTreasurys[[12]][1][["WEIGHT"]] / s1718[1][["WEIGHT"]]
 
 avg_tax_by_decile_allpersons202728 <- 
-  Budget_1922[["2027-28"]][["Budget2018"]] %>%
+  bound_models[.("2027-28", "Budget2018")] %>%
   rbind(data.table(new_tax = 0,
                    baseline_tax = 0,
                    Taxable_Income = 0L,
@@ -1666,7 +1667,7 @@ decile201718 <-
 ```
 
 ```{r}
-Budget_1922[["2027-28"]][["Budget2018"]] %>%
+bound_models[.("2027-28", "Budget2018")] %>%
   rbind(data.table(new_tax = 0,
                    baseline_tax = 0,
                    Taxable_Income = 0L,
@@ -1679,7 +1680,7 @@ Budget_1922[["2027-28"]][["Budget2018"]] %>%
   .[, prop := tot / sum(tot)] %>%
   .[]
 
-Budget_1922[["2024-25"]][["Budget2018"]] %>%
+bound_models[.("2024-25", "Budget2018")]%>%
   rbind(data.table(new_tax = 0,
                    baseline_tax = 0,
                    Taxable_Income = 0L,
@@ -1908,13 +1909,13 @@ prop_tax_earnt_by_quintile_201718 <-
   .[]
 
 prop_tax_paid_by_quintile_202728_baseline <- 
-  Budget_1922[["2027-28"]][["Budget2018_baseline"]] %>%
+  bound_models[.("2027-28", "Budget2018")] %>%
   .[, .(tax_paid = sum(as.numeric(new_tax))), keyby = .(Quintile = ntile(Taxable_Income, 5))] %>%
   .[, prop := tax_paid / sum(tax_paid)] %>%
   .[]
 
 prop_tax_paid_by_quintile_202728_Budget <- 
-  Budget_1922[["2027-28"]][["Budget2018"]] %>%
+  bound_models[.("2027-28", "Budget2018")] %>%
   .[, .(tax_paid = sum(as.numeric(new_tax))), keyby = .(Quintile = ntile(Taxable_Income, 5))] %>%
   .[, prop := tax_paid / sum(tax_paid)] %>%
   .[]
