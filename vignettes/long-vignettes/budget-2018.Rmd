@@ -1703,9 +1703,54 @@ compare_avg_tax_rates(s2728_various_wages, s1718[, baseline_tax := tax]) %>%
 
 ```
 
+```{r prop_tax_paid_before_2025}
+bound_models %>%
+  .[id == "Budget2018"] %>%
+  .[fy_year <= "2024-25"] %>%
+  .[, new_tax := as.double(new_tax)] %>%
+  .[, .(tot_tax = sum(new_tax)),
+    keyby = .(fy2018 = id,#  if_else(fy_year == "2018-19", "2018-19", "2019-20 - 2024-25"),
+              Quintile = weighted_ntile(Taxable_Income, n = 5))] %>%
+  .[, p := tot_tax / sum(tot_tax), keyby = "fy2018"] %>%
+  .[]
+```
+
+```{r adult_population_projections}
+lapply(as.Date(paste0(2001:2016, "-06-30")), aus_pop_qtr_age, age = 18:100, tbl = TRUE) %>%
+  rbindlist %>% .[, .(pop = sum(Value)), keyby = "Date"] %$% 
+  forecast::forecast(pop, h = 12) %>%
+  as.data.frame %>%
+  dplyr::mutate(YR = as.integer(rownames(.)) + 2000L) %>%
+  as.data.table %>%
+  melt(id.vars = "YR") %>%
+  {
+    dot <- .
+    ribbon <- 
+      dot[variable %enotin% "Point Forecast"] %>%
+      .[, c("LowHi", "Level") := tstrsplit(variable, split = " ")] %>%
+      .[, variable := NULL] %>%
+      dcast(... ~ LowHi, value.var = "value") %>%
+      .[, Level := as.integer(Level)]
+    
+    grplot(dot) + 
+      geom_ribbon(data = ribbon[Level == 80L], 
+                  aes(x = YR, ymin = Lo, ymax = Hi), 
+                  alpha = 0.4) +
+      geom_ribbon(data = ribbon[Level == 95L], 
+                  aes(x = YR, ymin = Lo, ymax = Hi), 
+                  alpha = 0.3) +
+      geom_line(data = dot[variable %ein% "Point Forecast"], 
+                aes(x = YR, y = value, color = variable)) +
+      geom_hline(yintercept = 22.37e6) + 
+      geom_vline(xintercept = 2024) +
+      scale_y_continuous(label = function(x) paste0(x / 1e6, "M"))
+  }
+
+```
+
 ```{r comparison-lf-assumptions}
-s2024_Deloitte_LF_growth <- 
-  project(sample_file_1516, h = 9L, lf.series = 0.0135) %>%
+s2425_Deloitte_LF_growth <- 
+  project(sample_file_1516, h = 9L) %>%
   model_income_tax(baseline_fy = "2017-18", 
                    ordinary_tax_thresholds = ordinary_tax_thresholds("2024-25"), 
                    ordinary_tax_rates = ordinary_tax_rates("2024-25"),
@@ -1715,8 +1760,23 @@ s2024_Deloitte_LF_growth <-
                    medicare_levy_lower_sapto_threshold = medicare_levy_lower_sapto_threshold("2024-25"), 
                    medicare_levy_upper_sapto_threshold = 49300,
                    medicare_levy_lower_family_threshold = medicare_levy_lower_family_threshold("2024-25"), 
-                   medicare_levy_lower_family_sapto_threshold = medicare_levy_lower_family_sapto_threshold("2024-25"))
+                   medicare_levy_lower_family_sapto_threshold = medicare_levy_lower_family_sapto_threshold("2024-25")) %>%
+  # Ensure number of taxpayers = 11.6 million
+  .[new_tax >= 1, WEIGHT := 11.6e6 / sum(new_tax > 0)] %>%
+  
+  # Ensure total population is 22.37 million
+  .[, WEIGHT := WEIGHT * if_else(new_tax < 1,
+                                 1 + (22.37e6 - 11.6e6 - sum(WEIGHT[new_tax < 1])) / sum(WEIGHT[new_tax < 1]),
+                                 1)]
 
+stopifnot(s2425_Deloitte_LF_growth[new_tax > 1, sum(WEIGHT)] %between% c(11.5e6, 11.7e6))
+stopifnot(s2425_Deloitte_LF_growth[, sum(WEIGHT)] %between% c(22.2e6, 22.4e6))
+
+s2425_Deloitte_LF_growth %>%
+  .[, .(total_tax_paid = sum(new_tax * WEIGHT)),
+    keyby = .(Quintile = weighted_ntile(Taxable_Income, weights = WEIGHT, n = 5))] %>%
+  .[, p := total_tax_paid / sum(total_tax_paid)] %>%
+  .[]
 
 ```
 
