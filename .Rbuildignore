@@ -49,3 +49,4 @@
 ^vignettes/long-vignettes/prop-tax-paid-by-facet-decile\.csv$
 ^vignettes/long-vignettes/Reynolds-Smolensky-vs-year\.csv$
 ^_pkgdown\.yml$
+^codecov\.yml$

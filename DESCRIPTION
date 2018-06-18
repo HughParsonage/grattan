@@ -45,11 +45,12 @@ Suggests:
     rmarkdown,
     scales,
     survey,
-    testthat, 
+    testthat,
     taxstats,
     taxstats1516,
     viridis,
-    yaml
+    yaml,
+    covr
 Additional_repositories: https://hughparsonage.github.io/tax-drat/
 LazyData: true
 VignetteBuilder: knitr

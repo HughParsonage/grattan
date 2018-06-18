@@ -1,22 +1,3 @@
--   [grattan](#grattan)
--   [Overview](#overview)
-    -   [`income_tax`](#income_tax)
-    -   [`model_income_tax`: modelling changes to personal income tax](#model_income_tax-modelling-changes-to-personal-income-tax)
-    -   [`project`](#project)
-    -   [Access ABS data](#access-abs-data)
--   [NEWS](#news)
-    -   [1.6.1.0](#section)
-    -   [1.6.0.0](#section-1)
-    -   [1.5.3.6](#section-3)
-    -   [1.5.3.1](#section-5)
-    -   [1.5.2.5](#section-7)
-    -   [1.5.2.3](#section-10)
-    -   [1.5.2.0](#section-12)
-    -   [1.5.1.2](#section-14)
--   [CRAN Notes](#cran-notes)
-    -   [Test results](#test-results)
-    -   [Note to CRAN: moderately-large vignette](#note-to-cran-moderately-large-vignette)
-
 [![Coverage status](https://codecov.io/gh/HughParsonage/grattan/branch/master/graph/badge.svg)](https://codecov.io/github/HughParsonage/grattan?branch=master) [![Build Status](https://travis-ci.org/HughParsonage/grattan.svg?branch=master)](https://travis-ci.org/HughParsonage/grattan)
 
 grattan
@@ -35,7 +16,7 @@ install.packages("grattan")
 library(grattan)
 ```
 
-    ## Last change: test_weighted_ntile.R at 2018-06-17 19:08:13 (3 hours ago).
+    ## Last change: test_weighted_ntile.R at 2018-06-17 19:08:13 (20 hours ago).
 
 `income_tax`
 ------------
@@ -56,6 +37,7 @@ income_tax(50e3, "2015-16")
 # install.packages("taxstats", repos = "https://hughparsonage.github.io/tax-drat")
 library(taxstats)
 
+library(hutils)
 library(data.table) 
 library(magrittr)
 library(ggplot2)
@@ -144,7 +126,7 @@ Create comparison of average tax rates:
 
 ``` r
 lapply(list("30k" = 30e3,
-            "37k" = 37e3,
+            "36k" = 36e3,
             "42k" = 42e3),
        function(T2) {
          model_income_tax(s1718,
@@ -155,16 +137,19 @@ lapply(list("30k" = 30e3,
                                                       87000, 
                                                       180e3))
        }) %>%
-  rbindlist(idcol = "id") %>%
-  compare_avg_tax_rates(baseDT = .[id == "37k"]) %>%
+  rbindlist(idcol = "id",
+            use.names = TRUE,
+            fill = TRUE) %>%
+  compare_avg_tax_rates(baseDT = .[id %ein% "36k"]) %>%
   ggplot(aes(x = Taxable_Income_percentile,
              y = delta_avgTaxRate,
              color = id,
-             group = id)) + 
+             group = id)) +
+  geom_hline(yintercept = 0) +
   geom_line()
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-2-1.png)
+![](README_files/figure-markdown_github/compare-30-37-42-thresholds-1.svg)
 
 Access ABS data
 ---------------
