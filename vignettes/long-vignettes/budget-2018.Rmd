@@ -477,7 +477,8 @@ names(Budget_1922) <- yr2fy(2019:2028)
 bound_models <-
   Budget_1922 %>% 
   lapply(rbindlist, use.names = TRUE, fill = TRUE, idcol = "id") %>%
-  rbindlist(use.names = TRUE, fill = TRUE, idcol = "fy_year")
+  rbindlist(use.names = TRUE, fill = TRUE, idcol = "fy_year") %>%
+  setkey(fy_year, id)
 bound_models[id %in% c("Budget2018", "Budget2018_Step1and2", "Budget2018_baseline"),
              .SD,
              .SDcols = c("id",
@@ -557,6 +558,38 @@ write.csv(round(sapply(Budget_1922_Grattan80, sapply, revenue_foregone, USE.NAME
           "Budget201718-Grattan-summaries-80pc.csv")
 write.csv(round(sapply(Budget_1922_Grattan20, sapply, revenue_foregone, USE.NAMES = TRUE) / 1e9, 2), 
           "Budget201718-Grattan-summaries-20pc.csv")
+```
+
+```{r bound_models_Grattan}
+bound_models_Grattan <- 
+  Budget_1922_Grattan %>% 
+  lapply(rbindlist, use.names = TRUE, fill = TRUE, idcol = "id") %>%
+  rbindlist(use.names = TRUE, fill = TRUE, idcol = "fy_year") %>%
+  setkey(fy_year, id)
+```
+
+```{r bound_models_Grattan20}
+bound_models_Grattan20 <- 
+  Budget_1922_Grattan20 %>% 
+  lapply(rbindlist, use.names = TRUE, fill = TRUE, idcol = "id") %>%
+  rbindlist(use.names = TRUE, fill = TRUE, idcol = "fy_year") %>%
+  setkey(fy_year, id)
+```
+
+```{r bound_models_Grattan80}
+bound_models_Grattan80 <- 
+  Budget_1922_Grattan80 %>% 
+  lapply(rbindlist, use.names = TRUE, fill = TRUE, idcol = "id") %>%
+  rbindlist(use.names = TRUE, fill = TRUE, idcol = "fy_year") %>%
+  setkey(fy_year, id)
+```
+
+```{r bound_models_wage2.75}
+bound_models_wage2.75 <- 
+  Budget_1922_Grattan2.75 %>% 
+  lapply(rbindlist, use.names = TRUE, fill = TRUE, idcol = "id") %>%
+  rbindlist(use.names = TRUE, fill = TRUE, idcol = "fy_year") %>%
+  setkey(fy_year, id)
 ```
 
 ```{r avg_individual_impact_by_Quintile_fy}
@@ -1282,34 +1315,6 @@ sample_files_all %>%
   facet_wrap(~fy_year)
 ```
 
-```{r bound_models_Grattan}
-bound_models_Grattan <- 
-  Budget_1922_Grattan %>% 
-  lapply(rbindlist, use.names = TRUE, fill = TRUE, idcol = "id") %>%
-  rbindlist(use.names = TRUE, fill = TRUE, idcol = "fy_year")
-```
-
-```{r bound_models_Grattan20}
-bound_models_Grattan20 <- 
-  Budget_1922_Grattan20 %>% 
-  lapply(rbindlist, use.names = TRUE, fill = TRUE, idcol = "id") %>%
-  rbindlist(use.names = TRUE, fill = TRUE, idcol = "fy_year")
-```
-
-```{r bound_models_Grattan80}
-bound_models_Grattan80 <- 
-  Budget_1922_Grattan80 %>% 
-  lapply(rbindlist, use.names = TRUE, fill = TRUE, idcol = "id") %>%
-  rbindlist(use.names = TRUE, fill = TRUE, idcol = "fy_year")
-```
-
-```{r bound_models_wage2.75}
-bound_models_wage2.75 <- 
-  Budget_1922_Grattan2.75 %>% 
-  lapply(rbindlist, use.names = TRUE, fill = TRUE, idcol = "id") %>%
-  rbindlist(use.names = TRUE, fill = TRUE, idcol = "fy_year")
-```
-
 ```{r}
 bound_models %>%
   .[id == "ALP2018"] %>%
@@ -1716,13 +1721,16 @@ bound_models %>%
 ```
 
 ```{r adult_population_projections}
-lapply(as.Date(paste0(2001:2016, "-06-30")), aus_pop_qtr_age, age = 18:100, tbl = TRUE) %>%
+adult_population_projections <- 
+  lapply(as.Date(paste0(2001:2016, "-06-30")), aus_pop_qtr_age, age = 18:100, tbl = TRUE) %>%
   rbindlist %>% .[, .(pop = sum(Value)), keyby = "Date"] %$% 
   forecast::forecast(pop, h = 12) %>%
   as.data.frame %>%
   dplyr::mutate(YR = as.integer(rownames(.)) + 2000L) %>%
   as.data.table %>%
-  melt(id.vars = "YR") %>%
+  melt(id.vars = "YR")
+
+adult_population_projections %>%
   {
     dot <- .
     ribbon <- 
@@ -1747,6 +1755,34 @@ lapply(as.Date(paste0(2001:2016, "-06-30")), aus_pop_qtr_age, age = 18:100, tbl 
   }
 
 ```
+
+```{r comparison-deloitte-ntaxpayers}
+s1516 <- copy(sample_file_1516)[, tax := income_tax(Taxable_Income, "2015-16", .dots.ATO = .SD)]
+n_taxpayers_1516 <- s1516[tax > 1, .N * 50]
+
+v <- (1 / (2025 - 2016))
+deloitte_wage_r <- (11.6e6 / n_taxpayers_1516) ^ v
+budget_wage_r <- 
+  (bound_models[.("2024-25", "Budget2018")][new_tax > 1, sum(WEIGHT)] / n_taxpayers_1516) ^ v
+```
+
+```{r comparison-deloitte-adults}
+adultpop2016 <- sum(aus_pop_qtr_age(date = as.Date("2016-06-30"), age = 18:100))
+deloitte_pop_r <- (22.37e6 / adultpop2016) ^ v
+budget_pop_r <- 
+  adult_population_projections %>%
+  .[YR == 2025] %>%
+  .[variable == "Point Forecast", (value / adultpop2016) ^ v]
+  
+```
+
+Growth assumptions:
+  - Number of taxpayers:
+    - Deloitte: `r percent(deloitte_wage_r - 1)`
+    - Budget: `r percent(budget_wage_r - 1)`
+  - Number of adults: 
+    - Deloitte: `r percent(deloitte_pop_r - 1)`
+    - Grattan: `r percent(budget_pop_r - 1)`
 
 ```{r comparison-lf-assumptions}
 s2425_Deloitte_LF_growth <- 
