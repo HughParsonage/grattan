@@ -78,7 +78,31 @@ stopifnot(file.exists("../../DESCRIPTION"))
 stopifnot(!isFALSE(getOption("knitr.use.stringr")))
 ```
 
-```{r}
+```{r fwrite}
+# New fwriter so that git checkins are not too bad:
+fwrite <- function(x, file, ...) {
+  xo <- copy(x)
+  for (j in seq_along(x)) {
+    xj <- x[[j]]
+    if (is.double(xj)) {
+      jmax <- max(xj)
+      jmin <- min(xj)
+      if (jmax < 1 && jmin > -1) {
+        set(xo, j = j, value = round(xj, 4))
+      } else if (abs(jmin) > 100e3) {
+        set(xo, j = j, value = round(xj, -3))
+      } else {
+        set(xo, j = j, value = round(xj, 1))
+      }
+    }
+  }
+  data.table::fwrite(xo, file, ...)
+  
+}
+
+```
+
+```{r grattan_percent}
 grattan_percent <- function(number, digits = 1, .percent.suffix = " per cent") {
   grattanCharts::grattan_percent(number, digits, .percent.suffix)
 }
@@ -908,7 +932,7 @@ avg_tax_rates_by_percentile_facet_fy %>%
   #                  na.rm = TRUE) +
   xlab("Taxable income percentile") +
   scale_y_continuous(labels = percent, expand = c(0, 0)) +
-  theme(legend.position = c(0.9, 0.1),
+  theme(legend.position = c(0.95, 0.05),
         axis.line.x = element_line(size = 0.5),
         legend.title = element_blank(),
         legend.justification = c(1, 0))
