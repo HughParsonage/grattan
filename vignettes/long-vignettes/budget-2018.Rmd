@@ -23,6 +23,8 @@ knitr::opts_chunk$set(
   fig.path = "./Budget2018-atlas/"
 )
 if (FALSE) {
+  stopifnot(file.exists("~/grattan/DESCRIPTION"))
+  pkgdown::build_site(pkg = "~/grattan")
   for (svg in dir(path = "~/grattan/vignettes/long-vignettes/Budget2018-atlas/", 
                   pattern = "\\.svg$", 
                   full.names = TRUE)) {

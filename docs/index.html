@@ -8,10 +8,11 @@
 <title>Australian Tax Policy Analysis • grattan</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="jquery.sticky-kit.min.js"></script><script src="pkgdown.js"></script><meta property="og:title" content="Australian Tax Policy Analysis">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script><meta property="og:title" content="Australian Tax Policy Analysis">
 <meta property="og:description" content="Utilities for costing and evaluating Australian tax policy, including high-performance tax and transfer calculators, a fast method of projecting tax collections, and an interface to common indices from the Australian Bureau of Statistics.  Written to support Grattan Institute's Australian Perspectives program. For access to the 'taxstats' package, please run
- install.packages(" taxstats repos="https://hughparsonage.github.io/tax-drat/" type="source" n.b. the package is approximately mb.>
+ install.packages(&quot;taxstats&quot;, repos = &quot;https://hughparsonage.github.io/tax-drat/&quot;, type = &quot;source&quot;). 
+ N.B. The 'taxstats' package is approximately 50 MB.">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -86,20 +87,159 @@
 
     
     
+
 <div id="grattan" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#grattan" class="anchor"></a>grattan</h1></div>
 <p>Australian Tax Policy Analysis</p>
+</div>
+<div id="overview" class="section level1">
+<h1 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"grattan"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(grattan)</code></pre></div>
+<pre><code>## Last change: test_weighted_ntile.R at 2018-06-17 19:08:13 (1 days ago).</code></pre>
+<div id="income_tax" class="section level2">
+<h2 class="hasAnchor">
+<a href="#income_tax" class="anchor"></a><code>income_tax</code>
+</h2>
+<p>Calculates the income tax for a given taxable income and financial year:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/income_tax.html">income_tax</a></span>(<span class="fl">50e3</span>, <span class="st">"2015-16"</span>)</code></pre></div>
+<pre><code>## [1] 8547</code></pre>
+<div id="with-sample-files" class="section level3">
+<h3 class="hasAnchor">
+<a href="#with-sample-files" class="anchor"></a>With sample files</h3>
+<p><code>income_tax</code> is designed to work well with the ATO’s sample files. You can obtain the sample files from my repo:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("taxstats", repos = "https://hughparsonage.github.io/tax-drat")</span>
+<span class="kw">library</span>(taxstats)
+
+<span class="kw">library</span>(hutils)
+<span class="kw">library</span>(data.table) 
+<span class="kw">library</span>(magrittr)
+<span class="kw">library</span>(ggplot2)</code></pre></div>
+<p>Simply pass the sample file to <code>.dots.ATO</code> and the complexities of things like Medicare levy and the Seniors and Pensioners Tax Offset are handled for you. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s1314 &lt;-<span class="st"> </span><span class="kw">as.data.table</span>(sample_file_<span class="dv">1314</span>)
+s1314 <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, tax <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="reference/income_tax.html">income_tax</a></span>(Taxable_Income, <span class="st">"2013-14"</span>, <span class="dt">.dots.ATO =</span> s1314)] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, .(Taxable_Income, tax)]</code></pre></div>
+<pre><code>##         Taxable_Income       tax
+##      1:           4800     0.000
+##      2:         126122 36503.970
+##      3:          39742  4655.410
+##      4:         108123 29574.355
+##      5:          85957 21040.445
+##     ---                         
+## 258770:          24462  1111.710
+## 258771:          37055  3701.525
+## 258772:          45024  6530.520
+## 258773:           5134     0.000
+## 258774:          46368  7007.640</code></pre>
+</div>
+</div>
+<div id="model_income_tax-modelling-changes-to-personal-income-tax" class="section level2">
+<h2 class="hasAnchor">
+<a href="#model_income_tax-modelling-changes-to-personal-income-tax" class="anchor"></a><code>model_income_tax</code>: modelling changes to personal income tax</h2>
+<p>While <code>income_tax</code> is designed to inflexibly return the tax payable as legislated, <code>model_income_tax</code> is designed to calculate income tax when changes are made. For example,</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s1314 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># reduce top threshold from 180,000 to 150,000</span>
+<span class="st">  </span><span class="kw"><a href="reference/model_income_tax.html">model_income_tax</a></span>(<span class="dt">ordinary_tax_thresholds =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">18200</span>, <span class="dv">37000</span>, <span class="dv">80000</span>, 
+                                               <span class="fl">150e3</span>), 
+                   <span class="dt">baseline_fy =</span> <span class="st">"2013-14"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, .(Taxable_Income, baseline_tax, new_tax)]</code></pre></div>
+<pre><code>##         Taxable_Income baseline_tax   new_tax
+##      1:           4800            0     0.000
+##      2:         126122        36503 36503.970
+##      3:          39742         4655  4655.410
+##      4:         108123        29574 29574.355
+##      5:          85957        21040 21040.445
+##     ---                                      
+## 258770:          24462         1111  1111.710
+## 258771:          37055         3701  3701.525
+## 258772:          45024         6530  6530.520
+## 258773:           5134            0     0.000
+## 258774:          46368         7007  7007.640</code></pre>
+</div>
+<div id="project" class="section level2">
+<h2 class="hasAnchor">
+<a href="#project" class="anchor"></a><code>project</code>
+</h2>
+<p>Given a sample file, we can project forward a number of years</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s1617 &lt;-<span class="st"> </span><span class="kw"><a href="reference/project.html">project</a></span>(s1314, <span class="dt">h =</span> 3L)</code></pre></div>
+<p>or to a particular financial year</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s1718 &lt;-<span class="st"> </span><span class="kw"><a href="reference/project_to.html">project_to</a></span>(s1314, <span class="st">"2017-18"</span>)</code></pre></div>
+<p>Together with <code>model_income_tax</code>, this allows us to make point-predictions of future years. The function <code>revenue_foregone</code> prettily prints the resultant revenue:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_file_<span class="dv">1314</span> <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="reference/project_to.html">project_to</a></span>(<span class="st">"2018-19"</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="reference/model_income_tax.html">model_income_tax</a></span>(<span class="dt">baseline_fy =</span> <span class="st">"2017-18"</span>,
+                   <span class="dt">ordinary_tax_thresholds =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">18200</span>, <span class="dv">37000</span>, <span class="dv">87000</span>, 
+                                               <span class="fl">150e3</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span>revenue_foregone</code></pre></div>
+<pre><code>## [1] "$1.7 billion"</code></pre>
+<div id="compare_avg_tax_rates" class="section level3">
+<h3 class="hasAnchor">
+<a href="#compare_avg_tax_rates" class="anchor"></a><code>compare_avg_tax_rates</code>:</h3>
+<p>Create comparison of average tax rates:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(<span class="kw">list</span>(<span class="st">"30k"</span> =<span class="st"> </span><span class="fl">30e3</span>,
+            <span class="st">"36k"</span> =<span class="st"> </span><span class="fl">36e3</span>,
+            <span class="st">"42k"</span> =<span class="st"> </span><span class="fl">42e3</span>),
+       <span class="cf">function</span>(T2) {
+         <span class="kw"><a href="reference/model_income_tax.html">model_income_tax</a></span>(s1718,
+                          <span class="dt">baseline_fy =</span> <span class="st">"2017-18"</span>,
+                          <span class="dt">ordinary_tax_thresholds =</span> <span class="kw">c</span>(<span class="dv">0</span>, 
+                                                      <span class="dv">18200</span>,
+                                                      T2,
+                                                      <span class="dv">87000</span>, 
+                                                      <span class="fl">180e3</span>))
+       }) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">rbindlist</span>(<span class="dt">idcol =</span> <span class="st">"id"</span>,
+            <span class="dt">use.names =</span> <span class="ot">TRUE</span>,
+            <span class="dt">fill =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="reference/compare_avg_tax_rates.html">compare_avg_tax_rates</a></span>(<span class="dt">baseDT =</span> .[id <span class="op">%ein%</span><span class="st"> "36k"</span>]) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Taxable_Income_percentile,
+             <span class="dt">y =</span> delta_avgTaxRate,
+             <span class="dt">color =</span> id,
+             <span class="dt">group =</span> id)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
+<p><img src="index_files/figure-html/compare-30-37-42-thresholds-1.png" width="700"></p>
+</div>
+</div>
+<div id="access-abs-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#access-abs-data" class="anchor"></a>Access ABS data</h2>
+</div>
 </div>
 <div id="news" class="section level1">
 <h1 class="hasAnchor">
 <a href="#news" class="anchor"></a>NEWS</h1>
 <div id="section" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section" class="anchor"></a>1.6.0.0</h2>
-<div id="section-1" class="section level3">
+<a href="#section" class="anchor"></a>1.6.1.0</h2>
+<ul>
+<li>New functions:
+<ul>
+<li>
+<code>compare_avg_tax_rates</code>: create a difference in average tax rates between multiple models and a baseline tax, by percentile.</li>
+<li>
+<code><a href="reference/install_taxstats.html">install_taxstats()</a></code> for convenience.</li>
+</ul>
+</li>
+<li>Bug fixes:
+<ul>
+<li>
+<code><a href="reference/small_business_tax_offset.html">small_business_tax_offset()</a></code> is now always positive, fixing the original misinterpretation of the legislation whereby negative business income resulted in a negative offset.</li>
+</ul>
+</li>
+<li>
+<code>taxstats1516</code> is now a suggested dependency.</li>
+</ul>
+</div>
+<div id="section-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#section-1" class="anchor"></a>1.6.0.0</h2>
+<div id="section-2" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-1" class="anchor"></a>2018-05-08</h3>
+<a href="#section-2" class="anchor"></a>2018-05-08</h3>
 <ul>
 <li>Never-legislated Medicare levy change in 2019-20 has been reverted</li>
 <li>Budget 2018:</li>
@@ -132,24 +272,24 @@
 </ul>
 </div>
 </div>
-<div id="section-2" class="section level2">
+<div id="section-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-2" class="anchor"></a>1.5.3.6</h2>
-<div id="section-3" class="section level3">
+<a href="#section-3" class="anchor"></a>1.5.3.6</h2>
+<div id="section-4" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-3" class="anchor"></a>2018-02-21</h3>
+<a href="#section-4" class="anchor"></a>2018-02-21</h3>
 <ul>
 <li>Labour force data and wage price index updated to 2018-02-21.</li>
 <li>Update as requested to fix failing unit tests relying on non-standard packages.</li>
 </ul>
 </div>
 </div>
-<div id="section-4" class="section level2">
+<div id="section-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-4" class="anchor"></a>1.5.3.1</h2>
-<div id="section-5" class="section level3">
+<a href="#section-5" class="anchor"></a>1.5.3.1</h2>
+<div id="section-6" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-5" class="anchor"></a>2018-01-22</h3>
+<a href="#section-6" class="anchor"></a>2018-01-22</h3>
 </div>
 <div id="new-features" class="section level3">
 <h3 class="hasAnchor">
@@ -186,12 +326,12 @@
 </ul>
 </div>
 </div>
-<div id="section-6" class="section level2">
+<div id="section-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-6" class="anchor"></a>1.5.2.5</h2>
-<div id="section-7" class="section level3">
+<a href="#section-7" class="anchor"></a>1.5.2.5</h2>
+<div id="section-8" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-7" class="anchor"></a>2017-11-16</h3>
+<a href="#section-8" class="anchor"></a>2017-11-16</h3>
 <ul>
 <li>Update wage data to 2017-Q3</li>
 <li>Update labour force data to 2017-09</li>
@@ -199,32 +339,32 @@
 <li>Vignettes now install <code>taxstats</code> to a temporary directory if not already installed, rather than the user or system’s library.</li>
 </ul>
 </div>
-<div id="section-8" class="section level3">
+<div id="section-9" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-8" class="anchor"></a>2017-10-27</h3>
+<a href="#section-9" class="anchor"></a>2017-10-27</h3>
 <ul>
 <li>Update CPI data</li>
 <li>Fix wage data</li>
 </ul>
 </div>
 </div>
-<div id="section-9" class="section level2">
+<div id="section-10" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-9" class="anchor"></a>1.5.2.3</h2>
-<div id="section-10" class="section level3">
+<a href="#section-10" class="anchor"></a>1.5.2.3</h2>
+<div id="section-11" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-10" class="anchor"></a>2017-10-21</h3>
+<a href="#section-11" class="anchor"></a>2017-10-21</h3>
 <ul>
 <li>Update labour-force data</li>
 </ul>
 </div>
 </div>
-<div id="section-11" class="section level2">
+<div id="section-12" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-11" class="anchor"></a>1.5.2.0</h2>
-<div id="section-12" class="section level3">
+<a href="#section-12" class="anchor"></a>1.5.2.0</h2>
+<div id="section-13" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-12" class="anchor"></a>2017-10-19</h3>
+<a href="#section-13" class="anchor"></a>2017-10-19</h3>
 <ul>
 <li>New internal C++ functions for <code>income_tax</code>, and related functions</li>
 <li>BTO function now uses tax scales from the <em>Income Tax Regulations</em>
@@ -232,35 +372,35 @@
 </ul>
 </div>
 </div>
-<div id="section-13" class="section level2">
+<div id="section-14" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-13" class="anchor"></a>1.5.1.2</h2>
-<div id="section-14" class="section level3">
+<a href="#section-14" class="anchor"></a>1.5.1.2</h2>
+<div id="section-15" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-14" class="anchor"></a>2017-10-15</h3>
+<a href="#section-15" class="anchor"></a>2017-10-15</h3>
 <ul>
 <li>Optional argument <code>age</code> in <code>income_tax</code> now <code>NULL</code> rather than <code>42</code>.<br>
 The default argument continues to result in SAPTO being not applied if <code>.dots.ATO</code>. However, if <code>.dots.ATO</code> is supplied (and the age variable has not been removed from it), the individuals’ SAPTO eligibility is determined by the age variable in <code>.dots.ATO</code>, rather than setting each individual’s SAPTO to 0.</li>
 </ul>
 </div>
-<div id="section-15" class="section level3">
+<div id="section-16" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-15" class="anchor"></a>2017-08-30</h3>
+<a href="#section-16" class="anchor"></a>2017-08-30</h3>
 <ul>
 <li>Update labour force data. Avoid segfault in separate package in unit test.</li>
 <li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
 </ul>
 </div>
-<div id="section-16" class="section level3">
+<div id="section-17" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-16" class="anchor"></a>2017-08-16</h3>
+<a href="#section-17" class="anchor"></a>2017-08-16</h3>
 <ul>
 <li>Update wage, CPI, labour force data</li>
 </ul>
 </div>
-<div id="section-17" class="section level3">
+<div id="section-18" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-17" class="anchor"></a>2017-07-02</h3>
+<a href="#section-18" class="anchor"></a>2017-07-02</h3>
 <ul>
 <li>Update wage and labour force data</li>
 <li>Fix breaking build due to change in dplyr API</li>
@@ -326,7 +466,14 @@ The default argument continues to result in SAPTO being not applied if <code>.do
 </ul>
 </div>
 
-      </div>
+      <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://codecov.io/github/HughParsonage/grattan?branch=master"><img src="https://codecov.io/gh/HughParsonage/grattan/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
+<li><a href="https://travis-ci.org/HughParsonage/grattan"><img src="https://travis-ci.org/HughParsonage/grattan.svg?branch=master" alt="Build Status"></a></li>
+</ul>
+</div>
+</div>
 
 </div>
 
