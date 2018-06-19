@@ -1257,16 +1257,29 @@ Grey <- function(fy) {
 
 ```{r Average-tax-rates-relative-201718-vs-Taxable-income-percentile-by-FY}
 sample_files_all %>%
-  .[, Over65 := coalesce(age_range <= 1L, Birth_year <= 1L)] %>%
-  .[, .(avg_tax_rate = mean(avg_tax_rate)), keyby = .(fy.year, Taxable_Income_percentile)] %>%
+  .[, .(avg_tax_rate = mean(avg_tax_rate)),
+    keyby = .(fy.year, Taxable_Income_percentile)] %>%
   setnames("fy.year", "fy_year") %>%
-  rbind(avg_tax_rates_by_percentile_facet_fy[, .SD, .SDcols = c("id", names(.))],
+  rbind(avg_tax_rates_by_percentile_facet_fy[.(c("Baseline", "Budget2018", "Current")),
+                                             .SD, 
+                                             .SDcols = c("id", names(.))],
         use.names = TRUE,
         fill = TRUE) %>%
   setkey(fy_year, Taxable_Income_percentile) %>%
   .[, z := fy_year %ein% "2017-18"] %>%
   .[, avg_tax_rate_rel := avg_tax_rate - median(avg_tax_rate[z]),
     keyby = .(Taxable_Income_percentile)] %>%
+  .[, is_max_hist := and(fy_year < "2017-18",
+                         avg_tax_rate_rel == max(avg_tax_rate_rel[fy_year < "2017-18"]))] %>%
+  .[, is_min_hist := and(fy_year < "2017-18",
+                         avg_tax_rate_rel == min(avg_tax_rate_rel[fy_year < "2017-18"]))] %T>%
+  .[, stopifnot(Taxable_Income_percentile[is_max_hist] < 30L,
+                fy_year[is_max_hist] == "2004-05",
+                avg_tax_rate_rel[is_max_hist] %between% c(0.06, 0.07),
+                
+                Taxable_Income_percentile[is_min_hist] %between% c(45, 55),
+                avg_tax_rate_rel[is_min_hist] %between% c(-0.05, -0.04),
+                fy_year[is_min_hist] == "2009-10")] %>%
 
   .[, colour := if_else(is.na(id),
                         grey(0.5), 
@@ -1278,18 +1291,21 @@ sample_files_all %>%
                                         gpal(6)[1],
                                         gpal(6)[2])))] %>%
   .[, alpha := if_else(is.na(id), 1.05 * scale01(fy2yr(fy_year)), 1)] %>%
-  .[fy_year %in% c("2004-05", "2013-14"), c("alpha", "colour") := list(0.8, "black")] %>%
+  .[fy_year %in% c("2004-05", "2009-10"), c("alpha", "colour") := list(0.8, "black")] %>%
   .[implies(!is.na(id), fy_year %in% c("2018-19", "2027-28"))] %>%
   .[, size := 0.8] %>%
-  .[fy_year %in% c("2004-05", "2013-14"), size := 1.1] %>%
+  .[fy_year %in% c("2004-05", "2009-10"), size := 1.1] %>%
   .[fy_year %in% c("2018-19", "2027-28"), size := 1.4] %>%
-  .[Taxable_Income_percentile == 50L & !is.na(id), label := paste0(id, "\n", as.character(fy_year))] %>% 
+  .[Taxable_Income_percentile == 50L & !is.na(id),
+    label := paste0(id, "\n", as.character(fy_year))] %>% 
   # .[Taxable_Income_percentile == 95L & !is.na(id), label := ""] %>%
   .[] %>%
   .[, group := paste0(fy_year, colour)] %>%
   .[, text := paste0(fy_year, " ", coalesce(id, ""), "\n",
                      formatC("Percentile: ", width = 24), Taxable_Income_percentile, "\n",
-                     formatC("Avg. tax rate (03-04 = 0):", width = 24), " ", 100 * round(avg_tax_rate_rel, 4))] %>%
+                     formatC("Avg. tax rate (17-18 = 0):", width = 24),
+                     " ",
+                     100 * round(avg_tax_rate_rel, 4))] %>%
   .[] %>%
   setnames("Taxable_Income_percentile", 
            "Taxable income percentile") %T>%
@@ -1303,17 +1319,17 @@ sample_files_all %>%
              text = text)) +
   annotate("label",
            x = 20,
-           y = 0.09, 
+           y = 0.07, 
            hjust = 1,
            label.size = NA,
-           label = "2003-04",
+           label = "2004-05",
            fontface = "bold") +
   annotate("label",
-           x = 25,
+           x = 45,
            y = -0.04,
            hjust = 1,
            label.size = NA,
-           label = "2013-14",
+           label = "2009-10",
            fontface = "bold") +
   scale_color_identity() +
   scale_size_identity() +
@@ -1866,6 +1882,7 @@ budget_pop_r <-
 ```
 
 Growth assumptions:
+
   * Number of taxpayers:
     * Deloitte: `r percent(deloitte_wage_r - 1)`
     * Budget: `r percent(budget_wage_r - 1)`
