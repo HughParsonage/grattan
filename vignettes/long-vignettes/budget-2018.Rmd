@@ -22,6 +22,7 @@ knitr::opts_chunk$set(
   dev = "svg",
   fig.path = "./Budget2018-atlas/"
 )
+cache <- TRUE
 if (FALSE) {
   if (interactive() && !is_knitting()) {
     stopifnot(file.exists("~/grattan/DESCRIPTION"))
@@ -241,41 +242,39 @@ print.revenue_foregone <- function(x, ...) {
 }
 ```
 
-```{r s1617, cache=TRUE}
-## ------------------------------------------------------------------------
-s1617 <- 
-  if (file.exists("~/ozTaxData/data-raw/2016_sample_file.csv")) {
-    sample_file_1516 <- fread("~/ozTaxData/data-raw/2016_sample_file.csv")
-    project(sample_file_1516, h = 1L, fy.year.of.sample.file = "2015-16")
+```{r get_near_term}
+#' @details 700ms vs 57ms
+get_near_term <- function(fy_year = c("2016-17", "2017-18", "2018-19")) {
+  fy_year <- match.arg(fy_year)
+  h <- as.integer(fy2yr(fy_year) - 2016L)
+  syyyy <- paste0(substr(fy_year, 3, 4), substr(fy_year, 6, 7))
+  if (cache && file.exists(syyyy.fst <- sprintf("budget-2018_cache/%s.fst", syyyy))) {
+    s <- read_fst(syyyy.fst, as.data.table = TRUE)
   } else {
-    project(sample_file_1415_synth, h = 2L)
+    s <- 
+      if (file.exists("~/ozTaxData/data-raw/2016_sample_file.csv")) {
+        sample_file_1516 <- fread("~/ozTaxData/data-raw/2016_sample_file.csv")
+        project(sample_file_1516, h = h , fy.year.of.sample.file = "2015-16")
+      } else {
+        project(sample_file_1415_synth, h = h + 1L, fy.year.of.sample.file = "2014-15")
+      }
+    s <- model_income_tax(s, "2017-18")
+    write_fst(s, syyyy.fst)
   }
-s1617 <- model_income_tax(s1617, "2016-17")
+}
 ```
 
-```{r s1718, cache=TRUE}
-## ------------------------------------------------------------------------
-s1718 <- 
-  if (file.exists("~/ozTaxData/data-raw/2016_sample_file.csv")) {
-    sample_file_1516 <- fread("~/ozTaxData/data-raw/2016_sample_file.csv")
-    project(sample_file_1516, h = 2L, fy.year.of.sample.file = "2015-16")
-  } else {
-    project(sample_file_1415_synth, h = 3L)
-  }
-s1718 <- model_income_tax(s1718, "2017-18")
+```{r s1617}
+s1617 <- get_near_term("2016-17")
+```
+
+```{r s1718}
+s1718 <- get_near_term("2017-18")
 ```
 
 
-```{r s1819, cache=TRUE}
-## ------------------------------------------------------------------------
-s1819 <- 
-  if (file.exists("~/ozTaxData/data-raw/2016_sample_file.csv")) {
-    sample_file_1516 <- fread("~/ozTaxData/data-raw/2016_sample_file.csv")
-    project(sample_file_1516, h = 3L, fy.year.of.sample.file = "2015-16")
-  } else {
-    project(sample_file_1415_synth, h = 4L)
-  } %>%
-  model_income_tax("2018-19")
+```{r s1819}
+s1819 <- get_near_term("2018-19")
 ```
 
 These tables come from the Budget papers and will be passed to `project` so that the uprating can be set with fixed values. (By default `project` forecasts the series using the `forecast` package.)
@@ -1753,7 +1752,8 @@ bound_models[.(yr2fy(2019:2025), "Budget2018")] %>%
 ```{r adult_population_projections}
 adult_population_projections <- 
   lapply(as.Date(paste0(2001:2016, "-06-30")), aus_pop_qtr_age, age = 18:100, tbl = TRUE) %>%
-  rbindlist %>% .[, .(pop = sum(Value)), keyby = "Date"] %$% 
+  rbindlist %>% 
+  .[, .(pop = sum(Value)), keyby = "Date"] %$% 
   forecast::forecast(pop, h = 12) %>%
   as.data.frame %>%
   dplyr::mutate(YR = as.integer(rownames(.)) + 2000L) %>%
@@ -1789,6 +1789,8 @@ adult_population_projections %>%
 ```{r comparison-deloitte-ntaxpayers}
 s1516 <- copy(sample_file_1516)[, tax := income_tax(Taxable_Income, "2015-16", .dots.ATO = .SD)]
 n_taxpayers_1516 <- s1516[tax > 1, .N * 50]
+n_taxpayers_1718 <- s1718[tax > 1, sum(WEIGHT)]
+
 
 v <- (1 / (2025 - 2016))
 deloitte_wage_r <- (11.6e6 / n_taxpayers_1516) ^ v
