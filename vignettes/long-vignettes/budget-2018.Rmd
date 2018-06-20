@@ -412,6 +412,16 @@ medicare_levy_lower_up_for_each_child <- function(fy) {
 .project_useGrattans <- lapply(1:13, .project_to, use.Treasury = FALSE)
 ```
 
+```{r s2425_Treasury}
+if (file.exists("budget-2018_cache/s2425_Treasury.fst")) {
+  s2425_Treasury <- read_fst("budget-2018_cache/s2425_Treasury.fst", 
+                             as.data.table = TRUE)
+} else {
+  s2425_Treasury <- .project_useTreasurys[[2025L - 2016L]]
+  write_fst(s2425_Treasury, "budget-2018_cache/s2425_Treasury.fst")
+}
+```
+
 ```{r wage_r80}
 wage_r80 <- 
   data.table(fy_year = yr2fy(c(2017:2028)),
@@ -1407,11 +1417,10 @@ sample_files_all %>%
 
 ```{r ALP-proposal-201920-vs-taxable-income}
 bound_models %>%
-  .[id == "ALP2018"] %>%
+  .[.("2019-20", "ALP2018")] %>%
   .[, tax_saving := baseline_tax - new_tax] %>%
   .[Taxable_Income <= 300e3] %>%
-  .[fy_year %ein% "2019-20"] %>%
-  .[age_range > 1] %>%
+  .[age_range > 1L] %>%
   .[, .(tax_saving = mean(tax_saving)),
     keyby = .(fy_year, Taxable_Income = round(Taxable_Income, -3))] %T>%
   fwrite("ALP-proposal-201920-vs-taxable-income.csv") %>%
@@ -1454,7 +1463,7 @@ list(
 ```{r progressivity_80}
 progressivity_80 <- 
   bound_models_Grattan80 %>%
-  .[id == "Budget2018"] %>%
+  .[.(unique(fy_year), "Budget2018")] %>%
   .[, .(progressivity = progressivity(Taxable_Income, new_tax)), keyby = c("fy_year")] %>%
   .[]
 ```
@@ -1462,7 +1471,7 @@ progressivity_80 <-
 ```{r progressivity_20}
 progressivity_20 <- 
   bound_models_Grattan20 %>%
-  .[id == "Budget2018"] %>%
+  .[.(unique(fy_year), "Budget2018")] %>%
   .[, .(progressivity = progressivity(Taxable_Income, new_tax)), keyby = c("fy_year")] %>%
   .[]
 ```
@@ -1563,7 +1572,7 @@ alternative %>%
   geom_line()
 
 baseline_share <- 
-  bound_models[id == "Budget2018_baseline" & fy_year == "2027-28"] %>%
+  bound_models[.("2027-28", "Budget2018_baseline")] %>%
   .[, .(total_delta = sum(delta)), keyby = .(Taxable_Income_percentile = ntile(Taxable_Income, 10))] %>%
   .[, prop := total_delta / sum(total_delta)] 
 
@@ -1652,10 +1661,16 @@ avg_tax_by_decile_allpersons201718 <-
   .[, share := round(total / sum(total), 3)] %T>%
   fwrite("avg_tax_by_decile_allpersons201718.csv") %>%
   .[]
+```
 
+
+
+```{r wt_rel1718v202425}
 wt_rel1718v202425 <- 
-  .project_useTreasurys[[2025-2016]][1][["WEIGHT"]] / s1718[1][["WEIGHT"]]
+  s2425_Treasury[, first(WEIGHT)] / s1718[, first(WEIGHT)]
+```
 
+```{r avg_tax_by_decile_allpersons202425}
 avg_tax_by_decile_allpersons202425 <- 
   bound_models[.("2027-28", "Budget2018")] %>%
   rbind(data.table(new_tax = 0,
@@ -1670,10 +1685,14 @@ avg_tax_by_decile_allpersons202425 <-
   .[, share := round(total / sum(total), 3)] %T>%
   fwrite("avg_tax_by_decile_allpersons202425.csv") %>%
   .[]
+```
 
+```{r wt_rel1718v202728}
 wt_rel1718v202728 <- 
   .project_useTreasurys[[12]][1][["WEIGHT"]] / s1718[1][["WEIGHT"]]
+```
 
+```{r avg_tax_by_decile_allpersons202728}
 avg_tax_by_decile_allpersons202728 <- 
   bound_models[.("2027-28", "Budget2018")] %>%
   rbind(data.table(new_tax = 0,
@@ -1688,9 +1707,6 @@ avg_tax_by_decile_allpersons202728 <-
   .[, share := round(total / sum(total), 3)] %T>%
   fwrite("avg_tax_by_decile_allpersons202728.csv") %>%
   .[]
-
-
-
 ```
 
 ```{r allpersonsquintiles}
@@ -1922,12 +1938,30 @@ s2425_Deloitte_LF_growth %>%
 
 ```
 
+```{r minIncome_by_Quintile_Deloitte_method201718}
+minIncome_by_Quintile_Deloitte_method201718 <-
+  avg_tax_by_decile_allpersons201718 %>%
+  .[, .(minIncome = round(min(min_income), -3)),
+    keyby = .(Quintile = {{Taxable_Income_decile - 1L} %/% 2L} + 1L)]
+fwrite(minIncome_by_Quintile_Deloitte_method201718, 
+       "minIncome_by_Quintile_Deloitte_method201718.csv")
+```
+
+```{r minIncome_by_Quintile_Deloitte_method202425}
+minIncome_by_Quintile_Deloitte_method202425 <-
+  avg_tax_by_decile_allpersons202425 %>%
+  .[, .(minIncome = round(min(min_income), -3)),
+    keyby = .(Quintile = {{Taxable_Income_decile - 1L} %/% 2L} + 1L)]
+fwrite(minIncome_by_Quintile_Deloitte_method202425, 
+       "minIncome_by_Quintile_Deloitte_method202425.csv")
+```
+
 
 ## JD 'How not to sell a tax cut'
 
 ```{r p_geq_120k_202728}
 p_geq_120k_202728 <- 
-  bound_models[fy_year == "2027-28" & id == "Budget2018"] %$%
+  bound_models[.("2027-28", "Budget2018")] %$%
   mean(Taxable_Income > 120e3)
 stopifnot(round(p_geq_120k_202728, 1) == 0.2)
 ```
