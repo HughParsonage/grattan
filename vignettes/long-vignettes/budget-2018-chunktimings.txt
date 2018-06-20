@@ -1,7 +1,7 @@
   0.0	RUNTIME-CHECKS
   0.1	fwrite
   0.0	grattan_percent
-  0.4	loadPackages
+  0.5	loadPackages
   0.0	loadGrattan
   0.0	clarify-namespace
   0.0	loadTaxstats
@@ -11,75 +11,79 @@
   0.0	revenue_foregone
   0.0	get_near_term
   0.1	s1617
-  0.2	s1718
+  0.1	s1718
   0.1	s1819
+  0.0	unique_fy_year
   0.0	wage_forecasts
   0.0	lf_forecasts
   0.0	ordinary_tax_rates
   0.0	ordinary_tax_thresholds
   0.0	do_medicare_levy
   0.1	s2425_Treasury
-  0.5	wage_r80
+  0.1	s2728_Treasury
+  0.4	wage_r80
   0.0	wage_r20
   0.0	model_Budgets
   0.0	ntilers
   0.0	percentile2quintile
   0.0	rowname2column
   0.0	bind_Budget2018_models
-  5.0	bound_models
-  1.8	bound_models_Grattan
-  2.0	bound_models_Grattan80
+  1.8	bound_models
+  1.9	bound_models_Grattan
+  1.9	bound_models_Grattan80
   1.8	bound_models_Grattan20
-  1.9	bound_models_Grattan2.75
+  1.8	bound_models_Grattan2.75
   0.0	Budget-summaries
   0.0	Budget-summaries-Grattan
   0.0	Budget-summaries-Grattan-80
   0.0	Budget-summaries-Grattan-20
   3.2	avg_individual_impact_by_Quintile_fy
-  1.0	avg_individual_impact_by_Quintile_fy__2.75
-  0.5	Brackets
-  1.3	avg_individual_impact_by_Bracket_fy
-  1.4	Total-revenue-vs-fy-by-incomes-above
+  0.6	avg_individual_impact_by_Quintile_fy__2.75
+  0.2	Brackets
+  1.0	avg_individual_impact_by_Bracket_fy
+  1.0	Total-revenue-vs-fy-by-incomes-above
   0.1	cost_in_202728
   0.0	minIncome_by_decile
-  3.6	avg_tax_rates_by_percentile_facet_fy
+  1.3	avg_tax_rates_by_percentile_facet_fy
   0.3	avg_tax_rates_by_percentile_Budget_202728_vs_201718
-  0.5	avg_tax_rates_by_percentile_Budget_202728_vs_201718_with_PI
+  0.7	avg_tax_rates_by_percentile_Budget_202728_vs_201718_with_PI
   0.0	decile2income
   0.0	texNumD
   0.0	Qfy2Cut
+  0.0	avgTaxRate50
   0.0	to_prop
-  0.4	provide-tax-s1718
+  0.0	provide-tax-s1718
   0.2	share-total-pit-by-decile
   0.2	share-total-pit-by-decile-275
   0.0	share-total-personal-income-tax-per-decile
   0.0	scale01
   0.0	Grey
-  0.6	Average-tax-rates-relative-201718-vs-Taxable-income-percentile-by-FY
-  1.8	avg_tax_rate_by_percentile_fy_year_rel0304
+  0.5	Average-tax-rates-relative-201718-vs-Taxable-income-percentile-by-FY
+  1.5	avg_tax_rate_by_percentile_fy_year_rel0304
   0.3	ALP-proposal-201920-vs-taxable-income
-  5.4	progressivities
-  0.9	progressivity_80
-  0.9	progressivity_20
-  0.7	progressivity2.75
-  0.5	progressivity2-75-plot
-  4.9	avg_tax_rates_by_percentile_facet_fy_historical
-  2.5	s202728_in_1920
-  0.5	budget2018-total-revenue-vs-fy-by-quintile.csv
+  2.9	progressivities
+  0.6	progressivity_80
+  0.6	progressivity_20
+  0.4	progressivity2.75
+  0.4	progressivity2-75-plot
+  1.9	avg_tax_rates_by_percentile_facet_fy_historical
+  2.1	s202728_in_1920
+  0.3	budget2018-total-revenue-vs-fy-by-quintile.csv
   0.0	revenue_foregone2018-19-bracket-creep
-  0.5	avg_tax_rate_by_percentile_brackets_cpi
+  0.2	avg_tax_rate_by_percentile_brackets_cpi
   0.0	non_taxable_individuals
   0.0	taxable_individuals_1718
   0.0	avg_tax_by_decile_allpersons201718
   0.0	wt_rel1718v202425
+  0.0	wt_rel1718v202728
   0.1	avg_tax_by_decile_allpersons202425
-  6.4	wt_rel1718v202728
   0.1	avg_tax_by_decile_allpersons202728
-  0.0	allpersonsquintiles
-  0.2	decile201718
+  0.0	avg_tax_by_quintile_allpersons201718
+  0.0	avg_tax_by_quintile_allpersons202425
+  0.1	decile201718
   0.1	prop-tax-paid-deloitte-technique-202425
   0.1	prop-tax-paid-deloitte-technique-202728
-  4.8	s2728_various_wages
+  0.0	s2728_various_wages
   0.6	comparison-wage-assumptions
   0.4	prop_tax_paid_before_2025
   0.4	adult_population_projections
@@ -89,7 +93,7 @@
   0.0	minIncome_by_Quintile_Deloitte_method201718
   0.0	minIncome_by_Quintile_Deloitte_method202425
   0.0	p_geq_120k_202728
-  0.1	current_tax_paid_geq_180k
+  0.2	current_tax_paid_geq_180k
   0.1	prop_tax_earnt_by_quintile_201718
-  1.7	bound_models_with_timings
+  1.1	bound_models_with_timings
   0.5	session_info

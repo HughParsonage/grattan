@@ -22,6 +22,7 @@ knitr::opts_chunk$set(
   dev = "svg",
   fig.path = "./Budget2018-atlas/"
 )
+options("warn" = 2)
 if (!exists("cache")) {
   library(magrittr)
   library(hutils)
@@ -305,6 +306,7 @@ get_near_term <- function(fy_year = c("2016-17", "2017-18", "2018-19")) {
         project(sample_file_1415_synth, h = h + 1L, fy.year.of.sample.file = "2014-15")
       }
     s <- model_income_tax(s, "2017-18")
+    s[, Taxable_Income_percentile := ntile(Taxable_Income, 100)]
     write_fst(s, syyyy.fst)
   }
 }
@@ -321,6 +323,11 @@ s1718 <- get_near_term("2017-18")
 
 ```{r s1819}
 s1819 <- get_near_term("2018-19")
+```
+
+```{r unique_fy_year}
+# Used throughout: takes 0.25s of each query, improves consistency
+unique_fy_year <- yr2fy(2019:2028)
 ```
 
 These tables come from the Budget papers and will be passed to `project` so that the uprating can be set with fixed values. (By default `project` forecasts the series using the `forecast` package.)
@@ -422,6 +429,16 @@ if (file.exists("budget-2018_cache/s2425_Treasury.fst")) {
 }
 ```
 
+```{r s2728_Treasury}
+if (file.exists("budget-2018_cache/s2728_Treasury.fst")) {
+  s2728_Treasury <- read_fst("budget-2018_cache/s2728_Treasury.fst", 
+                             as.data.table = TRUE)
+} else {
+  s2728_Treasury <- .project_useTreasurys[[2028L - 2016L]]
+  write_fst(s2728_Treasury, "budget-2018_cache/s2728_Treasury.fst")
+}
+```
+
 ```{r wage_r80}
 wage_r80 <- 
   data.table(fy_year = yr2fy(c(2017:2028)),
@@ -461,6 +478,7 @@ wage_r20 <-
   project(sample_file_1516, h = h, wage.series = 0.0275)
 })
 ```
+
 
 ```{r model_Budgets}
 #' @param level Prediction interval level.
@@ -607,8 +625,8 @@ bind_Budget2018_models <- function(chunk, .cache = cache, ...) {
   if (file.exists(x.fst <- sprintf("budget-2018_cache/%s.fst", chunk)) && .cache) {
     read_fst(x.fst, as.data.table = TRUE)
   } else {
-    Budget_1922 <- lapply(yr2fy(2019:2028), model_Budgets, ...)
-    names(Budget_1922) <- yr2fy(2019:2028)
+    Budget_1922 <- lapply(unique_fy_year, model_Budgets, ...)
+    names(Budget_1922) <- unique_fy_year
     
     if (is_knitting()) {
       revenue_fy_year <- 
@@ -647,19 +665,19 @@ bind_Budget2018_models <- function(chunk, .cache = cache, ...) {
 
 ```{r bound_models, cache=FALSE}
 bound_models <- bind_Budget2018_models("bound_models")
-
-bound_models[id %in% c("Budget2018", "Budget2018_Step1and2", "Budget2018_baseline"),
-             .SD,
-             .SDcols = c("id",
-                         "fy_year",
-                         "delta",
-                         "WEIGHT",
-                         "Taxable_Income", 
-                         "new_tax", 
-                         "baseline_tax")] %>%
-  fst::write_fst(path = "~/Budget-2018-Senate-submission/data/bound-models.fst", 
-                 compress = 100)
-
+if (!cache) {
+  bound_models[id %in% c("Budget2018", "Budget2018_Step1and2", "Budget2018_baseline"),
+               .SD,
+               .SDcols = c("id",
+                           "fy_year",
+                           "delta",
+                           "WEIGHT",
+                           "Taxable_Income", 
+                           "new_tax", 
+                           "baseline_tax")] %>%
+    fst::write_fst(path = "~/Budget-2018-Senate-submission/data/bound-models.fst", 
+                   compress = 100)
+}
 ```
 
 
@@ -718,10 +736,10 @@ avg_individual_impact_by_Quintile_fy <-
   .[, Quintile := factor(.ntile(Taxable_Income, 5), levels = 1:5),
     keyby = .(fy_year, id)] %>%
   .[, .(avg_delta = mean(delta),
-            max_income = max(Taxable_Income),
-            min_income = min(Taxable_Income),
-            avg_income = mean(Taxable_Income + 0)),
-        keyby = .(id, fy_year, Quintile)] %>%
+        max_income = max(Taxable_Income),
+        min_income = min(Taxable_Income),
+        avg_income = mean(Taxable_Income + 0)),
+    keyby = .(id, fy_year, Quintile)] %>%
   .[, "Financial year ending" := fy2yr(fy_year)] %>%
   .[, avg_delta := round(avg_delta, 2)] %T>%
   fwrite("avg_individual_impact_by_Quintile_fy.csv") %>%
@@ -743,7 +761,7 @@ avg_individual_impact_by_Quintile_fy %>%
 ```{r avg_individual_impact_by_Quintile_fy__2.75}
 avg_individual_impact_by_Quintile_fy__2.75 <- 
   bound_models_Grattan2.75 %>%
-  .[.(unique(fy_year), "Budget2018"),
+  .[.(unique_fy_year, "Budget2018"),
     .(avg_delta = mean(delta),
       max_income = max(Taxable_Income),
       min_income = min(Taxable_Income),
@@ -773,7 +791,7 @@ avg_individual_impact_by_Quintile_fy__2.75 %>%
 
 ```{r Brackets}
 Brackets <- 
-  bound_models[.(unique(fy_year), "Budget2018"), 
+  bound_models[.(unique_fy_year, "Budget2018"), 
                .(Breaks = c(0, 37e3, 41e3, 87e3, 90e3, 120e3, 180e3, 200e3)),
                keyby = c("fy_year", "id")]%>%
   .[, Taxable_Income := as.integer(Breaks)] %>%
@@ -783,7 +801,7 @@ Brackets <-
 ```{r avg_individual_impact_by_Bracket_fy}
 avg_individual_impact_by_Bracket_fy <-
   # Match every taxable income with the correct bracket
-  Brackets[setkey(bound_models[.(unique(fy_year), "Budget2018"),
+  Brackets[setkey(bound_models[.(unique_fy_year, "Budget2018"),
                                .(fy_year, id, Taxable_Income, delta)],
                   fy_year, id, Taxable_Income),
            roll=TRUE,
@@ -811,7 +829,7 @@ avg_individual_impact_by_Bracket_fy %>%
 ```
 
 ```{r Total-revenue-vs-fy-by-incomes-above}
-Brackets[setkey(bound_models[.(unique(fy_year), "Budget2018"),
+Brackets[setkey(bound_models[.(unique_fy_year, "Budget2018"),
                              .(fy_year, id, Taxable_Income,
                                total_delta = delta * WEIGHT / 1e9)],
                 fy_year, id, Taxable_Income),
@@ -858,7 +876,7 @@ avg_tax_rates_by_percentile_facet_fy <-
     list(
       "Budget2018" = {
         bound_models %>%
-          .[.(unique(fy_year), "Budget2018"),
+          .[.(unique_fy_year, "Budget2018"),
             .(avg_tax_rate = mean(coalesce(new_tax / Taxable_Income, 0)),
               avg_tax_bill = mean(new_tax),
               total_tax = sum(new_tax * WEIGHT / 1e9),
@@ -870,7 +888,7 @@ avg_tax_rates_by_percentile_facet_fy <-
       },
       "Grattan 20%" = {
         bound_models_Grattan20 %>%
-          .[.(unique(fy_year), "Budget2018"),
+          .[.(unique_fy_year, "Budget2018"),
             .(avg_tax_rate = mean(coalesce(new_tax / Taxable_Income, 0)),
               avg_tax_bill = mean(new_tax),
               total_tax = sum(new_tax * WEIGHT / 1e9),
@@ -882,7 +900,7 @@ avg_tax_rates_by_percentile_facet_fy <-
       },
       "Grattan 80%" = {
         bound_models_Grattan80 %>%
-          .[.(unique(fy_year), "Budget2018"),
+          .[.(unique_fy_year, "Budget2018"),
             .(avg_tax_rate = mean(coalesce(new_tax / Taxable_Income, 0)),
               avg_tax_bill = mean(new_tax),
               total_tax = sum(new_tax * WEIGHT / 1e9),
@@ -894,7 +912,7 @@ avg_tax_rates_by_percentile_facet_fy <-
       },
       
       "Baseline" = {
-        bound_models[.(unique(fy_year), "Budget2018_baseline"),
+        bound_models[.(unique_fy_year, "Budget2018_baseline"),
           .(avg_tax_rate = mean(coalesce(new_tax / Taxable_Income, 0)),
             avg_tax_bill = mean(new_tax),
             total_tax = sum(new_tax * WEIGHT / 1e9),
@@ -913,7 +931,7 @@ avg_tax_rates_by_percentile_facet_fy <-
                 max_income = max(Taxable_Income),
                 total_tax = sum(new_tax * WEIGHT / 1e9),
                 avg_income = mean(Taxable_Income + 0)), 
-              keyby = .(Taxable_Income_percentile = weighted_ntile(Taxable_Income, n = 100))] %>%
+              keyby = .(Taxable_Income_percentile)] %>%
           .[, facet := "2017-18"] %>%
           .[, fy_year :=  "2017-18"]
       }),
@@ -921,7 +939,7 @@ avg_tax_rates_by_percentile_facet_fy <-
     idcol = "id")
   } %>% 
   .[, "Financial year ending" := fy2yr(fy_year)] %>%
-  setkey(id, fy_year, Taxable_Income_percentile) %>%
+  setkey(fy_year, id, Taxable_Income_percentile) %>%
   .[, avg_tax_rate := round(avg_tax_rate, 3)] %>%
   .[, total_tax := round(total_tax, 3)] %>%
   setnames("total_tax", "total_tax_bn") %T>%
@@ -931,8 +949,8 @@ avg_tax_rates_by_percentile_facet_fy <-
 
 ```{r avg_tax_rates_by_percentile_Budget_202728_vs_201718}
 avg_tax_rates_by_percentile_facet_fy %>%
-  .[facet %in% c("Baseline", "Budget 2018", "2017-18")] %>%
-  .[fy_year %in% range(fy_year)] %T>%
+  .[.(c("2017-18", "2027-28"))] %>%
+  .[facet %in% c("Baseline", "Budget 2018", "2017-18")] %T>%
   {
     dot <- .
     dot[, .(facet, fy_year, Taxable_Income_percentile, avg_tax_rate)] %>%
@@ -964,10 +982,10 @@ avg_tax_rates_by_percentile_facet_fy %>%
 
 ```{r avg_tax_rates_by_percentile_Budget_202728_vs_201718_with_PI}
 avg_tax_rates_by_percentile_facet_fy %>%
+  .[.(c("2017-18", "2027-28"))] %>%
   .[facet %in% c("Baseline", "Budget 2018", "2017-18", 
                  "Budget 2018 (20% wage forecast)", 
                  "Budget 2018 (80% wage forecast)")] %>%
-  .[fy_year %in% range(fy_year)] %>%
   .[avg_tax_rate > 0] %>%
   .[, labeli := which.max(avg_tax_rate > 0.15), keyby = "facet"] %>%
   .[, i := seq_len(.N), keyby = "facet"] %>%
@@ -1071,7 +1089,12 @@ plan.
 # Quintile and financial year to tax cut
 Qfy2Cut <- function(Quintile, fy) {
   q <- factor(as.integer(Quintile), levels = 1:5)
-  ans <- -1*avg_individual_impact_by_Quintile_fy[.(fy, q)][["avg_delta"]]
+  stopifnot(haskey(avg_individual_impact_by_Quintile_fy), 
+            identical(key(avg_individual_impact_by_Quintile_fy), 
+                      c("id", "fy_year", "Quintile")), 
+            length(fy) == 1L, 
+            length(q) == 1L)
+  ans <- -1*avg_individual_impact_by_Quintile_fy[.("Budget2018", fy, q), avg_delta]
   grattan_dollar(round(ans, -2))
 }
 ```
@@ -1098,15 +1121,26 @@ from bracket creep. Certainly the plan reduces average tax rates in
 2027-28 for all taxpayers compared to what they would be if there were
 no changes to rates or brackets over that period.
 
+```{r avgTaxRate50}
+avgTaxRate50 <- function(id, fy) {
+  stopifnot(identical(key(avg_tax_rates_by_percentile_facet_fy), 
+                      c("fy_year", "id", "Taxable_Income_percentile")),
+            length(id) == 1L,
+            length(fy) == 1L, 
+            "avg_tax_rate" %in% names(avg_tax_rates_by_percentile_facet_fy))
+  avg_tax_rates_by_percentile_facet_fy[.(fy, id, 50L), avg_tax_rate]
+}
+```
+
 But middle-income earners are not spared from bracket creep under the
 PIT plan. The average tax rate for a taxpayer at the 50^th^ percentile
 will still increase by 
-`r round(100 * (avg_tax_rates_by_percentile_facet_fy[.("Budget2018", "2027-28", 50L)][['avg_tax_rate']] - avg_tax_rates_by_percentile_facet_fy[.("Current", "2017-18", 50L)][['avg_tax_rate']]))`
+`r round(100 * (avgTaxRate50("Budget2018", "2027-28") - avgTaxRate50("Current", "2017-18")))`
 percentage points
 (from 
-`r avg_tax_rates_by_percentile_facet_fy[.("Current", "2017-18", 50L)][['avg_tax_rate']] %>% percent`
+`r percent(avgTaxRate50("Current", "2017-18"))`
 to 
-`r avg_tax_rates_by_percentile_facet_fy[.("Budget2018", "2027-28", 50L)][['avg_tax_rate']] %>% percent`
+`r percent(avgTaxRate50("Budget2018", "2027-28"))`
 )
 compared to
 2017-18. Without further changes, average tax rates will be higher for
@@ -1270,9 +1304,11 @@ sample_files_all %>%
   .[, .(avg_tax_rate = mean(avg_tax_rate)),
     keyby = .(fy.year, Taxable_Income_percentile)] %>%
   setnames("fy.year", "fy_year") %>%
-  rbind(avg_tax_rates_by_percentile_facet_fy[.(c("Baseline", "Budget2018", "Current")),
+  rbind(avg_tax_rates_by_percentile_facet_fy[CJ(unique(fy_year),
+                                               c("Baseline", "Budget2018", "Current")),
                                              .SD, 
-                                             .SDcols = c("id", names(.))],
+                                             .SDcols = c("id", names(.)),
+                                             nomatch=0L],
         use.names = TRUE,
         fill = TRUE) %>%
   setkey(fy_year, Taxable_Income_percentile) %>%
@@ -1325,8 +1361,7 @@ sample_files_all %>%
   grplot(aes(x = `Taxable income percentile`,
              y = avg_tax_rate_rel,
              colour = colour,
-             group = group,
-             text = text)) +
+             group = group)) +
   annotate("label",
            x = 20,
            y = 0.07, 
@@ -1424,6 +1459,7 @@ bound_models %>%
   .[, .(tax_saving = mean(tax_saving)),
     keyby = .(fy_year, Taxable_Income = round(Taxable_Income, -3))] %T>%
   fwrite("ALP-proposal-201920-vs-taxable-income.csv") %>%
+  .[Taxable_Income %between% c(0, 225e3)] %>%
   grplot(aes(x = Taxable_Income, y = tax_saving, color = fy_year)) + 
   geom_line() +
   scale_x_continuous("Taxable income", labels = grattan_dollar, limits = c(0, 225e3)) 
@@ -1436,13 +1472,13 @@ bound_models %>%
 list(
   {
     sample_files_all %>%
-      .[, .(new_tax = tax), keyby = .(fy_year = fy.year, Taxable_Income)] %>%
-      .[, id := "Current"] %>%
+      .[, .(id = "Current", fy_year = fy.year, Taxable_Income, new_tax = tax)] %>%
       .[]
   },
-  bound_models[, .(id, fy_year, Taxable_Income, new_tax)],
+  s1617[, .(id = "Current", fy_year = "2016-17", Taxable_Income, new_tax)],
   s1718[, .(id = "Current", fy_year = "2017-18", Taxable_Income, new_tax)],
-  s1617[, .(id = "Current", fy_year = "2016-17", Taxable_Income, new_tax)]
+  bound_models[CJ(unique_fy_year, c("Budget2018", "Budget2018_baseline", "ALP2018")),
+               .(id, fy_year, Taxable_Income, new_tax)]
 ) %>%
   rbindlist(use.names = TRUE,
             fill = TRUE)  %>%
@@ -1463,7 +1499,7 @@ list(
 ```{r progressivity_80}
 progressivity_80 <- 
   bound_models_Grattan80 %>%
-  .[.(unique(fy_year), "Budget2018")] %>%
+  .[.(unique_fy_year, "Budget2018")] %>%
   .[, .(progressivity = progressivity(Taxable_Income, new_tax)), keyby = c("fy_year")] %>%
   .[]
 ```
@@ -1471,7 +1507,7 @@ progressivity_80 <-
 ```{r progressivity_20}
 progressivity_20 <- 
   bound_models_Grattan20 %>%
-  .[.(unique(fy_year), "Budget2018")] %>%
+  .[.(unique_fy_year, "Budget2018")] %>%
   .[, .(progressivity = progressivity(Taxable_Income, new_tax)), keyby = c("fy_year")] %>%
   .[]
 ```
@@ -1479,7 +1515,7 @@ progressivity_20 <-
 ```{r progressivity2.75}
 progressivity2.75 <- 
   bound_models_Grattan2.75 %>%
-  .[.(unique(fy_year), "Budget2018"),
+  .[.(unique_fy_year, "Budget2018"),
     .(progressivity = progressivity(Taxable_Income, new_tax)),
     keyby = c("fy_year")] %>%
   .[, id := "Wages @ 2.75%"] %>%
@@ -1508,18 +1544,17 @@ avg_tax_rates_by_percentile_facet_fy_historical <-
   list(
   {
     sample_files_all %>%
-      .[, .(new_tax = tax), keyby = .(fy_year = fy.year, Taxable_Income)] %>%
+      .[, .(fy_year = fy.year, Taxable_Income, Taxable_Income_percentile, new_tax = tax)] %>%
       .[, id := "Current"] %>%
+      set_cols_first("id") %>%
       .[]
   },
-  bound_models[, .(id, fy_year, Taxable_Income, new_tax)],
-  s1718[, .(id = "Current", fy_year = "2017-18", Taxable_Income, new_tax)],
-  s1617[, .(id = "Current", fy_year = "2016-17", Taxable_Income, new_tax)]
+  s1718[, .(id = "Current", fy_year = "2017-18", Taxable_Income, Taxable_Income_percentile, new_tax)],
+  s1617[, .(id = "Current", fy_year = "2016-17", Taxable_Income, Taxable_Income_percentile, new_tax)],
+  bound_models[, .(id, fy_year, Taxable_Income, Taxable_Income_percentile, new_tax)]
 ) %>%
   rbindlist(use.names = TRUE,
             fill = TRUE) %>%
-  .[, Taxable_Income_percentile := ntile(Taxable_Income, 100),
-    keyby = .(id, fy_year)] %>%
   .[, new_avg_tax_rate := coalesce(new_tax / Taxable_Income, 0)] %>%
   .[, .(new_avg_tax_rate = mean(new_avg_tax_rate)), 
     keyby = .(fy_year, id, Taxable_Income_percentile)] %>%
@@ -1572,8 +1607,9 @@ alternative %>%
   geom_line()
 
 baseline_share <- 
-  bound_models[.("2027-28", "Budget2018_baseline")] %>%
-  .[, .(total_delta = sum(delta)), keyby = .(Taxable_Income_percentile = ntile(Taxable_Income, 10))] %>%
+  bound_models[.("2027-28", "Budget2018_baseline"),
+               .(total_delta = sum(delta)),
+               keyby = .(Taxable_Income_percentile)] %>%
   .[, prop := total_delta / sum(total_delta)] 
 
 govt_share <- 
@@ -1586,7 +1622,7 @@ govt_share <-
 
 alternative_share <- 
   alternative %>%
-  .[, .(total_delta = sum(delta)), keyby = .(Taxable_Income_percentile = ntile(Taxable_Income, 10))] %>%
+  .[, .(total_delta = sum(delta)), keyby = .(Decile = ntile(Taxable_Income, 10))] %>%
   .[, prop := total_delta / sum(total_delta)] %>%
   fwrite("prop-share-tax-benefit-alternative-by-decile.csv")
 
@@ -1603,7 +1639,7 @@ alternative %>%
 
 ```{r budget2018-total-revenue-vs-fy-by-quintile.csv}
 bound_models %>%
-  .[.(unique(fy_year), "Budget2018"),  
+  .[.(unique_fy_year, "Budget2018"),  
     .(total_delta_bn = sum((new_tax - baseline_tax) * WEIGHT / 1e9), 
       max_income = max(Taxable_Income),
       min_income = min(Taxable_Income), 
@@ -1622,7 +1658,7 @@ print(revenue_foregone(bound_models[.("2018-19", "Baseline_brackets_cpi")]))
 
 ```{r avg_tax_rate_by_percentile_brackets_cpi}
 avg_tax_rate_by_percentile_brackets_cpi <-
-  bound_models[.(unique(fy_year), "Baseline_brackets_cpi"),
+  bound_models[.(unique_fy_year, "Baseline_brackets_cpi"),
                .(fy_year, Taxable_Income, new_tax, Taxable_Income_percentile)] %>%
   .[, avg_tax_rate := coalesce(new_tax / Taxable_Income, 0)] %>%
   .[, .(avg_tax_rate = mean(avg_tax_rate)), 
@@ -1663,16 +1699,18 @@ avg_tax_by_decile_allpersons201718 <-
   .[]
 ```
 
-
-
 ```{r wt_rel1718v202425}
-wt_rel1718v202425 <- 
-  s2425_Treasury[, first(WEIGHT)] / s1718[, first(WEIGHT)]
+wt_rel1718v202425 <- s2425_Treasury[, first(WEIGHT)] / s1718[, first(WEIGHT)]
+```
+
+```{r wt_rel1718v202728}
+wt_rel1718v202728 <- s2728_Treasury[, first(WEIGHT)] / s1718[, first(WEIGHT)]
 ```
 
 ```{r avg_tax_by_decile_allpersons202425}
 avg_tax_by_decile_allpersons202425 <- 
-  bound_models[.("2027-28", "Budget2018")] %>%
+  bound_models[.("2027-28", "Budget2018"),
+               .(new_tax, baseline_tax, Taxable_Income, WEIGHT)] %>%
   rbind(data.table(new_tax = 0,
                    baseline_tax = 0,
                    Taxable_Income = 0L,
@@ -1681,20 +1719,19 @@ avg_tax_by_decile_allpersons202425 <-
   .[, Taxable_Income_decile := weighted_ntile(Taxable_Income, WEIGHT, 10)] %>%
   .[, .(total = sum(new_tax), 
         min_income = min(Taxable_Income),
-        tot_adults = sum(WEIGHT)), keyby = "Taxable_Income_decile"] %>%
+        tot_adults = sum(WEIGHT)),
+    keyby = "Taxable_Income_decile"] %>%
   .[, share := round(total / sum(total), 3)] %T>%
   fwrite("avg_tax_by_decile_allpersons202425.csv") %>%
   .[]
 ```
 
-```{r wt_rel1718v202728}
-wt_rel1718v202728 <- 
-  .project_useTreasurys[[12]][1][["WEIGHT"]] / s1718[1][["WEIGHT"]]
-```
+
 
 ```{r avg_tax_by_decile_allpersons202728}
 avg_tax_by_decile_allpersons202728 <- 
-  bound_models[.("2027-28", "Budget2018")] %>%
+  bound_models[.("2027-28", "Budget2018"),
+                .(new_tax, baseline_tax, Taxable_Income, WEIGHT)] %>%
   rbind(data.table(new_tax = 0,
                    baseline_tax = 0,
                    Taxable_Income = 0L,
@@ -1709,14 +1746,16 @@ avg_tax_by_decile_allpersons202728 <-
   .[]
 ```
 
-```{r allpersonsquintiles}
+```{r avg_tax_by_quintile_allpersons201718}
 avg_tax_by_quintile_allpersons201718 <- 
   avg_tax_by_decile_allpersons201718 %>%
   .[, .(total = sum(total)), keyby = .(Quintile = ceiling(Taxable_Income_decile / 2))] %>%
   .[, share := total / sum(total)] %T>%
   fwrite("avg_tax_by_quintile_allpersons201718.csv") %>%
   .[]
+```
 
+```{r avg_tax_by_quintile_allpersons202425}
 avg_tax_by_quintile_allpersons202425 <- 
   avg_tax_by_decile_allpersons202425 %>%
   .[, .(total = sum(total)), keyby = .(Quintile = ceiling(Taxable_Income_decile / 2))] %>%
@@ -1732,7 +1771,7 @@ decile201718 <-
   rbind(data.table(new_tax = 0,
                    baseline_tax = 0,
                    Taxable_Income = 0L,
-                   WEIGHT = total_population_1516 - sum(sample_files_all[fy.year == "2015-16"][["WEIGHT"]])), 
+                   WEIGHT = total_population_1516 - sample_files_all[.("2015-16"), sum(WEIGHT)]), 
         use.names = TRUE,
         fill = TRUE) %>%
   .[, Taxable_Income_decile := weighted_ntile(Taxable_Income, WEIGHT, 10)] %>%
@@ -1747,13 +1786,13 @@ decile201718 <-
 
 
 ```{r prop-tax-paid-deloitte-technique-202425}
-bound_models[.("2024-25", "Budget2018")]%>%
+bound_models[.("2024-25", "Budget2018"),
+              .(new_tax, baseline_tax, Taxable_Income, WEIGHT)] %>%
   rbind(data.table(new_tax = 0,
                    baseline_tax = 0,
                    Taxable_Income = 0L,
                    WEIGHT = wt_rel1718v202728 * (total_population_1516 - taxable_individuals_1718)), 
         use.names = TRUE, fill = TRUE) %>%
-  .[, .(new_tax, baseline_tax, Taxable_Income, WEIGHT)] %>%
   setkey(Taxable_Income) %>%
   decile201718[., roll = TRUE] %>%
   .[, .(tot = sum(new_tax * WEIGHT / 1e9)), keyby = .(Taxable_Income_decile, min_Taxable_Income)] %>%
@@ -1767,7 +1806,8 @@ bound_models[.("2024-25", "Budget2018")]%>%
 ```
 
 ```{r prop-tax-paid-deloitte-technique-202728}
-bound_models[.("2027-28", "Budget2018")] %>%
+bound_models[.("2027-28", "Budget2018"),
+             .(new_tax, baseline_tax, Taxable_Income, WEIGHT)] %>%
   rbind(data.table(new_tax = 0,
                    baseline_tax = 0,
                    Taxable_Income = 0L,
@@ -1788,28 +1828,35 @@ bound_models[.("2027-28", "Budget2018")] %>%
 
 
 ```{r s2728_various_wages}
-s2728_various_wages <- 
-  lapply(c(0.02, 0.025, 0.03, 0.035), function(wage_r) {
-  project(sample_file_1516, h = 12L, wage.series = wage_r) %>%
-  grattan::model_income_tax(
-      baseline_fy = "2017-18",
-      medicare_levy_lower_threshold = medicare_levy_lower_threshold("2027-28"),
-      medicare_levy_lower_sapto_threshold = medicare_levy_lower_sapto_threshold("2027-28"),
-      medicare_levy_lower_family_threshold = medicare_levy_lower_family_threshold("2027-28"),
-      medicare_levy_lower_family_sapto_threshold = medicare_levy_lower_family_sapto_threshold("2027-28"),
-      medicare_levy_lower_up_for_each_child = medicare_levy_lower_up_for_each_child("2027-28"),
-      warn_upper_thresholds = FALSE,
-      Budget2018_lamington = FALSE,
-      Budget2018_lito_202223 = TRUE,
-      Budget2018_watr = FALSE,
-      ordinary_tax_thresholds = ordinary_tax_thresholds("2027-28"),
-      ordinary_tax_rates = ordinary_tax_rates("2027-28")) %>%
-      .[, .(Ind, age_range, Total_PP_BE_amt, Total_NPP_BE_amt, Taxable_Income, new_tax, baseline_tax, WEIGHT, id = wage_r)] 
-  }) %>%
-  rbindlist(use.names = TRUE, fill = TRUE) %>%
-  .[, new_tax := as.integer(new_tax)] %>%
-  .[, delta := new_tax - baseline_tax]
-
+s2728_various_wages <-
+  if (file.exists(s2728_various_wages.fst <- "budget-2018_cache/s2728_various_wages.fst")) {
+    read_fst(s2728_various_wages.fst, as.data.table = TRUE)
+  } else {
+    lapply(c(0.02, 0.025, 0.03, 0.035), function(wage_r) {
+      project(sample_file_1516, h = 12L, wage.series = wage_r) %>%
+        grattan::model_income_tax(
+          baseline_fy = "2017-18",
+          medicare_levy_lower_threshold = medicare_levy_lower_threshold("2027-28"),
+          medicare_levy_lower_sapto_threshold = medicare_levy_lower_sapto_threshold("2027-28"),
+          medicare_levy_lower_family_threshold = medicare_levy_lower_family_threshold("2027-28"),
+          medicare_levy_lower_family_sapto_threshold = medicare_levy_lower_family_sapto_threshold("2027-28"),
+          medicare_levy_lower_up_for_each_child = medicare_levy_lower_up_for_each_child("2027-28"),
+          warn_upper_thresholds = FALSE,
+          Budget2018_lamington = FALSE,
+          Budget2018_lito_202223 = TRUE,
+          Budget2018_watr = FALSE,
+          ordinary_tax_thresholds = ordinary_tax_thresholds("2027-28"),
+          ordinary_tax_rates = ordinary_tax_rates("2027-28")) %>%
+        .[, .(Ind, age_range, Total_PP_BE_amt, Total_NPP_BE_amt,
+              Taxable_Income, new_tax, baseline_tax, WEIGHT,
+              id = wage_r)] 
+    }) %>%
+      rbindlist(use.names = TRUE, fill = TRUE) %>%
+      .[, new_tax := as.integer(new_tax)] %>%
+      .[, delta := new_tax - baseline_tax] %T>%
+      write_fst(s2728_various_wages.fst) %>%
+      .[]
+  }
 ```
 
 ```{r comparison-wage-assumptions}
@@ -2047,7 +2094,7 @@ We can apply timing issues: 85\% revenue is tax revenue and 15\% at the time of 
 # setindex(bound_models, id)
 bound_models_with_timings <- 
   lapply(c(FALSE, TRUE), function(x) {
-    bound_models[.(unique(fy_year), "Budget2018"),
+    bound_models[.(unique_fy_year, "Budget2018"),
                  .(id,
                    YearOfAssessment = x,
                    fy_year2 = if (x) yr2fy(fy2yr(.BY[[1L]]) + x) else .BY[[1L]],
@@ -2061,10 +2108,6 @@ bound_models_with_timings <-
   .[(Taxable_Income > 180e3), WEIGHT := if_else(YearOfAssessment, 0.25, 0.75) * WEIGHT] %>%
   .[(Taxable_Income <= 180e3), WEIGHT := if_else(YearOfAssessment, 0.15, 0.85) * WEIGHT] %>%
   .[, .(tot = sum(delta * WEIGHT / 1e9)), keyby = "fy_year2"]
-  
-
-
-
 ```
 
 
@@ -2072,3 +2115,5 @@ bound_models_with_timings <-
 ```{r session_info}
 devtools::session_info()
 ```
+
+Finished in `r as.character(ceiling(difftime(Sys.time(), START.TIME, unit = "sec"))) %T>% writeLines("budget-2018-duration.txt") %>% identity`.
