@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"779WGkzsQOuXg5a2iBxrAG1ow_U9y35QuU9oerJ-SXc","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/16922":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"npfyP0cE5_gWLmtdZTXpQy1IlG_slG78tz6LOd6k4M8","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/16922":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children menu-mlid-513"><a href="../child-support-guide">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-489"><a href="../guide-social-security-law.1" class="active-trail">Guide to Social Security Law</a></li>
+<li class="leaf has-children active-trail menu-mlid-489"><a href="../guide-social-security-law" class="active-trail">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,16 +49,16 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-IYjc2y0UKTRi4xZpREYyW2oTpfE72echM4dxP35bKJ4" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-D18PW910jnQXO7jfh7ijnGByeVX4ymmPeAOdGMezYBw" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Guide to Social Security Law</h2>
-<p>Version 1.237 - Released 19 October 2017</p>
+<p>Version 1.245 - Released 1 June 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../guide-social-security-law.1" title="">Using the Guide to Social Security Law</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../guide-social-security-law" title="">Using the Guide to Social Security Law</a></li>
 <li class="collapsed menu-mlid-493"><a href="../guide-social-security-law/updates">What&#039;s New</a></li>
 <li class="collapsed menu-mlid-2295"><a href="../guide-social-security-law/1">1 Key Terms &amp; Principles</a></li>
 <li class="collapsed menu-mlid-2294"><a href="../guide-social-security-law/2">2 Claim Verification</a></li>
@@ -125,7 +125,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7372"><a href="../guide-social-security-law/act-references">Act Reference Index</a></li>
 <li class="last leaf menu-mlid-7168"><a href="../guide-social-security-law/sitemap">Site Map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../guide-social-security-law.1">Guide to Social Security Law</a> &raquo; <a href="../guide-social-security-law/3" class="active-trail">3 Qualification &amp; Payability</a> &raquo; <a href="../guide-social-security-law/3/5" class="active-trail">3.5 Families &amp; Parenting - Qualification &amp; Payability</a> &raquo; <a href="../guide-social-security-law/3/5/1" class="active-trail">3.5.1 PP - Qualification &amp; Payability</a> &raquo; 3.5.1.200 Suitable Work (PP)</div>
+	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../guide-social-security-law">Guide to Social Security Law</a> &raquo; <a href="../guide-social-security-law/3" class="active-trail">3 Qualification &amp; Payability</a> &raquo; <a href="../guide-social-security-law/3/5" class="active-trail">3.5 Families &amp; Parenting - Qualification &amp; Payability</a> &raquo; <a href="../guide-social-security-law/3/5/1" class="active-trail">3.5.1 PP - Qualification &amp; Payability</a> &raquo; 3.5.1.200 Suitable Work (PP)</div>
 <div id="utility">
 	
 <div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/node/16922"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
@@ -147,7 +147,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p>PP recipients with participation requirements are subject to an obligation to seek part-time paid work of at least 30 hours per fortnight (unless they are undertaking approved activities of at least 30 hours per fortnight or are exempted from the obligation to meet participation requirements during a specified period).</p>
 <p>They are not required to seek full-time employment, or employment of more than 25 hours per week in duration. However, a PP recipient may choose to seek (and take up) employment of more than 25 hours a week.</p>
 <div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 501B Requirement to look for work</p>
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 501B PP Employment Pathway Plans - requirement to look for work…</p>
 <p><strong>Policy reference:</strong> SS Guide <a href="../guide-social-security-law/3/5/1/170">3.5.1.170</a> Approved Activity - Job Search (PP), <a href="../guide-social-security-law/3/2/9/210">3.2.9.210</a> Suitable Activity - Principal Carer, <a href="../guide-social-security-law/3/5/1/280">3.5.1.280</a> Mutual Obligation Requirements Exemption in Special Family Circumstances - Case-by-Case (PP)</p>
 </div>
 <h2>Part-time work requirements - accepting offers of paid work</h2>
@@ -190,7 +190,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li>the work requires the PP recipient to move from a home in one place to a home in another place, or</li>
 <li>if, for any other reason, the work is unsuitable for the PP recipient.</li>
 </ul><div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 502(4) Particular paid work is unsuitable…</p>
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 502(4) …particular paid work is unsuitable…</p>
 </div>
 <h2>Availability of child care &amp; requirements outside school hours</h2>
 <p>Unless otherwise requested or agreed by the PP recipient, participation requirements (including work experience activity requirement activities and employment services provider interviews) should be scheduled to occur during school hours (i.e. generally between 9 am and 3 pm and during school terms).</p>
@@ -210,15 +210,15 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p><strong>Example 2: </strong>Erika recently received an offer of employment, providing administrative support to a small business on a casual basis. The job will involve work outside normal school hours. While her daughter's primary school has an approved outside school hours place available and on-site, Erika does not want to place her child in care. She believes that as a mother, she should be there to care for the child and does not want her placed with a child care provider. In this case, the job offer is 'suitable' (subject to other considerations below) and Erika is required to accept the job. She may organise other types of care for her daughter if she wishes.</p>
 </div>
 <div class="example">
-<p><strong>Example 3: </strong>Ione's youngest child has recently turned 6, and she has been offered part-time employment with a regional state government Agency. While no formal child care places are available in Ione's local area during the times she would be expected to work, her mother is able to provide care to the children during working hours. In this case, if Ione considers this arrangement acceptable, the job offer is 'suitable' (subject to other considerations below).</p>
+<p><strong>Example 3: </strong>Ione's youngest child has recently turned 6, and she has been offered part-time employment with a regional state government agency. While no formal child care places are available in Ione's local area during the times she would be expected to work, her mother is able to provide care to the children during working hours. In this case, if Ione considers this arrangement acceptable, the job offer is 'suitable' (subject to other considerations below).</p>
 </div>
 <h2>Child care arrangements change after accepting a suitable job offer</h2>
 <p>In the event that a PP recipient accepts an offer of paid employment, and child care arrangements later change, or hours of work change, so that approved formal child care or acceptable informal child care is no longer available, then the employment is no longer regarded as suitable, and the PP recipient may choose to seek alternative employment.</p>
 <div class="example">
-<p><strong>Example: </strong>Kim has a son Peter aged 7. She received an offer of part-time employment of 17 hours per week working at a supermarket, and has been able to obtain a temporary child care place for Peter at the local child care centre. This arrangement works well for the temporary placement, but after 3 months, there is no available place. Kim is able to leave this job (and resume looking for work) because the work is no longer suitable because she does not have access to appropriate care and supervision for Peter during the times she would be required to work. In this situation, Kim should be referred back to her employment services provider or other employment services provider.</p>
+<p><strong>Example: </strong>Kim has a son Peter aged 7. She received an offer of part-time employment of 17 hours per week working at a supermarket, and has been able to obtain a temporary child care place for Peter at the local child care centre. This arrangement works well for the temporary placement, but after 3 months, there is no available place. Kim is able to leave this job (and resume looking for work) because the work is no longer suitable because she does not have access to appropriate care and supervision for Peter during the times she would be required to work. In this situation, Kim should be referred back to her employment services provider or another employment services provider.</p>
 </div>
 <div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 502(5) Appropriate care and supervision</p>
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 502(5) …appropriate care and supervision…</p>
 <p><strong>Policy reference:</strong> FA Guide <a href="../family-assistance-guide/1/1/a/90">1.1.A.90</a> Approved service, approved care (CCB, CCR), <a href="../family-assistance-guide/1/1/r/20">1.1.R.20</a> Registered care, registered carer (CCB)</p>
 </div>
 <h2>Offers of work that a PP recipient may have to give-up after a short period</h2>
@@ -233,12 +233,12 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </div>
 <h2>Other issues to consider when determining if a particular offer of paid work is suitable for PP recipients</h2>
 <p>SSAct section 502(4)(i) and 502(4)(j) provides some discretion to consider a range of additional circumstances when determining if a particular offer of paid work is suitable for PP recipients. These circumstances include, but are not limited to:</p>
-<ul><li>whether the location of either the workplace or the children venue makes the total travel time to work unreasonable, OR</li>
+<ul><li>whether the location of either the workplace or the children's venue makes the total travel time to work unreasonable, OR</li>
 <li>whether the cost of travel to and from work is unreasonable, OR</li>
 <li>whether the PP recipient will be financially better off as a result of undertaking the work, OR</li>
 <li>the work is unsuitable on the basis of moral, cultural, or religious grounds.</li>
 </ul><div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 502(4)(i) The work requires the person to move…, section 502(4)(j) For any other reason, the work…</p>
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 502(4)(i) the work requires the person to move…, section 502(4)(j) for any other reason, the work…</p>
 </div>
 <h2>Travel time</h2>
 <p>An offer of work should generally not be deemed suitable for PP recipients if the journey, either from the PP recipient's home to the place of work or from the place of work to the person's home (including the time to travel to and from child care where relevant) would normally exceed 60 minutes in duration. However a person may voluntarily choose to accept a job offer where the commuting exceeds 60 minutes. Conversely, in some circumstances, a journey of a lesser duration than 60 minutes may be considered excessive travel time. These circumstances could include:</p>
@@ -253,7 +253,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p><strong>Example 2: </strong>Patricia has a daughter Angela, aged 6 years. She receives an offer of part-time employment of 20 hours per week working at a retail clothing store, and some of the work will be outside of normal school hours. She has been able to find a formal outside school hours care service with available places, but this is a distance of 15km from Angela's school, and it would take Patricia 75 minutes to take Angela to care and to work each way. In this situation, the job offer is not suitable, and Patricia is not required to accept the job offer.</p>
 </div>
 <div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 502(4)(g) Unreasonable commuting</p>
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 502(4)(g) commuting between the person's home…</p>
 </div>
 <h2>Reasonable cost of travel</h2>
 <p>When a principal carer parent recipient receives an offer of work and the cost of travel (additional and due directly to the employment) by the person's normal and most cost effective mode of transportation to and from work after any assistance provided by their employment services provider, for example, through the Employment Pathway Fund will exceed 10 per cent of the gross wage to be gained from that work, the cost of that travel should be considered unreasonable and the offer of work deemed unsuitable. The person will indicate to the delegate if they are receiving any assistance with travel.</p>
@@ -264,13 +264,13 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </div>
 <h2>Financial suitability of a job</h2>
 <p>No principal carer parent is required to accept a job offer or continue in a job which fails to make them financially better off compared to not doing the job. If a principal carer parent is not at least $50.00 per fortnight better off than if they did not accept or continue in that job, then the parent is able to decline the job offer or leave the job. A financial suitability test is available to providers and job seekers on the <a href="https://www.humanservices.gov.au/" title="Department of Human Services">DHS website</a> as part of the rate estimator.</p>
-<p>The following items should be taken into account by DHS (and employment services providers) in assessing whether a job is financially suitable:</p>
+<p>The following items should be taken into account by <a href="../guide-social-security-law/acronyms#dhs" title="Department of Human Services">DHS</a> (and employment services providers) in assessing whether a job is financially suitable:</p>
 <ul><li>gross wages from the job,</li>
 <li>personal income tax liabilities,</li>
 <li>the drop in income support payment as a result of the earned income,</li>
 <li>out of pocket child care costs incurred in order to undertake the work (after taking into account <a href="../guide-social-security-law/acronyms#jet" title="Jobs, education and training">JET</a> child care fee assistance and the child care benefit and/or assistance such as through the Employment Pathway Fund), and</li>
 <li>travel costs to and from work (after taking into account any assistance that may be provided by the Employment Pathway Fund and noting the reasonable costs of travel test described above), and</li>
-<li>any increase in public housing rent (ONLY if the parent is living in state government subsidised or provided public housing and either on NSA, YA (job seeker) or <a href="../guide-social-security-law/acronyms#spb" title="Special benefit">SpB</a>.</li>
+<li>any increase in public housing rent (ONLY if the parent is living in state government subsidised or provided public housing and either on NSA, YA (job seeker) or <a href="../guide-social-security-law/acronyms#spb" title="Special benefit">SpB</a>).</li>
 </ul><p>If, after taking these factors into account, the PP recipient was not at least $50.00 per fortnight better off than if they did not accept or continue in that job, then the delegate must allow the parent to decline the job offer or to leave the job. The PP recipient must then search for another job that is either closer to home or at least had cheaper travel costs, required lower or no child care costs, was for more hours per week, or more money per hour (or some combinations of those factors).</p>
 <p>In many instances public housing rent will only actually increase some months after a parent begins part-time work. However, in Tasmania, Victoria, South Australia and Western Australia increases in public housing rent may occur from the day from which the parent begins earning additional income. In these states, the delegate should factor in 25% of the difference between the maximum rate of PP and the combined total of the part-rate PP and gross fortnightly earnings. This should be used as the indicative amount by which their public housing rent will increase within the next complete fortnight. For PP recipients in all other states and territories, increases in public housing rents are only to be taken into account in any particular application of this test if the PP recipient can provide documentation that their rent will increase within the next complete fortnight (or if the rent has already increased on or before the date of the test due to the paid part-time work). If a rent increase is to take effect after the next complete fortnight then no increase can be taken into account within the public housing component of the financial suitability test as applied at that point in time.</p>
 <p>In these instances the PP recipient should be advised that if they are concerned about the financial suitability of the job when their public housing rent does increase they may return to DHS to have their job assessed under this test again. If the job fails the financial suitability test then the job is no longer suitable and the person may leave the job without penalty. PP recipients will need to be advised by the delegate that they will need to provide DHS with documentation from the relevant State/Territory authority indicating:</p>
@@ -315,7 +315,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p><strong>Exception:</strong> If a PP recipient also has a partial capacity to work due to a disability (as assessed by an <a href="../guide-social-security-law/acronyms#esat" title="Employment Services Assessment">ESAt</a>/<a href="../guide-social-security-law/acronyms#jca" title="Job capacity assessment">JCA</a>) and they have costs in moving into employment not otherwise offset by other assistance (e.g. through the Workplace-Modifications Scheme) then these costs should also be factored into the calculation described above (i.e. they must be at least $50 a fortnight better off once these additional costs are also factored in).</p>
 <p>In some limited circumstances the next complete fortnight might not be the most appropriate period for assessing whether the job is financially suitable. This could include instances where a PP recipient is taking up a job that involves work that has variable hours/shifts that are known beforehand and which would affect earned income significantly. For example, they may be working shift work and this might mean the person will have significantly higher earned income one fortnight compared to the next. In these instances, the delegate is able to consider a longer period of up to 4 weeks and use this period to consider whether the person is financially better off over the month (rather than the next complete fortnight). The use of this approach should be the exception rather than the rule.</p>
 <h2>Any other matters that the Secretary considers relevant in the circumstances</h2>
-<p>Without being prescriptive, additional issues not directly addressed above may be considered in determining whether work is 'suitable' (including financially suitable) where there are exceptional circumstances - (e.g. beyond the range of what could be considered usual) or special hardship cases. Before making a determination, the customer service adviser (CSA) should seek advice from <a href="../guide-social-security-law/acronyms#nso" title="National Support Office">NSO</a>, who will consult with the <a href="http://www.employment.gov.au/" title="Department of Employment">Department of Employment</a>.</p>
+<p>Without being prescriptive, additional issues not directly addressed above may be considered in determining whether work is 'suitable' (including financially suitable) where there are exceptional circumstances - (e.g. beyond the range of what could be considered usual) or special hardship cases. Before making a determination, the customer service adviser (CSA) should seek advice from <a href="../guide-social-security-law/acronyms#nso" title="National Support Office">NSO</a>, who will consult with the <a href="https://www.jobs.gov.au/">Department of Jobs and Small Business</a>.</p>
 <h2>Could a suitable job become unsuitable at a later date?</h2>
 <p>After a PP recipient has accepted a job offer of suitable part-time work, circumstances may change which could mean the work becomes unsuitable over time. For instance, the hours of work may change or high demand for vacation child care places during a period of school holidays could mean the PP recipient may be unable to access appropriate care and supervision of their child/ren during the hours they would be expected to work. Factors such as these would render the job unsuitable and it would be inappropriate to penalise the PP recipient in these circumstances for leaving that work. In this circumstance, the PP recipient should be re-connected with their employment services provider to help them search for other suitable work if they have voluntarily ceased participating in those services while undertaking the work.</p>
 <h2>Inability to accept an offer of suitable work because child care has not been organised</h2>
@@ -345,7 +345,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </div>
 <h2>Participation requirements &amp; suitable work for ministers of religion &amp; their partners</h2>
 <p>Ministers of religion receiving PP will be subject to part-time participation requirements. That is, they are subject to an obligation to seek suitable paid part-time work of at least 15 hours per week.</p>
-<p>They will be regarded as satisfying their part-time participation requirements in full by undertaking at least 15 hours of paid pastoral work a week for their religious organisation. However, the amount of remuneration received does not have to be at least at the National Minimum Wage. They will be required to show evidence (e.g. a letter) that they are working at least 15 paid hours per week as a Minister for a religious organisation.</p>
+<p>They will be regarded as satisfying their part-time participation requirements in full by undertaking at least 15 hours of paid pastoral work a week for their religious organisation. However, the amount of remuneration received does not have to be, at the least, the National Minimum Wage. They will be required to show evidence (e.g. a letter) that they are working at least 15 paid hours per week as a Minister for a religious organisation.</p>
 <h2>Remuneration &amp; hours of work</h2>
 <p>When a PP recipient is already working, but for less than 15 hours a week and therefore still has job search requirements, a job offer should be accepted if the total pay as well as the total hours from the employment is higher than the existing job. A person would not have to accept a job offer if the total earnings from the new job are less than the total earnings from the existing job. However if the rate of pay of the new job (e.g. hourly rate) is lower than the existing job's rate of pay, but the increase in hours will mean that a person has greater income overall, they are still required to accept the job.</p>
 <div class="example">
@@ -374,7 +374,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     1 July 2014  	</div>
+      Last reviewed:     2 January 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../contact-us">Contact us</a></li>
@@ -384,7 +384,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"Gz-t_isHmsKPtyccTG-0v2xatgdFAJrHzjVQWQG81hM","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/189":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"5AokZ7PLe92vKJZAwZTsm6V7xgEjBUTYEqidm4Ep8O8","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/189":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children active-trail menu-mlid-513"><a href="../child-support-guide" class="active-trail">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../guide-social-security-law">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,10 +49,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-8CYhisLV2ds7IFob9kiXVABpkVsN0kbthYlb2PEifVs" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-eNgpaaEp1JOcZhvtbRmTAnsSHlVWLh0DeWn5MOF3BWM" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.27 - Released 20 September 2017</p>
+<p>Version 4.32 - Released 7 May 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
@@ -73,7 +73,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-692"><a href="../child-support-guide/5/2/6">5.2.6 Collection from Family Tax Benefit</a></li>
 <li class="leaf active-trail active menu-mlid-693"><a href="../child-support-guide/5/2/7" class="active-trail active">5.2.7 Collection from Veterans&#039; Pensions &amp; Allowances</a></li>
 <li class="leaf menu-mlid-694"><a href="../child-support-guide/5/2/8">5.2.8 Tax Refund Intercepts</a></li>
-<li class="leaf menu-mlid-695"><a href="http://guides.dss.gov.au/child-support-guide/5/2/9">5.2.9 Collection from Third Parties</a></li>
+<li class="leaf menu-mlid-695"><a href="../child-support-guide/5/2/9">5.2.9 Collection from Third Parties</a></li>
 <li class="leaf menu-mlid-697"><a href="../child-support-guide/5/2/10">5.2.10 Collection from Parental Leave Payments</a></li>
 <li class="last leaf menu-mlid-696"><a href="../child-support-guide/5/2/11">5.2.11 Departure Prohibition Orders</a></li>
 </ul></li>
@@ -101,7 +101,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <div class="reference">
 <h2>Act references</h2>
 <p><a href="https://www.legislation.gov.au/Series/C2004A03596" title="Child Support (Registration and Collection) Act 1988">CSRC Act</a> section 72AC</p>
-<p><a href="https://www.legislation.gov.au/Series/F1996B00886" title="Child Support (Registration and Collection) Regulations 1988">CSRC Regs</a> regulation 5EA</p>
+<p><a href="https://www.legislation.gov.au/Series/F2018L00313" title="Child Support (Registration and Collection) Regulations 2018">CSRC Regs</a> regulation 21</p>
 <p><a href="https://www.legislation.gov.au/Series/C2004A03268">Veterans' Entitlements Act 1986</a> section 58J(3), section 122E</p>
 </div>
 <h2>On this page</h2>
@@ -153,15 +153,15 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p>DHS will contact a payer by telephone to advise that the Registrar will start deductions from their pension or allowance. The exception is where the payer has elected to make other payment arrangements and was notified that deductions would start if they defaulted on those arrangements.</p>
 <p>If DHS does not make contact with the payer by telephone, the payer will be informed in writing that the Repatriation Commission has been notified to commence deductions from their pension or allowance.</p>
 <h2 id="howmuchdeducted">How much can be deducted?</h2>
-<p>Where there is an ongoing liability but no child support arrears, the 'prescribed periodic deduction' is the lesser of either 3 times the minimum rate or the liability amount for the pension period (regulation 5EA(1)). The minimum rate (<a href="../child-support-guide/2/4/12">2.4.12</a>) is defined in regulation 5EA(3) as the minimum annual rate of child support (CSA Act section 66(5)).</p>
+<p>Where there is an ongoing liability but no child support arrears, the 'prescribed periodic deduction' is the lesser of either 3 times the minimum veterans rate or the liability amount for the pension period (CSRC Regs regulation 21(1)). The minimum veterans rate (<a href="../child-support-guide/2/4/12">2.4.12</a>) is defined in regulation 21(3) of the CSRC Regs as the minimum annual rate of child support (CSA Act section 66(5)).</p>
 <div class="example">
-<p><strong>Example:</strong> M is assessed to pay $50 per week child support and has no child support arrears. M is in receipt of an age service pension. The Registrar is only entitled to ask the Reparation Commission to deduct 3 times the minimum rate as this is less than the ongoing liability amount.</p>
+<p><strong>Example:</strong> Abdul is assessed to pay $50 per week child support and has no child support arrears. Abdul is in receipt of an age service pension. The Registrar is only entitled to ask the Repatriation Commission to deduct 3 times the minimum veterans rate as this is less than the ongoing liability amount.</p>
 </div>
-<p>Where child support arrears exist, the 'prescribed periodic deduction' is the lesser of either 3 times the minimum rate (less any amounts deducted for the ongoing liability) or the amount of the debt that has not been paid (regulation 5EA(2)).</p>
+<p>Where child support arrears exist, the 'prescribed periodic deduction' is the lesser of either 3 times the minimum veterans rate (less any amounts deducted for the ongoing liability) or the amount of the debt that has not been paid (CSRC Regs regulation 21(2)).</p>
 <div class="example">
-<p><strong>Example:</strong> F is assessed to pay $10 per week child support and has arrears of $60. F is in receipt of an invalidity service pension. The Registrar is only entitled to ask the Reparation Commission to deduct 3 times the minimum rate (less any amount deducted for the ongoing liability) as this is less than the total outstanding child support. $10 is deducted for the ongoing liability, and the balance goes to the arrears.</p>
+<p><strong>Example:</strong> Madeline is assessed to pay $10 per week child support and has arrears of $60. Madeline is in receipt of an invalidity service pension. The Registrar is only entitled to ask the Repatriation Commission to deduct 3 times the minimum veterans rate (less any amount deducted for the ongoing liability) as this is less than the total outstanding child support. $10 is deducted for the ongoing liability, and the balance goes to the arrears.</p>
 </div>
-<p>The Registrar will not collect amounts of less than $1 per week from a person's veteran's pension or allowance. If a payer's child support liability is less than $1 per week, and there are no arrears, the Registrar will allow the amounts due to accumulate until it can instruct the Repatriation Commission to deduct an amount under regulation 5EA(2).</p>
+<p>The Registrar will not collect amounts of less than $1 per week from a person's veteran's pension or allowance. If a payer's child support liability is less than $1 per week, and there are no arrears, the Registrar will allow the amounts due to accumulate until it can instruct the Repatriation Commission to deduct an amount under regulation 21(2) of the CSRC Regs.</p>
 <h2 id="arrgtinplace">Where a payment arrangement is in place</h2>
 <p>If a payer is complying with a satisfactory payment arrangement, the Registrar will not collect from their veteran's pension or allowance.</p>
 <h2 id="othersources">Collection from other sources of income</h2>
@@ -178,7 +178,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </ul></article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     1 July 2016  	</div>
+      Last reviewed:     3 April 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../contact-us">Contact us</a></li>
@@ -188,7 +188,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

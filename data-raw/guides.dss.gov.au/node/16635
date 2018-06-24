@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"IPXAhMQTsgX4GD2xYPKMHyziV0FliNfRbmbVUseH9Ao","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/16635":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"8aAtPrRzwl5wGjSAXd81zR9S5CxEfRqoJ2yJZmTF2nE","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/16635":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children menu-mlid-513"><a href="../child-support-guide">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-489"><a href="../guide-social-security-law.1" class="active-trail">Guide to Social Security Law</a></li>
+<li class="leaf has-children active-trail menu-mlid-489"><a href="../guide-social-security-law" class="active-trail">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,16 +49,16 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-kPNwFiT0EKjnRov6zeAlN8-Pu_xeVL9lXnqMTGZUiA0" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-P7chfRXmgdYu3xX0GhKIblLy6j1XTvrnjGW-Ep0ugQ0" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Guide to Social Security Law</h2>
-<p>Version 1.237 - Released 19 October 2017</p>
+<p>Version 1.245 - Released 1 June 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../guide-social-security-law.1" title="">Using the Guide to Social Security Law</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../guide-social-security-law" title="">Using the Guide to Social Security Law</a></li>
 <li class="collapsed menu-mlid-493"><a href="../guide-social-security-law/updates">What&#039;s New</a></li>
 <li class="collapsed menu-mlid-2295"><a href="../guide-social-security-law/1">1 Key Terms &amp; Principles</a></li>
 <li class="collapsed menu-mlid-2294"><a href="../guide-social-security-law/2">2 Claim Verification</a></li>
@@ -131,7 +131,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7372"><a href="../guide-social-security-law/act-references">Act Reference Index</a></li>
 <li class="last leaf menu-mlid-7168"><a href="../guide-social-security-law/sitemap">Site Map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../guide-social-security-law.1">Guide to Social Security Law</a> &raquo; <a href="../guide-social-security-law/3" class="active-trail">3 Qualification &amp; Payability</a> &raquo; <a href="../guide-social-security-law/3/8" class="active-trail">3.8 Supplementary Benefits - Qualification &amp; Payability</a> &raquo; <a href="../guide-social-security-law/3/8/1" class="active-trail">3.8.1 RA - Qualification &amp; Payability</a> &raquo; 3.8.1.10 Qualification for RA</div>
+	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../guide-social-security-law">Guide to Social Security Law</a> &raquo; <a href="../guide-social-security-law/3" class="active-trail">3 Qualification &amp; Payability</a> &raquo; <a href="../guide-social-security-law/3/8" class="active-trail">3.8 Supplementary Benefits - Qualification &amp; Payability</a> &raquo; <a href="../guide-social-security-law/3/8/1" class="active-trail">3.8.1 RA - Qualification &amp; Payability</a> &raquo; 3.8.1.10 Qualification for RA</div>
 <div id="utility">
 	
 <div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/node/16635"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
@@ -237,7 +237,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <td>No - exempt</td>
 </tr><tr><td>
 <p>Family tax benefit</p>
-<p>FA Guide <a href="../family-assistance-guide/3/1/4/30">3.1.4.30</a></p>
+<p>FA Guide <a href="http://guides.dss.gov.au/family-assistance-guide/3/1/4/30">3.1.4.30</a></p>
 </td>
 <td>Only if getting FTB Part A at greater than the base rate.</td>
 <td>FAAct Schedule 1 Part 5 Division 2B</td>
@@ -302,33 +302,30 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <td>SSAct section 1070Q</td>
 <td>Yes</td>
 </tr></tbody></table><div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 1070L Rate for carer payments and certain age, disability support and wife pensions, section 1061P(1) to (3) Determinations of rates (AGDRP), section 1070Q Rate for youth allowance, austudy payment, mature age allowance under Part 2.12B, newstart allowance, partner allowance, sickness allowance and widow allowance, section 1070M Rate for bereavement allowance, widow B pension and certain parenting payments, section 1070N Rate for disability support pension (person aged under 18), section 1070P Rate for disability support pension (person aged between 18 and 21), section 1065-A1 Method of calculating rate (Age and DSP (blind people)), section 1070R Rate for certain parenting payments</p>
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 1070L Rate for CPs and certain age, disability support and wife pensions, section 1061P(1) to (3) Determinations of rates (AGDRP), section 1070Q Rate for YA, Austudy, MAA under Part 2.12B, NSA, PA, SA and WA, section 1070M Rate for BVA, WidB and certain PPs, section 1070N Rate for DSP (person aged under 18), section 1070P Rate for DSP (person aged between 18 and 21), section 1065-A1 Method of calculating rate (Age and DSP (blind people)), section 1070R Rate for certain PPs</p>
 <p><a href="https://www.legislation.gov.au/Series/C2004A00490" title="A New Tax System (Family Assistance) Act 1999">FAAct</a> Schedule 1 Part 5 Division 2B Rent assistance</p>
 </div>
 <h2>RA &amp; FTB</h2>
-<p>When a person receives a social security payment and FTB Part A, RA is usually paid with FTB Part A. However, there are 2 instances when RA may be paid with the recipient's social security payment instead.</p>
+<p>When a person receives a social security payment and FTB Part A, RA is usually paid with FTB Part A. However, in some cases RA may be paid with the recipient's social security payment instead.</p>
 <div class="example">
-<p><strong>Example 1:</strong> An FTB recipient does not take maintenance action, and gets base rate of FTB Part A. This recipient is not eligible for RA under FTB. However, RA may be paid with the social security payment. When maintenance action is taken, RA is then included in the recipient's FTB Part A payment if this is greater than the base rate.</p>
-</div>
-<div class="example">
-<p><strong>Example 2:</strong> An FTB recipient not eligible for RA with FTB Part A because the rent they pay is lower than the rent threshold. The recipient can receive RA with primary payment.</p>
+<p><strong>Example:</strong> An FTB recipient does not take maintenance action, and is paid the base rate of FTB Part A. This recipient is not eligible for RA with FTB. However, RA may be paid with the social security payment.</p>
 </div>
 <h2>Adjusting RA payments when eligibility commences with FTB Part A</h2>
 <p>When a person has received RA with a social security or veteran's entitlement payment for a period and it is later found they are eligible for RA with FTB Part A, the amount of any arrears of FTB Part A are adjusted to account for the amount of RA already paid.</p>
 <div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00490" title="A New Tax System (Family Assistance) Act 1999">FAAct</a> Schedule 1 clause 38J Offsetting for duplicate rent assistance under family assistance and social security law, Schedule 1 clause 38K Offsetting duplicate rent assistance under family assistance and veteran's entitlements law</p>
-<p><strong>Policy reference:</strong> FA Guide <a href="../family-assistance-guide/3/1/4/30">3.1.4.30</a> Rent Assistance</p>
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00490" title="A New Tax System (Family Assistance) Act 1999">FAAct</a> Schedule 1 clause 38J Offsetting for duplicate RA under family assistance and social security law, Schedule 1 clause 38K Offsetting duplicate RA under family assistance and veteran's entitlements law</p>
+<p><strong>Policy reference:</strong> FA Guide <a href="http://guides.dss.gov.au/family-assistance-guide/3/1/4/30">3.1.4.30</a> Rent Assistance</p>
 </div>
 <h2>RA &amp; blind pensioners</h2>
 <p>Rates of Age and DSP paid to blind people are not subject to the income or assets test unless the person claims RA. If a blind person wishes to test their eligibility for RA their pension is calculated in accordance with the income and assets tests. The amount payable under the normal income and assets tests with RA is compared to the means test free rate without RA and the higher amount is paid.</p>
 <div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> Part 3.7 Rent Assistance, section 1070 When this part applies</p>
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> Part 3.7 RA, section 1070 When this Part applies</p>
 <p><strong>Policy reference:</strong> SS Guide <a href="../guide-social-security-law/4/3/1/30">4.3.1.30</a> Rate of Income - Couples, Blind Pensioners &amp; Children</p>
 </div>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     9 February 2015  	</div>
+      Last reviewed:     3 April 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../contact-us">Contact us</a></li>
@@ -338,7 +335,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

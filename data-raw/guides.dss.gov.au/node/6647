@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"RbMcxQrUK9iNQu2tPMlqQWsjTckzkfiUKoTP_AvQIs4","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/6647":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"aIIXDA1vKrpyg4pJk80abuzBPZ1Xl9tdZL-5He9qDoU","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/6647":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children menu-mlid-513"><a href="../child-support-guide">Child Support Guide</a></li>
 <li class="leaf has-children active-trail menu-mlid-491"><a href="../family-assistance-guide" class="active-trail">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../guide-social-security-law">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,10 +49,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-NB6Gt1FWKxXtc3b2ShAAQzb_tVpAw0ciZSL5RGbgbKY" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-842S9eH88ayoKQcyIYvvYZTxFAVqvY4CeHIkfqFWHhY" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Family Assistance Guide</h2>
-<p>Version 1.198 - Released 20 September 2017</p>
+<p>Version 1.203 - Released 7 May 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
@@ -104,7 +104,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <ul><li>general residence requirements,</li>
 <li>exception to residence requirements for <a href="../family-assistance-guide/acronyms#ftb" title="Family tax benefit">FTB</a>,</li>
 <li>exceptions to residence requirements for <a href="../family-assistance-guide/acronyms#ccb" title="Child care benefit">CCB</a>, and</li>
-<li>determining whether an individual resides in Australia.</li>
+<li>determining whether an individual resides in Australia (<a href="../family-assistance-guide/1/1/a/120">1.1.A.120</a>).</li>
 </ul><h2>General residence requirements</h2>
 <p>To be eligible for FTB and CCB an individual must be an Australian resident (<a href="../family-assistance-guide/1/1/a/130">1.1.A.130</a>) or an <a href="../family-assistance-guide/acronyms#scv" title="Special category visa">SCV</a> (<a href="../family-assistance-guide/1/1/v/10">1.1.V.10</a>) holder (New Zealand citizen) residing in Australia, unless the exceptions given below in this topic apply.</p>
 <p>To be eligible for <a href="../family-assistance-guide/acronyms#sbp" title="Stillborn baby payment">SBP</a> under the 6 month income test, an individual must have otherwise been eligible for FTB if the child was not stillborn (disregarding the FTB income test) within 26 weeks starting on the day of the child's delivery. Therefore the FTB residency requirements detailed in this topic also apply to SBP claimants who are paid under the 6 month SBP income test. Where an SBP claimant does not meet FTB residence requirements under the 6 month SBP income test, they may be eligible to receive SBP if their partner is eligible to receive FTB Part A at a rate greater than nil in relation to a day that is within 52 weeks beginning on the day of the stillborn child's delivery.</p>
@@ -131,7 +131,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p><strong>Policy reference:</strong> FA Guide <a href="../family-assistance-guide/2/1/2/20">2.1.2.20</a> Verifying Residence/Citizenship, <a href="../family-assistance-guide/2/1/1/10">2.1.1.10</a> FTB Child, <a href="../family-assistance-guide/2/2/1">2.2.1</a> FTB Eligibility Criteria for Individuals, <a href="../family-assistance-guide/2/6/1">2.6.1</a> CCB Eligibility Criteria for Individuals, <a href="../family-assistance-guide/2/12/1">2.12.1</a> SBP Eligibility Criteria</p>
 </div>
 <h2>Exception to residence requirements for FTB</h2>
-<p>An individual who qualifies for <a href="../family-assistance-guide/acronyms#spb" title="Special benefit">SpB</a> under SSAct section 729(2)(f)(v) and who is in Australia or temporarily absent does not have to satisfy the residence requirements under SSAct section <span class="nobr">7(2)</span>. The individual does not need to receive SpB. See the table below for these exceptions.</p>
+<p>An individual who qualifies for <a href="../family-assistance-guide/acronyms#spb" title="Special benefit">SpB</a> under SSAct section 729(2)(f)(v) and who is in Australia or temporarily absent from Australia (<a href="../family-assistance-guide/1/1/a/10">1.1.A.10</a>) does not have to satisfy the residence requirements under SSAct section <span class="nobr">7(2)</span>. The individual does not need to receive SpB. See the table below for these exceptions.</p>
 <table><thead><tr><th scope="col">Exception</th>
 <th scope="col">More Detail</th>
 </tr></thead><tbody><tr><td>
@@ -155,7 +155,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </ul></td>
 </tr></tbody></table><p>*Visa subclass 447 was abolished from 9 August 2008 but visas already issued under this subclass will remain valid until they expire or the holders are granted another visa.</p>
 <p>**Visa subclass 695 was abolished on 9 August 2008 and has not been granted since that date. They were only effective for 18 months from the date of grant.</p>
-<p>***Subject to approval from <a href="../family-assistance-guide/acronyms#dibp" title="Department of Immigration and Border Protection">DIBP</a>, a subclass 785 (class XD) or 790 visa holder may be eligible to travel overseas and re-enter Australia where the holder can demonstrate compassionate or compelling circumstances.</p>
+<p>***Subject to approval from the Department of Home Affairs, a subclass 785 (class XD) or 790 visa holder may be eligible to travel overseas and re-enter Australia where the holder can demonstrate compassionate or compelling circumstances.</p>
 <div class="reference">
 <p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00490" title="A New Tax System (Family Assistance) Act 1999">FAAct</a> section 21(1) When an individual is eligible for FTB in normal circumstances</p>
 <p><a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 7(2) An Australian resident is a person who…, section 729(2) Qualification for SpB see sub paragraphs (f)(i) and (f)(v)</p>
@@ -209,7 +209,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     3 July 2017  	</div>
+      Last reviewed:     2 January 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../contact-us">Contact us</a></li>
@@ -219,7 +219,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

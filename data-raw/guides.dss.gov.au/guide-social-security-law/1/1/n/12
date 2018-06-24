@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../../../../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../../../../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"0JSpTQF7_vAVSyVaep63vMNRvYLggi9I_XB_FE_YQ0I","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/guide-social-security-law\/1\/1\/n\/12":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"lcxEP4Tu6k-X1rc2tvFNeigsP3UeoQEzNLr3uX5ekvo","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/guide-social-security-law\/1\/1\/n\/12":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children menu-mlid-513"><a href="../../../../child-support-guide">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-489"><a href="../../../../guide-social-security-law.1" class="active-trail">Guide to Social Security Law</a></li>
+<li class="leaf has-children active-trail menu-mlid-489"><a href="../../../../guide-social-security-law" class="active-trail">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,16 +49,16 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-wHVkHEesDtNU0c1nZ6Uac9Ma-214aGe4RlRwMTWOJb0" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-Q-b0_XtzTkNs9xCARV-xKssOEr3gjyrnUiILTVpGp1o" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Guide to Social Security Law</h2>
-<p>Version 1.237 - Released 19 October 2017</p>
+<p>Version 1.245 - Released 1 June 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../../../../guide-social-security-law.1" title="">Using the Guide to Social Security Law</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../../../../guide-social-security-law" title="">Using the Guide to Social Security Law</a></li>
 <li class="collapsed menu-mlid-493"><a href="../../../updates">What&#039;s New</a></li>
 <li class="expanded active-trail menu-mlid-2295"><a href="../../../1" class="active-trail">1 Key Terms &amp; Principles</a><ul class="menu"><li class="first expanded active-trail menu-mlid-5189"><a href="../../1" class="active-trail">1.1 Definition of Key Terms</a><ul class="menu"><li class="first collapsed menu-mlid-5163"><a href="../a">1.1.A Key Terms Beginning with the Letter A</a></li>
 <li class="collapsed menu-mlid-5164"><a href="../b">1.1.B Key Terms Beginning with the Letter B</a></li>
@@ -129,7 +129,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7372"><a href="../../../act-references">Act Reference Index</a></li>
 <li class="last leaf menu-mlid-7168"><a href="../../../sitemap">Site Map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../../../index.html">Home</a> &raquo; <a href="../../../../guide-social-security-law.1">Guide to Social Security Law</a> &raquo; <a href="../../../1" class="active-trail">1 Key Terms &amp; Principles</a> &raquo; <a href="../../1" class="active-trail">1.1 Definition of Key Terms</a> &raquo; <a href="../n" class="active-trail">1.1.N Key Terms Beginning with the Letter N</a> &raquo; 1.1.N.12 National Training Wage schedule rate (YA, DSP)</div>
+	<div id="breadcrumb"><a href="../../../../index.html">Home</a> &raquo; <a href="../../../../guide-social-security-law">Guide to Social Security Law</a> &raquo; <a href="../../../1" class="active-trail">1 Key Terms &amp; Principles</a> &raquo; <a href="../../1" class="active-trail">1.1 Definition of Key Terms</a> &raquo; <a href="../n" class="active-trail">1.1.N Key Terms Beginning with the Letter N</a> &raquo; 1.1.N.12 National Training Wage schedule rate (YA, DSP)</div>
 <div id="utility">
 	
 <div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/guide-social-security-law/1/1/n/12"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
@@ -137,17 +137,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <article id="node-19739">
 <h1 >1.1.N.12 National Training Wage schedule rate (YA, DSP)</h1>
 <h2>Definition</h2>
-<p>For the purposes of <a href="../../../acronyms#ya" title="Youth allowance">YA</a> and <a href="../../../acronyms#dsp" title="Disability support pension">DSP</a>, the Wage Level A of the National Training Wage schedule included in a modern award (NTWS), or the rate as varied or replaced by Fair Work Australia, is a rate used to measure whether a young person can be classified as being self-supporting through paid employment (<a href="../../../3/2/5/80">3.2.5.80</a>). If the young person has earned at least 75% of the rate in any 18 month period since last leaving school, then, in certain circumstances, they can be considered independent for YA and DSP purposes.</p>
-<p>The young person can only be considered independent under this provision if they have earned 75% of the maximum award payable at Wage Level A of the NTWS included in a modern award or that maximum rate as varied or replaced by Fair Work Australia, and the 18 months since last leaving secondary school has elapsed.</p>
-<p>This provision applies only to:</p>
-<ul><li>young people who qualified for YA as an independent person prior to 1 July 2010 if they have supported themselves through paid work consisting of employment within an 18 month period, or</li>
-<li>YA students who finished secondary studies in 2008, did not study full-time in 2009, commenced higher education studies in 2010 and qualify for independence under the transitional arrangements for gap year students (<a href="../../../3/2/5/80">3.2.5.80</a>) on or before 31 December 2010, or</li>
-<li>inner regional (from 1 January 2012), outer regional, remote and very remote students (from 1 January 2011) who are required to live away from home to undertake full-time study if their parental income is less than $150,000 for the appropriate tax year, or</li>
-<li>DSP claimants/recipients aged under 21 without dependent children.</li>
-</ul><p>The appropriate version of the NTWS or the rate as varied or replaced by Fair Work Australia to use is based on when the young person first commenced their employment.</p>
-<div class="example">
-<p><strong>Example:</strong> Kate left school in November 2015 and commenced working on 10 February 2016. She is from an inner regional area and her parents earn less than $150,000. She moves away from home to study at university in 2017. She applies for YA in June 2017 in which time she has earned $25,565 from her casual job. The appropriate NTWS to use is $31,305 (75% = $23,479) as Kate commenced employment between 1 July 2015 and 30 June 2016. As Kate has left school over 18 months ago and has earned 75% of the relevant NTWS rate in an 18 month period, she can be considered to be independent under the self-supporting criteria.</p>
-</div>
+<p>For the purposes of <a href="../../../acronyms#ya" title="Youth allowance">YA</a> and <a href="../../../acronyms#dsp" title="Disability support pension">DSP</a>, the Wage Level A of the National Training Wage schedule included in a modern award (NTWS), or the rate as varied or replaced by Fair Work Australia, is a rate used to measure whether a young person can be classified as being self-supporting through paid employment (<a href="../../../3/2/5/80">3.2.5.80</a>).</p>
 <h2>Rates</h2>
 <p>The following table lists the relevant NTWS rates over recent years, and the minimum amounts that young people must earn to qualify as independent under the self-supporting provisions.</p>
 <table><thead><tr><th scope="col">If period/s of employment commenced from</th>
@@ -177,14 +167,15 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </tr><tr><td>1 October 2008 to 30 June 2011</td>
 <td>$26,043</td>
 <td>$19,532</td>
-</tr></tbody></table><div class="reference">
+</tr></tbody></table><p><strong>Note:</strong> The maximum rate of pay under Wage level A of the NTWS, is identified as the maximum weekly wage at Schedule E, Clause E.4.1 (a) of the <a href="http://awardviewer.fwo.gov.au/award/show/MA000104">Miscellaneous Award 2010</a>. In July 2017 this was $635.10, which is equivalent to an annual salary of $33,114.11.</p>
+<div class="reference">
 <p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 1067A(10) to (10J) People who are self-supporting</p>
 <p><strong>Policy reference:</strong> SS Guide <a href="../../../3/2/5/80">3.2.5.80</a> YA &amp; DSP - Self-supporting through Paid Employment, <a href="../../../5/2/1/60">5.2.1.60</a> Historical National Training Wage Schedule Rates (YA, DSP)</p>
 </div>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     14 August 2017  	</div>
+      Last reviewed:     20 March 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../../contact-us">Contact us</a></li>
@@ -194,7 +185,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../../../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"NLUu_kFXltqsQv67kqiwzs76jEoNFMDe65eufp16s7s","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/1\/2\/1":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"D0rrt6s99lOh_Inc0z7TvBAfX6Ff41_46A5ksFs0H94","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/1\/2\/1":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide" class="active-trail">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,10 +49,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-gt9bBdc6Ooahd5yo1cWP764W6RqLmLs03EtvJXIjr7Q" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-3q9PbAKclLHpFA7qiYDNRfbrknmqJJZOAuH947_PC8k" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.27 - Released 20 September 2017</p>
+<p>Version 4.32 - Released 7 May 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
@@ -92,7 +92,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <h2>Act references</h2>
 <p><a href="https://www.legislation.gov.au/Details/C2004A03596">Child Support Act 1988</a></p>
 <p><a href="https://www.legislation.gov.au/Series/C2004A03596" title="Child Support (Registration and Collection) Act 1988">CSRC Act</a></p>
-<p><a href="https://www.legislation.gov.au/Series/F1996B00886" title="Child Support (Registration and Collection) Regulations 1988">CSRC Regs</a></p>
+<p><a href="https://www.legislation.gov.au/Series/F2018L00313" title="Child Support (Registration and Collection) Regulations 2018">CSRC Regs</a></p>
+<p><a href="https://www.legislation.gov.au/Series/F1996B00886" title="Child Support (Registration and Collection) Regulations 1988">Child Support (Registration and Collection) Regulations 1988</a></p>
 <p><a href="https://www.legislation.gov.au/Details/C2004A03725">Child Support Amendment Act 1988</a></p>
 <p><a href="https://www.legislation.gov.au/Series/C2004A03872" title="Child Support (Assessment) Act 1989">CSA Act</a></p>
 <p><a href="https://www.legislation.gov.au/Series/C2004A03911">Social Security and Veterans' Affairs Legislation Amendment Act (No 3) 1989</a></p>
@@ -113,7 +114,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p><a href="https://www.legislation.gov.au/Details/C2004A00583">Federal Magistrates (Consequential Amendments) Act 1999</a></p>
 <p><a href="https://www.legislation.gov.au/Details/C2004A00641">Child Support Legislation Amendment Act 2000</a></p>
 <p><a href="https://www.legislation.gov.au/Details/C2004A00736">Family Law Amendment Act 2000</a></p>
-<p><a href="https://www.legislation.gov.au/Series/F2000B00083">Child Support (Regulation and Collection) (Overseas-related Maintenance Obligations) Regulations 2000</a></p>
+<p><a href="https://www.legislation.gov.au/Series/F2000B00083">Child Support (Registration and Collection) (Overseas-related Maintenance Obligations) Regulations 2000</a></p>
 <p><a href="https://www.legislation.gov.au/Details/C2004A00843">Child Support Legislation Amendment Act 2001</a></p>
 <p><a href="https://www.legislation.gov.au/Details/C2004A00909">Family and Community Services Legislation Amendment (Application of Criminal Code) Act 2001</a></p>
 <p><a href="https://www.legislation.gov.au/Details/C2006A00023">Jurisdiction of the Federal Magistrates Court Legislation Amendment Act 2006</a></p>
@@ -138,7 +139,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <ul><li><cite>Child Support Act 1988</cite> renamed the CSRC Act.</li>
 <li>The Registrar can collect the amounts payable under a child support assessment.</li>
 </ul><h2>From 6 April 1992</h2>
-<ul><li>The Registrar can issue a notice to a third party (<a href="http://guides.dss.gov.au/child-support-guide/5/2/9">5.2.9</a>) who holds money for a child support payer to pay that money to the Registrar in satisfaction of child support arrears.</li>
+<ul><li>The Registrar can issue a notice to a third party (<a href="../../5/2/9">5.2.9</a>) who holds money for a child support payer to pay that money to the Registrar in satisfaction of child support arrears.</li>
 <li>The CSRC Act was amended to facilitate the Registrar collecting child support where a payer was overseas.</li>
 <li>The Registrar can credit an amount as a non-agency payment where the payer made that payment to a third party in satisfaction of a debt owed by the payer and/or payee if both parents intended it to be for child support and there are special circumstances.</li>
 <li>A court can set aside or prevent a transaction intended to reduce or defeat a payer's ability to pay child support.</li>
@@ -199,7 +200,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li>There are some increased time allowances in relation to various processes where one party to a maintenance liability is resident in a reciprocating jurisdiction. Generally these increased time allowances apply only to the party who is resident in the reciprocating jurisdiction.</li>
 <li>A person who has a liability to pay child support to the Registrar because of an overseas maintenance liability is able to apply for non-enforcement of the liability during a period of low income.</li>
 </ul><h2>From 1 January 2008</h2>
-<ul><li>The Registrar can issue a notice to someone who owes a child support debtor money requiring that the money be paid to the Registrar in satisfaction of child support related debts (section 72A notice (<a href="http://guides.dss.gov.au/child-support-guide/5/2/9">5.2.9</a>)) for less than the total amount of outstanding child support.</li>
+<ul><li>The Registrar can issue a notice to someone who owes a child support debtor money requiring that the money be paid to the Registrar in satisfaction of child support related debts (section 72A notice (<a href="../../5/2/9">5.2.9</a>)) for less than the total amount of outstanding child support.</li>
 <li>The Registrar is not required to serve a copy of the objection (<a href="../../4/1/6">4.1.6</a>) and accompanying documents on the other parent where the objection is to the making of, or refusal to make, a departure determination under CSA Act Part 6A if the Registrar is satisfied that the rights of the other parent will not be affected by any decision made by the Registrar.</li>
 <li>Parents can apply for an extension of time (<a href="../../4/1/5">4.1.5</a>) to submit an objection over the phone as well as in writing.</li>
 <li>Payers can object (<a href="../../4/1/2">4.1.2</a>) to the acceptance of their application for a child support assessment.</li>
@@ -207,7 +208,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </ul><h2>From 1 July 2008</h2>
 <ul><li>A new child support scheme comes into operation from 1 July 2008. This is the most significant change since the inception of the child support scheme.</li>
 <li>The changes to the scheme build on the Government's reform of the family law system which seek to encourage shared parenting, reduce conflict and make sure child support is paid in full and on time.</li>
-<li>In changing the scheme the Government has accepted the report of the Ministerial Taskforce on Child Support, chaired by Professor Patrick Parkinson (<a href="https://www.dss.gov.au/our-responsibilities/families-and-children/publications-articles/in-the-best-interests-of-children-reforming-the-child-support-scheme-report-of-the-ministerial-taskforce-on-child-support">In the Best Interests of Children, May 2005</a>). This review was conducted in response to the House of Representatives Standing Committee on Family and Community Affairs report on child custody arrangements in the event of family separation (<a href="http://www.aph.gov.au/Parliamentary_Business/Committees/House_of_Representatives_Committees?url=fca/childcustody/report.htm">Every Picture Tells a Story, December 2003</a>).</li>
+<li>In changing the scheme the Government has accepted the report of the Ministerial Taskforce on Child Support, chaired by Professor Patrick Parkinson (<a href="https://www.dss.gov.au/our-responsibilities/families-and-children/publications-articles/in-the-best-interests-of-children-reforming-the-child-support-scheme-report-of-the-ministerial-taskforce-on-child-support">In the Best Interests of Children, May 2005</a>). This review was conducted in response to the House of Representatives Standing Committee on Family and Community Affairs report on child custody arrangements in the event of family separation (<a href="https://www.aph.gov.au/Parliamentary_Business/Committees/House_of_Representatives_Committees?url=fca/childcustody/report.htm">Every Picture Tells a Story, December 2003</a>).</li>
 <li>The Taskforce found that the scheme needed to be updated to reflect the substantial changes in our society since the scheme was first established in 1988. It highlighted the need for a much greater emphasis on shared parental responsibility and a growing recognition of the importance of both parents remaining actively involved in their children's lives after separation.</li>
 <li>The changes to the scheme are significant and therefore the child support legislation has been amended extensively to bring these changes about. A summary of some of the more significant changes to the CSRC Act that are operative from 1 July 2008 are outlined below:
 <ul><li>Prescribed non-agency payments (<a href="../../5/3/1">5.3.1</a>) do not apply to parents whose child support liability reflects at least regular care of any of the children to whom the relevant administrative assessment relates.</li>
@@ -252,7 +253,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     1 July 2016  	</div>
+      Last reviewed:     3 April 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../contact-us">Contact us</a></li>
@@ -262,7 +263,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

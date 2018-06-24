@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../../../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"sKHynyupMo82wx-BDp2migCR3i2pj6lSMEyBS2aWE-I","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/5\/5\/2":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"0zagMcbNTy6xlMPwsG1vpUgL2R_4csHT9D63UXl6Zrc","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/5\/5\/2":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide" class="active-trail">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,10 +49,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-FP8jtYPrsilukFwYNy9LbPhkHbzgPN5NaHT5FpRtPzE" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-O7TghpVWfjy0JS5QNiy0RzjAUyElqrW9I9G6Zcosajw" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.27 - Released 20 September 2017</p>
+<p>Version 4.32 - Released 7 May 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
@@ -95,7 +95,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <div class="reference">
 <h2>Act references</h2>
 <p><a href="https://www.legislation.gov.au/Series/C2004A03596" title="Child Support (Registration and Collection) Act 1988">CSRC Act</a> section 4(1), section 17, section 70, section 76, section 113A</p>
-<p><a href="https://www.legislation.gov.au/Series/F1996B00886" title="Child Support (Registration and Collection) Regulations 1988">CSRC Regs</a> regulation 6</p>
+<p><a href="https://www.legislation.gov.au/Series/F2018L00313" title="Child Support (Registration and Collection) Regulations 2018">CSRC Regs</a> regulation 23</p>
 </div>
 <h2>Entitlement to payment</h2>
 <p>The Registrar must pay a payee on or before the first Wednesday of the following month an amount equal to the total of the following amounts in relation to their registered maintenance liability (CSRC Act section 76(1)):</p>
@@ -108,8 +108,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </ul><p>but excluding any amount that was not due and payable by the payer on the seventh day of the current month. The Registrar will hold these advance payments in credit and apply them against future amounts payable to the payee.</p>
 <p>The 'payment period' begins 8 days before the first Wednesday of the current month and ends 9 days before the first Wednesday of the following month (CSRC Act section 76(1)(b)).</p>
 <div class="example">
-<p><strong>Example:</strong> The Registrar is collecting child support from M for F. On the first Wednesday in December F is entitled to receive:</p>
-<ul><li>all payments deducted by M's employer during October (due to the Registrar on 7 November) including any deductions for arrears, and</li>
+<p><strong>Example:</strong> The Registrar is collecting child support from Myron for Elisabeti. On the first Wednesday in December Elisabeti is entitled to receive:</p>
+<ul><li>all payments deducted by Myron's employer during October (due to the Registrar on 7 November) including any deductions for arrears, and</li>
 <li>all payments, other than payments from an employer, received up until the closing day, which is 9 days before the first Wednesday in December (i.e. the Monday of the week that is before the week of the first Wednesday in December), including any arrears payments,</li>
 </ul><p>	except where:</p>
 <ul><li>the amount has already been paid to the payee, or</li>
@@ -121,14 +121,14 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <h2>Apportionment of payments between payees</h2>
 <p>Where the Registrar receives a payment from a payer who owes child support to more than one payee and the amount received is less than the sum of those debts, the Registrar must apportion the payment between the payees in proportion to the amount each of them is owed (CSRC Act section 70(1)).</p>
 <div class="example">
-<p><strong>Example:</strong> F makes a payment of $600 for child support payable to M and D. M has no current entitlement but is owed arrears of $1000. D is owed no arrears but has a current entitlement of $500.</p>
-<p>The Registrar apportions the payment, $400 to M and $200 to D.</p>
+<p><strong>Example:</strong> Anton makes a payment of $600 for child support payable to Jen and Rita. Jen has no current entitlement but is owed arrears of $1000. Rita is owed no arrears but has a current entitlement of $500.</p>
+<p>The Registrar apportions the payment, $400 to Jen and $200 to Rita.</p>
 </div>
 <p>The exception is where the Registrar receives an amount from the payer which has been paid in accordance with a court order made in enforcement proceedings brought by a payee (<a href="../4/7">5.4.7</a>) (CSRC Act section 70(2)). If this occurs, the Registrar will disburse the entire amount paid in accordance with the order to the payee who initiated the proceedings (up to the extent of the debt owed to that payee).</p>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     9 November 2015  	</div>
+      Last reviewed:     3 April 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../contact-us">Contact us</a></li>
@@ -138,7 +138,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

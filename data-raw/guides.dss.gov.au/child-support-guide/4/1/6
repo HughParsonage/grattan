@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../../../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"8GsHE_rDvZHYztExyrdPQ9R3xuTFNUzunXG22r2L0ak","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/4\/1\/6":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"DYnBG0XVzyTYe2ik0g9VApyAy0Wi9WmuzAewaBxYBFg","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/4\/1\/6":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide" class="active-trail">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,10 +49,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-VMJEFeeomAOew8P3dV13SdF5KIw-pkFO_o1xfI__zFI" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-ajXeiNRY69zgdUso6dSuTSu6a88Yzei7jlbkfx6PpQA" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.27 - Released 20 September 2017</p>
+<p>Version 4.32 - Released 7 May 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
@@ -124,7 +124,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p>The Registrar will also make reasonable efforts to obtain information that is relevant to the original decision from either parent or from third parties. The officer dealing with the objection must use their judgment about the appropriate method of obtaining information in each case.</p>
 <p>The Registrar will provide each parent with an opportunity to comment on information that may be taken into account in a way that is adverse to them.</p>
 <p>The Registrar must make a decision within 60 days of the day on which the objection was received (CSRC Act section 87(1)). However, if the parent making the objection, or a parent served with a copy of the objection and any accompanying documents, is a resident of a reciprocating jurisdiction, the time to make a decision is extended to 120 days (CSRC Act section 87(1A)).</p>
-<p>A parent can make an application to the Federal Court or Federal Circuit Court on the basis that the Registrar has failed to make a decision on an objection within the required time (ADJR Act section 7). However, the Registrar is still obliged to make a decision on an objection even if the 60 day (or 120 day) period has ended ('<cite>Garnaut v Child Support Registrar</cite> [2004] FCA 1100').</p>
+<p>A parent can make an application to the Federal Court or Federal Circuit Court on the basis that the Registrar has failed to make a decision on an objection within the required time (ADJR Act section 7). However, the Registrar is still obliged to make a decision on an objection even if the 60 day (or 120 day) period has ended (<cite>Garnaut v Child Support Registrar</cite> [2004] FCA 1100).</p>
 <h2 id="The_Objections_Officer">The Objections Officer</h2>
 <p>Only authorised 'Objections Officers' will make decisions on an objection (<a href="../../6/1/3">6.1.3)</a>.</p>
 <p>An Objections Officer must not deal with an objection to a particular decision if they were involved in making that original decision.</p>
@@ -141,7 +141,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </div>
 <p>The Objections Officer will ensure that the process followed is procedurally fair and will give parents an opportunity to respond to information that is being taken into account.</p>
 <h2 id="Decisions_an_Objections_Officer_can_make">Decisions an Objections Officer can make</h2>
-<p>An Objections Officer must decide to allow, partly allow or disallow the objection (CSRC Act section 87(1)). They do not simply look at the grounds of the objection and decide whether they agree or disagree with the original decision. The Objections Officer must make their own findings about the facts and apply the law to those facts in order to make the correct or preferable decision ('<cite>Garnaut v Child Support Registrar</cite> [2004] FCA 1100'). They then compare their decision with the original decision.</p>
+<p>An Objections Officer must decide to allow, partly allow or disallow the objection (CSRC Act section 87(1)). They do not simply look at the grounds of the objection and decide whether they agree or disagree with the original decision. The Objections Officer must make their own findings about the facts and apply the law to those facts in order to make the correct or preferable decision (<cite>Garnaut v Child Support Registrar</cite> [2004] FCA 1100). They then compare their decision with the original decision.</p>
 <p>If the Objections Officer finds that it was not correct to make the original decision then they will allow the objection. The original decision is set aside and the assessment and/or Register are amended as if the original decision had not been made.</p>
 <p>If the Objections Officer finds that it was correct to make the original decision but that some aspect of the decision is incorrect, they will partly allow the objection. The original decision is taken never to have been made and the Objections Officer will make a new and preferable decision to replace the decision. The Registrar will amend the assessment and/or Register in accordance with the new decision.</p>
 <p>If the Objections Officer finds that the original decision was entirely correct they will disallow the objection.</p>
@@ -176,7 +176,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

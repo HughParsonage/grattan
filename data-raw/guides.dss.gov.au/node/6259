@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"MckKjAE5tv1qyE9heTkHN5tm9H0Yd6ClmT-7AYqYd9c","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/6259":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"3iOwOOhVcKvGoj3TCimTy-LAHQUM9EYVII33q-vfhd8","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/6259":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children menu-mlid-513"><a href="../child-support-guide">Child Support Guide</a></li>
 <li class="leaf has-children active-trail menu-mlid-491"><a href="../family-assistance-guide" class="active-trail">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../guide-social-security-law">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,10 +49,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-BjiQjU_qDK_7pFSASFZj6eeslrd_lwKLdCqGHbuk7Z0" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-XAGY-ciSY-68VkEaDwwddqjYv1kzdlZaHeYY8WzWdkc" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Family Assistance Guide</h2>
-<p>Version 1.198 - Released 20 September 2017</p>
+<p>Version 1.203 - Released 7 May 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
@@ -97,63 +97,103 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <article id="node-6259">
 <h1 >7.3.2.40 Waiver in Relation to Settlements</h1>
 <h2>Summary</h2>
-<p>Centrelink can agree to settle a debt (<a href="http://guides.dss.gov.au/family-assistance-guide/1/1/d/60">1.1.D.60</a>) for less than the amount outstanding in the following situations:</p>
-<ul><li>civil action,</li>
-<li>proceedings during the <a href="../family-assistance-guide/acronyms#aat" title="Administrative Appeals Tribunal">AAT</a> first review or AAT second review,</li>
-<li>when 80% of the debt has already been recovered and the debtor cannot repay more,</li>
-<li>when the debtor offers to repay at least the present value of the outstanding amount, and it would take at least a year to otherwise recover the amount, and the debtor cannot repay more.</li>
-</ul><p>Where a debt has been settled for less than the value of the debt, the balance of the debt must be waived (<a href="../family-assistance-guide/1/1/w/10">1.1.W.10</a>). More information about these situations is provided later in this topic.</p>
+
+<p>Centrelink can agree to settle a debt (<a href="6900">1.1.D.60</a>) for less than the amount outstanding in the following situations:</p>
+
+<ul>
+	<li>civil action,</li>
+	<li>proceedings during the <a href="7005#aat" title="Administrative Appeals Tribunal">AAT</a> first review or AAT second review,</li>
+	<li>when 80% of the debt has already been recovered and the debtor cannot repay more,</li>
+	<li>when the debtor offers to repay at least the present value of the outstanding amount, and it would take at least a year to otherwise recover the amount, and the debtor cannot repay more.</li>
+</ul>
+
+<p>Where a debt has been settled for less than the value of the debt, the balance of the debt must be waived (<a href="6710">1.1.W.10</a>). More information about these situations is provided later in this topic.</p>
+
 <h2>Civil action</h2>
+
 <p>If legal action has been taken to recover a debt, and the Commonwealth has agreed to settle for an amount that is less than the full amount of the debt, Centrelink must waive recovery of the balance of the debt.</p>
+
 <div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 100(1) Settlement of civil action, section 141 Settlement of Proceedings before AAT</p>
+	<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 100(1) Settlement of civil action, section 141 Settlement of proceedings before the AAT</p>
 </div>
+
 <h2>Proceedings before the AAT</h2>
+
 <p>If Centrelink has agreed to settle a debt for less than the full amount of the debt in proceedings before the AAT, Centrelink must waive recovery of the balance of the debt.</p>
+
 <div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 100(2) Settlement of proceedings before the AAT</p>
+	<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 100(2) Settlement of proceedings before the AAT</p>
 </div>
+
 <h2>80% of the debt already recovered</h2>
+
 <p>Centrelink must waive recovery of up to 20% of the original value of the debt if the debtor:</p>
-<ul><li>has repaid at least 80% of the original value of the debt, and</li>
-<li>is unable to repay the remaining balance (see example).</li>
-</ul><div class="example">
-<p><strong>Example:</strong> Michael has a debt of $10,000. He has $8,500 in a bank account, but is unemployed with low job prospects. Recovery of his debt by deduction from his ongoing <a href="../family-assistance-guide/acronyms#ftb" title="Family tax benefit">FTB</a> entitlement would take a number of years. Michael offers to repay $8,500 in satisfaction of the debt. Centrelink agrees to settle the debt, and waives recovery of the remaining balance of $1,500.</p>
-</div>
-<div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 100(3) Waiver where at least 80% of debt recovered and debtor cannot pay more</p>
-</div>
-<h2>Repayment of present value</h2>
-<p>Centrelink may agree to settle a debt for less than the unpaid amount of the debt if:</p>
-<ul><li>the debtor cannot repay more than the agreed amount, and</li>
-<li>it would take at least a year to recover the unpaid amount using another method of recovery.</li>
-</ul><p>Centrelink must waive the difference between the agreed amount and the unpaid amount of the debt.</p>
-<p>The rest of this topic provides information about calculating the present value of the debt.</p>
-<div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 100(4) Agreement for part-payment in satisfaction of outstanding debt, section 100(5) Limits on agreement to accept part-payment in satisfaction of outstanding debt</p>
-</div>
-<h2>Working out the present value of the debt</h2>
-<p>The present value of the unpaid amount of a debt is worked out using the following formula:</p>
-<p>Present value = (Annual repayment divided by interest) × (1 - (1divided by (1 + interest) repayment period))</p>
-<p>The annual repayment is the amount of the debt that would have been recovered in a year if it were not being waived. The interest rate is declared by the Minister in a disallowable instrument (<a href="../family-assistance-guide/1/1/d/90">1.1.D.90</a>). The interest rate is currently 10% per annum. The repayment period, expressed in years, is the number of annual repayments required to repay the unpaid amount.</p>
+
+<ul>
+	<li>has repaid at least 80% of the original value of the debt, and</li>
+	<li>is unable to repay the remaining balance (see example).</li>
+</ul>
+
 <div class="example">
-<p><strong>Example:</strong> Stuart had a debt of $15,000. He has already repaid $3,000 leaving an unpaid amount of $12,000. Stuart offers to make a lump sum repayment of $8,200, and shows he is unable to repay more. Centrelink works out that the annual repayment of the debt is $1,300 per year based on a repayment of $50 per fortnight. The repayment period works out to 9.23 years.</p>
-<p>The present value of the debt is worked out as follows:</p>
-<p>Present value = (Annual repayment divided by interest) × (1 - (1 divided by (1 + interest) repayment period))</p>
-<p>= ($1,300 divided by 0.1) × (1 - (1 divided by 1.1 9.23))</p>
-<ul><li>= $1,300 × (1 - 0.4149)</li>
-<li>= $1,300 × 0.585)</li>
-<li>= $7,606</li>
-</ul></div>
-<p>As the amount offered to settle the debt is more than the present value of the debt, Centrelink agrees to accept the lump sum in full satisfaction of the debt. Recovery of the remaining $3,800 is waived.</p>
+	<p><strong>Example:</strong> Michael has a debt of $10,000. He has $8,500 in a bank account, but is unemployed with low job prospects. Recovery of his debt by deduction from his ongoing <a href="7005#ftb" title="Family tax benefit">FTB</a> entitlement would take a number of years. Michael offers to repay $8,500 in satisfaction of the debt. Centrelink agrees to settle the debt, and waives recovery of the remaining balance of $1,500.</p>
+</div>
+
 <div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 100(6) Formula for working out present value of unpaid amount</p>
-<p><a href="https://www.legislation.gov.au/Series/F2007B00412">Family Assistance (Present Value of Unpaid Amount - Interest Rate) Determination 2000</a></p>
+	<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 100(3) Waiver where at least 80% of debt recovered and debtor cannot pay more</p>
+</div>
+
+<h2>Repayment of present value</h2>
+
+<p>Centrelink may agree to settle a debt for less than the unpaid amount of the debt if:</p>
+
+<ul>
+	<li>the debtor cannot repay more than the agreed amount, and</li>
+	<li>it would take at least a year to recover the unpaid amount using another method of recovery.</li>
+</ul>
+
+<p>Centrelink must waive the difference between the agreed amount and the unpaid amount of the debt.</p>
+
+<p>The rest of this topic provides information about calculating the present value of the debt.</p>
+
+<div class="reference">
+	<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 100(4) Agreement for part-payment in satisfaction of outstanding debt, section 100(5) Limits on agreement to accept part-payment in satisfaction of outstanding debt</p>
+</div>
+
+<h2>Working out the present value of the debt</h2>
+
+<p>The present value of the unpaid amount of a debt is worked out using the following formula:</p>
+
+<p>Present value = (Annual repayment &divide; interest) &times; (1 - (1 &divide; (1 + interest)<sup>repayment period</sup>))</p>
+
+<p>The annual repayment is the amount of the debt that would have been recovered in a year if it were not being waived. The interest rate is declared by the Minister in a disallowable instrument (<a href="6905">1.1.D.90</a>). The interest rate is currently 10% per annum. The repayment period, expressed in years, is the number of annual repayments required to repay the unpaid amount.</p>
+
+<div class="example">
+	<p><strong>Example:</strong> Stuart had a debt of $15,000. He has already repaid $3,000 leaving an unpaid amount of $12,000. Stuart offers to make a lump sum repayment of $8,200, and shows he is unable to repay more. Centrelink works out that the annual repayment of the debt is $1,300 per year based on a repayment of $50 per fortnight. The repayment period works out to 9.23 years.</p>
+
+	<p>The present value of the debt is worked out as follows:</p>
+
+	<p>Present value = (Annual repayment &divide; interest) &times; (1 - (1 &divide; (1 + interest)<sup>repayment period</sup>))</p>
+
+	<p>= ($1,300 &divide; 0.1) &times; (1 - (1 &divide; 1.1<sup>9.23</sup>))</p>
+
+	<ul>
+		<li>= $13,000 &times; (1 - 0.4149)</li>
+		<li>= $13,000 &times; 0.585</li>
+		<li>= $7,606</li>
+	</ul>
+</div>
+
+<p>As the amount offered to settle the debt is more than the present value of the debt, Centrelink agrees to accept the lump sum in full satisfaction of the debt. Recovery of the remaining $3,800 is waived.</p>
+
+<div class="reference">
+	<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 100(6) Formula for working out present value of unpaid amount</p>
+
+	<p><a  href="https://www.legislation.gov.au/Series/F2018L00166">Social Services Laws (Present Value of Unpaid Amount – Interest Rate) Determination 2018 </a></p>
 </div>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     1 July 2015  	</div>
+      Last reviewed:     7 May 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../contact-us">Contact us</a></li>
@@ -163,7 +203,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

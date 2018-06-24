@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../../../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"kG5Sfr7423_4l1dSclo3TPVtUEk3QYlxAKXj1jOcHKA","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/2\/5\/3":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"nrg4FeoExTidsdRKwZ2ZDCRZ5Oe4Tmrea1MVub__F80","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/2\/5\/3":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide" class="active-trail">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,10 +49,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-k6JptCD9rN6A-weppEqV7XsHeRAdofZPNqbCs_6uMZU" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-3zHoNZbAZmuqkuv7UalYOAL_o5xtdbf-D5diFAJzS1o" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.27 - Released 20 September 2017</p>
+<p>Version 4.32 - Released 7 May 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
@@ -72,7 +72,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-597"><a href="5">2.5.5 Application to Have an Assessment Continue Past a Child&#039;s 18th Birthday</a></li>
 <li class="last leaf menu-mlid-598"><a href="6">2.5.6 Estimates of Income - before 1 July 2010</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-599"><a href="../6" title="This chapter describes the issues that the Registrar has to consider when making a decision to change an assessment under CSA Act part 6A.">2.6 Change of Assessment in Special Circumstances</a></li>
+<li class="collapsed menu-mlid-599"><a href="../6" title="This chapter describes the issues that the Registrar has to consider when making a decision to change an assessment under Child Support (Assessment) Act 1989 (CSA Act) part 6A.">2.6 Change of Assessment in Special Circumstances</a></li>
 <li class="collapsed menu-mlid-618"><a href="../7" title="This chapter describes how parents can make child support agreements. It describes the effect of a child support agreement upon a child support assessment.">2.7 Agreements</a></li>
 <li class="collapsed menu-mlid-624"><a href="../8" title="This chapter describes when a court can make orders that affect a child support assessment and how the Registrar interprets court orders which will affect an assessment.">2.8 Court Variation to Assessments</a></li>
 <li class="collapsed menu-mlid-627"><a href="../9" title="This chapter describes the procedural rules for making assessments and notes the information required in a notice of assessment. It also describes when the Registrar will amend an assessment.
@@ -99,7 +99,7 @@ It also describes how an assessment creates a liability to pay child support and
 <div class="reference">
 <h2>Act references</h2>
 <p><a href="https://www.legislation.gov.au/Series/C2004A03872" title="Child Support (Assessment) Act 1989">CSA Act</a> section 5, section 60, section 65A, section 65B, section 66, section 66A, section 66B, section 66C, section 67A</p>
-<p><a href="https://www.legislation.gov.au/Series/F1996B00398" title="Child Support (Assessment) Regulations 1989">CSA Regs</a> regulation 7D</p>
+<p><a href="https://www.legislation.gov.au/Series/F2018L00307" title="Child Support (Assessment) Regulations 2018">CSA Regs</a> regulation 13</p>
 <p><a href="https://www.legislation.gov.au/Series/C2013A00020">National Disability Insurance Scheme Act 2013</a></p>
 </div>
 <h2>On this page</h2>
@@ -129,7 +129,7 @@ It also describes how an assessment creates a liability to pay child support and
 <p>In considering an application under 65B for the fixed annual rate not to be used, the Registrar must use the definition of income in section 66A(4) to determine if the parent's current income is no more than the relevant parenting payment (single) maximum basic amount (<a href="../4/2">2.4.2</a>). In that section, 'income' is not restricted to taxable income. A taxation assessment is not sufficient evidence of the income of the parent for the purposes of this section (section 65B(3)). In section 66A(4) income is defined as:</p>
 <ul><li>any money received, earned or derived for personal use or benefit, or</li>
 <li>any periodic payment by way of gift or allowance.</li>
-</ul><p>The only exclusions to this definition are prescribed in the regulations (regulation 7D). They are:</p>
+</ul><p>The only exclusions to this definition are prescribed in the regulations (regulation 13). They are:</p>
 <ul><li>amenity allowances or gratuities (incidental payments for personal items or other minor expenses, but not payments for work, study or participation in approved programs) paid to prisoners,</li>
 <li>disability support pensions, pensions paid to veterans who are totally and permanently incapacitated and Special Rate Disability Pension for veterans, where at least 85% of the pension is paid to another person for the provision of ongoing care to the pension recipient, and</li>
 <li>a National Disability Insurance Scheme (NDIS) amount (as defined in the <cite>National Disability Insurance Scheme Act 2013</cite>).</li>
@@ -159,20 +159,20 @@ It also describes how an assessment creates a liability to pay child support and
 <p><strong>Note:</strong> The superannuation pension and the lotto win (both non-taxable income) have been included in calculating the income for section 66A(4) purposes. The liable parent's application for the fixed annual rate not to be used will not be granted as the total income exceeds the relevant parenting payment (single) maximum basic amount.</p>
 </div>
 <div class="example">
-<p><strong>Example:</strong> F is assessed to pay child support to M for their children A and B. F has regular care of A and B. F did not receive an income support payment in the last relevant year of income and had an adjusted taxable income of less than the relevant parenting payment (single) maximum basic amount. The assessment has been made using the fixed annual rate.</p>
-<p>F makes an application for the fixed annual rate not to apply. F does not receive any income support payments due to the income of their current partner. F has no other sources of income, and does not receive any non-monetary benefits that are relevant to the assessment.</p>
-<p>The Registrar is satisfied that F's current income is no more than the relevant parenting payment (single) maximum basic amount. The Registrar is also satisfied that it would be unjust and inequitable to expect F to pay the fixed annual rate. A determination is made under section 65B(4) that the fixed annual rate not apply.</p>
-<p>As F has regular care of the children, and is therefore contributing to the cost of the children, the minimum rate of child support (section 66) does not apply. F is not required to pay child support for A and B.</p>
+<p><strong>Example:</strong> Noor is assessed to pay child support to Uri for their children Florinda and Petra. Noor has regular care of Florinda and Petra. Noor did not receive an income support payment in the last relevant year of income and had an adjusted taxable income of less than the relevant parenting payment (single) maximum basic amount. The assessment has been made using the fixed annual rate.</p>
+<p>Noor makes an application for the fixed annual rate not to apply. Noor does not receive any income support payments due to the income of their current partner. Noor has no other sources of income, and does not receive any non-monetary benefits that are relevant to the assessment.</p>
+<p>The Registrar is satisfied that Noor's current income is no more than the relevant parenting payment (single) maximum basic amount. The Registrar is also satisfied that it would be unjust and inequitable to expect Noor to pay the fixed annual rate. A determination is made under section 65B(4) that the fixed annual rate not apply.</p>
+<p>As Noor has regular care of the children, and is therefore contributing to the cost of the children, the minimum rate of child support (section 66) does not apply. Noor is not required to pay child support for Florinda and Petra.</p>
 </div>
 <div class="example">
-<p><strong>Example:</strong> M is assessed to pay child support to F for their children A and B. M has regular care of A and B. M did not receive an income support payment in the last relevant year of income and had an adjusted taxable income of less than the relevant parenting payment (single) maximum basic amount. The assessment has been made applying the fixed annual rate.</p>
-<p>M makes an application for the fixed annual rate not to be used. M has an adjusted taxable income of $10,000 and is a director of a family business which operates through a trust. M provides financial records regarding the business. The Registrar determines that M receives goods, services or benefits with a significant annual value through the business.</p>
-<p>M's current income of $10,000 is less than the relevant parenting payment (single) maximum amount. However, the Registrar decides that M's income does not fairly represent M's real capacity to pay child support, and that it is not unjust and inequitable to require M to pay the fixed annual rate. M's application is, therefore, refused.</p>
+<p><strong>Example:</strong> Justina is assessed to pay child support to Kumar for their children Esra and Shantel. Justina has regular care of Esra and Shantel. Justina did not receive an income support payment in the last relevant year of income and had an adjusted taxable income of less than the relevant parenting payment (single) maximum basic amount. The assessment has been made applying the fixed annual rate.</p>
+<p>Justina makes an application for the fixed annual rate not to be used. Justina has an adjusted taxable income of $10,000 and is a director of a family business which operates through a trust. Justina provides financial records regarding the business. The Registrar determines that Justina receives goods, services or benefits with a significant annual value through the business.</p>
+<p>Justina's current income of $10,000 is less than the relevant parenting payment (single) maximum amount. However, the Registrar decides that Justina's income does not fairly represent Justina's real capacity to pay child support, and that it is not unjust and inequitable to require Justina to pay the fixed annual rate. Justina's application is, therefore, refused.</p>
 </div>
 <div class="example">
-<p><strong>Example:</strong> F is assessed to pay child support to M for their children A and B. F has regular care of A and B. F did not receive an income support payment in the last relevant year of income and had an adjusted taxable income of less than the relevant parenting payment (single) maximum basic amount. The assessment has been made applying the fixed annual rate.</p>
-<p>F makes an application for the fixed annual rate not to be used. F has an adjusted taxable income of $10,000 and receives a superannuation pension (not taxable) of $10,000.</p>
-<p>As F's current income of $20,000 is more than the relevant parenting payment (single) maximum basic amount the application must be refused.</p>
+<p><strong>Example:</strong> Adam is assessed to pay child support to Fausta for their children Igon and Irene. Adam has regular care of Igon and Irene. Adam did not receive an income support payment in the last relevant year of income and had an adjusted taxable income of less than the relevant parenting payment (single) maximum basic amount. The assessment has been made applying the fixed annual rate.</p>
+<p>Adam makes an application for the fixed annual rate not to be used. Adam has an adjusted taxable income of $10,000 and receives a superannuation pension (not taxable) of $10,000.</p>
+<p>As Adam's current income of $20,000 is more than the relevant parenting payment (single) maximum basic amount the application must be refused.</p>
 </div>
 <h2 id="reinstatefar">Amending an assessment if section 65B conditions no longer satisfied</h2>
 <p>The Registrar may become aware that the liable parent no longer satisfies the requirements of section 65B after a determination for the fixed annual rate not to be used has been made. If the Registrar is satisfied that the parent no longer meets the conditions for the determination that the fixed rate not apply then the assessment may be amended to have the fixed annual rate again apply (section 66B(b)).</p>
@@ -181,14 +181,14 @@ It also describes how an assessment creates a liability to pay child support and
 <li>the date the fixed annual rate was first not applied, if section 65B was in fact never satisfied, or</li>
 <li>the date the Registrar became aware of the change in circumstances that meant section 65B is no longer satisfied.</li>
 </ul><div class="example">
-<p><strong>Example:</strong> F was assessed to pay the fixed annual rate to M for their children A and B. F made an application for the fixed rate not to be used. The Registrar was satisfied that F's current income was no more than the relevant parenting payment (single) maximum basic amount (<a href="../4/2">2.4.2</a>) and that it would be unjust and inequitable for F to pay the fixed annual rate. A determination was made under section 65B(4) that the fixed annual rate not be used from the start of the child support period.</p>
-<p>Three months later, the Registrar became aware that F had always been working and the information provided with the application for the fixed annual rate not to apply was inaccurate and incomplete. As F's current income is in fact more than the relevant parenting payment (single) maximum basic amount they do not satisfy the requirements of section 65B. The Registrar amends the assessment under section 66B to reinstate the fixed annual rate from the start of the child support period.</p>
+<p><strong>Example:</strong> Magdalena was assessed to pay the fixed annual rate to Elias for their children Alan and Ilija. Magdalena made an application for the fixed rate not to be used. The Registrar was satisfied that Magdalena's current income was no more than the relevant parenting payment (single) maximum basic amount (<a href="../4/2">2.4.2</a>) and that it would be unjust and inequitable for Magdalena to pay the fixed annual rate. A determination was made under section 65B(4) that the fixed annual rate not be used from the start of the child support period.</p>
+<p>Three months later, the Registrar became aware that Magdalena had always been working and the information provided with the application for the fixed annual rate not to apply was inaccurate and incomplete. As Magdalena's current income is in fact more than the relevant parenting payment (single) maximum basic amount they do not satisfy the requirements of section 65B. The Registrar amends the assessment under section 66B to reinstate the fixed annual rate from the start of the child support period.</p>
 </div>
 <p>The Registrar must notify the liable parent in writing that the fixed annual rate will again apply and that the assessment has been amended (section 66C). That person can then object (<a href="../../4/1/2">4.1.2</a>) to the particulars of the assessment.</p>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     16 May 2016  	</div>
+      Last reviewed:     3 April 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../contact-us">Contact us</a></li>
@@ -198,7 +198,7 @@ It also describes how an assessment creates a liability to pay child support and
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"SrkTIkkVRXqaU1qn_rzrXfCHw0tFMFRPM3a54DrvDjo","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/20195":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"G4IzVcAQQnw8fREyu4ZBzyHKYCXIICsmLcfeC5cKd7g","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/20195":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children menu-mlid-513"><a href="../child-support-guide">Child Support Guide</a></li>
 <li class="leaf has-children active-trail menu-mlid-491"><a href="../family-assistance-guide" class="active-trail">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../guide-social-security-law">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,10 +49,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-17xXHJ66p53EtkuxHiiJnyaGe76S8wYbed1squCF4Hk" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-GqmE2xc_RHAfPjAsDfSDWCykYQm07pg4Pin4Dg39upc" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Family Assistance Guide</h2>
-<p>Version 1.198 - Released 20 September 2017</p>
+<p>Version 1.203 - Released 7 May 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
@@ -83,7 +83,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p>The site map gives an overall picture of the structure of the Family Assistance Guide.</p>
 </article><div class="menu-block">
 <ul class="menu"><li class="first leaf menu-mlid-7283"><a href="../family-assistance-guide" title="">Using the Family Assistance Guide</a></li>
-<li class="expanded menu-mlid-2274"><a href="../family-assistance-guide/updates">What&#039;s New</a><ul class="menu"><li class="first last expanded menu-mlid-1507"><a href="../family-assistance-guide/updates/previous-updates">Previous Family Assistance Guide Updates</a><ul class="menu"><li class="first leaf menu-mlid-17181"><a href="../family-assistance-guide/updates/previous-updates/2017">2017</a></li>
+<li class="expanded menu-mlid-2274"><a href="../family-assistance-guide/updates">What&#039;s New</a><ul class="menu"><li class="first last expanded menu-mlid-1507"><a href="../family-assistance-guide/updates/previous-updates">Previous Family Assistance Guide Updates</a><ul class="menu"><li class="first leaf menu-mlid-18776"><a href="../family-assistance-guide/updates/previous-updates/2018">2018</a></li>
+<li class="leaf menu-mlid-17181"><a href="../family-assistance-guide/updates/previous-updates/2017">2017</a></li>
 <li class="leaf menu-mlid-14161"><a href="../family-assistance-guide/updates/previous-updates/2016">2016</a></li>
 <li class="leaf menu-mlid-9111"><a href="../family-assistance-guide/updates/previous-updates/2015">2015</a></li>
 <li class="leaf menu-mlid-7364"><a href="../family-assistance-guide/updates/previous-updates/2014">2014</a></li>
@@ -118,6 +119,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-2207"><a href="../family-assistance-guide/1/1/a/60">1.1.A.60 Agreement pension</a></li>
 <li class="leaf menu-mlid-2208"><a href="../family-assistance-guide/1/1/a/70">1.1.A.70 Number not currently in use</a></li>
 <li class="leaf menu-mlid-2209"><a href="../family-assistance-guide/1/1/a/72">1.1.A.72 Applicant</a></li>
+<li class="leaf menu-mlid-20521"><a href="../family-assistance-guide/1/1/a/75">1.1.A.75 Number not currently in use</a></li>
 <li class="leaf menu-mlid-2211"><a href="../family-assistance-guide/1/1/a/80">1.1.A.80 Approved care organisation (ACO)</a></li>
 <li class="leaf menu-mlid-2212"><a href="../family-assistance-guide/1/1/a/90">1.1.A.90 Approved service, approved care (CCB, CCR)</a></li>
 <li class="leaf menu-mlid-2190"><a href="../family-assistance-guide/1/1/a/100">1.1.A.100 Number not currently in use</a></li>
@@ -137,18 +139,22 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </ul></li>
 <li class="expanded menu-mlid-2215"><a href="../family-assistance-guide/1/1/c">1.1.C Key Terms Beginning with the Letter C</a><ul class="menu"><li class="first leaf menu-mlid-2165"><a href="../family-assistance-guide/1/1/c/05">1.1.C.05 Care arrangement (FTB)</a></li>
 <li class="leaf menu-mlid-2166"><a href="../family-assistance-guide/1/1/c/10">1.1.C.10 CCB percentage (CCB)</a></li>
+<li class="leaf menu-mlid-20546"><a href="../family-assistance-guide/1/1/c/15">1.1.C.15 Number not currently in use</a></li>
+<li class="leaf menu-mlid-20551"><a href="../family-assistance-guide/1/1/c/18">1.1.C.18 Number not currently in use</a></li>
 <li class="leaf menu-mlid-2168"><a href="../family-assistance-guide/1/1/c/20">1.1.C.20 Child support (FTB)</a></li>
 <li class="leaf menu-mlid-2169"><a href="../family-assistance-guide/1/1/c/21">1.1.C.21 Child support liability</a></li>
+<li class="leaf menu-mlid-20531"><a href="../family-assistance-guide/1/1/c/25">1.1.C.25 Number not currently in use</a></li>
 <li class="leaf menu-mlid-2170"><a href="../family-assistance-guide/1/1/c/27">1.1.C.27 Claim (CCB)</a></li>
 <li class="leaf menu-mlid-2171"><a href="../family-assistance-guide/1/1/c/30">1.1.C.30 Number not currently in use</a></li>
 <li class="leaf menu-mlid-2172"><a href="../family-assistance-guide/1/1/c/40">1.1.C.40 Cohabitation, living together (FTB)</a></li>
 <li class="leaf menu-mlid-2173"><a href="../family-assistance-guide/1/1/c/47">1.1.C.47 Common law right to receive less</a></li>
 <li class="leaf menu-mlid-2174"><a href="../family-assistance-guide/1/1/c/50">1.1.C.50 Compensation</a></li>
+<li class="leaf menu-mlid-20541"><a href="../family-assistance-guide/1/1/c/52">1.1.C.52 Number not currently in use</a></li>
 <li class="leaf menu-mlid-2175"><a href="../family-assistance-guide/1/1/c/55">1.1.C.55 Correspondence nominee</a></li>
 <li class="leaf menu-mlid-2176"><a href="../family-assistance-guide/1/1/c/57">1.1.C.57 Current education period (SKB)</a></li>
 <li class="leaf menu-mlid-2177"><a href="../family-assistance-guide/1/1/c/60">1.1.C.60 Custodian, custodial parent (FTB)</a></li>
 <li class="leaf menu-mlid-2178"><a href="../family-assistance-guide/1/1/c/70">1.1.C.70 Custody order, court order (FTB)</a></li>
-<li class="leaf menu-mlid-2179"><a href="../family-assistance-guide/1/1/c/80">1.1.C.80 Cut-out amount (FTB) (deleted)</a></li>
+<li class="leaf menu-mlid-2179"><a href="../family-assistance-guide/1/1/c/80">1.1.C.80 Number not currently in use</a></li>
 <li class="leaf menu-mlid-2180"><a href="../family-assistance-guide/1/1/c/90">1.1.C.90 Care (FTB)</a></li>
 <li class="last leaf menu-mlid-2167"><a href="../family-assistance-guide/1/1/c/100">1.1.C.100 Care period for FTB assessments</a></li>
 </ul></li>
@@ -161,12 +167,14 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-2160"><a href="../family-assistance-guide/1/1/d/65">1.1.D.65 Defence Force Income Support Allowance</a></li>
 <li class="leaf menu-mlid-2161"><a href="../family-assistance-guide/1/1/d/70">1.1.D.70 Number not currently in use</a></li>
 <li class="leaf menu-mlid-2162"><a href="../family-assistance-guide/1/1/d/75">1.1.D.75 Designated child support child (FTB)</a></li>
+<li class="leaf menu-mlid-20621"><a href="../family-assistance-guide/1/1/d/78">1.1.D.78 Number not currently in use</a></li>
 <li class="leaf menu-mlid-2163"><a href="../family-assistance-guide/1/1/d/80">1.1.D.80 Disabled person (CCB)</a></li>
 <li class="leaf menu-mlid-2164"><a href="../family-assistance-guide/1/1/d/90">1.1.D.90 Disallowable instrument</a></li>
 <li class="last leaf menu-mlid-2154"><a href="../family-assistance-guide/1/1/d/100">1.1.D.100 Disbursement method (FTB)</a></li>
 </ul></li>
 <li class="expanded menu-mlid-2217"><a href="../family-assistance-guide/1/1/e">1.1.E Key Terms Beginning with the Letter E</a><ul class="menu"><li class="first leaf menu-mlid-2141"><a href="../family-assistance-guide/1/1/e/05">1.1.E.05 Education institution (JETCCFA)</a></li>
 <li class="leaf menu-mlid-2142"><a href="../family-assistance-guide/1/1/e/10">1.1.E.10 Effective claim (FTB)</a></li>
+<li class="leaf menu-mlid-20516"><a href="../family-assistance-guide/1/1/e/15">1.1.E.15 Number not currently in use</a></li>
 <li class="leaf menu-mlid-2143"><a href="../family-assistance-guide/1/1/e/17">1.1.E.17 Eligibility (FTB, SIFS, CCB &amp; CCR)</a></li>
 <li class="leaf menu-mlid-2144"><a href="../family-assistance-guide/1/1/e/20">1.1.E.20 Eligible child care hours (CCB)</a></li>
 <li class="leaf menu-mlid-2145"><a href="../family-assistance-guide/1/1/e/25">1.1.E.25 Enrolment</a></li>
@@ -187,16 +195,19 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-2137"><a href="../family-assistance-guide/1/1/f/50">1.1.F.50 Formula assessment (FTB)</a></li>
 <li class="leaf menu-mlid-2138"><a href="../family-assistance-guide/1/1/f/53">1.1.F.53 FTB activity test (deleted)</a></li>
 <li class="leaf menu-mlid-2139"><a href="../family-assistance-guide/1/1/f/57">1.1.F.57 FTB child rate</a></li>
+<li class="leaf menu-mlid-20556"><a href="../family-assistance-guide/1/1/f/58">1.1.F.58  Number not currently in use</a></li>
 <li class="last leaf menu-mlid-2140"><a href="../family-assistance-guide/1/1/f/60">1.1.F.60 Full-time secondary study (FTB)</a></li>
 </ul></li>
 <li class="expanded menu-mlid-2219"><a href="../family-assistance-guide/1/1/g">1.1.G Key Terms Beginning with the Letter G</a><ul class="menu"><li class="first leaf menu-mlid-2127"><a href="../family-assistance-guide/1/1/g/10">1.1.G.10 Garnishee debtor, garnishee notice</a></li>
 <li class="leaf menu-mlid-13351"><a href="../family-assistance-guide/1/1/g/12">1.1.G.12 General practitioner</a></li>
 <li class="leaf menu-mlid-7344"><a href="../family-assistance-guide/1/1/g/13">1.1.G.13 Government funded rehabilitation (JETCCFA)</a></li>
+<li class="leaf menu-mlid-20561"><a href="../family-assistance-guide/1/1/g/14">1.1.G.14 Number not currently in use</a></li>
 <li class="leaf menu-mlid-2128"><a href="../family-assistance-guide/1/1/g/15">1.1.G.15 Grandparent carer (CCB, FTB Part B)</a></li>
 <li class="last leaf menu-mlid-2129"><a href="../family-assistance-guide/1/1/g/20">1.1.G.20 Guardianship</a></li>
 </ul></li>
 <li class="expanded menu-mlid-2220"><a href="../family-assistance-guide/1/1/h">1.1.H Key Terms Beginning with the Letter H</a><ul class="menu"><li class="first leaf menu-mlid-2125"><a href="../family-assistance-guide/1/1/h/05">1.1.H.05 Healthy start for school child health check</a></li>
-<li class="last leaf menu-mlid-2126"><a href="../family-assistance-guide/1/1/h/10">1.1.H.10 Higher income free area (FTB)</a></li>
+<li class="leaf menu-mlid-2126"><a href="../family-assistance-guide/1/1/h/10">1.1.H.10 Higher income free area (FTB)</a></li>
+<li class="last leaf menu-mlid-20566"><a href="../family-assistance-guide/1/1/h/20">1.1.H.20 Number not currently in use</a></li>
 </ul></li>
 <li class="expanded menu-mlid-2221"><a href="../family-assistance-guide/1/1/i">1.1.I Key Terms Beginning with the Letter I</a><ul class="menu"><li class="first leaf menu-mlid-2108"><a href="../family-assistance-guide/1/1/i/10">1.1.I.10 Immunisation requirements (FTB, CCB)</a></li>
 <li class="leaf menu-mlid-2113"><a href="../family-assistance-guide/1/1/i/20">1.1.I.20 Income</a></li>
@@ -297,7 +308,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-2030"><a href="../family-assistance-guide/1/1/p/100">1.1.P.100 Prescribed Educational Scheme</a></li>
 <li class="leaf menu-mlid-2031"><a href="../family-assistance-guide/1/1/p/110">1.1.P.110 Presumption of parentage (FTB)</a></li>
 <li class="leaf menu-mlid-2032"><a href="../family-assistance-guide/1/1/p/115">1.1.P.115 Previous education period (SKB)</a></li>
-<li class="leaf menu-mlid-2033"><a href="../family-assistance-guide/1/1/p/120">1.1.P.120 Primary carer (FTB, baby bonus)</a></li>
+<li class="leaf menu-mlid-2033"><a href="../family-assistance-guide/1/1/p/120">1.1.P.120 Primary carer (FTB)</a></li>
 <li class="leaf menu-mlid-2034"><a href="../family-assistance-guide/1/1/p/122">1.1.P.122 Primary earner (FTB)</a></li>
 <li class="leaf menu-mlid-2035"><a href="../family-assistance-guide/1/1/p/125">1.1.P.125 Principal carer (CCB)</a></li>
 <li class="leaf menu-mlid-2036"><a href="../family-assistance-guide/1/1/p/130">1.1.P.130 Private collection (FTB)</a></li>
@@ -331,6 +342,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-1998"><a href="../family-assistance-guide/1/1/s/25">1.1.S.25 Secondary earner (FTB)</a></li>
 <li class="leaf menu-mlid-1999"><a href="../family-assistance-guide/1/1/s/27">1.1.S.27 Senior secondary school child (FTB)</a></li>
 <li class="leaf menu-mlid-2000"><a href="../family-assistance-guide/1/1/s/30">1.1.S.30 Service pension</a></li>
+<li class="leaf menu-mlid-20511"><a href="../family-assistance-guide/1/1/s/35">1.1.S.35 Number currently not in use</a></li>
 <li class="leaf menu-mlid-2001"><a href="../family-assistance-guide/1/1/s/40">1.1.S.40 Sessions of care (CCB)</a></li>
 <li class="leaf menu-mlid-2002"><a href="../family-assistance-guide/1/1/s/45">1.1.S.45 Severe financial hardship</a></li>
 <li class="leaf menu-mlid-2003"><a href="../family-assistance-guide/1/1/s/50">1.1.S.50 Short term hardship (CCB)</a></li>
@@ -354,6 +366,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-1979"><a href="../family-assistance-guide/1/1/t/30">1.1.T.30 Taxable income percentage (CCB)</a></li>
 <li class="leaf menu-mlid-1980"><a href="../family-assistance-guide/1/1/t/40">1.1.T.40 Taxable income taper percentage (CCB)</a></li>
 <li class="leaf menu-mlid-1981"><a href="../family-assistance-guide/1/1/t/50">1.1.T.50 TFN definitions (FTB, SIFS, SBP)</a></li>
+<li class="leaf menu-mlid-20571"><a href="../family-assistance-guide/1/1/t/51">1.1.T.51 Number not currently in use</a></li>
 <li class="leaf menu-mlid-1982"><a href="../family-assistance-guide/1/1/t/52">1.1.T.52 Total fee charged (CCR)</a></li>
 <li class="leaf menu-mlid-1983"><a href="../family-assistance-guide/1/1/t/53">1.1.T.53 Total net investment loss</a></li>
 <li class="leaf menu-mlid-1987"><a href="../family-assistance-guide/1/1/t/55">1.1.T.55 Training (JETCCFA)</a></li>
@@ -385,11 +398,11 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="expanded menu-mlid-1966"><a href="../family-assistance-guide/1/2/8">1.2.8 FTB Advance - Description</a><ul class="menu"><li class="first leaf menu-mlid-1948"><a href="../family-assistance-guide/1/2/8/10">1.2.8.10 FTB Advance Payments - Details</a></li>
 <li class="last leaf menu-mlid-1949"><a href="../family-assistance-guide/1/2/8/20">1.2.8.20 Variations to FTB Advance Repayment Period</a></li>
 </ul></li>
-<li class="leaf menu-mlid-1967"><a href="../family-assistance-guide/1/2/9">1.2.9 Clean Energy Advance (CEA) - Description (deleted)</a></li>
+<li class="leaf menu-mlid-1967"><a href="../family-assistance-guide/1/2/9">1.2.9 Number not currently in use</a></li>
 <li class="leaf menu-mlid-1951"><a href="../family-assistance-guide/1/2/10">1.2.10 Energy Supplement (ES) - Description</a></li>
 <li class="leaf menu-mlid-1952"><a href="../family-assistance-guide/1/2/11">1.2.11 Single Income Family Supplement (SIFS) - Description</a></li>
 <li class="leaf menu-mlid-1953"><a href="../family-assistance-guide/1/2/12">1.2.12 Number not currently in use</a></li>
-<li class="leaf menu-mlid-1954"><a href="../family-assistance-guide/1/2/13">1.2.13 Low Income Family Supplement (LIFS) - Description (deleted)</a></li>
+<li class="leaf menu-mlid-1954"><a href="../family-assistance-guide/1/2/13">1.2.13 Number not currently in use</a></li>
 <li class="leaf menu-mlid-1955"><a href="../family-assistance-guide/1/2/14">1.2.14 Schoolkids Bonus (SKB) - Description</a></li>
 <li class="leaf menu-mlid-1956"><a href="../family-assistance-guide/1/2/15">1.2.15 Rent Assistance (RA) - Description</a></li>
 <li class="leaf menu-mlid-1957"><a href="../family-assistance-guide/1/2/16">1.2.16 Multiple Birth Allowance (MBA) - Description</a></li>
@@ -409,7 +422,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </ul></li>
 </ul></li>
 <li class="expanded menu-mlid-2267"><a href="../family-assistance-guide/2">2 Eligibility</a><ul class="menu"><li class="first expanded menu-mlid-1929"><a href="../family-assistance-guide/2/1">2.1 General Provisions</a><ul class="menu"><li class="first expanded menu-mlid-1926"><a href="../family-assistance-guide/2/1/1">2.1.1 FTB Child &amp; Regular Care Child</a><ul class="menu"><li class="first leaf menu-mlid-1909"><a href="../family-assistance-guide/2/1/1/10">2.1.1.10 FTB Child</a></li>
-<li class="leaf menu-mlid-7459"><a href="http://guides.dss.gov.au/family-assistance-guide/2/1/1/11">2.1.1.11 Full-time Study Requirement</a></li>
+<li class="leaf menu-mlid-7459"><a href="../family-assistance-guide/2/1/1/11">2.1.1.11 Full-time Study Requirement</a></li>
 <li class="leaf menu-mlid-1911"><a href="../family-assistance-guide/2/1/1/13">2.1.1.13 Regular Care Child</a></li>
 <li class="leaf menu-mlid-1913"><a href="../family-assistance-guide/2/1/1/15">2.1.1.15 Verification of Child&#039;s Name &amp; Date of Birth</a></li>
 <li class="leaf menu-mlid-1914"><a href="../family-assistance-guide/2/1/1/20">2.1.1.20 Shared Care &amp; Change of Care Summary</a></li>
@@ -462,7 +475,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="expanded menu-mlid-1879"><a href="../family-assistance-guide/2/6/5">2.6.5 CCB Eligibility Criteria for Registered Carers</a><ul class="menu"><li class="first leaf menu-mlid-1868"><a href="../family-assistance-guide/2/6/5/10">2.6.5.10 Becoming a Registered Carer</a></li>
 <li class="last leaf menu-mlid-1869"><a href="../family-assistance-guide/2/6/5/20">2.6.5.20 Responsibilities of a Registered Carer</a></li>
 </ul></li>
-<li class="leaf menu-mlid-1880"><a href="../family-assistance-guide/2/6/6">2.6.6 CCB Eligibility Criteria for 24 Hour Care</a></li>
+<li class="expanded menu-mlid-1880"><a href="../family-assistance-guide/2/6/6">2.6.6 CCB Eligibility Criteria for 24 Hour Care</a><ul class="menu"><li class="first leaf menu-mlid-20576"><a href="../family-assistance-guide/2/6/6/10">2.6.6.10 Number not currently in use</a></li>
+<li class="last leaf menu-mlid-20581"><a href="../family-assistance-guide/2/6/6/20">2.6.6.20 Number not currently in use</a></li>
+</ul></li>
 <li class="leaf menu-mlid-1881"><a href="../family-assistance-guide/2/6/7">2.6.7 Special Child Care Benefit (SCCB) - Eligibility Criteria</a></li>
 <li class="last leaf menu-mlid-1882"><a href="../family-assistance-guide/2/6/8">2.6.8 Grandparent Child Care Benefit (GCCB) - Eligibility Criteria</a></li>
 </ul></li>
@@ -470,11 +485,16 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="expanded menu-mlid-1939"><a href="../family-assistance-guide/2/8">2.8 JETCCFA Eligibility</a><ul class="menu"><li class="first expanded menu-mlid-1862"><a href="../family-assistance-guide/2/8/1">2.8.1 JETCCFA Eligibility Criteria</a><ul class="menu"><li class="first leaf menu-mlid-1858"><a href="../family-assistance-guide/2/8/1/10">2.8.1.10 JETCCFA Eligibility Criteria - Overview</a></li>
 <li class="leaf menu-mlid-1859"><a href="../family-assistance-guide/2/8/1/20">2.8.1.20 JETCCFA Eligibility Criteria - Mandatory Claimants</a></li>
 <li class="leaf menu-mlid-1860"><a href="../family-assistance-guide/2/8/1/30">2.8.1.30 JETCCFA Eligibility Criteria - Voluntary Claimants</a></li>
-<li class="last leaf menu-mlid-1861"><a href="../family-assistance-guide/2/8/1/40">2.8.1.40 Eligibility for JETCCFA for Bodies Other Than Individuals</a></li>
+<li class="leaf menu-mlid-1861"><a href="../family-assistance-guide/2/8/1/40">2.8.1.40 Eligibility for JETCCFA for Bodies Other Than Individuals</a></li>
+<li class="leaf menu-mlid-20676"><a href="../family-assistance-guide/2/8/1/50">2.8.1.50 Number not currently in use</a></li>
+<li class="last leaf menu-mlid-20681"><a href="../family-assistance-guide/2/8/1/60">2.8.1.60 Number not currently in use</a></li>
 </ul></li>
 <li class="expanded menu-mlid-1863"><a href="../family-assistance-guide/2/8/2">2.8.2 JETCCFA Eligibility Exceptions</a><ul class="menu"><li class="first leaf menu-mlid-1855"><a href="../family-assistance-guide/2/8/2/10">2.8.2.10 JETCCFA Eligibility Exceptions for All Individuals</a></li>
 <li class="leaf menu-mlid-1856"><a href="../family-assistance-guide/2/8/2/20">2.8.2.20 JETCCFA Eligibility Exceptions for Mandatory Claimants</a></li>
-<li class="last leaf menu-mlid-1857"><a href="../family-assistance-guide/2/8/2/30">2.8.2.30 JETCCFA Eligibility Exceptions Voluntary Claimants</a></li>
+<li class="leaf menu-mlid-1857"><a href="../family-assistance-guide/2/8/2/30">2.8.2.30 JETCCFA Eligibility Exceptions Voluntary Claimants</a></li>
+<li class="leaf menu-mlid-20686"><a href="../family-assistance-guide/2/8/2/40">2.8.2.40 Number not currently in use</a></li>
+<li class="leaf menu-mlid-20691"><a href="../family-assistance-guide/2/8/2/50">2.8.2.50 Number not currenly in use</a></li>
+<li class="last leaf menu-mlid-20701"><a href="../family-assistance-guide/2/8/2/60">2.8.2.60 Number not currently in use</a></li>
 </ul></li>
 <li class="expanded menu-mlid-1864"><a href="../family-assistance-guide/2/8/3">2.8.3 JETCCFA Eligibility Requirements Relating to Activities &amp; Activity Limits</a><ul class="menu"><li class="first leaf menu-mlid-1853"><a href="../family-assistance-guide/2/8/3/10">2.8.3.10 JETCCFA Activity Types</a></li>
 <li class="leaf menu-mlid-1854"><a href="../family-assistance-guide/2/8/3/20">2.8.3.20 JETCCFA Activity Limits for Work (Paid &amp; Unpaid) or Setting Up a Business</a></li>
@@ -486,7 +506,12 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </ul></li>
 <li class="expanded menu-mlid-1865"><a href="../family-assistance-guide/2/8/4">2.8.4 JETCCFA Eligibility Requirements Relating to the Period of Approval</a><ul class="menu"><li class="first leaf menu-mlid-1845"><a href="../family-assistance-guide/2/8/4/10">2.8.4.10 Requirements for Determining the JETCCFA Assessment Period</a></li>
 <li class="leaf menu-mlid-1846"><a href="../family-assistance-guide/2/8/4/20">2.8.4.20 Backdating JETCCFA</a></li>
-<li class="last leaf menu-mlid-1847"><a href="../family-assistance-guide/2/8/4/30">2.8.4.30 Cancelling JETCCFA</a></li>
+<li class="leaf menu-mlid-1847"><a href="../family-assistance-guide/2/8/4/30">2.8.4.30 Cancelling JETCCFA</a></li>
+<li class="leaf menu-mlid-20706"><a href="../family-assistance-guide/2/8/4/40">2.8.4.40 Number not currently in use</a></li>
+<li class="leaf menu-mlid-20711"><a href="../family-assistance-guide/2/8/4/50">2.8.4.50 Number not currently in use</a></li>
+<li class="leaf menu-mlid-20716"><a href="../family-assistance-guide/2/8/4/60">2.8.4.60 Number not currently in use</a></li>
+<li class="leaf menu-mlid-20726"><a href="../family-assistance-guide/2/8/4/70">2.8.4.70 Number not currently in use</a></li>
+<li class="last leaf menu-mlid-20731"><a href="../family-assistance-guide/2/8/4/80">2.8.4.80 Number not currently in use</a></li>
 </ul></li>
 <li class="expanded menu-mlid-1866"><a href="../family-assistance-guide/2/8/5">2.8.5 JETCCFA Eligibility Requirements Relating to Hours</a><ul class="menu"><li class="first leaf menu-mlid-1842"><a href="../family-assistance-guide/2/8/5/10">2.8.5.10 JETCCFA Eligibility Requirements Relating to Hours</a></li>
 <li class="leaf menu-mlid-1843"><a href="../family-assistance-guide/2/8/5/20">2.8.5.20 Varying JETCCFA Hours of Activity Over a Fortnight</a></li>
@@ -526,7 +551,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-1819"><a href="../family-assistance-guide/3/1/3">3.1.3 Apportioning Income Test Reductions between FTB Part A Components</a></li>
 <li class="expanded menu-mlid-1820"><a href="../family-assistance-guide/3/1/4">3.1.4 FTB Part A Rate Calculation - Method 1</a><ul class="menu"><li class="first leaf menu-mlid-1799"><a href="../family-assistance-guide/3/1/4/10">3.1.4.10 Method 1 - Calculating the Maximum Rate of FTB Part A</a></li>
 <li class="leaf menu-mlid-1800"><a href="../family-assistance-guide/3/1/4/20">3.1.4.20 Standard Rate - FTB Part A Method 1</a></li>
-<li class="leaf menu-mlid-1801"><a href="../family-assistance-guide/3/1/4/30">3.1.4.30 Rent Assistance</a></li>
+<li class="leaf menu-mlid-1801"><a href="http://guides.dss.gov.au/family-assistance-guide/3/1/4/30">3.1.4.30 Rent Assistance</a></li>
 <li class="leaf menu-mlid-1802"><a href="../family-assistance-guide/3/1/4/40">3.1.4.40 Income Test - FTB Part A Method 1</a></li>
 <li class="last leaf menu-mlid-1803"><a href="../family-assistance-guide/3/1/4/50">3.1.4.50 Health Care Card (HCC)</a></li>
 </ul></li>
@@ -536,6 +561,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-1792"><a href="../family-assistance-guide/3/1/5/30">3.1.5.30 Taking Reasonable Maintenance Action</a></li>
 <li class="leaf menu-mlid-1793"><a href="../family-assistance-guide/3/1/5/40">3.1.5.40 Maintenance Action in Progress</a></li>
 <li class="leaf menu-mlid-1794"><a href="../family-assistance-guide/3/1/5/50">3.1.5.50 Reasonable Maintenance Action Completed</a></li>
+<li class="leaf menu-mlid-20751"><a href="../family-assistance-guide/3/1/5/55">3.1.5.55 Number not currently in use</a></li>
 <li class="leaf menu-mlid-1795"><a href="../family-assistance-guide/3/1/5/60">3.1.5.60 When Maintenance Action is Not Applicable</a></li>
 <li class="leaf menu-mlid-1796"><a href="../family-assistance-guide/3/1/5/70">3.1.5.70 Exemptions from the Maintenance Action Test</a></li>
 <li class="leaf menu-mlid-1797"><a href="../family-assistance-guide/3/1/5/80">3.1.5.80 Payer is Overseas</a></li>
@@ -573,7 +599,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </ul></li>
 <li class="expanded menu-mlid-1825"><a href="../family-assistance-guide/3/1/9">3.1.9 FTB Part B Rate Calculation</a><ul class="menu"><li class="first leaf menu-mlid-1759"><a href="../family-assistance-guide/3/1/9/10">3.1.9.10 Calculating FTB Part B</a></li>
 <li class="leaf menu-mlid-1760"><a href="../family-assistance-guide/3/1/9/20">3.1.9.20 Income Test - FTB Part B</a></li>
-<li class="last leaf menu-mlid-1761"><a href="http://guides.dss.gov.au/family-assistance-guide/3/1/9/30">3.1.9.30 FTB Part B Return to Work</a></li>
+<li class="last leaf menu-mlid-1761"><a href="../family-assistance-guide/3/1/9/30">3.1.9.30 FTB Part B Return to Work</a></li>
 </ul></li>
 <li class="leaf menu-mlid-1816"><a href="../family-assistance-guide/3/1/10">3.1.10 Number not currently in use</a></li>
 <li class="last leaf menu-mlid-1817"><a href="../family-assistance-guide/3/1/11">3.1.11 Advance Payment of FTB Part A</a></li>
@@ -589,12 +615,12 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-1748"><a href="../family-assistance-guide/3/2/8/20">3.2.8.20 Estimate Following Cancellation of Income Support Payment or Conclusion of Employment Income Nil Rate Period</a></li>
 <li class="last leaf menu-mlid-1749"><a href="../family-assistance-guide/3/2/8/30">3.2.8.30 Revised Estimates</a></li>
 </ul></li>
-<li class="last leaf menu-mlid-1758"><a href="http://guides.dss.gov.au/family-assistance-guide/3/2/9">3.2.9 Reportable Superannuation Contributions</a></li>
+<li class="last leaf menu-mlid-1758"><a href="../family-assistance-guide/3/2/9">3.2.9 Reportable Superannuation Contributions</a></li>
 </ul></li>
 <li class="leaf menu-mlid-1830"><a href="../family-assistance-guide/3/3">3.3 Number not currently in use</a></li>
 <li class="leaf menu-mlid-1831"><a href="../family-assistance-guide/3/4">3.4 Number not currently in use</a></li>
 <li class="expanded menu-mlid-1832"><a href="../family-assistance-guide/3/5">3.5 CCB Rate Calculation</a><ul class="menu"><li class="first leaf menu-mlid-1745"><a href="../family-assistance-guide/3/5/1">3.5.1 CCB Entitlement - General Provisions</a></li>
-<li class="last expanded menu-mlid-1746"><a href="../family-assistance-guide/3/5/2">3.5.2 Calculating Approved Care CCB Entitlement</a><ul class="menu"><li class="first leaf menu-mlid-1736"><a href="../family-assistance-guide/3/5/2/10">3.5.2.10 CCB Overall Rate Calculation - Approved Care</a></li>
+<li class="expanded menu-mlid-1746"><a href="../family-assistance-guide/3/5/2">3.5.2 Calculating Approved Care CCB Entitlement</a><ul class="menu"><li class="first leaf menu-mlid-1736"><a href="../family-assistance-guide/3/5/2/10">3.5.2.10 CCB Overall Rate Calculation - Approved Care</a></li>
 <li class="leaf menu-mlid-1737"><a href="../family-assistance-guide/3/5/2/20">3.5.2.20 Calculating the Approved Care Adjustment Percentage</a></li>
 <li class="leaf menu-mlid-1738"><a href="../family-assistance-guide/3/5/2/30">3.5.2.30 Calculating the Approved Care CCB Percentage</a></li>
 <li class="leaf menu-mlid-1739"><a href="../family-assistance-guide/3/5/2/40">3.5.2.40 Calculating the Approved Care Taxable Income Percentage</a></li>
@@ -604,9 +630,12 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-1743"><a href="../family-assistance-guide/3/5/2/80">3.5.2.80 CCB Adjustment Percentage Example - 4 Children, Income above Upper Threshold</a></li>
 <li class="last leaf menu-mlid-1744"><a href="../family-assistance-guide/3/5/2/90">3.5.2.90 CCB Adjustment Percentage Example - 2 Children, Income above Upper Threshold</a></li>
 </ul></li>
+<li class="leaf menu-mlid-20526"><a href="../family-assistance-guide/3/5/3">3.5.3 Number not currently in use</a></li>
+<li class="leaf menu-mlid-20536"><a href="../family-assistance-guide/3/5/4">3.5.4 Number not currently in use</a></li>
+<li class="last leaf menu-mlid-20801"><a href="../family-assistance-guide/3/5/5">3.5.5 Number not currently in use</a></li>
 </ul></li>
 <li class="expanded menu-mlid-1833"><a href="../family-assistance-guide/3/6">3.6 Historical Rates</a><ul class="menu"><li class="first leaf menu-mlid-1729"><a href="../family-assistance-guide/3/6/1">3.6.1 FTB Part A - Historical Rates</a></li>
-<li class="leaf menu-mlid-1730"><a href="../family-assistance-guide/3/6/2">3.6.2 FTB Rent Assistance - Historical Rates &amp; Thresholds</a></li>
+<li class="leaf menu-mlid-1730"><a href="http://guides.dss.gov.au/family-assistance-guide/3/6/2">3.6.2 FTB Rent Assistance - Historical Rates &amp; Thresholds</a></li>
 <li class="leaf menu-mlid-1731"><a href="../family-assistance-guide/3/6/3">3.6.3 FTB Part B - Historical Rates</a></li>
 <li class="leaf menu-mlid-1732"><a href="../family-assistance-guide/3/6/4">3.6.4 Maternity Payments - Historical Rates</a></li>
 <li class="expanded menu-mlid-1733"><a href="../family-assistance-guide/3/6/5">3.6.5 CCB - Historical Rates</a><ul class="menu"><li class="first leaf menu-mlid-1725"><a href="../family-assistance-guide/3/6/5/10">3.6.5.10 CCB - Historical Standard Hourly Rate</a></li>
@@ -709,7 +738,11 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf menu-mlid-8986"><a href="../family-assistance-guide/4/4/10">4.4.10 Security Notice Issued</a></li>
 </ul></li>
 <li class="leaf menu-mlid-1711"><a href="../family-assistance-guide/4/5">4.5 Number not currently in use</a></li>
-<li class="expanded menu-mlid-1712"><a href="../family-assistance-guide/4/6">4.6 CCB - Individual&#039;s Claims &amp; Payments</a><ul class="menu"><li class="first leaf menu-mlid-1621"><a href="../family-assistance-guide/4/6/1">4.6.1 General Provisions for Individual&#039;s Claims &amp; Payments</a></li>
+<li class="expanded menu-mlid-1712"><a href="../family-assistance-guide/4/6">4.6 CCB - Individual&#039;s Claims &amp; Payments</a><ul class="menu"><li class="first expanded menu-mlid-1621"><a href="../family-assistance-guide/4/6/1">4.6.1 General Provisions for Individual&#039;s Claims &amp; Payments</a><ul class="menu"><li class="first leaf menu-mlid-20586"><a href="../family-assistance-guide/4/6/1/10">4.6.1.10 Number not currently in use</a></li>
+<li class="leaf menu-mlid-20591"><a href="../family-assistance-guide/4/6/1/20">4.6.1.20 Number not currently in use</a></li>
+<li class="leaf menu-mlid-20596"><a href="../family-assistance-guide/4/6/1/30">4.6.1.30 Number not currently in use</a></li>
+<li class="last leaf menu-mlid-20601"><a href="../family-assistance-guide/4/6/1/40">4.6.1.40 Number not currently in use</a></li>
+</ul></li>
 <li class="leaf menu-mlid-1622"><a href="../family-assistance-guide/4/6/2">4.6.2 Approved Care CCB - Individual&#039;s Claim</a></li>
 <li class="leaf menu-mlid-1623"><a href="../family-assistance-guide/4/6/3">4.6.3 Registered Care CCB - Individual&#039;s Claim</a></li>
 <li class="last expanded menu-mlid-1624"><a href="../family-assistance-guide/4/6/4">4.6.4 More Choice for Families - CCB</a><ul class="menu"><li class="first leaf menu-mlid-1617"><a href="../family-assistance-guide/4/6/4/10">4.6.4.10 Adjusted Rate of CCB</a></li>
@@ -741,9 +774,14 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf menu-mlid-1600"><a href="../family-assistance-guide/4/11/3">4.11.3 JETCCFA Entitlement Variations - Date of Effect</a></li>
 </ul></li>
 <li class="leaf menu-mlid-1705"><a href="../family-assistance-guide/4/12">4.12 CCR - Payments</a></li>
-<li class="expanded menu-mlid-1706"><a href="../family-assistance-guide/4/13">4.13 CCMS Provisions</a><ul class="menu"><li class="first last expanded menu-mlid-1689"><a href="../family-assistance-guide/4/13/1">4.13.1 CCMS Enrolment</a><ul class="menu"><li class="first leaf menu-mlid-1686"><a href="../family-assistance-guide/4/13/1/10">4.13.1.10 CCMS - Formal Enrolment</a></li>
+<li class="expanded menu-mlid-1706"><a href="../family-assistance-guide/4/13">4.13 CCMS Provisions</a><ul class="menu"><li class="first expanded menu-mlid-1689"><a href="../family-assistance-guide/4/13/1">4.13.1 CCMS Enrolment</a><ul class="menu"><li class="first leaf menu-mlid-1686"><a href="../family-assistance-guide/4/13/1/10">4.13.1.10 CCMS - Formal Enrolment</a></li>
 <li class="leaf menu-mlid-1687"><a href="../family-assistance-guide/4/13/1/20">4.13.1.20 CCMS - Informal Enrolment</a></li>
 <li class="last leaf menu-mlid-1688"><a href="../family-assistance-guide/4/13/1/30">4.13.1.30 CCMS - AMEP/Other Enrolments</a></li>
+</ul></li>
+<li class="last expanded menu-mlid-20651"><a href="../family-assistance-guide/4/13/2">4.13.2 Number not currently in use</a><ul class="menu"><li class="first leaf menu-mlid-20656"><a href="../family-assistance-guide/4/13/2/10">4.13.2.10 Number not currently in use</a></li>
+<li class="leaf menu-mlid-20661"><a href="../family-assistance-guide/4/13/2/20">4.13.2.20 Number not currently in use</a></li>
+<li class="leaf menu-mlid-20666"><a href="../family-assistance-guide/4/13/2/30">4.13.2.30</a></li>
+<li class="last leaf menu-mlid-20671"><a href="../family-assistance-guide/4/13/2/40">4.13.2.40 Number not currently in use</a></li>
 </ul></li>
 </ul></li>
 <li class="leaf menu-mlid-1707"><a href="../family-assistance-guide/4/14">4.14 Claims for SIFS</a></li>
@@ -763,7 +801,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </ul></li>
 <li class="last expanded menu-mlid-1597"><a href="../family-assistance-guide/5/2">5.2 Information Required for FA</a><ul class="menu"><li class="first expanded menu-mlid-1585"><a href="../family-assistance-guide/5/2/1">5.2.1 Change of Circumstances</a><ul class="menu"><li class="first leaf menu-mlid-1582"><a href="../family-assistance-guide/5/2/1/10">5.2.1.10 Change of Circumstances - General Provisions</a></li>
 <li class="leaf menu-mlid-1583"><a href="../family-assistance-guide/5/2/1/20">5.2.1.20 Change of Eligibility Circumstances</a></li>
-<li class="last leaf menu-mlid-1584"><a href="../family-assistance-guide/5/2/1/30">5.2.1.30 Change of Rate Circumstances</a></li>
+<li class="leaf menu-mlid-1584"><a href="../family-assistance-guide/5/2/1/30">5.2.1.30 Change of Rate Circumstances</a></li>
+<li class="leaf menu-mlid-20606"><a href="../family-assistance-guide/5/2/1/40">5.2.1.40</a></li>
+<li class="last leaf menu-mlid-20611"><a href="../family-assistance-guide/5/2/1/50">5.2.1.50 Number not currently in use</a></li>
 </ul></li>
 <li class="leaf menu-mlid-1586"><a href="../family-assistance-guide/5/2/2">5.2.2 Information Required - Instalment Claims</a></li>
 <li class="last leaf menu-mlid-1587"><a href="../family-assistance-guide/5/2/3">5.2.3 Information Required - Past Period Instalment Claims</a></li>
@@ -821,7 +861,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-1531"><a href="../family-assistance-guide/7/2/6">7.2.6 Debt Recovery by Legal Proceedings</a></li>
 <li class="leaf menu-mlid-1532"><a href="../family-assistance-guide/7/2/7">7.2.7 Debt Recovery by Garnishee</a></li>
 <li class="leaf menu-mlid-1533"><a href="../family-assistance-guide/7/2/8">7.2.8 Effect of Bankruptcy on Debt Recovery</a></li>
-<li class="last leaf menu-mlid-1534"><a href="../family-assistance-guide/7/2/9">7.2.9 Recovery from Financial Institutions</a></li>
+<li class="leaf menu-mlid-1534"><a href="../family-assistance-guide/7/2/9">7.2.9 Recovery from Financial Institutions</a></li>
+<li class="last leaf menu-mlid-20616"><a href="../family-assistance-guide/7/2/10">7.2.10 Number not currently in use</a></li>
 </ul></li>
 <li class="expanded menu-mlid-1540"><a href="../family-assistance-guide/7/3">7.3 Non-Recoverable Debts</a><ul class="menu"><li class="first expanded menu-mlid-1524"><a href="../family-assistance-guide/7/3/1">7.3.1 Writing-off a Debt</a><ul class="menu"><li class="first leaf menu-mlid-1521"><a href="../family-assistance-guide/7/3/1/10">7.3.1.10 Writing-off a Debt</a></li>
 <li class="leaf menu-mlid-1522"><a href="../family-assistance-guide/7/3/1/20">7.3.1.20 Legally Irrecoverable Debts</a></li>
@@ -843,9 +884,12 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf menu-mlid-16586"><a href="../family-assistance-guide/7/7/2">7.7.2 Departure Authorisation Certificates</a></li>
 </ul></li>
 </ul></li>
-<li class="expanded menu-mlid-2273"><a href="../family-assistance-guide/8">8 Transitional Arrangements</a><ul class="menu"><li class="first expanded menu-mlid-1512"><a href="../family-assistance-guide/8/1">8.1 Immunisation Requirements from 01/01/2016 - Transitional Arrangements</a><ul class="menu"><li class="first last leaf menu-mlid-1510"><a href="../family-assistance-guide/8/1/1">8.1.1 Immunisation Requirement Changes - Part Year Effects &amp; Past Period Claims (FTB)</a></li>
+<li class="expanded menu-mlid-2273"><a href="../family-assistance-guide/8">8 Transitional Arrangements</a><ul class="menu"><li class="first expanded menu-mlid-1512"><a href="../family-assistance-guide/8/1">8.1 Immunisation Requirements from 01/01/2016 - Transitional Arrangements</a><ul class="menu"><li class="first leaf menu-mlid-1510"><a href="../family-assistance-guide/8/1/1">8.1.1 Immunisation Requirement Changes - Part Year Effects &amp; Past Period Claims (FTB)</a></li>
+<li class="last leaf menu-mlid-20806"><a href="../family-assistance-guide/8/1/2">8.1.2 Number not currently in use</a></li>
 </ul></li>
-<li class="last leaf menu-mlid-17201"><a href="../family-assistance-guide/8/2">8.2 ES - Grandfathering Provisions</a></li>
+<li class="leaf menu-mlid-17201"><a href="../family-assistance-guide/8/2">8.2 ES - Grandfathering Provisions</a></li>
+<li class="leaf menu-mlid-20696"><a href="../family-assistance-guide/8/3">8.3 Number not currently in use</a></li>
+<li class="last leaf menu-mlid-20811"><a href="../family-assistance-guide/8/4">8.4 Number not currently in use</a></li>
 </ul></li>
 <li class="leaf menu-mlid-2264"><a href="../family-assistance-guide/acronyms">Acronym List</a></li>
 <li class="leaf menu-mlid-7296"><a href="../family-assistance-guide/keywords">Keyword Index</a></li>
@@ -860,7 +904,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

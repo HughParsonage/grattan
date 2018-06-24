@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"7oEvR8M_X3QlwsPIbq3dsGfBNpoqVcdZAzJqgraeQ9M","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/150":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"e5WJLwlBoKIhOr4GG4ZHGCx_j03msIAhdraMyTnyQ2Q","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/150":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children active-trail menu-mlid-513"><a href="../child-support-guide" class="active-trail">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../guide-social-security-law">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,10 +49,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-f36YXLm-TZl_5gNqYeTRwH5qkS9E_j7WB79o9UvDcdo" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-Un4duOCzJEC1aWpst3P1QLoY8xmUKchsw9kKrwmF96g" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.27 - Released 20 September 2017</p>
+<p>Version 4.32 - Released 7 May 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
@@ -96,7 +96,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <h2>Act reference</h2>
 <p><a href="https://www.legislation.gov.au/Series/C2004A03596" title="Child Support (Registration and Collection) Act 1988">CSRC Act</a> Part VIIA</p>
 <p><a href="https://www.legislation.gov.au/Series/C2004A01401" title="Administrative Appeals Tribunal Act 1975">AAT Act</a> Part IV</p>
-<p><a href="http://www.aat.gov.au/resources/practice-directions-guides-and-guidelines">AAT Practice Directions - Child Support Review Directions and Guide to Social Services and Related Jurisdiction</a></p>
+<p><a href="http://www.aat.gov.au/resources/practice-directions-guides-guidelines-and-polici">AAT Practice Directions - Child Support Review Directions and Guide to Social Services and Related Jurisdiction</a></p>
 </div>
 <h2>On this page</h2>
 <ul><li><a href="150#applicationreceivedbythessat">Application received by the AAT</a></li>
@@ -118,8 +118,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <h2 id="family">Family violence</h2>
 <p>Within 14 days of making or being notified by the AAT of the application for an AAT first review, a party must give the AAT a copy of any current family violence order which they obtained against the other party to the review.</p>
 <p>A party must also advise the AAT if his or her whereabouts, residential address, contact details and place of employment are not known to the other party due to a history of family violence.</p>
-<p>A party who obtains a family violence order against another party to the AAT first review, after the making or notification of the application for review but before the hearing, must give the AAT a copy of the order as soon as practicable (<a href="http://www.aat.gov.au/resources/practice-directions-guides-and-guidelines">Child Support Review Direction</a>).</p>
-<p>If the AAT notifies a parent that another person is a party to an AAT second review, the parent must tell the AAT if there is any history of domestic violence between the parent and the other person. If there is a history of domestic violence between 2 parties to an AAT second review, the AAT will require at least one of the parties to appear at the hearing by telephone or videoconference (<a href="http://www.aat.gov.au/resources/practice-directions-guides-and-guidelines">Guide to Social Services and Related Jurisdiction</a>).</p>
+<p>A party who obtains a family violence order against another party to the AAT first review, after the making or notification of the application for review but before the hearing, must give the AAT a copy of the order as soon as practicable (<a href="http://www.aat.gov.au/resources/practice-directions-guides-guidelines-and-polici">Child Support Review Direction</a>).</p>
+<p>If the AAT notifies a parent that another person is a party to an AAT second review, the parent must tell the AAT if there is any history of domestic violence between the parent and the other person. If there is a history of domestic violence between 2 parties to an AAT second review, the AAT will require at least one of the parties to appear at the hearing by telephone or videoconference (<a href="http://www.aat.gov.au/resources/practice-directions-guides-guidelines-and-polici">Guide to Social Services and Related Jurisdiction</a>).</p>
 <h2 id="partiestoareview">Parties to a review</h2>
 <p>The parties to AAT proceedings are the applicant, the Registrar and any other person entitled to apply for a review of the decision under CSRC Act section 89 (e.g. the other parent or a non-parent carer) (AAT Act section 30, CSRC Act section 95D section 97A). For most objection decisions and AAT first review decisions this will mean that all of the parties to the child support case are parties to the AAT review of the decision.</p>
 <p>If the decision being reviewed is an objection decision regarding penalties, or an extension of time decision made by the Registrar (i.e. it is an AAT first review), then generally only the applicant and the Registrar will be parties to the review.</p>
@@ -154,7 +154,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p>On 18 January 2013 the Registrar received a letter from M that included receipts for payments made in the relevant private collect period. As the objection decision had been made there are no further review processes within the department.</p>
 <p>If M was to apply to the AAT for a review of the objection decision the letter received 18 January 2013 would be provided to the AAT as a relevant document.</p>
 </div>
-<h3 id="Documents">Documents to be provided by the Registrar for extension of time applications</h3>
+<h3 id="documents">Documents to be provided by the Registrar for extension of time applications</h3>
 <p>When the Registrar is advised that an application for an extension of time has been received by the AAT, the Registrar is required to provide to the AAT within 28 days:</p>
 <ul><li>a statement described in AAT Act section 37(1), and</li>
 <li>a copy of any correspondence and any record of oral communication between the applicant for the extension of time and the Registrar after the Registrar served notice on that person of the decision about which review is sought.</li>
@@ -246,7 +246,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

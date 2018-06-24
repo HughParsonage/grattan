@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"3P9qRFnz8S1AAS2NFs-PztQ-HPbR_JMuF3vmBhQb0i0","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/17129":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"gwgJ4uEn8A8qHfidK1BvhJZiq_OZjYQSHLAvct0fU20","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/17129":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children menu-mlid-513"><a href="../child-support-guide">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-489"><a href="../guide-social-security-law.1" class="active-trail">Guide to Social Security Law</a></li>
+<li class="leaf has-children active-trail menu-mlid-489"><a href="../guide-social-security-law" class="active-trail">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,16 +49,16 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-K0AQiW-uaEd_M9E-R6BNAL5XFSkko2T0-HkruupHQO8" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-r4VvL1wnoQo32bLM43pajzA57Iy9yQnKzoS98MKGhoM" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Guide to Social Security Law</h2>
-<p>Version 1.237 - Released 19 October 2017</p>
+<p>Version 1.245 - Released 1 June 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../guide-social-security-law.1" title="">Using the Guide to Social Security Law</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../guide-social-security-law" title="">Using the Guide to Social Security Law</a></li>
 <li class="collapsed menu-mlid-493"><a href="../guide-social-security-law/updates">What&#039;s New</a></li>
 <li class="collapsed menu-mlid-2295"><a href="../guide-social-security-law/1">1 Key Terms &amp; Principles</a></li>
 <li class="collapsed menu-mlid-2294"><a href="../guide-social-security-law/2">2 Claim Verification</a></li>
@@ -113,7 +113,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7372"><a href="../guide-social-security-law/act-references">Act Reference Index</a></li>
 <li class="last leaf menu-mlid-7168"><a href="../guide-social-security-law/sitemap">Site Map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../guide-social-security-law.1">Guide to Social Security Law</a> &raquo; <a href="../guide-social-security-law/3" class="active-trail">3 Qualification &amp; Payability</a> &raquo; <a href="../guide-social-security-law/3/2" class="active-trail">3.2 Newstart &amp; Youth Allowance</a> &raquo; <a href="../guide-social-security-law/3/2/7" class="active-trail">3.2.7 YA Activity Testing for Students</a> &raquo; 3.2.7.40 Approved Courses of Study for YA</div>
+	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../guide-social-security-law">Guide to Social Security Law</a> &raquo; <a href="../guide-social-security-law/3" class="active-trail">3 Qualification &amp; Payability</a> &raquo; <a href="../guide-social-security-law/3/2" class="active-trail">3.2 Newstart &amp; Youth Allowance</a> &raquo; <a href="../guide-social-security-law/3/2/7" class="active-trail">3.2.7 YA Activity Testing for Students</a> &raquo; 3.2.7.40 Approved Courses of Study for YA</div>
 <div id="utility">
 	
 <div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/node/17129"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
@@ -130,29 +130,35 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </ul></li>
 </ul><h2>Unapproved courses</h2>
 <p>A student is not considered full-time while taking unrelated subjects that are not included in the Determination. However, they may still qualify for YA while taking these subjects if they have been incorporated in their <a href="../guide-social-security-law/acronyms#epp" title="Employment pathway plan">EPP</a> (<a href="../guide-social-security-law/1/1/j/25">1.1.J.25</a>) or activity agreement.</p>
+<p>If a student is studying a combination of an approved course and an unapproved course for YA purposes, the units or subjects in the unapproved course are NOT considered part of a full-time study-load.</p>
+<div class="example">
+<p><strong>Example:</strong> If a student is studying an unapproved <a href="../guide-social-security-law/acronyms#vet" title="Vocational education and training">VET</a> course that is required to be completed as part of an approved bachelor course, the unapproved VET course cannot be counted towards a full-time study-load.</p>
+</div>
+<div class="reference">
+<p><strong>Policy reference:</strong> SS Guide <a href="../guide-social-security-law/3/3/4/60">3.3.4.60</a> Assessing Tertiary Study-load for Austudy - Full-time Students</p>
+</div>
 <h2>Institutions awaiting accreditation</h2>
 <p>Where it can be demonstrated that an institution is seeking accreditation for a course, or for the institution itself, from the relevant authority, YA job seeker recipients may be permitted to enter into an EPP which outlines their full-time studies in the course or institution as the sole activity. This EPP may be negotiated for a maximum of 6 months, with no extensions permitted. If accreditation for the course or institution has not been granted within this period, the person must negotiate a new EPP as a job seeker. The recipients will not be able to access the higher personal income free area or Income Bank for the period of their EPP, as they will not be regarded as a full-time student in an approved course.</p>
-<h2>Masters &amp; Doctorate level studies</h2>
-<p>Mainstream doctorate level courses or a qualification of the same standing are not approved courses for YA (student). Masters courses that are not specified in Schedule 3 of the Determination are NOT approved courses for YA (student) purposes. However, students may still be approved for part of courses that lead to unapproved master's degree courses, for example, combined bachelor/unapproved master's degree courses, excluding the year/s that exceed the normal full-time duration of the related bachelor degree course.</p>
+<h2>Masters &amp; doctorate level studies</h2>
+<p>Mainstream doctorate level courses or a qualification of the same standing are not approved courses for YA (student). Masters courses that are not specified in Schedule 3 of the Determination are NOT approved courses for YA (student) purposes. However, students may still be approved for part of courses that lead to unapproved masters degree courses, for example, combined bachelor/unapproved masters degree courses, excluding the year/s that exceed the normal full-time duration of the related bachelor degree course.</p>
 <p>Where a student is enrolled in and undertaking a non-approved course (e.g. an unapproved masters degree course) which has a 'nested' degree structure that allows the student to exit the course early and be granted a lower level award (e.g. a graduate diploma) the student is NOT eligible for YA while completing the units required for the lower level award.</p>
-<p>In some cases, it may be possible for studies leading to a master's degree in an unapproved masters course or doctorate to be incorporated into an EPP as part of a combination of approved activities.</p>
+<p>In some cases, it may be possible for studies leading to a masters degree in an unapproved masters course or doctorate to be incorporated into an EPP as part of a combination of approved activities.</p>
 <div class="example">
 <p><strong>Example:</strong> An unapproved masters course student's or a doctorate student's activity load might include:</p>
 <ul><li>6 hours per week study,</li>
 <li>10 hours per week part-time work, and</li>
 <li>3 hours per week voluntary work.</li>
 </ul></div>
+<p><strong>Note:</strong> Doctorate level courses only refer to doctorate qualifications which are Australian Qualifications Framework (AQF) Level 10. There are some masters level courses which may call themselves a 'Doctor' course but they may be AQF Level 9.</p>
+<div class="example">
+<p><strong>Example:</strong> Juris Doctor is not a doctorate course, it is an AQF Level 9 masters course.</p>
+</div>
 <h2>Secondary study</h2>
-<p>While secondary study remains an approved course of study under the Determination since 1 January 2012, dependent young people undertaking full-time secondary study have not been able to apply for YA until they turn 18, unless they:</p>
+<p>While secondary study remains an approved course of study under the Determination, dependent young people undertaking full-time secondary study are not eligible for YA until they turn 18, unless they:</p>
 <ul><li>become independent,</li>
 <li>are required to live away from home to study, or</li>
 <li>are determined by the Secretary not to be benefiting from <a href="../guide-social-security-law/acronyms#ftb" title="Family tax benefit">FTB</a> that is being paid to their parents.</li>
-</ul><h2>Year 13</h2>
-<p>Particular care is required in assessing year 13 students because of the range of courses commonly referred to as year 13. Courses at this level are regarded as either:</p>
-<ul><li>repeating year 12, if they include normal year 12 general education certificate subjects, or</li>
-<li>as tertiary preparation or bridging courses if they are made up of tertiary preparation studies, even if year 12 subjects are also included.</li>
-</ul><p>In both cases student status is determined by the normal requirements for full-time secondary study.</p>
-<div class="reference">
+</ul><div class="reference">
 <p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 541B(5) Meaning of approved course of education or study</p>
 <p><a href="https://www.legislation.gov.au/Series/F2009L04345">Student Assistance (Education Institutions and Courses) Determination 2009 (No. 2)</a></p>
 <p><strong>Policy reference:</strong> SS Guide <a href="../guide-social-security-law/3/2/7/30">3.2.7.30</a> YA Full-time Students, <a href="../guide-social-security-law/3/2/7/60">3.2.7.60</a> YA Study-load - Full-time Secondary Students</p>
@@ -160,7 +166,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     1 July 2014  	</div>
+      Last reviewed:     7 May 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../contact-us">Contact us</a></li>
@@ -170,7 +176,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

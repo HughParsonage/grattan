@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"VS5wcwR6ZUK44dBfLbEizWlAN5jXYKiVNFQeKrRaZvo","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/21101":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"sMTYh_hBN0PECSJKC1Q5TAF0GE1sytCVA1mQbqcn-3I","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/21101":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children menu-mlid-513"><a href="../child-support-guide">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-489"><a href="../guide-social-security-law.1" class="active-trail">Guide to Social Security Law</a></li>
+<li class="leaf has-children active-trail menu-mlid-489"><a href="../guide-social-security-law" class="active-trail">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,16 +49,16 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-xcRWVHkEAfjWzcPyy6xLC8UKOw0fml8plSPbzmiX4HY" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-KjxInCqHAHCMeIOHbnVs8yF_P4KF8abOqp3io5ohXCs" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Guide to Social Security Law</h2>
-<p>Version 1.237 - Released 19 October 2017</p>
+<p>Version 1.245 - Released 1 June 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../guide-social-security-law.1" title="">Using the Guide to Social Security Law</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../guide-social-security-law" title="">Using the Guide to Social Security Law</a></li>
 <li class="collapsed menu-mlid-493"><a href="../guide-social-security-law/updates">What&#039;s New</a></li>
 <li class="collapsed menu-mlid-2295"><a href="../guide-social-security-law/1">1 Key Terms &amp; Principles</a></li>
 <li class="collapsed menu-mlid-2294"><a href="../guide-social-security-law/2">2 Claim Verification</a></li>
@@ -97,7 +97,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7372"><a href="../guide-social-security-law/act-references">Act Reference Index</a></li>
 <li class="last leaf menu-mlid-7168"><a href="../guide-social-security-law/sitemap">Site Map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../guide-social-security-law.1">Guide to Social Security Law</a> &raquo; <a href="../guide-social-security-law/8" class="active-trail">8 Administration Act Provisions</a> &raquo; <a href="../guide-social-security-law/8/7" class="active-trail">8.7 Cashless Debit Card Trial</a> &raquo; <a href="../guide-social-security-law/8/7/6" class="active-trail">8.7.6 Cashless Welfare Arrangement Rules</a> &raquo; 8.7.6.50 Declinable Transactions in the Cashless Debit Card Trial</div>
+	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../guide-social-security-law">Guide to Social Security Law</a> &raquo; <a href="../guide-social-security-law/8" class="active-trail">8 Administration Act Provisions</a> &raquo; <a href="../guide-social-security-law/8/7" class="active-trail">8.7 Cashless Debit Card Trial</a> &raquo; <a href="../guide-social-security-law/8/7/6" class="active-trail">8.7.6 Cashless Welfare Arrangement Rules</a> &raquo; 8.7.6.50 Declinable Transactions in the Cashless Debit Card Trial</div>
 <div id="utility">
 	
 <div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/node/21101"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
@@ -105,20 +105,21 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <article id="node-21101">
 <h1 >8.7.6.50 Declinable Transactions in the Cashless Debit Card Trial</h1>
 <h2>Declinable transactions</h2>
-<p>For the purposes of SS(Admin)Act subsection 124PQ(2), the kinds of businesses specified in <a href="https://www.legislation.gov.au/Series/F2016L00312">Social Security (Administration) (Trial - Declinable Transactions) Determination 2016 </a>(the Determination) Schedule 1, Schedule 2, Schedule 3, Schedule 4 or Schedule 5 are kinds of businesses in relation to which transactions involving money in a welfare restricted bank account may be declined by a financial institution, without contravening the <a href="https://www.legislation.gov.au/Series/C2004A00109">Competition and Consumer Act 2010 </a>Part IV.</p>
-<p>Kinds of business are listed in 5 different ways in the Determination.</p>
-<ul><li>Schedule 1 to the Determination lists declared kinds of business by description and includes:
-<ul><li>businesses which sell alcoholic beverages, gambling services or gift cards, store cards or vouchers (whether reloadable or not), that can be used to purchase alcoholic beverages or gambling services</li>
+<p>For the purposes of SS(Admin)Act subsection 124PQ(2), the kinds of businesses specified in <a href="https://www.legislation.gov.au/Series/F2018L00251">Social Security (Administration) (Trial - Declinable Transactions and Welfare Restricted Bank Account) Determination 2018</a> (the Determination) Schedule 2, Schedule 3, Schedule 4, Schedule 5, Schedule 6 or Schedule 7 are kinds of businesses in relation to which transactions involving money in a welfare restricted bank account may be declined by a financial institution, without contravening the <cite><a href="https://www.legislation.gov.au/Series/C2004A00109">Competition and Consumer Act 2010</a></cite> Part IV.</p>
+<p>The kinds of businesses are listed in 5 different ways in the Determination.</p>
+<ul><li>Schedule 2 to the Determination lists declared kinds of business by description and includes:
+<ul><li>businesses which sell alcoholic beverages, gambling services or gift cards, store cards or vouchers (whether reloadable or not), that can be used to purchase alcoholic beverages or gambling services,</li>
 <li>businesses from which purchases may be made via online transactions or without the need to present a debit card, and the transaction involving money in a welfare restricted bank account is proposed to be made without presenting a welfare restricted bank account debit card.</li>
 </ul></li>
-<li>Schedule 2 to the Determination lists declared kinds of business by Merchant Category. A merchant category code is a 4-digit number assigned to a business by credit card companies when the business first starts accepting one of these cards as a form of payment. For example, at Schedule 2 item 1, the merchant category code of 4829, is for 'Quasi Cash - Wire Transfer Money Order'.</li>
-<li>Schedule 3 to the Determination lists declared kinds of business by Australian New Zealand Standard Industrial Classification (ANZSIC) codes. ANZSIC codes were developed jointly by the Australian Bureau of Statistics (ABS) and Statistics New Zealand in order to make it easier to compare industry statistics between the 2 countries and with the rest of the world. A list of ANZSIC codes is available on the ABS website. For the purposes of this Determination, ANZSIC codes include, for example, at item 1, ANZSIC code 1212 - Beer Manufacturing.</li>
-<li>Schedule 4 to the Determination lists declared kinds of business by reference to terminal identification codes. Terminal identification codes are codes identifying the specific terminal at which the purchase is being made. As the trial develops, specific terminal identification codes will be updated in the Determination to reflect different store terminals in the trial areas.</li>
-<li>Schedule 5 to the Determination lists declared kinds of business by reference to card accepted identification codes. These codes are generally at store level, e.g. Ceduna Grocery Store. As the trial develops, specific card accepted identification codes will be updated in the Determination to reflect different stores in the trial areas.</li>
+<li>Schedule 3 to the Determination lists declared kinds of business by Merchant Category. A merchant category code is a 4-digit number assigned to a business by credit card companies when the business first starts accepting one of these cards as a form of payment. For example, at Schedule 3 item 1, the merchant category code of 4829, is for 'Quasi Cash - Wire Transfer Money Order'.</li>
+<li>Schedule 4 to the Determination lists declared kinds of business by Australian New Zealand Standard Industrial Classification (ANZSIC) codes. ANZSIC codes were developed jointly by the Australian Bureau of Statistics (ABS) and Statistics New Zealand in order to make it easier to compare industry statistics between the 2 countries and with the rest of the world. A list of ANZSIC codes is available on the ABS website. For the purposes of this Determination, ANZSIC codes include, for example, at item 1, ANZSIC code 1212 for 'Beer Manufacturing'.</li>
+<li>Schedule 5 to the Determination lists declared kinds of business by reference to terminal identification codes. Terminal identification codes are codes identifying the specific terminal at which the purchase is being made. For example, at Schedule 5 item 1, the terminal identification code of 14307200, is for 'Bistro Bar 1 at the Ceduna Foreshore Hotel Motel'.</li>
+<li>Schedule 6 to the Determination lists declared kinds of business by reference to card accepted identification codes. These codes are generally at store level, e.g. Ceduna Grocery Store. As the trial develops, specific card accepted identification codes will be updated in the Determination to reflect different stores in the trial areas.</li>
+<li>Schedule 7 to the Determination lists declared kinds of business by reference to BPAY biller codes. For example, at Schedule 7 item 1, the BPAY biller code of 112615, is for 'Purchase of on-line 'money orders' at Australia Post'.</li>
 </ul></article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     21 March 2016  	</div>
+      Last reviewed:     7 May 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../contact-us">Contact us</a></li>
@@ -128,7 +129,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

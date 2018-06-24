@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../../../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"l5bjProG6cr6SrjXSA9XvTfZ_fFiON84Pobgit8fHMg","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/5\/6\/3":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"Z5mUod4mi-l0pm5S8gUQOa9cDt8eAHn_1gmfsFGra-Y","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/5\/6\/3":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide" class="active-trail">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,10 +49,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-1cwVwS0_6xdYMS9ma8mQNtV7flAcAE_6TmQT_D9V08Q" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-R2X3nPGtcK-sABvsk1RZwXGaWG-_giRYjtBDAjxXEeY" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.27 - Released 20 September 2017</p>
+<p>Version 4.32 - Released 7 May 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
@@ -93,6 +93,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <div class="reference">
 <h2>Act references</h2>
 <p><a href="https://www.legislation.gov.au/Series/C2004A03596" title="Child Support (Registration and Collection) Act 1988">CSRC Act</a> section 39, section 39A</p>
+<p><a href="https://www.legislation.gov.au/Series/F2018L00313" title="Child Support (Registration and Collection) Regulations 2018">CSRC Regs</a> regulation 19</p>
 </div>
 <h2>On this page</h2>
 <ul><li><a href="3#application">Application for the Registrar to again collect the liability</a></li>
@@ -102,20 +103,20 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li><a href="3#collectarrears">Collection of arrears if the Registrar accepts the payee's application for collection to resume</a></li>
 </ul><h2 id="application">Application for the Registrar to again collect the liability</h2>
 <p>If the Registrar ends collection (<a href="2">5.6.2</a>) because the payer had a satisfactory payment record, or because the payee (or payee and payer jointly) elected to end Child Support collection, the payee can later reapply for Child Support collection (section 39).</p>
-<p>The payee can make their application in writing, by telephone, in person, or electronically by completing a form on the <a href="https://www.humanservices.gov.au/individuals/forms/cs1979">department's website</a> (section 39(2)). The payee can also apply for the Registrar to collect arrears for them (section 39A(4)).</p>
+<p>The payee can make their application in writing, by telephone, in person, or electronically by completing a <a href="https://www.humanservices.gov.au/individuals/forms/cs1979">form</a> on the <a href="../../acronyms#dhs" title="Department of Human Services">DHS</a> website (section 39(2)). The payee can also apply for the Registrar to collect arrears for them (section 39A(4)).</p>
 <p>A payee cannot make an application for collection to resume during a low-income non-enforcement period (<a href="../../3/4/5">3.4.5</a>) (section 39(3)).</p>
 <p>Unlike a first election for collection, the Registrar is not obliged to accept the payee's application for collection to resume. The Registrar can grant or refuse the payee's application and must do so within 28 days of receiving it (section 39(4)), or within 90 days if either the payer or payee is a resident of an overseas jurisdiction (section 39(4A)).</p>
 <p>The Registrar must grant the application unless satisfied that (section 39(5)):</p>
 <ul><li>the payer <a href="3#complying">has been complying</a> with their child support obligations,</li>
 <li>the payer has <a href="3#explaination">satisfactorily explained</a> their failure to meet their obligations and rectified that failure, or</li>
 <li><a href="3#speccircs">special circumstances</a> exist in relation to the liability that make it appropriate for the Registrar to refuse the application</li>
-</ul><p>If the Registrar accepts the payee's application, the Register must be varied by specifying a date that the liability again becomes enforceable, which cannot be more than 60 days after Child Support received the application for collection (section 39(6)). Nor can it be a day included in a low-income non-enforcement period (<a href="../../3/4/5">3.4.5</a>) (section 39(7)).</p>
-<p>The Registrar will usually determine that the liability is first enforceable from the date Child Support received the payee's application for collection to resume. It may sometimes be appropriate to make the liability enforceable from a later day, for example if the payee has received an advance payment but since then the payer has indicated that no further payments will be made.</p>
+</ul><p>If the Registrar accepts the payee's application, the Register must be varied by specifying a date that the liability again becomes enforceable, which cannot be more than 60 days after DHS received the application for collection (section 39(6)). Nor can it be a day included in a low-income non-enforcement period (<a href="../../3/4/5">3.4.5</a>) (section 39(7)).</p>
+<p>The Registrar will usually determine that the liability is first enforceable from the date DHS received the payee's application for collection to resume. It may sometimes be appropriate to make the liability enforceable from a later day, for example if the payee has received an advance payment but since then the payer has indicated that no further payments will be made.</p>
 <p>If the payee made their application by lodging a form at a service centre, the Registrar will accept this as the date the payee's application was received.</p>
 <p>When the Registrar accepts a payee's application to resume collection, the Registrar can also collect <a href="3#collectarrears">unpaid amounts for a specified arrears period</a>. See <a href="../1/4">5.1.4</a> for information on how unpaid amounts are calculated.</p>
 <h2 id="complying">Complying with child support obligations</h2>
 <p>A payer has complied with their child support obligations if they pay the maintenance liability when it is due (section 39(5)(a)). In determining whether compliance has been met, the Registrar will examine the evidence provided by both parties such as bank statements, automatic transfer of payments, cheque butts and written statements.</p>
-<p>A child support obligation is considered to have been complied with if the payer has made a payment of a kind prescribed in regulation 5D, that would be credited against the ongoing liability if the case was registered for collection and the payment was sufficient to meet the liability (section 39A(8)). The payer must have also paid 70% of the ongoing liability directly to the payee by the date it was due. The Registrar will give both parties the opportunity to make statements and provide evidence about whether the payments have been made.</p>
+<p>A child support obligation is considered to have been complied with if the payer has made a payment of a kind prescribed in regulation 19 of the CSRC Regs, that would be credited against the ongoing liability if the case was registered for collection and the payment was sufficient to meet the liability (section 39A(8)). The payer must have also paid 70% of the ongoing liability directly to the payee by the date it was due. The Registrar will give both parties the opportunity to make statements and provide evidence about whether the payments have been made.</p>
 <h2 id="explaination">The payer has satisfactorily explained their failure to meet their obligations &amp; rectified that failure</h2>
 <p>The payer must satisfactorily explain why they failed to meet their obligations and have rectified that failure (section 39(5)(b)).</p>
 <p>Examples of a satisfactory explanation as to why a payer failed to meet their child support obligations may include:</p>
@@ -137,9 +138,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </ul><h2 id="speccircs">Special circumstances exist that make it appropriate for the Registrar to refuse the application</h2>
 <p>Even though the Registrar may not be satisfied a payer has complied or rectified a failure to comply, there may be special circumstances that exist in relation to the liability that make it appropriate to refuse the application (section 39(5)(c)).</p>
 <div class="example">
-<p><strong>Example:</strong> M applied for Child Support collection to resume because F missed that month's payment, however F is currently in hospital and has agreed to rectify that failure to comply on release from hospital the following week. The Registrar is satisfied the payment will be made and that it is appropriate to refuse the application.</p>
+<p><strong>Example:</strong> Juan applied for Child Support collection to resume because Valentina missed that month's payment, however Valentina is currently in hospital and has agreed to rectify that failure to comply on release from hospital the following week. The Registrar is satisfied the payment will be made and that it is appropriate to refuse the application.</p>
 </div>
-<p>When the payee applies for Child Support collection, Child Support will contact the payer. If the payer provides a reason why they believe their circumstances are special such that the application for collection should be refused, Child Support will give the payee an opportunity to comment on the reason the payer has given. The Registrar will then make a decision based on the information and evidence provided by both parties.</p>
+<p>When the payee applies for collection, DHS will contact the payer. If the payer provides a reason why they believe their circumstances are special such that the application for collection should be refused, DHS will give the payee an opportunity to comment on the reason the payer has given. The Registrar will then make a decision based on the information and evidence provided by both parties.</p>
 <h2 id="collectarrears">Collection of arrears if the Registrar accepts the payee's application for collection to resume</h2>
 <p>A payee who applies for collection to resume can also apply for the Registrar to collect arrears for them (section 39A(4)). If the Registrar accepts the payee's election for collection to resume, the Registrar must also accept the payee's application for collection of amounts that the payer has not paid in the 3 months immediately before the date the liability first becomes enforceable (section 39A(5)). The Registrar will need to be satisfied that the amounts have actually not been paid.</p>
 <p>A payee may also apply for collection of amounts unpaid by the payer for 9 months before the liability again becomes enforceable. This is called the maximum arrears period. If there are amounts unpaid for this period and the Registrar is satisfied that there are exceptional circumstances, the application must be granted. See <a href="../1/4">5.1.4</a> for more information on how unpaid amounts are calculated.</p>
@@ -147,7 +148,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     1 July 2016  	</div>
+      Last reviewed:     3 April 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../contact-us">Contact us</a></li>
@@ -157,7 +158,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"heDmKUhP0EoKe-1c8bNfugtO78emcTfZcMTbSidTaoY","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/138":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"UUpLHiJhy4atjl2fOJ8uZcCWqI213-SDwgTMqfLiqyE","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/138":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children active-trail menu-mlid-513"><a href="../child-support-guide" class="active-trail">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../guide-social-security-law">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,10 +49,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-F9VUrEAzjSQQi08m1UtAhfISVwdQUFZXRfBh5M__e7w" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-iANZsPhjjNwlMvk48boyHSpMOW6yefacDsdefaucdz0" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.27 - Released 20 September 2017</p>
+<p>Version 4.32 - Released 7 May 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
@@ -96,8 +96,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <div class="reference">
 <h2>Act references</h2>
 <p><a href="https://www.legislation.gov.au/Series/C2004A03596" title="Child Support (Registration and Collection) Act 1988">CSRC Act</a> Part VII</p>
-<p><a href="https://www.legislation.gov.au/Series/F1996B00886" title="Child Support (Registration and Collection) Regulations 1988">CSRC Regs</a> regulation 14, regulation 15, regulation 16</p>
-<p><a href="https://www.legislation.gov.au/Series/F1996B00398" title="Child Support (Assessment) Regulations 1989">CSA Regs</a> regulation 4C</p>
+<p><a href="https://www.legislation.gov.au/Series/F2018L00313" title="Child Support (Registration and Collection) Regulations 2018">CSRC Regs</a> regulation 31, regulation 34, regulation 35</p>
+<p><a href="https://www.legislation.gov.au/Series/F2018L00307" title="Child Support (Assessment) Regulations 2018">CSA Regs</a> regulation 8</p>
 <p><a href="https://www.legislation.gov.au/Series/C2004A04858">Evidence Act 1995</a> section 160, section 163</p>
 </div>
 <h2>On this page</h2>
@@ -114,7 +114,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <h2 id="From_a_person_who_may_object_against_a_decision_which_carries_objection_rights">From a person who may object against a decision which carries objection rights</h2>
 <p>CSRC Act section 80(1) specifies who may object and which decisions they may object against. Information about who may object to specified decisions under the CSA Act is included in <a href="../child-support-guide/4/1/2">4.1.2</a>. Information about who may object to specified decisions under the CSRC Act is included in <a href="../child-support-guide/4/1/3">4.1.3</a>.</p>
 <p>A person who may object (for example, the carer entitled to child support or the liable parent for an objection to a decision as to the particulars of an administrative assessment) must lodge their own objection unless it is made on their behalf by someone with power of attorney or with statutory rights to deal with the parent's finances (such as a State Trustee). Another person who is otherwise authorised to act as the representative of a person who may object (including a solicitor) may not write an objection on behalf of the person who may object unless the person who may object signs the objection. For more information see <a href="../child-support-guide/6/3/6">6.3.6</a>. There are also particular requirements with regard to representation in the process for a change of assessment application and these requirements apply to the process for an objection to a change of assessment decision (see <a href="../child-support-guide/2/6/5">2.6.5</a>).</p>
-<p>If the parent resides in a reciprocating jurisdiction (<a href="../child-support-guide/1/6/3">1.6.3</a>), the relevant overseas authority (<a href="../child-support-guide/1/5/1">1.5.1</a>) can object on behalf of the parent if (CSA Regs regulation 4C):</p>
+<p>If the parent resides in a reciprocating jurisdiction (<a href="../child-support-guide/1/6/3">1.6.3</a>), the relevant overseas authority (<a href="../child-support-guide/1/5/1">1.5.1</a>) can object on behalf of the parent if (CSA Regs regulation 8):</p>
 <ul><li>an application for administrative assessment has been made by the overseas authority on behalf of the payee, or</li>
 <li>an application for administrative assessment has been made by the parent and given to the Registrar by the overseas authority, and the parent consents to the overseas authority objecting on his or her behalf.</li>
 </ul><p>Occasionally there will be an error in a decision to which there are no objection rights, for example a decision about presumption of parentage. In these cases, the Registrar may be able to correct the error without using the objection process. Refer to <a href="../child-support-guide/4/1/2">4.1.2</a> and <a href="../child-support-guide/4/1/1">4.1.1</a> for more details.</p>
@@ -122,8 +122,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <h2 id="Within_28_days">Within 28 days (or 90 days for residents of reciprocating jurisdictions)</h2>
 <p>An objection to a decision must be lodged within 28 days of the day that the parent was served with written notice of that decision (CSRC Act section 81(1)). If the decision is an appealable collection refusal (<a href="../child-support-guide/4/1/3">4.1.3</a>) decision, the payee may object to it within 28 days of the date they first became aware of the decision (CSRC Act section 81(2)).</p>
 <p>The period for lodging an objection to any decision is extended from 28 days to 90 days for a parent who is resident overseas in a reciprocating jurisdiction (<a href="../child-support-guide/1/6/3">1.6.3</a>) while the other parent resides in Australia (CSRC Act section 81(3)).</p>
-<p>When deciding whether an objection has been lodged in time, the Registrar will firstly calculate the date upon which the person was served with notice of the decision. The Registrar usually serves notices by pre-paid mail sent to the person at his or her last known address (CSRC Regs sub-regulation 14(1)). A person is taken to have been served with notice by mail at the time when the letter would, in the ordinary course of the post, have arrived at the place to which it was addressed, unless proven otherwise (CSRC Regs sub-regulation 14(1)).</p>
-<p>The last address notified by the person to the Registrar is for all purposes that person's address for service (CSRC Regs regulation 15(1)). If the person has not notified the Registrar of his or her address but the Registrar records nevertheless contain an address for the person, the last such address in the Registrar records is the person's address for service (CSRC Regs regulation 15(2)). If the person failed to advise the Registrar of a change to his or her address, the notice is taken to have been served despite it being sent to his or her former address (CSRC Regs regulation 16).</p>
+<p>When deciding whether an objection has been lodged in time, the Registrar will firstly calculate the date upon which the person was served with notice of the decision. The Registrar usually serves notices by pre-paid mail sent to the person at his or her last known address (CSRC Regs sub-regulation 31(1)). A person is taken to have been served with notice by mail at the time when the letter would, in the ordinary course of the post, have arrived at the place to which it was addressed, unless proven otherwise (CSRC Regs sub-regulation 31(1)).</p>
+<p>The last address notified by the person to the Registrar is for all purposes that person's address for service (CSRC Regs regulation 34(1)). If the person has not notified the Registrar of his or her address but the Registrar records nevertheless contain an address for the person, the last such address in the Registrar records is the person's address for service (CSRC Regs regulation 34(2)). If the person failed to advise the Registrar of a change to his or her address, the notice is taken to have been served despite it being sent to his or her former address (CSRC Regs regulation 35).</p>
 <p>The Registrar will presume that a notice has been posted to a person on the fifth business day after the date the notice was produced (Evidence Act section 163). The Registrar will presume that the letter was received at the person's address in Australia on the fourth working day after that date it was presumed to have been posted (Evidence Act section 160). This means that in most cases, a notice is presumed to have been served on a person on the ninth working day after the date of the notice (i.e. excluding any day that is a Saturday, Sunday, bank or public holiday).</p>
 <p>The only exceptions are where the Registrar is aware that the person received the notice within a shorter period, or where the notice is sent to a person at an overseas address. The Registrar may be aware that the person received the notice within a shorter period if a copy of the notice was sent to the person by facsimile at his or her request; or if the person contacted DHS before the ninth working day after the date of the notice to discuss it when he or she received it. If the notice was sent to the person at an overseas address, the Registrar will investigate the usual postage period for an ordinary mail article sent from Australia to that overseas address.</p>
 <p>Once the Registrar has calculated the presumed (or actual) date of service of the notice, the Registrar will work out whether the person has lodged his or her objection within 28 (90 for international cases) calendar days of that date. The objection will be considered to be lodged within time if it is received by the Registrar by the twenty-eighth day after the date of service (or ninetieth day for international cases).</p>
@@ -137,7 +137,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     14 August 2017  	</div>
+      Last reviewed:     3 April 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../contact-us">Contact us</a></li>
@@ -147,7 +147,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

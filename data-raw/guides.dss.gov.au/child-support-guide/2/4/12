@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../../../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"pIs8w2kucL-qU0AaBB3_fuV3ZRZdmhvT0q3gPeiyxdY","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/2\/4\/12":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"2VgZqQ-KmjxdmcL5wj4co_bBCv88eSgy3Ro2W40L_oI","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/2\/4\/12":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide" class="active-trail">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,10 +49,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-EfoFB8y30m5F5QNGqcCiaH8lqfe2ItkH92YABx9lBdA" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-t-ogP-df_hpvgf3rpq-uQaEiwVS-flugwQlI67kN8f8" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.27 - Released 20 September 2017</p>
+<p>Version 4.32 - Released 7 May 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
@@ -78,7 +78,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf active-trail active menu-mlid-587"><a href="12" class="active-trail active">2.4.12 The Minimum Annual Rate of Child Support</a></li>
 </ul></li>
 <li class="collapsed menu-mlid-588"><a href="../5" title="This chapter describes the applications and elections that may be made to amend a child support assessment.">2.5 Applications &amp; Elections to Amend an Assessment</a></li>
-<li class="collapsed menu-mlid-599"><a href="../6" title="This chapter describes the issues that the Registrar has to consider when making a decision to change an assessment under CSA Act part 6A.">2.6 Change of Assessment in Special Circumstances</a></li>
+<li class="collapsed menu-mlid-599"><a href="../6" title="This chapter describes the issues that the Registrar has to consider when making a decision to change an assessment under Child Support (Assessment) Act 1989 (CSA Act) part 6A.">2.6 Change of Assessment in Special Circumstances</a></li>
 <li class="collapsed menu-mlid-618"><a href="../7" title="This chapter describes how parents can make child support agreements. It describes the effect of a child support agreement upon a child support assessment.">2.7 Agreements</a></li>
 <li class="collapsed menu-mlid-624"><a href="../8" title="This chapter describes when a court can make orders that affect a child support assessment and how the Registrar interprets court orders which will affect an assessment.">2.8 Court Variation to Assessments</a></li>
 <li class="collapsed menu-mlid-627"><a href="../9" title="This chapter describes the procedural rules for making assessments and notes the information required in a notice of assessment. It also describes when the Registrar will amend an assessment.
@@ -105,7 +105,7 @@ It also describes how an assessment creates a liability to pay child support and
 <div class="reference">
 <h2>Act references</h2>
 <p><a href="https://www.legislation.gov.au/Series/C2004A03872" title="Child Support (Assessment) Act 1989">CSA Act</a> section 5, section 7B, section 65A, section 66, section 66A, section 66B, section 66C, section 116, section 153A, section 155</p>
-<p><a href="https://www.legislation.gov.au/Series/F1996B00398" title="Child Support (Assessment) Regulations 1989">CSA Regs</a> regulation 7D</p>
+<p><a href="https://www.legislation.gov.au/Series/F2018L00307" title="Child Support (Assessment) Regulations 2018">CSA Regs</a> regulation 13</p>
 </div>
 <h2>On this page</h2>
 <ul><li><a href="12#minimumannualrate">What is the minimum annual rate of child support?</a></li>
@@ -130,16 +130,16 @@ It also describes how an assessment creates a liability to pay child support and
 </ul><p>The minimum annual rate does not apply if the Registrar could make an assessment under section 65A applying the fixed annual rate of child support. However, if the Registrar has made a determination under section 65B that section 65A does not apply then the Registrar can make a minimum annual rate assessment (section 66(2)).</p>
 <p>The minimum annual rate will apply until the end of the child support period (section 66(4)(b)(i)), or until 28 days after the day on which the person would cease to be assessed to pay the minimum rate, even if that day is after the end of the child support period (section 66(4)(b)(ii)).</p>
 <div class="example">
-<p><strong>Example:</strong> M has been assessed to pay child support at the minimum annual rate, based on an income estimate for a year of income in the child support period 1 September 2010 to 30 June 2011.</p>
-<p>M starts work on 1 March 2011 and lodges a later income estimate on that day. Child support is now payable at a rate higher than the minimum annual rate. The higher rate will be payable from 29 March 2011, 28 days after the minimum rate would otherwise cease to be payable.</p>
+<p><strong>Example:</strong> Anjali has been assessed to pay child support at the minimum annual rate, based on an income estimate for a year of income in the child support period 1 September 2010 to 30 June 2011.</p>
+<p>Anjali starts work on 1 March 2011 and lodges a later income estimate on that day. Child support is now payable at a rate higher than the minimum annual rate. The higher rate will be payable from 29 March 2011, 28 days after the minimum rate would otherwise cease to be payable.</p>
 </div>
 <div class="example">
-<p><strong>Example:</strong> M has been assessed to pay child support at the minimum annual rate, based on an estimate of income, for the child support period 1 September 2008 to 30 November 2009.</p>
-<p>M starts work on 12 November 2009 and lodges a new estimate on that day. Child support is now payable at a rate higher than the minimum annual rate. The higher rate will be payable from 10 December 2009, 28 days after the minimum rate would otherwise cease to be payable even if that day is after the end of the child support period.</p>
+<p><strong>Example:</strong> Aaron has been assessed to pay child support at the minimum annual rate, based on an estimate of income, for the child support period 1 September 2008 to 30 November 2009.</p>
+<p>Aaron starts work on 12 November 2009 and lodges a new estimate on that day. Child support is now payable at a rate higher than the minimum annual rate. The higher rate will be payable from 10 December 2009, 28 days after the minimum rate would otherwise cease to be payable even if that day is after the end of the child support period.</p>
 </div>
 <p>As noted above, the minimum annual rate does not apply where the assessment is made in accordance with a change of assessment decision, a court order or a child support agreement. Therefore the minimum annual rate will cease to apply the day before a rate is determined in accordance with a change of assessment decision, order or agreement.</p>
 <div class="example">
-<p><strong>Example:</strong> M has been assessed to pay child support at the minimum annual rate, based on an income estimate for a year of income in the child support period 1 September 2010 to 30 June 2011.</p>
+<p><strong>Example:</strong> Nhung has been assessed to pay child support at the minimum annual rate, based on an income estimate for a year of income in the child support period 1 September 2010 to 30 June 2011.</p>
 <p>A departure order sets a higher annual rate to be payable from 1 March 2011. The minimum annual rate will cease to be payable from 28 February 2011, the day before the higher rate is payable.</p>
 </div>
 <h2 id="multipleliabilities">How the annual rate is calculated where a parent has more than 3 cases</h2>
@@ -147,17 +147,17 @@ It also describes how an assessment creates a liability to pay child support and
 <ul><li>Annual rate for each case = (3 × minimum annual rate ÷ Total number of the parent's child support cases)</li>
 </ul><p>The total number of cases includes all cases where the parent has been assessed in respect of the cost of the children. This includes cases where the liability has been determined in another way, such as in accordance with the provisions of an order or agreement.</p>
 <div class="example">
-<p><strong>Example:</strong> As at 7 December 2008, F has been assessed in respect of the cost of the children in 4 cases. F receives an income support payment and has an adjusted taxable income below the self-support amount.</p>
-<p>Assessment 1 F is assessed to pay child support to A for one child. The assessment is varied by a court order which has an annual rate of $260.</p>
-<p>Assessment 2 F is assessed in respect of the costs of 3 children. F and B share the care of one child and have sole care of one child each.</p>
-<p>Assessment 3 F is assessed to receive child support from C for one child.</p>
-<p>Assessment 4 F is assessed to pay D child support for 2 children.</p>
+<p><strong>Example:</strong> As at 7 December 2008, Eric has been assessed in respect of the cost of the children in 4 cases. Eric receives an income support payment and has an adjusted taxable income below the self-support amount.</p>
+<p>Assessment 1 Eric is assessed to pay child support to Srishti for one child. The assessment is varied by a court order which has an annual rate of $260.</p>
+<p>Assessment 2 Eric is assessed in respect of the costs of 3 children. Eric and Thiva share the care of one child and have sole care of one child each.</p>
+<p>Assessment 3 Eric is assessed to receive child support from Alice for one child.</p>
+<p>Assessment 4 Eric is assessed to pay Yixiao child support for 2 children.</p>
 <p>The amount payable for each case where the minimum annual rate is applicable is determined using the formula in section 66(6):</p>
 <ul><li>Annual rate for each case = (3 × 339 ÷ 4) = 254</li>
-</ul><p>Therefore F is required to pay the following amounts:</p>
+</ul><p>Therefore Eric is required to pay the following amounts:</p>
 <p>Assessment 1 $260 as required by the court order</p>
-<p>Assessment 2 Nil as F has more than regular care of a child</p>
-<p>Assessment 3 Nil as F is entitled to receive child support</p>
+<p>Assessment 2 Nil as Eric has more than regular care of a child</p>
+<p>Assessment 3 Nil as Eric is entitled to receive child support</p>
 <p>Assessment 4 $254 as a minimum rate assessment</p>
 </div>
 <h2 id="minto3rdparty">Paying the minimum annual rate for a case to more than one person</h2>
@@ -165,35 +165,35 @@ It also describes how an assessment creates a liability to pay child support and
 <ul><li>If 2 carers have an equal percentage of care of the children, and that percentage is the highest percentage of care for the children, then each person is entitled to receive half of the amount that is payable by the parent</li>
 <li>Otherwise, only the carer with the highest percentage of care for the children is entitled to be paid the minimum annual rate of child support payable by the parent.</li>
 </ul><div class="example">
-<p><strong>Example:</strong> M and F have one child A who lives one week with F and the alternative week with M's mother G. F and G each have a percentage of care of 50%. G has applied for an assessment of child support for A.</p>
-<p>M receives an income support payment and has an adjusted taxable income below the self-support amount. M has no other child support cases. M's liability has been assessed, for the child support period 1 September 2010 to 30 November 2011, at the minimum annual rate of $360.</p>
-<p>As F and G each have the equal highest percentage of care they are each entitled to be paid $180, half of the minimum annual rate.</p>
+<p><strong>Example: </strong>Sonicka and Praful have one child William who lives one week with Praful and the alternative week with Sonicka's mother Manasa. Praful and Manasa each have a percentage of care of 50%. Manasa has applied for an assessment of child support for William.</p>
+<p>Sonicka receives an income support payment and has an adjusted taxable income below the self-support amount. Sonicka has no other child support cases. Sonicka's liability has been assessed, for the child support period 1 September 2010 to 30 November 2011, at the minimum annual rate of $360.</p>
+<p>As Praful and Manasa each have the equal highest percentage of care they are each entitled to be paid $180, half of the minimum annual rate.</p>
 </div>
 <div class="example">
-<p><strong>Example:</strong> M and F have one child A, who lives one week with F and the alternative week with M's mother G. A spends some of the school holidays with M rather than with G. F has a percentage of care of 50%, G has a percentage of care of 40% and M has a care percentage of 10%. G has applied for an assessment of child support for A.</p>
-<p>M receives an income support payment and has an adjusted taxable income below the self-support amount. M has no other child support cases. The liability has been assessed, for the child support period 1 September 2010 to 30 November 2011, at the minimum annual rate of $360.</p>
-<p>As F has the highest percentage of care, only F is entitled to be paid the minimum annual rate of $360.</p>
+<p><strong>Example:</strong> Michelle and Robert have one child Catherine, who lives one week with Robert and the alternative week with Michelle's mother Grace. Catherine spends some of the school holidays with Michelle rather than with Grace. Robert has a percentage of care of 50%, Grace has a percentage of care of 40% and Michelle has a care percentage of 10%. Grace has applied for an assessment of child support for Catherine.</p>
+<p>Michelle receives an income support payment and has an adjusted taxable income below the self-support amount. Michelle has no other child support cases. The liability has been assessed, for the child support period 1 September 2010 to 30 November 2011, at the minimum annual rate of $360.</p>
+<p>As Robert has the highest percentage of care, only Robert is entitled to be paid the minimum annual rate of $360.</p>
 </div>
 <div class="example">
-<p><strong>Example:</strong> F has been assessed in respect of the cost of the children in 4 cases. F receives an income support payment and has an adjusted taxable income below the self-support amount.</p>
-<p>Assessment 1 F is assessed to pay child support to A for one child. The assessment is varied by a court order which has an annual rate of $260.</p>
-<p>Assessment 2 F is assessed in respect of the costs of 3 children. F and B share the care of one child and have sole care of one child each.</p>
-<p>Assessment 3 F is assessed to receive child support from C for one child.</p>
-<p>Assessment 4 F is assessed to pay child support for 2 children who live one week with M and the alternative week with M's mother G. M and G each have a percentage of care of 50%.</p>
+<p><strong>Example:</strong> Ramona has been assessed in respect of the cost of the children in 4 cases. Ramona receives an income support payment and has an adjusted taxable income below the self-support amount.</p>
+<p>Assessment 1 Ramona is assessed to pay child support to Albert for one child. The assessment is varied by a court order which has an annual rate of $260.</p>
+<p>Assessment 2 Ramona is assessed in respect of the costs of 3 children. Ramona and Sven share the care of one child and have sole care of one child each.</p>
+<p>Assessment 3 Ramona is assessed to receive child support from Rashid for one child.</p>
+<p>Assessment 4 Ramona is assessed to pay child support for 2 children who live one week with Thanh and the alternative week with Thanh's mother Thao. Thanh and Thao each have a percentage of care of 50%.</p>
 <p>The amount payable for each case where the minimum annual rate is applicable is determined using the formula in section 66(6):</p>
 <ul><li>Annual rate for each case = (3 × 408 ÷ 4) = 306</li>
-</ul><p>Therefore F is required to pay the following amounts:</p>
+</ul><p>Therefore Ramona is required to pay the following amounts:</p>
 <p>Assessment 1 $260 as required by the court order</p>
-<p>Assessment 2 Nil as F has more than regular care of a child</p>
-<p>Assessment 3 Nil as F is entitled to receive child support</p>
-<p>Assessment 4 $306 - M and G each have the equal highest percentage of care they are each entitled to be paid $153 each, half of the portion of minimum annual rate payable.</p>
+<p>Assessment 2 Nil as Ramona has more than regular care of a child</p>
+<p>Assessment 3 Nil as Ramona is entitled to receive child support</p>
+<p>Assessment 4 $306 - Thanh and Thao each have the equal highest percentage of care they are each entitled to be paid $153 each, half of the portion of minimum annual rate payable.</p>
 </div>
 <h2 id="reducetonil">When can a minimum assessment be reduced to nil?</h2>
 <p>A parent can apply directly to a court for a departure order (section 116(1)(c)) or can apply to the Registrar to have the minimum annual rate reduced to nil for a particular child support period (section 66A). See <a href="../5/4">2.5.4</a> on applying to have the minimum annual rate of child support reduced to nil.</p>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     20 March 2015  	</div>
+      Last reviewed:     3 April 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../contact-us">Contact us</a></li>
@@ -203,7 +203,7 @@ It also describes how an assessment creates a liability to pay child support and
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

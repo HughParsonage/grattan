@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../../../../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../../../../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"3-8Rfjor-kuS3fWsDmabpjb5TLWnNgI_4xqv5u9F_0o","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/guide-social-security-law\/4\/3\/2\/35":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"xa2ZxFDQe5joX6B69kx3THd2WZDO2GI6JsWvwufkPGM","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/guide-social-security-law\/4\/3\/2\/35":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children menu-mlid-513"><a href="../../../../child-support-guide">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-489"><a href="../../../../guide-social-security-law.1" class="active-trail">Guide to Social Security Law</a></li>
+<li class="leaf has-children active-trail menu-mlid-489"><a href="../../../../guide-social-security-law" class="active-trail">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,16 +49,16 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-OKaYX3QCXjKOte5p42ocR9WHExUCoqUm5nwn2SP-l_w" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-OsN-4NJB4E7XSbph06UyEkaAPoi_8ZU0pwXNFS_Q1W0" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Guide to Social Security Law</h2>
-<p>Version 1.237 - Released 19 October 2017</p>
+<p>Version 1.245 - Released 1 June 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../../../../guide-social-security-law.1" title="">Using the Guide to Social Security Law</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../../../../guide-social-security-law" title="">Using the Guide to Social Security Law</a></li>
 <li class="collapsed menu-mlid-493"><a href="../../../updates">What&#039;s New</a></li>
 <li class="collapsed menu-mlid-2295"><a href="../../../1">1 Key Terms &amp; Principles</a></li>
 <li class="collapsed menu-mlid-2294"><a href="../../../2">2 Claim Verification</a></li>
@@ -104,7 +104,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7372"><a href="../../../act-references">Act Reference Index</a></li>
 <li class="last leaf menu-mlid-7168"><a href="../../../sitemap">Site Map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../../../index.html">Home</a> &raquo; <a href="../../../../guide-social-security-law.1">Guide to Social Security Law</a> &raquo; <a href="../../../4" class="active-trail">4 Income &amp; Assets</a> &raquo; <a href="../../3" class="active-trail">4.3 Ordinary Income</a> &raquo; <a href="../2" class="active-trail">4.3.2 Income Exempt from Assessment</a> &raquo; 4.3.2.35 Income Exempt from Assessment - s 8(11) Exempt Lump Sums</div>
+	<div id="breadcrumb"><a href="../../../../index.html">Home</a> &raquo; <a href="../../../../guide-social-security-law">Guide to Social Security Law</a> &raquo; <a href="../../../4" class="active-trail">4 Income &amp; Assets</a> &raquo; <a href="../../3" class="active-trail">4.3 Ordinary Income</a> &raquo; <a href="../2" class="active-trail">4.3.2 Income Exempt from Assessment</a> &raquo; 4.3.2.35 Income Exempt from Assessment - s 8(11) Exempt Lump Sums</div>
 <div id="utility">
 	
 <div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/guide-social-security-law/4/3/2/35"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
@@ -299,7 +299,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </tr><tr><td>2 of 2003</td>
 <td>
 <p>7 March 2003</p>
-<p>(Revoked by Determination 2 of 2005, 13 January 2005).</p>
+<p>(Revoked by Determination 2 of 2005, 13 January 2005.)</p>
 </td>
 <td>
 <p>Queensland Government Indigenous Wages and Savings Reparations Process</p>
@@ -399,7 +399,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </td>
 <td>
 <p>Tasmanian Child Abuse Payment</p>
-<p>Tasmanian Government ex-gratia payment for child abuse suffered by a person while in Tasmanian State care. (Report of the Tasmanian Ombudsman 'Listen to the Children' Review of Claims of Abuse from Adults in State Care as Children).</p>
+<p>Tasmanian Government ex-gratia payment for child abuse suffered by a person while in Tasmanian State care. (Report of the Tasmanian Ombudsman 'Listen to the Children' Review of Claims of Abuse from Adults in State Care as Children.)</p>
 </td>
 </tr><tr><td colspan="3">2005</td>
 </tr><tr><td>
@@ -628,9 +628,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </tr><tr><td>Federal Register of Legislation number F2016L01706</td>
 <td>4 November 2016</td>
 <td>A lump sum compensation payment made by Emergency Services And State Super (ESSSuper) to Centrelink pensioners impacted by an incorrect deductible amount calculated and reported to Centrelink by ESSSuper.</td>
-</tr><tr><td>
-<p>Federal Register of Legislation number F2016L01977</p>
-</td>
+</tr><tr><td>Federal Register of Legislation number F2016L01977</td>
 <td>From 8 July 2016</td>
 <td>This determination exempts Taxi Reform Transitional Payments made by Transport for NSW. These one-off payments will assist taxi licence holders to adjust to transport industry changes.</td>
 </tr><tr><td colspan="3">2017</td>
@@ -677,15 +675,30 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </tr><tr><td>Federal Register of Legislation number F2017L00543</td>
 <td>19 May 2017</td>
 <td>This determination exempts certain NSW Government payments to Stolen Generations survivors. The relevant payments are made under the Stolen Generations Reparations Scheme, the Stolen Generations Funeral Assistance Fund or the Aboriginal Trust Fund Repayment Scheme.</td>
-</tr><tr><td>Federal Register of Legislation number F2017L00644</td>
+</tr><tr><td>Federal Register of Legislation number F2017C01107 (F2017L01435 is the Amendment determination which amended F2017L00644 which was the original determination.)</td>
 <td>8 June 2017</td>
 <td>
 <p>Payments Compensatory in Nature for Non-Economic Loss.</p>
 <p>See <a href="35#notec">Note C</a>.</p>
 </td>
 </tr><tr><td>Federal Register of Legislation number F2017L01083</td>
-<td>24 August 2017</td>
+<td>25 August 2017</td>
 <td>This determination exempts Victorian Industry Transition Assistance Payments. These one-off payments will assist eligible taxi and hire car licence holders.</td>
+</tr><tr><td>Federal Register of Legislation number F2017L01335</td>
+<td>1 November 2017</td>
+<td>This determination exempts NSW Additional Assistance Hire Vehicle payments. These one-off payments assist hire vehicle licence holders.</td>
+</tr><tr><td>Federal Register of Legislation number F2017L01446</td>
+<td>From 26 July 2017</td>
+<td>This determination exempts certain payments made under the South Australia Taxi Industry Assistance Package. These one-off payments assist taxi licence holders and lessees.</td>
+</tr><tr><td>Federal Register of Legislation number F2017L01518</td>
+<td>23 November 2017</td>
+<td>This determination exempts payments made under the Queensland Government's Reconciliation Plan to individuals who, as children, were inappropriately placed in adult mental health facilities in Queensland.</td>
+</tr><tr><td>Federal Register of Legislation number F2017L01586</td>
+<td>1 December 2017</td>
+<td>This determination exempts Tasmanian Special Energy Bonus payments to certain pensioner concession card and seniors health card holders in Tasmania.</td>
+</tr><tr><td>Federal Register of Legislation number F2018L00107</td>
+<td>14 February 2018</td>
+<td>This determination exempts Defence Force Reparation Scheme Payments</td>
 </tr></tbody></table><table><thead><tr><th scope="col">Note</th>
 <th scope="col">Explanation</th>
 </tr></thead><tbody><tr><td id="notea">﻿A</td>
@@ -711,11 +724,12 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li>death benefits,</li>
 <li>insurance in respect of specified medical trauma or event, and</li>
 <li>death and permanent impairment under the <cite>Safety, Rehabilitation and Compensation Act 1988 </cite>or the <a href="../../../acronyms#mrca" title="Military Rehabilitation and Compensation Act 2004">MRCA</a>.</li>
-</ul><p><strong>Note:</strong> This list is not a complete guide for decision makers. It is important to refer to the legislative instrument (<a href="https://www.legislation.gov.au/Series/F2017L00644">F2017L00644</a>) for more detailed information on exempt payments.</p>
+</ul><p><strong>Note:</strong> This list is not a complete guide for decision makers. It is important to refer to the legislative instrument (<a href="https://www.legislation.gov.au/Details/F2017C01107">F2017C01107</a>) for more detailed information on exempt payments.</p>
 <p>Where all or part of a payment is specifically for economic loss, this determination does not apply to the component for economic loss.</p>
 <p>Where a compensatory type lump sum covered by this determination includes both economic loss and non-economic loss components, and the breakdown of these components is not known, 50% of the gross amount of the lump sum payment is exempt.</p>
 <p>Where a lump sum is received instead of periodic payments for a set period (i.e. the lump sum is calculated at a set weekly, fortnightly or monthly rate over a specific period), they are not exempted as income under section 8(11).</p>
 <p>This determination does not change the assessment of compensation payments under SSAct Part 3.14.</p>
+<p>The amendment determination F2017L01435 amending F2017L00644 was made to ensure certain payments for people in the Australian Defence Force continue to be exempt under the social security income test. From 12 October 2017 these payments, which were previously paid under the <cite>Safety, Rehabilitation and Compensation Act 1988</cite>, are now taken to have been made under the <cite>Safety, Rehabilitation and Compensation (Defence-related Claims) Act 1988</cite>.</p>
 </td>
 </tr></tbody></table><p><strong>Note:</strong> The initial exemption of a lump sum amount from the income test does NOT alter the fact that any on-going income generated by the lump sum is counted under the income test, and any assessable asset produced from the lump sum is counted under the social security assets test. Once the lump sum amount is invested or used to purchase goods or services, the usual income and assets rules will apply. For example, if the lump sum amount is used to buy a car, the car would be counted as an asset under the assets test. If the lump sum amount is spent on a holiday or on bills there would generally be no ongoing income or asset to be assessed. If the lump sum amount is placed in a financial investment (such as a bank account) the funds have then become a financial asset that would be assessable as an asset and subject to the income test deeming rules (refer to SSAct section 9(1) for all the types of financial assets).</p>
 <div class="reference">
@@ -725,7 +739,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     20 September 2017  	</div>
+      Last reviewed:     20 March 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../../contact-us">Contact us</a></li>
@@ -735,7 +749,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

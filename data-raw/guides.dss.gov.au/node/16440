@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"J9jQ8jZMQnQfphkO6Vm_lPTMwL6QTGWqNvr1PC85tIo","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/16440":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"R36he1hZL6K0e57NEfyjzX22TroZTE51EtsaalBcksY","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/16440":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children menu-mlid-513"><a href="../child-support-guide">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-489"><a href="../guide-social-security-law.1" class="active-trail">Guide to Social Security Law</a></li>
+<li class="leaf has-children active-trail menu-mlid-489"><a href="../guide-social-security-law" class="active-trail">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,16 +49,16 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-rTkptmE1ieSbL8emltfJs0myCSk6fxBzP0S6dI9IMEg" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-kTDQNlN3Nfm1JOBSuT_4hXw0G9K8o0c4JZAY4E1y__0" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Guide to Social Security Law</h2>
-<p>Version 1.237 - Released 19 October 2017</p>
+<p>Version 1.245 - Released 1 June 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../guide-social-security-law.1" title="">Using the Guide to Social Security Law</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../guide-social-security-law" title="">Using the Guide to Social Security Law</a></li>
 <li class="collapsed menu-mlid-493"><a href="../guide-social-security-law/updates">What&#039;s New</a></li>
 <li class="collapsed menu-mlid-2295"><a href="../guide-social-security-law/1">1 Key Terms &amp; Principles</a></li>
 <li class="collapsed menu-mlid-2294"><a href="../guide-social-security-law/2">2 Claim Verification</a></li>
@@ -105,7 +105,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7372"><a href="../guide-social-security-law/act-references">Act Reference Index</a></li>
 <li class="last leaf menu-mlid-7168"><a href="../guide-social-security-law/sitemap">Site Map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../guide-social-security-law.1">Guide to Social Security Law</a> &raquo; <a href="../guide-social-security-law/4" class="active-trail">4 Income &amp; Assets</a> &raquo; <a href="../guide-social-security-law/4/12" class="active-trail">4.12 Means Test Treatment of Private Trusts &amp; Private Companies from 01/01/2002</a> &raquo; <a href="../guide-social-security-law/4/12/11" class="active-trail">4.12.11 Primary Production Controlled Private Trusts &amp; Controlled Private Companies</a> &raquo; 4.12.11.10 Aggregation Assessments of Controlled Primary Production Private Trusts &amp; Private Companies</div>
+	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../guide-social-security-law">Guide to Social Security Law</a> &raquo; <a href="../guide-social-security-law/4" class="active-trail">4 Income &amp; Assets</a> &raquo; <a href="../guide-social-security-law/4/12" class="active-trail">4.12 Means Test Treatment of Private Trusts &amp; Private Companies from 01/01/2002</a> &raquo; <a href="../guide-social-security-law/4/12/11" class="active-trail">4.12.11 Primary Production Controlled Private Trusts &amp; Controlled Private Companies</a> &raquo; 4.12.11.10 Aggregation Assessments of Controlled Primary Production Private Trusts &amp; Private Companies</div>
 <div id="utility">
 	
 <div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/node/16440"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
@@ -122,7 +122,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 1207Q Controlled private companies, section 1207V Controlled private trusts, section 1207X Attributable stakeholder, assets attribution…</p>
 </div>
 <h2>Summary</h2>
-<p>If an income support recipient is an attributable stakeholder of a controlled private trust or controlled private company and the main business activity undertaken by the trust or company is primary production (<a href="../guide-social-security-law/1/1/p/389">1.1.P.389</a>), the aggregation rules of SSAct section 1121A are to apply. That is the value of ALL the stakeholder's primary production liabilities can be offset against their primary production assets. This includes primary production assets PERSONALLY owned by the stakeholder. The stakeholder's principal home and adjacent land (<a href="../guide-social-security-law/1/1/a/58">1.1.A.58</a>) is an exempt asset and is not used in the aggregation assessment, even if that home is on the primary production land.</p>
+<p>If an income support recipient is an attributable stakeholder of a controlled private trust or controlled private company and the main business activity undertaken by the trust or company is primary production, the aggregation rules of SSAct section 1121A are to apply. That is the value of ALL the stakeholder's primary production liabilities can be offset against their primary production assets. This includes primary production assets PERSONALLY owned by the stakeholder. The stakeholder's principal home and adjacent land (<a href="../guide-social-security-law/1/1/a/58">1.1.A.58</a>) is an exempt asset and is not used in the aggregation assessment, even if that home is on the primary production land.</p>
 <div class="example">
 <p><strong>Example:</strong> Jim is a 50% attributable stakeholder of a private family trust. His child Tom is also a 50% stakeholder. The trust is part of a primary production enterprise. Jim holds the title to the primary production land in his own name. The trust owns the plant, equipment and stock, and carries the liabilities of the enterprise. Jim's primary production assets and liabilities include the primary production land he personally owns (minus his principal home and adjacent land) and his share of the trust primary production assets and liabilities.</p>
 </div>
@@ -132,13 +132,13 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <h2>Primary production liabilities</h2>
 <p>A primary production liability is any liability the attributable stakeholder has, that has been obtained for the purpose of running a primary production business. The assessor should have care when determining the attributable stakeholder's primary production liabilities as non-primary production assets and liabilities or exempt assets (<a href="../guide-social-security-law/1/1/e/170">1.1.E.170</a>) are not considered to be an asset or liability for aggregation purposes. If a liability is held over both a primary production and non-primary production or exempt asset the liability must be apportioned to determine the primary production liability for the stakeholder.</p>
 <div class="example">
-<p><strong>Explanation:</strong> Where a liability is held over a property that includes the stakeholder's principal home the liability must be apportioned to determine the amount that can be used to offset any primary production assets for aggregation purposes. This is because the home and adjacent land (<a href="../guide-social-security-law/1/1/a/58">1.1.A.58</a>) are not primary production assets for the homeowner. An encumbrance held over a primary production asset for a third party also cannot be used to offset the value of that asset, as the liability is the third party's.</p>
+<p><strong>Explanation:</strong> Where a liability is held over a property that includes the stakeholder's principal home the liability must be apportioned to determine the amount that can be used to offset any primary production assets for aggregation purposes. This is because the home and adjacent land are not primary production assets for the homeowner. An encumbrance held over a primary production asset for a third party also cannot be used to offset the value of that asset, as the liability is the third party's.</p>
 </div>
 <div class="example">
 <p><strong>Example:</strong> George is a primary producer. He secures a mortgage over a portion of his primary production land. The purpose of the mortgage is to secure a loan for his child who wishes to buy a holiday home. The mortgage cannot be used to offset the primary production assets for aggregation purposes, as the LIABILITY is the child's, and the purpose of the loan is not primary production.</p>
 </div>
 <h2>Apportionment</h2>
-<p>If the primary production assets include the principal residence (and adjacent land (<a href="../guide-social-security-law/1/1/a/58">1.1.A.58</a>)) of the stakeholder, and/or a liability is secured over the assets (regardless of whether the primary production assets are entity or personal assets), then the assets and liabilities must be apportioned to determine the net primary production asset amount for the attributable stakeholder.</p>
+<p>If the primary production assets include the principal residence (and adjacent land) of the stakeholder, and/or a liability is secured over the assets (regardless of whether the primary production assets are entity or personal assets), then the assets and liabilities must be apportioned to determine the net primary production asset amount for the attributable stakeholder.</p>
 <p><strong>Note:</strong> For further information about apportionment see <a href="../guide-social-security-law/4/12/5/20">4.12.5.20</a> Apportioning a Liability of a Controlled Private Company or Controlled Private Trust.</p>
 <h2>Aggregation &amp; multiple primary production entities</h2>
 <p>If an income support recipient is an attributable stakeholder of multiple entities that have primary production assets and liabilities, then ALL the primary production assets and liabilities of those entities are brought into account when determining the stakeholder's aggregation assessment. (Subject to the attribution percentage the stakeholder has in the entities.)</p>
@@ -158,7 +158,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     1 July 2013  	</div>
+      Last reviewed:     6 November 2017  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../contact-us">Contact us</a></li>
@@ -168,7 +168,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

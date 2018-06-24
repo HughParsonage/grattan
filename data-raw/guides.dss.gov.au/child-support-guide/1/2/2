@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../../../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"UA8slSSPnXUh0So6Pa1sxmWhlZe_uIXFBHJuGVfa0cc","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/1\/2\/2":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"A9NXaWoVCbeyKEeTekFkjTQYf_HWk7dbGacqe63n5Gg","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/1\/2\/2":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide" class="active-trail">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,10 +49,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-57hkVFMlppVwZUpBdPTWrb-1DBgZbP6KainB0OhP7WE" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-t6eit65K5EW-GBSg0QZIVEt9ST4PyDBANcGtbO8mReg" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.27 - Released 20 September 2017</p>
+<p>Version 4.32 - Released 7 May 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
@@ -91,7 +91,8 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <h2>Act references</h2>
 <p><a href="https://www.legislation.gov.au/Series/C2004A03911">Social Security and Veterans' Affairs Legislation Amendment Act (No 3) 1989</a></p>
 <p><a href="https://www.legislation.gov.au/Series/C2004A03872" title="Child Support (Assessment) Act 1989">CSA Act</a></p>
-<p><a href="https://www.legislation.gov.au/Series/F1996B00398" title="Child Support (Assessment) Regulations 1989">CSA Regs</a></p>
+<p><a href="https://www.legislation.gov.au/Series/F2018L00307" title="Child Support (Assessment) Regulations 2018">CSA Regs</a></p>
+<p><a href="https://www.legislation.gov.au/Series/F1996B00398" title="Child Support (Assessment) Regulations 1989">Child Support (Assessment) Regulations 1989</a></p>
 <p><a href="https://www.legislation.gov.au/Details/C2004A04069">Child Support Legislation Amendment Act 1990</a></p>
 <p><a href="https://www.legislation.gov.au/Details/C2004A04304">Child Support Legislation Amendment Act 1992</a></p>
 <p><a href="https://www.legislation.gov.au/Details/C2004A04442">Child Support Legislation Amendment Act (No 2) 1992</a></p>
@@ -146,11 +147,11 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li>A parent can make a new estimate for a child support year (<a href="../../2/5/6">2.5.6</a>) every 2 months instead of 3 months.</li>
 <li>Penalties apply for parents who underestimate (<a href="../../2/5/6">2.5.6</a>) their taxable income.</li>
 </ul><h2>From 29 May 1995</h2>
-<ul><li>The Registrar can be satisfied that a person is a child's parent if one of a number of 'presumptions' (<a href="../../2/1/3">2.1.3</a>) apply.</li>
+<ul><li>The Registrar can be satisfied that a person is a child's parent if one of a number of 'presumptions' (<a href="http://guides.dss.gov.au/child-support-guide/2/1/3">2.1.3</a>) apply.</li>
 <li>The Registrar must refer a child support agreement to the Secretary if the payee receives more than minimum family payment or sole parent pension. The Registrar can only accept these agreements if the Secretary decides that the agreement passes the 'reasonable action to obtain maintenance' test.</li>
 <li>The Registrar must refuse to accept an agreement if the payee has not applied for a child support assessment and receives more than the minimum family payment or sole parent pension.</li>
 </ul><h2>From 22 July 1997</h2>
-<p>The Registrar can now be satisfied that a person is a parent of a child (<a href="../../2/1/3">2.1.3</a>) if:</p>
+<p>The Registrar can now be satisfied that a person is a parent of a child (<a href="http://guides.dss.gov.au/child-support-guide/2/1/3">2.1.3</a>) if:</p>
 <ul><li>the child is born within 44 weeks of the annulment of that person's marriage, or</li>
 <li>the child is born after a marriage has been dissolved but within 44 weeks after a period of cohabitation by the 2 people concerned, or</li>
 <li>the child is born to a woman who lived with the man anytime during the period beginning 44 weeks and ending 20 weeks before the child's birth.</li>
@@ -235,7 +236,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </ul><h2>From 1 July 2008</h2>
 <ul><li>A new child support scheme comes into operation from 1 July 2008. This is the most significant change since the inception of the child support scheme.</li>
 <li>The changes to the scheme build on reform of the family law system which seeks to encourage shared parenting, reduce conflict and make sure child support is paid in full and on time.</li>
-<li>In changing the scheme the Government accepted the report of the Ministerial Taskforce on Child Support, chaired by Professor Patrick Parkinson (<a href="https://www.dss.gov.au/our-responsibilities/families-and-children/publications-articles/in-the-best-interests-of-children-reforming-the-child-support-scheme-report-of-the-ministerial-taskforce-on-child-support">In the Best Interests of Children, May 2005</a>). This review was conducted in response to the House of Representatives Committee on Family and Community Affairs report on child custody arrangements in the event of family separation (<a href="http://www.aph.gov.au/Parliamentary_Business/Committees/House_of_Representatives_Committees?url=fca/childcustody/report.htm">Every Picture Tells a Story, December 2003</a>).</li>
+<li>In changing the scheme the Government accepted the report of the Ministerial Taskforce on Child Support, chaired by Professor Patrick Parkinson (<a href="https://www.dss.gov.au/our-responsibilities/families-and-children/publications-articles/in-the-best-interests-of-children-reforming-the-child-support-scheme-report-of-the-ministerial-taskforce-on-child-support">In the Best Interests of Children, May 2005</a>). This review was conducted in response to the House of Representatives Committee on Family and Community Affairs report on child custody arrangements in the event of family separation (<a href="https://www.aph.gov.au/Parliamentary_Business/Committees/House_of_Representatives_Committees?url=fca/childcustody/report.htm">Every Picture Tells a Story, December 2003</a>).</li>
 <li>The Taskforce found that the scheme needed to be updated to reflect the substantial changes in society since the scheme was first established in 1988. It highlighted the need for a much greater emphasis on shared parental responsibility and a growing recognition of the importance of both parents remaining actively involved in their children's lives after separation.</li>
 <li>The changes to the scheme are significant and therefore the child support legislation has been amended extensively to bring these changes about. A summary of some of the more significant changes to the CSA Act that are operative from 1 July 2008 are outlined below:</li>
 </ul><h3>New formula</h3>
@@ -273,7 +274,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </ul><h2>From 6 January 2009</h2>
 <h3>Amendments to care provisions</h3>
 <ul><li>Changes in care arrangements (<a href="../../2/2/6">2.2.6</a>) that are less than 1 night per fortnight (7.1%) can be reflected by the Registrar if the change is because the care has fallen above or below 35%, or if the change is because an agreement, parenting plan or court order has been made.</li>
-<li>Changes in care can be reflected by the Registrar from the date the change happened if the Registrar is notified within 28 days of that date (<a href="../../2/2/6"> 2.2.6</a>).</li>
+<li>Changes in care can be reflected by the Registrar from the date the change happened if the Registrar is notified within 28 days of that date (<a href="../../2/2/6">2.2.6</a>).</li>
 <li>Interim care determinations made on or after 6 January 2009 do not need to be reviewed if there are special circumstances (<a href="../../2/2/6">2.2.6</a>) that justify not doing so.</li>
 </ul><h3>Amendments to change of assessment provisions</h3>
 <ul><li>Both receiving and paying parents are able to apply for a change to their assessment because their childcare costs (<a href="../../2/6/12">2.6.12</a>) significantly affect their ability to support a child.</li>
@@ -285,7 +286,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p>Parents who have administrative assessments for children under the laws of a reciprocating jurisdictions can have these children reflected in their Australian assessment for the purposes of calculating their Australian child support obligation, including the calculation of the multi-case allowances and cap and apportionment of the minimum annual rate.</p>
 <h2>From 1 July 2009</h2>
 <h3>Amendments to recognise same sex couples</h3>
-<p>The parentage provisions (<a href="../../2/1/3">2.1.3</a>) were amended to reflect the changes made to the FL Act to recognise that the members of a same sex couple may be the parents of a child, and if so, could be assessed as parents for child support.</p>
+<p>The parentage provisions (<a href="http://guides.dss.gov.au/child-support-guide/2/1/3">2.1.3</a>) were amended to reflect the changes made to the FL Act to recognise that the members of a same sex couple may be the parents of a child, and if so, could be assessed as parents for child support.</p>
 <h3>Amendments to the definition of income used for child support purposes</h3>
 <ul><li>The income component of 'net rental property losses' was replaced by a new component 'the total net investment loss' which includes rental property losses and net financial investment losses, and</li>
 <li>a new income component 'reportable superannuation contribution amounts' is included when calculating a parent's adjusted taxable income (<a href="../../2/4/4">2.4.4</a>).</li>
@@ -317,11 +318,11 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p>The AWE (<a href="../../2/4/2">2.4.2</a>) amount used in the ATI indexation factor will be based on the relevant December quarter and will apply to child support periods starting on or after 1 July 2013.</p>
 <h2>From 1 July 2016</h2>
 <p>The meaning of 'resident of Australia' was amended by the <cite>Norfolk Island Legislation Amendment Act 2015</cite> and the <cite>Territories Legislation Amendment Act 2016</cite>. These amendments provide that residents of Norfolk Island, Christmas Island and Cocos (Keeling) Islands are residents of Australia for child support purposes, and enables the residents of these external territories to apply for child support (<a href="../6/1">1.6.1</a>).</p>
-<p>The Child Support (Assessment) Amendment (Territories) Regulation 2016 removed Norfolk Island, Christmas Island and Cocos (Keeling) Islands from regulation 4 of the CSA Regs. The new regulation 4 excludes a child from being an eligible child if the child is cared for under a child welfare law of Western Australia or South Australia.</p>
+<p>The Child Support (Assessment) Amendment (Territories) Regulation 2016 removed Norfolk Island, Christmas Island and Cocos (Keeling) Islands from regulation 4 of the Child Support (Assessment) Regulations 1989 (now regulation 6 of the CSA Regs). Regulation 6 excludes a child from being an eligible child if the child is cared for under a child welfare law of Western Australia or South Australia.</p>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     1 July 2016  	</div>
+      Last reviewed:     3 April 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../contact-us">Contact us</a></li>
@@ -331,7 +332,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

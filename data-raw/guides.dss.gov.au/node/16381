@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"nB6dDGGazD3bXEF6xumLhHugzh-NEL2cm3TmFvv_dzE","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/16381":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"V2fA_u9sqE_gpqVCpGr0dZiZv5Pdia5SQvAfXqyhblM","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/16381":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children menu-mlid-513"><a href="../child-support-guide">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-489"><a href="../guide-social-security-law.1" class="active-trail">Guide to Social Security Law</a></li>
+<li class="leaf has-children active-trail menu-mlid-489"><a href="../guide-social-security-law" class="active-trail">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,16 +49,16 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-DdmpkavMFkAUAhsELtJWA_9X2kCapt7F69FXVPoJGlc" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-vpeL-4JRZ4Jx6dY21JM9DHtaqJ2oCjEo5y3s3KRxV5E" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Guide to Social Security Law</h2>
-<p>Version 1.237 - Released 19 October 2017</p>
+<p>Version 1.245 - Released 1 June 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../guide-social-security-law.1" title="">Using the Guide to Social Security Law</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../guide-social-security-law" title="">Using the Guide to Social Security Law</a></li>
 <li class="collapsed menu-mlid-493"><a href="../guide-social-security-law/updates">What&#039;s New</a></li>
 <li class="collapsed menu-mlid-2295"><a href="../guide-social-security-law/1">1 Key Terms &amp; Principles</a></li>
 <li class="collapsed menu-mlid-2294"><a href="../guide-social-security-law/2">2 Claim Verification</a></li>
@@ -98,7 +98,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7372"><a href="../guide-social-security-law/act-references">Act Reference Index</a></li>
 <li class="last leaf menu-mlid-7168"><a href="../guide-social-security-law/sitemap">Site Map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../guide-social-security-law.1">Guide to Social Security Law</a> &raquo; <a href="../guide-social-security-law/4" class="active-trail">4 Income &amp; Assets</a> &raquo; <a href="../guide-social-security-law/4/2" class="active-trail">4.2 Means Tests &amp; Limits</a> &raquo; 4.2.5 CP Income &amp; Assets Tests</div>
+	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../guide-social-security-law">Guide to Social Security Law</a> &raquo; <a href="../guide-social-security-law/4" class="active-trail">4 Income &amp; Assets</a> &raquo; <a href="../guide-social-security-law/4/2" class="active-trail">4.2 Means Tests &amp; Limits</a> &raquo; 4.2.5 CP Income &amp; Assets Tests</div>
 <div id="utility">
 	
 <div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/node/16381"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
@@ -127,10 +127,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p>From 20 September 2009, the higher income test threshold for carers with dependent children will be abolished to align the pension income test with the allowance and family payments income tests.</p>
 <p>From 20 September 2009, the rate at which extra income above the threshold affects the pension will change from 40 cents to 50 cents in the dollar for singles. For couples, the rate will change from 20 cents to 25 cents in the dollar for each member of a couple.</p>
 <p>A transitional safety net will apply for existing carers who would otherwise have their payments reduced by the new income test rules. These carers will continue to receive their existing payment based on the current 40 cent withdrawal rate and the additional free area for dependent children, until they are better off under the new rules, including the 50 cent withdrawal rate.</p>
-<p>Carers over age pension age may be able to access the work bonus (<a href="../guide-social-security-law/3/1/14">3.1.14</a>).</p>
+<p>Carers over age pension age may be able to access the work bonus (<a href="../guide-social-security-law/3/1/15">3.1.15</a>).</p>
 <div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 1073AA Work bonus, section 1064 Rate of age, disability support, wife pensions and carer payments (people who are not blind), section 1066 Rate of bereavement allowance and widow B pension, section 1072 General meaning of ordinary income</p>
-<p><strong>Policy reference:</strong> SS Guide <a href="../guide-social-security-law/3/1/14">3.1.14</a> Work Bonus (from 1 July 2011), <a href="../guide-social-security-law/5/1/8/40">5.1.8.40</a> Pension Reform - Transitional Arrangements</p>
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 1073AA Work bonus, section 1064 Rate of age, disability support, wife pensions and CP (people who are not blind), section 1066 Rate of bereavement allowance and widow B pension, section 1072 General meaning of ordinary income</p>
+<p><strong>Policy reference:</strong> SS Guide <a href="../guide-social-security-law/3/1/15">3.1.15</a> Work Bonus (from 1 July 2011), <a href="../guide-social-security-law/5/1/8/40">5.1.8.40</a> Pension Reform - Transitional Arrangements</p>
 </div>
 <h2>Care receiver income &amp; assets tests</h2>
 <p>A person may qualify for CP if the income and assets of their care receiver/s (<a href="../guide-social-security-law/1/1/c/21">1.1.C.21</a>) meet the requirements of the CP care receiver income and assets tests.</p>
@@ -141,13 +141,13 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p>The ordinary income and assets tests that apply to all pensions are then applied to the carer to establish his or her rate of CP.</p>
 <p><strong>Exception:</strong> If the care receiver is a higher ADAT score adult and is receiving a social security pension or benefit, service pension or <a href="../guide-social-security-law/acronyms#iss" title="Income support supplement">ISS</a>, then the care receiver income and assets tests do not apply.</p>
 <p><strong>Note:</strong> According to the SSAct section 23(1):</p>
-<ul><li>'service pension' means the following payments made under Part III of the Veterans' Entitlement Act:
+<ul><li>'service pension' means the following payments made under <a href="../guide-social-security-law/acronyms#vea" title="Veterans' Entitlements Act 1986">VEA</a> Part III:
 <ul><li>an age pension, or</li>
 <li>an invalidity service pension, or</li>
 <li>a partner service pension, or</li>
 <li>a carer service pension.</li>
 </ul></li>
-<li>an 'income support supplement' means income support supplement under Part IIIA of the Veterans' Entitlements Act.</li>
+<li>an 'income support supplement' means income support supplement under VEA Part IIIA.</li>
 </ul><div class="reference">
 <p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 198(7) Alternative to income/assets test for higher ADAT score adults, section 198A(1) Passing the income test, section 198D Assets test, section 23(1) Dictionary</p>
 </div>
@@ -161,7 +161,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <div class="example">
 <p><strong>Example:</strong> John claims CP on 4 August 2009. It falls in the calendar year 1 January to 31 December 2009, so the base tax year is the tax year that ended on 30 June 2008 (i.e. the year of income beginning on 1 July 2007).</p>
 </div>
-<h2>Change to appropriate tax year upon request</h2>
+<h2 id="tax">Change to appropriate tax year upon request</h2>
 <p>The care receiver, if they are 16 years of age or older, or a parent of a care receiver under 16 years of age, can request an assessment based on the current tax year if CP would not be payable to a person because the care receiver/s would not pass the care receiver income test. The request must be in writing. The tax year in which the request is made can be used if the taxable income/s are likely to be less than the income ceiling. The earliest that the current tax year can be used to assess qualification for CP is the day on which the written request is given.</p>
 <h2>Current tax year to be retained for consecutive calendar years in certain circumstances</h2>
 <p>If CP in a calendar year is assessed based on the current tax year for the care receiver income test, the current tax assessment is retained for the following calendar year if:</p>
@@ -169,7 +169,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li>the care receiver's assessable taxable income for the current tax year is less than the taxable income for the base tax year for the new calendar year, and</li>
 <li>the care receiver's assessable taxable income for the base tax year for the new calendar year is above the income ceiling.</li>
 </ul><h2>Change to appropriate tax year because of a notifiable event</h2>
-<p>If a notifiable event occurs while the person is receiving CP and as a result the care receiver's taxable income would exceed the income ceiling in the tax year in which the event occurs, or the following tax year, the appropriate tax year is the year in which the taxable income exceeds the income ceiling. A request may then be made to change the appropriate tax year (see 'Change to appropriate tax year upon request' (above)).</p>
+<p>If a notifiable event occurs while the person is receiving CP and as a result the care receiver's taxable income would exceed the income ceiling in the tax year in which the event occurs, or the following tax year, the appropriate tax year is the year in which the taxable income exceeds the income ceiling. A request may then be made to change the appropriate tax year (see <a href="16381#tax">Change to appropriate tax year upon request</a>).</p>
 <div class="reference">
 <p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 198C Appropriate tax year</p>
 <p><a href="https://www.legislation.gov.au/Series/C2004A00580" title="Social Security (Administration) Act 1999">SS(Admin)Act</a> section 70 Care receiver is respect of whom carer payment being made</p>
@@ -233,35 +233,22 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p>(Current liquid assets limit is in section 198N(5))</p>
 </th>
 <th scope="col">
-<p>And the sum of the amounts of the care receiver/s accepted estimated taxable income for the current financial year is…</p>
+<p>The sum of the amounts of the care receiver/s accepted estimated taxable income for the current financial year is…</p>
 <p>(The threshold amount is worked out under section 198N(6))</p>
 </th>
 </tr></thead><tbody><tr><td>section 198N(2) Failing assets test but passing special income test</td>
 <td>more than the lower assets test limit but not more than the upper assets test limit,</td>
-<td>less than the liquid assets limit,</td>
+<td>less than the liquid assets limit, and</td>
 <td>less than the threshold amount.</td>
 </tr><tr><td>section 198N(4) Failing assets test by large margin but passing special income test</td>
 <td>more than the upper assets test limit,</td>
-<td>less than the liquid assets limit,</td>
+<td>less than the liquid assets limit, and</td>
 <td>less than the threshold amount.</td>
-</tr></tbody></table><table><thead><tr><th scope="col">Discretion can be applied under <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a>…</th>
-<th scope="col">
-<p>If the sum of the value/s of the care receiver/s assets is…</p>
-<p>(section 198D)</p>
-</th>
-<th scope="col">
-<p>And the sum of the value/s of the care receiver/s liquid assets is…</p>
-<p>(Current liquid assets limit is in section 198N(5))</p>
-</th>
-<th scope="col">
-<p>Or the sum of the amounts of the care receiver/s accepted estimated taxable income for the current financial year is…</p>
-<p>(The threshold amount is worked out under section 198N(6))</p>
-</th>
-</tr></thead><tbody><tr><td>section 198N(3) Failing assets and special income tests</td>
+</tr><tr><td>section 198N(3) Failing assets and special income tests</td>
 <td>more than the lower assets test limit but not more than the upper assets test limit,</td>
-<td>equal to or greater than the liquid assets limit,</td>
+<td>equal to or greater than the liquid assets limit, or</td>
 <td>equal to or more than the threshold amount.</td>
-</tr></tbody></table><p>For current limits see the <a href="https://www.humanservices.gov.au/individuals/enablers/income-and-assets-test-carer-payment">Carer Payment Special Care Receivers Income and Assets Limits</a> on the <a href="https://www.humanservices.gov.au/" title="Department of Human Services website">DHS website</a>.</p>
+</tr></tbody></table><p>For current limits see the <a href="https://www.humanservices.gov.au/individuals/enablers/income-and-assets-test-carer-payment/30466">Carer Payment Special Care Receivers Income and Assets Limits</a> on the <a href="https://www.humanservices.gov.au/" title="Department of Human Services website">DHS website</a>.</p>
 <div class="reference">
 <p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 198A Income test, section 198D Assets test, section 198N Exemption from care receiver assets test</p>
 </div>
@@ -272,7 +259,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p><strong>Explanation:</strong> NDIS amounts are to provide care and support for people with disability and are not for the NDIS participant's income support.</p>
 </div>
 <div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 1118(1) Certain assets to be disregarded in calculating the value of a person's assets, see (sb), section 1118(1AD) Certain assets to be disregarded in calculating the value of a person's assets, section 19B Financial hardship (CP) liquid assets test definition, see (i)</p>
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 1118(1) Certain assets to be disregarded in calculating the value of a person's assets, see (sb), section 1118(1AD) NDIS amounts, section 19B Financial hardship (CP) liquid assets test definition, see (i)</p>
 <p><strong>Policy reference:</strong> SS Guide <a href="../guide-social-security-law/4/6/2/10">4.6.2.10</a> General Provisions for Exempt Assets</p>
 </div>
 <h2>Disposal of assets</h2>
@@ -284,7 +271,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     12 August 2013  	</div>
+      Last reviewed:     6 November 2017  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../contact-us">Contact us</a></li>
@@ -294,7 +281,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

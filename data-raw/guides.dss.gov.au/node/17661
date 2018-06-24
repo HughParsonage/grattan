@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"xD4_LMoHThdMUSQvr2MKbUx7W9thyfKSR7TZm78MbtY","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/17661":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"wG35-lQQ25H7KLRIBHzbtEyRZtxzLOadtdGJWfUCLrM","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/17661":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children menu-mlid-513"><a href="../child-support-guide">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-489"><a href="../guide-social-security-law.1" class="active-trail">Guide to Social Security Law</a></li>
+<li class="leaf has-children active-trail menu-mlid-489"><a href="../guide-social-security-law" class="active-trail">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,16 +49,16 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-oM70wZS0rPa_W_q9nug7Kmx7crNDHgJhvCwT4acpQ2A" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-cWiVh6uGJ0vtm3Kr0GDn0ETwTW35nTtqAbcSvvBradc" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Guide to Social Security Law</h2>
-<p>Version 1.237 - Released 19 October 2017</p>
+<p>Version 1.245 - Released 1 June 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../guide-social-security-law.1" title="">Using the Guide to Social Security Law</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../guide-social-security-law" title="">Using the Guide to Social Security Law</a></li>
 <li class="collapsed menu-mlid-493"><a href="../guide-social-security-law/updates">What&#039;s New</a></li>
 <li class="collapsed menu-mlid-2295"><a href="../guide-social-security-law/1">1 Key Terms &amp; Principles</a></li>
 <li class="collapsed menu-mlid-2294"><a href="../guide-social-security-law/2">2 Claim Verification</a></li>
@@ -77,7 +77,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf active-trail active menu-mlid-6874"><a href="../guide-social-security-law/11/1/1/50" class="active-trail active">11.1.1.50 Trigger Payments for Income Management</a></li>
 <li class="last leaf menu-mlid-6875"><a href="../guide-social-security-law/11/1/1/60">11.1.1.60 Payments Subject to Income Management</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-6921"><a href="../guide-social-security-law/11/1/2">11.1.2 Financial Wellbeing Support Services Supporting Welfare Payments Reform</a></li>
+<li class="leaf menu-mlid-6921"><a href="../guide-social-security-law/11/1/2">11.1.2 Financial Wellbeing Support Services Supporting Welfare Payments Reform</a></li>
 <li class="collapsed menu-mlid-6925"><a href="../guide-social-security-law/11/1/3">11.1.3 General Rules about Income Management</a></li>
 <li class="collapsed menu-mlid-6938"><a href="../guide-social-security-law/11/1/4">11.1.4 Nominee Arrangements under Income Management</a></li>
 <li class="collapsed menu-mlid-6945"><a href="../guide-social-security-law/11/1/5">11.1.5 Actions Taken to Meet Priority Needs under Income Management</a></li>
@@ -90,11 +90,11 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="collapsed menu-mlid-6894"><a href="../guide-social-security-law/11/1/12">11.1.12 Guidance on Some Complex Income Management Issues</a></li>
 <li class="leaf menu-mlid-6906"><a href="../guide-social-security-law/11/1/13">11.1.13 Reviews &amp; Appeals under Income Management</a></li>
 <li class="collapsed menu-mlid-6907"><a href="../guide-social-security-law/11/1/14">11.1.14 Exemptions from Income Management</a></li>
-<li class="last collapsed menu-mlid-6916"><a href="../guide-social-security-law/11/1/15">11.1.15 Matched Savings Scheme (Income Management) Payment</a></li>
+<li class="last collapsed menu-mlid-6916"><a href="../guide-social-security-law/11/1/15">11.1.15 Matched Savings Scheme (Income Management) Payment (deleted)</a></li>
 </ul></li>
 <li class="collapsed menu-mlid-6973"><a href="../guide-social-security-law/11/2">11.2 Cape York Initiative</a></li>
 <li class="collapsed menu-mlid-7004"><a href="../guide-social-security-law/11/3">11.3 Child Protection Measure</a></li>
-<li class="collapsed menu-mlid-7028"><a href="../guide-social-security-law/11/4">11.4 Vulnerable Welfare Payment Recipients Measure</a></li>
+<li class="collapsed menu-mlid-7028"><a href="../guide-social-security-law/11/4">11.4 Vulnerable Welfare Payment Recipient Measure</a></li>
 <li class="collapsed menu-mlid-7043"><a href="../guide-social-security-law/11/5">11.5 Disengaged Youth Measure</a></li>
 <li class="collapsed menu-mlid-7053"><a href="../guide-social-security-law/11/6">11.6 Long-term Welfare Payment Recipients Measure</a></li>
 <li class="collapsed menu-mlid-7064"><a href="../guide-social-security-law/11/7">11.7 Voluntary Income Management</a></li>
@@ -106,7 +106,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7372"><a href="../guide-social-security-law/act-references">Act Reference Index</a></li>
 <li class="last leaf menu-mlid-7168"><a href="../guide-social-security-law/sitemap">Site Map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../guide-social-security-law.1">Guide to Social Security Law</a> &raquo; <a href="../guide-social-security-law/11" class="active-trail">11 Income Management</a> &raquo; <a href="../guide-social-security-law/11/1" class="active-trail">11.1 Income Management Framework</a> &raquo; <a href="../guide-social-security-law/11/1/1" class="active-trail">11.1.1 Overview of Income Management</a> &raquo; 11.1.1.50 Trigger Payments for Income Management</div>
+	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../guide-social-security-law">Guide to Social Security Law</a> &raquo; <a href="../guide-social-security-law/11" class="active-trail">11 Income Management</a> &raquo; <a href="../guide-social-security-law/11/1" class="active-trail">11.1 Income Management Framework</a> &raquo; <a href="../guide-social-security-law/11/1/1" class="active-trail">11.1.1 Overview of Income Management</a> &raquo; 11.1.1.50 Trigger Payments for Income Management</div>
 <div id="utility">
 	
 <div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/node/17661"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
@@ -114,7 +114,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <article id="node-17661">
 <h1 >11.1.1.50 Trigger Payments for Income Management</h1>
 <h2>Trigger payments</h2>
-<p>Under the Vulnerable Welfare Payment Recipients and <a href="../guide-social-security-law/acronyms#vim" title="Voluntary income management">VIM</a> Measures of income management, a person must be receiving a category H payment to be assessed as eligible for income management. Under the Child Protection Measure and the <a href="../guide-social-security-law/acronyms#spar" title="Supporting People at Risk">SPAR</a> Measure, a person or their partner must be receiving a category H payment to be assessed as eligible for income management.</p>
+<p>Under the <a href="../guide-social-security-law/acronyms#vwpr" title="Vulnerable welfare payment recipient">VWPR</a> and <a href="../guide-social-security-law/acronyms#vim" title="Voluntary income management">VIM</a> Measures of income management, a person must be receiving a category H payment to be assessed as eligible for income management. Under the Child Protection Measure and the <a href="../guide-social-security-law/acronyms#spar" title="Supporting People at Risk">SPAR</a> Measure, a person or their partner must be receiving a category H payment to be assessed as eligible for income management.</p>
 <p>Under the Disengaged Youth and Long-term Welfare Payment Recipients Measures, a person must be receiving a category E payment to be assessed as eligible for income management.</p>
 <p>Under the Cape York Reform, a person or their partner must be receiving a category P or category R payment to be assessed as eligible for income management. For more information on trigger payments under the Cape York Reform, see <a href="../guide-social-security-law/11/2/3">11.2.3</a> Conditions that Result in an Individual being Subject to Income Management under the Cape York Initiative.</p>
 <h2>Category E payments</h2>
@@ -172,7 +172,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

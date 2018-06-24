@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../../../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"A3PiajJaWYMAglxLnBybsjZnkWRkeiMeNOi-gVG56hc","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/guide-social-security-law\/4\/10\/2":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"TJv0YP3QYv4hrcZKY3dtoLsMTpCG8zUloYO-69yp-nE","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/guide-social-security-law\/4\/10\/2":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children menu-mlid-513"><a href="../../../child-support-guide">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-489"><a href="../../../guide-social-security-law.1" class="active-trail">Guide to Social Security Law</a></li>
+<li class="leaf has-children active-trail menu-mlid-489"><a href="../../../guide-social-security-law" class="active-trail">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,16 +49,16 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-oosL0g6r-0qVa45jR0mv8YxoOwtfoPmCFsh05F7FzBI" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-lsFi_TLISaYusaMlpDlOXUL8tD5JSFvT3oRhlqAPQTs" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Guide to Social Security Law</h2>
-<p>Version 1.237 - Released 19 October 2017</p>
+<p>Version 1.245 - Released 1 June 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../../../guide-social-security-law.1" title="">Using the Guide to Social Security Law</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../../../guide-social-security-law" title="">Using the Guide to Social Security Law</a></li>
 <li class="collapsed menu-mlid-493"><a href="../../updates">What&#039;s New</a></li>
 <li class="collapsed menu-mlid-2295"><a href="../../1">1 Key Terms &amp; Principles</a></li>
 <li class="collapsed menu-mlid-2294"><a href="../../2">2 Claim Verification</a></li>
@@ -97,7 +97,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7372"><a href="../../act-references">Act Reference Index</a></li>
 <li class="last leaf menu-mlid-7168"><a href="../../sitemap">Site Map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../guide-social-security-law.1">Guide to Social Security Law</a> &raquo; <a href="../../4" class="active-trail">4 Income &amp; Assets</a> &raquo; <a href="../10" class="active-trail">4.10 Historical Income &amp; Assets Limits &amp; Information</a> &raquo; 4.10.2 Historical Unemployment &amp; Sickness Benefit Income Test</div>
+	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../guide-social-security-law">Guide to Social Security Law</a> &raquo; <a href="../../4" class="active-trail">4 Income &amp; Assets</a> &raquo; <a href="../10" class="active-trail">4.10 Historical Income &amp; Assets Limits &amp; Information</a> &raquo; 4.10.2 Historical Unemployment &amp; Sickness Benefit Income Test</div>
 <div id="utility">
 	
 <div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/guide-social-security-law/4/10/2"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
@@ -105,7 +105,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <article id="node-16489">
 <h1 >4.10.2 Historical Unemployment &amp; Sickness Benefit Income Test</h1>
 <h2>Summary</h2>
-<p>This section contains one topic covering the income test for unemployment and sickness benefit from September 1969 to July 2015. Notes to the table are included immediately after the table. The following table shows the permissible income and income test applying at each date. Before 12 December 1987, excess amounts were rounded to the nearest cent.</p>
+<p>This section contains one topic covering the income test for unemployment and sickness benefit from September 1969 to January 2018. Notes to the table are included immediately after the table. The following table shows the permissible income and income test applying at each date. Before 12 December 1987, excess amounts were rounded to the nearest cent.</p>
 <table><thead><tr><th scope="col">
 <p>Date</p>
 </th>
@@ -230,12 +230,26 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p>Each fortnight that the recipient's own ordinary income is below the ordinary income free area ($60.00), an earnings credit will accrue unless the recipient has accrued the maximum amount.</p>
 </td>
 </tr><tr><td>
-<p>01/07/2000</p>
+<p>01/07/1998</p>
 <p><a href="2#g">Note G</a></p>
+</td>
+<td>
+<p>Introduction of <a href="../../acronyms#ya" title="Youth allowance">YA</a> (other), replacing <a href="../../acronyms#yta" title="Youth training allowance">YTA</a>, <a href="../../acronyms#nsa" title="Newstart allowance">NSA</a> and <a href="../../acronyms#sa" title="Sickness allowance">SA</a> for young people.</p>
+<p>Income free area of $60.00 pf.</p>
+<p>Income threshold of $140.00 pf.</p>
+</td>
+<td>
+<p>Taper rate on income between $60 pf and $140 is 50%.</p>
+<p>Taper rate for income above $140 pf is 70%.</p>
+</td>
+</tr><tr><td>
+<p>01/07/2000</p>
+<p><a href="2#h">Note H</a></p>
 </td>
 <td>
 <p>Income free area moves from $60.00 pf to $62.00 pf with the introduction of the New Tax System.</p>
 <p>Income threshold of $140.00 pf moves to $142.00 pf.</p>
+<p><strong>Note:</strong> This includes YA (other).</p>
 </td>
 <td>
 <p>No changes to ordinary income test tapering.</p>
@@ -245,15 +259,25 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </td>
 <td>
 <p>Income threshold of $142.00 pf is increased to $250.00 pf.</p>
+<p><strong>Note:</strong> This includes YA (other).</p>
 </td>
 <td>
-<p>Taper rate on income between $62.00 and $250.00 a fortnight is 50%. Taper rate for income above $250.00 becomes 60%. Partner excess income taper rate becomes 60%.</p>
+<p>Taper rate on income between $62.00 and $250.00 pf is 50%. Taper rate for income above $250.00 becomes 60%. Partner excess income taper rate becomes 60%.</p>
+</td>
+</tr><tr><td>
+<p>01/07/2012</p>
+<p><a href="2#i">Note I</a></p>
+</td>
+<td>Income free area moves from $62.00 pf to $143.00 pf for YA (other).</td>
+<td>
+<p>Taper rate on income between $143.00 and $250 pf is 50%.</p>
+<p>Taper rate on income over $250 is 60%.</p>
 </td>
 </tr><tr><td>
 <p>01/01/2013</p>
 </td>
 <td>
-<p>Existing <a href="../../acronyms#nsa" title="Newstart allowance">NSA</a> taper rates for all single principal carers were replaced with a single, lower taper rate of 40 cents in the dollar for income above $62.00 pf.</p>
+<p>Existing NSA taper rates for all single principal carers were replaced with a single, lower taper rate of 40 cents in the dollar for income above $62.00 pf.</p>
 </td>
 <td>
 <p>All other NSA recipients will remain subject to the usual NSA income test of 50 cents in the dollar for fortnightly income between $62.00 and $250.00 and 60 cents in the dollar for income above $250.00 pf.</p>
@@ -262,18 +286,43 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p>20/3/2014</p>
 </td>
 <td>
-<p>Income free area moves from $62.00 pf to $100.00 pf for NSA, <a href="../../acronyms#wa" title="Widow allowance">WA</a>, <a href="../../acronyms#pa" title="Partner allowance">PA</a>, <a href="../../acronyms#ppp" title="Parenting payment (partnered)">PPP</a>, and <a href="../../acronyms#sa" title="Sickness allowance">SA</a>.</p>
+<p>Income free area moves from $62.00 pf to $100.00 pf for NSA, <a href="../../acronyms#wa" title="Widow allowance">WA</a>, <a href="../../acronyms#pa" title="Partner allowance">PA</a>, <a href="../../acronyms#ppp" title="Parenting payment (partnered)">PPP</a>, and SA.</p>
 </td>
 <td>
 <p>No changes to ordinary income test tapering.</p>
 </td>
 </tr><tr><td>1/7/2015</td>
-<td>The income free area moves from $100.00 pf to $102.00 pf for NSA, WA, PA, PPP, and SA. Also, the income threshold moves from $250.00 pf to $252.00 pf for NSA, WA, PA, PPP, and SA.</td>
+<td>
+<p>Income free area moves from $100.00 pf to $102.00 pf for NSA, WA, PA, PPP and SA.</p>
+<p>Income threshold moves from $250.00 pf to $252.00 pf for NSA, WA, PA, PPP and SA.</p>
+</td>
 <td>
 <p>No changes to ordinary income test tapering.</p>
 </td>
+</tr><tr><td>1/7/2016</td>
+<td>
+<p>Income free area moves from $102.00 pf to $104.00 pf for NSA, WA, PA, PPP and SA.</p>
+<p>Income threshold moves from $252.00 pf to $254.00 pf for NSA, WA, PA, PPP and SA.</p>
+</td>
+<td>
+<p>No changes to ordinary income test tapering.</p>
+</td>
+</tr><tr><td>
+<p>1/7/2017</p>
+<p><a href="2#j">Note J</a></p>
+</td>
+<td>Maintain at level the income free area for NSA, WA, PA, PPP and SA from 1 July 2018 for the next 3 years.</td>
+<td>No changes to ordinary income test tapering.</td>
+</tr><tr><td>
+<p>1/1/2018</p>
+<p><a href="2#k">Note K</a></p>
+</td>
+<td>Maintain at level the income free area for YA (other) from 1 January 2018 for the next 3 years.
+<p> </p>
+</td>
+<td>No changes to ordinary income test tapering.</td>
 </tr></tbody></table><h2>Notes</h2>
-<p>These notes relate to unemployment and sickness benefit income test from September 1969 to July 2000:</p>
+<p>These notes relate to unemployment and sickness benefit income test from September 1969 to January 2018:</p>
 <table><thead><tr><th>Note</th>
 <th>Explanation</th>
 </tr></thead><tbody><tr><td id="a">A</td>
@@ -300,15 +349,26 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </td>
 </tr><tr><td id="g">G</td>
 <td>
+<p>From 1 July 1998, the <cite>Social Security Legislation Amendment (Youth Allowance Consequential and Related Measures) Act 1998</cite> introduced YA.</p>
+<p>The income test is the same as NSA.</p>
+</td>
+</tr><tr><td id="h">H</td>
+<td>
 <p>As part of the changes introduced with the New Tax System at 1 July 2000 - income and asset free areas were generally increased by 2.5%.</p>
 </td>
+</tr><tr><td id="i">I</td>
+<td>As part of the <cite>Social Security and Other Legislation Amendment (Income Support and Other Measures) Act 2012</cite>, the income free area for YA (other) will increase from $62 to $143 and the second threshold amount will remain at $250.</td>
+</tr><tr><td id="j">J</td>
+<td>As part of the <cite>Social Services Legislation Amendment Act 2017</cite>, indexation which occurs on 1 July each year for NSA, WA, PA, PPP and SA, will be paused for 3 years. The first instance is 1 July 2017.</td>
+</tr><tr><td id="k">K</td>
+<td>As part of the Social Services Legislation Amendment Act 2017, indexation which occurs on 1 January each year for YA (other), will be paused for 3 years. The first instance is 1 January 2018.</td>
 </tr></tbody></table><div class="reference">
 <p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 8(1)-'income'</p>
 </div>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     1 July 2015  	</div>
+      Last reviewed:     20 March 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../contact-us">Contact us</a></li>
@@ -318,7 +378,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

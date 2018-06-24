@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../../../../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../../../../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"OCHDBV4KXdRZhUkzbESV9lC5m-eV-EZbF_t6T3pFWMg","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/guide-social-security-law\/3\/1\/10\/35":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"MKA6NvluAD2p51g5r4piKESw_GuJneeceBb8GzKbX5M","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/guide-social-security-law\/3\/1\/10\/35":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children menu-mlid-513"><a href="../../../../child-support-guide">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-489"><a href="../../../../guide-social-security-law.1" class="active-trail">Guide to Social Security Law</a></li>
+<li class="leaf has-children active-trail menu-mlid-489"><a href="../../../../guide-social-security-law" class="active-trail">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,16 +49,16 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-09SPeiiCEviX9xR55-gW0jLm9q2jT0AyS5IeS_ZZyHo" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-t0PJuGFE-15qNK_lz-rAKog9tIzFxPTOsJ9-x1snx5A" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Guide to Social Security Law</h2>
-<p>Version 1.237 - Released 19 October 2017</p>
+<p>Version 1.245 - Released 1 June 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../../../../guide-social-security-law.1" title="">Using the Guide to Social Security Law</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../../../../guide-social-security-law" title="">Using the Guide to Social Security Law</a></li>
 <li class="collapsed menu-mlid-493"><a href="../../../updates">What&#039;s New</a></li>
 <li class="collapsed menu-mlid-2295"><a href="../../../1">1 Key Terms &amp; Principles</a></li>
 <li class="collapsed menu-mlid-2294"><a href="../../../2">2 Claim Verification</a></li>
@@ -71,7 +71,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="collapsed menu-mlid-4375"><a href="../7">3.1.7 Seasonal Work Preclusion Period</a></li>
 <li class="leaf menu-mlid-4376"><a href="../8">3.1.8 Dates of Effect of Claim Determinations</a></li>
 <li class="collapsed menu-mlid-4377"><a href="../9">3.1.9 Compensation Provisions</a></li>
-<li class="expanded active-trail menu-mlid-4365"><a href="../10" class="active-trail">3.1.10 Improving School Enrolment &amp; Attendance through Welfare Reform Measure (SEAM)</a><ul class="menu"><li class="first leaf menu-mlid-4353"><a href="10">3.1.10.10 Background to SEAM</a></li>
+<li class="expanded active-trail menu-mlid-4365"><a href="../10" class="active-trail">3.1.10 School Enrolment &amp; Attendance Measure (SEAM)</a><ul class="menu"><li class="first leaf menu-mlid-4353"><a href="10">3.1.10.10 Background to SEAM</a></li>
 <li class="leaf menu-mlid-4354"><a href="20">3.1.10.20 Number not currently in use</a></li>
 <li class="leaf menu-mlid-4355"><a href="30">3.1.10.30 SEAM Requirements</a></li>
 <li class="leaf active-trail active menu-mlid-4356"><a href="35" class="active-trail active">3.1.10.35 Reasonable Excuse &amp; Special Circumstances - Enrolment Notices (SEAM)</a></li>
@@ -84,9 +84,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="collapsed menu-mlid-4366"><a href="../11">3.1.11 Working Credit</a></li>
 <li class="leaf menu-mlid-4367"><a href="../12">3.1.12 Employment Income Nil Rate Period</a></li>
 <li class="collapsed menu-mlid-4368"><a href="../13">3.1.13 Compliance Framework for Participation Payments</a></li>
-<li class="collapsed menu-mlid-4369"><a href="../14">3.1.14 Work Bonus (from 1 July 2011)</a></li>
-<li class="leaf menu-mlid-7593"><a href="../15">3.1.15 Payability during the Green Army Programme</a></li>
-<li class="last leaf menu-mlid-9096"><a href="../16">3.1.16 Security Notices</a></li>
+<li class="collapsed menu-mlid-19936"><a href="../14">3.1.14 Number not currently in use</a></li>
+<li class="collapsed menu-mlid-4369"><a href="../15">3.1.15 Work Bonus (from 1 July 2011)</a></li>
+<li class="leaf menu-mlid-7593"><a href="../16">3.1.16 Payability during the Green Army Programme</a></li>
+<li class="last leaf menu-mlid-9096"><a href="../17">3.1.17 Security Notices</a></li>
 </ul></li>
 <li class="collapsed menu-mlid-4385"><a href="../../2">3.2 Newstart &amp; Youth Allowance</a></li>
 <li class="collapsed menu-mlid-4386"><a href="../../3">3.3 Other Labour Market &amp; Older Students</a></li>
@@ -116,20 +117,21 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7372"><a href="../../../act-references">Act Reference Index</a></li>
 <li class="last leaf menu-mlid-7168"><a href="../../../sitemap">Site Map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../../../index.html">Home</a> &raquo; <a href="../../../../guide-social-security-law.1">Guide to Social Security Law</a> &raquo; <a href="../../../3" class="active-trail">3 Qualification &amp; Payability</a> &raquo; <a href="../../1" class="active-trail">3.1 General Provisions</a> &raquo; <a href="../10" class="active-trail">3.1.10 Improving School Enrolment &amp; Attendance through Welfare Reform Measure (SEAM)</a> &raquo; 3.1.10.35 Reasonable Excuse &amp; Special Circumstances - Enrolment Notices (SEAM)</div>
+	<div id="breadcrumb"><a href="../../../../index.html">Home</a> &raquo; <a href="../../../../guide-social-security-law">Guide to Social Security Law</a> &raquo; <a href="../../../3" class="active-trail">3 Qualification &amp; Payability</a> &raquo; <a href="../../1" class="active-trail">3.1 General Provisions</a> &raquo; <a href="../10" class="active-trail">3.1.10 School Enrolment &amp; Attendance Measure (SEAM)</a> &raquo; 3.1.10.35 Reasonable Excuse &amp; Special Circumstances - Enrolment Notices (SEAM)</div>
 <div id="utility">
 	
 <div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/guide-social-security-law/3/1/10/35"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
 <div id="content" role="main">
 <article id="node-17369">
 <h1 >3.1.10.35 Reasonable Excuse &amp; Special Circumstances - Enrolment Notices (SEAM)</h1>
+<p><strong>Note:</strong> <a href="../../../acronyms#seam" title="School Enrolment and Attendance Measure">SEAM</a> ceased effective 31 December 2017. The Australian and Northern Territory Governments remain committed to supporting families and communities to get their children to school every day and to improve school attendance in remote communities. Despite the cessation of SEAM, Northern Territory Government Truancy Officers will continue to monitor attendance in select communities and <a href="../../../acronyms#dhs" title="Department of Human Services">DHS</a> social workers will continue to visit remote communities as part of their general work.</p>
 <p><strong>Note:</strong> This section applies only to enrolment notices.</p>
 <h2>Reasonable excuse &amp; special circumstances</h2>
 <p>The Social Security (Administration) (Schooling Requirement) Determination 2009 (No. 1) provides direction on the reasonable excuse and special circumstances provisions for notices issued under SS(Admin)Act section 124F.</p>
-<p>Clause 6 and 7 of the Determination sets out the special circumstances and reasonable excuses that <a href="../../../acronyms#dhs" title="Department of Human Services">DHS</a> will take into consideration when deciding whether or not payment should be suspended. In deciding if special circumstances exist the decision maker MUST consider the personal and family circumstances of the parent.</p>
+<p>Clause 6 and 7 of the Determination sets out the special circumstances and reasonable excuses that DHS will take into consideration when deciding whether or not payment should be suspended. In deciding if special circumstances exist the decision maker MUST consider the personal and family circumstances of the parent.</p>
 <p>A special circumstance should only be granted where there is a clear material impact on the ability of the child to be enrolled in school or for the parent to be able to enrol the child in school.</p>
 <p>However where it is determined that a reasonable excuse exists DHS may give the person additional time to comply with the notice under the provisions of clause 6 of the Determination.</p>
-<p>Under these circumstances, the parent will remain subject to <a href="../../../acronyms#seam" title="Improving School Enrolment and Attendance through Welfare Reform Measure">SEAM</a> and continue to receive support from DHS to address barriers that are impacting on their ability to ensure enrolment of their child in school.</p>
+<p>Under these circumstances, the parent will remain subject to SEAM and continue to receive support from DHS to address barriers that are impacting on their ability to ensure enrolment of their child in school.</p>
 <p>The period of additional time allowed for a person to comply with an enrolment notice must be no longer than reasonably required to address an issue and must take into account any state or territory statutory requirements.</p>
 <div class="example">
 <p><strong>Example:</strong> Jessica has just moved from one SEAM location to live in another SEAM location. She had been given an enrolment notice at her previous address because her daughter, Peta, was not enrolled in school. The time allowed for in the enrolment notice expired 2 days after Jessica moved to her new address. State education legislation requires Jessica to enrol Peta in school within 14 days of moving to a new address. In this case, Jessica should notify DHS of her change of address which is a reasonable excuse for not providing enrolment details in response to the original notice. She should then be allowed up to 14 days from the date she moved to her new address to enrol Peta in school and provide details of this enrolment to DHS.</p>
@@ -140,7 +142,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     20 March 2017  	</div>
+      Last reviewed:     5 February 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../../contact-us">Contact us</a></li>
@@ -150,7 +152,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

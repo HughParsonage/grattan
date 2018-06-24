@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../../../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"ZPPgBIi97W8_uB23kWkIFdgf8A2WpJATEF6t0IoafsE","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/family-assistance-guide\/3\/1\/11":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"5HVhWc1zdZMXq5zyjpSv89io4iYTxN-Ko28Wkzh_OsY","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/family-assistance-guide\/3\/1\/11":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children menu-mlid-513"><a href="../../../child-support-guide">Child Support Guide</a></li>
 <li class="leaf has-children active-trail menu-mlid-491"><a href="../../../family-assistance-guide" class="active-trail">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,10 +49,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-Ji2I-FwADt7w6ewPhxIuybNXuc80RwHqQYBXKySjnak" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-KGJX4A8xcUwBgpugl92ZVe14fq4MCYEh7bAsgGaaB_k" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Family Assistance Guide</h2>
-<p>Version 1.198 - Released 20 September 2017</p>
+<p>Version 1.203 - Released 7 May 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
@@ -115,12 +115,12 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p>The Secretary may determine that a lower amount of FTB advance is to be paid if the Secretary is satisfied that the individual would suffer financial hardship if their Part A rate were reduced to repay the greater amount.</p>
 <p>An example is where the repayment period (<a href="../../1/1/r/33">1.1.R.33</a>) of the advance is known to be shorter than 182 days because the individual's eligibility for FTB will cease at an earlier time, such as if the their only child will cease to be an FTB child (<a href="../../2/1/1/10">2.1.1.10</a>) due to their age.</p>
 <p>Other circumstances which may impact on the advance amount and/or eligibility include (but are not limited to) where an individual advises Centrelink of an event which will impact on the eligibility in the future, such as:</p>
-<ul><li>the individual advises Centrelink that they will be moving overseas permanently at a particular future date, or</li>
+<ul><li>the individual advises Centrelink that they will be absent from Australia (<a href="../../1/1/a/10">1.1.A.10</a>) permanently at a particular future date, or</li>
 <li>the child has pre-claimed <a href="../../acronyms#ya" title="Youth allowance">YA</a> where they are due to turn 18 or complete secondary study, or</li>
 <li>a carer will have less than 35% of the care of a child from a particular date onwards, etc.</li>
 </ul><div class="example">
 <p><strong>Example:</strong> Martin is eligible for a maximum $500 advance based on his rate of FTB Part A. However, the payment is scheduled to cancel in 100 days as he is leaving Australia permanently, so the repayment period is 100 days instead of 182 days. It is considered that the daily repayment of $5 ($500 ÷ 100) would result in financial hardship, but the equivalent daily repayment for $500 over 182 days would not cause financial hardship.</p>
-<p>Therefore, exercising the discretion, the maximum advance amount would be $500 ÷ 182 × 100 = $274.72. As this is greater than the minimum amount (<a href="../../1/1/m/55">1.1.M.55</a>), the advance of $274.72 would be granted. The daily repayment over 100 days would be $274.72 ÷ 100, which is the equivalent daily repayment to what would be applied if he repaid $500 over 182 days.</p>
+<p>Therefore, exercising the discretion, the maximum advance amount would be $500 ÷ 182 × 100 = $274.72. As this is greater than the minimum amount, the advance of $274.72 would be granted. The daily repayment over 100 days would be $274.72 ÷ 100, which is the equivalent daily repayment to what would be applied if he repaid $500 over 182 days.</p>
 <p>If the Secretary is to exercise this discretion, the advance amount must be at least the minimum amount.</p>
 <p>In the example above, if the maximum advance based on Martin's rate of FTB Part A was $250, the advance would not be granted as $250 ÷ 182 × 100 = $137.36, which is less than the minimum amount.</p>
 </div>
@@ -128,7 +128,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 35C Amount of FTB advance</p>
 </div>
 <h2>Reduction in advance amount due to repayment of a previous advance</h2>
-<p>If a previous advance is being repaid when an individual requests a new FTB advance, the maximum advance amount for the new FTB advance is reduced by the original amount of any unrepaid FTB advance. This reduced amount would need to be at least the minimum amount (<a href="../../1/1/m/55">1.1.M.55</a>) in order for the individual to qualify for a new advance.</p>
+<p>If a previous advance is being repaid when an individual requests a new FTB advance, the maximum advance amount for the new FTB advance is reduced by the original amount of any unrepaid FTB advance. This reduced amount would need to be at least the minimum amount in order for the individual to qualify for a new advance.</p>
 <div class="example">
 <p><strong>Example:</strong> Tony is eligible for a maximum $1000 advance based on his current FTB Part A rate. He claims a $400 advance, then, during the repayment period for the $400 advance he requests a further advance. As Tony has not yet fully repaid the $400 advance, the maximum amount available to him at this point in time is his maximum advance amount ($1000), reduced by the original amount of any advance/s he has not fully repaid ($400). Therefore, his maximum advance amount at the time of the second request is $600.</p>
 </div>
@@ -142,7 +142,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     3 July 2017  	</div>
+      Last reviewed:     2 January 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../contact-us">Contact us</a></li>
@@ -152,7 +152,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../../../../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../../../../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"EZrQ2pZYivqYBf_-bmkoNmJdYfBmkuuIBE__VSYW-xw","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/2\/4\/4\/60":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"jiNKiKNro44x8k_V637Gk2zNjWTAFfTI769dPJEo1cI","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/2\/4\/4\/60":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children active-trail menu-mlid-513"><a href="../../../../child-support-guide" class="active-trail">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../../../../guide-social-security-law">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,10 +49,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-2c1jiGp9TtCdYAIn5NmZXqsvcrAl4tTDb5LiAh4JOYI" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-YoQFA4eP5vyFyYd3RqHLl6gyWdy9x6_tzEelamlLEQo" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.27 - Released 20 September 2017</p>
+<p>Version 4.32 - Released 7 May 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
@@ -84,7 +84,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf menu-mlid-587"><a href="../12">2.4.12 The Minimum Annual Rate of Child Support</a></li>
 </ul></li>
 <li class="collapsed menu-mlid-588"><a href="../../5" title="This chapter describes the applications and elections that may be made to amend a child support assessment.">2.5 Applications &amp; Elections to Amend an Assessment</a></li>
-<li class="collapsed menu-mlid-599"><a href="../../6" title="This chapter describes the issues that the Registrar has to consider when making a decision to change an assessment under CSA Act part 6A.">2.6 Change of Assessment in Special Circumstances</a></li>
+<li class="collapsed menu-mlid-599"><a href="../../6" title="This chapter describes the issues that the Registrar has to consider when making a decision to change an assessment under Child Support (Assessment) Act 1989 (CSA Act) part 6A.">2.6 Change of Assessment in Special Circumstances</a></li>
 <li class="collapsed menu-mlid-618"><a href="../../7" title="This chapter describes how parents can make child support agreements. It describes the effect of a child support agreement upon a child support assessment.">2.7 Agreements</a></li>
 <li class="collapsed menu-mlid-624"><a href="../../8" title="This chapter describes when a court can make orders that affect a child support assessment and how the Registrar interprets court orders which will affect an assessment.">2.8 Court Variation to Assessments</a></li>
 <li class="collapsed menu-mlid-627"><a href="../../9" title="This chapter describes the procedural rules for making assessments and notes the information required in a notice of assessment. It also describes when the Registrar will amend an assessment.
@@ -111,7 +111,7 @@ It also describes how an assessment creates a liability to pay child support and
 <div class="reference">
 <h2>Act references</h2>
 <p><a href="https://www.legislation.gov.au/Series/C2004A03872" title="Child Support (Assessment) Act 1989">CSA Act</a> section 58, section 58AA, section 58A</p>
-<p><a href="https://www.legislation.gov.au/Series/F1996B00398" title="Child Support (Assessment) Regulations 1989">CSA Regs</a> regulation 7B</p>
+<p><a href="https://www.legislation.gov.au/Series/F2018L00307" title="Child Support (Assessment) Regulations 2018">CSA Regs</a> regulation 11</p>
 <p><a href="https://www.legislation.gov.au/Details/C2011A00053">Families, Housing, Community Services and Indigenous Affairs and Other Legislation Amendment (Further Election Commitments and Other Measures) Act 2011</a></p>
 </div>
 <h2>Description</h2>
@@ -127,25 +127,25 @@ It also describes how an assessment creates a liability to pay child support and
 <li>paragraph (a) does not apply and the adjusted taxable income subsequently ascertained or later determined by the Registrar is higher than the amount previously determined, or</li>
 <li>paragraphs (a) and (b) do not apply and the parent was genuinely unable to provide the Registrar with timely information due to the parent being unaware that an assessment had been made; ill-health; natural disaster; remote location; imprisonment; or other exceptional circumstances and the parent provided income information as soon as was practicable in the circumstances, or</li>
 <li>paragraphs (a) and (b) do not apply and the parent resided overseas, was not required to lodge a tax return and the parent provided information about his or her income to the Registrar within a reasonable time in the circumstances.</li>
-</ol><p>When making a decision about whether the circumstances prescribed by CSA Regs regulation 7B apply, the Registrar must consider all the relevant facts of the parent's particular circumstances and the extent to which they contributed to the parent's delay in providing information about their income to the Registrar.</p>
-<p>For the purposes of regulation 7B(1)(c), the Registrar will consider a person provided their income information to the Registrar as soon as was practicable if they provided that information within a reasonable period of time after the special or exceptional circumstances ceased to affect them. A decision about whether the parent provided their income information to the Registrar as soon as was practicable will require an examination of the parent's individual circumstances.</p>
+</ol><p>When making a decision about whether the circumstances prescribed by CSA Regs regulation 11 apply, the Registrar must consider all the relevant facts of the parent's particular circumstances and the extent to which they contributed to the parent's delay in providing information about their income to the Registrar.</p>
+<p>For the purposes of regulation 11(1)(c), the Registrar will consider a person provided their income information to the Registrar as soon as was practicable if they provided that information within a reasonable period of time after the special or exceptional circumstances ceased to affect them. A decision about whether the parent provided their income information to the Registrar as soon as was practicable will require an examination of the parent's individual circumstances.</p>
 <p>Otherwise, the amendment to the assessment will take effect from the day after the assessment was amended, for the remainder of the child support period.</p>
 <div class="example">
-<p><strong>Example 1:</strong> On 20 July 2008 M advises their adjusted taxable income for 2007-08 is $40,000. That figure is used to calculate the child support assessment for the child support period 1 August 2008 to 31 October 2009.</p>
-<p>0n 15 July 2009, M's tax return for 2007-08, lodged late, issues and their adjusted taxable income is $43,000. As M's income is higher, the child support assessment would be adjusted from 1 August 2008.</p>
-<p>If M's adjusted taxable income was $38,000 and the child support assessment is amended on 15 July 2009, the amended assessment would have effect from 16 July 2009. Under section 58A(3) of the CSA Act, the day after the assessment is amended is the date of effect, as M's income is lower and the tax return was lodged late.</p>
+<p><strong>Example 1:</strong> On 20 July 2008, Shannon advises their adjusted taxable income for 2007-08 is $40,000. That figure is used to calculate the child support assessment for the child support period 1 August 2008 to 31 October 2009.</p>
+<p>0n 15 July 2009, Shannon's tax return for 2007-08, lodged late, issues and their adjusted taxable income is $43,000. As Shannon's income is higher, the child support assessment would be adjusted from 1 August 2008.</p>
+<p>If Shannon's adjusted taxable income was $38,000 and the child support assessment is amended on 15 July 2009, the amended assessment would have effect from 16 July 2009. Under section 58A(3) of the CSA Act, the day after the assessment is amended is the date of effect, as Shannon's income is lower and the tax return was lodged late.</p>
 </div>
 <div class="example">
-<p><strong>Example 2:</strong> F has not lodged the 2006-07 tax return when child support period commences 1 March 2008. The Registrar determines an adjusted taxable income for 2006-07 of $80,000 (from the taxable income in the year prior to the LRYI) and uses that figure to calculate the child support assessment for the child support period 1 March 2008 to 30 May 2009.</p>
-<p>On 1 November 2008, F's tax return for 2006-07 issues and their adjusted taxable income is $55,000, and the assessment is amended. As F's income is lower, the child support assessment would be amended using income as follows:</p>
+<p><strong>Example 2:</strong> Claire has not lodged her 2006-07 tax return when child support period commences 1 March 2008. The Registrar determines an adjusted taxable income for 2006-07 of $80,000 (from the taxable income in the year prior to the last relevant year of income) and uses that figure to calculate the child support assessment for the child support period 1 March 2008 to 30 May 2009.</p>
+<p>On 1 November 2008, Claire's tax return for 2006-07 issues and her adjusted taxable income is $55,000, and the assessment is amended. As Claire's income is lower, the child support assessment would be amended using income as follows:</p>
 <ul><li>from 1 March 2008 to 30 June 2008: $55,000 (pre-1 July 2008 legislation)</li>
 <li>from 1 July 2008 to 1 November 2008: $80,000</li>
-<li>from 2 November 2008: $55,000 (section 58A(3) applies as F's tax return was lodged late).</li>
+<li>from 2 November 2008: $55,000 (section 58A(3) applies as Claire's tax return was lodged late).</li>
 </ul></div>
 <div class="example">
-<p><strong>Example 3: </strong>The Registrar made an assessment for a child support period commencing 1 August 2013. As there was no ATO assessment available, the adjusted taxable income used in this assessment was $44,758, ⅔ of the 2013 annualised Male Average Weekly Earnings (MTAWE). On 26 September 2013, M's 2008-09 tax assessment issues an adjusted taxable income of $45,000. The Registrar considers determining a 2012-13 adjusted taxable income based on the 2008-09 adjusted taxable income.</p>
+<p><strong>Example 3: </strong>The Registrar made an assessment for a child support period commencing 1 August 2013. As there was no ATO assessment available, the adjusted taxable income used in this assessment was $44,758, ⅔ of the 2013 annualised Male Average Weekly Earnings (MTAWE). On 26 September 2013, Amit's 2008-09 tax assessment issues, resulting in an adjusted taxable income of $45,000. The Registrar considers determining a 2012-13 adjusted taxable income based on the 2008-09 adjusted taxable income.</p>
 <p>The Average Weekly Earnings (AWE) amount for the December quarter of the last relevant year of income (2012-13) is the November 2012 amount of $1080.30. The AWE amount for the December quarter of the tax year (2008-09) is the November 2008 amount of $911.30. The adjusted taxable income indexation factor is therefore $1080.30 ÷ $911.30 = 1.185.</p>
-<p>M's 2012-13 adjusted taxable income is $45,000 × 1.185 = $53,325 or ⅔ MTAWE, which is the 2013 value of $44,758. As the indexed value is greater, M's adjusted taxable income is $53,325.</p>
+<p>Amit's 2012-13 adjusted taxable income is $45,000 × 1.185 = $53,325 or ⅔ MTAWE, which is the 2013 value of $44,758. As the indexed value is greater, Amit's adjusted taxable income is $53,325.</p>
 <p>The Registrar amends the assessment from the beginning of the child support period, 1 August 2013, because the new adjusted taxable income determined by the Registrar of $53,325 is higher than the previous determination of adjusted taxable income, $44,758.</p>
 </div>
 <h2>New information about incomes used before 1 July 2008</h2>
@@ -153,12 +153,12 @@ It also describes how an assessment creates a liability to pay child support and
 <p>The Registrar can ascertain a taxable income in this situation even if the ATO has not made an income tax assessment. It can act on information that provides a better basis for a default income.</p>
 <p>However, the Registrar will not amend an assessment if a parent provides details of income and supplementary amounts and the Registrar has other evidence that suggests that the information provided is incorrect.</p>
 <div class="example">
-<p><strong>Example:</strong> M's taxable income and supplementary amounts cannot be ascertained because M hasn't lodged a tax return for the relevant year (2006-07). M has been asked to provide details of taxable and supplementary incomes for the relevant year but M doesn't provide the details requested. The Registrar can make a child support assessment using an income amount considered appropriate and decides to use an amount of $32,000 based on M's past income history. M later lodges a tax return for the 2006-07 year and M's taxable income is assessed to be $28,000 and there are no supplementary amounts. The Registrar must amend the child support assessment to reflect M's actual taxable income of $28,000.</p>
+<p><strong>Example:</strong> Daniel's taxable income and supplementary amounts cannot be ascertained because Daniel hasn't lodged a tax return for the relevant year (2006-07). Daniel has been asked to provide details of taxable and supplementary incomes for the relevant year but he doesn't provide the details requested. The Registrar can make a child support assessment using an income amount considered appropriate and decides to use an amount of $32,000 based on Daniel's past income history. Daniel later lodges a tax return for the 2006-07 year and his taxable income is assessed to be $28,000 and there are no supplementary amounts. The Registrar must amend the child support assessment to reflect Daniel's actual taxable income of $28,000.</p>
 </div>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     16 May 2016  	</div>
+      Last reviewed:     3 April 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../../contact-us">Contact us</a></li>
@@ -168,7 +168,7 @@ It also describes how an assessment creates a liability to pay child support and
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

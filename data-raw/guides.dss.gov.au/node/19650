@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"bRAxHYSdhD0SkXA5vcwoAPyWY5PUL4Ng-SZWsTaq7q8","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/19650":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"YAtqYIjEMKuRc-2sYF528qiMpL3jQ-Z1gEa1ix7C0BU","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/19650":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children menu-mlid-513"><a href="../child-support-guide">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-489"><a href="../guide-social-security-law.1" class="active-trail">Guide to Social Security Law</a></li>
+<li class="leaf has-children active-trail menu-mlid-489"><a href="../guide-social-security-law" class="active-trail">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,16 +49,16 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-E5C1ASeLIE2HixJEcBLk2sscXe2UIVORyKn6iPE4ctM" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-C0z86EIjY8UUiDpm5Gl8E2CDVeGrI5LotYPXaX9tDGo" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Guide to Social Security Law</h2>
-<p>Version 1.237 - Released 19 October 2017</p>
+<p>Version 1.245 - Released 1 June 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../guide-social-security-law.1" title="">Using the Guide to Social Security Law</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../guide-social-security-law" title="">Using the Guide to Social Security Law</a></li>
 <li class="collapsed menu-mlid-493"><a href="../guide-social-security-law/updates">What&#039;s New</a></li>
 <li class="expanded active-trail menu-mlid-2295"><a href="../guide-social-security-law/1" class="active-trail">1 Key Terms &amp; Principles</a><ul class="menu"><li class="first expanded active-trail menu-mlid-5189"><a href="../guide-social-security-law/1/1" class="active-trail">1.1 Definition of Key Terms</a><ul class="menu"><li class="first collapsed menu-mlid-5163"><a href="../guide-social-security-law/1/1/a">1.1.A Key Terms Beginning with the Letter A</a></li>
 <li class="collapsed menu-mlid-5164"><a href="../guide-social-security-law/1/1/b">1.1.B Key Terms Beginning with the Letter B</a></li>
@@ -193,7 +193,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7372"><a href="../guide-social-security-law/act-references">Act Reference Index</a></li>
 <li class="last leaf menu-mlid-7168"><a href="../guide-social-security-law/sitemap">Site Map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../guide-social-security-law.1">Guide to Social Security Law</a> &raquo; <a href="../guide-social-security-law/1" class="active-trail">1 Key Terms &amp; Principles</a> &raquo; <a href="../guide-social-security-law/1/1" class="active-trail">1.1 Definition of Key Terms</a> &raquo; <a href="../guide-social-security-law/1/1/p" class="active-trail">1.1.P Key Terms Beginning with the Letter P</a> &raquo; 1.1.P.416 Principal carer - shared care</div>
+	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../guide-social-security-law">Guide to Social Security Law</a> &raquo; <a href="../guide-social-security-law/1" class="active-trail">1 Key Terms &amp; Principles</a> &raquo; <a href="../guide-social-security-law/1/1" class="active-trail">1.1 Definition of Key Terms</a> &raquo; <a href="../guide-social-security-law/1/1/p" class="active-trail">1.1.P Key Terms Beginning with the Letter P</a> &raquo; 1.1.P.416 Principal carer - shared care</div>
 <div id="utility">
 	
 <div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/node/19650"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
@@ -203,7 +203,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <h2>Summary</h2>
 <p>The provisions of SSAct subsection 5(18) mean that only one person at a time can be the principal carer (<a href="../guide-social-security-law/1/1/p/412">1.1.P.412</a>) of a child. In all shared care situations (<a href="../guide-social-security-law/acronyms#pp" title="Parenting payment">PP</a>, <a href="../guide-social-security-law/acronyms#nsa" title="Newstart allowance">NSA</a>, <a href="../guide-social-security-law/acronyms#ya" title="Youth allowance">YA</a> (job seeker) and <a href="../guide-social-security-law/acronyms#spb" title="Special benefit">SpB</a>), it is necessary to determine which of the carers is the principal carer.</p>
 <div class="example">
-<p><strong>Example:</strong> A couple have separated and have joint legal responsibility (<a href="../guide-social-security-law/1/1/l/33">1.1.L.33</a>) for, and share the care of, their child who is under 6. One of the parents previously received <a href="../guide-social-security-law/acronyms#ppp" title="Parenting payment (partnered)">PPP</a> under SSAct subsection 500D(1). Subsection 5(19) requires that a determination be made stating which person is the principal carer of the child, and therefore has the PP child.</p>
+<p><strong>Example:</strong> A couple have separated and have joint legal responsibility (<a href="../guide-social-security-law/1/1/l/33">1.1.L.33</a>) for, and share the care of, their child who is under 6. One of the parents previously received <a href="../guide-social-security-law/acronyms#ppp" title="Parenting payment (partnered)">PPP</a> under SSAct subsection 500D(1). SSAct subsection 5(19) requires that a determination be made stating which person is the principal carer of the child, and therefore has the PP child.</p>
 </div>
 <p>In all cases where care is shared a written determination must be made which:</p>
 <ul><li>specifies one of the adults as the principal carer of the child,</li>
@@ -217,7 +217,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <h2>Principal carer status &amp; legal responsibility</h2>
 <p>Care should be taken to ensure that it is not assumed that a child is always the dependent child of their parent, but the assessment should fully explore whether the person legally responsible for the child is actually providing care for the child. In some cases grandparents or relatives who have taken on responsibility of caring for the child where the parent is unable or unwilling to care for the child can be determined to be principal carers.</p>
 <h2>One person provides greater degree of care</h2>
-<p>As subsection 5(19) does not list any specific criteria that should or should not be taken into account in making a determination, all the circumstances of each case need to be considered. However, given that the principal carer determination is based upon majority care of a child, it will generally be appropriate to decide that the person providing the greater degree of care is the principal carer, EVEN if that person has not claimed income support.</p>
+<p>As SSAct subsection 5(19) does not list any specific criteria that should or should not be taken into account in making a determination, all the circumstances of each case need to be considered. However, given that the principal carer determination is based upon majority care of a child, it will generally be appropriate to decide that the person providing the greater degree of care is the principal carer, EVEN if that person has not claimed income support.</p>
 <div class="example">
 <p><strong>Example:</strong> Sally has the care of her 9 year old child 55% of the time over a period, and her ex-partner Dan has the care of their child for the remaining 45% of the time. Sally is working full-time and has not claimed NSA. Dan is not working and is in receipt of NSA and is seeking to be made the principal carer. In this case, Sally would be determined as the principal carer, as she has the greater degree of care. This determination is made despite the fact that Sally has not claimed income support.</p>
 </div>
@@ -247,7 +247,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li>the duration that each carer has been on income support and their principal carer status during this time. If there are no substantial differences between the parties, then generally the determination should be favoured which maintains the 'status quo', and</li>
 <li>any other factors considered relevant by the decision maker.</li>
 </ul><div class="example">
-<p><strong>Example:</strong> Mary and John are separated and equally share the care of their daughter Cathy. Mary has been receiving NSA with principal carer status since August 2006, and John lodges a claim for NSA in October 2007. The rate that would be payable to John is approximately the same as that being paid to Mary. Neither John nor Mary owns any substantial assets such as a house or car. John has recent workforce experience, which increases his employment prospects in the area. It is fair to argue that a decision that cancelled Mary's status as principal carer would have a more significant impact than a decision to reject John's claim to be deemed principal carer, especially as John has greater employment prospects than Mary. Therefore Mary should continue to be specified as the principal carer of Cathy while John should have generic NSA requirements/concessions.</p>
+<p><strong>Example:</strong> Mary and John are separated and equally share the care of their daughter Cathy. Mary has been receiving NSA with principal carer status since August 2015, and John lodges a claim for NSA in October 2016. The rate that would be payable to John is approximately the same as that being paid to Mary. Neither John nor Mary owns any substantial assets such as a house or car. John has recent workforce experience, which increases his employment prospects in the area. It is fair to argue that a decision that cancelled Mary's status as principal carer would have a more significant impact than a decision to reject John's claim to be deemed principal carer, especially as John has greater employment prospects than Mary. Therefore Mary should continue to be specified as the principal carer of Cathy while John should have generic NSA requirements/concessions.</p>
 </div>
 <h2>Equal care - same decision applies to each child</h2>
 <p>If the care arrangements for 2 or more children are identical, it is NOT appropriate to 'allocate' each parent as the principal carer of a child, thus enabling both parents to qualify for income support as a principal carer. Different determinations about which parent is the principal carer of each child should only be made if the circumstances relating to the care of the children are not the same, and justify a different decision.</p>
@@ -263,7 +263,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p><strong>Example:</strong> One parent has the greater degree of care of one child (or more children), and the other parent has the greater degree of care of the other child/ren.</p>
 </div>
 <h2>Change in existing shared care - different principal carer</h2>
-<p>To avoid a debt being created for payments received before the determination is made, if a person is already receiving income support as a principal carer after the commencement of shared care (or a decrease in the degree of shared care) and before a determination has been made under subsection 5(19), consideration should be given to making different determinations for the period before and after the date of determination. This would only be necessary if the application of subsection 5(19) will result in a change of the determination as to who is the principal carer. In this situation, different determinations should be made if:</p>
+<p>To avoid a debt being created for payments received before the determination is made, if a person is already receiving income support as a principal carer after the commencement of shared care (or a decrease in the degree of shared care) and before a determination has been made under SSAct subsection 5(19), consideration should be given to making different determinations for the period before and after the date of determination. This would only be necessary if the application of subsection 5(19) will result in a change of the determination as to who is the principal carer. In this situation, different determinations should be made if:</p>
 <ul><li>the degree of shared care is approximately equal, or</li>
 <li>the current recipient has the lesser degree of care, and
 <ul><li>the recipient has not made a false statement and has complied with the notification requirements relating to shared care, and</li>
@@ -277,34 +277,21 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </li>
 </ul></div>
 <div class="example">
-<p><strong>Example 1:</strong> Janice is receiving PP for one child aged under 6 at the single rate and has 100% care of the child. This degree of care changes on 27 April 2007 so that she has 40% care and her former partner, David, has 60% care. Janice complies by notifying this on 11 May 2007 and the payment for the entitlement period, which ended 9 May 2007, has already been issued. David has not claimed PP.</p>
-<p>On 12 May, Janice is specified as the principal carer and the recipient of PP between 26 April 2007 and 9 May 2007 inclusive. David is specified as the principal carer from 10 May 2007. This means that Janice loses qualification from 10 May 2007 instead of 27 April 2007 and automatic termination therefore does not apply. Payment to Janice is cancelled from 10 May 2007. No debt arises for the payment made on 1 May 2007.</p>
+<p><strong>Example 1:</strong> Janice is receiving PP for one child aged under 6 at the single rate and has 100% care of the child. This degree of care changes on 28 April 2017 so that she has 40% care and her former partner, David, has 60% care. Janice complies by notifying this on 12 May 2017 and the payment for the entitlement period, which ended 10 May 2017, has already been issued. David has not claimed PP.</p>
+<p>Janice is specified by Centrelink as the principal carer and the recipient of PP between 27 April 2017 and 10 May 2017 inclusive. David is specified as the principal carer from 11 May 2017. This means that Janice loses qualification from 11 May 2017 instead of 28 April 2017 and automatic termination therefore does not apply. Payment to Janice is cancelled from 11 May 2017. No debt arises for the payment made on 12 May 2017.</p>
 </div>
 <div class="example">
-<p><strong>Example 2:</strong> Betty is receiving PP for one child at the single rate and has 100% care of the child. The degree of care changes on 27 April 2010 so that Betty has 40% care and her former partner, Kristin, has 60% care. Betty does not notify this until 25 May 2010, and so has not complied. Subsequently, Kristin is specified as the principal carer under subsection 5(19) from 27 April 2010. Payment to Betty automatically terminates under SSAct section 94 from 27 April 2010, and the final payment issued was on 14 May 2010 in respect of the entitlement period ending 12 May. Therefore, a debt arises for the period 27 April 2010 to 12 May 2010.</p>
+<p><strong>Example 2:</strong> Betty is receiving PP for one child at the single rate and has 100% care of the child. The degree of care changes on 25 April 2017 so that Betty has 40% care and her former partner, Kristin, has 60% care. Betty does not notify this until 23 May 2017, and so has not complied. Subsequently, Kristin is specified as the principal carer under SSAct subsection 5(19) from 25 April 2017. Payment to Betty automatically terminates under SS(Admin)Act section 94 from 25 April 2017, and the final payment issued was on 12 May 2017 in respect of the entitlement period ending 10 May. Therefore, a debt arises for the period 25 April 2017 to 10 May 2017.</p>
 </div>
 <div class="reference">
 <p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 5(18) Only one person at a time can be the principal carer of a particular child</p>
 <p><a href="https://www.legislation.gov.au/Series/C2004A00580" title="Social Security (Administration) Act 1999">SS(Admin)Act</a> section 80 Cancellation or suspension determination, section 94 Automatic cancellation-recipient not complying…, section 93 Automatic cancellation-recipient complying…</p>
 <p><strong>Policy reference:</strong> SS Guide <a href="../guide-social-security-law/3/5/1/50">3.5.1.50</a> Child-related Qualification for PP - Shared Care, <a href="../guide-social-security-law/3/5/1/10">3.5.1.10</a> Qualification Summary for PP</p>
 </div>
-<h2>Change in care - PP transitional arrangement</h2>
-<p>The same decision making processes as outlined above apply where a person is covered by the PP transitional arrangement under SSAct section 500D(3).</p>
-<p>However, where a determination is made that the parent is in receipt of PP under the transitional arrangement (parent A) is no longer the principal carer of a particular child, and the child in question is aged:</p>
-<ul><li>6 or more where parent B is a partnered parent, OR</li>
-<li>8 or more where parent B is a single parent.</li>
-</ul><p>then parent B would not be eligible for PP, and would instead be a principal carer on the appropriate payment such as NSA, YA job seeker or SpB.</p>
-<div class="example">
-<p><strong>Example:</strong> Bridget is receiving PP for a 9 year old child at the single rate and has 100% care of the child. The degree of care changes on 1 April 2007 so that Bridget has 40% care and her former partner, Jason, has 60% care. As Jason is not a member of a couple, his eligibility for PP at the single rate is assessed under SSAct subsection 500D(2). Since the child has turned 8, Jason is not eligible for PP at the single rate, and must instead claim another income support payment such as NSA or YA job seeker, if needed.</p>
-</div>
-<div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 500D PP child, section 542FA Disabled children or other family circumstances exemption (YA), section 602C(3) Relief from activity test - people with disabled children and other circumstances (NSA), section 731DB(3) Relief from activity test-people with disabled children and other circumstances (SpB), section 731GA Relief from activity test - certain principal carers and people with partial capacity to work (SpB), section 1061ZA(2A) PCC (YA partial capacity to work and single principal carer), section 1061ZA(2B) PCC (NSA partial capacity to work and single principal carer), section 1061ZM(1BA) PCC extended qualification (NSA/YA single principal carer), section 1067G-B3 Person who is independent (YA), section 1067G-C1 Qualification for PhA (YA), section 1068-B5 Maximum basic rate for certain NSA recipients, section 1068-D2B Newstart recipients who have a partial capacity to work or are principal carers</p>
-<p><strong>Policy reference:</strong> SS Guide <a href="../guide-social-security-law/1/1/p/340">1.1.P.340</a> PP child (PP), <a href="../guide-social-security-law/1/1/d/70">1.1.D.70</a> Dependent child, <a href="../guide-social-security-law/3/5/1/50">3.5.1.50</a> Child-related Qualification for PP - Shared Care, <a href="../guide-social-security-law/3/2/1/10">3.2.1.10</a> Qualification for NSA, <a href="../guide-social-security-law/3/2/3/10">3.2.3.10</a> Qualification for YA, <a href="../guide-social-security-law/3/7/1/10">3.7.1.10</a> Qualification for SpB, <a href="../guide-social-security-law/3/9">3.9</a> Concession Cards - Qualification Provisions</p>
-</div>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     20 March 2017  	</div>
+      Last reviewed:     5 February 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../contact-us">Contact us</a></li>
@@ -314,7 +301,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"fW_4JE3XedmsBt91BLlfSROU6CpQb54pv8pB0BRpQEM","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/17062":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"nILx0qtTHG7lZzVxYyugjDHQQuW-us1KERWGdNifZdM","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/17062":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children menu-mlid-513"><a href="../child-support-guide">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-489"><a href="../guide-social-security-law.1" class="active-trail">Guide to Social Security Law</a></li>
+<li class="leaf has-children active-trail menu-mlid-489"><a href="../guide-social-security-law" class="active-trail">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,23 +49,23 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-FaJWao3keTRNfN1fQrGDHnVZK1SRA2PhF_ab9EkBJGQ" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-NoRvU8YOqUnp8MSo3u8tlctBhTWR-olyTI9sNTjJOn0" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Guide to Social Security Law</h2>
-<p>Version 1.237 - Released 19 October 2017</p>
+<p>Version 1.245 - Released 1 June 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../guide-social-security-law.1" title="">Using the Guide to Social Security Law</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../guide-social-security-law" title="">Using the Guide to Social Security Law</a></li>
 <li class="collapsed menu-mlid-493"><a href="../guide-social-security-law/updates">What&#039;s New</a></li>
 <li class="collapsed menu-mlid-2295"><a href="../guide-social-security-law/1">1 Key Terms &amp; Principles</a></li>
 <li class="collapsed menu-mlid-2294"><a href="../guide-social-security-law/2">2 Claim Verification</a></li>
 <li class="expanded active-trail menu-mlid-2293"><a href="../guide-social-security-law/3" class="active-trail">3 Qualification &amp; Payability</a><ul class="menu"><li class="first collapsed menu-mlid-4378"><a href="../guide-social-security-law/3/1">3.1 General Provisions</a></li>
 <li class="collapsed menu-mlid-4385"><a href="../guide-social-security-law/3/2">3.2 Newstart &amp; Youth Allowance</a></li>
 <li class="expanded active-trail menu-mlid-4386"><a href="../guide-social-security-law/3/3" class="active-trail">3.3 Other Labour Market &amp; Older Students</a><ul class="menu"><li class="first collapsed menu-mlid-4075"><a href="../guide-social-security-law/3/3/1">3.3.1 PA - Qualification &amp; Payability</a></li>
-<li class="collapsed menu-mlid-4076"><a href="../guide-social-security-law/3/3/2">3.3.2 MAA - Qualification &amp; Payability</a></li>
+<li class="collapsed menu-mlid-4076"><a href="../guide-social-security-law/3/3/2">3.3.2 MAA - Qualification &amp; Payability (deleted)</a></li>
 <li class="collapsed menu-mlid-4077"><a href="../guide-social-security-law/3/3/3">3.3.3 Austudy - Qualification &amp; Payability</a></li>
 <li class="last expanded active-trail menu-mlid-4078"><a href="../guide-social-security-law/3/3/4" class="active-trail">3.3.4 Satisfying the Activity Test for Austudy</a><ul class="menu"><li class="first leaf menu-mlid-4048"><a href="../guide-social-security-law/3/3/4/10">3.3.4.10 Approved Courses of Study for Austudy</a></li>
 <li class="leaf active-trail active menu-mlid-4049"><a href="../guide-social-security-law/3/3/4/20" class="active-trail active">3.3.4.20 Austudy &amp; Full-time Tertiary Students</a></li>
@@ -103,7 +103,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7372"><a href="../guide-social-security-law/act-references">Act Reference Index</a></li>
 <li class="last leaf menu-mlid-7168"><a href="../guide-social-security-law/sitemap">Site Map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../guide-social-security-law.1">Guide to Social Security Law</a> &raquo; <a href="../guide-social-security-law/3" class="active-trail">3 Qualification &amp; Payability</a> &raquo; <a href="../guide-social-security-law/3/3" class="active-trail">3.3 Other Labour Market &amp; Older Students</a> &raquo; <a href="../guide-social-security-law/3/3/4" class="active-trail">3.3.4 Satisfying the Activity Test for Austudy</a> &raquo; 3.3.4.20 Austudy &amp; Full-time Tertiary Students</div>
+	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../guide-social-security-law">Guide to Social Security Law</a> &raquo; <a href="../guide-social-security-law/3" class="active-trail">3 Qualification &amp; Payability</a> &raquo; <a href="../guide-social-security-law/3/3" class="active-trail">3.3 Other Labour Market &amp; Older Students</a> &raquo; <a href="../guide-social-security-law/3/3/4" class="active-trail">3.3.4 Satisfying the Activity Test for Austudy</a> &raquo; 3.3.4.20 Austudy &amp; Full-time Tertiary Students</div>
 <div id="utility">
 	
 <div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/node/17062"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
@@ -118,7 +118,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li>full-time study during the first 2 weeks of a course, and</li>
 <li>continuing students.</li>
 </ul><h2>Full-time tertiary students</h2>
-<p>Full-time tertiary students (<a href="../guide-social-security-law/1/1/f/230">1.1.F.230</a>) are participating in, or intending to enrol in, at least 75% of the normal amount of full-time study for a course for any given study period (for example, semester, trimester or year).</p>
+<p>Full-time tertiary students (<a href="../guide-social-security-law/1/1/f/230">1.1.F.230</a>) are participating in, or intending to enrol in, at least 75% of the normal amount of full-time study for a course for their relevant study period (for example, semester, trimester or year).</p>
 <p>The normal amount of full-time study for a course is:</p>
 <ul><li>if the course is a course of study within the meaning of the <cite>Higher Education Support Act 2003</cite> - the equivalent for the period of the standard study-load for a particular period (whether the units being undertaken are semester, trimester or year based) as determined by the institution in accordance with the Administration Guidelines under that Act, or</li>
 <li>if the course is not such a course and the institution defines an amount of full-time study that a full-time student should typically undertake in respect of the course in the period - the amount so defined, or</li>
@@ -161,41 +161,53 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 569F First fortnight of classes</p>
 </div>
 <h2>Continuing students</h2>
-<p>Continuing students who are moving from one course to another, or who are on vacation from the course they are undertaking, can be regarded as full-time students if they were enrolled in a course and intend to enrol in the same, or another course when enrolments are next accepted. This also applies to students who were studying on a part-time basis in the previous study period and who intend to re-enrol on a full-time basis from the start of the next study period.</p>
-<p>Full-time students who discontinued halfway through their studies but intend to commence a new course in the next study period are not considered to be a continuing student and only qualify for payment of Austudy as a full-time student from the commencement of the new course.</p>
-<p>If an overpayment is applied, the date of effect is the EARLIER of the following:</p>
+<p>Continuing students who are moving from one eligible course to another, or who are on vacation from the course they are undertaking, can be regarded as full-time students if they were enrolled in a course and intend to enrol in the same, or another eligible course when enrolments are next accepted. This also applies to students who were studying on a part-time basis in the previous study period and who intend to re-enrol on a full-time basis from the start of the next study period.</p>
+<p>Full-time students who discontinued halfway through their studies but intend to commence a new eligible course in the next study period are not considered to be a continuing student and only qualify for payment as a full-time student from the commencement of the new course.</p>
+<p>If an overpayment is received, the date of effect is the EARLIER of the following:</p>
 <ul><li>the start of the course in which the person did NOT enrol and undertake qualifying study, OR</li>
 <li>the day the person became aware that they would NOT be enrolling in the course.</li>
 </ul><div class="example">
 <p><strong>Example:</strong> The date when they received their academic results from a previous course or subject and knew that they would NOT be accepted in the next course or subject.</p>
 </div>
+<div class="example">
+<p><strong>Example:</strong> Aaron has just completed his Arts course and intends to enrol in a Science course when enrolments for next semester open. However, a week before the course is due to begin, Aaron decides that he no longer wants to study. Aaron would continue to be eligible to receive Austudy until the week that he decides that he no longer intends to study, providing he continues to meet all other eligibility requirements.</p>
+</div>
 <h2>Honours study</h2>
 <p>For information on Honours study for Austudy recipients, see <a href="../guide-social-security-law/3/3/4/70">3.3.4.70</a>.</p>
-<h2>Reasonable Excuse</h2>
-<p>If a person discontinues studies or reduces their study load to less than full-time, but they have a reasonable excuse, the person may continue to receive Austudy in certain circumstances as if they were full-time. Matters that are to be considered in deciding whether a person has a reasonable excuse include:</p>
+<h2>Students unable to undertake full-time study</h2>
+<p>Students who reduce their study load to less than full-time may continue to receive Austudy as if they were full-time students if they have a reasonable excuse. Matters that are to be considered in deciding whether a person has a reasonable excuse include:</p>
 <ul><li>not having access to safe, secure and adequate housing, or being in emergency accommodation or a refuge at the time, and</li>
-<li>the person's language and literacy skills, and</li>
-<li>an illness, impairment or condition requiring treatment (whether episodic or unpredictable), and</li>
-<li>a person's cognitive, neurological, psychiatric, psychological impairment or mental illness, and</li>
-<li>a person's drug or alcohol dependency, and</li>
+<li>the person's language and literacy skills, and a person's drug or alcohol dependency, and</li>
 <li>unforeseen family or caring responsibilities (including being adversely affected by the death of an immediate or close relative), and</li>
-<li>being a victim of criminal violence (including domestic violence and sexual assault), and</li>
+<li>being a victim of criminal violence (including domestic and family violence and sexual assault), and</li>
 <li>certain instances of imprisonment or release from imprisonment.</li>
 </ul><p>For the person to remain qualified for Austudy as a student, the person must:</p>
 <ul><li>intend to return to full-time study once their reasonable excuse circumstances have been resolved, and</li>
 <li>remain enrolled in their course of study, or registered for the relevant award, regardless of whether they are undertaking any of the course subjects or units during the period.</li>
 </ul><div class="example">
-<p><strong>Example:</strong> Joanne is a single parent and commences study in semester 1. Four weeks into the course her child develops an illness and requires hospitalisation. Whilst Joanne intends to continue with her studies she fails to notify that she has temporarily withdrawn from her subjects but remains enrolled in the course. Joanne enrols in semester 2 and it is then identified that she did not undertake full-time study for the entire duration of semester 1. As Joanne withdrew due to circumstances beyond her control and always had an intention to continue studies, she can retain payments as a continuing student.</p>
+<p><strong>Example:</strong> Joanne is a single parent and commences study in semester 1. Four weeks into the course her child develops an illness and requires hospitalisation. Whilst Joanne intends to continue with her studies she fails to notify that she has temporarily deferred her subjects but remains enrolled in the course. Joanne enrols in semester 2 and it is then identified that she did not undertake full-time study for the entire duration of semester 1. As Joanne deferred due to circumstances beyond her control and always had an intention to continue studies, she can retain payments as a continuing student.</p>
+</div>
+<h2>Students unable to undertake full-time study due to health reasons</h2>
+<p>Students who have a substantial physical, psychiatric or intellectual disability and are not capable of full-time study, may be eligible for a 25% concessional study load in the short or long-term (see <a href="../guide-social-security-law/3/3/3/40">3.3.4.30</a>).</p>
+<p>Students who are temporarily incapacitated and unable to undertake any study are not able to continue receiving Austudy, but may qualify for <a href="../guide-social-security-law/acronyms#sa" title="Sickness allowance">SA</a> instead. SA can only be paid where the student is not undertaking any study. For more information on SA, see <a href="../guide-social-security-law/1/2/5/30">1.2.5.30</a>.</p>
+<p>If a person continues their study, but reduces their study load to less than full-time, but does not qualify for a 25% concessional study load and s/he has a reasonable excuse for reducing their study load, the person may continue to receive Austudy in certain circumstances as if they were full-time. Matters that are to be considered in deciding whether a person has a reasonable excuse include:</p>
+<ul><li>an illness, impairment or condition requiring treatment (whether episodic or unpredictable), and</li>
+<li>a person's cognitive, neurological, psychiatric, psychological impairment or mental illness, and</li>
+</ul><p>For the person to remain qualified for Austudy as a student, the person must:</p>
+<ul><li>intend to return to full-time study once their reasonable excuse circumstances have been resolved, and</li>
+<li>remain enrolled in their course of study, or registered for the relevant award, regardless of whether they are undertaking study on a less than full-time basis.</li>
+</ul><div class="example">
+<p><strong>Example:</strong> Jamie is involved in a car accident which results in a broken leg, requiring surgery and rehabilitation. He is unable to continue full-time study for that semester, and has to drop down to 2 subjects. He is unable to qualify for the 25% concessional study load as he does not have a substantial disability, and as he is still able to undertake some study, he does not qualify for SA. Jamie may still be able to receive Austudy as if he were full-time student because he has a reasonable excuse for not undertaking full-time study, and intends to return to full-time study in the following semester.</p>
 </div>
 <div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 569A Undertaking qualifying study, section 576 Austudy participation failures, section 576A Allowance not payable because of austudy participation failure</p>
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 569A Undertaking qualifying study, section 569D Concessional study-load students, section 576 Austudy participation failures, section 576A Allowance not payable because of austudy participation failure, section 666 Qualification for SA</p>
 <p><a href="https://www.legislation.gov.au/Series/F2009L01803">Social Security (Reasonable Excuse - Participation Payment Obligations) (DEEWR) Determination 2009 (No. 1)</a></p>
-<p><strong>Policy reference:</strong> SS Guide <a href="../guide-social-security-law/3/3/3/70">3.3.3.70</a> Austudy Participation Failures</p>
+<p><strong>Policy reference:</strong> SS Guide <a href="../guide-social-security-law/1/2/5/30">1.2.5.30</a> Sickness Allowance (SA) - Description, <a href="../guide-social-security-law/3/3/3/70">3.3.3.70</a> Austudy Participation Failures</p>
 </div>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     20 September 2017  	</div>
+      Last reviewed:     20 March 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../contact-us">Contact us</a></li>
@@ -205,7 +217,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

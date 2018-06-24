@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../../../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"h-BoQ909oCDW6J4QAPKpYJCqR78OCeTcyEcphteDYrQ","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/2\/6\/10":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"aHQ2PqQfxUktX6JFUWfGAjxQGp3sBuGib5PPgUZE2v0","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/2\/6\/10":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide" class="active-trail">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,10 +49,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-MBhneyA9THva4Is4GPuWV5tSUaawwfxIOLKPnn7fFkw" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-36X_PDN6RBjOb6H-vyg_o3nhPPAskLKl6Gx_vghZ_YE" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.27 - Released 20 September 2017</p>
+<p>Version 4.32 - Released 7 May 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
@@ -66,7 +66,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="collapsed menu-mlid-568"><a href="../3" title="This chapter describes the start and end dates of child support periods and which financial year of income the Registrar will use when making an assessment for a child support period.">2.3 Child Support Periods</a></li>
 <li class="collapsed menu-mlid-575"><a href="../4" title="This chapter describes the administrative formulas the Registrar uses to calculate a child support assessment. It explains how the Registrar uses income and care to calculate a child support assessment and how the parents&#039; combined incomes are used to calculate the costs of children. It also includes information about when the minimum annual rate of child support, or the fixed annual rate assessment, will apply.">2.4 Formula Assessment</a></li>
 <li class="collapsed menu-mlid-588"><a href="../5" title="This chapter describes the applications and elections that may be made to amend a child support assessment.">2.5 Applications &amp; Elections to Amend an Assessment</a></li>
-<li class="expanded active-trail menu-mlid-599"><a href="../6" title="This chapter describes the issues that the Registrar has to consider when making a decision to change an assessment under CSA Act part 6A." class="active-trail">2.6 Change of Assessment in Special Circumstances</a><ul class="menu"><li class="first leaf menu-mlid-600"><a href="1">2.6.1 When Can the Registrar Consider Changing an Assessment?</a></li>
+<li class="expanded active-trail menu-mlid-599"><a href="../6" title="This chapter describes the issues that the Registrar has to consider when making a decision to change an assessment under Child Support (Assessment) Act 1989 (CSA Act) part 6A." class="active-trail">2.6 Change of Assessment in Special Circumstances</a><ul class="menu"><li class="first leaf menu-mlid-600"><a href="1">2.6.1 When Can the Registrar Consider Changing an Assessment?</a></li>
 <li class="leaf menu-mlid-601"><a href="2">2.6.2 What Are the Reasons for a Change of Assessment?</a></li>
 <li class="leaf menu-mlid-602"><a href="3">2.6.3 A Decision to Refuse to Change an Assessment</a></li>
 <li class="leaf menu-mlid-603"><a href="4">2.6.4 Kinds of Change of Assessment Decisions</a></li>
@@ -99,7 +99,7 @@ It also describes how an assessment creates a liability to pay child support and
 <li class="leaf menu-mlid-7193"><a href="../../keywords" title="">Keyword Index</a></li>
 <li class="last leaf menu-mlid-7167"><a href="../../sitemap">Site Map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../child-support-guide">Child Support Guide</a> &raquo; <a href="../../2" class="active-trail">2 Child Support Assessments</a> &raquo; <a href="../6" title="This chapter describes the issues that the Registrar has to consider when making a decision to change an assessment under CSA Act part 6A." class="active-trail">2.6 Change of Assessment in Special Circumstances</a> &raquo; 2.6.10 Reason 4 - Income of the Child</div>
+	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../child-support-guide">Child Support Guide</a> &raquo; <a href="../../2" class="active-trail">2 Child Support Assessments</a> &raquo; <a href="../6" title="This chapter describes the issues that the Registrar has to consider when making a decision to change an assessment under Child Support (Assessment) Act 1989 (CSA Act) part 6A." class="active-trail">2.6 Change of Assessment in Special Circumstances</a> &raquo; 2.6.10 Reason 4 - Income of the Child</div>
 <div id="utility">
 	
 <div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/child-support-guide/2/6/10"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
@@ -120,21 +120,21 @@ It also describes how an assessment creates a liability to pay child support and
 </ul><h2 id="groundsfordeparture">Grounds for departure under Reason 4</h2>
 <p>The usual formula assessment provisions do not take into account the child's personal income when calculating the rate of child support payable by a parent for that child.</p>
 <p>The Registrar cannot end a child support assessment because of the income earned by an eligible child. However, there may be a reason for changing an assessment if, in the special circumstances of the case, the administrative assessment of child support results in an unjust and inequitable determination of the level of financial support to be provided by the liable parent for the child because of the income, earning capacity, property and financial resources of the child (CSA Act section 117(2)(c)(i)).</p>
-<p>The phrase 'special circumstances of the case' is not defined in the CSA Act. The Family Court has held that 'it is intended to emphasise that the facts of the case must establish something which is special or out of the ordinary' ('<cite>Gyselman and Gyselman</cite> (1992) FLC 92-279').</p>
+<p>The phrase 'special circumstances of the case' is not defined in the CSA Act. The Family Court has held that 'it is intended to emphasise that the facts of the case must establish something which is special or out of the ordinary' (<cite>Gyselman and Gyselman</cite> (1992) FLC 92-279).</p>
 <p>Each case has to be considered in the light of the individual circumstances of the child and the parents. Substantial income and/or assets, whether or not directly under the control of the child, will be relevant when deciding whether the assessment is unfair.</p>
 <p>A parent can make an application to change the child support assessment if they consider that the financial resources of the child result in an unjust and inequitable level of child support under the child support assessment.</p>
 <p>The Registrar will consider the financial resources of the child in the context of the income and asset position of both parents. In most cases there will be some overlap between these considerations and that of consideration of what is 'just and equitable'.</p>
 <h2 id="minimalearnings">Minimal earnings</h2>
-<p>Minimal earnings are generally not regarded as a reason to change an assessment of child support ('<cite>Mee and Ferguson</cite> (1986) FLC 91-716').</p>
+<p>Minimal earnings are generally not regarded as a reason to change an assessment of child support (<cite>Mee and Ferguson</cite> (1986) FLC 91-716).</p>
 <p>The Registrar will not usually consider that the following types of income affect the financial responsibility of the parents:</p>
 <ul><li>income derived from casual work in holidays or after school hours,</li>
 <li>gifts of small amounts of money,</li>
 <li>pocket money.</li>
 </ul><p>The Registrar must disregard an income-tested pension, allowance or benefit (<a href="17">2.6.17</a>) received by the child (or by another person on behalf of the child) when considering that child's income, earning capacity, property and financial resources (CSA Act section 117(7)).</p>
 <h2 id="significantincome">Significant income</h2>
-<p>If a parent applies for a change of assessment because their child receives more than a minimal income, the Registrar will consider whether that income is significant to warrant a change to an assessment. This will depend upon the income of the child, the financial circumstances of the parents, the amount of child support payable under the assessment and the circumstances of the case. However, generally the Registrar will not be satisfied that a child's income is sufficient to warrant a change to the assessment unless that income is regular and exceeds the equivalent of the maximum rate of youth allowance (SS Guide <a href="../../../guide-social-security-law/5/1/1/20">5.1.1.20</a>) payable to a child under 18 years of age living at home plus the income free threshold applicable to students/Australian Apprentices (SS Guide <a href="../../../guide-social-security-law/4/2/8/50">4.2.8.50</a>, <a href="../../../guide-social-security-law/4/2/8/55">4.2.8.55</a>). This means, for example, that as at 1 January 2017, a child would generally need to earn or receive a gross income of at least $338.25 per week for the earnings to be considered so significant as to be capable of affecting the assessment.</p>
+<p>If a parent applies for a change of assessment because their child receives more than a minimal income, the Registrar will consider whether that income is significant to warrant a change to an assessment. This will depend upon the income of the child, the financial circumstances of the parents, the amount of child support payable under the assessment and the circumstances of the case. However, generally the Registrar will not be satisfied that a child's income is sufficient to warrant a change to the assessment unless that income is regular and exceeds the equivalent of the maximum rate of youth allowance (SS Guide <a href="../../../guide-social-security-law/5/1/1/20">5.1.1.20</a>) payable to a child under 18 years of age living at home plus the income free threshold applicable to students/Australian Apprentices (SS Guide <a href="../../../guide-social-security-law/4/2/8/50">4.2.8.50</a>, <a href="../../../guide-social-security-law/4/2/8/55">4.2.8.55</a>). This means, for example, that as at 1 January 2018, a child would generally need to earn or receive a gross income of at least $340.55 per week for the earnings to be considered so significant as to be capable of affecting the assessment.</p>
 <p>However, this is only a guide and in certain circumstances decision-makers may determine that the child's income is significant even if it is below this amount or is insignificant even though it is above this amount. Please note that the actual figures will change periodically in line with changes to payment rates for youth allowance. The Registrar will also consider the needs of the child including the costs incurred by the child, or the parents, in earning the income, e.g. transport and clothing costs.</p>
-<p>For example, where a child earns $338.25 per week but incurs high transport costs, and the payer has an adequate disposable income, it might not be considered fair to change the assessment.</p>
+<p>For example, where a child earns $340.55 per week but incurs high transport costs, and the payer has an adequate disposable income, it might not be considered fair to change the assessment.</p>
 <p>However, if the payer has a low income and the payee is in a comfortable financial position, then it might be considered fair to change the assessment.</p>
 <h2 id="justandequitable">'Just and equitable' &amp; 'otherwise proper', &amp; the kinds of decisions that can be made</h2>
 <p>If there is a reason to change the assessment, the Registrar must consider whether it would be just, equitable and otherwise proper to the child, the payer, and the payee to make a decision to change the assessment (CSA Act sections 117(4) to 117(9)).</p>
@@ -144,7 +144,7 @@ It also describes how an assessment creates a liability to pay child support and
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     8 May 2017  	</div>
+      Last reviewed:     20 March 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../contact-us">Contact us</a></li>
@@ -154,7 +154,7 @@ It also describes how an assessment creates a liability to pay child support and
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../../../../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../../../../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"kpSmIoU1fJQPwybLiigEX_gCdMi5BDdB9UvxmG2Gf2A","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/guide-social-security-law\/4\/3\/2\/31":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"qWHY1OZz3dWkmst9O0EtL0ruBuJpdSIxlRnbP05qRzs","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/guide-social-security-law\/4\/3\/2\/31":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children menu-mlid-513"><a href="../../../../child-support-guide">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-489"><a href="../../../../guide-social-security-law.1" class="active-trail">Guide to Social Security Law</a></li>
+<li class="leaf has-children active-trail menu-mlid-489"><a href="../../../../guide-social-security-law" class="active-trail">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,16 +49,16 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-KLUXK1QBBkEPIrx4oFH7qnV4wQYy8FeiR53FZJ7FkJg" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-twPYg-SzLQ62Cz0or-7TTW6DccS-NOQEV4NDYfkYvJo" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Guide to Social Security Law</h2>
-<p>Version 1.237 - Released 19 October 2017</p>
+<p>Version 1.245 - Released 1 June 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../../../../guide-social-security-law.1" title="">Using the Guide to Social Security Law</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../../../../guide-social-security-law" title="">Using the Guide to Social Security Law</a></li>
 <li class="collapsed menu-mlid-493"><a href="../../../updates">What&#039;s New</a></li>
 <li class="collapsed menu-mlid-2295"><a href="../../../1">1 Key Terms &amp; Principles</a></li>
 <li class="collapsed menu-mlid-2294"><a href="../../../2">2 Claim Verification</a></li>
@@ -104,7 +104,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7372"><a href="../../../act-references">Act Reference Index</a></li>
 <li class="last leaf menu-mlid-7168"><a href="../../../sitemap">Site Map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../../../index.html">Home</a> &raquo; <a href="../../../../guide-social-security-law.1">Guide to Social Security Law</a> &raquo; <a href="../../../4" class="active-trail">4 Income &amp; Assets</a> &raquo; <a href="../../3" class="active-trail">4.3 Ordinary Income</a> &raquo; <a href="../2" class="active-trail">4.3.2 Income Exempt from Assessment</a> &raquo; 4.3.2.31 Income Exempt from Assessment - Specifically Approved</div>
+	<div id="breadcrumb"><a href="../../../../index.html">Home</a> &raquo; <a href="../../../../guide-social-security-law">Guide to Social Security Law</a> &raquo; <a href="../../../4" class="active-trail">4 Income &amp; Assets</a> &raquo; <a href="../../3" class="active-trail">4.3 Ordinary Income</a> &raquo; <a href="../2" class="active-trail">4.3.2 Income Exempt from Assessment</a> &raquo; 4.3.2.31 Income Exempt from Assessment - Specifically Approved</div>
 <div id="utility">
 	
 <div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/guide-social-security-law/4/3/2/31"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
@@ -331,16 +331,30 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </tr><tr><td>01/05/2017</td>
 <td>Commonwealth Continuity of Support (CoS) Programme - Direct Funding Individual Support Packages</td>
 <td>Commonwealth Continuity of Support (CoS) Programme, administered by the Commonwealth Department of Health</td>
-</tr></tbody></table><p id="notea"><strong>Note A:</strong> This applies for income test purposes not for the compensation provisions. See <a href="../../13/1/25">4.13.1.25</a> Treatment of Specific Compensatory Type Payments.</p>
-<p id="noteb"><strong>Note B:</strong> Date of determination for Department of Families, Community Services and Indigenous Affairs (FaCSIA) and Department of Employment and Workplace Relations (DEWR) payments is 14/08/2007 and 19/09/2007 for Department of Education, Science and Training (DEST) payments.</p>
-<p id="notec"><strong>Note C:</strong> Date of determination for Department of Families, Housing, Community Services and Indigenous Affairs (FaHCSIA) is 18 November 2009 and 3 December 2009 for Department of Education, Employment and Workplace Relations (DEEWR) payments.</p>
-<p id="noted"><strong>Note D:</strong> Date of determination for FaHCSIA is 9 June 2011 and 10 June 2011 for DEEWR payments.</p>
-<p id="notee"><strong>Note E:</strong> Date of effect of determination for DEEWR is 9 January 2013 and for FaHCSIA is 31 January 2013 and for Department of Industry, Innovation, Climate Change, Science, Research and Tertiary Education (DIICCSRTE) is 3 April 2013.</p>
-<p id="notef"><strong>Note F:</strong> Date of effect of determination for FaHCSIA is 5 June 2013 and for DEEWR is 8 June 2013 and for DIICCSRTE is 25 June 2013.</p>
-<p id="noteg"><strong>Note G: </strong>Date of effect of determination for FaHCSIA is 15 May 2013 and for DIICCSRTE is 22 June 2013 and for DEEWR is 1 July 2013.</p>
-<p id="noteh"><strong>Note H:</strong> Date of effect of determination for FaHCSIA is 29 August 2013 and for DEEWR is 21 August 2013 and for DIICCSRTE is 23 August 2013.</p>
-<p id="notei"><strong>Note I:</strong> Date of effect of determination for FaHCSIA is 6 September 2013 and for DIICCSRTE is 7 September 2013 and for DEEWR is 10 September 2013.</p>
-<div class="reference">
+</tr><tr><td>14/09/2017</td>
+<td>Personal Care Support Scheme - Victorian Direct Payments Project (Federal Register of Legislation: F2017L01166)</td>
+<td>Victorian Department of Health and Human Services</td>
+</tr></tbody></table><table><thead><tr><th scope="col">Note</th>
+<th scope="col">Explanation</th>
+</tr></thead><tbody><tr><td id="notea">A</td>
+<td>This applies for income test purposes not for the compensation provisions. See <a href="../../13/1/25">4.13.1.25</a> Treatment of Specific Compensatory Type Payments.</td>
+</tr><tr><td id="noteb">B</td>
+<td>Date of determination for Department of Families, Community Services and Indigenous Affairs (FaCSIA) and Department of Employment and Workplace Relations (DEWR) payments is 14/08/2007 and 19/09/2007 for Department of Education, Science and Training (DEST) payments</td>
+</tr><tr><td id="notec">C</td>
+<td>Date of determination for Department of Families, Housing, Community Services and Indigenous Affairs (FaHCSIA) is 18 November 2009 and 3 December 2009 for Department of Education, Employment and Workplace Relations (DEEWR) payments.</td>
+</tr><tr><td id="noted">D</td>
+<td>Date of determination for FaHCSIA is 9 June 2011 and 10 June 2011 for DEEWR payments.</td>
+</tr><tr><td id="notee">E</td>
+<td>Date of effect of determination for DEEWR is 9 January 2013 and for FaHCSIA is 31 January 2013 and for Department of Industry, Innovation, Climate Change, Science, Research and Tertiary Education (DIICCSRTE) is 3 April 2013.</td>
+</tr><tr><td id="notef">F</td>
+<td>Date of effect of determination for FaHCSIA is 5 June 2013 and for DEEWR is 8 June 2013 and for DIICCSRTE is 25 June 2013.</td>
+</tr><tr><td id="noteg">G</td>
+<td>Date of effect of determination for FaHCSIA is 15 May 2013 and for DIICCSRTE is 22 June 2013 and for DEEWR is 1 July 2013.</td>
+</tr><tr><td id="noteh">H</td>
+<td>Date of effect of determination for FaHCSIA is 29 August 2013 and for DEEWR is 21 August 2013 and for DIICCSRTE is 23 August 2013.</td>
+</tr><tr><td id="notei">I</td>
+<td>Date of effect of determination for FaHCSIA is 6 September 2013 and for DIICCSRTE is 7 September 2013 and for DEEWR is 10 September 2013.</td>
+</tr></tbody></table><div class="reference">
 <p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 35A Personal Care Support, section 8(8) Excluded amounts-general, see (zi)</p>
 <p><a href="https://www.legislation.gov.au/Series/C2004A00580" title="Social Security (Administration) Act 1999">SS(Admin)Act</a> Part 3 Division 9 Date of effect of determinations</p>
 <p><strong>Policy reference:</strong> SS Guide <a href="../../../10/11/100">10.11.100</a> Austrian Glossary, see Austrian Personal Care Benefit</p>
@@ -447,7 +461,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     20 September 2017  	</div>
+      Last reviewed:     6 November 2017  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../../contact-us">Contact us</a></li>
@@ -457,7 +471,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"8UFW4iv4wLmdCatX7oU-NUxEEpeJt6glcpO_vN_izTE","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/118":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"dyi0evz9lMF_0twIddl7fX3_E0Lr9pVtlb39KGBX0UA","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/118":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children active-trail menu-mlid-513"><a href="../child-support-guide" class="active-trail">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../guide-social-security-law">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,10 +49,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-rGIXdiLdKn3BSzbiF2JFC3X4hXi66yvy3N0WoQc4An8" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-dZ7VBo9Oq4DNF5aLH5x9iPU5KjScR56uHeJ-3TZbz9g" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.27 - Released 20 September 2017</p>
+<p>Version 4.32 - Released 7 May 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
@@ -66,12 +66,13 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="collapsed menu-mlid-568"><a href="../child-support-guide/2/3" title="This chapter describes the start and end dates of child support periods and which financial year of income the Registrar will use when making an assessment for a child support period.">2.3 Child Support Periods</a></li>
 <li class="collapsed menu-mlid-575"><a href="../child-support-guide/2/4" title="This chapter describes the administrative formulas the Registrar uses to calculate a child support assessment. It explains how the Registrar uses income and care to calculate a child support assessment and how the parents&#039; combined incomes are used to calculate the costs of children. It also includes information about when the minimum annual rate of child support, or the fixed annual rate assessment, will apply.">2.4 Formula Assessment</a></li>
 <li class="collapsed menu-mlid-588"><a href="../child-support-guide/2/5" title="This chapter describes the applications and elections that may be made to amend a child support assessment.">2.5 Applications &amp; Elections to Amend an Assessment</a></li>
-<li class="collapsed menu-mlid-599"><a href="../child-support-guide/2/6" title="This chapter describes the issues that the Registrar has to consider when making a decision to change an assessment under CSA Act part 6A.">2.6 Change of Assessment in Special Circumstances</a></li>
+<li class="collapsed menu-mlid-599"><a href="../child-support-guide/2/6" title="This chapter describes the issues that the Registrar has to consider when making a decision to change an assessment under Child Support (Assessment) Act 1989 (CSA Act) part 6A.">2.6 Change of Assessment in Special Circumstances</a></li>
 <li class="expanded active-trail menu-mlid-618"><a href="../child-support-guide/2/7" title="This chapter describes how parents can make child support agreements. It describes the effect of a child support agreement upon a child support assessment." class="active-trail">2.7 Agreements</a><ul class="menu"><li class="first leaf menu-mlid-619"><a href="../child-support-guide/2/7/1">2.7.1 What Is a Child Support Agreement?</a></li>
 <li class="leaf menu-mlid-620"><a href="../child-support-guide/2/7/2">2.7.2 Application for Acceptance of a Child Support Agreement</a></li>
 <li class="leaf menu-mlid-621"><a href="../child-support-guide/2/7/3">2.7.3 Making a Decision on an Application</a></li>
 <li class="leaf active-trail active menu-mlid-622"><a href="../child-support-guide/2/7/4" class="active-trail active">2.7.4 Effect of a Child Support Agreement Once Accepted by the Registrar (Other than Lump Sum Payment Provisions)</a></li>
-<li class="last leaf menu-mlid-623"><a href="../child-support-guide/2/7/5">2.7.5 Changing or Terminating a Child Support Agreement</a></li>
+<li class="leaf menu-mlid-623"><a href="../child-support-guide/2/7/5">2.7.5 Changing or Terminating a Child Support Agreement</a></li>
+<li class="last leaf menu-mlid-21261"><a href="../child-support-guide/2/7/6">2.7.6 Number not currently in use</a></li>
 </ul></li>
 <li class="collapsed menu-mlid-624"><a href="../child-support-guide/2/8" title="This chapter describes when a court can make orders that affect a child support assessment and how the Registrar interprets court orders which will affect an assessment.">2.8 Court Variation to Assessments</a></li>
 <li class="collapsed menu-mlid-627"><a href="../child-support-guide/2/9" title="This chapter describes the procedural rules for making assessments and notes the information required in a notice of assessment. It also describes when the Registrar will amend an assessment.
@@ -100,7 +101,7 @@ It also describes how an assessment creates a liability to pay child support and
 <p><a href="https://www.legislation.gov.au/Series/C2004A03872" title="Child Support (Assessment) Act 1989">CSA Act</a> section 34B, section 93, section 94, section 95, Part 7A</p>
 <p><a href="https://www.legislation.gov.au/Series/C2006A00146">Child Support Legislation Amendment (Reform of the Child Support Scheme, New Formula and Other Measures) Act 2006</a> Schedule 5 item 73</p>
 <p><a href="https://www.legislation.gov.au/Details/C2008A00063">Families, Housing, Community Services and Indigenous Affairs and Other Legislation Amendment (2008 Budget and Other Measures) Act 2008</a> Schedule 6 item 16</p>
-<p><a href="https://www.legislation.gov.au/Series/F2007L04738">Child Support Reform (New Formula and Other Measures) Regulations 2007</a> Part 5</p>
+<p><a href="https://www.legislation.gov.au/Series/F2018L00308">Child Support Reform (New Formula and Other Measures) Regulations 2018</a> Part 4</p>
 <p><a href="https://www.legislation.gov.au/Details/C2008A00143">Families, Housing, Community Services and Indigenous Affairs and Other Legislation Amendment (Further 2008 Budget and Other Measures) Act 2008</a> Schedule 3 Part 3</p>
 </div>
 <h2>On this page</h2>
@@ -155,11 +156,11 @@ It also describes how an assessment creates a liability to pay child support and
 <h3>Multiple provisional notional assessments</h3>
 <p>In some circumstances where both parents have requested a new provisional notional assessment and then sought to vary those assessments, more than one provisional notional assessment can exist at the same time. All variations to all provisional notional assessments must be finalised before a provisional notional assessment can become a notional assessment.</p>
 <div class="example">
-<p><strong>Example:</strong> C and D have a limited child support agreement. C requests a new provisional notional assessment and seeks a variation to reflect their new income by applying for a change of assessment.</p>
-<p>While the change of assessment application is being considered, D notifies a change in care of the children.</p>
-<p>More than 14 days have passed since D received notice of the new provisional notional assessment so they are unable to seek a variation to this assessment. D therefore requests a new provisional notional assessment, and then seeks a variation.</p>
+<p><strong>Example:</strong> George and Gladys have a limited child support agreement. George requests a new provisional notional assessment and seeks a variation to reflect their new income by applying for a change of assessment.</p>
+<p>While the change of assessment application is being considered, Gladys notifies a change in care of the children.</p>
+<p>More than 14 days have passed since Gladys received notice of the new provisional notional assessment so they are unable to seek a variation to this assessment. Gladys therefore requests a new provisional notional assessment, and then seeks a variation.</p>
 <p>This second provisional notional assessment is varied to reflect the change in care. However, it is unable to be converted to a notional assessment while the change of assessment decision relating to the first provisional notional assessment is pending.</p>
-<p>When the change of assessment decision is made, a new notional assessment is made that reflects both the change of assessment decision relating to C's income and the change in care.</p>
+<p>When the change of assessment decision is made, a new notional assessment is made that reflects both the change of assessment decision relating to George's income and the change in care.</p>
 </div>
 <h2 id="Notional">Notional assessments</h2>
 <p>A provisional notional assessment becomes a notional assessment:</p>
@@ -175,24 +176,24 @@ It also describes how an assessment creates a liability to pay child support and
 <li>where the child support payable under a child support agreement (binding or limited) changes by more than 15% (section 146F(c)), or</li>
 <li>for limited agreements, on request of either party (section 146F(b)).</li>
 </ul><div class="example">
-<p><strong>Example:</strong> M and F have an agreement for 2 children, A and B who are both in F's 100% care. Under the agreement, M is required to pay F an annual rate of $4000 for each child. B leaves F's care and is now living with M. The rate payable under the agreement by M reduces from $8000 for A and B to $4000 for A only. This represents more than a 15% change in the annual rate and a new provisional notional assessment is issued.</p>
+<p><strong>Example:</strong> Emanuel and Karla have an agreement for 2 children, Ivor and Natalie who are both in Karla's 100% care. Under the agreement, Emanuel is required to pay Karla an annual rate of $4000 for each child. Natalie leaves Karla's care and is now living with Emanuel. The rate payable under the agreement by Emanuel reduces from $8000 for Ivor and Natalie to $4000 for Ivor only. This represents more than a 15% change in the annual rate and a new provisional notional assessment is issued.</p>
 </div>
 <p>See <a href="../child-support-guide/2/7/5">2.7.5</a> for details about when an agreement may be terminated, including when a limited child support agreement may be terminated if a new notional assessment differs by more than 15% from the previous notional assessment in circumstances not contemplated by the agreement.</p>
 <h2 id="TransitionalArr">Transitional arrangements for child support agreements</h2>
-<p>Prior to 1 July 2008, the Registrar reviewed all child support agreements that would be in force on that day (Item 73, Schedule 5, Reform of the Child Support Scheme, New Formula and Other Measures Act) (the Reforms Act).</p>
-<p>The Registrar considered each agreement to determine whether the agreement contained provisions that would continue after 1 July 2008. Regulation 21 of the Child Support Reforms Regulations specifies which provisions of an agreement would continue to operate after 1 July 2008.</p>
-<p>Where the continuity of the agreement provisions are not affected by the changed legislation, then it became a special type of binding child support agreement known as a transitional child support agreement (item 74(1)(b)(i) of the Reforms Act).</p>
+<p>Prior to 1 July 2008, the Registrar reviewed all child support agreements that would be in force on that day (Child Support Legislation Amendment (Reform of the Child Support Scheme, New Formula and Other Measures) Act 2006 (the Reforms Act) Schedule 5 item 73).</p>
+<p>The Registrar considered each agreement to determine whether the agreement contained provisions that would continue after 1 July 2008. Regulation 11 of the Child Support Reform (New Formula and Other Measures) Regulations 2018 specifies which provisions of an agreement would continue to operate after 1 July 2008.</p>
+<p>Where the continuity of the agreement provisions are not affected by the changed legislation, then it became a special type of binding child support agreement known as a transitional child support agreement (the Reforms Act Schedule 5 item 74(1)(b)(i)).</p>
 <p>The Registrar will not issue notional assessments in relation to transitional child support agreements. Where the assessment is determined under a transitional agreement, a parent's entitlement to FTB Part A will be assessed on the basis of the agreed amount of child support pursuant to the transitional agreement.</p>
-<p>A transitional agreement can be ended by a written agreement entered into without legal advice (item 75(6) of the Reforms Act).</p>
-<p>Where a child support agreement contained provisions that do not operate after 1 July 2008, e.g. based on components of the previous child support formula that no longer exist, it was terminated by the Registrar as at 30 June 2008 (item 74(1)(b)(ii) of the Reforms Act). An administrative assessment based on the child support formula was made for the period after 1 July 2008, where an administrative assessment was in place before the child support agreement was accepted. If no administrative assessment was in place before the child support agreement was accepted then the Registrar's decision to terminate the child support agreement has the effect of a terminating event (item 74(2) of the Reforms Act).</p>
-<p>The Registrar notified the parties in writing of the decision to terminate or make binding each such agreement (item 74(3) of the Reforms Act). The parties were also advised of their objection and appeal rights (items 74(4) to (6) of the Reforms Act).</p>
+<p>A transitional agreement can be ended by a written agreement entered into without legal advice (the Reforms Act Schedule 5 item 75(6)).</p>
+<p>Where a child support agreement contained provisions that do not operate after 1 July 2008, e.g. based on components of the previous child support formula that no longer exist, it was terminated by the Registrar as at 30 June 2008 (the Reforms Act Schedule 5 item 74(1)(b)(ii)). An administrative assessment based on the child support formula was made for the period after 1 July 2008, where an administrative assessment was in place before the child support agreement was accepted. If no administrative assessment was in place before the child support agreement was accepted then the Registrar's decision to terminate the child support agreement has the effect of a terminating event (the Reforms Act Schedule 5 item 74(2)).</p>
+<p>The Registrar notified the parties in writing of the decision to terminate or make binding each such agreement (the Reforms Act Schedule 5 item 74(3)). The parties were also advised of their objection and appeal rights (the Reforms Act Schedule 5 items 74(4) to (6)).</p>
 <h2 id="WAExNuptual">WA ex-nuptial cases</h2>
 <p>The information on this page applies to WA ex-nuptial children.</p>
 <p>See <a href="../child-support-guide/1/4/3">1.4.3</a> for details of the date from which various provisions had effect for WA ex-nuptial cases.</p>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     4 January 2016  	</div>
+      Last reviewed:     3 April 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../contact-us">Contact us</a></li>
@@ -202,7 +203,7 @@ It also describes how an assessment creates a liability to pay child support and
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

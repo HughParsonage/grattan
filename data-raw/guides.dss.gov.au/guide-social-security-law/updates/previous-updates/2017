@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../../../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"B2omWc_7yN7-rHQEYWa4GOK2C-7KIGUNpgm8ysk3VC8","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/guide-social-security-law\/updates\/previous-updates\/2017":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"cDNRGX2hzEOh_L0HnLn4EzRbT0-m_ilih4kLi69S6B4","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/guide-social-security-law\/updates\/previous-updates\/2017":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children menu-mlid-513"><a href="../../../child-support-guide">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-489"><a href="../../../guide-social-security-law.1" class="active-trail">Guide to Social Security Law</a></li>
+<li class="leaf has-children active-trail menu-mlid-489"><a href="../../../guide-social-security-law" class="active-trail">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,17 +49,18 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-hDPbun5erNBXR-CFeF9FsRZdhn_ovPtD23DTJA4r_1g" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-1Zyomeermce-pti44cYehdBPzbO6K5sW2OzFhD75TvI" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Guide to Social Security Law</h2>
-<p>Version 1.237 - Released 19 October 2017</p>
+<p>Version 1.245 - Released 1 June 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../../../guide-social-security-law.1" title="">Using the Guide to Social Security Law</a></li>
-<li class="expanded active-trail menu-mlid-493"><a href="../../updates" class="active-trail">What&#039;s New</a><ul class="menu"><li class="first last expanded active-trail menu-mlid-7171"><a href="../previous-updates" class="active-trail">Previous Guide to Social Security Law Updates</a><ul class="menu"><li class="first leaf active-trail active menu-mlid-17191"><a href="2017" class="active-trail active">2017</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../../../guide-social-security-law" title="">Using the Guide to Social Security Law</a></li>
+<li class="expanded active-trail menu-mlid-493"><a href="../../updates" class="active-trail">What&#039;s New</a><ul class="menu"><li class="first last expanded active-trail menu-mlid-7171"><a href="../previous-updates" class="active-trail">Previous Guide to Social Security Law Updates</a><ul class="menu"><li class="first leaf menu-mlid-18791"><a href="2018">2018</a></li>
+<li class="leaf active-trail active menu-mlid-17191"><a href="2017" class="active-trail active">2017</a></li>
 <li class="leaf menu-mlid-14156"><a href="2016">2016</a></li>
 <li class="leaf menu-mlid-9116"><a href="2015">2015</a></li>
 <li class="leaf menu-mlid-7458"><a href="2014">2014</a></li>
@@ -102,14 +103,17 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7372"><a href="../../act-references">Act Reference Index</a></li>
 <li class="last leaf menu-mlid-7168"><a href="../../sitemap">Site Map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../guide-social-security-law.1">Guide to Social Security Law</a> &raquo; <a href="../../updates" class="active-trail">What&#039;s New</a> &raquo; <a href="../previous-updates" class="active-trail">Previous Guide to Social Security Law Updates</a> &raquo; Guide to Social Security Law Updates - 2017</div>
+	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../guide-social-security-law">Guide to Social Security Law</a> &raquo; <a href="../../updates" class="active-trail">What&#039;s New</a> &raquo; <a href="../previous-updates" class="active-trail">Previous Guide to Social Security Law Updates</a> &raquo; Guide to Social Security Law Updates - 2017</div>
 <div id="utility">
 	
 <div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/guide-social-security-law/updates/previous-updates/2017"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
 <div id="content" role="main">
 <article id="node-21231">
 <h1 >Guide to Social Security Law Updates - 2017</h1>
-<ul><li><a href="2017#20sep2017">20 September 2017 (v1.236)</a></li>
+<ul><li><a href="2017#13dec2017">13 December 2017 (v1.239)</a></li>
+<li><a href="2017#6nov2017">6 November 2017 (v1.238)</a></li>
+<li><a href="2017#19oct">19 October 2017 (v1.237)</a></li>
+<li><a href="2017#20sep2017">20 September 2017 (v1.236)</a></li>
 <li><a href="2017#14aug2017">14 August 2017 (v1.235)</a></li>
 <li><a href="2017#3july2017">3 July 2017 (v1.234)</a></li>
 <li><a href="2017#31may2017">31 May 2017 (v1.233)</a></li>
@@ -118,7 +122,100 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li><a href="2017#20mar2017">20 March 2017 (v1.230)</a></li>
 <li><a href="2017#6feb2017">6 February 2017 (v1.229)</a></li>
 <li><a href="2017#3jan2017">3 January 2017 (v1.228)</a></li>
-</ul><h2 id="20sep2017">20 September 2017 (v1.236)</h2>
+</ul><h2 id="13dec2017">13 December 2017 (v1.239)</h2>
+<table summary="This table lists the pages changed for the 13 December 2017 release with details of the change."><thead><tr><th scope="col">Page</th>
+<th scope="col">Title</th>
+<th scope="col">Details</th>
+</tr></thead><tbody><tr><td>1.1.M.120</td>
+<td>Member of a couple</td>
+<td>Updated to reflect changes to the <cite>Marriage Act 1961</cite>.</td>
+</tr><tr><td>2.2.2</td>
+<td>Verifying Personal Details</td>
+<td>Updated policy.</td>
+</tr><tr><td>2.2.5.10</td>
+<td>Determining a De Facto Relationship</td>
+<td>Updated to reflect changes to the Marriage Act 1961.</td>
+</tr><tr><td>2.2.5.11</td>
+<td>Member of a Couple - Age of Consent</td>
+<td>Updated to reflect legislative change.</td>
+</tr><tr><td>2.2.5.13</td>
+<td>Registered Relationships</td>
+<td>Updated to reflect legislative change.</td>
+</tr><tr><td>2.2.5.14</td>
+<td>Overseas Same-Sex Marriage (deleted)</td>
+<td>Removed information.</td>
+</tr><tr><td>2.2.5.15</td>
+<td>Multiple Relationships</td>
+<td>Updated to reflect legislative change.</td>
+</tr><tr><td>2.2.5.20</td>
+<td>Determining Living Separately &amp; Apart</td>
+<td>Updated to reflect legislative change.</td>
+</tr><tr><td>2.2.5.30</td>
+<td>Determining Separation Under One Roof</td>
+<td>Updated to reflect legislative change.</td>
+</tr><tr><td>2.2.5.40</td>
+<td>Transgender (deleted)</td>
+<td>Removed information.</td>
+</tr><tr><td>2.2.5.50</td>
+<td>Discretion to Treat a Person as Not Being a Member of a Couple for a Special Reason</td>
+<td>Updated to reflect legislative change.</td>
+</tr><tr><td>2.2.5.60</td>
+<td>Determining an Illness Separated Couple</td>
+<td>Updated to reflect legislative change.</td>
+</tr><tr><td>2.2.5.70</td>
+<td>Determining a Respite Care Couple</td>
+<td>Updated to reflect legislative change.</td>
+</tr><tr><td>2.2.5.80</td>
+<td>Determining Treatment of Claimant/Recipient with Partner in Gaol - General Provisions</td>
+<td>Updated to reflect legislative change.</td>
+</tr><tr><td>3.4.9.10</td>
+<td>Qualification for BVA</td>
+<td>Updated policy.</td>
+</tr><tr><td>6.6</td>
+<td>Conducting a Member of a Couple Review</td>
+<td>Updated to reflect legislative change.</td>
+</tr></tbody></table><h2 id="6nov2017">6 November 2017 (v1.238)</h2>
+<table summary="This table lists the pages changed for the 6 November 2017 release with details of the change."><thead><tr><th scope="col">Page</th>
+<th scope="col">Title</th>
+<th scope="col">Details</th>
+</tr></thead><tbody><tr><td>1.1.A.110</td>
+<td>Aged care (residential)</td>
+<td>​Clarified definition.</td>
+</tr><tr><td>3.3.1.70</td>
+<td>Continuation, Variation or Termination of PA</td>
+<td>Clarified policy.</td>
+</tr><tr><td>4.3.2.31</td>
+<td>Income Exempt from Assessment - Specifically Approved</td>
+<td>Updated list of group personal care support schemes approved by ministers.</td>
+</tr><tr><td>4.3.2.35</td>
+<td>Income Exempt from Assessment - s8(11) Exempt Lump Sums</td>
+<td>Updated list of lump sums exempted under section 8(11).</td>
+</tr><tr><td>4.6.4.50</td>
+<td>Granny Flats - Features, Rights &amp; Interests</td>
+<td>Clarified policy.</td>
+</tr><tr><td>4.6.4.70</td>
+<td>Granny Flats - Additional Features</td>
+<td>Clarified deprivation rules.</td>
+</tr><tr><td>4.6.7.50</td>
+<td>Unrealisable Assets - Unable or Unreasonable to Sell or Borrow Against</td>
+<td>Clarified policy.</td>
+</tr><tr><td>4.9.2.20</td>
+<td>Extension of Asset Test Exemption to pre-20/9/98 Defined Benefit Income Streams</td>
+<td>Updated Act reference.</td>
+</tr></tbody></table><h2 id="19oct">19 October 2017 (v1.237)</h2>
+<table summary="This table lists the pages changed for the 19 October 2017 release with details of the change."><thead><tr><th scope="col">Page</th>
+<th scope="col">Title</th>
+<th scope="col">Details</th>
+</tr></thead><tbody><tr><td>2.2.3</td>
+<td>Verifying Financial Information</td>
+<td>Updated verifying financial circumstances.</td>
+</tr><tr><td>3.7.2.80</td>
+<td>SpB for Australian Citizen Children &amp; Australian Permanent Resident Children in the Custody of a Non-permanent Resident</td>
+<td>Clarified application of residency rules.</td>
+</tr><tr><td>6.3.9</td>
+<td>Employment Income Confirmation</td>
+<td>New page.</td>
+</tr></tbody></table><h2 id="20sep2017">20 September 2017 (v1.236)</h2>
 <table summary="This table lists the pages changed for the 20 September 2017 release with details of the change."><thead><tr><th scope="col">Page</th>
 <th scope="col">Title</th>
 <th scope="col">Details</th>
@@ -195,7 +292,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <td>Energy Assistance Payment (EAP) - Qualification &amp; Payability</td>
 <td>New page.</td>
 </tr><tr><td>4.3.2.31</td>
-<td>Income Exempt from Assessment – Specifically Approved</td>
+<td>Income Exempt from Assessment - Specifically Approved</td>
 <td>Added National Injury Insurance Scheme Queensland to table of group personal care support schemes approved by ministers.</td>
 </tr><tr><td>4.3.2.35</td>
 <td>Income Exempt from Assessment - s8(11) Exempt Lump Sums</td>
@@ -204,10 +301,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <td>Overseas War Pensions</td>
 <td>Updated references.</td>
 </tr><tr><td>4.3.6.30</td>
-<td>Holocaust Restitution Payments – All Countries</td>
+<td>Holocaust Restitution Payments - All Countries</td>
 <td>Added information about compensation payments to victims of National Socialist (Nazi) persecution from countries other than Germany or Austria.</td>
 </tr><tr><td>4.3.6.31</td>
-<td>Holocaust Restitution Payments – Other Countries (deleted - see 4.3.6.30)</td>
+<td>Holocaust Restitution Payments - Other Countries (deleted - see 4.3.6.30)</td>
 <td>Removed information.</td>
 </tr><tr><td>4.6.7.130</td>
 <td>Rate Calculation Under the Hardship Provisions</td>
@@ -1499,7 +1596,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>

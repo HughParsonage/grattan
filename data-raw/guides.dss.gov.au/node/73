@@ -10,9 +10,9 @@
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@oxjbm3" media="all" />
-<script type="text/javascript" src="../sites/default/files/js/js_tm1gahPj5RurExr4Zj4GdGvvL7W4-u6_XRVeEsXyp3Q.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_NpX2cwCeepkWZZ194B6-ViyVBHleaYLOx5R9EWBOMRU.js"></script>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
 <script type="text/javascript" src="../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
@@ -22,7 +22,7 @@
 <script type="text/javascript" src="../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"D0WOyOqldbOgdXNAobcH1Ixq--u6MUWY0IUbgSBBDKw","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/73":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"o5K5aJLq1sknh4VV9uq6_6B3O18zpPTpwdrVQhBgKz4","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/73":true}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -39,7 +39,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf menu-mlid-7597"><a href="../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
 <li class="leaf has-children active-trail menu-mlid-513"><a href="../child-support-guide" class="active-trail">Child Support Guide</a></li>
 <li class="leaf has-children menu-mlid-491"><a href="../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../guide-social-security-law.1">Guide to Social Security Law</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../guide-social-security-law">Guide to Social Security Law</a></li>
 <li class="last leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
 </ul></div></nav>
 <header role="banner">
@@ -49,10 +49,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
  <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-Y3vobMoA0wRYFtSJCxcTDdvNUYOl8lPPrXpESEEc5dg" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-LhDXQAlm_fZ3Uti2lDURxvrZmVitsdO0EKNOapedSYs" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.27 - Released 20 September 2017</p>
+<p>Version 4.32 - Released 7 May 2018</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
@@ -78,7 +78,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="last leaf menu-mlid-587"><a href="../child-support-guide/2/4/12">2.4.12 The Minimum Annual Rate of Child Support</a></li>
 </ul></li>
 <li class="collapsed menu-mlid-588"><a href="../child-support-guide/2/5" title="This chapter describes the applications and elections that may be made to amend a child support assessment.">2.5 Applications &amp; Elections to Amend an Assessment</a></li>
-<li class="collapsed menu-mlid-599"><a href="../child-support-guide/2/6" title="This chapter describes the issues that the Registrar has to consider when making a decision to change an assessment under CSA Act part 6A.">2.6 Change of Assessment in Special Circumstances</a></li>
+<li class="collapsed menu-mlid-599"><a href="../child-support-guide/2/6" title="This chapter describes the issues that the Registrar has to consider when making a decision to change an assessment under Child Support (Assessment) Act 1989 (CSA Act) part 6A.">2.6 Change of Assessment in Special Circumstances</a></li>
 <li class="collapsed menu-mlid-618"><a href="../child-support-guide/2/7" title="This chapter describes how parents can make child support agreements. It describes the effect of a child support agreement upon a child support assessment.">2.7 Agreements</a></li>
 <li class="collapsed menu-mlid-624"><a href="../child-support-guide/2/8" title="This chapter describes when a court can make orders that affect a child support assessment and how the Registrar interprets court orders which will affect an assessment.">2.8 Court Variation to Assessments</a></li>
 <li class="collapsed menu-mlid-627"><a href="../child-support-guide/2/9" title="This chapter describes the procedural rules for making assessments and notes the information required in a notice of assessment. It also describes when the Registrar will amend an assessment.
@@ -113,6 +113,7 @@ It also describes how an assessment creates a liability to pay child support and
 <li><a href="73#csinflationfactor">Child support inflation factor</a></li>
 <li><a href="73#ati">ATI indexation factor</a></li>
 <li><a href="73#coststable">Costs of the Children Table</a></li>
+<li><a href="73#costs2018">Costs of the Children Table 2018</a></li>
 <li><a href="73#costs2017">Costs of the Children Table 2017</a></li>
 <li><a href="73#costs2016">Costs of the Children Table 2016</a></li>
 <li><a href="73#costs2015">Costs of the Children Table 2015</a></li>
@@ -136,6 +137,7 @@ It also describes how an assessment creates a liability to pay child support and
 <th>2015</th>
 <th>2016</th>
 <th>2017</th>
+<th>2018</th>
 </tr></thead><tbody><tr><td>Annualised MTAWE figure</td>
 <td>$54,756</td>
 <td>$56,425</td>
@@ -147,6 +149,7 @@ It also describes how an assessment creates a liability to pay child support and
 <td>$70,829</td>
 <td>$71,256</td>
 <td>$72,462</td>
+<td>$73,606</td>
 </tr><tr><td>Self-support amount (1/3 MTAWE)</td>
 <td>$18,252</td>
 <td>$18,808</td>
@@ -158,6 +161,7 @@ It also describes how an assessment creates a liability to pay child support and
 <td>$23,610</td>
 <td>$23,752</td>
 <td>$24,154</td>
+<td>$24,535</td>
 </tr><tr><td>Default income (2/3 MTAWE)</td>
 <td>$36,504</td>
 <td>$37,617</td>
@@ -169,6 +173,7 @@ It also describes how an assessment creates a liability to pay child support and
 <td>$47,219</td>
 <td>$47,504</td>
 <td>$48,308</td>
+<td>$49,071</td>
 </tr><tr><td>Fixed annual rate of child support</td>
 <td>$1,122</td>
 <td>$1,178</td>
@@ -180,6 +185,7 @@ It also describes how an assessment creates a liability to pay child support and
 <td>$1,352</td>
 <td>$1,373</td>
 <td>$1,390</td>
+<td>$1,416</td>
 </tr><tr><td>Parenting payment single, maximum basic amount (PPS)</td>
 <td>$13,980</td>
 <td>$14,615</td>
@@ -191,6 +197,7 @@ It also describes how an assessment creates a liability to pay child support and
 <td>$18,728</td>
 <td>$19,011</td>
 <td>$19,201</td>
+<td>$19,568</td>
 </tr><tr><td>Minimum annual rate of child support</td>
 <td>$339</td>
 <td>$356</td>
@@ -202,6 +209,7 @@ It also describes how an assessment creates a liability to pay child support and
 <td>$408</td>
 <td>$414</td>
 <td>$420</td>
+<td>$427</td>
 </tr><tr><td>Child support inflation factor</td>
 <td>5.0%</td>
 <td>3.3%</td>
@@ -213,6 +221,7 @@ It also describes how an assessment creates a liability to pay child support and
 <td>1.8%</td>
 <td>1.3%</td>
 <td>2.1%</td>
+<td>1.6%</td>
 </tr></tbody></table><p><strong>Note:</strong> Before the end of each calendar year the following amounts must be published in the Australian Government Gazette for all child support periods starting in the following calendar year:</p>
 <ul><li>the minimum annual rate of child support</li>
 <li>the fixed annual rate of child support</li>
@@ -246,8 +255,8 @@ It also describes how an assessment creates a liability to pay child support and
 <p>The <a href="73#ati">ATI indexation factor</a> is now used when required to determine incomes to be used in assessments for child support periods commencing after 1 July 2011.</p>
 <p>Some child support agreements or court orders specify that the child support inflation factor be used as the indexation value for that agreement or order. Due to a change to the publication frequency of ABS Average Weekly Earnings Catalogue No 6302.0, from 2013 the child support inflation factor will refer to the relevant June quarter, not the September quarter, for child support agreement and court order purposes.</p>
 <div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A03872" title="Child Support (Assessment) Act 1989">CSA Act</a> section 58(3A) Determination by the Registrar of a parent's adjusted taxable income</p>
-<p><a href="https://www.legislation.gov.au/Series/F1996B00398" title="Child Support (Assessment) Regulations 1989">CSA Regs</a> regulation 7A Factor for making a determination</p>
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A03872" title="Child Support (Assessment) Act 1989">CSA Act</a> section 58(3A) Determination by the Registrar of a parent's adjusted taxable income (as in force immediately before 1 July 2011)</p>
+<p><a href="https://www.legislation.gov.au/Series/F1996B00398">Child Support (Assessment) Regulations 1989</a> regulation 7A Factor for making a determination</p>
 <p><strong>Policy reference:</strong> CS Guide <a href="../child-support-guide/2/4/4">2.4.4</a> Child Support Income</p>
 </div>
 <h2 id="ati">ATI indexation factor</h2>
@@ -369,6 +378,7 @@ It also describes how an assessment creates a liability to pay child support and
 <td> </td>
 <td> </td>
 </tr></tbody></table><div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A03872" title="Child Support (Assessment) Act 1989">CSA Act</a> section 58 Determination by the Registrar of a parent's adjusted taxable income</p>
 <p><strong>Policy reference:</strong> CS Guide <a href="../child-support-guide/2/4/4">2.4.4</a> Child Support Income</p>
 </div>
 <h2 id="coststable">Costs of the Children Table</h2>
@@ -376,6 +386,85 @@ It also describes how an assessment creates a liability to pay child support and
 <div class="reference">
 <p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A03872" title="Child Support (Assessment) Act 1989">CSA Act</a> section 155 Publication of figures, Schedule 1 The Costs of the Children Table</p>
 <p><strong>Policy reference:</strong> CS Guide <a href="../child-support-guide/2/4/4">2.4.4</a> Child Support Income, <a href="../child-support-guide/2/4/6">2.4.6</a> The Costs of the Child</p>
+</div>
+<h2 id="costs2018">Costs of the Children Table 2018</h2>
+<table><thead><tr><th colspan="7">Parents' combined child support income (<a href="../child-support-guide/2/4/4">2.4.4</a>)</th>
+</tr><tr><th>Fraction of MTAWE</th>
+<th>0.5</th>
+<th>1</th>
+<th>1.5</th>
+<th>2</th>
+<th>2.5</th>
+<th>Costs of children do not increase above this cap</th>
+</tr></thead><tbody><tr><td>No. of children</td>
+<td>$0 to $36,803</td>
+<td>$36,804 to $73,606</td>
+<td>$73,607 to $110,409</td>
+<td>$110,410 to $147,212</td>
+<td>$147,213 to $184,015</td>
+<td>Income over $184,015</td>
+</tr><tr><td colspan="7">Costs of the children (to be apportioned between parents)</td>
+</tr><tr><th colspan="7">Children aged 0-12 years</th>
+</tr><tr><td>1 child</td>
+<td>17c for each $1</td>
+<td>$6,257 plus 15c for each $1 over $36,803</td>
+<td>$11,777 plus 12c for each $1 over $73,606</td>
+<td>$16,193 plus 10c for each $1 over $110,409</td>
+<td>$19,873 plus 7c for each $1 over $147,212</td>
+<td>$22,449</td>
+</tr><tr><td>2 children</td>
+<td>24c for each $1</td>
+<td>$8,833 plus 23c for each $1 over $36,803</td>
+<td>$17,298 plus 20c for each $1 over $73,606</td>
+<td>$24,659 plus 18c for each $1 over $110,409</td>
+<td>$31,284 plus 10c for each $1 over $147,212</td>
+<td>$34,964</td>
+</tr><tr><td>3 + children</td>
+<td>27c for each $1</td>
+<td>$9,937 plus 26c for each $1 over $36,803</td>
+<td>$19,506 plus 25c for each $1 over $73,606</td>
+<td>$28,707 plus 24c for each $1 over $110,409</td>
+<td>$37,540 plus 18c for each $1 over $147,212</td>
+<td>$44,165</td>
+</tr><tr><th colspan="7">Children aged 13 + years</th>
+</tr><tr><td>1 child</td>
+<td>23c for each $1</td>
+<td>$8,465 plus 22c for each $1 over $36,803</td>
+<td>$16,562 plus 12c for each $1 over $73,606</td>
+<td>$20,978 plus 10c for each $1 over $110,409</td>
+<td>$24,658 plus 9c for each $1 over $147,212</td>
+<td>$27,970</td>
+</tr><tr><td>2 children</td>
+<td>29c for each $1</td>
+<td>$10,673 plus 28c for each $1 over $36,803</td>
+<td>$20,978 plus 25c for each $1 over $73,606</td>
+<td>$30,179 plus 20c for each $1 over $110,409</td>
+<td>$37,540 plus 13c for each $1 over $147,212</td>
+<td>$42,324</td>
+</tr><tr><td>3 + children</td>
+<td>32c for each $1</td>
+<td>$11,777 plus 31c for each $1 over $36,803</td>
+<td>$23,186 plus 30c for each $1 over $73,606</td>
+<td>$34,227 plus 29c for each $1 over $110,409</td>
+<td>$44,900 plus 20c for each $1 over $147,212</td>
+<td>$52,261</td>
+</tr><tr><th colspan="7">Children of mixed age</th>
+</tr><tr><td>2 children</td>
+<td>26.5c for each $1</td>
+<td>$9,753 plus 25.5c for each $1 over $36,803</td>
+<td>$19,138 plus 22.5c for each $1 over $73,606</td>
+<td>$27,419 plus 19c for each $1 over $110,409</td>
+<td>$34,412 plus 11.5c for each $1 over $147,212</td>
+<td>$38,644</td>
+</tr><tr><td>3 + children</td>
+<td>29.5c for each $1</td>
+<td>$10,857 plus 28.5c for each $1 over $36,803</td>
+<td>$21,346 plus 27.5c for each $1 over $73,606</td>
+<td>$31,467 plus 26.5c for each $1 over $110,409</td>
+<td>$41,220 plus 19c for each $1 over $147,212</td>
+<td>$48,213</td>
+</tr></tbody></table><div class="reference">
+<p><strong>Policy reference:</strong> CS Guide <a href="../child-support-guide/2/4/4">2.4.4</a> Child Support Income</p>
 </div>
 <h2 id="costs2017">Costs of the Children Table 2017</h2>
 <table><thead><tr><th colspan="7">Parents' combined child support income (<a href="../child-support-guide/2/4/4">2.4.4</a>)</th>
@@ -1188,7 +1277,7 @@ It also describes how an assessment creates a liability to pay child support and
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     20 September 2017  	</div>
+      Last reviewed:     3 April 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../contact-us">Contact us</a></li>
@@ -1198,7 +1287,7 @@ It also describes how an assessment creates a liability to pay child support and
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
 <script type="text/javascript" src="../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;oxjbm3"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
 <script type="text/javascript" src="../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
 </body>
 </html>
