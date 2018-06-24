@@ -1,18 +1,26 @@
 language: r
+r_check_args:
+  - '--no-multiarch'
+  - '--ignore-vignettes'
 r:
-- devel
-- release
+  - oldrel
+  - release
+  - devel
+
 cache: packages
 warnings_are_errors: true
 
-r_packages: 
-- hutils
-
 r_github_packages:
-  - hughparsonage/taxstats
   - hughparsonage/formalCoverage
+  - hughparsonage/hutils
   - jimhester/covr
 
 after_success:
-  - Rscript -e 'formalCoverage::formalPackageCoverage()'
-  - if (["$TRAVIS_R_VERSION_STRING" == "release"]); then Rscript -e 'covr::codecov(line_exclusions = "R/zzz.R")'
+  - Rscript -e 'Sys.time()'
+  - if [ $TRAVIS_R_VERSION_STRING == "release" ]; then Rscript -e 'covr::codecov(line_exclusions = c("R/zzz.R", "R/install_taxstats.R"))'; fi
+
+after_failure:
+  - Rscript -e 'hutils::RQ("devtools", install.packages(c("devtools", "roxygen2")))'
+  - Rscript -e 'devtools::test()'
+  - Rscript -e 'install.packages("taxstats", repos = "https://hughparsonage.github.io/drat/", type = "source")'
+  

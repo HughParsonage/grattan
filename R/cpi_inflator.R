@@ -6,12 +6,9 @@
 #' @param from_fy (character) a character vector with each element in the form "2012-13" representing the financial year contemporaneous to the from_nominal_price. 
 #' @param to_fy (character) a character vector with each element in the form "2012-13" representing the financial year that prices are to be inflated. 
 #' @param adjustment What CPI index to use ("none" = raw series, "seasonal", or "trimmed" [mean]).
-#' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. The internal data was updated on 2017-08-16.
-#' 
-#' There was a bug in \code{rsdmx 0.5-9} that prevented this working reliably.
-#' As this argument is the only to use \code{rsdmx}, version \code{0.5-10} is not a strict
-#' dependency, but users would be well-advised to use it. 
-#' 
+#' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. 
+#' The internal data is up-to-date as of 2017-Q4. 
+#' If using \code{useABSConnection = TRUE}, ensure you have \code{rsdmx (>= 0.5-10)} up-to-date.
 #' @param allow.projection Should projections beyond the ABS's data be allowed?
 #' @examples 
 #' cpi_inflator(100, from_fy = "2005-06", to_fy = "2014-15")
@@ -20,18 +17,26 @@
 cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15", 
                          adjustment = c("seasonal", "none", "trimmed.mean"),
                          useABSConnection = FALSE,
-                         allow.projection = TRUE){
+                         allow.projection = TRUE) {
   # CRAN
-  obsTime <- NULL; obsValue <- NULL; to_index <- NULL; from_index <- NULL
+  obsTime <- obsValue <- to_index <- from_index <- NULL
   
-  if (anyNA(from_fy) || anyNA(to_fy)){
-    stop("from_fy and to_fy contain NAs. Remove NAs before applying.")
+  if (anyNA(from_fy)) {
+    stop("`from_fy` contained NAs. Remove NAs before applying.")
+  } 
+  if (anyNA(to_fy)){
+    stop("`to_fy` contained NAs. Remove NAs before applying.")
   }
   # Don't like vector recycling
   # http://stackoverflow.com/a/9335687/1664978
-  prohibit_vector_recycling(from_nominal_price, from_fy, to_fy)
+  max.length <- 
+    prohibit_vector_recycling.MAXLENGTH(from_nominal_price, from_fy, to_fy)
   
-  stopifnot(all(is.fy(from_fy)), all(is.fy(to_fy)))
+  if (max.length == 1L && as.integer(substr(to_fy, 0L, 4L)) < 2031L) {
+    stopifnot(all_fy(from_fy), all_fy(to_fy))
+  } else {
+    stopifnot(all_fy(from_fy), all(is.fy(to_fy)))
+  }
   
   adjustment <- match.arg(adjustment, several.ok = FALSE)
   
@@ -66,8 +71,19 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15",
                            from_fy = from_fy,
                            to_fy = to_fy)
   
-  if (!allow.projection && !all(to_fy %in% cpi.indices$fy_year)){
-    stop("Not all elements of to_fy are in CPI data.")
+  if (!allow.projection && !all(to_fy %in% cpi.indices$fy_year)) {
+    if (length(to_fy) == 1L) {
+      stop("`to_fy = ", to_fy, "` yet `allow.projection = FALSE`. ", 
+           "The latest to_fy that may be used is ", max(cpi.indices$fy_year), ". ", 
+           "Set `allow.projection = TRUE` or ensure `to_fy` is earlier than ", 
+           max(cpi.indices$fy), ".")
+    } else {
+      first_late_fy <- first(to_fy[to_fy %notin% cpi.indices$fy_year])
+      stop("`to_fy` contains ", first_late_fy, ", yet `allow.projection = FALSE`. ", 
+           "The latest to_fy that may be used is ", max(cpi.indices$fy_year), ". ",
+           "Set `allow.projection = TRUE` or ensure `to_fy` is earlier than ", 
+           max(cpi.indices$fy), ".")
+    }
   }
   # else allow NAs to propagate
   

@@ -27,5 +27,5 @@ If \code{fy_year} would provide incomplete data (i.e. only sum three or fewer qu
 Dates or fy_year outside the available data is neither a warning nor an error, but \code{NA}.
 }
 \description{
-Gross domestic product, at contemporaneous prices (called 'current prices' by the ABS).
+Gross domestic product, at contemporaneous prices (called \sQuote{current prices} by the ABS).
 }

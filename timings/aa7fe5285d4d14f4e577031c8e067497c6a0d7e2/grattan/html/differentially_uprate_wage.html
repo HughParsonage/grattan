@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Differential uprating</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for differentially_uprate_wage {grattan}"><tr><td>differentially_uprate_wage {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Differential uprating</h2>
+
+<h3>Description</h3>
+
+<p>Apply differential uprating to projections of the <code>Sw_amt</code> variable.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+differentially_uprate_wage(wage = 1, from_fy, to_fy, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>wage</code></td>
+<td>
+<p>A numeric vector to be uprated.</p>
+</td></tr>
+<tr valign="top"><td><code>from_fy</code></td>
+<td>
+<p>The financial year contemporaneous to wage, which must be a financial year of an available sample file &ndash; in particular, not after 2015-16.</p>
+</td></tr>
+<tr valign="top"><td><code>to_fy</code></td>
+<td>
+<p>The target of the uprating. Passed to <code><a href="wage_inflator.html">wage_inflator</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments passed <code><a href="wage_inflator.html">wage_inflator</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>See <code>vignette("differential-uprating")</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The vector <code>wage</code> differentially uprated to <code>to_fy</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Hugh Parsonage and William Young
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+ws &lt;- c(20e3, 50e3, 100e3)
+from &lt;- "2013-14"
+to &lt;- "2016-17"
+differentially_uprate_wage(ws, from, to)
+differentially_uprate_wage(ws, from, to) / wage_inflator(ws, from, to)
+
+# Use a wage series:
+if (requireNamespace("taxstats", quietly = TRUE)) {
+  library(data.table)
+  library(taxstats)
+  WageGrowth &lt;- data.table(fy_year = c("2017-18", "2018-19"),
+                           r = c(0.0, 0.1))
+  Wage201314 &lt;- sample_file_1314[["Sw_amt"]]
+  
+  data.table(Wage_201314 = Wage201314,
+             Wage_201819 = 
+               differentially_uprate_wage(Wage201314, 
+                                          from_fy = "2013-14",
+                                          to_fy = "2018-19",
+                                          wage.series = WageGrowth))
+}
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

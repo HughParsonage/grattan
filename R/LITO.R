@@ -20,11 +20,15 @@ NULL
 #' @rdname lito
 .lito <- function(input){
   income <- NULL
+  if ("ordering" %notin% names(input)) {
+    input[, "ordering" := .I]
+  } 
   lito_tbl[input] %>%
-    .[,lito := pminV(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
-                     max_lito)] %>%
+    .[, lito := pminV(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
+                      max_lito)] %>%
     setorderv("ordering") %>%
     .[["lito"]]
+  
 }
 
 
@@ -44,5 +48,33 @@ lito <- function(income,
           max_lito)
   }
 }
+
+
+lmito <- function(income, 
+                  first_offset = 200,
+                  thresholds = c(37e3, 48e3, 90e3, 125333+1/3),
+                  taper = c(0, 0.03, 0, -0.015),
+                  fy.year = NULL) {
+  if (!is.null(fy.year) &&
+      !identical(fy.year, "2018-19") &&
+      !identical(fy.year, "2017-18")) {
+    stop("`fy.year` was not NULL or \"2018-19\". Only these values are supported")
+  }
+  
+  stopifnot(length(thresholds) == length(taper))
+  out <- first_offset  # auto recycling
+  for (i in seq_len(length(thresholds) - 1L)) {
+    out <- out + pmaxC(pminC(income, thresholds[i + 1L]) - thresholds[i], 0) * (taper[i + 1L])
+  }
+  as.integer(round(out))
+}
+
+watr <- function(income) {
+  pmaxC(lmito(income, first_offset = 350, taper = c(0, 0.0525, 0, -0.02625)), 0)
+}
+
+
+
+
 
 

@@ -9,7 +9,7 @@
 #' @param to_date Dates as a character vector.
 #' @param from_fy Financial year of \code{labour_force}.
 #' @param to_fy Financial year for which the labour force is predicted.
-#' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. The internal data was updated on 2017-08-16.
+#' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. The internal data was updated on 2018-05-21 to include data up to 2018-04-01.
 #' @param allow.projection Logical. Should projections be allowed?
 #' @param use.month An integer (corresponding to the output of \code{data.table::month}) representing the month of the series used for the inflation.
 #' @param forecast.series Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals.
@@ -45,10 +45,13 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     lf.url.trend <- 
       "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978"
     lf <- rsdmx::readSDMX(lf.url.trend)
-    lf.indices <- as.data.table(as.data.frame(lf))
+    lf.indices <- as.data.frame(lf)
+    # nocov start
     if (nrow(lf.indices) == 0) {
       stop("Unable to establish SDMX connection to stat.data.abs.gov.au")
     }
+    # nocov end
+    lf.indices <- as.data.table(lf.indices)
   } else {
     lf.indices <- lf_trend
   }
@@ -56,17 +59,15 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
   lf.indices[, obsDate := as.Date(sprintf("%s-01", obsTime))]
   last.date.in.series <- last(lf.indices[["obsDate"]])
   
+  obsDate <- NULL
   last_full_yr_in_series <- 
     lf.indices %>%
     # month from data.table::
-    .[month(obsDate) == 6] %>%
-    .[["obsDate"]] %>%
+    .[month(obsDate) == 6L, obsDate] %>%
     last %>%
     year
   
-  last_full_fy_in_series <- 
-    last_full_yr_in_series %>%
-    yr2fy(.)
+  last_full_fy_in_series <- yr2fy(last_full_yr_in_series)
   
   if (!allow.projection && any(to_fy > last_full_fy_in_series)){
     stop("Not all elements of to_fy are in labour force data.")
@@ -123,7 +124,7 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
                             fill = TRUE)
   }
   
-  stopifnot(use.month %between% c(1, 12))
+  stopifnot(use.month %between% c(1L, 12L))
   
   lf.indices <- 
     lf.indices %>%
@@ -133,8 +134,8 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
   if (AND(allow.projection,
           AND(any(to_fy > last_full_fy_in_series),
               forecast.series == "custom"))) {
-    if (!is.data.table(lf.series)){
-      if (length(lf.series) == 1L){
+    if (!is.data.table(lf.series)) {
+      if (length(lf.series) == 1L) {
         years_required <- seq.int(from = last_full_yr_in_series + 1, 
                                   to = fy2yr(max(to_fy)))
         
@@ -163,7 +164,7 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
                       to = last_full_yr_in_series + nrow(lf.series)))
       
       if (!identical(input_series_fys, expected_fy_sequence)){
-        stop("lf.series$fy_year should be ", dput(expected_fy_sequence), ".")
+        stop("lf.series$fy_year should be ", deparse(expected_fy_sequence), ".")
       }
     }
     
@@ -177,10 +178,13 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     
     lf.series[, obsValue := last_obsValue_in_actual_series * cumprod(1 + r)]
     
-    lf.indices <- rbindlist(list(lf.indices, 
-                                 lf.series), 
-                              use.names = TRUE, 
-                              fill = TRUE)
+    lf.indices <-
+      rbindlist(list(lf.indices, 
+                     lf.series), 
+                use.names = TRUE, 
+                fill = TRUE) %>%
+      # Ensure the date falls appropriately
+      unique(by = "fy_year", fromLast = TRUE)
   }
   
   input <-
@@ -196,7 +200,7 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
     merge(lf.indices, by.x = "to_fy", by.y = "fy_year", sort = FALSE, 
           all.x = TRUE) %>%
     setnames("obsValue", "to_index") %>%
-    .[, out := labour_force * (to_index/from_index)]
+    .[, "out" := labour_force * (to_index/from_index)]
 
   
   output[["out"]]

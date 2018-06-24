@@ -6,7 +6,7 @@
 prohibit_unequal_length_vectors <- function(...){
   lengths <- vapply(list(...), FUN = length, FUN.VALUE = 0L)
   
-  if (length(unique(lengths)) != 1L){
+  if (max(lengths) != min(lengths)) {
     stop("Input vectors must all have the same length.")
   }
   invisible(NULL)

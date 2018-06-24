@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: SAPTO with user-defined thresholds</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for new_sapto {grattan}"><tr><td>new_sapto {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>SAPTO with user-defined thresholds</h2>
+
+<h3>Description</h3>
+
+<p>SAPTO with user-defined thresholds
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+new_sapto(rebate_income, new_sapto_tbl, sapto.eligible = TRUE,
+  Spouse_income = 0, fill = 0, family_status = "single")
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>rebate_income</code></td>
+<td>
+<p>The rebate income of the individual.</p>
+</td></tr>
+<tr valign="top"><td><code>new_sapto_tbl</code></td>
+<td>
+<p>Having the same columns as <code>grattan:::sapto_tbl</code>, keyed on family_status.</p>
+</td></tr>
+<tr valign="top"><td><code>sapto.eligible</code></td>
+<td>
+<p>Is the individual eligible for sapto?</p>
+</td></tr>
+<tr valign="top"><td><code>Spouse_income</code></td>
+<td>
+<p>Spouse income whose unutilized SAPTO may be added to the current taxpayer. Must match <code>family_status</code>; i.e. can only be nonzero when <code>family_status != "single"</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>fill</code></td>
+<td>
+<p>If SAPTO was not applicable, what value should be used?</p>
+</td></tr>
+<tr valign="top"><td><code>family_status</code></td>
+<td>
+<p>Family status of the individual.</p>
+</td></tr>
+</table>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

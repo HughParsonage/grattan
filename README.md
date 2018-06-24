@@ -1,23 +1,229 @@
-[![Travis-CI](https://travis-ci.org/HughParsonage/formalCoverage.svg?branch=master)](https://travis-ci.org/HughParsonage/grattan?branch=master) [![Project Status: Active ? The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html) [![codecov.io](https://codecov.io/github/HughParsonage/grattan/coverage.svg?branch=master)](https://codecov.io/github/HughParsonage/grattan?branch=master)
-
-------------------------------------------------------------------------
-
-[![minimal R version](https://img.shields.io/badge/R%3E%3D-2.10-6666ff.svg)](https://cran.r-project.org/) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/grattan)](https://cran.r-project.org/package=grattan) [![packageversion](https://img.shields.io/badge/Package%20version-1.5.2.5-orange.svg?style=flat-square)](commits/master)
-
-------------------------------------------------------------------------
-
-[![Last-changedate](https://img.shields.io/badge/last%20change-2017--11--16-orange.svg)](/commits/master)
+[![Coverage status](https://codecov.io/gh/HughParsonage/grattan/branch/master/graph/badge.svg)](https://codecov.io/github/HughParsonage/grattan?branch=master) [![Build Status](https://travis-ci.org/HughParsonage/grattan.svg?branch=master)](https://travis-ci.org/HughParsonage/grattan)
 
 grattan
 =======
 
 Australian Tax Policy Analysis
 
+Overview
+========
+
+``` r
+install.packages("grattan")
+```
+
+``` r
+library(grattan)
+```
+
+    ## Last change: test_weighted_ntile.R at 2018-06-17 19:08:13 (20 hours ago).
+
+`income_tax`
+------------
+
+Calculates the income tax for a given taxable income and financial year:
+
+``` r
+income_tax(50e3, "2015-16")
+```
+
+    ## [1] 8547
+
+### With sample files
+
+`income_tax` is designed to work well with the ATO's sample files. You can obtain the sample files from my repo:
+
+``` r
+# install.packages("taxstats", repos = "https://hughparsonage.github.io/tax-drat")
+library(taxstats)
+
+library(hutils)
+library(data.table) 
+library(magrittr)
+library(ggplot2)
+```
+
+Simply pass the sample file to `.dots.ATO` and the complexities of things like Medicare levy and the Seniors and Pensioners Tax Offset are handled for you. For example:
+
+``` r
+s1314 <- as.data.table(sample_file_1314)
+s1314 %>%
+  .[, tax := income_tax(Taxable_Income, "2013-14", .dots.ATO = s1314)] %>%
+  .[, .(Taxable_Income, tax)]
+```
+
+    ##         Taxable_Income       tax
+    ##      1:           4800     0.000
+    ##      2:         126122 36503.970
+    ##      3:          39742  4655.410
+    ##      4:         108123 29574.355
+    ##      5:          85957 21040.445
+    ##     ---                         
+    ## 258770:          24462  1111.710
+    ## 258771:          37055  3701.525
+    ## 258772:          45024  6530.520
+    ## 258773:           5134     0.000
+    ## 258774:          46368  7007.640
+
+`model_income_tax`: modelling changes to personal income tax
+------------------------------------------------------------
+
+While `income_tax` is designed to inflexibly return the tax payable as legislated, `model_income_tax` is designed to calculate income tax when changes are made. For example,
+
+``` r
+s1314 %>%
+  # reduce top threshold from 180,000 to 150,000
+  model_income_tax(ordinary_tax_thresholds = c(0, 18200, 37000, 80000, 
+                                               150e3), 
+                   baseline_fy = "2013-14") %>%
+  .[, .(Taxable_Income, baseline_tax, new_tax)]
+```
+
+    ##         Taxable_Income baseline_tax   new_tax
+    ##      1:           4800            0     0.000
+    ##      2:         126122        36503 36503.970
+    ##      3:          39742         4655  4655.410
+    ##      4:         108123        29574 29574.355
+    ##      5:          85957        21040 21040.445
+    ##     ---                                      
+    ## 258770:          24462         1111  1111.710
+    ## 258771:          37055         3701  3701.525
+    ## 258772:          45024         6530  6530.520
+    ## 258773:           5134            0     0.000
+    ## 258774:          46368         7007  7007.640
+
+`project`
+---------
+
+Given a sample file, we can project forward a number of years
+
+``` r
+s1617 <- project(s1314, h = 3L)
+```
+
+or to a particular financial year
+
+``` r
+s1718 <- project_to(s1314, "2017-18")
+```
+
+Together with `model_income_tax`, this allows us to make point-predictions of future years. The function `revenue_foregone` prettily prints the resultant revenue:
+
+``` r
+sample_file_1314 %>%
+  project_to("2018-19") %>%
+  model_income_tax(baseline_fy = "2017-18",
+                   ordinary_tax_thresholds = c(0, 18200, 37000, 87000, 
+                                               150e3)) %>%
+  revenue_foregone
+```
+
+    ## [1] "$1.7 billion"
+
+### `compare_avg_tax_rates`:
+
+Create comparison of average tax rates:
+
+``` r
+lapply(list("30k" = 30e3,
+            "36k" = 36e3,
+            "42k" = 42e3),
+       function(T2) {
+         model_income_tax(s1718,
+                          baseline_fy = "2017-18",
+                          ordinary_tax_thresholds = c(0, 
+                                                      18200,
+                                                      T2,
+                                                      87000, 
+                                                      180e3))
+       }) %>%
+  rbindlist(idcol = "id",
+            use.names = TRUE,
+            fill = TRUE) %>%
+  compare_avg_tax_rates(baseDT = .[id %ein% "36k"]) %>%
+  ggplot(aes(x = Taxable_Income_percentile,
+             y = delta_avgTaxRate,
+             color = id,
+             group = id)) +
+  geom_hline(yintercept = 0) +
+  geom_line()
+```
+
+![](README_files/figure-markdown_github/compare-30-37-42-thresholds-1.svg)
+
+Access ABS data
+---------------
+
 NEWS
 ====
 
+1.6.1.0
+-------
+
+-   New functions:
+    -   `compare_avg_tax_rates`: create a difference in average tax rates between multiple models and a baseline tax, by percentile.
+    -   `install_taxstats()` for convenience.
+-   Bug fixes:
+    -   `small_business_tax_offset()` is now always positive, fixing the original misinterpretation of the legislation whereby negative business income resulted in a negative offset.
+-   `taxstats1516` is now a suggested dependency.
+
+1.6.0.0
+-------
+
+### 2018-05-08
+
+-   Never-legislated Medicare levy change in 2019-20 has been reverted
+-   Budget 2018:
+-   `model_income_tax()` no longer coerces `WEIGHT` to integer.
+-   New arguments to support Budget 2018:
+    -   `lito_multi` Permits multiple pieces to the linear offset.
+    -   `Budget2018_lamington` The Low And Middle Income Tax Offset proposed in the Budget 2018 budget.
+    -   `Budget2018_lito_202223` The proposed change to LITO from 2022-23.
+    -   `Budget2018_watr` The offset proposed by the Opposition the Budget Reply.
+    -   `sbto_discount` Allows modification of the small business tax offset.
+    -   `clear_tax_cols` By default, old tax columns are deleted.
+    -   `warn_upper_thresholds` If changed to `FALSE` allows the automatic changes to be applied without warning.
+-   New functions:
+-   `progressivity()` for Gini-based measure of the progressivity of income tax
+-   `revenue_foregone()` as a convenenience for returning the revenue foregone from a modelled sample file.
+
+-   Routine changes:
+-   ABS data updated as of 2018-05-21.
+
+1.5.3.6
+-------
+
+### 2018-02-21
+
+-   Labour force data and wage price index updated to 2018-02-21.
+-   Update as requested to fix failing unit tests relying on non-standard packages.
+
+1.5.3.1
+-------
+
+### 2018-01-22
+
+### New features:
+
+-   New function `model_income_tax` which attempts to provide every lever of the income tax system that is visible from the tax office's sample files. Users can model the sample file by changing single parameters to observe the effect on tax collections.
+-   `small_business_tax_offset`: Include the small business tax offset as a standalone function and within `income_tax`.
+
+### Other user-visible changes
+
+-   `project` and `project_to` no longer require `fy.year.of.sample.file`. However, they expect the supplied `data.frame` to be compatible with the sample file provided. Failling to provide a sample file with the expected number of rows or not providing a sample file with a valid number of rows is a warning, which can be silenced by `check_fy_sample_file = FALSE`.
+
+### Data:
+
+-   Update labour force data to November 2017
+-   Internal projection tables have been updated for the latest (2014-15) sample file.
+
+### Other changes
+
+-   `mgcv` was used but not declared in Suggests: Thanks to BDR for reporting.
+-   (internal) Extend `prohibit_vector_recycling` to return the maximum permissible length of a list of vectors.
+
 1.5.2.5
-=======
+-------
 
 ### 2017-11-16
 
@@ -32,22 +238,22 @@ NEWS
 -   Fix wage data
 
 1.5.2.3
-=======
+-------
 
 ### 2017-10-21
 
 -   Update labour-force data
 
-grattan 1.5.2.0
-===============
+1.5.2.0
+-------
 
 ### 2017-10-19
 
 -   New internal C++ functions for `income_tax`, and related functions
 -   BTO function now uses tax scales from the *Income Tax Regulations*
 
-grattan 1.5.1.2
-===============
+1.5.1.2
+-------
 
 ### 2017-10-15
 
@@ -71,28 +277,25 @@ grattan 1.5.1.2
 CRAN Notes
 ==========
 
-Test environments
------------------
+Test results
+------------
 
--   local Windows install, MRAN 3.4.2
--   ubuntu 12.04 (on travis-ci), R devel and release <https://travis-ci.org/HughParsonage/grattan>
--   win-builder (devel) <https://win-builder.r-project.org/Mer51d990tOv/00check.log>
+0 ERRORS | 0 WARNINGS | 1-2 NOTEs
 
--   This is a package update to:
--   fix vignettes to comply with CRAN policy
--   reflect recent data
+### Test environments:
 
-R CMD check results
--------------------
+-   Local Windows CRAN 3.5.0 and R-devel (r74750):
+-   Travis-CI: Ubuntu 14.04. R 3.4, 3.5, and dev (r74786)
+-   Appveyor: dev (r74750) and release.
+-   winbuilder: dev (r74786) and release.
 
-0 errors | 0 warnings | 2 notes
+NOTES:
 
--   The first NOTE is with respect to the 'taxstats' package not being a mainstream repository; its inclusion satisfies the CRAN repository policy, as in previous versions.
+Possibly mis-spelled words in DESCRIPTION: ... ==&gt; Spellings are correct: 'repos' and 'taxstats' cannot be quoted as they are within R code.
 
-The NOTE also recommends including the URL <https://hughparsonage.github.io/drat/> in angle brackets; however, this NOTE is spurious as the URL is within R code.
+Suggests or Enhances not in mainstream repositories: ... ==&gt; Normal due to taxstats dependency
 
--   The second NOTE refers to GNU make as a SystemRequirements. This is a modest requirement and is necessary to run RcppParallel.
+Note to CRAN: moderately-large vignette
+---------------------------------------
 
-In addition:
-
--   There are two 'Additional issues' in which undefined behaviour is detected via `clang-UBSAN` and `gcc-UBSAN`. These issues arise due to an issue with `RcppParallel`. The maintainers of `RcppParallel` appears to fixed these issues in a development version (downstream of <https://github.com/RcppCore/RcppParallel/pull/48>); however this version is yet to reach CRAN. Accordingly, there are no changes in my package addressing these issues.
+The vignette is quite lengthy and, while it will run on CRAN, requires the installation of 'taxstats', a 58 MB source package, each time the package is checked.

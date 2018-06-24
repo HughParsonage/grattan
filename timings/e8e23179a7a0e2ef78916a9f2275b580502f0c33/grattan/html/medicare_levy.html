@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Medicare levy</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for medicare_levy {grattan}"><tr><td>medicare_levy {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Medicare levy</h2>
+
+<h3>Description</h3>
+
+<p>The (actual) amount payable for the Medicare levy.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+medicare_levy(income, fy.year = "2013-14", Spouse_income = 0,
+  sapto.eligible = FALSE, sato = NULL, pto = NULL,
+  family_status = "individual", n_dependants = 0, .checks = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>income</code></td>
+<td>
+<p>The taxable income. A vector of numeric values.</p>
+</td></tr>
+<tr valign="top"><td><code>fy.year</code></td>
+<td>
+<p>The financial year. A character vector satisfying <code>is.fy</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>Spouse_income</code></td>
+<td>
+<p>The spouse's adjusted income.</p>
+</td></tr>
+<tr valign="top"><td><code>sapto.eligible</code></td>
+<td>
+<p>(logical) Is the taxpayer eligible for SAPTO? See Details.</p>
+</td></tr>
+<tr valign="top"><td><code>sato</code></td>
+<td>
+<p>Is the taxpayer eligible for the Senior Australians Tax Offset?</p>
+</td></tr>
+<tr valign="top"><td><code>pto</code></td>
+<td>
+<p>Is the taxpayer eligible for the Pensions Tax Offset?</p>
+</td></tr>
+<tr valign="top"><td><code>family_status</code></td>
+<td>
+<p>What is the taxpayer's family status: family or individual?</p>
+</td></tr>
+<tr valign="top"><td><code>n_dependants</code></td>
+<td>
+<p>Number of children dependant on the taxpayer.</p>
+</td></tr>
+<tr valign="top"><td><code>.checks</code></td>
+<td>
+<p>Should checks of certain arguments be made? Provided to improve performance when checks are not necessary.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The Seniors and Pensioners Tax Offset was formed in 2012-13 as an amalgam of the Senior Australians Tax Offset and the Pensions Tax Offset. 
+Medicare rates before 2012-13 were different based on these offsets. 
+For most taxpayers, eligibility would be based on whether your age is over the pension age (currently 65).
+If <code>sato</code> and <code>pto</code> are <code>NULL</code>, <code>sapto.eligible</code> stands for eligibility for the <code>sato</code> and not <code>pto</code>.
+If <code>sato</code> or <code>pto</code> are not <code>NULL</code> for such years, only <code>sato</code> is currently considered. 
+Supplying <code>pto</code> independently is currently a warning.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The Medicare levy payable for that taxpayer.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

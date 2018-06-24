@@ -40,37 +40,37 @@ BEGIN_RCPP
 END_RCPP
 }
 // MedicareLevySaptoYear
-NumericVector MedicareLevySaptoYear(NumericVector income, NumericVector SpouseIncome, IntegerVector NDependants, bool sapto, int yr);
-RcppExport SEXP _grattan_MedicareLevySaptoYear(SEXP incomeSEXP, SEXP SpouseIncomeSEXP, SEXP NDependantsSEXP, SEXP saptoSEXP, SEXP yrSEXP) {
+NumericVector MedicareLevySaptoYear(NumericVector income, NumericVector SpouseIncome, IntegerVector NDependants, LogicalVector SaptoEligible, int yr);
+RcppExport SEXP _grattan_MedicareLevySaptoYear(SEXP incomeSEXP, SEXP SpouseIncomeSEXP, SEXP NDependantsSEXP, SEXP SaptoEligibleSEXP, SEXP yrSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type income(incomeSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type SpouseIncome(SpouseIncomeSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type NDependants(NDependantsSEXP);
-    Rcpp::traits::input_parameter< bool >::type sapto(saptoSEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type SaptoEligible(SaptoEligibleSEXP);
     Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
-    rcpp_result_gen = Rcpp::wrap(MedicareLevySaptoYear(income, SpouseIncome, NDependants, sapto, yr));
+    rcpp_result_gen = Rcpp::wrap(MedicareLevySaptoYear(income, SpouseIncome, NDependants, SaptoEligible, yr));
     return rcpp_result_gen;
 END_RCPP
 }
 // MedicareLevy
-NumericVector MedicareLevy(NumericVector income, double lowerThreshold, double upperThreshold, NumericVector SpouseIncome, LogicalVector isFamily, IntegerVector NDependants, double lowerFamilyThreshold, double upperFamilyThreshold, double lowerUpForEachChild, double rate, double taper);
+NumericVector MedicareLevy(NumericVector income, NumericVector lowerThreshold, NumericVector upperThreshold, NumericVector SpouseIncome, LogicalVector isFamily, IntegerVector NDependants, NumericVector lowerFamilyThreshold, NumericVector upperFamilyThreshold, NumericVector lowerUpForEachChild, NumericVector rate, NumericVector taper);
 RcppExport SEXP _grattan_MedicareLevy(SEXP incomeSEXP, SEXP lowerThresholdSEXP, SEXP upperThresholdSEXP, SEXP SpouseIncomeSEXP, SEXP isFamilySEXP, SEXP NDependantsSEXP, SEXP lowerFamilyThresholdSEXP, SEXP upperFamilyThresholdSEXP, SEXP lowerUpForEachChildSEXP, SEXP rateSEXP, SEXP taperSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type income(incomeSEXP);
-    Rcpp::traits::input_parameter< double >::type lowerThreshold(lowerThresholdSEXP);
-    Rcpp::traits::input_parameter< double >::type upperThreshold(upperThresholdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lowerThreshold(lowerThresholdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type upperThreshold(upperThresholdSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type SpouseIncome(SpouseIncomeSEXP);
     Rcpp::traits::input_parameter< LogicalVector >::type isFamily(isFamilySEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type NDependants(NDependantsSEXP);
-    Rcpp::traits::input_parameter< double >::type lowerFamilyThreshold(lowerFamilyThresholdSEXP);
-    Rcpp::traits::input_parameter< double >::type upperFamilyThreshold(upperFamilyThresholdSEXP);
-    Rcpp::traits::input_parameter< double >::type lowerUpForEachChild(lowerUpForEachChildSEXP);
-    Rcpp::traits::input_parameter< double >::type rate(rateSEXP);
-    Rcpp::traits::input_parameter< double >::type taper(taperSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lowerFamilyThreshold(lowerFamilyThresholdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type upperFamilyThreshold(upperFamilyThresholdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type lowerUpForEachChild(lowerUpForEachChildSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type rate(rateSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type taper(taperSEXP);
     rcpp_result_gen = Rcpp::wrap(MedicareLevy(income, lowerThreshold, upperThreshold, SpouseIncome, isFamily, NDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild, rate, taper));
     return rcpp_result_gen;
 END_RCPP
@@ -103,14 +103,25 @@ BEGIN_RCPP
 END_RCPP
 }
 // pmaxC
-Rcpp::NumericVector pmaxC(Rcpp::NumericVector x, double a);
+NumericVector pmaxC(NumericVector x, double a);
 RcppExport SEXP _grattan_pmaxC(SEXP xSEXP, SEXP aSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< double >::type a(aSEXP);
     rcpp_result_gen = Rcpp::wrap(pmaxC(x, a));
+    return rcpp_result_gen;
+END_RCPP
+}
+// pmax0
+NumericVector pmax0(NumericVector x);
+RcppExport SEXP _grattan_pmax0(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(pmax0(x));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -127,14 +138,25 @@ BEGIN_RCPP
 END_RCPP
 }
 // pminC
-Rcpp::NumericVector pminC(Rcpp::NumericVector x, double a);
+NumericVector pminC(NumericVector x, double a);
 RcppExport SEXP _grattan_pminC(SEXP xSEXP, SEXP aSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< double >::type a(aSEXP);
     rcpp_result_gen = Rcpp::wrap(pminC(x, a));
+    return rcpp_result_gen;
+END_RCPP
+}
+// pmin0
+NumericVector pmin0(NumericVector x);
+RcppExport SEXP _grattan_pmin0(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(pmin0(x));
     return rcpp_result_gen;
 END_RCPP
 }

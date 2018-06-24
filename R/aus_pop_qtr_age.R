@@ -11,14 +11,23 @@
 #' aus_pop_qtr_age(date = as.Date("2016-01-01"), age = 42)
 #' @export 
 
-aus_pop_qtr_age <- function(date = NULL, age = NULL, tbl = FALSE, roll = TRUE, roll.beyond = FALSE){
+aus_pop_qtr_age <- function(date = NULL, age = NULL, tbl = FALSE, roll = TRUE, roll.beyond = FALSE) {
   if (!is.null(date)){
     stopifnot(all(inherits(date, "Date")))
     
-    if (length(date) > 1 && 
-        length(age) > 1 && 
-        length(date) != length(age)) {
-      stop("If 'date' and 'age' have lengths > 1 they must have the same length.")
+    if (length(date) > length(age)) {
+      if (length(age) > 1L) {
+        stop("`date` had length ", length(date),
+             " yet `age` had length ", length(age), ". ", 
+             "`date` and `age` can only have different lengths when the smaller length is 1.")
+      }
+    }
+    if (length(age) > length(date)) {
+      if (length(date) > 1L) {
+        stop("`date` had length ", length(date),
+             " yet `age` had length ", length(age), ". ", 
+             "`date` and `age` can only have different lengths when the smaller length is 1.")
+      }
     }
   }
   

@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: CPI inflator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for cpi_inflator {grattan}"><tr><td>cpi_inflator {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>CPI inflator</h2>
+
+<h3>Description</h3>
+
+<p>CPI inflator
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+cpi_inflator(from_nominal_price = 1, from_fy, to_fy = "2014-15",
+  adjustment = c("seasonal", "none", "trimmed.mean"),
+  useABSConnection = FALSE, allow.projection = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>from_nominal_price</code></td>
+<td>
+<p>(numeric) the price (or vector of prices) to be inflated</p>
+</td></tr>
+<tr valign="top"><td><code>from_fy</code></td>
+<td>
+<p>(character) a character vector with each element in the form &quot;2012-13&quot; representing the financial year contemporaneous to the from_nominal_price.</p>
+</td></tr>
+<tr valign="top"><td><code>to_fy</code></td>
+<td>
+<p>(character) a character vector with each element in the form &quot;2012-13&quot; representing the financial year that prices are to be inflated.</p>
+</td></tr>
+<tr valign="top"><td><code>adjustment</code></td>
+<td>
+<p>What CPI index to use (&quot;none&quot; = raw series, &quot;seasonal&quot;, or &quot;trimmed&quot; [mean]).</p>
+</td></tr>
+<tr valign="top"><td><code>useABSConnection</code></td>
+<td>
+<p>Should the function connect with ABS.Stat via an SDMX connection? If <code>FALSE</code> (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. 
+The internal data is up-to-date as of 2017-Q4. 
+If using <code>useABSConnection = TRUE</code>, ensure you have <code>rsdmx (&gt;= 0.5-10)</code> up-to-date.</p>
+</td></tr>
+<tr valign="top"><td><code>allow.projection</code></td>
+<td>
+<p>Should projections beyond the ABS's data be allowed?</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The value of <code>from_nominal_price</code> in real (<code>to_fy</code>) dollars.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+cpi_inflator(100, from_fy = "2005-06", to_fy = "2014-15")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

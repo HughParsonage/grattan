@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Generic inflator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for generic_inflator {grattan}"><tr><td>generic_inflator {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Generic inflator</h2>
+
+<h3>Description</h3>
+
+<p>Used to inflate variables in the sample file when there is no clear existing index.
+Note this is an unexported function: it is not available to the end-user.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+generic_inflator(vars, h, fy.year.of.sample.file = "2012-13",
+  nonzero = FALSE, estimator = "mean", pred_interval = 80)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>vars</code></td>
+<td>
+<p>A character vector of those variables within <code>.sample_file</code> for which forecasts are desired.</p>
+</td></tr>
+<tr valign="top"><td><code>h</code></td>
+<td>
+<p>An integer, how many years ahead should the inflator be targeted.</p>
+</td></tr>
+<tr valign="top"><td><code>fy.year.of.sample.file</code></td>
+<td>
+<p>A string representing the financial year of <code>.sample_file</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>nonzero</code></td>
+<td>
+<p>Should the forecast be taken on all values, or just nonzero values?</p>
+</td></tr>
+<tr valign="top"><td><code>estimator</code></td>
+<td>
+<p>What forecast element should be used: the point estimate (<code>"mean"</code>), or the <code>upper</code> or <code>lower</code> endpoint of a prediction interval?</p>
+</td></tr>
+<tr valign="top"><td><code>pred_interval</code></td>
+<td>
+<p>If <code>estimator</code> is <code>upper</code> or <code>lower</code>, what prediction interval are these the end points of?</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data table of two columns: <code>variable</code> containing <code>vars</code> and <code>inflator</code> equal to the inflator to be applied to that variable to inflate it ahead <code>h</code> years.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

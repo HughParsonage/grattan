@@ -3,12 +3,31 @@
 
 select_which_ <- hutils::select_which
 
+# fast selector, shallow copy
+.selector <- function(dt, noms) {
+  dt_key <- key(dt)
+  out <- setnames(setDT(lapply(noms, function(v) .subset2(dt, v))), noms)
+  if (!is.null(dt_key)) {
+    setattr(out, "sorted", dt_key)
+  }
+  out
+}
+
 unselect_ <- function(.data, .dots) {
   hutils::drop_cols(.data, vars = .dots)
 }
 
 `%notin%` <- function(x, y) {
   !(x %in% y)
+}
+
+anyIntersection <- function(x, y) {
+  max(match(x, y, nomatch = 0L)) &&
+    max(match(y, x, nomatch = 0L))
+}
+
+is_knitting <- function() {
+  isTRUE(getOption('knitr.in.progress'))
 }
 
 # from dplyr::near
@@ -58,8 +77,8 @@ mean_of_nonzero <- function(x){
   MeanNumeric(x[x > 0])
 }
 
-is.nonnegative <- function(vec){
-  is.numeric(vec) && !anyNA(vec) && all(vec >= 0)
+is.nonnegative <- function(vec) {
+  is.numeric(vec) && !anyNA(vec) && min(vec) >= 0
 }
 
 are_zero <- function(x){

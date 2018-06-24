@@ -2,26 +2,132 @@
 output:
   md_document:
     variant: markdown_github
+    toc: false
 ---
 
-[![Travis-CI](https://travis-ci.org/HughParsonage/formalCoverage.svg?branch=master)](https://travis-ci.org/HughParsonage/grattan?branch=master)
-[![Project Status: Active ? The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-[![Licence](https://img.shields.io/badge/licence-GPL--2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
-[![codecov.io](https://codecov.io/github/HughParsonage/grattan/coverage.svg?branch=master)](https://codecov.io/github/HughParsonage/grattan?branch=master)
- 
----
- 
-[![minimal R version](https://img.shields.io/badge/R%3E%3D-2.10-6666ff.svg)](https://cran.r-project.org/)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/grattan)](https://cran.r-project.org/package=grattan)
-[![packageversion](https://img.shields.io/badge/Package%20version-`r packageVersion("grattan")`-orange.svg?style=flat-square)](commits/master)
- 
----
- 
-[![Last-changedate](https://img.shields.io/badge/last%20change-`r gsub('-', '--', Sys.Date())`-orange.svg)](/commits/master)
+
+[![Coverage status](https://codecov.io/gh/HughParsonage/grattan/branch/master/graph/badge.svg)](https://codecov.io/github/HughParsonage/grattan?branch=master)
+[![Build Status](https://travis-ci.org/HughParsonage/grattan.svg?branch=master)](https://travis-ci.org/HughParsonage/grattan)
 
 # grattan
 
+```{r knitrOpts, include=FALSE}
+library(knitr)
+opts_chunk$set(dev = 'svg')
+```
+
 Australian Tax Policy Analysis
+
+# Overview
+```{r eval=FALSE}
+install.packages("grattan")
+```
+
+```{r loadPackages}
+library(grattan)
+```
+
+## `income_tax`
+Calculates the income tax for a given taxable income and financial year:
+
+```{r income_tax_1}
+income_tax(50e3, "2015-16")
+```
+
+### With sample files
+`income_tax` is designed to work well with the ATO's sample files. You can obtain the sample files from my repo:
+
+```{r install_taxstats}
+# install.packages("taxstats", repos = "https://hughparsonage.github.io/tax-drat")
+library(taxstats)
+
+library(hutils)
+library(data.table) 
+library(magrittr)
+library(ggplot2)
+```
+
+Simply pass the sample file to `.dots.ATO` and the complexities of things like Medicare levy and the Seniors and Pensioners Tax Offset are handled for you. For example:
+
+```{r income_tax_s1314}
+s1314 <- as.data.table(sample_file_1314)
+s1314 %>%
+  .[, tax := income_tax(Taxable_Income, "2013-14", .dots.ATO = s1314)] %>%
+  .[, .(Taxable_Income, tax)]
+```
+
+## `model_income_tax`: modelling changes to personal income tax
+While `income_tax` is designed to inflexibly return the tax payable as legislated, 
+`model_income_tax` is designed to calculate income tax when changes are made. For example,
+
+```{r model_income_tax}
+s1314 %>%
+  # reduce top threshold from 180,000 to 150,000
+  model_income_tax(ordinary_tax_thresholds = c(0, 18200, 37000, 80000, 
+                                               150e3), 
+                   baseline_fy = "2013-14") %>%
+  .[, .(Taxable_Income, baseline_tax, new_tax)]
+```
+
+
+## `project`
+Given a sample file, we can project forward a number of years
+
+```{r s1617}
+s1617 <- project(s1314, h = 3L)
+```
+
+or to a particular financial year
+
+```{r s1718}
+s1718 <- project_to(s1314, "2017-18")
+```
+
+Together with `model_income_tax`, this allows us to make point-predictions of future years. The function `revenue_foregone` prettily prints the resultant revenue:
+
+```{r model1819}
+sample_file_1314 %>%
+  project_to("2018-19") %>%
+  model_income_tax(baseline_fy = "2017-18",
+                   ordinary_tax_thresholds = c(0, 18200, 37000, 87000, 
+                                               150e3)) %>%
+  revenue_foregone
+```
+
+### `compare_avg_tax_rates`:
+
+Create comparison of average tax rates:
+
+```{r compare-30-37-42-thresholds}
+lapply(list("30k" = 30e3,
+            "36k" = 36e3,
+            "42k" = 42e3),
+       function(T2) {
+         model_income_tax(s1718,
+                          baseline_fy = "2017-18",
+                          ordinary_tax_thresholds = c(0, 
+                                                      18200,
+                                                      T2,
+                                                      87000, 
+                                                      180e3))
+       }) %>%
+  rbindlist(idcol = "id",
+            use.names = TRUE,
+            fill = TRUE) %>%
+  compare_avg_tax_rates(baseDT = .[id %ein% "36k"]) %>%
+  ggplot(aes(x = Taxable_Income_percentile,
+             y = delta_avgTaxRate,
+             color = id,
+             group = id)) +
+  geom_hline(yintercept = 0) +
+  geom_line()
+```
+
+## Access ABS data
+
+
+
+
 
 # NEWS
 ```{r NEWS, results='asis', echo=FALSE}

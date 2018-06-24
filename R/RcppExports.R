@@ -18,20 +18,21 @@ IncomeTax <- function(x, thresholds, rates) {
 #' @title Medicare levy in C++
 #' @description Medicare levy. Experimental function in C++, equivalent to \code{\link{medicare_levy}}.
 #' @name MedicareLevy
-#' @param income,SpouseIncome,SaptoEligible,isFamily,nDependants,lowerThreshold,upperThreshold,lowerFamilyThreshold,upperFamilyThreshold,lowerUpForEachChild As in \code{medicare_levy}.
+#' @param income,SpouseIncome,isFamily,NDependants,lowerThreshold,upperThreshold,lowerFamilyThreshold,upperFamilyThreshold,lowerUpForEachChild As in \code{medicare_levy}.
 #' @param rate,taper The parameters for the specific year or hypothetical requested.
-#' @export MedicareLevy 
+#' @export MedicareLevy
+#' @details For \code{yr > 2018}, the 2017-18 values are used.
 NULL
 
-MedicareLevySingle <- function(income, lowerThreshold, upperThreshold, rate = 0.02, taper = 0.2, SpouseIncome = 0, isFamily = FALSE, nDependants = 0L, lowerFamilyThreshold = 46000, upperFamilyThreshold = 54119, lowerUpForEachChild = 3306) {
+MedicareLevySingle <- function(income, lowerThreshold, upperThreshold, rate = 0.02, taper = 0.1, SpouseIncome = 0, isFamily = FALSE, nDependants = 0L, lowerFamilyThreshold = 46000, upperFamilyThreshold = 54119, lowerUpForEachChild = 3306) {
     .Call(`_grattan_MedicareLevySingle`, income, lowerThreshold, upperThreshold, rate, taper, SpouseIncome, isFamily, nDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild)
 }
 
-MedicareLevySaptoYear <- function(income, SpouseIncome, NDependants, sapto, yr) {
-    .Call(`_grattan_MedicareLevySaptoYear`, income, SpouseIncome, NDependants, sapto, yr)
+MedicareLevySaptoYear <- function(income, SpouseIncome, NDependants, SaptoEligible, yr) {
+    .Call(`_grattan_MedicareLevySaptoYear`, income, SpouseIncome, NDependants, SaptoEligible, yr)
 }
 
-MedicareLevy <- function(income, lowerThreshold, upperThreshold, SpouseIncome, isFamily, NDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild, rate = 0.02, taper = 0.1) {
+MedicareLevy <- function(income, lowerThreshold, upperThreshold, SpouseIncome, isFamily, NDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild, rate, taper) {
     .Call(`_grattan_MedicareLevy`, income, lowerThreshold, upperThreshold, SpouseIncome, isFamily, NDependants, lowerFamilyThreshold, upperFamilyThreshold, lowerUpForEachChild, rate, taper)
 }
 
@@ -68,13 +69,17 @@ pmax3 <- function(x, y, z) {
 #' @name pmaxC
 #' @param x A numeric vector.
 #' @param a A single numeric value.
-#' @return The parallel maximum of the input values.
+#' @return The parallel maximum of the input values. \code{pmax0(x)} is shorthand for \code{pmaxC(x, 0)}, i.e. convert negative values in \code{x} to 0.
 #' @note This function will always be faster than \code{pmax(x, a)} when \code{a} is a single value, but can be slower than \code{pmax.int(x, a)} when \code{x} is short. Use this function when comparing a numeric vector with a single value.
 #' @export pmaxC
 NULL
 
 pmaxC <- function(x, a) {
     .Call(`_grattan_pmaxC`, x, a)
+}
+
+pmax0 <- function(x) {
+    .Call(`_grattan_pmax0`, x)
 }
 
 #' @title Parallel maximum
@@ -97,13 +102,17 @@ pmaxV <- function(x, y) {
 #' @name pminC
 #' @param x A numeric vector.
 #' @param a A single numeric value.
-#' @return The parallel minimum of the input values.
+#' @return The parallel minimum of the input values. The \code{0} versions are shortcuts for \code{a = 0}.
 #' @note This function will always be faster than \code{pmin(x, a)} when \code{a} is a single value, but can be slower than \code{pmin.int(x, a)} when \code{x} is short. Use this function when comparing a numeric vector with a single value.
 #' @export pminC
 NULL
 
 pminC <- function(x, a) {
     .Call(`_grattan_pminC`, x, a)
+}
+
+pmin0 <- function(x) {
+    .Call(`_grattan_pmin0`, x)
 }
 
 #' @title Parallel maximum

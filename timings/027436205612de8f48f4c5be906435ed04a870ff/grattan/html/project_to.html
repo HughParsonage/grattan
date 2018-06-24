@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: A function for simple projections of sample files</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for project_to {grattan}"><tr><td>project_to {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>A function for simple projections of sample files</h2>
+
+<h3>Description</h3>
+
+<p>A function for simple projections of sample files
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+project_to(sample_file, to_fy, fy.year.of.sample.file = NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>sample_file</code></td>
+<td>
+<p>A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.</p>
+</td></tr>
+<tr valign="top"><td><code>to_fy</code></td>
+<td>
+<p>A string like &quot;1066-67&quot; representing the financial year for which forecasts of the sample file are desired.</p>
+</td></tr>
+<tr valign="top"><td><code>fy.year.of.sample.file</code></td>
+<td>
+<p>The financial year of <code>sample_file</code>. See <code><a href="project.html">project</a></code> for the default.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Other arguments passed to <code><a href="project.html">project</a></code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A sample file of the same number of rows as <code>sample_file</code> with inflated values (including WEIGHT).
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

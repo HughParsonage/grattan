@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Superannuation caps and Division 293 calculations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for apply_super_caps_and_div293 {grattan}"><tr><td>apply_super_caps_and_div293 {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Superannuation caps and Division 293 calculations</h2>
+
+<h3>Description</h3>
+
+<p>Mutate a sample file to reflect particular caps on concessional contributions and applications of Division 293 tax.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+apply_super_caps_and_div293(.sample.file,
+  colname_concessional = "concessional_contributions",
+  colname_div293_tax = "div293_tax",
+  colname_new_Taxable_Income = "Taxable_income_for_ECT",
+  div293_threshold = 3e+05, cap = 25000, cap2 = 35000,
+  age_based_cap = TRUE, cap2_age = 59, ecc = FALSE,
+  use_other_contr = FALSE, scale_contr_match_ato = FALSE, .lambda = 0,
+  reweight_late_lodgers = FALSE, .mu = 1.05,
+  impute_zero_concess_contr = FALSE, .min.Sw.for.SG = 450 * 12,
+  .SG_rate = 0.0925, warn_if_colnames_overwritten = TRUE,
+  drop_helpers = FALSE, copyDT = TRUE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>.sample.file</code></td>
+<td>
+<p>A data.table containing at least the variables <code>sample_file_1314</code> from the taxstats package.</p>
+</td></tr>
+<tr valign="top"><td><code>colname_concessional</code></td>
+<td>
+<p>The name for concessional contributions.</p>
+</td></tr>
+<tr valign="top"><td><code>colname_div293_tax</code></td>
+<td>
+<p>The name of the column containing the values of Division 293 tax payable for that taxpayer.</p>
+</td></tr>
+<tr valign="top"><td><code>colname_new_Taxable_Income</code></td>
+<td>
+<p>The name of the column containing the new Taxable Income.</p>
+</td></tr>
+<tr valign="top"><td><code>div293_threshold</code></td>
+<td>
+<p>The Division 293 threshold.</p>
+</td></tr>
+<tr valign="top"><td><code>cap</code></td>
+<td>
+<p>The cap on concessional contributions for all taxpayers if <code>age_based_cap</code> is FALSE, or for those below the age threshold otherwise.</p>
+</td></tr>
+<tr valign="top"><td><code>cap2</code></td>
+<td>
+<p>The cap on concessional contributions for those above the age threshold. No effect if <code>age_based_cap</code> is FALSE.</p>
+</td></tr>
+<tr valign="top"><td><code>age_based_cap</code></td>
+<td>
+<p>Is the cap on concessional contributions age-based?</p>
+</td></tr>
+<tr valign="top"><td><code>cap2_age</code></td>
+<td>
+<p>The age above which <code>cap2</code> applies.</p>
+</td></tr>
+<tr valign="top"><td><code>ecc</code></td>
+<td>
+<p>(logical) Should an excess concessional contributions charge be calculated? (Not implemented.)</p>
+</td></tr>
+<tr valign="top"><td><code>use_other_contr</code></td>
+<td>
+<p>Make a (poor) assumption that all 'Other contributions' (<code>MCS_Othr_Contr</code>) are concessional contributions. This may be a useful upper bound should such contributions be considered important.</p>
+</td></tr>
+<tr valign="top"><td><code>scale_contr_match_ato</code></td>
+<td>
+<p>(logical) Should concessional contributions be inflated to match aggregates in 2013-14? That is, should concessional contributions by multiplied by <code>grattan:::super_contribution_inflator_1314</code>, which was defined to be: </p>
+<p style="text-align: center;"><i>Total assessable contributions in SMSF and funds / Total contributions in 2013-14 sample file.</i></p>
+<p>.</p>
+</td></tr>
+<tr valign="top"><td><code>.lambda</code></td>
+<td>
+<p>Scalar weight applied to <code>concessional contributions</code>. <i>&lambda; = 0</i> means no (extra) weight. <i>&lambda; = 1</i> means contributions are inflated by the ratio of aggregates to the sample file's total. For <i>R = \textrm{actual} / \textrm{apparent}</i> then the contributions are scaled by <i>1 + &lambda;(R - 1)</i>.</p>
+</td></tr>
+<tr valign="top"><td><code>reweight_late_lodgers</code></td>
+<td>
+<p>(logical) Should WEIGHT be inflated to account for late lodgers?</p>
+</td></tr>
+<tr valign="top"><td><code>.mu</code></td>
+<td>
+<p>Scalar weight for WEIGHT. (<i>w' = &mu; w</i>) No effect if <code>reweight_late_lodgers</code> is <code>FALSE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>impute_zero_concess_contr</code></td>
+<td>
+<p>Should zero concessional contributions be imputed using salary?</p>
+</td></tr>
+<tr valign="top"><td><code>.min.Sw.for.SG</code></td>
+<td>
+<p>The minimum salary required for super guarantee to be imputed.</p>
+</td></tr>
+<tr valign="top"><td><code>.SG_rate</code></td>
+<td>
+<p>The super guarantee rate for imputation.</p>
+</td></tr>
+<tr valign="top"><td><code>warn_if_colnames_overwritten</code></td>
+<td>
+<p>(logical) Issue a warning if the construction of helper columns will overwrite existing column names in <code>.sample.file</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>drop_helpers</code></td>
+<td>
+<p>(logical) Should columns used in the calculation be dropped before the sample file is returned?</p>
+</td></tr>
+<tr valign="top"><td><code>copyDT</code></td>
+<td>
+<p>(logical) Should the data table be <code>copy()</code>d? If the action of this data table is being compared, possibly useful.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A data table comprising the original sample file (<code>.sample.file</code>) with extra superannuation policy-relevant variables for the policy specified by the function.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Hugh Parsonage, William Young
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

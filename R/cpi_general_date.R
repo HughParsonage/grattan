@@ -18,7 +18,7 @@ cpi_inflator_general_date <- function(from_nominal_price = 1,
     message("CPI: Using Q4 for each year")
   } else {
     
-    if (all(is.fy(from_date))){
+    if (all_fy(from_date)) {
       from_date <- paste0(fy2yr(from_date), "-Q1")
     } else {
       
@@ -64,3 +64,4 @@ cpi_inflator_general_date <- function(from_nominal_price = 1,
                         to_qtr = to_date,
                         ...)
 }
+

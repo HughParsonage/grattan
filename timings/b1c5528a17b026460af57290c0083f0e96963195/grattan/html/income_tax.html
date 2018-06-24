@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Income tax payable</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for income_tax {grattan}"><tr><td>income_tax {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Income tax payable</h2>
+
+<h3>Description</h3>
+
+<p>Income tax payable
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+income_tax(income, fy.year, age = NULL, family_status = "individual",
+  n_dependants = 0L, .dots.ATO = NULL, return.mode = c("numeric",
+  "integer"), allow.forecasts = FALSE, .debug = FALSE)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>income</code></td>
+<td>
+<p>The individual assessable income.</p>
+</td></tr>
+<tr valign="top"><td><code>fy.year</code></td>
+<td>
+<p>The financial year in which the income was earned. Tax years 2000-01 to 2016-17 are provided, as well as the tax years 2017-18 to 2019-20, for convenience, under the assumption the 2017 Budget measures will pass. 
+In particular, the tax payable is calculated under the assumption that the rate of the Medicare levy will rise to 2.5% in the 2019-20 tax year.</p>
+</td></tr>
+<tr valign="top"><td><code>age</code></td>
+<td>
+<p>The individual's age.</p>
+</td></tr>
+<tr valign="top"><td><code>family_status</code></td>
+<td>
+<p>For Medicare and SAPTO purposes.</p>
+</td></tr>
+<tr valign="top"><td><code>n_dependants</code></td>
+<td>
+<p>An integer for the number of children of the taxpayer (for the purposes of the Medicare levy).</p>
+</td></tr>
+<tr valign="top"><td><code>.dots.ATO</code></td>
+<td>
+<p>A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files. If <code>.dots.ATO</code> is a <code>data.table</code>, I recommend you enclose it with <code>copy()</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>return.mode</code></td>
+<td>
+<p>The mode (numeric or integer) of the returned vector.</p>
+</td></tr>
+<tr valign="top"><td><code>allow.forecasts</code></td>
+<td>
+<p>should dates beyond 2019-20 be permitted? Currently, not permitted.</p>
+</td></tr>
+<tr valign="top"><td><code>.debug</code></td>
+<td>
+<p>(logical, default: <code>FALSE</code>)  If <code>TRUE</code>, returns a <code>data.table</code> containing the components. (This argument and its result is liable to change in future versions, possibly without notice.)</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The function 'rolling' is inflexible by design. It is designed to guarantee the correct tax payable in a year.
+For years preceding the introduction of SAPTO, the maximum offset is assumed to apply to those above pensionable age.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The total personal income tax payable.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Tim Cameron, Brendan Coates, Hugh Parsonage, William Young
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+income_tax(50e3, "2013-14")
+
+## Calculate tax for each lodger in the 2013-14 sample file.
+if (requireNamespace("taxstats", quietly = TRUE)) {
+  library(data.table)
+  library(taxstats)
+  
+  s1314 &lt;- as.data.table(sample_file_1314)
+  s1314[, tax := income_tax(Taxable_Income, "2013-14", .dots.ATO = s1314)]
+}
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

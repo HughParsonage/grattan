@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Beneficiary tax offset</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for bto {grattan}"><tr><td>bto {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Beneficiary tax offset</h2>
+
+<h3>Description</h3>
+
+<p>Beneficiary tax offset
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+bto(benefit_amount, fy.year = NULL, rate1 = 0.15,
+  benefit_threshold = 6000, tax_threshold = 37000, rate2 = 0.15)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>benefit_amount</code></td>
+<td>
+<p>The amount of Tax Offsetable benefit received by the taxpayer during the income year.</p>
+</td></tr>
+<tr valign="top"><td><code>fy.year</code></td>
+<td>
+<p>The income year. Not used by default.</p>
+</td></tr>
+<tr valign="top"><td><code>rate1</code></td>
+<td>
+<p>The coefficient in Division 2, section 13(2) of the Income Tax Assessment (1936 Act) Regulation 2015
+(the regulations).</p>
+</td></tr>
+<tr valign="top"><td><code>benefit_threshold</code></td>
+<td>
+<p>The amount of benefits above which the offset applies.</p>
+</td></tr>
+<tr valign="top"><td><code>tax_threshold</code></td>
+<td>
+<p>The <em>threshold at the upper conclusion of the lowest marginal tax rate</em> in the
+words of the section 13(3) of the regulations.</p>
+</td></tr>
+<tr valign="top"><td><code>rate2</code></td>
+<td>
+<p>The second coefficient in section 13(3) of the regulations.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The beneficiary tax offset.
+</p>
+
+
+<h3>WARNING</h3>
+
+<p>This function disagrees with the ATO online calculator.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

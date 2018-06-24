@@ -1,0 +1,39 @@
+CGT_inflator            CGT inflator
+aus_pop_qtr             Australia's population
+chart_data              chart_data
+clean_bibtex_output_from_endnote
+                        endnote_to_bibtex
+colours                 The Grattan colours
+cpi_general_date        CPI for general dates
+cpi_inflator            CPI inflator
+cpi_inflator_quarters   CPI inflator when dates are nice
+gpal                    automatic palette adjustment (for small number
+                        of categories)
+gpalx                   The extended colour palette
+gratplot_discrete       attempt to harness ggplot but set as much to
+                        default as possible
+grattan waterfall       Create waterfall charts
+grattan_dollar          dollar scales
+greys                   The grey palette
+income_tax              tax function
+inverse_income          Inverse income tax functions
+is.fy                   Convenience function for creating FY
+lf_inflator_fy          Labour force inflators
+new_income_tax          New income tax payable Income tax payable with
+                        new tax brackets, tax rates etc
+newstart_income         Newstart income
+npv                     Financial functions
+prohibit_vector_recycling
+                        Prohibit vector recyling
+rebate_income           Rebate income
+sapto                   Senior Australians and Pensioner Tax Offset
+scale_color_discrete_grattan
+                        scale color scale for grattan (uses the
+                        palette)
+texNum                  Convert number to English prose
+theme_grattan           theme_grattan
+theme_grattan_OrangeBackground
+                        A theme for use with ggplots when the
+                        background needs to be Orange
+theme_hugh              A theme for use with ggplots
+wage_inflator           a wage inflator

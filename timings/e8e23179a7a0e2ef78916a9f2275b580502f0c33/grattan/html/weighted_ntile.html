@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Weighted quantiles</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for weighted_ntile {grattan}"><tr><td>weighted_ntile {grattan}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Weighted quantiles</h2>
+
+<h3>Description</h3>
+
+<p>Weighted quantiles
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+weighted_ntile(vector, weights = rep(1, length(vector)), n)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>vector</code></td>
+<td>
+<p>The vector for which quantiles are desired.</p>
+</td></tr>
+<tr valign="top"><td><code>weights</code></td>
+<td>
+<p>The weights associated with the vector. None should be <code>NA</code> or zero.</p>
+</td></tr>
+<tr valign="top"><td><code>n</code></td>
+<td>
+<p>The number of quantiles desired.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>With a short-length vector, or with weights of a high variance, the results may be unexpected.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A vector of integers corresponding to the ntiles. (As in <code>dplyr::ntile</code>.)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+weighted_ntile(1:10, n = 5)
+weighted_ntile(1:10, weights = c(rep(4, 5), rep(1, 5)), n = 5)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>grattan</em> version 1.6.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

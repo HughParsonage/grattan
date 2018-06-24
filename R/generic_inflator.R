@@ -1,5 +1,6 @@
 #' Generic inflator
 #' @description Used to inflate variables in the sample file when there is no clear existing index.
+#' Note this is an unexported function: it is not available to the end-user. 
 #' @param vars A character vector of those variables within \code{.sample_file} for which forecasts are desired. 
 #' @param h An integer, how many years ahead should the inflator be targeted.
 #' @param fy.year.of.sample.file A string representing the financial year of \code{.sample_file}.
@@ -17,15 +18,14 @@ generic_inflator <- function(vars,
                              estimator = "mean",
                              pred_interval = 80) {
   stopifnot(length(h) == 1L)
-  if (h == 0L){
+  stopifnot(is.integer(h), 
+            h >= 0, 
+            length(fy.year.of.sample.file) == 1L,
+            all_fy(fy.year.of.sample.file))
+  if (h == 0L) {
     return(data.table(variable = vars, 
                       inflator = 1))
   }
-  
-  stopifnot(is.integer(h), 
-            h >= 0, 
-            is.fy(fy.year.of.sample.file))
-  
   vars_only_in_201314 <- c("MCS_Emplr_Contr", 
                            "MCS_Prsnl_Contr",
                            "MCS_Othr_Contr",
@@ -33,9 +33,9 @@ generic_inflator <- function(vars,
   
   switch(fy.year.of.sample.file, 
          "2012-13" = if (any(vars_only_in_201314 %chin% vars)) {
-           stop("You have requested a projection / inflator of ",
-                vars[vars %in% vars_only_in_201314],
-                " but this variable ",
+           stop("You have requested a projection / inflator of '",
+                first(vars[vars %in% vars_only_in_201314]),
+                "', yet `fy.year.ofy.sample.file = '2012-13'` but this variable ",
                 "was not present till the 2013-14 sample file.")
          })
   

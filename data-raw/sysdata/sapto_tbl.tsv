@@ -1,0 +1,49 @@
+fy_year	family_status_index	family_status	max_offset	lower_threshold	upper_threshold	taper_rate	source	sapto	sato	pto
+2000-01	2	married	2310	25590	22035		ATO Historical-rates-of-personal-income-tax	0	0	1
+2000-01	3	separated_due_illness	2942	29306	26421		ATO Historical-rates-of-personal-income-tax	0	0	1
+2000-01	1	single	1608	15459	28323		ATO Historical-rates-of-personal-income-tax	0	0	1
+2001-02	2	married	2490	26648	23284		ATO Historical-rates-of-personal-income-tax	0	0	1
+2001-02	3	separated_due_illness	3146	30506	27837		ATO Historical-rates-of-personal-income-tax	0	0	1
+2001-02	1	single	1710	16059	29739		ATO Historical-rates-of-personal-income-tax	0	0	1
+2002-03	2	married	2848	28754	25769	0.125	ATO Historical-rates-of-personal-income-tax	0	0	1
+2002-03	3	separated_due_illness	3564	32966	30739	0.125	ATO Historical-rates-of-personal-income-tax	0	0	1
+2002-03	1	single	1925	17342	32766	0.125	ATO Historical-rates-of-personal-income-tax	0	0	1
+2003-04	2	married	3204	33612	29622	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax2003-04.pdf	0	1	0
+2003-04	3	separated_due_illness	4080	38766	35703	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax2003-04.pdf	0	0	0
+2003-04	1	single	2230	20500	38340	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax2003-04.pdf	0	1	0
+2004-05	2	married	3204	33612	29622	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax2004-05.pdf	0	1	0
+2004-05	3	separated_due_illness	4080	38766	35703	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax2004-05.pdf	0	1	0
+2004-05	1	single	2230	20500	38340	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax2004-05.pdf	0	1	0
+2005-06	2	married	3204	36494	31063	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax_2005-06.pdf	0	1	0
+2005-06	3	separated_due_illness	4080	42334	37487	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax_2005-06.pdf	0	1	0
+2005-06	1	single	2230	21968	39808	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax_2005-06.pdf	0	1	0
+2006-07	2	married	3204	43360	66992	0.125	http://www.inthepicture.com.au/tax_rates.pdf	0	1	0
+2006-07	3	separated_due_illness	4080	47200	79840	0.125	http://www.inthepicture.com.au/tax_rates.pdf	0	1	0
+2006-07	1	single	2230	24867	42707	0.125		0	1	0
+2007-08	2	married	3204	41360	66992	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	0	1	0
+2007-08	3	separated_due_illness	4080	47200	79840	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	0	1	0
+2007-08	1	single	2230	24867	42707	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	0	1	0
+2008-09	1	single	2230	28867	46707	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	0	1	0
+2009-10	1	single	2230	29867	47707	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	0	1	0
+2010-11	1	single	2230	30685	48525	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	0	1	0
+2011-12	1	single	2230	30685	48525	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	0	1	0
+2012-13	2	married	3204	57948	83580	0.125		1	0	0
+2012-13	3	separated_due_illness	4080	62558	95198	0.125		1	0	0
+2012-13	1	single	2230	32279	50119	0.125		1	0	0
+2013-14	2	married	3204	57948	83580	0.125		1	0	0
+2013-14	3	separated_due_illness	4080	62558	95198	0.125		1	0	0
+2013-14	1	single	2230	32279	50119	0.125		1	0	0
+2014-15	2	married	3204	57948	83580	0.125		1	0	0
+2014-15	3	separated_due_illness	4080	62558	95198	0.125		1	0	0
+2014-15	1	single	2230	32279	50119	0.125		1	0	0
+2015-16	2	married	3204	57948	83580	0.125		1	0	0
+2015-16	3	separated_due_illness	4080	62558	95198	0.125		1	0	0
+2015-16	1	single	2230	32279	50119	0.125		1	0	0
+2016-17	2	married	3204	57948	83580	0.125		1	0	0
+2016-17	1	single	2230	32279	50119	0.125		1	0	0
+2017-18	2	married	3204	57948	83580	0.125		1	0	0
+2017-18	1	single	2230	32279	50119	0.125		1	0	0
+2018-19	2	married	3204	57948	83580	0.125		1	0	0
+2018-19	1	single	2230	32279	50119	0.125		1	0	0
+2019-20	2	married	3204	57948	83580	0.125		1	0	0
+2019-20	1	single	2230	32279	50119	0.125		1	0	0
