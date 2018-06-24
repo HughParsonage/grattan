@@ -1,5 +1,9 @@
 # Data for internal use
 # Must be sourced after modification
+if ("dplyr" %in% .packages()) {
+  stop("dplyr is attached. Restart R and source.")
+}
+library(unpivotr)
 library(htmltab)
 library(rsdmx)
 if (packageVersion("rsdmx") < package_version("0.5.10")) {
@@ -1014,6 +1018,4 @@ use_and_write_data(tax_table2,
                    rent_assistance_rates_by_date,
                    
                    youth_income_tests,
-                   youth_annual_rates,
-                   
-                   internal = TRUE, overwrite = TRUE)
+                   youth_annual_rates)
