@@ -1,6 +1,6 @@
 language: r
 r_build_args: --no-build-vignettes
-r_check_args:  '--no-multiarch --ignore-vignettes --no-vignettes'
+r_check_args: --no-multiarch --ignore-vignettes --no-vignettes
 r:
   - oldrel
   - release

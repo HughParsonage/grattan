@@ -19,7 +19,9 @@ environment:
 
   matrix:
   - R_VERSION: release
-    R_ARCH: x64
+    R_ARCH: i386
+    R_BUILD_ARGS: --no-build-vignettes
+    R_CHECK_ARGS: --ignore-vignettes --no-vignettes
     
   - R_VERSION: devel
     R_ARCH: x64
@@ -29,7 +31,7 @@ environment:
 
 build_script:
   - travis-tool.sh install_deps
-  - cmd: Rscript -e "is.null(install.packages('taxstats', repos = 'https://hughparsonage.github.io/drat'))"
+  - cmd: Rscript -e "is.null(install.packages(c('taxstats', 'taxstats1516'), repos = 'https://hughparsonage.github.io/tax-drat'))"
 
 test_script:
   - travis-tool.sh run_tests
