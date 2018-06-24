@@ -5,6 +5,7 @@
 * Bug fixes:
     - `small_business_tax_offset()` is now always positive, fixing the original misinterpretation of the legislation whereby negative business income resulted in a negative offset.
 * `taxstats1516` is now a suggested dependency.
+* `income_tax` is about twice as fast since 1.6.0.0: 1.5-2.0s down from 3.0-3.7s on the 100% population (13 million)
 
 
 ## 1.6.0.0
