@@ -25,6 +25,8 @@ youth_unemployment(income = 0, assets = 0, fy.year = NULL, Date = NULL,
 
 \item{lives_at_home}{(logical, default: \code{FALSE}) Is the individual a dependant who lives at home?}
 
+\item{independent}{(logical, default: \code{TRUE}) Should the individual be considered independent.}
+
 \item{unemployed}{(logical, default: \code{FALSE}) Is the individual unemployed?}
 }
 \value{

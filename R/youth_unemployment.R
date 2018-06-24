@@ -7,6 +7,7 @@
 #' @param has_dependant (logical, default: \code{FALSE}) Does the indvidiual have any dependant children?
 #' @param age Age (only determines whether the 16-17 age or 18 or over rates will apply).
 #' @param lives_at_home (logical, default: \code{FALSE}) Is the individual a dependant who lives at home?
+#' @param independent (logical, default: \code{TRUE}) Should the individual be considered independent.
 #' @param unemployed (logical, default: \code{FALSE}) Is the individual unemployed?
 #' @return The fortnightly unemployment benefit payable for each entry. 
 #' The function is vectorized over its arguments, with any length-1 argument
@@ -24,18 +25,6 @@ youth_unemployment <- function(income = 0,
                                lives_at_home = FALSE,
                                independent = TRUE,
                                unemployed = FALSE) {
-  # TODO: delete once the other branch MAXLENGTH
-  prohibit_vector_recycling.MAXLENGTH <- function(...) {
-    # http://stackoverflow.com/a/9335687/1664978
-    lengths <- vapply(list(...), FUN = length, FUN.VALUE = 0L)
-    max.length <- max(lengths)
-    if (any(lengths != 1L & lengths != max.length)){
-      stop("Only permissible vector lengths are 1 or the maximum (nrow) of the inputs.")
-    } else {
-      invisible(max.length)
-    }
-  }
-  
   max.length <- 
     prohibit_vector_recycling.MAXLENGTH(income,
                                         assets,
@@ -57,7 +46,7 @@ youth_unemployment <- function(income = 0,
                     assets,
                     has_partner,
                     has_dependant,
-                    is_home_owner),
+                    lives_at_home),
                length,
                integer(1))
       
@@ -87,7 +76,7 @@ youth_unemployment <- function(income = 0,
                     assets,
                     has_partner,
                     has_dependant,
-                    is_home_owner),
+                    lives_at_home),
                length,
                integer(1))
       
@@ -145,6 +134,8 @@ youth_unemployment <- function(income = 0,
     }
   
   out <- ok <- NULL
+  
+  Age <- Unemployed <- Independent <- NULL
   
   output <-
     youth_income_tests[input, on = c("fy_year")] %>%
