@@ -31,7 +31,7 @@
 #' @export income_tax
 
 income_tax <- function(income,
-                       fy.year,
+                       fy.year = NULL,
                        age = NULL,
                        family_status = "individual",
                        n_dependants = 0L,
@@ -39,10 +39,10 @@ income_tax <- function(income,
                        return.mode = c("numeric", "integer"),
                        allow.forecasts = FALSE,
                        .debug = FALSE) {
-  if (missing(fy.year)){
-    stop("fy.year is missing, with no default")
+  if (is.null(fy.year)){
+    warning("fy.year is missing, using current year")
   }
-  
+  fy.year = fy.year(format(as.Date(Sys.Date()),"%Y"))
   if (!is.null(.dots.ATO)) {
     if (!is.data.frame(.dots.ATO)) {
       stop(".dots.ATO should be a data frame/data table")
