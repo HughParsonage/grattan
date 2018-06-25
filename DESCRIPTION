@@ -5,7 +5,8 @@ Version: 1.6.0.0
 Date: 2018-05-19
 Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.parsonage@gmail.com"),
               person("Tim", "Cameron", role = "aut"),
-              person("Brendan", "Coates", role = "aut"), 
+              person("Brendan", "Coates", role = "aut"),
+              person("Matthew", "Katzen", role = "aut"),
               person("William", "Young", role = "aut"), 
               person("Ittima", "Cherastidtham", role = "dtc"),
               person("W.", "Karsten", role = "ctb"),
