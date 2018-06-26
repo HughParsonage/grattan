@@ -4,15 +4,17 @@
 \alias{income_tax}
 \title{Income tax payable}
 \usage{
-income_tax(income, fy.year, age = NULL, family_status = "individual",
-  n_dependants = 0L, .dots.ATO = NULL, return.mode = c("numeric",
-  "integer"), allow.forecasts = FALSE, .debug = FALSE)
+income_tax(income, fy.year = NULL, age = NULL,
+  family_status = "individual", n_dependants = 0L, .dots.ATO = NULL,
+  return.mode = c("numeric", "integer"), allow.forecasts = FALSE,
+  .debug = FALSE)
 }
 \arguments{
 \item{income}{The individual assessable income.}
 
 \item{fy.year}{The financial year in which the income was earned. Tax years 2000-01 to 2016-17 are provided, as well as the tax years 2017-18 to 2019-20, for convenience, under the assumption the 2017 Budget measures will pass. 
-In particular, the tax payable is calculated under the assumption that the rate of the Medicare levy will rise to 2.5\% in the 2019-20 tax year.}
+In particular, the tax payable is calculated under the assumption that the rate of the Medicare levy will rise to 2.5\% in the 2019-20 tax year.
+If fy.year is not given, the current financial year is used by default.}
 
 \item{age}{The individual's age.}
 
@@ -53,5 +55,5 @@ if (requireNamespace("taxstats", quietly = TRUE)) {
 
 }
 \author{
-Tim Cameron, Brendan Coates, Hugh Parsonage, William Young
+Tim Cameron, Brendan Coates, Matthew Katzen, Hugh Parsonage, William Young
 }
