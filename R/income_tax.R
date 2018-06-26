@@ -40,9 +40,9 @@ income_tax <- function(income,
                        allow.forecasts = FALSE,
                        .debug = FALSE) {
   if (is.null(fy.year)){
+    fy.year = fy.year(format(as.Date(Sys.Date()),"%Y"))
     warning("fy.year is missing, using current year")
   }
-  fy.year = fy.year(format(as.Date(Sys.Date()),"%Y"))
   if (!is.null(.dots.ATO)) {
     if (!is.data.frame(.dots.ATO)) {
       stop(".dots.ATO should be a data frame/data table")
