@@ -4,6 +4,7 @@
 #' @param income The individual assessable income.
 #' @param fy.year The financial year in which the income was earned. Tax years 2000-01 to 2016-17 are provided, as well as the tax years 2017-18 to 2019-20, for convenience, under the assumption the 2017 Budget measures will pass. 
 #' In particular, the tax payable is calculated under the assumption that the rate of the Medicare levy will rise to 2.5\% in the 2019-20 tax year.
+#' If fy.year is not given, the current financial year is used by default.
 #' @param age The individual's age.
 #' @param family_status For Medicare and SAPTO purposes.
 #' @param n_dependants An integer for the number of children of the taxpayer (for the purposes of the Medicare levy).
@@ -11,7 +12,7 @@
 #' @param .dots.ATO A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files. If \code{.dots.ATO} is a \code{data.table}, I recommend you enclose it with \code{copy()}.
 #' @param allow.forecasts should dates beyond 2019-20 be permitted? Currently, not permitted.
 #' @param .debug (logical, default: \code{FALSE})  If \code{TRUE}, returns a \code{data.table} containing the components. (This argument and its result is liable to change in future versions, possibly without notice.)
-#' @author Tim Cameron, Brendan Coates, Hugh Parsonage, William Young
+#' @author Tim Cameron, Brendan Coates, Matthew Katzen, Hugh Parsonage, William Young
 #' @details The function 'rolling' is inflexible by design. It is designed to guarantee the correct tax payable in a year.
 #' For years preceding the introduction of SAPTO, the maximum offset is assumed to apply to those above pensionable age. 
 #' @return The total personal income tax payable.
@@ -40,7 +41,7 @@ income_tax <- function(income,
                        allow.forecasts = FALSE,
                        .debug = FALSE) {
   if (is.null(fy.year)){
-    fy.year = fy.year(format(as.Date(Sys.Date()),"%Y"))
+    fy.year <- fy.year(format(as.Date(Sys.Date()),"%Y"))
     warning("fy.year is missing, using current year")
   }
   if (!is.null(.dots.ATO)) {
