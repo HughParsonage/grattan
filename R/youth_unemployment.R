@@ -108,12 +108,14 @@ youth_unemployment <- function(income = 0,
     }
   }
   
+  Age <- as.integer(age)
+  
   input <-
     data.table(income = income,
                assets = assets,
                fy_year = fy.year %||% date2fy(Date), 
-               Age = age,
-               Age16or17 = age %between% c(16, 17),
+               Age = Age,
+               Age16or17 = Age == 16L | Age == 17L,
                HasPartner = has_partner,
                HasDependant = has_dependant,
                LivesAtHome = lives_at_home, 
