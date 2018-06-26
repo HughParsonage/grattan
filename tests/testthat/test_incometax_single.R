@@ -2,6 +2,9 @@
 context("Individual income tax")
 
 test_that("income tax checks", {
+  # no fy.year
+  expect_warning(income_tax(30e3), regexp = "fy\\.year is missing, using current year")
+  
   # not fy
   expect_error(income_tax(1, "2015-17"), regexp = "not in correct form")
   
