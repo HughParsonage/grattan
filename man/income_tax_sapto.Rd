@@ -13,7 +13,7 @@ income_tax_sapto(income, fy.year = NULL, age = 42,
 \arguments{
 \item{income}{The individual assessable income.}
 
-\item{fy.year}{The financial year in which the income was earned. Only tax years from 2000-01 to 2016-17 are available.}
+\item{fy.year}{The financial year in which the income was earned. Only tax years from 2000-01 to 2016-17 are available. If fy.year is not given, the current financial year is used by default.}
 
 \item{age}{The individual's age.}
 
