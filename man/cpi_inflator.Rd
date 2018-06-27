@@ -4,16 +4,16 @@
 \alias{cpi_inflator}
 \title{CPI inflator}
 \usage{
-cpi_inflator(from_nominal_price = 1, from_fy, to_fy = "2014-15",
+cpi_inflator(from_nominal_price = 1, from_fy = NULL, to_fy = NULL,
   adjustment = c("seasonal", "none", "trimmed.mean"),
   useABSConnection = FALSE, allow.projection = TRUE)
 }
 \arguments{
 \item{from_nominal_price}{(numeric) the price (or vector of prices) to be inflated}
 
-\item{from_fy}{(character) a character vector with each element in the form "2012-13" representing the financial year contemporaneous to the from_nominal_price.}
+\item{from_fy}{(character) a character vector with each element in the form "2012-13" representing the financial year contemporaneous to the from_nominal_price. If both from_fy and to_fy are not given, the previous financial year is the default value for from_fy. If from_fy is not given but to_fy is, the financial year before to_fy is used by default.}
 
-\item{to_fy}{(character) a character vector with each element in the form "2012-13" representing the financial year that prices are to be inflated.}
+\item{to_fy}{(character) a character vector with each element in the form "2012-13" representing the financial year that prices are to be inflated. If both from_fy and to_fy are not given, the current financial year is the default value for to_fy. If to_fy is not given but from_fy is, the financial year after from_fy is used by default.}
 
 \item{adjustment}{What CPI index to use ("none" = raw series, "seasonal", or "trimmed" [mean]).}
 
