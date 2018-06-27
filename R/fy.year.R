@@ -89,10 +89,10 @@ fy2date <- function(x){
 
 
 date2fy <- function(date, back=NULL){
-  if(!is.null(back)){
-    Year<-year(date) - back
-  }else{
-    Year<-year(date)
+  if (!is.null(back)){
+    Year <- year(date) - back
+  } else {
+    Year <- year(date)
   }
   if_else(month(date) < 7, 
           yr2fy(Year), 
