@@ -3,8 +3,8 @@
 #' @name cpi_inflator
 #' @export 
 #' @param from_nominal_price (numeric) the price (or vector of prices) to be inflated
-#' @param from_fy (character) a character vector with each element in the form "2012-13" representing the financial year contemporaneous to the from_nominal_price. 
-#' @param to_fy (character) a character vector with each element in the form "2012-13" representing the financial year that prices are to be inflated. 
+#' @param from_fy (character) a character vector with each element in the form "2012-13" representing the financial year contemporaneous to the from_nominal_price. If both from_fy and to_fy are not given, the previous financial year is the default value for from_fy. If from_fy is not given but to_fy is, the financial year before to_fy is used by default. 
+#' @param to_fy (character) a character vector with each element in the form "2012-13" representing the financial year that prices are to be inflated. If both from_fy and to_fy are not given, the current financial year is the default value for to_fy. If to_fy is not given but from_fy is, the financial year after from_fy is used by default. 
 #' @param adjustment What CPI index to use ("none" = raw series, "seasonal", or "trimmed" [mean]).
 #' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. 
 #' The internal data is up-to-date as of 2017-Q4. 
@@ -14,19 +14,27 @@
 #' cpi_inflator(100, from_fy = "2005-06", to_fy = "2014-15")
 #' @return The value of \code{from_nominal_price} in real (\code{to_fy}) dollars.
 
-cpi_inflator <- function(from_nominal_price = 1, from_fy, to_fy = "2014-15", 
+cpi_inflator <- function(from_nominal_price = 1, from_fy = NULL, to_fy = NULL, 
                          adjustment = c("seasonal", "none", "trimmed.mean"),
                          useABSConnection = FALSE,
                          allow.projection = TRUE) {
   # CRAN
   obsTime <- obsValue <- to_index <- from_index <- NULL
   
-  if (anyNA(from_fy)) {
-    stop("`from_fy` contained NAs. Remove NAs before applying.")
-  } 
-  if (anyNA(to_fy)){
-    stop("`to_fy` contained NAs. Remove NAs before applying.")
+  if (is.null(from_fy) && is.null(to_fy)){
+    from_fy <- fyback(date2fy(Sys.Date()), back = 1)
+    to_fy <- date2fy(Sys.Date())
+    warning("from_fy and to_fy are missing, using previous and current financial years respectively")
   }
+  if (is.null(to_fy)){
+    to_fy <- fyforward(from_fy , forward = 1)
+    warning("to_fy is missing, using financial year after from_fy")
+  }
+  if (is.null(from_fy)){
+    from_fy <- fyback(to_fy, back = 1)
+    warning("from_fy is missing, using financial year before to_fy")
+  }
+  
   # Don't like vector recycling
   # http://stackoverflow.com/a/9335687/1664978
   max.length <- 
