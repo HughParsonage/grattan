@@ -21,6 +21,9 @@ test_that("Other fy utils", {
   expect_error(fy2date("2014-16"))
   
   expect_equal(fy2date("2012-13"), as.Date("2013-06-30"))
+  
+  expect_equal(fyback("2012-13", back=10),"2022-2023")
+  expect_equal(fyforward("2012-13", forward=10),"2022-23")
 })
 
 test_that("all_fy", {
