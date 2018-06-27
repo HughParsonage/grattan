@@ -133,7 +133,7 @@ test_that("new_medicare_levy matches", {
                regexp = "Whenever `Spouse_income` is positive,")
   
   expect_error(new_medicare_levy(parameter_table = as.data.frame(par_tbl)))
-  expect_error(new_medicare_levy(parameter_table = drop_cols(par_tbl, "taper")),
+  expect_error(new_medicare_levy(parameter_table = hutils::drop_cols(par_tbl, "taper")),
                regexp = "parameter_table must contain certain columns")
   
   
