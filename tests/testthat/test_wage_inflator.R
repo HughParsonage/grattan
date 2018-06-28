@@ -6,6 +6,9 @@ test_that("Default from_fy and to_fy", {
   expect_equal(suppressWarnings(wage_inflator()),
                wage_inflator(from_fy = yr2fy(year(Sys.Date()) - 1),
                               to_fy = date2fy(Sys.Date())))
+  
+  expect_error(wage_inflator(from_fy = "2014-15"), 
+               regexp = "`to_fy` is missing, with no default.")
 })
 
 test_that("Error handling", {
