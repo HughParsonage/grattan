@@ -1,9 +1,21 @@
 context("Wage inflator")
 
+test_that("Default from_fy and to_fy", {
+  expect_warning(wage_inflator(), 
+                 regexp = "`from_fy` and `to_fy` are missing, using previous and current financial years respectively")
+  expect_equal(suppressWarnings(wage_inflator()),
+               wage_inflator(from_fy = yr2fy(year(Sys.Date()) - 1),
+                              to_fy = date2fy(Sys.Date())))
+})
+
 test_that("Error handling", {
   skip_on_cran()
-  expect_error(wage_inflator(from_fy = NA, to_fy = "2015-16"))
-  
+  expect_error(lf_inflator_fy(to_fy = "2013-14"), 
+               regexp = "`from_fy` is missing", 
+               fixed = TRUE)
+  expect_error(lf_inflator_fy(from_fy = "2013-14"), 
+               regexp = "`to_fy` is missing",
+               fixed = TRUE)
   expect_error(wage_inflator(1, from_fy = "2013-14", to_fy = "2045-46", allow.projection = FALSE), regexp = "wage index data")
   expect_error(wage_inflator(from_fy = "2017-18",
                               to_fy = "2018-19",
