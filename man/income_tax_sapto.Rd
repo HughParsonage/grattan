@@ -4,15 +4,16 @@
 \alias{income_tax_sapto}
 \title{Income tax payable as a function of SAPTO}
 \usage{
-income_tax_sapto(income, fy.year, age = 42, family_status = "individual",
-  n_dependants = 0L, return.mode = c("numeric", "integer"),
-  .dots.ATO = NULL, allow.forecasts = FALSE, sapto.eligible,
-  medicare.sapto.eligible, new_sapto_tbl = NULL)
+income_tax_sapto(income, fy.year = NULL, age = 42,
+  family_status = "individual", n_dependants = 0L,
+  return.mode = c("numeric", "integer"), .dots.ATO = NULL,
+  allow.forecasts = FALSE, sapto.eligible, medicare.sapto.eligible,
+  new_sapto_tbl = NULL)
 }
 \arguments{
 \item{income}{The individual assessable income.}
 
-\item{fy.year}{The financial year in which the income was earned. Only tax years from 2000-01 to 2016-17 are available.}
+\item{fy.year}{The financial year in which the income was earned. Only tax years from 2000-01 to 2016-17 are available. If fy.year is not given, the current financial year is used by default.}
 
 \item{age}{The individual's age.}
 

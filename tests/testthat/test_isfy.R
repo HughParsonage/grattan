@@ -31,4 +31,18 @@ test_that("is_fy2", {
   expect_true(all(is_fy2(c("2000-01", "2010-11", "2013-14", "2020-21"))))
 })
 
+test_that("Correct logic when asserting fys", {
+  expect_error(fy2date(c("foo", "2015-16")), 
+               regexp = "fy.yr contains non-FYs", 
+               fixed = TRUE)
+  expect_error(fy2yr(c("foo", "2015-16")), 
+               regexp = "fy.yr contains non-FYs", 
+               fixed = TRUE)
+})
+
+test_that("fy.year and yr2fy are identical", {
+  x <- 1900:2100
+  expect_identical(fy.year(x), yr2fy(x))
+})
+
 
