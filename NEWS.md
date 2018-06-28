@@ -1,3 +1,10 @@
+## 1.6.2.0
+### 2018-06-28
+* Added default values to the following functions:
+    - `income_tax`, `income_tax_sapto`: the default value for fy.year is the current financial year
+    - `cpi_inflator`, `lf_inflator_fy`, `wage_inflator`: if both from_fy and to_fy are missing, the default values become the previous and current financial years respectively. If only one of the two are missing, an error appears.
+
+
 ## 1.6.1.0
 * New functions:
     - `compare_avg_tax_rates`: create a difference in average tax rates between multiple models and a baseline tax, by percentile.
