@@ -18,7 +18,7 @@
 \value{
 For \code{is.fy}, a logical, whether its argument is a financial year.
 The following forms are allowed: \code{2012-13}, \code{201213}, \code{2012 13}, only.
-For \code{fy.year}, \code{yr2fy}, \code{date2fy}, \code{fyback}, and \code{fyforward}, the financial year. 
+For \code{fy.year}, \code{yr2fy}, and \code{date2fy}, the financial year. 
 For the inverses, a numeric corresponding to the year.
 }
 \description{
@@ -30,6 +30,4 @@ is.fy("2012-14")
 yr2fy(2012)
 fy2yr("2015-16")
 date2fy("2014-08-09")
-fyback("2015-16", back = 1)
-fyforward("2015-16", forward = 1)
 }

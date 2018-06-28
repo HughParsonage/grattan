@@ -7,7 +7,7 @@
 #' @param date A string or date for which the financial year is desired. Note that \code{yr2fy} does not check its argument is an integer.
 #' @return For \code{is.fy}, a logical, whether its argument is a financial year.
 #' The following forms are allowed: \code{2012-13}, \code{201213}, \code{2012 13}, only.
-#' For \code{fy.year}, \code{yr2fy}, \code{date2fy}, \code{fyback}, and \code{fyforward}, the financial year. 
+#' For \code{fy.year}, \code{yr2fy}, and \code{date2fy}, the financial year. 
 #' For the inverses, a numeric corresponding to the year.
 #' @examples
 #' is.fy("2012-13")
@@ -15,9 +15,7 @@
 #' yr2fy(2012)
 #' fy2yr("2015-16")
 #' date2fy("2014-08-09")
-#' fyback("2015-16", back = 1)
-#' fyforward("2015-16", forward = 1)
-#' @export is.fy fy.year yr2fy fy2yr fy2date date2fy fyback fyforward
+#' @export is.fy fy.year yr2fy fy2yr fy2date date2fy 
 NULL
 
 
@@ -94,20 +92,4 @@ date2fy <- function(date){
   if_else(month(date) < 7, 
           yr2fy(year(date)), 
           yr2fy(year(date) + 1))
-}
-
-fyback <- function(fy, back){
-  if (!any(is.fy(fy))){
-    stop("fy contains non-FYs")
-  } else {
-    yr2fy(fy2yr(fy) - back)
-  }
-}
-
-fyforward <- function(fy, forward){
-  if (!any(is.fy(fy))){
-    stop("fy contains non-FYs")
-  } else {
-    yr2fy(fy2yr(fy) + forward)
-  }
 }
