@@ -3,8 +3,9 @@
 #' @name cpi_inflator
 #' @export 
 #' @param from_nominal_price (numeric) the price (or vector of prices) to be inflated
-#' @param from_fy (character) a character vector with each element in the form "2012-13" representing the financial year contemporaneous to the from_nominal_price. If both from_fy and to_fy are not given, the previous financial year is the default value for from_fy.  
-#' @param to_fy (character) a character vector with each element in the form "2012-13" representing the financial year that prices are to be inflated. If both from_fy and to_fy are not given, the current financial year is the default value for to_fy.
+#' @param from_fy,to_fy (character) a character vector with each element in the form "2012-13" representing the financial years between which the CPI inflator is desired.
+#' 
+#' If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{from_fy} is set to the previous financial year and \code{to_fy} to the current financial year, with a warning. Setting only one is an error.
 #' @param adjustment What CPI index to use ("none" = raw series, "seasonal", or "trimmed" [mean]).
 #' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. 
 #' The internal data is up-to-date as of 2017-Q4. 
@@ -14,7 +15,9 @@
 #' cpi_inflator(100, from_fy = "2005-06", to_fy = "2014-15")
 #' @return The value of \code{from_nominal_price} in real (\code{to_fy}) dollars.
 
-cpi_inflator <- function(from_nominal_price = 1, from_fy = NULL, to_fy = NULL, 
+cpi_inflator <- function(from_nominal_price = 1,
+                         from_fy = NULL,
+                         to_fy = NULL, 
                          adjustment = c("seasonal", "none", "trimmed.mean"),
                          useABSConnection = FALSE,
                          allow.projection = TRUE) {
@@ -22,15 +25,15 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy = NULL, to_fy = NULL,
   obsTime <- obsValue <- to_index <- from_index <- NULL
   
   if (is.null(from_fy) && is.null(to_fy)){
-    from_fy <- yr2fy(year(Sys.Date()) - 1)
     to_fy <- date2fy(Sys.Date())
+    from_fy <- prev_fy(to_fy)
     warning("`from_fy` and `to_fy` are missing, using previous and current financial years respectively")
   }
   if (is.null(from_fy)){
-    stop("`from_fy` is missing")
+    stop("`from_fy` is missing, with no default.")
   } 
   if (is.null(to_fy)){
-    stop("`to_fy` is missing")
+    stop("`to_fy` is missing, with no default.")
   }
   
   # Don't like vector recycling
@@ -70,12 +73,7 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy = NULL, to_fy = NULL,
   cpi.indices <- 
     as.data.table(cpi) %>%
     .[grepl("Q1", obsTime)] %>%
-    .[, fy_year := yr2fy(sub("-Q1", "", obsTime, fixed = TRUE))]
-  
-  input <-
-    data.table(from_nominal_price = from_nominal_price,
-                           from_fy = from_fy,
-                           to_fy = to_fy)
+    .[, fy_year := yr2fy(as.integer(sub("-Q1", "", obsTime, fixed = TRUE)))]
   
   if (!allow.projection && !all(to_fy %in% cpi.indices$fy_year)) {
     if (length(to_fy) == 1L) {
@@ -97,16 +95,26 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy = NULL, to_fy = NULL,
   if (allow.projection && !all(to_fy %in% cpi.indices$fy_year)){
     # Number of years beyond the data our forecast must reach
     years.beyond <- max(fy2yr(to_fy)) - max(fy2yr(cpi.indices$fy_year))
-    cpi_index_forecast <- cpi.indices %$% gforecast(obsValue, h = years.beyond) %$% as.numeric(mean)
+    cpi_index_forecast <-
+      cpi.indices %$%
+      gforecast(obsValue, h = years.beyond) %$%
+      as.numeric(mean)
+    
     cpi.indices.new <- 
-      data.table(fy_year = yr2fy(seq(max(fy2yr(cpi.indices$fy_year)) + 1,
-                                                 max(fy2yr(to_fy)),
-                                                 by = 1L)),
-                             obsValue = cpi_index_forecast)
-    cpi.indices <- rbindlist(list(cpi.indices, cpi.indices.new), use.names = TRUE, fill = TRUE)
+      setDT(list(fy_year = yr2fy(seq(max(fy2yr(cpi.indices$fy_year)) + 1,
+                                     max(fy2yr(to_fy)),
+                                     by = 1L)),
+                 obsValue = cpi_index_forecast))
+    cpi.indices <-
+      rbindlist(list(cpi.indices, cpi.indices.new),
+                use.names = TRUE,
+                fill = TRUE)
   }
   
-  inflator(from_nominal_price, from = from_fy, to = to_fy, inflator_table = cpi.indices,
+  inflator(from_nominal_price,
+           from = from_fy,
+           to = to_fy,
+           inflator_table = cpi.indices,
            index.col = "obsValue", 
            time.col = "fy_year")
 }

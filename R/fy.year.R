@@ -68,7 +68,7 @@ fy.year <- function(yr_ending){
 }
 
 yr2fy <- function(yr_ending){
-  sprintf("%d-%02d", yr_ending - 1L, yr_ending %% 100L)
+  sprintf("%d-%02d", as.integer(yr_ending) - 1L, as.integer(yr_ending) %% 100L)
 }
 
 fy2yr <- function(fy.yr){

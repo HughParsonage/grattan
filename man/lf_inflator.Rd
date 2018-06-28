@@ -20,9 +20,9 @@ lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date,
 \arguments{
 \item{labour_force}{A numeric vector.}
 
-\item{from_fy}{Financial year of \code{labour_force}. If both from_fy and to_fy are not given, the previous financial year is the default value for from_fy.}
+\item{from_fy, to_fy}{(character) a character vector with each element in the form "2012-13" representing the financial years between which the labour force inflator is desired.
 
-\item{to_fy}{Financial year for which the labour force is predicted. If both from_fy and to_fy are not given, the current financial year is the default value for to_fy.}
+If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{from_fy} is set to the previous financial year and \code{to_fy} to the current financial year, with a warning. Setting only one is an error.}
 
 \item{useABSConnection}{Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. The internal data was updated on 2018-05-21 to include data up to 2018-04-01.}
 

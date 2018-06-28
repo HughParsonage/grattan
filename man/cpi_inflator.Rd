@@ -11,9 +11,9 @@ cpi_inflator(from_nominal_price = 1, from_fy = NULL, to_fy = NULL,
 \arguments{
 \item{from_nominal_price}{(numeric) the price (or vector of prices) to be inflated}
 
-\item{from_fy}{(character) a character vector with each element in the form "2012-13" representing the financial year contemporaneous to the from_nominal_price. If both from_fy and to_fy are not given, the previous financial year is the default value for from_fy.}
+\item{from_fy, to_fy}{(character) a character vector with each element in the form "2012-13" representing the financial years between which the CPI inflator is desired.
 
-\item{to_fy}{(character) a character vector with each element in the form "2012-13" representing the financial year that prices are to be inflated. If both from_fy and to_fy are not given, the current financial year is the default value for to_fy.}
+If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{from_fy} is set to the previous financial year and \code{to_fy} to the current financial year, with a warning. Setting only one is an error.}
 
 \item{adjustment}{What CPI index to use ("none" = raw series, "seasonal", or "trimmed" [mean]).}
 

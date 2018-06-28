@@ -9,6 +9,8 @@ test_that("Default from_fy and to_fy", {
   
   expect_error(wage_inflator(from_fy = "2014-15"), 
                regexp = "`to_fy` is missing, with no default.")
+  expect_error(wage_inflator(to_fy = "2014-15"), 
+               regexp = "`from_fy` is missing, with no default.")
 })
 
 test_that("Error handling", {

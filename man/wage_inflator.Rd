@@ -12,9 +12,9 @@ wage_inflator(wage = 1, from_fy = NULL, to_fy = NULL,
 \arguments{
 \item{wage}{The amount to be inflated (1 by default).}
 
-\item{from_fy}{A character vector of the form "2012-13" representing the FY ending that the wage index is to be taken (i.e. Q4 in that year). FY year must be 1996-97 or later.If both from_fy and to_fy are not given, the previous financial year is the default value for from_fy.}
+\item{from_fy, to_fy}{(character) a character vector with each element in the form "2012-13" representing the financial years between which the CPI inflator is desired.
 
-\item{to_fy}{The FY ending that the wage index is to be taken. If both from_fy and to_fy are not given, the current financial year is the default value for to_fy.}
+If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{from_fy} is set to the previous financial year and \code{to_fy} to the current financial year, with a warning. Setting only one is an error.}
 
 \item{useABSConnection}{Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. The internal data was updated on 2018-05-21 to include data up to 2018-Q1.}
 
