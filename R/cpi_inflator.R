@@ -22,17 +22,15 @@ cpi_inflator <- function(from_nominal_price = 1, from_fy = NULL, to_fy = NULL,
   obsTime <- obsValue <- to_index <- from_index <- NULL
   
   if (is.null(from_fy) && is.null(to_fy)){
-    from_fy <- fyback(date2fy(Sys.Date()), back = 1)
+    from_fy <- yr2fy(year(Sys.Date()) - 1)
     to_fy <- date2fy(Sys.Date())
-    warning("from_fy and to_fy are missing, using previous and current financial years respectively")
-  }
-  if (is.null(to_fy)){
-    to_fy <- fyforward(from_fy , forward = 1)
-    warning("to_fy is missing, using financial year after from_fy")
+    warning("`from_fy` and `to_fy` are missing, using previous and current financial years respectively")
   }
   if (is.null(from_fy)){
-    from_fy <- fyback(to_fy, back = 1)
-    warning("from_fy is missing, using financial year before to_fy")
+    stop("`from_fy` is missing")
+  } 
+  if (is.null(to_fy)){
+    stop("`to_fy` is missing")
   }
   
   # Don't like vector recycling

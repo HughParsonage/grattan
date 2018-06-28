@@ -2,14 +2,16 @@ context("Inflators return correct results")
 
 test_that("Warnings", {
   expect_warning(cpi_inflator(), 
-                 regexp = "from_fy and to_fy are missing, using previous and current financial years respectively")
-  expect_warning(cpi_inflator(to_fy = "2015-16"), 
-                 regexp = "from_fy is missing, using financial year before to_fy")
-  expect_warning(cpi_inflator(from_fy = "2014-15"), 
-                 regexp = "to_fy is missing, using financial year after from_fy")
+                 regexp = "`from_fy` and `to_fy` are missing, using previous and current financial years respectively")
 })
 
 test_that("Errors", {
+  expect_error(cpi_inflator(to_fy = "2013-14"), 
+               regexp = "`from_fy` is missing", 
+               fixed = TRUE)
+  expect_error(cpi_inflator(from_fy = "2013-14"), 
+               regexp = "`to_fy` is missing",
+               fixed = TRUE)
   expect_error(cpi_inflator(from_fy = "2013-14", to_fy = "2040-41",
                             allow.projection = FALSE), 
                regexp = "`to_fy = 2040-41` yet `allow.projection = FALSE`.", 
@@ -38,14 +40,8 @@ test_that("cpi returns known results", {
                          useABSConnection = FALSE,
                          allow.projection = FALSE), 
             1.030)
-  expect_equal(suppressWarnings(cpi_inflator(from_fy = "2014-15")),
-               1.013109,
-               tol=1e5)
-  expect_equal(suppressWarnings(cpi_inflator(to_fy = "2014-15")),
-               1.013283,
-               tol=1e5)
   expect_equal(suppressWarnings(cpi_inflator()),
-               cpi_inflator(from_fy = fyback(date2fy(Sys.Date()), back = 1),
+               cpi_inflator(from_fy = yr2fy(year(Sys.Date()) - 1),
                             to_fy = date2fy(Sys.Date())))
 })
 
