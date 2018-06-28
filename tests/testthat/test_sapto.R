@@ -1,5 +1,13 @@
 context("SAPTO")
 
+test_that("Mising fy.year",{
+  expect_warning(income_tax_sapto(33000,sapto.eligible = T), 
+                 regexp = "fy\\.year is missing, using current financial year")
+  
+  expect_equal(suppressWarnings(income_tax_sapto(33000,sapto.eligible = T)),
+               income_tax_sapto(33000,fy.year=date2fy(Sys.Date()),sapto.eligible = T))
+})
+
 test_that("SAPTO for singles", {
   sapto(33279, fy.year = "2015-16")
 })
@@ -109,7 +117,7 @@ test_that("New SAPTO matches old SAPTO for SAPTO", {
 })
 
 test_that("income_tax_sapto", {
-  expect_error(income_tax_sapto(allow.forecasts = TRUE),
+  expect_error(suppressWarnings(income_tax_sapto(allow.forecasts = TRUE)),
                regexp = "not used")
   skip_on_cran()
   skip_if_not_installed("taxstats", minimum_version = "0.0.5")

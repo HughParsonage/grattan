@@ -9,13 +9,22 @@
 #' The following forms are allowed: \code{2012-13}, \code{201213}, \code{2012 13}, only.
 #' For \code{fy.year}, \code{yr2fy}, and \code{date2fy}, the financial year. 
 #' For the inverses, a numeric corresponding to the year.
+#' 
+#' \code{fy.year} is a deprecated alias for \code{yr2fy}, the latter is slightly more efficient, as well as more declarative.
+#' 
+#' \code{fy2yr} converts a financial year to the year ending: \code{fy2yr("2016-17")} returns 2017. \code{yr2fy} is the inverse: \code{yr2fy(fy2yr("2016-17")) == "2016-17"}.
+#' 
+#' \code{fy2date} converts a financial year to the 30 June of the financial year ending.
+#' 
+#' \code{date2fy} converts a date to the corresponding financial year.
+#' 
 #' @examples
 #' is.fy("2012-13")
 #' is.fy("2012-14")
 #' yr2fy(2012)
 #' fy2yr("2015-16")
 #' date2fy("2014-08-09")
-#' @export is.fy fy.year yr2fy fy2yr fy2date date2fy
+#' @export is.fy fy.year yr2fy fy2yr fy2date date2fy 
 NULL
 
 
@@ -54,32 +63,26 @@ all_fy <- function(x) {
   !anyNA(fmatch(x, a))
 }
 
-
 fy.year <- function(yr_ending){
   paste0(as.integer(yr_ending) - 1, "-", substr(yr_ending, 3, 4))
 }
 
-
-
-
 yr2fy <- function(yr_ending){
-  paste0(as.integer(yr_ending) - 1, "-", substr(yr_ending, 3, 4))
+  sprintf("%d-%02d", as.integer(yr_ending) - 1L, as.integer(yr_ending) %% 100L)
 }
 
-
-
 fy2yr <- function(fy.yr){
-  if (any(!is.fy(fy.yr))){
+  if (!all(is.fy(fy.yr))){
     stop("fy.yr contains non-FYs")
   } else  {
-    1 + as.integer(gsub("^.*([12][0-9]{3}).?[0-9]{2}.*$", "\\1", fy.yr))
+    1L + as.integer(gsub("^.*([12][0-9]{3}).?[0-9]{2}.*$", "\\1", fy.yr))
   }
 }
 
 
 
 fy2date <- function(x){
-  if (!any(is.fy(x))){
+  if (!all(is.fy(x))){
     stop("fy.yr contains non-FYs")
   } else {
     date <- paste0(as.numeric(gsub("^([1-9][0-9]{3}).*", "\\1", x)) + 1, "-06-30") 
@@ -88,9 +91,8 @@ fy2date <- function(x){
 }
 
 
-
 date2fy <- function(date){
-  if_else(month(date) < 7, 
+  if_else(month(date) < 7L, 
           yr2fy(year(date)), 
-          yr2fy(year(date) + 1))
+          yr2fy(year(date) + 1L))
 }

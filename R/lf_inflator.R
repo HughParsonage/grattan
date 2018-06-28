@@ -1,14 +1,15 @@
 #' Labour force inflators
 #' 
 #' @name lf_inflator
-#' @author Hugh Parsonage and Tim Cameron
+#' @author Tim Cameron, Matthew Katzen, and Hugh Parsonage 
 #' @rdname lf_inflator
 #' @aliases lf_inflator_fy
 #' @param labour_force A numeric vector.
-#' @param from_date The date of \code{labour_force}.
+#' @param from_date The date of \code{labour_force}. 
 #' @param to_date Dates as a character vector.
-#' @param from_fy Financial year of \code{labour_force}.
-#' @param to_fy Financial year for which the labour force is predicted.
+#' @param from_fy,to_fy (character) a character vector with each element in the form "2012-13" representing the financial years between which the labour force inflator is desired.
+#' 
+#' If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{from_fy} is set to the previous financial year and \code{to_fy} to the current financial year, with a warning. Setting only one is an error.
 #' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. The internal data was updated on 2018-05-21 to include data up to 2018-04-01.
 #' @param allow.projection Logical. Should projections be allowed?
 #' @param use.month An integer (corresponding to the output of \code{data.table::month}) representing the month of the series used for the inflation.
@@ -32,7 +33,9 @@
 #' @return The relative labour force between \code{to_date} and \code{for_date} or \code{to_fy} and \code{from_fy}, multiplied by \code{labour_force}.
 #' @export lf_inflator lf_inflator_fy
 
-lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy, 
+lf_inflator_fy <- function(labour_force = 1,
+                           from_fy = NULL,
+                           to_fy = NULL, 
                            useABSConnection = FALSE, allow.projection = TRUE, 
                            use.month = 1L,
                            forecast.series = c("mean", "upper", "lower", "custom"),
@@ -41,6 +44,19 @@ lf_inflator_fy <- function(labour_force = 1, from_fy = "2012-13", to_fy,
   # CRAN
   obsTime <- NULL; obsValue <- NULL; to_index <- NULL; from_index <- NULL
   obsTimeDate <- NULL
+  
+  if (is.null(from_fy) && is.null(to_fy)){
+    to_fy <- date2fy(Sys.Date())
+    from_fy <- prev_fy(to_fy)
+    warning("`from_fy` and `to_fy` are missing, using previous and current financial years respectively")
+  }
+  if (is.null(from_fy)){
+    stop("`from_fy` is missing, with no default.")
+  } 
+  if (is.null(to_fy)){
+    stop("`to_fy` is missing, with no default.")
+  }
+  
   if (useABSConnection){
     lf.url.trend <- 
       "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978"
