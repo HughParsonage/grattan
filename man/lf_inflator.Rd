@@ -9,7 +9,7 @@
 ABS Cat 6202.0 \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocument}.
 }
 \usage{
-lf_inflator_fy(labour_force = 1, from_fy = "2012-13", to_fy,
+lf_inflator_fy(labour_force = 1, from_fy = NULL, to_fy = NULL,
   useABSConnection = FALSE, allow.projection = TRUE, use.month = 1L,
   forecast.series = c("mean", "upper", "lower", "custom"),
   forecast.level = 95, lf.series = NULL)
