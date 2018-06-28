@@ -2,9 +2,9 @@
 #' 
 #' @name cpi_inflator
 #' @export 
-#' @param \code{from_nominal_price} (numeric) the price (or vector of prices) to be inflated
-#' @param \code{from_fy} (character) a character vector with each element in the form "2012-13" representing the financial year contemporaneous to the from_nominal_price. If both from_fy and to_fy are not given, the previous financial year is the default value for from_fy.  
-#' @param \code{to_fy} (character) a character vector with each element in the form "2012-13" representing the financial year that prices are to be inflated. If both from_fy and to_fy are not given, the current financial year is the default value for to_fy.
+#' @param from_nominal_price (numeric) the price (or vector of prices) to be inflated
+#' @param from_fy (character) a character vector with each element in the form "2012-13" representing the financial year contemporaneous to the from_nominal_price. If both from_fy and to_fy are not given, the previous financial year is the default value for from_fy.  
+#' @param to_fy (character) a character vector with each element in the form "2012-13" representing the financial year that prices are to be inflated. If both from_fy and to_fy are not given, the current financial year is the default value for to_fy.
 #' @param adjustment What CPI index to use ("none" = raw series, "seasonal", or "trimmed" [mean]).
 #' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. 
 #' The internal data is up-to-date as of 2017-Q4. 
