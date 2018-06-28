@@ -1,7 +1,22 @@
 context("lf inflator")
 
+test_that("Default from_fy and to_fy", {
+  expect_warning(lf_inflator_fy(), 
+                 regexp = "`from_fy` and `to_fy` are missing, using previous and current financial years respectively")
+  expect_equal(suppressWarnings(lf_inflator_fy()),
+               lf_inflator_fy(from_fy = yr2fy(year(Sys.Date()) - 1),
+                            to_fy = date2fy(Sys.Date())))
+})
+
+
 test_that("Error handling", {
   skip_on_cran()
+  expect_error(lf_inflator_fy(to_fy = "2013-14"), 
+               regexp = "`from_fy` is missing", 
+               fixed = TRUE)
+  expect_error(lf_inflator_fy(from_fy = "2013-14"), 
+               regexp = "`to_fy` is missing",
+               fixed = TRUE)
   expect_error(lf_inflator_fy(from_fy = "2012-13", to_fy = "2099-00", allow.projection = FALSE),
                regexp = "to_fy are in labour force data")
   expect_error(lf_inflator_fy(from_fy = "2012-13", to_fy = "2025-26", 
