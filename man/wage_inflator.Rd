@@ -4,9 +4,10 @@
 \alias{wage_inflator}
 \title{Inflation using the Wage Price Index.}
 \usage{
-wage_inflator(wage = 1, from_fy, to_fy, useABSConnection = FALSE,
-  allow.projection = TRUE, forecast.series = c("mean", "upper", "lower",
-  "custom"), forecast.level = 95, wage.series = NULL)
+wage_inflator(wage = 1, from_fy = NULL, to_fy = NULL,
+  useABSConnection = FALSE, allow.projection = TRUE,
+  forecast.series = c("mean", "upper", "lower", "custom"),
+  forecast.level = 95, wage.series = NULL)
 }
 \arguments{
 \item{wage}{The amount to be inflated (1 by default).}

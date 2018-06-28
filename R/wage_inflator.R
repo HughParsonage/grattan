@@ -2,8 +2,8 @@
 #' @description Predicts the inflation of hourly rates of pay, between two financial years.
 #' 
 #' @param wage The amount to be inflated (1 by default).
-#' @param from_fy A character vector of the form "2012-13" representing the FY ending that the wage index is to be taken (i.e. Q4 in that year). FY year must be 1996-97 or later.
-#' @param to_fy The FY ending that the wage index is to be taken.
+#' @param from_fy A character vector of the form "2012-13" representing the FY ending that the wage index is to be taken (i.e. Q4 in that year). FY year must be 1996-97 or later.If both from_fy and to_fy are not given, the previous financial year is the default value for from_fy.  
+#' @param to_fy The FY ending that the wage index is to be taken. If both from_fy and to_fy are not given, the current financial year is the default value for to_fy.
 #' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. The internal data was updated on 2018-05-21 to include data up to 2018-Q1.
 #' @param allow.projection If set to \code{TRUE} the \code{forecast} package is used to project forward, if required. 
 #' @param forecast.series Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals. A fourth option \code{custom} allows manual forecasts to be set.
@@ -30,8 +30,8 @@
 #' @export
 
 wage_inflator <- function(wage = 1, 
-                          from_fy, 
-                          to_fy, 
+                          from_fy = NULL, 
+                          to_fy = NULL, 
                           useABSConnection = FALSE,
                           allow.projection = TRUE, 
                           forecast.series = c("mean", "upper", "lower", "custom"), 
@@ -41,8 +41,16 @@ wage_inflator <- function(wage = 1,
   # CRAN
   obsTime <- obsValue <- to_index <- from_index <- NULL
   
-  if (anyNA(from_fy) || anyNA(to_fy)){
-    stop("from_fy and to_fy contain NAs. Filter before applying this function.")
+  if (is.null(from_fy) && is.null(to_fy)){
+    from_fy <- yr2fy(year(Sys.Date()) - 1)
+    to_fy <- date2fy(Sys.Date())
+    warning("`from_fy` and `to_fy` are missing, using previous and current financial years respectively")
+  }
+  if (is.null(from_fy)){
+    stop("`from_fy` is missing")
+  } 
+  if (is.null(to_fy)){
+    stop("`to_fy` is missing")
   }
   
   # Avoid vector recycling
