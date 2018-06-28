@@ -20,6 +20,12 @@ For \code{is.fy}, a logical, whether its argument is a financial year.
 The following forms are allowed: \code{2012-13}, \code{201213}, \code{2012 13}, only.
 For \code{fy.year}, \code{yr2fy}, and \code{date2fy}, the financial year. 
 For the inverses, a numeric corresponding to the year.
+
+\code{fy2yr} converts a financial year to the year ending: \code{fy2yr("2016-17")} returns 2017. \code{yr2fy} is the inverse: \code{yr2fy(fy2yr("2016-17")) == "2016-17"}.
+
+\code{fy2date} converts a financial year to the 30 June of the financial year ending.
+
+\code{date2fy} converts a date to the corresponding financial year.
 }
 \description{
 Convenience functions for dealing with financial years
