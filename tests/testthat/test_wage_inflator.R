@@ -4,7 +4,7 @@ test_that("Default from_fy and to_fy", {
   expect_warning(wage_inflator(), 
                  regexp = "`from_fy` and `to_fy` are missing, using previous and current financial years respectively")
   expect_equal(suppressWarnings(wage_inflator()),
-               wage_inflator(from_fy = yr2fy(year(Sys.Date()) - 1),
+               wage_inflator(from_fy = prev_fy(date2fy(Sys.Date())),
                               to_fy = date2fy(Sys.Date())))
   
   expect_error(wage_inflator(from_fy = "2014-15"), 

@@ -4,7 +4,7 @@ test_that("Default from_fy and to_fy", {
   expect_warning(cpi_inflator(), 
                  regexp = "`from_fy` and `to_fy` are missing, using previous and current financial years respectively")
   expect_equal(suppressWarnings(cpi_inflator()),
-               cpi_inflator(from_fy = yr2fy(year(Sys.Date()) - 1),
+               cpi_inflator(from_fy = prev_fy(date2fy(Sys.Date())),
                               to_fy = date2fy(Sys.Date())))
 })
 
