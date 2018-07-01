@@ -8,8 +8,8 @@
 <title>Grattan Institute • grattan</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="Grattan Institute">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Grattan Institute">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -85,9 +85,9 @@
       <h1>Grattan Institute</h1>
                         <h4 class="author">Hugh Parsonage</h4>
             
-            <h4 class="date">2018-06-06</h4>
+            <h4 class="date">2018-06-18</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/HughParsonage/grattan/blob/master/vignettes/grattan.Rmd"><code>vignettes/grattan.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/HughParsonage/grattan/blob/master/vignettes/long-vignettes/vignettes/grattan.Rmd"><code>vignettes/long-vignettes/vignettes/grattan.Rmd</code></a></small>
       <div class="hidden name"><code>grattan.Rmd</code></div>
 
     </div>
@@ -147,14 +147,12 @@
 <span class="co">#&gt;     between, first, last</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">templib &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 hutils<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/hutils/topics/provide.dir">provide.dir</a></span>(templib)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"https://raw.githubusercontent.com/hughparsonage/drat/gh-pages/src/contrib/taxstats_0.0.5.1415.tar.gz"</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"https://raw.githubusercontent.com/hughparsonage/tax-drat/master/src/contrib/taxstats_0.0.5.1415.tar.gz"</span>,
                  <span class="dt">dependencies =</span> <span class="ot">FALSE</span>,
-                 <span class="dt">quiet =</span> <span class="ot">FALSE</span>,
+                 <span class="dt">quiet =</span> <span class="ot">TRUE</span>,
                  <span class="dt">lib =</span> templib,
-                 <span class="dt">verbose =</span> <span class="ot">TRUE</span>,
-                 <span class="dt">repos =</span> <span class="ot">NULL</span>)
-<span class="co">#&gt; system (cmd0): C:/R/R-35~1.0/bin/x64/R CMD INSTALL</span>
-<span class="co">#&gt; 1): succeeded 'C:/R/R-35~1.0/bin/x64/R CMD INSTALL -l "C:\Users\hughp\AppData\Local\Temp\Rtmpw9rvMN\file16f8be914e4" "C:/Users/hughp/AppData/Local/Temp/Rtmpw9rvMN/downloaded_packages/taxstats_0.0.5.1415.tar.gz"'</span></code></pre></div>
+                 <span class="dt">verbose =</span> <span class="ot">FALSE</span>,
+                 <span class="dt">repos =</span> <span class="ot">NULL</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">"taxstats"</span>,
         <span class="dt">lib.loc =</span> templib,
         <span class="dt">verbose =</span> <span class="ot">TRUE</span>,
@@ -178,7 +176,7 @@ hutils<span class="op">::</span><span class="kw"><a href="http://www.rdocumentat
 sample_files_all[, WEIGHT <span class="op">:</span><span class="er">=</span><span class="st"> </span>hutils<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/hutils/topics/if_else">if_else</a></span>(fy.year <span class="op">&gt;</span><span class="st"> '2010-11'</span>, 50L, 100L)]
 age_range_decoder &lt;-<span class="st"> </span><span class="kw">as.data.table</span>(age_range_decoder)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(grattan)
-<span class="co">#&gt; Last change: NAMESPACE at 2018-06-06 12:40:54 (6 hours ago).</span></code></pre></div>
+<span class="co">#&gt; Last change: NAMESPACE at 2018-06-17 16:41:39 (1 days ago).</span></code></pre></div>
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
@@ -385,19 +383,19 @@ avg_tax_rate_2021_50k &lt;-<span class="st"> </span>
 </tr>
 <tr class="even">
 <td align="left">18,200-37,000</td>
-<td align="right">1.24</td>
+<td align="right">1.20</td>
 </tr>
 <tr class="odd">
 <td align="left">37,000-87,000</td>
-<td align="right">2.26</td>
+<td align="right">2.22</td>
 </tr>
 <tr class="even">
 <td align="left">87,000-180,000</td>
-<td align="right">0.83</td>
+<td align="right">0.79</td>
 </tr>
 <tr class="odd">
 <td align="left">180,000+</td>
-<td align="right">0.44</td>
+<td align="right">0.40</td>
 </tr>
 </tbody>
 </table>
@@ -846,7 +844,6 @@ sample_file <span class="op">%&gt;%</span>
          }
 <span class="co">#&gt; Warning in if_else(grepl("to", age_range_description),</span>
 <span class="co">#&gt; as.numeric(gsub("^([0-9]{2}).*$", : NAs introduced by coercion</span>
-<span class="co">#&gt; Warning: Ignoring unknown parameters: hjust, vjust</span>
 <span class="co">#&gt; Warning: Ignoring unknown aesthetics: x, y</span>
 <span class="co">#&gt; `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'</span></code></pre></div>
 <p><img src="grattan_files/figure-html/CG-incidence-by-age-by-fy-1.png" width="864"></p>
@@ -1549,7 +1546,7 @@ grattan_dollar &lt;-<span class="st"> </span><span class="cf">function</span> (x
 <span class="st">  </span><span class="kw"><a href="../reference/project_to.html">project_to</a></span>(<span class="dt">to_fy =</span> <span class="st">"2017-18"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span>as.data.table <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/model_new_caps_and_div293.html">revenue_from_new_cap_and_div293</a></span>(<span class="dt">new_cap =</span> <span class="fl">25e3</span>, <span class="dt">fy.year =</span> <span class="st">"2016-17"</span>, <span class="dt">new_age_based_cap =</span> <span class="ot">FALSE</span>, <span class="dt">new_div293_threshold =</span> <span class="fl">250e3</span>))
-<span class="co">#&gt; [1] 1199316778</span>
+<span class="co">#&gt; [1] 1199745593</span>
 
 <span class="kw">paste</span>(<span class="kw">grattan_dollar</span>(new_revenue <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>), <span class="st">"bn"</span>)
 <span class="co">#&gt; [1] "$1 bn"</span>
@@ -1559,10 +1556,10 @@ grattan_dollar &lt;-<span class="st"> </span><span class="cf">function</span> (x
 <span class="st">  </span><span class="kw"><a href="../reference/project_to.html">project_to</a></span>(<span class="dt">to_fy =</span> <span class="st">"2017-18"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span>as.data.table <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/model_new_caps_and_div293.html">n_affected_from_new_cap_and_div293</a></span>(<span class="dt">new_cap =</span> <span class="fl">25e3</span>, <span class="dt">fy.year =</span> <span class="st">"2016-17"</span>, <span class="dt">new_age_based_cap =</span> <span class="ot">FALSE</span>, <span class="dt">new_div293_threshold =</span> <span class="fl">250e3</span>))
-<span class="co">#&gt; [1] 558713.5</span>
+<span class="co">#&gt; [1] 558913.2</span>
 
 <span class="kw">prettyNum</span>(<span class="kw">round</span>(n_affected), <span class="dt">big.mark =</span> <span class="st">","</span>)
-<span class="co">#&gt; [1] "558,713"</span></code></pre></div>
+<span class="co">#&gt; [1] "558,913"</span></code></pre></div>
 <p>Notes:</p>
 <ol style="list-style-type: decimal">
 <li>

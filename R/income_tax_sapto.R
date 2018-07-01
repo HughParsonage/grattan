@@ -2,7 +2,7 @@
 #' 
 #' @name income_tax_sapto
 #' @param income The individual assessable income.
-#' @param fy.year The financial year in which the income was earned. Only tax years from 2000-01 to 2016-17 are available. 
+#' @param fy.year The financial year in which the income was earned. Only tax years from 2000-01 to 2016-17 are available. If fy.year is not given, the current financial year is used by default.
 #' @param age The individual's age.
 #' @param family_status For Medicare and SAPTO purposes.
 #' @param n_dependants An integer for the number of children of the taxpayer (for the purposes of the Medicare levy).
@@ -16,7 +16,7 @@
 #' @export income_tax_sapto
 
 income_tax_sapto <- function(income,
-                             fy.year,
+                             fy.year=NULL,
                              age = 42,
                              family_status = "individual",
                              n_dependants = 0L,
@@ -26,6 +26,11 @@ income_tax_sapto <- function(income,
                              sapto.eligible, 
                              medicare.sapto.eligible, 
                              new_sapto_tbl = NULL){
+  if (is.null(fy.year)){
+    fy.year <- date2fy(Sys.Date())
+    warning("fy.year is missing, using current financial year")
+  }
+  
   if (!identical(allow.forecasts, FALSE)) {
     .NotYetUsed("allow.forecasts")
   }

@@ -1,3 +1,10 @@
+## 1.6.2.0
+### 2018-06-28
+* Added default values to the following functions:
+    - `income_tax`, `income_tax_sapto`: the default value for fy.year is the current financial year
+    - `cpi_inflator`, `lf_inflator_fy`, `wage_inflator`: if both from_fy and to_fy are missing, the default values become the previous and current financial years respectively. If only one of the two are missing, an error appears.
+
+
 ## 1.6.1.0
 * New functions:
     - `compare_avg_tax_rates`: create a difference in average tax rates between multiple models and a baseline tax, by percentile.
@@ -5,6 +12,7 @@
 * Bug fixes:
     - `small_business_tax_offset()` is now always positive, fixing the original misinterpretation of the legislation whereby negative business income resulted in a negative offset.
 * `taxstats1516` is now a suggested dependency.
+* `income_tax` is about twice as fast since 1.6.0.0: 1.5-2.0s down from 3.0-3.7s on the 100% population (13 million)
 
 
 ## 1.6.0.0
