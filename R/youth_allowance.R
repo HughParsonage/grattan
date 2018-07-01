@@ -1,0 +1,136 @@
+#' Youth allowance
+#' 
+#' @param eligible_if_over22 To be eligible for Youth Allowance while over 22, recipients must either commence full-time study or an Australian apprenticeship having been in receipt of an income support payment for at least 6 out of the last 9 months since turning 22, or study an approved course in English where English is not their first language.
+#' @param isjspceoalfofcoahodeoc Is the recipient a single job seeker principal carer, either of large family or foster child/ren, or who is a home or distance educator of child/ren?
+#' @export youth_allowance income_reduction
+
+
+
+youth_allowance <- function(ordinary_income = 0,
+                            fy.year = yr2fy(year(Sys.Date())),
+                            age = 18,
+                            eligible_if_over22 = FALSE,
+                            is_single = TRUE,
+                            living_at_home = FALSE,
+                            has_children = FALSE,
+                            isjspceoalfofcoahodeoc = FALSE,
+                            is_student = TRUE,
+                            per = "fortnight",
+                            taper1 = 0.5,
+                            taper2 = 0.6,
+                            FT_YA_student_lower = 437,
+                            FT_YA_student_upper = 524,
+                            FT_YA_jobseeker_lower = 143,
+                            FT_YA_jobseeker_upper = 250,
+                            excess_partner_income_mu = 0.6) {
+  stopifnot(per == "fortnight")
+  
+  max_income <-
+    if_else(isjspceoalfofcoahodeoc,
+            1435.17,      
+            if_else(has_children,
+                    if_else(is_single,
+                            1149.84,
+                            989.67),
+                    if_else(living_at_home,
+                            if_else(age<18,
+                                    574.18,
+                                    657.84),
+                            989.67)))
+            
+            
+  max_rate_March_2018 <-
+    if_else(ordinary_income > Inf,
+           0,
+           if_else(and(age>=22, eligible_if_over22),
+                   if_else(is_single,
+                           if_else(living_at_home,
+                                   360.20,
+                                   541.70),
+                           if_else(has_children,
+                                   0,
+                                   489.60)),
+                   if_else(is_single,
+                           if_else(isjspceoalfofcoahodeoc,
+                                   762.40,
+                                   if_else(has_children,
+                                           584.20,
+                                           if_else(!living_at_home,
+                                                   445.80,
+                                                   if_else(age %between% c(16,17),
+                                                           244.10,
+                                                           293.60)))),
+                           ifelse(has_children,
+                                  489.60,
+                                  445.80))))
+  
+  if (anyNA(max_rate_March_2018)) {
+    stop("Unknown recipient status for youth_allowance() at index ",
+         which(is.na(max_rate_March_2018)),
+         " . Check arguments.")
+  }
+
+  # Benefit test
+  # http://guides.dss.gov.au/guide-social-security-law/4/2/2
+  # https://www.humanservices.gov.au/individuals/enablers/personal-income-test-austudy-and-youth-allowance/30411
+  
+  
+  #ordinary_income_free_area <- 
+  #  cpi_inflator(100, from_fy = "2014-15", to_fy = fy.year)
+  
+  #ordinary_income_excess <- pmaxC(ordinary_income - ordinary_income_free_area)
+  
+  
+  
+                                       
+                                       
+                                       
+  #parnter_reduction <- excess_partner_income_mu * excess_partner_income
+    
+  
+  payment <- pmaxC(max_rate_March_2018 - income_reduction(ordinary_income, 
+                                                          max_income,
+                                                          is_student,
+                                                          FT_YA_student_lower,
+                                                          FT_YA_student_upper,
+                                                          FT_YA_jobseeker_lower,
+                                                          FT_YA_jobseeker_upper,
+                                                          taper1,
+                                                          taper2)
+                   ,0)
+  payment
+  
+}
+
+income_reduction <- function(ordinary_income,
+                             max_income,
+                             is_student,
+                             max_rate_March_2018,
+                             taper1 = 0.5,
+                             taper2 = 0.6,
+                             FT_YA_student_lower = 437,
+                             FT_YA_student_upper = 524,
+                             FT_YA_jobseeker_lower = 143,
+                             FT_YA_jobseeker_upper = 250) {
+  if_else(is_student,
+          #student
+          if_else(ordinary_income<FT_YA_student_lower,
+                  0,
+                  if_else(ordinary_income < FT_YA_student_upper,
+                          taper1 * (ordinary_income - FT_YA_student_lower),
+                          if_else(ordinary_income < max_income,
+                                  taper1 * (ordinary_income - FT_YA_student_lower) +
+                                    (taper2 - taper1) * (ordinary_income - FT_YA_student_upper),
+                                  #reduce by entire income
+                                  max_rate_March_2018))),
+          #jobseeker
+          if_else(ordinary_income<FT_YA_jobseeker_lower,
+                  0,
+                  if_else(ordinary_income < FT_YA_jobseeker_upper,
+                          taper1 * (ordinary_income - FT_YA_jobseeker_lower),
+                          if_else(ordinary_income < max_income,
+                                  taper1 * (ordinary_income - FT_YA_jobseeker_lower) +
+                                    (taper2 - taper1) * (ordinary_income - FT_YA_jobseeker_upper),
+                                  #reduction is entire income
+                                  max_rate_March_2018))))
+}
