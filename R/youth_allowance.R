@@ -17,7 +17,6 @@
 #' @param FT_YA_jobseeker_lower Jobseeker lower bound for which reduction in payment occurs at rate taper1
 #' @param FT_YA_jobseeker_upper Jobseeker upper bound for which reduction in payment occurs at rate taper1. Student and apprentice lower bound for which reduction in payment occurs at rate taper2.
 #' @param excess_partner_income_mu The amount at which the payment is reduced for each dollar earned by the individual's partner.
-
 #' @export youth_allowance 
 
 
@@ -114,14 +113,26 @@ youth_allowance <- function(ordinary_income = 0,
   
   #ordinary_income_excess <- pmaxC(ordinary_income - ordinary_income_free_area)
   
+  ###TESTS needed: https://www.humanservices.gov.au/individuals/services/centrelink/youth-allowance-students-and-australian-apprentices/how-much-you-can-get/income-and-assets-test#personalassets
+    #personal income test: function ya_income_reduction()
+      #https://www.humanservices.gov.au/individuals/enablers/personal-income-test-austudy-and-youth-allowance/30411
   
+    #personal assets test: INCOMPLETE
+      #http://guides.dss.gov.au/guide-social-security-law/4/2/8/30 The personal assets test for independent YA recipients is the same as the benefits assets tes
+      #http://guides.dss.gov.au/guide-social-security-law/4/2/3
+      #https://www.legislation.gov.au/Details/C2018C00167
+  
+    #partner income test: function ya_partner_reduction() INCOMPLETE
+      #http://guides.dss.gov.au/guide-social-security-law/4/2/2
+      #example: http://guides.dss.gov.au/guide-social-security-law/5/5/3/30
+  
+    #parental income test: function ya_parental_income_reduction() INCOMPLETE
+      #https://www.humanservices.gov.au/individuals/services/centrelink/youth-allowance-students-and-australian-apprentices/how-much-you-can-get/income-and-assets-test#parentalincome
+      #http://guides.dss.gov.au/guide-social-security-law/4/2/8/05                          
+      #family tax benefits: http://guides.dss.gov.au/family-assistance-guide/3/1/1/20   
+      #https://www.humanservices.gov.au/individuals/enablers/how-much-ftb-part-you-can-get/30611
   
                                        
-                                       
-                                       
-  #parnter_reduction <- excess_partner_income_mu * excess_partner_income
-    
-  
   payment <- if_else(ordinary_income > max_income,
                      0,
                      max_rate_March_2018 - ya_income_reduction(ordinary_income, 
@@ -138,6 +149,20 @@ youth_allowance <- function(ordinary_income = 0,
   payment
   
 }
+
+ya_parental_income_reduction <- function() {}
+
+ya_partner_reduction <- function(ordinary_income,
+                                 partner_income = 0,
+                                 income_free_area,
+                                 partner_benefit,
+                                 partner_pension,
+                                 partner_dependent_ya) {
+  #social security benifit?
+  
+  
+}
+
 
 ya_income_reduction <- function(ordinary_income,
                              max_income,
