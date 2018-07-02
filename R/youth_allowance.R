@@ -1,8 +1,24 @@
 #' Youth allowance
 #' 
+#' @param ordinary_income Fortnightly individual income. Defualt is zero.
+#' @param fy.year Financial year. Default is current financial year.
+#' @param age The individual's age. Default is 18 years.
 #' @param eligible_if_over22 To be eligible for Youth Allowance while over 22, recipients must either commence full-time study or an Australian apprenticeship having been in receipt of an income support payment for at least 6 out of the last 9 months since turning 22, or study an approved course in English where English is not their first language.
+#' @param is_single Is the individual single?
+#' @param living_at_home Does the individual live at home with their parents?
+#' @param has_children Does the individual have any children?
 #' @param isjspceoalfofcoahodeoc Is the recipient a single job seeker principal carer, either of large family or foster child/ren, or who is a home or distance educator of child/ren?
-#' @export youth_allowance income_reduction
+#' @param is_student Is the individual a student? Note that apprenctices are considered students.
+#' @param per How often the payment will be made. Default is fortnightly. At present payments can only be fortnightly.
+#' @param taper1 The amount at which the payment is reduced for each dollar earned between the lower and upper bounds.
+#' @param taper2 The amount at which the payment is reduced for each dollar earned above the upper bound.
+#' @param FT_YA_student_lower Student and apprentice lower bound for which reduction in payment occurs at rate taper1
+#' @param FT_YA_student_upper Student and apprentice upper bound for which reduction in payment occurs at rate taper1. Student and apprentice lower bound for which reduction in payment occurs at rate taper2.
+#' @param FT_YA_jobseeker_lower Jobseeker lower bound for which reduction in payment occurs at rate taper1
+#' @param FT_YA_jobseeker_upper Jobseeker upper bound for which reduction in payment occurs at rate taper1. Student and apprentice lower bound for which reduction in payment occurs at rate taper2.
+#' @param excess_partner_income_mu The amount at which the payment is reduced for each dollar earned by the individual's partner.
+
+#' @export youth_allowance 
 
 
 
@@ -108,7 +124,7 @@ youth_allowance <- function(ordinary_income = 0,
   
   payment <- if_else(ordinary_income > max_income,
                      0,
-                     max_rate_March_2018 - income_reduction(ordinary_income, 
+                     max_rate_March_2018 - ya_income_reduction(ordinary_income, 
                                                           max_income,
                                                           is_student,
                                                           FT_YA_student_lower,
@@ -123,7 +139,7 @@ youth_allowance <- function(ordinary_income = 0,
   
 }
 
-income_reduction <- function(ordinary_income,
+ya_income_reduction <- function(ordinary_income,
                              max_income,
                              is_student,
                              max_rate_March_2018,
