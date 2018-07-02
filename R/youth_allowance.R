@@ -25,50 +25,68 @@ youth_allowance <- function(ordinary_income = 0,
                             excess_partner_income_mu = 0.6) {
   stopifnot(per == "fortnight")
   
-  max_income <-
-    if_else(isjspceoalfofcoahodeoc,
-            1435.17,      
-            if_else(has_children,
-                    if_else(is_single,
-                            1149.84,
-                            989.67),
-                    if_else(living_at_home,
-                            if_else(age<18,
-                                    574.18,
-                                    657.84),
-                            989.67)))
-            
-            
+  #max rate data: http://guides.dss.gov.au/guide-social-security-law/5/1/1/20
+  #note: identical for student and jobseeker
   max_rate_March_2018 <-
-    if_else(ordinary_income > Inf,
-           0,
-           if_else(and(age>=22, eligible_if_over22),
-                   if_else(is_single,
-                           if_else(living_at_home,
-                                   360.20,
-                                   541.70),
-                           if_else(has_children,
-                                   0,
-                                   489.60)),
-                   if_else(is_single,
-                           if_else(isjspceoalfofcoahodeoc,
-                                   762.40,
-                                   if_else(has_children,
-                                           584.20,
-                                           if_else(!living_at_home,
-                                                   445.80,
-                                                   if_else(age %between% c(16,17),
-                                                           244.10,
-                                                           293.60)))),
-                           ifelse(has_children,
-                                  489.60,
-                                  445.80))))
+    if_else(ordinary_income >= Inf,
+            NA_real_,
+            if_else(and(age>=22, eligible_if_over22),
+                    if_else(is_single,
+                            if_else(living_at_home,
+                                    360.20,
+                                    541.70),
+                            if_else(has_children,
+                                    NA_real_,
+                                    489.60)),
+                    if_else(is_single,
+                            if_else(isjspceoalfofcoahodeoc,
+                                    762.40,
+                                    if_else(has_children,
+                                            584.20,
+                                            if_else(living_at_home,
+                                                    if_else(age %between% c(16,17),
+                                                            244.10,
+                                                            293.60),
+                                                    445.80
+                                                    ))),
+                            ifelse(has_children,
+                                   489.60,
+                                   445.80))))
   
   if (anyNA(max_rate_March_2018)) {
-    stop("Unknown recipient status for youth_allowance() at index ",
-         which(is.na(max_rate_March_2018)),
+    stop("Unknown recipient status for youth_allowance() at index(es) ",
+         paste(which(is.na(max_rate_March_2018)), collapse=", "),
          " . Check arguments.")
   }
+  
+  
+  #max income data: https://www.humanservices.gov.au/individuals/enablers/personal-income-test-austudy-and-youth-allowance/30411
+  max_income <-
+    if_else(is_student,
+            #student
+            if_else(has_children,
+                    if_else(is_single,
+                            1440.50,
+                            1280.34),
+                    if_else(living_at_home,
+                            if_else(age<18,
+                                    864.84,
+                                    948.50),
+                            1206.17)),
+            #jobseeker
+            if_else(isjspceoalfofcoahodeoc,
+                    1435.17,      
+                    if_else(has_children,
+                            if_else(is_single,
+                                    1149.84,
+                                    989.67),
+                            if_else(living_at_home,
+                                    if_else(age<18,
+                                            574.18,
+                                            657.84),
+                                    989.67))))
+            
+
 
   # Benefit test
   # http://guides.dss.gov.au/guide-social-security-law/4/2/2
@@ -88,7 +106,9 @@ youth_allowance <- function(ordinary_income = 0,
   #parnter_reduction <- excess_partner_income_mu * excess_partner_income
     
   
-  payment <- pmaxC(max_rate_March_2018 - income_reduction(ordinary_income, 
+  payment <- if_else(ordinary_income > max_income,
+                     0,
+                     max_rate_March_2018 - income_reduction(ordinary_income, 
                                                           max_income,
                                                           is_student,
                                                           FT_YA_student_lower,
@@ -96,8 +116,9 @@ youth_allowance <- function(ordinary_income = 0,
                                                           FT_YA_jobseeker_lower,
                                                           FT_YA_jobseeker_upper,
                                                           taper1,
-                                                          taper2)
-                   ,0)
+                                                          taper2))
+                     
+                   
   payment
   
 }
@@ -121,7 +142,7 @@ income_reduction <- function(ordinary_income,
                           if_else(ordinary_income < max_income,
                                   taper1 * (ordinary_income - FT_YA_student_lower) +
                                     (taper2 - taper1) * (ordinary_income - FT_YA_student_upper),
-                                  #reduce by entire income
+                                  #reduce by entire income i.e. dont get YA
                                   max_rate_March_2018))),
           #jobseeker
           if_else(ordinary_income<FT_YA_jobseeker_lower,
@@ -131,6 +152,6 @@ income_reduction <- function(ordinary_income,
                           if_else(ordinary_income < max_income,
                                   taper1 * (ordinary_income - FT_YA_jobseeker_lower) +
                                     (taper2 - taper1) * (ordinary_income - FT_YA_jobseeker_upper),
-                                  #reduction is entire income
+                                  #reduce by entire income i.e. dont get YA
                                   max_rate_March_2018))))
 }
