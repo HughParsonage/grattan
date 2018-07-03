@@ -7,6 +7,8 @@
 #' @source \url{http://classic.austlii.edu.au/au/legis/cth/consol_act/ssa1991186/s1068.html}
 #' 
 
+#historical rates single: http://guides.dss.gov.au/guide-social-security-law/5/2/1/20
+  #married: http://guides.dss.gov.au/guide-social-security-law/5/2/1/30
 
 newstart_allowance <- function(ordinary_income,
                                has_partner = FALSE,
