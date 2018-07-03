@@ -9,6 +9,10 @@
 
 
 newstart_allowance <- function(ordinary_income,
+                               has_partner = FALSE,
+                               n_dependants = 0L,
+                               nine_months = FALSE,
+                               isjspceoalfofcoahodeoc = FALSE,
                                partner_income = 0,
                                partner_eligible = FALSE,
                                age = NULL,
@@ -112,27 +116,7 @@ if (FALSE) {
   # Determine the ordinary income reduction by using step 4A if the person is a full-time YA student (including Australian apprentices) or an Austudy recipient, or step 4B for a YA job seeker (including YA single principal carer parents), or step 4C for NSA single principal carer parents and 4D for other cases.
   
   # (The ordinary income reduction is the amount that will be deducted from the person's rate of payment in respect of their own income.)
-    
-    # 4A	
-    # For any income between $437.00 and $524.00 pf, multiply by 0.5. The result is amount A.
-    # 
-    # For remaining income above $524.00 pf, multiply by 0.6. The result is amount B.
-    # 
-    # Add amount A and amount B.
-    # 
-    # RESULT: THE ORDINARY INCOME REDUCTION.
-    # Go to step 5.
-    # 
-    # 4B	
-    # For any income between $143.00 and $250.00 pf, multiply by 0.5. The result is amount A.
-    # 
-    # For remaining income above $250.00 pf, multiply by 0.6. The result is amount B.
-    # 
-    # Add amount A and amount B
-    
-    # RESULT: THE ORDINARY INCOME REDUCTION.
-    # Go to Step 5
-    # 
+
     # 4C	
     # For any income of $104.00 and over, multiply by 0.4.
     # 
