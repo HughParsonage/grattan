@@ -4,9 +4,9 @@
 #' @param fy.year Financial year. Default is current financial year.
 #' @param age The individual's age. Default is 18 years.
 #' @param eligible_if_over22 To be eligible for Youth Allowance while over 22, recipients must either commence full-time study or an Australian apprenticeship having been in receipt of an income support payment for at least 6 out of the last 9 months since turning 22, or study an approved course in English where English is not their first language.
-#' @param is_single Is the individual single?
+#' @param has_partner Does the individual have a partner?
 #' @param living_at_home Does the individual live at home with their parents?
-#' @param has_children Does the individual have any children?
+#' @param n_dependants How many dependant children does the individual have?
 #' @param isjspceoalfofcoahodeoc Is the recipient a single job seeker principal carer, either of large family or foster child/ren, or who is a home or distance educator of child/ren?
 #' @param is_student Is the individual a student? Note that apprenctices are considered students.
 #' @param per How often the payment will be made. Default is fortnightly. At present payments can only be fortnightly.
