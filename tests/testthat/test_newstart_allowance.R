@@ -1,4 +1,4 @@
-context("lf inflator")
+context("newstart allowance")
 
 test_that("Correct values, no income", {
   #values retrieved for singles: http://guides.dss.gov.au/guide-social-security-law/5/2/1/20
@@ -58,6 +58,5 @@ test_that("Correct values, income", {
                                   n_dependants = 1L),
                476.4-18-0.6)#example: /30
   #example /50?
-  
   
 })
