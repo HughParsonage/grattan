@@ -4,24 +4,24 @@ context("Youth allowance")
 test_that("Allowance with no income", {
   expect_equal(youth_allowance(ordinary_income = 0,
                                age = 16,
-                               is_single = TRUE,
+                               has_partner = FALSE,
                                living_at_home = TRUE),
                244.10)
   expect_equal(youth_allowance(ordinary_income = 0,
                                age = 18,
-                               is_single = TRUE,
+                               has_partner = FALSE,
                                living_at_home = TRUE),
                293.60)
   expect_equal(youth_allowance(ordinary_income = 0,
                                age = 17,
-                               is_single = TRUE,
-                               has_children = FALSE,
+                               has_partner = FALSE,
+                               n_dependants = 0L,
                                living_at_home = FALSE),
                445.80)
   expect_equal(youth_allowance(ordinary_income = 0,
                                age = 16,
-                               is_single = TRUE,
-                               has_children = TRUE),
+                               has_partner = FALSE,
+                               n_dependants = 1L),
                584.20)
   expect_equal(youth_allowance(ordinary_income = 0,
                                age = 20,
@@ -29,13 +29,13 @@ test_that("Allowance with no income", {
                762.40)
   expect_equal(youth_allowance(ordinary_income = 0,
                                age = 20,
-                               is_single = FALSE,
-                               has_children = FALSE),
+                               has_partner = TRUE,
+                               n_dependants = 0L),
                445.80)
   expect_equal(youth_allowance(ordinary_income = 0,
                                age = 28,
-                               is_single = FALSE, 
-                               has_children = TRUE),
+                               has_partner = TRUE, 
+                               n_dependants = 1L),
                489.60)
   expect_equal(youth_allowance(ordinary_income = 0,
                                age = 22,
@@ -50,7 +50,7 @@ test_that("Allowance with no income", {
   expect_equal(youth_allowance(ordinary_income = 0,
                                age = 25,
                                eligible_if_over22 = TRUE,
-                               is_single = FALSE),
+                               has_partner = TRUE),
                489.60)
 })
 
@@ -79,26 +79,22 @@ test_that("Income reduction", {
                0.5 * (524 - 437) + 0.6 * (860 - 524))
   
   #Jobseeker
+  expect_equal(ya_income_reduction(ordinary_income = 100,
+                                max_rate_March_2018 = 244.10,
+                                max_income = 574.18,
+                                is_student = FALSE),
+               0)
+  expect_equal(ya_income_reduction(ordinary_income = 200,
+                                max_rate_March_2018 = 244.10,
+                                max_income = 574.18,
+                                is_student = FALSE),
+               0.5 * (200 - 143))
   expect_equal(ya_income_reduction(ordinary_income = 300,
                                 max_rate_March_2018 = 244.10,
-                                max_income = 864.84,
-                                is_student = TRUE),
-               0)
-  expect_equal(ya_income_reduction(ordinary_income = 500,
-                                max_rate_March_2018 = 244.10,
-                                max_income = 864.84,
-                                is_student = TRUE),
-               0.5 * (500 - 437))
-  expect_equal(ya_income_reduction(ordinary_income = 700,
-                                max_rate_March_2018 = 244.10,
-                                max_income = 864.84,
-                                is_student = TRUE),
-               0.5 * (524 - 437) + 0.6 * (700 - 524))
-  expect_equal(ya_income_reduction(ordinary_income = 860,
-                                max_rate_March_2018 = 244.10,
-                                max_income = 864.84,
-                                is_student = TRUE),
-               0.5 * (524 - 437) + 0.6 * (860 - 524))##ERROR: REDUCES BY MORE THAN RATE)
+                                max_income = 574.18,
+                                is_student = FALSE),
+               0.5 * (250 - 143) + 0.6 * (300 - 250))
+  
 })
 
 #http://guides.dss.gov.au/guide-social-security-law/5/5/2
