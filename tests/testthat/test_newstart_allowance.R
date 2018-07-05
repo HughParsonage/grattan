@@ -2,7 +2,7 @@ context("newstart allowance")
 
 test_that("Warnings", {
   expect_warning(newstart_allowance(),
-                 '`fy.year` not set, so defaulting to fy.year = "2015-16"')
+                 regexp = '`fy.year` not set, so defaulting to fy.year = "2015-16"')
 })
 
 test_that("Correct values, no income", {
@@ -11,28 +11,34 @@ test_that("Correct values, no income", {
   #additional source from wayback machine which contains isjspceoalfofcoahodeoc value: https://web.archive.org/web/20160502192819/http://guides.dss.gov.au/guide-social-security-law/5/1/8/20
   #using 20/03/2016 values, note that rate is indexed in March and September each year.
   expect_equal(newstart_allowance(ordinary_income = 0,
-                                  age = 22),
+                                  age = 22,
+                                  fy.year = "2015-16"),
                527.6)
   expect_equal(newstart_allowance(ordinary_income = 0,
                                   age = 22,
-                                  n_dependants = 1L),
+                                  n_dependants = 1L,
+                                  fy.year = "2015-16"),
                570.8)
   expect_equal(newstart_allowance(ordinary_income = 0,
                                   age = 60,
-                                  nine_months = TRUE),
+                                  nine_months = TRUE,
+                                  fy.year = "2015-16"),
                570.8)
   expect_equal(newstart_allowance(ordinary_income = 0,
                                   age = 22,
-                                  has_partner = TRUE),
+                                  has_partner = TRUE,
+                                  fy.year = "2015-16"),
                476.4)
   expect_equal(newstart_allowance(ordinary_income = 0,
                                   age = 22,
                                   has_partner = TRUE,
-                                  n_dependants = 1L),
+                                  n_dependants = 1L,
+                                  fy.year = "2015-16"),
                476.4)
   expect_equal(newstart_allowance(ordinary_income = 0,
                                   age = 22,
-                                  isjspceoalfofcoahodeoc = TRUE),
+                                  isjspceoalfofcoahodeoc = TRUE,
+                                  fy.year = "2015-16"),
                737.10)
 })
 
@@ -40,13 +46,15 @@ test_that("Correct values, no income", {
   #subtracted extra benefits (RA, ES, ...)
 test_that("Correct values, income", {
   expect_equal(newstart_allowance(ordinary_income = 300,
-                                  age = 22),
+                                  age = 22,
+                                  fy.year = "2015-16"),
                423.8) 
   expect_equal(newstart_allowance(ordinary_income = 300,
                                   age = 22,
                                   has_partner = FALSE,
                                   n_dependants = 1L,
-                                  principal_carer = TRUE),
+                                  principal_carer = TRUE,
+                                  fy.year = "2015-16"),
                491.6)
   #examples for partners http://guides.dss.gov.au/guide-social-security-law/5/5/3
     #2015-16 values taken from wayback machine
@@ -54,31 +62,39 @@ test_that("Correct values, income", {
                                   age = 22,
                                   has_partner = TRUE,
                                   partner_income = 160,
-                                  n_dependants = 1L),
+                                  n_dependants = 1L,
+                                  fy.year = "2015-16"),
                378.6)#example: /10
   expect_equal(newstart_allowance(ordinary_income = 140,
                                   age = 22,
                                   has_partner = TRUE,
                                   partner_income = 950,
-                                  n_dependants = 1L),
+                                  n_dependants = 1L,
+                                  fy.year = "2015-16"),
                440)#example: /30 except es removed
   #example /50?
   
 })
 
 test_that("Multiple people", {
-  expect_equal(newstart_allowance(ordinary_income = c(0,0), n_dependants = c(0,1),
-                                  age = 22),
+  expect_equal(newstart_allowance(ordinary_income = c(0,0), 
+                                  n_dependants = c(0,1),
+                                  age = 22,
+                                  fy.year = "2015-16"),
                c(527.6, 570.8))
 })
 
 test_that("Elligibility and asset threshhold", {
-  expect_equal(newstart_allowance(age = 20),
+  expect_equal(newstart_allowance(age = 20,
+                                  fy.year = "2015-16"),
                0)
-  expect_equal(newstart_allowance(age = 65),
+  expect_equal(newstart_allowance(age = 65,
+                                  fy.year = "2015-16"),
                0)
-  expect_equal(newstart_allowance(assets_value = 348000), 
+  expect_equal(newstart_allowance(assets_value = 348000,
+                                  fy.year = "2015-16"), 
                527.6)
-  expect_equal(newstart_allowance(assets_value = 348501),
+  expect_equal(newstart_allowance(assets_value = 348501,
+                                  fy.year = "2015-16"),
                0)
 })
