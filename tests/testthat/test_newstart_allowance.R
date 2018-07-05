@@ -63,3 +63,9 @@ test_that("Correct values, income", {
   
 })
 
+test_that("Multiple people", {
+  expect_equal(newstart_allowance(ordinary_income = c(0,0), n_dependants = c(0,1),
+                                  age = 22),
+               c(527.6, 570.8))
+})
+
