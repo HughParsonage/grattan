@@ -49,7 +49,6 @@ test_that("Correct values, income", {
                                   age = 22,
                                   has_partner = TRUE,
                                   partner_income = 160,
-                                  partner_eligible = TRUE,
                                   n_dependants = 1L),
                378.6)#example: /10
   expect_equal(newstart_allowance(ordinary_income = 140,
