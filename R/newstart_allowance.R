@@ -5,9 +5,9 @@
 #' @param n_dependants How many dependant children does the individual have?
 #' @param nine_months If the person is over 60 years old, have they been receiving payments for over 9 continuous months?
 #' @param isjspceoalfofcoahodeoc Is the recipient a single job seeker principal carer, either of large family or foster child/ren, or who is a home or distance educator of child/ren?
-#' @param principal_carer parent wiht most of the day to day care of child. Defined in https://www.humanservices.gov.au/individuals/enablers/principal-carer-rules-parenting-payment/41456
+#' @param principal_carer Is the individual the parent with most of the day to day care of child. Defined in https://www.humanservices.gov.au/individuals/enablers/principal-carer-rules-parenting-payment/41456
 #' @param partner_income The partner's income.
-#' @param age The individual's age. Different rates apply to those aged 18 to 20.
+#' @param age The individual's age.
 #' @param fy.year Financial year. Default is "2015-16".
 #' @param assets_value Total value of household assets. Details can be found at https://www.humanservices.gov.au/individuals/enablers/assets/30621 
 #' @param homeowner Is the individual a homeowner?
@@ -43,7 +43,7 @@ newstart_allowance <- function(ordinary_income = 0,
   
   if (is.null(fy.year)) {
     fy.year <- "2015-16"
-    message('`fy.year` not set, so defaulting to fy.year = "2015-16"')
+    warning('`fy.year` not set, so defaulting to fy.year = "2015-16"')
   }
   
   input <- data.table(do.call(cbind.data.frame, mget(ls())))
