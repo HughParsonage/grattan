@@ -18,15 +18,17 @@ newstart_allowance(ordinary_income = 0, has_partner = FALSE,
 
 \item{has_partner}{Does the individual have a partner?}
 
+\item{n_dependants}{How many dependant children does the individual have?}
+
 \item{nine_months}{If the person is over 60 years old, have they been receiving payments for over 9 continuous months?}
 
 \item{isjspceoalfofcoahodeoc}{Is the recipient a single job seeker principal carer, either of large family or foster child/ren, or who is a home or distance educator of child/ren?}
 
-\item{principal_carer}{parent wiht most of the day to day care of child. Defined in https://www.humanservices.gov.au/individuals/enablers/principal-carer-rules-parenting-payment/41456}
+\item{principal_carer}{Is the individual the parent with most of the day to day care of child. Defined in https://www.humanservices.gov.au/individuals/enablers/principal-carer-rules-parenting-payment/41456}
 
 \item{partner_income}{The partner's income.}
 
-\item{age}{The individual's age. Different rates apply to those aged 18 to 20.}
+\item{age}{The individual's age.}
 
 \item{fy.year}{Financial year. Default is "2015-16".}
 
