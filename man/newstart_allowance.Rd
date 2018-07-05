@@ -8,11 +8,11 @@
 }
 \usage{
 newstart_allowance(ordinary_income = 0, has_partner = FALSE,
-  n_dependants = 0L, nine_months = FALSE, isjspceoalfofcoahodeoc = FALSE,
+  n_dependants = 0, nine_months = FALSE, isjspceoalfofcoahodeoc = FALSE,
   principal_carer = FALSE, partner_income = 0, partner_eligible = FALSE,
   age = 22, fy.year = "2015-16", assets_value = 0, homeowner = FALSE,
-  income_free_area = NULL, lower = 102, upper = 252, taper1 = 0.5,
-  taper2 = 0.6, taper3 = 0.4, per = "fortnight")
+  lower = 102, upper = 252, taper1 = 0.5, taper2 = 0.6, taper3 = 0.4,
+  per = "fortnight")
 }
 \arguments{
 \item{ordinary_income}{'Ordinary income' within the meaning of s. 1068-G1 of the \emph{Social Security Act 1991}.}
