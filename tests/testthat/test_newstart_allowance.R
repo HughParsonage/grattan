@@ -64,16 +64,14 @@ test_that("Correct values, income", {
                                   partner_income = 160,
                                   n_dependants = 1L,
                                   fy.year = "2015-16"),
-               378.6)#example: /10
+               378.6)#example: /10 except es removed
   expect_equal(newstart_allowance(ordinary_income = 140,
                                   age = 22,
                                   has_partner = TRUE,
                                   partner_income = 950,
                                   n_dependants = 1L,
                                   fy.year = "2015-16"),
-               440)#example: /30 except es removed
-  #example /50?
-  
+               440)#example: /30 
 })
 
 test_that("Multiple people", {
