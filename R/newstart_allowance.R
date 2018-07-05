@@ -21,7 +21,7 @@
 
 #historical rates single: http://guides.dss.gov.au/guide-social-security-law/5/2/1/20
   #married: http://guides.dss.gov.au/guide-social-security-law/5/2/1/30
-#better copy of rates: https://www.humanservices.gov.au/sites/default/files/co029-1603en.pdf
+#better copy of rates and reductions: https://www.humanservices.gov.au/sites/default/files/co029-1603en.pdf
 newstart_allowance <- function(ordinary_income = 0,
                                has_partner = FALSE,
                                n_dependants = 0,
@@ -53,10 +53,11 @@ newstart_allowance <- function(ordinary_income = 0,
                                              570.80,
                                              527.60))))]
   
+  #additional eligibility requirements at https://www.humanservices.gov.au/individuals/services/centrelink/newstart-allowance/who-can-get-it
   eligibility <-
-    
-    
-    
+    input[ ,if_else(22 <= age & age < 65,
+                    0,
+                    max_rate_March_2016)]
     
   max_income_March_2016 <-
     input[ ,if_else(isjspceoalfofcoahodeoc,
@@ -109,6 +110,6 @@ newstart_allowance <- function(ordinary_income = 0,
 
   #output
 
-  pmaxC(max_rate_March_2016 - income_reduction - asset_reduction - partner_income_reduction,
+  pmaxC(max_rate_March_2016 - eligibility - income_reduction - asset_reduction - partner_income_reduction,
         0)
 }
