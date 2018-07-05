@@ -1,5 +1,10 @@
 context("newstart allowance")
 
+test_that("Warnings", {
+  expect_warning(newstart_allowance(),
+                 '`fy.year` not set, so defaulting to fy.year = "2015-16"')
+})
+
 test_that("Correct values, no income", {
   #values retrieved for singles: http://guides.dss.gov.au/guide-social-security-law/5/2/1/20
   #values retrieved for couples: http://guides.dss.gov.au/guide-social-security-law/5/2/1/30
@@ -67,3 +72,13 @@ test_that("Multiple people", {
                c(527.6, 570.8))
 })
 
+test_that("Elligibility and asset threshhold", {
+  expect_equal(newstart_allowance(age = 20),
+               0)
+  expect_equal(newstart_allowance(age = 65),
+               0)
+  expect_equal(newstart_allowance(assets_value = 348000), 
+               527.6)
+  expect_equal(newstart_allowance(assets_value = 348501),
+               0)
+})
