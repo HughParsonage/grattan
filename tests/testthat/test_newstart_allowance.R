@@ -55,7 +55,6 @@ test_that("Correct values, income", {
                                   age = 22,
                                   has_partner = TRUE,
                                   partner_income = 950,
-                                  partner_eligible = FALSE,
                                   n_dependants = 1L),
                440)#example: /30 except es removed
   #example /50?
