@@ -5,8 +5,8 @@
 \title{Youth allowance}
 \usage{
 youth_allowance(ordinary_income = 0, fy.year = yr2fy(year(Sys.Date())),
-  age = 18, eligible_if_over22 = FALSE, is_single = TRUE,
-  living_at_home = FALSE, has_children = FALSE,
+  age = 18, eligible_if_over22 = FALSE, has_partner = FALSE,
+  living_at_home = FALSE, n_dependants = 0L,
   isjspceoalfofcoahodeoc = FALSE, is_student = TRUE, per = "fortnight",
   taper1 = 0.5, taper2 = 0.6, FT_YA_student_lower = 437,
   FT_YA_student_upper = 524, FT_YA_jobseeker_lower = 143,
@@ -21,11 +21,11 @@ youth_allowance(ordinary_income = 0, fy.year = yr2fy(year(Sys.Date())),
 
 \item{eligible_if_over22}{To be eligible for Youth Allowance while over 22, recipients must either commence full-time study or an Australian apprenticeship having been in receipt of an income support payment for at least 6 out of the last 9 months since turning 22, or study an approved course in English where English is not their first language.}
 
-\item{is_single}{Is the individual single?}
+\item{has_partner}{Does the individual have a partner?}
 
 \item{living_at_home}{Does the individual live at home with their parents?}
 
-\item{has_children}{Does the individual have any children?}
+\item{n_dependants}{How many dependant children does the individual have?}
 
 \item{isjspceoalfofcoahodeoc}{Is the recipient a single job seeker principal carer, either of large family or foster child/ren, or who is a home or distance educator of child/ren?}
 

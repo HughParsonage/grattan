@@ -4,9 +4,9 @@
 #' @param fy.year Financial year. Default is current financial year.
 #' @param age The individual's age. Default is 18 years.
 #' @param eligible_if_over22 To be eligible for Youth Allowance while over 22, recipients must either commence full-time study or an Australian apprenticeship having been in receipt of an income support payment for at least 6 out of the last 9 months since turning 22, or study an approved course in English where English is not their first language.
-#' @param is_single Is the individual single?
+#' @param has_partner Does the individual have a partner?
 #' @param living_at_home Does the individual live at home with their parents?
-#' @param has_children Does the individual have any children?
+#' @param n_dependants How many dependant children does the individual have?
 #' @param isjspceoalfofcoahodeoc Is the recipient a single job seeker principal carer, either of large family or foster child/ren, or who is a home or distance educator of child/ren?
 #' @param is_student Is the individual a student? Note that apprenctices are considered students.
 #' @param per How often the payment will be made. Default is fortnightly. At present payments can only be fortnightly.
@@ -25,9 +25,9 @@ youth_allowance <- function(ordinary_income = 0,
                             fy.year = yr2fy(year(Sys.Date())),
                             age = 18,
                             eligible_if_over22 = FALSE,
-                            is_single = TRUE,
+                            has_partner = FALSE,
                             living_at_home = FALSE,
-                            has_children = FALSE,
+                            n_dependants = 0L,
                             isjspceoalfofcoahodeoc = FALSE,
                             is_student = TRUE,
                             per = "fortnight",
@@ -43,30 +43,28 @@ youth_allowance <- function(ordinary_income = 0,
   #max rate data: http://guides.dss.gov.au/guide-social-security-law/5/1/1/20
   #note: identical for student and jobseeker
   max_rate_March_2018 <-
-    if_else(ordinary_income >= Inf,
-            NA_real_,
-            if_else(and(age>=22, eligible_if_over22),
-                    if_else(is_single,
-                            if_else(living_at_home,
-                                    360.20,
-                                    541.70),
-                            if_else(has_children,
-                                    NA_real_,
-                                    489.60)),
-                    if_else(is_single,
-                            if_else(isjspceoalfofcoahodeoc,
-                                    762.40,
-                                    if_else(has_children,
-                                            584.20,
-                                            if_else(living_at_home,
-                                                    if_else(age %between% c(16,17),
-                                                            244.10,
-                                                            293.60),
-                                                    445.80
-                                                    ))),
-                            ifelse(has_children,
-                                   489.60,
-                                   445.80))))
+    if_else(and(age>=22, eligible_if_over22),
+            if_else(!has_partner,
+                    if_else(living_at_home,
+                            360.20,
+                            541.70),
+                    if_else(n_dependants > 0L,
+                            NA_real_,
+                            489.60)),
+            if_else(!has_partner,
+                    if_else(isjspceoalfofcoahodeoc,
+                            762.40,
+                            if_else(n_dependants > 0L,
+                                    584.20,
+                                    if_else(living_at_home,
+                                            if_else(age %between% c(16,17),
+                                                    244.10,
+                                                    293.60),
+                                            445.80
+                                            ))),
+                    ifelse(n_dependants > 0L,
+                           489.60,
+                           445.80)))
   
   if (anyNA(max_rate_March_2018)) {
     stop("Unknown recipient status for youth_allowance() at index(es) ",
@@ -79,8 +77,8 @@ youth_allowance <- function(ordinary_income = 0,
   max_income <-
     if_else(is_student,
             #student
-            if_else(has_children,
-                    if_else(is_single,
+            if_else(n_dependants > 0L,
+                    if_else(!has_partner,
                             1440.50,
                             1280.34),
                     if_else(living_at_home,
@@ -91,8 +89,8 @@ youth_allowance <- function(ordinary_income = 0,
             #jobseeker
             if_else(isjspceoalfofcoahodeoc,
                     1435.17,      
-                    if_else(has_children,
-                            if_else(is_single,
+                    if_else(n_dependants > 0L,
+                            if_else(!has_partner,
                                     1149.84,
                                     989.67),
                             if_else(living_at_home,
