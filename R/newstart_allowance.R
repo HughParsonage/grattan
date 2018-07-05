@@ -2,6 +2,7 @@
 #' 
 #' @param ordinary_income 'Ordinary income' within the meaning of s. 1068-G1 of the \emph{Social Security Act 1991}. 
 #' @param has_partner Does the individual have a partner?
+#' @param n_dependants How many dependant children does the individual have?
 #' @param nine_months If the person is over 60 years old, have they been receiving payments for over 9 continuous months?
 #' @param isjspceoalfofcoahodeoc Is the recipient a single job seeker principal carer, either of large family or foster child/ren, or who is a home or distance educator of child/ren?
 #' @param principal_carer parent wiht most of the day to day care of child. Defined in https://www.humanservices.gov.au/individuals/enablers/principal-carer-rules-parenting-payment/41456
@@ -30,7 +31,7 @@ newstart_allowance <- function(ordinary_income = 0,
                                principal_carer = FALSE,
                                partner_income = 0,
                                age = 22,
-                               fy.year = "2015-16",
+                               fy.year = NULL,
                                assets_value = 0,
                                homeowner = FALSE,
                                lower = 102,
@@ -39,6 +40,11 @@ newstart_allowance <- function(ordinary_income = 0,
                                taper2 = 0.6,
                                taper3 = 0.4,
                                per = "fortnight") {
+  
+  if (is.null(fy.year)) {
+    fy.year <- "2015-16"
+    message('`fy.year` not set, so defaulting to fy.year = "2015-16"')
+  }
   
   input <- data.table(do.call(cbind.data.frame, mget(ls())))
  
