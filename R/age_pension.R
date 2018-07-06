@@ -70,12 +70,7 @@ age_pension <- function(ordinary_income = 0,
     setkeyv(c("HasPartner", "Date"))
   
   assets_test <- 
-    copy(Age_pension_assets_test_by_year) %>%
-    .[, .(HasPartner = endsWith(type, "Couple"),
-          IllnessSeparated = endsWith(type, "Illness Separated Couple"),
-          HomeOwner = startsWith(type, "Homeowner"),
-          Date = as.Date(Date),
-          assets_test)] %>%
+    Age_pension_assets_test_by_year %>%
     setkeyv(c("HasPartner", "IllnessSeparated", "HomeOwner", "Date"))
   
   stopifnot(hutils::has_unique_key(assets_test))
@@ -93,7 +88,7 @@ age_pension <- function(ordinary_income = 0,
   setkeyv(B, c("HasPartner", "IllnessSeparated", "HomeOwner", "Date"))
   C <- assets_test[B, on = c("HasPartner", "IllnessSeparated", "HomeOwner", "Date"), roll = Inf, nomatch=0L] 
 
-  # print(A); print(B); print(C)
+  # if (is_testing())print(A); print(B); print(C)
   
   C %>%
     .[, age_pension_income := pminV(pmaxC(max_rate - 0.5 * (Income - permissible_income),

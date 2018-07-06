@@ -42,11 +42,11 @@ test_that("Assets means testing single homeowner", {
   # RESULT: the REDUCTION FOR ASSETS.
   expect_equal(age_pension(fy.year = "2015-16", 
                            has_partner = FALSE, 
-                           is_home_owner = TRUE,
+                           is_home_owner = FALSE,
                            # Assets limit 360500
                            # http://guides.dss.gov.au/guide-social-security-law/4/10/3
                            assets = c(0, 360.5e3, 365.5e3)),
-               c(20664.80, 20664.80, 20664.80 - floor(1000/250) * 19.5))
+               c(20664.80, 20664.80, 20664.80 - floor(5000/250) * 19.5))
 })
 
 test_that("Assets means testing single non-homeowner", {
@@ -59,7 +59,7 @@ test_that("Assets means testing single non-homeowner", {
   # RESULT: the REDUCTION FOR ASSETS.
   expect_equal(age_pension(fy.year = "2015-16", 
                            has_partner = FALSE, 
-                           is_home_owner = FALSE,
+                           is_home_owner = TRUE,
                            # Assets limit 209,000: 
                            # http://guides.dss.gov.au/guide-social-security-law/4/10/3
                            assets = c(0, 209e3, 210e3)),
@@ -97,5 +97,5 @@ test_that("Assets means testing couple homeowner", {
                            # Assets limit 296,500:
                            # http://guides.dss.gov.au/guide-social-security-law/4/10/3
                            assets = c(0, 296500, 298500)),
-               c(15576.60, 15576.60, 15576.60, 15576.60 - floor(2000/250) * 19.5))
+               c(15576.60, 15576.60, 15576.60 - floor(2000/250) * 19.5))
 })
