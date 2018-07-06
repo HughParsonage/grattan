@@ -6,9 +6,13 @@ test_that("Errors", {
   expect_error(newstart_allowance(per = "month"),
                regexp = '`per`` can only take values "fortnight" or "annual"')
   expect_error(newstart_allowance(fortnightly_income = 100, annual_income = 100000),
-               regexp = 'cannot have inputs for both `fortightly_income` and `annual_income` for the same individual')
+               regexp = 'cannot have inputs for both `fortnightly_income` and `annual_income` for the same individual')
+  expect_error(newstart_allowance(fortnightly_partner_income = 100, annual_partner_income = 100000),
+               regexp = 'cannot have inputs for both `fortnightly_partner_income` and `annual_partner_income` for the same individual')
   expect_error(newstart_allowance(fortnightly_income = c(1,2,3), age = c(22,23)),
                regexp = 'inputs are not of the same length')
+  expect_error(newstart_allowance(has_partner = FALSE, partner_pensioner = TRUE),
+               regexp = 'check conflciting values for `has_partner`` and `partner_pensioner`')
 })
 
 test_that("Correct values, no income", {
@@ -67,14 +71,14 @@ test_that("Correct values, income", {
   expect_equal(newstart_allowance(fortnightly_income = 290,
                                   age = 22,
                                   has_partner = TRUE,
-                                  partner_income = 160,
+                                  fortnightly_partner_income = 160,
                                   n_dependants = 1L,
                                   fy.year = "2015-16"),
                378.6)#example: /10 except es removed
   expect_equal(newstart_allowance(fortnightly_income = 140,
                                   age = 22,
                                   has_partner = TRUE,
-                                  partner_income = 950,
+                                  fortnightly_partner_income = 950,
                                   n_dependants = 1L,
                                   fy.year = "2015-16"),
                440)#example: /30 
@@ -108,7 +112,7 @@ test_that("Per", {
                13717.6)
 })
 
-test_that("Income_annual", {
+test_that("Income annual", {
   expect_equal(newstart_allowance(annual_income = 10000),
                373.0308, tolerance = 1e-3)
 })
