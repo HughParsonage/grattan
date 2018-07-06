@@ -111,7 +111,7 @@ newstart_allowance <- function(ordinary_income = 0,
 
   partner_income_reduction <- #https://web.archive.org/web/20160812171654/http://guides.dss.gov.au/guide-social-security-law/5/5/3/30
     if_else(has_partner & (partner_income > max_income_March_2016),
-            (partner_income - round((max_rate_March_2016 - ((upper-lower) * 0.5)) * (1/0.6) + upper)) * 0.6 ,
+            0.6 * (partner_income - round((1/0.6) * (max_rate_March_2016 - (upper - lower) * 0.5 + 252 * 0.6))),
             0)
 
   #output
