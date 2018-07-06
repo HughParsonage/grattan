@@ -1,13 +1,15 @@
 #' Newstart allowance
 #' 
-#' @param fortnightly_income 'Ordinary income' received on a fortnightly basis within the meaning of s. 1068-G1 of the \emph{Social Security Act 1991}. 
-#' @param fortnightly_income 'Ordinary income' received annually basis within the meaning of s. 1068-G1 of the \emph{Social Security Act 1991}. 
+#' @param fortnightly_income 'Ordinary income' received fortnightly within the meaning of s. 1068-G1 of the \emph{Social Security Act 1991}. 
+#' @param annual_income 'Ordinary income' received annually.
 #' @param has_partner Does the individual have a partner?
+#' @param partner_pensioner Does the partner receive a pension?
 #' @param n_dependants How many dependant children does the individual have?
 #' @param nine_months If the person is over 60 years old, have they been receiving payments for over 9 continuous months?
 #' @param isjspceoalfofcoahodeoc Is the recipient a single job seeker principal carer, either of large family or foster child/ren, or who is a home or distance educator of child/ren?
 #' @param principal_carer Is the individual the parent with most of the day to day care of child. Defined in https://www.humanservices.gov.au/individuals/enablers/principal-carer-rules-parenting-payment/41456
-#' @param partner_income The partner's income.
+#' @param fortnightly_partner_income Partner's 'Ordinary income' received fortnightly. 
+#' @param annual_partner_income Partner's Ordinary income' received annually.
 #' @param age The individual's age.
 #' @param fy.year Financial year. Default is "2015-16".
 #' @param assets_value Total value of household assets. Details can be found at https://www.humanservices.gov.au/individuals/enablers/assets/30621 
@@ -27,11 +29,13 @@
 newstart_allowance <- function(fortnightly_income = 0,
                                annual_income = 0,
                                has_partner = FALSE,
+                               partner_pensioner = FALSE,
                                n_dependants = 0,
                                nine_months = FALSE,
                                isjspceoalfofcoahodeoc = FALSE,
                                principal_carer = FALSE,
-                               partner_income = 0,
+                               fortnightly_partner_income = 0,
+                               annual_partner_income = 0,
                                age = 22,
                                fy.year = "2015-16",
                                assets_value = 0,
@@ -58,13 +62,25 @@ newstart_allowance <- function(fortnightly_income = 0,
   input <- data.table(do.call(cbind.data.frame, mget(ls())))
   
   if(any(input[, if_else(fortnightly_income > 0 & annual_income > 0, TRUE, FALSE)])){
-    stop('cannot have inputs for both `fortightly_income` and `annual_income` for the same individual')
+    stop('cannot have inputs for both `fortnightly_income` and `annual_income` for the same individual')
+  }
+  
+  if(any(input[, if_else(fortnightly_partner_income > 0 & annual_partner_income > 0, TRUE, FALSE)])){
+    stop('cannot have inputs for both `fortnightly_partner_income` and `annual_partner_income` for the same individual')
+  }
+  
+  if(any(input[, if_else(!has_partner & partner_pensioner, TRUE, FALSE)])){
+    stop('check conflciting values for `has_partner`` and `partner_pensioner`')
   }
   
   #replace missing fortnightly income with annual income / 26
   input[,'fortnightly_income'] <-
     input[, if_else(annual_income > 0,
                     annual_income / 26,
+                    fortnightly_income)]
+  input[,'fortnightly_partner_income'] <-
+    input[, if_else(annual_partner_income > 0,
+                    annual_partner_income / 26,
                     fortnightly_income)]
 
   max_rate_March_2016 <-
@@ -97,6 +113,11 @@ newstart_allowance <- function(fortnightly_income = 0,
                                                     1552.75,
                                                     1094.17)))))]
 
+  input[ ,'fortnightly_income']<-
+    input[ ,if_else(partner_pensioner,
+                    (fortnightly_partner_income + fortnightly_income)/2,
+                    fortnightly_income)]
+  
   income_reduction <-
     input[ ,if_else(fortnightly_income < lower,
                     0,
@@ -129,8 +150,8 @@ newstart_allowance <- function(fortnightly_income = 0,
                                     FALSE)))]
 
   partner_income_reduction <- #https://web.archive.org/web/20160812171654/http://guides.dss.gov.au/guide-social-security-law/5/5/3/30
-    if_else(has_partner & (partner_income > max_income_March_2016),
-            0.6 * (partner_income - round((1/0.6) * (max_rate_March_2016 - (upper - lower) * 0.5 + 252 * 0.6))),
+    if_else(has_partner & (fortnightly_partner_income > max_income_March_2016),
+            0.6 * (fortnightly_partner_income - round((1/0.6) * (max_rate_March_2016 - (upper - lower) * 0.5 + 252 * 0.6))),
             0)
 
   #output

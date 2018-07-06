@@ -8,16 +8,22 @@
 }
 \usage{
 newstart_allowance(fortnightly_income = 0, annual_income = 0,
-  has_partner = FALSE, n_dependants = 0, nine_months = FALSE,
-  isjspceoalfofcoahodeoc = FALSE, principal_carer = FALSE,
-  partner_income = 0, age = 22, fy.year = "2015-16", assets_value = 0,
-  homeowner = FALSE, lower = 102, upper = 252, taper_lower = 0.5,
-  taper_upper = 0.6, taper_principal_carer = 0.4, per = "fortnight")
+  has_partner = FALSE, partner_pensioner = FALSE, n_dependants = 0,
+  nine_months = FALSE, isjspceoalfofcoahodeoc = FALSE,
+  principal_carer = FALSE, fortnightly_partner_income = 0,
+  annual_partner_income = 0, age = 22, fy.year = "2015-16",
+  assets_value = 0, homeowner = FALSE, lower = 102, upper = 252,
+  taper_lower = 0.5, taper_upper = 0.6, taper_principal_carer = 0.4,
+  per = "fortnight")
 }
 \arguments{
-\item{fortnightly_income}{'Ordinary income' received on a fortnightly basis within the meaning of s. 1068-G1 of the \emph{Social Security Act 1991}.}
+\item{fortnightly_income}{'Ordinary income' received fortnightly within the meaning of s. 1068-G1 of the \emph{Social Security Act 1991}.}
+
+\item{annual_income}{'Ordinary income' received annually.}
 
 \item{has_partner}{Does the individual have a partner?}
+
+\item{partner_pensioner}{Does the partner receive a pension?}
 
 \item{n_dependants}{How many dependant children does the individual have?}
 
@@ -27,7 +33,9 @@ newstart_allowance(fortnightly_income = 0, annual_income = 0,
 
 \item{principal_carer}{Is the individual the parent with most of the day to day care of child. Defined in https://www.humanservices.gov.au/individuals/enablers/principal-carer-rules-parenting-payment/41456}
 
-\item{partner_income}{The partner's income.}
+\item{fortnightly_partner_income}{Partner's 'Ordinary income' received fortnightly.}
+
+\item{annual_partner_income}{Partner's Ordinary income' received annually.}
 
 \item{age}{The individual's age.}
 
@@ -48,8 +56,6 @@ newstart_allowance(fortnightly_income = 0, annual_income = 0,
 \item{taper_principal_carer}{The amount at which the payment is reduced for each dollar earned above the lower bound for principal carers.}
 
 \item{per}{Specifies the timeframe in which payments will be made. Can either take value "fortnight" or "annual".}
-
-\item{fortnightly_income}{'Ordinary income' received annually basis within the meaning of s. 1068-G1 of the \emph{Social Security Act 1991}.}
 }
 \description{
 Newstart allowance
