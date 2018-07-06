@@ -79,10 +79,10 @@ newstart_allowance <- function(fortnightly_income = 0,
                                              527.60))))]
   
   #additional eligibility requirements at https://www.humanservices.gov.au/individuals/services/centrelink/newstart-allowance/who-can-get-it
-  eligibility <-
+  eligible <-
     input[ ,if_else(22 <= age & age < 65,
-                    0,
-                    max_rate_March_2016)]
+                    TRUE,
+                    FALSE)]
     
   max_income_March_2016 <-
     input[ ,if_else(isjspceoalfofcoahodeoc,
@@ -111,22 +111,22 @@ newstart_allowance <- function(fortnightly_income = 0,
                                                 (taper_upper - taper_lower) * (fortnightly_income - upper),
                                               max_rate_March_2016))))]
 
-  asset_reduction<-
+    asset_threshold <-
     input[ ,if_else(has_partner,
                     if_else(homeowner,
-                            if_else(assets_value > 286500,
-                                    max_rate_March_2016,
-                                    0),
-                            if_else(assets_value > 433000,
-                                    max_rate_March_2016,
-                                    0)),
+                            if_else(assets_value < 286500,
+                                    TRUE,
+                                    FALSE),
+                            if_else(assets_value < 433000,
+                                    TRUE,
+                                    FALSE)),
                     if_else(homeowner,
-                            if_else(assets_value > 202000,
-                                    max_rate_March_2016,
-                                    0),
-                            if_else(assets_value > 348500,
-                                    max_rate_March_2016,
-                                    0)))]
+                            if_else(assets_value < 202000,
+                                    TRUE,
+                                    FALSE),
+                            if_else(assets_value < 348500,
+                                    TRUE,
+                                    FALSE)))]
 
   partner_income_reduction <- #https://web.archive.org/web/20160812171654/http://guides.dss.gov.au/guide-social-security-law/5/5/3/30
     if_else(has_partner & (partner_income > max_income_March_2016),
@@ -136,8 +136,11 @@ newstart_allowance <- function(fortnightly_income = 0,
   #output
 
   fortnightly_rate <- 
-    pmaxC(max_rate_March_2016 - eligibility - income_reduction - asset_reduction - partner_income_reduction,
-          0)
+    if_else(eligible & asset_threshold,
+            pmaxC(max_rate_March_2016 - income_reduction - partner_income_reduction,
+                  0),
+            0)
+            
   
   input[, if_else(per == "fortnight",
                   fortnightly_rate,
