@@ -3,15 +3,9 @@ context("Inflators return correct results")
 test_that("Default from_fy and to_fy", {
   expect_warning(cpi_inflator(), 
                  regexp = "`from_fy` and `to_fy` are missing, using previous and current financial years respectively")
-  if (data.table::month(Sys.Date()) < 7) {
-    expect_equal(suppressWarnings(cpi_inflator()),
-                 cpi_inflator(from_fy = yr2fy(year(Sys.Date()) - 1),
+  expect_equal(suppressWarnings(cpi_inflator()),
+               cpi_inflator(from_fy = yr2fy(year(Sys.Date()) - 1),
                               to_fy = date2fy(Sys.Date())))
-  } else {
-    expect_equal(suppressWarnings(cpi_inflator()),
-                 cpi_inflator(from_fy = yr2fy(year(Sys.Date())),
-                              to_fy = date2fy(Sys.Date())))
-  }
 })
 
 test_that("Errors", {

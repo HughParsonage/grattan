@@ -1,10 +1,5 @@
 # Data for internal use
 # Must be sourced after modification
-if ("dplyr" %in% .packages()) {
-  stop("dplyr is attached. Restart R and source.")
-}
-library(unpivotr)
-library(htmltab)
 library(rsdmx)
 if (packageVersion("rsdmx") < package_version("0.5.10")) {
   warning("rsdmx will not properly connect to ABS for versions of rsdmx before 0.5.10")
@@ -49,7 +44,7 @@ if (packageVersion("data.table") < package_version("1.9.8")){
   fwrite <- function(..., sep = "\t") readr::write_tsv(...)
 }
 
-renew <- FALSE
+renew <- TRUE
 
 tax_tbl <-
   data.table::fread("./data-raw/tax-brackets-and-marginal-rates-by-fy.tsv")
@@ -667,55 +662,10 @@ Age_pension_base_rates_by_year <-
   }
 
 Age_pension_assets_test_by_year <- 
-  if (file.exists("data-raw/Age-Pension-assets-test-1997-present.tsv")) {
-    Age_pension_assets_test_by_year <- 
-      fread("data-raw/Age-Pension-assets-test-1997-present.tsv", logical01 = TRUE) %>%
-      .[, Date := as.Date(Date)] %>%
-      setkeyv(c("HasPartner", "IllnessSeparated", "HomeOwner", "Date")) %>%
-      .[]
-    if (Age_pension_assets_test_by_year[, difftime(Sys.Date(), max(Date), units = "days")] > 400) {
-      warning("`Age_pension_assets_test_by_year` out-of-date by some 400 days.")
-    }
-    
-  } else {
-    age_pension_assets_test_dss_gov_au <- 
-      htmltab::htmltab("http://guides.dss.gov.au/guide-social-security-law/4/10/3", which = 10)
-    stopifnot(identical(names(age_pension_assets_test_dss_gov_au),
-                        c("Date",
-                          "Homeowners >> Single",
-                          "Homeowners >> Couple",
-                          "Homeowners >> Illness Separated Couple", 
-                          "Non-homeowners >> Single",
-                          "Non-homeowners >> Couple",
-                          "Non-homeowners >> Illness Separated Couple", 
-                          "Notes")))
-    as.data.table(age_pension_assets_test_dss_gov_au) %>%
-      .[, Notes := NULL] %>%
-      melt.data.table(id.vars = "Date", 
-                      variable.factor = FALSE) %>%
-      .[, c("t1", "t2") := tstrsplit(variable, split = " >> ", fixed = TRUE)] %>%
-      .[, variable := NULL] %>%
-      .[, Date := as.Date(Date, format = "%d/%m/%Y")] %>%
-      .[, assets_test := as.integer(gsub(",", "", value))] %>%
-      .[, .(HasPartner = endsWith(t2, "Couple"),
-            IllnessSeparated = startsWith(t2, "Illness Separated"),
-            HomeOwner = startsWith(t1, "Homeowner"),
-            Date,
-            assets_test)] %>%
-      setkeyv(c("HasPartner", "IllnessSeparated", "HomeOwner", "Date")) %T>%
-      .[, stopifnot(has_unique_key(.SD))] %>%
-      # .[, .(Date, t1, t2, assets_test)] %>%
-      # .[]
-      .[, Date := as.character(Date)] %T>%
-      fwrite("data-raw/Age-Pension-assets-test-1997-present.tsv",
-             sep = "\t",
-             logical01 = TRUE) %>%
-      .[, Date := as.Date(Date)] %>%
-      setkeyv(c("HasPartner", "IllnessSeparated", "HomeOwner", "Date")) %>%
-      .[]
-    
-    
-  }
+  read_excel("data-raw/Age-Pension-assets-test-1997-2016.xlsx", sheet = "clean") %>%
+  gather(type, assets_test, -Date) %>%
+  mutate(type = gsub("[^A-Za-z]", " ", type)) %>%
+  as.data.table
 
 bto_tbl <- 
   read_excel("data-raw/beneficiary-tax-offset-by-fy.xlsx") %>%
@@ -790,12 +740,10 @@ aust_pop_by_age_yearqtr <-
         Value = obsValue)] %>%
   setkey(Age, Date)
 
-abs_key_aggregates_url_status <- 
-  download.file("http://www.ausstats.abs.gov.au/ausstats/meisubs.nsf/LatestTimeSeries/5206001_key_aggregates/$FILE/5206001_key_aggregates.xls",
-                mode = "wb",
-                destfile = "data-raw/5206001_key_aggregates-latest-release.xls")
+download.file("http://www.ausstats.abs.gov.au/ausstats/meisubs.nsf/LatestTimeSeries/5206001_key_aggregates/$FILE/5206001_key_aggregates.xls",
+              mode = "wb",
+              destfile = "data-raw/5206001_key_aggregates-latest-release.xls")
 
-if (!abs_key_aggregates_url_status) {
 # abs_key_aggregates_names <- 
 #   read_excel("data-raw/5206001_key_aggregates-latest-release.xls",
 #              sheet = "Data1",
@@ -845,15 +793,6 @@ abs_key_aggregates <-
   .[]
 
 fwrite(abs_key_aggregates, "data-raw/abs_key_aggregates.tsv", sep = "\t")
-} else {
-  abs_key_aggregates <- fread("data-raw/abs_key_aggregates.tsv")
-  if (as.double(difftime(Sys.Date(),
-                         as.Date(last(abs_key_aggregates[["Date"]])),
-                         units = "days")) > 182) {
-    stop("ABS key aggregates too old.\nLast date:\t", last(abs_key_aggregates[["Date"]]))
-  }
-  
-}
 
 read_csv_2col <- function(...) {
   suppressMessages(suppressWarnings(read_csv(...))) %>% select(1:2) %>% setDT
@@ -912,64 +851,9 @@ residential_property_prices <-
          Darwin = Drw,
          `Australia (weighted average)` = AVG) %>%
   .[order(Date)] %>%
-  melt.data.table(id.vars = "Date",
-                  variable.name = "City",
-                  value.name = "Residential_property_price_index")
+  melt.data.table(id.vars = "Date", variable.name = "City", value.name = "Residential_property_price_index")
 
 devtools::use_data(residential_property_prices, overwrite = TRUE)
-
-NewstartRatesTable.raw <-
-  "http://guides.dss.gov.au/guide-social-security-law/5/2/1/20" %>%
-  htmltab::htmltab(which = '//*[@id="node-16056"]/table[11]')
-
-NewstartRatesOver21Single1991 <-
-  "http://guides.dss.gov.au/guide-social-security-law/5/2/1/20" %>%
-  htmltab::htmltab(which = '//*[@id="node-16056"]/table[9]')
-
-newstart_rates_table <-
-  NewstartRatesOver21Single1991 %>%
-  as.data.table %>%
-  .[, is_single := TRUE] %>%
-  .[, min_age := 21] %>%
-  .[, max_age := Inf] %>%
-  # Only include entries following the heading within the table
-  .[seq_len(.N) > which(Date %pin% "From 1 July 1991.*became")] %>%
-  .[, Rate := sub(" Note [MN]", "", Rate, perl = TRUE)] %>%
-  .[, Date := as.Date(Date, format = "%d/%m/%Y")] %>%
-  .[, Rate := as.numeric(Rate)] %T>%
-  fwrite("data-raw/Newstart-allowance-rates.tsv", sep = "\t") %>%
-  .[] 
-
-CPI_July2015 <- function(income_free_area, Date) {
-  {
-    100L * cpi_inflator_general_date(from_date = "2015-07-01",
-                                     to_date = Date)
-  } %>%
-    ceiling %>%
-    as.integer
-}
-
-newstart_income_test <-
-  # http://guides.dss.gov.au/guide-social-security-law/4/10/2
-  fread(input = "
-Date  income_free_area  income_threshold
-2015-07-01  102 252
-2014-03-20  100 250
-2013-01-01  62  250
-2006-07-01  62  250
-2000-07-01  60  140
-") %>%
-  .[, Date := as.Date(Date)] %>%
-  setkey(Date) %>%
-  .[newstart_rates_table, roll = TRUE] %>%
-  .[Date > "2015-07-01", 
-    income_free_area := CPI_July2015(income_free_area, Date)] %>%
-  .[, max_income_allowed := (10 / 4) * (Rate - 0.5 * (income_threshold - income_free_area))] %>%
-  .[] %T>%
-  fwrite("data-raw/newstart-income-test.tsv", sep = "\t") %>% 
-  .[]
-
-source("./data-raw/CAPITA/extract_clean_capita.R")
 
 do_dots <- function(...) {
   eval(substitute(alist(...)))
@@ -1040,7 +924,8 @@ use_and_write_data(tax_table2,
                    #
                    salary_by_fy_swtile,
                    differential_sw_uprates,
-                   
+                   # possibly separable
+                   .avbl_fractions,
                    Age_pension_base_rates_by_year,
                    Age_pension_assets_test_by_year,
                    Age_pension_deeming_rates_by_Date,
@@ -1048,21 +933,4 @@ use_and_write_data(tax_table2,
                    bto_tbl,
                    aus_pop_by_yearqtr,
                    aust_pop_by_age_yearqtr,
-
-                   abs_key_aggregates,
-                   
-                   # unemployment_income_tests,
-                   # unemployment_annual_rates,
-                   # unemployment_assets_tests,
-                   # unemployment_income_tests_by_date,
-                   # unemployment_rates_by_date,
-                   # unemployment_assets_tests_by_date,
-                   # 
-                   # rent_assistance_rates,
-                   # rent_assistance_rates_by_date,
-                   # 
-                   # youth_income_tests,
-                   # youth_annual_rates,
-                   
-                   # possibly separable
-                   .avbl_fractions)
+                   abs_key_aggregates)

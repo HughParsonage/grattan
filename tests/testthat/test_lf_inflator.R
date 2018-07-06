@@ -3,15 +3,9 @@ context("lf inflator")
 test_that("Default from_fy and to_fy", {
   expect_warning(lf_inflator_fy(), 
                  regexp = "`from_fy` and `to_fy` are missing, using previous and current financial years respectively")
-  if (data.table::month(Sys.Date()) < 7) {
-    expect_equal(suppressWarnings(lf_inflator_fy()),
-                 lf_inflator_fy(from_fy = yr2fy(year(Sys.Date()) - 1),
-                                to_fy = date2fy(Sys.Date())))
-  } else {
-    expect_equal(suppressWarnings(lf_inflator_fy()),
-                 lf_inflator_fy(from_fy = yr2fy(year(Sys.Date())),
-                                to_fy = date2fy(Sys.Date())))
-  } 
+  expect_equal(suppressWarnings(lf_inflator_fy()),
+               lf_inflator_fy(from_fy = yr2fy(year(Sys.Date()) - 1),
+                            to_fy = date2fy(Sys.Date())))
 })
 
 
