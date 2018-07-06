@@ -31,7 +31,7 @@ newstart_allowance <- function(ordinary_income = 0,
                                principal_carer = FALSE,
                                partner_income = 0,
                                age = 22,
-                               fy.year = NULL,
+                               fy.year = "2015-16",
                                assets_value = 0,
                                homeowner = FALSE,
                                lower = 102,
@@ -41,9 +41,8 @@ newstart_allowance <- function(ordinary_income = 0,
                                taper3 = 0.4,
                                per = "fortnight") {
   
-  if (is.null(fy.year)) {
-    fy.year <- "2015-16"
-    warning('`fy.year` not set, so defaulting to fy.year = "2015-16"')
+  if (fy.year != "2015-16") {
+    stop('`fy.year` can only take value "2015-16" for now')
   }
   
   input <- data.table(do.call(cbind.data.frame, mget(ls())))

@@ -1,8 +1,8 @@
 context("newstart allowance")
 
 test_that("Warnings", {
-  expect_warning(newstart_allowance(),
-                 regexp = '`fy.year` not set, so defaulting to fy.year = "2015-16"')
+  expect_error(newstart_allowance(fy.year = "2011-12"),
+                 regexp = '`fy.year` can only take value "2015-16" for now')
 })
 
 test_that("Correct values, no income", {
