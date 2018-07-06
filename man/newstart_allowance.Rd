@@ -7,16 +7,23 @@
 \url{http://classic.austlii.edu.au/au/legis/cth/consol_act/ssa1991186/s1068.html}
 }
 \usage{
-newstart_allowance(ordinary_income = 0, has_partner = FALSE,
-  n_dependants = 0, nine_months = FALSE, isjspceoalfofcoahodeoc = FALSE,
-  principal_carer = FALSE, partner_income = 0, age = 22, fy.year = NULL,
+newstart_allowance(fortnightly_income = 0, annual_income = 0,
+  has_partner = FALSE, partner_pensioner = FALSE, n_dependants = 0,
+  nine_months = FALSE, isjspceoalfofcoahodeoc = FALSE,
+  principal_carer = FALSE, fortnightly_partner_income = 0,
+  annual_partner_income = 0, age = 22, fy.year = "2015-16",
   assets_value = 0, homeowner = FALSE, lower = 102, upper = 252,
-  taper1 = 0.5, taper2 = 0.6, taper3 = 0.4, per = "fortnight")
+  taper_lower = 0.5, taper_upper = 0.6, taper_principal_carer = 0.4,
+  per = "fortnight")
 }
 \arguments{
-\item{ordinary_income}{'Ordinary income' within the meaning of s. 1068-G1 of the \emph{Social Security Act 1991}.}
+\item{fortnightly_income}{'Ordinary income' received fortnightly within the meaning of s. 1068-G1 of the \emph{Social Security Act 1991}.}
+
+\item{annual_income}{'Ordinary income' received annually.}
 
 \item{has_partner}{Does the individual have a partner?}
+
+\item{partner_pensioner}{Does the partner receive a pension?}
 
 \item{n_dependants}{How many dependant children does the individual have?}
 
@@ -26,7 +33,9 @@ newstart_allowance(ordinary_income = 0, has_partner = FALSE,
 
 \item{principal_carer}{Is the individual the parent with most of the day to day care of child. Defined in https://www.humanservices.gov.au/individuals/enablers/principal-carer-rules-parenting-payment/41456}
 
-\item{partner_income}{The partner's income.}
+\item{fortnightly_partner_income}{Partner's 'Ordinary income' received fortnightly.}
+
+\item{annual_partner_income}{Partner's Ordinary income' received annually.}
 
 \item{age}{The individual's age.}
 
@@ -36,17 +45,17 @@ newstart_allowance(ordinary_income = 0, has_partner = FALSE,
 
 \item{homeowner}{Is the individual a homeowner?}
 
-\item{lower}{Lower bound for which reduction in payment occurs at rate taper1 (taper 3 for principal carers).}
+\item{lower}{Lower bound for which reduction in payment occurs at rate taper_lower (taper_principal_carer for principal carers).}
 
-\item{upper}{Upper bound for which reduction in payment occurs at rate taper1. Lower bound for which reduction in payment occurs at rate taper2. Note that for principal carers there is no upper bound upper.}
+\item{upper}{Upper bound for which reduction in payment occurs at rate taper_lower. Lower bound for which reduction in payment occurs at rate taper_upper. Note that for principal carers there is no upper bound.}
 
-\item{taper1}{The amount at which the payment is reduced for each dollar earned between the lower and upper bounds for non-principal carers.}
+\item{taper_lower}{The amount at which the payment is reduced for each dollar earned between the lower and upper bounds for non-principal carers.}
 
-\item{taper2}{The amount at which the payment is reduced for each dollar earned above the upper bound for non-principal carers.}
+\item{taper_upper}{The amount at which the payment is reduced for each dollar earned above the upper bound for non-principal carers.}
 
-\item{taper3}{The amount at which the payment is reduced for each dollar earned above the lower bound for principal carers.}
+\item{taper_principal_carer}{The amount at which the payment is reduced for each dollar earned above the lower bound for principal carers.}
 
-\item{per}{Fortnight, the default, specified the units the inputs and outputs are returned.}
+\item{per}{Specifies the timeframe in which payments will be made. Can either take value "fortnight" or "annual".}
 }
 \description{
 Newstart allowance
