@@ -667,10 +667,55 @@ Age_pension_base_rates_by_year <-
   }
 
 Age_pension_assets_test_by_year <- 
-  read_excel("data-raw/Age-Pension-assets-test-1997-2016.xlsx", sheet = "clean") %>%
-  gather(type, assets_test, -Date) %>%
-  mutate(type = gsub("[^A-Za-z]", " ", type)) %>%
-  as.data.table
+  if (file.exists("data-raw/Age-Pension-assets-test-1997-present.tsv")) {
+    Age_pension_assets_test_by_year <- 
+      fread("data-raw/Age-Pension-assets-test-1997-present.tsv", logical01 = TRUE) %>%
+      .[, Date := as.Date(Date)] %>%
+      setkeyv(c("HasPartner", "IllnessSeparated", "HomeOwner", "Date")) %>%
+      .[]
+    if (Age_pension_assets_test_by_year[, difftime(Sys.Date(), max(Date), units = "days")] > 400) {
+      warning("`Age_pension_assets_test_by_year` out-of-date by some 400 days.")
+    }
+    
+  } else {
+    age_pension_assets_test_dss_gov_au <- 
+      htmltab::htmltab("http://guides.dss.gov.au/guide-social-security-law/4/10/3", which = 10)
+    stopifnot(identical(names(age_pension_assets_test_dss_gov_au),
+                        c("Date",
+                          "Homeowners >> Single",
+                          "Homeowners >> Couple",
+                          "Homeowners >> Illness Separated Couple", 
+                          "Non-homeowners >> Single",
+                          "Non-homeowners >> Couple",
+                          "Non-homeowners >> Illness Separated Couple", 
+                          "Notes")))
+    as.data.table(age_pension_assets_test_dss_gov_au) %>%
+      .[, Notes := NULL] %>%
+      melt.data.table(id.vars = "Date", 
+                      variable.factor = FALSE) %>%
+      .[, c("t1", "t2") := tstrsplit(variable, split = " >> ", fixed = TRUE)] %>%
+      .[, variable := NULL] %>%
+      .[, Date := as.Date(Date, format = "%d/%m/%Y")] %>%
+      .[, assets_test := as.integer(gsub(",", "", value))] %>%
+      .[, .(HasPartner = endsWith(t2, "Couple"),
+            IllnessSeparated = startsWith(t2, "Illness Separated"),
+            HomeOwner = startsWith(t1, "Homeowner"),
+            Date,
+            assets_test)] %>%
+      setkeyv(c("HasPartner", "IllnessSeparated", "HomeOwner", "Date")) %T>%
+      .[, stopifnot(has_unique_key(.SD))] %>%
+      # .[, .(Date, t1, t2, assets_test)] %>%
+      # .[]
+      .[, Date := as.character(Date)] %T>%
+      fwrite("data-raw/Age-Pension-assets-test-1997-present.tsv",
+             sep = "\t",
+             logical01 = TRUE) %>%
+      .[, Date := as.Date(Date)] %>%
+      setkeyv(c("HasPartner", "IllnessSeparated", "HomeOwner", "Date")) %>%
+      .[]
+    
+    
+  }
 
 bto_tbl <- 
   read_excel("data-raw/beneficiary-tax-offset-by-fy.xlsx") %>%
@@ -995,8 +1040,7 @@ use_and_write_data(tax_table2,
                    #
                    salary_by_fy_swtile,
                    differential_sw_uprates,
-                   # possibly separable
-                   .avbl_fractions,
+                   
                    Age_pension_base_rates_by_year,
                    Age_pension_assets_test_by_year,
                    Age_pension_deeming_rates_by_Date,
@@ -1007,15 +1051,18 @@ use_and_write_data(tax_table2,
 
                    abs_key_aggregates,
                    
-                   unemployment_income_tests,
-                   unemployment_annual_rates,
-                   unemployment_assets_tests,
-                   unemployment_income_tests_by_date,
-                   unemployment_rates_by_date,
-                   unemployment_assets_tests_by_date,
+                   # unemployment_income_tests,
+                   # unemployment_annual_rates,
+                   # unemployment_assets_tests,
+                   # unemployment_income_tests_by_date,
+                   # unemployment_rates_by_date,
+                   # unemployment_assets_tests_by_date,
+                   # 
+                   # rent_assistance_rates,
+                   # rent_assistance_rates_by_date,
+                   # 
+                   # youth_income_tests,
+                   # youth_annual_rates,
                    
-                   rent_assistance_rates,
-                   rent_assistance_rates_by_date,
-                   
-                   youth_income_tests,
-                   youth_annual_rates)
+                   # possibly separable
+                   .avbl_fractions)
