@@ -620,6 +620,13 @@ salary_by_fy_swtile <-
   .[, average_salary := round(average_salary, 2L)] %>%
   setkey(Sw_amt_percentile) %>%
   .[]
+
+if (salary_by_fy_swtile[, max(fy.year)] < "2015-16") {
+  warning("salary_by_fy_swtile not available.")
+  rm(salary_by_fy_swtile)
+  salary_by_fy_swtile <- grattan:::salary_by_fy_swtile
+}
+
   
 
 differential_sw_uprates <- 
