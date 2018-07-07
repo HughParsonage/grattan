@@ -4,7 +4,7 @@
 \alias{youth_allowance}
 \title{Youth allowance}
 \usage{
-youth_allowance(ordinary_income = 0, fy.year = yr2fy(year(Sys.Date())),
+youth_allowance(ordinary_income = 0, fy.year = date2fy(Sys.Date()),
   age = 18, eligible_if_over22 = FALSE, has_partner = FALSE,
   living_at_home = FALSE, n_dependants = 0L,
   isjspceoalfofcoahodeoc = FALSE, is_student = TRUE, per = "fortnight",

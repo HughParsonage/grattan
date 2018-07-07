@@ -2,6 +2,7 @@ context("Youth allowance")
 
 # http://guides.dss.gov.au/guide-social-security-law/5/5/2/40
 test_that("Allowance with no income", {
+  skip("Not yet implemented")
   expect_equal(youth_allowance(ordinary_income = 0,
                                age = 16,
                                has_partner = FALSE,
@@ -55,6 +56,7 @@ test_that("Allowance with no income", {
 })
 
 test_that("Income reduction", {
+  skip("Not yet implemented")
   #max income formula: https://www.humanservices.gov.au/individuals/enablers/personal-income-test-austudy-and-youth-allowance/30411
   #Student
   expect_equal(ya_income_reduction(ordinary_income = 300,
