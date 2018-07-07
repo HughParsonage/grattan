@@ -7,6 +7,10 @@ test_that("Error handling", {
                regexp = "is neither a Date object nor safely coercible as such")
   expect_error(rent_assistance(Date = "1999-01-01"), 
                regexp = "Ensure `Date` only includes dates between 2000")
+  expect_error(rent_assistance(fy.year = "2016-17", n_dependants = "1.5"),
+               regexp = "`n_dependants` was type character.")
+  expect_error(rent_assistance(fy.year = "2016-17", n_dependants = factor(1:5)),
+               regexp = "`n_dependants` was a factor.")
   expect_error(rent_assistance(fy.year = "2016-17", n_dependants = 1.5), 
                regexp = "`n_dependants` is type double and cannot be safely coerced to type integer.", 
                fixed = TRUE)
@@ -32,4 +36,6 @@ test_that("Error handling", {
 test_that("Rent assistance", {
   expect_equal(rent_assistance(500, max_rate = 500, min_rent = 100), 
                300)
+  expect_gt(rent_assistance(500, "2015-16", n_dependants = 1L), 
+            rent_assistance(500, "2015-16", n_dependants = 0L))
 })
