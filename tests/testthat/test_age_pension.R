@@ -1,5 +1,12 @@
 context("Age pension")
 
+test_that("Error handling", {
+  expect_warning(age_pension(Date = "2015-12-01", fy.year = "2015-16"), 
+                 regexp = "Ignoring `fy.year`", 
+                 fixed = TRUE)
+})
+
+
 test_that("Maximum rates", {
   # http://guides.dss.gov.au/guide-social-security-law/5/2/2/10
   expect_equal(age_pension(fy.year = "2015-16", has_partner = FALSE), 20664.80)
@@ -12,7 +19,7 @@ test_that("Income means testing single", {
   expect_equal(age_pension(fy.year = "2015-16",
                            has_partner = FALSE,
                            # http://guides.dss.gov.au/guide-social-security-law/4/10/3
-                           annual_income = c(0, 4000, 4264, 5264, 50e3)), 
+                           annual_income = c(0, 4000, 4212, 5212, 50e3)), 
                c(20664.80, 
                  20664.80, 
                  20664.80,
@@ -24,7 +31,7 @@ test_that("Income means testing couple", {
   expect_equal(age_pension(fy.year = "2015-16",
                            has_partner = TRUE,
                            # http://guides.dss.gov.au/guide-social-security-law/4/10/3
-                           annual_income = c(0, 3000, 3796, 4796, 40e3)), 
+                           annual_income = c(0, 3000, 3744, 4744, 40e3)), 
                c(15576.60, 
                  15576.60, 
                  15576.60,
@@ -45,8 +52,8 @@ test_that("Assets means testing single homeowner", {
                            is_home_owner = FALSE,
                            # Assets limit 360500
                            # http://guides.dss.gov.au/guide-social-security-law/4/10/3
-                           assets = c(0, 360.5e3, 365.5e3)),
-               c(20664.80, 20664.80, 20664.80 - floor(5000/250) * 19.5))
+                           assets = c(0, 354.5e3, 364.5e3)),
+               c(20664.80, 20664.80, 20664.80 - floor(10000/250) * 19.5))
 })
 
 test_that("Assets means testing single non-homeowner", {
@@ -60,10 +67,10 @@ test_that("Assets means testing single non-homeowner", {
   expect_equal(age_pension(fy.year = "2015-16", 
                            has_partner = FALSE, 
                            is_home_owner = TRUE,
-                           # Assets limit 209,000: 
+                           # Assets limit 205,500: 
                            # http://guides.dss.gov.au/guide-social-security-law/4/10/3
-                           assets = c(0, 209e3, 210e3)),
-               c(20664.80, 20664.80, 20664.80 - floor(1000/250) * 19.5))
+                           assets = c(0, 205500, 215500)),
+               c(20664.80, 20664.80, 20664.80 - floor(10000/250) * 19.5))
 })
 
 test_that("Assets means testing couple non-homeowner", {
@@ -77,10 +84,10 @@ test_that("Assets means testing couple non-homeowner", {
   expect_equal(age_pension(fy.year = "2015-16", 
                            has_partner = TRUE, 
                            is_home_owner = FALSE,
-                           # Assets limit 448,000:
+                           # Assets limit 440500:
                            # http://guides.dss.gov.au/guide-social-security-law/4/10/3
-                           assets = c(0, 448e3, 450e3)),
-               c(15576.60, 15576.60, 15576.60 - floor(2000/250) * 19.5))
+                           assets = c(0, 440500, 446.5e3)),
+               c(15576.60, 15576.60, 15576.60 - floor(6000/250) * 19.5))
 })
 
 test_that("Assets means testing couple homeowner", {
@@ -94,8 +101,8 @@ test_that("Assets means testing couple homeowner", {
   expect_equal(age_pension(fy.year = "2015-16", 
                            has_partner = TRUE, 
                            is_home_owner = TRUE,
-                           # Assets limit 296,500:
+                           # Assets limit 291,500:
                            # http://guides.dss.gov.au/guide-social-security-law/4/10/3
-                           assets = c(0, 296500, 298500)),
-               c(15576.60, 15576.60, 15576.60 - floor(2000/250) * 19.5))
+                           assets = c(0, 291500, 292500)),
+               c(15576.60, 15576.60, 15576.60 - floor(1000/250) * 19.5))
 })

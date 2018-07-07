@@ -30,3 +30,6 @@ age_pension(ordinary_income = 0, annual_income = ordinary_income * 26,
 \description{
 Age pension
 }
+\details{
+
+}

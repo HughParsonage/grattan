@@ -9,6 +9,9 @@
 #' @param is_home_owner (logical, default: \code{FALSE}) Does the individual own their own home? 
 #' @param illness_separated_couple Is the couple separated by illness? (Affects the assets test.)
 #' 
+#' @details
+#' 
+#' 
 #' 
 #' @export age_pension
 #' 
@@ -27,12 +30,19 @@ age_pension <- function(ordinary_income = 0,
                         illness_separated_couple = FALSE) {
   if (is.null(Date)) {
     if (is.null(fy.year)) {
-      stop("`Date` and `fy.year` were both NULL, yet one is required.")
-    } else {
-      if (!identical(fy.year, "2015-16")) {
-        .NotYetImplemented()
+      today <- Sys.Date()
+      if (month(today) > 7L) {
+        Date <- paste0(year(today), "-09-20")
+      } else {
+        Date <- paste0(year(today), "-03-20")
       }
-      Date <- as.Date("2016-07-01")
+      message('`Date` and `fy.year` not set, so using `Date = "', Date, '".')
+    } else {
+      Date <- fy2date(fy.year)
+    }
+  } else {
+    if (!is.null(fy.year)) {
+      warning("`fy.year` and `Date` both used. Ignoring `fy.year`.")
     }
   }
   
@@ -81,7 +91,7 @@ age_pension <- function(ordinary_income = 0,
     setkeyv(c("HasPartner", "IllnessSeparated", "HomeOwner", "Date"))
   
   stopifnot(hutils::has_unique_key(assets_test), 
-            "assets_excess" %in% names(assets_test))
+            "assets_test" %in% names(assets_test))
   assets_excess <- NULL
   
   stopifnot("type" %in% names(Age_pension_permissible_income_by_Date))
@@ -105,6 +115,7 @@ age_pension <- function(ordinary_income = 0,
   # if (is_testing())print(A); print(B); print(C)
   age_pension_income <-
     age_pension_assets <- 
+    assets_test <- 
     NULL
   
   C %>%
