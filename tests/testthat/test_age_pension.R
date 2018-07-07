@@ -106,3 +106,14 @@ test_that("Assets means testing couple homeowner", {
                            assets = c(0, 291500, 292500)),
                c(15576.60, 15576.60, 15576.60 - floor(1000/250) * 19.5))
 })
+
+test_that("today helper", {
+  expect_equal(.age_pension_today2qtr(as.Date("2017-07-01")), "2017-03-20")
+  expect_equal(.age_pension_today2qtr("2017-07-01"), "2017-03-20")
+  expect_equal(.age_pension_today2qtr("2017-03-21"), "2017-03-20")
+  expect_equal(.age_pension_today2qtr(as.Date("2017-03-01")), "2016-09-20")
+  expect_equal(.age_pension_today2qtr("2017-03-01"), "2016-09-20")
+  expect_equal(.age_pension_today2qtr("2016-12-01"), "2016-09-20")
+  expect_equal(.age_pension_today2qtr("2017-03-21"), "2017-03-20")
+  expect_message(age_pension(), "not set")
+})

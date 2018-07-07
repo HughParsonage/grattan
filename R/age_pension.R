@@ -30,12 +30,7 @@ age_pension <- function(ordinary_income = 0,
                         illness_separated_couple = FALSE) {
   if (is.null(Date)) {
     if (is.null(fy.year)) {
-      today <- Sys.Date()
-      if (month(today) > 7L) {
-        Date <- paste0(year(today), "-09-20")
-      } else {
-        Date <- paste0(year(today), "-03-20")
-      }
+      Date <- .age_pension_today2qtr(Sys.Date())
       message('`Date` and `fy.year` not set, so using `Date = "', Date, '".')
     } else {
       Date <- fy2date(fy.year)
@@ -129,6 +124,21 @@ age_pension <- function(ordinary_income = 0,
               age_pension_assets)]
   
   
+}
+
+.age_pension_today2qtr <- function(today) {
+  the_year <- year(today)
+  the_month <- month(today)
+  the_day <- mday(today)
+  if (OR(the_month < 3L,
+         the_month == 3L && the_day < 20L)) {
+    paste0(the_year - 1L, "-09-20")
+  } else if (OR(the_month > 9L,
+                the_month == 9L && the_day >= 20L)) {
+    paste0(year(today), "-09-20")
+  } else {
+    paste0(year(today), "-03-20")
+  }
 }
 
 
