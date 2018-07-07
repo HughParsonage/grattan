@@ -45,6 +45,13 @@ age_pension <- function(ordinary_income = 0,
                                         assets_value, 
                                         is_home_owner)
   
+  Income <- 
+    HasPartner <- 
+    PartnerIncome <-
+    Assets <- 
+    HomeOwner <-
+    IlnnessSeparated <- NULL
+  
   input <- 
     data.table(Income = annual_income, 
                HasPartner = has_partner, 
@@ -54,10 +61,10 @@ age_pension <- function(ordinary_income = 0,
                Assets = assets_value, 
                HomeOwner = is_home_owner,
                IllnessSeparated = illness_separated_couple)
-  input[, ordering := .I]
+  input[, "ordering" := .I]
   setkeyv(input, c("HasPartner", "Date"))
   
-  
+  max_rate <- NULL
   max_rates <-
     melt.data.table(Age_pension_base_rates_by_year,
                     id.vars = "Date", 
@@ -73,7 +80,14 @@ age_pension <- function(ordinary_income = 0,
     Age_pension_assets_test_by_year %>%
     setkeyv(c("HasPartner", "IllnessSeparated", "HomeOwner", "Date"))
   
-  stopifnot(hutils::has_unique_key(assets_test))
+  stopifnot(hutils::has_unique_key(assets_test), 
+            "assets_excess" %in% names(assets_test))
+  assets_excess <- NULL
+  
+  stopifnot("type" %in% names(Age_pension_permissible_income_by_Date))
+  type <- NULL
+  stopifnot("permissible_income" %in% names(Age_pension_permissible_income_by_Date))
+  permissible_income <- NULL
   
   income_test <- 
     Age_pension_permissible_income_by_Date %>%
@@ -89,6 +103,9 @@ age_pension <- function(ordinary_income = 0,
   C <- assets_test[B, on = c("HasPartner", "IllnessSeparated", "HomeOwner", "Date"), roll = Inf, nomatch=0L] 
 
   # if (is_testing())print(A); print(B); print(C)
+  age_pension_income <-
+    age_pension_assets <- 
+    NULL
   
   C %>%
     .[, age_pension_income := pminV(pmaxC(max_rate - 0.5 * (Income - permissible_income),
@@ -96,6 +113,7 @@ age_pension <- function(ordinary_income = 0,
                                     max_rate)] %>%
     .[, assets_excess := pmaxC(Assets - assets_test, 0)] %>%
     .[, age_pension_assets := pminV(pmaxC(max_rate - 19.5 * floor(assets_excess / 250), 0), max_rate)] %>%
+    setorderv("ordering") %>%
     .[, pminV(age_pension_income, 
               age_pension_assets)]
   

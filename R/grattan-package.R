@@ -25,6 +25,7 @@
 #' @importFrom magrittr %>%
 #' @importFrom magrittr %$%
 #' @importFrom magrittr %<>%
+#' @importFrom magrittr %T>%
 #' @importFrom magrittr and
 #' @importFrom magrittr or
 
