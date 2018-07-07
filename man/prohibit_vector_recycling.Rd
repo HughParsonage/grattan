@@ -2,15 +2,23 @@
 % Please edit documentation in R/prohibit_vector_recycling.R
 \name{prohibit_vector_recycling}
 \alias{prohibit_vector_recycling}
+\alias{prohibit_vector_recycling.MAXLENGTH}
+\alias{prohibit_arg_recycling.MAXLENGTH}
 \title{Prohibit vector recycling}
 \source{
 \url{http://stackoverflow.com/a/9335687/1664978}
 }
 \usage{
 prohibit_vector_recycling(...)
+
+prohibit_vector_recycling.MAXLENGTH(...)
+
+prohibit_arg_recycling.MAXLENGTH(LIST)
 }
 \arguments{
 \item{...}{A list of vectors}
+
+\item{LIST}{A list of objects (typically \code{mget(ls())} called in the body of a function).}
 }
 \value{
 An error message if the vectors are of different length (unless the alternative length is 1). 

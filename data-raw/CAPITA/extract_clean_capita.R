@@ -508,6 +508,23 @@ youth_unemployment_rates <-
 
 
 
+# Age pension
+# age_pension_income_tests <-
+  capita[sheet_name %ein% "Pensions"] %>%
+  .[COL %chin% c("Q", "S", "U"),
+    .(start_date, end_date, col, COL, value)] %>%
+  .[, variable_type := if_else(COL %chin% c("U"),
+                               "taper", 
+                               "IncomeThreshold")] %>%
+  .[, has_partner := if_else(COL %in% c("S", "T"), "Couple", "Single")] %>%
+  .[, .(fy_year = date2fy(end_date), end_date = as.Date(end_date), variable_type, has_partner, value)] %>%
+    dcast(fy_year + end_date ~ variable_type + has_partner, value.var = "value") %>%
+    melt(measure.vars = patterns("IncomeThreshold"),
+         variable.factor = FALSE) %>%
+    .[, HasPartner := endsWith(variable, "Couple")] %>%
+    .[, .(fy_year, Date = end_date, HasPartner, taper = taper_Single, value)]
+
+
 
 
 
