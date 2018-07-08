@@ -27,14 +27,14 @@ verify_fys_permitted <- function(to_verify, permitted_fys) {
     i <- which(fy.year %notin% permitted_fys)
     i1 <- i[1]
     
-    if (length(fy.year) == 1L) {
-      stop("`fy.year = ", fy.year, "` was not within the allowed range: ",
+    if (length(i) == 1L) {
+      stop("`fy.year = ", fy.year[i1], "` was not within the allowed range: ",
            permitted_fys[1], " <= fy.year <= ", last(permitted_fys))
     } else {
       stop("`fy.year` were not within the allowed range: ",
            permitted_fys[1], " <= fy.year <= ", last(permitted_fys), "\n\n",
-           "First invalid FY:\n\t", fy.year[i], "\n",
-           "at position ", i)
+           "First invalid FY:\n\t", fy.year[i1], "\n",
+           "at position ", i1)
     }
   }
 }
