@@ -37,6 +37,9 @@ test_that("Error handling", {
   
   expect_error(unemployment_benefit(income = 0, Date = "22"), 
                regexp = "neither a Date object nor safely coercible as such")
+  expect_error(unemployment_benefit(income = 0, Date = c("1999-12-31")),
+               regexp = "Ensure `Date` only includes dates between 2000 and 2020.",
+               fixed = TRUE)
   
   
   expect_message(unemployment_benefit(), 

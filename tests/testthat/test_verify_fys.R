@@ -11,5 +11,9 @@ test_that("Error handling", {
                                     c("2015-16", "2016-17")), 
                regexp = "`fy.year = 2017-18` was not within the allowed range: 2015-16 <= fy.year <= 2016-17",
                fixed = TRUE)
+  expect_error(verify_fys_permitted(c("2015-16", "2016-17", "2017-18", "2018-19"),
+                                    c("2015-16", "2016-17")), 
+               regexp = "`fy.year` were not within the allowed range: 2015-16 <= fy.year <= 2016-17",
+               fixed = TRUE)
 })
 
