@@ -39,4 +39,6 @@ test_that("Rent assistance", {
                300)
   expect_gt(rent_assistance(500, "2015-16", n_dependants = 1L), 
             rent_assistance(500, "2015-16", n_dependants = 0L))
+  expect_gt(rent_assistance(500, "2015-16", n_dependants = 1), 
+            rent_assistance(500, "2015-16", n_dependants = 0))
 })
