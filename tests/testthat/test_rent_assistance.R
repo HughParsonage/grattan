@@ -29,7 +29,8 @@ test_that("Error handling", {
                "has_partner.*supplied but are being ignored")
   expect_error(rent_assistance(min_rent = "a", max_rate = 5), regexp = "not numeric")
   expect_error(rent_assistance(min_rent = 5, max_rate = "5"), regexp = "not numeric")
-  
+  expect_warning(rent_assistance(Date = "2017-09-20", fy.year = "2017-18"),
+                 regexp = "Both `Date` and `fy.year` were set. `fy.year` will be ignored.")
   
 })
 
