@@ -17,6 +17,7 @@
 #' prohibit_vector_recycling(c(2, 2), 1, c(3, 3, 3))
 #' }
 #' @source \url{http://stackoverflow.com/a/9335687/1664978}
+#' @export
 
 prohibit_vector_recycling <- function(...){
   # http://stackoverflow.com/a/9335687/1664978

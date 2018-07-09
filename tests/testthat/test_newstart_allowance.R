@@ -10,7 +10,7 @@ test_that("Errors", {
   expect_error(newstart_allowance(fortnightly_partner_income = 200, annual_partner_income = 100000),
                regexp = 'input for `annual_partner_income` is not 26 times larger than `fortnightly_partner_income`')
   expect_error(newstart_allowance(fortnightly_income = c(1,2,3), age = c(22,23)),
-               regexp = 'inputs are not of the same length')
+               regexp = 'Only permissible vector lengths are 1 or the maximum (nrow) of the inputs.')
   expect_error(newstart_allowance(has_partner = FALSE, partner_pensioner = TRUE),
                regexp = 'check conflicting values for `has_partner`` and `partner_pensioner`')
 })

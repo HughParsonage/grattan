@@ -55,9 +55,26 @@ newstart_allowance <- function(fortnightly_income = 0,
     stop('`per`` can only take values "fortnight" or "annual"')
   }
   
-  if(dim(table(lengths(mget(ls())))) >2 ){
-    stop('inputs are not of the same length')
-  }
+  prohibit_vector_recycling(fortnightly_income,
+                            annual_income,
+                            has_partner,
+                            partner_pensioner,
+                            n_dependants,
+                            nine_months,
+                            isjspceoalfofcoahodeoc,
+                            principal_carer,
+                            fortnightly_partner_income,
+                            annual_partner_income,
+                            age,
+                            fy.year,
+                            assets_value,
+                            homeowner,
+                            lower,
+                            upper,
+                            taper_lower,
+                            taper_upper,
+                            taper_principal_carer,
+                            per)
   
   input <- data.table(do.call(cbind.data.frame, mget(ls())))
   
@@ -102,9 +119,7 @@ newstart_allowance <- function(fortnightly_income = 0,
   
   #additional eligibility requirements at https://www.humanservices.gov.au/individuals/services/centrelink/newstart-allowance/who-can-get-it
   eligible <-
-    input[ ,if_else(22 <= age & age < 65,
-                    TRUE,
-                    FALSE)]
+    input[ ,22 <= age & age < 65]
     
   max_income_March_2016 <-
     input[ ,if_else(isjspceoalfofcoahodeoc,
@@ -142,19 +157,11 @@ newstart_allowance <- function(fortnightly_income = 0,
     asset_threshold <-
     input[ ,if_else(has_partner,
                     if_else(homeowner,
-                            if_else(assets_value < 286500,
-                                    TRUE,
-                                    FALSE),
-                            if_else(assets_value < 433000,
-                                    TRUE,
-                                    FALSE)),
+                            assets_value < 286500,
+                            assets_value < 433000),
                     if_else(homeowner,
-                            if_else(assets_value < 202000,
-                                    TRUE,
-                                    FALSE),
-                            if_else(assets_value < 348500,
-                                    TRUE,
-                                    FALSE)))]
+                            assets_value < 202000,
+                            assets_value < 348500))]
 
   partner_income_reduction <- #https://web.archive.org/web/20160812171654/http://guides.dss.gov.au/guide-social-security-law/5/5/3/30
     if_else(has_partner & (fortnightly_partner_income > max_income_March_2016),
