@@ -60,7 +60,7 @@ disability_pension <- function(fortnightly_income = 0,
                             237.10,
                             285.10)))
   if (missing(per)) {
-    message("`per` is missing. Using `per = ", per[1], "`.", 
+    message("`per` is missing. Using `per = ", per[1], "`. ", 
             "Set `per` explicitly to avoid this message.")
   }
   
