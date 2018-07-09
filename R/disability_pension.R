@@ -59,6 +59,11 @@ disability_pension <- function(fortnightly_income = 0,
                     if_else(lives_at_home, 
                             237.10,
                             285.10)))
+  if (missing(per)) {
+    message("`per` is missing. Using `per = ", per[1], "`.", 
+            "Set `per` explicitly to avoid this message.")
+  }
+  
   per <- per[1L]
   
   switch(per, 

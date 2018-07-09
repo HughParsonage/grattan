@@ -15,6 +15,12 @@ test_that("Maximum rates", {
   expect_equal(age_pension(Date = "2016-06-30", has_partner = TRUE), 15576.60)
 })
 
+test_that("per message", {
+  expect_message(age_pension(fy.year = "2015-16"), regexp = "per")
+  expect_equal(age_pension(fy.year = "2015-16", per = "fortnight"), 
+               age_pension(fy.year = "2015-16", per = "year") / 26)
+})
+
 test_that("Income means testing single", {
   expect_equal(age_pension(fy.year = "2015-16",
                            has_partner = FALSE,

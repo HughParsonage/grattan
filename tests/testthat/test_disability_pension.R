@@ -10,3 +10,10 @@ test_that("Disability results", {
                age_pension(fy.year = "2015-16"))
 })
 
+test_that("per", {
+  expect_message(disability_pension(fy.year = "2015-16"), 
+                 "per")
+  expect_equal(disability_pension(fy.year = "2015-16", per = "year"), 
+               26 * disability_pension(fy.year = "2015-16", per = "fortnight"))
+})
+

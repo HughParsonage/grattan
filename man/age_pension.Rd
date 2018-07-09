@@ -33,5 +33,5 @@ age_pension(fortnightly_income = 0, annual_income = fortnightly_income * 26,
 Age pension
 }
 \details{
-
+Currently does not include the age pension supplement.
 }

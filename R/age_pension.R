@@ -11,6 +11,7 @@
 #' @param per Specifies the timeframe in which payments will be made. One of \code{"year"} and \code{"fortnight"}.
 #' 
 #' @details
+#' Currently does not include the age pension supplement.
 #' 
 #' 
 #' 
