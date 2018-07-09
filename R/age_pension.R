@@ -1,6 +1,6 @@
 #' Age pension
 #' 
-#' @param ordinary_income,annual_income Income for means-testing purposes. Provide one but not both.
+#' @param fortnightly_income,annual_income Income for means-testing purposes. Provide one but not both.
 #' @param has_partner (logical, default: \code{FALSE}) Does the individual have a partner?
 #' @param n_dependants How many dependants does sthe individual have? Default is zero.
 #' @param partner_fortnightly_income,partner_annual_income The partner's income. The sum of this value and the indiviudal's income gives the income test.
@@ -17,8 +17,8 @@
 #' 
 
 
-age_pension <- function(ordinary_income = 0, 
-                        annual_income = ordinary_income * 26, 
+age_pension <- function(fortnightly_income = 0, 
+                        annual_income = fortnightly_income * 26, 
                         has_partner = FALSE,
                         n_dependants = 0L,
                         partner_fortnightly_income = 0,
@@ -27,7 +27,8 @@ age_pension <- function(ordinary_income = 0,
                         fy.year = NULL,
                         assets_value = 0,
                         is_home_owner = FALSE,
-                        illness_separated_couple = FALSE) {
+                        illness_separated_couple = FALSE,
+                        per = c("year", "fortnight")) {
   if (is.null(Date)) {
     if (is.null(fy.year)) {
       Date <- .age_pension_today2qtr(Sys.Date())
@@ -113,7 +114,8 @@ age_pension <- function(ordinary_income = 0,
     assets_test <- 
     NULL
   
-  C %>%
+  out <- 
+    C %>%
     .[, age_pension_income := pminV(pmaxC(max_rate - 0.5 * (Income - permissible_income),
                                           0),
                                     max_rate)] %>%
@@ -122,6 +124,15 @@ age_pension <- function(ordinary_income = 0,
     setorderv("ordering") %>%
     .[, pminV(age_pension_income, 
               age_pension_assets)]
+  
+  if (length(per) > 1L) {
+    per <- per[1L]
+  }
+  
+  switch(per, 
+         "fortnight" = out / 26,
+         "year" = out, 
+         stop('`per` must be one of "fortnight" or "annual".'))
   
   
 }
@@ -135,9 +146,9 @@ age_pension <- function(ordinary_income = 0,
     paste0(the_year - 1L, "-09-20")
   } else if (OR(the_month > 9L,
                 the_month == 9L && the_day >= 20L)) {
-    paste0(year(today), "-09-20")
+    paste0(the_year, "-09-20")
   } else {
-    paste0(year(today), "-03-20")
+    paste0(the_year, "-03-20")
   }
 }
 
