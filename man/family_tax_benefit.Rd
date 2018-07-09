@@ -4,8 +4,8 @@
 \alias{family_tax_benefit}
 \title{FAMILY TAX BENEFIT}
 \usage{
-family_tax_benefit(child_age = 1, child_in_secondary_school = FALSE,
-  child_in_care = FALSE)
+family_tax_benefit(data, income_test_1_bound = 51027,
+  income_test_2_bound = 94316)
 }
 \description{
 FAMILY TAX BENEFIT
