@@ -27,7 +27,7 @@ family_tax_benefit <- function(data,
   base_rate_March_2016 <-
     57.68
   
-  family_data <- temp %>% group_by(HH_id) %>% summarise(fam_income = sum(income), max_family_rate = sum(max_rate_March_2016))
+  family_data <- data %>% group_by(HH_id) %>% summarise(fam_income = sum(income), max_family_rate = sum(max_rate_March_2016))
     
     
     
