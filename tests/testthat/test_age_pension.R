@@ -19,6 +19,18 @@ test_that("per message", {
   expect_message(age_pension(fy.year = "2015-16"), regexp = "per")
   expect_equal(age_pension(fy.year = "2015-16", per = "fortnight"), 
                age_pension(fy.year = "2015-16", per = "year") / 26)
+  
+  # undocumented but ok
+  expect_equal(age_pension(fy.year = "2015-16", per = "fortnight"), 
+               age_pension(fy.year = "2015-16", per = "annual") / 26)
+  # undocumented but ok
+  expect_equal(age_pension(fy.year = "2015-16", per = c("fortnight", "annual")), 
+               age_pension(fy.year = "2015-16", per = "annual") / 26)
+  
+  # undocumented but ok
+  expect_error(age_pension(fy.year = "2015-16", per = "fortnightly"),
+               '`per` must be one of "fortnight" or "annual".', 
+               fixed = TRUE)
 })
 
 test_that("Income means testing single", {
