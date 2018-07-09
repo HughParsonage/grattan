@@ -5,14 +5,14 @@ test_that("Errors", {
                  regexp = '`fy.year` can only take value "2015-16" for now')
   expect_error(newstart_allowance(per = "month"),
                regexp = '`per`` can only take values "fortnight" or "annual"')
-  expect_error(newstart_allowance(fortnightly_income = 100, annual_income = 100000),
-               regexp = 'cannot have inputs for both `fortnightly_income` and `annual_income` for the same individual')
-  expect_error(newstart_allowance(fortnightly_partner_income = 100, annual_partner_income = 100000),
-               regexp = 'cannot have inputs for both `fortnightly_partner_income` and `annual_partner_income` for the same individual')
+  expect_error(newstart_allowance(fortnightly_income = 200, annual_income = 100000),
+               regexp = 'input for `annual_income` is not 26 times larger than `fortnightly_income`')
+  expect_error(newstart_allowance(fortnightly_partner_income = 200, annual_partner_income = 100000),
+               regexp = 'input for `annual_partner_income` is not 26 times larger than `fortnightly_partner_income`')
   expect_error(newstart_allowance(fortnightly_income = c(1,2,3), age = c(22,23)),
                regexp = 'inputs are not of the same length')
   expect_error(newstart_allowance(has_partner = FALSE, partner_pensioner = TRUE),
-               regexp = 'check conflciting values for `has_partner`` and `partner_pensioner`')
+               regexp = 'check conflicting values for `has_partner`` and `partner_pensioner`')
 })
 
 test_that("Correct values, no income", {

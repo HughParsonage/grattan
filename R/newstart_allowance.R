@@ -61,27 +61,33 @@ newstart_allowance <- function(fortnightly_income = 0,
   
   input <- data.table(do.call(cbind.data.frame, mget(ls())))
   
-  if(any(input[, if_else(fortnightly_income > 0 & annual_income > 0, TRUE, FALSE)])){
-    stop('cannot have inputs for both `fortnightly_income` and `annual_income` for the same individual')
-  }
-  
-  if(any(input[, if_else(fortnightly_partner_income > 0 & annual_partner_income > 0, TRUE, FALSE)])){
-    stop('cannot have inputs for both `fortnightly_partner_income` and `annual_partner_income` for the same individual')
-  }
-  
-  if(any(input[, if_else(!has_partner & partner_pensioner, TRUE, FALSE)])){
-    stop('check conflciting values for `has_partner`` and `partner_pensioner`')
+  if(any(input[, any(!has_partner & partner_pensioner)])){
+    stop('check conflicting values for `has_partner`` and `partner_pensioner`')
   }
   
   #replace missing fortnightly income with annual income / 26
-  input[,'fortnightly_income'] <-
-    input[, if_else(annual_income > 0,
-                    annual_income / 26,
-                    fortnightly_income)]
-  input[,'fortnightly_partner_income'] <-
-    input[, if_else(annual_partner_income > 0,
-                    annual_partner_income / 26,
-                    fortnightly_income)]
+  input[ ,fortnightly_income := if_else(annual_income > 0 & fortnightly_income == 0,
+                                        annual_income / 26,
+                                        fortnightly_income)]
+  input[ ,fortnightly_partner_income := if_else(annual_partner_income > 0 & fortnightly_partner_income == 0,
+                                                annual_partner_income / 26,
+                                                fortnightly_partner_income)]
+  
+  #replace missing annual income with fortnightly income * 26
+  input[ ,annual_income := if_else(fortnightly_income > 0 & annual_income == 0,
+                                   fortnightly_income * 26,
+                                   annual_income)]
+  input[ ,annual_partner_income := if_else(fortnightly_partner_income > 0 & annual_partner_income == 0,
+                                           fortnightly_partner_income * 26,
+                                           annual_partner_income)]
+  
+  if(!input[, isTRUE(all.equal(annual_income, 26 * fortnightly_income, tol = 1e-04))]){
+    stop('input for `annual_income` is not 26 times larger than `fortnightly_income`')
+  }
+  
+  if(!input[, isTRUE(all.equal(annual_partner_income, 26 * fortnightly_partner_income, tol = 1e-04))]){
+    stop('input for `annual_partner_income` is not 26 times larger than `fortnightly_partner_income`')
+  }
 
   max_rate_March_2016 <-
     input[ ,if_else(isjspceoalfofcoahodeoc,
@@ -113,6 +119,7 @@ newstart_allowance <- function(fortnightly_income = 0,
                                                     1552.75,
                                                     1094.17)))))]
 
+  #if partner is on pension, fortnightly income is average of 2 incomes
   input[ ,'fortnightly_income']<-
     input[ ,if_else(partner_pensioner,
                     (fortnightly_partner_income + fortnightly_income)/2,
