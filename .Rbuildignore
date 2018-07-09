@@ -4,6 +4,7 @@
 ^\.travis\.yml$
 ^.*README\.Rmd$
 ^cran-comments\.md$
+^R/NotImplemented$
 ^Roadmap\.Rnw$
 ^Roadmap\.pdf$
 ^grattan\.pdf$
@@ -50,3 +51,5 @@
 ^vignettes/long-vignettes/Reynolds-Smolensky-vs-year\.csv$
 ^_pkgdown\.yml$
 ^codecov\.yml$
+^README_files/figure-markdown_github$
+^README_files//figure-markdown_github/compare-30-37-42-thresholds-1\.svg$

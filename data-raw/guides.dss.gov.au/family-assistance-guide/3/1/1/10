@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="shortlink" href="../../../../node/6545" />
+<link rel="canonical" href="10" />
+<meta name="viewport" content="width=device-width" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>3.1.1.10 Calculating a Rate of FTB - Overview | Family Assistance Guide</title>
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"-79vxGLugL7Go-bW25NHZh6_g2IGxN-75h63yxqTYV8","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/family-assistance-guide\/3\/1\/1\/10":true}});
+//--><!]]>
+</script>
+<!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
+</head>
+<body class="">
+<ul class="offleft" id="top">
+<li><a href="10#navigation">Skip to navigation</a></li>
+<li><a href="10#content">Skip to main content</a></li>
+</ul>
+<nav id="global">
+	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
+<div class="menu-block">
+<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<li class="leaf menu-mlid-7597"><a href="../../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
+<li class="leaf has-children menu-mlid-513"><a href="../../../../child-support-guide">Child Support Guide</a></li>
+<li class="leaf has-children active-trail menu-mlid-491"><a href="../../../../family-assistance-guide" class="active-trail">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../../../../guide-social-security-law">Guide to Social Security Law</a></li>
+<li class="last leaf has-children menu-mlid-490"><a href="../../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+</ul></div></nav>
+<header role="banner">
+	<a href="../../../../index.html" rel="home"><img src="../../../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
+<p class="site-name">Guides to Social Policy Law</p>
+<form class="search-form" role="search" action="10" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
+  <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
+ <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-fmsAsmsU7Qktz-i6Bg-wbsNKcA2I28QMGzRmuVeTxYs" />
+<input type="hidden" name="form_id" value="search_block_form" />
+</div></form>	<h2>Family Assistance Guide</h2>
+<p>Version 1.203 - Released 7 May 2018</p>
+	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
+</header>
+<div id="contentwrap">
+	<nav role="navigation" id="navigation">
+	<div class="menu-block">
+<ul class="menu"><li class="first leaf menu-mlid-7283"><a href="../../../../family-assistance-guide" title="">Using the Family Assistance Guide</a></li>
+<li class="collapsed menu-mlid-2274"><a href="../../../updates">What&#039;s New</a></li>
+<li class="collapsed menu-mlid-2266"><a href="../../../1">1 Key Terms &amp; Principles</a></li>
+<li class="collapsed menu-mlid-2267"><a href="../../../2">2 Eligibility</a></li>
+<li class="expanded active-trail menu-mlid-2268"><a href="../../../3" class="active-trail">3 Rate Calculation</a><ul class="menu"><li class="first expanded active-trail menu-mlid-1826"><a href="../../1" class="active-trail">3.1 FTB Rate Calculation</a><ul class="menu"><li class="first expanded active-trail menu-mlid-1815"><a href="../1" class="active-trail">3.1.1 Rate Provisions for FTB</a><ul class="menu"><li class="first leaf active-trail active menu-mlid-1804"><a href="10" class="active-trail active">3.1.1.10 Calculating a Rate of FTB - Overview</a></li>
+<li class="leaf menu-mlid-1805"><a href="20">3.1.1.20 Current FTB Rates &amp; Income Test Amounts</a></li>
+<li class="leaf menu-mlid-1806"><a href="25">3.1.1.25 Current ES Rates</a></li>
+<li class="leaf menu-mlid-1807"><a href="30">3.1.1.30 Shared Care Rate for FTB</a></li>
+<li class="leaf menu-mlid-1808"><a href="31">3.1.1.31 Shared Care Rate Calculation</a></li>
+<li class="leaf menu-mlid-1809"><a href="32">3.1.1.32 Sharing FTB in Blended Families</a></li>
+<li class="leaf menu-mlid-1811"><a href="34">3.1.1.34 Sharing FTB for Separated Couples</a></li>
+<li class="leaf menu-mlid-1812"><a href="40">3.1.1.40 Calculating FTB Bereavement Payment</a></li>
+<li class="leaf menu-mlid-1813"><a href="50">3.1.1.50 FTB Payments During Absence from Australia before 1 July 2016</a></li>
+<li class="last leaf menu-mlid-1814"><a href="60">3.1.1.60 Indexation of FTB</a></li>
+</ul></li>
+<li class="leaf menu-mlid-1818"><a href="../2">3.1.2 FTB Rate for ACOs</a></li>
+<li class="leaf menu-mlid-1819"><a href="../3">3.1.3 Apportioning Income Test Reductions between FTB Part A Components</a></li>
+<li class="collapsed menu-mlid-1820"><a href="../4">3.1.4 FTB Part A Rate Calculation - Method 1</a></li>
+<li class="collapsed menu-mlid-1821"><a href="../5">3.1.5 Maintenance Action Test for FTB Part A</a></li>
+<li class="collapsed menu-mlid-1822"><a href="../6">3.1.6 Child Support Assessments &amp; Agreements</a></li>
+<li class="collapsed menu-mlid-1823"><a href="../7">3.1.7 Maintenance Income Test</a></li>
+<li class="collapsed menu-mlid-1824"><a href="../8">3.1.8 FTB Part A Rate Calculation - Method 2</a></li>
+<li class="collapsed menu-mlid-1825"><a href="../9">3.1.9 FTB Part B Rate Calculation</a></li>
+<li class="leaf menu-mlid-1816"><a href="../10">3.1.10 Number not currently in use</a></li>
+<li class="last leaf menu-mlid-1817"><a href="../11">3.1.11 Advance Payment of FTB Part A</a></li>
+</ul></li>
+<li class="collapsed menu-mlid-1829"><a href="../../2">3.2 Adjusted Taxable Income</a></li>
+<li class="leaf menu-mlid-1830"><a href="../../3">3.3 Number not currently in use</a></li>
+<li class="leaf menu-mlid-1831"><a href="../../4">3.4 Number not currently in use</a></li>
+<li class="collapsed menu-mlid-1832"><a href="../../5">3.5 CCB Rate Calculation</a></li>
+<li class="collapsed menu-mlid-1833"><a href="../../6">3.6 Historical Rates</a></li>
+<li class="collapsed menu-mlid-1837"><a href="../../7">3.7 JETCCFA Rate Calculation</a></li>
+<li class="collapsed menu-mlid-1834"><a href="../../8">3.8 CCR Rate Calculation</a></li>
+<li class="leaf menu-mlid-1835"><a href="../../9">3.9 SKB Rate</a></li>
+<li class="leaf menu-mlid-1827"><a href="../../10">3.10 Determining the SIFS Rate</a></li>
+<li class="leaf menu-mlid-1836"><a href="../../11">3.11 NBS Rate</a></li>
+<li class="last leaf menu-mlid-1828"><a href="../../12">3.12 SBP Rate</a></li>
+</ul></li>
+<li class="collapsed menu-mlid-2269"><a href="../../../4">4 Claims &amp; Payments</a></li>
+<li class="collapsed menu-mlid-2270"><a href="../../../5">5 Gathering Information</a></li>
+<li class="collapsed menu-mlid-2271"><a href="../../../6">6 Review &amp; Reconciliation</a></li>
+<li class="collapsed menu-mlid-2272"><a href="../../../7">7 Debts</a></li>
+<li class="collapsed menu-mlid-2273"><a href="../../../8">8 Transitional Arrangements</a></li>
+<li class="leaf menu-mlid-2264"><a href="../../../acronyms">Acronym List</a></li>
+<li class="leaf menu-mlid-7296"><a href="../../../keywords">Keyword Index</a></li>
+<li class="leaf menu-mlid-7371"><a href="../../../act-references">Act Reference Index</a></li>
+<li class="last leaf menu-mlid-7169"><a href="../../../sitemap">Site Map</a></li>
+</ul></div>	</nav>
+	<div id="breadcrumb"><a href="../../../../index.html">Home</a> &raquo; <a href="../../../../family-assistance-guide">Family Assistance Guide</a> &raquo; <a href="../../../3" class="active-trail">3 Rate Calculation</a> &raquo; <a href="../../1" class="active-trail">3.1 FTB Rate Calculation</a> &raquo; <a href="../1" class="active-trail">3.1.1 Rate Provisions for FTB</a> &raquo; 3.1.1.10 Calculating a Rate of FTB - Overview</div>
+<div id="utility">
+	
+<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/family-assistance-guide/3/1/1/10"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="content" role="main">
+<article id="node-6545">
+<h1 >3.1.1.10 Calculating a Rate of FTB - Overview</h1>
+<h2>Summary</h2>
+<p>This topic provides an overview of how the rate of <a href="../../../acronyms#ftb" title="Family tax benefit">FTB</a> is calculated, and the income tests that may be applied. The topic discusses the following:</p>
+<ul><li>FTB annual rate,</li>
+<li>calculating the annual rate of FTB for an individual,</li>
+<li>annual rate of FTB for an <a href="../../../acronyms#aco" title="Approved care organisation">ACO</a>,</li>
+<li>calculating FTB daily rate,</li>
+<li>rounding the FTB rate,</li>
+<li>minimum amount of FTB,</li>
+<li>FTB income tests, and</li>
+<li>effect of changes in relationship status.</li>
+</ul><h2>FTB annual rate</h2>
+<p>The FTB rate is calculated as an annual rate. For individuals (<a href="../../../1/1/i/90">1.1.I.90</a>), this annual rate is the sum of FTB Part A and FTB Part B, including supplements if eligible.</p>
+<p><strong>Note:</strong> Although both the FTB Part A and FTB Part B supplement amounts are included in the annual rate of FTB Part A and FTB Part B respectively for eligible individuals, they cannot be paid as fortnightly instalments.</p>
+<p>From 1 July 2016, the FTB Part A supplement is subject to an income test. If an individual's <a href="../../../acronyms#ati" title="Adjusted taxable income">ATI</a> (which includes the ATI of their partner if any) is more than $80,000 for the relevant income year, then the individual's FTB Part A supplement in relation to that year will be nil.</p>
+<h2>Calculating the annual rate of FTB for an individual</h2>
+<p>The annual rate of FTB for an individual is calculated using FAAct Schedule 1. This schedule sets out the income tests for FTB Part A, FTB Part A supplement and FTB Part B respectively. These income tests assess, for an income year:</p>
+<ul><li>the ATI (<a href="../../../1/1/a/20">1.1.A.20</a>) of individuals and their partners (<a href="../../../1/1/p/30">1.1.P.30</a>) for FTB Part A, FTB Part A supplement and FTB Part B, and if applicable</li>
+<li>the maintenance income (<a href="../../../1/1/m/10">1.1.M.10</a>) of the individual and their partners for FTB Part A worked out using Method 1.</li>
+</ul><p><strong>Note: </strong>Past period claims made for a period in the current financial year and payments made by instalment may be based on either the individual's estimate as agreed with Centrelink, the indexed current estimate (<a href="../../../1/1/i/85">1.1.I.85</a>) or the indexed actual incomes.</p>
+<div class="example">
+<p><strong>Explanation:</strong> Centrelink may use either:</p>
+<ul><li>an estimate provided by the individual and assessed as reasonable by Centrelink, or</li>
+<li>the indexed current estimate (most recent estimate of income available to Centrelink adjusted by movements in average weekly earnings over the relevant 12 month period), or</li>
+<li>the indexed actual income, based on the most recent taxable income as determined by the <a href="../../../acronyms#ato" title="Australian Taxation Office">ATO</a> and adjusted by movements in average weekly earnings over the relevant 12 month period.</li>
+</ul></div>
+<p>An individual's rate of FTB is calculated partly on the basis of family income. For ongoing instalment claims and past period claims made for periods in the current income year, FTB payments are determined by using an estimate of an individual and their partner's ATI and maintenance income, if applicable, for the current year. If the claim is for a previous income year payments are based on actual ATI.</p>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00490" title="A New Tax System (Family Assistance) Act 1999">FAAct</a> section 58(1) Annual rate of FTB for individuals</p>
+<p><a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 20A Indexed estimates, section 20B Indexed actual incomes</p>
+<p><strong>Policy reference:</strong> FA Guide <a href="../../../1/1/i/85">1.1.I.85</a> Indexed income - actual or estimate (FTB), <a href="../4">3.1.4</a> FTB Part A Rate Calculation - Method 1, <a href="../8">3.1.8</a> FTB Part A Rate Calculation - Method 2, <a href="../9">3.1.9</a> FTB Part B Rate Calculation, <a href="../../../4/2">4.2</a> Claims for FTB</p>
+</div>
+<h2>Annual rate of FTB for an ACO</h2>
+<p>For ACOs (<a href="../../../1/1/a/80">1.1.A.80</a>), this annual rate is a flat rate. The annual rate of FTB for an ACO is not subject to an income test. The ACO rate is equivalent to the base rate (<a href="../../../1/1/b/10">1.1.B.10</a>) of FTB Part A for a child under 18. The FTB Part A supplement is only for individuals and cannot be paid to an ACO.</p>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00490" title="A New Tax System (Family Assistance) Act 1999">FAAct</a> section 58(2) Annual rate of FTB to approved care organisation</p>
+<p><strong>Policy reference:</strong> FA Guide <a href="../2">3.1.2</a> FTB Rate for ACOs</p>
+</div>
+<h2>Calculating FTB daily rate</h2>
+<p>The annual rate of FTB for an individual or an ACO is converted to a daily rate by dividing the annual rate by 365. A new daily rate is derived each time the annual rate of FTB for an individual is recalculated.</p>
+<p><strong>Note:</strong> In a leap year, the daily rate is still calculated by dividing the annual rate by 365.</p>
+<p>The daily rate of FTB is used to pay for each day of eligibility during:</p>
+<ul><li>a fortnight when an individual or ACO is paid FTB by instalments, or</li>
+<li>a past period when an individual or ACO is paid FTB as a lump sum.</li>
+</ul><p>In general, the annual rate of FTB responds to changes in eligibility as they occur.</p>
+<div class="example">
+<p><strong>Example:</strong> The rate of FTB may change in the following circumstances:</p>
+<ul><li>an individual's ATI is more than $80,000 (FTB Part A supplement is nil),</li>
+<li>the number of FTB children changes,</li>
+<li>an individual is receiving <a href="../../../acronyms#ra" title="Rent assistance">RA</a> and the amount of rent they pay changes,</li>
+<li>the amount of maintenance income an instalment individual receives changes, and/or</li>
+<li>an individual separates or gets married.</li>
+</ul></div>
+<h2>Rounding the FTB rate</h2>
+<p>Each time an annual rate is converted to a daily rate, the new daily rate is always rounded to the nearest cent (e.g. rounding amounts ending in 0.5 cents upwards to the next whole cent). If the daily rate before rounding is above nil and below half a cent, round up to one cent.</p>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00490" title="A New Tax System (Family Assistance) Act 1999">FAAct</a> section 58(3) Daily rate of FTB</p>
+</div>
+<h2>Minimum amount of FTB</h2>
+<p>After rounding, the minimum amount of FTB that can be paid is one cent per day or 14 cents per fortnight. Individuals receiving less than $100 a year are encouraged to claim their entitlement as a lump sum after the end of the financial year.</p>
+<h2>FTB income tests</h2>
+<p>The rate of FTB Part A for an individual is subject to an income test, except where the individual or their partner:</p>
+<ul><li>receives an income support payment (<a href="../../../1/1/i/50">1.1.I.50</a>), or</li>
+<li>is in an employment income nil rate period of up to 6 fortnights (during this time a person on nil rate is taken to be receiving (<a href="../../../1/1/r/05">1.1.R.05</a>) a social security pension or benefit).</li>
+</ul><p>The rate of FTB Part A may be calculated using Method 1 or Method 2, depending on the amount of the individual's ATI. If FTB Part A is calculated using Method 1, it is also subject to the maintenance income test.</p>
+<p>FTB Part B is calculated separately. Single parents who receive income support payments are not income tested.</p>
+<div class="reference">
+<p><strong>Policy reference:</strong> FA Guide <a href="../4">3.1.4</a> FTB Part A Rate Calculation - Method 1, <a href="../7">3.1.7</a> Maintenance Income Test, <a href="../8">3.1.8</a> FTB Part A Rate Calculation - Method 2, <a href="../9">3.1.9</a> FTB Part B Rate Calculation</p>
+<p>SS Guide <a href="../../../../guide-social-security-law/3/1/12">3.1.12</a> Employment Income Nil Rate Period</p>
+</div>
+<h2>Effect of changes in relationship status</h2>
+<p>Eligibility for FTB is based on the ATI of the individual, and their partner if they have one, for the period being claimed. If the individual's relationship status changes during the period of the claim, the income assessment must also change for the relevant period.</p>
+<div class="example">
+<p><strong>Example 1:</strong> Suzanne lodges a lump sum claim for FTB for a previous income year. From July to September, Suzanne was partnered. From October to April she was a single parent, and from May to June she had a new partner. Her daily rate of FTB is calculated taking into account 3 different ATI assessments - the joint income with her ex-partner from July to September, her sole income from October to April, and the joint income with her new partner from May to June.</p>
+</div>
+<div class="example">
+<p><strong>Example 2:</strong> Simon is a single parent who receives FTB by instalments. He notifies Centrelink that he is moving in with his new partner, and he provides his partner's estimated ATI for the current income year. Simon's daily rate of FTB is reassessed from the date he commences the relationship, and his FTB payments are based on the combined family ATI for that income year.</p>
+</div>
+</article>	<div id="view-last-reviewed-date">
+		
+		  
+      Last reviewed:     20 March 2017  	</div>
+</div></div>
+<footer role="contentinfo" id="footer">
+	<ul class="menu"><li class="first leaf"><a href="../../../../contact-us">Contact us</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/copyright-disclaimer" title="">Copyright &amp; Disclaimer</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/privacy-policy" title="">Privacy</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
+<li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
+</ul></footer>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+</body>
+</html>

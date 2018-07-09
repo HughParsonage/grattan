@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="shortlink" href="../../../node/6273" />
+<link rel="canonical" href="7" />
+<meta name="viewport" content="width=device-width" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>7.2.7 Debt Recovery by Garnishee | Family Assistance Guide</title>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"y3t2qQPmv3IjdNt6AAzwjzcDnRLsZu_NYlCQCbV9yNs","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/family-assistance-guide\/7\/2\/7":true}});
+//--><!]]>
+</script>
+<!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
+</head>
+<body class="">
+<ul class="offleft" id="top">
+<li><a href="7#navigation">Skip to navigation</a></li>
+<li><a href="7#content">Skip to main content</a></li>
+</ul>
+<nav id="global">
+	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
+<div class="menu-block">
+<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
+<li class="leaf has-children menu-mlid-513"><a href="../../../child-support-guide">Child Support Guide</a></li>
+<li class="leaf has-children active-trail menu-mlid-491"><a href="../../../family-assistance-guide" class="active-trail">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law">Guide to Social Security Law</a></li>
+<li class="last leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+</ul></div></nav>
+<header role="banner">
+	<a href="../../../index.html" rel="home"><img src="../../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
+<p class="site-name">Guides to Social Policy Law</p>
+<form class="search-form" role="search" action="7" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
+  <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
+ <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-mkomheYouGxzu3o37HAouKkVZ0rv0OVzXzDjXRLr0Yg" />
+<input type="hidden" name="form_id" value="search_block_form" />
+</div></form>	<h2>Family Assistance Guide</h2>
+<p>Version 1.203 - Released 7 May 2018</p>
+	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
+</header>
+<div id="contentwrap">
+	<nav role="navigation" id="navigation">
+	<div class="menu-block">
+<ul class="menu"><li class="first leaf menu-mlid-7283"><a href="../../../family-assistance-guide" title="">Using the Family Assistance Guide</a></li>
+<li class="collapsed menu-mlid-2274"><a href="../../updates">What&#039;s New</a></li>
+<li class="collapsed menu-mlid-2266"><a href="../../1">1 Key Terms &amp; Principles</a></li>
+<li class="collapsed menu-mlid-2267"><a href="../../2">2 Eligibility</a></li>
+<li class="collapsed menu-mlid-2268"><a href="../../3">3 Rate Calculation</a></li>
+<li class="collapsed menu-mlid-2269"><a href="../../4">4 Claims &amp; Payments</a></li>
+<li class="collapsed menu-mlid-2270"><a href="../../5">5 Gathering Information</a></li>
+<li class="collapsed menu-mlid-2271"><a href="../../6">6 Review &amp; Reconciliation</a></li>
+<li class="expanded active-trail menu-mlid-2272"><a href="../../7" class="active-trail">7 Debts</a><ul class="menu"><li class="first collapsed menu-mlid-1538"><a href="../1">7.1 FA Debts</a></li>
+<li class="expanded active-trail menu-mlid-1539"><a href="../2" class="active-trail">7.2 Methods of Debt Recovery</a><ul class="menu"><li class="first leaf menu-mlid-1526"><a href="1">7.2.1 Debt Recovery - General Provisions</a></li>
+<li class="leaf menu-mlid-1527"><a href="2">7.2.2 Debt Recovery by Deduction</a></li>
+<li class="leaf menu-mlid-1528"><a href="3">7.2.3 Debt Recovery from FA Entitlement</a></li>
+<li class="leaf menu-mlid-1529"><a href="4">7.2.4 Debt Recovery by Cash</a></li>
+<li class="leaf menu-mlid-1530"><a href="5">7.2.5 Debt Recovery from Income Tax Refund</a></li>
+<li class="leaf menu-mlid-1531"><a href="6">7.2.6 Debt Recovery by Legal Proceedings</a></li>
+<li class="leaf active-trail active menu-mlid-1532"><a href="7" class="active-trail active">7.2.7 Debt Recovery by Garnishee</a></li>
+<li class="leaf menu-mlid-1533"><a href="8">7.2.8 Effect of Bankruptcy on Debt Recovery</a></li>
+<li class="leaf menu-mlid-1534"><a href="9">7.2.9 Recovery from Financial Institutions</a></li>
+<li class="last leaf menu-mlid-20616"><a href="10">7.2.10 Number not currently in use</a></li>
+</ul></li>
+<li class="collapsed menu-mlid-1540"><a href="../3">7.3 Non-Recoverable Debts</a></li>
+<li class="leaf menu-mlid-1541"><a href="../4">7.4 Child Support Debts</a></li>
+<li class="leaf menu-mlid-1543"><a href="../5">7.5 JETCCFA Debts</a></li>
+<li class="leaf menu-mlid-1542"><a href="../6">7.6 FTB Advance Debts</a></li>
+<li class="last collapsed menu-mlid-16571"><a href="../7">7.7 Departure Prohibition Orders</a></li>
+</ul></li>
+<li class="collapsed menu-mlid-2273"><a href="../../8">8 Transitional Arrangements</a></li>
+<li class="leaf menu-mlid-2264"><a href="../../acronyms">Acronym List</a></li>
+<li class="leaf menu-mlid-7296"><a href="../../keywords">Keyword Index</a></li>
+<li class="leaf menu-mlid-7371"><a href="../../act-references">Act Reference Index</a></li>
+<li class="last leaf menu-mlid-7169"><a href="../../sitemap">Site Map</a></li>
+</ul></div>	</nav>
+	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../family-assistance-guide">Family Assistance Guide</a> &raquo; <a href="../../7" class="active-trail">7 Debts</a> &raquo; <a href="../2" class="active-trail">7.2 Methods of Debt Recovery</a> &raquo; 7.2.7 Debt Recovery by Garnishee</div>
+<div id="utility">
+	
+<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/family-assistance-guide/7/2/7"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="content" role="main">
+<article id="node-6273">
+<h1 >7.2.7 Debt Recovery by Garnishee</h1>
+<h2>Summary</h2>
+<p>This section provides information about recovering a debt (<a href="http://guides.dss.gov.au/family-assistance-guide/1/1/d/60">1.1.D.60</a>) by means of a garnishee notice (<a href="../../1/1/g/10">1.1.G.10</a>). It includes:</p>
+<ul><li>who can a garnishee notice be issued to,</li>
+<li>what information is contained in a garnishee notice,</li>
+<li>when payment must be made,</li>
+<li>compliance with a garnishee notice, and</li>
+<li>garnishee of trust funds, superannuation and deceased estates.</li>
+</ul><div class="reference">
+<p><strong>Policy reference:</strong> FA Guide <a href="1">7.2.1</a> Debt Recovery - General Provisions</p>
+</div>
+<h2>Who can a garnishee notice be issued to?</h2>
+<p>A garnishee notice may be issued to any person who:</p>
+<ul><li>owes or will owe, money to the debtor, or</li>
+<li>holds, or may subsequently hold, money for or on account of the debtor, or</li>
+<li>holds, or may subsequently hold, money on account of some other person for payment to the debtor, or</li>
+<li>has authority from some other person to pay money to the debtor.</li>
+</ul><p>This applies to an amount regardless of any law of a state or territory under which the amount may be inalienable. If money is to be paid to the debtor only if a condition is met, then the money is taken to be due on demand even if the condition is not met.</p>
+<div class="example">
+<p><strong>Example:</strong> A garnishee notice can be issued to a person's employer, bank or solicitor.</p>
+</div>
+<p>A copy of the garnishee notice must be given to the debtor.</p>
+<p>The person who has been issued with a garnishee notice becomes a garnishee debtor (<a href="../../1/1/g/10">1.1.G.10</a>).</p>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 89 Garnishee notice</p>
+</div>
+<h2>What information is contained in a garnishee notice?</h2>
+<p>The notice requires the garnishee debtor to pay:</p>
+<ul><li>an amount specified in the notice, which is no more than the amount of the debt or than the amount that can be recovered from the garnishee debtor (see explanation), or
+<ul><li>
+<div class="example"><strong>Explanation:</strong> The amount that can be recovered relates to the amount the person owes or will owe or hold for the original debtor.</div>
+</li>
+</ul></li>
+<li>an amount or percentage specified in the notice out of each payment that the garnishee debtor will become liable to pay the debtor from time to time, until the debt is satisfied.</li>
+</ul><h2>When must the payment be made?</h2>
+<p>The date by which payment must be made is specified in the notice. This date cannot be before either:</p>
+<ul><li>the money becomes due, or is held by the garnishee debtor, or</li>
+<li>before the end of the period of 14 days after the notice is given.</li>
+</ul><h2>Compliance with a garnishee notice</h2>
+<p>A person cannot refuse or fail to comply with a garnishee notice to the extent to which they are capable of complying with the notice. The penalty for failure to do so is 12 months imprisonment.</p>
+<p>If the garnishee debtor fails to comply with the notice, the amount of the debt outstanding is recoverable from the garnishee debtor by means of:</p>
+<ul><li>legal proceedings, or</li>
+<li>a garnishee notice.</li>
+</ul><p>The amount outstanding is the lesser of the amount the:</p>
+<ul><li>garnishee debtor was required to pay at that time, or</li>
+<li>original debtor was required to have paid at that time.</li>
+</ul><p>If an amount is recovered from either the original debtor or the garnishee debtor, the amount reduces the balance of both debts.</p>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 80 Debt from failure to comply with garnishee notice, section 89 Garnishee notice</p>
+</div>
+<h2>Payments made by garnishee</h2>
+<p>Payments made by a garnishee debtor are taken to have been made with the authority of the original debtor.</p>
+<p>When the debtor or anyone on their behalf makes a payment, the garnishee debtor must be notified that the debt has been reduced by the amount paid.</p>
+<h2>Garnishee of term deposits</h2>
+<p>Where a garnishee notice is issued to a financial institution against a term deposit, the notice immediately attaches to that account. However, the financial institution is not liable to pay the garnisheed amount to Centrelink until the term deposit matures or is terminated by the individual. Although Centrelink is not restricted from approaching the individual to discuss early termination of the term deposit, there is no legislative authority to request the individual to do so.</p>
+<h2>Garnishee of trust funds</h2>
+<p>The only circumstances in which a garnishee notice may be issued against a trust fund are when the:</p>
+<ul><li>debtor is owed money by the trust fund, or</li>
+<li>trust fund does not have the true nature of a trust (see explanation).
+<ul><li>
+<div class="example"><strong>Explanation:</strong> If the nature of the trust is difficult to identify the case should be referred to the Helpdesk for advice.</div>
+</li>
+</ul></li>
+</ul><p>A garnishee notice should not be issued against a trust fund:</p>
+<ul><li>where the debtor is a beneficiary of the trust, but is not owed money by the trust, or</li>
+<li>where the trust does not appear to have the true nature of a trust, but this is due to a breach of the trustee's obligations as a trustee (the trustee's fiduciary duties) rather than a defect in the creation of the trust.</li>
+</ul><h2>Garnishee of superannuation funds</h2>
+<p>A garnishee notice should not be issued against a superannuation fund under any circumstances.</p>
+<h2>Garnishee notices &amp; deceased estates</h2>
+<p>Under no circumstances should a garnishee notice be served on the executor of the estate of a deceased individual.</p>
+<p>Under FA(Admin)Act section 89 a garnishee notice may be issued against a person who 'holds … money for or on account of the debtor'. An executor cannot be said to hold an estate 'for or on account' of the deceased person and therefore a garnishee notice must not be issued under section 89 in these circumstances.</p>
+<h2>Garnishee notices &amp; bankruptcy</h2>
+<p>A garnishee notice cannot be issued once a debtor has become bankrupt because the debt is no longer a 'debt due to the Commonwealth' for the purposes of the SSAct.</p>
+<p>The Commonwealth can rely on a garnishee notice issued prior to bankruptcy, but only where the debt was due before the bankruptcy commenced. In cases where the garnishee notice was issued prior to bankruptcy but was not complied with before the funds were vested in the trustee, specific advice should be sought.</p>
+<div class="reference">
+<p><strong>Policy reference:</strong> FA Guide <a href="8">7.2.8</a> Effect of Bankruptcy on Debt Recovery</p>
+</div>
+</article>	<div id="view-last-reviewed-date">
+		
+		  
+      Last reviewed:     3 January 2017  	</div>
+</div></div>
+<footer role="contentinfo" id="footer">
+	<ul class="menu"><li class="first leaf"><a href="../../../contact-us">Contact us</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/copyright-disclaimer" title="">Copyright &amp; Disclaimer</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/privacy-policy" title="">Privacy</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
+<li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
+</ul></footer>
+<script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+</body>
+</html>
