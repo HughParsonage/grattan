@@ -106,77 +106,72 @@ newstart_allowance <- function(fortnightly_income = 0,
     stop('input for `annual_partner_income` is not 26 times larger than `fortnightly_partner_income`')
   }
 
-  max_rate_March_2016 <-
-    input[ ,if_else(isjspceoalfofcoahodeoc,
-                     737.10,
-                     if_else(has_partner,
-                             476.4,
-                             if_else(and(age >= 60, nine_months),
-                                     570.80,
-                                     if_else(n_dependants > 0,
-                                             570.80,
-                                             527.60))))]
+  max_rate_March_2016 <- input[ ,if_else(isjspceoalfofcoahodeoc,
+                                         737.10,
+                                         if_else(has_partner,
+                                                 476.4,
+                                                 if_else(and(age >= 60, nine_months),
+                                                         570.80,
+                                                         if_else(n_dependants > 0,
+                                                                 570.80,
+                                                                 527.60))))]
   
   #additional eligibility requirements at https://www.humanservices.gov.au/individuals/services/centrelink/newstart-allowance/who-can-get-it
-  eligible <-
-    input[ ,22 <= age & age < 65]
-    
-  max_income_March_2016 <-
-    input[ ,if_else(isjspceoalfofcoahodeoc,
-                    1974.75,
-                    if_else(has_partner,
-                            934.74,
-                            if_else(and(age > 60, nine_months),
-                                    1104.50,
-                                    if_else(n_dependants == 0,
-                                            1021,
-                                            if_else(principal_carer,
-                                                    1552.75,
-                                                    1094.17)))))]
+  eligible <- input[ ,22 <= age & age < 65]
+  
+  
+  max_income_March_2016 <- input[ ,if_else(isjspceoalfofcoahodeoc,
+                                          1974.75,
+                                          if_else(has_partner,
+                                                  934.74,
+                                                  if_else(and(age > 60, nine_months),
+                                                          1104.50,
+                                                          if_else(n_dependants == 0,
+                                                                  1021,
+                                                                  if_else(principal_carer,
+                                                                          1552.75,
+                                                                          1094.17)))))]
 
   #if partner is on pension, fortnightly income is average of 2 incomes
-  input[ ,'fortnightly_income']<-
-    input[ ,if_else(partner_pensioner,
-                    (fortnightly_partner_income + fortnightly_income)/2,
-                    fortnightly_income)]
+  input[ , fortnightly_income := if_else(partner_pensioner,
+                                        (fortnightly_partner_income + fortnightly_income)/2,
+                                        fortnightly_income)]
   
-  income_reduction <-
-    input[ ,if_else(fortnightly_income < lower,
-                    0,
-                      if_else(principal_carer,
-                              if_else(fortnightly_income < max_income_March_2016,
-                                      taper_principal_carer * (fortnightly_income - lower),
-                                      max_rate_March_2016),
-                              if_else(fortnightly_income < upper,
-                                      taper_lower * (fortnightly_income - lower),
-                                      if_else(fortnightly_income < max_income_March_2016,
-                                              taper_lower * (fortnightly_income - lower) +
-                                                (taper_upper - taper_lower) * (fortnightly_income - upper),
-                                              max_rate_March_2016))))]
+  #income reduction
+  income_reduction <- input[ ,if_else(fortnightly_income < lower,
+                                      0,
+                                        if_else(principal_carer,
+                                                if_else(fortnightly_income < max_income_March_2016,
+                                                        taper_principal_carer * (fortnightly_income - lower),
+                                                        max_rate_March_2016),
+                                                if_else(fortnightly_income < upper,
+                                                        taper_lower * (fortnightly_income - lower),
+                                                        if_else(fortnightly_income < max_income_March_2016,
+                                                                taper_lower * (fortnightly_income - lower) +
+                                                                  (taper_upper - taper_lower) * (fortnightly_income - upper),
+                                                                max_rate_March_2016))))]
+  #asset test
+  asset_threshold <- input[ ,if_else(has_partner,
+                                        if_else(homeowner,
+                                                assets_value < 286500,
+                                                assets_value < 433000),
+                                        if_else(homeowner,
+                                                assets_value < 202000,
+                                                assets_value < 348500))]
 
-    asset_threshold <-
-    input[ ,if_else(has_partner,
-                    if_else(homeowner,
-                            assets_value < 286500,
-                            assets_value < 433000),
-                    if_else(homeowner,
-                            assets_value < 202000,
-                            assets_value < 348500))]
-
+  #partner income reduction
   partner_income_reduction <- #https://web.archive.org/web/20160812171654/http://guides.dss.gov.au/guide-social-security-law/5/5/3/30
-    if_else(has_partner & (fortnightly_partner_income > max_income_March_2016),
-            0.6 * (fortnightly_partner_income - round((1/0.6) * (max_rate_March_2016 - (upper - lower) * 0.5 + 252 * 0.6))),
-            0)
+          input[ ,if_else(has_partner & (fortnightly_partner_income > max_income_March_2016) & !partner_pensioner,
+                          0.6 * (fortnightly_partner_income - round((1/0.6) * (max_rate_March_2016 - (upper - lower) * 0.5 + 252 * 0.6))),
+                          0)]
 
-  #output
-
-  fortnightly_rate <- 
-    if_else(eligible & asset_threshold,
-            pmaxC(max_rate_March_2016 - income_reduction - partner_income_reduction,
-                  0),
-            0)
+  #check eligibility
+  fortnightly_rate <- if_else(eligible & asset_threshold,
+                                      pmaxC(max_rate_March_2016 - income_reduction - partner_income_reduction,
+                                            0),
+                                      0)
             
-  
+  #output
   input[, if_else(per == "fortnight",
                   fortnightly_rate,
                   fortnightly_rate * 26)]
