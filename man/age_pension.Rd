@@ -26,6 +26,8 @@ age_pension(fortnightly_income = 0, annual_income = fortnightly_income * 26,
 \item{is_home_owner}{(logical, default: \code{FALSE}) Does the individual own their own home?}
 
 \item{illness_separated_couple}{Is the couple separated by illness? (Affects the assets test.)}
+
+\item{per}{Specifies the timeframe in which payments will be made. One of \code{"year"} and \code{"fortnight"}.}
 }
 \description{
 Age pension

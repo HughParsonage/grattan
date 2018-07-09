@@ -2,19 +2,20 @@
 #' @description Identical to the \code{\link{age_pension}} except for those under 21.
 #' 
 #' @param fortnightly_income,annual_income Income for the means test
-#' @param assets Assets test.
+#' @param assets_value Value of assets for the assets test.
 #' @param fy.year,Date Either the financial year and Date in which the pension is paid. Only `fy.year = "2015-16"` is implemented.
 #' @param age Age of the individual, only relevant for those under 21.
 #' @param has_partner (logical, default: \code{FALSE}) Is the individual a member of a couple?
 #' @param n_dependants Integer number of dependent children.
 #' @param lives_at_home (logical, default: \code{FALSE}) Does the individual live at home with their parents? Only relevant if \code{age < 21}.
 #' @param independent (logical, default: \code{FALSE}) Is the person independent? Only relevant if \code{age < 21}.
-#' @param per One of \code{"fortnight"}, \code{"year"} return either the fortnightly pension.
+#' @param per One of \code{"fortnight"}, \code{"year"} to return either the fortnightly pension or the annual amount.
+#' @param ... Other arguments passed to \code{\link{age_pension}}.
 
 
 disability_pension <- function(fortnightly_income = 0,
                                annual_income = 26 * fortnightly_income,
-                               assets = 0,
+                               assets_value = 0,
                                fy.year = NULL,
                                Date = NULL,
                                age = 21L,
@@ -22,7 +23,7 @@ disability_pension <- function(fortnightly_income = 0,
                                n_dependants = 0L,
                                lives_at_home = FALSE,
                                independent = FALSE,
-                               per = c("fortnight", "year"),
+                               per = c("year", "fortnight"),
                                ...) {
   stopifnot(identical(fy.year, "2015-16"))
   if (!missing(annual_income)) {
@@ -40,11 +41,13 @@ disability_pension <- function(fortnightly_income = 0,
   
   out <- 
     if_else(age >= 21L | n_dependants > 0L,
-            age_pension(fortnightly_income = fortnightly_income, 
-                        assets = assets, 
+            age_pension(fortnightly_income = fortnightly_income,
+                        annual_income = annual_income,
+                        assets_value = assets_value, 
                         fy.year = "2015-16",
                         has_partner = has_partner,
                         n_dependants = n_dependants,
+                        per = "fortnight",
                         ...),
             # http://guides.dss.gov.au/guide-social-security-law/5/2/2/40
             # possibly more; see
@@ -56,8 +59,11 @@ disability_pension <- function(fortnightly_income = 0,
                     if_else(lives_at_home, 
                             237.10,
                             285.10)))
-  switch(match.arg(per), 
+  per <- per[1L]
+  
+  switch(per, 
          "fortnight" = out,
+         "annual" = 26 * out,
          "year" = 26 * out)
   
 }

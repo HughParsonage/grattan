@@ -5,15 +5,15 @@
 \title{Disability support pension}
 \usage{
 disability_pension(fortnightly_income = 0, annual_income = 26 *
-  fortnightly_income, assets = 0, fy.year = NULL, Date = NULL,
+  fortnightly_income, assets_value = 0, fy.year = NULL, Date = NULL,
   age = 21L, has_partner = FALSE, n_dependants = 0L,
-  lives_at_home = FALSE, independent = FALSE, per = c("fortnight",
-  "year"), ...)
+  lives_at_home = FALSE, independent = FALSE, per = c("year",
+  "fortnight"), ...)
 }
 \arguments{
 \item{fortnightly_income, annual_income}{Income for the means test}
 
-\item{assets}{Assets test.}
+\item{assets_value}{Value of assets for the assets test.}
 
 \item{fy.year, Date}{Either the financial year and Date in which the pension is paid. Only `fy.year = "2015-16"` is implemented.}
 
@@ -27,7 +27,9 @@ disability_pension(fortnightly_income = 0, annual_income = 26 *
 
 \item{independent}{(logical, default: \code{FALSE}) Is the person independent? Only relevant if \code{age < 21}.}
 
-\item{per}{One of \code{"fortnight"}, \code{"year"} return either the fortnightly pension.}
+\item{per}{One of \code{"fortnight"}, \code{"year"} to return either the fortnightly pension or the annual amount.}
+
+\item{...}{Other arguments passed to \code{\link{age_pension}}.}
 }
 \description{
 Identical to the \code{\link{age_pension}} except for those under 21.

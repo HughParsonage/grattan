@@ -8,6 +8,7 @@
 #' @param assets_value Total value of household assets.
 #' @param is_home_owner (logical, default: \code{FALSE}) Does the individual own their own home? 
 #' @param illness_separated_couple Is the couple separated by illness? (Affects the assets test.)
+#' @param per Specifies the timeframe in which payments will be made. One of \code{"year"} and \code{"fortnight"}.
 #' 
 #' @details
 #' 
@@ -125,13 +126,18 @@ age_pension <- function(fortnightly_income = 0,
     .[, pminV(age_pension_income, 
               age_pension_assets)]
   
-  if (length(per) > 1L) {
-    per <- per[1L]
+  if (missing(per)) {
+    message("`per` is missing. Using `per = ", per[1], "`.", 
+            "Set `per` explicitly to avoid this message.")
   }
+  
+  per <- per[1L]
+  
   
   switch(per, 
          "fortnight" = out / 26,
-         "year" = out, 
+         "year" = out,
+         "annual" = out,
          stop('`per` must be one of "fortnight" or "annual".'))
   
   
