@@ -79,7 +79,15 @@ newstart_allowance <- function(fortnightly_income = 0,
   input <- data.table(do.call(cbind.data.frame, mget(ls())))
   
   if(any(input[, any(!has_partner & partner_pensioner)])){
-    stop('check conflicting values for `has_partner`` and `partner_pensioner`')
+    stop('check conflicting values for `has_partner` and `partner_pensioner`')
+  }
+  
+  if(any(input[, any(annual_partner_income > 0 & !has_partner)])) {
+    stop('check conflicting values for `has_partner` and `annual_partner_income`')
+  }
+  
+  if(any(input[, any(fortnightly_partner_income > 0 & !has_partner)])) {
+    stop('check conflicting values for `has_partner` and `fortnightly_partner_income`')
   }
   
   #replace missing fortnightly income with annual income / 26
