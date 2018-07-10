@@ -5,7 +5,8 @@
 \title{FAMILY TAX BENEFIT}
 \usage{
 family_tax_benefit(data, income_test_1_bound = 51027,
-  income_test_2_bound = 94316)
+  income_test_2_bound = 94316, income_test_bound_ftbB = 5402,
+  per = "annual")
 }
 \description{
 FAMILY TAX BENEFIT
