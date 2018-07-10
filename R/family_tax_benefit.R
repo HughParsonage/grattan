@@ -57,10 +57,10 @@ family_tax_benefit <- function(data,
                                                                  if_else(youngest_age <= 19 & youngest_in_secondary & single_parent,
                                                                          106.82,
                                                                          0))))]
-
-  ftbB_supplement_March_2016 <- if_else(ftb_eligible,
-                                        354.05,
-                                        0)
+  ###need to change to assign to child, not 
+  ftbB_supplement_March_2016 <- family_data[ ,if_else(youngest_age <= 19 & youngest_in_secondary,
+                                                      354.05,
+                                                      0)]
 
 
   #income reduction test ftbA
