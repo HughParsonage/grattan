@@ -1,7 +1,4 @@
 #' FAMILY TAX BENEFIT
-#' @param child_age
-#' @param child_in_secondary_school
-#' @param child_in_care
 #' @export
 #' 
 
@@ -15,10 +12,10 @@ family_tax_benefit <- function(data,
   #https://web.archive.org/web/20160420184949/http://guides.dss.gov.au/family-assistance-guide/3/1/1/20
   #historical rates: http://guides.dss.gov.au/family-assistance-guide/3/6/
   
-  #data has columns `HH_id`, `id`, `age`, `income`, `in_secondary_school`, `in_care`, `single_parent`
+  #data has columns `HH_id`, `id`, `age`, `income`, `in_secondary_school`, `single_parent`
   #note: `has_partner_and_is_parent` condition is to sift out ftb B families who are ineligible
   
-  ftbA_eligible <- data[ ,(age <= 15) | ((16 <= age) & (age <= 19) & in_secondary_school)]
+  ftb_eligible <- data[ ,(age <= 15) | ((16 <= age) & (age <= 19) & in_secondary_school)]
   
   #ftbA rate
   data[ ,ftbA_max_rate_March_2016 := if_else(age < 13,
@@ -27,14 +24,12 @@ family_tax_benefit <- function(data,
                                                      233.94,
                                                      if_else(age <= 19 & in_secondary_school,
                                                              233.94,
-                                                             if_else(in_care,
-                                                                     57.68,
-                                                                     0))))]
-  data[ ,ftbA_base_rate_March_2016 := if_else(ftbA_eligible,
+                                                             0)))]
+  data[ ,ftbA_base_rate_March_2016 := if_else(ftb_eligible,
                                               57.68,
                                               0)]
   
-  data[ ,ftbA_supplement_March_2016 := if_else(ftbA_eligible,
+  data[ ,ftbA_supplement_March_2016 := if_else(ftb_eligible,
                                                726.35,
                                                0)]
             #note 1: conditional on meeting requirements e.g. immunisations, tax returns
@@ -63,7 +58,9 @@ family_tax_benefit <- function(data,
                                                                          106.82,
                                                                          0))))]
 
-  ftbB_supplement_March_2016 <-354.05
+  ftbB_supplement_March_2016 <- if_else(ftb_eligible,
+                                        354.05,
+                                        0)
 
 
   #income reduction test ftbA
