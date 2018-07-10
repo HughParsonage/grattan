@@ -39,6 +39,35 @@ disability_pension <- function(fortnightly_income = 0,
     }
   }
   
+  max.length <-
+    prohibit_vector_recycling.MAXLENGTH(fortnightly_income,
+                                        annual_income,
+                                        assets_value,
+                                        age,
+                                        has_partner,
+                                        n_dependants,
+                                        lives_at_home,
+                                        independent)
+  
+  rep_via <- function(v) {
+    if (length(v) == 1L) {
+      rep_len(v, max.length)
+    } else {
+      v
+    }
+  }
+  
+  fortnightly_income %<>% rep_via
+  annual_income      %<>% rep_via
+  assets_value       %<>% rep_via
+  age                %<>% rep_via
+  has_partner        %<>% rep_via
+  n_dependants       %<>% rep_via
+  lives_at_home      %<>% rep_via
+  independent        %<>% rep_via
+  
+  
+  
   out <- 
     if_else(age >= 21L | n_dependants > 0L,
             age_pension(fortnightly_income = fortnightly_income,
@@ -69,6 +98,7 @@ disability_pension <- function(fortnightly_income = 0,
   switch(per, 
          "fortnight" = out,
          "annual" = 26 * out,
-         "year" = 26 * out)
+         "year" = 26 * out,
+         stop('`per` must be one of "fortnight" and "year".'))
   
 }
