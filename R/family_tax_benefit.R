@@ -1,6 +1,6 @@
 #' FAMILY TAX BENEFIT
 #' 
-#' @param data Data table input. Each row is an individual. Column names are `HH_id`: household id, `id`: individual id, `age`: individual's age, `income`: individual's income, `in_secondary_school`: does the individual attends secondary school?, `single_parent`: is the parent single?, `other_allowance_benefit_or_pension`: does the individual receive a pension, benefit, or labour market program payment such as Youth Allowance.
+#' @param data Data table input. Each row is an individual. Column names are `HH_id`: household id, `id`: individual id, `age`: individual's age, `income`: individual's income, `in_secondary_school`: does the individual attend secondary school, `single_parent`: is the parent single, `other_allowance_benefit_or_pension`: does the individual receive a pension, benefit, or labour market program payment such as Youth Allowance, `maintenance_income`: the amount of maintenance income the individual receives for the care of a child/children from a previous relationship, `maintenance_children`: the number of children who you receive maintenance for that are in you care.
 #' @param income_test_ftbA_1_bound Lower bound for which reduction in ftb A max payment occurs at rate taper_ftbA_1.
 #' @param income_test_ftbA_2_bound Lower bound for which reduction in ftb A base payment occurs at rate taper_ftbA_1.
 #' @param income_test_ftbB_bound Lower bound for which reduction in ftb B payment occurs at rate taper_ftbB.
@@ -25,9 +25,10 @@ family_tax_benefit <- function(data,
   #https://web.archive.org/web/20160420184949/http://guides.dss.gov.au/family-assistance-guide/3/1/1/20
   #historical rates: http://guides.dss.gov.au/family-assistance-guide/3/6/
   
-  #data has columns `HH_id`, `id`, `age`, `income`, `in_secondary_school`, `single_parent`, `other_allowance_benefit_or_pension`
   
-
+  ###ADD WARNING RE MAINTENANCE
+  
+  
   #ftbA: payed per child
   data[ ,ftbA_max_rate_March_2016 := if_else(other_allowance_benefit_or_pension,
                                              0,
@@ -48,8 +49,18 @@ family_tax_benefit <- function(data,
             #note 1: supplement conditional on meeting requirements e.g. immunisations, tax returns
             #note 2: can only be paid annually
   
+  #MAINTENANCE ACTION TEST: if you care for a child from a previous relationship and do not take reasonable action to attain child support, child is ineleigible for ftb A max rate (can still receive ftbA base payment).
   
-  family_data <- data %>% group_by(HH_id) %>% summarise(fam_income = sum(income), 
+  #MAINTENANCE INCOME TEST ftbA
+  data[ ,maintenance_income_test_ftbA := if_else(maintenance_children > 0,
+                                                 if_else(maintenance_children == 1,
+                                                         pmax(0.5 * (maintenance_income - 1543.95), 0),
+                                                         pmax(0.5 * (maintenance_income - 1543.95 - (514.65 * (maintenance_children - 1))), 0)),
+                                                 0)] 
+    
+    
+  
+  family_data <- data %>% group_by(HH_id) %>% summarise(family_income = sum(income), 
                                                         ftbA_max_family_rate = sum(ftbA_max_rate_March_2016), 
                                                         ftbA_base_family_rate = sum(ftbA_base_rate_March_2016),
                                                         ftbA_supplement_family_rate = sum(ftbA_supplement_March_2016),
@@ -60,7 +71,8 @@ family_tax_benefit <- function(data,
                                                         youngest_age = min(age),
                                                         youngest_in_secondary = in_secondary_school[age==min(age)],
                                                         youngest_allowance_benefit_or_pension = other_allowance_benefit_or_pension[age==min(age)],
-                                                        single_parent = any(single_parent)) %>% data.table()
+                                                        single_parent = any(single_parent),
+                                                        family_maintenance_income_test_ftbA = sum(maintenance_income_test_ftbA)) %>% data.table()
   
   #ftbB: payed based on youngest child
       #cannot be paid during Paid Parental Leave period
@@ -80,13 +92,13 @@ family_tax_benefit <- function(data,
 
 
   #income reduction test ftbA
-  income_test_ftbA_1 <- family_data[ ,if_else(fam_income < income_test_ftbA_1_bound,
+  income_test_ftbA_1 <- family_data[ ,if_else(family_income < income_test_ftbA_1_bound,
                     0,
-                    taper_ftbA_1 * (fam_income - income_test_ftbA_1_bound))]
+                    taper_ftbA_1 * (family_income - income_test_ftbA_1_bound))]
 
-  income_test_ftbA_2 <- family_data[ ,if_else(fam_income < income_test_ftbA_2_bound,
+  income_test_ftbA_2 <- family_data[ ,if_else(family_income < income_test_ftbA_2_bound,
                     0,
-                    taper_ftbA_2 * (fam_income - income_test_ftbA_2_bound))]
+                    taper_ftbA_2 * (family_income - income_test_ftbA_2_bound))]
             #note: before 2015 income_test_ftbA_2_bound increased based upon number of ftb children http://guides.dss.gov.au/family-assistance-guide/3/6/1 note 2G
 
   #income test ftbB
@@ -100,10 +112,8 @@ family_tax_benefit <- function(data,
                                                              0)),
                                              0)]
 
-
-
-  output<- data.table(HH_id = family_data$HH_id,
-                      ftbA_incl_supplement = family_data[ ,pmax(365/14 * ftbA_max_family_rate + ftbA_supplement_family_rate - income_test_ftbA_1, 
+    output<- data.table(HH_id = family_data$HH_id,
+                      ftbA_incl_supplement = family_data[ ,pmax(365/14 * ftbA_max_family_rate + ftbA_supplement_family_rate - income_test_ftbA_1 - family_maintenance_income_test_ftbA, 
                                                          365/14 * ftbA_base_family_rate + ftbA_supplement_family_rate - income_test_ftbA_2,
                                                          0)],
 

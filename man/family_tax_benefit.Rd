@@ -10,10 +10,25 @@ family_tax_benefit(data, income_test_ftbA_1_bound = 51027,
   per = "annual")
 }
 \arguments{
-\item{data}{Data table input. Each row is an individual. Column names are `HH_id`: household id, `id`: individual id, `age`: individual's age, `income`: individual's income, `in_secondary_school`: does the individual attends secondary school?, `single_parent`: is the parent single?, `other_allowance_benefit_or_pension`: does the individual receive a pension, benefit, or labour market program payment such as Youth Allowance.}
+\item{data}{Data table input. Each row is an individual. Column names are `HH_id`: household id, `id`: individual id, `age`: individual's age, `income`: individual's income, `in_secondary_school`: does the individual attend secondary school, `single_parent`: is the parent single, `other_allowance_benefit_or_pension`: does the individual receive a pension, benefit, or labour market program payment such as Youth Allowance, `maintenance_income`: the amount of maintenance income the individual receives for the care of a child/children from a previous relationship, `maintenance_children`: the number of children who you receive maintenance for that are in you care.}
 
-\item{income_test_ftbA_1_bound}{Lower bound for which reduction in ftb A max rate payment occurs at rate taper_ftbA_1}
+\item{income_test_ftbA_1_bound}{Lower bound for which reduction in ftb A max payment occurs at rate taper_ftbA_1.}
+
+\item{income_test_ftbA_2_bound}{Lower bound for which reduction in ftb A base payment occurs at rate taper_ftbA_1.}
+
+\item{income_test_ftbB_bound}{Lower bound for which reduction in ftb B payment occurs at rate taper_ftbB.}
+
+\item{taper_ftbA_1}{The amount at which ftb A max payment is reduced for each dollar earned above income_test_ftbA_1_bound.}
+
+\item{taper_ftbA_2}{The amount at which ftb A base payment is reduced for each dollar earned above income_test_ftbA_2_bound.}
+
+\item{taper_ftbB}{The amount at which ftb B payment is reduced for each dollar earned above income_test_ftbB_bound.}
+
+\item{per}{How often the payment will be made. At present payments can only be annually.}
 }
 \description{
 FAMILY TAX BENEFIT
+}
+\author{
+Matthew Katzen
 }
