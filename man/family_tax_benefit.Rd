@@ -4,9 +4,15 @@
 \alias{family_tax_benefit}
 \title{FAMILY TAX BENEFIT}
 \usage{
-family_tax_benefit(data, income_test_1_bound = 51027,
-  income_test_2_bound = 94316, income_test_bound_ftbB = 5402,
+family_tax_benefit(data, income_test_ftbA_1_bound = 51027,
+  income_test_ftbA_2_bound = 94316, income_test_ftbB_bound = 5402,
+  taper_ftbA_1 = 0.2, taper_ftbA_2 = 0.3, taper_ftbB = 0.2,
   per = "annual")
+}
+\arguments{
+\item{data}{Data table input. Each row is an individual. Column names are `HH_id`: household id, `id`: individual id, `age`: individual's age, `income`: individual's income, `in_secondary_school`: does the individual attends secondary school?, `single_parent`: is the parent single?, `other_allowance_benefit_or_pension`: does the individual receive a pension, benefit, or labour market program payment such as Youth Allowance.}
+
+\item{income_test_ftbA_1_bound}{Lower bound for which reduction in ftb A max rate payment occurs at rate taper_ftbA_1}
 }
 \description{
 FAMILY TAX BENEFIT

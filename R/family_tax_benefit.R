@@ -1,11 +1,24 @@
 #' FAMILY TAX BENEFIT
+#' 
+#' @param data Data table input. Each row is an individual. Column names are `HH_id`: household id, `id`: individual id, `age`: individual's age, `income`: individual's income, `in_secondary_school`: does the individual attends secondary school?, `single_parent`: is the parent single?, `other_allowance_benefit_or_pension`: does the individual receive a pension, benefit, or labour market program payment such as Youth Allowance.
+#' @param income_test_ftbA_1_bound Lower bound for which reduction in ftb A max payment occurs at rate taper_ftbA_1.
+#' @param income_test_ftbA_2_bound Lower bound for which reduction in ftb A base payment occurs at rate taper_ftbA_1.
+#' @param income_test_ftbB_bound Lower bound for which reduction in ftb B payment occurs at rate taper_ftbB.
+#' @param taper_ftbA_1 The amount at which ftb A max payment is reduced for each dollar earned above income_test_ftbA_1_bound.
+#' @param taper_ftbA_2 The amount at which ftb A base payment is reduced for each dollar earned above income_test_ftbA_2_bound.
+#' @param taper_ftbB The amount at which ftb B payment is reduced for each dollar earned above income_test_ftbB_bound.
+#' @param per How often the payment will be made. At present payments can only be annually.
+#' @author Matthew Katzen
 #' @export
 #' 
 
 family_tax_benefit <- function(data, 
-                               income_test_1_bound = 51027,
-                               income_test_2_bound = 94316,
-                               income_test_bound_ftbB = 5402,
+                               income_test_ftbA_1_bound = 51027,
+                               income_test_ftbA_2_bound = 94316,
+                               income_test_ftbB_bound = 5402,
+                               taper_ftbA_1 = 0.2,
+                               taper_ftbA_2 = 0.3,
+                               taper_ftbB = 0.2,
                                per = 'annual'
                                ){
   #https://www.humanservices.gov.au/sites/default/files/co029-1603en.pdf
@@ -13,7 +26,6 @@ family_tax_benefit <- function(data,
   #historical rates: http://guides.dss.gov.au/family-assistance-guide/3/6/
   
   #data has columns `HH_id`, `id`, `age`, `income`, `in_secondary_school`, `single_parent`, `other_allowance_benefit_or_pension`
-  #note: `has_partner_and_is_parent` condition is to sift out ftb B families who are ineligible
   
 
   #ftbA: payed per child
@@ -68,14 +80,14 @@ family_tax_benefit <- function(data,
 
 
   #income reduction test ftbA
-  income_test_1 <- family_data[ ,if_else(fam_income < income_test_1_bound,
+  income_test_ftbA_1 <- family_data[ ,if_else(fam_income < income_test_ftbA_1_bound,
                     0,
-                    0.2 * (fam_income - income_test_1_bound))]
+                    taper_ftbA_1 * (fam_income - income_test_ftbA_1_bound))]
 
-  income_test_2 <- family_data[ ,if_else(fam_income < income_test_2_bound,
+  income_test_ftbA_2 <- family_data[ ,if_else(fam_income < income_test_ftbA_2_bound,
                     0,
-                    0.3 * (fam_income - income_test_2_bound))]
-            #note: before 2015 income_test_2_bound increased based upon number of ftb children http://guides.dss.gov.au/family-assistance-guide/3/6/1 note 2G
+                    taper_ftbA_2 * (fam_income - income_test_ftbA_2_bound))]
+            #note: before 2015 income_test_ftbA_2_bound increased based upon number of ftb children http://guides.dss.gov.au/family-assistance-guide/3/6/1 note 2G
 
   #income test ftbB
   ftbB_eligible <- family_data[ ,primary_income < 100000]
@@ -83,16 +95,16 @@ family_tax_benefit <- function(data,
   income_test_ftbB <- family_data[ ,if_else(primary_income < 100000,
                                              if_else(single_parent,
                                                      0,
-                                                     if_else(secondary_income > income_test_bound_ftbB,
-                                                             0.2 * (secondary_income - income_test_bound_ftbB),
+                                                     if_else(secondary_income > income_test_ftbB_bound,
+                                                             taper_ftbB * (secondary_income - income_test_ftbB_bound),
                                                              0)),
                                              0)]
 
 
 
   output<- data.table(HH_id = family_data$HH_id,
-                      ftbA_incl_supplement = family_data[ ,pmax(365/14 * ftbA_max_family_rate + ftbA_supplement_family_rate - income_test_1, 
-                                                         365/14 * ftbA_base_family_rate + ftbA_supplement_family_rate - income_test_2,
+                      ftbA_incl_supplement = family_data[ ,pmax(365/14 * ftbA_max_family_rate + ftbA_supplement_family_rate - income_test_ftbA_1, 
+                                                         365/14 * ftbA_base_family_rate + ftbA_supplement_family_rate - income_test_ftbA_2,
                                                          0)],
 
                       ftbB_incl_supplement = family_data[ ,if_else(ftbB_eligible, 
