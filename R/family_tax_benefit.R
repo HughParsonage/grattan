@@ -30,7 +30,7 @@ family_tax_benefit <- function(data,
   
   
   #ftbA: payed per child
-  data[ ,ftbA_max_rate_March_2016 := if_else(other_allowance_benefit_or_pension,
+  data[ ,ftbA_max_rate_July_2015 := if_else(other_allowance_benefit_or_pension,
                                              0,
                                              if_else(age < 13,
                                                      179.76,
@@ -39,11 +39,11 @@ family_tax_benefit <- function(data,
                                                              if_else(age <= 19 & in_secondary_school,
                                                                      233.94,
                                                                      0))))]
-  data[ ,ftbA_base_rate_March_2016 := if_else(!other_allowance_benefit_or_pension & (age <= 15 | (age <= 19 & in_secondary_school)),
+  data[ ,ftbA_base_rate_July_2015 := if_else(!other_allowance_benefit_or_pension & (age <= 15 | (age <= 19 & in_secondary_school)),
                                               57.68,
                                               0)]
   
-  data[ ,ftbA_supplement_March_2016 := if_else(!other_allowance_benefit_or_pension & (age <= 15 | (age <= 19 & in_secondary_school)),
+  data[ ,ftbA_supplement_July_2015 := if_else(!other_allowance_benefit_or_pension & (age <= 15 | (age <= 19 & in_secondary_school)),
                                                726.35,
                                                0)]
             #note 1: supplement conditional on meeting requirements e.g. immunisations, tax returns
@@ -61,9 +61,9 @@ family_tax_benefit <- function(data,
     
   
   family_data <- data %>% group_by(HH_id) %>% summarise(family_income = sum(income), 
-                                                        ftbA_max_family_rate = sum(ftbA_max_rate_March_2016), 
-                                                        ftbA_base_family_rate = sum(ftbA_base_rate_March_2016),
-                                                        ftbA_supplement_family_rate = sum(ftbA_supplement_March_2016),
+                                                        ftbA_max_family_rate = sum(ftbA_max_rate_July_2015), 
+                                                        ftbA_base_family_rate = sum(ftbA_base_rate_July_2015),
+                                                        ftbA_supplement_family_rate = sum(ftbA_supplement_July_2015),
                                                         primary_income = max(income), 
                                                         secondary_income = if_else(any(single_parent), 
                                                                               0, 
@@ -77,7 +77,7 @@ family_tax_benefit <- function(data,
   #ftbB: payed based on youngest child
       #cannot be paid during Paid Parental Leave period
       #note: eligibility changed for fy 2016-17: https://www.humanservices.gov.au/sites/default/files/co029-1607en.pdf
-  ftbB_rate_March_2016 <- family_data[ ,if_else(youngest_allowance_benefit_or_pension,
+  ftbB_rate_July_2015 <- family_data[ ,if_else(youngest_allowance_benefit_or_pension,
                                                 0,
                                                 if_else(youngest_age < 5,
                                                        152.88,
@@ -85,7 +85,7 @@ family_tax_benefit <- function(data,
                                                                        106.82,
                                                                        0)))]
   
-  ftbB_supplement_March_2016 <- family_data[ ,if_else(!youngest_allowance_benefit_or_pension & 
+  ftbB_supplement_July_2015 <- family_data[ ,if_else(!youngest_allowance_benefit_or_pension & 
                                                       (youngest_age <= 15 | (youngest_age <= 19 & youngest_in_secondary)),
                                                       354.05,
                                                       0)]
@@ -118,7 +118,7 @@ family_tax_benefit <- function(data,
                                                          0)],
 
                       ftbB_incl_supplement = family_data[ ,if_else(ftbB_eligible, 
-                                                                   pmaxC(365/14 * ftbB_rate_March_2016 + ftbB_supplement_March_2016 - income_test_ftbB,
+                                                                   pmaxC(365/14 * ftbB_rate_July_2015 + ftbB_supplement_July_2015 - income_test_ftbB,
                                                                          0), 
                                                                    0)])
                       
