@@ -82,3 +82,14 @@ test_that("Multiple HH - combos of previous tests", {
                data.table(HH_id = c(1,2, 3), ftbA_incl_supplement = c(524.95, 2230.15, 13658.08), ftbB_incl_supplement = c(0, 3138.99, 0)),
                tol = 1e-02)
 })
+
+test_that("Errors", {
+  temp <- data.table(HH_id = c(1, 1, 1), pers_id = 1:3, age = c(35, 30, 0), income = c(0, 0, 0),
+                     in_secondary_school = F, single_parent = F, other_allowance_benefit_or_pension = F, maintenance_income = c(100, 0, 0), maintenance_children = 0)
+  expect_error(family_tax_benefit(temp), 
+                 regexp = "Incompatible combination of `maintenance_income` and `maintenance_children`")
+  temp <- data.table(HH_id = c(1, 1, 1), pers_id = 1:3, age = c(35, 30, 0), income = c(0, 0, 0),
+                     in_secondary_school = F, single_parent = F, other_allowance_benefit_or_pension = F, maintenance_income = 0, maintenance_children = c(1,0,0))
+  expect_error(family_tax_benefit(temp), 
+                 regexp = "Incompatible combination of `maintenance_income` and `maintenance_children`")
+})

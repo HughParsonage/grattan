@@ -26,8 +26,10 @@ family_tax_benefit <- function(data,
   #historical rates: http://guides.dss.gov.au/family-assistance-guide/3/6/
   
   
-  ###ADD WARNING RE MAINTENANCE
-  
+  #maintenance warning
+  if(data[ ,any((maintenance_income > 0) == (maintenance_children == 0))]){
+    stop("Incompatible combination of `maintenance_income` and `maintenance_children`")
+  }
   
   #ftbA: payed per child
   data[ ,ftbA_max_rate_July_2015 := if_else(other_allowance_benefit_or_pension,
