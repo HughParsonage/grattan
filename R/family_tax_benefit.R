@@ -12,27 +12,28 @@ family_tax_benefit <- function(data,
   #https://web.archive.org/web/20160420184949/http://guides.dss.gov.au/family-assistance-guide/3/1/1/20
   #historical rates: http://guides.dss.gov.au/family-assistance-guide/3/6/
   
-  #data has columns `HH_id`, `id`, `age`, `income`, `in_secondary_school`, `single_parent`
+  #data has columns `HH_id`, `id`, `age`, `income`, `in_secondary_school`, `single_parent`, `other_allowance_benefit_or_pension`
   #note: `has_partner_and_is_parent` condition is to sift out ftb B families who are ineligible
   
-  ftb_eligible <- data[ ,(age <= 15) | ((16 <= age) & (age <= 19) & in_secondary_school)]
-  
-  #ftbA rate
-  data[ ,ftbA_max_rate_March_2016 := if_else(age < 13,
-                                             179.76,
-                                             if_else(age <= 15,
-                                                     233.94,
-                                                     if_else(age <= 19 & in_secondary_school,
+
+  #ftbA: payed per child
+  data[ ,ftbA_max_rate_March_2016 := if_else(other_allowance_benefit_or_pension,
+                                             0,
+                                             if_else(age < 13,
+                                                     179.76,
+                                                     if_else(age <= 15,
                                                              233.94,
-                                                             0)))]
-  data[ ,ftbA_base_rate_March_2016 := if_else(ftb_eligible,
+                                                             if_else(age <= 19 & in_secondary_school,
+                                                                     233.94,
+                                                                     0))))]
+  data[ ,ftbA_base_rate_March_2016 := if_else(!other_allowance_benefit_or_pension & (age <= 15 | (age <= 19 & in_secondary_school)),
                                               57.68,
                                               0)]
   
-  data[ ,ftbA_supplement_March_2016 := if_else(ftb_eligible,
+  data[ ,ftbA_supplement_March_2016 := if_else(!other_allowance_benefit_or_pension & (age <= 15 | (age <= 19 & in_secondary_school)),
                                                726.35,
                                                0)]
-            #note 1: conditional on meeting requirements e.g. immunisations, tax returns
+            #note 1: supplement conditional on meeting requirements e.g. immunisations, tax returns
             #note 2: can only be paid annually
   
   
@@ -46,17 +47,22 @@ family_tax_benefit <- function(data,
                                                                               sort(income, decreasing = TRUE)[2]),
                                                         youngest_age = min(age),
                                                         youngest_in_secondary = in_secondary_school[age==min(age)],
+                                                        youngest_allowance_benefit_or_pension = other_allowance_benefit_or_pension[age==min(age)],
                                                         single_parent = any(single_parent)) %>% data.table()
   
-  #ftbB - payed based on youngest child
-  #cannot be paid during Paid Parental Leave period
-  ftbB_rate_March_2016 <- family_data[ ,if_else(youngest_age < 5,
-                                                 152.88,
-                                                 if_else(youngest_age <= 15 | (youngest_age <= 19 & youngest_in_secondary),
-                                                                 106.82,
-                                                                 0))]
+  #ftbB: payed based on youngest child
+      #cannot be paid during Paid Parental Leave period
+      #note: eligibility changed for fy 2016-17: https://www.humanservices.gov.au/sites/default/files/co029-1607en.pdf
+  ftbB_rate_March_2016 <- family_data[ ,if_else(youngest_allowance_benefit_or_pension,
+                                                0,
+                                                if_else(youngest_age < 5,
+                                                       152.88,
+                                                       if_else(youngest_age <= 15 | (youngest_age <= 19 & youngest_in_secondary),
+                                                                       106.82,
+                                                                       0)))]
   
-  ftbB_supplement_March_2016 <- family_data[ ,if_else((youngest_age <= 15) | ((16 <= youngest_age) & (youngest_age <= 19) & youngest_in_secondary),
+  ftbB_supplement_March_2016 <- family_data[ ,if_else(!youngest_allowance_benefit_or_pension & 
+                                                      (youngest_age <= 15 | (youngest_age <= 19 & youngest_in_secondary)),
                                                       354.05,
                                                       0)]
 
