@@ -41,24 +41,22 @@ family_tax_benefit <- function(data,
                                                         ftbA_base_family_rate = sum(ftbA_base_rate_March_2016),
                                                         ftbA_supplement_family_rate = sum(ftbA_supplement_March_2016),
                                                         primary_income = max(income), 
-                                                        secondary_income = sort(income, decreasing = TRUE)[2],
+                                                        secondary_income = if_else(any(single_parent), 
+                                                                              0, 
+                                                                              sort(income, decreasing = TRUE)[2]),
                                                         youngest_age = min(age),
                                                         youngest_in_secondary = in_secondary_school[age==min(age)],
                                                         single_parent = any(single_parent)) %>% data.table()
   
-  #ftbB
+  #ftbB - payed based on youngest child
   #cannot be paid during Paid Parental Leave period
   ftbB_rate_March_2016 <- family_data[ ,if_else(youngest_age < 5,
                                                  152.88,
-                                                 if_else(youngest_age <= 13,
-                                                         106.82,
-                                                         if_else(youngest_age <= 15,
+                                                 if_else(youngest_age <= 15 | (youngest_age <= 19 & youngest_in_secondary),
                                                                  106.82,
-                                                                 if_else(youngest_age <= 19 & youngest_in_secondary & single_parent,
-                                                                         106.82,
-                                                                         0))))]
-  ###need to change to assign to child, not 
-  ftbB_supplement_March_2016 <- family_data[ ,if_else(youngest_age <= 19 & youngest_in_secondary,
+                                                                 0))]
+  
+  ftbB_supplement_March_2016 <- family_data[ ,if_else((youngest_age <= 15) | ((16 <= youngest_age) & (youngest_age <= 19) & youngest_in_secondary),
                                                       354.05,
                                                       0)]
 
