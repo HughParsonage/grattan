@@ -91,6 +91,9 @@ rent_assistance <- function(fortnightly_rent = Inf,
     }
     
     if (!is.integer(n_dependants)) {
+      if (is.factor(n_dependants)) {
+        stop("`n_dependants` was a factor. Change to be a pure integer.")
+      }
       if (!is.double(n_dependants)) {
         stop("`n_dependants` was type ", typeof(n_dependants), ". ",
              "Change `n_dependants` to be an integer vector.")

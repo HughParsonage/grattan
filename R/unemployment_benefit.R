@@ -25,18 +25,6 @@ unemployment_benefit <- function(income = 0,
                                  has_dependant = FALSE,
                                  is_home_owner = FALSE) {
   
-  # TODO: delete once the other branch MAXLENGTH
-  prohibit_vector_recycling.MAXLENGTH <- function(...) {
-    # http://stackoverflow.com/a/9335687/1664978
-    lengths <- vapply(list(...), FUN = length, FUN.VALUE = 0L)
-    max.length <- max(lengths)
-    if (any(lengths != 1L & lengths != max.length)){
-      stop("Only permissible vector lengths are 1 or the maximum (nrow) of the inputs.")
-    } else {
-      invisible(max.length)
-    }
-  }
-  
   max.length <- 
     prohibit_vector_recycling.MAXLENGTH(income,
                                         assets,

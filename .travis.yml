@@ -16,7 +16,7 @@ r_github_packages:
 
 after_success:
   - Rscript -e 'Sys.time()'
-  - if [ $TRAVIS_R_VERSION_STRING == "release" ]; then Rscript -e 'covr::codecov(line_exclusions = c("R/zzz.R", "R/install_taxstats.R"))'; fi
+  - if [ $TRAVIS_R_VERSION_STRING == "release" ]; then Rscript -e 'covr::codecov(line_exclusions = c("R/zzz.R", "R/install_taxstats.R", "R/youth_allowance.R", "R/youth_unemployment.R"))'; fi
 
 after_failure:
   - Rscript -e 'hutils::RQ("devtools", install.packages(c("devtools", "roxygen2")))'

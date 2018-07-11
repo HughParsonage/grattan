@@ -33,9 +33,19 @@ test_that("Error handling", {
                regexp = "fy.year.*which is not a valid.*between")
   
   expect_error(unemployment_benefit(income = 300, fy.year = c("1995-96", "2015-16")),
-               regexp = "fy.year.*were not within the allowed range")
+               regexp = "`fy.year = 1995-96` was not within the allowed range:")
+  
+  expect_error(unemployment_benefit(income = 0, Date = "22"), 
+               regexp = "neither a Date object nor safely coercible as such")
+  expect_error(unemployment_benefit(income = 0, Date = c("1999-12-31")),
+               regexp = "Ensure `Date` only includes dates between 2000 and 2020.",
+               fixed = TRUE)
   
   
-  expect_warning(rent_assistance(Date = "2017-09-20", fy.year = "2017-18"),
-                 regexp = "Both `Date` and `fy.year` were set. `fy.year` will be ignored.")
+  expect_message(unemployment_benefit(), 
+                 regexp = "`fy.year` not set")
+  expect_error(unemployment_benefit(income = c(200, 300, 400), fy.year = c("2015-16", "2016-17")),
+               regexp = "`fy.year` had length 2.")
+  expect_error(unemployment_benefit(income = c(200, 300, 400), Date = fy2date(c("2015-16", "2016-17"))),
+               regexp = "`Date` had length 2.")
 })

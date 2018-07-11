@@ -46,6 +46,8 @@ test_that("prohibit_vector_recyling", {
   expect_error(prohibit_vector_recycling(c(2, 2), 1, c(3, 3, 3)))
   expect_error(prohibit_vector_recycling.MAXLENGTH(c(2, 2), 1, c(3, 3, 3)))
   expect_equal(prohibit_vector_recycling.MAXLENGTH(c(2, 2), 1:2, 1), 2L)
+  expect_equal(prohibit_arg_recycling.MAXLENGTH(list(c(2, 2), 1:2, 1)), 2L)
+  expect_error(prohibit_arg_recycling.MAXLENGTH(list(a = 1:3, b = 1:2, d = 1)))
 })
 
 test_that("qtrs_ahead", {
