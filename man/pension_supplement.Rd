@@ -4,14 +4,14 @@
 \alias{pension_supplement}
 \title{Pension Supplement}
 \usage{
-pension_supplement(has_partner = FALSE, age = 70,
+pension_supplement(has_partner = FALSE, age = 70, n_dependents = 0,
   parenting_payment = FALSE, Date = NULL, fy.year = NULL,
-  age_pension_age_requirement = FALSE, per = "fortnight",
-  overseas_absence = FALSE)
+  age_pension_age_requirement = FALSE, disability_support_pension = FALSE,
+  per = "fortnight", overseas_absence = FALSE)
 }
 \description{
-Gets added to max rate of payment before income reduction tests are applied
-Supplementary payment for those receiving Age Pension, Carer Payment, Wife Pension, Widow B Pension, Bereavement Allowance, Disability Support Pension (except if under 21 and no kids)
+The Pension Supplement gets added to the max rate of payment before income reduction tests are applied.
+Can be claimed by those receiving Age Pension, Carer Payment, Wife Pension, Widow B Pension, Bereavement Allowance, Disability Support Pension (except if under 21 and have no children).
 Can also receive if over age pension age and  receiving ABSTUDY, Austudy, Parenting Payment, Partner Allowance, Special Benefit, or, Widow Allowance
 Can still receive the basic amount if single, under age pension age, and receive the Parenting Payment
 }
