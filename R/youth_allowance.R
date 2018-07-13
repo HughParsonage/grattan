@@ -117,10 +117,6 @@ youth_allowance <- function(ordinary_income = 0,
   # http://guides.dss.gov.au/guide-social-security-law/4/2/2
   # https://www.humanservices.gov.au/individuals/enablers/personal-income-test-austudy-and-youth-allowance/30411
   
-  
-  # ordinary_income_free_area <- 
-  #  cpi_inflator(100, from_fy = "2014-15", to_fy = fy.year)
-  
   # ordinary_income_excess <- pmaxC(ordinary_income - ordinary_income_free_area)
   
   ### TESTS needed: https://www.humanservices.gov.au/individuals/services/centrelink/youth-allowance-students-and-australian-apprentices/how-much-you-can-get/income-and-assets-test# personalassets
@@ -186,12 +182,12 @@ youth_allowance <- function(ordinary_income = 0,
     # http://guides.dss.gov.au/guide-social-security-law/4/2/8/05                          
     
   MITRA <-
-      233.94 - 57.68
+      233.94 - 57.68 #ftba max rate - basic rate
     
   PITR <- # http://guides.dss.gov.au/guide-social-security-law/4/2/8/10
       input[, if_else(parents_income > 51027,
-                    (parents_income / 130),
-                    0)]# NOTE: steps 6-10 not applied
+                    (parents_income - 51027) / 130,
+                    0)]# NOTE: steps 6-10 not applied as require info on other children who receive payments
   
   MITR <-  
     # MIFA historical rates: http://guides.dss.gov.au/family-assistance-guide/3/6/1# table7
