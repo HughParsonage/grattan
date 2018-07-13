@@ -2,8 +2,8 @@
 #' 
 #' The Pension Supplement gets added to the max rate of payment before income reduction tests are applied.
 #' Can be claimed by those receiving Age Pension, Carer Payment, Wife Pension, Widow B Pension, Bereavement Allowance, or Disability Support Pension (except if under 21 and have no children).
-#' Can also receive if over age pension age and are receiving ABSTUDY, Austudy, Parenting Payment, Partner Allowance, Special Benefit, or Widow Allowance.
-#' Can still receive the basic amount if single, under age pension age, and receive the Parenting Payment.
+#' Can also be claimed if over age pension age and are receiving ABSTUDY, Austudy, Parenting Payment, Partner Allowance, Special Benefit, or Widow Allowance.
+#' Can still claim the basic amount if single, under age pension age, and receive the Parenting Payment.
 #'
 #' @param has_partner Does the individual have a partner?
 #' @param age The individual's age. Default is 18 years.
@@ -15,9 +15,10 @@
 #' @param disability_support_pension Is the individual receiving the disability support pension?
 #' @param per How often the payment will be made. Default is fortnightly. 
 #' @param overseas_absence Will the individual be living outside of Australia for more than 6 weeks of the year?
+#' @author Matthew Katzen
 #' @export
 
-#note: adjusted using 364/14 = 26
+#note: annual is multiplied by 364/14 = 26
 
 pension_supplement <- function(has_partner = FALSE,
                                age = 70,
