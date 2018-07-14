@@ -1,0 +1,906 @@
+raw_name	R6	R5	R4	R3	R2	R1	col	sheet_name	k
+Date	Outyears growth	Index	CPI Release				1	CPI	2
+peCpi	Outyears growth	Index	"CPI, Australia
+Published series"				2	CPI	2
+peCpiG	Outyears growth	Quarterly growth	"CPI, Australia
+Published series"				3	CPI	2
+LagCpi	Outyears growth	Index	"CPI, Australia (First published)
+"				4	CPI	2
+peCpiFpG	Outyears growth	Quarterly growth	"CPI, Australia (First published)
+"				5	CPI	2
+peCpiFpSs	Outyears growth	Index	"CPI, Australia (First published)
+Superseded September 2012"				6	CPI	2
+peCpiFpSsG	Outyears growth	Quarterly Growth	"CPI, Australia (First published)
+Superseded September 2012"				7	CPI	2
+peCpiFpSsG		Quarterly Growth	"CPI, Australia (First published)
+Superseded September 2012"				16	CPI	2
+Date	Index	CPI Release					1	CPI_A	3
+peCpi	Index	"CPI, Australia
+Published series"					2	CPI_A	3
+peCpiG	Quarterly growth	"CPI, Australia
+Published series"					3	CPI_A	3
+LagCpi	Index	"CPI, Australia (First published)
+"					4	CPI_A	3
+peCpiFpG	Quarterly growth	"CPI, Australia (First published)
+"					5	CPI_A	3
+peCpiFpSs	Index	"CPI, Australia (First published)
+Superseded September 2012"					6	CPI_A	3
+peCpiFpSsG	Annual Growth	"CPI, Australia (First published)
+Superseded September 2012"					7	CPI_A	3
+Date	Outyears growth	Index	Males Total Average Weekly Earnings	AWE Release			1	AWE	4
+peMtaWe	Outyears growth	Index	Males Total Average Weekly Earnings	Original Survey Basis			2	AWE	4
+peMtaWeG	Outyears growth	Quarterly Growth	Males Total Average Weekly Earnings	Original Survey Basis			3	AWE	4
+peFtaWe	Outyears growth	Index	Females Total Average Weekly Earnings	Original Survey Basis			4	AWE	4
+peFtaWeG	Outyears growth	Quarterly Growth	Females Total Average Weekly Earnings	Original Survey Basis			5	AWE	4
+pePtaWe	Outyears growth	Index	All Persons Total Average Weekly Earnings	Original Survey Basis			6	AWE	4
+pePtaWeG	Outyears growth	Quarterly Growth	All Persons Total Average Weekly Earnings	Original Survey Basis			7	AWE	4
+peAwote	Outyears growth	Index	Full Time Adults Average Weekly Ordinary Time Earnings	Original Survey Basis			8	AWE	4
+peAwoteG	Outyears growth	Quarterly Growth	Full Time Adults Average Weekly Ordinary Time Earnings	Original Survey Basis			9	AWE	4
+pePtaWeSa	Outyears growth	Index	All Persons Total Average Weekly Earnings	Seasonally Adjusted			10	AWE	4
+pePtaWeSaG	Outyears growth	Quarterly Growth	All Persons Total Average Weekly Earnings	Seasonally Adjusted			11	AWE	4
+peAwoteSa	Outyears growth	Index	Full Time Adults Average Weekly Ordinary Time Earnings	Seasonally Adjusted			12	AWE	4
+peAwoteSaG	Outyears growth	Quarterly Growth	Full Time Adults Average Weekly Ordinary Time Earnings	Seasonally Adjusted			13	AWE	4
+peAwoteSaG		Quarterly Growth	Full Time Adults Average Weekly Ordinary Time Earnings	Seasonally Adjusted			14	AWE	4
+Date	Index	Males Total Average Weekly Earnings	AWE Release				1	AWE_A	5
+peMtaWe	Index	Males Total Average Weekly Earnings	Original Survey Basis				2	AWE_A	5
+peMtaWeG	Annual Growth	Males Total Average Weekly Earnings	Original Survey Basis				3	AWE_A	5
+peFtaWe	Index	Females Total Average Weekly Earnings	Original Survey Basis				4	AWE_A	5
+peFtaWeG	Annual Growth	Females Total Average Weekly Earnings	Original Survey Basis				5	AWE_A	5
+pePtaWe	Index	All Persons Total Average Weekly Earnings	Original Survey Basis				6	AWE_A	5
+pePtaWeG	Annual Growth	All Persons Total Average Weekly Earnings	Original Survey Basis				7	AWE_A	5
+peAwote	Annual Growth	Full Time Adults Average Weekly Ordinary Time Earnings	Original Survey Basis				8	AWE_A	5
+peAwoteG	Annual Growth	Full Time Adults Average Weekly Ordinary Time Earnings	Original Survey Basis				9	AWE_A	5
+pePtaWeSa	Index	All Persons Total Average Weekly Earnings	Seasonaly Adjusted				10	AWE_A	5
+pePtaWeSaG	Annual Growth	All Persons Total Average Weekly Earnings	Seasonaly Adjusted				11	AWE_A	5
+peAwoteSa	Index	Full Time Adults Average Weekly Ordinary Time Earnings	Seasonaly Adjusted				12	AWE_A	5
+peAwoteSaG	Annual Growth	Full Time Adults Average Weekly Ordinary Time Earnings	Seasonaly Adjusted				13	AWE_A	5
+peAwoteSaG	Annual Growth	Full Time Adults Average Weekly Ordinary Time Earnings	Seasonaly Adjusted				14	AWE_A	5
+Date	Outyears growth	Index	PBLCI Release				1	PBLCI	6
+pePblci	Outyears growth	Index	PBLCI, Australia (First published)				2	PBLCI	6
+pePblciG	Indexed to CPI outyears growth	Quarterly Growth	PBLCI, Australia (First published)				3	PBLCI	6
+pePblciG		Quarterly Growth	PBLCI, Australia (First published)				12	PBLCI	6
+Date	Index	PBLCI Release					1	PBLCI_A	7
+pePblci	Index	PBLCI, Australia (First published)					2	PBLCI_A	7
+pePblciG	Annual Growth	PBLCI, Australia (First published)					3	PBLCI_A	7
+pePblciG	Annual Growth	PBLCI, Australia (First published)					12	PBLCI_A	7
+Date		Base Rate	From		Period	Disability and Dependent Pension Rates	1	DVA	8
+Enddate		Base Rate	To		Period	Disability and Dependent Pension Rates	2	DVA	8
+not_used25		Base Rate	Special		Disability rate	Disability and Dependent Pension Rates	3	DVA	8
+not_used26		Energy Supplement	Special		Disability rate	Disability and Dependent Pension Rates	4	DVA	8
+not_used27		Base Rate	Intermediate		Disability rate	Disability and Dependent Pension Rates	5	DVA	8
+not_used28		Energy Supplement	Intermediate		Disability rate	Disability and Dependent Pension Rates	6	DVA	8
+not_used29		Base Rate	Extreme		Disability rate	Disability and Dependent Pension Rates	7	DVA	8
+not_used30		Energy Supplement	Extreme		Disability rate	Disability and Dependent Pension Rates	8	DVA	8
+not_used31		Base Rate	Extreme		Disability rate	Disability and Dependent Pension Rates	9	DVA	8
+DvaDisBaseEsF		Energy Supplement	Extreme		Disability rate	Disability and Dependent Pension Rates	10	DVA	8
+not_used33		Maximum Basic Rate	Components		War Widows' Pension	Disability and Dependent Pension Rates	11	DVA	8
+not_used34		Supplementary Amount	Components		War Widows' Pension	Disability and Dependent Pension Rates	12	DVA	8
+not_used35		Add on	Components		War Widows' Pension	Disability and Dependent Pension Rates	13	DVA	8
+DvaWarWidEsF		Energy Supplement	Components		War Widows' Pension	Disability and Dependent Pension Rates	14	DVA	8
+not_used37		Energy Supplement	Maximum fortnightly WW pension		War Widows' Pension	Disability and Dependent Pension Rates	15	DVA	8
+not_used38		Energy Supplement	Maximum fortnightly WW pension		War Widows' Pension	Income Support Supplement Ceiling Rate	16	DVA	8
+not_used39		Energy Supplement	Single		Rent assistance income free area	Rent Assistance for Disability Pensioners	17	DVA	8
+not_used40		Energy Supplement	Married		Rent assistance income free area	Rent Assistance for Disability Pensioners	18	DVA	8
+not_used41		Energy Supplement	Married		Withdrawal rate for rent assistance	Rent Assistance for Disability Pensioners	19	DVA	8
+DvaPenAge		Energy Supplement	Married		Withdrawal rate for rent assistance	DVA Pension Age	20	DVA	8
+Date		Base Rate	From		Period	Disability and Dependent Pension Rates	1	DVA_A	9
+Enddate		Base Rate	To		Period	Disability and Dependent Pension Rates	2	DVA_A	9
+not_used25		Base Rate	Special		Disability rate	Disability and Dependent Pension Rates	3	DVA_A	9
+not_used26		Energy Supplement	Special		Disability rate	Disability and Dependent Pension Rates	4	DVA_A	9
+not_used27		Base Rate	Intermediate		Disability rate	Disability and Dependent Pension Rates	5	DVA_A	9
+not_used28		Energy Supplement	Intermediate		Disability rate	Disability and Dependent Pension Rates	6	DVA_A	9
+not_used29		Base Rate	Extreme		Disability rate	Disability and Dependent Pension Rates	7	DVA_A	9
+not_used30		Energy Supplement	Extreme		Disability rate	Disability and Dependent Pension Rates	8	DVA_A	9
+not_used31		Base Rate	Extreme		Disability rate	Disability and Dependent Pension Rates	9	DVA_A	9
+DvaDisBaseEsF		Energy Supplement	Extreme		Disability rate	Disability and Dependent Pension Rates	10	DVA_A	9
+not_used33		Maximum Basic Rate	Components		War Widows' Pension	Disability and Dependent Pension Rates	11	DVA_A	9
+not_used34		Supplementary Amount	Components		War Widows' Pension	Disability and Dependent Pension Rates	12	DVA_A	9
+not_used35		Add on	Components		War Widows' Pension	Disability and Dependent Pension Rates	13	DVA_A	9
+DvaWarWidEsF		Energy Supplement	Components		War Widows' Pension	Disability and Dependent Pension Rates	14	DVA_A	9
+not_used37		Energy Supplement	Maximum fortnightly WW pension		War Widows' Pension	Disability and Dependent Pension Rates	15	DVA_A	9
+not_used38		Energy Supplement	Maximum fortnightly WW pension		War Widows' Pension	Income Support Supplement Ceiling Rate	16	DVA_A	9
+not_used39		Energy Supplement	Single		Rent assistance free area	Rent Assistance for Disability Pensioners	17	DVA_A	9
+not_used40		Energy Supplement	Married		Rent assistance free area	Rent Assistance for Disability Pensioners	18	DVA_A	9
+not_used41		Energy Supplement	Married		Withdrawal rate for rent assistance	Rent Assistance for Disability Pensioners	19	DVA_A	9
+DvaPenAge		Energy Supplement	Married		Withdrawal rate for rent assistance	DVA Pension Age	20	DVA_A	9
+Date	Lower	Rate	From	Maximum Basic Rate	Period	Rates	1	Pensions	10
+Enddate	Lower	Rate	To	Maximum Basic Rate	Period	Rates	2	Pensions	10
+PenBasicMaxSF	Lower	Rate	To	Maximum Basic Rate	Single	Rates	3	Pensions	10
+PenSupBasicMaxSF	Lower	Rate	Basic amount	Pension Supplement	Single	Rates	4	Pensions	10
+PenSupRemMaxSF	Lower	Rate	Remaining amount	Pension Supplement	Single	Rates	5	Pensions	10
+PenSupMinMaxSF	Lower	Rate	Minimum amount	Pension Supplement	Single	Rates	6	Pensions	10
+PenSupTotSF	Lower	Rate	Total	Pension Supplement	Single	Rates	7	Pensions	10
+PenEsMaxSF	Lower	Rate	Total	Energy Supplement	Single	Rates	8	Pensions	10
+PenTotSF	Lower	Rate	Total	Total fortnightly maximum single pension rate	Single	Rates	9	Pensions	10
+PenBasicMaxCF	Lower	Rate	Total	Maximum Basic Rate	Coupled	Rates	10	Pensions	10
+PenSupBasicMaxCF	Lower	Rate	Basic amount	Pension Supplement	Coupled	Rates	11	Pensions	10
+PenSupRemMaxCF	Lower	Rate	Remaining amount	Pension Supplement	Coupled	Rates	12	Pensions	10
+PenSupMinMaxCF	Lower	Rate	Minimum amount	Pension Supplement	Coupled	Rates	13	Pensions	10
+PenSupTotCF	Lower	Rate	Total	Pension Supplement	Coupled	Rates	14	Pensions	10
+PenEsMaxCF	Lower	Rate	Total	Energy Supplement	Coupled	Rates	15	Pensions	10
+PenTotCF	Lower	Rate	Total	Total fortnightly maximum coupled pension rate	Coupled	Rates	16	Pensions	10
+PenThrSF	Lower	Rate	Income test free area	Single Threshold	Income test	Means Tests	17	Pensions	10
+PenThrAddonSF	Lower	Rate	Extra per dependent child	Single Threshold	Income test	Means Tests	18	Pensions	10
+PenThrCF	Lower	Rate	Income test free area	Married Threshold	Income test	Means Tests	19	Pensions	10
+PenThrAddonCF	Lower	Rate	Extra per dependent child	Married Threshold	Income test	Means Tests	20	Pensions	10
+HarmerPenTpr	Lower	Rate	Extra per dependent child	Taper Rate on Income Excess	Income test	Means Tests	21	Pensions	10
+PenDeemRateLwr	Lower	Rate	Extra per dependent child	Assets Deeming	Income test	Means Tests	22	Pensions	10
+PenDeemRateUpr	Upper	Rate	Extra per dependent child	Assets Deeming	Income test	Means Tests	23	Pensions	10
+PenDeemThrS	Single	Thresholds	Extra per dependent child	Assets Deeming	Income test	Means Tests	24	Pensions	10
+PenDeemThrPenC	Pensioner Couple	Thresholds	Extra per dependent child	Assets Deeming	Income test	Means Tests	25	Pensions	10
+PenDeemThrOthC	Other Couple	Thresholds	Extra per dependent child	Assets Deeming	Income test	Means Tests	26	Pensions	10
+PenAssThrHoS	Other Couple	Home owner	Single	Thresholds	Assets testing	Means Tests	27	Pensions	10
+PenAssThrNhoS	Other Couple	Non home owner	Single	Thresholds	Assets testing	Means Tests	28	Pensions	10
+PenAssThrHoC	Other Couple	Home owner	Married	Thresholds	Assets testing	Means Tests	29	Pensions	10
+PenAssThrNhoC	Other Couple	Non home owner	Married	Thresholds	Assets testing	Means Tests	30	Pensions	10
+PenAssTpr	Other Couple	Non home owner	Married	Reduction rate	Assets testing	Means Tests	31	Pensions	10
+PenAssRnding	Other Couple	Non home owner	Married	Rounding Factor for Assets Tetsing	Assets testing	Means Tests	32	Pensions	10
+WorkBonF	Other Couple	Non home owner	Threshold	Rounding Factor for Assets Tetsing	Assets testing	Age Pension Work Bonus	33	Pensions	10
+not_used66	Other Couple	Non home owner	Income reduction factor for earned income below the threshold	Rounding Factor for Assets Tetsing	Assets testing	Age Pension Work Bonus	34	Pensions	10
+MaleAgePenAge	Male	Non home owner	Income reduction factor for earned income below the threshold	Rounding Factor for Assets Tetsing	Assets testing	Age pension age	35	Pensions	10
+FemaleAgePenAge	Female	Non home owner	Income reduction factor for earned income below the threshold	Rounding Factor for Assets Tetsing	Assets testing	Age pension age	36	Pensions	10
+Date	Lower	Rate	From	Maximum Basic Rate	Period	Rates	1	Pensions_A	11
+Enddate	Lower	Rate	To	Maximum Basic Rate	Period	Rates	2	Pensions_A	11
+PenBasicMaxSF	Lower	Rate	To	Maximum Basic Rate	Single	Rates	3	Pensions_A	11
+PenSupBasicMaxSF	Lower	Rate	Basic amount	Pension Supplement	Single	Rates	4	Pensions_A	11
+PenSupRemMaxSF	Lower	Rate	Remaining amount	Pension Supplement	Single	Rates	5	Pensions_A	11
+PenSupMinMaxSF	Lower	Rate	Minimum amount	Pension Supplement	Single	Rates	6	Pensions_A	11
+PenSupTotSF	Lower	Rate	Total	Pension Supplement	Single	Rates	7	Pensions_A	11
+PenEsMaxSF	Lower	Rate	Total	Energy Supplement	Single	Rates	8	Pensions_A	11
+PenTotSF	Lower	Rate	Total	Total fortnightly maximum single pension rate	Single	Rates	9	Pensions_A	11
+PenBasicMaxCF	Lower	Rate	Total	Maximum Basic Rate	Coupled	Rates	10	Pensions_A	11
+PenSupBasicMaxCF	Lower	Rate	Basic amount	Pension Supplement	Coupled	Rates	11	Pensions_A	11
+PenSupRemMaxCF	Lower	Rate	Remaining amount	Pension Supplement	Coupled	Rates	12	Pensions_A	11
+PenSupMinMaxCF	Lower	Rate	Minimum amount	Pension Supplement	Coupled	Rates	13	Pensions_A	11
+PenSupTotCF	Lower	Rate	Total	Pension Supplement	Coupled	Rates	14	Pensions_A	11
+PenEsMaxCF	Lower	Rate	Total	Energy Supplement	Coupled	Rates	15	Pensions_A	11
+PenTotCF	Lower	Rate	Total	Total fortnightly maximum coupled pension rate	Coupled	Rates	16	Pensions_A	11
+PenThrSF	Lower	Rate	Income test free area	Single Threshold	Income test	Means Tests	17	Pensions_A	11
+PenThrAddonSF	Lower	Rate	Extra per dependent child	Single Threshold	Income test	Means Tests	18	Pensions_A	11
+PenThrCF	Lower	Rate	Income test free area	Married Threshold	Income test	Means Tests	19	Pensions_A	11
+PenThrAddonCF	Lower	Rate	Extra per dependent child	Married Threshold	Income test	Means Tests	20	Pensions_A	11
+HarmerPenTpr	Lower	Rate	Extra per dependent child	Taper Rate on Income Excess	Income test	Means Tests	21	Pensions_A	11
+PenDeemRateLwr	Lower	Rate	Extra per dependent child	Assets Deeming	Income test	Means Tests	22	Pensions_A	11
+PenDeemRateUpr	Upper	Rate	Extra per dependent child	Assets Deeming	Income test	Means Tests	23	Pensions_A	11
+PenDeemThrS	Single	Thresholds	Extra per dependent child	Assets Deeming	Income test	Means Tests	24	Pensions_A	11
+PenDeemThrPenC	Pensioner Couple	Thresholds	Extra per dependent child	Assets Deeming	Income test	Means Tests	25	Pensions_A	11
+PenDeemThrOthC	Other Couple	Thresholds	Extra per dependent child	Assets Deeming	Income test	Means Tests	26	Pensions_A	11
+PenAssThrHoS	Other Couple	Home owner	Single	Thresholds	Assets testing	Means Tests	27	Pensions_A	11
+PenAssThrNhoS	Other Couple	Non home owner	Single	Thresholds	Assets testing	Means Tests	28	Pensions_A	11
+PenAssThrHoC	Other Couple	Home owner	Married	Thresholds	Assets testing	Means Tests	29	Pensions_A	11
+PenAssThrNhoC	Other Couple	Non home owner	Married	Thresholds	Assets testing	Means Tests	30	Pensions_A	11
+PenAssTpr	Other Couple	Non home owner	Married	Reduction rate	Assets testing	Means Tests	31	Pensions_A	11
+PenAssRnding	Other Couple	Non home owner	Married	Rounding Factor for Assets Tetsing	Assets testing	Means Tests	32	Pensions_A	11
+WorkBonF	Other Couple	Non home owner	Threshold	Rounding Factor for Assets Tetsing	Assets testing	Age Pension Work Bonus	33	Pensions_A	11
+not_used66	Other Couple	Non home owner	Income reduction factor for earned income below the threshold	Rounding Factor for Assets Tetsing	Assets testing	Age Pension Work Bonus	34	Pensions_A	11
+MaleAgePenAge	Male	Non home owner	Income reduction factor for earned income below the threshold	Rounding Factor for Assets Tetsing	Assets testing	Age pension age	35	Pensions_A	11
+FemaleAgePenAge	Female	Non home owner	Income reduction factor for earned income below the threshold	Rounding Factor for Assets Tetsing	Assets testing	Age pension age	36	Pensions_A	11
+Date			From		Carer Allowance (per fortnight)	Period	1	Carers	12
+Enddate			To		Carer Allowance (per fortnight)	Period	2	Carers	12
+CareAllMaxF			To		Carer Allowance (per fortnight)	Rates	3	Carers	12
+CareSupMaxA			To		Carer Supplement (annual)	Rates	4	Carers	12
+Date			From		Period	Rates	1	Carers_A	13
+Enddate			To		Period	Rates	2	Carers_A	13
+CareAllMaxF			To		Carer Allowance (per fortnight)	Rates	3	Carers_A	13
+CareSupMaxA			To		Carer Supplement (annual)	Rates	4	Carers_A	13
+Date			From	Maximum Basic Rate	Period	Rates	1	PPS	14
+Enddate			To	Maximum Basic Rate	Period	Rates	2	PPS	14
+PPSPenBasicMaxF			To	Maximum Basic Rate	Components	Rates	3	PPS	14
+PPSSupBasicMaxF			To	Pension supplement	Components	Rates	4	PPS	14
+PPSPenEsMaxF			To	Energy Supplement	Components	Rates	5	PPS	14
+not_used82			To	Energy Supplement	Maximum Fortnightly Rate (before rent assistance and pharmA)	Rates	6	PPS	14
+PPSPenThrF			To	Income test free area	Income test	Means Test	7	PPS	14
+PPSThrChild			To	Extra per dept child	Income test	Means Test	8	PPS	14
+PPSPenTpr			To	Income test taper rate	Income test	Means Test	9	PPS	14
+not_used86			Home Owner	Income test taper rate	Assets Cut Outs	Means Test	10	PPS	14
+not_used87			Non-Home Owner	Income test taper rate	Assets Cut Outs	Means Test	11	PPS	14
+PPSDepAge			Non-Home Owner	Income test taper rate	Assets Cut Outs	Child age limit	12	PPS	14
+Date			From	Maximum Basic Rate	Period	Rates	1	PPS_A	15
+Enddate			To	Maximum Basic Rate	Period	Rates	2	PPS_A	15
+PPSPenBasicMaxF			To	Maximum Basic Rate	Components	Rates	3	PPS_A	15
+PPSSupBasicMaxF			To	Pension supplement	Components	Rates	4	PPS_A	15
+PPSPenEsMaxF			To	Energy Supplement	Components	Rates	5	PPS_A	15
+not_used82			To	Energy Supplement	Maximum Fortnightly Rate (before rent assistance and pharmA)	Rates	6	PPS_A	15
+PPSPenThrF			To	Income test free area	Income test	Means Test	7	PPS_A	15
+PPSThrChild			To	Extra per dept child	Income test	Means Test	8	PPS_A	15
+PPSPenTpr			To	Income test taper rate	Income test	Means Test	9	PPS_A	15
+not_used86			Home Owner	Income test taper rate	Assets Cut Outs	Means Test	10	PPS_A	15
+not_used87			Non-Home Owner	Income test taper rate	Assets Cut Outs	Means Test	11	PPS_A	15
+PPSDepAge			Non-Home Owner	Income test taper rate	Assets Cut Outs	Child age limit	12	PPS_A	15
+Date	Single	Energy Supplement	From	At Home	Period	Payment Rates	1	YouthDSP	16
+Enddate	Single	Energy Supplement	To	At Home	Period	Payment Rates	2	YouthDSP	16
+not_used89	Single	Energy Supplement	To	At Home	Youth disability supplement	Payment Rates	3	YouthDSP	16
+DSPU21YngAHPenEsMaxSF	Single	Energy Supplement	Aged Under 18	At Home	Single	Payment Rates	4	YouthDSP	16
+DSPU21YngAHPenBasicMaxSF	Single	Total Payment (before PhA and RA)	Aged Under 18	At Home	Single	Payment Rates	5	YouthDSP	16
+DSPU21OldAHPenEsMaxSF	Single	Energy Supplement	Aged 18 to 20	At Home	Single	Payment Rates	6	YouthDSP	16
+DSPU21OldAHPenBasicMaxSF	Single	Total Payment (before PhA and RA)	Aged 18 to 20	At Home	Single	Payment Rates	7	YouthDSP	16
+DSPU21PenEsMaxSF	Single	Energy Supplement	Aged 18 to 20	Away from Home	Single	Payment Rates	8	YouthDSP	16
+DSPU21PenBasicMaxSF	Single	Total Payment (Not including CES and before PhA and RA)	Aged 18 to 20	Away from Home	Single	Payment Rates	9	YouthDSP	16
+not_used96	Single	Total Payment (before PhA and RA)	Aged 18 to 20	Away from Home	Single	Payment Rates	10	YouthDSP	16
+DSPU21PenEsMaxCF	Single	Energy Supplement	Aged 18 to 20	Aged Under 21	Partnered	Payment Rates	11	YouthDSP	16
+DSPU21PenBasicMaxCF	Single	Total Payment (Not including CES and before PhA and RA)	Aged 18 to 20	Aged Under 21	Partnered	Payment Rates	12	YouthDSP	16
+not_used99	Single	Total Payment (before PhA and RA)	Aged 18 to 20	Aged Under 21	Partnered	Payment Rates	13	YouthDSP	16
+DSPU21PenThrSF	Single	Total Payment (before PhA and RA)	Income test free area	Aged Under 21	Income test	Means Tests	14	YouthDSP	16
+DSPU21PenThrCF	Coupled	Total Payment (before PhA and RA)	Income test free area	Aged Under 21	Income test	Means Tests	15	YouthDSP	16
+DSPU21PenTpr	Coupled	Total Payment (before PhA and RA)	Income test taper rate	Aged Under 21	Income test	Means Tests	16	YouthDSP	16
+Date	Single	Energy Supplement	From	At Home	Period	Payment Rates	1	YouthDSP_A	17
+Enddate	Single	Energy Supplement	To	At Home	Period	Payment Rates	2	YouthDSP_A	17
+not_used89	Single	Energy Supplement	To	At Home	Youth disability supplement	Payment Rates	3	YouthDSP_A	17
+DSPU21YngAHPenEsMaxSF	Single	Energy Supplement	Aged Under 18	At Home	Single	Payment Rates	4	YouthDSP_A	17
+DSPU21YngAHPenBasicMaxSF	Single	Total Payment (before PhA and RA)	Aged Under 18	At Home	Single	Payment Rates	5	YouthDSP_A	17
+DSPU21OldAHPenEsMaxSF	Single	Energy Supplement	Aged 18 to 20	At Home	Single	Payment Rates	6	YouthDSP_A	17
+DSPU21OldAHPenBasicMaxSF	Single	Total Payment (before PhA and RA)	Aged 18 to 20	At Home	Single	Payment Rates	7	YouthDSP_A	17
+DSPU21PenEsMaxSF	Single	Energy Supplement	Aged 18 to 20	Away from Home	Single	Payment Rates	8	YouthDSP_A	17
+DSPU21PenBasicMaxSF	Single	Total Payment (Not including CES and before PhA and RA)	Aged 18 to 20	Away from Home	Single	Payment Rates	9	YouthDSP_A	17
+not_used96	Single	Total Payment (before PhA and RA)	Aged 18 to 20	Away from Home	Single	Payment Rates	10	YouthDSP_A	17
+DSPU21PenEsMaxCF	Single	Energy Supplement	Aged 18 to 20	Aged Under 21	Partnered	Payment Rates	11	YouthDSP_A	17
+DSPU21PenBasicMaxCF	Single	Total Payment (Not including CES and before PhA and RA)	Aged 18 to 20	Aged Under 21	Partnered	Payment Rates	12	YouthDSP_A	17
+not_used99	Single	Total Payment (before PhA and RA)	Aged 18 to 20	Aged Under 21	Partnered	Payment Rates	13	YouthDSP_A	17
+DSPU21PenThrSF	Single	Total Payment (before PhA and RA)	Income test free area	Aged Under 21	Income test	Means Tests	14	YouthDSP_A	17
+DSPU21PenThrCF	Coupled	Total Payment (before PhA and RA)	Income test free area	Aged Under 21	Income test	Means Tests	15	YouthDSP_A	17
+DSPU21PenTpr	Coupled	Total Payment (before PhA and RA)	Income test taper rate	Aged Under 21	Income test	Means Tests	16	YouthDSP_A	17
+Date	MBR	Components	From	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	1	Unemployment	18
+Enddate	MBR	Components	To	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	2	Unemployment	18
+UnempSingNoDepsBasicMaxF	MBR	Components	No Dependents	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	3	Unemployment	18
+UnempSingNoDepsEsMaxF	ES	Components	No Dependents	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	4	Unemployment	18
+not_used105	ES	Total (before RA)	No Dependents	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	5	Unemployment	18
+UnempSingDepsBasicMaxF	MBR	Components	With Dependents	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	6	Unemployment	18
+UnempSingDepsEsMaxF	ES	Components	With Dependents	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	7	Unemployment	18
+not_used108	ES	Total (before RA and PhA)	With Dependents	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	8	Unemployment	18
+UnempOldLtrBasicMaxF	MBR	Components	60+ and long term recipient	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	9	Unemployment	18
+UnempOldLtrEsMaxF	ES	Components	60+ and long term recipient	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	10	Unemployment	18
+AlNsaTot60S	ES	Total (before RA and PhA)	60+ and long term recipient	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	11	Unemployment	18
+UnempCoupBasicMaxF	MBR	Components	60+ and long term recipient	Married	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	12	Unemployment	18
+UnempCoupEsMaxF	ES	Components	60+ and long term recipient	Married	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	13	Unemployment	18
+not_used114	ES	Total (before RA)	60+ and long term recipient	Married	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	14	Unemployment	18
+UnempAssHomeThrSA	ES	Total (before RA)	Home owner	Single	Asset Cutout	Means Tests	15	Unemployment	18
+UnempAssNoHomeThrSA	ES	Total (before RA)	Non-home owner	Single	Asset Cutout	Means Tests	16	Unemployment	18
+UnempAssHomeThrCA	ES	Total (before RA)	Home owner	Married	Asset Cutout	Means Tests	17	Unemployment	18
+UnempAssNoHomeThrCA	ES	Total (before RA)	Non-home owner	Married	Asset Cutout	Means Tests	18	Unemployment	18
+UnempThr1F	ES	Lower	Non-home owner	Income Thresholds	Income tests	Means Tests	19	Unemployment	18
+UnempThr2F	ES	Upper	Non-home owner	Income Thresholds	Income tests	Means Tests	20	Unemployment	18
+UnempTpr1	Lower	Couples and Singles Without Deps	Non-home owner	Taper Rates	Income tests	Means Tests	21	Unemployment	18
+UnempTpr2	Upper	Couples and Singles Without Deps	Non-home owner	Taper Rates	Income tests	Means Tests	22	Unemployment	18
+UnempSingDepsTpr1	Lower	Singles with Dependents	Non-home owner	Taper Rates	Income tests	Means Tests	23	Unemployment	18
+UnempSingDepsTpr2	Upper	Singles with Dependents	Non-home owner	Taper Rates	Income tests	Means Tests	24	Unemployment	18
+AllPartTpr	Upper	Singles with Dependents	Non-home owner	Taper Rates	Income tests	Allowance Partner Income Test Taper Rate	25	Unemployment	18
+MaaAge	Upper	Singles with Dependents	Non-home owner	Taper Rates	Income tests	Mature Age Allowance Age	26	Unemployment	18
+WidAllMinAge	Upper	Singles with Dependents	Non-home owner	Taper Rates	Income tests	Mininmum eligibility age for Widow Allowance	27	Unemployment	18
+PppDepAge	Upper	Singles with Dependents	Non-home owner	Taper Rates	Income tests	Parenting Payment Partnered Child age limit	28	Unemployment	18
+Date	MBR	Components	From	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	1	Unemployment_A	19
+Enddate	MBR	Components	To	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	2	Unemployment_A	19
+UnempSingNoDepsBasicMaxF	MBR	Components	No Dependents	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	3	Unemployment_A	19
+UnempSingNoDepsEsMaxF	ES	Components	No Dependents	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	4	Unemployment_A	19
+not_used105	ES	Total (before RA and PhA)	No Dependents	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	5	Unemployment_A	19
+UnempSingDepsBasicMaxF	MBR	Components	With Dependents	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	6	Unemployment_A	19
+UnempSingDepsEsMaxF	ES	Components	With Dependents	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	7	Unemployment_A	19
+not_used108	ES	Total (before RA and PhA)	With Dependents	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	8	Unemployment_A	19
+UnempOldLtrBasicMaxF	MBR	Components	60+ and long term recipient	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	9	Unemployment_A	19
+UnempOldLtrEsMaxF	ES	Components	60+ and long term recipient	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	10	Unemployment_A	19
+AlNsaTot60S	ES	Total (before RA and PhA)	60+ and long term recipient	Single	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	11	Unemployment_A	19
+UnempCoupBasicMaxF	MBR	Components	60+ and long term recipient	Married	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	12	Unemployment_A	19
+UnempCoupEsMaxF	ES	Components	60+ and long term recipient	Married	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	13	Unemployment_A	19
+not_used114	ES	Total (before RA and PhA)	60+ and long term recipient	Married	Period	NewStart Allowance, Special Benefit, Sickness Allowance and Parenting Payment Partnered Rates	14	Unemployment_A	19
+UnempAssHomeThrSA	ES	Total (before RA and PhA)	Home owner	Single	Asset Cutout	Means Tests	15	Unemployment_A	19
+UnempAssNoHomeThrSA	ES	Total (before RA and PhA)	Non-home owner	Single	Asset Cutout	Means Tests	16	Unemployment_A	19
+UnempAssHomeThrCA	ES	Total (before RA and PhA)	Home owner	Married	Asset Cutout	Means Tests	17	Unemployment_A	19
+UnempAssNoHomeThrCA	ES	Total (before RA and PhA)	Non-home owner	Married	Asset Cutout	Means Tests	18	Unemployment_A	19
+UnempThr1F	ES	Lower	Non-home owner	Income Thresholds	Income tests	Means Tests	19	Unemployment_A	19
+UnempThr2F	ES	Upper	Non-home owner	Income Thresholds	Income tests	Means Tests	20	Unemployment_A	19
+UnempTpr1	Lower	Couples and Singles Without Deps	Non-home owner	Taper Rates	Income tests	Means Tests	21	Unemployment_A	19
+UnempTpr2	Upper	Couples and Singles Without Deps	Non-home owner	Taper Rates	Income tests	Means Tests	22	Unemployment_A	19
+UnempSingDepsTpr1	Lower	Singles with Dependents	Non-home owner	Taper Rates	Income tests	Means Tests	23	Unemployment_A	19
+UnempSingDepsTpr2	Upper	Singles with Dependents	Non-home owner	Taper Rates	Income tests	Means Tests	24	Unemployment_A	19
+AllPartTpr	Upper	Singles with Dependents	Non-home owner	Taper Rates	Income tests	Allowance Partner Income Test Taper Rate	25	Unemployment_A	19
+MaaAge	Upper	Singles with Dependents	Non-home owner	Taper Rates	Income tests	Mature Age Allowance Age	26	Unemployment_A	19
+WidAllMinAge	Upper	Singles with Dependents	Non-home owner	Taper Rates	Income tests	Mininmum eligibility age for Widow Allowance	27	Unemployment_A	19
+PppDepAge	Upper	Singles with Dependents	Non-home owner	Taper Rates	Income tests	Parenting Payment Partnered Child age limit	28	Unemployment_A	19
+Date	MBR	Components	From	Dependent At Home	Full Time Students	Period	1	YouthStudents	20
+Enddate	MBR	Components	To	Dependent At Home	Full Time Students	Period	2	YouthStudents	20
+StudYngAHBasicMaxF	MBR	Components	16-17 y.o.	Dependent At Home	Full Time Students	Payment rates (fortnightly)	3	YouthStudents	20
+StudYngAhEsMaxF	ES	Components	16-17 y.o.	Dependent At Home	Full Time Students	Payment rates (fortnightly)	4	YouthStudents	20
+not_used131	ES	Total	Total	Dependent At Home	Full Time Students	Payment rates (fortnightly)	5	YouthStudents	20
+StudOldAHBasicMaxF	MBR	Components	18+ y.o.	Dependent At Home	Full Time Students	Payment rates (fortnightly)	6	YouthStudents	20
+StudOldAhEsMaxF	ES	Components	18+ y.o.	Dependent At Home	Full Time Students	Payment rates (fortnightly)	7	YouthStudents	20
+not_used134	ES	Total	Total	Dependent At Home	Full Time Students	Payment rates (fortnightly)	8	YouthStudents	20
+StudSingNoDepsBasicMaxF	MBR	Components	Total	Single, no kids, not at home	Full Time Students	Payment rates (fortnightly)	9	YouthStudents	20
+StudSingNoDepsEsMaxF	ES	Components	Total	Single, no kids, not at home	Full Time Students	Payment rates (fortnightly)	10	YouthStudents	20
+not_used137	ES	Total	Total	Single, no kids, not at home	Full Time Students	Payment rates (fortnightly)	11	YouthStudents	20
+StudCoupNoDepsBasicMaxF	MBR	Components	Total	Coupled Without Children	Full Time Students	Payment rates (fortnightly)	12	YouthStudents	20
+StudCoupNoDepsEsMaxF	ES	Components	Total	Coupled Without Children	Full Time Students	Payment rates (fortnightly)	13	YouthStudents	20
+not_used140	ES	Total	Total	Coupled Without Children	Full Time Students	Payment rates (fortnightly)	14	YouthStudents	20
+StudCoupDepsBasicMaxF	MBR	Components	Total	Coupled With Children	Full Time Students	Payment rates (fortnightly)	15	YouthStudents	20
+StudCoupDepsEsMaxF	ES	Components	Total	Coupled With Children	Full Time Students	Payment rates (fortnightly)	16	YouthStudents	20
+not_used143	ES	Total	Total	Coupled With Children	Full Time Students	Payment rates (fortnightly)	17	YouthStudents	20
+StudSingDepsBasicMaxF	MBR	Components	Total	Sole parents	Full Time Students	Payment rates (fortnightly)	18	YouthStudents	20
+StudSingDepsEsMaxF	ES	Components	Total	Sole parents	Full Time Students	Payment rates (fortnightly)	19	YouthStudents	20
+not_used146	ES	Total	Total	Sole parents	Full Time Students	Payment rates (fortnightly)	20	YouthStudents	20
+StudThr1F	Lower	Total	Income Thresholds ($ per Fortnight)	Sole parents	Full Time Students	Income Tests	21	YouthStudents	20
+StudThr2F	Upper	Total	Income Thresholds ($ per Fortnight)	Sole parents	Full Time Students	Income Tests	22	YouthStudents	20
+StudTpr1	Lower	Total	Taper Rates	Sole parents	Full Time Students	Income Tests	23	YouthStudents	20
+StudTpr2	Upper	Total	Taper Rates	Sole parents	Full Time Students	Income Tests	24	YouthStudents	20
+StudIndepAge	Upper	Total	Taper Rates	Full time students	Age of Independence	Other	25	YouthStudents	20
+not_used152	Upper	1st Year	Taper Rates	Full time students	Relocation Scholarship (per year)	Other	26	YouthStudents	20
+not_used153	Upper	Intermediate Rate	Taper Rates	Full time students	Relocation Scholarship (per year)	Other	27	YouthStudents	20
+not_used154	Upper	Ongoing Rate Rate	Taper Rates	Full time students	Relocation Scholarship (per year)	Other	28	YouthStudents	20
+YaAgeLwr	Upper	Ongoing Rate Rate	Taper Rates	Full time students	Relocation Scholarship (per year)	Youth Allowance Student minimum age	29	YouthStudents	20
+YaStudAgeUpr	Upper	Ongoing Rate Rate	Taper Rates	Full time students	Relocation Scholarship (per year)	Youth Allowance Student maximum age (must be less than)	30	YouthStudents	20
+DepCauseProp	Upper	Ongoing Rate Rate	Taper Rates	Full time students	Relocation Scholarship (per year)	Proportion of dependent YA recipients who are away from home	31	YouthStudents	20
+AllRedPareTpr	Upper	Ongoing Rate Rate	Taper Rates	Full time students	Relocation Scholarship (per year)	Reduction in rate of YA once parental income exceeds parental income threshold	32	YouthStudents	20
+AllPareThrA	Upper	Ongoing Rate Rate	Taper Rates	Full time students	Relocation Scholarship (per year)	Parental Income Threshold for YA purposes	33	YouthStudents	20
+Date	MBR	Components	From	Dependent At Home	Full Time Students	Period	1	YouthStudents_A	21
+Enddate	MBR	Components	To	Dependent At Home	Full Time Students	Period	2	YouthStudents_A	21
+StudYngAHBasicMaxF	MBR	Components	16-17 y.o.	Dependent At Home	Full Time Students	Payment rates (fortnightly)	3	YouthStudents_A	21
+StudYngAhEsMaxF	ES	Components	16-17 y.o.	Dependent At Home	Full Time Students	Payment rates (fortnightly)	4	YouthStudents_A	21
+not_used131	ES	Total	Total	Dependent At Home	Full Time Students	Payment rates (fortnightly)	5	YouthStudents_A	21
+StudOldAHBasicMaxF	MBR	Components	18+ y.o.	Dependent At Home	Full Time Students	Payment rates (fortnightly)	6	YouthStudents_A	21
+StudOldAhEsMaxF	ES	Components	18+ y.o.	Dependent At Home	Full Time Students	Payment rates (fortnightly)	7	YouthStudents_A	21
+not_used134	ES	Total	Total	Dependent At Home	Full Time Students	Payment rates (fortnightly)	8	YouthStudents_A	21
+StudSingNoDepsBasicMaxF	MBR	Components	Total	Single, no kids, not at home	Full Time Students	Payment rates (fortnightly)	9	YouthStudents_A	21
+StudSingNoDepsEsMaxF	ES	Components	Total	Single, no kids, not at home	Full Time Students	Payment rates (fortnightly)	10	YouthStudents_A	21
+not_used137	ES	Total	Total	Single, no kids, not at home	Full Time Students	Payment rates (fortnightly)	11	YouthStudents_A	21
+StudCoupNoDepsBasicMaxF	MBR	Components	Total	Coupled Without Children	Full Time Students	Payment rates (fortnightly)	12	YouthStudents_A	21
+StudCoupNoDepsEsMaxF	ES	Components	Total	Coupled Without Children	Full Time Students	Payment rates (fortnightly)	13	YouthStudents_A	21
+not_used140	ES	Total	Total	Coupled Without Children	Full Time Students	Payment rates (fortnightly)	14	YouthStudents_A	21
+StudCoupDepsBasicMaxF	MBR	Components	Total	Coupled With Children	Full Time Students	Payment rates (fortnightly)	15	YouthStudents_A	21
+StudCoupDepsEsMaxF	ES	Components	Total	Coupled With Children	Full Time Students	Payment rates (fortnightly)	16	YouthStudents_A	21
+not_used143	ES	Total	Total	Coupled With Children	Full Time Students	Payment rates (fortnightly)	17	YouthStudents_A	21
+StudSingDepsBasicMaxF	MBR	Components	Total	Sole parents	Full Time Students	Payment rates (fortnightly)	18	YouthStudents_A	21
+StudSingDepsEsMaxF	ES	Components	Total	Sole parents	Full Time Students	Payment rates (fortnightly)	19	YouthStudents_A	21
+not_used146	ES	Total	Total	Sole parents	Full Time Students	Payment rates (fortnightly)	20	YouthStudents_A	21
+StudThr1F	Lower	Total	Income Thresholds ($ per Fortnight)	Sole parents	Full Time Students	Income Tests	21	YouthStudents_A	21
+StudThr2F	Upper	Total	Income Thresholds ($ per Fortnight)	Sole parents	Full Time Students	Income Tests	22	YouthStudents_A	21
+StudTpr1	Lower	Total	Taper Rates	Sole parents	Full Time Students	Income Tests	23	YouthStudents_A	21
+StudTpr2	Upper	Total	Taper Rates	Sole parents	Full Time Students	Income Tests	24	YouthStudents_A	21
+StudIndepAge	Upper	Total	Taper Rates	Full time students	Age of Independence	Other	25	YouthStudents_A	21
+not_used152	Upper	1st Year	Taper Rates	Full time students	Relocation Scholarship (per year)	Other	26	YouthStudents_A	21
+not_used153	Upper	Intermediate Rate	Taper Rates	Full time students	Relocation Scholarship (per year)	Other	27	YouthStudents_A	21
+not_used154	Upper	Ongoing Rate Rate	Taper Rates	Full time students	Relocation Scholarship (per year)	Other	28	YouthStudents_A	21
+YaAgeLwr	Upper	Ongoing Rate Rate	Taper Rates	Full time students	Relocation Scholarship (per year)	Youth Allowance Student minimum age	29	YouthStudents_A	21
+YaStudAgeUpr	Upper	Ongoing Rate Rate	Taper Rates	Full time students	Relocation Scholarship (per year)	Youth Allowance Student maximum age	30	YouthStudents_A	21
+DepCauseProp	Upper	Ongoing Rate Rate	Taper Rates	Full time students	Relocation Scholarship (per year)	Proportion of dependent YA recipients who are away from home	31	YouthStudents_A	21
+AllRedPareTpr	Upper	Ongoing Rate Rate	Taper Rates	Full time students	Relocation Scholarship (per year)	Reduction in rate of YA once parental income exceeds parental income threshold	32	YouthStudents_A	21
+AllPareThrA	Upper	Ongoing Rate Rate	Taper Rates	Full time students	Relocation Scholarship (per year)	Parental Income Threshold for YA purposes	33	YouthStudents_A	21
+Date	MBR	Components	From	Dependent At Home	Unemployed	Period	1	YouthUnemployment	22
+Enddate	MBR	Components	To	Dependent At Home	Unemployed	Period	2	YouthUnemployment	22
+YngUnempYngAHBasicMaxF	MBR	Components	16-17 y.o.	Dependent At Home	Unemployed	Payment rates (fortnightly)	3	YouthUnemployment	22
+YngUnempYngAhEsMaxF	ES	Components	16-17 y.o.	Dependent At Home	Unemployed	Payment rates (fortnightly)	4	YouthUnemployment	22
+not_used162	ES	Total	Total	Dependent At Home	Unemployed	Payment rates (fortnightly)	5	YouthUnemployment	22
+YngUnempOldAHBasicMaxF	MBR	Components	18+ y.o.	Dependent At Home	Unemployed	Payment rates (fortnightly)	6	YouthUnemployment	22
+YngUnempOldAhEsMaxF	ES	Components	18+ y.o.	Dependent At Home	Unemployed	Payment rates (fortnightly)	7	YouthUnemployment	22
+not_used165	ES	Total	Total	Dependent At Home	Unemployed	Payment rates (fortnightly)	8	YouthUnemployment	22
+YngUnempSingNoDepsBasicMaxF	MBR	Components	Total	Single, no kids, not at home	Unemployed	Payment rates (fortnightly)	9	YouthUnemployment	22
+YngUnempSingNoDepsEsMaxF	ES	Components	Total	Single, no kids, not at home	Unemployed	Payment rates (fortnightly)	10	YouthUnemployment	22
+not_used168	ES	Total	Total	Single, no kids, not at home	Unemployed	Payment rates (fortnightly)	11	YouthUnemployment	22
+YngUnempCoupNoDepsBasicMaxF	MBR	Components	Total	Coupled Without Children	Unemployed	Payment rates (fortnightly)	12	YouthUnemployment	22
+YngUnempCoupNoDepsEsMaxF	ES	Components	Total	Coupled Without Children	Unemployed	Payment rates (fortnightly)	13	YouthUnemployment	22
+not_used171	ES	Total	Total	Coupled Without Children	Unemployed	Payment rates (fortnightly)	14	YouthUnemployment	22
+YngUnempCoupDepsBasicMaxF	MBR	Components	Total	Coupled With Children	Unemployed	Payment rates (fortnightly)	15	YouthUnemployment	22
+YngUnempCoupDepsEsMaxF	ES	Components	Total	Coupled With Children	Unemployed	Payment rates (fortnightly)	16	YouthUnemployment	22
+not_used174	ES	Total	Total	Coupled With Children	Unemployed	Payment rates (fortnightly)	17	YouthUnemployment	22
+YngUnempSingDepsBasicMaxF	MBR	Components	Total	Sole parents	Unemployed	Payment rates (fortnightly)	18	YouthUnemployment	22
+YngUnempSingDepsEsMaxF	ES	Components	Total	Sole parents	Unemployed	Payment rates (fortnightly)	19	YouthUnemployment	22
+not_used177	ES	Total	Total	Sole parents	Unemployed	Payment rates (fortnightly)	20	YouthUnemployment	22
+YngUnempThr1F	Lower	Total	Income Thresholds ($ per Fortnight)	Sole parents	Unemployed	Income Tests	21	YouthUnemployment	22
+YngUnempThr2F	Upper	Total	Income Thresholds ($ per Fortnight)	Sole parents	Unemployed	Income Tests	22	YouthUnemployment	22
+YngUnempTpr1	Lower	Total	Taper Rates	Sole parents	Unemployed	Income Tests	23	YouthUnemployment	22
+YngUnempTpr2	Upper	Total	Taper Rates	Sole parents	Unemployed	Income Tests	24	YouthUnemployment	22
+UnempIndepAge	Upper	Total	Unemployed	Sole parents	Age of Independence	Income Tests	25	YouthUnemployment	22
+YAOtherAgeUpr	Upper	Total	Youth Unemployed	Sole parents	Maximum YA Other Age	Income Tests	26	YouthUnemployment	22
+Date	MBR	Components	From	Dependent At Home	Unemployed	Period	1	YouthUnemployment_A	23
+Enddate	MBR	Components	To	Dependent At Home	Unemployed	Period	2	YouthUnemployment_A	23
+YngUnempYngAHBasicMaxF	MBR	Components	16-17 y.o.	Dependent At Home	Unemployed	Payment rates (fortnightly)	3	YouthUnemployment_A	23
+YngUnempYngAhEsMaxF	ES	Components	16-17 y.o.	Dependent At Home	Unemployed	Payment rates (fortnightly)	4	YouthUnemployment_A	23
+not_used162	ES	Total	Total	Dependent At Home	Unemployed	Payment rates (fortnightly)	5	YouthUnemployment_A	23
+YngUnempOldAHBasicMaxF	MBR	Components	18+ y.o.	Dependent At Home	Unemployed	Payment rates (fortnightly)	6	YouthUnemployment_A	23
+YngUnempOldAhEsMaxF	ES	Components	18+ y.o.	Dependent At Home	Unemployed	Payment rates (fortnightly)	7	YouthUnemployment_A	23
+not_used165	ES	Total	Total	Dependent At Home	Unemployed	Payment rates (fortnightly)	8	YouthUnemployment_A	23
+YngUnempSingNoDepsBasicMaxF	MBR	Components	Total	Single, no kids, not at home	Unemployed	Payment rates (fortnightly)	9	YouthUnemployment_A	23
+YngUnempSingNoDepsEsMaxF	ES	Components	Total	Single, no kids, not at home	Unemployed	Payment rates (fortnightly)	10	YouthUnemployment_A	23
+not_used168	ES	Total	Total	Single, no kids, not at home	Unemployed	Payment rates (fortnightly)	11	YouthUnemployment_A	23
+YngUnempCoupNoDepsBasicMaxF	MBR	Components	Total	Coupled Without Children	Unemployed	Payment rates (fortnightly)	12	YouthUnemployment_A	23
+YngUnempCoupNoDepsEsMaxF	ES	Components	Total	Coupled Without Children	Unemployed	Payment rates (fortnightly)	13	YouthUnemployment_A	23
+not_used171	ES	Total	Total	Coupled Without Children	Unemployed	Payment rates (fortnightly)	14	YouthUnemployment_A	23
+YngUnempCoupDepsBasicMaxF	MBR	Components	Total	Coupled With Children	Unemployed	Payment rates (fortnightly)	15	YouthUnemployment_A	23
+YngUnempCoupDepsEsMaxF	ES	Components	Total	Coupled With Children	Unemployed	Payment rates (fortnightly)	16	YouthUnemployment_A	23
+not_used174	ES	Total	Total	Coupled With Children	Unemployed	Payment rates (fortnightly)	17	YouthUnemployment_A	23
+YngUnempSingDepsBasicMaxF	MBR	Components	Total	Sole parents	Unemployed	Payment rates (fortnightly)	18	YouthUnemployment_A	23
+YngUnempSingDepsEsMaxF	ES	Components	Total	Sole parents	Unemployed	Payment rates (fortnightly)	19	YouthUnemployment_A	23
+not_used177	ES	Total	Total	Sole parents	Unemployed	Payment rates (fortnightly)	20	YouthUnemployment_A	23
+YngUnempThr1F	Lower	Total	Income Thresholds ($ per Fortnight)	Sole parents	Unemployed	Payment rates (fortnightly)	21	YouthUnemployment_A	23
+YngUnempThr2F	Upper	Total	Income Thresholds ($ per Fortnight)	Sole parents	Unemployed	Payment rates (fortnightly)	22	YouthUnemployment_A	23
+YngUnempTpr1	Lower	Total	Taper Rates	Sole parents	Unemployed	Payment rates (fortnightly)	23	YouthUnemployment_A	23
+YngUnempTpr2	Upper	Total	Taper Rates	Sole parents	Unemployed	Payment rates (fortnightly)	24	YouthUnemployment_A	23
+UnempIndepAge	Upper	Total	Taper Rates	Unemployed	Age of Independence	Payment rates (fortnightly)	25	YouthUnemployment_A	23
+YAOtherAgeUpr	Upper	Total	Taper Rates	Youth Unemployed	Maximum YA Other Age	Payment rates (fortnightly)	26	YouthUnemployment_A	23
+Date			From			Period	1	PenEdSup	24
+Enddate			To			Period	2	PenEdSup	24
+PenEdSupFullMaxF			Pen. Edu Supplement			Rate	3	PenEdSup	24
+PenEdSupHalfMaxF			Pen. Edu Supplement Half Rate			Rate	4	PenEdSup	24
+MinPesAge			Pen. Edu Supplement Half Rate			Pen. Edu Supplement minimum age	5	PenEdSup	24
+Date			From			Period	1	PenEdSup_A	25
+Enddate			To			Period	2	PenEdSup_A	25
+PenEdSupFullMaxF			Pen. Edu Supplement			Rate	3	PenEdSup_A	25
+PenEdSupHalfMaxF			Pen. Edu Supplement Half Rate			Rate	4	PenEdSup_A	25
+MinPesAge			Pen. Edu Supplement Half Rate			Pen. Edu Supplement minimum age	5	PenEdSup_A	25
+Date		Under 16 (weekly)	From		Period		1	SSDepIncLimit	26
+Enddate		Under 16 (weekly)	To		Period		2	SSDepIncLimit	26
+DepChildIncLimUnder16		Under 16 (weekly)	To		Permissable Child Earnings		3	SSDepIncLimit	26
+DepChildIncLimOver16		16 and more (annual)	To		Permissable Child Earnings		4	SSDepIncLimit	26
+Date		Under 16 (weekly)	From		Period		1	SSDepIncLimit_A	27
+Enddate		Under 16 (weekly)	To		Period		2	SSDepIncLimit_A	27
+DepChildIncLimUnder16		Under 16 (weekly)	To		Permissable Child Earnings		3	SSDepIncLimit_A	27
+DepChildIncLimOver16		16 and more (annual)	To		Permissable Child Earnings		4	SSDepIncLimit_A	27
+Date		Single	From		Period		1	PharmA	28
+Enddate		Single	To		Period		2	PharmA	28
+PharmAllMaxSF		Single	To		Rate of Pharmaceutical Allowance		3	PharmA	28
+PharmAllMaxCF		Married	To		Rate of Pharmaceutical Allowance		4	PharmA	28
+Date		Single	From		Period		1	PharmA_A	29
+Enddate		Single	To		Period		2	PharmA_A	29
+PharmAllMaxSF		Single	To		Rate of Pharmaceutical Allowance		3	PharmA_A	29
+PharmAllMaxCF		Married	To		Rate of Pharmaceutical Allowance		4	PharmA_A	29
+Date	lower		From		Period		1	TelephoneUtility	30
+Enddate	lower		To		Period		2	TelephoneUtility	30
+TelAllLowMaxAS	lower		Telephone Allowance		Singles	Rate	3	TelephoneUtility	30
+TelAllHighMaxAS	upper		Telephone Allowance		Singles	Rate	4	TelephoneUtility	30
+UtilitiesAllMaxAS	upper		Utitlities Allowance		Singles	Rate	5	TelephoneUtility	30
+TelAllLowMaxAC	lower		Telephone Allowance		Couples	Rate	6	TelephoneUtility	30
+TelAllHighMaxAC	upper		Telephone Allowance		Couples	Rate	7	TelephoneUtility	30
+UtilitiesAllMaxAC	upper		Utitlities Allowance		Couples	Rate	8	TelephoneUtility	30
+Date	lower		From		Period		1	TelephoneUtility_A	31
+Enddate	lower		To		Period		2	TelephoneUtility_A	31
+TelAllLowMaxAS	lower		Telephone Allowance		Singles	Rate	3	TelephoneUtility_A	31
+TelAllHighMaxAS	upper		Telephone Allowance		Singles	Rate	4	TelephoneUtility_A	31
+UtilitiesAllMaxAS	upper		Utitlities Allowance		Singles	Rate	5	TelephoneUtility_A	31
+TelAllLowMaxAC	lower		Telephone Allowance		Couples	Rate	6	TelephoneUtility_A	31
+TelAllHighMaxAC	upper		Telephone Allowance		Couples	Rate	7	TelephoneUtility_A	31
+UtilitiesAllMaxAC	upper		Utitlities Allowance		Couples	Rate	8	TelephoneUtility_A	31
+Date			From		Period		1	SeniorSup	32
+Enddate			To		Period		2	SeniorSup	32
+SenSupMaxAS			Single		Seniors Supplement	Rate	3	SeniorSup	32
+SenSupEsMaxFS			ES Single		Seniors Supplement	Rate	4	SeniorSup	32
+SenSupMaxAC			Couple		Seniors Supplement	Rate	5	SeniorSup	32
+SenSupEsMaxFC			ES Couple		Seniors Supplement	Rate	6	SeniorSup	32
+CshcThrAS			Single		Commonwealth Senior Health Card Eligibility	Income Test	7	SeniorSup	32
+CshcThrAC			Couple		Commonwealth Senior Health Card Eligibility	Income Test	8	SeniorSup	32
+CshcThrDepAddA			Increase for Dependent Children		Commonwealth Senior Health Card Eligibility	Income Test	9	SeniorSup	32
+Date			From		Period		1	SeniorSup_A	33
+Enddate			To		Period		2	SeniorSup_A	33
+SenSupMaxAS			Single		Seniors Supplement	Rate	3	SeniorSup_A	33
+SenSupEsMaxFS			ES Single		Seniors Supplement	Rate	4	SeniorSup_A	33
+SenSupMaxAC			Couple		Seniors Supplement	Rate	5	SeniorSup_A	33
+SenSupEsMaxFC			ES Couple		Seniors Supplement	Rate	6	SeniorSup_A	33
+CshcThrAS			Single		Commonwealth Senior Health Card Eligibility	Income Test	7	SeniorSup_A	33
+CshcThrAC			Couple		Commonwealth Senior Health Card Eligibility	Income Test	8	SeniorSup_A	33
+CshcThrDepAddA			Increase for Dependent Children		Commonwealth Senior Health Card Eligibility	Income Test	9	SeniorSup_A	33
+Date	No deps	Single	From		Period		1	RentA	34
+Enddate	No deps	Single	To		Period		2	RentA	34
+RAssMaxSF	No deps	Single	To		Maximum rent assistance payable		3	RentA	34
+RentMaxSDeps1_2	1-2 deps	Single	To		Maximum rent assistance payable		4	RentA	34
+RentMaxSDepsMany	> 2 deps	Single	To		Maximum rent assistance payable		5	RentA	34
+RAssMaxCF	No deps	Married	To		Maximum rent assistance payable		6	RentA	34
+RentMaxCDeps1_2	1-2 deps	Married	To		Maximum rent assistance payable		7	RentA	34
+RentMaxCDepsMany	> 2 deps	Married	To		Maximum rent assistance payable		8	RentA	34
+RAssMinRentSF	No deps	Single	To		Minimum rent paid for rent allowance to be payable		9	RentA	34
+RentMinSDeps1_2	1-2 deps	Single	To		Minimum rent paid for rent allowance to be payable		10	RentA	34
+RentMinSDepsMany	> 2 deps	Single	To		Minimum rent paid for rent allowance to be payable		11	RentA	34
+RAssMinRentCF	No deps	Married	To		Minimum rent paid for rent allowance to be payable		12	RentA	34
+RentMinCDeps1_2	1-2 deps	Married	To		Minimum rent paid for rent allowance to be payable		13	RentA	34
+RentMinCDepsMany	> 2 deps	Married	To		Minimum rent paid for rent allowance to be payable		14	RentA	34
+RAssCoPayProp	> 2 deps	Married	To		Proportion of rent paid by RA		15	RentA	34
+Date	No deps	Single	From		Period		1	RentA_A	35
+Enddate	No deps	Single	To		Period		2	RentA_A	35
+RAssMaxSF	No deps	Single	To		Maximum rent assistance payable		3	RentA_A	35
+RentMaxSDeps1_2	1-2 deps	Single	To		Maximum rent assistance payable		4	RentA_A	35
+RentMaxSDepsMany	> 2 deps	Single	To		Maximum rent assistance payable		5	RentA_A	35
+RAssMaxCF	No deps	Married	To		Maximum rent assistance payable		6	RentA_A	35
+RentMaxCDeps1_2	1-2 deps	Married	To		Maximum rent assistance payable		7	RentA_A	35
+RentMaxCDepsMany	> 2 deps	Married	To		Maximum rent assistance payable		8	RentA_A	35
+RAssMinRentSF	No deps	Single	To		Minimum rent paid for rent allowance to be payable		9	RentA_A	35
+RentMinSDeps1_2	1-2 deps	Single	To		Minimum rent paid for rent allowance to be payable		10	RentA_A	35
+RentMinSDepsMany	> 2 deps	Single	To		Minimum rent paid for rent allowance to be payable		11	RentA_A	35
+RAssMinRentCF	No deps	Married	To		Minimum rent paid for rent allowance to be payable		12	RentA_A	35
+RentMinCDeps1_2	1-2 deps	Married	To		Minimum rent paid for rent allowance to be payable		13	RentA_A	35
+RentMinCDepsMany	> 2 deps	Married	To		Minimum rent paid for rent allowance to be payable		14	RentA_A	35
+RAssCoPayProp	> 2 deps	Married	To		Proportion of rent paid by RA		15	RentA_A	35
+Date		From 	Rate of Low Income Supplement		Period		1	LIS	36
+Enddate		To	Rate of Low Income Supplement		Period		2	LIS	36
+oiLisMax		To	Rate of Low Income Supplement		Rate		3	LIS	36
+oiLisThrSNoKid		Individuals, no dependents	Income Requirement Thresholds		Tests		4	LIS	36
+oiLisThrCNoKid		Couples, no dependants	Income Requirement Thresholds		Tests		5	LIS	36
+oiLisThrFam		Families with dependents	Income Requirement Thresholds		Tests		6	LIS	36
+oiLisTxThr		Families with dependents	Tax Requirement Lower Threshold		Tests		7	LIS	36
+Date		From 	Rate of Low Income Supplement		Period		1	LIS_A	37
+Enddate		To	Rate of Low Income Supplement		Period		2	LIS_A	37
+oiLisMax		To	Rate of Low Income Supplement		Rate		3	LIS_A	37
+oiLisThrSNoKid		Individuals, no dependents	Income Requirement Thresholds		Tests		4	LIS_A	37
+oiLisThrCNoKid		Couples, no dependants	Income Requirement Thresholds		Tests		5	LIS_A	37
+oiLisThrFam		Families with dependents	Income Requirement Thresholds		Tests		6	LIS_A	37
+oiLisTxThr		Families with dependents	Tax Requirement Lower Threshold		Tests		7	LIS_A	37
+Date	The income support bonus is stated in bi-annual amounts	From 	To make annual averaging work, the amounts payable in Sep are specified in both Sep & Dec quarters and the March amount in Mar & Jun quarters. This is because ISB is paid in March and Sep, so annual averages should reflect the average of the values at those two quarters, and not the value from previous quarters.	The income support bonus is paid twice yearly (20 Sept/20 March) to recipients of social security benefits and PPS. 	Period		1	IncomeSupportBonus	38
+Enddate	The income support bonus is stated in bi-annual amounts	To	To make annual averaging work, the amounts payable in Sep are specified in both Sep & Dec quarters and the March amount in Mar & Jun quarters. This is because ISB is paid in March and Sep, so annual averages should reflect the average of the values at those two quarters, and not the value from previous quarters.	The income support bonus is paid twice yearly (20 Sept/20 March) to recipients of social security benefits and PPS. 	Period		2	IncomeSupportBonus	38
+IncSupBonMaxBs	The income support bonus is stated in bi-annual amounts	Single	To make annual averaging work, the amounts payable in Sep are specified in both Sep & Dec quarters and the March amount in Mar & Jun quarters. This is because ISB is paid in March and Sep, so annual averages should reflect the average of the values at those two quarters, and not the value from previous quarters.	The income support bonus is paid twice yearly (20 Sept/20 March) to recipients of social security benefits and PPS. 	Rate of Income Support Bonus		3	IncomeSupportBonus	38
+IncSupBonMaxBc	The income support bonus is stated in bi-annual amounts	Couple	To make annual averaging work, the amounts payable in Sep are specified in both Sep & Dec quarters and the March amount in Mar & Jun quarters. This is because ISB is paid in March and Sep, so annual averages should reflect the average of the values at those two quarters, and not the value from previous quarters.	The income support bonus is paid twice yearly (20 Sept/20 March) to recipients of social security benefits and PPS. 	Rate of Income Support Bonus		4	IncomeSupportBonus	38
+	The income support bonus is stated in bi-annual amounts	These amounts are the rates of single installments specified in the table in s920 SSA1991 and indexed by CPI half yearly as per table item 43 in s1191. (Note while the indexation date says 20 September, we index on 1 July to make our annual averages reflect the amount paid in the financial year.)	To make annual averaging work, the amounts payable in Sep are specified in both Sep & Dec quarters and the March amount in Mar & Jun quarters. This is because ISB is paid in March and Sep, so annual averages should reflect the average of the values at those two quarters, and not the value from previous quarters.	The income support bonus is paid twice yearly (20 Sept/20 March) to recipients of social security benefits and PPS. 	Bott, Mark:		5	IncomeSupportBonus	38
+Date			From 			Period	1	IncomeSupportBonus_A	39
+Enddate			To			Period	2	IncomeSupportBonus_A	39
+IncSupBonMaxBs			Single			Rate of Income Support Bonus	3	IncomeSupportBonus_A	39
+IncSupBonMaxBc			Couple			Rate of Income Support Bonus	4	IncomeSupportBonus_A	39
+Date	2 kids		From	From	Rates	Period	1	Childcare	40
+Enddate	2 kids		To	To	Rates	Period	2	Childcare	40
+CcbStdHrRateApp	2 kids		To	Standard Hourly Rate - Approved care	Rates	Child Care Benefit	3	Childcare	40
+CcbStdHrRateReg	2 kids		To	Standard Hourly Rate - Registered care	Rates	Child Care Benefit	4	Childcare	40
+CcbMultChdLd2	2 kids		To	Multiple Child Loading	Rates	Child Care Benefit	5	Childcare	40
+CcbMultChdLd3	3+ kids		To	Multiple Child Loading	Rates	Child Care Benefit	6	Childcare	40
+CcbSchKidPct	3+ kids		To	School Kids Percentage	Rates	Child Care Benefit	7	Childcare	40
+CcbIncThrLwrA	3+ kids		Lower	School Kids Percentage	Income Thresholds	Child Care Benefit	8	Childcare	40
+CcbIncThrUprA	3+ kids		Upper	School Kids Percentage	Income Thresholds	Child Care Benefit	9	Childcare	40
+CcbTprLwr1	3+ kids		1 child	Lower	Taper Rates	Child Care Benefit	10	Childcare	40
+CcbTprLwr2	3+ kids		2+ children	Lower	Taper Rates	Child Care Benefit	11	Childcare	40
+CcbTprUpr1	3+ kids		2 children	Upper	Taper Rates	Child Care Benefit	12	Childcare	40
+CcbTprUpr2	3+ kids		3+ children	Upper	Taper Rates	Child Care Benefit	13	Childcare	40
+CcbMaxHrUprW	3+ kids		If Pass Activity Test	Upper	Maximum Hours	Child Care Benefit	14	Childcare	40
+CcbMaxHrLwrW	3+ kids		If Do Not Pass Activity Test	Upper	Maximum Hours	Child Care Benefit	15	Childcare	40
+CcbActivHrThrW	3+ kids		If Do Not Pass Activity Test	Upper	Weekly Hours Work Required to Pass Worktest	Child Care Benefit	16	Childcare	40
+CcbSchAge	3+ kids		If Do Not Pass Activity Test	Upper	School Age (Estimate for cameo purposes)	Child Care Benefit	17	Childcare	40
+CcbLdcLdHr1	3+ kids		Hours category one	Hours per week	LDC Part Time Loading	Child Care Benefit	18	Childcare	40
+CcbLdcLdHr2	3+ kids		Hours category two	Hours per week	LDC Part Time Loading	Child Care Benefit	19	Childcare	40
+CcbLdcLdHr3	3+ kids		Hours category three	Hours per week	LDC Part Time Loading	Child Care Benefit	20	Childcare	40
+CcbLdcLdHr4	3+ kids		Hours category four	Hours per week	LDC Part Time Loading	Child Care Benefit	21	Childcare	40
+CcbLdcLdHr5	3+ kids		Hours category five	Hours per week	LDC Part Time Loading	Child Care Benefit	22	Childcare	40
+CcbLdcLdPct1	3+ kids		First loading	Percent loading	LDC Part Time Loading	Child Care Benefit	23	Childcare	40
+CcbLdcLdPct2	3+ kids		Second loading	Percent loading	LDC Part Time Loading	Child Care Benefit	24	Childcare	40
+CcbLdcLdPct3	3+ kids		Third loading	Percent loading	LDC Part Time Loading	Child Care Benefit	25	Childcare	40
+CcbLdcLdPct4	3+ kids		Fourth loading	Percent loading	LDC Part Time Loading	Child Care Benefit	26	Childcare	40
+CcbLdcLdPct5	3+ kids		Fifth loading	Percent loading	LDC Part Time Loading	Child Care Benefit	27	Childcare	40
+CcbLdcLdPct6	3+ kids		Sixth loading	Percent loading	LDC Part Time Loading	Child Care Benefit	28	Childcare	40
+CcrPct	3+ kids		Sixth loading	Percentage of Out of Pocket Costs Claimable	LDC Part Time Loading	Child Care Rebate	29	Childcare	40
+CcrMaxRebA	3+ kids		Sixth loading	Maximum Annual Rebate	LDC Part Time Loading	Child Care Rebate	30	Childcare	40
+CcsLdcHrFeeCap	3+ kids		Sixth loading	Long Day Care Hourly Fee Cap	Fee caps	Child Care Subsidy	31	Childcare	40
+CcsFdcHrFeeCap	3+ kids		Sixth loading	Family Day Care Hourly Fee Cap	Fee caps	Child Care Subsidy	32	Childcare	40
+CcsOshcHrFeeCap	3+ kids		Sixth loading	Outside School Hours Care Hourly Fee Cap	Fee caps	Child Care Subsidy	33	Childcare	40
+CcsRateUprA	3+ kids		Sixth loading	Upper subsidy rate	Subsidy rates	Child Care Subsidy	34	Childcare	40
+CcsRateMidA	3+ kids		Sixth loading	Mid-level subsidy rate	Subsidy rates	Child Care Subsidy	35	Childcare	40
+CcsRateLwrA	3+ kids		Sixth loading	Lower subsidy rate	Subsidy rates	Child Care Subsidy	36	Childcare	40
+CcsRateTpr	3+ kids		Sixth loading	Effective taper rate	Subsidy rates	Child Care Subsidy	37	Childcare	40
+CcsIncThrA1	3+ kids		Sixth loading	Lower income threshold	Income Thresholds	Child Care Subsidy	38	Childcare	40
+CcsIncThrA2	3+ kids		Sixth loading	Second income threshold	Income Thresholds	Child Care Subsidy	39	Childcare	40
+CcsIncThrA3	3+ kids		Sixth loading	Third income threshold	Income Thresholds	Child Care Subsidy	40	Childcare	40
+CcsIncThrA4	3+ kids		Sixth loading	Fourth income threshold	Income Thresholds	Child Care Subsidy	41	Childcare	40
+CcsIncThrA6	3+ kids		Sixth loading	Fifth income threshold	Income Thresholds	Child Care Subsidy	42	Childcare	40
+CcsIncThrA5	3+ kids		Sixth loading	HIgh income threshold	Income Thresholds	Child Care Subsidy	43	Childcare	40
+CcsCappedSubsidyA	3+ kids		Sixth loading	High income annual subsidy cap	Income Thresholds	Child Care Subsidy	44	Childcare	40
+CcsActivHrThrW1	3+ kids		Sixth loading	Start of second category	Activity test hours worked thresholds	Child Care Subsidy	45	Childcare	40
+CcsActivHrThrW2	3+ kids		Sixth loading	Start of third category	Activity test hours worked thresholds	Child Care Subsidy	46	Childcare	40
+CcsActivHrThrW3	3+ kids		Sixth loading	Start of fourth category	Activity test hours worked thresholds	Child Care Subsidy	47	Childcare	40
+CcsMaxHrAssistW1	3+ kids		Sixth loading	First maximum hours category	Activity test hours of fee assistance	Child Care Subsidy	48	Childcare	40
+CcsMaxHrAssistW2	3+ kids		Sixth loading	Second category maximum hours	Activity test hours of fee assistance	Child Care Subsidy	49	Childcare	40
+CcsMaxHrAssistW3	3+ kids		Sixth loading	Third category maximum hours	Activity test hours of fee assistance	Child Care Subsidy	50	Childcare	40
+CcsMaxHrAssistW4	3+ kids		Sixth loading	Fourth category maximum hours	Activity test hours of fee assistance	Child Care Subsidy	51	Childcare	40
+CcsMaxHrAssistWSpc	3+ kids		Sixth loading	Special category maximum hours	Activity test hours of fee assistance	Child Care Subsidy	52	Childcare	40
+Date		2 kids	From	From	Rates	Period	1	Childcare_A	41
+Enddate		2 kids	To	To	Rates	Period	2	Childcare_A	41
+CcbStdHrRateApp		2 kids	To	Standard Hourly Rate - Approved care	Rates	Child Care Benefit	3	Childcare_A	41
+CcbStdHrRateReg		2 kids	To	Standard Hourly Rate - Registered care	Rates	Child Care Benefit	4	Childcare_A	41
+CcbMultChdLd2		2 kids	To	Multiple Child Loading	Rates	Child Care Benefit	5	Childcare_A	41
+CcbMultChdLd3		3+ kids	To	Multiple Child Loading	Rates	Child Care Benefit	6	Childcare_A	41
+CcbSchKidPct		3+ kids	To	School Kids Percentage	Rates	Child Care Benefit	7	Childcare_A	41
+CcbIncThrLwrA		3+ kids	Lower	School Kids Percentage	Income Thresholds	Child Care Benefit	8	Childcare_A	41
+CcbIncThrUprA		3+ kids	Upper	School Kids Percentage	Income Thresholds	Child Care Benefit	9	Childcare_A	41
+CcbTprLwr1		3+ kids	1 child	Lower	Taper Rates	Child Care Benefit	10	Childcare_A	41
+CcbTprLwr2		3+ kids	2+ children	Lower	Taper Rates	Child Care Benefit	11	Childcare_A	41
+CcbTprUpr1		3+ kids	2 children	Upper	Taper Rates	Child Care Benefit	12	Childcare_A	41
+CcbTprUpr2		3+ kids	3+ children	Upper	Taper Rates	Child Care Benefit	13	Childcare_A	41
+CcbMaxHrUprW		3+ kids	If Pass Worktest	Upper	Maximum Hours	Child Care Benefit	14	Childcare_A	41
+CcbMaxHrLwrW		3+ kids	If Do Not Pass Worktest	Upper	Maximum Hours	Child Care Benefit	15	Childcare_A	41
+CcbActivHrThrW		3+ kids	If Do Not Pass Worktest	Upper	Weekly Hours Work Required to Pass Worktest	Child Care Benefit	16	Childcare_A	41
+CcbSchAge		3+ kids	If Do Not Pass Worktest	Upper	School Age (Estimate for Cameo purposes)	Child Care Benefit	17	Childcare_A	41
+CcbLdcLdHr1		3+ kids	Hours category one	Hours per week	LDC Part Time Loading	Child Care Benefit	18	Childcare_A	41
+CcbLdcLdHr2		3+ kids	Hours category two	Hours per week	LDC Part Time Loading	Child Care Benefit	19	Childcare_A	41
+CcbLdcLdHr3		3+ kids	Hours category three	Hours per week	LDC Part Time Loading	Child Care Benefit	20	Childcare_A	41
+CcbLdcLdHr4		3+ kids	Hours category four	Hours per week	LDC Part Time Loading	Child Care Benefit	21	Childcare_A	41
+CcbLdcLdHr5		3+ kids	Hours category five	Hours per week	LDC Part Time Loading	Child Care Benefit	22	Childcare_A	41
+CcbLdcLdPct1		3+ kids	First loading	Percent loading	LDC Part Time Loading	Child Care Benefit	23	Childcare_A	41
+CcbLdcLdPct2		3+ kids	Second loading	Percent loading	LDC Part Time Loading	Child Care Benefit	24	Childcare_A	41
+CcbLdcLdPct3		3+ kids	Third loading	Percent loading	LDC Part Time Loading	Child Care Benefit	25	Childcare_A	41
+CcbLdcLdPct4		3+ kids	Fourth loading	Percent loading	LDC Part Time Loading	Child Care Benefit	26	Childcare_A	41
+CcbLdcLdPct5		3+ kids	Fifth loading	Percent loading	LDC Part Time Loading	Child Care Benefit	27	Childcare_A	41
+CcbLdcLdPct6		3+ kids	Sixth loading	Percent loading	LDC Part Time Loading	Child Care Benefit	28	Childcare_A	41
+CcrPct		3+ kids	Sixth loading	Percentage of Out of Pocket Costs Claimable	LDC Part Time Loading	Child Care Rebate	29	Childcare_A	41
+CcrMaxRebA		3+ kids	Sixth loading	Maximum Annual Rebate	LDC Part Time Loading	Child Care Rebate	30	Childcare_A	41
+CcsLdcHrFeeCap		3+ kids	Sixth loading	Long Day Care Hourly Fee Cap	Fee caps	Child Care Subsidy	31	Childcare_A	41
+CcsFdcHrFeeCap		3+ kids	Sixth loading	Family Day Care Hourly Fee Cap	Fee caps	Child Care Subsidy	32	Childcare_A	41
+CcsOshcHrFeeCap		3+ kids	Sixth loading	Outside School Hours Care Hourly Fee Cap	Fee caps	Child Care Subsidy	33	Childcare_A	41
+CcsRateUprA		3+ kids	Sixth loading	Upper subsidy rate	Subsidy rates	Child Care Subsidy	34	Childcare_A	41
+CcsRateMidA		3+ kids	Sixth loading	Mid-level subsidy rate	Subsidy rates	Child Care Subsidy	35	Childcare_A	41
+CcsRateLwrA		3+ kids	Sixth loading	Lower subsidy rate	Subsidy rates	Child Care Subsidy	36	Childcare_A	41
+CcsRateTpr		3+ kids	Sixth loading	Lower subsidy rate	Subsidy rates	Child Care Subsidy	37	Childcare_A	41
+CcsIncThrA1		3+ kids	Sixth loading	Lower income threshold	Income Thresholds	Child Care Subsidy	38	Childcare_A	41
+CcsIncThrA2		3+ kids	Sixth loading	Second income threshold	Income Thresholds	Child Care Subsidy	39	Childcare_A	41
+CcsIncThrA3		3+ kids	Sixth loading	Third income threshold	Income Thresholds	Child Care Subsidy	40	Childcare_A	41
+CcsIncThrA4		3+ kids	Sixth loading	Fourth income threshold	Income Thresholds	Child Care Subsidy	41	Childcare_A	41
+CcsIncThrA6		3+ kids	Sixth loading	Fifth income threshold	Income Thresholds	Child Care Subsidy	42	Childcare_A	41
+CcsIncThrA5		3+ kids	Sixth loading	High income threshold	Income Thresholds	Child Care Subsidy	43	Childcare_A	41
+CcsCappedSubsidyA		3+ kids	Sixth loading	High income annual subsidy cap	Income Thresholds	Child Care Subsidy	44	Childcare_A	41
+CcsActivHrThrW1		3+ kids	Sixth loading	Start of second category	Activity test hours worked thresholds	Child Care Subsidy	45	Childcare_A	41
+CcsActivHrThrW2		3+ kids	Sixth loading	Start of third category	Activity test hours worked thresholds	Child Care Subsidy	46	Childcare_A	41
+CcsActivHrThrW3		3+ kids	Sixth loading	Start of fourth category	Activity test hours worked thresholds	Child Care Subsidy	47	Childcare_A	41
+CcsMaxHrAssistW1		3+ kids	Sixth loading	First maximum hours category	Activity test hours of fee assistance	Child Care Subsidy	48	Childcare_A	41
+CcsMaxHrAssistW2		3+ kids	Sixth loading	Second category maximum hours	Activity test hours of fee assistance	Child Care Subsidy	49	Childcare_A	41
+CcsMaxHrAssistW3		3+ kids	Sixth loading	Third category maximum hours	Activity test hours of fee assistance	Child Care Subsidy	50	Childcare_A	41
+CcsMaxHrAssistW4		3+ kids	Sixth loading	Fourth category maximum hours	Activity test hours of fee assistance	Child Care Subsidy	51	Childcare_A	41
+CcsMaxHrAssistWSpc		3+ kids	Sixth loading	Special category maximum hours	Activity test hours of fee assistance	Child Care Subsidy	52	Childcare_A	41
+Date	Basic Rate	Supplement 	From	Maximum rate	Period	Rates	1	FTBA	42
+Enddate	Basic Rate	Supplement 	To	Maximum rate	Period	Rates	2	FTBA	42
+FtbaMaxRateAgeUnder13	Basic Rate	Supplement 	Under 13 years old	Maximum rate	Annual payment rate per child	Rates	3	FTBA	42
+FtbaMaxEsAgeunder13	Energy Supplement	Supplement 	Under 13 years old	Maximum rate	Annual payment rate per child	Rates	4	FTBA	42
+FtbaMaxRateAge13_19Stud	Basic Rate	Supplement 	13 to 15 years old and 16-19 senior secondary students	Maximum rate	Annual payment rate per child	Rates	5	FTBA	42
+FtbaMaxEsAge13_19Stud	Energy Supplement	Supplement 	13 to 15 years old and 16-19 senior secondary students	Maximum rate	Annual payment rate per child	Rates	6	FTBA	42
+FtbaMaxRateAge16_17SecGrad	Basic Rate	Supplement 	16 to 17 years old / 0-19 in an approved care organisation	Maximum rate	Annual payment rate per child	Rates	7	FTBA	42
+FtbaMaxEsAge16_17SecGrad	Energy Supplement	Supplement 	16 to 17 years old / 0-19 in an approved care organisation	Maximum rate	Annual payment rate per child	Rates	8	FTBA	42
+not_used282	Basic Rate	Supplement 	18 to 24 years old	Maximum rate	Annual payment rate per child	Rates	9	FTBA	42
+not_used296	Energy Supplement	Supplement 	18 to 24 years old	Maximum rate	Annual payment rate per child	Rates	10	FTBA	42
+FtbaBaseRateA	Basic Rate	Supplement 	Under 18 years old	Base rate	Annual payment rate per child	Rates	11	FTBA	42
+FtbaBaseEsRateA	Energy Supplement	Supplement 	Under 18 years old	Base rate	Annual payment rate per child	Rates	12	FTBA	42
+not_used273	Basic Rate	Supplement 	18 to 24 years old	Base rate	Annual payment rate per child	Rates	13	FTBA	42
+not_used297	Energy Supplement	Supplement 	18 to 24 years old	Base rate	Annual payment rate per child	Rates	14	FTBA	42
+FtbaSupA	Energy Supplement	Supplement 	18 to 24 years old	Base rate	FTB-A supplement (per child)	Rates	15	FTBA	42
+FtbaSupAThr	Energy Supplement	Supplement 	18 to 24 years old	Base rate	FTB-A supplement (threshold)	Rates	16	FTBA	42
+LfsRateA	Energy Supplement	Supplement 	18 to 24 years old	Base rate	Large family supplement	Rates	17	FTBA	42
+LFSKidsMin	Energy Supplement	Minimum number of kids	18 to 24 years old	Base rate	Large family supplement	Rates	18	FTBA	42
+NewBornSup1A	Energy Supplement	First Birth	18 to 24 years old	Base rate	Newborn Supplement	Rates	19	FTBA	42
+NewBornSup2A	Energy Supplement	Subsequent Births	18 to 24 years old	Base rate	Newborn Supplement	Rates	20	FTBA	42
+NewBornUpfrontRateA	Energy Supplement	Newborn Upfront Payment	18 to 24 years old	Base rate	Newborn Supplement	Rates	21	FTBA	42
+NbsNumw	Energy Supplement	Number of weeks	18 to 24 years old	Base rate	Newborn Supplement	Rates	22	FTBA	42
+not_used287	Energy Supplement	First StillBorn Child	18 to 24 years old	Base rate	Stillborn Baby Payment	Rates	23	FTBA	42
+not_used288	Energy Supplement	Subsequent Stillborn Children	18 to 24 years old	Base rate	Stillborn Baby Payment	Rates	24	FTBA	42
+not_used289	Energy Supplement	Income Threshold	18 to 24 years old	Base rate	Stillborn Baby Payment	Rates	25	FTBA	42
+not_used290	Energy Supplement	Triplets	18 to 24 years old	Base rate	Multiple Birth Allowance	Rates	26	FTBA	42
+not_used291	Energy Supplement	Quads or More	18 to 24 years old	Base rate	Multiple Birth Allowance	Rates	27	FTBA	42
+FtbaBaseBasicThr	Energy Supplement	Quads or More	Higher Income Free Area	Base rate	Method 2 income test (higher free income test)	Tests	28	FTBA	42
+FtbaBaseAddThr	Energy Supplement	Quads or More	Extra per additional dep	Base rate	Method 2 income test (higher free income test)	Tests	29	FTBA	42
+FtbaBaseTpr	Energy Supplement	Quads or More	Reduction for excess income	Base rate	Method 2 income test (higher free income test)	Tests	30	FTBA	42
+FtbaMaxThr	Energy Supplement	Quads or More	Income Free Area	Base rate	Method 1 income test	Tests	31	FTBA	42
+FtbaMaxTpr	Energy Supplement	Quads or More	Reduction for excess income	Base rate	Method 1 income test	Tests	32	FTBA	42
+MaintIncFreeSingle	Energy Supplement	Quads or More	One Recipient of Child Support	Annual Income Limit	Maintenance Income Test	Tests	33	FTBA	42
+MaintIncFreeCouple	Energy Supplement	Quads or More	Both Parents Receive Child Support	Annual Income Limit	Maintenance Income Test	Tests	34	FTBA	42
+MaintIncFreeKids	Energy Supplement	Quads or More	Extra inc for deps	Annual Income Limit	Maintenance Income Test	Tests	35	FTBA	42
+MaintTpr	Energy Supplement	Quads or More	Extra inc for deps	Reduction rate for income excess 	Maintenance Income Test	Tests	36	FTBA	42
+FtbaChldIncLim	Energy Supplement	Quads or More	Extra inc for deps	Dependency Income limit ($ per year)	Maintenance Income Test	FTB Child Qualifying Rules	37	FTBA	42
+not_used303	Energy Supplement	Quads or More	Extra inc for deps	Disqualifying Age for NON-school students	Maintenance Income Test	FTB Child Qualifying Rules	38	FTBA	42
+not_used304	Energy Supplement	Quads or More	Extra inc for deps	Disqualifying Age as a senior secondary school child	Maintenance Income Test	FTB Child Qualifying Rules	39	FTBA	42
+Date	Basic Rate	Supplement 	From	Maximum rate	Period	Rates	1	FTBA_A	43
+Enddate	Basic Rate	Supplement 	To	Maximum rate	Period	Rates	2	FTBA_A	43
+FtbaMaxRateAgeUnder13	Basic Rate	Supplement 	Under 13 years old	Maximum rate	Annual payment rate per child	Rates	3	FTBA_A	43
+FtbaMaxEsAgeunder13	Energy Supplement	Supplement 	Under 13 years old	Maximum rate	Annual payment rate per child	Rates	4	FTBA_A	43
+FtbaMaxRateAge13_19Stud	Basic Rate	Supplement 	13 to 15 years old and senior secondary students	Maximum rate	Annual payment rate per child	Rates	5	FTBA_A	43
+FtbaMaxEsAge13_19Stud	Energy Supplement	Supplement 	13 to 15 years old and senior secondary students	Maximum rate	Annual payment rate per child	Rates	6	FTBA_A	43
+FtbaMaxRateAge16_17SecGrad	Basic Rate	Supplement 	16 to 17 years old	Maximum rate	Annual payment rate per child	Rates	7	FTBA_A	43
+FtbaMaxEsAge16_17SecGrad	Energy Supplement	Supplement 	16 to 17 years old	Maximum rate	Annual payment rate per child	Rates	8	FTBA_A	43
+not_used282	Basic Rate	Supplement 	18 to 24 years old	Maximum rate	Annual payment rate per child	Rates	9	FTBA_A	43
+not_used296	Energy Supplement	Supplement 	18 to 24 years old	Maximum rate	Annual payment rate per child	Rates	10	FTBA_A	43
+FtbaBaseRateA	Basic Rate	Supplement 	Under 18 years old	Base rate	Annual payment rate per child	Rates	11	FTBA_A	43
+FtbaBaseEsRateA	Energy Supplement	Supplement 	Under 18 years old	Base rate	Annual payment rate per child	Rates	12	FTBA_A	43
+not_used273	Basic Rate	Supplement 	18 to 24 years old	Base rate	Annual payment rate per child	Rates	13	FTBA_A	43
+not_used297	Energy Supplement	Supplement 	18 to 24 years old	Base rate	Annual payment rate per child	Rates	14	FTBA_A	43
+FtbaSupA	Energy Supplement	Supplement 	18 to 24 years old	Base rate	FTB-A supplement (per child)	Rates	15	FTBA_A	43
+FtbaSupAThr	Energy Supplement	Supplement 	18 to 24 years old	Base rate	FTB-A supplement (threshold)	Rates	16	FTBA_A	43
+LfsRateA	Energy Supplement	Supplement 	18 to 24 years old	Base rate	Large family supplement	Rates	17	FTBA_A	43
+LFSKidsMin	Energy Supplement	Minimum number of kids	18 to 24 years old	Base rate	Large family supplement	Rates	18	FTBA_A	43
+NewBornSup1A	Energy Supplement	First Birth	18 to 24 years old	Base rate	Newborn Supplement	Rates	19	FTBA_A	43
+NewBornSup2A	Energy Supplement	Subsequent Births	18 to 24 years old	Base rate	Newborn Supplement	Rates	20	FTBA_A	43
+NewBornUpfrontRateA	Energy Supplement	Newborn Upfront Payment	18 to 24 years old	Base rate	Newborn Supplement	Rates	21	FTBA_A	43
+NbsNumw	Energy Supplement	Number of weeks	18 to 24 years old	Base rate	Newborn Supplement	Rates	22	FTBA_A	43
+not_used287	Energy Supplement	First StillBorn Child	18 to 24 years old	Base rate	Stillborn Baby Payment	Rates	23	FTBA_A	43
+not_used288	Energy Supplement	Subsequent Stillborn Children	18 to 24 years old	Base rate	Stillborn Baby Payment	Rates	24	FTBA_A	43
+not_used289	Energy Supplement	Income Threshold	18 to 24 years old	Base rate	Stillborn Baby Payment	Rates	25	FTBA_A	43
+not_used290	Energy Supplement	Triplets	18 to 24 years old	Base rate	Multiple Birth Allowance	Rates	26	FTBA_A	43
+not_used291	Energy Supplement	Quads or More	18 to 24 years old	Base rate	Multiple Birth Allowance	Rates	27	FTBA_A	43
+FtbaBaseBasicThr	Energy Supplement	Quads or More	Higher Income Free Area	Base rate	Method 2 income test (higher free income test)	Tests	28	FTBA_A	43
+FtbaBaseAddThr	Energy Supplement	Quads or More	Extra per additional dep	Base rate	Method 2 income test (higher free income test)	Tests	29	FTBA_A	43
+FtbaBaseTpr	Energy Supplement	Quads or More	Reduction for excess income	Base rate	Method 2 income test (higher free income test)	Tests	30	FTBA_A	43
+FtbaMaxThr	Energy Supplement	Quads or More	Income Free Area	Base rate	Method 1 income test	Tests	31	FTBA_A	43
+FtbaMaxTpr	Energy Supplement	Quads or More	Reduction for excess income	Base rate	Method 1 income test	Tests	32	FTBA_A	43
+MaintIncFreeSingle	Energy Supplement	Quads or More	One Recipient of Child Support	Annual Income Limit	Maintenance Income Test	Tests	33	FTBA_A	43
+MaintIncFreeCouple	Energy Supplement	Quads or More	Both Parents Receive Child Support	Annual Income Limit	Maintenance Income Test	Tests	34	FTBA_A	43
+MaintIncFreeKids	Energy Supplement	Quads or More	Extra inc for deps	Annual Income Limit	Maintenance Income Test	Tests	35	FTBA_A	43
+MaintTpr	Energy Supplement	Quads or More	Extra inc for deps	Reduction rate for income excess 	Maintenance Income Test	Tests	36	FTBA_A	43
+FtbaChldIncLim	Energy Supplement	Quads or More	Extra inc for deps	Dependency Income limit ($ per year)	Maintenance Income Test	FTB Child Qualifying Rules	37	FTBA_A	43
+not_used303	Energy Supplement	Quads or More	Extra inc for deps	Disqualifying Age for NON-school students	Maintenance Income Test	FTB Child Qualifying Rules	38	FTBA_A	43
+not_used304	Energy Supplement	Quads or More	Extra inc for deps	Disqualifying Age as a senior secondary school child	Maintenance Income Test	FTB Child Qualifying Rules	39	FTBA_A	43
+Date		Standard Rate	From	At least one child < 5 yo	Period	Rates	1	FTBB	44
+Enddate		Standard Rate	To	At least one child < 5 yo	Period	Rates	2	FTBB	44
+FtbbDepUnder5A		Standard Rate	To	At least one child < 5 yo	Fortnightly Component	Rates	3	FTBB	44
+FtbbEsUnder5A		Energy Supplement	To	At least one child < 5 yo	Fortnightly Component	Rates	4	FTBB	44
+FtbbDepOver5A		Standard Rate	To	No child < 5 yo	Fortnightly Component	Rates	5	FTBB	44
+FtbbEsOver5A		Energy Supplement	To	No child < 5 yo	Fortnightly Component	Rates	6	FTBB	44
+FtbbDepUnder1A		Standard Rate	under 1 yo	Youngest child 	Fortnightly Component	Rates	7	FTBB	44
+FtbbDep1_4A		Standard Rate	1-4 yo	Youngest child 	Fortnightly Component	Rates	8	FTBB	44
+FtbbDep5_12A		Standard Rate	5-12 yo	Youngest child 	Fortnightly Component	Rates	9	FTBB	44
+FtbbDep13_16A		Standard Rate	13-16 yo       Single parents	Youngest child 	Fortnightly Component	Rates	10	FTBB	44
+FtbbSupA		Standard Rate	13-16 yo       Single parents	Youngest child 	End of Year Supplement (per family)	Rates	11	FTBB	44
+FtbSingPareSupMaxA		Standard Rate	13-16 yo       Single parents	Youngest child 	"Single Parent supplement 
+(ages 6-12 incl.)"	Rates	12	FTBB	44
+FtbbSecThr		Standard Rate	Income Free Area	Youngest child 	Secondary Earner Income Test	Tests	13	FTBB	44
+FtbbSecTpr		Standard Rate	Taper Rate	Youngest child 	Secondary Earner Income Test	Tests	14	FTBB	44
+FtbbPrimaryThr		Standard Rate	Taper Rate	Youngest child 	Primary earner income limit	Tests	15	FTBB	44
+Date		Basic Rate	From	At least one child < 5 yo	Period	Rates	1	FTBB_A	45
+Enddate		Basic Rate	To	At least one child < 5 yo	Period	Rates	2	FTBB_A	45
+FtbbDepUnder5A		Basic Rate	To	At least one child < 5 yo	Fortnightly Component	Rates	3	FTBB_A	45
+FtbbEsUnder5A		Energy Supplement	To	At least one child < 5 yo	Fortnightly Component	Rates	4	FTBB_A	45
+FtbbDepOver5A		Basic Rate	To	No child < 5 yo	Fortnightly Component	Rates	5	FTBB_A	45
+FtbbEsOver5A		Energy Supplement	To	No child < 5 yo	Fortnightly Component	Rates	6	FTBB_A	45
+FtbbDepUnder1A		Basic Rate	under 1 yo	Youngest child 	Fortnightly Component	Rates	7	FTBB_A	45
+FtbbDep1_4A		Basic Rate	1-4 yo	Youngest child 	Fortnightly Component	Rates	8	FTBB_A	45
+FtbbDep5_12A		Basic Rate	5-12 yo	Youngest child 	Fortnightly Component	Rates	9	FTBB_A	45
+FtbbDep13_16A		Basic Rate	13-16 yo	Youngest child 	Fortnightly Component	Rates	10	FTBB_A	45
+FtbbSupA		Basic Rate	13-16 yo	Youngest child 	End of Year Supplement (per family)	Rates	11	FTBB_A	45
+FtbSingPareSupMaxA		Basic Rate	13-16 yo	Youngest child 	"Single Parent supplement 
+(ages 6-12 incl.)"	Rates	12	FTBB_A	45
+FtbbSecThr		Basic Rate	Income Free Area	Youngest child 	Secondary Earning Income Test	Tests	13	FTBB_A	45
+FtbbSecTpr		Basic Rate	Taper Rate	Youngest child 	Secondary Earning Income Test	Tests	14	FTBB_A	45
+FtbbPrimaryThr		Basic Rate	Taper Rate	Youngest child 	Primary earner income limit	Tests	15	FTBB_A	45
+Date			From		Period	Rates	1	BabyBonus	46
+Enddate			To		Period	Rates	2	BabyBonus	46
+BabyBon1A			1st Child		Total Baby Bonus Payment	Rates	3	BabyBonus	46
+BabyBon2A			2nd and Subsequent Chidren		Total Baby Bonus Payment	Rates	4	BabyBonus	46
+BabyBonThr			2nd and Subsequent Chidren		Income limit for baby bonus	Tests	5	BabyBonus	46
+Date			From		Period	Rates	1	BabyBonus_A	47
+Enddate			To		Period	Rates	2	BabyBonus_A	47
+BabyBon1A			1st Child		Total Baby Bonus Payment	Rates	3	BabyBonus_A	47
+BabyBon2A			2nd and Subsequent Chidren		Total Baby Bonus Payment	Rates	4	BabyBonus_A	47
+BabyBonThr			2nd and Subsequent Chidren		Income limit for baby bonus	Tests	5	BabyBonus_A	47
+Date			From		Period	Tests	1	SchoolKidsBonus	48
+Enddate			To		Period	Tests	2	SchoolKidsBonus	48
+SkBonusIncThr			To		Income Threshold	Tests	3	SchoolKidsBonus	48
+SKPrimaryRateA			Primary School Children		SchoolKids Bonus per Child	Rates	4	SchoolKidsBonus	48
+SKSecStudRateA			Secondary School Children		SchoolKids Bonus per Child	Rates	5	SchoolKidsBonus	48
+Date			From		Period	Tests	1	SchoolKidsBonus_A	49
+Enddate			To		Period	Tests	2	SchoolKidsBonus_A	49
+SkBonusIncThr			To		Income Threshold	Tests	3	SchoolKidsBonus_A	49
+SKPrimaryRateA			Primary School Children		SchoolKids Bonus per Child	Rates	4	SchoolKidsBonus_A	49
+SKSecStudRateA			Secondary School Children		SchoolKids Bonus per Child	Rates	5	SchoolKidsBonus_A	49
+Date			From	Phase in Threshold	Period	Rate	1	SIFS	50
+Enddate			To	Phase in Threshold	Period	Rate	2	SIFS	50
+SifsMaxA			To	Phase in Threshold	Maximum Rate	Rate	3	SIFS	50
+SifsThrLwr			To	Phase in Threshold	Primary Earner	Tests	4	SIFS	50
+SifsTpr1			To	Taper in Rate	Primary Earner	Tests	5	SIFS	50
+SifsThrMid			To	Phase out threshold	Primary Earner	Tests	6	SIFS	50
+SifsTpr2			To	Taper out rate	Primary Earner	Tests	7	SIFS	50
+SifsThrUpr			To	Upper Threshold	Primary Earner	Tests	8	SIFS	50
+SifsPartThr			To	Income Free Area	Secondary Earner	Tests	9	SIFS	50
+SifsPartTpr			To	Taper out rate	Secondary Earner	Tests	10	SIFS	50
+Date			From	Phase in Threshold	Period	Rate	1	SIFS_A	51
+Enddate			To	Phase in Threshold	Period	Rate	2	SIFS_A	51
+SifsMaxA			To	Phase in Threshold	Maximum Rate	Rate	3	SIFS_A	51
+SifsThrLwr			To	Phase in Threshold	Primary Earner	Tests	4	SIFS_A	51
+SifsTpr1			To	Taper in Rate	Primary Earner	Tests	5	SIFS_A	51
+SifsThrMid			To	Phase out threshold	Primary Earner	Tests	6	SIFS_A	51
+SifsTpr2			To	Taper out rate	Primary Earner	Tests	7	SIFS_A	51
+SifsThrUpr			To	Upper Threshold	Primary Earner	Tests	8	SIFS_A	51
+SifsPartThr			To	Income Free Area	Secondary Earner	Tests	9	SIFS_A	51
+SifsPartTpr			To	Taper out rate	Secondary Earner	Tests	10	SIFS_A	51
+Date						Period:	1	TaxSchedule	52
+Enddate						Period:	2	TaxSchedule	52
+NumTaxBrkt						Number of tax brackets	3	TaxSchedule	52
+TaxThr1						(Statutory) Tax Free Threshold	4	TaxSchedule	52
+TaxRate1						Marginal rate in first tax step	5	TaxSchedule	52
+TaxThr2						Second step in income tax scale	6	TaxSchedule	52
+TaxRate2						Marginal rate in second tax step	7	TaxSchedule	52
+TaxThr3						Third step in income tax scale	8	TaxSchedule	52
+TaxRate3						Marginal rate in third tax step	9	TaxSchedule	52
+TaxThr4						Fourth step in income tax scale	10	TaxSchedule	52
+TaxRate4						Marginal rate in fourth tax step	11	TaxSchedule	52
+Date	Standard Rate	Singles	Singles	Rates	Period		1	MedicareAndLevies	53
+Enddate	Standard Rate	Singles	Singles	Rates	Period		2	MedicareAndLevies	53
+MedLevRate	Standard Rate	Singles	Singles	Rates	Period	Medicare Levy	3	MedicareAndLevies	53
+MedLevShdInRate	Shade-in rate	Singles	Singles	Rates	Period	Medicare Levy	4	MedicareAndLevies	53
+MedLevSingThr	Standard Threshold	Singles	Singles	Thresholds	Period	Medicare Levy	5	MedicareAndLevies	53
+MedLevSAPTOThr	Taxable Pensioners	Singles	Singles	Thresholds	Period	Medicare Levy	6	MedicareAndLevies	53
+not_used365	Seniors	Singles	Singles	Thresholds	Period	Medicare Levy	7	MedicareAndLevies	53
+MedLevFamIncThr	Standard	Singles	Families	Thresholds	Period	Medicare Levy	8	MedicareAndLevies	53
+MedLevSaptoFamIncThr	Taxable Pensioners	Singles	Families	Thresholds	Period	Medicare Levy	9	MedicareAndLevies	53
+not_used368	Seniors	Singles	Families	Thresholds	Period	Medicare Levy	10	MedicareAndLevies	53
+MedLevThrDep	Add on for each child	Singles	Families	Thresholds	Period	Medicare Levy	11	MedicareAndLevies	53
+MedLevDepAge1	Age limit 1	Singles	Dependants	Thresholds	Period	Medicare Levy	12	MedicareAndLevies	53
+MedLevDepAge2	Age limit 2	Singles	Dependants	Thresholds	Period	Medicare Levy	13	MedicareAndLevies	53
+MedLevDepIncThr1	Income threshold 1	Singles	Dependants	Thresholds	Period	Medicare Levy	14	MedicareAndLevies	53
+MedLevDepIncThr2	Income Threshold 2	Singles	Dependants	Thresholds	Period	Medicare Levy	15	MedicareAndLevies	53
+MedLevSurRate1	Tier 1	Singles	Dependants	Rates	Period	Medicare levy surcharge	16	MedicareAndLevies	53
+MedLevSurRate2	Tier 2	Singles	Dependants	Rates	Period	Medicare levy surcharge	17	MedicareAndLevies	53
+MedLevSurRate3	Tier 3	Singles	Dependants	Rates	Period	Medicare levy surcharge	18	MedicareAndLevies	53
+MedLevSurTier1ThrS	Tier 1	Singles	Dependants	Thresholds	Period	Medicare levy surcharge	19	MedicareAndLevies	53
+MedLevSurTier2ThrS	Tier 2	Singles	Dependants	Thresholds	Period	Medicare levy surcharge	20	MedicareAndLevies	53
+MedLevSurTier3ThrS	Tier 3	Singles	Dependants	Thresholds	Period	Medicare levy surcharge	21	MedicareAndLevies	53
+MedLevSurTier1ThrC	Tier 1	Families	Dependants	Thresholds	Period	Medicare levy surcharge	22	MedicareAndLevies	53
+MedLevSurTier2ThrC	Tier 2	Families	Dependants	Thresholds	Period	Medicare levy surcharge	23	MedicareAndLevies	53
+MedLevSurTier3ThrC	Tier 3	Families	Dependants	Thresholds	Period	Medicare levy surcharge	24	MedicareAndLevies	53
+MedLevSurThrDep	Add on per child	Families	Dependants	Thresholds	Period	Medicare levy surcharge	25	MedicareAndLevies	53
+MedLevSurDepAge1	Age limit 1	Dependants	Dependants	Thresholds	Period	Medicare levy surcharge	26	MedicareAndLevies	53
+MedLevSurDepAge2	Age limit 2	Dependants	Dependants	Thresholds	Period	Medicare levy surcharge	27	MedicareAndLevies	53
+not_used386	Age limit 2	Dependants	Dependants	Thresholds	Lower threshold	Flood Levy	28	MedicareAndLevies	53
+not_used387	Age limit 2	Dependants	Dependants	Thresholds	Upper threshold	Flood Levy	29	MedicareAndLevies	53
+not_used388	Age limit 2	Dependants	Dependants	Thresholds	Lower rate	Flood Levy	30	MedicareAndLevies	53
+not_used389	Age limit 2	Dependants	Dependants	Thresholds	Upper rate	Flood Levy	31	MedicareAndLevies	53
+TempBudgRepLevThr	Age limit 2	Dependants	Dependants	Thresholds	Threshold	Temporary Budget Repair Levy 	32	MedicareAndLevies	53
+TempBudgRepLevRate	Age limit 2	Dependants	Dependants	Thresholds	Rate 	Temporary Budget Repair Levy 	33	MedicareAndLevies	53
+Date			Single	No dependents	Period:	Dependant spouse rebate	1	RebatesOffsets	54
+Enddate			Single	No dependents	Period:		2	RebatesOffsets	54
+DSTOMax			Single	No dependents	Rates	Dependant spouse rebate	3	RebatesOffsets	54
+DSTOThr			Single	Separate net income thresholds	Tests	Dependant spouse rebate	4	RebatesOffsets	54
+DSTOTpr			Single	Withdrawal rates	Tests	Dependant spouse rebate	5	RebatesOffsets	54
+DSTOIncThr			Single	Income limit of dependent spouse rebate	Tests	Dependant spouse rebate	6	RebatesOffsets	54
+not_used396			Single	Yearly ATI Threshold	Dependency ATI limit for child or student	Dependant spouse rebate	7	RebatesOffsets	54
+DICTOMax			Single	No dependents	Rates	Dependant (Invalid and Carer) Tax Offset	8	RebatesOffsets	54
+DICTOThr			Single	Adjusted taxable income for offset threshold	Tests	Dependant (Invalid and Carer) Tax Offset	9	RebatesOffsets	54
+DICTOTpr			Single	Withdrawal rates	Tests	Dependant (Invalid and Carer) Tax Offset	10	RebatesOffsets	54
+DICTOIncThr			Single	Income limit of dependent spouse rebate	Tests	Dependant (Invalid and Carer) Tax Offset	11	RebatesOffsets	54
+LITOMax			Single	Rebate maximum amount	Rate	Low Income Tax Offset	12	RebatesOffsets	54
+LITOThr			Single	Income test threshold	Test	Low Income Tax Offset	13	RebatesOffsets	54
+LITOTpr			Single	Withdrawal rate	Test	Low Income Tax Offset	14	RebatesOffsets	54
+not_used404			Single	Rebate amount	Rate	Senior Australian Tax Offset	15	RebatesOffsets	54
+not_used405			Couple	Rebate amount	Rate	Senior Australian Tax Offset	16	RebatesOffsets	54
+not_used406			Single	Income threshold	Test	Senior Australian Tax Offset	17	RebatesOffsets	54
+not_used407			Couple	Income threshold	Test	Senior Australian Tax Offset	18	RebatesOffsets	54
+not_used408			Couple	Taper	Test	Senior Australian Tax Offset	19	RebatesOffsets	54
+not_used409			Single	Maximum rebate amount	Rate	Pensioners Tax Offset	20	RebatesOffsets	54
+not_used410			Couple	Maximum rebate amount	Rate	Pensioners Tax Offset	21	RebatesOffsets	54
+not_used411			Single	Income threshold	Test	Pensioners Tax Offset	22	RebatesOffsets	54
+not_used412			Couple	Income threshold	Test	Pensioners Tax Offset	23	RebatesOffsets	54
+not_used413			Couple	Withdrawal Rate 	Test	Pensioners Tax Offset	24	RebatesOffsets	54
+not_used414			Single	Seniors rebate supplement	Test	Pensioners Tax Offset	25	RebatesOffsets	54
+not_used415			Couple	Seniors rebate supplement	Test	Pensioners Tax Offset	26	RebatesOffsets	54
+SAPTOMaxS			Single	Maximum rebate amount	Rate	Senior Australians and Pensioners Tax Offset	27	RebatesOffsets	54
+SAPTOMaxC			Couple	Maximum rebate amount	Rate	Senior Australians and Pensioners Tax Offset	28	RebatesOffsets	54
+not_used418			Single	Income threshold	Test	Senior Australians and Pensioners Tax Offset	29	RebatesOffsets	54
+not_used419			Couple	Income threshold	Test	Senior Australians and Pensioners Tax Offset	30	RebatesOffsets	54
+SAPTOTpr			Couple	Taper	Test	Senior Australians and Pensioners Tax Offset	31	RebatesOffsets	54
+not_used421			Couple	Rate	Rate	Net Medical Expenses Offset	32	RebatesOffsets	54
+not_used422			Couple	Rate 2	Rate	Net Medical Expenses Offset	33	RebatesOffsets	54
+not_used423			Couple	Medical Expenses Threshold 1	Test (Income test = MLS Test)	Net Medical Expenses Offset	34	RebatesOffsets	54
+not_used424			Couple	Medical Expenses Threshold 2	Test (Income test = MLS Test)	Net Medical Expenses Offset	35	RebatesOffsets	54
+MAWTOMax			Couple	Rebate maximum amount	Rate	Mature age worker tax offset	36	RebatesOffsets	54
+MAWTOAge			Couple	Qualifying age	Test	Mature age worker tax offset	37	RebatesOffsets	54
+MAWTOThr1			Couple	Threshold to start phase-out	Test	Mature age worker tax offset	38	RebatesOffsets	54
+MAWTOThr2			Couple	Threshold to end phase-out	Test	Mature age worker tax offset	39	RebatesOffsets	54
+MAWTOPhsInRate			Couple	Phase-in Rate	Test	Mature age worker tax offset	40	RebatesOffsets	54
+MAWTOPhsOutRate			Couple	Phase-out Rate	Test	Mature age worker tax offset	41	RebatesOffsets	54
+not_used431			Couple	Share of earned income in private income	Test	Mature age worker tax offset	42	RebatesOffsets	54
+not_used432			Couple	Primary school	Maximum rebateable expenditure per child	Education Tax Refund	43	RebatesOffsets	54
+not_used433			Couple	Secondary school	Maximum rebateable expenditure per child	Education Tax Refund	44	RebatesOffsets	54
+not_used434			Couple	Secondary school	Proportion of expenses covered	Education Tax Refund	45	RebatesOffsets	54
+not_used435			Couple	Secondary school	Spouse income threshold	Spouse superannuation contribution tax offset	46	RebatesOffsets	54
+not_used436			Couple	Secondary school	Maximum contributions eligible for offset	Spouse superannuation contribution tax offset	47	RebatesOffsets	54
+not_used437			Couple	Secondary school	Offset rate	Spouse superannuation contribution tax offset	48	RebatesOffsets	54
+not_used438			Couple	Secondary school	Taper rate	Spouse superannuation contribution tax offset	49	RebatesOffsets	54
+BENTOThr			Couple	Secondary school	Maximum amount of rebate	Beneficiary Tax Offset	50	RebatesOffsets	54
+BENTORate			Couple	Secondary school	Phase out rate	Beneficiary Tax Offset	51	RebatesOffsets	54
+Date	Aged Under 65	Lump sum rate	Taxed elements	Pre-preservation age maximum rates	Period from:		1	SuperBenefits	55
+Enddate	Aged Under 65	Lump sum rate	Taxed elements	Pre-preservation age maximum rates	Period from:		2	SuperBenefits	55
+SuperPresAge	Aged Under 65	Lump sum rate	Taxed elements	Pre-preservation age maximum rates	Preservation age		3	SuperBenefits	55
+SuperTfAge	Aged Under 65	Lump sum rate	Taxed elements	Pre-preservation age maximum rates	Tax free age		4	SuperBenefits	55
+Drawdown5564	Aged Under 65	Lump sum rate	Taxed elements	Pre-preservation age maximum rates	Minimum annual drawdown factors for super income streams		5	SuperBenefits	55
+Drawdown6574	Aged 65-74	Lump sum rate	Taxed elements	Pre-preservation age maximum rates	Minimum annual drawdown factors for super income streams		6	SuperBenefits	55
+Drawdown7579	Aged 75-79	Lump sum rate	Taxed elements	Pre-preservation age maximum rates	Minimum annual drawdown factors for super income streams		7	SuperBenefits	55
+Drawdown8084	Aged 80-84	Lump sum rate	Taxed elements	Pre-preservation age maximum rates	Minimum annual drawdown factors for super income streams		8	SuperBenefits	55
+Drawdown8589	Aged 85-89	Lump sum rate	Taxed elements	Pre-preservation age maximum rates	Minimum annual drawdown factors for super income streams		9	SuperBenefits	55
+Drawdown9094	Aged 90-94	Lump sum rate	Taxed elements	Pre-preservation age maximum rates	Minimum annual drawdown factors for super income streams		10	SuperBenefits	55
+DrawdownGt95	Aged 95 or more	Lump sum rate	Taxed elements	Pre-preservation age maximum rates	Minimum annual drawdown factors for super income streams		11	SuperBenefits	55
+not_used456	Aged 95 or more	Lump sum rate	Taxed elements	Pre-preservation age maximum rates	Tax Rates on Superannuation Benefits		12	SuperBenefits	55
+not_used457	Aged 95 or more	Offset rate disability benefit for income stream	Taxed elements	Pre-preservation age maximum rates	Tax Rates on Superannuation Benefits		13	SuperBenefits	55
+not_used458	Aged 95 or more	Lump sum tax rate	Untaxed elements	Pre-preservation age maximum rates	Tax Rates on Superannuation Benefits		14	SuperBenefits	55
+not_used459	Aged 95 or more	Lump sum tax rate	Untaxed elements	Pre-preservation age maximum rates	Tax Rates on Superannuation Benefits		15	SuperBenefits	55
+not_used460	Tax rate 1	Lump sum	Taxed elements	Post-preservation but pre-tax free age maximum rates	Tax Rates on Superannuation Benefits		16	SuperBenefits	55
+not_used461	Tax rate 2	Lump sum	Taxed elements	Post-preservation but pre-tax free age maximum rates	Tax Rates on Superannuation Benefits		17	SuperBenefits	55
+TaxIncStrToRate	Offset rate	Income stream	Taxed elements	Post-preservation but pre-tax free age maximum rates	Tax Rates on Superannuation Benefits		18	SuperBenefits	55
+not_used463	Tax rate 1	Lump sum	Untaxed elements	Post-preservation but pre-tax free age maximum rates	Tax Rates on Superannuation Benefits		19	SuperBenefits	55
+not_used464	Tax rate 2	Lump sum	Untaxed elements	Post-preservation but pre-tax free age maximum rates	Tax Rates on Superannuation Benefits		20	SuperBenefits	55
+not_used465	Tax rate 3	Lump sum	Untaxed elements	Post-preservation but pre-tax free age maximum rates	Tax Rates on Superannuation Benefits		21	SuperBenefits	55
+not_used466	Tax rate 1	Lump sum	Untaxed elements	Post tax-free age	Tax Rates on Superannuation Benefits		22	SuperBenefits	55
+not_used467	Tax rate 2	Lump sum	Untaxed elements	Post tax-free age	Tax Rates on Superannuation Benefits		23	SuperBenefits	55
+UntaxIncStrToRate	Offset rate	Income stream	Untaxed elements	Post tax-free age	Tax Rates on Superannuation Benefits		24	SuperBenefits	55
+not_used469	Offset rate	Income stream	Untaxed elements	Low rate cap amount	Tax Rates on Superannuation Benefits		25	SuperBenefits	55
+not_used470	Offset rate	Income stream	Untaxed elements	Untaxed plan cap amount	Tax Rates on Superannuation Benefits		26	SuperBenefits	55
+not_used471	Offset rate	Income stream	Base limit	Untaxed plan cap amount	Bona fide redundancy - tax-free part		27	SuperBenefits	55
+not_used472	Offset rate	Income stream	Per complete year of service	Untaxed plan cap amount	Bona fide redundancy - tax-free part		28	SuperBenefits	55
+not_used472	Offset rate	Income stream	Cap	Untaxed plan cap amount	Super Transfer Balance 		29	SuperBenefits	55
