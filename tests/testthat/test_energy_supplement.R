@@ -33,4 +33,13 @@ test_that("Correct", {
   ee(f("austudy", has_partner = FALSE, n_dependants = 1L, isjspceoalfofcoahodeoc = FALSE), 239.20)
   ee(f("austudy", has_partner = TRUE, n_dependants = 0L, isjspceoalfofcoahodeoc = FALSE), 182.00)
   ee(f("austudy", has_partner = TRUE, n_dependants = 1L, isjspceoalfofcoahodeoc = FALSE), 200.20)
+  ee(f(c("austudy", "age pension"), has_partner = TRUE, n_dependants = 1L, isjspceoalfofcoahodeoc = FALSE),
+     c(200.20, 275.60))
+})
+
+test_that("Multi-length", {
+  expect_equal(energy_supplement("austudy",
+                                 has_partner = TRUE,
+                                 n_dependants = c(0L, 1L, 0L)), 
+               c(182, 200.2, 182))
 })
