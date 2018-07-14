@@ -100,8 +100,8 @@ qtrs_ahead <- function(x, y) {
   qtrs_ahead
 }
 
-#' vectorized switch 
-#' e.g. Switch(c("A", "B", "C", "A"), "A" = 1, "B" = 2, "C" = 11:14)
+# vectorized switch 
+# e.g. Switch(c("A", "B", "C", "A"), "A" = 1, "B" = 2, "C" = 11:14)
 Switch <- function(Expr, ...) {
   max.length <- prohibit_vector_recycling.MAXLENGTH(...)
   out <- rep_len(..1, max.length)

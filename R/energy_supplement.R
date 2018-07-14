@@ -1,10 +1,16 @@
 #' Energy supplement
-#' @description The ES is a supplementary payment that commenced on 20 September 2014. It was previously known as the clean energy supplement (CES). It is a fixed nominal amount; the supplement is neither indexed nor increased each year.
+#' @description The ES is a supplementary payment that commenced on 20 September 2014. It was previously known as the clean energy supplement (CES). It is a fixed nominal amount; the supplement is neither indexed nor increased each year. There is no means testing.
 #' @param qualifying_payment A string designating the payment type the individual is entitled to. Valid 
 #' @param has_partner (logical, default: \code{FALSE}) Does the individual have a partner?
+#' @param n_dependants How many dependants does the individual have? Default is zero.
+#' @param age The age of the individual.
+#' @param lives_at_home (logical, default: \code{FALSE}) Does the individual live at home?
+#' @param independent (logical, default: \code{FALSE}) For persons under 21, is the person 'independent'?
 #' @param isjspceoalfofcoahodeoc Is the recipient a single job seeker principal carer, either of large family or foster child/ren, or who is a home or distance educator of child/ren?
 #' @param long_term Is the individual a long-term welfare recipient?
 #' @param per Dictates whether the result is per year or per fortnight.
+#' 
+#' @return The energy supplement for each individual. Arguments are recycled, but only if length-one.
 #' @export energy_supplement
 #' 
 

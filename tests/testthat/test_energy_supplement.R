@@ -37,6 +37,14 @@ test_that("Correct", {
      c(200.20, 275.60))
 })
 
+test_that("per", {
+  expect_equal(energy_supplement("austudy",
+                                 has_partner = TRUE,
+                                 n_dependants = c(0L, 1L, 0L), 
+                                 per = "fortnight"), 
+               c(182, 200.2, 182) / 26)
+})
+
 test_that("Multi-length", {
   expect_equal(energy_supplement("austudy",
                                  has_partner = TRUE,

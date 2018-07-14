@@ -14,12 +14,23 @@ energy_supplement(qualifying_payment, has_partner = FALSE,
 
 \item{has_partner}{(logical, default: \code{FALSE}) Does the individual have a partner?}
 
+\item{n_dependants}{How many dependants does the individual have? Default is zero.}
+
+\item{age}{The age of the individual.}
+
+\item{lives_at_home}{(logical, default: \code{FALSE}) Does the individual live at home?}
+
+\item{independent}{(logical, default: \code{FALSE}) For persons under 21, is the person 'independent'?}
+
 \item{isjspceoalfofcoahodeoc}{Is the recipient a single job seeker principal carer, either of large family or foster child/ren, or who is a home or distance educator of child/ren?}
 
 \item{long_term}{Is the individual a long-term welfare recipient?}
 
 \item{per}{Dictates whether the result is per year or per fortnight.}
 }
+\value{
+The energy supplement for each individual. Arguments are recycled, but only if length-one.
+}
 \description{
-The ES is a supplementary payment that commenced on 20 September 2014. It was previously known as the clean energy supplement (CES). It is a fixed nominal amount; the supplement is neither indexed nor increased each year.
+The ES is a supplementary payment that commenced on 20 September 2014. It was previously known as the clean energy supplement (CES). It is a fixed nominal amount; the supplement is neither indexed nor increased each year. There is no means testing.
 }
