@@ -52,8 +52,13 @@ energy_supplement <- function(qualifying_payment,
                  "austudy")
   
   if (!all(.qp %in% permitted)) {
-    stop("`qualifying_payment` contains ", 
-         qualifying_payment[qualifying_payment %notin% permitted])
+    stop("`qualifying_payment` contains '", 
+         first(qualifying_payment[qualifying_payment %notin% permitted]),
+         "'. ", 
+         "The only valid entries are \n\t", 
+         paste0(permitted, sep = "\n\t"), "\n",
+         "Set other entries to an appropriate, valid payment.")
+         
   }
   
   rep_via <- function(v) {

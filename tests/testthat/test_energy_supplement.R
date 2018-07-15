@@ -1,5 +1,14 @@
 context("Energy supplement")
 
+test_that("Error handling", {
+  expect_error(energy_supplement(), 
+               regexp = "`qualifying_payment` is missing, with no default.", 
+               fixed = TRUE)
+  expect_error(energy_supplement("blooz"), 
+               regexp = "`qualifying_payment` contains 'blooz'", 
+               fixed = TRUE)
+})
+
 test_that("Correct", {
   # http://guides.dss.gov.au/guide-social-security-law/5/1/10/20
   ee <- expect_equal
