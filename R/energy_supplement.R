@@ -19,7 +19,7 @@
 #' @param independent (logical, default: \code{FALSE}) For persons under 21, is the person 'independent'?
 #' @param isjspceoalfofcoahodeoc Is the recipient a single job seeker principal carer, either of large family or foster child/ren, or who is a home or distance educator of child/ren?
 #' @param long_term Is the individual a long-term welfare recipient?
-#' @param per Dictates whether the result is per year or per fortnight.
+#' @param per Dictates whether the result is per year, per fortnight, or per quarter. By default, yearly payments are returned, with a message. Payments are generally made each fortnight though recipients can elect to have them paid quarterly.
 #' 
 #' @return The energy supplement for each individual. Arguments are recycled, but only if length-one.
 #' @export energy_supplement
@@ -37,7 +37,7 @@ energy_supplement <- function(qualifying_payment,
                               independent = FALSE,
                               isjspceoalfofcoahodeoc = FALSE,
                               long_term = FALSE,
-                              per = c("year", "fortnight")) {
+                              per = c("year", "fortnight", "quarter")) {
   if (missing(qualifying_payment)) {
     stop("`qualifying_payment` is missing, with no default.")
   }
@@ -51,6 +51,25 @@ energy_supplement <- function(qualifying_payment,
                                         independent,
                                         isjspceoalfofcoahodeoc,
                                         long_term)
+  if (missing(per)) {
+    per <- per[1L]
+    message("`per` not set; calculating ", paste0(per, "ly"), " payment.")
+  } else {
+    if (!is.character(per)) {
+      stop("`per` was type '", typeof(per), "', but must be a string.")
+    }
+    
+    if (length(per) > 1L) {
+      per <- per[1L]
+      warning("`per` is provided but has length > 1 so only the first element ", 
+              "(`per = '", per, "'`) will be used.")
+    }
+    
+    if (per %notin% c("year", "fortnight", "quarter")) {
+      stop("`per = '", per, "'` but must be one of 'year', 'fortnight', or 'quarter'. ")
+    }
+    
+  }
   
   .qp <- tolower(qualifying_payment)
   if (length(.qp) != max.length) {
@@ -163,11 +182,16 @@ energy_supplement <- function(qualifying_payment,
                              182, 
                              239.20))
            })
-  if (per[1L] == "fortnight") {
-    out / 26
-  } else {
-    out
-  }
   
+  switch(per,
+         "fortnight" = {
+           out / 26
+         },
+         "year" = {
+           out
+         }, 
+         "quarter" = {
+           out / 4
+         })
 }
 

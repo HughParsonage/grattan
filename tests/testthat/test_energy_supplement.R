@@ -9,6 +9,21 @@ test_that("Error handling", {
                fixed = TRUE)
 })
 
+test_that("per handling", {
+  expect_message(energy_supplement("pension"), 
+                 regexp = "`per` not set; calculating yearly payment.", 
+                 fixed = TRUE)
+  expect_error(energy_supplement("pension", per = 2), 
+               "`per` was type 'double', but must be a string.", 
+               fixed = TRUE)
+  expect_warning(energy_supplement("pension", per = c("year", "fortnight")), 
+                 "`per` is provided but has length > 1 so only the first element (`per = 'year'`) will be used.",
+                 fixed = TRUE)
+  expect_error(energy_supplement("pension", per = "goof"), 
+               "`per = 'goof'` but must be one of 'year', 'fortnight', or 'quarter'.", 
+               fixed = TRUE)
+})
+
 test_that("Correct", {
   # http://guides.dss.gov.au/guide-social-security-law/5/1/10/20
   ee <- expect_equal
@@ -57,6 +72,11 @@ test_that("per", {
                                  n_dependants = c(0L, 1L, 0L), 
                                  per = "fortnight"), 
                c(182, 200.2, 182) / 26)
+  expect_equal(energy_supplement("austudy",
+                                 has_partner = TRUE,
+                                 n_dependants = c(0L, 1L, 0L), 
+                                 per = "quarter"), 
+               c(182, 200.2, 182) / 4)
 })
 
 test_that("Multi-length", {
