@@ -37,7 +37,12 @@ test_that("Correct", {
   ee(f("youth allowance", has_partner = TRUE, n_dependants = 0L), 182)
   ee(f("youth allowance", has_partner = TRUE, n_dependants = 1L), 200.20)
   ee(f("youth allowance", has_partner = FALSE, n_dependants = 1L, isjspceoalfofcoahodeoc = TRUE), 312.00)
-  ## ...
+  ee(f("youth disability", has_partner = FALSE, age = 17, lives_at_home = TRUE), 153.40)
+  ee(f("youth disability", has_partner = FALSE, age = 17, lives_at_home = FALSE), 221.00)
+  ee(f("youth disability", has_partner = FALSE, age = 19, lives_at_home = TRUE), 171.60)
+  ee(f("youth disability", has_partner = FALSE, age = 19, lives_at_home = FALSE), 221.00)
+  ee(f("youth disability", has_partner = TRUE, age = 19, lives_at_home = FALSE), 200.20)
+  ee(f("youth disability", has_partner = TRUE), 200.20)
   ee(f("austudy", has_partner = FALSE, n_dependants = 0L, isjspceoalfofcoahodeoc = FALSE), 182.00)
   ee(f("austudy", has_partner = FALSE, n_dependants = 1L, isjspceoalfofcoahodeoc = FALSE), 239.20)
   ee(f("austudy", has_partner = TRUE, n_dependants = 0L, isjspceoalfofcoahodeoc = FALSE), 182.00)

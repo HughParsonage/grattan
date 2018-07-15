@@ -1,7 +1,18 @@
 #' Energy supplement
 #' @description The ES is a supplementary payment that commenced on 20 September 2014. It was previously known as the clean energy supplement (CES). It is a fixed nominal amount; the supplement is neither indexed nor increased each year. There is no means testing.
-#' @param qualifying_payment A string designating the payment type the individual is entitled to. Valid 
-#' @param has_partner (logical, default: \code{FALSE}) Does the individual have a partner?
+#' @param qualifying_payment A character vector designating the payment type the individual is entitled to. Valid strings are
+#' \describe{
+#' \item{pension}{All pensions and bereavement allowance}
+#' \item{seniors health card}{Commonwealth Seniors Health Card}
+#' \item{disability pension}{Disability support pension (over 21)}
+#' \item{allowance}{All allowances not elsewhere described, 
+#' \emph{viz.} Newstart allowance, Widow allowance, Partner allowance, Sickness allowance}
+#' \item{parenting}{Parenting payments}
+#' \item{youth allowance}{Youth allowance (but not receiving youth disability supplement)}
+#' \item{youth disability}{Youth allowance but also receiving youth disability supplement}
+#' \item{austudy}{Austudy recipients}
+#' }
+#' @param has_partner (logical, default: \code{FALSE}) Does the individual have a partner? For persons with partners but separated due to the partner's illness or imprisonment, this may be true or false depending on the eligibility of the qualifying payment.
 #' @param n_dependants How many dependants does the individual have? Default is zero.
 #' @param age The age of the individual.
 #' @param lives_at_home (logical, default: \code{FALSE}) Does the individual live at home?
@@ -12,6 +23,10 @@
 #' 
 #' @return The energy supplement for each individual. Arguments are recycled, but only if length-one.
 #' @export energy_supplement
+#' @source 
+#' \emph{Social Security Guide} by the Department of Social Services. 
+#' Chapter 5, \sQuote{Payment rates}, s. 5.1.10.20 \dQuote{Clean Energy Household Assistance: current rates}.
+#' \url{http://guides.dss.gov.au/guide-social-security-law/5/1/10/20}
 #' 
 
 energy_supplement <- function(qualifying_payment, 
@@ -48,7 +63,8 @@ energy_supplement <- function(qualifying_payment,
                  "disability pension", 
                  "allowance", 
                  "parenting", 
-                 "youth allowance", 
+                 "youth allowance",
+                 "youth disability",
                  "austudy")
   
   if (!all(.qp %in% permitted)) {
@@ -127,6 +143,17 @@ energy_supplement <- function(qualifying_payment,
                                                      182)))))
              
            },
+           
+           "youth disability" = {
+             if_else(has_partner, 
+                     200.20,
+                     if_else(lives_at_home, 
+                             if_else(age < 18, 
+                                     153.40,
+                                     171.60),
+                             221))
+           },
+           
            "austudy" = {
              if_else(has_partner,
                      if_else(n_dependants == 0L, 
