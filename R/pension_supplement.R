@@ -1,6 +1,6 @@
 #' Pension Supplement
 #' 
-#' The Pension Supplement gets added to the max rate of payment before income reduction tests are applied.
+#' The Pension Supplement gets added to the max rate of payment before income reduction tests are applied. Note that if the individual is part of a couple, the rate indicates the payment amount per person, not for the couple.
 #' Can be claimed by those receiving Age Pension, Carer Payment, Wife Pension, Widow B Pension, Bereavement Allowance, or Disability Support Pension (except if under 21 and have no children).
 #' Can also be claimed if over age pension age and are receiving ABSTUDY, Austudy, Parenting Payment, Partner Allowance, Special Benefit, or Widow Allowance.
 #' Can still claim the basic amount if single, under age pension age, and receive the Parenting Payment.
