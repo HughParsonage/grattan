@@ -4,21 +4,59 @@
 \alias{carer_payment}
 \title{Carer Payment}
 \usage{
-carer_payment(carer_ordinary_income = 0,
-  carer_annual_income = carer_ordinary_income * 26, has_partner = FALSE,
-  n_dependants = 0L, carer_partner_fortnightly_income = 0,
+carer_payment(Date = NULL, fy.year = NULL, carer_fortnightly_income = 0,
+  carer_annual_income = carer_fortnightly_income * 26,
+  carer_has_partner = FALSE, carer_n_dependants = 0L,
+  carer_partner_fortnightly_income = 0,
   carer_partner_annual_income = carer_partner_fortnightly_income * 26,
-  Date = NULL, fy.year = NULL, carer_assets_value = 0,
-  is_home_owner = FALSE, illness_separated_couple = FALSE,
-  dclad_eligible = TRUE, adat_eligible = FALSE, high_adat = FALSE,
-  living_at_home = FALSE, care_receiver_fortnightly_income = 0,
+  carer_assets_value = 0, carer_is_home_owner = FALSE,
+  carer_illness_separated_couple = FALSE, dclad_eligible = TRUE,
+  low_adat = FALSE, high_adat = FALSE, living_at_home = FALSE,
+  receiving_other_payment = FALSE, care_receiver_fortnightly_income = 0,
   care_receiver_annual_income = 0, care_receiver_asset_value = 0,
   partner_annual_income = 0, partner_asset_value = 0,
   children_annual_income = 0, children_asset_value = 0)
 }
-\description{
-Carer Payment
-}
-\details{
+\arguments{
+\item{Date, fy.year}{The financial year. Currently only 2015-16 is supported (the most recent survey of income and housing results).}
 
+\item{carer_fortnightly_income, carer_annual_income}{Carer's income for means-testing purposes. Provide one but not both.}
+
+\item{carer_has_partner}{(logical, default: \code{FALSE}) Does the carer have a partner?}
+
+\item{carer_n_dependants}{How many dependants does the carer have? Default is zero.}
+
+\item{carer_partner_fortnightly_income, carer_partner_annual_income}{The carer's partner's income.}
+
+\item{carer_assets_value}{Total value of carer's household assets.}
+
+\item{carer_is_home_owner}{(logical, default: \code{FALSE}) Does the carer own their own home?}
+
+\item{carer_illness_separated_couple}{Is the couple separated by illness? (Affects the assets test.)}
+
+\item{dclad_eligible}{Is the person receiving care a DCLAD qualifying child as defined in http://guides.dss.gov.au/guide-social-security-law/1/1/q/17 ?}
+
+\item{low_adat, high_adat}{Does the person receiving care have a low or high ADAT score as defined in http://guides.dss.gov.au/guide-social-security-law/1/1/a/78 ?}
+
+\item{living_at_home}{Does the person receiving care live at home with their parents?}
+
+\item{receiving_other_payment}{Is the care receiver receiving other social security payments?}
+
+\item{care_receiver_fortnightly_income}{Care receiver's fortnightly income}
+
+\item{care_receiver_asset_value}{Care receiver's asset value}
+
+\item{partner_annual_income}{Care receiver's partner's annual income}
+
+\item{partner_asset_value}{Care receiver's partner's asset value}
+
+\item{children_annual_income}{Care receiver's partner's annual income}
+
+\item{children_asset_value}{Care receiver's children's asset value}
+}
+\description{
+Carer payment is available to those who provide constant for a person who has a physical, intellectual, or psychiatric disability. Note that many of the arguments relate to the individual who receives the care (indicated by not starting with 'carer_'). Payment is made to the carer and not to the person receiving the care.
+}
+\author{
+Matthew Katzen
 }
