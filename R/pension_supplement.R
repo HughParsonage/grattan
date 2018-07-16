@@ -24,7 +24,7 @@
 
 pension_supplement <- function(has_partner = FALSE,
                                age = 70,
-                               n_dependents = 0,
+                               n_dependants = 0,
                                parenting_payment = FALSE,
                                Date = NULL,
                                fy.year = NULL,
@@ -77,7 +77,7 @@ pension_supplement <- function(has_partner = FALSE,
   input[, eligible := if_else(age_pension_age_requirement,
                               age >= age_pension_age,
                               if_else(disability_support_pension,
-                                      !(age < 21 & n_dependents == 0),#ineligble if under 21 and have no kids
+                                      !(age < 21 & n_dependants == 0),#ineligble if under 21 and have no kids
                                       TRUE))]
 
   input[ ,max_rate_March_2016 :=
