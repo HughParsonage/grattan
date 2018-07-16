@@ -20,7 +20,7 @@
 #' @author Matthew Katzen
 #' @export
 
-#note: annual is multiplied by 364/14 = 26
+#note: annual = rate multiplied by 364/14 (= 26)
 
 pension_supplement <- function(has_partner = FALSE,
                                age = 70,
