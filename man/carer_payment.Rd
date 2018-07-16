@@ -4,13 +4,17 @@
 \alias{carer_payment}
 \title{Carer Payment}
 \usage{
-carer_payment(dclad_eligible = TRUE, adat_eligible = FALSE,
-  n_dependents = 0, high_adat = FALSE, living_at_home = FALSE,
-  carer_fortnightly_income = 0, carer_annual_income = 0,
-  carer_asset_value = 0, care_receiver_fortnightly_income = 0,
+carer_payment(carer_ordinary_income = 0,
+  carer_annual_income = carer_ordinary_income * 26, has_partner = FALSE,
+  n_dependants = 0L, carer_partner_fortnightly_income = 0,
+  carer_partner_annual_income = carer_partner_fortnightly_income * 26,
+  Date = NULL, fy.year = NULL, carer_assets_value = 0,
+  is_home_owner = FALSE, illness_separated_couple = FALSE,
+  dclad_eligible = TRUE, adat_eligible = FALSE, high_adat = FALSE,
+  living_at_home = FALSE, care_receiver_fortnightly_income = 0,
   care_receiver_annual_income = 0, care_receiver_asset_value = 0,
-  partner_income = 0, partner_assets = 0, children_income = 0,
-  children_assets = 0)
+  partner_annual_income = 0, partner_asset_value = 0,
+  children_annual_income = 0, children_asset_value = 0)
 }
 \description{
 Carer Payment
