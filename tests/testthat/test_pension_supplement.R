@@ -9,6 +9,8 @@ test_that("Warnings and Errors", {
                  reg_exp = "`fy.year` and `Date` both used. Ignoring `fy.year`.")
   expect_error(suppressWarnings(pension_supplement(per = 'month')),
                reg_exp = "per can only take values `fortnight` or `annual`")
+  expect_error(suppressWarnings(pension_supplement(has_partner = FALSE, seperated_couple = TRUE)),
+               reg_exp = "incompatible values of `has_partner` and `partner_seperated`")
 })
 
 test_that("Rates", {
@@ -19,6 +21,8 @@ test_that("Rates", {
             49)
   expect_equal(suppressWarnings(pension_supplement(age_pension_age_requirement = TRUE, age = 65)),
             65)
+  expect_equal(suppressWarnings(pension_supplement(has_partner = TRUE, seperated_couple = TRUE)),
+               65)
   #basic rates
   expect_equal(suppressWarnings(pension_supplement(has_partner = FALSE, parenting_payment = TRUE)),
             22.70)
@@ -26,6 +30,7 @@ test_that("Rates", {
             22.70)
   expect_equal(suppressWarnings(pension_supplement(has_partner = TRUE, overseas_absence = TRUE)),
             18.7)
+  
 })
 
 test_that("Ineligibles", {

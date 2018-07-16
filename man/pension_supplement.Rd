@@ -7,11 +7,37 @@
 pension_supplement(has_partner = FALSE, age = 70, n_dependents = 0,
   parenting_payment = FALSE, Date = NULL, fy.year = NULL,
   age_pension_age_requirement = FALSE, disability_support_pension = FALSE,
-  per = "fortnight", overseas_absence = FALSE)
+  per = "fortnight", overseas_absence = FALSE, seperated_couple = FALSE)
+}
+\arguments{
+\item{has_partner}{Does the individual have a partner?}
+
+\item{age}{The individual's age. Default is 18 years.}
+
+\item{parenting_payment}{Is the individual receiving parenting payment?}
+
+\item{Date}{Date. Default is "2016/03/01" if fy.year is not present.}
+
+\item{fy.year}{Financial year. Default is "2015-16" if Date is not present.}
+
+\item{age_pension_age_requirement}{Does the payment for which the pension supplement is being added to require the individual to be over age pension age to receive? i.e. one of ABSTUDY, Austudy, Parenting Payment, Partner Allowance, Special Benefit, Widow Allowance.}
+
+\item{disability_support_pension}{Is the individual receiving the disability support pension?}
+
+\item{per}{How often the payment will be made. Default is fortnightly.}
+
+\item{overseas_absence}{Will the individual be living outside of Australia for more than 6 weeks of the year?}
+
+\item{seperated_couple}{Is the individual part of an illness separated couple, respite care couple, or partner imprisoned?}
+
+\item{n_dependants}{How many dependant children does the individual have?}
 }
 \description{
 The Pension Supplement gets added to the max rate of payment before income reduction tests are applied.
-Can be claimed by those receiving Age Pension, Carer Payment, Wife Pension, Widow B Pension, Bereavement Allowance, Disability Support Pension (except if under 21 and have no children).
-Can also receive if over age pension age and  receiving ABSTUDY, Austudy, Parenting Payment, Partner Allowance, Special Benefit, or, Widow Allowance
-Can still receive the basic amount if single, under age pension age, and receive the Parenting Payment
+Can be claimed by those receiving Age Pension, Carer Payment, Wife Pension, Widow B Pension, Bereavement Allowance, or Disability Support Pension (except if under 21 and have no children).
+Can also be claimed if over age pension age and are receiving ABSTUDY, Austudy, Parenting Payment, Partner Allowance, Special Benefit, or Widow Allowance.
+Can still claim the basic amount if single, under age pension age, and receive the Parenting Payment.
+}
+\author{
+Matthew Katzen
 }

@@ -15,6 +15,8 @@
 #' @param disability_support_pension Is the individual receiving the disability support pension?
 #' @param per How often the payment will be made. Default is fortnightly. 
 #' @param overseas_absence Will the individual be living outside of Australia for more than 6 weeks of the year?
+#' @param seperated_couple Is the individual part of an illness separated couple, respite care couple, or partner imprisoned?
+#' 
 #' @author Matthew Katzen
 #' @export
 
@@ -29,7 +31,16 @@ pension_supplement <- function(has_partner = FALSE,
                                age_pension_age_requirement = FALSE,
                                disability_support_pension = FALSE,
                                per = 'fortnight',
-                               overseas_absence = FALSE){
+                               overseas_absence = FALSE,
+                               seperated_couple = FALSE){
+  
+  if(!(per %in% c('fortnight', 'annual'))){
+    stop("per can only take values `fortnight` or `annual`")
+  }
+  
+  if(any(!has_partner & seperated_couple)) {
+    stop("incompatible values of `has_partner` and `partner_seperated`")
+  }
   
   if (is.null(Date)) {
     if (is.null(fy.year)) {
@@ -48,11 +59,7 @@ pension_supplement <- function(has_partner = FALSE,
     }
   }
   
-  if(!(per %in% c('fortnight', 'annual'))){
-    stop("per can only take values `fortnight` or `annual`")
-  }
-  
-  input <- data.table(do.call(cbind.data.frame, mget(ls()))) #recycles vectors
+  input <- data.table(do.call(cbind.data.frame, mget(ls()))) #convert arguments to data table
   
   
   input[ ,age_pension_age :=  #increase:https://www.humanservices.gov.au/individuals/services/centrelink/age-pension/eligibility-payment-rates/age-rules
@@ -74,14 +81,10 @@ pension_supplement <- function(has_partner = FALSE,
                                       TRUE))]
 
   input[ ,max_rate_March_2016 :=
-    if_else(has_partner,
+    if_else(has_partner & !seperated_couple,
             49,
             65)]
-  #not exactly sure how min rate works. Think it is the minimum payment one can receive before the individual becomes ineligible due to income reduction tests and therefore isn't used explicitly
-  # min_rate_March_2016 <-
-  #   if_else(has_partner,
-  #           52.60,
-  #           34.90)
+
   input[, basic_rate_March_2016 :=
     if_else(has_partner,
             18.7,
