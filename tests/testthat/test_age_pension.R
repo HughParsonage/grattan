@@ -117,3 +117,8 @@ test_that("today helper", {
   expect_equal(.age_pension_today2qtr("2017-03-21"), "2017-03-20")
   expect_message(age_pension(), "not set")
 })
+
+
+test_that("guides.dss.gov.au deeming examples", {
+  skip("Needed but not yet")
+})
