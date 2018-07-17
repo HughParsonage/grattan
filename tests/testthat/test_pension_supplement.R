@@ -15,35 +15,35 @@ test_that("Warnings and Errors", {
 
 test_that("Rates", {
   #Max rates
-  expect_equal(suppressWarnings(pension_supplement(has_partner = FALSE)),
-            65)
-  expect_equal(suppressWarnings(pension_supplement(has_partner = TRUE)),
-            49)
-  expect_equal(suppressWarnings(pension_supplement(age_pension_age_requirement = TRUE, age = 65)),
-            65)
-  expect_equal(suppressWarnings(pension_supplement(has_partner = TRUE, seperated_couple = TRUE)),
+  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = FALSE),
+               65)
+  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = TRUE),
+               49)
+  expect_equal(pension_supplement(Date = "2016/03/01", qualifying_payment = 'age-pension', age = 65),
+               65)
+  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = TRUE, seperated_couple = TRUE),
                65)
   #basic rates
-  expect_equal(suppressWarnings(pension_supplement(has_partner = FALSE, parenting_payment = TRUE)),
-            22.70)
-  expect_equal(suppressWarnings(pension_supplement(has_partner = FALSE, overseas_absence = TRUE)),
-            22.70)
-  expect_equal(suppressWarnings(pension_supplement(has_partner = TRUE, overseas_absence = TRUE)),
-            18.7)
+  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = FALSE, parenting_payment = TRUE),
+               22.70)
+  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = FALSE, overseas_absence = TRUE),
+               22.70)
+  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = TRUE, overseas_absence = TRUE),
+               18.7)
   
 })
 
 test_that("Ineligibles", {
-  expect_equal(suppressWarnings(pension_supplement(age_pension_age_requirement = TRUE, age = 20)),
-            0)
-  expect_equal(suppressWarnings(pension_supplement(disability_support_pension = TRUE, age = 20, n_dependents = 0)),
-            0)
-  expect_equal(suppressWarnings(pension_supplement(age_pension_age_requirement = TRUE, age = 65, Date = as.Date("2017/07/01"))),
-            0)
+  expect_equal(pension_supplement(Date = "2016/03/01", qualifying_payment = 'austudy', age = 20),
+               0)
+  expect_equal(pension_supplement(Date = "2016/03/01", disability_support_pension = TRUE, age = 20, n_dependents = 0),
+               0)
+  expect_equal(pension_supplement(Date = "2018/03/01", qualifying_payment = 'partner_allowance', age = 65),
+               0)
 })
 
 test_that("Multiple People", {
-  expect_equal(suppressWarnings(pension_supplement(has_partner = c(T,F))),
+  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = c(T,F)),
                c(49, 65))
 })
 
