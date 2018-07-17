@@ -21,7 +21,7 @@ test_that("Eligibility", {
                              living_at_home = FALSE,
                              care_receiver_annual_income = 50000,
                              parents_annual_income = 100000),
-               age_pension)
+               age_pension())
   expect_equal(carer_payment(Date = "2018-03-20", 
                              dclad_eligible = TRUE,
                              living_at_home = TRUE,
