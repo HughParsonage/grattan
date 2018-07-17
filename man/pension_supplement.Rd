@@ -4,7 +4,7 @@
 \alias{pension_supplement}
 \title{Pension Supplement}
 \usage{
-pension_supplement(has_partner = FALSE, age = 70, n_dependents = 0,
+pension_supplement(has_partner = FALSE, age = 70, n_dependants = 0,
   parenting_payment = FALSE, Date = NULL, fy.year = NULL,
   age_pension_age_requirement = FALSE, disability_support_pension = FALSE,
   per = "fortnight", overseas_absence = FALSE, seperated_couple = FALSE)
@@ -13,6 +13,8 @@ pension_supplement(has_partner = FALSE, age = 70, n_dependents = 0,
 \item{has_partner}{Does the individual have a partner?}
 
 \item{age}{The individual's age. Default is 18 years.}
+
+\item{n_dependants}{How many dependant children does the individual have?}
 
 \item{parenting_payment}{Is the individual receiving parenting payment?}
 
@@ -29,11 +31,9 @@ pension_supplement(has_partner = FALSE, age = 70, n_dependents = 0,
 \item{overseas_absence}{Will the individual be living outside of Australia for more than 6 weeks of the year?}
 
 \item{seperated_couple}{Is the individual part of an illness separated couple, respite care couple, or partner imprisoned?}
-
-\item{n_dependants}{How many dependant children does the individual have?}
 }
 \description{
-The Pension Supplement gets added to the max rate of payment before income reduction tests are applied.
+The Pension Supplement gets added to the max rate of payment before income reduction tests are applied. Note that if the individual is part of a couple, the rate indicates the payment amount per person, not for the couple.
 Can be claimed by those receiving Age Pension, Carer Payment, Wife Pension, Widow B Pension, Bereavement Allowance, or Disability Support Pension (except if under 21 and have no children).
 Can also be claimed if over age pension age and are receiving ABSTUDY, Austudy, Parenting Payment, Partner Allowance, Special Benefit, or Widow Allowance.
 Can still claim the basic amount if single, under age pension age, and receive the Parenting Payment.
