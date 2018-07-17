@@ -10,6 +10,7 @@ age_pension_age <- function(when = Sys.Date(),
   }
   if (missing(when)) {
     message("`when` not set, so using when = ", when, ".")
+    max.length <- length(sex)
   } else {
     lwhen <- length(when)
     lsex <- length(sex)
@@ -54,24 +55,25 @@ age_pension_age <- function(when = Sys.Date(),
     Switch(sex, 
            "f" = {
              o[when <= "1993-94"] <- 60
-             o[when == "1994-95"] <- 60.5
+             o[when == "1994-95"] <- 60
              o[when == "1995-96"] <- 60.5
-             o[when == "1996-97"] <- 61
+             o[when == "1996-97"] <- 60.5
              o[when == "1997-98"] <- 61
-             o[when == "1998-99"] <- 61.5
+             o[when == "1998-99"] <- 61
              o[when == "1999-00"] <- 61.5
-             o[when == "2000-01"] <- 62
+             o[when == "2000-01"] <- 61.5
              o[when == "2001-02"] <- 62
-             o[when == "2002-03"] <- 62.5
+             o[when == "2002-03"] <- 62
              o[when == "2003-04"] <- 62.5
-             o[when == "2004-05"] <- 63
+             o[when == "2004-05"] <- 62.5
              o[when == "2005-06"] <- 63
-             o[when == "2006-07"] <- 63.5
+             o[when == "2006-07"] <- 63
              o[when == "2007-08"] <- 63.5
-             o[when == "2008-09"] <- 64
+             o[when == "2008-09"] <- 63.5
              o[when == "2009-10"] <- 64
-             o[when == "2010-11"] <- 64.5
+             o[when == "2010-11"] <- 64
              o[when == "2011-12"] <- 64.5
+             o[when == "2012-13"] <- 64.5
            })
   } else {
     if (!inherits(when, "Date")) {
