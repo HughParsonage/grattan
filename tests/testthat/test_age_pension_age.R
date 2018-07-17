@@ -31,3 +31,17 @@ test_that("Women before 1995", {
   
 })
 
+test_that("65", {
+  expect_equal(age_pension_age(when = c("2014-15", "2015-16"), 
+                               sex = c("male", "female")), 
+               c(65, 65))
+})
+
+
+test_that("Future dates", {
+  res <- age_pension_age(when = c("2016-17", "2018-19", "2021-22", "2022-23", "2030-31"), 
+                         sex = c("m", "f", "m", "f", "m"))
+  expect_equal(res, c(65, 65.5, 66.5, 66.5, 67))
+  res <- age_pension_age(when = c("2016-17", "2018-19", "2021-22", "2022-23", "2030-31"))
+  expect_equal(res, c(65, 65.5, 66.5, 66.5, 67))
+})
