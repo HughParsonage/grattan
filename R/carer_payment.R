@@ -72,8 +72,6 @@ carer_payment <- function(Date = NULL,
   } else {
     if (is.null(fy.year)) {
       fy.year <- date2fy(Date)
-    } else {
-      warning("`fy.year` and `Date` both used. Ignoring `fy.year`.")
     }
   }
   
@@ -103,7 +101,7 @@ carer_payment <- function(Date = NULL,
   
   care_receiver_asset_test <- input[ ,if_else(dclad_eligible & !living_at_home,
                                               care_receiver_asset_value, #child living away from home
-                                              care_receiver_asset_value + partner_asset_value + children_asset_value + parents_annual_income)] #all other cases
+                                              care_receiver_asset_value + partner_asset_value + children_asset_value + parents_asset_value)] #all other cases
   
   income_eligible <- input[ ,or(high_adat & receiving_other_payment,
                                 care_receiver_income_test < 108828)]
