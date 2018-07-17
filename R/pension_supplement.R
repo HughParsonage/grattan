@@ -28,7 +28,6 @@ pension_supplement <- function(has_partner = FALSE,
                                Date = NULL,
                                fy.year = NULL,
                                qualifying_payment = 'age_pension',
-                               disability_support_pension = FALSE,
                                per = 'fortnight',
                                overseas_absence = FALSE,
                                seperated_couple = FALSE){
