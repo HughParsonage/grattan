@@ -2,15 +2,15 @@
 % Please edit documentation in R/family_tax_benefit.R
 \name{family_tax_benefit}
 \alias{family_tax_benefit}
-\title{FAMILY TAX BENEFIT}
+\title{Family tax benefit}
 \usage{
-family_tax_benefit(data, income_test_ftbA_1_bound = 51027,
+family_tax_benefit(.data, income_test_ftbA_1_bound = 51027,
   income_test_ftbA_2_bound = 94316, income_test_ftbB_bound = 5402,
   taper_ftbA_1 = 0.2, taper_ftbA_2 = 0.3, taper_ftbB = 0.2,
   per = "annual")
 }
 \arguments{
-\item{data}{Data table input. Each row is an individual. Column names are `HH_id`: household id, `id`: individual id, `age`: individual's age, `income`: individual's income, `in_secondary_school`: does the individual attend secondary school, `single_parent`: is the parent single, `other_allowance_benefit_or_pension`: does the individual receive a pension, benefit, or labour market program payment such as Youth Allowance, `maintenance_income`: the amount of maintenance income the individual receives for the care of a child/children from a previous relationship, `maintenance_children`: the number of children who you receive maintenance for that are in you care.}
+\item{.data}{.data table input. Each row is an individual. Column names are `id_hh`: household id, `id`: individual id, `age`: individual's age, `income`: individual's income, `in_secondary_school`: does the individual attend secondary school, `single_parent`: is the parent single, `other_allowance_benefit_or_pension`: does the individual receive a pension, benefit, or labour market program payment such as Youth Allowance, `maintenance_income`: the amount of maintenance income the individual receives for the care of a child/children from a previous relationship, `maintenance_children`: the number of children who you receive maintenance for that are in you care.}
 
 \item{income_test_ftbA_1_bound}{Lower bound for which reduction in ftb A max payment occurs at rate taper_ftbA_1.}
 
@@ -27,7 +27,7 @@ family_tax_benefit(data, income_test_ftbA_1_bound = 51027,
 \item{per}{How often the payment will be made. At present payments can only be annually.}
 }
 \description{
-FAMILY TAX BENEFIT
+Family tax benefit
 }
 \author{
 Matthew Katzen
