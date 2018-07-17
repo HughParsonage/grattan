@@ -131,14 +131,14 @@ family_tax_benefit <- function(.data,
                                             0)]
   
   output<- data.table(id_hh = family_data$id_hh,
-                       ftbA_incl_supplement = family_data[ ,pmax(365/14 * ftbA_max_family_rate + ftbA_supplement_family_rate - income_test_ftbA_1 - family_maintenance_income_test_ftbA, 
-                                                                 365/14 * ftbA_base_family_rate + ftbA_supplement_family_rate - income_test_ftbA_2,
-                                                                 0)],
-                       
-                       ftbB_incl_supplement = family_data[ ,if_else(ftbB_eligible, 
-                                                                    pmaxC(365/14 * ftbB_rate_July_2015 + ftbB_supplement_July_2015 - income_test_ftbB,
-                                                                          0), 
-                                                                    0)])
+                      ftbA_incl_supplement = family_data[ ,pmax(365/14 * ftbA_max_family_rate + ftbA_supplement_family_rate - income_test_ftbA_1 - family_maintenance_income_test_ftbA, 
+                                                                365/14 * ftbA_base_family_rate + ftbA_supplement_family_rate - income_test_ftbA_2,
+                                                                0)],
+                      
+                      ftbB_incl_supplement = family_data[ ,if_else(ftbB_eligible, 
+                                                                   pmaxC(365/14 * ftbB_rate_July_2015 + ftbB_supplement_July_2015 - income_test_ftbB,
+                                                                         0), 
+                                                                   0)])
   
   
   output
