@@ -1,12 +1,8 @@
 context("Pension Supplement")
 
 test_that("Warnings and Errors", {
-  expect_warning(pension_supplement(),
+  expect_message(pension_supplement(),
                  reg_exp = '`Date` and `fy.year` not set, so using `Date` = "2016/03/01" and `fy.year` = "2015-16"')
-  expect_warning(pension_supplement(fy.year = "2015-16"),
-                 reg_exp = '`Date` not set. Using date as defined in fy2date()')
-  expect_warning(pension_supplement(Date = as.Date("2016-07-01"), fy.year = "2016-17"),
-                 reg_exp = "`fy.year` and `Date` both used. Ignoring `fy.year`.")
   expect_error(suppressWarnings(pension_supplement(per = 'month')),
                reg_exp = "per can only take values `fortnight` or `annual`")
   expect_error(suppressWarnings(pension_supplement(has_partner = FALSE, seperated_couple = TRUE)),
@@ -19,7 +15,7 @@ test_that("Rates", {
                65)
   expect_equal(pension_supplement(Date = "2016/03/01", has_partner = TRUE),
                49)
-  expect_equal(pension_supplement(Date = "2016/03/01", qualifying_payment = 'age-pension', age = 65),
+  expect_equal(pension_supplement(Date = "2016/03/01", qualifying_payment = 'age_pension', age = 65),
                65)
   expect_equal(pension_supplement(Date = "2016/03/01", has_partner = TRUE, seperated_couple = TRUE),
                65)
@@ -36,14 +32,16 @@ test_that("Rates", {
 test_that("Ineligibles", {
   expect_equal(pension_supplement(Date = "2016/03/01", qualifying_payment = 'austudy', age = 20),
                0)
-  expect_equal(pension_supplement(Date = "2016/03/01", disability_support_pension = TRUE, age = 20, n_dependents = 0),
+  expect_equal(pension_supplement(Date = "2016/03/01", qualifying_payment = 'disability_support_pension', age = 20, n_dependants = 0),
                0)
   expect_equal(pension_supplement(Date = "2018/03/01", qualifying_payment = 'partner_allowance', age = 65),
+               0)
+  expect_equal(pension_supplement(Date = "2018/03/01", qualifying_payment = 'youth_allowance', age = 20),
                0)
 })
 
 test_that("Multiple People", {
-  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = c(T,F)),
+  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = c(TRUE, FALSE)),
                c(49, 65))
 })
 

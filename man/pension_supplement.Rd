@@ -6,7 +6,7 @@
 \usage{
 pension_supplement(has_partner = FALSE, age = 70, n_dependants = 0,
   parenting_payment = FALSE, Date = NULL, fy.year = NULL,
-  qualifying_payment = FALSE, disability_support_pension = FALSE,
+  qualifying_payment = "age_pension", disability_support_pension = FALSE,
   per = "fortnight", overseas_absence = FALSE, seperated_couple = FALSE)
 }
 \arguments{
@@ -24,11 +24,9 @@ pension_supplement(has_partner = FALSE, age = 70, n_dependants = 0,
 
 \item{qualifying_payment}{What is the payment that the supplement is being applied to?}
 
-\item{disability_support_pension}{Is the individual receiving the disability support pension?}
-
 \item{per}{How often the payment will be made. Default is fortnightly.}
 
-\item{overseas_absence}{Will the individual be living outside of Australia for more than 6 weeks of the year?}
+\item{overseas_absence}{Will the individual be living outside of Australia for more than 6 weeks of the upcoming year?}
 
 \item{seperated_couple}{Is the individual part of an illness separated couple, respite care couple, or partner imprisoned?}
 }

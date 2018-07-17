@@ -12,9 +12,8 @@
 #' @param Date Date. Default is "2016/03/01" if fy.year is not present.
 #' @param fy.year Financial year. Default is "2015-16" if Date is not present.
 #' @param qualifying_payment What is the payment that the supplement is being applied to? 
-#' @param disability_support_pension Is the individual receiving the disability support pension?
 #' @param per How often the payment will be made. Default is fortnightly. 
-#' @param overseas_absence Will the individual be living outside of Australia for more than 6 weeks of the year?
+#' @param overseas_absence Will the individual be living outside of Australia for more than 6 weeks of the upcoming year?
 #' @param seperated_couple Is the individual part of an illness separated couple, respite care couple, or partner imprisoned?
 #' 
 #' @author Matthew Katzen
@@ -28,7 +27,7 @@ pension_supplement <- function(has_partner = FALSE,
                                parenting_payment = FALSE,
                                Date = NULL,
                                fy.year = NULL,
-                               qualifying_payment = FALSE,
+                               qualifying_payment = 'age_pension',
                                disability_support_pension = FALSE,
                                per = 'fortnight',
                                overseas_absence = FALSE,
@@ -77,9 +76,10 @@ pension_supplement <- function(has_partner = FALSE,
   
   input[, eligible := if_else(qualifying_payment %in% c('abstudy', 'austudy', 'parenting_payment', 'partner_allowance', 'special_benefit', 'widow_allowance'),
                               age >= age_pension_age, #must be over age pension age if receiving one of above payments
-                              !(disability_support_pension & age < 21 & n_dependants == 0))]#ineligble if under 21 and have no kids
-                                      
-  
+                              if_else(qualifying_payment == 'disability_support_pension',
+                                      !(age < 21 & n_dependants == 0),#ineligble if under 21 and have no kids
+                                      qualifying_payment %in% c('age_pension', 'carer_payment', 'wife_pension', 'widow_b_pension', 'bereavement_allowance')))]#eligible for these payments
+        
   input[ ,max_rate_March_2016 :=
            if_else(has_partner & !seperated_couple,
                    49,
