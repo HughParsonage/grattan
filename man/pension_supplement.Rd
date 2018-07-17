@@ -6,8 +6,8 @@
 \usage{
 pension_supplement(has_partner = FALSE, age = 70, n_dependants = 0,
   parenting_payment = FALSE, Date = NULL, fy.year = NULL,
-  qualifying_payment = "age_pension", disability_support_pension = FALSE,
-  per = "fortnight", overseas_absence = FALSE, seperated_couple = FALSE)
+  qualifying_payment = "age_pension", per = "fortnight",
+  overseas_absence = FALSE, seperated_couple = FALSE)
 }
 \arguments{
 \item{has_partner}{Does the individual have a partner?}
