@@ -1,31 +1,37 @@
 #' Age of eligibility for the Age Pension
-#' 
+#' @param when Either a Date 
 #' @source \url{http://guides.dss.gov.au/guide-social-security-law/3/4/1/10}
 
 age_pension_age <- function(when = Sys.Date(),
                             sex = "male") {
+  
   if (!is.character(sex)) {
     stop("`sex` must be a character vector.")
   }
-  
-  lwhen <- length(when)
-  lsex <- length(sex)
-  if (lsex > 1L) {
-    max.length <- lsex
-    if (length(when) > 1L &&
-        length(sex) != length(when)) {
-      stop("`sex` had length ", length(sex),
-           ", yet `length(when) = ", length(when), ". ", 
-           "`sex` must be length-one or have the same length as `when`.")
-    }
+  if (missing(when)) {
+    message("`when` not set, so using when = ", when, ".")
   } else {
-    max.length <- lwhen
+    lwhen <- length(when)
+    lsex <- length(sex)
+    if (lsex > 1L) {
+      max.length <- lsex
+      if (length(when) > 1L &&
+          length(sex) != length(when)) {
+        stop("`sex` had length ", length(sex),
+             ", yet `length(when) = ", length(when), ". ", 
+             "`sex` must be length-one or have the same length as `when`.")
+      }
+    } else {
+      max.length <- lwhen
+    }
   }
   
   .sex <- tolower(substr(sex, 0L, 1L))
   
   if (!all(.sex %chin% c("m", "f"))) {
-    stop("`sex` must be a character vector containing 'male' or 'female'.")
+    which_first_bad <- first(which(.sex %notin% c("m", "f")))
+    stop("`sex` contained ", sex[which_first_bad], " at position ", which_first_bad,
+         ". The only valid entries are 'male' or 'female'.")
   }
   
   
@@ -68,6 +74,19 @@ age_pension_age <- function(when = Sys.Date(),
              o[when == "2011-12"] <- 64.5
            })
   } else {
+    if (!inherits(when, "Date")) {
+      when <- 
+        tryCatch(as.Date(when), 
+                 error = function(e) {
+                   m <- e$m
+                   stop("`when` was not of class 'Date' and ", 
+                        "during coercion to Date the following error ", 
+                        "was encountered. Ensure `when` is a Date. ", 
+                        e$m, 
+                        call. = FALSE)
+                 })
+    }
+    
     # http://guides.dss.gov.au/guide-social-security-law/3/4/1/10
     age_pension_dates_female <-
       list(Date = as.Date(c("1995-06-30", paste0(seq(1995, 2013, by = 2), "-07-01"))), 
@@ -86,7 +105,7 @@ age_pension_age <- function(when = Sys.Date(),
     input <-
       setDT(list(ordering = seq_len(max.length), 
                  sex = rep_len(.sex, max.length),
-                 Date = rep_len(as.Date(when), max.length)))
+                 Date = rep_len(when, max.length)))
     setkeyv(input, c("sex", "Date"))
     o <- 
       Age_by_Sex_Date[input,
