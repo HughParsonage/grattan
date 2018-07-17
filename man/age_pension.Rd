@@ -4,14 +4,15 @@
 \alias{age_pension}
 \title{Age pension}
 \usage{
-age_pension(ordinary_income = 0, annual_income = ordinary_income * 26,
+age_pension(fortnightly_income = 0, annual_income = fortnightly_income * 26,
   has_partner = FALSE, n_dependants = 0L, partner_fortnightly_income = 0,
-  partner_annual_income = partner_fortnightly_income * 26, Date = NULL,
-  fy.year = NULL, assets_value = 0, is_home_owner = FALSE,
+  partner_annual_income = partner_fortnightly_income * 26,
+  partner_pensioner = has_partner, Date = NULL, fy.year = NULL,
+  assets_value = 0, financial_assets = 0, is_home_owner = FALSE,
   illness_separated_couple = FALSE)
 }
 \arguments{
-\item{ordinary_income, annual_income}{Income for means-testing purposes. Provide one but not both.}
+\item{fortnightly_income, annual_income}{Income for means-testing purposes. Provide one but not both.}
 
 \item{has_partner}{(logical, default: \code{FALSE}) Does the individual have a partner?}
 
@@ -19,17 +20,21 @@ age_pension(ordinary_income = 0, annual_income = ordinary_income * 26,
 
 \item{partner_fortnightly_income, partner_annual_income}{The partner's income. The sum of this value and the indiviudal's income gives the income test.}
 
+\item{partner_pensioner}{(logical, default: \code{TRUE}) Is the individual's partner also in receipt of the age pension?}
+
 \item{Date, fy.year}{The financial year. Currently only 2015-16 is supported (the most recent survey of income and housing results).}
 
 \item{assets_value}{Total value of household assets.}
+
+\item{financial_assets}{Assets which earn incomes for which deeming rates apply.}
 
 \item{is_home_owner}{(logical, default: \code{FALSE}) Does the individual own their own home?}
 
 \item{illness_separated_couple}{Is the couple separated by illness? (Affects the assets test.)}
 }
+\value{
+Returns the age pension payable for each individual defined by the arguments, assuming otherwise eligible.
+}
 \description{
 Age pension
-}
-\details{
-
 }
