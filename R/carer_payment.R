@@ -10,15 +10,22 @@
 #' @param carer_assets_value Total value of carer's household assets.
 #' @param carer_is_home_owner (logical, default: \code{FALSE}) Does the carer own their own home? 
 #' @param carer_illness_separated_couple Is the couple separated by illness? (Affects the assets test.)
-#' @param dclad_eligible Is the person receiving care a DCLAD qualifying child as defined in http://guides.dss.gov.au/guide-social-security-law/1/1/q/17 ?
-#' @param low_adat,high_adat Does the person receiving care have a low or high ADAT score as defined in http://guides.dss.gov.au/guide-social-security-law/1/1/a/78 ?
+#' @param dclad_eligible Is the person receiving care a DCLAD (Disability Care Load Assessment) qualifying child as defined in http://guides.dss.gov.au/guide-social-security-law/1/1/q/17 ?
+#' @param high_adat Does the person receiving care have a high ADAT (Adult Disability Assessment Tool) score as defined in http://guides.dss.gov.au/guide-social-security-law/1/1/a/78 ?
 #' @param living_at_home Does the person receiving care live at home with their parents?
 #' @param care_receiver_fortnightly_income Care receiver's fortnightly income
+#' @param care_receiver_annual_income Care receiver's annual income
 #' @param care_receiver_asset_value Care receiver's asset value
+#' @param partner_fortnightly_income Care receiver's partner's fortnightly income
 #' @param partner_annual_income Care receiver's partner's annual income
 #' @param partner_asset_value Care receiver's partner's asset value
-#' @param children_annual_income Care receiver's partner's annual income
-#' @param children_asset_value Care receiver's children's asset value
+#' @param children_fortnightly_income Care receiver's children's fortnightly income
+#' @param children_annual_income Care receiver's children's annual income
+#' @param children_asset_value Care receiver's children's asset value 
+#' @param parents_fortnightly_income Care receiver's parents' fortnightly income
+#' @param parents_annual_income Care receiver's parents' annual income
+#' @param parents_asset_value Care receiver's parents' asset value
+#' 
 #' @param receiving_other_payment Is the care receiver receiving other social security payments?
 #' 
 #' @author Matthew Katzen
@@ -37,19 +44,22 @@ carer_payment <- function(Date = NULL,
                           carer_is_home_owner = FALSE,
                           carer_illness_separated_couple = FALSE,
                           #care receiver arguments
-                          dclad_eligible = TRUE,
-                          low_adat = FALSE,
+                          dclad_eligible = FALSE,
                           high_adat = FALSE,
-                          living_at_home = FALSE,
+                          living_at_home = TRUE,
                           receiving_other_payment = FALSE,
                           care_receiver_fortnightly_income = 0,
-                          care_receiver_annual_income = 0,
+                          care_receiver_annual_income = care_receiver_fortnightly_income * 26,
                           care_receiver_asset_value = 0,
-                          partner_annual_income = 0,
+                          partner_fortnightly_income = 0,
+                          partner_annual_income = partner_fortnightly_income * 26,
                           partner_asset_value = 0,
-                          children_annual_income = 0,
-                          children_asset_value = 0
-                          ) {
+                          children_fortnightly_income = 0,
+                          children_annual_income = children_fortnightly_income * 26,
+                          children_asset_value = 0,
+                          parents_fortnightly_income = 0,
+                          parents_annual_income = parents_fortnightly_income * 26,
+                          parents_asset_value = 0) {
   
   if (is.null(Date)) {
     if (is.null(fy.year)) {
@@ -67,12 +77,10 @@ carer_payment <- function(Date = NULL,
     }
   }
   
-  #error for no dclad or adat
-  
   input <- data.table(do.call(cbind.data.frame, mget(ls())))
-
+  
   #Rates, income test, and asset test same as age pension
-
+  
   rate <- age_pension(ordinary_income = carer_fortnightly_income,
                       annual_income = carer_annual_income,
                       has_partner = carer_has_partner,
@@ -83,34 +91,29 @@ carer_payment <- function(Date = NULL,
                       assets_value = carer_assets_value,
                       is_home_owner = carer_is_home_owner,
                       illness_separated_couple = carer_illness_separated_couple)
-
   
-
   #http://guides.dss.gov.au/guide-social-security-law/4/2/5
   #https://www.humanservices.gov.au/sites/default/files/co029-1603en.pdf
   
-  #detailed eligibility: http://guides.dss.gov.au/guide-social-security-law/3/6/4
-  care_receiver_eligible <- input[ ,(dclad_eligible | high_adat | low_adat)]
-
   care_receiver_income_test <- input[ ,if_else(high_adat,
                                                care_receiver_annual_income + partner_annual_income, #high adat
-                                               if_else(dclad_eligible & living_at_home,
+                                               if_else(dclad_eligible & !living_at_home,
                                                        care_receiver_annual_income, #child living away from home
-                                                       care_receiver_annual_income + partner_annual_income + children_annual_income))] #all other cases
+                                                       care_receiver_annual_income + partner_annual_income + children_annual_income + parents_annual_income))] #all other cases
   
   care_receiver_asset_test <- input[ ,if_else(dclad_eligible & !living_at_home,
-                            care_receiver_asset_value, #child living away from home
-                            care_receiver_asset_value + partner_asset_value + children_asset_value)] #all other cases
-
-  income_eligible <- input[ ,if_else(high_adat & receiving_other_payment, #exemption: http://guides.dss.gov.au/guide-social-security-law/3/6/4/10
-                                      TRUE,
-                                      (care_receiver_income_test < 108828))]
-  assets_eligible <- input[ ,if_else(high_adat & receiving_other_payment,
-                                      TRUE,
-                                      (care_receiver_asset_test < 671250))]
-
+                                              care_receiver_asset_value, #child living away from home
+                                              care_receiver_asset_value + partner_asset_value + children_asset_value + parents_annual_income)] #all other cases
+  
+  income_eligible <- input[ ,or(high_adat & receiving_other_payment,
+                                care_receiver_income_test < 108828)]
+  assets_eligible <- input[ ,or(high_adat & receiving_other_payment, 
+                                care_receiver_asset_test < 671250)]
+  
+  #NOTE: there is discretion to still approve payment even if failed the care receiver asset test. Described in section 'Discretion to decide that the care receivers assets test does not disqualify a person from CP' http://guides.dss.gov.au/guide-social-security-law/4/2/5
+  
   #OUTPUT
-  input[ ,if_else(care_receiver_eligible & income_eligible & assets_eligible,
+  input[ ,if_else(income_eligible & assets_eligible,
                   rate,
                   0)]
 }
