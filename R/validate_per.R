@@ -1,7 +1,5 @@
 #' Validate per
-#' 
-#' @export validate_per
-#' 
+ 
 
 validate_per <- function(per = 'fortnight') {
   if (missing(per)) {
