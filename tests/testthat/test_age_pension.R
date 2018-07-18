@@ -120,5 +120,21 @@ test_that("today helper", {
 
 
 test_that("guides.dss.gov.au deeming examples", {
-  skip("Needed but not yet")
+  # http://guides.dss.gov.au/guide-social-security-law/4/4/1/60
+  # John and Mary are both Age recipients with a combined total
+  # of $90,000 in financial investments.  $25,000 is in a term 
+  # deposit, $15,000 is in a credit union account and they have 
+  # $50,000 worth of managed investments.
+  expect_equal(age_pension(annual_income = 5e3,
+                           Date = "2017-07-03",
+                           has_partner = TRUE,
+                           partner_pensioner = TRUE,
+                           assets_value = 90e3,
+                           financial_assets = 90e3), 
+               age_pension(annual_income = 5e3 + 1674,
+                           Date = "2017-07-03",
+                           has_partner = TRUE,
+                           partner_pensioner = TRUE,
+                           assets_value = 90e3,
+                           financial_assets = 0))
 })

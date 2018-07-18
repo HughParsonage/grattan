@@ -132,6 +132,13 @@ age_pension <- function(fortnightly_income = 0,
   # http://guides.dss.gov.au/guide-social-security-law/4/4/1/10
   deeming <- 
     Age_pension_deeming_rates_by_Date %>%
+    # temp
+    rbind(data.table(Date = as.Date("2017-07-01"), 
+                     type = c("single", "couple", "nonpensioner couple"), 
+                     threshold = c(50200, 83400, 41700),
+                     deeming_rate_below = 0.0175,
+                     deeming_rate_above = 0.0325)) %>%
+    unique %>%
     .[, .(Date,
           HasPartner = type != "single",
           PartnerPensioner = type == "couple", 
@@ -149,7 +156,7 @@ age_pension <- function(fortnightly_income = 0,
   
   D[, deemed_income := deeming_rate_below * pminV(threshold, FinancialAssets)]
   D[FinancialAssets > threshold,
-    deemed_income := deeming_rate_above * pminC(FinancialAssets - threshold, 0)]
+    deemed_income := deemed_income + deeming_rate_above * pmaxC(FinancialAssets - threshold, 0)]
   D[, Income := Income + deemed_income]
   
   # if (is_testing())print(A); print(B); print(C)
