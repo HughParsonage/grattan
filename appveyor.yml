@@ -18,10 +18,10 @@ environment:
     _R_CHECK_CRAN_INCOMING_: 0
 
   matrix:
-  - R_VERSION: release
-    R_ARCH: i386
-    R_BUILD_ARGS: --no-build-vignettes
-    R_CHECK_ARGS: --ignore-vignettes --no-vignettes --no-manual
+  #- R_VERSION: release
+  #  R_ARCH: i386
+  #  R_BUILD_ARGS: --no-build-vignettes
+  #  R_CHECK_ARGS: --ignore-vignettes --no-vignettes --no-manual
     
   - R_VERSION: devel
     R_ARCH: x64
