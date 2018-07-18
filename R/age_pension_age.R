@@ -5,9 +5,9 @@
 #' "}. May be abbreviated to \code{"m"} or \code{"f"} and is case-insensitive.
 #' @return A numeric vector, the age of eligiblity for the Age Pension for each \code{when}.
 #' @examples
-#' age_pension()  # Current age of eligiblity
-#' age_pension("1995-12-31")
-#' age_pension("2013-14")
+#' age_pension_age()  # Current age of eligiblity
+#' age_pension_age("1995-12-31")
+#' age_pension_age("2013-14")
 #' @source \url{http://guides.dss.gov.au/guide-social-security-law/3/4/1/10}
 
 age_pension_age <- function(when = Sys.Date(),

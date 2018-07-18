@@ -23,7 +23,7 @@ A numeric vector, the age of eligiblity for the Age Pension for each \code{when}
 Age of eligibility for the Age Pension
 }
 \examples{
-age_pension()  # Current age of eligiblity
-age_pension("1995-12-31")
-age_pension("2013-14")
+age_pension_age()  # Current age of eligiblity
+age_pension_age("1995-12-31")
+age_pension_age("2013-14")
 }
