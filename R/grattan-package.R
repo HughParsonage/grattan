@@ -25,7 +25,9 @@
 #' @importFrom magrittr %>%
 #' @importFrom magrittr %$%
 #' @importFrom magrittr %<>%
+#' @importFrom magrittr %T>%
 #' @importFrom magrittr and
+#' @importFrom magrittr or
 
 #' @importFrom Rcpp sourceCpp
 #' @importFrom stats complete.cases

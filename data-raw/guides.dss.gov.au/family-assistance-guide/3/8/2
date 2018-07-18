@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="shortlink" href="../../../node/6465" />
+<link rel="canonical" href="2" />
+<meta name="viewport" content="width=device-width" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>3.8.2 CCR Limit Calculation - Examples | Family Assistance Guide</title>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"lAR9bNQashJxsdYD-boHP47BRBqH9fqie7WLV7ZlzsA","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/family-assistance-guide\/3\/8\/2":true}});
+//--><!]]>
+</script>
+<!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
+</head>
+<body class="">
+<ul class="offleft" id="top">
+<li><a href="2#navigation">Skip to navigation</a></li>
+<li><a href="2#content">Skip to main content</a></li>
+</ul>
+<nav id="global">
+	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
+<div class="menu-block">
+<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
+<li class="leaf has-children menu-mlid-513"><a href="../../../child-support-guide">Child Support Guide</a></li>
+<li class="leaf has-children active-trail menu-mlid-491"><a href="../../../family-assistance-guide" class="active-trail">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law">Guide to Social Security Law</a></li>
+<li class="last leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+</ul></div></nav>
+<header role="banner">
+	<a href="../../../index.html" rel="home"><img src="../../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
+<p class="site-name">Guides to Social Policy Law</p>
+<form class="search-form" role="search" action="2" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
+  <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
+ <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-ZymfHSxthjtkNFpdoa8SH0CI82HfTVCPa0BiAkU6A5o" />
+<input type="hidden" name="form_id" value="search_block_form" />
+</div></form>	<h2>Family Assistance Guide</h2>
+<p>Version 1.203 - Released 7 May 2018</p>
+	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
+</header>
+<div id="contentwrap">
+	<nav role="navigation" id="navigation">
+	<div class="menu-block">
+<ul class="menu"><li class="first leaf menu-mlid-7283"><a href="../../../family-assistance-guide" title="">Using the Family Assistance Guide</a></li>
+<li class="collapsed menu-mlid-2274"><a href="../../updates">What&#039;s New</a></li>
+<li class="collapsed menu-mlid-2266"><a href="../../1">1 Key Terms &amp; Principles</a></li>
+<li class="collapsed menu-mlid-2267"><a href="../../2">2 Eligibility</a></li>
+<li class="expanded active-trail menu-mlid-2268"><a href="../../3" class="active-trail">3 Rate Calculation</a><ul class="menu"><li class="first collapsed menu-mlid-1826"><a href="../1">3.1 FTB Rate Calculation</a></li>
+<li class="collapsed menu-mlid-1829"><a href="../2">3.2 Adjusted Taxable Income</a></li>
+<li class="leaf menu-mlid-1830"><a href="../3">3.3 Number not currently in use</a></li>
+<li class="leaf menu-mlid-1831"><a href="../4">3.4 Number not currently in use</a></li>
+<li class="collapsed menu-mlid-1832"><a href="../5">3.5 CCB Rate Calculation</a></li>
+<li class="collapsed menu-mlid-1833"><a href="../6">3.6 Historical Rates</a></li>
+<li class="collapsed menu-mlid-1837"><a href="../7">3.7 JETCCFA Rate Calculation</a></li>
+<li class="expanded active-trail menu-mlid-1834"><a href="../8" class="active-trail">3.8 CCR Rate Calculation</a><ul class="menu"><li class="first leaf menu-mlid-1723"><a href="1">3.8.1 CCR Limit Calculations - General Provisions</a></li>
+<li class="last leaf active-trail active menu-mlid-1724"><a href="2" class="active-trail active">3.8.2 CCR Limit Calculation - Examples</a></li>
+</ul></li>
+<li class="leaf menu-mlid-1835"><a href="../9">3.9 SKB Rate</a></li>
+<li class="leaf menu-mlid-1827"><a href="../10">3.10 Determining the SIFS Rate</a></li>
+<li class="leaf menu-mlid-1836"><a href="../11">3.11 NBS Rate</a></li>
+<li class="last leaf menu-mlid-1828"><a href="../12">3.12 SBP Rate</a></li>
+</ul></li>
+<li class="collapsed menu-mlid-2269"><a href="../../4">4 Claims &amp; Payments</a></li>
+<li class="collapsed menu-mlid-2270"><a href="../../5">5 Gathering Information</a></li>
+<li class="collapsed menu-mlid-2271"><a href="../../6">6 Review &amp; Reconciliation</a></li>
+<li class="collapsed menu-mlid-2272"><a href="../../7">7 Debts</a></li>
+<li class="collapsed menu-mlid-2273"><a href="../../8">8 Transitional Arrangements</a></li>
+<li class="leaf menu-mlid-2264"><a href="../../acronyms">Acronym List</a></li>
+<li class="leaf menu-mlid-7296"><a href="../../keywords">Keyword Index</a></li>
+<li class="leaf menu-mlid-7371"><a href="../../act-references">Act Reference Index</a></li>
+<li class="last leaf menu-mlid-7169"><a href="../../sitemap">Site Map</a></li>
+</ul></div>	</nav>
+	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../family-assistance-guide">Family Assistance Guide</a> &raquo; <a href="../../3" class="active-trail">3 Rate Calculation</a> &raquo; <a href="../8" class="active-trail">3.8 CCR Rate Calculation</a> &raquo; 3.8.2 CCR Limit Calculation - Examples</div>
+<div id="utility">
+	
+<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/family-assistance-guide/3/8/2"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="content" role="main">
+<article id="node-6465">
+<h1 >3.8.2 CCR Limit Calculation - Examples</h1>
+<h2>Example 1: Calculating the rebate</h2>
+<p>From July 2011 the <a href="../../acronyms#ccr" title="Child care rebate">CCR</a> can be paid on a fortnightly basis either directly to an individual's nominated bank account or to one or more approved child care service/s. Fortnightly payments will be paid once Centrelink has received child care attendance details from approved child care service/s and the <a href="../../acronyms#ccb" title="Child care benefit">CCB</a> fee reductions have been calculated for the week (a more than nil amount or a nil amount due to income). For individuals in receipt of a nil amount of CCB, the full 50% CCR will be paid up to the annual limit. For individuals in receipt of a more than nil amount of CCB, Centrelink will withhold a reduction amount of 15% to provide a reserve to minimise an individual's debt that may be determined after the end of the income year. The reserve withheld will be reconciled at the end of the financial year and any outstanding amounts will be paid to the individual.</p>
+<p>Individuals may also still continue to receive their payment to a nominated bank account on a quarterly basis or as an annual lump sum payment.</p>
+<p>Ben and Robyn both worked full-time in 2016-17 and had 2 children in approved care, David and Bella. As Robyn was working and was eligible for CCB for that year, she is eligible for CCR for that year.</p>
+<p>David's after school care fees were $3,075 and Bella's long day care fees were $15,000. Robyn's CCB entitlement was $620 for David and $2,430 for Bella.</p>
+<p>Robyn's CCR entitlement is calculated as follows:</p>
+<table><thead><tr><th scope="col">Yearly</th>
+<th scope="col">David</th>
+<th scope="col">Bella</th>
+<th scope="col">Weekly over 48 weeks</th>
+<th scope="col">David</th>
+<th scope="col">Bella</th>
+</tr></thead><tbody><tr><td>Total fees</td>
+<td>$3,050</td>
+<td>$15,000</td>
+<td>Weekly fees</td>
+<td>$63.54</td>
+<td>$312.50</td>
+</tr><tr><td>Less CCB entitlement</td>
+<td>$620</td>
+<td>$2,430</td>
+<td>Less CCB entitlement</td>
+<td>$12.91</td>
+<td>$50.62</td>
+</tr><tr><td>Out-of-pocket expenses</td>
+<td>$2,430</td>
+<td>$12,570</td>
+<td>Out-of-pocket expenses</td>
+<td>$50.63</td>
+<td>$261.88</td>
+</tr><tr><td>x 50%</td>
+<td>$1,215</td>
+<td>$6,285</td>
+<td>x 50% less 15% withheld to reduce a debt</td>
+<td>$21.51</td>
+<td>$111.30</td>
+</tr></tbody></table><p>Robyn's total CCR entitlement for both David and Bella is $7,500 ($1,215 + $6,285).</p>
+<p>Robyn's weekly CCR entitlement for both David and Bella is calculated as $132.81 ($21.51 + $111.30) which is less 15% of her 50% CCR entitlement of $156.25 ($130.94 + $25.31) as Robyn is in receipt of more than a nil amount of CCB.</p>
+<h2>Example 2: Reduction of CCR to the maximum allowable rate</h2>
+<p>Anna works full-time in 2017-18 and has her daughter Sophie in full-time approved child care. As Anna works and is eligible for CCB for that year, she is eligible to receive CCR for that year.</p>
+<p>Anna's total fees for Sophie's care are $17,000 and her CCB is $680.</p>
+<p>Anna's CCR entitlement for 2017-18 is calculated as follows:</p>
+<table><thead><tr><th scope="col">Yearly</th>
+<th scope="col">Sophie</th>
+<th scope="col">Weekly over 48 weeks</th>
+<th scope="col">Sophie</th>
+</tr></thead><tbody><tr><td>Total fees</td>
+<td>$17,000</td>
+<td>Weekly fees</td>
+<td>$354.16</td>
+</tr><tr><td>Less CCB entitlement</td>
+<td>$680</td>
+<td>Less CCB entitlement</td>
+<td>$14.16</td>
+</tr><tr><td>Out-of-pocket expenses</td>
+<td>$16,320</td>
+<td>Out-of-pocket expenses</td>
+<td>$340.00</td>
+</tr><tr><td>x 50%</td>
+<td>$8,160</td>
+<td>x 50% less 15% withheld to reduce a debt</td>
+<td>$144.50</td>
+</tr></tbody></table><p>Anna's CCR entitlement is calculated to be higher than the annual maximum allowed of $7,613. Anna will receive the maximum allowable amount of $7,613.</p>
+<p>Anna's weekly CCR entitlement for Sophie is calculated as $144.50 which is less 15% of her 50% CCR entitlement of $170.00 as Anna is in receipt of more than a nil amount of CCB.</p>
+<h2>Example 3: Calculating CCR for families who are eligible for CCB, but whose CCB entitlement is zero due to income</h2>
+<p>Individuals who are eligible for CCB, but whose CCB entitlement is zero due to income, may still be eligible for CCR.</p>
+<p>Rose and Peter both work full-time in 2017-18 and have 2 children in approved care, Marta and Filip. As Rose and Peter work and are eligible for CCB, but their CCB entitlement is zero due to income, they are still eligible for CCR.</p>
+<p>Filip's before and after school care fees are $4,920 and Marta's long day care fees are $16,000.</p>
+<p>Rose and Peter's CCR entitlement for 2017-18 is calculated as follows:</p>
+<table><thead><tr><th scope="col">Yearly</th>
+<th scope="col">Filip</th>
+<th scope="col">Marta</th>
+<th scope="col">Weekly over 48 weeks</th>
+<th scope="col">Filip</th>
+<th scope="col">Marta</th>
+</tr></thead><tbody><tr><td>Total fees</td>
+<td>$4,920</td>
+<td>$16,000</td>
+<td>Weekly fees</td>
+<td>$102.50</td>
+<td>$333.33</td>
+</tr><tr><td>Less CCB entitlement</td>
+<td>$0</td>
+<td>$0</td>
+<td>Less CCB entitlement</td>
+<td>$0</td>
+<td>$0</td>
+</tr><tr><td>Out-of-pocket expenses</td>
+<td>$4,920</td>
+<td>$16,000</td>
+<td>Out-of-pocket expenses</td>
+<td>$102.50</td>
+<td>$333.33</td>
+</tr><tr><td>x 50%</td>
+<td>$2,460</td>
+<td>$8,000</td>
+<td>x 50%</td>
+<td>$51.25</td>
+<td>$166.66</td>
+</tr></tbody></table><p>Rose and Peter's CCR entitlement for Marta is calculated as $8,000. However, they will only receive the maximum of $7,613 allowed for Marta. The CCR for Filip is $2,460. They will receive a total CCR entitlement for both Filip and Marta of $10,073 ($2,460 + $7,613).</p>
+<p>Rose and Peter's weekly CCR entitlement for both Filip and Marta is calculated as $217.91 ($51.25 + $166.66) as they are in receipt of a nil amount of CCB, the full 50% CCR will be paid up to the annual limit.</p>
+<p><strong>Note:</strong> To calculate the CCR for the 2017-18 income year, the CCR is calculated as 50% of out of pocket expenses for approved child care and is capped per child at $7,613.</p>
+<p>To calculate the CCR for the 2011-12 to the 2016-17 income years, the CCR is calculated as 50% of out of pocket expenses for approved child care and is capped per child at $7,500.</p>
+<p>To calculate the CCR for the 2010-11 income year, the CCR is calculated as 50% of out-of-pocket expenses for approved child care and is capped per child at $7,941.</p>
+<p>To calculate CCR for the 2009-10 income year, the CCR is calculated as 50% of out-of-pocket expenses for approved child care and is capped per child at $7,778.</p>
+<p>To calculate <a href="../../acronyms#cctr" title="Child care tax rebate">CCTR</a> for the 2008-09 income year the CCTR is calculated as 50% of out-of-pocket expenses for approved child care and is capped per child at $7,500.</p>
+<p>To calculate CCTR for the 2006-07 and 2007-08 income years, the CCTR is calculated as 30% of out-of-pocket expenses for approved child care and is capped per child at $4,211 for 2006-07 and $4,354 per child for 2007-08.</p>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00490" title="A New Tax System (Family Assistance) Act 1999">FAAct</a> section 57EAA Eligibility for CCR-for a week, section 84AAA Amount of CCR-for a week, section 84AAC Component formula-reduction percentage</p>
+<p><a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> Part 3 Division 4AA Child care rebate, section 65EAAAA Individual may elect to have CCR paid in various ways</p>
+</div>
+</article>	<div id="view-last-reviewed-date">
+		
+		  
+      Last reviewed:     3 July 2017  	</div>
+</div></div>
+<footer role="contentinfo" id="footer">
+	<ul class="menu"><li class="first leaf"><a href="../../../contact-us">Contact us</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/copyright-disclaimer" title="">Copyright &amp; Disclaimer</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/privacy-policy" title="">Privacy</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
+<li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
+</ul></footer>
+<script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+</body>
+</html>
