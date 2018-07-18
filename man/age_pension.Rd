@@ -9,7 +9,7 @@ age_pension(fortnightly_income = 0, annual_income = fortnightly_income * 26,
   partner_annual_income = partner_fortnightly_income * 26,
   partner_pensioner = has_partner, Date = NULL, fy.year = NULL,
   assets_value = 0, financial_assets = 0, is_home_owner = FALSE,
-  illness_separated_couple = FALSE)
+  illness_separated_couple = FALSE, per = c("year", "fortnight"))
 }
 \arguments{
 \item{fortnightly_income, annual_income}{Income for means-testing purposes. Provide one but not both.}
@@ -31,10 +31,15 @@ age_pension(fortnightly_income = 0, annual_income = fortnightly_income * 26,
 \item{is_home_owner}{(logical, default: \code{FALSE}) Does the individual own their own home?}
 
 \item{illness_separated_couple}{Is the couple separated by illness? (Affects the assets test.)}
+
+\item{per}{Specifies the timeframe in which payments will be made. One of \code{"year"} and \code{"fortnight"}.}
 }
 \value{
 Returns the age pension payable for each individual defined by the arguments, assuming otherwise eligible.
 }
 \description{
 Age pension
+}
+\details{
+Currently does not include the age pension supplement.
 }

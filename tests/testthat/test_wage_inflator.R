@@ -94,7 +94,13 @@ test_that("from > to deflates and is not a warning for inflators", {
 })
 
 test_that("ABS connection", {
+  skip_on_cran()
   skip_if_not(packageVersion("rsdmx") >= package_version("0.5.10"))
+  
+  # Minimize false on errors on travis
+  skip_if(getRversion() >= "3.6")
+  skip_if(getRversion() <= "3.4")
+  
   internal_ans <- wage_inflator(from_fy = "2012-13", 
                                 to_fy = "2013-14",
                                 useABSConnection = FALSE)

@@ -10,7 +10,10 @@
 #' @param financial_assets Assets which earn incomes for which deeming rates apply.
 #' @param is_home_owner (logical, default: \code{FALSE}) Does the individual own their own home? 
 #' @param illness_separated_couple Is the couple separated by illness? (Affects the assets test.)
+#' @param per Specifies the timeframe in which payments will be made. One of \code{"year"} and \code{"fortnight"}.
 #' 
+#' @details
+#' Currently does not include the age pension supplement.
 #' @return Returns the age pension payable for each individual defined by the arguments, assuming otherwise eligible.
 #' 
 #' 
@@ -31,7 +34,8 @@ age_pension <- function(fortnightly_income = 0,
                         assets_value = 0,
                         financial_assets = 0,
                         is_home_owner = FALSE,
-                        illness_separated_couple = FALSE) {
+                        illness_separated_couple = FALSE,
+                        per = c("year", "fortnight")) {
   if (is.null(Date)) {
     if (is.null(fy.year)) {
       Date <- .age_pension_today2qtr(Sys.Date())
@@ -165,7 +169,8 @@ age_pension <- function(fortnightly_income = 0,
     assets_test <- 
     NULL
   
-  D %>%
+  out <- 
+    D %>%
     .[, age_pension_income := pminV(pmaxC(max_rate - 0.5 * (Income - permissible_income),
                                           0),
                                     max_rate)] %>%
@@ -174,6 +179,20 @@ age_pension <- function(fortnightly_income = 0,
     setorderv("ordering") %>%
     .[, pminV(age_pension_income, 
               age_pension_assets)]
+  
+  if (missing(per)) {
+    message("`per` is missing. Using `per = ", per[1], "`. ", 
+            "Set `per` explicitly to avoid this message.")
+  }
+  
+  per <- per[1L]
+  
+  
+  switch(per, 
+         "fortnight" = out / 26,
+         "year" = out,
+         "annual" = out,
+         stop('`per` must be one of "fortnight" or "annual".'))
   
   
 }
@@ -187,9 +206,9 @@ age_pension <- function(fortnightly_income = 0,
     paste0(the_year - 1L, "-09-20")
   } else if (OR(the_month > 9L,
                 the_month == 9L && the_day >= 20L)) {
-    paste0(year(today), "-09-20")
+    paste0(the_year, "-09-20")
   } else {
-    paste0(year(today), "-03-20")
+    paste0(the_year, "-03-20")
   }
 }
 
