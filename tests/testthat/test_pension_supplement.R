@@ -32,7 +32,10 @@ test_that("Rates", {
 test_that("Ineligibles", {
   expect_equal(pension_supplement(Date = "2016/03/01", qualifying_payment = 'austudy', age = 20),
                0)
-  expect_equal(pension_supplement(Date = "2016/03/01", qualifying_payment = 'disability_support_pension', age = 20, n_dependants = 0),
+  expect_equal(pension_supplement(Date = "2016/03/01",
+                                  qualifying_payment = 'disability_support_pension',
+                                  age = 20,
+                                  n_dependants = 0),
                0)
   expect_equal(pension_supplement(Date = "2018/03/01", qualifying_payment = 'partner_allowance', age = 65),
                0)
