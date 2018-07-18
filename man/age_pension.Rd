@@ -19,9 +19,13 @@ age_pension(fortnightly_income = 0, annual_income = fortnightly_income * 26,
 
 \item{partner_fortnightly_income, partner_annual_income}{The partner's income. The sum of this value and the indiviudal's income gives the income test.}
 
+\item{partner_pensioner}{(logical, default: \code{TRUE}) Is the individual's partner also in receipt of the age pension?}
+
 \item{Date, fy.year}{The financial year. Currently only 2015-16 is supported (the most recent survey of income and housing results).}
 
 \item{assets_value}{Total value of household assets.}
+
+\item{financial_assets}{Assets which earn incomes for which deeming rates apply.}
 
 \item{is_home_owner}{(logical, default: \code{FALSE}) Does the individual own their own home?}
 
@@ -29,9 +33,14 @@ age_pension(fortnightly_income = 0, annual_income = fortnightly_income * 26,
 
 \item{per}{Specifies the timeframe in which payments will be made. One of \code{"year"} and \code{"fortnight"}.}
 }
+\value{
+Returns the age pension payable for each individual defined by the arguments, assuming otherwise eligible.
+}
 \description{
 Age pension
 }
+
 \details{
 Currently does not include the age pension supplement.
 }
+
