@@ -4,6 +4,10 @@ test_that("Error handling", {
   expect_warning(age_pension(Date = "2015-12-01", fy.year = "2015-16"), 
                  regexp = "Ignoring `fy.year`", 
                  fixed = TRUE)
+  expect_error(age_pension(fortnightly_income = 2,
+                           annual_income = 1),
+               regexp = "`fortnightly_income` is provided, yet `annual_income` is not 26 times its values.",
+               fixed = TRUE)
 })
 
 
