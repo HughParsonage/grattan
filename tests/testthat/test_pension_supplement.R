@@ -11,20 +11,32 @@ test_that("Warnings and Errors", {
 
 test_that("Rates", {
   #Max rates
-  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = FALSE),
+  expect_equal(pension_supplement(Date = "2016/03/01",
+                                  has_partner = FALSE,
+                                  per = "fortnight"),
                65)
-  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = TRUE),
+  expect_equal(pension_supplement(Date = "2016/03/01", 
+                                  has_partner = TRUE, 
+                                  per = "fortnight"),
                49)
-  expect_equal(pension_supplement(Date = "2016/03/01", qualifying_payment = 'age_pension', age = 65),
+  expect_equal(pension_supplement(Date = "2016/03/01", qualifying_payment = 'age_pension', age = 65,
+                                  per = "fortnight"),
                65)
-  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = TRUE, seperated_couple = TRUE),
+  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = TRUE, seperated_couple = TRUE,
+                                  per = "fortnight"),
                65)
   #basic rates
-  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = FALSE, parenting_payment = TRUE),
+  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = FALSE, parenting_payment = TRUE,
+                                  per = "fortnight"),
                22.70)
-  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = FALSE, overseas_absence = TRUE),
+  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = FALSE, overseas_absence = TRUE,
+                                  per = "fortnight"),
                22.70)
-  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = TRUE, overseas_absence = TRUE),
+  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = TRUE, overseas_absence = TRUE,
+                                  per = "fortnight"),
+               18.7)
+  expect_equal(pension_supplement(Date = "2015-16", has_partner = TRUE, overseas_absence = TRUE,
+                                  per = "fortnight"), 
                18.7)
   
 })
