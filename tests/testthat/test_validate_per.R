@@ -8,5 +8,6 @@ test_that("Errors", {
   expect_error(validate_per(per = "month", missing_per = FALSE),
                regexp = "`per = 'month'` but must be one of 'year', 'fortnight', or 'quarter'.")
   expect_warning(validate_per(per = c("fortnight", "month"), missing_per = FALSE),
-               regexp = "`per` is provided but has length > 1 so only the first element (`per = 'fortnight'`) will be used.")
+               regexp = "`per` is provided but has length > 1 so only the first element (`per = 'fortnight'`) will be used.",
+               fixed = TRUE)
 })
