@@ -67,7 +67,7 @@ carer_payment <- function(Date = NULL,
       fy.year <- date2fy(Date)
       message('`Date` and `fy.year` not set, so using `Date = "', Date, '".')
     } else {
-      Date <- fy2date(fy.year)
+      Date <- fy2date(fy.year) 
     }
   } else {
     if (is.null(fy.year)) {
