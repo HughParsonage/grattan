@@ -35,7 +35,7 @@ test_that("Rates", {
   expect_equal(pension_supplement(Date = "2016/03/01", has_partner = TRUE, overseas_absence = TRUE,
                                   per = "fortnight"),
                18.7)
-  expect_equal(pension_supplement(Date = "2015-16", has_partner = TRUE, overseas_absence = TRUE,
+  expect_equal(pension_supplement(fy.year = "2015-16", has_partner = TRUE, overseas_absence = TRUE,
                                   per = "fortnight"), 
                18.7)
   
