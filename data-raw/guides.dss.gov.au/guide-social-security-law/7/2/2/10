@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="shortlink" href="../../../../node/15805" />
+<link rel="canonical" href="10" />
+<meta name="viewport" content="width=device-width" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>7.2.2.10 Calculating Proportional Portability for Non-Agreement Pensions | Guide to Social Security Law</title>
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
+<script type="text/javascript" src="../../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"xIpk4eqRmu2XIeVEbDhAacAsO5oVZbrt6-472a0fwUQ","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/guide-social-security-law\/7\/2\/2\/10":true}});
+//--><!]]>
+</script>
+<!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
+</head>
+<body class="">
+<ul class="offleft" id="top">
+<li><a href="10#navigation">Skip to navigation</a></li>
+<li><a href="10#content">Skip to main content</a></li>
+</ul>
+<nav id="global">
+	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
+<div class="menu-block">
+<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<li class="leaf menu-mlid-7597"><a href="../../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
+<li class="leaf has-children menu-mlid-513"><a href="../../../../child-support-guide">Child Support Guide</a></li>
+<li class="leaf has-children menu-mlid-491"><a href="../../../../family-assistance-guide">Family Assistance Guide</a></li>
+<li class="leaf has-children active-trail menu-mlid-489"><a href="../../../../guide-social-security-law" class="active-trail">Guide to Social Security Law</a></li>
+<li class="last leaf has-children menu-mlid-490"><a href="../../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+</ul></div></nav>
+<header role="banner">
+	<a href="../../../../index.html" rel="home"><img src="../../../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
+<p class="site-name">Guides to Social Policy Law</p>
+<form class="search-form" role="search" action="10" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
+  <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
+ <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+</div>
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-r5dn5dVRtA5f7Vpu7MC_X0GJMNBKjbyJWbmoGo7LvJg" />
+<input type="hidden" name="form_id" value="search_block_form" />
+</div></form>	<h2>Guide to Social Security Law</h2>
+<p>Version 1.245 - Released 1 June 2018</p>
+	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
+</header>
+<div id="contentwrap">
+	<nav role="navigation" id="navigation">
+	<div class="menu-block">
+<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../../../../guide-social-security-law" title="">Using the Guide to Social Security Law</a></li>
+<li class="collapsed menu-mlid-493"><a href="../../../updates">What&#039;s New</a></li>
+<li class="collapsed menu-mlid-2295"><a href="../../../1">1 Key Terms &amp; Principles</a></li>
+<li class="collapsed menu-mlid-2294"><a href="../../../2">2 Claim Verification</a></li>
+<li class="collapsed menu-mlid-2293"><a href="../../../3">3 Qualification &amp; Payability</a></li>
+<li class="collapsed menu-mlid-2292"><a href="../../../4">4 Income &amp; Assets</a></li>
+<li class="collapsed menu-mlid-2291"><a href="../../../5">5 Payment Rates</a></li>
+<li class="collapsed menu-mlid-2290"><a href="../../../6">6 Reviews, Debts &amp; Payment Recovery</a></li>
+<li class="expanded active-trail menu-mlid-2289"><a href="../../../7" class="active-trail">7 Portability &amp; CFP</a><ul class="menu"><li class="first collapsed menu-mlid-2783"><a href="../../1">7.1 Conditions for Payment Outside Australia</a></li>
+<li class="expanded active-trail menu-mlid-2794"><a href="../../2" class="active-trail">7.2 Arrangements for Payment Outside Australia</a><ul class="menu"><li class="first collapsed menu-mlid-2795"><a href="../1">7.2.1 Pre-departure Arrangements for Portable Pensions</a></li>
+<li class="expanded active-trail menu-mlid-2799"><a href="../2" class="active-trail">7.2.2 Rate of Portable Pension</a><ul class="menu"><li class="first leaf active-trail active menu-mlid-2800"><a href="10" class="active-trail active">7.2.2.10 Calculating Proportional Portability for Non-Agreement Pensions</a></li>
+<li class="leaf menu-mlid-2801"><a href="20">7.2.2.20 Number not currently in use</a></li>
+<li class="leaf menu-mlid-2802"><a href="30">7.2.2.30 Number not currently in use</a></li>
+<li class="leaf menu-mlid-2803"><a href="40">7.2.2.40 Australian Working Life Residence</a></li>
+<li class="leaf menu-mlid-2804"><a href="50">7.2.2.50 Number not currently in use</a></li>
+<li class="last leaf menu-mlid-2805"><a href="60">7.2.2.60 Post Departure Reviews of Portable Payments</a></li>
+</ul></li>
+<li class="last collapsed menu-mlid-2806"><a href="../3">7.2.3 Granting a New Payment or Changing a Payment for an Overseas Recipient</a></li>
+</ul></li>
+<li class="last collapsed menu-mlid-2810"><a href="../../3">7.3 Claiming CFP</a></li>
+</ul></li>
+<li class="collapsed menu-mlid-2288"><a href="../../../8">8 Administration Act Provisions</a></li>
+<li class="collapsed menu-mlid-2278"><a href="../../../9">9 Visas, Entitlements &amp; Assurances of Support</a></li>
+<li class="collapsed menu-mlid-2296"><a href="../../../10">10 Australian Social Security Agreements</a></li>
+<li class="collapsed menu-mlid-2297"><a href="../../../11">11 Income Management</a></li>
+<li class="leaf menu-mlid-2298"><a href="../../../acronyms">Acronym List</a></li>
+<li class="leaf menu-mlid-7297"><a href="../../../keywords">Keyword Index</a></li>
+<li class="leaf menu-mlid-7372"><a href="../../../act-references">Act Reference Index</a></li>
+<li class="last leaf menu-mlid-7168"><a href="../../../sitemap">Site Map</a></li>
+</ul></div>	</nav>
+	<div id="breadcrumb"><a href="../../../../index.html">Home</a> &raquo; <a href="../../../../guide-social-security-law">Guide to Social Security Law</a> &raquo; <a href="../../../7" class="active-trail">7 Portability &amp; CFP</a> &raquo; <a href="../../2" class="active-trail">7.2 Arrangements for Payment Outside Australia</a> &raquo; <a href="../2" class="active-trail">7.2.2 Rate of Portable Pension</a> &raquo; 7.2.2.10 Calculating Proportional Portability for Non-Agreement Pensions</div>
+<div id="utility">
+	
+<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/guide-social-security-law/7/2/2/10"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="content" role="main">
+<article id="node-15805">
+<h1 >7.2.2.10 Calculating Proportional Portability for Non-Agreement Pensions</h1>
+<h2>Summary</h2>
+<p>Payments that can be paid overseas indefinitely, i.e. <a href="../../../acronyms#age" title="Age pension">Age</a>, <a href="../../../acronyms#dsp" title="Disability support pension">DSP</a> (terminally ill and leaving Australia permanently or permanently and severely impaired with no future work capacity), <a href="../../../acronyms#wp" title="Wife pension">WP</a> 'entitled persons' (<a href="../../../1/1/e/120">1.1.E.120</a>) and <a href="../../../acronyms#widb" title="Widow B pension">WidB</a> entitled persons, are paid at the non-proportional rate for the first 26 weeks of an absence. After the first 26 weeks the rate may become proportional - depending on the recipient's circumstances. The payments for the first 26 weeks MAY also include ancillary payments, such as <a href="../../../acronyms#ra" title="Rent assistance">RA</a>, <a href="../../../acronyms#pha" title="Pharmaceutical allowance">PhA</a> or <a href="../../../acronyms#ia" title="Incentive allowance">IA</a> (6 weeks only for <a href="../../../acronyms#tal" title="Telephone allowance">TAL</a> and pension supplement), if the absence is temporary.</p>
+<p>Some recipients retain pre 20 September 2000 proportionalisation rules. This may mean other exemptions from proportional rate, 12 months for the non-proportional period, or possible use of the partner's <a href="../../../acronyms#awlr" title="Australian working life residence">AWLR</a>, see <a href="../../1/1/10">7.1.1.10</a> Overview of Portability Legislation.</p>
+<p>DSP recipients who are granted indefinite portability because they are terminally ill cannot receive ancillary payments. This is because their absence is permanent and they cease to be an Australian resident.</p>
+<h2>Normal (non-proportional) income &amp; asset tested rate</h2>
+<p>A non-proportional rate is the rate generally payable in Australia to a qualified person. It is calculated after the relevant income and assets tests have been applied. The rate MAY include ancillary payments such as RA or PhA only if a recipient's absence is temporary.</p>
+<div class="reference">
+<p><strong>Policy reference:</strong> SS Guide <a href="../../../3/6/1/50">3.6.1.50</a> Payability of DSP, <a href="../../../3/6/2/20">3.6.2.20</a> Manifest Grants &amp; Rejections for DSP, <a href="../../1/2/20">7.1.2.20</a> Application of Portability Rules (Portability Table)</p>
+</div>
+<h2>Proportional rate</h2>
+<p>When a recipient, with unlimited portability, stays overseas for more than 26 weeks and has less than 420 months (35 years) of AWLR (<a href="../../../1/1/a/340">1.1.A.340</a>), the person is generally paid at a 'proportion' of the normal rate or at a proportional rate. The proportional rate is calculated using the proportional portability (<a href="../../../1/1/p/310">1.1.P.310</a>) provisions of the SSAct, unless the recipient is specially exempted (see below).</p>
+<p>Some international social security agreements (<a href="../../../1/1/a/120">1.1.A.120</a>), allow concessions for foreign incomes. One of these concessions is that if the person's rate is proportionalised, then any foreign pension that would be covered by an agreement is also proportionalised before being added into the income test. For couples, all affected foreign pensions received by either partner are added together, with half of the total income then being allocated to each partner and the appropriate AWLR rules being used for that partner. In all these cases (single and partnered) the rate can never exceed the rate that would be payable if the person had 420 months AWLR (for agreement pensions granted outside Australia before 1 July 2014 this will generally be 300 months AWLR.) This limit did not apply before 1 August 2000.</p>
+<h2>Exemptions from the proportional rate</h2>
+<p>If a person has AWLR of 420 months or more, the normal income and asset-tested rate can be paid overseas. RA, however, would still cease after 26 weeks (6 weeks only for TAL and maximum pension supplement) of a temporary absence, or on departure if the absence was permanent. The pension supplement basic amount (former GST supplement) can be paid overseas indefinitely.</p>
+<p>The following income support recipients, with indefinite portability, are exempt from the proportional rate. These are:</p>
+<ul><li>terminally ill DSP recipients who are severely disabled, who qualified for DSP because they became unable to work or permanently blind whilst they were an Australia resident, and</li>
+<li>permanently and severely impaired DSP recipients with no future work capacity who qualified for DSP because they became unable to work or permanently blind whilst they were an Australian resident, and</li>
+<li>entitled WidB pensioners whose partner died while both members of the couple were Australian residents, and who were overseas immediately before 20 Sept 2000 and have not returned to Australia for more than 26 weeks, and</li>
+<li>all pensioners granted before 2 July 1986 (proportional portability only came in on 1 July 1986), who were overseas immediately before 20 Sept 2000 and have not returned to Australia for more than 26 weeks.</li>
+</ul><div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 1221(2) Proportionality - WP and WidB rate for entitled persons, section 1220B(2) Proportionality - DSP rate for a severely disabled person</p>
+</div>
+<h2>Transfer between payments</h2>
+<p>For recipients who are transferred from one payment to another (e.g. transfers to Age under the SS(Admin)Act section 12) while they are overseas, SSAct sections 1220A, 1220B and 1221 apply as if the transfer occurred on the day on which the person departed Australia.</p>
+<p>If transfer from one payment to another would be disadvantageous to the recipient, the transfer should not be made.</p>
+<div class="example">
+<p><strong>Example:</strong> A recipient overseas receiving entitled WidB pension, who is not paid at the proportional rate because their partner died while an Australian resident, should not be transferred to Age if that pension were to be subject to proportionalisation and they have less than 420 months AWLR.</p>
+</div>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 1220A Proportionality - age pension rate, section 1220B Proportionality - disability support pension rate for a severely disabled person, section 1221 Proportionality - wife pension and widow B pension rate for entitled persons</p>
+<p><a href="https://www.legislation.gov.au/Series/C2004A00580" title="Social Security (Administration) Act 1999">SS(Admin)Act</a> section 12 Deemed claim in certain cases</p>
+</div>
+<h2>The pensions portability rate calculator</h2>
+<p>The pensions portability rate calculator is in the SSAct section 1221-A1 and is used to calculate the proportional rate. The following formula shows how the rate is derived:</p>
+<table><tbody><tr><td colspan="2">Overseas rate = (P × Q) ÷ 420, where:</td>
+</tr><tr><td>P =</td>
+<td>the yearly income and asset tested rate payable in Australia (the NOTIONAL DOMESTIC RATE),</td>
+</tr><tr><td>Q =</td>
+<td>the number of months of AWLR PLUS one month, but not exceeding 420, and</td>
+</tr><tr><td>420 =</td>
+<td>35 years expressed in months.</td>
+</tr></tbody></table><div class="example">
+<p><strong>Example:</strong> A recipient with a yearly income and asset tested rate of $3,500 and 18 years working life in Australia would get an overseas rate of $1,808.30 a year [(3,500 × 217) ÷ 420].</p>
+</div>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 1221-A1 Overall rate calculation process</p>
+</div>
+<h2>Recipients with partners</h2>
+<p>A recipient's proportional rate of pension is calculated using his or her OWN AWLR.</p>
+<h2>Recipients with NO AWLR (<a href="../../../1/1/a/340">1.1.A.340</a>)</h2>
+<p>Recipients with unlimited portability who have NO AWLR will get a proportional portability (<a href="../../../1/1/p/310">1.1.P.310</a>) rate of NIL, even though they may still QUALIFY for a pension after 26 weeks of continuous absence. As these recipients have an unlimited portability period they cannot apply for a discretionary extension.</p>
+<h2>Effect of compensation (<a href="../../../1/1/c/240">1.1.C.240</a>) payments</h2>
+<p>If a recipient also receives compensation payments that are directly deducted from their Australian payment, that direct deduction should occur immediately after the NOTIONAL DOMESTIC RATE has been calculated in step 3 of the Pension Portability Rate Calculator.</p>
+<h2>Blind recipients</h2>
+<p>Even though blind recipients are exempt from the income and asset tests, their payment is still affected by proportionalisation (unless exempt).</p>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 1220B(2) Proportionality - DSP rate for a severely disabled person</p>
+</div>
+<h2>Transfer to agreement rate</h2>
+<p>If a person would be better off being paid under an agreement, they can be transferred to payment under an agreement if they are in that agreement country.</p>
+<div class="example">
+<p><strong>Example:</strong> A WP recipient can use her husband's WLR.</p>
+</div>
+<p>The agreement needs to cover that particular payment type and category of person. This should not be done until the person's non-proportional period has ended. All implications of the decision need to be explained to the person including subsequent changes to portability. For more details see Part 10 of the Guide to Social Security Law.</p>
+<div class="reference">
+<p><strong>Policy reference:</strong> SS Guide <a href="../../../10">Part 10</a> Australian Social Security Agreements</p>
+</div>
+</article>	<div id="view-last-reviewed-date">
+		
+		  
+      Last reviewed:     17 August 2015  	</div>
+</div></div>
+<footer role="contentinfo" id="footer">
+	<ul class="menu"><li class="first leaf"><a href="../../../../contact-us">Contact us</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/copyright-disclaimer" title="">Copyright &amp; Disclaimer</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/privacy-policy" title="">Privacy</a></li>
+<li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
+<li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
+</ul></footer>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
+<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+</body>
+</html>

@@ -100,4 +100,24 @@ qtrs_ahead <- function(x, y) {
   qtrs_ahead
 }
 
+# vectorized switch 
+# e.g. Switch(c("A", "B", "C", "A"), "A" = 1, "B" = 2, "C" = 11:14)
+Switch <- function(Expr, ...) {
+  max.length <- prohibit_vector_recycling.MAXLENGTH(...)
+  out <- rep_len(..1, max.length)
+  dots <- list(...)
+  dot_noms <- names(dots)
+  for (n in seq_along(dots)) {
+    w <- which(Expr == dot_noms[n])
+    n_res <- switch(n, ...)
+    if (length(n_res) == 1L) {
+      out[w] <- n_res
+    } else {
+      out[w] <- n_res[w]
+    }
+  }
+  out
+}
+
+
 
