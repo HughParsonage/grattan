@@ -45,7 +45,7 @@ family_tax_benefit <- function(.data,
   #maintenance warning
   if(.data[ ,any((maintenance_income > 0) == (maintenance_children == 0))]) {
     stop("Incompatible combination of `maintenance_income` and `maintenance_children`.")
-  }
+  } 
   
   #ftbA: payed per child
   .data[ ,ftbA_max_rate_July_2015 := if_else(other_allowance_benefit_or_pension,
