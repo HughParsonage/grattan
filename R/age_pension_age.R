@@ -1,5 +1,13 @@
 #' Age of eligibility for the Age Pension
-#' @param when Either a Date 
+#' @param when Either a Date (or a character vector coercible to such) or a financial year,
+#' when the age of eligibility of Age Pension is requested. Defaults to current date.
+#' @param sex A character vector the same length as \code{when}, containing strings \code{"male"} and \code{"female
+#' "}. May be abbreviated to \code{"m"} or \code{"f"} and is case-insensitive.
+#' @return A numeric vector, the age of eligiblity for the Age Pension for each \code{when}.
+#' @examples
+#' age_pension()  # Current age of eligiblity
+#' age_pension("1995-12-31")
+#' age_pension("2013-14")
 #' @source \url{http://guides.dss.gov.au/guide-social-security-law/3/4/1/10}
 
 age_pension_age <- function(when = Sys.Date(),

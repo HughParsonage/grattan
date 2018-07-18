@@ -10,8 +10,20 @@
 age_pension_age(when = Sys.Date(), sex = "male")
 }
 \arguments{
-\item{when}{Either a Date}
+\item{when}{Either a Date (or a character vector coercible to such) or a financial year,
+when the age of eligibility of Age Pension is requested. Defaults to current date.}
+
+\item{sex}{A character vector the same length as \code{when}, containing strings \code{"male"} and \code{"female
+"}. May be abbreviated to \code{"m"} or \code{"f"} and is case-insensitive.}
+}
+\value{
+A numeric vector, the age of eligiblity for the Age Pension for each \code{when}.
 }
 \description{
 Age of eligibility for the Age Pension
+}
+\examples{
+age_pension()  # Current age of eligiblity
+age_pension("1995-12-31")
+age_pension("2013-14")
 }
