@@ -6,8 +6,9 @@
 \usage{
 age_pension(fortnightly_income = 0, annual_income = fortnightly_income * 26,
   has_partner = FALSE, n_dependants = 0L, partner_fortnightly_income = 0,
-  partner_annual_income = partner_fortnightly_income * 26, Date = NULL,
-  fy.year = NULL, assets_value = 0, is_home_owner = FALSE,
+  partner_annual_income = partner_fortnightly_income * 26,
+  partner_pensioner = has_partner, Date = NULL, fy.year = NULL,
+  assets_value = 0, financial_assets = 0, is_home_owner = FALSE,
   illness_separated_couple = FALSE, per = c("year", "fortnight"))
 }
 \arguments{
@@ -39,8 +40,6 @@ Returns the age pension payable for each individual defined by the arguments, as
 \description{
 Age pension
 }
-
 \details{
 Currently does not include the age pension supplement.
 }
-

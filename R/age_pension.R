@@ -14,7 +14,6 @@
 #' 
 #' @details
 #' Currently does not include the age pension supplement.
-=======
 #' @return Returns the age pension payable for each individual defined by the arguments, assuming otherwise eligible.
 #' 
 #' 
