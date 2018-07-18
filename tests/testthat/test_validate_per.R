@@ -1,12 +1,12 @@
 context('Validate per')
 
 test_that("Errors", {
-  expect_message(validate_per(),
-              regexp = "`per` not set; calculating fortnightly payment.")
-  expect_error(validate_per(NULL),
+  expect_message(validate_per(per = 'year', missing_per = TRUE),
+              regexp = "`per` not set; calculating yearly payment.")
+  expect_error(validate_per(per = NULL, missing_per = FALSE),
                regexp = "`per` was type 'NULL', but must be a string.")
-  expect_error(validate_per("month"),
+  expect_error(validate_per(per = "month", missing_per = FALSE),
                regexp = "`per = 'month'` but must be one of 'year', 'fortnight', or 'quarter'.")
-  expect_warning(validate_per(c("fortnight", "month")),
+  expect_warning(validate_per(per = c("fortnight", "month"), missing_per = FALSE),
                regexp = "`per` is provided but has length > 1 so only the first element (`per = 'fortnight'`) will be used.")
 })

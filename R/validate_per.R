@@ -1,8 +1,8 @@
 #' Validate per
  
 
-validate_per <- function(per = 'fortnight') {
-  if (missing(per)) {
+validate_per <- function(per, missing_per) {
+  if (missing_per) {
     per <- per[1L]
     message("`per` not set; calculating ", paste0(per, "ly"), " payment.")
   } else {
@@ -19,7 +19,5 @@ validate_per <- function(per = 'fortnight') {
     if (per %notin% c("year", "fortnight", "quarter")) {
       stop("`per = '", per, "'` but must be one of 'year', 'fortnight', or 'quarter'. ")
     }
-    
   }
-  
 }
