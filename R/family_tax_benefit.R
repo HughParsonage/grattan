@@ -32,7 +32,7 @@ family_tax_benefit <- function(.data,
   }
   
   if(!any(class(.data) == "data.frame")) {
-    stop("`.data` is not of class `data.frame`.")
+    stop("`.data` is not of class `data.frame`.") 
   }
   
   if(or(!all(lapply(.data, class)[c('id_hh','id', 'maintenance_income', 'maintenance_children')] 
