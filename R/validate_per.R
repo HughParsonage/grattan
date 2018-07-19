@@ -1,5 +1,12 @@
 #' Validate per
-#' @export validate_per
+#' 
+#' Checks whether a valid input of `per` is used and outputs the amount which yearly payments are divided by to get the desired rate. 
+#' 
+#' @param per How often are payments made? Can only take values 'year', 'fortnight', or 'quarter'.
+#' @param missing_per Is `per`` missing in the outer function? If so the defualt for that function will be used.
+#' @param .fortnights_per_yr What is the ratio of the fortnightly payment amount to the yearly payment amount? Can only take values 26 or 365/14.
+#' 
+#' @author Matthew Katzen
 
 validate_per <- function(per, missing_per, .fortnights_per_yr = NULL) {
   if (missing_per) {
