@@ -7,6 +7,8 @@
 #' @param .fortnights_per_yr What is the ratio of the fortnightly payment amount to the yearly payment amount? Can only take values 26 or 365/14.
 #' 
 #' @author Matthew Katzen
+#' 
+#' @export validate_per
 
 validate_per <- function(per, missing_per, .fortnights_per_yr = NULL) {
   if (missing_per) {
@@ -30,17 +32,12 @@ validate_per <- function(per, missing_per, .fortnights_per_yr = NULL) {
   
   if (per == "fortnight") {
     if (is.null(.fortnights_per_yr)) {
-      .fortnights_per_yr <- 26
       warning("`.fortnights_per_year` not set. Using 26 as default.")
-    }
-    if (.fortnights_per_yr == 26) {
       26
-    } else if (.fortnights_per_yr == 365/14){
-      365/14
-    } else if (!is.numeric(.fortnights_per_yr)){
-      stop("`per` was type '", typeof(per), "', but must be numeric.")
+    } else if (is.numeric(.fortnights_per_yr)) {
+      .fortnights_per_yr
     } else {
-      stop("`.fortnights_per_yr` must be either 26 or 365/14")
+      stop("`per` was type '", typeof(per), "', but must be numeric.")
     } 
     
   } else if(per == "quarter") {

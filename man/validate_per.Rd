@@ -7,12 +7,15 @@
 validate_per(per, missing_per, .fortnights_per_yr = NULL)
 }
 \arguments{
-\item{per}{How often are payments will made? Can only take values 'year', 'fortnight', or 'quarter'.}
+\item{per}{How often are payments made? Can only take values 'year', 'fortnight', or 'quarter'.}
 
-\item{missing_per}{Is `per`` missing in the outer function? If so the defualt for that function is being used.}
+\item{missing_per}{Is `per`` missing in the outer function? If so the defualt for that function will be used.}
 
-\item{.fortnights_per_yr}{What is the ratio of the fortnightly payment amount to the yearly payment amount. Can only take values 26 or 365/14.}
+\item{.fortnights_per_yr}{What is the ratio of the fortnightly payment amount to the yearly payment amount? Can only take values 26 or 365/14.}
 }
 \description{
-Checks whether a valid input of `per` is used and outputs the amount yearly payments are divided by to get the desired rate.
+Checks whether a valid input of `per` is used and outputs the amount which yearly payments are divided by to get the desired rate.
+}
+\author{
+Matthew Katzen
 }
