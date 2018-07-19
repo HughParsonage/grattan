@@ -18,6 +18,8 @@
 #' @param taper_ftbA_2 The amount at which ftb A base payment is reduced for each dollar earned above income_test_ftbA_2_bound.
 #' @param taper_ftbB The amount at which ftb B payment is reduced for each dollar earned above income_test_ftbB_bound.
 #' @param per How often the payment will be made. At present payments can only be annually.
+#' @param copy (logical, default: \code{TRUE}) Should a copy of \code{.data} be made before the calculation? 
+#' If \code{FALSE}, intermediate values will be assigned by reference to \code{.data} (if not \code{NULL}).
 #' @author Matthew Katzen
 #' @export
 #' 
@@ -38,7 +40,8 @@ family_tax_benefit <- function(.data = NULL,
                                taper_ftbA_1 = 0.2,
                                taper_ftbA_2 = 0.3,
                                taper_ftbB = 0.2,
-                               per = 'annual') {
+                               per = 'annual', 
+                               copy = TRUE) {
   # https://www.humanservices.gov.au/sites/default/files/co029-1603en.pdf
   # https://web.archive.org/web/20160420184949/http://guides.dss.gov.au/family-assistance-guide/3/1/1/20
   # historical rates: http://guides.dss.gov.au/family-assistance-guide/3/6/
@@ -176,6 +179,12 @@ family_tax_benefit <- function(.data = NULL,
       stop("Incompatible combination of `maintenance_income` and `maintenance_children`.")
     } 
   }
+  
+  if (copy) {
+    .data <- copy(.data)
+  }
+  
+  per_m <- validate_per(per)
   
   # ftbA: paid per child
   .data[, ftbA_max_rate_July_2015 := if_else(other_allowance_benefit_or_pension,

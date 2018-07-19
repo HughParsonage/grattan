@@ -10,7 +10,7 @@ family_tax_benefit(.data = NULL, id_hh = NULL, id = NULL, age = NULL,
   maintenance_children = NULL, income_test_ftbA_1_bound = 51027,
   income_test_ftbA_2_bound = 94316, income_test_ftbB_bound = 5402,
   taper_ftbA_1 = 0.2, taper_ftbA_2 = 0.3, taper_ftbB = 0.2,
-  per = "annual")
+  per = "annual", copy = TRUE)
 }
 \arguments{
 \item{.data}{\code{data.table} input. Each row is an individual. 
@@ -47,6 +47,9 @@ Columns must be have the same names}
 \item{taper_ftbB}{The amount at which ftb B payment is reduced for each dollar earned above income_test_ftbB_bound.}
 
 \item{per}{How often the payment will be made. At present payments can only be annually.}
+
+\item{copy}{(logical, default: \code{TRUE}) Should a copy of \code{.data} be made before the calculation? 
+If \code{FALSE}, intermediate values will be assigned by reference to \code{.data} (if not \code{NULL}).}
 }
 \description{
 Family tax benefit
