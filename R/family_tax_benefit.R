@@ -1,6 +1,15 @@
 #' Family tax benefit
 #' 
-#' @param .data .data table input. Each row is an individual. Column names are `id_hh`: household id, `id`: individual id, `age`: individual's age, `income`: individual's income, `in_secondary_school`: does the individual attend secondary school, `single_parent`: is the parent single, `other_allowance_benefit_or_pension`: does the individual receive a pension, benefit, or labour market program payment such as Youth Allowance, `maintenance_income`: the amount of maintenance income the individual receives for the care of a child/children from a previous relationship, `maintenance_children`: the number of children who you receive maintenance for that are in you care.
+#' @param .data \code{data.table} input. Each row is an individual. Column names are.
+#' @param id individual id
+#' @param id_hh household id, used to group households to determine eligiblity and number of children
+#' @param age numeric: age of each \code{id}
+#' @param income numeric: income of each \code{id}
+#' @param in_secondary_school logical column: does \code{id} attend secondary school?
+#' @param single_parent logical column: is \code{id} (a parent) single?
+#' @param other_allowance_benefit_or_pension logical column: does the individual receive a pension, benefit, or labour market program payment such as Youth Allowance?
+#' @param maintenance_income the amount of maintenance income the individual receives for the care of a child/children from a previous relationship
+#' @param maintenance_children the number of children in the care of \code{id} for whom \code{id} receives maintenance
 #' @param income_test_ftbA_1_bound Lower bound for which reduction in ftb A max payment occurs at rate taper_ftbA_1.
 #' @param income_test_ftbA_2_bound Lower bound for which reduction in ftb A base payment occurs at rate taper_ftbA_1.
 #' @param income_test_ftbB_bound Lower bound for which reduction in ftb B payment occurs at rate taper_ftbB.
@@ -12,7 +21,8 @@
 #' @export
 #' 
 
-family_tax_benefit <- function(.data, 
+family_tax_benefit <- function(.data,
+                               
                                income_test_ftbA_1_bound = 51027,
                                income_test_ftbA_2_bound = 94316,
                                income_test_ftbB_bound = 5402,
