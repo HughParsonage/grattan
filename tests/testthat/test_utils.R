@@ -67,3 +67,11 @@ test_that("koffset", {
   expect_equal(koffset(37000 + 1:10, c(0, 37e3, 66667, Inf), c(445, 445, 0, 0)), 
                lito(37000 + 1:10))
 })
+
+test_that("Switch", {
+  expect_equal(Switch(c("A", "B", "C", "A"), "A" = 1, "B" = 2, "C" = 11:14), 
+               c(1, 2, 13, 1))
+  expect_equal(Switch(c("A", "B", "C", "A"), "A" = 1:4, "B" = 2, "C" = 11:14), 
+               c(1, 2, 13, 4))
+})
+
