@@ -20,6 +20,19 @@ test_that("Eligibility", {
                              partner_annual_income = 50000,
                              children_annual_income = 50000),
                age_pension(Date = "2018-03-20"))
+  #high_adat and receving other payment
+  expect_equal(carer_payment(Date = "2018-03-20", 
+                             high_adat = TRUE, 
+                             care_receiver_annual_income = 50000, 
+                             partner_annual_income = 100000,
+                             receiving_other_payment = TRUE),
+               age_pension(Date = "2018-03-20"))
+  expect_equal(carer_payment(Date = "2018-03-20", 
+                             high_adat = TRUE, 
+                             care_receiver_asset_value = 500000, 
+                             partner_asset_value = 500000,
+                             receiving_other_payment = TRUE),
+               age_pension(Date = "2018-03-20"))
   #child not at home - income
   expect_equal(carer_payment(Date = "2018-03-20", 
                              dclad_eligible = TRUE,
