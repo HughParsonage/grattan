@@ -4,7 +4,7 @@
 \alias{validate_per}
 \title{Validate per}
 \usage{
-validate_per(per, missing_per)
+validate_per(per, missing_per, .fortnights_per_yr = NULL)
 }
 \description{
 Validate per
