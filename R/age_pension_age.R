@@ -9,6 +9,7 @@
 #' age_pension_age("1995-12-31")
 #' age_pension_age("2013-14")
 #' @source \url{http://guides.dss.gov.au/guide-social-security-law/3/4/1/10}
+#' @export
 
 age_pension_age <- function(when = Sys.Date(),
                             sex = "male") {
