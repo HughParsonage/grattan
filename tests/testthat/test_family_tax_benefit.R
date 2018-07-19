@@ -129,4 +129,76 @@ test_that("Errors", {
                regexp = "`.data` is not of class `data.frame`.")
 })
 
+test_that("Errors during non .data arguments", {
+  expect_error(family_tax_benefit(.data = NULL), 
+               "`.data` was NULL, yet `id_hh` was also NULL.", 
+               fixed = TRUE)
+  expect_error(family_tax_benefit(id_hh = 1, id = 1, 
+                                  age = "50", 
+                                  income = 50e3,
+                                  in_secondary_school = 1L,
+                                  single_parent = FALSE,
+                                  other_allowance_benefit_or_pension = FALSE,
+                                  maintenance_income = 0,
+                                  maintenance_children = 0L), 
+               "`age` was type.*numeric")
+  expect_error(family_tax_benefit(id_hh = 1, id = 1, 
+                                  age = 50,
+                                  income = '50e3',
+                                  in_secondary_school = 1L,
+                                  single_parent = FALSE,
+                                  other_allowance_benefit_or_pension = FALSE,
+                                  maintenance_income = 0,
+                                  maintenance_children = 0L), 
+               "`income` was type.*numeric")
+  expect_error(family_tax_benefit(id_hh = 1, id = 1, 
+                                  age = 50, income = 50e3,
+                                  in_secondary_school = 1L,
+                                  single_parent = FALSE,
+                                  other_allowance_benefit_or_pension = FALSE,
+                                  maintenance_income = 0,
+                                  maintenance_children = 0L), 
+               "`in_secondary_school` was type.*logical")
+  expect_error(family_tax_benefit(id_hh = 1, id = 1, 
+                                  age = 50, income = 50e3,
+                                  in_secondary_school = 1L,
+                                  single_parent = FALSE,
+                                  other_allowance_benefit_or_pension = FALSE,
+                                  maintenance_income = 0,
+                                  maintenance_children = 0L), 
+               "`in_secondary_school` was type.*logical")
+  expect_error(family_tax_benefit(id_hh = 1, id = 1, 
+                                  age = 50, income = 50e3,
+                                  in_secondary_school = FALSE,
+                                  single_parent = 1,
+                                  other_allowance_benefit_or_pension = FALSE,
+                                  maintenance_income = 0,
+                                  maintenance_children = 0L), 
+               "`single_parent` was type.*logical")
+  expect_error(family_tax_benefit(id_hh = 1, id = 1, 
+                                  age = 50, income = 50e3,
+                                  in_secondary_school = FALSE,
+                                  single_parent = FALSE,
+                                  other_allowance_benefit_or_pension = 1,
+                                  maintenance_income = 0,
+                                  maintenance_children = 0L), 
+               "`other_allowance_benefit_or_pension` was type.*logical")
+  expect_error(family_tax_benefit(id_hh = 1, id = 1, 
+                                  age = 50, income = 50e3,
+                                  in_secondary_school = FALSE,
+                                  single_parent = FALSE,
+                                  other_allowance_benefit_or_pension = FALSE,
+                                  maintenance_income = '0',
+                                  maintenance_children = 0L), 
+               "`maintenance_income` was type.*numeric")
+  expect_error(family_tax_benefit(id_hh = 1, id = 1, 
+                                  age = 50, income = 50e3,
+                                  in_secondary_school = FALSE,
+                                  single_parent = FALSE,
+                                  other_allowance_benefit_or_pension = FALSE,
+                                  maintenance_income = 0,
+                                  maintenance_children = '0'), 
+               "`maintenance_children` was type.*integer")
+})
+
 

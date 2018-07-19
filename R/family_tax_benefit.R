@@ -46,25 +46,26 @@ family_tax_benefit <- function(.data = NULL,
   # https://web.archive.org/web/20160420184949/http://guides.dss.gov.au/family-assistance-guide/3/1/1/20
   # historical rates: http://guides.dss.gov.au/family-assistance-guide/3/6/
   if (is.null(.data)) {
-    check_null <- function(x) {
+    check_null <- function(x, ...) {
       if (is.null(x)) {
         xd <- deparse(substitute(x))
         stop("`.data` was NULL, yet ", "`", xd, "` was also NULL. ", 
              "When `data` is not provided, you must provided all columns explicitly.")
       }
-      TRUE
+      if (!missing(..1)) {
+        check_null(...)
+      }
     }
-    vapply(list(id_hh,
-                id,
-                age,
-                income,
-                in_secondary_school,
-                single_parent, 
-                other_allowance_benefit_or_pension,
-                maintenance_income,
-                maintenance_children), 
-           check_null, 
-           FALSE)
+    
+    check_null(id_hh,
+               id,
+               age,
+               income,
+               in_secondary_school, 
+               single_parent, 
+               other_allowance_benefit_or_pension,
+               maintenance_income,
+               maintenance_children)
     
     max.length <- 
       prohibit_vector_recycling.MAXLENGTH(id_hh,
@@ -102,13 +103,8 @@ family_tax_benefit <- function(.data = NULL,
            ", but must be a numeric vector.")
     }
     if (!is.integer(maintenance_children)) {
-      stop("`maintenance_children` was type", typeof(maintenance_children),
+      stop("`maintenance_children` was type ", typeof(maintenance_children),
            ", but must be an integer vector.")
-    }
-    
-    setdt_list <- function(...) {
-      noms <- vapply(as.list(substitute(list(...)))[-1L], deparse, character(1L))
-      setnames(setDT(lapply(list(...), rep_len, max.length)), noms)
     }
     
     .data <- 
