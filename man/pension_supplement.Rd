@@ -6,13 +6,15 @@
 \usage{
 pension_supplement(has_partner = FALSE, age = 70, n_dependants = 0,
   parenting_payment = FALSE, Date = NULL, fy.year = NULL,
-  age_pension_age_requirement = FALSE, disability_support_pension = FALSE,
-  per = "fortnight", overseas_absence = FALSE, seperated_couple = FALSE)
+  qualifying_payment = "age_pension", per = "fortnight",
+  overseas_absence = FALSE, seperated_couple = FALSE)
 }
 \arguments{
 \item{has_partner}{Does the individual have a partner?}
 
-\item{age}{The individual's age. Default is 18 years.}
+\item{age}{The individual's age. Default is 70 years.}
+
+\item{n_dependants}{How many dependant children does the individual have?}
 
 \item{n_dependants}{How many dependant children does the individual have?}
 
@@ -22,13 +24,11 @@ pension_supplement(has_partner = FALSE, age = 70, n_dependants = 0,
 
 \item{fy.year}{Financial year. Default is "2015-16" if Date is not present.}
 
-\item{age_pension_age_requirement}{Does the payment for which the pension supplement is being added to require the individual to be over age pension age to receive? i.e. one of ABSTUDY, Austudy, Parenting Payment, Partner Allowance, Special Benefit, Widow Allowance.}
-
-\item{disability_support_pension}{Is the individual receiving the disability support pension?}
+\item{qualifying_payment}{What is the payment that the supplement is being applied to?}
 
 \item{per}{How often the payment will be made. Default is fortnightly.}
 
-\item{overseas_absence}{Will the individual be living outside of Australia for more than 6 weeks of the year?}
+\item{overseas_absence}{Will the individual be living outside of Australia for more than 6 weeks of the upcoming year?}
 
 \item{seperated_couple}{Is the individual part of an illness separated couple, respite care couple, or partner imprisoned?}
 }
