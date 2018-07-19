@@ -215,6 +215,18 @@ family_tax_benefit <- function(.data = NULL,
     max(x[-which.max(x)])
   }
   
+  family_income = NULL
+  ftbA_max_family_rate = NULL
+  ftbA_base_family_rate = NULL
+  ftbA_supplement_family_rate = NULL
+  primary_income = NULL
+  secondary_income = NULL
+  youngest_age = NULL
+  youngest_in_secondary = NULL
+  youngest_allowance_benefit_or_pension = NULL
+  single_parent = NULL
+  family_maintenance_income_test_ftbA = NULL
+  
   family_data <- 
     .data[, .(family_income = sum(income), 
               ftbA_max_family_rate = sum(ftbA_max_rate_July_2015), 
@@ -233,7 +245,7 @@ family_tax_benefit <- function(.data = NULL,
   # cannot be paid during Paid Parental Leave period
   # note: eligibility changed for fy 2016-17:
   # https://www.humanservices.gov.au/sites/default/files/co029-1607en.pdf
-  
+  ftbB_rate_July_2015 <- NULL
   family_data %>%
     .[, ftbB_rate_July_2015 := if_else(youngest_allowance_benefit_or_pension,
                                        0,
@@ -241,33 +253,42 @@ family_tax_benefit <- function(.data = NULL,
                                                152.88,
                                                if_else(youngest_age <= 15 | (youngest_age <= 19 & youngest_in_secondary),
                                                        106.82,
-                                                       0)))] %>%
-    
-    
+                                                       0)))]
+  
+  ftbB_supplement_July_2015 <- NULL
+  family_data %>%
     .[, ftbB_supplement_July_2015 := 354.05 * and(!youngest_allowance_benefit_or_pension,
                                                   or(youngest_age <= 15,
                                                      and(youngest_age <= 19, 
-                                                         youngest_in_secondary)))] %>%
+                                                         youngest_in_secondary)))]
   
-  
+  income_test_ftbA_1 <- NULL
   # income reduction test ftbA
+  family_data %>%
     .[, income_test_ftbA_1 := if_else(family_income < income_test_ftbA_1_bound,
                                       0,
-                                      taper_ftbA_1 * (family_income - income_test_ftbA_1_bound))] %>%
+                                      taper_ftbA_1 * (family_income - income_test_ftbA_1_bound))]
   
+  income_test_ftbA_2 <- NULL
+  family_data %>%
     .[, income_test_ftbA_2 := if_else(family_income < income_test_ftbA_2_bound,
                                       0,
-                                      taper_ftbA_2 * (family_income - income_test_ftbA_2_bound))] %>%
+                                      taper_ftbA_2 * (family_income - income_test_ftbA_2_bound))]
     
     # Note: before 2015 income_test_ftbA_2_bound
     # increased based upon number of ftb children http://guides.dss.gov.au/family-assistance-guide/3/6/1 note 2G
   
-  #income test ftbB
-    .[, ftbB_eligible := primary_income < 100000] %>%
+  # Income test ftbB
+  ftbB_eligible <- NULL
+  family_data %>%
+    .[, ftbB_eligible := primary_income < 100000]
     
+  income_test_ftbB <- NULL
+  family_data %>%
     .[, income_test_ftbB := if_else(ftbB_eligible & !single_parent & secondary_income > income_test_ftbB_bound,
                                     taper_ftbB * (secondary_income - income_test_ftbB_bound),
-                                    0)] %>%
+                                    0)]
+  family_data %>%
     .[, .(id_hh, 
           ftbA_incl_supplement = pmax(365/14 * ftbA_max_family_rate + ftbA_supplement_family_rate - income_test_ftbA_1 - family_maintenance_income_test_ftbA, 
                                       365/14 * ftbA_base_family_rate + ftbA_supplement_family_rate - income_test_ftbA_2,
