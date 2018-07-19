@@ -28,21 +28,16 @@ validate_per <- function(per, missing_per, .fortnights_per_yr = NULL) {
     }
   }
   
-  if (per == "fortnight") {
-    if (is.null(.fortnights_per_yr)) {
-      warning("`.fortnights_per_year` not set. Using 26 as default.")
-      26
-    } else if (is.numeric(.fortnights_per_yr)) {
-      .fortnights_per_yr
-    } else {
-      stop("`per` was type '", typeof(per), "', but must be numeric.")
-    } 
-    
-  } else if(per == "quarter") {
-    4
-  } else if(per == "year") {
-    1
-  }
+  switch(per,
+         fortnight = {if (is.null(.fortnights_per_yr)) {
+                        warning("`.fortnights_per_year` not set. Using 26 as default.")
+                        26
+                      } else if (is.numeric(.fortnights_per_yr)) {
+                       .fortnights_per_yr
+                      } else {
+                       stop("`per` was type '", typeof(per), "', but must be numeric.")
+                      } },
+         quarter = 4,
+         year = 1)
   
 }
-  
