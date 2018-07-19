@@ -184,7 +184,7 @@ family_tax_benefit <- function(.data = NULL,
     .data <- copy(.data)
   }
   
-  per_m <- validate_per(per)
+  # per_m <- validate_per(per)
   
   # ftbA: paid per child
   .data[, ftbA_max_rate_July_2015 := if_else(other_allowance_benefit_or_pension,

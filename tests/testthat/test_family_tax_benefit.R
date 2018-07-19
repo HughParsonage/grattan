@@ -38,6 +38,16 @@ test_that("Benefit with 2 parent equal income", {
                      maintenance_children = 0L)
   expect_equal(family_tax_benefit(temp), 
                data.table(id_hh = 1, ftbA_incl_supplement = 5412.95, ftbB_incl_supplement = 3139))
+  expect_equal(family_tax_benefit(temp), 
+               family_tax_benefit(id_hh = c(1, 1, 1),
+                                  id = 1:3, age = c(35, 30, 5), income = c(0, 0, 0),
+                                  in_secondary_school= FALSE,
+                                  single_parent = FALSE,
+                                  other_allowance_benefit_or_pension = FALSE,
+                                  maintenance_income = 0,
+                                  maintenance_children = 0L))
+  
+  
   #test1
   temp <- data.table(id_hh = c(1, 1, 1),
                      id = 1:3,
@@ -118,3 +128,5 @@ test_that("Errors", {
   expect_error(family_tax_benefit(temp), 
                regexp = "`.data` is not of class `data.frame`.")
 })
+
+
