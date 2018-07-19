@@ -112,7 +112,11 @@ test_that("Multiple HH - combos of previous tests", {
 test_that("Errors", {
   library(data.table)
   temp <- data.table(id_hh = c(1, 1, 1), id = 1:3, age = c(35, 30, 0), income = c(0, 0, 0),
-                     in_secondary_school= FALSE, single_parent= FALSE, other_allowance_benefit_or_pension= FALSE, maintenance_income = c(100, 0, 0), maintenance_children = 0)
+                     in_secondary_school= FALSE,
+                     single_parent = FALSE,
+                     other_allowance_benefit_or_pension= FALSE,
+                     maintenance_income = c(100, 0, 0),
+                     maintenance_children = 0)
   expect_error(family_tax_benefit(temp), 
                regexp = "Incompatible combination of `maintenance_income` and `maintenance_children`")
   temp <- data.table(id_hh = c(1, 1, 1), id = 1:3, age = c(35, 30, 0), income = c(0, 0, 0),
@@ -127,6 +131,30 @@ test_that("Errors", {
                                  in_secondary_school= FALSE, single_parent= FALSE, other_allowance_benefit_or_pension= FALSE, maintenance_income = 0, maintenance_children = c(1,0,0)))
   expect_error(family_tax_benefit(temp), 
                regexp = "`.data` is not of class `data.frame`.")
+  
+  temp <- data.table(id_hh = c(1, 1, 1),
+                     id = 1:3,
+                     age = c(35, 30, '0'),
+                     income = c(0, 0, 0),
+                     in_secondary_school= FALSE,
+                     single_parent = FALSE,
+                     other_allowance_benefit_or_pension= FALSE,
+                     maintenance_income = c(100, 0, 0),
+                     maintenance_children = 0)
+  expect_error(family_tax_benefit(temp), 
+               "Column 'age' in `.data`.*numeric")
+  temp[, age := as.numeric(age)]
+  temp[, in_secondary_school := as.character(in_secondary_school)]
+  expect_error(family_tax_benefit(temp), 
+               "Column 'in_secondary_school'.*logical")
+  temp[, in_secondary_school := as.logical(in_secondary_school)]
+  temp[, maintenance_children := factor(maintenance_children)]
+  expect_error(family_tax_benefit(temp), 
+               "Column 'maintenance_children'.*factor")
+  temp[, maintenance_children := as.character(maintenance_children)]
+  expect_error(family_tax_benefit(temp), 
+               "Column 'maintenance_children'.*character")
+  
 })
 
 test_that("Errors during non .data arguments", {

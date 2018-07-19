@@ -183,6 +183,7 @@ family_tax_benefit <- function(.data = NULL,
   # per_m <- validate_per(per)
   
   # ftbA: paid per child
+  ftbA_max_rate_July_2015 <- NULL
   .data[, ftbA_max_rate_July_2015 := if_else(other_allowance_benefit_or_pension,
                                              0,
                                              if_else(age < 13,
@@ -192,19 +193,22 @@ family_tax_benefit <- function(.data = NULL,
                                                              if_else(age <= 19 & in_secondary_school,
                                                                      233.94,
                                                                      0))))]
+  ftbA_base_rate_July_2015 <- NULL
   .data[, ftbA_base_rate_July_2015 := if_else(!other_allowance_benefit_or_pension & (age <= 15 | (age <= 19 & in_secondary_school)),
                                               57.68,
                                               0)]
   
+  ftbA_supplement_July_2015 <- NULL
   .data[, ftbA_supplement_July_2015 := if_else(!other_allowance_benefit_or_pension & (age <= 15 | (age <= 19 & in_secondary_school)),
                                                726.35,
                                                0)]
-  #note 1: supplement conditional on meeting requirements e.g. immunisations, tax returns
-  #note 2: can only be paid annually
+  # Note 1: supplement conditional on meeting requirements e.g. immunisations, tax returns
+  # Note 2: can only be paid annually
   
-  #MAINTENANCE ACTION TEST: if you care for a child from a previous relationship and do not take reasonable action to attain child support, child is ineleigible for ftb A max rate (can still receive ftbA base payment).
+  # MAINTENANCE ACTION TEST: if you care for a child from a previous relationship and do not take reasonable action to attain child support, child is ineleigible for ftb A max rate (can still receive ftbA base payment).
   
-  #MAINTENANCE INCOME TEST ftbA
+  # MAINTENANCE INCOME TEST ftbA
+  maintenance_income_test_ftbA <- NULL
   .data[, maintenance_income_test_ftbA := if_else(maintenance_children > 0,
                                                   if_else(maintenance_children == 1,
                                                           pmax(0.5 * (maintenance_income - 1543.95), 0),
@@ -224,7 +228,6 @@ family_tax_benefit <- function(.data = NULL,
   youngest_age = NULL
   youngest_in_secondary = NULL
   youngest_allowance_benefit_or_pension = NULL
-  single_parent = NULL
   family_maintenance_income_test_ftbA = NULL
   
   family_data <- 
