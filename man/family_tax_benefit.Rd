@@ -4,13 +4,35 @@
 \alias{family_tax_benefit}
 \title{Family tax benefit}
 \usage{
-family_tax_benefit(.data, income_test_ftbA_1_bound = 51027,
+family_tax_benefit(.data = NULL, id_hh = NULL, id = NULL, age = NULL,
+  income = NULL, in_secondary_school = NULL, single_parent = NULL,
+  other_allowance_benefit_or_pension = NULL, maintenance_income = NULL,
+  maintenance_children = NULL, income_test_ftbA_1_bound = 51027,
   income_test_ftbA_2_bound = 94316, income_test_ftbB_bound = 5402,
   taper_ftbA_1 = 0.2, taper_ftbA_2 = 0.3, taper_ftbB = 0.2,
-  per = "annual")
+  per = "annual", copy = TRUE)
 }
 \arguments{
-\item{.data}{\code{data.table} input. Each row is an individual. Column names are.}
+\item{.data}{\code{data.table} input. Each row is an individual. 
+Columns must be have the same names}
+
+\item{id_hh}{household id, used to group households to determine eligiblity and number of children}
+
+\item{id}{individual id}
+
+\item{age}{numeric: age of each \code{id}}
+
+\item{income}{numeric: income of each \code{id}}
+
+\item{in_secondary_school}{logical column: does \code{id} attend secondary school?}
+
+\item{single_parent}{logical column: is \code{id} (a parent) single?}
+
+\item{other_allowance_benefit_or_pension}{logical column: does the individual receive a pension, benefit, or labour market program payment such as Youth Allowance?}
+
+\item{maintenance_income}{numeric: the amount of maintenance income the individual receives for the care of a child/children from a previous relationship}
+
+\item{maintenance_children}{integer: the number of children in the care of \code{id} for whom \code{id} receives maintenance}
 
 \item{income_test_ftbA_1_bound}{Lower bound for which reduction in ftb A max payment occurs at rate taper_ftbA_1.}
 
@@ -25,24 +47,6 @@ family_tax_benefit(.data, income_test_ftbA_1_bound = 51027,
 \item{taper_ftbB}{The amount at which ftb B payment is reduced for each dollar earned above income_test_ftbB_bound.}
 
 \item{per}{How often the payment will be made. At present payments can only be annually.}
-
-\item{id}{individual id}
-
-\item{id_hh}{household id, used to group households to determine eligiblity and number of children}
-
-\item{age}{numeric: age of each \code{id}}
-
-\item{income}{numeric: income of each \code{id}}
-
-\item{in_secondary_school}{logical column: does \code{id} attend secondary school?}
-
-\item{single_parent}{logical column: is \code{id} (a parent) single?}
-
-\item{other_allowance_benefit_or_pension}{logical column: does the individual receive a pension, benefit, or labour market program payment such as Youth Allowance?}
-
-\item{maintenance_income}{the amount of maintenance income the individual receives for the care of a child/children from a previous relationship}
-
-\item{maintenance_children}{the number of children in the care of \code{id} for whom \code{id} receives maintenance}
 }
 \description{
 Family tax benefit

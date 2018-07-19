@@ -29,13 +29,25 @@ test_that("Fringe cases", {
 test_that("Benefit with 2 parent equal income", {
   library(data.table)
   #no income
-  temp <- data.table(id_hh = c(1, 1, 1), id = 1:3, age = c(35, 30, 5), income = c(0, 0, 0),
-                     in_secondary_school= FALSE, single_parent= FALSE, other_allowance_benefit_or_pension= FALSE, maintenance_income = 0, maintenance_children = 0)
+  temp <- data.table(id_hh = c(1, 1, 1),
+                     id = 1:3, age = c(35, 30, 5), income = c(0, 0, 0),
+                     in_secondary_school= FALSE,
+                     single_parent = FALSE,
+                     other_allowance_benefit_or_pension = FALSE,
+                     maintenance_income = 0,
+                     maintenance_children = 0L)
   expect_equal(family_tax_benefit(temp), 
                data.table(id_hh = 1, ftbA_incl_supplement = 5412.95, ftbB_incl_supplement = 3139))
   #test1
-  temp <- data.table(id_hh = c(1, 1, 1), id = 1:3, age = c(35, 30, 5), income = c(30000, 30000, 0),
-                     in_secondary_school= FALSE, single_parent= FALSE, other_allowance_benefit_or_pension= FALSE, maintenance_income = 0, maintenance_children = 0)
+  temp <- data.table(id_hh = c(1, 1, 1),
+                     id = 1:3,
+                     age = c(35, 30, 5),
+                     income = c(30000, 30000, 0),
+                     in_secondary_school= FALSE,
+                     single_parent= FALSE, 
+                     other_allowance_benefit_or_pension= FALSE,
+                     maintenance_income = 0, 
+                     maintenance_children = 0L)
   expect_equal(family_tax_benefit(temp), 
                data.table(id_hh = 1, ftbA_incl_supplement = 3618.35, ftbB_incl_supplement = 0))
   #base
@@ -100,13 +112,9 @@ test_that("Errors", {
   temp <- data.table(ERROR = c(1, 1, 1), id = 1:3, age = c(35, 30, 0), income = c(0, 0, 0),
                      in_secondary_school= FALSE, single_parent= FALSE, other_allowance_benefit_or_pension= FALSE, maintenance_income = 0, maintenance_children = c(1,0,0))
   expect_error(family_tax_benefit(temp), 
-               regexp = "`.data` does not contain all the relevant columns.")
+               regexp = "`.data` did not contain a column .*id_hh")
   temp <- data.matrix(data.frame(id_hh = c(1, 1, 1), id = 1:3, age = c(35, 30, 0), income = c(0, 0, 0),
                                  in_secondary_school= FALSE, single_parent= FALSE, other_allowance_benefit_or_pension= FALSE, maintenance_income = 0, maintenance_children = c(1,0,0)))
   expect_error(family_tax_benefit(temp), 
                regexp = "`.data` is not of class `data.frame`.")
-  temp <- data.frame(id_hh = c('1', 1, 1), id = 1:3, age = c(35, 30, 0), income = c(0, 0, 0),
-                     in_secondary_school= FALSE, single_parent= FALSE, other_allowance_benefit_or_pension= FALSE, maintenance_income = 0, maintenance_children = c(1,0,0))
-  expect_error(family_tax_benefit(temp), 
-               regexp = "`.data` columns are not of correct class. Only integer, numeric, or logical allowed.")
 })
