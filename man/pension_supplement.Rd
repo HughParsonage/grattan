@@ -16,8 +16,6 @@ pension_supplement(has_partner = FALSE, age = 70, n_dependants = 0,
 
 \item{n_dependants}{How many dependant children does the individual have?}
 
-\item{n_dependants}{How many dependant children does the individual have?}
-
 \item{parenting_payment}{Is the individual receiving parenting payment?}
 
 \item{Date}{Date. Default is "2016/03/01" if fy.year is not present.}
