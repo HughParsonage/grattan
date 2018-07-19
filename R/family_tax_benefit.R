@@ -175,14 +175,14 @@ family_tax_benefit <- function(.data = NULL,
       }
     }
   
-  # Maintenance warning
-  if (.data[ ,any((maintenance_income > 0) == (maintenance_children == 0))]) {
-    stop("Incompatible combination of `maintenance_income` and `maintenance_children`.")
-  } 
+    # Maintenance warning
+    if (.data[ ,any((maintenance_income > 0) == (maintenance_children == 0))]) {
+      stop("Incompatible combination of `maintenance_income` and `maintenance_children`.")
+    } 
   }
   
   # ftbA: paid per child
-  .data[ ,ftbA_max_rate_July_2015 := if_else(other_allowance_benefit_or_pension,
+  .data[, ftbA_max_rate_July_2015 := if_else(other_allowance_benefit_or_pension,
                                              0,
                                              if_else(age < 13,
                                                      179.76,
