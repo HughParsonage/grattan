@@ -38,8 +38,7 @@ family_tax_benefit <- function(.data = NULL,
                                taper_ftbA_1 = 0.2,
                                taper_ftbA_2 = 0.3,
                                taper_ftbB = 0.2,
-                               per = 'annual', 
-                               copy = TRUE) {
+                               per = 'annual') {
   # https://www.humanservices.gov.au/sites/default/files/co029-1603en.pdf
   # https://web.archive.org/web/20160420184949/http://guides.dss.gov.au/family-assistance-guide/3/1/1/20
   # historical rates: http://guides.dss.gov.au/family-assistance-guide/3/6/
@@ -104,8 +103,13 @@ family_tax_benefit <- function(.data = NULL,
            ", but must be an integer vector.")
     }
     
+    setdt_list <- function(...) {
+      noms <- vapply(as.list(substitute(list(...)))[-1L], deparse, character(1L))
+      setnames(setDT(lapply(list(...), rep_len, max.length)), noms)
+    }
+    
     .data <- 
-      setDT(list(id_hh,
+      data.table(id_hh,
                  id,
                  age,
                  income,
@@ -113,15 +117,7 @@ family_tax_benefit <- function(.data = NULL,
                  single_parent, 
                  other_allowance_benefit_or_pension,
                  maintenance_income,
-                 maintenance_children))
-    if (copy) {
-      .data <- copy(.data)
-    }
-      
-    
-    
-      
-    
+                 maintenance_children)
     
   } else {
     if (!is.data.frame(.data)) {
@@ -191,11 +187,11 @@ family_tax_benefit <- function(.data = NULL,
                                                              if_else(age <= 19 & in_secondary_school,
                                                                      233.94,
                                                                      0))))]
-  .data[ ,ftbA_base_rate_July_2015 := if_else(!other_allowance_benefit_or_pension & (age <= 15 | (age <= 19 & in_secondary_school)),
+  .data[, ftbA_base_rate_July_2015 := if_else(!other_allowance_benefit_or_pension & (age <= 15 | (age <= 19 & in_secondary_school)),
                                               57.68,
                                               0)]
   
-  .data[ ,ftbA_supplement_July_2015 := if_else(!other_allowance_benefit_or_pension & (age <= 15 | (age <= 19 & in_secondary_school)),
+  .data[, ftbA_supplement_July_2015 := if_else(!other_allowance_benefit_or_pension & (age <= 15 | (age <= 19 & in_secondary_school)),
                                                726.35,
                                                0)]
   #note 1: supplement conditional on meeting requirements e.g. immunisations, tax returns
