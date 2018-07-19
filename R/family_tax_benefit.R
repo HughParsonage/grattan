@@ -25,7 +25,7 @@ family_tax_benefit <- function(.data,
   #https://web.archive.org/web/20160420184949/http://guides.dss.gov.au/family-assistance-guide/3/1/1/20
   #historical rates: http://guides.dss.gov.au/family-assistance-guide/3/6/
   
-  #check .data in correct form
+  #check .data in correct form 
   if(!all(c("id_hh", "id", "age", "income", "in_secondary_school", "single_parent", "other_allowance_benefit_or_pension", "maintenance_income", "maintenance_children") 
           %in% colnames(.data))) {
     stop("`.data` does not contain all the relevant columns.")
