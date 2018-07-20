@@ -4,11 +4,11 @@
 #' 
 #' @param per How often are payments made? Can only take values 'year', 'fortnight', or 'quarter'.
 #' @param missing_per Is `per`` missing in the outer function? If so the defualt for that function will be used.
-#' @param .fortnights_per_yr What is the ratio of the fortnightly payment amount to the yearly payment amount? Can only take values 26 or 365/14.
+#' @param .fortnights_per_yr What is the ratio of the fortnightly payment amount to the yearly payment amount? By default, 26. (Some payments expect 26; others expect 364/14.)
 #' 
 #' @author Matthew Katzen
 
-validate_per <- function(per, missing_per, .fortnights_per_yr = NULL) {
+validate_per <- function(per, missing_per, .fortnights_per_yr = 26) {
   if (missing_per) {
     per <- per[1L]
     message("`per` not set; calculating ", paste0(per, "ly"), " payment.")
@@ -23,20 +23,21 @@ validate_per <- function(per, missing_per, .fortnights_per_yr = NULL) {
               "(`per = '", per, "'`) will be used.")
     }
     
-    if (per %notin% c("year", "fortnight", "quarter")) {
+    if (per == "annual") {
+      per <- "year"
+    } else if (per %notin% c("year", "fortnight", "quarter")) {
       stop("`per = '", per, "'` but must be one of 'year', 'fortnight', or 'quarter'. ")
     }
   }
   
   switch(per,
-         fortnight = {if (is.null(.fortnights_per_yr)) {
-                        warning("`.fortnights_per_year` not set. Using 26 as default.")
-                        26
-                      } else if (is.numeric(.fortnights_per_yr)) {
-                       .fortnights_per_yr
-                      } else {
-                       stop("`per` was type '", typeof(per), "', but must be numeric.")
-                      } },
+         fortnight = {
+           if (is.numeric(.fortnights_per_yr)) {
+             .fortnights_per_yr
+           } else {
+             stop("`per` was type '", typeof(per), "', but must be numeric.")
+           }
+         },
          quarter = 4,
          year = 1)
   

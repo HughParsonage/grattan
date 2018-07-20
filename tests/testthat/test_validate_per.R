@@ -12,8 +12,6 @@ test_that("Errors", {
                  fixed = TRUE)
   expect_error(validate_per(per = "fortnight", missing_per = FALSE, .fortnights_per_yr = "twentysix"),
                reg_exp = "`per` was type 'character', but must be numeric.")
-  expect_warning(validate_per(per = "fortnight", missing_per = FALSE),
-                 regexp = "`.fortnights_per_year` not set. Using 26 as default.")
 })
 
 test_that("Values", {

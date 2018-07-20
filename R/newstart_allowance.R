@@ -45,14 +45,10 @@ newstart_allowance <- function(fortnightly_income = 0,
                                taper_lower = 0.5,
                                taper_upper = 0.6,
                                taper_principal_carer = 0.4,
-                               per = "fortnight") {
+                               per = c("year", "fortnight")) {
   
-  if (fy.year != "2015-16") {
+  if (!identical(fy.year, "2015-16")) {
     stop('`fy.year` can only take value "2015-16" for now')
-  }
-  
-  if(any(!(per %in% c("fortnight", "annual")))){
-    stop('`per`` can only take values "fortnight" or "annual"')
   }
   
   prohibit_vector_recycling(fortnightly_income,
@@ -75,8 +71,8 @@ newstart_allowance <- function(fortnightly_income = 0,
                             taper_upper,
                             taper_principal_carer,
                             per)
-  
-  input <- data.table(do.call(cbind.data.frame, mget(ls())))
+  ls_np <- ls()[ls() != "per"]
+  input <- data.table(do.call(cbind.data.frame, mget(ls_np)))
   
   if(any(input[, any(!has_partner & partner_pensioner)])){
     stop('check conflicting values for `has_partner` and `partner_pensioner`')
@@ -175,12 +171,10 @@ newstart_allowance <- function(fortnightly_income = 0,
 
   #check eligibility
   fortnightly_rate <- if_else(eligible & asset_threshold,
-                                      pmaxC(max_rate_March_2016 - income_reduction - partner_income_reduction,
-                                            0),
-                                      0)
+                              pmaxC(max_rate_March_2016 - income_reduction - partner_income_reduction,
+                                    0),
+                              0)
             
-  #output
-  input[, if_else(per == "fortnight",
-                  fortnightly_rate,
-                  fortnightly_rate * 26)]
+  fortnightly_rate * 26 / validate_per(per, missing(per))
+  
 }

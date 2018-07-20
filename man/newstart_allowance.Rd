@@ -14,7 +14,7 @@ newstart_allowance(fortnightly_income = 0, annual_income = 0,
   annual_partner_income = 0, age = 22, fy.year = "2015-16",
   assets_value = 0, homeowner = FALSE, lower = 102, upper = 252,
   taper_lower = 0.5, taper_upper = 0.6, taper_principal_carer = 0.4,
-  per = "fortnight")
+  per = c("year", "fortnight"))
 }
 \arguments{
 \item{fortnightly_income}{'Ordinary income' received fortnightly within the meaning of s. 1068-G1 of the \emph{Social Security Act 1991}.}
