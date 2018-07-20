@@ -155,24 +155,24 @@ newstart_allowance <- function(fortnightly_income = 0,
                                                                            1094.17)))))]
 
   # If partner is on pension, fortnightly income is average of 2 incomes
-  input[ , fortnightly_income := if_else(partner_pensioner,
-                                         (fortnightly_partner_income + fortnightly_income)/2,
-                                         fortnightly_income)]
+  input[(partner_pensioner),
+        fortnightly_income := (fortnightly_partner_income + fortnightly_income) / 2]
   
   # Income reduction
-  input[, income_reduction := 
-          if_else(fortnightly_income < lower,
-                  0,
-                  if_else(principal_carer,
-                          if_else(fortnightly_income < max_income_March_2016,
-                                  taper_principal_carer * (fortnightly_income - lower),
-                                  max_rate_March_2016),
-                          if_else(fortnightly_income < upper,
-                                  taper_lower * (fortnightly_income - lower),
+  input
+  input %>%
+    .[, income_reduction := 0] %>%
+    .[fortnightly_income > lower,
+      income_reduction := if_else(principal_carer,
                                   if_else(fortnightly_income < max_income_March_2016,
-                                          taper_lower * (fortnightly_income - lower) +
-                                            (taper_upper - taper_lower) * (fortnightly_income - upper),
-                                          max_rate_March_2016))))]
+                                          taper_principal_carer * (fortnightly_income - lower),
+                                          max_rate_March_2016),
+                                  if_else(fortnightly_income < upper,
+                                          taper_lower * (fortnightly_income - lower),
+                                          if_else(fortnightly_income < max_income_March_2016,
+                                                  taper_lower * (fortnightly_income - lower) +
+                                                    (taper_upper - taper_lower) * (fortnightly_income - upper),
+                                                  max_rate_March_2016)))]
   # Asset test
   input[, asset_threshold := if_else(has_partner,
                                      if_else(homeowner,
