@@ -66,3 +66,8 @@ test_that("Matches age pension payment", {
                age_pension())
 })
 
+test_that("fy.year supplied", {
+  expect_equal(carer_payment(fy.year = "2015-16"),
+               20664.8)
+})
+
