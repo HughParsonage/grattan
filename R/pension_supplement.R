@@ -12,7 +12,7 @@
 #' @param Date Date. Default is "2016/03/01" if fy.year is not present.
 #' @param fy.year Financial year. Default is "2015-16" if Date is not present.
 #' @param qualifying_payment What is the payment that the supplement is being applied to? 
-#' @param per How often the payment will be made. Default is fortnightly. 
+#' @param per How often the payment will be made. Default is to return the annual payment, with a messsage.
 #' @param overseas_absence Will the individual be living outside of Australia for more than 6 weeks of the upcoming year?
 #' @param seperated_couple Is the individual part of an illness separated couple, respite care couple, or partner imprisoned?
 #' 
@@ -28,15 +28,13 @@ pension_supplement <- function(has_partner = FALSE,
                                Date = NULL,
                                fy.year = NULL,
                                qualifying_payment = 'age_pension',
-                               per = 'fortnight',
+                               per = c("year", "fortnight", "quarter"),
                                overseas_absence = FALSE,
                                seperated_couple = FALSE){
   
-  if(!(per %in% c('fortnight', 'annual'))){
-    stop("per can only take values `fortnight` or `annual`")
-  }
   
-  if(any(!has_partner & seperated_couple)) {
+  
+  if (any(!has_partner & seperated_couple)) {
     stop("incompatible values of `has_partner` and `partner_seperated`")
   }
   
@@ -58,7 +56,8 @@ pension_supplement <- function(has_partner = FALSE,
   Date <- as.Date(Date)
   
   #convert arguments to data table
-  input <- data.table(do.call(cbind.data.frame, mget(ls()))) 
+  ls_np <- ls()[ls() != "per"]
+  input <- data.table(do.call(cbind.data.frame, mget(ls_np))) 
   
   
   input[ ,age_pension_age :=  #increase:https://www.humanservices.gov.au/individuals/services/centrelink/age-pension/eligibility-payment-rates/age-rules
@@ -89,14 +88,11 @@ pension_supplement <- function(has_partner = FALSE,
                   18.7,
                   22.70)]
   
-  #OUTPUT
-  input[, if_else(eligible,
-                  if_else((!has_partner & parenting_payment) | overseas_absence,
-                          if_else(per == 'fortnight',
-                                  basic_rate_March_2016,
-                                  basic_rate_March_2016 * 26),
-                          if_else(per == 'fortnight',
-                                  max_rate_March_2016,
-                                  max_rate_March_2016 * 26)),
-                  0)]
+  res <- 
+    input[, if_else(eligible,
+                    if_else((!has_partner & parenting_payment) | overseas_absence,
+                            basic_rate_March_2016 * 26,
+                            max_rate_March_2016 * 26),
+                    0)]
+  res / validate_per(per, missing(per))
 }

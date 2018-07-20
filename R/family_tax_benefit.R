@@ -40,7 +40,7 @@ family_tax_benefit <- function(.data = NULL,
                                taper_ftbA_1 = 0.2,
                                taper_ftbA_2 = 0.3,
                                taper_ftbB = 0.2,
-                               per = 'annual', 
+                               per = 'year', 
                                copy = TRUE) {
   # https://www.humanservices.gov.au/sites/default/files/co029-1603en.pdf
   # https://web.archive.org/web/20160420184949/http://guides.dss.gov.au/family-assistance-guide/3/1/1/20

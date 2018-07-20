@@ -6,8 +6,8 @@
 \usage{
 pension_supplement(has_partner = FALSE, age = 70, n_dependants = 0,
   parenting_payment = FALSE, Date = NULL, fy.year = NULL,
-  qualifying_payment = "age_pension", per = "fortnight",
-  overseas_absence = FALSE, seperated_couple = FALSE)
+  qualifying_payment = "age_pension", per = c("year", "fortnight",
+  "quarter"), overseas_absence = FALSE, seperated_couple = FALSE)
 }
 \arguments{
 \item{has_partner}{Does the individual have a partner?}
@@ -24,7 +24,7 @@ pension_supplement(has_partner = FALSE, age = 70, n_dependants = 0,
 
 \item{qualifying_payment}{What is the payment that the supplement is being applied to?}
 
-\item{per}{How often the payment will be made. Default is fortnightly.}
+\item{per}{How often the payment will be made. Default is to return the annual payment, with a messsage.}
 
 \item{overseas_absence}{Will the individual be living outside of Australia for more than 6 weeks of the upcoming year?}
 

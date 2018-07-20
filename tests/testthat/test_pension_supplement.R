@@ -56,7 +56,9 @@ test_that("Ineligibles", {
 })
 
 test_that("Multiple People", {
-  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = c(TRUE, FALSE)),
+  expect_equal(pension_supplement(Date = "2016/03/01",
+                                  has_partner = c(TRUE, FALSE),
+                                  per = "fortnight"),
                c(49, 65))
 })
 
