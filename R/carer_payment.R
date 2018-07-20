@@ -79,7 +79,7 @@ carer_payment <- function(Date = NULL,
   
   #Rates, income test, and asset test same as age pension
   
-  rate <- age_pension(ordinary_income = carer_fortnightly_income,
+  rate <- age_pension(fortnightly_income = carer_fortnightly_income,
                       annual_income = carer_annual_income,
                       has_partner = carer_has_partner,
                       n_dependants = carer_n_dependants,

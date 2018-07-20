@@ -1,6 +1,7 @@
 library(data.table)
 library(magrittr)
 
+# http://guides.dss.gov.au/guide-social-security-law/5/2/5/20
 carers_tbl <- 
   fread("01/07/1999	75.60
 01/01/2000	76.40
