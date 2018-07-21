@@ -86,6 +86,7 @@ test_that("Surchargeable income and low tax contributions less than 300,000 impl
 
 test_that("Counts for Div 293 at 250e3 not at odds with PBO", {
   skip_if_not_installed("taxstats") 
+  skip_on_appveyor()
   sample_file_1718 <- 
     sample_file_1314 %>%
     project_to(to_fy = "2017-18", fy.year.of.sample.file = "2013-14")

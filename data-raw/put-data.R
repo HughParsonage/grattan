@@ -620,6 +620,13 @@ salary_by_fy_swtile <-
   .[, average_salary := round(average_salary, 2L)] %>%
   setkey(Sw_amt_percentile) %>%
   .[]
+
+if (salary_by_fy_swtile[, max(fy.year)] < "2015-16") {
+  warning("salary_by_fy_swtile not available.")
+  rm(salary_by_fy_swtile)
+  salary_by_fy_swtile <- grattan:::salary_by_fy_swtile
+}
+
   
 
 differential_sw_uprates <- 
@@ -676,6 +683,7 @@ Age_pension_assets_test_by_year <-
     if (Age_pension_assets_test_by_year[, difftime(Sys.Date(), max(Date), units = "days")] > 400) {
       warning("`Age_pension_assets_test_by_year` out-of-date by some 400 days.")
     }
+    Age_pension_assets_test_by_year
     
   } else {
     age_pension_assets_test_dss_gov_au <- 
@@ -1051,18 +1059,18 @@ use_and_write_data(tax_table2,
 
                    abs_key_aggregates,
                    
-                   # unemployment_income_tests,
-                   # unemployment_annual_rates,
-                   # unemployment_assets_tests,
-                   # unemployment_income_tests_by_date,
-                   # unemployment_rates_by_date,
-                   # unemployment_assets_tests_by_date,
-                   # 
-                   # rent_assistance_rates,
-                   # rent_assistance_rates_by_date,
-                   # 
-                   # youth_income_tests,
-                   # youth_annual_rates,
-                   
+                   unemployment_income_tests,
+                   unemployment_annual_rates,
+                   unemployment_assets_tests,
+                   unemployment_income_tests_by_date,
+                   unemployment_rates_by_date,
+                   unemployment_assets_tests_by_date,
+
+                   rent_assistance_rates,
+                   rent_assistance_rates_by_date,
+
+                   youth_income_tests,
+                   youth_annual_rates,
+
                    # possibly separable
                    .avbl_fractions)
