@@ -139,9 +139,10 @@ newstart_allowance <- function(fortnightly_income = 0,
                                                                  527.60))))]
   
   # Additional eligibility requirements at https://www.humanservices.gov.au/individuals/services/centrelink/newstart-allowance/who-can-get-it
+  eligible <- NULL
   input[, eligible := 22 <= age & age < 65]
   
-  
+  max_rate_March_2016 <- NULL
   input[, max_income_March_2016 := if_else(isjspceoalfofcoahodeoc,
                                            1974.75,
                                            if_else(has_partner,
@@ -159,7 +160,7 @@ newstart_allowance <- function(fortnightly_income = 0,
         fortnightly_income := (fortnightly_partner_income + fortnightly_income) / 2]
   
   # Income reduction
-  input
+  income_reduction <- NULL
   input %>%
     .[, income_reduction := 0] %>%
     .[fortnightly_income > lower,
@@ -174,6 +175,7 @@ newstart_allowance <- function(fortnightly_income = 0,
                                                     (taper_upper - taper_lower) * (fortnightly_income - upper),
                                                   max_rate_March_2016)))]
   # Asset test
+  asset_threshold <- NULL
   input[, asset_threshold := if_else(has_partner,
                                      if_else(homeowner,
                                              assets_value < 286500,
@@ -184,6 +186,7 @@ newstart_allowance <- function(fortnightly_income = 0,
   
   # Partner income reduction
   # https://web.archive.org/web/20160812171654/http://guides.dss.gov.au/guide-social-security-law/5/5/3/30
+  partner_income_reduction <- NULL
   input %>%
     .[, partner_income_reduction := 
         and(has_partner,
@@ -195,6 +198,7 @@ newstart_allowance <- function(fortnightly_income = 0,
                       upper * taper_upper) / taper_upper))]
   
   # Check eligibility
+  fortnightly_rate <- NULL
   input[, fortnightly_rate :=
           and(eligible, asset_threshold) *
           pmax0(max_rate_March_2016 - income_reduction - partner_income_reduction)]

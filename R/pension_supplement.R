@@ -52,41 +52,28 @@ pension_supplement <- function(has_partner = FALSE,
     } 
   }
   
-  #convert date to DATE format
+  # Convert date to DATE format
   Date <- as.Date(Date)
   
-  #convert arguments to data table
+  # Convert arguments to data table
   ls_np <- ls()[ls() != "per"]
   input <- data.table(do.call(cbind.data.frame, mget(ls_np))) 
   
-  
-  input[ ,age_pension_age :=  #increase:https://www.humanservices.gov.au/individuals/services/centrelink/age-pension/eligibility-payment-rates/age-rules
-           #women increase before 2014 (not implemented): https://www.humanservices.gov.au/sites/default/files/documents/co029-0907.pdf
-           if_else(Date < "2017-07-01",
-                   65,
-                   if_else(Date < "2019-07-01",
-                           65.5,
-                           if_else(Date < "2021-07-01",
-                                   66,
-                                   if_else(Date < "2023-07-01",
-                                           66.5,
-                                           67))))]
-  
+  eligible <- NULL
   input[, eligible := if_else(qualifying_payment %in% c('abstudy', 'austudy', 'parenting_payment', 'partner_allowance', 'special_benefit', 'widow_allowance'),
-                              age >= age_pension_age, #must be over age pension age if receiving one of above payments
+                              age >= age_pension_age(Date), # must be over age pension age if receiving one of above payments
                               if_else(qualifying_payment == 'disability_support_pension',
-                                      !(age < 21 & n_dependants == 0),#ineligble if under 21 and have no kids
-                                      qualifying_payment %in% c('age_pension', 'carer_payment', 'wife_pension', 'widow_b_pension', 'bereavement_allowance')))]#eligible for these payments
+                                      !(age < 21 & n_dependants == 0), # ineligble if under 21 and have no kids
+                                      qualifying_payment %in% c('age_pension', 'carer_payment', 'wife_pension', 'widow_b_pension', 'bereavement_allowance')))] # eligible for these payments
         
-  input[ ,max_rate_March_2016 :=
-           if_else(has_partner & !seperated_couple,
-                   49,
-                   65)]
+  max_rate_March_2016 <- NULL
+  input[, max_rate_March_2016 :=
+          if_else(has_partner & !seperated_couple,
+                  49,
+                  65)]
   
-  input[, basic_rate_March_2016 :=
-          if_else(has_partner,
-                  18.7,
-                  22.70)]
+  basic_rate_March_2016 <- NULL
+  input[, basic_rate_March_2016 := if_else(has_partner, 18.7, 22.70)]
   
   res <- 
     input[, if_else(eligible,

@@ -134,6 +134,9 @@ age_pension <- function(fortnightly_income = 0,
                    nomatch = 0L] 
   
   # http://guides.dss.gov.au/guide-social-security-law/4/4/1/10
+  deeming_rate_above <-
+    deemed_income <- 
+    FinancialAssets <- NULL
   deeming <- 
     Age_pension_deeming_rates_by_Date %>%
     # temp
