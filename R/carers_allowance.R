@@ -7,6 +7,7 @@
 carers_allowance <- function(Date = NULL,
                            fy.year = NULL, 
                            per = c("year", "fortnight")) {
+  CarersPayment <- NULL
   carers_tbl <- readRDS(system.file("extdata", "carers_tbl.rds", package = "grattan"))
   # per_m <- validte_per(per, missing(per))
   
@@ -21,6 +22,7 @@ carers_allowance <- function(Date = NULL,
         message("`fy.year` and `Date` not set, so setting `Date = ",
                 as.character(Date), "`.")
       }
+      ord <- NULL
       input <- setDT(list(Date = Date, 
                           ord = seq_along(Date)))
       setkeyv(input, "Date")

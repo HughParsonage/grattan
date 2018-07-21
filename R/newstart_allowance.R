@@ -105,18 +105,18 @@ newstart_allowance <- function(fortnightly_income = 0,
   }
   
   #replace missing fortnightly income with annual income / 26
-  input[ ,fortnightly_income := if_else(annual_income > 0 & fortnightly_income == 0,
+  input[, fortnightly_income := if_else(annual_income > 0 & fortnightly_income == 0,
                                         annual_income / 26,
                                         fortnightly_income)]
-  input[ ,fortnightly_partner_income := if_else(annual_partner_income > 0 & fortnightly_partner_income == 0,
+  input[, fortnightly_partner_income := if_else(annual_partner_income > 0 & fortnightly_partner_income == 0,
                                                 annual_partner_income / 26,
                                                 fortnightly_partner_income)]
   
   #replace missing annual income with fortnightly income * 26
-  input[ ,annual_income := if_else(fortnightly_income > 0 & annual_income == 0,
+  input[, annual_income := if_else(fortnightly_income > 0 & annual_income == 0,
                                    fortnightly_income * 26,
                                    annual_income)]
-  input[ ,annual_partner_income := if_else(fortnightly_partner_income > 0 & annual_partner_income == 0,
+  input[, annual_partner_income := if_else(fortnightly_partner_income > 0 & annual_partner_income == 0,
                                            fortnightly_partner_income * 26,
                                            annual_partner_income)]
   
@@ -128,6 +128,7 @@ newstart_allowance <- function(fortnightly_income = 0,
     stop('input for `annual_partner_income` is not 26 times larger than `fortnightly_partner_income`')
   }
 
+  max_rate_March_2016 <- NULL
   input[, max_rate_March_2016 := if_else(isjspceoalfofcoahodeoc,
                                          737.10,
                                          if_else(has_partner,
@@ -142,7 +143,7 @@ newstart_allowance <- function(fortnightly_income = 0,
   eligible <- NULL
   input[, eligible := 22 <= age & age < 65]
   
-  max_rate_March_2016 <- NULL
+  max_income_March_2016 <- NULL
   input[, max_income_March_2016 := if_else(isjspceoalfofcoahodeoc,
                                            1974.75,
                                            if_else(has_partner,
