@@ -69,9 +69,9 @@ test_that("koffset", {
 })
 
 test_that("Switch", {
-  expect_equal(Switch(c("A", "B", "C", "A"), "A" = 1, "B" = 2, "C" = 11:14), 
+  expect_equal(Switch(c("A", "B", "C", "A"), "A" = 1, "B" = 2, "C" = 11:14 + 0, DEFAULT = 0), 
                c(1, 2, 13, 1))
-  expect_equal(Switch(c("A", "B", "C", "A"), "A" = 1:4, "B" = 2, "C" = 11:14), 
+  expect_equal(Switch(c("A", "B", "C", "A"), "A" = 1:4, "B" = 2, "C" = 11:14 + 0, DEFAULT = 0), 
                c(1, 2, 13, 4))
 })
 
