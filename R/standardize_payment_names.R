@@ -28,13 +28,19 @@ standardize_payment_names <- function(payment_name) {
          
          "parenting payment" = "parenting payment",
          
+         "pension" = "pension",
+         
+         
          "rent assistance" = "rent assistance",
          "commonwealth rent assistance" = "rent assistance",
          "cra" = "rent assistance",
          
+         "seniors health card" = "seniors health card",
+         "health card" = "seniors health card",
+         
          "ya" = "youth allowance",
          
-         .pn)
+         DEFAULT = .pn)
 }
 
 
