@@ -1,3 +1,14 @@
+## 1.6.3.0
+### 2018-07-21
+* New allowances functions (usable for the 2015-16 financial year)
+    - `age_pension`, 
+    - `carer_payment`
+    - `carers_allowance`
+    - `energy_supplement`
+    - `family_tax_benefit`
+    - `newstart_allowance`
+    - `pension_supplement`
+
 ## 1.6.2.0
 ### 2018-06-28
 * Added default values to the following functions:
