@@ -98,6 +98,12 @@ test_that("Accelerate inputs", {
                                           to_fy = "2016-17",
                                           THRESHOLD = 2L))
   
+  y <- runif(1001)
+  expect_identical(accel_repetitive_input(y, log), 
+                   accel_repetitive_input(y, log, THRESHOLD = 2000L))
+  expect_identical(accel_repetitive_input(2, log), 
+                   log(2))
+  
 })
 
 

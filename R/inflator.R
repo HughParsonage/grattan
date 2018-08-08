@@ -16,6 +16,12 @@ inflator <- function(x = 1, from, to, inflator_table, index.col = "Index", time.
   max.length <- 
     prohibit_vector_recycling.MAXLENGTH(x, from, to)
   
+  if (max.length == 1L && is.null(roll)) {
+    Values <- .subset2(inflator_table, index.col)
+    Times <- .subset2(inflator_table, time.col)
+    return(x * Values[chmatch(to, Times)] / Values[chmatch(from, Times)])
+  }
+  
   inflator_table <- 
     inflator_table %>%
     # Possibly locked binding

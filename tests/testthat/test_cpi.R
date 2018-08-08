@@ -32,6 +32,9 @@ test_that("Errors", {
   expect_error(cpi_inflator_quarters(from_qtr = "2015-Q1", to_qtr = "2015-01-01"), 
                regexp = "Dates must be in quarters.", 
                fixed = TRUE)
+  
+  
+  
 })
 
 test_that("cpi returns known results", {
@@ -223,18 +226,21 @@ test_that("cpi accelerated", {
   skip_on_cran()
   set.seed(5)
   long_tos <- long_froms <- sample(yr2fy(2005:2010), size = 2e6, replace = TRUE)
-  expect_identical(cpi_inflator(from_nominal_price = rep(1, 2e6), 
+  expect_identical(cpi_inflator(from_nominal_price = rep(2, 2e6), 
                                 from_fy = long_froms, 
                                 to_fy = "2015-16"), 
-                   cpi_inflator(from_nominal_price = 1, 
+                   cpi_inflator(from_nominal_price = 2, 
                                 from_fy = long_froms, 
                                 to_fy = "2015-16"))
-  expect_identical(cpi_inflator(from_nominal_price = rep(1, 2e6), 
+  expect_identical(cpi_inflator(from_nominal_price = rep(2, 2e6), 
                                 from_fy = "1999-00", 
                                 to_fy = long_tos), 
-                   cpi_inflator(from_nominal_price = 1, 
+                   cpi_inflator(from_nominal_price = 2, 
                                 from_fy = "1999-00", 
                                 to_fy = long_tos))
+  time1 <- system.time(cpi_inflator(1, from_fy = "2004-05", to_fy = long_tos))
+  time2 <- system.time(cpi_inflator(rep(1, 2e6), from_fy = "2004-05", to_fy = long_tos))
+  expect_gt(time2[["elapsed"]] / time1[["elapsed"]], 10)
   
 })
 

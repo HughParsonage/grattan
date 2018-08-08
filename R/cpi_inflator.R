@@ -35,19 +35,54 @@ cpi_inflator <- function(from_nominal_price = 1,
   if (is.null(to_fy)){
     stop("`to_fy` is missing, with no default.")
   }
+  if (length(useABSConnection) != 1L) {
+    stop("`useABSConnection` had length ", length(useABSConnection), ", but must be length-one. ", 
+         "Ensure `ABSConnection` is either TRUE or FALSE.")
+  }
+  if (!is.logical(useABSConnection)) {
+    stop("`useABSConnection`  was type ", typeof(useABSConnection), ", but must be logical. ", 
+         "Ensure `ABSConnection` is either TRUE or FALSE.")
+  }
+  if (anyNA(useABSConnection)) {
+    stop("`useABSConnection` was NA, but may only be TRUE or FALSE.")
+  }
   
   # Don't like vector recycling
   # http://stackoverflow.com/a/9335687/1664978
   max.length <- 
     prohibit_vector_recycling.MAXLENGTH(from_nominal_price, from_fy, to_fy)
   
-  if (max.length == 1L && as.integer(substr(to_fy, 0L, 4L)) < 2031L) {
-    stopifnot(all_fy(from_fy), all_fy(to_fy))
-  } else {
-    stopifnot(all_fy(from_fy), all(is.fy(to_fy)))
+  adjustment <- match.arg(adjustment, several.ok = FALSE)
+  
+  
+  
+  
+  if (max.length > 1e5L && 
+      # don't connect for every group
+      !useABSConnection &&
+      length(from_nominal_price) == 1L) {
+    if (length(to_fy) == 1L) {
+      return(accel_repetitive_input(from_fy,
+                                    cpi_inflator,
+                                    from_nominal_price = from_nominal_price[[1L]],
+                                    to_fy = to_fy[[1L]],
+                                    adjustment = adjustment[[1L]], 
+                                    useABSConnection = FALSE, 
+                                    allow.projection = allow.projection[[1L]]))
+    } else {
+      cpi_fun <- function(x) {
+        cpi_inflator(from_nominal_price = from_nominal_price[[1L]],
+                     from_fy = from_fy[[1L]], 
+                     to_fy = x,
+                     adjustment = adjustment[[1L]], 
+                     useABSConnection = FALSE,
+                     allow.projection = allow.projection[[1L]])
+      }
+      return(accel_repetitive_input(to_fy, cpi_fun))
+    }
   }
   
-  adjustment <- match.arg(adjustment, several.ok = FALSE)
+  
   
   if (useABSConnection) {
     switch(adjustment, 
@@ -72,10 +107,32 @@ cpi_inflator <- function(from_nominal_price = 1,
   
   cpi.indices <- 
     as.data.table(cpi) %>%
-    .[grepl("Q1", obsTime)] %>%
+    .[endsWith(obsTime, "Q1")] %>%
     .[, fy_year := yr2fy(as.integer(sub("-Q1", "", obsTime, fixed = TRUE)))]
   
-  if (!allow.projection && !all(to_fy %in% cpi.indices$fy_year)) {
+  permitted_fys <- .subset2(cpi.indices, "fy_year")
+  earliest_from_fy <- permitted_fys[[1L]]
+  cpi_table_nom <-
+    switch(adjustment, 
+           "none" = "unadjusted",
+           "seasonal" = "seasonally adjusted",
+           "trimmed.mean" = "trimmed mean")
+  
+  if (max.length == 1L) {
+    if (from_fy < earliest_from_fy) {
+      stop("`from_fy = ", from_fy, "` was earlier than the earliest ", 
+           "instance of the ", cpi_table_nom, " CPI, ", '"', earliest_from_fy, '".')
+    }
+  } else {
+    if (anyNA(fmatch(from_fy, permitted_fys))) {
+      first_early_fy <- first(from_fy[from_fy %notin% permitted_fys])
+      stop("`from_fy` contained ", first_early_fy, "` was earlier than the earliest ", 
+           "instance of the ", cpi_table_nom, " CPI, ", '"', earliest_from_fy, '".')
+    }
+  }
+  
+  
+  if (!allow.projection && anyNA(fmatch(to_fy, permitted_fys))) {
     if (length(to_fy) == 1L) {
       stop("`to_fy = ", to_fy, "` yet `allow.projection = FALSE`. ", 
            "The latest to_fy that may be used is ", max(cpi.indices$fy_year), ". ", 
@@ -92,7 +149,7 @@ cpi_inflator <- function(from_nominal_price = 1,
   # else allow NAs to propagate
   
   # Use forecast::forecast to inflate forward
-  if (allow.projection && !all(to_fy %in% cpi.indices$fy_year)){
+  if (allow.projection && anyNA(fmatch(to_fy, permitted_fys))) {
     # Number of years beyond the data our forecast must reach
     years.beyond <- max(fy2yr(to_fy)) - max(fy2yr(cpi.indices$fy_year))
     cpi_index_forecast <-
@@ -101,7 +158,7 @@ cpi_inflator <- function(from_nominal_price = 1,
       as.numeric(mean)
     
     cpi.indices.new <- 
-      setDT(list(fy_year = yr2fy(seq(max(fy2yr(cpi.indices$fy_year)) + 1,
+      setDT(list(fy_year = yr2fy(seq(max(fy2yr(cpi.indices$fy_year)) + 1L,
                                      max(fy2yr(to_fy)),
                                      by = 1L)),
                  obsValue = cpi_index_forecast))
@@ -111,10 +168,12 @@ cpi_inflator <- function(from_nominal_price = 1,
                 fill = TRUE)
   }
   
+    
   inflator(from_nominal_price,
            from = from_fy,
            to = to_fy,
            inflator_table = cpi.indices,
            index.col = "obsValue", 
            time.col = "fy_year")
+  
 }

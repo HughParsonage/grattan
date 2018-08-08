@@ -111,3 +111,43 @@ test_that("ABS connection", {
   expect_equal(internal_ans, external_ans, tol = 0.00001)
 })
 
+test_that("accelerated", {
+  skip_on_cran()
+  set.seed(1111)
+  long_fys <- to_fys <- sample(yr2fy(2005:2010), size = 2e6, replace = TRUE)
+  expect_identical(wage_inflator(1, from_fy = "2004-05", to_fy = to_fys), 
+                   wage_inflator(rep(1, 2e6), from_fy = "2004-05", to_fy = to_fys))
+  time1 <- system.time(wage_inflator(1, from_fy = "2004-05", to_fy = to_fys))
+  time2 <- system.time(wage_inflator(rep(1, 2e6), from_fy = "2004-05", to_fy = to_fys))
+  expect_gt(time2[["elapsed"]] / time1[["elapsed"]], 10)
+  
+  a <- wage_inflator(1, from_fy = "2004-05", to_fy = c(to_fys, "2020-21"))
+  b <- wage_inflator(rep(1, 2e6 + 1),  from_fy = "2004-05", to_fy = c(to_fys, "2020-21"))
+  expect_identical(a, b)
+  
+  af <- wage_inflator(1,
+                      from_fy = "2004-05", to_fy = c(to_fys, "2020-21"), 
+                      forecast.series = "custom",
+                      wage.series = 0.02)
+  bf <- wage_inflator(rep(1, 2e6 + 1),
+                      from_fy = "2004-05", to_fy = c(to_fys, "2020-21"), 
+                      forecast.series = "custom",
+                      wage.series = 0.02)
+  expect_identical(af, bf)
+  
+  rff <- runif(4, 0.01, 0.04)
+  aff <- wage_inflator(1,
+                       from_fy = "2004-05", to_fy = c(to_fys, "2020-21"), 
+                       forecast.series = "custom",
+                       wage.series = data.table(fy_year = yr2fy(2018:2021),
+                                                r = rff))
+  bff <- wage_inflator(rep(1, 2e6 + 1),
+                       from_fy = "2004-05", to_fy = c(to_fys, "2020-21"), 
+                       forecast.series = "custom",
+                       wage.series = data.table(fy_year = yr2fy(2018:2021),
+                                                r = rff))
+  expect_identical(aff, bff)
+})
+
+
+

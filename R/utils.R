@@ -119,6 +119,8 @@ Switch <- function(Expr, ...) {
   out
 }
 
+
+# NOTE: FUN must return the same length as 'x'. e.g. mean will fail badly.
 accel_repetitive_input <- function(x, FUN, ..., THRESHOLD = 1000L) {
   .FUN <- match.fun(FUN)
   if (length(x) <= 1L || length(x) < THRESHOLD) {
