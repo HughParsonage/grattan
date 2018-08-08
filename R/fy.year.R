@@ -67,8 +67,14 @@ fy.year <- function(yr_ending){
   paste0(as.integer(yr_ending) - 1, "-", substr(yr_ending, 3, 4))
 }
 
-yr2fy <- function(yr_ending){
-  sprintf("%d-%02d", as.integer(yr_ending) - 1L, as.integer(yr_ending) %% 100L)
+yr2fy <- function(yr_ending) {
+  if (length(yr_ending) > 10e3L) {
+    # Apparently quicker for > 1000
+    dt <- setDT(list(yr = x))
+    return(dt[, fy := yr2fy(.BY[[1L]]), by = "yr"][["fy"]])
+  } else {
+    sprintf("%d-%02d", as.integer(yr_ending) - 1L, as.integer(yr_ending) %% 100L)
+  }
 }
 
 fy2yr <- function(fy.yr){

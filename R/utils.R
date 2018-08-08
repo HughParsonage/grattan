@@ -119,5 +119,15 @@ Switch <- function(Expr, ...) {
   out
 }
 
+accel_repetitive_input <- function(x, FUN, ..., THRESHOLD = 1000L) {
+  if (length(x) <= 1L || length(x) < THRESHOLD) {
+    FUN(x)
+  } else {
+    DT <- setDT(list(x = x))
+    .FUN <- match.fun(FUN)
+    .subset2(DT[, "res" := .FUN(.BY[[1L]], ...), by = "x"], "res")
+  }
+}
+
 
 

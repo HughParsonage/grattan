@@ -75,3 +75,21 @@ test_that("Switch", {
                c(1, 2, 13, 4))
 })
 
+test_that("Accelerate inputs", {
+  skip_on_cran()
+  set.seed(3713907)
+  yrs <- sample(1990:2010, size = 1e5, replace = TRUE)
+  fys <- yr2fy(yrs)
+  expect_identical(fys, 
+                   accel_repetitive_input(yrs, "yr2fy"))
+  expect_identical(fys, 
+                   accel_repetitive_input(yrs, yr2fy, THRESHOLD = 10L))
+  cpi15 <- function(x) {
+    cpi_inflator(from_fy = x, to_fy = "2015-16", adjustment = "none")
+  }
+  expect_identical(cpi_inflator(from_fy = fys, to_fy = "2015-16", adjustment = "none"), 
+                   accel_repetitive_input(fys, cpi15))
+  
+})
+
+
