@@ -45,3 +45,10 @@ test_that("rolling inflator", {
                5 / cpi_inflator_quarters(1, from_qtr = "2013-Q1", to_qtr = "2014-Q1"))
 })
 
+test_that("When to is long", {
+  to_fy <- c("2015-16", "2017-18", "2016-17")
+  res1 <- wage_inflator(1, from_fy = "2014-15", to_fy = to_fy)
+  res2 <- wage_inflator(1, from_fy = rep("2014-15", 3), to_fy = to_fy)
+  expect_equal(res1, res2)
+})
+

@@ -218,3 +218,41 @@ test_that("ABS connection", {
   expect_equal(internal_ans, external_ans, tol = 0.0001)
   
 })
+
+test_that("cpi accelerated", {
+  skip_on_cran()
+  set.seed(5)
+  long_tos <- long_froms <- sample(yr2fy(2005:2010), size = 2e6, replace = TRUE)
+  expect_identical(cpi_inflator(from_nominal_price = rep(1, 2e6), 
+                                from_fy = long_froms, 
+                                to_fy = "2015-16"), 
+                   cpi_inflator(from_nominal_price = 1, 
+                                from_fy = long_froms, 
+                                to_fy = "2015-16"))
+  expect_identical(cpi_inflator(from_nominal_price = rep(1, 2e6), 
+                                from_fy = "1999-00", 
+                                to_fy = long_tos), 
+                   cpi_inflator(from_nominal_price = 1, 
+                                from_fy = "1999-00", 
+                                to_fy = long_tos))
+  
+})
+
+
+test_that("cpi different lengths", {
+  expect_identical(cpi_inflator(1,
+                                to_fy = c("2004-05", "2007-08", "2009-10", "2009-10", "2007-08"),
+                                from_fy = "1999-00"),
+                   cpi_inflator(1,
+                                to_fy = c("2004-05", "2007-08", "2009-10", "2009-10", "2007-08"),
+                                from_fy = rep("1999-00", 5)))
+  expect_identical(cpi_inflator(1,
+                                to_fy = c("2004-05", "2007-08", "2009-10", "2009-10", "2007-08"),
+                                from_fy = "1999-00"),
+                   cpi_inflator(rep(1, 5),
+                                to_fy = c("2004-05", "2007-08", "2009-10", "2009-10", "2007-08"),
+                                from_fy = rep("1999-00", 5)))
+})
+
+
+
