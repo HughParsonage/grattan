@@ -90,6 +90,14 @@ test_that("Accelerate inputs", {
   expect_identical(cpi_inflator(from_fy = fys, to_fy = "2015-16", adjustment = "none"), 
                    accel_repetitive_input(fys, cpi15))
   
+  expect_identical(cpi_inflator(from_fy = c("2015-16", "2015-16", "2015-16"), 
+                                to_fy = "2016-17"),
+                   accel_repetitive_input(c("2015-16", "2015-16", "2015-16"),
+                                          FUN = cpi_inflator,
+                                          from_nominal_price = 1,
+                                          to_fy = "2016-17",
+                                          THRESHOLD = 2L))
+  
 })
 
 
