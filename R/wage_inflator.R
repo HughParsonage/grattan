@@ -54,8 +54,39 @@ wage_inflator <- function(wage = 1,
     stop("`to_fy` is missing, with no default.")
   }
   
+  check_TF(useABSConnection)
+  check_TF(allow.projection)
+  
   # Avoid vector recycling
-  prohibit_vector_recycling(wage, from_fy, to_fy)
+  max.length <- 
+    prohibit_vector_recycling.MAXLENGTH(wage, from_fy, to_fy)
+  forecast.series <- match.arg(forecast.series)
+  
+  if (max.length > 1e5L && 
+      # don't connect for every group
+      !useABSConnection &&
+      length(wage) == 1L) {
+    if (length(to_fy) == 1L) {
+      return(accel_repetitive_input(from_fy,
+                                    wage_inflator,
+                                    wage = wage[[1L]],
+                                    to_fy = to_fy[[1L]],
+                                    forecast.series = forecast.series[[1L]],
+                                    wage.series = wage.series,
+                                    useABSConnection = FALSE, 
+                                    allow.projection = allow.projection[[1L]]))
+    } else {
+      wage_fun <- function(x) {
+        wage_inflator(from_fy = from_fy[[1L]], 
+                     to_fy = x,
+                     forecast.series = forecast.series[[1L]], 
+                     useABSConnection = FALSE,
+                     wage.series = wage.series,
+                     allow.projection = allow.projection[[1L]])
+      }
+      return(accel_repetitive_input(to_fy, wage_fun))
+    }
+  }
   
   if (useABSConnection) {
     wage.url <- "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LABOUR_PRICE_INDEX/1.THRPEB.7.-.0.30.Q/all?startTime=1997-Q3"
@@ -85,15 +116,21 @@ wage_inflator <- function(wage = 1,
     .[["obsQtr"]] %>%
     last 
   
-  exponent <- rep_len(1L, length(from_fy))
-  if (any(from_fy > to_fy)){
-    exponent[from_fy > last_full_fy_in_series] <- -1L
-    
-    .from <- pmin(from_fy, to_fy)
-    .to   <- pmax(to_fy, from_fy)
-    
-    from_fy <- .from
-    to_fy <- .to
+  if (max.length == 1L ||
+      AND(length(from_fy) == 1L, 
+          length(to_fy) == 1L)) {
+    exponent <- if (from_fy > to_fy) -1L else 1L
+  } else {
+    exponent <- rep_len(1L, length(from_fy))
+    if (any(are_deflator <- from_fy > to_fy)){
+      exponent[are_deflator] <- -1L
+      
+      .from <- pmin(from_fy, to_fy)
+      .to   <- pmax(to_fy, from_fy)
+      
+      from_fy <- .from
+      to_fy <- .to
+    }
   }
   
   if (!allow.projection && any(to_fy > last_full_fy_in_series)){
@@ -102,7 +139,7 @@ wage_inflator <- function(wage = 1,
   # else allow NAs to propagate
   
   # Use forecast::forecast to inflate forward
-  forecast.series <- match.arg(forecast.series)
+  
   if (AND(allow.projection, 
           AND(any(to_fy > last_full_fy_in_series),
               forecast.series != "custom"))) {
@@ -206,21 +243,13 @@ wage_inflator <- function(wage = 1,
                               fill = TRUE)
   }
   
-  input <-
-    data.table(wage = wage,
-               from_fy = from_fy,
-               to_fy = to_fy)
-  
-  output <- 
-    input %>%
-    merge(wage.indices, by.x = "from_fy", by.y = "fy_year", sort = FALSE,
-          all.x = TRUE) %>%
-    setnames("obsValue", "from_index") %>%
-    merge(wage.indices, by.x = "to_fy", by.y = "fy_year", sort = FALSE, 
-          all.x = TRUE) %>%
-    setnames("obsValue", "to_index") %>%
-    .[, out := wage * (to_index/from_index) ^ exponent]
-  
-  output[["out"]]
+  infl_factor <-
+    inflator(1, 
+             from = from_fy,
+             to = to_fy,
+             inflator_table = wage.indices,
+             index.col = "obsValue", 
+             time.col = "fy_year") 
+  wage * {infl_factor ^ exponent}
 }
 

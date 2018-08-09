@@ -9,6 +9,28 @@
     - `newstart_allowance`
     - `pension_supplement`
 
+Bug fixes:
+* `inflator` no longer fails when `to_fy` is length > 1 and unordered.
+* `inflator` and `cpi_inflator` is now much faster:
+
+```r
+from_fys <- sample(yr2fy(1995:2010), size = 1e6, replace = TRUE)
+microbenchmark(cpi_inflator(from_fy = from_fys, to_fy = "2015-16"))
+# Old
+Unit: seconds
+                                                expr      min      lq     mean   median       uq
+ cpi_inflator(from_fy = from_fys, to_fy = "2015-16") 1.519483 1.54438 1.550628 1.549735 1.554507
+      max neval
+ 1.661502   100
+ 
+# New
+Unit: milliseconds
+                                                expr      min       lq     mean   median       uq
+ cpi_inflator(from_fy = from_fys, to_fy = "2015-16") 40.71753 41.94061 47.93162 42.93946 48.08461
+      max neval
+ 191.3497   100
+```
+
 ## 1.6.2.0
 ### 2018-06-28
 * Added default values to the following functions:
