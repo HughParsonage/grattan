@@ -74,6 +74,19 @@ test_that("Errors", {
   expect_warning(cpi_inflator(double(0), character(0), character(0)), 
                  "Zero")
   
+  expect_error(cpi_inflator(from_fy = raw(1), to_fy = raw(1)), 
+               regexp = "from_fy.*type.*raw")
+  expect_error(cpi_inflator(from_fy = "2015-16", to_fy = raw(1)), 
+               regexp = "to_fy.*not a valid financial year.")
+  
+  expect_error(cpi_inflator(from_fy = c("2015-16", "aa", "bb"), to_fy = "2015-16"), 
+               regexp = '`from_fy` contained "aa" which is not a valid financial year.', 
+               fixed = TRUE)
+  
+  expect_error(cpi_inflator(from_fy = c("2015-16", "2015-16", "2015-16"),
+                            to_fy = c("2015-16", "x", "y")), 
+               regexp = '`to_fy` contained "x" which is an invalid financial year.', 
+               fixed = TRUE)
   
 })
 
