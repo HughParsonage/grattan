@@ -111,13 +111,14 @@ cpi_inflator <- function(from_nominal_price = 1,
   
   if (max.length == 1L) {
     if (from_fy < earliest_from_fy) {
-      stop("`from_fy = ", from_fy, "` was earlier than the earliest ", 
+      stop("`from_fy = ", from_fy, "` which is earlier than the first ", 
            "instance of the ", cpi_table_nom, " CPI, ", '"', earliest_from_fy, '".')
     }
   } else {
     if (anyNA(fmatch(from_fy, permitted_fys))) {
       first_early_fy <- first(from_fy[from_fy %notin% permitted_fys])
-      stop("`from_fy` contained ", first_early_fy, "` was earlier than the earliest ", 
+      stop("`from_fy` contained ", '"', first_early_fy, '"', 
+           " which is earlier than the first ", 
            "instance of the ", cpi_table_nom, " CPI, ", '"', earliest_from_fy, '".')
     }
   }

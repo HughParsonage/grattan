@@ -121,9 +121,13 @@ test_that("accelerated", {
   time2 <- system.time(wage_inflator(rep(1, 2e6), from_fy = "2004-05", to_fy = to_fys))
   expect_gt(time2[["elapsed"]] / time1[["elapsed"]], 10)
   
-  a <- wage_inflator(1, from_fy = "2004-05", to_fy = c(to_fys, "2020-21"))
-  b <- wage_inflator(rep(1, 2e6 + 1),  from_fy = "2004-05", to_fy = c(to_fys, "2020-21"))
-  expect_identical(a, b)
+  a1 <- wage_inflator(1, from_fy = "2004-05", to_fy = c(to_fys, "2020-21"))
+  b1 <- wage_inflator(rep(1, 2e6 + 1), from_fy = "2004-05", to_fy = c(to_fys, "2020-21"))
+  expect_identical(a1, b1)
+  
+  a2 <- wage_inflator(1, to_fy = "2017-18", from_fy = to_fys)
+  b2 <- wage_inflator(rep(1, 2e6), to_fy = "2017-18", from_fy = to_fys)
+  expect_identical(a2, b2)
   
   af <- wage_inflator(1,
                       from_fy = "2004-05", to_fy = c(to_fys, "2020-21"), 

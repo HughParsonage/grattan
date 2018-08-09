@@ -32,7 +32,38 @@ test_that("Errors", {
   expect_error(cpi_inflator_quarters(from_qtr = "2015-Q1", to_qtr = "2015-01-01"), 
                regexp = "Dates must be in quarters.", 
                fixed = TRUE)
+  expect_error(cpi_inflator(from_fy = c("1920-21"),
+                            to_fy = "2012-13",
+                            adjustment = "none"),
+               regexp = '`from_fy = 1920-21` which is earlier than the first instance of the unadjusted CPI, "1948-49".', 
+               fixed = TRUE)
+  expect_error(cpi_inflator(from_fy = c("2011-12", rep_len("1920-21", 3)),
+                            to_fy = "2012-13",
+                            adjustment = "none"),
+               regexp = '`from_fy` contained "1920-21" which is earlier than the first instance of the unadjusted CPI, "1948-49".', 
+               fixed = TRUE)
   
+  expect_error(cpi_inflator(from_fy = c("1920-21"),
+                            to_fy = "2012-13",
+                            adjustment = "seasonal"),
+               regexp = '`from_fy = 1920-21` which is earlier than the first instance of the seasonally adjusted CPI, "1986-87"', 
+               fixed = TRUE)
+  expect_error(cpi_inflator(from_fy = c("2011-12", rep_len("1920-21", 3)),
+                            to_fy = "2012-13",
+                            adjustment = "seasonal"),
+               regexp = '`from_fy` contained "1920-21" which is earlier than the first instance of the seasonally adjusted CPI, "1986-87"', 
+               fixed = TRUE)
+  
+  expect_error(cpi_inflator(from_fy = c("1920-21"),
+                            to_fy = "2012-13",
+                            adjustment = "trimmed.mean"),
+               regexp = '`from_fy = 1920-21` which is earlier than the first instance of the trimmed mean CPI, "2002-03"', 
+               fixed = TRUE)
+  expect_error(cpi_inflator(from_fy = c("2011-12", rep_len("1920-21", 3)),
+                            to_fy = "2012-13",
+                            adjustment = "trimmed.mean"),
+               regexp = '`from_fy` contained "1920-21" which is earlier than the first instance of the trimmed mean CPI, "2002-03"', 
+               fixed = TRUE)
   
   
 })

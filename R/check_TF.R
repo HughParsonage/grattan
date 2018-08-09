@@ -10,12 +10,11 @@ check_TF <- function(x) {
     }
   } else {
     xc <- deparse(substitute(x))
-    if (!is.logical(x)) {
-      stop("`", xc, "` was type ", typeof(x), " but must be logical. ", 
-           "Change `", xc, "` to be TRUE or FALSE.")
-    }
     if (length(x) != 1L) {
       stop("`", xc, "` had length ", length(x), " but must be length-one. ", 
+           "Change `", xc, "` to be TRUE or FALSE.")
+    } else {
+      stop("`", xc, "` was type ", typeof(x), " but must be logical. ", 
            "Change `", xc, "` to be TRUE or FALSE.")
     }
   }

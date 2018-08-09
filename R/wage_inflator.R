@@ -69,7 +69,7 @@ wage_inflator <- function(wage = 1,
     if (length(to_fy) == 1L) {
       return(accel_repetitive_input(from_fy,
                                     wage_inflator,
-                                    from_nominal_price = from_nominal_price[[1L]],
+                                    wage = wage[[1L]],
                                     to_fy = to_fy[[1L]],
                                     forecast.series = forecast.series[[1L]],
                                     wage.series = wage.series,
