@@ -13,7 +13,14 @@
 
 inflator <- function(x = 1, from, to, inflator_table, index.col = "Index", time.col = "Time", roll = NULL){
   prohibit_length0_vectors(x, from, to)
-  prohibit_vector_recycling(x, from, to)
+  max.length <- 
+    prohibit_vector_recycling.MAXLENGTH(x, from, to)
+  
+  if (max.length == 1L && is.null(roll)) {
+    Values <- .subset2(inflator_table, index.col)
+    Times <- .subset2(inflator_table, time.col)
+    return(x * Values[chmatch(to, Times)] / Values[chmatch(from, Times)])
+  }
   
   inflator_table <- 
     inflator_table %>%
@@ -36,10 +43,8 @@ inflator <- function(x = 1, from, to, inflator_table, index.col = "Index", time.
     to <- .to
   }
   
-  input <- 
-    data.table(y = 1, from = from, to = to,
-               # merging can reorder
-               order = seq_along(from))
+  input <- as.data.table(list(y = 1, from = from, to = to))
+  input[, "order" := .I]
   
   if (is.null(roll)){
     output <- 

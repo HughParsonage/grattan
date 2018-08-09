@@ -18,6 +18,9 @@
 #' @param lf.series If \code{forecast.series = 'custom'}, a \code{data.table} with two variables, \code{fy_year} and \code{r}. 
 #' The variable \code{fy_year} consists of all financial years between the last financial year in the (known) labour force series and \code{to_fy} \strong{inclusive}.
 #' The variable \code{r} consists of rates of labour force growth assumed in each \code{fy_year}, which must be 1 in the first year (to connect with the original labour force series).
+#' 
+#' @param .lf_indices (Internal use only.) A \code{data.table} sent directly to \code{inflator} without any checks.
+#' 
 #' @source ABS Cat 6202.0 \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocument}.
 #' @details \code{lf_inflator} is used on dates. The underlying data series is available every month. 
 #' @examples
@@ -36,11 +39,22 @@
 lf_inflator_fy <- function(labour_force = 1,
                            from_fy = NULL,
                            to_fy = NULL, 
-                           useABSConnection = FALSE, allow.projection = TRUE, 
+                           useABSConnection = FALSE,
+                           allow.projection = TRUE, 
                            use.month = 1L,
                            forecast.series = c("mean", "upper", "lower", "custom"),
                            forecast.level = 95, 
-                           lf.series = NULL) {
+                           lf.series = NULL,
+                           .lf_indices = NULL) {
+  if (!is.null(.lf_indices)) {
+    return(inflator(labour_force, 
+                    from = from_fy, 
+                    to = to_fy, 
+                    inflator_table = .lf_indices, 
+                    index.col = "obsValue",
+                    time.col = "fy_year"))
+  }
+  
   # CRAN
   obsTime <- NULL; obsValue <- NULL; to_index <- NULL; from_index <- NULL
   obsTimeDate <- NULL
@@ -57,6 +71,41 @@ lf_inflator_fy <- function(labour_force = 1,
     stop("`to_fy` is missing, with no default.")
   }
   
+  check_TF(useABSConnection)
+  check_TF(allow.projection)
+  
+  max.length <- 
+    prohibit_vector_recycling.MAXLENGTH(labour_force, from_fy, to_fy)
+  
+  if (max.length > 1e5L && 
+      # don't connect for every group
+      !useABSConnection &&
+      length(labour_force) == 1L) {
+    if (length(to_fy) == 1L) {
+      return(accel_repetitive_input(from_fy,
+                                    lf_inflator_fy,
+                                    labour_force = labour_force[[1L]],
+                                    to_fy = to_fy[[1L]],
+                                    forecast.series = forecast.series[[1L]],
+                                    useABSConnection = FALSE,
+                                    lf.series = lf.series,
+                                    use.month = use.month,
+                                    allow.projection = allow.projection[[1L]]))
+    } else {
+      lf_fun <- function(x) {
+        lf_inflator_fy(labour_force = labour_force[[1L]],
+                       from_fy = from_fy[[1L]], 
+                       to_fy = x,
+                       forecast.series = forecast.series[[1L]], 
+                       useABSConnection = FALSE,
+                       lf.series = lf.series,
+                       use.month = use.month,
+                       allow.projection = allow.projection[[1L]])
+      }
+      return(accel_repetitive_input(to_fy, lf_fun))
+    }
+  }
+  
   if (useABSConnection){
     lf.url.trend <- 
       "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978"
@@ -69,7 +118,7 @@ lf_inflator_fy <- function(labour_force = 1,
     # nocov end
     lf.indices <- as.data.table(lf.indices)
   } else {
-    lf.indices <- lf_trend
+    lf.indices <- as.data.table(lf_trend)
   }
   
   lf.indices[, obsDate := as.Date(sprintf("%s-01", obsTime))]
@@ -92,8 +141,8 @@ lf_inflator_fy <- function(labour_force = 1,
   # Use forecast::forecast to inflate forward
   forecast.series <- match.arg(forecast.series)
   if (AND(allow.projection,
-          AND(any(to_fy > last_full_fy_in_series),
-              forecast.series != "custom"))) {
+          AND(forecast.series != "custom",
+              any(to_fy > last_full_fy_in_series)))) {
     # Labour force is monthly
     to_date <- fy2date(max(to_fy))
     months.ahead <- 
@@ -203,23 +252,12 @@ lf_inflator_fy <- function(labour_force = 1,
       unique(by = "fy_year", fromLast = TRUE)
   }
   
-  input <-
-    data.table(labour_force = labour_force,
-               from_fy = from_fy,
-               to_fy = to_fy)
-  
-  output <- 
-    input %>%
-    merge(lf.indices, by.x = "from_fy", by.y = "fy_year", sort = FALSE,
-          all.x = TRUE) %>%
-    setnames("obsValue", "from_index") %>%
-    merge(lf.indices, by.x = "to_fy", by.y = "fy_year", sort = FALSE, 
-          all.x = TRUE) %>%
-    setnames("obsValue", "to_index") %>%
-    .[, "out" := labour_force * (to_index/from_index)]
-
-  
-  output[["out"]]
+  inflator(labour_force, 
+           from = from_fy, 
+           to = to_fy, 
+           inflator_table = lf.indices, 
+           index.col = "obsValue",
+           time.col = "fy_year")
 }
 
 #' @rdname lf_inflator

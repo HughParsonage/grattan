@@ -5,7 +5,8 @@
 \title{CPI inflator when dates are nice}
 \usage{
 cpi_inflator_quarters(from_nominal_price, from_qtr, to_qtr,
-  adjustment = c("seasonal", "trimmed", "none"), useABSConnection = FALSE)
+  adjustment = c("seasonal", "trimmed", "none"),
+  useABSConnection = FALSE)
 }
 \arguments{
 \item{from_nominal_price}{(numeric) the nominal prices to be converted to a real price}
