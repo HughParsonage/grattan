@@ -35,17 +35,8 @@ cpi_inflator <- function(from_nominal_price = 1,
   if (is.null(to_fy)){
     stop("`to_fy` is missing, with no default.")
   }
-  if (length(useABSConnection) != 1L) {
-    stop("`useABSConnection` had length ", length(useABSConnection), ", but must be length-one. ", 
-         "Ensure `ABSConnection` is either TRUE or FALSE.")
-  }
-  if (!is.logical(useABSConnection)) {
-    stop("`useABSConnection`  was type ", typeof(useABSConnection), ", but must be logical. ", 
-         "Ensure `ABSConnection` is either TRUE or FALSE.")
-  }
-  if (anyNA(useABSConnection)) {
-    stop("`useABSConnection` was NA, but may only be TRUE or FALSE.")
-  }
+  check_TF(useABSConnection)
+  check_TF(allow.projection)
   
   # Don't like vector recycling
   # http://stackoverflow.com/a/9335687/1664978

@@ -54,6 +54,9 @@ wage_inflator <- function(wage = 1,
     stop("`to_fy` is missing, with no default.")
   }
   
+  check_TF(useABSConnection)
+  check_TF(allow.projection)
+  
   # Avoid vector recycling
   max.length <- 
     prohibit_vector_recycling.MAXLENGTH(wage, from_fy, to_fy)

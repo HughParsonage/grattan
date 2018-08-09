@@ -36,7 +36,8 @@
 lf_inflator_fy <- function(labour_force = 1,
                            from_fy = NULL,
                            to_fy = NULL, 
-                           useABSConnection = FALSE, allow.projection = TRUE, 
+                           useABSConnection = FALSE,
+                           allow.projection = TRUE, 
                            use.month = 1L,
                            forecast.series = c("mean", "upper", "lower", "custom"),
                            forecast.level = 95, 
@@ -56,6 +57,9 @@ lf_inflator_fy <- function(labour_force = 1,
   if (is.null(to_fy)){
     stop("`to_fy` is missing, with no default.")
   }
+  
+  check_TF(useABSConnection)
+  check_TF(allow.projection)
   
   if (useABSConnection){
     lf.url.trend <- 
