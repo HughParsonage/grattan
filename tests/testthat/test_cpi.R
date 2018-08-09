@@ -23,11 +23,11 @@ test_that("Errors", {
                fixed = TRUE)
   expect_error(cpi_inflator(from_fy = "2013-14", to_fy = "2040-41",
                             allow.projection = FALSE), 
-               regexp = "`to_fy = 2040-41` yet `allow.projection = FALSE`.", 
+               regexp = '`to_fy = "2040-41"` yet `allow.projection = FALSE`.', 
                fixed = TRUE)
   expect_error(cpi_inflator(from_fy = "2013-14", to_fy = c("2015-16", "2040-41"),
                             allow.projection = FALSE), 
-               regexp = "`to_fy` contains 2040-41, yet `allow.projection = FALSE`.", 
+               regexp = '`to_fy` contains "2040-41", yet `allow.projection = FALSE`.', 
                fixed = TRUE)
   expect_error(cpi_inflator_quarters(from_qtr = "2015-Q1", to_qtr = "2015-01-01"), 
                regexp = "Dates must be in quarters.", 
@@ -35,7 +35,7 @@ test_that("Errors", {
   expect_error(cpi_inflator(from_fy = c("1920-21"),
                             to_fy = "2012-13",
                             adjustment = "none"),
-               regexp = '`from_fy = 1920-21` which is earlier than the first instance of the unadjusted CPI, "1948-49".', 
+               regexp = '`from_fy = "1920-21"` which is earlier than the first instance of the unadjusted CPI, "1948-49".', 
                fixed = TRUE)
   expect_error(cpi_inflator(from_fy = c("2011-12", rep_len("1920-21", 3)),
                             to_fy = "2012-13",
@@ -46,7 +46,7 @@ test_that("Errors", {
   expect_error(cpi_inflator(from_fy = c("1920-21"),
                             to_fy = "2012-13",
                             adjustment = "seasonal"),
-               regexp = '`from_fy = 1920-21` which is earlier than the first instance of the seasonally adjusted CPI, "1986-87"', 
+               regexp = '`from_fy = "1920-21"` which is earlier than the first instance of the seasonally adjusted CPI, "1986-87"', 
                fixed = TRUE)
   expect_error(cpi_inflator(from_fy = c("2011-12", rep_len("1920-21", 3)),
                             to_fy = "2012-13",
@@ -57,13 +57,22 @@ test_that("Errors", {
   expect_error(cpi_inflator(from_fy = c("1920-21"),
                             to_fy = "2012-13",
                             adjustment = "trimmed.mean"),
-               regexp = '`from_fy = 1920-21` which is earlier than the first instance of the trimmed mean CPI, "2002-03"', 
+               regexp = '`from_fy = "1920-21"` which is earlier than the first instance of the trimmed mean CPI, "2002-03"', 
                fixed = TRUE)
   expect_error(cpi_inflator(from_fy = c("2011-12", rep_len("1920-21", 3)),
                             to_fy = "2012-13",
                             adjustment = "trimmed.mean"),
                regexp = '`from_fy` contained "1920-21" which is earlier than the first instance of the trimmed mean CPI, "2002-03"', 
                fixed = TRUE)
+  
+  expect_error(cpi_inflator(from_fy = "2010-12", to_fy = "2015-16"),
+               regexp = '`from_fy = "2010-12"` was not a valid financial year.',
+               fixed = TRUE)
+  expect_error(cpi_inflator(to_fy = "2010-12", from_fy = "2015-16"),
+               regexp = '`to_fy = "2010-12"` which is not a valid financial year.',
+               fixed = TRUE)
+  expect_warning(cpi_inflator(double(0), character(0), character(0)), 
+                 "Zero")
   
   
 })

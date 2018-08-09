@@ -43,6 +43,11 @@ cpi_inflator <- function(from_nominal_price = 1,
   max.length <- 
     prohibit_vector_recycling.MAXLENGTH(from_nominal_price, from_fy, to_fy)
   
+  if (max.length == 0L) {
+    warning("Zero-length arguments provided, returning double(0).")
+    return(double(0))
+  }
+  
   adjustment <- match.arg(adjustment, several.ok = FALSE)
   
   
@@ -109,58 +114,111 @@ cpi_inflator <- function(from_nominal_price = 1,
            "seasonal" = "seasonally adjusted",
            "trimmed.mean" = "trimmed mean")
   
-  if (max.length == 1L) {
-    if (from_fy < earliest_from_fy) {
-      stop("`from_fy = ", from_fy, "` which is earlier than the first ", 
-           "instance of the ", cpi_table_nom, " CPI, ", '"', earliest_from_fy, '".')
+  if (!all_fy(from_fy, permitted = permitted_fys)) {
+    if (!is.character(from_fy)) {
+      stop("`from_fy` was type ", '"', typeof(from_fy), '", ', 
+           "but must be a character vector. ", 
+           "\n\n",
+           "Ensure all elements of `from_fy` are valid financial years satisfying `",
+           '"', earliest_from_fy, '"',
+           " <= from_fy <= ", '"',
+           last(permitted_fys), '"', "`. ")
     }
-  } else {
-    if (anyNA(fmatch(from_fy, permitted_fys))) {
+    if (max.length == 1L) {
+      if (!is.fy(from_fy)) {
+        stop("`from_fy = ", '"', from_fy, '"', "` was not a valid financial year. ",
+             "\n\n",
+             "Ensure all elements of `from_fy` are valid financial years satisfying `",
+             '"', earliest_from_fy, '"',
+             " <= from_fy <= ", '"',
+             last(permitted_fys), '"', "`. ")
+      }
+      
+      if (from_fy < earliest_from_fy) {
+        stop("`from_fy = ", '"', from_fy, '"', "` which is earlier than the first ", 
+             "instance of the ", cpi_table_nom, " CPI, ", '"', earliest_from_fy, '".', 
+             "\n\n",
+             "Ensure all elements of `from_fy` are valid financial years satisfying `",
+             '"', earliest_from_fy, '"',
+             " <= from_fy <= ", '"',
+             last(permitted_fys), '"', "`. ")
+      }
+    } else {
+      
       first_early_fy <- first(from_fy[from_fy %notin% permitted_fys])
+      if (!is.fy(first_early_fy)) {
+        stop("`from_fy` contained ", '"', first_early_fy, '"', 
+             " which is not a valid financial year. ", 
+             "\n\n",
+             "Ensure all elements of `from_fy` are valid financial years satisfying `",
+             '"', earliest_from_fy, '"',
+             " <= from_fy <= ", '"',
+             last(permitted_fys), '"', "`. ")
+      }
       stop("`from_fy` contained ", '"', first_early_fy, '"', 
            " which is earlier than the first ", 
-           "instance of the ", cpi_table_nom, " CPI, ", '"', earliest_from_fy, '".')
+           "instance of the ", cpi_table_nom, " CPI, ", '"', earliest_from_fy, '".',
+           "\n\n",
+           "Ensure all elements of `from_fy` are valid financial years satisfying `",
+           '"', earliest_from_fy, '"',
+           " <= from_fy <= ", '"',
+           last(permitted_fys), '"', "`. ")
     }
   }
   
   
-  if (!allow.projection && anyNA(fmatch(to_fy, permitted_fys))) {
-    if (length(to_fy) == 1L) {
-      stop("`to_fy = ", to_fy, "` yet `allow.projection = FALSE`. ", 
-           "The latest to_fy that may be used is ", max(cpi.indices$fy_year), ". ", 
-           "Set `allow.projection = TRUE` or ensure `to_fy` is earlier than ", 
-           max(cpi.indices$fy), ".")
+  if (!all_fy(to_fy, permitted_fys)) {
+    if (!allow.projection) {
+      if (length(to_fy) == 1L) {
+        stop("`to_fy = ", '"', to_fy, '"', "` yet `allow.projection = FALSE`. ", 
+             "The latest to_fy that may be used is ", max(cpi.indices$fy_year), ". ", 
+             "Set `allow.projection = TRUE` or ensure `to_fy` is earlier than ", 
+             max(cpi.indices$fy), ".")
+      } else {
+        first_late_fy <- first(to_fy[to_fy %notin% cpi.indices$fy_year])
+        stop("`to_fy` contains ", '"', first_late_fy, '"', ", yet `allow.projection = FALSE`. ", 
+             "The latest to_fy that may be used is ", max(cpi.indices$fy_year), ". ",
+             "Set `allow.projection = TRUE` or ensure `to_fy` is earlier than ", 
+             max(cpi.indices$fy), ".")
+      }
     } else {
-      first_late_fy <- first(to_fy[to_fy %notin% cpi.indices$fy_year])
-      stop("`to_fy` contains ", first_late_fy, ", yet `allow.projection = FALSE`. ", 
-           "The latest to_fy that may be used is ", max(cpi.indices$fy_year), ". ",
-           "Set `allow.projection = TRUE` or ensure `to_fy` is earlier than ", 
-           max(cpi.indices$fy), ".")
+      if (!all_fy(to_fy)) {
+        if (!all(is.fy(to_fy))) {
+          if (length(to_fy) == 1L) {
+            stop("`to_fy = ", '"', to_fy, '"`',
+                 " which is not a valid financial year.",
+                 "\n\n", 
+                 "Ensure all elements of `to_fy` are valid financial years.")
+          } else {
+            first_to_fy <- to_fy[which.min(is.fy(to_fy))]
+            stop("`to_fy` contained ",
+                 '"', first_to_fy, '"',
+                 " which is an invalid financial year.",
+                 "\n\n", 
+                 "Ensure all elements of `to_fy` are valid financial years.")
+          }
+        }
+      }
+      
+      # Number of years beyond the data our forecast must reach
+      years.beyond <- max(fy2yr(to_fy)) - max(fy2yr(permitted_fys))
+      cpi_index_forecast <-
+        cpi.indices %$%
+        gforecast(obsValue, h = years.beyond) %$%
+        as.numeric(mean)
+      
+      cpi.indices.new <- 
+        setDT(list(fy_year = yr2fy(seq(max(fy2yr(permitted_fys)) + 1L,
+                                       max(fy2yr(to_fy)),
+                                       by = 1L)),
+                   obsValue = cpi_index_forecast))
+      cpi.indices <-
+        rbindlist(list(cpi.indices, cpi.indices.new),
+                  use.names = TRUE,
+                  fill = TRUE)
     }
   }
-  # else allow NAs to propagate
   
-  # Use forecast::forecast to inflate forward
-  if (allow.projection && anyNA(fmatch(to_fy, permitted_fys))) {
-    # Number of years beyond the data our forecast must reach
-    years.beyond <- max(fy2yr(to_fy)) - max(fy2yr(cpi.indices$fy_year))
-    cpi_index_forecast <-
-      cpi.indices %$%
-      gforecast(obsValue, h = years.beyond) %$%
-      as.numeric(mean)
-    
-    cpi.indices.new <- 
-      setDT(list(fy_year = yr2fy(seq(max(fy2yr(cpi.indices$fy_year)) + 1L,
-                                     max(fy2yr(to_fy)),
-                                     by = 1L)),
-                 obsValue = cpi_index_forecast))
-    cpi.indices <-
-      rbindlist(list(cpi.indices, cpi.indices.new),
-                use.names = TRUE,
-                fill = TRUE)
-  }
-  
-    
   inflator(from_nominal_price,
            from = from_fy,
            to = to_fy,
