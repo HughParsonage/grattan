@@ -123,3 +123,77 @@ test_that("ABS connection", {
   
   expect_equal(internal_ans, external_ans, tol = 0.0005)
 })
+
+test_that("accelerate", {
+  skip_on_cran()
+  set.seed(6)
+  long_tos <- long_froms <- sample(yr2fy(2005:2010), size = 2e6, replace = TRUE)
+  expect_identical(lf_inflator_fy(labour_force = rep(2, 2e6), 
+                                  from_fy = long_froms, 
+                                  to_fy = "2015-16"), 
+                   lf_inflator_fy(labour_force = 2, 
+                                  from_fy = long_froms, 
+                                  to_fy = "2015-16"))
+  expect_identical(lf_inflator_fy(labour_force = rep(2, 2e6), 
+                                  from_fy = "1999-00", 
+                                  to_fy = long_tos), 
+                   lf_inflator_fy(labour_force = 2, 
+                                  from_fy = "1999-00", 
+                                  to_fy = long_tos))
+  time1 <- system.time(lf_inflator_fy(1, from_fy = "2004-05", to_fy = long_tos))
+  time2 <- system.time(lf_inflator_fy(rep(1, 2e6), from_fy = "2004-05", to_fy = long_tos))
+  expect_gt(time2[["elapsed"]] / time1[["elapsed"]], 10)
+  
+  
+  expect_identical(lf_inflator_fy(labour_force = rep(2, 2e6), 
+                                  from_fy = long_froms, 
+                                  to_fy = "2020-21"), 
+                   lf_inflator_fy(labour_force = 2, 
+                                  from_fy = long_froms, 
+                                  to_fy = "2020-21"))
+  expect_identical(lf_inflator_fy(labour_force = rep(2, 2e6), 
+                                  from_fy = "1999-00", 
+                                  to_fy = long_tos), 
+                   lf_inflator_fy(labour_force = 2, 
+                                  from_fy = "1999-00", 
+                                  to_fy = long_tos))
+  
+  expect_identical(lf_inflator_fy(labour_force = rep(2, 2e6), 
+                                  from_fy = long_froms, 
+                                  to_fy = "2020-21",
+                                  use.month = 2L), 
+                   lf_inflator_fy(labour_force = 2, 
+                                  from_fy = long_froms, 
+                                  to_fy = "2020-21",
+                                  use.month = 2L))
+  
+  expect_identical(lf_inflator_fy(labour_force = rep(2, 2e6), 
+                                  from_fy = long_froms, 
+                                  to_fy = "2018-19",
+                                  forecast.series = "custom", 
+                                  lf.series = data.table(fy_year = c("2017-18", "2018-19"),
+                                                         r = c(0, 0.01))), 
+                   lf_inflator_fy(labour_force = 2, 
+                                  from_fy = long_froms, 
+                                  to_fy = "2018-19",
+                                  forecast.series = "custom", 
+                                  lf.series = data.table(fy_year = c("2017-18", "2018-19"),
+                                                         r = c(0, 0.01))))
+  
+})
+
+test_that("lf_indices", {
+  skip_on_cran()
+  library(data.table)
+  LL_inds <- as.data.table(grattan:::lf_trend)
+  LL_inds[, obsDate := as.Date(paste0(obsTime, "-01"))]
+  LL_inds_month1 <- LL_inds[month(obsDate) == 1L]
+  LL_inds_month1[, fy_year := date2fy(obsDate)]
+  expect_equal(lf_inflator_fy(from_fy = "2014-15", to_fy = "2015-16"),
+               lf_inflator_fy(from_fy = "2014-15", to_fy = "2015-16",
+                              .lf_indices = LL_inds_month1))
+  
+  
+})
+
+
