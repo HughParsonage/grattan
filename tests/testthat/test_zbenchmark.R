@@ -19,5 +19,5 @@ test_that("Performance regression: cpi_inflator", {
                                                 to_fy = "2015-16",
                                                 adjustment = "none"))
   expect_lt(cpi_infl_time100M[["elapsed"]], 
-            if (hughs_computer) 5 else 15)
+            if (hughs_computer) 5 else 17)
 })

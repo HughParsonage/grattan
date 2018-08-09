@@ -102,9 +102,10 @@ qtrs_ahead <- function(x, y) {
 
 # vectorized switch 
 # e.g. Switch(c("A", "B", "C", "A"), "A" = 1, "B" = 2, "C" = 11:14)
-Switch <- function(Expr, ...) {
-  max.length <- prohibit_vector_recycling.MAXLENGTH(...)
-  out <- rep_len(..1, max.length)
+Switch <- function(Expr, ..., DEFAULT) {
+  max.length <- max(prohibit_vector_recycling.MAXLENGTH(...), 
+                    length(DEFAULT))
+  out <- rep_len(DEFAULT, max.length)
   dots <- list(...)
   dot_noms <- names(dots)
   for (n in seq_along(dots)) {

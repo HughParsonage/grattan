@@ -61,7 +61,8 @@ age_pension_age <- function(when = Sys.Date(),
     o[when == "2021-22"] <- 66.5
     o[when == "2022-23"] <- 66.5
     o[when >= "2023-24"] <- 67
-    Switch(sex, 
+    Switch(sex,
+           DEFAULT = o,
            "f" = {
              o[when <= "1993-94"] <- 60
              o[when == "1994-95"] <- 60
