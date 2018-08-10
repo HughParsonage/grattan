@@ -11,7 +11,8 @@ ABS Cat 6202.0 \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocume
 lf_inflator_fy(labour_force = 1, from_fy = NULL, to_fy = NULL,
   useABSConnection = FALSE, allow.projection = TRUE, use.month = 1L,
   forecast.series = c("mean", "upper", "lower", "custom"),
-  forecast.level = 95, lf.series = NULL, .lf_indices = NULL)
+  forecast.level = 95, lf.series = NULL, .lf_indices = NULL,
+  accelerate.above = 100000L)
 
 lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date,
   useABSConnection = FALSE)
@@ -39,6 +40,11 @@ The variable \code{fy_year} consists of all financial years between the last fin
 The variable \code{r} consists of rates of labour force growth assumed in each \code{fy_year}, which must be 1 in the first year (to connect with the original labour force series).}
 
 \item{.lf_indices}{(Internal use only.) A \code{data.table} sent directly to \code{inflator} without any checks.}
+
+\item{accelerate.above}{An integer setting the threshold for 'acceleration'. 
+When the maximum length of the arguments exceeds this value, calculate each unique value individually 
+then combine. Set to 100,000 as a rule of thumb beyond which calculation speeds benefit
+dramatically. Can be set to \code{Inf} to disable acceleration.}
 
 \item{from_date}{The date of \code{labour_force}.}
 

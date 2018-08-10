@@ -6,7 +6,8 @@
 \usage{
 cpi_inflator(from_nominal_price = 1, from_fy = NULL, to_fy = NULL,
   adjustment = c("seasonal", "none", "trimmed.mean"),
-  useABSConnection = FALSE, allow.projection = TRUE)
+  useABSConnection = FALSE, allow.projection = TRUE,
+  accelerate.above = 100000L)
 }
 \arguments{
 \item{from_nominal_price}{(numeric) the price (or vector of prices) to be inflated}
@@ -22,6 +23,11 @@ The internal data was updated on 2018-08-10 to 2018-Q2.
 If using \code{useABSConnection = TRUE}, ensure you have \code{rsdmx (>= 0.5-10)} up-to-date.}
 
 \item{allow.projection}{Should projections beyond the ABS's data be allowed?}
+
+\item{accelerate.above}{An integer setting the threshold for 'acceleration'. 
+When the maximum length of the arguments exceeds this value, calculate each unique value individually 
+then combine. Set to 100,000 as a rule of thumb beyond which calculation speeds benefit
+dramatically. Can be set to \code{Inf} to disable acceleration.}
 }
 \value{
 The value of \code{from_nominal_price} in real (\code{to_fy}) dollars.

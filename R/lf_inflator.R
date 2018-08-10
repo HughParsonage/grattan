@@ -21,7 +21,12 @@
 #' The variable \code{r} consists of rates of labour force growth assumed in each \code{fy_year}, which must be 1 in the first year (to connect with the original labour force series).
 #' 
 #' @param .lf_indices (Internal use only.) A \code{data.table} sent directly to \code{inflator} without any checks.
+#' @param accelerate.above An integer setting the threshold for 'acceleration'. 
+#' When the maximum length of the arguments exceeds this value, calculate each unique value individually 
+#' then combine. Set to 100,000 as a rule of thumb beyond which calculation speeds benefit
+#' dramatically. Can be set to \code{Inf} to disable acceleration.
 #' 
+#'   
 #' @source ABS Cat 6202.0 \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocument}.
 #' @details \code{lf_inflator} is used on dates. The underlying data series is available every month. 
 #' @examples
@@ -46,7 +51,8 @@ lf_inflator_fy <- function(labour_force = 1,
                            forecast.series = c("mean", "upper", "lower", "custom"),
                            forecast.level = 95, 
                            lf.series = NULL,
-                           .lf_indices = NULL) {
+                           .lf_indices = NULL,
+                           accelerate.above = 1e5L) {
   if (!is.null(.lf_indices)) {
     return(inflator(labour_force, 
                     from = from_fy, 
@@ -57,8 +63,7 @@ lf_inflator_fy <- function(labour_force = 1,
   }
   
   # CRAN
-  obsTime <- NULL; obsValue <- NULL; to_index <- NULL; from_index <- NULL
-  obsTimeDate <- NULL
+  obsTime <- NULL; obsValue <- NULL
   
   if (is.null(from_fy) && is.null(to_fy)){
     to_fy <- date2fy(Sys.Date())
@@ -78,21 +83,25 @@ lf_inflator_fy <- function(labour_force = 1,
   max.length <- 
     prohibit_vector_recycling.MAXLENGTH(labour_force, from_fy, to_fy)
   
-  if (max.length > 1e5L && 
+  if (max.length > accelerate.above && 
       # don't connect for every group
       !useABSConnection &&
       length(labour_force) == 1L) {
     if (length(to_fy) == 1L) {
-      return(accel_repetitive_input(from_fy,
-                                    lf_inflator_fy,
-                                    labour_force = labour_force[[1L]],
-                                    to_fy = to_fy[[1L]],
-                                    forecast.series = forecast.series[[1L]],
-                                    useABSConnection = FALSE,
-                                    lf.series = lf.series,
-                                    use.month = use.month,
-                                    allow.projection = allow.projection[[1L]]))
-    } else {
+      lf_fun <- function(x) {
+        lf_inflator_fy(labour_force = labour_force[[1L]],
+                       from_fy = x, 
+                       to_fy = to_fy[[1L]],
+                       forecast.series = forecast.series[[1L]], 
+                       useABSConnection = FALSE,
+                       lf.series = lf.series,
+                       use.month = use.month,
+                       allow.projection = allow.projection[[1L]],
+                       accelerate.above = Inf)
+      }
+      return(accel_repetitive_input(from_fy, lf_fun))
+    }
+    if (length(from_fy) == 1L) {
       lf_fun <- function(x) {
         lf_inflator_fy(labour_force = labour_force[[1L]],
                        from_fy = from_fy[[1L]], 
@@ -101,7 +110,8 @@ lf_inflator_fy <- function(labour_force = 1,
                        useABSConnection = FALSE,
                        lf.series = lf.series,
                        use.month = use.month,
-                       allow.projection = allow.projection[[1L]])
+                       allow.projection = allow.projection[[1L]],
+                       accelerate.above = Inf)
       }
       return(accel_repetitive_input(to_fy, lf_fun))
     }

@@ -184,6 +184,14 @@ test_that("accelerate", {
   
 })
 
+test_that("accelerating both from and to", {
+  expect_identical(lf_inflator_fy(from_fy = c("2005-06", "2008-09", "2006-07"),
+                                  to_fy = c("2015-16", "2014-15", "2016-17")),
+                   lf_inflator_fy(from_fy = c("2005-06", "2008-09", "2006-07"),
+                                  to_fy = c("2015-16", "2014-15", "2016-17"),
+                                  accelerate.above = 2L))
+})
+
 test_that("lf_indices", {
   skip_on_cran()
   library(data.table)

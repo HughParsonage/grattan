@@ -298,6 +298,15 @@ test_that("cpi accelerated", {
 })
 
 
+test_that("cpi accelerated but both to and from multilength", {
+  expect_identical(cpi_inflator(from_fy = c("2005-06", "2008-09", "2006-07"),
+                                to_fy = c("2015-16", "2014-15", "2016-17")),
+                   cpi_inflator(from_fy = c("2005-06", "2008-09", "2006-07"),
+                                to_fy = c("2015-16", "2014-15", "2016-17"),
+                                accelerate.above = 2L))
+})
+
+
 test_that("cpi different lengths", {
   expect_identical(cpi_inflator(1,
                                 to_fy = c("2004-05", "2007-08", "2009-10", "2009-10", "2007-08"),

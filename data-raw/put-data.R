@@ -143,6 +143,7 @@ cpi_unadj <-
   error = function(e) {
     fread("./data-raw/cpi-unadjusted-manual.tsv")
   })
+  
 
 cpi_seasonal_adjustment <-
   tryCatch({
@@ -173,6 +174,26 @@ cpi_trimmed <-
   error = function(e) {
     fread("./data-raw/cpi-seasonally-adjusted-manual.tsv")
   })
+
+cpi_by_adj_fy <-
+  list("none" = cpi_unadj, 
+       "seasonal" = cpi_seasonal_adjustment,
+       "trimmed.mean" = cpi_trimmed) %>%
+  lapply(function(DT) {
+    DT %>%
+      .[endsWith(obsTime, "Q1")] %>%
+      .[, .(obsValue),
+        keyby = .(fy_year = yr2fy(as.integer(sub("-Q1", "", obsTime, fixed = TRUE))))]
+  }) %>%
+  rbindlist(idcol = "Adjustment", use.names = TRUE, fill = TRUE) %>%
+  setkey(Adjustment, fy_year)
+
+cpi_unadj_fy <- cpi_by_adj_fy[.("none"), .(fy_year, obsValue)]
+cpi_seasonal_adjustment_fy <- cpi_by_adj_fy[.("seasonal"), .(fy_year, obsValue)]
+cpi_trimmed_fy <- cpi_by_adj_fy[.("trimmed.mean"), .(fy_year, obsValue)]
+setkey(cpi_unadj_fy, fy_year)
+setkey(cpi_seasonal_adjustment_fy, fy_year)
+setkey(cpi_trimmed_fy, fy_year)
 
 
 wages_trend <- 
@@ -1036,6 +1057,9 @@ use_and_write_data(tax_table2,
                    cpi_unadj,
                    cpi_seasonal_adjustment,
                    cpi_trimmed,
+                   cpi_unadj_fy,
+                   cpi_seasonal_adjustment_fy,
+                   cpi_trimmed_fy,
                    wages_trend,
                    lf_trend,
                    cgt_expenditures,

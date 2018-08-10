@@ -4,7 +4,7 @@
 \alias{inverse_average_rate}
 \title{Inverse average tax rate}
 \usage{
-inverse_average_rate(average_rate, ..., .max = 100000000)
+inverse_average_rate(average_rate, ..., .max = 1e+08)
 }
 \arguments{
 \item{average_rate}{The average tax rate (\eqn{\frac{tax}{income}})}

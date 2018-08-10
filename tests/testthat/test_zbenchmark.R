@@ -21,3 +21,4 @@ test_that("Performance regression: cpi_inflator", {
   expect_lt(cpi_infl_time100M[["elapsed"]], 
             if (hughs_computer) 5 else 17)
 })
+

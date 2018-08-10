@@ -7,7 +7,8 @@
 wage_inflator(wage = 1, from_fy = NULL, to_fy = NULL,
   useABSConnection = FALSE, allow.projection = TRUE,
   forecast.series = c("mean", "upper", "lower", "custom"),
-  forecast.level = 95, wage.series = NULL)
+  forecast.level = 95, wage.series = NULL,
+  accelerate.above = 100000L)
 }
 \arguments{
 \item{wage}{The amount to be inflated (1 by default).}
@@ -31,6 +32,11 @@ The future wage series can be provided in two ways:
 (2) a \code{data.table} with two variables, \code{fy_year} and \code{r}. If (2), 
 the variable \code{fy_year} must be a vector of all financial years after the last financial year in the (known) wage series and the latest \code{to_fy} \strong{inclusive}.
 The variable \code{r} consists of rates of wage growth assumed in each \code{fy_year}.}
+
+\item{accelerate.above}{An integer setting the threshold for 'acceleration'. 
+When the maximum length of the arguments exceeds this value, calculate each unique value individually 
+then combine. Set to 100,000 as a rule of thumb beyond which calculation speeds benefit
+dramatically. Can be set to \code{Inf} to disable acceleration.}
 }
 \value{
 The wage inflation between the two years.

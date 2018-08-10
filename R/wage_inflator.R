@@ -16,6 +16,11 @@
 #' (2) a \code{data.table} with two variables, \code{fy_year} and \code{r}. If (2), 
 #' the variable \code{fy_year} must be a vector of all financial years after the last financial year in the (known) wage series and the latest \code{to_fy} \strong{inclusive}.
 #' The variable \code{r} consists of rates of wage growth assumed in each \code{fy_year}.
+#' @param accelerate.above An integer setting the threshold for 'acceleration'. 
+#' When the maximum length of the arguments exceeds this value, calculate each unique value individually 
+#' then combine. Set to 100,000 as a rule of thumb beyond which calculation speeds benefit
+#' dramatically. Can be set to \code{Inf} to disable acceleration.
+#' 
 #' 
 #' @examples
 #' # Wage inflation
@@ -38,7 +43,8 @@ wage_inflator <- function(wage = 1,
                           allow.projection = TRUE, 
                           forecast.series = c("mean", "upper", "lower", "custom"), 
                           forecast.level = 95, 
-                          wage.series = NULL) {
+                          wage.series = NULL,
+                          accelerate.above = 1e5L) {
   
   # CRAN
   obsTime <- obsValue <- to_index <- from_index <- NULL
@@ -63,27 +69,32 @@ wage_inflator <- function(wage = 1,
     prohibit_vector_recycling.MAXLENGTH(wage, from_fy, to_fy)
   forecast.series <- match.arg(forecast.series)
   
-  if (max.length > 1e5L && 
+  if (max.length > accelerate.above && 
       # don't connect for every group
       !useABSConnection &&
       length(wage) == 1L) {
     if (length(to_fy) == 1L) {
-      return(accel_repetitive_input(from_fy,
-                                    wage_inflator,
-                                    wage = wage[[1L]],
-                                    to_fy = to_fy[[1L]],
-                                    forecast.series = forecast.series[[1L]],
-                                    wage.series = wage.series,
-                                    useABSConnection = FALSE, 
-                                    allow.projection = allow.projection[[1L]]))
-    } else {
+      wage_fun <- function(x) {
+        wage_inflator(wage = wage[[1L]],
+                      from_fy = x, 
+                      to_fy = to_fy[[1L]],
+                      forecast.series = forecast.series[[1L]], 
+                      useABSConnection = FALSE,
+                      wage.series = wage.series,
+                      allow.projection = allow.projection[[1L]],
+                      accelerate.above = Inf)
+      }
+      return(accel_repetitive_input(from_fy, wage_fun))
+    }
+    if (length(from_fy) == 1L) {
       wage_fun <- function(x) {
         wage_inflator(from_fy = from_fy[[1L]], 
                      to_fy = x,
                      forecast.series = forecast.series[[1L]], 
                      useABSConnection = FALSE,
                      wage.series = wage.series,
-                     allow.projection = allow.projection[[1L]])
+                     allow.projection = allow.projection[[1L]],
+                     accelerate.above = Inf)
       }
       return(accel_repetitive_input(to_fy, wage_fun))
     }
