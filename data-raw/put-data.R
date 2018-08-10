@@ -27,17 +27,20 @@ if (requireNamespace("SampleFile1415", quietly = TRUE)) {
               use.names = TRUE, 
               fill = TRUE)
 } else {
+  warning("SampleFile1415 not used.")
   sample_files_all <- get_sample_files_all()
 }
-if (requireNamespace("ozTaxData", quietly = TRUE)) {
-  sample_file_1516 <- as.data.table(ozTaxData::sample_15_16)
-  sample_file_1516[, fy.year := "2015-16"]
-  sample_file_1516[, WEIGHT := 50]
-  sample_files_all <- rbindlist(list(sample_files_all,
-                                     sample_file_1516),
-                                use.names = TRUE,
-                                fill = TRUE)
+if (!requireNamespace("ozTaxData", quietly = TRUE)) {
+  stop("ozTaxData needed for 2015-16 sample file.")
 }
+sample_file_1516 <- as.data.table(ozTaxData::sample_15_16)
+sample_file_1516[, fy.year := "2015-16"]
+sample_file_1516[, WEIGHT := 50]
+sample_files_all <- rbindlist(list(sample_files_all,
+                                   sample_file_1516),
+                              use.names = TRUE,
+                              fill = TRUE)
+
 
 library(grattan)
 library(readr)
@@ -1022,6 +1025,8 @@ setkey(generic_inflators_1516[, fy_year := NULL], h, variable)
 
 setkey(wages_trend, obsTime)
 
+.date_data_updated <- Sys.Date()
+
 use_and_write_data(tax_table2, 
                    lito_tbl, 
                    tax_tbl, 
@@ -1073,4 +1078,5 @@ use_and_write_data(tax_table2,
                    youth_annual_rates,
 
                    # possibly separable
-                   .avbl_fractions)
+                   .avbl_fractions,
+                   .date_data_updated)
