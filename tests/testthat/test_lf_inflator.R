@@ -17,6 +17,7 @@ test_that("Default from_fy and to_fy", {
 
 test_that("Error handling", {
   skip_on_cran()
+  skip_if_not(identical(date2fy(Sys.Date()), "2018-19"))
   expect_error(lf_inflator_fy(to_fy = "2013-14"), 
                regexp = "`from_fy` is missing", 
                fixed = TRUE)
@@ -38,12 +39,12 @@ test_that("Error handling", {
                                                      r = 0.2)), 
                regexp = "The first fy in the custom series must be equal to", 
                fixed = TRUE)
-  expect_error(lf_inflator_fy(from_fy = "2017-18",
-                              to_fy = "2018-19",
+  expect_error(lf_inflator_fy(from_fy = "2018-19",
+                              to_fy = "2019-20",
                               forecast.series = "custom",
-                              lf.series = data.table(fy_year = c("2017-18", "2017-18"),
+                              lf.series = data.table(fy_year = c("2018-19", "2018-19"),
                                                      r = c(0, 0.123))), 
-               regexp = 'lf.series$fy_year should be c("2017-18", "2018-19").', 
+               regexp = 'lf.series$fy_year should be c("2018-19", "2019-20").', 
                fixed = TRUE)
 })
 
@@ -86,6 +87,7 @@ test_that("lf_inflator_fy accepts multiple dates", {
 })
 
 test_that("Custom lf series", {
+  skip_if_not(identical(date2fy(Sys.Date()), "2018-19"))
   expect_message(lf_inflator_fy(from_fy = "2022-23", 
                                 to_fy = "2024-25",
                                 forecast.series = "custom",
@@ -98,10 +100,10 @@ test_that("Custom lf series", {
   expect_equal(y, 1.1^2)
   
   y_custom_series <-
-    lf_inflator_fy(from_fy = "2017-18",
-                   to_fy = "2018-19",
+    lf_inflator_fy(from_fy = "2018-19",
+                   to_fy = "2019-20",
                    forecast.series = "custom",
-                   lf.series = data.table(fy_year = c("2017-18", "2018-19"),
+                   lf.series = data.table(fy_year = c("2018-19", "2019-20"),
                                           r = c(0, 0.123)))
   
   expect_equal(y_custom_series, 1.123)
@@ -171,13 +173,13 @@ test_that("accelerate", {
                                   from_fy = long_froms, 
                                   to_fy = "2018-19",
                                   forecast.series = "custom", 
-                                  lf.series = data.table(fy_year = c("2017-18", "2018-19"),
+                                  lf.series = data.table(fy_year = c("2018-19", "2019-20"),
                                                          r = c(0, 0.01))), 
                    lf_inflator_fy(labour_force = 2, 
                                   from_fy = long_froms, 
                                   to_fy = "2018-19",
                                   forecast.series = "custom", 
-                                  lf.series = data.table(fy_year = c("2017-18", "2018-19"),
+                                  lf.series = data.table(fy_year = c("2018-19", "2019-20"),
                                                          r = c(0, 0.01))))
   
 })
