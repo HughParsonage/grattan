@@ -108,7 +108,7 @@ test_that("ABS connection", {
                                to_fy = "2013-14",
                                useABSConnection = TRUE)
   
-  expect_equal(internal_ans, external_ans, tol = 0.00001)
+  expect_equal(internal_ans, external_ans, tol = 0.00001, scale = 1)
 })
 
 test_that("accelerated", {
