@@ -31,6 +31,8 @@ Unit: milliseconds
       max neval
  191.3497   100
 ```
+* Fixed failing interaction between temporary budget repair levy and small business tax offset in 2016-17.
+
 
 ## 1.6.2.0
 ### 2018-06-28
