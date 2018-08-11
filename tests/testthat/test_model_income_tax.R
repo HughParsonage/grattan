@@ -115,14 +115,15 @@ test_that("La plus ca meme la plus ca meme: SBTO doesn't interfere with SBTO", {
   library(taxstats)
   library(magrittr)
   library(data.table)
-  sample_file_1314_copy <- 
-    sample_file_1314 %>%
+  sample_file_1314_copy <- copy(sample_file_1314)
+  sample_file_81913 <- 
+    sample_file_1314_copy %>%
     .[Ind == 81913] %T>%
     .[, stopifnot(Taxable_Income > 180e3, Net_NPP_BI_amt > 1000)] %>%
     model_income_tax("2016-17")
   
-  expect_equal(sample_file_1314[["baseline_tax"]],
-               sample_file_1314[["new_tax"]])
+  expect_equal(sample_file_81913[["baseline_tax"]],
+               sample_file_81913[["new_tax"]])
 })
 
 test_that("Increase in a rate results in more tax", {
