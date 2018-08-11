@@ -123,7 +123,8 @@ test_that("La plus ca meme la plus ca meme: SBTO doesn't interfere with SBTO", {
     model_income_tax("2016-17")
   
   expect_equal(sample_file_81913[["baseline_tax"]],
-               sample_file_81913[["new_tax"]])
+               sample_file_81913[["new_tax"]],
+               tol = 1, scale = 1)
 })
 
 test_that("Increase in a rate results in more tax", {
