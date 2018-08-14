@@ -63,7 +63,7 @@ lf_inflator_fy <- function(labour_force = 1,
   }
   
   # CRAN
-  obsTime <- NULL; obsValue <- NULL
+  obsTime <- obsValue <- NULL
   
   if (is.null(from_fy) && is.null(to_fy)){
     to_fy <- date2fy(Sys.Date())
@@ -79,6 +79,8 @@ lf_inflator_fy <- function(labour_force = 1,
   
   check_TF(useABSConnection)
   check_TF(allow.projection)
+  
+  stopifnot(use.month %between% c(1L, 12L))
   
   max.length <- 
     prohibit_vector_recycling.MAXLENGTH(labour_force, from_fy, to_fy)
@@ -139,21 +141,22 @@ lf_inflator_fy <- function(labour_force = 1,
   last_full_yr_in_series <- 
     lf.indices %>%
     # month from data.table::
-    .[month(obsDate) == 6L, obsDate] %>%
-    last %>%
+    .[month(obsDate) == 6L, last(obsDate)] %>%
     year
   
   last_full_fy_in_series <- yr2fy(last_full_yr_in_series)
+  max_to_fy <- max(to_fy)
   
-  if (!allow.projection && any(to_fy > last_full_fy_in_series)){
+  if (!allow.projection && max_to_fy > last_full_fy_in_series) {
     stop("Not all elements of to_fy are in labour force data.")
   }
   
   # Use forecast::forecast to inflate forward
   forecast.series <- match.arg(forecast.series)
+  
   if (AND(allow.projection,
           AND(forecast.series != "custom",
-              any(to_fy > last_full_fy_in_series)))) {
+              max_to_fy > last_full_fy_in_series))) {
     # Labour force is monthly
     to_date <- fy2date(max(to_fy))
     months.ahead <- 
@@ -200,67 +203,19 @@ lf_inflator_fy <- function(labour_force = 1,
                             fill = TRUE)
   }
   
-  stopifnot(use.month %between% c(1L, 12L))
-  
   lf.indices <- 
     lf.indices %>%
     .[month(obsDate) == use.month] %>%
     .[, fy_year := date2fy(obsDate)]
   
   if (AND(allow.projection,
-          AND(any(to_fy > last_full_fy_in_series),
+          AND(max_to_fy > last_full_fy_in_series,
               forecast.series == "custom"))) {
-    if (!is.data.table(lf.series)) {
-      if (length(lf.series) == 1L) {
-        years_required <- seq.int(from = last_full_yr_in_series + 1, 
-                                  to = fy2yr(max(to_fy)))
-        
-        lf.series <- data.table(fy_year = yr2fy(years_required), 
-                                r = lf.series)
-      } else {
-        stop("lf.series must be either a length-one vector", 
-             " or a data.table.")
-      }
-    } else {
-      stopifnot(all(c("fy_year", "r") %in% names(lf.series)))
-      r <- NULL
-      
-      
-      first_fy_in_lf_series <- min(lf.series[["fy_year"]])
-      
-      if (first_fy_in_lf_series != yr2fy(last_full_yr_in_series + 1)){
-        stop("The first fy in the custom series must be equal to ",
-             yr2fy(last_full_yr_in_series + 1))
-      }
-      
-      # Determine whether the dates are a regular sequence (no gaps)
-      input_series_fys <- lf.series[["fy_year"]]
-      expected_fy_sequence <-
-        yr2fy(seq.int(from = last_full_yr_in_series + 1, 
-                      to = last_full_yr_in_series + nrow(lf.series)))
-      
-      if (!identical(input_series_fys, expected_fy_sequence)){
-        stop("lf.series$fy_year should be ", deparse(expected_fy_sequence), ".")
-      }
-    }
-    
-    if (any(lf.series[["r"]] > 1)){
-      message("Some r > 1 in lf.series.",
-              "This is unlikely rate of wage growth ", 
-              "(r = 0.025 corresponds to 2.5% wage growth).")
-    }
-    
-    last_obsValue_in_actual_series <- last(lf.indices[["obsValue"]])
-    
-    lf.series[, obsValue := last_obsValue_in_actual_series * cumprod(1 + r)]
-    
-    lf.indices <-
-      rbindlist(list(lf.indices, 
-                     lf.series), 
-                use.names = TRUE, 
-                fill = TRUE) %>%
-      # Ensure the date falls appropriately
-      unique(by = "fy_year", fromLast = TRUE)
+    lf.indices <- append_custom_series(orig = lf.indices,
+                                       custom.series = lf.series,
+                                       max_to_fy = max_to_fy,
+                                       last_full_yr_in_orig = last_full_yr_in_series,
+                                       last_full_fy_in_orig = last_full_fy_in_series)
   }
   
   inflator(labour_force, 

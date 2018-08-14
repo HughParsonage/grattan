@@ -30,21 +30,21 @@ test_that("Error handling", {
                               allow.projection = TRUE, 
                               forecast.series = "custom", 
                               lf.series = c(1:2)), 
-               regexp = "lf.series must be either a length-one vector", 
+               regexp = "`lf.series` had length 2. If using `lf.series` as an atomic vector, ensure it is a single numeric vector.", 
                fixed = TRUE)
   expect_error(lf_inflator_fy(from_fy = "2012-13", to_fy = "2025-26", 
                               allow.projection = TRUE, 
                               forecast.series = "custom", 
                               lf.series = data.table(fy_year = "2013-14", 
                                                      r = 0.2)), 
-               regexp = "The first fy in the custom series must be equal to", 
+               regexp = "`lf.series$fy_year` did not have the required financial years.", 
                fixed = TRUE)
   expect_error(lf_inflator_fy(from_fy = "2018-19",
                               to_fy = "2019-20",
                               forecast.series = "custom",
                               lf.series = data.table(fy_year = c("2018-19", "2018-19"),
                                                      r = c(0, 0.123))), 
-               regexp = 'lf.series$fy_year should be c("2018-19", "2019-20").', 
+               regexp = '`lf.series$fy_year` did not have the required financial years.', 
                fixed = TRUE)
 })
 

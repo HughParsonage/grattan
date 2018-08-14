@@ -27,13 +27,14 @@ test_that("Error handling", {
   expect_error(lf_inflator_fy(from_fy = "2013-14"), 
                regexp = "`to_fy` is missing",
                fixed = TRUE)
-  expect_error(wage_inflator(1, from_fy = "2013-14", to_fy = "2045-46", allow.projection = FALSE), regexp = "wage index data")
+  expect_error(wage_inflator(1, from_fy = "2013-14", to_fy = "2045-46", allow.projection = FALSE),
+               regexp = "wage index data")
   expect_error(wage_inflator(from_fy = "2017-18",
                               to_fy = "2018-19",
                               forecast.series = "custom",
                               wage.series = data.table(fy_year = c("2017-18", "2017-18"),
                                                      r = c(0, 0.123))), 
-               regexp = 'wage.series$fy_year should be c("2017-18", "2018-19").', 
+               regexp = '`wage.series$fy_year` did not have the required financial years.', 
                fixed = TRUE)
 })
 
@@ -52,16 +53,17 @@ test_that("Custom wage series", {
 })
   
 test_that("Custom wage series error handling", {
-  expect_error(wage_inflator(1, from_fy = "2015-16", to_fy = "2017-18", 
-                             forecast.series = "custom", 
-                             wage.series = data.table(fy_year = c("2015-16", "2016-17", "2017-18"), 
-                                                      r = c(42, 0.1, 0.1))),
-               regexp = "first fy in the custom series")
+  # expect_error(wage_inflator(1, from_fy = "2015-16", to_fy = "2017-18", 
+  #                            forecast.series = "custom", 
+  #                            wage.series = data.table(fy_year = c("2015-16", "2016-17", "2017-18"), 
+  #                                                     r = c(42, 0.1, 0.1))),
+  #              regexp = "first fy in the custom series")
   
   expect_error(wage_inflator(1, from_fy = "2015-16", to_fy = "2017-18", 
                              forecast.series = "custom", 
                              wage.series = c(1, 2)),
-               regexp = "length-one vector or a data.table")
+               regexp = "`wage.series` had length 2.",
+               fixed = TRUE)
   
   expect_message(wage_inflator(1, from_fy = "2015-16", to_fy = "2018-19", 
                                forecast.series = "custom", 
