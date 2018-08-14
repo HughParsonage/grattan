@@ -420,22 +420,23 @@ medicare_levy_lower_up_for_each_child <- function(fy) {
 ```
 
 ```{r s2425_Treasury}
-if (file.exists("budget-2018_cache/s2425_Treasury.fst")) {
-  s2425_Treasury <- read_fst("budget-2018_cache/s2425_Treasury.fst", 
+# && cache generally because the filename must be known if cache = FALSE
+if (file.exists(s2425_Treasury.fst <- "budget-2018_cache/s2425_Treasury.fst") && cache) {
+  s2425_Treasury <- read_fst(s2425_Treasury.fst, 
                              as.data.table = TRUE)
 } else {
   s2425_Treasury <- .project_useTreasurys[[2025L - 2016L]]
-  write_fst(s2425_Treasury, "budget-2018_cache/s2425_Treasury.fst")
+  write_fst(s2425_Treasury, s2425_Treasury.fst)
 }
 ```
 
 ```{r s2728_Treasury}
-if (file.exists("budget-2018_cache/s2728_Treasury.fst")) {
-  s2728_Treasury <- read_fst("budget-2018_cache/s2728_Treasury.fst", 
+if (file.exists(s2728_Treasury.fst <- "budget-2018_cache/s2728_Treasury.fst") && cache) {
+  s2728_Treasury <- read_fst(s2728_Treasury.fst, 
                              as.data.table = TRUE)
 } else {
   s2728_Treasury <- .project_useTreasurys[[2028L - 2016L]]
-  write_fst(s2728_Treasury, "budget-2018_cache/s2728_Treasury.fst")
+  write_fst(s2728_Treasury, s2728_Treasury.fst)
 }
 ```
 
@@ -1829,7 +1830,7 @@ bound_models[.("2027-28", "Budget2018"),
 
 ```{r s2728_various_wages}
 s2728_various_wages <-
-  if (file.exists(s2728_various_wages.fst <- "budget-2018_cache/s2728_various_wages.fst")) {
+  if (file.exists(s2728_various_wages.fst <- "budget-2018_cache/s2728_various_wages.fst") && cache) {
     read_fst(s2728_various_wages.fst, as.data.table = TRUE)
   } else {
     lapply(c(0.02, 0.025, 0.03, 0.035), function(wage_r) {
@@ -1960,12 +1961,14 @@ s2425_Deloitte_LF_growth <-
                    ordinary_tax_thresholds = ordinary_tax_thresholds("2024-25"), 
                    ordinary_tax_rates = ordinary_tax_rates("2024-25"),
                    Budget2018_lito_202223 = TRUE,
-                   medicare_levy_lower_threshold = medicare_levy_lower_threshold("2024-25"), 
-                   medicare_levy_upper_threshold = 31175,
-                   medicare_levy_lower_sapto_threshold = medicare_levy_lower_sapto_threshold("2024-25"), 
-                   medicare_levy_upper_sapto_threshold = 49300,
-                   medicare_levy_lower_family_threshold = medicare_levy_lower_family_threshold("2024-25"), 
-                   medicare_levy_lower_family_sapto_threshold = medicare_levy_lower_family_sapto_threshold("2024-25")) %>%
+                   # medicare_levy_rate = 0.02,
+                   # medicare_levy_taper = 0.1,
+                   medicare_levy_lower_threshold = medicare_levy_lower_threshold("2024-25"), # 24950
+                   medicare_levy_upper_threshold = 31188,
+                   medicare_levy_lower_sapto_threshold = medicare_levy_lower_sapto_threshold("2024-25"), # 39460
+                   medicare_levy_upper_sapto_threshold = 49325,
+                   medicare_levy_lower_family_threshold = medicare_levy_lower_family_threshold("2024-25"), # 54930
+                   medicare_levy_lower_family_sapto_threshold = medicare_levy_lower_family_sapto_threshold("2024-25")) %>% # 54930
   # Ensure number of taxpayers = 11.6 million
   .[new_tax >= 1, WEIGHT := 11.6e6 / sum(new_tax > 0)] %>%
   
