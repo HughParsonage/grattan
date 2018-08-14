@@ -15,6 +15,11 @@
 #' @param max_rate If not \code{NULL}, a numeric vector indicating for each individual the maximum rent assistance payable.
 #' @param min_rent If not \code{NULL}, a numeric vector indicating for each individual the minimum fortnightly rent above which rent assistance is payable. \code{max_rate} and \code{min_rent} must not be used when \code{fy.year} is set.
 #' 
+#' @param sharers_provision_applies (logical, default: FALSE) Does the sharers provision apply to the parent payment? The list of functions can be found in table 2 column 4 http://guides.dss.gov.au/guide-social-security-law/3/8/1/10
+#' @param is_homeowner (logical, default: FALSE) Does the individual own their own home?
+#' @param has_partner (logical, default: FALSE) Does the individual have a partner?
+#' @param lives_in_sharehouse (logical, defualt: FALSE) Does the individual live in a sharehouse?
+#' 
 #' @return If \code{fy.year} is used, the annual rent assistance payable for each individual; 
 #' if \code{Date} is used, the \emph{fortnightly} rent assistance payable.
 #' If the arguments cannot be recycled safely, the function errors. 
@@ -43,7 +48,11 @@ rent_assistance <- function(fortnightly_rent = Inf,
                             has_partner = FALSE,
                             .prop_rent_paid_by_RA = 0.75,
                             max_rate = NULL,
-                            min_rent = NULL) {
+                            min_rent = NULL,
+                            sharers_provision_applies = FALSE,
+                            is_homeowner = FALSE,
+                            is_single = FALSE,
+                            lives_in_sharehouse = FALSE) {
   
   if (is.null(max_rate) && is.null(min_rent)) {
     if (is.null(Date)) {
@@ -189,6 +198,12 @@ rent_assistance <- function(fortnightly_rent = Inf,
     ra <- pminV(.prop_rent_paid_by_RA * pmaxC(Rent - min_rent, 0),
                 max_rate)
   }
+  #sharers provision
+  if (sharers_provision_applies & !is_homeowner & !has_partner & (n_dependants == 0) & lives_in_sharehouse) {
+    ra <- ra * 2/3
+  }
   
-  return(ra / validate_per(per, missing(per)) * 26) #validate_per assumes yearly payments, however RA has fortnightly rates which is why it must be scaled by 26
+  ra <- ra * 26 / validate_per(per, missing(per)) #validate_per assumes yearly payments, however RA has fortnightly rates which is why it must be scaled by 26
+  
+  return(ra) 
 }

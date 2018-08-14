@@ -6,10 +6,12 @@
 \usage{
 rent_assistance(fortnightly_rent = Inf, per = "fortnight", fy.year = NULL,
   Date = NULL, n_dependants = 0L, has_partner = FALSE,
-  .prop_rent_paid_by_RA = 0.75, max_rate = NULL, min_rent = NULL)
+  .prop_rent_paid_by_RA = 0.75, max_rate = NULL, min_rent = NULL,
+  sharers_provision_applies = TRUE, is_homeowner = TRUE, is_single = TRUE,
+  lives_in_sharehouse = FALSE)
 }
 \arguments{
-\item{fortnightly_rent}{The fortnightly rent paid by each individual. By default, infinity, so the maximum rent assistance is returned by default, since rent assistance is capped at a maximum rate.}
+\item{fortnightly_rent}{The fortnightly rent paid by each individual. By default, infinity, so the maximum rent assistance is returned by default, since rent assistance is capped at a maximum rate. Note the criteria for board and lodging which can be found at http://guides.dss.gov.au/guide-social-security-law/3/8/1/70}
 
 \item{fy.year}{(character) The financial year over which rent assistance is to be calculated.
 When left as \code{NULL}, defaults to the user's financial year, unless \code{max_rate} and \code{min_rent} are both set. If \code{fy.year} is set, the annual payment is provided.}
