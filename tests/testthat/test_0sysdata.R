@@ -53,7 +53,7 @@ test_that("pkgdown up-to-date", {
     .[which.max(.)] %>%
     as.POSIXct.numeric(origin = structure(0, class = c("POSIXct", "POSIXt"), tzone = "UTC"))
   
-  expect_lte(as.integer(difftime(time1 = Sys.time(), last_doc_file, units = "hours")), 1)
+  expect_lte(as.integer(difftime(time1 = Sys.time(), last_doc_file, units = "hours")), 24)
 })
 
 
