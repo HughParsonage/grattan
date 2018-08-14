@@ -199,12 +199,16 @@ rent_assistance <- function(fortnightly_rent = Inf,
     ra <- pminV(.prop_rent_paid_by_RA * pmaxC(Rent - min_rent, 0),
                 max_rate)
   }
-  #sharers provision
+  
+  # sharers provision
+  
   if (sharers_provision_applies & !is_homeowner & !has_partner & (n_dependants == 0) & lives_in_sharehouse) {
     ra <- ra * 2/3
   }
   
-  ra <- ra * 26 / validate_per(per, missing(per)) #validate_per assumes yearly payments, however RA has fortnightly rates which is why it must be scaled by 26
+  # validate_per assumes yearly payments, however RA has fortnightly rates which is why it must be scaled by 26
+  
+  ra <- ra * 26 / validate_per(per, missing(per)) 
   
   return(ra) 
 }
