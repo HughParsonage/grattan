@@ -6,7 +6,8 @@
 #' @param missing_per Is `per`` missing in the outer function? If so the defualt for that function will be used.
 #' @param .fortnights_per_yr What is the ratio of the fortnightly payment amount to the yearly payment amount? By default, 26. (Some payments expect 26; others expect 364/14.)
 #' 
-#' @author Matthew Katzen
+#' @examples 
+#' See rent_assistance function
 
 validate_per <- function(per, missing_per, .fortnights_per_yr = 26) {
   if (missing_per) {

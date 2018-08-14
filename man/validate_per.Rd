@@ -16,6 +16,6 @@ validate_per(per, missing_per, .fortnights_per_yr = 26)
 \description{
 Checks whether a valid input of `per` is used and outputs the amount which yearly payments are divided by to get the desired rate.
 }
-\author{
-Matthew Katzen
+\examples{
+See rent_assistance function
 }

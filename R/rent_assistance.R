@@ -36,6 +36,7 @@
 #' @export
 
 rent_assistance <- function(fortnightly_rent = Inf,
+                            per = "fortnight",
                             fy.year = NULL,
                             Date = NULL,
                             n_dependants = 0L,
@@ -124,8 +125,6 @@ rent_assistance <- function(fortnightly_rent = Inf,
                 "nDependants",
                 "Date"))
       
-      multiple <- 1
-      
       output <- 
         rent_assistance_rates_by_date[input,
                                       on = c("HasPartner",
@@ -137,8 +136,6 @@ rent_assistance <- function(fortnightly_rent = Inf,
               c("fy_year",
                 "HasPartner",
                 "nDependants"))
-      
-      multiple <- 26
       
       output <- 
         rent_assistance_rates[input,
@@ -153,7 +150,7 @@ rent_assistance <- function(fortnightly_rent = Inf,
                          max_rate)] %>%
       setorderv("ordering") %>%
       .subset2("out")
-    ra <- ra * multiple
+    
   } else {
     
     if (is.null(max_rate)) {
@@ -193,5 +190,5 @@ rent_assistance <- function(fortnightly_rent = Inf,
                 max_rate)
   }
   
-  return(ra)
+  return(ra / validate_per(per, missing(per)) * 26) #validate_per assumes yearly payments, however RA has fortnightly rates which is why it must be scaled by 26
 }
