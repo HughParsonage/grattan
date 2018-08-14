@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grattan</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.0.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.1.0</span>
       </span>
     </div>
 
@@ -126,7 +126,11 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>prohibit_vector_recycling</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>prohibit_vector_recycling</span>(<span class='no'>...</span>)
+
+<span class='fu'>prohibit_vector_recycling.MAXLENGTH</span>(<span class='no'>...</span>)
+
+<span class='fu'>prohibit_arg_recycling.MAXLENGTH</span>(<span class='no'>LIST</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -134,6 +138,10 @@
     <tr>
       <th>...</th>
       <td><p>A list of vectors</p></td>
+    </tr>
+    <tr>
+      <th>LIST</th>
+      <td><p>A list of objects (typically <code>mget(ls())</code> called in the body of a function).</p></td>
     </tr>
     </table>
     
@@ -176,7 +184,7 @@ returns the maximum of the lengths whereas <code>prohibit_vector_recyling</code>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, William Young.</p>
+  <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, Matthew Katzen, William Young.</p>
 </div>
 
 <div class="pkgdown">

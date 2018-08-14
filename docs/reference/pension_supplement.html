@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A function for simple projections of sample files — project_to • grattan</title>
+<title>Pension Supplement — pension_supplement • grattan</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,12 @@
 
 
 
-<meta property="og:title" content="A function for simple projections of sample files — project_to" />
+<meta property="og:title" content="Pension Supplement — pension_supplement" />
 
-<meta property="og:description" content="A function for simple projections of sample files" />
+<meta property="og:description" content="The Pension Supplement gets added to the max rate of payment before income reduction tests are applied. Note that if the individual is part of a couple, the rate indicates the payment amount per person, not for the couple.
+Can be claimed by those receiving Age Pension, Carer Payment, Wife Pension, Widow B Pension, Bereavement Allowance, or Disability Support Pension (except if under 21 and have no children).
+Can also be claimed if over age pension age and are receiving ABSTUDY, Austudy, Parenting Payment, Partner Allowance, Special Benefit, or Widow Allowance.
+Can still claim the basic amount if single, under age pension age, and receive the Parenting Payment." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -115,43 +118,69 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A function for simple projections of sample files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/HughParsonage/grattan/blob/master/R/project_to.R'><code>R/project_to.R</code></a></small>
-    <div class="hidden name"><code>project_to.Rd</code></div>
+    <h1>Pension Supplement</h1>
+    <small class="dont-index">Source: <a href='https://github.com/HughParsonage/grattan/blob/master/R/pension_supplement.R'><code>R/pension_supplement.R</code></a></small>
+    <div class="hidden name"><code>pension_supplement.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A function for simple projections of sample files</p>
+    <p>The Pension Supplement gets added to the max rate of payment before income reduction tests are applied. Note that if the individual is part of a couple, the rate indicates the payment amount per person, not for the couple.
+Can be claimed by those receiving Age Pension, Carer Payment, Wife Pension, Widow B Pension, Bereavement Allowance, or Disability Support Pension (except if under 21 and have no children).
+Can also be claimed if over age pension age and are receiving ABSTUDY, Austudy, Parenting Payment, Partner Allowance, Special Benefit, or Widow Allowance.
+Can still claim the basic amount if single, under age pension age, and receive the Parenting Payment.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>project_to</span>(<span class='no'>sample_file</span>, <span class='no'>to_fy</span>, <span class='kw'>fy.year.of.sample.file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>pension_supplement</span>(<span class='kw'>has_partner</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>age</span> <span class='kw'>=</span> <span class='fl'>70</span>, <span class='kw'>n_dependants</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>parenting_payment</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>Date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fy.year</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>qualifying_payment</span> <span class='kw'>=</span> <span class='st'>"age_pension"</span>, <span class='kw'>per</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"year"</span>, <span class='st'>"fortnight"</span>,
+  <span class='st'>"quarter"</span>), <span class='kw'>overseas_absence</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>seperated_couple</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>sample_file</th>
-      <td><p>A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.</p></td>
+      <th>has_partner</th>
+      <td><p>Does the individual have a partner?</p></td>
     </tr>
     <tr>
-      <th>to_fy</th>
-      <td><p>A string like "1066-67" representing the financial year for which forecasts of the sample file are desired.</p></td>
+      <th>age</th>
+      <td><p>The individual's age. Default is 70 years.</p></td>
     </tr>
     <tr>
-      <th>fy.year.of.sample.file</th>
-      <td><p>The financial year of <code>sample_file</code>. See <code><a href='project.html'>project</a></code> for the default.</p></td>
+      <th>n_dependants</th>
+      <td><p>How many dependant children does the individual have?</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Other arguments passed to <code><a href='project.html'>project</a></code>.</p></td>
+      <th>parenting_payment</th>
+      <td><p>Is the individual receiving parenting payment?</p></td>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <td><p>Date. Default is "2016/03/01" if fy.year is not present.</p></td>
+    </tr>
+    <tr>
+      <th>fy.year</th>
+      <td><p>Financial year. Default is "2015-16" if Date is not present.</p></td>
+    </tr>
+    <tr>
+      <th>qualifying_payment</th>
+      <td><p>What is the payment that the supplement is being applied to?</p></td>
+    </tr>
+    <tr>
+      <th>per</th>
+      <td><p>How often the payment will be made. Default is to return the annual payment, with a messsage.</p></td>
+    </tr>
+    <tr>
+      <th>overseas_absence</th>
+      <td><p>Will the individual be living outside of Australia for more than 6 weeks of the upcoming year?</p></td>
+    </tr>
+    <tr>
+      <th>seperated_couple</th>
+      <td><p>Is the individual part of an illness separated couple, respite care couple, or partner imprisoned?</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A sample file of the same number of rows as <code>sample_file</code> with inflated values (including WEIGHT).</p>
     
 
   </div>
@@ -159,9 +188,11 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-          </ul>
+                </ul>
+
+    <h2>Author</h2>
+    
+Matthew Katzen
 
   </div>
 </div>

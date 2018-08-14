@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A function for simple projections of sample files — project_to • grattan</title>
+<title>Carers allowance — carers_allowance • grattan</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="A function for simple projections of sample files — project_to" />
+<meta property="og:title" content="Carers allowance — carers_allowance" />
 
-<meta property="og:description" content="A function for simple projections of sample files" />
+<meta property="og:description" content="Carers allowance" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -115,43 +115,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A function for simple projections of sample files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/HughParsonage/grattan/blob/master/R/project_to.R'><code>R/project_to.R</code></a></small>
-    <div class="hidden name"><code>project_to.Rd</code></div>
+    <h1>Carers allowance</h1>
+    <small class="dont-index">Source: <a href='https://github.com/HughParsonage/grattan/blob/master/R/carers_allowance.R'><code>R/carers_allowance.R</code></a></small>
+    <div class="hidden name"><code>carers_allowance.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A function for simple projections of sample files</p>
+    <p>Carers allowance</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>project_to</span>(<span class='no'>sample_file</span>, <span class='no'>to_fy</span>, <span class='kw'>fy.year.of.sample.file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>carers_allowance</span>(<span class='kw'>Date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fy.year</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>per</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"year"</span>,
+  <span class='st'>"fortnight"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>sample_file</th>
-      <td><p>A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.</p></td>
+      <th>Date, fy.year</th>
+      <td><p>The timing of the allowance.</p></td>
     </tr>
     <tr>
-      <th>to_fy</th>
-      <td><p>A string like "1066-67" representing the financial year for which forecasts of the sample file are desired.</p></td>
-    </tr>
-    <tr>
-      <th>fy.year.of.sample.file</th>
-      <td><p>The financial year of <code>sample_file</code>. See <code><a href='project.html'>project</a></code> for the default.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Other arguments passed to <code><a href='project.html'>project</a></code>.</p></td>
+      <th>per</th>
+      <td><p>Frequency of the payment.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A sample file of the same number of rows as <code>sample_file</code> with inflated values (including WEIGHT).</p>
+    <p>The carer's payment, if eligible.</p>
     
 
   </div>

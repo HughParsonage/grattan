@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A function for simple projections of sample files — project_to • grattan</title>
+<title>Energy supplement — energy_supplement • grattan</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="A function for simple projections of sample files — project_to" />
+<meta property="og:title" content="Energy supplement — energy_supplement" />
 
-<meta property="og:description" content="A function for simple projections of sample files" />
+<meta property="og:description" content="The ES is a supplementary payment that commenced on 20 September 2014. It was previously known as the clean energy supplement (CES). It is a fixed nominal amount; the supplement is neither indexed nor increased each year. There is no means testing." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -115,43 +115,82 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A function for simple projections of sample files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/HughParsonage/grattan/blob/master/R/project_to.R'><code>R/project_to.R</code></a></small>
-    <div class="hidden name"><code>project_to.Rd</code></div>
+    <h1>Energy supplement</h1>
+    <small class="dont-index">Source: <a href='https://github.com/HughParsonage/grattan/blob/master/R/energy_supplement.R'><code>R/energy_supplement.R</code></a></small>
+    <div class="hidden name"><code>energy_supplement.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A function for simple projections of sample files</p>
+    <p>The ES is a supplementary payment that commenced on 20 September 2014. It was previously known as the clean energy supplement (CES). It is a fixed nominal amount; the supplement is neither indexed nor increased each year. There is no means testing.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>project_to</span>(<span class='no'>sample_file</span>, <span class='no'>to_fy</span>, <span class='kw'>fy.year.of.sample.file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>energy_supplement</span>(<span class='no'>qualifying_payment</span>, <span class='kw'>has_partner</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>n_dependants</span> <span class='kw'>=</span> <span class='fl'>0L</span>, <span class='kw'>age</span> <span class='kw'>=</span> <span class='fl'>21</span>, <span class='kw'>lives_at_home</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>independent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>isjspceoalfofcoahodeoc</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>long_term</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>per</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"year"</span>, <span class='st'>"fortnight"</span>, <span class='st'>"quarter"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>sample_file</th>
-      <td><p>A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.</p></td>
+      <th>qualifying_payment</th>
+      <td><p>A character vector designating the payment type the individual is entitled to. Valid strings are</p><dl class='dl-horizontal'>
+<dt>pension</dt><dd><p>All pensions and bereavement allowance</p></dd>
+<dt>seniors health card</dt><dd><p>Commonwealth Seniors Health Card</p></dd>
+<dt>disability pension</dt><dd><p>Disability support pension (over 21)</p></dd>
+<dt>allowance</dt><dd><p>All allowances not elsewhere described, 
+<em>viz.</em> Newstart allowance, Widow allowance, Partner allowance, Sickness allowance</p></dd>
+<dt>parenting</dt><dd><p>Parenting payments</p></dd>
+<dt>youth allowance</dt><dd><p>Youth allowance (but not receiving youth disability supplement)</p></dd>
+<dt>youth disability</dt><dd><p>Youth allowance but also receiving youth disability supplement</p></dd>
+<dt>austudy</dt><dd><p>Austudy recipients</p></dd>
+</dl></td>
     </tr>
     <tr>
-      <th>to_fy</th>
-      <td><p>A string like "1066-67" representing the financial year for which forecasts of the sample file are desired.</p></td>
+      <th>has_partner</th>
+      <td><p>(logical, default: <code>FALSE</code>) Does the individual have a partner? For persons with partners but separated due to the partner's illness or imprisonment, this may be true or false depending on the eligibility of the qualifying payment.</p></td>
     </tr>
     <tr>
-      <th>fy.year.of.sample.file</th>
-      <td><p>The financial year of <code>sample_file</code>. See <code><a href='project.html'>project</a></code> for the default.</p></td>
+      <th>n_dependants</th>
+      <td><p>How many dependants does the individual have? Default is zero.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Other arguments passed to <code><a href='project.html'>project</a></code>.</p></td>
+      <th>age</th>
+      <td><p>The age of the individual.</p></td>
+    </tr>
+    <tr>
+      <th>lives_at_home</th>
+      <td><p>(logical, default: <code>FALSE</code>) Does the individual live at home?</p></td>
+    </tr>
+    <tr>
+      <th>independent</th>
+      <td><p>(logical, default: <code>FALSE</code>) For persons under 21, is the person 'independent'?</p></td>
+    </tr>
+    <tr>
+      <th>isjspceoalfofcoahodeoc</th>
+      <td><p>Is the recipient a single job seeker principal carer, either of large family or foster child/ren, or who is a home or distance educator of child/ren?</p></td>
+    </tr>
+    <tr>
+      <th>long_term</th>
+      <td><p>Is the individual a long-term welfare recipient?</p></td>
+    </tr>
+    <tr>
+      <th>per</th>
+      <td><p>Dictates whether the result is per year, per fortnight, or per quarter. By default, yearly payments are returned, with a message. Payments are generally made each fortnight though recipients can elect to have them paid quarterly.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    <p><em>Social Security Guide</em> by the Department of Social Services. 
+Chapter 5, &#8216;Payment rates&#8217;, s. 5.1.10.20 &#8220;Clean Energy Household Assistance: current rates&#8221;.
+<a href='http://guides.dss.gov.au/guide-social-security-law/5/1/10/20'>http://guides.dss.gov.au/guide-social-security-law/5/1/10/20</a></p>
+    
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A sample file of the same number of rows as <code>sample_file</code> with inflated values (including WEIGHT).</p>
+    <p>The energy supplement for each individual. Arguments are recycled, but only if length-one.</p>
     
 
   </div>
@@ -160,6 +199,8 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#source">Source</a></li>
+
       <li><a href="#value">Value</a></li>
           </ul>
 

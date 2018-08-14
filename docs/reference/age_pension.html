@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A function for simple projections of sample files — project_to • grattan</title>
+<title>Age pension — age_pension • grattan</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="A function for simple projections of sample files — project_to" />
+<meta property="og:title" content="Age pension — age_pension" />
 
-<meta property="og:description" content="A function for simple projections of sample files" />
+<meta property="og:description" content="Age pension" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -115,43 +115,81 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A function for simple projections of sample files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/HughParsonage/grattan/blob/master/R/project_to.R'><code>R/project_to.R</code></a></small>
-    <div class="hidden name"><code>project_to.Rd</code></div>
+    <h1>Age pension</h1>
+    <small class="dont-index">Source: <a href='https://github.com/HughParsonage/grattan/blob/master/R/age_pension.R'><code>R/age_pension.R</code></a></small>
+    <div class="hidden name"><code>age_pension.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A function for simple projections of sample files</p>
+    <p>Age pension</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>project_to</span>(<span class='no'>sample_file</span>, <span class='no'>to_fy</span>, <span class='kw'>fy.year.of.sample.file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>age_pension</span>(<span class='kw'>fortnightly_income</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>annual_income</span> <span class='kw'>=</span> <span class='no'>fortnightly_income</span>
+  * <span class='fl'>26</span>, <span class='kw'>has_partner</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>n_dependants</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
+  <span class='kw'>partner_fortnightly_income</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>partner_annual_income</span> <span class='kw'>=</span> <span class='no'>partner_fortnightly_income</span> * <span class='fl'>26</span>,
+  <span class='kw'>partner_pensioner</span> <span class='kw'>=</span> <span class='no'>has_partner</span>, <span class='kw'>Date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>fy.year</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>assets_value</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>financial_assets</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>is_home_owner</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>illness_separated_couple</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>per</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"year"</span>, <span class='st'>"fortnight"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>sample_file</th>
-      <td><p>A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.</p></td>
+      <th>fortnightly_income, annual_income</th>
+      <td><p>Income for means-testing purposes. Provide one but not both.</p></td>
     </tr>
     <tr>
-      <th>to_fy</th>
-      <td><p>A string like "1066-67" representing the financial year for which forecasts of the sample file are desired.</p></td>
+      <th>has_partner</th>
+      <td><p>(logical, default: <code>FALSE</code>) Does the individual have a partner?</p></td>
     </tr>
     <tr>
-      <th>fy.year.of.sample.file</th>
-      <td><p>The financial year of <code>sample_file</code>. See <code><a href='project.html'>project</a></code> for the default.</p></td>
+      <th>n_dependants</th>
+      <td><p>How many dependants does sthe individual have? Default is zero.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Other arguments passed to <code><a href='project.html'>project</a></code>.</p></td>
+      <th>partner_fortnightly_income, partner_annual_income</th>
+      <td><p>The partner's income. The sum of this value and the indiviudal's income gives the income test.</p></td>
+    </tr>
+    <tr>
+      <th>partner_pensioner</th>
+      <td><p>(logical, default: <code>TRUE</code>) Is the individual's partner also in receipt of the age pension?</p></td>
+    </tr>
+    <tr>
+      <th>Date, fy.year</th>
+      <td><p>The financial year. Currently only 2015-16 is supported (the most recent survey of income and housing results).</p></td>
+    </tr>
+    <tr>
+      <th>assets_value</th>
+      <td><p>Total value of household assets.</p></td>
+    </tr>
+    <tr>
+      <th>financial_assets</th>
+      <td><p>Assets which earn incomes for which deeming rates apply.</p></td>
+    </tr>
+    <tr>
+      <th>is_home_owner</th>
+      <td><p>(logical, default: <code>FALSE</code>) Does the individual own their own home?</p></td>
+    </tr>
+    <tr>
+      <th>illness_separated_couple</th>
+      <td><p>Is the couple separated by illness? (Affects the assets test.)</p></td>
+    </tr>
+    <tr>
+      <th>per</th>
+      <td><p>Specifies the timeframe in which payments will be made. One of <code>"year"</code> and <code>"fortnight"</code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A sample file of the same number of rows as <code>sample_file</code> with inflated values (including WEIGHT).</p>
+    <p>Returns the age pension payable for each individual defined by the arguments, assuming otherwise eligible.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Currently does not include the age pension supplement.</p>
     
 
   </div>
@@ -161,6 +199,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
           </ul>
 
   </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A function for simple projections of sample files — project_to • grattan</title>
+<title>Age of eligibility for the Age Pension — age_pension_age • grattan</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="A function for simple projections of sample files — project_to" />
+<meta property="og:title" content="Age of eligibility for the Age Pension — age_pension_age" />
 
-<meta property="og:description" content="A function for simple projections of sample files" />
+<meta property="og:description" content="Age of eligibility for the Age Pension" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -115,53 +115,57 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A function for simple projections of sample files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/HughParsonage/grattan/blob/master/R/project_to.R'><code>R/project_to.R</code></a></small>
-    <div class="hidden name"><code>project_to.Rd</code></div>
+    <h1>Age of eligibility for the Age Pension</h1>
+    <small class="dont-index">Source: <a href='https://github.com/HughParsonage/grattan/blob/master/R/age_pension_age.R'><code>R/age_pension_age.R</code></a></small>
+    <div class="hidden name"><code>age_pension_age.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A function for simple projections of sample files</p>
+    <p>Age of eligibility for the Age Pension</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>project_to</span>(<span class='no'>sample_file</span>, <span class='no'>to_fy</span>, <span class='kw'>fy.year.of.sample.file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>age_pension_age</span>(<span class='kw'>when</span> <span class='kw'>=</span> <span class='fu'>Sys.Date</span>(), <span class='kw'>sex</span> <span class='kw'>=</span> <span class='st'>"male"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>sample_file</th>
-      <td><p>A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.</p></td>
+      <th>when</th>
+      <td><p>Either a Date (or a character vector coercible to such) or a financial year,
+when the age of eligibility of Age Pension is requested. Defaults to current date.</p></td>
     </tr>
     <tr>
-      <th>to_fy</th>
-      <td><p>A string like "1066-67" representing the financial year for which forecasts of the sample file are desired.</p></td>
-    </tr>
-    <tr>
-      <th>fy.year.of.sample.file</th>
-      <td><p>The financial year of <code>sample_file</code>. See <code><a href='project.html'>project</a></code> for the default.</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>Other arguments passed to <code><a href='project.html'>project</a></code>.</p></td>
+      <th>sex</th>
+      <td><p>A character vector the same length as <code>when</code>, containing strings <code>"male"</code> and <code>"female
+"</code>. May be abbreviated to <code>"m"</code> or <code>"f"</code> and is case-insensitive.</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    <p><a href='http://guides.dss.gov.au/guide-social-security-law/3/4/1/10'>http://guides.dss.gov.au/guide-social-security-law/3/4/1/10</a></p>
+    
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A sample file of the same number of rows as <code>sample_file</code> with inflated values (including WEIGHT).</p>
+    <p>A numeric vector, the age of eligiblity for the Age Pension for each <code>when</code>.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>age_pension_age</span>()  <span class='co'># Current age of eligiblity</span></div><div class='output co'>#&gt; <span class='message'>`when` not set, so using when = 2018-08-14.</span></div><div class='output co'>#&gt; [1] 65.5</div><div class='input'><span class='fu'>age_pension_age</span>(<span class='st'>"1995-12-31"</span>)</div><div class='output co'>#&gt; [1] 65</div><div class='input'><span class='fu'>age_pension_age</span>(<span class='st'>"2013-14"</span>)</div><div class='output co'>#&gt; [1] 65</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
+      <li><a href="#source">Source</a></li>
+
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

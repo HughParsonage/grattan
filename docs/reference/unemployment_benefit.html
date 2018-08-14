@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A function for simple projections of sample files — project_to • grattan</title>
+<title>Unemployment benefit — unemployment_benefit • grattan</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,10 @@
 
 
 
-<meta property="og:title" content="A function for simple projections of sample files — project_to" />
+<meta property="og:title" content="Unemployment benefit — unemployment_benefit" />
 
-<meta property="og:description" content="A function for simple projections of sample files" />
+<meta property="og:description" content="Calculates the unemployment benefit (Newstart Allowance) payable for individuals in the specified financial year(s), 
+given each individual's income and assets, and whether they are married, have children, or own their own home." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -115,43 +116,66 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A function for simple projections of sample files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/HughParsonage/grattan/blob/master/R/project_to.R'><code>R/project_to.R</code></a></small>
-    <div class="hidden name"><code>project_to.Rd</code></div>
+    <h1>Unemployment benefit</h1>
+    <small class="dont-index">Source: <a href='https://github.com/HughParsonage/grattan/blob/master/R/unemployment_benefit.R'><code>R/unemployment_benefit.R</code></a></small>
+    <div class="hidden name"><code>unemployment_benefit.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A function for simple projections of sample files</p>
+    <p>Calculates the unemployment benefit (Newstart Allowance) payable for individuals in the specified financial year(s), 
+given each individual's income and assets, and whether they are married, have children, or own their own home.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>project_to</span>(<span class='no'>sample_file</span>, <span class='no'>to_fy</span>, <span class='kw'>fy.year.of.sample.file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>unemployment_benefit</span>(<span class='kw'>income</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>assets</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>fy.year</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>Date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>has_partner</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>has_dependant</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>is_home_owner</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>sample_file</th>
-      <td><p>A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.</p></td>
+      <th>income</th>
+      <td><p>Numeric vector of fortnightly income for the income test.</p></td>
     </tr>
     <tr>
-      <th>to_fy</th>
-      <td><p>A string like "1066-67" representing the financial year for which forecasts of the sample file are desired.</p></td>
+      <th>assets</th>
+      <td><p>Numeric vector of the value of assets. By default, <code>income</code> and <code>assets</code> are both zero, thus returning the maximum benefit payable.</p></td>
     </tr>
     <tr>
-      <th>fy.year.of.sample.file</th>
-      <td><p>The financial year of <code>sample_file</code>. See <code><a href='project.html'>project</a></code> for the default.</p></td>
+      <th>fy.year</th>
+      <td><p>A character vector of valid financial years between "2000-01" and "2020-21" specifying which financial year the allowance is to be calculated.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Other arguments passed to <code><a href='project.html'>project</a></code>.</p></td>
+      <th>Date</th>
+      <td><p>(Date vector or coercible to such). An alternative to <code>fy.year</code> to specify the period over which the allowance is calculated.</p></td>
+    </tr>
+    <tr>
+      <th>has_partner</th>
+      <td><p>(logical vector, default: <code>FALSE</code>) Does the individual have a partner?</p></td>
+    </tr>
+    <tr>
+      <th>has_dependant</th>
+      <td><p>(logical vectpr, default: <code>FALSE</code>) Does the indvidiual have any dependant children?</p></td>
+    </tr>
+    <tr>
+      <th>is_home_owner</th>
+      <td><p>(logical vector, default: <code>FALSE</code>) Does the individual own their own home?</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A sample file of the same number of rows as <code>sample_file</code> with inflated values (including WEIGHT).</p>
+    <p>The fortnightly unemployment benefit payable for each entry. 
+The function is vectorized over its arguments, with any length-1 argument
+recycled. (Other vector recycling is not supported and will result in an error.)</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The income test for long-term employed persons above 60 happens to be the same as 
+that for singles with dependants, so calculating the benefit payable for such 
+individuals can be performed by setting <code>has_partner = FALSE, has_dependant = TRUE</code>.</p>
     
 
   </div>
@@ -161,6 +185,8 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
           </ul>
 
   </div>

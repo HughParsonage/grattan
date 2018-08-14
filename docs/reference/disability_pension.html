@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A function for simple projections of sample files — project_to • grattan</title>
+<title>Disability support pension — disability_pension • grattan</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="A function for simple projections of sample files — project_to" />
+<meta property="og:title" content="Disability support pension — disability_pension" />
 
-<meta property="og:description" content="A function for simple projections of sample files" />
+<meta property="og:description" content="Identical to the age_pension except for those under 21." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -115,43 +115,67 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A function for simple projections of sample files</h1>
-    <small class="dont-index">Source: <a href='https://github.com/HughParsonage/grattan/blob/master/R/project_to.R'><code>R/project_to.R</code></a></small>
-    <div class="hidden name"><code>project_to.Rd</code></div>
+    <h1>Disability support pension</h1>
+    <small class="dont-index">Source: <a href='https://github.com/HughParsonage/grattan/blob/master/R/disability_pension.R'><code>R/disability_pension.R</code></a></small>
+    <div class="hidden name"><code>disability_pension.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A function for simple projections of sample files</p>
+    <p>Identical to the <code><a href='age_pension.html'>age_pension</a></code> except for those under 21.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>project_to</span>(<span class='no'>sample_file</span>, <span class='no'>to_fy</span>, <span class='kw'>fy.year.of.sample.file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>disability_pension</span>(<span class='kw'>fortnightly_income</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>annual_income</span> <span class='kw'>=</span> <span class='fl'>26</span> *
+  <span class='no'>fortnightly_income</span>, <span class='kw'>assets_value</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>fy.year</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>Date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>age</span> <span class='kw'>=</span> <span class='fl'>21L</span>, <span class='kw'>has_partner</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>n_dependants</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
+  <span class='kw'>lives_at_home</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>independent</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>per</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"year"</span>,
+  <span class='st'>"fortnight"</span>), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>sample_file</th>
-      <td><p>A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.</p></td>
+      <th>fortnightly_income, annual_income</th>
+      <td><p>Income for the means test</p></td>
     </tr>
     <tr>
-      <th>to_fy</th>
-      <td><p>A string like "1066-67" representing the financial year for which forecasts of the sample file are desired.</p></td>
+      <th>assets_value</th>
+      <td><p>Value of assets for the assets test.</p></td>
     </tr>
     <tr>
-      <th>fy.year.of.sample.file</th>
-      <td><p>The financial year of <code>sample_file</code>. See <code><a href='project.html'>project</a></code> for the default.</p></td>
+      <th>fy.year, Date</th>
+      <td><p>Either the financial year and Date in which the pension is paid. Only `fy.year = "2015-16"` is implemented.</p></td>
+    </tr>
+    <tr>
+      <th>age</th>
+      <td><p>Age of the individual, only relevant for those under 21.</p></td>
+    </tr>
+    <tr>
+      <th>has_partner</th>
+      <td><p>(logical, default: <code>FALSE</code>) Is the individual a member of a couple?</p></td>
+    </tr>
+    <tr>
+      <th>n_dependants</th>
+      <td><p>Integer number of dependent children.</p></td>
+    </tr>
+    <tr>
+      <th>lives_at_home</th>
+      <td><p>(logical, default: <code>FALSE</code>) Does the individual live at home with their parents? Only relevant if <code>age &lt; 21</code>.</p></td>
+    </tr>
+    <tr>
+      <th>independent</th>
+      <td><p>(logical, default: <code>FALSE</code>) Is the person independent? Only relevant if <code>age &lt; 21</code>.</p></td>
+    </tr>
+    <tr>
+      <th>per</th>
+      <td><p>One of <code>"fortnight"</code>, <code>"year"</code> to return either the fortnightly pension or the annual amount.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Other arguments passed to <code><a href='project.html'>project</a></code>.</p></td>
+      <td><p>Other arguments passed to <code><a href='age_pension.html'>age_pension</a></code>.</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A sample file of the same number of rows as <code>sample_file</code> with inflated values (including WEIGHT).</p>
     
 
   </div>
@@ -159,9 +183,7 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-          </ul>
+                </ul>
 
   </div>
 </div>
