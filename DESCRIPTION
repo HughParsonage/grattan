@@ -55,3 +55,4 @@ Suggests:
 Additional_repositories: https://hughparsonage.github.io/tax-drat/
 LazyData: true
 VignetteBuilder: knitr
+Encoding: UTF-8
