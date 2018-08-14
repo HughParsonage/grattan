@@ -1,6 +1,6 @@
 #' Rent assistance
 #' @description The rent assistance to each individual payable by financial year.
-#' @param fortnightly_rent The fortnightly rent paid by each individual. By default, infinity, so the maximum rent assistance is returned by default, since rent assistance is capped at a maximum rate.
+#' @param fortnightly_rent The fortnightly rent paid by each individual. By default, infinity, so the maximum rent assistance is returned by default, since rent assistance is capped at a maximum rate. Note the criteria for board and lodging which can be found at http://guides.dss.gov.au/guide-social-security-law/3/8/1/70
 #' @param fy.year (character) The financial year over which rent assistance is to be calculated.
 #' When left as \code{NULL}, defaults to the user's financial year, unless \code{max_rate} and \code{min_rent} are both set. If \code{fy.year} is set, the annual payment is provided.
 #' @param Date (Date vector or coercible to such) An alternative to \code{fy.year}.
