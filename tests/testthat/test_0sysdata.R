@@ -2,7 +2,7 @@ context("Data up-to-date")
 
 test_that("Data is up-to-date as documented", {
   skip_on_cran()
-  skip_on_travis()
+  # skip_on_travis()
   skip_on_appveyor()
   check_doc <- function(rd) {
     rd_lines <- readLines(rd, warn = FALSE)
@@ -35,3 +35,26 @@ test_that("Data is up-to-date as documented", {
   
   
 })
+
+test_that("pkgdown up-to-date", {
+  skip_on_cran()
+  skip_on_travis()
+  skip_on_appveyor()
+  skip_if_not_installed("magrittr")
+  skip_if_not(file.exists("test_0sysdata.R"))
+  
+  pkgdown_files <- dir("../../docs", recursive = TRUE, full.names = TRUE)
+  
+  expect_gt(length(pkgdown_files), 0)
+  
+  last_doc_file <-
+    pkgdown_files %>%
+    vapply(file.mtime, double(1)) %>%
+    .[which.max(.)] %>%
+    as.POSIXct.numeric(origin = structure(0, class = c("POSIXct", "POSIXt"), tzone = "UTC"))
+  
+  expect_lte(as.integer(difftime(time1 = Sys.time(), last_doc_file, units = "hours")), 1)
+})
+
+
+
