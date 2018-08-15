@@ -200,9 +200,17 @@ rent_assistance <- function(fortnightly_rent = Inf,
   
   # sharers provision
   
-  if (sharers_provision_applies && !is_homeowner && !has_partner && (n_dependants == 0) && lives_in_sharehouse) {
-    ra <- ra * 2/3
-  }
+  sharers_prov <- data.table(SharersProvisionApplies = sharers_provision_applies,
+                             isHomeOwner = is_homeowner,
+                             ShareHouse = lives_in_sharehouse,
+                             hasPartner = has_partner,
+                             nDependants = n_dependants)
+  
+  ra <- ra * (1 - 1/3 * sharers_prov[, SharersProvisionApplies &  
+                                       !isHomeOwner &
+                                       !hasPartner &
+                                       nDependants == 0 &
+                                       ShareHouse])
   
   # validate_per assumes yearly payments, however RA has fortnightly rates which is why it must be scaled by 26
   

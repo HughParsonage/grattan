@@ -31,7 +31,6 @@ test_that("Error handling", {
   expect_error(rent_assistance(min_rent = 5, max_rate = "5"), regexp = "not numeric")
   expect_warning(rent_assistance(Date = "2017-09-20", fy.year = "2017-18"),
                  regexp = "Both `Date` and `fy.year` were set. `fy.year` will be ignored.")
-  
 })
 
 test_that("Per", {
@@ -44,6 +43,8 @@ test_that("Per", {
 test_that("Sharer's Provision", {
   expect_equal(rent_assistance(sharers_provision_applies = TRUE, is_homeowner = FALSE, has_partner = FALSE, n_dependants = 0, lives_in_sharehouse = TRUE),
                rent_assistance() * 2/3)
+  expect_equal(rent_assistance(sharers_provision_applies = c(TRUE, FALSE), is_homeowner = FALSE, has_partner = FALSE, n_dependants = 0, lives_in_sharehouse = TRUE),
+               rent_assistance(c(Inf,Inf)) * c(2/3, 1))
 })
 
 test_that("Rent assistance", {
