@@ -1048,6 +1048,10 @@ setkey(wages_trend, obsTime)
 
 .date_data_updated <- Sys.Date()
 
+library(fastmatch)
+fys1901 <- yr2fy(1901:2100)
+"1999-00" %fin% fys1901
+
 use_and_write_data(tax_table2, 
                    lito_tbl, 
                    tax_tbl, 
@@ -1103,4 +1107,5 @@ use_and_write_data(tax_table2,
 
                    # possibly separable
                    .avbl_fractions,
-                   .date_data_updated)
+                   .date_data_updated,
+                   fys1901)

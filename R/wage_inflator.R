@@ -152,6 +152,25 @@ wage_inflator <- function(wage = 1,
     }
   }
   
+  if (anyNA(from_yrs <- fastmatch::fmatch(from_fy, fys1901))) {
+    
+  }
+  
+  if (min(from_yrs) <= 98L) {
+    first_bad <- which.min(from_yrs)
+    err_msg <- 
+      if (any(are_deflator)) {
+        
+      } else {
+        paste0("`from_fy` contains ", from_fy[first_bad], " at position ", first_bad, 
+               ", earlier than the earliest date in the wage series (\"1997-98\"). Ensure",
+               " the earliest financial year is \"1997-98\".")
+               
+      }
+    stop("`from_fy` contains ", from_fy[first_bad], " at position ", first_bad, 
+         ", earlier than the earliest date in the wage series (1997-98). Ensure")
+  }
+  
   
   
   max_to_fy <- max(to_fy)
