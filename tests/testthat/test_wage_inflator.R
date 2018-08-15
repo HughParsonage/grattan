@@ -59,7 +59,7 @@ test_that("Custom wage series error handling", {
   #                                                     r = c(42, 0.1, 0.1))),
   #              regexp = "first fy in the custom series")
   
-  expect_error(wage_inflator(1, from_fy = "2015-16", to_fy = "2017-18", 
+  expect_error(wage_inflator(1, from_fy = "2015-16", to_fy = "2020-21", 
                              forecast.series = "custom", 
                              wage.series = c(1, 2)),
                regexp = "`wage.series` had length 2.",
