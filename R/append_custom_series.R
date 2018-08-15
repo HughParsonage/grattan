@@ -40,13 +40,13 @@ stopn <- function(..., n = -sys.nframe()) {
 
 append_custom_series <- function(orig,
                                  custom.series,
-                                 max_to_fy,
+                                 max_to_yr,
                                  last_full_yr_in_orig,
                                  last_full_fy_in_orig,
                                  cs = deparse(substitute(custom.series))) {
   reqd_fys <-
     yr2fy(seq.int(from = last_full_yr_in_orig + 1L, 
-                  to = fy2yr(max_to_fy))) %>%
+                  to = max_to_yr)) %>%
     .[. %notin% .subset2(orig, "fy_year")]
   
   

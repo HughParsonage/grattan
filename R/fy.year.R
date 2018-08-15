@@ -111,6 +111,19 @@ all_fy <- function(x, permitted = NULL) {
   }
 }
 
+range_fy2yr <- function(x) {
+  y <- fmatch(x, fys1901)
+  c(min(y, na.rm = TRUE), max(y, na.rm = TRUE)) + 1900L
+}
+
+min_fy2yr <- function(x) {
+  range_fy2yr(x)[1L]
+}
+
+max_fy2yr <- function(x) {
+  range_fy2yr(x)[2L]
+}
+
 fy.year <- function(yr_ending){
   paste0(as.integer(yr_ending) - 1, "-", substr(yr_ending, 3, 4))
 }

@@ -145,9 +145,9 @@ lf_inflator_fy <- function(labour_force = 1,
     year
   
   last_full_fy_in_series <- yr2fy(last_full_yr_in_series)
-  max_to_fy <- max(to_fy)
+  max_to_yr <- max_fy2yr(to_fy)
   
-  if (!allow.projection && max_to_fy > last_full_fy_in_series) {
+  if (!allow.projection && max_to_yr > last_full_yr_in_series) {
     stop("Not all elements of to_fy are in labour force data.")
   }
   
@@ -156,9 +156,9 @@ lf_inflator_fy <- function(labour_force = 1,
   
   if (AND(allow.projection,
           AND(forecast.series != "custom",
-              max_to_fy > last_full_fy_in_series))) {
+              max_to_yr > last_full_yr_in_series))) {
     # Labour force is monthly
-    to_date <- fy2date(max(to_fy))
+    to_date <- fy2date(yr2fy(max_to_yr))
     months.ahead <- 
       12L * (year(to_date) - year(last.date.in.series)) +
       month(to_date) - month(last.date.in.series)
@@ -210,11 +210,11 @@ lf_inflator_fy <- function(labour_force = 1,
 
   
   if (AND(allow.projection,
-          AND(max_to_fy > last_full_fy_in_series,
+          AND(max_to_yr > last_full_yr_in_series,
               forecast.series == "custom"))) {
     lf.indices <- append_custom_series(orig = lf.indices,
                                        custom.series = lf.series,
-                                       max_to_fy = max_to_fy,
+                                       max_to_yr = max_to_yr,
                                        last_full_yr_in_orig = last_full_yr_in_series,
                                        last_full_fy_in_orig = last_full_fy_in_series,
                                        cs = "lf.series")

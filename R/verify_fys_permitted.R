@@ -4,10 +4,12 @@ verify_fys_permitted <- function(to_verify, permitted_fys,
                                  min.yr = NULL, max.yr = NULL,
                                  deparsed = deparse(substitute(to_verify))) {
   fy.year <- to_verify
-  known.wrong <- FALSE
   if (missing(permitted_fys)) {
     if (anyNA(fmatches <- fmatch(to_verify, fys1901))) {
-      known.wrong <- TRUE
+      first_bad <- which.max(is.na(fmatches))
+      stop("`", deparsed, "` contains ", '"',
+           to_verify[first_bad], '",', " which ",
+           "is not a valid FY.")
     } else {
       if (!is.null(min.yr)) {
         min.k <- min.yr - 1900L
@@ -34,7 +36,7 @@ verify_fys_permitted <- function(to_verify, permitted_fys,
   }
   
   
-  if (known.wrong || !all(fy.year %chin% permitted_fys)) {
+  if (!all(fy.year %chin% permitted_fys)) {
     if (any(!is.fy(fy.year))) {
       i <- which(!is.fy(fy.year))
       i1 <- i[1]

@@ -219,6 +219,13 @@ wages_trend <-
   })
 
 stopifnot(is.data.table(wages_trend))
+split2yq <- function(x) {
+  lapply(tstrsplit(x, split = ".Q", perl = TRUE),
+         as.integer)
+}
+wages_trend[, c("obsYear", "obsQtr") := split2yq(obsTime)]
+min.wage.yr <- wages_trend[, min(obsYear)]
+
 
 lf_trend <- 
   tryCatch({
@@ -1045,7 +1052,7 @@ setkey(generic_inflators_1415[, fy_year := NULL], h, variable)
 setkey(generic_inflators_1516[, fy_year := NULL], h, variable)
 
 setkey(wages_trend, obsTime)
-
+setindex(wages_trend, obsQtr)
 .date_data_updated <- Sys.Date()
 
 library(fastmatch)
@@ -1108,4 +1115,5 @@ use_and_write_data(tax_table2,
                    # possibly separable
                    .avbl_fractions,
                    .date_data_updated,
-                   fys1901)
+                   fys1901,
+                   min.wage.yr)

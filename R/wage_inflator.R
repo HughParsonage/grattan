@@ -105,35 +105,28 @@ wage_inflator <- function(wage = 1,
     wages <- rsdmx::readSDMX(wage.url)
     message("Using ABS sdmx connection")
     wage.indices <- setDT(as.data.frame(wages))
+    split2yq <- function(x) {
+      lapply(tstrsplit(x, split = ".Q", perl = TRUE),
+             as.integer)
+    }
+    wage.indices[, c("obsYear", "obsQtr") := split2yq(obsTime)]
+    min.wage.yr <- wage.indices[, min(obsYear)]
   } else {
     # .wages_trend means the wage indices of the trend index
     wage.indices <- copy(wages_trend)
   }
   
-  split2yq <- function(x) {
-    lapply(tstrsplit(x, split = ".Q", perl = TRUE),
-           as.integer)
-  }
-  
-  obsDate <- NULL
-  wage.indices[, c("obsYear", "obsQtr") := split2yq(obsTime)]
-  
-  fys_in_series <- wage.indices[obsQtr == 2L, yr2fy(obsYear)]
-  
-  first_fy_in_series <- first(fys_in_series)
-  
+  obsYear <- obsQtr <- NULL
   last_full_yr_in_series <- 
-    wage.indices %>%
-    .[obsQtr == 2L, .SD, .SDcols = "obsYear"] %>%
-    .[["obsYear"]] %>%
-    last 
+    wage.indices[obsQtr == 2L, last(obsYear)]
   
   last_full_fy_in_series <- yr2fy(last_full_yr_in_series)
   
   last.quarter.in.series <- 
-    wage.indices %>%
-    .[["obsQtr"]] %>%
-    last 
+    wage.indices[, last(obsQtr)]
+  
+  verify_fys_permitted(from_fy, min.yr = min.wage.yr)
+  verify_fys_permitted(to_fy, min.yr = min.wage.yr)
   
   if (max.length == 1L ||
       AND(length(from_fy) == 1L, 
@@ -152,30 +145,9 @@ wage_inflator <- function(wage = 1,
     }
   }
   
-  if (anyNA(from_yrs <- fastmatch::fmatch(from_fy, fys1901))) {
-    
-  }
+  max_to_yr <- max_yr <- max_fy2yr(to_fy)
   
-  if (min(from_yrs) <= 98L) {
-    first_bad <- which.min(from_yrs)
-    err_msg <- 
-      if (any(are_deflator)) {
-        
-      } else {
-        paste0("`from_fy` contains ", from_fy[first_bad], " at position ", first_bad, 
-               ", earlier than the earliest date in the wage series (\"1997-98\"). Ensure",
-               " the earliest financial year is \"1997-98\".")
-               
-      }
-    stop("`from_fy` contains ", from_fy[first_bad], " at position ", first_bad, 
-         ", earlier than the earliest date in the wage series (1997-98). Ensure")
-  }
-  
-  
-  
-  max_to_fy <- max(to_fy)
-  
-  if (!allow.projection && max_to_fy > last_full_fy_in_series) {
+  if (!allow.projection && max_yr > last_full_yr_in_series) {
     stop("Not all elements of to_fy are in wage index data.")
   }
   # else allow NAs to propagate
@@ -183,11 +155,11 @@ wage_inflator <- function(wage = 1,
   # Use forecast::forecast to inflate forward
   
   if (AND(allow.projection, 
-          AND(max_to_fy > last_full_fy_in_series,
+          AND(max_yr > last_full_yr_in_series,
               forecast.series != "custom"))) {
     # Number of quarters beyond the data our forecast must reach
     quarters.ahead <- 
-      4L * (fy2yr(max_to_fy) - last_full_yr_in_series) + 2L - last.quarter.in.series
+      4L * (max_yr - last_full_yr_in_series) + 2L - last.quarter.in.series
     
     switch(forecast.series, 
            "mean" = {
@@ -235,12 +207,12 @@ wage_inflator <- function(wage = 1,
     .[, list(fy_year, obsValue)]
   
   if (allow.projection &&
-      max_to_fy > last_full_fy_in_series &&
+      max_yr > last_full_yr_in_series &&
       forecast.series == "custom") {
     
     wage.indices <- append_custom_series(orig = wage.indices,
                                          custom.series = wage.series,
-                                         max_to_fy = max_to_fy,
+                                         max_to_yr = max_to_yr,
                                          last_full_yr_in_orig = last_full_yr_in_series,
                                          last_full_fy_in_orig = last_full_fy_in_series)
   }
