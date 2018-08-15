@@ -207,6 +207,7 @@ lf_inflator_fy <- function(labour_force = 1,
     lf.indices %>%
     .[month(obsDate) == use.month] %>%
     .[, fy_year := date2fy(obsDate)]
+
   
   if (AND(allow.projection,
           AND(max_to_fy > last_full_fy_in_series,
@@ -215,7 +216,8 @@ lf_inflator_fy <- function(labour_force = 1,
                                        custom.series = lf.series,
                                        max_to_fy = max_to_fy,
                                        last_full_yr_in_orig = last_full_yr_in_series,
-                                       last_full_fy_in_orig = last_full_fy_in_series)
+                                       last_full_fy_in_orig = last_full_fy_in_series,
+                                       cs = "lf.series")
   }
   
   inflator(labour_force, 

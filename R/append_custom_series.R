@@ -2,7 +2,7 @@
 # check_names(X, expected_names, pre_ensure = NULL) {
 #   if (!is.null(names(X))) {
 #     Xc <- deparse(substitute(X))
-#     stop("`custom.series` is a list with no names. ", 
+#     stopn("`custom.series` is a list with no names. ", 
 #          "If using `custom.series` as a list, ensure ",
 #          "its names are 'fy_year' and 'r'.")
 #   }
@@ -11,7 +11,9 @@
 #   }
 # }
 
-stopn <- function(..., n = -1L) {
+
+# Provide error function that can refer to the calling function.
+stopn <- function(..., n = -sys.nframe()) {
   error_message <- paste0(..., collapse = "")
   condition <- function(subclass, message, call = sys.call(-1), ...) {
     structure(
@@ -56,7 +58,7 @@ append_custom_series <- function(orig,
   stopifnot(is.data.table(custom.series))
   
   if (max(.subset2(custom.series, "r")) > 1) {
-    message("Some r > 1 in `", cs, "`.",
+    message("Some r > 1 in `", cs, "`. ",
             "This is unlikely rate of growth ", 
             "(r = 0.025 corresponds to 2.5% growth).")
   }
@@ -71,8 +73,11 @@ append_custom_series <- function(orig,
   
   # Leaves a gap
   if (first_fy_in_custom_series > next_fy(last_full_fy_in_orig)) {
-    stop("The first fy in the `", cs, "` must be equal to ", '"',
-         yr2fy(last_full_yr_in_orig + 1), '".')
+    stopn("`", cs, "` starts with ", first_fy_in_custom_series, 
+          " but the last financial year in the original series is ", 
+          '"', last_full_fy_in_orig, '".',
+          " Ensure `", cs, "` inlucdes ", next_fy(last_full_fy_in_orig), ".",
+          n = -2)
   }
  
   # Is the following
@@ -82,10 +87,11 @@ append_custom_series <- function(orig,
     expected_fy_sequence <- next_fy(last_full_fy_in_orig, h = 1:nrow(custom.series))
     
     if (!identical(input_series_fys, expected_fy_sequence)){
-      stop("`", cs, "$fy_year` was\n\t",
+      stopn("`", cs, "$fy_year` was\n\t",
            deparse(input_series_fys), "\n",
            "but should be\n\t",
-           deparse(expected_fy_sequence), ".")
+           deparse(expected_fy_sequence), ".",
+           n = -2)
     }
     
     last_obsValue_in_actual_series <- last(.subset2(orig, "obsValue"))
@@ -105,10 +111,11 @@ append_custom_series <- function(orig,
       next_fy(last(.subset2(series_before_custom, "fy_year")),
               h = 1:nrow(custom.series))
     if (!identical(expected_fy_sequence, input_series_fys)) {
-      stop("`", cs, "$fy_year` was\n\t",
+      stopn("`", cs, "$fy_year` was\n\t",
            deparse(input_series_fys), "\n",
            "but should be\n\t",
-           deparse(expected_fy_sequence), ".")
+           deparse(expected_fy_sequence), ".",
+           n = -2)
     }
     
     last_obsValue_in_actual_series <- last(series_before_custom[["obsValue"]])
@@ -137,6 +144,7 @@ append_custom_series <- function(orig,
 #' @param req.fys The required fys for the data.table (only required for atomic custom.series).
 #' @noRd
 standardize_custom_series <- function(custom.series, cs, req.fys) {
+  
   if (is.null(custom.series)) {
     stopn("`", cs, " = NULL`, yet `forecast.series = ", '"custom"`. ', 
           "When `forecast.series = ", '"custom"`, ',
@@ -148,20 +156,22 @@ standardize_custom_series <- function(custom.series, cs, req.fys) {
     stopn("`", cs, "` had class ", class(custom.series)[1],
           ", but must either a single number ", 
           "or a list with names 'fy_year' and 'r'. ",
-          n = 3)
+          n = -3)
   }
   
   if (is.atomic(custom.series)) {
     if (!is.numeric(custom.series)) {
-      stop("`", cs, "` was type ", typeof(custom.series), ". ", 
-           "If using `", cs,
-           "` as an atomic vector, ensure it is a single numeric vector.")
+      stopn("`", cs, "` was type ", typeof(custom.series), ". ", 
+            "If using `", cs,
+            "` as an atomic vector, ensure it is a single numeric vector.",
+            n = -3)
     }
     
     if (length(custom.series) != 1L) {
-      stop("`", cs, "` had length ", length(custom.series), ". ", 
-           "If using `", cs,
-           "` as an atomic vector, ensure it is a single numeric vector.")
+      stopn("`", cs, "` had length ", length(custom.series), ". ", 
+            "If using `", cs,
+            "` as an atomic vector, ensure it is a single numeric vector.",
+            n = -3)
     }
     
     
@@ -174,48 +184,66 @@ standardize_custom_series <- function(custom.series, cs, req.fys) {
   # Must be a list from here:
   
   if (is.null(names(custom.series))) {
-    stop("`", cs, "` is a list with no names. ", 
+    stopn("`", cs, "` is a list with no names. ", 
          "If using `", cs, "` as a list, ensure ",
-         "its names are 'fy_year' and 'r'.")
+         "its names are 'fy_year' and 'r'.",
+         n = -3)
   }
   if (length(names(custom.series)) < 2L) {
-    stop("`", cs, "` had fewer than 2 names. ", 
+    stopn("`", cs, "` had fewer than 2 names. ", 
          "If using `", cs, "` as a list, ensure ",
-         "its names are 'fy_year' and 'r'.")
+         "its names are 'fy_year' and 'r'.",
+         n = -3)
   }
   if (names(custom.series)[1] != "fy_year") {
-    stop("`", cs, "` had first name ", '"', names(custom.series)[1], '". ',
+    stopn("`", cs, "` had first name ", '"', names(custom.series)[1], '". ',
          "If using `", cs, "` as a list, ensure ",
-         "its names are 'fy_year' and 'r'.")
+         "its names are 'fy_year' and 'r'.",
+         n = -3)
   } 
   if (names(custom.series)[2] != "r") {
-    stop("`", cs, "` had first name ", '"', names(custom.series)[1], '". ',
+    stopn("`", cs, "` had first name ", '"', names(custom.series)[1], '". ',
          "If using `", cs, "` as a list, ensure ",
-         "its names are 'fy_year' and 'r'.")
+         "its names are 'fy_year' and 'r'.",
+         n = -3)
   }
   if (!is.data.table(custom.series)) {
     if (length(custom.series[["r"]]) != length(custom.series[["fy_year"]])) {
       if (length(custom.series[["r"]]) != 1L) {
-        stop("`", cs, "` was a list with mismatching lengths: ", 
+        stopn("`", cs, "` was a list with mismatching lengths: ", 
              vapply(custom.series, length, 1L), ". ", 
              "Ensure column `r` has length 1 ",
              "or ", length(custom.series[["fy_year"]]), 
-             " (the length of column `fy_year`).")
+             " (the length of column `fy_year`).",
+             n = -3)
       }
     }
     custom.series <- as.data.table(custom.series)
   }
   
   input_series_fys <- .subset2(custom.series, "fy_year")
-  if (!identical(input_series_fys, req.fys) && 
-      !all(req.fys %in% input_series_fys)) {
-    stop("`", cs, "$fy_year` did not have the required financial years.\n\n", 
-         "`", cs, "$fy_year` was\n\t",
-         deparse(input_series_fys), "\n",
-         "but should be\n\t",
-         deparse(req.fys), ".")
+  
+  if (!all(req.fys %in% input_series_fys)) {
+    stopn("`", cs, "$fy_year` did not have the required financial years.\n\n", 
+          "`", cs, "$fy_year` was\n\t",
+          deparse(input_series_fys), "\n",
+          "but needs to include\n\t",
+          deparse(req.fys), ".",
+          n = -3)
   }
   
+  # Need to make sure that they're in the same order
+  if (!identical(req.fys[req.fys %in% input_series_fys],
+                 input_series_fys[input_series_fys %in% req.fys])) {
+      stopn("`", cs, "$fy_year` had the required financial years but not in the correct order.\n\n", 
+            "`", cs, "$fy_year` was\n\t",
+            deparse(input_series_fys), "\n",
+            "but needs to include and be in the same order as\n\t",
+            deparse(req.fys), ".",
+            n = -3)
+    
+    
+  }
   
   return(custom.series)
 }

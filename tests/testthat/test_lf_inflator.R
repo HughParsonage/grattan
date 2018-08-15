@@ -46,6 +46,7 @@ test_that("Error handling", {
                                                      r = c(0, 0.123))), 
                regexp = '`lf.series$fy_year` did not have the required financial years.', 
                fixed = TRUE)
+  
 })
 
 test_that("upper and lower series produce higher and lower forecasts", {
