@@ -45,7 +45,7 @@ if (!exists("cache")) {
           is_less_than(2))
 }
 if (FALSE) {
-  if (interactive() && !is_knitting()) {
+  if (interactive() && !grattanCharts::is_knitting()) {
     stopifnot(file.exists("~/grattan/DESCRIPTION"))
     pkgdown::build_site(pkg = "../..", lazy = TRUE)
     for (svg in dir(path = "~/grattan/vignettes/long-vignettes/Budget2018-atlas/", 
@@ -405,6 +405,7 @@ medicare_levy_lower_up_for_each_child <- function(fy) {
 .project_to <- function(h, use.Treasury) {
   project(sample_file_1516,
           h = h,
+          fy.year.of.sample.file = "2015-16",
           wage.series = if (use.Treasury) wage_forecasts,
           lf.series = if (use.Treasury) lf_forecasts) %>%
     setkey(Taxable_Income)
@@ -412,11 +413,11 @@ medicare_levy_lower_up_for_each_child <- function(fy) {
 ```
 
 ```{r project_useTreasurys, cache=cache}
-.project_useTreasurys <- lapply(1:13, .project_to, use.Treasury = TRUE)
+.project_useTreasurys <- lapply(1:12, .project_to, use.Treasury = TRUE)
 ```
 
 ```{r .project_useGrattans, cache=cache}
-.project_useGrattans <- lapply(1:13, .project_to, use.Treasury = FALSE)
+.project_useGrattans <- lapply(1:12, .project_to, use.Treasury = FALSE)
 ```
 
 ```{r s2425_Treasury}
@@ -463,19 +464,19 @@ wage_r20 <-
 ```
 
 ```{r .project_useGrattans80, cache=cache}
-.project_useGrattans80 <- lapply(1:13, function(h) {
+.project_useGrattans80 <- lapply(1:12, function(h) {
   project(sample_file_1516, h = h, wage.series = wage_r80)
 })
 ```
 
 ```{r .project_useGrattans20, cache=cache}
-.project_useGrattans20 <- lapply(1:13, function(h) {
+.project_useGrattans20 <- lapply(1:12, function(h) {
   project(sample_file_1516, h = h, wage.series = wage_r20)
 })
 ```
 
 ```{r .project_useGrattans2.75, cache=TRUE}
-.project_useGrattans2.75 <- lapply(1:13, function(h) {
+.project_useGrattans2.75 <- lapply(1:12, function(h) {
   project(sample_file_1516, h = h, wage.series = 0.0275)
 })
 ```
