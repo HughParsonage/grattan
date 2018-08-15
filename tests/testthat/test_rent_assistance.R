@@ -34,11 +34,23 @@ test_that("Error handling", {
   
 })
 
+test_that("Per", {
+  expect_equal(26 * rent_assistance(per = "fortnight"),
+               rent_assistance(per = "year"))
+  expect_equal(26 * rent_assistance(per = "fortnight", fy.year = "2015-16", n_dependants = 1L),
+               rent_assistance(per = "year", fy.year = "2015-16", n_dependants = 1L))
+})
+
+test_that("Sharer's Provision", {
+  expect_equal(rent_assistance(sharers_provision_applies = TRUE, is_homeowner = FALSE, has_partner = FALSE, n_dependants = 0, lives_in_sharehouse = TRUE),
+               rent_assistance() * 2/3)
+})
+
 test_that("Rent assistance", {
   expect_equal(rent_assistance(500, max_rate = 500, min_rent = 100), 
                300)
-  expect_gt(rent_assistance(500, "2015-16", n_dependants = 1L), 
-            rent_assistance(500, "2015-16", n_dependants = 0L))
-  expect_gt(rent_assistance(500, "2015-16", n_dependants = 1), 
-            rent_assistance(500, "2015-16", n_dependants = 0))
+  expect_gt(rent_assistance(500, fy.year = "2015-16", n_dependants = 1L), 
+            rent_assistance(500, fy.year = "2015-16", n_dependants = 0L))
+  expect_gt(rent_assistance(500, fy.year = "2015-16", n_dependants = 1), 
+            rent_assistance(500, fy.year = "2015-16", n_dependants = 0))
 })
