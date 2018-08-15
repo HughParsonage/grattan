@@ -70,16 +70,9 @@ append_custom_series <- function(orig,
   #   - equals or precedes '2018-19'  ==> custom series takes precedence
   input_series_fys <- .subset2(custom.series, "fy_year")
   first_fy_in_custom_series <- input_series_fys[[1L]]
-  
-  # Leaves a gap
-  if (first_fy_in_custom_series > next_fy(last_full_fy_in_orig)) {
-    stopn("`", cs, "` starts with ", first_fy_in_custom_series, 
-          " but the last financial year in the original series is ", 
-          '"', last_full_fy_in_orig, '".',
-          " Ensure `", cs, "` inlucdes ", next_fy(last_full_fy_in_orig), ".",
-          n = -2)
-  }
  
+  stopifnot(first_fy_in_custom_series <= next_fy(last_full_fy_in_orig))
+  
   # Is the following
   if (first_fy_in_custom_series == next_fy(last_full_fy_in_orig)) {
     # Determine whether the dates are a regular sequence (no gaps)
@@ -96,6 +89,7 @@ append_custom_series <- function(orig,
     
     last_obsValue_in_actual_series <- last(.subset2(orig, "obsValue"))
     
+    obsValue <- r <- NULL
     custom.series[, obsValue := last_obsValue_in_actual_series * cumprod(1 + r)]
     
     out <- 
