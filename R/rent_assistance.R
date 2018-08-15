@@ -200,6 +200,12 @@ rent_assistance <- function(fortnightly_rent = Inf,
   
   # sharers provision
   
+  prohibit_vector_recycling(sharers_provision_applies,
+                            is_homeowner,
+                            lives_in_sharehouse,
+                            has_partner,
+                            n_dependants)
+  
   sharers_prov <- data.table(SharersProvisionApplies = sharers_provision_applies,
                              isHomeOwner = is_homeowner,
                              ShareHouse = lives_in_sharehouse,
