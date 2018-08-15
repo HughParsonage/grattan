@@ -45,4 +45,11 @@ test_that("fy.year and yr2fy are identical", {
   expect_identical(fy.year(x), yr2fy(x))
 })
 
+test_that("range_fy", {
+  expect_identical(max_fy2yr(c("2015-16", "2000-01", "2001-02")), 2016L)
+  expect_identical(min_fy2yr(c("2015-16", "2000-01", "2001-02")), 2001L)
+})
+
+
+
 

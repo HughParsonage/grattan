@@ -24,6 +24,8 @@ test_that("min or max years", {
   expect_error(verify_fys_permitted("1980-81", max.yr = 1979L))
   expect_null(verify_fys_permitted("1980-81", max.yr = 1982L))
   expect_null(verify_fys_permitted("1984-85", min.yr = 1982L, max.yr = 1989L))
+  expect_error(verify_fys_permitted(c("1980-81", "1980-80"), min.yr = 1980L),
+               regexp = "not a valid FY")
 })
 
 
