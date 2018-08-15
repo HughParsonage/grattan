@@ -159,7 +159,7 @@ wage_inflator <- function(wage = 1,
               forecast.series != "custom"))) {
     # Number of quarters beyond the data our forecast must reach
     quarters.ahead <- 
-      4L * (max(fy2yr(to_fy)) - last_full_yr_in_series) + 2L - last.quarter.in.series
+      4L * (fy2yr(max_to_fy) - last_full_yr_in_series) + 2L - last.quarter.in.series
     
     switch(forecast.series, 
            "mean" = {
