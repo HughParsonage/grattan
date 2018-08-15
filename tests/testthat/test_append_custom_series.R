@@ -59,6 +59,18 @@ test_that("As applied with inflators", {
                regexp = 'was a list with mismatching lengths:',
                fixed = TRUE)
   
+  expect_error(wage_inflator(from_fy = "2015-16", to_fy = "2020-21",
+                             forecast.series = "custom",
+                             wage.series = list(fy_year = yr2fy(2021:2018), r = 1:4/100)),
+               regexp = '`wage.series$fy_year` had the required financial years but not in the correct order.',
+               fixed = TRUE)
+  expect_error(wage_inflator(from_fy = "2015-16", to_fy = "2020-21",
+                             forecast.series = "custom",
+                             wage.series = list(fy_year = c("2017-18", "2019-20", "2018-19", "2020-21"),
+                                                r = 1:4/100)),
+               regexp = '`wage.series$fy_year` had the required financial years but not in the correct order.',
+               fixed = TRUE)
+  
   expect_error(lf_inflator_fy(from_fy = "2015-16", to_fy = "2020-21",
                               forecast.series = "custom",
                               lf.series = list(fy_year = "2020-21", r = 0.01)),

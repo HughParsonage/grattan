@@ -6,7 +6,7 @@
 #' 
 #' If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{from_fy} is set to the previous financial year and \code{to_fy} to the current financial year, with a warning. Setting only one is an error.
 #' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.
-#' The internal data was updated on 2018-08-10 to 2018-Q1. 
+#' The internal data was updated on 2018-08-15 to 2018-Q2. 
 #' @param allow.projection If set to \code{TRUE} the \code{forecast} package is used to project forward, if required. 
 #' @param forecast.series Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals. A fourth option \code{custom} allows manual forecasts to be set.
 #' @param forecast.level The prediction interval to be used if \code{forecast.series} is \code{upper} or \code{lower}.
@@ -104,16 +104,23 @@ wage_inflator <- function(wage = 1,
     wage.url <- "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LABOUR_PRICE_INDEX/1.THRPEB.7.-.0.30.Q/all?startTime=1997-Q3"
     wages <- rsdmx::readSDMX(wage.url)
     message("Using ABS sdmx connection")
-    wage.indices <- as.data.frame(wages) %>%
-      as.data.table
+    wage.indices <- setDT(as.data.frame(wages))
   } else {
     # .wages_trend means the wage indices of the trend index
     wage.indices <- copy(wages_trend)
   }
   
+  split2yq <- function(x) {
+    lapply(tstrsplit(x, split = ".Q", perl = TRUE),
+           as.integer)
+  }
+  
   obsDate <- NULL
-  wage.indices[, obsYear := as.integer(sub("([12][0-9]{3}).Q([1-4])", "\\1", obsTime, perl = TRUE))]
-  wage.indices[, obsQtr  := as.integer(sub("([12][0-9]{3}).Q([1-4])", "\\2", obsTime, perl = TRUE))]
+  wage.indices[, c("obsYear", "obsQtr") := split2yq(obsTime)]
+  
+  fys_in_series <- wage.indices[obsQtr == 2L, yr2fy(obsYear)]
+  
+  first_fy_in_series <- first(fys_in_series)
   
   last_full_yr_in_series <- 
     wage.indices %>%
@@ -144,6 +151,8 @@ wage_inflator <- function(wage = 1,
       to_fy <- .to
     }
   }
+  
+  
   
   max_to_fy <- max(to_fy)
   
