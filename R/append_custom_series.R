@@ -202,7 +202,7 @@ standardize_custom_series <- function(custom.series, cs, req.fys) {
          n = -3)
   } 
   if (names(custom.series)[2] != "r") {
-    stopn("`", cs, "` had first name ", '"', names(custom.series)[1], '". ',
+    stopn("`", cs, "` had second name ", '"', names(custom.series)[2], '". ',
          "If using `", cs, "` as a list, ensure ",
          "its names are 'fy_year' and 'r'.",
          n = -3)
