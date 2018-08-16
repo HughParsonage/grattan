@@ -197,7 +197,11 @@ test_that("cpi returns reasonable forecasts", {
 
 test_that("ABS connection", {
   skip_on_cran()
-  false_if_rel <- !identical(Sys.getenv("TRAVIS"), "true")
+  travis_release_not_pr <- 
+    identical(Sys.getenv("TRAVIS"), "true") &&
+    !identical(Sys.getenv("TRAVIS_R_VERSION_STRING"), "release") &&
+    identical(Sys.getenv("TRAVIS_PULL_REQUEST"), "true")
+  skip_if(travis_release_not_pr)
   internal_ans <- cpi_inflator(from_fy = "2012-13", 
                                to_fy = "2013-14", 
                                adjustment = "none", 
@@ -217,7 +221,7 @@ test_that("ABS connection", {
   external_ans <- cpi_inflator(from_fy = "2012-13", 
                                to_fy = "2013-14", 
                                adjustment = "seasonal", 
-                               useABSConnection = false_if_rel)
+                               useABSConnection = TRUE)
   
   expect_equal(internal_ans, external_ans, tol = 0.0001)
   
@@ -229,7 +233,7 @@ test_that("ABS connection", {
   external_ans <- cpi_inflator(from_fy = "2012-13", 
                                to_fy = "2013-14", 
                                adjustment = "trimmed", 
-                               useABSConnection = false_if_rel)
+                               useABSConnection = TRUE)
   
   expect_equal(internal_ans, external_ans, tol = 0.0001)
   
@@ -256,7 +260,7 @@ test_that("ABS connection", {
                                         from_qtr = "1960-Q1", 
                                         to_qtr = "1961-Q1", 
                                         adjustment = "seasonal", 
-                                        useABSConnection = false_if_rel)
+                                        useABSConnection = TRUE)
   
   expect_equal(internal_ans, external_ans, tol = 0.0001)
   
@@ -270,7 +274,7 @@ test_that("ABS connection", {
                                         from_qtr = "1960-Q1", 
                                         to_qtr = "1961-Q1", 
                                         adjustment = "none", 
-                                        useABSConnection = false_if_rel)
+                                        useABSConnection = TRUE)
   
   expect_equal(internal_ans, external_ans, tol = 0.0001)
   
