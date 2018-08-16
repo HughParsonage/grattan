@@ -85,7 +85,7 @@
       <h1>Grattan Institute</h1>
                         <h4 class="author">Hugh Parsonage</h4>
             
-            <h4 class="date">2018-08-15</h4>
+            <h4 class="date">2018-08-16</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/HughParsonage/grattan/blob/master/vignettes/grattan.Rmd"><code>vignettes/grattan.Rmd</code></a></small>
       <div class="hidden name"><code>grattan.Rmd</code></div>
@@ -183,7 +183,7 @@ hutils<span class="op">::</span><span class="kw"><a href="http://www.rdocumentat
 sample_files_all[, WEIGHT <span class="op">:</span><span class="er">=</span><span class="st"> </span>hutils<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/hutils/topics/if_else">if_else</a></span>(fy.year <span class="op">&gt;</span><span class="st"> '2010-11'</span>, 50L, 100L)]
 age_range_decoder &lt;-<span class="st"> </span><span class="kw">as.data.table</span>(age_range_decoder)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(grattan)
-<span class="co">#&gt; Last change: NAMESPACE at 2018-08-14 23:13:01 (10 hours ago).</span></code></pre></div>
+<span class="co">#&gt; Last change: NAMESPACE at 2018-08-16 17:01:28 (1 hours ago).</span></code></pre></div>
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
@@ -263,7 +263,7 @@ avg_tax_by_decile_<span class="dv">2021</span> &lt;-<span class="st"> </span>
 </tr>
 </tbody>
 </table>
-<p>The <code>project</code> function expects wages to grow by 7.97% over the period 2016-17 to 2020-21, whereas by the forecast in the Budget this number would be 13.4%. Whatever the merits of each forecast, the <code>project</code> function allows you to specify a particular wage series in the future through the argument <code>wage.series =</code>. We can then repeat the analysis above using those estimates:</p>
+<p>The <code>project</code> function expects wages to grow by 8.02% over the period 2016-17 to 2020-21, whereas by the forecast in the Budget this number would be 13.4%. Whatever the merits of each forecast, the <code>project</code> function allows you to specify a particular wage series in the future through the argument <code>wage.series =</code>. We can then repeat the analysis above using those estimates:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_file_<span class="dv">1617</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/project.html">project</a></span>(sample_file_<span class="dv">1213</span>,
                             <span class="dt">h =</span> 4L,
                             <span class="dt">fy.year.of.sample.file =</span> <span class="st">"2012-13"</span>)
@@ -369,7 +369,7 @@ avg_tax_rate_2021_50k &lt;-<span class="st"> </span>
 }</code></pre></div>
 <p>which leads to the sentence and table in the op-ed:</p>
 <blockquote>
-<p>For example, if the government was to reduce the tax rate only in the middle (37,000-87,000) bracket from 32.5% to 30%, the promised $7.8 billion surplus in 2021 would all but be swallowed up by the 6.8 bn revenue loss.</p>
+<p>For example, if the government was to reduce the tax rate only in the middle (37,000-87,000) bracket from 32.5% to 30%, the promised $7.8 billion surplus in 2021 would all but be swallowed up by the 6.7 bn revenue loss.</p>
 </blockquote>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data.table</span>(<span class="dt">tax_bracket =</span> <span class="kw">c</span>(<span class="st">"&lt;18,200"</span>,
                            <span class="st">"18,200-37,000"</span>,
@@ -390,15 +390,15 @@ avg_tax_rate_2021_50k &lt;-<span class="st"> </span>
 </tr>
 <tr class="even">
 <td align="left">18,200-37,000</td>
-<td align="right">1.21</td>
+<td align="right">1.19</td>
 </tr>
 <tr class="odd">
 <td align="left">37,000-87,000</td>
-<td align="right">2.24</td>
+<td align="right">2.21</td>
 </tr>
 <tr class="even">
 <td align="left">87,000-180,000</td>
-<td align="right">0.79</td>
+<td align="right">0.78</td>
 </tr>
 <tr class="odd">
 <td align="left">180,000+</td>
@@ -1553,7 +1553,7 @@ grattan_dollar &lt;-<span class="st"> </span><span class="cf">function</span> (x
 <span class="st">  </span><span class="kw"><a href="../reference/project_to.html">project_to</a></span>(<span class="dt">to_fy =</span> <span class="st">"2017-18"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span>as.data.table <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/model_new_caps_and_div293.html">revenue_from_new_cap_and_div293</a></span>(<span class="dt">new_cap =</span> <span class="fl">25e3</span>, <span class="dt">fy.year =</span> <span class="st">"2016-17"</span>, <span class="dt">new_age_based_cap =</span> <span class="ot">FALSE</span>, <span class="dt">new_div293_threshold =</span> <span class="fl">250e3</span>))
-<span class="co">#&gt; [1] 1199407221</span>
+<span class="co">#&gt; [1] 1201797855</span>
 
 <span class="kw">paste</span>(<span class="kw">grattan_dollar</span>(new_revenue <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>), <span class="st">"bn"</span>)
 <span class="co">#&gt; [1] "$1 bn"</span>
@@ -1563,10 +1563,10 @@ grattan_dollar &lt;-<span class="st"> </span><span class="cf">function</span> (x
 <span class="st">  </span><span class="kw"><a href="../reference/project_to.html">project_to</a></span>(<span class="dt">to_fy =</span> <span class="st">"2017-18"</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span>as.data.table <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/model_new_caps_and_div293.html">n_affected_from_new_cap_and_div293</a></span>(<span class="dt">new_cap =</span> <span class="fl">25e3</span>, <span class="dt">fy.year =</span> <span class="st">"2016-17"</span>, <span class="dt">new_age_based_cap =</span> <span class="ot">FALSE</span>, <span class="dt">new_div293_threshold =</span> <span class="fl">250e3</span>))
-<span class="co">#&gt; [1] 558767.4</span>
+<span class="co">#&gt; [1] 560470.3</span>
 
 <span class="kw">prettyNum</span>(<span class="kw">round</span>(n_affected), <span class="dt">big.mark =</span> <span class="st">","</span>)
-<span class="co">#&gt; [1] "558,767"</span></code></pre></div>
+<span class="co">#&gt; [1] "560,470"</span></code></pre></div>
 <p>Notes:</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -1612,19 +1612,19 @@ new_sample_file_<span class="dv">1718</span> <span class="op">%&gt;%</span>
 </tr>
 <tr class="even">
 <td align="right">2</td>
-<td align="right">4.90</td>
+<td align="right">4.94</td>
 </tr>
 <tr class="odd">
 <td align="right">3</td>
-<td align="right">11.32</td>
+<td align="right">11.30</td>
 </tr>
 <tr class="even">
 <td align="right">4</td>
-<td align="right">22.70</td>
+<td align="right">22.73</td>
 </tr>
 <tr class="odd">
 <td align="right">5</td>
-<td align="right">31.14</td>
+<td align="right">31.24</td>
 </tr>
 <tr class="even">
 <td align="right">6</td>
@@ -1632,19 +1632,19 @@ new_sample_file_<span class="dv">1718</span> <span class="op">%&gt;%</span>
 </tr>
 <tr class="odd">
 <td align="right">7</td>
-<td align="right">41.58</td>
+<td align="right">41.50</td>
 </tr>
 <tr class="even">
 <td align="right">8</td>
-<td align="right">61.37</td>
+<td align="right">61.62</td>
 </tr>
 <tr class="odd">
 <td align="right">9</td>
-<td align="right">101.53</td>
+<td align="right">101.73</td>
 </tr>
 <tr class="even">
 <td align="right">10</td>
-<td align="right">506.51</td>
+<td align="right">507.61</td>
 </tr>
 </tbody>
 </table>
