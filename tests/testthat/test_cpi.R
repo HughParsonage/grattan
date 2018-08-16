@@ -90,6 +90,11 @@ test_that("Errors", {
   
 })
 
+test_that("FY corner cases", {
+  expect_equal(cpi_inflator(from_fy = "2014-15", to_fy = "201314"),
+               cpi_inflator(from_fy = "2014-15", to_fy = "2013-14"))
+})
+
 test_that("cpi returns known results", {
   expect_gt(cpi_inflator(from_nominal_price = 1,
                          from_fy = "2012-13",

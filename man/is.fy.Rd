@@ -32,6 +32,10 @@ For the inverses, a numeric corresponding to the year.
 \description{
 Convenience functions for dealing with financial years
 }
+\details{
+The following forms are permitted: \code{2012-13}, \code{201213}, \code{2012 13}, only.
+However, the \code{2012-13} form is preferred and will improve performance.
+}
 \examples{
 is.fy("2012-13")
 is.fy("2012-14")

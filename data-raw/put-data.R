@@ -238,11 +238,24 @@ lf_trend <-
       as.data.frame(lf) %>% 
       as.data.table %T>%
       {stopifnot(nrow(.) > 0)} %>%
-      .[, .(obsTime, obsValue = as.integer(obsValue * 1000))] %T>%
-      fwrite("./data-raw/lf-trend.tsv", sep = "\t") %>%
-      .[]
+      .[, .(obsTime, obsValue = as.integer(obsValue * 1000))]
+    
+    if ("2018-07" %notin% .subset2(lf, "obsTime") &&
+        "2018-06" == lf[, last(obsTime)]) {
+      message("Manually entering 2018-07 in lf")
+      lf <- rbind(lf, 
+                  data.table(obsTime = "2018-07",
+                             obsValue = as.integer(13294.7 * 1000)))
+    }
+    
+    fwrite(lf, "./data-raw/lf-trend.tsv", sep = "\t")
+    lf
+    
+    
   }, 
   error = function(e){
+    cat("Labour force retrieve errored: ", crayon::red(e$m), "\n")
+    message("Using old (", as.character(file.mtime("./data-raw/lf-trend.tsv")), ") version of lf-trend.")
     data.table::fread("./data-raw/lf-trend.tsv" 
                       , select = c("obsTime", "obsValue"))
   })

@@ -8,7 +8,7 @@ test_that("Performance regression: cpi_inflator", {
                  AND(AND(identical(Sys.getenv("TRAVIS"), "true"), 
                          identical(Sys.getenv("TRAVIS_R_VERSION_STRING"), "devel")),
                      Sys.getenv("TRAVIS_PULL_REQUEST") != "true")))
-              
+  
   set.seed(19842014)
   from_fys10K <- sample(yr2fy(1984:2014), size = 10e3, replace = TRUE)
   from_fys100M <- rep(from_fys10K, times = 100e6/10e3)
