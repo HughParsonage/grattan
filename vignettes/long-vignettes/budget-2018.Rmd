@@ -71,6 +71,19 @@ if (FALSE) {
                          pattern = "\\.html$", 
                          full.names = TRUE), 
                      change_pngs))
+    (all(vapply(dir(path = "~/grattan/vignettes/long-vignettes/",
+                             full.names = TRUE,
+                             recursive = TRUE,
+                             pattern = "\\.png$"),
+                         file.remove,
+                         FALSE)))
+    (all(vapply(dir(path = "~/grattan/docs/articles/long-vignettes/",
+                             full.names = TRUE,
+                             recursive = TRUE,
+                             pattern = "\\.png$"),
+                         file.remove,
+                         FALSE)))
+    
     
   }
 }
@@ -1124,13 +1137,13 @@ from bracket creep. Certainly the plan reduces average tax rates in
 no changes to rates or brackets over that period.
 
 ```{r avgTaxRate50}
-avgTaxRate50 <- function(id, fy) {
+avgTaxRate50 <- function(idd, fy) {
   stopifnot(identical(key(avg_tax_rates_by_percentile_facet_fy), 
                       c("fy_year", "id", "Taxable_Income_percentile")),
-            length(id) == 1L,
+            length(idd) == 1L,
             length(fy) == 1L, 
             "avg_tax_rate" %in% names(avg_tax_rates_by_percentile_facet_fy))
-  avg_tax_rates_by_percentile_facet_fy[.(fy, id, 50L), avg_tax_rate]
+  avg_tax_rates_by_percentile_facet_fy[.(fy, idd, 50L), avg_tax_rate]
 }
 ```
 
