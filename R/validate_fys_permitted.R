@@ -24,7 +24,7 @@
 
 
 
-verify_fys_permitted <- function(to_verify, permitted_fys,
+validate_fys_permitted <- function(to_verify, permitted_fys,
                                  min.yr = NULL, max.yr = NULL,
                                  deparsed = deparse(substitute(to_verify))) {
   fy.year <- to_verify
