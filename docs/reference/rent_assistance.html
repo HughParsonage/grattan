@@ -181,7 +181,7 @@ If the arguments cannot be recycled safely, the function errors.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># current annual rent assistance</span>
-<span class='fu'>rent_assistance</span>()</div><div class='output co'>#&gt; <span class='message'>`fy.year` not set, so defaulting to fy.year = "2018-19"</span></div><div class='output co'>#&gt; [1] 3534.96</div><div class='input'>
+<span class='fu'>rent_assistance</span>()</div><div class='output co'>#&gt; <span class='message'>`fy.year` not set, so defaulting to fy.year = "2018-19"</span></div><div class='output co'>#&gt; <span class='error'>Error in fy.year %chin% permitted_fys: x is type 'closure' (must be 'character' or NULL)</span></div><div class='input'>
 <span class='co'># current fortnightly payment</span>
 <span class='fu'>rent_assistance</span>(<span class='kw'>Date</span> <span class='kw'>=</span> <span class='fu'>Sys.Date</span>())</div><div class='output co'>#&gt; [1] 134.4</div><div class='input'>
 <span class='co'># zero since no rent</span>
