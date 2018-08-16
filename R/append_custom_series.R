@@ -75,18 +75,6 @@ append_custom_series <- function(orig,
   
   # Is the following
   if (first_fy_in_custom_series == next_fy(last_full_fy_in_orig)) {
-    # Determine whether the dates are a regular sequence (no gaps)
-    
-    expected_fy_sequence <- next_fy(last_full_fy_in_orig, h = 1:nrow(custom.series))
-    
-    if (!identical(input_series_fys, expected_fy_sequence)){
-      stopn("`", cs, "$fy_year` was\n\t",
-           deparse(input_series_fys), "\n",
-           "but should be\n\t",
-           deparse(expected_fy_sequence), ".",
-           n = -2)
-    }
-    
     last_obsValue_in_actual_series <- last(.subset2(orig, "obsValue"))
     
     obsValue <- r <- NULL
@@ -101,17 +89,7 @@ append_custom_series <- function(orig,
       unique(by = "fy_year", fromLast = TRUE)
   } else {
     series_before_custom <- orig[fy_year < first_fy_in_custom_series]
-    expected_fy_sequence <- 
-      next_fy(last(.subset2(series_before_custom, "fy_year")),
-              h = 1:nrow(custom.series))
-    if (!identical(expected_fy_sequence, input_series_fys)) {
-      stopn("`", cs, "$fy_year` was\n\t",
-           deparse(input_series_fys), "\n",
-           "but should be\n\t",
-           deparse(expected_fy_sequence), ".",
-           n = -2)
-    }
-    
+
     last_obsValue_in_actual_series <- last(series_before_custom[["obsValue"]])
     custom.series[, obsValue := last_obsValue_in_actual_series * cumprod(1 + r)]
     

@@ -70,6 +70,12 @@ test_that("As applied with inflators", {
                                                 r = 1:5/100)),
                regexp = '`wage.series$fy_year` had the required financial years but not in the correct order.',
                fixed = TRUE)
+  expect_error(wage_inflator(from_fy = "2015-16", to_fy = "2019-20",
+                             forecast.series = "custom",
+                             wage.series = list(fy_year = c("2019-20", "2018-19"),
+                                                r = 1:2/100)),
+               regexp = '`wage.series$fy_year` had the required financial years but not in the correct order.',
+               fixed = TRUE)
   
   expect_error(lf_inflator_fy(from_fy = "2015-16", to_fy = "2020-21",
                               forecast.series = "custom",
