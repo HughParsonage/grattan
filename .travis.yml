@@ -1,10 +1,20 @@
 language: r
-r_build_args: --no-build-vignettes
-r_check_args: --no-multiarch --ignore-vignettes --no-vignettes
-r:
-  - oldrel
-  - release
-  - devel
+
+matrix:
+  include:
+  - r: oldrel
+    r_build_args: --no-build-vignettes
+    r_check_args: --no-multiarch --ignore-vignettes --no-vignettes
+  - r: oldrel
+    r_build_args: --no-manual
+    r_check_args: --no-multiarch --no-tests
+  - r: release
+    r_build_args: --no-build-vignettes
+    r_check_args: --no-multiarch --ignore-vignettes --no-vignettes
+  - r: devel
+    r_build_args: --no-build-vignettes
+    r_check_args: --no-multiarch --ignore-vignettes --no-vignettes
+
 
 cache: packages
 warnings_are_errors: true
@@ -19,7 +29,8 @@ after_success:
   - if [ $TRAVIS_R_VERSION_STRING == "release" ] && [ $TRAVIS_PULL_REQUEST == "false" ]; then Rscript -e 'covr::codecov(line_exclusions = c("R/zzz.R", "R/install_taxstats.R", "R/youth_allowance.R", "R/youth_unemployment.R"))'; fi
 
 after_failure:
-  - Rscript -e 'hutils::RQ("devtools", install.packages(c("devtools", "roxygen2")))'
+  - Rscript -e 'hutils::RQ("devtools", install.packages(c("roxygen2")))'
+  - Rscript -e 'hutils::RQ("roxygen2", install.packages(c("roxygen2")))'
   - Rscript -e 'devtools::test()'
   #- Rscript -e 'install.packages("taxstats", repos = "https://hughparsonage.github.io/drat/", type = "source")'
   
