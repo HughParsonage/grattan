@@ -1,3 +1,27 @@
+#' Verifying validity of financial years
+#' 
+#' @description Many functions expect financial years. 
+#' Determining that they are validly entered is often quite 
+#' computatationally costly, relative to the core calculations.
+#' These internal functions provide mechanisms to check validity
+#' quickly, while still providing clear, accurate error messages.
+#' 
+#' @param to_verify A user-provided value, purporting to be
+#' character vector of financial years.
+#' @param permitted_fys A character vector of valid financial years.
+#' @param min.yr,max.yr Integers specifying the range of \code{to_verify}.
+#' If \code{NULL}, no restriction on the upper or lower bound of the range. 
+#' 
+#' @param deparsed A string indicating the argument that the user provided.
+#' Should generally be provided explicitly as the default is unlikely 
+#' to be user-friendly.
+#' 
+#' @return \code{NULL} invisibly provided \code{to_verify} 
+#' contains financial years as specified. Otherwise an error
+#' explaining why \code{to_verify} could not be validated.
+#' 
+#' 
+
 
 
 verify_fys_permitted <- function(to_verify, permitted_fys,
@@ -73,6 +97,7 @@ verify_fys_permitted <- function(to_verify, permitted_fys,
     }
   }
 }
+
 
 
 
