@@ -125,8 +125,8 @@ wage_inflator <- function(wage = 1,
   last.quarter.in.series <- 
     wage.indices[, last(obsQtr)]
   
-  validate_fys_permitted(from_fy, min.yr = min.wage.yr)
-  validate_fys_permitted(to_fy, min.yr = min.wage.yr)
+  from_fy <- validate_fys_permitted(from_fy, min.yr = min.wage.yr)
+  to_fy <- validate_fys_permitted(to_fy, min.yr = min.wage.yr)
   
   if (max.length == 1L ||
       AND(length(from_fy) == 1L, 

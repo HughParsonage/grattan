@@ -65,7 +65,7 @@ youth_unemployment <- function(income = 0,
         "2015-16", "2016-17", "2017-18", 
         "2018-19", "2019-20", "2020-21")
     
-    validate_fys_permitted(fy.year, permitted_fys)
+    fy.year <- validate_fys_permitted(fy.year, permitted_fys)
     
   } else {
     if (length(Date) != max.length &&

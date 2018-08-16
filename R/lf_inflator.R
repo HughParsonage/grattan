@@ -79,6 +79,8 @@ lf_inflator_fy <- function(labour_force = 1,
   
   check_TF(useABSConnection)
   check_TF(allow.projection)
+  from_fy <- validate_fys_permitted(from_fy, min.yr = 1978L)
+  to_fy <- validate_fys_permitted(to_fy, min.yr = 1978L)
   
   stopifnot(use.month %between% c(1L, 12L))
   

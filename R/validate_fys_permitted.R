@@ -16,46 +16,117 @@
 #' Should generally be provided explicitly as the default is unlikely 
 #' to be user-friendly.
 #' 
-#' @return \code{NULL} invisibly provided \code{to_verify} 
-#' contains financial years as specified. Otherwise an error
-#' explaining why \code{to_verify} could not be validated.
+#' @return If \code{to_verify} contains valid financial years
+#' they are returned all in the form \code{2013-14}. If they were
+#' already in that form, they obtain the following attributes:
+#' \describe{
+#' \item{\code{grattan_all_fy}}{\code{TRUE} if all the financial years are valid.}
+#' \item{\code{grattan_min_fy}}{An integer, the earliest year ending in \code{to_verify}.}
+#' \item{\code{grattan_max_fy}}{An integer, the latest year ending in \code{to_verify}.}
+#' }
+#' 
 #' 
 #' 
 
 
 
 validate_fys_permitted <- function(to_verify, permitted_fys,
-                                 min.yr = NULL, max.yr = NULL,
-                                 deparsed = deparse(substitute(to_verify))) {
+                                   min.yr = NULL, max.yr = NULL,
+                                   deparsed = deparse(substitute(to_verify))) {
+  if (isTRUE(attr(to_verify, "grattan_all_fy"))) {
+    # If min.yr and max.yr are fine, we're done
+    if (is.null(min.yr) && is.null(max.yr)) {
+      return(to_verify)
+    }
+    
+    # Otherwise we just have to check the ranges: either the ranges
+    # are no good (in which case error), or return to_verify
+    
+    # min
+    if (!is.null(min.yr)) {
+      
+      # Unlikely (misspecified), but should assert
+      if (is.null(attr(to_verify, "grattan_min_yr"))) {
+        min_to_verify_yr <- min_fy2yr(to_verify)
+        setattr(to_verify, "grattan_min_yr", min_to_verify_yr)
+      }
+      
+      if (min.yr > attr(to_verify, "grattan_min_yr")) {
+        min.k <- min.yr - 1900L
+        stop("`", deparsed, "` contains ",
+             fys1901[attr(to_verify, "grattan_min_yr") - 1900L],
+             " which ",
+             "is earlier than the earliest permitted ",
+             "financial year: ", '"', fys1901[min.k], ".")
+      }
+    }
+    
+    # max
+    if (!is.null(max.yr)) {
+      
+      # Unlikely (misspecified), but should assert
+      if (is.null(attr(to_verify, "grattan_max_yr"))) {
+        max_to_verify_yr <- max_fy2yr(to_verify)
+        setattr(to_verify, "grattan_max_yr", max_to_verify_yr)
+      }
+      
+      if (max.yr > attr(to_verify, "grattan_max_yr")) {
+        max.k <- max.yr - 1900L
+        stop("`", deparsed, "` contains ",
+             fys1901[attr(to_verify, "grattan_max_yr") - 1900L],
+             " which ",
+             "is later than the latest permitted ",
+             "financial year: ", '"', fys1901[max.k], ".")
+      }
+    }
+    
+    return(to_verify)
+  }
+  
+  
   fy.year <- to_verify
   if (missing(permitted_fys)) {
     if (anyNA(fmatches <- fmatch(to_verify, fys1901))) {
-      first_bad <- which.max(is.na(fmatches))
+      if (all(are_fy <- is.fy(to_verify) & is.na(fmatches))) {
+        nchar_to_verify <- nchar(to_verify)
+        out <- sprintf("%s-%s",
+                       substr(to_verify, 1L, 4L),
+                       substr(to_verify, nchar_to_verify - 1L, nchar_to_verify))
+        return(out)
+      }
+      first_bad <- which.max(are_fy)
       stop("`", deparsed, "` contains ", '"',
            to_verify[first_bad], '",', " which ",
            "is not a valid FY.")
     } else {
+      setattr(to_verify, "grattan_all_fy", TRUE)
+      setattr(to_verify, "grattan_min_fy", NA_integer_)
+      setattr(to_verify, "grattan_max_fy", NA_integer_)
       if (!is.null(min.yr)) {
         min.k <- min.yr - 1900L
-        if (min(fmatches) < min.k) {
+        min_fmatches <- min(fmatches)
+        if (min_fmatches < min.k) {
           first_bad <- which.min(fmatches)
           stop("`", deparsed, "` contains ",
                to_verify[first_bad], " which ",
                "is earlier than the earliest permitted ",
                "financial year: ", '"', fys1901[min.k], ".")
         }
+        setattr(to_verify, "grattan_min_fy", min_fmatches + 1900L)
       }
       if (!is.null(max.yr)) {
         max.k <- max.yr - 1900L
-        if (max(fmatches) > max.k) {
+        max_fmatches <- max(fmatches)
+        if (max_fmatches > max.k) {
           first_bad <- which.max(fmatches)
           stop("`", deparsed, "` contains ",
                to_verify[first_bad], " which ",
                "is later than the latest permitted ",
                "financial year: ", '"', fys1901[max.k], ".")
         }
+        setattr(to_verify, "grattan_max_fy", max_fmatches + 1900L)
       }
-      return(invisible(NULL))
+      return(invisible(to_verify))
     }
   }
   
@@ -96,6 +167,7 @@ validate_fys_permitted <- function(to_verify, permitted_fys,
            "at position ", i1)
     }
   }
+  return(to_verify)
 }
 
 

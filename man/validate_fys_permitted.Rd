@@ -21,9 +21,14 @@ Should generally be provided explicitly as the default is unlikely
 to be user-friendly.}
 }
 \value{
-\code{NULL} invisibly provided \code{to_verify} 
-contains financial years as specified. Otherwise an error
-explaining why \code{to_verify} could not be validated.
+If \code{to_verify} contains valid financial years
+they are returned all in the form \code{2013-14}. If they were
+already in that form, they obtain the following attributes:
+\describe{
+\item{\code{grattan_all_fy}}{\code{TRUE} if all the financial years are valid.}
+\item{\code{grattan_min_fy}}{An integer, the earliest year ending in \code{to_verify}.}
+\item{\code{grattan_max_fy}}{An integer, the latest year ending in \code{to_verify}.}
+}
 }
 \description{
 Many functions expect financial years. 

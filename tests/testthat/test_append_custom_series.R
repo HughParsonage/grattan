@@ -11,7 +11,8 @@ test_that("Errors don't refer to internal helper functions", {
                             to_fy = "2020-21",
                             forecast.series = "custom"),
              error = function(e) {
-               paste0(as.character(deparse(e$c)))
+               paste0(as.character(deparse(e$c)),
+                      collapse = " ")
              })
   expect_false(grepl("append_custom_series", Call))
   expect_false(grepl("standardize_custom_series", Call))
