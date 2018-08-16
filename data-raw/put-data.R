@@ -239,7 +239,8 @@ lf_trend <-
       as.data.table %T>%
       {stopifnot(nrow(.) > 0)} %>%
       .[, .(obsTime, obsValue = as.integer(obsValue * 1000))] %T>%
-      fwrite("./data-raw/lf-trend.tsv", sep = "\t")
+      fwrite("./data-raw/lf-trend.tsv", sep = "\t") %>%
+      .[]
   }, 
   error = function(e){
     data.table::fread("./data-raw/lf-trend.tsv" 
