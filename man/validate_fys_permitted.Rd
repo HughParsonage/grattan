@@ -6,7 +6,9 @@
 \usage{
 validate_fys_permitted(to_verify, permitted_fys, min.yr = NULL,
   max.yr = NULL, deparsed = deparse(substitute(to_verify)),
-  allow.projection = TRUE)
+  allow.projection = TRUE,
+  earliest_permitted_financial_year = "earliest permitted financial year",
+  latest_permitted_financial_year = "latest permitted financial year")
 }
 \arguments{
 \item{to_verify}{A user-provided value, purporting to be
@@ -20,6 +22,8 @@ If \code{NULL}, no restriction on the upper or lower bound of the range.}
 \item{deparsed}{A string indicating the argument that the user provided.
 Should generally be provided explicitly as the default is unlikely 
 to be user-friendly.}
+
+\item{allow.projection}{If \code{FALSE} emit a different error message.}
 }
 \value{
 If \code{to_verify} contains valid financial years

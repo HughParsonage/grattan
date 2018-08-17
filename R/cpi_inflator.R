@@ -119,9 +119,9 @@ cpi_inflator <- function(from_nominal_price = 1,
   earliest_from_fy <- permitted_fys[[1L]]
   cpi_table_nom <-
     switch(adjustment, 
-           "none" = "unadjusted",
-           "seasonal" = "seasonally adjusted",
-           "trimmed.mean" = "trimmed mean")
+           "none" = "first instance of the unadjusted CPI", 
+           "seasonal" = "first instance of the seasonally adjusted CPI",
+           "trimmed.mean" = "first instance of the trimmed mean CPI")
   
   the_min.yr <-
     switch(adjustment, 
@@ -139,12 +139,14 @@ cpi_inflator <- function(from_nominal_price = 1,
                                     # else 2050L because we will need max year later
                                     max.yr = if (!allow.projection) the_max.yr else 2050L,
                                     deparsed = "from_fy", 
-                                    allow.projection = allow.projection)
+                                    allow.projection = allow.projection,
+                                    earliest_permitted_financial_year = cpi_table_nom)
   to_fy <- validate_fys_permitted(to_fy,
                                   min.yr = the_min.yr,
                                   max.yr = if (!allow.projection) the_max.yr else 2050L,
                                   deparsed = "to_fy", 
-                                  allow.projection = allow.projection)
+                                  allow.projection = allow.projection,
+                                  earliest_permitted_financial_year = cpi_table_nom)
   
   if (max_fy2yr(to_fy) > the_max.yr || 
       max_fy2yr(from_fy) > the_max.yr) {

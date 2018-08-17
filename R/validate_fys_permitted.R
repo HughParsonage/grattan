@@ -15,6 +15,7 @@
 #' @param deparsed A string indicating the argument that the user provided.
 #' Should generally be provided explicitly as the default is unlikely 
 #' to be user-friendly.
+#' @param allow.projection If \code{FALSE} emit a different error message.
 #' 
 #' @return If \code{to_verify} contains valid financial years
 #' they are returned all in the form \code{2013-14}. If they were
@@ -33,7 +34,9 @@
 validate_fys_permitted <- function(to_verify, permitted_fys,
                                    min.yr = NULL, max.yr = NULL,
                                    deparsed = deparse(substitute(to_verify)),
-                                   allow.projection = TRUE) {
+                                   allow.projection = TRUE,
+                                   earliest_permitted_financial_year = "earliest permitted financial year",
+                                   latest_permitted_financial_year = "latest permitted financial year") {
   
   if (!is.character(to_verify)) {
     stopn("`", deparsed, "` was type ", typeof(to_verify), ", ",
@@ -66,11 +69,14 @@ validate_fys_permitted <- function(to_verify, permitted_fys,
       
       if (min.yr > attr(to_verify, "grattan_min_yr")) {
         min.k <- min.yr - 1900L
-        stopn("`", deparsed, "` contains ",
-              fys1901[attr(to_verify, "grattan_min_yr") - 1900L],
+        stopn("`", deparsed, 
+              if (length(to_verify) == 1L) " = " else "` contained ",
+              '"', fys1901[attr(to_verify, "grattan_min_yr") - 1900L], '"',
+              if (length(to_verify) == 1L) "`",
               " which ",
-              "is earlier than the earliest permitted ",
-              "financial year: ", '"', fys1901[min.k], '"', ".")
+              "is earlier than the ",
+              earliest_permitted_financial_year,
+              ": ", '"', fys1901[min.k], '"', ".")
       }
     }
     
@@ -86,11 +92,14 @@ validate_fys_permitted <- function(to_verify, permitted_fys,
       if (max.yr < attr(to_verify, "grattan_max_yr")) {
         max.k <- max.yr - 1900L
         stopn(if (!allow.projection) "`allow.projection = FALSE`, yet ",
-              "`", deparsed, "` contains ",
-              fys1901[attr(to_verify, "grattan_max_yr") - 1900L],
+              "`", deparsed,
+              if (length(to_verify) == 1L) " = " else "` contained ",
+              '"', fys1901[attr(to_verify, "grattan_max_yr") - 1900L], '"',
+              if (length(to_verify) == 1L) "`",
               " which ",
-              "is later than the latest permitted ",
-              "financial year: ", '"', fys1901[min.k], '"', ".")
+              "is later than the ",
+              latest_permitted_financial_year,
+              ": ", '"', fys1901[min.k], '"', ".")
       }
     }
     
@@ -108,10 +117,12 @@ validate_fys_permitted <- function(to_verify, permitted_fys,
                        substr(to_verify, nchar_to_verify - 1L, nchar_to_verify))
         return(out)
       }
-      first_bad <- which.max(are_fy)
-      stopn("`", deparsed, "` contains ", '"',
-            to_verify[first_bad], '",', " which ",
-            "is not a valid FY.")
+      first_bad <- which.min(are_fy)
+      stopn("`", deparsed, 
+            if (length(to_verify) == 1L) " = " else "` contained ",
+            '"', to_verify[first_bad], '"',
+            if (length(to_verify) == 1L) "` was " else " which is ",
+            "not a valid financial year.")
     } else {
       attr(to_verify, "grattan_all_fy") <- TRUE
       if (!is.null(min.yr)) {
@@ -119,10 +130,14 @@ validate_fys_permitted <- function(to_verify, permitted_fys,
         min_fmatches <- min(fmatches)
         if (min_fmatches < min.k) {
           first_bad <- which.min(fmatches)
-          stopn("`", deparsed, "` contains ",
-                to_verify[first_bad], " which ",
-                "is earlier than the earliest permitted ",
-                "financial year: ", '"', fys1901[min.k], '"', ".")
+          stopn("`", deparsed,
+                if (length(to_verify) == 1L) " = " else "` contained ",
+                '"', to_verify[first_bad], '"',
+                if (length(to_verify) == 1L) "`",
+                " which ",
+                "is earlier than the ",
+                earliest_permitted_financial_year,
+                ": ", '"', fys1901[min.k], '"', ".")
         }
         attr(to_verify, "grattan_min_yr") <- min_fmatches + 1900L
       }
@@ -132,10 +147,14 @@ validate_fys_permitted <- function(to_verify, permitted_fys,
         if (max_fmatches > max.k) {
           first_bad <- which.max(fmatches)
           stopn(if (!allow.projection) "`allow.projection = FALSE`, yet ",
-                "`", deparsed, "` contains ",
-                to_verify[first_bad], " which ",
-                "is later than the latest permitted ",
-                "financial year: ", '"', fys1901[max.k], '"', ".")
+                "`", deparsed,
+                if (length(to_verify) == 1L) " = " else "` contained ",
+                '"', to_verify[first_bad], '"',
+                if (length(to_verify) == 1L) "`",
+                " which ",
+                "is later than the ",
+                latest_permitted_financial_year,
+                ": ", '"', fys1901[max.k], '"', ".")
         }
         attr(to_verify, "grattan_max_yr") <-  max_fmatches + 1900L
       }
@@ -158,7 +177,7 @@ validate_fys_permitted <- function(to_verify, permitted_fys,
               "at position ", i)
       } else {
         if (length(fy.year) == 1L) {
-          stopn("`", deparsed, "` set to '", fy.year, "', which is not a valid FY. ",
+          stopn("`", deparsed, "` set to '", fy.year, "', was not a valid financial year. ",
                 "Select a valid fy.year between ",
                 permitted_fys[1], " and ", last(permitted_fys), ".")
         } else {
