@@ -87,7 +87,7 @@ validate_fys_permitted <- function(to_verify, permitted_fys,
   fy.year <- to_verify
   if (missing(permitted_fys)) {
     if (anyNA(fmatches <- fmatch(to_verify, fys1901))) {
-      if (all(are_fy <- is.fy(to_verify) & is.na(fmatches))) {
+      if (all(are_fy <- is.fy(to_verify))) {
         nchar_to_verify <- nchar(to_verify)
         out <- sprintf("%s-%s",
                        substr(to_verify, 1L, 4L),
@@ -100,8 +100,6 @@ validate_fys_permitted <- function(to_verify, permitted_fys,
            "is not a valid FY.")
     } else {
       attr(to_verify, "grattan_all_fy") <- TRUE
-      attr(to_verify, "grattan_min_yr") <- NA_integer_
-      attr(to_verify, "grattan_max_yr") <- NA_integer_
       if (!is.null(min.yr)) {
         min.k <- min.yr - 1900L
         min_fmatches <- min(fmatches)

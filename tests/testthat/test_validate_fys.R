@@ -22,10 +22,18 @@ test_that("Error handling", {
 test_that("min or max years", {
   expect_error(validate_fys_permitted("1980-81", min.yr = 1982L))
   expect_error(validate_fys_permitted("1980-81", max.yr = 1979L))
-  expect_null(validate_fys_permitted("1980-81", max.yr = 1982L))
-  expect_null(validate_fys_permitted("1984-85", min.yr = 1982L, max.yr = 1989L))
+  expect_equal(validate_fys_permitted("1980-81", max.yr = 1982L), "1980-81", check.attributes = FALSE)
+  expect_equal(validate_fys_permitted("1984-85", min.yr = 1982L, max.yr = 1989L), "1984-85", check.attributes = FALSE)
   expect_error(validate_fys_permitted(c("1980-81", "1980-80"), min.yr = 1980L),
                regexp = "not a valid FY")
+})
+
+test_that("validation of other types", {
+  expect_equal(validate_fys_permitted("1980 81"), "1980-81")
+  expect_equal(validate_fys_permitted("198081"), "1980-81")
+  v <- c("2015-16", "2015 16", "201516", "201516", "2003-04", "2004 05")
+  a <- c("2015-16", "2015-16", "2015-16", "2015-16", "2003-04", "2004-05")
+  expect_equal(validate_fys_permitted(v), a)
 })
 
 
