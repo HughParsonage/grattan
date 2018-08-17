@@ -62,7 +62,7 @@ if (FALSE) {
     
     change_pngs <- function(html) {
       html_lines <- readr::read_lines(html)
-      for (i in grep("((Budget2018.atlas)|(budget.2018_files)).*\\.png", html_lines)) {
+      for (i in grep("((Budget2018.atlas)|(budget.2018_files)|(compare.30.37.42.thresholds.1)).*\\.png", html_lines)) {
         html_lines[i] <- sub(".png", ".svg", html_lines[i], fixed = TRUE)
       }
       readr::write_lines(html_lines, html)
@@ -71,13 +71,11 @@ if (FALSE) {
                          pattern = "\\.html$", 
                          full.names = TRUE), 
                      change_pngs))
+    invisible(lapply(dir(path = "~/grattandocs/", 
+                         pattern = "\\.html$", 
+                         full.names = TRUE), 
+                     change_pngs))
     (all(vapply(dir(path = "~/grattan/vignettes/long-vignettes/",
-                             full.names = TRUE,
-                             recursive = TRUE,
-                             pattern = "\\.png$"),
-                         file.remove,
-                         FALSE)))
-    (all(vapply(dir(path = "~/grattan/docs/articles/long-vignettes/",
                              full.names = TRUE,
                              recursive = TRUE,
                              pattern = "\\.png$"),

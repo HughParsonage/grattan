@@ -85,7 +85,7 @@
       <h1>Budget 2018 modelling</h1>
                         <h4 class="author">Hugh Parsonage</h4>
             
-            <h4 class="date">2018-08-16</h4>
+            <h4 class="date">2018-08-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/HughParsonage/grattan/blob/master/vignettes/long-vignettes/vignettes/long-vignettes/budget-2018.Rmd"><code>vignettes/long-vignettes/vignettes/long-vignettes/budget-2018.Rmd</code></a></small>
       <div class="hidden name"><code>budget-2018.Rmd</code></div>
@@ -167,7 +167,7 @@ fwrite &lt;-<span class="st"> </span><span class="cf">function</span>(x, file, .
 templib &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
 hutils<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/hutils/topics/provide.dir">provide.dir</a></span>(templib)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(grattan)
-<span class="co">#&gt; Last change: NAMESPACE at 2018-08-16 17:01:28 (1 hours ago).</span></code></pre></div>
+<span class="co">#&gt; Last change: NAMESPACE at 2018-08-18 02:26:30 (44 mins ago).</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ntile &lt;-<span class="st"> </span><span class="cf">function</span>(x, n) {
   <span class="cf">if</span> (<span class="kw">requireNamespace</span>(<span class="st">"dplyr"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {
     dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/ranking.html">ntile</a></span>(x, n)
@@ -741,12 +741,12 @@ x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1
 <td align="right">-4.4</td>
 <td align="right">-6.6</td>
 <td align="right">-8.9</td>
-<td align="right">-11.4</td>
-<td align="right">-14.0</td>
-<td align="right">-16.6</td>
-<td align="right">-19.4</td>
-<td align="right">-22.4</td>
-<td align="right">-25.4</td>
+<td align="right">-11.3</td>
+<td align="right">-13.9</td>
+<td align="right">-16.5</td>
+<td align="right">-19.3</td>
+<td align="right">-22.2</td>
+<td align="right">-25.2</td>
 </tr>
 <tr class="odd">
 <td align="left">Budget2018_just_rates</td>
@@ -754,25 +754,25 @@ x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1
 <td align="right">-0.5</td>
 <td align="right">-0.6</td>
 <td align="right">-0.6</td>
-<td align="right">-9.2</td>
+<td align="right">-9.1</td>
 <td align="right">-9.6</td>
-<td align="right">-15.5</td>
-<td align="right">-16.3</td>
-<td align="right">-17.1</td>
-<td align="right">-17.9</td>
+<td align="right">-15.4</td>
+<td align="right">-16.2</td>
+<td align="right">-17.0</td>
+<td align="right">-17.8</td>
 </tr>
 <tr class="even">
 <td align="left">Budget2018_lamington_et_LITO</td>
 <td align="right">-3.7</td>
 <td align="right">-3.9</td>
 <td align="right">-4.0</td>
-<td align="right">-4.2</td>
+<td align="right">-4.1</td>
 <td align="right">-0.8</td>
 <td align="right">-0.8</td>
 <td align="right">-0.9</td>
 <td align="right">-0.9</td>
 <td align="right">-1.0</td>
-<td align="right">-1.1</td>
+<td align="right">-1.0</td>
 </tr>
 <tr class="odd">
 <td align="left">Budget2018</td>
@@ -781,11 +781,11 @@ x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1
 <td align="right">-4.4</td>
 <td align="right">-4.6</td>
 <td align="right">-9.7</td>
-<td align="right">-10.2</td>
+<td align="right">-10.1</td>
 <td align="right">-16.0</td>
-<td align="right">-16.8</td>
-<td align="right">-17.6</td>
-<td align="right">-18.5</td>
+<td align="right">-16.7</td>
+<td align="right">-17.5</td>
+<td align="right">-18.3</td>
 </tr>
 <tr class="even">
 <td align="left">Budget2018_Step1and2</td>
@@ -794,24 +794,24 @@ x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1
 <td align="right">-4.4</td>
 <td align="right">-4.6</td>
 <td align="right">-9.7</td>
-<td align="right">-10.2</td>
-<td align="right">-10.6</td>
+<td align="right">-10.1</td>
+<td align="right">-10.5</td>
 <td align="right">-11.0</td>
-<td align="right">-11.5</td>
-<td align="right">-12.0</td>
+<td align="right">-11.4</td>
+<td align="right">-11.9</td>
 </tr>
 <tr class="odd">
 <td align="left">ALP2018</td>
-<td align="right">-6.9</td>
+<td align="right">-6.8</td>
 <td align="right">-7.1</td>
 <td align="right">-7.3</td>
-<td align="right">-7.6</td>
+<td align="right">-7.5</td>
 <td align="right">-16.2</td>
-<td align="right">-16.8</td>
-<td align="right">-17.4</td>
-<td align="right">-18.0</td>
-<td align="right">-18.5</td>
-<td align="right">-19.1</td>
+<td align="right">-16.7</td>
+<td align="right">-17.3</td>
+<td align="right">-17.8</td>
+<td align="right">-18.4</td>
+<td align="right">-19.0</td>
 </tr>
 </tbody>
 </table>
@@ -851,12 +851,12 @@ x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1
 <td align="right">-4.4</td>
 <td align="right">-6.7</td>
 <td align="right">-9.1</td>
-<td align="right">-11.7</td>
-<td align="right">-14.4</td>
-<td align="right">-17.3</td>
-<td align="right">-20.3</td>
-<td align="right">-23.5</td>
-<td align="right">-26.9</td>
+<td align="right">-11.6</td>
+<td align="right">-14.3</td>
+<td align="right">-17.2</td>
+<td align="right">-20.2</td>
+<td align="right">-23.3</td>
+<td align="right">-26.7</td>
 </tr>
 <tr class="odd">
 <td align="left">Budget2018_just_rates</td>
@@ -865,11 +865,11 @@ x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1
 <td align="right">-0.6</td>
 <td align="right">-0.6</td>
 <td align="right">-9.5</td>
-<td align="right">-10.1</td>
-<td align="right">-16.7</td>
-<td align="right">-17.8</td>
-<td align="right">-19.0</td>
-<td align="right">-20.1</td>
+<td align="right">-10.0</td>
+<td align="right">-16.6</td>
+<td align="right">-17.7</td>
+<td align="right">-18.8</td>
+<td align="right">-19.9</td>
 </tr>
 <tr class="even">
 <td align="left">Budget2018_lamington_et_LITO</td>
@@ -888,40 +888,40 @@ x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1
 <td align="left">Budget2018</td>
 <td align="right">-4.1</td>
 <td align="right">-4.3</td>
-<td align="right">-4.5</td>
+<td align="right">-4.4</td>
 <td align="right">-4.6</td>
-<td align="right">-10.1</td>
-<td align="right">-10.6</td>
-<td align="right">-17.3</td>
-<td align="right">-18.3</td>
-<td align="right">-19.5</td>
-<td align="right">-20.6</td>
+<td align="right">-10.0</td>
+<td align="right">-10.5</td>
+<td align="right">-17.1</td>
+<td align="right">-18.2</td>
+<td align="right">-19.3</td>
+<td align="right">-20.4</td>
 </tr>
 <tr class="even">
 <td align="left">Budget2018_Step1and2</td>
 <td align="right">-4.1</td>
 <td align="right">-4.3</td>
-<td align="right">-4.5</td>
+<td align="right">-4.4</td>
 <td align="right">-4.6</td>
-<td align="right">-10.1</td>
-<td align="right">-10.6</td>
+<td align="right">-10.0</td>
+<td align="right">-10.5</td>
 <td align="right">-11.1</td>
-<td align="right">-11.7</td>
-<td align="right">-12.3</td>
-<td align="right">-12.8</td>
+<td align="right">-11.6</td>
+<td align="right">-12.2</td>
+<td align="right">-12.7</td>
 </tr>
 <tr class="odd">
 <td align="left">ALP2018</td>
 <td align="right">-6.9</td>
 <td align="right">-7.1</td>
-<td align="right">-7.4</td>
-<td align="right">-7.6</td>
-<td align="right">-16.6</td>
-<td align="right">-17.2</td>
-<td align="right">-17.9</td>
-<td align="right">-18.6</td>
-<td align="right">-19.3</td>
-<td align="right">-19.9</td>
+<td align="right">-7.3</td>
+<td align="right">-7.5</td>
+<td align="right">-16.5</td>
+<td align="right">-17.1</td>
+<td align="right">-17.8</td>
+<td align="right">-18.4</td>
+<td align="right">-19.1</td>
+<td align="right">-19.8</td>
 </tr>
 </tbody>
 </table>
@@ -960,13 +960,13 @@ x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1
 <td align="right">-2.2</td>
 <td align="right">-4.3</td>
 <td align="right">-6.5</td>
-<td align="right">-8.8</td>
+<td align="right">-8.7</td>
 <td align="right">-11.1</td>
-<td align="right">-13.5</td>
-<td align="right">-16.0</td>
-<td align="right">-18.5</td>
-<td align="right">-21.2</td>
-<td align="right">-23.8</td>
+<td align="right">-13.4</td>
+<td align="right">-15.9</td>
+<td align="right">-18.4</td>
+<td align="right">-21.0</td>
+<td align="right">-23.7</td>
 </tr>
 <tr class="odd">
 <td align="left">Budget2018_just_rates</td>
@@ -976,9 +976,9 @@ x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1
 <td align="right">-0.6</td>
 <td align="right">-8.8</td>
 <td align="right">-9.1</td>
-<td align="right">-14.3</td>
-<td align="right">-14.8</td>
-<td align="right">-15.3</td>
+<td align="right">-14.2</td>
+<td align="right">-14.7</td>
+<td align="right">-15.2</td>
 <td align="right">-15.7</td>
 </tr>
 <tr class="even">
@@ -986,12 +986,12 @@ x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1
 <td align="right">-3.7</td>
 <td align="right">-3.9</td>
 <td align="right">-4.0</td>
-<td align="right">-4.2</td>
+<td align="right">-4.1</td>
 <td align="right">-0.8</td>
 <td align="right">-0.9</td>
 <td align="right">-0.9</td>
 <td align="right">-1.0</td>
-<td align="right">-1.1</td>
+<td align="right">-1.0</td>
 <td align="right">-1.1</td>
 </tr>
 <tr class="odd">
@@ -1017,21 +1017,21 @@ x &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1
 <td align="right">-9.7</td>
 <td align="right">-10.0</td>
 <td align="right">-10.3</td>
-<td align="right">-10.7</td>
-<td align="right">-11.0</td>
+<td align="right">-10.6</td>
+<td align="right">-10.9</td>
 </tr>
 <tr class="odd">
 <td align="left">ALP2018</td>
-<td align="right">-6.9</td>
+<td align="right">-6.8</td>
 <td align="right">-7.1</td>
 <td align="right">-7.3</td>
 <td align="right">-7.5</td>
-<td align="right">-15.9</td>
+<td align="right">-15.8</td>
 <td align="right">-16.3</td>
-<td align="right">-16.8</td>
-<td align="right">-17.3</td>
-<td align="right">-17.7</td>
-<td align="right">-18.2</td>
+<td align="right">-16.7</td>
+<td align="right">-17.2</td>
+<td align="right">-17.6</td>
+<td align="right">-18.0</td>
 </tr>
 </tbody>
 </table>
@@ -1626,7 +1626,7 @@ ShareTaxPaid_by_Percentile_id &lt;-<span class="st"> </span>
 <td align="right">0.80%</td>
 <td align="right">0.4%</td>
 <td align="right">0.4%</td>
-<td align="right">0.70%</td>
+<td align="right">0.69%</td>
 </tr>
 <tr class="even">
 <td align="right">4</td>
@@ -1634,7 +1634,7 @@ ShareTaxPaid_by_Percentile_id &lt;-<span class="st"> </span>
 <td align="right">2.26%</td>
 <td align="right">1.6%</td>
 <td align="right">1.7%</td>
-<td align="right">2.10%</td>
+<td align="right">2.09%</td>
 </tr>
 <tr class="odd">
 <td align="right">5</td>
@@ -1642,7 +1642,7 @@ ShareTaxPaid_by_Percentile_id &lt;-<span class="st"> </span>
 <td align="right">4.30%</td>
 <td align="right">3.4%</td>
 <td align="right">3.5%</td>
-<td align="right">4.13%</td>
+<td align="right">4.12%</td>
 </tr>
 <tr class="even">
 <td align="right">6</td>
@@ -1650,7 +1650,7 @@ ShareTaxPaid_by_Percentile_id &lt;-<span class="st"> </span>
 <td align="right">6.38%</td>
 <td align="right">5.8%</td>
 <td align="right">5.8%</td>
-<td align="right">6.27%</td>
+<td align="right">6.26%</td>
 </tr>
 <tr class="odd">
 <td align="right">7</td>
@@ -1658,11 +1658,11 @@ ShareTaxPaid_by_Percentile_id &lt;-<span class="st"> </span>
 <td align="right">8.92%</td>
 <td align="right">8.5%</td>
 <td align="right">8.6%</td>
-<td align="right">8.86%</td>
+<td align="right">8.85%</td>
 </tr>
 <tr class="even">
 <td align="right">8</td>
-<td align="right">12.21%</td>
+<td align="right">12.20%</td>
 <td align="right">12.33%</td>
 <td align="right">12.1%</td>
 <td align="right">12.1%</td>
@@ -1681,8 +1681,8 @@ ShareTaxPaid_by_Percentile_id &lt;-<span class="st"> </span>
 <td align="right">47.49%</td>
 <td align="right">47.34%</td>
 <td align="right">50.4%</td>
-<td align="right">50.3%</td>
-<td align="right">47.98%</td>
+<td align="right">50.2%</td>
+<td align="right">48.00%</td>
 </tr>
 </tbody>
 </table>
@@ -2162,38 +2162,38 @@ alternative <span class="op">%&gt;%</span>
 <tr class="odd">
 <td align="right">5</td>
 <td align="left">$11,000</td>
-<td align="right">0.0439236</td>
-<td align="right">0.0001498</td>
+<td align="right">0.0442389</td>
+<td align="right">0.0001509</td>
 </tr>
 <tr class="even">
 <td align="right">6</td>
 <td align="left">$24,000</td>
-<td align="right">3.5005576</td>
-<td align="right">0.0119370</td>
+<td align="right">3.5035860</td>
+<td align="right">0.0119476</td>
 </tr>
 <tr class="odd">
 <td align="right">7</td>
 <td align="left">$37,000</td>
-<td align="right">10.6327907</td>
-<td align="right">0.0362581</td>
+<td align="right">10.6512998</td>
+<td align="right">0.0363220</td>
 </tr>
 <tr class="even">
 <td align="right">8</td>
 <td align="left">$50,000</td>
-<td align="right">25.3770502</td>
-<td align="right">0.0865364</td>
+<td align="right">25.3818279</td>
+<td align="right">0.0865546</td>
 </tr>
 <tr class="odd">
 <td align="right">9</td>
 <td align="left">$68,000</td>
-<td align="right">48.0165651</td>
-<td align="right">0.1637377</td>
+<td align="right">48.0562017</td>
+<td align="right">0.1638765</td>
 </tr>
 <tr class="even">
 <td align="right">10</td>
 <td align="left">$98,000</td>
-<td align="right">205.6820741</td>
-<td align="right">0.7013811</td>
+<td align="right">205.6092365</td>
+<td align="right">0.7011484</td>
 </tr>
 </tbody>
 </table>
@@ -2238,38 +2238,38 @@ alternative <span class="op">%&gt;%</span>
 <tr class="odd">
 <td align="right">5</td>
 <td align="left">$11,000</td>
-<td align="right">670889</td>
-<td align="right">0.0001142</td>
+<td align="right">675356</td>
+<td align="right">0.0001150</td>
 </tr>
 <tr class="even">
 <td align="right">6</td>
 <td align="left">$24,000</td>
-<td align="right">55497643</td>
-<td align="right">0.0094492</td>
+<td align="right">55572723</td>
+<td align="right">0.0094620</td>
 </tr>
 <tr class="odd">
 <td align="right">7</td>
 <td align="left">$37,000</td>
-<td align="right">167455755</td>
-<td align="right">0.0285116</td>
+<td align="right">167619563</td>
+<td align="right">0.0285395</td>
 </tr>
 <tr class="even">
 <td align="right">8</td>
 <td align="left">$50,000</td>
-<td align="right">438453834</td>
-<td align="right">0.0746527</td>
+<td align="right">438633192</td>
+<td align="right">0.0746833</td>
 </tr>
 <tr class="odd">
 <td align="right">9</td>
 <td align="left">$68,000</td>
-<td align="right">854728071</td>
-<td align="right">0.1455291</td>
+<td align="right">855676748</td>
+<td align="right">0.1456906</td>
 </tr>
 <tr class="even">
 <td align="right">10</td>
 <td align="left">$98,000</td>
-<td align="right">4356439737</td>
-<td align="right">0.7417431</td>
+<td align="right">4355068347</td>
+<td align="right">0.7415096</td>
 </tr>
 </tbody>
 </table>
@@ -2541,7 +2541,7 @@ bound_models_with_timings &lt;-<span class="st"> </span>
 <span class="co">#&gt;  language (EN)                        </span>
 <span class="co">#&gt;  collate  English_Australia.1252      </span>
 <span class="co">#&gt;  tz       Australia/Sydney            </span>
-<span class="co">#&gt;  date     2018-08-16</span>
+<span class="co">#&gt;  date     2018-08-18</span>
 <span class="co">#&gt; Packages ----------------------------------------------------------------------------------------------------</span>
 <span class="co">#&gt;  package        * version    date       source        </span>
 <span class="co">#&gt;  assertthat       0.2.0      2017-04-11 CRAN (R 3.5.1)</span>
@@ -2570,7 +2570,7 @@ bound_models_with_timings &lt;-<span class="st"> </span>
 <span class="co">#&gt;  ggrepel        * 0.8.0      2018-05-09 CRAN (R 3.5.1)</span>
 <span class="co">#&gt;  glue             1.3.0      2018-07-17 CRAN (R 3.5.1)</span>
 <span class="co">#&gt;  graphics       * 3.5.1      2018-07-02 local         </span>
-<span class="co">#&gt;  grattan        * 1.6.1.0    2018-08-16 local         </span>
+<span class="co">#&gt;  grattan        * 1.6.1.0    2018-08-17 local         </span>
 <span class="co">#&gt;  grattanCharts  * 0.9.0      2018-08-13 local         </span>
 <span class="co">#&gt;  grDevices      * 3.5.1      2018-07-02 local         </span>
 <span class="co">#&gt;  grid             3.5.1      2018-07-02 local         </span>
@@ -2630,7 +2630,7 @@ bound_models_with_timings &lt;-<span class="st"> </span>
 <span class="co">#&gt;  xts              0.11-0     2018-07-16 CRAN (R 3.5.1)</span>
 <span class="co">#&gt;  yaml             2.2.0      2018-07-25 CRAN (R 3.5.1)</span>
 <span class="co">#&gt;  zoo              1.8-3      2018-07-16 CRAN (R 3.5.1)</span></code></pre></div>
-<p>Finished in 39.</p>
+<p>Finished in 38.</p>
 </div>
   </div>
 
