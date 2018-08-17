@@ -43,6 +43,7 @@ Suggests:
     knitr,
     lattice,
     mgcv,
+    rlang,
     rmarkdown,
     scales,
     survey,

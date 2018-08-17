@@ -25,6 +25,8 @@ test_that("Other fy utils", {
 
 test_that("all_fy", {
   expect_true(all_fy(c("2000-01", "2010-11", "2013-14", "2020-21")))
+  expect_true(all_fy(c("2000-01", "2010-11", "2013-14", "2020-21"),
+                     permitted = c("2000-01", "2010-11", "2013-14", "2020-21")))
 })
 
 test_that("is_fy2", {

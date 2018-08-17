@@ -41,6 +41,8 @@ test_that("Validation memoization", {
   y <- c("2014-15", "2015-16")
   x <- validate_fys_permitted(y)
   expect_equal(x, y, check.attributes = FALSE)
+  x1 <- validate_fys_permitted(x)
+  expect_equal(x, x1, check.attributes = FALSE)
   x2 <- validate_fys_permitted(x, min.yr = 2000L)
   expect_equal(x2, x)
   setattr(x2, "grattan_min_yr", NULL)

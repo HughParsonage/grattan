@@ -113,6 +113,20 @@ test_that("ABS connection", {
   expect_equal(internal_ans, external_ans, tol = 0.00001, scale = 1)
 })
 
+test_that("ABS Connection (extras)", {
+  skip_on_cran()
+  skip_on_appveyor()
+  skip_on_travis()
+  internal_ans <- wage_inflator(from_fy = "2012-13", 
+                                to_fy = "2020-21",
+                                useABSConnection = FALSE)
+  external_ans <- wage_inflator(from_fy = "2012-13", 
+                                to_fy = "2020 21",
+                                useABSConnection = TRUE)
+  
+  expect_equal(internal_ans, external_ans, tol = 0.00001, scale = 1)
+})
+
 test_that("accelerated", {
   skip_on_cran()
   set.seed(1111)
@@ -161,6 +175,16 @@ test_that("accelerating both from and to", {
                    wage_inflator(from_fy = c("2005-06", "2008-09", "2006-07"),
                                  to_fy = c("2015-16", "2014-15", "2016-17"),
                                  accelerate.above = 2L))
+})
+
+test_that("verbose option", {
+  skip_if_not_installed("rlang")
+  expect_output(
+    rlang::with_options(
+      wage_inflator(from_fy = "2014-15", to_fy = "2016-17"),
+      grattan.verbose = TRUE
+    ),
+    "a:\\s+2014.15")
 })
 
 

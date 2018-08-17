@@ -68,7 +68,7 @@ wage_inflator <- function(wage = 1,
   max.length <- prohibit_vector_recycling.MAXLENGTH(wage, from_fy, to_fy)
   forecast.series <- match.arg(forecast.series)
   
-  if (max.length == 1L) {
+  if (max.length == 1L && !useABSConnection) {
     a <- validate_fys_permitted(from_fy, min.yr = min.wage.yr)
     b <- validate_fys_permitted(to_fy, min.yr = min.wage.yr)
     early_return <- 
