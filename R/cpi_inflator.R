@@ -136,16 +136,18 @@ cpi_inflator <- function(from_nominal_price = 1,
   
   from_fy <- validate_fys_permitted(from_fy,
                                     min.yr = the_min.yr,
-                                    max.yr = if (!allow.projection) the_max.yr,
+                                    # else 2050L because we will need max year later
+                                    max.yr = if (!allow.projection) the_max.yr else 2050L,
                                     deparsed = "from_fy", 
                                     allow.projection = allow.projection)
   to_fy <- validate_fys_permitted(to_fy,
                                   min.yr = the_min.yr,
-                                  max.yr = if (!allow.projection) the_max.yr,
+                                  max.yr = if (!allow.projection) the_max.yr else 2050L,
                                   deparsed = "to_fy", 
                                   allow.projection = allow.projection)
   
-  if (max_fy2yr(from_fy) > the_max.yr) {
+  if (max_fy2yr(to_fy) > the_max.yr || 
+      max_fy2yr(from_fy) > the_max.yr) {
     # Number of years beyond the data our forecast must reach
     years.beyond <- max(fy2yr(to_fy)) - max(fy2yr(permitted_fys))
     cpi_index_forecast <-

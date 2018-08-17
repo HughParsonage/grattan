@@ -24,7 +24,7 @@ microbenchmark(
   cpi_inflator(from_fy = "2014-15", to_fy = "2015-16"),
   wage_inflator(from_fy = "2014-15", to_fy = "2015-16"),
   lf_inflator_fy(from_fy = "2014-15", to_fy = "2015-16"),
-  times = 1L) %>%
+  times = 1L, control = list(order = "inorder")) %>%
   save_it
 
 the_next_fy <- next_fy(date2fy(Sys.Date()), h = 2L)
@@ -33,7 +33,7 @@ microbenchmark(
   cpi_inflator(from_fy = "2014-15", to_fy = the_next_fy),
   wage_inflator(from_fy = "2014-15", to_fy = the_next_fy),
   lf_inflator_fy(from_fy = "2014-15", to_fy = the_next_fy),
-  times = 1L) %>%
+  times = 1L, control = list(order = "inorder")) %>%
   save_it
 
 
@@ -44,19 +44,19 @@ microbenchmark(
   cpi_inflator(from_fy = from_fys50K, to_fy = "2015-16"),
   wage_inflator(from_fy = from_fys50K, to_fy = "2015-16"),
   lf_inflator_fy(from_fy = from_fys50K, to_fy = "2015-16"),
-  times = 1L) %>%
+  times = 1L, control = list(order = "inorder")) %>%
   save_it
 
 
 
 microbenchmark(
   sample_file_1314[, income_tax(Taxable_Income, "2013-14", .dots.ATO = .SD)],
-  times = 1L) %>%
+  times = 1L, control = list(order = "inorder")) %>%
   save_it
 
 microbenchmark(
   project(sample_file_1314, h = 2L),
-  times = 1L) %>%
+  times = 1L, control = list(order = "inorder")) %>%
   save_it
 
 shell("git add timings/now/result*tsv")

@@ -2,3 +2,9 @@ expr	time	Date
 "wage_inflator(from_fy = ""2014-15"", to_fy = ""2015-16"")"	3383719	2018-08-17
 "lf_inflator_fy(from_fy = ""2014-15"", to_fy = ""2015-16"")"	70955100	2018-08-17
 "cpi_inflator(from_fy = ""2014-15"", to_fy = ""2015-16"")"	1063153	2018-08-17
+"lf_inflator_fy(from_fy = ""2014-15"", to_fy = ""2015-16"")"	73314819	2018-08-17
+"cpi_inflator(from_fy = ""2014-15"", to_fy = ""2015-16"")"	1040867	2018-08-17
+"wage_inflator(from_fy = ""2014-15"", to_fy = ""2015-16"")"	1739295	2018-08-17
+"cpi_inflator(from_fy = ""2014-15"", to_fy = ""2015-16"")"	3429499	2018-08-17
+"wage_inflator(from_fy = ""2014-15"", to_fy = ""2015-16"")"	1468838	2018-08-17
+"lf_inflator_fy(from_fy = ""2014-15"", to_fy = ""2015-16"")"	71303863	2018-08-17
