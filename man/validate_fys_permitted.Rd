@@ -24,6 +24,8 @@ Should generally be provided explicitly as the default is unlikely
 to be user-friendly.}
 
 \item{allow.projection}{If \code{FALSE} emit a different error message.}
+
+\item{earliest_permitted_financial_year, latest_permitted_financial_year}{Text for earliest/latest permitted financial year when \code{min.yr}/\code{max.yr} condition is violated.}
 }
 \value{
 If \code{to_verify} contains valid financial years
