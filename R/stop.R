@@ -24,7 +24,7 @@ stop_via <- function(..., FUNCTION) {
   if (missing(FUNCTION)) stop(...)
   error_message <- paste0(..., collapse = "")
   caller <- as.name(FUNCTION)
-  stop(structure(class = "condition", 
+  stop(structure(class = c("error", "condition"),
                  list(message = error_message,
                       call = caller)))
 }
