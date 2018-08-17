@@ -65,9 +65,30 @@ wage_inflator <- function(wage = 1,
   check_TF(allow.projection)
   
   # Avoid vector recycling
-  max.length <- 
-    prohibit_vector_recycling.MAXLENGTH(wage, from_fy, to_fy)
+  max.length <- prohibit_vector_recycling.MAXLENGTH(wage, from_fy, to_fy)
   forecast.series <- match.arg(forecast.series)
+  
+  if (max.length == 1L) {
+    a <- validate_fys_permitted(from_fy[[1L]], min.yr = min.wage.yr)
+    b <- validate_fys_permitted(to_fy[[1L]], min.yr = min.wage.yr)
+    if (identical(a, b)) {
+      return(wage)
+    }
+    if (max_fy2yr(a) <= max.wage.yr &&
+        max_fy2yr(b) <= max.wage.yr) {
+      if (.getOption("grattan.verbose", FALSE)) {
+        cat("\na: ", a, "\t", max_fy2yr(a), "\tb: ", b, "\t", max_fy2yr(b), "\n")
+      }
+      
+      i <- 
+        if (a > b) {
+          wages_trend_fy[, obsValue[fmatch(a, fy_year)] / obsValue[fmatch(b, fy_year)]]
+        } else {
+          wages_trend_fy[, obsValue[fmatch(b, fy_year)] / obsValue[fmatch(a, fy_year)]]
+        }
+      return(wage * i)
+    }
+  }
   
   if (max.length > accelerate.above && 
       # don't connect for every group

@@ -26,8 +26,8 @@ they are returned all in the form \code{2013-14}. If they were
 already in that form, they obtain the following attributes:
 \describe{
 \item{\code{grattan_all_fy}}{\code{TRUE} if all the financial years are valid.}
-\item{\code{grattan_min_fy}}{An integer, the earliest year ending in \code{to_verify}.}
-\item{\code{grattan_max_fy}}{An integer, the latest year ending in \code{to_verify}.}
+\item{\code{grattan_min_yr}}{An integer, the earliest year ending in \code{to_verify}.}
+\item{\code{grattan_max_yr}}{An integer, the latest year ending in \code{to_verify}.}
 }
 }
 \description{

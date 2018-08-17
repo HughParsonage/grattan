@@ -227,6 +227,20 @@ wages_trend[, c("obsYear", "obsQtr") := split2yq(obsTime)]
 min.wage.yr <- wages_trend[, min(obsYear)]
 
 
+`%fin%` <- fastmatch::`%fin%`
+
+wages_trend_fy <- 
+  wages_trend[obsQtr == 2L] %>%
+  .[, .(fy_year = yr2fy(obsYear), 
+                  obsValue)] %>%
+  unique(by = "fy_year", fromLast = TRUE) %>%
+  setkey(fy_year) %T>%
+  # put match hash
+  .[, stopifnot("2015-16" %fin% fy_year)] %>%
+  .[]
+max.wage.yr <- wages_trend_fy[, max(fy2yr(fy_year))]
+
+
 lf_trend <- 
   tryCatch({
     lf.url.trend <- 
@@ -1086,6 +1100,7 @@ use_and_write_data(tax_table2,
                    cpi_seasonal_adjustment_fy,
                    cpi_trimmed_fy,
                    wages_trend,
+                   wages_trend_fy,
                    lf_trend,
                    cgt_expenditures,
                    mean_of_each_taxstats_var, 
@@ -1130,4 +1145,5 @@ use_and_write_data(tax_table2,
                    .avbl_fractions,
                    .date_data_updated,
                    fys1901,
-                   min.wage.yr)
+                   min.wage.yr,
+                   max.wage.yr)

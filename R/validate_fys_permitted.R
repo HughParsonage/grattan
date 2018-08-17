@@ -21,8 +21,8 @@
 #' already in that form, they obtain the following attributes:
 #' \describe{
 #' \item{\code{grattan_all_fy}}{\code{TRUE} if all the financial years are valid.}
-#' \item{\code{grattan_min_fy}}{An integer, the earliest year ending in \code{to_verify}.}
-#' \item{\code{grattan_max_fy}}{An integer, the latest year ending in \code{to_verify}.}
+#' \item{\code{grattan_min_yr}}{An integer, the earliest year ending in \code{to_verify}.}
+#' \item{\code{grattan_max_yr}}{An integer, the latest year ending in \code{to_verify}.}
 #' }
 #' 
 #' 
@@ -70,7 +70,7 @@ validate_fys_permitted <- function(to_verify, permitted_fys,
         setattr(to_verify, "grattan_max_yr", max_to_verify_yr)
       }
       
-      if (max.yr > attr(to_verify, "grattan_max_yr")) {
+      if (max.yr < attr(to_verify, "grattan_max_yr")) {
         max.k <- max.yr - 1900L
         stop("`", deparsed, "` contains ",
              fys1901[attr(to_verify, "grattan_max_yr") - 1900L],
@@ -100,8 +100,8 @@ validate_fys_permitted <- function(to_verify, permitted_fys,
            "is not a valid FY.")
     } else {
       setattr(to_verify, "grattan_all_fy", TRUE)
-      setattr(to_verify, "grattan_min_fy", NA_integer_)
-      setattr(to_verify, "grattan_max_fy", NA_integer_)
+      setattr(to_verify, "grattan_min_yr", NA_integer_)
+      setattr(to_verify, "grattan_max_yr", NA_integer_)
       if (!is.null(min.yr)) {
         min.k <- min.yr - 1900L
         min_fmatches <- min(fmatches)
@@ -112,7 +112,7 @@ validate_fys_permitted <- function(to_verify, permitted_fys,
                "is earlier than the earliest permitted ",
                "financial year: ", '"', fys1901[min.k], ".")
         }
-        setattr(to_verify, "grattan_min_fy", min_fmatches + 1900L)
+        setattr(to_verify, "grattan_min_yr", min_fmatches + 1900L)
       }
       if (!is.null(max.yr)) {
         max.k <- max.yr - 1900L
@@ -124,7 +124,7 @@ validate_fys_permitted <- function(to_verify, permitted_fys,
                "is later than the latest permitted ",
                "financial year: ", '"', fys1901[max.k], ".")
         }
-        setattr(to_verify, "grattan_max_fy", max_fmatches + 1900L)
+        setattr(to_verify, "grattan_max_yr", max_fmatches + 1900L)
       }
       return(invisible(to_verify))
     }

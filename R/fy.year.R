@@ -116,8 +116,18 @@ all_fy <- function(x, permitted = NULL) {
 }
 
 range_fy2yr <- function(x) {
-  y <- fmatch(x, fys1901)
-  c(min(y, na.rm = TRUE), max(y, na.rm = TRUE)) + 1900L
+  if (!is.null(g_min_yr <- attr(x, "grattan_min_yr")) &&
+      !is.null(g_max_yr <- attr(x, "grattan_max_yr")) &&
+      !is.na(g_min_yr) &&
+      !is.na(g_max_yr)) {
+    return(c(g_min_yr, g_max_yr))
+  }
+  y <- fmatch(x, fys1901) + 1900L
+  miny <- min(y, na.rm = TRUE)
+  maxy <- max(y, na.rm = TRUE)
+  setattr(x, "grattan_min_yr", miny)
+  setattr(x, "grattan_max_yr", maxy)
+  c(miny, maxy)
 }
 
 min_fy2yr <- function(x) {

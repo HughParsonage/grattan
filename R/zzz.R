@@ -1,4 +1,11 @@
-.onLoad <- function(libname = find.package("grattan"), pkgname = "grattan"){
+.onLoad <- function(libname = find.package("grattan"), pkgname = "grattan") {
+  
+  op <- options()
+  opgrattan <- list(
+    "grattan.verbose" = FALSE
+  )
+  toset <- !(names(opgrattan) %in% names(op))
+  if (any(toset)) options(opgrattan[toset])
   
   # CRAN Note avoidance
   if(getRversion() >= "2.15.1") 
