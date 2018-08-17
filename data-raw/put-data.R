@@ -195,6 +195,13 @@ setkey(cpi_unadj_fy, fy_year)
 setkey(cpi_seasonal_adjustment_fy, fy_year)
 setkey(cpi_trimmed_fy, fy_year)
 
+min.cpi_unadj.yr <- fy2yr(cpi_unadj_fy[, first(fy_year)])
+max.cpi_unadj.yr <- fy2yr(cpi_unadj_fy[, last(fy_year)])
+min.cpi_seasonal_adjustment.yr <- fy2yr(cpi_seasonal_adjustment_fy[, first(fy_year)])
+max.cpi_seasonal_adjustment.yr <- fy2yr(cpi_seasonal_adjustment_fy[, last(fy_year)])
+min.cpi_trimmed.yr <- fy2yr(cpi_trimmed_fy[, first(fy_year)])
+max.cpi_trimmed.yr <- fy2yr(cpi_trimmed_fy[, last(fy_year)])
+
 
 wages_trend <- 
   tryCatch({
@@ -1146,4 +1153,11 @@ use_and_write_data(tax_table2,
                    .date_data_updated,
                    fys1901,
                    min.wage.yr,
-                   max.wage.yr)
+                   max.wage.yr,
+                   #
+                   min.cpi_unadj.yr,
+                   max.cpi_unadj.yr,
+                   min.cpi_seasonal_adjustment.yr,
+                   max.cpi_seasonal_adjustment.yr,
+                   min.cpi_trimmed.yr,
+                   max.cpi_trimmed.yr)

@@ -5,7 +5,8 @@
 \title{Verifying validity of financial years}
 \usage{
 validate_fys_permitted(to_verify, permitted_fys, min.yr = NULL,
-  max.yr = NULL, deparsed = deparse(substitute(to_verify)))
+  max.yr = NULL, deparsed = deparse(substitute(to_verify)),
+  allow.projection = TRUE)
 }
 \arguments{
 \item{to_verify}{A user-provided value, purporting to be

@@ -58,6 +58,7 @@ microbenchmark(
   times = 1L) %>%
   save_it
 
+shell("git add timings/now/result*tsv")
 
 
 

@@ -71,21 +71,19 @@ wage_inflator <- function(wage = 1,
   if (max.length == 1L) {
     a <- validate_fys_permitted(from_fy, min.yr = min.wage.yr)
     b <- validate_fys_permitted(to_fy, min.yr = min.wage.yr)
-    if (identical(a, b)) {
-      return(wage)
-    }
-    if (max_fy2yr(a) <= max.wage.yr &&
-        max_fy2yr(b) <= max.wage.yr) {
+    early_return <- 
+      if (a < b) {
+        max_fy2yr(b) <= max.wage.yr
+      } else {
+        max_fy2yr(a) <= max.wage.yr
+      }
+    if (early_return) {
       if (.getOption("grattan.verbose", FALSE)) {
         cat("\na: ", a, "\t", max_fy2yr(a), "\tb: ", b, "\t", max_fy2yr(b), "\n")
       }
-      
-      i <- 
-        if (a > b) {
-          wages_trend_fy[, obsValue[fmatch(a, fy_year)] / obsValue[fmatch(b, fy_year)]]
-        } else {
-          wages_trend_fy[, obsValue[fmatch(b, fy_year)] / obsValue[fmatch(a, fy_year)]]
-        }
+      Values <- .subset2(wages_trend_fy, "obsValue")
+      fy_years <- .subset2(wages_trend_fy, "fy_year")
+      i <- Values[fmatch(b, fy_years)] / Values[fmatch(a, fy_years)]
       return(wage * i)
     }
   }

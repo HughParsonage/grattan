@@ -32,8 +32,8 @@
 
 validate_fys_permitted <- function(to_verify, permitted_fys,
                                    min.yr = NULL, max.yr = NULL,
-                                   deparsed = deparse(substitute(to_verify))) {
-  allow.projection <- exists("allow.projection") && allow.projection
+                                   deparsed = deparse(substitute(to_verify)),
+                                   allow.projection = TRUE) {
   
   if (!is.character(to_verify)) {
     stopn("`", deparsed, "` was type ", typeof(to_verify), ", ",
@@ -135,7 +135,7 @@ validate_fys_permitted <- function(to_verify, permitted_fys,
                 "`", deparsed, "` contains ",
                 to_verify[first_bad], " which ",
                 "is later than the latest permitted ",
-                "financial year: ", '"', fys1901[min.k], '"', ".")
+                "financial year: ", '"', fys1901[max.k], '"', ".")
         }
         attr(to_verify, "grattan_max_yr") <-  max_fmatches + 1900L
       }
