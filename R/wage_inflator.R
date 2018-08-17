@@ -69,8 +69,8 @@ wage_inflator <- function(wage = 1,
   forecast.series <- match.arg(forecast.series)
   
   if (max.length == 1L) {
-    a <- validate_fys_permitted(from_fy[[1L]], min.yr = min.wage.yr)
-    b <- validate_fys_permitted(to_fy[[1L]], min.yr = min.wage.yr)
+    a <- validate_fys_permitted(from_fy, min.yr = min.wage.yr)
+    b <- validate_fys_permitted(to_fy, min.yr = min.wage.yr)
     if (identical(a, b)) {
       return(wage)
     }
