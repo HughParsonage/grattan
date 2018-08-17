@@ -100,7 +100,7 @@ validate_fys_permitted <- function(to_verify, permitted_fys,
               " which ",
               "is later than the ",
               latest_permitted_financial_year,
-              ": ", '"', fys1901[min.k], '"', ".")
+              ": ", '"', fys1901[max.k], '"', ".")
       }
     }
     

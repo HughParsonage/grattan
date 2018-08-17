@@ -37,4 +37,28 @@ test_that("validation of other types", {
 })
 
 
+test_that("Validation memoization", {
+  y <- c("2014-15", "2015-16")
+  x <- validate_fys_permitted(y)
+  expect_equal(x, y, check.attributes = FALSE)
+  x2 <- validate_fys_permitted(x, min.yr = 2000L)
+  expect_equal(x2, x)
+  setattr(x2, "grattan_min_yr", NULL)
+  x3 <- validate_fys_permitted(x2, min.yr = 2000L)
+  expect_equal(x, x3, check.attributes = FALSE)
+  setattr(x2, "grattan_max_yr", NULL)
+  x4 <- validate_fys_permitted(x2, min.yr = 2000L, max.yr = 2020L)
+  expect_equal(x, x4, check.attributes = FALSE)
+  
+  expect_error(validate_fys_permitted(x2, min.yr = 2020L), 
+               regexp = '`x2` contained "2014-15" which is earlier than the earliest permitted',
+               fixed = TRUE)
+  expect_error(validate_fys_permitted(x2, max.yr = 2010L), 
+               regexp = '`x2` contained "2015-16" which is later than the latest permitte',
+               fixed = TRUE)
+  
+})
+
+
+
 

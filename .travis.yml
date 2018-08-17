@@ -10,7 +10,7 @@ matrix:
     r_check_args: --no-multiarch --no-tests
   - r: release
     r_build_args: --no-build-vignettes
-    r_check_args: --no-multiarch --ignore-vignettes --no-vignettes
+    r_check_args: --no-multiarch --ignore-vignettes --no-vignettes --no-tests
   - r: devel
     r_build_args: --no-build-vignettes
     r_check_args: --no-multiarch --ignore-vignettes --no-vignettes
