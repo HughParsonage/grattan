@@ -15,8 +15,9 @@ i = 0L
 save_it <- function(mm) {
   as.data.frame(mm) %>%
     as.data.table %>%
-    .[, Date := as.character(Sys.Date())] %>%
-    fwrite(paste0("timings/now/result-", (i <<- i + 1L), ".tsv"), sep = "\t", append = TRUE)
+    .[, Date := as.character(Sys.Date())] %T>%
+    fwrite(paste0("timings/now/result-", (i <<- i + 1L), ".tsv"), sep = "\t", append = FALSE) %>%
+    fwrite(paste0("timings/now/result-", (i), "-dates.tsv"), sep = "\t", append = TRUE)
 }
 
 microbenchmark(
