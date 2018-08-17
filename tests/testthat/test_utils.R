@@ -106,4 +106,10 @@ test_that("Accelerate inputs", {
   
 })
 
+test_that("getOption", {
+  expect_equal(.getOption("grattan.sadfsdfsdfdfs", "abc"), "abc")
+  expect_equal(getOption("width", "abc"), 
+               .getOption("width", "abc"))
+})
+
 
