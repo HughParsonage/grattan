@@ -71,7 +71,7 @@ if (FALSE) {
                          pattern = "\\.html$", 
                          full.names = TRUE), 
                      change_pngs))
-    invisible(lapply(dir(path = "~/grattandocs/", 
+    invisible(lapply(dir(path = "~/grattan/docs/", 
                          pattern = "\\.html$", 
                          full.names = TRUE), 
                      change_pngs))

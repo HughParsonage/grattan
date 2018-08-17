@@ -281,6 +281,20 @@ lf_trend <-
                       , select = c("obsTime", "obsValue"))
   })
 
+lf_trend_fy <- 
+  lf_trend[endsWith(obsTime, "-01")] %>%
+  .[, .(fy_year = yr2fy(substr(obsTime, 1L, 4L)), 
+        obsValue)] %>%
+  unique(by = "fy_year", fromLast = TRUE) %>%
+  setkey(fy_year) %T>%
+  # put match hash
+  .[, stopifnot("2015-16" %fin% fy_year)] %>%
+  .[]
+min.lf.yr <- lf_trend_fy[, min(fy2yr(fy_year))]
+max.lf.yr <- lf_trend_fy[, max(fy2yr(fy_year))]
+
+
+
 cgt_expenditures <- 
   data.table::fread("./data-raw/tax-expenditures-cgt-historical.tsv")
 
@@ -1088,7 +1102,7 @@ setkey(generic_inflators_1516[, fy_year := NULL], h, variable)
 
 setkey(wages_trend, obsTime)
 setindex(wages_trend, obsQtr)
-.date_data_updated <- Sys.Date()
+.date_data_updated <- as.Date("2018-08-17") #Sys.Date()
 
 library(fastmatch)
 fys1901 <- yr2fy(1901:2100)
@@ -1109,6 +1123,7 @@ use_and_write_data(tax_table2,
                    wages_trend,
                    wages_trend_fy,
                    lf_trend,
+                   lf_trend_fy,
                    cgt_expenditures,
                    mean_of_each_taxstats_var, 
                    meanPositive_of_each_taxstats_var,
@@ -1160,4 +1175,7 @@ use_and_write_data(tax_table2,
                    min.cpi_seasonal_adjustment.yr,
                    max.cpi_seasonal_adjustment.yr,
                    min.cpi_trimmed.yr,
-                   max.cpi_trimmed.yr)
+                   max.cpi_trimmed.yr,
+                   #
+                   min.lf.yr,
+                   max.lf.yr)

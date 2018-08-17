@@ -79,13 +79,33 @@ lf_inflator_fy <- function(labour_force = 1,
   
   check_TF(useABSConnection)
   check_TF(allow.projection)
-  from_fy <- validate_fys_permitted(from_fy, min.yr = 1978L)
-  to_fy <- validate_fys_permitted(to_fy, min.yr = 1978L)
-  
-  stopifnot(use.month %between% c(1L, 12L))
   
   max.length <- 
     prohibit_vector_recycling.MAXLENGTH(labour_force, from_fy, to_fy)
+  
+  if (max.length == 1L &&
+      !useABSConnection &&
+      identical(use.month, 1L)) {
+    a <- validate_fys_permitted(from_fy, min.yr = min.lf.yr)
+    b <- validate_fys_permitted(to_fy, min.yr = min.lf.yr)
+    early_return <- 
+      if (a < b) {
+        max_fy2yr(b) <= max.lf.yr
+      } else {
+        max_fy2yr(a) <= max.lf.yr
+      }
+    if (early_return) {
+      if (.getOption("grattan.verbose", FALSE)) {
+        cat("\na: ", a, "\t", max_fy2yr(a), "\tb: ", b, "\t", max_fy2yr(b), "\n")
+      }
+      Values <- .subset2(lf_trend_fy, "obsValue")
+      fy_years <- .subset2(lf_trend_fy, "fy_year")
+      i <- Values[fmatch(b, fy_years)] / Values[fmatch(a, fy_years)]
+      return(labour_force * i)
+    }
+  }
+  
+  stopifnot(use.month %between% c(1L, 12L))
   
   if (max.length > accelerate.above && 
       # don't connect for every group
@@ -120,6 +140,9 @@ lf_inflator_fy <- function(labour_force = 1,
       return(accel_repetitive_input(to_fy, lf_fun))
     }
   }
+  
+  from_fy <- validate_fys_permitted(from_fy, min.yr = 1978L)
+  to_fy <- validate_fys_permitted(to_fy, min.yr = 1978L)
   
   if (useABSConnection){
     lf.url.trend <- 
