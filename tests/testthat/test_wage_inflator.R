@@ -125,6 +125,15 @@ test_that("ABS Connection (extras)", {
                                 useABSConnection = TRUE)
   
   expect_equal(internal_ans, external_ans, tol = 0.00001, scale = 1)
+  
+  internal_ans <- wage_inflator(from_fy = yr2fy(2013:2016), 
+                                to_fy = "2020-21",
+                                useABSConnection = FALSE)
+  external_ans <- wage_inflator(from_fy = yr2fy(2013:2016), 
+                                to_fy = "2020 21",
+                                useABSConnection = TRUE)
+  
+  expect_equal(internal_ans, external_ans, tol = 0.00001, scale = 1)
 })
 
 test_that("accelerated", {
