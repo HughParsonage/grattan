@@ -43,21 +43,31 @@ test_that("income_tax returns known results",{
   expect_equal(income_tax(40e3, fy.year = "2013-14"), 4747)
   expect_equal(income_tax(40e3, "2013-14", family_status = "family", n_dependants = 1L), 4394.70)
   # different rounding treatment.
-  expect_equal(round(income_tax(40e3, "2013-14", family_status = "family", n_dependants = 0L, age = 66)), 2882)
-  expect_equal(income_tax(40e3, "2013-14", family_status = "family", n_dependants = 2L, .dots.ATO = data.frame(Spouse_adjusted_taxable_inc = 30e3)), 4747)
+  expect_equal(round(income_tax(40e3,
+                                "2013-14",
+                                family_status = "family",
+                                n_dependants = 0L,
+                                age = 66)),
+               2882)
+  expect_equal(income_tax(40e3, 
+                          "2013-14",
+                          family_status = "family",
+                          n_dependants = 2L,
+                          .dots.ATO = data.frame(Spouse_adjusted_taxable_inc = 30e3)),
+               4747)
   
   expect_equal(income_tax(31993, fy.year = "2014-15"), 2815.53)
   expect_equal(income_tax(31993, fy.year = "2014-15", age = 70), 0)
-  expect_equal(income_tax(135288, fy.year = "2014-15"), 40709, tolerance = 1)
-  expect_equal(income_tax(41636, fy.year = "2014-15"), 5535.95, tolerance = 1)
-  expect_equal(income_tax(26010, fy.year = "2014-15"), 1550.30, tolerance = 1)
+  expect_equal(income_tax(135288, fy.year = "2014-15"), 40709, tol = 1, scale = 1)
+  expect_equal(income_tax(41636, fy.year = "2014-15"), 5535.95, tol = 1, scale = 1)
+  expect_equal(income_tax(26010, fy.year = "2014-15"), 1550.30, tol = 1, scale = 1)
   
   # Test rolling now no longer the default
   expect_equal(rolling_income_tax(31993, fy.year = "2014-15"), 2815.53)
   expect_equal(rolling_income_tax(31993, fy.year = "2014-15", age = 70), 0)
-  expect_equal(rolling_income_tax(135288, fy.year = "2014-15"), 40709, tolerance = 1)
-  expect_equal(rolling_income_tax(41636, fy.year = "2014-15"), 5535.95, tolerance = 1)
-  expect_equal(rolling_income_tax(26010, fy.year = "2014-15"), 1550.30, tolerance = 1)
+  expect_equal(rolling_income_tax(135288, fy.year = "2014-15"), 40709, tol = 1, scale = 1)
+  expect_equal(rolling_income_tax(41636, fy.year = "2014-15"), 5535.95, tol = 1, scale = 1)
+  expect_equal(rolling_income_tax(26010, fy.year = "2014-15"), 1550.30, tol = 1, scale = 1)
   
   
 })
@@ -72,7 +82,11 @@ test_that("income_tax is not NA for 2003-04", {
 })
 
 test_that("income_tax always returns the length of its arguments", {
-  LEN <- ceiling(abs(rcauchy(1)))
-  expect_equal(length(income_tax(runif(LEN, 0, 2e6), fy.year = sample(yr2fy(2004:2014), size = LEN, replace = TRUE))), LEN)
+  LEN <- max(ceiling(abs(rcauchy(10, scale = 3))))
+  expect_equal(length(income_tax(runif(LEN, 0, 2e6),
+                                 fy.year = sample(yr2fy(2004:2014),
+                                                  size = LEN,
+                                                  replace = TRUE))),
+               LEN)
 })
 

@@ -14,3 +14,4 @@ test_that("pension", {
                  "age pension",
                  "newstart allowance"))
 })
+

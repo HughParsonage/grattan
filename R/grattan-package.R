@@ -11,6 +11,13 @@
 #' @author \email{hugh.parsonage+grattanpackage@@grattan.edu.au}
 #' @author \email{hugh.parsonage@@gmail.com}
 #' @keywords package
+#' 
+#' @section Package options:
+#' \describe{
+#' \item{\code{grattan.verbose}}{Emit diagnostic messages (via \code{cat()}))}
+#' }
+#' 
+#' 
 #' @importFrom hutils if_else
 #' @importFrom hutils coalesce
 #' @importFrom hutils OR

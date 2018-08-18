@@ -135,7 +135,7 @@ test_that("Coverage", {
                  h = 1L,
                  fy.year.of.sample.file = "2015-16",
                  .recalculate.inflators = TRUE)
-  expect_equal(out1, out2, tol = 0.1)
+  expect_equal(out1, out2, tol = 0.1, scale = NULL)
   
   expect_error(project(sample_file_1112,
                        h = 1L,

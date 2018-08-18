@@ -124,3 +124,6 @@ test_that('Income reduction not exceed max rate', {
                                 is_student = TRUE),
                0.5 * (524 - 437) + 0.6 * (864.84 - 524))
 })
+
+
+

@@ -27,13 +27,14 @@ test_that("Error handling", {
   expect_error(lf_inflator_fy(from_fy = "2013-14"), 
                regexp = "`to_fy` is missing",
                fixed = TRUE)
-  expect_error(wage_inflator(1, from_fy = "2013-14", to_fy = "2045-46", allow.projection = FALSE), regexp = "wage index data")
+  expect_error(wage_inflator(1, from_fy = "2013-14", to_fy = "2045-46", allow.projection = FALSE),
+               regexp = "wage index data")
   expect_error(wage_inflator(from_fy = "2017-18",
                               to_fy = "2018-19",
                               forecast.series = "custom",
                               wage.series = data.table(fy_year = c("2017-18", "2017-18"),
                                                      r = c(0, 0.123))), 
-               regexp = 'wage.series$fy_year should be c("2017-18", "2018-19").', 
+               regexp = '`wage.series$fy_year` did not have the required financial years.', 
                fixed = TRUE)
 })
 
@@ -52,16 +53,17 @@ test_that("Custom wage series", {
 })
   
 test_that("Custom wage series error handling", {
-  expect_error(wage_inflator(1, from_fy = "2015-16", to_fy = "2017-18", 
-                             forecast.series = "custom", 
-                             wage.series = data.table(fy_year = c("2015-16", "2016-17", "2017-18"), 
-                                                      r = c(42, 0.1, 0.1))),
-               regexp = "first fy in the custom series")
+  # expect_error(wage_inflator(1, from_fy = "2015-16", to_fy = "2017-18", 
+  #                            forecast.series = "custom", 
+  #                            wage.series = data.table(fy_year = c("2015-16", "2016-17", "2017-18"), 
+  #                                                     r = c(42, 0.1, 0.1))),
+  #              regexp = "first fy in the custom series")
   
-  expect_error(wage_inflator(1, from_fy = "2015-16", to_fy = "2017-18", 
+  expect_error(wage_inflator(1, from_fy = "2015-16", to_fy = "2020-21", 
                              forecast.series = "custom", 
                              wage.series = c(1, 2)),
-               regexp = "length-one vector or a data.table")
+               regexp = "`wage.series` had length 2.",
+               fixed = TRUE)
   
   expect_message(wage_inflator(1, from_fy = "2015-16", to_fy = "2018-19", 
                                forecast.series = "custom", 
@@ -108,7 +110,30 @@ test_that("ABS connection", {
                                to_fy = "2013-14",
                                useABSConnection = TRUE)
   
-  expect_equal(internal_ans, external_ans, tol = 0.00001)
+  expect_equal(internal_ans, external_ans, tol = 0.00001, scale = 1)
+})
+
+test_that("ABS Connection (extras)", {
+  skip_on_cran()
+  skip_on_appveyor()
+  skip_on_travis()
+  internal_ans <- wage_inflator(from_fy = "2012-13", 
+                                to_fy = "2020-21",
+                                useABSConnection = FALSE)
+  external_ans <- wage_inflator(from_fy = "2012-13", 
+                                to_fy = "2020 21",
+                                useABSConnection = TRUE)
+  
+  expect_equal(internal_ans, external_ans, tol = 0.00001, scale = 1)
+  
+  internal_ans <- wage_inflator(from_fy = yr2fy(2013:2016), 
+                                to_fy = "2020-21",
+                                useABSConnection = FALSE)
+  external_ans <- wage_inflator(from_fy = yr2fy(2013:2016), 
+                                to_fy = "2020 21",
+                                useABSConnection = TRUE)
+  
+  expect_equal(internal_ans, external_ans, tol = 0.00001, scale = 1)
 })
 
 test_that("accelerated", {
@@ -151,6 +176,24 @@ test_that("accelerated", {
                        wage.series = data.table(fy_year = yr2fy(2018:2021),
                                                 r = rff))
   expect_identical(aff, bff)
+})
+
+test_that("accelerating both from and to", {
+  expect_identical(wage_inflator(from_fy = c("2005-06", "2008-09", "2006-07"),
+                                 to_fy = c("2015-16", "2014-15", "2016-17")),
+                   wage_inflator(from_fy = c("2005-06", "2008-09", "2006-07"),
+                                 to_fy = c("2015-16", "2014-15", "2016-17"),
+                                 accelerate.above = 2L))
+})
+
+test_that("verbose option", {
+  skip_if_not_installed("rlang")
+  expect_output(
+    rlang::with_options(
+      wage_inflator(from_fy = "2014-15", to_fy = "2016-17"),
+      grattan.verbose = TRUE
+    ),
+    "a:\\s+2014.15")
 })
 
 

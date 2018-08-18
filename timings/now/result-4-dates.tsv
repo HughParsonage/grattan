@@ -1,0 +1,23 @@
+expr	time	Date
+"lf_inflator_fy(from_fy = ""2014-15"", to_fy = the_next_fy)"	696092023	2018-08-17
+"cpi_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	97882	2018-08-17
+"wage_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	32758076	2018-08-17
+"wage_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	653915251	2018-08-17
+"cpi_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	89149	2018-08-17
+"lf_inflator_fy(from_fy = ""2014-15"", to_fy = the_next_fy)"	56928402	2018-08-17
+"sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	483533018	2018-08-17
+"sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	492074086	2018-08-17
+"sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	495431301	2018-08-17
+"sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	501039812	2018-08-18
+"sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	486435759	2018-08-18
+"sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	492466218	2018-08-18
+"sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	495772234	2018-08-18
+"sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	492198774	2018-08-18
+"sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	507912361	2018-08-18
+"sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	511838199	2018-08-18
+"sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	520215426	2018-08-18
+"sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	491533474	2018-08-18
+"sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	489199356	2018-08-18
+"sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	489495412	2018-08-18
+"sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	485758714	2018-08-18
+"sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	494377786	2018-08-18

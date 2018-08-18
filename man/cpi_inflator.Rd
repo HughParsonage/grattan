@@ -6,7 +6,8 @@
 \usage{
 cpi_inflator(from_nominal_price = 1, from_fy = NULL, to_fy = NULL,
   adjustment = c("seasonal", "none", "trimmed.mean"),
-  useABSConnection = FALSE, allow.projection = TRUE)
+  useABSConnection = FALSE, allow.projection = TRUE,
+  accelerate.above = 100000L)
 }
 \arguments{
 \item{from_nominal_price}{(numeric) the price (or vector of prices) to be inflated}
@@ -18,10 +19,15 @@ If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{fro
 \item{adjustment}{What CPI index to use ("none" = raw series, "seasonal", or "trimmed" [mean]).}
 
 \item{useABSConnection}{Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. 
-The internal data is up-to-date as of 2017-Q4. 
+The internal data was updated on 2018-08-17 to 2018-Q2. 
 If using \code{useABSConnection = TRUE}, ensure you have \code{rsdmx (>= 0.5-10)} up-to-date.}
 
 \item{allow.projection}{Should projections beyond the ABS's data be allowed?}
+
+\item{accelerate.above}{An integer setting the threshold for 'acceleration'. 
+When the maximum length of the arguments exceeds this value, calculate each unique value individually 
+then combine. Set to 100,000 as a rule of thumb beyond which calculation speeds benefit
+dramatically. Can be set to \code{Inf} to disable acceleration.}
 }
 \value{
 The value of \code{from_nominal_price} in real (\code{to_fy}) dollars.

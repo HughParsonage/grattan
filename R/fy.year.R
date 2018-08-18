@@ -5,6 +5,9 @@
 #' @param yr_ending An integer representing a year.
 #' @param fy.yr A string suspected to be a financial year.
 #' @param date A string or date for which the financial year is desired. Note that \code{yr2fy} does not check its argument is an integer.
+#' @details The following forms are permitted: \code{2012-13}, \code{201213}, \code{2012 13}, only.
+#' However, the \code{2012-13} form is preferred and will improve performance. 
+#' 
 #' @return For \code{is.fy}, a logical, whether its argument is a financial year.
 #' The following forms are allowed: \code{2012-13}, \code{201213}, \code{2012 13}, only.
 #' For \code{fy.year}, \code{yr2fy}, and \code{date2fy}, the financial year. 
@@ -17,6 +20,7 @@
 #' \code{fy2date} converts a financial year to the 30 June of the financial year ending.
 #' 
 #' \code{date2fy} converts a date to the corresponding financial year.
+#' 
 #' 
 #' @examples
 #' is.fy("2012-13")
@@ -109,6 +113,31 @@ all_fy <- function(x, permitted = NULL) {
       TRUE
     }
   }
+}
+
+range_fy2yr <- function(x) {
+  if (length(x) == 1L) {
+    y <- fmatch(x, fys1901) + 1900L
+    return(rep(y, times = 2L))
+  }
+  if (!is.null(g_min_yr <- attr(x, "grattan_min_yr")) &&
+      !is.null(g_max_yr <- attr(x, "grattan_max_yr"))) {
+    return(c(g_min_yr, g_max_yr))
+  }
+  y <- fmatch(x, fys1901) + 1900L
+  miny <- min(y, na.rm = TRUE)
+  maxy <- max(y, na.rm = TRUE)
+  setattr(x, "grattan_min_yr", miny)
+  setattr(x, "grattan_max_yr", maxy)
+  c(miny, maxy)
+}
+
+min_fy2yr <- function(x) {
+  range_fy2yr(x)[1L]
+}
+
+max_fy2yr <- function(x) {
+  range_fy2yr(x)[2L]
 }
 
 fy.year <- function(yr_ending){

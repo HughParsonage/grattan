@@ -233,7 +233,7 @@ model_income_tax <- function(sample_file,
     }
     
     if (length(Thresholds) != length(Rates)) {
-      stop("`ordinary_tax_thresholds` and `ordinary_tax_rates` have different lengths. ",
+      stop("`ordinary_tax_thresholds` and `ordinary_tax_rates` had different lengths. ",
            "Specify numeric vectors of equal length (or NULL).")
     }
     
@@ -241,6 +241,7 @@ model_income_tax <- function(sample_file,
       IncomeTax(income,
                 thresholds = Thresholds,
                 rates = Rates)
+    temp_budget_repair_levy. <- 0
   } else {
     tax_at <- lower_bracket <- marginal_rate <- NULL
     if ("ordering" %chin% names(input)) {
@@ -260,8 +261,6 @@ model_income_tax <- function(sample_file,
       and(input[["fy_year"]] %chin% c("2014-15", "2015-16", "2016-17"),
           income > 180e3) * 
       (0.02 * (income - 180e3))
-    
-    base_tax. <- base_tax. + temp_budget_repair_levy. 
   }
   
   WEIGHTj <- which(names(.dots.ATO) == "WEIGHT")
@@ -744,13 +743,17 @@ model_income_tax <- function(sample_file,
                                 fy_year = if (is.null(sbto_discount)) baseline_fy,
                                 tax_discount = sbto_discount)
     
-    if (.debug) {
-      return(data.table(income, base_tax., lito., lamington_offset., sapto., sbto., medicare_levy.))
-    }
-    
-    pmaxC(S4.10_basic_income_tax_liability - sbto., 0) +
+    new_tax <- 
+      pmaxC(S4.10_basic_income_tax_liability - sbto., 0) +
+      temp_budget_repair_levy. + 
       medicare_levy. +
       flood_levy.
+    
+    if (.debug) {
+      return(data.table(income, old_tax, base_tax., lito., lamington_offset., sapto., sbto., medicare_levy.))
+    }
+    
+    new_tax  
   }
   # new_tax2 <<- new_tax
   

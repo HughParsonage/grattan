@@ -11,7 +11,8 @@ ABS Cat 6202.0 \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocume
 lf_inflator_fy(labour_force = 1, from_fy = NULL, to_fy = NULL,
   useABSConnection = FALSE, allow.projection = TRUE, use.month = 1L,
   forecast.series = c("mean", "upper", "lower", "custom"),
-  forecast.level = 95, lf.series = NULL, .lf_indices = NULL)
+  forecast.level = 95, lf.series = NULL, .lf_indices = NULL,
+  accelerate.above = 100000L)
 
 lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date,
   useABSConnection = FALSE)
@@ -23,7 +24,8 @@ lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date,
 
 If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{from_fy} is set to the previous financial year and \code{to_fy} to the current financial year, with a warning. Setting only one is an error.}
 
-\item{useABSConnection}{Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. The internal data was updated on 2018-05-21 to include data up to 2018-04-01.}
+\item{useABSConnection}{Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.
+The internal data was updated on 2018-08-17 to 2018-07-01.}
 
 \item{allow.projection}{Logical. Should projections be allowed?}
 
@@ -38,6 +40,11 @@ The variable \code{fy_year} consists of all financial years between the last fin
 The variable \code{r} consists of rates of labour force growth assumed in each \code{fy_year}, which must be 1 in the first year (to connect with the original labour force series).}
 
 \item{.lf_indices}{(Internal use only.) A \code{data.table} sent directly to \code{inflator} without any checks.}
+
+\item{accelerate.above}{An integer setting the threshold for 'acceleration'. 
+When the maximum length of the arguments exceeds this value, calculate each unique value individually 
+then combine. Set to 100,000 as a rule of thumb beyond which calculation speeds benefit
+dramatically. Can be set to \code{Inf} to disable acceleration.}
 
 \item{from_date}{The date of \code{labour_force}.}
 
@@ -56,11 +63,11 @@ Labour force inflators
 lf_inflator_fy(labour_force = 1, from_fy = "2012-13", to_fy = "2013-14")
 
 library(data.table)
-# Custom 1\% growth over 2017-18 -> 2018.19
-lf_inflator_fy(from_fy = "2017-18",
-               to_fy = "2018-19",
+# Custom 1\% growth over 2018-19 -> 2019-20
+lf_inflator_fy(from_fy = "2018-19",
+               to_fy = "2019-20",
                forecast.series = "custom", 
-               lf.series = data.table(fy_year = c("2017-18", "2018-19"),
+               lf.series = data.table(fy_year = c("2018-19", "2019-20"),
                                       r = c(0, 0.01)))
 \dontrun{
 lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date = "2014-06-30")

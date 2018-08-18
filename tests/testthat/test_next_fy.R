@@ -14,3 +14,4 @@ test_that("prev_fy", {
   expect_equal(prev_fy(c("2016-17", "2019-20")),
                c("2015-16", "2018-19"))
 })
+

@@ -132,5 +132,15 @@ accel_repetitive_input <- function(x, FUN, ..., THRESHOLD = 1000L) {
   }
 }
 
+.getOption <- function(x, default = NULL) {
+  ans <- getOption(x)
+  if (is.null(ans)) {
+    default
+  } else {
+    ans
+  }
+}
+
+
 
 
