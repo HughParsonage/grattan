@@ -9,6 +9,8 @@
     - `newstart_allowance`
     - `pension_supplement`
 
+* Data has been updated for wage, CPI, and labour force inflators.
+
 Bug fixes:
 * `inflator` no longer fails when `to_fy` is length > 1 and unordered.
 * `inflator` and `cpi_inflator`, `lf_inflator_fy`, and `wage_inflator` are now much faster when either `from_fy` or `to_fy` have more than 100,000 elements:
@@ -31,7 +33,9 @@ Unit: milliseconds
       max neval
  191.3497   100
 ```
+
 * Fixed failing interaction between temporary budget repair levy and small business tax offset in 2016-17.
+* `*_inflator` functions now return correct results for non-standard but supported financial years.
 
 
 ## 1.6.2.0
