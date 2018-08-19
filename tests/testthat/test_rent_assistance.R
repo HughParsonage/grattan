@@ -55,3 +55,11 @@ test_that("Rent assistance", {
   expect_gt(rent_assistance(500, fy.year = "2015-16", n_dependants = 1), 
             rent_assistance(500, fy.year = "2015-16", n_dependants = 0))
 })
+
+test_that("Parents of (strictly) integer children not NA", {
+  expect_false(anyNA(rent_assistance(n_dependants = 0:4, fy.year = "2017-18")))
+  expect_equal(rent_assistance(100, n_dependants = 0:4, fy.year = "2017-18"), 
+               rent_assistance(100, n_dependants = c(0, 1, 1, 3, 3)))
+})
+
+

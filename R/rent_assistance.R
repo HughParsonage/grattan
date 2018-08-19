@@ -111,9 +111,10 @@ rent_assistance <- function(fortnightly_rent = Inf,
         stop("`n_dependants` is type double and cannot be safely coerced to type integer.")
       }
       n_dependants <- as.integer(n_dependants)
-      n_dependants[n_dependants == 2L] <- 1L
-      n_dependants[n_dependants > 3L] <- 3L
     }
+    
+    n_dependants[n_dependants == 2L] <- 1L
+    n_dependants[n_dependants > 3L] <- 3L
     
     
     # Actual calculation:
