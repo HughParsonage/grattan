@@ -110,6 +110,23 @@ test_that("La plus ca meme la plus ca meme: LITO", {
   expect_equal(new_tax2, original)
 })
 
+test_that("La plus ca meme la plus ca meme: SBTO doesn't interfere with SBTO", {
+  skip_if_not_installed("taxstats"); skip_on_cran()
+  library(taxstats)
+  library(magrittr)
+  library(data.table)
+  sample_file_1314_copy <- copy(sample_file_1314)
+  sample_file_81913 <- 
+    sample_file_1314_copy %>%
+    .[Ind == 81913] %T>%
+    .[, stopifnot(Taxable_Income > 180e3, Net_NPP_BI_amt > 1000)] %>%
+    model_income_tax("2016-17")
+  
+  expect_equal(sample_file_81913[["baseline_tax"]],
+               sample_file_81913[["new_tax"]],
+               tol = 1, scale = 1)
+})
+
 test_that("Increase in a rate results in more tax", {
   skip_if_not_installed("taxstats"); skip_on_cran()
   library(taxstats)
@@ -390,7 +407,7 @@ test_that("Medicare families", {
   single_idx <- which(s1617$Spouse_adjusted_taxable_inc == 0)
   expect_equal(s1617_orig$orig_tax[single_idx],
                s1617_modelled[single_idx], 
-               tol = 1)
+               tol = 2, scale = 1)
   
 })
 
@@ -771,7 +788,8 @@ test_that("Debugger", {
   s1516 <- as.data.table(sample_file_1516_synth)
   s1516[, Med_Exp_TO_amt := 0]
   o <- model_income_tax(s1516[, Med_Exp_TO_amt := 0], "2016-17", .debug = TRUE)
-  expect_equal(names(o), c("income", "base_tax.", "lito.", "lamington_offset.", "sapto.", 
+  expect_equal(names(o), c("income", "old_tax",
+                           "base_tax.", "lito.", "lamington_offset.", "sapto.", 
                            "sbto.", "medicare_levy."))
 })
 

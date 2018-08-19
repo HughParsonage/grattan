@@ -69,9 +69,47 @@ test_that("koffset", {
 })
 
 test_that("Switch", {
-  expect_equal(Switch(c("A", "B", "C", "A"), "A" = 1, "B" = 2, "C" = 11:14), 
+  expect_equal(Switch(c("A", "B", "C", "A"), "A" = 1, "B" = 2, "C" = 11:14 + 0, DEFAULT = 0), 
                c(1, 2, 13, 1))
-  expect_equal(Switch(c("A", "B", "C", "A"), "A" = 1:4, "B" = 2, "C" = 11:14), 
+  expect_equal(Switch(c("A", "B", "C", "A"), "A" = 1:4, "B" = 2, "C" = 11:14 + 0, DEFAULT = 0), 
                c(1, 2, 13, 4))
 })
+
+test_that("Accelerate inputs", {
+  skip_on_cran()
+  set.seed(3713907)
+  yrs <- sample(1990:2010, size = 1e5, replace = TRUE)
+  fys <- yr2fy(yrs)
+  expect_identical(fys, 
+                   accel_repetitive_input(yrs, "yr2fy"))
+  expect_identical(fys, 
+                   accel_repetitive_input(yrs, yr2fy, THRESHOLD = 10L))
+  cpi15 <- function(x) {
+    cpi_inflator(from_fy = x, to_fy = "2015-16", adjustment = "none")
+  }
+  expect_identical(cpi_inflator(from_fy = fys, to_fy = "2015-16", adjustment = "none"), 
+                   accel_repetitive_input(fys, cpi15))
+  
+  expect_identical(cpi_inflator(from_fy = c("2015-16", "2015-16", "2015-16"), 
+                                to_fy = "2016-17"),
+                   accel_repetitive_input(c("2015-16", "2015-16", "2015-16"),
+                                          FUN = cpi_inflator,
+                                          from_nominal_price = 1,
+                                          to_fy = "2016-17",
+                                          THRESHOLD = 2L))
+  
+  y <- runif(1001)
+  expect_identical(accel_repetitive_input(y, log), 
+                   accel_repetitive_input(y, log, THRESHOLD = 2000L))
+  expect_identical(accel_repetitive_input(2, log), 
+                   log(2))
+  
+})
+
+test_that("getOption", {
+  expect_equal(.getOption("grattan.sadfsdfsdfdfs", "abc"), "abc")
+  expect_equal(getOption("width", "abc"), 
+               .getOption("width", "abc"))
+})
+
 

@@ -66,7 +66,7 @@ rent_assistance <- function(fortnightly_rent = Inf,
           "2011-12", "2012-13", "2013-14", "2014-15", "2015-16", "2016-17", 
           "2017-18", "2018-19", "2019-20", "2020-21")
       
-      verify_fys_permitted(fy.year, permitted_fys)
+      fy.year <- validate_fys_permitted(fy.year, permitted_fys)
       
       prohibit_vector_recycling(fy.year, n_dependants, has_partner, fortnightly_rent)
     } else {

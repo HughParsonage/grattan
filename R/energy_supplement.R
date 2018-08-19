@@ -71,10 +71,15 @@ energy_supplement <- function(qualifying_payment,
     
   }
   
-  .qp <- tolower(qualifying_payment)
-  if (length(.qp) != max.length) {
-    .qp <- rep(.qp, times = max.length)
+  rep_via <- function(v) {
+    if (length(v) == 1L) {
+      rep_len(v, max.length)
+    } else {
+      v
+    }
   }
+  
+  .qp <- rep_via(standardize_payment_names(qualifying_payment))
   .qp[.qp == "age pension"] <- "pension"
   
   permitted <- c("pension", 
@@ -96,14 +101,6 @@ energy_supplement <- function(qualifying_payment,
          
   }
   
-  rep_via <- function(v) {
-    if (length(v) == 1L) {
-      rep_len(v, max.length)
-    } else {
-      v
-    }
-  }
-  
   qualifying_payment     %<>% rep_via
   has_partner            %<>% rep_via
   n_dependants           %<>% rep_via
@@ -115,7 +112,7 @@ energy_supplement <- function(qualifying_payment,
   
   out <- 
     Switch(.qp, 
-           "allowance" = {
+           "pension" = {
              if_else(has_partner, 275.60, 366.60)
            }, 
            "seniors health card" = {
@@ -181,7 +178,8 @@ energy_supplement <- function(qualifying_payment,
                      if_else(n_dependants == 0L, 
                              182, 
                              239.20))
-           })
+           },
+           DEFAULT = 0)
   
   switch(per,
          "fortnight" = {

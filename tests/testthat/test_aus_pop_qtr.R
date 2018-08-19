@@ -27,7 +27,8 @@ test_that("Returns correct values", {
                                            294616L, 294397L, 293969L, 293637L, 293110L, 296848L, 300623L, 
                                            304219L, 307681L, 308917L, 309894L, 310986L, 311858L, 310855L, 
                                            309617L, 308503L, 307228L, 307658L, 307941L, 308384L),
-               tol = 1)
+               tol = 5000,
+               scale = 1)
   expect_equal(aus_pop_qtr_age(date = as.Date("2015-01-01")), 
                c(309617L, 312599L, 306541L, 303699L, 305330L, 303537L, 300446L, 
                  297943L, 293234L, 286061L, 282031L, 279984L, 281517L, 284300L, 
@@ -43,14 +44,16 @@ test_that("Returns correct values", {
                  117245L, 109200L, 100965L, 94738L, 89194L, 85082L, 80922L, 74057L, 
                  66857L, 59752L, 52432L, 45257L, 38161L, 31289L, 25353L, 20199L, 
                  15161L, 10386L, 6943L, 5041L, 3669L, 2590L, 4130L), 
-               tol = 10e3)
+               tol = 10e3,
+               scale = 1)
 })
 
 test_that("Multiple unordered", {
   expect_equal(aus_pop_qtr_age(date = as.Date(c("2015-12-01", "2013-12-01", "2014-12-01")), 
                                age = c(2, 1, 3)), 
                c(311984, 309894, 306541), 
-               tol = 1000)
+               tol = 5000,
+               scale = 1)
 })
 
 test_that("Rolls work as expected", {

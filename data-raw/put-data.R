@@ -27,17 +27,20 @@ if (requireNamespace("SampleFile1415", quietly = TRUE)) {
               use.names = TRUE, 
               fill = TRUE)
 } else {
+  warning("SampleFile1415 not used.")
   sample_files_all <- get_sample_files_all()
 }
-if (requireNamespace("ozTaxData", quietly = TRUE)) {
-  sample_file_1516 <- as.data.table(ozTaxData::sample_15_16)
-  sample_file_1516[, fy.year := "2015-16"]
-  sample_file_1516[, WEIGHT := 50]
-  sample_files_all <- rbindlist(list(sample_files_all,
-                                     sample_file_1516),
-                                use.names = TRUE,
-                                fill = TRUE)
+if (!requireNamespace("ozTaxData", quietly = TRUE)) {
+  stop("ozTaxData needed for 2015-16 sample file.")
 }
+sample_file_1516 <- as.data.table(ozTaxData::sample_15_16)
+sample_file_1516[, fy.year := "2015-16"]
+sample_file_1516[, WEIGHT := 50]
+sample_files_all <- rbindlist(list(sample_files_all,
+                                   sample_file_1516),
+                              use.names = TRUE,
+                              fill = TRUE)
+
 
 library(grattan)
 library(readr)
@@ -140,6 +143,7 @@ cpi_unadj <-
   error = function(e) {
     fread("./data-raw/cpi-unadjusted-manual.tsv")
   })
+  
 
 cpi_seasonal_adjustment <-
   tryCatch({
@@ -171,6 +175,33 @@ cpi_trimmed <-
     fread("./data-raw/cpi-seasonally-adjusted-manual.tsv")
   })
 
+cpi_by_adj_fy <-
+  list("none" = cpi_unadj, 
+       "seasonal" = cpi_seasonal_adjustment,
+       "trimmed.mean" = cpi_trimmed) %>%
+  lapply(function(DT) {
+    DT %>%
+      .[endsWith(obsTime, "Q1")] %>%
+      .[, .(obsValue),
+        keyby = .(fy_year = yr2fy(as.integer(sub("-Q1", "", obsTime, fixed = TRUE))))]
+  }) %>%
+  rbindlist(idcol = "Adjustment", use.names = TRUE, fill = TRUE) %>%
+  setkey(Adjustment, fy_year)
+
+cpi_unadj_fy <- cpi_by_adj_fy[.("none"), .(fy_year, obsValue)]
+cpi_seasonal_adjustment_fy <- cpi_by_adj_fy[.("seasonal"), .(fy_year, obsValue)]
+cpi_trimmed_fy <- cpi_by_adj_fy[.("trimmed.mean"), .(fy_year, obsValue)]
+setkey(cpi_unadj_fy, fy_year)
+setkey(cpi_seasonal_adjustment_fy, fy_year)
+setkey(cpi_trimmed_fy, fy_year)
+
+min.cpi_unadj.yr <- fy2yr(cpi_unadj_fy[, first(fy_year)])
+max.cpi_unadj.yr <- fy2yr(cpi_unadj_fy[, last(fy_year)])
+min.cpi_seasonal_adjustment.yr <- fy2yr(cpi_seasonal_adjustment_fy[, first(fy_year)])
+max.cpi_seasonal_adjustment.yr <- fy2yr(cpi_seasonal_adjustment_fy[, last(fy_year)])
+min.cpi_trimmed.yr <- fy2yr(cpi_trimmed_fy[, first(fy_year)])
+max.cpi_trimmed.yr <- fy2yr(cpi_trimmed_fy[, last(fy_year)])
+
 
 wages_trend <- 
   tryCatch({
@@ -195,6 +226,27 @@ wages_trend <-
   })
 
 stopifnot(is.data.table(wages_trend))
+split2yq <- function(x) {
+  lapply(tstrsplit(x, split = ".Q", perl = TRUE),
+         as.integer)
+}
+wages_trend[, c("obsYear", "obsQtr") := split2yq(obsTime)]
+min.wage.yr <- wages_trend[, min(obsYear)]
+
+
+`%fin%` <- fastmatch::`%fin%`
+
+wages_trend_fy <- 
+  wages_trend[obsQtr == 2L] %>%
+  .[, .(fy_year = yr2fy(obsYear), 
+                  obsValue)] %>%
+  unique(by = "fy_year", fromLast = TRUE) %>%
+  setkey(fy_year) %T>%
+  # put match hash
+  .[, stopifnot("2015-16" %fin% fy_year)] %>%
+  .[]
+max.wage.yr <- wages_trend_fy[, max(fy2yr(fy_year))]
+
 
 lf_trend <- 
   tryCatch({
@@ -207,13 +259,41 @@ lf_trend <-
       as.data.frame(lf) %>% 
       as.data.table %T>%
       {stopifnot(nrow(.) > 0)} %>%
-      .[, .(obsTime, obsValue = as.integer(obsValue * 1000))] %T>%
-      fwrite("./data-raw/lf-trend.tsv", sep = "\t")
+      .[, .(obsTime, obsValue = as.integer(obsValue * 1000))]
+    
+    if ("2018-07" %notin% .subset2(lf, "obsTime") &&
+        "2018-06" == lf[, last(obsTime)]) {
+      message("Manually entering 2018-07 in lf")
+      lf <- rbind(lf, 
+                  data.table(obsTime = "2018-07",
+                             obsValue = as.integer(13294.7 * 1000)))
+    }
+    
+    fwrite(lf, "./data-raw/lf-trend.tsv", sep = "\t")
+    lf
+    
+    
   }, 
   error = function(e){
+    cat("Labour force retrieve errored: ", crayon::red(e$m), "\n")
+    message("Using old (", as.character(file.mtime("./data-raw/lf-trend.tsv")), ") version of lf-trend.")
     data.table::fread("./data-raw/lf-trend.tsv" 
                       , select = c("obsTime", "obsValue"))
   })
+
+lf_trend_fy <- 
+  lf_trend[endsWith(obsTime, "-01")] %>%
+  .[, .(fy_year = yr2fy(substr(obsTime, 1L, 4L)), 
+        obsValue)] %>%
+  unique(by = "fy_year", fromLast = TRUE) %>%
+  setkey(fy_year) %T>%
+  # put match hash
+  .[, stopifnot("2015-16" %fin% fy_year)] %>%
+  .[]
+min.lf.yr <- lf_trend_fy[, min(fy2yr(fy_year))]
+max.lf.yr <- lf_trend_fy[, max(fy2yr(fy_year))]
+
+
 
 cgt_expenditures <- 
   data.table::fread("./data-raw/tax-expenditures-cgt-historical.tsv")
@@ -1021,6 +1101,12 @@ setkey(generic_inflators_1415[, fy_year := NULL], h, variable)
 setkey(generic_inflators_1516[, fy_year := NULL], h, variable)
 
 setkey(wages_trend, obsTime)
+setindex(wages_trend, obsQtr)
+.date_data_updated <- as.Date("2018-08-17") #Sys.Date()
+
+library(fastmatch)
+fys1901 <- yr2fy(1901:2100)
+"1999-00" %fin% fys1901
 
 use_and_write_data(tax_table2, 
                    lito_tbl, 
@@ -1031,8 +1117,13 @@ use_and_write_data(tax_table2,
                    cpi_unadj,
                    cpi_seasonal_adjustment,
                    cpi_trimmed,
+                   cpi_unadj_fy,
+                   cpi_seasonal_adjustment_fy,
+                   cpi_trimmed_fy,
                    wages_trend,
+                   wages_trend_fy,
                    lf_trend,
+                   lf_trend_fy,
                    cgt_expenditures,
                    mean_of_each_taxstats_var, 
                    meanPositive_of_each_taxstats_var,
@@ -1073,4 +1164,18 @@ use_and_write_data(tax_table2,
                    youth_annual_rates,
 
                    # possibly separable
-                   .avbl_fractions)
+                   .avbl_fractions,
+                   .date_data_updated,
+                   fys1901,
+                   min.wage.yr,
+                   max.wage.yr,
+                   #
+                   min.cpi_unadj.yr,
+                   max.cpi_unadj.yr,
+                   min.cpi_seasonal_adjustment.yr,
+                   max.cpi_seasonal_adjustment.yr,
+                   min.cpi_trimmed.yr,
+                   max.cpi_trimmed.yr,
+                   #
+                   min.lf.yr,
+                   max.lf.yr)

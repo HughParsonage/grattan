@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grattan</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.0.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.1.0</span>
       </span>
     </div>
 
@@ -126,9 +126,10 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>income_tax</span>(<span class='no'>income</span>, <span class='no'>fy.year</span>, <span class='kw'>age</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>family_status</span> <span class='kw'>=</span> <span class='st'>"individual"</span>,
-  <span class='kw'>n_dependants</span> <span class='kw'>=</span> <span class='fl'>0L</span>, <span class='kw'>.dots.ATO</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>return.mode</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"numeric"</span>,
-  <span class='st'>"integer"</span>), <span class='kw'>allow.forecasts</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>.debug</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>income_tax</span>(<span class='no'>income</span>, <span class='kw'>fy.year</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>age</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>family_status</span> <span class='kw'>=</span> <span class='st'>"individual"</span>, <span class='kw'>n_dependants</span> <span class='kw'>=</span> <span class='fl'>0L</span>, <span class='kw'>.dots.ATO</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>return.mode</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"numeric"</span>, <span class='st'>"integer"</span>), <span class='kw'>allow.forecasts</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>.debug</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,7 +141,8 @@
     <tr>
       <th>fy.year</th>
       <td><p>The financial year in which the income was earned. Tax years 2000-01 to 2016-17 are provided, as well as the tax years 2017-18 to 2019-20, for convenience, under the assumption the 2017 Budget measures will pass. 
-In particular, the tax payable is calculated under the assumption that the rate of the Medicare levy will rise to 2.5% in the 2019-20 tax year.</p></td>
+In particular, the tax payable is calculated under the assumption that the rate of the Medicare levy will rise to 2.5% in the 2019-20 tax year.
+If fy.year is not given, the current financial year is used by default.</p></td>
     </tr>
     <tr>
       <th>age</th>
@@ -407,7 +409,8 @@ For years preceding the introduction of SAPTO, the maximum offset is assumed to 
 #&gt; 258771:               0              0            80571  3701.525
 #&gt; 258772:               0              0            46460  6530.520
 #&gt; 258773:               0              0                0     0.000
-#&gt; 258774:               0              0            16542  7007.640</div></pre>
+#&gt; 258774:               0              0            16542  7007.640</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -423,14 +426,14 @@ For years preceding the introduction of SAPTO, the maximum offset is assumed to 
 
     <h2>Author</h2>
     
-Tim Cameron, Brendan Coates, Hugh Parsonage, William Young
+Tim Cameron, Brendan Coates, Matthew Katzen, Hugh Parsonage, William Young
 
   </div>
 </div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, William Young.</p>
+  <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, Matthew Katzen, William Young.</p>
 </div>
 
 <div class="pkgdown">

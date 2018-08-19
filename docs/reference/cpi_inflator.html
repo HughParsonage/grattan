@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grattan</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.0.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.1.0</span>
       </span>
     </div>
 
@@ -126,9 +126,10 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>cpi_inflator</span>(<span class='kw'>from_nominal_price</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>from_fy</span>, <span class='kw'>to_fy</span> <span class='kw'>=</span> <span class='st'>"2014-15"</span>,
+    <pre class="usage"><span class='fu'>cpi_inflator</span>(<span class='kw'>from_nominal_price</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>from_fy</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>to_fy</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>adjustment</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"seasonal"</span>, <span class='st'>"none"</span>, <span class='st'>"trimmed.mean"</span>),
-  <span class='kw'>useABSConnection</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>allow.projection</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+  <span class='kw'>useABSConnection</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>allow.projection</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>accelerate.above</span> <span class='kw'>=</span> <span class='fl'>100000L</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,12 +139,9 @@
       <td><p>(numeric) the price (or vector of prices) to be inflated</p></td>
     </tr>
     <tr>
-      <th>from_fy</th>
-      <td><p>(character) a character vector with each element in the form "2012-13" representing the financial year contemporaneous to the from_nominal_price.</p></td>
-    </tr>
-    <tr>
-      <th>to_fy</th>
-      <td><p>(character) a character vector with each element in the form "2012-13" representing the financial year that prices are to be inflated.</p></td>
+      <th>from_fy, to_fy</th>
+      <td><p>(character) a character vector with each element in the form "2012-13" representing the financial years between which the CPI inflator is desired.</p>
+<p>If both <code>from_fy</code> and <code>to_fy</code> are <code>NULL</code> (the default), <code>from_fy</code> is set to the previous financial year and <code>to_fy</code> to the current financial year, with a warning. Setting only one is an error.</p></td>
     </tr>
     <tr>
       <th>adjustment</th>
@@ -152,12 +150,19 @@
     <tr>
       <th>useABSConnection</th>
       <td><p>Should the function connect with ABS.Stat via an SDMX connection? If <code>FALSE</code> (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. 
-The internal data is up-to-date as of 2017-Q4. 
+The internal data was updated on 2018-08-17 to 2018-Q2. 
 If using <code>useABSConnection = TRUE</code>, ensure you have <code>rsdmx (&gt;= 0.5-10)</code> up-to-date.</p></td>
     </tr>
     <tr>
       <th>allow.projection</th>
       <td><p>Should projections beyond the ABS's data be allowed?</p></td>
+    </tr>
+    <tr>
+      <th>accelerate.above</th>
+      <td><p>An integer setting the threshold for 'acceleration'. 
+When the maximum length of the arguments exceeds this value, calculate each unique value individually 
+then combine. Set to 100,000 as a rule of thumb beyond which calculation speeds benefit
+dramatically. Can be set to <code>Inf</code> to disable acceleration.</p></td>
     </tr>
     </table>
     
@@ -184,7 +189,7 @@ If using <code>useABSConnection = TRUE</code>, ensure you have <code>rsdmx (&gt;
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, William Young.</p>
+  <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, Matthew Katzen, William Young.</p>
 </div>
 
 <div class="pkgdown">

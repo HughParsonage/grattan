@@ -26,3 +26,4 @@ test_that("Values", {
   expect_equal(validate_per("year", missing_per = FALSE), 
                1)
 })
+
