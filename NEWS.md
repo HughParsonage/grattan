@@ -1,5 +1,23 @@
+## 1.6.4.0
+### 2018-08-19
+
+* Potentially minor breaking change: `yr2fy(x)` no longer works for x = 1900L, 
+  despite a unit test, for the sake of performance.
+  
+```
+  #> Last change: NAMESPACE at 2018-08-19 14:47:14 (4 mins ago).
+  #> Unit: milliseconds
+  #>       expr min  lq mean median  uq max neval cld
+  #>   yr2fy(z)  75  88   98     90 101 161   100  a 
+  #>  .yr2fy(z) 274 286  298    297 302 359   100   b
+```
+  
+  Use `yr2fy(x, assume1901_2100 = FALSE)` if you need the old behaviour.
+
+
 ## 1.6.3.0
-### 2018-07-21
+### 2018-08-18
+
 * New allowances functions (usable for the 2015-16 financial year)
     - `age_pension`, 
     - `carer_payment`
@@ -12,6 +30,7 @@
 * Data has been updated for wage, CPI, and labour force inflators.
 
 Bug fixes:
+
 * `inflator` no longer fails when `to_fy` is length > 1 and unordered.
 * `inflator` and `cpi_inflator`, `lf_inflator_fy`, and `wage_inflator` are now much faster when either `from_fy` or `to_fy` have more than 100,000 elements:
 

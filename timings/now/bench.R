@@ -68,6 +68,15 @@ microbenchmark(
   times = 1L, control = list(order = "inorder")) %>%
   save_it
 
+x2014L_10K <- rep_len(2014L, 10e3)
+x1984_2015_20M <- rep(1991:2010, each = 1e6, length.out = 20e6)
+microbenchmark(
+  yr2fy(2014L),
+  yr2fy(x2014L_10K),
+  yr2fy(x1984_2015_20M),
+  times = 2L, control = list(order = "inorder")) %>%
+  save_it
+
 shell("git add timings/now/result*tsv")
 
 
