@@ -74,7 +74,6 @@ microbenchmark(
   yr2fy(2014L),
   yr2fy(x2014L_10K),
   yr2fy(x1984_2015_20M),
-  sfall[, yr2fy(fy.year)],
   times = 2L, control = list(order = "inorder")) %>%
   save_it
 

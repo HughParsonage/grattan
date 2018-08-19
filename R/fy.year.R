@@ -5,6 +5,8 @@
 #' @param yr_ending An integer representing a year.
 #' @param fy.yr A string suspected to be a financial year.
 #' @param date A string or date for which the financial year is desired. Note that \code{yr2fy} does not check its argument is an integer.
+#' @param assume1901_2100 For \code{yr2fy}, assume that \code{yr_ending} is between 1901 and 2100, 
+#' for performance. By default, set to `getOption("grattan.assume1901_2100", TRUE)`.
 #' @details The following forms are permitted: \code{2012-13}, \code{201213}, \code{2012 13}, only.
 #' However, the \code{2012-13} form is preferred and will improve performance. 
 #' 
@@ -144,7 +146,17 @@ fy.year <- function(yr_ending){
   paste0(as.integer(yr_ending) - 1, "-", substr(yr_ending, 3, 4))
 }
 
-yr2fy <- function(yr_ending) {
+yr2fy <- function(yr_ending, assume1901_2100 = .getOption("grattan.assume1901_2100", TRUE)) {
+  if (assume1901_2100 ||
+      AND(min(yr_ending) > 1900L, 
+          max(yr_ending) < 2100L)) {
+    fys1901[yr_ending - 1900L]
+  } else {
+    .yr2fy(yr_ending)
+  }
+}
+
+.yr2fy <- function(yr_ending) {
   if (length(yr_ending) > 10e3L) {
     # Apparently quicker for > 1000
     accel_repetitive_input(yr_ending, yr2fy)

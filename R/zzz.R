@@ -2,7 +2,8 @@
   
   op <- options()
   opgrattan <- list(
-    "grattan.verbose" = FALSE
+    "grattan.verbose" = FALSE,
+    "grattan.assume1901_2100" = TRUE
   )
   toset <- !(names(opgrattan) %in% names(op))
   if (any(toset)) options(opgrattan[toset])

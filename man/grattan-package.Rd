@@ -14,13 +14,6 @@ Tax modelling and other common tasks for Australian policy analysts,
 in support of the Grattan Institute, Melbourne. 
 <https://grattan.edu.au>
 }
-\section{Package options}{
-
-\describe{
-\item{\code{grattan.verbose}}{Emit diagnostic messages (via \code{cat()}))}
-}
-}
-
 \seealso{
 Useful links:
 \itemize{
