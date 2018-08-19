@@ -7,10 +7,6 @@
 \alias{pv}
 \alias{pmt}
 \alias{\url{http://cvs.moodle.org/contrib/patches/question_calculated_extended/calculated/packages/financial/financial_class.php?view=co}}
-\alias{irr}
-\alias{fv}
-\alias{pv}
-\alias{pmt}
 \title{Financial functions}
 \usage{
 npv(rate, values)

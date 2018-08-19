@@ -16,7 +16,7 @@ install.packages("grattan")
 library(grattan)
 ```
 
-    ## Last change: test_weighted_ntile.R at 2018-06-17 19:08:13 (20 hours ago).
+    ## Last change: test_utils.R at 2018-08-18 02:40:26 (25 mins ago).
 
 `income_tax`
 ------------
@@ -157,6 +157,52 @@ Access ABS data
 NEWS
 ====
 
+1.6.3.0
+-------
+
+### 2018-07-21
+
+-   New allowances functions (usable for the 2015-16 financial year)
+    -   `age_pension`,
+    -   `carer_payment`
+    -   `carers_allowance`
+    -   `energy_supplement`
+    -   `family_tax_benefit`
+    -   `newstart_allowance`
+    -   `pension_supplement`
+
+Bug fixes: \* `inflator` no longer fails when `to_fy` is length &gt; 1 and unordered. \* `inflator` and `cpi_inflator`, `lf_inflator_fy`, and `wage_inflator` are now much faster when either `from_fy` or `to_fy` have more than 100,000 elements:
+
+``` r
+set.seed(19952010)
+from_fys <- sample(yr2fy(1995:2010), size = 1e6, replace = TRUE)
+microbenchmark(cpi_inflator(from_fy = from_fys, to_fy = "2015-16"))
+# Old
+Unit: seconds
+                                                expr      min      lq     mean   median       uq
+ cpi_inflator(from_fy = from_fys, to_fy = "2015-16") 1.519483 1.54438 1.550628 1.549735 1.554507
+      max neval
+ 1.661502   100
+ 
+# New
+Unit: milliseconds
+                                                expr      min       lq     mean   median       uq
+ cpi_inflator(from_fy = from_fys, to_fy = "2015-16") 40.71753 41.94061 47.93162 42.93946 48.08461
+      max neval
+ 191.3497   100
+```
+
+-   Fixed failing interaction between temporary budget repair levy and small business tax offset in 2016-17.
+
+1.6.2.0
+-------
+
+### 2018-06-28
+
+-   Added default values to the following functions:
+    -   `income_tax`, `income_tax_sapto`: the default value for fy.year is the current financial year
+    -   `cpi_inflator`, `lf_inflator_fy`, `wage_inflator`: if both from\_fy and to\_fy are missing, the default values become the previous and current financial years respectively. If only one of the two are missing, an error appears.
+
 1.6.1.0
 -------
 
@@ -166,6 +212,7 @@ NEWS
 -   Bug fixes:
     -   `small_business_tax_offset()` is now always positive, fixing the original misinterpretation of the legislation whereby negative business income resulted in a negative offset.
 -   `taxstats1516` is now a suggested dependency.
+-   `income_tax` is about twice as fast since 1.6.0.0: 1.5-2.0s down from 3.0-3.7s on the 100% population (13 million)
 
 1.6.0.0
 -------

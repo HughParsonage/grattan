@@ -25,6 +25,8 @@ test_that("Other fy utils", {
 
 test_that("all_fy", {
   expect_true(all_fy(c("2000-01", "2010-11", "2013-14", "2020-21")))
+  expect_true(all_fy(c("2000-01", "2010-11", "2013-14", "2020-21"),
+                     permitted = c("2000-01", "2010-11", "2013-14", "2020-21")))
 })
 
 test_that("is_fy2", {
@@ -41,8 +43,31 @@ test_that("Correct logic when asserting fys", {
 })
 
 test_that("fy.year and yr2fy are identical", {
-  x <- 1900:2100
+  x <- 1901:2099
   expect_identical(fy.year(x), yr2fy(x))
 })
+
+test_that("grattan.assume1901_2100 options", {
+  skip_if_not_installed("rlang")
+  skip_on_cran()
+  x <- 1900:2099
+  rlang::with_options(
+    expect_identical(fy.year(x), yr2fy(x)),
+    grattan.assume1901_2100 = FALSE
+  )
+  expect_identical(fy.year(x), yr2fy(x, FALSE))
+})
+
+test_that("yr2fy and .yr2fy", {
+  x <- 1900:2100
+  expect_identical(fy.year(x), .yr2fy(x))
+})
+
+test_that("range_fy", {
+  expect_identical(max_fy2yr(c("2015-16", "2000-01", "2001-02")), 2016L)
+  expect_identical(min_fy2yr(c("2015-16", "2000-01", "2001-02")), 2001L)
+})
+
+
 
 

@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grattan</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.0.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.1.0</span>
       </span>
     </div>
 
@@ -150,6 +150,15 @@
 The following forms are allowed: <code>2012-13</code>, <code>201213</code>, <code>2012 13</code>, only.
 For <code>fy.year</code>, <code>yr2fy</code>, and <code>date2fy</code>, the financial year. 
 For the inverses, a numeric corresponding to the year.</p>
+<p><code>fy.year</code> is a deprecated alias for <code>yr2fy</code>, the latter is slightly more efficient, as well as more declarative.</p>
+<p><code>fy2yr</code> converts a financial year to the year ending: <code>fy2yr("2016-17")</code> returns 2017. <code>yr2fy</code> is the inverse: <code>yr2fy(fy2yr("2016-17")) == "2016-17"</code>.</p>
+<p><code>fy2date</code> converts a financial year to the 30 June of the financial year ending.</p>
+<p><code>date2fy</code> converts a date to the corresponding financial year.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The following forms are permitted: <code>2012-13</code>, <code>201213</code>, <code>2012 13</code>, only.
+However, the <code>2012-13</code> form is preferred and will improve performance.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -161,6 +170,8 @@ For the inverses, a numeric corresponding to the year.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
@@ -170,7 +181,7 @@ For the inverses, a numeric corresponding to the year.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, William Young.</p>
+  <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, Matthew Katzen, William Young.</p>
 </div>
 
 <div class="pkgdown">

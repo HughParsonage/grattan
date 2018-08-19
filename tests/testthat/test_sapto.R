@@ -1,11 +1,11 @@
 context("SAPTO")
 
 test_that("Mising fy.year",{
-  expect_warning(income_tax_sapto(33000,sapto.eligible = T), 
+  expect_warning(income_tax_sapto(33000, sapto.eligible = TRUE), 
                  regexp = "fy\\.year is missing, using current financial year")
   
-  expect_equal(suppressWarnings(income_tax_sapto(33000,sapto.eligible = T)),
-               income_tax_sapto(33000,fy.year=date2fy(Sys.Date()),sapto.eligible = T))
+  expect_equal(suppressWarnings(income_tax_sapto(33000, sapto.eligible = TRUE)),
+               income_tax_sapto(33000, fy.year=date2fy(Sys.Date()), sapto.eligible = TRUE))
 })
 
 test_that("SAPTO for singles", {
@@ -64,24 +64,25 @@ test_that("SAPTO for partners", {
                3134)
   
   expect_equal(sapto(37130, fy.year = "2015-16", Spouse_income = 1e-6, family_status = "married"), 
-               3204, tol = 1)
+               3204,
+               tol = 1, scale = 1)
   expect_equal(sapto(37230, fy.year = "2015-16", Spouse_income = 1e-6, family_status = "married"), 
-               3204, tol = 1)
+               3204, tol = 1, scale = 1)
   expect_equal(sapto(37280, fy.year = "2015-16", Spouse_income = 1e-6, family_status = "married"), 
-               3198, tol = 1)
+               3198, tol = 1, scale = 1)
   expect_equal(sapto(37330, fy.year = "2015-16", Spouse_income = 1e-6, family_status = "married"), 
-               3192, tol = 1)
+               3192, tol = 1, scale = 1)
   
   
   
   expect_equal(sapto(60000, fy.year = "2015-16", Spouse_income = 100, family_status = "married"), 
-               358, tol = 1)
+               358, tol = 1, scale = 1)
   expect_equal(sapto(61000, fy.year = "2015-16", Spouse_income = 100, family_status = "married"), 
-               233, tol = 1)
+               233, tol = 1, scale = 1)
   expect_equal(sapto(62000, fy.year = "2015-16", Spouse_income = 100, family_status = "married"), 
-               108, tol = 1)
+               108, tol = 1, scale = 1)
   expect_equal(sapto(65000, fy.year = "2015-16", Spouse_income = 100, family_status = "married"), 
-               0, tol = 1)
+               0, tol = 1, scale = 1)
   
   expect_lte(abs(sapto(41000, fy.year = "2015-16", Spouse_income = 41000, family_status = "married") - 99) < 1)
   expect_lte(abs(sapto(41100, fy.year = "2015-16", Spouse_income = 41100, family_status = "married") - 87) < 1)

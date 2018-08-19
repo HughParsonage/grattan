@@ -136,3 +136,4 @@ test_that("Income annual", {
   expect_equal(newstart_allowance(annual_income = 10000, per = "fortnight"),
                373.0308, tolerance = 1e-3)
 })
+
