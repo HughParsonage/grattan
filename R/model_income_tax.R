@@ -108,6 +108,8 @@ model_income_tax <- function(sample_file,
                              
                              sbto_discount = NULL,
                              
+                             cg_discount_rate = NULL,
+                             
                              calc_baseline_tax = TRUE,
                              return. = c("sample_file", "tax", "sample_file.int"),
                              clear_tax_cols = TRUE,
@@ -166,6 +168,12 @@ model_income_tax <- function(sample_file,
     absent_cols <- setdiff(s1213_noms, sample_file_noms)
     stop("`sample_file` lacked the following required columns:\n\t",
          paste0(absent_cols, collapse = "\n\t"), ".\n")
+  }
+  
+  #cg adjustment
+  if (!is.null(cg_discount_rate)) {
+    sample_file[["Taxable_Income"]] <-  pmaxC(sample_file[["Taxable_Income"]] - sample_file[["Net_CG_amt"]] + (sample_file[["Tot_CY_CG_amt"]] * cg_discount_rate),
+                                              0) 
   }
   
   income <- sample_file[["Taxable_Income"]]
@@ -795,9 +803,10 @@ model_income_tax <- function(sample_file,
   }
   
   switch(return.,
-         "tax" = new_tax,
-         "sample_file" = set(sample_file, j = "new_tax", value = new_tax),
-         "sample_file.int" = set(sample_file, j = "new_tax", value = as.integer(new_tax)))
+         "tax" = new_tax)
+         #"sample_file" = set(sample_file, j = "new_tax", value = new_tax),
+         #"sample_file.int" = set(sample_file, j = "new_tax", value = as.integer(new_tax)))
+  
 }
 
 
