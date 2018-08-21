@@ -7,11 +7,10 @@
 youth_allowance(ordinary_income = 0, fy.year = date2fy(Sys.Date()),
   age = 18, eligible_if_over22 = FALSE, has_partner = FALSE,
   living_at_home = FALSE, n_dependants = 0L,
-  isjspceoalfofcoahodeoc = FALSE, is_student = TRUE,
-  per = "fortnight", taper1 = 0.5, taper2 = 0.6,
-  FT_YA_student_lower = 437, FT_YA_student_upper = 524,
-  FT_YA_jobseeker_lower = 143, FT_YA_jobseeker_upper = 250,
-  excess_partner_income_mu = 0.6)
+  isjspceoalfofcoahodeoc = FALSE, is_student = TRUE, per = "fortnight",
+  taper1 = 0.5, taper2 = 0.6, FT_YA_student_lower = 437,
+  FT_YA_student_upper = 524, FT_YA_jobseeker_lower = 143,
+  FT_YA_jobseeker_upper = 250, excess_partner_income_mu = 0.6)
 }
 \arguments{
 \item{ordinary_income}{Fortnightly individual income. Defualt is zero.}
