@@ -11,5 +11,6 @@ model_rent_assistance(sample_file, .Prop_rent_paid_by_RA, Max_rate = NULL,
 Model Rent Assistance
 }
 \examples{
-
+sample<- CJ(rent = 1:500, n_dependants = 0:3, has_partner = 0:1 > 0, is_homeowner = 0:1 > 0, lives_in_sharehouse = 0:1 > 0) 
+model_rent_assistance(sample, .Prop_rent_paid_by_RA = 0.75, Max_rate = 500, Min_rent = 100)
 }

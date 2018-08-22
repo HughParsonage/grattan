@@ -10,10 +10,16 @@ model_rent_assistance <- function(sample_file,
                                   .Prop_rent_paid_by_RA,
                                   Max_rate = NULL,
                                   Min_rent = NULL) {
-  #check sample file is of correct format
+  #check sample file has correct format
   stopifnot(is.data.table(sample_file))
+  cols_required <- c("rent",  "n_dependants", "has_partner", "is_homeowner", "lives_in_sharehouse")
+  if (!all(cols_required %chin% colnames(sample_file))) {
+    absent_cols <- setdiff(cols_required, colnames(sample_file))
+    stop("`sample_file` lacked the following required columns:\n\t",
+         paste0(absent_cols, collapse = "\n\t"), ".\n")
+  }
   
-  
+  #actual calculation
   Rent <- sample_file[['rent']]
   N_dependants <- sample_file[['n_dependants']]
   Has_partner <- sample_file[['has_partner']]
@@ -29,4 +35,3 @@ model_rent_assistance <- function(sample_file,
                   max_rate = Max_rate,
                   min_rent = Min_rent)
 }
-
