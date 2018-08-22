@@ -4,12 +4,16 @@
 \alias{rent_assistance}
 \title{Rent assistance}
 \usage{
-rent_assistance(fortnightly_rent = Inf, fy.year = NULL, Date = NULL,
-  n_dependants = 0L, has_partner = FALSE,
-  .prop_rent_paid_by_RA = 0.75, max_rate = NULL, min_rent = NULL)
+rent_assistance(fortnightly_rent = Inf, per = "fortnight", fy.year = NULL,
+  Date = NULL, n_dependants = 0L, has_partner = FALSE,
+  .prop_rent_paid_by_RA = 0.75, max_rate = NULL, min_rent = NULL,
+  sharers_provision_applies = FALSE, is_homeowner = FALSE,
+  lives_in_sharehouse = FALSE)
 }
 \arguments{
-\item{fortnightly_rent}{The fortnightly rent paid by each individual. By default, infinity, so the maximum rent assistance is returned by default, since rent assistance is capped at a maximum rate.}
+\item{fortnightly_rent}{The fortnightly rent paid by each individual. By default, infinity, so the maximum rent assistance is returned by default, since rent assistance is capped at a maximum rate. Note the criteria for board and lodging which can be found at \url{http://guides.dss.gov.au/guide-social-security-law/3/8/1/70}}
+
+\item{per}{Specifies the timeframe in which payments will be made. Can either take value "fortnight" or "annual".}
 
 \item{fy.year}{(character) The financial year over which rent assistance is to be calculated.
 When left as \code{NULL}, defaults to the user's financial year, unless \code{max_rate} and \code{min_rent} are both set. If \code{fy.year} is set, the annual payment is provided.}
@@ -29,6 +33,12 @@ the internal table.}
 \item{max_rate}{If not \code{NULL}, a numeric vector indicating for each individual the maximum rent assistance payable.}
 
 \item{min_rent}{If not \code{NULL}, a numeric vector indicating for each individual the minimum fortnightly rent above which rent assistance is payable. \code{max_rate} and \code{min_rent} must not be used when \code{fy.year} is set.}
+
+\item{sharers_provision_applies}{(logical, default: FALSE) Does the sharers provision apply to the parent payment? The list of functions can be found in table 2 column 4 \url{http://guides.dss.gov.au/guide-social-security-law/3/8/1/10}}
+
+\item{is_homeowner}{(logical, default: FALSE) Does the individual own their own home?}
+
+\item{lives_in_sharehouse}{(logical, defualt: FALSE) Does the individual live in a sharehouse?}
 }
 \value{
 If \code{fy.year} is used, the annual rent assistance payable for each individual; 
