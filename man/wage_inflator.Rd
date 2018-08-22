@@ -7,7 +7,8 @@
 wage_inflator(wage = 1, from_fy = NULL, to_fy = NULL,
   useABSConnection = FALSE, allow.projection = TRUE,
   forecast.series = c("mean", "upper", "lower", "custom"),
-  forecast.level = 95, wage.series = NULL, accelerate.above = 100000L)
+  forecast.level = 95, wage.series = NULL,
+  accelerate.above = 100000L)
 }
 \arguments{
 \item{wage}{The amount to be inflated (1 by default).}

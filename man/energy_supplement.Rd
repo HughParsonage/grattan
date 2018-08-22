@@ -11,8 +11,8 @@ Chapter 5, \sQuote{Payment rates}, s. 5.1.10.20 \dQuote{Clean Energy Household A
 \usage{
 energy_supplement(qualifying_payment, has_partner = FALSE,
   n_dependants = 0L, age = 21, lives_at_home = FALSE,
-  independent = FALSE, isjspceoalfofcoahodeoc = FALSE, long_term = FALSE,
-  per = c("year", "fortnight", "quarter"))
+  independent = FALSE, isjspceoalfofcoahodeoc = FALSE,
+  long_term = FALSE, per = c("year", "fortnight", "quarter"))
 }
 \arguments{
 \item{qualifying_payment}{A character vector designating the payment type the individual is entitled to. Valid strings are
