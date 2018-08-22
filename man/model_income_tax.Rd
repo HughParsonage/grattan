@@ -20,7 +20,7 @@ model_income_tax(sample_file, baseline_fy, n_dependants = 0L,
   Budget2018_lamington = FALSE, Budget2018_lito_202223 = FALSE,
   Budget2018_watr = FALSE, sapto_eligible = NULL,
   sapto_max_offset = NULL, sapto_lower_threshold = NULL,
-  sapto_taper = NULL, sbto_discount = NULL, cg_discount_rate = NULL,
+  sapto_taper = NULL, sbto_discount = NULL, cgt_discount_rate = NULL,
   calc_baseline_tax = TRUE, return. = c("sample_file", "tax",
   "sample_file.int"), clear_tax_cols = TRUE,
   warn_upper_thresholds = TRUE, .debug = FALSE)
@@ -91,7 +91,7 @@ If \code{NULL}, the default, then eligibility is determined by \code{age_range} 
 
 \item{sbto_discount}{The \code{tax_discount} in \code{\link{small_business_tax_offset}}.}
 
-\item{cg_discount_rate}{(Numeric) The capital gains discount rate as a decimal. If no value is given the \code{Net_CG_amt} is used as part of the \code{Taxable_Income} column in \code{sample_file}.}
+\item{cgt_discount_rate}{(numeric(1)) The capital gains tax discount rate, currently 50\%.}
 
 \item{calc_baseline_tax}{(logical, default: \code{TRUE}) Should the income tax in \code{baseline_fy} be included as a column in the result?}
 
