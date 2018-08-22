@@ -793,7 +793,31 @@ test_that("Debugger", {
                            "sbto.", "medicare_levy."))
 })
 
-
+test_that("CG discount", {
+  skip_on_cran()
+  skip_if_not_installed("taxstats"); skip_on_cran()
+  library(taxstats)
+  s12131314 <- 
+    copy(sample_file_1213)
+  expect_equal(model_income_tax(s12131314,
+                       "2013-14",
+                       ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3),
+                       return. = "tax"),
+               model_income_tax(s12131314,
+                                "2013-14",
+                                ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3),
+                                cg_discount_rate = 0.5,
+                                return. = "tax"))
+  expect_lt(sum(model_income_tax(s12131314,
+                             "2013-14",
+                             ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3),
+                             return. = "tax")),
+            sum(model_income_tax(s12131314,
+                             "2013-14",
+                             ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3),
+                             cg_discount_rate = 0.4,
+                             return. = "tax")))
+})
 
 
 
