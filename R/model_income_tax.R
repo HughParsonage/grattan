@@ -174,7 +174,7 @@ model_income_tax <- function(sample_file,
   
   #cg adjustment
   if (!is.null(cg_discount_rate)) {
-    sample_file[, Taxable_Income := ifelse(Net_CG_amt==Tot_CY_CG_amt & Tot_CY_CG_amt > 0, #assume ineligible if Net_CG_amt==Tot_CY_CG_amt
+    sample_file[, Taxable_Income := if_else(Net_CG_amt==Tot_CY_CG_amt & Tot_CY_CG_amt > 0, #assume ineligible if Net_CG_amt==Tot_CY_CG_amt
                                            Taxable_Income,
                                            pmaxC(Taxable_Income + Net_CG_amt * (1 - 2 * cg_discount_rate),
                                                  0))] 
