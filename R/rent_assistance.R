@@ -183,14 +183,22 @@ rent_assistance <- function(fortnightly_rent = Inf,
       stop("`min_rent` was set but was not numeric.")
     }
     
-    prohibit_vector_recycling(.prop_rent_paid_by_RA, 
-                              fortnightly_rent,
-                              min_rent,
-                              max_rate)
-    Rent <- fortnightly_rent
+    max.length <- 
+      prohibit_vector_recycling.MAXLENGTH(.prop_rent_paid_by_RA, 
+                                          fortnightly_rent,
+                                          min_rent,
+                                          max_rate)
     
-    ra <- pminV(.prop_rent_paid_by_RA * pmaxC(Rent - min_rent, 0),
-                max_rate)
+    input <- lapply(list(.prop_rent_paid_by_RA = .prop_rent_paid_by_RA, 
+                         Rent = fortnightly_rent,
+                         min_rent = min_rent,
+                         max_rate = max_rate), 
+                    rep_len, max.length)
+                      
+    setDT(input)
+    
+    ra <- input[, pminV(.prop_rent_paid_by_RA * pmax0(Rent - min_rent),
+                        max_rate)]
   }
   
   return(ra)

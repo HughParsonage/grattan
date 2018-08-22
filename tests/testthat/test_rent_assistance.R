@@ -42,3 +42,10 @@ test_that("Rent assistance", {
   expect_gt(rent_assistance(500, "2015-16", n_dependants = 1), 
             rent_assistance(500, "2015-16", n_dependants = 0))
 })
+
+test_that("Multi max rent", {
+  # pminV originally caused underflow
+  expect_false(is.unsorted(rent_assistance(1:500, max_rate = 100, min_rent = 50)))
+})
+
+
