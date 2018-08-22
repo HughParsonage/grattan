@@ -3,6 +3,7 @@
 \name{lf_inflator}
 \alias{lf_inflator}
 \alias{lf_inflator_fy}
+\alias{lf_inflator}
 \title{Labour force inflators}
 \source{
 ABS Cat 6202.0 \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocument}.
