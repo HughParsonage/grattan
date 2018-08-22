@@ -45,6 +45,8 @@
 #' @param sapto_taper The taper rate beyond \code{sapto_lower_threshold}.
 #' @param sbto_discount The \code{tax_discount} in \code{\link{small_business_tax_offset}}.
 #' 
+#' @param cg_discount_rate (Integer) The capital gains discount rate. If no value is given the \code{Net_CG_amt} is used as part of the \code{Taxable_Income} column in \code{sample_file}.
+#' 
 #' @param calc_baseline_tax (logical, default: \code{TRUE}) Should the income tax in \code{baseline_fy} be included as a column in the result?
 #' @param return. What should the function return? One of \code{tax}, \code{sample_file}, or \code{sample_file.int}. 
 #' If \code{tax}, the tax payable under the settings; if \code{sample_file}, the \code{sample_file},
@@ -172,8 +174,8 @@ model_income_tax <- function(sample_file,
   
   #cg adjustment
   if (!is.null(cg_discount_rate)) {
-    sample_file[["Taxable_Income"]] <-  pmaxC(sample_file[["Taxable_Income"]] - sample_file[["Net_CG_amt"]] + (sample_file[["Tot_CY_CG_amt"]] * cg_discount_rate),
-                                              0) 
+    sample_file[, Taxable_Income := pmaxC(Taxable_Income - Net_CG_amt + Tot_CY_CG_amt * (1 - cg_discount_rate),
+                                          0)] 
   }
   
   income <- sample_file[["Taxable_Income"]]
@@ -803,9 +805,9 @@ model_income_tax <- function(sample_file,
   }
   
   switch(return.,
-         "tax" = new_tax)
-         #"sample_file" = set(sample_file, j = "new_tax", value = new_tax),
-         #"sample_file.int" = set(sample_file, j = "new_tax", value = as.integer(new_tax)))
+         "tax" = new_tax,
+         "sample_file" = set(sample_file, j = "new_tax", value = new_tax),
+         "sample_file.int" = set(sample_file, j = "new_tax", value = as.integer(new_tax)))
   
 }
 

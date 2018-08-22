@@ -90,6 +90,8 @@ If \code{NULL}, the default, then eligibility is determined by \code{age_range} 
 
 \item{sbto_discount}{The \code{tax_discount} in \code{\link{small_business_tax_offset}}.}
 
+\item{cg_discount_rate}{(Integer) The capital gains discount rate. If no value is given the \code{Net_CG_amt} is used as part of the \code{Taxable_Income} column.}
+
 \item{calc_baseline_tax}{(logical, default: \code{TRUE}) Should the income tax in \code{baseline_fy} be included as a column in the result?}
 
 \item{return.}{What should the function return? One of \code{tax}, \code{sample_file}, or \code{sample_file.int}. 
