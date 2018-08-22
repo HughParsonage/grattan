@@ -4,8 +4,18 @@
 \alias{model_rent_assistance}
 \title{Model Rent Assistance}
 \usage{
-model_rent_assistance(sample_file, .Prop_rent_paid_by_RA, Max_rate = NULL,
-  Min_rent = NULL)
+model_rent_assistance(sample_file, baseline_fy = NULL, baseline_Date = NULL,
+  .Prop_rent_paid_by_RA, Max_rate = NULL, Min_rent = NULL,
+  return. = c("new_ra", "sample_file", "sample_file.int"))
+}
+\arguments{
+\item{sample_file}{A sample file having the same variables as the data.frame in the example.}
+
+\item{.Prop_rent_paid_by_RA}{The proportion of the rent above the minimum threshold paid by rent assistance.}
+
+\item{Max_rate}{If not \code{NULL}, a numeric vector indicating for each individual the maximum rent assistance payable.}
+
+\item{Min_rent}{If not \code{NULL}, a numeric vector indicating for each individual the minimum fortnightly rent above which rent assistance is payable. \code{max_rate} and \code{min_rent}}
 }
 \description{
 Model Rent Assistance
