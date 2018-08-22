@@ -45,7 +45,7 @@
 #' @param sapto_taper The taper rate beyond \code{sapto_lower_threshold}.
 #' @param sbto_discount The \code{tax_discount} in \code{\link{small_business_tax_offset}}.
 #' 
-#' @param cg_discount_rate (Integer) The capital gains discount rate. If no value is given the \code{Net_CG_amt} is used as part of the \code{Taxable_Income} column in \code{sample_file}.
+#' @param cg_discount_rate (Numeric) The capital gains discount rate as a decimal. If no value is given the \code{Net_CG_amt} is used as part of the \code{Taxable_Income} column in \code{sample_file}.
 #' 
 #' @param calc_baseline_tax (logical, default: \code{TRUE}) Should the income tax in \code{baseline_fy} be included as a column in the result?
 #' @param return. What should the function return? One of \code{tax}, \code{sample_file}, or \code{sample_file.int}. 
@@ -175,9 +175,9 @@ model_income_tax <- function(sample_file,
   #cg adjustment
   if (!is.null(cg_discount_rate)) {
     sample_file[, Taxable_Income := if_else(Net_CG_amt==Tot_CY_CG_amt & Tot_CY_CG_amt > 0, #assume ineligible if Net_CG_amt==Tot_CY_CG_amt
-                                           Taxable_Income,
-                                           pmaxC(Taxable_Income + Net_CG_amt * (1 - 2 * cg_discount_rate),
-                                                 0))] 
+                                            as.numeric(Taxable_Income),
+                                            as.numeric(pmaxC(Taxable_Income + Net_CG_amt * (1 - 2 * cg_discount_rate),
+                                                             0)))] 
   }
   
   income <- sample_file[["Taxable_Income"]]
