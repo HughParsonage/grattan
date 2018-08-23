@@ -227,40 +227,25 @@ model_income_tax <- function(sample_file,
           and(Tot_CY_CG_amt. > Net_CG_amt.,
               Tot_CY_CG_amt. > 0)
         }
-      out_is_int <-
-        is.integer(income) && is.integer(Net_CG_amt.) && is.integer(Tot_CY_CG_amt.)
       
-      out <-
-        if (out_is_int) {
-          integer(max.length)
-        } else {
-          double(max.length)
-        }
+      out <- integer(max.length)
       
       out[has_discount] <-
-        if (out_is_int) {
           as.integer(Net_CG_amt.[has_discount] * {{1 - new_rate} / {1 - old_rate} - 1})
-        } else {
-          as.double(Net_CG_amt.[has_discount] * {{1 - new_rate} / {1 - old_rate} - 1})
-        }
       
       
-      for (j in c("Tot_inc_amt", "Net_CG_amt")) {
+      
+      for (j in c("Net_CG_amt", "Tot_inc_amt", "Taxable_Income")) {
         v <- .subset2(DT, j)
-        if (is.double(v)) {
-          set(DT, j = j, value = v + as.double(out))
-        } else {
-          set(DT, j = j, value = v + as.integer(out))
-        }
+        set(DT, 
+            j = j,
+            value = as.integer(v) + out)
       }
       
       # Taxable Income cannot be negative
-      if (is.double(income)) {
-        DT[, Taxable_Income := pmax0(Taxable_Income + out)]
-      } else {
-        DT[, Taxable_Income := as.integer(pmax.int(Taxable_Income + out, 0L))]
-      }
+      DT[, Taxable_Income := as.integer(pmax.int(Taxable_Income + out, 0L))]
       
+      DT[]
     }
     extra_Net_CG_amt(sample_file)
     # Need to update since the Taxable Income is now different.
@@ -356,6 +341,7 @@ model_income_tax <- function(sample_file,
   }
   
   # If .dots.ATO  is NULL, for loops over zero-length vector
+  # Use integers since that's what tax forms use.
   for (j in which(vapply(.dots.ATO, FUN = is.double, logical(1)))) {
     if (j != WEIGHTj) {
       set(.dots.ATO, j = j, value = as.integer(.dots.ATO[[j]]))
