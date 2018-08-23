@@ -824,7 +824,10 @@ test_that("CGT discount", {
   s1516[, WEIGHT := 50L]
   expect_lte(abs(revenue_foregone(s1516) -  6150e6) / 6150e6, 0.025)
   
-  
+  if (getRversion() < "3.5.0") {
+    # sum doesn't coerce to double to avoid overflow
+    baseline[, baseline_tax := as.double(baseline_tax)]
+  }
   expect_lt(baseline[, sum(baseline_tax)],
             sum(model_income_tax(s12131314,
                                  "2013-14",
