@@ -811,7 +811,7 @@ test_that("CGT discount", {
                      ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3),
                      cgt_discount_rate = 0.5)
   
-  expect_equal(baseline[["baseline_tax"]],
+  expect_equal(baseline[["new_tax"]],
                model_income_tax(s12131314,
                                 "2013-14",
                                 ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3),
