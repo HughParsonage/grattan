@@ -15,7 +15,7 @@ test_that("Wage growth is higher for extreme salaries", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
   skip_if_not_installed("dplyr")
-  skip_if(isTRUE(grepl("devel", R.version$version.string)))
+  skip_on_travis()
   library(taxstats)
   library(dplyr)
   skip_if_not(exists("get_sample_files_all"))
@@ -90,7 +90,10 @@ test_that("Differentially uprated wage growth is *up*", {
 })
 
 test_that("Less than 0.1% of individuals move more than one percentile over 10 years", {
-  skip_if_not_installed("taxstats") 
+  skip_if_not_installed("taxstats")
+  skip_if_not_installed("dplyr")
+  library(dplyr)
+  library(taxstats)
   skip_on_cran()
   prop_move <- 
     sample_file_1314 %>%
