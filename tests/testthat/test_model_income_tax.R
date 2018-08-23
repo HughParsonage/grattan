@@ -823,7 +823,7 @@ test_that("CGT discount", {
             sum(model_income_tax(s12131314,
                                  "2013-14",
                                  ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3),
-                                 cg_discount_rate = 0.4,
+                                 cgt_discount_rate = 0.4,
                                  return. = "tax")))
 })
 
