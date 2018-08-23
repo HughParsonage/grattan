@@ -110,7 +110,8 @@ test_that("differential wage inflator is mean-preserving", {
   skip_if_not_installed("taxstats") 
   skip_on_cran()
   library(magrittr)
-  salaries_1314 <- sample_file_1314$Sw_amt
+  library(taxstats)
+  salaries_1314 <- sample_file_1314[["Sw_amt"]]
 
   salaries_1314_vanilla <- wage_inflator(salaries_1314, from_fy = "2013-14", to_fy = "2015-16")
   salaries_1314_differe <- differentially_uprate_wage(salaries_1314, from_fy = "2013-14", to_fy = "2015-16")
