@@ -10,12 +10,15 @@ revenue_foregone <- function(dt, revenue_positive = TRUE, digits = NULL) {
             "new_tax" %in% names(dt),
             "baseline_tax" %in% names(dt))
   
+  # nocov start 
+  # Memory efficiency:
   if (min(.subset2(dt, "WEIGHT")) == max(.subset2(dt, "WEIGHT"))) {
     # is constant
     WEIGHT <- .subset2(dt, "WEIGHT")[1L]
     delta <- WEIGHT * as.double(.subset2(dt, "new_tax") - .subset2(dt, "baseline_tax"))
+    
   } else if (getRversion() < "3.5.0") {
-    # nocov start 
+    
     # else will likely overflow
     new_tax <- as.double(.subset2(dt, "new_tax"))
     baseline_tax <- as.double(.subset2(dt, "baseline_tax"))
