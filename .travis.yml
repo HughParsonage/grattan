@@ -21,7 +21,6 @@ warnings_are_errors: true
 
 r_github_packages:
   - hughparsonage/formalCoverage
-  - hughparsonage/hutils
   - jimhester/covr
 
 after_success:
@@ -29,8 +28,8 @@ after_success:
   - if [ $TRAVIS_R_VERSION_STRING == "release" ] && [ $TRAVIS_PULL_REQUEST == "false" ]; then Rscript -e 'covr::codecov(line_exclusions = c("R/zzz.R", "R/install_taxstats.R", "R/youth_allowance.R", "R/youth_unemployment.R"))'; fi
 
 after_failure:
-  - Rscript -e 'if (F) hutils::RQ("devtools", install.packages(c("roxygen2")))'
-  - Rscript -e 'if (F) hutils::RQ("roxygen2", install.packages(c("roxygen2")))'
+  - Rscript -e 'hutils::RQ("devtools", install.packages(c("roxygen2")))'
+  - Rscript -e 'hutils::RQ("roxygen2", install.packages(c("roxygen2")))'
   - Rscript -e 'devtools::test()'
   #- Rscript -e 'install.packages("taxstats", repos = "https://hughparsonage.github.io/drat/", type = "source")'
   
