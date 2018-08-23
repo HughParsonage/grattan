@@ -238,9 +238,9 @@ model_income_tax <- function(sample_file,
       
       out[has_discount] <-
         if (out_is_int) {
-          as.integer(Net_CG_amt.[has_discount] * {old_rate - new_rate} / {1 - old_rate})
+          as.integer(Net_CG_amt.[has_discount] * {{1 - new_rate} / {1 - old_rate} - 1})
         } else {
-          Net_CG_amt.[has_discount] * {old_rate - new_rate} / {1 - old_rate}
+          Net_CG_amt.[has_discount] * {{1 - new_rate} / {1 - old_rate} - 1}
         }
       
       
