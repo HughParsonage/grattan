@@ -243,7 +243,7 @@ model_income_tax <- function(sample_file,
       }
       
       # Taxable Income cannot be negative
-      DT[, Taxable_Income := as.integer(pmax.int(Taxable_Income + out, 0L))]
+      DT[, Taxable_Income := as.integer(pmax.int(Taxable_Income, 0L))]
       
       DT[]
     }
