@@ -9,10 +9,15 @@ revenue_foregone <- function(dt, revenue_positive = TRUE, digits = NULL) {
             "WEIGHT" %in% names(dt),
             "new_tax" %in% names(dt),
             "baseline_tax" %in% names(dt))
-  delta <- .subset2(dt, "WEIGHT") * (.subset2(dt, "new_tax") - .subset2(dt, "baseline_tax"))
   if (getRversion() < "3.5.0") {
     # else will likely overflow
-    delta <- as.double(delta)
+    new_tax <- as.double(.subset2(dt, "new_tax"))
+    baseline_tax <- as.double(.subset2(dt, "baseline_tax"))
+    WEIGHT <- as.double(.subset2(dt, "WEIGHT"))
+    delta <- new_tax - baseline_tax
+    delta <- WEIGHT * delta
+  } else {
+    delta <- .subset2(dt, "WEIGHT") * (.subset2(dt, "new_tax") - .subset2(dt, "baseline_tax"))
   }
   out <- sum(delta)
   if (!revenue_positive) {

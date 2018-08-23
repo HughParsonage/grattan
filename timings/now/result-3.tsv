@@ -1,4 +1,4 @@
 expr	time	Date
-"cpi_inflator(from_fy = from_fys50K, to_fy = ""2015-16"")"	27667271	2018-08-23
-"wage_inflator(from_fy = from_fys50K, to_fy = ""2015-16"")"	46115532	2018-08-23
-"lf_inflator_fy(from_fy = from_fys50K, to_fy = ""2015-16"")"	36938385	2018-08-23
+"cpi_inflator(from_fy = from_fys50K, to_fy = ""2015-16"")"	28160598	2018-08-23
+"wage_inflator(from_fy = from_fys50K, to_fy = ""2015-16"")"	47075983	2018-08-23
+"lf_inflator_fy(from_fy = from_fys50K, to_fy = ""2015-16"")"	37563929	2018-08-23
