@@ -193,8 +193,9 @@ model_income_tax <- function(sample_file,
   if (!is.null(cgt_discount_rate)) {
     if (length(cgt_discount_rate) != 1L) {
       if (length(cgt_discount_rate) != max.length) {
-        stop("`length(", cgt_discount_rate, ") = ", length(cgt_discount_rate), "`, ", 
-             "yet max.length = ", max.length, ".")
+        stop("`length(cgt_discount_rate) = ", length(cgt_discount_rate), "`, ", 
+             "yet `nrow(sample_file) = ", max.length, "`. ",
+             "Ensure `cgt_discount_rate` has length one.")
       }
     }
     

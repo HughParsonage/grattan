@@ -852,5 +852,17 @@ test_that("CGT discount", {
 })
 
 
-
+test_that("CGT (errors)", {
+  skip_on_cran()
+  skip_if_not_installed("taxstats")
+  library(taxstats)
+  expect_error(model_income_tax(sample_file_1213, "2013-14", 
+                                cgt_discount_rate = rep(0, 5)),
+               regexp = "length(cgt_discount_rate) = 5",
+               fixed = TRUE)
+  expect_error(model_income_tax(sample_file_1213, "2013-14", 
+                                cgt_discount_rate = "x"),
+               regexp = "`cgt_discount_rate` was type character",
+               fixed = TRUE)
+})
 
