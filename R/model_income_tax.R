@@ -211,6 +211,7 @@ model_income_tax <- function(sample_file,
       # That which will be added to both Net_CG_amt and Taxable_Income
       # in the resultant sample file.
       
+      
       # Use this function to avoid copying
       
       Net_CG_amt. <- .subset2(DT, "Net_CG_amt")
@@ -227,7 +228,7 @@ model_income_tax <- function(sample_file,
               Tot_CY_CG_amt. > 0)
         }
       out_is_int <-
-        is.integer(income) && is.integer(Net_CG_amt.) && is.integer(.subset2(DT, "Tot_inc_amt"))
+        is.integer(income) && is.integer(Net_CG_amt.) && is.integer(Tot_CY_CG_amt.)
       
       out <-
         if (out_is_int) {
@@ -240,18 +241,26 @@ model_income_tax <- function(sample_file,
         if (out_is_int) {
           as.integer(Net_CG_amt.[has_discount] * {{1 - new_rate} / {1 - old_rate} - 1})
         } else {
-          Net_CG_amt.[has_discount] * {{1 - new_rate} / {1 - old_rate} - 1}
+          as.double(Net_CG_amt.[has_discount] * {{1 - new_rate} / {1 - old_rate} - 1})
         }
       
       
-      for (j in c("Taxable_Income", "Tot_inc_amt", "Net_CG_amt")) {
+      for (j in c("Tot_inc_amt", "Net_CG_amt")) {
         v <- .subset2(DT, j)
-        if (out_is_int || is.double(v)) {
-          set(DT, j = j, value = v + out)
+        if (is.double(v)) {
+          set(DT, j = j, value = v + as.double(out))
         } else {
           set(DT, j = j, value = v + as.integer(out))
         }
       }
+      
+      # Taxable Income cannot be negative
+      if (is.double(income)) {
+        DT[, Taxable_Income := pmax0(Taxable_Income + out)]
+      } else {
+        DT[, Taxable_Income := as.integer(pmax.int(Taxable_Income + out, 0L))]
+      }
+      
     }
     extra_Net_CG_amt(sample_file)
     # Need to update since the Taxable Income is now different.

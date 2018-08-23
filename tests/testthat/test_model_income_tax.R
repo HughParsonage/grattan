@@ -805,6 +805,15 @@ test_that("CGT discount", {
                                "2013-14",
                                ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3))
   
+  if (getRversion() < "3.5.0") {
+    # sum doesn't coerce to double to avoid overflow
+    baseline[, new_tax := as.double(new_tax)]
+  }
+  
+  # Surprisingly didn't fail on recent versions of R
+  expect_lt(baseline[, sum(new_tax)], 
+            baseline[, sum(baseline_tax)])
+  
   la_meme <-
     model_income_tax(s12131314,
                      "2013-14",
@@ -824,16 +833,21 @@ test_that("CGT discount", {
   s1516[, WEIGHT := 50L]
   expect_lte(abs(revenue_foregone(s1516) -  6150e6) / 6150e6, 0.025)
   
-  if (getRversion() < "3.5.0") {
-    # sum doesn't coerce to double to avoid overflow
-    baseline[, baseline_tax := as.double(baseline_tax)]
-  }
-  expect_lt(baseline[, sum(baseline_tax)],
+  
+  expect_lt(baseline[, sum(new_tax)],
             sum(model_income_tax(s12131314,
                                  "2013-14",
                                  ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3),
                                  cgt_discount_rate = 0.4,
                                  return. = "tax")))
+  s1516_totally_discounted <- 
+    model_income_tax(taxstats1516::sample_file_1516_synth, 
+                     baseline_fy = "2015-16",
+                     cgt_discount_rate = 1.0)
+  expect_false(anyNA(s1516_totally_discounted[["new_tax"]]),
+               label = "High CGT discount should not cause NAs in new_tax.")
+  expect_gte(s1516_totally_discounted[, min(Taxable_Income, na.rm = TRUE)], 0,
+             label = "High CGT discount should not introduce negative Taxable_Incomes.")
 })
 
 
