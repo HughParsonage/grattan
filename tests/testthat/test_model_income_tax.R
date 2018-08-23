@@ -808,6 +808,7 @@ test_that("CGT discount", {
   if (getRversion() < "3.5.0") {
     # sum doesn't coerce to double to avoid overflow
     baseline[, new_tax := as.double(new_tax)]
+    baseline[, baseline_tax := as.double(baseline_tax)]
   }
   
   # Surprisingly didn't fail on recent versions of R
