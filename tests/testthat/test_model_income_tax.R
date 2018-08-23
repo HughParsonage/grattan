@@ -793,8 +793,88 @@ test_that("Debugger", {
                            "sbto.", "medicare_levy."))
 })
 
+test_that("CGT discount", {
+  skip_on_cran()
+  skip_if_not_installed("taxstats")
+  skip_if_not_installed("taxstats1516")
+  library(taxstats)
+  library(taxstats1516)
+  library(data.table)
+  s12131314 <- copy(sample_file_1213)
+  baseline <- model_income_tax(s12131314,
+                               "2013-14",
+                               ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3))
+  
+  if (getRversion() < "3.5.0") {
+    # sum doesn't coerce to double to avoid overflow
+    baseline[, new_tax := as.double(new_tax)]
+    baseline[, baseline_tax := as.double(baseline_tax)]
+  }
+  
+  # Surprisingly didn't fail on recent versions of R
+  expect_lt(baseline[, sum(new_tax)], 
+            baseline[, sum(baseline_tax)])
+  
+  la_meme <-
+    model_income_tax(s12131314,
+                     "2013-14",
+                     ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3),
+                     cgt_discount_rate = 0.5)
+  
+  expect_equal(baseline[["new_tax"]],
+               model_income_tax(s12131314,
+                                "2013-14",
+                                ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3),
+                                cgt_discount_rate = 0.5,
+                                return. = "tax"))
+  # TES 2015-16: 5160 for full discount
+  s1516 <- model_income_tax(taxstats1516::sample_file_1516_synth, 
+                            baseline_fy = "2015-16",
+                            cgt_discount_rate = 0.0)
+  s1516[, WEIGHT := 50L]
+  expect_lte(abs(revenue_foregone(s1516) -  6150e6) / 6150e6, 0.025)
+  
+  
+  expect_lt(baseline[, sum(new_tax)],
+            sum(model_income_tax(s12131314,
+                                 "2013-14",
+                                 ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3),
+                                 cgt_discount_rate = 0.4,
+                                 return. = "tax")))
+  s1516_totally_discounted <- 
+    model_income_tax(taxstats1516::sample_file_1516_synth, 
+                     baseline_fy = "2015-16",
+                     cgt_discount_rate = 1.0)
+  expect_false(anyNA(s1516_totally_discounted[["new_tax"]]),
+               label = "High CGT discount should not cause NAs in new_tax.")
+  expect_gte(s1516_totally_discounted[, min(Taxable_Income, na.rm = TRUE)], 0,
+             label = "High CGT discount should not introduce negative Taxable_Incomes.")
+  
+  prev_revenue_foregone <- revenue_foregone(s1516)
+  
+  # No discount if no capital gains
+  s1516[, Tot_CY_CG_amt := -1L]
+  s1516 <- model_income_tax(s1516, 
+                            baseline_fy = "2015-16",
+                            cgt_discount_rate = 0.0)
+  
+  expect_lt(revenue_foregone(s1516), prev_revenue_foregone)
+  
+  
+})
 
 
-
-
+test_that("CGT (errors)", {
+  skip_on_cran()
+  skip_if_not_installed("taxstats")
+  library(taxstats)
+  expect_error(model_income_tax(sample_file_1213, "2013-14", 
+                                cgt_discount_rate = rep(0, 5)),
+               regexp = "length(cgt_discount_rate) = 5",
+               fixed = TRUE)
+  expect_error(model_income_tax(sample_file_1213, "2013-14", 
+                                cgt_discount_rate = "x"),
+               regexp = "`cgt_discount_rate` was type character",
+               fixed = TRUE)
+})
 

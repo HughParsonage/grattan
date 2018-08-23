@@ -15,10 +15,13 @@ test_that("Wage growth is higher for extreme salaries", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
   skip_if_not_installed("dplyr")
+  skip_if(isTRUE(grepl("devel", R.version$version.string)))
   library(taxstats)
   library(dplyr)
   skip_if_not(exists("get_sample_files_all"))
-  try(sample_files_all <- get_sample_files_all())
+  if (!exists("sample_files_all")) {
+    try(sample_files_all <- get_sample_files_all())
+  }
   skip_if_not(exists("sample_files_all"))
   
   extreme_tile <- sample(c(1:20, 80:100), size = 1)
