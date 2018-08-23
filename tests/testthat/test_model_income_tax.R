@@ -849,6 +849,18 @@ test_that("CGT discount", {
                label = "High CGT discount should not cause NAs in new_tax.")
   expect_gte(s1516_totally_discounted[, min(Taxable_Income, na.rm = TRUE)], 0,
              label = "High CGT discount should not introduce negative Taxable_Incomes.")
+  
+  prev_revenue_foregone <- revenue_foregone(s1516)
+  
+  # No discount if no capital gains
+  s1516[, Tot_CY_CG_amt := -1L]
+  s1516 <- model_income_tax(s1516, 
+                            baseline_fy = "2015-16",
+                            cgt_discount_rate = 0.0)
+  
+  expect_lt(revenue_foregone(s1516), prev_revenue_foregone)
+  
+  
 })
 
 
