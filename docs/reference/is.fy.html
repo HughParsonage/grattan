@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grattan</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.1.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.4.0</span>
       </span>
     </div>
 
@@ -141,6 +141,11 @@
     <tr>
       <th>date</th>
       <td><p>A string or date for which the financial year is desired. Note that <code>yr2fy</code> does not check its argument is an integer.</p></td>
+    </tr>
+    <tr>
+      <th>assume1901_2100</th>
+      <td><p>For <code>yr2fy</code>, assume that <code>yr_ending</code> is between 1901 and 2100, 
+for performance. By default, set to `getOption("grattan.assume1901_2100", TRUE)`.</p></td>
     </tr>
     </table>
     
