@@ -13,7 +13,13 @@ using namespace Rcpp;
 // [[Rcpp::export]]
 NumericVector pminV(NumericVector x, NumericVector y) {
   int n = x.length();
+  int m = y.length();
+  if (n != m){
+    stop("x and y must be same length.");
+  }
   NumericVector out(n);
+  
+  
   
   for (int i = 0; i < n; ++i) {
     double xi = x[i];

@@ -56,6 +56,13 @@ test_that("Rent assistance", {
             rent_assistance(500, fy.year = "2015-16", n_dependants = 0))
 })
 
+
+test_that("Multi max rent", {
+  # pminV originally caused underflow
+  expect_false(is.unsorted(rent_assistance(1:500, max_rate = 100, min_rent = 50)))
+})
+
+
 test_that("Parents of (strictly) integer children not NA", {
   expect_false(anyNA(rent_assistance(n_dependants = 0:4, fy.year = "2017-18")))
   expect_equal(rent_assistance(100, n_dependants = 0:4, fy.year = "2017-18"), 
