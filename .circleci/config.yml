@@ -1,0 +1,35 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/main
+    docker:
+      - image: rocker/verse
+        environment:
+          NOT_CRAN: true
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}-{{ checksum ".circleci/config.yml" }}
+            - deps1-{{ .Branch }}
+            - deps1-
+      - run:
+          command: |
+            R -e "devtools::install_deps(dependencies = TRUE)"
+      - run:
+          no_output_timeout: 20m
+          command: |
+            R -e 'devtools::check()'
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}-{{ checksum ".circleci/config.yml" }}
+          paths:
+            - "/usr/local/lib/R/site-library"
+      - run:
+          no_output_timeout: 20m
+          command: |
+            mkdir /root/main/artifacts
+            R -e "devtools::install()"
+            R -e "knitr::knit('vignettes/grattan.Rmd')"
+      - store_artifacts:
+          path: /root/main/artifacts/
+          destination: artifacts
