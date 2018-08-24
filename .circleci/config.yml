@@ -6,6 +6,7 @@ jobs:
       - image: rocker/verse
         environment:
           NOT_CRAN: true
+          
     steps:
       - checkout
       - restore_cache:
@@ -19,7 +20,8 @@ jobs:
       - run:
           no_output_timeout: 20m
           command: |
-            R -e 'devtools::check()'
+            Rscript -e 'dir.create("~/.R");file.create(mv <- "~/.R/Makevars");writeLines("CXXFLAGS=-O3", mv)'
+            Rscript -e 'devtools::check()'
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}-{{ checksum ".circleci/config.yml" }}
           paths:
