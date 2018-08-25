@@ -24,7 +24,7 @@ jobs:
           command: |
             Rscript -e 'dir.create("~/.R");file.create(mv <- "~/.R/Makevars");writeLines("CXXFLAGS=-O3", mv)'
             R CMD build .
-            if [[ $CIRCLE_NODE_INDEX == "0" ]] R CMD check *tar.gz
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then R CMD check *tar.gz; fi
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}-{{ checksum ".circleci/config.yml" }}
           paths:
@@ -34,7 +34,7 @@ jobs:
           command: |
             mkdir /root/main/artifacts
             Rscript -e "devtools::install()"
-            if [[ $CIRCLE_NODE_INDEX == "1" ]] Rscript -e "knitr::knit('vignettes/grattan.Rmd')"
+            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then Rscript -e "knitr::knit('vignettes/grattan.Rmd')"; fi
       - store_artifacts:
           path: /root/main/artifacts/
           destination: artifacts
