@@ -24,7 +24,7 @@ jobs:
           command: |
             Rscript -e 'dir.create("~/.R");file.create(mv <- "~/.R/Makevars");writeLines("CXXFLAGS=-O3", mv)'
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then R CMD build --no-build-vignettes . ; fi
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then R CMD check *tar.gz ; fi
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then R CMD check --ignore-vignettes --no-vignettes *tar.gz ; fi
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}-{{ checksum ".circleci/config.yml" }}
           paths:
