@@ -8,6 +8,7 @@ jobs:
           NOT_CRAN: true
           TRAVIS: true
           
+    parallelism: 2
     steps:
       - checkout
       - restore_cache:
@@ -23,7 +24,7 @@ jobs:
           command: |
             Rscript -e 'dir.create("~/.R");file.create(mv <- "~/.R/Makevars");writeLines("CXXFLAGS=-O3", mv)'
             R CMD build .
-            R CMD check *tar.gz
+            if [[ $CIRCLE_NODE_INDEX == "0" ]] R CMD check *tar.gz
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}-{{ checksum ".circleci/config.yml" }}
           paths:
@@ -32,8 +33,8 @@ jobs:
           no_output_timeout: 20m
           command: |
             mkdir /root/main/artifacts
-            R -e "devtools::install()"
-            R -e "knitr::knit('vignettes/grattan.Rmd')"
+            Rscript -e "devtools::install()"
+            if [[ $CIRCLE_NODE_INDEX == "1" ]] Rscript -e "knitr::knit('vignettes/grattan.Rmd')"
       - store_artifacts:
           path: /root/main/artifacts/
           destination: artifacts
