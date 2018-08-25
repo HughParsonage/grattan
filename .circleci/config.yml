@@ -17,12 +17,13 @@ jobs:
             - deps1-
       - run:
           command: |
-            R -e "devtools::install_deps(dependencies = TRUE)"
+            Rscript -e "devtools::install_deps(dependencies = TRUE)"
       - run:
           no_output_timeout: 20m
           command: |
             Rscript -e 'dir.create("~/.R");file.create(mv <- "~/.R/Makevars");writeLines("CXXFLAGS=-O3", mv)'
-            Rscript -e 'devtools::check(build_args = "--no-build-vignettes", args = "--no-vignettes")'
+            R CMD BUILD .'
+            R CMD check *tar.gz
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}-{{ checksum ".circleci/config.yml" }}
           paths:
