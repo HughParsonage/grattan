@@ -22,7 +22,7 @@ jobs:
           no_output_timeout: 20m
           command: |
             Rscript -e 'dir.create("~/.R");file.create(mv <- "~/.R/Makevars");writeLines("CXXFLAGS=-O3", mv)'
-            R CMD BUILD .'
+            R CMD BUILD .
             R CMD check *tar.gz
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}-{{ checksum ".circleci/config.yml" }}
