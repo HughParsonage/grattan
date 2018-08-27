@@ -38,9 +38,10 @@ jobs:
       - run:
           name: Check R CMD check failures
           command: |
-            Rscript -e "devtools::check_failures('grattan.Rcheck')"
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; Rscript -e "cat(devtools::check_failures('./grattan.Rcheck'), sep = '\n');cat('\n')"
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; Rscript -e "if (length(res <- devtools::check_failures('./grattan.Rcheck', note=FALSE))) stop(res)"
       - store_test_results:
-          path: /grattan.Rcheck/tests
+          path: ./grattan.Rcheck/tests
       - store_artifacts:
           path: /root/main/artifacts/
           destination: artifacts
