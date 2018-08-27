@@ -11,5 +11,10 @@ if (all(vapply(all.pkgs, requireNamespace, logical(1L), quietly = TRUE))) {
   
   library(magrittr)
   
-  test_check("grattan")
+  if (identical(Sys.getenv("CIRCLECI"), "true")) {
+    test_check("grattan",
+               reporter = JunitReporter$new(file = "junit_result.xml"))
+  } else {
+    test_check("grattan")
+  }
 }

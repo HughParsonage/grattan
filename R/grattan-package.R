@@ -15,7 +15,7 @@
 #' @section Package options:
 #' \describe{
 #' \item{\code{grattan.verbose}}{(\code{FALSE}) Emit diagnostic messages (via \code{cat()}))}
-#' \item{\code{grattan.assume1901_2100}}{(\code{TRUE}) Assume \code{yr2fy} receives an integer >= 1901 and <= 2100.
+#' \item{\code{grattan.assume1901_2100}}{(\code{TRUE}) Assume \code{yr2fy} receives an integer >= 1901 and <= 2100.}
 #' }
 #' 
 #' 
