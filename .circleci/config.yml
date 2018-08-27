@@ -38,8 +38,8 @@ jobs:
       - run:
           name: Check R CMD check failures
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; Rscript -e "cat(devtools::check_failures('./grattan.Rcheck'), sep = '\n');cat('\n')"
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; Rscript -e "if (length(res <- devtools::check_failures('./grattan.Rcheck', note=FALSE))) stop(res)"
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then Rscript -e "cat(devtools::check_failures('./grattan.Rcheck'), sep = '\n');cat('\n')" ; fi
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then Rscript -e "if (length(res <- devtools::check_failures('./grattan.Rcheck', note=FALSE))) stop(res)" ; fi
       - store_test_results:
           path: ./grattan.Rcheck/tests
       - store_artifacts:
