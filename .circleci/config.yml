@@ -35,6 +35,12 @@ jobs:
             mkdir /root/main/artifacts
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then Rscript -e "devtools::install()" ; fi
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then Rscript -e "knitr::knit('vignettes/grattan.Rmd')" ; fi
+      - run:
+          name: Check R CMD check failures
+          command: |
+            Rscript -e "devtools::check_failures('grattan.Rcheck')"
+      - store_test_results:
+          path: /grattan.Rcheck/tests
       - store_artifacts:
           path: /root/main/artifacts/
           destination: artifacts
