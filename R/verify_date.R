@@ -87,7 +87,15 @@ verify_date <- function(date_to_verify, from = NULL, to = NULL,
   }
   
   from <- range2Date(from)
-  to   <- range2Date(to)
+  to   <- range2Date(to, FALSE)
+  
+  if (!is.null(to) && !is.null(from)) {
+    if (to < from) {
+      stop("`to = ", deparse(substitute(to)),
+           "` precedes `from = ", 
+           deparse(substitute(from)), "`.")
+    }
+  }
   
   
   if (!is.null(from) && min(date_to_verify) < from) {
