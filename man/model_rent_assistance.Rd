@@ -11,7 +11,7 @@ model_rent_assistance(sample_file, baseline_fy = NULL, baseline_Date = NULL,
 \arguments{
 \item{sample_file}{A sample file having the same variables as the data.frame in the example.}
 
-\item{baseline_fy, baseline_Date}{(character) The financial year/date over which the baseline rent assistance is to be calculated. Only one needs to be provided.}
+\item{baseline_fy, baseline_Date}{(character) The financial year/date over which the baseline rent assistance is to be calculated. Only can be provided.}
 
 \item{.Prop_rent_paid_by_RA}{The proportion of the rent above the minimum threshold paid by rent assistance.}
 
