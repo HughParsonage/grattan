@@ -9,15 +9,14 @@
 #' @param date_to_verify (character) A user-provided value, purporting to be
 #' character vector of dates.
 #' @param from,to Indicating the range of years valid for \code{date_to_verify}. Default set to -Inf and Inf respectively (i.e. there is no bound)
+#' @param deparsed The name of variable to appear in error messages.
 #' 
-#' @return If \code{date_to_verify} contains valid dates
-#' they are returned as date objects. If they were
-#' already in that form, they obtain the following attributes:
-#' \describe{
-#' \item{\code{grattan_all_date}}{\code{TRUE} if all the dates are valid.}
+#' @return \code{date_to_verify} as a Date object, provided it can be converted 
+#' to a Date and all elements are within the bounds \code{from} and \code{to}.
 #' 
 
-verify_date <- function(date_to_verify, from = NULL, to = NULL) {
+verify_date <- function(date_to_verify, from = NULL, to = NULL,
+                        deparsed = "Date") {
 
   if (!is.Date(date_to_verify)) {
     if (is.character(date_to_verify)) {
@@ -25,13 +24,19 @@ verify_date <- function(date_to_verify, from = NULL, to = NULL) {
         tryCatch(as.Date(date_to_verify), 
                  error = function(e) {
                    m <- e$m
-                   stop("`date_to_verify` was not of class 'Date' and ", 
+                   stop("`", deparsed, "` was not of class 'Date' and ", 
                         "during coercion to Date the following error ", 
-                        "was encountered. Ensure `when` is a Date. ", 
-                        e$m)
+                        "was encountered. Ensure `", deparsed, "` is a Date. ", 
+                        e$m,
+                        call. = FALSE)
                  })
+      if (anyNA(date_to_verify)) {
+        i_first_bad <- which.max(is.na(date_to_verify)) 
+        stop("Position ", i_first_bad, " was not converted to Date successfully.")
+      }
+      
     } else {
-      stop("`Date`` was a ", class(date_to_verify)[1], ", but ", 
+      stop("`Date` was a ", class(date_to_verify)[1], ", but ", 
            "must be a character or Date object.")
     }
   }

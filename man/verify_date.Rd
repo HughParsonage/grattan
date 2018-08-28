@@ -4,13 +4,20 @@
 \alias{verify_date}
 \title{Verifying validity of dates}
 \usage{
-verify_date(date_to_verify, from = NULL, to = NULL)
+verify_date(date_to_verify, from = NULL, to = NULL,
+  deparsed = "Date")
 }
 \arguments{
 \item{date_to_verify}{(character) A user-provided value, purporting to be
 character vector of dates.}
 
 \item{from, to}{Indicating the range of years valid for \code{date_to_verify}. Default set to -Inf and Inf respectively (i.e. there is no bound)}
+
+\item{deparsed}{The name of variable to appear in error messages.}
+}
+\value{
+\code{date_to_verify} as a Date object, provided it can be converted 
+to a Date and all elements are within the bounds \code{from} and \code{to}.
 }
 \description{
 Many functions expect Dates. 
