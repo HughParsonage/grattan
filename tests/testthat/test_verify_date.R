@@ -2,7 +2,8 @@ context("Verify Date")
 
 test_that("errors", {
   expect_error(verify_date("2018-10-10", from = 2010, to = 2011),
-               regexp = "`Date` had value 2018-10-10 at position 1. Ensure `Date` only includes dates between 2010 and 2011")
+               regexp = "`Date` contained '2018-10-10' at position 1, later than the latest permitted date: '2010-01-01'.",
+               fixed = TRUE)
   expect_error(verify_date("2018-10-10", to = 2011),
                regexp = "`Date` had value 2018-10-10 at position 1. Ensure `Date` only includes dates between -Inf and 2011")
   expect_error(verify_date("2018-10-10", from = 2019),
@@ -38,4 +39,9 @@ test_that("values", {
   x2 <- verify_date(x, to = 2019)
   expect_equal(x2, x, check.attributes = FALSE)
   expect_true(attributes(x2)$grattan_all_date)
+})
+
+test_that("sprintf error", {
+  expect_error(verify_date("2015-06-01", 2015.25, 2016),
+               regexp = "invalid format")
 })
