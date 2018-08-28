@@ -14,6 +14,8 @@ model_rent_assistance(sample_file, baseline_fy = NULL,
 
 \item{baseline_fy, baseline_Date}{(character) The financial year/date over which the baseline rent assistance is to be calculated. Only one can be provided.}
 
+\item{Per}{Specifies the timeframe in which payments will be made. Can either take value "fortnight" or "annual".}
+
 \item{.Prop_rent_paid_by_RA}{The proportion of the rent above the minimum threshold paid by rent assistance.}
 
 \item{Max_rate}{If not \code{NULL}, a numeric vector indicating for each individual the maximum rent assistance payable.}
@@ -25,13 +27,21 @@ model_rent_assistance(sample_file, baseline_fy = NULL,
 \item{return.}{What should the function return? One of \code{tax}, \code{sample_file}, or \code{sample_file.int}. 
 If \code{tax}, the tax payable under the settings; if \code{sample_file}, the \code{sample_file},
 but with variables \code{tax} and possibly \code{new_taxable_income}; if \code{sample_file.int}, same as \code{sample_file} but \code{new_tax} is coerced to integer.}
-
-\item{per}{Specifies the timeframe in which payments will be made. Can either take value "fortnight" or "annual".}
 }
 \description{
 Model Rent Assistance
 }
 \examples{
-sample <- CJ(rent = 1:500, n_dependants = 0:3, has_partner = 0:1 > 0, is_homeowner = 0:1 > 0, lives_in_sharehouse = 0:1 > 0) 
-model_rent_assistance(sample, .Prop_rent_paid_by_RA = 0.75, Max_rate = 500, Min_rent = 100)
+
+library(data.table)
+sample <-
+  CJ(rent = 1:500,
+     n_dependants = 0:3,
+     has_partner = 0:1 > 0,
+     is_homeowner = 0:1 > 0,
+     lives_in_sharehouse = 0:1 > 0) 
+model_rent_assistance(sample,
+                      .Prop_rent_paid_by_RA = 0.75,
+                      Max_rate = 500,
+                      Min_rent = 100)
 }

@@ -4,7 +4,7 @@
 #' @param .Prop_rent_paid_by_RA The proportion of the rent above the minimum threshold paid by rent assistance. 
 #' @param calc_baseline_ra (logical, default: \code{TRUE}) Should the income tax in \code{baseline_fy} or \code{baseline_Date} be included as a column in the result?
 #' @param baseline_fy,baseline_Date (character) The financial year/date over which the baseline rent assistance is to be calculated. Only one can be provided.
-#' @param per Specifies the timeframe in which payments will be made. Can either take value "fortnight" or "annual".
+#' @param Per Specifies the timeframe in which payments will be made. Can either take value "fortnight" or "annual".
 #' @param Max_rate If not \code{NULL}, a numeric vector indicating for each individual the maximum rent assistance payable.
 #' @param Min_rent If not \code{NULL}, a numeric vector indicating for each individual the minimum fortnightly rent above which rent assistance is payable. \code{max_rate} and \code{min_rent}
 #' @param return. What should the function return? One of \code{tax}, \code{sample_file}, or \code{sample_file.int}. 
@@ -14,8 +14,18 @@
 #' @export 
 #' 
 #' @examples
-#' sample <- CJ(rent = 1:500, n_dependants = 0:3, has_partner = 0:1 > 0, is_homeowner = 0:1 > 0, lives_in_sharehouse = 0:1 > 0) 
-#' model_rent_assistance(sample, .Prop_rent_paid_by_RA = 0.75, Max_rate = 500, Min_rent = 100)
+#' 
+#' library(data.table)
+#' sample <-
+#'   CJ(rent = 1:500,
+#'      n_dependants = 0:3,
+#'      has_partner = 0:1 > 0,
+#'      is_homeowner = 0:1 > 0,
+#'      lives_in_sharehouse = 0:1 > 0) 
+#' model_rent_assistance(sample,
+#'                       .Prop_rent_paid_by_RA = 0.75,
+#'                       Max_rate = 500,
+#'                       Min_rent = 100)
 
 model_rent_assistance <- function(sample_file,
                                   baseline_fy = NULL,
