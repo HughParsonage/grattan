@@ -6,7 +6,7 @@
 \usage{
 model_rent_assistance(sample_file, baseline_fy = NULL, baseline_Date = NULL,
   .Prop_rent_paid_by_RA, Max_rate = NULL, Min_rent = NULL,
-  return. = c("new_ra", "sample_file", "sample_file.int"))
+  calc_baseline_ra = TRUE, return. = "new_ra")
 }
 \arguments{
 \item{sample_file}{A sample file having the same variables as the data.frame in the example.}
@@ -16,6 +16,12 @@ model_rent_assistance(sample_file, baseline_fy = NULL, baseline_Date = NULL,
 \item{Max_rate}{If not \code{NULL}, a numeric vector indicating for each individual the maximum rent assistance payable.}
 
 \item{Min_rent}{If not \code{NULL}, a numeric vector indicating for each individual the minimum fortnightly rent above which rent assistance is payable. \code{max_rate} and \code{min_rent}}
+
+\item{calc_baseline_ra}{(logical, default: \code{TRUE}) Should the income tax in \code{baseline_fy} be included as a column in the result?}
+
+\item{return.}{What should the function return? One of \code{tax}, \code{sample_file}, or \code{sample_file.int}. 
+If \code{tax}, the tax payable under the settings; if \code{sample_file}, the \code{sample_file},
+but with variables \code{tax} and possibly \code{new_taxable_income}; if \code{sample_file.int}, same as \code{sample_file} but \code{new_tax} is coerced to integer.}
 }
 \description{
 Model Rent Assistance
