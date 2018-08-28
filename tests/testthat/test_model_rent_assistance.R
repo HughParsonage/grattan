@@ -14,6 +14,8 @@ test_that("Errors", {
   sample <- CJ(gsdfgfdg = 1:500, n_dependants = 0, has_partner = FALSE, is_homeowner = FALSE, lives_in_sharehouse = FALSE)
   expect_error(model_rent_assistance(sample, baseline_fy = "2018-19"),
                regexp = "`sample_file` lacked the following required columns:\n\trent.\n")
-  expect_error(model_rent_assistance(300),
+  expect_error(model_rent_assistance(sample),
+               rgexp = "one of `baseline_fy` or `baseline_Date` was not provided")
+  expect_error(model_rent_assistance(300, baseline_fy = "2018-19"),
                reg_exp = "is.data.frame(sample_file) is not TRUE")
 })

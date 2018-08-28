@@ -2,9 +2,10 @@
 #' 
 #' @param sample_file A sample file having the same variables as the data.frame in the example.
 #' @param .Prop_rent_paid_by_RA The proportion of the rent above the minimum threshold paid by rent assistance. 
+#' @param calc_baseline_ra (logical, default: \code{TRUE}) Should the income tax in \code{baseline_fy} or \code{baseline_Date} be included as a column in the result?
+#' @param baseline_fy,baseline_Date (character) The financial year/date over which the baseline rent assistance is to be calculated. Only one needs to be provided.
 #' @param Max_rate If not \code{NULL}, a numeric vector indicating for each individual the maximum rent assistance payable.
 #' @param Min_rent If not \code{NULL}, a numeric vector indicating for each individual the minimum fortnightly rent above which rent assistance is payable. \code{max_rate} and \code{min_rent}
-#' @param calc_baseline_ra (logical, default: \code{TRUE}) Should the income tax in \code{baseline_fy} be included as a column in the result?
 #' @param return. What should the function return? One of \code{tax}, \code{sample_file}, or \code{sample_file.int}. 
 #' If \code{tax}, the tax payable under the settings; if \code{sample_file}, the \code{sample_file},
 #' but with variables \code{tax} and possibly \code{new_taxable_income}; if \code{sample_file.int}, same as \code{sample_file} but \code{new_tax} is coerced to integer.
@@ -18,12 +19,17 @@
 model_rent_assistance <- function(sample_file,
                                   baseline_fy = NULL,
                                   baseline_Date = NULL,
+                                  Per = "fortnight",
                                   .Prop_rent_paid_by_RA = 0.75,
                                   Max_rate = NULL,
                                   Min_rent = NULL,
                                   calc_baseline_ra = TRUE,
                                   return. = "new_ra") {
   
+  if (is.null(baseline_fy) && is.null(baseline_Date)) {
+    stop("one of either `baseline_fy` or `baseline_Date` was not provided")
+  }
+
   sample_file <- copy(sample_file)
   
   #check sample file has correct format
@@ -49,6 +55,7 @@ model_rent_assistance <- function(sample_file,
     baseline_ra <- rent_assistance(fortnightly_rent = Rent, 
                                    fy.year = baseline_fy,
                                    Date = baseline_Date,
+                                   per = Per,
                                    n_dependants = N_dependants,
                                    has_partner = Has_partner,
                                    is_homeowner = Is_homeowner,
@@ -61,6 +68,9 @@ model_rent_assistance <- function(sample_file,
   }
   
   ra <- rent_assistance(fortnightly_rent = Rent, 
+                        fy.year = baseline_fy,
+                        Date = baseline_Date,
+                        per = Per,
                         n_dependants = N_dependants,
                         has_partner = Has_partner,
                         is_homeowner = Is_homeowner,
