@@ -71,6 +71,9 @@ expr	time	Date
 "cpi_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	683438800	2018-08-20
 "wage_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	38949086	2018-08-20
 "lf_inflator_fy(from_fy = ""2014-15"", to_fy = the_next_fy)"	61381034	2018-08-20
+"cpi_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	748096339	2018-08-28
+"wage_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	34405793	2018-08-28
+"lf_inflator_fy(from_fy = ""2014-15"", to_fy = the_next_fy)"	65559181	2018-08-28
 "cpi_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	741519851	2018-08-22
 "wage_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	34900324	2018-08-22
 "lf_inflator_fy(from_fy = ""2014-15"", to_fy = the_next_fy)"	64889665	2018-08-22
@@ -116,3 +119,9 @@ expr	time	Date
 "cpi_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	741596651	2018-08-27
 "wage_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	35002424	2018-08-27
 "lf_inflator_fy(from_fy = ""2014-15"", to_fy = the_next_fy)"	65070070	2018-08-27
+"cpi_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	762453420	2018-08-28
+"wage_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	34569332	2018-08-28
+"lf_inflator_fy(from_fy = ""2014-15"", to_fy = the_next_fy)"	64028904	2018-08-28
+"cpi_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	756446155	2018-08-28
+"wage_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	33969087	2018-08-28
+"lf_inflator_fy(from_fy = ""2014-15"", to_fy = the_next_fy)"	63535576	2018-08-28

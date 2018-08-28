@@ -141,6 +141,7 @@ accel_repetitive_input <- function(x, FUN, ..., THRESHOLD = 1000L) {
   }
 }
 
+is.Date <- function(x) inherits(x, "Date")
 
 
 
