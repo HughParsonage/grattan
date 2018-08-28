@@ -77,6 +77,15 @@ microbenchmark(
   times = 2L, control = list(order = "inorder")) %>%
   save_it
 
+microbenchmark(
+  model_income_tax(s1314, "2015-16"),
+  model_thresholds = model_income_tax(s1314, "2015-16", ordinary_tax_thresholds = c(0, 20e3, 40e3, 80e3, 180e3)),
+  model_medicare = model_income_tax(s1314, "2015-16", medicare_levy_lower_sapto_threshold = 30e3, medicare_levy_upper_sapto_threshold = 37500),
+  model_cgt = model_income_tax(s1314, "2015-16", cgt_discount_rate = 0.0),
+  model_lito = model_income_tax(s1314, "2015-16", lito_max_offset = 500),
+  times = 2L, control = list(order = "inorder")) %>%
+  save_it
+
 shell("git add timings/now/result*tsv")
 
 

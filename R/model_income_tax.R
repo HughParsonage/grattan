@@ -45,6 +45,8 @@
 #' @param sapto_taper The taper rate beyond \code{sapto_lower_threshold}.
 #' @param sbto_discount The \code{tax_discount} in \code{\link{small_business_tax_offset}}.
 #' 
+#' @param cgt_discount_rate (numeric(1)) The capital gains tax discount rate, currently 50\%. 
+#' 
 #' @param calc_baseline_tax (logical, default: \code{TRUE}) Should the income tax in \code{baseline_fy} be included as a column in the result?
 #' @param return. What should the function return? One of \code{tax}, \code{sample_file}, or \code{sample_file.int}. 
 #' If \code{tax}, the tax payable under the settings; if \code{sample_file}, the \code{sample_file},
@@ -108,6 +110,8 @@ model_income_tax <- function(sample_file,
                              
                              sbto_discount = NULL,
                              
+                             cgt_discount_rate = NULL,
+                             
                              calc_baseline_tax = TRUE,
                              return. = c("sample_file", "tax", "sample_file.int"),
                              clear_tax_cols = TRUE,
@@ -127,6 +131,7 @@ model_income_tax <- function(sample_file,
   
   stopifnot(is.data.table(sample_file))
   sample_file <- copy(sample_file)
+  max.length <- nrow(sample_file)
   .dots.ATO <- sample_file
   sample_file_noms <- copy(names(sample_file))
   
@@ -156,7 +161,7 @@ model_income_tax <- function(sample_file,
       "WRE_uniform_amt", "WRE_self_amt", "WRE_other_amt", "Div_Ded_amt", 
       "Intrst_Ded_amt", "Gift_amt", "Non_emp_spr_amt", "Cost_tax_affairs_amt", 
       "Other_Ded_amt", "Tot_ded_amt", "PP_loss_claimed", "NPP_loss_claimed", 
-      "Rep_frng_ben_amt", "Med_Exp_TO_amt", "Asbl_forgn_source_incm_amt", 
+      "Rep_frng_ben_amt", # "Med_Exp_TO_amt", "Asbl_forgn_source_incm_amt", 
       # "Spouse_adjusted_taxable_inc",
       "Net_fincl_invstmt_lss_amt", "Rptbl_Empr_spr_cont_amt", 
       "Cr_PAYG_ITI_amt", "TFN_amts_wheld_gr_intst_amt", "TFN_amts_wheld_divs_amt", 
@@ -168,6 +173,7 @@ model_income_tax <- function(sample_file,
          paste0(absent_cols, collapse = "\n\t"), ".\n")
   }
   
+  
   income <- sample_file[["Taxable_Income"]]
   max.length <- length(income)
   prohibit_vector_recycling(income, n_dependants, baseline_fy)
@@ -176,11 +182,75 @@ model_income_tax <- function(sample_file,
                         fy.year = baseline_fy,
                         .dots.ATO = .dots.ATO,
                         n_dependants = n_dependants)
-  
   if (calc_baseline_tax) {
     switch(return.,
            "sample_file" = set(sample_file, j = "baseline_tax", value = old_tax),
            "sample_file.int" = set(sample_file, j = "baseline_tax", value = as.integer(old_tax)))
+  }
+  
+  # Recalculate the taxable income
+  # CG adjustment
+  if (!is.null(cgt_discount_rate)) {
+    if (length(cgt_discount_rate) != 1L) {
+      if (length(cgt_discount_rate) != max.length) {
+        stop("`length(cgt_discount_rate) = ", length(cgt_discount_rate), "`, ", 
+             "yet `nrow(sample_file) = ", max.length, "`. ",
+             "Ensure `cgt_discount_rate` has length one.")
+      }
+    }
+    
+    if (!is.numeric(cgt_discount_rate)) {
+      stop("`cgt_discount_rate` was type ", typeof(cgt_discount_rate), ", ",
+           "but must be numeric. Ensure `cgt_discount_rate`, if used, is numeric.")
+    }
+    
+    extra_Net_CG_amt <- function(DT,
+                                 new_rate = cgt_discount_rate,
+                                 old_rate = 0.5) {
+      # Return the extra amount of capital gains
+      # payable under `new_rate` compared to `old_rate`.
+      # That which will be added to both Net_CG_amt and Taxable_Income
+      # in the resultant sample file.
+      
+      
+      # Use this function to avoid copying
+      
+      Net_CG_amt. <- .subset2(DT, "Net_CG_amt")
+      Tot_CY_CG_amt. <- .subset2(DT, "Tot_CY_CG_amt")
+      income <- .subset2(DT, "Taxable_Income")
+      
+      # Assume a CGT discount is applicable 
+      
+      has_discount <-
+        if (min(Tot_CY_CG_amt.) == 0) {
+          Tot_CY_CG_amt. > Net_CG_amt.
+        } else {
+          and(Tot_CY_CG_amt. > Net_CG_amt.,
+              Tot_CY_CG_amt. > 0)
+        }
+      
+      out <- integer(max.length)
+      
+      out[has_discount] <-
+          as.integer(Net_CG_amt.[has_discount] * {{1 - new_rate} / {1 - old_rate} - 1})
+      
+      
+      
+      for (j in c("Net_CG_amt", "Tot_inc_amt", "Taxable_Income")) {
+        v <- .subset2(DT, j)
+        set(DT, 
+            j = j,
+            value = as.integer(v) + out)
+      }
+      
+      # Taxable Income cannot be negative
+      DT[, Taxable_Income := as.integer(pmax.int(Taxable_Income, 0L))]
+      
+      DT[]
+    }
+    extra_Net_CG_amt(sample_file)
+    # Need to update since the Taxable Income is now different.
+    income <- .subset2(sample_file, "Taxable_Income")
   }
   
   if (is.null(sapto_eligible)) {
@@ -200,6 +270,9 @@ model_income_tax <- function(sample_file,
            max.length, "(i.e. nrow(sample_file)) or length one.")
     }
   }
+  
+  
+
   
   ordering <- NULL
   
@@ -269,6 +342,7 @@ model_income_tax <- function(sample_file,
   }
   
   # If .dots.ATO  is NULL, for loops over zero-length vector
+  # Use integers since that's what tax forms use.
   for (j in which(vapply(.dots.ATO, FUN = is.double, logical(1)))) {
     if (j != WEIGHTj) {
       set(.dots.ATO, j = j, value = as.integer(.dots.ATO[[j]]))
@@ -798,6 +872,7 @@ model_income_tax <- function(sample_file,
          "tax" = new_tax,
          "sample_file" = set(sample_file, j = "new_tax", value = new_tax),
          "sample_file.int" = set(sample_file, j = "new_tax", value = as.integer(new_tax)))
+  
 }
 
 

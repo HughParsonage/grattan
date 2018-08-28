@@ -42,7 +42,7 @@ test_that("Average tax rates correctly inverted for 2003-04", {
 })
 
 test_that("Average tax rates correctly inverted for 2004-05", {
-  skip_on_cran()
+  skip_on_cran(); skip_on_travis(); skip_on_appveyor()
   
   income <- ceiling(abs(rlnorm(1, 11, 1)) + 1)
   fy.year <- "2004-05"
@@ -60,7 +60,7 @@ test_that("Average tax rates correctly inverted for 2004-05", {
 })
 
 test_that("Average tax rates correctly inverted for 2005-06", {
-  skip_on_cran()
+  skip_on_cran(); skip_on_travis(); skip_on_appveyor()
   
   income <- ceiling(abs(rlnorm(1, 11, 1)) + 1)
   fy.year <- "2005-06"
@@ -78,7 +78,7 @@ test_that("Average tax rates correctly inverted for 2005-06", {
 })
 
 test_that("Average tax rates correctly inverted for 2006-07", {
-  skip_on_cran()
+  skip_on_cran(); skip_on_travis(); skip_on_appveyor()
   
   income <- ceiling(abs(rlnorm(1, 11, 1)) + 1)
   fy.year <- "2006-07"
@@ -96,7 +96,7 @@ test_that("Average tax rates correctly inverted for 2006-07", {
 })
 
 test_that("Average tax rates correctly inverted for 2007-08", {
-  skip_on_cran()
+  skip_on_cran(); skip_on_travis(); skip_on_appveyor()
   
   income <- ceiling(abs(rlnorm(1, 11, 1)) + 1)
   fy.year <- "2007-08"
@@ -114,7 +114,7 @@ test_that("Average tax rates correctly inverted for 2007-08", {
 })
 
 test_that("Average tax rates correctly inverted for 2008-09", {
-  skip_on_cran()
+  skip_on_cran(); skip_on_travis(); skip_on_appveyor()
   
   income <- ceiling(abs(rlnorm(1, 11, 1)) + 1)
   fy.year <- "2008-09"
@@ -132,7 +132,7 @@ test_that("Average tax rates correctly inverted for 2008-09", {
 })
 
 test_that("Average tax rates correctly inverted for 2009-10", {
-  skip_on_cran()
+  skip_on_cran(); skip_on_travis(); skip_on_appveyor()
   
   income <- ceiling(abs(rlnorm(1, 11, 1)) + 1)
   fy.year <- "2009-10"
