@@ -4,9 +4,10 @@
 \alias{model_rent_assistance}
 \title{Model Rent Assistance}
 \usage{
-model_rent_assistance(sample_file, baseline_fy = NULL, baseline_Date = NULL,
-  Per = "fortnight", .Prop_rent_paid_by_RA = NULL, Max_rate = NULL,
-  Min_rent = NULL, calc_baseline_ra = TRUE, return. = "new_ra")
+model_rent_assistance(sample_file, baseline_fy = NULL,
+  baseline_Date = NULL, Per = "fortnight",
+  .Prop_rent_paid_by_RA = NULL, Max_rate = NULL, Min_rent = NULL,
+  calc_baseline_ra = TRUE, return. = "new_ra")
 }
 \arguments{
 \item{sample_file}{A sample file having the same variables as the data.frame in the example.}
@@ -24,6 +25,8 @@ model_rent_assistance(sample_file, baseline_fy = NULL, baseline_Date = NULL,
 \item{return.}{What should the function return? One of \code{tax}, \code{sample_file}, or \code{sample_file.int}. 
 If \code{tax}, the tax payable under the settings; if \code{sample_file}, the \code{sample_file},
 but with variables \code{tax} and possibly \code{new_taxable_income}; if \code{sample_file.int}, same as \code{sample_file} but \code{new_tax} is coerced to integer.}
+
+\item{per}{Specifies the timeframe in which payments will be made. Can either take value "fortnight" or "annual".}
 }
 \description{
 Model Rent Assistance
