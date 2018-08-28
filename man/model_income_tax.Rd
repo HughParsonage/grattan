@@ -18,11 +18,12 @@ model_income_tax(sample_file, baseline_fy, n_dependants = 0L,
   medicare_levy_lower_up_for_each_child = NULL, lito_max_offset = NULL,
   lito_taper = NULL, lito_min_bracket = NULL, lito_multi = NULL,
   Budget2018_lamington = FALSE, Budget2018_lito_202223 = FALSE,
-  Budget2018_watr = FALSE, sapto_eligible = NULL, sapto_max_offset = NULL,
-  sapto_lower_threshold = NULL, sapto_taper = NULL, sbto_discount = NULL,
+  Budget2018_watr = FALSE, sapto_eligible = NULL,
+  sapto_max_offset = NULL, sapto_lower_threshold = NULL,
+  sapto_taper = NULL, sbto_discount = NULL, cgt_discount_rate = NULL,
   calc_baseline_tax = TRUE, return. = c("sample_file", "tax",
-  "sample_file.int"), clear_tax_cols = TRUE, warn_upper_thresholds = TRUE,
-  .debug = FALSE)
+  "sample_file.int"), clear_tax_cols = TRUE,
+  warn_upper_thresholds = TRUE, .debug = FALSE)
 }
 \arguments{
 \item{sample_file}{A sample file having at least as many variables as the 2012-13 sample file.}
@@ -89,6 +90,8 @@ If \code{NULL}, the default, then eligibility is determined by \code{age_range} 
 \item{sapto_taper}{The taper rate beyond \code{sapto_lower_threshold}.}
 
 \item{sbto_discount}{The \code{tax_discount} in \code{\link{small_business_tax_offset}}.}
+
+\item{cgt_discount_rate}{(numeric(1)) The capital gains tax discount rate, currently 50\%.}
 
 \item{calc_baseline_tax}{(logical, default: \code{TRUE}) Should the income tax in \code{baseline_fy} be included as a column in the result?}
 

@@ -4,6 +4,7 @@ test_that("No NAs for sample_files_all", {
   skip_if_not_installed("taxstats") 
   skip_on_cran()
   skip_on_appveyor()
+  skip_on_travis()
   library(taxstats)
   sample_files_all <- get_sample_files_all()
   expect_false(anyNA(income_tax(sample_files_all[["Taxable_Income"]], 

@@ -7,7 +7,7 @@
 revenue_foregone(dt, revenue_positive = TRUE, digits = NULL)
 }
 \arguments{
-\item{dt}{A \code{data.table}}
+\item{dt}{A \code{data.table} from \code{\link{model_income_tax}}.}
 
 \item{revenue_positive}{If \code{TRUE}, the default, tax increase (revenue) is positive and tax cuts are negative.}
 

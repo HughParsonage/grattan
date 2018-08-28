@@ -61,6 +61,8 @@ test_that("grattan.assume1901_2100 options", {
 test_that("yr2fy and .yr2fy", {
   x <- 1900:2100
   expect_identical(fy.year(x), .yr2fy(x))
+  x <- rep_len(x, 20e3)
+  expect_identical(fy.year(x), .yr2fy(x))
 })
 
 test_that("range_fy", {
