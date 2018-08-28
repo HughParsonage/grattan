@@ -4,6 +4,7 @@
 #' @param .Prop_rent_paid_by_RA The proportion of the rent above the minimum threshold paid by rent assistance. 
 #' @param calc_baseline_ra (logical, default: \code{TRUE}) Should the income tax in \code{baseline_fy} or \code{baseline_Date} be included as a column in the result?
 #' @param baseline_fy,baseline_Date (character) The financial year/date over which the baseline rent assistance is to be calculated. Only one can be provided.
+#' @param per Specifies the timeframe in which payments will be made. Can either take value "fortnight" or "annual".
 #' @param Max_rate If not \code{NULL}, a numeric vector indicating for each individual the maximum rent assistance payable.
 #' @param Min_rent If not \code{NULL}, a numeric vector indicating for each individual the minimum fortnightly rent above which rent assistance is payable. \code{max_rate} and \code{min_rent}
 #' @param return. What should the function return? One of \code{tax}, \code{sample_file}, or \code{sample_file.int}. 
@@ -20,7 +21,7 @@ model_rent_assistance <- function(sample_file,
                                   baseline_fy = NULL,
                                   baseline_Date = NULL,
                                   Per = "fortnight",
-                                  .Prop_rent_paid_by_RA = 0.75,
+                                  .Prop_rent_paid_by_RA = NULL,
                                   Max_rate = NULL,
                                   Min_rent = NULL,
                                   calc_baseline_ra = TRUE,
@@ -29,7 +30,25 @@ model_rent_assistance <- function(sample_file,
   if (!xor(is.null(baseline_fy), is.null(baseline_Date))) {
     stop("only one of either `baseline_fy` or `baseline_Date` can be provided.")
   }
-
+  if (is.null(.Prop_rent_paid_by_RA) || is.null(Max_rate) || is.null(Min_rent)) {
+    stop("need all of `.Prop_rent_paid_by_RA`, `Max_rate` and `Min_rent`.")
+  }
+  if (!is.numeric(.Prop_rent_paid_by_RA)) {
+    stop("`.Prop_rent_paid_by_RA` was type ", typeof(.Prop_rent_paid_by_RA),", but must be numeric.")
+  }
+  if (!is.numeric(Max_rate)) {
+    stop("`.Prop_rent_paid_by_RA` was type ", typeof(.Prop_rent_paid_by_RA),", but must be numeric.")
+  }
+  if (!is.numeric(Min_rent)) {
+    stop("`Min_rent` was type ", typeof(Min_rent),", but must be numeric.")
+  }
+  if (!is.logical(calc_baseline_ra)) {
+    stop("`calc_baseline_ra` was type ", typeof(calc_baseline_ra),", but must be logical.")
+  }
+  if (!(return. %chin% c("new_ra", "sample_file", "sample_file.int"))) {
+    stop("`return. was not one of `new_ra`, `sample_file`, `sample_file.int`")
+  }
+  
   sample_file <- copy(sample_file)
   
   #check sample file has correct format

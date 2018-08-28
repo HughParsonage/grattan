@@ -5,13 +5,13 @@
 \title{Model Rent Assistance}
 \usage{
 model_rent_assistance(sample_file, baseline_fy = NULL, baseline_Date = NULL,
-  Per = "fortnight", .Prop_rent_paid_by_RA = 0.75, Max_rate = NULL,
+  Per = "fortnight", .Prop_rent_paid_by_RA = NULL, Max_rate = NULL,
   Min_rent = NULL, calc_baseline_ra = TRUE, return. = "new_ra")
 }
 \arguments{
 \item{sample_file}{A sample file having the same variables as the data.frame in the example.}
 
-\item{baseline_fy, baseline_Date}{(character) The financial year/date over which the baseline rent assistance is to be calculated. Only can be provided.}
+\item{baseline_fy, baseline_Date}{(character) The financial year/date over which the baseline rent assistance is to be calculated. Only one can be provided.}
 
 \item{.Prop_rent_paid_by_RA}{The proportion of the rent above the minimum threshold paid by rent assistance.}
 
