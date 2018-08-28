@@ -73,12 +73,14 @@ verify_date <- function(date_to_verify, from = NULL, to = NULL,
       }
     }
     
+    # nocov start
     if (!is.character(x)) {
       stop("Internal error: must be character at this point.")
     }
+    # nocov end
     
     if (is.fy(x)) {
-      return(date2fy(x))
+      return(fy2date(x))
     }
     
     as.Date(x)

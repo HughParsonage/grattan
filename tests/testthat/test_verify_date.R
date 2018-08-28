@@ -14,12 +14,23 @@ test_that("errors", {
                regexp = " during coercion to Date")
   expect_error(verify_date(c("2018-10-10","cvgvg"), from = 2010, to = 2011),
                regexp = "[pP]osition 2.")
+  
+  expect_error(verify_date(data.frame()), 
+               regexp = "was a data\\.frame")
+  expect_error(verify_date(c("2018-01-01"), from = 1:2),
+              "`from` must be length-one.",
+              fixed = TRUE)
+  expect_error(verify_date(c("2018-01-01"), to = 1:2),
+               "`to` must be length-one.",
+               fixed = TRUE)
+  
 })
 
 test_that("values", {
   x <- "2018-10-10"
   x2 <- verify_date(x)
   expect_true(x2 == x)
+  expect_true(x2 == verify_date(x2))
 
   x <- c("2018-10-10", "2018-10-11")
   x2 <- verify_date(x)
@@ -36,6 +47,19 @@ test_that("values", {
   x <- c("2018-10-10","2018-10-11")
   x2 <- verify_date(x, to = 2019)
   expect_true(all(x2 == x))
+  
+  x <- c("2013-12-31")
+  x2 <- verify_date(x, from = "2012-13")
+  expect_true(x == x2)
+  
+  x <- c("2013-12-31")
+  x2 <- verify_date(x, from = "2012-12-01", to = "2013-14")
+  expect_true(x == x2)
+  
+  x <- c("2013-12-31")
+  x2 <- verify_date(x, from = as.Date("2012-12-01"), to = "2013-14")
+  expect_true(x == x2)
+  
 })
 
 test_that("sprintf error", {
