@@ -5,7 +5,7 @@
 \title{Model Rent Assistance}
 \usage{
 model_rent_assistance(sample_file, baseline_fy = NULL, baseline_Date = NULL,
-  .Prop_rent_paid_by_RA, Max_rate = NULL, Min_rent = NULL,
+  .Prop_rent_paid_by_RA = 0.75, Max_rate = NULL, Min_rent = NULL,
   calc_baseline_ra = TRUE, return. = "new_ra")
 }
 \arguments{
@@ -27,6 +27,6 @@ but with variables \code{tax} and possibly \code{new_taxable_income}; if \code{s
 Model Rent Assistance
 }
 \examples{
-sample<- CJ(rent = 1:500, n_dependants = 0:3, has_partner = 0:1 > 0, is_homeowner = 0:1 > 0, lives_in_sharehouse = 0:1 > 0) 
+sample <- CJ(rent = 1:500, n_dependants = 0:3, has_partner = 0:1 > 0, is_homeowner = 0:1 > 0, lives_in_sharehouse = 0:1 > 0) 
 model_rent_assistance(sample, .Prop_rent_paid_by_RA = 0.75, Max_rate = 500, Min_rent = 100)
 }

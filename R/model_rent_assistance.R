@@ -12,13 +12,13 @@
 #' @export 
 #' 
 #' @examples
-#' sample<- CJ(rent = 1:500, n_dependants = 0:3, has_partner = 0:1 > 0, is_homeowner = 0:1 > 0, lives_in_sharehouse = 0:1 > 0) 
+#' sample <- CJ(rent = 1:500, n_dependants = 0:3, has_partner = 0:1 > 0, is_homeowner = 0:1 > 0, lives_in_sharehouse = 0:1 > 0) 
 #' model_rent_assistance(sample, .Prop_rent_paid_by_RA = 0.75, Max_rate = 500, Min_rent = 100)
 
 model_rent_assistance <- function(sample_file,
                                   baseline_fy = NULL,
                                   baseline_Date = NULL,
-                                  .Prop_rent_paid_by_RA,
+                                  .Prop_rent_paid_by_RA = 0.75,
                                   Max_rate = NULL,
                                   Min_rent = NULL,
                                   calc_baseline_ra = TRUE,
@@ -70,9 +70,8 @@ model_rent_assistance <- function(sample_file,
                         min_rent = Min_rent)
   
   switch(return.,
-         "ra" = new_ra,
-         "sample_file" = set(sample_file, j = "new_ra", value = ra),
-         "sample_file.int" = set(sample_file, j = "new_ra", value = as.integer(ra)))
+         "new_ra" = ra[],
+         "sample_file" = set(sample_file, j = "new_ra", value = ra)[],
+         "sample_file.int" = set(sample_file, j = "new_ra", value = as.integer(ra))[])
   
-  eval(parse(text = return.))
 }
