@@ -159,7 +159,7 @@ yr2fy <- function(yr_ending, assume1901_2100 = .getOption("grattan.assume1901_21
 .yr2fy <- function(yr_ending) {
   if (length(yr_ending) > 10e3L) {
     # Apparently quicker for > 1000
-    accel_repetitive_input(yr_ending, yr2fy)
+    accel_repetitive_input(yr_ending, .yr2fy)
   } else {
     sprintf("%d-%02d", as.integer(yr_ending) - 1L, as.integer(yr_ending) %% 100L)
   }

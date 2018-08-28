@@ -210,4 +210,18 @@ test_that("lf_indices", {
   
 })
 
+test_that("deflator", {
+  skip_if_not_installed("rlang")
+  
+  rlang::with_options({
+    expect_output(lf_inflator_fy(from_fy = "2014-15", to_fy = "2013-14"),
+                  "a:\\s+2014.15")
+    expect_output(lf_inflator_fy(to_fy = "2014-15", from_fy = "2013-14"),
+                  "a:\\s+2013.14")
+  },
+  grattan.verbose = TRUE)
+  expect_equal(lf_inflator_fy(from_fy = "2014-15", to_fy = "2013-14"),
+               1 / lf_inflator_fy(to_fy = "2014-15", from_fy = "2013-14"))
+})
+
 
