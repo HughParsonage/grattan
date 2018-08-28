@@ -4,14 +4,13 @@
 \alias{verify_date}
 \title{Verifying validity of dates}
 \usage{
-verify_date(date_to_verify, from = -Inf, to = Inf)
+verify_date(date_to_verify, from = NULL, to = NULL)
 }
 \arguments{
 \item{date_to_verify}{(character) A user-provided value, purporting to be
 character vector of dates.}
 
-\item{from, to}{(integer) Indicating the range of years valid for date_to_verify.
-If \code{NULL}, no restriction on the upper or lower bound of the range.}
+\item{from, to}{Indicating the range of years valid for \code{date_to_verify}. Default set to -Inf and Inf respectively (i.e. there is no bound)}
 }
 \description{
 Many functions expect Dates. 
