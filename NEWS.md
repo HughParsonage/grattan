@@ -13,6 +13,11 @@
 ```
   
   Use `yr2fy(x, assume1901_2100 = FALSE)` if you need the old behaviour.
+  
+### New functions:
+
+* `rent_assistance` the Commonwealth Rent Assistance
+* `model_rent_assistance` as experimental function for modelling changes to rent assistance.
 
 
 ## 1.6.3.0

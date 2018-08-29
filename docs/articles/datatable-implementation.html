@@ -88,7 +88,7 @@
       <h1>Calculations of income tax are rolling joins</h1>
                         <h4 class="author">Hugh Parsonage</h4>
             
-            <h4 class="date">2018-08-28</h4>
+            <h4 class="date">2018-08-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/HughParsonage/grattan/blob/master/vignettes/datatable-implementation.Rmd"><code>vignettes/datatable-implementation.Rmd</code></a></small>
       <div class="hidden name"><code>datatable-implementation.Rmd</code></div>
@@ -105,7 +105,6 @@
 <span class="kw">library</span>(data.table)
 <span class="kw">library</span>(hutils)
 <span class="kw">library</span>(grattan)</code></pre></div>
-<pre><code>## Last change: NAMESPACE at 2018-08-28 21:59:36 (1 hours ago).</code></pre>
 <p>Generally, income taxes are parmeterized by tax tables. In Australia, for the 2017-18 financial year, the table looks like</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dollar &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">paste0</span>(<span class="st">"$"</span>, <span class="kw">prettyNum</span>(x, <span class="dt">big.mark =</span> <span class="st">","</span>))
 grattan<span class="op">:::</span>tax_table2[fy_year <span class="op">==</span><span class="st"> "2017-18"</span>,

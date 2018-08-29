@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Rebate income — rebate_income • grattan</title>
+<title>Verifying validity of dates — validate_date • grattan</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,13 @@
 
 
 
-<meta property="og:title" content="Rebate income — rebate_income" />
+<meta property="og:title" content="Verifying validity of dates — validate_date" />
 
-<meta property="og:description" content="Rebate income" />
+<meta property="og:description" content="Many functions expect Dates. 
+Determining that they are validly entered is often quite 
+computatationally costly, relative to the core calculations.
+These internal functions provide mechanisms to check validity
+quickly, while still providing clear, accurate error messages." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -118,53 +122,46 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Rebate income</h1>
-    <small class="dont-index">Source: <a href='https://github.com/HughParsonage/grattan/blob/master/R/rebate_income.R'><code>R/rebate_income.R</code></a></small>
-    <div class="hidden name"><code>rebate_income.Rd</code></div>
+    <h1>Verifying validity of dates</h1>
+    <small class="dont-index">Source: <a href='https://github.com/HughParsonage/grattan/blob/master/R/validate_date.R'><code>R/validate_date.R</code></a></small>
+    <div class="hidden name"><code>validate_date.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Rebate income</p>
+    <p>Many functions expect Dates. 
+Determining that they are validly entered is often quite 
+computatationally costly, relative to the core calculations.
+These internal functions provide mechanisms to check validity
+quickly, while still providing clear, accurate error messages.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>rebate_income</span>(<span class='no'>Taxable_Income</span>, <span class='kw'>Rptbl_Empr_spr_cont_amt</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>All_deductible_super_contr</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>Net_fincl_invstmt_lss_amt</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>Net_rent_amt</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>Rep_frng_ben_amt</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>validate_date</span>(<span class='no'>date_to_verify</span>, <span class='kw'>from</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>deparsed</span> <span class='kw'>=</span> <span class='st'>"Date"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>Taxable_Income</th>
-      <td><p>the taxable income</p></td>
+      <th>date_to_verify</th>
+      <td><p>(character) A user-provided value, purporting to be
+character vector of dates.</p></td>
     </tr>
     <tr>
-      <th>Rptbl_Empr_spr_cont_amt</th>
-      <td><p>The reportable employer superannuation contributions amount</p></td>
+      <th>from, to</th>
+      <td><p>Indicating the range of years valid for <code>date_to_verify</code>. Default set to -Inf and Inf respectively (i.e. there is no bound)</p></td>
     </tr>
     <tr>
-      <th>All_deductible_super_contr</th>
-      <td><p>deductible personal superannuation contributions</p></td>
-    </tr>
-    <tr>
-      <th>Net_fincl_invstmt_lss_amt</th>
-      <td><p>Net financial investment loss</p></td>
-    </tr>
-    <tr>
-      <th>Net_rent_amt</th>
-      <td><p>(for Rental deductions)</p></td>
-    </tr>
-    <tr>
-      <th>Rep_frng_ben_amt</th>
-      <td><p>Reportable fringe-benefits</p></td>
+      <th>deparsed</th>
+      <td><p>The name of variable to appear in error messages.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><a href='https://www.ato.gov.au/Individuals/Tax-return/2015/Tax-return/Tax-offset-questions-T1-T2/Rebate-income-2015/'>https://www.ato.gov.au/Individuals/Tax-return/2015/Tax-return/Tax-offset-questions-T1-T2/Rebate-income-2015/</a></p>
+    <p><code>date_to_verify</code> as a Date object, provided it can be converted 
+to a Date and all elements are within the bounds <code>from</code> and <code>to</code>.</p>
     
 
   </div>
@@ -173,7 +170,7 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#source">Source</a></li>
+      <li><a href="#value">Value</a></li>
           </ul>
 
   </div>
