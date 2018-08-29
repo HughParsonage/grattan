@@ -3,6 +3,7 @@
 \name{lito}
 \alias{lito}
 \alias{.lito}
+\alias{lito}
 \title{Low Income Tax Offset}
 \usage{
 .lito(input)

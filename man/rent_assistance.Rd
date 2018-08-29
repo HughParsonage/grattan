@@ -5,8 +5,8 @@
 \title{Rent assistance}
 \usage{
 rent_assistance(fortnightly_rent = Inf, fy.year = NULL, Date = NULL,
-  n_dependants = 0L, has_partner = FALSE,
-  .prop_rent_paid_by_RA = 0.75, max_rate = NULL, min_rent = NULL)
+  n_dependants = 0L, has_partner = FALSE, .prop_rent_paid_by_RA = 0.75,
+  max_rate = NULL, min_rent = NULL)
 }
 \arguments{
 \item{fortnightly_rent}{The fortnightly rent paid by each individual. By default, infinity, so the maximum rent assistance is returned by default, since rent assistance is capped at a maximum rate.}
