@@ -4,7 +4,10 @@
 \alias{child_care_subsidy}
 \title{Child care Subsidy}
 \usage{
-child_care_subsidy(family_annual_income, child_age, type_of_day_care)
+child_care_subsidy(family_annual_income = 0, activity_level = Inf,
+  activity_exemption = TRUE, child_age = 3, type_of_day_care = c("cbdc",
+  "oshc", "fdc", "ihc"), hours_day_care_fortnight = 20, cost_hour = 20,
+  early_education_program = FALSE)
 }
 \arguments{
 \item{family_annual_income}{}
