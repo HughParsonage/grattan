@@ -36,7 +36,10 @@ model_rent_assistance <- function(sample_file,
                                   Max_rate = NULL,
                                   Min_rent = NULL,
                                   calc_baseline_ra = TRUE,
-                                  return. = "new_ra") {
+                                  return. = c("sample_file", "new_ra", "sample_file.int")) {
+  arguments <- ls()
+  argument_vals <- as.list(environment())
+  return. <- match.arg(return.)
   
   if (!xor(is.null(baseline_fy), is.null(baseline_Date))) {
     stop("only one of either `baseline_fy` or `baseline_Date` can be provided.")
@@ -56,10 +59,7 @@ model_rent_assistance <- function(sample_file,
   if (!is.logical(calc_baseline_ra)) {
     stop("`calc_baseline_ra` was type ", typeof(calc_baseline_ra),", but must be logical.")
   }
-  if (!(return. %chin% c("new_ra", "sample_file", "sample_file.int"))) {
-    stop("`return. was not one of `new_ra`, `sample_file`, `sample_file.int`")
-  }
-  
+ 
   sample_file <- copy(sample_file)
   
   #check sample file has correct format
