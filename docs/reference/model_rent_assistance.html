@@ -129,9 +129,11 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>model_rent_assistance</span>(<span class='no'>sample_file</span>, <span class='kw'>baseline_fy</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>baseline_Date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>Per</span> <span class='kw'>=</span> <span class='st'>"fortnight"</span>, <span class='kw'>.Prop_rent_paid_by_RA</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>Max_rate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>Min_rent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>calc_baseline_ra</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>return.</span> <span class='kw'>=</span> <span class='st'>"new_ra"</span>)</pre>
+    <pre class="usage"><span class='fu'>model_rent_assistance</span>(<span class='no'>sample_file</span>, <span class='kw'>baseline_fy</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>baseline_Date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>Per</span> <span class='kw'>=</span> <span class='st'>"fortnight"</span>,
+  <span class='kw'>.Prop_rent_paid_by_RA</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>Max_rate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>Min_rent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>calc_baseline_ra</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>return.</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"sample_file"</span>, <span class='st'>"new_ra"</span>,
+  <span class='st'>"sample_file.int"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -143,6 +145,10 @@
     <tr>
       <th>baseline_fy, baseline_Date</th>
       <td><p>(character) The financial year/date over which the baseline rent assistance is to be calculated. Only one can be provided.</p></td>
+    </tr>
+    <tr>
+      <th>Per</th>
+      <td><p>Specifies the timeframe in which payments will be made. Can either take value "fortnight" or "annual".</p></td>
     </tr>
     <tr>
       <th>.Prop_rent_paid_by_RA</th>
@@ -170,8 +176,42 @@ but with variables <code>tax</code> and possibly <code>new_taxable_income</code>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>sample</span> <span class='kw'>&lt;-</span> <span class='fu'>CJ</span>(<span class='kw'>rent</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>500</span>, <span class='kw'>n_dependants</span> <span class='kw'>=</span> <span class='fl'>0</span>:<span class='fl'>3</span>, <span class='kw'>has_partner</span> <span class='kw'>=</span> <span class='fl'>0</span>:<span class='fl'>1</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>, <span class='kw'>is_homeowner</span> <span class='kw'>=</span> <span class='fl'>0</span>:<span class='fl'>1</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>, <span class='kw'>lives_in_sharehouse</span> <span class='kw'>=</span> <span class='fl'>0</span>:<span class='fl'>1</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>)
-<span class='fu'>model_rent_assistance</span>(<span class='no'>sample</span>, <span class='kw'>.Prop_rent_paid_by_RA</span> <span class='kw'>=</span> <span class='fl'>0.75</span>, <span class='kw'>Max_rate</span> <span class='kw'>=</span> <span class='fl'>500</span>, <span class='kw'>Min_rent</span> <span class='kw'>=</span> <span class='fl'>100</span>)</div><div class='output co'>#&gt; <span class='error'>Error in model_rent_assistance(sample, .Prop_rent_paid_by_RA = 0.75, Max_rate = 500,     Min_rent = 100): only one of either `baseline_fy` or `baseline_Date` can be provided.</span></div></pre>
+    <pre class="examples"><div class='input'>
+<span class='fu'>library</span>(<span class='no'>data.table</span>)
+<span class='no'>sample</span> <span class='kw'>&lt;-</span>
+  <span class='fu'><a href='http://www.rdocumentation.org/packages/data.table/topics/J'>CJ</a></span>(<span class='kw'>rent</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>500</span>,
+     <span class='kw'>n_dependants</span> <span class='kw'>=</span> <span class='fl'>0</span>:<span class='fl'>3</span>,
+     <span class='kw'>has_partner</span> <span class='kw'>=</span> <span class='fl'>0</span>:<span class='fl'>1</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>,
+     <span class='kw'>is_homeowner</span> <span class='kw'>=</span> <span class='fl'>0</span>:<span class='fl'>1</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>,
+     <span class='kw'>lives_in_sharehouse</span> <span class='kw'>=</span> <span class='fl'>0</span>:<span class='fl'>1</span> <span class='kw'>&gt;</span> <span class='fl'>0</span>)
+<span class='fu'>model_rent_assistance</span>(<span class='no'>sample</span>,
+                      <span class='kw'>baseline_fy</span> <span class='kw'>=</span> <span class='st'>"2018-19"</span>,
+                      <span class='kw'>.Prop_rent_paid_by_RA</span> <span class='kw'>=</span> <span class='fl'>0.75</span>,
+                      <span class='kw'>Max_rate</span> <span class='kw'>=</span> <span class='fl'>500</span>,
+                      <span class='kw'>Min_rent</span> <span class='kw'>=</span> <span class='fl'>100</span>)</div><div class='output co'>#&gt;        rent n_dependants has_partner is_homeowner lives_in_sharehouse
+#&gt;     1:    1            0       FALSE        FALSE               FALSE
+#&gt;     2:    1            0       FALSE        FALSE                TRUE
+#&gt;     3:    1            0       FALSE         TRUE               FALSE
+#&gt;     4:    1            0       FALSE         TRUE                TRUE
+#&gt;     5:    1            0        TRUE        FALSE               FALSE
+#&gt;    ---                                                               
+#&gt; 15996:  500            3       FALSE         TRUE                TRUE
+#&gt; 15997:  500            3        TRUE        FALSE               FALSE
+#&gt; 15998:  500            3        TRUE        FALSE                TRUE
+#&gt; 15999:  500            3        TRUE         TRUE               FALSE
+#&gt; 16000:  500            3        TRUE         TRUE                TRUE
+#&gt;        baseline_ra new_ra
+#&gt;     1:        0.00      0
+#&gt;     2:        0.00      0
+#&gt;     3:        0.00      0
+#&gt;     4:        0.00      0
+#&gt;     5:        0.00      0
+#&gt;    ---                   
+#&gt; 15996:      180.43    300
+#&gt; 15997:      180.43    300
+#&gt; 15998:      180.43    300
+#&gt; 15999:      180.43    300
+#&gt; 16000:      180.43    300</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

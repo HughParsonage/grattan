@@ -143,11 +143,12 @@
   <span class='kw'>medicare_levy_lower_up_for_each_child</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lito_max_offset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>lito_taper</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lito_min_bracket</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lito_multi</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>Budget2018_lamington</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>Budget2018_lito_202223</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>Budget2018_watr</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sapto_eligible</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sapto_max_offset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>sapto_lower_threshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sapto_taper</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sbto_discount</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>cgt_discount_rate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>calc_baseline_tax</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>return.</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"sample_file"</span>, <span class='st'>"tax"</span>, <span class='st'>"sample_file.int"</span>),
-  <span class='kw'>clear_tax_cols</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>warn_upper_thresholds</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>.debug</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>Budget2018_watr</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sapto_eligible</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sapto_max_offset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sapto_lower_threshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sapto_taper</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sbto_discount</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cgt_discount_rate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>calc_baseline_tax</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>return.</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"sample_file"</span>, <span class='st'>"tax"</span>,
+  <span class='st'>"sample_file.int"</span>), <span class='kw'>clear_tax_cols</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>warn_upper_thresholds</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>.debug</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -298,14 +299,44 @@ but with variables <code>tax</code> and possibly <code>new_taxable_income</code>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
+<span class='fu'>library</span>(<span class='no'>data.table</span>)
+<span class='fu'>library</span>(<span class='no'>hutils</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'hutils'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:grattan':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    %notin%, Switch</span></div><div class='input'><span class='no'>ans</span> <span class='kw'>&lt;-</span>
 <span class='co'># With new tax-free threshold of $20,000:</span>
 <span class='kw'>if</span> (<span class='fu'>requireNamespace</span>(<span class='st'>"taxstats"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
   <span class='fu'>library</span>(<span class='no'>taxstats</span>)
+
   <span class='fu'>model_income_tax</span>(<span class='no'>sample_file_1314</span>,
                    <span class='st'>"2013-14"</span>,
                    <span class='kw'>ordinary_tax_thresholds</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>20e3</span>, <span class='fl'>37e3</span>, <span class='fl'>80e3</span>, <span class='fl'>180e3</span>))
 
-}</div></pre>
+}
+<span class='fu'><a href='http://www.rdocumentation.org/packages/hutils/topics/select_grep'>select_grep</a></span>(<span class='no'>ans</span>, <span class='st'>"tax"</span>, <span class='st'>"Taxable_Income"</span>)</div><div class='output co'>#&gt;         Untaxed_othr_pnsn_amt Cost_tax_affairs_amt Spouse_adjusted_taxable_inc
+#&gt;      1:                     0                    0                           0
+#&gt;      2:                     0                  336                           0
+#&gt;      3:                     0                    0                           0
+#&gt;      4:                     0                  138                       19914
+#&gt;      5:                     0                   61                           0
+#&gt;     ---                                                                       
+#&gt; 258770:                     0                  383                      178171
+#&gt; 258771:                     0                    0                      144777
+#&gt; 258772:                     0                  241                       24200
+#&gt; 258773:                     0                    0                           0
+#&gt; 258774:                     0                    0                           0
+#&gt;         Taxable_Income baseline_tax   new_tax
+#&gt;      1:           4800            0     0.000
+#&gt;      2:         126122        36503 36161.970
+#&gt;      3:          39742         4655  4313.410
+#&gt;      4:         108123        29574 29232.355
+#&gt;      5:          85957        21040 20698.445
+#&gt;     ---                                      
+#&gt; 258770:          24462         1111   769.710
+#&gt; 258771:          37055         3701  3359.525
+#&gt; 258772:          45024         6530  6188.520
+#&gt; 258773:           5134            0     0.000
+#&gt; 258774:          46368         7007  6665.640</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

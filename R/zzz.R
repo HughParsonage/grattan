@@ -99,6 +99,7 @@
 
 gessage <- function(...) {
   if (identical(Sys.info()[["user"]], "hughp") &&
+      !isNamespaceLoaded("pkgdown") &&
       file.exists("~/grattan_1.4.0.2.tar.gz")) {
     packageStartupMessage(...)
   } else {

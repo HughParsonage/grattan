@@ -55,6 +55,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/datatable-implementation.html">Calculations of income tax are rolling joins</a>
+    </li>
+    <li>
       <a href="../articles/long-vignettes/budget-2018.html">Budget 2018 modelling</a>
     </li>
   </ul>
@@ -85,7 +88,7 @@
       <h1>Grattan Institute</h1>
                         <h4 class="author">Hugh Parsonage</h4>
             
-            <h4 class="date">2018-08-24</h4>
+            <h4 class="date">2018-08-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/HughParsonage/grattan/blob/master/vignettes/grattan.Rmd"><code>vignettes/grattan.Rmd</code></a></small>
       <div class="hidden name"><code>grattan.Rmd</code></div>
@@ -182,8 +185,7 @@ hutils<span class="op">::</span><span class="kw"><a href="http://www.rdocumentat
               <span class="dt">idcol =</span> <span class="st">"fy.year"</span>)
 sample_files_all[, WEIGHT <span class="op">:</span><span class="er">=</span><span class="st"> </span>hutils<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/hutils/topics/if_else">if_else</a></span>(fy.year <span class="op">&gt;</span><span class="st"> '2010-11'</span>, 50L, 100L)]
 age_range_decoder &lt;-<span class="st"> </span><span class="kw">as.data.table</span>(age_range_decoder)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(grattan)
-<span class="co">#&gt; Last change: NAMESPACE at 2018-08-24 00:41:36 (22 hours ago).</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(grattan)</code></pre></div>
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
