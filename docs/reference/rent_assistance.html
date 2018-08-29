@@ -87,6 +87,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/datatable-implementation.html">Calculations of income tax are rolling joins</a>
+    </li>
+    <li>
       <a href="../articles/long-vignettes/budget-2018.html">Budget 2018 modelling</a>
     </li>
   </ul>
@@ -126,16 +129,22 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>rent_assistance</span>(<span class='kw'>fortnightly_rent</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>fy.year</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>Date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>n_dependants</span> <span class='kw'>=</span> <span class='fl'>0L</span>, <span class='kw'>has_partner</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>.prop_rent_paid_by_RA</span> <span class='kw'>=</span> <span class='fl'>0.75</span>, <span class='kw'>max_rate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>min_rent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>rent_assistance</span>(<span class='kw'>fortnightly_rent</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>per</span> <span class='kw'>=</span> <span class='st'>"fortnight"</span>, <span class='kw'>fy.year</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>Date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n_dependants</span> <span class='kw'>=</span> <span class='fl'>0L</span>, <span class='kw'>has_partner</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>.prop_rent_paid_by_RA</span> <span class='kw'>=</span> <span class='fl'>0.75</span>, <span class='kw'>max_rate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>min_rent</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sharers_provision_applies</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>is_homeowner</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>lives_in_sharehouse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fortnightly_rent</th>
-      <td><p>The fortnightly rent paid by each individual. By default, infinity, so the maximum rent assistance is returned by default, since rent assistance is capped at a maximum rate.</p></td>
+      <td><p>The fortnightly rent paid by each individual. By default, infinity, so the maximum rent assistance is returned by default, since rent assistance is capped at a maximum rate. Note the criteria for board and lodging which can be found at <a href='http://guides.dss.gov.au/guide-social-security-law/3/8/1/70'>http://guides.dss.gov.au/guide-social-security-law/3/8/1/70</a></p></td>
+    </tr>
+    <tr>
+      <th>per</th>
+      <td><p>Specifies the timeframe in which payments will be made. Can either take value "fortnight" or "annual".</p></td>
     </tr>
     <tr>
       <th>fy.year</th>
@@ -170,6 +179,18 @@ the internal table.</p></td>
       <th>min_rent</th>
       <td><p>If not <code>NULL</code>, a numeric vector indicating for each individual the minimum fortnightly rent above which rent assistance is payable. <code>max_rate</code> and <code>min_rent</code> must not be used when <code>fy.year</code> is set.</p></td>
     </tr>
+    <tr>
+      <th>sharers_provision_applies</th>
+      <td><p>(logical, default: FALSE) Does the sharers provision apply to the parent payment? The list of functions can be found in table 2 column 4 <a href='http://guides.dss.gov.au/guide-social-security-law/3/8/1/10'>http://guides.dss.gov.au/guide-social-security-law/3/8/1/10</a></p></td>
+    </tr>
+    <tr>
+      <th>is_homeowner</th>
+      <td><p>(logical, default: FALSE) Does the individual own their own home?</p></td>
+    </tr>
+    <tr>
+      <th>lives_in_sharehouse</th>
+      <td><p>(logical, defualt: FALSE) Does the individual live in a sharehouse?</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -181,13 +202,13 @@ If the arguments cannot be recycled safely, the function errors.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># current annual rent assistance</span>
-<span class='fu'>rent_assistance</span>()</div><div class='output co'>#&gt; <span class='message'>`fy.year` not set, so defaulting to fy.year = "2018-19"</span></div><div class='output co'>#&gt; [1] 3534.96</div><div class='input'>
+<span class='fu'>rent_assistance</span>()</div><div class='output co'>#&gt; <span class='message'>`fy.year` not set, so defaulting to fy.year = "2018-19"</span></div><div class='output co'>#&gt; <span class='message'>`per` not set; calculating fortnightly payment.</span></div><div class='output co'>#&gt; [1] 135.96</div><div class='input'>
 <span class='co'># current fortnightly payment</span>
-<span class='fu'>rent_assistance</span>(<span class='kw'>Date</span> <span class='kw'>=</span> <span class='fu'>Sys.Date</span>())</div><div class='output co'>#&gt; [1] 134.4</div><div class='input'>
+<span class='fu'>rent_assistance</span>(<span class='kw'>Date</span> <span class='kw'>=</span> <span class='fu'>Sys.Date</span>())</div><div class='output co'>#&gt; <span class='message'>`per` not set; calculating fortnightly payment.</span></div><div class='output co'>#&gt; [1] 134.4</div><div class='input'>
 <span class='co'># zero since no rent</span>
-<span class='fu'>rent_assistance</span>(<span class='fl'>0</span>, <span class='kw'>Date</span> <span class='kw'>=</span> <span class='st'>"2016-01-02"</span>)</div><div class='output co'>#&gt; [1] 0</div><div class='input'>
+<span class='fu'>rent_assistance</span>(<span class='fl'>0</span>, <span class='kw'>Date</span> <span class='kw'>=</span> <span class='st'>"2016-01-02"</span>)</div><div class='output co'>#&gt; <span class='message'>`per` not set; calculating fortnightly payment.</span></div><div class='output co'>#&gt; [1] 0</div><div class='input'>
 <span class='co'># Rent assistance is payable at 75c for every dollar over min rent</span>
-<span class='fu'>rent_assistance</span>(<span class='fl'>101</span>, <span class='kw'>max_rate</span> <span class='kw'>=</span> <span class='fl'>500</span>, <span class='kw'>min_rent</span> <span class='kw'>=</span> <span class='fl'>100</span>)</div><div class='output co'>#&gt; [1] 0.75</div><div class='input'><span class='fu'>rent_assistance</span>(<span class='fl'>500</span>, <span class='kw'>max_rate</span> <span class='kw'>=</span> <span class='fl'>500</span>, <span class='kw'>min_rent</span> <span class='kw'>=</span> <span class='fl'>100</span>)</div><div class='output co'>#&gt; [1] 300</div><div class='input'>
+<span class='fu'>rent_assistance</span>(<span class='fl'>101</span>, <span class='kw'>max_rate</span> <span class='kw'>=</span> <span class='fl'>500</span>, <span class='kw'>min_rent</span> <span class='kw'>=</span> <span class='fl'>100</span>)</div><div class='output co'>#&gt; <span class='message'>`per` not set; calculating fortnightly payment.</span></div><div class='output co'>#&gt; [1] 0.75</div><div class='input'><span class='fu'>rent_assistance</span>(<span class='fl'>500</span>, <span class='kw'>max_rate</span> <span class='kw'>=</span> <span class='fl'>500</span>, <span class='kw'>min_rent</span> <span class='kw'>=</span> <span class='fl'>100</span>)</div><div class='output co'>#&gt; <span class='message'>`per` not set; calculating fortnightly payment.</span></div><div class='output co'>#&gt; [1] 300</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
