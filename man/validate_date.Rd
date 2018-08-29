@@ -4,8 +4,7 @@
 \alias{validate_date}
 \title{Verifying validity of dates}
 \usage{
-validate_date(date_to_verify, from = NULL, to = NULL,
-  deparsed = "Date")
+validate_date(date_to_verify, from = NULL, to = NULL, deparsed = "Date")
 }
 \arguments{
 \item{date_to_verify}{(character) A user-provided value, purporting to be
