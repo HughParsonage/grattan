@@ -182,7 +182,7 @@ model_income_tax <- function(sample_file,
                         fy.year = baseline_fy,
                         .dots.ATO = .dots.ATO,
                         n_dependants = n_dependants)
-  if (calc_baseline_tax && return != "tax") {
+  if (calc_baseline_tax && return. != "tax") {
     set(sample_file,
         j = "baseline_tax",
         value = switch(return.,
