@@ -37,51 +37,62 @@ model_rent_assistance <- function(sample_file,
                                   Min_rent = NULL,
                                   calc_baseline_ra = TRUE,
                                   return. = c("sample_file", "new_ra", "sample_file.int")) {
-  arguments <- ls()
-  argument_vals <- as.list(environment())
   return. <- match.arg(return.)
   
-  if (!xor(is.null(baseline_fy), is.null(baseline_Date))) {
-    stop("only one of either `baseline_fy` or `baseline_Date` can be provided.")
+  if (!XOR(is.null(baseline_fy), is.null(baseline_Date))) {
+    if (is.null(baseline_fy) && is.null(baseline_Date)) {
+      stop("Neither `baseline_fy` nor `baseline_Date` was provided. ", 
+           "Provide `baseline_fy` xor `baseline_Date`.")
+    } else {
+      stop("`baseline_fy` is NULL, yet `baseline_Date` is also NULL. ",
+           "Only one of `baseline_fy` and `baseline_Date` may be provided.")
+    } 
   }
   if (is.null(.Prop_rent_paid_by_RA) || is.null(Max_rate) || is.null(Min_rent)) {
     stop("need all of `.Prop_rent_paid_by_RA`, `Max_rate` and `Min_rent`.")
   }
   if (!is.numeric(.Prop_rent_paid_by_RA)) {
-    stop("`.Prop_rent_paid_by_RA` was type ", typeof(.Prop_rent_paid_by_RA),", but must be numeric.")
+    stop("`.Prop_rent_paid_by_RA` was type ", typeof(.Prop_rent_paid_by_RA),
+         ", but must be numeric.")
   }
   if (!is.numeric(Max_rate)) {
-    stop("`.Prop_rent_paid_by_RA` was type ", typeof(.Prop_rent_paid_by_RA),", but must be numeric.")
+    stop("`Max_rate` was type ", typeof(Max_rate),
+         ", but must be numeric.")
   }
   if (!is.numeric(Min_rent)) {
     stop("`Min_rent` was type ", typeof(Min_rent),", but must be numeric.")
   }
-  if (!is.logical(calc_baseline_ra)) {
-    stop("`calc_baseline_ra` was type ", typeof(calc_baseline_ra),", but must be logical.")
-  }
- 
-  sample_file <- copy(sample_file)
   
-  #check sample file has correct format
-  stopifnot(is.data.frame(sample_file))
+  check_TF(calc_baseline_ra)
+ 
+  
+  
+  # Check sample file has correct format
   if(!is.data.table(sample_file)) {
-    sample_file <- data.table(sample_file)
+    if (!is.data.frame(sample_file)) {
+      stop("`sample_file` was a ", class(sample_file)[1],
+           ", but must be a data.frame.")
+    }
+  
+    sample_file <- as.data.table(sample_file)
+  } else {
+    sample_file <- copy(sample_file)
   }
   cols_required <- c("rent",  "n_dependants", "has_partner", "is_homeowner", "lives_in_sharehouse")
-  if (!all(cols_required %chin% colnames(sample_file))) {
-    absent_cols <- setdiff(cols_required, colnames(sample_file))
+  if (!all(cols_required %chin% names(sample_file))) {
+    absent_cols <- setdiff(cols_required, names(sample_file))
     stop("`sample_file` lacked the following required columns:\n\t",
          paste0(absent_cols, collapse = "\n\t"), ".\n")
   }
   
-  #actual calculation
+  # Actual calculation
   Rent <- sample_file[['rent']]
   N_dependants <- sample_file[['n_dependants']]
   Has_partner <- sample_file[['has_partner']]
   Is_homeowner <- sample_file[['is_homeowner']]
   Lives_in_sharehouse <- sample_file[['lives_in_sharehouse']]
   
-  if (calc_baseline_ra){
+  if (calc_baseline_ra && return. != "new_ra") {
     baseline_ra <- rent_assistance(fortnightly_rent = Rent, 
                                    fy.year = baseline_fy,
                                    Date = baseline_Date,
@@ -90,11 +101,11 @@ model_rent_assistance <- function(sample_file,
                                    has_partner = Has_partner,
                                    is_homeowner = Is_homeowner,
                                    lives_in_sharehouse = Lives_in_sharehouse)
-    
-    switch(return.,
-           "sample_file" = set(sample_file, j = "baseline_ra", value = baseline_ra),
-           "sample_file.int" = set(sample_file, j = "baseline_ra", value = as.integer(baseline_ra)))
-    
+    set(sample_file,
+        j = "baseline_ra",
+        value = switch(return.,
+                       "sample_file" = baseline_ra,
+                       "sample_file.int" = as.integer(baseline_ra)))
   }
   
   ra <- rent_assistance(fortnightly_rent = Rent, 
