@@ -106,7 +106,7 @@ test_that("Errors", {
                                      Min_rent = 100,
                                      return. = "singlefile"),
                
-               regexp = "'arg' should be one of .sample_file., .new_ra., .sample_file.int")
+               regexp = "should be one of")
   expect_error(model_rent_assistance(sample,
                                      baseline_fy = "2018-19",
                                      .Prop_rent_paid_by_RA = 0.75,
