@@ -47,9 +47,10 @@ Suggests:
     rmarkdown,
     scales,
     survey,
-    testthat,
     taxstats,
     taxstats1516,
+    testthat,
+    tibble,
     viridis,
     yaml,
     covr

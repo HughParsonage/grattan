@@ -51,89 +51,10 @@ weighted_ntile <- function(vector, weights = rep(1, length(vector)), n) {
   out
 }
 
-mutate_ntile <- function(DT, col, n, new.col = NULL,
-                         overwrite = TRUE,
-                         check.na = FALSE) {
-  if (length(n) != 1L) {
-    stop("`length(n) = ", length(n), "`.", 
-         "`n` must be a single whole number.")
-  }
-  if (!is.integer(n)) {
-    if (!is.double(n)) {
-      stop("`n` was type ", typeof(n), ".", 
-           "`n` must be a single whole number.")
-    }
-    .n <- as.integer(n)
-    if (.n != n) {
-      stop("`n` was type double but `n != as.integer(n)`.", 
-           "`n` must be a single whole number.")
-    }
-    n <- .n
-  }
-  
-  .col <- as.character(substitute(col))
-  if (is.null(new.col)) {
-    suffix <- 
-      switch(as.character(n), 
-             "3" = "Terciles",
-             "4" = "Quartile", 
-             "5" = "Quintile",
-             "6" = "Sextile",
-             "7" = "Septile",
-             "8" = "Octile",
-             "10" = "Decile", 
-             "12" = "DuoDecile",
-             "16" = "Hexadecile",
-             "20" = "Vigintile",
-             "100" = "Percentile", 
-             "1000" = "Permilles",
-             stop("`n = ", n, "` and new.col is NULL, ",
-                  "but no default column suffix is supported.", 
-                  "Supply a column name using `new.col`."))
-    new.col <- paste0(.col, suffix)
-  }
-  
-  if (not_DT <- !is.data.table(DT)) {
-    input_class <- class(DT)
-    if (!is.data.frame(DT)) {
-      stop("`DT` was a ", class(DT)[1], " but must be a data.frame.")
-    }
-    DT <- as.data.table(DT)
-  }
-  
-  
-  if (OR(haskey(DT) && key(DT)[1] == .col,
-         !is.unsorted(DT[[.col]]))) {
-    DT[, (new.col) := .ntile(.SD[[1L]], n, check.na = check.na),
-       .SDcols = c(.col)]
-  } else {
-    if (requireNamespace("dplyr", quietly = TRUE)) {
-      ntile <- dplyr::ntile
-    } else {
-      ntile <- weighted_ntile
-    }
-    
-    # n must be named because of weighted_ntile
-    DT[, (new.col) := ntile(.SD[[1L]], n = n),
-       .SDcols = c(.col)]
-    
-  }
-  if (not_DT) {
-    class(DT) <- old_class
-  }
-  DT[]
-}
 
-.ntile <- function(x, n, check.sorted = FALSE, check.na = FALSE) {
-  if (check.sorted && is.unsorted(x)) {
-    stop("`x` must be already sorted.")
-  }
-  if (check.na && anyNA(x)) {
-    stop("`anyNA(x)` is TRUE.")
-  }
-  
-  as.integer(n * {seq_along(x) - 1L} / length(x) + 1L)
-} 
+
+
+
 
 
 
