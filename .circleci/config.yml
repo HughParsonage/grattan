@@ -22,9 +22,9 @@ jobs:
       - run:
           no_output_timeout: 20m
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then Rscript -e 'dir.create("~/.R");file.create(mv <- "~/.R/Makevars");writeLines("CXXFLAGS=-O3", mv)'; fi
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then R CMD build --no-build-vignettes . ; fi
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then R CMD check --ignore-vignettes --no-vignettes *tar.gz ; fi
+            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then Rscript -e 'dir.create("~/.R");file.create(mv <- "~/.R/Makevars");writeLines("CXXFLAGS=-O3", mv)'; fi
+            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then R CMD build --no-build-vignettes . ; fi
+            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then R CMD check --ignore-vignettes --no-vignettes *tar.gz ; fi
       - run:
           no_output_timeout: 20m
           command: |
@@ -38,13 +38,13 @@ jobs:
           no_output_timeout: 20m
           command: |
             mkdir /root/main/artifacts
-            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then Rscript -e "devtools::install()" ; fi
-            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then Rscript -e "knitr::knit('vignettes/grattan.Rmd')" ; fi
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then Rscript -e "devtools::install()" ; fi
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then Rscript -e "knitr::knit('vignettes/grattan.Rmd')" ; fi
       - run:
           name: Check R CMD check failures
           command: |
-            if [[ $CIRCLE_NODE_INDEX != "1" ]]; then Rscript -e "cat(devtools::check_failures('./grattan.Rcheck'), sep = '\n');cat('\n')" ; fi
-            if [[ $CIRCLE_NODE_INDEX != "1" ]]; then Rscript -e "if (length(res <- devtools::check_failures('./grattan.Rcheck', note=FALSE))) stop(res)" ; fi
+            if [[ $CIRCLE_NODE_INDEX != "0" ]]; then Rscript -e "cat(devtools::check_failures('./grattan.Rcheck'), sep = '\n');cat('\n')" ; fi
+            if [[ $CIRCLE_NODE_INDEX != "0" ]]; then Rscript -e "if (length(res <- devtools::check_failures('./grattan.Rcheck', note=FALSE))) stop(res)" ; fi
       - store_test_results:
           path: ./grattan.Rcheck/tests
       - store_artifacts:

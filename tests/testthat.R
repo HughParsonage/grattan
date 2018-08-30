@@ -8,18 +8,7 @@ if (all(vapply(all.pkgs, requireNamespace, logical(1L), quietly = TRUE))) {
   library(grattan)
   library(hutils)
   library(data.table)
-  
   library(magrittr)
-  skip_on_circleci <- function(node = NULL) {
-    if (identical(Sys.getenv("CIRCLECI"), "true")) {
-      if (is.null(node)) {
-        skip("On Circle-CI")
-      } else if (!identical(Sys.getenv("CIRCLECI_NODE_INDEX"), as.character(node))) {
-        skip("On Circle-CI node ", as.character(node))
-      }
-    }
-    return(invisible(TRUE))
-  }
   
   if (identical(Sys.getenv("CIRCLECI"), "true")) {
     test_check("grattan",

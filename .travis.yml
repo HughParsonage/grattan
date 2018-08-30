@@ -19,12 +19,17 @@ matrix:
 cache: packages
 warnings_are_errors: true
 
+r_packages:
+  - roxygen2
+
 r_github_packages:
   - hughparsonage/formalCoverage
   - jimhester/covr
 
 after_success:
   - Rscript -e 'Sys.time()'
+  - Rscript -e 'hutils::RQ("devtools", install.packages(c("devtools")))'
+  - Rscript -e 'hutils::RQ("roxygen2", install.packages(c("roxygen2")))'
   - if [ $TRAVIS_R_VERSION_STRING == "release" ] && [ $TRAVIS_PULL_REQUEST == "false" ]; then Rscript -e 'tryCatch(covr::codecov(line_exclusions = c("R/zzz.R", "R/install_taxstats.R", "R/youth_allowance.R", "R/youth_unemployment.R"), quiet = FALSE), error = function(e) devtools::test())'; fi
 
 after_failure:
