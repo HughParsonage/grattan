@@ -23,7 +23,11 @@ If \code{NULL} (the default) a name will be inferred from \code{n}.
 If \code{FALSE}, attempting to overwrite an existing column is an error.}
 
 \item{check.na}{(logical, default: \code{FALSE}) If \code{TRUE}, \code{NA}s
-in \code{DT[[col]]} will throw an error.}
+in \code{DT[[col]]} will throw an error. If \code{NA}'s are present, the 
+corresponding n-tile may take any value.}
+}
+\value{
+\code{DT} with a new integer column \code{new.col} containing the quantiles.
 }
 \description{
 Add a column of ntiles to a data table

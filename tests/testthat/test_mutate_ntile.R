@@ -39,7 +39,8 @@ test_that("Error handling", {
   DT <- data.table(x = 1:10)
   DT[5L, x := NA_integer_]
   expect_equal(mutate_ntile(DT, "x", n = 2L, new.col = "x1", check.na = FALSE),
-               data.table(x = DT$x, x1 = c(1, 1, 1, 1, NA, 1, 2, 2, 2, 2)))
+               # Not guaranteed:
+               data.table(x = DT$x, x1 = c(1, 1, 1, 1, 1, 1, 2, 2, 2, 2)))
   expect_error(mutate_ntile(DT, "x", n = 4L, new.col = "x1", check.na = TRUE),
                regexp = "check.na = TRUE",
                fixed = TRUE)
@@ -67,6 +68,18 @@ test_that("Corresponds to dplyr::ntile", {
   DT[5L, x := 0L]
   expect_identical(mutate_ntile(DT, x, n = 4)[["xQuartile"]], 
                    dplyr::ntile(1:101, n = 4))
+  
+  
+  
+})
+
+test_that("data frames", {
+  DT <- data.frame(x = 1:59)
+  expect_identical(mutate_ntile(DT, x, n = 10)[["xDecile"]], 
+                   dplyr::ntile(1:59, n = 10))
+  expect_identical(mutate_ntile(DT, x, n = 1, new.col = "y")[["y"]], 
+                   dplyr::ntile(1:59, n = 1))
+  DT <- data.frame(xy = rev(1:59))
   
   
   

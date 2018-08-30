@@ -9,7 +9,12 @@
 #' \code{new.col} already exists in \code{DT}, the column will be overwritten.
 #' If \code{FALSE}, attempting to overwrite an existing column is an error.
 #' @param check.na (logical, default: \code{FALSE}) If \code{TRUE}, \code{NA}s
-#' in \code{DT[[col]]} will throw an error.
+#' in \code{DT[[col]]} will throw an error. If \code{NA}'s are present, the 
+#' corresponding n-tile may take any value.
+#' 
+#' 
+#' 
+#' @return \code{DT} with a new integer column \code{new.col} containing the quantiles.
 #' 
 #' @export mutate_ntile
 
@@ -115,11 +120,8 @@ mutate_ntile <- function(DT,
     DT[, (new.col) := .ntile(.SD[[1L]], n, check.na = check.na),
        .SDcols = c(.col)]
   } else {
-    if (requireNamespace("dplyr", quietly = TRUE)) {
-      ntile <- dplyr::ntile
-    } else {
-      ntile <- weighted_ntile
-    }
+    ntile <- weighted_ntile
+    
     if (check.na && anyNA(DT[[.col]])) {
       stop("`check.na = TRUE` yet `DT[[", .col, "]]` ", 
            "so stopping, as requested.")
