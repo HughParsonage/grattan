@@ -40,7 +40,7 @@ test_that("Error handling", {
   DT[5L, x := NA_integer_]
   expect_equal(mutate_ntile(DT, "x", n = 2L, new.col = "x1", check.na = FALSE),
                # Not guaranteed:
-               data.table(x = DT$x, x1 = c(1, 1, 1, 1, 1, 1, 2, 2, 2, 2)))
+               data.table(x = DT$x, x1 = c(1, 1, 1, 1, 1, 2, 2, 2, 2, 2)))
   expect_error(mutate_ntile(DT, "x", n = 4L, new.col = "x1", check.na = TRUE),
                regexp = "check.na = TRUE",
                fixed = TRUE)
