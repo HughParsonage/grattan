@@ -1,6 +1,6 @@
 #' Add a column of ntiles to a data table
 #' @param DT A \code{data.table}.
-#' @param col The column (quoted or unquoted) for which quantiles are desired.
+#' @param col The column name (quoted or unquoted) for which quantiles are desired.
 #' @param n A positive integer, the number of groups to split \code{col}.
 #' @param new.col If not \code{NULL}, the name of the column to be added. 
 #' If \code{NULL} (the default) a name will be inferred from \code{n}. 
@@ -8,7 +8,8 @@
 #' @param overwrite (logical, default: \code{TRUE}) If \code{TRUE} and
 #' \code{new.col} already exists in \code{DT}, the column will be overwritten.
 #' If \code{FALSE}, attempting to overwrite an existing column is an error.
-#' 
+#' @param check.na (logical, default: \code{FALSE}) If \code{TRUE}, \code{NA}s
+#' in \code{DT[[col]]} will throw an error.
 #' 
 #' @export mutate_ntile
 
@@ -94,9 +95,23 @@ mutate_ntile <- function(DT,
     DT <- as.data.table(DT)
   }
   
+  definitely_sorted <- function(ddt, nom, check_na) {
+    if (haskey(ddt) && key(ddt)[1] == nom) {
+      return(TRUE)
+    }
+    x <- .subset2(ddt, nom)
+    if (anyNA(x)) {
+      if (check_na) {
+        stop("`check.na = TRUE` yet `DT[[", nom, "]]` ", 
+             "so stopping, as requested.")
+      }
+      return(FALSE)
+    }
+    !is.unsorted(x)
+  }
   
-  if (OR(haskey(DT) && key(DT)[1] == .col,
-         !is.unsorted(DT[[.col]]))) {
+  
+  if (definitely_sorted(DT, .col, check.na)) {
     DT[, (new.col) := .ntile(.SD[[1L]], n, check.na = check.na),
        .SDcols = c(.col)]
   } else {
@@ -104,6 +119,10 @@ mutate_ntile <- function(DT,
       ntile <- dplyr::ntile
     } else {
       ntile <- weighted_ntile
+    }
+    if (check.na && anyNA(DT[[.col]])) {
+      stop("`check.na = TRUE` yet `DT[[", .col, "]]` ", 
+           "so stopping, as requested.")
     }
     
     # n must be named because of weighted_ntile

@@ -10,7 +10,7 @@ mutate_ntile(DT, col, n, new.col = NULL, overwrite = TRUE,
 \arguments{
 \item{DT}{A \code{data.table}.}
 
-\item{col}{The column (quoted or unquoted) for which quantiles are desired.}
+\item{col}{The column name (quoted or unquoted) for which quantiles are desired.}
 
 \item{n}{A positive integer, the number of groups to split \code{col}.}
 
@@ -21,6 +21,9 @@ If \code{NULL} (the default) a name will be inferred from \code{n}.
 \item{overwrite}{(logical, default: \code{TRUE}) If \code{TRUE} and
 \code{new.col} already exists in \code{DT}, the column will be overwritten.
 If \code{FALSE}, attempting to overwrite an existing column is an error.}
+
+\item{check.na}{(logical, default: \code{FALSE}) If \code{TRUE}, \code{NA}s
+in \code{DT[[col]]} will throw an error.}
 }
 \description{
 Add a column of ntiles to a data table
