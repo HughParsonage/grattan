@@ -25,10 +25,10 @@ r_github_packages:
 
 after_success:
   - Rscript -e 'Sys.time()'
-  - if [ $TRAVIS_R_VERSION_STRING == "release" ] && [ $TRAVIS_PULL_REQUEST == "false" ]; then Rscript -e 'covr::codecov(line_exclusions = c("R/zzz.R", "R/install_taxstats.R", "R/youth_allowance.R", "R/youth_unemployment.R"))'; fi
+  - if [ $TRAVIS_R_VERSION_STRING == "release" ] && [ $TRAVIS_PULL_REQUEST == "false" ]; then Rscript -e 'tryCatch(covr::codecov(line_exclusions = c("R/zzz.R", "R/install_taxstats.R", "R/youth_allowance.R", "R/youth_unemployment.R"), quiet = FALSE), error = function(e) devtools::test())'; fi
 
 after_failure:
-  - Rscript -e 'hutils::RQ("devtools", install.packages(c("roxygen2")))'
+  - Rscript -e 'hutils::RQ("devtools", install.packages(c("devtools")))'
   - Rscript -e 'hutils::RQ("roxygen2", install.packages(c("roxygen2")))'
   - Rscript -e 'devtools::test()'
   #- Rscript -e 'install.packages("taxstats", repos = "https://hughparsonage.github.io/drat/", type = "source")'

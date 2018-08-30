@@ -14,7 +14,7 @@ if (all(vapply(all.pkgs, requireNamespace, logical(1L), quietly = TRUE))) {
     if (identical(Sys.getenv("CIRCLECI"), "true")) {
       if (is.null(node)) {
         skip("On Circle-CI")
-      } else if (identical(Sys.getenv("CIRCLECI_NODE_INDEX"), as.character(node))) {
+      } else if (!identical(Sys.getenv("CIRCLECI_NODE_INDEX"), as.character(node))) {
         skip("On Circle-CI node ", as.character(node))
       }
     }
