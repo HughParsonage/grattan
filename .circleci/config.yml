@@ -22,7 +22,7 @@ jobs:
       - run:
           no_output_timeout: 20m
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; Rscript -e 'dir.create("~/.R");file.create(mv <- "~/.R/Makevars");writeLines("CXXFLAGS=-O3", mv)'
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then Rscript -e 'dir.create("~/.R");file.create(mv <- "~/.R/Makevars");writeLines("CXXFLAGS=-O3", mv)'; fi
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then R CMD build --no-build-vignettes . ; fi
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then R CMD check --ignore-vignettes --no-vignettes *tar.gz ; fi
       - run:
