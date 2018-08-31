@@ -1,6 +1,7 @@
 context("mutate ntile")
 
 test_that("Error handling", {
+  skip_if_not_installed("dplyr")
   library(data.table)
   DT <- data.table(x = 1:101)
   expect_error(mutate_ntile(DT, n = 1:2),
@@ -38,9 +39,9 @@ test_that("Error handling", {
                fixed = TRUE)
   DT <- data.table(x = 1:10)
   DT[5L, x := NA_integer_]
-  expect_equal(mutate_ntile(DT, "x", n = 2L, new.col = "x1", check.na = FALSE),
+  expect_equal(mutate_ntile(DT, "x", n = 2L, new.col = "x1", check.na = FALSE)[-5],
                # Not guaranteed:
-               data.table(x = DT$x, x1 = c(1, 1, 1, 1, 1, 2, 2, 2, 2, 2)))
+               data.table(x = DT$x, x1 = dplyr::ntile(DT$x, 2))[-5])
   expect_error(mutate_ntile(DT, "x", n = 4L, new.col = "x1", check.na = TRUE),
                regexp = "check.na = TRUE",
                fixed = TRUE)
@@ -86,9 +87,6 @@ test_that("Corresponds to dplyr::ntile", {
   DT[5L, x := 0L]
   expect_identical(mutate_ntile(DT, x, n = 4)[["xQuartile"]], 
                    dplyr::ntile(1:101, n = 4))
-  
-  
-  
 })
 
 test_that("data frames", {
@@ -98,8 +96,33 @@ test_that("data frames", {
   expect_identical(mutate_ntile(DT, x, n = 1, new.col = "y")[["y"]], 
                    dplyr::ntile(1:59, n = 1))
   DT <- data.frame(xy = rev(1:59))
+})
+
+
+test_that("bys", {
+  skip_on_cran()
+  skip_if_not_installed("taxstats1516")
+  skip_if_not_installed("dplyr")
+  skip_on_circleci(1)
   
+  library(data.table)
+  library(hutils)
+  library(magrittr)
   
+  s1516 <- 
+     selector(taxstats1516::sample_file_1516_synth,
+              cols = c("Gender", "Sw_amt", "Taxable_Income"))
+  s1516 <- as.data.table(s1516)
+  
+  s1516a <- copy(s1516b <- copy(s1516))
+  
+  mutate_ntile(s1516a, "Taxable_Income", n = 100, by = "Gender")
+  s1516b[, "Taxable_IncomePercentile" := dplyr::ntile(Taxable_Income, 100), by = "Gender"][]
+  expect_identical(s1516a, s1516b)
+  
+  mutate_ntile(s1516a, "Sw_amt", n = 20, keyby = "Gender")
+  s1516b <- s1516b[, "Sw_amtVigintile" := dplyr::ntile(Sw_amt, 20), keyby = "Gender"][]
+  expect_identical(s1516a, s1516b)
   
 })
 

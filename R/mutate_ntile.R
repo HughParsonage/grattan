@@ -2,6 +2,8 @@
 #' @param DT A \code{data.table}.
 #' @param col The column name (quoted or unquoted) for which quantiles are desired.
 #' @param n A positive integer, the number of groups to split \code{col}.
+#' @param by,keyby Produce a grouped quantile column, as in \code{\link[data.table]{data.table}}.
+#'   \code{keyby} will set a key on the result (\emph{i.e.} order by \code{keyby}).
 #' @param new.col If not \code{NULL}, the name of the column to be added. 
 #' If \code{NULL} (the default) a name will be inferred from \code{n}. 
 #' (For example, \code{n = 100} will be \code{<col>Percentile}).
@@ -12,7 +14,13 @@
 #' in \code{DT[[col]]} will throw an error. If \code{NA}'s are present, the 
 #' corresponding n-tile may take any value.
 #' 
-#' 
+#' @examples
+#' library(data.table)
+#' DT <- data.table(x = 1:20, y = 2:1)
+#' mutate_ntile(DT, "x", n = 10)
+#' mutate_ntile(DT, "x", n = 5)
+#' mutate_ntile(DT, "x", n = 10, by = "y")
+#' mutate_ntile(DT, "x", n = 10, keyby = "y")
 #' 
 #' @return \code{DT} with a new integer column \code{new.col} containing the quantiles.
 #' 
@@ -23,6 +31,8 @@
 mutate_ntile <- function(DT,
                          col,
                          n,
+                         by = NULL,
+                         keyby = NULL,
                          new.col = NULL,
                          overwrite = TRUE,
                          check.na = FALSE) {
@@ -92,6 +102,7 @@ mutate_ntile <- function(DT,
     }
   }
   
+  
   if (not_DT <- !is.data.table(DT)) {
     input_class <- class(DT)
     if (!is.data.frame(DT)) {
@@ -107,7 +118,7 @@ mutate_ntile <- function(DT,
     x <- .subset2(ddt, nom)
     if (anyNA(x)) {
       if (check_na) {
-        stop("`check.na = TRUE` yet `DT[[", nom, "]]` ", 
+        stop("`check.na = TRUE` yet `DT[['", nom, "']]` ", 
              "so stopping, as requested.")
       }
       return(FALSE)
@@ -117,13 +128,48 @@ mutate_ntile <- function(DT,
   
   
   if (definitely_sorted(DT, .col, check.na)) {
-    DT[, (new.col) := .ntile(.SD[[1L]], n, check.na = check.na),
-       .SDcols = c(.col)]
-  } else {
+    if (is.null(by) && is.null(keyby)) {
+      DT[, (new.col) := .ntile(.SD[[1L]], n, check.na = check.na),
+         .SDcols = c(.col)]
+    }
+    if (!is.null(by)) {
+      if (!is.null(keyby)) {
+        stop("`by` is NULL, yet `keyby` is NULL too. ", 
+             "Only one of `by` and `keyby` may be provided.")
+      }
+      
+      DT[, (new.col) := .ntile(.SD[[.col]], n, check.na = check.na),
+         .SDcols = c(.col),
+         by = c(by)]
+    }
+    if (!is.null(keyby)) {
+      DT[, (new.col) := .ntile(.SD[[.col]], n, check.na = check.na),
+         .SDcols = c(.col),
+         keyby = c(keyby)]
+      setkeyv(DT, keyby)
+    }
     
-    # n must be named because of weighted_ntile
-    DT[, (new.col) := weighted_ntile(.SD[[1L]], n = n),
-       .SDcols = c(.col)]
+  } else {
+    if (is.null(by) && is.null(keyby)) {
+      DT[, (new.col) := weighted_ntile(.SD[[.col]], n = n),
+         .SDcols = c(.col)]
+    }
+    if (!is.null(by)) {
+      if (!is.null(keyby)) {
+        stop("`by` is NULL, yet `keyby` is NULL too. ", 
+             "Only one of `by` and `keyby` may be provided.")
+      }
+      
+      DT[, (new.col) := weighted_ntile(.SD[[.col]], n = n),
+         .SDcols = c(.col),
+         by = c(by)]
+    }
+    if (!is.null(keyby)) {
+      DT[, (new.col) := weighted_ntile(.SD[[.col]], n = n),
+         .SDcols = c(.col),
+         keyby = c(keyby)]
+      return(setkeyv(DT, keyby)[])
+    }
     
   }
   if (not_DT) {
@@ -144,4 +190,4 @@ mutate_ntile <- function(DT,
   }
   
   as.integer(n * {seq_along(x) - 1L} / length(x) + 1L)
-} 
+}

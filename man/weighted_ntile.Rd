@@ -4,7 +4,7 @@
 \alias{weighted_ntile}
 \title{Weighted quantiles}
 \usage{
-weighted_ntile(vector, weights = rep(1, length(vector)), n)
+weighted_ntile(vector, weights = rep(1, times = length(vector)), n)
 }
 \arguments{
 \item{vector}{The vector for which quantiles are desired.}

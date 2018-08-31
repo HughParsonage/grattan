@@ -4,8 +4,8 @@
 \alias{mutate_ntile}
 \title{Add a column of ntiles to a data table}
 \usage{
-mutate_ntile(DT, col, n, new.col = NULL, overwrite = TRUE,
-  check.na = FALSE)
+mutate_ntile(DT, col, n, by = NULL, keyby = NULL, new.col = NULL,
+  overwrite = TRUE, check.na = FALSE)
 }
 \arguments{
 \item{DT}{A \code{data.table}.}
@@ -13,6 +13,9 @@ mutate_ntile(DT, col, n, new.col = NULL, overwrite = TRUE,
 \item{col}{The column name (quoted or unquoted) for which quantiles are desired.}
 
 \item{n}{A positive integer, the number of groups to split \code{col}.}
+
+\item{by, keyby}{Produce a grouped quantile column, as in \code{\link[data.table]{data.table}}.
+\code{keyby} will set a key on the result (\emph{i.e.} order by \code{keyby}).}
 
 \item{new.col}{If not \code{NULL}, the name of the column to be added. 
 If \code{NULL} (the default) a name will be inferred from \code{n}. 
@@ -31,4 +34,13 @@ corresponding n-tile may take any value.}
 }
 \description{
 Add a column of ntiles to a data table
+}
+\examples{
+library(data.table)
+DT <- data.table(x = 1:20, y = 2:1)
+mutate_ntile(DT, "x", n = 10)
+mutate_ntile(DT, "x", n = 5)
+mutate_ntile(DT, "x", n = 10, by = "y")
+mutate_ntile(DT, "x", n = 10, keyby = "y")
+
 }
