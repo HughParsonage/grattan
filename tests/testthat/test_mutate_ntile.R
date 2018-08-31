@@ -57,6 +57,10 @@ test_that("tibble", {
   TIB <- tibble::tibble(hadley = 1:4)
   expect_identical(mutate_ntile(TIB, "hadley", n = 2, new.col = "hadleyTile"),
                    tibble::tibble(hadley = 1:4, hadleyTile = rep(1:2, each = 2L)))
+  asf <- function(x) as.data.frame(x)
+  TIB <- asf(tibble::tibble(hadley = 1:4))
+  expect_identical(mutate_ntile(TIB, "hadley", n = 2, new.col = "hadleyTile"),
+                   asf(tibble::tibble(hadley = 1:4, hadleyTile = rep(1:2, each = 2L))))
   
 })
 

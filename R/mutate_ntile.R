@@ -120,15 +120,9 @@ mutate_ntile <- function(DT,
     DT[, (new.col) := .ntile(.SD[[1L]], n, check.na = check.na),
        .SDcols = c(.col)]
   } else {
-    ntile <- weighted_ntile
-    
-    if (check.na && anyNA(DT[[.col]])) {
-      stop("`check.na = TRUE` yet `DT[[", .col, "]]` ", 
-           "so stopping, as requested.")
-    }
     
     # n must be named because of weighted_ntile
-    DT[, (new.col) := ntile(.SD[[1L]], n = n),
+    DT[, (new.col) := weighted_ntile(.SD[[1L]], n = n),
        .SDcols = c(.col)]
     
   }
