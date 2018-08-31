@@ -133,9 +133,8 @@ mutate_ntile <- function(DT,
     
   }
   if (not_DT) {
-    if (identical(input_class, "data.frame")) {
-      setDF(DT)
-    } else {
+    setDF(DT)
+    if (!identical(input_class, "data.frame")) {
       class(DT) <- input_class
     }
   }

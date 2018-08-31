@@ -44,6 +44,20 @@ test_that("Error handling", {
   expect_error(mutate_ntile(DT, "x", n = 4L, new.col = "x1", check.na = TRUE),
                regexp = "check.na = TRUE",
                fixed = TRUE)
+  DT[1L, x := 3L]
+  expect_error(mutate_ntile(DT, "x", n = 4L, new.col = "x11", check.na = TRUE),
+               regexp = "check.na = TRUE",
+               fixed = TRUE)
+  
+})
+
+test_that("tibble", {
+  skip_on_cran()
+  skip_if_not_installed("tibble")
+  TIB <- tibble::tibble(hadley = 1:4)
+  expect_identical(mutate_ntile(TIB, "hadley", n = 2, new.col = "hadleyTile"),
+                   tibble::tibble(hadley = 1:4, hadleyTile = rep(1:2, each = 2L)))
+  
 })
 
 test_that(".ntile", {
