@@ -28,29 +28,32 @@ test_that("weighted_ntiles on integers", {
 test_that("weighted_ntile agrees with svyquantile", {
   skip_if_not_installed("survey")
   skip_if_not_installed("dplyr")
+  skip_if_not_installed("tibble")
   library(survey)
   library(dplyr)
+  library(tibble)
   
   set.seed(13)
-  N <- 1e4
+  N <- as.integer(runif(1, 1e3, 1e4))
   wts <- pmax(round(abs(rnorm(N)), 2), 0.01) # pmax(,0.01) to ensure no nonzero weights
-  val <- round(abs(rnorm(N)), 2) %>% sort
+  val <- round(abs(rnorm(N)), 2)
   n <- 10
   quantiles <- c(0:n) / n
   dummy_survey <- 
-    data.table(ids = 1:N, 
-               wts = wts, 
-               val = val)
+    tibble(ids = 1:N, 
+           wts = wts, 
+           val = val)
   
-  survey_package_quantiles <- 
+
+  survey_package_quantiles <-
     svydesign(data = dummy_survey, ids = ~ids, weights = ~wts) %>%
     svyquantile(design = ., x = ~val, quantiles = quantiles)
   
   survey_cut_twice <- 
     dummy_survey %>%
-    mutate(survey__package_ntiles = .bincode(val, 
-                                             breaks = survey_package_quantiles, 
-                                             include.lowest = TRUE), 
+    mutate(survey__package_ntiles = .bincode(val,
+                                             breaks = survey_package_quantiles,
+                                             include.lowest = TRUE),
            grattan_package_ntiles = weighted_ntile(vector = val, weights = wts, n = n)) 
   
   
