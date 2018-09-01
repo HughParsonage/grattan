@@ -147,8 +147,8 @@ test_that("bys", {
   s1516b <- s1516b[, "Sw_amtVigintile" := dplyr::ntile(Sw_amt, 20), keyby = "Gender"][]
   expect_identical(s1516a, s1516b)
   
-  s1516a <- copy(s1516b <- copy(s1516))
   setkey(s1516, Sw_amt)
+  s1516a <- copy(s1516b <- copy(s1516))
   mutate_ntile(s1516a, "Sw_amt", n = 6, keyby = "Gender")
   s1516b <- s1516b[, "Sw_amtSextile" := dplyr::ntile(Sw_amt, 6), keyby = "Gender"][]
   expect_identical(s1516a, s1516b)
