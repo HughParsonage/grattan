@@ -105,6 +105,8 @@ test_that("bys", {
   skip_if_not_installed("dplyr")
   skip_on_circleci(1)
   
+  
+  
   library(data.table)
   library(hutils)
   library(magrittr)
@@ -124,5 +126,24 @@ test_that("bys", {
   s1516b <- s1516b[, "Sw_amtVigintile" := dplyr::ntile(Sw_amt, 20), keyby = "Gender"][]
   expect_identical(s1516a, s1516b)
   
+  
+  # Errors
+  expect_error(mutate_ntile(s1516a, "Taxable_Income", n = 10, by = "Gender", keyby = "Gender"), 
+               "`by` is NULL, yet `keyby` is NULL too. ")
+  
+  setkey(s1516, Taxable_Income)
+  s1516a <- copy(s1516b <- copy(s1516))
+  mutate_ntile(s1516a, "Taxable_Income", n = 100, by = "Gender")
+  s1516b[, "Taxable_IncomePercentile" := dplyr::ntile(Taxable_Income, 100), by = "Gender"][]
+  expect_identical(s1516a, s1516b)
+  
+  mutate_ntile(s1516a, "Sw_amt", n = 20, keyby = "Gender")
+  s1516b <- s1516b[, "Sw_amtVigintile" := dplyr::ntile(Sw_amt, 20), keyby = "Gender"][]
+  expect_identical(s1516a, s1516b)
+  
+  
+  # Errors
+  expect_error(mutate_ntile(s1516a, "Taxable_Income", n = 10, by = "Gender", keyby = "Gender"), 
+               "`by` is NULL, yet `keyby` is NULL too. ")
 })
 
