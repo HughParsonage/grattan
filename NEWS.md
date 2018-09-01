@@ -18,6 +18,7 @@
 
 * `rent_assistance` the Commonwealth Rent Assistance
 * `model_rent_assistance` as experimental function for modelling changes to rent assistance.
+* `mutate_ntile` and `mutate_weighted_ntile` for adding quantile columns
 
 
 ## 1.6.3.0
