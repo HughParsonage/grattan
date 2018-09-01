@@ -18,7 +18,10 @@ test_that("weighted_ntiles on integers", {
   expect_equal(weighted_ntile(n = 2, vector = 1:4, c(1, 1, 1, 5)), c(1, 1, 1, 1))
   expect_equal(weighted_ntile(n = 4, vector = 4:1, weights = c(1, 1, 1, 5)), c(4, 4, 3, 1))
   
-  expect_warning(weighted_ntile(1:5, weights = c(1, 1, 1, 2, 0), n = 5))
+  expect_warning(weighted_ntile(1:5, weights = c(1, 1, 1, 2, 0), n = 5),
+                 regexp = "Some weights are zero")
+  expect_warning(weighted_ntile(1:5, weights = c(1, 1, 1, 2, 0), n = 5),
+                 regexp = "Some ntiles greater than n")
 })
 
 

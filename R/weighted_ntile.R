@@ -33,7 +33,7 @@ weighted_ntile <- function(vector, weights = rep(1, times = length(vector)), n) 
   ov <- order(vector)
   out <- as.integer(n * cumsum(shift(x = weights[ov], fill = 0)) / sum(weights))
   
-  if (last(out) > n) {
+  if (last(out) >= n) {
     warning("Some ntiles greater than n = ", n)
   } 
   out[order(ov)] + 1L
