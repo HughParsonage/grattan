@@ -79,7 +79,7 @@ child_care_subsidy <- function(family_annual_income = 0,
                cost_hour,
                early_education_program)
   
-  income_test <- .data[, if_else(family_annual_income < 66958,
+  .data[, income_test := if_else(family_annual_income < 66958,
                                  0.85,
                                  if_else(family_annual_income < 171958,
                                          0.85 - floor((family_annual_income - 66958)/3000)/100,
@@ -97,7 +97,7 @@ child_care_subsidy <- function(family_annual_income = 0,
                                               "cbdc", 
                                               type_of_day_care))]
   
-  hourly_cap <- .data[, if_else(type_of_day_care == "cbdc",
+  .data[, hourly_cap := if_else(type_of_day_care == "cbdc",
                                 11.77,
                                 if_else(type_of_day_care == "fdc",
                                         10.90,
@@ -107,33 +107,28 @@ child_care_subsidy <- function(family_annual_income = 0,
                                                         25.48,
                                                         0))))]
   
-  annual_cap <- .data[, if_else(family_annual_income > 186958,
+  .data[, annual_cap := if_else(family_annual_income > 186958,
                                 10190,
                                 Inf)]
   
-  activity_test_1 <- .data[, if_else(activity_level < 8,
+  .data[, activity_test_1 := if_else(activity_level < 8,
                                      0,
                                      if_else(activity_level <= 16,
                                              36,
                                              if_else(activity_level <=  48,
                                                      72,
                                                      100)))]
-  activity_test_2 <- .data[, if_else(family_annual_income <= 66985 & activity_level < 8,
+  .data[, activity_test_2 := if_else(family_annual_income <= 66985 & activity_level < 8,
                                      24, 0)]
-  activity_test_3 <- .data[, if_else(early_education_program & type_of_day_care == "cbdc",
+  .data[, activity_test_3:= if_else(early_education_program & type_of_day_care == "cbdc",
                                      36, 0)]
-  activity_test_4 <- .data[, if_else(activity_exemption, 100, 0)]
+  .data[, activity_test_4 := if_else(activity_exemption, 100, 0)]
   
-  activity_test <- pmax(activity_test_1, activity_test_2, activity_test_3, activity_test_4)
+  .data[, activity_test := pmax(activity_test_1, activity_test_2, activity_test_3, activity_test_4)]
   
-  input <- data.table(cost_hour,
-                      hourly_cap,
-                      income_test,
-                      hours_day_care_fortnight,
-                      activity_test,
-                      annual_cap)
+  
   #calculation
-  output <- input[, pminC(pminC(cost_hour, hourly_cap) * income_test * pminC(hours_day_care_fortnight, activity_test) * 365/14,
+  output <- .data[, pminC(pminC(cost_hour, hourly_cap) * income_test * pminC(hours_day_care_fortnight, activity_test) * 365/14,
                           annual_cap)]
   
   output
