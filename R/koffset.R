@@ -1,6 +1,6 @@
 
-koffset <- function(income, X, Y) {
-  stats::approxfun(x = X, y = Y)(income)
+koffset <- function(income, X, Y, Yright, Method = "linear") {
+  stats::approxfun(x = X, y = Y, yright = Yright, method = Method)(income)
 }
 
 
