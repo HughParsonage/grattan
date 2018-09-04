@@ -1,5 +1,5 @@
 expr	time	Date
-"mutate_ntile(s1314, ""Sw_amt"", n = 10)"	14448642	2018-09-04
-"mutate_ntile(s1314_keyed, ""Taxable_Income"", n = 10)"	3012970	2018-09-04
-"mutate_ntile(s1314, ""Sw_amt"", n = 10)"	14118252	2018-09-04
-"mutate_ntile(s1314_keyed, ""Taxable_Income"", n = 10)"	3052726	2018-09-04
+dt[, weighted_ntile(y, w = wt, n = 10)]	313140753	2018-09-04
+dt[, weighted_ntile(x, w = wt, n = 10)]	27919365	2018-09-04
+dt[, weighted_ntile(y, w = wt, n = 10)]	147267185	2018-09-04
+dt[, weighted_ntile(x, w = wt, n = 10)]	28862950	2018-09-04

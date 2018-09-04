@@ -86,11 +86,13 @@ microbenchmark(
   times = 2L, control = list(order = "inorder")) %>%
   save_it
 
-s1314_keyed <- setkey(s1314, Taxable_Income)
+dt <- data.table(x = seq(0, 1e4, length.out = 1e6),
+                 y = rnorm(1e6),
+                 wt = runif(1e6, 10, 150))
 
 microbenchmark(
-  mutate_ntile(s1314, "Sw_amt", n = 10),
-  mutate_ntile(s1314_keyed, "Taxable_Income", n = 10),
+  dt[, weighted_ntile(y, w = wt, n = 10)],
+  dt[, weighted_ntile(x, w = wt, n = 10)],
   times = 2L, control = list(order = "inorder")) %>%
   save_it
 
