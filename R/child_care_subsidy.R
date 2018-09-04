@@ -11,10 +11,8 @@
 #' 
 #' @return The annual child care subsidy payable per child
 #' 
-#' @export 
-#' 
 #' @examples
-#' Example from \url{http://guides.dss.gov.au/family-assistance-guide/3/5/4}
+#' Example from http://guides.dss.gov.au/family-assistance-guide/3/5/4
 #' child_care_subsidy(family_annual_income = 175000,
 #'                    activity_level = 40,
 #'                    activity_exemption = FALSE,
@@ -23,6 +21,9 @@
 #'                    cost_hour = 20,
 #'                    hours_day_care_fortnight = 80,
 #'                    early_education_program = FALSE)
+#'                    
+#'@export 
+
 
 
 child_care_subsidy <- function(family_annual_income = 0,
