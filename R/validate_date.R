@@ -15,7 +15,7 @@
 #' to a Date and all elements are within the bounds \code{from} and \code{to}.
 #' 
 
-verify_date <- function(date_to_verify, from = NULL, to = NULL,
+validate_date <- function(date_to_verify, from = NULL, to = NULL,
                         deparsed = "Date") {
 
   if (!is.Date(date_to_verify)) {

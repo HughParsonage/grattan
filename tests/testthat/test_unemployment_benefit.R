@@ -4,7 +4,7 @@ context("Unemployment benefit")
 test_that("DSS examples", {
   out <- 
     unemployment_benefit(income = 300, fy.year = date2fy("2017-09-20")) / 26 + 
-    rent_assistance(fy.year = date2fy("2017-09-20")) / 26
+    rent_assistance(fy.year = date2fy("2017-09-20")) 
   
   expect_equal(out, 579.33)
   

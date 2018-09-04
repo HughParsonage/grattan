@@ -4,6 +4,7 @@ test_that("income_tax collections in 2003-04 match final budget outcome by 1%", 
   skip_if_not_installed("taxstats", minimum_version = package_version("0.0.5")) 
   skip_on_cran()
   skip_on_appveyor()
+  skip_on_circleci(2)
   library(taxstats)
   # http://www.budget.gov.au/2003-04/fbo/download/FBO_2003_04.pdf
   final_budget_outcome_0304 <- 98.779 * 1e9
@@ -20,6 +21,7 @@ test_that("income_tax collections in 2006-07 match final budget outcome by 1%", 
   skip_if_not_installed("taxstats", minimum_version = package_version("0.0.5")) 
   skip_on_cran()
   skip_on_appveyor()
+  skip_on_circleci(2)
   library(taxstats)
   # http://www.budget.gov.au/2006-07/fbo/download/FBO_2006-07.pdf
   final_budget_outcome_0607 <- 117.614 * 1e9
@@ -37,6 +39,7 @@ test_that("Projections match collections", {
   skip_if_not_installed("taxstats", minimum_version = package_version("0.0.5")) 
   skip_on_cran()
   skip_on_appveyor()
+  skip_on_circleci(2)
   library(taxstats)
   library(magrittr)
   library(data.table)

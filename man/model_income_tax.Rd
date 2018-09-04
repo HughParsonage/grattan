@@ -18,11 +18,12 @@ model_income_tax(sample_file, baseline_fy, n_dependants = 0L,
   medicare_levy_lower_up_for_each_child = NULL, lito_max_offset = NULL,
   lito_taper = NULL, lito_min_bracket = NULL, lito_multi = NULL,
   Budget2018_lamington = FALSE, Budget2018_lito_202223 = FALSE,
-  Budget2018_watr = FALSE, sapto_eligible = NULL, sapto_max_offset = NULL,
-  sapto_lower_threshold = NULL, sapto_taper = NULL, sbto_discount = NULL,
-  cgt_discount_rate = NULL, calc_baseline_tax = TRUE,
-  return. = c("sample_file", "tax", "sample_file.int"),
-  clear_tax_cols = TRUE, warn_upper_thresholds = TRUE, .debug = FALSE)
+  Budget2018_watr = FALSE, sapto_eligible = NULL,
+  sapto_max_offset = NULL, sapto_lower_threshold = NULL,
+  sapto_taper = NULL, sbto_discount = NULL, cgt_discount_rate = NULL,
+  calc_baseline_tax = TRUE, return. = c("sample_file", "tax",
+  "sample_file.int"), clear_tax_cols = TRUE,
+  warn_upper_thresholds = TRUE, .debug = FALSE)
 }
 \arguments{
 \item{sample_file}{A sample file having at least as many variables as the 2012-13 sample file.}
@@ -109,12 +110,17 @@ The income tax payable if tax settings are changed.
 }
 \examples{
 
+library(data.table)
+library(hutils)
+ans <-
 # With new tax-free threshold of $20,000:
 if (requireNamespace("taxstats", quietly = TRUE)) {
   library(taxstats)
+     
   model_income_tax(sample_file_1314,
                    "2013-14",
                    ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3))
 
 }
+select_grep(ans, "tax", "Taxable_Income")
 }
