@@ -86,6 +86,14 @@ microbenchmark(
   times = 2L, control = list(order = "inorder")) %>%
   save_it
 
+s1314_keyed <- setkey(s1314, Taxable_Income)
+
+microbenchmark(
+  mutate_ntile(s1314, "Sw_amt", n = 10),
+  mutate_ntile(s1314_keyed, "Taxable_Income", n = 10),
+  times = 2L, control = list(order = "inorder")) %>%
+  save_it
+
 shell("git add timings/now/result*tsv")
 
 
