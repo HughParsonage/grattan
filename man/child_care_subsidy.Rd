@@ -5,16 +5,41 @@
 \title{Child care Subsidy}
 \usage{
 child_care_subsidy(family_annual_income = 0, activity_level = Inf,
-  activity_exemption = TRUE, child_age = 3, type_of_day_care = c("cbdc",
+  activity_exemption = FALSE, child_age = 3, type_of_day_care = c("cbdc",
   "oshc", "fdc", "ihc"), hours_day_care_fortnight = 20, cost_hour = 20,
   early_education_program = FALSE)
 }
 \arguments{
-\item{family_annual_income}{}
+\item{family_annual_income}{(numeric) Total income of the family}
+
+\item{activity_level}{(numeric) The total number of activity hours of the parents. Note that if there are two parents the one with the lower activity level will be applied. Common activities include work, leave, and study. A full list can be viewed at \url{http://guides.dss.gov.au/family-assistance-guide/3/5/2/10}}
+
+\item{activity_exemption}{(logical) Whether the parent is exempt from the activity test. Note that in a two parent family both parents must be exempt. A list of exemptions is available at \url{http://guides.dss.gov.au/family-assistance-guide/3/5/2/10}}
+
+\item{child_age}{(numeric) The age of the child in child care}
+
+\item{type_of_day_care}{The type of child care. Acceptable inputs are: "cbdc" Centre Based Day Care, "oshc" Outside School Hours Care, "fdc" Family Day Care, or "ihc" In Home Care. Note that In Home Care can only be claimed once per family.}
+
+\item{hours_day_care_fortnight}{(numeric) The hours of day care per child per fortnight}
+
+\item{cost_hour}{(numeric) The cost of day care per hour}
+
+\item{early_education_program}{(logical) Whether the child is part of an early education program}
 }
 \value{
-jdjd
+The annual child care subsidy payable per child
 }
 \description{
 Child care Subsidy
+}
+\examples{
+Example from \\url{http://guides.dss.gov.au/family-assistance-guide/3/5/4}
+child_care_subsidy(family_annual_income = 175000,
+                   activity_level = 40,
+                   activity_exemption = FALSE,
+                   child_age = 3,
+                   type_of_day_care = "cbdc",
+                   cost_hour = 20,
+                   hours_day_care_fortnight = 80,
+                   early_education_program = FALSE)
 }
