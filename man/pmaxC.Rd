@@ -9,11 +9,14 @@
 \item{a}{A single numeric value.}
 }
 \value{
-The parallel maximum of the input values. \code{pmax0(x)} is shorthand for \code{pmaxC(x, 0)}, i.e. convert negative values in \code{x} to 0.
+The parallel maximum of the input values. \code{pmax0(x)} is
+ shorthand for \code{pmaxC(x, 0)}, i.e. convert negative values in \code{x} to 0.
 }
 \description{
 A faster \code{pmax()}.
 }
 \note{
-This function will always be faster than \code{pmax(x, a)} when \code{a} is a single value, but can be slower than \code{pmax.int(x, a)} when \code{x} is short. Use this function when comparing a numeric vector with a single value.
+This function will always be faster than \code{pmax(x, a)} when \code{a} is
+ a single value, but can be slower than \code{pmax.int(x, a)} when \code{x} is short.
+ Use this function when comparing a numeric vector with a single value.
 }

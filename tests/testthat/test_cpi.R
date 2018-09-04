@@ -1,6 +1,8 @@
-context("Inflators return correct results")
+context("CPI return correct results")
 
 test_that("Default from_fy and to_fy", {
+  skip_on_circleci(1)
+  
   expect_warning(cpi_inflator(), 
                  regexp = "`from_fy` and `to_fy` are missing, using previous and current financial years respectively")
   if (data.table::month(Sys.Date()) < 7) {
@@ -15,6 +17,8 @@ test_that("Default from_fy and to_fy", {
 })
 
 test_that("Errors", {
+  skip_on_circleci(1)
+  
   expect_error(cpi_inflator(to_fy = "2013-14"), 
                regexp = "`from_fy` is missing", 
                fixed = TRUE)
@@ -91,11 +95,15 @@ test_that("Errors", {
 })
 
 test_that("FY corner cases", {
+  skip_on_circleci(1)
+  
   expect_equal(cpi_inflator(from_fy = "2014-15", to_fy = "201314"),
                cpi_inflator(from_fy = "2014-15", to_fy = "2013-14"))
 })
 
 test_that("cpi returns known results", {
+  skip_on_circleci(1)
+  
   expect_gt(cpi_inflator(from_nominal_price = 1,
                          from_fy = "2012-13",
                          to_fy = "2013-14",
@@ -113,6 +121,8 @@ test_that("cpi returns known results", {
 })
 
 test_that("cpi_inflator_general_date same as cpi_inflator", {
+  skip_on_circleci(1)
+  
   expect_equal(cpi_inflator(from_fy = "2013-14",
                             to_fy = "2014-15",
                             adjustment = "none",
@@ -137,6 +147,8 @@ test_that("cpi_inflator_general_date same as cpi_inflator", {
 })
 
 test_that("cpi_inflator_general_date same as cpi_inflator when diverged", {
+  skip_on_circleci(1)
+  
   expect_equal(cpi_inflator(from_fy = "2013-14",
                             to_fy = "2014-15",
                             adjustment = "none",
@@ -155,6 +167,8 @@ test_that("cpi_inflator_general_date same as cpi_inflator when diverged", {
 })
 
 test_that("cpi_inflator_general_date messages", {
+  skip_on_circleci(1)
+  
   expect_message(cpi_inflator_general_date(from_date = "2013",
                                            to_date = "2014"))
   expect_error(cpi_inflator_general_date(from_date = "2015-Q5",
@@ -166,6 +180,8 @@ test_that("cpi_inflator_general_date messages", {
 })
 
 test_that("cpi returns reasonable forecasts", {
+  skip_on_circleci(1)
+  
   skip_if_not(packageVersion("rsdmx") >= package_version("0.5.10"))
   expect_gt(cpi_inflator(from_nominal_price = 1,
                          from_fy = "2016-17",
@@ -201,6 +217,8 @@ test_that("cpi returns reasonable forecasts", {
 })
 
 test_that("ABS connection", {
+  skip_on_circleci(1)
+  
   skip_on_cran()
   travis_release_not_pr <- 
     identical(Sys.getenv("TRAVIS"), "true") &&
@@ -286,6 +304,8 @@ test_that("ABS connection", {
 })
 
 test_that("cpi accelerated", {
+  skip_on_circleci(1)
+  
   skip_on_cran()
   set.seed(5)
   long_tos <- long_froms <- sample(yr2fy(2005:2010), size = 2e6, replace = TRUE)
@@ -309,6 +329,8 @@ test_that("cpi accelerated", {
 
 
 test_that("cpi accelerated but both to and from multilength", {
+  skip_on_circleci(1)
+  
   expect_identical(cpi_inflator(from_fy = c("2005-06", "2008-09", "2006-07"),
                                 to_fy = c("2015-16", "2014-15", "2016-17")),
                    cpi_inflator(from_fy = c("2005-06", "2008-09", "2006-07"),
@@ -318,6 +340,8 @@ test_that("cpi accelerated but both to and from multilength", {
 
 
 test_that("cpi different lengths", {
+  skip_on_circleci(1)
+  
   expect_identical(cpi_inflator(1,
                                 to_fy = c("2004-05", "2007-08", "2009-10", "2009-10", "2007-08"),
                                 from_fy = "1999-00"),

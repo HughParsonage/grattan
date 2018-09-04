@@ -153,6 +153,8 @@ rent_assistance <- function(fortnightly_rent = Inf,
                                      "nDependants")]
     }
     
+    Rent <- NULL
+    
     ra <- 
       output %>%
       .[, "out" := pminV(.prop_rent_paid_by_RA * pmaxC(Rent - min_rent, 0),
@@ -215,6 +217,7 @@ rent_assistance <- function(fortnightly_rent = Inf,
                             has_partner,
                             n_dependants)
   
+  SharersProvisionApplies <- NULL
   sharers_prov <- data.table(SharersProvisionApplies = sharers_provision_applies,
                              isHomeOwner = is_homeowner,
                              ShareHouse = lives_in_sharehouse,

@@ -2,6 +2,7 @@ context("model_income_tax")
 
 test_that("Error handling", {
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   library(taxstats)
   library(hutils)
   sample_file_1314_copy <- copy(sample_file_1314)
@@ -40,6 +41,7 @@ test_that("Error handling", {
 
 test_that("La plus ca meme la plus ca meme: ordinary tax", {
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   original <- income_tax(sample_file_1314$Taxable_Income, "2013-14", .dots.ATO = copy(sample_file_1314))
@@ -55,6 +57,7 @@ test_that("La plus ca meme la plus ca meme: ordinary tax", {
 
 test_that("La plus ca meme la plus ca meme: la deluge", {
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   library(taxstats)
   sample_file_1112_copy <- copy(sample_file_1112)
   original <-
@@ -74,6 +77,7 @@ test_that("La plus ca meme la plus ca meme: la deluge", {
   
 test_that("La plus ca meme la plus ca meme: medicare levy", {
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   
@@ -93,6 +97,7 @@ test_that("La plus ca meme la plus ca meme: medicare levy", {
 
 test_that("La plus ca meme la plus ca meme: LITO", {
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   
@@ -112,6 +117,7 @@ test_that("La plus ca meme la plus ca meme: LITO", {
 
 test_that("La plus ca meme la plus ca meme: SBTO doesn't interfere with SBTO", {
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   library(taxstats)
   library(magrittr)
   library(data.table)
@@ -129,6 +135,7 @@ test_that("La plus ca meme la plus ca meme: SBTO doesn't interfere with SBTO", {
 
 test_that("Increase in a rate results in more tax", {
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   original <- income_tax(sample_file_1314$Taxable_Income, "2013-14", .dots.ATO = copy(sample_file_1314))
@@ -151,6 +158,7 @@ test_that("Increase in a rate results in more tax", {
 
 test_that("Medicare warnings", {
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   expect_warning(model_income_tax(sample_file_1314_copy,
@@ -297,6 +305,7 @@ test_that("Medicare warnings", {
 
 test_that("Medicare options", {
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   original <- income_tax(sample_file_1314$Taxable_Income,
@@ -378,6 +387,7 @@ test_that("Medicare options", {
 test_that("Medicare families", {
   skip_on_cran()
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   s1617 <- project(sample_file_1314, h = 3L)
   
   for (j in seq_along(s1617)) {
@@ -414,6 +424,7 @@ test_that("Medicare families", {
 test_that("SAPTO modelled", {
   skip_on_cran()
   skip_if_not_installed("taxstats", minimum_version = "0.0.5")
+  skip_on_circleci(2)
   library(taxstats)
   sample_file_1415_copy <- copy(sample_file_1415_synth)
   
@@ -486,6 +497,7 @@ test_that("SAPTO modelled", {
 
 test_that("LITO", {
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   library(taxstats)
   sample_file_1213_copy <- copy(sample_file_1213)
   
@@ -508,7 +520,8 @@ test_that("LITO", {
 
 test_that("Elasticity of taxable income", {
   skip_on_cran()
-  skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_if_not_installed("taxstats")
+  skip_on_circleci(2)
   library(taxstats)
   s12131314 <- 
     copy(sample_file_1213) %>%
@@ -591,6 +604,7 @@ test_that("Elasticity of taxable income", {
 
 test_that("Elasticity 0 vs 1", {
   skip_if_not_installed("taxstats", minimum_version = "0.0.5")
+  skip_on_circleci(2)
   library(taxstats)
   s1415 <- 
     copy(sample_file_1415_synth) %>%
@@ -634,6 +648,7 @@ test_that("Lamington", {
   skip_on_cran()
   skip_if_not_installed("taxstats", minimum_version = "0.0.5")
   skip_if_not_installed("fst", minimum_version = "0.8.4")
+  skip_on_circleci(2)
   temp.fst <- "~/SampleFile1819/sample_file_1819.fst"
   library(data.table)
   library(hutils)
@@ -675,6 +690,7 @@ test_that("Lamington", {
 test_that("Clear columns", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
+  skip_on_circleci(2)
   library(taxstats)
   s1314 <- as.data.table(sample_file_1314)
   s1314[, new_tax := 1][, baseline_tax := 2]
@@ -685,6 +701,7 @@ test_that("Clear columns", {
 test_that("sample_file.int", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
+  skip_on_circleci(2)
   library(taxstats)
   s1314 <- as.data.table(sample_file_1314)
   res <- model_income_tax(s1314, "2013-14", return. = "sample_file.int")
@@ -694,6 +711,7 @@ test_that("sample_file.int", {
 test_that("lito_multi", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
+  skip_on_circleci(2)
   library(taxstats)
   s1314 <- as.data.table(sample_file_1314)
   base <- model_income_tax(s1314, "2013-14")
@@ -740,6 +758,7 @@ test_that("lito_multi", {
 test_that("Keyed data.table", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
+  skip_on_circleci(2)
   library(taxstats)
   s1314 <- as.data.table(sample_file_1314)
   base <- model_income_tax(s1314, "2013-14", sbto_discount = 0.1)
@@ -752,6 +771,7 @@ test_that("Keyed data.table", {
 test_that("Budget2018", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
+  skip_on_circleci(2)
   library(taxstats)
   s1314 <- as.data.table(sample_file_1314)
   sWatr <- model_income_tax(s1314,
@@ -783,6 +803,7 @@ test_that("Budget2018", {
 test_that("Debugger", {
   skip_on_cran()
   skip_if_not_installed("taxstats1516")
+  skip_on_circleci(2)
   library(data.table)
   library(taxstats1516)
   s1516 <- as.data.table(sample_file_1516_synth)
@@ -797,6 +818,7 @@ test_that("CGT discount", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
   skip_if_not_installed("taxstats1516")
+  skip_on_circleci(2)
   library(taxstats)
   library(taxstats1516)
   library(data.table)
@@ -867,6 +889,7 @@ test_that("CGT discount", {
 test_that("CGT (errors)", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
+  skip_on_circleci(2)
   library(taxstats)
   expect_error(model_income_tax(sample_file_1213, "2013-14", 
                                 cgt_discount_rate = rep(0, 5)),

@@ -68,16 +68,14 @@ model_rent_assistance <- function(sample_file,
   
   
   # Check sample file has correct format
-  if(!is.data.table(sample_file)) {
-    if (!is.data.frame(sample_file)) {
-      stop("`sample_file` was a ", class(sample_file)[1],
-           ", but must be a data.frame.")
-    }
-  
-    sample_file <- as.data.table(sample_file)
-  } else {
-    sample_file <- copy(sample_file)
+  if (!is.data.frame(sample_file)) {
+    stop("`sample_file` was a ", class(sample_file)[1],
+         ", but must be a data.frame.")
   }
+  
+  # Effectively copy  
+  sample_file <- as.data.table(sample_file)
+
   cols_required <- c("rent",  "n_dependants", "has_partner", "is_homeowner", "lives_in_sharehouse")
   if (!all(cols_required %chin% names(sample_file))) {
     absent_cols <- setdiff(cols_required, names(sample_file))
