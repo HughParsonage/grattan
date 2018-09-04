@@ -86,6 +86,16 @@ microbenchmark(
   times = 2L, control = list(order = "inorder")) %>%
   save_it
 
+dt <- data.table(x = seq(0, 1e4, length.out = 1e6),
+                 y = rnorm(1e6),
+                 wt = runif(1e6, 10, 150))
+
+microbenchmark(
+  dt[, weighted_ntile(y, w = wt, n = 10)],
+  dt[, weighted_ntile(x, w = wt, n = 10)],
+  times = 2L, control = list(order = "inorder")) %>%
+  save_it
+
 shell("git add timings/now/result*tsv")
 
 
