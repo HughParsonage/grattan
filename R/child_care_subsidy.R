@@ -1,15 +1,25 @@
-#' Child care Subsidy
+#' Child Care Subsidy payed per child. 
 #' 
-#' @param family_annual_income (numeric) Total income of the family
-#' @param activity_level (numeric) The total number of activity hours of the parents. Note that if there are two parents the one with the lower activity level will be applied. Common activities include work, leave, and study. A full list can be viewed at \url{http://guides.dss.gov.au/family-assistance-guide/3/5/2/10}
-#' @param activity_exemption (logical) Whether the parent is exempt from the activity test. Note that in a two parent family both parents must be exempt. A list of exemptions is available at \url{http://guides.dss.gov.au/family-assistance-guide/3/5/2/10}
-#' @param child_age (numeric) The age of the child in child care
-#' @param type_of_day_care The type of child care. Acceptable inputs are: "cbdc" Centre Based Day Care, "oshc" Outside School Hours Care, "fdc" Family Day Care, or "ihc" In Home Care. Note that In Home Care can only be claimed once per family.
-#' @param hours_day_care_fortnight (numeric) The hours of day care per child per fortnight
-#' @param cost_hour (numeric) The cost of day care per hour
-#' @param early_education_program (logical) Whether the child is part of an early education program
+#' @param family_annual_income (numeric) Total income of the family.
+#' @param activity_level (numeric) The total number of activity hours of the parent. Note that if there are two parents the one with the lower activity level will be applied. Common activities include work, leave, and study. A full list can be viewed at \url{http://guides.dss.gov.au/family-assistance-guide/3/5/2/10}.
+#' @param activity_exemption (logical) Whether the parent is exempt from the activity test. Note that in a two parent family both parents must be exempt. A list of exemptions is available at \url{http://guides.dss.gov.au/family-assistance-guide/3/5/2/10}.
+#' @param child_age (numeric) The age of the child in child care.
+#' @param type_of_day_care (character) The type of child care. Acceptable inputs are: "cbdc" Centre Based Day Care, "oshc" Outside School Hours Care, "fdc" Family Day Care, or "ihc" In Home Care. Note that In Home Care can only be claimed once per family.
+#' @param hours_day_care_fortnight (numeric) The number of hours of day care per child per fortnight.
+#' @param cost_hour (numeric) The cost of day care per hour.
+#' @param early_education_program (logical) Whether the child is part of an early education program.
 #' 
-#' @return The annual child care subsidy payable per child
+#' @param cbdc_hourly_cap,fdc_hourly_cap,oshc_hourly_cap,ihc_hourly_cap (numeric) The lower of `cost_hour` or the relevant `hourly_cap` will be used in the calculation of the subsidy.
+#' @param annual_cap_income (numeric) The minimum family income for which the `annual_cap_subsidy` applies from.
+#' @param annual_cap_subsidy (numeric) Amount at which annual subsidies are capped for those who earn more than `annual_cap_income`. 
+#' 
+#' @param activity_test_1_brackets (numeric vector) The activity levels at which the activity test increases.
+#' @param activity_test_1_hours (numeric vector) The hours corresponding to the step increase in `activity_test_1_brackets`.
+#' 
+#' @param income_test_bracket_1,income_test_bracket_2,income_test_bracket_3,income_test_bracket_4,income_test_bracket_5 (numeric) The steps at which income test 1 changes rates. Note the strange structure \url{https://www.humanservices.gov.au/individuals/services/centrelink/child-care-subsidy/payments/how-your-income-affects-it}.
+#' @param taper_1,taper_2,taper_3 (numeric) The proportion of the hourly cap retained. Note that the rate only decreases between each odd bracket.
+#' 
+#' @return The annual child care subsidy payable per child.
 #' 
 #' @examples
 #' Example from http://guides.dss.gov.au/family-assistance-guide/3/5/4
@@ -31,9 +41,29 @@ child_care_subsidy <- function(family_annual_income = 0,
                                activity_exemption = FALSE,
                                child_age = 3,
                                type_of_day_care = c("cbdc", "oshc", "fdc", "ihc"),
-                               hours_day_care_fortnight = 20,
-                               cost_hour = 20,
-                               early_education_program = FALSE) {
+                               hours_day_care_fortnight,
+                               cost_hour,
+                               early_education_program = FALSE,
+                               
+                               cbdc_hourly_cap = 11.77,
+                               fdc_hourly_cap = 10.90,
+                               oshc_hourly_cap = 10.29,
+                               ihc_hourly_cap = 25.48,
+                               
+                               annual_cap_income = 186958,
+                               annual_cap_subsidy = 10190,
+                               
+                               income_test_bracket_1 = 66958,
+                               income_test_bracket_2 = 171958,
+                               income_test_bracket_3 = 251248,
+                               income_test_bracket_4 = 341248,
+                               income_test_bracket_5 = 354248,
+                               taper_1 = 0.85,
+                               taper_2 = 0.5,
+                               taper_3 = 0.2,
+                               
+                               activity_test_1_brackets = c(0, 8, 16.00001, 48.00001),
+                               activity_test_1_hours = c(0, 36, 72, 100)) {
   
   prohibit_vector_recycling(family_annual_income,
                             activity_level,
@@ -80,45 +110,42 @@ child_care_subsidy <- function(family_annual_income = 0,
                cost_hour,
                early_education_program)
   
-  .data[, income_test := if_else(family_annual_income < 66958,
-                                 0.85,
-                                 if_else(family_annual_income < 171958,
-                                         0.85 - floor((family_annual_income - 66958)/3000)/100,
-                                         if_else(family_annual_income < 251248,
-                                                 0.5,
-                                                 if_else(family_annual_income < 341248,
-                                                         0.5 - floor((family_annual_income - 251248)/3000)/100,
-                                                         if_else(family_annual_income < 354248,
-                                                                 0.2,
-                                                                 0)))))] 
+  #income_test
+  .data[, income_test := if_else(family_annual_income < income_test_bracket_1,
+                                 taper_1,
+                                 if_else(family_annual_income < income_test_bracket_2,
+                                         taper_1 - floor((family_annual_income - income_test_bracket_1)/3000)/100,
+                                         if_else(family_annual_income < income_test_bracket_3,
+                                                 taper_2,
+                                                 if_else(family_annual_income < income_test_bracket_4,
+                                                         taper_2 - floor((family_annual_income - income_test_bracket_3)/3000)/100,
+                                                         if_else(family_annual_income < income_test_bracket_5,
+                                                                 taper_3,
+                                                                 0)))))]
   #type of care adjustment
   .data[, type_of_day_care := if_else(child_age >= 6 & type_of_day_care == "cbdc",
                                       "oshc",
                                       if_else(child_age < 6 & type_of_day_care == "oshc",
                                               "cbdc", 
                                               type_of_day_care))]
+  #hourly cap
+  .data[, hourly_cap := 0]
+  .data[type_of_day_care == "cbdc", hourly_cap := cbdc_hourly_cap]
+  .data[type_of_day_care == "fdc", hourly_cap := fdc_hourly_cap]
+  .data[type_of_day_care == "oshc", hourly_cap := oshc_hourly_cap]
+  .data[type_of_day_care == "ihc", hourly_cap := ihc_hourly_cap]
   
-  .data[, hourly_cap := if_else(type_of_day_care == "cbdc",
-                                11.77,
-                                if_else(type_of_day_care == "fdc",
-                                        10.90,
-                                        if_else(type_of_day_care == "oshc",
-                                                10.29,
-                                                if_else(type_of_day_care == "ihc",
-                                                        25.48,
-                                                        0))))]
-  
-  .data[, annual_cap := if_else(family_annual_income > 186958,
-                                10190,
+  .data[, annual_cap := if_else(family_annual_income > annual_cap_income,
+                                annual_cap_subsidy,
                                 Inf)]
   
-  .data[, activity_test_1 := if_else(activity_level < 8,
-                                     0,
-                                     if_else(activity_level <= 16,
-                                             36,
-                                             if_else(activity_level <=  48,
-                                                     72,
-                                                     100)))]
+  #activity tests
+  .data[, activity_test_1 := grattan:::koffset(activity_level,
+                                           activity_test_1_brackets,
+                                           activity_test_1_hours,
+                                           Yright = 100,
+                                           Method = "constant")]
+  
   .data[, activity_test_2 := if_else(family_annual_income <= 66985 & activity_level < 8,
                                      24, 0)]
   .data[, activity_test_3:= if_else(early_education_program & type_of_day_care == "cbdc",
@@ -131,6 +158,6 @@ child_care_subsidy <- function(family_annual_income = 0,
   #calculation
   output <- .data[, pminC(pminC(cost_hour, hourly_cap) * income_test * pminC(hours_day_care_fortnight, activity_test) * 365/14,
                           annual_cap)]
-  
+
   output
 }
