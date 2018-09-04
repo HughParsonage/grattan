@@ -3,6 +3,7 @@
 #include <stdlib.h> // for NULL
 #include <R_ext/Rdynload.h>
 
+
 /* .Call calls */
 extern SEXP _grattan_pmax3(SEXP, SEXP, SEXP);
 extern SEXP _grattan_IncomeTax(SEXP, SEXP, SEXP);
