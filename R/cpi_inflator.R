@@ -173,7 +173,8 @@ cpi_inflator <- function(from_nominal_price = 1,
            to = to_fy,
            inflator_table = cpi.indices,
            index.col = "obsValue", 
-           time.col = "fy_year")
+           time.col = "fy_year",
+           max.length = max.length)
   
 }
 
