@@ -36,6 +36,8 @@ age_pension <- function(fortnightly_income = 0,
                         is_home_owner = FALSE,
                         illness_separated_couple = FALSE,
                         per = c("year", "fortnight")) {
+  args <- ls(sorted = FALSE)  # sorted = FALSE => in order of args
+  
   if (is.null(Date)) {
     if (is.null(fy.year)) {
       Date <- .age_pension_today2qtr(Sys.Date())
@@ -46,6 +48,12 @@ age_pension <- function(fortnightly_income = 0,
   } else {
     if (!is.null(fy.year)) {
       warning("`fy.year` and `Date` both used. Ignoring `fy.year`.")
+    }
+  }
+  
+  for (i in args) {
+    if (anyNA(get(i, inherits = FALSE))) {
+      stop("`", i, "` contains NAs. Impute these values.")
     }
   }
   
@@ -70,6 +78,8 @@ age_pension <- function(fortnightly_income = 0,
                                         financial_assets,
                                         is_home_owner)
   
+  
+  
   Income <- 
     HasPartner <- 
     PartnerIncome <-
@@ -88,6 +98,8 @@ age_pension <- function(fortnightly_income = 0,
                FinancialAssets = financial_assets,
                HomeOwner = is_home_owner,
                IllnessSeparated = illness_separated_couple)
+  
+  
   input[, "ordering" := .I]
   setkeyv(input, c("HasPartner", "Date"))
   
