@@ -97,6 +97,7 @@ test_that("from > to deflates and is not a warning for inflators", {
 
 test_that("ABS connection", {
   skip_on_cran()
+  skip_on_circleci(2)
   skip_if_not(packageVersion("rsdmx") >= package_version("0.5.10"))
   
   # Minimize false on errors on travis
@@ -117,6 +118,7 @@ test_that("ABS Connection (extras)", {
   skip_on_cran()
   skip_on_appveyor()
   skip_on_travis()
+  skip_on_circleci(2)
   internal_ans <- wage_inflator(from_fy = "2012-13", 
                                 to_fy = "2020-21",
                                 useABSConnection = FALSE)
@@ -139,6 +141,7 @@ test_that("ABS Connection (extras)", {
 test_that("accelerated", {
   skip_on_cran()
   set.seed(1111)
+  skip_on_circleci(2)
   long_fys <- to_fys <- sample(yr2fy(2005:2010), size = 2e6, replace = TRUE)
   expect_identical(wage_inflator(1, from_fy = "2004-05", to_fy = to_fys), 
                    wage_inflator(rep(1, 2e6), from_fy = "2004-05", to_fy = to_fys))
@@ -179,6 +182,7 @@ test_that("accelerated", {
 })
 
 test_that("accelerating both from and to", {
+  skip_on_circleci(2)
   expect_identical(wage_inflator(from_fy = c("2005-06", "2008-09", "2006-07"),
                                  to_fy = c("2015-16", "2014-15", "2016-17")),
                    wage_inflator(from_fy = c("2005-06", "2008-09", "2006-07"),
@@ -187,6 +191,7 @@ test_that("accelerating both from and to", {
 })
 
 test_that("verbose option", {
+  skip_on_circleci(2)
   skip_if_not_installed("rlang")
   expect_output(
     rlang::with_options(

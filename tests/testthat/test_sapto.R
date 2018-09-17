@@ -9,7 +9,7 @@ test_that("Mising fy.year",{
 })
 
 test_that("SAPTO for singles", {
-  sapto(33279, fy.year = "2015-16")
+  expect_equal(sapto(33279, fy.year = "2015-16"), 2105)
 })
 
 test_that("Error handling", {

@@ -26,6 +26,7 @@ in support of the Grattan Institute, Melbourne.
 Useful links:
 \itemize{
   \item \url{https://github.com/HughParsonage/grattan}
+  \item \url{https://hughparsonage.github.io/grattan/}
   \item Report bugs at \url{https://github.com/HughParsonage/grattan/issues}
 }
 

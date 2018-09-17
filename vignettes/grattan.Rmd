@@ -159,6 +159,7 @@ avg_tax_by_decile_2021 <-
     keyby = .(decile = weighted_ntile(Taxable_Income, n = 10))]
 ```
 
+
 We can then plot a comparison of these table by joining them and using `ggplot2`. 
 Since the tables are already keyed by `decile`, we can use the `X[Y]` method from `data.table` to join by `decile`.
 This creates a three-column table: the first is `decile`, the second is `avg_tax` which is the `avg_tax` from the 2016-17 table and `i.avg_tax` which is the `avg_tax` from the 2020-21 table.

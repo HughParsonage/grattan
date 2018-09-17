@@ -16,5 +16,6 @@ test_that("grattan functions and pmax pmin give identical results", {
   
   expect_error(pmax3(1, 2, 3:4))
   expect_error(pmaxV(1, 1:2))
+  expect_error(pminV(1, 1:2))
 })
 

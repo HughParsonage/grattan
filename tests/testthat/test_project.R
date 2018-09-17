@@ -30,6 +30,7 @@ test_that("Error handling", {
 test_that("h = 0", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
+  skip_on_circleci(1)
   library(taxstats)
   s1314 <- as.data.table(sample_file_1314)
   expect_identical(s1314, project(s1314, h = 0L))
@@ -51,6 +52,7 @@ test_that("Columns do not vanish", {
 test_that("Warnings", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
+  skip_on_circleci(1)
   expect_warning(project(sample_file_1314, h = 1L, fy.year.of.sample.file = "2012-13"),
                  regexp = "nrow")
   expect_error(project(sample_file_1314, h = 1L, fy.year.of.sample.file = "2011-12"),
@@ -60,6 +62,7 @@ test_that("Warnings", {
 test_that("Error handling (sample files)", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
+  skip_on_circleci(1)
   library(taxstats)
   expect_error(project(data.table(), h = 1L),
                regexp = "`fy.year.of.sample.file` was not provided, and its value could not be inferred from nrow(sample_file) = 0. Either use a 2% sample file of the years 2012-13, 2013-14, or 2014-15 or supply `fy.year.of.sample.file` manually.", 
@@ -83,6 +86,7 @@ test_that("Error handling (sample files)", {
 test_that("Switch off differentially uprating", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
+  skip_on_circleci(1)
   library(taxstats)
   s1314 <- as.data.table(sample_file_1314)
   s1516A <- project(s1314, h = 2L)
@@ -101,6 +105,7 @@ test_that("Switch off differentially uprating", {
 test_that("Custom lf/wage series", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
+  skip_on_circleci(1)
   library(taxstats)
   s1314 <- as.data.table(sample_file_1314)
   s2021 <- project(s1314, h = 7L)
@@ -125,6 +130,7 @@ test_that("Coverage", {
   skip_on_cran()
   skip_if_not_installed("taxstats1516")
   skip_if_not_installed("taxstats")
+  skip_on_circleci(1)
   library(taxstats1516)
   library(taxstats)
   s1516 <- as.data.table(sample_file_1516_synth)
