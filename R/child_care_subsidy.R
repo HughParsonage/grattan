@@ -22,7 +22,6 @@
 #' @return The annual child care subsidy payable per child.
 #' 
 #' @examples
-#' Example from http://guides.dss.gov.au/family-assistance-guide/3/5/4
 #' child_care_subsidy(family_annual_income = 175000,
 #'                    activity_level = 40,
 #'                    activity_exemption = FALSE,
