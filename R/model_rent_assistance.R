@@ -39,7 +39,7 @@ model_rent_assistance <- function(sample_file,
                                   return. = c("sample_file", "new_ra", "sample_file.int")) {
   return. <- match.arg(return.)
   
-  if (!XOR(is.null(baseline_fy), is.null(baseline_Date))) {
+  if (!xor(is.null(baseline_fy), is.null(baseline_Date))) {
     if (is.null(baseline_fy) && is.null(baseline_Date)) {
       stop("Neither `baseline_fy` nor `baseline_Date` was provided. ", 
            "Provide `baseline_fy` xor `baseline_Date`.")
