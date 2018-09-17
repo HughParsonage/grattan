@@ -20,3 +20,12 @@ check_TF <- function(x) {
   }
 }
 
+check_numeric <- function(x) {
+  xc <- deparse(substitute(x))
+  if (length(x) != 1L) {
+    stop("`", xc, "` had length ", length(x), " but must be length-one.")
+  }
+  if (!is.numeric(x)) {
+    stop("`", xc, "` was type ", typeof(x), ", but must be numeric.")
+  }
+}

@@ -13,3 +13,13 @@ test_that("check_TF", {
   expect_error(check_TF(mustBe), 
                '`mustBe` had length 2 but must be length-one. Change `mustBe` to be TRUE or FALSE.')
 })
+
+test_that("check_numeric", {
+  expect_null(check_numeric(17))
+  mustBe <- TRUE
+  expect_error(check_numeric(mustBe), 
+               '`mustBe` was type logical, but must be numeric.')
+  mustBe <- 1:3
+  expect_error(check_numeric(mustBe), 
+               '`mustBe` had length 3 but must be length-one.')
+})
