@@ -139,7 +139,7 @@ child_care_subsidy <- function(family_annual_income = 0,
                                 Inf)]
   
   #activity tests
-  .data[, activity_test_1 := grattan:::koffset(activity_level,
+  .data[, activity_test_1 := koffset(activity_level,
                                            activity_test_1_brackets,
                                            activity_test_1_hours,
                                            Yright = 100,
