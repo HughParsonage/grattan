@@ -5,14 +5,39 @@
 \title{Model Child Care Subsidy}
 \usage{
 model_child_care_subsidy(sample_file = 1, cbdc_hourly_cap = 11.77,
-  fdc_hourly_cap = 10.9, oshc_hourly_cap = 10.29, ihc_hourly_cap = 25.48,
-  annual_cap_income = 186958, annual_cap_subsidy = 10190,
-  income_test_bracket_1 = 66958, income_test_bracket_2 = 171958,
-  income_test_bracket_3 = 251248, income_test_bracket_4 = 341248,
-  income_test_bracket_5 = 354248, taper_1 = 0.85, taper_2 = 0.5,
-  taper_3 = 0.2, activity_test_1_brackets = c(0, 8, 16.00001, 48.00001),
-  activity_test_1_hours = c(0, 36, 72, 100), calc_baseline_subsidy = FALSE,
-  return. = c("sample_file", "new_subsidy"))
+  fdc_hourly_cap = 10.9, oshc_hourly_cap = 10.29,
+  ihc_hourly_cap = 25.48, annual_cap_income = 186958,
+  annual_cap_subsidy = 10190, income_test_bracket_1 = 66958,
+  income_test_bracket_2 = 171958, income_test_bracket_3 = 251248,
+  income_test_bracket_4 = 341248, income_test_bracket_5 = 354248,
+  taper_1 = 0.85, taper_2 = 0.5, taper_3 = 0.2,
+  activity_test_1_brackets = c(0, 8, 16.00001, 48.00001),
+  activity_test_1_hours = c(0, 36, 72, 100),
+  calc_baseline_subsidy = TRUE, return. = c("sample_file",
+  "new_subsidy"))
+}
+\arguments{
+\item{sample_file}{A sample file having the same variables as the data.frame in the example.}
+
+\item{cbdc_hourly_cap, fdc_hourly_cap, oshc_hourly_cap, ihc_hourly_cap}{(numeric) The lower of `cost_hour` or the relevant `hourly_cap` will be used in the calculation of the subsidy.}
+
+\item{annual_cap_income}{(numeric) The minimum family income for which the `annual_cap_subsidy` applies from.}
+
+\item{annual_cap_subsidy}{(numeric) Amount at which annual subsidies are capped for those who earn more than `annual_cap_income`.}
+
+\item{income_test_bracket_1, income_test_bracket_2, income_test_bracket_3, income_test_bracket_4, income_test_bracket_5}{(numeric) The steps at which income test 1 changes rates. Note the strange structure \url{https://www.humanservices.gov.au/individuals/services/centrelink/child-care-subsidy/payments/how-your-income-affects-it}.}
+
+\item{taper_1, taper_2, taper_3}{(numeric) The proportion of the hourly cap retained. Note that the rate only decreases between each odd bracket.}
+
+\item{activity_test_1_brackets}{(numeric vector) The activity levels at which the activity test increases.}
+
+\item{activity_test_1_hours}{(numeric vector) The hours corresponding to the step increase in `activity_test_1_brackets`.}
+
+\item{calc_baseline_subsidy}{(logical, default: \code{TRUE}) Should the current child care subsidy be included as a column in the result?}
+
+\item{return.}{What should the function return? One of \code{subsidy}, \code{sample_file}, or \code{sample_file.int}. 
+If \code{subsidy}, the subsidy received under the settings; if \code{sample_file}, the \code{sample_file},
+but with variables \code{subsidy} and possibly \code{new_subsidy}; if \code{sample_file.int}, same as \code{sample_file} but \code{new_subsidy} is coerced to integer.}
 }
 \description{
 The child care subsidy if threshholds and rates are changed.
