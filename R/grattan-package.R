@@ -25,6 +25,7 @@
 #' @importFrom hutils NOR
 #' @importFrom hutils NEITHER
 #' @importFrom hutils AND
+#' @importFrom hutils XOR
 #' @importFrom hutils %ein%
 
 #' @importFrom fastmatch %fin%
