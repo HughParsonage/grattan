@@ -250,7 +250,8 @@ lf_inflator_fy <- function(labour_force = 1,
            to = to_fy, 
            inflator_table = lf.indices, 
            index.col = "obsValue",
-           time.col = "fy_year")
+           time.col = "fy_year",
+           max.length = max.length)
 }
 
 #' @rdname lf_inflator

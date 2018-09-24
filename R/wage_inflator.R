@@ -242,7 +242,8 @@ wage_inflator <- function(wage = 1,
              to = to_fy,
              inflator_table = wage.indices,
              index.col = "obsValue", 
-             time.col = "fy_year") 
+             time.col = "fy_year",
+             max.length = max.length) 
   wage * {infl_factor ^ exponent}
 }
 

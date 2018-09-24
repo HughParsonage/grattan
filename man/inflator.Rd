@@ -5,7 +5,7 @@
 \title{Inflate using a general index}
 \usage{
 inflator(x = 1, from, to, inflator_table, index.col = "Index",
-  time.col = "Time", roll = NULL)
+  time.col = "Time", roll = NULL, max.length = NULL)
 }
 \arguments{
 \item{x}{The vector to be inflated.}
@@ -21,6 +21,10 @@ inflator(x = 1, from, to, inflator_table, index.col = "Index",
 \item{time.col}{The column in \code{inflator_table} by which times are mapped.}
 
 \item{roll}{If \code{NULL}, inflation is calculated only on exact matches in \code{inflator_table}. Otherwise, uses a rolling join. See \code{data.table::data.table}.}
+
+\item{max.length}{(Internal use only). If not \code{NULL}, the maximum length of \code{x},
+\code{from}, and \code{to} known in advance. May be provided to improve the performance
+if known.}
 }
 \value{
 A vector of inflated values. For example, \code{inflator_table = grattan:::cpi_seasonal_adjustment}, 

@@ -151,15 +151,15 @@ cpi_inflator <- function(from_nominal_price = 1,
   if (max_fy2yr(to_fy) > the_max.yr || 
       max_fy2yr(from_fy) > the_max.yr) {
     # Number of years beyond the data our forecast must reach
-    years.beyond <- max(fy2yr(to_fy)) - max(fy2yr(permitted_fys))
+    years.beyond <- max_fy2yr(to_fy) - max_fy2yr(permitted_fys)
     cpi_index_forecast <-
       cpi.indices %$%
       gforecast(obsValue, h = years.beyond) %$%
       as.numeric(mean)
     
     cpi.indices.new <- 
-      setDT(list(fy_year = yr2fy(seq(max(fy2yr(permitted_fys)) + 1L,
-                                     max(fy2yr(to_fy)),
+      setDT(list(fy_year = yr2fy(seq(max_fy2yr(permitted_fys) + 1L,
+                                     max_fy2yr(to_fy),
                                      by = 1L)),
                  obsValue = cpi_index_forecast))
     cpi.indices <-
@@ -173,7 +173,8 @@ cpi_inflator <- function(from_nominal_price = 1,
            to = to_fy,
            inflator_table = cpi.indices,
            index.col = "obsValue", 
-           time.col = "fy_year")
+           time.col = "fy_year",
+           max.length = max.length)
   
 }
 

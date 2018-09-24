@@ -1,5 +1,9 @@
 language: r
 
+env:
+  global:
+    - _R_CHECK_LENGTH_1_LOGIC2_=true
+
 matrix:
   include:
   - r: oldrel

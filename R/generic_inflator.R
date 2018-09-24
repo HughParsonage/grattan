@@ -77,7 +77,7 @@ generic_inflator <- function(vars,
   }
   
   forecast_and_extract <- function(fy.year, value) {
-    max_year <- max(fy2yr(fy.year))
+    max_year <- max_fy2yr(fy.year)
     list(fy_year = c(fy.year, yr2fy(max_year + seq_len(h))),
          value = c(value, extract_estimator(forecast_ahead_h(forecaster(value)))))
   }
