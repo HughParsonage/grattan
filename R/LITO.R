@@ -24,7 +24,7 @@ NULL
     input[, "ordering" := .I]
   } 
   lito_tbl[input] %>%
-    .[, lito := pminV(pmax0(max_lito - (income - min_bracket) * lito_taper),
+    .[, lito := pminV(pmaxIPnum0(max_lito - (income - min_bracket) * lito_taper),
                       max_lito)] %>%
     setorderv("ordering") %>%
     .subset2("lito")

@@ -254,7 +254,7 @@ rolling_income_tax <- function(income,
   # input[["fy_year"]] ensures it matches the length of income if length(fy.year) == 1.
   if (any(c("2014-15", "2015-16", "2016-17") %fin% .subset2(input, "fy_year"))) {
     temp_budget_repair_levy. <-
-      0.02 * pmax0(income - 180e3) *
+      0.02 * pmaxIPnum0(income - 180e3) *
       {.subset2(input, "fy_year") %chin% c("2014-15", "2015-16", "2016-17")}
   } else {
     temp_budget_repair_levy. <- 0
@@ -264,13 +264,13 @@ rolling_income_tax <- function(income,
     flood_levy. <- 
       0.005 *
       {.subset2(input, "fy_year") == "2011-12"} * 
-      {pmax0(income - 50e3) + pmax0(income - 100e3)}
+      {pmaxIPnum0(income - 50e3) + pmaxIPnum0(income - 100e3)}
   } else {
     flood_levy. <- 0
   }
   
   # http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html
-  S4.10_basic_income_tax_liability <- pmax0(base_tax. - lito. - sapto.)
+  S4.10_basic_income_tax_liability <- pmaxIPnum0(base_tax. - lito. - sapto.)
   
   # SBTO can only be calculated off .dots.ATO
   if (is.null(.dots.ATO)) {
@@ -284,7 +284,7 @@ rolling_income_tax <- function(income,
   }
   
   # SBTO is non-refundable (Para 1.6 of explanatory memo)
-  pmax0(S4.10_basic_income_tax_liability - sbto.) +
+  pmaxIPnum0(S4.10_basic_income_tax_liability - sbto.) +
     medicare_levy. +
     temp_budget_repair_levy. +
     flood_levy.
@@ -468,7 +468,7 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
   flood_levy. <- 0
   
   # http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html
-  S4.10_basic_income_tax_liability <- pmax0(base_tax. - lito. - sapto.)
+  S4.10_basic_income_tax_liability <- pmaxIPnum0(base_tax. - lito. - sapto.)
   
   # SBTO can only be calculated off .dots.ATO
   if (is.null(.dots.ATO)) {
