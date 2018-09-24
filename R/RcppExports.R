@@ -9,7 +9,6 @@
 #' @param a A (single) integer. That which is to be compared.
 #' @param gt,lt,eq Booleans, whether or not the comparison is greater than, less than, or equal to.
 #' Only \code{gt} and \code{lt} are mutually exclusive.
-#' @keywords internal
 NULL
 
 AnyWhich <- function(x, a, gt, lt, eq) {

@@ -7,7 +7,7 @@
 anyGeq(x, a)
 }
 \arguments{
-\item{x}{An integer vector}
+\item{x}{An integer vector.}
 
 \item{a}{An integer.}
 }

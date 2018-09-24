@@ -9,7 +9,6 @@ using namespace Rcpp;
 //' @param a A (single) integer. That which is to be compared.
 //' @param gt,lt,eq Booleans, whether or not the comparison is greater than, less than, or equal to.
 //' Only \code{gt} and \code{lt} are mutually exclusive.
-//' @keywords internal
 
 // [[Rcpp::export]]
 int AnyWhich(IntegerVector x, int a, bool gt, bool lt, bool eq) {

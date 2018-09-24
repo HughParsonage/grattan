@@ -15,4 +15,3 @@ Only \code{gt} and \code{lt} are mutually exclusive.}
 Used when a single instance is likely to occur and be important to detect quickly
 (in a sufficiently large integer vector).
 }
-\keyword{internal}
