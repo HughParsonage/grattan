@@ -10,8 +10,6 @@ anyGeq(x, a)
 \item{x}{An integer vector}
 
 \item{a}{An integer.}
-
-\item{comparison}{The operator}
 }
 \value{
 0 if none true or the index of the first match.

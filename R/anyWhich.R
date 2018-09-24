@@ -1,7 +1,6 @@
 #' Any without logical creation
 #' @param x An integer vector
 #' @param a An integer.
-#' @param comparison The operator
 #' @return 0 if none true or the index of the first match.
 #' 
 #' 
