@@ -8,6 +8,9 @@ test_that("Error handling", {
                            annual_income = 1),
                regexp = "`fortnightly_income` is provided, yet `annual_income` is not 26 times its values.",
                fixed = TRUE)
+  expect_error(age_pension(fortnightly_income = NA,
+                           fy.year = "2015-16"),
+               regexp = "`fortnightly_income` contains NAs.")
 })
 
 
