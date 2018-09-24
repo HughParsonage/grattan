@@ -38,7 +38,7 @@ lito <- function(income,
                  lito_taper = 0.015, 
                  min_bracket = 37000){
   if (length(max_lito) == 1L){
-    pminC(pmax0(max_lito - (income - min_bracket) * lito_taper),
+    pminC(pmaxIPnum0(max_lito - (income - min_bracket) * lito_taper),
           max_lito)
   } else {
     # Need to guard against unequal length vectors passed to pminV. In particular
