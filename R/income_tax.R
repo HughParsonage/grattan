@@ -254,7 +254,7 @@ rolling_income_tax <- function(income,
   # input[["fy_year"]] ensures it matches the length of income if length(fy.year) == 1.
   if (any(c("2014-15", "2015-16", "2016-17") %fin% .subset2(input, "fy_year"))) {
     temp_budget_repair_levy. <-
-      0.02 * pmaxC(income - 180e3, 0) *
+      0.02 * pmaxIPnum0(income - 180e3) *
       {.subset2(input, "fy_year") %chin% c("2014-15", "2015-16", "2016-17")}
   } else {
     temp_budget_repair_levy. <- 0
@@ -264,13 +264,13 @@ rolling_income_tax <- function(income,
     flood_levy. <- 
       0.005 *
       {.subset2(input, "fy_year") == "2011-12"} * 
-      {pmaxC(income - 50e3, 0) + pmaxC(income - 100e3, 0)}
+      {pmaxIPnum0(income - 50e3) + pmaxIPnum0(income - 100e3)}
   } else {
     flood_levy. <- 0
   }
   
   # http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html
-  S4.10_basic_income_tax_liability <- pmaxC(base_tax. - lito. - sapto., 0)
+  S4.10_basic_income_tax_liability <- pmaxIPnum0(base_tax. - lito. - sapto.)
   
   # SBTO can only be calculated off .dots.ATO
   if (is.null(.dots.ATO)) {
@@ -284,7 +284,7 @@ rolling_income_tax <- function(income,
   }
   
   # SBTO is non-refundable (Para 1.6 of explanatory memo)
-  pmaxC(S4.10_basic_income_tax_liability - sbto., 0) +
+  pmaxIPnum0(S4.10_basic_income_tax_liability - sbto.) +
     medicare_levy. +
     temp_budget_repair_levy. +
     flood_levy.
@@ -361,7 +361,7 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
               rates = c(0, 0.19, 0.325, 0.37, 
                         0.45))
   
-  lito. <- pminC(pmaxC(445 - (income - 37000) * 0.015, 0),
+  lito. <- pminC(pmax0(445 - (income - 37000) * 0.015),
                  445)
 
   switch(fy.year,
@@ -468,7 +468,7 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
   flood_levy. <- 0
   
   # http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html
-  S4.10_basic_income_tax_liability <- pmaxC(base_tax. - lito. - sapto., 0)
+  S4.10_basic_income_tax_liability <- pmaxIPnum0(base_tax. - lito. - sapto.)
   
   # SBTO can only be calculated off .dots.ATO
   if (is.null(.dots.ATO)) {
@@ -485,7 +485,7 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
   }
   
   out <-
-    pmaxC(S4.10_basic_income_tax_liability - sbto., 0) +
+    pmax0(S4.10_basic_income_tax_liability - sbto.) +
     medicare_levy. +
     flood_levy. 
   

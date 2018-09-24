@@ -24,10 +24,10 @@ NULL
     input[, "ordering" := .I]
   } 
   lito_tbl[input] %>%
-    .[, lito := pminV(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
+    .[, lito := pminV(pmaxIPnum0(max_lito - (income - min_bracket) * lito_taper),
                       max_lito)] %>%
     setorderv("ordering") %>%
-    .[["lito"]]
+    .subset2("lito")
   
 }
 
@@ -38,13 +38,13 @@ lito <- function(income,
                  lito_taper = 0.015, 
                  min_bracket = 37000){
   if (length(max_lito) == 1L){
-    pminC(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
+    pminC(pmaxIPnum0(max_lito - (income - min_bracket) * lito_taper),
           max_lito)
   } else {
     # Need to guard against unequal length vectors passed to pminV. In particular
     # there is a danger that max_lito will be single, but income won't.
     prohibit_unequal_length_vectors(income, max_lito, lito_taper, min_bracket)
-    pminV(pmaxC(max_lito - (income - min_bracket) * lito_taper, 0),
+    pminV(pmax0(max_lito - (income - min_bracket) * lito_taper),
           max_lito)
   }
 }
@@ -70,7 +70,7 @@ lmito <- function(income,
 }
 
 watr <- function(income) {
-  pmaxC(lmito(income, first_offset = 350, taper = c(0, 0.0525, 0, -0.02625)), 0)
+  pmax0(lmito(income, first_offset = 350, taper = c(0, 0.0525, 0, -0.02625)))
 }
 
 

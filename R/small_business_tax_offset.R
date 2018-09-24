@@ -50,8 +50,8 @@ small_business_tax_offset <- function(taxable_income,
                                       fy_year = NULL,
                                       tax_discount = NULL) {
   
-  if (!is.null(fy_year) && fy_year < "2015-16") {
-    return(0)
+  if (!is.null(fy_year) && length(fy_year) == 1L && fy_year < "2015-16") {
+    double(length(taxable_income))
   } else {
     if (!is.null(.dots.ATO)) {
       if (!is.null(aggregated_turnover)) {
