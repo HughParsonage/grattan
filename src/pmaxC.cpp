@@ -92,6 +92,28 @@ NumericVector pmax0(NumericVector x) {
   return out;
 }
 
+// [[Rcpp::export]]
+NumericVector pmaxIPnum0(NumericVector x) {
+  int n = x.length();
+  
+  for (int i = 0; i < n; ++i) {
+    if (x[i] < 0) {
+      x[i] = 0;
+    }
+  }
+  return x;
+}
 
+// [[Rcpp::export]]
+IntegerVector pmaxIPint0(IntegerVector x) {
+  int n = x.length();
+  
+  for (int i = 0; i < n; ++i) {
+    if (x[i] < 0) {
+      x[i] = 0;
+    }
+  }
+  return x;
+}
 
 
