@@ -23,28 +23,28 @@
 
 model_child_care_subsidy <- function(sample_file,
                                      
-                                     cbdc_hourly_cap = NULL,
-                                     fdc_hourly_cap = NULL,
-                                     oshc_hourly_cap = NULL,
-                                     ihc_hourly_cap = NULL,
+                                     Cbdc_hourly_cap = NULL,
+                                     Fdc_hourly_cap = NULL,
+                                     Oshc_hourly_cap = NULL,
+                                     Ihc_hourly_cap = NULL,
                                      
-                                     annual_cap_income = NULL,
-                                     annual_cap_subsidy = NULL,
+                                     Annual_cap_income = NULL,
+                                     Annual_cap_subsidy = NULL,
                                      
-                                     income_test_bracket_1 = NULL,
-                                     income_test_bracket_2 = NULL,
-                                     income_test_bracket_3 = NULL,
-                                     income_test_bracket_4 = NULL,
-                                     income_test_bracket_5 = NULL,
-                                     taper_1 = NULL,
-                                     taper_2 = NULL,
-                                     taper_3 = NULL,
+                                     Income_test_bracket_1 = NULL,
+                                     Income_test_bracket_2 = NULL,
+                                     Income_test_bracket_3 = NULL,
+                                     Income_test_bracket_4 = NULL,
+                                     Income_test_bracket_5 = NULL,
+                                     Taper_1 = NULL,
+                                     Taper_2 = NULL,
+                                     Taper_3 = NULL,
                                      
-                                     activity_test_1_brackets = NULL,
-                                     activity_test_1_hours = NULL,
+                                     Activity_test_1_brackets = NULL,
+                                     Activity_test_1_hours = NULL,
   
                                      calc_baseline_ccs = TRUE,
-                                     return. = c("sample_file", "new_ccs")) {
+                                     return. = c("sample_file", "new_ccs", "sample_file.int")) {
   return. <- match.arg(return.)
   
   # Check sample file has correct format
@@ -68,37 +68,80 @@ model_child_care_subsidy <- function(sample_file,
   }
   
   #check other params
-  params <- c(cbdc_hourly_cap, fdc_hourly_cap, oshc_hourly_cap, ihc_hourly_cap, 
-              annual_cap_income, annual_cap_subsidy,
-              income_test_bracket_1, income_test_bracket_2, income_test_bracket_3, income_test_bracket_4, income_test_bracket_5,
-              taper_1, taper_2, taper_3,
-              activity_test_1_brackets, activity_test_1_hours)
+  check_numeric(Cbdc_hourly_cap)
+  check_numeric(Fdc_hourly_cap)
+  check_numeric(Oshc_hourly_cap)
+  check_numeric(Ihc_hourly_cap)
+  check_numeric(Annual_cap_income)
+  check_numeric(Annual_cap_subsidy)
+  check_numeric(Income_test_bracket_1)
+  check_numeric(Income_test_bracket_2)
+  check_numeric(Income_test_bracket_3)
+  check_numeric(Income_test_bracket_4)
+  check_numeric(Income_test_bracket_5)
+  check_numeric(Taper_1)
+  check_numeric(Taper_2)
+  check_numeric(Taper_3)
+  check_numeric(Activity_test_1_brackets)
+  check_numeric(Activity_test_1_hours)
   
-  for (i in params) {
-    if (!is.null(i)) {
-      check_numeric(i)
-    }
-  }
+  check_TF(calc_baseline_ccs)
   
   #Actual calculation
   
   Family_annual_income = sample_file[['family_annual_income']]
-  Activity_level = sample
-  Activity_exemption = FALSE
-  Child_age = 3
-  Type_of_day_care = c("cbdc", "oshc", "fdc", "ihc")
-  Hours_day_care_fortnight
-  Cost_hour
-  Early_education_program = FALSE
+  Activity_level = sample_file[['activity_level']]
+  Activity_exemption = sample_file[['activity_exemption']]
+  Child_age = sample_file[['child_age']]
+  Type_of_day_care = sample_file[['type_of_day_care']]
+  Cost_hour = sample_file[['cost_hour']]
+  Hours_day_care_fortnight = sample_file[['hours_day_care_fortnight']]
+  Early_education_program = sample_file[['early_education_program']]
   
   if (calc_baseline_ccs && return. != "new_ccs") {
-    baseline_ccs <- child_care_subsidy()
+    baseline_ccs <- child_care_subsidy(family_annual_income = Family_annual_income,
+                                       activity_level = Activity_level,
+                                       activity_exemption = Activity_exemption,
+                                       child_age = Child_age,
+                                       type_of_day_care = Type_of_day_care,
+                                       cost_hour = Cost_hour,
+                                       hours_day_care_fortnight = Hours_day_care_fortnight,
+                                       early_education_program = Early_education_program)
     
     set(sample_file,
-        j = "baseline_ra",
+        j = "baseline_css",
         value = switch(return.,
                        "sample_file" = baseline_ra,
                        "sample_file.int" = as.integer(baseline_ra)))
   }
+  
+  css <- child_care_subsidy(family_annual_income = Family_annual_income,
+                            activity_level = Activity_level,
+                            activity_exemption = Activity_exemption,
+                            child_age = Child_age,
+                            type_of_day_care = Type_of_day_care,
+                            cost_hour = Cost_hour,
+                            hours_day_care_fortnight = Hours_day_care_fortnight,
+                            early_education_program = Early_education_program,
+                            
+                            cbdc_hourly_cap = Cbdc_hourly_cap,
+                            fdc_hourly_cap = Fdc_hourly_cap,
+                            oshc_hourly_cap = Oshc_hourly_cap,
+                            ihc_hourly_cap = Ihc_hourly_cap,
+                            
+                            annual_cap_income = Annual_cap_income,
+                            annual_cap_subsidy = Annual_cap_subsidy,
+                            
+                            income_test_bracket_1 = Income_test_bracket_1,
+                            income_test_bracket_2 = Income_test_bracket_2,
+                            income_test_bracket_3 = Income_test_bracket_3,
+                            income_test_bracket_4 = Income_test_bracket_4,
+                            income_test_bracket_5 = Income_test_bracket_5,
+                            taper_1 = Taper_1,
+                            taper_2 = Taper_2,
+                            taper_3 = Taper_3,
+                            
+                            activity_test_1_brackets = Activity_test_1_brackets,
+                            activity_test_1_hours = Activity_test_1_hours)
   
 }

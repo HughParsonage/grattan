@@ -4,20 +4,23 @@
 \alias{model_child_care_subsidy}
 \title{Model Child Care Subsidy}
 \usage{
-model_child_care_subsidy(sample_file = 1, cbdc_hourly_cap = 11.77,
-  fdc_hourly_cap = 10.9, oshc_hourly_cap = 10.29,
-  ihc_hourly_cap = 25.48, annual_cap_income = 186958,
-  annual_cap_subsidy = 10190, income_test_bracket_1 = 66958,
-  income_test_bracket_2 = 171958, income_test_bracket_3 = 251248,
-  income_test_bracket_4 = 341248, income_test_bracket_5 = 354248,
-  taper_1 = 0.85, taper_2 = 0.5, taper_3 = 0.2,
-  activity_test_1_brackets = c(0, 8, 16.00001, 48.00001),
-  activity_test_1_hours = c(0, 36, 72, 100),
-  calc_baseline_subsidy = TRUE, return. = c("sample_file",
-  "new_subsidy"))
+model_child_care_subsidy(sample_file, Cbdc_hourly_cap = NULL,
+  Fdc_hourly_cap = NULL, Oshc_hourly_cap = NULL,
+  Ihc_hourly_cap = NULL, Annual_cap_income = NULL,
+  Annual_cap_subsidy = NULL, Income_test_bracket_1 = NULL,
+  Income_test_bracket_2 = NULL, Income_test_bracket_3 = NULL,
+  Income_test_bracket_4 = NULL, Income_test_bracket_5 = NULL,
+  Taper_1 = NULL, Taper_2 = NULL, Taper_3 = NULL,
+  Activity_test_1_brackets = NULL, Activity_test_1_hours = NULL,
+  calc_baseline_ccs = TRUE, return. = c("sample_file", "new_ccs",
+  "sample_file.int"))
 }
 \arguments{
 \item{sample_file}{A sample file having the same variables as the data.frame in the example.}
+
+\item{return.}{What should the function return? One of \code{subsidy}, \code{sample_file}, or \code{sample_file.int}. 
+If \code{subsidy}, the subsidy received under the settings; if \code{sample_file}, the \code{sample_file},
+but with variables \code{subsidy} and possibly \code{new_subsidy}; if \code{sample_file.int}, same as \code{sample_file} but \code{new_subsidy} is coerced to integer.}
 
 \item{cbdc_hourly_cap, fdc_hourly_cap, oshc_hourly_cap, ihc_hourly_cap}{(numeric) The lower of `cost_hour` or the relevant `hourly_cap` will be used in the calculation of the subsidy.}
 
@@ -34,10 +37,6 @@ model_child_care_subsidy(sample_file = 1, cbdc_hourly_cap = 11.77,
 \item{activity_test_1_hours}{(numeric vector) The hours corresponding to the step increase in `activity_test_1_brackets`.}
 
 \item{calc_baseline_subsidy}{(logical, default: \code{TRUE}) Should the current child care subsidy be included as a column in the result?}
-
-\item{return.}{What should the function return? One of \code{subsidy}, \code{sample_file}, or \code{sample_file.int}. 
-If \code{subsidy}, the subsidy received under the settings; if \code{sample_file}, the \code{sample_file},
-but with variables \code{subsidy} and possibly \code{new_subsidy}; if \code{sample_file.int}, same as \code{sample_file} but \code{new_subsidy} is coerced to integer.}
 }
 \description{
 The child care subsidy if threshholds and rates are changed.
