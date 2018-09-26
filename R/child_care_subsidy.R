@@ -75,7 +75,7 @@ child_care_subsidy <- function(family_annual_income = 0,
   
   arguments <- ls()
   argument_vals <- as.list(environment())
-  type_of_day_care <- match.arg(type_of_day_care)
+  type_of_day_care <- match.arg(type_of_day_care, several.ok = TRUE)
   
   if (!is.numeric(family_annual_income)) {
     stop("`family_annual_income` was type ", typeof(family_annual_income),", but must be numeric.")
@@ -151,11 +151,11 @@ child_care_subsidy <- function(family_annual_income = 0,
                                      36, 0)]
   .data[, activity_test_4 := if_else(activity_exemption, 100, 0)]
   
-  .data[, activity_test := pmax(activity_test_1, activity_test_2, activity_test_3, activity_test_4)]
+  .data[, activity_test := pmaxV(activity_test_1, activity_test_2, activity_test_3, activity_test_4)]
   
   
   #calculation
-  output <- .data[, pminC(pminC(cost_hour, hourly_cap) * income_test * pminC(hours_day_care_fortnight, activity_test) * 365/14,
+  output <- .data[, pminV(pminV(cost_hour, hourly_cap) * income_test * pminV(hours_day_care_fortnight, activity_test) * 365/14,
                           annual_cap)]
 
   output

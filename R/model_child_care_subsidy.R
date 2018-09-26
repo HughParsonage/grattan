@@ -109,13 +109,13 @@ model_child_care_subsidy <- function(sample_file,
                                        early_education_program = Early_education_program)
     
     set(sample_file,
-        j = "baseline_css",
+        j = "baseline_ccs",
         value = switch(return.,
                        "sample_file" = baseline_ra,
                        "sample_file.int" = as.integer(baseline_ra)))
   }
   
-  css <- child_care_subsidy(family_annual_income = Family_annual_income,
+  ccs <- child_care_subsidy(family_annual_income = Family_annual_income,
                             activity_level = Activity_level,
                             activity_exemption = Activity_exemption,
                             child_age = Child_age,
@@ -143,5 +143,10 @@ model_child_care_subsidy <- function(sample_file,
                             
                             activity_test_1_brackets = Activity_test_1_brackets,
                             activity_test_1_hours = Activity_test_1_hours)
+  
+  switch(return.,
+        "new_ccs" = ccs[],
+        "sample_file" = set(sample_file, j = "new_ra", value = ccs)[],
+        "sample_file.int" = set(sample_file, j = "new_ra", value = as.integer(ccs))[])
   
 }
