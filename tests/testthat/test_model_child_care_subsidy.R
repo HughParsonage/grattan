@@ -1,4 +1,4 @@
-context("Model Child Crae Subsidy")
+context("Model Child Care Subsidy")
 
 test_that("Values", {
   library(data.table)
@@ -30,8 +30,8 @@ test_that("Values", {
                       
                       tactivity_test_1_brackets = c(0, 8, 16.00001, 48.00001),
                       tactivity_test_1_hours = c(0, 36, 72, 100),
-                      ret = "new_css") {
-    css <- model_child_care_subsidy(sample_file,
+                      ret = "new_ccs") {
+    css <- model_child_care_subsidy(sample,
                                     
                                     Cbdc_hourly_cap = tcbdc_hourly_cap,
                                     Fdc_hourly_cap = tfdc_hourly_cap,
@@ -53,8 +53,8 @@ test_that("Values", {
                                     Activity_test_1_brackets = tactivity_test_1_brackets,
                                     Activity_test_1_hours = tactivity_test_1_hours,
                                     
-                                    return. = "new_css")
-    if (ret == "new_css") {
+                                    return. = ret)
+    if (ret == "new_ccs") {
       sum(css) 
     } else {
       css
