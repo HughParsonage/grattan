@@ -111,8 +111,8 @@ model_child_care_subsidy <- function(sample_file,
     set(sample_file,
         j = "baseline_ccs",
         value = switch(return.,
-                       "sample_file" = baseline_ra,
-                       "sample_file.int" = as.integer(baseline_ra)))
+                       "sample_file" = baseline_ccs,
+                       "sample_file.int" = as.integer(baseline_ccs)))
   }
   
   ccs <- child_care_subsidy(family_annual_income = Family_annual_income,

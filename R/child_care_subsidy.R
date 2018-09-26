@@ -151,7 +151,7 @@ child_care_subsidy <- function(family_annual_income = 0,
                                      36, 0)]
   .data[, activity_test_4 := if_else(activity_exemption, 100, 0)]
   
-  .data[, activity_test := pmaxV(activity_test_1, activity_test_2, activity_test_3, activity_test_4)]
+  .data[, activity_test := pmax(activity_test_1, activity_test_2, activity_test_3, activity_test_4)]
   
   
   #calculation
