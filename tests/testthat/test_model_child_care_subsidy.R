@@ -67,22 +67,22 @@ test_that("Values", {
   expect_gt(m1819_3(tfdc_hourly_cap = 10),
             m1819_3(tfdc_hourly_cap = 9))
   
-  expect_gt(m1819_3(Annual_cap_income = 10000, tannual_cap_subsidy = 1000),
-            m1819_3(Annual_cap_income = 10000, tannual_cap_subsidy = 100))
+  expect_gt(m1819_3(tannual_cap_income = 100000, tannual_cap_subsidy = 1000),
+            m1819_3(tannual_cap_income = 100000, tannual_cap_subsidy = 100))
   
   expect_gt(m1819_3(tincome_test_bracket_1 = 60000),
             m1819_3(tincome_test_bracket_1 = 50000))
   
   expect_gt(m1819_3(tincome_test_bracket_2 = 180000),
-            m1819_3(tincome_test_bracket_2 = 170000))
+            m1819_3(tincome_test_bracket_2 = 100000))
   
-  expect_gt(m1819_3(ttaper_1 = 0.75),
-            m1819_3(ttaper_1 = 0.85))
+  expect_gt(m1819_3(ttaper_1 = 0.85),
+            m1819_3(ttaper_1 = 0.75))
   
   expect_true(is.data.table(m1819_3(ret = "sample_file")))
   expect_true(is.data.table(m1819_3(ret = "sample_file.int")))
   expect_true(is.integer(.subset2(m1819_3(ret = "sample_file.int"),
-                                  "baseline_css")))
+                                  "baseline_ccs")))
 })
 
 test_that("Errors", {
@@ -109,7 +109,4 @@ test_that("Errors", {
   expect_error(model_child_care_subsidy(sample, 
                                         Cbdc_hourly_cap = "10"),
                regexp = "`Cbdc_hourly_cap` was type character, but must be numeric.")
-  expect_error(model_child_care_subsidy(sample, 
-                                        Cbdc_hourly_cap = c(10,20)),
-               regexp = "`Cbdc_hourly_cap` had length 2 but must be length-one.")
 })
