@@ -56,11 +56,11 @@ test_that("Income means testing couple", {
   expect_equal(age_pension(fy.year = "2015-16",
                            has_partner = TRUE,
                            # http://guides.dss.gov.au/guide-social-security-law/4/10/3
-                           annual_income = c(0, 3000, 3744, 4744, 40e3)), 
+                           annual_income = c(0, 6000, 7488, 8488, 80e4)),
                c(15576.60, 
                  15576.60, 
                  15576.60,
-                 15576.60 - 1000 * 0.5,
+                 15576.60 - 1000 * 0.25,
                  0))
 })
   

@@ -80,7 +80,7 @@ age_pension <- function(fortnightly_income = 0,
   
   
   
-  Income <- 
+  HH_Income <- 
     HasPartner <- 
     PartnerIncome <-
     Assets <- 
@@ -88,10 +88,9 @@ age_pension <- function(fortnightly_income = 0,
     IlnnessSeparated <- NULL
   
   input <- 
-    data.table(Income = annual_income, 
+    data.table(HH_Income = annual_income + partner_annual_income, 
                HasPartner = has_partner, 
                n_dependants = n_dependants,
-               PartnerIncome = partner_annual_income,
                PartnerPensioner = partner_pensioner,
                Date = as.Date(Date), 
                Assets = assets_value, 
@@ -176,7 +175,7 @@ age_pension <- function(fortnightly_income = 0,
   D[, deemed_income := deeming_rate_below * pminV(threshold, FinancialAssets)]
   D[FinancialAssets > threshold,
     deemed_income := deemed_income + deeming_rate_above * pmaxC(FinancialAssets - threshold, 0)]
-  D[, Income := Income + deemed_income]
+  D[, HH_Income := HH_Income + deemed_income]
   
   # if (is_testing())print(A); print(B); print(C)
   age_pension_income <-
@@ -186,12 +185,12 @@ age_pension <- function(fortnightly_income = 0,
   
   out <- 
     D %>%
-    .[, partner_asset_test_reduction := (-1/2 * HasPartner + 1)] %>% 
-    .[, age_pension_income := pminV(pmaxC(max_rate - 0.5 * (Income - permissible_income),
+    .[, partner_test_reduction := (-1/2 * HasPartner + 1)] %>% 
+    .[, age_pension_income := pminV(pmaxC(max_rate - partner_test_reduction * 0.5 * (HH_Income - (has_partner + 1) * permissible_income),
                                           0),
                                     max_rate)] %>%
     .[, assets_excess := pmaxC(Assets - assets_test, 0)] %>%
-    .[, age_pension_assets := pminV(pmaxC(max_rate - partner_asset_test_reduction * 19.5 * floor(assets_excess / 250), 0), max_rate)] %>%
+    .[, age_pension_assets := pminV(pmaxC(max_rate - partner_test_reduction * 19.5 * floor(assets_excess / 250), 0), max_rate)] %>%
     setorderv("ordering") %>%
     .[, pminV(age_pension_income, 
               age_pension_assets)]
