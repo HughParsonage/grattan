@@ -112,7 +112,7 @@ test_that("Assets means testing couple non-homeowner", {
                            # Assets limit 440500:
                            # http://guides.dss.gov.au/guide-social-security-law/4/10/3
                            assets = c(0, 440500, 446.5e3)),
-               c(15576.60, 15576.60, 15576.60 - floor(6000/250) * 19.5))
+               c(15576.60, 15576.60, 15576.60 - 1/2 * floor(6000/250) * 19.5))
 })
 
 test_that("Assets means testing couple homeowner", {
@@ -129,7 +129,7 @@ test_that("Assets means testing couple homeowner", {
                            # Assets limit 291,500:
                            # http://guides.dss.gov.au/guide-social-security-law/4/10/3
                            assets = c(0, 291500, 292500)),
-               c(15576.60, 15576.60, 15576.60 - floor(1000/250) * 19.5))
+               c(15576.60, 15576.60, 15576.60 - 1/2 * floor(1000/250) * 19.5))
 })
 
 test_that("today helper", {

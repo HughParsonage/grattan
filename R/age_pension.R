@@ -186,11 +186,12 @@ age_pension <- function(fortnightly_income = 0,
   
   out <- 
     D %>%
+    .[, partner_asset_test_reduction := (-1/2 * HasPartner + 1)] %>% 
     .[, age_pension_income := pminV(pmaxC(max_rate - 0.5 * (Income - permissible_income),
                                           0),
                                     max_rate)] %>%
     .[, assets_excess := pmaxC(Assets - assets_test, 0)] %>%
-    .[, age_pension_assets := pminV(pmaxC(max_rate - 19.5 * floor(assets_excess / 250), 0), max_rate)] %>%
+    .[, age_pension_assets := pminV(pmaxC(max_rate - partner_asset_test_reduction * 19.5 * floor(assets_excess / 250), 0), max_rate)] %>%
     setorderv("ordering") %>%
     .[, pminV(age_pension_income, 
               age_pension_assets)]
