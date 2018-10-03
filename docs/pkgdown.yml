@@ -1,7 +1,8 @@
 pandoc: 1.19.2.1
-pkgdown: 1.1.0
-pkgdown_sha: ~
+pkgdown: 1.1.0.9000
+pkgdown_sha: b2798656f04ce282edea3e12734ba5588c6acd6e
 articles:
+  datatable-implementation: datatable-implementation.html
   grattan: grattan.html
   budget-2018: long-vignettes/budget-2018.html
 

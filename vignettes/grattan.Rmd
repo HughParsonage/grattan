@@ -50,19 +50,23 @@ hutils::provide.dir(templib)
 ```
 
 ```{r loadPackages-3}
-install.packages("https://raw.githubusercontent.com/hughparsonage/tax-drat/master/src/contrib/taxstats_0.0.5.1415.tar.gz",
-                 dependencies = FALSE,
-                 quiet = TRUE,
-                 lib = templib,
-                 verbose = FALSE,
-                 repos = NULL)
-```
-
-```{r loadPackages-4}
-library("taxstats",
-        lib.loc = templib,
-        verbose = TRUE,
-        character.only = TRUE)
+if (requireNamespace("taxstats1516", quietly = TRUE) &&
+    requireNamespace("taxstats", quietly = TRUE)) {
+  library(taxstats)
+  library(taxstats1516)
+} else {
+  install.packages("https://raw.githubusercontent.com/hughparsonage/tax-drat/master/src/contrib/taxstats_0.0.5.1415.tar.gz",
+                   dependencies = FALSE,
+                   quiet = TRUE,
+                   lib = templib,
+                   verbose = FALSE,
+                   repos = NULL)
+  
+  library("taxstats",
+          lib.loc = templib,
+          verbose = TRUE,
+          character.only = TRUE)
+}
 ```
 
 ```{r sample_files_all}
@@ -154,6 +158,7 @@ avg_tax_by_decile_2021 <-
   .[, .(avg_tax = mean(avg_tax)),
     keyby = .(decile = weighted_ntile(Taxable_Income, n = 10))]
 ```
+
 
 We can then plot a comparison of these table by joining them and using `ggplot2`. 
 Since the tables are already keyed by `decile`, we can use the `X[Y]` method from `data.table` to join by `decile`.

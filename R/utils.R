@@ -100,4 +100,48 @@ qtrs_ahead <- function(x, y) {
   qtrs_ahead
 }
 
+# vectorized switch 
+# e.g. Switch(c("A", "B", "C", "A"), "A" = 1, "B" = 2, "C" = 11:14)
+Switch <- function(Expr, ..., DEFAULT) {
+  max.length <- max(prohibit_vector_recycling.MAXLENGTH(...), 
+                    length(DEFAULT))
+  out <- rep_len(DEFAULT, max.length)
+  dots <- list(...)
+  dot_noms <- names(dots)
+  for (n in seq_along(dots)) {
+    w <- which(Expr == dot_noms[n])
+    n_res <- switch(n, ...)
+    if (length(n_res) == 1L) {
+      out[w] <- n_res
+    } else {
+      out[w] <- n_res[w]
+    }
+  }
+  out
+}
+
+
+# NOTE: FUN must return the same length as 'x'. e.g. mean will fail badly.
+accel_repetitive_input <- function(x, FUN, ..., THRESHOLD = 1000L) {
+  .FUN <- match.fun(FUN)
+  if (length(x) <= 1L || length(x) < THRESHOLD) {
+    .FUN(x)
+  } else {
+    DT <- setDT(list(x = x))
+    .subset2(DT[, "res" := .FUN(.BY[[1L]], ...), by = "x"], "res")
+  }
+}
+
+.getOption <- function(x, default = NULL) {
+  ans <- getOption(x)
+  if (is.null(ans)) {
+    default
+  } else {
+    ans
+  }
+}
+
+is.Date <- function(x) inherits(x, "Date")
+
+
 

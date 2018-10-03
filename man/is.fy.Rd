@@ -14,6 +14,9 @@
 \item{fy.yr}{A string suspected to be a financial year.}
 
 \item{date}{A string or date for which the financial year is desired. Note that \code{yr2fy} does not check its argument is an integer.}
+
+\item{assume1901_2100}{For \code{yr2fy}, assume that \code{yr_ending} is between 1901 and 2100, 
+for performance. By default, set to `getOption("grattan.assume1901_2100", TRUE)`.}
 }
 \value{
 For \code{is.fy}, a logical, whether its argument is a financial year.
@@ -31,6 +34,10 @@ For the inverses, a numeric corresponding to the year.
 }
 \description{
 Convenience functions for dealing with financial years
+}
+\details{
+The following forms are permitted: \code{2012-13}, \code{201213}, \code{2012 13}, only.
+However, the \code{2012-13} form is preferred and will improve performance.
 }
 \examples{
 is.fy("2012-13")

@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grattan</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.0.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.4.0</span>
       </span>
     </div>
 
@@ -86,6 +86,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/datatable-implementation.html">Calculations of income tax are rolling joins</a>
+    </li>
     <li>
       <a href="../articles/long-vignettes/budget-2018.html">Budget 2018 modelling</a>
     </li>
@@ -126,9 +129,11 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>wage_inflator</span>(<span class='kw'>wage</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>from_fy</span>, <span class='no'>to_fy</span>, <span class='kw'>useABSConnection</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>allow.projection</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>forecast.series</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"mean"</span>, <span class='st'>"upper"</span>, <span class='st'>"lower"</span>,
-  <span class='st'>"custom"</span>), <span class='kw'>forecast.level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>wage.series</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>wage_inflator</span>(<span class='kw'>wage</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>from_fy</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>to_fy</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>useABSConnection</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>allow.projection</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>forecast.series</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"mean"</span>, <span class='st'>"upper"</span>, <span class='st'>"lower"</span>, <span class='st'>"custom"</span>),
+  <span class='kw'>forecast.level</span> <span class='kw'>=</span> <span class='fl'>95</span>, <span class='kw'>wage.series</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>accelerate.above</span> <span class='kw'>=</span> <span class='fl'>100000L</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -138,16 +143,14 @@
       <td><p>The amount to be inflated (1 by default).</p></td>
     </tr>
     <tr>
-      <th>from_fy</th>
-      <td><p>A character vector of the form "2012-13" representing the FY ending that the wage index is to be taken (i.e. Q4 in that year). FY year must be 1996-97 or later.</p></td>
-    </tr>
-    <tr>
-      <th>to_fy</th>
-      <td><p>The FY ending that the wage index is to be taken.</p></td>
+      <th>from_fy, to_fy</th>
+      <td><p>(character) a character vector with each element in the form "2012-13" representing the financial years between which the CPI inflator is desired.</p>
+<p>If both <code>from_fy</code> and <code>to_fy</code> are <code>NULL</code> (the default), <code>from_fy</code> is set to the previous financial year and <code>to_fy</code> to the current financial year, with a warning. Setting only one is an error.</p></td>
     </tr>
     <tr>
       <th>useABSConnection</th>
-      <td><p>Should the function connect with ABS.Stat via an SDMX connection? If <code>FALSE</code> (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. The internal data was updated on 2018-05-21 to include data up to 2018-Q1.</p></td>
+      <td><p>Should the function connect with ABS.Stat via an SDMX connection? If <code>FALSE</code> (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.
+The internal data was updated on 2018-08-17 to 2018-Q2.</p></td>
     </tr>
     <tr>
       <th>allow.projection</th>
@@ -170,6 +173,13 @@ The future wage series can be provided in two ways:
 the variable <code>fy_year</code> must be a vector of all financial years after the last financial year in the (known) wage series and the latest <code>to_fy</code> <strong>inclusive</strong>.
 The variable <code>r</code> consists of rates of wage growth assumed in each <code>fy_year</code>.</p></td>
     </tr>
+    <tr>
+      <th>accelerate.above</th>
+      <td><p>An integer setting the threshold for 'acceleration'. 
+When the maximum length of the arguments exceeds this value, calculate each unique value individually 
+then combine. Set to 100,000 as a rule of thumb beyond which calculation speeds benefit
+dramatically. Can be set to <code>Inf</code> to disable acceleration.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -184,7 +194,8 @@ The variable <code>r</code> consists of rates of wage growth assumed in each <co
 <span class='fu'>wage_inflator</span>(<span class='kw'>from_fy</span> <span class='kw'>=</span> <span class='st'>"2016-17"</span>,
               <span class='kw'>to_fy</span> <span class='kw'>=</span> <span class='st'>"2017-18"</span>,
               <span class='kw'>forecast.series</span> <span class='kw'>=</span> <span class='st'>"custom"</span>,
-              <span class='kw'>wage.series</span> <span class='kw'>=</span> <span class='fl'>0.05</span>)</div><div class='output co'>#&gt; [1] 1.05</div><div class='input'>
+              <span class='kw'>wage.series</span> <span class='kw'>=</span> <span class='fl'>0.05</span>)</div><div class='output co'>#&gt; [1] 1.020586</div><div class='input'>
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -202,7 +213,7 @@ The variable <code>r</code> consists of rates of wage growth assumed in each <co
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, William Young.</p>
+  <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, Matthew Katzen, William Young.</p>
 </div>
 
 <div class="pkgdown">

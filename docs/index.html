@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">grattan</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.0.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.4.0</span>
       </span>
     </div>
 
@@ -57,6 +57,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/datatable-implementation.html">Calculations of income tax are rolling joins</a>
+    </li>
+    <li>
       <a href="articles/long-vignettes/budget-2018.html">Budget 2018 modelling</a>
     </li>
   </ul>
@@ -98,7 +101,6 @@
 <a href="#overview" class="anchor"></a>Overview</h1>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"grattan"</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(grattan)</code></pre></div>
-<pre><code>## Last change: test_weighted_ntile.R at 2018-06-17 19:08:13 (1 days ago).</code></pre>
 <div id="income_tax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#income_tax" class="anchor"></a><code>income_tax</code>
@@ -201,7 +203,7 @@ s1314 <span class="op">%&gt;%</span>
              <span class="dt">group =</span> id)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
-<p><img src="index_files/figure-html/compare-30-37-42-thresholds-1.png" width="700"></p>
+<p><img src="index_files/figure-html/compare-30-37-42-thresholds-1.svg" width="700"></p>
 </div>
 </div>
 <div id="access-abs-data" class="section level2">
@@ -214,7 +216,105 @@ s1314 <span class="op">%&gt;%</span>
 <a href="#news" class="anchor"></a>NEWS</h1>
 <div id="section" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section" class="anchor"></a>1.6.1.0</h2>
+<a href="#section" class="anchor"></a>1.6.4.0</h2>
+<div id="section-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#section-1" class="anchor"></a>2018-08-19</h3>
+<ul>
+<li>Potentially minor breaking change: <code><a href="reference/is.fy.html">yr2fy(x)</a></code> no longer works for x = 1900L, despite a unit test, for the sake of performance.</li>
+</ul>
+<pre><code>  #&gt; Last change: NAMESPACE at 2018-08-19 14:47:14 (4 mins ago).
+  #&gt; Unit: milliseconds
+  #&gt;       expr min  lq mean median  uq max neval cld
+  #&gt;   yr2fy(z)  75  88   98     90 101 161   100  a 
+  #&gt;  .yr2fy(z) 274 286  298    297 302 359   100   b</code></pre>
+<p>Use <code><a href="reference/is.fy.html">yr2fy(x, assume1901_2100 = FALSE)</a></code> if you need the old behaviour.</p>
+</div>
+<div id="new-functions" class="section level3">
+<h3 class="hasAnchor">
+<a href="#new-functions" class="anchor"></a>New functions:</h3>
+<ul>
+<li>
+<code>rent_assistance</code> the Commonwealth Rent Assistance</li>
+<li>
+<code>model_rent_assistance</code> as experimental function for modelling changes to rent assistance.</li>
+<li>
+<code>mutate_ntile</code> and <code>mutate_weighted_ntile</code> for adding quantile columns</li>
+</ul>
+</div>
+</div>
+<div id="section-2" class="section level2">
+<h2 class="hasAnchor">
+<a href="#section-2" class="anchor"></a>1.6.3.0</h2>
+<div id="section-3" class="section level3">
+<h3 class="hasAnchor">
+<a href="#section-3" class="anchor"></a>2018-08-18</h3>
+<ul>
+<li>New allowances functions (usable for the 2015-16 financial year)
+<ul>
+<li>
+<code>age_pension</code>,</li>
+<li><code>carer_payment</code></li>
+<li><code>carers_allowance</code></li>
+<li><code>energy_supplement</code></li>
+<li><code>family_tax_benefit</code></li>
+<li><code>newstart_allowance</code></li>
+<li><code>pension_supplement</code></li>
+</ul>
+</li>
+<li>Data has been updated for wage, CPI, and labour force inflators.</li>
+</ul>
+<p>Bug fixes:</p>
+<ul>
+<li>
+<code>inflator</code> no longer fails when <code>to_fy</code> is length &gt; 1 and unordered.</li>
+<li>
+<code>inflator</code> and <code>cpi_inflator</code>, <code>lf_inflator_fy</code>, and <code>wage_inflator</code> are now much faster when either <code>from_fy</code> or <code>to_fy</code> have more than 100,000 elements:</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">19952010</span>)
+from_fys &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw"><a href="reference/is.fy.html">yr2fy</a></span>(<span class="dv">1995</span><span class="op">:</span><span class="dv">2010</span>), <span class="dt">size =</span> <span class="fl">1e6</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
+<span class="kw">microbenchmark</span>(<span class="kw"><a href="reference/cpi_inflator.html">cpi_inflator</a></span>(<span class="dt">from_fy =</span> from_fys, <span class="dt">to_fy =</span> <span class="st">"2015-16"</span>))
+<span class="co"># Old</span>
+Unit<span class="op">:</span><span class="st"> </span>seconds
+                                                expr      min      lq     mean   median       uq
+ <span class="kw"><a href="reference/cpi_inflator.html">cpi_inflator</a></span>(<span class="dt">from_fy =</span> from_fys, <span class="dt">to_fy =</span> <span class="st">"2015-16"</span>) <span class="fl">1.519483</span> <span class="fl">1.54438</span> <span class="fl">1.550628</span> <span class="fl">1.549735</span> <span class="fl">1.554507</span>
+      max neval
+ <span class="fl">1.661502</span>   <span class="dv">100</span>
+ 
+<span class="co"># New</span>
+Unit<span class="op">:</span><span class="st"> </span>milliseconds
+                                                expr      min       lq     mean   median       uq
+ <span class="kw"><a href="reference/cpi_inflator.html">cpi_inflator</a></span>(<span class="dt">from_fy =</span> from_fys, <span class="dt">to_fy =</span> <span class="st">"2015-16"</span>) <span class="fl">40.71753</span> <span class="fl">41.94061</span> <span class="fl">47.93162</span> <span class="fl">42.93946</span> <span class="fl">48.08461</span>
+      max neval
+ <span class="fl">191.3497</span>   <span class="dv">100</span></code></pre></div>
+<ul>
+<li>Fixed failing interaction between temporary budget repair levy and small business tax offset in 2016-17.</li>
+<li>
+<code>*_inflator</code> functions now return correct results for non-standard but supported financial years.</li>
+</ul>
+</div>
+</div>
+<div id="section-4" class="section level2">
+<h2 class="hasAnchor">
+<a href="#section-4" class="anchor"></a>1.6.2.0</h2>
+<div id="section-5" class="section level3">
+<h3 class="hasAnchor">
+<a href="#section-5" class="anchor"></a>2018-06-28</h3>
+<ul>
+<li>Added default values to the following functions:
+<ul>
+<li>
+<code>income_tax</code>, <code>income_tax_sapto</code>: the default value for fy.year is the current financial year</li>
+<li>
+<code>cpi_inflator</code>, <code>lf_inflator_fy</code>, <code>wage_inflator</code>: if both from_fy and to_fy are missing, the default values become the previous and current financial years respectively. If only one of the two are missing, an error appears.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="section-6" class="section level2">
+<h2 class="hasAnchor">
+<a href="#section-6" class="anchor"></a>1.6.1.0</h2>
 <ul>
 <li>New functions:
 <ul>
@@ -232,14 +332,16 @@ s1314 <span class="op">%&gt;%</span>
 </li>
 <li>
 <code>taxstats1516</code> is now a suggested dependency.</li>
+<li>
+<code>income_tax</code> is about twice as fast since 1.6.0.0: 1.5-2.0s down from 3.0-3.7s on the 100% population (13 million)</li>
 </ul>
 </div>
-<div id="section-1" class="section level2">
+<div id="section-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-1" class="anchor"></a>1.6.0.0</h2>
-<div id="section-2" class="section level3">
+<a href="#section-7" class="anchor"></a>1.6.0.0</h2>
+<div id="section-8" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-2" class="anchor"></a>2018-05-08</h3>
+<a href="#section-8" class="anchor"></a>2018-05-08</h3>
 <ul>
 <li>Never-legislated Medicare levy change in 2019-20 has been reverted</li>
 <li>Budget 2018:</li>
@@ -272,24 +374,24 @@ s1314 <span class="op">%&gt;%</span>
 </ul>
 </div>
 </div>
-<div id="section-3" class="section level2">
+<div id="section-9" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-3" class="anchor"></a>1.5.3.6</h2>
-<div id="section-4" class="section level3">
+<a href="#section-9" class="anchor"></a>1.5.3.6</h2>
+<div id="section-10" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-4" class="anchor"></a>2018-02-21</h3>
+<a href="#section-10" class="anchor"></a>2018-02-21</h3>
 <ul>
 <li>Labour force data and wage price index updated to 2018-02-21.</li>
 <li>Update as requested to fix failing unit tests relying on non-standard packages.</li>
 </ul>
 </div>
 </div>
-<div id="section-5" class="section level2">
+<div id="section-11" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-5" class="anchor"></a>1.5.3.1</h2>
-<div id="section-6" class="section level3">
+<a href="#section-11" class="anchor"></a>1.5.3.1</h2>
+<div id="section-12" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-6" class="anchor"></a>2018-01-22</h3>
+<a href="#section-12" class="anchor"></a>2018-01-22</h3>
 </div>
 <div id="new-features" class="section level3">
 <h3 class="hasAnchor">
@@ -326,12 +428,12 @@ s1314 <span class="op">%&gt;%</span>
 </ul>
 </div>
 </div>
-<div id="section-7" class="section level2">
+<div id="section-13" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-7" class="anchor"></a>1.5.2.5</h2>
-<div id="section-8" class="section level3">
+<a href="#section-13" class="anchor"></a>1.5.2.5</h2>
+<div id="section-14" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-8" class="anchor"></a>2017-11-16</h3>
+<a href="#section-14" class="anchor"></a>2017-11-16</h3>
 <ul>
 <li>Update wage data to 2017-Q3</li>
 <li>Update labour force data to 2017-09</li>
@@ -339,32 +441,32 @@ s1314 <span class="op">%&gt;%</span>
 <li>Vignettes now install <code>taxstats</code> to a temporary directory if not already installed, rather than the user or system’s library.</li>
 </ul>
 </div>
-<div id="section-9" class="section level3">
+<div id="section-15" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-9" class="anchor"></a>2017-10-27</h3>
+<a href="#section-15" class="anchor"></a>2017-10-27</h3>
 <ul>
 <li>Update CPI data</li>
 <li>Fix wage data</li>
 </ul>
 </div>
 </div>
-<div id="section-10" class="section level2">
+<div id="section-16" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-10" class="anchor"></a>1.5.2.3</h2>
-<div id="section-11" class="section level3">
+<a href="#section-16" class="anchor"></a>1.5.2.3</h2>
+<div id="section-17" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-11" class="anchor"></a>2017-10-21</h3>
+<a href="#section-17" class="anchor"></a>2017-10-21</h3>
 <ul>
 <li>Update labour-force data</li>
 </ul>
 </div>
 </div>
-<div id="section-12" class="section level2">
+<div id="section-18" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-12" class="anchor"></a>1.5.2.0</h2>
-<div id="section-13" class="section level3">
+<a href="#section-18" class="anchor"></a>1.5.2.0</h2>
+<div id="section-19" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-13" class="anchor"></a>2017-10-19</h3>
+<a href="#section-19" class="anchor"></a>2017-10-19</h3>
 <ul>
 <li>New internal C++ functions for <code>income_tax</code>, and related functions</li>
 <li>BTO function now uses tax scales from the <em>Income Tax Regulations</em>
@@ -372,35 +474,35 @@ s1314 <span class="op">%&gt;%</span>
 </ul>
 </div>
 </div>
-<div id="section-14" class="section level2">
+<div id="section-20" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-14" class="anchor"></a>1.5.1.2</h2>
-<div id="section-15" class="section level3">
+<a href="#section-20" class="anchor"></a>1.5.1.2</h2>
+<div id="section-21" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-15" class="anchor"></a>2017-10-15</h3>
+<a href="#section-21" class="anchor"></a>2017-10-15</h3>
 <ul>
 <li>Optional argument <code>age</code> in <code>income_tax</code> now <code>NULL</code> rather than <code>42</code>.<br>
 The default argument continues to result in SAPTO being not applied if <code>.dots.ATO</code>. However, if <code>.dots.ATO</code> is supplied (and the age variable has not been removed from it), the individuals’ SAPTO eligibility is determined by the age variable in <code>.dots.ATO</code>, rather than setting each individual’s SAPTO to 0.</li>
 </ul>
 </div>
-<div id="section-16" class="section level3">
+<div id="section-22" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-16" class="anchor"></a>2017-08-30</h3>
+<a href="#section-22" class="anchor"></a>2017-08-30</h3>
 <ul>
 <li>Update labour force data. Avoid segfault in separate package in unit test.</li>
 <li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
 </ul>
 </div>
-<div id="section-17" class="section level3">
+<div id="section-23" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-17" class="anchor"></a>2017-08-16</h3>
+<a href="#section-23" class="anchor"></a>2017-08-16</h3>
 <ul>
 <li>Update wage, CPI, labour force data</li>
 </ul>
 </div>
-<div id="section-18" class="section level3">
+<div id="section-24" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-18" class="anchor"></a>2017-07-02</h3>
+<a href="#section-24" class="anchor"></a>2017-07-02</h3>
 <ul>
 <li>Update wage and labour force data</li>
 <li>Fix breaking build due to change in dplyr API</li>
@@ -461,6 +563,7 @@ The default argument continues to result in SAPTO being not applied if <code>.do
 <li>Hugh Parsonage <br><small class="roles"> Author, maintainer </small>  </li>
 <li>Tim Cameron <br><small class="roles"> Author </small>  </li>
 <li>Brendan Coates <br><small class="roles"> Author </small>  </li>
+<li>Matthew Katzen <br><small class="roles"> Author </small>  </li>
 <li>William Young <br><small class="roles"> Author </small>  </li>
 <li><a href="authors.html">All authors...</a></li>
 </ul>
@@ -479,7 +582,7 @@ The default argument continues to result in SAPTO being not applied if <code>.do
 
 
       <footer><div class="copyright">
-  <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, William Young.</p>
+  <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, Matthew Katzen, William Young.</p>
 </div>
 
 <div class="pkgdown">

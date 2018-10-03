@@ -45,9 +45,9 @@ if (!exists("cache")) {
           is_less_than(2))
 }
 if (FALSE) {
-  if (interactive() && !is_knitting()) {
+  if (interactive() && !grattanCharts::is_knitting()) {
     stopifnot(file.exists("~/grattan/DESCRIPTION"))
-    pkgdown::build_site(pkg = "../..", lazy = TRUE)
+    # pkgdown::build_site(pkg = "../..", lazy = TRUE)
     for (svg in dir(path = "~/grattan/vignettes/long-vignettes/Budget2018-atlas/", 
                     pattern = "\\.svg$", 
                     full.names = TRUE)) {
@@ -62,7 +62,7 @@ if (FALSE) {
     
     change_pngs <- function(html) {
       html_lines <- readr::read_lines(html)
-      for (i in grep("((Budget2018.atlas)|(budget.2018_files)).*\\.png", html_lines)) {
+      for (i in grep("((Budget2018.atlas)|(budget.2018_files)|(compare.30.37.42.thresholds.1)).*\\.png", html_lines)) {
         html_lines[i] <- sub(".png", ".svg", html_lines[i], fixed = TRUE)
       }
       readr::write_lines(html_lines, html)
@@ -71,6 +71,17 @@ if (FALSE) {
                          pattern = "\\.html$", 
                          full.names = TRUE), 
                      change_pngs))
+    invisible(lapply(dir(path = "~/grattan/docs/", 
+                         pattern = "\\.html$", 
+                         full.names = TRUE), 
+                     change_pngs))
+    (all(vapply(dir(path = "~/grattan/vignettes/long-vignettes/",
+                             full.names = TRUE,
+                             recursive = TRUE,
+                             pattern = "\\.png$"),
+                         file.remove,
+                         FALSE)))
+    
     
   }
 }
@@ -405,6 +416,7 @@ medicare_levy_lower_up_for_each_child <- function(fy) {
 .project_to <- function(h, use.Treasury) {
   project(sample_file_1516,
           h = h,
+          fy.year.of.sample.file = "2015-16",
           wage.series = if (use.Treasury) wage_forecasts,
           lf.series = if (use.Treasury) lf_forecasts) %>%
     setkey(Taxable_Income)
@@ -412,30 +424,31 @@ medicare_levy_lower_up_for_each_child <- function(fy) {
 ```
 
 ```{r project_useTreasurys, cache=cache}
-.project_useTreasurys <- lapply(1:13, .project_to, use.Treasury = TRUE)
+.project_useTreasurys <- lapply(1:12, .project_to, use.Treasury = TRUE)
 ```
 
 ```{r .project_useGrattans, cache=cache}
-.project_useGrattans <- lapply(1:13, .project_to, use.Treasury = FALSE)
+.project_useGrattans <- lapply(1:12, .project_to, use.Treasury = FALSE)
 ```
 
 ```{r s2425_Treasury}
-if (file.exists("budget-2018_cache/s2425_Treasury.fst")) {
-  s2425_Treasury <- read_fst("budget-2018_cache/s2425_Treasury.fst", 
+# && cache generally because the filename must be known if cache = FALSE
+if (file.exists(s2425_Treasury.fst <- "budget-2018_cache/s2425_Treasury.fst") && cache) {
+  s2425_Treasury <- read_fst(s2425_Treasury.fst, 
                              as.data.table = TRUE)
 } else {
   s2425_Treasury <- .project_useTreasurys[[2025L - 2016L]]
-  write_fst(s2425_Treasury, "budget-2018_cache/s2425_Treasury.fst")
+  write_fst(s2425_Treasury, s2425_Treasury.fst)
 }
 ```
 
 ```{r s2728_Treasury}
-if (file.exists("budget-2018_cache/s2728_Treasury.fst")) {
-  s2728_Treasury <- read_fst("budget-2018_cache/s2728_Treasury.fst", 
+if (file.exists(s2728_Treasury.fst <- "budget-2018_cache/s2728_Treasury.fst") && cache) {
+  s2728_Treasury <- read_fst(s2728_Treasury.fst, 
                              as.data.table = TRUE)
 } else {
   s2728_Treasury <- .project_useTreasurys[[2028L - 2016L]]
-  write_fst(s2728_Treasury, "budget-2018_cache/s2728_Treasury.fst")
+  write_fst(s2728_Treasury, s2728_Treasury.fst)
 }
 ```
 
@@ -462,19 +475,19 @@ wage_r20 <-
 ```
 
 ```{r .project_useGrattans80, cache=cache}
-.project_useGrattans80 <- lapply(1:13, function(h) {
+.project_useGrattans80 <- lapply(1:12, function(h) {
   project(sample_file_1516, h = h, wage.series = wage_r80)
 })
 ```
 
 ```{r .project_useGrattans20, cache=cache}
-.project_useGrattans20 <- lapply(1:13, function(h) {
+.project_useGrattans20 <- lapply(1:12, function(h) {
   project(sample_file_1516, h = h, wage.series = wage_r20)
 })
 ```
 
 ```{r .project_useGrattans2.75, cache=TRUE}
-.project_useGrattans2.75 <- lapply(1:13, function(h) {
+.project_useGrattans2.75 <- lapply(1:12, function(h) {
   project(sample_file_1516, h = h, wage.series = 0.0275)
 })
 ```
@@ -1122,13 +1135,13 @@ from bracket creep. Certainly the plan reduces average tax rates in
 no changes to rates or brackets over that period.
 
 ```{r avgTaxRate50}
-avgTaxRate50 <- function(id, fy) {
+avgTaxRate50 <- function(idd, fy) {
   stopifnot(identical(key(avg_tax_rates_by_percentile_facet_fy), 
                       c("fy_year", "id", "Taxable_Income_percentile")),
-            length(id) == 1L,
+            length(idd) == 1L,
             length(fy) == 1L, 
             "avg_tax_rate" %in% names(avg_tax_rates_by_percentile_facet_fy))
-  avg_tax_rates_by_percentile_facet_fy[.(fy, id, 50L), avg_tax_rate]
+  avg_tax_rates_by_percentile_facet_fy[.(fy, idd, 50L), avg_tax_rate]
 }
 ```
 
@@ -1829,7 +1842,7 @@ bound_models[.("2027-28", "Budget2018"),
 
 ```{r s2728_various_wages}
 s2728_various_wages <-
-  if (file.exists(s2728_various_wages.fst <- "budget-2018_cache/s2728_various_wages.fst")) {
+  if (file.exists(s2728_various_wages.fst <- "budget-2018_cache/s2728_various_wages.fst") && cache) {
     read_fst(s2728_various_wages.fst, as.data.table = TRUE)
   } else {
     lapply(c(0.02, 0.025, 0.03, 0.035), function(wage_r) {
@@ -1960,12 +1973,14 @@ s2425_Deloitte_LF_growth <-
                    ordinary_tax_thresholds = ordinary_tax_thresholds("2024-25"), 
                    ordinary_tax_rates = ordinary_tax_rates("2024-25"),
                    Budget2018_lito_202223 = TRUE,
-                   medicare_levy_lower_threshold = medicare_levy_lower_threshold("2024-25"), 
-                   medicare_levy_upper_threshold = 31175,
-                   medicare_levy_lower_sapto_threshold = medicare_levy_lower_sapto_threshold("2024-25"), 
-                   medicare_levy_upper_sapto_threshold = 49300,
-                   medicare_levy_lower_family_threshold = medicare_levy_lower_family_threshold("2024-25"), 
-                   medicare_levy_lower_family_sapto_threshold = medicare_levy_lower_family_sapto_threshold("2024-25")) %>%
+                   # medicare_levy_rate = 0.02,
+                   # medicare_levy_taper = 0.1,
+                   medicare_levy_lower_threshold = medicare_levy_lower_threshold("2024-25"), # 24950
+                   medicare_levy_upper_threshold = 31188,
+                   medicare_levy_lower_sapto_threshold = medicare_levy_lower_sapto_threshold("2024-25"), # 39460
+                   medicare_levy_upper_sapto_threshold = 49325,
+                   medicare_levy_lower_family_threshold = medicare_levy_lower_family_threshold("2024-25"), # 54930
+                   medicare_levy_lower_family_sapto_threshold = medicare_levy_lower_family_sapto_threshold("2024-25")) %>% # 54930
   # Ensure number of taxpayers = 11.6 million
   .[new_tax >= 1, WEIGHT := 11.6e6 / sum(new_tax > 0)] %>%
   

@@ -21,7 +21,8 @@
 
 
 
-youth_allowance <- function(ordinary_income = 0,
+youth_allowance <- function(fortnightly_income = 0,
+                            annual_income = 0,
                             fy.year = date2fy(Sys.Date()),
                             age = 18,
                             eligible_if_over22 = FALSE,
@@ -38,7 +39,7 @@ youth_allowance <- function(ordinary_income = 0,
                             FT_YA_jobseeker_lower = 143,
                             FT_YA_jobseeker_upper = 250,
                             excess_partner_income_mu = 0.6) {
-  .NotYetImplemented()
+  # .NotYetImplemented()
   stopifnot(per == "fortnight", 
             identical(fy.year, "2017-18"))
   
@@ -104,14 +105,34 @@ youth_allowance <- function(ordinary_income = 0,
   
   max_income <- 
     switch(fy.year,
-           "2017-18" = max_income_March_2018,
+           "2017-18" = max_income_March_2018 <- 143,
            .NotYetImplemented())
   max_rate <- 
     switch(fy.year,
-           "2017-18" = max_rate_March_2018,
+           "2017-18" = max_rate_March_2018 <- 293.60,
            .NotYetImplemented())
+  
+  max_income_March_2016 <- 143
+  max_rate_March_2016 <- 244
             
-
+  if (missing(annual_income)) {
+    ordinary_income <- fortnightly_income
+  } else {
+    if (missing(fortnightly_income)) {
+      ordinary_income <- annual_income / 26
+    } else {
+      if (max(abs(fortnightly_income - annual_income / 26)) < .Machine$double.eps^0.5) {
+        i <- which.max(abs(fortnightly_income - annual_income / 26))
+        stop("`fortnightly_income` and `annual_income` both provided but ",
+             "don't agree. \n\t", 
+             "i \tfortnightly_income\tannual_income\n\t", 
+             "--\t------------------\t-------------\n\t", 
+             i, "\t", fortnightly_income[i], "\t", annual_income[i], "\n")
+      }
+      ordinary_income <- fortnightly_income
+    }
+  }
+  
 
   # Benefit test
   # http://guides.dss.gov.au/guide-social-security-law/4/2/2
@@ -146,7 +167,9 @@ youth_allowance <- function(ordinary_income = 0,
                                     # reduce by entire income i.e. dont get YA
                                     max_rate_March_2018))))
     # personal assets test: 
-      # http://guides.dss.gov.au/guide-social-security-law/4/2/8/30 The personal assets test for independent YA recipients is the same as the benefits assets tes
+      # http://guides.dss.gov.au/guide-social-security-law/4/2/8/30 
+      # ## The personal assets test for independent YA recipients 
+      # ##  is the same as the benefits assets tes
       # http://guides.dss.gov.au/guide-social-security-law/4/2/3
       # https://www.legislation.gov.au/Details/C2018C00167
   

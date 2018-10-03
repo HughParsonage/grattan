@@ -17,6 +17,7 @@ test_that("Default from_fy and to_fy", {
 
 test_that("Error handling", {
   skip_on_cran()
+  skip_if_not(identical(date2fy(Sys.Date()), "2018-19"))
   expect_error(lf_inflator_fy(to_fy = "2013-14"), 
                regexp = "`from_fy` is missing", 
                fixed = TRUE)
@@ -29,22 +30,23 @@ test_that("Error handling", {
                               allow.projection = TRUE, 
                               forecast.series = "custom", 
                               lf.series = c(1:2)), 
-               regexp = "lf.series must be either a length-one vector", 
+               regexp = "`lf.series` had length 2. If using `lf.series` as an atomic vector, ensure it is a single numeric vector.", 
                fixed = TRUE)
   expect_error(lf_inflator_fy(from_fy = "2012-13", to_fy = "2025-26", 
                               allow.projection = TRUE, 
                               forecast.series = "custom", 
                               lf.series = data.table(fy_year = "2013-14", 
                                                      r = 0.2)), 
-               regexp = "The first fy in the custom series must be equal to", 
+               regexp = "`lf.series$fy_year` did not have the required financial years.", 
                fixed = TRUE)
-  expect_error(lf_inflator_fy(from_fy = "2017-18",
-                              to_fy = "2018-19",
+  expect_error(lf_inflator_fy(from_fy = "2018-19",
+                              to_fy = "2019-20",
                               forecast.series = "custom",
-                              lf.series = data.table(fy_year = c("2017-18", "2017-18"),
+                              lf.series = data.table(fy_year = c("2018-19", "2018-19"),
                                                      r = c(0, 0.123))), 
-               regexp = 'lf.series$fy_year should be c("2017-18", "2018-19").', 
+               regexp = '`lf.series$fy_year` did not have the required financial years.', 
                fixed = TRUE)
+  
 })
 
 test_that("upper and lower series produce higher and lower forecasts", {
@@ -86,6 +88,7 @@ test_that("lf_inflator_fy accepts multiple dates", {
 })
 
 test_that("Custom lf series", {
+  skip_if_not(identical(date2fy(Sys.Date()), "2018-19"))
   expect_message(lf_inflator_fy(from_fy = "2022-23", 
                                 to_fy = "2024-25",
                                 forecast.series = "custom",
@@ -98,10 +101,10 @@ test_that("Custom lf series", {
   expect_equal(y, 1.1^2)
   
   y_custom_series <-
-    lf_inflator_fy(from_fy = "2017-18",
-                   to_fy = "2018-19",
+    lf_inflator_fy(from_fy = "2018-19",
+                   to_fy = "2019-20",
                    forecast.series = "custom",
-                   lf.series = data.table(fy_year = c("2017-18", "2018-19"),
+                   lf.series = data.table(fy_year = c("2018-19", "2019-20"),
                                           r = c(0, 0.123)))
   
   expect_equal(y_custom_series, 1.123)
@@ -123,3 +126,102 @@ test_that("ABS connection", {
   
   expect_equal(internal_ans, external_ans, tol = 0.0005)
 })
+
+test_that("accelerate", {
+  skip_on_cran()
+  
+  set.seed(6)
+  long_tos <- long_froms <- sample(yr2fy(2005:2010), size = 2e6, replace = TRUE)
+  expect_identical(lf_inflator_fy(labour_force = rep(2, 2e6), 
+                                  from_fy = long_froms, 
+                                  to_fy = "2015-16"), 
+                   lf_inflator_fy(labour_force = 2, 
+                                  from_fy = long_froms, 
+                                  to_fy = "2015-16"))
+  expect_identical(lf_inflator_fy(labour_force = rep(2, 2e6), 
+                                  from_fy = "1999-00", 
+                                  to_fy = long_tos), 
+                   lf_inflator_fy(labour_force = 2, 
+                                  from_fy = "1999-00", 
+                                  to_fy = long_tos))
+  if (NOR(identical(Sys.getenv("TRAVIS_R_VERSION_STRING"), "release"),
+          identical(Sys.getenv("APPVEYOR"), "True") && data.table::second(Sys.time()) > 30)) {
+    time1 <- system.time(lf_inflator_fy(1, from_fy = "2004-05", to_fy = long_tos))
+    time2 <- system.time(lf_inflator_fy(rep(1, 2e6), from_fy = "2004-05", to_fy = long_tos))
+    expect_gt(time2[["elapsed"]] / time1[["elapsed"]], 10)
+  }
+  
+  expect_identical(lf_inflator_fy(labour_force = rep(2, 2e6), 
+                                  from_fy = long_froms, 
+                                  to_fy = "2020-21"), 
+                   lf_inflator_fy(labour_force = 2, 
+                                  from_fy = long_froms, 
+                                  to_fy = "2020-21"))
+  expect_identical(lf_inflator_fy(labour_force = rep(2, 2e6), 
+                                  from_fy = "1999-00", 
+                                  to_fy = long_tos), 
+                   lf_inflator_fy(labour_force = 2, 
+                                  from_fy = "1999-00", 
+                                  to_fy = long_tos))
+  
+  expect_identical(lf_inflator_fy(labour_force = rep(2, 2e6), 
+                                  from_fy = long_froms, 
+                                  to_fy = "2020-21",
+                                  use.month = 2L), 
+                   lf_inflator_fy(labour_force = 2, 
+                                  from_fy = long_froms, 
+                                  to_fy = "2020-21",
+                                  use.month = 2L))
+  
+  expect_identical(lf_inflator_fy(labour_force = rep(2, 2e6), 
+                                  from_fy = long_froms, 
+                                  to_fy = "2018-19",
+                                  forecast.series = "custom", 
+                                  lf.series = data.table(fy_year = c("2018-19", "2019-20"),
+                                                         r = c(0, 0.01))), 
+                   lf_inflator_fy(labour_force = 2, 
+                                  from_fy = long_froms, 
+                                  to_fy = "2018-19",
+                                  forecast.series = "custom", 
+                                  lf.series = data.table(fy_year = c("2018-19", "2019-20"),
+                                                         r = c(0, 0.01))))
+  
+})
+
+test_that("accelerating both from and to", {
+  expect_identical(lf_inflator_fy(from_fy = c("2005-06", "2008-09", "2006-07"),
+                                  to_fy = c("2015-16", "2014-15", "2016-17")),
+                   lf_inflator_fy(from_fy = c("2005-06", "2008-09", "2006-07"),
+                                  to_fy = c("2015-16", "2014-15", "2016-17"),
+                                  accelerate.above = 2L))
+})
+
+test_that("lf_indices", {
+  skip_on_cran()
+  library(data.table)
+  LL_inds <- as.data.table(grattan:::lf_trend)
+  LL_inds[, obsDate := as.Date(paste0(obsTime, "-01"))]
+  LL_inds_month1 <- LL_inds[month(obsDate) == 1L]
+  LL_inds_month1[, fy_year := date2fy(obsDate)]
+  expect_equal(lf_inflator_fy(from_fy = "2014-15", to_fy = "2015-16"),
+               lf_inflator_fy(from_fy = "2014-15", to_fy = "2015-16",
+                              .lf_indices = LL_inds_month1))
+  
+  
+})
+
+test_that("deflator", {
+  skip_if_not_installed("rlang")
+  
+  rlang::with_options({
+    expect_output(lf_inflator_fy(from_fy = "2014-15", to_fy = "2013-14"),
+                  "a:\\s+2014.15")
+    expect_output(lf_inflator_fy(to_fy = "2014-15", from_fy = "2013-14"),
+                  "a:\\s+2013.14")
+  },
+  grattan.verbose = TRUE)
+  expect_equal(lf_inflator_fy(from_fy = "2014-15", to_fy = "2013-14"),
+               1 / lf_inflator_fy(to_fy = "2014-15", from_fy = "2013-14"))
+})
+
+

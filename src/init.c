@@ -3,16 +3,17 @@
 #include <stdlib.h> // for NULL
 #include <R_ext/Rdynload.h>
 
-/* FIXME: 
-  Check these declarations against the C/Fortran source code.
-*/
-  
+
 /* .Call calls */
 extern SEXP _grattan_pmax3(SEXP, SEXP, SEXP);
 extern SEXP _grattan_IncomeTax(SEXP, SEXP, SEXP);
 extern SEXP _grattan_pmaxC(SEXP, SEXP);
 extern SEXP _grattan_pmax0(SEXP);
+extern SEXP _grattan_pmaxIPnum0(SEXP);
+extern SEXP _grattan_pmaxIPint0(SEXP);
 extern SEXP _grattan_pmin0(SEXP);
+extern SEXP _grattan_AnyWhich(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP _grattan_anyOutside(SEXP, SEXP, SEXP);
 extern SEXP _grattan_pmaxV(SEXP, SEXP);
 extern SEXP _grattan_pminC(SEXP, SEXP);
 extern SEXP _grattan_pminV(SEXP, SEXP);
@@ -30,7 +31,11 @@ static const R_CallMethodDef CallEntries[] = {
   {"_grattan_IncomeTax", (DL_FUNC) &_grattan_IncomeTax, 3},
   {"_grattan_pmaxC", (DL_FUNC) &_grattan_pmaxC, 2},
   {"_grattan_pmax0", (DL_FUNC) &_grattan_pmax0, 1},
+  {"_grattan_pmaxIPnum0", (DL_FUNC) &_grattan_pmaxIPnum0, 1},
+  {"_grattan_pmaxIPint0", (DL_FUNC) &_grattan_pmaxIPint0, 1},
   {"_grattan_pmin0", (DL_FUNC) &_grattan_pmin0, 1},
+  {"_grattan_AnyWhich", (DL_FUNC) &_grattan_AnyWhich, 5},
+  {"_grattan_anyOutside", (DL_FUNC) &_grattan_anyOutside, 3},
   {"_grattan_pmaxV", (DL_FUNC) &_grattan_pmaxV, 2},
   {"_grattan_pminC", (DL_FUNC) &_grattan_pminC, 2},
   {"_grattan_pminV", (DL_FUNC) &_grattan_pminV, 2},

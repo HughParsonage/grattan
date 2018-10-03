@@ -1,0 +1,52 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/main
+    docker:
+      - image: rocker/verse
+        environment:
+          NOT_CRAN: true
+          TRAVIS: true
+          
+    parallelism: 3
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}-{{ checksum ".circleci/config.yml" }}
+            - deps1-{{ .Branch }}
+            - deps1-
+      - run:
+          command: |
+            Rscript -e "devtools::install_deps(dependencies = TRUE)"
+      - run:
+          no_output_timeout: 20m
+          command: |
+            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then Rscript -e 'dir.create("~/.R");file.create(mv <- "~/.R/Makevars");writeLines("CXXFLAGS=-O3", mv)'; fi
+            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then R CMD build --no-build-vignettes . ; fi
+            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then R CMD check --ignore-vignettes --no-vignettes *tar.gz ; fi
+      - run:
+          no_output_timeout: 20m
+          command: |
+            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then R CMD build --no-build-vignettes . ; fi
+            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then R CMD check --ignore-vignettes --no-vignettes *tar.gz ; fi
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}-{{ checksum ".circleci/config.yml" }}
+          paths:
+            - "/usr/local/lib/R/site-library"
+      - run:
+          no_output_timeout: 20m
+          command: |
+            mkdir /root/main/artifacts
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then Rscript -e "devtools::install()" ; fi
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then Rscript -e "knitr::knit('vignettes/grattan.Rmd')" ; fi
+      - run:
+          name: Check R CMD check failures
+          command: |
+            if [[ $CIRCLE_NODE_INDEX != "0" ]]; then Rscript -e "cat(devtools::check_failures('./grattan.Rcheck'), sep = '\n');cat('\n')" ; fi
+            if [[ $CIRCLE_NODE_INDEX != "0" ]]; then Rscript -e "if (length(res <- devtools::check_failures('./grattan.Rcheck', note=FALSE))) stop(res)" ; fi
+      - store_test_results:
+          path: ./grattan.Rcheck/tests
+      - store_artifacts:
+          path: /root/main/artifacts/
+          destination: artifacts

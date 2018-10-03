@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grattan</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.0.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.4.0</span>
       </span>
     </div>
 
@@ -86,6 +86,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/datatable-implementation.html">Calculations of income tax are rolling joins</a>
+    </li>
     <li>
       <a href="../articles/long-vignettes/budget-2018.html">Budget 2018 modelling</a>
     </li>
@@ -126,11 +129,11 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>project</span>(<span class='no'>sample_file</span>, <span class='kw'>h</span> <span class='kw'>=</span> <span class='fl'>0L</span>, <span class='kw'>fy.year.of.sample.file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>WEIGHT</span> <span class='kw'>=</span> <span class='fl'>50L</span>,
-  <span class='no'>excl_vars</span>, <span class='kw'>forecast.dots</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>estimator</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>pred_interval</span> <span class='kw'>=</span> <span class='fl'>80</span>),
-  <span class='kw'>wage.series</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lf.series</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.recalculate.inflators</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>.copyDT</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>check_fy_sample_file</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>differentially_uprate_Sw</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>project</span>(<span class='no'>sample_file</span>, <span class='kw'>h</span> <span class='kw'>=</span> <span class='fl'>0L</span>, <span class='kw'>fy.year.of.sample.file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>WEIGHT</span> <span class='kw'>=</span> <span class='fl'>50L</span>, <span class='no'>excl_vars</span>, <span class='kw'>forecast.dots</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>estimator</span> <span class='kw'>=</span> <span class='st'>"mean"</span>,
+  <span class='kw'>pred_interval</span> <span class='kw'>=</span> <span class='fl'>80</span>), <span class='kw'>wage.series</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lf.series</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>.recalculate.inflators</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>.copyDT</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>check_fy_sample_file</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>differentially_uprate_Sw</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -228,7 +231,7 @@ as the latter suggests lower-than-recorded tax collections.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, William Young.</p>
+  <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, Matthew Katzen, William Young.</p>
 </div>
 
 <div class="pkgdown">

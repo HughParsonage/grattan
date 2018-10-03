@@ -2,12 +2,12 @@ context("Test inverse income tax.")
 
 test_that("Inverse single income matches.", {
   skip_on_cran()
-  income <- sample(1:500e3, size = 1)
+  income <- sample(1:200e3, size = 1)
   fy.year <- sample(yr2fy(2004:2015), size = 1)
   
   # Ignore cases where the tax is zero
   while (income_tax(income, fy.year) < 1){
-    income <- sample(1:500e3, size = 1)
+    income <- sample(1:200e3, size = 1)
     fy.year <- sample(yr2fy(2004:2015), size = 1)
   }
   
@@ -35,10 +35,10 @@ test_that("Inverse income on zero", {
 
 test_that("Inverse long income matches.", {
   skip_on_cran()
-  income <- sample(1:500e3, size = 2)
+  income <- sample(1:300e3, size = 2)
   fy.year <- sample(yr2fy(2004:2015), size = 1)
   while (any(income_tax(income, fy.year = fy.year) < 1)){
-    income <- sample(1:500e3, size = 2)
+    income <- sample(1:300e3, size = 2)
     fy.year <- sample(yr2fy(2004:2015), size = 1)
   }
   

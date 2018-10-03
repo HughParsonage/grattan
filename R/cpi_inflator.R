@@ -8,9 +8,13 @@
 #' If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{from_fy} is set to the previous financial year and \code{to_fy} to the current financial year, with a warning. Setting only one is an error.
 #' @param adjustment What CPI index to use ("none" = raw series, "seasonal", or "trimmed" [mean]).
 #' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. 
-#' The internal data is up-to-date as of 2017-Q4. 
+#' The internal data was updated on 2018-08-17 to 2018-Q2. 
 #' If using \code{useABSConnection = TRUE}, ensure you have \code{rsdmx (>= 0.5-10)} up-to-date.
 #' @param allow.projection Should projections beyond the ABS's data be allowed?
+#' @param accelerate.above An integer setting the threshold for 'acceleration'. 
+#' When the maximum length of the arguments exceeds this value, calculate each unique value individually 
+#' then combine. Set to 100,000 as a rule of thumb beyond which calculation speeds benefit
+#' dramatically. Can be set to \code{Inf} to disable acceleration.
 #' @examples 
 #' cpi_inflator(100, from_fy = "2005-06", to_fy = "2014-15")
 #' @return The value of \code{from_nominal_price} in real (\code{to_fy}) dollars.
@@ -20,11 +24,12 @@ cpi_inflator <- function(from_nominal_price = 1,
                          to_fy = NULL, 
                          adjustment = c("seasonal", "none", "trimmed.mean"),
                          useABSConnection = FALSE,
-                         allow.projection = TRUE) {
+                         allow.projection = TRUE,
+                         accelerate.above = 1e5L) {
   # CRAN
-  obsTime <- obsValue <- to_index <- from_index <- NULL
+  obsTime <- obsValue <- NULL
   
-  if (is.null(from_fy) && is.null(to_fy)){
+  if (is.null(from_fy) && is.null(to_fy)) {
     to_fy <- date2fy(Sys.Date())
     from_fy <- prev_fy(to_fy)
     warning("`from_fy` and `to_fy` are missing, using previous and current financial years respectively")
@@ -35,74 +40,126 @@ cpi_inflator <- function(from_nominal_price = 1,
   if (is.null(to_fy)){
     stop("`to_fy` is missing, with no default.")
   }
+  check_TF(useABSConnection)
+  check_TF(allow.projection)
   
   # Don't like vector recycling
   # http://stackoverflow.com/a/9335687/1664978
   max.length <- 
     prohibit_vector_recycling.MAXLENGTH(from_nominal_price, from_fy, to_fy)
   
-  if (max.length == 1L && as.integer(substr(to_fy, 0L, 4L)) < 2031L) {
-    stopifnot(all_fy(from_fy), all_fy(to_fy))
-  } else {
-    stopifnot(all_fy(from_fy), all(is.fy(to_fy)))
+  if (max.length == 0L) {
+    warning("Zero-length arguments provided, returning double(0).")
+    return(double(0))
   }
   
   adjustment <- match.arg(adjustment, several.ok = FALSE)
+
   
-  if (useABSConnection) {
-    switch(adjustment, 
-           "none" = url <-     
-             "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.10001.10.Q/ABS?startTime=1948", 
-           
-           "seasonal" = url <- 
-             "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999901.10+20.Q/ABS?startTime=1948",
-           
-           "trimmed.mean" = url <- 
-             "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999902.10+20.Q/ABS?startTime=1948")
-    
-    cpi <- rsdmx::readSDMX(url)
-    message("Using ABS sdmx connection")
-    cpi <- as.data.frame(cpi)
-  } else {
-    switch(adjustment, 
-           "none" = cpi <- cpi_unadj,
-           "seasonal" = cpi <- cpi_seasonal_adjustment,
-           "trimmed.mean" = cpi <- cpi_trimmed)
-  }
   
-  cpi.indices <- 
-    as.data.table(cpi) %>%
-    .[grepl("Q1", obsTime)] %>%
-    .[, fy_year := yr2fy(as.integer(sub("-Q1", "", obsTime, fixed = TRUE)))]
-  
-  if (!allow.projection && !all(to_fy %in% cpi.indices$fy_year)) {
+  if (max.length > accelerate.above && 
+      # don't connect for every group
+      !useABSConnection &&
+      length(from_nominal_price) == 1L) {
     if (length(to_fy) == 1L) {
-      stop("`to_fy = ", to_fy, "` yet `allow.projection = FALSE`. ", 
-           "The latest to_fy that may be used is ", max(cpi.indices$fy_year), ". ", 
-           "Set `allow.projection = TRUE` or ensure `to_fy` is earlier than ", 
-           max(cpi.indices$fy), ".")
-    } else {
-      first_late_fy <- first(to_fy[to_fy %notin% cpi.indices$fy_year])
-      stop("`to_fy` contains ", first_late_fy, ", yet `allow.projection = FALSE`. ", 
-           "The latest to_fy that may be used is ", max(cpi.indices$fy_year), ". ",
-           "Set `allow.projection = TRUE` or ensure `to_fy` is earlier than ", 
-           max(cpi.indices$fy), ".")
+      cpi_fun <- function(x) {
+        cpi_inflator(from_nominal_price = from_nominal_price[[1L]],
+                     from_fy = x,
+                     to_fy = to_fy[[1L]],
+                     adjustment = adjustment[[1L]], 
+                     useABSConnection = FALSE,
+                     allow.projection = allow.projection[[1L]],
+                     accelerate.above = Inf)
+      }
+      return(accel_repetitive_input(from_fy, cpi_fun))
+    }
+    
+    if (length(from_fy) == 1L) {
+      cpi_fun <- function(x) {
+        cpi_inflator(from_nominal_price = from_nominal_price[[1L]],
+                     from_fy = from_fy[[1L]], 
+                     to_fy = x,
+                     adjustment = adjustment[[1L]], 
+                     useABSConnection = FALSE,
+                     allow.projection = allow.projection[[1L]],
+                     accelerate.above = Inf)
+      }
+      return(accel_repetitive_input(to_fy, cpi_fun))
     }
   }
-  # else allow NAs to propagate
   
-  # Use forecast::forecast to inflate forward
-  if (allow.projection && !all(to_fy %in% cpi.indices$fy_year)){
+  
+  cpi.indices <- 
+    if (useABSConnection) {
+      switch(adjustment, 
+             "none" = url <-     
+               "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.10001.10.Q/ABS?startTime=1948", 
+             
+             "seasonal" = url <- 
+               "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999901.10+20.Q/ABS?startTime=1948",
+             
+             "trimmed.mean" = url <- 
+               "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999902.10+20.Q/ABS?startTime=1948")
+      
+      cpi <- rsdmx::readSDMX(url)
+      message("Using ABS sdmx connection")
+      as.data.frame(cpi) %>%
+        as.data.table(cpi) %>%
+        .[endsWith(obsTime, "Q1")] %>%
+        .[, fy_year := yr2fy(as.integer(sub("-Q1", "", obsTime, fixed = TRUE)))]
+    } else {
+      switch(adjustment, 
+             "none" = cpi_unadj_fy,
+             "seasonal" = cpi_seasonal_adjustment_fy,
+             "trimmed.mean" = cpi_trimmed_fy)
+    }
+  
+  
+  permitted_fys <- .subset2(cpi.indices, "fy_year")
+  earliest_from_fy <- permitted_fys[[1L]]
+  cpi_table_nom <-
+    switch(adjustment, 
+           "none" = "first instance of the unadjusted CPI", 
+           "seasonal" = "first instance of the seasonally adjusted CPI",
+           "trimmed.mean" = "first instance of the trimmed mean CPI")
+  
+  the_min.yr <-
+    switch(adjustment, 
+           "none" = min.cpi_unadj.yr,
+           "seasonal" = min.cpi_seasonal_adjustment.yr,
+           "trimmed.mean" = min.cpi_trimmed.yr)
+  the_max.yr <-
+    switch(adjustment, 
+           "none" = max.cpi_unadj.yr,
+           "seasonal" = max.cpi_seasonal_adjustment.yr,
+           "trimmed.mean" = max.cpi_trimmed.yr)
+  
+  from_fy <- validate_fys_permitted(from_fy,
+                                    min.yr = the_min.yr,
+                                    # else 2050L because we will need max year later
+                                    max.yr = if (!allow.projection) the_max.yr else 2050L,
+                                    deparsed = "from_fy", 
+                                    allow.projection = allow.projection,
+                                    earliest_permitted_financial_year = cpi_table_nom)
+  to_fy <- validate_fys_permitted(to_fy,
+                                  min.yr = the_min.yr,
+                                  max.yr = if (!allow.projection) the_max.yr else 2050L,
+                                  deparsed = "to_fy", 
+                                  allow.projection = allow.projection,
+                                  earliest_permitted_financial_year = cpi_table_nom)
+  
+  if (max_fy2yr(to_fy) > the_max.yr || 
+      max_fy2yr(from_fy) > the_max.yr) {
     # Number of years beyond the data our forecast must reach
-    years.beyond <- max(fy2yr(to_fy)) - max(fy2yr(cpi.indices$fy_year))
+    years.beyond <- max_fy2yr(to_fy) - max_fy2yr(permitted_fys)
     cpi_index_forecast <-
       cpi.indices %$%
       gforecast(obsValue, h = years.beyond) %$%
       as.numeric(mean)
     
     cpi.indices.new <- 
-      setDT(list(fy_year = yr2fy(seq(max(fy2yr(cpi.indices$fy_year)) + 1,
-                                     max(fy2yr(to_fy)),
+      setDT(list(fy_year = yr2fy(seq(max_fy2yr(permitted_fys) + 1L,
+                                     max_fy2yr(to_fy),
                                      by = 1L)),
                  obsValue = cpi_index_forecast))
     cpi.indices <-
@@ -116,5 +173,9 @@ cpi_inflator <- function(from_nominal_price = 1,
            to = to_fy,
            inflator_table = cpi.indices,
            index.col = "obsValue", 
-           time.col = "fy_year")
+           time.col = "fy_year",
+           max.length = max.length)
+  
 }
+
+

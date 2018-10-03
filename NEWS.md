@@ -1,3 +1,68 @@
+## 1.6.4.0
+### 2018-08-19
+
+* Potentially minor breaking change: `yr2fy(x)` no longer works for x = 1900L, 
+  despite a unit test, for the sake of performance.
+  
+```
+  #> Last change: NAMESPACE at 2018-08-19 14:47:14 (4 mins ago).
+  #> Unit: milliseconds
+  #>       expr min  lq mean median  uq max neval cld
+  #>   yr2fy(z)  75  88   98     90 101 161   100  a 
+  #>  .yr2fy(z) 274 286  298    297 302 359   100   b
+```
+  
+  Use `yr2fy(x, assume1901_2100 = FALSE)` if you need the old behaviour.
+  
+### New functions:
+
+* `rent_assistance` the Commonwealth Rent Assistance
+* `model_rent_assistance` as experimental function for modelling changes to rent assistance.
+* `mutate_ntile` and `mutate_weighted_ntile` for adding quantile columns
+
+
+## 1.6.3.0
+### 2018-08-18
+
+* New allowances functions (usable for the 2015-16 financial year)
+    - `age_pension`, 
+    - `carer_payment`
+    - `carers_allowance`
+    - `energy_supplement`
+    - `family_tax_benefit`
+    - `newstart_allowance`
+    - `pension_supplement`
+
+* Data has been updated for wage, CPI, and labour force inflators.
+
+Bug fixes:
+
+* `inflator` no longer fails when `to_fy` is length > 1 and unordered.
+* `inflator` and `cpi_inflator`, `lf_inflator_fy`, and `wage_inflator` are now much faster when either `from_fy` or `to_fy` have more than 100,000 elements:
+
+```r
+set.seed(19952010)
+from_fys <- sample(yr2fy(1995:2010), size = 1e6, replace = TRUE)
+microbenchmark(cpi_inflator(from_fy = from_fys, to_fy = "2015-16"))
+# Old
+Unit: seconds
+                                                expr      min      lq     mean   median       uq
+ cpi_inflator(from_fy = from_fys, to_fy = "2015-16") 1.519483 1.54438 1.550628 1.549735 1.554507
+      max neval
+ 1.661502   100
+ 
+# New
+Unit: milliseconds
+                                                expr      min       lq     mean   median       uq
+ cpi_inflator(from_fy = from_fys, to_fy = "2015-16") 40.71753 41.94061 47.93162 42.93946 48.08461
+      max neval
+ 191.3497   100
+```
+
+* Fixed failing interaction between temporary budget repair levy and small business tax offset in 2016-17.
+* `*_inflator` functions now return correct results for non-standard but supported financial years.
+
+
 ## 1.6.2.0
 ### 2018-06-28
 * Added default values to the following functions:

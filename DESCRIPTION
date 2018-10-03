@@ -1,8 +1,8 @@
 Package: grattan
 Type: Package
 Title: Australian Tax Policy Analysis
-Version: 1.6.1.0
-Date: 2018-06-25
+Version: 1.6.4.0
+Date: 2018-08-19
 Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.parsonage@gmail.com"),
               person("Tim", "Cameron", role = "aut"),
               person("Brendan", "Coates", role = "aut"),
@@ -12,7 +12,7 @@ Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.p
               person("W.", "Karsten", role = "ctb"),
               person("M.", "Enrique Garcia", role = "ctb"))
 Maintainer: Hugh Parsonage <hugh.parsonage@gmail.com>
-URL: https://github.com/HughParsonage/grattan
+URL: https://github.com/HughParsonage/grattan, https://hughparsonage.github.io/grattan/
 BugReports: https://github.com/HughParsonage/grattan/issues
 Description: Utilities for costing and evaluating Australian tax policy, including high-performance tax and transfer calculators, a fast method of projecting tax collections, and an interface to common indices from the Australian Bureau of Statistics.  Written to support Grattan Institute's Australian Perspectives program. For access to the 'taxstats' package, please run
  install.packages("taxstats", repos = "https://hughparsonage.github.io/tax-drat/", type = "source"). 
@@ -22,18 +22,18 @@ License: GPL-2
 Imports:
     data.table,
     hutils,
-    ineq,
+    ineq (>= 0.2-10),
     rsdmx,
     fastmatch,
     forecast,
-    assertthat,
-    magrittr,
+    assertthat (>= 0.1),
+    magrittr (>= 1.5),
     Rcpp (>= 0.12.3),
     utils,
-    zoo
+    zoo (>= 1.5-5)
 LinkingTo: 
     Rcpp
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 Suggests:
     dplyr,
     dtplyr,
@@ -43,15 +43,18 @@ Suggests:
     knitr,
     lattice,
     mgcv,
+    rlang,
     rmarkdown,
     scales,
     survey,
-    testthat,
     taxstats,
     taxstats1516,
+    testthat,
+    tibble,
     viridis,
     yaml,
     covr
 Additional_repositories: https://hughparsonage.github.io/tax-drat/
 LazyData: true
 VignetteBuilder: knitr
+Encoding: UTF-8

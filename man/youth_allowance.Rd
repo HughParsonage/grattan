@@ -4,17 +4,17 @@
 \alias{youth_allowance}
 \title{Youth allowance}
 \usage{
-youth_allowance(ordinary_income = 0, fy.year = date2fy(Sys.Date()),
-  age = 18, eligible_if_over22 = FALSE, has_partner = FALSE,
+youth_allowance(fortnightly_income = 0, annual_income = 0,
+  fy.year = date2fy(Sys.Date()), age = 18,
+  eligible_if_over22 = FALSE, has_partner = FALSE,
   living_at_home = FALSE, n_dependants = 0L,
-  isjspceoalfofcoahodeoc = FALSE, is_student = TRUE, per = "fortnight",
-  taper1 = 0.5, taper2 = 0.6, FT_YA_student_lower = 437,
-  FT_YA_student_upper = 524, FT_YA_jobseeker_lower = 143,
-  FT_YA_jobseeker_upper = 250, excess_partner_income_mu = 0.6)
+  isjspceoalfofcoahodeoc = FALSE, is_student = TRUE,
+  per = "fortnight", taper1 = 0.5, taper2 = 0.6,
+  FT_YA_student_lower = 437, FT_YA_student_upper = 524,
+  FT_YA_jobseeker_lower = 143, FT_YA_jobseeker_upper = 250,
+  excess_partner_income_mu = 0.6)
 }
 \arguments{
-\item{ordinary_income}{Fortnightly individual income. Defualt is zero.}
-
 \item{fy.year}{Financial year. Default is current financial year.}
 
 \item{age}{The individual's age. Default is 18 years.}
@@ -46,6 +46,8 @@ youth_allowance(ordinary_income = 0, fy.year = date2fy(Sys.Date()),
 \item{FT_YA_jobseeker_upper}{Jobseeker upper bound for which reduction in payment occurs at rate taper1. Student and apprentice lower bound for which reduction in payment occurs at rate taper2.}
 
 \item{excess_partner_income_mu}{The amount at which the payment is reduced for each dollar earned by the individual's partner.}
+
+\item{ordinary_income}{Fortnightly individual income. Defualt is zero.}
 }
 \description{
 Youth allowance

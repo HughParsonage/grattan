@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grattan</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.0.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.4.0</span>
       </span>
     </div>
 
@@ -86,6 +86,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/datatable-implementation.html">Calculations of income tax are rolling joins</a>
+    </li>
     <li>
       <a href="../articles/long-vignettes/budget-2018.html">Budget 2018 modelling</a>
     </li>
@@ -127,7 +130,8 @@
     </div>
 
     <pre class="usage"><span class='fu'>cpi_inflator_quarters</span>(<span class='no'>from_nominal_price</span>, <span class='no'>from_qtr</span>, <span class='no'>to_qtr</span>,
-  <span class='kw'>adjustment</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"seasonal"</span>, <span class='st'>"trimmed"</span>, <span class='st'>"none"</span>), <span class='kw'>useABSConnection</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>adjustment</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"seasonal"</span>, <span class='st'>"trimmed"</span>, <span class='st'>"none"</span>),
+  <span class='kw'>useABSConnection</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -151,7 +155,7 @@
     <tr>
       <th>useABSConnection</th>
       <td><p>Should the function connect with ABS.Stat via an SDMX connection? By default set to <code>FALSE</code> in which case a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.
-The internal data is up-to-date as of 2018-Q1. 
+The internal data was updated on 2018-08-17 to 2018-Q2.
 If using <code>useABSConnection = TRUE</code>, ensure you have <code>rsdmx (&gt;= 0.5-10)</code> up-to-date.</p></td>
     </tr>
     </table>
@@ -175,7 +179,7 @@ If using <code>useABSConnection = TRUE</code>, ensure you have <code>rsdmx (&gt;
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, William Young.</p>
+  <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, Matthew Katzen, William Young.</p>
 </div>
 
 <div class="pkgdown">

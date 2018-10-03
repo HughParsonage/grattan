@@ -14,10 +14,19 @@ Tax modelling and other common tasks for Australian policy analysts,
 in support of the Grattan Institute, Melbourne. 
 <https://grattan.edu.au>
 }
+\section{Package options}{
+
+\describe{
+\item{\code{grattan.verbose}}{(\code{FALSE}) Emit diagnostic messages (via \code{cat()}))}
+\item{\code{grattan.assume1901_2100}}{(\code{TRUE}) Assume \code{yr2fy} receives an integer >= 1901 and <= 2100.}
+}
+}
+
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://github.com/HughParsonage/grattan}
+  \item \url{https://hughparsonage.github.io/grattan/}
   \item Report bugs at \url{https://github.com/HughParsonage/grattan/issues}
 }
 

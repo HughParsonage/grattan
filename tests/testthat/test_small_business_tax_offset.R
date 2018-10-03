@@ -18,6 +18,18 @@ test_that("Always zero for fy_year", {
                                          total_net_small_business_income =  50e3,
                                          fy_year = "2014-15"),
                0)
+  expect_equal(small_business_tax_offset(1:100e3,
+                                         basic_income_tax_liability = 25e3,
+                                         aggregated_turnover = 1e6,
+                                         total_net_small_business_income =  50e3,
+                                         fy_year = "2014-15"),
+               double(100e3))
+  expect_equal(small_business_tax_offset(1:100e3,
+                                         basic_income_tax_liability = 25e3,
+                                         aggregated_turnover = 1e6,
+                                         total_net_small_business_income =  50e3,
+                                         fy_year = rep("2014-15", times = 100e3)),
+               double(100e3))
 })
 
 test_that("Error handling", {

@@ -7,13 +7,31 @@
 #' @param index.col The column in \code{inflator_table} containing the index used for inflation.
 #' @param time.col The column in \code{inflator_table} by which times are mapped. 
 #' @param roll If \code{NULL}, inflation is calculated only on exact matches in \code{inflator_table}. Otherwise, uses a rolling join. See \code{data.table::data.table}.
+#' @param max.length (Internal use only). If not \code{NULL}, the maximum length of \code{x},
+#' \code{from}, and \code{to} known in advance. May be provided to improve the performance
+#' if known.
 #' @return A vector of inflated values. For example, \code{inflator_table = grattan:::cpi_seasonal_adjustment}, 
 #' \code{index.col = "obsValue"}, \code{time.col = "obsTime"}, gives the CPI inflator.
 #' @export
 
-inflator <- function(x = 1, from, to, inflator_table, index.col = "Index", time.col = "Time", roll = NULL){
-  prohibit_length0_vectors(x, from, to)
-  prohibit_vector_recycling(x, from, to)
+inflator <- function(x = 1,
+                     from,
+                     to,
+                     inflator_table,
+                     index.col = "Index",
+                     time.col = "Time",
+                     roll = NULL,
+                     max.length = NULL) {
+  if (is.null(max.length)) {
+    prohibit_length0_vectors(x, from, to)
+    max.length <- prohibit_vector_recycling.MAXLENGTH(x, from, to)
+  }
+  
+  if (max.length == 1L && is.null(roll)) {
+    Values <- .subset2(inflator_table, index.col)
+    Times <- .subset2(inflator_table, time.col)
+    return(x * Values[chmatch(to, Times)] / Values[chmatch(from, Times)])
+  }
   
   inflator_table <- 
     inflator_table %>%
@@ -36,10 +54,8 @@ inflator <- function(x = 1, from, to, inflator_table, index.col = "Index", time.
     to <- .to
   }
   
-  input <- 
-    data.table(y = 1, from = from, to = to,
-               # merging can reorder
-               order = seq_along(from))
+  input <- as.data.table(list(y = 1, from = from, to = to))
+  input[, "order" := .I]
   
   if (is.null(roll)){
     output <- 

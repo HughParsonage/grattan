@@ -1,5 +1,5 @@
 #' Revenue foregone from a modelled sample file
-#' @param dt A \code{data.table}
+#' @param dt A \code{data.table} from \code{\link{model_income_tax}}.
 #' @param revenue_positive If \code{TRUE}, the default, tax increase (revenue) is positive and tax cuts are negative.
 #' @param digits If not \code{NULL}, affects the print method of the value.
 #' @export revenue_foregone
@@ -9,7 +9,27 @@ revenue_foregone <- function(dt, revenue_positive = TRUE, digits = NULL) {
             "WEIGHT" %in% names(dt),
             "new_tax" %in% names(dt),
             "baseline_tax" %in% names(dt))
-  delta <- .subset2(dt, "WEIGHT") * (.subset2(dt, "new_tax") - .subset2(dt, "baseline_tax"))
+  
+  # nocov start 
+  # Memory efficiency:
+  if (min(.subset2(dt, "WEIGHT")) == max(.subset2(dt, "WEIGHT"))) {
+    # is constant
+    WEIGHT <- .subset2(dt, "WEIGHT")[1L]
+    delta <- WEIGHT * as.double(.subset2(dt, "new_tax") - .subset2(dt, "baseline_tax"))
+    
+  } else if (getRversion() < "3.5.0") {
+    
+    # else will likely overflow
+    new_tax <- as.double(.subset2(dt, "new_tax"))
+    baseline_tax <- as.double(.subset2(dt, "baseline_tax"))
+    WEIGHT <- as.double(.subset2(dt, "WEIGHT"))
+    delta <- new_tax - baseline_tax
+    delta <- WEIGHT * delta
+    
+  } else {
+    delta <- .subset2(dt, "WEIGHT") * (.subset2(dt, "new_tax") - .subset2(dt, "baseline_tax"))
+  }
+  # nocov end
   out <- sum(delta)
   if (!revenue_positive) {
     out <- -out

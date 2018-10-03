@@ -2,6 +2,7 @@ context("model_income_tax")
 
 test_that("Error handling", {
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   library(taxstats)
   library(hutils)
   sample_file_1314_copy <- copy(sample_file_1314)
@@ -40,6 +41,7 @@ test_that("Error handling", {
 
 test_that("La plus ca meme la plus ca meme: ordinary tax", {
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   original <- income_tax(sample_file_1314$Taxable_Income, "2013-14", .dots.ATO = copy(sample_file_1314))
@@ -55,6 +57,7 @@ test_that("La plus ca meme la plus ca meme: ordinary tax", {
 
 test_that("La plus ca meme la plus ca meme: la deluge", {
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   library(taxstats)
   sample_file_1112_copy <- copy(sample_file_1112)
   original <-
@@ -74,6 +77,7 @@ test_that("La plus ca meme la plus ca meme: la deluge", {
   
 test_that("La plus ca meme la plus ca meme: medicare levy", {
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   
@@ -93,6 +97,7 @@ test_that("La plus ca meme la plus ca meme: medicare levy", {
 
 test_that("La plus ca meme la plus ca meme: LITO", {
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   
@@ -110,8 +115,27 @@ test_that("La plus ca meme la plus ca meme: LITO", {
   expect_equal(new_tax2, original)
 })
 
+test_that("La plus ca meme la plus ca meme: SBTO doesn't interfere with SBTO", {
+  skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
+  library(taxstats)
+  library(magrittr)
+  library(data.table)
+  sample_file_1314_copy <- copy(sample_file_1314)
+  sample_file_81913 <- 
+    sample_file_1314_copy %>%
+    .[Ind == 81913] %T>%
+    .[, stopifnot(Taxable_Income > 180e3, Net_NPP_BI_amt > 1000)] %>%
+    model_income_tax("2016-17")
+  
+  expect_equal(sample_file_81913[["baseline_tax"]],
+               sample_file_81913[["new_tax"]],
+               tol = 1, scale = 1)
+})
+
 test_that("Increase in a rate results in more tax", {
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   original <- income_tax(sample_file_1314$Taxable_Income, "2013-14", .dots.ATO = copy(sample_file_1314))
@@ -134,6 +158,7 @@ test_that("Increase in a rate results in more tax", {
 
 test_that("Medicare warnings", {
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   expect_warning(model_income_tax(sample_file_1314_copy,
@@ -280,6 +305,7 @@ test_that("Medicare warnings", {
 
 test_that("Medicare options", {
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   library(taxstats)
   sample_file_1314_copy <- copy(sample_file_1314)
   original <- income_tax(sample_file_1314$Taxable_Income,
@@ -361,6 +387,7 @@ test_that("Medicare options", {
 test_that("Medicare families", {
   skip_on_cran()
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   s1617 <- project(sample_file_1314, h = 3L)
   
   for (j in seq_along(s1617)) {
@@ -390,13 +417,14 @@ test_that("Medicare families", {
   single_idx <- which(s1617$Spouse_adjusted_taxable_inc == 0)
   expect_equal(s1617_orig$orig_tax[single_idx],
                s1617_modelled[single_idx], 
-               tol = 1)
+               tol = 2, scale = 1)
   
 })
 
 test_that("SAPTO modelled", {
   skip_on_cran()
   skip_if_not_installed("taxstats", minimum_version = "0.0.5")
+  skip_on_circleci(2)
   library(taxstats)
   sample_file_1415_copy <- copy(sample_file_1415_synth)
   
@@ -469,6 +497,7 @@ test_that("SAPTO modelled", {
 
 test_that("LITO", {
   skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_circleci(2)
   library(taxstats)
   sample_file_1213_copy <- copy(sample_file_1213)
   
@@ -491,7 +520,8 @@ test_that("LITO", {
 
 test_that("Elasticity of taxable income", {
   skip_on_cran()
-  skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_if_not_installed("taxstats")
+  skip_on_circleci(2)
   library(taxstats)
   s12131314 <- 
     copy(sample_file_1213) %>%
@@ -574,6 +604,7 @@ test_that("Elasticity of taxable income", {
 
 test_that("Elasticity 0 vs 1", {
   skip_if_not_installed("taxstats", minimum_version = "0.0.5")
+  skip_on_circleci(2)
   library(taxstats)
   s1415 <- 
     copy(sample_file_1415_synth) %>%
@@ -617,6 +648,7 @@ test_that("Lamington", {
   skip_on_cran()
   skip_if_not_installed("taxstats", minimum_version = "0.0.5")
   skip_if_not_installed("fst", minimum_version = "0.8.4")
+  skip_on_circleci(2)
   temp.fst <- "~/SampleFile1819/sample_file_1819.fst"
   library(data.table)
   library(hutils)
@@ -658,6 +690,7 @@ test_that("Lamington", {
 test_that("Clear columns", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
+  skip_on_circleci(2)
   library(taxstats)
   s1314 <- as.data.table(sample_file_1314)
   s1314[, new_tax := 1][, baseline_tax := 2]
@@ -668,6 +701,7 @@ test_that("Clear columns", {
 test_that("sample_file.int", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
+  skip_on_circleci(2)
   library(taxstats)
   s1314 <- as.data.table(sample_file_1314)
   res <- model_income_tax(s1314, "2013-14", return. = "sample_file.int")
@@ -677,6 +711,7 @@ test_that("sample_file.int", {
 test_that("lito_multi", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
+  skip_on_circleci(2)
   library(taxstats)
   s1314 <- as.data.table(sample_file_1314)
   base <- model_income_tax(s1314, "2013-14")
@@ -723,6 +758,7 @@ test_that("lito_multi", {
 test_that("Keyed data.table", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
+  skip_on_circleci(2)
   library(taxstats)
   s1314 <- as.data.table(sample_file_1314)
   base <- model_income_tax(s1314, "2013-14", sbto_discount = 0.1)
@@ -735,6 +771,7 @@ test_that("Keyed data.table", {
 test_that("Budget2018", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
+  skip_on_circleci(2)
   library(taxstats)
   s1314 <- as.data.table(sample_file_1314)
   sWatr <- model_income_tax(s1314,
@@ -766,17 +803,101 @@ test_that("Budget2018", {
 test_that("Debugger", {
   skip_on_cran()
   skip_if_not_installed("taxstats1516")
+  skip_on_circleci(2)
   library(data.table)
   library(taxstats1516)
   s1516 <- as.data.table(sample_file_1516_synth)
   s1516[, Med_Exp_TO_amt := 0]
   o <- model_income_tax(s1516[, Med_Exp_TO_amt := 0], "2016-17", .debug = TRUE)
-  expect_equal(names(o), c("income", "base_tax.", "lito.", "lamington_offset.", "sapto.", 
+  expect_equal(names(o), c("income", "old_tax",
+                           "base_tax.", "lito.", "lamington_offset.", "sapto.", 
                            "sbto.", "medicare_levy."))
 })
 
+test_that("CGT discount", {
+  skip_on_cran()
+  skip_if_not_installed("taxstats")
+  skip_if_not_installed("taxstats1516")
+  skip_on_circleci(2)
+  library(taxstats)
+  library(taxstats1516)
+  library(data.table)
+  s12131314 <- copy(sample_file_1213)
+  baseline <- model_income_tax(s12131314,
+                               "2013-14",
+                               ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3))
+  
+  if (getRversion() < "3.5.0") {
+    # sum doesn't coerce to double to avoid overflow
+    baseline[, new_tax := as.double(new_tax)]
+    baseline[, baseline_tax := as.double(baseline_tax)]
+  }
+  
+  # Surprisingly didn't fail on recent versions of R
+  expect_lt(baseline[, sum(new_tax)], 
+            baseline[, sum(baseline_tax)])
+  
+  la_meme <-
+    model_income_tax(s12131314,
+                     "2013-14",
+                     ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3),
+                     cgt_discount_rate = 0.5)
+  
+  expect_equal(baseline[["new_tax"]],
+               model_income_tax(s12131314,
+                                "2013-14",
+                                ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3),
+                                cgt_discount_rate = 0.5,
+                                return. = "tax"))
+  # TES 2015-16: 5160 for full discount
+  s1516 <- model_income_tax(taxstats1516::sample_file_1516_synth, 
+                            baseline_fy = "2015-16",
+                            cgt_discount_rate = 0.0)
+  s1516[, WEIGHT := 50L]
+  expect_lte(abs(revenue_foregone(s1516) -  6150e6) / 6150e6, 0.025)
+  
+  
+  expect_lt(baseline[, sum(new_tax)],
+            sum(model_income_tax(s12131314,
+                                 "2013-14",
+                                 ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3),
+                                 cgt_discount_rate = 0.4,
+                                 return. = "tax")))
+  s1516_totally_discounted <- 
+    model_income_tax(taxstats1516::sample_file_1516_synth, 
+                     baseline_fy = "2015-16",
+                     cgt_discount_rate = 1.0)
+  expect_false(anyNA(s1516_totally_discounted[["new_tax"]]),
+               label = "High CGT discount should not cause NAs in new_tax.")
+  expect_gte(s1516_totally_discounted[, min(Taxable_Income, na.rm = TRUE)], 0,
+             label = "High CGT discount should not introduce negative Taxable_Incomes.")
+  
+  prev_revenue_foregone <- revenue_foregone(s1516)
+  
+  # No discount if no capital gains
+  s1516[, Tot_CY_CG_amt := -1L]
+  s1516 <- model_income_tax(s1516, 
+                            baseline_fy = "2015-16",
+                            cgt_discount_rate = 0.0)
+  
+  expect_lt(revenue_foregone(s1516), prev_revenue_foregone)
+  
+  
+})
 
 
-
-
+test_that("CGT (errors)", {
+  skip_on_cran()
+  skip_if_not_installed("taxstats")
+  skip_on_circleci(2)
+  library(taxstats)
+  expect_error(model_income_tax(sample_file_1213, "2013-14", 
+                                cgt_discount_rate = rep(0, 5)),
+               regexp = "length(cgt_discount_rate) = 5",
+               fixed = TRUE)
+  expect_error(model_income_tax(sample_file_1213, "2013-14", 
+                                cgt_discount_rate = "x"),
+               regexp = "`cgt_discount_rate` was type character",
+               fixed = TRUE)
+})
 
