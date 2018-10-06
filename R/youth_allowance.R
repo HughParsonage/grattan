@@ -1,15 +1,20 @@
 #' Youth allowance
 #' 
-#' @param ordinary_income Fortnightly individual income. Defualt is zero.
+#' @param fortnightly_income,annual_income Individual's income. Defualt is zero. 
+#' You may provided both; providing both when the ratio is not 26 is an error.
 #' @param fy.year Financial year. Default is current financial year.
-#' @param age The individual's age. Default is 18 years.
+#' @param include_ES (logical, default: \code{TRUE}) If \code{FALSE} do not include the energy supplement.
+#' @param age The individual's age. Default is 18 years. If type double will be coerced to 
+#' integer via truncation (i.e. 17.9 becomes 17).
 #' @param eligible_if_over22 To be eligible for Youth Allowance while over 22, recipients must either commence full-time study or an Australian apprenticeship having been in receipt of an income support payment for at least 6 out of the last 9 months since turning 22, or study an approved course in English where English is not their first language.
 #' @param has_partner Does the individual have a partner?
-#' @param living_at_home Does the individual live at home with their parents?
+#' @param lives_at_home Does the individual live at home with their parents?
 #' @param n_dependants How many dependant children does the individual have?
 #' @param isjspceoalfofcoahodeoc Is the recipient a single job seeker principal carer, either of large family or foster child/ren, or who is a home or distance educator of child/ren?
 #' @param is_student Is the individual a student? Note that apprenctices are considered students.
 #' @param per How often the payment will be made. Default is fortnightly. At present payments can only be fortnightly.
+#' @param max_rate If not \code{NULL}, a length-1 double representing the maximum rate for youth allowance.
+#' @param es If not \code{NULL}, a length-1 double as the energy supplement.
 #' @param taper1 The amount at which the payment is reduced for each dollar earned between the lower and upper bounds.
 #' @param taper2 The amount at which the payment is reduced for each dollar earned above the upper bound.
 #' @param FT_YA_student_lower Student and apprentice lower bound for which reduction in payment occurs at rate taper1
@@ -20,8 +25,199 @@
 #' @export youth_allowance 
 
 
-
 youth_allowance <- function(fortnightly_income = 0,
+                            annual_income = 0,
+                            fy.year = NULL,
+                            include_ES = TRUE,
+                            age = 18L,
+                            eligible_if_over22 = FALSE,
+                            has_partner = FALSE,
+                            lives_at_home = FALSE,
+                            n_dependants = 0L,
+                            isjspceoalfofcoahodeoc = FALSE,
+                            is_student = TRUE,
+                            per = "fortnight",
+                            
+                            max_rate = NULL,
+                            es = NULL,
+                            taper1 = NULL,
+                            taper2 = NULL,
+                            FT_YA_student_lower = NULL,
+                            FT_YA_student_upper = NULL,
+                            FT_YA_jobseeker_lower = NULL,
+                            FT_YA_jobseeker_upper = NULL,
+                            excess_partner_income_mu = 0.6) {
+  if (missing(annual_income)) {
+    ordinary_income <- fortnightly_income
+  } else {
+    if (missing(fortnightly_income)) {
+      ordinary_income <- annual_income / 26
+    } else {
+      if (max(abs(fortnightly_income - annual_income / 26)) > .Machine$double.eps^0.5) {
+        i <- which.max(abs(fortnightly_income - annual_income / 26))
+        stop("`fortnightly_income` and `annual_income` both provided but ",
+             "don't agree. \n\n\t", 
+             "i \tfortnightly_income\tannual_income\n\t", 
+             "--\t------------------\t-------------\n\t", 
+             i,
+             "\t", formatC(fortnightly_income[i], width = 18),
+             "\t", formatC(annual_income[i], width = 13), "\n\n",
+             "Either provide one (and not the other) or ensure that `annual_income = 26 * fortnightly_income`.")
+      }
+      ordinary_income <- fortnightly_income
+    }
+  }
+  
+  if (is.null(fy.year)) {
+    fy.year <- date2fy(Sys.Date())
+    message('fy.year` not set, so using `fy.year = "', fy.year, '".')
+  } else {
+    fy.year <- validate_fys_permitted(fy.year)
+  }
+  
+  
+  if (length(fy.year) == 1L) {
+    rates <- youth_annual_rates[.(fy.year)]
+    tests <- youth_income_tests[.(fy.year)]
+  } else {
+    if (!is.null(max_rate)) {
+      stop("`fy.year` has length ", length(fy.year),
+           "but `max_rate` is not NULL. ",
+           "If using `max_rate` to manually ", 
+           "set the threshold, `fy.year` must be a single ", 
+           "financial year.")
+    }
+    if (!is.null(taper1)) {
+      stop("`fy.year` has length ", length(fy.year),
+           "but `taper1` is not NULL. ",
+           "If using `taper1` to manually ", 
+           "set the threshold, `fy.year` must be a single ", 
+           "financial year.")
+    }
+    if (!is.null(taper2)) {
+      stop("`fy.year` has length ", length(fy.year),
+           "but `taper2` is not NULL. ",
+           "If using `taper2` to manually ", 
+           "set the threshold, `fy.year` must be a single ", 
+           "financial year.")
+    }
+    if (!is.null(FT_YA_student_lower)) {
+      stop("`fy.year` has length ", length(fy.year),
+           "but `FT_YA_student_lower` is not NULL. ",
+           "If using `FY_YA_student_lower` to manually ", 
+           "set the threshold, `fy.year` must be a single ", 
+           "financial year.")
+    }
+    if (!is.null(FT_YA_student_upper)) {
+      stop("`fy.year` has length ", length(fy.year),
+           "but `FT_YA_student_upper` is not NULL. ",
+           "If using `FT_YA_student_upper` to manually ", 
+           "set the threshold, `fy.year` must be a single ", 
+           "financial year.")
+    }
+    if (!is.null(FT_YA_jobseeker_lower)) {
+      stop("`fy.year` has length ", length(fy.year),
+           "but `FT_YA_jobseeker_lower` is not NULL. ",
+           "If using `FT_YA_jobseeker_lower` to manually ", 
+           "set the threshold, `fy.year` must be a single ", 
+           "financial year.")
+    }
+    if (!is.null(FT_YA_jobseeker_upper)) {
+      stop("`fy.year` has length ", length(fy.year),
+           "but `FT_YA_jobseeker_upper` is not NULL. ",
+           "If using `FT_YA_jobseeker_upper` to manually ", 
+           "set the threshold, `fy.year` must be a single ", 
+           "financial year.")
+    }
+    
+    rates <- youth_annual_rates
+    tests <- youth_annual_rates
+  }
+  
+  
+  input <- data.table(income = ordinary_income,
+                      fy_year = fy.year,
+                      HasDependant = n_dependants > 0L,
+                      HasPartner = has_partner,
+                      LivesAtHome = lives_at_home,
+                      Age16or17 = or(as.integer(age) == 16L,
+                                     as.integer(age) == 17L))
+  on.exit(options(datatable.auto.index = getOption("datatable.auto.index")))
+  options(datatable.auto.index = FALSE)
+  
+  tests_rates <-
+    input %>%
+    .[rates, 
+      on = c("fy_year",
+             "HasDependant",
+             "HasPartner",
+             "LivesAtHome",
+             "Age16or17"),
+      nomatch=0L] %>%
+    .[tests, 
+      on = c("isStudent",
+             "fy_year"),
+      nomatch=0L] %>%
+    .[, out := 0] %>%
+    .[, ok := (eligible_if_over22 | age <= 22)] %>%
+    setindexv("ok") %>%
+    .[]
+  
+  if (include_ES) {
+    tests_rates[, MaxRate := MBR + ES] 
+  } else {
+    tests_rates[, MaxRate := MBR + 0] 
+  }
+  if (!is.null(max_rate)) {
+    if (include_ES) {
+      if (!is.null(es)) {
+        set(tests_rates, j = "MaxRate", value = max_rate + es)
+      } else {
+        tests_rates[, MaxRate := max_rate + ES]
+      }
+    }
+    set(tests_rates, j = "MaxRate", value = max_rate)
+  }
+  
+  if (!is.null(taper1)) {
+    set(tests_rates, j = "taper_1", value = taper1)
+  }
+  if (!is.null(taper2)) {
+    set(tests_rates, j = "taper_2", value = taper2)
+  }
+  
+  if (!is.null(FT_YA_student_lower) && !is.null(FT_YA_jobseeker_lower)) {
+    tests_rates[, Income_Threshold_1 := if_else(isStudent, 
+                                                FT_YA_student_lower,
+                                                FT_YA_jobseeker_lower)]
+  } else if (!is.null(FT_YA_student_lower)) {
+    tests_rates[(isStudent), Income_Threshold_1 := FT_YA_student_lower]
+  } else if (!is.null(FT_YA_jobseeker_lower)) {
+    tests_rates[(isStudent), Income_Threshold_1 := FT_YA_jobseeker_lower]
+  }
+  
+  if (!is.null(FT_YA_student_upper) && !is.null(FT_YA_jobseeker_upper)) {
+    tests_rates[, Income_Threshold_1 := if_else(isStudent, 
+                                                FT_YA_student_upper,
+                                                FT_YA_jobseeker_upper)]
+  } else if (!is.null(FT_YA_student_upper)) {
+    tests_rates[(isStudent), Income_Threshold_1 := FT_YA_student_upper]
+  } else if (!is.null(FT_YA_jobseeker_upper)) {
+    tests_rates[(isStudent), Income_Threshold_1 := FT_YA_jobseeker_upper]
+  }
+  
+  res <-
+    tests_rates %>%
+    .[(ok), out := MaxRate] %>%
+    .[(ok), out := out - taper_1 * pmax0(pminV(income, IncomeThreshold_2) - IncomeThreshold_1)] %>%
+    .[(ok), out := out - taper_2 * pmax0(income - IncomeThreshold_2)] %>%
+    .subset2("out")
+  
+  res * 26 / validate_per(per, missing(per))
+}
+
+
+.youth_allowance <- function(fortnightly_income = 0,
                             annual_income = 0,
                             fy.year = date2fy(Sys.Date()),
                             age = 18,
@@ -39,9 +235,6 @@ youth_allowance <- function(fortnightly_income = 0,
                             FT_YA_jobseeker_lower = 143,
                             FT_YA_jobseeker_upper = 250,
                             excess_partner_income_mu = 0.6) {
-  # .NotYetImplemented()
-  stopifnot(per == "fortnight", 
-            identical(fy.year, "2017-18"))
   
   input <- data.table(do.call(cbind.data.frame, mget(ls())))
   
@@ -66,9 +259,9 @@ youth_allowance <- function(fortnightly_income = 0,
                                                             244.10,
                                                             293.60),
                                                     445.80))),
-                            ifelse(n_dependants > 0L,
-                                   489.60,
-                                   445.80)))]
+                            if_else(n_dependants > 0L,
+                                    489.60,
+                                    445.80)))]
   
   if (anyNA(max_rate_March_2018)) {
     stop("Unknown recipient status for youth_allowance() at index(es) ",
@@ -121,13 +314,15 @@ youth_allowance <- function(fortnightly_income = 0,
     if (missing(fortnightly_income)) {
       ordinary_income <- annual_income / 26
     } else {
-      if (max(abs(fortnightly_income - annual_income / 26)) < .Machine$double.eps^0.5) {
+      if (max(abs(fortnightly_income - annual_income / 26)) > .Machine$double.eps^0.5) {
         i <- which.max(abs(fortnightly_income - annual_income / 26))
         stop("`fortnightly_income` and `annual_income` both provided but ",
-             "don't agree. \n\t", 
+             "don't agree. \n\n\t", 
              "i \tfortnightly_income\tannual_income\n\t", 
              "--\t------------------\t-------------\n\t", 
-             i, "\t", fortnightly_income[i], "\t", annual_income[i], "\n")
+             i,
+             "\t", formatC(fortnightly_income[i], width = 18),
+             "\t", formatC(annual_income[i], width = 13), "\n")
       }
       ordinary_income <- fortnightly_income
     }
@@ -194,7 +389,8 @@ youth_allowance <- function(fortnightly_income = 0,
       # http://guides.dss.gov.au/guide-social-security-law/4/2/2
       # http://guides.dss.gov.au/guide-social-security-law/4/2/8/40
       # example: http://guides.dss.gov.au/guide-social-security-law/5/5/3/30
-    partner_income_reduction <- # https://web.archive.org/web/20160812171654/http://guides.dss.gov.au/guide-social-security-law/5/5/3/30
+    partner_income_reduction <- 
+      # https://web.archive.org/web/20160812171654/http://guides.dss.gov.au/guide-social-security-law/5/5/3/30
       if_else(has_partner & (partner_income > max_income_March_2018) & (age >= 22),
               0.6 * (partner_income - round((1/0.6) * (max_rate_March_2018 - (upper - lower) * 0.5 + 252 * 0.6))),
               0)
@@ -225,8 +421,13 @@ youth_allowance <- function(fortnightly_income = 0,
     if_else(PITR > MITRA,
             PITR,
             0)
-                                       
-  pmaxC(max_rate_March_2016 - personal_income_reduction - parental_income_reduction - asset_reduction - partner_income_reduction,
-        0)
+  ans <- 
+    max_rate_March_2016 - 
+    personal_income_reduction - 
+    parental_income_reduction - 
+    asset_reduction - 
+    partner_income_reduction
+  
+  pmax0(ans) / validate_per(per, missing(per))
 }
 

@@ -5,25 +5,28 @@
 \title{Youth allowance}
 \usage{
 youth_allowance(fortnightly_income = 0, annual_income = 0,
-  fy.year = date2fy(Sys.Date()), age = 18,
-  eligible_if_over22 = FALSE, has_partner = FALSE,
-  living_at_home = FALSE, n_dependants = 0L,
+  fy.year = NULL, age = 18L, eligible_if_over22 = FALSE,
+  has_partner = FALSE, lives_at_home = FALSE, n_dependants = 0L,
   isjspceoalfofcoahodeoc = FALSE, is_student = TRUE,
-  per = "fortnight", taper1 = 0.5, taper2 = 0.6,
-  FT_YA_student_lower = 437, FT_YA_student_upper = 524,
-  FT_YA_jobseeker_lower = 143, FT_YA_jobseeker_upper = 250,
+  per = "fortnight", taper1 = NULL, taper2 = NULL,
+  FT_YA_student_lower = NULL, FT_YA_student_upper = NULL,
+  FT_YA_jobseeker_lower = NULL, FT_YA_jobseeker_upper = NULL,
   excess_partner_income_mu = 0.6)
 }
 \arguments{
+\item{fortnightly_income, annual_income}{Individual's income. Defualt is zero. 
+You may provided both; providing both when the ratio is not 26 is an error.}
+
 \item{fy.year}{Financial year. Default is current financial year.}
 
-\item{age}{The individual's age. Default is 18 years.}
+\item{age}{The individual's age. Default is 18 years. If type double will be coerced to 
+integer via truncation (i.e. 17.9 becomes 17).}
 
 \item{eligible_if_over22}{To be eligible for Youth Allowance while over 22, recipients must either commence full-time study or an Australian apprenticeship having been in receipt of an income support payment for at least 6 out of the last 9 months since turning 22, or study an approved course in English where English is not their first language.}
 
 \item{has_partner}{Does the individual have a partner?}
 
-\item{living_at_home}{Does the individual live at home with their parents?}
+\item{lives_at_home}{Does the individual live at home with their parents?}
 
 \item{n_dependants}{How many dependant children does the individual have?}
 
@@ -46,8 +49,6 @@ youth_allowance(fortnightly_income = 0, annual_income = 0,
 \item{FT_YA_jobseeker_upper}{Jobseeker upper bound for which reduction in payment occurs at rate taper1. Student and apprentice lower bound for which reduction in payment occurs at rate taper2.}
 
 \item{excess_partner_income_mu}{The amount at which the payment is reduced for each dollar earned by the individual's partner.}
-
-\item{ordinary_income}{Fortnightly individual income. Defualt is zero.}
 }
 \description{
 Youth allowance

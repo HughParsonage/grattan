@@ -1,5 +1,15 @@
 context("Youth allowance")
 
+test_that("Error handling", {
+  expect_error(youth_allowance(fortnightly_income = 1,
+                               annual_income = 1),
+               regexp = "`fortnightly_income` and `annual_income` both provided but don't agree.")
+})
+
+test_that("Youth allowance values for given financial years", {
+  test_that()
+})
+
 # http://guides.dss.gov.au/guide-social-security-law/5/5/2/40
 test_that("Allowance with no income", {
   skip("Not yet implemented")

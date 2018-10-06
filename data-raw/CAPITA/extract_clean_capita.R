@@ -465,9 +465,9 @@ rent_assistance_rates_by_date <-
             "Date")) %>%
   .[]
 
-youth_annual_rates <- 
-  capita[sheet_name == "YouthUnemployment_A"] %>%
-  .[capita_headers, on = c("sheet_name", "col"), nomatch = 0] %>%
+youthStudent_annual_rates <-
+  capita[sheet_name == "YouthStudents_A"] %>%
+  .[capita_headers, on = c("sheet_name", "col"), nomatch = 0L] %>%
   .[COL <= "X"] %>%
   .[and(col %% 3 != 2, COL %notin% c("U", "V", "W", "X"))] %>%
   .[, .(fy_year = date2fy(end_date), col, COL, R6, value)] %>%
@@ -481,6 +481,35 @@ youth_annual_rates <-
   dcast.data.table(... ~ R6, value.var = "value") %>%
   .[]
 
+youthStudent_income_tests <- 
+  capita[sheet_name == "YouthStudents_A"] %>%
+  .[COL %chin% c("U", "V", "W", "X"),
+    .(start_date, end_date, col, COL, value)] %>%
+  .[, variable_type := if_else(COL %chin% c("U", "V"),
+                               "IncomeThreshold", 
+                               "taper")] %>%
+  .[, TaperNo := col %% 2 + 1] %>%
+  .[, fy_year := date2fy(end_date)] %>%
+  .[, isStudent := TRUE] %>%
+  dcast.data.table(isStudent + fy_year ~ variable_type + TaperNo, value.var = "value") %>%
+  .[, IncomeThreshold_1 := as.integer(IncomeThreshold_1)] %>%
+  .[, IncomeThreshold_2 := as.integer(IncomeThreshold_2)] %>%
+  .[]
+
+youth_annual_rates <- 
+  capita[sheet_name == "YouthUnemployment_A"] %>%
+  .[capita_headers, on = c("sheet_name", "col"), nomatch = 0] %>%
+  .[COL <= "X"] %>%
+  .[and(col %% 3 != 2, COL %notin% c("U", "V", "W", "X"))] %>%
+  .[, .(fy_year = date2fy(end_date), col, COL, R6, value)] %>%
+  .[, HasDependant := COL > "N"] %>%
+  .[, HasPartner := COL %between% c("L", "Q")] %>%
+  .[, LivesAtHome := COL %between% c("C", "G")] %>%
+  .[, Age16or17 := COL %chin% c("C", "D")] %>%
+  .[R6 %ein% c("MBR", "ES")] %>%
+  .[, c("COL", "col") := NULL] %>%
+  dcast.data.table(... ~ R6, value.var = "value")
+
 youth_income_tests <- 
   capita[sheet_name == "YouthUnemployment_A"] %>%
   .[COL %chin% c("U", "V", "W", "X"),
@@ -490,9 +519,12 @@ youth_income_tests <-
                                "taper")] %>%
   .[, TaperNo := col %% 2 + 1] %>%
   .[, fy_year := date2fy(end_date)] %>%
-  dcast.data.table(fy_year ~ variable_type + TaperNo, value.var = "value") %>%
+  .[, isStudent := FALSE] %>% 
+  dcast.data.table(isStudent + fy_year ~ variable_type + TaperNo, value.var = "value") %>%
   .[, IncomeThreshold_1 := as.integer(IncomeThreshold_1)] %>%
   .[, IncomeThreshold_2 := as.integer(IncomeThreshold_2)] %>%
+  rbind(youthStudent_income_tests, use.names = TRUE, fill = TRUE) %>%
+  setkey(isStudent, fy_year) %>%
   .[]
 
 youth_unemployment_rates <-
