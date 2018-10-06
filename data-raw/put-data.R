@@ -283,7 +283,7 @@ lf_trend <-
 
 lf_trend_fy <- 
   lf_trend[endsWith(obsTime, "-01")] %>%
-  .[, .(fy_year = yr2fy(substr(obsTime, 1L, 4L)), 
+  .[, .(fy_year = yr2fy(as.integer(substr(obsTime, 1L, 4L))), 
         obsValue)] %>%
   unique(by = "fy_year", fromLast = TRUE) %>%
   setkey(fy_year) %T>%
@@ -944,9 +944,14 @@ fwrite(abs_key_aggregates, "data-raw/abs_key_aggregates.tsv", sep = "\t")
 }
 
 read_csv_2col <- function(...) {
+  if (httr::http_error(..1)) {
+    message("ausmacrodata.org unavbl")
+    return(NULL)
+  }
   suppressMessages(suppressWarnings(read_csv(...))) %>% select(1:2) %>% setDT
 }
 
+if (FALSE) {
 abs_residential_property_price_Syd <-
   read_csv_2col("http://ausmacrodata.org/Data/6416.0/rppisrppiinpcoq.csv") %>%
   setnames(names(.)[2], "Syd")
@@ -1003,6 +1008,36 @@ residential_property_prices <-
   melt.data.table(id.vars = "Date",
                   variable.name = "City",
                   value.name = "Residential_property_price_index")
+}
+
+residential_property_prices <- 
+"http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/RES_PROP_INDEX/1.3.1GSYD+2GMEL+3GBRI+4GADE+5GPER+6GHOB+7GDAR+8ACTE+100.Q/all?startTime=2002-Q1&endTime=2018-Q2" %>% 
+  readSDMX %>%
+  as.data.frame %>% 
+  setDT %>%
+  .[ASGS_2011 %ein% "3GBRI", City := "Brisbane"] %>%
+  .[ASGS_2011 %ein% "5GPER", City := "Perth"] %>%
+  .[ASGS_2011 %ein% "7GDAR", City := "Darwin"] %>%
+  .[ASGS_2011 %ein% "6GHOB", City := "Hobart"] %>%
+  .[ASGS_2011 %ein% "8ACTE", City := "Canberra"] %>%
+  .[ASGS_2011 %ein% "1GSYD", City := "Sydney"] %>%
+  .[ASGS_2011 %ein% "4GADE", City := "Adelaide"] %>%
+  .[ASGS_2011 %ein% "100", City := "Australia (weighted average)"] %>%
+  .[ASGS_2011 %ein% "2GMEL", City := "Melbourne"] %>%
+  .[, City := factor(City, 
+                     levels = c("Sydney", "Melbourne", "Brisbane",
+                                "Perth", "Adelaide", "Hobart", 
+                                "Canberra", "Darwin",
+                                "Australia (weighted average)"))] %>%
+  .[, Date := as.Date(paste0(substr(obsTime, 1, 4), 
+                             "-",
+                             3L * as.integer(substr(obsTime, 7, 7)),
+                             "-01"))] %>%
+  .[, .(Date, City, Residential_property_price_index = obsValue)] %>%
+  setkey(Date, City) %>%
+  .[]
+
+
 
 devtools::use_data(residential_property_prices, overwrite = TRUE)
 
