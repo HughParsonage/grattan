@@ -1087,6 +1087,7 @@ Date  income_free_area  income_threshold
   .[newstart_rates_table, roll = TRUE] %>%
   .[Date > "2015-07-01", 
     income_free_area := CPI_July2015(income_free_area, Date)] %>%
+  .[complete.cases(.)] %>%  # avoid inflating prematurely
   .[, max_income_allowed := (10 / 4) * (Rate - 0.5 * (income_threshold - income_free_area))] %>%
   .[] %T>%
   fwrite("data-raw/newstart-income-test.tsv", sep = "\t") %>% 
