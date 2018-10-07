@@ -36,7 +36,7 @@ youth_allowance <- function(fortnightly_income = 0,
                             n_dependants = 0L,
                             isjspceoalfofcoahodeoc = FALSE,
                             is_student = TRUE,
-                            per = "fortnight",
+                            per = c("fortnight", "year"),
                             
                             max_rate = NULL,
                             es = NULL,
@@ -47,6 +47,18 @@ youth_allowance <- function(fortnightly_income = 0,
                             FT_YA_jobseeker_lower = NULL,
                             FT_YA_jobseeker_upper = NULL,
                             excess_partner_income_mu = 0.6) {
+  
+  max.length <- 
+    prohibit_vector_recycling.MAXLENGTH(fortnightly_income,
+                                        annual_income,
+                                        age,
+                                        eligible_if_over22,
+                                        has_partner,
+                                        lives_at_home,
+                                        n_dependants,
+                                        isjspceoalfofcoahodeoc,
+                                        is_student)
+  
   if (missing(annual_income)) {
     ordinary_income <- fortnightly_income
   } else {
@@ -72,13 +84,23 @@ youth_allowance <- function(fortnightly_income = 0,
     fy.year <- date2fy(Sys.Date())
     message('fy.year` not set, so using `fy.year = "', fy.year, '".')
   } else {
+    if (length(fy.year) != 1L && length(fy.year) != max.length) {
+      if (max.length == 1L) {
+        max.length <- length(fy.year)
+      } else {
+        stop("`fy.year` has length ", length(fy.year),
+             ", yet ")
+      }
+    }
+    
     fy.year <- validate_fys_permitted(fy.year)
+    
   }
   
   
   if (length(fy.year) == 1L) {
     rates <- youth_annual_rates[.(fy.year)]
-    tests <- youth_income_tests[.(fy.year)]
+    tests <- youth_income_tests[.(c(FALSE, TRUE), fy.year)]
   } else {
     if (!is.null(max_rate)) {
       stop("`fy.year` has length ", length(fy.year),
@@ -136,6 +158,7 @@ youth_allowance <- function(fortnightly_income = 0,
   
   
   input <- data.table(income = ordinary_income,
+                      isStudent = is_student,
                       fy_year = fy.year,
                       HasDependant = n_dependants > 0L,
                       HasPartner = has_partner,

@@ -1,4 +1,4 @@
 expr	time	Date
-"cpi_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	873287625	2018-10-07
-"wage_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	33932022	2018-10-07
-"lf_inflator_fy(from_fy = ""2014-15"", to_fy = the_next_fy)"	60678280	2018-10-07
+"cpi_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	759454450	2018-10-07
+"wage_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	36189338	2018-10-07
+"lf_inflator_fy(from_fy = ""2014-15"", to_fy = the_next_fy)"	60845733	2018-10-07

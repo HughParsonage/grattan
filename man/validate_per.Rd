@@ -22,11 +22,12 @@ For examples, see \code{\link{rent_assistance}} function code.
 \examples{
 \dontrun{
 # Typical use-case
+# attach(asNamespace("grattan"))
 z <- function(per = "year") 52 / validate_per(per, missing(per))
 z()  # message
-z(per = "year")  # same, no message
+z(per = "year")       # same, no message
 z(per = "fortnight")  # in fortnights
-z(per = "sidfh")  # error
+z(per = "sidfh")      # error
 }
 
 

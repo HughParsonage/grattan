@@ -5,19 +5,22 @@
 \title{Youth allowance}
 \usage{
 youth_allowance(fortnightly_income = 0, annual_income = 0,
-  fy.year = NULL, age = 18L, eligible_if_over22 = FALSE,
-  has_partner = FALSE, lives_at_home = FALSE, n_dependants = 0L,
+  fy.year = NULL, include_ES = TRUE, age = 18L,
+  eligible_if_over22 = FALSE, has_partner = FALSE,
+  lives_at_home = FALSE, n_dependants = 0L,
   isjspceoalfofcoahodeoc = FALSE, is_student = TRUE,
-  per = "fortnight", taper1 = NULL, taper2 = NULL,
-  FT_YA_student_lower = NULL, FT_YA_student_upper = NULL,
-  FT_YA_jobseeker_lower = NULL, FT_YA_jobseeker_upper = NULL,
-  excess_partner_income_mu = 0.6)
+  per = c("fortnight", "year"), max_rate = NULL, es = NULL,
+  taper1 = NULL, taper2 = NULL, FT_YA_student_lower = NULL,
+  FT_YA_student_upper = NULL, FT_YA_jobseeker_lower = NULL,
+  FT_YA_jobseeker_upper = NULL, excess_partner_income_mu = 0.6)
 }
 \arguments{
 \item{fortnightly_income, annual_income}{Individual's income. Defualt is zero. 
 You may provided both; providing both when the ratio is not 26 is an error.}
 
 \item{fy.year}{Financial year. Default is current financial year.}
+
+\item{include_ES}{(logical, default: \code{TRUE}) If \code{FALSE} do not include the energy supplement.}
 
 \item{age}{The individual's age. Default is 18 years. If type double will be coerced to 
 integer via truncation (i.e. 17.9 becomes 17).}
@@ -35,6 +38,10 @@ integer via truncation (i.e. 17.9 becomes 17).}
 \item{is_student}{Is the individual a student? Note that apprenctices are considered students.}
 
 \item{per}{How often the payment will be made. Default is fortnightly. At present payments can only be fortnightly.}
+
+\item{max_rate}{If not \code{NULL}, a length-1 double representing the maximum rate for youth allowance.}
+
+\item{es}{If not \code{NULL}, a length-1 double as the energy supplement.}
 
 \item{taper1}{The amount at which the payment is reduced for each dollar earned between the lower and upper bounds.}
 
