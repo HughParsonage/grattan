@@ -39,7 +39,7 @@ integer via truncation (i.e. 17.9 becomes 17).}
 
 \item{per}{How often the payment will be made. Default is fortnightly. At present payments can only be fortnightly.}
 
-\item{max_rate}{If not \code{NULL}, a length-1 double representing the maximum rate for youth allowance.}
+\item{max_rate}{If not \code{NULL}, a length-1 double representing the maximum \emph{fortnightly} rate for youth allowance.}
 
 \item{es}{If not \code{NULL}, a length-1 double as the energy supplement.}
 

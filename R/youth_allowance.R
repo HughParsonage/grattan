@@ -13,7 +13,7 @@
 #' @param isjspceoalfofcoahodeoc Is the recipient a single job seeker principal carer, either of large family or foster child/ren, or who is a home or distance educator of child/ren?
 #' @param is_student Is the individual a student? Note that apprenctices are considered students.
 #' @param per How often the payment will be made. Default is fortnightly. At present payments can only be fortnightly.
-#' @param max_rate If not \code{NULL}, a length-1 double representing the maximum rate for youth allowance.
+#' @param max_rate If not \code{NULL}, a length-1 double representing the maximum \emph{fortnightly} rate for youth allowance.
 #' @param es If not \code{NULL}, a length-1 double as the energy supplement.
 #' @param taper1 The amount at which the payment is reduced for each dollar earned between the lower and upper bounds.
 #' @param taper2 The amount at which the payment is reduced for each dollar earned above the upper bound.
@@ -168,7 +168,7 @@ youth_allowance <- function(fortnightly_income = 0,
     }
     
     rates <- youth_annual_rates
-    tests <- youth_annual_rates
+    tests <- youth_income_tests
   }
   
   
@@ -178,8 +178,10 @@ youth_allowance <- function(fortnightly_income = 0,
                       HasDependant = n_dependants > 0L,
                       HasPartner = has_partner,
                       LivesAtHome = lives_at_home,
-                      Age16or17 = or(as.integer(age) == 16L,
-                                     as.integer(age) == 17L))
+                      Age16or17 = and(or(as.integer(age) == 16L,
+                                         as.integer(age) == 17L),
+                                      and(n_dependants == 0L,
+                                          has_partner & lives_at_home)))
   on.exit(options(datatable.auto.index = getOption("datatable.auto.index")))
   options(datatable.auto.index = FALSE)
   
@@ -225,33 +227,36 @@ youth_allowance <- function(fortnightly_income = 0,
   }
   
   if (!is.null(FT_YA_student_lower) && !is.null(FT_YA_jobseeker_lower)) {
-    tests_rates[, Income_Threshold_1 := if_else(isStudent, 
+    tests_rates[, IncomeThreshold_1 := if_else(isStudent, 
                                                 FT_YA_student_lower,
                                                 FT_YA_jobseeker_lower)]
   } else if (!is.null(FT_YA_student_lower)) {
-    tests_rates[(isStudent), Income_Threshold_1 := FT_YA_student_lower]
+    tests_rates[(isStudent), IncomeThreshold_1 := FT_YA_student_lower]
   } else if (!is.null(FT_YA_jobseeker_lower)) {
-    tests_rates[(isStudent), Income_Threshold_1 := FT_YA_jobseeker_lower]
+    tests_rates[(!isStudent), IncomeThreshold_1 := FT_YA_jobseeker_lower]
   }
   
   if (!is.null(FT_YA_student_upper) && !is.null(FT_YA_jobseeker_upper)) {
-    tests_rates[, Income_Threshold_1 := if_else(isStudent, 
+    tests_rates[, IncomeThreshold_2 := if_else(isStudent, 
                                                 FT_YA_student_upper,
                                                 FT_YA_jobseeker_upper)]
   } else if (!is.null(FT_YA_student_upper)) {
-    tests_rates[(isStudent), Income_Threshold_1 := FT_YA_student_upper]
+    tests_rates[(isStudent), IncomeThreshold_2 := FT_YA_student_upper]
   } else if (!is.null(FT_YA_jobseeker_upper)) {
-    tests_rates[(isStudent), Income_Threshold_1 := FT_YA_jobseeker_upper]
+    tests_rates[(!isStudent), IncomeThreshold_2 := FT_YA_jobseeker_upper]
   }
   
   res <-
     tests_rates %>%
+    # incom2:
+    #   the top threshold or the income, whichever is the smallest
+    .[, incom2 := pminV(income, IncomeThreshold_2)] %>%
     .[(ok), out := MaxRate] %>%
-    .[(ok), out := out - taper_1 * pmax0(pminV(income, IncomeThreshold_2) - IncomeThreshold_1)] %>%
+    .[(ok), out := out - taper_1 * pmax0(incom2 - IncomeThreshold_1)] %>%
     .[(ok), out := out - taper_2 * pmax0(income - IncomeThreshold_2)] %>%
     .subset2("out")
   
-  res * 26 / validate_per(per, missing(per))
+  pmax0(res) * 26 / validate_per(per, missing(per))
 }
 
 

@@ -41,6 +41,10 @@ test_that("Error handling", {
                regexp = "`fy.year` has length 3 but `FT_YA_jobseeker_upper` is not NULL", 
                fixed = TRUE)
   
+  youth_allowance(fy.year = yr2fy(2016:2018),
+                  age = 16L,
+                  per = "fortnight")
+  
 })
 
 test_that("Fortnightly annual agreement", {
@@ -48,6 +52,14 @@ test_that("Fortnightly annual agreement", {
                                fy.year = "2015-16",
                                per = "year"),
                youth_allowance(fortnightly_income = 260,
+                               fy.year = "2015-16",
+                               per = "year"))
+  
+  expect_equal(youth_allowance(fortnightly_income = c(150, 260),
+                               annual_income = 26 * c(150, 260),
+                               fy.year = "2015-16",
+                               per = "year"),
+               youth_allowance(annual_income = 26 * c(150, 260),
                                fy.year = "2015-16",
                                per = "year"))
 })
@@ -71,8 +83,93 @@ test_that("per", {
                                per = "fortnight") * 26)
 })
 
-test_that("Youth allowance values for given financial years", {
+test_that("Youth allowance values with and without energy supplemeent", {
+  expect_equal(youth_allowance(fy.year = "2017-18", per = "fortnight"), 
+               448.65)
+  expect_equal(youth_allowance(fy.year = "2017-18", per = "fortnight", include_ES = FALSE),
+               441.65)
+})
+
+test_that("Manually set youth allowance parameters coincide", {
   
+  expect_equal(youth_allowance(fy.year = "2014-15", per = "fortnight"),
+               youth_allowance(fy.year = "2014-15", per = "fortnight", max_rate = 427.6))
+  expect_equal(youth_allowance(fy.year = "2014-15", per = "fortnight"),
+               youth_allowance(fy.year = "2014-15", per = "fortnight", max_rate = 427.6))
+  
+  # La plus ca meme
+  ya <- function(...) {
+    youth_allowance(fortnightly_income = 1:500,
+                    fy.year = "2014-15", per = "fortnight", ...)
+  }
+  
+  expect_equal(ya(),
+               ya(max_rate = 427.6))
+  expect_equal(ya(),
+               ya(taper1 = 0.5))
+  expect_equal(ya(),
+               ya(taper2 = 0.6))
+  expect_equal(ya(), 
+               ya(FT_YA_student_lower = 421))
+  expect_equal(ya(), 
+               ya(FT_YA_student_upper = 505))
+  rm(ya)
+})
+
+test_that("Manually set different rates", {
+  expect_lt(youth_allowance(fy.year = "2015-16", per = "year"),
+            youth_allowance(fy.year = "2015-16", per = "year", max_rate = 500))
+  expect_lt(youth_allowance(fortnightly_income = 550,
+                            fy.year = "2015-16",
+                            per = "year"),
+            youth_allowance(fortnightly_income = 550,
+                            fy.year = "2015-16",
+                            per = "year",
+                            taper2 = 0.4))
+  expect_lt(youth_allowance(fortnightly_income = 500,
+                            fy.year = "2015-16",
+                            per = "year"),
+            youth_allowance(fortnightly_income = 500,
+                            fy.year = "2015-16",
+                            per = "year",
+                            taper1 = 0.4))
+  expect_equal(youth_allowance(fortnightly_income = 520,
+                               fy.year = "2015-16",
+                               per = "fortnight",
+                               taper2 = 0.4),
+               youth_allowance(fortnightly_income = 520,
+                               fy.year = "2015-16",
+                               per = "fortnight") + 1)
+  expect_equal(youth_allowance(fortnightly_income = c(520, 255),
+                               is_student = c(TRUE, FALSE),
+                               fy.year = "2015-16",
+                               per = "fortnight",
+                               taper2 = 0.4),
+               youth_allowance(fortnightly_income = c(520, 255),
+                               is_student = c(TRUE, FALSE),
+                               fy.year = "2015-16",
+                               per = "fortnight") + 1)
+  expect_equal(youth_allowance(fortnightly_income = c(153, 439),
+                               is_student = c(FALSE, TRUE),
+                               fy.year = "2015-16",
+                               per = "fortnight",
+                               FT_YA_student_lower = 439,
+                               FT_YA_jobseeker_lower = 153),
+               youth_allowance(fortnightly_income = c(143, 429),
+                               is_student = c(FALSE, TRUE),
+                               fy.year = "2015-16",
+                               
+                               per = "fortnight"))
+})
+
+
+test_that("Youth allowance for multiple years", {
+  expect_equal(youth_allowance(fy.year = yr2fy(2016:2018),
+                               age = 16L,
+                               per = "fortnight"),
+               youth_allowance(fy.year = yr2fy(2016:2018),
+                               age = 19L,
+                               per = "fortnight"))
 })
 
 # http://guides.dss.gov.au/guide-social-security-law/5/5/2/40

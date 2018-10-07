@@ -40,6 +40,7 @@
 
 #' @importFrom Rcpp sourceCpp
 #' @importFrom stats complete.cases
+#' @importFrom stats setNames
 #' 
 #' 
 #' @import data.table
