@@ -4,10 +4,75 @@ test_that("Error handling", {
   expect_error(youth_allowance(fortnightly_income = 1,
                                annual_income = 1),
                regexp = "`fortnightly_income` and `annual_income` both provided but don't agree.")
+  expect_error(youth_allowance(fortnightly_income = (0:1) * 200,
+                               fy.year = yr2fy(2016:2018)),
+               regexp = "`fy.year` had length 3, yet `fortnightly_income` had length 2.",
+               fixed = TRUE)
+  expect_error(youth_allowance(is_student = as.logical(0:7),
+                               fy.year = yr2fy(2016:2018)),
+               regexp = "`fy.year` had length 3, yet `is_student` had length 8.",
+               fixed = TRUE)
+  expect_error(youth_allowance(fy.year = yr2fy(2016:2018),
+                               max_rate = 500),
+               regexp = "`fy.year` has length 3 but `max_rate` is not NULL", 
+               fixed = TRUE)
+  expect_error(youth_allowance(fy.year = yr2fy(2016:2018),
+                               taper1 = 0.4),
+               regexp = "`fy.year` has length 3 but `taper1` is not NULL", 
+               fixed = TRUE)
+  expect_error(youth_allowance(fy.year = yr2fy(2016:2018),
+                               taper2 = 0.4),
+               regexp = "`fy.year` has length 3 but `taper2` is not NULL", 
+               fixed = TRUE)
+  expect_error(youth_allowance(fy.year = yr2fy(2016:2018),
+                               FT_YA_student_lower = 0.4),
+               regexp = "`fy.year` has length 3 but `FT_YA_student_lower` is not NULL", 
+               fixed = TRUE)
+  expect_error(youth_allowance(fy.year = yr2fy(2016:2018),
+                               FT_YA_student_upper = 0.4),
+               regexp = "`fy.year` has length 3 but `FT_YA_student_upper` is not NULL", 
+               fixed = TRUE)
+  expect_error(youth_allowance(fy.year = yr2fy(2016:2018),
+                               FT_YA_jobseeker_lower = 0.4),
+               regexp = "`fy.year` has length 3 but `FT_YA_jobseeker_lower` is not NULL", 
+               fixed = TRUE)
+  expect_error(youth_allowance(fy.year = yr2fy(2016:2018),
+                               FT_YA_jobseeker_upper = 0.4),
+               regexp = "`fy.year` has length 3 but `FT_YA_jobseeker_upper` is not NULL", 
+               fixed = TRUE)
+  
+})
+
+test_that("Fortnightly annual agreement", {
+  expect_equal(youth_allowance(annual_income = 26 * 260,
+                               fy.year = "2015-16",
+                               per = "year"),
+               youth_allowance(fortnightly_income = 260,
+                               fy.year = "2015-16",
+                               per = "year"))
+})
+
+test_that("fy.year NULL", {
+  expect_message(youth_allowance(per = "year"),
+                 regex = '`fy.year` not set, so using `fy.year = ',
+                 fixed = TRUE)
+})
+
+test_that("per", {
+  expect_equal(youth_allowance(fy.year = "2016-17", 
+                               per = "year"),
+               youth_allowance(fy.year = "2016-17",
+                               per = "fortnight") * 26)
+  expect_equal(youth_allowance(fortnightly_income = 1:500,
+                               fy.year = "2016-17", 
+                               per = "year"),
+               youth_allowance(fortnightly_income = 1:500,
+                               fy.year = "2016-17",
+                               per = "fortnight") * 26)
 })
 
 test_that("Youth allowance values for given financial years", {
-  expect_equal(1, 1)
+  
 })
 
 # http://guides.dss.gov.au/guide-social-security-law/5/5/2/40

@@ -82,14 +82,30 @@ youth_allowance <- function(fortnightly_income = 0,
   
   if (is.null(fy.year)) {
     fy.year <- date2fy(Sys.Date())
-    message('fy.year` not set, so using `fy.year = "', fy.year, '".')
+    message('`fy.year` not set, so using `fy.year = "', fy.year, '".')
   } else {
     if (length(fy.year) != 1L && length(fy.year) != max.length) {
       if (max.length == 1L) {
         max.length <- length(fy.year)
       } else {
-        stop("`fy.year` has length ", length(fy.year),
-             ", yet ")
+        the_lengths <-
+          vapply(autonamed_list(fortnightly_income,
+                                annual_income,
+                                age,
+                                eligible_if_over22,
+                                has_partner,
+                                lives_at_home,
+                                n_dependants,
+                                isjspceoalfofcoahodeoc,
+                                is_student),
+                 length, 
+                 0L)
+        
+        stop("`fy.year` had length ", length(fy.year),
+             ", yet `",
+             names(the_lengths)[which.max(the_lengths)],
+             "` had length ", max.length, ". ",
+             "The only permitted lengths are 1 or the maximum length of the inputs.")
       }
     }
     
