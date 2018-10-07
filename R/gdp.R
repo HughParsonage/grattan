@@ -50,10 +50,10 @@ gdp_fy <- function(fy_year){
           quarters = .N), keyby = "fy_year"] %>%
     .[input] 
   
-  if (any(output[!is.na(quarters)][["quarters"]] != 4L)){
-    warning("Incomplete data for some fy_years. Dates before 1959 or in the very recent past will not be reliable.")
-    set(output, i = which(output[["quarters"]] < 4), j = which(names(output) == "GNI"), value = 4 * output[["GNI"]])
-  }
+  # if (any(output[!is.na(quarters)][["quarters"]] != 4L)){
+  #   warning("Incomplete data for some fy_years. Dates before 1959 or in the very recent past will not be reliable.")
+  #   set(output, i = which(output[["quarters"]] < 4), j = which(names(output) == "GNI"), value = 4 * output[["GNI"]])
+  # }
   
   output %>%
     setorderv("ordering") %>%

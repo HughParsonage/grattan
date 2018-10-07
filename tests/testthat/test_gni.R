@@ -12,7 +12,7 @@ test_that("GNI returns known results", {
 })
 
 test_that("Error handling", {
-  skip_if(Sys.Date() > "2019-07-01")
+  skip("All fys have full quarters in this release.")
   expect_warning(gni_fy("2018-19"))
 })
 
@@ -30,6 +30,7 @@ test_that("GDP returns known results", {
 })
 
 test_that("Error handling", {
-  skip_if(Sys.Date() > "2019-07-01")
+  library(data.table)
+  skip("All fys have full quarters in this release.")
   expect_warning(gdp_fy("2018-19"))
 })
