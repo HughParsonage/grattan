@@ -7,7 +7,7 @@ test_that("Error handling", {
 })
 
 test_that("Youth allowance values for given financial years", {
-  test_that()
+  expect_equal(1, 1)
 })
 
 # http://guides.dss.gov.au/guide-social-security-law/5/5/2/40
