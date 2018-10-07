@@ -110,7 +110,6 @@ youth_allowance <- function(fortnightly_income = 0,
     }
     
     fy.year <- validate_fys_permitted(fy.year)
-    
   }
   
   
@@ -120,49 +119,49 @@ youth_allowance <- function(fortnightly_income = 0,
   } else {
     if (!is.null(max_rate)) {
       stop("`fy.year` has length ", length(fy.year),
-           "but `max_rate` is not NULL. ",
+           " but `max_rate` is not NULL. ",
            "If using `max_rate` to manually ", 
            "set the threshold, `fy.year` must be a single ", 
            "financial year.")
     }
     if (!is.null(taper1)) {
       stop("`fy.year` has length ", length(fy.year),
-           "but `taper1` is not NULL. ",
+           " but `taper1` is not NULL. ",
            "If using `taper1` to manually ", 
            "set the threshold, `fy.year` must be a single ", 
            "financial year.")
     }
     if (!is.null(taper2)) {
       stop("`fy.year` has length ", length(fy.year),
-           "but `taper2` is not NULL. ",
+           " but `taper2` is not NULL. ",
            "If using `taper2` to manually ", 
            "set the threshold, `fy.year` must be a single ", 
            "financial year.")
     }
     if (!is.null(FT_YA_student_lower)) {
       stop("`fy.year` has length ", length(fy.year),
-           "but `FT_YA_student_lower` is not NULL. ",
+           " but `FT_YA_student_lower` is not NULL. ",
            "If using `FY_YA_student_lower` to manually ", 
            "set the threshold, `fy.year` must be a single ", 
            "financial year.")
     }
     if (!is.null(FT_YA_student_upper)) {
       stop("`fy.year` has length ", length(fy.year),
-           "but `FT_YA_student_upper` is not NULL. ",
+           " but `FT_YA_student_upper` is not NULL. ",
            "If using `FT_YA_student_upper` to manually ", 
            "set the threshold, `fy.year` must be a single ", 
            "financial year.")
     }
     if (!is.null(FT_YA_jobseeker_lower)) {
       stop("`fy.year` has length ", length(fy.year),
-           "but `FT_YA_jobseeker_lower` is not NULL. ",
+           " but `FT_YA_jobseeker_lower` is not NULL. ",
            "If using `FT_YA_jobseeker_lower` to manually ", 
            "set the threshold, `fy.year` must be a single ", 
            "financial year.")
     }
     if (!is.null(FT_YA_jobseeker_upper)) {
       stop("`fy.year` has length ", length(fy.year),
-           "but `FT_YA_jobseeker_upper` is not NULL. ",
+           " but `FT_YA_jobseeker_upper` is not NULL. ",
            "If using `FT_YA_jobseeker_upper` to manually ", 
            "set the threshold, `fy.year` must be a single ", 
            "financial year.")
