@@ -12,7 +12,8 @@ test_that("GNI returns known results", {
 })
 
 test_that("Error handling", {
-  expect_warning(gni_fy("2017-18"))
+  skip("All fys have full quarters in this release.")
+  expect_warning(gni_fy("2018-19"))
 })
 
 context("GDP")
@@ -29,5 +30,7 @@ test_that("GDP returns known results", {
 })
 
 test_that("Error handling", {
-  expect_warning(gdp_fy("2017-18"))
+  library(data.table)
+  skip("All fys have full quarters in this release.")
+  expect_warning(gdp_fy("2018-19"))
 })
