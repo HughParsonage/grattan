@@ -341,10 +341,8 @@ youth_allowance <- function(fortnightly_income = 0,
     .[(ok), out := out - taper_1 * pmax0(incom2 - IncomeThreshold_1)] %>%
     .[(ok), out := out - taper_2 * pmax0(income - IncomeThreshold_2)]
   
-  xx <<- tests_rates
-  
   if (any(partner_is_pensioner)) {
-    pifabfsa <<- copy(partner_income_free_area_by_fy_student_age)
+    pifabfsa <- partner_income_free_area_by_fy_student_age
     tests_rates <-
       # ## 4.2.8.40 
       # The partner income test applies where an independent YA recipient is 
