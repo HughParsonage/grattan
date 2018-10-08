@@ -1,4 +1,4 @@
-fy_year	PartnerReceivesBenefit	Age	partner_income_free_area
+fy_year	partnerIsPensioner	Age	partner_income_free_area
 2004-05	0	0	547
 2004-05	0	22	650
 2004-05	0	65	650

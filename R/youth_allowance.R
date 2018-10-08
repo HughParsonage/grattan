@@ -211,6 +211,9 @@ youth_allowance <- function(fortnightly_income = 0,
   hasPartner <- NULL
   LivesAtHome <- NULL
   Age16or17 <- NULL
+  Age <- NULL
+  partnerIsPensioner <- NULL
+  partnerIncome <- NULL
   
   MBR <- ES <- NULL
   
@@ -273,6 +276,7 @@ youth_allowance <- function(fortnightly_income = 0,
     .[]
   
   if (any(isjspceoalfofcoahodeoc)) {
+    i.MBR <- NULL
     tests_rates %<>% 
       .[parenting_payment_by_fy,
         on = "fy_year",
@@ -337,19 +341,26 @@ youth_allowance <- function(fortnightly_income = 0,
     .[(ok), out := out - taper_1 * pmax0(incom2 - IncomeThreshold_1)] %>%
     .[(ok), out := out - taper_2 * pmax0(income - IncomeThreshold_2)]
   
+  xx <<- tests_rates
+  
   if (any(partner_is_pensioner)) {
-    tests_rates %>%
+    pifabfsa <<- copy(partner_income_free_area_by_fy_student_age)
+    tests_rates <-
       # ## 4.2.8.40 
       # The partner income test applies where an independent YA recipient is 
       # a member of a couple (1.1.M.120). A recipient's rate of YA is reduced 
       # by 60 cents for each dollar of their partner's ordinary income (1.1.O.30)
       # that exceeds the partner income free area. The partner income free 
       # area is the same as for the benefits income test.
-      .[partner_income_free_area_by_fy_student_age,
-        on = c("fy_year", "PartnerReceivesBenefit", "Age"),
-        roll = TRUE] %>%
+      pifabfsa[tests_rates,
+               on = c("fy_year",
+                      "partnerIsPensioner",
+                      "Age"),
+               roll = TRUE,
+               nomatch = 0L,
+               mult = "first"] %>%
       .[hasPartner & !partnerIsPensioner,
-        out := out - partner_taper * pmax0(partner_income - partner_income_free_area)]
+        out := out - partner_taper * pmax0(partner_fortnightly_income - partner_income_free_area)]
   }
   
   

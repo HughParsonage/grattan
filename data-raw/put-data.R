@@ -1164,6 +1164,10 @@ partner_income_free_area_by_fy_student_age <-
              .partner_income_free_area(yr2fy(2005:2020), c(FALSE, TRUE), c(0L, 22L, 65L))
   })
 
+setnames(partner_income_free_area_by_fy_student_age, 
+         "PartnerReceivesBenefit",
+         "partnerIsPensioner")
+
 
 do_dots <- function(...) {
   eval(substitute(alist(...)))

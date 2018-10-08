@@ -197,6 +197,61 @@ test_that("Manually set different rates", {
                                per = "fortnight") - 10)
 })
 
+test_that("Partners (standard)", {
+  expect_equal(youth_allowance(fy.year = "2018-19",
+                               age = 19L,
+                               has_partner = TRUE,
+                               per = "fortnight"),
+               457.25)
+  expect_equal(youth_allowance(fy.year = "2018-19",
+                               age = 19L,
+                               has_partner = TRUE,
+                               n_dependants = 1L,
+                               per = "fortnight"),
+               502.2)
+  
+  ya_near_thr <- youth_allowance(fortnightly_income = 1280:1300,
+                             fy.year = "2018-19",
+                             age = 19L,
+                             has_partner = TRUE,
+                             n_dependants = 1L)
+  expect_true(max(ya_near_thr) > 0)
+  expect_equal(min(ya_near_thr), 0)
+  
+  expect_equal(length(youth_allowance(100,
+                                      partner_fortnightly_income = 1000,
+                                      has_partner = TRUE,
+                                      partner_is_pensioner = TRUE)),
+               1L)
+  expect_equal(length(youth_allowance(100,
+                                      age = c(18, 17, 22, 24, 66, 64),
+                                      partner_fortnightly_income = 1000,
+                                      has_partner = TRUE,
+                                      partner_is_pensioner = TRUE)),
+               6L)
+  expect_equal(youth_allowance(100,
+                               age = c(18, 17, 22, 24, 66, 64),
+                               partner_fortnightly_income = 1000,
+                               has_partner = TRUE,
+                               partner_is_pensioner = TRUE)[2],
+               youth_allowance(100,
+                               age = 17,
+                               partner_fortnightly_income = 1000,
+                               has_partner = TRUE,
+                               partner_is_pensioner = TRUE))
+  expect_equal(youth_allowance(100,
+                               age = c(18, 17, 22, 24, 66, 64),
+                               partner_fortnightly_income = 1000,
+                               has_partner = TRUE,
+                               partner_is_pensioner = TRUE)[3],
+               youth_allowance(100,
+                               age = 22,
+                               partner_fortnightly_income = 1000,
+                               has_partner = TRUE,
+                               partner_is_pensioner = TRUE))
+  
+})
+
 
 test_that("Youth allowance for multiple years", {
   expect_equal(youth_allowance(fy.year = yr2fy(2016:2018),
