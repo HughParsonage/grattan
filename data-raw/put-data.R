@@ -1095,6 +1095,76 @@ Date  income_free_area  income_threshold
 
 source("./data-raw/CAPITA/extract_clean_capita.R")
 
+forecast_with_orig <- function(x) {
+  y <- ts(x, freq = 2)
+  the_forecast <- forecast::forecast(y, h = 10L)
+  ans <- 
+    c(the_forecast[["x"]], 
+      the_forecast[["mean"]])
+  if (is.integer(x)) {
+    as.integer(ans)
+  } else {
+    ans
+  }
+}
+
+parenting_payment_by_date <- 
+  htmltab::htmltab("data-raw/guides.dss.gov.au/guide-social-security-law/5/2/4/50",
+                   which = 3) %>%
+  as.data.table %>%
+  setnames("Date rate commenced", "Date") %>%
+  setnames("Pension PPS", "MBR") %>% # for consistency with CAPITA tables
+  .[, MBR := sub(" Note A", "", MBR, fixed = TRUE)] %>%
+  .[, MBR := as.double(MBR)] %T>%
+  .[, stopifnot(!anyNA(MBR))] %>%
+  .[, Date := as.Date(Date, format = "%d/%m/%Y")] %>%
+  setkey(Date) %>%
+  .[, Year := year(Date)] %>%
+  .[, Month := month(Date)] %>%
+  .[, lapply(.SD, forecast_with_orig), .SDcols = c("Year", "Month", "MBR")] %>%
+  .[, Date := as.Date(paste0(Year, "-", Month, "-20"))] %>%
+  .[, MBR := round(MBR, 2)] %>%
+  setkey(Date) %>%
+  .[]
+
+parenting_payment_by_fy <- 
+  parenting_payment_by_date %>%
+  .[, .(MBR = mean(MBR)),
+    keyby = .(fy_year = date2fy(Date))]
+
+# http://guides.dss.gov.au/guide-social-security-law/4/2/2
+.partner_income_free_area <- function(fy.year,
+                                      partner_receives_benefit,
+                                      age) {
+  input <- CJ(fy_year = fy.year,
+              PartnerReceivesBenefit = partner_receives_benefit,
+              Age = age)
+  input[, II := .I]
+  input[
+    ,
+    "partner_income_free_area" := if (length(Age) != 1L || length(fy_year) != 1L) {
+      stop("Unexpected number of ages.")
+    } else if (Age < 22) {
+      which.max(youth_allowance(1:5e3, fy.year = fy_year, is_student = FALSE, per = "fortnight") < 0.01) + 1
+    } else if (Age < 65) {
+      which.max(unemployment_benefit(1:5e3, fy.year = fy_year) < 0.01) + 1
+    } else {
+      which.max(unemployment_benefit(1:5e3, fy.year = fy_year) < 0.01) + 1
+    },
+    keyby = "II"]
+  input[, II := NULL]
+  setkeyv(input, c("fy_year", "PartnerReceivesBenefit", "Age"))
+  input[]
+}
+
+partner_income_free_area_by_fy_student_age <- 
+  tryCatch(getFromNamespace("partner_income_free_area_by_fy_student_age",
+                            ns = asNamespace("grattan")),
+           error = function(e) {
+             .partner_income_free_area(yr2fy(2005:2020), c(FALSE, TRUE), c(0L, 22L, 65L))
+  })
+
+
 do_dots <- function(...) {
   eval(substitute(alist(...)))
 }
@@ -1185,6 +1255,10 @@ use_and_write_data(tax_table2,
                    aust_pop_by_age_yearqtr,
 
                    abs_key_aggregates,
+                   
+                   parenting_payment_by_fy,
+                   partner_income_free_area_by_fy_student_age,
+                   
                    
                    unemployment_income_tests,
                    unemployment_annual_rates,

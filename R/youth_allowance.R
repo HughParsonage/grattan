@@ -20,8 +20,10 @@
 #' @param FT_YA_student_lower Student and apprentice lower bound for which reduction in payment occurs at rate taper1
 #' @param FT_YA_student_upper Student and apprentice upper bound for which reduction in payment occurs at rate taper1. Student and apprentice lower bound for which reduction in payment occurs at rate taper2.
 #' @param FT_YA_jobseeker_lower Jobseeker lower bound for which reduction in payment occurs at rate taper1
-#' @param FT_YA_jobseeker_upper Jobseeker upper bound for which reduction in payment occurs at rate taper1. Student and apprentice lower bound for which reduction in payment occurs at rate taper2.
-#' @param excess_partner_income_mu The amount at which the payment is reduced for each dollar earned by the individual's partner.
+#' @param FT_YA_jobseeker_upper Jobseeker upper bound for which reduction in payment occurs at rate taper1. Student and apprentice lower bound for which reduction in payment occurs at rate \code{taper2}.
+#' @param partner_fortnightly_income The partner's fortnightly income (or zero if no partner).
+#' @param partner_is_pensioner (logical, default: \code{FALSE}) Is the individual's partner in receipt of a \emph{pension} (or benefit)? 
+#' @param partner_taper The amount by which the payment is reduced for each dollar earned by the individual's partner. (See \url{http://guides.dss.gov.au/guide-social-security-law/4/2/8/40}.)
 #' @export youth_allowance 
 
 
@@ -46,7 +48,11 @@ youth_allowance <- function(fortnightly_income = 0,
                             FT_YA_student_upper = NULL,
                             FT_YA_jobseeker_lower = NULL,
                             FT_YA_jobseeker_upper = NULL,
-                            excess_partner_income_mu = 0.6) {
+                            partner_fortnightly_income = 0,
+                            partner_is_pensioner = FALSE,
+                            partner_taper = 0.6) {
+  
+  args <- ls(sorted = FALSE)  # sorted = FALSE => in order of args
   
   max.length <- 
     prohibit_vector_recycling.MAXLENGTH(fortnightly_income,
@@ -57,7 +63,15 @@ youth_allowance <- function(fortnightly_income = 0,
                                         lives_at_home,
                                         n_dependants,
                                         isjspceoalfofcoahodeoc,
-                                        is_student)
+                                        is_student,
+                                        partner_fortnightly_income,
+                                        partner_is_pensioner)
+  for (arg in args) {
+    if (anyNA(get(arg, inherits = FALSE))) {
+      stop("`", arg, "` contains missing values. Impute these values.")
+    }
+  }
+  
   
   if (missing(annual_income)) {
     ordinary_income <- fortnightly_income
@@ -171,35 +185,81 @@ youth_allowance <- function(fortnightly_income = 0,
     tests <- youth_income_tests
   }
   
+  if (!is.numeric(partner_fortnightly_income)) {
+    stop("`partner_fortnightly_income` was class ", 
+         class(partner_fortnightly_income), 
+         ", but must be a numeric vector. ",
+         "Ensure `partner_fortnightly_income` is a numeric vector of length-1 ",
+         "or the length of the longest input.")
+  }
+  
+  
+  if (any(partner_fortnightly_income[!has_partner] != 0)) {
+    first_bad <- which.max(and(partner_fortnightly_income > 0, !has_partner))
+    stop("`partner_fortnightly_income` was greater than zero at position ",
+         first_bad, " yet ",
+         "`has_partner[", first_bad, "]` is FALSE. ", 
+         "Ensure the entries of `partner_fortnightly_income` and `has_partner` ", 
+         "agree in this respect.")
+  }
+  
+  
   income <- NULL
   isStudent <- NULL
   fy_year <- NULL
-  HasDependant <- NULL
-  HasPartner <- NULL
+  hasDependant <- NULL
+  hasPartner <- NULL
   LivesAtHome <- NULL
   Age16or17 <- NULL
   
-  input <- data.table(income = ordinary_income,
+  MBR <- ES <- NULL
+  
+  input <- data.table(income = as.double(ordinary_income),
                       isStudent = is_student,
                       fy_year = fy.year,
-                      HasDependant = n_dependants > 0L,
-                      HasPartner = has_partner,
+                      hasDependant = n_dependants > 0L,
+                      hasPartner = has_partner,
                       LivesAtHome = lives_at_home,
                       Age16or17 = and(or(as.integer(age) == 16L,
                                          as.integer(age) == 17L),
                                       and(n_dependants == 0L,
-                                          has_partner & lives_at_home)))
+                                          has_partner & lives_at_home)),
+                      Age = age,  # necessary for partner calculations
+                      partnerIsPensioner = partner_is_pensioner,
+                      partnerIncome = partner_fortnightly_income)
+  
+  # ## 4.2.8.40 
+  # The partner income test applies where an independent YA recipient is 
+  # a member of a couple (1.1.M.120). A recipient's rate of YA is reduced 
+  # by 60 cents for each dollar of their partner's ordinary income (1.1.O.30)
+  # that exceeds the partner income free area. The partner income free 
+  # area is the same as for the benefits income test.
+  #
+  # Exception: If the recipient's partner is receiving a pension, both
+  #   partners income is added together. Each partner is then assessed 
+  #   on half the combined income.
+  # 
+  # source: http://guides.dss.gov.au/guide-social-security-law/4/2/8/40
+  input[, income := if_else(hasPartner & partnerIsPensioner,
+                            (income + partnerIncome) / 2,
+                            income)]
+  
+  
   on.exit(options(datatable.auto.index = getOption("datatable.auto.index")))
   options(datatable.auto.index = FALSE)
   
   ok <- NULL
+  IncomeThreshold_1 <- NULL
+  IncomeThreshold_2 <- NULL
+  taper_1 <- NULL
+  taper_2 <- NULL
   
   tests_rates <-
     input %>%
     .[rates, 
       on = c("fy_year",
-             "HasDependant",
-             "HasPartner",
+             "hasDependant",
+             "hasPartner",
              "LivesAtHome",
              "Age16or17"),
       nomatch=0L] %>%
@@ -212,12 +272,21 @@ youth_allowance <- function(fortnightly_income = 0,
     setindexv("ok") %>%
     .[]
   
+  if (any(isjspceoalfofcoahodeoc)) {
+    tests_rates %<>% 
+      .[parenting_payment_by_fy,
+        on = "fy_year",
+        nomatch = 0L] %>%
+      .[, MBR := coalesce(i.MBR, MBR)] %>%
+      .[, i.MBR := NULL]
+  }
   
   
+  MaxRate <- NULL
   if (include_ES) {
-    tests_rates[, MaxRate := MBR + ES] 
+    tests_rates[, "MaxRate" := MBR + ES] 
   } else {
-    tests_rates[, MaxRate := MBR + 0] 
+    tests_rates[, "MaxRate" := MBR + 0] 
   }
   if (!is.null(max_rate)) {
     if (include_ES) {
@@ -258,17 +327,33 @@ youth_allowance <- function(fortnightly_income = 0,
     tests_rates[(!isStudent), IncomeThreshold_2 := FT_YA_jobseeker_upper]
   }
   
-  res <-
-    tests_rates %>%
+  incom2 <- NULL
+  
+  tests_rates %>%
     # incom2:
     #   the top threshold or the income, whichever is the smallest
     .[, incom2 := pminV(income, IncomeThreshold_2)] %>%
     .[(ok), out := MaxRate] %>%
     .[(ok), out := out - taper_1 * pmax0(incom2 - IncomeThreshold_1)] %>%
-    .[(ok), out := out - taper_2 * pmax0(income - IncomeThreshold_2)] %>%
-    .subset2("out")
+    .[(ok), out := out - taper_2 * pmax0(income - IncomeThreshold_2)]
   
-  pmax0(res) * 26 / validate_per(per, missing(per))
+  if (any(partner_is_pensioner)) {
+    tests_rates %>%
+      # ## 4.2.8.40 
+      # The partner income test applies where an independent YA recipient is 
+      # a member of a couple (1.1.M.120). A recipient's rate of YA is reduced 
+      # by 60 cents for each dollar of their partner's ordinary income (1.1.O.30)
+      # that exceeds the partner income free area. The partner income free 
+      # area is the same as for the benefits income test.
+      .[partner_income_free_area_by_fy_student_age,
+        on = c("fy_year", "PartnerReceivesBenefit", "Age"),
+        roll = TRUE] %>%
+      .[hasPartner & !partnerIsPensioner,
+        out := out - partner_taper * pmax0(partner_income - partner_income_free_area)]
+  }
+  
+  
+  pmax0(.subset2(tests_rates, "out")) * 26 / validate_per(per, missing(per))
 }
 
 

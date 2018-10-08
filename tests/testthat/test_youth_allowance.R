@@ -185,9 +185,9 @@ test_that("Manually set different rates", {
                                fy.year = "2015-16",
                                per = "fortnight",
                                
-                               FT_YA_jobseeker_lower = 200,
-                               FT_YA_student_lower = 500,
-                               taper1 = 0.1,
+                               FT_YA_jobseeker_upper = 200,
+                               FT_YA_student_upper = 500,
+                               taper1 = 0,
                                taper2 = 0.1),
                youth_allowance(fortnightly_income = 0,
                                is_student = c(FALSE, TRUE),

@@ -12,7 +12,8 @@ youth_allowance(fortnightly_income = 0, annual_income = 0,
   per = c("fortnight", "year"), max_rate = NULL, es = NULL,
   taper1 = NULL, taper2 = NULL, FT_YA_student_lower = NULL,
   FT_YA_student_upper = NULL, FT_YA_jobseeker_lower = NULL,
-  FT_YA_jobseeker_upper = NULL, excess_partner_income_mu = 0.6)
+  FT_YA_jobseeker_upper = NULL, partner_fortnightly_income = 0,
+  partner_is_pensioner = FALSE, partner_taper = 0.6)
 }
 \arguments{
 \item{fortnightly_income, annual_income}{Individual's income. Defualt is zero. 
@@ -53,9 +54,13 @@ integer via truncation (i.e. 17.9 becomes 17).}
 
 \item{FT_YA_jobseeker_lower}{Jobseeker lower bound for which reduction in payment occurs at rate taper1}
 
-\item{FT_YA_jobseeker_upper}{Jobseeker upper bound for which reduction in payment occurs at rate taper1. Student and apprentice lower bound for which reduction in payment occurs at rate taper2.}
+\item{FT_YA_jobseeker_upper}{Jobseeker upper bound for which reduction in payment occurs at rate taper1. Student and apprentice lower bound for which reduction in payment occurs at rate \code{taper2}.}
 
-\item{excess_partner_income_mu}{The amount at which the payment is reduced for each dollar earned by the individual's partner.}
+\item{partner_fortnightly_income}{The partner's fortnightly income (or zero if no partner).}
+
+\item{partner_is_pensioner}{(logical, default: \code{FALSE}) Is the individual's partner in receipt of a \emph{pension} (or benefit)?}
+
+\item{partner_taper}{The amount by which the payment is reduced for each dollar earned by the individual's partner. (See \url{http://guides.dss.gov.au/guide-social-security-law/4/2/8/40}.)}
 }
 \description{
 Youth allowance
