@@ -178,6 +178,23 @@ test_that("Manually set different rates", {
                                fy.year = "2015-16",
                                
                                per = "fortnight"))
+  expect_equal(youth_allowance(fortnightly_income = c(300, 600),
+                               is_student = c(FALSE, TRUE),
+                               has_partner = FALSE,
+                               n_dependants = 0L,
+                               fy.year = "2015-16",
+                               per = "fortnight",
+                               
+                               FT_YA_jobseeker_lower = 200,
+                               FT_YA_student_lower = 500,
+                               taper1 = 0.1,
+                               taper2 = 0.1),
+               youth_allowance(fortnightly_income = 0,
+                               is_student = c(FALSE, TRUE),
+                               has_partner = FALSE,
+                               n_dependants = 0L,
+                               fy.year = "2015-16",
+                               per = "fortnight") - 10)
 })
 
 
@@ -222,6 +239,14 @@ test_that("Manually set energy supplement", {
                                include_ES = TRUE,
                                max_rate = 410.95,
                                es = 2.5) + 1)
+})
+
+test_that("When not eligible", {
+  expect_equal(youth_allowance(400, 
+                               fy.year = "2017-18",
+                               per = "fortnight",
+                               age = 21:30),
+               if_else((21:30) <= 22, 448.65, 0))
 })
 
 # http://guides.dss.gov.au/guide-social-security-law/5/5/2/40

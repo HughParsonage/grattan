@@ -171,6 +171,13 @@ youth_allowance <- function(fortnightly_income = 0,
     tests <- youth_income_tests
   }
   
+  income <- NULL
+  isStudent <- NULL
+  fy_year <- NULL
+  HasDependant <- NULL
+  HasPartner <- NULL
+  LivesAtHome <- NULL
+  Age16or17 <- NULL
   
   input <- data.table(income = ordinary_income,
                       isStudent = is_student,
@@ -184,6 +191,8 @@ youth_allowance <- function(fortnightly_income = 0,
                                           has_partner & lives_at_home)))
   on.exit(options(datatable.auto.index = getOption("datatable.auto.index")))
   options(datatable.auto.index = FALSE)
+  
+  ok <- NULL
   
   tests_rates <-
     input %>%
@@ -202,6 +211,8 @@ youth_allowance <- function(fortnightly_income = 0,
     .[, ok := (eligible_if_over22 | age <= 22)] %>%
     setindexv("ok") %>%
     .[]
+  
+  
   
   if (include_ES) {
     tests_rates[, MaxRate := MBR + ES] 
