@@ -93,9 +93,8 @@ test_that("Youth allowance values with and without energy supplemeent", {
 test_that("Manually set youth allowance parameters coincide", {
   
   expect_equal(youth_allowance(fy.year = "2014-15", per = "fortnight"),
-               youth_allowance(fy.year = "2014-15", per = "fortnight", max_rate = 427.6))
-  expect_equal(youth_allowance(fy.year = "2014-15", per = "fortnight"),
-               youth_allowance(fy.year = "2014-15", per = "fortnight", max_rate = 427.6))
+               youth_allowance(fy.year = "2014-15", per = "fortnight", 
+                               max_rate = 427.6, include_ES = FALSE))
   
   # La plus ca meme
   ya <- function(...) {
@@ -104,7 +103,7 @@ test_that("Manually set youth allowance parameters coincide", {
   }
   
   expect_equal(ya(),
-               ya(max_rate = 427.6))
+               ya(max_rate = 427.6, include_ES = FALSE))
   expect_equal(ya(),
                ya(taper1 = 0.5))
   expect_equal(ya(),
@@ -113,6 +112,25 @@ test_that("Manually set youth allowance parameters coincide", {
                ya(FT_YA_student_lower = 421))
   expect_equal(ya(), 
                ya(FT_YA_student_upper = 505))
+  
+  # La plus ca meme
+  ya <- function(...) {
+    youth_allowance(fortnightly_income = 1:500,
+                    is_student = FALSE,
+                    fy.year = "2014-15", per = "fortnight", ...)
+  }
+  
+  # No effect
+  expect_equal(ya(), 
+               ya(FT_YA_student_lower = 421))
+  expect_equal(ya(), 
+               ya(FT_YA_student_upper = 505))
+  
+  expect_equal(ya(), 
+               ya(FT_YA_jobseeker_lower = 143))
+  expect_equal(ya(), 
+               ya(FT_YA_jobseeker_upper = 250))
+  
   rm(ya)
 })
 
@@ -170,6 +188,40 @@ test_that("Youth allowance for multiple years", {
                youth_allowance(fy.year = yr2fy(2016:2018),
                                age = 19L,
                                per = "fortnight"))
+})
+
+test_that("Manually set energy supplement", {
+  # La plus ca meme
+  expect_equal(youth_allowance(per = "fortnight",
+                               fy.year = "2012-13",
+                               has_partner = TRUE,
+                               n_dependants = 0L,
+                               include_ES = TRUE),
+               youth_allowance(per = "fortnight",
+                               fy.year = "2012-13",
+                               include_ES = TRUE,
+                               max_rate = 405.10,
+                               es = 0))
+  expect_equal(youth_allowance(per = "fortnight",
+                               fy.year = "2013-14",
+                               has_partner = TRUE,
+                               n_dependants = 0L,
+                               include_ES = TRUE),
+               youth_allowance(per = "fortnight",
+                               fy.year = "2013-14",
+                               include_ES = TRUE,
+                               max_rate = 410.95,
+                               es = 3.5))
+  expect_equal(youth_allowance(per = "fortnight",
+                               fy.year = "2013-14",
+                               has_partner = TRUE,
+                               n_dependants = 0L,
+                               include_ES = TRUE),
+               youth_allowance(per = "fortnight",
+                               fy.year = "2013-14",
+                               include_ES = TRUE,
+                               max_rate = 410.95,
+                               es = 2.5) + 1)
 })
 
 # http://guides.dss.gov.au/guide-social-security-law/5/5/2/40

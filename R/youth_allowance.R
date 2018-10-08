@@ -215,8 +215,9 @@ youth_allowance <- function(fortnightly_income = 0,
       } else {
         tests_rates[, MaxRate := max_rate + ES]
       }
+    } else {
+      set(tests_rates, j = "MaxRate", value = max_rate)
     }
-    set(tests_rates, j = "MaxRate", value = max_rate)
   }
   
   if (!is.null(taper1)) {
