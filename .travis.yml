@@ -1,4 +1,5 @@
 language: r
+sudo: required
 
 env:
   global:
@@ -23,8 +24,14 @@ matrix:
 cache: packages
 warnings_are_errors: true
 
-r_packages:
+
+
+r_binary_packages:
   - roxygen2
+  - stringr
+  - devtools
+  - dplyr
+  - forecast
 
 r_github_packages:
   - hughparsonage/formalCoverage
