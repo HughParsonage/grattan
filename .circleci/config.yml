@@ -40,6 +40,7 @@ jobs:
             mkdir /root/main/artifacts
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then Rscript -e "devtools::install()" ; fi
             if [[ $CIRCLE_NODE_INDEX == "0" ]]; then Rscript -e "knitr::knit('vignettes/grattan.Rmd')" ; fi
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then Rscript -e "tryCatch(covr::codecov(line_exclusions = c('R/zzz.R', 'R/install_taxstats.R', 'R/youth_unemployment.R', 'R/utils-test.R'), quiet = FALSE), error = function(e) devtools::test())" ; fi
       - run:
           name: Check R CMD check failures
           command: |

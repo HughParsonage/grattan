@@ -112,8 +112,8 @@ test_that("bys", {
   library(magrittr)
   
   s1516 <- 
-     selector(taxstats1516::sample_file_1516_synth,
-              cols = c("Gender", "Sw_amt", "Taxable_Income"))
+     .selector(taxstats1516::sample_file_1516_synth,
+              noms = c("Gender", "Sw_amt", "Taxable_Income"))
   s1516 <- as.data.table(s1516)
   
   s1516a <- copy(s1516b <- copy(s1516))

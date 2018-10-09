@@ -183,6 +183,11 @@ test_that("cpi returns reasonable forecasts", {
   skip_on_circleci(1)
   
   skip_if_not(packageVersion("rsdmx") >= package_version("0.5.10"))
+  travis_release_not_pr <- 
+    identical(Sys.getenv("TRAVIS"), "true") &&
+    !identical(Sys.getenv("TRAVIS_R_VERSION_STRING"), "release") &&
+    identical(Sys.getenv("TRAVIS_PULL_REQUEST"), "true")
+  skip_if(travis_release_not_pr)
   expect_gt(cpi_inflator(from_nominal_price = 1,
                          from_fy = "2016-17",
                          to_fy = "2018-19",

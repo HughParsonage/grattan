@@ -348,6 +348,8 @@ youth_allowance <- function(fortnightly_income = 0,
   
   if (any(partner_is_pensioner)) {
     pifabfsa <- partner_income_free_area_by_fy_student_age
+    partner_income_free_area <- NULL
+    
     tests_rates <-
       # ## 4.2.8.40 
       # The partner income test applies where an independent YA recipient is 
