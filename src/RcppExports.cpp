@@ -5,19 +5,6 @@
 
 using namespace Rcpp;
 
-// anyOutside
-int anyOutside(IntegerVector x, int a, int b);
-RcppExport SEXP _grattan_anyOutside(SEXP xSEXP, SEXP aSEXP, SEXP bSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< int >::type a(aSEXP);
-    Rcpp::traits::input_parameter< int >::type b(bSEXP);
-    rcpp_result_gen = Rcpp::wrap(anyOutside(x, a, b));
-    return rcpp_result_gen;
-END_RCPP
-}
 // AnyWhich
 int AnyWhich(IntegerVector x, int a, bool gt, bool lt, bool eq);
 RcppExport SEXP _grattan_AnyWhich(SEXP xSEXP, SEXP aSEXP, SEXP gtSEXP, SEXP ltSEXP, SEXP eqSEXP) {
@@ -114,6 +101,19 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type a(aSEXP);
     Rcpp::traits::input_parameter< double >::type m(mSEXP);
     rcpp_result_gen = Rcpp::wrap(Offset(x, y, a, m));
+    return rcpp_result_gen;
+END_RCPP
+}
+// anyOutside
+int anyOutside(IntegerVector x, int a, int b);
+RcppExport SEXP _grattan_anyOutside(SEXP xSEXP, SEXP aSEXP, SEXP bSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type a(aSEXP);
+    Rcpp::traits::input_parameter< int >::type b(bSEXP);
+    rcpp_result_gen = Rcpp::wrap(anyOutside(x, a, b));
     return rcpp_result_gen;
 END_RCPP
 }

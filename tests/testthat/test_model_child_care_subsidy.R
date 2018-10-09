@@ -108,5 +108,5 @@ test_that("Errors", {
                early_education_program = FALSE)
   expect_error(model_child_care_subsidy(sample, 
                                         Cbdc_hourly_cap = "10"),
-               regexp = "`Cbdc_hourly_cap` was type character, but must be numeric.")
+               regexp = "`Cbdc_hourly_cap` was type character but must be numeric.")
 })

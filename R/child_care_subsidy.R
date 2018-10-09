@@ -1,4 +1,4 @@
-#' Child Care Subsidy payed per child. 
+#' Child Care Subsidy paid per child. 
 #' 
 #' @param family_annual_income (numeric) Total income of the family.
 #' @param activity_level (numeric) The total number of activity hours of the parent. Note that if there are two parents the one with the lower activity level will be applied. Common activities include work, leave, and study. A full list can be viewed at \url{http://guides.dss.gov.au/family-assistance-guide/3/5/2/10}.
@@ -40,8 +40,8 @@ child_care_subsidy <- function(family_annual_income = 0,
                                activity_exemption = FALSE,
                                child_age = 3,
                                type_of_day_care = c("cbdc", "oshc", "fdc", "ihc"),
-                               hours_day_care_fortnight,
-                               cost_hour,
+                               hours_day_care_fortnight = 36,
+                               cost_hour = 10,
                                early_education_program = FALSE,
                                
                                cbdc_hourly_cap = 11.77,
@@ -109,7 +109,7 @@ child_care_subsidy <- function(family_annual_income = 0,
                cost_hour,
                early_education_program)
   
-  #income_test
+  # Income_test
   .data[, income_test := if_else(family_annual_income < income_test_bracket_1,
                                  taper_1,
                                  if_else(family_annual_income < income_test_bracket_2,
@@ -121,13 +121,14 @@ child_care_subsidy <- function(family_annual_income = 0,
                                                          if_else(family_annual_income < income_test_bracket_5,
                                                                  taper_3,
                                                                  0)))))]
-  #type of care adjustment
+  # Type of care adjustment
   .data[, type_of_day_care := if_else(child_age >= 6 & type_of_day_care == "cbdc",
                                       "oshc",
                                       if_else(child_age < 6 & type_of_day_care == "oshc",
                                               "cbdc", 
                                               type_of_day_care))]
-  #hourly cap
+  setindexv(.data, "type_of_day_care")
+  # Hourly cap
   .data[, hourly_cap := 0]
   .data[type_of_day_care == "cbdc", hourly_cap := cbdc_hourly_cap]
   .data[type_of_day_care == "fdc", hourly_cap := fdc_hourly_cap]
@@ -138,12 +139,12 @@ child_care_subsidy <- function(family_annual_income = 0,
                                 annual_cap_subsidy,
                                 Inf)]
   
-  #activity tests
+  # Activity tests
   .data[, activity_test_1 := koffset(activity_level,
-                                           activity_test_1_brackets,
-                                           activity_test_1_hours,
-                                           Yright = 100,
-                                           Method = "constant")]
+                                     activity_test_1_brackets,
+                                     activity_test_1_hours,
+                                     Yright = 100,
+                                     Method = "constant")]
   
   .data[, activity_test_2 := if_else(family_annual_income <= 66985 & activity_level < 8,
                                      24, 0)]
@@ -151,12 +152,14 @@ child_care_subsidy <- function(family_annual_income = 0,
                                      36, 0)]
   .data[, activity_test_4 := if_else(activity_exemption, 100, 0)]
   
-  .data[, activity_test := pmax(activity_test_1, activity_test_2, activity_test_3, activity_test_4)]
+  .data[, activity_test := pmax.int(activity_test_1,
+                                    activity_test_2,
+                                    activity_test_3,
+                                    activity_test_4)]
   
   
-  #calculation
-  output <- .data[, pminV(pminV(cost_hour, hourly_cap) * income_test * pminV(hours_day_care_fortnight, activity_test) * 365/14,
-                          annual_cap)]
-
-  output
+  # Calculation
+  .data[, pminV(pminV(cost_hour, hourly_cap) * income_test * pminV(hours_day_care_fortnight, activity_test) * 365/14,
+                annual_cap)]
+  
 }

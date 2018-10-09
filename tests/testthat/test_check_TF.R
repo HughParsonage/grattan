@@ -14,12 +14,21 @@ test_that("check_TF", {
                '`mustBe` had length 2 but must be length-one. Change `mustBe` to be TRUE or FALSE.')
 })
 
-test_that("check_numeric", {
-  expect_null(check_numeric(17))
-  mustBe <- TRUE
-  expect_error(check_numeric(mustBe), 
-               '`mustBe` was type logical, but must be numeric.')
-  mustBe <- 1:3
-  expect_error(check_numeric(mustBe), 
-               '`mustBe` had length 3 but must be length-one.')
+test_that("check_num1", {
+  expect_null(check_num1(1L))
+  expect_null(check_num1(1))
+  
+  mm <- 1:5
+  expect_error(check_num1(mm),
+               "`mm` had length 5 but must be length-one.",
+               fixed = TRUE)
+  mm <- "mm"
+  expect_error(check_num1(mm),
+               "`mm` was type character",
+               fixed = TRUE)
+  mm <- NA_real_
+  expect_error(check_num1(mm),
+               "`mm = NA` but must be a non-missing numeric.",
+               fixed = TRUE)
 })
+

@@ -48,7 +48,7 @@ model_child_care_subsidy <- function(sample_file,
   return. <- match.arg(return.)
   
   # Check sample file has correct format
-  if(!is.data.table(sample_file)) {
+  if (!is.data.table(sample_file)) {
     if (!is.data.frame(sample_file)) {
       stop("`sample_file` was a ", class(sample_file)[1],
            ", but must be a data.frame.")
@@ -59,7 +59,15 @@ model_child_care_subsidy <- function(sample_file,
     sample_file <- copy(sample_file)
   }
   
-  cols_required <- c("family_annual_income",  "activity_level", "activity_exemption", "child_age", "type_of_day_care", "hours_day_care_fortnight", "cost_hour", "early_education_program")
+  cols_required <- 
+    c("family_annual_income",
+      "activity_level",
+      "activity_exemption",
+      "child_age",
+      "type_of_day_care",
+      "hours_day_care_fortnight",
+      "cost_hour",
+      "early_education_program")
   
   if (!all(cols_required %chin% names(sample_file))) {
     absent_cols <- setdiff(cols_required, names(sample_file))
@@ -67,23 +75,43 @@ model_child_care_subsidy <- function(sample_file,
          paste0(absent_cols, collapse = "\n\t"), ".\n")
   }
   
-  #check other params
-  check_numeric(Cbdc_hourly_cap)
-  check_numeric(Fdc_hourly_cap)
-  check_numeric(Oshc_hourly_cap)
-  check_numeric(Ihc_hourly_cap)
-  check_numeric(Annual_cap_income)
-  check_numeric(Annual_cap_subsidy)
-  check_numeric(Income_test_bracket_1)
-  check_numeric(Income_test_bracket_2)
-  check_numeric(Income_test_bracket_3)
-  check_numeric(Income_test_bracket_4)
-  check_numeric(Income_test_bracket_5)
-  check_numeric(Taper_1)
-  check_numeric(Taper_2)
-  check_numeric(Taper_3)
-  check_numeric(Activity_test_1_brackets)
-  check_numeric(Activity_test_1_hours)
+  # check other params
+  check_num1(Cbdc_hourly_cap)
+  check_num1(Fdc_hourly_cap)
+  check_num1(Oshc_hourly_cap)
+  check_num1(Ihc_hourly_cap)
+  check_num1(Annual_cap_income)
+  check_num1(Annual_cap_subsidy)
+  check_num1(Income_test_bracket_1)
+  check_num1(Income_test_bracket_2)
+  check_num1(Income_test_bracket_3)
+  check_num1(Income_test_bracket_4)
+  check_num1(Income_test_bracket_5)
+  check_num1(Taper_1)
+  check_num1(Taper_2)
+  check_num1(Taper_3)
+  
+  if (!is.numeric(Activity_test_1_brackets)) {
+    stop("`Activity_test_1_brackets` was type ", typeof(Activity_test_1_brackets),
+         ", but must numeric.")
+  }
+  if (anyNA(Activity_test_1_brackets)) {
+    stop("`Activity_test_1_brackets` had missing values. Impute or remove these values.")
+  }
+  
+  if (!is.numeric(Activity_test_1_hours)) {
+    stop("`Activity_test_1_hours` was type ", typeof(Activity_test_1_hours),
+         ", but must numeric.")
+  }
+  if (anyNA(Activity_test_1_hours)) {
+    stop("`Activity_test_1_hours` had missing values. Impute or remove these values.")
+  }
+  if (length(Activity_test_1_hours) != length(Activity_test_1_brackets)) {
+    stop("`Activity_test_1_hours` and `Activity_test_1_brackets` have different ",
+         "lengths. Ensure that the hours and brackets arguments are numeric ",
+         "vectors with the same length.")
+  }
+  
   
   check_TF(calc_baseline_ccs)
   
