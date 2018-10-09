@@ -66,6 +66,7 @@ if (FALSE) {
       if (!file.rename(svg, sub("\\.png$", ".svg", svg))) {
         stop(svg)
       }
+    }
 
     
     change_pngs <- function(html) {
@@ -76,6 +77,10 @@ if (FALSE) {
       readr::write_lines(html_lines, html)
     }
     invisible(lapply(dir(path = "~/grattan/docs/articles/long-vignettes/", 
+                         pattern = "\\.html$", 
+                         full.names = TRUE), 
+                     change_pngs))
+    invisible(lapply(dir(path = "~/grattan/docs/articles/", 
                          pattern = "\\.html$", 
                          full.names = TRUE), 
                      change_pngs))

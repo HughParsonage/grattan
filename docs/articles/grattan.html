@@ -234,7 +234,7 @@ avg_tax_by_decile_<span class="dv">2021</span> &lt;-<span class="st"> </span>
 <span class="st">  </span>.[, decile <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">factor</span>(decile)] <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> decile, <span class="dt">y =</span> ppt_increase)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_col</span>()</code></pre></div>
-<p><img src="grattan_files/figure-html/tax-changes-grattan-forecast-1.png" width="700"></p>
+<p><img src="grattan_files/figure-html/tax-changes-grattan-forecast-1.svg" width="700"></p>
 <p>This chart and the underlying data are a reflection of the assumptions in the <code>project</code> function. In particular, the <code>project</code> function uses a particular forecast of the wage price index to uprate the salary column in the sample file. This differs from the assumptions in the 2017 Budget.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Budget_wage_series &lt;-
 <span class="st">  </span><span class="kw">data.table</span>(<span class="dt">fy_year =</span> <span class="kw">c</span>(<span class="st">"2017-18"</span>, <span class="st">"2018-19"</span>, <span class="st">"2019-20"</span>, <span class="st">"2020-21"</span>),
@@ -304,7 +304,7 @@ difference_2021_Budget <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, decile <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">factor</span>(decile)] <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> decile, <span class="dt">y =</span> ppt_increase)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_col</span>()</code></pre></div>
-<p><img src="grattan_files/figure-html/project-with-respect-to-budget-1.png" width="700"></p>
+<p><img src="grattan_files/figure-html/project-with-respect-to-budget-1.svg" width="700"></p>
 <p>Through some intermediate calculations, we can obtain the sentence that was used in the op-ed:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">middle_income_avg_inc &lt;-
 <span class="st">  </span>difference_2021_Budget <span class="op">%&gt;%</span>
@@ -576,7 +576,7 @@ sample_file <span class="op">%&gt;%</span>
         <span class="dt">axis.line.y =</span> <span class="kw">element_blank</span>(), 
         <span class="dt">axis.text.y =</span> <span class="kw">element_blank</span>(), 
         <span class="dt">axis.title.y =</span> <span class="kw">element_blank</span>())</code></pre></div>
-<p><img src="grattan_files/figure-html/taxable-income-quantiles-1.png" width="864"></p>
+<p><img src="grattan_files/figure-html/taxable-income-quantiles-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">DF <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Taxable_Income_decile =</span> <span class="kw">cut</span>(x, 
                                      <span class="dt">breaks =</span> <span class="kw">quantile</span>(sample_file<span class="op">$</span>Taxable_Income,
@@ -619,7 +619,7 @@ sample_file <span class="op">%&gt;%</span>
                <span class="dt">xend =</span> <span class="kw">tx_inc_q</span>(<span class="fl">0.95</span>),
                <span class="dt">yend =</span> <span class="fl">1.9</span> <span class="op">*</span><span class="st"> </span><span class="kw">max</span>(.<span class="op">$</span>y[.<span class="op">$</span>x <span class="op">&gt;</span><span class="st"> </span><span class="kw">tx_inc_q</span>(<span class="fl">0.925</span>)])) 
   }</code></pre></div>
-<p><img src="grattan_files/figure-html/taxable-income-quantiles-filled-1.png" width="864"></p>
+<p><img src="grattan_files/figure-html/taxable-income-quantiles-filled-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n_CGs &lt;-<span class="st"> </span>
 <span class="st">  </span>sample_file <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(Tot_CY_CG_amt <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%$%</span>
@@ -734,7 +734,7 @@ cgt_ratio_res &lt;-<span class="st"> </span><span class="dv">50</span></code></p
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title.y =</span> <span class="kw">element_blank</span>(),
         <span class="dt">axis.ticks.y =</span> <span class="kw">element_blank</span>(),
         <span class="dt">axis.text.y =</span> <span class="kw">element_blank</span>())</code></pre></div>
-<p><img src="grattan_files/figure-html/Ratio-Net-CG-to-Tot-CG-1.png" width="864"></p>
+<p><img src="grattan_files/figure-html/Ratio-Net-CG-to-Tot-CG-1.svg" width="864"></p>
 <p>Taxable capital gains are typically realized later in life. This is unsurprising: a capital gain can only be realized when one has an asset to sell. Further, the capital gains tax makes the sale of assets less attractive when incomes are high. Taxpayers in their twenties have a 1.28% chance of incurring capital gains tax, whereas 11.8% of those of retirement age have capital gains.  shows that although capital gains have been more common with older taxpayers, the age skew is slightly more pronounced in 2013-14 than in previous years.</p>
 <p>The average marginal tax rate of those with capital gains tax was 29.1%; however, this weights an individual with a capital gain of $1 equally as someone with a capital gain of $500,000. Weighting by the value of capital gain, the average marginal tax rate was 40.6%.</p>
 <p>The net capital gains includes the CGT discount (and other discounts) applied to: <span class="math display">\[\text{Total capital gains} - \text{Total capital losses (incl. from prev. years)}\]</span> Comparing the ratio  of  can shed some light on the value of the discount and the impact of capital losses on tax and tax revenue. Of those with nonzero total capital gains, 8.79% had no discount and 28.5% paid no tax (or a 100% discount). Some 45.3% had net capital gains of around 50% of their total gains. Weighting these numbers by the value of total capital gains, 1.51% of capital gains are taxed at the full marginal rate.  shows the distribution of this ratio. The deviance from 50% is due to some gains being realized within 12 months and (more commonly) capital losses.</p>
@@ -809,7 +809,7 @@ sample_file <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">color =</span> <span class="kw">viridis</span>(<span class="dv">1</span>), <span class="dt">size =</span> <span class="fl">1.2</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">label =</span> percent) 
 <span class="co">#&gt; `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'</span></code></pre></div>
-<p><img src="grattan_files/figure-html/CG-incidence-by-age-1.png" width="864"></p>
+<p><img src="grattan_files/figure-html/CG-incidence-by-age-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_files_all <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(age_range, Net_CG_amt, fy.year) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">merge</span>(age_range_decoder, <span class="dt">by =</span> <span class="st">"age_range"</span>) <span class="op">%&gt;%</span>
@@ -855,7 +855,7 @@ sample_file <span class="op">%&gt;%</span>
 <span class="co">#&gt; as.numeric(gsub("^([0-9]{2}).*$", : NAs introduced by coercion</span>
 <span class="co">#&gt; Warning: Ignoring unknown aesthetics: x, y</span>
 <span class="co">#&gt; `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'</span></code></pre></div>
-<p><img src="grattan_files/figure-html/CG-incidence-by-age-by-fy-1.png" width="864"></p>
+<p><img src="grattan_files/figure-html/CG-incidence-by-age-by-fy-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">24841</span>)
 sample_files_all <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(age_range, Net_CG_amt, fy.year) <span class="op">%&gt;%</span>
@@ -902,7 +902,7 @@ sample_files_all <span class="op">%&gt;%</span>
 <span class="co">#&gt; Warning: Ignoring unknown aesthetics: nudge_x</span>
 <span class="co">#&gt; Warning: Ignoring unknown aesthetics: x, y</span>
 <span class="co">#&gt; `geom_smooth()` using method = 'loess' and formula 'NULL'</span></code></pre></div>
-<p><img src="grattan_files/figure-html/CGT-by-age-weighted-ntile-1.png" width="864"></p>
+<p><img src="grattan_files/figure-html/CGT-by-age-weighted-ntile-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_file <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Tot_inc_amt_noCG =</span> Tot_inc_amt <span class="op">-</span><span class="st"> </span>Net_CG_amt, 
          <span class="dt">Taxable_Income_noCG =</span> <span class="kw"><a href="../reference/pmaxC.html">pmaxC</a></span>(Tot_inc_amt_noCG <span class="op">-</span><span class="st"> </span>Tot_ded_amt <span class="op">-</span><span class="st"> </span>NPP_loss_claimed <span class="op">-</span><span class="st"> </span>PP_loss_claimed, <span class="dv">0</span>)) <span class="op">%&gt;%</span>
@@ -914,7 +914,7 @@ sample_files_all <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Age, <span class="dt">fill =</span> <span class="st">`</span><span class="dt">Taxable Income</span><span class="ch">\n</span><span class="dt">(excl CG) decile</span><span class="st">`</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_density</span>(<span class="dt">alpha =</span> <span class="fl">0.7</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"right"</span>)</code></pre></div>
-<p><img src="grattan_files/figure-html/Age-distribution-ofCG-by-taxable-income-exclCG-1.png" width="864"></p>
+<p><img src="grattan_files/figure-html/Age-distribution-ofCG-by-taxable-income-exclCG-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (FY.YEAR <span class="op">!=</span><span class="st"> "2013-14"</span>){
   <span class="kw">stop</span>(<span class="st">"Check annotations in this chart before compiling"</span>)
 }
@@ -936,7 +936,7 @@ sample_file <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title.y =</span> <span class="kw">element_blank</span>())
 <span class="co">#&gt; `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'</span>
 <span class="co">#&gt; `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'</span></code></pre></div>
-<p><img src="grattan_files/figure-html/CGT-marginal-rate-weighted-and-unweighted-1.png" width="864"></p>
+<p><img src="grattan_files/figure-html/CGT-marginal-rate-weighted-and-unweighted-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (FY.YEAR <span class="op">!=</span><span class="st"> "2013-14"</span>){
   <span class="kw">stop</span>(<span class="st">"Check annotations in this chart before compiling"</span>)
 }
@@ -959,7 +959,7 @@ sample_file <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title.y =</span> <span class="kw">element_blank</span>())
 <span class="co">#&gt; `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'</span>
 <span class="co">#&gt; `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'</span></code></pre></div>
-<p><img src="grattan_files/figure-html/CGT-marginal-rate-b4-CG-weighted-and-unweighted-1.png" width="864"></p>
+<p><img src="grattan_files/figure-html/CGT-marginal-rate-b4-CG-weighted-and-unweighted-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n_prop_invstrs &lt;-
 <span class="st">  </span>sample_file <span class="op">%$%</span>
 <span class="st">  </span><span class="kw">sum</span>((Gross_rent_amt <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">*</span><span class="st"> </span>WEIGHT)
@@ -988,7 +988,7 @@ NG_tax_exp &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">label =</span> dollar) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title.y =</span> <span class="kw">element_blank</span>())
 <span class="co">#&gt; `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'</span></code></pre></div>
-<p><img src="grattan_files/figure-html/NG-vs-salary-1.png" width="864"></p>
+<p><img src="grattan_files/figure-html/NG-vs-salary-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">NG_by_taxBracket &lt;-
 <span class="st">  </span>sample_file <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Tax_bracket =</span> <span class="kw">cut</span>(Taxable_Income, 
@@ -1218,7 +1218,7 @@ NG_tax_benefit_taxable_income_decile_noNG &lt;-
                      <span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>),
                      <span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="kw">round</span>(<span class="kw">max</span>(<span class="kw">c</span>(NG_tax_benefit_taxable_income_decile_noNG<span class="op">$</span>tax_diff_prop, 
                                                NG_tax_benefit_taxable_income_decile<span class="op">$</span>tax_diff_prop)), <span class="dv">1</span>)))</code></pre></div>
-<p><img src="grattan_files/figure-html/NG-tax-benefit-by-income-tax-decile-1.png" width="864"></p>
+<p><img src="grattan_files/figure-html/NG-tax-benefit-by-income-tax-decile-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">NG_tax_benefit_taxable_income_decile_prev &lt;-
 <span class="st">  </span>sample_file_prev <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Tot_inc_amt_NoNG =</span> Tot_inc_amt <span class="op">-</span><span class="st"> </span>Net_rent_amt <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/pmaxC.html">pmaxC</a></span>(Net_rent_amt, <span class="dv">0</span>),
@@ -1274,7 +1274,7 @@ NG_tax_benefit_taxable_income_decile_noNG_prev &lt;-
         <span class="dt">strip.text =</span> <span class="kw">element_text</span>(<span class="dt">colour =</span> <span class="st">"white"</span>, <span class="dt">face =</span> <span class="st">"bold"</span>))
 <span class="co">#&gt; Warning: `legend.margin` must be specified using `margin()`. For the old</span>
 <span class="co">#&gt; behavior use legend.spacing</span></code></pre></div>
-<p><img src="grattan_files/figure-html/NG-tax-benefit-comparison-prev-fy-1.png" width="864"></p>
+<p><img src="grattan_files/figure-html/NG-tax-benefit-comparison-prev-fy-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="ot">NULL</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">data =</span> sample_file, 
@@ -1309,7 +1309,7 @@ NG_tax_benefit_taxable_income_decile_noNG_prev &lt;-
 p
 <span class="co">#&gt; `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'</span>
 <span class="co">#&gt; `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'</span></code></pre></div>
-<p><img src="grattan_files/figure-html/NG-incidence-by-age-1.png" width="864"></p>
+<p><img src="grattan_files/figure-html/NG-incidence-by-age-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">age_res =<span class="st"> </span><span class="dv">1</span>
 inc_res =<span class="st"> </span><span class="dv">10000</span>
 
@@ -1343,7 +1343,7 @@ sample_file <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">theme_dark</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.title =</span> <span class="kw">element_blank</span>(), 
         <span class="dt">plot.margin =</span> <span class="kw">unit</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="st">"pt"</span>))<span class="co"># %&gt;%</span></code></pre></div>
-<p><img src="grattan_files/figure-html/NG-by-age-by-total-income-1.png" width="864"></p>
+<p><img src="grattan_files/figure-html/NG-by-age-by-total-income-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co">#align_baptiste(.)</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">age_res =<span class="st"> </span><span class="dv">1</span>
 inc_res =<span class="st"> </span><span class="dv">10000</span>
@@ -1377,7 +1377,7 @@ sample_file <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">theme_dark</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.title =</span> <span class="kw">element_blank</span>())</code></pre></div>
-<p><img src="grattan_files/figure-html/NG-tax-benefit-by-age-by-total-income-1.png" width="864"></p>
+<p><img src="grattan_files/figure-html/NG-tax-benefit-by-age-by-total-income-1.svg" width="864"></p>
 </div>
 </div>
 <div id="differential-uprating" class="section level1">
@@ -1438,7 +1438,7 @@ sample_file <span class="op">%&gt;%</span>
   <span class="co"># ggplotly(p)</span>
   p
 }</code></pre></div>
-<p><img src="grattan_files/figure-html/unnamed-chunk-3-1.png" width="672"></p>
+<p><img src="grattan_files/figure-html/unnamed-chunk-3-1.svg" width="672"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">differential_uprates &lt;-<span class="st"> </span>
 <span class="st">  </span>average_salary_by_fy_swtile <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(<span class="st">`</span><span class="dt">Salary percentile</span><span class="st">`</span>) <span class="op">%&gt;%</span>
@@ -1449,7 +1449,7 @@ differential_uprates <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">`</span><span class="dt">Salary percentile</span><span class="st">`</span>, <span class="dt">y =</span> avg_r)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">label =</span> percent)</code></pre></div>
-<p><img src="grattan_files/figure-html/unnamed-chunk-4-1.png" width="864"></p>
+<p><img src="grattan_files/figure-html/unnamed-chunk-4-1.svg" width="864"></p>
 <p><strong>Differential uprating</strong> is a method by which variables are uprated by a function of not only the time period and the type of variable, but of the variable’s value too. To differentially uprate salary, use <code>differentially_uprate_wage</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data_frame</span>(<span class="dt">wage =</span> <span class="kw">c</span>(<span class="fl">20e3</span>, <span class="fl">50e3</span>, <span class="fl">100e3</span>)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ordinary =</span> <span class="kw"><a href="../reference/wage_inflator.html">wage_inflator</a></span>(wage, <span class="dt">from_fy =</span> <span class="st">"2012-13"</span>, <span class="dt">to_fy =</span> <span class="st">"2013-14"</span>), 
@@ -1664,7 +1664,7 @@ new_sample_file_<span class="dv">1718</span> <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># cosmetic:</span>
 <span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">label =</span> grattan_dollar) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title.y =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">"bold"</span>, <span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">margin =</span> <span class="kw">margin</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="st">"lines"</span>)))</code></pre></div>
-<p><img src="grattan_files/figure-html/unnamed-chunk-10-1.png" width="864"></p>
+<p><img src="grattan_files/figure-html/unnamed-chunk-10-1.svg" width="864"></p>
 </div>
 </div>
 </div>
@@ -1701,7 +1701,7 @@ new_sample_file_<span class="dv">1718</span> <span class="op">%&gt;%</span>
             <span class="dt">hjust =</span> <span class="fl">1.02</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">"top"</span>)</code></pre></div>
-<p><img src="grattan_files/figure-html/unnamed-chunk-12-1.png" width="864"></p>
+<p><img src="grattan_files/figure-html/unnamed-chunk-12-1.svg" width="864"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">conf_int_of_t.test &lt;-<span class="st"> </span><span class="cf">function</span>(variable){
   t_test &lt;-<span class="st"> </span><span class="kw">t.test</span>(sample_file_<span class="dv">1314</span>[[variable]],
                    sample_file_1314_projected[[variable]])
@@ -1727,7 +1727,7 @@ new_sample_file_<span class="dv">1718</span> <span class="op">%&gt;%</span>
              <span class="dt">color =</span> p.value <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.05</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_errorbar</span>() <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>)</code></pre></div>
-<p><img src="grattan_files/figure-html/unnamed-chunk-13-1.png" width="864"></p>
+<p><img src="grattan_files/figure-html/unnamed-chunk-13-1.svg" width="864"></p>
 <div id="years-not-in-sample-files" class="section level2">
 <h2 class="hasAnchor">
 <a href="#years-not-in-sample-files" class="anchor"></a>Years not in sample files</h2>
