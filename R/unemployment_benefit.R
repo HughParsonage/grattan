@@ -39,21 +39,22 @@ unemployment_benefit <- function(income = 0,
     }
     
     if (length(fy.year) != max.length &&
-        max.length != 1L) {
-      
-      Lengths <- 
-        vapply(list(income,
-                    assets,
-                    has_partner,
-                    has_dependant,
-                    is_home_owner),
-               length,
-               integer(1))
-      
-      stop("`fy.year` had length ", length(fy.year), ". ",
-           "Ensure it has length-1 or length-", max.length, ", ",
-           "the maximum of the lengths of the arguments ",
-           "length(", names(Lengths)[which.max(Lengths)], ").")
+        length(fy.year) != 1L) {
+      if (max.length == 1L) {
+        max.length <- length(fy.year)
+      } else {
+        Lengths <- 
+          autonamed_list(income,
+                         assets,
+                         has_partner,
+                         has_dependant,
+                         is_home_owner) %>%
+          vapply(length, integer(1L))
+        stop("`fy.year` had length ", length(fy.year), ". ",
+             "Ensure it has length-1 or length-", max.length, ", ",
+             "the maximum of the lengths of the arguments ",
+             "length(", names(Lengths)[which.max(Lengths)], ").")
+      }
     }
     
     permitted_fys <-
@@ -112,8 +113,8 @@ unemployment_benefit <- function(income = 0,
     data.table(income, 
                assets, 
                fy_or_date = fy.year %||% Date, 
-               HasPartner = has_partner,
-               HasDependant = has_dependant, 
+               hasPartner = has_partner,
+               hasDependant = has_dependant, 
                HomeOwner = is_home_owner)
   input[, "ordering" := .I]
   setnames(input,
@@ -131,39 +132,39 @@ unemployment_benefit <- function(income = 0,
     output <-
       unemployment_income_tests[input,
                                 on = c("fy_year",
-                                       "HasPartner",
-                                       "HasDependant")] %>%
+                                       "hasPartner",
+                                       "hasDependant")] %>%
       unemployment_annual_rates[., on = c("fy_year",
-                                          "HasPartner", 
-                                          "HasDependant")] %>%
+                                          "hasPartner", 
+                                          "hasDependant")] %>%
       unemployment_assets_tests[.,
                                 on = c("fy_year", 
-                                       "HasPartner",
+                                       "hasPartner",
                                        "HomeOwner")]
   } else {
     setkeyv(input,
-            c("HasPartner",
-              "HasDependant",
+            c("hasPartner",
+              "hasDependant",
               "Date"))
     output <-
       unemployment_income_tests_by_date[input,
-                                on = c("HasPartner",
-                                       "HasDependant",
+                                on = c("hasPartner",
+                                       "hasDependant",
                                        "Date"),
                                 roll = -Inf]
     output <-
       unemployment_rates_by_date[output,
-                                 on = c("HasPartner", 
-                                        "HasDependant",
+                                 on = c("hasPartner", 
+                                        "hasDependant",
                                         "Date"),
                                  roll = -Inf]
     setkeyv(input,
-            c("HasPartner",
+            c("hasPartner",
               "HomeOwner",
               "Date"))
     output <- 
       unemployment_assets_tests_by_date[output,
-                                        on = c("HasPartner",
+                                        on = c("hasPartner",
                                                "HomeOwner", 
                                                "Date"),
                                         roll = -Inf]

@@ -283,7 +283,7 @@ lf_trend <-
 
 lf_trend_fy <- 
   lf_trend[endsWith(obsTime, "-01")] %>%
-  .[, .(fy_year = yr2fy(substr(obsTime, 1L, 4L)), 
+  .[, .(fy_year = yr2fy(as.integer(substr(obsTime, 1L, 4L))), 
         obsValue)] %>%
   unique(by = "fy_year", fromLast = TRUE) %>%
   setkey(fy_year) %T>%
@@ -944,9 +944,14 @@ fwrite(abs_key_aggregates, "data-raw/abs_key_aggregates.tsv", sep = "\t")
 }
 
 read_csv_2col <- function(...) {
+  if (httr::http_error(..1)) {
+    message("ausmacrodata.org unavbl")
+    return(NULL)
+  }
   suppressMessages(suppressWarnings(read_csv(...))) %>% select(1:2) %>% setDT
 }
 
+if (FALSE) {
 abs_residential_property_price_Syd <-
   read_csv_2col("http://ausmacrodata.org/Data/6416.0/rppisrppiinpcoq.csv") %>%
   setnames(names(.)[2], "Syd")
@@ -1003,6 +1008,36 @@ residential_property_prices <-
   melt.data.table(id.vars = "Date",
                   variable.name = "City",
                   value.name = "Residential_property_price_index")
+}
+
+residential_property_prices <- 
+"http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/RES_PROP_INDEX/1.3.1GSYD+2GMEL+3GBRI+4GADE+5GPER+6GHOB+7GDAR+8ACTE+100.Q/all?startTime=2002-Q1&endTime=2018-Q2" %>% 
+  readSDMX %>%
+  as.data.frame %>% 
+  setDT %>%
+  .[ASGS_2011 %ein% "3GBRI", City := "Brisbane"] %>%
+  .[ASGS_2011 %ein% "5GPER", City := "Perth"] %>%
+  .[ASGS_2011 %ein% "7GDAR", City := "Darwin"] %>%
+  .[ASGS_2011 %ein% "6GHOB", City := "Hobart"] %>%
+  .[ASGS_2011 %ein% "8ACTE", City := "Canberra"] %>%
+  .[ASGS_2011 %ein% "1GSYD", City := "Sydney"] %>%
+  .[ASGS_2011 %ein% "4GADE", City := "Adelaide"] %>%
+  .[ASGS_2011 %ein% "100", City := "Australia (weighted average)"] %>%
+  .[ASGS_2011 %ein% "2GMEL", City := "Melbourne"] %>%
+  .[, City := factor(City, 
+                     levels = c("Sydney", "Melbourne", "Brisbane",
+                                "Perth", "Adelaide", "Hobart", 
+                                "Canberra", "Darwin",
+                                "Australia (weighted average)"))] %>%
+  .[, Date := as.Date(paste0(substr(obsTime, 1, 4), 
+                             "-",
+                             3L * as.integer(substr(obsTime, 7, 7)),
+                             "-01"))] %>%
+  .[, .(Date, City, Residential_property_price_index = obsValue)] %>%
+  setkey(Date, City) %>%
+  .[]
+
+
 
 devtools::use_data(residential_property_prices, overwrite = TRUE)
 
@@ -1052,12 +1087,95 @@ Date  income_free_area  income_threshold
   .[newstart_rates_table, roll = TRUE] %>%
   .[Date > "2015-07-01", 
     income_free_area := CPI_July2015(income_free_area, Date)] %>%
+  .[complete.cases(.)] %>%  # avoid inflating prematurely
   .[, max_income_allowed := (10 / 4) * (Rate - 0.5 * (income_threshold - income_free_area))] %>%
   .[] %T>%
   fwrite("data-raw/newstart-income-test.tsv", sep = "\t") %>% 
   .[]
 
 source("./data-raw/CAPITA/extract_clean_capita.R")
+
+forecast_with_orig <- function(x) {
+  y <- ts(x, freq = 2)
+  the_forecast <- forecast::forecast(y, h = 10L)
+  ans <- 
+    c(the_forecast[["x"]], 
+      the_forecast[["mean"]])
+  if (is.integer(x)) {
+    as.integer(ans)
+  } else {
+    ans
+  }
+}
+
+parenting_payment_by_date <- 
+  htmltab::htmltab("data-raw/guides.dss.gov.au/guide-social-security-law/5/2/4/50",
+                   which = 3) %>%
+  as.data.table %>%
+  setnames("Date rate commenced", "Date") %>%
+  setnames("Pension PPS", "MBR") %>% # for consistency with CAPITA tables
+  .[, MBR := sub(" Note A", "", MBR, fixed = TRUE)] %>%
+  .[, MBR := as.double(MBR)] %T>%
+  .[, stopifnot(!anyNA(MBR))] %>%
+  .[, Date := as.Date(Date, format = "%d/%m/%Y")] %>%
+  setkey(Date) %>%
+  .[, Year := year(Date)] %>%
+  .[, Month := month(Date)] %>%
+  .[, lapply(.SD, forecast_with_orig), .SDcols = c("Year", "Month", "MBR")] %>%
+  .[, Date := as.Date(paste0(Year, "-", Month, "-20"))] %>%
+  .[, MBR := round(MBR, 2)] %>%
+  setkey(Date) %>%
+  .[]
+
+parenting_payment_by_fy <- 
+  parenting_payment_by_date %>%
+  .[, .(MBR = mean(MBR)),
+    keyby = .(fy_year = date2fy(Date))]
+
+parenting_payment_by_fy <- 
+  rbind(copy(parenting_payment_by_fy)[, isParentingPayment := FALSE][, MBR := NA_real_],
+        copy(parenting_payment_by_fy)[, isParentingPayment := TRUE]) %>%
+  setkeyv(c("isParentingPayment", "fy_year"))
+
+# http://guides.dss.gov.au/guide-social-security-law/4/2/2
+.partner_income_free_area <- function(fy.year,
+                                      partner_receives_benefit,
+                                      age) {
+  input <- CJ(fy_year = fy.year,
+              PartnerReceivesBenefit = partner_receives_benefit,
+              Age = age)
+  input[, II := .I]
+  input[
+    ,
+    "partner_income_free_area" := if (length(Age) != 1L || length(fy_year) != 1L) {
+      stop("Unexpected number of ages.")
+    } else if (Age < 22) {
+      which.max(youth_allowance(1:5e3, fy.year = fy_year, is_student = FALSE, per = "fortnight") < 0.01) + 1
+    } else if (Age < 65) {
+      which.max(unemployment_benefit(1:5e3, fy.year = fy_year) < 0.01) + 1
+    } else {
+      which.max(unemployment_benefit(1:5e3, fy.year = fy_year) < 0.01) + 1
+    },
+    keyby = "II"]
+  input[, II := NULL]
+  setkeyv(input, c("fy_year", "PartnerReceivesBenefit", "Age"))
+  input[]
+}
+
+partner_income_free_area_by_fy_student_age <- 
+  tryCatch(getFromNamespace("partner_income_free_area_by_fy_student_age",
+                            ns = asNamespace("grattan")),
+           error = function(e) {
+             .partner_income_free_area(yr2fy(2005:2020), c(FALSE, TRUE), c(0L, 22L, 65L))
+  })
+
+if (hasName(partner_income_free_area_by_fy_student_age, 
+            "PartnerReceivesBenefit")) {
+  setnames(partner_income_free_area_by_fy_student_age, 
+           "PartnerReceivesBenefit",
+           "partnerIsPensioner")
+}
+
 
 do_dots <- function(...) {
   eval(substitute(alist(...)))
@@ -1149,6 +1267,10 @@ use_and_write_data(tax_table2,
                    aust_pop_by_age_yearqtr,
 
                    abs_key_aggregates,
+                   
+                   parenting_payment_by_fy,
+                   partner_income_free_area_by_fy_student_age,
+                   
                    
                    unemployment_income_tests,
                    unemployment_annual_rates,

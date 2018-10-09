@@ -1,6 +1,7 @@
 context("Data up-to-date")
 
 test_that("Data is up-to-date as documented", {
+  skip_if_not(is.na(Sys.getenv("R_GRATTAN_CHECK_UP_TO_DATE", unset = NA_character_)))
   skip_on_cran()
   # skip_on_travis()
   skip_on_appveyor()

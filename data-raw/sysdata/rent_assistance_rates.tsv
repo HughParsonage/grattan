@@ -1,4 +1,4 @@
-fy_year	HasPartner	nDependants	max_rate	min_rent
+fy_year	hasPartner	nDependants	max_rate	min_rent
 2000-01	0	0	86.51	75.53
 2000-01	0	1	101.12	99.37
 2000-01	0	3	114.29	99.37

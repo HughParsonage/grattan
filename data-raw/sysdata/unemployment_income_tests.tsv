@@ -1,4 +1,4 @@
-fy_year	HasPartner	HasDependant	IncomeThreshold_1	IncomeThreshold_2	taper_1	taper_2
+fy_year	hasPartner	hasDependant	IncomeThreshold_1	IncomeThreshold_2	taper_1	taper_2
 2000-01	0	0	62	142	0.5	0.7
 2000-01	0	1	62	142	0.5	0.7
 2000-01	1	0	62	142	0.5	0.7

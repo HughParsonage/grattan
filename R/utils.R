@@ -143,5 +143,10 @@ accel_repetitive_input <- function(x, FUN, ..., THRESHOLD = 1000L) {
 
 is.Date <- function(x) inherits(x, "Date")
 
+autonamed_list <- function(...) {
+  setNames(list(...), nm = eval(substitute(alist(...))))
+}
+
+
 
 

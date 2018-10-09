@@ -121,7 +121,7 @@ rent_assistance <- function(fortnightly_rent = Inf,
     
     input <- 
       data.table(fy_year = fy.year %||% Date,
-                 HasPartner = has_partner,
+                 hasPartner = has_partner,
                  nDependants = n_dependants,
                  Rent = fortnightly_rent)
     
@@ -130,26 +130,26 @@ rent_assistance <- function(fortnightly_rent = Inf,
     if (is.null(fy.year)) {
       setnames(input, "fy_year", "Date")
       setkeyv(input,
-              c("HasPartner",
+              c("hasPartner",
                 "nDependants",
                 "Date"))
       
       output <- 
         rent_assistance_rates_by_date[input,
-                                      on = c("HasPartner",
+                                      on = c("hasPartner",
                                              "nDependants",
                                              "Date"), 
                                       roll = -Inf]
     } else {
       setkeyv(input,
               c("fy_year",
-                "HasPartner",
+                "hasPartner",
                 "nDependants"))
       
       output <- 
         rent_assistance_rates[input,
                               on = c("fy_year",
-                                     "HasPartner",
+                                     "hasPartner",
                                      "nDependants")]
     }
     
@@ -232,7 +232,5 @@ rent_assistance <- function(fortnightly_rent = Inf,
   
   # validate_per assumes yearly payments, however RA has fortnightly rates which is why it must be scaled by 26
   
-  ra <- ra * 26 / validate_per(per, missing(per)) 
-  
-  return(ra) 
+  ra * 26 / validate_per(per, missing(per))
 }

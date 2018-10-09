@@ -149,7 +149,7 @@ youth_unemployment <- function(income = 0,
     .[Age >= 21 + (fy_year >= "2012-13"), Independent := TRUE] %>%
     .[, ok := or(Independent, coalesce(Unemployed, FALSE))] %>%
     .[(ok), out := MBR + ES] %>%
-    .[(ok), out := out - taper_1 * pmaxC(pminV(income, IncomeThreshold_2) - IncomeThreshold_1,
+    .[(ok), out := out - taper_1 * pmaxC(pminV(income, IncomeThreshold_1) - IncomeThreshold_2,
                                          0)] %>%
     .[(ok), out := out - taper_2 * pmaxC(income - IncomeThreshold_2,
                                          0)]

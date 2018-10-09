@@ -1,4 +1,4 @@
-Date	HasPartner	HasDependant	IncomeThreshold_1	IncomeThreshold_2	taper_1	taper_2
+Date	hasPartner	hasDependant	IncomeThreshold_1	IncomeThreshold_2	taper_1	taper_2
 2000-09-19	0	0	62	142	0.5	0.7
 2000-12-31	0	0	62	142	0.5	0.7
 2001-03-19	0	0	62	142	0.5	0.7
