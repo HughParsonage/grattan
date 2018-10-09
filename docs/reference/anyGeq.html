@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Validate per — validate_per • grattan</title>
+<title>Any without logical creation — anyGeq • grattan</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Validate per — validate_per" />
+<meta property="og:title" content="Any without logical creation — anyGeq" />
 
-<meta property="og:description" content="Checks whether a valid input of `per` is used and outputs the amount which yearly payments are divided by to get the desired rate." />
+<meta property="og:description" content="Any without logical creation" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -118,63 +118,45 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Validate per</h1>
-    <small class="dont-index">Source: <a href='https://github.com/HughParsonage/grattan/blob/master/R/validate_per.R'><code>R/validate_per.R</code></a></small>
-    <div class="hidden name"><code>validate_per.Rd</code></div>
+    <h1>Any without logical creation</h1>
+    <small class="dont-index">Source: <a href='https://github.com/HughParsonage/grattan/blob/master/R/anyWhich.R'><code>R/anyWhich.R</code></a></small>
+    <div class="hidden name"><code>anyGeq.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Checks whether a valid input of `per` is used and outputs the amount which yearly payments are divided by to get the desired rate.</p>
+    <p>Any without logical creation</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>validate_per</span>(<span class='no'>per</span>, <span class='no'>missing_per</span>, <span class='kw'>.fortnights_per_yr</span> <span class='kw'>=</span> <span class='fl'>26</span>)</pre>
+    <pre class="usage"><span class='fu'>anyGeq</span>(<span class='no'>x</span>, <span class='no'>a</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>per</th>
-      <td><p>How often are payments made? Can only take values 'year', 'fortnight', or 'quarter'.</p></td>
+      <th>x</th>
+      <td><p>An integer vector.</p></td>
     </tr>
     <tr>
-      <th>missing_per</th>
-      <td><p>Is `per` missing in the outer function? If so the defualt for that function will be used. Essentially, you should always pass <code>missing(per)</code> to this argument.</p></td>
-    </tr>
-    <tr>
-      <th>.fortnights_per_yr</th>
-      <td><p>What is the ratio of the fortnightly payment amount to the yearly payment amount? By default, 26. (Some payments expect 26; others expect 364/14.)</p></td>
+      <th>a</th>
+      <td><p>An integer.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>For examples, see <code><a href='rent_assistance.html'>rent_assistance</a></code> function code.</p>
+    <p>0 if none true or the index of the first match.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='co'># Typical use-case</span>
-<span class='co'># attach(asNamespace("grattan"))</span>
-<span class='no'>z</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>per</span> <span class='kw'>=</span> <span class='st'>"year"</span>) <span class='fl'>52</span> / <span class='fu'>validate_per</span>(<span class='no'>per</span>, <span class='fu'>missing</span>(<span class='no'>per</span>))
-<span class='fu'>z</span>()  <span class='co'># message</span>
-<span class='fu'>z</span>(<span class='kw'>per</span> <span class='kw'>=</span> <span class='st'>"year"</span>)       <span class='co'># same, no message</span>
-<span class='fu'>z</span>(<span class='kw'>per</span> <span class='kw'>=</span> <span class='st'>"fortnight"</span>)  <span class='co'># in fortnights</span>
-<span class='fu'>z</span>(<span class='kw'>per</span> <span class='kw'>=</span> <span class='st'>"sidfh"</span>)      <span class='co'># error</span>
-<span class='co'># }</span><div class='input'>
-
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#details">Details</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>

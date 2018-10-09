@@ -130,7 +130,7 @@
     </div>
 
     <pre class="usage"><span class='fu'>inflator</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='no'>from</span>, <span class='no'>to</span>, <span class='no'>inflator_table</span>, <span class='kw'>index.col</span> <span class='kw'>=</span> <span class='st'>"Index"</span>,
-  <span class='kw'>time.col</span> <span class='kw'>=</span> <span class='st'>"Time"</span>, <span class='kw'>roll</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>time.col</span> <span class='kw'>=</span> <span class='st'>"Time"</span>, <span class='kw'>roll</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>max.length</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,6 +162,12 @@
     <tr>
       <th>roll</th>
       <td><p>If <code>NULL</code>, inflation is calculated only on exact matches in <code>inflator_table</code>. Otherwise, uses a rolling join. See <code><a href='http://www.rdocumentation.org/packages/data.table/topics/data.table'>data.table::data.table</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>max.length</th>
+      <td><p>(Internal use only). If not <code>NULL</code>, the maximum length of <code>x</code>,
+<code>from</code>, and <code>to</code> known in advance. May be provided to improve the performance
+if known.</p></td>
     </tr>
     </table>
     
