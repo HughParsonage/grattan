@@ -145,11 +145,14 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The parallel maximum of the input values. <code>pmax0(x)</code> is shorthand for <code>pmaxC(x, 0)</code>, i.e. convert negative values in <code>x</code> to 0.</p>
+    <p>The parallel maximum of the input values. <code>pmax0(x)</code> is
+ shorthand for <code>pmaxC(x, 0)</code>, i.e. convert negative values in <code>x</code> to 0.</p>
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>This function will always be faster than <code>pmax(x, a)</code> when <code>a</code> is a single value, but can be slower than <code>pmax.int(x, a)</code> when <code>x</code> is short. Use this function when comparing a numeric vector with a single value.</p>
+    <p>This function will always be faster than <code>pmax(x, a)</code> when <code>a</code> is
+ a single value, but can be slower than <code>pmax.int(x, a)</code> when <code>x</code> is short.
+ Use this function when comparing a numeric vector with a single value.</p>
     
 
   </div>

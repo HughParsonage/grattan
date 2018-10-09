@@ -60,14 +60,27 @@ if (FALSE) {
                           basename(svg)))
     }
     
+    for (svg in dir(path = "~/grattan/docs/articles/grattan_files/figure-html/",
+                    full.names = TRUE,
+                    pattern = "\\.png$")) {
+      if (!file.rename(svg, sub("\\.png$", ".svg", svg))) {
+        stop(svg)
+      }
+    }
+
+    
     change_pngs <- function(html) {
       html_lines <- readr::read_lines(html)
-      for (i in grep("((Budget2018.atlas)|(budget.2018_files)|(compare.30.37.42.thresholds.1)).*\\.png", html_lines)) {
+      for (i in grep("((grattan_files/figure.html)|(Budget2018.atlas)|(budget.2018_files)|(compare.30.37.42.thresholds.1)).*\\.png", html_lines)) {
         html_lines[i] <- sub(".png", ".svg", html_lines[i], fixed = TRUE)
       }
       readr::write_lines(html_lines, html)
     }
     invisible(lapply(dir(path = "~/grattan/docs/articles/long-vignettes/", 
+                         pattern = "\\.html$", 
+                         full.names = TRUE), 
+                     change_pngs))
+    invisible(lapply(dir(path = "~/grattan/docs/articles/", 
                          pattern = "\\.html$", 
                          full.names = TRUE), 
                      change_pngs))

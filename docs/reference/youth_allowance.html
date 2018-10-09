@@ -129,29 +129,37 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>youth_allowance</span>(<span class='kw'>ordinary_income</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>fy.year</span> <span class='kw'>=</span> <span class='fu'><a href='is.fy.html'>date2fy</a></span>(<span class='fu'>Sys.Date</span>()),
-  <span class='kw'>age</span> <span class='kw'>=</span> <span class='fl'>18</span>, <span class='kw'>eligible_if_over22</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>has_partner</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>living_at_home</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>n_dependants</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
+    <pre class="usage"><span class='fu'>youth_allowance</span>(<span class='kw'>fortnightly_income</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>annual_income</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>fy.year</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>include_ES</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>age</span> <span class='kw'>=</span> <span class='fl'>18L</span>,
+  <span class='kw'>eligible_if_over22</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>has_partner</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>lives_at_home</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>n_dependants</span> <span class='kw'>=</span> <span class='fl'>0L</span>,
   <span class='kw'>isjspceoalfofcoahodeoc</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>is_student</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>per</span> <span class='kw'>=</span> <span class='st'>"fortnight"</span>, <span class='kw'>taper1</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>taper2</span> <span class='kw'>=</span> <span class='fl'>0.6</span>,
-  <span class='kw'>FT_YA_student_lower</span> <span class='kw'>=</span> <span class='fl'>437</span>, <span class='kw'>FT_YA_student_upper</span> <span class='kw'>=</span> <span class='fl'>524</span>,
-  <span class='kw'>FT_YA_jobseeker_lower</span> <span class='kw'>=</span> <span class='fl'>143</span>, <span class='kw'>FT_YA_jobseeker_upper</span> <span class='kw'>=</span> <span class='fl'>250</span>,
-  <span class='kw'>excess_partner_income_mu</span> <span class='kw'>=</span> <span class='fl'>0.6</span>)</pre>
+  <span class='kw'>per</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"fortnight"</span>, <span class='st'>"year"</span>), <span class='kw'>max_rate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>es</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>taper1</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>taper2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>FT_YA_student_lower</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>FT_YA_student_upper</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>FT_YA_jobseeker_lower</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>FT_YA_jobseeker_upper</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>partner_fortnightly_income</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>partner_is_pensioner</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>partner_taper</span> <span class='kw'>=</span> <span class='fl'>0.6</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ordinary_income</th>
-      <td><p>Fortnightly individual income. Defualt is zero.</p></td>
+      <th>fortnightly_income, annual_income</th>
+      <td><p>Individual's income. Defualt is zero. 
+You may provided both; providing both when the ratio is not 26 is an error.</p></td>
     </tr>
     <tr>
       <th>fy.year</th>
       <td><p>Financial year. Default is current financial year.</p></td>
     </tr>
     <tr>
+      <th>include_ES</th>
+      <td><p>(logical, default: <code>TRUE</code>) If <code>FALSE</code> do not include the energy supplement.</p></td>
+    </tr>
+    <tr>
       <th>age</th>
-      <td><p>The individual's age. Default is 18 years.</p></td>
+      <td><p>The individual's age. Default is 18 years. If type double will be coerced to 
+integer via truncation (i.e. 17.9 becomes 17).</p></td>
     </tr>
     <tr>
       <th>eligible_if_over22</th>
@@ -162,7 +170,7 @@
       <td><p>Does the individual have a partner?</p></td>
     </tr>
     <tr>
-      <th>living_at_home</th>
+      <th>lives_at_home</th>
       <td><p>Does the individual live at home with their parents?</p></td>
     </tr>
     <tr>
@@ -180,6 +188,14 @@
     <tr>
       <th>per</th>
       <td><p>How often the payment will be made. Default is fortnightly. At present payments can only be fortnightly.</p></td>
+    </tr>
+    <tr>
+      <th>max_rate</th>
+      <td><p>If not <code>NULL</code>, a length-1 double representing the maximum <em>fortnightly</em> rate for youth allowance.</p></td>
+    </tr>
+    <tr>
+      <th>es</th>
+      <td><p>If not <code>NULL</code>, a length-1 double as the energy supplement.</p></td>
     </tr>
     <tr>
       <th>taper1</th>
@@ -203,11 +219,19 @@
     </tr>
     <tr>
       <th>FT_YA_jobseeker_upper</th>
-      <td><p>Jobseeker upper bound for which reduction in payment occurs at rate taper1. Student and apprentice lower bound for which reduction in payment occurs at rate taper2.</p></td>
+      <td><p>Jobseeker upper bound for which reduction in payment occurs at rate taper1. Student and apprentice lower bound for which reduction in payment occurs at rate <code>taper2</code>.</p></td>
     </tr>
     <tr>
-      <th>excess_partner_income_mu</th>
-      <td><p>The amount at which the payment is reduced for each dollar earned by the individual's partner.</p></td>
+      <th>partner_fortnightly_income</th>
+      <td><p>The partner's fortnightly income (or zero if no partner).</p></td>
+    </tr>
+    <tr>
+      <th>partner_is_pensioner</th>
+      <td><p>(logical, default: <code>FALSE</code>) Is the individual's partner in receipt of a <em>pension</em> (or benefit)?</p></td>
+    </tr>
+    <tr>
+      <th>partner_taper</th>
+      <td><p>The amount by which the payment is reduced for each dollar earned by the individual's partner. (See <a href='http://guides.dss.gov.au/guide-social-security-law/4/2/8/40'>http://guides.dss.gov.au/guide-social-security-law/4/2/8/40</a>.)</p></td>
     </tr>
     </table>
     
