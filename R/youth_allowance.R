@@ -73,6 +73,7 @@ youth_allowance <- function(fortnightly_income = 0,
   }
   
   
+  
   if (missing(annual_income)) {
     ordinary_income <- fortnightly_income
   } else {
@@ -214,6 +215,7 @@ youth_allowance <- function(fortnightly_income = 0,
   Age <- NULL
   partnerIsPensioner <- NULL
   partnerIncome <- NULL
+  isParentingPayment <- NULL
   
   MBR <- ES <- NULL
   
@@ -229,7 +231,9 @@ youth_allowance <- function(fortnightly_income = 0,
                                           has_partner & lives_at_home)),
                       Age = age,  # necessary for partner calculations
                       partnerIsPensioner = partner_is_pensioner,
-                      partnerIncome = partner_fortnightly_income)
+                      partnerIncome = partner_fortnightly_income,
+                      isParentingPayment = isjspceoalfofcoahodeoc)
+  
   
   # ## 4.2.8.40 
   # The partner income test applies where an independent YA recipient is 
@@ -275,13 +279,15 @@ youth_allowance <- function(fortnightly_income = 0,
     setindexv("ok") %>%
     .[]
   
+  xx <<- tests_rates
+  
   if (any(isjspceoalfofcoahodeoc)) {
     i.MBR <- NULL
-    tests_rates %<>% 
-      .[parenting_payment_by_fy,
-        on = "fy_year",
-        nomatch = 0L] %>%
-      .[, MBR := coalesce(i.MBR, MBR)] %>%
+    tests_rates <-
+      parenting_payment_by_fy[tests_rates,
+                              on = c("isParentingPayment", "fy_year"),
+                              nomatch = 0L] %>%
+      .[, MBR := coalesce(MBR, i.MBR)] %>%
       .[, i.MBR := NULL]
   }
   

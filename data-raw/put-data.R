@@ -1132,6 +1132,11 @@ parenting_payment_by_fy <-
   .[, .(MBR = mean(MBR)),
     keyby = .(fy_year = date2fy(Date))]
 
+parenting_payment_by_fy <- 
+  rbind(copy(parenting_payment_by_fy)[, isParentingPayment := FALSE][, MBR := NA_real_],
+        copy(parenting_payment_by_fy)[, isParentingPayment := TRUE]) %>%
+  setkeyv(c("isParentingPayment", "fy_year"))
+
 # http://guides.dss.gov.au/guide-social-security-law/4/2/2
 .partner_income_free_area <- function(fy.year,
                                       partner_receives_benefit,
@@ -1164,9 +1169,12 @@ partner_income_free_area_by_fy_student_age <-
              .partner_income_free_area(yr2fy(2005:2020), c(FALSE, TRUE), c(0L, 22L, 65L))
   })
 
-setnames(partner_income_free_area_by_fy_student_age, 
-         "PartnerReceivesBenefit",
-         "partnerIsPensioner")
+if (hasName(partner_income_free_area_by_fy_student_age, 
+            "PartnerReceivesBenefit")) {
+  setnames(partner_income_free_area_by_fy_student_age, 
+           "PartnerReceivesBenefit",
+           "partnerIsPensioner")
+}
 
 
 do_dots <- function(...) {

@@ -41,9 +41,28 @@ test_that("Error handling", {
                regexp = "`fy.year` has length 3 but `FT_YA_jobseeker_upper` is not NULL", 
                fixed = TRUE)
   
-  youth_allowance(fy.year = yr2fy(2016:2018),
-                  age = 16L,
-                  per = "fortnight")
+  expect_error(youth_allowance(fy.year = yr2fy(2016:2018),
+                               age = c(16L, NA, 18L),
+                               per = "fortnight"),
+               regexp = "`age` contains missing values. Impute these values.",
+               fixed = TRUE)
+  expect_error(youth_allowance(fy.year = yr2fy(2016:2018),
+                               age = 16L,
+                               partner_is_pensioner = NA,
+                               per = "fortnight"),
+               regexp = "`partner_is_pensioner` contains missing values. Impute these values.",
+               fixed = TRUE)
+  expect_error(youth_allowance(fy.year = yr2fy(2016:2018),
+                               age = 16L,
+                               partner_fortnightly_income = "abc",
+                               per = "fortnight"),
+               regexp = "`partner_fortnightly_income` was class character",
+               fixed = TRUE)
+  expect_error(youth_allowance(fy.year = "2017-18",
+                               has_partner = c(FALSE, TRUE, FALSE),
+                               partner_fortnightly_income = c(0, 0, 100)),
+               regexp = "`partner_fortnightly_income` was greater than zero at position 3 yet `has_partner[3]` is FALSE.",
+               fixed = TRUE)
   
 })
 
@@ -250,6 +269,17 @@ test_that("Partners (standard)", {
                                has_partner = TRUE,
                                partner_is_pensioner = TRUE))
   
+})
+
+test_that("Parenting payment", {
+  expect_equal(youth_allowance(isjspceoalfofcoahodeoc = TRUE,
+                               fy.year = "2016-17",
+                               per = "fortnight"),
+               750.3)
+  expect_equal(youth_allowance(isjspceoalfofcoahodeoc = c(TRUE, FALSE),
+                               fy.year = "2016-17",
+                               per = "fortnight"),
+               c(750.3, 442.35))
 })
 
 
