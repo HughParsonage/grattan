@@ -32,6 +32,9 @@ r_binary_packages:
   - devtools
   - dplyr
   - forecast
+  - nnet
+  - Rcpp
+  - utf8
 
 r_github_packages:
   - hughparsonage/formalCoverage
