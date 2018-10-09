@@ -1,18 +1,19 @@
 #' Model Child Care Subsidy
-#' @description The child care subsidy if threshholds and rates are changed.
+#' @description The child care subsidy if thresholds and rates are changed.
+#'  (See \code{\link{child_care_subsidy}}.)
 #' @param sample_file A sample file having the same variables as the data.frame in the example.
-#' @param cbdc_hourly_cap,fdc_hourly_cap,oshc_hourly_cap,ihc_hourly_cap (numeric) The lower of `cost_hour` or the relevant `hourly_cap` will be used in the calculation of the subsidy.
+#' @param Cbdc_hourly_cap,Fdc_hourly_cap,Oshc_hourly_cap,Ihc_hourly_cap (numeric) The lower of `cost_hour` or the relevant `hourly_cap` will be used in the calculation of the subsidy.
 #' 
-#' @param annual_cap_income (numeric) The minimum family income for which the `annual_cap_subsidy` applies from.
-#' @param annual_cap_subsidy (numeric) Amount at which annual subsidies are capped for those who earn more than `annual_cap_income`. 
+#' @param Annual_cap_income (numeric) The minimum family income for which the `Annual_cap_subsidy` applies from.
+#' @param Annual_cap_subsidy (numeric) Amount at which annual subsidies are capped for those who earn more than `Annual_cap_income`. 
 #' 
-#' @param income_test_bracket_1,income_test_bracket_2,income_test_bracket_3,income_test_bracket_4,income_test_bracket_5 (numeric) The steps at which income test 1 changes rates. Note the strange structure \url{https://www.humanservices.gov.au/individuals/services/centrelink/child-care-subsidy/payments/how-your-income-affects-it}.
-#' @param taper_1,taper_2,taper_3 (numeric) The proportion of the hourly cap retained. Note that the rate only decreases between each odd bracket.
+#' @param Income_test_bracket_1,Income_test_bracket_2,Income_test_bracket_3,Income_test_bracket_4,Income_test_bracket_5 (numeric) The steps at which income test 1 changes rates. Note the strange structure \url{https://www.humanservices.gov.au/individuals/services/centrelink/child-care-subsidy/payments/how-your-income-affects-it}.
+#' @param Taper_1,Taper_2,Taper_3 (numeric) The proportion of the hourly cap retained. Note that the rate only decreases between each odd bracket.
 #' 
-#' @param activity_test_1_brackets (numeric vector) The activity levels at which the activity test increases.
-#' @param activity_test_1_hours (numeric vector) The hours corresponding to the step increase in `activity_test_1_brackets`.
+#' @param Activity_test_1_brackets (numeric vector) The activity levels at which the activity test increases.
+#' @param Activity_test_1_hours (numeric vector) The hours corresponding to the step increase in `activity_test_1_brackets`.
 #' 
-#' @param calc_baseline_subsidy (logical, default: \code{TRUE}) Should the current child care subsidy be included as a column in the result?
+#' @param calc_baseline_ccs (logical, default: \code{TRUE}) Should the current child care subsidy be included as a column in the result?
 #' @param return. What should the function return? One of \code{subsidy}, \code{sample_file}, or \code{sample_file.int}. 
 #' If \code{subsidy}, the subsidy received under the settings; if \code{sample_file}, the \code{sample_file},
 #' but with variables \code{subsidy} and possibly \code{new_subsidy}; if \code{sample_file.int}, same as \code{sample_file} but \code{new_subsidy} is coerced to integer.
@@ -115,7 +116,7 @@ model_child_care_subsidy <- function(sample_file,
   
   check_TF(calc_baseline_ccs)
   
-  #Actual calculation
+  # Actual calculation
   
   Family_annual_income = sample_file[['family_annual_income']]
   Activity_level = sample_file[['activity_level']]
