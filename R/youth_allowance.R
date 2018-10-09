@@ -372,217 +372,217 @@ youth_allowance <- function(fortnightly_income = 0,
 }
 
 
-.youth_allowance <- function(fortnightly_income = 0,
-                            annual_income = 0,
-                            fy.year = date2fy(Sys.Date()),
-                            age = 18,
-                            eligible_if_over22 = FALSE,
-                            has_partner = FALSE,
-                            living_at_home = FALSE,
-                            n_dependants = 0L,
-                            isjspceoalfofcoahodeoc = FALSE,
-                            is_student = TRUE,
-                            per = "fortnight",
-                            taper1 = 0.5,
-                            taper2 = 0.6,
-                            FT_YA_student_lower = 437,
-                            FT_YA_student_upper = 524,
-                            FT_YA_jobseeker_lower = 143,
-                            FT_YA_jobseeker_upper = 250,
-                            excess_partner_income_mu = 0.6) {
-  
-  input <- data.table(do.call(cbind.data.frame, mget(ls())))
-  
-  # max rate data: http://guides.dss.gov.au/guide-social-security-law/5/1/1/20
-  # note: identical for student and jobseeker
-  max_rate_March_2018 <-
-    input[, if_else(and(age >= 22, eligible_if_over22),
-                    if_else(!has_partner,
-                            if_else(living_at_home,
-                                    360.20,
-                                    541.70),
-                            if_else(n_dependants > 0L,
-                                    NA_real_,
-                                    489.60)),
-                    if_else(!has_partner,
-                            if_else(isjspceoalfofcoahodeoc,
-                                    762.40,
-                                    if_else(n_dependants > 0L,
-                                            584.20,
-                                            if_else(living_at_home,
-                                                    if_else(age %between% c(16, 17),
-                                                            244.10,
-                                                            293.60),
-                                                    445.80))),
-                            if_else(n_dependants > 0L,
-                                    489.60,
-                                    445.80)))]
-  
-  if (anyNA(max_rate_March_2018)) {
-    stop("Unknown recipient status for youth_allowance() at index(es) ",
-         paste(which(is.na(max_rate_March_2018)), collapse=", "),
-         " . Check arguments.")
-  }
-  
-  
-  # max income data: https://www.humanservices.gov.au/individuals/enablers/personal-income-test-austudy-and-youth-allowance/30411
-  max_income_March_2018 <-
-    input[, if_else(is_student,
-                    # student
-                    if_else(n_dependants > 0L,
-                            if_else(has_partner,
-                                    1280.34,
-                                    1440.50),
-                            if_else(living_at_home,
-                                    if_else(age < 18,
-                                            864.84,
-                                            948.50),
-                                    1206.17)),
-                    # jobseeker
-                    if_else(isjspceoalfofcoahodeoc,
-                            1435.17,      
-                            if_else(n_dependants > 0L,
-                                    if_else(has_partner,
-                                            989.67,
-                                            1149.84),
-                                    if_else(living_at_home,
-                                            if_else(age < 18,
-                                                    574.18,
-                                                    657.84),
-                                            989.67))))]
-  
-  max_income <- 
-    switch(fy.year,
-           "2017-18" = max_income_March_2018 <- 143,
-           .NotYetImplemented())
-  max_rate <- 
-    switch(fy.year,
-           "2017-18" = max_rate_March_2018 <- 293.60,
-           .NotYetImplemented())
-  
-  max_income_March_2016 <- 143
-  max_rate_March_2016 <- 244
-            
-  if (missing(annual_income)) {
-    ordinary_income <- fortnightly_income
-  } else {
-    if (missing(fortnightly_income)) {
-      ordinary_income <- annual_income / 26
-    } else {
-      if (max(abs(fortnightly_income - annual_income / 26)) > .Machine$double.eps^0.5) {
-        i <- which.max(abs(fortnightly_income - annual_income / 26))
-        stop("`fortnightly_income` and `annual_income` both provided but ",
-             "don't agree. \n\n\t", 
-             "i \tfortnightly_income\tannual_income\n\t", 
-             "--\t------------------\t-------------\n\t", 
-             i,
-             "\t", formatC(fortnightly_income[i], width = 18),
-             "\t", formatC(annual_income[i], width = 13), "\n")
-      }
-      ordinary_income <- fortnightly_income
-    }
-  }
-  
-
-  # Benefit test
-  # http://guides.dss.gov.au/guide-social-security-law/4/2/2
-  # https://www.humanservices.gov.au/individuals/enablers/personal-income-test-austudy-and-youth-allowance/30411
-  
-  # ordinary_income_excess <- pmaxC(ordinary_income - ordinary_income_free_area)
-  
-  ### TESTS needed: https://www.humanservices.gov.au/individuals/services/centrelink/youth-allowance-students-and-australian-apprentices/how-much-you-can-get/income-and-assets-test# personalassets
-    # personal income test: 
-      # https://www.humanservices.gov.au/individuals/enablers/personal-income-test-austudy-and-youth-allowance/30411
-  
-  personal_income_reduction <-
-    if_else(is_student,
-            # student
-            if_else(ordinary_income < FT_YA_student_lower,
-                    0,
-                    if_else(ordinary_income < FT_YA_student_upper,
-                            taper1 * (ordinary_income - FT_YA_student_lower),
-                            if_else(ordinary_income < max_income,
-                                    taper1 * (ordinary_income - FT_YA_student_lower) +
-                                      (taper2 - taper1) * (ordinary_income - FT_YA_student_upper),
-                                    # reduce by entire income i.e. dont get YA
-                                    max_rate_March_2018))),
-            # jobseeker
-            if_else(ordinary_income < FT_YA_jobseeker_lower,
-                    0,
-                    if_else(ordinary_income < FT_YA_jobseeker_upper,
-                            taper1 * (ordinary_income - FT_YA_jobseeker_lower),
-                            if_else(ordinary_income < max_income,
-                                    taper1 * (ordinary_income - FT_YA_jobseeker_lower) +
-                                      (taper2 - taper1) * (ordinary_income - FT_YA_jobseeker_upper),
-                                    # reduce by entire income i.e. dont get YA
-                                    max_rate_March_2018))))
-    # personal assets test: 
-      # http://guides.dss.gov.au/guide-social-security-law/4/2/8/30 
-      # ## The personal assets test for independent YA recipients 
-      # ##  is the same as the benefits assets tes
-      # http://guides.dss.gov.au/guide-social-security-law/4/2/3
-      # https://www.legislation.gov.au/Details/C2018C00167
-  
-    personal_asset_reduction <-
-      input[, if_else(has_partner,
-                      if_else(homeowner,
-                              if_else(assets_value > 286500,
-                                      max_rate_March_2016,
-                                      0),
-                              if_else(assets_value > 433000,
-                                      max_rate_March_2016,
-                                      0)),
-                      if_else(homeowner,
-                              if_else(assets_value > 202000,
-                                      max_rate_March_2016,
-                                      0),
-                              if_else(assets_value > 348500,
-                                      max_rate_March_2016,
-                                      0)))]
-  
-    # partner income test
-      # http://guides.dss.gov.au/guide-social-security-law/4/2/2
-      # http://guides.dss.gov.au/guide-social-security-law/4/2/8/40
-      # example: http://guides.dss.gov.au/guide-social-security-law/5/5/3/30
-    partner_income_reduction <- 
-      # https://web.archive.org/web/20160812171654/http://guides.dss.gov.au/guide-social-security-law/5/5/3/30
-      if_else(has_partner & (partner_income > max_income_March_2018) & (age >= 22),
-              0.6 * (partner_income - round((1/0.6) * (max_rate_March_2018 - (upper - lower) * 0.5 + 252 * 0.6))),
-              0)
-  
-    
-  # parental income test:  INCOMPLETE
-    # https://www.humanservices.gov.au/individuals/services/centrelink/youth-allowance-students-and-australian-apprentices/how-much-you-can-get/income-and-assets-test# parentalincome
-    # http://guides.dss.gov.au/guide-social-security-law/4/2/8/05                          
-    
-  MITRA <-
-      233.94 - 57.68 #ftba max rate - basic rate
-    
-  PITR <- # http://guides.dss.gov.au/guide-social-security-law/4/2/8/10
-      input[, if_else(parents_income > 51027,
-                    (parents_income - 51027) / 130,
-                    0)]# NOTE: steps 6-10 not applied as require info on other children who receive payments
-  
-  MITR <-  
-    # MIFA historical rates: http://guides.dss.gov.au/family-assistance-guide/3/6/1# table7
-    if_else(n_siblings_on_ya == 0 & !ftb_children,
-            1620.60,
-            if_else(ftb_children,
-                    540.20,
-                    (1620.60 + n_siblings_on_ya * 540.20) / (1 + n_siblings_on_ya)))
-    # need maintenance income
-    
-  parental_income_reduction <-
-    if_else(PITR > MITRA,
-            PITR,
-            0)
-  ans <- 
-    max_rate_March_2016 - 
-    personal_income_reduction - 
-    parental_income_reduction - 
-    asset_reduction - 
-    partner_income_reduction
-  
-  pmax0(ans) / validate_per(per, missing(per))
-}
+# .youth_allowance <- function(fortnightly_income = 0,
+#                             annual_income = 0,
+#                             fy.year = date2fy(Sys.Date()),
+#                             age = 18,
+#                             eligible_if_over22 = FALSE,
+#                             has_partner = FALSE,
+#                             living_at_home = FALSE,
+#                             n_dependants = 0L,
+#                             isjspceoalfofcoahodeoc = FALSE,
+#                             is_student = TRUE,
+#                             per = "fortnight",
+#                             taper1 = 0.5,
+#                             taper2 = 0.6,
+#                             FT_YA_student_lower = 437,
+#                             FT_YA_student_upper = 524,
+#                             FT_YA_jobseeker_lower = 143,
+#                             FT_YA_jobseeker_upper = 250,
+#                             excess_partner_income_mu = 0.6) {
+#   
+#   input <- data.table(do.call(cbind.data.frame, mget(ls())))
+#   
+#   # max rate data: http://guides.dss.gov.au/guide-social-security-law/5/1/1/20
+#   # note: identical for student and jobseeker
+#   max_rate_March_2018 <-
+#     input[, if_else(and(age >= 22, eligible_if_over22),
+#                     if_else(!has_partner,
+#                             if_else(living_at_home,
+#                                     360.20,
+#                                     541.70),
+#                             if_else(n_dependants > 0L,
+#                                     NA_real_,
+#                                     489.60)),
+#                     if_else(!has_partner,
+#                             if_else(isjspceoalfofcoahodeoc,
+#                                     762.40,
+#                                     if_else(n_dependants > 0L,
+#                                             584.20,
+#                                             if_else(living_at_home,
+#                                                     if_else(age %between% c(16, 17),
+#                                                             244.10,
+#                                                             293.60),
+#                                                     445.80))),
+#                             if_else(n_dependants > 0L,
+#                                     489.60,
+#                                     445.80)))]
+#   
+#   if (anyNA(max_rate_March_2018)) {
+#     stop("Unknown recipient status for youth_allowance() at index(es) ",
+#          paste(which(is.na(max_rate_March_2018)), collapse=", "),
+#          " . Check arguments.")
+#   }
+#   
+#   
+#   # max income data: https://www.humanservices.gov.au/individuals/enablers/personal-income-test-austudy-and-youth-allowance/30411
+#   max_income_March_2018 <-
+#     input[, if_else(is_student,
+#                     # student
+#                     if_else(n_dependants > 0L,
+#                             if_else(has_partner,
+#                                     1280.34,
+#                                     1440.50),
+#                             if_else(living_at_home,
+#                                     if_else(age < 18,
+#                                             864.84,
+#                                             948.50),
+#                                     1206.17)),
+#                     # jobseeker
+#                     if_else(isjspceoalfofcoahodeoc,
+#                             1435.17,      
+#                             if_else(n_dependants > 0L,
+#                                     if_else(has_partner,
+#                                             989.67,
+#                                             1149.84),
+#                                     if_else(living_at_home,
+#                                             if_else(age < 18,
+#                                                     574.18,
+#                                                     657.84),
+#                                             989.67))))]
+#   
+#   max_income <- 
+#     switch(fy.year,
+#            "2017-18" = max_income_March_2018 <- 143,
+#            .NotYetImplemented())
+#   max_rate <- 
+#     switch(fy.year,
+#            "2017-18" = max_rate_March_2018 <- 293.60,
+#            .NotYetImplemented())
+#   
+#   max_income_March_2016 <- 143
+#   max_rate_March_2016 <- 244
+#             
+#   if (missing(annual_income)) {
+#     ordinary_income <- fortnightly_income
+#   } else {
+#     if (missing(fortnightly_income)) {
+#       ordinary_income <- annual_income / 26
+#     } else {
+#       if (max(abs(fortnightly_income - annual_income / 26)) > .Machine$double.eps^0.5) {
+#         i <- which.max(abs(fortnightly_income - annual_income / 26))
+#         stop("`fortnightly_income` and `annual_income` both provided but ",
+#              "don't agree. \n\n\t", 
+#              "i \tfortnightly_income\tannual_income\n\t", 
+#              "--\t------------------\t-------------\n\t", 
+#              i,
+#              "\t", formatC(fortnightly_income[i], width = 18),
+#              "\t", formatC(annual_income[i], width = 13), "\n")
+#       }
+#       ordinary_income <- fortnightly_income
+#     }
+#   }
+#   
+# 
+#   # Benefit test
+#   # http://guides.dss.gov.au/guide-social-security-law/4/2/2
+#   # https://www.humanservices.gov.au/individuals/enablers/personal-income-test-austudy-and-youth-allowance/30411
+#   
+#   # ordinary_income_excess <- pmaxC(ordinary_income - ordinary_income_free_area)
+#   
+#   ### TESTS needed: https://www.humanservices.gov.au/individuals/services/centrelink/youth-allowance-students-and-australian-apprentices/how-much-you-can-get/income-and-assets-test# personalassets
+#     # personal income test: 
+#       # https://www.humanservices.gov.au/individuals/enablers/personal-income-test-austudy-and-youth-allowance/30411
+#   
+#   personal_income_reduction <-
+#     if_else(is_student,
+#             # student
+#             if_else(ordinary_income < FT_YA_student_lower,
+#                     0,
+#                     if_else(ordinary_income < FT_YA_student_upper,
+#                             taper1 * (ordinary_income - FT_YA_student_lower),
+#                             if_else(ordinary_income < max_income,
+#                                     taper1 * (ordinary_income - FT_YA_student_lower) +
+#                                       (taper2 - taper1) * (ordinary_income - FT_YA_student_upper),
+#                                     # reduce by entire income i.e. dont get YA
+#                                     max_rate_March_2018))),
+#             # jobseeker
+#             if_else(ordinary_income < FT_YA_jobseeker_lower,
+#                     0,
+#                     if_else(ordinary_income < FT_YA_jobseeker_upper,
+#                             taper1 * (ordinary_income - FT_YA_jobseeker_lower),
+#                             if_else(ordinary_income < max_income,
+#                                     taper1 * (ordinary_income - FT_YA_jobseeker_lower) +
+#                                       (taper2 - taper1) * (ordinary_income - FT_YA_jobseeker_upper),
+#                                     # reduce by entire income i.e. dont get YA
+#                                     max_rate_March_2018))))
+#     # personal assets test: 
+#       # http://guides.dss.gov.au/guide-social-security-law/4/2/8/30 
+#       # ## The personal assets test for independent YA recipients 
+#       # ##  is the same as the benefits assets tes
+#       # http://guides.dss.gov.au/guide-social-security-law/4/2/3
+#       # https://www.legislation.gov.au/Details/C2018C00167
+#   
+#     personal_asset_reduction <-
+#       input[, if_else(has_partner,
+#                       if_else(homeowner,
+#                               if_else(assets_value > 286500,
+#                                       max_rate_March_2016,
+#                                       0),
+#                               if_else(assets_value > 433000,
+#                                       max_rate_March_2016,
+#                                       0)),
+#                       if_else(homeowner,
+#                               if_else(assets_value > 202000,
+#                                       max_rate_March_2016,
+#                                       0),
+#                               if_else(assets_value > 348500,
+#                                       max_rate_March_2016,
+#                                       0)))]
+#   
+#     # partner income test
+#       # http://guides.dss.gov.au/guide-social-security-law/4/2/2
+#       # http://guides.dss.gov.au/guide-social-security-law/4/2/8/40
+#       # example: http://guides.dss.gov.au/guide-social-security-law/5/5/3/30
+#     partner_income_reduction <- 
+#       # https://web.archive.org/web/20160812171654/http://guides.dss.gov.au/guide-social-security-law/5/5/3/30
+#       if_else(has_partner & (partner_income > max_income_March_2018) & (age >= 22),
+#               0.6 * (partner_income - round((1/0.6) * (max_rate_March_2018 - (upper - lower) * 0.5 + 252 * 0.6))),
+#               0)
+#   
+#     
+#   # parental income test:  INCOMPLETE
+#     # https://www.humanservices.gov.au/individuals/services/centrelink/youth-allowance-students-and-australian-apprentices/how-much-you-can-get/income-and-assets-test# parentalincome
+#     # http://guides.dss.gov.au/guide-social-security-law/4/2/8/05                          
+#     
+#   MITRA <-
+#       233.94 - 57.68 #ftba max rate - basic rate
+#     
+#   PITR <- # http://guides.dss.gov.au/guide-social-security-law/4/2/8/10
+#       input[, if_else(parents_income > 51027,
+#                     (parents_income - 51027) / 130,
+#                     0)]# NOTE: steps 6-10 not applied as require info on other children who receive payments
+#   
+#   MITR <-  
+#     # MIFA historical rates: http://guides.dss.gov.au/family-assistance-guide/3/6/1# table7
+#     if_else(n_siblings_on_ya == 0 & !ftb_children,
+#             1620.60,
+#             if_else(ftb_children,
+#                     540.20,
+#                     (1620.60 + n_siblings_on_ya * 540.20) / (1 + n_siblings_on_ya)))
+#     # need maintenance income
+#     
+#   parental_income_reduction <-
+#     if_else(PITR > MITRA,
+#             PITR,
+#             0)
+#   ans <- 
+#     max_rate_March_2016 - 
+#     personal_income_reduction - 
+#     parental_income_reduction - 
+#     asset_reduction - 
+#     partner_income_reduction
+#   
+#   pmax0(ans) / validate_per(per, missing(per))
+# }
 
