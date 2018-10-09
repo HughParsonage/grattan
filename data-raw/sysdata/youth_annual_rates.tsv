@@ -1,4 +1,4 @@
-fy_year	HasDependant	HasPartner	LivesAtHome	Age16or17	ES	MBR
+fy_year	hasDependant	hasPartner	LivesAtHome	Age16or17	ES	MBR
 2000-01	0	0	0	0	0	285.6
 2000-01	0	0	1	0	0	187.95
 2000-01	0	0	1	1	0	156.35

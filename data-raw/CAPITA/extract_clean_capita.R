@@ -233,8 +233,8 @@ unemployment_annual_rates <-
   .[R1 == "Period" | R2 %pin% c("Period", "NewStart Allowance,")] %>%
   assert_drop60plus_ok %>%
   .[, .(fy_year = yr2fy(year(end_date)),
-        HasPartner = R3 %ein% "Married",
-        HasDependant = R4 %enotin% "No Dependents",
+        hasPartner = R3 %ein% "Married",
+        hasDependant = R4 %enotin% "No Dependents",
         Component = R6,
         value = round(value, 2))] %>%
   unique %>%
@@ -259,10 +259,10 @@ unemployment_assets_tests <-
   drop_constant_cols %>%
   .[,
     list(fy_year = date2fy(end_date),
-         HasPartner = R3 == "Married",
+         hasPartner = R3 == "Married",
          HomeOwner = R4 == "Home owner",
          asset_cutout = as.integer(floor(value)))] %>%
-  setkey(fy_year, HasPartner, HomeOwner) %>%
+  setkey(fy_year, hasPartner, HomeOwner) %>%
   .[]
 
 unemployment_income_thresholds <- 
@@ -290,28 +290,28 @@ unemployment_income_tapers <-
         TaperNumber = as.integer(R6 == "Upper") + 1L,
         raw_name,
         value)] %>%
-  .[, HasPartner := grepl("Couples", R5)] %>%
-  .[, HasDependant := R5 == "Singles with Dependents"] %>%
+  .[, hasPartner := grepl("Couples", R5)] %>%
+  .[, hasDependant := R5 == "Singles with Dependents"] %>%
   {
     dot <- .
-    Couples_with_dependants <- dot[(HasPartner)]
+    Couples_with_dependants <- dot[(hasPartner)]
     Couples_with_dependants[, R5 := "Couples with Dependants"]
-    rbind(dot, Couples_with_dependants[, HasDependant := TRUE])
+    rbind(dot, Couples_with_dependants[, hasDependant := TRUE])
   } %>%
   {
     dot <- .
     Singles_without_dependants <- dot[R5 %ein% "Couples and Singles Without Deps"]
     Singles_without_dependants[, R5 := "Singles without Dependants"]
-    Singles_without_dependants[, HasPartner := FALSE]
-    rbind(dot, Singles_without_dependants[, HasDependant := FALSE])
+    Singles_without_dependants[, hasPartner := FALSE]
+    rbind(dot, Singles_without_dependants[, hasDependant := FALSE])
   } %>%
-  .[order(fy_year, value, HasPartner, HasDependant, TaperNumber),
-    .(fy_year, HasPartner, HasDependant, TaperNumber, taper = value)]
+  .[order(fy_year, value, hasPartner, hasDependant, TaperNumber),
+    .(fy_year, hasPartner, hasDependant, TaperNumber, taper = value)]
 
 unemployment_income_tests <-
   unemployment_income_thresholds[unemployment_income_tapers,
                                  on = c("fy_year", "TaperNumber")] %>%
-  dcast.data.table(fy_year + HasPartner + HasDependant ~ TaperNumber,
+  dcast.data.table(fy_year + hasPartner + hasDependant ~ TaperNumber,
                    value.var = c("IncomeThreshold", "taper"),
                    sep = "_")
 
@@ -324,15 +324,15 @@ unemployment_rates_by_date <-
   assert_drop60plus_ok %>%
   .[col %notin% c(5, 8, 11, 14)] %>%
   .[, .(Date = as.Date(end_date),
-        HasPartner = R3 %ein% "Married",
-        HasDependant = R4 %enotin% "No Dependents",
+        hasPartner = R3 %ein% "Married",
+        hasDependant = R4 %enotin% "No Dependents",
         Component = R6,
         value = round(value, 2))] %>%
   unique %>%
-  dcast.data.table(Date + HasPartner + HasDependant ~ Component,
+  dcast.data.table(Date + hasPartner + hasDependant ~ Component,
                    value.var = "value") %>%
   .[, ES := coalesce(ES, 0.0)] %>%
-  setkey(HasPartner, HasDependant, Date)
+  setkey(hasPartner, hasDependant, Date)
 
 unemployment_assets_tests_by_date <-
   capita[sheet_name == "Unemployment"] %>%
@@ -341,11 +341,11 @@ unemployment_assets_tests_by_date <-
     .[R2 == "Asset Cutout"] %>%
     .[,
       .(Date = as.Date(end_date),
-        HasPartner = R3 %ein% "Married",
+        hasPartner = R3 %ein% "Married",
         HomeOwner = R4 %ein% "Home owner",
         asset_cutout = as.integer(floor(value)))
       ] %>%
-    setkey(HasPartner, HomeOwner, Date)
+    setkey(hasPartner, HomeOwner, Date)
 
 unemployment_income_thresholds_by_date <-
   capita[sheet_name == "Unemployment"] %>%
@@ -367,31 +367,31 @@ unemployment_income_tapers_by_date <-
         R5,
         TaperNumber = as.integer(R6 == "Upper") + 1L,
         taper = round(value, 2))] %>%
-  .[, HasPartner := grepl("Couples", R5)] %>%
-  .[, HasDependant := R5 == "Singles with Dependents"] %>%
+  .[, hasPartner := grepl("Couples", R5)] %>%
+  .[, hasDependant := R5 == "Singles with Dependents"] %>%
   {
     dot <- .
-    Couples_with_dependants <- dot[(HasPartner)]
+    Couples_with_dependants <- dot[(hasPartner)]
     Couples_with_dependants[, R5 := "Couples with Dependants"]
-    rbind(dot, Couples_with_dependants[, HasDependant := TRUE])
+    rbind(dot, Couples_with_dependants[, hasDependant := TRUE])
   } %>%
   {
     dot <- .
     Singles_without_dependants <- dot[R5 %ein% "Couples and Singles Without Deps"]
     Singles_without_dependants[, R5 := "Singles without Dependants"]
-    Singles_without_dependants[, HasPartner := FALSE]
-    rbind(dot, Singles_without_dependants[, HasDependant := FALSE])
+    Singles_without_dependants[, hasPartner := FALSE]
+    rbind(dot, Singles_without_dependants[, hasDependant := FALSE])
   } %>%
   .[, R5 := NULL]
 
 unemployment_income_tests_by_date <-
   unemployment_income_thresholds_by_date[unemployment_income_tapers_by_date,
                                  on = c("Date", "TaperNumber")] %>%
-  dcast.data.table(Date + HasPartner + HasDependant ~ TaperNumber,
+  dcast.data.table(Date + hasPartner + hasDependant ~ TaperNumber,
                    value.var = c("IncomeThreshold", "taper"),
                    sep = "_") %>%
-  setkeyv(c("HasPartner",
-            "HasDependant",
+  setkeyv(c("hasPartner",
+            "hasDependant",
             "Date"))
 
 
@@ -406,11 +406,11 @@ rent_assistance_table <-
   .[R6 == "No deps", nDependants := 0L] %>%
   .[R6 == "1-2 deps", nDependants := 1L] %>%
   .[R6 == "> 2 deps", nDependants := 3L] %>%
-  .[, HasPartner := R5 %ein% "Married"] %>%
+  .[, hasPartner := R5 %ein% "Married"] %>%
   .[,
     .(fy_year = date2fy(end_date),
       R2,
-      HasPartner,
+      hasPartner,
       nDependants,
       value)]
 
@@ -439,11 +439,11 @@ rent_assistance_table_by_date <-
   .[R6 == "No deps", nDependants := 0L] %>%
   .[R6 == "1-2 deps", nDependants := 1L] %>%
   .[R6 == "> 2 deps", nDependants := 3L] %>%
-  .[, HasPartner := R5 %ein% "Married"] %>%
+  .[, hasPartner := R5 %ein% "Married"] %>%
   .[,
     .(Date = as.Date(end_date),
       R2,
-      HasPartner,
+      hasPartner,
       nDependants,
       value)]
 
@@ -460,19 +460,19 @@ rent_assistance_rates_by_date <-
              "Minimum rent paid for rent allowance to be payable"),
            c("max_rate",
              "min_rent")) %>%
-  setkeyv(c("HasPartner",
+  setkeyv(c("hasPartner",
             "nDependants",
             "Date")) %>%
   .[]
 
-youth_annual_rates <- 
-  capita[sheet_name == "YouthUnemployment_A"] %>%
-  .[capita_headers, on = c("sheet_name", "col"), nomatch = 0] %>%
+youthStudent_annual_rates <-
+  capita[sheet_name == "YouthStudents_A"] %>%
+  .[capita_headers, on = c("sheet_name", "col"), nomatch = 0L] %>%
   .[COL <= "X"] %>%
   .[and(col %% 3 != 2, COL %notin% c("U", "V", "W", "X"))] %>%
   .[, .(fy_year = date2fy(end_date), col, COL, R6, value)] %>%
-  .[, HasDependant := COL > "N"] %>%
-  .[, HasPartner := COL %between% c("L", "Q")] %>%
+  .[, hasDependant := COL > "N"] %>%
+  .[, hasPartner := COL %between% c("L", "Q")] %>%
   .[, LivesAtHome := COL %between% c("C", "G")] %>%
   .[, Age16or17 := COL %chin% c("C", "D")] %>%
   .[R6 %ein% c("MBR", "ES")] %>%
@@ -481,18 +481,49 @@ youth_annual_rates <-
   dcast.data.table(... ~ R6, value.var = "value") %>%
   .[]
 
-youth_income_tests <- 
-  capita[sheet_name == "YouthUnemployment_A"] %>%
+youthStudent_income_tests <- 
+  capita[sheet_name == "YouthStudents_A"] %>%
   .[COL %chin% c("U", "V", "W", "X"),
     .(start_date, end_date, col, COL, value)] %>%
   .[, variable_type := if_else(COL %chin% c("U", "V"),
                                "IncomeThreshold", 
                                "taper")] %>%
-  .[, TaperNo := col %% 2 + 1] %>%
+  .[, TaperNo := if_else(COL %ein% c("U", "W"), "1", "2")] %>%
   .[, fy_year := date2fy(end_date)] %>%
-  dcast.data.table(fy_year ~ variable_type + TaperNo, value.var = "value") %>%
+  .[, isStudent := TRUE] %>%
+  dcast.data.table(isStudent + fy_year ~ variable_type + TaperNo, value.var = "value") %>%
   .[, IncomeThreshold_1 := as.integer(IncomeThreshold_1)] %>%
   .[, IncomeThreshold_2 := as.integer(IncomeThreshold_2)] %>%
+  .[]
+
+youth_annual_rates <- 
+  capita[sheet_name == "YouthUnemployment_A"] %>%
+  .[capita_headers, on = c("sheet_name", "col"), nomatch = 0] %>%
+  .[COL <= "X"] %>%
+  .[and(col %% 3 != 2, COL %notin% c("U", "V", "W", "X"))] %>%
+  .[, .(fy_year = date2fy(end_date), col, COL, R6, value)] %>%
+  .[, hasDependant := COL > "N"] %>%
+  .[, hasPartner := COL %between% c("L", "Q")] %>%
+  .[, LivesAtHome := COL %between% c("C", "G")] %>%
+  .[, Age16or17 := COL %chin% c("C", "D")] %>%
+  .[R6 %ein% c("MBR", "ES")] %>%
+  .[, c("COL", "col") := NULL] %>%
+  dcast.data.table(... ~ R6, value.var = "value")
+
+youth_income_tests <- 
+  capita[sheet_name == "YouthUnemployment_A"] %>%
+  .[COL %chin% c("U", "V", "W", "X"),
+    .(fy_year = date2fy(end_date), COL, value)] %>%
+  .[, variable_type := if_else(COL %chin% c("U", "V"),
+                               "IncomeThreshold", 
+                               "taper")] %>%
+  .[, TaperNo := if_else(COL %ein% c("U", "W"), "1", "2")] %>%
+  .[, isStudent := FALSE] %>% 
+  dcast.data.table(isStudent + fy_year ~ variable_type + TaperNo, value.var = "value") %>%
+  .[, IncomeThreshold_1 := as.integer(IncomeThreshold_1)] %>%
+  .[, IncomeThreshold_2 := as.integer(IncomeThreshold_2)] %>%
+  rbind(youthStudent_income_tests, use.names = TRUE, fill = TRUE) %>%
+  setkey(isStudent, fy_year) %>%
   .[]
 
 youth_unemployment_rates <-
@@ -500,8 +531,8 @@ youth_unemployment_rates <-
   .[capita_headers, on = c("sheet_name", "col"), nomatch = 0] %>%
   .[col %between% match(c("C", "T"), LETTERS)] %>%
   drop_constant_cols() %>%
-  .[, HasDependant := R3 %ein% c("Coupled With Children", "Sole parents")] %>%
-  .[, HasPartner := R3 %ein% c("Coupled Without Children", "Coupled With Children")] %>%
+  .[, hasDependant := R3 %ein% c("Coupled With Children", "Sole parents")] %>%
+  .[, hasPartner := R3 %ein% c("Coupled Without Children", "Coupled With Children")] %>%
   .[, LivesAtHome := R3 %ein% "Dependent At Home"] %>%
   .[]
 
@@ -521,8 +552,8 @@ youth_unemployment_rates <-
     dcast(fy_year + end_date ~ variable_type + has_partner, value.var = "value") %>%
     melt(measure.vars = patterns("IncomeThreshold"),
          variable.factor = FALSE) %>%
-    .[, HasPartner := endsWith(variable, "Couple")] %>%
-    .[, .(fy_year, Date = end_date, HasPartner, taper = taper_Single, value)]
+    .[, hasPartner := endsWith(variable, "Couple")] %>%
+    .[, .(fy_year, Date = end_date, hasPartner, taper = taper_Single, value)]
 
 
 

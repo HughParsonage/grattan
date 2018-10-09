@@ -1,3 +1,7 @@
+# 1.7.0.0
+
+* `prohibit_vector_recycling()` and friends return more informative error messages.
+
 ## 1.6.4.0
 ### 2018-08-19
 
