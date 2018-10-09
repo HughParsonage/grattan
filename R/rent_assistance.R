@@ -218,6 +218,10 @@ rent_assistance <- function(fortnightly_rent = Inf,
                             n_dependants)
   
   SharersProvisionApplies <- NULL
+  isHomeOwner <- NULL
+  ShareHouse <- NULL
+  hasPartner <- NULL
+  nDependants <- NULL
   sharers_prov <- data.table(SharersProvisionApplies = sharers_provision_applies,
                              isHomeOwner = is_homeowner,
                              ShareHouse = lives_in_sharehouse,

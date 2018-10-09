@@ -110,6 +110,7 @@ child_care_subsidy <- function(family_annual_income = 0,
                early_education_program)
   
   # Income_test
+  income_test <- NULL
   .data[, income_test := if_else(family_annual_income < income_test_bracket_1,
                                  taper_1,
                                  if_else(family_annual_income < income_test_bracket_2,
@@ -129,16 +130,19 @@ child_care_subsidy <- function(family_annual_income = 0,
                                               type_of_day_care))]
   setindexv(.data, "type_of_day_care")
   # Hourly cap
+  hourly_cap <- NULL
   .data[, hourly_cap := 0]
   .data[type_of_day_care == "cbdc", hourly_cap := cbdc_hourly_cap]
   .data[type_of_day_care == "fdc", hourly_cap := fdc_hourly_cap]
   .data[type_of_day_care == "oshc", hourly_cap := oshc_hourly_cap]
   .data[type_of_day_care == "ihc", hourly_cap := ihc_hourly_cap]
   
+  annual_cap <- NULL
   .data[, annual_cap := if_else(family_annual_income > annual_cap_income,
                                 annual_cap_subsidy,
                                 Inf)]
   
+  activity_test_1 <- NULL
   # Activity tests
   .data[, activity_test_1 := koffset(activity_level,
                                      activity_test_1_brackets,
@@ -146,6 +150,10 @@ child_care_subsidy <- function(family_annual_income = 0,
                                      Yright = 100,
                                      Method = "constant")]
   
+  activity_test_2 <- NULL
+  activity_test_3 <- NULL
+  activity_test_4 <- NULL
+  activity_test <- NULL
   .data[, activity_test_2 := if_else(family_annual_income <= 66985 & activity_level < 8,
                                      24, 0)]
   .data[, activity_test_3:= if_else(early_education_program & type_of_day_care == "cbdc",
