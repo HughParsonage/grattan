@@ -83,9 +83,31 @@ test_that("Values", {
   expect_true(is.data.table(m1819_3(ret = "sample_file.int")))
   expect_true(is.integer(.subset2(m1819_3(ret = "sample_file.int"),
                                   "baseline_ccs")))
+  
+  expect_error(m1819_3(tcbdc_hourly_cap = "10"),
+               regexp = "`Cbdc_hourly_cap` was type character but must be numeric.",
+               fixed = TRUE)
+  expect_error(m1819_3(tactivity_test_1_brackets = "10"),
+               regexp = "`Activity_test_1_brackets` was type character, but must numeric.",
+               fixed = TRUE)
+  expect_error(m1819_3(tactivity_test_1_brackets = NA_real_),
+               regexp =  "`Activity_test_1_brackets` had missing values.",
+               fixed = TRUE)
+  expect_error(m1819_3(tactivity_test_1_hours = "10"),
+               regexp =  "`Activity_test_1_hours` was type character, but must numeric.",
+               fixed = TRUE)
+  expect_error(m1819_3(tactivity_test_1_hours = NA_real_),
+               regexp =  "`Activity_test_1_hours` had missing values.",
+               fixed = TRUE)
+  expect_error(m1819_3(tactivity_test_1_hours = c(1, 2), tactivity_test_1_brackets = 1:3),
+               regexp =  "`Activity_test_1_hours` and `Activity_test_1_brackets` have different lengths.",
+               fixed = TRUE)
+  setDF(sample)
+  expect_true(is.data.table(m1819_3(ret = "sample_file")))
 })
 
 test_that("Errors", {
+  library(data.table)
   sample <- CJ(family_annual_income = seq(0, 400000, 50000),
                activity_levels = c(0, 16, 20),
                activity_exemption = FALSE,

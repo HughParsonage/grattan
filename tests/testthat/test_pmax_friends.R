@@ -19,3 +19,10 @@ test_that("grattan functions and pmax pmin give identical results", {
   expect_error(pminV(1, 1:2))
 })
 
+test_that("pmaxIPint0", {
+  expect_equal(pmaxIPint0(-2:2),
+               hutils::if_else(-2:2 > 0, -2:2, 0L))
+  expect_equal(pmaxIPint0(1:5),
+               1:5)
+})
+
