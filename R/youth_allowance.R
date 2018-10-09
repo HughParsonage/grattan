@@ -279,7 +279,6 @@ youth_allowance <- function(fortnightly_income = 0,
     setindexv("ok") %>%
     .[]
   
-  xx <<- tests_rates
   
   if (any(isjspceoalfofcoahodeoc)) {
     i.MBR <- NULL
