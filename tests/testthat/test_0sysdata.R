@@ -44,7 +44,7 @@ test_that("pkgdown up-to-date", {
   skip_on_appveyor()
   skip_if_not_installed("magrittr")
   skip_if_not(file.exists("test_0sysdata.R"))
-  
+  skip_if(dir.exists("../../docs"))  # if checking, this will be removed
   pkgdown_files <- dir("../../docs", recursive = TRUE, full.names = TRUE)
   
   expect_gt(length(pkgdown_files), 0)
