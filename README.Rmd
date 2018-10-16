@@ -13,7 +13,8 @@ output:
 
 ```{r knitrOpts, include=FALSE}
 library(knitr)
-opts_chunk$set(dev = 'svg')
+opts_chunk$set(dev = 'svg',
+               fig.path = "man/figures/README_")
 ```
 
 Australian Tax Policy Analysis

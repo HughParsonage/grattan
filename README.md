@@ -16,7 +16,7 @@ install.packages("grattan")
 library(grattan)
 ```
 
-    ## Last change: model_income_tax.R at 2018-08-29 18:03:31 (2 hours ago).
+    ## Last change: test_0sysdata.R at 2018-10-16 15:32:09 (8 mins ago).
 
 `income_tax`
 ------------
@@ -38,6 +38,16 @@ income_tax(50e3, "2015-16")
 library(taxstats)
 
 library(hutils)
+```
+
+    ## 
+    ## Attaching package: 'hutils'
+
+    ## The following objects are masked from 'package:grattan':
+    ## 
+    ##     mutate_ntile, weighted_ntile
+
+``` r
 library(data.table) 
 library(magrittr)
 library(ggplot2)
@@ -149,7 +159,7 @@ lapply(list("30k" = 30e3,
   geom_line()
 ```
 
-![](README_files/figure-markdown_github/compare-30-37-42-thresholds-1.svg)
+![](man/figures/README_compare-30-37-42-thresholds-1.svg)
 
 Access ABS data
 ---------------
@@ -157,34 +167,20 @@ Access ABS data
 NEWS
 ====
 
-1.6.4.0
+1.7.0.0
 -------
 
-### 2018-08-19
+### Bug fixes
 
--   Potentially minor breaking change: `yr2fy(x)` no longer works for x = 1900L, despite a unit test, for the sake of performance.
+-   Fixed failing interaction between temporary budget repair levy and small business tax offset in 2016-17.
+-   `small_business_tax_offset()` is now always positive, fixing the original misinterpretation of the legislation whereby negative business income resulted in a negative offset.
+-   `*_inflator` functions now return correct results for non-standard but supported financial years.
+-   `inflator` no longer fails when `to_fy` is length &gt; 1 and unordered.
 
-<!-- -->
+### New features
 
-      #> Last change: NAMESPACE at 2018-08-19 14:47:14 (4 mins ago).
-      #> Unit: milliseconds
-      #>       expr min  lq mean median  uq max neval cld
-      #>   yr2fy(z)  75  88   98     90 101 161   100  a 
-      #>  .yr2fy(z) 274 286  298    297 302 359   100   b
-
-Use `yr2fy(x, assume1901_2100 = FALSE)` if you need the old behaviour.
-
-### New functions:
-
--   `rent_assistance` the Commonwealth Rent Assistance
--   `model_rent_assistance` as experimental function for modelling changes to rent assistance.
-
-1.6.3.0
--------
-
-### 2018-08-18
-
--   New allowances functions (usable for the 2015-16 financial year)
+-   `mutate_ntile` and `mutate_weighted_ntile` for adding quantile columns
+-   New welfare functions (usable for the 2015-16 financial year)
     -   `age_pension`,
     -   `carer_payment`
     -   `carers_allowance`
@@ -192,11 +188,19 @@ Use `yr2fy(x, assume1901_2100 = FALSE)` if you need the old behaviour.
     -   `family_tax_benefit`
     -   `newstart_allowance`
     -   `pension_supplement`
--   Data has been updated for wage, CPI, and labour force inflators.
+    -   `rent_assistance` the Commonwealth Rent Assistance
+    -   `model_rent_assistance` as experimental function for modelling changes to rent assistance.
+    -   `youth_allowance()` now available, though limited
+-   `compare_avg_tax_rates`: create a difference in average tax rates between multiple models and a baseline tax, by percentile.
+-   `install_taxstats()` as a convenient means to install the non-CRAN `taxstats` dependency.
 
-Bug fixes:
+### Enhancements
 
--   `inflator` no longer fails when `to_fy` is length &gt; 1 and unordered.
+-   `prohibit_vector_recycling()` and friends return more informative error messages.
+-   Added default values to the following functions:
+    -   `income_tax`, `income_tax_sapto`: the default value for fy.year is the current financial year
+    -   `cpi_inflator`, `lf_inflator_fy`, `wage_inflator`: if both from\_fy and to\_fy are missing, the default values become the previous and current financial years respectively. If only one of the two are missing, an error appears.
+-   `income_tax` is about twice as fast since 1.6.0.0: 1.5-2.0s down from 3.0-3.7s on the 100% population (13 million)
 -   `inflator` and `cpi_inflator`, `lf_inflator_fy`, and `wage_inflator` are now much faster when either `from_fy` or `to_fy` have more than 100,000 elements:
 
 ``` r
@@ -218,28 +222,23 @@ Unit: milliseconds
  191.3497   100
 ```
 
--   Fixed failing interaction between temporary budget repair levy and small business tax offset in 2016-17.
--   `*_inflator` functions now return correct results for non-standard but supported financial years.
+### Potentially breaking changes
 
-1.6.2.0
--------
+-   `yr2fy(x)` no longer works for x = 1900L, despite a unit test, for the sake of performance.
 
-### 2018-06-28
+<!-- -->
 
--   Added default values to the following functions:
-    -   `income_tax`, `income_tax_sapto`: the default value for fy.year is the current financial year
-    -   `cpi_inflator`, `lf_inflator_fy`, `wage_inflator`: if both from\_fy and to\_fy are missing, the default values become the previous and current financial years respectively. If only one of the two are missing, an error appears.
+      #> Last change: NAMESPACE at 2018-08-19 14:47:14 (4 mins ago).
+      #> Unit: milliseconds
+      #>       expr min  lq mean median  uq max neval cld
+      #>   yr2fy(z)  75  88   98     90 101 161   100  a 
+      #>  .yr2fy(z) 274 286  298    297 302 359   100   b
 
-1.6.1.0
--------
+Use `yr2fy(x, assume1901_2100 = FALSE)` if you need the old behaviour.
 
--   New functions:
-    -   `compare_avg_tax_rates`: create a difference in average tax rates between multiple models and a baseline tax, by percentile.
-    -   `install_taxstats()` for convenience.
--   Bug fixes:
-    -   `small_business_tax_offset()` is now always positive, fixing the original misinterpretation of the legislation whereby negative business income resulted in a negative offset.
+### Misc/Internal
+
 -   `taxstats1516` is now a suggested dependency.
--   `income_tax` is about twice as fast since 1.6.0.0: 1.5-2.0s down from 3.0-3.7s on the 100% population (13 million)
 
 1.6.0.0
 -------
