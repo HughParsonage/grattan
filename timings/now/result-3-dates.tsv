@@ -281,3 +281,6 @@ expr	time	Date
 "cpi_inflator(from_fy = from_fys50K, to_fy = ""2015-16"")"	29065625	2018-10-16
 "wage_inflator(from_fy = from_fys50K, to_fy = ""2015-16"")"	46560355	2018-10-16
 "lf_inflator_fy(from_fy = from_fys50K, to_fy = ""2015-16"")"	38156632	2018-10-16
+"cpi_inflator(from_fy = from_fys50K, to_fy = ""2015-16"")"	28359969	2018-10-16
+"wage_inflator(from_fy = from_fys50K, to_fy = ""2015-16"")"	46228158	2018-10-16
+"lf_inflator_fy(from_fy = from_fys50K, to_fy = ""2015-16"")"	37737395	2018-10-16

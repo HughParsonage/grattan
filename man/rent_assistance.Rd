@@ -44,6 +44,9 @@ the internal table.}
 
 \item{is_homeowner}{(logical, default: \code{FALSE}) Does the individual own 
 their own home?}
+
+\item{lives_in_sharehouse}{(logical, default: \code{FALSE}) Does the individual
+live in a sharehouse?}
 }
 \value{
 If \code{fy.year} is used, the annual rent assistance payable for each individual; 

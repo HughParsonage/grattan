@@ -25,7 +25,7 @@
 #' @param sharers_provision_applies (logical, default: FALSE) Does the sharers provision apply to the parent payment? The list of functions can be found in table 2 column 4 \url{http://guides.dss.gov.au/guide-social-security-law/3/8/1/10}
 #' @param is_homeowner (logical, default: \code{FALSE}) Does the individual own 
 #' their own home?
-#' @param lives_in_sharehouse (logical, default: \code{FALSE) Does the individual
+#' @param lives_in_sharehouse (logical, default: \code{FALSE}) Does the individual
 #'  live in a sharehouse?
 #' 
 #' @return If \code{fy.year} is used, the annual rent assistance payable for each individual; 
