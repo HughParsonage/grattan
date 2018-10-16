@@ -38,7 +38,7 @@
 #' you can specify it via \code{tax_discount}. If both are provided, \code{tax_discount} prevails, with a warning.
 #' @source
 #' Basic income tax method s4-10(3) \url{http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html}.
-#' Explanatory memorandum \url{http://parlinfo.aph.gov.au/parlInfo/download/legislation/ems/r5494_ems_0a26ca86-9c3f-4ffa-9b81-219ac09be454/upload_pdf/503041.pdf}.
+#' Explanatory memorandum \url{https://github.com/HughParsonage/grattan/blob/master/data-raw/parlinfo/small-biz-explanatory-memo-2015.pdf} from the original \verb{http://parlinfo.aph.gov.au/parlInfo/download/legislation/ems/r5494_ems_0a26ca86-9c3f-4ffa-9b81-219ac09be454/upload_pdf/503041.pdf}.
 #' @export
 
 

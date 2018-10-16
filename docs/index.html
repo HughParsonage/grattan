@@ -115,8 +115,13 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("taxstats", repos = "https://hughparsonage.github.io/tax-drat")</span>
 <span class="kw">library</span>(taxstats)
 
-<span class="kw">library</span>(hutils)
-<span class="kw">library</span>(data.table) 
+<span class="kw">library</span>(hutils)</code></pre></div>
+<pre><code>## 
+## Attaching package: 'hutils'</code></pre>
+<pre><code>## The following objects are masked from 'package:grattan':
+## 
+##     mutate_ntile, weighted_ntile</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(data.table) 
 <span class="kw">library</span>(magrittr)
 <span class="kw">library</span>(ggplot2)</code></pre></div>
 <p>Simply pass the sample file to <code>.dots.ATO</code> and the complexities of things like Medicare levy and the Seniors and Pensioners Tax Offset are handled for you. For example:</p>
