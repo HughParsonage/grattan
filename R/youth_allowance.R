@@ -1,29 +1,50 @@
 #' Youth allowance
 #' 
-#' @param fortnightly_income,annual_income Individual's income. Defualt is zero. 
+#' @param fortnightly_income,annual_income Individual's income. Default is zero. 
 #' You may provided both; providing both when the ratio is not 26 is an error.
 #' @param fy.year Financial year. Default is current financial year.
-#' @param include_ES (logical, default: \code{TRUE}) If \code{FALSE} do not include the energy supplement.
-#' @param age The individual's age. Default is 18 years. If type double will be coerced to 
-#' integer via truncation (i.e. 17.9 becomes 17).
-#' @param eligible_if_over22 To be eligible for Youth Allowance while over 22, recipients must either commence full-time study or an Australian apprenticeship having been in receipt of an income support payment for at least 6 out of the last 9 months since turning 22, or study an approved course in English where English is not their first language.
+#' @param include_ES (logical, default: \code{TRUE}) If \code{FALSE} do not
+#'  include the energy supplement.
+#' @param age The individual's age. Default is 18 years. If type double will be
+#' coerced to integer via truncation (i.e. 17.9 becomes 17).
+#' @param eligible_if_over22 To be eligible for Youth Allowance while over 22, 
+#' recipients must either commence full-time study or an Australian 
+#' apprenticeship having been in receipt of an income support payment for at 
+#' least 6 out of the last 9 months since turning 22, or study an approved 
+#' course in English where English is not their first language.
 #' @param has_partner Does the individual have a partner?
 #' @param lives_at_home Does the individual live at home with their parents?
 #' @param n_dependants How many dependant children does the individual have?
-#' @param isjspceoalfofcoahodeoc Is the recipient a single job seeker principal carer, either of large family or foster child/ren, or who is a home or distance educator of child/ren?
-#' @param is_student Is the individual a student? Note that apprenctices are considered students.
-#' @param per How often the payment will be made. Default is fortnightly. At present payments can only be fortnightly.
-#' @param max_rate If not \code{NULL}, a length-1 double representing the maximum \emph{fortnightly} rate for youth allowance.
+#' @param isjspceoalfofcoahodeoc Is the recipient a single job seeker principal
+#'  carer, either of large family or foster child/ren, or who is a home or 
+#'  distance educator of child/ren?
+#' @param is_student Is the individual a student? Note that apprentices are 
+#' considered students.
+#' @param per How often the payment will be made. Default is fortnightly. At 
+#' present payments can only be fortnightly.
+#' @param max_rate If not \code{NULL}, a length-1 double representing the 
+#' maximum \emph{fortnightly} rate for youth allowance.
 #' @param es If not \code{NULL}, a length-1 double as the energy supplement.
-#' @param taper1 The amount at which the payment is reduced for each dollar earned between the lower and upper bounds.
-#' @param taper2 The amount at which the payment is reduced for each dollar earned above the upper bound.
-#' @param FT_YA_student_lower Student and apprentice lower bound for which reduction in payment occurs at rate taper1
-#' @param FT_YA_student_upper Student and apprentice upper bound for which reduction in payment occurs at rate taper1. Student and apprentice lower bound for which reduction in payment occurs at rate taper2.
-#' @param FT_YA_jobseeker_lower Jobseeker lower bound for which reduction in payment occurs at rate taper1
-#' @param FT_YA_jobseeker_upper Jobseeker upper bound for which reduction in payment occurs at rate taper1. Student and apprentice lower bound for which reduction in payment occurs at rate \code{taper2}.
-#' @param partner_fortnightly_income The partner's fortnightly income (or zero if no partner).
-#' @param partner_is_pensioner (logical, default: \code{FALSE}) Is the individual's partner in receipt of a \emph{pension} (or benefit)? 
-#' @param partner_taper The amount by which the payment is reduced for each dollar earned by the individual's partner. (See \url{http://guides.dss.gov.au/guide-social-security-law/4/2/8/40}.)
+#' @param taper1 The amount at which the payment is reduced for each dollar 
+#' earned between the lower and upper bounds.
+#' @param taper2 The amount at which the payment is reduced for each dollar
+#'  earned above the upper bound.
+#' @param FT_YA_student_lower Student and apprentice lower bound for which 
+#' reduction in payment occurs at rate \code{taper1}.
+#' @param FT_YA_student_upper Student and apprentice upper bound for which 
+#' reduction in payment occurs at rate \code{taper1}. Student and apprentice
+#'  lower bound for which reduction in payment occurs at rate taper2.
+#' @param FT_YA_jobseeker_lower Jobseeker lower bound for which reduction in
+#'  payment occurs at rate taper1
+#' @param FT_YA_jobseeker_upper Jobseeker upper bound for which reduction in 
+#' payment occurs at rate taper1. Student and apprentice lower bound for which 
+#' reduction in payment occurs at rate \code{taper2}.
+#' @param partner_fortnightly_income The partner's fortnightly income (or zero 
+#' if no partner).
+#' @param partner_is_pensioner (logical, default: \code{FALSE}) Is the 
+#' individual's partner in receipt of a \emph{pension} (or benefit)? 
+#' @param partner_taper The amount by which the payment is reduced for each 
+#' dollar earned by the individual's partner. (See \url{http://guides.dss.gov.au/guide-social-security-law/4/2/8/40}.)
 #' @export youth_allowance 
 
 

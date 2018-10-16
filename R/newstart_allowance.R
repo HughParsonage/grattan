@@ -1,25 +1,36 @@
 #' Newstart allowance
 #' 
-#' @param fortnightly_income 'Ordinary income' received fortnightly within the meaning of s. 1068-G1 of the \emph{Social Security Act 1991}. 
+#' @param fortnightly_income 'Ordinary income' received fortnightly within the 
+#' meaning of s. 1068-G1 of the \emph{Social Security Act 1991}. 
 #' @param annual_income 'Ordinary income' received annually.
 #' @param has_partner Does the individual have a partner?
 #' @param partner_pensioner Does the partner receive a pension?
 #' @param n_dependants How many dependant children does the individual have?
-#' @param nine_months If the person is over 60 years old, have they been receiving payments for over 9 continuous months?
+#' @param nine_months If the person is over 60 years old, have they been 
+#' receiving payments for over 9 continuous months?
 #' @param isjspceoalfofcoahodeoc Is the recipient a single job seeker principal carer, either of large family or foster child/ren, or who is a home or distance educator of child/ren?
-#' @param principal_carer Is the individual the parent with most of the day to day care of child. Defined in https://www.humanservices.gov.au/individuals/enablers/principal-carer-rules-parenting-payment/41456
+#' @param principal_carer Is the individual the parent with most of the day-to-day
+#'  care of child. Defined in \url{https://www.humanservices.gov.au/individuals/enablers/principal-carer-rules-parenting-payment/41456}.
 #' @param fortnightly_partner_income Partner's 'Ordinary income' received fortnightly. 
 #' @param annual_partner_income Partner's Ordinary income' received annually.
 #' @param age The individual's age.
 #' @param fy.year Financial year. Default is "2015-16".
-#' @param assets_value Total value of household assets. Details can be found at https://www.humanservices.gov.au/individuals/enablers/assets/30621 
+#' @param assets_value Total value of household assets. Details can be found at
+#' \url{https://www.humanservices.gov.au/individuals/enablers/assets/30621}. 
 #' @param homeowner Is the individual a homeowner?
-#' @param taper_lower The amount at which the payment is reduced for each dollar earned between the lower and upper bounds for non-principal carers.
-#' @param taper_upper The amount at which the payment is reduced for each dollar earned above the upper bound for non-principal carers.
-#' @param taper_principal_carer The amount at which the payment is reduced for each dollar earned above the lower bound for principal carers.
-#' @param lower Lower bound for which reduction in payment occurs at rate taper_lower (taper_principal_carer for principal carers).
-#' @param upper Upper bound for which reduction in payment occurs at rate taper_lower. Lower bound for which reduction in payment occurs at rate taper_upper. Note that for principal carers there is no upper bound.
-#' @param per Specifies the timeframe in which payments will be made. Can either take value "fortnight" or "annual".
+#' @param taper_lower The amount at which the payment is reduced for each dollar
+#'  earned between the lower and upper bounds for non-principal carers.
+#' @param taper_upper The amount at which the payment is reduced for each dollar
+#'  earned above the upper bound for non-principal carers.
+#' @param taper_principal_carer The amount at which the payment is reduced for
+#'  each dollar earned above the lower bound for principal carers.
+#' @param lower Lower bound for which reduction in payment occurs at rate 
+#' \code{taper_lower} (\code{taper_principal_carer} for principal carers).
+#' @param upper Upper bound for which reduction in payment occurs at rate 
+#' \code{taper_lower}. Lower bound for which reduction in payment occurs at rate
+#' \code{taper_upper}. Note that for principal carers there is no upper bound.
+#' @param per Specifies the timeframe in which payments will be made. 
+#' Can either take value "fortnight" or "annual".
 #' @source \url{http://classic.austlii.edu.au/au/legis/cth/consol_act/ssa1991186/s1068.html}
 #' @export newstart_allowance
 

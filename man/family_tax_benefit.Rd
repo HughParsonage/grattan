@@ -16,9 +16,10 @@ family_tax_benefit(.data = NULL, id_hh = NULL, id = NULL,
 \item{.data}{\code{data.table} input. Each row is an individual. 
 Columns must be have the same names}
 
-\item{id_hh}{household id, used to group households to determine eligiblity and number of children}
+\item{id_hh}{household identifier, used to group households to determine eligiblity 
+and number of children}
 
-\item{id}{individual id}
+\item{id}{individual identifier}
 
 \item{age}{numeric: age of each \code{id}}
 
@@ -34,22 +35,31 @@ Columns must be have the same names}
 
 \item{maintenance_children}{integer: the number of children in the care of \code{id} for whom \code{id} receives maintenance}
 
-\item{income_test_ftbA_1_bound}{Lower bound for which reduction in ftb A max payment occurs at rate taper_ftbA_1.}
+\item{income_test_ftbA_1_bound}{Lower bound for which reduction in FTB A max 
+payment occurs at rate \code{taper_ftbA_1}.}
 
-\item{income_test_ftbA_2_bound}{Lower bound for which reduction in ftb A base payment occurs at rate taper_ftbA_1.}
+\item{income_test_ftbA_2_bound}{Lower bound for which reduction in FTB A base
+payment occurs at rate \code{taper_ftbA_1}.}
 
-\item{income_test_ftbB_bound}{Lower bound for which reduction in ftb B payment occurs at rate taper_ftbB.}
+\item{income_test_ftbB_bound}{Lower bound for which reduction in FTB B payment
+occurs at rate \code{taper_ftbB}.}
 
-\item{taper_ftbA_1}{The amount at which ftb A max payment is reduced for each dollar earned above income_test_ftbA_1_bound.}
+\item{taper_ftbA_1}{The amount at which ftb A max payment is reduced for each
+dollar earned above \code{income_test_ftbA_1_bound}.}
 
-\item{taper_ftbA_2}{The amount at which ftb A base payment is reduced for each dollar earned above income_test_ftbA_2_bound.}
+\item{taper_ftbA_2}{The amount at which ftb A base payment is reduced for each
+dollar earned above \code{income_test_ftbA_2_bound}.}
 
-\item{taper_ftbB}{The amount at which ftb B payment is reduced for each dollar earned above income_test_ftbB_bound.}
+\item{taper_ftbB}{The amount at which ftb B payment is reduced for each dollar
+earned above \code{income_test_ftbB_bound}.}
 
-\item{per}{How often the payment will be made. At present payments can only be annually.}
+\item{per}{How often the payment will be made. At present, payments can only 
+be annually.}
 
-\item{copy}{(logical, default: \code{TRUE}) Should a copy of \code{.data} be made before the calculation? 
-If \code{FALSE}, intermediate values will be assigned by reference to \code{.data} (if not \code{NULL}).}
+\item{copy}{(logical, default: \code{TRUE}) Should a copy of \code{.data} be 
+made before the calculation? 
+If \code{FALSE}, intermediate values will be assigned by reference to 
+\code{.data} (if not \code{NULL}).}
 }
 \description{
 Family tax benefit

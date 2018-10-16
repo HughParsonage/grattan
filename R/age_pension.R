@@ -2,7 +2,7 @@
 #' 
 #' @param fortnightly_income,annual_income Income for means-testing purposes. Provide one but not both.
 #' @param has_partner (logical, default: \code{FALSE}) Does the individual have a partner?
-#' @param n_dependants How many dependants does sthe individual have? Default is zero.
+#' @param n_dependants How many dependants does the individual have? Default is zero.
 #' @param partner_fortnightly_income,partner_annual_income The partner's income. The sum of this value and the indiviudal's income gives the income test.
 #' @param partner_pensioner (logical, default: \code{TRUE}) Is the individual's partner also in receipt of the age pension?
 #' @param Date,fy.year The financial year. Currently only 2015-16 is supported (the most recent survey of income and housing results).
@@ -14,7 +14,8 @@
 #' 
 #' @details
 #' Currently does not include the age pension supplement.
-#' @return Returns the age pension payable for each individual defined by the arguments, assuming otherwise eligible.
+#' @return Returns the age pension payable for each individual defined by the 
+#' arguments, assuming otherwise eligible.
 #' 
 #' 
 #' 

@@ -2,7 +2,7 @@
 #' 
 #' @description Many functions expect Dates. 
 #' Determining that they are validly entered is often quite 
-#' computatationally costly, relative to the core calculations.
+#' computationally costly, relative to the core calculations.
 #' These internal functions provide mechanisms to check validity
 #' quickly, while still providing clear, accurate error messages.
 #' 

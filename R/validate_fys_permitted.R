@@ -2,7 +2,7 @@
 #' 
 #' @description Many functions expect financial years. 
 #' Determining that they are validly entered is often quite 
-#' computatationally costly, relative to the core calculations.
+#' computationally costly, relative to the core calculations.
 #' These internal functions provide mechanisms to check validity
 #' quickly, while still providing clear, accurate error messages.
 #' 
@@ -16,7 +16,9 @@
 #' Should generally be provided explicitly as the default is unlikely 
 #' to be user-friendly.
 #' @param allow.projection If \code{FALSE} emit a different error message.
-#' @param earliest_permitted_financial_year,latest_permitted_financial_year Text for earliest/latest permitted financial year when \code{min.yr}/\code{max.yr} condition is violated.
+#' @param earliest_permitted_financial_year,latest_permitted_financial_year Text
+#'  for earliest/latest permitted financial year when \code{min.yr}/\code{max.yr}
+#'  condition is violated.
 #' 
 #' @return If \code{to_verify} contains valid financial years
 #' they are returned all in the form \code{2013-14}. If they were

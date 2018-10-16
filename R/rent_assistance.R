@@ -1,9 +1,15 @@
 #' Rent assistance
 #' @description The rent assistance to each individual payable by financial year.
-#' @param fortnightly_rent The fortnightly rent paid by each individual. By default, infinity, so the maximum rent assistance is returned by default, since rent assistance is capped at a maximum rate. Note the criteria for board and lodging which can be found at \url{http://guides.dss.gov.au/guide-social-security-law/3/8/1/70}
-#' @param per Specifies the timeframe in which payments will be made. Can either take value "fortnight" or "annual".
-#' @param fy.year (character) The financial year over which rent assistance is to be calculated.
-#' When left as \code{NULL}, defaults to the user's financial year, unless \code{max_rate} and \code{min_rent} are both set. If \code{fy.year} is set, the annual payment is provided.
+#' @param fortnightly_rent The fortnightly rent paid by each individual. By 
+#' default, infinity, so the maximum rent assistance is returned by default, 
+#' since rent assistance is capped at a maximum rate. Note the criteria for board
+#'  and lodging which can be found at \url{http://guides.dss.gov.au/guide-social-security-law/3/8/1/70}
+#' @param per Specifies the timeframe in which payments will be made. Can either
+#'  take value "fortnight" or "annual".
+#' @param fy.year (character) The financial year over which rent assistance is 
+#' to be calculated. When left as \code{NULL}, defaults to the user's financial 
+#' year, unless \code{max_rate} and \code{min_rent} are both set. If 
+#' \code{fy.year} is set, the annual payment is provided.
 #' @param Date (Date vector or coercible to such) An alternative to \code{fy.year}.
 #'  If both \code{fy.year} and \code{Date} are provided, \code{fy.year} is ignored, with a warning. 
 #'  If \code{Date} is used, the fortnightly rent assistance is provided.
@@ -17,8 +23,10 @@
 #' @param min_rent If not \code{NULL}, a numeric vector indicating for each individual the minimum fortnightly rent above which rent assistance is payable. \code{max_rate} and \code{min_rent} must not be used when \code{fy.year} is set.
 #' 
 #' @param sharers_provision_applies (logical, default: FALSE) Does the sharers provision apply to the parent payment? The list of functions can be found in table 2 column 4 \url{http://guides.dss.gov.au/guide-social-security-law/3/8/1/10}
-#' @param is_homeowner (logical, default: FALSE) Does the individual own their own home?
-#' @param lives_in_sharehouse (logical, defualt: FALSE) Does the individual live in a sharehouse?
+#' @param is_homeowner (logical, default: \code{FALSE}) Does the individual own 
+#' their own home?
+#' @param lives_in_sharehouse (logical, default: \code{FALSE) Does the individual
+#'  live in a sharehouse?
 #' 
 #' @return If \code{fy.year} is used, the annual rent assistance payable for each individual; 
 #' if \code{Date} is used, the \emph{fortnightly} rent assistance payable.

@@ -12,9 +12,12 @@
 #' @param Date Date. Default is "2016/03/01" if fy.year is not present.
 #' @param fy.year Financial year. Default is "2015-16" if Date is not present.
 #' @param qualifying_payment What is the payment that the supplement is being applied to? 
-#' @param per How often the payment will be made. Default is to return the annual payment, with a messsage.
-#' @param overseas_absence Will the individual be living outside of Australia for more than 6 weeks of the upcoming year?
-#' @param seperated_couple Is the individual part of an illness separated couple, respite care couple, or partner imprisoned?
+#' @param per How often the payment will be made. Default is to return the annual
+#'  payment, with a message.
+#' @param overseas_absence Will the individual be living outside of Australia 
+#' for more than 6 weeks of the upcoming year?
+#' @param seperated_couple Is the individual part of an illness separated couple,
+#'  respite care couple, or partner imprisoned?
 #' 
 #' @author Matthew Katzen
 #' @export
