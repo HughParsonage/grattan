@@ -48,5 +48,8 @@ energy_supplement(qualifying_payment, has_partner = FALSE,
 The energy supplement for each individual. Arguments are recycled, but only if length-one.
 }
 \description{
-The ES is a supplementary payment that commenced on 20 September 2014. It was previously known as the clean energy supplement (CES). It is a fixed nominal amount; the supplement is neither indexed nor increased each year. There is no means testing.
+The energy supplement (ES) is a supplementary payment that 
+commenced on 20 September 2014. It was previously known as the clean energy 
+supplement (CES). It is a fixed nominal amount; the supplement is neither 
+indexed nor increased each year. There is no means testing.
 }

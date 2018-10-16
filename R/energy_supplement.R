@@ -1,5 +1,8 @@
 #' Energy supplement
-#' @description The ES is a supplementary payment that commenced on 20 September 2014. It was previously known as the clean energy supplement (CES). It is a fixed nominal amount; the supplement is neither indexed nor increased each year. There is no means testing.
+#' @description The energy supplement (ES) is a supplementary payment that 
+#' commenced on 20 September 2014. It was previously known as the clean energy 
+#' supplement (CES). It is a fixed nominal amount; the supplement is neither 
+#' indexed nor increased each year. There is no means testing.
 #' @param qualifying_payment A character vector designating the payment type the individual is entitled to. Valid strings are
 #' \describe{
 #' \item{pension}{All pensions and bereavement allowance}
