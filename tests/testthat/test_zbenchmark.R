@@ -2,6 +2,7 @@ context("Benchmarks")
 
 test_that("Performance regression: cpi_inflator", {
   skip_on_cran()
+  skip_if_not(identical(.Platform$r_arch, "x64"))
   OR <- `||`
   AND <- `&&`
   skip_if_not(OR(hughs_computer <- identical(Sys.getenv("USERNAME"), "hughp"),
@@ -24,6 +25,7 @@ test_that("Performance regression: cpi_inflator", {
 
 test_that("Performance regression: wage_inflator", {
   skip_on_cran()
+  skip_if_not(identical(.Platform$r_arch, "x64"))
   OR <- `||`
   AND <- `&&`
   skip_if_not(OR(hughs_computer <- identical(Sys.getenv("USERNAME"), "hughp"),

@@ -5,6 +5,7 @@ test_that("Data is up-to-date as documented", {
   skip_on_cran()
   # skip_on_travis()
   skip_on_appveyor()
+  skip_if_not(identical(.Platform$r_arch, "x64"))
   check_doc <- function(rd) {
     rd_lines <- readLines(rd, warn = FALSE)
     if (length(intrnl_data_line <- grep("internal data", rd_lines))) {
