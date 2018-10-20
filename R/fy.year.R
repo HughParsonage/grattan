@@ -6,7 +6,7 @@
 #' @param fy.yr A string suspected to be a financial year.
 #' @param date A string or date for which the financial year is desired. Note that \code{yr2fy} does not check its argument is an integer.
 #' @param assume1901_2100 For \code{yr2fy}, assume that \code{yr_ending} is between 1901 and 2100, 
-#' for performance. By default, set to `getOption("grattan.assume1901_2100", TRUE)`.
+#' for performance. By default, set to \code{getOption("grattan.assume1901_2100", TRUE)}.
 #' @details The following forms are permitted: \code{2012-13}, \code{201213}, \code{2012 13}, only.
 #' However, the \code{2012-13} form is preferred and will improve performance. 
 #' 

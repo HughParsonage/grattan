@@ -2,8 +2,9 @@
 #' 
 #' @param .data \code{data.table} input. Each row is an individual. 
 #' Columns must be have the same names 
-#' @param id individual id
-#' @param id_hh household id, used to group households to determine eligiblity and number of children
+#' @param id individual identifier
+#' @param id_hh household identifier, used to group households to determine eligiblity 
+#' and number of children
 #' @param age numeric: age of each \code{id}
 #' @param income numeric: income of each \code{id}
 #' @param in_secondary_school logical column: does \code{id} attend secondary school?
@@ -11,15 +12,24 @@
 #' @param other_allowance_benefit_or_pension logical column: does the individual receive a pension, benefit, or labour market program payment such as Youth Allowance?
 #' @param maintenance_income numeric: the amount of maintenance income the individual receives for the care of a child/children from a previous relationship
 #' @param maintenance_children integer: the number of children in the care of \code{id} for whom \code{id} receives maintenance
-#' @param income_test_ftbA_1_bound Lower bound for which reduction in ftb A max payment occurs at rate taper_ftbA_1.
-#' @param income_test_ftbA_2_bound Lower bound for which reduction in ftb A base payment occurs at rate taper_ftbA_1.
-#' @param income_test_ftbB_bound Lower bound for which reduction in ftb B payment occurs at rate taper_ftbB.
-#' @param taper_ftbA_1 The amount at which ftb A max payment is reduced for each dollar earned above income_test_ftbA_1_bound.
-#' @param taper_ftbA_2 The amount at which ftb A base payment is reduced for each dollar earned above income_test_ftbA_2_bound.
-#' @param taper_ftbB The amount at which ftb B payment is reduced for each dollar earned above income_test_ftbB_bound.
-#' @param per How often the payment will be made. At present payments can only be annually.
-#' @param copy (logical, default: \code{TRUE}) Should a copy of \code{.data} be made before the calculation? 
-#' If \code{FALSE}, intermediate values will be assigned by reference to \code{.data} (if not \code{NULL}).
+#' @param income_test_ftbA_1_bound Lower bound for which reduction in FTB A max 
+#' payment occurs at rate \code{taper_ftbA_1}.
+#' @param income_test_ftbA_2_bound Lower bound for which reduction in FTB A base
+#'  payment occurs at rate \code{taper_ftbA_1}.
+#' @param income_test_ftbB_bound Lower bound for which reduction in FTB B payment
+#'  occurs at rate \code{taper_ftbB}.
+#' @param taper_ftbA_1 The amount at which ftb A max payment is reduced for each
+#'  dollar earned above \code{income_test_ftbA_1_bound}.
+#' @param taper_ftbA_2 The amount at which ftb A base payment is reduced for each
+#'  dollar earned above \code{income_test_ftbA_2_bound}.
+#' @param taper_ftbB The amount at which ftb B payment is reduced for each dollar
+#'  earned above \code{income_test_ftbB_bound}.
+#' @param per How often the payment will be made. At present, payments can only 
+#' be annually.
+#' @param copy (logical, default: \code{TRUE}) Should a copy of \code{.data} be 
+#' made before the calculation? 
+#' If \code{FALSE}, intermediate values will be assigned by reference to 
+#' \code{.data} (if not \code{NULL}).
 #' @author Matthew Katzen
 #' @export
 #' 

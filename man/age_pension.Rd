@@ -17,7 +17,7 @@ age_pension(fortnightly_income = 0, annual_income = fortnightly_income
 
 \item{has_partner}{(logical, default: \code{FALSE}) Does the individual have a partner?}
 
-\item{n_dependants}{How many dependants does sthe individual have? Default is zero.}
+\item{n_dependants}{How many dependants does the individual have? Default is zero.}
 
 \item{partner_fortnightly_income, partner_annual_income}{The partner's income. The sum of this value and the indiviudal's income gives the income test.}
 
@@ -36,7 +36,8 @@ age_pension(fortnightly_income = 0, annual_income = fortnightly_income
 \item{per}{Specifies the timeframe in which payments will be made. One of \code{"year"} and \code{"fortnight"}.}
 }
 \value{
-Returns the age pension payable for each individual defined by the arguments, assuming otherwise eligible.
+Returns the age pension payable for each individual defined by the 
+arguments, assuming otherwise eligible.
 }
 \description{
 Age pension

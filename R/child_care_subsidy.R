@@ -1,23 +1,42 @@
 #' Child Care Subsidy paid per child. 
 #' 
 #' @param family_annual_income (numeric) Total income of the family.
-#' @param activity_level (numeric) The total number of activity hours of the parent. Note that if there are two parents the one with the lower activity level will be applied. Common activities include work, leave, and study. A full list can be viewed at \url{http://guides.dss.gov.au/family-assistance-guide/3/5/2/10}.
-#' @param activity_exemption (logical) Whether the parent is exempt from the activity test. Note that in a two parent family both parents must be exempt. A list of exemptions is available at \url{http://guides.dss.gov.au/family-assistance-guide/3/5/2/10}.
+#' @param activity_level (numeric) The total number of activity hours of the 
+#' parent. Note that if there are two parents the one with the lower activity 
+#' level will be applied. Common activities include work, leave, and study. A 
+#' full list can be viewed at \url{http://guides.dss.gov.au/family-assistance-guide/3/5/2/10}.
+#' @param activity_exemption (logical) Whether the parent is exempt from the 
+#' activity test. Note that in a two parent family both parents must be exempt. 
+#' A list of exemptions is available at \url{http://guides.dss.gov.au/family-assistance-guide/3/5/2/10}.
 #' @param child_age (numeric) The age of the child in child care.
-#' @param type_of_day_care (character) The type of child care. Acceptable inputs are: "cbdc" Centre Based Day Care, "oshc" Outside School Hours Care, "fdc" Family Day Care, or "ihc" In Home Care. Note that In Home Care can only be claimed once per family.
-#' @param hours_day_care_fortnight (numeric) The number of hours of day care per child per fortnight.
+#' @param type_of_day_care (character) The type of child care. Acceptable inputs
+#'  are: \code{"cbdc"} Centre Based Day Care, "oshc" Outside School Hours Care,
+#'  \code{"fdc"} Family Day Care, or 
+#'  \code{"ihc"} In Home Care. Note that In Home Care 
+#'  can only be claimed once per family.
+#' @param hours_day_care_fortnight (numeric) The number of hours of day care per
+#'  child per fortnight.
 #' @param cost_hour (numeric) The cost of day care per hour.
-#' @param early_education_program (logical) Whether the child is part of an early education program.
+#' @param early_education_program (logical) Whether the child is part of an 
+#' early education program.
 #' 
-#' @param cbdc_hourly_cap,fdc_hourly_cap,oshc_hourly_cap,ihc_hourly_cap (numeric) The lower of `cost_hour` or the relevant `hourly_cap` will be used in the calculation of the subsidy.
-#' @param annual_cap_income (numeric) The minimum family income for which the `annual_cap_subsidy` applies from.
-#' @param annual_cap_subsidy (numeric) Amount at which annual subsidies are capped for those who earn more than `annual_cap_income`. 
+#' @param cbdc_hourly_cap,fdc_hourly_cap,oshc_hourly_cap,ihc_hourly_cap (numeric) 
+#' The lower of `cost_hour` or the relevant `hourly_cap` will be used in the 
+#' calculation of the subsidy.
+#' @param annual_cap_income (numeric) The minimum family income for which the 
+#' `annual_cap_subsidy` applies from.
+#' @param annual_cap_subsidy (numeric) Amount at which annual subsidies are 
+#' capped for those who earn more than `annual_cap_income`. 
 #' 
-#' @param activity_test_1_brackets (numeric vector) The activity levels at which the activity test increases.
-#' @param activity_test_1_hours (numeric vector) The hours corresponding to the step increase in `activity_test_1_brackets`.
+#' @param activity_test_1_brackets (numeric vector) The activity levels at which
+#'  the activity test increases.
+#' @param activity_test_1_hours (numeric vector) The hours corresponding to the
+#'  step increase in `activity_test_1_brackets`.
 #' 
-#' @param income_test_bracket_1,income_test_bracket_2,income_test_bracket_3,income_test_bracket_4,income_test_bracket_5 (numeric) The steps at which income test 1 changes rates. Note the strange structure \url{https://www.humanservices.gov.au/individuals/services/centrelink/child-care-subsidy/payments/how-your-income-affects-it}.
-#' @param taper_1,taper_2,taper_3 (numeric) The proportion of the hourly cap retained. Note that the rate only decreases between each odd bracket.
+#' @param income_test_bracket_1,income_test_bracket_2,income_test_bracket_3,income_test_bracket_4,income_test_bracket_5 (numeric) The steps at which income test 1 changes rates.
+#'  Note the strange structure \url{https://www.humanservices.gov.au/individuals/services/centrelink/child-care-subsidy/payments/how-your-income-affects-it}.
+#' @param taper_1,taper_2,taper_3 (numeric) The proportion of the hourly cap 
+#' retained. Note that the rate only decreases between each odd bracket.
 #' 
 #' @return The annual child care subsidy payable per child.
 #' 

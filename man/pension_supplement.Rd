@@ -24,11 +24,14 @@ pension_supplement(has_partner = FALSE, age = 70, n_dependants = 0,
 
 \item{qualifying_payment}{What is the payment that the supplement is being applied to?}
 
-\item{per}{How often the payment will be made. Default is to return the annual payment, with a messsage.}
+\item{per}{How often the payment will be made. Default is to return the annual
+payment, with a message.}
 
-\item{overseas_absence}{Will the individual be living outside of Australia for more than 6 weeks of the upcoming year?}
+\item{overseas_absence}{Will the individual be living outside of Australia 
+for more than 6 weeks of the upcoming year?}
 
-\item{seperated_couple}{Is the individual part of an illness separated couple, respite care couple, or partner imprisoned?}
+\item{seperated_couple}{Is the individual part of an illness separated couple,
+respite care couple, or partner imprisoned?}
 }
 \description{
 The Pension Supplement gets added to the max rate of payment before income reduction tests are applied. Note that if the individual is part of a couple, the rate indicates the payment amount per person, not for the couple.
