@@ -1,3 +1,9 @@
+## 1.7.1.0
+
+### Internal
+* `mutate_ntile` and `weighted_ntile` now use the `hutils` equivalents. This 
+  broke 3 unit tests because of the specific phrasing of some error messages.
+
 ## 1.7.0.0
 
 ### Bug fixes

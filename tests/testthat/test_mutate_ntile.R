@@ -65,14 +65,7 @@ test_that("tibble", {
   
 })
 
-test_that(".ntile", {
-  expect_error(.ntile(c(1, 2, 5, 4), n = 1, check.sorted = TRUE), 
-               regexp = "`x` must be already sorted",
-               fixed = TRUE)
-  expect_error(.ntile(c(1, 2, 5, 4, NA), n = 1, check.na = TRUE), 
-               regexp = "anyNA(x)` is TRUE",
-               fixed = TRUE)
-})
+
 
 test_that("Corresponds to dplyr::ntile", {
   skip_if_not_installed("dplyr")
