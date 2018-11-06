@@ -29,7 +29,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grattan</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.4.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.7.0.1</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
       <h1>Grattan Institute</h1>
                         <h4 class="author">Hugh Parsonage</h4>
             
-            <h4 class="date">2018-10-16</h4>
+            <h4 class="date">2018-11-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/HughParsonage/grattan/blob/master/vignettes/grattan.Rmd"><code>vignettes/grattan.Rmd</code></a></small>
       <div class="hidden name"><code>grattan.Rmd</code></div>
@@ -185,12 +185,7 @@ hutils<span class="op">::</span><span class="kw"><a href="http://www.rdocumentat
               <span class="dt">idcol =</span> <span class="st">"fy.year"</span>)
 sample_files_all[, WEIGHT <span class="op">:</span><span class="er">=</span><span class="st"> </span>hutils<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/hutils/topics/if_else">if_else</a></span>(fy.year <span class="op">&gt;</span><span class="st"> '2010-11'</span>, 50L, 100L)]
 age_range_decoder &lt;-<span class="st"> </span><span class="kw">as.data.table</span>(age_range_decoder)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(grattan)
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'grattan'</span>
-<span class="co">#&gt; The following objects are masked from 'package:hutils':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     mutate_ntile, weighted_ntile</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(grattan)</code></pre></div>
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
@@ -226,12 +221,12 @@ sample_file_<span class="dv">2021</span>[, avg_tax <span class="op">:</span><spa
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">avg_tax_by_decile_<span class="dv">1617</span> &lt;-<span class="st"> </span>
 <span class="st">  </span>sample_file_<span class="dv">1617</span> <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, .(<span class="dt">avg_tax =</span> <span class="kw">mean</span>(avg_tax)),
-    keyby =<span class="st"> </span>.(<span class="dt">decile =</span> <span class="kw"><a href="../reference/weighted_ntile.html">weighted_ntile</a></span>(Taxable_Income, <span class="dt">n =</span> <span class="dv">10</span>))]
+    keyby =<span class="st"> </span>.(<span class="dt">decile =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/hutils/topics/weighted_ntile">weighted_ntile</a></span>(Taxable_Income, <span class="dt">n =</span> <span class="dv">10</span>))]
 
 avg_tax_by_decile_<span class="dv">2021</span> &lt;-<span class="st"> </span>
 <span class="st">  </span>sample_file_<span class="dv">2021</span> <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, .(<span class="dt">avg_tax =</span> <span class="kw">mean</span>(avg_tax)),
-    keyby =<span class="st"> </span>.(<span class="dt">decile =</span> <span class="kw"><a href="../reference/weighted_ntile.html">weighted_ntile</a></span>(Taxable_Income, <span class="dt">n =</span> <span class="dv">10</span>))]</code></pre></div>
+    keyby =<span class="st"> </span>.(<span class="dt">decile =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/hutils/topics/weighted_ntile">weighted_ntile</a></span>(Taxable_Income, <span class="dt">n =</span> <span class="dv">10</span>))]</code></pre></div>
 <p>We can then plot a comparison of these table by joining them and using <code>ggplot2</code>. Since the tables are already keyed by <code>decile</code>, we can use the <code>X[Y]</code> method from <code>data.table</code> to join by <code>decile</code>. This creates a three-column table: the first is <code>decile</code>, the second is <code>avg_tax</code> which is the <code>avg_tax</code> from the 2016-17 table and <code>i.avg_tax</code> which is the <code>avg_tax</code> from the 2020-21 table. (In the result of <code>X[Y]</code>, any column in <code>Y</code> which has the same name as a column in <code>X</code> (but isn’t a key) is prefixed with <code>i.</code> to distinguish it.) We discard the lowest decile as the average tax is <code>NaN</code> for those with zero taxable income. Lastly, for cosmetic reasons, we convert <code>decile</code> to a factor so that the labels on the chart are <code>1, 2, 3, ...</code> rather than <code>0, 2.5, 5, ...</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">avg_tax_by_decile_<span class="dv">1617</span>[avg_tax_by_decile_<span class="dv">2021</span>] <span class="op">%&gt;%</span>
 <span class="st">  </span>.[decile <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>] <span class="op">%&gt;%</span>
@@ -292,12 +287,12 @@ sample_file_<span class="dv">2021</span>[, avg_tax <span class="op">:</span><spa
 avg_tax_by_decile_<span class="dv">1617</span> &lt;-<span class="st"> </span>
 <span class="st">  </span>sample_file_<span class="dv">1617</span> <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, .(<span class="dt">avg_tax =</span> <span class="kw">mean</span>(avg_tax)),
-    keyby =<span class="st"> </span>.(<span class="dt">decile =</span> <span class="kw"><a href="../reference/weighted_ntile.html">weighted_ntile</a></span>(Taxable_Income, <span class="dt">n =</span> <span class="dv">10</span>))]
+    keyby =<span class="st"> </span>.(<span class="dt">decile =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/hutils/topics/weighted_ntile">weighted_ntile</a></span>(Taxable_Income, <span class="dt">n =</span> <span class="dv">10</span>))]
 
 avg_tax_by_decile_<span class="dv">2021</span> &lt;-<span class="st"> </span>
 <span class="st">  </span>sample_file_<span class="dv">2021</span> <span class="op">%&gt;%</span>
 <span class="st">  </span>.[, .(<span class="dt">avg_tax =</span> <span class="kw">mean</span>(avg_tax)),
-    keyby =<span class="st"> </span>.(<span class="dt">decile =</span> <span class="kw"><a href="../reference/weighted_ntile.html">weighted_ntile</a></span>(Taxable_Income, <span class="dt">n =</span> <span class="dv">10</span>))]
+    keyby =<span class="st"> </span>.(<span class="dt">decile =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/hutils/topics/weighted_ntile">weighted_ntile</a></span>(Taxable_Income, <span class="dt">n =</span> <span class="dv">10</span>))]
 
 difference_2021_Budget &lt;-
 <span class="st">  </span>avg_tax_by_decile_<span class="dv">1617</span>[avg_tax_by_decile_<span class="dv">2021</span>] <span class="op">%&gt;%</span>
@@ -315,7 +310,7 @@ difference_2021_Budget <span class="op">%&gt;%</span>
 <span class="st">  </span>difference_2021_Budget <span class="op">%&gt;%</span>
 <span class="st">  </span>.[decile <span class="op">%between%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">7</span>)] <span class="op">%$%</span>
 <span class="st">  </span><span class="kw">range</span>(<span class="kw">round</span>(ppt_increase, <span class="dv">1</span>))</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_file_<span class="dv">1617</span>[, percentile <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="../reference/weighted_ntile.html">weighted_ntile</a></span>(Taxable_Income, <span class="dt">n =</span> <span class="dv">100</span>)]
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_file_<span class="dv">1617</span>[, percentile <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/hutils/topics/weighted_ntile">weighted_ntile</a></span>(Taxable_Income, <span class="dt">n =</span> <span class="dv">100</span>)]
 <span class="kw">stopifnot</span>(<span class="dv">56</span> <span class="op">%in%</span><span class="st"> </span>sample_file_<span class="dv">1617</span>[Taxable_Income <span class="op">%between%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">49500</span>, <span class="dv">50500</span>)][[<span class="st">"percentile"</span>]])
 
 avg_tax_rate_2017_50k &lt;-<span class="st"> </span>
@@ -325,7 +320,7 @@ avg_tax_rate_2017_50k &lt;-<span class="st"> </span>
 
 avg_tax_rate_2021_50k &lt;-<span class="st"> </span>
 <span class="st">  </span>sample_file_<span class="dv">2021</span> <span class="op">%&gt;%</span>
-<span class="st">  </span>.[, percentile <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="../reference/weighted_ntile.html">weighted_ntile</a></span>(Taxable_Income, <span class="dt">n =</span> <span class="dv">100</span>)] <span class="op">%&gt;%</span>
+<span class="st">  </span>.[, percentile <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/hutils/topics/weighted_ntile">weighted_ntile</a></span>(Taxable_Income, <span class="dt">n =</span> <span class="dv">100</span>)] <span class="op">%&gt;%</span>
 <span class="st">  </span>.[percentile <span class="op">==</span><span class="st"> </span><span class="dv">56</span>] <span class="op">%$%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">mean</span>(avg_tax) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">round</span>(<span class="dv">3</span>)</code></pre></div>
@@ -422,7 +417,7 @@ avg_tax_rate_2021_50k &lt;-<span class="st"> </span>
 <div id="prologue" class="section level2">
 <h2 class="hasAnchor">
 <a href="#prologue" class="anchor"></a>Prologue</h2>
-<p>This vignette is a mirror of a small book prepared internally by Grattan Institute. The goal is to demonstrate how to perform simple analysis and create common charts. You will need the <code>taxstats</code> package available via <code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github('hughparsonage/taxstats')</a></code>.</p>
+<p>This vignette is a mirror of a small book prepared internally by Grattan Institute. The goal is to demonstrate how to perform simple analysis and create common charts. You will need the <code>taxstats</code> package available via <code><a href="http://www.rdocumentation.org/packages/devtools/topics/reexports">devtools::install_github('hughparsonage/taxstats')</a></code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="st">"scipen"</span> =<span class="st"> </span><span class="dv">99</span>)
 opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">fig.width =</span> <span class="dv">9</span>,
                <span class="dt">fig.height =</span> <span class="fl">6.5</span>,

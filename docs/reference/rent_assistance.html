@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grattan</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.4.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.7.0.1</span>
       </span>
     </div>
 
@@ -140,16 +140,22 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>fortnightly_rent</th>
-      <td><p>The fortnightly rent paid by each individual. By default, infinity, so the maximum rent assistance is returned by default, since rent assistance is capped at a maximum rate. Note the criteria for board and lodging which can be found at <a href='http://guides.dss.gov.au/guide-social-security-law/3/8/1/70'>http://guides.dss.gov.au/guide-social-security-law/3/8/1/70</a></p></td>
+      <td><p>The fortnightly rent paid by each individual. By 
+default, infinity, so the maximum rent assistance is returned by default, 
+since rent assistance is capped at a maximum rate. Note the criteria for board
+ and lodging which can be found at <a href='http://guides.dss.gov.au/guide-social-security-law/3/8/1/70'>http://guides.dss.gov.au/guide-social-security-law/3/8/1/70</a></p></td>
     </tr>
     <tr>
       <th>per</th>
-      <td><p>Specifies the timeframe in which payments will be made. Can either take value "fortnight" or "annual".</p></td>
+      <td><p>Specifies the timeframe in which payments will be made. Can either
+take value "fortnight" or "annual".</p></td>
     </tr>
     <tr>
       <th>fy.year</th>
-      <td><p>(character) The financial year over which rent assistance is to be calculated.
-When left as <code>NULL</code>, defaults to the user's financial year, unless <code>max_rate</code> and <code>min_rent</code> are both set. If <code>fy.year</code> is set, the annual payment is provided.</p></td>
+      <td><p>(character) The financial year over which rent assistance is 
+to be calculated. When left as <code>NULL</code>, defaults to the user's financial 
+year, unless <code>max_rate</code> and <code>min_rent</code> are both set. If 
+<code>fy.year</code> is set, the annual payment is provided.</p></td>
     </tr>
     <tr>
       <th>Date</th>
@@ -185,11 +191,13 @@ the internal table.</p></td>
     </tr>
     <tr>
       <th>is_homeowner</th>
-      <td><p>(logical, default: FALSE) Does the individual own their own home?</p></td>
+      <td><p>(logical, default: <code>FALSE</code>) Does the individual own 
+their own home?</p></td>
     </tr>
     <tr>
       <th>lives_in_sharehouse</th>
-      <td><p>(logical, defualt: FALSE) Does the individual live in a sharehouse?</p></td>
+      <td><p>(logical, default: <code>FALSE</code>) Does the individual
+live in a sharehouse?</p></td>
     </tr>
     </table>
     
