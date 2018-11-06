@@ -1,0 +1,8 @@
+  0.0	loadPackages
+  0.1	GetTaxstats1516
+  0.5	unnamed-chunk-1
+  1.3	avgBenefit-vs-avgTaxableIncome
+  1.6	avgBenefits-vs-TaxableIncome-twitter
+  0.6	propNG_by_Occupation
+  0.8	propNG_by_Occupation--png
+  0.6	sessionInfo
