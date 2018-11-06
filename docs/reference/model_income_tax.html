@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grattan</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.4.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.7.0.1</span>
       </span>
     </div>
 
@@ -303,7 +303,7 @@ but with variables <code>tax</code> and possibly <code>new_taxable_income</code>
 <span class='fu'>library</span>(<span class='no'>hutils</span>)</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'>Attaching package: 'hutils'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:grattan':</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    %notin%, mutate_ntile, Switch, weighted_ntile</span></div><div class='input'>
+#&gt; <span class='message'>    %notin%, Switch</span></div><div class='input'>
 <span class='co'># With new tax-free threshold of $20,000:</span>
 <span class='kw'>if</span> (<span class='fu'>requireNamespace</span>(<span class='st'>"taxstats"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
   <span class='fu'>library</span>(<span class='no'>taxstats</span>)
@@ -314,7 +314,10 @@ but with variables <code>tax</code> and possibly <code>new_taxable_income</code>
                    <span class='kw'>ordinary_tax_thresholds</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>20e3</span>, <span class='fl'>37e3</span>, <span class='fl'>80e3</span>, <span class='fl'>180e3</span>)) <span class='kw'>%&gt;%</span>
     <span class='fu'><a href='http://www.rdocumentation.org/packages/hutils/topics/select_grep'>select_grep</a></span>(<span class='st'>"tax"</span>, <span class='st'>"Taxable_Income"</span>)
 
-}</div><div class='output co'>#&gt;         Untaxed_othr_pnsn_amt Cost_tax_affairs_amt Spouse_adjusted_taxable_inc
+}</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: 'magrittr'</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from 'package:testthat':</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    equals, is_less_than, not</span></div><div class='output co'>#&gt;         Untaxed_othr_pnsn_amt Cost_tax_affairs_amt Spouse_adjusted_taxable_inc
 #&gt;      1:                     0                    0                           0
 #&gt;      2:                     0                  336                           0
 #&gt;      3:                     0                    0                           0

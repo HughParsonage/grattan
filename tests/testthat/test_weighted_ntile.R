@@ -4,7 +4,7 @@ test_that("Error handling", {
   expect_error(weighted_ntile(stop("Not checked yet"), weights = -1:0), 
                regex = "contained negative values")
   expect_error(weighted_ntile(1:10, 1:5, n = 10), 
-               regexp = "`weights` must be length-one or length(vector)", 
+               regexp = "`length(weights) = 5`, yet `length(vector) = 10`.", 
                fixed = TRUE)
 })
 

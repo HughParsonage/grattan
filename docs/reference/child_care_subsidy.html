@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grattan</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.6.4.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.7.0.1</span>
       </span>
     </div>
 
@@ -152,11 +152,16 @@
     </tr>
     <tr>
       <th>activity_level</th>
-      <td><p>(numeric) The total number of activity hours of the parent. Note that if there are two parents the one with the lower activity level will be applied. Common activities include work, leave, and study. A full list can be viewed at <a href='http://guides.dss.gov.au/family-assistance-guide/3/5/2/10'>http://guides.dss.gov.au/family-assistance-guide/3/5/2/10</a>.</p></td>
+      <td><p>(numeric) The total number of activity hours of the 
+parent. Note that if there are two parents the one with the lower activity 
+level will be applied. Common activities include work, leave, and study. A 
+full list can be viewed at <a href='http://guides.dss.gov.au/family-assistance-guide/3/5/2/10'>http://guides.dss.gov.au/family-assistance-guide/3/5/2/10</a>.</p></td>
     </tr>
     <tr>
       <th>activity_exemption</th>
-      <td><p>(logical) Whether the parent is exempt from the activity test. Note that in a two parent family both parents must be exempt. A list of exemptions is available at <a href='http://guides.dss.gov.au/family-assistance-guide/3/5/2/10'>http://guides.dss.gov.au/family-assistance-guide/3/5/2/10</a>.</p></td>
+      <td><p>(logical) Whether the parent is exempt from the 
+activity test. Note that in a two parent family both parents must be exempt. 
+A list of exemptions is available at <a href='http://guides.dss.gov.au/family-assistance-guide/3/5/2/10'>http://guides.dss.gov.au/family-assistance-guide/3/5/2/10</a>.</p></td>
     </tr>
     <tr>
       <th>child_age</th>
@@ -164,11 +169,16 @@
     </tr>
     <tr>
       <th>type_of_day_care</th>
-      <td><p>(character) The type of child care. Acceptable inputs are: "cbdc" Centre Based Day Care, "oshc" Outside School Hours Care, "fdc" Family Day Care, or "ihc" In Home Care. Note that In Home Care can only be claimed once per family.</p></td>
+      <td><p>(character) The type of child care. Acceptable inputs
+are: <code>"cbdc"</code> Centre Based Day Care, "oshc" Outside School Hours Care,
+<code>"fdc"</code> Family Day Care, or 
+<code>"ihc"</code> In Home Care. Note that In Home Care 
+can only be claimed once per family.</p></td>
     </tr>
     <tr>
       <th>hours_day_care_fortnight</th>
-      <td><p>(numeric) The number of hours of day care per child per fortnight.</p></td>
+      <td><p>(numeric) The number of hours of day care per
+child per fortnight.</p></td>
     </tr>
     <tr>
       <th>cost_hour</th>
@@ -176,35 +186,44 @@
     </tr>
     <tr>
       <th>early_education_program</th>
-      <td><p>(logical) Whether the child is part of an early education program.</p></td>
+      <td><p>(logical) Whether the child is part of an 
+early education program.</p></td>
     </tr>
     <tr>
       <th>cbdc_hourly_cap, fdc_hourly_cap, oshc_hourly_cap, ihc_hourly_cap</th>
-      <td><p>(numeric) The lower of `cost_hour` or the relevant `hourly_cap` will be used in the calculation of the subsidy.</p></td>
+      <td><p>(numeric) 
+The lower of `cost_hour` or the relevant `hourly_cap` will be used in the 
+calculation of the subsidy.</p></td>
     </tr>
     <tr>
       <th>annual_cap_income</th>
-      <td><p>(numeric) The minimum family income for which the `annual_cap_subsidy` applies from.</p></td>
+      <td><p>(numeric) The minimum family income for which the 
+`annual_cap_subsidy` applies from.</p></td>
     </tr>
     <tr>
       <th>annual_cap_subsidy</th>
-      <td><p>(numeric) Amount at which annual subsidies are capped for those who earn more than `annual_cap_income`.</p></td>
+      <td><p>(numeric) Amount at which annual subsidies are 
+capped for those who earn more than `annual_cap_income`.</p></td>
     </tr>
     <tr>
       <th>income_test_bracket_1, income_test_bracket_2, income_test_bracket_3, income_test_bracket_4, income_test_bracket_5</th>
-      <td><p>(numeric) The steps at which income test 1 changes rates. Note the strange structure <a href='https://www.humanservices.gov.au/individuals/services/centrelink/child-care-subsidy/payments/how-your-income-affects-it'>https://www.humanservices.gov.au/individuals/services/centrelink/child-care-subsidy/payments/how-your-income-affects-it</a>.</p></td>
+      <td><p>(numeric) The steps at which income test 1 changes rates.
+Note the strange structure <a href='https://www.humanservices.gov.au/individuals/services/centrelink/child-care-subsidy/payments/how-your-income-affects-it'>https://www.humanservices.gov.au/individuals/services/centrelink/child-care-subsidy/payments/how-your-income-affects-it</a>.</p></td>
     </tr>
     <tr>
       <th>taper_1, taper_2, taper_3</th>
-      <td><p>(numeric) The proportion of the hourly cap retained. Note that the rate only decreases between each odd bracket.</p></td>
+      <td><p>(numeric) The proportion of the hourly cap 
+retained. Note that the rate only decreases between each odd bracket.</p></td>
     </tr>
     <tr>
       <th>activity_test_1_brackets</th>
-      <td><p>(numeric vector) The activity levels at which the activity test increases.</p></td>
+      <td><p>(numeric vector) The activity levels at which
+the activity test increases.</p></td>
     </tr>
     <tr>
       <th>activity_test_1_hours</th>
-      <td><p>(numeric vector) The hours corresponding to the step increase in `activity_test_1_brackets`.</p></td>
+      <td><p>(numeric vector) The hours corresponding to the
+step increase in `activity_test_1_brackets`.</p></td>
     </tr>
     </table>
     

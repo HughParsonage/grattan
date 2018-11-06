@@ -88,12 +88,16 @@ if (FALSE) {
                          pattern = "\\.html$", 
                          full.names = TRUE), 
                      change_pngs))
-    (all(vapply(dir(path = "~/grattan/vignettes/long-vignettes/",
-                             full.names = TRUE,
-                             recursive = TRUE,
-                             pattern = "\\.png$"),
-                         file.remove,
-                         FALSE)))
+    (all(vapply(setdiff(dir(path = "~/grattan/vignettes/long-vignettes/",
+                            full.names = TRUE,
+                            recursive = TRUE,
+                            pattern = "\\.png$"),
+                        dir(path = "~/grattan/vignettes/long-vignettes/",
+                            pattern = "(twitter|[-]1)\\.png$",
+                            full.names = TRUE,
+                            recursive = TRUE)),
+                file.remove,
+                FALSE)))
     
     
   }
