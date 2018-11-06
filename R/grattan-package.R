@@ -27,6 +27,8 @@
 #' @importFrom hutils AND
 #' @importFrom hutils XOR
 #' @importFrom hutils %ein%
+#' @importFrom hutils weighted_ntile
+#' @importFrom hutils mutate_ntile
 
 #' @importFrom fastmatch %fin%
 #' @importFrom fastmatch fmatch
