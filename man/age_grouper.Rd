@@ -25,7 +25,7 @@ age_grouper(age, interval = 10, min_age = 25, max_age = 75,
 if \code{breaks} and \code{labels} are \code{NULL}.)}
 
 \item{ages.ok}{(logical, default: \code{TRUE}) Are all ages in the range 1-100?
-If \code{FALSE}, ages outside this range will be coerced if \code{length(age) > \code{threshold}.}}
+If \code{FALSE}, ages outside this range will be coerced if \code{length(age) > threshold.}}
 
 \item{threshold}{An integer, the minimum length at which the calculation will
 be accelerated.}

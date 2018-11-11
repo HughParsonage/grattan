@@ -9,7 +9,7 @@
 #' @param below String giving the prefix for the lowest bin. (Only applicable
 #' if \code{breaks} and \code{labels} are \code{NULL}.)
 #' @param ages.ok (logical, default: \code{TRUE}) Are all ages in the range 1-100?
-#' If \code{FALSE}, ages outside this range will be coerced if \code{length(age) > \code{threshold}.}
+#' If \code{FALSE}, ages outside this range will be coerced if \code{length(age) > threshold.}
 #' @param threshold An integer, the minimum length at which the calculation will
 #' be accelerated.
 #' @return An ordered factor giving age ranges (separated by hyphens) as specified. 

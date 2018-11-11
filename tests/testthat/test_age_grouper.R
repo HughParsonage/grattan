@@ -15,6 +15,6 @@ test_that("Long age_grouper", {
   y <- rep(1:100, times = 1000L)
   expect_equal(age_grouper(y, ages.ok = TRUE),
                rep(age_grouper(1:100), times = 1000L))
-  Age20M <- as.character(age_grouper(20L, newline = FALSE))
+  Age20M <- as.character(age_grouper(20L, below = "Below "))
   expect_equal(Age20M, "Below 25")
 })
