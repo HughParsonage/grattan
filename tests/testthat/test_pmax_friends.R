@@ -26,3 +26,7 @@ test_that("pmaxIPint0", {
                1:5)
 })
 
+test_that("pmaxCint", {
+  expect_identical(pmaxCint(0:2, 1L), c(1L, 1L, 2L))
+})
+

@@ -5,7 +5,8 @@
 \title{Age grouper}
 \usage{
 age_grouper(age, interval = 10, min_age = 25, max_age = 75,
-  breaks = NULL, labels = NULL)
+  breaks = NULL, labels = NULL, below = "Below\\n",
+  ages.ok = FALSE, threshold = 10000L)
 }
 \arguments{
 \item{age}{A numeric age (in years).}
@@ -19,6 +20,15 @@ age_grouper(age, interval = 10, min_age = 25, max_age = 75,
 \item{breaks}{Specify breaks manually.}
 
 \item{labels}{Specify the labels manually.}
+
+\item{below}{String giving the prefix for the lowest bin. (Only applicable
+if \code{breaks} and \code{labels} are \code{NULL}.)}
+
+\item{ages.ok}{(logical, default: \code{TRUE}) Are all ages in the range 1-100?
+If \code{FALSE}, ages outside this range will be coerced if \code{length(age) > \code{threshold}.}}
+
+\item{threshold}{An integer, the minimum length at which the calculation will
+be accelerated.}
 }
 \value{
 An ordered factor giving age ranges (separated by hyphens) as specified.

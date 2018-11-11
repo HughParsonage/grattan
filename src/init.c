@@ -8,6 +8,7 @@
 extern SEXP _grattan_pmax3(SEXP, SEXP, SEXP);
 extern SEXP _grattan_IncomeTax(SEXP, SEXP, SEXP);
 extern SEXP _grattan_pmaxC(SEXP, SEXP);
+extern SEXP _grattan_pmaxCint(SEXP, SEXP);
 extern SEXP _grattan_pmax0(SEXP);
 extern SEXP _grattan_pmaxIPnum0(SEXP);
 extern SEXP _grattan_pmaxIPint0(SEXP);
@@ -30,6 +31,7 @@ static const R_CallMethodDef CallEntries[] = {
   {"_grattan_pmax3", (DL_FUNC) &_grattan_pmax3, 3},
   {"_grattan_IncomeTax", (DL_FUNC) &_grattan_IncomeTax, 3},
   {"_grattan_pmaxC", (DL_FUNC) &_grattan_pmaxC, 2},
+  {"_grattan_pmaxCint", (DL_FUNC) &_grattan_pmaxCint, 2},
   {"_grattan_pmax0", (DL_FUNC) &_grattan_pmax0, 1},
   {"_grattan_pmaxIPnum0", (DL_FUNC) &_grattan_pmaxIPnum0, 1},
   {"_grattan_pmaxIPint0", (DL_FUNC) &_grattan_pmaxIPint0, 1},

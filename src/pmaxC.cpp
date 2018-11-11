@@ -79,6 +79,23 @@ NumericVector pmaxC(NumericVector x, double a) {
 }
 
 // [[Rcpp::export]]
+IntegerVector pmaxCint(IntegerVector x, int a) {
+  int n = x.length();
+  IntegerVector out(n);
+  
+  for (int i = 0; i < n; ++i) {
+    int xi = x[i];
+    if (xi < a) {
+      out[i] = a;
+    } else {
+      out[i] = xi;
+    }
+  }
+  
+  return out;
+}
+
+// [[Rcpp::export]]
 NumericVector pmax0(NumericVector x) {
   int n = x.length();
   NumericVector out(n);
