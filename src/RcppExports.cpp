@@ -142,6 +142,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// pmaxCint
+IntegerVector pmaxCint(IntegerVector x, int a);
+RcppExport SEXP _grattan_pmaxCint(SEXP xSEXP, SEXP aSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type a(aSEXP);
+    rcpp_result_gen = Rcpp::wrap(pmaxCint(x, a));
+    return rcpp_result_gen;
+END_RCPP
+}
 // pmax0
 NumericVector pmax0(NumericVector x);
 RcppExport SEXP _grattan_pmax0(SEXP xSEXP) {

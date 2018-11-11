@@ -1,5 +1,9 @@
 ## 1.7.1.0
 
+### Enhancements:
+* `age_grouper` can now have a custom first label prefix, and is much faster
+  when `length(age)` is large.
+
 ### Internal
 * `mutate_ntile` and `weighted_ntile` now use the `hutils` equivalents. This 
   broke 3 unit tests because of the specific phrasing of some error messages.

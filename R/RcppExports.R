@@ -99,6 +99,10 @@ pmaxC <- function(x, a) {
     .Call(`_grattan_pmaxC`, x, a)
 }
 
+pmaxCint <- function(x, a) {
+    .Call(`_grattan_pmaxCint`, x, a)
+}
+
 pmax0 <- function(x) {
     .Call(`_grattan_pmax0`, x)
 }
