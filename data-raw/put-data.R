@@ -1204,7 +1204,7 @@ fwrite_dots <- function(...) {
 }
 
 use_and_write_data <- function(...) {
-  devtools::use_data(..., internal = TRUE, overwrite = TRUE)
+  usethis::use_data(..., internal = TRUE, overwrite = TRUE)
   fwrite_dots(...)
 }
 
@@ -1220,7 +1220,7 @@ setkey(generic_inflators_1516[, fy_year := NULL], h, variable)
 
 setkey(wages_trend, obsTime)
 setindex(wages_trend, obsQtr)
-.date_data_updated <- as.Date("2018-08-17") #Sys.Date()
+.date_data_updated <- as.Date("2018-11-12") #Sys.Date()
 
 library(fastmatch)
 fys1901 <- yr2fy(1901:2100)
