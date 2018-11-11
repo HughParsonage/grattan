@@ -8,8 +8,9 @@
 #' @param labels Specify the labels manually.
 #' @param below String giving the prefix for the lowest bin. (Only applicable
 #' if \code{breaks} and \code{labels} are \code{NULL}.)
-#' @param ages.ok (logical, default: \code{TRUE}) Are all ages in the range 1-100?
-#' If \code{FALSE}, ages outside this range will be coerced if \code{length(age) > threshold.}
+#' @param exp_min_age,exp_max_age Integers specifying the lowest/highest expected 
+#' age in \code{age}. If any values fall outside this range, ages will still work
+#' though perhaps slow when \code{length(age) >> threshold}.
 #' @param threshold An integer, the minimum length at which the calculation will
 #' be accelerated.
 #' @return An ordered factor giving age ranges (separated by hyphens) as specified. 
@@ -25,7 +26,8 @@ age_grouper <- function(age,
                         breaks = NULL,
                         labels = NULL,
                         below = "Below\n",
-                        ages.ok = FALSE,
+                        exp_min_age = 1L,
+                        exp_max_age = 100L,
                         threshold = 10e3L) {
   
   if (is.null(breaks)){
@@ -33,16 +35,21 @@ age_grouper <- function(age,
       warning("breaks not specified, but labels is given (and will be ignored).")
     }
     
-    if (length(age) > threshold) {
+    if (length(age) > threshold &&
+        min(age) >= exp_min_age &&
+        max(age) <= exp_max_age) {
+      
+      i <- age - exp_min_age + 1L
+      
       ans <- 
-        age_grouper(1:100,
+        age_grouper(exp_min_age:exp_max_age,
                     interval = interval,
                     min_age = min_age,
                     max_age = max_age,
                     breaks = breaks,
                     labels = labels,
-                    ages.ok = ages.ok,
-                    below = below)[if (ages.ok) age else pmaxCint(as.integer(age), 1L)]
+                    threshold = Inf,
+                    below = below)[i]
       return(ans)
     }
     

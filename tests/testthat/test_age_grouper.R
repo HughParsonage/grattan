@@ -13,8 +13,19 @@ test_that("age_grouper delivers appropriate results", {
 
 test_that("Long age_grouper", {
   y <- rep(1:100, times = 1000L)
-  expect_equal(age_grouper(y, ages.ok = TRUE),
+  expect_equal(age_grouper(y),
                rep(age_grouper(1:100), times = 1000L))
   Age20M <- as.character(age_grouper(20L, below = "Below "))
   expect_equal(Age20M, "Below 25")
 })
+
+test_that("Alternate usage: years of birth", {
+  expect_equal(age_grouper(c(1980, 1995, 1973), min_age = 1950, max_age = 1990),
+               factor(c("1980-1989", "1990+", "1970-1979"),
+                      levels = c("Below\n1950", "1950-1959", 
+                                 "1960-1969", "1970-1979",
+                                 "1980-1989", "1990+"),
+                      ordered = TRUE))
+})
+
+

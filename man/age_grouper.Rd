@@ -6,7 +6,7 @@
 \usage{
 age_grouper(age, interval = 10, min_age = 25, max_age = 75,
   breaks = NULL, labels = NULL, below = "Below\\n",
-  ages.ok = FALSE, threshold = 10000L)
+  exp_min_age = 1L, exp_max_age = 100L, threshold = 10000L)
 }
 \arguments{
 \item{age}{A numeric age (in years).}
@@ -24,8 +24,9 @@ age_grouper(age, interval = 10, min_age = 25, max_age = 75,
 \item{below}{String giving the prefix for the lowest bin. (Only applicable
 if \code{breaks} and \code{labels} are \code{NULL}.)}
 
-\item{ages.ok}{(logical, default: \code{TRUE}) Are all ages in the range 1-100?
-If \code{FALSE}, ages outside this range will be coerced if \code{length(age) > threshold.}}
+\item{exp_min_age, exp_max_age}{Integers specifying the lowest/highest expected 
+age in \code{age}. If any values fall outside this range, ages will still work
+though perhaps slow when \code{length(age) >> threshold}.}
 
 \item{threshold}{An integer, the minimum length at which the calculation will
 be accelerated.}
