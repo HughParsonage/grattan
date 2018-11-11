@@ -41,7 +41,8 @@ age_grouper <- function(age,
                     max_age = max_age,
                     breaks = breaks,
                     labels = labels,
-                    newline = newline)[if (ages.ok) age else pmaxCint(as.integer(age), 1L)]
+                    ages.ok = ages.ok,
+                    below = below)[if (ages.ok) age else pmaxCint(as.integer(age), 1L)]
       return(ans)
     }
     
