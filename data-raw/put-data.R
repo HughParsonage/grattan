@@ -1176,6 +1176,85 @@ if (hasName(partner_income_free_area_by_fy_student_age,
            "partnerIsPensioner")
 }
 
+transpose2 <- function(DT, new.names.j = 1L) {
+  new_names <- DT[[new.names.j]]
+  old_names <- names(DT)
+  out <- t(DT)[-1, ]
+  out <- as.data.table(out)
+  setnames(out, 1L, "orig")
+  setnames(out, names(out), new_names)
+  out
+}
+
+
+AWOTE.xls <- tempfile(fileext = ".xls")
+"http://www.ausstats.abs.gov.au/ausstats/meisubs.nsf/0/37EB872D1A0BBB32CA257E9F00141FDB/$File/6302001.xls" %>%
+  download.file(destfile = AWOTE.xls, 
+                mode = "wb", 
+                quiet = TRUE)
+
+AWOTE_Header <-
+  read_excel(AWOTE.xls,
+             sheet = "Data1",
+             n_max = 10,
+             col_names = FALSE) %>%
+  setDT %>%
+  setnames("X__1", "id") %>%
+  transpose2
+  
+AWOTE_Data <-
+  read_excel(AWOTE.xls, "Data1", skip = 9) %>%
+  as.data.table
+
+AWOTE1994_2011.xls <- tempfile(fileext = ".xls")
+download.file("http://www.ausstats.abs.gov.au/ausstats/meisubs.nsf/0/8F061DFDA1200856CA2579AC000D5F10/$File/6302001.xls", 
+              mode = "wb", 
+              destfile = AWOTE1994_2011.xls)
+
+update_SeriesExcelDates <- function(DT) {
+  for (j in grep("Series (Start|End)", names(DT))) {
+    set(DT, j = j, value = as.Date(as.integer(DT[[j]]), origin = "1899-12-30"))
+  }
+  DT
+}
+
+AWOTE1994_2011_Header <-
+  read_excel(AWOTE1994_2011.xls,
+             sheet = "Data1",
+             n_max = 10,
+             col_names = FALSE) %>%
+  setDT %>%
+  setnames("X__1", "id") %>%
+  transpose2 %>%
+  update_SeriesExcelDates
+
+read_excel(AWOTE1994_2011.xls, "Data1", skip = 9) %>%
+  as.data.table
+
+CJ(Date = seq.Date(as.Date("1986-02-15"), 
+                   as.Date("1994-05-15"), 
+                   by = "3 months"),
+   Sex = c("Male", "Female", "Persons"),
+   Earnings = c("Ordinary", "Total")) %>%
+  .[, Date := as.character(Date)] %>%
+  setkey(Date, Sex, Earnings) %>%
+  # http://www.ausstats.abs.gov.au/ausstats/free.nsf/0/B0E788EAD7591E6ECA2574FF001962A2/$File/63020_FEB1986.pdf
+  .[.("1986-02-15", "Male", "Ordinary"), AWOTE := 427.20] %>%
+  .[.("1986-02-15", "Male", "Total"), AWOTE := 422.7] %>%
+  .[.("1986-02-15", "Female", "Ordinary"), AWOTE := 352.8] %>%
+  .[.("1986-02-15", "Female", "Total"), AWOTE := 276.4] %>%
+  .[.("1986-02-15", "Persons", "Ordinary"), AWOTE := 404.20] %>%
+  .[.("1986-02-15", "Persons", "Total"), AWOTE := 404.20] %>%
+  
+  # http://www.ausstats.abs.gov.au/ausstats/free.nsf/0/B0E788EAD7591E6ECA2574FF001962A2/$File/63020_FEB1986.pdf
+  .[.("1985-02-15", "Male", "Ordinary"), AWOTE := 399.60] %>%
+  .[.("1985-02-15", "Male", "Total"), AWOTE := 429] %>%
+  .[.("1985-02-15", "Female", "Ordinary"), AWOTE := 328.4] %>%
+  .[.("1985-02-15", "Female", "Total"), AWOTE := 335.9] %>%
+  .[.("1985-02-15", "Persons", "Ordinary"), AWOTE := 377.50] %>%
+  .[.("1985-02-15", "Persons", "Total"), AWOTE := 400.10] %>%
+  .[]
+
 
 do_dots <- function(...) {
   eval(substitute(alist(...)))
