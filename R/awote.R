@@ -1,8 +1,12 @@
 #' AWOTE
 #' @description Adult weekly ordinary-time earnings
 #' @param Date,fy.year When the AWOTE is desired.
-#' @param Sex (If \code{NULL} )
-#' @export
+#' @param Sex (If \code{NULL}, the AWOTE of all persons is used.) Otherwise, 
+#' \code{Male} or \code{Female}.
+#' @param isAdult (logical, default: \code{TRUE}) Use adult weekly earnings?
+#' @param rollDate How should the \code{Date} be joined to the source data?
+#' Passed to \code{data.table}.
+#' @param isOrdinary Use ordinary weekly earnings?
 
 awote <- function(Date = NULL,
                   fy.year = NULL,

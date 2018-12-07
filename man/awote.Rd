@@ -10,7 +10,15 @@ awote(Date = NULL, fy.year = NULL, Sex = NULL, isAdult = TRUE,
 \arguments{
 \item{Date, fy.year}{When the AWOTE is desired.}
 
-\item{Sex}{(If \code{NULL} )}
+\item{Sex}{(If \code{NULL}, the AWOTE of all persons is used.) Otherwise, 
+\code{Male} or \code{Female}.}
+
+\item{isAdult}{(logical, default: \code{TRUE}) Use adult weekly earnings?}
+
+\item{rollDate}{How should the \code{Date} be joined to the source data?
+Passed to \code{data.table}.}
+
+\item{isOrdinary}{Use ordinary weekly earnings?}
 }
 \description{
 Adult weekly ordinary-time earnings
