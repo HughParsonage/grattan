@@ -36,6 +36,8 @@ after_success:
 after_failure:
   - Rscript -e 'hutils::RQ("devtools", install.packages(c("devtools")))'
   - Rscript -e 'hutils::RQ("roxygen2", install.packages(c("roxygen2")))'
-  - Rscript -e 'devtools::test()'
+  # - Rscript -e 'devtools::test()'
+  - cd vignettes
+  - Rscript -e 'knitr::knit("grattan.Rmd")'
   #- Rscript -e 'install.packages("taxstats", repos = "https://hughparsonage.github.io/drat/", type = "source")'
   
