@@ -1,19 +1,41 @@
 #' AWOTE
 #' @description Adult weekly ordinary-time earnings
 #' @param Date,fy.year When the AWOTE is desired.
-#' @param Sex (If \code{NULL}, the AWOTE of all persons is used.) Otherwise, 
-#' \code{Male} or \code{Female}.
+#' @param isMale (logical, default: \code{NA}) \code{TRUE} for male weekly earnings, 
+#' \code{FALSE} for female, \code{NA} for the weekly earnings of both sexes.
 #' @param isAdult (logical, default: \code{TRUE}) Use adult weekly earnings?
 #' @param rollDate How should the \code{Date} be joined to the source data?
 #' Passed to \code{data.table}.
 #' @param isOrdinary Use ordinary weekly earnings?
+#' 
+#' @examples
+#' awote()  # Current AWOTE
+#' 
+#' 
+#' @export awote
 
 awote <- function(Date = NULL,
                   fy.year = NULL,
-                  Sex = NULL,
-                  isAdult = TRUE,
                   rollDate = "nearest",
+                  isMale = NA,
+                  isAdult = TRUE,
                   isOrdinary = TRUE) {
+  if (!is.logical(isMale)) {
+    stop("`isMale` was type ", typeof(isMale), ", but must be a logical.")
+  }
+  if (!is.logical(isAdult)) {
+    stop("`isAdult` was type ", typeof(isAdult), ", but must be a logical.")
+  }
+  if (anyNA(isAdult)) {
+    stop("`isAdult` contains NAs. Impute these values.")
+  }
+  if (!is.logical(isOrdinary)) {
+    stop("`isOrdinary` was type ", typeof(isOrdinary), ", but must be a logical.")
+  }
+  if (anyNA(isOrdinary)) {
+    stop("`isOrdinary` contains NAs. Impute these values.")
+  }
+  
   if (is.null(Date) && is.null(fy.year)) {
     Date <- Sys.Date()
     message("`Date` and `fy.year` both NULL so using `Date = ", as.character(Date), "`.")
@@ -23,21 +45,10 @@ awote <- function(Date = NULL,
                                       min.yr = 1994L,
                                       max.yr = 2018L)
     return(awote_fy(fy_year = fy_year,
-                    Sex = Sex,
+                    isMale = isMale,
                     isAdult = isAdult,
                     isOrdinary = isOrdinary))
     
-  }
-  
-  if (is.null(Sex)) {
-    isMale <- NA
-  } else {
-    if (anyNA(Sex)) {
-      warning("`Sex` contains missing values. These will be missing in the result.")
-      isMale[complete.cases(Sex)] <- Sex[complete.cases(Sex)] %chin% c("Male", "male", "M", "m")
-    } else {
-      isMale <- Sex %chin% c("Male", "male", "M", "m")
-    }
   }
   
   max.length <-
@@ -55,6 +66,18 @@ awote <- function(Date = NULL,
   AWOTE_by_Date_isMale_isOrdinary_isAdult %>%
     .[input, roll = rollDate] %>%
     .subset2("AWOTE")
-  
-  
+}
+
+awote_fy <- function(fy_year, isMale, isAdult, isOrdinary) {
+  fy_year <- validate_fys_permitted(fy_year)
+  input <- data.table(fy_year, isMale, isAdult, isOrdinary)
+  setkeyv(input, names(input))
+  AWOTE_by_Date_isMale_isOrdinary_isAdult %>%
+    .[, .(AWOTE = mean(AWOTE)), 
+      keyby = .(fy_year = date2fy(Date),
+                isMale,
+                isOrdinary,
+                isAdult)] %>%
+    .[input, on = c(key(.))] %>%
+    .subset2("AWOTE")
 }
