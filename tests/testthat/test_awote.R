@@ -12,3 +12,10 @@ test_that("Message", {
   expect_message(awote(), 
                  regexp = "both NULL so using")
 })
+
+test_that("AWOTE fy", {
+  library(data.table)
+  expect_true(between(awote(Date = fy2date("2013-14")),
+                      awote(fy.year = "2012-13"),
+                      awote(fy.year = "2014-15")))
+})
