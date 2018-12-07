@@ -1,0 +1,70 @@
+---
+title: "2015-16 taxstats miscellany"
+author: "Hugh Parsonage"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Taxstats 2015-16}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+library(knitr)
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r loadPackages}
+library(data.table)
+library(hutils)
+library(magrittr)
+library(ggplot2)
+library(taxstats)
+library(taxstats1516)
+
+library(grattan)
+```
+
+```{r}
+s1516 <- 
+  as.data.table(sample_file_1516_synth) %>%
+  setkey(Taxable_Income) %>%
+  mutate_ntile("Taxable_Income", n = 100L) %>%
+  mutate_ntile("Taxable_Income", n = 10L) 
+s1516[, tax := income_tax(Taxable_Income, "2015-16", .dots.ATO = .SD)]
+
+```
+
+
+## Negative gearing
+
+### Tax benefits
+
+```{r}
+s1516[, taxNoNG := income_tax(Taxable_Income - pminC(Net_rent_amt, 0), 
+                              fy.year = "2015-16",
+                              .dots.ATO = .SD)]
+s1516[, benefit_due_NG := taxNoNG - tax]
+```
+
+#### by decile
+
+```{r benefitsNG_by_Decile}
+benefitsNG_by_Decile <- 
+  s1516[, .(avgBenefitNG = mean(benefit_due_NG)), keyby = "Taxable_IncomeDecile"]
+
+copy(benefitsNG_by_Decile) %>%
+  setnames("Taxable_IncomeDecile", "Taxable Income Decile") %>%
+  .[, Share := paste0(round(100 * avgBenefitNG / sum(avgBenefitNG)), "%")] %>%
+  .[, avgBenefitNG := round(avgBenefitNG, -2)] %>%
+  setnames("avgBenefitNG", "Average benefit from NG / $") %>%
+  kable(align = "rrr")
+```
+
+
+
+
+

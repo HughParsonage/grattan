@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grattan</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.7.0.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.7.0.2</span>
       </span>
     </div>
 
@@ -86,6 +86,9 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/2015-16-taxstats.html">2015-16 taxstats miscellany</a>
+    </li>
     <li>
       <a href="../articles/datatable-implementation.html">Calculations of income tax are rolling joins</a>
     </li>
@@ -130,7 +133,8 @@
     </div>
 
     <pre class="usage"><span class='fu'>age_grouper</span>(<span class='no'>age</span>, <span class='kw'>interval</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>min_age</span> <span class='kw'>=</span> <span class='fl'>25</span>, <span class='kw'>max_age</span> <span class='kw'>=</span> <span class='fl'>75</span>,
-  <span class='kw'>breaks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>breaks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>below</span> <span class='kw'>=</span> <span class='st'>"Below\n"</span>,
+  <span class='kw'>exp_min_age</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='kw'>exp_max_age</span> <span class='kw'>=</span> <span class='fl'>100L</span>, <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>10000L</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -158,6 +162,22 @@
     <tr>
       <th>labels</th>
       <td><p>Specify the labels manually.</p></td>
+    </tr>
+    <tr>
+      <th>below</th>
+      <td><p>String giving the prefix for the lowest bin. (Only applicable
+if <code>breaks</code> and <code>labels</code> are <code>NULL</code>.)</p></td>
+    </tr>
+    <tr>
+      <th>exp_min_age, exp_max_age</th>
+      <td><p>Integers specifying the lowest/highest expected 
+age in <code>age</code>. If any values fall outside this range, ages will still work
+though perhaps slow when <code>length(age) &gt;&gt; threshold</code>.</p></td>
+    </tr>
+    <tr>
+      <th>threshold</th>
+      <td><p>An integer, the minimum length at which the calculation will
+be accelerated.</p></td>
     </tr>
     </table>
     

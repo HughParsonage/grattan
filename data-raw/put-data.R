@@ -52,6 +52,25 @@ if (packageVersion("data.table") < package_version("1.9.8")){
   fwrite <- function(..., sep = "\t") readr::write_tsv(...)
 }
 
+git_compare_prev <- function(file.tsv, nomatch = NA_integer_, threshold = 0) {
+  if (file.exists(file.tsv) && 
+      endsWith(dirname(file.tsv), "sysdata")) {
+    file.tsv <- basename(file.tsv)
+  }
+  shell(paste0("git show HEAD~:data-raw/sysdata/", file.tsv, " > tempshow.tsv"))
+  prev <- fread("tempshow.tsv")
+  unlink("tempshow.tsv")
+  curr <- fread(file = paste0("data-raw/sysdata/", file.tsv))
+  out <- 
+    if (anyNA(nomatch)) {
+      prev[curr, on = "obsTime"] 
+    } else {
+      prev[curr, on = "obsTime", nomatch = 0L]
+    }
+  
+  
+}
+
 renew <- FALSE
 
 tax_tbl <-
@@ -1176,6 +1195,163 @@ if (hasName(partner_income_free_area_by_fy_student_age,
            "partnerIsPensioner")
 }
 
+transpose2 <- function(DT, new.names.j = 1L) {
+  new_names <- DT[[new.names.j]]
+  old_names <- names(DT)
+  out <- t(DT)[-1, ]
+  out <- as.data.table(out)
+  setnames(out, 1L, "orig")
+  setnames(out, names(out), new_names)
+  out
+}
+
+
+AWOTE.xls <- tempfile("AWOTE-May2018", fileext = ".xls")
+"http://www.ausstats.abs.gov.au/ausstats/meisubs.nsf/0/3DFE8BCE606106CDCA2582EA00193BAB/$File/6302001.xls" %>%
+  download.file(destfile = AWOTE.xls, 
+                mode = "wb", 
+                quiet = TRUE)
+
+AWOTE_Header <-
+  read_excel(AWOTE.xls,
+             sheet = "Data1",
+             n_max = 10,
+             col_names = FALSE) %>%
+  setDT %>%
+  setnames("X__1", "id") %>%
+  .[1L, id := coalesce(id, "Description")] %>%
+  transpose2 %>%
+  .[, Sex := if_else(grepl("Persons", Description),
+                     "Persons",
+                     if_else(grepl("Males", Description),
+                             "Male",
+                             "Female"))] %>%
+  .[, Earnings := if_else(grepl("Total", Description),
+                          "Total",
+                          "Ordinary")] %>%
+  .[, isAdult := grepl("Adult", Description)] %>%
+  .[]
+  
+AWOTE_Data <-
+  read_excel(AWOTE.xls, "Data1", skip = 9) %>%
+  as.data.table %>%
+  setnames("Series ID", "Date") %>%
+  melt.data.table(id.vars = "Date",
+                  variable.name = "Series ID",
+                  variable.factor = FALSE,
+                  value.name = "AWOTE") %>%
+  .[AWOTE_Header[, .SD, .SDcols = c("Series ID", "Sex", "Earnings", "isAdult")],
+    on = c("Series ID"),
+    nomatch=0L] %>%
+  .[, Date := as.character(Date)] %>%
+  .[]
+
+AWOTE1994_2011.xls <- tempfile(fileext = ".xls")
+download.file("http://www.ausstats.abs.gov.au/ausstats/meisubs.nsf/0/8F061DFDA1200856CA2579AC000D5F10/$File/6302001.xls", 
+              mode = "wb", 
+              destfile = AWOTE1994_2011.xls)
+
+update_SeriesExcelDates <- function(DT) {
+  for (j in grep("Series (Start|End)", names(DT))) {
+    set(DT, j = j, value = as.Date(as.integer(DT[[j]]), origin = "1899-12-30"))
+  }
+  DT
+}
+
+AWOTE1994_2011_Header <-
+  read_excel(AWOTE1994_2011.xls,
+             sheet = "Data1",
+             n_max = 10,
+             col_names = FALSE) %>%
+  setDT %>%
+  setnames("X__1", "id") %>%
+  .[1L, id := coalesce(id, "Description")] %>%
+  transpose2 %>%
+  update_SeriesExcelDates %>%
+  .[, Sex := if_else(grepl("Persons", Description),
+                     "Persons",
+                     if_else(grepl("Males", Description),
+                             "Male",
+                             "Female"))] %>%
+  .[, Earnings := if_else(grepl("Total", Description),
+                          "Total",
+                          "Ordinary")] %>%
+  .[, isAdult := grepl("Adult", Description)] %>%
+  .[]
+
+AWOTE1994_2011_Data <- 
+  read_excel(AWOTE1994_2011.xls, "Data1", skip = 9) %>%
+  as.data.table %>% 
+  setnames("Series ID", "Date") %>%
+  melt.data.table(id.vars = "Date",
+                  variable.name = "Series ID",
+                  variable.factor = FALSE,
+                  value.name = "AWOTE") %>%
+  .[AWOTE1994_2011_Header[, .SD, .SDcols = c("Series ID", "Sex", "Earnings", "isAdult")],
+    on = c("Series ID"),
+    nomatch=0L] %>%
+  .[, Date := as.character(Date)] %>%
+  .[]
+
+AWOTE_by_Date_isMale_isOrdinary_isAdult <- 
+  CJ(Date = seq.Date(as.Date("1986-02-15"), 
+                     as.Date("1994-05-15"), 
+                     by = "3 months"),
+     Sex = c("Male", "Female", "Persons"),
+     Earnings = c("Ordinary", "Total"),
+     isAdult = FALSE) %>%
+  .[, "Series ID" := NA_character_] %>%
+  .[, Date := as.character(Date)] %>%
+  setkey(Date, Sex, Earnings, isAdult) %>%
+  # http://www.ausstats.abs.gov.au/ausstats/free.nsf/0/B0E788EAD7591E6ECA2574FF001962A2/$File/63020_FEB1986.pdf
+  .[.("1986-02-15", "Male", "Ordinary"), AWOTE := 427.20] %>%
+  .[.("1986-02-15", "Male", "Total"), AWOTE := 422.7] %>%
+  .[.("1986-02-15", "Female", "Ordinary"), AWOTE := 352.8] %>%
+  .[.("1986-02-15", "Female", "Total"), AWOTE := 276.4] %>%
+  .[.("1986-02-15", "Persons", "Ordinary"), AWOTE := 404.20] %>%
+  .[.("1986-02-15", "Persons", "Total"), AWOTE := 404.20] %>%
+  
+  # http://www.ausstats.abs.gov.au/ausstats/free.nsf/0/B0E788EAD7591E6ECA2574FF001962A2/$File/63020_FEB1986.pdf
+  .[.("1985-02-15", "Male", "Ordinary"), AWOTE := 399.60] %>%
+  .[.("1985-02-15", "Male", "Total"), AWOTE := 429] %>%
+  .[.("1985-02-15", "Female", "Ordinary"), AWOTE := 328.4] %>%
+  .[.("1985-02-15", "Female", "Total"), AWOTE := 335.9] %>%
+  .[.("1985-02-15", "Persons", "Ordinary"), AWOTE := 377.50] %>%
+  .[.("1985-02-15", "Persons", "Total"), AWOTE := 400.10] %>%
+  
+  # http://www.ausstats.abs.gov.au/ausstats/free.nsf/0/761EBD51124BCA23CA2574FA001441D4/$File/63020_AUG1993.pdf
+  .[.("1993-08-15", "Persons", "Ordinary"), AWOTE := 604.80] %>%
+  .[.("1993-08-15", "Male", "Ordinary"), AWOTE := 641.20] %>%
+  .[.("1993-08-15", "Female", "Ordinary"), AWOTE := 538.40] %>%
+  rbind(AWOTE1994_2011_Data, use.names = TRUE) %>%
+  rbind(AWOTE_Data, use.names = TRUE) %>%
+  drop_col("Series ID") %>%
+  .[, isMale := Sex == "Male"] %>%
+  .[, isMale := if_else(Sex == "Persons", NA, isMale)] %>%
+  drop_col("Sex") %>%
+  .[, isOrdinary := Earnings %ein% "Ordinary"] %>%
+  drop_col("Earnings") %>%
+  .[, Date := as.Date(Date)] %>%
+  set_unique_key(isMale, isOrdinary, isAdult, Date) %>%
+  set_cols_first(key(.)) %>%
+  .[]
+
+AWOTE_by_fy_isMale_isOrdinary_isAdult <-
+  AWOTE_by_Date_isMale_isOrdinary_isAdult %>%
+  .[, .(AWOTE = mean(AWOTE)), 
+    keyby = .(isMale, 
+              isOrdinary,
+              isAdult,
+              fy_year = date2fy(Date))]
+
+max_AWOTE_fy <- AWOTE_by_fy_isMale_isOrdinary_isAdult[, max(fy_year)]
+min_AWOTE_fy <- 
+  AWOTE_by_fy_isMale_isOrdinary_isAdult %>%
+  
+  # complete cases while AWOTE is being filled in. 
+  .[complete.cases(.)] %>%
+  .[, min(fy_year)]
+
 
 do_dots <- function(...) {
   eval(substitute(alist(...)))
@@ -1262,6 +1438,11 @@ use_and_write_data(tax_table2,
                    Age_pension_assets_test_by_year,
                    Age_pension_deeming_rates_by_Date,
                    Age_pension_permissible_income_by_Date,
+                   
+                   AWOTE_by_Date_isMale_isOrdinary_isAdult,
+                   max_AWOTE_fy,
+                   min_AWOTE_fy,
+                   
                    bto_tbl,
                    aus_pop_by_yearqtr,
                    aust_pop_by_age_yearqtr,

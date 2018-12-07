@@ -21,7 +21,7 @@ context("GDP")
 test_that("GDP returns known results", {
   expect_equal(gdp_qtr("1989-12-02", roll = "nearest"),
                100576000000, 
-               tol = 0.1e9,
+               tol = 0.25e9,
                scale = 1)
   expect_equal(gdp_fy("1989-90"),
                404889000000,

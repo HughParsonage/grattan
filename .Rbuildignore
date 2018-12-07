@@ -1,3 +1,5 @@
+^Meta$
+^doc$
 ^\.circleci$
 ^.*\.Rproj$
 ^\.Rproj\.user$

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">grattan</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.7.0.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">1.7.0.2</span>
       </span>
     </div>
 
@@ -57,6 +57,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/2015-16-taxstats.html">2015-16 taxstats miscellany</a>
+    </li>
+    <li>
       <a href="articles/datatable-implementation.html">Calculations of income tax are rolling joins</a>
     </li>
     <li>
@@ -99,31 +102,31 @@
 <div id="overview" class="section level1">
 <h1 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"grattan"</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(grattan)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"grattan"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(grattan)</a></code></pre></div>
 <div id="income_tax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#income_tax" class="anchor"></a><code>income_tax</code>
 </h2>
 <p>Calculates the income tax for a given taxable income and financial year:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/income_tax.html">income_tax</a></span>(<span class="fl">50e3</span>, <span class="st">"2015-16"</span>)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="reference/income_tax.html">income_tax</a></span>(<span class="fl">50e3</span>, <span class="st">"2015-16"</span>)</a></code></pre></div>
 <pre><code>## [1] 8547</code></pre>
 <div id="with-sample-files" class="section level3">
 <h3 class="hasAnchor">
 <a href="#with-sample-files" class="anchor"></a>With sample files</h3>
 <p><code>income_tax</code> is designed to work well with the ATO’s sample files. You can obtain the sample files from my repo:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("taxstats", repos = "https://hughparsonage.github.io/tax-drat")</span>
-<span class="kw">library</span>(taxstats)
-
-<span class="kw">library</span>(hutils)
-<span class="kw">library</span>(data.table) 
-<span class="kw">library</span>(magrittr)
-<span class="kw">library</span>(ggplot2)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># install.packages("taxstats", repos = "https://hughparsonage.github.io/tax-drat")</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">library</span>(taxstats)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw">library</span>(hutils)</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw">library</span>(data.table) </a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="kw">library</span>(magrittr)</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="kw">library</span>(ggplot2)</a></code></pre></div>
 <p>Simply pass the sample file to <code>.dots.ATO</code> and the complexities of things like Medicare levy and the Seniors and Pensioners Tax Offset are handled for you. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s1314 &lt;-<span class="st"> </span><span class="kw">as.data.table</span>(sample_file_<span class="dv">1314</span>)
-s1314 <span class="op">%&gt;%</span>
-<span class="st">  </span>.[, tax <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="reference/income_tax.html">income_tax</a></span>(Taxable_Income, <span class="st">"2013-14"</span>, <span class="dt">.dots.ATO =</span> s1314)] <span class="op">%&gt;%</span>
-<span class="st">  </span>.[, .(Taxable_Income, tax)]</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">s1314 &lt;-<span class="st"> </span><span class="kw">as.data.table</span>(sample_file_<span class="dv">1314</span>)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">s1314 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">  </span>.[, tax <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="reference/income_tax.html">income_tax</a></span>(Taxable_Income, <span class="st">"2013-14"</span>, <span class="dt">.dots.ATO =</span> s1314)] <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="st">  </span>.[, .(Taxable_Income, tax)]</a></code></pre></div>
 <pre><code>##         Taxable_Income       tax
 ##      1:           4800     0.000
 ##      2:         126122 36503.970
@@ -142,12 +145,12 @@ s1314 <span class="op">%&gt;%</span>
 <h2 class="hasAnchor">
 <a href="#model_income_tax-modelling-changes-to-personal-income-tax" class="anchor"></a><code>model_income_tax</code>: modelling changes to personal income tax</h2>
 <p>While <code>income_tax</code> is designed to inflexibly return the tax payable as legislated, <code>model_income_tax</code> is designed to calculate income tax when changes are made. For example,</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s1314 <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="co"># reduce top threshold from 180,000 to 150,000</span>
-<span class="st">  </span><span class="kw"><a href="reference/model_income_tax.html">model_income_tax</a></span>(<span class="dt">ordinary_tax_thresholds =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">18200</span>, <span class="dv">37000</span>, <span class="dv">80000</span>, 
-                                               <span class="fl">150e3</span>), 
-                   <span class="dt">baseline_fy =</span> <span class="st">"2013-14"</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span>.[, .(Taxable_Income, baseline_tax, new_tax)]</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">s1314 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="co"># reduce top threshold from 180,000 to 150,000</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="reference/model_income_tax.html">model_income_tax</a></span>(<span class="dt">ordinary_tax_thresholds =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">18200</span>, <span class="dv">37000</span>, <span class="dv">80000</span>, </a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">                                               <span class="fl">150e3</span>), </a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">                   <span class="dt">baseline_fy =</span> <span class="st">"2013-14"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="st">  </span>.[, .(Taxable_Income, baseline_tax, new_tax)]</a></code></pre></div>
 <pre><code>##         Taxable_Income baseline_tax   new_tax
 ##      1:           4800            0     0.000
 ##      2:         126122        36503 36503.970
@@ -166,43 +169,43 @@ s1314 <span class="op">%&gt;%</span>
 <a href="#project" class="anchor"></a><code>project</code>
 </h2>
 <p>Given a sample file, we can project forward a number of years</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s1617 &lt;-<span class="st"> </span><span class="kw"><a href="reference/project.html">project</a></span>(s1314, <span class="dt">h =</span> 3L)</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">s1617 &lt;-<span class="st"> </span><span class="kw"><a href="reference/project.html">project</a></span>(s1314, <span class="dt">h =</span> 3L)</a></code></pre></div>
 <p>or to a particular financial year</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">s1718 &lt;-<span class="st"> </span><span class="kw"><a href="reference/project_to.html">project_to</a></span>(s1314, <span class="st">"2017-18"</span>)</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">s1718 &lt;-<span class="st"> </span><span class="kw"><a href="reference/project_to.html">project_to</a></span>(s1314, <span class="st">"2017-18"</span>)</a></code></pre></div>
 <p>Together with <code>model_income_tax</code>, this allows us to make point-predictions of future years. The function <code>revenue_foregone</code> prettily prints the resultant revenue:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_file_<span class="dv">1314</span> <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="reference/project_to.html">project_to</a></span>(<span class="st">"2018-19"</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="reference/model_income_tax.html">model_income_tax</a></span>(<span class="dt">baseline_fy =</span> <span class="st">"2017-18"</span>,
-                   <span class="dt">ordinary_tax_thresholds =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">18200</span>, <span class="dv">37000</span>, <span class="dv">87000</span>, 
-                                               <span class="fl">150e3</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span>revenue_foregone</code></pre></div>
-<pre><code>## [1] "$1.7 billion"</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">sample_file_<span class="dv">1314</span> <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/project_to.html">project_to</a></span>(<span class="st">"2018-19"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="reference/model_income_tax.html">model_income_tax</a></span>(<span class="dt">baseline_fy =</span> <span class="st">"2017-18"</span>,</a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">                   <span class="dt">ordinary_tax_thresholds =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">18200</span>, <span class="dv">37000</span>, <span class="dv">87000</span>, </a>
+<a class="sourceLine" id="cb12-5" data-line-number="5">                                               <span class="fl">150e3</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="st">  </span>revenue_foregone</a></code></pre></div>
+<pre><code>## [1] "$1.8 billion"</code></pre>
 <div id="compare_avg_tax_rates" class="section level3">
 <h3 class="hasAnchor">
 <a href="#compare_avg_tax_rates" class="anchor"></a><code>compare_avg_tax_rates</code>:</h3>
 <p>Create comparison of average tax rates:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(<span class="kw">list</span>(<span class="st">"30k"</span> =<span class="st"> </span><span class="fl">30e3</span>,
-            <span class="st">"36k"</span> =<span class="st"> </span><span class="fl">36e3</span>,
-            <span class="st">"42k"</span> =<span class="st"> </span><span class="fl">42e3</span>),
-       <span class="cf">function</span>(T2) {
-         <span class="kw"><a href="reference/model_income_tax.html">model_income_tax</a></span>(s1718,
-                          <span class="dt">baseline_fy =</span> <span class="st">"2017-18"</span>,
-                          <span class="dt">ordinary_tax_thresholds =</span> <span class="kw">c</span>(<span class="dv">0</span>, 
-                                                      <span class="dv">18200</span>,
-                                                      T2,
-                                                      <span class="dv">87000</span>, 
-                                                      <span class="fl">180e3</span>))
-       }) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">rbindlist</span>(<span class="dt">idcol =</span> <span class="st">"id"</span>,
-            <span class="dt">use.names =</span> <span class="ot">TRUE</span>,
-            <span class="dt">fill =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="reference/compare_avg_tax_rates.html">compare_avg_tax_rates</a></span>(<span class="dt">baseDT =</span> .[id <span class="op">%ein%</span><span class="st"> "36k"</span>]) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Taxable_Income_percentile,
-             <span class="dt">y =</span> delta_avgTaxRate,
-             <span class="dt">color =</span> id,
-             <span class="dt">group =</span> id)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">lapply</span>(<span class="kw">list</span>(<span class="st">"30k"</span> =<span class="st"> </span><span class="fl">30e3</span>,</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">            <span class="st">"36k"</span> =<span class="st"> </span><span class="fl">36e3</span>,</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">            <span class="st">"42k"</span> =<span class="st"> </span><span class="fl">42e3</span>),</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">       <span class="cf">function</span>(T2) {</a>
+<a class="sourceLine" id="cb14-5" data-line-number="5">         <span class="kw"><a href="reference/model_income_tax.html">model_income_tax</a></span>(s1718,</a>
+<a class="sourceLine" id="cb14-6" data-line-number="6">                          <span class="dt">baseline_fy =</span> <span class="st">"2017-18"</span>,</a>
+<a class="sourceLine" id="cb14-7" data-line-number="7">                          <span class="dt">ordinary_tax_thresholds =</span> <span class="kw">c</span>(<span class="dv">0</span>, </a>
+<a class="sourceLine" id="cb14-8" data-line-number="8">                                                      <span class="dv">18200</span>,</a>
+<a class="sourceLine" id="cb14-9" data-line-number="9">                                                      T2,</a>
+<a class="sourceLine" id="cb14-10" data-line-number="10">                                                      <span class="dv">87000</span>, </a>
+<a class="sourceLine" id="cb14-11" data-line-number="11">                                                      <span class="fl">180e3</span>))</a>
+<a class="sourceLine" id="cb14-12" data-line-number="12">       }) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-13" data-line-number="13"><span class="st">  </span><span class="kw">rbindlist</span>(<span class="dt">idcol =</span> <span class="st">"id"</span>,</a>
+<a class="sourceLine" id="cb14-14" data-line-number="14">            <span class="dt">use.names =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb14-15" data-line-number="15">            <span class="dt">fill =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-16" data-line-number="16"><span class="st">  </span><span class="kw"><a href="reference/compare_avg_tax_rates.html">compare_avg_tax_rates</a></span>(<span class="dt">baseDT =</span> .[id <span class="op">%ein%</span><span class="st"> "36k"</span>]) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-17" data-line-number="17"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Taxable_Income_percentile,</a>
+<a class="sourceLine" id="cb14-18" data-line-number="18">             <span class="dt">y =</span> delta_avgTaxRate,</a>
+<a class="sourceLine" id="cb14-19" data-line-number="19">             <span class="dt">color =</span> id,</a>
+<a class="sourceLine" id="cb14-20" data-line-number="20">             <span class="dt">group =</span> id)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb14-21" data-line-number="21"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb14-22" data-line-number="22"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
 <p><img src="reference/figures/README_compare-30-37-42-thresholds-1.svg" width="700"></p>
 </div>
 </div>
@@ -216,7 +219,27 @@ s1314 <span class="op">%&gt;%</span>
 <a href="#news" class="anchor"></a>NEWS</h1>
 <div id="section" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section" class="anchor"></a>1.7.0.0</h2>
+<a href="#section" class="anchor"></a>1.7.1.0</h2>
+<div id="enhancements" class="section level3">
+<h3 class="hasAnchor">
+<a href="#enhancements" class="anchor"></a>Enhancements:</h3>
+<ul>
+<li>
+<code>age_grouper</code> can now have a custom first label prefix, and is much faster when <code>length(age)</code> is large.</li>
+</ul>
+</div>
+<div id="internal" class="section level3">
+<h3 class="hasAnchor">
+<a href="#internal" class="anchor"></a>Internal</h3>
+<ul>
+<li>
+<code>mutate_ntile</code> and <code>weighted_ntile</code> now use the <code>hutils</code> equivalents. This broke 3 unit tests because of the specific phrasing of some error messages.</li>
+</ul>
+</div>
+</div>
+<div id="section-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#section-1" class="anchor"></a>1.7.0.0</h2>
 <div id="bug-fixes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bug-fixes" class="anchor"></a>Bug fixes</h3>
@@ -260,9 +283,9 @@ s1314 <span class="op">%&gt;%</span>
 <code><a href="reference/install_taxstats.html">install_taxstats()</a></code> as a convenient means to install the non-CRAN <code>taxstats</code> dependency.</li>
 </ul>
 </div>
-<div id="enhancements" class="section level3">
+<div id="enhancements-1" class="section level3">
 <h3 class="hasAnchor">
-<a href="#enhancements" class="anchor"></a>Enhancements</h3>
+<a href="#enhancements-1" class="anchor"></a>Enhancements</h3>
 <ul>
 <li>
 <code><a href="reference/prohibit_vector_recycling.html">prohibit_vector_recycling()</a></code> and friends return more informative error messages.</li>
@@ -279,22 +302,22 @@ s1314 <span class="op">%&gt;%</span>
 <li>
 <code>inflator</code> and <code>cpi_inflator</code>, <code>lf_inflator_fy</code>, and <code>wage_inflator</code> are now much faster when either <code>from_fy</code> or <code>to_fy</code> have more than 100,000 elements:</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">19952010</span>)
-from_fys &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw"><a href="reference/is.fy.html">yr2fy</a></span>(<span class="dv">1995</span><span class="op">:</span><span class="dv">2010</span>), <span class="dt">size =</span> <span class="fl">1e6</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)
-<span class="kw">microbenchmark</span>(<span class="kw"><a href="reference/cpi_inflator.html">cpi_inflator</a></span>(<span class="dt">from_fy =</span> from_fys, <span class="dt">to_fy =</span> <span class="st">"2015-16"</span>))
-<span class="co"># Old</span>
-Unit<span class="op">:</span><span class="st"> </span>seconds
-                                                expr      min      lq     mean   median       uq
- <span class="kw"><a href="reference/cpi_inflator.html">cpi_inflator</a></span>(<span class="dt">from_fy =</span> from_fys, <span class="dt">to_fy =</span> <span class="st">"2015-16"</span>) <span class="fl">1.519483</span> <span class="fl">1.54438</span> <span class="fl">1.550628</span> <span class="fl">1.549735</span> <span class="fl">1.554507</span>
-      max neval
- <span class="fl">1.661502</span>   <span class="dv">100</span>
- 
-<span class="co"># New</span>
-Unit<span class="op">:</span><span class="st"> </span>milliseconds
-                                                expr      min       lq     mean   median       uq
- <span class="kw"><a href="reference/cpi_inflator.html">cpi_inflator</a></span>(<span class="dt">from_fy =</span> from_fys, <span class="dt">to_fy =</span> <span class="st">"2015-16"</span>) <span class="fl">40.71753</span> <span class="fl">41.94061</span> <span class="fl">47.93162</span> <span class="fl">42.93946</span> <span class="fl">48.08461</span>
-      max neval
- <span class="fl">191.3497</span>   <span class="dv">100</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">19952010</span>)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">from_fys &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw"><a href="reference/is.fy.html">yr2fy</a></span>(<span class="dv">1995</span><span class="op">:</span><span class="dv">2010</span>), <span class="dt">size =</span> <span class="fl">1e6</span>, <span class="dt">replace =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="kw">microbenchmark</span>(<span class="kw"><a href="reference/cpi_inflator.html">cpi_inflator</a></span>(<span class="dt">from_fy =</span> from_fys, <span class="dt">to_fy =</span> <span class="st">"2015-16"</span>))</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co"># Old</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">Unit<span class="op">:</span><span class="st"> </span>seconds</a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">                                                expr      min      lq     mean   median       uq</a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"> <span class="kw"><a href="reference/cpi_inflator.html">cpi_inflator</a></span>(<span class="dt">from_fy =</span> from_fys, <span class="dt">to_fy =</span> <span class="st">"2015-16"</span>) <span class="fl">1.519483</span> <span class="fl">1.54438</span> <span class="fl">1.550628</span> <span class="fl">1.549735</span> <span class="fl">1.554507</span></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8">      max neval</a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"> <span class="fl">1.661502</span>   <span class="dv">100</span></a>
+<a class="sourceLine" id="cb15-10" data-line-number="10"> </a>
+<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="co"># New</span></a>
+<a class="sourceLine" id="cb15-12" data-line-number="12">Unit<span class="op">:</span><span class="st"> </span>milliseconds</a>
+<a class="sourceLine" id="cb15-13" data-line-number="13">                                                expr      min       lq     mean   median       uq</a>
+<a class="sourceLine" id="cb15-14" data-line-number="14"> <span class="kw"><a href="reference/cpi_inflator.html">cpi_inflator</a></span>(<span class="dt">from_fy =</span> from_fys, <span class="dt">to_fy =</span> <span class="st">"2015-16"</span>) <span class="fl">40.71753</span> <span class="fl">41.94061</span> <span class="fl">47.93162</span> <span class="fl">42.93946</span> <span class="fl">48.08461</span></a>
+<a class="sourceLine" id="cb15-15" data-line-number="15">      max neval</a>
+<a class="sourceLine" id="cb15-16" data-line-number="16"> <span class="fl">191.3497</span>   <span class="dv">100</span></a></code></pre></div>
 </div>
 <div id="potentially-breaking-changes" class="section level3">
 <h3 class="hasAnchor">
@@ -319,15 +342,16 @@ Unit<span class="op">:</span><span class="st"> </span>milliseconds
 </ul>
 </div>
 </div>
-<div id="section-1" class="section level2">
+<div id="section-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-1" class="anchor"></a>1.6.0.0</h2>
-<div id="section-2" class="section level3">
+<a href="#section-2" class="anchor"></a>1.6.0.0</h2>
+<div id="section-3" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-2" class="anchor"></a>2018-05-08</h3>
+<a href="#section-3" class="anchor"></a>2018-05-08</h3>
 <ul>
 <li>Never-legislated Medicare levy change in 2019-20 has been reverted</li>
-<li>Budget 2018:</li>
+<li>Budget 2018:
+<ul>
 <li>
 <code><a href="reference/model_income_tax.html">model_income_tax()</a></code> no longer coerces <code>WEIGHT</code> to integer.</li>
 <li>New arguments to support Budget 2018:
@@ -348,33 +372,42 @@ Unit<span class="op">:</span><span class="st"> </span>milliseconds
 <code>warn_upper_thresholds</code> If changed to <code>FALSE</code> allows the automatic changes to be applied without warning.</li>
 </ul>
 </li>
-<li>New functions:</li>
+</ul>
+</li>
+<li>New functions:
+<ul>
 <li>
 <code><a href="reference/progressivity.html">progressivity()</a></code> for Gini-based measure of the progressivity of income tax</li>
-<li><p><code><a href="reference/revenue_foregone.html">revenue_foregone()</a></code> as a convenenience for returning the revenue foregone from a modelled sample file.</p></li>
-<li>Routine changes:</li>
-<li><p>ABS data updated as of 2018-05-21.</p></li>
+<li>
+<code><a href="reference/revenue_foregone.html">revenue_foregone()</a></code> as a convenenience for returning the revenue foregone from a modelled sample file.</li>
+</ul>
+</li>
+<li>Routine changes:
+<ul>
+<li>ABS data updated as of 2018-05-21.</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
-<div id="section-3" class="section level2">
+<div id="section-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-3" class="anchor"></a>1.5.3.6</h2>
-<div id="section-4" class="section level3">
+<a href="#section-4" class="anchor"></a>1.5.3.6</h2>
+<div id="section-5" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-4" class="anchor"></a>2018-02-21</h3>
+<a href="#section-5" class="anchor"></a>2018-02-21</h3>
 <ul>
 <li>Labour force data and wage price index updated to 2018-02-21.</li>
 <li>Update as requested to fix failing unit tests relying on non-standard packages.</li>
 </ul>
 </div>
 </div>
-<div id="section-5" class="section level2">
+<div id="section-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-5" class="anchor"></a>1.5.3.1</h2>
-<div id="section-6" class="section level3">
+<a href="#section-6" class="anchor"></a>1.5.3.1</h2>
+<div id="section-7" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-6" class="anchor"></a>2018-01-22</h3>
+<a href="#section-7" class="anchor"></a>2018-01-22</h3>
 </div>
 <div id="new-features-1" class="section level3">
 <h3 class="hasAnchor">
@@ -411,12 +444,12 @@ Unit<span class="op">:</span><span class="st"> </span>milliseconds
 </ul>
 </div>
 </div>
-<div id="section-7" class="section level2">
+<div id="section-8" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-7" class="anchor"></a>1.5.2.5</h2>
-<div id="section-8" class="section level3">
+<a href="#section-8" class="anchor"></a>1.5.2.5</h2>
+<div id="section-9" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-8" class="anchor"></a>2017-11-16</h3>
+<a href="#section-9" class="anchor"></a>2017-11-16</h3>
 <ul>
 <li>Update wage data to 2017-Q3</li>
 <li>Update labour force data to 2017-09</li>
@@ -424,32 +457,32 @@ Unit<span class="op">:</span><span class="st"> </span>milliseconds
 <li>Vignettes now install <code>taxstats</code> to a temporary directory if not already installed, rather than the user or system’s library.</li>
 </ul>
 </div>
-<div id="section-9" class="section level3">
+<div id="section-10" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-9" class="anchor"></a>2017-10-27</h3>
+<a href="#section-10" class="anchor"></a>2017-10-27</h3>
 <ul>
 <li>Update CPI data</li>
 <li>Fix wage data</li>
 </ul>
 </div>
 </div>
-<div id="section-10" class="section level2">
+<div id="section-11" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-10" class="anchor"></a>1.5.2.3</h2>
-<div id="section-11" class="section level3">
+<a href="#section-11" class="anchor"></a>1.5.2.3</h2>
+<div id="section-12" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-11" class="anchor"></a>2017-10-21</h3>
+<a href="#section-12" class="anchor"></a>2017-10-21</h3>
 <ul>
 <li>Update labour-force data</li>
 </ul>
 </div>
 </div>
-<div id="section-12" class="section level2">
+<div id="section-13" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-12" class="anchor"></a>1.5.2.0</h2>
-<div id="section-13" class="section level3">
+<a href="#section-13" class="anchor"></a>1.5.2.0</h2>
+<div id="section-14" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-13" class="anchor"></a>2017-10-19</h3>
+<a href="#section-14" class="anchor"></a>2017-10-19</h3>
 <ul>
 <li>New internal C++ functions for <code>income_tax</code>, and related functions</li>
 <li>BTO function now uses tax scales from the <em>Income Tax Regulations</em>
@@ -457,35 +490,35 @@ Unit<span class="op">:</span><span class="st"> </span>milliseconds
 </ul>
 </div>
 </div>
-<div id="section-14" class="section level2">
+<div id="section-15" class="section level2">
 <h2 class="hasAnchor">
-<a href="#section-14" class="anchor"></a>1.5.1.2</h2>
-<div id="section-15" class="section level3">
+<a href="#section-15" class="anchor"></a>1.5.1.2</h2>
+<div id="section-16" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-15" class="anchor"></a>2017-10-15</h3>
+<a href="#section-16" class="anchor"></a>2017-10-15</h3>
 <ul>
 <li>Optional argument <code>age</code> in <code>income_tax</code> now <code>NULL</code> rather than <code>42</code>.<br>
 The default argument continues to result in SAPTO being not applied if <code>.dots.ATO</code>. However, if <code>.dots.ATO</code> is supplied (and the age variable has not been removed from it), the individuals’ SAPTO eligibility is determined by the age variable in <code>.dots.ATO</code>, rather than setting each individual’s SAPTO to 0.</li>
 </ul>
 </div>
-<div id="section-16" class="section level3">
+<div id="section-17" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-16" class="anchor"></a>2017-08-30</h3>
+<a href="#section-17" class="anchor"></a>2017-08-30</h3>
 <ul>
 <li>Update labour force data. Avoid segfault in separate package in unit test.</li>
 <li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
 </ul>
 </div>
-<div id="section-17" class="section level3">
+<div id="section-18" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-17" class="anchor"></a>2017-08-16</h3>
+<a href="#section-18" class="anchor"></a>2017-08-16</h3>
 <ul>
 <li>Update wage, CPI, labour force data</li>
 </ul>
 </div>
-<div id="section-18" class="section level3">
+<div id="section-19" class="section level3">
 <h3 class="hasAnchor">
-<a href="#section-18" class="anchor"></a>2017-07-02</h3>
+<a href="#section-19" class="anchor"></a>2017-07-02</h3>
 <ul>
 <li>Update wage and labour force data</li>
 <li>Fix breaking build due to change in dplyr API</li>
