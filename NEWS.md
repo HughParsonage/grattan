@@ -1,5 +1,8 @@
 ## 1.7.1.0
 
+### New functions:
+* `awote` for weekly earnings
+
 ### Enhancements:
 * `age_grouper` can now have a custom first label prefix, and is much faster
   when `length(age)` is large.

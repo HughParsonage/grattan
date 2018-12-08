@@ -10,8 +10,8 @@ matrix:
     r_build_args: --no-build-vignettes
     r_check_args: --no-multiarch --ignore-vignettes --no-vignettes
   - r: oldrel
-    r_build_args: --no-manual
-    r_check_args: --no-multiarch --no-tests
+    r_build_args: --no-manual --no-build-vignettes
+    r_check_args: --no-multiarch --ignore-vignettes --no-vignettes --no-tests
   - r: release
     r_build_args: --no-build-vignettes
     r_check_args: --no-multiarch --ignore-vignettes --no-vignettes --no-tests
@@ -36,6 +36,8 @@ after_success:
 after_failure:
   - Rscript -e 'hutils::RQ("devtools", install.packages(c("devtools")))'
   - Rscript -e 'hutils::RQ("roxygen2", install.packages(c("roxygen2")))'
-  - Rscript -e 'devtools::test()'
+  # - Rscript -e 'devtools::test()'
+  - cd vignettes
+  - Rscript -e 'knitr::knit("grattan.Rmd")'
   #- Rscript -e 'install.packages("taxstats", repos = "https://hughparsonage.github.io/drat/", type = "source")'
   
