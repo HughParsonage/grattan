@@ -18,4 +18,6 @@ test_that("AWOTE fy", {
   expect_true(between(awote(Date = fy2date("2013-14")),
                       awote(fy.year = "2012-13"),
                       awote(fy.year = "2014-15")))
+  expect_equal(awote_fy("2014-15", isMale = NA, isAdult = TRUE, isOrdinary = TRUE),
+               awote(fy.year = "2014-15"))
 })
