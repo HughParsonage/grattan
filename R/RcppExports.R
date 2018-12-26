@@ -49,6 +49,18 @@ Offset <- function(x, y, a, m) {
     .Call(`_grattan_Offset`, x, y, a, m)
 }
 
+#' @title Simple average tax in C++
+#' @name simple_avg
+#' @param y Initial income to use.
+#' @param a The average tax rate
+#' @return The income corresponding to 'a'.
+#' @export simple_avg
+NULL
+
+simple_avg <- function(y, a) {
+    .Call(`_grattan_simple_avg`, y, a)
+}
+
 #' @title Threeway parallel maximum
 #' @description Returns the parallel maximum of three 
 #' 

@@ -89,6 +89,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// simple_avg
+double simple_avg(double y, double a);
+RcppExport SEXP _grattan_simple_avg(SEXP ySEXP, SEXP aSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type y(ySEXP);
+    Rcpp::traits::input_parameter< double >::type a(aSEXP);
+    rcpp_result_gen = Rcpp::wrap(simple_avg(y, a));
+    return rcpp_result_gen;
+END_RCPP
+}
 // pmax3
 NumericVector pmax3(NumericVector x, NumericVector y, NumericVector z);
 RcppExport SEXP _grattan_pmax3(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP) {
