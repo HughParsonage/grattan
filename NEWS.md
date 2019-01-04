@@ -6,6 +6,8 @@
 ### Enhancements:
 * `age_grouper` can now have a custom first label prefix, and is much faster
   when `length(age)` is large.
+* `income_tax` now emits a warning when both age and `.dots.ATO` are provided, 
+  indicating that `age` will be ignored.
 
 ### Internal
 * `mutate_ntile` and `weighted_ntile` now use the `hutils` equivalents. This 

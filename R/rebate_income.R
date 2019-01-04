@@ -14,10 +14,19 @@ rebate_income <- function(Taxable_Income,
                           Net_fincl_invstmt_lss_amt = 0, 
                           Net_rent_amt = 0, 
                           Rep_frng_ben_amt = 0) {
+  # NA's can occur when multiple sample files are bound
+  c0 <- function(x) {
+    if (is.double(x)) {
+      coalesce(x, 0)
+    } else {
+      coalesce(x, 0L)
+    }
+  }
+  
   Taxable_Income +
-    Rptbl_Empr_spr_cont_amt +
-    All_deductible_super_contr +
-    Net_fincl_invstmt_lss_amt -
-    pminC(Net_rent_amt, 0) +
-    floor(Rep_frng_ben_amt * 0.51)
+    c0(Rptbl_Empr_spr_cont_amt) +
+    c0(All_deductible_super_contr) +
+    c0(Net_fincl_invstmt_lss_amt) -
+    pminC(c0(Net_rent_amt), 0) +
+    floor(c0(Rep_frng_ben_amt) * 0.51)
 }

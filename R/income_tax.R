@@ -5,11 +5,16 @@
 #' @param fy.year The financial year in which the income was earned. Tax years 2000-01 to 2016-17 are provided, as well as the tax years 2017-18 to 2019-20, for convenience, under the assumption the 2017 Budget measures will pass. 
 #' In particular, the tax payable is calculated under the assumption that the rate of the Medicare levy will rise to 2.5\% in the 2019-20 tax year.
 #' If fy.year is not given, the current financial year is used by default.
-#' @param age The individual's age.
+#' @param age The individual's age. Ignored if \code{.dots.ATO} is provided (and contains
+#' an age variable such as \code{age_range} or \code{Birth_year}).
 #' @param family_status For Medicare and SAPTO purposes.
 #' @param n_dependants An integer for the number of children of the taxpayer (for the purposes of the Medicare levy).
 #' @param return.mode The mode (numeric or integer) of the returned vector.
 #' @param .dots.ATO A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files. If \code{.dots.ATO} is a \code{data.table}, I recommend you enclose it with \code{copy()}.
+#' 
+#' Age variables in \code{.dots.ATO} take precedence over \code{age} and providing both
+#' is a warning.
+#' 
 #' @param allow.forecasts should dates beyond 2019-20 be permitted? Currently, not permitted.
 #' @param .debug (logical, default: \code{FALSE})  If \code{TRUE}, returns a \code{data.table} containing the components. (This argument and its result is liable to change in future versions, possibly without notice.)
 #' @author Tim Cameron, Brendan Coates, Matthew Katzen, Hugh Parsonage, William Young
@@ -138,6 +143,10 @@ rolling_income_tax <- function(income,
       sapto.eligible <- age >= 65
     }
   } else {
+    if (!is.null(age)) {
+      warning("`age` is not NULL but `.dots.ATO` is supplied with an age variable, ",
+              "so age will be ignored.")
+    }
     if ("age_range" %chin% .dots.ATO.noms) {
       if ("Birth_year" %chin% .dots.ATO.noms) {
         sapto.eligible <- coalesce(between(.subset2(.dots.ATO, "age_range"), 0L, 1L), 
@@ -281,6 +290,22 @@ rolling_income_tax <- function(income,
                                 basic_income_tax_liability = S4.10_basic_income_tax_liability,
                                 .dots.ATO = .dots.ATO,
                                 fy_year = fy.year)
+  }
+  
+  if (.debug && is.data.table(.dots.ATO)) {
+    result <- 
+      copy(.dots.ATO) %>%
+      .[, "base_tax" := base_tax.] %>%
+      .[, "lito" := lito.] %>%
+      .[, "sapto" := sapto.] %>%
+      .[, "medicare_levy" := medicare_levy.] %>%
+      .[, "SBTO" := sbto.] 
+    
+    # if (fy.year == "2011-12") {
+    #   result[, "flood_levy" := flood_levy.]
+    # }
+    
+    return(result[])
   }
   
   # SBTO is non-refundable (Para 1.6 of explanatory memo)
