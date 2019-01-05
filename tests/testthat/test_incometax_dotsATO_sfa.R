@@ -13,9 +13,10 @@ test_that("sfa", {
 
   
   s0304 <- copy(sample_file_0304)
-  s0304[, tax := income_tax(Taxable_Income, "2003-04", .dots.ATO = .SD)]  
+  s0304[, tax := income_tax(Taxable_Income, "2003-04", .dots.ATO = .SD)]
   
-  expect_equal(s0304[["Ind"]], s0304[["Ind"]]) # Just to check order-preservation
+  
+  expect_equal(s0304[["Ind"]], sfa200304[["Ind"]]) # Just to check order-preservation
   expect_equal(s0304[["tax"]], sfa200304[["tax"]])
   
 })
