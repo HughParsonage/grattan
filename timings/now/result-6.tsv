@@ -1,3 +1,3 @@
 expr	time	Date
-"s1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	37742271	2019-01-05
-sfall[, income_tax(Taxable_Income, fy.year, .dots.ATO = .SD)]	2999619313	2019-01-05
+"s1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	33290576	2019-01-05
+sfall[, income_tax(Taxable_Income, fy.year, .dots.ATO = .SD)]	1941713256	2019-01-05

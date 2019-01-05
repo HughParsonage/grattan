@@ -1,0 +1,541 @@
+Date	City	Residential_property_price_index
+2003-09-01	Sydney	85.3
+2003-09-01	Melbourne	60.7
+2003-09-01	Brisbane	64.2
+2003-09-01	Perth	48.3
+2003-09-01	Adelaide	62.2
+2003-09-01	Hobart	61.2
+2003-09-01	Canberra	68.3
+2003-09-01	Darwin	40.5
+2003-09-01	Australia (weighted average)	69
+2003-12-01	Sydney	88.2
+2003-12-01	Melbourne	62.1
+2003-12-01	Brisbane	69.4
+2003-12-01	Perth	50.6
+2003-12-01	Adelaide	63.9
+2003-12-01	Hobart	66.5
+2003-12-01	Canberra	70.9
+2003-12-01	Darwin	43.3
+2003-12-01	Australia (weighted average)	71.6
+2004-03-01	Sydney	87
+2004-03-01	Melbourne	60.8
+2004-03-01	Brisbane	70.7
+2004-03-01	Perth	52.5
+2004-03-01	Adelaide	64.8
+2004-03-01	Hobart	68.7
+2004-03-01	Canberra	69.9
+2004-03-01	Darwin	45.5
+2004-03-01	Australia (weighted average)	71.3
+2004-06-01	Sydney	84.4
+2004-06-01	Melbourne	60.9
+2004-06-01	Brisbane	71.7
+2004-06-01	Perth	53.7
+2004-06-01	Adelaide	65.9
+2004-06-01	Hobart	71.8
+2004-06-01	Canberra	70.1
+2004-06-01	Darwin	45.2
+2004-06-01	Australia (weighted average)	70.6
+2004-09-01	Sydney	84.2
+2004-09-01	Melbourne	60.9
+2004-09-01	Brisbane	71.2
+2004-09-01	Perth	54.7
+2004-09-01	Adelaide	67.1
+2004-09-01	Hobart	72.3
+2004-09-01	Canberra	68.6
+2004-09-01	Darwin	46.8
+2004-09-01	Australia (weighted average)	70.6
+2004-12-01	Sydney	84.8
+2004-12-01	Melbourne	62.4
+2004-12-01	Brisbane	72
+2004-12-01	Perth	57.1
+2004-12-01	Adelaide	68.6
+2004-12-01	Hobart	74.6
+2004-12-01	Canberra	69.7
+2004-12-01	Darwin	49.7
+2004-12-01	Australia (weighted average)	71.8
+2005-03-01	Sydney	83.2
+2005-03-01	Melbourne	62.5
+2005-03-01	Brisbane	72.6
+2005-03-01	Perth	59.4
+2005-03-01	Adelaide	68.6
+2005-03-01	Hobart	75.8
+2005-03-01	Canberra	70.3
+2005-03-01	Darwin	53.6
+2005-03-01	Australia (weighted average)	71.7
+2005-06-01	Sydney	82.6
+2005-06-01	Melbourne	63.2
+2005-06-01	Brisbane	73.3
+2005-06-01	Perth	62.6
+2005-06-01	Adelaide	69.3
+2005-06-01	Hobart	76.9
+2005-06-01	Canberra	69.9
+2005-06-01	Darwin	54.7
+2005-06-01	Australia (weighted average)	72.2
+2005-09-01	Sydney	81.4
+2005-09-01	Melbourne	63.1
+2005-09-01	Brisbane	73.6
+2005-09-01	Perth	65.2
+2005-09-01	Adelaide	70
+2005-09-01	Hobart	76.7
+2005-09-01	Canberra	70.1
+2005-09-01	Darwin	56.1
+2005-09-01	Australia (weighted average)	72.1
+2005-12-01	Sydney	81.8
+2005-12-01	Melbourne	64
+2005-12-01	Brisbane	75
+2005-12-01	Perth	70
+2005-12-01	Adelaide	71.6
+2005-12-01	Hobart	79.1
+2005-12-01	Canberra	71.7
+2005-12-01	Darwin	60.2
+2005-12-01	Australia (weighted average)	73.5
+2006-03-01	Sydney	80.8
+2006-03-01	Melbourne	65.4
+2006-03-01	Brisbane	75.6
+2006-03-01	Perth	75.6
+2006-03-01	Adelaide	72.2
+2006-03-01	Hobart	81
+2006-03-01	Canberra	72.5
+2006-03-01	Darwin	63.2
+2006-03-01	Australia (weighted average)	74.3
+2006-06-01	Sydney	82.3
+2006-06-01	Melbourne	67.2
+2006-06-01	Brisbane	77.5
+2006-06-01	Perth	86.4
+2006-06-01	Adelaide	73.4
+2006-06-01	Hobart	83.4
+2006-06-01	Canberra	74.3
+2006-06-01	Darwin	67.1
+2006-06-01	Australia (weighted average)	77
+2006-09-01	Sydney	82
+2006-09-01	Melbourne	68.1
+2006-09-01	Brisbane	78.5
+2006-09-01	Perth	95.1
+2006-09-01	Adelaide	73.8
+2006-09-01	Hobart	84.6
+2006-09-01	Canberra	76
+2006-09-01	Darwin	67.3
+2006-09-01	Australia (weighted average)	78.4
+2006-12-01	Sydney	82.7
+2006-12-01	Melbourne	69.5
+2006-12-01	Brisbane	80.5
+2006-12-01	Perth	98.4
+2006-12-01	Adelaide	75.7
+2006-12-01	Hobart	86.1
+2006-12-01	Canberra	77.1
+2006-12-01	Darwin	70.5
+2006-12-01	Australia (weighted average)	79.8
+2007-03-01	Sydney	81.9
+2007-03-01	Melbourne	71
+2007-03-01	Brisbane	83.6
+2007-03-01	Perth	99
+2007-03-01	Adelaide	77.2
+2007-03-01	Hobart	88.5
+2007-03-01	Canberra	78.6
+2007-03-01	Darwin	72.2
+2007-03-01	Australia (weighted average)	80.5
+2007-06-01	Sydney	85.2
+2007-06-01	Melbourne	76
+2007-06-01	Brisbane	89
+2007-06-01	Perth	97.7
+2007-06-01	Adelaide	81.9
+2007-06-01	Hobart	89.6
+2007-06-01	Canberra	82
+2007-06-01	Darwin	74.1
+2007-06-01	Australia (weighted average)	84.1
+2007-09-01	Sydney	87.3
+2007-09-01	Melbourne	79.5
+2007-09-01	Brisbane	93.4
+2007-09-01	Perth	99.4
+2007-09-01	Adelaide	86.9
+2007-09-01	Hobart	92.3
+2007-09-01	Canberra	86.3
+2007-09-01	Darwin	76.3
+2007-09-01	Australia (weighted average)	87.1
+2007-12-01	Sydney	89.2
+2007-12-01	Melbourne	84.7
+2007-12-01	Brisbane	98.1
+2007-12-01	Perth	100.6
+2007-12-01	Adelaide	91.9
+2007-12-01	Hobart	96
+2007-12-01	Canberra	88.6
+2007-12-01	Darwin	78.3
+2007-12-01	Australia (weighted average)	90.4
+2008-03-01	Sydney	88.5
+2008-03-01	Melbourne	85.7
+2008-03-01	Brisbane	100.6
+2008-03-01	Perth	99.5
+2008-03-01	Adelaide	94.9
+2008-03-01	Hobart	93.9
+2008-03-01	Canberra	89.3
+2008-03-01	Darwin	77.7
+2008-03-01	Australia (weighted average)	90.8
+2008-06-01	Sydney	87.3
+2008-06-01	Melbourne	85.5
+2008-06-01	Brisbane	101.3
+2008-06-01	Perth	97.6
+2008-06-01	Adelaide	93.8
+2008-06-01	Hobart	95.2
+2008-06-01	Canberra	87.7
+2008-06-01	Darwin	78.5
+2008-06-01	Australia (weighted average)	90
+2008-09-01	Sydney	85.7
+2008-09-01	Melbourne	83
+2008-09-01	Brisbane	97.5
+2008-09-01	Perth	95.3
+2008-09-01	Adelaide	94.1
+2008-09-01	Hobart	93.3
+2008-09-01	Canberra	85.2
+2008-09-01	Darwin	81.8
+2008-09-01	Australia (weighted average)	88
+2008-12-01	Sydney	84.5
+2008-12-01	Melbourne	82.3
+2008-12-01	Brisbane	95.8
+2008-12-01	Perth	92.9
+2008-12-01	Adelaide	93.6
+2008-12-01	Hobart	93.9
+2008-12-01	Canberra	84.8
+2008-12-01	Darwin	84.3
+2008-12-01	Australia (weighted average)	86.8
+2009-03-01	Sydney	83.9
+2009-03-01	Melbourne	82.5
+2009-03-01	Brisbane	96
+2009-03-01	Perth	92.5
+2009-03-01	Adelaide	93.2
+2009-03-01	Hobart	93.4
+2009-03-01	Canberra	85.8
+2009-03-01	Darwin	87.2
+2009-03-01	Australia (weighted average)	86.6
+2009-06-01	Sydney	87.5
+2009-06-01	Melbourne	86.9
+2009-06-01	Brisbane	98.8
+2009-06-01	Perth	95.1
+2009-06-01	Adelaide	95.8
+2009-06-01	Hobart	96.4
+2009-06-01	Canberra	88.7
+2009-06-01	Darwin	89
+2009-06-01	Australia (weighted average)	90.2
+2009-09-01	Sydney	91.1
+2009-09-01	Melbourne	92.5
+2009-09-01	Brisbane	102.1
+2009-09-01	Perth	97.6
+2009-09-01	Adelaide	97.2
+2009-09-01	Hobart	98.6
+2009-09-01	Canberra	92.1
+2009-09-01	Darwin	92.3
+2009-09-01	Australia (weighted average)	94
+2009-12-01	Sydney	96
+2009-12-01	Melbourne	98.6
+2009-12-01	Brisbane	105.3
+2009-12-01	Perth	103.5
+2009-12-01	Adelaide	101.1
+2009-12-01	Hobart	104.2
+2009-12-01	Canberra	97.6
+2009-12-01	Darwin	98.7
+2009-12-01	Australia (weighted average)	99.2
+2010-03-01	Sydney	98.9
+2010-03-01	Melbourne	103.3
+2010-03-01	Brisbane	106.4
+2010-03-01	Perth	106.5
+2010-03-01	Adelaide	102.8
+2010-03-01	Hobart	105.9
+2010-03-01	Canberra	101.7
+2010-03-01	Darwin	99.4
+2010-03-01	Australia (weighted average)	102.3
+2010-06-01	Sydney	101.4
+2010-06-01	Melbourne	106.2
+2010-06-01	Brisbane	107
+2010-06-01	Perth	106.6
+2010-06-01	Adelaide	104.7
+2010-06-01	Hobart	103.6
+2010-06-01	Canberra	101.6
+2010-06-01	Darwin	100.9
+2010-06-01	Australia (weighted average)	104.3
+2010-09-01	Sydney	101.1
+2010-09-01	Melbourne	104.3
+2010-09-01	Brisbane	105.3
+2010-09-01	Perth	103.8
+2010-09-01	Adelaide	103.9
+2010-09-01	Hobart	103.5
+2010-09-01	Canberra	101.6
+2010-09-01	Darwin	101.1
+2010-09-01	Australia (weighted average)	103
+2010-12-01	Sydney	101.3
+2010-12-01	Melbourne	105.7
+2010-12-01	Brisbane	105
+2010-12-01	Perth	103.9
+2010-12-01	Adelaide	104.8
+2010-12-01	Hobart	106.6
+2010-12-01	Canberra	102.5
+2010-12-01	Darwin	101.9
+2010-12-01	Australia (weighted average)	103.6
+2011-03-01	Sydney	101
+2011-03-01	Melbourne	104.7
+2011-03-01	Brisbane	102.9
+2011-03-01	Perth	103
+2011-03-01	Adelaide	103.3
+2011-03-01	Hobart	105.9
+2011-03-01	Canberra	102.3
+2011-03-01	Darwin	99.5
+2011-03-01	Australia (weighted average)	102.7
+2011-06-01	Sydney	101.4
+2011-06-01	Melbourne	103.5
+2011-06-01	Brisbane	102.5
+2011-06-01	Perth	100.2
+2011-06-01	Adelaide	101
+2011-06-01	Hobart	102.9
+2011-06-01	Canberra	101.9
+2011-06-01	Darwin	96.5
+2011-06-01	Australia (weighted average)	102
+2011-09-01	Sydney	99.9
+2011-09-01	Melbourne	101.3
+2011-09-01	Brisbane	99.9
+2011-09-01	Perth	99.1
+2011-09-01	Adelaide	100.4
+2011-09-01	Hobart	100.6
+2011-09-01	Canberra	98.7
+2011-09-01	Darwin	96.9
+2011-09-01	Australia (weighted average)	100.2
+2011-12-01	Sydney	98.4
+2011-12-01	Melbourne	100
+2011-12-01	Brisbane	100.2
+2011-12-01	Perth	99.4
+2011-12-01	Adelaide	100.7
+2011-12-01	Hobart	101.9
+2011-12-01	Canberra	100.9
+2011-12-01	Darwin	98.2
+2011-12-01	Australia (weighted average)	99.4
+2012-03-01	Sydney	100.3
+2012-03-01	Melbourne	99.4
+2012-03-01	Brisbane	100
+2012-03-01	Perth	100.5
+2012-03-01	Adelaide	99.3
+2012-03-01	Hobart	99.4
+2012-03-01	Canberra	100.8
+2012-03-01	Darwin	100.8
+2012-03-01	Australia (weighted average)	100
+2012-06-01	Sydney	101.4
+2012-06-01	Melbourne	99.3
+2012-06-01	Brisbane	99.9
+2012-06-01	Perth	101
+2012-06-01	Adelaide	99.6
+2012-06-01	Hobart	98.2
+2012-06-01	Canberra	99.5
+2012-06-01	Darwin	104.1
+2012-06-01	Australia (weighted average)	100.4
+2012-09-01	Sydney	100.9
+2012-09-01	Melbourne	98.6
+2012-09-01	Brisbane	100.8
+2012-09-01	Perth	102.1
+2012-09-01	Adelaide	99.2
+2012-09-01	Hobart	98.1
+2012-09-01	Canberra	99.5
+2012-09-01	Darwin	105.5
+2012-09-01	Australia (weighted average)	100.2
+2012-12-01	Sydney	103.7
+2012-12-01	Melbourne	100.4
+2012-12-01	Brisbane	101.7
+2012-12-01	Perth	105.2
+2012-12-01	Adelaide	100.2
+2012-12-01	Hobart	98.4
+2012-12-01	Canberra	101.8
+2012-12-01	Darwin	107.8
+2012-12-01	Australia (weighted average)	102.4
+2013-03-01	Sydney	104.7
+2013-03-01	Melbourne	100.8
+2013-03-01	Brisbane	101.9
+2013-03-01	Perth	107.5
+2013-03-01	Adelaide	99.8
+2013-03-01	Hobart	100
+2013-03-01	Canberra	100.3
+2013-03-01	Darwin	109.6
+2013-03-01	Australia (weighted average)	103.1
+2013-06-01	Sydney	108.7
+2013-06-01	Melbourne	102.7
+2013-06-01	Brisbane	103.2
+2013-06-01	Perth	110.6
+2013-06-01	Adelaide	100.9
+2013-06-01	Hobart	100
+2013-06-01	Canberra	101
+2013-06-01	Darwin	111
+2013-06-01	Australia (weighted average)	105.7
+2013-09-01	Sydney	112.8
+2013-09-01	Melbourne	105.9
+2013-09-01	Brisbane	104.5
+2013-09-01	Perth	110.7
+2013-09-01	Adelaide	101.3
+2013-09-01	Hobart	101
+2013-09-01	Canberra	101.1
+2013-09-01	Darwin	111.3
+2013-09-01	Australia (weighted average)	108.3
+2013-12-01	Sydney	119
+2013-12-01	Melbourne	109.7
+2013-12-01	Brisbane	107.1
+2013-12-01	Perth	113.9
+2013-12-01	Adelaide	104.4
+2013-12-01	Hobart	103.3
+2013-12-01	Canberra	101.8
+2013-12-01	Darwin	112.8
+2013-12-01	Australia (weighted average)	112.6
+2014-03-01	Sydney	121.7
+2014-03-01	Melbourne	110.7
+2014-03-01	Brisbane	108.5
+2014-03-01	Perth	114.8
+2014-03-01	Adelaide	105.4
+2014-03-01	Hobart	103.7
+2014-03-01	Canberra	102.3
+2014-03-01	Darwin	114
+2014-03-01	Australia (weighted average)	114.2
+2014-06-01	Sydney	126
+2014-06-01	Melbourne	112.1
+2014-06-01	Brisbane	110.5
+2014-06-01	Perth	114.8
+2014-06-01	Adelaide	105.6
+2014-06-01	Hobart	104.1
+2014-06-01	Canberra	103.3
+2014-06-01	Darwin	114.7
+2014-06-01	Australia (weighted average)	116.4
+2014-09-01	Sydney	128.8
+2014-09-01	Melbourne	113.1
+2014-09-01	Brisbane	111
+2014-09-01	Perth	114.5
+2014-09-01	Adelaide	106.1
+2014-09-01	Hobart	104.4
+2014-09-01	Canberra	103.5
+2014-09-01	Darwin	114.4
+2014-09-01	Australia (weighted average)	117.8
+2014-12-01	Sydney	133.4
+2014-12-01	Melbourne	115.2
+2014-12-01	Brisbane	112.3
+2014-12-01	Perth	114.5
+2014-12-01	Adelaide	107.3
+2014-12-01	Hobart	105.2
+2014-12-01	Canberra	104.3
+2014-12-01	Darwin	113.7
+2014-12-01	Australia (weighted average)	120.2
+2015-03-01	Sydney	137.6
+2015-03-01	Melbourne	115.9
+2015-03-01	Brisbane	112.7
+2015-03-01	Perth	114.4
+2015-03-01	Adelaide	108
+2015-03-01	Hobart	105.7
+2015-03-01	Canberra	105.4
+2015-03-01	Darwin	113.5
+2015-03-01	Australia (weighted average)	122.1
+2015-06-01	Sydney	149.8
+2015-06-01	Melbourne	120.8
+2015-06-01	Brisbane	113.7
+2015-06-01	Perth	113.4
+2015-06-01	Adelaide	108.5
+2015-06-01	Hobart	105.7
+2015-06-01	Canberra	106.2
+2015-06-01	Darwin	112.6
+2015-06-01	Australia (weighted average)	127.8
+2015-09-01	Sydney	154.4
+2015-09-01	Melbourne	124.3
+2015-09-01	Brisbane	115.2
+2015-09-01	Perth	110.7
+2015-09-01	Adelaide	109.8
+2015-09-01	Hobart	106.2
+2015-09-01	Canberra	107.6
+2015-09-01	Darwin	112.1
+2015-09-01	Australia (weighted average)	130.4
+2015-12-01	Sydney	151.9
+2015-12-01	Melbourne	126.3
+2015-12-01	Brisbane	117
+2015-12-01	Perth	111.2
+2015-12-01	Adelaide	110.8
+2015-12-01	Hobart	108.9
+2015-12-01	Canberra	110.6
+2015-12-01	Darwin	110.1
+2015-12-01	Australia (weighted average)	130.6
+2016-03-01	Sydney	150.9
+2016-03-01	Melbourne	127.3
+2016-03-01	Brisbane	117.3
+2016-03-01	Perth	109.3
+2016-03-01	Adelaide	111.4
+2016-03-01	Hobart	110.1
+2016-03-01	Canberra	110.2
+2016-03-01	Darwin	107.9
+2016-03-01	Australia (weighted average)	130.4
+2016-06-01	Sydney	155.2
+2016-06-01	Melbourne	130.7
+2016-06-01	Brisbane	118.6
+2016-06-01	Perth	108
+2016-06-01	Adelaide	112.3
+2016-06-01	Hobart	110.9
+2016-06-01	Canberra	112.6
+2016-06-01	Darwin	105.3
+2016-06-01	Australia (weighted average)	133
+2016-09-01	Sydney	159.3
+2016-09-01	Melbourne	132.9
+2016-09-01	Brisbane	118.8
+2016-09-01	Perth	106.3
+2016-09-01	Adelaide	113.3
+2016-09-01	Hobart	113.4
+2016-09-01	Canberra	113.5
+2016-09-01	Darwin	104
+2016-09-01	Australia (weighted average)	135
+2016-12-01	Sydney	167.6
+2016-12-01	Melbourne	140
+2016-12-01	Brisbane	121.4
+2016-12-01	Perth	106.6
+2016-12-01	Adelaide	115.3
+2016-12-01	Hobart	118.5
+2016-12-01	Canberra	116.7
+2016-12-01	Darwin	102.4
+2016-12-01	Australia (weighted average)	140.6
+2017-03-01	Sydney	172.7
+2017-03-01	Melbourne	144.4
+2017-03-01	Brisbane	121.4
+2017-03-01	Perth	105.5
+2017-03-01	Adelaide	117
+2017-03-01	Hobart	122.5
+2017-03-01	Canberra	120
+2017-03-01	Darwin	101.5
+2017-03-01	Australia (weighted average)	143.7
+2017-06-01	Sydney	176.6
+2017-06-01	Melbourne	148.7
+2017-06-01	Brisbane	122.1
+2017-06-01	Perth	104.7
+2017-06-01	Adelaide	117.9
+2017-06-01	Hobart	124.7
+2017-06-01	Canberra	121.5
+2017-06-01	Darwin	100.1
+2017-06-01	Australia (weighted average)	146.5
+2017-09-01	Sydney	174.2
+2017-09-01	Melbourne	150.4
+2017-09-01	Brisbane	122.9
+2017-09-01	Perth	103.7
+2017-09-01	Adelaide	118.7
+2017-09-01	Hobart	129
+2017-09-01	Canberra	121.3
+2017-09-01	Darwin	97.5
+2017-09-01	Australia (weighted average)	146.2
+2017-12-01	Sydney	174
+2017-12-01	Melbourne	154.3
+2017-12-01	Brisbane	124
+2017-12-01	Perth	104.8
+2017-12-01	Adelaide	119.4
+2017-12-01	Hobart	134
+2017-12-01	Canberra	123.4
+2017-12-01	Darwin	96
+2017-12-01	Australia (weighted average)	147.6
+2018-03-01	Sydney	171.9
+2018-03-01	Melbourne	153.4
+2018-03-01	Brisbane	123.3
+2018-03-01	Perth	103.9
+2018-03-01	Adelaide	120
+2018-03-01	Hobart	139.8
+2018-03-01	Canberra	124.5
+2018-03-01	Darwin	94.9
+2018-03-01	Australia (weighted average)	146.6
+2018-06-01	Sydney	169.8
+2018-06-01	Melbourne	152.1
+2018-06-01	Brisbane	124.2
+2018-06-01	Perth	103.8
+2018-06-01	Adelaide	120.4
+2018-06-01	Hobart	144
+2018-06-01	Canberra	125.2
+2018-06-01	Darwin	94
+2018-06-01	Australia (weighted average)	145.6
