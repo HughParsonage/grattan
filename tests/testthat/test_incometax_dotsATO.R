@@ -52,5 +52,11 @@ test_that("Debugger", {
                income_tax(sample_file_1112$Taxable_Income, 
                           "2013-14", 
                           .dots.ATO = copy(sample_file_1112)))
+  result <- 
+    income_tax(sample_file_1112$Taxable_Income,
+               fy.year = rep("2013-14", nrow(sample_file_1112)),
+               .dots.ATO = copy(sample_file_1112),
+               .debug = TRUE)
+  expect_true("medicare_levy" %in% names(result))
 })
 
