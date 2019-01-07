@@ -16,13 +16,17 @@ income_tax(income, fy.year = NULL, age = NULL,
 In particular, the tax payable is calculated under the assumption that the rate of the Medicare levy will rise to 2.5\% in the 2019-20 tax year.
 If fy.year is not given, the current financial year is used by default.}
 
-\item{age}{The individual's age.}
+\item{age}{The individual's age. Ignored if \code{.dots.ATO} is provided (and contains
+an age variable such as \code{age_range} or \code{Birth_year}).}
 
 \item{family_status}{For Medicare and SAPTO purposes.}
 
 \item{n_dependants}{An integer for the number of children of the taxpayer (for the purposes of the Medicare levy).}
 
-\item{.dots.ATO}{A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files. If \code{.dots.ATO} is a \code{data.table}, I recommend you enclose it with \code{copy()}.}
+\item{.dots.ATO}{A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files. If \code{.dots.ATO} is a \code{data.table}, I recommend you enclose it with \code{copy()}.
+
+Age variables in \code{.dots.ATO} take precedence over \code{age} and providing both
+is a warning.}
 
 \item{return.mode}{The mode (numeric or integer) of the returned vector.}
 

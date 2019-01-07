@@ -1058,7 +1058,11 @@ residential_property_prices <-
 
 
 
-devtools::use_data(residential_property_prices, overwrite = TRUE)
+usethis::use_data(residential_property_prices, overwrite = TRUE)
+fwrite(residential_property_prices,
+       "data-raw/sysdata/residential_property_prices.tsv", 
+       sep = "\t",
+       logical01 = TRUE)
 
 NewstartRatesTable.raw <-
   "http://guides.dss.gov.au/guide-social-security-law/5/2/1/20" %>%

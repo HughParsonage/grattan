@@ -10,8 +10,7 @@ test_that("income_tax collections in 2003-04 match final budget outcome by 1%", 
   final_budget_outcome_0304 <- 98.779 * 1e9
   collections_0304 <- sum(income_tax(sample_file_0304[["Taxable_Income"]], 
                                      fy.year = "2003-04", 
-                                     .dots.ATO = copy(sample_file_0304), 
-                                     age = if_else(sample_file_0304$Birth_year < 2, 67, 42))) * 100 
+                                     .dots.ATO = copy(sample_file_0304))) * 100 
   
   expect_lt(abs(collections_0304 - final_budget_outcome_0304) / final_budget_outcome_0304, 
             0.01)
@@ -27,8 +26,7 @@ test_that("income_tax collections in 2006-07 match final budget outcome by 1%", 
   final_budget_outcome_0607 <- 117.614 * 1e9
   collections_0607 <- sum(income_tax(sample_file_0607[["Taxable_Income"]], 
                                      fy.year = "2006-07", 
-                                     .dots.ATO = copy(sample_file_0607), 
-                                     age = if_else(sample_file_0607$Birth_year < 2, 67, 42))) * 100 
+                                     .dots.ATO = copy(sample_file_0607))) * 100 
   
   expect_lt(abs(collections_0607 - final_budget_outcome_0607) / final_budget_outcome_0607, 
             0.01)
@@ -47,15 +45,13 @@ test_that("Projections match collections", {
     sample_file_1213 %>%
     # ABS: 166,027 million. Cat 5506
     project_to(to_fy = "2013-14") %$%
-    abs(sum(income_tax(Taxable_Income, "2013-14", 
-                       age = if_else(age_range <= 1, 67, 42), 
+    abs(sum(income_tax(Taxable_Income, "2013-14",
                        .dots.ATO = copy(.)) * WEIGHT)/ (166027 * 1e6) - 1) 
   
   collections_1415_proj.over.actual <- 
     sample_file_1415_synth %$%
     abs(sum(income_tax(Taxable_Income, 
-                       "2014-15", 
-                       age = if_else(age_range <= 1, 67, 42), 
+                       "2014-15",
                        .dots.ATO = copy(.)) * 50) / (176600 * 1e6) - 1)
   
   # http://budget.gov.au/2016-17/content/bp1/download/bp1.pdf
@@ -65,8 +61,7 @@ test_that("Projections match collections", {
     # Budget papers http://www.budget.gov.au/2015-16/content/bp1/html/bp1_bs4-03.htm
     project_to(to_fy = "2015-16") %$%
     abs(sum(income_tax(Taxable_Income, 
-                       "2015-16", 
-                       age = if_else(age_range <= 1, 67, 42), 
+                       "2015-16",
                        .dots.ATO = copy(.)) * WEIGHT) / (188400 * 1e6) - 1)
   
   # http://budget.gov.au/2016-17/content/bp1/download/bp1.pdf
@@ -78,9 +73,9 @@ test_that("Projections match collections", {
     # FBO: 193863M
     project_to(to_fy = "2016-17") %>%
     .[, tax := income_tax(Taxable_Income, 
-                          "2016-17", 
-                          age = if_else(age_range <= 1, 67, 42), 
-                          .dots.ATO = copy(.), .debug = TRUE)] %>%
+                          "2016-17",
+                          .dots.ATO = copy(.),
+                          .debug = FALSE)] %>%
     .[, .(total = sum(tax * WEIGHT))] %$%
     total %>%
     divide_by(193863 * 1e6) %>%
