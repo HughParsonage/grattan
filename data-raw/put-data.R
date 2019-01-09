@@ -1347,7 +1347,48 @@ AWOTE_by_Date_isMale_isOrdinary_isAdult <-
   .[.("1985-02-15", "Persons", "Ordinary"), AWOTE := 377.50] %>%
   .[.("1985-02-15", "Persons", "Total"), AWOTE := 400.10] %>%
   
+  ## 1992
+  .[.("1992-05-15", "Male", "Ordinary"), AWOTE := 625.20] %>%
+  .[.("1992-08-21", "Male", "Ordinary"), AWOTE := 625.10] %>%
+  .[.("1992-11-20", "Male", "Ordinary"), AWOTE := 624.40] %>%
+  
+  .[.("1992-05-15", "Male", "Total"), AWOTE := 598.80] %>%
+  .[.("1992-08-21", "Male", "Total"), AWOTE := 599.50] %>%
+  .[.("1992-11-20", "Male", "Total"), AWOTE := 601.20] %>%
+
+  .[.("1992-05-15", "Female", "Ordinary"), AWOTE := 520.70] %>%
+  .[.("1992-08-21", "Female", "Ordinary"), AWOTE := 520.70] %>%
+  .[.("1992-11-20", "Female", "Ordinary"), AWOTE := 522.50] %>%
+  
+  .[.("1992-05-15", "Female", "Total"), AWOTE := 398.20] %>%
+  .[.("1992-08-21", "Female", "Total"), AWOTE := 398.50] %>%
+  .[.("1992-11-20", "Female", "Total"), AWOTE := 399.80] %>%
+  
+  .[.("1992-05-15", "Persons", "Ordinary"), AWOTE := 587.90] %>%
+  .[.("1992-08-21", "Persons", "Ordinary"), AWOTE := 587.60] %>%
+  .[.("1992-11-20", "Persons", "Ordinary"), AWOTE := 587.90] %>%
+  
+  ## 1993
+  .[.("1993-02-19", "Male", "Ordinary"), AWOTE := 627.50] %>%
+  .[.("1993-05-21", "Male", "Ordinary"), AWOTE := 633.60] %>%
+  
+  .[.("1993-02-19", "Male", "Total"), AWOTE := 512.40] %>%
+  .[.("1993-05-21", "Male", "Total"), AWOTE := 519.00] %>%
+  
+  .[.("1993-02-19", "Female", "Ordinary"), AWOTE := 527.30] %>%
+  .[.("1993-05-21", "Female", "Ordinary"), AWOTE := 532.90] %>%
+  
+  .[.("1993-02-19", "Female", "Total"), AWOTE := 403.40] %>%
+  .[.("1993-05-21", "Female", "Total"), AWOTE := 408.10] %>%
+  
+  .[.("1993-02-19", "Persons", "Ordinary"), AWOTE := 591.90] %>%
+  .[.("1993-05-21", "Persons", "Ordinary"), AWOTE := 597.90] %>%
+  
+  .[.("1993-02-19", "Persons", "Total"), AWOTE := 512.40] %>%
+  .[.("1993-05-21", "Persons", "Total"), AWOTE := 519.00] %>%
+  
   # http://www.ausstats.abs.gov.au/ausstats/free.nsf/0/761EBD51124BCA23CA2574FA001441D4/$File/63020_AUG1993.pdf
+  
   .[.("1993-08-15", "Persons", "Ordinary"), AWOTE := 604.80] %>%
   .[.("1993-08-15", "Male", "Ordinary"), AWOTE := 641.20] %>%
   .[.("1993-08-15", "Female", "Ordinary"), AWOTE := 538.40] %>%
