@@ -1308,12 +1308,36 @@ AWOTE_by_Date_isMale_isOrdinary_isAdult <-
   .[, Date := as.character(Date)] %>%
   setkey(Date, Sex, Earnings, isAdult) %>%
   # http://www.ausstats.abs.gov.au/ausstats/free.nsf/0/B0E788EAD7591E6ECA2574FF001962A2/$File/63020_FEB1986.pdf
+  .[.("1985-02-15", "Male", "Ordinary"), AWOTE := 399.60] %>%
+  .[.("1985-05-17", "Male", "Ordinary"), AWOTE := 404.50] %>%
+  .[.("1985-08-16", "Male", "Ordinary"), AWOTE := 409.80] %>%
+  .[.("1985-11-15", "Male", "Ordinary"), AWOTE := 419.60] %>%
+  
+  .[.("1985-02-15", "Male", "Total"), AWOTE := 392.70] %>%
+  .[.("1985-05-17", "Male", "Total"), AWOTE := 397.20] %>%
+  .[.("1985-08-16", "Male", "Total"), AWOTE := 403.10] %>%
+  .[.("1985-11-15", "Male", "Total"), AWOTE := 413.90] %>%
+  
+  .[.("1985-02-15", "Female", "Ordinary"), AWOTE := 328.40] %>%
+  .[.("1985-05-17", "Female", "Ordinary"), AWOTE := 334.40] %>%
+  .[.("1985-08-16", "Female", "Ordinary"), AWOTE := 338.70] %>%
+  .[.("1985-11-15", "Female", "Ordinary"), AWOTE := 345.30] %>%
+  
+  .[.("1985-02-15", "Female", "Total"), AWOTE := 260.10] %>%
+  .[.("1985-05-17", "Female", "Total"), AWOTE := 263.40] %>%
+  .[.("1985-08-16", "Female", "Total"), AWOTE := 265.00] %>%
+  .[.("1985-11-15", "Female", "Total"), AWOTE := 268.40] %>%
+  
+  
+  .[.("1985-02-15", "Persons", "Ordinary"), AWOTE := 377.50] %>%
+  .[.("1985-02-15", "Persons", "Total"), AWOTE := 340.10] %>%
+  
   .[.("1986-02-15", "Male", "Ordinary"), AWOTE := 427.20] %>%
   .[.("1986-02-15", "Male", "Total"), AWOTE := 422.7] %>%
   .[.("1986-02-15", "Female", "Ordinary"), AWOTE := 352.8] %>%
   .[.("1986-02-15", "Female", "Total"), AWOTE := 276.4] %>%
   .[.("1986-02-15", "Persons", "Ordinary"), AWOTE := 404.20] %>%
-  .[.("1986-02-15", "Persons", "Total"), AWOTE := 404.20] %>%
+  .[.("1986-02-15", "Persons", "Total"), AWOTE := 364.10] %>%
   
   # http://www.ausstats.abs.gov.au/ausstats/free.nsf/0/B0E788EAD7591E6ECA2574FF001962A2/$File/63020_FEB1986.pdf
   .[.("1985-02-15", "Male", "Ordinary"), AWOTE := 399.60] %>%
