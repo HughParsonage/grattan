@@ -19,6 +19,8 @@ setup_knitr_for_grattex(chunktimings.txt = "153-CHUNKTIMINGS.txt")
 @
 
 <<loadPackages>>=
+library(grid)
+library(gridExtra)
 library(taxstats)
 library(data.table)
 library(magrittr)
@@ -90,6 +92,15 @@ TaxstatsTable14 <-
   }
 @
 
+<<TaxstatsTable14-incl-CEOs>>=
+CEO_occupations <- 
+  c(#"1100 Chief Executives, General Managers and Legislators - type not specified", 
+    "1111 Chief Executives and Managing Directors")
+TaxstatsTable14[Occupation %ein% c(CEO_occupations), Occupation := "CEOs"]
+nPersons_by_Occupation[Occupation %ein% c(CEO_occupations), Occupation := "CEOs"]
+nPersons_by_Occupation[, .(nIndividuals = sum(nIndividuals)), keyby = "Occupation"]
+@
+
 <<>>=
 avgTaxableIncome_by_Occupation <-
   TaxstatsTable14 %>%
@@ -153,6 +164,7 @@ avgBenefit_by_Occupation[nPersons_by_Occupation, on = "Occupation", nomatch=0L] 
                       color = color,
                       fontface = fontface),
                   force = 1.3,
+                  min.segment.length = 0,
                   size = 14/(14/5),
                   family = if (is_knitting()) "helvet" else "",
                   point.padding = 0.25,
@@ -176,7 +188,8 @@ if (is_knitting()) {
 
 \begin{figure}
 \caption{Average negative gearing benefit vs taxable income, 2015-16}
-<<avgBenefits-vs-TaxableIncome-twitter, dev='png', fig.height=fig_width, out.height=paste0(out_width, "in"), fig.ext="png">>=
+<<avgBenefits-vs-TaxableIncome-twitter, fig.height=0.8*fig_width, out.height=paste0(0.8*out_width, "in"), dev='png', fig.ext="png">>=
+gc(full = TRUE)  # ggrepel buffer overflow?
 avgBenefit_by_Occupation[nPersons_by_Occupation, on = "Occupation", nomatch=0L] %>%
   .[nzchar(Occupation)] %>%
   .[, label := as.character(Occupation)] %>%
@@ -184,6 +197,7 @@ avgBenefit_by_Occupation[nPersons_by_Occupation, on = "Occupation", nomatch=0L] 
     label := "Investment Advisers"] %>%
   .[, label := sub(" - type not specified", "", label, fixed = TRUE)] %>%
   .[, label := sub("^[0-9]+\\s*", "", label)] %>%
+  .[label %ein% "Judicial and Other Legal Professionals", label := "Lawyers"] %>%
   .[, label := sub(" and (?!Emergency).*$", "", label, perl = TRUE)] %>%
   .[, label := sub(" (General)", "", label, fixed = TRUE)] %>%
   .[, label := sub(", Dealers, Investment Advisers", "", label, fixed = TRUE)] %>%
@@ -192,12 +206,15 @@ avgBenefit_by_Occupation[nPersons_by_Occupation, on = "Occupation", nomatch=0L] 
   .[, label := sub("Registered Nurses", "Nurses", label)] %>%
   .[, label := sub("Other Medical Practitioners", "Other Doctors", label)] %>%
   .[, label := sub("Primary School Teachers", "Primary School\nTeachers", label)] %>%
+  .[] %>%
   .[, keep_label := label %ein% c("Emergency\nWorkers",
                                   "Primary School\nTeachers",
                                   "Sales Assistants",
                                   "Farmers",
                                   "Investment Advisers",
-                                  "Chief Executives",
+                                  "CEOs",
+                                  "Lawyers",
+                                  "Financial Dealers",
                                   "Other Doctors",
                                   "Nurses",
                                   "Anaesthetists",
@@ -209,10 +226,91 @@ avgBenefit_by_Occupation[nPersons_by_Occupation, on = "Occupation", nomatch=0L] 
   chart_data %>%
   
   grplot(aes(x = avgTaxableIncome, y = avgBenefit)) + 
-  geom_point(aes(size = nIndividuals)) + 
+  ggtitle("Average tax benefit due to negative gearing") + 
+  theme(#title = element_text(face = "bold", hjust = -0.4, vjust = 0, size = 18),
+        plot.margin = margin(t = 5),
+        plot.title = element_text(face = "plain", hjust = -0.75, vjust = 0, size = 16,
+                                  color = theGrey)) +
+  geom_point(aes(size = nIndividuals)) +
   scale_x_continuous("Taxable Income",
-                     expand = expand_scale(mult = 0.08),
+                     expand = c(0, 0),
                      labels = function(x) paste0(dollar(x / 1000), "k")) + 
+  geom_label_repel(aes(label = label),
+                   fill = "white",
+                   label.size = NA,
+                   min.segment.length = 0,
+                   force = 1.5,
+                   max.iter = 3000,
+                   lineheight = 1,
+                   size = 16/(14/5),
+                   family = if (is_knitting()) "helvet" else "",
+                   point.padding = 0.5,
+                   box.padding = 1.5,
+                   na.rm = TRUE) + 
+  geom_blank(aes(x = 0, y = 16e3)) +
+  geom_blank(aes(x = 0, y = 0)) +
+  geom_blank(aes(x = 430e3, y = 0)) +
+  geom_blank(aes(x = -10e3, y = 0)) +
+  scale_y_continuous(labels = grattan_dollar, 
+                     breaks = c(0, 5e3, 10e3, 15e3),
+                     expand = c(0, 0))
+@
+\end{figure}
+
+\begin{figure}
+\caption{Proportion negative gearing benefit vs taxable income, 2015-16}
+<<propBenefits-vs-TaxableIncome-twitter, fig.height=0.8*fig_width, out.height=paste0(0.8*out_width, "in"), dev='png', fig.ext="png">>=
+gc(full = TRUE)  # ggrepel buffer overflow?
+p_propoBenefits_vs_avgTaxableIncome <- 
+  nNG_by_Occupation[nPersons_by_Occupation, on = "Occupation", nomatch=0L] %>%
+  .[avgTaxableIncome_by_Occupation, on = "Occupation", nomatch=0L] %>%
+  .[nzchar(Occupation)] %>%
+  .[, label := as.character(Occupation)] %>%
+  .[label %ein% "2220 Financial Brokers, Dealers, Investment Advisers and Managers - type not specified",
+    label := "Investment Advisers"] %>%
+  .[, label := sub(" - type not specified", "", label, fixed = TRUE)] %>%
+  .[, label := sub("^[0-9]+\\s*", "", label)] %>%
+  .[label %ein% "Judicial and Other Legal Professionals", label := "Lawyers"] %>%
+  .[, label := sub(" and (?!Emergency).*$", "", label, perl = TRUE)] %>%
+  .[, label := sub(" (General)", "", label, fixed = TRUE)] %>%
+  .[, label := sub(", Dealers, Investment Advisers", "", label, fixed = TRUE)] %>%
+  .[, label := sub("^Fire and ", "", label)] %>%
+  .[, label := sub("Emergency Workers", "Emergency\nWorkers", label)] %>%
+  .[, label := sub("Registered Nurses", "Nurses", label)] %>%
+  .[, label := sub("Other Medical Practitioners", "Other Doctors", label)] %>%
+  .[, label := sub("Primary School Teachers", "Primary School\nTeachers", label)] %>%
+  
+  .[, keep_label := label %ein% c("Emergency\nWorkers",
+                                  "Primary School\nTeachers",
+                                  "Sales Assistants",
+                                  "Farmers",
+                                  "Investment Advisers",
+                                  "CEOs",
+                                  "Lawyers",
+                                  "Financial Dealers",
+                                  "Other Doctors",
+                                  "Nurses",
+                                  "Anaesthetists",
+                                  "Surgeons")] %>%
+  .[, label := if_else(keep_label, label, "")] %>%
+  .[, label := if_else((.I %% 3) > 0 & !nzchar(label), NA_character_, label)] %>%
+  .[, color := if_else(grepl("Emerge", Occupation), gpal(2)[1], "black")] %>%
+  .[, fontface := if_else(grepl("Emerge", Occupation), "bold", "plain")] %>%
+  .[, propNG := nNG / nIndividuals] %>%
+  .[nIndividuals > 0] %T>%
+  chart_data %>%
+  
+  grplot(aes(x = avgTaxableIncome, y = propNG)) +
+  ggtitle("Percentage of occupation negatively gearing property, 2015-16") +
+  theme(plot.title = element_text(size = 16, color = theGrey)) +
+  geom_point(aes(size = nIndividuals)) +
+  scale_x_continuous("Taxable Income",
+                     expand = c(0, 0),
+                     limits = c(0, 430e3),
+                     labels = function(x) paste0(dollar(x / 1000), "k")) + 
+  scale_y_continuous(expand = c(0, 0),
+                     limits = c(-0.005, 0.32),
+                     labels = function(x) paste0(round(x * 100), "%")) +
   geom_label_repel(aes(label = label),
                    fill = "white",
                    label.size = NA,
@@ -223,10 +321,12 @@ avgBenefit_by_Occupation[nPersons_by_Occupation, on = "Occupation", nomatch=0L] 
                    family = if (is_knitting()) "helvet" else "",
                    point.padding = 0.5,
                    box.padding = 1.5,
-                   na.rm = TRUE) + 
-  scale_y_continuous(labels = grattan_dollar, 
-                     limits = c(0, 15e3), 
-                     expand = c(0, 0.01))
+                   na.rm = TRUE)
+library(gridExtra)
+grid.newpage()
+g <- ggplotGrob(p_propoBenefits_vs_avgTaxableIncome)
+g$layout$l[g$layout$name == "title"] <- 1
+grid::grid.draw(g)
 @
 \end{figure}
 

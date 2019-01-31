@@ -65,6 +65,20 @@ copy(benefitsNG_by_Decile) %>%
 ```
 
 
+### Average taxable income, by age and gender, 2015
+
+```{r average-taxable-income-by-age-and-gender-2015}
+s1516[, .(avgTaxableIncome = mean(Taxable_Income)), keyby = .(age_range, Gender)] %>%
+  .[age_range_decoder, on = "age_range"] %>%
+  .[, Sex := if_else(Gender == 1, "Female", "Male")] %>%
+  ggplot(aes(x = age_range_description,
+             y = avgTaxableIncome,
+             group = Sex, 
+             color = Sex)) + 
+  geom_line() + 
+  scale_y_continuous(labels = function(x) paste0("$", prettyNum(x, big.mark = ",")))
+```
+
 
 
 
