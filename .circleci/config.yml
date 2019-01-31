@@ -6,7 +6,7 @@ jobs:
       - image: rocker/verse
         environment:
           NOT_CRAN: true
-          TRAVIS: true
+          TRAVIS: false
           
     parallelism: 3
     steps:
