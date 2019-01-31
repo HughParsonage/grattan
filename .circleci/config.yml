@@ -8,7 +8,7 @@ jobs:
           NOT_CRAN: true
           TRAVIS: false
           
-    parallelism: 3
+    parallelism: 4
     steps:
       - checkout
       - restore_cache:
@@ -30,6 +30,10 @@ jobs:
           command: |
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then R CMD build --no-build-vignettes . ; fi
             if [[ $CIRCLE_NODE_INDEX == "2" ]]; then R CMD check --ignore-vignettes --no-vignettes *tar.gz ; fi
+      - run:
+          no_output_timeout: 20m
+          command: |
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; Rscript -e 'devtools::test()'';  fi
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}-{{ checksum ".circleci/config.yml" }}
           paths:
