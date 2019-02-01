@@ -1,3 +1,12 @@
+---
+title: "2015-16 size of dividends credit"
+author: "Hugh Parsonage"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_document
+---
+
+
+```{r loadPackages}
 library(data.table)
 library(SampleFile1516)
 library(SampleFile1415)
@@ -7,12 +16,26 @@ library(magrittr)
 library(ggplot2)
 library(grattanCharts)
 library(scales)
+```
 
+```{r knitrOpts}
+library(knitr)
+opts_chunk$set(results = "hide")
+```
+
+```{r s1516}
 s1516 <- as.data.table(sample_file_1516)
-s1415 <- as.data.table(sample_file_1415)
 s1516[, Sex := c("Male", "Female")[Gender + 1L]]
+```
+
+```{r s1415}
+s1415 <- as.data.table(sample_file_1415)
+s1415[, Sex := c("Male", "Female")[Gender + 1L]]
+```
 
 
+
+```{r apply-no-franking-credit}
 s1516[, tax := income_tax(Taxable_Income, "2015-16", .dots.ATO = copy(s1516))]
 s1516[, tax_no_frnk := tax + (tax <= Dividends_franking_cr_amt) * Dividends_franking_cr_amt]
 s1516[, isAffected := tax_no_frnk > tax]
@@ -22,11 +45,20 @@ s1415[, tax := income_tax(Taxable_Income, "2014-15", .dots.ATO = copy(s1415))]
 s1415[, tax_no_frnk := tax + (tax <= Dividends_franking_cr_amt) * Dividends_franking_cr_amt]
 s1415[, isAffected := tax_no_frnk > tax]
 s1415[, delta := tax_no_frnk - tax]
+```
+
+```{r switch-results-on}
+opts_chunk$set(results = "markup")
+```
+
+```{r percentAffected-by-Sex}
 
 # Percent women:
-s1415[, .(isAffected = mean(isAffected)), keyby = "Gender"]
-s1516[, .(isAffected = mean(isAffected)), keyby = "Gender"]
+s1415[, .(isAffected = mean(isAffected)), keyby = "Sex"]
+s1516[, .(isAffected = mean(isAffected)), keyby = "Sex"]
+```
 
+```{r propGender-where-isAffected}
 # Affected and women
 s1516[(isAffected), mean(Gender)]
 # 0.5582023
@@ -34,12 +66,21 @@ s1516[(isAffected), mean(Gender)]
 # Affected and over 60
 s1415[(isAffected & Gender == 1), mean(age_range <= 2)]
 # 0.6792155
+```
 
+```{r misc-sizes-vs-Sex}
 # Average sizes by gender
 s1516[, .(avgAffected = mean(Dividends_franking_cr_amt)), keyby = "Gender"]
 s1516[Dividends_franking_cr_amt > 0, .(avgAffected = mean(Dividends_franking_cr_amt)), keyby = "Gender"]
+
+# Average size of dividends credit among those affected
 s1516[(isAffected), .(avgAffected = mean(Dividends_franking_cr_amt)), keyby = "Gender"]
+```
 
+```{r avgDelta-vs-Sex}
+# Average change in tax if Div_cr non-refundable
 s1516[, .(avgDelta = mean(delta)), keyby = "Sex"]
-s1516[(isAffected), .(avgDelta = mean(delta)), keyby = "Sex"]
 
+# Average change in tax if Div_cr non-refundable -- among those affected
+s1516[(isAffected), .(avgDelta = mean(delta)), keyby = "Sex"]
+```
