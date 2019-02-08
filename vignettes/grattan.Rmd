@@ -1298,7 +1298,7 @@ differential_uprates %>%
 **Differential uprating** is a method by which variables are uprated by a function of not only the time period and the type of variable, but of the variable's value too. To differentially uprate salary, use `differentially_uprate_wage`:
 
 ```{r, echo=TRUE}
-data_frame(wage = c(20e3, 50e3, 100e3)) %>%
+data.table(wage = c(20e3, 50e3, 100e3)) %>%
   mutate(ordinary = wage_inflator(wage, from_fy = "2012-13", to_fy = "2013-14"), 
          `change ordinary` = ordinary / wage - 1, 
          differential = differentially_uprate_wage(wage, from_fy = "2012-13", to_fy = "2013-14"), 
