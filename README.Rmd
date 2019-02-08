@@ -11,6 +11,8 @@ output:
 
 # grattan
 
+> Important temporary notice (2019-02-09): The vignettes do not run on pandoc v2.4 (or take a very long time). Please upgrade to v2.6 (2019-01-30) if building vignettes. You may need to modify the PATH or change the RSTUDIO_PANDOC env. var after installing.
+
 ```{r knitrOpts, include=FALSE}
 library(knitr)
 opts_chunk$set(dev = 'svg',
