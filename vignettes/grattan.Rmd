@@ -1421,7 +1421,7 @@ new_sample_file_1718 %>%
   kable
 ```
 
-```{r}
+```{r Avgerage-increase-in-tax-vs-Taxable-income-decile}
 library(ggplot2)
 new_sample_file_1718 %>%
   mutate(Taxable_Income_decile = ntile(Taxable_Income, 10)) %>%
@@ -1461,7 +1461,7 @@ sample_file_1314_projected <-
 ```
 
 
-```{r}
+```{r value_rel-vs-variable-by-the_source-flip}
 data.table(the_source = c("Actual",
                           "Projected"),
            n_persons = c(nrow(sample_file_1314) * 50,
@@ -1484,7 +1484,7 @@ data.table(the_source = c("Actual",
   theme(legend.position = "top")
 ```
 
-```{r}
+```{r t-test-conf-vs-taxstats-variables}
 conf_int_of_t.test <- function(variable){
   t_test <- t.test(sample_file_1314[[variable]],
                    sample_file_1314_projected[[variable]])
