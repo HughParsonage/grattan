@@ -1222,7 +1222,7 @@ AWOTE_Header <-
              n_max = 10,
              col_names = FALSE) %>%
   setDT %>%
-  setnames("X__1", "id") %>%
+  setnames(1L, "id") %>%
   .[1L, id := coalesce(id, "Description")] %>%
   transpose2 %>%
   .[, Sex := if_else(grepl("Persons", Description),
@@ -1268,7 +1268,7 @@ AWOTE1994_2011_Header <-
              n_max = 10,
              col_names = FALSE) %>%
   setDT %>%
-  setnames("X__1", "id") %>%
+  setnames(1L, "id") %>% 
   .[1L, id := coalesce(id, "Description")] %>%
   transpose2 %>%
   update_SeriesExcelDates %>%
