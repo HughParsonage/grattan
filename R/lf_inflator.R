@@ -11,7 +11,7 @@
 #' 
 #' If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{from_fy} is set to the previous financial year and \code{to_fy} to the current financial year, with a warning. Setting only one is an error.
 #' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.
-#' The internal data was updated on 2018-11-12 to 2018-09-01.
+#' The internal data was updated on 2019-02-08 to 2018-12-01.
 #' @param allow.projection Logical. Should projections be allowed?
 #' @param use.month An integer (corresponding to the output of \code{data.table::month}) representing the month of the series used for the inflation.
 #' @param forecast.series Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals.
@@ -188,31 +188,12 @@ lf_inflator_fy <- function(labour_force = 1,
       12L * (year(to_date) - year(last.date.in.series)) +
       month(to_date) - month(last.date.in.series)
     
-    switch(forecast.series, 
-           "mean" = {
-             forecasts <- 
-               gforecast(lf.indices[["obsValue"]], 
-                         h = months.ahead, 
-                         level = forecast.level) %>%
-               magrittr::use_series("mean") %>%
-               as.numeric 
-           }, 
-           "upper" = {
-             forecasts <- 
-               gforecast(lf.indices[["obsValue"]], 
-                         h = months.ahead, 
-                         level = forecast.level) %>%
-               magrittr::use_series("upper") %>%
-               as.numeric 
-           }, 
-           "lower" = {
-             forecasts <- 
-               gforecast(lf.indices[["obsValue"]], 
-                         h = months.ahead, 
-                         level = forecast.level) %>%
-               magrittr::use_series("lower") %>%
-               as.numeric
-           })
+    forecasts <- 
+      gforecast(lf.indices[["obsValue"]], 
+                h = months.ahead, 
+                level = forecast.level) %>%
+      .subset2(forecast.series) %>%
+      as.numeric 
     
     obsDate <- NULL
     lf.indices.new <- 
