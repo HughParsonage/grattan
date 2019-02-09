@@ -1,9 +1,10 @@
-pandoc: 2.3.1
+pandoc: '2.6'
 pkgdown: 1.3.0
 pkgdown_sha: ~
 articles:
   datatable-implementation: datatable-implementation.html
   grattan: grattan.html
   budget-2018: long-vignettes/budget-2018.html
+  '166': long-vignettes/issues/166.html
   v201515-taxstats: v201515-taxstats.html
 
