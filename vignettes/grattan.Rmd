@@ -3,7 +3,7 @@ title: "Grattan Institute"
 author: "Hugh Parsonage"
 date: "`r Sys.Date()`"
 output: 
-  rmarkdown::html_vignette:
+  rmarkdown::html_document:
     toc: true
 vignette: >
   %\VignetteIndexEntry{grattan}
@@ -17,6 +17,33 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+#### When memory needs to be monitored
+# if (grattanCharts::is_knitting()) {
+#   mem_usage_tempfile <- tempfile("mem")
+#   invisible(file.create("grattan-memory-usage.tsv"))
+# }
+# knitr::knit_hooks$set(do_mem = function(before) {
+#   if (before) {
+#     utils::Rprofmem(mem_usage_tempfile)
+#   } else {
+#     utils::Rprofmem(NULL)
+#     .mem_used <-
+#       profmem::readRprofmem(mem_usage_tempfile) %$%
+#       sum(as.double(bytes), na.rm = TRUE) %>%
+#       divide_by(1024^3) %>%
+#       round(1) %>%
+#       formatC(digits = 1, width = 4, format = "f")
+#     write(
+#       paste0(.mem_used,
+#              "\t",
+#              knitr::opts_current$get(name = "label")),
+#       file = "grattan-memory-usage.tsv",
+#       ncolumns = 1,
+#       append = TRUE)
+#   }
+# })
+# knitr::opts_chunk$set(do_mem = TRUE)
 ```
 
 ## Budget 2018
@@ -92,6 +119,13 @@ age_range_decoder <- as.data.table(age_range_decoder)
 
 ```{r load-grattan}
 library(grattan)
+```
+
+```{r weighted-mean}
+# Just an easy way to grab a bit of extra memory
+weighted.mean <- function(x, w) {
+  sum(as.double(x) * w) / sum(x)
+}
 ```
 
 
@@ -285,14 +319,24 @@ tax_delta <- function(bracket_number, rate_increase = -0.01) {
   
   new_tax <- 
     sample_file_2021 %>%
-    copy %>%
+    # memory is tight on e.g. Travis-CI
+    selector(cols = c("age_range",
+                      "Net_rent_amt",
+                      "Rep_frng_ben_amt",
+                      "Spouse_adjusted_taxable_inc", 
+                      "Net_fincl_invstmt_lss_amt",
+                      "Rptbl_Empr_spr_cont_amt", 
+                      "Taxable_Income", 
+                      "WEIGHT", 
+                      "tax_paid")) %>%
     .[, base_tax. := IncomeTax(Taxable_Income,
                               thresholds = c(0, 18200, 37000, 87000, 180e3),
                               rates = new_rates)] %>%
-    .[, medicare_levy. := medicare_levy(income = Taxable_Income, fy.year = "2019-20",
-                                       Spouse_income = Spouse_adjusted_taxable_inc,
-                                       sapto.eligible = (age_range <= 1),
-                                       family_status = if_else(Spouse_adjusted_taxable_inc > 0, "family", "individual"))] %>%
+    .[, medicare_levy. := medicare_levy(income = Taxable_Income,
+                                        fy.year = "2019-20",
+                                        Spouse_income = Spouse_adjusted_taxable_inc,
+                                        sapto.eligible = (age_range <= 1),
+                                        family_status = if_else(Spouse_adjusted_taxable_inc > 0, "family", "individual"))] %>%
     .[, lito. := lito(Taxable_Income, max_lito = 445, lito_taper = 0.015, min_bracket = 37000)] %>%
     .[, rebate_income := .ri(Taxable_Income,
                              Rptbl_Empr_spr_cont_amt = Rptbl_Empr_spr_cont_amt,
@@ -605,66 +649,55 @@ The capital gains discount applies to assets sold after more than 12 months' hol
 The tax on these capital gains totalled `r texNum(tax_on_CG$total, dollar = TRUE)` or `r texNum(tax_on_CG$avg, dollar = TRUE)` per individual with capital gains tax. 
 
 ```{r CG-incidence-by-age-descriptive-stats}
+sample_file <- as.data.table(sample_file)
 probCG_by_age <- 
-  sample_file %>%
-  group_by(age_range_description) %>%
-  summarise(probCG = mean(Net_CG_amt > 0))
+  sample_file[, .(probCG = mean(Net_CG_amt > 0)),
+              keyby = "age_range_description"]
 
 probCG_twenties <- 
-  sample_file %>%
-  filter(age_imp < 30) %$%
-  mean(Net_CG_amt > 0)
+  sample_file[age_imp < 30, mean(Net_CG_amt > 0)]
 
 probCG_65p <- 
-  sample_file %>%
-  filter(age_imp >= 65) %$%
-  mean(Net_CG_amt > 0)
+  sample_file[age_imp >= 65, mean(Net_CG_amt > 0)]
 
 avg_marginal_rate_CG <- 
-  sample_file %>%
-  filter(Net_CG_amt > 0) %>%
-  mutate(marginal_rate = income_tax(Taxable_Income + 1, fy.year = FY.YEAR) - income_tax(Taxable_Income, fy.year = FY.YEAR)) %$% 
-  mean(marginal_rate)
+  sample_file[Net_CG_amt > 0, .(Taxable_Income)] %>%
+  .[, mean(income_tax(Taxable_Income + 1, fy.year = FY.YEAR) - income_tax(Taxable_Income, fy.year = FY.YEAR))]
 
 avg_marginal_rate_CG_weighted_by_CG <- 
-  sample_file %>%
-  filter(Net_CG_amt > 0) %>%
-  mutate(marginal_rate = income_tax(Taxable_Income + 1, fy.year = FY.YEAR) - income_tax(Taxable_Income, fy.year = FY.YEAR)) %$% 
-  weighted.mean(marginal_rate, Net_CG_amt)
+  sample_file[Net_CG_amt > 0, .(Net_CG_amt, Taxable_Income)] %>%
+  .[, marginal_rate := income_tax(Taxable_Income + 1, fy.year = FY.YEAR) - income_tax(Taxable_Income, fy.year = FY.YEAR)] %>%
+  .[, weighted.mean(marginal_rate, Net_CG_amt)]
 
 avg_marginal_rate_b4_CG <- 
-  sample_file %>%
-  filter(Net_CG_amt > 0, 
-         age_imp >= 20) %>%
-  mutate(Taxable_Income_b4_CG = pmaxC(Taxable_Income - Net_CG_amt, 0),
-         marginal_rate_b4_CG = income_tax(Taxable_Income_b4_CG + 1, fy.year = FY.YEAR) - income_tax(Taxable_Income_b4_CG, fy.year = FY.YEAR)) %>%
-  mutate(is_in_workforce = between(age_imp, 20, 65)) %>%
-  group_by(is_in_workforce) %>%
-  summarise(avg_marginal_rate_weighted = weighted.mean(marginal_rate_b4_CG, Net_CG_amt), 
-            avg_marginal_Rate = mean(marginal_rate_b4_CG))
+  sample_file[Net_CG_amt > 0 & age_imp >= 20] %>%
+  .[, Taxable_Income_b4_CG := pmaxC(Taxable_Income - Net_CG_amt, 0)] %>%
+  .[, marginal_rate_b4_CG := income_tax(Taxable_Income_b4_CG + 1, fy.year = FY.YEAR) - income_tax(Taxable_Income_b4_CG, fy.year = FY.YEAR)] %>%
+  .[, is_in_workforce := between(age_imp, 20, 65)] %>%
+  .[, .(avg_marginal_rate_weighted = weighted.mean(marginal_rate_b4_CG, Net_CG_amt), 
+        avg_marginal_Rate = mean(marginal_rate_b4_CG)),
+    keyby = "is_in_workforce"]
 
-prop_no_CGT_discount <- 
-  sample_file %>%
-  mutate(apparent_discount = 1 - Net_CG_amt / Tot_CY_CG_amt) %>%
-  filter(Tot_CY_CG_amt > 0) %$%
-  mean(apparent_discount == 0)
+.prob_no_CGT_discounts <- 
+  sample_file[Tot_CY_CG_amt > 0, .(Net_CG_amt, Tot_CY_CG_amt)] %>%
+  .[, apparent_discount := 1 - Net_CG_amt / Tot_CY_CG_amt] %>%
+  .[, apparent_discount0 := apparent_discount == 0] %>%
+  .[, apparent_discount1 := apparent_discount == 1] %>%
+  .[, apparent_discount50 := apparent_discount %between% c(0.45, 0.55)] %>%
+  .[, lapply(.SD, mean),
+    .SDcols = c("apparent_discount0",
+                "apparent_discount50",
+                "apparent_discount1")]
 
-prop_100pc_CGT_discount <- 
-  sample_file %>%
-  mutate(apparent_discount = 1 - Net_CG_amt / Tot_CY_CG_amt) %>%
-  filter(Tot_CY_CG_amt > 0) %$%
-  mean(apparent_discount == 1)
+prop_no_CGT_discount <- .prob_no_CGT_discounts[["apparent_discount0"]]
 
-prop_50pc_CGT_discount <- 
-  sample_file %>%
-  mutate(apparent_discount = 1 - Net_CG_amt / Tot_CY_CG_amt) %>%
-  filter(Tot_CY_CG_amt > 0) %$%
-  mean(between(apparent_discount, 0.45, 0.55))
+prop_100pc_CGT_discount <- .prob_no_CGT_discounts[["apparent_discount1"]]
+
+prop_50pc_CGT_discount <- .prob_no_CGT_discounts[["apparent_discount50"]]
 
 prop_no_CGT_discount_by_val <- 
-  sample_file %>%
-  mutate(apparent_discount = 1 - Net_CG_amt / Tot_CY_CG_amt) %>%
-  filter(Tot_CY_CG_amt > 0) %$%
+  sample_file[Tot_CY_CG_amt > 0, .(Net_CG_amt, Tot_CY_CG_amt)] %>%
+  .[, apparent_discount := 1 - Net_CG_amt / Tot_CY_CG_amt] %$%
   weighted.mean(apparent_discount == 0, Tot_CY_CG_amt)
 
 cgt_ratio_res <- 50
@@ -672,13 +705,13 @@ cgt_ratio_res <- 50
 
 ```{r Ratio-Net-CG-to-Tot-CG}
 sample_file %>%
-  select(Tot_CY_CG_amt, Net_CG_amt, WEIGHT) %>%
-  filter(Tot_CY_CG_amt > 0) %>%
-  mutate(apparent_discount = Net_CG_amt / Tot_CY_CG_amt) %>%
-  mutate(apparent_discount_round = round(apparent_discount * cgt_ratio_res) / cgt_ratio_res) %>%
-  group_by(apparent_discount_round) %>%
-  summarise(n_taxpayers = sum(WEIGHT), 
-            n_taxpayers_by_val = sum(as.double(WEIGHT * Tot_CY_CG_amt))) %>%
+  selector(Tot_CY_CG_amt, Net_CG_amt, WEIGHT) %>%
+  .[Tot_CY_CG_amt > 0] %>%
+  .[, apparent_discount := Net_CG_amt / Tot_CY_CG_amt] %>%
+  .[, apparent_discount_round := round(apparent_discount * cgt_ratio_res) / cgt_ratio_res] %>%
+  .[, keyby = .(apparent_discount_round), 
+    .(n_taxpayers = sum(WEIGHT), 
+      n_taxpayers_by_val = sum(as.double(WEIGHT * Tot_CY_CG_amt)))] %>%
   ggplot(aes(x = apparent_discount_round, y = n_taxpayers_by_val)) +
   xlab("Ratio of Net capital gains to Total capital gains") +
   geom_bar(stat = "identity", width = 1/cgt_ratio_res) + 
@@ -731,47 +764,61 @@ sample_file %>%
 ```
 
 ```{r CG-incidence-by-age-by-fy}
+
+# faster than ifelseing over the whole table
+desc2min_age <- function(x) {
+  if (grepl("to", x)) { 
+    sub("^([0-9]{2}).*$", "\\1", x) 
+  } else if (grepl("70", x)) {
+    "70" 
+  } else {
+    "15"
+  }
+}
+
 sample_files_all %>%
-  select(age_range, Net_CG_amt, fy.year) %>%
+  selector(age_range, Net_CG_amt, fy.year, shallow = TRUE) %>%
   merge(age_range_decoder, by = "age_range") %>%
-  group_by(age_range_description) %>%
-  mutate(min_age = if_else(grepl("to", age_range_description), 
-                           as.numeric(gsub("^([0-9]{2}).*$", "\\1", age_range_description)), 
-                           if_else(grepl("70", age_range_description),
-                                   70, 
-                                   15)),
-         max_age = min_age + 5, 
-         age_imp = runif(n(), min_age, max_age)) %>%
-  select(-min_age, -max_age) %>%
-  mutate(last_fy = fy.year == max(fy.year)) %>%
-  mutate(`Tax year` = factor(fy.year)) %>%
-  group_by(`Tax year`) %>%
-  mutate(label = if_else(age_imp == max(age_imp), fy.year, NA_character_),
-         is_CG = Net_CG_amt > 0,
-         label.y = mean(is_CG[age_imp > 71]), 
-         Age = age_imp) %>%
-         {
-           
-           ggplot(., aes(x = Age, 
-                         y = as.numeric(is_CG), 
-                         color = `Tax year`, 
-                         group = `Tax year`)) + 
-             scale_y_continuous(label = percent) + 
-             ggtitle("Incidence of capital gains") +
-             scale_color_viridis(discrete = TRUE) + 
-             geom_line(stat = "smooth", method = "auto", se = FALSE, size = 1.2) +
-             geom_label_repel(aes(label = label, y = label.y),
-                              fill = NA,
-                              nudge_x = 1,
-                              hjust = 0, 
-                              vjust = 0, 
-                              fontface = "bold", 
-                              na.rm = TRUE) + 
-             annotate("blank", 
-                      x = 80, y = 0) +
-             theme_dark() + 
-             theme(axis.title.y = element_blank())
-         }
+  .[, min_age := desc2min_age(.BY[[1L]]),
+    keyby = "age_range_description"] %>%
+  .[, min_age := as.double(min_age)] %>%
+  .[, max_age := min_age + 5] %>%
+  .[, age_imp := rep_len(seq(from = .BY[["min_age"]],
+                             to = .BY[["max_age"]],
+                             # must be reasonably high to capture (infreq.)
+                             # capital gains events
+                             length.out = 2000),
+                         .N),
+    keyby = c("min_age", "max_age")] %>%
+  unique(by = c("fy.year", "age_imp")) %>%
+  .[, last_fy := fy.year == max(fy.year)] %>%
+  .[, Tax_year := as.character(fy.year)] %>% 
+  .[, is_CG := as.double(Net_CG_amt > 0)] %>%
+  .[, y := fitted(gam(is_CG ~ s(age_imp, bs = "cs"), data = .SD)), keyby = "Tax_year"] %>%
+  .[, Age := round(age_imp, 1)] %>%
+  .[, .(y = mean(y)), keyby = .(Tax_year, Age)] %>%
+  .[, label := if_else(Age == max(Age), Tax_year, NA_character_), keyby = "Tax_year"] %>%
+  .[] %>%
+  ggplot(aes(x = Age, 
+             y = y, 
+             color = Tax_year, 
+             group = Tax_year)) + 
+  scale_y_continuous(label = percent) + 
+  ggtitle("Incidence of capital gains") +
+  scale_color_viridis("Tax year", discrete = TRUE) + 
+  geom_line(size = 1.2) +
+  # geom_line(stat = "smooth", method = "auto", se = FALSE, size = 1.2) +
+  geom_label_repel(aes(label = label),
+                   fill = NA,
+                   nudge_x = 1,
+                   xlim = c(75, NA),
+                   hjust = 0, 
+                   vjust = 0, 
+                   fontface = "bold", 
+                   na.rm = TRUE) + 
+  geom_blank(aes(x = 80, y = 0)) +
+  theme_dark() + 
+  theme(axis.title.y = element_blank())
 ```
 
 ```{r CGT-by-age-weighted-ntile}
@@ -1331,19 +1378,6 @@ To obtain these results (say for 2017-18)
 ```{r}
 library(grattan)
 library(data.table)
-if (requireNamespace("taxstats", quietly = TRUE)){
-  library(taxstats)
-  sample_files_all <- get_sample_files_all()
-} else {
-  templib <- tempfile()
-  hutils::provide.dir(templib)
-  install.packages("taxstats",
-                   lib = templib,
-                   repos = "https://hughparsonage.github.io/drat/",
-                   type = "source")
-  library("taxstats", lib.loc = templib)
-  sample_files_all <- get_sample_files_all()
-}
 library(magrittr)
 #' dollar scales
 #' 
