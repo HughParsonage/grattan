@@ -24,7 +24,7 @@ install.packages("grattan")
 library(grattan)
 ```
 
-    ## Last change: lf_inflator.R at 2019-02-08 21:50:28 (6 hours ago).
+    ## Last change: sysdata.rda at 2019-02-09 16:11:51 (2 mins ago).
 
 `income_tax`
 ------------
@@ -190,12 +190,15 @@ NEWS
     faster when `length(age)` is large.
 -   `income_tax` now emits a warning when both age and `.dots.ATO` are
     provided, indicating that `age` will be ignored.
+-   The data has been updated to 2019-02-09.
 
 ### Internal
 
 -   `mutate_ntile` and `weighted_ntile` now use the `hutils`
     equivalents. This broke 3 unit tests because of the specific
     phrasing of some error messages.
+-   The vignette requires pandoc &gt; 2.4. Some chunks have been
+    refactored to avoid excess memory usage.
 
 1.7.0.0
 -------

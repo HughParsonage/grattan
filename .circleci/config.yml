@@ -22,21 +22,21 @@ jobs:
       - run:
           no_output_timeout: 20m
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then Rscript -e 'dir.create("~/.R");file.create(mv <- "~/.R/Makevars");writeLines("CXXFLAGS=-O3", mv)'; fi
-            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then R CMD build --no-build-vignettes . ; fi
-            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then R CMD check --ignore-vignettes --no-vignettes *tar.gz ; fi
+            if [[ $CIRCLE_NODE_INDEX == "11" ]]; then Rscript -e 'dir.create("~/.R");file.create(mv <- "~/.R/Makevars");writeLines("CXXFLAGS=-O3", mv)'; fi
+            if [[ $CIRCLE_NODE_INDEX == "11" ]]; then R CMD build . ; fi
+            if [[ $CIRCLE_NODE_INDEX == "11" ]]; then R CMD check --ignore-vignettes --no-vignettes *tar.gz ; fi
       - run:
           no_output_timeout: 20m
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then R CMD build --no-build-vignettes . ; fi
-            if [[ $CIRCLE_NODE_INDEX == "2" ]]; then R CMD check --ignore-vignettes --no-vignettes *tar.gz ; fi
+            if [[ $CIRCLE_NODE_INDEX == "21" ]]; then R CMD build --no-build-vignettes . ; fi
+            if [[ $CIRCLE_NODE_INDEX == "21" ]]; then R CMD check --ignore-vignettes --no-vignettes *tar.gz ; fi
       - run:
           no_output_timeout: 20m
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then Rscript -e "devtools::install()" ; fi
-            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then R -e 'library(grattan);c(age_pension(fy.year = "2015-16", has_partner = FALSE), 20664.80)';  fi
-            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then R -e 'library(grattan);testthat::expect_equal(age_pension(fy.year = "2015-16", has_partner = FALSE), 20664.80)';  fi
-            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then R -e 'devtools::test(filter = "pension")';  fi
+            if [[ $CIRCLE_NODE_INDEX == "31" ]]; then Rscript -e "devtools::install()" ; fi
+            if [[ $CIRCLE_NODE_INDEX == "31" ]]; then R -e 'library(grattan);c(age_pension(fy.year = "2015-16", has_partner = FALSE), 20664.80)';  fi
+            if [[ $CIRCLE_NODE_INDEX == "31" ]]; then R -e 'library(grattan);testthat::expect_equal(age_pension(fy.year = "2015-16", has_partner = FALSE), 20664.80)';  fi
+            if [[ $CIRCLE_NODE_INDEX == "31" ]]; then R -e 'devtools::test(filter = "pension")';  fi
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}-{{ checksum ".circleci/config.yml" }}
           paths:
@@ -45,16 +45,12 @@ jobs:
           no_output_timeout: 20m
           command: |
             mkdir /root/main/artifacts
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then Rscript -e "devtools::install()" ; fi
-            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then Rscript -e "knitr::knit('vignettes/grattan.Rmd')" ; fi
+            if [[ $CIRCLE_NODE_INDEX == "9" ]]; then Rscript -e "devtools::install()" ; fi
+            if [[ $CIRCLE_NODE_INDEX == "9" ]]; then Rscript -e "knitr::knit('vignettes/grattan.Rmd')" ; fi
             if [[ $CIRCLE_NODE_INDEX == "9" ]]; then Rscript -e "tryCatch(covr::codecov(line_exclusions = c('R/zzz.R', 'R/install_taxstats.R', 'R/youth_unemployment.R', 'R/utils-test.R'), quiet = FALSE), error = function(e) devtools::test())" ; fi
       - run:
           name: Check R CMD check failures
           command: |
-            if [[ $CIRCLE_NODE_INDEX != "0" ]]; then Rscript -e "cat(devtools::check_failures('./grattan.Rcheck'), sep = '\n');cat('\n')" ; fi
-            if [[ $CIRCLE_NODE_INDEX != "0" ]]; then Rscript -e "if (length(res <- devtools::check_failures('./grattan.Rcheck', note=FALSE))) stop(res)" ; fi
-      - store_test_results:
-          path: ./grattan.Rcheck/tests
-      - store_artifacts:
-          path: /root/main/artifacts/
-          destination: artifacts
+            if [[ $CIRCLE_NODE_INDEX == "10" ]]; then Rscript -e "if (dir.exists('./grattan.Rcheck')) cat(devtools::check_failures('./grattan.Rcheck'), sep = '\n');cat('\n')" ; fi
+            if [[ $CIRCLE_NODE_INDEX == "10" ]]; then Rscript -e "if (dir.exists('./grattan.Rcheck') && length(res <- devtools::check_failures('./grattan.Rcheck', note=FALSE))) stop(res)" ; fi
+

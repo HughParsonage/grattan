@@ -62,6 +62,9 @@
       <a href="../articles/long-vignettes/budget-2018.html">Budget 2018 modelling</a>
     </li>
     <li>
+      <a href="../articles/long-vignettes/issues/166.html">2015-16 size of dividends credit</a>
+    </li>
+    <li>
       <a href="../articles/v201515-taxstats.html">2015-16 taxstats miscellany</a>
     </li>
   </ul>
@@ -92,7 +95,7 @@
       <h1>2015-16 taxstats miscellany</h1>
                         <h4 class="author">Hugh Parsonage</h4>
             
-            <h4 class="date">2019-01-05</h4>
+            <h4 class="date">2019-02-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/HughParsonage/grattan/blob/master/vignettes/v201515-taxstats.Rmd"><code>vignettes/v201515-taxstats.Rmd</code></a></small>
       <div class="hidden name"><code>v201515-taxstats.Rmd</code></div>
@@ -101,42 +104,42 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(data.table)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(hutils)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(magrittr)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(taxstats)</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(taxstats1516)</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(grattan)</a></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">s1516 &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="st">  </span><span class="kw">as.data.table</span>(sample_file_<span class="dv">1516</span>_synth) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="st">  </span><span class="kw">setkey</span>(Taxable_Income) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/hutils/topics/mutate_ntile">mutate_ntile</a></span>(<span class="st">"Taxable_Income"</span>, <span class="dt">n =</span> 100L) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/hutils/topics/mutate_ntile">mutate_ntile</a></span>(<span class="st">"Taxable_Income"</span>, <span class="dt">n =</span> 10L) </a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">s1516[, tax <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="../reference/income_tax.html">income_tax</a></span>(Taxable_Income, <span class="st">"2015-16"</span>, <span class="dt">.dots.ATO =</span> .SD)]</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(data.table)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(hutils)</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(magrittr)</a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(taxstats)</a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(taxstats1516)</a>
+<a class="sourceLine" id="cb1-7" title="7"></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(grattan)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">s1516 &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="st">  </span><span class="kw">as.data.table</span>(sample_file_<span class="dv">1516</span>_synth) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="st">  </span><span class="kw">setkey</span>(Taxable_Income) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/hutils/topics/mutate_ntile">mutate_ntile</a></span>(<span class="st">"Taxable_Income"</span>, <span class="dt">n =</span> 100L) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/hutils/topics/mutate_ntile">mutate_ntile</a></span>(<span class="st">"Taxable_Income"</span>, <span class="dt">n =</span> 10L) </a>
+<a class="sourceLine" id="cb2-6" title="6">s1516[, tax <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="../reference/income_tax.html">income_tax</a></span>(Taxable_Income, <span class="st">"2015-16"</span>, <span class="dt">.dots.ATO =</span> .SD)]</a></code></pre></div>
 <div id="negative-gearing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#negative-gearing" class="anchor"></a>Negative gearing</h2>
 <div id="tax-benefits" class="section level3">
 <h3 class="hasAnchor">
 <a href="#tax-benefits" class="anchor"></a>Tax benefits</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">s1516[, taxNoNG <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="../reference/income_tax.html">income_tax</a></span>(Taxable_Income <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/pminC.html">pminC</a></span>(Net_rent_amt, <span class="dv">0</span>), </a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">                              <span class="dt">fy.year =</span> <span class="st">"2015-16"</span>,</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">                              <span class="dt">.dots.ATO =</span> .SD)]</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">s1516[, benefit_due_NG <span class="op">:</span><span class="er">=</span><span class="st"> </span>taxNoNG <span class="op">-</span><span class="st"> </span>tax]</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">s1516[, taxNoNG <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="../reference/income_tax.html">income_tax</a></span>(Taxable_Income <span class="op">-</span><span class="st"> </span><span class="kw"><a href="../reference/pminC.html">pminC</a></span>(Net_rent_amt, <span class="dv">0</span>), </a>
+<a class="sourceLine" id="cb3-2" title="2">                              <span class="dt">fy.year =</span> <span class="st">"2015-16"</span>,</a>
+<a class="sourceLine" id="cb3-3" title="3">                              <span class="dt">.dots.ATO =</span> .SD)]</a>
+<a class="sourceLine" id="cb3-4" title="4">s1516[, benefit_due_NG <span class="op">:</span><span class="er">=</span><span class="st"> </span>taxNoNG <span class="op">-</span><span class="st"> </span>tax]</a></code></pre></div>
 <div id="by-decile" class="section level4">
 <h4 class="hasAnchor">
 <a href="#by-decile" class="anchor"></a>by decile</h4>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">benefitsNG_by_Decile &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span>s1516[, .(<span class="dt">avgBenefitNG =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(benefit_due_NG)), keyby =<span class="st"> "Taxable_IncomeDecile"</span>]</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="kw">copy</span>(benefitsNG_by_Decile) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="st">  </span><span class="kw">setnames</span>(<span class="st">"Taxable_IncomeDecile"</span>, <span class="st">"Taxable Income Decile"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="st">  </span>.[, Share <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">round</a></span>(<span class="dv">100</span> <span class="op">*</span><span class="st"> </span>avgBenefitNG <span class="op">/</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(avgBenefitNG)), <span class="st">"%"</span>)] <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="st">  </span>.[, avgBenefitNG <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">round</a></span>(avgBenefitNG, <span class="dv">-2</span>)] <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="st">  </span><span class="kw">setnames</span>(<span class="st">"avgBenefitNG"</span>, <span class="st">"Average benefit from NG / $"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="st">  </span><span class="kw">kable</span>(<span class="dt">align =</span> <span class="st">"rrr"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">benefitsNG_by_Decile &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="st">  </span>s1516[, .(<span class="dt">avgBenefitNG =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(benefit_due_NG)), keyby =<span class="st"> "Taxable_IncomeDecile"</span>]</a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="kw">copy</span>(benefitsNG_by_Decile) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="st">  </span><span class="kw">setnames</span>(<span class="st">"Taxable_IncomeDecile"</span>, <span class="st">"Taxable Income Decile"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="st">  </span>.[, Share <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">round</a></span>(<span class="dv">100</span> <span class="op">*</span><span class="st"> </span>avgBenefitNG <span class="op">/</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(avgBenefitNG)), <span class="st">"%"</span>)] <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="st">  </span>.[, avgBenefitNG <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">round</a></span>(avgBenefitNG, <span class="dv">-2</span>)] <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="st">  </span><span class="kw">setnames</span>(<span class="st">"avgBenefitNG"</span>, <span class="st">"Average benefit from NG / $"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="st">  </span><span class="kw">kable</span>(<span class="dt">align =</span> <span class="st">"rrr"</span>)</a></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="right">Taxable Income Decile</th>
@@ -197,6 +200,20 @@
 </tbody>
 </table>
 </div>
+</div>
+<div id="average-taxable-income-by-age-and-gender-2015" class="section level3">
+<h3 class="hasAnchor">
+<a href="#average-taxable-income-by-age-and-gender-2015" class="anchor"></a>Average taxable income, by age and gender, 2015</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">s1516[, .(<span class="dt">avgTaxableIncome =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(Taxable_Income)), keyby =<span class="st"> </span>.(age_range, Gender)] <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="st">  </span>.[age_range_decoder, on =<span class="st"> "age_range"</span>] <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="st">  </span>.[, Sex <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">if_else</span>(Gender <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="st">"Female"</span>, <span class="st">"Male"</span>)] <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> age_range_description,</a>
+<a class="sourceLine" id="cb5-5" title="5">             <span class="dt">y =</span> avgTaxableIncome,</a>
+<a class="sourceLine" id="cb5-6" title="6">             <span class="dt">group =</span> Sex, </a>
+<a class="sourceLine" id="cb5-7" title="7">             <span class="dt">color =</span> Sex)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> <span class="cf">function</span>(x) <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="st">"$"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/formatc">prettyNum</a></span>(x, <span class="dt">big.mark =</span> <span class="st">","</span>)))</a></code></pre></div>
+<p><img src="v201515-taxstats_files/figure-html/average-taxable-income-by-age-and-gender-2015-1.png" width="700"></p>
 </div>
 </div>
   </div>
