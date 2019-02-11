@@ -147,6 +147,11 @@ autonamed_list <- function(...) {
   setNames(list(...), nm = eval(substitute(alist(...))))
 }
 
+get_qtr <- function(x) {
+  stopifnot(is.Date(x))
+  {month(x) - 1L} %/% 3L + 1L
+}
+
 
 
 
