@@ -39,6 +39,7 @@ jobs:
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then R -e 'library(data.table);setDTthreads(1L);library(grattan);testthat::expect_equal(age_pension(fy.year = "2015-16", has_partner = FALSE), 20664.80)';  fi
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then R -e 'library(data.table);setDTthreads(2L);devtools::test(filter = "pension")';  fi
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then R -e 'library(data.table);setDTthreads(1L);devtools::test(filter = "pension")';  fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then R -e 'knitr::knit("vignettes/long-vignettes/budget-2018.Rmd")';  fi
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}-{{ checksum ".circleci/config.yml" }}
           paths:
@@ -53,6 +54,6 @@ jobs:
       - run:
           name: Check R CMD check failures
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "10" ]]; then Rscript -e "if (dir.exists('./grattan.Rcheck')) cat(devtools::check_failures('./grattan.Rcheck'), sep = '\n');cat('\n')" ; fi
-            if [[ $CIRCLE_NODE_INDEX == "10" ]]; then Rscript -e "if (dir.exists('./grattan.Rcheck') && length(res <- devtools::check_failures('./grattan.Rcheck', note=FALSE))) stop(res)" ; fi
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then Rscript -e "if (dir.exists('./grattan.Rcheck')) cat(devtools::check_failures('./grattan.Rcheck'), sep = '\n');cat('\n')" ; fi
+            if [[ $CIRCLE_NODE_INDEX == "0" ]]; then Rscript -e "if (dir.exists('./grattan.Rcheck') && length(res <- devtools::check_failures('./grattan.Rcheck', note=FALSE))) stop(res)" ; fi
 
