@@ -152,6 +152,8 @@ get_qtr <- function(x) {
   {month(x) - 1L} %/% 3L + 1L
 }
 
-
+hasntName <- function(x, name) {
+  match(name, names(x), nomatch = 0L) == 0L
+}
 
 
