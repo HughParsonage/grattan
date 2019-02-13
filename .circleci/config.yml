@@ -33,10 +33,10 @@ jobs:
       - run:
           no_output_timeout: 20m
           command: |
-            if [[ $CIRCLE_NODE_INDEX == "31" ]]; then Rscript -e "devtools::install()" ; fi
-            if [[ $CIRCLE_NODE_INDEX == "31" ]]; then R -e 'library(grattan);c(age_pension(fy.year = "2015-16", has_partner = FALSE), 20664.80)';  fi
-            if [[ $CIRCLE_NODE_INDEX == "31" ]]; then R -e 'library(grattan);testthat::expect_equal(age_pension(fy.year = "2015-16", has_partner = FALSE), 20664.80)';  fi
-            if [[ $CIRCLE_NODE_INDEX == "31" ]]; then R -e 'devtools::test(filter = "pension")';  fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then Rscript -e "devtools::install()" ; fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then R -e 'library(data.table);setDTthreads(1L);library(grattan);c(age_pension(fy.year = "2015-16", has_partner = FALSE), 20664.80)';  fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then R -e 'library(data.table);setDTthreads(1L);library(grattan);testthat::expect_equal(age_pension(fy.year = "2015-16", has_partner = FALSE), 20664.80)';  fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then R -e 'library(data.table);setDTthreads(1L);devtools::test(filter = "pension")';  fi
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}-{{ checksum ".circleci/config.yml" }}
           paths:
