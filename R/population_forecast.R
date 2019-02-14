@@ -1,7 +1,8 @@
 
 population_forecast <- function(to_year = NULL,
                                 YOBs = NULL,
-                                include_tbl = FALSE) {
+                                include_tbl = FALSE,
+                                do_log = FALSE) {
   if (is.null(to_year)) {
     to_year <- year(Sys.Date()) + 1L
     message("`to_year` is missing, so using `to_year = ", to_year, "`.")
@@ -18,20 +19,24 @@ population_forecast <- function(to_year = NULL,
   h <- 0L
   forecast_yob1 <- function(v, dates) {
     .ts <- 
-      ts(v,
+      ts(if (do_log) log(v + 1) else v,
          frequency = 4,
          start = c(min(year(dates)), 
                    first_qtr))
     
-    h <<- 4L * (to_year - max(year(dates))) - (4L - last_qtr)
-    k <<- h
-    the_forecast <<- forecast::forecast(v, h = h, level = 95)
+    h <- 4L * (to_year - max(year(dates))) - (4L - last_qtr)
+    the_forecast <- forecast::forecast(.ts, h = h, level = 95)
     
+    the_y <- as.numeric(the_forecast[["mean"]])
     
-    list(Dates = seq.Date(from = max(dates),
+    list(Date = seq.Date(from = max(dates),
                           by = "3 months",
                           length.out = h + 1L)[-1L],
-         f_m = as.integer(the_forecast[["mean"]]))
+         Population = as.integer(if (do_log) {
+           exp(the_y) - 1 
+         } else {
+           the_y
+         }))
   }
   if (!is.null(YOBs)) {
     DT <- DT[YOB %in% YOBs]
@@ -45,7 +50,7 @@ population_forecast <- function(to_year = NULL,
   
   if (include_tbl) {
     rbindlist(list(DT[, .(YOB, Date, Population = Value, isForecast = FALSE)], 
-                   out[, .(YOB, Date = Dates, Population = f_m, isForecast = TRUE)]),
+                   out[, .(YOB, Date, Population, isForecast = TRUE)]),
               use.names = TRUE, 
               fill = TRUE) %>%
       .[]
