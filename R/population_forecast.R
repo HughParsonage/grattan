@@ -30,8 +30,8 @@ population_forecast <- function(to_year = NULL,
     the_y <- as.numeric(the_forecast[["mean"]])
     
     list(Date = seq.Date(from = max(dates),
-                          by = "3 months",
-                          length.out = h + 1L)[-1L],
+                         by = "3 months",
+                         length.out = h + 1L)[-1L],
          Population = as.integer(if (do_log) {
            exp(the_y) - 1 
          } else {

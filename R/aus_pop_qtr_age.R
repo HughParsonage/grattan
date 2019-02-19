@@ -85,3 +85,15 @@ aus_pop_qtr_age <- function(date = NULL, age = NULL, tbl = FALSE, roll = TRUE, r
     return(out[["Value"]])
   }
 }
+
+aus_pop_fy_age <- function(fy = NULL, age = NULL, tbl = FALSE) {
+  checkTF(tbl)
+  if (is.null(fy) && is.null(age) && !tbl) {
+    DT <- aus_pop_by_yearqtr
+    DT[, c("Year", "Qtr") := lapply(tstrsplit(obsTime, split = "-Q", fixed = TRUE), as.integer)]
+    
+    
+  }
+}
+
+

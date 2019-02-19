@@ -338,3 +338,6 @@ expr	time	Date
 "cpi_inflator(from_fy = ""2014-15"", to_fy = ""2015-16"")"	5990699	2019-02-17
 "wage_inflator(from_fy = ""2014-15"", to_fy = ""2015-16"")"	1471246	2019-02-17
 "lf_inflator_fy(from_fy = ""2014-15"", to_fy = ""2015-16"")"	1285722	2019-02-17
+"cpi_inflator(from_fy = ""2014-15"", to_fy = ""2015-16"")"	3821628	2019-02-19
+"wage_inflator(from_fy = ""2014-15"", to_fy = ""2015-16"")"	1437214	2019-02-19
+"lf_inflator_fy(from_fy = ""2014-15"", to_fy = ""2015-16"")"	1229402	2019-02-19

@@ -21,6 +21,10 @@ unselect_ <- function(.data, .dots) {
   !(x %in% y)
 }
 
+any_notin <- function(x, y) {
+  anyNA(match(x, y))
+}
+
 anyIntersection <- function(x, y) {
   max(match(x, y, nomatch = 0L)) &&
     max(match(y, x, nomatch = 0L))
