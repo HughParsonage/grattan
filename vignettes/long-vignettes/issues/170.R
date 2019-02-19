@@ -86,8 +86,8 @@ nTaxpayers_by_fy_age_range[aus_pop_by_fy_age_range,
   setkey(fy_year, Age) %>%
   .[, nTaxpayers := prettyNum(nTaxpayers, big.mark = ",")] %>%
   .[, Population := prettyNum(Population, big.mark = ",")] %>%
- 
   .[, lapply(.SD, format_numbers)] %>%
+  set_cols_first(key(.)) %>%
   kable(align = "r")
 
 nTaxpayers_by_fy_age_range[aus_pop_by_fy_age_range,
@@ -105,6 +105,20 @@ nTaxpayers_by_fy_age_range[aus_pop_by_fy_age_range,
     .(Age, fy_year, P)] %>%
   dcast(Age ~ fy_year, value.var = "P") %>%
   kable(align = "r")
+
+nTaxpayers_by_fy_age_range[aus_pop_by_fy_age_range,
+                           on = c("fy_year", "age_range"),
+                           nomatch = 0L] %>%
+  .[, P := nTaxpayers / Population] %>%
+  .[, Year := fy2yr(fy_year)] %>%
+  .[age_range_decoder, on = "age_range"] %>%
+  ggplot(aes(x = Year, 
+             y = P,
+             group = age_range_description, 
+             color = age_range_description)) + 
+  geom_line(size = 1.4) + 
+  theme_dark() + 
+  scale_y_continuous(labels = format_numbers)
 
 
 
