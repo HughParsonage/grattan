@@ -20,7 +20,7 @@ jobs:
       - run:
           command: |
             Rscript -e "devtools::install_deps(dependencies = TRUE)"
-            Rscript -e "install.packages('remotes', repos = 'https://cran.rstudio.com')"
+            Rscript -e "install.packages(c('remotes', 'hutilscpp'), repos = 'https://cran.rstudio.com', quiet = TRUE)"
             Rscript -e "remotes::install_github('hughparsonage/hutilscpp', quiet = TRUE, quick = TRUE)"
             Rscript -e "remotes::install_github('hughparsonage/grattanCharts', quiet = TRUE, quick = TRUE)"
       - run:
