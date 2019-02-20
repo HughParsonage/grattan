@@ -187,6 +187,11 @@ library(knitr)
 library(hutils)
 library(magrittr)
 library(data.table)
+if (!requireNamespace("grattanCharts", quietly = TRUE)) {
+  remotes::install_github("hughparsonage/grattanCharts",
+                          quietly = TRUE,
+                          quick = TRUE)
+}
 library(grattanCharts)
 templib <- tempfile()
 hutils::provide.dir(templib)
