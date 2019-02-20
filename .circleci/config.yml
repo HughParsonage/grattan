@@ -21,7 +21,7 @@ jobs:
           command: |
             Rscript -e "devtools::install_deps(dependencies = TRUE)"
             Rscript -e "install.packages('remotes')"
-            Rscript -e "remotes::install_github('hughparsonage/hutilscpp', quiet = TRUE, quick = TRUE)""
+            Rscript -e "remotes::install_github('hughparsonage/hutilscpp', quiet = TRUE, quick = TRUE)"
             Rscript -e "remotes::install_github('hughparsonage/grattanCharts', quiet = TRUE, quick = TRUE)"
       - run:
           no_output_timeout: 20m
