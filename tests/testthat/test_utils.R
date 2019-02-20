@@ -135,5 +135,15 @@ test_that("get_qtr", {
   expect_equal(DT2000g, DT2000z)
 })
 
+test_that("age2age_range", {
+  expect_equal(age2age_range(65), 1)
+  expect_equal(age2age_range(64), 2)
+  expect_equal(age2age_range(60), 2)
+  expect_equal(age2age_range(24), 10)
+  expect_equal(age2age_range(20), 10)
+  expect_equal(age2age_range(19), 11)
+})
+
+
 
 

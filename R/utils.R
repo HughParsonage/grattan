@@ -160,4 +160,8 @@ hasntName <- function(x, name) {
   match(name, names(x), nomatch = 0L) == 0L
 }
 
+age2age_range <- function(age) {
+  pmax.int(pmin.int(11L - {(age - 15L) %/% 5L}, 11L), 0L)
+}
+
 

@@ -121,3 +121,4 @@ expr	time	Date
 "sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	606758277	2019-02-14
 "sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	571832363	2019-02-17
 "sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	561581695	2019-02-19
+"sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	546558713	2019-02-21
