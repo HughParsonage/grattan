@@ -20,6 +20,9 @@ jobs:
       - run:
           command: |
             Rscript -e "devtools::install_deps(dependencies = TRUE)"
+            Rscript -e "install.packages('hutilscpp')"
+            Rscript -e "install.packages('remotes')"
+            Rscript -e "remotes::install_github('hughparsonage/grattanCharts')"
       - run:
           no_output_timeout: 20m
           command: |
