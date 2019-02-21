@@ -195,11 +195,11 @@ if (!requireNamespace("grattanCharts", quietly = TRUE) &&
   remotes::install_github("hughparsonage/hutilscpp", 
                           quietly = TRUE, 
                           quick = TRUE,
-                          upgrade = "never")
+                          upgrade = FALSE)
   remotes::install_github("hughparsonage/grattanCharts",
                           quietly = TRUE,
                           quick = TRUE, 
-                          upgrade = "never")
+                          upgrade = FALSE)
 }
 library(grattanCharts)
 templib <- tempfile()
