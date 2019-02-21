@@ -187,7 +187,11 @@ library(knitr)
 library(hutils)
 library(magrittr)
 library(data.table)
-if (!requireNamespace("grattanCharts", quietly = TRUE)) {
+```
+
+```{r requireGrattanCharts}
+if (!requireNamespace("grattanCharts", quietly = TRUE) &&
+    !requireNamespace("hutilscpp", quietly = TRUE)) {
   remotes::install_github("hughparsonage/hutilscpp", 
                           quietly = TRUE, 
                           quick = TRUE,
