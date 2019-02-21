@@ -41,12 +41,30 @@ population_forecast <- function(to_year = NULL,
   if (!is.null(YOBs)) {
     DT <- DT[YOB %in% YOBs]
   } 
-  out <- 
-    if (length(YOBs) != 1L) { # not > 1 since NULL means 'all'
-      DT[, forecast_yob1(Value, Date), keyby = "YOB"]
+  
+  if (length(YOBs) != 1L) { # not > 1 since NULL means 'all'
+    if (requireNamespace("future.apply", quietly = TRUE)) {
+      setkeyv(DT, "YOB")
+      X <- first(.subset2(DT, "YOB")):last(.subset2(DT, "YOB"))
+      out <- 
+        future.apply::future_lapply(seq_along(X), 
+                                    function(i) {
+                                      DT[.(X[i]), 
+                                         forecast_yob1(Value, Date)]
+                                    }) %>%
+        rbindlist(idcol = "YOBi") %>%
+        .[, YOB := X[YOBi]] %>%
+        .[, YOBi := NULL] %>%
+        setattr("cols", "YOB") %>%
+        .[]
     } else {
-      DT[, forecast_yob1(Value, Date)]
+      out <- DT[, forecast_yob1(Value, Date), keyby = "YOB"]
     }
+  } else {
+    out <- DT[, forecast_yob1(Value, Date)]
+    out[, YOB := YOBs]
+    setkey(out, YOB)
+  }
   
   if (include_tbl) {
     rbindlist(list(DT[, .(YOB, Date, Population = Value, isForecast = FALSE)], 
@@ -60,9 +78,28 @@ population_forecast <- function(to_year = NULL,
   
 }
 
+population_forecast_age_range <- function(from_fy, to_fy, age_range = 0:11) {
+  
+  the_populations <- population_forecast(to_year = fy2yr(to_fy) + 1L, include_tbl = TRUE, do_log = TRUE)
+  the_populations[, Age := year(Date) - YOB]
+  the_populations <- the_populations[Age %between% c(15L, 90L)][month(Date) == 6L]
+  the_populations[, age_range := age2age_range(Age)]
+  pop_indices <- the_populations[, .(Population = sum(Population)), keyby = .(age_range, Date)]
+  .ppo <<- copy(pop_indices)
+  pop_indices[, fy := date2fy(Date)]
+  pop_indices[, .(i = inflator(from = from_fy,
+                       to = to_fy, 
+                       index.col = "Population",
+                       time.col = "fy", 
+                       inflator_table = .SD)),
+      keyby = "age_range"]
+  
+}
+
 project_population <- function(DT,
                                wt_col,
-                               age_col,
+                               age_col = NULL,
+                               age_range_col = NULL,
                                from = NULL,
                                to = NULL) {
   if (missing(wt_col)) {
@@ -76,9 +113,16 @@ project_population <- function(DT,
     stop("`DT` did not have the specified column: `wt_col = ", wt_col, ".")
   }
   
-  if (missing(age_col)) {
-    stop("`wt_col` was missing, with no default.")
+  if (is.null(age_col) && is.null(age_range_col)) {
+    stop("`age_col` and `age_range_col` were both NULL, but one must be provided.")
   }
+  
+  if (!is.null(age_col) && !is.null(age_range_col)) {
+    stop("`age_col` and `age_range_col` were both provided.")
+  }
+  
+  
+  
   if (length(age_col) != 1L) {
     stop("`col` had length ", length(col), ".", 
          "Ensure `col` specifies a column in `DT` containing the weight to project.")
@@ -102,6 +146,9 @@ project_population <- function(DT,
   
   last_Pop[Pop, on = "Age"]
 }
+
+
+
 
 
 

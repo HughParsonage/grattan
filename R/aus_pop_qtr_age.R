@@ -87,12 +87,24 @@ aus_pop_qtr_age <- function(date = NULL, age = NULL, tbl = FALSE, roll = TRUE, r
 }
 
 aus_pop_fy_age <- function(fy = NULL, age = NULL, tbl = FALSE) {
-  checkTF(tbl)
-  if (is.null(fy) && is.null(age) && !tbl) {
-    DT <- aus_pop_by_yearqtr
-    DT[, c("Year", "Qtr") := lapply(tstrsplit(obsTime, split = "-Q", fixed = TRUE), as.integer)]
-    
-    
+  check_TF(tbl)
+  DT <- copy(aust_pop_by_age_yearqtr)
+  DT[month(Date) == 6L]
+  DT[, fy_year := date2fy(Date)]
+  
+  if (!is.null(fy)) {
+    fy_ <- validate_fys_permitted(fy)
+    DT <- DT[fy_year %in% fy_]
+  }
+  
+  if (!is.null(age)) {
+    DT <- DT[Age %in% age]
+  }
+  
+  if (tbl) {
+    return(DT[, .(Population = last(Value)), keyby = c("fy_year", "Age")])
+  } else {
+    .subset2(DT, "Value")
   }
 }
 

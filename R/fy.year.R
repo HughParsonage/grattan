@@ -204,7 +204,8 @@ qtr2fy <- function(yq) {
     # format
     first_yq <- yq[1L]
     if (is.na(first_yq)) {
-      first_yq <- first(yq[!is.na(yq)])
+      yq_is_na <- is.na(yq)
+      first_yq <- first(yq[which.min(yq_is_na)])
     }
     
     cm <- CJ(y = 1901:2099, q = 1:4)
