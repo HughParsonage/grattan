@@ -109,17 +109,34 @@ if (isTRUE(getOption("knitr.in.progress"))) {
   .finished <- FALSE
   chunktimings.txt <- "budget-2018-chunktimings.txt"
   invisible(file.create(chunktimings.txt))
+  mem_usage.tsv <- "budget-2018-memory-usage.tsv"
+  mem_usage_tempfile <- tempfile("mem")
+  invisible(file.create(mem_usage.tsv))
   knitr::knit_hooks$set(timeit = function(before) {
     if (before) {
+      utils::Rprofmem(mem_usage_tempfile)
       assign(".current.time", value = Sys.time(), envir = .GlobalEnv)
-    }
-    else {
+    } else {
       .duration <- formatC(as.numeric(round(difftime(Sys.time(), 
                                                      .current.time, units = "secs"), 1)), format = "f", 
                            flag = "#", digits = 1, width = 5)
-      if (!.finished) 
+      if (!.finished) {
         write(paste0(.duration, "\t", knitr::opts_current$get(name = "label")), 
               file = chunktimings.txt, ncolumns = 1, append = TRUE)
+      }
+      utils::Rprofmem(NULL)
+      .mem_used <-
+        profmem::readRprofmem(mem_usage_tempfile) %$%
+        sum(as.double(bytes), na.rm = TRUE) %>%
+        divide_by(1024^3) %>%
+        round(1) %>%
+        formatC(digits = 1, width = 4, format = "f")
+      write(paste0(.mem_used,
+                   "\t",
+                   knitr::opts_current$get(name = "label")),
+            file = mem_usage.tsv,
+            ncolumns = 1,
+            append = TRUE)
     }
   })
   knitr::opts_chunk$set(timeit = TRUE)

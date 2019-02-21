@@ -48,7 +48,13 @@ Population_by_Age_Date %>%
 ### An immediate forecast
 
 ```{r population-forecasted-vs-Date-YOB-1975-1985-1995}
-forecast1 <- function(v, hh = 40) {
+forecast1 <- function(v, hh = 40, dates = NULL) {
+  if (!is.null(dates)) {
+    last_date <- last(dates)
+    last_year <- year(last(dates))
+    last_qtr  <- get_qtr(last(dates))
+    
+  }
   vts <- ts(v, frequency = 4, end = c(last_year, last_qtr))
   the_forecast <- forecast::forecast(vts, h = hh)
   o <- 
@@ -81,6 +87,21 @@ Population_by_Age_Date %>%
 
 
 ## Population vs age by year
+
+```{r Population_by_Age_Year}
+Population_by_Age_Year <-
+  Population_by_Age_Date %>%
+  .[, .(Population = first(Value)), 
+    keyby = .(Age,
+              Year = year(Date))]
+```
+
+```{r forecast3}
+forecast3 <- function(v, hh = 10) {
+  vts <- ts(v, end = last_year)
+  the_forecast <- forecast::forecast(vts, h = hh)
+}
+```
 
 
 ## Population vs age group by year
@@ -123,5 +144,32 @@ forecast2 <- function(v, hh = 10) {
         fill = TRUE)
 }
 ```
+
+
+
+## Out-of-sample tests
+
+```{r out-of-sample-forecast1}
+forecast_from_2008 <-
+  Population_by_Age_Date %>%
+  .[YOB %in% c(1975L, 1985L, 1995L)] %>%
+  .[year(Date) <= 2008] %>%
+  .[, forecast1(Value, hh = 40L, dates = Date), keyby = "YOB"]
+
+rbind("Forecast" = forecast_from_2008, 
+      "Actual" = Population_by_Age_Date[YOB %in% c(1975L, 1985L, 1995L)],
+      idcol = "Color",
+      use.names = TRUE,
+      fill = TRUE) %>%
+  .[] %>%
+  ggplot(aes(x = Date, y = Value, group = paste0(YOB, Color), color = Color)) + 
+  geom_line()
+
+
+
+
+```
+
+
 
 

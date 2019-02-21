@@ -74,7 +74,7 @@
   
   tryCatch({
     f_mtimes <- 
-      if (file.exists("R/zzz.R")) {
+      if (file.exists("R/grattan-package.R")) {
         c(vapply(dir(path = "R", full.names = TRUE), file.mtime, double(1)),
           vapply(dir(path = "tests/testthat", full.names = TRUE), file.mtime, double(1)))
       } else if (file.exists(file.path(find.package("grattan"), "NAMESPACE"))) {
@@ -99,6 +99,7 @@
 
 gessage <- function(...) {
   if (identical(Sys.info()[["user"]], "hughp") &&
+      identical(.Platform$GUI, "RStudio") &&
       !isNamespaceLoaded("pkgdown") &&
       file.exists("~/grattan_1.4.0.2.tar.gz")) {
     packageStartupMessage(...)

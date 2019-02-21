@@ -36,6 +36,8 @@ age2age_range <- function(age) {
           0, 
           pmin(11 - {(age - 15) %/% 5}, 11))
 }
+
+
 stopifnot(age2age_range(65) == 1)
 stopifnot(age2age_range(64) == 2)
 stopifnot(age2age_range(60) == 2)
