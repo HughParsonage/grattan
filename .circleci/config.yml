@@ -25,7 +25,7 @@ jobs:
           command: |
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then Rscript -e 'dir.create("~/.R");file.create(mv <- "~/.R/Makevars");writeLines("CXXFLAGS=-O3", mv)'; fi
             if [[ $CIRCLE_NODE_INDEX == "1" ]]; then R CMD build . ; fi
-            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then R CMD check --ignore-vignettes --no-vignettes *tar.gz ; fi
+            if [[ $CIRCLE_NODE_INDEX == "1" ]]; then R CMD check --no-tests *tar.gz ; fi
       - run:
           no_output_timeout: 20m
           command: |
@@ -35,11 +35,7 @@ jobs:
           no_output_timeout: 20m
           command: |
             if [[ $CIRCLE_NODE_INDEX == "3" ]]; then Rscript -e "devtools::install()" ; fi
-            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then R -e 'library(data.table);setDTthreads(1L);library(grattan);c(age_pension(fy.year = "2015-16", has_partner = FALSE), 20664.80)';  fi
-            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then R -e 'library(data.table);setDTthreads(1L);library(grattan);testthat::expect_equal(age_pension(fy.year = "2015-16", has_partner = FALSE), 20664.80)';  fi
-            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then R -e 'library(data.table);setDTthreads(2L);devtools::test(filter = "pension")';  fi
-            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then R -e 'library(data.table);setDTthreads(1L);devtools::test(filter = "pension")';  fi
-            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then R -e 'knitr::knit("vignettes/long-vignettes/budget-2018.Rmd")';  fi
+            if [[ $CIRCLE_NODE_INDEX == "3" ]]; then Rscript -e "tryCatch(covr::codecov(line_exclusions = c('R/zzz.R', 'R/install_taxstats.R', 'R/youth_unemployment.R', 'R/utils-test.R'), quiet = FALSE), error = function(e) devtools::test())" ; fi
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}-{{ checksum ".circleci/config.yml" }}
           paths:
