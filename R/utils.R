@@ -51,7 +51,12 @@ as.numeric_unless_warning <- function(x){
 }
 
 # Cosmetic: For line-breaking. Slower but easier to read.  
-.add <- function(...) Reduce("+", list(...))
+.add <- function(x, ...) {
+  if (missing(..1)) {
+    return(x)
+  }
+  x + .add(...)
+}
 
 gforecast <- function(x, ...) {
   forecast::forecast(forecast::auto.arima(x), ...)
