@@ -190,10 +190,12 @@ library(data.table)
 if (!requireNamespace("grattanCharts", quietly = TRUE)) {
   remotes::install_github("hughparsonage/hutilscpp", 
                           quietly = TRUE, 
-                          quick = TRUE)
+                          quick = TRUE,
+                          upgrade = "never")
   remotes::install_github("hughparsonage/grattanCharts",
                           quietly = TRUE,
-                          quick = TRUE)
+                          quick = TRUE, 
+                          upgrade = "never")
 }
 library(grattanCharts)
 templib <- tempfile()
@@ -247,6 +249,7 @@ if (file.exists(sample_files_all.fst <- "budget-2018_cache/sample_files_all.fst"
     cache) {
   sample_files_all <- read_fst(sample_files_all.fst, as.data.table = TRUE)    
 } else {
+  provide.dir("budget-2018_cache")
   sample_files_all <-
     rbindlist(lapply(list(`2003-04` = sample_file_0304, 
                           `2004-05` = sample_file_0405,
