@@ -336,7 +336,12 @@ rolling_income_tax <- function(income,
 
 
 
-income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = NULL, n_dependants = 0L, .debug = FALSE) {
+income_tax_cpp <- function(income,
+                           fy.year,
+                           .dots.ATO = NULL, 
+                           sapto.eligible = NULL,
+                           n_dependants = 0L, 
+                           .debug = FALSE) {
   # Assume everyone of pension age is eligible for sapto.
   .dots.ATO.noms <- names(.dots.ATO)
   
@@ -477,7 +482,7 @@ income_tax_cpp <- function(income, fy.year, .dots.ATO = NULL, sapto.eligible = N
                   "Rep_frng_ben_amt") %chin% .dots.ATO.noms))) {
       sapto. <- double(max.length)
       .dAse <- function(v) {
-        .dots.ATO[which_sapto, eval(parse(text = v))]
+        .subset2(.dots.ATO, v)[which_sapto]
       }
       
       sapto.[which_sapto] <-

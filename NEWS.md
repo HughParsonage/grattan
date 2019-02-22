@@ -3,6 +3,7 @@
 ### Bug fixes
 * `income_tax` now gives consistent results modulo the existence of completely empty 
   columns that are inputs for `sapto` (#158)
+* `income_tax` will work if `.dots.ATO` is a non-data.table data.frame.
 
 ### New functions:
 * `awote` for weekly earnings

@@ -59,3 +59,23 @@ test_that("Debugger", {
   expect_true("medicare_levy" %in% names(result))
 })
 
+test_that("tibble", {
+  skip_if_not_installed("taxstats")
+  skip_on_cran()
+  skip_on_appveyor()
+  skip_if_not_installed("tibble")
+  skip_if_not_installed("dplyr")
+  library(tibble)
+  s1314 <- tibble::as_tibble(sample_file_1314)
+  tax1314_tibble <- 
+    s1314 %>%
+    dplyr::mutate(tax = income_tax(Taxable_Income, "2013-14", .dots.ATO = s1314)) %>%
+    .subset2("tax")
+  
+  s13 <- data.table::as.data.table(sample_file_1314)
+  tax1314_dt <-
+    s13[, ta := income_tax(Taxable_Income, "2013-14", .dots.ATO = copy(s13))][["ta"]]
+  expect_equal(tax1314_tibble, tax1314_tibble)
+})
+
+

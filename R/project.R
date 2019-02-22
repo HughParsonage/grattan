@@ -319,13 +319,14 @@ project <- function(sample_file,
   
   if (use_age_pop_forecast) {
     pop_inflator_by_age <-
-      g_pop_forecasts_by_age_range[CJ(0:11, c(current.fy, to.fy)),
+      g_pop_forecasts_by_age_range[CJ(age_range = 0:11,
+                                      fy = c(current.fy, to.fy)),
                                    on = c("age_range", "fy")] %>%
       .[, .(pop_forecast_r = last(Population) / first(Population)),
         keyby = "age_range"]
     sample_file <- sample_file[pop_inflator_by_age, on = "age_range"]
   } else {
-    sample_file[, pop_forecast_r := 1]
+    sample_file[, "pop_forecast_r" := 1]
   }
   
   for (j in which(col.names %chin% lfy.cols)) {
