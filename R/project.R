@@ -9,6 +9,9 @@
 #' @param forecast.dots A list containing parameters to be passed to \code{generic_inflator}.
 #' @param wage.series See \code{\link{wage_inflator}}. Note that the \code{Sw_amt} will uprated by \code{\link{differentially_uprate_wage}}.
 #' @param lf.series See \code{\link{lf_inflator_fy}}.
+#' @param use_age_pop_forecast Should the inflation of the number of taxpayers be 
+#' moderated by the number of resident persons born in a certain year? If \code{TRUE},
+#' younger ages will grow at a slightly higher rate beyond 2018 than older ages.
 #' @param .recalculate.inflators (logical, default: \code{FALSE}. Should \code{generic_inflator()} or \code{CG_inflator} be called to project the other variables? Adds time.
 #' @param .copyDT (logical, default: \code{TRUE}) Should a \code{copy()} of \code{sample_file} be made? If set to \code{FALSE}, will update \code{sample_file}. 
 #' @param check_fy_sample_file (logical, default: \code{TRUE}) Should \code{fy.year.of.sample.file} be checked against \code{sample_file}?
@@ -44,6 +47,7 @@ project <- function(sample_file,
                     forecast.dots = list(estimator = "mean", pred_interval = 80), 
                     wage.series = NULL,
                     lf.series = NULL,
+                    use_age_pop_forecast = FALSE,
                     .recalculate.inflators = FALSE, 
                     .copyDT = TRUE,
                     check_fy_sample_file = TRUE,
@@ -165,19 +169,22 @@ project <- function(sample_file,
                                    forecast.series = "custom", wage.series = wage.series)
   }
   
-  if (is.null(lf.series)){
+  if (is.null(lf.series)) {
     lf.inflator <- lf_inflator_fy(from_fy = current.fy, to_fy = to.fy)
   } else {
     lf.inflator <- lf_inflator_fy(from_fy = current.fy, to_fy = to.fy, 
-                                  forecast.series = "custom", lf.series = lf.series)
+                                  forecast.series = "custom", 
+                                  lf.series = lf.series)
   }
+
+  
   
   
   cpi.inflator <- cpi_inflator(1, from_fy = current.fy, to_fy = to.fy)
   if (.recalculate.inflators) {
     CG.inflator <- CG_inflator(1, from_fy = current.fy, to_fy = to.fy)
   } else {
-    if (current.fy %notin% c("2012-13", "2013-14", "2014-15", "2015-16")){
+    if (current.fy %notin% c("2012-13", "2013-14", "2014-15", "2015-16")) {
       stop("Precalculated inflators only available when projecting from ",
            "2012-13, 2013-14, 2014-15, 2015-16.")
     } else {
@@ -262,14 +269,14 @@ project <- function(sample_file,
                     "PHI_Ind", 
                     alien.cols)
   
-  if(!missing(excl_vars)){
+  if (!missing(excl_vars)) {
     Not.Inflated <- c(Not.Inflated, excl_vars)
   }
   
   generic.cols <- 
     col.names[!col.names %chin% c(diff.uprate.wagey.cols, wagey.cols, super.bal.col, lfy.cols, cpiy.cols, derived.cols, Not.Inflated)]
   
-  if (.recalculate.inflators){
+  if (.recalculate.inflators) {
     generic.inflators <- 
       generic_inflator(vars = generic.cols,
                        h = h,
@@ -306,11 +313,26 @@ project <- function(sample_file,
     }
   }
   
-  for (j in which(col.names %chin% wagey.cols))
+  for (j in which(col.names %chin% wagey.cols)) {
     set(sample_file, j = j, value = wage.inflator * sample_file[[j]])
+  }
   
-  for (j in which(col.names %chin% lfy.cols))
-    set(sample_file, j = j, value = lf.inflator * sample_file[[j]])
+  if (use_age_pop_forecast) {
+    pop_inflator_by_age <-
+      g_pop_forecasts_by_age_range[CJ(0:11, c(current.fy, to.fy)),
+                                   on = c("age_range", "fy")] %>%
+      .[, .(pop_forecast_r = last(Population) / first(Population)),
+        keyby = "age_range"]
+    sample_file <- sample_file[pop_inflator_by_age, on = "age_range"]
+  } else {
+    sample_file[, pop_forecast_r := 1]
+  }
+  
+  for (j in which(col.names %chin% lfy.cols)) {
+    set(sample_file,
+        j = j, 
+        value = lf.inflator * sample_file[[j]] * sample_file[["pop_forecast_r"]])
+  }
   
   for (j in which(col.names %chin% cpiy.cols))
     set(sample_file, j = j, value = cpi.inflator * sample_file[[j]])
@@ -319,7 +341,7 @@ project <- function(sample_file,
     set(sample_file, j = j, value = CG.inflator * sample_file[[j]])
   
   if (.recalculate.inflators) {
-    for (j in which(col.names %chin% generic.cols)){
+    for (j in which(col.names %chin% generic.cols)) {
       stopifnot("variable" %in% names(generic.inflators))  ## super safe
       nom <- col.names[j]
       set(sample_file, 

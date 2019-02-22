@@ -19,10 +19,10 @@ population_forecast <- function(to_year = NULL,
   h <- 0L
   forecast_yob1 <- function(v, dates) {
     .ts <- 
-      ts(if (do_log) log(v + 1) else v,
-         frequency = 4,
-         start = c(min(year(dates)), 
-                   first_qtr))
+      stats::ts(if (do_log) log(v + 1) else v,
+                frequency = 4,
+                start = c(min(year(dates)), 
+                          first_qtr))
     
     h <- 4L * (to_year - max(year(dates))) - (4L - last_qtr)
     the_forecast <- forecast::forecast(.ts, h = h, level = 95)
@@ -43,7 +43,12 @@ population_forecast <- function(to_year = NULL,
   } 
   
   if (length(YOBs) != 1L) { # not > 1 since NULL means 'all'
-    if (requireNamespace("future.apply", quietly = TRUE)) {
+    if (requireNamespace("future.apply", quietly = TRUE) &&
+        requireNamespace("future", quietly = TRUE) &&
+        # Don't bother with future.apply if we just
+        # have sequential planning
+        !inherits(future::plan(), "sequential")) {
+      
       setkeyv(DT, "YOB")
       X <- first(.subset2(DT, "YOB")):last(.subset2(DT, "YOB"))
       out <- 
@@ -85,7 +90,6 @@ population_forecast_age_range <- function(from_fy, to_fy, age_range = 0:11) {
   the_populations <- the_populations[Age %between% c(15L, 90L)][month(Date) == 6L]
   the_populations[, age_range := age2age_range(Age)]
   pop_indices <- the_populations[, .(Population = sum(Population)), keyby = .(age_range, Date)]
-  .ppo <<- copy(pop_indices)
   pop_indices[, fy := date2fy(Date)]
   pop_indices[, .(i = inflator(from = from_fy,
                        to = to_fy, 

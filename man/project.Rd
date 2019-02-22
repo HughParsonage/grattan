@@ -7,8 +7,9 @@
 project(sample_file, h = 0L, fy.year.of.sample.file = NULL,
   WEIGHT = 50L, excl_vars, forecast.dots = list(estimator = "mean",
   pred_interval = 80), wage.series = NULL, lf.series = NULL,
-  .recalculate.inflators = FALSE, .copyDT = TRUE,
-  check_fy_sample_file = TRUE, differentially_uprate_Sw = TRUE)
+  use_age_pop_forecast = FALSE, .recalculate.inflators = FALSE,
+  .copyDT = TRUE, check_fy_sample_file = TRUE,
+  differentially_uprate_Sw = TRUE)
 }
 \arguments{
 \item{sample_file}{A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.}
@@ -27,6 +28,10 @@ number of rows of \code{sample_file} to be one of \code{2012-13}, \code{2013-14}
 \item{wage.series}{See \code{\link{wage_inflator}}. Note that the \code{Sw_amt} will uprated by \code{\link{differentially_uprate_wage}}.}
 
 \item{lf.series}{See \code{\link{lf_inflator_fy}}.}
+
+\item{use_age_pop_forecast}{Should the inflation of the number of taxpayers be 
+moderated by the number of resident persons born in a certain year? If \code{TRUE},
+younger ages will grow at a slightly higher rate beyond 2018 than older ages.}
 
 \item{.recalculate.inflators}{(logical, default: \code{FALSE}. Should \code{generic_inflator()} or \code{CG_inflator} be called to project the other variables? Adds time.}
 
