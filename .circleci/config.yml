@@ -19,6 +19,7 @@ jobs:
             - deps1-
       - run:
           command: |
+            Rscript -e "utils::install.packages('hutilscpp', repos = 'https://cran.rstudio.com')"
             Rscript -e "devtools::install_deps(dependencies = TRUE)"
       - run:
           no_output_timeout: 20m
