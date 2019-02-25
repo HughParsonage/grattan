@@ -94,6 +94,11 @@ test_that("Custom lf series", {
                                 forecast.series = "custom",
                                 lf.series = 2),
                  regexp = "unlikely")
+  expect_message(lf_inflator_fy(from_fy = "2018-19", 
+                                to_fy = "2024-25",
+                                forecast.series = "custom",
+                                lf.series = 2),
+                 regexp = "unlikely")
   
   y <- lf_inflator_fy(1, from_fy = "2022-23", to_fy = "2024-25", 
                       forecast.series = "custom", lf.series = 0.10)

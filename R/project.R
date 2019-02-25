@@ -177,7 +177,9 @@ project <- function(sample_file,
                                   lf.series = lf.series)
   }
 
-  
+  if (Sys.getenv("_R_GRATTAN_DEBUG_") == "true") {
+    lf.inflator <<- lf.inflator
+  }
   
   
   cpi.inflator <- cpi_inflator(1, from_fy = current.fy, to_fy = to.fy)
@@ -325,14 +327,14 @@ project <- function(sample_file,
       .[, .(pop_forecast_r = last(Population) / first(Population)),
         keyby = "age_range"]
     sample_file <- sample_file[pop_inflator_by_age, on = "age_range"]
-  } else {
-    sample_file[, "pop_forecast_r" := 1]
-  }
+    # Will expand to nrow
+    lf.inflator <- {lf.inflator + .subset2(sample_file, "pop_forecast_r")} / 2
+  } 
   
   for (j in which(col.names %chin% lfy.cols)) {
     set(sample_file,
         j = j, 
-        value = lf.inflator * sample_file[[j]] * sample_file[["pop_forecast_r"]])
+        value = lf.inflator * sample_file[[j]])
   }
   
   for (j in which(col.names %chin% cpiy.cols))

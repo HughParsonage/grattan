@@ -1475,7 +1475,7 @@ setkey(generic_inflators_1516[, fy_year := NULL], h, variable)
 
 setkey(wages_trend, obsTime)
 setindex(wages_trend, obsQtr)
-.date_data_updated <- as.Date("2018-11-12") #Sys.Date()
+.date_data_updated <- as.Date("2019-02-23") #Sys.Date()
 
 g_pop_forecasts_by_age_range <-
   local({

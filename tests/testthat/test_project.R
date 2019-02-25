@@ -110,6 +110,7 @@ test_that("Custom lf/wage series", {
   s1314 <- as.data.table(sample_file_1314)
   s2021 <- project(s1314, h = 7L)
   s2021_LA <- project(s1314, h = 7L, lf.series = 0.0)
+  
   s2021_LB <- project(s1314, h = 7L, lf.series = 0.1)
   expect_lt(s2021_LA[, sum(WEIGHT)], 
             s2021[, sum(WEIGHT)])

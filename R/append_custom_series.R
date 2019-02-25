@@ -30,10 +30,16 @@ append_custom_series <- function(orig,
                                  last_full_fy_in_orig,
                                  cs = deparse(substitute(custom.series))) {
   reqd_fys <-
-    yr2fy(seq.int(from = last_full_yr_in_orig + 1L, 
+    yr2fy(seq.int(from = min(last_full_yr_in_orig + 1L, 
+                             fy2yr(last_full_fy_in_orig) + 1L),
                   to = max_to_yr)) %>%
     .[. %notin% .subset2(orig, "fy_year")]
-  
+  if (Sys.getenv("_R_GRATTAN_DEBUG_") == "true") {
+    for (i in ls()) {
+      assign(i, value = get(i), envir = .GlobalEnv)
+    }
+    
+  }
   
   custom.series <-
     standardize_custom_series(custom.series,
@@ -56,7 +62,11 @@ append_custom_series <- function(orig,
   input_series_fys <- .subset2(custom.series, "fy_year")
   first_fy_in_custom_series <- input_series_fys[[1L]]
  
-  stopifnot(first_fy_in_custom_series <= next_fy(last_full_fy_in_orig))
+  if (first_fy_in_custom_series > next_fy(last_full_fy_in_orig)) {
+    stop("Internal error: `first_fy_in_custom_series > next_fy(last_full_fy_in_orig)`\n\t", 
+         "first_fy_in_custom_series = ", first_fy_in_custom_series, "\n\t",
+         "last_full_fy_in_orig = ", last_full_fy_in_orig, "\n\t")
+  }
   
   # Is the following
   if (first_fy_in_custom_series == next_fy(last_full_fy_in_orig)) {

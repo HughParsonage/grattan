@@ -166,7 +166,7 @@ lf_inflator_fy <- function(labour_force = 1,
   last_full_yr_in_series <- 
     lf.indices %>%
     # month from data.table::
-    .[month(obsDate) == 6L, last(obsDate)] %>%
+    .[month(obsDate) == use.month, last(obsDate)] %>%
     year
   
   last_full_fy_in_series <- yr2fy(last_full_yr_in_series)
@@ -212,12 +212,18 @@ lf_inflator_fy <- function(labour_force = 1,
   lf.indices <- 
     lf.indices %>%
     .[month(obsDate) == use.month] %>%
-    .[, fy_year := date2fy(obsDate)]
+    .[, "fy_year" := date2fy(obsDate)]
 
   
   if (AND(allow.projection,
           AND(max_to_yr > last_full_yr_in_series,
               forecast.series == "custom"))) {
+    if (Sys.getenv("_R_GRATTAN_DEBUG_") == "true") {
+      lf.indices <<- lf.indices
+      last_full_yr_in_orig <<- last_full_yr_in_series
+      last_full_fy_in_orig <<- last_full_fy_in_series
+    }
+    last_full_fy_in_series <- last(.subset2(lf.indices, "fy_year"))
     lf.indices <- append_custom_series(orig = lf.indices,
                                        custom.series = lf.series,
                                        max_to_yr = max_to_yr,
