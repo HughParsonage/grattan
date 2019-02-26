@@ -86,11 +86,12 @@ aus_pop_qtr_age <- function(date = NULL, age = NULL, tbl = FALSE, roll = TRUE, r
   }
 }
 
-aus_pop_fy_age <- function(fy = NULL, age = NULL, tbl = FALSE) {
+aus_pop_fy_age <- function(fy_year = NULL, age = NULL, tbl = FALSE) {
+  fy <- fy_year
   check_TF(tbl)
   DT <- copy(aust_pop_by_age_yearqtr)
-  DT[month(Date) == 6L]
   DT[, fy_year := date2fy(Date)]
+  DT <- unique(DT, by = c("fy_year", "Age"), fromLast = TRUE)
   
   if (!is.null(fy)) {
     fy_ <- validate_fys_permitted(fy)
