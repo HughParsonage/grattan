@@ -190,7 +190,7 @@ standardize_custom_series <- function(custom.series, cs, req.fys) {
   
   input_series_fys <- .subset2(custom.series, "fy_year")
   
-  if (!all(req.fys %in% input_series_fys)) {
+  if (any_notin(req.fys, input_series_fys)) {
     stopn("`", cs, "$fy_year` did not have the required financial years.\n\n", 
           "`", cs, "$fy_year` was\n\t",
           deparse(input_series_fys), "\n",
