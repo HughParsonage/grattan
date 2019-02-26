@@ -35,7 +35,7 @@ awote <- function(Date = NULL,
   if (anyNA(isOrdinary)) {
     stop("`isOrdinary` contains NAs. Impute these values.")
   }
-  
+ 
   if (is.null(Date) && is.null(fy.year)) {
     Date <- Sys.Date()
     message("`Date` and `fy.year` both NULL so using `Date = ", as.character(Date), "`.")
@@ -72,9 +72,11 @@ awote_fy <- function(fy_year, isMale, isAdult, isOrdinary) {
   fy_year <- validate_fys_permitted(fy_year)
   input <- data.table(fy_year, isMale, isAdult, isOrdinary)
   setkeyv(input, names(input))
+  Date <- AWOTE <- NULL
   AWOTE_by_Date_isMale_isOrdinary_isAdult %>%
+    .[, "fy_year" := date2fy(Date)] %>%
     .[, .(AWOTE = mean(AWOTE)), 
-      keyby = .(fy_year = date2fy(Date),
+      keyby = .(fy_year,
                 isMale,
                 isOrdinary,
                 isAdult)] %>%

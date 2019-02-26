@@ -8,6 +8,7 @@ population_forecast <- function(to_year = NULL,
     message("`to_year` is missing, so using `to_year = ", to_year, "`.")
   }
   
+  Date <- Age <- YOB <- Value <- NULL
   DT <- copy(aus_pop_qtr_age(tbl = TRUE))
   DT[, YOB := year(Date) - Age]
   
@@ -41,7 +42,7 @@ population_forecast <- function(to_year = NULL,
   if (!is.null(YOBs)) {
     DT <- DT[YOB %in% YOBs]
   } 
-  
+  YOB <- NULL
   if (length(YOBs) != 1L) { # not > 1 since NULL means 'all'
     if (requireNamespace("future.apply", quietly = TRUE) &&
         requireNamespace("future", quietly = TRUE) &&
@@ -51,6 +52,7 @@ population_forecast <- function(to_year = NULL,
       
       setkeyv(DT, "YOB")
       X <- first(.subset2(DT, "YOB")):last(.subset2(DT, "YOB"))
+      YOBi <- NULL
       out <- 
         future.apply::future_lapply(seq_along(X), 
                                     function(i) {
@@ -66,6 +68,7 @@ population_forecast <- function(to_year = NULL,
       out <- DT[, forecast_yob1(Value, Date), keyby = "YOB"]
     }
   } else {
+    Population <- NULL
     out <- DT[, forecast_yob1(Value, Date)]
     out[, YOB := YOBs]
     setkey(out, YOB)
@@ -84,19 +87,24 @@ population_forecast <- function(to_year = NULL,
 }
 
 population_forecast_age_range <- function(from_fy, to_fy, age_range = 0:11) {
-  
-  the_populations <- population_forecast(to_year = fy2yr(to_fy) + 1L, include_tbl = TRUE, do_log = TRUE)
+  Date <- YOB <- Age <- Population <- NULL
+  the_populations <- population_forecast(to_year = fy2yr(to_fy) + 1L,
+                                         include_tbl = TRUE,
+                                         do_log = TRUE)
   the_populations[, Age := year(Date) - YOB]
   the_populations <- the_populations[Age %between% c(15L, 90L)][month(Date) == 6L]
+  age_range <- NULL
   the_populations[, age_range := age2age_range(Age)]
+  Population <- NULL
   pop_indices <- the_populations[, .(Population = sum(Population)), keyby = .(age_range, Date)]
+  fy <- NULL
   pop_indices[, fy := date2fy(Date)]
   pop_indices[, .(i = inflator(from = from_fy,
-                       to = to_fy, 
-                       index.col = "Population",
-                       time.col = "fy", 
-                       inflator_table = .SD)),
-      keyby = "age_range"]
+                               to = to_fy, 
+                               index.col = "Population",
+                               time.col = "fy", 
+                               inflator_table = .SD)),
+              keyby = "age_range"]
   
 }
 
@@ -138,6 +146,7 @@ project_population <- function(DT,
     stop("Age must be numeric.")
   }
   
+  Value <- NULL
   last_Pop <- 
     aus_pop_qtr_age(date = NULL, tbl = TRUE) %>% 
     .[, .(Value = last(Value)), keyby = "Age"]

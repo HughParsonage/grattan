@@ -208,6 +208,7 @@ qtr2fy <- function(yq) {
       first_yq <- first(yq[which.min(yq_is_na)])
     }
     
+    y <- q <- NULL
     cm <- CJ(y = 1901:2099, q = 1:4)
     cm[, "YQ" := sprintf("%d%sQ%d", y, substr(first_yq, 5L, 5L), q)]
     cm[, "fy_year" := yr2fy(y + q %in% 3:4)]

@@ -19,6 +19,10 @@ test_that("sfa", {
   expect_equal(s0304[["Ind"]], sfa200304[["Ind"]]) # Just to check order-preservation
   expect_equal(s0304[["tax"]], sfa200304[["tax"]])
   
+  sfa_201213 <- sfa[fy_year == "2012-13"]
+  sfa_201213[, tax := income_tax(Taxable_Income, "2012-13", .dots.ATO = .SD)]
+  
+  
 })
 
 

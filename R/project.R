@@ -320,6 +320,7 @@ project <- function(sample_file,
   }
   
   if (use_age_pop_forecast) {
+    Population <- NULL
     pop_inflator_by_age <-
       g_pop_forecasts_by_age_range[CJ(age_range = 0:11,
                                       fy = c(current.fy, to.fy)),
