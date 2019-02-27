@@ -86,6 +86,14 @@ test_that("qtr2fy", {
                  "2013-14", "2013-14"))
 })
 
+test_that("NA handling", {
+  expect_equal(qtr2fy(c("2014-Q1", NA, "2014-Q2")), 
+               c("2013-14", NA, "2013-14"))
+  expect_equal(qtr2fy(c(NA, "2014-Q1", "2014-Q2")),
+               c(NA, "2013-14", "2013-14"))
+})
+
+
 
 
 
