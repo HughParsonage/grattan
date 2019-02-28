@@ -17,6 +17,7 @@ library(data.table)
 library(grattan)
 library(hutils)
 library(ggplot2)
+library(ggrepel)Y
 library(forecast)
 library(magrittr)
 ```
@@ -52,7 +53,7 @@ forecast1 <- function(v, hh = 40, dates = NULL) {
   if (!is.null(dates)) {
     last_date <- last(dates)
     last_year <- year(last(dates))
-    last_qtr  <- get_qtr(last(dates))
+    last_qtr  <- grattan:::get_qtr(last(dates))
     
   }
   vts <- ts(v, frequency = 4, end = c(last_year, last_qtr))
@@ -162,7 +163,15 @@ rbind("Forecast" = forecast_from_2008,
       use.names = TRUE,
       fill = TRUE) %>%
   .[] %>%
-  ggplot(aes(x = Date, y = Value, group = paste0(YOB, Color), color = Color)) + 
+  .[Date == max(Date), label := as.character(YOB)] %>%
+  ggplot(aes(x = Date,
+             y = Value,
+             group = paste0(YOB, Color),
+             color = Color)) + 
+  geom_text_repel(aes(label = label), 
+                  xlim = c(as.Date("2018-06-01"), as.Date(NA)),
+                  hjust = 0,
+                  na.rm = TRUE) +
   geom_line()
 
 
