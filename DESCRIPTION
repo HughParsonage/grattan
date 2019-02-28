@@ -38,6 +38,8 @@ Suggests:
     dplyr,
     dtplyr,
     fst (>= 0.8.4),
+    future,
+    future.apply,
     ggplot2,
     ggrepel,
     knitr,

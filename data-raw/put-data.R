@@ -45,6 +45,16 @@ sample_files_all <- rbindlist(list(sample_files_all,
 library(grattan)
 library(readr)
 library(readxl)
+legacy_repair <- function(nms, prefix = "X", sep = "__") {
+  if (length(nms) == 0) return(character())
+  blank <- nms == ""
+  nms[!blank] <- make.unique(nms[!blank], sep = sep)
+  new_nms <- setdiff(paste(prefix, seq_along(nms), sep = sep), nms)
+  nms[blank] <- new_nms[seq_len(sum(blank))]
+  nms
+}
+library(default)
+default(read_excel) <- list(.name_repair = legacy_repair)
 library(tidyxl)
 library(hutils)
 options("scipen" = 99)
@@ -1465,7 +1475,19 @@ setkey(generic_inflators_1516[, fy_year := NULL], h, variable)
 
 setkey(wages_trend, obsTime)
 setindex(wages_trend, obsQtr)
-.date_data_updated <- as.Date("2018-11-12") #Sys.Date()
+.date_data_updated <- as.Date("2019-02-23") #Sys.Date()
+
+g_pop_forecasts_by_age_range <-
+  local({
+    the_populations <- grattan:::population_forecast(to_year = 2040L,
+                                                     include_tbl = TRUE, 
+                                                     do_log = TRUE)
+    the_populations[, Age := year(Date) - YOB]
+    the_populations <- the_populations[Age %between% c(15L, 90L)][month(Date) == 6L]
+    the_populations[, age_range := grattan:::age2age_range(Age)]
+    the_populations[, .(Population = sum(Population)), keyby = .(age_range, fy = date2fy(Date))]
+  })
+
 
 library(fastmatch)
 fys1901 <- yr2fy(1901:2100)
@@ -1499,6 +1521,7 @@ use_and_write_data(tax_table2,
                    cg_inflators_1314,
                    cg_inflators_1213,
                    super_contribution_inflator_1314,
+                   g_pop_forecasts_by_age_range,
                    #
                    salary_by_fy_swtile,
                    differential_sw_uprates,

@@ -112,4 +112,42 @@ test_that("getOption", {
                .getOption("width", "abc"))
 })
 
+test_that("get_qtr", {
+  skip_if_not_installed("zoo")
+  DT2017 <- data.table(Dates = seq.Date(as.Date(c("2017-01-01")),
+                                        as.Date(c("2017-12-31")), 
+                                        by = "1 day"))
+  DT2017[, ZooQtr := zoo::as.yearqtr(Dates)]
+  DT2017[, GratQtr := get_qtr(Dates)]
+  DT2017z <- unique(DT2017, by = "ZooQtr")
+  DT2017g <- unique(DT2017, by = "GratQtr")
+  expect_equal(DT2017g, DT2017z)
+  
+  DT2017 <- DT2017z <- DT2017g <- NULL # to avoid continuation
+  # leap years
+  DT2000 <- data.table(Dates = seq.Date(as.Date(c("2000-01-01")),
+                                        as.Date(c("2000-12-31")), 
+                                        by = "1 day"))
+  DT2000[, ZooQtr := zoo::as.yearqtr(Dates)]
+  DT2000[, GratQtr := get_qtr(Dates)]
+  DT2000z <- unique(DT2000, by = "ZooQtr")
+  DT2000g <- unique(DT2000, by = "GratQtr")
+  expect_equal(DT2000g, DT2000z)
+})
+
+test_that("age2age_range", {
+  expect_equal(age2age_range(65), 1)
+  expect_equal(age2age_range(64), 2)
+  expect_equal(age2age_range(60), 2)
+  expect_equal(age2age_range(24), 10)
+  expect_equal(age2age_range(20), 10)
+  expect_equal(age2age_range(19), 11)
+})
+
+test_that("hasntName", {
+  expect_true(hasntName(data.table(x = 1), "y"))
+  expect_false(hasntName(data.table(x = 1), "x"))
+})
+
+
 

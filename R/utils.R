@@ -21,6 +21,10 @@ unselect_ <- function(.data, .dots) {
   !(x %in% y)
 }
 
+any_notin <- function(x, y) {
+  anyNA(match(x, y))
+}
+
 anyIntersection <- function(x, y) {
   max(match(x, y, nomatch = 0L)) &&
     max(match(y, x, nomatch = 0L))
@@ -47,7 +51,12 @@ as.numeric_unless_warning <- function(x){
 }
 
 # Cosmetic: For line-breaking. Slower but easier to read.  
-.add <- function(...) Reduce("+", list(...))
+.add <- function(x, ...) {
+  if (missing(..1)) {
+    return(x)
+  }
+  x + .add(...)
+}
 
 gforecast <- function(x, ...) {
   forecast::forecast(forecast::auto.arima(x), ...)
@@ -147,6 +156,17 @@ autonamed_list <- function(...) {
   setNames(list(...), nm = eval(substitute(alist(...))))
 }
 
+get_qtr <- function(x) {
+  stopifnot(is.Date(x))
+  {month(x) - 1L} %/% 3L + 1L
+}
 
+hasntName <- function(x, name) {
+  match(name, names(x), nomatch = 0L) == 0L
+}
+
+age2age_range <- function(age) {
+  pmax.int(pmin.int(11L - {(age - 15L) %/% 5L}, 11L), 0L)
+}
 
 

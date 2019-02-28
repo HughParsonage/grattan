@@ -5,6 +5,8 @@ date: "`r Sys.Date()`"
 output: 
   rmarkdown::html_document:
     toc: true
+    toc_depth: 2
+    dev: svg
 vignette: >
   %\VignetteIndexEntry{grattan}
   %\VignetteEngine{knitr::rmarkdown}
@@ -1442,7 +1444,7 @@ new_sample_file_1718 <-
 
 ```
 
-```{r}
+```{r new_sample_file_1718-kable}
 library(knitr)
 library(dplyr)
 library(dtplyr)  # for data.table
@@ -1483,7 +1485,7 @@ new_sample_file_1718 %>%
 
 To test the performance of our projection, we consider the projection of the 2012-13 sample file by one year with the actual 2013-14 sample file.
 
-```{r}
+```{r sample_file_1314_projected}
 sample_file_1314_projected <- 
   sample_file_1213 %>%
   copy %>%
@@ -1551,7 +1553,7 @@ c("Sw_amt",
 Other tests can be found in the `tests/` folder to compare the tax collections in those years. 
 
 
-```{r echo=FALSE}
+```{r options-scipen, echo=FALSE}
 options("scipen" = 0)
 ```
 

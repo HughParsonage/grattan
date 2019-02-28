@@ -55,6 +55,11 @@ test_that("Equivalence in 2013-14 sample file", {
   expect_equal(income_tax(tx, rep_along("2013-14", tx), .dots.ATO = s1314), 
                income_tax_cpp(tx, "2013-14", .dots.ATO = s1314))
   
+  # For coverage
+  s1314[, Sw_amt := as.double(Sw_amt)]
+  expect_equal(income_tax(tx, rep_along("2013-14", tx), .dots.ATO = s1314), 
+               income_tax_cpp(tx, "2013-14", .dots.ATO = s1314))
+  
   expect_equal(income_tax(tx, rep_along("2013-14", tx), age = 50 + 50 * s1314$Gender, .dots.ATO = NULL), 
                income_tax_cpp(tx, "2013-14", sapto.eligible = as.logical(s1314$Gender), .dots.ATO = NULL))
   

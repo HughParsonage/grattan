@@ -1,0 +1,184 @@
+---
+title: "Forecasting population"
+author: "Hugh Parsonage"
+date: "14/02/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(echo = TRUE)
+```
+
+## Population by year of birth
+
+```{r loadPackages}
+library(data.table)
+library(grattan)
+library(hutils)
+library(ggplot2)
+library(ggrepel)Y
+library(forecast)
+library(magrittr)
+```
+
+```{r Population_by_Age_Date}
+Population_by_Age_Date <- 
+  aus_pop_qtr_age(tbl = TRUE) %>%
+  .[, YOB := year(Date) - Age] %>%
+  .[]
+```
+
+```{r last_qtr}
+last_date <- Population_by_Age_Date[, last(Date)]
+last_qtr <- grattan:::get_qtr(last_date)
+last_year <-  year(last_date)
+```
+
+```{r population-vs-Date-YOB-1975-1985-1995}
+Population_by_Age_Date %>%
+  .[YOB %in% c(1975L, 1985L, 1995L)] %>%
+  .[, YOB := factor(YOB)] %>%
+  ggplot(aes(x = Date, 
+             y = Value, 
+             group = YOB, 
+             color = YOB)) + 
+  geom_line()
+```
+
+### An immediate forecast
+
+```{r population-forecasted-vs-Date-YOB-1975-1985-1995}
+forecast1 <- function(v, hh = 40, dates = NULL) {
+  if (!is.null(dates)) {
+    last_date <- last(dates)
+    last_year <- year(last(dates))
+    last_qtr  <- grattan:::get_qtr(last(dates))
+    
+  }
+  vts <- ts(v, frequency = 4, end = c(last_year, last_qtr))
+  the_forecast <- forecast::forecast(vts, h = hh)
+  o <- 
+    data.table(Date = seq.Date(from = last_date,
+                               by = "3 months",
+                               length.out = hh + 1L)[-1L], 
+               Value = the_forecast[["mean"]])
+  ts2date <- function(x) {
+    date_decimal <- lubridate::date_decimal
+    as.Date(lubridate::date_decimal(as.numeric(time(x))))
+  }
+  
+  rbind(data.table(Date = ts2date(vts), 
+                   Value = v),
+        o, 
+        use.names = TRUE, 
+        fill = TRUE)
+}
+
+Population_by_Age_Date %>%
+  .[YOB %in% c(1975L, 1985L, 1995L)] %>%
+  .[, forecast1(Value), keyby = "YOB"] %>%
+  .[] %>%
+  .[, isForecast := Date > last_date] %>%
+  .[, Key := if_else(isForecast, paste0(YOB, " (forecast)"), as.character(YOB))] %>%
+  .[] %>%
+  ggplot(aes(x = Date, y = Value, group = YOB, color = Key)) + 
+  geom_line()
+```
+
+
+## Population vs age by year
+
+```{r Population_by_Age_Year}
+Population_by_Age_Year <-
+  Population_by_Age_Date %>%
+  .[, .(Population = first(Value)), 
+    keyby = .(Age,
+              Year = year(Date))]
+```
+
+```{r forecast3}
+forecast3 <- function(v, hh = 10) {
+  vts <- ts(v, end = last_year)
+  the_forecast <- forecast::forecast(vts, h = hh)
+}
+```
+
+
+## Population vs age group by year
+
+```{r Population_by_AgeGroup_Year}
+Population_by_AgeGroup_Year <-
+  Population_by_Age_Date %>%
+  .[, .(Population = sum(Value)), 
+    keyby = .(YOB = round(YOB / 5) * 5, 
+              Year = if (last_qtr <= 2L) date2fy(Date) else year(Date))]
+```
+
+
+
+```{r }
+forecast2 <- function(v, hh = 10) {
+  vts <- ts(v, end = c(last_year))
+  the_forecast <- forecast::forecast(vts, h = hh)
+  o <- 
+    data.table(Year = last_year + 1:hh,
+               Value = the_forecast[["mean"]],
+               isForecast = TRUE)
+  ts2date <- function(x) {
+    # If we just take the year at face value,
+    # the first quarter of a year that ends 
+    # early will appear to dip down.
+    o <- 
+      if (last_qtr <= 2L) {
+        as.numeric(time(x)) + 0.49
+      } else {
+        as.numeric(time(x))
+      }
+    as.integer(round(o))
+  }    
+  rbind(data.table(Year = ts2date(vts), 
+                   Value = v,
+                   isForecast = FALSE),
+        o, 
+        use.names = TRUE, 
+        fill = TRUE)
+}
+```
+
+
+
+## Out-of-sample tests
+
+```{r out-of-sample-forecast1}
+forecast_from_2008 <-
+  Population_by_Age_Date %>%
+  .[YOB %in% c(1975L, 1985L, 1995L)] %>%
+  .[year(Date) <= 2008] %>%
+  .[, forecast1(Value, hh = 40L, dates = Date), keyby = "YOB"]
+
+rbind("Forecast" = forecast_from_2008, 
+      "Actual" = Population_by_Age_Date[YOB %in% c(1975L, 1985L, 1995L)],
+      idcol = "Color",
+      use.names = TRUE,
+      fill = TRUE) %>%
+  .[] %>%
+  .[Date == max(Date), label := as.character(YOB)] %>%
+  ggplot(aes(x = Date,
+             y = Value,
+             group = paste0(YOB, Color),
+             color = Color)) + 
+  geom_text_repel(aes(label = label), 
+                  xlim = c(as.Date("2018-06-01"), as.Date(NA)),
+                  hjust = 0,
+                  na.rm = TRUE) +
+  geom_line()
+
+
+
+
+```
+
+
+
+

@@ -1,19 +1,3 @@
-
-# check_names(X, expected_names, pre_ensure = NULL) {
-#   if (!is.null(names(X))) {
-#     Xc <- deparse(substitute(X))
-#     stopn("`custom.series` is a list with no names. ", 
-#          "If using `custom.series` as a list, ensure ",
-#          "its names are 'fy_year' and 'r'.")
-#   }
-#   if (length(names(X)) != length(expected_names)) {
-#     
-#   }
-# }
-
-
-
-
 #' Append a custom series when you want a fixed forecast
 #' @param orig The original series (with \code{fy_year})
 #' @param custom.series The user-provided way of appending series.
@@ -30,10 +14,18 @@ append_custom_series <- function(orig,
                                  last_full_fy_in_orig,
                                  cs = deparse(substitute(custom.series))) {
   reqd_fys <-
-    yr2fy(seq.int(from = last_full_yr_in_orig + 1L, 
+    yr2fy(seq.int(from = min(last_full_yr_in_orig + 1L, 
+                             fy2yr(last_full_fy_in_orig) + 1L),
                   to = max_to_yr)) %>%
     .[. %notin% .subset2(orig, "fy_year")]
   
+  # nocov start
+  if (Sys.getenv("_R_GRATTAN_DEBUG_") == "true") {
+    for (i in ls()) {
+      assign(i, value = get(i), envir = .GlobalEnv)
+    }
+  }
+  # nocov end
   
   custom.series <-
     standardize_custom_series(custom.series,
@@ -56,7 +48,13 @@ append_custom_series <- function(orig,
   input_series_fys <- .subset2(custom.series, "fy_year")
   first_fy_in_custom_series <- input_series_fys[[1L]]
  
-  stopifnot(first_fy_in_custom_series <= next_fy(last_full_fy_in_orig))
+  # nocov start
+  if (first_fy_in_custom_series > next_fy(last_full_fy_in_orig)) {
+    stop("Internal error: `first_fy_in_custom_series > next_fy(last_full_fy_in_orig)`\n\t", 
+         "first_fy_in_custom_series = ", first_fy_in_custom_series, "\n\t",
+         "last_full_fy_in_orig = ", last_full_fy_in_orig, "\n\t")
+  }
+  # nocov end
   
   # Is the following
   if (first_fy_in_custom_series == next_fy(last_full_fy_in_orig)) {
@@ -180,7 +178,7 @@ standardize_custom_series <- function(custom.series, cs, req.fys) {
   
   input_series_fys <- .subset2(custom.series, "fy_year")
   
-  if (!all(req.fys %in% input_series_fys)) {
+  if (any_notin(req.fys, input_series_fys)) {
     stopn("`", cs, "$fy_year` did not have the required financial years.\n\n", 
           "`", cs, "$fy_year` was\n\t",
           deparse(input_series_fys), "\n",

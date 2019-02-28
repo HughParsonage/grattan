@@ -185,8 +185,43 @@ fy2date <- function(x){
 }
 
 
-date2fy <- function(date){
+date2fy <- function(date) {
   if_else(month(date) < 7L, 
           yr2fy(year(date)), 
           yr2fy(year(date) + 1L))
 }
+
+qtr2fy <- function(yq) {
+  if (inherits(yq, "yearqtr")) {
+    yqn <- as.numeric(yq)
+    o <- 
+      yr2fy(if_else(yqn %% 1 >= 0.5,
+                    yqn + 1, 
+                    yqn))
+    o
+  } else if (is.character(yq)) {
+    # Rely on the first element to determine the 
+    # format
+    first_yq <- yq[1L]
+    if (is.na(first_yq)) {
+      yq_is_na <- is.na(yq)
+      first_yq <- first(yq[which.min(yq_is_na)])
+    }
+    
+    y <- q <- NULL
+    cm <- CJ(y = 1901:2099, q = 1:4)
+    cm[, "YQ" := sprintf("%d%sQ%d", y, substr(first_yq, 5L, 5L), q)]
+    cm[, "fy_year" := yr2fy(y + q %in% 3:4)]
+    cmyq <- .subset2(cm, "YQ")
+    o <- .subset2(cm, "fy_year")[fmatch(yq, cmyq)]
+  } else {
+    stop("Unknown class for `yq`.")
+  }
+  o
+}
+
+
+
+
+
+

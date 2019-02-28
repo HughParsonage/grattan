@@ -11,7 +11,7 @@
 #' 
 #' If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{from_fy} is set to the previous financial year and \code{to_fy} to the current financial year, with a warning. Setting only one is an error.
 #' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.
-#' The internal data was updated on 2019-02-08 to 2018-12-01.
+#' The internal data was updated on 2019-02-23 to 2019-01-01.
 #' @param allow.projection Logical. Should projections be allowed?
 #' @param use.month An integer (corresponding to the output of \code{data.table::month}) representing the month of the series used for the inflation.
 #' @param forecast.series Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals.
@@ -166,7 +166,7 @@ lf_inflator_fy <- function(labour_force = 1,
   last_full_yr_in_series <- 
     lf.indices %>%
     # month from data.table::
-    .[month(obsDate) == 6L, last(obsDate)] %>%
+    .[month(obsDate) == use.month, last(obsDate)] %>%
     year
   
   last_full_fy_in_series <- yr2fy(last_full_yr_in_series)
@@ -212,12 +212,13 @@ lf_inflator_fy <- function(labour_force = 1,
   lf.indices <- 
     lf.indices %>%
     .[month(obsDate) == use.month] %>%
-    .[, fy_year := date2fy(obsDate)]
+    .[, "fy_year" := date2fy(obsDate)]
 
   
   if (AND(allow.projection,
           AND(max_to_yr > last_full_yr_in_series,
               forecast.series == "custom"))) {
+    last_full_fy_in_series <- last(.subset2(lf.indices, "fy_year"))
     lf.indices <- append_custom_series(orig = lf.indices,
                                        custom.series = lf.series,
                                        max_to_yr = max_to_yr,
