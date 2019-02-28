@@ -93,6 +93,10 @@ test_that("NA handling", {
                c(NA, "2013-14", "2013-14"))
 })
 
+test_that("qtr2fy error", {
+  expect_error(qtr2fy(raw(1)))
+})
+
 
 
 

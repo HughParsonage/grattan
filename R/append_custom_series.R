@@ -1,19 +1,3 @@
-
-# check_names(X, expected_names, pre_ensure = NULL) {
-#   if (!is.null(names(X))) {
-#     Xc <- deparse(substitute(X))
-#     stopn("`custom.series` is a list with no names. ", 
-#          "If using `custom.series` as a list, ensure ",
-#          "its names are 'fy_year' and 'r'.")
-#   }
-#   if (length(names(X)) != length(expected_names)) {
-#     
-#   }
-# }
-
-
-
-
 #' Append a custom series when you want a fixed forecast
 #' @param orig The original series (with \code{fy_year})
 #' @param custom.series The user-provided way of appending series.
@@ -34,12 +18,14 @@ append_custom_series <- function(orig,
                              fy2yr(last_full_fy_in_orig) + 1L),
                   to = max_to_yr)) %>%
     .[. %notin% .subset2(orig, "fy_year")]
+  
+  # nocov start
   if (Sys.getenv("_R_GRATTAN_DEBUG_") == "true") {
     for (i in ls()) {
       assign(i, value = get(i), envir = .GlobalEnv)
     }
-    
   }
+  # nocov end
   
   custom.series <-
     standardize_custom_series(custom.series,
@@ -62,11 +48,13 @@ append_custom_series <- function(orig,
   input_series_fys <- .subset2(custom.series, "fy_year")
   first_fy_in_custom_series <- input_series_fys[[1L]]
  
+  # nocov start
   if (first_fy_in_custom_series > next_fy(last_full_fy_in_orig)) {
     stop("Internal error: `first_fy_in_custom_series > next_fy(last_full_fy_in_orig)`\n\t", 
          "first_fy_in_custom_series = ", first_fy_in_custom_series, "\n\t",
          "last_full_fy_in_orig = ", last_full_fy_in_orig, "\n\t")
   }
+  # nocov end
   
   # Is the following
   if (first_fy_in_custom_series == next_fy(last_full_fy_in_orig)) {

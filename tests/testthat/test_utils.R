@@ -144,6 +144,10 @@ test_that("age2age_range", {
   expect_equal(age2age_range(19), 11)
 })
 
+test_that("hasntName", {
+  expect_true(hasntName(data.table(x = 1), "y"))
+  expect_false(hasntName(data.table(x = 1), "x"))
+})
 
 
 
