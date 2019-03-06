@@ -41,12 +41,17 @@ revenue_foregone <- function(dt, revenue_positive = TRUE, digits = NULL) {
 
 #' @export
 print.revenue_foregone <- function(x, ...) {
+  pre <- 
+    paste0(if (x < 0) {
+      # minus sign
+      "\u2212"
+    },
+    if_knitting_latex("\\$", "$"))
+  
   if (x < 0) {
-    pre <- paste0("\u2212", if (is_knitting()) "\\$" else "$")
     x <- -x
-  } else {
-    pre <- "$"
   }
+  
   d <- function(default) {
     if (is.null(attr(x, "digits"))) {
       default
@@ -55,11 +60,17 @@ print.revenue_foregone <- function(x, ...) {
     }
   }
   if (x > 10e9) {
-    res <- paste0(pre, prettyNum(round(x / 1e9, d(0)), big.mark = ","), " billion")
+    res <- paste0(pre, prettyNum(round(x / 1e9, d(0)), big.mark = ","),
+                  if_knitting_latex("~billion", 
+                                    " billion"))
   } else if (x > 1e9) {
-    res <- paste0(pre, prettyNum(round(x / 1e9, d(1)), big.mark = ","), " billion")
+    res <- paste0(pre, prettyNum(round(x / 1e9, d(1)), big.mark = ","),
+                  if_knitting_latex("~billion", 
+                                    " billion"))
   } else {
-    res <- paste0(pre, prettyNum(round(x / 1e6, d(0)), big.mark = ","), " million")
+    res <- paste0(pre, prettyNum(round(x / 1e6, d(0)), big.mark = ","),
+                  if_knitting_latex("~million", 
+                                    " million"))
   }
   print(res)
 }

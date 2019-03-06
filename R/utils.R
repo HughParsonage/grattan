@@ -34,6 +34,23 @@ is_knitting <- function() {
   isTRUE(getOption('knitr.in.progress'))
 }
 
+# i.e. is the output latex -- useful for constructing
+# print objects that may need different escaping/spacing
+is_knitting_latex <- function() {
+  OR(is_knitting() && 
+       identical(knitr::opts_knit$get("out.format"), "latex"),
+     # use this for unit tests
+     Sys.getenv("_R_GRATTAN_MOCK_KNITR_LATEX_") == "true")
+}
+
+if_knitting_latex <- function(yes, no) {
+  if (is_knitting_latex()) {
+    yes
+  } else {
+    no
+  }
+}
+
 # from dplyr::near
 near <- function (x, y, tol = .Machine$double.eps^0.5) {
   abs(x - y) < tol
