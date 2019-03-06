@@ -833,7 +833,16 @@ model_income_tax <- function(sample_file,
       flood_levy.
     
     if (.debug) {
-      return(data.table(income, old_tax, base_tax., lito., lamington_offset., sapto., sbto., medicare_levy.))
+      return(data.table(Ind = if ("Ind" %in% names(.dots.ATO)) .dots.ATO[["Ind"]] else -1L, 
+                        income, 
+                        old_tax,
+                        new_tax,
+                        base_tax.,
+                        lito.,
+                        lamington_offset.,
+                        sapto.,
+                        sbto.,
+                        medicare_levy.))
     }
     
     new_tax  

@@ -16,7 +16,7 @@
 #' is a warning.
 #' 
 #' @param allow.forecasts should dates beyond 2019-20 be permitted? Currently, not permitted.
-#' @param .debug (logical, default: \code{FALSE})  If \code{TRUE}, returns a \code{data.table} containing the components. (This argument and its result is liable to change in future versions, possibly without notice.)
+#' @param .debug (logical, default: \code{FALSE})  If \code{TRUE}, returns a \code{data.table} containing the components of income tax calculated. (This argument and its result is liable to change in future versions, possibly without notice.)
 #' @author Tim Cameron, Brendan Coates, Matthew Katzen, Hugh Parsonage, William Young
 #' @details The function 'rolling' is inflexible by design. It is designed to guarantee the correct tax payable in a year.
 #' For years preceding the introduction of SAPTO, the maximum offset is assumed to apply to those above pensionable age. 
@@ -26,6 +26,8 @@
 #' income_tax(50e3, "2013-14")
 #' 
 #' ## Calculate tax for each lodger in the 2013-14 sample file.
+#' ## Essentially, this is the only use-case for `income_tax`
+#' 
 #' if (requireNamespace("taxstats", quietly = TRUE)) {
 #'   library(data.table)
 #'   library(taxstats)
@@ -304,8 +306,14 @@ rolling_income_tax <- function(income,
   }
   
   if (.debug && is.data.table(.dots.ATO)) {
+    new_tax <-
+      pmaxIPnum0(S4.10_basic_income_tax_liability - sbto.) +
+      medicare_levy. +
+      temp_budget_repair_levy. +
+      flood_levy.
+    
     result <- 
-      copy(.dots.ATO) %>%
+      as.data.table(.dots.ATO) %>%
       .[, "base_tax" := base_tax.] %>%
       .[, "lito" := lito.] %>%
       .[wse, "rebate_income" := rebate_income(Taxable_Income = income[wse],
@@ -315,7 +323,8 @@ rolling_income_tax <- function(income,
                                               Rep_frng_ben_amt = dase("Rep_frng_ben_amt"))] %>%
       .[, "sapto" := sapto.] %>%
       .[, "medicare_levy" := medicare_levy.] %>%
-      .[, "SBTO" := sbto.] 
+      .[, "SBTO" := sbto.] %>%
+      .[, "new_tax" := new_tax]
     
     # if (fy.year == "2011-12") {
     #   result[, "flood_levy" := flood_levy.]

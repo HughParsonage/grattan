@@ -49,6 +49,8 @@ For years preceding the introduction of SAPTO, the maximum offset is assumed to 
 income_tax(50e3, "2013-14")
 
 ## Calculate tax for each lodger in the 2013-14 sample file.
+## Essentially, this is the only use-case for `income_tax`
+
 if (requireNamespace("taxstats", quietly = TRUE)) {
   library(data.table)
   library(taxstats)
