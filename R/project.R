@@ -1,6 +1,7 @@
-#' A function for simple projections of tables of Australian Taxation Office tax returns.
+#' Simple projections of the annual 2\% samples of Australian Taxation Office tax returns.
 #' 
-#' @param sample_file A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.
+#' @param sample_file A \code{data.table} matching a 2\% sample file from the ATO.
+#' See package \code{taxstats} for an example.
 #' @param h An integer. How many years should the sample file be projected?
 #' @param fy.year.of.sample.file The financial year of \code{sample_file}. If \code{NULL}, the default, the number is inferred from the 
 #' number of rows of \code{sample_file} to be one of \code{2012-13}, \code{2013-14}, \code{2014-15}, or \code{2015-16}.
@@ -20,9 +21,15 @@
 #' @param differentially_uprate_Sw (logical, default: \code{TRUE}) Should the salary and wage column (\code{Sw_amt}) be differentially uprating using (\code{\link{differentially_uprate_wage}})?
 #' 
 #' 
-#' @return A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).
-#' @details We recommend you use \code{sample_file_1213} over \code{sample_file_1314}, unless you need the superannuation variables, 
+#' @return A sample file with the same number of rows as \code{sample_file} but 
+#' with inflated values as a forecast for the sample file in \code{to_fy}. 
+#' If \code{WEIGHT} is not already a column of \code{sample_file}, it will be added and its sum
+#' will be the predicted number of taxpayers in \code{to_fy}.
+#' 
+#' @details We recommend you use \code{sample_file_1213} over \code{sample_file_1314},
+#' unless you need the superannuation variables, 
 #' as the latter suggests lower-than-recorded tax collections. 
+#' However, more recent data is of course preferable.
 #' 
 #' Superannuation variables are inflated by a fixed rate of 5\% p.a.
 #' @examples 
@@ -36,7 +43,6 @@
 #'                               h = 3L, # to "2016-17"
 #'                               fy.year.of.sample.file = "2013-14")  
 #' }
-#' @import data.table
 #' @export
 
 project <- function(sample_file, 
@@ -183,8 +189,8 @@ project <- function(sample_file,
   }
   # nocov end
   
-  
   cpi.inflator <- cpi_inflator(1, from_fy = current.fy, to_fy = to.fy)
+  
   if (.recalculate.inflators) {
     CG.inflator <- CG_inflator(1, from_fy = current.fy, to_fy = to.fy)
   } else {

@@ -2,7 +2,7 @@
 % Please edit documentation in R/project.R
 \name{project}
 \alias{project}
-\title{A function for simple projections of tables of Australian Taxation Office tax returns.}
+\title{Simple projections of the annual 2\% samples of Australian Taxation Office tax returns.}
 \usage{
 project(sample_file, h = 0L, fy.year.of.sample.file = NULL,
   WEIGHT = 50L, excl_vars = NULL, forecast.dots = list(estimator =
@@ -12,7 +12,8 @@ project(sample_file, h = 0L, fy.year.of.sample.file = NULL,
   differentially_uprate_Sw = TRUE)
 }
 \arguments{
-\item{sample_file}{A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.}
+\item{sample_file}{A \code{data.table} matching a 2\% sample file from the ATO.
+See package \code{taxstats} for an example.}
 
 \item{h}{An integer. How many years should the sample file be projected?}
 
@@ -44,14 +45,19 @@ number of rows in \code{sample_file} is different to the known number of rows in
 \item{differentially_uprate_Sw}{(logical, default: \code{TRUE}) Should the salary and wage column (\code{Sw_amt}) be differentially uprating using (\code{\link{differentially_uprate_wage}})?}
 }
 \value{
-A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).
+A sample file with the same number of rows as \code{sample_file} but 
+with inflated values as a forecast for the sample file in \code{to_fy}. 
+If \code{WEIGHT} is not already a column of \code{sample_file}, it will be added and its sum
+will be the predicted number of taxpayers in \code{to_fy}.
 }
 \description{
-A function for simple projections of tables of Australian Taxation Office tax returns.
+Simple projections of the annual 2\% samples of Australian Taxation Office tax returns.
 }
 \details{
-We recommend you use \code{sample_file_1213} over \code{sample_file_1314}, unless you need the superannuation variables, 
+We recommend you use \code{sample_file_1213} over \code{sample_file_1314},
+unless you need the superannuation variables, 
 as the latter suggests lower-than-recorded tax collections. 
+However, more recent data is of course preferable.
 
 Superannuation variables are inflated by a fixed rate of 5\% p.a.
 }
