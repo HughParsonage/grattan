@@ -22,7 +22,7 @@ append_custom_series <- function(orig,
   # nocov start
   if (Sys.getenv("_R_GRATTAN_DEBUG_") == "true") {
     for (i in ls()) {
-      assign(i, value = get(i), envir = .GlobalEnv)
+      assign(i, value = get(i), envir = GRATTAN_DEBUG_ENV)
     }
   }
   # nocov end

@@ -74,11 +74,14 @@
   
   tryCatch({
     f_mtimes <- 
-      if (file.exists("R/grattan-package.R")) {
-        c(vapply(dir(path = "R", full.names = TRUE), file.mtime, double(1)),
-          vapply(dir(path = "tests/testthat", full.names = TRUE), file.mtime, double(1)))
-      } else if (file.exists(file.path(find.package("grattan"), "NAMESPACE"))) {
-        sapply(file.path(find.package("grattan"), "NAMESPACE"), file.mtime)
+      # Display last file changed when on local machine only
+      if (identical(Sys.info()[["user"]], "hughp")) {
+        if (file.exists("R/grattan-package.R")) {
+          c(vapply(dir(path = "R", full.names = TRUE), file.mtime, double(1)),
+            vapply(dir(path = "tests/testthat", full.names = TRUE), file.mtime, double(1)))
+        } else if (file.exists(file.path(find.package("grattan"), "NAMESPACE"))) {
+          sapply(file.path(find.package("grattan"), "NAMESPACE"), file.mtime)
+        }
       }
     if (length(f_mtimes)) {
       class(f_mtimes) <- "POSIXct"
