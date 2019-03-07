@@ -43,7 +43,7 @@ project <- function(sample_file,
                     h = 0L, 
                     fy.year.of.sample.file = NULL, 
                     WEIGHT = 50L, 
-                    excl_vars, 
+                    excl_vars = NULL, 
                     forecast.dots = list(estimator = "mean", pred_interval = 80), 
                     wage.series = NULL,
                     lf.series = NULL,
@@ -245,24 +245,26 @@ project <- function(sample_file,
   CGTy.cols <- c("Net_CG_amt", "Tot_CY_CG_amt")
   
   # names(taxstats::sample_file_1314)
-  alien.cols <- col.names[!col.names %chin% c("Ind", "Gender", "age_range", "Occ_code", "Partner_status", 
-                                              "Region", "Lodgment_method", "PHI_Ind", "Sw_amt", "Alow_ben_amt", 
-                                              "ETP_txbl_amt", "Grs_int_amt", "Aust_govt_pnsn_allw_amt", "Unfranked_Div_amt", 
-                                              "Frk_Div_amt", "Dividends_franking_cr_amt", "Net_rent_amt", "Gross_rent_amt", 
-                                              "Other_rent_ded_amt", "Rent_int_ded_amt", "Rent_cap_wks_amt", 
-                                              "Net_farm_management_amt", "Net_PP_BI_amt", "Net_NPP_BI_amt", 
-                                              "Total_PP_BI_amt", "Total_NPP_BI_amt", "Total_PP_BE_amt", "Total_NPP_BE_amt", 
-                                              "Net_CG_amt", "Tot_CY_CG_amt", "Net_PT_PP_dsn", "Net_PT_NPP_dsn", 
-                                              "Taxed_othr_pnsn_amt", "Untaxed_othr_pnsn_amt", "Other_foreign_inc_amt", 
-                                              "Other_inc_amt", "Tot_inc_amt", "WRE_car_amt", "WRE_trvl_amt", 
-                                              "WRE_uniform_amt", "WRE_self_amt", "WRE_other_amt", "Div_Ded_amt", 
-                                              "Intrst_Ded_amt", "Gift_amt", "Non_emp_spr_amt", "Cost_tax_affairs_amt", 
-                                              "Other_Ded_amt", "Tot_ded_amt", "PP_loss_claimed", "NPP_loss_claimed", 
-                                              "Rep_frng_ben_amt", "Med_Exp_TO_amt", "Asbl_forgn_source_incm_amt", 
-                                              "Spouse_adjusted_taxable_inc", "Net_fincl_invstmt_lss_amt", "Rptbl_Empr_spr_cont_amt", 
-                                              "Cr_PAYG_ITI_amt", "TFN_amts_wheld_gr_intst_amt", "TFN_amts_wheld_divs_amt", 
-                                              "Hrs_to_prepare_BPI_cnt", "Taxable_Income", "Help_debt", "MCS_Emplr_Contr", 
-                                              "MCS_Prsnl_Contr", "MCS_Othr_Contr", "MCS_Ttl_Acnt_Bal")]
+  alien.cols <- 
+    col.names[!col.names %chin% c("Ind", "Gender", "age_range", "Occ_code", "Partner_status", 
+                                  "Region", "Lodgment_method", "PHI_Ind", "Sw_amt", "Alow_ben_amt", 
+                                  "ETP_txbl_amt", "Grs_int_amt", "Aust_govt_pnsn_allw_amt", "Unfranked_Div_amt", 
+                                  "Frk_Div_amt", "Dividends_franking_cr_amt", "Net_rent_amt", "Gross_rent_amt", 
+                                  "Other_rent_ded_amt", "Rent_int_ded_amt", "Rent_cap_wks_amt", 
+                                  "Net_farm_management_amt", "Net_PP_BI_amt", "Net_NPP_BI_amt", 
+                                  "Total_PP_BI_amt", "Total_NPP_BI_amt", "Total_PP_BE_amt", "Total_NPP_BE_amt", 
+                                  "Net_CG_amt", "Tot_CY_CG_amt", "Net_PT_PP_dsn", "Net_PT_NPP_dsn", 
+                                  "Taxed_othr_pnsn_amt", "Untaxed_othr_pnsn_amt", "Other_foreign_inc_amt", 
+                                  "Other_inc_amt", "Tot_inc_amt", "WRE_car_amt", "WRE_trvl_amt", 
+                                  "WRE_uniform_amt", "WRE_self_amt", "WRE_other_amt", "Div_Ded_amt", 
+                                  "Intrst_Ded_amt", "Gift_amt", "Non_emp_spr_amt", "Cost_tax_affairs_amt", 
+                                  "Other_Ded_amt", "Tot_ded_amt", "PP_loss_claimed", "NPP_loss_claimed", 
+                                  "Rep_frng_ben_amt", "Med_Exp_TO_amt", "Asbl_forgn_source_incm_amt", 
+                                  "Spouse_adjusted_taxable_inc", "Net_fincl_invstmt_lss_amt", "Rptbl_Empr_spr_cont_amt", 
+                                  "Cr_PAYG_ITI_amt", "TFN_amts_wheld_gr_intst_amt", "TFN_amts_wheld_divs_amt", 
+                                  "Hrs_to_prepare_BPI_cnt", "Taxable_Income", "Help_debt", "MCS_Emplr_Contr", 
+                                  "MCS_Prsnl_Contr", "MCS_Othr_Contr", "MCS_Ttl_Acnt_Bal",
+                                  "WEIGHT")]
   Not.Inflated <- c("Ind", 
                     "Gender",
                     "age_range", 
@@ -270,15 +272,21 @@ project <- function(sample_file,
                     "Partner_status", 
                     "Region", 
                     "Lodgment_method", 
-                    "PHI_Ind", 
+                    "PHI_Ind",
+                    derived.cols,
                     alien.cols)
   
-  if (!missing(excl_vars)) {
-    Not.Inflated <- c(Not.Inflated, excl_vars)
-  }
+  
+  Not.Inflated <- c(Not.Inflated, excl_vars)
   
   generic.cols <- 
-    col.names[!col.names %chin% c(diff.uprate.wagey.cols, wagey.cols, super.bal.col, lfy.cols, cpiy.cols, derived.cols, Not.Inflated)]
+    col.names[col.names %notchin% c(diff.uprate.wagey.cols, 
+                                    wagey.cols,
+                                    super.bal.col,
+                                    lfy.cols,
+                                    cpiy.cols,
+                                    derived.cols,
+                                    Not.Inflated)]
   
   if (.recalculate.inflators) {
     generic.inflators <- 
@@ -299,26 +307,32 @@ project <- function(sample_file,
   }
   
   ## Inflate:
-  # make numeric to avoid overflow
-  # integer.cols <- names(sample_file)[vapply(sample_file, is.integer, TRUE)]
-  # integer.cols <- integer.cols[integer.cols %notin% c(Not.Inflated)]
-  # for (j in which(col.names %chin% integer.cols)) {
-  #   set(sample_file, j = j, value = as.double(.subset2(sample_file, j)))
-  # }
   
-  
-  # Differential uprating:
-  for (j in which(col.names %chin% diff.uprate.wagey.cols)){
-    if (is.null(wage.series)){
-      set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy))
-    } else {
-      set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy, 
-                                                                 forecast.series = "custom", wage.series = wage.series))
+  # Function to determine which inflator to use, given the column name
+  inflator_switch <- function(nom) {
+    if (nom %chin% diff.uprate.wagey.cols) {
+      return("differential")
     }
-  }
-  
-  for (j in which(col.names %chin% wagey.cols)) {
-    set(sample_file, j = j, value = wage.inflator * sample_file[[j]])
+    if (nom %chin% wagey.cols) {
+      return("wage")
+    }
+    if (nom %chin% cpiy.cols) {
+      return("cpi")
+    }
+    if (nom %chin% lfy.cols) {
+      return("labour-force")
+    }
+    if (nom %chin% CGTy.cols) {
+      return("cgt")
+    }
+    if (nom %chin% generic.cols) {
+      return("generic")
+    }
+    if (nom %chin% super.bal.col) {
+      return("super")
+    }
+    stop("Internal error: inflator-switch unmatched. ", # nocov
+         "`nom = ", nom, "`") # nocov
   }
   
   if (use_age_pop_forecast) {
@@ -332,38 +346,59 @@ project <- function(sample_file,
     sample_file <- sample_file[pop_inflator_by_age, on = "age_range"]
     # Will expand to nrow
     lf.inflator <- {lf.inflator + .subset2(sample_file, "pop_forecast_r")} / 2
-  } 
-  
-  for (j in which(col.names %chin% lfy.cols)) {
-    set(sample_file,
-        j = j, 
-        value = lf.inflator * sample_file[[j]])
   }
   
-  for (j in which(col.names %chin% cpiy.cols))
-    set(sample_file, j = j, value = cpi.inflator * sample_file[[j]])
-  
-  for (j in which(col.names %chin% CGTy.cols))
-    set(sample_file, j = j, value = CG.inflator * sample_file[[j]])
-  
-  if (.recalculate.inflators) {
-    for (j in which(col.names %chin% generic.cols)) {
-      stopifnot("variable" %in% names(generic.inflators))  ## super safe
-      nom <- col.names[j]
-      set(sample_file, 
-          j = j, 
-          value = generic.inflators[variable == nom]$inflator * sample_file[[j]])
+
+  for (j in col.names) {
+    if (j %chin% Not.Inflated) {
+      next
     }
-  } else {
-    stopifnot(identical(key(generic.inflators), c("h", "variable")))
-    for (v in generic.cols) {
-      set(sample_file, j = v,
-          value = generic.inflators[.(H, v), inflator] * .subset2(sample_file, v))
-    }
-  }
-  
-  for (j in which(col.names %in% super.bal.col)){
-    set(sample_file, j = j, value = (1.05 ^ h) * sample_file[[j]])
+    v <- .subset2(sample_file, j)
+    v_new <- 
+      switch(inflator_switch(j),
+             "differential" = {
+               if (is.null(wage.series)) {
+                 differentially_uprate_wage(v, 
+                                            from_fy = current.fy,
+                                            to_fy = to.fy)
+               } else {
+                 differentially_uprate_wage(v, 
+                                            from_fy = current.fy,
+                                            to_fy = to.fy,
+                                            forecast.series = "custom",
+                                            wage.series = wage.series)
+               }
+             },
+             "wage" = {
+               wage.inflator * v
+             },
+             "cpi" = {
+               cpi.inflator * v
+             },
+             "labour-force" = {
+               lf.inflator * v
+             },
+             "cgt" = {
+               CG.inflator * v
+             },
+             "generic" = {
+               if (.recalculate.inflators) {
+                 generic.inflators[variable == j]$inflator * v
+               } else {
+                 generic.inflators[.(H, j), inflator] * v
+               }
+             },
+             "super" = {
+               {1.05 ^ h} * v
+             },
+             # nocov start
+             stop("Internal error: switch(inflator_switch()) not matched\n\t", 
+                  "inflator_switch(j) = ", "inflator_switch(", j, ") = ", 
+                  inflator_switch(j)))
+    # nocov end
+    set(sample_file, 
+        j = j,
+        value = v_new)
   }
   
   sample_file %>%

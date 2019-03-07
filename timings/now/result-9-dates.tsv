@@ -307,3 +307,7 @@ dt[, weighted_ntile(y, w = wt, n = 10)]	110525402	2019-03-07
 dt[, weighted_ntile(x, w = wt, n = 10)]	35341801	2019-03-07
 dt[, weighted_ntile(y, w = wt, n = 10)]	121115901	2019-03-07
 dt[, weighted_ntile(x, w = wt, n = 10)]	40879101	2019-03-07
+dt[, weighted_ntile(y, w = wt, n = 10)]	101627400	2019-03-07
+dt[, weighted_ntile(x, w = wt, n = 10)]	22882500	2019-03-07
+dt[, weighted_ntile(y, w = wt, n = 10)]	108178900	2019-03-07
+dt[, weighted_ntile(x, w = wt, n = 10)]	27754100	2019-03-07
