@@ -1,0 +1,265 @@
+---
+title: "Model income tax and project"
+author: "Hugh Parsonage"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{model_income_tax}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# How to use `model_income_tax`
+
+`model_income_tax` takes a sample file and returns a sample file under the settings
+given by the function arguments.
+
+
+```{r loadPackages}
+library(data.table)
+library(magrittr)
+library(taxstats1516)
+s1516 <- as.data.table(sample_file_1516_synth)
+s1516[, WEIGHT := 50]
+library(knitr)
+library(hutils)
+library(grattan)
+dollar <- function (x, digits = 0) {
+  #
+  nsmall <- digits
+  commaz <- format(abs(x), nsmall = nsmall, trim = TRUE, big.mark = ",", 
+                   scientific = FALSE, digits = 1L)
+  
+  if_else(x < 0, 
+          paste0("\U2212","$", commaz),
+          paste0("$", commaz))
+}
+```
+
+All instances of `model_income_tax` require `sample_file` and
+`baseline_fy`. These define the `baseline_tax` column. When another
+tax argument is `NULL`, the `new_tax` value is calculated using the
+tax settings in whatever tax 
+year `baseline_tax` is set to.
+
+```{r baseline-fy}
+s1516 %>%
+  model_income_tax(baseline_fy = "2015-16") %>%
+  select_grep("tax$", "Taxable_Income") %>%  # just look at relevant cols
+  head %>%
+  kable
+```
+
+Note that under default settings the `new_tax` is a double precision
+vector, not rounded.  You can use `return. = sample_file.int` to 
+return rounded variables, matching `baseline_tax`.
+
+```{r baseline-fy-int}
+is_all_equal <- function(x, y) {
+  if (is.integer(x) && is.integer(y)) {
+    all(x == y)
+  } else {
+    isTRUE(all.equal(x, y))
+  }
+}
+
+s1516 %>%
+  model_income_tax(baseline_fy = "2015-16", 
+                   return. = "sample_file.int") %>%
+  select_grep("tax$", "Taxable_Income") %T>%
+  .[, stopifnot(is_all_equal(baseline_tax, new_tax))] %>%
+  head %>%
+  kable
+```
+
+## Changing ordinary tax parameters
+
+You can change how the 'ordinary tax' is calculated by changing the 
+arguments `ordinary_tax_thresholds` and `ordinary_tax_rates`. To replicate
+the 2015-16 tax scales, one would use.
+
+```{r s1516_no_changes}
+s1516_no_changes <- 
+  # Temp budget repair levy not refundable against SBTO
+  s1516 %>%
+  model_income_tax(baseline_fy = "2015-16",
+                   ordinary_tax_thresholds = c(0, 18200, 37000, 80000, 180000),
+                                                               # temp budget 
+                                                               # repair levy
+                   ordinary_tax_rates = c(0, 0.19, 0.325, 0.37, 0.45 + 0.02), 
+                   return. = "sample_file.int")
+```
+
+Note that the top marginal tax rate must include the temporary budget repair levy. This
+causes a slight difference between the two taxes because the small business tax offset 
+does not offset levies.
+
+## Changing Medicare levy parameters
+
+The Medicare levy is more complex to calculate than ordinary income tax. 
+There are parameters relating to two thresholds, as well as different 
+thresholds for families and SAPTO-eligible individuals. Even the simplest
+modification require changes to multiple parameters. To assist, warnings 
+are emitted whenever a parameter are not internally consistent.
+
+Let's try to increase the Medicare levy rate from 2\% and 3\%. Observe
+the warning messages.
+
+```{r medicare-levy-rate-increase-a}
+m1516a <- 
+  s1516 %>%
+  model_income_tax("2015-16",
+                   # Increase to 3%
+                   medicare_levy_rate = 0.03)
+```
+
+Note the warning messsage says that the parameter **has** been changed.
+However, you should never tolerate the warning; instead, change the parameter
+to the suggested one (if you agree with the warning message's advice).
+
+```{r medicare-levy-rate-increase-b}
+m1516a <- 
+  s1516 %>%
+  model_income_tax("2015-16",
+                   # Increase to 3%
+                   medicare_levy_rate = 0.03,
+                   medicare_levy_upper_threshold = 30479,
+                   medicare_levy_upper_sapto_threshold = 48197)
+```
+
+## Changes to the Low Income Tax Offset
+
+Here is a change to the LITO so that the maximum offset is $1000.
+Then we print the revenue foregone.
+
+```{r lito-a}
+L1516a <-
+  s1516 %>%
+  model_income_tax("2015-16", 
+                   lito_max_offset = 1000)
+revenue_foregone(L1516a)
+```
+
+# How to use `project`
+
+The function `project` takes a sample file and returns a sample file. The 
+other mandatory argument is `h`, the number of integer years ahead of the
+sample file provided.
+
+Thus, to get a forecast for the 2018-19 tax year: 
+
+```{r project-a}
+s1819 <- project(s1516, h = 3L)
+```
+
+This uses the internal forecast methods. To specify specific forecast outcomes,
+you can use the `wage.series` and `lf.series` 
+
+## Wage and labour series
+
+```{r project-wage-lf-series}
+s1819_lf2pc_wage2pc <- 
+  s1516 %>%
+  project(h = 3L, 
+          lf.series = 0.02,
+          wage.series = 0.02) 
+```
+
+To compare the tax collections under these different assumptions, one would
+use `income_tax` separately:
+
+```{r compare-2pc-to-default}
+tax_Grattan_1819 <- 
+  s1819 %$%
+  income_tax(Taxable_Income, "2018-19", .dots.ATO = copy(s1819)) %>%
+  sum %>%
+  # Weight (equi-weighted so do now)
+  multiply_by(s1819[["WEIGHT"]][1L])
+tax_2pc_1819 <- 
+  s1819_lf2pc_wage2pc %$%
+  income_tax(Taxable_Income, "2018-19", .dots.ATO = copy(s1819)) %>%
+  sum %>%
+  # Weight (equi-weighted so do now)
+  multiply_by(s1819[["WEIGHT"]][1L])
+```
+
+Currently there is no interface to using the upper or lower bounds of the labour force or
+wage price indices. If you wanted the 80\% upper bound of the prediction interval for 
+salary out to 2020-21, for instance, you would pass `Sw_amt` to `excl_vars` and manually inflate.
+
+```{r s2021}
+s2021 <- project(s1516, h = 5L)
+```
+
+```{r s1819_wage80pc}
+s2021_wage80pc <- 
+  s1516 %>%
+  copy %>%
+  .[, Sw_amt := wage_inflator(Sw_amt, 
+                              from_fy = "2015-16",
+                              to_fy = "2020-21", 
+                              forecast.level = 80,
+                              forecast.series = "upper")] %>%
+  .[] %>%
+  project(h = 5L,
+          excl_vars = "Sw_amt") %>%
+  .[]
+```
+
+```{r compare-Sw_amt}
+s2021[, mean(Sw_amt)] %>% dollar
+s2021_wage80pc[, mean(Sw_amt)] %>% dollar
+s2021[, mean(Taxable_Income)] %>% dollar
+s2021_wage80pc[, mean(Taxable_Income)] %>% dollar
+```
+
+
+# Combining the two
+
+To cost a reduction in the capital gains tax discount from 50\% to 25\% over the four years
+from 2018-19, we would run
+
+```{r cgt_25pc_fwd_estimates}
+cgt_25pc_fwd_estimates <- 
+  lapply(yr2fy(2019:2022), function(fy) {
+    s1516 %>%
+      project_to(to_fy = fy) %>%
+      model_income_tax("2018-19",
+                       cgt_discount_rate = 0.25) %>%
+      .[, fy_year := fy]
+  }) %>%
+  rbindlist
+```
+
+Note that this takes a few seconds, most of which is spent within `project`. We could improve
+the speed of this by caching the intermediate objects, either as objects in the environment
+or as files (say, `.fst` files). You should consider this when you find yourself running `project`
+many times -- likely you are just repeating calculations.
+
+```{r cgt_25pc_fwd_estimates-deciles}
+cgt_25pc_fwd_estimates %>%
+  mutate_ntile("Taxable_Income", n = 5L, keyby = "fy_year") %>%
+  .[, delta := new_tax - baseline_tax] %>%
+  .[, .(totDelta = sum(delta),
+        avgDelta = mean(delta)),
+    keyby = .(fy_year, Taxable_IncomeQuintile)] %>%
+  # cosmetic
+  .[, lapply(.SD, round), keyby = key(.)] %>%
+  kable
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
