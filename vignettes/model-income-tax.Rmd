@@ -9,11 +9,30 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+The functions `model_income_tax` and `project` are at the core of the package.
+We use them to produce costings of changes to tax policy using the ATO's 2\% 
+sample files. The functions are both \(X^n \to X^n\). That is, they take 
+a sample file and return a mutated sample file. 
+
+With the mutated sample file, the costing for that particular tax year is the weighted 
+sum of the difference between the `new_tax` and the `baseline_tax`. We can also perform
+distributional analysis because the change is given for each taxpayer.
+
+Since the input data is tax filers and the functions do not purport to expand beyond
+that scope, these functions cannot (directly) analyse the effect of policies on 
+households or on the wider population. For example, policies affecting welfare or
+policies which tax entities outside the current population of tax filers. 
+
+
 # How to use `model_income_tax`
 
 `model_income_tax` takes a sample file and returns a sample file under the settings
 given by the function arguments.
 
+To start, let's load the (minimal) packages we need. We'll use the synthetic 2015-16
+sample file contained in the suggested package `taxstats1516`. See `?install_taxstats`
+for installation instructions. For future years, use the latest sample file from the
+ATO.
 
 ```{r loadPackages}
 library(data.table)
@@ -25,7 +44,6 @@ library(knitr)
 library(hutils)
 library(grattan)
 dollar <- function (x, digits = 0) {
-  #
   nsmall <- digits
   commaz <- format(abs(x), nsmall = nsmall, trim = TRUE, big.mark = ",", 
                    scientific = FALSE, digits = 1L)
@@ -36,9 +54,9 @@ dollar <- function (x, digits = 0) {
 }
 ```
 
-All instances of `model_income_tax` require `sample_file` and
-`baseline_fy`. These define the `baseline_tax` column. When another
-tax argument is `NULL`, the `new_tax` value is calculated using the
+All instances of `model_income_tax` have two mandatory arguments: `sample_file` and
+`baseline_fy`. These define the `baseline_tax` column in the result. When a
+tax argument is left as `NULL`, the `new_tax` value is calculated using the
 tax settings in whatever tax 
 year `baseline_tax` is set to.
 
@@ -71,6 +89,12 @@ s1516 %>%
   head %>%
   kable
 ```
+
+The choice of rounded, unrounded, or truncated values may be important for some analysis.
+For instance, tax liabilities are calculated using whole dollar amounts, so a truncated 
+value may be appropriate when the values required need to be very precise. Unrounded values
+may be important to determine changes in marginal tax rates. Rounded values may be most 
+appropriate for costings. 
 
 ## Changing ordinary tax parameters
 
