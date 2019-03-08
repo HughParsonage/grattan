@@ -19,14 +19,6 @@ append_custom_series <- function(orig,
                   to = max_to_yr)) %>%
     .[. %notin% .subset2(orig, "fy_year")]
   
-  # nocov start
-  if (Sys.getenv("_R_GRATTAN_DEBUG_") == "true") {
-    for (i in ls()) {
-      assign(i, value = get(i), envir = GRATTAN_DEBUG_ENV)
-    }
-  }
-  # nocov end
-  
   custom.series <-
     standardize_custom_series(custom.series,
                               cs = cs,

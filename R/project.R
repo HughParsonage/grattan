@@ -182,12 +182,6 @@ project <- function(sample_file,
                                   forecast.series = "custom", 
                                   lf.series = lf.series)
   }
-
-  # nocov start
-  if (Sys.getenv("_R_GRATTAN_DEBUG_") == "true") {
-    lf.inflator <<- lf.inflator
-  }
-  # nocov end
   
   cpi.inflator <- cpi_inflator(1, from_fy = current.fy, to_fy = to.fy)
   
