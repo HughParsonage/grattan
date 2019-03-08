@@ -35,14 +35,35 @@ for installation instructions. For future years, use the latest sample file from
 ATO.
 
 ```{r loadPackages}
+library(knitr)
 library(data.table)
 library(magrittr)
-library(taxstats1516)
+library(hutils)
+# Non-standard packages must be installed in a temporary
+# directory.  Use 
+#  install.packages("taxstats1516", 
+#                      repos = "https://hughparsonage.github.io/tax-drat",
+#                      type = "source")
+# when running interactively.
+provide.dir(temp_lib <- tempfile())
+if (requireNamespace("taxstats1516", quietly = TRUE)) {
+  library(taxstats1516)
+} else {
+  install.packages("taxstats1516", 
+                   repos = "https://hughparsonage.github.io/tax-drat",
+                   type = "source", 
+                   lib = temp_lib)
+  library(taxstats1516, lib.loc = temp_lib)
+}
+
 s1516 <- as.data.table(sample_file_1516_synth)
 s1516[, WEIGHT := 50]
-library(knitr)
-library(hutils)
+
+
 library(grattan)
+```
+
+```{r dollar}
 dollar <- function (x, digits = 0) {
   nsmall <- digits
   commaz <- format(abs(x), nsmall = nsmall, trim = TRUE, big.mark = ",", 
