@@ -65,7 +65,7 @@ test_that("Error handling (sample files)", {
   skip_on_circleci(1)
   library(taxstats)
   expect_error(project(data.table(), h = 1L),
-               regexp = "`fy.year.of.sample.file` was not provided, and its value could not be inferred from nrow(sample_file) = 0. Either use a 2% sample file of the years 2012-13, 2013-14, or 2014-15 or supply `fy.year.of.sample.file` manually.", 
+               regexp = "`fy.year.of.sample.file` was not provided, and its value could not be inferred from nrow(sample_file) = 0.", 
                fixed = TRUE)
   
   
@@ -79,7 +79,7 @@ test_that("Error handling (sample files)", {
                  regexp = "nrow(sample_file) != 269639", 
                  fixed = TRUE)
   expect_error(project_to(sample_file_1112, "2013-14"),
-               regexp = "`fy.year.of.sample.file` was not provided, yet its value could not be inferred from nrow(sample_file) = 254273. Either use a 2% sample file of the years 2012-13, 2013-14, or 2014-15 or supply `fy.year.of.sample.file` manually.",
+               regexp = "`fy.year.of.sample.file` was not provided, yet its value could not be inferred from nrow(sample_file) = 254273.",
                fixed = TRUE)
 })
 

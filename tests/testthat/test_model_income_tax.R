@@ -809,7 +809,7 @@ test_that("Debugger", {
   s1516 <- as.data.table(sample_file_1516_synth)
   s1516[, Med_Exp_TO_amt := 0]
   o <- model_income_tax(s1516[, Med_Exp_TO_amt := 0], "2016-17", .debug = TRUE)
-  expect_equal(names(o), c("income", "old_tax",
+  expect_equal(names(o), c("Ind", "income", "old_tax", "new_tax",
                            "base_tax.", "lito.", "lamington_offset.", "sapto.", 
                            "sbto.", "medicare_levy."))
 })
