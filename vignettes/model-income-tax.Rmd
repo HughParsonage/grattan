@@ -24,7 +24,7 @@ households or on the wider population. For example, policies affecting welfare o
 policies which tax entities outside the current population of tax filers. 
 
 
-# How to use `model_income_tax`
+## How to use `model_income_tax`
 
 `model_income_tax` takes a sample file and returns a sample file under the settings
 given by the function arguments.
@@ -117,7 +117,7 @@ value may be appropriate when the values required need to be very precise. Unrou
 may be important to determine changes in marginal tax rates. Rounded values may be most 
 appropriate for costings. 
 
-## Changing ordinary tax parameters
+### Changing ordinary tax parameters
 
 You can change how the 'ordinary tax' is calculated by changing the 
 arguments `ordinary_tax_thresholds` and `ordinary_tax_rates`. To replicate
@@ -139,7 +139,7 @@ Note that the top marginal tax rate must include the temporary budget repair lev
 causes a slight difference between the two taxes because the small business tax offset 
 does not offset levies.
 
-## Changing Medicare levy parameters
+### Changing Medicare levy parameters
 
 The Medicare levy is more complex to calculate than ordinary income tax. 
 There are parameters relating to two thresholds, as well as different 
@@ -172,7 +172,7 @@ m1516a <-
                    medicare_levy_upper_sapto_threshold = 48197)
 ```
 
-## Changes to the Low Income Tax Offset
+### Changes to the Low Income Tax Offset
 
 Here is a change to the LITO so that the maximum offset is $1000.
 Then we print the revenue foregone.
@@ -185,7 +185,7 @@ L1516a <-
 revenue_foregone(L1516a)
 ```
 
-# How to use `project`
+## How to use `project`
 
 The function `project` takes a sample file and returns a sample file. The 
 other mandatory argument is `h`, the number of integer years ahead of the
@@ -200,7 +200,7 @@ s1819 <- project(s1516, h = 3L)
 This uses the internal forecast methods. To specify specific forecast outcomes,
 you can use the `wage.series` and `lf.series` 
 
-## Wage and labour series
+### Wage and labour series
 
 ```{r project-wage-lf-series}
 s1819_lf2pc_wage2pc <- 
@@ -259,7 +259,7 @@ s2021_wage80pc[, mean(Taxable_Income)] %>% dollar
 ```
 
 
-# Combining the two
+## Combining the two
 
 To cost a reduction in the capital gains tax discount from 50\% to 25\% over the four years
 from 2018-19, we would run
