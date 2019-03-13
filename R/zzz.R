@@ -1,9 +1,27 @@
 .onLoad <- function(libname = find.package("grattan"), pkgname = "grattan") {
   
   op <- options()
+  the_tempdir <- tempdir()
+  
   opgrattan <- list(
     "grattan.verbose" = FALSE,
-    "grattan.assume1901_2100" = TRUE
+    "grattan.assume1901_2100" = TRUE,
+    "grattan.taxstats.lib" = {
+      if (any(grepl("taxstatslib", list.dirs(path = the_tempdir, 
+                                             recursive = FALSE, 
+                                             full.names = FALSE)))) {
+        lib <- file.path(the_tempdir, 
+                         grep("taxstatslib", 
+                              list.dirs(path = the_tempdir,
+                                        recursive = FALSE,
+                                        full.names = FALSE),
+                              value = TRUE,
+                              fixed = TRUE)[1])
+      } else {
+        lib <- tempfile("taxstatslib", tmpdir = the_tempdir)
+      }
+      lib
+    }
   )
   toset <- !(names(opgrattan) %in% names(op))
   if (any(toset)) options(opgrattan[toset])
