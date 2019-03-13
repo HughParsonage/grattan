@@ -39,28 +39,11 @@ library(knitr)
 library(data.table)
 library(magrittr)
 library(hutils)
-# Non-standard packages must be installed in a temporary
-# directory.  Use 
-#  install.packages("taxstats1516", 
-#                      repos = "https://hughparsonage.github.io/tax-drat",
-#                      type = "source")
-# when running interactively.
-provide.dir(temp_lib <- tempfile())
-if (requireNamespace("taxstats1516", quietly = TRUE)) {
-  library(taxstats1516)
-} else {
-  install.packages("taxstats1516", 
-                   repos = "https://hughparsonage.github.io/tax-drat",
-                   type = "source", 
-                   lib = temp_lib)
-  library(taxstats1516, lib.loc = temp_lib)
-}
+library(grattan)
+require_taxstats1516()
 
 s1516 <- as.data.table(sample_file_1516_synth)
 s1516[, WEIGHT := 50]
-
-
-library(grattan)
 ```
 
 ```{r dollar}
@@ -135,9 +118,11 @@ s1516_no_changes <-
                    return. = "sample_file.int")
 ```
 
-Note that the top marginal tax rate must include the temporary budget repair levy. This
-causes a slight difference between the two taxes because the small business tax offset 
-does not offset levies.
+Note that the temporary budget repair levy is not included by default,
+so I simulated it by topping up the \$180,000 marginal tax rate. This
+simulation is imperfect because the small business tax offset 
+does not offset levies. As a result, `baseline_tax` and `new_tax` are slightly different
+in `s1516_no_changes`. This is not a problem for tax years including and beyond 2018-19.
 
 ### Changing Medicare levy parameters
 
@@ -293,7 +278,27 @@ cgt_25pc_fwd_estimates %>%
   kable
 ```
 
+### `lito_multi` for custom offsets
 
+While `model_income_tax` cannot account for the future imagination
+of tax policy makers, the argument `lito_multi` does provide a 
+powerful mechanisms for handling complicated offsets. The argument, 
+if provided, must be a list of two components `x` and `y`. These 
+can be used to define an offset: for every `(x_i, y_i)` defined the 
+value of the offset for a taxable income `x_i` must be `y_i` with the 
+points in between interpolated linearly. 
+
+For example to simply mimic `LITO` in 2015-16:
+
+```{r lito_multi_201516}
+s1516 %>%
+  model_income_tax("2015-16",
+                   lito_multi = list(x = c(-Inf, 37e3, 200e3/3, Inf),
+                                     y = c(445, 445, 0, 0)),
+                   return. = "sample_file.int") %>%
+  .[new_tax != baseline_tax]
+
+```
 
 
 
