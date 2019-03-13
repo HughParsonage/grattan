@@ -129,8 +129,8 @@ in `s1516_no_changes`. This is not a problem for tax years including and beyond 
 The Medicare levy is more complex to calculate than ordinary income tax. 
 There are parameters relating to two thresholds, as well as different 
 thresholds for families and SAPTO-eligible individuals. Even the simplest
-modification require changes to multiple parameters. To assist, warnings 
-are emitted whenever a parameter are not internally consistent.
+modification require changes to multiple parameters. 
+Warnings are emitted whenever parameters are not internally consistent.
 
 Let's try to increase the Medicare levy rate from 2\% and 3\%. Observe
 the warning messages.
@@ -156,6 +156,47 @@ m1516a <-
                    medicare_levy_upper_threshold = 30479,
                    medicare_levy_upper_sapto_threshold = 48197)
 ```
+
+Since there are many degrees of freedom, and since thresholds are generally
+the things that are actually contemplated when making changes, the Medicare
+levy rate or taper are assumed to be correct; the warning suggests changing 
+thresholds over changes to the rate or taper if there is a conflict. Only 
+when the thresholds have been manually selected and there is still a conflict
+is a change to the taper or rate suggested. For example, if we didn't want to change 
+the upper threshold, but keep it at its 2015-16 value of \$26,670, we could insist:
+
+```{r medicare-levy-rate-increase-c}
+m1516a <- 
+  s1516 %>%
+  model_income_tax("2015-16",
+                   # Increase to 3%
+                   medicare_levy_rate = 0.03,
+                   # but keep the upper threshold the same
+                   medicare_levy_upper_threshold = 26670,
+                   medicare_levy_upper_sapto_threshold = 48197)
+```
+
+The warning still assumes the taper and rate are the same, but it can no longer
+suggest a change to the upper threshold (since we provided it), so it suggests a 
+change to the lower threshold. Only once we exhaust the thresholds it can adjust
+does the warning message start to include changing the taper:
+
+```{r medicare-levy-rate-increase-d}
+m1516a <- 
+  s1516 %>%
+  model_income_tax("2015-16",
+                   # Increase to 3%
+                   medicare_levy_rate = 0.03,
+                   # but keep the upper threshold the same
+                   medicare_levy_lower_threshold = 21335,
+                   medicare_levy_upper_threshold = 26670,
+                   medicare_levy_upper_sapto_threshold = 48197)
+```
+
+
+Consider another change: both to the rate and the taper. 
+
+
 
 ### Changes to the Low Income Tax Offset
 
