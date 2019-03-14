@@ -158,8 +158,8 @@ m1516a <-
 ```
 
 Since there are many degrees of freedom, and since thresholds are generally
-the things that are actually contemplated when making changes, the Medicare
-levy rate or taper are assumed to be correct; the warning suggests changing 
+the things that are actually contemplated when making changes, warnings
+will suggest changing 
 thresholds over changes to the rate or taper if there is a conflict. Only 
 when the thresholds have been manually selected and there is still a conflict
 is a change to the taper or rate suggested. For example, if we didn't want to change 
@@ -194,7 +194,6 @@ m1516a <-
 ```
 
 
-Consider another change: both to the rate and the taper. 
 
 
 
