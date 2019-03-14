@@ -199,7 +199,8 @@ m1516a <-
 
 ### Changes to the Low Income Tax Offset
 
-Here is a change to the LITO so that the maximum offset is $1000.
+Here is a change to the LITO so that the maximum offset is $1000,
+rather than $445, with the 1.5\% taper left as-is.
 Then we print the revenue foregone.
 
 ```{r lito-a}
