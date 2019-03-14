@@ -211,6 +211,11 @@ L1516a <-
 revenue_foregone(L1516a)
 ```
 
+```{r cleanup-before-project, include=FALSE}
+# reduce memory usage (e.g. travis, CCI)
+rm(L1516a, m1516a, s1516_no_changes)
+```
+
 ## How to use `project`
 
 The function `project` takes a sample file and returns a sample file. The 
@@ -290,7 +295,7 @@ s2021_wage80pc[, mean(Taxable_Income)] %>% dollar
 To cost a reduction in the capital gains tax discount from 50\% to 25\% over the four years
 from 2018-19, we would run
 
-```{r cgt_25pc_fwd_estimates}
+```{r cgt_25pc_fwd_estimates, eval=Sys.getenv('CIRCLECI')==''}
 cgt_25pc_fwd_estimates <- 
   lapply(yr2fy(2019:2022), function(fy) {
     s1516 %>%
