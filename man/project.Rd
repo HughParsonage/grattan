@@ -54,11 +54,6 @@ will be the predicted number of taxpayers in \code{to_fy}.
 Simple projections of the annual 2\% samples of Australian Taxation Office tax returns.
 }
 \details{
-We recommend you use \code{sample_file_1213} over \code{sample_file_1314},
-unless you need the superannuation variables, 
-as the latter suggests lower-than-recorded tax collections. 
-However, more recent data is of course preferable.
-
 Currently components of taxable income are individually inflated 
 based on their historical trends in the ATO sample files, with the 
 exception of:
@@ -67,9 +62,15 @@ exception of:
 \item{inflated using \code{\link{wage_inflator}}}{\code{Alow_ben_amt}, \code{ETP_txbl_amt}, \code{Rptbl_Empr_spr_cont_amt}, \code{Non_emp_spr_amt}, \code{MCS_Emplr_Contr}, \code{MCS_Prsnl_Contr}, \code{MCS_Othr_Contr}}
 \item{inflated using \code{\link{cpi_inflator}}}{\code{WRE_car_amt}, \code{WRE_trvl_amt}, \code{WRE_uniform_amt}, \code{WRE_self_amt}, \code{WRE_other_amt}}
 \item{inflated by \code{\link{lf_inflator_fy}}}{\code{WEIGHT}}
+\item{inflated by \code{\link{CG_inflator}}}{\code{Net_CG_amt}, \code{Tot_CY_CG_amt}}
 }
 
 Superannuation balances are inflated by a fixed rate of 5\% p.a.
+
+We recommend you use \code{sample_file_1213} over \code{sample_file_1314},
+unless you need the superannuation variables, 
+as the latter suggests lower-than-recorded tax collections. 
+However, more recent data is of course preferable.
 }
 \examples{
 # install.packages('taxstats', repos = 'https://hughparsonage.github.io/drat')
