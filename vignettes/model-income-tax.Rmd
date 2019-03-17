@@ -34,6 +34,35 @@ sample file contained in the suggested package `taxstats1516`. See `?install_tax
 for installation instructions. For future years, use the latest sample file from the
 ATO.
 
+```{r mem}
+#### When memory needs to be monitored
+if (grattanCharts::is_knitting()) {
+  mem_usage_tempfile <- tempfile("mem")
+  invisible(file.create("grattan-memory-usage.tsv"))
+}
+knitr::knit_hooks$set(do_mem = function(before) {
+  if (before) {
+    utils::Rprofmem(mem_usage_tempfile)
+  } else {
+    utils::Rprofmem(NULL)
+    .mem_used <-
+      profmem::readRprofmem(mem_usage_tempfile) %$%
+      sum(as.double(bytes), na.rm = TRUE) %>%
+      divide_by(1024^3) %>%
+      round(1) %>%
+      formatC(digits = 1, width = 4, format = "f")
+    write(
+      paste0(.mem_used,
+             "\t",
+             knitr::opts_current$get(name = "label")),
+      file = "grattan-memory-usage.tsv",
+      ncolumns = 1,
+      append = TRUE)
+  }
+})
+knitr::opts_chunk$set(do_mem = TRUE)
+```
+
 ```{r loadPackages}
 library(knitr)
 library(data.table)
@@ -228,7 +257,11 @@ Thus, to get a forecast for the 2018-19 tax year:
 s1819 <- project(s1516, h = 3L)
 ```
 
-This uses the internal forecast methods. To specify specific forecast outcomes,
+This uses the internal forecast methods. In particular,
+
+
+
+To specify specific forecast outcomes,
 you can use the `wage.series` and `lf.series` 
 
 ### Wage and labour series
@@ -328,7 +361,7 @@ cgt_25pc_fwd_estimates %>%
 
 While `model_income_tax` cannot account for the future imagination
 of tax policy makers, the argument `lito_multi` does provide a 
-powerful mechanisms for handling complicated offsets. The argument, 
+powerful mechanism for handling complicated offsets. The argument, 
 if provided, must be a list of two components `x` and `y`. These 
 can be used to define an offset: for every `(x_i, y_i)` defined the 
 value of the offset for a taxable income `x_i` must be `y_i` with the 

@@ -59,7 +59,17 @@ unless you need the superannuation variables,
 as the latter suggests lower-than-recorded tax collections. 
 However, more recent data is of course preferable.
 
-Superannuation variables are inflated by a fixed rate of 5\% p.a.
+Currently components of taxable income are individually inflated 
+based on their historical trends in the ATO sample files, with the 
+exception of:
+\describe{
+\item{inflated using \code{\link{differentially_uprate_wage}}.}{\code{Sw_amt}}
+\item{inflated using \code{\link{wage_inflator}}}{\code{Alow_ben_amt}, \code{ETP_txbl_amt}, \code{Rptbl_Empr_spr_cont_amt}, \code{Non_emp_spr_amt}, \code{MCS_Emplr_Contr}, \code{MCS_Prsnl_Contr}, \code{MCS_Othr_Contr}}
+\item{inflated using \code{\link{cpi_inflator}}}{\code{WRE_car_amt}, \code{WRE_trvl_amt}, \code{WRE_uniform_amt}, \code{WRE_self_amt}, \code{WRE_other_amt}}
+\item{inflated by \code{\link{lf_inflator_fy}}}{\code{WEIGHT}}
+}
+
+Superannuation balances are inflated by a fixed rate of 5\% p.a.
 }
 \examples{
 # install.packages('taxstats', repos = 'https://hughparsonage.github.io/drat')
