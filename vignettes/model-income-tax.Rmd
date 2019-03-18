@@ -34,6 +34,14 @@ sample file contained in the suggested package `taxstats1516`. See `?install_tax
 for installation instructions. For future years, use the latest sample file from the
 ATO.
 
+```{r no-includes, include=FALSE}
+do_eval <- function() {
+  library(hutils)
+  NEITHER(nzchar(Sys.getenv("CIRCLECI")),
+          nzchar(Sys.getenv("TRAVIS")))
+}
+```
+
 ```{r mem}
 #### When memory needs to be monitored
 if (grattanCharts::is_knitting()) {
@@ -257,10 +265,7 @@ Thus, to get a forecast for the 2018-19 tax year:
 s1819 <- project(s1516, h = 3L)
 ```
 
-This uses the internal forecast methods. In particular,
-
-
-
+This uses the internal forecast methods.
 To specify specific forecast outcomes,
 you can use the `wage.series` and `lf.series` 
 
@@ -328,7 +333,7 @@ s2021_wage80pc[, mean(Taxable_Income)] %>% dollar
 To cost a reduction in the capital gains tax discount from 50\% to 25\% over the four years
 from 2018-19, we would run
 
-```{r cgt_25pc_fwd_estimates, eval=Sys.getenv('CIRCLECI')==''}
+```{r cgt_25pc_fwd_estimates, eval=do_eval()}
 cgt_25pc_fwd_estimates <- 
   lapply(yr2fy(2019:2022), function(fy) {
     s1516 %>%
@@ -345,7 +350,7 @@ the speed of this by caching the intermediate objects, either as objects in the 
 or as files (say, `.fst` files). You should consider this when you find yourself running `project`
 many times -- likely you are just repeating calculations.
 
-```{r cgt_25pc_fwd_estimates-deciles}
+```{r cgt_25pc_fwd_estimates-deciles, eval=do_eval()}
 cgt_25pc_fwd_estimates %>%
   mutate_ntile("Taxable_Income", n = 5L, keyby = "fy_year") %>%
   .[, delta := new_tax - baseline_tax] %>%
