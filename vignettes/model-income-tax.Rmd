@@ -42,35 +42,6 @@ do_eval <- function() {
 }
 ```
 
-```{r mem}
-#### When memory needs to be monitored
-if (grattanCharts::is_knitting()) {
-  mem_usage_tempfile <- tempfile("mem")
-  invisible(file.create("grattan-memory-usage.tsv"))
-}
-knitr::knit_hooks$set(do_mem = function(before) {
-  if (before) {
-    utils::Rprofmem(mem_usage_tempfile)
-  } else {
-    utils::Rprofmem(NULL)
-    .mem_used <-
-      profmem::readRprofmem(mem_usage_tempfile) %$%
-      sum(as.double(bytes), na.rm = TRUE) %>%
-      divide_by(1024^3) %>%
-      round(1) %>%
-      formatC(digits = 1, width = 4, format = "f")
-    write(
-      paste0(.mem_used,
-             "\t",
-             knitr::opts_current$get(name = "label")),
-      file = "grattan-memory-usage.tsv",
-      ncolumns = 1,
-      append = TRUE)
-  }
-})
-knitr::opts_chunk$set(do_mem = TRUE)
-```
-
 ```{r loadPackages}
 library(knitr)
 library(data.table)
