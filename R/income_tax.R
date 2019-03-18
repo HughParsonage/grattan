@@ -36,7 +36,8 @@
 #' \emph{Income Tax Rates Act 1986} (Cth).}
 #' \item{Medicare levy}{See \code{\link{medicare_levy}} for details.}
 #' \item{LITO}{See \code{\link{lito}} for details.}
-#' \item{SAPTO}{For years preceding the introduction of SAPTO, the maximum offset is assumed to apply to those above pensionable age.}
+#' \item{SAPTO}{See \code{\link{lito}}. For years preceding the introduction of SAPTO, the maximum offset is assumed to apply to those above age 65 (since the sample files only provide 5-year 
+#' age groups).}
 #' \item{SBTO}{See \code{\link{small_business_tax_offset}} for details.}
 #' \item{Historical levies}{The flood levy and the temporary budget repair levy.}
 #' }
