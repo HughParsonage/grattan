@@ -2,6 +2,8 @@
 #' @description The income tax payable if tax settings are changed. 
 #' @param sample_file A sample file having at least as many variables as the 2012-13 sample file.
 #' @param baseline_fy If a parameter is not selected, the parameter's value in this tax year is used.
+#' 
+#' Must be a valid tax year and one for which \code{income_tax} has been programmed. 
 #' @param elasticity_of_taxable_income Either \code{NULL} (the default), or a numeric vector the same length of \code{sample_file} (or length-1) providing the elasticity of taxable income for each observation in \code{sample_file}; 
 #' \deqn{\frac{\Delta z / z}{\Delta \tau / (1 - \tau)}} 
 #' where \eqn{z} is taxable income and \eqn{\tau} is tax payable.

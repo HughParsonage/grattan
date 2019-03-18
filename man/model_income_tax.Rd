@@ -28,7 +28,9 @@ model_income_tax(sample_file, baseline_fy, n_dependants = 0L,
 \arguments{
 \item{sample_file}{A sample file having at least as many variables as the 2012-13 sample file.}
 
-\item{baseline_fy}{If a parameter is not selected, the parameter's value in this tax year is used.}
+\item{baseline_fy}{If a parameter is not selected, the parameter's value in this tax year is used.
+
+Must be a valid tax year and one for which \code{income_tax} has been programmed.}
 
 \item{n_dependants}{The number of dependants for each entry in \code{sample_file}.}
 
