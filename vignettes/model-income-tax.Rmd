@@ -143,7 +143,7 @@ Warnings are emitted whenever parameters are not internally consistent.
 Let's try to increase the Medicare levy rate from 2\% and 3\%. Observe
 the warning messages.
 
-```{r medicare-levy-rate-increase-a}
+```{r medicare-levy-rate-increase-a, eval=do_eval()}
 m1516a <- 
   s1516 %>%
   model_income_tax("2015-16",
@@ -155,7 +155,7 @@ Note the warning messsage says that the parameter **has** been changed.
 However, you should never tolerate the warning; instead, change the parameter
 to the suggested one (if you agree with the warning message's advice).
 
-```{r medicare-levy-rate-increase-b}
+```{r medicare-levy-rate-increase-b, eval=do_eval()}
 m1516a <- 
   s1516 %>%
   model_income_tax("2015-16",
@@ -173,7 +173,7 @@ when the thresholds have been manually selected and there is still a conflict
 is a change to the taper or rate suggested. For example, if we didn't want to change 
 the upper threshold, but keep it at its 2015-16 value of \$26,670, we could insist:
 
-```{r medicare-levy-rate-increase-c}
+```{r medicare-levy-rate-increase-c, eval=do_eval()}
 m1516a <- 
   s1516 %>%
   model_income_tax("2015-16",
@@ -189,7 +189,7 @@ suggest a change to the upper threshold (since we provided it), so it suggests a
 change to the lower threshold. Only once we exhaust the thresholds it can adjust
 does the warning message start to include changing the taper:
 
-```{r medicare-levy-rate-increase-d}
+```{r medicare-levy-rate-increase-d, eval=do_eval()}
 m1516a <- 
   s1516 %>%
   model_income_tax("2015-16",
@@ -287,7 +287,8 @@ s2021_wage80pc <-
                               forecast.series = "upper")] %>%
   .[] %>%
   project(h = 5L,
-          excl_vars = "Sw_amt") %>%
+          excl_vars = "Sw_amt",
+          .copyDT = FALSE) %>%  # just for memory frugality
   .[]
 ```
 
