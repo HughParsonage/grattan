@@ -51,8 +51,14 @@ library(grattan)
 require_taxstats1516()
 
 s1516 <- as.data.table(sample_file_1516_synth)
-s1516[, WEIGHT := 50]
+s1516[, WEIGHT := 50L]
 ```
+
+```{r detach-taxstats, eval=do_eval()}
+# memory
+detach("package:taxstats1516", unload = TRUE)
+```
+
 
 ```{r dollar}
 dollar <- function (x, digits = 0) {
@@ -319,7 +325,7 @@ cgt_25pc_fwd_estimates <-
 
 Note that this takes a few seconds, most of which is spent within `project`. We could improve
 the speed of this by caching the intermediate objects, either as objects in the environment
-or as files (say, `.fst` files). You should consider this when you find yourself running `project`
+or as files (say, `.fst` files). You should consider doing this when you find yourself running `project`
 many times -- likely you are just repeating calculations.
 
 ```{r cgt_25pc_fwd_estimates-deciles, eval=do_eval()}
