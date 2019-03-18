@@ -12,12 +12,26 @@
 #' @param n_dependants Number of children dependant on the taxpayer.
 #' @param .checks Should checks of certain arguments be made? Provided to improve performance when checks are not necessary.
 #' @return The Medicare levy payable for that taxpayer.
-#' @details The Seniors and Pensioners Tax Offset was formed in 2012-13 as an amalgam of the Senior Australians Tax Offset and the Pensions Tax Offset. 
+#' @details The Medicare levy for individuals is imposed by the \emph{Medicare Levy Act 1986} (Cth).
+#' The function only calculates the levy for individuals (not trusts).
+#' It includes the s 7 \emph{Levy in cases of small incomes}, including the differences for those
+#' eligible for \code{\link{sapto}}.
+#' s 8 \emph{Amount of levy---person who has spouse or dependants} (though the number of dependants
+#' is not a variable in the sample files).
+#' 
+#' The function does \strong{not} include the Medicare levy surcharge; it assumes that all 
+#' persons (who would potentially be liable for it) avoided it.#' 
+#' 
+#' The Seniors and Pensioners Tax Offset was formed in 2012-13 as an amalgam of the Senior Australians Tax Offset and the Pensions Tax Offset. 
 #' Medicare rates before 2012-13 were different based on these offsets. 
 #' For most taxpayers, eligibility would be based on whether your age is over the pension age (currently 65).
 #' If \code{sato} and \code{pto} are \code{NULL}, \code{sapto.eligible} stands for eligibility for the \code{sato} and not \code{pto}.
 #' If \code{sato} or \code{pto} are not \code{NULL} for such years, only \code{sato} is currently considered. 
 #' Supplying \code{pto} independently is currently a warning.
+#' 
+#' See \url{http://classic.austlii.edu.au/au/legis/cth/consol_act/mla1986131/}
+#' for the \emph{Medicare Levy Act 1986} (Cth).
+#' 
 #' @export
 #' 
 

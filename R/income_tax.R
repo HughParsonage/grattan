@@ -10,7 +10,7 @@
 #' @param family_status For Medicare and SAPTO purposes.
 #' @param n_dependants An integer for the number of children of the taxpayer (for the purposes of the Medicare levy).
 #' @param return.mode The mode (numeric or integer) of the returned vector.
-#' @param .dots.ATO A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files. If \code{.dots.ATO} is a \code{data.table}, I recommend you enclose it with \code{copy()}.
+#' @param .dots.ATO A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files.
 #' 
 #' Age variables in \code{.dots.ATO} take precedence over \code{age} and providing both
 #' is a warning.
@@ -18,9 +18,34 @@
 #' @param allow.forecasts should dates beyond 2019-20 be permitted? Currently, not permitted.
 #' @param .debug (logical, default: \code{FALSE})  If \code{TRUE}, returns a \code{data.table} containing the components of income tax calculated. (This argument and its result is liable to change in future versions, possibly without notice.)
 #' @author Tim Cameron, Brendan Coates, Matthew Katzen, Hugh Parsonage, William Young
-#' @details The function 'rolling' is inflexible by design. It is designed to guarantee the correct tax payable in a year.
-#' For years preceding the introduction of SAPTO, the maximum offset is assumed to apply to those above pensionable age. 
+#' @details The function is inflexible by design.
+#' It is designed to return the correct tax payable in a year.
+#' 
 #' @return The total personal income tax payable.
+#' 
+#' @details
+#' The function aims to produce the personal income tax payable for the inputs given
+#' in the tax year \code{fy.year}. The function is specified to produce the most accurate 
+#' calculation of personal income tax given the variables in the ATO's 2\% sample files.
+#'  However, many components are absent from these files, while other components could
+#'  not be computed reliably.
+#'  
+#' For the 2018-19 tax year, the function calculates
+#' \describe{
+#' \item{tax on ordinary taxable income}{The tax as specified in Schedule 7 of the 
+#' \emph{Income Tax Rates Act 1986} (Cth).}
+#' \item{Medicare levy}{See \code{\link{medicare_levy}} for details.}
+#' \item{LITO}{See \code{\link{lito}} for details.}
+#' \item{SAPTO}{For years preceding the introduction of SAPTO, the maximum offset is assumed to apply to those above pensionable age.}
+#' \item{SBTO}{See \code{\link{small_business_tax_offset}} for details.}
+#' \item{Historical levies}{The flood levy and the temporary budget repair levy.}
+#' }
+#' 
+#' Notably, when used with a 2\% sample file, the function will not be able to correctly account
+#' for different tax rates and offsets among taxpayers with dependants since the sample files
+#' (as of 2015-16) do not have this information.
+#' 
+#' 
 #' @examples 
 #' 
 #' income_tax(50e3, "2013-14")
