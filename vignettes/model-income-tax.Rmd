@@ -9,19 +9,24 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-The functions `model_income_tax` and `project` are at the core of the package.
-We use them to produce costings of changes to tax policy using the ATO's 2\% 
-sample files. The functions are both \(X^n \to X^n\). That is, they take 
+The functions `model_income_tax` and `project` are the core of the grattan package.
+Grattan applies them to the ATO's 2\% 
+sample files
+to produce costings of changes to tax policy.
+The functions are both \(X^n \to X^n\). That is, they take 
 a sample file and return a mutated sample file. 
 
 With the mutated sample file, the costing for that particular tax year is the weighted 
-sum of the difference between the `new_tax` and the `baseline_tax`. We can also perform
-distributional analysis because the change is given for each taxpayer.
+sum of the difference between the `new_tax` and the `baseline_tax` columns. We can also use
+the mutated sample file to perform distributional analysis, such as the average change in 
+tax by taxable income percentile.
 
-Since the input data is tax filers and the functions do not purport to expand beyond
-that scope, these functions cannot (directly) analyse the effect of policies on 
-households or on the wider population. For example, policies affecting welfare or
-policies which tax entities outside the current population of tax filers. 
+Since the input data consists of tax returns and the grattan package does not purport to generate
+inferences about the wider Australian population, these functions cannot (directly) analyse the effect of policies on 
+households or on the wider population. For example, policies affecting welfare payments, 
+changes to the tax settings of businesses or super funds, or changes which would tax people 
+who do not currently file tax returns are not amenable to the kind of analysis these functions
+perform.
 
 
 ## How to use `model_income_tax`
@@ -54,18 +59,19 @@ s1516 <- as.data.table(sample_file_1516_synth)
 s1516[, WEIGHT := 50L]
 ```
 
-```{r detach-taxstats, eval=do_eval()}
-# memory
+```{r detach-taxstats, include=FALSE}
+# memory 
 detach("package:taxstats1516", unload = TRUE)
 ```
 
+This function is purely cosmetic.
 
 ```{r dollar}
+#' @return Number formatted as dollar e.g. 30e3 => $30,000
 dollar <- function (x, digits = 0) {
   nsmall <- digits
   commaz <- format(abs(x), nsmall = nsmall, trim = TRUE, big.mark = ",", 
                    scientific = FALSE, digits = 1L)
-  
   if_else(x < 0, 
           paste0("\U2212","$", commaz),
           paste0("$", commaz))
@@ -73,10 +79,9 @@ dollar <- function (x, digits = 0) {
 ```
 
 All instances of `model_income_tax` have two mandatory arguments: `sample_file` and
-`baseline_fy`. These define the `baseline_tax` column in the result. When a
-tax argument is left as `NULL`, the `new_tax` value is calculated using the
-tax settings in whatever tax 
-year `baseline_tax` is set to.
+`baseline_fy`. These define the `baseline_tax` column in the result. When an
+argument is left as `NULL`, the `new_tax` column is calculated using the
+corresponding tax setting that applied in `baseline_fy`.
 
 ```{r baseline-fy}
 s1516 %>%
@@ -86,9 +91,12 @@ s1516 %>%
   kable
 ```
 
-Note that under default settings the `new_tax` is a double precision
+Note that by default `new_tax` is a double precision
 vector, not rounded.  You can use `return. = sample_file.int` to 
-return rounded variables, matching `baseline_tax`.
+return rounded variables.
+
+With the use of a simple function to test equality, we can see that
+`new_tax` is just the same as `baseline_tax`, as expected. 
 
 ```{r baseline-fy-int}
 is_all_equal <- function(x, y) {
@@ -110,9 +118,10 @@ s1516 %>%
 
 The choice of rounded, unrounded, or truncated values may be important for some analysis.
 For instance, tax liabilities are calculated using whole dollar amounts, so a truncated 
-value may be appropriate when the values required need to be very precise. Unrounded values
-may be important to determine changes in marginal tax rates. Rounded values may be most 
-appropriate for costings. 
+value may be appropriate when the values of `new_tax` for each row need to be very precise. 
+Unrounded values
+may be important to determine changes in marginal tax rates. Rounded values may be the most 
+appropriate choice for costings. 
 
 ### Changing ordinary tax parameters
 
