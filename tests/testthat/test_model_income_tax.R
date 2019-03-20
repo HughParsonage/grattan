@@ -901,3 +901,14 @@ test_that("CGT (errors)", {
                fixed = TRUE)
 })
 
+test_that("SAPTO parameters should not go out of range (causing NAs)", {
+  skip_on_cran()
+  skip_if_not_installed("taxstats")
+  skip_on_circleci(2)
+  library(taxstats)
+  library(data.table)
+  library(hutils)
+  s1314 <- as.data.table(sample_file_1314)
+  m1314_27000 <- model_income_tax(s1314, sapto_lower_threshold = 27000)
+  expect_false(anyNA(m1314_27000[["new_tax"]]))
+})
