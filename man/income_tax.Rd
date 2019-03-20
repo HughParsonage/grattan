@@ -12,9 +12,8 @@ income_tax(income, fy.year = NULL, age = NULL,
 \arguments{
 \item{income}{The individual assessable income.}
 
-\item{fy.year}{The financial year in which the income was earned. Tax years 2000-01 to 2016-17 are provided, as well as the tax years 2017-18 to 2019-20, for convenience, under the assumption the 2017 Budget measures will pass. 
-In particular, the tax payable is calculated under the assumption that the rate of the Medicare levy will rise to 2.5\% in the 2019-20 tax year.
-If fy.year is not given, the current financial year is used by default.}
+\item{fy.year}{The financial year in which the income was earned. Tax years 2000-01 to 2018-19 are supported, as well as the tax year 2019-20, for convenience. 
+If \code{fy.year} is not given, the current financial year is used by default.}
 
 \item{age}{The individual's age. Ignored if \code{.dots.ATO} is provided (and contains
 an age variable such as \code{age_range} or \code{Birth_year}).}
@@ -42,7 +41,9 @@ Income tax payable
 }
 \details{
 The function is inflexible by design.
-It is designed to return the correct tax payable in a year.
+It is designed to return the correct tax payable in a year, not to model the tax payable 
+under different tax settings. (Use \code{\link{model_income_tax}} for that purpose.)
+
 
 The function aims to produce the personal income tax payable for the inputs given
 in the tax year \code{fy.year}. The function is specified to produce the most accurate 
@@ -56,7 +57,8 @@ For the 2018-19 tax year, the function calculates
 \emph{Income Tax Rates Act 1986} (Cth).}
 \item{Medicare levy}{See \code{\link{medicare_levy}} for details.}
 \item{LITO}{See \code{\link{lito}} for details.}
-\item{SAPTO}{See \code{\link{lito}}. For years preceding the introduction of SAPTO, the maximum offset is assumed to apply to those above age 65 (since the sample files only provide 5-year 
+\item{SAPTO}{See \code{\link{sapto}}. For years preceding the introduction of SAPTO, 
+the maximum offset is assumed to apply to those above age 65 (since the sample files only provide 5-year 
 age groups).}
 \item{SBTO}{See \code{\link{small_business_tax_offset}} for details.}
 \item{Historical levies}{The flood levy and the temporary budget repair levy.}
