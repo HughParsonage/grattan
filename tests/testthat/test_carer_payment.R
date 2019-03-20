@@ -2,7 +2,7 @@ context("Carer Payment")
 
 test_that("Messages", {
   expect_message(carer_payment(),
-                 regexp = '`Date` and `fy.year` not set, so using `Date = "2018-09-20".',
+                 regexp = '`Date` and `fy.year` not set, so using `Date = ',
                  fixed = TRUE)
 })
 
