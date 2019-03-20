@@ -372,6 +372,36 @@ s1516 %>%
 ```
 
 
+### `Budget_...` parameters
+
+These were used to cost policies proposed in the 2018 Budget period by the Government and
+the Opposition. They're unlikely to have much use except in reproducing past results.
+
+### SAPTO
+
+The Seniors and Pensioner Tax Offset (SAPTO) can be modified for future years. 
+To cost the abolition of SAPTO, one would use:
+
+```{r sapto_abolished1819}
+sapto_abolished1819 <- 
+  s1819 %>%
+  model_income_tax("2018-19", 
+                   sapto_eligible = FALSE)
+```
+
+To model a change to lower the SAPTO threshold from \$32,279 to \$27,000:
+
+```{r sapto_abolished_abv27k_1819}
+sapto_abolished_abv27k_1819 <-
+  s1819 %>%
+  model_income_tax("2018-19",
+                   sapto_lower_threshold = 27000)
+```
+
+
+
+
+
 
 
 
