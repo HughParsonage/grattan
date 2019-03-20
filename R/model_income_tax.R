@@ -45,8 +45,10 @@
 #' @param sapto_max_offset The maximum offset available through SAPTO. 
 #' @param sapto_lower_threshold The threshold at which SAPTO begins to reduce (from \code{sapto_max_offset}).
 #' @param sapto_taper The taper rate beyond \code{sapto_lower_threshold}.
-#' @param sbto_discount The \code{tax_discount} in \code{\link{small_business_tax_offset}}.
 #' 
+#' @param sapto_max_offset_married,sapto_lower_threshold_married,sapto_taper_married As above,
+#' but applied to members of a couple
+#' @param sbto_discount The \code{tax_discount} in \code{\link{small_business_tax_offset}}.
 #' @param cgt_discount_rate (numeric(1)) The capital gains tax discount rate, currently 50\%. 
 #' 
 #' @param calc_baseline_tax (logical, default: \code{TRUE}) Should the income tax in \code{baseline_fy} be included as a column in the result?
@@ -115,7 +117,10 @@ model_income_tax <- function(sample_file,
                              sapto_eligible = NULL,
                              sapto_max_offset = NULL,
                              sapto_lower_threshold = NULL,
-                             sapto_taper = NULL, 
+                             sapto_taper = NULL,
+                             sapto_max_offset_married = NULL,
+                             sapto_lower_threshold_married = NULL,
+                             sapto_taper_married = NULL,
                              
                              sbto_discount = NULL,
                              
@@ -387,8 +392,7 @@ model_income_tax <- function(sample_file,
                     .checks = FALSE)
     
   } else {
-    medicare_tbl_fy <- 
-      medicare_tbl[input, on = c("fy_year", "sapto==SaptoEligible")]
+    medicare_tbl_fy <- medicare_tbl[input, on = c("fy_year", "sapto==SaptoEligible")]
     
     if ("ordering" %chin% names(input)) {
       setorderv(medicare_tbl_fy, "ordering")
@@ -713,39 +717,25 @@ model_income_tax <- function(sample_file,
       sapto_married_fy <- sapto_tbl_fy[family_status == "married"]
       sapto_single_fy <- sapto_tbl_fy[family_status == "single"]
       sapto_married <- sapto_eligible & the_spouse_income > 0L
-      sapto_single  <- sapto_eligible & the_spouse_income == 0L
+      # Need to expand length-one arguments so that [] subsetting
+      # does not improperly introduce NAs
+      sapto. <-
+        do_sapto_rcpp2(RebateIncome = rebate_income(Taxable_Income = income, 
+                                                    Rptbl_Empr_spr_cont_amt = .dots.ATO[["Rptbl_Empr_spr_cont_amt"]],
+                                                    Net_fincl_invstmt_lss_amt = .dots.ATO[["Net_fincl_invstmt_lss_amt"]],
+                                                    Net_rent_amt = .dots.ATO[["Net_rent_amt"]],
+                                                    Rep_frng_ben_amt = .dots.ATO[["Rep_frng_ben_amt"]]),
+                       
+                       maxOffsetSingle =                     sapto_max_offset %||% sapto_single_fy[["max_offset"]],
+                       maxOffsetMarried =            sapto_max_offset_married %||% sapto_married_fy[["max_offset"]],
+                       lowerThresholdSingle =           sapto_lower_threshold %||% sapto_single_fy[["lower_threshold"]],
+                       lowerThresholdMarried = sapto_lower_threshold_married %||% sapto_married_fy[["lower_threshold"]],
+                       taperRateSingle =                          sapto_taper %||% sapto_single_fy[["taper_rate"]],
+                       taperRateMarried =                 sapto_taper_married %||% sapto_married_fy[["taper_rate"]],
+                       SaptoEligible = sapto_eligible,
+                       IsMarried = the_spouse_income > 0L,
+                       SpouseIncome = the_spouse_income)
       
-      rebate_income_married_eligible <-
-        rebate_income(Taxable_Income = income[sapto_married],
-                      Rptbl_Empr_spr_cont_amt =   .dots.ATO[sapto_married][["Rptbl_Empr_spr_cont_amt"]],
-                      Net_fincl_invstmt_lss_amt = .dots.ATO[sapto_married][["Net_fincl_invstmt_lss_amt"]],
-                      Net_rent_amt =              .dots.ATO[sapto_married][["Net_rent_amt"]],
-                      Rep_frng_ben_amt =          .dots.ATO[sapto_married][["Rep_frng_ben_amt"]])
-      
-      rebate_income_single_eligible <-
-        rebate_income(Taxable_Income = income[sapto_single],
-                      Rptbl_Empr_spr_cont_amt =   .dots.ATO[sapto_single][["Rptbl_Empr_spr_cont_amt"]],
-                      Net_fincl_invstmt_lss_amt = .dots.ATO[sapto_single][["Net_fincl_invstmt_lss_amt"]],
-                      Net_rent_amt =              .dots.ATO[sapto_single][["Net_rent_amt"]],
-                      Rep_frng_ben_amt =          .dots.ATO[sapto_single][["Rep_frng_ben_amt"]])
-      
-      sapto.[sapto_married] <- 
-        sapto_rcpp(RebateIncome   = rebate_income_married_eligible,
-                   MaxOffset      =      sapto_max_offset[sapto_married] %|||% sapto_married_fy[["max_offset"]],
-                   LowerThreshold = sapto_lower_threshold[sapto_married] %|||% sapto_married_fy[["lower_threshold"]],
-                   TaperRate      =           sapto_taper[sapto_married] %|||% sapto_married_fy[["taper_rate"]],
-                   SaptoEligible  = TRUE,
-                   IsMarried      = TRUE,
-                   SpouseIncome   = the_spouse_income[sapto_married])
-      
-      sapto.[sapto_single] <- 
-        sapto_rcpp(RebateIncome   = rebate_income_single_eligible,
-                   MaxOffset      =      sapto_max_offset[sapto_single] %|||% sapto_single_fy[["max_offset"]],
-                   LowerThreshold = sapto_lower_threshold[sapto_single] %|||% sapto_single_fy[["lower_threshold"]],
-                   TaperRate      =           sapto_taper[sapto_single] %|||% sapto_single_fy[["taper_rate"]],
-                   SaptoEligible  = TRUE,
-                   IsMarried      = FALSE,
-                   SpouseIncome   = the_spouse_income[sapto_single])
     }
   }
   
