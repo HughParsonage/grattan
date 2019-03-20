@@ -380,7 +380,7 @@ the Opposition. They're unlikely to have much use except in reproducing past res
 
 ### SAPTO
 
-The Seniors and Pensioner Tax Offset (SAPTO) can be modified for future years. 
+The Seniors and Pensioner Tax Offset (SAPTO) can also be modified. 
 To cost the abolition of SAPTO, one would use:
 
 ```{r sapto_abolished1819}
