@@ -55,6 +55,7 @@ library(hutils)
 library(grattan)
 require_taxstats1516()
 
+# Use the actual sample file if you've got it
 s1516 <- as.data.table(sample_file_1516_synth)
 s1516[, WEIGHT := 50L]
 ```
@@ -398,6 +399,24 @@ sapto_abolished_abv27k_1819 <-
                    sapto_lower_threshold = 27000)
 ```
 
+To cost the proposal in *Age of entitlement: age-based tax breaks* (2016)
+
+```{r sapto-age-of-entitlement}
+s1718_AgeOfEntitlement <-
+    project(s1516, 
+            h = 2L) %>%
+    model_income_tax("2017-18", 
+                     sapto_lower_threshold = 27e3,
+                     sapto_lower_threshold_married = 42e3,
+                     sapto_max_offset = 1160,
+                     sapto_max_offset_married = 390,
+                     medicare_levy_lower_sapto_threshold = 27000,
+                     medicare_levy_upper_sapto_threshold = 33750,
+                     medicare_levy_upper_family_threshold = 46361,
+                     medicare_levy_lower_family_sapto_threshold = 42000,
+                     medicare_levy_upper_family_sapto_threshold = 52500)
+revenue_foregone(s1718_AgeOfEntitlement)
+```
 
 
 
