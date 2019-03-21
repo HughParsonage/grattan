@@ -13,7 +13,7 @@ matrix:
     r_build_args: --no-build-vignettes
     r_check_args: --no-multiarch --ignore-vignettes --no-vignettes
   - r: oldrel
-    r_build_args: --no-manual
+    r_build_args: --no-manual --no-build-vignettes
     r_check_args: --no-multiarch --ignore-vignettes --no-vignettes --no-tests
   - r: release
     r_build_args: --no-build-vignettes

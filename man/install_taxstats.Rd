@@ -4,9 +4,11 @@
 \alias{install_taxstats}
 \title{Install 'taxstats' files}
 \usage{
-install_taxstats(...)
+install_taxstats(pkg = c("taxstats"), ...)
 }
 \arguments{
+\item{pkg}{The package to install such as \code{"taxstats"} or \code{"taxstats1516"}.}
+
 \item{...}{Arguments passed to \code{\link[utils]{install.packages}}.}
 }
 \description{
