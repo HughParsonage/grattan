@@ -11,24 +11,24 @@
  4.0	sample_files_all
  0.0	revenue_foregone
  0.0	get_near_term
- 1.0	s1617
- 1.0	s1718
- 1.0	s1819
+ 0.9	s1617
+ 0.9	s1718
+ 0.9	s1819
  0.0	unique_fy_year
  0.0	wage_forecasts
  0.0	lf_forecasts
  0.0	ordinary_tax_rates
  0.0	ordinary_tax_thresholds
  0.0	do_medicare_levy
- 4.7	project_useTreasurys
- 4.9	.project_useGrattans
+ 3.9	project_useTreasurys
+ 4.1	.project_useGrattans
  0.0	s2425_Treasury
  0.0	s2728_Treasury
  0.0	wage_r80
  0.0	wage_r20
- 4.9	.project_useGrattans80
- 4.9	.project_useGrattans20
- 4.9	.project_useGrattans2.75
+ 4.1	.project_useGrattans80
+ 4.1	.project_useGrattans20
+ 4.1	.project_useGrattans2.75
  0.0	model_Budgets
  0.0	ntilers
  0.0	percentile2quintile
@@ -89,13 +89,13 @@
  0.0	decile201718
  0.0	prop-tax-paid-deloitte-technique-202425
  0.1	prop-tax-paid-deloitte-technique-202728
- 4.1	s2728_various_wages
+ 3.8	s2728_various_wages
  0.1	comparison-wage-assumptions
  0.2	prop_tax_paid_before_2025
  0.0	adult_population_projections
  0.2	comparison-deloitte-ntaxpayers
  0.0	comparison-deloitte-adults
- 1.0	comparison-lf-assumptions
+ 0.9	comparison-lf-assumptions
  0.0	minIncome_by_Quintile_Deloitte_method201718
  0.0	minIncome_by_Quintile_Deloitte_method202425
  0.0	p_geq_120k_202728
