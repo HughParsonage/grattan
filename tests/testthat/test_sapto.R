@@ -167,6 +167,20 @@ test_that("sapto_rcpp for vector inputs", {
                           c(FALSE, TRUE, FALSE)),
                # Just for coverage
                c(960, 1712.5, 0))
+  expect_equal(sapto_rcpp(c(30e3, 40e3),
+                          MaxOffset = 2230,
+                          LowerThreshold = 22e3,
+                          TaperRate = 0.125,
+                          SaptoEligible = TRUE,
+                          SpouseIncome = 0,
+                          IsMarried = FALSE),
+               sapto_rcpp(c(30e3, 40e3),
+                          MaxOffset = c(2230, 2230),
+                          LowerThreshold = c(22e3, 22e3),
+                          TaperRate = c(0.125, 0.125),
+                          SaptoEligible = c(TRUE, TRUE),
+                          SpouseIncome = c(0, 0),
+                          IsMarried = c(FALSE, FALSE)))
 })
 
 test_that("Errors in sapto_rcpp", {
