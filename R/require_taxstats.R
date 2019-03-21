@@ -8,6 +8,8 @@
 #' 
 #' @export require_taxstats 
 
+
+# nocov start
 require_taxstats <- function() {
   .require_taxstats("taxstats")
 }
@@ -32,4 +34,4 @@ require_taxstats1516 <- function() {
   library(pkg, character.only = TRUE)
   invisible(TRUE)
 }
-
+# nocov end
