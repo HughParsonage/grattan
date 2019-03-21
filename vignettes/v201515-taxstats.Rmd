@@ -22,10 +22,10 @@ library(data.table)
 library(hutils)
 library(magrittr)
 library(ggplot2)
+
+library(grattan)  # needs to be before require_taxstats..
 require_taxstats()
 require_taxstats1516()
-
-library(grattan)
 ```
 
 ```{r}

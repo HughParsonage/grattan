@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">grattan</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.1.0</span>
       </span>
     </div>
 
@@ -65,6 +65,12 @@
     </li>
     <li>
       <a href="articles/long-vignettes/issues/166.html">2015-16 size of dividends credit</a>
+    </li>
+    <li>
+      <a href="articles/long-vignettes/population/forecasting-population.html">Forecasting population</a>
+    </li>
+    <li>
+      <a href="articles/model-income-tax.html">Model income tax and project</a>
     </li>
     <li>
       <a href="articles/v201515-taxstats.html">2015-16 taxstats miscellany</a>
@@ -101,10 +107,10 @@
 <div id="grattan" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#grattan" class="anchor"></a>grattan</h1></div>
+<p>Utilities for costing and evaluating Australian tax policy, including high-performance tax and transfer calculators, a fast method of projecting tax collections from ATO sample files, and an interface to common indices from the Australian Bureau of Statistics. Written to support Grattan Institute’s Australian Perspectives program.</p>
 <blockquote>
 <p>Important temporary notice (2019-02-09): The vignettes do not run on pandoc v2.4 (or take a very long time). Please upgrade to v2.6 (2019-01-30) if building vignettes. You may need to modify the PATH or change the RSTUDIO_PANDOC env. var after installing.</p>
 </blockquote>
-<p>Australian Tax Policy Analysis</p>
 </div>
 <div id="overview" class="section level1">
 <h1 class="hasAnchor">
@@ -233,6 +239,18 @@
 <ul>
 <li>
 <code>income_tax</code> now gives consistent results modulo the existence of completely empty columns that are inputs for <code>sapto</code> (#158)</li>
+<li>
+<code>income_tax</code> will work if <code>.dots.ATO</code> is a non-data.table data.frame.</li>
+<li>
+<code>model_income_tax</code>:
+<ul>
+<li>Correctly imputes SAPTO vs non-SAPTO family thresholds when both provided.</li>
+<li>
+<code>sapto_rcpp</code> is now more careful about passing length-one vectors to vectorized C++ functions.</li>
+</ul>
+</li>
+<li>
+<code>project</code> now correctly prioritizes <code>excl_vars</code> over variables with otherwise predefined uprating mechanisms (such as <code>Sw_amt</code>).</li>
 </ul>
 </div>
 <div id="new-functions" class="section level3">
@@ -251,7 +269,7 @@
 <code>age_grouper</code> can now have a custom first label prefix, and is much faster when <code><a href="https://www.rdocumentation.org/packages/base/topics/length">length(age)</a></code> is large.</li>
 <li>
 <code>income_tax</code> now emits a warning when both age and <code>.dots.ATO</code> are provided, indicating that <code>age</code> will be ignored.</li>
-<li>The data has been updated to 2019-02-09.</li>
+<li>The data has been updated to 2019-02-23.</li>
 </ul>
 </div>
 <div id="internal" class="section level3">

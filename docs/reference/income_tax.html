@@ -98,6 +98,12 @@
       <a href="../articles/long-vignettes/issues/166.html">2015-16 size of dividends credit</a>
     </li>
     <li>
+      <a href="../articles/long-vignettes/population/forecasting-population.html">Forecasting population</a>
+    </li>
+    <li>
+      <a href="../articles/model-income-tax.html">Model income tax and project</a>
+    </li>
+    <li>
       <a href="../articles/v201515-taxstats.html">2015-16 taxstats miscellany</a>
     </li>
   </ul>
@@ -151,9 +157,8 @@
     </tr>
     <tr>
       <th>fy.year</th>
-      <td><p>The financial year in which the income was earned. Tax years 2000-01 to 2016-17 are provided, as well as the tax years 2017-18 to 2019-20, for convenience, under the assumption the 2017 Budget measures will pass. 
-In particular, the tax payable is calculated under the assumption that the rate of the Medicare levy will rise to 2.5% in the 2019-20 tax year.
-If fy.year is not given, the current financial year is used by default.</p></td>
+      <td><p>The financial year in which the income was earned. Tax years 2000-01 to 2018-19 are supported, as well as the tax year 2019-20, for convenience. 
+If <code>fy.year</code> is not given, the current financial year is used by default.</p></td>
     </tr>
     <tr>
       <th>age</th>
@@ -170,7 +175,7 @@ an age variable such as <code>age_range</code> or <code>Birth_year</code>).</p><
     </tr>
     <tr>
       <th>.dots.ATO</th>
-      <td><p>A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files. If <code>.dots.ATO</code> is a <code>data.table</code>, I recommend you enclose it with <code>copy()</code>.</p>
+      <td><p>A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files.</p>
 <p>Age variables in <code>.dots.ATO</code> take precedence over <code>age</code> and providing both
 is a warning.</p></td>
     </tr>
@@ -184,7 +189,7 @@ is a warning.</p></td>
     </tr>
     <tr>
       <th>.debug</th>
-      <td><p>(logical, default: <code>FALSE</code>)  If <code>TRUE</code>, returns a <code>data.table</code> containing the components. (This argument and its result is liable to change in future versions, possibly without notice.)</p></td>
+      <td><p>(logical, default: <code>FALSE</code>)  If <code>TRUE</code>, returns a <code>data.table</code> containing the components of income tax calculated. (This argument and its result is liable to change in future versions, possibly without notice.)</p></td>
     </tr>
     </table>
     
@@ -194,14 +199,36 @@ is a warning.</p></td>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The function 'rolling' is inflexible by design. It is designed to guarantee the correct tax payable in a year.
-For years preceding the introduction of SAPTO, the maximum offset is assumed to apply to those above pensionable age.</p>
+    <p>The function is inflexible by design.
+It is designed to return the correct tax payable in a year, not to model the tax payable 
+under different tax settings. (Use <code><a href='model_income_tax.html'>model_income_tax</a></code> for that purpose.)</p>
+    <p>The function aims to produce the personal income tax payable for the inputs given
+in the tax year <code>fy.year</code>. The function is specified to produce the most accurate 
+calculation of personal income tax given the variables in the ATO's 2% sample files.
+ However, many components are absent from these files, while other components could
+ not be computed reliably.</p> 
+<p>For the 2018-19 tax year, the function calculates</p><dl class='dl-horizontal'>
+<dt>tax on ordinary taxable income</dt><dd><p>The tax as specified in Schedule 7 of the 
+<em>Income Tax Rates Act 1986</em> (Cth).</p></dd>
+<dt>Medicare levy</dt><dd><p>See <code><a href='medicare_levy.html'>medicare_levy</a></code> for details.</p></dd>
+<dt>LITO</dt><dd><p>See <code><a href='lito.html'>lito</a></code> for details.</p></dd>
+<dt>SAPTO</dt><dd><p>See <code><a href='sapto.html'>sapto</a></code>. For years preceding the introduction of SAPTO, 
+the maximum offset is assumed to apply to those above age 65 (since the sample files only provide 5-year 
+age groups).</p></dd>
+<dt>SBTO</dt><dd><p>See <code><a href='small_business_tax_offset.html'>small_business_tax_offset</a></code> for details.</p></dd>
+<dt>Historical levies</dt><dd><p>The flood levy and the temporary budget repair levy.</p></dd>
+</dl>
+    <p>Notably, when used with a 2% sample file, the function will not be able to correctly account
+for different tax rates and offsets among taxpayers with dependants since the sample files
+(as of 2015-16) do not have this information.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='fu'>income_tax</span>(<span class='fl'>50e3</span>, <span class='st'>"2013-14"</span>)</div><div class='output co'>#&gt; [1] 8297</div><div class='input'>
 <span class='co'>## Calculate tax for each lodger in the 2013-14 sample file.</span>
+<span class='co'>## Essentially, this is the only use-case for `income_tax`</span>
+
 <span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/ns-load'>requireNamespace</a></span>(<span class='st'>"taxstats"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
   <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>data.table</span>)
   <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>taxstats</span>)
