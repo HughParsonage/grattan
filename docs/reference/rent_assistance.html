@@ -95,6 +95,15 @@
       <a href="../articles/long-vignettes/budget-2018.html">Budget 2018 modelling</a>
     </li>
     <li>
+      <a href="../articles/long-vignettes/issues/166.html">2015-16 size of dividends credit</a>
+    </li>
+    <li>
+      <a href="../articles/long-vignettes/population/forecasting-population.html">Forecasting population</a>
+    </li>
+    <li>
+      <a href="../articles/model-income-tax.html">Model income tax and project</a>
+    </li>
+    <li>
       <a href="../articles/v201515-taxstats.html">2015-16 taxstats miscellany</a>
     </li>
   </ul>
@@ -217,7 +226,7 @@ If the arguments cannot be recycled safely, the function errors.</p>
     <pre class="examples"><div class='input'><span class='co'># current annual rent assistance</span>
 <span class='fu'>rent_assistance</span>()</div><div class='output co'>#&gt; <span class='message'>`fy.year` not set, so defaulting to fy.year = "2018-19"</span></div><div class='output co'>#&gt; <span class='message'>`per` not set; calculating fortnightly payment.</span></div><div class='output co'>#&gt; [1] 135.96</div><div class='input'>
 <span class='co'># current fortnightly payment</span>
-<span class='fu'>rent_assistance</span>(<span class='kw'>Date</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.time'>Sys.Date</a></span>())</div><div class='output co'>#&gt; <span class='message'>`per` not set; calculating fortnightly payment.</span></div><div class='output co'>#&gt; [1] 135.8</div><div class='input'>
+<span class='fu'>rent_assistance</span>(<span class='kw'>Date</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Sys.time'>Sys.Date</a></span>())</div><div class='output co'>#&gt; <span class='message'>`per` not set; calculating fortnightly payment.</span></div><div class='output co'>#&gt; [1] 137.2</div><div class='input'>
 <span class='co'># zero since no rent</span>
 <span class='fu'>rent_assistance</span>(<span class='fl'>0</span>, <span class='kw'>Date</span> <span class='kw'>=</span> <span class='st'>"2016-01-02"</span>)</div><div class='output co'>#&gt; <span class='message'>`per` not set; calculating fortnightly payment.</span></div><div class='output co'>#&gt; [1] 0</div><div class='input'>
 <span class='co'># Rent assistance is payable at 75c for every dollar over min rent</span>

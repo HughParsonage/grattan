@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A function for simple projections of sample files — project_to • grattan</title>
+<title>Simple projections of the annual 2% samples of Australian Taxation Office tax returns. — project_to • grattan</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="A function for simple projections of sample files — project_to" />
+<meta property="og:title" content="Simple projections of the annual 2% samples of Australian Taxation Office tax returns. — project_to" />
 
-<meta property="og:description" content="A function for simple projections of sample files" />
+<meta property="og:description" content="Simple projections of the annual 2% samples of Australian Taxation Office tax returns." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -95,6 +95,15 @@
       <a href="../articles/long-vignettes/budget-2018.html">Budget 2018 modelling</a>
     </li>
     <li>
+      <a href="../articles/long-vignettes/issues/166.html">2015-16 size of dividends credit</a>
+    </li>
+    <li>
+      <a href="../articles/long-vignettes/population/forecasting-population.html">Forecasting population</a>
+    </li>
+    <li>
+      <a href="../articles/model-income-tax.html">Model income tax and project</a>
+    </li>
+    <li>
       <a href="../articles/v201515-taxstats.html">2015-16 taxstats miscellany</a>
     </li>
   </ul>
@@ -123,14 +132,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A function for simple projections of sample files</h1>
+    <h1>Simple projections of the annual 2% samples of Australian Taxation Office tax returns.</h1>
     <small class="dont-index">Source: <a href='https://github.com/HughParsonage/grattan/blob/master/R/project_to.R'><code>R/project_to.R</code></a></small>
     <div class="hidden name"><code>project_to.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A function for simple projections of sample files</p>
+    <p>Simple projections of the annual 2% samples of Australian Taxation Office tax returns.</p>
     
     </div>
 
@@ -141,7 +150,8 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>sample_file</th>
-      <td><p>A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.</p></td>
+      <td><p>A <code>data.table</code> matching a 2% sample file from the ATO.
+See package <code>taxstats</code> for an example.</p></td>
     </tr>
     <tr>
       <th>to_fy</th>
@@ -159,7 +169,10 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A sample file of the same number of rows as <code>sample_file</code> with inflated values (including WEIGHT).</p>
+    <p>A sample file with the same number of rows as <code>sample_file</code> but 
+with inflated values as a forecast for the sample file in <code>to_fy</code>. 
+If <code>WEIGHT</code> is not already a column of <code>sample_file</code>, it will be added and its sum
+will be the predicted number of taxpayers in <code>to_fy</code>.</p>
     
 
   </div>

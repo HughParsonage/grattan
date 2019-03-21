@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>A function for simple projections of tables of Australian Taxation Office tax returns. — project • grattan</title>
+<title>Simple projections of the annual 2% samples of Australian Taxation Office tax returns. — project • grattan</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="A function for simple projections of tables of Australian Taxation Office tax returns. — project" />
+<meta property="og:title" content="Simple projections of the annual 2% samples of Australian Taxation Office tax returns. — project" />
 
-<meta property="og:description" content="A function for simple projections of tables of Australian Taxation Office tax returns." />
+<meta property="og:description" content="Simple projections of the annual 2% samples of Australian Taxation Office tax returns." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -95,6 +95,15 @@
       <a href="../articles/long-vignettes/budget-2018.html">Budget 2018 modelling</a>
     </li>
     <li>
+      <a href="../articles/long-vignettes/issues/166.html">2015-16 size of dividends credit</a>
+    </li>
+    <li>
+      <a href="../articles/long-vignettes/population/forecasting-population.html">Forecasting population</a>
+    </li>
+    <li>
+      <a href="../articles/model-income-tax.html">Model income tax and project</a>
+    </li>
+    <li>
       <a href="../articles/v201515-taxstats.html">2015-16 taxstats miscellany</a>
     </li>
   </ul>
@@ -123,29 +132,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>A function for simple projections of tables of Australian Taxation Office tax returns.</h1>
+    <h1>Simple projections of the annual 2% samples of Australian Taxation Office tax returns.</h1>
     <small class="dont-index">Source: <a href='https://github.com/HughParsonage/grattan/blob/master/R/project.R'><code>R/project.R</code></a></small>
     <div class="hidden name"><code>project.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>A function for simple projections of tables of Australian Taxation Office tax returns.</p>
+    <p>Simple projections of the annual 2% samples of Australian Taxation Office tax returns.</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>project</span>(<span class='no'>sample_file</span>, <span class='kw'>h</span> <span class='kw'>=</span> <span class='fl'>0L</span>, <span class='kw'>fy.year.of.sample.file</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>WEIGHT</span> <span class='kw'>=</span> <span class='fl'>50L</span>, <span class='no'>excl_vars</span>, <span class='kw'>forecast.dots</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>estimator</span> <span class='kw'>=</span> <span class='st'>"mean"</span>,
-  <span class='kw'>pred_interval</span> <span class='kw'>=</span> <span class='fl'>80</span>), <span class='kw'>wage.series</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lf.series</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>.recalculate.inflators</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>.copyDT</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>check_fy_sample_file</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>differentially_uprate_Sw</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+  <span class='kw'>WEIGHT</span> <span class='kw'>=</span> <span class='fl'>50L</span>, <span class='kw'>excl_vars</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>forecast.dots</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>estimator</span> <span class='kw'>=</span>
+  <span class='st'>"mean"</span>, <span class='kw'>pred_interval</span> <span class='kw'>=</span> <span class='fl'>80</span>), <span class='kw'>wage.series</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lf.series</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>use_age_pop_forecast</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>.recalculate.inflators</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>.copyDT</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>check_fy_sample_file</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>differentially_uprate_Sw</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>sample_file</th>
-      <td><p>A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.</p></td>
+      <td><p>A <code>data.table</code> matching a 2% sample file from the ATO.
+See package <code>taxstats</code> for an example.</p></td>
     </tr>
     <tr>
       <th>h</th>
@@ -154,7 +165,7 @@
     <tr>
       <th>fy.year.of.sample.file</th>
       <td><p>The financial year of <code>sample_file</code>. If <code>NULL</code>, the default, the number is inferred from the 
-number of rows of <code>sample_file</code> to be one of <code>2012-13</code>, <code>2013-14</code>, or <code>2014-15</code>.</p></td>
+number of rows of <code>sample_file</code> to be one of <code>2012-13</code>, <code>2013-14</code>, <code>2014-15</code>, or <code>2015-16</code>.</p></td>
     </tr>
     <tr>
       <th>WEIGHT</th>
@@ -177,6 +188,12 @@ number of rows of <code>sample_file</code> to be one of <code>2012-13</code>, <c
       <td><p>See <code><a href='lf_inflator.html'>lf_inflator_fy</a></code>.</p></td>
     </tr>
     <tr>
+      <th>use_age_pop_forecast</th>
+      <td><p>Should the inflation of the number of taxpayers be 
+moderated by the number of resident persons born in a certain year? If <code>TRUE</code>,
+younger ages will grow at a slightly higher rate beyond 2018 than older ages.</p></td>
+    </tr>
+    <tr>
       <th>.recalculate.inflators</th>
       <td><p>(logical, default: <code>FALSE</code>. Should <code><a href='generic_inflator.html'>generic_inflator()</a></code> or <code>CG_inflator</code> be called to project the other variables? Adds time.</p></td>
     </tr>
@@ -187,7 +204,7 @@ number of rows of <code>sample_file</code> to be one of <code>2012-13</code>, <c
     <tr>
       <th>check_fy_sample_file</th>
       <td><p>(logical, default: <code>TRUE</code>) Should <code>fy.year.of.sample.file</code> be checked against <code>sample_file</code>?
-By default, <code>TRUE</code>, an error is raised if the base is not 2012-13, 2013-14, or 2014-15 and a warning is raised if the 
+By default, <code>TRUE</code>, an error is raised if the base is not 2012-13, 2013-14, 2014-15, or 2015-16, and a warning is raised if the 
 number of rows in <code>sample_file</code> is different to the known number of rows in the sample files.</p></td>
     </tr>
     <tr>
@@ -198,13 +215,27 @@ number of rows in <code>sample_file</code> is different to the known number of r
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A sample file of the same number of rows as <code>sample_file</code> with inflated values (including WEIGHT).</p>
+    <p>A sample file with the same number of rows as <code>sample_file</code> but 
+with inflated values as a forecast for the sample file in <code>to_fy</code>. 
+If <code>WEIGHT</code> is not already a column of <code>sample_file</code>, it will be added and its sum
+will be the predicted number of taxpayers in <code>to_fy</code>.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>We recommend you use <code>sample_file_1213</code> over <code>sample_file_1314</code>, unless you need the superannuation variables, 
-as the latter suggests lower-than-recorded tax collections.</p>
-<p>Superannuation variables are inflated by a fixed rate of 5% p.a.</p>
+    <p>Currently components of taxable income are individually inflated 
+based on their historical trends in the ATO sample files, with the 
+exception of:</p><dl class='dl-horizontal'>
+<dt>inflated using <code><a href='differentially_uprate_wage.html'>differentially_uprate_wage</a></code>.</dt><dd><p><code>Sw_amt</code></p></dd>
+<dt>inflated using <code><a href='wage_inflator.html'>wage_inflator</a></code></dt><dd><p><code>Alow_ben_amt</code>, <code>ETP_txbl_amt</code>, <code>Rptbl_Empr_spr_cont_amt</code>, <code>Non_emp_spr_amt</code>, <code>MCS_Emplr_Contr</code>, <code>MCS_Prsnl_Contr</code>, <code>MCS_Othr_Contr</code></p></dd>
+<dt>inflated using <code><a href='cpi_inflator.html'>cpi_inflator</a></code></dt><dd><p><code>WRE_car_amt</code>, <code>WRE_trvl_amt</code>, <code>WRE_uniform_amt</code>, <code>WRE_self_amt</code>, <code>WRE_other_amt</code></p></dd>
+<dt>inflated by <code><a href='lf_inflator.html'>lf_inflator_fy</a></code></dt><dd><p><code>WEIGHT</code></p></dd>
+<dt>inflated by <code><a href='CG_population_inflator.html'>CG_inflator</a></code></dt><dd><p><code>Net_CG_amt</code>, <code>Tot_CY_CG_amt</code></p></dd>
+</dl>
+    <p>Superannuation balances are inflated by a fixed rate of 5% p.a.</p>
+<p>We recommend you use <code>sample_file_1213</code> over <code>sample_file_1314</code>,
+unless you need the superannuation variables, 
+as the latter suggests lower-than-recorded tax collections. 
+However, more recent data is of course preferable.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

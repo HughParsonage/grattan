@@ -1,6 +1,6 @@
 ---
 title: "Forecasting population"
-author: "Hugh Parsonage"
+author: "Hugh Parsonage (Work in progress)"
 date: "14/02/2019"
 output: html_document
 ---
@@ -17,7 +17,7 @@ library(data.table)
 library(grattan)
 library(hutils)
 library(ggplot2)
-library(ggrepel)Y
+library(ggrepel)
 library(forecast)
 library(magrittr)
 ```
