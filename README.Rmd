@@ -126,12 +126,6 @@ lapply(list("30k" = 30e3,
   geom_line()
 ```
 
-## Access ABS data
-
-
-
-
-
 # NEWS
 ```{r NEWS, results='asis', echo=FALSE}
 cat(readLines("NEWS.md"), sep = "\n")
