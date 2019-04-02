@@ -157,3 +157,66 @@ test_that("Works for ATO sample file", {
 })
 
 
+test_that("sapto_rcpp for vector inputs", {
+  expect_equal(sapto_rcpp(c(30e3, 40e3, 0), 
+                          c(1000, 2500, 0),
+                          c(28e3, 35e3, 0), 
+                          c(0.02, 0.05, 0),
+                          c(TRUE, TRUE, FALSE),
+                          c(0, 1000, 1000),
+                          c(FALSE, TRUE, FALSE)),
+               # Just for coverage
+               c(960, 1712.5, 0))
+  expect_equal(sapto_rcpp(c(30e3, 40e3),
+                          MaxOffset = 2230,
+                          LowerThreshold = 22e3,
+                          TaperRate = 0.125,
+                          SaptoEligible = TRUE,
+                          SpouseIncome = 0,
+                          IsMarried = FALSE),
+               sapto_rcpp(c(30e3, 40e3),
+                          MaxOffset = c(2230, 2230),
+                          LowerThreshold = c(22e3, 22e3),
+                          TaperRate = c(0.125, 0.125),
+                          SaptoEligible = c(TRUE, TRUE),
+                          SpouseIncome = c(0, 0),
+                          IsMarried = c(FALSE, FALSE)))
+})
+
+test_that("Errors in sapto_rcpp", {
+  expect_error(do_sapto_rcpp2(RebateIncome = 1:500, 
+                              maxOffsetSingle = 1,
+                              maxOffsetMarried = 1,
+                              lowerThresholdSingle = 1,
+                              lowerThresholdMarried = 1,
+                              taperRateSingle = 1,
+                              taperRateMarried = 1,
+                              SaptoEligible = 1:499,
+                              IsMarried = 1:500,
+                              SpouseIncome = 1:500),
+               regexp = "SaptoEligible")
+  expect_error(do_sapto_rcpp2(RebateIncome = 1:500, 
+                              maxOffsetSingle = 1,
+                              maxOffsetMarried = 1,
+                              lowerThresholdSingle = 1,
+                              lowerThresholdMarried = 1,
+                              taperRateSingle = 1,
+                              taperRateMarried = 1,
+                              SaptoEligible = 1:500,
+                              IsMarried = 1:499,
+                              SpouseIncome = 1:500),
+               regexp = "IsMarried")
+  expect_error(do_sapto_rcpp2(RebateIncome = 1:500, 
+                              maxOffsetSingle = 1,
+                              maxOffsetMarried = 1,
+                              lowerThresholdSingle = 1,
+                              lowerThresholdMarried = 1,
+                              taperRateSingle = 1,
+                              taperRateMarried = 1,
+                              SaptoEligible = 1:500,
+                              IsMarried = 1:500,
+                              SpouseIncome = 1:499),
+               regexp = "SpouseIncome")
+})
+
+

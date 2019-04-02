@@ -11,6 +11,8 @@ output:
 
 # grattan
 
+Utilities for costing and evaluating Australian tax policy, including high-performance tax and transfer calculators, a fast method of projecting tax collections from ATO sample files, and an interface to common indices from the Australian Bureau of Statistics.  Written to support Grattan Institute's Australian Perspectives program.
+
 > Important temporary notice (2019-02-09): The vignettes do not run on pandoc v2.4 (or take a very long time). Please upgrade to v2.6 (2019-01-30) if building vignettes. You may need to modify the PATH or change the RSTUDIO_PANDOC env. var after installing.
 
 ```{r knitrOpts, include=FALSE}
@@ -18,8 +20,6 @@ library(knitr)
 opts_chunk$set(dev = 'svg',
                fig.path = "man/figures/README_")
 ```
-
-Australian Tax Policy Analysis
 
 # Overview
 ```{r eval=FALSE}
@@ -125,12 +125,6 @@ lapply(list("30k" = 30e3,
   geom_hline(yintercept = 0) +
   geom_line()
 ```
-
-## Access ABS data
-
-
-
-
 
 # NEWS
 ```{r NEWS, results='asis', echo=FALSE}

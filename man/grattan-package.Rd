@@ -19,6 +19,8 @@ in support of the Grattan Institute, Melbourne.
 \describe{
 \item{\code{grattan.verbose}}{(\code{FALSE}) Emit diagnostic messages (via \code{cat()}))}
 \item{\code{grattan.assume1901_2100}}{(\code{TRUE}) Assume \code{yr2fy} receives an integer >= 1901 and <= 2100.}
+\item{\code{grattan.taxstats.lib}}{Package library into which \code{taxstats} packages will
+be installed. If \code{NULL}, a temporary directory is used.}
 }
 }
 

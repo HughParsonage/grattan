@@ -2,12 +2,13 @@
 % Please edit documentation in R/project_to.R
 \name{project_to}
 \alias{project_to}
-\title{A function for simple projections of sample files}
+\title{Simple projections of the annual 2\% samples of Australian Taxation Office tax returns.}
 \usage{
 project_to(sample_file, to_fy, fy.year.of.sample.file = NULL, ...)
 }
 \arguments{
-\item{sample_file}{A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.}
+\item{sample_file}{A \code{data.table} matching a 2\% sample file from the ATO.
+See package \code{taxstats} for an example.}
 
 \item{to_fy}{A string like "1066-67" representing the financial year for which forecasts of the sample file are desired.}
 
@@ -16,8 +17,11 @@ project_to(sample_file, to_fy, fy.year.of.sample.file = NULL, ...)
 \item{...}{Other arguments passed to \code{\link{project}}.}
 }
 \value{
-A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).
+A sample file with the same number of rows as \code{sample_file} but 
+with inflated values as a forecast for the sample file in \code{to_fy}. 
+If \code{WEIGHT} is not already a column of \code{sample_file}, it will be added and its sum
+will be the predicted number of taxpayers in \code{to_fy}.
 }
 \description{
-A function for simple projections of sample files
+Simple projections of the annual 2\% samples of Australian Taxation Office tax returns.
 }

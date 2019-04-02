@@ -27,3 +27,20 @@ test_that("Value of revenue_foregone", {
   
 })
 
+test_that("latex output produces LaTeX escaped $", {
+  # Purely to avoid polluting the devtools::test()
+  # progress.
+  Feed <- capture.output({
+    skip_if_not_installed("knitr")
+    skip_if_not_installed("withr")
+    withr::with_envvar(c("_R_GRATTAN_MOCK_KNITR_LATEX_" = "true"), {
+      library(data.table)
+      dt <- data.table(new_tax = rep(1, 100), 
+                       baseline_tax = integer(100), 
+                       WEIGHT = 2e7)
+      expect_equal(print.revenue_foregone(revenue_foregone(dt)), 
+                   "\\$2~billion")
+    })
+  })
+})
+

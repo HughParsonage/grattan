@@ -95,6 +95,15 @@
       <a href="../articles/long-vignettes/budget-2018.html">Budget 2018 modelling</a>
     </li>
     <li>
+      <a href="../articles/long-vignettes/issues/166.html">2015-16 size of dividends credit</a>
+    </li>
+    <li>
+      <a href="../articles/long-vignettes/population/forecasting-population.html">Forecasting population</a>
+    </li>
+    <li>
+      <a href="../articles/model-income-tax.html">Model income tax and project</a>
+    </li>
+    <li>
       <a href="../articles/v201515-taxstats.html">2015-16 taxstats miscellany</a>
     </li>
   </ul>
@@ -150,7 +159,9 @@
   <span class='kw'>Budget2018_lamington</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>Budget2018_lito_202223</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>Budget2018_watr</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sapto_eligible</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>sapto_max_offset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sapto_lower_threshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>sapto_taper</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sbto_discount</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cgt_discount_rate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sapto_taper</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sapto_max_offset_married</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sapto_lower_threshold_married</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sapto_taper_married</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sbto_discount</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cgt_discount_rate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>calc_baseline_tax</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>return.</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"sample_file"</span>, <span class='st'>"tax"</span>,
   <span class='st'>"sample_file.int"</span>), <span class='kw'>clear_tax_cols</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>warn_upper_thresholds</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>.debug</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
@@ -164,7 +175,8 @@
     </tr>
     <tr>
       <th>baseline_fy</th>
-      <td><p>If a parameter is not selected, the parameter's value in this tax year is used.</p></td>
+      <td><p>If a parameter is not selected, the parameter's value in this tax year is used.</p>
+<p>Must be a valid tax year and one for which <code>income_tax</code> has been programmed.</p></td>
     </tr>
     <tr>
       <th>n_dependants</th>
@@ -268,6 +280,11 @@ If <code>NULL</code>, the default, then eligibility is determined by <code>age_r
     <tr>
       <th>sapto_taper</th>
       <td><p>The taper rate beyond <code>sapto_lower_threshold</code>.</p></td>
+    </tr>
+    <tr>
+      <th>sapto_max_offset_married, sapto_lower_threshold_married, sapto_taper_married</th>
+      <td><p>As above,
+but applied to members of a couple</p></td>
     </tr>
     <tr>
       <th>sbto_discount</th>

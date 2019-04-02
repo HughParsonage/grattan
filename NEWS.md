@@ -4,6 +4,12 @@
 * `income_tax` now gives consistent results modulo the existence of completely empty 
   columns that are inputs for `sapto` (#158)
 * `income_tax` will work if `.dots.ATO` is a non-data.table data.frame.
+* `model_income_tax`:
+  - Correctly imputes SAPTO vs non-SAPTO family thresholds when both provided.
+  - `sapto_rcpp` is now more careful about passing length-one vectors to vectorized C++
+    functions.
+* `project` now correctly prioritizes `excl_vars` over variables with otherwise predefined 
+  uprating mechanisms (such as `Sw_amt`).
 
 ### New functions:
 * `awote` for weekly earnings

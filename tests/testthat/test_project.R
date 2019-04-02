@@ -65,7 +65,7 @@ test_that("Error handling (sample files)", {
   skip_on_circleci(1)
   library(taxstats)
   expect_error(project(data.table(), h = 1L),
-               regexp = "`fy.year.of.sample.file` was not provided, and its value could not be inferred from nrow(sample_file) = 0. Either use a 2% sample file of the years 2012-13, 2013-14, or 2014-15 or supply `fy.year.of.sample.file` manually.", 
+               regexp = "`fy.year.of.sample.file` was not provided, and its value could not be inferred from nrow(sample_file) = 0.", 
                fixed = TRUE)
   
   
@@ -79,7 +79,7 @@ test_that("Error handling (sample files)", {
                  regexp = "nrow(sample_file) != 269639", 
                  fixed = TRUE)
   expect_error(project_to(sample_file_1112, "2013-14"),
-               regexp = "`fy.year.of.sample.file` was not provided, yet its value could not be inferred from nrow(sample_file) = 254273. Either use a 2% sample file of the years 2012-13, 2013-14, or 2014-15 or supply `fy.year.of.sample.file` manually.",
+               regexp = "`fy.year.of.sample.file` was not provided, yet its value could not be inferred from nrow(sample_file) = 254273.",
                fixed = TRUE)
 })
 
@@ -106,7 +106,9 @@ test_that("Custom lf/wage series", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
   skip_on_circleci(1)
+  library(data.table)
   library(taxstats)
+  
   s1314 <- as.data.table(sample_file_1314)
   s2021 <- project(s1314, h = 7L)
   s2021_LA <- project(s1314, h = 7L, lf.series = 0.0)
@@ -155,5 +157,26 @@ test_that("Coverage", {
   
   
 })
+
+test_that("excl_vars has priority", {
+  skip_if_not_installed("taxstats")
+  library(data.table)
+  library(taxstats)
+  s1718 <- project(sample_file_1314, h = 4L)
+  s1718_noSwAmt <- project(sample_file_1314, h = 4L, excl_vars = "Sw_amt")
+  Sw_all_equal <- function(DT1, DT2) {
+    v1 <- .subset2(DT1, "Sw_amt")
+    v2 <- .subset2(DT2, "Sw_amt")
+    for (i in seq_along(v1)) {
+      if (v1[i] != v2[i]) {
+        return(FALSE)
+      }
+    }
+    TRUE
+  }
+  
+  expect_false(Sw_all_equal(s1718, s1718_noSwAmt))
+})
+
 
 

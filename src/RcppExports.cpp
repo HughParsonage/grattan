@@ -234,9 +234,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// sapto_rcpp
-NumericVector sapto_rcpp(NumericVector RebateIncome, NumericVector MaxOffset, NumericVector LowerThreshold, NumericVector TaperRate, LogicalVector SaptoEligible, NumericVector SpouseIncome, LogicalVector IsMarried);
-RcppExport SEXP _grattan_sapto_rcpp(SEXP RebateIncomeSEXP, SEXP MaxOffsetSEXP, SEXP LowerThresholdSEXP, SEXP TaperRateSEXP, SEXP SaptoEligibleSEXP, SEXP SpouseIncomeSEXP, SEXP IsMarriedSEXP) {
+// do_sapto_rcpp
+NumericVector do_sapto_rcpp(NumericVector RebateIncome, NumericVector MaxOffset, NumericVector LowerThreshold, NumericVector TaperRate, LogicalVector SaptoEligible, NumericVector SpouseIncome, LogicalVector IsMarried);
+RcppExport SEXP _grattan_do_sapto_rcpp(SEXP RebateIncomeSEXP, SEXP MaxOffsetSEXP, SEXP LowerThresholdSEXP, SEXP TaperRateSEXP, SEXP SaptoEligibleSEXP, SEXP SpouseIncomeSEXP, SEXP IsMarriedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -247,7 +247,27 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< LogicalVector >::type SaptoEligible(SaptoEligibleSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type SpouseIncome(SpouseIncomeSEXP);
     Rcpp::traits::input_parameter< LogicalVector >::type IsMarried(IsMarriedSEXP);
-    rcpp_result_gen = Rcpp::wrap(sapto_rcpp(RebateIncome, MaxOffset, LowerThreshold, TaperRate, SaptoEligible, SpouseIncome, IsMarried));
+    rcpp_result_gen = Rcpp::wrap(do_sapto_rcpp(RebateIncome, MaxOffset, LowerThreshold, TaperRate, SaptoEligible, SpouseIncome, IsMarried));
+    return rcpp_result_gen;
+END_RCPP
+}
+// do_sapto_rcpp2
+NumericVector do_sapto_rcpp2(NumericVector RebateIncome, double maxOffsetSingle, double maxOffsetMarried, double lowerThresholdSingle, double lowerThresholdMarried, double taperRateSingle, double taperRateMarried, LogicalVector SaptoEligible, LogicalVector IsMarried, NumericVector SpouseIncome);
+RcppExport SEXP _grattan_do_sapto_rcpp2(SEXP RebateIncomeSEXP, SEXP maxOffsetSingleSEXP, SEXP maxOffsetMarriedSEXP, SEXP lowerThresholdSingleSEXP, SEXP lowerThresholdMarriedSEXP, SEXP taperRateSingleSEXP, SEXP taperRateMarriedSEXP, SEXP SaptoEligibleSEXP, SEXP IsMarriedSEXP, SEXP SpouseIncomeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type RebateIncome(RebateIncomeSEXP);
+    Rcpp::traits::input_parameter< double >::type maxOffsetSingle(maxOffsetSingleSEXP);
+    Rcpp::traits::input_parameter< double >::type maxOffsetMarried(maxOffsetMarriedSEXP);
+    Rcpp::traits::input_parameter< double >::type lowerThresholdSingle(lowerThresholdSingleSEXP);
+    Rcpp::traits::input_parameter< double >::type lowerThresholdMarried(lowerThresholdMarriedSEXP);
+    Rcpp::traits::input_parameter< double >::type taperRateSingle(taperRateSingleSEXP);
+    Rcpp::traits::input_parameter< double >::type taperRateMarried(taperRateMarriedSEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type SaptoEligible(SaptoEligibleSEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type IsMarried(IsMarriedSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type SpouseIncome(SpouseIncomeSEXP);
+    rcpp_result_gen = Rcpp::wrap(do_sapto_rcpp2(RebateIncome, maxOffsetSingle, maxOffsetMarried, lowerThresholdSingle, lowerThresholdMarried, taperRateSingle, taperRateMarried, SaptoEligible, IsMarried, SpouseIncome));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -295,4 +315,35 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(sapto_rcpp_yr(RebateIncome, SpouseIncome, IsMarried, yr));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_grattan_AnyWhich", (DL_FUNC) &_grattan_AnyWhich, 5},
+    {"_grattan_IncomeTax", (DL_FUNC) &_grattan_IncomeTax, 3},
+    {"_grattan_MedicareLevySingle", (DL_FUNC) &_grattan_MedicareLevySingle, 11},
+    {"_grattan_MedicareLevySaptoYear", (DL_FUNC) &_grattan_MedicareLevySaptoYear, 5},
+    {"_grattan_MedicareLevy", (DL_FUNC) &_grattan_MedicareLevy, 11},
+    {"_grattan_Offset", (DL_FUNC) &_grattan_Offset, 4},
+    {"_grattan_anyOutside", (DL_FUNC) &_grattan_anyOutside, 3},
+    {"_grattan_pmax3", (DL_FUNC) &_grattan_pmax3, 3},
+    {"_grattan_pmaxC", (DL_FUNC) &_grattan_pmaxC, 2},
+    {"_grattan_pmaxCint", (DL_FUNC) &_grattan_pmaxCint, 2},
+    {"_grattan_pmax0", (DL_FUNC) &_grattan_pmax0, 1},
+    {"_grattan_pmaxIPnum0", (DL_FUNC) &_grattan_pmaxIPnum0, 1},
+    {"_grattan_pmaxIPint0", (DL_FUNC) &_grattan_pmaxIPint0, 1},
+    {"_grattan_pmaxV", (DL_FUNC) &_grattan_pmaxV, 2},
+    {"_grattan_pminC", (DL_FUNC) &_grattan_pminC, 2},
+    {"_grattan_pmin0", (DL_FUNC) &_grattan_pmin0, 1},
+    {"_grattan_pminV", (DL_FUNC) &_grattan_pminV, 2},
+    {"_grattan_do_sapto_rcpp", (DL_FUNC) &_grattan_do_sapto_rcpp, 7},
+    {"_grattan_do_sapto_rcpp2", (DL_FUNC) &_grattan_do_sapto_rcpp2, 10},
+    {"_grattan_sapto_rcpp_singleton", (DL_FUNC) &_grattan_sapto_rcpp_singleton, 7},
+    {"_grattan_sapto_rcpp_yr_singleton", (DL_FUNC) &_grattan_sapto_rcpp_yr_singleton, 4},
+    {"_grattan_sapto_rcpp_yr", (DL_FUNC) &_grattan_sapto_rcpp_yr, 4},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_grattan(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

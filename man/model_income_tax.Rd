@@ -20,7 +20,9 @@ model_income_tax(sample_file, baseline_fy, n_dependants = 0L,
   Budget2018_lamington = FALSE, Budget2018_lito_202223 = FALSE,
   Budget2018_watr = FALSE, sapto_eligible = NULL,
   sapto_max_offset = NULL, sapto_lower_threshold = NULL,
-  sapto_taper = NULL, sbto_discount = NULL, cgt_discount_rate = NULL,
+  sapto_taper = NULL, sapto_max_offset_married = NULL,
+  sapto_lower_threshold_married = NULL, sapto_taper_married = NULL,
+  sbto_discount = NULL, cgt_discount_rate = NULL,
   calc_baseline_tax = TRUE, return. = c("sample_file", "tax",
   "sample_file.int"), clear_tax_cols = TRUE,
   warn_upper_thresholds = TRUE, .debug = FALSE)
@@ -28,7 +30,9 @@ model_income_tax(sample_file, baseline_fy, n_dependants = 0L,
 \arguments{
 \item{sample_file}{A sample file having at least as many variables as the 2012-13 sample file.}
 
-\item{baseline_fy}{If a parameter is not selected, the parameter's value in this tax year is used.}
+\item{baseline_fy}{If a parameter is not selected, the parameter's value in this tax year is used.
+
+Must be a valid tax year and one for which \code{income_tax} has been programmed.}
 
 \item{n_dependants}{The number of dependants for each entry in \code{sample_file}.}
 
@@ -88,6 +92,9 @@ If \code{NULL}, the default, then eligibility is determined by \code{age_range} 
 \item{sapto_lower_threshold}{The threshold at which SAPTO begins to reduce (from \code{sapto_max_offset}).}
 
 \item{sapto_taper}{The taper rate beyond \code{sapto_lower_threshold}.}
+
+\item{sapto_max_offset_married, sapto_lower_threshold_married, sapto_taper_married}{As above,
+but applied to members of a couple}
 
 \item{sbto_discount}{The \code{tax_discount} in \code{\link{small_business_tax_offset}}.}
 

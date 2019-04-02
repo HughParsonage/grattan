@@ -1,0 +1,435 @@
+---
+title: "Model income tax and project"
+author: "Hugh Parsonage"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{model_income_tax}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The functions `model_income_tax` and `project` are the core of the grattan package.
+Grattan applies them to the ATO's 2\% 
+sample files
+to produce costings of changes to tax policy.
+The functions are both \(X^n \to X^n\). That is, they take 
+a sample file and return a mutated sample file. 
+
+With the mutated sample file, the costing for that particular tax year is the weighted 
+sum of the difference between the `new_tax` and the `baseline_tax` columns. We can also use
+the mutated sample file to perform distributional analysis, such as the average change in 
+tax by taxable income percentile.
+
+Since the input data consists of tax returns and the grattan package does not purport to generate
+inferences about the wider Australian population, these functions cannot (directly) analyse the effect of policies on 
+households or on the wider population. For example, policies affecting welfare payments, 
+changes to the tax settings of businesses or super funds, or changes which would tax people 
+who do not currently file tax returns are not amenable to the kind of analysis these functions
+perform.
+
+
+## How to use `model_income_tax`
+
+`model_income_tax` takes a sample file and returns a sample file under the settings
+given by the function arguments.
+
+To start, let's load the (minimal) packages we need. We'll use the synthetic 2015-16
+sample file contained in the suggested package `taxstats1516`. See `?install_taxstats`
+for installation instructions. For future years, use the latest sample file from the
+ATO.
+
+```{r no-includes, include=FALSE}
+do_eval <- function() {
+  library(hutils)
+  NEITHER(nzchar(Sys.getenv("CIRCLECI")),
+          nzchar(Sys.getenv("TRAVIS")))
+}
+```
+
+```{r loadPackages}
+library(knitr)
+library(data.table)
+library(magrittr)
+library(hutils)
+library(grattan)
+require_taxstats1516()
+
+# Use the actual sample file if you've got it
+s1516 <- as.data.table(sample_file_1516_synth)
+s1516[, WEIGHT := 50L]
+```
+
+```{r detach-taxstats, include=FALSE}
+# memory 
+detach("package:taxstats1516", unload = TRUE)
+```
+
+This function is purely cosmetic.
+
+```{r dollar}
+#' @return Number formatted as dollar e.g. 30e3 => $30,000
+dollar <- function (x, digits = 0) {
+  nsmall <- digits
+  commaz <- format(abs(x), nsmall = nsmall, trim = TRUE, big.mark = ",", 
+                   scientific = FALSE, digits = 1L)
+  if_else(x < 0, 
+          paste0("\U2212","$", commaz),
+          paste0("$", commaz))
+}
+```
+
+All instances of `model_income_tax` have two mandatory arguments: `sample_file` and
+`baseline_fy`. These define the `baseline_tax` column in the result. When an
+argument is left as `NULL`, the `new_tax` column is calculated using the
+corresponding tax setting that applied in `baseline_fy`.
+
+```{r baseline-fy}
+s1516 %>%
+  model_income_tax(baseline_fy = "2015-16") %>%
+  select_grep("tax$", "Taxable_Income") %>%  # just look at relevant cols
+  head %>%
+  kable
+```
+
+Note that by default `new_tax` is a double precision
+vector, not rounded.  You can use `return. = sample_file.int` to 
+return rounded variables.
+
+With the use of a simple function to test equality, we can see that
+`new_tax` is just the same as `baseline_tax`, as expected. 
+
+```{r baseline-fy-int}
+is_all_equal <- function(x, y) {
+  if (is.integer(x) && is.integer(y)) {
+    all(x == y)
+  } else {
+    isTRUE(all.equal(x, y))
+  }
+}
+
+s1516 %>%
+  model_income_tax(baseline_fy = "2015-16", 
+                   return. = "sample_file.int") %>%
+  select_grep("tax$", "Taxable_Income") %T>%
+  .[, stopifnot(is_all_equal(baseline_tax, new_tax))] %>%
+  head %>%
+  kable
+```
+
+The choice of rounded, unrounded, or truncated values may be important for some analysis.
+For instance, tax liabilities are calculated using whole dollar amounts, so a truncated 
+value may be appropriate when the values of `new_tax` for each row need to be very precise. 
+Unrounded values
+may be important to determine changes in marginal tax rates. Rounded values may be the most 
+appropriate choice for costings. 
+
+### Changing ordinary tax parameters
+
+You can change how the 'ordinary tax' is calculated by changing the 
+arguments `ordinary_tax_thresholds` and `ordinary_tax_rates`. To replicate
+the 2015-16 tax scales, one would use.
+
+```{r s1516_no_changes}
+s1516_no_changes <- 
+  # Temp budget repair levy not refundable against SBTO
+  s1516 %>%
+  model_income_tax(baseline_fy = "2015-16",
+                   ordinary_tax_thresholds = c(0, 18200, 37000, 80000, 180000),
+                                                               # temp budget 
+                                                               # repair levy
+                   ordinary_tax_rates = c(0, 0.19, 0.325, 0.37, 0.45 + 0.02), 
+                   return. = "sample_file.int")
+```
+
+Note that the temporary budget repair levy is not included by default,
+so I simulated it by topping up the \$180,000 marginal tax rate. This
+simulation is imperfect because the small business tax offset 
+does not offset levies. As a result, `baseline_tax` and `new_tax` are slightly different
+in `s1516_no_changes`. This is not a problem for tax years including and beyond 2018-19.
+
+### Changing Medicare levy parameters
+
+The Medicare levy is more complex to calculate than ordinary income tax. 
+There are parameters relating to two thresholds, as well as different 
+thresholds for families and SAPTO-eligible individuals. Even the simplest
+modification require changes to multiple parameters. 
+Warnings are emitted whenever parameters are not internally consistent.
+
+Let's try to increase the Medicare levy rate from 2\% and 3\%. Observe
+the warning messages.
+
+```{r medicare-levy-rate-increase-a, eval=do_eval()}
+m1516a <- 
+  s1516 %>%
+  model_income_tax("2015-16",
+                   # Increase to 3%
+                   medicare_levy_rate = 0.03)
+```
+
+Note the warning messsage says that the parameter **has** been changed.
+However, you should never tolerate the warning; instead, change the parameter
+to the suggested one (if you agree with the warning message's advice).
+
+```{r medicare-levy-rate-increase-b, eval=do_eval()}
+m1516a <- 
+  s1516 %>%
+  model_income_tax("2015-16",
+                   # Increase to 3%
+                   medicare_levy_rate = 0.03,
+                   medicare_levy_upper_threshold = 30479,
+                   medicare_levy_upper_sapto_threshold = 48197)
+```
+
+Since there are many degrees of freedom, and since thresholds are generally
+the things that are actually contemplated when making changes, warnings
+will suggest changing 
+thresholds over changes to the rate or taper if there is a conflict. Only 
+when the thresholds have been manually selected and there is still a conflict
+is a change to the taper or rate suggested. For example, if we didn't want to change 
+the upper threshold, but keep it at its 2015-16 value of \$26,670, we could insist:
+
+```{r medicare-levy-rate-increase-c, eval=do_eval()}
+m1516a <- 
+  s1516 %>%
+  model_income_tax("2015-16",
+                   # Increase to 3%
+                   medicare_levy_rate = 0.03,
+                   # but keep the upper threshold the same
+                   medicare_levy_upper_threshold = 26670,
+                   medicare_levy_upper_sapto_threshold = 48197)
+```
+
+The warning still assumes the taper and rate are the same, but it can no longer
+suggest a change to the upper threshold (since we provided it), so it suggests a 
+change to the lower threshold. Only once we exhaust the thresholds it can adjust
+does the warning message start to include changing the taper:
+
+```{r medicare-levy-rate-increase-d, eval=do_eval()}
+m1516a <- 
+  s1516 %>%
+  model_income_tax("2015-16",
+                   # Increase to 3%
+                   medicare_levy_rate = 0.03,
+                   # but keep the upper threshold the same
+                   medicare_levy_lower_threshold = 21335,
+                   medicare_levy_upper_threshold = 26670,
+                   medicare_levy_upper_sapto_threshold = 48197)
+```
+
+
+
+
+
+### Changes to the Low Income Tax Offset
+
+Here is a change to the LITO so that the maximum offset is $1000,
+rather than $445, with the 1.5\% taper left as-is.
+Then we print the revenue foregone.
+
+```{r lito-a}
+L1516a <-
+  s1516 %>%
+  model_income_tax("2015-16", 
+                   lito_max_offset = 1000)
+revenue_foregone(L1516a)
+```
+
+```{r cleanup-before-project, include=FALSE}
+# reduce memory usage (e.g. travis, CCI)
+rm(L1516a, m1516a, s1516_no_changes)
+```
+
+## How to use `project`
+
+The function `project` takes a sample file and returns a sample file. The 
+other mandatory argument is `h`, the number of integer years ahead of the
+sample file provided.
+
+Thus, to get a forecast for the 2018-19 tax year: 
+
+```{r project-a}
+s1819 <- project(s1516, h = 3L)
+```
+
+This uses the internal forecast methods.
+To specify specific forecast outcomes,
+you can use the `wage.series` and `lf.series` 
+
+### Wage and labour series
+
+```{r project-wage-lf-series}
+s1819_lf2pc_wage2pc <- 
+  s1516 %>%
+  project(h = 3L, 
+          lf.series = 0.02,
+          wage.series = 0.02) 
+```
+
+To compare the tax collections under these different assumptions, one would
+use `income_tax` separately:
+
+```{r compare-2pc-to-default}
+tax_Grattan_1819 <- 
+  s1819 %$%
+  income_tax(Taxable_Income, "2018-19", .dots.ATO = copy(s1819)) %>%
+  sum %>%
+  # Weight (equi-weighted so do now)
+  multiply_by(s1819[["WEIGHT"]][1L])
+tax_2pc_1819 <- 
+  s1819_lf2pc_wage2pc %$%
+  income_tax(Taxable_Income, "2018-19", .dots.ATO = copy(s1819)) %>%
+  sum %>%
+  # Weight (equi-weighted so do now)
+  multiply_by(s1819[["WEIGHT"]][1L])
+```
+
+Currently there is no interface to using the upper or lower bounds of the labour force or
+wage price indices. If you wanted the 80\% upper bound of the prediction interval for 
+salary out to 2020-21, for instance, you would pass `Sw_amt` to `excl_vars` and manually inflate.
+
+```{r s2021}
+s2021 <- project(s1516, h = 5L)
+```
+
+```{r s1819_wage80pc}
+s2021_wage80pc <- 
+  s1516 %>%
+  copy %>%
+  .[, Sw_amt := wage_inflator(Sw_amt, 
+                              from_fy = "2015-16",
+                              to_fy = "2020-21", 
+                              forecast.level = 80,
+                              forecast.series = "upper")] %>%
+  .[] %>%
+  project(h = 5L,
+          excl_vars = "Sw_amt",
+          .copyDT = FALSE) %>%  # just for memory frugality
+  .[]
+```
+
+```{r compare-Sw_amt}
+s2021[, mean(Sw_amt)] %>% dollar
+s2021_wage80pc[, mean(Sw_amt)] %>% dollar
+s2021[, mean(Taxable_Income)] %>% dollar
+s2021_wage80pc[, mean(Taxable_Income)] %>% dollar
+```
+
+
+## Combining the two
+
+To cost a reduction in the capital gains tax discount from 50\% to 25\% over the four years
+from 2018-19, we would run
+
+```{r cgt_25pc_fwd_estimates, eval=do_eval()}
+cgt_25pc_fwd_estimates <- 
+  lapply(yr2fy(2019:2022), function(fy) {
+    s1516 %>%
+      project_to(to_fy = fy) %>%
+      model_income_tax("2018-19",
+                       cgt_discount_rate = 0.25) %>%
+      .[, fy_year := fy]
+  }) %>%
+  rbindlist
+```
+
+Note that this takes a few seconds, most of which is spent within `project`. We could improve
+the speed of this by caching the intermediate objects, either as objects in the environment
+or as files (say, `.fst` files). You should consider doing this when you find yourself running `project`
+many times -- likely you are just repeating calculations.
+
+```{r cgt_25pc_fwd_estimates-deciles, eval=do_eval()}
+cgt_25pc_fwd_estimates %>%
+  mutate_ntile("Taxable_Income", n = 5L, keyby = "fy_year") %>%
+  .[, delta := new_tax - baseline_tax] %>%
+  .[, .(totDelta = sum(delta),
+        avgDelta = mean(delta)),
+    keyby = .(fy_year, Taxable_IncomeQuintile)] %>%
+  # cosmetic
+  .[, lapply(.SD, round), keyby = key(.)] %>%
+  kable
+```
+
+### `lito_multi` for custom offsets
+
+While `model_income_tax` cannot account for the future imagination
+of tax policy makers, the argument `lito_multi` does provide a 
+powerful mechanism for handling complicated offsets. The argument, 
+if provided, must be a list of two components `x` and `y`. These 
+can be used to define an offset: for every `(x_i, y_i)` defined the 
+value of the offset for a taxable income `x_i` must be `y_i` with the 
+points in between interpolated linearly. 
+
+For example to simply mimic `LITO` in 2015-16:
+
+```{r lito_multi_201516}
+s1516 %>%
+  model_income_tax("2015-16",
+                   lito_multi = list(x = c(-Inf, 37e3, 200e3/3, Inf),
+                                     y = c(445, 445, 0, 0)),
+                   return. = "sample_file.int") %>%
+  .[new_tax != baseline_tax]
+
+```
+
+
+### `Budget_...` parameters
+
+These were used to cost policies proposed in the 2018 Budget period by the Government and
+the Opposition. They're unlikely to have much use except in reproducing past results.
+
+### SAPTO
+
+The Seniors and Pensioner Tax Offset (SAPTO) can also be modified. 
+To cost the abolition of SAPTO, one would use:
+
+```{r sapto_abolished1819}
+sapto_abolished1819 <- 
+  s1819 %>%
+  model_income_tax("2018-19", 
+                   sapto_eligible = FALSE)
+```
+
+To model a change to lower the SAPTO threshold from \$32,279 to \$27,000:
+
+```{r sapto_abolished_abv27k_1819}
+sapto_abolished_abv27k_1819 <-
+  s1819 %>%
+  model_income_tax("2018-19",
+                   sapto_lower_threshold = 27000)
+```
+
+To cost the proposal in *Age of entitlement: age-based tax breaks* (2016)
+
+```{r sapto-age-of-entitlement}
+s1718_AgeOfEntitlement <-
+    project(s1516, 
+            h = 2L) %>%
+    model_income_tax("2017-18", 
+                     sapto_lower_threshold = 27e3,
+                     sapto_lower_threshold_married = 42e3,
+                     sapto_max_offset = 1160,
+                     sapto_max_offset_married = 390,
+                     medicare_levy_lower_sapto_threshold = 27000,
+                     medicare_levy_upper_sapto_threshold = 33750,
+                     medicare_levy_upper_family_threshold = 46361,
+                     medicare_levy_lower_family_sapto_threshold = 42000,
+                     medicare_levy_upper_family_sapto_threshold = 52500)
+revenue_foregone(s1718_AgeOfEntitlement)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

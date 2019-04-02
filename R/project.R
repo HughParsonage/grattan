@@ -1,9 +1,10 @@
-#' A function for simple projections of tables of Australian Taxation Office tax returns.
+#' Simple projections of the annual 2\% samples of Australian Taxation Office tax returns.
 #' 
-#' @param sample_file A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.
+#' @param sample_file A \code{data.table} matching a 2\% sample file from the ATO.
+#' See package \code{taxstats} for an example.
 #' @param h An integer. How many years should the sample file be projected?
 #' @param fy.year.of.sample.file The financial year of \code{sample_file}. If \code{NULL}, the default, the number is inferred from the 
-#' number of rows of \code{sample_file} to be one of \code{2012-13}, \code{2013-14}, or \code{2014-15}.
+#' number of rows of \code{sample_file} to be one of \code{2012-13}, \code{2013-14}, \code{2014-15}, or \code{2015-16}.
 #' @param WEIGHT The sample weight for the sample file. (So a 2\% file has \code{WEIGHT} = 50.)
 #' @param excl_vars A character vector of column names in \code{sample_file} that should not be inflated. Columns not present in the 2013-14 sample file are not inflated and nor are the columns \code{Ind}, \code{Gender}, \code{age_range}, \code{Occ_code}, \code{Partner_status}, \code{Region}, \code{Lodgment_method}, and \code{PHI_Ind}.
 #' @param forecast.dots A list containing parameters to be passed to \code{generic_inflator}.
@@ -15,16 +16,35 @@
 #' @param .recalculate.inflators (logical, default: \code{FALSE}. Should \code{generic_inflator()} or \code{CG_inflator} be called to project the other variables? Adds time.
 #' @param .copyDT (logical, default: \code{TRUE}) Should a \code{copy()} of \code{sample_file} be made? If set to \code{FALSE}, will update \code{sample_file}. 
 #' @param check_fy_sample_file (logical, default: \code{TRUE}) Should \code{fy.year.of.sample.file} be checked against \code{sample_file}?
-#' By default, \code{TRUE}, an error is raised if the base is not 2012-13, 2013-14, or 2014-15 and a warning is raised if the 
+#' By default, \code{TRUE}, an error is raised if the base is not 2012-13, 2013-14, 2014-15, or 2015-16, and a warning is raised if the 
 #' number of rows in \code{sample_file} is different to the known number of rows in the sample files. 
 #' @param differentially_uprate_Sw (logical, default: \code{TRUE}) Should the salary and wage column (\code{Sw_amt}) be differentially uprating using (\code{\link{differentially_uprate_wage}})?
 #' 
 #' 
-#' @return A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).
-#' @details We recommend you use \code{sample_file_1213} over \code{sample_file_1314}, unless you need the superannuation variables, 
-#' as the latter suggests lower-than-recorded tax collections. 
+#' @return A sample file with the same number of rows as \code{sample_file} but 
+#' with inflated values as a forecast for the sample file in \code{to_fy}. 
+#' If \code{WEIGHT} is not already a column of \code{sample_file}, it will be added and its sum
+#' will be the predicted number of taxpayers in \code{to_fy}.
 #' 
-#' Superannuation variables are inflated by a fixed rate of 5\% p.a.
+#' @details 
+#' 
+#' Currently components of taxable income are individually inflated 
+#' based on their historical trends in the ATO sample files, with the 
+#' exception of:
+#' \describe{
+#' \item{inflated using \code{\link{differentially_uprate_wage}}.}{\code{Sw_amt}}
+#' \item{inflated using \code{\link{wage_inflator}}}{\code{Alow_ben_amt}, \code{ETP_txbl_amt}, \code{Rptbl_Empr_spr_cont_amt}, \code{Non_emp_spr_amt}, \code{MCS_Emplr_Contr}, \code{MCS_Prsnl_Contr}, \code{MCS_Othr_Contr}}
+#' \item{inflated using \code{\link{cpi_inflator}}}{\code{WRE_car_amt}, \code{WRE_trvl_amt}, \code{WRE_uniform_amt}, \code{WRE_self_amt}, \code{WRE_other_amt}}
+#' \item{inflated by \code{\link{lf_inflator_fy}}}{\code{WEIGHT}}
+#' \item{inflated by \code{\link{CG_inflator}}}{\code{Net_CG_amt}, \code{Tot_CY_CG_amt}}
+#' }
+#' 
+#' Superannuation balances are inflated by a fixed rate of 5\% p.a.
+#' 
+#' We recommend you use \code{sample_file_1213} over \code{sample_file_1314},
+#' unless you need the superannuation variables, 
+#' as the latter suggests lower-than-recorded tax collections. 
+#' However, more recent data is of course preferable.
 #' @examples 
 #' # install.packages('taxstats', repos = 'https://hughparsonage.github.io/drat')
 #' if (requireNamespace("taxstats", quietly = TRUE) &&
@@ -36,14 +56,13 @@
 #'                               h = 3L, # to "2016-17"
 #'                               fy.year.of.sample.file = "2013-14")  
 #' }
-#' @import data.table
 #' @export
 
 project <- function(sample_file, 
                     h = 0L, 
                     fy.year.of.sample.file = NULL, 
                     WEIGHT = 50L, 
-                    excl_vars, 
+                    excl_vars = NULL, 
                     forecast.dots = list(estimator = "mean", pred_interval = 80), 
                     wage.series = NULL,
                     lf.series = NULL,
@@ -176,15 +195,9 @@ project <- function(sample_file,
                                   forecast.series = "custom", 
                                   lf.series = lf.series)
   }
-
-  # nocov start
-  if (Sys.getenv("_R_GRATTAN_DEBUG_") == "true") {
-    lf.inflator <<- lf.inflator
-  }
-  # nocov end
-  
   
   cpi.inflator <- cpi_inflator(1, from_fy = current.fy, to_fy = to.fy)
+  
   if (.recalculate.inflators) {
     CG.inflator <- CG_inflator(1, from_fy = current.fy, to_fy = to.fy)
   } else {
@@ -245,24 +258,26 @@ project <- function(sample_file,
   CGTy.cols <- c("Net_CG_amt", "Tot_CY_CG_amt")
   
   # names(taxstats::sample_file_1314)
-  alien.cols <- col.names[!col.names %chin% c("Ind", "Gender", "age_range", "Occ_code", "Partner_status", 
-                                              "Region", "Lodgment_method", "PHI_Ind", "Sw_amt", "Alow_ben_amt", 
-                                              "ETP_txbl_amt", "Grs_int_amt", "Aust_govt_pnsn_allw_amt", "Unfranked_Div_amt", 
-                                              "Frk_Div_amt", "Dividends_franking_cr_amt", "Net_rent_amt", "Gross_rent_amt", 
-                                              "Other_rent_ded_amt", "Rent_int_ded_amt", "Rent_cap_wks_amt", 
-                                              "Net_farm_management_amt", "Net_PP_BI_amt", "Net_NPP_BI_amt", 
-                                              "Total_PP_BI_amt", "Total_NPP_BI_amt", "Total_PP_BE_amt", "Total_NPP_BE_amt", 
-                                              "Net_CG_amt", "Tot_CY_CG_amt", "Net_PT_PP_dsn", "Net_PT_NPP_dsn", 
-                                              "Taxed_othr_pnsn_amt", "Untaxed_othr_pnsn_amt", "Other_foreign_inc_amt", 
-                                              "Other_inc_amt", "Tot_inc_amt", "WRE_car_amt", "WRE_trvl_amt", 
-                                              "WRE_uniform_amt", "WRE_self_amt", "WRE_other_amt", "Div_Ded_amt", 
-                                              "Intrst_Ded_amt", "Gift_amt", "Non_emp_spr_amt", "Cost_tax_affairs_amt", 
-                                              "Other_Ded_amt", "Tot_ded_amt", "PP_loss_claimed", "NPP_loss_claimed", 
-                                              "Rep_frng_ben_amt", "Med_Exp_TO_amt", "Asbl_forgn_source_incm_amt", 
-                                              "Spouse_adjusted_taxable_inc", "Net_fincl_invstmt_lss_amt", "Rptbl_Empr_spr_cont_amt", 
-                                              "Cr_PAYG_ITI_amt", "TFN_amts_wheld_gr_intst_amt", "TFN_amts_wheld_divs_amt", 
-                                              "Hrs_to_prepare_BPI_cnt", "Taxable_Income", "Help_debt", "MCS_Emplr_Contr", 
-                                              "MCS_Prsnl_Contr", "MCS_Othr_Contr", "MCS_Ttl_Acnt_Bal")]
+  alien.cols <- 
+    col.names[!col.names %chin% c("Ind", "Gender", "age_range", "Occ_code", "Partner_status", 
+                                  "Region", "Lodgment_method", "PHI_Ind", "Sw_amt", "Alow_ben_amt", 
+                                  "ETP_txbl_amt", "Grs_int_amt", "Aust_govt_pnsn_allw_amt", "Unfranked_Div_amt", 
+                                  "Frk_Div_amt", "Dividends_franking_cr_amt", "Net_rent_amt", "Gross_rent_amt", 
+                                  "Other_rent_ded_amt", "Rent_int_ded_amt", "Rent_cap_wks_amt", 
+                                  "Net_farm_management_amt", "Net_PP_BI_amt", "Net_NPP_BI_amt", 
+                                  "Total_PP_BI_amt", "Total_NPP_BI_amt", "Total_PP_BE_amt", "Total_NPP_BE_amt", 
+                                  "Net_CG_amt", "Tot_CY_CG_amt", "Net_PT_PP_dsn", "Net_PT_NPP_dsn", 
+                                  "Taxed_othr_pnsn_amt", "Untaxed_othr_pnsn_amt", "Other_foreign_inc_amt", 
+                                  "Other_inc_amt", "Tot_inc_amt", "WRE_car_amt", "WRE_trvl_amt", 
+                                  "WRE_uniform_amt", "WRE_self_amt", "WRE_other_amt", "Div_Ded_amt", 
+                                  "Intrst_Ded_amt", "Gift_amt", "Non_emp_spr_amt", "Cost_tax_affairs_amt", 
+                                  "Other_Ded_amt", "Tot_ded_amt", "PP_loss_claimed", "NPP_loss_claimed", 
+                                  "Rep_frng_ben_amt", "Med_Exp_TO_amt", "Asbl_forgn_source_incm_amt", 
+                                  "Spouse_adjusted_taxable_inc", "Net_fincl_invstmt_lss_amt", "Rptbl_Empr_spr_cont_amt", 
+                                  "Cr_PAYG_ITI_amt", "TFN_amts_wheld_gr_intst_amt", "TFN_amts_wheld_divs_amt", 
+                                  "Hrs_to_prepare_BPI_cnt", "Taxable_Income", "Help_debt", "MCS_Emplr_Contr", 
+                                  "MCS_Prsnl_Contr", "MCS_Othr_Contr", "MCS_Ttl_Acnt_Bal",
+                                  "WEIGHT")]
   Not.Inflated <- c("Ind", 
                     "Gender",
                     "age_range", 
@@ -270,15 +285,21 @@ project <- function(sample_file,
                     "Partner_status", 
                     "Region", 
                     "Lodgment_method", 
-                    "PHI_Ind", 
+                    "PHI_Ind",
+                    derived.cols,
                     alien.cols)
   
-  if (!missing(excl_vars)) {
-    Not.Inflated <- c(Not.Inflated, excl_vars)
-  }
+  
+  Not.Inflated <- c(Not.Inflated, excl_vars)
   
   generic.cols <- 
-    col.names[!col.names %chin% c(diff.uprate.wagey.cols, wagey.cols, super.bal.col, lfy.cols, cpiy.cols, derived.cols, Not.Inflated)]
+    col.names[col.names %notchin% c(diff.uprate.wagey.cols, 
+                                    wagey.cols,
+                                    super.bal.col,
+                                    lfy.cols,
+                                    cpiy.cols,
+                                    derived.cols,
+                                    Not.Inflated)]
   
   if (.recalculate.inflators) {
     generic.inflators <- 
@@ -299,26 +320,32 @@ project <- function(sample_file,
   }
   
   ## Inflate:
-  # make numeric to avoid overflow
-  # integer.cols <- names(sample_file)[vapply(sample_file, is.integer, TRUE)]
-  # integer.cols <- integer.cols[integer.cols %notin% c(Not.Inflated)]
-  # for (j in which(col.names %chin% integer.cols)) {
-  #   set(sample_file, j = j, value = as.double(.subset2(sample_file, j)))
-  # }
   
-  
-  # Differential uprating:
-  for (j in which(col.names %chin% diff.uprate.wagey.cols)){
-    if (is.null(wage.series)){
-      set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy))
-    } else {
-      set(sample_file, j = j, value = differentially_uprate_wage(sample_file[[j]], from_fy = current.fy, to_fy = to.fy, 
-                                                                 forecast.series = "custom", wage.series = wage.series))
+  # Function to determine which inflator to use, given the column name
+  inflator_switch <- function(nom) {
+    if (nom %chin% diff.uprate.wagey.cols) {
+      return("differential")
     }
-  }
-  
-  for (j in which(col.names %chin% wagey.cols)) {
-    set(sample_file, j = j, value = wage.inflator * sample_file[[j]])
+    if (nom %chin% wagey.cols) {
+      return("wage")
+    }
+    if (nom %chin% cpiy.cols) {
+      return("cpi")
+    }
+    if (nom %chin% lfy.cols) {
+      return("labour-force")
+    }
+    if (nom %chin% CGTy.cols) {
+      return("cgt")
+    }
+    if (nom %chin% generic.cols) {
+      return("generic")
+    }
+    if (nom %chin% super.bal.col) {
+      return("super")
+    }
+    stop("Internal error: inflator-switch unmatched. ", # nocov
+         "`nom = ", nom, "`") # nocov
   }
   
   if (use_age_pop_forecast) {
@@ -332,38 +359,59 @@ project <- function(sample_file,
     sample_file <- sample_file[pop_inflator_by_age, on = "age_range"]
     # Will expand to nrow
     lf.inflator <- {lf.inflator + .subset2(sample_file, "pop_forecast_r")} / 2
-  } 
-  
-  for (j in which(col.names %chin% lfy.cols)) {
-    set(sample_file,
-        j = j, 
-        value = lf.inflator * sample_file[[j]])
   }
   
-  for (j in which(col.names %chin% cpiy.cols))
-    set(sample_file, j = j, value = cpi.inflator * sample_file[[j]])
-  
-  for (j in which(col.names %chin% CGTy.cols))
-    set(sample_file, j = j, value = CG.inflator * sample_file[[j]])
-  
-  if (.recalculate.inflators) {
-    for (j in which(col.names %chin% generic.cols)) {
-      stopifnot("variable" %in% names(generic.inflators))  ## super safe
-      nom <- col.names[j]
-      set(sample_file, 
-          j = j, 
-          value = generic.inflators[variable == nom]$inflator * sample_file[[j]])
+
+  for (j in col.names) {
+    if (j %chin% Not.Inflated) {
+      next
     }
-  } else {
-    stopifnot(identical(key(generic.inflators), c("h", "variable")))
-    for (v in generic.cols) {
-      set(sample_file, j = v,
-          value = generic.inflators[.(H, v), inflator] * .subset2(sample_file, v))
-    }
-  }
-  
-  for (j in which(col.names %in% super.bal.col)){
-    set(sample_file, j = j, value = (1.05 ^ h) * sample_file[[j]])
+    v <- .subset2(sample_file, j)
+    v_new <- 
+      switch(inflator_switch(j),
+             "differential" = {
+               if (is.null(wage.series)) {
+                 differentially_uprate_wage(v, 
+                                            from_fy = current.fy,
+                                            to_fy = to.fy)
+               } else {
+                 differentially_uprate_wage(v, 
+                                            from_fy = current.fy,
+                                            to_fy = to.fy,
+                                            forecast.series = "custom",
+                                            wage.series = wage.series)
+               }
+             },
+             "wage" = {
+               wage.inflator * v
+             },
+             "cpi" = {
+               cpi.inflator * v
+             },
+             "labour-force" = {
+               lf.inflator * v
+             },
+             "cgt" = {
+               CG.inflator * v
+             },
+             "generic" = {
+               if (.recalculate.inflators) {
+                 generic.inflators[variable == j]$inflator * v
+               } else {
+                 generic.inflators[.(H, j), inflator] * v
+               }
+             },
+             "super" = {
+               {1.05 ^ h} * v
+             },
+             # nocov start
+             stop("Internal error: switch(inflator_switch()) not matched\n\t", 
+                  "inflator_switch(j) = ", "inflator_switch(", j, ") = ", 
+                  inflator_switch(j)))
+    # nocov end
+    set(sample_file, 
+        j = j,
+        value = v_new)
   }
   
   sample_file %>%

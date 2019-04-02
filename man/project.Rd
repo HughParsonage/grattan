@@ -2,22 +2,23 @@
 % Please edit documentation in R/project.R
 \name{project}
 \alias{project}
-\title{A function for simple projections of tables of Australian Taxation Office tax returns.}
+\title{Simple projections of the annual 2\% samples of Australian Taxation Office tax returns.}
 \usage{
 project(sample_file, h = 0L, fy.year.of.sample.file = NULL,
-  WEIGHT = 50L, excl_vars, forecast.dots = list(estimator = "mean",
-  pred_interval = 80), wage.series = NULL, lf.series = NULL,
+  WEIGHT = 50L, excl_vars = NULL, forecast.dots = list(estimator =
+  "mean", pred_interval = 80), wage.series = NULL, lf.series = NULL,
   use_age_pop_forecast = FALSE, .recalculate.inflators = FALSE,
   .copyDT = TRUE, check_fy_sample_file = TRUE,
   differentially_uprate_Sw = TRUE)
 }
 \arguments{
-\item{sample_file}{A sample file, most likely the 2012-13 sample file. It is intended that to be the most recent.}
+\item{sample_file}{A \code{data.table} matching a 2\% sample file from the ATO.
+See package \code{taxstats} for an example.}
 
 \item{h}{An integer. How many years should the sample file be projected?}
 
 \item{fy.year.of.sample.file}{The financial year of \code{sample_file}. If \code{NULL}, the default, the number is inferred from the 
-number of rows of \code{sample_file} to be one of \code{2012-13}, \code{2013-14}, or \code{2014-15}.}
+number of rows of \code{sample_file} to be one of \code{2012-13}, \code{2013-14}, \code{2014-15}, or \code{2015-16}.}
 
 \item{WEIGHT}{The sample weight for the sample file. (So a 2\% file has \code{WEIGHT} = 50.)}
 
@@ -38,22 +39,38 @@ younger ages will grow at a slightly higher rate beyond 2018 than older ages.}
 \item{.copyDT}{(logical, default: \code{TRUE}) Should a \code{copy()} of \code{sample_file} be made? If set to \code{FALSE}, will update \code{sample_file}.}
 
 \item{check_fy_sample_file}{(logical, default: \code{TRUE}) Should \code{fy.year.of.sample.file} be checked against \code{sample_file}?
-By default, \code{TRUE}, an error is raised if the base is not 2012-13, 2013-14, or 2014-15 and a warning is raised if the 
+By default, \code{TRUE}, an error is raised if the base is not 2012-13, 2013-14, 2014-15, or 2015-16, and a warning is raised if the 
 number of rows in \code{sample_file} is different to the known number of rows in the sample files.}
 
 \item{differentially_uprate_Sw}{(logical, default: \code{TRUE}) Should the salary and wage column (\code{Sw_amt}) be differentially uprating using (\code{\link{differentially_uprate_wage}})?}
 }
 \value{
-A sample file of the same number of rows as \code{sample_file} with inflated values (including WEIGHT).
+A sample file with the same number of rows as \code{sample_file} but 
+with inflated values as a forecast for the sample file in \code{to_fy}. 
+If \code{WEIGHT} is not already a column of \code{sample_file}, it will be added and its sum
+will be the predicted number of taxpayers in \code{to_fy}.
 }
 \description{
-A function for simple projections of tables of Australian Taxation Office tax returns.
+Simple projections of the annual 2\% samples of Australian Taxation Office tax returns.
 }
 \details{
-We recommend you use \code{sample_file_1213} over \code{sample_file_1314}, unless you need the superannuation variables, 
-as the latter suggests lower-than-recorded tax collections. 
+Currently components of taxable income are individually inflated 
+based on their historical trends in the ATO sample files, with the 
+exception of:
+\describe{
+\item{inflated using \code{\link{differentially_uprate_wage}}.}{\code{Sw_amt}}
+\item{inflated using \code{\link{wage_inflator}}}{\code{Alow_ben_amt}, \code{ETP_txbl_amt}, \code{Rptbl_Empr_spr_cont_amt}, \code{Non_emp_spr_amt}, \code{MCS_Emplr_Contr}, \code{MCS_Prsnl_Contr}, \code{MCS_Othr_Contr}}
+\item{inflated using \code{\link{cpi_inflator}}}{\code{WRE_car_amt}, \code{WRE_trvl_amt}, \code{WRE_uniform_amt}, \code{WRE_self_amt}, \code{WRE_other_amt}}
+\item{inflated by \code{\link{lf_inflator_fy}}}{\code{WEIGHT}}
+\item{inflated by \code{\link{CG_inflator}}}{\code{Net_CG_amt}, \code{Tot_CY_CG_amt}}
+}
 
-Superannuation variables are inflated by a fixed rate of 5\% p.a.
+Superannuation balances are inflated by a fixed rate of 5\% p.a.
+
+We recommend you use \code{sample_file_1213} over \code{sample_file_1314},
+unless you need the superannuation variables, 
+as the latter suggests lower-than-recorded tax collections. 
+However, more recent data is of course preferable.
 }
 \examples{
 # install.packages('taxstats', repos = 'https://hughparsonage.github.io/drat')
