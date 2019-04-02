@@ -57,8 +57,9 @@ lmito <- function(income,
                   fy.year = NULL) {
   if (!is.null(fy.year) &&
       !identical(fy.year, "2018-19") &&
-      !identical(fy.year, "2017-18")) {
-    stop("`fy.year` was not NULL or \"2018-19\". Only these values are supported")
+      !identical(fy.year, "2017-18") &&
+      !identical(fy.year, "2019-20")) {
+    stop("`fy.year` was not NULL or \"2018-19\" or \"2019-20\". Only these values are supported")
   }
   
   stopifnot(length(thresholds) == length(taper))
