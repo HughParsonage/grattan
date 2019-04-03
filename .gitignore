@@ -7,7 +7,6 @@ vignettes/long-vignettes/issues/153-cache/
 # History files
 .Rhistory
 .Rapp.history
-
 # Example code in package build process
 *-Ex.R
 # RStudio files
@@ -40,3 +39,4 @@ Roadmap\.tex
 vignettes/long-vignettes/budget-2018_cache/*
 vignettes/long-vignettes/compare-avg-tax-rates-2027-28-wage-assumptions.pptx
 .Renviron
+.DS_Store
