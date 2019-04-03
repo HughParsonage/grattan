@@ -55,6 +55,7 @@ Suggests:
     tibble,
     viridis,
     yaml,
+    withr,
     covr
 Additional_repositories: https://hughparsonage.github.io/tax-drat/
 LazyData: true
