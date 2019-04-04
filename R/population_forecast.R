@@ -13,7 +13,7 @@ population_forecast <- function(to_year = NULL,
   DT[, YOB := year(Date) - Age]
   
   # Quarters start at 1 in calendar year
-  get_qtr <- grattan:::get_qtr
+  #get_qtr <- grattan:::get_qtr
   last_month <- month(DT[, last(Date)])
   last_qtr <- get_qtr(DT[, last(Date)])
   first_qtr <- get_qtr(DT[, first(Date)])
