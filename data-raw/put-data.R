@@ -27,13 +27,19 @@ if (requireNamespace("SampleFile1415", quietly = TRUE)) {
               use.names = TRUE, 
               fill = TRUE)
 } else {
-  warning("SampleFile1415 not used.")
-  sample_files_all <- get_sample_files_all()
+  stop("SampleFile1415 package is required to run put-data.R.")
 }
-if (!requireNamespace("ozTaxData", quietly = TRUE)) {
-  stop("ozTaxData needed for 2015-16 sample file.")
+
+library(ozTaxData) # devtools::install_github("hughparsonage/ozTaxData)
+if(exists('sample_15_16', where = 'package:ozTaxData')){
+  sample_file_1516 <- as.data.table(ozTaxData::sample_15_16)
+  
+} else {
+  # Define the local path to the 2015-16 sample file here, if it's not in ozTaxData
+  local_1516_path <- "~/Desktop/Tax/data/ATO/2016 sample file/2016_sample_file.csv"
+  sample_file_1516 <- fread(local_1516_path)
 }
-sample_file_1516 <- as.data.table(ozTaxData::sample_15_16)
+
 sample_file_1516[, fy.year := "2015-16"]
 sample_file_1516[, WEIGHT := 50]
 sample_files_all <- rbindlist(list(sample_files_all,
