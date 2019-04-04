@@ -1485,9 +1485,10 @@ setindex(wages_trend, obsQtr)
 
 g_pop_forecasts_by_age_range <-
   local({
-    the_populations <- grattan:::population_forecast(to_year = 2040L,
-                                                     include_tbl = TRUE, 
-                                                     do_log = TRUE)
+    source("./data-raw/population_forecast.R")
+    the_populations <- population_forecast(to_year = 2040L,
+                                           include_tbl = TRUE, 
+                                           do_log = TRUE)
     the_populations[, Age := year(Date) - YOB]
     the_populations <- the_populations[Age %between% c(15L, 90L)][month(Date) == 6L]
     the_populations[, age_range := grattan:::age2age_range(Age)]
