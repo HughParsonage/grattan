@@ -1485,7 +1485,7 @@ setindex(wages_trend, obsQtr)
 
 g_pop_forecasts_by_age_range <-
   local({
-    source("./data-raw/population_forecast.R")
+    #source("./data-raw/population_forecast.R")
     the_populations <- population_forecast(to_year = 2040L,
                                            include_tbl = TRUE, 
                                            do_log = TRUE)
