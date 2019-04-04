@@ -19,6 +19,24 @@ test_that("LITO", {
                500)
 })
 
+test_that("LMITO", {
+  # Test 2018 Budget version
+  expect_equal(lmito(income  = seq(30e3, 130e3, 10e3), 
+                     fy.year = "2018-19"),
+               c(200, 290, 530, 530, 530, 530, 530, 380, 230, 80, 0))
+  
+  # Test 2019 Budget version
+  
+  expect_equal(lmito(income  = seq(30e3, 130e3, 10e3),
+                     fy.year = "2019-20",
+                     first_offset = 255,
+                     thresholds = c(37e3, 48e3, 90e3, 126e3),
+                     taper = c(0, 0.075, 0, -0.03)),
+               c(255, 480, 1080, 1080, 1080, 1080, 1080, 780, 480, 180, 0)
+               )
+  
+})
+
 test_that("WATR: ALP Budget Reply 2018", {
   expect_equal(watr(seq(20e3, 120e3, by = 5e3)), 
                c(000, 350,
