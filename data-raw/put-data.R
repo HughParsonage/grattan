@@ -36,7 +36,7 @@ if(exists('sample_15_16', where = 'package:ozTaxData')){
   
 } else {
   # Define the local path to the 2015-16 sample file here, if it's not in ozTaxData
-  local_1516_path <- "~/Desktop/Tax/data/ATO/2016 sample file/2016_sample_file.csv"
+  local_1516_path <- "~/Dropbox (Grattan Institute)/Matt Cowgill/Tax/data/ATO/2016 sample file/2016_sample_file.csv"
   sample_file_1516 <- fread(local_1516_path)
 }
 
@@ -48,7 +48,8 @@ sample_files_all <- rbindlist(list(sample_files_all,
                               fill = TRUE)
 
 
-library(grattan)
+#library(grattan)
+devtools::load_all(".")
 library(readr)
 library(readxl)
 legacy_repair <- function(nms, prefix = "X", sep = "__") {
