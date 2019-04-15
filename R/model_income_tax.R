@@ -38,7 +38,8 @@
 #' @param Budget2018_lamington logical; default is `FALSE`. If set to `TRUE`, calculates the amount that taxpayers would be entitled to under the Low and Middle Income Tax Offset as contained in the 2018 Budget.
 #' @param Budget2019_lamington logical; default is `FALSE`. If set to `TRUE`, calculates the amount that taxpayers would be entitled to under the Low and Middle Income Tax Offset as amended by the 2019 Budget.
 #' @param Budget2018_lito_202223 The LITO proposed for 2022-23 proposed in the 2018 Budget.
-#' @param Budget2018_watr The "Working Australian Tax Refund" proposed in the Opposition Leader's Budget Reply Speech 2018.
+#' @param Budget2018_watr logical; default is `FALSE`. If set to `TRUE`, calculates the "Working Australian Tax Refund" as proposed in the Labor Opposition Leader's Budget Reply Speech 2018.
+#' @param Budget2019_watr logical; default is `FALSE`. If set to `TRUE`, calculates the "Working Australian Tax Refund" as revised in the Labor Opposition Leader's Budget Reply Speech 2019.
 #' 
 #' @param sapto_eligible Whether or not each taxpayer in \code{sample_file} is eligible for \code{SAPTO}. 
 #' If \code{NULL}, the default, then eligibility is determined by \code{age_range} in \code{sample_file};
@@ -115,6 +116,7 @@ model_income_tax <- function(sample_file,
                              Budget2019_lamington = FALSE,
                              Budget2018_lito_202223 = FALSE,
                              Budget2018_watr = FALSE,
+                             Budget2019_watr = FALSE,
                              
                              sapto_eligible = NULL,
                              sapto_max_offset = NULL,
@@ -767,6 +769,11 @@ model_income_tax <- function(sample_file,
     watr. <- 
       if (Budget2018_watr) {
         watr(income)
+      } else if (Budget2019_watr) {
+        watr(income,
+             first_offset = 350,
+             thresholds = c(37e3, 48e3, 90e3, 126e3),
+             taper = c(0, (1080-350)/11000, 0, -0.03))
       } else {
         0
       }

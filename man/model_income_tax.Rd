@@ -19,9 +19,9 @@ model_income_tax(sample_file, baseline_fy, n_dependants = 0L,
   lito_taper = NULL, lito_min_bracket = NULL, lito_multi = NULL,
   Budget2018_lamington = FALSE, Budget2019_lamington = FALSE,
   Budget2018_lito_202223 = FALSE, Budget2018_watr = FALSE,
-  sapto_eligible = NULL, sapto_max_offset = NULL,
-  sapto_lower_threshold = NULL, sapto_taper = NULL,
-  sapto_max_offset_married = NULL,
+  Budget2019_watr = FALSE, sapto_eligible = NULL,
+  sapto_max_offset = NULL, sapto_lower_threshold = NULL,
+  sapto_taper = NULL, sapto_max_offset_married = NULL,
   sapto_lower_threshold_married = NULL, sapto_taper_married = NULL,
   sbto_discount = NULL, cgt_discount_rate = NULL,
   calc_baseline_tax = TRUE, return. = c("sample_file", "tax",
@@ -84,7 +84,9 @@ Since the temporary budget repair levy was imposed on a discrete tax bracket whe
 
 \item{Budget2018_lito_202223}{The LITO proposed for 2022-23 proposed in the 2018 Budget.}
 
-\item{Budget2018_watr}{The "Working Australian Tax Refund" proposed in the Opposition Leader's Budget Reply Speech 2018.}
+\item{Budget2018_watr}{logical; default is `FALSE`. If set to `TRUE`, calculates the "Working Australian Tax Refund" as proposed in the Labor Opposition Leader's Budget Reply Speech 2018.}
+
+\item{Budget2019_watr}{logical; default is `FALSE`. If set to `TRUE`, calculates the "Working Australian Tax Refund" as revised in the Labor Opposition Leader's Budget Reply Speech 2019.}
 
 \item{sapto_eligible}{Whether or not each taxpayer in \code{sample_file} is eligible for \code{SAPTO}. 
 If \code{NULL}, the default, then eligibility is determined by \code{age_range} in \code{sample_file};
