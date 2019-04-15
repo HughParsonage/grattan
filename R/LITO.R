@@ -70,8 +70,11 @@ lmito <- function(income,
   as.integer(round(out))
 }
 
-watr <- function(income) {
-  pmax0(lmito(income, first_offset = 350, taper = c(0, 0.0525, 0, -0.02625)))
+watr <- function(income,
+                 first_offset = 350,
+                 thresholds = c(37e3, 48e3, 90e3, 125333+1/3),
+                 taper = c(0, 0.0525, 0, -0.02625)) {
+  pmax0(lmito(income, first_offset = first_offset, taper = taper, thresholds = thresholds))
 }
 
 
