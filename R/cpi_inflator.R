@@ -113,15 +113,15 @@ cpi_inflator <- function(from_nominal_price = 1,
                                "seasonal" = cpi_seasonal_adjustment_fy,
                                "trimmed.mean" = cpi_trimmed_fy)
                       })
+      # nocov end
       if (sdmx_ok) {
-        # nocov end
         message("Using ABS sdmx connection")
         as.data.frame(cpi) %>%
           as.data.table %>%
           .[endsWith(obsTime, "Q1")] %>%
           .[, "fy_year" := yr2fy(as.integer(sub("-Q1", "", obsTime, fixed = TRUE)))]
       } else {
-        cpi  # as below
+        cpi  # nocov 
       }
     } else {
       switch(adjustment, 
