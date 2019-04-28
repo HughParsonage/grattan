@@ -181,7 +181,7 @@ test_that("cpi_inflator_general_date messages", {
 
 test_that("cpi returns reasonable forecasts", {
   skip_on_circleci(1)
-  
+  skip_on_cran()
   skip_if_not(packageVersion("rsdmx") >= package_version("0.5.10"))
   travis_release_not_pr <- 
     identical(Sys.getenv("TRAVIS"), "true") &&

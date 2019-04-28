@@ -101,12 +101,28 @@ cpi_inflator <- function(from_nominal_price = 1,
              "trimmed.mean" = url <- 
                "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999902.10+20.Q/ABS?startTime=1948")
       
-      cpi <- rsdmx::readSDMX(url)
-      message("Using ABS sdmx connection")
-      as.data.frame(cpi) %>%
-        as.data.table(cpi) %>%
-        .[endsWith(obsTime, "Q1")] %>%
-        .[, fy_year := yr2fy(as.integer(sub("-Q1", "", obsTime, fixed = TRUE)))]
+      # nocov start
+      sdmx_ok <- TRUE
+      cpi <- tryCatch(rsdmx::readSDMX(url),
+                      error = function(e) {
+                        sdmx_ok <<- FALSE
+                        message("SDMX failed with error ", e$m,
+                                "falling back to useABSConnection = FALSE.")
+                        switch(adjustment, 
+                               "none" = cpi_unadj_fy,
+                               "seasonal" = cpi_seasonal_adjustment_fy,
+                               "trimmed.mean" = cpi_trimmed_fy)
+                      })
+      if (sdmx_ok) {
+        # nocov end
+        message("Using ABS sdmx connection")
+        as.data.frame(cpi) %>%
+          as.data.table %>%
+          .[endsWith(obsTime, "Q1")] %>%
+          .[, "fy_year" := yr2fy(as.integer(sub("-Q1", "", obsTime, fixed = TRUE)))]
+      } else {
+        cpi  # as below
+      }
     } else {
       switch(adjustment, 
              "none" = cpi_unadj_fy,
