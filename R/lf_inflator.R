@@ -11,6 +11,10 @@
 #' 
 #' If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{from_fy} is set to the previous financial year and \code{to_fy} to the current financial year, with a warning. Setting only one is an error.
 #' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.
+#' 
+#' If the SDMX connection fails, a message is emitted (not a warning) and
+#' the function contines as if \code{useABSConnection = FALSE}.
+#' 
 #' The internal data was updated on 2019-04-03 to 2019-02-01.
 #' @param allow.projection Logical. Should projections be allowed?
 #' @param use.month An integer (corresponding to the output of \code{data.table::month}) representing the month of the series used for the inflation.
@@ -144,17 +148,22 @@ lf_inflator_fy <- function(labour_force = 1,
   from_fy <- validate_fys_permitted(from_fy, min.yr = 1978L)
   to_fy <- validate_fys_permitted(to_fy, min.yr = 1978L)
   
-  if (useABSConnection){
-    lf.url.trend <- 
-      "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978"
-    lf <- rsdmx::readSDMX(lf.url.trend)
-    lf.indices <- as.data.frame(lf)
+  if (useABSConnection) {
     # nocov start
-    if (nrow(lf.indices) == 0) {
-      stop("Unable to establish SDMX connection to stat.data.abs.gov.au")
-    }
+    lf.indices <- 
+      tryCatch({
+        lf.url.trend <- 
+          "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978"
+        lf <- rsdmx::readSDMX(lf.url.trend)
+        lf.indices <- as.data.frame(lf)
+        lf.indices <- as.data.table(lf.indices)
+      },
+      error = function(e) {
+        message("SDMX failed with error ", e$m,
+                "falling back to useABSConnection = FALSE.")
+        lf.indices <- as.data.table(lf_trend)
+      })
     # nocov end
-    lf.indices <- as.data.table(lf.indices)
   } else {
     lf.indices <- as.data.table(lf_trend)
   }

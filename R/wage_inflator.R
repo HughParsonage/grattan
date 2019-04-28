@@ -6,6 +6,10 @@
 #' 
 #' If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{from_fy} is set to the previous financial year and \code{to_fy} to the current financial year, with a warning. Setting only one is an error.
 #' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.
+#' 
+#' If the SDMX connection fails, a message is emitted (not a warning) and
+#' the function contines as if \code{useABSConnection = FALSE}.
+#' 
 #' The internal data was updated on 2019-03-23 to 2018-Q4. 
 #' @param allow.projection If set to \code{TRUE} the \code{forecast} package is used to project forward, if required. 
 #' @param forecast.series Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals. A fourth option \code{custom} allows manual forecasts to be set.
@@ -120,16 +124,25 @@ wage_inflator <- function(wage = 1,
   }
   
   if (useABSConnection) {
+    # nocov start
     wage.url <- "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LABOUR_PRICE_INDEX/1.THRPEB.7.-.0.30.Q/all?startTime=1997-Q3"
-    wages <- rsdmx::readSDMX(wage.url)
-    message("Using ABS sdmx connection")
-    wage.indices <- setDT(as.data.frame(wages))
-    split2yq <- function(x) {
-      lapply(tstrsplit(x, split = ".Q", perl = TRUE),
-             as.integer)
-    }
-    wage.indices[, c("obsYear", "obsQtr") := split2yq(obsTime)]
-    min.wage.yr <- wage.indices[, min(obsYear)]
+    tryCatch({
+      wages <- rsdmx::readSDMX(wage.url)
+      message("Using ABS sdmx connection")
+      wage.indices <- setDT(as.data.frame(wages))
+      split2yq <- function(x) {
+        lapply(tstrsplit(x, split = ".Q", perl = TRUE),
+               as.integer)
+      }
+      wage.indices[, c("obsYear", "obsQtr") := split2yq(obsTime)]
+      min.wage.yr <- wage.indices[, min(obsYear)]
+    },
+    error = function(e) {
+      message("SDMX failed with error ", e$m,
+              "falling back to useABSConnection = FALSE.")
+      wage.indices <- copy(wages_trend)
+    })
+    # nocov end
   } else {
     # .wages_trend means the wage indices of the trend index
     wage.indices <- copy(wages_trend)
