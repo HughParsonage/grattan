@@ -30,20 +30,48 @@ if (requireNamespace("SampleFile1415", quietly = TRUE)) {
   stop("SampleFile1415 package is required to run put-data.R.")
 }
 
+DropboxInfo <- 
+  if (Sys.getenv("OS") == "Windows_NT") {
+    file.path(Sys.getenv("LOCALAPPDATA"), "Dropbox", "info.json")
+  } else {
+    "~/.dropbox/info.json"
+  }
+
+if (file.exists(DropboxInfo)) {
+  Path2Dropbox <- 
+    jsonlite::fromJSON(DropboxInfo) %>%
+    use_series("business") %>%
+    use_series("path")
+}
+
 library(ozTaxData) # devtools::install_github("hughparsonage/ozTaxData)
 if(exists('sample_15_16', where = 'package:ozTaxData')){
   sample_file_1516 <- as.data.table(ozTaxData::sample_15_16)
   
 } else {
   # Define the local path to the 2015-16 sample file here, if it's not in ozTaxData
-  local_1516_path <- "~/Dropbox (Grattan Institute)/Matt Cowgill/Tax/data/ATO/2016 sample file/2016_sample_file.csv"
-  sample_file_1516 <- fread(local_1516_path)
+  local_1516_path <- file.path(Path2Dropbox,
+                               "Matt Cowgill",
+                               "Tax/data/ATO/2016 sample file/2016_sample_file.csv")
+  sample_file_1516 <- fread(file = local_1516_path)
 }
 
 sample_file_1516[, fy.year := "2015-16"]
 sample_file_1516[, WEIGHT := 50]
+
+if (file.exists(local_1617_path <- "../taxstats1617/2017_sample_file.csv")) {
+  sample_file_1617 <- fread(file = local_1617_path)
+} else if (file.exists(local_1617_path <- file.path(Path2Dropbox, 
+                                             'Future Piggy Bank\\Data and Analysis\\Taxation\\ATO sample files\\2017 sample file', '2017_sample_file.csv'))) {
+  sample_file_1617 <- fread(file = local_1617_path, sep = ",")
+}
+sample_file_1617[, fy.year := "2016-17"]
+sample_file_1617[, WEIGHT := 50]
+
+
 sample_files_all <- rbindlist(list(sample_files_all,
-                                   sample_file_1516),
+                                   sample_file_1516,
+                                   sample_file_1617),
                               use.names = TRUE,
                               fill = TRUE)
 
@@ -416,6 +444,50 @@ round_if_num <- function(x, d = NULL) {
     x
   }
 }
+
+# fy suffix
+for (fys in c("1617")) {
+  assign(paste0("generic_inflators_", fys), 
+         value = local({
+           if (!renew && file.exists(paste0("./data-raw/generic_inflators_", fys, ".tsv"))) {
+             fread(file = paste0("./data-raw/generic_inflators_", fys, ".tsv"))
+           } else {
+             fy_long <- paste0("20", fys)
+             lapply(1:15, 
+                    function(h) {
+                      grattan:::generic_inflator(vars = generic.cols,
+                                                 h = h,
+                                                 fy.year.of.sample.file = "2015-16") %>%
+                        .[, H := h]
+                    }) %>%
+               rbindlist(use.names = TRUE) %>%
+               .[, fy_year := yr2fy(2017L + H)] %>%
+               .[, lapply(.SD, round_if_num)] %>%
+               setnames("H", "h") %T>%
+               write_tsv(paste0("./data-raw/generic_inflators_", fys, ".tsv")) %>%
+               .[]
+           }
+         }))
+}
+
+generic_inflators_1516 <- 
+  if (!renew){
+    fread("./data-raw/generic_inflators_1516.tsv")
+  } else {
+    lapply(1:15, 
+           function(h) {
+             grattan:::generic_inflator(vars = generic.cols,
+                                        h = h,
+                                        fy.year.of.sample.file = "2015-16") %>%
+               .[, H := h]
+           }) %>%
+      rbindlist(use.names = TRUE) %>%
+      .[, fy_year := yr2fy(2016 + H)] %>%
+      .[, lapply(.SD, round_if_num)] %>%
+      setnames("H", "h") %T>%
+      write_tsv("./data-raw/generic_inflators_1516.tsv") %>%
+      .[]
+  }
 
 generic_inflators_1516 <- 
   if (!renew){
