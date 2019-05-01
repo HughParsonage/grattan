@@ -1,5 +1,5 @@
 ## 1.7.1.1
-### `cpi_inflator` fails more gracefully when the ABS's website is not available
+* `cpi_inflator` fails more gracefully when the ABS's website is not available
 
 ## 1.7.1.0
 

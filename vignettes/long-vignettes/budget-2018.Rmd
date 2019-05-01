@@ -47,7 +47,7 @@ if (!exists("cache")) {
 if (FALSE) {
   if (interactive() && !grattanCharts::is_knitting()) {
     stopifnot(file.exists("~/grattan/DESCRIPTION"))
-    # pkgdown::build_site(pkg = "../..", lazy = TRUE)
+    pkgdown::build_site(pkg = "../..", lazy = TRUE)
     for (svg in dir(path = "~/grattan/vignettes/long-vignettes/Budget2018-atlas/", 
                     pattern = "\\.svg$", 
                     full.names = TRUE)) {

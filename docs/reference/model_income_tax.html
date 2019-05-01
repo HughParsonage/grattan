@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grattan</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.1.901</span>
       </span>
     </div>
 
@@ -156,8 +156,9 @@
   <span class='kw'>medicare_levy_upper_family_sapto_threshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>medicare_levy_lower_up_for_each_child</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lito_max_offset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>lito_taper</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lito_min_bracket</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lito_multi</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>Budget2018_lamington</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>Budget2018_lito_202223</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>Budget2018_watr</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sapto_eligible</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>Budget2018_lamington</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>Budget2019_lamington</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>Budget2018_lito_202223</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>Budget2018_watr</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>Budget2019_watr</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>sapto_eligible</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>sapto_max_offset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sapto_lower_threshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>sapto_taper</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sapto_max_offset_married</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>sapto_lower_threshold_married</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sapto_taper_married</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -253,7 +254,11 @@ Since the temporary budget repair levy was imposed on a discrete tax bracket whe
     </tr>
     <tr>
       <th>Budget2018_lamington</th>
-      <td><p>The Low Middle Income Tax Offset proposed in the 2018 Budget.</p></td>
+      <td><p>logical; default is `FALSE`. If set to `TRUE`, calculates the amount that taxpayers would be entitled to under the Low and Middle Income Tax Offset as contained in the 2018 Budget.</p></td>
+    </tr>
+    <tr>
+      <th>Budget2019_lamington</th>
+      <td><p>logical; default is `FALSE`. If set to `TRUE`, calculates the amount that taxpayers would be entitled to under the Low and Middle Income Tax Offset as amended by the 2019 Budget.</p></td>
     </tr>
     <tr>
       <th>Budget2018_lito_202223</th>
@@ -261,7 +266,11 @@ Since the temporary budget repair levy was imposed on a discrete tax bracket whe
     </tr>
     <tr>
       <th>Budget2018_watr</th>
-      <td><p>The "Working Australian Tax Refund" proposed in the Opposition Leader's Budget Reply Speech 2018.</p></td>
+      <td><p>logical; default is `FALSE`. If set to `TRUE`, calculates the "Working Australian Tax Refund" as proposed in the Labor Opposition Leader's Budget Reply Speech 2018.</p></td>
+    </tr>
+    <tr>
+      <th>Budget2019_watr</th>
+      <td><p>logical; default is `FALSE`. If set to `TRUE`, calculates the "Working Australian Tax Refund" as revised in the Labor Opposition Leader's Budget Reply Speech 2019.</p></td>
     </tr>
     <tr>
       <th>sapto_eligible</th>
