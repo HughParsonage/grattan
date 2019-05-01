@@ -37,9 +37,19 @@ cpi_inflator_quarters <- function(from_nominal_price,
                "seasonal" = cpi.url.seasonal.adjustment, 
                "trimmed" = cpi.url.trimmed.mean)
       
-      cpi <- rsdmx::readSDMX(url)
-      message("Using ABS sdmx connection")
-      setDT(as.data.frame(cpi))
+      cpi <- tryCatch({
+        rsdmx::readSDMX(url)
+        message("Using ABS sdmx connection")
+        setDT(as.data.frame(cpi))
+      }, 
+      error = function(e) {
+        message("SDMX failed with error ", e$m,
+                "falling back to useABSConnection = FALSE.")
+        switch(adjustment, 
+               "none" = cpi_unadj, 
+               "seasonal" = cpi_seasonal_adjustment, 
+               "trimmed" = cpi_trimmed)
+      })
     } else {
       switch(adjustment, 
              "none" = cpi_unadj, 

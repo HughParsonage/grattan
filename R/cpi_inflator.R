@@ -8,6 +8,10 @@
 #' If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{from_fy} is set to the previous financial year and \code{to_fy} to the current financial year, with a warning. Setting only one is an error.
 #' @param adjustment What CPI index to use ("none" = raw series, "seasonal", or "trimmed" [mean]).
 #' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? If \code{FALSE} (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date. 
+#' 
+#' If the SDMX connection fails, a message is emitted (not a warning) and
+#' the function contines as if \code{useABSConnection = FALSE}.
+#' 
 #' The internal data was updated on 2019-03-23 to 2018-Q4. 
 #' If using \code{useABSConnection = TRUE}, ensure you have \code{rsdmx (>= 0.5-10)} up-to-date.
 #' @param allow.projection Should projections beyond the ABS's data be allowed?
@@ -101,12 +105,28 @@ cpi_inflator <- function(from_nominal_price = 1,
              "trimmed.mean" = url <- 
                "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999902.10+20.Q/ABS?startTime=1948")
       
-      cpi <- rsdmx::readSDMX(url)
-      message("Using ABS sdmx connection")
-      as.data.frame(cpi) %>%
-        as.data.table(cpi) %>%
-        .[endsWith(obsTime, "Q1")] %>%
-        .[, fy_year := yr2fy(as.integer(sub("-Q1", "", obsTime, fixed = TRUE)))]
+      # nocov start
+      sdmx_ok <- TRUE
+      cpi <- tryCatch(rsdmx::readSDMX(url),
+                      error = function(e) {
+                        sdmx_ok <<- FALSE
+                        message("SDMX failed with error ", e$m,
+                                "falling back to useABSConnection = FALSE.")
+                        switch(adjustment, 
+                               "none" = cpi_unadj_fy,
+                               "seasonal" = cpi_seasonal_adjustment_fy,
+                               "trimmed.mean" = cpi_trimmed_fy)
+                      })
+      # nocov end
+      if (sdmx_ok) {
+        message("Using ABS sdmx connection")
+        as.data.frame(cpi) %>%
+          as.data.table %>%
+          .[endsWith(obsTime, "Q1")] %>%
+          .[, "fy_year" := yr2fy(as.integer(sub("-Q1", "", obsTime, fixed = TRUE)))]
+      } else {
+        cpi  # nocov 
+      }
     } else {
       switch(adjustment, 
              "none" = cpi_unadj_fy,

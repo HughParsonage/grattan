@@ -419,3 +419,12 @@ expr	time	Date
 "cpi_inflator(from_fy = ""2014-15"", to_fy = ""2015-16"")"	8185300	2019-03-23
 "wage_inflator(from_fy = ""2014-15"", to_fy = ""2015-16"")"	1485200	2019-03-23
 "lf_inflator_fy(from_fy = ""2014-15"", to_fy = ""2015-16"")"	1217300	2019-03-23
+"cpi_inflator(from_fy = ""2014-15"", to_fy = ""2015-16"")"	3740500	2019-04-28
+"wage_inflator(from_fy = ""2014-15"", to_fy = ""2015-16"")"	1441700	2019-04-28
+"lf_inflator_fy(from_fy = ""2014-15"", to_fy = ""2015-16"")"	1247400	2019-04-28
+"cpi_inflator(from_fy = ""2014-15"", to_fy = ""2015-16"")"	3777000	2019-04-28
+"wage_inflator(from_fy = ""2014-15"", to_fy = ""2015-16"")"	1426500	2019-04-28
+"lf_inflator_fy(from_fy = ""2014-15"", to_fy = ""2015-16"")"	1274500	2019-04-28
+"cpi_inflator(from_fy = ""2014-15"", to_fy = ""2015-16"")"	3731800	2019-04-28
+"wage_inflator(from_fy = ""2014-15"", to_fy = ""2015-16"")"	1536600	2019-04-28
+"lf_inflator_fy(from_fy = ""2014-15"", to_fy = ""2015-16"")"	1312100	2019-04-28
