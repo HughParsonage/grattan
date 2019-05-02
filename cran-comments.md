@@ -1,11 +1,14 @@
+This is a package update, as requested, to fail more gracefully when
+the ABS Internet resource is unavailable.
+
 ## Test results
 0 ERRORS | 0 WARNINGS | 1-2 NOTEs
 
 ### Test environments:
-* Local Windows CRAN 3.5.1
-* Travis-CI: Ubuntu 14.04. R 3.4, 3.5, and dev (r75443)
-* Appveyor: dev (r75439) and release.
-* winbuilder: dev (r75434) and release.
+* Local Windows CRAN 3.6.0
+* Travis-CI: Ubuntu 14.04. R 3.5, 3.6, and dev (r75443)
+* Appveyor: dev (r76446) and release.
+* winbuilder: dev (r76441) and release.
 
 
 
