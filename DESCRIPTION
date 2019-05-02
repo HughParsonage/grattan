@@ -18,7 +18,7 @@ BugReports: https://github.com/HughParsonage/grattan/issues
 Description: Utilities for costing and evaluating Australian tax policy, including high-performance tax and transfer calculators, a fast method of projecting tax collections, and an interface to common indices from the Australian Bureau of Statistics.  Written to support Grattan Institute's Australian Perspectives program. For access to the 'taxstats' package, please run
  install.packages("taxstats", repos = "https://hughparsonage.github.io/tax-drat/", type = "source"). 
  N.B. The 'taxstats' package is approximately 50 MB.
-Depends: R (>= 3.3.0)
+Depends: R (>= 3.5.0)
 License: GPL-2
 Imports:
     data.table,
