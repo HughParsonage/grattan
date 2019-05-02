@@ -1,5 +1,5 @@
 expr	time	Date
-dt[, weighted_ntile(y, w = wt, n = 10)]	104061400	2019-05-02
-dt[, weighted_ntile(x, w = wt, n = 10)]	29882200	2019-05-02
-dt[, weighted_ntile(y, w = wt, n = 10)]	153915000	2019-05-02
-dt[, weighted_ntile(x, w = wt, n = 10)]	31635100	2019-05-02
+dt[, weighted_ntile(y, w = wt, n = 10)]	109676600	2019-05-02
+dt[, weighted_ntile(x, w = wt, n = 10)]	23823700	2019-05-02
+dt[, weighted_ntile(y, w = wt, n = 10)]	142496300	2019-05-02
+dt[, weighted_ntile(x, w = wt, n = 10)]	28597700	2019-05-02
