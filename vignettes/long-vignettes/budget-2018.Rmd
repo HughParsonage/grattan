@@ -2027,7 +2027,7 @@ s2425_Deloitte_LF_growth <-
                    medicare_levy_lower_threshold = medicare_levy_lower_threshold("2024-25"), # 24950
                    medicare_levy_upper_threshold = 30938,
                    medicare_levy_lower_sapto_threshold = medicare_levy_lower_sapto_threshold("2024-25"), # 39460
-                   medicare_levy_upper_sapto_threshold = 48912),
+                   medicare_levy_upper_sapto_threshold = 48912,
                    medicare_levy_lower_family_threshold = medicare_levy_lower_family_threshold("2024-25"), # 54930
                    medicare_levy_lower_family_sapto_threshold = medicare_levy_lower_family_sapto_threshold("2024-25")) %>% # 54930
   # Ensure number of taxpayers = 11.6 million
