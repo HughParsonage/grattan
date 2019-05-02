@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grattan</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.1.901</span>
       </span>
     </div>
 
@@ -163,8 +163,10 @@
     </tr>
     <tr>
       <th>useABSConnection</th>
-      <td><p>Should the function connect with ABS.Stat via an SDMX connection? If <code>FALSE</code> (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.
-The internal data was updated on 2019-02-23  to 2018-Q4.</p></td>
+      <td><p>Should the function connect with ABS.Stat via an SDMX connection? If <code>FALSE</code> (the default), a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.</p>
+<p>If the SDMX connection fails, a message is emitted (not a warning) and
+the function contines as if <code>useABSConnection = FALSE</code>.</p>
+<p>The internal data was updated on 2019-03-23 to 2018-Q4.</p></td>
     </tr>
     <tr>
       <th>allow.projection</th>

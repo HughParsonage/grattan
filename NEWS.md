@@ -1,3 +1,8 @@
+## 1.7.1.1
+* `grattan` now depends on R 3.5.0 due to serialization format version 3 becoming the default
+  in R 3.6.0.
+* `cpi_inflator` fails more gracefully when the ABS's website is not available
+
 ## 1.7.1.0
 
 ### Bug fixes

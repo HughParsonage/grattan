@@ -1,5 +1,6 @@
 # Data for internal use
 # Must be sourced after modification
+renew <- TRUE
 if ("dplyr" %in% .packages()) {
   stop("dplyr is attached. Restart R and source.")
 }
@@ -30,20 +31,48 @@ if (requireNamespace("SampleFile1415", quietly = TRUE)) {
   stop("SampleFile1415 package is required to run put-data.R.")
 }
 
+DropboxInfo <- 
+  if (Sys.getenv("OS") == "Windows_NT") {
+    file.path(Sys.getenv("LOCALAPPDATA"), "Dropbox", "info.json")
+  } else {
+    "~/.dropbox/info.json"
+  }
+
+if (file.exists(DropboxInfo)) {
+  Path2Dropbox <- 
+    jsonlite::fromJSON(DropboxInfo) %>%
+    use_series("business") %>%
+    use_series("path")
+}
+
 library(ozTaxData) # devtools::install_github("hughparsonage/ozTaxData)
 if(exists('sample_15_16', where = 'package:ozTaxData')){
   sample_file_1516 <- as.data.table(ozTaxData::sample_15_16)
   
 } else {
   # Define the local path to the 2015-16 sample file here, if it's not in ozTaxData
-  local_1516_path <- "~/Dropbox (Grattan Institute)/Matt Cowgill/Tax/data/ATO/2016 sample file/2016_sample_file.csv"
-  sample_file_1516 <- fread(local_1516_path)
+  local_1516_path <- file.path(Path2Dropbox,
+                               "Matt Cowgill",
+                               "Tax/data/ATO/2016 sample file/2016_sample_file.csv")
+  sample_file_1516 <- fread(file = local_1516_path)
 }
 
 sample_file_1516[, fy.year := "2015-16"]
 sample_file_1516[, WEIGHT := 50]
+
+if (file.exists(local_1617_path <- "../taxstats1617/2017_sample_file.csv")) {
+  sample_file_1617 <- fread(file = local_1617_path)
+} else if (file.exists(local_1617_path <- file.path(Path2Dropbox, 
+                                             'Future Piggy Bank\\Data and Analysis\\Taxation\\ATO sample files\\2017 sample file', '2017_sample_file.csv'))) {
+  sample_file_1617 <- fread(file = local_1617_path, sep = ",")
+}
+sample_file_1617[, fy.year := "2016-17"]
+sample_file_1617[, WEIGHT := 50]
+
+
 sample_files_all <- rbindlist(list(sample_files_all,
-                                   sample_file_1516),
+                                   sample_file_1516,
+                                   sample_file_1617),
                               use.names = TRUE,
                               fill = TRUE)
 
@@ -87,8 +116,6 @@ git_compare_prev <- function(file.tsv, nomatch = NA_integer_, threshold = 0) {
   
   
 }
-
-renew <- FALSE
 
 tax_tbl <-
   data.table::fread("./data-raw/tax-brackets-and-marginal-rates-by-fy.tsv")
@@ -415,6 +442,31 @@ round_if_num <- function(x, d = NULL) {
   } else {
     x
   }
+}
+
+# fy suffix
+for (fys in c("1617")) {
+  assign(paste0("generic_inflators_", fys), 
+         value = local({
+           if (!renew && file.exists(paste0("./data-raw/generic_inflators_", fys, ".tsv"))) {
+             fread(file = paste0("./data-raw/generic_inflators_", fys, ".tsv"))
+           } else {
+             fy_long <- validate_fys_permitted(paste0("20", fys))
+             lapply(1:15, 
+                    function(h) {
+                      grattan:::generic_inflator(vars = generic.cols,
+                                                 h = h,
+                                                 fy.year.of.sample.file = "2016-17") %>%
+                        .[, H := h]
+                    }) %>%
+               rbindlist(use.names = TRUE) %>%
+               .[, fy_year := yr2fy(2017L + H)] %>%
+               .[, lapply(.SD, round_if_num)] %>%
+               setnames("H", "h") %T>%
+               write_tsv(paste0("./data-raw/generic_inflators_", fys, ".tsv")) %>%
+               .[]
+           }
+         }))
 }
 
 generic_inflators_1516 <- 
@@ -1479,10 +1531,11 @@ setkey(generic_inflators_1213[, fy_year := NULL], h, variable)
 setkey(generic_inflators_1314[, fy_year := NULL], h, variable)
 setkey(generic_inflators_1415[, fy_year := NULL], h, variable)
 setkey(generic_inflators_1516[, fy_year := NULL], h, variable)
+setkey(generic_inflators_1617[, fy_year := NULL], h, variable)
 
 setkey(wages_trend, obsTime)
 setindex(wages_trend, obsQtr)
-.date_data_updated <- as.Date("2019-02-23") #Sys.Date()
+.date_data_updated <- Sys.Date()
 
 g_pop_forecasts_by_age_range <-
   local({
@@ -1520,6 +1573,7 @@ use_and_write_data(tax_table2,
                    cgt_expenditures,
                    mean_of_each_taxstats_var, 
                    meanPositive_of_each_taxstats_var,
+                   generic_inflators_1617,
                    generic_inflators_1516,
                    generic_inflators_1415,
                    generic_inflators_1314,
