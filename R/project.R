@@ -123,7 +123,7 @@ project <- function(sample_file,
     # without updating the fy.year.of.sample.file
     if (is.null(fy.year.of.sample.file)) {
       fy.year.of.sample.file <-
-        match(nrow(sample_file), c(254318L, 258774L, 263339L, 269639L))
+        match(nrow(sample_file), c(254318L, 258774L, 263339L, 269639L,  277202L))
       if (is.na(fy.year.of.sample.file)) {
         stop("`fy.year.of.sample.file` was not provided, and its value could not be ",
              "inferred from nrow(sample_file) = ", nrow(sample_file), ". Either use ", 
@@ -131,7 +131,7 @@ project <- function(sample_file,
              "supply `fy.year.of.sample.file` manually.")
       }
       fy.year.of.sample.file <- 
-        c("2012-13", "2013-14", "2014-15", "2015-16")[fy.year.of.sample.file]
+        c("2012-13", "2013-14", "2014-15", "2015-16", "2016-17")[fy.year.of.sample.file]
     }
     
     
@@ -156,7 +156,12 @@ project <- function(sample_file,
                warning("nrow(sample_file) != 269639. Should you choose a different fy.year.of.sample.file?")
              }
            },
-           stop("`fy.year.of.sample.file` must be '2012-13', '2013-14', or '2014-15'."))
+           "2016-17" = {
+             if (nrow(sample_file) != 277202) {
+               warning("nrow(sample_file) != 277202. Should you choose a different fy.year.of.sample.file?")
+             }
+           },
+           stop("`fy.year.of.sample.file` must be '2012-13', '2013-14', '2014-15', '2015-16', or '2016-17'."))
   }
   
   if (h == 0) {
@@ -315,6 +320,7 @@ project <- function(sample_file,
              "2013-14" = generic_inflators_1314, 
              "2014-15" = generic_inflators_1415, 
              "2015-16" = generic_inflators_1516, 
+             "2016-17" = generic_inflators_1617, 
              stop("Precalculated inflators only available when projecting from ",
                   "2012-13, 2013-14, 2014-15, and 2015-16."))
   }

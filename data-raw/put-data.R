@@ -1,5 +1,6 @@
 # Data for internal use
 # Must be sourced after modification
+renew <- TRUE
 if ("dplyr" %in% .packages()) {
   stop("dplyr is attached. Restart R and source.")
 }
@@ -115,8 +116,6 @@ git_compare_prev <- function(file.tsv, nomatch = NA_integer_, threshold = 0) {
   
   
 }
-
-renew <- FALSE
 
 tax_tbl <-
   data.table::fread("./data-raw/tax-brackets-and-marginal-rates-by-fy.tsv")
@@ -452,12 +451,12 @@ for (fys in c("1617")) {
            if (!renew && file.exists(paste0("./data-raw/generic_inflators_", fys, ".tsv"))) {
              fread(file = paste0("./data-raw/generic_inflators_", fys, ".tsv"))
            } else {
-             fy_long <- paste0("20", fys)
+             fy_long <- validate_fys_permitted(paste0("20", fys))
              lapply(1:15, 
                     function(h) {
                       grattan:::generic_inflator(vars = generic.cols,
                                                  h = h,
-                                                 fy.year.of.sample.file = "2015-16") %>%
+                                                 fy.year.of.sample.file = "2016-17") %>%
                         .[, H := h]
                     }) %>%
                rbindlist(use.names = TRUE) %>%
@@ -469,25 +468,6 @@ for (fys in c("1617")) {
            }
          }))
 }
-
-generic_inflators_1516 <- 
-  if (!renew){
-    fread("./data-raw/generic_inflators_1516.tsv")
-  } else {
-    lapply(1:15, 
-           function(h) {
-             grattan:::generic_inflator(vars = generic.cols,
-                                        h = h,
-                                        fy.year.of.sample.file = "2015-16") %>%
-               .[, H := h]
-           }) %>%
-      rbindlist(use.names = TRUE) %>%
-      .[, fy_year := yr2fy(2016 + H)] %>%
-      .[, lapply(.SD, round_if_num)] %>%
-      setnames("H", "h") %T>%
-      write_tsv("./data-raw/generic_inflators_1516.tsv") %>%
-      .[]
-  }
 
 generic_inflators_1516 <- 
   if (!renew){
@@ -1551,6 +1531,7 @@ setkey(generic_inflators_1213[, fy_year := NULL], h, variable)
 setkey(generic_inflators_1314[, fy_year := NULL], h, variable)
 setkey(generic_inflators_1415[, fy_year := NULL], h, variable)
 setkey(generic_inflators_1516[, fy_year := NULL], h, variable)
+setkey(generic_inflators_1617[, fy_year := NULL], h, variable)
 
 setkey(wages_trend, obsTime)
 setindex(wages_trend, obsQtr)
@@ -1592,6 +1573,7 @@ use_and_write_data(tax_table2,
                    cgt_expenditures,
                    mean_of_each_taxstats_var, 
                    meanPositive_of_each_taxstats_var,
+                   generic_inflators_1617,
                    generic_inflators_1516,
                    generic_inflators_1415,
                    generic_inflators_1314,

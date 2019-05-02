@@ -1,2 +1,2 @@
 expr	time	Date
-"sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	552478700	2019-05-02
+"sample_file_1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	539999200	2019-05-02
