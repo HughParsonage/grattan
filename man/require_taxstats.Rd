@@ -11,7 +11,7 @@ require_taxstats1516()
 }
 \value{
 \code{TRUE}, invisibly, for success. Used for its side-effect: attaching the taxstats 
-package
+package.
 }
 \description{
 Used in lieu of simply \code{library(taxstats)} to 

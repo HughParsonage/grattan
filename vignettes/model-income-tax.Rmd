@@ -9,6 +9,22 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+
+```{r no-run-vignette, include=FALSE}
+library(knitr)
+if (!identical(Sys.getenv("R_GRATTAN_BUILD_MAIN_VIGNETTE"), "true")) {
+  do_eval <- function() return(FALSE)
+  opts_hooks$set(inline = function(x) invisible(NULL))
+  knit_hooks$set(inline = function(x) deparse(substitute(x)),
+                 evaluate.inline = function(code, envir) {
+                   deparse(substitute(code))
+                 })
+  
+  opts_knit$set(eval = FALSE, error = TRUE, warning = FALSE)
+  opts_chunk$set(eval = FALSE, error = TRUE, warning = FALSE)
+}
+```
+
 The functions `model_income_tax` and `project` are the core of the grattan package.
 Grattan applies them to the ATO's 2\% 
 sample files
