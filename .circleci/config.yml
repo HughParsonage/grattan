@@ -7,7 +7,7 @@ jobs:
         environment:
           NOT_CRAN: true
           TRAVIS: false
-          OMP_NUM_THREADS: 2
+          OMP_NUM_THREADS: 1
           
     parallelism: 4
     steps:
@@ -19,6 +19,7 @@ jobs:
             - deps1-
       - run:
           command: |
+            Rscript -e "print(R.version)"
             Rscript -e "utils::install.packages('hutilscpp', repos = 'https://cran.rstudio.com')"
             Rscript -e "devtools::install_deps(dependencies = TRUE, upgrade = 'false', keep_source = FALSE)"
       - run:
