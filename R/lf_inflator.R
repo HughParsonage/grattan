@@ -15,7 +15,7 @@
 #' If the SDMX connection fails, a message is emitted (not a warning) and
 #' the function contines as if \code{useABSConnection = FALSE}.
 #' 
-#' The internal data was updated on 2019-05-02 to 2019-03-01.
+#' The internal data was updated on 2019-05-20 to 2019-03-01.
 #' @param allow.projection Logical. Should projections be allowed?
 #' @param use.month An integer (corresponding to the output of \code{data.table::month}) representing the month of the series used for the inflation.
 #' @param forecast.series Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals.

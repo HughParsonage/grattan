@@ -12,7 +12,7 @@
 #' If the SDMX connection fails, a message is emitted (not a warning) and
 #' the function contines as if \code{useABSConnection = FALSE}.
 #' 
-#' The internal data was updated on 2019-05-02 to 2019-Q1. 
+#' The internal data was updated on 2019-05-20 to 2019-Q1. 
 #' If using \code{useABSConnection = TRUE}, ensure you have \code{rsdmx (>= 0.5-10)} up-to-date.
 #' @param allow.projection Should projections beyond the ABS's data be allowed?
 #' @param accelerate.above An integer setting the threshold for 'acceleration'. 
