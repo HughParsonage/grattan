@@ -1,8 +1,7 @@
 This is a package resubmission after archival.
 
-The vignettes have been protected from accessing taxstats packages; the 
-packages will only be attempted to be installed if an environment variable
-is set.
+The vignettes have been protected from accessing taxstats packages; the packages
+will only be attempted to be installed if an environment variable is set.
 
 ## Test results
 0 ERRORS | 0 WARNINGS | 1-2 NOTEs
@@ -19,9 +18,12 @@ NOTES:
 
 Package archival / previous violation of policy.
   ==> Vignettes using package 'taxstats' is now off by default
+  ==> Installation of taxstats packages now requires manual setting of 
+      environment variable
   
 Possibly mis-spelled words in DESCRIPTION: ...
-  ==> Spellings are correct: 'repos' and 'taxstats' cannot be quoted as they are within R code.
+  ==> Spellings are correct: 'repos' and 'taxstats' cannot be quoted as they are
+      within R code.
   
 URLs in angle brackets:
   ==> Not appropriate since the URL is within R code.

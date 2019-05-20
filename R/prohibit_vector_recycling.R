@@ -17,6 +17,7 @@
 #' prohibit_vector_recycling(c(2, 2), 1, c(3, 3, 3))
 #' }
 #' @source \url{http://stackoverflow.com/a/9335687/1664978}
+#' @noRd
 
 prohibit_vector_recycling <- function(...){
   # http://stackoverflow.com/a/9335687/1664978
@@ -34,7 +35,7 @@ prohibit_vector_recycling <- function(...){
   }
 }
 
-#' @rdname prohibit_vector_recycling
+
 prohibit_vector_recycling.MAXLENGTH <- function(...) {
   # http://stackoverflow.com/a/9335687/1664978
   lengths <- vapply(list(...), FUN = length, FUN.VALUE = 0L)
@@ -54,8 +55,8 @@ prohibit_vector_recycling.MAXLENGTH <- function(...) {
 }
 
 
-#' @rdname prohibit_vector_recycling
 #' @param LIST A list of objects (typically \code{mget(ls())} called in the body of a function).
+#' @noRd
 prohibit_arg_recycling.MAXLENGTH <- function(LIST) {
   # http://stackoverflow.com/a/9335687/1664978
   lengths <- vapply(LIST, FUN = length, FUN.VALUE = 0L)
