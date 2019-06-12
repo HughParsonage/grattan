@@ -45,15 +45,15 @@ if (file.exists(DropboxInfo)) {
     use_series("path")
 }
 
-library(ozTaxData) # devtools::install_github("hughparsonage/ozTaxData)
+library(ozTaxData) # devtools::install_github("hughparsonage/ozTaxData")
 if(exists('sample_15_16', where = 'package:ozTaxData')){
   sample_file_1516 <- as.data.table(ozTaxData::sample_15_16)
   
 } else {
   # Define the local path to the 2015-16 sample file here, if it's not in ozTaxData
   local_1516_path <- file.path(Path2Dropbox,
-                               "Matt Cowgill",
-                               "Tax/data/ATO/2016 sample file/2016_sample_file.csv")
+                               'Matt Cowgill',
+                               'Tax/data/ATO/2016 sample file/2016_sample_file.csv')
   sample_file_1516 <- fread(file = local_1516_path)
 }
 
@@ -63,7 +63,10 @@ sample_file_1516[, WEIGHT := 50]
 if (file.exists(local_1617_path <- "../taxstats1617/2017_sample_file.csv")) {
   sample_file_1617 <- fread(file = local_1617_path)
 } else if (file.exists(local_1617_path <- file.path(Path2Dropbox, 
-                                             'Future Piggy Bank\\Data and Analysis\\Taxation\\ATO sample files\\2017 sample file', '2017_sample_file.csv'))) {
+                                                    'Matt Cowgill',
+                                                    'Tax/data/ATO/2017 sample file',
+                                             # 'Future Piggy Bank\\Data and Analysis\\Taxation\\ATO sample files\\2017 sample file', 
+                                             '2017_sample_file.csv'))) {
   sample_file_1617 <- fread(file = local_1617_path, sep = ",")
 }
 sample_file_1617[, fy.year := "2016-17"]
@@ -795,7 +798,6 @@ if (salary_by_fy_swtile[, max(fy.year)] < "2015-16") {
   salary_by_fy_swtile <- grattan:::salary_by_fy_swtile
 }
 
-  
 
 differential_sw_uprates <- 
   salary_by_fy_swtile %>%
@@ -806,11 +808,13 @@ differential_sw_uprates <-
   .[, .(avg_r = mean(r_average_salary)), keyby = "Sw_amt_percentile"] %>%
   .[, .(Sw_amt_percentile, uprate_factor_raw = avg_r / mean(avg_r))] %>%
   setkey(Sw_amt_percentile) %>%
-  # Span = 0.5 seems to be the point at which the curve has only 
-  # one local extremum.
-  # ggplot(., aes(x = Sw_amt_percentile, y = uprate_factor)) + geom_point() + stat_smooth(method = "loess", span = 0.45)
-  .[, uprate_factor := predict(loess(uprate_factor_raw ~ Sw_amt_percentile, data = ., span = 0.40), newdata = .)] %>%
+  # Differential uprating was previously done using loess regression, span = 0.4
+  # .[, uprate_factor := predict(loess(uprate_factor_raw ~ Sw_amt_percentile, data = ., span = 0.40), newdata = .)] %>%
+  # Now done using polynomial regression (ie. lm with a quadratic)
+  .[, uprate_factor := predict(lm(uprate_factor_raw ~ Sw_amt_percentile + I(Sw_amt_percentile ^ 2), 
+                                  data = .), newdata = .)] %>%
   .[]
+
 
 .avbl_fractions <-
   # map between common fraction and English
