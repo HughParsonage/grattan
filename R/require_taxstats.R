@@ -4,7 +4,7 @@
 #' handle cases where it is not installed, but should not be installed
 #' to the user's default library (as during CRAN checks).
 #' @return \code{TRUE}, invisibly, for success. Used for its side-effect: attaching the taxstats 
-#' package
+#' package.
 #' 
 #' @export require_taxstats 
 
@@ -23,6 +23,11 @@ require_taxstats1516 <- function() {
 .require_taxstats <- function(pkg = c("taxstats", "taxstats1516")) {
   pkg <- match.arg(pkg)
   if (!requireNamespace(pkg, quietly = TRUE)) {
+    if (!requireNamespace("curl", quietly = TRUE) ||
+        !curl::has_internet()) {
+      message("No internet: unable to install '", pkg, "'.")
+      return(invisible(FALSE))
+    }
     if (is.null(temp_lib <- getOption("grattan.taxstats.lib"))) {
       temp_lib <- tempfile()
     }

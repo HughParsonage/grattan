@@ -5,6 +5,14 @@
 #' @export
 
 install_taxstats <- function(pkg = c("taxstats"), ...) {
+  if (!identical(Sys.getenv("R_GRATTAN_BUILD_MAIN_VIGNETTE"), "true") ||
+      !identical(Sys.getenv("R_GRATTAN_ALLOW_TAXSTATS"), "true")) {
+    message("Unable to install taxstats. Set one of the following environment variables\n\t", 
+            "Sys.setenv('R_GRATTAN_BUILD_MAIN_VIGNETTE' = 'true')\n", 
+            "or\n\t",
+            "Sys.setenv('R_GRATTAN_ALLOW_TAXSTATS' = 'true')\n")
+    return(NULL)
+  }
   if (!missing(..1)) {
     dots <- list(...)
     if ("lib" %in% names(dots)) {
@@ -13,6 +21,9 @@ install_taxstats <- function(pkg = c("taxstats"), ...) {
       }
     }
   }
+  
+  
+  
   utils::install.packages(pkgs = c(pkg),
                           repos = "https://hughparsonage.github.io/tax-drat",
                           type = "source", 

@@ -55,6 +55,25 @@ For a vignette from the Budget 2018 analysis, see: <https://hughparsonage.github
 
 This vignette collates the vignettes that were present before version 1.5.3.
 
+
+
+```{r no-run-vignette, include=FALSE}
+library(knitr)
+if (!identical(Sys.getenv("R_GRATTAN_BUILD_MAIN_VIGNETTE"), "true")) {
+  opts_hooks$set(inline = function(x) invisible(NULL))
+  knit_hooks$set(inline = function(x) deparse(substitute(x)),
+                 evaluate.inline = function(code, envir) {
+                   deparse(substitute(code))
+                 })
+  
+  opts_knit$set(eval = FALSE, error = TRUE, warning = FALSE)
+  opts_chunk$set(eval = FALSE, error = TRUE, warning = FALSE)
+}
+```
+
+To run the vignette, provided you have access to the Internet, set the environment variable
+`R_GRATTAN_BUILD_MAIN_VIGNETTE` to `"true"`. (It is set off to satisfy CRAN requirements.)
+
 # Bracket creep
 
 ```{r loadPackages-1}
@@ -83,22 +102,7 @@ require_taxstats1516()
 ```
 
 ```{r sample_files_all}
-sample_files_all <-
-    rbindlist(lapply(list(`2003-04` = sample_file_0304, 
-                          `2004-05` = sample_file_0405,
-                          `2005-06` = sample_file_0506, 
-                          `2006-07` = sample_file_0607,
-                          `2007-08` = sample_file_0708, 
-                          `2008-09` = sample_file_0809,
-                          `2009-10` = sample_file_0910, 
-                          `2010-11` = sample_file_1011,
-                          `2011-12` = sample_file_1112, 
-                          `2012-13` = sample_file_1213,
-                          `2013-14` = sample_file_1314), 
-                     function(x) if (is.data.table(x)) x else as.data.table(x)),
-              use.names = TRUE,
-              fill = TRUE, 
-              idcol = "fy.year")
+sample_files_all <- get_sample_files_all()
 sample_files_all[, WEIGHT := if_else(fy.year > '2010-11', 50L, 100L)]
 age_range_decoder <- as.data.table(age_range_decoder)
 ```

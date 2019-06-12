@@ -2,20 +2,8 @@
 
 
 # Provide error function that can refer to the calling function.
-stopn <- function(..., n = -sys.nframe()) {
-  error_message <- paste0(..., collapse = "")
-  condition <- function(subclass, message, call = sys.call(-1), ...) {
-    structure(
-      class = c(subclass, "condition"),
-      list(message = message, call = call),
-      ...
-    )
-  }
-  custom_stop <- function(subclass, message, call = sys.call(n - 1L), ...) {
-    ER <- condition(c("my_error", "error"), error_message, call = call, ...)
-    stop(ER)
-  }
-  custom_stop()
+stopn <- function(..., n = sys.nframe()) {
+  stop(..., call. = FALSE)
 }
 
 
