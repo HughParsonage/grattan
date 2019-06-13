@@ -4,7 +4,7 @@
 #' See package \code{taxstats} for an example.
 #' @param h An integer. How many years should the sample file be projected?
 #' @param fy.year.of.sample.file The financial year of \code{sample_file}. If \code{NULL}, the default, the number is inferred from the 
-#' number of rows of \code{sample_file} to be one of \code{2012-13}, \code{2013-14}, \code{2014-15}, or \code{2015-16}.
+#' number of rows of \code{sample_file} to be one of \code{2012-13}, \code{2013-14}, \code{2014-15}, \code{2015-16}, or \code{2016-17}.
 #' @param WEIGHT The sample weight for the sample file. (So a 2\% file has \code{WEIGHT} = 50.)
 #' @param excl_vars A character vector of column names in \code{sample_file} that should not be inflated. Columns not present in the 2013-14 sample file are not inflated and nor are the columns \code{Ind}, \code{Gender}, \code{age_range}, \code{Occ_code}, \code{Partner_status}, \code{Region}, \code{Lodgment_method}, and \code{PHI_Ind}.
 #' @param forecast.dots A list containing parameters to be passed to \code{generic_inflator}.
@@ -16,7 +16,7 @@
 #' @param .recalculate.inflators (logical, default: \code{FALSE}. Should \code{generic_inflator()} or \code{CG_inflator} be called to project the other variables? Adds time.
 #' @param .copyDT (logical, default: \code{TRUE}) Should a \code{copy()} of \code{sample_file} be made? If set to \code{FALSE}, will update \code{sample_file}. 
 #' @param check_fy_sample_file (logical, default: \code{TRUE}) Should \code{fy.year.of.sample.file} be checked against \code{sample_file}?
-#' By default, \code{TRUE}, an error is raised if the base is not 2012-13, 2013-14, 2014-15, or 2015-16, and a warning is raised if the 
+#' By default, \code{TRUE}, an error is raised if the base is not 2012-13, 2013-14, 2014-15, 2015-16, or 2016-17, and a warning is raised if the 
 #' number of rows in \code{sample_file} is different to the known number of rows in the sample files. 
 #' @param differentially_uprate_Sw (logical, default: \code{TRUE}) Should the salary and wage column (\code{Sw_amt}) be differentially uprating using (\code{\link{differentially_uprate_wage}})?
 #' 
@@ -206,16 +206,18 @@ project <- function(sample_file,
   if (.recalculate.inflators) {
     CG.inflator <- CG_inflator(1, from_fy = current.fy, to_fy = to.fy)
   } else {
-    if (current.fy %notin% c("2012-13", "2013-14", "2014-15", "2015-16")) {
+    if (current.fy %notin% c("2012-13", "2013-14", 
+                             "2014-15", "2015-16", "2016-17")) {
       stop("Precalculated inflators only available when projecting from ",
-           "2012-13, 2013-14, 2014-15, 2015-16.")
+           "2012-13, 2013-14, 2014-15, 2015-16, or 2016-17.")
     } else {
       cg_inflators <- 
         switch(current.fy, 
                "2012-13" = cg_inflators_1213, 
                "2013-14" = cg_inflators_1314,
                "2014-15" = cg_inflators_1415,
-               "2015-16" = cg_inflators_1516)
+               "2015-16" = cg_inflators_1516,
+               "2016-17" = cg_inflators_1617)
       stopifnot("forecast.series" %in% names(cg_inflators))
       forecast.series <- NULL 
       CG.inflator <- 
@@ -322,7 +324,7 @@ project <- function(sample_file,
              "2015-16" = generic_inflators_1516, 
              "2016-17" = generic_inflators_1617, 
              stop("Precalculated inflators only available when projecting from ",
-                  "2012-13, 2013-14, 2014-15, and 2015-16."))
+                  "2012-13, 2013-14, 2014-15, 2015-16, and 2016-17."))
   }
   
   ## Inflate:
