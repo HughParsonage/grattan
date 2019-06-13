@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">grattan</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.1.2</span>
       </span>
     </div>
 
@@ -141,7 +141,7 @@
 ##   c.quosures     rlang
 ##   print.quosures rlang</code></pre>
 <p>Simply pass the sample file to <code>.dots.ATO</code> and the complexities of things like Medicare levy and the Seniors and Pensioners Tax Offset are handled for you. For example:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">s1314 &lt;-<span class="st"> </span><span class="kw">as.data.table</span>(sample_file_<span class="dv">1314</span>)</a>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">s1314 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/data.table/topics/as.data.table">as.data.table</a></span>(sample_file_<span class="dv">1314</span>)</a>
 <a class="sourceLine" id="cb7-2" title="2">s1314 <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-3" title="3"><span class="st">  </span>.[, tax <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="reference/income_tax.html">income_tax</a></span>(Taxable_Income, <span class="st">"2013-14"</span>, <span class="dt">.dots.ATO =</span> s1314)] <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-4" title="4"><span class="st">  </span>.[, .(Taxable_Income, tax)]</a></code></pre></div>
@@ -207,7 +207,7 @@
 ##   method             from    
 ##   fitted.fracdiff    fracdiff
 ##   residuals.fracdiff fracdiff</code></pre>
-<pre><code>## [1] "$1.8 billion"</code></pre>
+<pre><code>## [1] "$1.7 billion"</code></pre>
 <div id="compare_avg_tax_rates" class="section level3">
 <h3 class="hasAnchor">
 <a href="#compare_avg_tax_rates" class="anchor"></a><code>compare_avg_tax_rates</code>:</h3>
@@ -224,17 +224,17 @@
 <a class="sourceLine" id="cb18-10" title="10">                                                      <span class="dv">87000</span>, </a>
 <a class="sourceLine" id="cb18-11" title="11">                                                      <span class="fl">180e3</span>))</a>
 <a class="sourceLine" id="cb18-12" title="12">       }) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb18-13" title="13"><span class="st">  </span><span class="kw">rbindlist</span>(<span class="dt">idcol =</span> <span class="st">"id"</span>,</a>
+<a class="sourceLine" id="cb18-13" title="13"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/data.table/topics/rbindlist">rbindlist</a></span>(<span class="dt">idcol =</span> <span class="st">"id"</span>,</a>
 <a class="sourceLine" id="cb18-14" title="14">            <span class="dt">use.names =</span> <span class="ot">TRUE</span>,</a>
 <a class="sourceLine" id="cb18-15" title="15">            <span class="dt">fill =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb18-16" title="16"><span class="st">  </span><span class="kw"><a href="reference/compare_avg_tax_rates.html">compare_avg_tax_rates</a></span>(<span class="dt">baseDT =</span> .[id <span class="op">%ein%</span><span class="st"> "36k"</span>]) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb18-17" title="17"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Taxable_Income_percentile,</a>
+<a class="sourceLine" id="cb18-17" title="17"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> Taxable_Income_percentile,</a>
 <a class="sourceLine" id="cb18-18" title="18">             <span class="dt">y =</span> delta_avgTaxRate,</a>
 <a class="sourceLine" id="cb18-19" title="19">             <span class="dt">color =</span> id,</a>
 <a class="sourceLine" id="cb18-20" title="20">             <span class="dt">group =</span> id)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb18-21" title="21"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb18-22" title="22"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
-<p><img src="reference/figures/README_compare-30-37-42-thresholds-1.png" width="700"></p>
+<a class="sourceLine" id="cb18-21" title="21"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_abline">geom_hline</a></span>(<span class="dt">yintercept =</span> <span class="dv">0</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-22" title="22"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>()</a></code></pre></div>
+<p><img src="../../../../Dropbox%20(Grattan%20Institute)/Matt%20Cowgill/hughparsonage/grattan/man/figures/README_compare-30-37-42-thresholds-1.png" width="700"></p>
 </div>
 </div>
 </div>
@@ -354,7 +354,7 @@
 <a href="#enhancements-1" class="anchor"></a>Enhancements</h3>
 <ul>
 <li>
-<code><a href="reference/prohibit_vector_recycling.html">prohibit_vector_recycling()</a></code> and friends return more informative error messages.</li>
+<code>prohibit_vector_recycling()</code> and friends return more informative error messages.</li>
 <li>Added default values to the following functions:
 <ul>
 <li>
@@ -595,6 +595,8 @@ The default argument continues to result in SAPTO being not applied if <code>.do
 <div id="cran-notes" class="section level1">
 <h1 class="hasAnchor">
 <a href="#cran-notes" class="anchor"></a>CRAN Notes</h1>
+<p>This is a package resubmission after archival.</p>
+<p>The vignettes have been protected from accessing taxstats packages; the packages will only be attempted to be installed if an environment variable is set.</p>
 <div id="test-results" class="section level2">
 <h2 class="hasAnchor">
 <a href="#test-results" class="anchor"></a>Test results</h2>
@@ -603,12 +605,13 @@ The default argument continues to result in SAPTO being not applied if <code>.do
 <h3 class="hasAnchor">
 <a href="#test-environments" class="anchor"></a>Test environments:</h3>
 <ul>
-<li>Local Windows CRAN 3.5.1</li>
-<li>Travis-CI: Ubuntu 14.04. R 3.4, 3.5, and dev (r75443)</li>
-<li>Appveyor: dev (r75439) and release.</li>
-<li>winbuilder: dev (r75434) and release.</li>
+<li>Local Windows CRAN 3.6.0</li>
+<li>Travis-CI: Ubuntu 14.04. R 3.5, 3.6, and dev (r76539)</li>
+<li>Appveyor: dev (r76446) and release.</li>
+<li>winbuilder: dev (r76539) and release.</li>
 </ul>
 <p>NOTES:</p>
+<p>Package archival / previous violation of policy. ==&gt; Vignettes using package ‘taxstats’ is now off by default ==&gt; Installation of taxstats packages now requires manual setting of environment variable</p>
 <p>Possibly mis-spelled words in DESCRIPTION: … ==&gt; Spellings are correct: ‘repos’ and ‘taxstats’ cannot be quoted as they are within R code.</p>
 <p>URLs in angle brackets: ==&gt; Not appropriate since the URL is within R code.</p>
 <p>Suggests or Enhances not in mainstream repositories: … ==&gt; Normal due to taxstats dependency</p>
@@ -617,7 +620,7 @@ The default argument continues to result in SAPTO being not applied if <code>.do
 <div id="note-to-cran-moderately-large-vignette" class="section level2">
 <h2 class="hasAnchor">
 <a href="#note-to-cran-moderately-large-vignette" class="anchor"></a>Note to CRAN: moderately-large vignette</h2>
-<p>The vignette is quite lengthy and, while it will run on CRAN, requires the installation of ‘taxstats’, a 58 MB source package, each time the package is checked.</p>
+<p>The vignette is quite lengthy and, if the environment variable is set, installs package ‘taxstats’, a 58 MB source package, each time the package is checked.</p>
 </div>
 </div>
   </div>
