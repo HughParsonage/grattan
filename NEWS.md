@@ -1,3 +1,6 @@
+## 1.7.1.3
+* `grattan`'s tax modelling functions now work with the 2016-17 ATO sample file 
+
 ## 1.7.1.1
 * `grattan` now depends on R 3.5.0 due to serialization format version 3 becoming the default
   in R 3.6.0.

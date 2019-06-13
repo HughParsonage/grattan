@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grattan</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.1.2</span>
       </span>
     </div>
 
@@ -154,7 +154,7 @@
     </tr>
     <tr>
       <th>from_fy</th>
-      <td><p>The financial year contemporaneous to wage, which must be a financial year of an available sample file -- in particular, not after 2015-16.</p></td>
+      <td><p>The financial year contemporaneous to wage, which must be a financial year of an available sample file -- in particular, not after 2016-17.</p></td>
     </tr>
     <tr>
       <th>to_fy</th>
@@ -179,7 +179,7 @@
     <pre class="examples"><div class='input'><span class='no'>ws</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>20e3</span>, <span class='fl'>50e3</span>, <span class='fl'>100e3</span>)
 <span class='no'>from</span> <span class='kw'>&lt;-</span> <span class='st'>"2013-14"</span>
 <span class='no'>to</span> <span class='kw'>&lt;-</span> <span class='st'>"2016-17"</span>
-<span class='fu'>differentially_uprate_wage</span>(<span class='no'>ws</span>, <span class='no'>from</span>, <span class='no'>to</span>)</div><div class='output co'>#&gt; [1]  21411.35  52749.51 106555.75</div><div class='input'><span class='fu'>differentially_uprate_wage</span>(<span class='no'>ws</span>, <span class='no'>from</span>, <span class='no'>to</span>) / <span class='fu'><a href='wage_inflator.html'>wage_inflator</a></span>(<span class='no'>ws</span>, <span class='no'>from</span>, <span class='no'>to</span>)</div><div class='output co'>#&gt; [1] 1.0061469 0.9915069 1.0014384</div><div class='input'>
+<span class='fu'>differentially_uprate_wage</span>(<span class='no'>ws</span>, <span class='no'>from</span>, <span class='no'>to</span>)</div><div class='output co'>#&gt; [1]  21344.88  52855.41 106537.99</div><div class='input'><span class='fu'>differentially_uprate_wage</span>(<span class='no'>ws</span>, <span class='no'>from</span>, <span class='no'>to</span>) / <span class='fu'><a href='wage_inflator.html'>wage_inflator</a></span>(<span class='no'>ws</span>, <span class='no'>from</span>, <span class='no'>to</span>)</div><div class='output co'>#&gt; [1] 1.0030237 0.9934975 1.0012715</div><div class='input'>
 <span class='co'># Use a wage series:</span>
 <span class='kw'>if</span> (<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/ns-load'>requireNamespace</a></span>(<span class='st'>"taxstats"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
   <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>data.table</span>)
@@ -195,17 +195,17 @@
                                           <span class='kw'>to_fy</span> <span class='kw'>=</span> <span class='st'>"2018-19"</span>,
                                           <span class='kw'>wage.series</span> <span class='kw'>=</span> <span class='no'>WageGrowth</span>))
 }</div><div class='output co'>#&gt;         Wage_201314 Wage_201819
-#&gt;      1:        4540    5176.119
-#&gt;      2:       58734   64541.562
-#&gt;      3:       39953   43820.534
-#&gt;      4:      112494  125720.460
-#&gt;      5:       94213  104801.979
+#&gt;      1:        4540    5165.725
+#&gt;      2:       58734   64672.913
+#&gt;      3:       39953   44068.550
+#&gt;      4:      112494  125745.469
+#&gt;      5:       94213  104878.692
 #&gt;     ---                        
-#&gt; 258770:       24491   27236.264
-#&gt; 258771:       47704   52252.765
-#&gt; 258772:       46690   51138.137
-#&gt; 258773:        5132    5850.954
-#&gt; 258774:       49508   54257.583</div></pre>
+#&gt; 258770:       24491   27272.861
+#&gt; 258771:       47704   52507.123
+#&gt; 258772:       46690   51397.854
+#&gt; 258773:        5132    5831.957
+#&gt; 258774:       49508   54479.362</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -226,7 +226,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, Matthew Katzen, William Young.</p>
+  <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, Matthew Katzen, William Young, Matt Cowgill.</p>
 </div>
 
 <div class="pkgdown">

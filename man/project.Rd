@@ -18,7 +18,7 @@ See package \code{taxstats} for an example.}
 \item{h}{An integer. How many years should the sample file be projected?}
 
 \item{fy.year.of.sample.file}{The financial year of \code{sample_file}. If \code{NULL}, the default, the number is inferred from the 
-number of rows of \code{sample_file} to be one of \code{2012-13}, \code{2013-14}, \code{2014-15}, or \code{2015-16}.}
+number of rows of \code{sample_file} to be one of \code{2012-13}, \code{2013-14}, \code{2014-15}, \code{2015-16}, or \code{2016-17}.}
 
 \item{WEIGHT}{The sample weight for the sample file. (So a 2\% file has \code{WEIGHT} = 50.)}
 
@@ -39,7 +39,7 @@ younger ages will grow at a slightly higher rate beyond 2018 than older ages.}
 \item{.copyDT}{(logical, default: \code{TRUE}) Should a \code{copy()} of \code{sample_file} be made? If set to \code{FALSE}, will update \code{sample_file}.}
 
 \item{check_fy_sample_file}{(logical, default: \code{TRUE}) Should \code{fy.year.of.sample.file} be checked against \code{sample_file}?
-By default, \code{TRUE}, an error is raised if the base is not 2012-13, 2013-14, 2014-15, or 2015-16, and a warning is raised if the 
+By default, \code{TRUE}, an error is raised if the base is not 2012-13, 2013-14, 2014-15, 2015-16, or 2016-17, and a warning is raised if the 
 number of rows in \code{sample_file} is different to the known number of rows in the sample files.}
 
 \item{differentially_uprate_Sw}{(logical, default: \code{TRUE}) Should the salary and wage column (\code{Sw_amt}) be differentially uprating using (\code{\link{differentially_uprate_wage}})?}
