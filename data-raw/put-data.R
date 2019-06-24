@@ -667,14 +667,18 @@ cg_inflators_1516 <- if (!renew) fread("./data-raw/cg_inflators_1516.tsv") else 
             zero_discount_Net_CG_total = revenue_foregone * 10^6 / mean(mean_wmrL, na.rm = TRUE))]
     
     
-      if (!exists("individuals_table1_201516")) {
-        individuals_table1_201516 <- 
-          if (file.exists("~/taxstats/data-raw/2015-16/individuals_table1_201516.tsv")) {
-            fread("~/taxstats/data-raw/2015-16/individuals_table1_201516.tsv", na.strings = c("", "NA", "f"))
+    if (!exists("individuals_table1_201516")) {
+      individuals_table1_201516 <- 
+        if (file.exists("~/taxstats/data-raw/2015-16/individuals_table1_201516.tsv")) {
+          fread("~/taxstats/data-raw/2015-16/individuals_table1_201516.tsv", na.strings = c("", "NA", "f"))
+        } else {
+          if(file.exists(file.path(Path2Dropbox, "Matt Cowgill", "hughparsonage", "taxstats", "data-raw", "2015-16", "individuals_table1_201516.tsv"))) {
+            fread(file.path(Path2Dropbox, "Matt Cowgill", "hughparsonage", "taxstats", "data-raw", "2015-16", "individuals_table1_201516.tsv"), na.strings = c("", "NA", "f"))
           } else {
             stop("individuals_table1_201516 does not exist.")
           }
-      }
+        }
+    }
     
     n_cg_history <- 
       as.data.table(individuals_table1_201516) %>%
