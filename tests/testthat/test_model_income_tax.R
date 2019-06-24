@@ -68,7 +68,7 @@ test_that("La plus ca meme la plus ca meme: la deluge", {
   new_tax <-
     model_income_tax(sample_file_1112_copy,
                      baseline_fy = "2011-12",
-                     ordinary_tax_thresholds = c(0, 6000, 35e3, 80e3, 180e3),
+                     ordinary_tax_thresholds = c(0, 6000, 37e3, 80e3, 180e3),
                      ordinary_tax_rates = c(0, 0.15, 0.30, 0.37, 0.45)) %>%
     .subset2("new_tax")
   
