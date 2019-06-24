@@ -1,3 +1,6 @@
+## 1.7.1.4
+* Fixed minor error that affected tax liability calculations for 2010-11 and 2011-12 financial years
+
 ## 1.7.1.3
 * `grattan`'s tax modelling functions now work with the 2016-17 ATO sample file 
 
