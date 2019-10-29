@@ -30,7 +30,7 @@ test_that("Error handling", {
   expect_error(wage_inflator(1, from_fy = "2013-14", to_fy = "2045-46", allow.projection = FALSE),
                regexp = "wage index data")
   expect_error(wage_inflator(from_fy = "2017-18",
-                              to_fy = "2018-19",
+                              to_fy = "2020-21",
                               forecast.series = "custom",
                               wage.series = data.table(fy_year = c("2017-18", "2017-18"),
                                                      r = c(0, 0.123))), 
@@ -45,7 +45,7 @@ test_that("upper/lower higher/lower", {
 
 test_that("Custom wage series", {
   
-  y <- wage_inflator(1, from_fy = "2017-18", to_fy = "2020-21", 
+  y <- wage_inflator(1, from_fy = "2018-19", to_fy = "2021-22", 
                      forecast.series = "custom", 
                      wage.series = 0.1)
   
@@ -65,9 +65,9 @@ test_that("Custom wage series error handling", {
                regexp = "`wage.series` had length 2.",
                fixed = TRUE)
   
-  expect_message(wage_inflator(1, from_fy = "2015-16", to_fy = "2018-19", 
+  expect_message(wage_inflator(1, from_fy = "2015-16", to_fy = "2019-20", 
                                forecast.series = "custom", 
-                               wage.series = data.table(fy_year = c("2017-18", "2018-19"), 
+                               wage.series = data.table(fy_year = c("2018-19", "2019-20"), 
                                                         r = c(2.5, 10.0))),
                  regexp = "unlikely")
 })

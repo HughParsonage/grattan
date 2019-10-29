@@ -8,12 +8,12 @@
  0.0	loadTaxstats
  0.2	sample_file_1415
  0.2	sample_file_1516
- 4.0	sample_files_all
+ 0.7	sample_files_all
  0.0	revenue_foregone
  0.0	get_near_term
- 1.0	s1617
- 0.8	s1718
- 0.8	s1819
+ 0.1	s1617
+ 0.1	s1718
+ 0.1	s1819
  0.0	unique_fy_year
  0.0	wage_forecasts
  0.0	lf_forecasts
@@ -21,10 +21,14 @@
  0.0	ordinary_tax_thresholds
  0.0	do_medicare_levy
  3.9	project_useTreasurys
- 0.0	s2425_Treasury
- 0.0	s2728_Treasury
+ 4.1	.project_useGrattans
+ 0.1	s2425_Treasury
+ 0.1	s2728_Treasury
  0.0	wage_r80
  0.0	wage_r20
+ 4.1	.project_useGrattans80
+ 4.1	.project_useGrattans20
+ 4.1	.project_useGrattans2.75
  0.0	model_Budgets
  0.0	ntilers
  0.0	percentile2quintile

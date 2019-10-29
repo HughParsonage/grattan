@@ -17,7 +17,7 @@ test_that("Default from_fy and to_fy", {
 
 test_that("Error handling", {
   skip_on_cran()
-  skip_if_not(identical(date2fy(Sys.Date()), "2018-19"))
+  skip_if_not(identical(date2fy(Sys.Date()), "2019-20"))
   expect_error(lf_inflator_fy(to_fy = "2013-14"), 
                regexp = "`from_fy` is missing", 
                fixed = TRUE)
@@ -88,7 +88,7 @@ test_that("lf_inflator_fy accepts multiple dates", {
 })
 
 test_that("Custom lf series", {
-  skip_if_not(identical(date2fy(Sys.Date()), "2018-19"))
+  skip_if_not(identical(date2fy(Sys.Date()), "2019-20"))
   expect_message(lf_inflator_fy(from_fy = "2022-23", 
                                 to_fy = "2024-25",
                                 forecast.series = "custom",

@@ -852,7 +852,7 @@ cg_inflators_1213 <-
   .[, cg_inflator := cg_inflator / cg_inflator[cg_inflators_1415$fy_year == "2012-13"]] %>%
   .[]
   
-  super_contribution_inflator_1314 <- 
+super_contribution_inflator_1314 <- 
   {
   sample_file_1314_concessional_contribution_total <- 
     
@@ -868,17 +868,20 @@ cg_inflators_1213 <-
     funds_table1_201314 %>%
     filter(Selected_items == "Assessable contributions") %>%
     select(fy_year, Assessable_contributions_funds = Sum) %>%
+    as.data.table() %>%
     setkey(fy_year)
   
   smsfs <- 
     funds_table2_smsf_201314 %>%
     filter(Selected_items == "Assessable contributions") %>%
     select(fy_year, Assessable_contributions_smsfs = Sum) %>%
+    as.data.table() %>%
     setkey(fy_year)
   
   ato_aggregate_contributions <- 
     smsfs[funds] %>%
-    mutate(total_contributions = Assessable_contributions_smsfs + Assessable_contributions_funds)
+    mutate(total_contributions = Assessable_contributions_smsfs + Assessable_contributions_funds) %>%
+    as.data.table()
   
   ato_aggregate_contributions[fy_year == "2013-14"][["total_contributions"]] / sample_file_1314_concessional_contribution_total
 }
@@ -963,15 +966,18 @@ Age_pension_assets_test_by_year <-
     
   } else {
     age_pension_assets_test_dss_gov_au <- 
-      htmltab::htmltab("http://guides.dss.gov.au/guide-social-security-law/4/10/3", which = 10)
+      htmltab::htmltab("http://guides.dss.gov.au/guide-social-security-law/4/10/3", 
+                       which = 10,
+                       rm_nodata_cols = FALSE)
+    
     stopifnot(identical(names(age_pension_assets_test_dss_gov_au),
                         c("Date",
                           "Homeowners >> Single",
                           "Homeowners >> Couple",
-                          "Homeowners >> Illness Separated Couple", 
+                          "Homeowners >> Illness separated couple", 
                           "Non-homeowners >> Single",
                           "Non-homeowners >> Couple",
-                          "Non-homeowners >> Illness Separated Couple", 
+                          "Non-homeowners >> Illness separated couple",
                           "Notes")))
     as.data.table(age_pension_assets_test_dss_gov_au) %>%
       .[, Notes := NULL] %>%
@@ -1248,6 +1254,10 @@ NewstartRatesTable.raw <-
 NewstartRatesOver21Single1991 <-
   "http://guides.dss.gov.au/guide-social-security-law/5/2/1/20" %>%
   htmltab::htmltab(which = '//*[@id="node-16056"]/table[9]')
+
+NewstartRatesOver21Single1991 <- 
+  NewstartRatesOver21Single1991 %>%
+  dplyr::rename(Rate = starts_with("Rate"))
 
 newstart_rates_table <-
   NewstartRatesOver21Single1991 %>%

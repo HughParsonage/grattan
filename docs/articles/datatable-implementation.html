@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calculations of income tax are rolling joins • grattan</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/all.min.css" integrity="sha256-PbSmjxuVAzJ6FPvNYsrXygfGhNJYyZ2GktDbkMBqQZg=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.1/css/v4-shims.min.css" integrity="sha256-A6jcAdwFD48VMjlI3GDxUd+eCQa7/KWy6G9oe/ovaPA=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Calculations of income tax are rolling joins">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
@@ -30,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">grattan</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.1.4</span>
       </span>
     </div>
 
@@ -38,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -82,7 +83,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/HughParsonage/grattan">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -95,13 +96,14 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Calculations of income tax are rolling joins</h1>
                         <h4 class="author">Hugh Parsonage</h4>
             
-            <h4 class="date">2019-06-13</h4>
+            <h4 class="date">2019-10-29</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/HughParsonage/grattan/blob/master/vignettes/datatable-implementation.Rmd"><code>vignettes/datatable-implementation.Rmd</code></a></small>
       <div class="hidden name"><code>datatable-implementation.Rmd</code></div>
@@ -113,18 +115,18 @@
 <div id="short-introduction-to-ordinary-income-tax" class="section level2">
 <h2 class="hasAnchor">
 <a href="#short-introduction-to-ordinary-income-tax" class="anchor"></a>Short introduction to ordinary income tax</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(knitr)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(magrittr)</a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(data.table)</a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(hutils)</a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(grattan)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(knitr)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(magrittr)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(data.table)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(hutils)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(grattan)</span></code></pre></div>
 <p>Generally, income taxes are parmeterized by tax tables. In Australia, for the 2017-18 financial year, the table looks like</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">dollar &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="st">"$"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/formatc">prettyNum</a></span>(x, <span class="dt">big.mark =</span> <span class="st">","</span>))</a>
-<a class="sourceLine" id="cb2-2" title="2">grattan<span class="op">:::</span>tax_table2[fy_year <span class="op">==</span><span class="st"> "2017-18"</span>,</a>
-<a class="sourceLine" id="cb2-3" title="3">                     .(<span class="st">`</span><span class="dt">Lower bracket</span><span class="st">`</span> =<span class="st"> </span><span class="kw">dollar</span>(lower_bracket),</a>
-<a class="sourceLine" id="cb2-4" title="4">                       <span class="st">`</span><span class="dt">Tax payable</span><span class="st">`</span> =<span class="st"> </span><span class="kw">dollar</span>(tax_at),</a>
-<a class="sourceLine" id="cb2-5" title="5">                       <span class="st">`</span><span class="dt">Marginal rate</span><span class="st">`</span> =<span class="st"> </span>marginal_rate)] <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb2-6" title="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>(<span class="dt">align =</span> <span class="st">"r"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>dollar &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"$"</span>, <span class="kw"><a href="https://rdrr.io/r/base/formatc.html">prettyNum</a></span>(x, <span class="dt">big.mark =</span> <span class="st">","</span>))</span>
+<span id="cb2-2"><a href="#cb2-2"></a>grattan<span class="op">:::</span>tax_table2[fy_year <span class="op">==</span><span class="st"> "2017-18"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3"></a>                     .(<span class="st">`</span><span class="dt">Lower bracket</span><span class="st">`</span> =<span class="st"> </span><span class="kw">dollar</span>(lower_bracket),</span>
+<span id="cb2-4"><a href="#cb2-4"></a>                       <span class="st">`</span><span class="dt">Tax payable</span><span class="st">`</span> =<span class="st"> </span><span class="kw">dollar</span>(tax_at),</span>
+<span id="cb2-5"><a href="#cb2-5"></a>                       <span class="st">`</span><span class="dt">Marginal rate</span><span class="st">`</span> =<span class="st"> </span>marginal_rate)] <span class="op">%&gt;%</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="st">  </span><span class="kw"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span>(<span class="dt">align =</span> <span class="st">"r"</span>)</span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="right">Lower bracket</th>
@@ -160,20 +162,20 @@
 </tbody>
 </table>
 <p>To calculate the income tax for a given income find the next lowest value in the <code>Lower bracket</code> column, then add the tax payable and difference between the lower bracket value and the income multiplied by the marginal rate. Originally, we implemented it like this:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">income &lt;-<span class="st"> </span><span class="fl">50e3</span></a>
-<a class="sourceLine" id="cb3-2" title="2">fy_year &lt;-<span class="st"> "2017-18"</span></a>
-<a class="sourceLine" id="cb3-3" title="3"></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ifelse">ifelse</a></span>(fy_year <span class="op">==</span><span class="st"> '2017-18'</span>,</a>
-<a class="sourceLine" id="cb3-5" title="5">       <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ifelse">ifelse</a></span>(income <span class="op">&lt;</span><span class="st"> </span><span class="dv">18200</span>,</a>
-<a class="sourceLine" id="cb3-6" title="6">              <span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb3-7" title="7">              <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ifelse">ifelse</a></span>(income <span class="op">&lt;</span><span class="st"> </span><span class="fl">37e3</span>,</a>
-<a class="sourceLine" id="cb3-8" title="8">                     <span class="dv">0</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.19</span> <span class="op">*</span><span class="st"> </span>(income <span class="op">-</span><span class="st"> </span><span class="dv">18200</span>),</a>
-<a class="sourceLine" id="cb3-9" title="9">                     <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ifelse">ifelse</a></span>(income <span class="op">&lt;</span><span class="st"> </span><span class="fl">87e3</span>,</a>
-<a class="sourceLine" id="cb3-10" title="10">                            <span class="dv">3572</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.325</span> <span class="op">*</span><span class="st"> </span>(income <span class="op">-</span><span class="st"> </span><span class="dv">37000</span>),</a>
-<a class="sourceLine" id="cb3-11" title="11">                            <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ifelse">ifelse</a></span>(income <span class="op">&lt;</span><span class="st"> </span><span class="fl">180e3</span>,</a>
-<a class="sourceLine" id="cb3-12" title="12">                                   <span class="dv">19822</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.37</span> <span class="op">*</span><span class="st"> </span>(income <span class="op">-</span><span class="st"> </span><span class="fl">87e3</span>),</a>
-<a class="sourceLine" id="cb3-13" title="13">                                   <span class="dv">54232</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.45</span> <span class="op">*</span><span class="st"> </span>(income <span class="op">-</span><span class="st"> </span><span class="fl">180e3</span>))))),</a>
-<a class="sourceLine" id="cb3-14" title="14">       <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/stop">stop</a></span>(<span class="st">"Not yet implemented."</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>income &lt;-<span class="st"> </span><span class="fl">50e3</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>fy_year &lt;-<span class="st"> "2017-18"</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">ifelse</a></span>(fy_year <span class="op">==</span><span class="st"> '2017-18'</span>,</span>
+<span id="cb3-5"><a href="#cb3-5"></a>       <span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">ifelse</a></span>(income <span class="op">&lt;</span><span class="st"> </span><span class="dv">18200</span>,</span>
+<span id="cb3-6"><a href="#cb3-6"></a>              <span class="dv">0</span>,</span>
+<span id="cb3-7"><a href="#cb3-7"></a>              <span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">ifelse</a></span>(income <span class="op">&lt;</span><span class="st"> </span><span class="fl">37e3</span>,</span>
+<span id="cb3-8"><a href="#cb3-8"></a>                     <span class="dv">0</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.19</span> <span class="op">*</span><span class="st"> </span>(income <span class="op">-</span><span class="st"> </span><span class="dv">18200</span>),</span>
+<span id="cb3-9"><a href="#cb3-9"></a>                     <span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">ifelse</a></span>(income <span class="op">&lt;</span><span class="st"> </span><span class="fl">87e3</span>,</span>
+<span id="cb3-10"><a href="#cb3-10"></a>                            <span class="dv">3572</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.325</span> <span class="op">*</span><span class="st"> </span>(income <span class="op">-</span><span class="st"> </span><span class="dv">37000</span>),</span>
+<span id="cb3-11"><a href="#cb3-11"></a>                            <span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/fifelse.html">ifelse</a></span>(income <span class="op">&lt;</span><span class="st"> </span><span class="fl">180e3</span>,</span>
+<span id="cb3-12"><a href="#cb3-12"></a>                                   <span class="dv">19822</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.37</span> <span class="op">*</span><span class="st"> </span>(income <span class="op">-</span><span class="st"> </span><span class="fl">87e3</span>),</span>
+<span id="cb3-13"><a href="#cb3-13"></a>                                   <span class="dv">54232</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.45</span> <span class="op">*</span><span class="st"> </span>(income <span class="op">-</span><span class="st"> </span><span class="fl">180e3</span>))))),</span>
+<span id="cb3-14"><a href="#cb3-14"></a>       <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span>(<span class="st">"Not yet implemented."</span>))</span></code></pre></div>
 <pre><code>## [1] 7797</code></pre>
 <p>There were some problems, however. One is that it’s difficult to update or modify. But perhaps more importantly is that it’s not particularly <em>literate</em>: the code merely ‘happens’ to give the right answer, rather than expressing the method too.</p>
 </div>
@@ -181,17 +183,17 @@
 <h2 class="hasAnchor">
 <a href="#income-tax-calculations-are-rolling-joins" class="anchor"></a>Income tax calculations are rolling joins</h2>
 <p>A more natural and expressive approach is to treat the income tax as a rolling join.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">input &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/data.table/topics/data.table">data.table</a></span>(<span class="dt">income =</span> income)</a>
-<a class="sourceLine" id="cb5-2" title="2">tax_table2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/data.table/topics/copy">copy</a></span>(grattan<span class="op">:::</span>tax_table2)</a>
-<a class="sourceLine" id="cb5-3" title="3"></a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="co"># Record the order if needed</span></a>
-<a class="sourceLine" id="cb5-5" title="5">input[, the_order <span class="op">:</span><span class="er">=</span><span class="st"> </span>.I]</a>
-<a class="sourceLine" id="cb5-6" title="6">input[, fy_year <span class="op">:</span><span class="er">=</span><span class="st"> "2017-18"</span>]</a>
-<a class="sourceLine" id="cb5-7" title="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/data.table/topics/setkey">setkey</a></span>(input, fy_year, income)</a>
-<a class="sourceLine" id="cb5-8" title="8"></a>
-<a class="sourceLine" id="cb5-9" title="9">tax_table2[input, roll =<span class="st"> </span><span class="ot">TRUE</span>] <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-10" title="10"><span class="st">  </span>.[, tax <span class="op">:</span><span class="er">=</span><span class="st"> </span>tax_at <span class="op">+</span><span class="st"> </span>(income <span class="op">-</span><span class="st"> </span>lower_bracket) <span class="op">*</span><span class="st"> </span>marginal_rate] <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb5-11" title="11"><span class="st">  </span>.[<span class="kw"><a href="https://www.rdocumentation.org/packages/data.table/topics/setorder">order</a></span>(the_order)]</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>input &lt;-<span class="st"> </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html">data.table</a></span>(<span class="dt">income =</span> income)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>tax_table2 &lt;-<span class="st"> </span><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy</a></span>(grattan<span class="op">:::</span>tax_table2)</span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co"># Record the order if needed</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>input[, the_order <span class="op">:</span><span class="er">=</span><span class="st"> </span>.I]</span>
+<span id="cb5-6"><a href="#cb5-6"></a>input[, fy_year <span class="op">:</span><span class="er">=</span><span class="st"> "2017-18"</span>]</span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/setkey.html">setkey</a></span>(input, fy_year, income)</span>
+<span id="cb5-8"><a href="#cb5-8"></a></span>
+<span id="cb5-9"><a href="#cb5-9"></a>tax_table2[input, roll =<span class="st"> </span><span class="ot">TRUE</span>] <span class="op">%&gt;%</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="st">  </span>.[, tax <span class="op">:</span><span class="er">=</span><span class="st"> </span>tax_at <span class="op">+</span><span class="st"> </span>(income <span class="op">-</span><span class="st"> </span>lower_bracket) <span class="op">*</span><span class="st"> </span>marginal_rate] <span class="op">%&gt;%</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="st">  </span>.[<span class="kw"><a href="https://Rdatatable.gitlab.io/data.table/reference/setorder.html">order</a></span>(the_order)]</span></code></pre></div>
 <pre><code>##    fy_year income lower_bracket marginal_rate tax_at the_order  tax
 ## 1: 2017-18  50000         37000         0.325   3572         1 7797</code></pre>
 <p>With this approach, we can just append new tax years or proposed tax rates to <code>tax_table2</code>, rather than pipetting magic numbers into a nest of <code>ifelse</code>s. The code and the data are separate and both are easier to manage.</p>
@@ -199,6 +201,7 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -212,17 +215,20 @@
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, Matthew Katzen, William Young, Matt Cowgill.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

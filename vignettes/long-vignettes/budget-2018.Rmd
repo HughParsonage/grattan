@@ -11,7 +11,7 @@ output:
 
 
 
-```{r setup, include = FALSE, cache=FALSE}
+```{r setup, include = FALSE, cache=TRUE}
 options(width = 110) # for kables (?)
 knitr::opts_chunk$set(
   collapse = TRUE,

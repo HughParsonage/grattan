@@ -43,17 +43,21 @@ test_that("Wage growth is higher for extreme salaries", {
   
   salaries <- 
     sample_files_all %>%
+    as.data.frame() %>%
     select(fy.year, Sw_amt) %>%
     filter(fy.year == from_fy, Sw_amt > 0) %>%
-    mutate(tile = ntile(Sw_amt, 100))
+    mutate(tile = ntile(Sw_amt, 100)) %>%
+    as.data.table()
   
   extreme_salary <- 
     salaries %>%
+    as.data.frame() %>%
     filter(tile == extreme_tile) %$%
     sample(Sw_amt, size = 1)
   
   moderate_salary <- 
     salaries %>%
+    as.data.frame() %>%
     filter(tile == moderate_tile) %$%
     sample(Sw_amt, size = 1)
   
@@ -97,6 +101,7 @@ test_that("Less than 0.1% of individuals move more than one percentile over 10 y
   skip_on_cran()
   prop_move <- 
     sample_file_1314 %>%
+    as.data.frame() %>%
     select(Sw_amt) %>%
     mutate(percentile = ntile(Sw_amt, 100)) %>%
     mutate(Sw_amt_2324 = differentially_uprate_wage(Sw_amt, "2013-14", "2023-24"), 
