@@ -966,15 +966,18 @@ Age_pension_assets_test_by_year <-
     
   } else {
     age_pension_assets_test_dss_gov_au <- 
-      htmltab::htmltab("http://guides.dss.gov.au/guide-social-security-law/4/10/3", which = 10)
+      htmltab::htmltab("http://guides.dss.gov.au/guide-social-security-law/4/10/3", 
+                       which = 10,
+                       rm_nodata_cols = FALSE)
+    
     stopifnot(identical(names(age_pension_assets_test_dss_gov_au),
                         c("Date",
                           "Homeowners >> Single",
                           "Homeowners >> Couple",
-                          "Homeowners >> Illness Separated Couple", 
+                          "Homeowners >> Illness separated couple", 
                           "Non-homeowners >> Single",
                           "Non-homeowners >> Couple",
-                          "Non-homeowners >> Illness Separated Couple", 
+                          "Non-homeowners >> Illness separated couple",
                           "Notes")))
     as.data.table(age_pension_assets_test_dss_gov_au) %>%
       .[, Notes := NULL] %>%
