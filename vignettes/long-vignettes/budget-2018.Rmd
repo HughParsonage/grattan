@@ -420,9 +420,9 @@ ordinary_tax_thresholds <- function(fy_year) {
   if (fy_year < "2022-23") {
     c(0, 18200, 37e3, 90e3, 180e3)
   } else if (fy_year < "2024-25") {
-    c(0, 18200, 41e3, 120e3, 180e3)
+    c(0, 18200, 45e3, 120e3, 180e3)
   } else {
-    c(0, 18200, 41e3, 200e3)
+    c(0, 18200, 45e3, 200e3)
   }
 }
 ```
@@ -795,8 +795,9 @@ kable(fread("revenue-by-fy_year-id--Grattan20.csv"))
 ```{r avg_individual_impact_by_Quintile_fy}
 avg_individual_impact_by_Quintile_fy <- 
   bound_models %>%
-  .[, Quintile := factor(.ntile(Taxable_Income, 5), levels = 1:5),
+  .[, Quintile := .ntile(Taxable_Income, 5),
     keyby = .(fy_year, id)] %>%
+   .[, Quintile := factor(Quintile, levels = 1:5)] %>%
   .[, .(avg_delta = mean(delta),
         max_income = max(Taxable_Income),
         min_income = min(Taxable_Income),
@@ -2022,14 +2023,14 @@ s2425_Deloitte_LF_growth <-
                    ordinary_tax_thresholds = ordinary_tax_thresholds("2024-25"), 
                    ordinary_tax_rates = ordinary_tax_rates("2024-25"),
                    Budget2018_lito_202223 = TRUE,
-                   # medicare_levy_rate = 0.02,
-                   # medicare_levy_taper = 0.1,
-                   medicare_levy_lower_threshold = medicare_levy_lower_threshold("2024-25"), # 24950
+                   medicare_levy_rate = 0.02,
+                   medicare_levy_taper = 0.1,
+                   # medicare_levy_lower_threshold = 24950, # medicare_levy_lower_threshold("2024-25")
                    medicare_levy_upper_threshold = 30938,
-                   medicare_levy_lower_sapto_threshold = medicare_levy_lower_sapto_threshold("2024-25"), # 39460
+                   medicare_levy_lower_sapto_threshold = 39460, # medicare_levy_lower_sapto_threshold("2024-25")
                    medicare_levy_upper_sapto_threshold = 48912,
-                   medicare_levy_lower_family_threshold = medicare_levy_lower_family_threshold("2024-25"), # 54930
-                   medicare_levy_lower_family_sapto_threshold = medicare_levy_lower_family_sapto_threshold("2024-25")) %>% # 54930
+                   medicare_levy_lower_family_threshold = 54930, # medicare_levy_lower_family_threshold("2024-25")
+                   medicare_levy_lower_family_sapto_threshold = 54930) %>% # medicare_levy_lower_family_sapto_threshold("2024-25")) %>% # 54930
   # Ensure number of taxpayers = 11.6 million
   .[new_tax >= 1, WEIGHT := 11.6e6 / sum(new_tax > 0)] %>%
   
