@@ -29,7 +29,7 @@ If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{fro
 If the SDMX connection fails, a message is emitted (not a warning) and
 the function contines as if \code{useABSConnection = FALSE}.
 
-The internal data was updated on 2019-06-13 to 2019-05-01.}
+The internal data was updated on 2019-10-29 to 2019-09-01.}
 
 \item{allow.projection}{Logical. Should projections be allowed?}
 
