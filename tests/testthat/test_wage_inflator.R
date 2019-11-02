@@ -1,9 +1,9 @@
 context("Wage inflator")
 
-expect_equal <- function(left, right, check.attributes = FALSE) {
+expect_equal <- function(left, right, check.attributes = FALSE, ...) {
   testthat::expect_equal(unclass(left),
                          unclass(right), 
-                         check.attributes = FALSE)
+                         check.attributes = FALSE, ...)
 }
 
 test_that("Default from_fy and to_fy", {
@@ -107,8 +107,10 @@ test_that("ABS connection", {
   skip_if_not(packageVersion("rsdmx") >= package_version("0.5.10"))
   
   # Minimize false on errors on travis
-  skip_if(getRversion() >= "3.6")
-  skip_if(getRversion() <= "3.4")
+  # Skip travis tests (except oldrel)
+  nottravis_or_oldrel <- 
+    Sys.getenv("TRAVIS_R_VERSION_STRING") %in% c("", "oldrel")
+  skip_if_not(nottravis_or_oldrel)
   
   internal_ans <- wage_inflator(from_fy = "2012-13", 
                                 to_fy = "2013-14",
