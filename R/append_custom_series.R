@@ -51,34 +51,27 @@ append_custom_series <- function(orig,
   # Is the following
   if (first_fy_in_custom_series == next_fy(last_full_fy_in_orig)) {
     last_obsValue_in_actual_series <- last(.subset2(orig, "obsValue"))
-    
-    obsValue <- r <- NULL
-    custom.series[, obsValue := last_obsValue_in_actual_series * cumprod(1 + r)]
-    
-    out <- 
-      rbindlist(list(orig, 
-                     custom.series), 
-                use.names = TRUE, 
-                fill = TRUE) %>%
-      # Ensure the date falls appropriately
-      unique(by = "fy_year", fromLast = TRUE)
   } else {
     series_before_custom <- orig[fy_year < first_fy_in_custom_series]
-
     last_obsValue_in_actual_series <- last(series_before_custom[["obsValue"]])
-    custom.series[, obsValue := last_obsValue_in_actual_series * cumprod(1 + r)]
-    
-    out <- 
-      rbindlist(list(orig, 
-                     custom.series), 
-                use.names = TRUE, 
-                fill = TRUE) %>%
-      # Ensure the date falls appropriately
-      unique(by = "fy_year", fromLast = TRUE)
+   
   }
   
-  out
+  obsValue <- r <- NULL
+  custom.series[, obsValue := last_obsValue_in_actual_series * cumprod(1 + r)]
   
+  # TODO: make fy inherit character
+  if (inherits(.subset2(orig, "fy_year"), "fy") &&
+      !inherits(.subset2(custom.series, "fy_year"), "fy")) {
+    orig <- copy(orig)[, fy_year := as.character(fy_year)]
+  }
+  
+  rbindlist(list(orig, 
+                 custom.series), 
+            use.names = TRUE, 
+            fill = TRUE) %>%
+    # Ensure the date falls appropriately
+    unique(by = "fy_year", fromLast = TRUE)
 }
 
 

@@ -1,5 +1,11 @@
 context("validate_fys_permitted")
 
+expect_equal <- function(left, right, check.attributes = FALSE) {
+  testthat::expect_equal(unclass(left),
+                         unclass(right), 
+                         check.attributes = FALSE)
+}
+
 test_that("Error handling", {
   expect_error(validate_fys_permitted(c("2015-16", "2015-17", "2010-9"), c("2015-16", "2016-17")), 
                regexp = "contained invalid FYs.",
@@ -22,8 +28,8 @@ test_that("Error handling", {
 test_that("min or max years", {
   expect_error(validate_fys_permitted("1980-81", min.yr = 1982L))
   expect_error(validate_fys_permitted("1980-81", max.yr = 1979L))
-  expect_equal(validate_fys_permitted("1980-81", max.yr = 1982L), "1980-81", check.attributes = FALSE)
-  expect_equal(validate_fys_permitted("1984-85", min.yr = 1982L, max.yr = 1989L), "1984-85", check.attributes = FALSE)
+  expect_equal(validate_fys_permitted("1980-81", max.yr = 1982L), "1980-81")
+  expect_equal(validate_fys_permitted("1984-85", min.yr = 1982L, max.yr = 1989L), "1984-85")
   expect_error(validate_fys_permitted(c("1980-81", "1980-80"), min.yr = 1980L),
                regexp = 'contained "1980-80" which is not a valid financial year.')
 })

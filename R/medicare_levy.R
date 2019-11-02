@@ -44,11 +44,12 @@ medicare_levy <- function(income,
                           family_status = "individual", 
                           n_dependants = 0, 
                           .checks = TRUE){
-  if (.checks){
-    stopifnot(all_fy(fy.year), all(family_status %in% c("family", "individual")))
+  if (.checks) {
+    fy.year <- validate_fys_permitted(fy.year)
+    stopifnot(all(family_status %in% c("family", "individual")))
     prohibit_vector_recycling(income, fy.year, family_status, Spouse_income, sapto.eligible, n_dependants)
   }
-  if (any(Spouse_income > 0 & family_status == "individual")){
+  if (any(Spouse_income > 0 & family_status == "individual")) {
     stop("If Spouse_income is nonzero, family_status cannot be 'individual'.")
   }
   
@@ -59,7 +60,7 @@ medicare_levy <- function(income,
   # Allow a join on a complete sato, pto, sapto key
   # To do this we need to make sato = sapto.eligible
   # and pto = !sato when required. 
-  if (is.null(sato) && is.null(pto)){
+  if (is.null(sato) && is.null(pto)) {
     sato <- sapto.eligible
     pto <- sapto.eligible & !sato
   } else {

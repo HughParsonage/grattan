@@ -33,7 +33,7 @@ For the inverses, a numeric corresponding to the year.
 \code{date2fy} converts a date to the corresponding financial year.
 }
 \description{
-Convenience functions for dealing with financial years
+From grattan v1.7.1.4, these are reexports from the \code{\link[fy]{fy-package}}.
 }
 \details{
 The following forms are permitted: \code{2012-13}, \code{201213}, \code{2012 13}, only.

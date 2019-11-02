@@ -1,5 +1,11 @@
 context("FY")
 
+expect_equal <- function(left, right) {
+  testthat::expect_equal(unclass(left),
+                         unclass(right), 
+                         check.attributes = FALSE)
+}
+
 test_that("is.fy() returns TRUE on FYs", {
   expect_true(is.fy("2012-13"))
   expect_true(is.fy("1999-00"))
@@ -33,18 +39,9 @@ test_that("is_fy2", {
   expect_true(all(is_fy2(c("2000-01", "2010-11", "2013-14", "2020-21"))))
 })
 
-test_that("Correct logic when asserting fys", {
-  expect_error(fy2date(c("foo", "2015-16")), 
-               regexp = "fy.yr contains non-FYs", 
-               fixed = TRUE)
-  expect_error(fy2yr(c("foo", "2015-16")), 
-               regexp = "fy.yr contains non-FYs", 
-               fixed = TRUE)
-})
-
 test_that("fy.year and yr2fy are identical", {
   x <- 1901:2099
-  expect_identical(fy.year(x), yr2fy(x))
+  expect_equal(fy.year(x), yr2fy(x))
 })
 
 test_that("grattan.assume1901_2100 options", {
@@ -52,17 +49,10 @@ test_that("grattan.assume1901_2100 options", {
   skip_on_cran()
   x <- 1900:2099
   rlang::with_options(
-    expect_identical(fy.year(x), yr2fy(x)),
+    expect_equal(fy.year(x), yr2fy(x)),
     grattan.assume1901_2100 = FALSE
   )
-  expect_identical(fy.year(x), yr2fy(x, FALSE))
-})
-
-test_that("yr2fy and .yr2fy", {
-  x <- 1900:2100
-  expect_identical(fy.year(x), .yr2fy(x))
-  x <- rep_len(x, 20e3)
-  expect_identical(fy.year(x), .yr2fy(x))
+  expect_equal(fy.year(x), yr2fy(x, FALSE))
 })
 
 test_that("range_fy", {

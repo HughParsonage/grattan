@@ -1,5 +1,10 @@
 context("Next fy")
 
+expect_equal <- function(left, right) {
+  testthat::expect_equal(unclass(left),
+                         unclass(right), 
+                         check.attributes = FALSE)
+}
 
 test_that("next_fy plus and minus", {
   expect_equal(next_fy("2015-16"), "2016-17")

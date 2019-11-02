@@ -13,7 +13,8 @@ CG_population_inflator <- function(x = 1,
                                    to_fy, 
                                    forecast.series = "mean", 
                                    cg.series){
-  stopifnot(all_fy(c(from_fy, to_fy)))
+  from_fy <- validate_fys_permitted(from_fy)
+  to_fy <- validate_fys_permitted(to_fy)
   stopifnot(forecast.series %in% c("mean", "lower", "upper", "custom"))
   
   last_fy <- max(from_fy, to_fy)
@@ -43,16 +44,17 @@ CG_population_inflator <- function(x = 1,
 
 CG_inflator <- function(x = 1, from_fy, to_fy, forecast.series = "mean"){
   prohibit_vector_recycling(x, from_fy, to_fy)
-  stopifnot(is.numeric(x), all_fy(from_fy), all_fy(to_fy))
+  stopifnot(is.numeric(x))
+  cg_fys <- union(cg_inflators_1213[["fy_year"]],
+                  cg_inflators_1617[["fy_year"]])
+  from_fy <- validate_fys_permitted(from_fy, permitted_fys = cg_fys)
+  to_fy   <- validate_fys_permitted(to_fy, permitted_fys = cg_fys)
+  
+  
   
   nse_forecast_series <- forecast.series
   cg_inflators_tbl <- 
     cg_inflators_1516[forecast.series == nse_forecast_series]
-  
-  
-  # Else NAs.
-  stopifnot(all(to_fy %in% cg_inflators_1516[["fy_year"]]),
-            all(from_fy %in% cg_inflators_1516[["fy_year"]]))
 
   # CRAN Note avoidance
   ordering <- NULL
@@ -60,8 +62,6 @@ CG_inflator <- function(x = 1, from_fy, to_fy, forecast.series = "mean"){
     data.table(x = x, from_fy = from_fy, to_fy = to_fy) %>% 
     .[, ordering := 1:.N]
 
-  
-  
   raw_out <- 
     input %>%
     merge(cg_inflators_tbl, by.y = "fy_year", by.x = "from_fy", all.x = TRUE) %>%
