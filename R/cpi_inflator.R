@@ -135,6 +135,7 @@ cpi_inflator <- function(from_nominal_price = 1,
     }
   
   
+  
   permitted_fys <- .subset2(cpi.indices, "fy_year")
   earliest_from_fy <- permitted_fys[[1L]]
   cpi_table_nom <-
@@ -182,6 +183,10 @@ cpi_inflator <- function(from_nominal_price = 1,
                                      max_fy2yr(to_fy),
                                      by = 1L)),
                  obsValue = cpi_index_forecast))
+    
+    # TODO: fy should inherit 'character'
+    cpi.indices.new[, fy_year := as.character(fy_year)]  
+    
     cpi.indices <-
       rbindlist(list(cpi.indices, cpi.indices.new),
                 use.names = TRUE,

@@ -1,3 +1,24 @@
+## 1.8.0.0
+
+### Potentially breaking changes
+
+* Pacakage `fy` is now used for operations involving financial years, notably validation of 
+  input.  This has led to changes in error messages (below) as well as the weakening
+  of some tests to omit checks of class attributes which were never intended to be 
+  relied on.
+  
+  ```r
+  # Prev:
+  fy2date("foo")
+  #> Error: fy.yr contains non-FYs.
+  
+  # Now
+  #> Error: `x = "foo"` was not a valid financial year.
+  ```
+
+
+
+
 ## 1.7.1.4
 * Fixed minor error that affected tax liability calculations for 2010-11 and 2011-12 financial years
 

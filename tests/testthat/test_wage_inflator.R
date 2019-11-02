@@ -1,5 +1,11 @@
 context("Wage inflator")
 
+expect_equal <- function(left, right, check.attributes = FALSE) {
+  testthat::expect_equal(unclass(left),
+                         unclass(right), 
+                         check.attributes = FALSE)
+}
+
 test_that("Default from_fy and to_fy", {
   expect_warning(wage_inflator(), 
                  regexp = "`from_fy` and `to_fy` are missing, using previous and current financial years respectively")
@@ -126,7 +132,7 @@ test_that("ABS Connection (extras)", {
                                 to_fy = "2020 21",
                                 useABSConnection = TRUE)
   
-  expect_equal(internal_ans, external_ans, tol = 0.00001, scale = 1)
+  testthat::expect_equal(internal_ans, external_ans, tol = 0.00001, scale = 1)
   
   internal_ans <- wage_inflator(from_fy = yr2fy(2013:2016), 
                                 to_fy = "2020-21",
@@ -135,7 +141,7 @@ test_that("ABS Connection (extras)", {
                                 to_fy = "2020 21",
                                 useABSConnection = TRUE)
   
-  expect_equal(internal_ans, external_ans, tol = 0.00001, scale = 1)
+  testthat::expect_equal(internal_ans, external_ans, tol = 0.00001, scale = 1)
 })
 
 test_that("accelerated", {

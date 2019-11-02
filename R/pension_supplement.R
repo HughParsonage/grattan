@@ -60,6 +60,7 @@ pension_supplement <- function(has_partner = FALSE,
   
   # Convert arguments to data table
   ls_np <- ls()[ls() != "per"]
+  class(fy.year) <- c("fy", "character")
   input <- data.table(do.call(cbind.data.frame, mget(ls_np))) 
   
   eligible <- NULL

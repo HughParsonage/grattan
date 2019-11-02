@@ -18,10 +18,10 @@ generic_inflator <- function(vars,
                              estimator = "mean",
                              pred_interval = 80) {
   stopifnot(length(h) == 1L)
+  fy.year.of.sample.file <- validate_fys_permitted(fy.year.of.sample.file)
   stopifnot(is.integer(h), 
             h >= 0, 
-            length(fy.year.of.sample.file) == 1L,
-            all_fy(fy.year.of.sample.file))
+            length(fy.year.of.sample.file) == 1L)
   if (h == 0L) {
     return(data.table(variable = vars, 
                       inflator = 1))

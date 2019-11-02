@@ -75,6 +75,7 @@ carer_payment <- function(Date = NULL,
     }
   }
   
+  class(fy.year) <- c("fy", "character")  # for cbind.data.frame method
   input <- data.table(do.call(cbind.data.frame, mget(ls())))
   
   #Rates, income test, and asset test same as age pension
