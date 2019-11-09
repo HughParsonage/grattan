@@ -1,6 +1,6 @@
 # Data for internal use
 # Must be sourced after modification
-renew <- TRUE
+renew <- FALSE
 if ("dplyr" %in% .packages()) {
   stop("dplyr is attached. Restart R and source.")
 }
@@ -770,6 +770,10 @@ cg_inflators_1617 <- if (!renew) fread("./data-raw/cg_inflators_1617.tsv") else 
       indiv_1617_path <- file.path(Path2Dropbox, 'Matt Cowgill', 
                                    'hughparsonage', 'taxstats', 
                                    'data-raw', '2016-17', 'Individuals_table1_201617.tsv')
+      if (!file.exists(indiv_1617_path) && 
+          file.exists("../taxstats/data-raw/2016-17/")) {
+        
+      }
       
       individuals_table1_201617 <- 
         if (file.exists(indiv_1617_path)) {
