@@ -21,3 +21,11 @@ test_that("AWOTE fy", {
   expect_equal(awote_fy("2014-15", isMale = NA, isAdult = TRUE, isOrdinary = TRUE),
                awote(fy.year = "2014-15"))
 })
+
+test_that("AWOTE unsorted, issue #204", {
+  ufys <- yr2fy(2014:2015)
+  # Reversing inputs same as referring outputs
+  expect_equal(awote(fy.year = rev(ufys)),
+               rev(awote(fy.year = ufys)))
+})
+
