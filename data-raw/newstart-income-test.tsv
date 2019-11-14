@@ -38,3 +38,4 @@ Date	income_free_area	income_threshold	Rate	is_single	min_age	max_age	max_income
 2018-03-20	105	252	272.9	TRUE	21	Inf	498.5
 2018-09-20	106	252	275.1	TRUE	21	Inf	505.25
 2019-03-20	106	252	277.85	TRUE	21	Inf	512.125
+2019-09-20	108	252	279.5	TRUE	21	Inf	518.75
