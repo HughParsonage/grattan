@@ -29,7 +29,7 @@ If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{fro
 If the SDMX connection fails, a message is emitted (not a warning) and
 the function contines as if \code{useABSConnection = FALSE}.
 
-The internal data was updated on 2019-10-29 to 2019-09-01.}
+The internal data was updated on 2019-11-15 to 2019-11-01.}
 
 \item{allow.projection}{Logical. Should projections be allowed?}
 
@@ -55,7 +55,8 @@ dramatically. Can be set to \code{Inf} to disable acceleration.}
 \item{to_date}{Dates as a character vector.}
 }
 \value{
-The relative labour force between \code{to_date} and \code{for_date} or \code{to_fy} and \code{from_fy}, multiplied by \code{labour_force}.
+The relative labour force between \code{to_date} and \code{for_date} 
+or \code{to_fy} and \code{from_fy}, multiplied by \code{labour_force}.
 }
 \description{
 Labour force inflators
