@@ -61,17 +61,22 @@ awote <- function(Date = NULL,
                       isMale = isMale,
                       isAdult = isAdult,
                       isOrdinary = isOrdinary) %>%
+    .[, "ordering" := .I] %>%
     setkeyv(key(AWOTE_by_Date_isMale_isOrdinary_isAdult))
   
   AWOTE_by_Date_isMale_isOrdinary_isAdult %>%
     .[input, roll = rollDate] %>%
+    setorderv("ordering") %>%
     .subset2("AWOTE")
 }
 
 awote_fy <- function(fy_year, isMale, isAdult, isOrdinary) {
   fy_year <- validate_fys_permitted(fy_year)
   input <- data.table(fy_year, isMale, isAdult, isOrdinary)
-  setkeyv(input, names(input))
+  
+  # Perhaps unnecessary since data.table retains order of 
+  input[, "ordering" := .I]
+  setkey(input, fy_year, isMale, isAdult, isOrdinary)
   Date <- AWOTE <- NULL
   AWOTE_by_Date_isMale_isOrdinary_isAdult %>%
     .[, "fy_year" := date2fy(Date)] %>%
@@ -81,5 +86,6 @@ awote_fy <- function(fy_year, isMale, isAdult, isOrdinary) {
                 isOrdinary,
                 isAdult)] %>%
     .[input, on = c(key(.))] %>%
+    setorderv("ordering") %>%
     .subset2("AWOTE")
 }

@@ -48,6 +48,7 @@ fy2date <- fy::fy2date
 date2fy <- function(...) as.character(fy::date2fy(...))
 qtr2fy <- function(...) as.character(fy::qtr2fy(...))
 
+
 max_fy2yr <- function(x) fy2yr(max(x))
 min_fy2yr <- function(x) fy2yr(min(x))
 
