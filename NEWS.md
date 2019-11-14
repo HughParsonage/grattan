@@ -16,6 +16,11 @@
   #> Error: `x = "foo"` was not a valid financial year.
   ```
 
+### Data
+
+* Update wage and labour force data
+
+
 
 
 
