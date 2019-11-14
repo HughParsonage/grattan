@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../../index.html">grattan</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.0.0</span>
       </span>
     </div>
 
@@ -101,9 +101,9 @@
       <h1>Budget 2018 modelling</h1>
                         <h4 class="author">Hugh Parsonage</h4>
             
-            <h4 class="date">2019-03-21</h4>
+            <h4 class="date">2019-11-15</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/HughParsonage/grattan/blob/master/vignettes/long-vignettes/budget-2018.Rmd"><code>vignettes/long-vignettes/budget-2018.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/HughParsonage/grattan/blob/master/vignettes/long-vignettes/vignettes/long-vignettes/budget-2018.Rmd"><code>vignettes/long-vignettes/vignettes/long-vignettes/budget-2018.Rmd</code></a></small>
       <div class="hidden name"><code>budget-2018.Rmd</code></div>
 
     </div>
@@ -146,31 +146,15 @@
 <p>First load the packages we’ll need.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fst)</a>
 <a class="sourceLine" id="cb4-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fastmatch)</a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="co">#&gt; Attaching package: 'fastmatch'</span></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt; The following object is masked from 'package:hutils':</span></a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="co">#&gt;     coalesce</span></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(scales)</a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(scales)</a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(magrittr)</a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggrepel)</a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(viridis)</a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(knitr)</a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(hutils)</a>
 <a class="sourceLine" id="cb4-10" title="10"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(magrittr)</a>
-<a class="sourceLine" id="cb4-11" title="11"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggrepel)</a>
-<a class="sourceLine" id="cb4-12" title="12"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(viridis)</a>
-<a class="sourceLine" id="cb4-13" title="13"><span class="co">#&gt; Loading required package: viridisLite</span></a>
-<a class="sourceLine" id="cb4-14" title="14"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-15" title="15"><span class="co">#&gt; Attaching package: 'viridis'</span></a>
-<a class="sourceLine" id="cb4-16" title="16"><span class="co">#&gt; The following object is masked from 'package:scales':</span></a>
-<a class="sourceLine" id="cb4-17" title="17"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-18" title="18"><span class="co">#&gt;     viridis_pal</span></a>
-<a class="sourceLine" id="cb4-19" title="19"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(knitr)</a>
-<a class="sourceLine" id="cb4-20" title="20"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(hutils)</a>
-<a class="sourceLine" id="cb4-21" title="21"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(magrittr)</a>
-<a class="sourceLine" id="cb4-22" title="22"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(data.table)</a>
-<a class="sourceLine" id="cb4-23" title="23"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-24" title="24"><span class="co">#&gt; Attaching package: 'data.table'</span></a>
-<a class="sourceLine" id="cb4-25" title="25"><span class="co">#&gt; The following object is masked _by_ '.GlobalEnv':</span></a>
-<a class="sourceLine" id="cb4-26" title="26"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-27" title="27"><span class="co">#&gt;     fwrite</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-11" title="11"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(data.table)</a></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ns-load">requireNamespace</a></span>(<span class="st">"grattanCharts"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>) <span class="op">&amp;&amp;</span></a>
 <a class="sourceLine" id="cb5-2" title="2"><span class="st">    </span><span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ns-load">requireNamespace</a></span>(<span class="st">"hutilscpp"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {</a>
 <a class="sourceLine" id="cb5-3" title="3">  remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"hughparsonage/hutilscpp"</span>, </a>
@@ -183,16 +167,9 @@
 <a class="sourceLine" id="cb5-10" title="10">                          <span class="dt">upgrade =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb5-11" title="11">}</a>
 <a class="sourceLine" id="cb5-12" title="12"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(grattanCharts)</a>
-<a class="sourceLine" id="cb5-13" title="13"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-14" title="14"><span class="co">#&gt; Attaching package: 'grattanCharts'</span></a>
-<a class="sourceLine" id="cb5-15" title="15"><span class="co">#&gt; The following object is masked _by_ '.GlobalEnv':</span></a>
-<a class="sourceLine" id="cb5-16" title="16"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-17" title="17"><span class="co">#&gt;     grattan_percent</span></a>
-<a class="sourceLine" id="cb5-18" title="18"><span class="co">#&gt; The following object is masked from 'package:datasets':</span></a>
-<a class="sourceLine" id="cb5-19" title="19"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-20" title="20"><span class="co">#&gt;     Orange</span></a>
-<a class="sourceLine" id="cb5-21" title="21">templib &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempfile</a></span>()</a>
-<a class="sourceLine" id="cb5-22" title="22">hutils<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/hutils/topics/provide.dir">provide.dir</a></span>(templib)</a></code></pre></div>
+<a class="sourceLine" id="cb5-13" title="13">templib &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempfile</a></span>()</a>
+<a class="sourceLine" id="cb5-14" title="14">hutils<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/hutils/topics/provide.dir">provide.dir</a></span>(templib)</a>
+<a class="sourceLine" id="cb5-15" title="15"><span class="co">#&gt; [1] "C:\\Users\\hughp\\AppData\\Local\\Temp\\Rtmpe656JH\\file41b466fb3788"</span></a></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(grattan)</a></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">ntile &lt;-<span class="st"> </span><span class="cf">function</span>(x, n) {</a>
 <a class="sourceLine" id="cb7-2" title="2">  <span class="cf">if</span> (<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ns-load">requireNamespace</a></span>(<span class="st">"dplyr"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {</a>
@@ -339,9 +316,9 @@
 <a class="sourceLine" id="cb21-2" title="2">  <span class="cf">if</span> (fy_year <span class="op">&lt;</span><span class="st"> "2022-23"</span>) {</a>
 <a class="sourceLine" id="cb21-3" title="3">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">18200</span>, <span class="fl">37e3</span>, <span class="fl">90e3</span>, <span class="fl">180e3</span>)</a>
 <a class="sourceLine" id="cb21-4" title="4">  } <span class="cf">else</span> <span class="cf">if</span> (fy_year <span class="op">&lt;</span><span class="st"> "2024-25"</span>) {</a>
-<a class="sourceLine" id="cb21-5" title="5">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">18200</span>, <span class="fl">41e3</span>, <span class="fl">120e3</span>, <span class="fl">180e3</span>)</a>
+<a class="sourceLine" id="cb21-5" title="5">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">18200</span>, <span class="fl">45e3</span>, <span class="fl">120e3</span>, <span class="fl">180e3</span>)</a>
 <a class="sourceLine" id="cb21-6" title="6">  } <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb21-7" title="7">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">18200</span>, <span class="fl">41e3</span>, <span class="fl">200e3</span>)</a>
+<a class="sourceLine" id="cb21-7" title="7">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">18200</span>, <span class="fl">45e3</span>, <span class="fl">200e3</span>)</a>
 <a class="sourceLine" id="cb21-8" title="8">  }</a>
 <a class="sourceLine" id="cb21-9" title="9">}</a></code></pre></div>
 <p>These functions increase the thresholds for the Medicare levy for low-income earners. Technically such measures have to be approved each financial year, but are as a matter of a routine.</p>
@@ -384,7 +361,17 @@
 <a class="sourceLine" id="cb22-37" title="37">          <span class="dt">lf.series =</span> <span class="cf">if</span> (use.Treasury) lf_forecasts) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb22-38" title="38"><span class="st">    </span><span class="kw">setkey</span>(Taxable_Income)</a>
 <a class="sourceLine" id="cb22-39" title="39">}</a></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">.project_useTreasurys &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, .project_to, <span class="dt">use.Treasury =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">.project_useTreasurys &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, .project_to, <span class="dt">use.Treasury =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="co">#&gt; Registered S3 method overwritten by 'xts':</span></a>
+<a class="sourceLine" id="cb23-3" title="3"><span class="co">#&gt;   method     from</span></a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="co">#&gt;   as.zoo.xts zoo</span></a>
+<a class="sourceLine" id="cb23-5" title="5"><span class="co">#&gt; Registered S3 method overwritten by 'quantmod':</span></a>
+<a class="sourceLine" id="cb23-6" title="6"><span class="co">#&gt;   method            from</span></a>
+<a class="sourceLine" id="cb23-7" title="7"><span class="co">#&gt;   as.zoo.data.frame zoo</span></a>
+<a class="sourceLine" id="cb23-8" title="8"><span class="co">#&gt; Registered S3 methods overwritten by 'forecast':</span></a>
+<a class="sourceLine" id="cb23-9" title="9"><span class="co">#&gt;   method             from    </span></a>
+<a class="sourceLine" id="cb23-10" title="10"><span class="co">#&gt;   fitted.fracdiff    fracdiff</span></a>
+<a class="sourceLine" id="cb23-11" title="11"><span class="co">#&gt;   residuals.fracdiff fracdiff</span></a></code></pre></div>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">.project_useGrattans &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>, .project_to, <span class="dt">use.Treasury =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="co"># &amp;&amp; cache generally because the filename must be known if cache = FALSE</span></a>
 <a class="sourceLine" id="cb25-2" title="2"><span class="cf">if</span> (<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/files">file.exists</a></span>(s2425_Treasury.fst &lt;-<span class="st"> "budget-2018_cache/s2425_Treasury.fst"</span>) <span class="op">&amp;&amp;</span><span class="st"> </span>cache) {</a>
@@ -449,11 +436,11 @@
 <a class="sourceLine" id="cb32-21" title="21">        <span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">is.character</a></span>(wage.r) <span class="op">||</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(wage.r) <span class="op">!=</span><span class="st"> </span><span class="dv">1</span>) {</a>
 <a class="sourceLine" id="cb32-22" title="22">          <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/stop">stop</a></span>(<span class="st">"`wage.r` must be a string."</span>)</a>
 <a class="sourceLine" id="cb32-23" title="23">        } </a>
-<a class="sourceLine" id="cb32-24" title="24">        <span class="cf">switch</span> (wage.r, </a>
-<a class="sourceLine" id="cb32-25" title="25">                <span class="st">"2.75%"</span> =<span class="st"> </span>{</a>
-<a class="sourceLine" id="cb32-26" title="26">                  s1920 &lt;-<span class="st"> </span>.project_useGrattans2<span class="fl">.75</span>[[h]]</a>
-<a class="sourceLine" id="cb32-27" title="27">                }, </a>
-<a class="sourceLine" id="cb32-28" title="28">                <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/stop">stop</a></span>(<span class="st">"`wage.r = "</span>, wage.r, <span class="st">"` not supported."</span>))</a>
+<a class="sourceLine" id="cb32-24" title="24">        <span class="cf">switch</span>(wage.r, </a>
+<a class="sourceLine" id="cb32-25" title="25">               <span class="st">"2.75%"</span> =<span class="st"> </span>{</a>
+<a class="sourceLine" id="cb32-26" title="26">                 s1920 &lt;-<span class="st"> </span>.project_useGrattans2<span class="fl">.75</span>[[h]]</a>
+<a class="sourceLine" id="cb32-27" title="27">               }, </a>
+<a class="sourceLine" id="cb32-28" title="28">               <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/stop">stop</a></span>(<span class="st">"`wage.r = "</span>, wage.r, <span class="st">"` not supported."</span>))</a>
 <a class="sourceLine" id="cb32-29" title="29">      }</a>
 <a class="sourceLine" id="cb32-30" title="30">    } <span class="cf">else</span> {</a>
 <a class="sourceLine" id="cb32-31" title="31">      <span class="cf">if</span> (level <span class="op">==</span><span class="st"> </span><span class="dv">20</span>) {</a>
@@ -641,39 +628,39 @@
 <td align="right">0.0</td>
 <td align="right">-0.1</td>
 <td align="right">-0.1</td>
+<td align="right">-0.1</td>
 <td align="right">-0.2</td>
 <td align="right">-0.2</td>
 <td align="right">-0.3</td>
 <td align="right">-0.3</td>
 <td align="right">-0.3</td>
-<td align="right">-0.4</td>
 <td align="right">-0.4</td>
 </tr>
 <tr class="even">
 <td align="left">Baseline_brackets_cpi</td>
-<td align="right">-2.3</td>
-<td align="right">-4.4</td>
-<td align="right">-6.6</td>
-<td align="right">-9.0</td>
-<td align="right">-11.5</td>
-<td align="right">-14.1</td>
-<td align="right">-16.9</td>
-<td align="right">-19.8</td>
-<td align="right">-22.9</td>
-<td align="right">-26.1</td>
+<td align="right">-1.7</td>
+<td align="right">-3.5</td>
+<td align="right">-5.7</td>
+<td align="right">-7.9</td>
+<td align="right">-10.3</td>
+<td align="right">-12.8</td>
+<td align="right">-15.5</td>
+<td align="right">-18.3</td>
+<td align="right">-21.2</td>
+<td align="right">-24.3</td>
 </tr>
 <tr class="odd">
 <td align="left">Budget2018_just_rates</td>
 <td align="right">-0.4</td>
 <td align="right">-0.5</td>
+<td align="right">-0.5</td>
 <td align="right">-0.6</td>
-<td align="right">-0.6</td>
-<td align="right">-9.5</td>
-<td align="right">-10.0</td>
-<td align="right">-17.0</td>
-<td align="right">-18.1</td>
-<td align="right">-19.3</td>
-<td align="right">-20.5</td>
+<td align="right">-14.0</td>
+<td align="right">-14.6</td>
+<td align="right">-21.4</td>
+<td align="right">-22.6</td>
+<td align="right">-23.8</td>
+<td align="right">-25.2</td>
 </tr>
 <tr class="even">
 <td align="left">Budget2018_lamington_et_LITO</td>
@@ -683,7 +670,7 @@
 <td align="right">-4.0</td>
 <td align="right">-0.7</td>
 <td align="right">-0.7</td>
-<td align="right">-0.8</td>
+<td align="right">-0.7</td>
 <td align="right">-0.8</td>
 <td align="right">-0.8</td>
 <td align="right">-0.8</td>
@@ -692,40 +679,40 @@
 <td align="left">Budget2018</td>
 <td align="right">-4.1</td>
 <td align="right">-4.2</td>
+<td align="right">-4.3</td>
 <td align="right">-4.4</td>
-<td align="right">-4.5</td>
-<td align="right">-10.0</td>
-<td align="right">-10.5</td>
-<td align="right">-17.4</td>
-<td align="right">-18.6</td>
-<td align="right">-19.7</td>
-<td align="right">-21.0</td>
+<td align="right">-14.5</td>
+<td align="right">-15.1</td>
+<td align="right">-21.8</td>
+<td align="right">-23.0</td>
+<td align="right">-24.3</td>
+<td align="right">-25.6</td>
 </tr>
 <tr class="even">
 <td align="left">Budget2018_Step1and2</td>
 <td align="right">-4.1</td>
 <td align="right">-4.2</td>
+<td align="right">-4.3</td>
 <td align="right">-4.4</td>
-<td align="right">-4.5</td>
-<td align="right">-10.0</td>
-<td align="right">-10.5</td>
-<td align="right">-11.0</td>
-<td align="right">-11.5</td>
-<td align="right">-12.1</td>
-<td align="right">-12.6</td>
+<td align="right">-14.5</td>
+<td align="right">-15.1</td>
+<td align="right">-15.8</td>
+<td align="right">-16.4</td>
+<td align="right">-17.1</td>
+<td align="right">-17.7</td>
 </tr>
 <tr class="odd">
 <td align="left">ALP2018</td>
-<td align="right">-6.9</td>
+<td align="right">-6.8</td>
 <td align="right">-7.0</td>
 <td align="right">-7.2</td>
 <td align="right">-7.3</td>
-<td align="right">-16.3</td>
-<td align="right">-16.8</td>
-<td align="right">-17.4</td>
-<td align="right">-18.0</td>
-<td align="right">-18.5</td>
-<td align="right">-19.1</td>
+<td align="right">-20.8</td>
+<td align="right">-21.4</td>
+<td align="right">-22.1</td>
+<td align="right">-22.8</td>
+<td align="right">-23.5</td>
+<td align="right">-24.2</td>
 </tr>
 </tbody>
 </table>
@@ -758,35 +745,35 @@
 <td align="right">-0.2</td>
 <td align="right">-0.3</td>
 <td align="right">-0.3</td>
+<td align="right">-0.3</td>
 <td align="right">-0.4</td>
 <td align="right">-0.4</td>
-<td align="right">-0.5</td>
 </tr>
 <tr class="even">
 <td align="left">Baseline_brackets_cpi</td>
-<td align="right">-2.3</td>
-<td align="right">-4.4</td>
-<td align="right">-6.6</td>
-<td align="right">-9.0</td>
-<td align="right">-11.5</td>
-<td align="right">-14.0</td>
-<td align="right">-16.8</td>
-<td align="right">-19.6</td>
-<td align="right">-22.6</td>
-<td align="right">-25.7</td>
+<td align="right">-1.7</td>
+<td align="right">-3.5</td>
+<td align="right">-5.6</td>
+<td align="right">-7.9</td>
+<td align="right">-10.2</td>
+<td align="right">-12.7</td>
+<td align="right">-15.2</td>
+<td align="right">-17.9</td>
+<td align="right">-20.7</td>
+<td align="right">-23.6</td>
 </tr>
 <tr class="odd">
 <td align="left">Budget2018_just_rates</td>
 <td align="right">-0.4</td>
 <td align="right">-0.5</td>
+<td align="right">-0.5</td>
 <td align="right">-0.6</td>
-<td align="right">-0.6</td>
-<td align="right">-9.3</td>
-<td align="right">-9.7</td>
-<td align="right">-15.8</td>
-<td align="right">-16.7</td>
-<td align="right">-17.5</td>
-<td align="right">-18.4</td>
+<td align="right">-13.7</td>
+<td align="right">-14.3</td>
+<td align="right">-20.0</td>
+<td align="right">-20.9</td>
+<td align="right">-21.9</td>
+<td align="right">-22.8</td>
 </tr>
 <tr class="even">
 <td align="left">Budget2018_lamington_et_LITO</td>
@@ -794,38 +781,38 @@
 <td align="right">-3.9</td>
 <td align="right">-4.0</td>
 <td align="right">-4.1</td>
+<td align="right">-0.7</td>
 <td align="right">-0.8</td>
 <td align="right">-0.8</td>
 <td align="right">-0.9</td>
 <td align="right">-0.9</td>
-<td align="right">-1.0</td>
 <td align="right">-1.0</td>
 </tr>
 <tr class="odd">
 <td align="left">Budget2018</td>
 <td align="right">-4.1</td>
-<td align="right">-4.3</td>
+<td align="right">-4.2</td>
 <td align="right">-4.4</td>
-<td align="right">-4.6</td>
-<td align="right">-9.8</td>
-<td align="right">-10.3</td>
-<td align="right">-16.4</td>
-<td align="right">-17.2</td>
-<td align="right">-18.1</td>
-<td align="right">-18.9</td>
+<td align="right">-4.5</td>
+<td align="right">-14.3</td>
+<td align="right">-14.8</td>
+<td align="right">-20.6</td>
+<td align="right">-21.5</td>
+<td align="right">-22.4</td>
+<td align="right">-23.3</td>
 </tr>
 <tr class="even">
 <td align="left">Budget2018_Step1and2</td>
 <td align="right">-4.1</td>
-<td align="right">-4.3</td>
+<td align="right">-4.2</td>
 <td align="right">-4.4</td>
-<td align="right">-4.6</td>
-<td align="right">-9.8</td>
-<td align="right">-10.3</td>
-<td align="right">-10.7</td>
-<td align="right">-11.2</td>
-<td align="right">-11.7</td>
-<td align="right">-12.1</td>
+<td align="right">-4.5</td>
+<td align="right">-14.3</td>
+<td align="right">-14.8</td>
+<td align="right">-15.4</td>
+<td align="right">-15.9</td>
+<td align="right">-16.5</td>
+<td align="right">-17.1</td>
 </tr>
 <tr class="odd">
 <td align="left">ALP2018</td>
@@ -833,12 +820,12 @@
 <td align="right">-7.1</td>
 <td align="right">-7.3</td>
 <td align="right">-7.5</td>
-<td align="right">-16.3</td>
-<td align="right">-16.9</td>
-<td align="right">-17.5</td>
-<td align="right">-18.0</td>
-<td align="right">-18.6</td>
-<td align="right">-19.2</td>
+<td align="right">-20.7</td>
+<td align="right">-21.4</td>
+<td align="right">-22.1</td>
+<td align="right">-22.8</td>
+<td align="right">-23.5</td>
+<td align="right">-24.2</td>
 </tr>
 </tbody>
 </table>
@@ -866,37 +853,37 @@
 <td align="right">-0.1</td>
 <td align="right">-0.2</td>
 <td align="right">-0.2</td>
+<td align="right">-0.2</td>
 <td align="right">-0.3</td>
 <td align="right">-0.3</td>
-<td align="right">-0.4</td>
 <td align="right">-0.4</td>
 <td align="right">-0.4</td>
 </tr>
 <tr class="even">
 <td align="left">Baseline_brackets_cpi</td>
-<td align="right">-2.3</td>
-<td align="right">-4.4</td>
-<td align="right">-6.7</td>
-<td align="right">-9.1</td>
-<td align="right">-11.7</td>
-<td align="right">-14.4</td>
-<td align="right">-17.3</td>
-<td align="right">-20.3</td>
-<td align="right">-23.6</td>
-<td align="right">-26.9</td>
+<td align="right">-1.7</td>
+<td align="right">-3.5</td>
+<td align="right">-5.7</td>
+<td align="right">-8.0</td>
+<td align="right">-10.4</td>
+<td align="right">-13.0</td>
+<td align="right">-15.7</td>
+<td align="right">-18.5</td>
+<td align="right">-21.5</td>
+<td align="right">-24.7</td>
 </tr>
 <tr class="odd">
 <td align="left">Budget2018_just_rates</td>
 <td align="right">-0.4</td>
 <td align="right">-0.5</td>
+<td align="right">-0.5</td>
 <td align="right">-0.6</td>
-<td align="right">-0.6</td>
-<td align="right">-9.6</td>
-<td align="right">-10.1</td>
-<td align="right">-16.9</td>
-<td align="right">-18.0</td>
-<td align="right">-19.2</td>
-<td align="right">-20.4</td>
+<td align="right">-14.0</td>
+<td align="right">-14.7</td>
+<td align="right">-21.0</td>
+<td align="right">-22.2</td>
+<td align="right">-23.4</td>
+<td align="right">-24.7</td>
 </tr>
 <tr class="even">
 <td align="left">Budget2018_lamington_et_LITO</td>
@@ -904,51 +891,51 @@
 <td align="right">-3.9</td>
 <td align="right">-4.0</td>
 <td align="right">-4.1</td>
+<td align="right">-0.7</td>
 <td align="right">-0.8</td>
 <td align="right">-0.8</td>
 <td align="right">-0.8</td>
-<td align="right">-0.9</td>
 <td align="right">-0.9</td>
 <td align="right">-0.9</td>
 </tr>
 <tr class="odd">
 <td align="left">Budget2018</td>
 <td align="right">-4.1</td>
-<td align="right">-4.3</td>
+<td align="right">-4.2</td>
 <td align="right">-4.4</td>
-<td align="right">-4.6</td>
-<td align="right">-10.1</td>
-<td align="right">-10.6</td>
-<td align="right">-17.4</td>
-<td align="right">-18.5</td>
-<td align="right">-19.7</td>
-<td align="right">-20.9</td>
+<td align="right">-4.5</td>
+<td align="right">-14.5</td>
+<td align="right">-15.2</td>
+<td align="right">-21.6</td>
+<td align="right">-22.7</td>
+<td align="right">-23.9</td>
+<td align="right">-25.2</td>
 </tr>
 <tr class="even">
 <td align="left">Budget2018_Step1and2</td>
 <td align="right">-4.1</td>
-<td align="right">-4.3</td>
+<td align="right">-4.2</td>
 <td align="right">-4.4</td>
-<td align="right">-4.6</td>
-<td align="right">-10.1</td>
-<td align="right">-10.6</td>
-<td align="right">-11.2</td>
-<td align="right">-11.7</td>
-<td align="right">-12.3</td>
-<td align="right">-12.9</td>
+<td align="right">-4.5</td>
+<td align="right">-14.5</td>
+<td align="right">-15.2</td>
+<td align="right">-15.9</td>
+<td align="right">-16.6</td>
+<td align="right">-17.3</td>
+<td align="right">-18.0</td>
 </tr>
 <tr class="odd">
 <td align="left">ALP2018</td>
-<td align="right">-6.9</td>
+<td align="right">-6.8</td>
 <td align="right">-7.1</td>
 <td align="right">-7.3</td>
 <td align="right">-7.5</td>
-<td align="right">-16.6</td>
-<td align="right">-17.2</td>
-<td align="right">-17.9</td>
-<td align="right">-18.6</td>
-<td align="right">-19.2</td>
-<td align="right">-19.9</td>
+<td align="right">-21.0</td>
+<td align="right">-21.8</td>
+<td align="right">-22.6</td>
+<td align="right">-23.4</td>
+<td align="right">-24.2</td>
+<td align="right">-25.0</td>
 </tr>
 </tbody>
 </table>
@@ -979,34 +966,34 @@
 <td align="right">-0.3</td>
 <td align="right">-0.3</td>
 <td align="right">-0.4</td>
-<td align="right">-0.5</td>
+<td align="right">-0.4</td>
 <td align="right">-0.5</td>
 </tr>
 <tr class="even">
 <td align="left">Baseline_brackets_cpi</td>
-<td align="right">-2.3</td>
-<td align="right">-4.4</td>
-<td align="right">-6.6</td>
-<td align="right">-8.8</td>
-<td align="right">-11.2</td>
-<td align="right">-13.7</td>
-<td align="right">-16.2</td>
-<td align="right">-18.8</td>
-<td align="right">-21.5</td>
-<td align="right">-24.3</td>
+<td align="right">-1.7</td>
+<td align="right">-3.5</td>
+<td align="right">-5.6</td>
+<td align="right">-7.8</td>
+<td align="right">-10.1</td>
+<td align="right">-12.4</td>
+<td align="right">-14.8</td>
+<td align="right">-17.3</td>
+<td align="right">-19.9</td>
+<td align="right">-22.5</td>
 </tr>
 <tr class="odd">
 <td align="left">Budget2018_just_rates</td>
 <td align="right">-0.4</td>
 <td align="right">-0.5</td>
+<td align="right">-0.5</td>
 <td align="right">-0.6</td>
-<td align="right">-0.6</td>
-<td align="right">-9.0</td>
-<td align="right">-9.3</td>
-<td align="right">-14.8</td>
-<td align="right">-15.3</td>
-<td align="right">-15.9</td>
-<td align="right">-16.4</td>
+<td align="right">-13.4</td>
+<td align="right">-13.9</td>
+<td align="right">-19.1</td>
+<td align="right">-19.7</td>
+<td align="right">-20.3</td>
+<td align="right">-20.8</td>
 </tr>
 <tr class="even">
 <td align="left">Budget2018_lamington_et_LITO</td>
@@ -1014,38 +1001,38 @@
 <td align="right">-3.9</td>
 <td align="right">-4.0</td>
 <td align="right">-4.1</td>
+<td align="right">-0.7</td>
 <td align="right">-0.8</td>
-<td align="right">-0.8</td>
+<td align="right">-0.9</td>
 <td align="right">-0.9</td>
 <td align="right">-1.0</td>
 <td align="right">-1.0</td>
-<td align="right">-1.1</td>
 </tr>
 <tr class="odd">
 <td align="left">Budget2018</td>
 <td align="right">-4.1</td>
-<td align="right">-4.3</td>
+<td align="right">-4.2</td>
 <td align="right">-4.4</td>
-<td align="right">-4.6</td>
-<td align="right">-9.5</td>
-<td align="right">-9.9</td>
-<td align="right">-15.3</td>
-<td align="right">-15.9</td>
-<td align="right">-16.5</td>
-<td align="right">-17.0</td>
+<td align="right">-4.5</td>
+<td align="right">-14.0</td>
+<td align="right">-14.4</td>
+<td align="right">-19.6</td>
+<td align="right">-20.2</td>
+<td align="right">-20.8</td>
+<td align="right">-21.4</td>
 </tr>
 <tr class="even">
 <td align="left">Budget2018_Step1and2</td>
 <td align="right">-4.1</td>
-<td align="right">-4.3</td>
+<td align="right">-4.2</td>
 <td align="right">-4.4</td>
-<td align="right">-4.6</td>
-<td align="right">-9.5</td>
-<td align="right">-9.9</td>
-<td align="right">-10.2</td>
-<td align="right">-10.6</td>
-<td align="right">-10.9</td>
-<td align="right">-11.3</td>
+<td align="right">-4.5</td>
+<td align="right">-14.0</td>
+<td align="right">-14.4</td>
+<td align="right">-14.9</td>
+<td align="right">-15.3</td>
+<td align="right">-15.7</td>
+<td align="right">-16.1</td>
 </tr>
 <tr class="odd">
 <td align="left">ALP2018</td>
@@ -1053,40 +1040,41 @@
 <td align="right">-7.1</td>
 <td align="right">-7.3</td>
 <td align="right">-7.5</td>
-<td align="right">-16.0</td>
-<td align="right">-16.5</td>
-<td align="right">-17.0</td>
-<td align="right">-17.5</td>
-<td align="right">-17.9</td>
-<td align="right">-18.4</td>
+<td align="right">-20.4</td>
+<td align="right">-21.0</td>
+<td align="right">-21.6</td>
+<td align="right">-22.1</td>
+<td align="right">-22.7</td>
+<td align="right">-23.2</td>
 </tr>
 </tbody>
 </table>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1">avg_individual_impact_by_Quintile_fy &lt;-<span class="st"> </span></a>
 <a class="sourceLine" id="cb46-2" title="2"><span class="st">  </span>bound_models <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb46-3" title="3"><span class="st">  </span>.[, Quintile <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(<span class="kw">.ntile</span>(Taxable_Income, <span class="dv">5</span>), <span class="dt">levels =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb46-3" title="3"><span class="st">  </span>.[, Quintile <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">.ntile</span>(Taxable_Income, <span class="dv">5</span>),</a>
 <a class="sourceLine" id="cb46-4" title="4">    keyby =<span class="st"> </span>.(fy_year, id)] <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb46-5" title="5"><span class="st">  </span>.[, .(<span class="dt">avg_delta =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(delta),</a>
-<a class="sourceLine" id="cb46-6" title="6">        <span class="dt">max_income =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">max</a></span>(Taxable_Income),</a>
-<a class="sourceLine" id="cb46-7" title="7">        <span class="dt">min_income =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">min</a></span>(Taxable_Income),</a>
-<a class="sourceLine" id="cb46-8" title="8">        <span class="dt">avg_income =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(Taxable_Income <span class="op">+</span><span class="st"> </span><span class="dv">0</span>)),</a>
-<a class="sourceLine" id="cb46-9" title="9">    keyby =<span class="st"> </span>.(id, fy_year, Quintile)] <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb46-10" title="10"><span class="st">  </span>.[, <span class="st">"Financial year ending"</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="../../reference/is.fy.html">fy2yr</a></span>(fy_year)] <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb46-11" title="11"><span class="st">  </span>.[, avg_delta <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">round</a></span>(avg_delta, <span class="dv">2</span>)] <span class="op">%T&gt;%</span></a>
-<a class="sourceLine" id="cb46-12" title="12"><span class="st">  </span><span class="kw">fwrite</span>(<span class="st">"avg_individual_impact_by_Quintile_fy.csv"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb46-13" title="13"><span class="st">  </span>.[] </a>
-<a class="sourceLine" id="cb46-14" title="14"></a>
-<a class="sourceLine" id="cb46-15" title="15">avg_individual_impact_by_Quintile_fy <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb46-16" title="16"><span class="st">  </span><span class="kw">grplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">`</span><span class="dt">Financial year ending</span><span class="st">`</span>,</a>
-<a class="sourceLine" id="cb46-17" title="17">             <span class="dt">y =</span> avg_delta,</a>
-<a class="sourceLine" id="cb46-18" title="18">             <span class="dt">fill =</span> Quintile),</a>
-<a class="sourceLine" id="cb46-19" title="19">         <span class="dt">reverse =</span> <span class="ot">TRUE</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb46-20" title="20"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">"dodge"</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb46-21" title="21"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">"Average individual impact"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb46-22" title="22"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> grattan_dollar) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb46-23" title="23"><span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">FALSE</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb46-24" title="24"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.line.x =</span> <span class="kw">element_line</span>(<span class="dt">size =</span> <span class="fl">0.5</span>),</a>
-<a class="sourceLine" id="cb46-25" title="25">        <span class="dt">legend.position =</span> <span class="st">"right"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb46-5" title="5"><span class="st">   </span>.[, Quintile <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(Quintile, <span class="dt">levels =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>)] <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb46-6" title="6"><span class="st">  </span>.[, .(<span class="dt">avg_delta =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(delta),</a>
+<a class="sourceLine" id="cb46-7" title="7">        <span class="dt">max_income =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">max</a></span>(Taxable_Income),</a>
+<a class="sourceLine" id="cb46-8" title="8">        <span class="dt">min_income =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">min</a></span>(Taxable_Income),</a>
+<a class="sourceLine" id="cb46-9" title="9">        <span class="dt">avg_income =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(Taxable_Income <span class="op">+</span><span class="st"> </span><span class="dv">0</span>)),</a>
+<a class="sourceLine" id="cb46-10" title="10">    keyby =<span class="st"> </span>.(id, fy_year, Quintile)] <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb46-11" title="11"><span class="st">  </span>.[, <span class="st">"Financial year ending"</span> <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="../../reference/is.fy.html">fy2yr</a></span>(fy_year)] <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb46-12" title="12"><span class="st">  </span>.[, avg_delta <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">round</a></span>(avg_delta, <span class="dv">2</span>)] <span class="op">%T&gt;%</span></a>
+<a class="sourceLine" id="cb46-13" title="13"><span class="st">  </span><span class="kw">fwrite</span>(<span class="st">"avg_individual_impact_by_Quintile_fy.csv"</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb46-14" title="14"><span class="st">  </span>.[] </a>
+<a class="sourceLine" id="cb46-15" title="15"></a>
+<a class="sourceLine" id="cb46-16" title="16">avg_individual_impact_by_Quintile_fy <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb46-17" title="17"><span class="st">  </span><span class="kw">grplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">`</span><span class="dt">Financial year ending</span><span class="st">`</span>,</a>
+<a class="sourceLine" id="cb46-18" title="18">             <span class="dt">y =</span> avg_delta,</a>
+<a class="sourceLine" id="cb46-19" title="19">             <span class="dt">fill =</span> Quintile),</a>
+<a class="sourceLine" id="cb46-20" title="20">         <span class="dt">reverse =</span> <span class="ot">TRUE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb46-21" title="21"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">"dodge"</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb46-22" title="22"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">"Average individual impact"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb46-23" title="23"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> grattan_dollar) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb46-24" title="24"><span class="st">  </span><span class="kw">guides</span>(<span class="dt">fill =</span> <span class="kw">guide_legend</span>(<span class="dt">reverse =</span> <span class="ot">FALSE</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb46-25" title="25"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.line.x =</span> <span class="kw">element_line</span>(<span class="dt">size =</span> <span class="fl">0.5</span>),</a>
+<a class="sourceLine" id="cb46-26" title="26">        <span class="dt">legend.position =</span> <span class="st">"right"</span>)</a></code></pre></div>
 <p><img src="Budget2018-atlas/avg_individual_impact_by_Quintile_fy-1.svg" width="864"></p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1">avg_individual_impact_by_Quintile_fy__<span class="fl">2.75</span> &lt;-<span class="st"> </span></a>
 <a class="sourceLine" id="cb47-2" title="2"><span class="st">  </span>bound_models_Grattan2<span class="fl">.75</span> <span class="op">%&gt;%</span></a>
@@ -1333,11 +1321,11 @@
 <a class="sourceLine" id="cb56-3" title="3">  <span class="kw">grattan_dollar</span>(minIncome_by_decile[.(d)][[<span class="st">"minIncome"</span>]])</a>
 <a class="sourceLine" id="cb56-4" title="4">}</a></code></pre></div>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1">texNumD &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">texNum</span>(x, <span class="dt">dollar =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<p>New Grattan Institute analysis highlights that most of the revenue reductions from the Turnbull Government’s full Personal Income Tax Plan are the result of lower taxes on high-income earners. Once the three-stage plan – including removing the 37c bracket – is complete, <strong>$15.1~billion</strong> of the annual <strong>$21~billion cost</strong> of the plan will result from collecting less tax from the top 20% of income earners, who currently have a taxable income of $68,000 or more.</p>
+<p>New Grattan Institute analysis highlights that most of the revenue reductions from the Turnbull Government’s full Personal Income Tax Plan are the result of lower taxes on high-income earners. Once the three-stage plan – including removing the 37c bracket – is complete, <strong>$16.4~billion</strong> of the annual <strong>$25.6~billion cost</strong> of the plan will result from collecting less tax from the top 20% of income earners, who currently have a taxable income of $68,000 or more.</p>
 <p>The PIT plan will do little to unwind bracket creep’s gradual reduction of the progressivity of the tax system. Even with the PIT plan, average tax rates are forecast to be higher for all taxpayers in 2027-28 – except for very high-income earners who are effectively shielded from bracket creep by the plan. A taxpayer who earns $117,000 today (more than 90% of other taxpayers) will pay an average tax rate of NA per cent in 2027-28, unchanged from today. In contrast, average tax rates for middle-income earners will continue to rise. The average tax rate for a taxpayer who earns $27,000-a-year today (more than 30% of other taxpayers) will increase 6 percentage points (from NA per cent to NA per cent ). As a result, the highest-income taxpayers will bear a lower share of the total tax burden.</p>
 <p><strong>Costing and distributional analysis of PIT plan </strong></p>
 <p>The 2018-19 budget shows the annual cost of the PIT Plan until 2022. The Treasurer has indicated the ten-year cost of the plan is $140 billion. Grattan’s analysis shows the annual costs of the plan until 2028. The Grattan costing takes into account all elements of the PIT plan.</p>
-<p>Most of the revenue reductions until 2021-22 are a result of the Low and Middle Income Tax Offset (“the Lamington”). But once the plan is fully implemented in 2024-25, there are much bigger revenue reductions because the top of the 32.5 cent bracket increases first to $120,000 and then to $200,000 (removing the 37c bracket). In 2028, these bracket changes account for <span class="math inline">\(-\)</span>$20.5~billion of the <span class="math inline">\(-\)</span>$21~billion in lower revenue.</p>
+<p>Most of the revenue reductions until 2021-22 are a result of the Low and Middle Income Tax Offset (“the Lamington”). But once the plan is fully implemented in 2024-25, there are much bigger revenue reductions because the top of the 32.5 cent bracket increases first to $120,000 and then to $200,000 (removing the 37c bracket). In 2028, these bracket changes account for <span class="math inline">\(-\)</span>$25.2~billion of the <span class="math inline">\(-\)</span>$25.6~billion in lower revenue.</p>
 <p>Once fully implemented, most of the reduction in revenue under the PIT is retained by the top 20% of income earners, with a taxable income of $87,000 or more. In 2028, the reduction in tax collected from this group will account for <strong>$15 billion</strong> of the $25 billion cost of the plan.</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="co"># Quintile and financial year to tax cut</span></a>
 <a class="sourceLine" id="cb58-2" title="2">Qfy2Cut &lt;-<span class="st"> </span><span class="cf">function</span>(Quintile, fy) {</a>
@@ -1350,7 +1338,7 @@
 <a class="sourceLine" id="cb58-9" title="9">  ans &lt;-<span class="st"> </span><span class="dv">-1</span><span class="op">*</span>avg_individual_impact_by_Quintile_fy[.(<span class="st">"Budget2018"</span>, fy, q), avg_delta]</a>
 <a class="sourceLine" id="cb58-10" title="10">  <span class="kw">grattan_dollar</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">round</a></span>(ans, <span class="dv">-2</span>))</a>
 <a class="sourceLine" id="cb58-11" title="11">}</a></code></pre></div>
-<p>By 2024-25, the income tax cuts are much larger for high-income earners, both in absolute terms and as a proportion of income. Those in the top 20 per cent will get an average tax cut of $4,600 a year, compared to $400 a year for someone in the second income quintile ($9,000 - $19,000).</p>
+<p>By 2024-25, the income tax cuts are much larger for high-income earners, both in absolute terms and as a proportion of income. Those in the top 20 per cent will get an average tax cut of $5,000 a year, compared to $500 a year for someone in the second income quintile ($9,000 - $19,000).</p>
 <p><strong>Impact of the PIT plan on tax system progressivity</strong></p>
 <p>Australia’s progressive tax system ensures that people with higher incomes pay higher average rates of personal income tax. Without changes to tax scales, bracket creep gradually increases average tax rates for all taxpayers. Middle-income earners are affected most in terms of higher average tax rates.</p>
 <p>The government claims the PIT plan protects middle-income Australians from bracket creep. Certainly the plan reduces average tax rates in 2027-28 for all taxpayers compared to what they would be if there were no changes to rates or brackets over that period.</p>
@@ -1362,7 +1350,7 @@
 <a class="sourceLine" id="cb59-6" title="6">            <span class="st">"avg_tax_rate"</span> <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(avg_tax_rates_by_percentile_facet_fy))</a>
 <a class="sourceLine" id="cb59-7" title="7">  avg_tax_rates_by_percentile_facet_fy[.(fy, idd, 50L), avg_tax_rate]</a>
 <a class="sourceLine" id="cb59-8" title="8">}</a></code></pre></div>
-<p>But middle-income earners are not spared from bracket creep under the PIT plan. The average tax rate for a taxpayer at the 50<sup>th</sup> percentile will still increase by 5 percentage points (from 14.6% to 19.1% ) compared to 2017-18. Without further changes, average tax rates will be higher for most taxpayers.</p>
+<p>But middle-income earners are not spared from bracket creep under the PIT plan. The average tax rate for a taxpayer at the 50<sup>th</sup> percentile will still increase by 3 percentage points (from 14.6% to 18.0% ) compared to 2017-18. Without further changes, average tax rates will be higher for most taxpayers.</p>
 <p>The exception is the top 10% of income earners. Average tax rates for those on the highest incomes are virtually unchanged under this plan.</p>
 <p>Once fully implemented, the PIT plan doesn’t change the progressivity of the tax system much. Overall, those on high incomes will pay a similar proportion of total tax revenues with or without the plan. But because of bracket creep, high income earners will be paying a lower proportion than today.</p>
 <p><strong>Table 1: Share of personal income tax paid falls for highest income earners under PIT plan</strong></p>
@@ -1444,56 +1432,56 @@
 <tr class="odd">
 <td align="right">3</td>
 <td align="right">0.004</td>
-<td align="right">0.008</td>
-<td align="right">0.008</td>
+<td align="right">0.007</td>
+<td align="right">0.007</td>
 </tr>
 <tr class="even">
 <td align="right">4</td>
 <td align="right">0.016</td>
-<td align="right">0.023</td>
-<td align="right">0.023</td>
+<td align="right">0.022</td>
+<td align="right">0.022</td>
 </tr>
 <tr class="odd">
 <td align="right">5</td>
 <td align="right">0.034</td>
-<td align="right">0.043</td>
-<td align="right">0.043</td>
+<td align="right">0.044</td>
+<td align="right">0.044</td>
 </tr>
 <tr class="even">
 <td align="right">6</td>
 <td align="right">0.058</td>
-<td align="right">0.063</td>
-<td align="right">0.063</td>
+<td align="right">0.064</td>
+<td align="right">0.064</td>
 </tr>
 <tr class="odd">
 <td align="right">7</td>
-<td align="right">0.085</td>
-<td align="right">0.087</td>
-<td align="right">0.087</td>
+<td align="right">0.086</td>
+<td align="right">0.088</td>
+<td align="right">0.088</td>
 </tr>
 <tr class="even">
 <td align="right">8</td>
 <td align="right">0.121</td>
-<td align="right">0.122</td>
-<td align="right">0.122</td>
+<td align="right">0.124</td>
+<td align="right">0.124</td>
 </tr>
 <tr class="odd">
 <td align="right">9</td>
-<td align="right">0.178</td>
 <td align="right">0.179</td>
-<td align="right">0.179</td>
+<td align="right">0.182</td>
+<td align="right">0.182</td>
 </tr>
 <tr class="even">
 <td align="right">91-99 perc.</td>
 <td align="right">0.329</td>
-<td align="right">0.322</td>
-<td align="right">0.322</td>
+<td align="right">0.319</td>
+<td align="right">0.319</td>
 </tr>
 <tr class="odd">
 <td align="right">1%</td>
-<td align="right">0.175</td>
-<td align="right">0.153</td>
-<td align="right">0.153</td>
+<td align="right">0.173</td>
+<td align="right">0.149</td>
+<td align="right">0.149</td>
 </tr>
 </tbody>
 </table>
@@ -1560,56 +1548,56 @@
 <tr class="odd">
 <td align="right">3</td>
 <td align="right">0.004</td>
-<td align="right">0.007</td>
-<td align="right">0.007</td>
+<td align="right">0.006</td>
+<td align="right">0.006</td>
 </tr>
 <tr class="even">
 <td align="right">4</td>
 <td align="right">0.016</td>
-<td align="right">0.022</td>
 <td align="right">0.021</td>
+<td align="right">0.020</td>
 </tr>
 <tr class="odd">
 <td align="right">5</td>
 <td align="right">0.034</td>
 <td align="right">0.042</td>
-<td align="right">0.041</td>
+<td align="right">0.040</td>
 </tr>
 <tr class="even">
 <td align="right">6</td>
 <td align="right">0.058</td>
-<td align="right">0.062</td>
+<td align="right">0.063</td>
 <td align="right">0.063</td>
 </tr>
 <tr class="odd">
 <td align="right">7</td>
-<td align="right">0.085</td>
 <td align="right">0.086</td>
+<td align="right">0.088</td>
 <td align="right">0.089</td>
 </tr>
 <tr class="even">
 <td align="right">8</td>
 <td align="right">0.121</td>
-<td align="right">0.121</td>
 <td align="right">0.123</td>
+<td align="right">0.124</td>
 </tr>
 <tr class="odd">
 <td align="right">9</td>
-<td align="right">0.178</td>
-<td align="right">0.178</td>
-<td align="right">0.177</td>
+<td align="right">0.179</td>
+<td align="right">0.182</td>
+<td align="right">0.180</td>
 </tr>
 <tr class="even">
 <td align="right">91-99 perc.</td>
 <td align="right">0.329</td>
-<td align="right">0.323</td>
+<td align="right">0.321</td>
 <td align="right">0.315</td>
 </tr>
 <tr class="odd">
 <td align="right">1%</td>
-<td align="right">0.175</td>
-<td align="right">0.158</td>
-<td align="right">0.164</td>
+<td align="right">0.173</td>
+<td align="right">0.154</td>
+<td align="right">0.162</td>
 </tr>
 </tbody>
 </table>
@@ -1649,31 +1637,31 @@
 </tr>
 <tr class="odd">
 <td align="right">3</td>
-<td align="right">0.8%</td>
-<td align="right">0.8%</td>
-<td align="right">0.4%</td>
-<td align="right">0.4%</td>
 <td align="right">0.7%</td>
+<td align="right">0.7%</td>
+<td align="right">0.4%</td>
+<td align="right">0.4%</td>
+<td align="right">0.6%</td>
 </tr>
 <tr class="even">
 <td align="right">4</td>
-<td align="right">2.3%</td>
-<td align="right">2.3%</td>
+<td align="right">2.2%</td>
+<td align="right">2.1%</td>
 <td align="right">1.6%</td>
 <td align="right">1.8%</td>
-<td align="right">2.1%</td>
+<td align="right">2.0%</td>
 </tr>
 <tr class="odd">
 <td align="right">5</td>
-<td align="right">4.3%</td>
-<td align="right">4.3%</td>
-<td align="right">3.4%</td>
-<td align="right">3.7%</td>
+<td align="right">4.4%</td>
 <td align="right">4.2%</td>
+<td align="right">3.4%</td>
+<td align="right">3.5%</td>
+<td align="right">4.0%</td>
 </tr>
 <tr class="even">
 <td align="right">6</td>
-<td align="right">6.3%</td>
+<td align="right">6.4%</td>
 <td align="right">6.4%</td>
 <td align="right">5.8%</td>
 <td align="right">5.9%</td>
@@ -1681,35 +1669,35 @@
 </tr>
 <tr class="odd">
 <td align="right">7</td>
-<td align="right">8.7%</td>
-<td align="right">8.9%</td>
-<td align="right">8.5%</td>
+<td align="right">8.8%</td>
+<td align="right">9.0%</td>
 <td align="right">8.6%</td>
+<td align="right">8.7%</td>
 <td align="right">8.9%</td>
 </tr>
 <tr class="even">
 <td align="right">8</td>
-<td align="right">12.2%</td>
-<td align="right">12.3%</td>
+<td align="right">12.4%</td>
+<td align="right">12.5%</td>
 <td align="right">12.1%</td>
-<td align="right">12.2%</td>
 <td align="right">12.3%</td>
+<td align="right">12.4%</td>
 </tr>
 <tr class="odd">
 <td align="right">9</td>
+<td align="right">18.2%</td>
+<td align="right">18.0%</td>
 <td align="right">17.9%</td>
-<td align="right">17.7%</td>
-<td align="right">17.8%</td>
-<td align="right">17.6%</td>
-<td align="right">17.7%</td>
+<td align="right">18.0%</td>
+<td align="right">18.0%</td>
 </tr>
 <tr class="even">
 <td align="right">10</td>
-<td align="right">47.5%</td>
-<td align="right">47.3%</td>
-<td align="right">50.4%</td>
-<td align="right">49.7%</td>
-<td align="right">47.8%</td>
+<td align="right">46.8%</td>
+<td align="right">47.1%</td>
+<td align="right">50.2%</td>
+<td align="right">49.3%</td>
+<td align="right">47.7%</td>
 </tr>
 </tbody>
 </table>
@@ -1997,8 +1985,8 @@
 <a class="sourceLine" id="cb76-21" title="21">                     <span class="dt">ordinary_tax_rates =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="fl">0.19</span> <span class="op">-</span><span class="st"> </span>r1<span class="op">/</span><span class="dv">200</span>, <span class="fl">0.325</span> <span class="op">-</span><span class="st"> </span>r1<span class="op">/</span><span class="dv">200</span>, <span class="fl">0.37</span>, <span class="fl">0.45</span>), </a>
 <a class="sourceLine" id="cb76-22" title="22">                     <span class="dt">ordinary_tax_thresholds =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">18200</span>, <span class="dv">37000</span>, <span class="dv">90000</span>, <span class="dv">180000</span>))</a>
 <a class="sourceLine" id="cb76-23" title="23">}</a>
-<a class="sourceLine" id="cb76-24" title="24"><span class="co">#&gt; [1] "-\\$377 million"</span></a>
-<a class="sourceLine" id="cb76-25" title="25"><span class="co">#&gt; [1] "-\\$2.7 billion"</span></a>
+<a class="sourceLine" id="cb76-24" title="24"><span class="co">#&gt; [1] "-\\$370 million"</span></a>
+<a class="sourceLine" id="cb76-25" title="25"><span class="co">#&gt; [1] "-\\$2.6 billion"</span></a>
 <a class="sourceLine" id="cb76-26" title="26"></a>
 <a class="sourceLine" id="cb76-27" title="27">alternative <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb76-28" title="28"><span class="st">  </span>.[, new_avg_tax_rate <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="kw">coalesce</span>(new_tax <span class="op">/</span><span class="st"> </span>Taxable_Income, <span class="dv">0</span>)] <span class="op">%&gt;%</span></a>
@@ -2057,7 +2045,7 @@
 <a class="sourceLine" id="cb78-11" title="11"><span class="st">  </span><span class="kw">setorder</span>(fy_year, <span class="op">-</span>Quintile) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb78-12" title="12"><span class="st">  </span><span class="kw">fwrite</span>(<span class="st">"budget2018-total-revenue-vs-fy-by-quintile.csv"</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="kw"><a href="../../reference/revenue_foregone.html">revenue_foregone</a></span>(bound_models[.(<span class="st">"2018-19"</span>, <span class="st">"Baseline_brackets_cpi"</span>)]))</a>
-<a class="sourceLine" id="cb79-2" title="2"><span class="co">#&gt; [1] "-\\$2.3 billion"</span></a></code></pre></div>
+<a class="sourceLine" id="cb79-2" title="2"><span class="co">#&gt; [1] "-\\$1.7 billion"</span></a></code></pre></div>
 <div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1">avg_tax_rate_by_percentile_brackets_cpi &lt;-</a>
 <a class="sourceLine" id="cb80-2" title="2"><span class="st">  </span>bound_models[.(unique_fy_year, <span class="st">"Baseline_brackets_cpi"</span>),</a>
 <a class="sourceLine" id="cb80-3" title="3">               .(fy_year, Taxable_Income, new_tax, Taxable_Income_percentile)] <span class="op">%&gt;%</span></a>
@@ -2189,38 +2177,38 @@
 <tr class="odd">
 <td align="right">5</td>
 <td align="left">$10,000</td>
-<td align="right">0.0430003</td>
-<td align="right">0.0001466</td>
+<td align="right">0.0365077</td>
+<td align="right">0.0001314</td>
 </tr>
 <tr class="even">
 <td align="right">6</td>
-<td align="left">$24,000</td>
-<td align="right">3.4996627</td>
-<td align="right">0.0119281</td>
+<td align="left">$23,000</td>
+<td align="right">3.3556299</td>
+<td align="right">0.0120803</td>
 </tr>
 <tr class="odd">
 <td align="right">7</td>
 <td align="left">$37,000</td>
-<td align="right">10.6540021</td>
-<td align="right">0.0363127</td>
+<td align="right">9.7351830</td>
+<td align="right">0.0350467</td>
 </tr>
 <tr class="even">
 <td align="right">8</td>
 <td align="left">$50,000</td>
-<td align="right">25.4227607</td>
-<td align="right">0.0866499</td>
+<td align="right">24.1862939</td>
+<td align="right">0.0870708</td>
 </tr>
 <tr class="odd">
 <td align="right">9</td>
 <td align="left">$68,000</td>
-<td align="right">48.0981309</td>
-<td align="right">0.1639358</td>
+<td align="right">47.0294443</td>
+<td align="right">0.1693062</td>
 </tr>
 <tr class="even">
 <td align="right">10</td>
 <td align="left">$98,000</td>
-<td align="right">205.6786328</td>
-<td align="right">0.7010269</td>
+<td align="right">193.4344154</td>
+<td align="right">0.6963647</td>
 </tr>
 </tbody>
 </table>
@@ -2265,38 +2253,38 @@
 <tr class="odd">
 <td align="right">5</td>
 <td align="left">$10,000</td>
-<td align="right">652837</td>
-<td align="right">0.0001112</td>
+<td align="right">544637</td>
+<td align="right">0.0000984</td>
 </tr>
 <tr class="even">
 <td align="right">6</td>
-<td align="left">$24,000</td>
-<td align="right">55449867</td>
-<td align="right">0.0094411</td>
+<td align="left">$23,000</td>
+<td align="right">52978483</td>
+<td align="right">0.0095763</td>
 </tr>
 <tr class="odd">
 <td align="right">7</td>
 <td align="left">$37,000</td>
-<td align="right">167634889</td>
-<td align="right">0.0285421</td>
+<td align="right">152241265</td>
+<td align="right">0.0275189</td>
 </tr>
 <tr class="even">
 <td align="right">8</td>
 <td align="left">$50,000</td>
-<td align="right">439068442</td>
-<td align="right">0.0747574</td>
+<td align="right">409203403</td>
+<td align="right">0.0739670</td>
 </tr>
 <tr class="odd">
 <td align="right">9</td>
 <td align="left">$68,000</td>
-<td align="right">856169960</td>
-<td align="right">0.1457746</td>
+<td align="right">845431511</td>
+<td align="right">0.1528190</td>
 </tr>
 <tr class="even">
 <td align="right">10</td>
 <td align="left">$98,000</td>
-<td align="right">4354269934</td>
-<td align="right">0.7413737</td>
+<td align="right">4071840609</td>
+<td align="right">0.7360203</td>
 </tr>
 </tbody>
 </table>
@@ -2351,10 +2339,10 @@
 <a class="sourceLine" id="cb95-7" title="7"><span class="st">  </span>.[]</a>
 <a class="sourceLine" id="cb95-8" title="8"><span class="co">#&gt;        fy2018 Quintile     tot_tax          p</span></a>
 <a class="sourceLine" id="cb95-9" title="9"><span class="co">#&gt; 1: Budget2018        1           0 0.00000000</span></a>
-<a class="sourceLine" id="cb95-10" title="10"><span class="co">#&gt; 2: Budget2018        2   726293116 0.02243683</span></a>
-<a class="sourceLine" id="cb95-11" title="11"><span class="co">#&gt; 3: Budget2018        3  3074742261 0.09498570</span></a>
-<a class="sourceLine" id="cb95-12" title="12"><span class="co">#&gt; 4: Budget2018        4  6675273641 0.20621421</span></a>
-<a class="sourceLine" id="cb95-13" title="13"><span class="co">#&gt; 5: Budget2018        5 21894270580 0.67636325</span></a></code></pre></div>
+<a class="sourceLine" id="cb95-10" title="10"><span class="co">#&gt; 2: Budget2018        2   680173352 0.02180777</span></a>
+<a class="sourceLine" id="cb95-11" title="11"><span class="co">#&gt; 3: Budget2018        3  2951107678 0.09461866</span></a>
+<a class="sourceLine" id="cb95-12" title="12"><span class="co">#&gt; 4: Budget2018        4  6466058131 0.20731530</span></a>
+<a class="sourceLine" id="cb95-13" title="13"><span class="co">#&gt; 5: Budget2018        5 21092149825 0.67625827</span></a></code></pre></div>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" title="1">adult_population_projections &lt;-<span class="st"> </span></a>
 <a class="sourceLine" id="cb96-2" title="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/as.Date">as.Date</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="dv">2001</span><span class="op">:</span><span class="dv">2016</span>, <span class="st">"-06-30"</span>)), aus_pop_qtr_age, <span class="dt">age =</span> <span class="dv">18</span><span class="op">:</span><span class="dv">100</span>, <span class="dt">tbl =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb96-3" title="3"><span class="st">  </span>rbindlist <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -2410,7 +2398,7 @@
 <li>Number of taxpayers:
 <ul>
 <li>Deloitte: 1.46%</li>
-<li>Budget: 2.05%</li>
+<li>Budget: 1.92%</li>
 </ul>
 </li>
 <li>Number of adults:
@@ -2426,14 +2414,14 @@
 <a class="sourceLine" id="cb99-4" title="4">                   <span class="dt">ordinary_tax_thresholds =</span> <span class="kw">ordinary_tax_thresholds</span>(<span class="st">"2024-25"</span>), </a>
 <a class="sourceLine" id="cb99-5" title="5">                   <span class="dt">ordinary_tax_rates =</span> <span class="kw">ordinary_tax_rates</span>(<span class="st">"2024-25"</span>),</a>
 <a class="sourceLine" id="cb99-6" title="6">                   <span class="dt">Budget2018_lito_202223 =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb99-7" title="7">                   <span class="co"># medicare_levy_rate = 0.02,</span></a>
-<a class="sourceLine" id="cb99-8" title="8">                   <span class="co"># medicare_levy_taper = 0.1,</span></a>
-<a class="sourceLine" id="cb99-9" title="9">                   <span class="dt">medicare_levy_lower_threshold =</span> <span class="kw">medicare_levy_lower_threshold</span>(<span class="st">"2024-25"</span>), <span class="co"># 24950</span></a>
-<a class="sourceLine" id="cb99-10" title="10">                   <span class="dt">medicare_levy_upper_threshold =</span> <span class="dv">31188</span>,</a>
-<a class="sourceLine" id="cb99-11" title="11">                   <span class="dt">medicare_levy_lower_sapto_threshold =</span> <span class="kw">medicare_levy_lower_sapto_threshold</span>(<span class="st">"2024-25"</span>), <span class="co"># 39460</span></a>
-<a class="sourceLine" id="cb99-12" title="12">                   <span class="dt">medicare_levy_upper_sapto_threshold =</span> <span class="dv">49325</span>,</a>
-<a class="sourceLine" id="cb99-13" title="13">                   <span class="dt">medicare_levy_lower_family_threshold =</span> <span class="kw">medicare_levy_lower_family_threshold</span>(<span class="st">"2024-25"</span>), <span class="co"># 54930</span></a>
-<a class="sourceLine" id="cb99-14" title="14">                   <span class="dt">medicare_levy_lower_family_sapto_threshold =</span> <span class="kw">medicare_levy_lower_family_sapto_threshold</span>(<span class="st">"2024-25"</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># 54930</span></a>
+<a class="sourceLine" id="cb99-7" title="7">                   <span class="dt">medicare_levy_rate =</span> <span class="fl">0.02</span>,</a>
+<a class="sourceLine" id="cb99-8" title="8">                   <span class="dt">medicare_levy_taper =</span> <span class="fl">0.1</span>,</a>
+<a class="sourceLine" id="cb99-9" title="9">                   <span class="dt">medicare_levy_lower_threshold =</span> <span class="dv">24750</span>, <span class="co"># medicare_levy_lower_threshold("2024-25")</span></a>
+<a class="sourceLine" id="cb99-10" title="10">                   <span class="dt">medicare_levy_upper_threshold =</span> <span class="dv">30938</span>,</a>
+<a class="sourceLine" id="cb99-11" title="11">                   <span class="dt">medicare_levy_lower_sapto_threshold =</span> <span class="kw">medicare_levy_lower_sapto_threshold</span>(<span class="st">"2024-25"</span>),</a>
+<a class="sourceLine" id="cb99-12" title="12">                   <span class="dt">medicare_levy_upper_sapto_threshold =</span> <span class="dv">48912</span>,</a>
+<a class="sourceLine" id="cb99-13" title="13">                   <span class="dt">medicare_levy_lower_family_threshold =</span> <span class="dv">54930</span>, <span class="co"># medicare_levy_lower_family_threshold("2024-25")</span></a>
+<a class="sourceLine" id="cb99-14" title="14">                   <span class="dt">medicare_levy_lower_family_sapto_threshold =</span> <span class="dv">54930</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># medicare_levy_lower_family_sapto_threshold("2024-25")) %&gt;% # 54930</span></a>
 <a class="sourceLine" id="cb99-15" title="15"><span class="st">  </span><span class="co"># Ensure number of taxpayers = 11.6 million</span></a>
 <a class="sourceLine" id="cb99-16" title="16"><span class="st">  </span>.[new_tax <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span>, WEIGHT <span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="fl">11.6e6</span> <span class="op">/</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(new_tax <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)] <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb99-17" title="17"><span class="st">  </span></a>
@@ -2453,9 +2441,9 @@
 <a class="sourceLine" id="cb99-31" title="31"><span class="co">#&gt;    Quintile total_tax_paid          p</span></a>
 <a class="sourceLine" id="cb99-32" title="32"><span class="co">#&gt; 1:        1              0 0.00000000</span></a>
 <a class="sourceLine" id="cb99-33" title="33"><span class="co">#&gt; 2:        2              0 0.00000000</span></a>
-<a class="sourceLine" id="cb99-34" title="34"><span class="co">#&gt; 3:        3     5826065968 0.02272364</span></a>
-<a class="sourceLine" id="cb99-35" title="35"><span class="co">#&gt; 4:        4    47476434522 0.18517427</span></a>
-<a class="sourceLine" id="cb99-36" title="36"><span class="co">#&gt; 5:        5   203085358733 0.79210209</span></a></code></pre></div>
+<a class="sourceLine" id="cb99-34" title="34"><span class="co">#&gt; 3:        3     5804519578 0.02387246</span></a>
+<a class="sourceLine" id="cb99-35" title="35"><span class="co">#&gt; 4:        4    44781188089 0.18417323</span></a>
+<a class="sourceLine" id="cb99-36" title="36"><span class="co">#&gt; 5:        5   192561397000 0.79195431</span></a></code></pre></div>
 <div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" title="1">minIncome_by_Quintile_Deloitte_method201718 &lt;-</a>
 <a class="sourceLine" id="cb100-2" title="2"><span class="st">  </span>avg_tax_by_decile_allpersons201718 <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb100-3" title="3"><span class="st">  </span>.[, .(<span class="dt">minIncome =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Round">round</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">min</a></span>(min_income), <span class="dv">-3</span>)),</a>
@@ -2517,7 +2505,7 @@
 <a class="sourceLine" id="cb103-37" title="37">  } <span class="cf">else</span> {</a>
 <a class="sourceLine" id="cb103-38" title="38">    twice1</a>
 <a class="sourceLine" id="cb103-39" title="39">  }</a></code></pre></div>
-<p>Another tricky claim is that without change those earning over $180,000 will go from paying 32.0 per cent to 43.0 per cent of income tax. But this is sleight of hand: twice as many people could be expected to be earning this income – so of course they will collectively pay a greater share of income tax.</p>
+<p>Another tricky claim is that without change those earning over $180,000 will go from paying 31.1 per cent to 41.3 per cent of income tax. But this is sleight of hand: twice as many people could be expected to be earning this income – so of course they will collectively pay a greater share of income tax.</p>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb104-1" title="1">prop_tax_earnt_by_quintile_<span class="dv">201718</span> &lt;-<span class="st"> </span></a>
 <a class="sourceLine" id="cb104-2" title="2"><span class="st">  </span>s1718[,</a>
 <a class="sourceLine" id="cb104-3" title="3">        .(<span class="dt">tax_earnt_bn =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(Taxable_Income <span class="op">*</span><span class="st"> </span>WEIGHT <span class="op">/</span><span class="st"> </span><span class="fl">1e9</span>)),</a>
@@ -2536,7 +2524,7 @@
 <a class="sourceLine" id="cb104-16" title="16"><span class="st">  </span>.[, .(<span class="dt">tax_paid =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(new_tax))), keyby =<span class="st"> </span>.(<span class="dt">Quintile =</span> <span class="kw">ntile</span>(Taxable_Income, <span class="dv">5</span>))] <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb104-17" title="17"><span class="st">  </span>.[, prop <span class="op">:</span><span class="er">=</span><span class="st"> </span>tax_paid <span class="op">/</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(tax_paid)] <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb104-18" title="18"><span class="st">  </span>.[]</a></code></pre></div>
-<p>The government’s best and most honest argument is that the tax package as a whole won’t materially change the progressivity of the income tax system. Without change, the top 20% of income earners – who earn 50.8 per cent per cent of taxable income – will pay 64.989 per cent of income tax. And under the package they will pay 64.9890 per cent.</p>
+<p>The government’s best and most honest argument is that the tax package as a whole won’t materially change the progressivity of the income tax system. Without change, the top 20% of income earners – who earn 50.7 per cent per cent of taxable income – will pay 65.148 per cent of income tax. And under the package they will pay 65.1482 per cent.</p>
 </div>
 <div id="applying-timings" class="section level2">
 <h2 class="hasAnchor">
@@ -2562,7 +2550,7 @@
 <div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb106-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">session_info</a></span>()</a>
 <a class="sourceLine" id="cb106-2" title="2"><span class="co">#&gt; - Session info ---------------------------------------------------------------------------------------------</span></a>
 <a class="sourceLine" id="cb106-3" title="3"><span class="co">#&gt;  setting  value                       </span></a>
-<a class="sourceLine" id="cb106-4" title="4"><span class="co">#&gt;  version  R version 3.5.2 (2018-12-20)</span></a>
+<a class="sourceLine" id="cb106-4" title="4"><span class="co">#&gt;  version  R version 3.6.1 (2019-07-05)</span></a>
 <a class="sourceLine" id="cb106-5" title="5"><span class="co">#&gt;  os       Windows 10 x64              </span></a>
 <a class="sourceLine" id="cb106-6" title="6"><span class="co">#&gt;  system   x86_64, mingw32             </span></a>
 <a class="sourceLine" id="cb106-7" title="7"><span class="co">#&gt;  ui       RTerm                       </span></a>
@@ -2570,100 +2558,109 @@
 <a class="sourceLine" id="cb106-9" title="9"><span class="co">#&gt;  collate  English_Australia.1252      </span></a>
 <a class="sourceLine" id="cb106-10" title="10"><span class="co">#&gt;  ctype    English_Australia.1252      </span></a>
 <a class="sourceLine" id="cb106-11" title="11"><span class="co">#&gt;  tz       Australia/Sydney            </span></a>
-<a class="sourceLine" id="cb106-12" title="12"><span class="co">#&gt;  date     2019-03-21                  </span></a>
+<a class="sourceLine" id="cb106-12" title="12"><span class="co">#&gt;  date     2019-11-15                  </span></a>
 <a class="sourceLine" id="cb106-13" title="13"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb106-14" title="14"><span class="co">#&gt; - Packages -------------------------------------------------------------------------------------------------</span></a>
-<a class="sourceLine" id="cb106-15" title="15"><span class="co">#&gt;  package        * version    date       lib source                          </span></a>
-<a class="sourceLine" id="cb106-16" title="16"><span class="co">#&gt;  assertthat       0.2.0      2017-04-11 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-17" title="17"><span class="co">#&gt;  backports        1.1.3      2018-12-14 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-18" title="18"><span class="co">#&gt;  callr            3.1.1      2018-12-21 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-19" title="19"><span class="co">#&gt;  cli              1.0.1      2018-09-25 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-20" title="20"><span class="co">#&gt;  codetools        0.2-16     2018-12-24 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-21" title="21"><span class="co">#&gt;  colorspace       1.4-0      2019-01-13 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-22" title="22"><span class="co">#&gt;  commonmark       1.7        2018-12-01 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-23" title="23"><span class="co">#&gt;  crayon           1.3.4      2017-09-16 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-24" title="24"><span class="co">#&gt;  curl             3.3        2019-01-10 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-25" title="25"><span class="co">#&gt;  data.table     * 1.12.0     2019-01-13 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-26" title="26"><span class="co">#&gt;  desc             1.2.0      2018-05-01 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-27" title="27"><span class="co">#&gt;  devtools         2.0.1      2018-10-26 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-28" title="28"><span class="co">#&gt;  digest           0.6.18     2018-10-10 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-29" title="29"><span class="co">#&gt;  dplyr            0.8.0.1    2019-02-15 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-30" title="30"><span class="co">#&gt;  evaluate         0.13       2019-02-12 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-31" title="31"><span class="co">#&gt;  fastmatch      * 1.1-0      2017-01-28 [1] CRAN (R 3.5.0)                  </span></a>
-<a class="sourceLine" id="cb106-32" title="32"><span class="co">#&gt;  forecast         8.5        2019-01-18 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-33" title="33"><span class="co">#&gt;  fracdiff         1.4-2      2012-12-02 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-34" title="34"><span class="co">#&gt;  fs               1.2.6      2018-08-23 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-35" title="35"><span class="co">#&gt;  fst            * 0.8.10     2018-12-14 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-36" title="36"><span class="co">#&gt;  ggplot2        * 3.1.0      2018-10-25 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-37" title="37"><span class="co">#&gt;  ggrepel        * 0.8.0.9000 2019-02-24 [1] Github (slowkow/ggrepel@cad83bb)</span></a>
-<a class="sourceLine" id="cb106-38" title="38"><span class="co">#&gt;  glue             1.3.0      2018-07-17 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-39" title="39"><span class="co">#&gt;  grattan        * 1.7.0.2    2019-03-21 [1] local                           </span></a>
-<a class="sourceLine" id="cb106-40" title="40"><span class="co">#&gt;  grattanCharts  * 0.10.0     2019-01-01 [1] local                           </span></a>
-<a class="sourceLine" id="cb106-41" title="41"><span class="co">#&gt;  gridExtra        2.3        2017-09-09 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-42" title="42"><span class="co">#&gt;  gtable           0.2.0      2016-02-26 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-43" title="43"><span class="co">#&gt;  highr            0.7        2018-06-09 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-44" title="44"><span class="co">#&gt;  htmltools        0.3.6      2017-04-28 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-45" title="45"><span class="co">#&gt;  hutils         * 1.4.0      2019-03-11 [1] local                           </span></a>
-<a class="sourceLine" id="cb106-46" title="46"><span class="co">#&gt;  ineq             0.2-13     2014-07-21 [1] CRAN (R 3.5.0)                  </span></a>
-<a class="sourceLine" id="cb106-47" title="47"><span class="co">#&gt;  knitr          * 1.21       2018-12-10 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-48" title="48"><span class="co">#&gt;  labeling         0.3        2014-08-23 [1] CRAN (R 3.5.0)                  </span></a>
-<a class="sourceLine" id="cb106-49" title="49"><span class="co">#&gt;  lattice          0.20-38    2018-11-04 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-50" title="50"><span class="co">#&gt;  lazyeval         0.2.1      2017-10-29 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-51" title="51"><span class="co">#&gt;  lmtest           0.9-36     2018-04-04 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-52" title="52"><span class="co">#&gt;  magrittr       * 1.5        2014-11-22 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-53" title="53"><span class="co">#&gt;  MASS             7.3-51.1   2018-11-01 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-54" title="54"><span class="co">#&gt;  memoise          1.1.0      2017-04-21 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-55" title="55"><span class="co">#&gt;  munsell          0.5.0      2018-06-12 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-56" title="56"><span class="co">#&gt;  nlme             3.1-137    2018-04-07 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-57" title="57"><span class="co">#&gt;  nnet             7.3-12     2016-02-02 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-58" title="58"><span class="co">#&gt;  pillar           1.3.1      2018-12-15 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-59" title="59"><span class="co">#&gt;  pkgbuild         1.0.2      2018-10-16 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-60" title="60"><span class="co">#&gt;  pkgconfig        2.0.2      2018-08-16 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-61" title="61"><span class="co">#&gt;  pkgdown          1.3.0      2018-12-07 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-62" title="62"><span class="co">#&gt;  pkgload          1.0.2      2018-10-29 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-63" title="63"><span class="co">#&gt;  plyr             1.8.4      2016-06-08 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-64" title="64"><span class="co">#&gt;  prettyunits      1.0.2      2015-07-13 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-65" title="65"><span class="co">#&gt;  processx         3.2.1      2018-12-05 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-66" title="66"><span class="co">#&gt;  profmem          0.5.0      2018-01-30 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-67" title="67"><span class="co">#&gt;  ps               1.3.0      2018-12-21 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-68" title="68"><span class="co">#&gt;  purrr            0.3.0      2019-01-27 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-69" title="69"><span class="co">#&gt;  quadprog         1.5-5      2013-04-17 [1] CRAN (R 3.5.0)                  </span></a>
-<a class="sourceLine" id="cb106-70" title="70"><span class="co">#&gt;  quantmod         0.4-13     2018-04-13 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-71" title="71"><span class="co">#&gt;  R6               2.4.0      2019-02-14 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-72" title="72"><span class="co">#&gt;  Rcpp             1.0.0      2018-11-07 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-73" title="73"><span class="co">#&gt;  remotes          2.0.2      2018-10-30 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-74" title="74"><span class="co">#&gt;  rlang            0.3.1      2019-01-08 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-75" title="75"><span class="co">#&gt;  rmarkdown        1.11       2018-12-08 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-76" title="76"><span class="co">#&gt;  roxygen2         6.1.1      2018-11-07 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-77" title="77"><span class="co">#&gt;  rprojroot        1.3-2      2018-01-03 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-78" title="78"><span class="co">#&gt;  rstudioapi       0.9.0      2019-01-09 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-79" title="79"><span class="co">#&gt;  SampleFile1415   1.0        2018-07-06 [1] local                           </span></a>
-<a class="sourceLine" id="cb106-80" title="80"><span class="co">#&gt;  scales         * 1.0.0      2018-08-09 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-81" title="81"><span class="co">#&gt;  sessioninfo      1.1.1      2018-11-05 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-82" title="82"><span class="co">#&gt;  stringi          1.3.1      2019-02-13 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-83" title="83"><span class="co">#&gt;  stringr          1.4.0      2019-02-10 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-84" title="84"><span class="co">#&gt;  sysfonts         0.8        2018-10-11 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-85" title="85"><span class="co">#&gt;  taxstats       * 0.1.0.1415 2019-03-13 [1] local                           </span></a>
-<a class="sourceLine" id="cb106-86" title="86"><span class="co">#&gt;  testthat         2.0.1      2018-10-13 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-87" title="87"><span class="co">#&gt;  tibble           2.0.1      2019-01-12 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-88" title="88"><span class="co">#&gt;  tidyselect       0.2.5      2018-10-11 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-89" title="89"><span class="co">#&gt;  timeDate         3043.102   2018-02-21 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-90" title="90"><span class="co">#&gt;  tseries          0.10-46    2018-11-19 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-91" title="91"><span class="co">#&gt;  TTR              0.23-4     2018-09-20 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-92" title="92"><span class="co">#&gt;  urca             1.3-0      2016-09-06 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-93" title="93"><span class="co">#&gt;  usethis          1.4.0      2018-08-14 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-94" title="94"><span class="co">#&gt;  viridis        * 0.5.1      2018-03-29 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-95" title="95"><span class="co">#&gt;  viridisLite    * 0.3.0      2018-02-01 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-96" title="96"><span class="co">#&gt;  withr            2.1.2      2018-03-15 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-97" title="97"><span class="co">#&gt;  xfun             0.5        2019-02-20 [1] CRAN (R 3.5.2)                  </span></a>
-<a class="sourceLine" id="cb106-98" title="98"><span class="co">#&gt;  xml2             1.2.0      2018-01-24 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-99" title="99"><span class="co">#&gt;  xts              0.11-2     2018-11-05 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-100" title="100"><span class="co">#&gt;  yaml             2.2.0      2018-07-25 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-101" title="101"><span class="co">#&gt;  zoo              1.8-4      2018-09-19 [1] CRAN (R 3.5.1)                  </span></a>
-<a class="sourceLine" id="cb106-102" title="102"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb106-103" title="103"><span class="co">#&gt; [1] C:/R/R-3.5.2/library</span></a>
-<a class="sourceLine" id="cb106-104" title="104"><span class="co">#&gt; [2] C:/R/R-3.5.1/library</span></a></code></pre></div>
-<p>Finished in 2535.</p>
+<a class="sourceLine" id="cb106-15" title="15"><span class="co">#&gt;  package        * version    date       lib source        </span></a>
+<a class="sourceLine" id="cb106-16" title="16"><span class="co">#&gt;  anytime          0.3.5      2019-07-28 [2] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-17" title="17"><span class="co">#&gt;  assertthat       0.2.1      2019-03-21 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-18" title="18"><span class="co">#&gt;  backports        1.1.5      2019-10-02 [1] CRAN (R 3.6.1)</span></a>
+<a class="sourceLine" id="cb106-19" title="19"><span class="co">#&gt;  callr            3.3.1      2019-07-18 [1] CRAN (R 3.6.1)</span></a>
+<a class="sourceLine" id="cb106-20" title="20"><span class="co">#&gt;  cli              1.1.0      2019-03-19 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-21" title="21"><span class="co">#&gt;  codetools        0.2-16     2018-12-24 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-22" title="22"><span class="co">#&gt;  colorspace       1.4-1      2019-03-18 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-23" title="23"><span class="co">#&gt;  commonmark       1.7        2018-12-01 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-24" title="24"><span class="co">#&gt;  crayon           1.3.4      2017-09-16 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-25" title="25"><span class="co">#&gt;  curl             4.2        2019-09-24 [1] CRAN (R 3.6.1)</span></a>
+<a class="sourceLine" id="cb106-26" title="26"><span class="co">#&gt;  data.table     * 1.12.6     2019-10-18 [1] CRAN (R 3.6.1)</span></a>
+<a class="sourceLine" id="cb106-27" title="27"><span class="co">#&gt;  desc             1.2.0      2018-05-01 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-28" title="28"><span class="co">#&gt;  devtools         2.1.0      2019-07-06 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-29" title="29"><span class="co">#&gt;  digest           0.6.21     2019-09-20 [1] CRAN (R 3.6.1)</span></a>
+<a class="sourceLine" id="cb106-30" title="30"><span class="co">#&gt;  dplyr            0.8.3      2019-07-04 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-31" title="31"><span class="co">#&gt;  evaluate         0.14       2019-05-28 [1] CRAN (R 3.6.1)</span></a>
+<a class="sourceLine" id="cb106-32" title="32"><span class="co">#&gt;  fastmatch      * 1.1-0      2017-01-28 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-33" title="33"><span class="co">#&gt;  forecast         8.8        2019-08-02 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-34" title="34"><span class="co">#&gt;  fracdiff         1.4-2      2012-12-02 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-35" title="35"><span class="co">#&gt;  fs               1.3.1      2019-05-06 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-36" title="36"><span class="co">#&gt;  fst            * 0.9.0      2019-04-09 [2] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-37" title="37"><span class="co">#&gt;  fy               0.2.0      2019-10-21 [1] local         </span></a>
+<a class="sourceLine" id="cb106-38" title="38"><span class="co">#&gt;  generics         0.0.2      2018-11-29 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-39" title="39"><span class="co">#&gt;  ggplot2        * 3.2.1      2019-08-10 [1] CRAN (R 3.6.1)</span></a>
+<a class="sourceLine" id="cb106-40" title="40"><span class="co">#&gt;  ggrepel        * 0.8.1      2019-05-07 [2] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-41" title="41"><span class="co">#&gt;  glue             1.3.1      2019-03-12 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-42" title="42"><span class="co">#&gt;  grattan        * 1.8.0.0    2019-11-14 [1] local         </span></a>
+<a class="sourceLine" id="cb106-43" title="43"><span class="co">#&gt;  grattanCharts  * 0.11.0     2019-02-08 [2] local         </span></a>
+<a class="sourceLine" id="cb106-44" title="44"><span class="co">#&gt;  gridExtra        2.3        2017-09-09 [2] CRAN (R 3.5.1)</span></a>
+<a class="sourceLine" id="cb106-45" title="45"><span class="co">#&gt;  gtable           0.3.0      2019-03-25 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-46" title="46"><span class="co">#&gt;  highr            0.8        2019-03-20 [1] CRAN (R 3.6.1)</span></a>
+<a class="sourceLine" id="cb106-47" title="47"><span class="co">#&gt;  htmltools        0.3.6      2017-04-28 [2] CRAN (R 3.5.1)</span></a>
+<a class="sourceLine" id="cb106-48" title="48"><span class="co">#&gt;  hutils         * 1.5.1      2019-10-05 [1] CRAN (R 3.6.1)</span></a>
+<a class="sourceLine" id="cb106-49" title="49"><span class="co">#&gt;  ineq             0.2-13     2014-07-21 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-50" title="50"><span class="co">#&gt;  knitr          * 1.25       2019-09-18 [1] CRAN (R 3.6.1)</span></a>
+<a class="sourceLine" id="cb106-51" title="51"><span class="co">#&gt;  labeling         0.3        2014-08-23 [2] CRAN (R 3.5.0)</span></a>
+<a class="sourceLine" id="cb106-52" title="52"><span class="co">#&gt;  lattice          0.20-38    2018-11-04 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-53" title="53"><span class="co">#&gt;  lazyeval         0.2.2      2019-03-15 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-54" title="54"><span class="co">#&gt;  lifecycle        0.1.0      2019-08-01 [1] CRAN (R 3.6.1)</span></a>
+<a class="sourceLine" id="cb106-55" title="55"><span class="co">#&gt;  lmtest           0.9-37     2019-04-30 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-56" title="56"><span class="co">#&gt;  lubridate        1.7.4      2018-04-11 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-57" title="57"><span class="co">#&gt;  magrittr       * 1.5        2014-11-22 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-58" title="58"><span class="co">#&gt;  MASS             7.3-51.4   2019-03-31 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-59" title="59"><span class="co">#&gt;  memoise          1.1.0      2017-04-21 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-60" title="60"><span class="co">#&gt;  munsell          0.5.0      2018-06-12 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-61" title="61"><span class="co">#&gt;  nlme             3.1-141    2019-08-01 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-62" title="62"><span class="co">#&gt;  nnet             7.3-12     2016-02-02 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-63" title="63"><span class="co">#&gt;  numDeriv         2016.8-1.1 2019-06-06 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-64" title="64"><span class="co">#&gt;  pillar           1.4.2      2019-06-29 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-65" title="65"><span class="co">#&gt;  pkgbuild         1.0.4      2019-08-05 [1] CRAN (R 3.6.1)</span></a>
+<a class="sourceLine" id="cb106-66" title="66"><span class="co">#&gt;  pkgconfig        2.0.3      2019-09-22 [1] CRAN (R 3.6.1)</span></a>
+<a class="sourceLine" id="cb106-67" title="67"><span class="co">#&gt;  pkgdown          1.3.0      2018-12-07 [2] CRAN (R 3.5.1)</span></a>
+<a class="sourceLine" id="cb106-68" title="68"><span class="co">#&gt;  pkgload          1.0.2      2018-10-29 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-69" title="69"><span class="co">#&gt;  prettyunits      1.0.2      2015-07-13 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-70" title="70"><span class="co">#&gt;  processx         3.4.1      2019-07-18 [1] CRAN (R 3.6.1)</span></a>
+<a class="sourceLine" id="cb106-71" title="71"><span class="co">#&gt;  ps               1.3.0      2018-12-21 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-72" title="72"><span class="co">#&gt;  purrr            0.3.2      2019-03-15 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-73" title="73"><span class="co">#&gt;  quadprog         1.5-7      2019-05-06 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-74" title="74"><span class="co">#&gt;  quantmod         0.4-15     2019-06-17 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-75" title="75"><span class="co">#&gt;  R6               2.4.0      2019-02-14 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-76" title="76"><span class="co">#&gt;  Rcpp             1.0.2      2019-07-25 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-77" title="77"><span class="co">#&gt;  remotes          2.1.0      2019-06-24 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-78" title="78"><span class="co">#&gt;  rlang            0.4.1      2019-10-24 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-79" title="79"><span class="co">#&gt;  rmarkdown        1.11       2018-12-08 [2] CRAN (R 3.5.2)</span></a>
+<a class="sourceLine" id="cb106-80" title="80"><span class="co">#&gt;  roxygen2         6.1.1      2018-11-07 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-81" title="81"><span class="co">#&gt;  rprojroot        1.3-2      2018-01-03 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-82" title="82"><span class="co">#&gt;  rstudioapi       0.10       2019-03-19 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-83" title="83"><span class="co">#&gt;  SampleFile1415   1.0        2018-07-06 [2] local         </span></a>
+<a class="sourceLine" id="cb106-84" title="84"><span class="co">#&gt;  scales         * 1.0.0      2018-08-09 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-85" title="85"><span class="co">#&gt;  sessioninfo      1.1.1      2018-11-05 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-86" title="86"><span class="co">#&gt;  stringi          1.4.3      2019-03-12 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-87" title="87"><span class="co">#&gt;  stringr          1.4.0      2019-02-10 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-88" title="88"><span class="co">#&gt;  sysfonts         0.8        2018-10-11 [2] CRAN (R 3.5.1)</span></a>
+<a class="sourceLine" id="cb106-89" title="89"><span class="co">#&gt;  taxstats       * 0.1.0.1415 2019-05-01 [1] local         </span></a>
+<a class="sourceLine" id="cb106-90" title="90"><span class="co">#&gt;  testthat         2.2.1      2019-07-25 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-91" title="91"><span class="co">#&gt;  tibble           2.1.3      2019-06-06 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-92" title="92"><span class="co">#&gt;  tidyr            1.0.0      2019-09-11 [1] CRAN (R 3.6.1)</span></a>
+<a class="sourceLine" id="cb106-93" title="93"><span class="co">#&gt;  tidyselect       0.2.5      2018-10-11 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-94" title="94"><span class="co">#&gt;  timeDate         3043.102   2018-02-21 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-95" title="95"><span class="co">#&gt;  tseries          0.10-47    2019-06-05 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-96" title="96"><span class="co">#&gt;  tsibble          0.8.3      2019-07-29 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-97" title="97"><span class="co">#&gt;  TTR              0.23-4     2018-09-20 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-98" title="98"><span class="co">#&gt;  urca             1.3-0      2016-09-06 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-99" title="99"><span class="co">#&gt;  usethis          1.5.1      2019-07-04 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-100" title="100"><span class="co">#&gt;  vctrs            0.2.0      2019-07-05 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-101" title="101"><span class="co">#&gt;  viridis        * 0.5.1      2018-03-29 [2] CRAN (R 3.5.1)</span></a>
+<a class="sourceLine" id="cb106-102" title="102"><span class="co">#&gt;  viridisLite    * 0.3.0      2018-02-01 [2] CRAN (R 3.5.1)</span></a>
+<a class="sourceLine" id="cb106-103" title="103"><span class="co">#&gt;  withr            2.1.2      2018-03-15 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-104" title="104"><span class="co">#&gt;  xfun             0.10       2019-10-01 [1] CRAN (R 3.6.1)</span></a>
+<a class="sourceLine" id="cb106-105" title="105"><span class="co">#&gt;  xml2             1.2.1      2019-07-29 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-106" title="106"><span class="co">#&gt;  xts              0.11-2     2018-11-05 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-107" title="107"><span class="co">#&gt;  yaml             2.2.0      2018-07-25 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-108" title="108"><span class="co">#&gt;  zeallot          0.1.0      2018-01-28 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-109" title="109"><span class="co">#&gt;  zoo              1.8-6      2019-05-28 [1] CRAN (R 3.6.0)</span></a>
+<a class="sourceLine" id="cb106-110" title="110"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb106-111" title="111"><span class="co">#&gt; [1] C:/R/R-3.6.0/library</span></a>
+<a class="sourceLine" id="cb106-112" title="112"><span class="co">#&gt; [2] C:/R/R-3.5.1/library</span></a>
+<a class="sourceLine" id="cb106-113" title="113"><span class="co">#&gt; [3] C:/R/R-3.6.1/library</span></a></code></pre></div>
+<p>Finished in 257.</p>
 </div>
   </div>
 
@@ -2683,7 +2680,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, Matthew Katzen, William Young.</p>
+  <p>Developed by Hugh Parsonage, Tim Cameron, Brendan Coates, Matthew Katzen, William Young, Matt Cowgill.</p>
 </div>
 
 <div class="pkgdown">
