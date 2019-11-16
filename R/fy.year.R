@@ -42,11 +42,12 @@ fy.year <- function(yr_ending) {
   paste0(as.integer(yr_ending) - 1, "-", substr(yr_ending, 3, 4))
 }
 
-yr2fy <- fy::yr2fy
+yr2fy <- function(...) as.character(fy::yr2fy(...))
 fy2yr <- fy::fy2yr
 fy2date <- fy::fy2date
-date2fy <- fy::date2fy
-qtr2fy <- fy::qtr2fy
+date2fy <- function(...) as.character(fy::date2fy(...))
+qtr2fy <- function(...) as.character(fy::qtr2fy(...))
+
 
 max_fy2yr <- function(x) fy2yr(max(x))
 min_fy2yr <- function(x) fy2yr(min(x))

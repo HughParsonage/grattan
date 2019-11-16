@@ -62,7 +62,8 @@ forecast1 <- function(v, hh = 40, dates = NULL) {
     data.table(Date = seq.Date(from = last_date,
                                by = "3 months",
                                length.out = hh + 1L)[-1L], 
-               Value = the_forecast[["mean"]])
+               Value = as.double(the_forecast[["mean"]]))
+  
   ts2date <- function(x) {
     date_decimal <- lubridate::date_decimal
     as.Date(lubridate::date_decimal(as.numeric(time(x))))

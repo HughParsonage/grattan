@@ -69,7 +69,6 @@ test_that("Error handling", {
   expect_error(aus_pop_qtr(c("2016 Q0", "2016-Q-", "19999")), "There were 2 other bad entries.")
   expect_error(aus_pop_qtr(c("2016 Q0", "2016 q1")), "Entries 1 and 2 were not in the correct form")
   
-  expect_error(aus_pop_qtr_age(date = "2015-01-01"))
   expect_error(aus_pop_qtr_age(age = "45"))
   expect_error(aus_pop_qtr_age(age = 101))
   expect_error(aus_pop_qtr_age(age = -99))

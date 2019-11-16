@@ -10,7 +10,7 @@
 #' If the SDMX connection fails, a message is emitted (not a warning) and
 #' the function contines as if \code{useABSConnection = FALSE}.
 #' 
-#' The internal data was updated on 2019-10-29 to 2019-Q2. 
+#' The internal data was updated on 2019-11-15 to 2019-Q3. 
 #' @param allow.projection If set to \code{TRUE} the \code{forecast} package is used to project forward, if required. 
 #' @param forecast.series Whether to use the forecast mean, or the upper or lower boundaries of the prediction intervals. A fourth option \code{custom} allows manual forecasts to be set.
 #' @param forecast.level The prediction interval to be used if \code{forecast.series} is \code{upper} or \code{lower}.
@@ -53,15 +53,15 @@ wage_inflator <- function(wage = 1,
   # CRAN
   obsTime <- obsValue <- to_index <- from_index <- NULL
   
-  if (is.null(from_fy) && is.null(to_fy)){
+  if (is.null(from_fy) && is.null(to_fy)) {
     to_fy <- date2fy(Sys.Date())
     from_fy <- prev_fy(to_fy)
     warning("`from_fy` and `to_fy` are missing, using previous and current financial years respectively")
   }
-  if (is.null(from_fy)){
+  if (is.null(from_fy)) {
     stop("`from_fy` is missing, with no default.")
   } 
-  if (is.null(to_fy)){
+  if (is.null(to_fy)) {
     stop("`to_fy` is missing, with no default.")
   }
   

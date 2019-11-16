@@ -42,11 +42,12 @@ if (!exists("cache")) {
                .daysSinceCacheRefresh, 
                double(1L)) %>%
           max %>%
-          is_less_than(2))
+          is_less_than(91))
 }
 if (FALSE) {
   if (interactive() && !grattanCharts::is_knitting()) {
     stopifnot(file.exists("~/grattan/DESCRIPTION"))
+    stopifnot(file.exists("budget-2018.Rmd"))
     pkgdown::build_site(pkg = "../..", lazy = TRUE)
     for (svg in dir(path = "~/grattan/vignettes/long-vignettes/Budget2018-atlas/", 
                     pattern = "\\.svg$", 
@@ -60,8 +61,9 @@ if (FALSE) {
                           basename(svg)))
     }
     
-    for (svg in dir(path = "~/grattan/docs/articles/grattan_files/figure-html/",
+    for (svg in dir(path = "~/grattan/docs/articles/",
                     full.names = TRUE,
+                    recursive = TRUE,
                     pattern = "\\.png$")) {
       if (!file.rename(svg, sub("\\.png$", ".svg", svg))) {
         stop(svg)
@@ -103,8 +105,8 @@ if (FALSE) {
   }
 }
 
-
-if (isTRUE(getOption("knitr.in.progress"))) {
+START.TIME <- Sys.time()
+if (FALSE && isTRUE(getOption("knitr.in.progress"))) {
   BUNDLE.CHART.DATA <- FALSE
   .finished <- FALSE
   chunktimings.txt <- "budget-2018-chunktimings.txt"
@@ -140,7 +142,6 @@ if (isTRUE(getOption("knitr.in.progress"))) {
     }
   })
   knitr::opts_chunk$set(timeit = TRUE)
-  START.TIME <- Sys.time()
 }
 ```
 
@@ -566,11 +567,11 @@ model_Budgets <- function(fy_year,
         if (!is.character(wage.r) || length(wage.r) != 1) {
           stop("`wage.r` must be a string.")
         } 
-        switch (wage.r, 
-                "2.75%" = {
-                  s1920 <- .project_useGrattans2.75[[h]]
-                }, 
-                stop("`wage.r = ", wage.r, "` not supported."))
+        switch(wage.r, 
+               "2.75%" = {
+                 s1920 <- .project_useGrattans2.75[[h]]
+               }, 
+               stop("`wage.r = ", wage.r, "` not supported."))
       }
     } else {
       if (level == 20) {
@@ -2025,9 +2026,9 @@ s2425_Deloitte_LF_growth <-
                    Budget2018_lito_202223 = TRUE,
                    medicare_levy_rate = 0.02,
                    medicare_levy_taper = 0.1,
-                   # medicare_levy_lower_threshold = 24950, # medicare_levy_lower_threshold("2024-25")
+                   medicare_levy_lower_threshold = 24750, # medicare_levy_lower_threshold("2024-25")
                    medicare_levy_upper_threshold = 30938,
-                   medicare_levy_lower_sapto_threshold = 39460, # medicare_levy_lower_sapto_threshold("2024-25")
+                   medicare_levy_lower_sapto_threshold = medicare_levy_lower_sapto_threshold("2024-25"),
                    medicare_levy_upper_sapto_threshold = 48912,
                    medicare_levy_lower_family_threshold = 54930, # medicare_levy_lower_family_threshold("2024-25")
                    medicare_levy_lower_family_sapto_threshold = 54930) %>% # medicare_levy_lower_family_sapto_threshold("2024-25")) %>% # 54930

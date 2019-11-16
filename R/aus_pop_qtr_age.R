@@ -12,8 +12,8 @@
 #' @export 
 
 aus_pop_qtr_age <- function(date = NULL, age = NULL, tbl = FALSE, roll = TRUE, roll.beyond = FALSE) {
-  if (!is.null(date)){
-    stopifnot(all(inherits(date, "Date")))
+  if (!is.null(date)) {
+    date <- as.Date(date)
     
     if (length(date) > length(age)) {
       if (length(age) > 1L) {
@@ -31,13 +31,13 @@ aus_pop_qtr_age <- function(date = NULL, age = NULL, tbl = FALSE, roll = TRUE, r
     }
   }
   
-  if (!is.null(age)){
+  if (!is.null(age)) {
     stopifnot(is.numeric(age),
-              all(age >= 0), 
-              all(age <= 100))
+              min(age, na.rm = TRUE) >= 0L,
+              max(age, na.rm = TRUE) <= 100L)
   }
   
-  if (AND(NEITHER(identical(roll, FALSE),
+  if (AND(NEITHER(isFALSE(roll),
                   roll.beyond),
           NEITHER(is.null(date),
                   all(date %between% range(aust_pop_by_age_yearqtr[["Date"]]))))) {
@@ -45,14 +45,14 @@ aus_pop_qtr_age <- function(date = NULL, age = NULL, tbl = FALSE, roll = TRUE, r
   }
   # CRAN note avoidance
   Date <- Age <- Value <- NULL
-  if (is.null(date)){
-    if (is.null(age)){
+  if (is.null(date)) {
+    if (is.null(age)) {
       out <- aust_pop_by_age_yearqtr
     } else {
       out <- aust_pop_by_age_yearqtr[Age %in% age]
     }
   } else {
-    if (is.null(age)){
+    if (is.null(age)) {
       input <-
         data.table(Date = date, 
                    Age = seq_len(100),
@@ -79,7 +79,7 @@ aus_pop_qtr_age <- function(date = NULL, age = NULL, tbl = FALSE, roll = TRUE, r
     out[, ordering := NULL]
   }
 
-  if (tbl){
+  if (tbl) {
     return(out[])
   } else {
     return(out[["Value"]])

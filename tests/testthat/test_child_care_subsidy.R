@@ -111,5 +111,5 @@ test_that("Values", {
                                   hours_day_care_fortnight = Inf,
                                   cost_hour = 20),
                36 * 11.77 * 0.5 * 365/14)
-
 })
+
