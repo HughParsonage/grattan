@@ -177,15 +177,17 @@ medicare_tbl %>%
 sapto_tbl <- 
   readxl::read_excel("./data-raw/SAPTO-rates.xlsx", sheet = 1) %>% 
   data.table::as.data.table(.) %>% 
+  lazy_dt %>%
   mutate(max_offset = if_else(family_status == "single", max_offset, max_offset * 2),
          lower_threshold = if_else(family_status == "single", lower_threshold, lower_threshold * 2)) %>%
   # Choose maximum
   group_by(fy_year, family_status) %>%
   filter(max_offset == max(max_offset)) %>%
   as.data.table %>%
-  data.table::setkey(fy_year, family_status) %>% 
+  setkey(fy_year, family_status) %>% 
   # avoid cartesian joins in income_tax
-  unique
+  unique %>%
+  as.data.table
 
 sapto_tbl %>%
   readr::write_tsv("./data-raw/sapto_tbl.tsv")
