@@ -4,9 +4,18 @@
 \alias{age_grouper}
 \title{Age grouper}
 \usage{
-age_grouper(age, interval = 10, min_age = 25, max_age = 75,
-  breaks = NULL, labels = NULL, below = "Below\\n",
-  exp_min_age = 1L, exp_max_age = 100L, threshold = 10000L)
+age_grouper(
+  age,
+  interval = 10,
+  min_age = 25,
+  max_age = 75,
+  breaks = NULL,
+  labels = NULL,
+  below = "Below\\n",
+  exp_min_age = 1L,
+  exp_max_age = 100L,
+  threshold = 10000L
+)
 }
 \arguments{
 \item{age}{A numeric age (in years).}

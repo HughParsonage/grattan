@@ -4,8 +4,15 @@
 \alias{sapto_rcpp_singleton}
 \title{SAPTO singleton}
 \usage{
-sapto_rcpp_singleton(rebate_income, max_offset, lower_threshold,
-  taper_rate, sapto_eligible, Spouse_income, is_married)
+sapto_rcpp_singleton(
+  rebate_income,
+  max_offset,
+  lower_threshold,
+  taper_rate,
+  sapto_eligible,
+  Spouse_income,
+  is_married
+)
 }
 \arguments{
 \item{rebate_income, max_offset, lower_threshold, taper_rate, sapto_eligible, Spouse_income, is_married}{As in \code{\link{sapto}}.}

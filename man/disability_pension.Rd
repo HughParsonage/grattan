@@ -4,11 +4,20 @@
 \alias{disability_pension}
 \title{Disability support pension}
 \usage{
-disability_pension(fortnightly_income = 0, annual_income = 26 *
-  fortnightly_income, assets_value = 0, fy.year = NULL, Date = NULL,
-  age = 21L, has_partner = FALSE, n_dependants = 0L,
-  lives_at_home = FALSE, independent = FALSE, per = c("year",
-  "fortnight"), ...)
+disability_pension(
+  fortnightly_income = 0,
+  annual_income = 26 * fortnightly_income,
+  assets_value = 0,
+  fy.year = NULL,
+  Date = NULL,
+  age = 21L,
+  has_partner = FALSE,
+  n_dependants = 0L,
+  lives_at_home = FALSE,
+  independent = FALSE,
+  per = c("year", "fortnight"),
+  ...
+)
 }
 \arguments{
 \item{fortnightly_income, annual_income}{Income for the means test}

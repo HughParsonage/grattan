@@ -4,8 +4,15 @@
 \alias{sapto}
 \title{Seniors and Pensioner Tax Offset}
 \usage{
-sapto(rebate_income, fy.year, fill = 0, sapto.eligible = TRUE,
-  Spouse_income = 0, family_status = "single", .check = TRUE)
+sapto(
+  rebate_income,
+  fy.year,
+  fill = 0,
+  sapto.eligible = TRUE,
+  Spouse_income = 0,
+  family_status = "single",
+  .check = TRUE
+)
 }
 \arguments{
 \item{rebate_income}{The rebate income of the individual.}

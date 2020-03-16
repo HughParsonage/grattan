@@ -5,8 +5,13 @@
 \alias{CG_inflator}
 \title{Forecasting capital gains}
 \usage{
-CG_population_inflator(x = 1, from_fy, to_fy, forecast.series = "mean",
-  cg.series)
+CG_population_inflator(
+  x = 1,
+  from_fy,
+  to_fy,
+  forecast.series = "mean",
+  cg.series
+)
 
 CG_inflator(x = 1, from_fy, to_fy, forecast.series = "mean")
 }

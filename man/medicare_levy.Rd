@@ -4,9 +4,17 @@
 \alias{medicare_levy}
 \title{Medicare levy}
 \usage{
-medicare_levy(income, fy.year = "2013-14", Spouse_income = 0,
-  sapto.eligible = FALSE, sato = NULL, pto = NULL,
-  family_status = "individual", n_dependants = 0, .checks = TRUE)
+medicare_levy(
+  income,
+  fy.year = "2013-14",
+  Spouse_income = 0,
+  sapto.eligible = FALSE,
+  sato = NULL,
+  pto = NULL,
+  family_status = "individual",
+  n_dependants = 0,
+  .checks = TRUE
+)
 }
 \arguments{
 \item{income}{The taxable income. A vector of numeric values.}

@@ -4,9 +4,15 @@
 \alias{unemployment_benefit}
 \title{Unemployment benefit}
 \usage{
-unemployment_benefit(income = 0, assets = 0, fy.year = NULL,
-  Date = NULL, has_partner = FALSE, has_dependant = FALSE,
-  is_home_owner = FALSE)
+unemployment_benefit(
+  income = 0,
+  assets = 0,
+  fy.year = NULL,
+  Date = NULL,
+  has_partner = FALSE,
+  has_dependant = FALSE,
+  is_home_owner = FALSE
+)
 }
 \arguments{
 \item{income}{Numeric vector of fortnightly income for the income test.}

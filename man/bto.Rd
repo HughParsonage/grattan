@@ -4,8 +4,14 @@
 \alias{bto}
 \title{Beneficiary tax offset}
 \usage{
-bto(benefit_amount, fy.year = NULL, rate1 = 0.15,
-  benefit_threshold = 6000, tax_threshold = 37000, rate2 = 0.15)
+bto(
+  benefit_amount,
+  fy.year = NULL,
+  rate1 = 0.15,
+  benefit_threshold = 6000,
+  tax_threshold = 37000,
+  rate2 = 0.15
+)
 }
 \arguments{
 \item{benefit_amount}{The amount of Tax Offsetable benefit received by the taxpayer during the income year.}

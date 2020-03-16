@@ -6,15 +6,30 @@
 \alias{revenue_from_new_cap_and_div293}
 \title{Modelling superannuation changes}
 \usage{
-model_new_caps_and_div293(.sample.file, fy.year, new_cap = 30000,
-  new_cap2 = 35000, new_age_based_cap = TRUE, new_cap2_age = 49,
-  new_ecc = FALSE, new_div293_threshold = 3e+05,
-  use_other_contr = FALSE, scale_contr_match_ato = FALSE,
-  .lambda = 0, reweight_late_lodgers = TRUE, .mu = 1.05,
-  impute_zero_concess_contr = TRUE, .min.Sw.for.SG = 450 * 12,
-  .SG_rate = 0.0925, prv_cap = 30000, prv_cap2 = 35000,
-  prv_age_based_cap = TRUE, prv_cap2_age = 49, prv_ecc = FALSE,
-  prv_div293_threshold = 3e+05)
+model_new_caps_and_div293(
+  .sample.file,
+  fy.year,
+  new_cap = 30000,
+  new_cap2 = 35000,
+  new_age_based_cap = TRUE,
+  new_cap2_age = 49,
+  new_ecc = FALSE,
+  new_div293_threshold = 3e+05,
+  use_other_contr = FALSE,
+  scale_contr_match_ato = FALSE,
+  .lambda = 0,
+  reweight_late_lodgers = TRUE,
+  .mu = 1.05,
+  impute_zero_concess_contr = TRUE,
+  .min.Sw.for.SG = 450 * 12,
+  .SG_rate = 0.0925,
+  prv_cap = 30000,
+  prv_cap2 = 35000,
+  prv_age_based_cap = TRUE,
+  prv_cap2_age = 49,
+  prv_ecc = FALSE,
+  prv_div293_threshold = 3e+05
+)
 
 n_affected_from_new_cap_and_div293(..., adverse_only = TRUE)
 

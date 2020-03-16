@@ -4,8 +4,13 @@
 \alias{aus_pop_qtr_age}
 \title{Australian estimated resident population by age and date}
 \usage{
-aus_pop_qtr_age(date = NULL, age = NULL, tbl = FALSE, roll = TRUE,
-  roll.beyond = FALSE)
+aus_pop_qtr_age(
+  date = NULL,
+  age = NULL,
+  tbl = FALSE,
+  roll = TRUE,
+  roll.beyond = FALSE
+)
 }
 \arguments{
 \item{date}{A vector of dates. If \code{NULL}, values for all dates are returned in a table. The dates need not be quarters, provided \code{roll != FALSE},}

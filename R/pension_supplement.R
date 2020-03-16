@@ -16,7 +16,7 @@
 #'  payment, with a message.
 #' @param overseas_absence Will the individual be living outside of Australia 
 #' for more than 6 weeks of the upcoming year?
-#' @param seperated_couple Is the individual part of an illness separated couple,
+#' @param separated_couple Is the individual part of an illness separated couple,
 #'  respite care couple, or partner imprisoned?
 #' 
 #' @author Matthew Katzen
@@ -33,11 +33,11 @@ pension_supplement <- function(has_partner = FALSE,
                                qualifying_payment = 'age_pension',
                                per = c("year", "fortnight", "quarter"),
                                overseas_absence = FALSE,
-                               seperated_couple = FALSE){
+                               separated_couple = FALSE){
   
   
   
-  if (any(!has_partner & seperated_couple)) {
+  if (any(!has_partner & separated_couple)) {
     stop("incompatible values of `has_partner` and `partner_seperated`")
   }
   
@@ -61,7 +61,16 @@ pension_supplement <- function(has_partner = FALSE,
   # Convert arguments to data table
   ls_np <- ls()[ls() != "per"]
   class(fy.year) <- c("fy", "character")
-  input <- data.table(do.call(cbind.data.frame, mget(ls_np))) 
+  input <-
+    data.table(has_partner = has_partner,
+               age = age,
+               n_dependants = n_dependants,
+               parenting_payment = parenting_payment,
+               Date = Date,
+               fy.year = fy.year,
+               qualifying_payment = qualifying_payment,
+               overseas_absence = overseas_absence,
+               separated_couple = separated_couple)
   
   eligible <- NULL
   input[, eligible := if_else(qualifying_payment %in% c('abstudy', 'austudy', 'parenting_payment', 'partner_allowance', 'special_benefit', 'widow_allowance'),
@@ -72,7 +81,7 @@ pension_supplement <- function(has_partner = FALSE,
         
   max_rate_March_2016 <- NULL
   input[, max_rate_March_2016 :=
-          if_else(has_partner & !seperated_couple,
+          if_else(has_partner & !separated_couple,
                   49,
                   65)]
   

@@ -4,10 +4,17 @@
 \alias{income_tax}
 \title{Income tax payable}
 \usage{
-income_tax(income, fy.year = NULL, age = NULL,
-  family_status = "individual", n_dependants = 0L, .dots.ATO = NULL,
-  return.mode = c("numeric", "integer"), allow.forecasts = FALSE,
-  .debug = FALSE)
+income_tax(
+  income,
+  fy.year = NULL,
+  age = NULL,
+  family_status = "individual",
+  n_dependants = 0L,
+  .dots.ATO = NULL,
+  return.mode = c("numeric", "integer"),
+  allow.forecasts = FALSE,
+  .debug = FALSE
+)
 }
 \arguments{
 \item{income}{The individual assessable income.}

@@ -4,8 +4,16 @@
 \alias{inflator}
 \title{Inflate using a general index}
 \usage{
-inflator(x = 1, from, to, inflator_table, index.col = "Index",
-  time.col = "Time", roll = NULL, max.length = NULL)
+inflator(
+  x = 1,
+  from,
+  to,
+  inflator_table,
+  index.col = "Index",
+  time.col = "Time",
+  roll = NULL,
+  max.length = NULL
+)
 }
 \arguments{
 \item{x}{The vector to be inflated.}

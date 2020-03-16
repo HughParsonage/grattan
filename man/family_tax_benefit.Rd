@@ -4,13 +4,26 @@
 \alias{family_tax_benefit}
 \title{Family tax benefit}
 \usage{
-family_tax_benefit(.data = NULL, id_hh = NULL, id = NULL,
-  age = NULL, income = NULL, in_secondary_school = NULL,
-  single_parent = NULL, other_allowance_benefit_or_pension = NULL,
-  maintenance_income = NULL, maintenance_children = NULL,
-  income_test_ftbA_1_bound = 51027, income_test_ftbA_2_bound = 94316,
-  income_test_ftbB_bound = 5402, taper_ftbA_1 = 0.2,
-  taper_ftbA_2 = 0.3, taper_ftbB = 0.2, per = "year", copy = TRUE)
+family_tax_benefit(
+  .data = NULL,
+  id_hh = NULL,
+  id = NULL,
+  age = NULL,
+  income = NULL,
+  in_secondary_school = NULL,
+  single_parent = NULL,
+  other_allowance_benefit_or_pension = NULL,
+  maintenance_income = NULL,
+  maintenance_children = NULL,
+  income_test_ftbA_1_bound = 51027,
+  income_test_ftbA_2_bound = 94316,
+  income_test_ftbB_bound = 5402,
+  taper_ftbA_1 = 0.2,
+  taper_ftbA_2 = 0.3,
+  taper_ftbB = 0.2,
+  per = "year",
+  copy = TRUE
+)
 }
 \arguments{
 \item{.data}{\code{data.table} input. Each row is an individual. 

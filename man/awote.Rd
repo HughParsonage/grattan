@@ -4,8 +4,14 @@
 \alias{awote}
 \title{AWOTE}
 \usage{
-awote(Date = NULL, fy.year = NULL, rollDate = "nearest",
-  isMale = NA, isAdult = TRUE, isOrdinary = TRUE)
+awote(
+  Date = NULL,
+  fy.year = NULL,
+  rollDate = "nearest",
+  isMale = NA,
+  isAdult = TRUE,
+  isOrdinary = TRUE
+)
 }
 \arguments{
 \item{Date, fy.year}{When the AWOTE is desired.}

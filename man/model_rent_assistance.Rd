@@ -4,11 +4,17 @@
 \alias{model_rent_assistance}
 \title{Model Rent Assistance}
 \usage{
-model_rent_assistance(sample_file, baseline_fy = NULL,
-  baseline_Date = NULL, Per = "fortnight",
-  .Prop_rent_paid_by_RA = NULL, Max_rate = NULL, Min_rent = NULL,
-  calc_baseline_ra = TRUE, return. = c("sample_file", "new_ra",
-  "sample_file.int"))
+model_rent_assistance(
+  sample_file,
+  baseline_fy = NULL,
+  baseline_Date = NULL,
+  Per = "fortnight",
+  .Prop_rent_paid_by_RA = NULL,
+  Max_rate = NULL,
+  Min_rent = NULL,
+  calc_baseline_ra = TRUE,
+  return. = c("sample_file", "new_ra", "sample_file.int")
+)
 }
 \arguments{
 \item{sample_file}{A sample file having the same variables as the data.frame in the example.}

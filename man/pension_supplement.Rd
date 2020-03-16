@@ -4,10 +4,18 @@
 \alias{pension_supplement}
 \title{Pension Supplement}
 \usage{
-pension_supplement(has_partner = FALSE, age = 70, n_dependants = 0,
-  parenting_payment = FALSE, Date = NULL, fy.year = NULL,
-  qualifying_payment = "age_pension", per = c("year", "fortnight",
-  "quarter"), overseas_absence = FALSE, seperated_couple = FALSE)
+pension_supplement(
+  has_partner = FALSE,
+  age = 70,
+  n_dependants = 0,
+  parenting_payment = FALSE,
+  Date = NULL,
+  fy.year = NULL,
+  qualifying_payment = "age_pension",
+  per = c("year", "fortnight", "quarter"),
+  overseas_absence = FALSE,
+  separated_couple = FALSE
+)
 }
 \arguments{
 \item{has_partner}{Does the individual have a partner?}
@@ -30,7 +38,7 @@ payment, with a message.}
 \item{overseas_absence}{Will the individual be living outside of Australia 
 for more than 6 weeks of the upcoming year?}
 
-\item{seperated_couple}{Is the individual part of an illness separated couple,
+\item{separated_couple}{Is the individual part of an illness separated couple,
 respite care couple, or partner imprisoned?}
 }
 \description{

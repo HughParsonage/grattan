@@ -7,14 +7,28 @@
 \url{http://classic.austlii.edu.au/au/legis/cth/consol_act/ssa1991186/s1068.html}
 }
 \usage{
-newstart_allowance(fortnightly_income = 0, annual_income = 0,
-  has_partner = FALSE, partner_pensioner = FALSE, n_dependants = 0,
-  nine_months = FALSE, isjspceoalfofcoahodeoc = FALSE,
-  principal_carer = FALSE, fortnightly_partner_income = 0,
-  annual_partner_income = 0, age = 22, fy.year = "2015-16",
-  assets_value = 0, homeowner = FALSE, lower = 102, upper = 252,
-  taper_lower = 0.5, taper_upper = 0.6, taper_principal_carer = 0.4,
-  per = c("year", "fortnight"))
+newstart_allowance(
+  fortnightly_income = 0,
+  annual_income = 0,
+  has_partner = FALSE,
+  partner_pensioner = FALSE,
+  n_dependants = 0,
+  nine_months = FALSE,
+  isjspceoalfofcoahodeoc = FALSE,
+  principal_carer = FALSE,
+  fortnightly_partner_income = 0,
+  annual_partner_income = 0,
+  age = 22,
+  fy.year = "2015-16",
+  assets_value = 0,
+  homeowner = FALSE,
+  lower = 102,
+  upper = 252,
+  taper_lower = 0.5,
+  taper_upper = 0.6,
+  taper_principal_carer = 0.4,
+  per = c("year", "fortnight")
+)
 }
 \arguments{
 \item{fortnightly_income}{'Ordinary income' received fortnightly within the 
