@@ -80,12 +80,12 @@ test_that("As applied with inflators", {
   
   expect_error(lf_inflator_fy(from_fy = "2015-16", to_fy = "2020-21",
                               forecast.series = "custom",
-                              lf.series = list(fy_year = "2020-21", r = 0.01)),
+                              lf.series = list(fy_year = next_fy(h = 2), r = 0.01)),
                regexp = "`lf.series$fy_year` did not have the required financial years.",
                fixed = TRUE)
-  expect_error(lf_inflator_fy(from_fy = "2015-16", to_fy = "2020-21",
+  expect_error(lf_inflator_fy(from_fy = "2015-16", to_fy = next_fy(h = 3),
                               forecast.series = "custom",
-                              lf.series = list(fy_year = c("2018-19", "2020-21", "2019-20"),
+                              lf.series = list(fy_year = c(next_fy(h = c(1, 3, 2))),
                                                r = 1:3/100)),
                regexp = "`lf.series$fy_year` had the required financial years but not in the correct order.",
                fixed = TRUE)

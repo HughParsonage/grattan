@@ -5,7 +5,7 @@ test_that("Warnings and Errors", {
                  reg_exp = '`Date` and `fy.year` not set, so using `Date` = "2016/03/01" and `fy.year` = "2015-16"')
   expect_error(suppressWarnings(pension_supplement(per = 'month')),
                reg_exp = "per can only take values `fortnight` or `annual`")
-  expect_error(suppressWarnings(pension_supplement(has_partner = FALSE, seperated_couple = TRUE)),
+  expect_error(suppressWarnings(pension_supplement(has_partner = FALSE, separated_couple = TRUE)),
                reg_exp = "incompatible values of `has_partner` and `partner_seperated`")
 })
 
@@ -22,7 +22,7 @@ test_that("Rates", {
   expect_equal(pension_supplement(Date = "2016/03/01", qualifying_payment = 'age_pension', age = 65,
                                   per = "fortnight"),
                65)
-  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = TRUE, seperated_couple = TRUE,
+  expect_equal(pension_supplement(Date = "2016/03/01", has_partner = TRUE, separated_couple = TRUE,
                                   per = "fortnight"),
                65)
   #basic rates

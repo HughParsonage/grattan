@@ -4,8 +4,7 @@
 \alias{carers_allowance}
 \title{Carers allowance}
 \usage{
-carers_allowance(Date = NULL, fy.year = NULL, per = c("year",
-  "fortnight"))
+carers_allowance(Date = NULL, fy.year = NULL, per = c("year", "fortnight"))
 }
 \arguments{
 \item{Date, fy.year}{The timing of the allowance.}

@@ -4,17 +4,29 @@
 \alias{apply_super_caps_and_div293}
 \title{Superannuation caps and Division 293 calculations}
 \usage{
-apply_super_caps_and_div293(.sample.file,
+apply_super_caps_and_div293(
+  .sample.file,
   colname_concessional = "concessional_contributions",
   colname_div293_tax = "div293_tax",
   colname_new_Taxable_Income = "Taxable_income_for_ECT",
-  div293_threshold = 3e+05, cap = 25000, cap2 = 35000,
-  age_based_cap = TRUE, cap2_age = 59, ecc = FALSE,
-  use_other_contr = FALSE, scale_contr_match_ato = FALSE,
-  .lambda = 0, reweight_late_lodgers = FALSE, .mu = 1.05,
-  impute_zero_concess_contr = FALSE, .min.Sw.for.SG = 450 * 12,
-  .SG_rate = 0.0925, warn_if_colnames_overwritten = TRUE,
-  drop_helpers = FALSE, copyDT = TRUE)
+  div293_threshold = 3e+05,
+  cap = 25000,
+  cap2 = 35000,
+  age_based_cap = TRUE,
+  cap2_age = 59,
+  ecc = FALSE,
+  use_other_contr = FALSE,
+  scale_contr_match_ato = FALSE,
+  .lambda = 0,
+  reweight_late_lodgers = FALSE,
+  .mu = 1.05,
+  impute_zero_concess_contr = FALSE,
+  .min.Sw.for.SG = 450 * 12,
+  .SG_rate = 0.0925,
+  warn_if_colnames_overwritten = TRUE,
+  drop_helpers = FALSE,
+  copyDT = TRUE
+)
 }
 \arguments{
 \item{.sample.file}{A data.table containing at least the variables \code{sample_file_1314} from the taxstats package.}

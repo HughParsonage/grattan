@@ -4,25 +4,35 @@
 \alias{carer_payment}
 \title{Carer Payment}
 \usage{
-carer_payment(Date = NULL, fy.year = NULL,
+carer_payment(
+  Date = NULL,
+  fy.year = NULL,
   carer_fortnightly_income = 0,
   carer_annual_income = carer_fortnightly_income * 26,
-  carer_has_partner = FALSE, carer_n_dependants = 0L,
+  carer_has_partner = FALSE,
+  carer_n_dependants = 0L,
   carer_partner_fortnightly_income = 0,
   carer_partner_annual_income = carer_partner_fortnightly_income * 26,
-  carer_assets_value = 0, carer_is_home_owner = FALSE,
-  carer_illness_separated_couple = FALSE, dclad_eligible = FALSE,
-  high_adat = FALSE, living_at_home = TRUE,
+  carer_assets_value = 0,
+  carer_is_home_owner = FALSE,
+  carer_illness_separated_couple = FALSE,
+  dclad_eligible = FALSE,
+  high_adat = FALSE,
+  living_at_home = TRUE,
   receiving_other_payment = FALSE,
   care_receiver_fortnightly_income = 0,
   care_receiver_annual_income = care_receiver_fortnightly_income * 26,
-  care_receiver_asset_value = 0, partner_fortnightly_income = 0,
+  care_receiver_asset_value = 0,
+  partner_fortnightly_income = 0,
   partner_annual_income = partner_fortnightly_income * 26,
-  partner_asset_value = 0, children_fortnightly_income = 0,
+  partner_asset_value = 0,
+  children_fortnightly_income = 0,
   children_annual_income = children_fortnightly_income * 26,
-  children_asset_value = 0, parents_fortnightly_income = 0,
+  children_asset_value = 0,
+  parents_fortnightly_income = 0,
   parents_annual_income = parents_fortnightly_income * 26,
-  parents_asset_value = 0)
+  parents_asset_value = 0
+)
 }
 \arguments{
 \item{Date, fy.year}{The financial year. Currently only 2015-16 is supported (the most recent survey of income and housing results).}

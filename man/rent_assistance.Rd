@@ -4,11 +4,20 @@
 \alias{rent_assistance}
 \title{Rent assistance}
 \usage{
-rent_assistance(fortnightly_rent = Inf, per = "fortnight",
-  fy.year = NULL, Date = NULL, n_dependants = 0L,
-  has_partner = FALSE, .prop_rent_paid_by_RA = 0.75, max_rate = NULL,
-  min_rent = NULL, sharers_provision_applies = FALSE,
-  is_homeowner = FALSE, lives_in_sharehouse = FALSE)
+rent_assistance(
+  fortnightly_rent = Inf,
+  per = "fortnight",
+  fy.year = NULL,
+  Date = NULL,
+  n_dependants = 0L,
+  has_partner = FALSE,
+  .prop_rent_paid_by_RA = 0.75,
+  max_rate = NULL,
+  min_rent = NULL,
+  sharers_provision_applies = FALSE,
+  is_homeowner = FALSE,
+  lives_in_sharehouse = FALSE
+)
 }
 \arguments{
 \item{fortnightly_rent}{The fortnightly rent paid by each individual. By 

@@ -4,11 +4,17 @@
 \alias{wage_inflator}
 \title{Inflation using the Wage Price Index.}
 \usage{
-wage_inflator(wage = 1, from_fy = NULL, to_fy = NULL,
-  useABSConnection = FALSE, allow.projection = TRUE,
+wage_inflator(
+  wage = 1,
+  from_fy = NULL,
+  to_fy = NULL,
+  useABSConnection = FALSE,
+  allow.projection = TRUE,
   forecast.series = c("mean", "upper", "lower", "custom"),
-  forecast.level = 95, wage.series = NULL,
-  accelerate.above = 100000L)
+  forecast.level = 95,
+  wage.series = NULL,
+  accelerate.above = 100000L
+)
 }
 \arguments{
 \item{wage}{The amount to be inflated (1 by default).}
@@ -22,7 +28,7 @@ If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{fro
 If the SDMX connection fails, a message is emitted (not a warning) and
 the function contines as if \code{useABSConnection = FALSE}.
 
-The internal data was updated on 2019-11-15 to 2019-Q3.}
+The internal data was updated on 2020-03-16 to 2019-Q4.}
 
 \item{allow.projection}{If set to \code{TRUE} the \code{forecast} package is used to project forward, if required.}
 

@@ -4,8 +4,7 @@
 \alias{cpi_inflator_general_date}
 \title{CPI for general dates}
 \usage{
-cpi_inflator_general_date(from_nominal_price = 1, from_date, to_date,
-  ...)
+cpi_inflator_general_date(from_nominal_price = 1, from_date, to_date, ...)
 }
 \arguments{
 \item{from_nominal_price}{(numeric) the nominal prices to be converted to a real price}

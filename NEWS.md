@@ -1,24 +1,12 @@
-## 1.8.0.0
+## 1.8.0.1
 
-### Potentially breaking changes
-
-* Pacakage `fy` is now used for operations involving financial years, notably validation of 
-  input.  This has led to changes in error messages (below) as well as the weakening
-  of some tests to omit checks of class attributes which were never intended to be 
-  relied on.
-  
-  ```r
-  # Prev:
-  fy2date("foo")
-  #> Error: fy.yr contains non-FYs.
-  
-  # Now
-  #> Error: `x = "foo"` was not a valid financial year.
-  ```
+### Bug fixes
+Fixed issue with stringsAsFactors = FALSE being inconsistently applied
+with R 4.0
 
 ### Data
 
-* Update wage and labour force data
+* Update wage, CPI, and labour force data
 
 
 

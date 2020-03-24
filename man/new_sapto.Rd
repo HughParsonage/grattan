@@ -4,8 +4,14 @@
 \alias{new_sapto}
 \title{SAPTO with user-defined thresholds}
 \usage{
-new_sapto(rebate_income, new_sapto_tbl, sapto.eligible = TRUE,
-  Spouse_income = 0, fill = 0, family_status = "single")
+new_sapto(
+  rebate_income,
+  new_sapto_tbl,
+  sapto.eligible = TRUE,
+  Spouse_income = 0,
+  fill = 0,
+  family_status = "single"
+)
 }
 \arguments{
 \item{rebate_income}{The rebate income of the individual.}

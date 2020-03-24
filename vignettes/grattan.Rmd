@@ -399,7 +399,9 @@ sample_file_prev <- merge(sample_file_prev, age_range_decoder, by = "age_range")
 
 ```{r impute-ages}
 set.seed(48031)
-sample_file %<>%
+sample_file <-
+  sample_file %>%
+  lazy_dt %>%
   group_by(age_range_description) %>%
   mutate(min_age = if_else(grepl("to", age_range_description), 
                            as.numeric(gsub("^([0-9]{2}).*$", "\\1", age_range_description)), 
@@ -511,9 +513,10 @@ texNum <- function(number, sig.figs = 3L, dollar = FALSE, pre.phrase = NULL, .su
     return(out)
   }
 }
+sample_file <- as.data.table(sample_file)
 ```
 
-There were `r texNum(sum(sample_file$WEIGHT), sig.figs = 3L)` taxpayers in `r FY.YEAR` in Australia. Of those, `r texNum(sum(sample_file[Taxable_Income == 0]$WEIGHT))` had zero taxable income (or a taxable loss). (... and so these ''taxpayers'' naturally paid no tax. Nor did the `r texNum(sum(sample_file[Taxable_Income < 18200]$WEIGHT), sig.figs = 2)` individuals below the tax-free threshold. For this vignette, a *taxpayer* is anyone who lodged a tax return, regardless of their tax liability). 
+There were `r texNum(sample_file[, sum(WEIGHT)], sig.figs = 3L)` taxpayers in `r FY.YEAR` in Australia. Of those, `r texNum(sample_file[Taxable_Income == 0, sum(WEIGHT)])` had zero taxable income (or a taxable loss). (... and so these ''taxpayers'' naturally paid no tax. Nor did the `r texNum(sample_file[Taxable_Income < 18200, sum(WEIGHT)], sig.figs = 2)` individuals below the tax-free threshold. For this vignette, a *taxpayer* is anyone who lodged a tax return, regardless of their tax liability). 
 
 ```{r taxable-income-quantiles}
 tx_inc_q <- function(q){
@@ -527,8 +530,10 @@ dens <- density(sample_file[Taxable_Income < tx_inc_q(0.95)]$Taxable_Income)
 DF <- with(dens, data.frame(x, y))
 
 sample_file %>%
+  lazy_dt %>%
   mutate(Taxable_Income_decile = ntile(Taxable_Income, 10)) %>%
   filter(between(Taxable_Income, 0, tx_inc_q(0.95))) %>%
+  as.data.table %>%
   ggplot(aes(x = Taxable_Income)) + 
   geom_density() + 
   scale_fill_viridis(discrete = TRUE) + 
@@ -590,6 +595,7 @@ DF %>%
 
 
 ```{r CGT-description-stats}
+sample_file <- as.data.table(sample_file)
 n_CGs <- 
   sample_file %>%
   filter(Tot_CY_CG_amt > 0) %$%
@@ -618,6 +624,7 @@ tax_on_CG <-
 
 tax_on_CG_prev <- 
   sample_file_prev %>%
+  lazy_dt %>%
   filter(Net_CG_amt > 0) %>%
   mutate(tax = income_tax(Taxable_Income, fy.year = FY.YEAR), 
          tax_wo_CG = income_tax(pmaxC(Taxable_Income - Net_CG_amt, 0), fy.year = FY.YEAR)) %>%
@@ -817,11 +824,14 @@ sample_files_all %>%
   merge(age_range_decoder, by = "age_range") %>%
   as.data.frame %>%
   group_by(age_range_description) %>%
-  mutate(min_age = ifelse(grepl("to", age_range_description), 
-                          as.numeric(gsub("^([0-9]{2}).*$", "\\1", age_range_description)), 
-                          ifelse(grepl("70", age_range_description),
-                                 70, 
-                                 15)),
+  mutate(min_age = 
+           if (grepl("^([0-9]{2}).*$", first(age_range_description))) {
+             as.numeric(gsub("^([0-9]{2}).*$", "\\1", age_range_description))
+           } else {
+             if_else(grepl("70", age_range_description),
+                     70, 
+                     15)
+           },
          max_age = min_age + 5, 
          age_imp = runif(n(), min_age, max_age)) %>%
   select(-min_age, -max_age) %>%

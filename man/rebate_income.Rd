@@ -7,9 +7,14 @@
 \url{https://www.ato.gov.au/Individuals/Tax-return/2015/Tax-return/Tax-offset-questions-T1-T2/Rebate-income-2015/}
 }
 \usage{
-rebate_income(Taxable_Income, Rptbl_Empr_spr_cont_amt = 0,
-  All_deductible_super_contr = 0, Net_fincl_invstmt_lss_amt = 0,
-  Net_rent_amt = 0, Rep_frng_ben_amt = 0)
+rebate_income(
+  Taxable_Income,
+  Rptbl_Empr_spr_cont_amt = 0,
+  All_deductible_super_contr = 0,
+  Net_fincl_invstmt_lss_amt = 0,
+  Net_rent_amt = 0,
+  Rep_frng_ben_amt = 0
+)
 }
 \arguments{
 \item{Taxable_Income}{the taxable income}

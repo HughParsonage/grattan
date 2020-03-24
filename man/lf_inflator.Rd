@@ -8,14 +8,26 @@
 ABS Cat 6202.0 \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocument}.
 }
 \usage{
-lf_inflator_fy(labour_force = 1, from_fy = NULL, to_fy = NULL,
-  useABSConnection = FALSE, allow.projection = TRUE, use.month = 1L,
+lf_inflator_fy(
+  labour_force = 1,
+  from_fy = NULL,
+  to_fy = NULL,
+  useABSConnection = FALSE,
+  allow.projection = TRUE,
+  use.month = 1L,
   forecast.series = c("mean", "upper", "lower", "custom"),
-  forecast.level = 95, lf.series = NULL, .lf_indices = NULL,
-  accelerate.above = 100000L)
+  forecast.level = 95,
+  lf.series = NULL,
+  .lf_indices = NULL,
+  accelerate.above = 100000L
+)
 
-lf_inflator(labour_force = 1, from_date = "2013-06-30", to_date,
-  useABSConnection = FALSE)
+lf_inflator(
+  labour_force = 1,
+  from_date = "2013-06-30",
+  to_date,
+  useABSConnection = FALSE
+)
 }
 \arguments{
 \item{labour_force}{A numeric vector.}
@@ -29,7 +41,7 @@ If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{fro
 If the SDMX connection fails, a message is emitted (not a warning) and
 the function contines as if \code{useABSConnection = FALSE}.
 
-The internal data was updated on 2019-11-15 to 2019-10-01.}
+The internal data was updated on 2020-03-16 to 2020-01-01.}
 
 \item{allow.projection}{Logical. Should projections be allowed?}
 

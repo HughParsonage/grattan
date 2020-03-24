@@ -4,8 +4,14 @@
 \alias{generic_inflator}
 \title{Generic inflator}
 \usage{
-generic_inflator(vars, h, fy.year.of.sample.file = "2012-13",
-  nonzero = FALSE, estimator = "mean", pred_interval = 80)
+generic_inflator(
+  vars,
+  h,
+  fy.year.of.sample.file = "2012-13",
+  nonzero = FALSE,
+  estimator = "mean",
+  pred_interval = 80
+)
 }
 \arguments{
 \item{vars}{A character vector of those variables within \code{.sample_file} for which forecasts are desired.}

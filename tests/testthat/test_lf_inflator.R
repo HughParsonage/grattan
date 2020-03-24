@@ -40,7 +40,7 @@ test_that("Error handling", {
                regexp = "`lf.series$fy_year` did not have the required financial years.", 
                fixed = TRUE)
   expect_error(lf_inflator_fy(from_fy = "2018-19",
-                              to_fy = "2019-20",
+                              to_fy = next_fy(h = 2),
                               forecast.series = "custom",
                               lf.series = data.table(fy_year = c("2018-19", "2018-19"),
                                                      r = c(0, 0.123))), 
@@ -106,10 +106,10 @@ test_that("Custom lf series", {
   expect_equal(y, 1.1^2)
   
   y_custom_series <-
-    lf_inflator_fy(from_fy = "2018-19",
-                   to_fy = "2019-20",
+    lf_inflator_fy(from_fy = next_fy(),
+                   to_fy = next_fy(h = 2),
                    forecast.series = "custom",
-                   lf.series = data.table(fy_year = c("2018-19", "2019-20"),
+                   lf.series = data.table(fy_year = next_fy(h = 1:2),
                                           r = c(0, 0.123)))
   
   expect_equal(y_custom_series, 1.123)

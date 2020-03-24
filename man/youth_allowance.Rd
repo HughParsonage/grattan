@@ -4,16 +4,31 @@
 \alias{youth_allowance}
 \title{Youth allowance}
 \usage{
-youth_allowance(fortnightly_income = 0, annual_income = 0,
-  fy.year = NULL, include_ES = TRUE, age = 18L,
-  eligible_if_over22 = FALSE, has_partner = FALSE,
-  lives_at_home = FALSE, n_dependants = 0L,
-  isjspceoalfofcoahodeoc = FALSE, is_student = TRUE,
-  per = c("fortnight", "year"), max_rate = NULL, es = NULL,
-  taper1 = NULL, taper2 = NULL, FT_YA_student_lower = NULL,
-  FT_YA_student_upper = NULL, FT_YA_jobseeker_lower = NULL,
-  FT_YA_jobseeker_upper = NULL, partner_fortnightly_income = 0,
-  partner_is_pensioner = FALSE, partner_taper = 0.6)
+youth_allowance(
+  fortnightly_income = 0,
+  annual_income = 0,
+  fy.year = NULL,
+  include_ES = TRUE,
+  age = 18L,
+  eligible_if_over22 = FALSE,
+  has_partner = FALSE,
+  lives_at_home = FALSE,
+  n_dependants = 0L,
+  isjspceoalfofcoahodeoc = FALSE,
+  is_student = TRUE,
+  per = c("fortnight", "year"),
+  max_rate = NULL,
+  es = NULL,
+  taper1 = NULL,
+  taper2 = NULL,
+  FT_YA_student_lower = NULL,
+  FT_YA_student_upper = NULL,
+  FT_YA_jobseeker_lower = NULL,
+  FT_YA_jobseeker_upper = NULL,
+  partner_fortnightly_income = 0,
+  partner_is_pensioner = FALSE,
+  partner_taper = 0.6
+)
 }
 \arguments{
 \item{fortnightly_income, annual_income}{Individual's income. Default is zero. 

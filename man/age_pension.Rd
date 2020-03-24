@@ -4,13 +4,22 @@
 \alias{age_pension}
 \title{Age pension}
 \usage{
-age_pension(fortnightly_income = 0, annual_income = fortnightly_income
-  * 26, has_partner = FALSE, n_dependants = 0L,
+age_pension(
+  fortnightly_income = 0,
+  annual_income = fortnightly_income * 26,
+  has_partner = FALSE,
+  n_dependants = 0L,
   partner_fortnightly_income = 0,
   partner_annual_income = partner_fortnightly_income * 26,
-  partner_pensioner = has_partner, Date = NULL, fy.year = NULL,
-  assets_value = 0, financial_assets = 0, is_home_owner = FALSE,
-  illness_separated_couple = FALSE, per = c("year", "fortnight"))
+  partner_pensioner = has_partner,
+  Date = NULL,
+  fy.year = NULL,
+  assets_value = 0,
+  financial_assets = 0,
+  is_home_owner = FALSE,
+  illness_separated_couple = FALSE,
+  per = c("year", "fortnight")
+)
 }
 \arguments{
 \item{fortnightly_income, annual_income}{Income for means-testing purposes. Provide one but not both.}

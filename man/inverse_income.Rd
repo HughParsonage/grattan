@@ -4,8 +4,12 @@
 \alias{inverse_income}
 \title{Inverse income tax functions}
 \usage{
-inverse_income(tax, fy.year = "2012-13", zero.tax.income = c("maximum",
-  "zero", "uniform", numeric(1)), ...)
+inverse_income(
+  tax,
+  fy.year = "2012-13",
+  zero.tax.income = c("maximum", "zero", "uniform", numeric(1)),
+  ...
+)
 }
 \arguments{
 \item{tax}{The tax payable.}

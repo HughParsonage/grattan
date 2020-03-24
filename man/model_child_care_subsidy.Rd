@@ -4,16 +4,27 @@
 \alias{model_child_care_subsidy}
 \title{Model Child Care Subsidy}
 \usage{
-model_child_care_subsidy(sample_file, Cbdc_hourly_cap = NULL,
-  Fdc_hourly_cap = NULL, Oshc_hourly_cap = NULL,
-  Ihc_hourly_cap = NULL, Annual_cap_income = NULL,
-  Annual_cap_subsidy = NULL, Income_test_bracket_1 = NULL,
-  Income_test_bracket_2 = NULL, Income_test_bracket_3 = NULL,
-  Income_test_bracket_4 = NULL, Income_test_bracket_5 = NULL,
-  Taper_1 = NULL, Taper_2 = NULL, Taper_3 = NULL,
-  Activity_test_1_brackets = NULL, Activity_test_1_hours = NULL,
-  calc_baseline_ccs = TRUE, return. = c("sample_file", "new_ccs",
-  "sample_file.int"))
+model_child_care_subsidy(
+  sample_file,
+  Cbdc_hourly_cap = NULL,
+  Fdc_hourly_cap = NULL,
+  Oshc_hourly_cap = NULL,
+  Ihc_hourly_cap = NULL,
+  Annual_cap_income = NULL,
+  Annual_cap_subsidy = NULL,
+  Income_test_bracket_1 = NULL,
+  Income_test_bracket_2 = NULL,
+  Income_test_bracket_3 = NULL,
+  Income_test_bracket_4 = NULL,
+  Income_test_bracket_5 = NULL,
+  Taper_1 = NULL,
+  Taper_2 = NULL,
+  Taper_3 = NULL,
+  Activity_test_1_brackets = NULL,
+  Activity_test_1_hours = NULL,
+  calc_baseline_ccs = TRUE,
+  return. = c("sample_file", "new_ccs", "sample_file.int")
+)
 }
 \arguments{
 \item{sample_file}{A sample file having the same variables as the data.frame in the example.}

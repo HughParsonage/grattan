@@ -4,19 +4,32 @@
 \alias{child_care_subsidy}
 \title{Child Care Subsidy paid per child.}
 \usage{
-child_care_subsidy(family_annual_income = 0, activity_level = Inf,
-  activity_exemption = FALSE, child_age = 3,
+child_care_subsidy(
+  family_annual_income = 0,
+  activity_level = Inf,
+  activity_exemption = FALSE,
+  child_age = 3,
   type_of_day_care = c("cbdc", "oshc", "fdc", "ihc"),
-  hours_day_care_fortnight = 36, cost_hour = 10,
-  early_education_program = FALSE, cbdc_hourly_cap = 11.77,
-  fdc_hourly_cap = 10.9, oshc_hourly_cap = 10.29,
-  ihc_hourly_cap = 25.48, annual_cap_income = 186958,
-  annual_cap_subsidy = 10190, income_test_bracket_1 = 66958,
-  income_test_bracket_2 = 171958, income_test_bracket_3 = 251248,
-  income_test_bracket_4 = 341248, income_test_bracket_5 = 354248,
-  taper_1 = 0.85, taper_2 = 0.5, taper_3 = 0.2,
+  hours_day_care_fortnight = 36,
+  cost_hour = 10,
+  early_education_program = FALSE,
+  cbdc_hourly_cap = 11.77,
+  fdc_hourly_cap = 10.9,
+  oshc_hourly_cap = 10.29,
+  ihc_hourly_cap = 25.48,
+  annual_cap_income = 186958,
+  annual_cap_subsidy = 10190,
+  income_test_bracket_1 = 66958,
+  income_test_bracket_2 = 171958,
+  income_test_bracket_3 = 251248,
+  income_test_bracket_4 = 341248,
+  income_test_bracket_5 = 354248,
+  taper_1 = 0.85,
+  taper_2 = 0.5,
+  taper_3 = 0.2,
   activity_test_1_brackets = c(0, 8, 16.00001, 48.00001),
-  activity_test_1_hours = c(0, 36, 72, 100))
+  activity_test_1_hours = c(0, 36, 72, 100)
+)
 }
 \arguments{
 \item{family_annual_income}{(numeric) Total income of the family.}

@@ -4,10 +4,15 @@
 \alias{cpi_inflator}
 \title{CPI inflator}
 \usage{
-cpi_inflator(from_nominal_price = 1, from_fy = NULL, to_fy = NULL,
+cpi_inflator(
+  from_nominal_price = 1,
+  from_fy = NULL,
+  to_fy = NULL,
   adjustment = c("seasonal", "none", "trimmed.mean"),
-  useABSConnection = FALSE, allow.projection = TRUE,
-  accelerate.above = 100000L)
+  useABSConnection = FALSE,
+  allow.projection = TRUE,
+  accelerate.above = 100000L
+)
 }
 \arguments{
 \item{from_nominal_price}{(numeric) the price (or vector of prices) to be inflated}
@@ -23,7 +28,7 @@ If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{fro
 If the SDMX connection fails, a message is emitted (not a warning) and
 the function contines as if \code{useABSConnection = FALSE}.
 
-The internal data was updated on 2019-10-29 to 2019-Q2. 
+The internal data was updated on 2020-03-16 to 2019-Q4. 
 If using \code{useABSConnection = TRUE}, ensure you have \code{rsdmx (>= 0.5-10)} up-to-date.}
 
 \item{allow.projection}{Should projections beyond the ABS's data be allowed?}

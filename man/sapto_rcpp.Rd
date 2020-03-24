@@ -4,8 +4,15 @@
 \alias{sapto_rcpp}
 \title{SAPTO done in Rcpp}
 \usage{
-sapto_rcpp(RebateIncome, MaxOffset, LowerThreshold, TaperRate,
-  SaptoEligible, SpouseIncome, IsMarried)
+sapto_rcpp(
+  RebateIncome,
+  MaxOffset,
+  LowerThreshold,
+  TaperRate,
+  SaptoEligible,
+  SpouseIncome,
+  IsMarried
+)
 }
 \arguments{
 \item{RebateIncome, MaxOffset, LowerThreshold, TaperRate, SaptoEligible, SpouseIncome, IsMarried}{Arguments

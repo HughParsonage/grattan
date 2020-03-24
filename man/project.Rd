@@ -4,12 +4,21 @@
 \alias{project}
 \title{Simple projections of the annual 2\% samples of Australian Taxation Office tax returns.}
 \usage{
-project(sample_file, h = 0L, fy.year.of.sample.file = NULL,
-  WEIGHT = 50L, excl_vars = NULL, forecast.dots = list(estimator =
-  "mean", pred_interval = 80), wage.series = NULL, lf.series = NULL,
-  use_age_pop_forecast = FALSE, .recalculate.inflators = FALSE,
-  .copyDT = TRUE, check_fy_sample_file = TRUE,
-  differentially_uprate_Sw = TRUE)
+project(
+  sample_file,
+  h = 0L,
+  fy.year.of.sample.file = NULL,
+  WEIGHT = 50L,
+  excl_vars = NULL,
+  forecast.dots = list(estimator = "mean", pred_interval = 80),
+  wage.series = NULL,
+  lf.series = NULL,
+  use_age_pop_forecast = FALSE,
+  .recalculate.inflators = FALSE,
+  .copyDT = TRUE,
+  check_fy_sample_file = TRUE,
+  differentially_uprate_Sw = TRUE
+)
 }
 \arguments{
 \item{sample_file}{A \code{data.table} matching a 2\% sample file from the ATO.

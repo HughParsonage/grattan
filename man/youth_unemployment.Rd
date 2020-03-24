@@ -4,10 +4,18 @@
 \alias{youth_unemployment}
 \title{Youth unemployment}
 \usage{
-youth_unemployment(income = 0, assets = 0, fy.year = NULL,
-  Date = NULL, has_partner = FALSE, has_dependant = FALSE,
-  age = 23, lives_at_home = FALSE, independent = TRUE,
-  unemployed = FALSE)
+youth_unemployment(
+  income = 0,
+  assets = 0,
+  fy.year = NULL,
+  Date = NULL,
+  has_partner = FALSE,
+  has_dependant = FALSE,
+  age = 23,
+  lives_at_home = FALSE,
+  independent = TRUE,
+  unemployed = FALSE
+)
 }
 \arguments{
 \item{income}{Numeric vector of fortnightly income for the income test.}
