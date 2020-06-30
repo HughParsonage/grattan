@@ -1,51 +1,51 @@
-fy_year	family_status_index	family_status	max_offset	lower_threshold	upper_threshold	taper_rate	source	sapto	sato	pto
-2000-01	2	married	2310	25590	22035	NA	ATO Historical-rates-of-personal-income-tax	FALSE	FALSE	TRUE
-2000-01	3	separated_due_illness	2942	29306	26421	NA	ATO Historical-rates-of-personal-income-tax	FALSE	FALSE	TRUE
-2000-01	1	single	1608	15459	28323	NA	ATO Historical-rates-of-personal-income-tax	FALSE	FALSE	TRUE
-2001-02	2	married	2490	26648	23284	NA	ATO Historical-rates-of-personal-income-tax	FALSE	FALSE	TRUE
-2001-02	3	separated_due_illness	3146	30506	27837	NA	ATO Historical-rates-of-personal-income-tax	FALSE	FALSE	TRUE
-2001-02	1	single	1710	16059	29739	NA	ATO Historical-rates-of-personal-income-tax	FALSE	FALSE	TRUE
-2002-03	2	married	2848	28754	25769	0.125	ATO Historical-rates-of-personal-income-tax	FALSE	FALSE	TRUE
-2002-03	3	separated_due_illness	3564	32966	30739	0.125	ATO Historical-rates-of-personal-income-tax	FALSE	FALSE	TRUE
-2002-03	1	single	1925	17342	32766	0.125	ATO Historical-rates-of-personal-income-tax	FALSE	FALSE	TRUE
-2003-04	2	married	3204	33612	29622	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax2003-04.pdf	FALSE	TRUE	FALSE
-2003-04	3	separated_due_illness	4080	38766	35703	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax2003-04.pdf	FALSE	FALSE	FALSE
-2003-04	1	single	2230	20500	38340	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax2003-04.pdf	FALSE	TRUE	FALSE
-2004-05	2	married	3204	33612	29622	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax2004-05.pdf	FALSE	TRUE	FALSE
-2004-05	3	separated_due_illness	4080	38766	35703	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax2004-05.pdf	FALSE	TRUE	FALSE
-2004-05	1	single	2230	20500	38340	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax2004-05.pdf	FALSE	TRUE	FALSE
-2005-06	2	married	3204	36494	31063	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax_2005-06.pdf	FALSE	TRUE	FALSE
-2005-06	3	separated_due_illness	4080	42334	37487	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax_2005-06.pdf	FALSE	TRUE	FALSE
-2005-06	1	single	2230	21968	39808	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax_2005-06.pdf	FALSE	TRUE	FALSE
-2006-07	2	married	3204	43360	66992	0.125	http://www.inthepicture.com.au/tax_rates.pdf	FALSE	TRUE	FALSE
-2006-07	3	separated_due_illness	4080	47200	79840	0.125	http://www.inthepicture.com.au/tax_rates.pdf	FALSE	TRUE	FALSE
-2006-07	1	single	2230	24867	42707	0.125	NA	FALSE	TRUE	FALSE
-2007-08	2	married	3204	41360	66992	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	FALSE	TRUE	FALSE
-2007-08	3	separated_due_illness	4080	47200	79840	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	FALSE	TRUE	FALSE
-2007-08	1	single	2230	24867	42707	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	FALSE	TRUE	FALSE
-2008-09	1	single	2230	28867	46707	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	FALSE	TRUE	FALSE
-2009-10	1	single	2230	29867	47707	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	FALSE	TRUE	FALSE
-2010-11	1	single	2230	30685	48525	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	FALSE	TRUE	FALSE
-2011-12	1	single	2230	30685	48525	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	FALSE	TRUE	FALSE
-2012-13	2	married	3204	57948	83580	0.125	NA	TRUE	FALSE	FALSE
-2012-13	3	separated_due_illness	4080	62558	95198	0.125	NA	TRUE	FALSE	FALSE
-2012-13	1	single	2230	32279	50119	0.125	NA	TRUE	FALSE	FALSE
-2013-14	2	married	3204	57948	83580	0.125	NA	TRUE	FALSE	FALSE
-2013-14	3	separated_due_illness	4080	62558	95198	0.125	NA	TRUE	FALSE	FALSE
-2013-14	1	single	2230	32279	50119	0.125	NA	TRUE	FALSE	FALSE
-2014-15	2	married	3204	57948	83580	0.125	NA	TRUE	FALSE	FALSE
-2014-15	3	separated_due_illness	4080	62558	95198	0.125	NA	TRUE	FALSE	FALSE
-2014-15	1	single	2230	32279	50119	0.125	NA	TRUE	FALSE	FALSE
-2015-16	2	married	3204	57948	83580	0.125	NA	TRUE	FALSE	FALSE
-2015-16	3	separated_due_illness	4080	62558	95198	0.125	NA	TRUE	FALSE	FALSE
-2015-16	1	single	2230	32279	50119	0.125	NA	TRUE	FALSE	FALSE
-2016-17	2	married	3204	57948	83580	0.125	NA	TRUE	FALSE	FALSE
-2016-17	1	single	2230	32279	50119	0.125	NA	TRUE	FALSE	FALSE
-2017-18	2	married	3204	57948	83580	0.125	NA	TRUE	FALSE	FALSE
-2017-18	1	single	2230	32279	50119	0.125	NA	TRUE	FALSE	FALSE
-2018-19	2	married	3204	57948	83580	0.125	NA	TRUE	FALSE	FALSE
-2018-19	1	single	2230	32279	50119	0.125	NA	TRUE	FALSE	FALSE
-2019-20	2	married	3204	57948	83580	0.125	NA	TRUE	FALSE	FALSE
-2019-20	1	single	2230	32279	50119	0.125	NA	TRUE	FALSE	FALSE
-2020-21	2	married	3204	57948	83580	0.125	NA	TRUE	FALSE	FALSE
-2020-21	1	single	2230	32279	50119	0.125	NA	TRUE	FALSE	FALSE
+fy_year	family_status	family_status_index	max_offset	lower_threshold	upper_threshold	taper_rate	source	sapto	sato	pto
+2000-01	married	2	2310	25590	22035	NA	ATO Historical-rates-of-personal-income-tax	FALSE	FALSE	TRUE
+2000-01	separated_due_illness	3	2942	29306	26421	NA	ATO Historical-rates-of-personal-income-tax	FALSE	FALSE	TRUE
+2000-01	single	1	1608	15459	28323	NA	ATO Historical-rates-of-personal-income-tax	FALSE	FALSE	TRUE
+2001-02	married	2	2490	26648	23284	NA	ATO Historical-rates-of-personal-income-tax	FALSE	FALSE	TRUE
+2001-02	separated_due_illness	3	3146	30506	27837	NA	ATO Historical-rates-of-personal-income-tax	FALSE	FALSE	TRUE
+2001-02	single	1	1710	16059	29739	NA	ATO Historical-rates-of-personal-income-tax	FALSE	FALSE	TRUE
+2002-03	married	2	2848	28754	25769	0.125	ATO Historical-rates-of-personal-income-tax	FALSE	FALSE	TRUE
+2002-03	separated_due_illness	3	3564	32966	30739	0.125	ATO Historical-rates-of-personal-income-tax	FALSE	FALSE	TRUE
+2002-03	single	1	1925	17342	32766	0.125	ATO Historical-rates-of-personal-income-tax	FALSE	FALSE	TRUE
+2003-04	married	2	3204	33612	29622	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax2003-04.pdf	FALSE	TRUE	FALSE
+2003-04	separated_due_illness	3	4080	38766	35703	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax2003-04.pdf	FALSE	FALSE	FALSE
+2003-04	single	1	2230	20500	38340	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax2003-04.pdf	FALSE	TRUE	FALSE
+2004-05	married	2	3204	33612	29622	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax2004-05.pdf	FALSE	TRUE	FALSE
+2004-05	separated_due_illness	3	4080	38766	35703	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax2004-05.pdf	FALSE	TRUE	FALSE
+2004-05	single	1	2230	20500	38340	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax2004-05.pdf	FALSE	TRUE	FALSE
+2005-06	married	2	3204	36494	31063	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax_2005-06.pdf	FALSE	TRUE	FALSE
+2005-06	separated_due_illness	3	4080	42334	37487	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax_2005-06.pdf	FALSE	TRUE	FALSE
+2005-06	single	1	2230	21968	39808	0.125	https://www.dss.gov.au/sites/default/files/documents/06_2012/tax_2005-06.pdf	FALSE	TRUE	FALSE
+2006-07	married	2	3204	43360	66992	0.125	http://www.inthepicture.com.au/tax_rates.pdf	FALSE	TRUE	FALSE
+2006-07	separated_due_illness	3	4080	47200	79840	0.125	http://www.inthepicture.com.au/tax_rates.pdf	FALSE	TRUE	FALSE
+2006-07	single	1	2230	24867	42707	0.125	NA	FALSE	TRUE	FALSE
+2007-08	married	2	3204	41360	66992	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	FALSE	TRUE	FALSE
+2007-08	separated_due_illness	3	4080	47200	79840	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	FALSE	TRUE	FALSE
+2007-08	single	1	2230	24867	42707	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	FALSE	TRUE	FALSE
+2008-09	single	1	2230	28867	46707	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	FALSE	TRUE	FALSE
+2009-10	single	1	2230	29867	47707	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	FALSE	TRUE	FALSE
+2010-11	single	1	2230	30685	48525	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	FALSE	TRUE	FALSE
+2011-12	single	1	2230	30685	48525	0.125	http://www.lewistaxation.com.au/tax/historic-tax-tax/senior-australians-tax-offset-historical	FALSE	TRUE	FALSE
+2012-13	married	2	3204	57948	83580	0.125	NA	TRUE	FALSE	FALSE
+2012-13	separated_due_illness	3	4080	62558	95198	0.125	NA	TRUE	FALSE	FALSE
+2012-13	single	1	2230	32279	50119	0.125	NA	TRUE	FALSE	FALSE
+2013-14	married	2	3204	57948	83580	0.125	NA	TRUE	FALSE	FALSE
+2013-14	separated_due_illness	3	4080	62558	95198	0.125	NA	TRUE	FALSE	FALSE
+2013-14	single	1	2230	32279	50119	0.125	NA	TRUE	FALSE	FALSE
+2014-15	married	2	3204	57948	83580	0.125	NA	TRUE	FALSE	FALSE
+2014-15	separated_due_illness	3	4080	62558	95198	0.125	NA	TRUE	FALSE	FALSE
+2014-15	single	1	2230	32279	50119	0.125	NA	TRUE	FALSE	FALSE
+2015-16	married	2	3204	57948	83580	0.125	NA	TRUE	FALSE	FALSE
+2015-16	separated_due_illness	3	4080	62558	95198	0.125	NA	TRUE	FALSE	FALSE
+2015-16	single	1	2230	32279	50119	0.125	NA	TRUE	FALSE	FALSE
+2016-17	married	2	3204	57948	83580	0.125	NA	TRUE	FALSE	FALSE
+2016-17	single	1	2230	32279	50119	0.125	NA	TRUE	FALSE	FALSE
+2017-18	married	2	3204	57948	83580	0.125	NA	TRUE	FALSE	FALSE
+2017-18	single	1	2230	32279	50119	0.125	NA	TRUE	FALSE	FALSE
+2018-19	married	2	3204	57948	83580	0.125	NA	TRUE	FALSE	FALSE
+2018-19	single	1	2230	32279	50119	0.125	NA	TRUE	FALSE	FALSE
+2019-20	married	2	3204	57948	83580	0.125	NA	TRUE	FALSE	FALSE
+2019-20	single	1	2230	32279	50119	0.125	NA	TRUE	FALSE	FALSE
+2020-21	married	2	3204	57948	83580	0.125	NA	TRUE	FALSE	FALSE
+2020-21	single	1	2230	32279	50119	0.125	NA	TRUE	FALSE	FALSE
