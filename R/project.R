@@ -123,7 +123,7 @@ project <- function(sample_file,
     # without updating the fy.year.of.sample.file
     if (is.null(fy.year.of.sample.file)) {
       fy.year.of.sample.file <-
-        match(nrow(sample_file), c(254318L, 258774L, 263339L, 269639L,  277202L))
+        match(nrow(sample_file), c(254318L, 258774L, 263339L, 269639L,  277202L, 284925L))
       if (is.na(fy.year.of.sample.file)) {
         stop("`fy.year.of.sample.file` was not provided, and its value could not be ",
              "inferred from nrow(sample_file) = ", nrow(sample_file), ". Either use ", 
@@ -131,7 +131,7 @@ project <- function(sample_file,
              "supply `fy.year.of.sample.file` manually.")
       }
       fy.year.of.sample.file <- 
-        c("2012-13", "2013-14", "2014-15", "2015-16", "2016-17")[fy.year.of.sample.file]
+        c("2012-13", "2013-14", "2014-15", "2015-16", "2016-17", "2017-18")[fy.year.of.sample.file]
     }
     
     
@@ -161,7 +161,13 @@ project <- function(sample_file,
                warning("nrow(sample_file) != 277202. Should you choose a different fy.year.of.sample.file?")
              }
            },
-           stop("`fy.year.of.sample.file` must be '2012-13', '2013-14', '2014-15', '2015-16', or '2016-17'."))
+           "2017-18" = {
+             if (nrow(sample_file) != 284925) {
+               warning("nrow(sample_file) != 277202. Should you choose a different fy.year.of.sample.file?")
+             }
+           },
+           stop("`fy.year.of.sample.file` must be '2012-13', '2013-14', '2014-15', '2015-16', '2016-17',
+                or '2017-18'."))
   }
   
   if (h == 0) {
