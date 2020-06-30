@@ -126,6 +126,27 @@ qtrs_ahead <- function(x, y) {
   qtrs_ahead
 }
 
+seq.qtr <- function(from, length.out) {
+  out <- character(length.out)
+  if (length.out < 1) {
+    return(out)
+  }
+  out[1] <- from
+  if (length.out < 2) {
+    return(out)
+  }
+  yr <- as.integer(substr(from, 0, 4))
+  qt <- as.integer(substr(from, 7, 7))
+  for (i in 2:length.out) {
+    if (endsWith(out[i - 1], "Q4")) {
+      yr <- yr + 1
+    }
+    qt <- c(2L, 3L, 4L, 1L)[qt]
+    out[i] <- sprintf("%d-Q%d", yr, qt)
+  }
+  out
+}
+
 # vectorized switch 
 # e.g. Switch(c("A", "B", "C", "A"), "A" = 1, "B" = 2, "C" = 11:14)
 Switch <- function(Expr, ..., DEFAULT) {

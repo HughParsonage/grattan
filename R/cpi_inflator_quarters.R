@@ -24,6 +24,7 @@ cpi_inflator_quarters <- function(from_nominal_price,
   from_qtr <- gsub("([0-9]{4}).?(Q[1-4])", "\\1-\\2", from_qtr, perl = TRUE)
   to_qtr <- gsub("([0-9]{4}).?(Q[1-4])", "\\1-\\2", to_qtr, perl = TRUE)
   
+  
   cpi.indices <- 
     if (useABSConnection) {
       # Importing the cpi data
@@ -55,6 +56,26 @@ cpi_inflator_quarters <- function(from_nominal_price,
              "none" = cpi_unadj, 
              "seasonal" = cpi_seasonal_adjustment, 
              "trimmed" = cpi_trimmed)
+    }
+  
+  max_obsTime <- max(cpi.indices[["obsTime"]])
+  
+  if (max(to_qtr) > max_obsTime ||
+      max(from_qtr) > max_obsTime) {
+    max_qtr <- max(max(to_qtr), max(from_qtr))
+    h <- qtrs_ahead(max_obsTime, max_qtr)
+    cpi_index_forecast <- 
+      gforecast(cpi.indices[["obsValue"]], h = h + 1L) %>%
+      .[["mean"]] %>%
+      as.double
+    
+    cpi.indices.new <- 
+      setDT(list(obsTime = c(seq.qtr(max_obsTime, h + 2L)[-1L]),
+                 obsValue = cpi_index_forecast))
+    
+    cpi.indices <-
+      rbindlist(list(cpi.indices, cpi.indices.new),
+                use.names = TRUE)
   }
   
   inflator(from_nominal_price,

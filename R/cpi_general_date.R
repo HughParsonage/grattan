@@ -11,7 +11,7 @@
 cpi_inflator_general_date <- function(from_nominal_price = 1, 
                                       from_date, 
                                       to_date, 
-                                      ...){
+                                      ...) {
   # Check the nominal date
   if (all(grepl("^[12][0-9]{3}$", from_date))){
     from_date <- paste0(from_date, "-Q4")
@@ -58,6 +58,7 @@ cpi_inflator_general_date <- function(from_nominal_price = 1,
       }
     }  
   }
+  
   
   cpi_inflator_quarters(from_nominal_price = from_nominal_price,
                         from_qtr = from_date,

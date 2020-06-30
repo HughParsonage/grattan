@@ -150,4 +150,12 @@ test_that("hasntName", {
 })
 
 
+test_that("seq.qtr", {
+  expect_equal(seq.qtr(from = "2020-Q1", length.out = 5),
+               c("2020-Q1", "2020-Q2", "2020-Q3", "2020-Q4", 
+                 "2021-Q1"))
+  expect_equal(length(seq.qtr(from = "2010-Q4", length.out = 10)), 10)
+})
+
+
 

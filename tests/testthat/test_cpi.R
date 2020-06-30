@@ -361,5 +361,13 @@ test_that("cpi different lengths", {
                                 from_fy = rep("1999-00", 5)))
 })
 
+test_that("cpi_general_date", {
+  # Issue #211
+  expect_false(anyNA(cpi_inflator_general_date(from_nominal_price = 1, 
+                                               from_date = as.Date("2010-01-01"), 
+                                               to_date = as.Date("2040-01-01"),
+                                               adjustment = "none")))
+})
+
 
 
