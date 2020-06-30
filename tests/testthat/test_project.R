@@ -78,6 +78,9 @@ test_that("Error handling (sample files)", {
   expect_warning(project(sample_file_1112, h = 1L, fy.year.of.sample.file = "2015-16"), 
                  regexp = "nrow(sample_file) != 269639", 
                  fixed = TRUE)
+  expect_warning(project(sample_file_1112, h = 1L, fy.year.of.sample.file = "2017-18"), 
+                 regexp = "nrow(sample_file) != 284925", 
+                 fixed = TRUE)
   expect_error(project_to(sample_file_1112, "2013-14"),
                regexp = "`fy.year.of.sample.file` was not provided, yet its value could not be inferred from nrow(sample_file) = 254273.",
                fixed = TRUE)
