@@ -4,6 +4,12 @@ renew <- FALSE
 if ("dplyr" %in% .packages()) {
   stop("dplyr is attached. Restart R and source.")
 }
+# Don't have two library paths loaded
+if (length(.libPaths()) > 2 && Sys.getenv("USERNAME") == "hughp") {
+  .libPaths(.libPaths()[1])
+}
+library(readxl)
+library(tidyxl)
 library(unpivotr)
 library(htmltab)
 library(rsdmx)
@@ -1106,7 +1112,7 @@ if (!abs_key_aggregates_url_status) {
 
 
 abs_key_aggregates_metadata <-
-  read_excel("data-raw/5206001_key_aggregates-latest-release.xls", sheet = "Index", skip = 10) %>%
+  read_excel("data-raw/5206001_key_aggregates-latest-release.xls", sheet = "Index", skip = 9) %>%
   as.data.table %>%
   .[, list(Description = `Data Item Description`,
            Series_ID = `Series ID`,

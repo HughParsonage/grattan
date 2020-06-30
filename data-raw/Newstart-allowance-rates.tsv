@@ -57,3 +57,5 @@ Date	Rate	is_single	min_age	max_age
 2018-09-20	275.1	TRUE	21	Inf
 2019-03-20	277.85	TRUE	21	Inf
 2019-09-20	279.5	TRUE	21	Inf
+		TRUE	21	Inf
+2020-03-20		TRUE	21	Inf
