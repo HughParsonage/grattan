@@ -16,8 +16,6 @@ NumericVector IncomeTax(NumericVector x, NumericVector thresholds, NumericVector
   NumericVector tax(n);
   
   // Environment Env = Environment::parent();
-  
-  
   int tn = thresholds.length();
   
   for (int i = 0; i < n; ++i) {
@@ -39,9 +37,7 @@ NumericVector IncomeTax(NumericVector x, NumericVector thresholds, NumericVector
         }
       }
     }
-    
   }
-  
   
   return tax;
 }
