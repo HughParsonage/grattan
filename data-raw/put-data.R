@@ -1279,9 +1279,17 @@ newstart_rates_table <-
   .[, max_age := Inf] %>%
   # Only include entries following the heading within the table
   .[seq_len(.N) > which(Date %pin% "From 1 July 1991.*became")] %>%
-  .[, Rate := sub(" Note [MN]", "", Rate, perl = TRUE)] %>%
+  .[, Rate := sub(" Note [MNO]", "", Rate, perl = TRUE)] %>%
   .[, Date := as.Date(Date, format = "%d/%m/%Y")] %>%
-  .[, Rate := as.numeric(Rate)] %T>%
+  
+  # COVID-19 jobseeker payment is entered as a fortnightly payment
+  # (and marked as such)
+  .[endsWith(Rate, "fortnight."), PerFortnight := TRUE] %>%
+  .[1, PerFortnight := FALSE] %>%
+  .[, PerFortnight := zoo::na.locf(PerFortnight, na.rm = FALSE)] %>%
+  .[!is.na(Date)] %>%
+  .[, Rate := if_else(PerFortnight, as.numeric(Rate) / 2, as.numeric(Rate))] %>%
+  .[] %T>%
   fwrite("data-raw/Newstart-allowance-rates.tsv", sep = "\t") %>%
   .[] 
 
@@ -1385,11 +1393,7 @@ parenting_payment_by_fy <-
 }
 
 partner_income_free_area_by_fy_student_age <- 
-  tryCatch(getFromNamespace("partner_income_free_area_by_fy_student_age",
-                            ns = asNamespace("grattan")),
-           error = function(e) {
-             .partner_income_free_area(yr2fy(2005:2020), c(FALSE, TRUE), c(0L, 22L, 65L))
-  })
+  .partner_income_free_area(yr2fy(2005:2021), c(FALSE, TRUE), c(0L, 22L, 65L))
 
 if (hasName(partner_income_free_area_by_fy_student_age, 
             "PartnerReceivesBenefit")) {
