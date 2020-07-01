@@ -161,7 +161,9 @@ model_new_caps_and_div293 <- function(.sample.file,
   
   setkeyv(new_sample_file, "Ind")
   ans <- sample_file[new_sample_file]
-  if (!missing(new_contr_tax)) {
+  if (use_marginal_rate) {
+    NewMarginalRate <- OldContributionsTax <- NewContributionsTax <-
+      old_concessional_contributions <- new_concessional_contributions <- NULL
     ans[, OldContributionsTax := 0.15 * old_concessional_contributions]
     ans[, NewContributionsTax := (NewMarginalRate - rel_marginal_rate) * new_concessional_contributions]
     ans[, new_revenue := new_revenue + (NewContributionsTax - OldContributionsTax)]
