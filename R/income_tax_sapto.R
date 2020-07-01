@@ -40,7 +40,7 @@ income_tax_sapto <- function(income,
   # CRAN NOTE avoidance
   fy_year <- marginal_rate <- lower_bracket <- tax_at <- n <- tax <- ordering <- max_lito <- min_bracket <- lito_taper <- sato <- taper <- rate <- max_offset <- upper_threshold <- taper_rate <- medicare_income <- lower_up_for_each_child <-NULL
   
-  if (missing(sapto.eligible)){
+  if (missing(sapto.eligible)) {
     # Assume everyone of pension age is eligible for sapto.
     sapto.eligible <- age >= 65
   }

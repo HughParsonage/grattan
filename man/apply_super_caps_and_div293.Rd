@@ -70,6 +70,8 @@ apply_super_caps_and_div293(
 \item{drop_helpers}{(logical) Should columns used in the calculation be dropped before the sample file is returned?}
 
 \item{copyDT}{(logical) Should the data table be \code{copy()}d? If the action of this data table is being compared, possibly useful.}
+
+\item{contributions_tax}{The tax rate applied to super tax concessions.}
 }
 \value{
 A data table comprising the original sample file (\code{.sample.file}) with extra superannuation policy-relevant variables for the policy specified by the function.
