@@ -78,7 +78,11 @@ test_that("Error handling (sample files)", {
   expect_warning(project(sample_file_1112, h = 1L, fy.year.of.sample.file = "2015-16"), 
                  regexp = "nrow(sample_file) != 269639", 
                  fixed = TRUE)
-  expect_warning(project(sample_file_1112, h = 1L, fy.year.of.sample.file = "2017-18"), 
+  expect_warning(project(sample_file_1112,
+                         h = 1L, 
+                         fy.year.of.sample.file = "2017-18",
+                         .recalculate.inflators = TRUE, 
+                         differentially_uprate_Sw = FALSE), 
                  regexp = "nrow(sample_file) != 284925", 
                  fixed = TRUE)
   expect_error(project_to(sample_file_1112, "2013-14"),
@@ -117,10 +121,13 @@ test_that("Custom lf/wage series", {
   s2021_LA <- project(s1314, h = 7L, lf.series = 0.0)
   
   s2021_LB <- project(s1314, h = 7L, lf.series = 0.1)
+  lf_hs <- 
+    vapply(1:8, function(hh) lf_inflator_fy(from_fy = next_fy("2013-14", h = hh - 1L),
+                                            to_fy = next_fy("2013-14", h = hh)), 
+           FUN.VALUE = double(1))
+  
   expect_lt(s2021_LA[, sum(WEIGHT)], 
-            s2021[, sum(WEIGHT)])
-  expect_gt(s2021_LB[, sum(WEIGHT)], 
-            s2021[, sum(WEIGHT)])
+            s2021_LB[, sum(WEIGHT)])
   
   s2021_WA <- project(s1314, h = 7L, wage.series = 0.0)
   s2021_WB <- project(s1314, h = 7L, wage.series = 0.035)
