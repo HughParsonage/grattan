@@ -14,6 +14,7 @@ model_new_caps_and_div293(
   new_age_based_cap = FALSE,
   new_cap2_age = 49,
   new_ecc = FALSE,
+  new_contr_tax = "15\%",
   new_div293_threshold = 3e+05,
   use_other_contr = FALSE,
   scale_contr_match_ato = FALSE,
@@ -49,6 +50,8 @@ revenue_from_new_cap_and_div293(...)
 \item{new_cap2_age}{The age above which \code{new_cap2} applies.}
 
 \item{new_ecc}{(logical) Should an excess concessional contributions charge be calculated? (Not implemented.)}
+
+\item{new_contr_tax}{A string to determine the contributions tax.}
 
 \item{new_div293_threshold}{The \strong{proposed} Division 293 threshold.}
 
@@ -93,4 +96,16 @@ For \code{revenue_from_new_cap_and_div293}, the extra revenue expected from the 
 }
 \description{
 Modelling superannuation changes
+}
+\examples{
+
+if (requireNamespace("taxstats", quietly = TRUE)) {
+  library(data.table)
+  s1314 <- taxstats::sample_file_1314
+  s1314[, WEIGHT := 50L]
+  revenue_from_new_cap_and_div293(s1314, new_cap = 12e3, "2016-17")
+  revenue_from_new_cap_and_div293(s1314, new_contr_tax = "mr - 15\%", "2016-17")
+}
+
+
 }

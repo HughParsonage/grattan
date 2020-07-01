@@ -11,7 +11,6 @@
 #' @param cap2 The cap on concessional contributions for those above the age threshold. No effect if \code{age_based_cap} is FALSE.
 #' @param age_based_cap Is the cap on concessional contributions age-based? 
 #' @param cap2_age The age above which \code{cap2} applies.
-#' @param contributions_tax The tax rate applied to super tax concessions.
 #' @param ecc (logical) Should an excess concessional contributions charge be calculated? (Not implemented.)
 #' @param use_other_contr Make a (poor) assumption that all 'Other contributions' (\code{MCS_Othr_Contr}) are concessional contributions. This may be a useful upper bound should such contributions be considered important.
 #' @param scale_contr_match_ato (logical) Should concessional contributions be inflated to match aggregates in 2013-14? That is, should concessional contributions by multiplied by \code{grattan:::super_contribution_inflator_1314}, which was defined to be: \deqn{\frac{\textrm{Total assessable contributions in SMSF and funds}}{\textrm{Total contributions in 2013-14 sample file}}}{Total assessable contributions in SMSF and funds / Total contributions in 2013-14 sample file.}. 
@@ -25,6 +24,8 @@
 #' @param drop_helpers (logical) Should columns used in the calculation be dropped before the sample file is returned?
 #' @param copyDT (logical) Should the data table be \code{copy()}d? If the action of this data table is being compared, possibly useful.
 #' @return A data table comprising the original sample file (\code{.sample.file}) with extra superannuation policy-relevant variables for the policy specified by the function.
+#' 
+#' 
 #' @export 
 
 apply_super_caps_and_div293 <- function(.sample.file, 
@@ -47,7 +48,7 @@ apply_super_caps_and_div293 <- function(.sample.file,
                                         .SG_rate = 0.0925,
                                         warn_if_colnames_overwritten = TRUE, 
                                         drop_helpers = FALSE, 
-                                        copyDT = TRUE){
+                                        copyDT = TRUE) {
   # Todo/wontfix
   if (!identical(ecc, FALSE)) {
     stop("ECC not implemented.")
@@ -66,7 +67,7 @@ apply_super_caps_and_div293 <- function(.sample.file,
     .sample.file <- copy(.sample.file)
   }
   
-  if (!is.data.table(.sample.file)){
+  if (!is.data.table(.sample.file)) {
     stop(".sample.file must be a data.table")
   }
   
@@ -82,7 +83,7 @@ apply_super_caps_and_div293 <- function(.sample.file,
   
   common.indices <- new_colnames %in% names(.sample.file)
   
-  if (warn_if_colnames_overwritten && any(common.indices)){
+  if (warn_if_colnames_overwritten && any(common.indices)) {
     warning("Overwriting", names(.sample.file)[common.indices], "in .sample.file")
   }
   
@@ -94,7 +95,7 @@ apply_super_caps_and_div293 <- function(.sample.file,
   
   if (any(c(colname_div293_tax, colname_concessional, colname_new_Taxable_Income) %in% names(.sample.file))){
     warning("Dropping requested column names.")
-    .sample.file[ , which(names(.sample.file) %in% c(colname_div293_tax, colname_concessional, colname_new_Taxable_Income)) := NULL]
+    .sample.file[, (c(colname_div293_tax, colname_concessional, colname_new_Taxable_Income)) := NULL]
   }
   
   if (!all(c("MCS_Emplr_Contr", 
@@ -105,8 +106,8 @@ apply_super_caps_and_div293 <- function(.sample.file,
   }
   
   if ("Rptbl_Empr_spr_cont_amt" %in% names(.sample.file)){
-    .sample.file[ , SG_contributions := pmaxC(MCS_Emplr_Contr - Rptbl_Empr_spr_cont_amt, 0)]
-    .sample.file[ , salary_sacrifice_contributions := Rptbl_Empr_spr_cont_amt]
+    .sample.file[, SG_contributions := pmax0(MCS_Emplr_Contr - Rptbl_Empr_spr_cont_amt)]
+    .sample.file[, salary_sacrifice_contributions := Rptbl_Empr_spr_cont_amt]
   }
   
   if ("Non_emp_spr_amt" %in% names(.sample.file))
@@ -114,14 +115,14 @@ apply_super_caps_and_div293 <- function(.sample.file,
   
   # Concessional contributions
   if (scale_contr_match_ato) {
-    .sample.file[ , MCS_Emplr_Contr := MCS_Emplr_Contr * (1 + (super_contribution_inflator_1314 - 1) * .lambda) ]
-    .sample.file[ , Non_emp_spr_amt := Non_emp_spr_amt * (1 + (super_contribution_inflator_1314 - 1) * .lambda) ]
+    .sample.file[, MCS_Emplr_Contr := MCS_Emplr_Contr * (1 + (super_contribution_inflator_1314 - 1) * .lambda) ]
+    .sample.file[, Non_emp_spr_amt := Non_emp_spr_amt * (1 + (super_contribution_inflator_1314 - 1) * .lambda) ]
   }
   
-  .sample.file[ , concessional_contributions := MCS_Emplr_Contr + Non_emp_spr_amt]
-  .sample.file[ , non_concessional_contributions := pmaxC(MCS_Prsnl_Contr - Non_emp_spr_amt, 0)]
+  .sample.file[, concessional_contributions := MCS_Emplr_Contr + Non_emp_spr_amt]
+  .sample.file[, non_concessional_contributions := pmaxC(MCS_Prsnl_Contr - Non_emp_spr_amt, 0)]
   
-  if (impute_zero_concess_contr){
+  if (impute_zero_concess_contr) {
     # CRAN note avoidance.
     Sw_amt <- Rptbl_Empr_spr_cont_amt <- NULL
     

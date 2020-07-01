@@ -1,8 +1,12 @@
 ## 1.9.0.0
 
-### Updates
+### New features
 
 * 2017-18 sample file now contemplated as an input to `project` 
+* Modelling superannuation changes now accepts contributions taxes relative to 
+  marginal rates.
+
+### Data
 * Data updated to 2020-06-30
 
 ## 1.8.0.1
