@@ -95,7 +95,8 @@ income_tax <- function(income,
       fy.year %chin% c("2012-13", "2013-14", 
                        "2014-15", "2015-16",
                        "2016-17", "2017-18",
-                       "2018-19", "2019-20")) {
+                       "2018-19", "2019-20",
+                       "2020-21")) {
     out <- income_tax_cpp(income,
                           fy.year = fy.year,
                           .dots.ATO = .dots.ATO,
@@ -469,6 +470,9 @@ income_tax_cpp <- function(income,
          }, 
          "2019-20" = {
            Year.int <- 2020L
+         },
+         "2020-21" = {
+           Year.int <- 2021L
          },
          stop("`fy.year` was ", fy.year, ". ",
               "Use a single financial year from 2012-13 onwards ", 

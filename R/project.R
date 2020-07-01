@@ -163,7 +163,7 @@ project <- function(sample_file,
            },
            "2017-18" = {
              if (nrow(sample_file) != 284925) {
-               warning("nrow(sample_file) != 277202. Should you choose a different fy.year.of.sample.file?")
+               warning("nrow(sample_file) != 284925. Should you choose a different fy.year.of.sample.file?")
              }
            },
            stop("`fy.year.of.sample.file` must be '2012-13', '2013-14', '2014-15', '2015-16', '2016-17',
@@ -209,7 +209,7 @@ project <- function(sample_file,
   
   cpi.inflator <- cpi_inflator(1, from_fy = current.fy, to_fy = to.fy)
   
-  if (.recalculate.inflators) {
+  if (.recalculate.inflators || current.fy >= "2017-18") {
     CG.inflator <- CG_inflator(1, from_fy = current.fy, to_fy = to.fy)
   } else {
     if (current.fy %notin% c("2012-13", "2013-14", 

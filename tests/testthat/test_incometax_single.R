@@ -2,10 +2,13 @@
 context("Individual income tax")
 
 test_that("income tax checks", {
+  skip_on_cran()
   # no fy.year
+  skip_if(date2fy(Sys.Date()) > "2020-21")
+  
   expect_warning(income_tax(30e3), regexp = "fy\\.year is missing, using current financial year")
   
-  expect_equal(suppressWarnings(income_tax(30e3)),income_tax(30e3,date2fy(Sys.Date())))
+  expect_equal(suppressWarnings(income_tax(30e3)), income_tax(30e3, date2fy(Sys.Date())))
   
   # not fy
   expect_error(income_tax(1, "2015-17"), regexp = "not in correct form")

@@ -11,6 +11,7 @@
 #' @param cap2 The cap on concessional contributions for those above the age threshold. No effect if \code{age_based_cap} is FALSE.
 #' @param age_based_cap Is the cap on concessional contributions age-based? 
 #' @param cap2_age The age above which \code{cap2} applies.
+#' @param contributions_tax The tax rate applied to super tax concessions.
 #' @param ecc (logical) Should an excess concessional contributions charge be calculated? (Not implemented.)
 #' @param use_other_contr Make a (poor) assumption that all 'Other contributions' (\code{MCS_Othr_Contr}) are concessional contributions. This may be a useful upper bound should such contributions be considered important.
 #' @param scale_contr_match_ato (logical) Should concessional contributions be inflated to match aggregates in 2013-14? That is, should concessional contributions by multiplied by \code{grattan:::super_contribution_inflator_1314}, which was defined to be: \deqn{\frac{\textrm{Total assessable contributions in SMSF and funds}}{\textrm{Total contributions in 2013-14 sample file}}}{Total assessable contributions in SMSF and funds / Total contributions in 2013-14 sample file.}. 
