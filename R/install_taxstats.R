@@ -18,7 +18,7 @@ install_taxstats <- function(pkg = c("taxstats"), ...) {
   if (!missing(..1)) {
     dots <- list(...)
     if ("lib" %in% names(dots)) {
-      if (!requireNamespace("data.table", lib.loc = dots$lib)) {
+      if (!requireNamespace("data.table", lib.loc = dots$lib, quietly = TRUE)) {
         utils::install.packages("data.table", lib = dots$lib, ...)
       }
     }
