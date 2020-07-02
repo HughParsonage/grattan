@@ -77,10 +77,11 @@ for different tax rates and offsets among taxpayers with dependants since the sa
 }
 \examples{
 
+## Income tax payable on a taxable income of 50,000 
+## for the 2013-14 tax year
 income_tax(50e3, "2013-14")
 
 ## Calculate tax for each lodger in the 2013-14 sample file.
-## Essentially, this is the only use-case for `income_tax`
 
 if (requireNamespace("taxstats", quietly = TRUE)) {
   library(data.table)
