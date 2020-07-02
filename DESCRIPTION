@@ -15,7 +15,12 @@ Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.p
 Maintainer: Hugh Parsonage <hugh.parsonage@gmail.com>
 URL: https://github.com/HughParsonage/grattan, https://hughparsonage.github.io/grattan/
 BugReports: https://github.com/HughParsonage/grattan/issues
-Description: Utilities to cost and evaluate Australian tax policy, including fast projections of personal income tax collections, high-performance tax and transfer calculators, and an interface to common indices from the Australian Bureau of Statistics.  Written to support Grattan Institute's Australian Perspectives program, and related projects. Access to the Australian Taxation Office's sample files of personal income tax returns is assumed for much of the modelling work. Access to the 'taxstats' package, which is used for tests, can be obtained via the install taxstats function.
+Description: Utilities to cost and evaluate Australian tax policy, including fast
+    projections of personal income tax collections, high-performance tax and 
+    transfer calculators, and an interface to common indices from the Australian
+    Bureau of Statistics.  Written to support Grattan Institute's Australian 
+    Perspectives program, and related projects. Access to the Australian Taxation
+    Office's sample files of personal income tax returns is assumed. 
 Depends: R (>= 3.5.0)
 License: GPL-2
 Imports:
