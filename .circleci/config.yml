@@ -22,6 +22,7 @@ jobs:
             Rscript -e "print(R.version)"
             Rscript -e "utils::install.packages('hutilscpp', repos = 'https://cran.rstudio.com')"
             Rscript -e "devtools::install_deps(dependencies = TRUE, upgrade = 'never')"
+            sudo apt-get install texlive-fonts-recommended
       - run:
           no_output_timeout: 20m
           command: |
