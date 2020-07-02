@@ -1,5 +1,7 @@
 #' Install 'taxstats' files
-#' @description The taxstats packages provide the sample files as released by the ATO. These packages are used for testing, but are not available through CRAN as they are too large.
+#' @description The taxstats packages provide the sample files as released by the
+#'  ATO. These packages are used for testing, but are not available through CRAN 
+#'  as they are too large.
 #' @param pkg The package to install such as \code{"taxstats"} or \code{"taxstats1516"}.
 #' @param ... Arguments passed to \code{\link[utils]{install.packages}}.
 #' @export
@@ -7,9 +9,9 @@
 install_taxstats <- function(pkg = c("taxstats"), ...) {
   if (!identical(Sys.getenv("R_GRATTAN_BUILD_MAIN_VIGNETTE"), "true") ||
       !identical(Sys.getenv("R_GRATTAN_ALLOW_TAXSTATS"), "true")) {
-    message("Unable to install taxstats. Set one of the following environment variables\n\t", 
+    message("Unable to install taxstats. Set both of the following environment variables\n\t", 
             "Sys.setenv('R_GRATTAN_BUILD_MAIN_VIGNETTE' = 'true')\n", 
-            "or\n\t",
+            "# and\n\t",
             "Sys.setenv('R_GRATTAN_ALLOW_TAXSTATS' = 'true')\n")
     return(NULL)
   }
