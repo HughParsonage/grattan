@@ -68,7 +68,7 @@ model_new_caps_and_div293 <- function(.sample.file,
                                       prv_age_based_cap = TRUE, 
                                       prv_cap2_age = 49, 
                                       prv_ecc = FALSE,
-                                      prv_div293_threshold = 300e3){
+                                      prv_div293_threshold = 300e3) {
   prv_revenue <- new_revenue <- NULL
   if (!any("WEIGHT" == names(.sample.file))){
     warning("WEIGHT not specified. Using WEIGHT=50 (assuming a 2% sample file).")
@@ -169,7 +169,7 @@ model_new_caps_and_div293 <- function(.sample.file,
     NewMarginalRate <- OldContributionsTax <- NewContributionsTax <-
       old_concessional_contributions <- new_concessional_contributions <- NULL
     ans[, OldContributionsTax := 0.15 * old_concessional_contributions]
-    ans[, NewContributionsTax := (NewMarginalRate - rel_marginal_rate) * new_concessional_contributions]
+    ans[, NewContributionsTax := (NewMarginalRate + rel_marginal_rate) * new_concessional_contributions]
     ans[, new_revenue := new_revenue + (NewContributionsTax - OldContributionsTax)]
   }
   ans
