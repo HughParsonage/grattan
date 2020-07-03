@@ -115,9 +115,11 @@ NumericVector MedicareLevySaptoYear(NumericVector income,
       case 2020:
         out[i] = MedicareLevySingle(ii, 36056, 45069, 0.020, 0.1, sii, ifi, ndi, 50191, 62739, 3533);
         break;
+        // # nocov start
       default:
         out[i] = MedicareLevySingle(ii, 36056, 45069, 0.020, 0.1, sii, ifi, ndi, 50191, 62739, 3533);
       break;
+      // # nocov end
       }
     } else {
       switch (yr) {
