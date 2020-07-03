@@ -23,7 +23,7 @@ environment:
   #  R_BUILD_ARGS: --no-build-vignettes
   #  R_CHECK_ARGS: --ignore-vignettes --no-vignettes --no-manual
     
-  - R_VERSION: devel
+  - R_VERSION: release
     R_ARCH: x64
 
 
