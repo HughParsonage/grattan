@@ -159,11 +159,7 @@ test_that("Imputed, reweighted sample file agrees with aggregates by no less tha
   imputed_concessional_contributions <- 
     s1314 %>%
     .[, WEIGHT := 50L] %>%
-    apply_super_caps_and_div293(reweight_late_lodgers = TRUE, 
-                                age_based_cap = TRUE,
-                                cap = 30e3, 
-                                cap2 = 35e3,
-                                .SG_rate = 0.0925,
+    apply_super_caps_and_div293(reweight_late_lodgers = TRUE,
                                 impute_zero_concess_contr = TRUE) %$%
     sum(concessional_contributions * WEIGHT)
   
@@ -262,6 +258,26 @@ test_that("Warning with no WEIGHT.", {
   skip_if_not_installed("taxstats")
   library(taxstats)
   expect_warning(revenue_from_new_cap_and_div293(sample_file_1314, fy.year = "2013-14"))
+})
+
+test_that("Marginals Rate", {
+  skip_if_not_installed("taxstats")
+  skip_if_not_installed("hutilscpp")
+  library(taxstats)
+  library(data.table)
+  library(hutilscpp)
+  s1314 <- copy(taxstats::sample_file_1314)[, WEIGHT := 50L]
+  expect_error(model_new_caps_and_div293(.sample.file = s1314, fy.year = "2013-14", new_contr_tax = "mr/"),
+               regexp = "not of the form mr -",
+               fixed = TRUE)
+  s1314A <- model_new_caps_and_div293(s1314, fy.year = "2013-14", new_contr_tax = "mr + 15%")[, .(NewContributionsTax)]
+  s1314B <- model_new_caps_and_div293(s1314, fy.year = "2013-14", new_contr_tax = "mr - 15%")[, .(NewContributionsTax)]
+  
+  NewContTaxA <- s1314A[[1]]
+  NewContTaxB <- s1314B[[1]]
+  
+  wf1 <- which_first(NewContTaxA < NewContTaxB)
+  expect_equal(wf1, 0)
 })
 
 

@@ -155,7 +155,7 @@ model_new_caps_and_div293 <- function(.sample.file,
     if (startsWith(new_contr_tax, "mr - ")) {
       rel_marginal_rate <- -as.double(sub("^mr - ([0-9]+)[%]$", "\\1", new_contr_tax)) / 100
     } else if (startsWith(new_contr_tax, "mr + ")) {
-      rel_marginal_rate <- +as.double(sub("^mr + ([0-9]+)[%]$", "\\1", new_contr_tax)) / 100
+      rel_marginal_rate <- +as.double(sub("^mr . ([0-9]+)[%]$", "\\1", new_contr_tax)) / 100
     } else {
       stop("`contributions_tax = ", new_contr_tax, "` ", 
            "not of the form mr - <double> or mr + <double>")
