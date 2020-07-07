@@ -186,6 +186,7 @@ apply_super_caps_and_div293 <- function(.sample.file,
   
   # https://www.ato.gov.au/uploadedFiles/Content/TPALS/downloads/Division-293-scenario-table-v2.pdf
   .sample.file[ , excess_concessional_contributions := pmaxC(concessional_contributions - concessional_cap, 0)]
+  .sample.file[, concessional_contributions := concessional_contributions - excess_concessional_contributions]
   .sample.file[ , rental_losses := -1 * pminC(Net_rent_amt, 0)]
   .sample.file[ , surchargeable_income_div293 := Taxable_Income + Net_fincl_invstmt_lss_amt + rental_losses + Rep_frng_ben_amt]
   if (use_other_contr){

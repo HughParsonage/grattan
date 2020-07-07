@@ -159,7 +159,12 @@ test_that("Imputed, reweighted sample file agrees with aggregates by no less tha
   imputed_concessional_contributions <- 
     s1314 %>%
     .[, WEIGHT := 50L] %>%
-    apply_super_caps_and_div293(reweight_late_lodgers = TRUE, impute_zero_concess_contr = TRUE) %$%
+    apply_super_caps_and_div293(reweight_late_lodgers = TRUE, 
+                                age_based_cap = TRUE,
+                                cap = 30e3, 
+                                cap2 = 35e3,
+                                .SG_rate = 0.0925,
+                                impute_zero_concess_contr = TRUE) %$%
     sum(concessional_contributions * WEIGHT)
   
   percentage_difference <- 
