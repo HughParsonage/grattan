@@ -12,5 +12,7 @@ install_taxstats(pkg = c("taxstats"), ...)
 \item{...}{Arguments passed to \code{\link[utils]{install.packages}}.}
 }
 \description{
-The taxstats packages provide the sample files as released by the ATO. These packages are used for testing, but are not available through CRAN as they are too large.
+The taxstats packages provide the sample files as released by the
+ ATO. These packages are used for testing, but are not available through CRAN 
+ as they are too large.
 }
