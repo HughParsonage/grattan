@@ -107,8 +107,10 @@ model_new_caps_and_div293 <- function(.sample.file,
   old_div293_tax <- NULL
   new_div293_tax <- NULL
   
-  sample_file[, prv_revenue := income_tax(old_Taxable_Income, fy.year) + old_div293_tax]
-  sample_file <- sample_file[, c("Ind", "prv_revenue", "old_concessional_contributions", "old_div293_tax", "div293_income"), with = FALSE]
+  sample_file <- 
+    sample_file[, c("Ind", "old_concessional_contributions", "old_div293_tax", 
+                    "div293_income", "old_Taxable_Income"),
+                with = FALSE]
   sample_file %>%
     setnames("div293_income", "old_div293_income") %>%
     setkeyv("Ind")
@@ -140,14 +142,14 @@ model_new_caps_and_div293 <- function(.sample.file,
                                                  drop_helpers = FALSE, 
                                                  copyDT = TRUE)
   
-  new_sample_file[, new_revenue := income_tax(new_Taxable_Income, fy.year) + new_div293_tax]
-  new_sample_file[, NewMarginalRate := marginal_rate(new_sample_file, fy.year)]
+  
   sexp_contributions_tax <- substitute(new_contr_tax)
   use_marginal_rate <- 
     !missing(new_contr_tax) &&
     length(new_contr_tax) == 1L &&
     is.character(new_contr_tax) &&
     startsWith(new_contr_tax, "mr")
+  
   rel_marginal_rate <- 0
   if (use_marginal_rate) {
     if (startsWith(new_contr_tax, "mr - ")) {
@@ -165,13 +167,21 @@ model_new_caps_and_div293 <- function(.sample.file,
   
   setkeyv(new_sample_file, "Ind")
   ans <- sample_file[new_sample_file]
+  ans[, OldContributionsTax := 0.15 * old_concessional_contributions]
+  ans[, prv_ordinary_tax := income_tax(old_Taxable_Income, fy.year, .dots.ATO = .SD)]
+  ans[, prv_revenue := income_tax(old_Taxable_Income, fy.year, .dots.ATO = .SD) + old_div293_tax + OldContributionsTax]
   if (use_marginal_rate) {
     NewMarginalRate <- OldContributionsTax <- NewContributionsTax <-
       old_concessional_contributions <- new_concessional_contributions <- NULL
-    ans[, OldContributionsTax := 0.15 * old_concessional_contributions]
+    
+    ans[, NewMarginalRate := marginal_rate(new_sample_file, fy.year)]
     ans[, NewContributionsTax := (NewMarginalRate + rel_marginal_rate) * new_concessional_contributions]
-    ans[, new_revenue := new_revenue + (NewContributionsTax - OldContributionsTax)]
+   
+  } else {
+    ans[, NewContributionsTax := 0.15 * new_concessional_contributions]
   }
+  ans[, new_ordinary_tax := income_tax(new_Taxable_Income, fy.year, .dots.ATO = .SD)]
+  ans[, new_revenue := income_tax(new_Taxable_Income, fy.year, .dots.ATO = .SD) + NewContributionsTax + new_div293_tax]
   ans
 }
 
