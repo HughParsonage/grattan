@@ -1,4 +1,8 @@
 #' Modelling superannuation changes
+#' 
+#' @description Model changes to the contributions cap, Division 293 threshold 
+#' and related modelling. Note: defaults are relevant to pre-2017 for 
+#' compatibility.
 
 
 #' @param .sample.file A \code{data.table} whose variables include those in \code{taxstats::sample_file_1314}.
@@ -49,7 +53,7 @@ model_new_caps_and_div293 <- function(.sample.file,
                                       fy.year,
                                       new_cap = 30e3, 
                                       new_cap2 = 35e3, 
-                                      new_age_based_cap = FALSE, 
+                                      new_age_based_cap = TRUE, 
                                       new_cap2_age = 49, 
                                       new_ecc = FALSE,
                                       new_contr_tax = "15%",
@@ -61,7 +65,7 @@ model_new_caps_and_div293 <- function(.sample.file,
                                       .mu = 1.05,
                                       impute_zero_concess_contr = TRUE,
                                       .min.Sw.for.SG = 450 * 12,
-                                      .SG_rate = 0.095, 
+                                      .SG_rate = 0.0925, 
                                       
                                       prv_cap = 30e3, 
                                       prv_cap2 = 35e3, 

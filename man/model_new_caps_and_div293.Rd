@@ -11,7 +11,7 @@ model_new_caps_and_div293(
   fy.year,
   new_cap = 30000,
   new_cap2 = 35000,
-  new_age_based_cap = FALSE,
+  new_age_based_cap = TRUE,
   new_cap2_age = 49,
   new_ecc = FALSE,
   new_contr_tax = "15\%",
@@ -23,7 +23,7 @@ model_new_caps_and_div293(
   .mu = 1.05,
   impute_zero_concess_contr = TRUE,
   .min.Sw.for.SG = 450 * 12,
-  .SG_rate = 0.095,
+  .SG_rate = 0.0925,
   prv_cap = 30000,
   prv_cap2 = 35000,
   prv_age_based_cap = TRUE,
@@ -99,7 +99,9 @@ For \code{n_affected_from_new_cap_and_div293}, the number of individuals affecte
 For \code{revenue_from_new_cap_and_div293}, the extra revenue expected from the proposed changes.
 }
 \description{
-Modelling superannuation changes
+Model changes to the contributions cap, Division 293 threshold 
+and related modelling. Note: defaults are relevant to pre-2017 for 
+compatibility.
 }
 \examples{
 
