@@ -167,7 +167,9 @@ model_new_caps_and_div293 <- function(.sample.file,
   
   setkeyv(new_sample_file, "Ind")
   ans <- sample_file[new_sample_file]
+  
   ans[, OldContributionsTax := 0.15 * old_concessional_contributions]
+  prv_ordinary_tax <- NULL
   ans[, prv_ordinary_tax := income_tax(old_Taxable_Income, fy.year, .dots.ATO = .SD)]
   ans[, prv_revenue := income_tax(old_Taxable_Income, fy.year, .dots.ATO = .SD) + old_div293_tax + OldContributionsTax]
   if (use_marginal_rate) {
@@ -181,6 +183,7 @@ model_new_caps_and_div293 <- function(.sample.file,
     ans[, NewContributionsTax := 0.15 * new_concessional_contributions]
   }
   ans[, new_ordinary_tax := income_tax(new_Taxable_Income, fy.year, .dots.ATO = .SD)]
+  new_ordinary_tax <- NULL
   ans[, new_revenue := income_tax(new_Taxable_Income, fy.year, .dots.ATO = .SD) + NewContributionsTax + new_div293_tax]
   ans
 }
