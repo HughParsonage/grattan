@@ -14,10 +14,11 @@ project(
   wage.series = NULL,
   lf.series = NULL,
   use_age_pop_forecast = FALSE,
-  .recalculate.inflators = FALSE,
+  .recalculate.inflators = NA,
   .copyDT = TRUE,
   check_fy_sample_file = TRUE,
-  differentially_uprate_Sw = TRUE
+  differentially_uprate_Sw = NA,
+  r_super_balance = 1.05
 )
 }
 \arguments{
@@ -35,7 +36,8 @@ number of rows of \code{sample_file} to be one of \code{2012-13}, \code{2013-14}
 
 \item{forecast.dots}{A list containing parameters to be passed to \code{generic_inflator}.}
 
-\item{wage.series}{See \code{\link{wage_inflator}}. Note that the \code{Sw_amt} will uprated by \code{\link{differentially_uprate_wage}}.}
+\item{wage.series}{See \code{\link{wage_inflator}}. Note that the \code{Sw_amt}
+will uprated by \code{\link{differentially_uprate_wage}} (if requested).}
 
 \item{lf.series}{See \code{\link{lf_inflator_fy}}.}
 
@@ -43,15 +45,38 @@ number of rows of \code{sample_file} to be one of \code{2012-13}, \code{2013-14}
 moderated by the number of resident persons born in a certain year? If \code{TRUE},
 younger ages will grow at a slightly higher rate beyond 2018 than older ages.}
 
-\item{.recalculate.inflators}{(logical, default: \code{FALSE}. Should \code{generic_inflator()} or \code{CG_inflator} be called to project the other variables? Adds time.}
+\item{.recalculate.inflators}{(logical, default: \code{NA}). 
+Should \code{generic_inflator()} or \code{CG_inflator} be called to project the other variables? Adds time.
+Default \code{NA} means \code{TRUE} if the pre-calculated inflators are available,
+\code{FALSE} otherwise.}
 
-\item{.copyDT}{(logical, default: \code{TRUE}) Should a \code{copy()} of \code{sample_file} be made? If set to \code{FALSE}, will update \code{sample_file}.}
+\item{.copyDT}{(logical, default: \code{TRUE}) Should a \code{copy()} of \code{sample_file} be made?
+If set to \code{FALSE}, will update \code{sample_file} in place, which may
+be necessary when memory is constrained, but is dangerous as it modifies the
+original data and its projection. (So if you run the same code twice you 
+may end up with a projection \code{2h} years ahead, not \code{h} years.)}
 
-\item{check_fy_sample_file}{(logical, default: \code{TRUE}) Should \code{fy.year.of.sample.file} be checked against \code{sample_file}?
-By default, \code{TRUE}, an error is raised if the base is not 2012-13, 2013-14, 2014-15, 2015-16, or 2016-17, and a warning is raised if the 
+\item{check_fy_sample_file}{(logical, default: \code{TRUE}) 
+Should \code{fy.year.of.sample.file} be checked against \code{sample_file}?
+By default, \code{TRUE}, an error is raised if the base is not 2012-13, 2013-14, 2014-15, 2015-16, 2016-17,
+or 2017-18,
+ and a warning is raised if the 
 number of rows in \code{sample_file} is different to the known number of rows in the sample files.}
 
-\item{differentially_uprate_Sw}{(logical, default: \code{TRUE}) Should the salary and wage column (\code{Sw_amt}) be differentially uprating using (\code{\link{differentially_uprate_wage}})?}
+\item{differentially_uprate_Sw}{(logical, default: \code{NA}) 
+Should the salary and wage column (\code{Sw_amt}) be differentially uprated 
+using (\code{\link{differentially_uprate_wage}})? Default of \code{NA} means
+use differential uprating is used when \code{fy.year.of.sample.file <= "2016-17"}.
+It is known that the Treasury stopped using differential uprating by 2019.
+
+Selecting \code{TRUE} for \code{fy.year.of.sample.file > "2016-17"} is an 
+error as the precalculated values are not available.}
+
+\item{r_super_balance}{The factor to inflate super balances by (annualized).
+Set to \code{1.05} for backwards compatibility. The annual superannuation 
+bulletin of June 2019 from APRA reported 7.3\% growth of funds with more than
+fund members over the previous 5 years and 7.9\% growth over the 
+previous ten years.}
 }
 \value{
 A sample file with the same number of rows as \code{sample_file} but 
@@ -82,7 +107,7 @@ as the latter suggests lower-than-recorded tax collections.
 However, more recent data is of course preferable.
 }
 \examples{
-# install.packages('taxstats', repos = 'https://hughparsonage.github.io/drat')
+# install_taxstats()
 if (requireNamespace("taxstats", quietly = TRUE) &&
     requireNamespace("data.table", quietly = TRUE)) {
   library(taxstats)

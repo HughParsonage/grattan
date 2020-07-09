@@ -188,5 +188,19 @@ test_that("excl_vars has priority", {
   expect_false(Sw_all_equal(s1718, s1718_noSwAmt))
 })
 
+test_that("r_super_balance", {
+  skip_if_not_installed("taxstats")
+  library(data.table)
+  library(taxstats)
+  s1718 <- project(sample_file_1314, h = 4L, r_super_balance = 1L)
+  expect_equal(sample_file_1314$MCS_Ttl_Acnt_Bal, s1718$MCS_Ttl_Acnt_Bal)
+  
+  expect_error(project(sample_file_1314, h = 4L, r_super_balance = "abc"),
+               regexp = "r_super_balance")
+  expect_error(project(sample_file_1314, h = 4L, r_super_balance = 1:2),
+               regexp = "r_super_balance.*length")
+  
+})
+
 
 

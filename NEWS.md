@@ -3,6 +3,8 @@
 ### New features
 
 * 2017-18 sample file now contemplated as an input to `project` 
+* `project` now has `r_super_balance` to project super balances by a user-supplied
+  factor, rather than a hard-coded 1.05.
 * Modelling superannuation changes now accepts contributions taxes relative to 
   marginal rates.
 
