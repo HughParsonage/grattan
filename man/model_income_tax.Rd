@@ -27,7 +27,7 @@ model_income_tax(
   lito_min_bracket = NULL,
   lito_multi = NULL,
   Budget2018_lamington = FALSE,
-  Budget2019_lamington = FALSE,
+  Budget2019_lamington = NA,
   Budget2018_lito_202223 = FALSE,
   Budget2018_watr = FALSE,
   Budget2019_watr = FALSE,

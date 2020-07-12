@@ -11,11 +11,14 @@
 ### Data
 * Data updated to 2020-06-30
 
+### Internal:
+
+* `package:rsdmx` is now Suggested, since a dependency has been orphaned.
+
 ## 1.8.0.1
 
 ### Bug fixes
-Fixed issue with stringsAsFactors = FALSE being inconsistently applied
-with R 4.0
+* Fixed issue with stringsAsFactors = FALSE being inconsistently applied with R 4.0
 
 ### Data
 

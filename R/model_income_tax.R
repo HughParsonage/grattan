@@ -113,7 +113,7 @@ model_income_tax <- function(sample_file,
                              lito_multi = NULL,
                              
                              Budget2018_lamington = FALSE,
-                             Budget2019_lamington = FALSE,
+                             Budget2019_lamington = NA,
                              Budget2018_lito_202223 = FALSE,
                              Budget2018_watr = FALSE,
                              Budget2019_watr = FALSE,
@@ -755,7 +755,8 @@ model_income_tax <- function(sample_file,
       if  (Budget2018_lamington) {
         lmito(income, fy.year = baseline_fy)
         
-      } else if (Budget2019_lamington){
+      } else if (coalesce(Budget2019_lamington, 
+                          baseline_fy %in% yr2fy(2018:2021))) {
         lmito(income, 
               fy.year = baseline_fy,
               first_offset = 255,

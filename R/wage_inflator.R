@@ -125,6 +125,9 @@ wage_inflator <- function(wage = 1,
   
   if (useABSConnection) {
     # nocov start
+    if (!requireNamespace("rsdmx", quietly = TRUE)) {
+      stop("`useABSConnection = TRUE`, yet package:rsdmx is not installed.")  # nocov
+    }
     wage.url <- "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LABOUR_PRICE_INDEX/1.THRPEB.7.-.0.30.Q/all?startTime=1997-Q3"
     tryCatch({
       wages <- rsdmx::readSDMX(wage.url)

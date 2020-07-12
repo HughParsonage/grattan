@@ -104,6 +104,7 @@ test_that("from > to deflates and is not a warning for inflators", {
 test_that("ABS connection", {
   skip_on_cran()
   skip_on_circleci(2)
+  skip_if_not_installed("rsdmx")
   skip_if_not(packageVersion("rsdmx") >= package_version("0.5.10"))
   
   # Minimize false on errors on travis

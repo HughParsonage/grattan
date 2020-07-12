@@ -27,6 +27,9 @@ cpi_inflator_quarters <- function(from_nominal_price,
   
   cpi.indices <- 
     if (useABSConnection) {
+      if (!requireNamespace("rsdmx", quietly = TRUE)) {
+        stop("`useABSConnection = TRUE`, yet package:rsdmx is not installed.")  # nocov
+      }
       # Importing the cpi data
       cpi.url <- "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.10001.10+20.Q/ABS?startTime=1948"
       cpi.url.seasonal.adjustment <- "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999901.10+20.Q/ABS?startTime=1948"

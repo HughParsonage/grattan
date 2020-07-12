@@ -152,6 +152,9 @@ lf_inflator_fy <- function(labour_force = 1,
   
   if (useABSConnection) {
     # nocov start
+    if (!requireNamespace("rsdmx", quietly = TRUE)) {
+      stop("`useABSConnection = TRUE`, yet package:rsdmx is not installed.")  # nocov
+    }
     lf.indices <- 
       tryCatch({
         lf.url.trend <- 
