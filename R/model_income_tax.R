@@ -36,8 +36,12 @@
 #' @param lito_multi A list of two components, named \code{x} and \code{y}, giving the value of a \emph{replacement} for \code{lito} at specified points, which will be linked by a piecewise linear curve between the points specified. For example, to mimic LITO in 2015-16 (when the offset was \$445 for incomes below \$37,000, and afterwards tapered off to \$66,667), one would use \code{lito_multi = list(x = c(-Inf, 37e3, 200e3/3, Inf), y = c(445, 445, 0, 0))}. The reason the argument ends with \code{multi} is that it is intended to extend the original parameters of LITO so that multiple kinks (including ones of positive and negative gradients) can be modelled. 
 #' 
 #' @param Budget2018_lamington logical; default is `FALSE`. If set to `TRUE`, calculates the amount that taxpayers would be entitled to under the Low and Middle Income Tax Offset as contained in the 2018 Budget.
-#' @param Budget2019_lamington logical; default is `FALSE`. If set to `TRUE`, calculates the amount that taxpayers would be entitled to under the Low and Middle Income Tax Offset as amended by the 2019 Budget.
-#' @param Budget2018_lito_202223 The LITO proposed for 2022-23 proposed in the 2018 Budget.
+#' @param Budget2019_lamington logical. If set to `TRUE`, calculates the amount that taxpayers would be entitled to under the Low and Middle Income Tax Offset as amended by the 2019 Budget.
+#' 
+#' The default, `NA`, means `TRUE` if `baseline_fy` is set to a year where the LMITO
+#' is in effect, viz. 2017-18, 2018-19, 2019-20 or 2020-21, and `FALSE` otherwise.
+#' 
+#' @param Budget2018_lito_202223 The LITO proposed to start in 2022-23 as announced in the 2018 Budget.
 #' @param Budget2018_watr logical; default is `FALSE`. If set to `TRUE`, calculates the "Working Australian Tax Refund" as proposed in the Labor Opposition Leader's Budget Reply Speech 2018.
 #' @param Budget2019_watr logical; default is `FALSE`. If set to `TRUE`, calculates the "Working Australian Tax Refund" as revised in the Labor Opposition Leader's Budget Reply Speech 2019.
 #' 

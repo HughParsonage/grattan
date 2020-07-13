@@ -99,9 +99,12 @@ Since the temporary budget repair levy was imposed on a discrete tax bracket whe
 
 \item{Budget2018_lamington}{logical; default is `FALSE`. If set to `TRUE`, calculates the amount that taxpayers would be entitled to under the Low and Middle Income Tax Offset as contained in the 2018 Budget.}
 
-\item{Budget2019_lamington}{logical; default is `FALSE`. If set to `TRUE`, calculates the amount that taxpayers would be entitled to under the Low and Middle Income Tax Offset as amended by the 2019 Budget.}
+\item{Budget2019_lamington}{logical. If set to `TRUE`, calculates the amount that taxpayers would be entitled to under the Low and Middle Income Tax Offset as amended by the 2019 Budget.
 
-\item{Budget2018_lito_202223}{The LITO proposed for 2022-23 proposed in the 2018 Budget.}
+The default, `NA`, means `TRUE` if `baseline_fy` is set to a year where the LMITO
+is in effect, viz. 2017-18, 2018-19, 2019-20 or 2020-21, and `FALSE` otherwise.}
+
+\item{Budget2018_lito_202223}{The LITO proposed to start in 2022-23 as announced in the 2018 Budget.}
 
 \item{Budget2018_watr}{logical; default is `FALSE`. If set to `TRUE`, calculates the "Working Australian Tax Refund" as proposed in the Labor Opposition Leader's Budget Reply Speech 2018.}
 
