@@ -9,6 +9,6 @@ This is a package update
 
 NOTES:
 
-stringsAsFactors = TRUE | FALSE both work now
+Date-based error has been fixed 
 
 
