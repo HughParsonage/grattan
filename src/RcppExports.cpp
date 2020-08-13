@@ -104,6 +104,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// LMITO2
+NumericVector LMITO2(NumericVector x);
+RcppExport SEXP _grattan_LMITO2(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(LMITO2(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // anyOutside
 int anyOutside(IntegerVector x, int a, int b);
 RcppExport SEXP _grattan_anyOutside(SEXP xSEXP, SEXP aSEXP, SEXP bSEXP) {
@@ -324,6 +335,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_grattan_MedicareLevySaptoYear", (DL_FUNC) &_grattan_MedicareLevySaptoYear, 5},
     {"_grattan_MedicareLevy", (DL_FUNC) &_grattan_MedicareLevy, 11},
     {"_grattan_Offset", (DL_FUNC) &_grattan_Offset, 4},
+    {"_grattan_LMITO2", (DL_FUNC) &_grattan_LMITO2, 1},
     {"_grattan_anyOutside", (DL_FUNC) &_grattan_anyOutside, 3},
     {"_grattan_pmax3", (DL_FUNC) &_grattan_pmax3, 3},
     {"_grattan_pmaxC", (DL_FUNC) &_grattan_pmaxC, 2},

@@ -16,6 +16,8 @@ model_new_caps_and_div293(
   new_ecc = FALSE,
   new_contr_tax = "15\%",
   new_div293_threshold = 3e+05,
+  new_listo_rate = 0.15,
+  new_listo_threshold = 37000,
   use_other_contr = FALSE,
   scale_contr_match_ato = FALSE,
   .lambda = 0,
@@ -29,7 +31,9 @@ model_new_caps_and_div293(
   prv_age_based_cap = TRUE,
   prv_cap2_age = 49,
   prv_ecc = FALSE,
-  prv_div293_threshold = 3e+05
+  prv_div293_threshold = 3e+05,
+  prv_listo_rate = 0.15,
+  prv_listo_threshold = 37000
 )
 
 n_affected_from_new_cap_and_div293(..., adverse_only = TRUE)
@@ -39,7 +43,9 @@ revenue_from_new_cap_and_div293(...)
 \arguments{
 \item{.sample.file}{A \code{data.table} whose variables include those in \code{taxstats::sample_file_1314}.}
 
-\item{fy.year}{The financial year tax scales.}
+\item{fy.year}{The financial year tax scales. N.B. Has no bearing on the 
+default values of caps, is only used if a marginal tax rate forms part of the
+calculation of a superannuation tax.}
 
 \item{new_cap}{The \strong{proposed} cap on concessional contributions for all taxpayers if \code{age_based_cap} is FALSE, or for those below the age threshold otherwise.}
 
@@ -54,6 +60,11 @@ revenue_from_new_cap_and_div293(...)
 \item{new_contr_tax}{A string to determine the contributions tax.}
 
 \item{new_div293_threshold}{The \strong{proposed} Division 293 threshold.}
+
+\item{new_listo_rate}{The low-income superannaution tax offset (LISTO): what rate will apply
+to adjusted taxable income below \code{new_listo_threshold}.}
+
+\item{new_listo_threshold}{The threshold of adjusted taxable income below which LISTO applies.}
 
 \item{use_other_contr}{Should \code{MCS_Othr_Contr} be used to calculate Division 293 liabilities?}
 
@@ -82,6 +93,11 @@ revenue_from_new_cap_and_div293(...)
 \item{prv_ecc}{(logical) Should an excess concessional contributions charge be calculated? (Not implemented.)}
 
 \item{prv_div293_threshold}{The \strong{comparator} Division 293 threshold.}
+
+\item{prv_listo_rate}{The low-income superannaution tax offset (LISTO): what rate applied
+to adjusted taxable income below \code{prv_listo_threshold}?}
+
+\item{prv_listo_threshold}{The threshold of adjusted taxable income below which LISTO applied.}
 
 \item{...}{Passed to \code{model_new_caps_and_div293}.}
 

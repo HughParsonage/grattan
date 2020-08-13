@@ -6,7 +6,9 @@
 
 
 #' @param .sample.file A \code{data.table} whose variables include those in \code{taxstats::sample_file_1314}.
-#' @param fy.year The financial year tax scales.
+#' @param fy.year The financial year tax scales. N.B. Has no bearing on the 
+#' default values of caps, is only used if a marginal tax rate forms part of the
+#' calculation of a superannuation tax.
 #' @param new_cap The \strong{proposed} cap on concessional contributions for all taxpayers if \code{age_based_cap} is FALSE, or for those below the age threshold otherwise.
 #' @param new_cap2 The \strong{proposed} cap on concessional contributions for those above the age threshold. No effect if \code{age_based_cap} is FALSE.
 #' @param new_age_based_cap Is the \strong{proposed} cap on concessional contributions age-based? 
@@ -14,6 +16,9 @@
 #' @param new_ecc (logical) Should an excess concessional contributions charge be calculated? (Not implemented.)
 #' @param new_contr_tax A string to determine the contributions tax.
 #' @param new_div293_threshold The \strong{proposed} Division 293 threshold. 
+#' @param new_listo_rate The low-income superannaution tax offset (LISTO): what rate will apply
+#' to adjusted taxable income below \code{new_listo_threshold}.
+#' @param new_listo_threshold The threshold of adjusted taxable income below which LISTO applies.
 #' @param use_other_contr Should \code{MCS_Othr_Contr} be used to calculate Division 293 liabilities?
 #' @param scale_contr_match_ato (logical) Should concessional contributions be inflated to match aggregates in 2013-14? That is, should the concessional contributions by multiplied by the internal constant \code{grattan:::super_contribution_inflator_1314}, which was defined to be: \deqn{\frac{\textrm{Total assessable contributions in SMSF and funds}}{\textrm{Total contributions in 2013-14 sample file}}}{Total assessable contributions in SMSF and funds / Total contributions in 2013-14 sample file.}. 
 #' @param .lambda Scalar weight applied to \code{concessional contributions}. \eqn{\lambda = 0} means no (extra) weight. \eqn{\lambda = 1} means contributions are inflated by the ratio of aggregates to the sample file's total. For \eqn{R = \textrm{actual} / \textrm{apparent}} then the contributions are scaled by \eqn{1 + \lambda(R - 1)}.
@@ -28,6 +33,9 @@
 #' @param prv_cap2_age The age above which \code{new_cap2} applies.
 #' @param prv_ecc (logical) Should an excess concessional contributions charge be calculated? (Not implemented.)
 #' @param prv_div293_threshold The \strong{comparator} Division 293 threshold. 
+#' @param prv_listo_rate The low-income superannaution tax offset (LISTO): what rate applied
+#' to adjusted taxable income below \code{prv_listo_threshold}?
+#' @param prv_listo_threshold The threshold of adjusted taxable income below which LISTO applied.
 #' @param ... Passed to \code{model_new_caps_and_div293}.
 #' @param adverse_only Count only individuals who are adversely affected by the change.
 #' @return For \code{model_new_caps_and_div293}, a \code{data.frame}, comprising 
@@ -58,6 +66,8 @@ model_new_caps_and_div293 <- function(.sample.file,
                                       new_ecc = FALSE,
                                       new_contr_tax = "15%",
                                       new_div293_threshold = 300e3,
+                                      new_listo_rate = 0.15,
+                                      new_listo_threshold = 37000,
                                       use_other_contr = FALSE, 
                                       scale_contr_match_ato = FALSE, 
                                       .lambda = 0, 
@@ -72,13 +82,19 @@ model_new_caps_and_div293 <- function(.sample.file,
                                       prv_age_based_cap = TRUE, 
                                       prv_cap2_age = 49, 
                                       prv_ecc = FALSE,
-                                      prv_div293_threshold = 300e3) {
+                                      prv_div293_threshold = 300e3,
+                                      prv_listo_rate = 0.15,
+                                      prv_listo_threshold = 37000) {
   prv_revenue <- new_revenue <- NULL
   if (!any("WEIGHT" == names(.sample.file))){
     warning("WEIGHT not specified. Using WEIGHT=50 (assuming a 2% sample file).")
-    WEIGHT <- 50
-    .sample.file[, WEIGHT := WEIGHT]
+    .sample.file[, WEIGHT := 50]
   } 
+  
+  use_listo <- 
+    !identical(prv_listo_rate, new_listo_rate) ||
+    !identical(prv_listo_threshold, new_listo_threshold)
+  
   
   
   
@@ -104,6 +120,10 @@ model_new_caps_and_div293 <- function(.sample.file,
                                              ecc = prv_ecc,
                                              warn_if_colnames_overwritten = FALSE, 
                                              drop_helpers = FALSE, 
+                                             incl_listo = use_listo,
+                                             listo_rate = prv_listo_rate,
+                                             listo_threshold = prv_listo_threshold,
+                                             colname_listo = "old_listo",
                                              copyDT = TRUE)
   
   new_Taxable_Income <- NULL
@@ -112,9 +132,10 @@ model_new_caps_and_div293 <- function(.sample.file,
   new_div293_tax <- NULL
   
   sample_file <- 
-    sample_file[, c("Ind", "old_concessional_contributions", "old_div293_tax", 
-                    "div293_income", "old_Taxable_Income"),
-                with = FALSE]
+    hutils::selector(sample_file, 
+                     cols = c("Ind", "old_concessional_contributions", "old_div293_tax", 
+                              "div293_income", "old_Taxable_Income",
+                              if (use_listo) "old_listo"))
   sample_file %>%
     setnames("div293_income", "old_div293_income") %>%
     setkeyv("Ind")
@@ -142,6 +163,10 @@ model_new_caps_and_div293 <- function(.sample.file,
                                                  age_based_cap = new_age_based_cap, 
                                                  cap2_age = new_cap2_age, 
                                                  ecc = new_ecc,
+                                                 incl_listo = use_listo,
+                                                 listo_rate = new_listo_rate,
+                                                 listo_threshold = new_listo_threshold,
+                                                 colname_listo = "new_listo",
                                                  warn_if_colnames_overwritten = FALSE, 
                                                  drop_helpers = FALSE, 
                                                  copyDT = TRUE)
@@ -189,6 +214,12 @@ model_new_caps_and_div293 <- function(.sample.file,
   ans[, new_ordinary_tax := income_tax(new_Taxable_Income, fy.year, .dots.ATO = .SD)]
   new_ordinary_tax <- NULL
   ans[, new_revenue := income_tax(new_Taxable_Income, fy.year, .dots.ATO = .SD) + NewContributionsTax + new_div293_tax]
+  
+  if (use_listo) {
+    ans[, prv_revenue := prv_revenue - old_listo]
+    ans[, new_revenue := new_revenue - new_listo]
+  }
+  
   ans
 }
 

@@ -43,3 +43,31 @@ NumericVector Offset(NumericVector x,
   return out;
 }
 
+// [[Rcpp::export]]
+NumericVector LMITO2(NumericVector x) {
+  int n = x.length();
+  NumericVector out = no_init(n);
+  
+  for (int i = 0; i < n; ++i) {
+    double xi = x[i];
+    out[i] = 255;
+    if (xi <= 37e3) {
+      continue;
+    }
+    if (xi > 37e3 && xi <= 48e3) {
+      out[i] += 0.075 * (xi - 37e3); 
+      continue;
+    }
+    if (xi > 48e3 && xi <= 90e3) {
+      out[i] = 1080;
+      continue;
+    }
+    if (xi > 90e3 && xi <= 126e3) {
+      out[i] = 1080 - 0.03 * (xi - 90e3);
+      continue;
+    }
+    out[i] = 0;
+  }
+  return out;
+}
+

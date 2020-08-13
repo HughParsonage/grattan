@@ -25,6 +25,12 @@ apply_super_caps_and_div293(
   .SG_rate = 0.0925,
   warn_if_colnames_overwritten = TRUE,
   drop_helpers = FALSE,
+  incl_listo = FALSE,
+  listo_rate = 0.15,
+  listo_threshold = 37000,
+  listo_min = 10,
+  listo_max = 500,
+  colname_listo = "listo",
   copyDT = TRUE
 )
 }
@@ -67,7 +73,19 @@ apply_super_caps_and_div293(
 
 \item{warn_if_colnames_overwritten}{(logical) Issue a warning if the construction of helper columns will overwrite existing column names in \code{.sample.file}.}
 
-\item{drop_helpers}{(logical) Should columns used in the calculation be dropped before the sample file is returned?}
+\item{drop_helpers}{(logical) Should columns used in the calculation be dropped
+before the sample file is returned?}
+
+\item{incl_listo}{(logical, default: \code{FALSE}) Should the low-income 
+superannuation tax offset be included?}
+
+\item{listo_rate}{The low-income superannaution tax offset (LISTO): the rate to apply
+to adjusted taxable income below \code{new_listo_threshold}.}
+
+\item{listo_threshold}{The threshold of adjusted taxable income below which LISTO applies.}
+
+\item{listo_min, listo_max}{The minimum and maximum values of LISTO, for individuals 
+satisfying the elgiibility criteria.}
 
 \item{copyDT}{(logical) Should the data table be \code{copy()}d? If the action of this data table is being compared, possibly useful.}
 }
