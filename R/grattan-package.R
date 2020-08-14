@@ -46,6 +46,7 @@
 #' @importFrom Rcpp sourceCpp
 #' @importFrom stats complete.cases
 #' @importFrom stats setNames
+#' @importFrom utils hasName
 #' 
 #' 
 #' @import data.table

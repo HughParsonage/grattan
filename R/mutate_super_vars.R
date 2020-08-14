@@ -21,7 +21,16 @@
 #' @param .min.Sw.for.SG The minimum salary required for super guarantee to be imputed.
 #' @param .SG_rate The super guarantee rate for imputation.
 #' @param warn_if_colnames_overwritten (logical) Issue a warning if the construction of helper columns will overwrite existing column names in \code{.sample.file}.
-#' @param drop_helpers (logical) Should columns used in the calculation be dropped before the sample file is returned?
+#' @param drop_helpers (logical) Should columns used in the calculation be dropped
+#'  before the sample file is returned?
+#' @param incl_listo (logical, default: \code{FALSE}) Should the low-income 
+#' superannuation tax offset be included?
+#' @param listo_rate The low-income superannaution tax offset (LISTO): the rate to apply
+#' to adjusted taxable income below \code{new_listo_threshold}.
+#' @param listo_threshold The threshold of adjusted taxable income below which LISTO applies.
+#' @param listo_min,listo_max The minimum and maximum values of LISTO, for individuals 
+#' satisfying the elgiibility criteria.
+#' @param colname_listo A string, the column name of LISTO to be added to \code{.sample.file}.
 #' @param copyDT (logical) Should the data table be \code{copy()}d? If the action of this data table is being compared, possibly useful.
 #' @return A data table comprising the original sample file (\code{.sample.file}) with extra superannuation policy-relevant variables for the policy specified by the function.
 #' 
@@ -48,11 +57,18 @@ apply_super_caps_and_div293 <- function(.sample.file,
                                         .SG_rate = 0.0925,
                                         warn_if_colnames_overwritten = TRUE, 
                                         drop_helpers = FALSE, 
+                                        incl_listo = FALSE,
+                                        listo_rate = 0.15,
+                                        listo_threshold = 37000,
+                                        listo_min = 10,
+                                        listo_max = 500,
+                                        colname_listo = "listo",
                                         copyDT = TRUE) {
   # Todo/wontfix
   if (!identical(ecc, FALSE)) {
     stop("ECC not implemented.")
   }
+  check_TF(incl_listo)
   
   # CRAN NOTE avoidance
   age_range_description <- concessional_cap <- div293_income <- div293_tax <-
@@ -63,7 +79,9 @@ apply_super_caps_and_div293 <- function(.sample.file,
     salary_sacrifice_contributions <- personal_deductible_contributions <- 
     non_concessional_contributions <- Taxable_income_for_ECT <- NULL
   
-  if (copyDT){
+  WEIGHT <- NULL
+  
+  if (copyDT) {
     .sample.file <- copy(.sample.file)
   }
   
@@ -105,6 +123,17 @@ apply_super_caps_and_div293 <- function(.sample.file,
     stop("The sample file you requested does not have the variables needed for this function.")
   }
   
+  if (incl_listo &&
+      !hasName(.sample.file, "Tot_inc_amt") &&
+      !hasName(.sample.file, "Tot_IncLoss_amt")) {
+    stop(".sample.file does not have a column 'Tot_inc_amt' or 'Tot_IncLoss_amt', ",
+         "yet `incl_listo = TRUE`.")
+  }
+  if (incl_listo && !hasName(.sample.file, "Tot_IncLoss_amt")) {
+    Tot_inc_amt <- NULL  # must be a column
+    .sample.file[, Tot_IncLoss_amt := Tot_inc_amt]
+  }
+  
   if ("Rptbl_Empr_spr_cont_amt" %in% names(.sample.file)){
     .sample.file[, SG_contributions := pmax0(MCS_Emplr_Contr - Rptbl_Empr_spr_cont_amt)]
     .sample.file[, salary_sacrifice_contributions := Rptbl_Empr_spr_cont_amt]
@@ -137,7 +166,7 @@ apply_super_caps_and_div293 <- function(.sample.file,
   }
   
   if (reweight_late_lodgers){
-    WEIGHT <- NULL
+    
     if (!any("WEIGHT" == names(.sample.file))){
       warning("No WEIGHT found; using WEIGHT=50 in reweighting.")
       .sample.file[ , WEIGHT := 50]
@@ -199,6 +228,22 @@ apply_super_caps_and_div293 <- function(.sample.file,
                                         0.15 * pminV(low_tax_contributions_div293, 
                                                      pmaxC(div293_income - div293_threshold, 0)), 
                                         0)]
+  if (incl_listo) {
+    adjusted_taxable_income <- NULL
+    .sample.file[, "adjusted_taxable_income" := Taxable_Income + Rep_frng_ben_amt * 0.53 + Asbl_forgn_source_incm_amt + Net_fincl_invstmt_lss_amt + Aust_govt_pnsn_allw_amt + Rptbl_Empr_spr_cont_amt]
+    
+    Tot_IncLoss_amt <- Tot_inc_amt <- NULL
+    
+    .sample.file[, (colname_listo) := if_else(and(adjusted_taxable_income <= listo_threshold,  # income test
+                                                  and(concessional_contributions > 0,  # super contributions test
+                                                      # 10% of income from salary or business
+                                                      Sw_amt + Total_PP_BI_amt + Total_NPP_BI_amt >= 0.1 * Tot_IncLoss_amt)), 
+                                              hutilscpp::squish(listo_rate * adjusted_taxable_income,
+                                                                listo_min, 
+                                                                listo_max),
+                                              0)]
+    .sample.file[, adjusted_taxable_income := NULL]
+  }
   
   # Modify taxable income to reflect exceeding cap:
   .sample.file[ , Taxable_income_for_ECT := Taxable_Income + excess_concessional_contributions]

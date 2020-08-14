@@ -64,6 +64,10 @@ Offset <- function(x, y, a, m) {
     .Call(`_grattan_Offset`, x, y, a, m)
 }
 
+LMITO2 <- function(x) {
+    .Call(`_grattan_LMITO2`, x)
+}
+
 anyOutside <- function(x, a, b) {
     .Call(`_grattan_anyOutside`, x, a, b)
 }

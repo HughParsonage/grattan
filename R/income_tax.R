@@ -261,6 +261,7 @@ rolling_income_tax <- function(income,
                   .checks = FALSE)
   
   lito. <- .lito(input)
+  lmito. <- (fy.year %in% yr2fy(2019:2022)) * (LMITO2(income))
   
   if (any(sapto.eligible)) {
     sapto. <- double(max.length)
@@ -320,7 +321,7 @@ rolling_income_tax <- function(income,
   }
   
   # http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html
-  S4.10_basic_income_tax_liability <- pmaxIPnum0(base_tax. - lito. - sapto.)
+  S4.10_basic_income_tax_liability <- pmaxIPnum0(base_tax. - lito. - lmito. - sapto.)
   
   # SBTO can only be calculated off .dots.ATO
   if (is.null(.dots.ATO)) {
@@ -550,11 +551,16 @@ income_tax_cpp <- function(income,
     sapto. <- 0
   }
   
+  lmito. <- 0
+  if (Year.int >= 2019L && Year.int <= 2022L) {
+    lmito. <- LMITO2(income)
+  }
+  
   # 2011-12 is never used
   flood_levy. <- 0
   
   # http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html
-  S4.10_basic_income_tax_liability <- pmaxIPnum0(base_tax. - lito. - sapto.)
+  S4.10_basic_income_tax_liability <- pmaxIPnum0(base_tax. - lito. - lmito. - sapto.)
   
   # SBTO can only be calculated off .dots.ATO
   if (is.null(.dots.ATO)) {
@@ -580,6 +586,8 @@ income_tax_cpp <- function(income,
     out <- out + 0.02 * pmax0(income - 180e3)
   }
   
+  
+  
   if (any(income < 0)) {
     warning("Negative entries in income detected. These will have value NA.")
     out[income < 0] <- switch(storage.mode(out), 
@@ -592,6 +600,7 @@ income_tax_cpp <- function(income,
       copy(.dots.ATO) %>%
       .[, "base_tax" := base_tax.] %>%
       .[, "lito" := lito.] %>%
+      .[, "lmito" := lmito.] %>%
       .[, "sapto" := sapto.] %>%
       .[, "medicare_levy" := medicare_levy.] %>%
       .[, "income_tax" := out] %>%
