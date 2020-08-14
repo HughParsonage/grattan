@@ -85,7 +85,7 @@ model_new_caps_and_div293 <- function(.sample.file,
                                       prv_div293_threshold = 300e3,
                                       prv_listo_rate = 0.15,
                                       prv_listo_threshold = 37000) {
-  prv_revenue <- new_revenue <- NULL
+  prv_revenue <- new_revenue <- WEIGHT <- NULL
   if (!any("WEIGHT" == names(.sample.file))){
     warning("WEIGHT not specified. Using WEIGHT=50 (assuming a 2% sample file).")
     .sample.file[, WEIGHT := 50]
@@ -131,12 +131,12 @@ model_new_caps_and_div293 <- function(.sample.file,
   old_div293_tax <- NULL
   new_div293_tax <- NULL
   
+  
   sample_file <- 
     hutils::selector(sample_file, 
                      cols = c("Ind", "old_concessional_contributions", "old_div293_tax", 
                               "div293_income", "old_Taxable_Income",
-                              if (use_listo) "old_listo"))
-  sample_file %>%
+                              if (use_listo) "old_listo")) %>%
     setnames("div293_income", "old_div293_income") %>%
     setkeyv("Ind")
   
@@ -216,6 +216,7 @@ model_new_caps_and_div293 <- function(.sample.file,
   ans[, new_revenue := income_tax(new_Taxable_Income, fy.year, .dots.ATO = .SD) + NewContributionsTax + new_div293_tax]
   
   if (use_listo) {
+    new_listo <- old_listo <- NULL
     ans[, prv_revenue := prv_revenue - old_listo]
     ans[, new_revenue := new_revenue - new_listo]
   }

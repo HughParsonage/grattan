@@ -87,6 +87,8 @@ to adjusted taxable income below \code{new_listo_threshold}.}
 \item{listo_min, listo_max}{The minimum and maximum values of LISTO, for individuals 
 satisfying the elgiibility criteria.}
 
+\item{colname_listo}{A string, the column name of LISTO to be added to \code{.sample.file}.}
+
 \item{copyDT}{(logical) Should the data table be \code{copy()}d? If the action of this data table is being compared, possibly useful.}
 }
 \value{
