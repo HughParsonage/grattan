@@ -114,7 +114,7 @@
   }, 
   error = function(e) NULL)
   
-  
+  verify_NA_ALIAS(0L)
   invisible(NULL)
 }
 
