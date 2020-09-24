@@ -154,13 +154,13 @@ constexpr double LITO_1ST_TAPER_2023_____ = -0.050;
 constexpr double LITO_2ND_TAPER_2023_____ = -0.015;
 
 
-
 constexpr double LMITO_1ST_OFFSET = 255;
 constexpr double LMITO_2ND_LEVEL = 1080;
 constexpr double LMITO_THRESHOLDS[4] = {37e3, 48e3, 90e3, 126e3};
 constexpr double LMITO_TAPER_RATES[4] = {0.075, 0, -0.03, 0};
 
-
+constexpr int TEMP_BUDGET_REPAIR_LEVY_THRESH = 180000;
+constexpr double TEMP_BUDGET_REPAIR_LEVY_RATE = 0.02;
 
 
 

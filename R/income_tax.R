@@ -151,10 +151,10 @@ income_tax_ <- function(.sample.file, yr) {
                    c_age_30_june = get_column_from(.sample.file, "c_age_30_june", 72L - 5L * age_range), 
                    is_net_rent =  get_column_from(.sample.file, "is_net_rent", "Net_rent_amt"), 
                    it_property_loss = get_column_from(.sample.file, "it_property_loss", -pmin0(Net_rent_amt)), 
-                   it_rept_empl_super_cont = get_column_from(.sample.file, "it_rept_empl_super_cont", Rptbl_Empr_spr_cont_amt), 
+                   it_rept_empl_super_cont = get_column_from(.sample.file, "it_rept_empl_super_cont", "Rptbl_Empr_spr_cont_amt"), 
                    it_rept_fringe_benefit = get_column_from(.sample.file, "it_rept_fringe_benefit", "Rep_frng_ben_amt"), 
                    it_invest_loss = get_column_from(.sample.file, "it_invest_loss", "Rep_frng_ben_amt"),
-                   spc_rebate_income = get_column_from(.sample.file, "spc_rebate_income", "Spouse_adjusted_taxable_inc", if_else(Partner_status > 0, 1L, 0L)),
+                   spc_rebate_income = get_column_from(.sample.file, "spc_rebate_income", "Spouse_adjusted_taxable_inc", "Partner_status"),
                    partner_status = get_column_from(.sample.file, "sp_flag", "Partner_status"))
 }
 

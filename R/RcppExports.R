@@ -115,8 +115,8 @@ verify_NA_ALIAS <- function(x = 0L) {
     .Call(`_grattan_verify_NA_ALIAS`, x)
 }
 
-do_income_tax_sf <- function(yr, N, ic_taxable_income_loss, c_age_30_june, is_net_rent, it_property_loss, it_rept_empl_super_cont, it_rept_fringe_benefit, it_invest_loss, spc_rebate_income, partner_status) {
-    .Call(`_grattan_do_income_tax_sf`, yr, N, ic_taxable_income_loss, c_age_30_june, is_net_rent, it_property_loss, it_rept_empl_super_cont, it_rept_fringe_benefit, it_invest_loss, spc_rebate_income, partner_status)
+do_income_tax_sf <- function(yr, N, ic_taxable_income_loss, c_age_30_june, is_net_rent, it_property_loss, it_rept_empl_super_cont, it_rept_fringe_benefit, it_invest_loss, spc_rebate_income, partner_status, n_dependants) {
+    .Call(`_grattan_do_income_tax_sf`, yr, N, ic_taxable_income_loss, c_age_30_june, is_net_rent, it_property_loss, it_rept_empl_super_cont, it_rept_fringe_benefit, it_invest_loss, spc_rebate_income, partner_status, n_dependants)
 }
 
 #' @title Threeway parallel maximum
