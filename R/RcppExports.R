@@ -60,12 +60,63 @@ MedicareLevy <- function(income, lowerThreshold, upperThreshold, SpouseIncome, i
 #' @export Offset
 NULL
 
+#' @name MultiOffset
+#' @title Multioffset
+#' @description An offset with multiple thresholds and tapers.
+#' 
+#' @param x A numeric vector that the thresholds refer to.
+#' @param first_offset \code{numeric(1)} The value of the first offset,
+#' the value of the offset for \code{x < first(thresholds)}.
+#' @param thresholds The thresholds for changes in the offset.
+#' @param tapers The tapers that apply \strong{above} the corresponding element
+#' of \code{thresholds}.
+#' @param above_zero (bool) Should negative offsets be set to zero?
+#' 
+#' 
+#' @examples
+#' MultiOffset(c(36e3, 37e3, 38e3, 47e3, 48e3, 49e3), 
+#'             255,
+#'             c(37e3, 48e3, 90e3),
+#'             c(0.075, 0, -0.03))
+NULL
+
 Offset <- function(x, y, a, m) {
     .Call(`_grattan_Offset`, x, y, a, m)
 }
 
+MultiOffset <- function(x, first_offset, thresholds, tapers, above_zero = TRUE) {
+    .Call(`_grattan_MultiOffset`, x, first_offset, thresholds, tapers, above_zero)
+}
+
 anyOutside <- function(x, a, b) {
     .Call(`_grattan_anyOutside`, x, a, b)
+}
+
+#' @name do_income_tax
+#' @description Accepts a sample file-like List and a tax year and returns
+#' a double vector.
+#' 
+#' @param c_age_30_june Age of taxpayer at 30 June of the financial year.
+#' @param is_net_rent Net rent amount.
+#' @param it_invest_loss Net financial income loss.
+#' @param 
+#' 
+NULL
+
+do_lito <- function(x, yr) {
+    .Call(`_grattan_do_lito`, x, yr)
+}
+
+do_lmito <- function(x) {
+    .Call(`_grattan_do_lmito`, x)
+}
+
+verify_NA_ALIAS <- function(x = 0L) {
+    .Call(`_grattan_verify_NA_ALIAS`, x)
+}
+
+do_income_tax_sf <- function(yr, N, ic_taxable_income_loss, c_age_30_june, is_net_rent, it_property_loss, it_rept_empl_super_cont, it_rept_fringe_benefit, it_invest_loss, spc_rebate_income, partner_status) {
+    .Call(`_grattan_do_income_tax_sf`, yr, N, ic_taxable_income_loss, c_age_30_june, is_net_rent, it_property_loss, it_rept_empl_super_cont, it_rept_fringe_benefit, it_invest_loss, spc_rebate_income, partner_status)
 }
 
 #' @title Threeway parallel maximum

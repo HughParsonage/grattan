@@ -104,6 +104,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// MultiOffset
+DoubleVector MultiOffset(NumericVector x, double first_offset, DoubleVector thresholds, DoubleVector tapers, bool above_zero);
+RcppExport SEXP _grattan_MultiOffset(SEXP xSEXP, SEXP first_offsetSEXP, SEXP thresholdsSEXP, SEXP tapersSEXP, SEXP above_zeroSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< double >::type first_offset(first_offsetSEXP);
+    Rcpp::traits::input_parameter< DoubleVector >::type thresholds(thresholdsSEXP);
+    Rcpp::traits::input_parameter< DoubleVector >::type tapers(tapersSEXP);
+    Rcpp::traits::input_parameter< bool >::type above_zero(above_zeroSEXP);
+    rcpp_result_gen = Rcpp::wrap(MultiOffset(x, first_offset, thresholds, tapers, above_zero));
+    return rcpp_result_gen;
+END_RCPP
+}
 // anyOutside
 int anyOutside(IntegerVector x, int a, int b);
 RcppExport SEXP _grattan_anyOutside(SEXP xSEXP, SEXP aSEXP, SEXP bSEXP) {
@@ -114,6 +128,57 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type a(aSEXP);
     Rcpp::traits::input_parameter< int >::type b(bSEXP);
     rcpp_result_gen = Rcpp::wrap(anyOutside(x, a, b));
+    return rcpp_result_gen;
+END_RCPP
+}
+// do_lito
+DoubleVector do_lito(DoubleVector x, int yr);
+RcppExport SEXP _grattan_do_lito(SEXP xSEXP, SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< DoubleVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(do_lito(x, yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// do_lmito
+DoubleVector do_lmito(DoubleVector x);
+RcppExport SEXP _grattan_do_lmito(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< DoubleVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(do_lmito(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// verify_NA_ALIAS
+int verify_NA_ALIAS(int x);
+RcppExport SEXP _grattan_verify_NA_ALIAS(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(verify_NA_ALIAS(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// do_income_tax_sf
+DoubleVector do_income_tax_sf(int yr, R_xlen_t N, IntegerVector ic_taxable_income_loss, IntegerVector c_age_30_june, IntegerVector is_net_rent, IntegerVector it_property_loss, IntegerVector it_rept_empl_super_cont, IntegerVector it_rept_fringe_benefit, IntegerVector it_invest_loss, IntegerVector spc_rebate_income, LogicalVector partner_status);
+RcppExport SEXP _grattan_do_income_tax_sf(SEXP yrSEXP, SEXP NSEXP, SEXP ic_taxable_income_lossSEXP, SEXP c_age_30_juneSEXP, SEXP is_net_rentSEXP, SEXP it_property_lossSEXP, SEXP it_rept_empl_super_contSEXP, SEXP it_rept_fringe_benefitSEXP, SEXP it_invest_lossSEXP, SEXP spc_rebate_incomeSEXP, SEXP partner_statusSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    Rcpp::traits::input_parameter< R_xlen_t >::type N(NSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type ic_taxable_income_loss(ic_taxable_income_lossSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type c_age_30_june(c_age_30_juneSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type is_net_rent(is_net_rentSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type it_property_loss(it_property_lossSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type it_rept_empl_super_cont(it_rept_empl_super_contSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type it_rept_fringe_benefit(it_rept_fringe_benefitSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type it_invest_loss(it_invest_lossSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type spc_rebate_income(spc_rebate_incomeSEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type partner_status(partner_statusSEXP);
+    rcpp_result_gen = Rcpp::wrap(do_income_tax_sf(yr, N, ic_taxable_income_loss, c_age_30_june, is_net_rent, it_property_loss, it_rept_empl_super_cont, it_rept_fringe_benefit, it_invest_loss, spc_rebate_income, partner_status));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -324,7 +389,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_grattan_MedicareLevySaptoYear", (DL_FUNC) &_grattan_MedicareLevySaptoYear, 5},
     {"_grattan_MedicareLevy", (DL_FUNC) &_grattan_MedicareLevy, 11},
     {"_grattan_Offset", (DL_FUNC) &_grattan_Offset, 4},
+    {"_grattan_MultiOffset", (DL_FUNC) &_grattan_MultiOffset, 5},
     {"_grattan_anyOutside", (DL_FUNC) &_grattan_anyOutside, 3},
+    {"_grattan_do_lito", (DL_FUNC) &_grattan_do_lito, 2},
+    {"_grattan_do_lmito", (DL_FUNC) &_grattan_do_lmito, 1},
+    {"_grattan_verify_NA_ALIAS", (DL_FUNC) &_grattan_verify_NA_ALIAS, 1},
+    {"_grattan_do_income_tax_sf", (DL_FUNC) &_grattan_do_income_tax_sf, 11},
     {"_grattan_pmax3", (DL_FUNC) &_grattan_pmax3, 3},
     {"_grattan_pmaxC", (DL_FUNC) &_grattan_pmaxC, 2},
     {"_grattan_pmaxCint", (DL_FUNC) &_grattan_pmaxCint, 2},

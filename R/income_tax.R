@@ -127,6 +127,37 @@ income_tax <- function(income,
          })
 }
 
+get_column_from <- function(DT, nom, ...) {
+  stopifnot(is.data.table(DT))
+  if (is.character(substitute(nom))) {
+    if (!hasName(DT, nom)) {
+      if (missing(..1)) {
+        stop("DT lacked name '", nom, "'.")
+      }
+      return(get_column_from(DT, ...))
+    }
+    return(.subset2(DT, nom))
+  }
+  if (all(hasName(DT, all.vars(substitute(nom))))) {
+    return(eval(substitute(nom), envir = DT))
+  }
+  get_column_from(DT, ...)
+}
+
+income_tax_ <- function(.sample.file, yr) {
+  do_income_tax_sf(yr,
+                   nrow(.sample.file), 
+                   ic_taxable_income_loss = get_column_from(.sample.file, "ic_taxable_income_loss", "Taxable_Income"), 
+                   c_age_30_june = get_column_from(.sample.file, "c_age_30_june", 72L - 5L * age_range), 
+                   is_net_rent =  get_column_from(.sample.file, "is_net_rent", "Net_rent_amt"), 
+                   it_property_loss = get_column_from(.sample.file, "it_property_loss", -pmin0(Net_rent_amt)), 
+                   it_rept_empl_super_cont = get_column_from(.sample.file, "it_rept_empl_super_cont", Rptbl_Empr_spr_cont_amt), 
+                   it_rept_fringe_benefit = get_column_from(.sample.file, "it_rept_fringe_benefit", "Rep_frng_ben_amt"), 
+                   it_invest_loss = get_column_from(.sample.file, "it_invest_loss", "Rep_frng_ben_amt"),
+                   spc_rebate_income = get_column_from(.sample.file, "spc_rebate_income", "Spouse_adjusted_taxable_inc", if_else(Partner_status > 0, 1L, 0L)),
+                   partner_status = get_column_from(.sample.file, "sp_flag", "Partner_status"))
+}
+
 
 # rolling_income_tax is inflexible by design: returns the tax payable in the fy.year; no scope for policy change.
 rolling_income_tax <- function(income, 
