@@ -131,6 +131,16 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// decode_age_range
+IntegerVector decode_age_range(IntegerVector x);
+RcppExport SEXP _grattan_decode_age_range(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(decode_age_range(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // do_lito
 DoubleVector do_lito(DoubleVector x, int yr);
 RcppExport SEXP _grattan_do_lito(SEXP xSEXP, SEXP yrSEXP) {
@@ -180,6 +190,17 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< LogicalVector >::type partner_status(partner_statusSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type n_dependants(n_dependantsSEXP);
     rcpp_result_gen = Rcpp::wrap(do_income_tax_sf(yr, N, ic_taxable_income_loss, c_age_30_june, is_net_rent, it_property_loss, it_rept_empl_super_cont, it_rept_fringe_benefit, it_invest_loss, spc_rebate_income, partner_status, n_dependants));
+    return rcpp_result_gen;
+END_RCPP
+}
+// medicare_levy_2018
+DoubleVector medicare_levy_2018(DoubleVector x, DoubleVector y);
+RcppExport SEXP _grattan_medicare_levy_2018(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< DoubleVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< DoubleVector >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(medicare_levy_2018(x, y));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -392,10 +413,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_grattan_Offset", (DL_FUNC) &_grattan_Offset, 4},
     {"_grattan_MultiOffset", (DL_FUNC) &_grattan_MultiOffset, 5},
     {"_grattan_anyOutside", (DL_FUNC) &_grattan_anyOutside, 3},
+    {"_grattan_decode_age_range", (DL_FUNC) &_grattan_decode_age_range, 1},
     {"_grattan_do_lito", (DL_FUNC) &_grattan_do_lito, 2},
     {"_grattan_do_lmito", (DL_FUNC) &_grattan_do_lmito, 1},
     {"_grattan_verify_NA_ALIAS", (DL_FUNC) &_grattan_verify_NA_ALIAS, 1},
     {"_grattan_do_income_tax_sf", (DL_FUNC) &_grattan_do_income_tax_sf, 12},
+    {"_grattan_medicare_levy_2018", (DL_FUNC) &_grattan_medicare_levy_2018, 2},
     {"_grattan_pmax3", (DL_FUNC) &_grattan_pmax3, 3},
     {"_grattan_pmaxC", (DL_FUNC) &_grattan_pmaxC, 2},
     {"_grattan_pmaxCint", (DL_FUNC) &_grattan_pmaxCint, 2},
