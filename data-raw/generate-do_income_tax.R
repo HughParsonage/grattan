@@ -152,3 +152,25 @@ for (y in 1990:2030) {
 }
 cl("}")
 
+library(hutils)
+for (yr in 1984:2030) {
+  provide.file(file.yr <- paste0("src/", yr, ".h"))
+  grattan.h <- readLines("src/grattan.h")
+  grattan.h <- if_else(startsWith(trimws(grattan.h), "//"), "//", grattan.h)
+  medicare.h <- readLines("src/grattanMedicareLevy.h")
+  medicare.h <- if_else(startsWith(trimws(medicare.h), "//"), "//", medicare.h)
+  
+  grep.yr <- grep(paste0("_", yr, ".*;"), grattan.h)
+  grep.my <- grep(paste0("_", yr, ".*;"), medicare.h)
+  if (!length(grep.yr) && !length(grep.my)) {
+    next
+  }
+  writeLines(unique(grattan.h[-grep.yr]), "src/grattan.h")
+  writeLines(unique(medicare.h[-grep.my]), "src/grattanMedicareLevy.h")
+  writeLines(unique(c(grattan.h[grep.yr], medicare.h[grep.my])), file.yr)
+}
+
+for (yr in 1984:2030) {
+  writeLines(unique(readLines(paste0("src/", yr, ".h"))), paste0("src/", yr, ".h"))
+}
+
