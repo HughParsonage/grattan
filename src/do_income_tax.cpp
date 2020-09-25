@@ -3,19 +3,33 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+const int ages_by_age_range[12] = {72, 67, 62, 57, 52, 47, 42, 37, 32, 27, 22, 17};
 
-// Medicare
-const double ML_RATE_2018 = 0.02;
-const double ML_TAPER_2018 = 0.1;
+int do_decode_age_range(int age_range) {
+  return ages_by_age_range[age_range];
+}
 
-constexpr double ML_THRESH_SINGLE_SAPTO_2018 = 34758;
-constexpr double ML_THRESH_SINGLE_______2018 = 21980;
-constexpr double ML_THRESH_FAMILY_SAPTO_2018 = 48385;
-constexpr double ML_THRESH_FAMILY_______2018 = 37090;
-constexpr double ML_THRESH_UP_PER_CHILD_2018 = 3406;
+void validate_age_range(IntegerVector x, R_xlen_t N) {
+  for (R_xlen_t i = 0; i < N; ++i) {
+    int xi = x[i];
+    if (xi < 0 || xi > 11) {
+      Rcerr << "`age_range` had values outside [0, 11]. ";
+      Rcerr << "First such value: " << x[i] << " at position " << i;
+      stop("`age_range` must be an integer vector with values in [0, 11].");
+    }
+  }
+}
 
-
-
+// [[Rcpp::export(rng = false)]]
+IntegerVector decode_age_range(IntegerVector x) {
+  R_xlen_t N = x.length();
+  validate_age_range(x, N);
+  IntegerVector out = no_init(N);
+  for (R_xlen_t i = 0; i < N; ++i) {
+    out[i] = ages_by_age_range[x[i]]; 
+  }
+  return out;
+}
 
 
 double pmax(double x, double y) {
@@ -60,7 +74,7 @@ double do_1_lito_2023_____(double x) {
   return max0(lito_y);
 }
 
-void apply_lito(int yr, double taxi, double xd) {
+void apply_lito(int yr, double & taxi, double xd) {
   double lito = 0;
   if (yr < 2013) {
     lito = do_1_lito_2001_2012(yr, xd);
@@ -69,7 +83,7 @@ void apply_lito(int yr, double taxi, double xd) {
   } else {
     lito = do_1_lito_2023_____(xd);
   }
-  if (taxi > lito) {
+  if (taxi <= lito) {
     taxi = 0;
   } else {
     taxi -= lito;
@@ -145,7 +159,9 @@ double income_taxi_nb(double& xd, const double (&bracks)[nb], const double (&rat
     if (xd < bracks[b]) {
       break;
     }
-    out += (xd - bracks[b]) * rates[b];
+    // above threshold
+    double xa = (b + 1 == nb || xd < bracks[b + 1]) ? (xd - bracks[b]) : (bracks[b + 1] - bracks[b]);
+    out += xa * rates[b];
   }
   return out;
 }
@@ -323,7 +339,7 @@ double do_1_sapto_2023_____(double x, double y, bool is_married) {
   return o;
 }
 
-void apply_sapto(bool post2023, double taxi, double x, double y, bool is_married) {
+void apply_sapto(bool post2023, double & taxi, double x, double y, bool is_married) {
   double sapto = post2023 ? do_1_sapto_2023_____(x, y, is_married) :  do_1_sapto_2013_2022(x, y, is_married);
   if (sapto >= taxi) {
     taxi = 0;
@@ -334,9 +350,9 @@ void apply_sapto(bool post2023, double taxi, double x, double y, bool is_married
 
 
 
-void apply_lmito(double taxi, double xd) {
+void apply_lmito(double & taxi, double xd) {
   double lmito = do_1_lmito(xd);
-  if (lmito > taxi) {
+  if (lmito >= taxi) {
     taxi = 0;
   } else {
     taxi -= lmito;
@@ -600,8 +616,6 @@ DoubleVector do_income_tax_sf(int yr,
         double yd = (double)spc_rebate_income[i];
         bool is_married = yd > 0 || partner_status[i];
         bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
         taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2000, ORD_TAX_RATES_2000);

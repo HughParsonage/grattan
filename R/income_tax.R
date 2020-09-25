@@ -127,12 +127,16 @@ income_tax <- function(income,
          })
 }
 
-get_column_from <- function(DT, nom, ...) {
+get_column_from <- function(DT, nom, ..., NULL_OK = FALSE) {
   stopifnot(is.data.table(DT))
   if (is.character(substitute(nom))) {
     if (!hasName(DT, nom)) {
       if (missing(..1)) {
-        stop("DT lacked name '", nom, "'.")
+        if (NULL_OK) {
+          return(NULL)
+        } else {
+          stop("DT lacked name '", nom, "'.")
+        }
       }
       return(get_column_from(DT, ...))
     }
@@ -144,18 +148,23 @@ get_column_from <- function(DT, nom, ...) {
   get_column_from(DT, ...)
 }
 
-income_tax_ <- function(.sample.file, yr) {
+income_tax_ <- function(.sample.file, yr, n_dependants = 0L) {
+  gcf <- function(nom, ...) {
+    get_column_from(.sample.file, nom, ...)
+  }
+  
   do_income_tax_sf(yr,
                    nrow(.sample.file), 
-                   ic_taxable_income_loss = get_column_from(.sample.file, "ic_taxable_income_loss", "Taxable_Income"), 
-                   c_age_30_june = get_column_from(.sample.file, "c_age_30_june", 72L - 5L * age_range), 
-                   is_net_rent =  get_column_from(.sample.file, "is_net_rent", "Net_rent_amt"), 
-                   it_property_loss = get_column_from(.sample.file, "it_property_loss", -pmin0(Net_rent_amt)), 
-                   it_rept_empl_super_cont = get_column_from(.sample.file, "it_rept_empl_super_cont", "Rptbl_Empr_spr_cont_amt"), 
-                   it_rept_fringe_benefit = get_column_from(.sample.file, "it_rept_fringe_benefit", "Rep_frng_ben_amt"), 
-                   it_invest_loss = get_column_from(.sample.file, "it_invest_loss", "Rep_frng_ben_amt"),
-                   spc_rebate_income = get_column_from(.sample.file, "spc_rebate_income", "Spouse_adjusted_taxable_inc", "Partner_status"),
-                   partner_status = get_column_from(.sample.file, "sp_flag", "Partner_status"))
+                   ic_taxable_income_loss = gcf("ic_taxable_income_loss", "Taxable_Income"), 
+                   c_age_30_june = gcf("c_age_30_june", decode_age_range(age_range)), 
+                   is_net_rent = gcf("is_net_rent", "Net_rent_amt"), 
+                   it_property_loss = gcf("it_property_loss", -pmin0(Net_rent_amt)), 
+                   it_rept_empl_super_cont = gcf("it_rept_empl_super_cont", "Rptbl_Empr_spr_cont_amt"), 
+                   it_rept_fringe_benefit = gcf("it_rept_fringe_benefit", "Rep_frng_ben_amt"), 
+                   it_invest_loss = gcf("it_invest_loss", "Rep_frng_ben_amt"),
+                   spc_rebate_income = gcf("spc_rebate_income", "Spouse_adjusted_taxable_inc", "Partner_status"),
+                   partner_status = gcf("sp_flag", "Partner_status"),
+                   n_dependants = n_dependants %||% gcf("n_dependants", "Partner_status"))
 }
 
 

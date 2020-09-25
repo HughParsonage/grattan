@@ -983,3 +983,14 @@ double do_1_medicare_levy_2030(double xd, double yd, bool is_family, bool pensio
 }
 
 
+// [[Rcpp::export(rng = false)]]
+DoubleVector medicare_levy_2018(DoubleVector x, DoubleVector y) {
+  R_xlen_t N = x.length();
+  DoubleVector out = no_init(N);
+  for (R_xlen_t i = 0; i < N; ++i) {
+    // do_1_medicare_levy_2018(double xd, double yd, bool is_family, bool pensioner, int n_dependants)
+    out[i] = do_1_medicare_levy_2018(x[i], y[i], true, false, 0);
+  }
+  return out;
+}
+
