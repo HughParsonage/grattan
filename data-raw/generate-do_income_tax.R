@@ -245,11 +245,37 @@ for (yr in 2001:2030) {
 }
 
 g <- glue::glue
-for (YEAR in 2001:2030) {
+for (YEAR in 1990:2030) {
   cat("case ", YEAR, ": \n", sep = '')
   cat(g("sapto = do_1_sapto_(xd, yd, sapto_cd, SAPTO_LWR_{YEAR}, SAPTO_UPR_{YEAR}, SAPTO_MAX_{YEAR}, SAPTO_TAPER_{YEAR}, ", 
       "ORD_TAX_BRACK_{YEAR}[1], ORD_TAX_RATES_{YEAR}[1], ", sep = "")
 }
+
+for (YEAR in 1984:2030) {
+  Year.h <- readLines(file.h <- file.path("src", "yrs", paste0(YEAR, ".h")))
+  if (!any_grepl(Year.h, "ML_TAPER")) {
+    w <- which_last(grepl("ML_", Year.h))
+    Year.h <- c(Year.h[1:w], 
+                paste0("ML_TAPER_", YEAR, " = ", 
+                       fcase(YEAR <= 1993, "0.25;",
+                             YEAR <= 2004, "0.20;",
+                             default = "0.1;")),
+                Year.h[-seq_len(w)])
+  }
+  if (!any_grepl(Year.h, "ML_RATE")) {
+    w <- which_last(grepl("ML_", Year.h))
+    Year.h <- c(Year.h[1:w], 
+                paste0("ML_RATE_", YEAR, " = ", 
+                       fcase(YEAR <= 1993, "0.0125;",
+                             YEAR <= 1995, "0.014;",
+                             YEAR == 1997, "0.017;",
+                             YEAR <= 2014, "0.015;",
+                             default = "0.02;")),
+                Year.h[-seq_len(w)])
+  }
+  writeLines(Year.h, file.h)
+}
+
 
 
 cg <- function(...) base::cat(g(...), "\n", file = "src/tmp_income_tax.cpp", sep = "", append = TRUE)
@@ -283,10 +309,12 @@ for (YEAR in 1984:2030) {
   cg("M{YEAR}.upr_single = ML_UPR_THRESHOLD_SINGLE_{YEAR};")
   cg("M{YEAR}.lwr_family = ML_LWR_THRESHOLD_FAMILY_{YEAR};")
   cg("M{YEAR}.upr_family = ML_UPR_THRESHOLD_FAMILY_{YEAR};")
-  cg("M{YEAR}.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_{YEAR};")
-  cg("M{YEAR}.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_{YEAR};")
-  cg("M{YEAR}.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_{YEAR};")
-  cg("M{YEAR}.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_{YEAR};")
+  if (YEAR >= 2000L) {
+    cg("M{YEAR}.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_{YEAR};")
+    cg("M{YEAR}.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_{YEAR};")
+    cg("M{YEAR}.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_{YEAR};")
+    cg("M{YEAR}.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_{YEAR};")
+  }
   cg("M{YEAR}.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_{YEAR};")
   cg("M{YEAR}.taper = ML_TAPER_{YEAR};")
   cg("M{YEAR}.rate = ML_RATE_{YEAR};")
@@ -295,26 +323,30 @@ for (YEAR in 1984:2030) {
   
   cl("{")
   cl("for (R_xlen_t i = 0; i < N; ++i) {")
-  cl("Lodge Person;")
+  cl("Person P;")
   cl("int xi = ic_taxable_income_loss[i];")
-  cl("Person.xi = xi;")
-  cl("Person.yi = spc_rebate_income[i];")
-  cl("Person.agei = c_age_30_june[i];")
-  cl("Person.is_married = partner_status[i];")
-  cl("Person.n_child = n_dependants[i];")
-  cl("Person.is_family = Person.is_married() || Person.n_child();")
+  cl("double taxi = 0;")
+  cl("")
+  cl("P.xi = xi;")
+  cl("P.yi = spc_rebate_income[i];")
+  cl("P.agei = c_age_30_june[i];")
+  cl("P.is_married = partner_status[i];")
+  cl("P.n_child = n_dependants[i];")
+  cl("P.is_family = P.is_married || P.n_child;")
   cl("")
   cg("taxi += income_taxi_nb(xi, ORD_TAX_BRACK_{YEAR}, ORD_TAX_RATES_{YEAR});")
   # SAPTO
+  if (YEAR >= 2000L) {
   cg("apply_sapto(taxi, Person, Sapto{YEAR});")
+  }
   
   
   # LITO
   if (YEAR >= 1994) {
     if (YEAR <= 2023) {
-      cg("apply_lito(taxi, xi, LITO_MAX_OFFSET_{YEAR}, LITO_THRESHOLD_1ST_THRESH_{YEAR}, LITO_TAPER_1ST_TAPER_{YEAR});")
+      cg("apply_lito(taxi, xi, LITO_MAX_OFFSET_{YEAR}, LITO_1ST_THRESH_{YEAR}, LITO_1ST_TAPER_{YEAR});")
     } else {
-      cg("apply_lito(taxi, xi, LITO_MAX_OFFSET_{YEAR}, LITO_THRESHOLD_1ST_THRESH_{YEAR}, LITO_TAPER_1ST_TAPER_{YEAR}, LITO_THRESHOLD_2ND_THRESH_{YEAR}, LITO_TAPER_2ND_TAPER_{YEAR});")
+      cg("apply_lito(taxi, xi, LITO_MAX_OFFSET_{YEAR}, LITO_1ST_THRESH_{YEAR}, LITO_1ST_TAPER_{YEAR}, LITO_2ND_THRESH_{YEAR}, LITO_2ND_TAPER_{YEAR});")
     }
   }
   
@@ -323,7 +355,7 @@ for (YEAR in 1984:2030) {
   }
   cg("")
   cg("// Medicare levy")
-  cg("double ml = do_medicare(Person, M{YEAR});")
+  cg("double ml = do_1_ML(Person, M{YEAR});")
   cl("taxi += ml;")
   cl("")
   if (YEAR == 2011 || YEAR == 2015 || YEAR == 2016 || YEAR == 2017) {
