@@ -93,18 +93,19 @@ anyOutside <- function(x, a, b) {
 }
 
 #' @name do_income_tax
+#' @title Internal function for income tax.
 #' @description Accepts a sample file-like List and a tax year and returns
 #' a double vector.
 #' 
 #' @param c_age_30_june Age of taxpayer at 30 June of the financial year.
 #' @param is_net_rent Net rent amount.
 #' @param it_invest_loss Net financial income loss.
-#' @param 
-#' 
+#' @param rebateIncome (NULL, rebate income).
+#' @noRd
 NULL
 
-decode_age_range <- function(x) {
-    .Call(`_grattan_decode_age_range`, x)
+decode_age_range <- function(X) {
+    .Call(`_grattan_decode_age_range`, X)
 }
 
 do_lito <- function(x, yr) {
@@ -119,8 +120,12 @@ verify_NA_ALIAS <- function(x = 0L) {
     .Call(`_grattan_verify_NA_ALIAS`, x)
 }
 
-do_income_tax_sf <- function(yr, N, ic_taxable_income_loss, c_age_30_june, is_net_rent, it_property_loss, it_rept_empl_super_cont, it_rept_fringe_benefit, it_invest_loss, spc_rebate_income, partner_status, n_dependants) {
-    .Call(`_grattan_do_income_tax_sf`, yr, N, ic_taxable_income_loss, c_age_30_june, is_net_rent, it_property_loss, it_rept_empl_super_cont, it_rept_fringe_benefit, it_invest_loss, spc_rebate_income, partner_status, n_dependants)
+do_rebate_income <- function(rebateIncome, ic_taxable_income_loss, it_rept_empl_super_cont, sc_empl_cont, ds_pers_super_cont, it_invest_loss, is_net_rent, it_rept_fringe_benefit, yr) {
+    .Call(`_grattan_do_rebate_income`, rebateIncome, ic_taxable_income_loss, it_rept_empl_super_cont, sc_empl_cont, ds_pers_super_cont, it_invest_loss, is_net_rent, it_rept_fringe_benefit, yr)
+}
+
+do_income_tax_sf <- function(yr, N, ic_taxable_income_loss, c_age_30_june, rebateIncome, is_net_rent, it_property_loss, it_rept_empl_super_cont, sc_empl_cont, it_rept_fringe_benefit, ds_pers_super_cont, it_invest_loss, spc_rebate_income, partner_status, n_dependants) {
+    .Call(`_grattan_do_income_tax_sf`, yr, N, ic_taxable_income_loss, c_age_30_june, rebateIncome, is_net_rent, it_property_loss, it_rept_empl_super_cont, sc_empl_cont, it_rept_fringe_benefit, ds_pers_super_cont, it_invest_loss, spc_rebate_income, partner_status, n_dependants)
 }
 
 medicare_levy_2018 <- function(x, y) {

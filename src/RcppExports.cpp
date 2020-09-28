@@ -132,12 +132,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // decode_age_range
-IntegerVector decode_age_range(IntegerVector x);
-RcppExport SEXP _grattan_decode_age_range(SEXP xSEXP) {
+SEXP decode_age_range(SEXP X);
+RcppExport SEXP _grattan_decode_age_range(SEXP XSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(decode_age_range(x));
+    Rcpp::traits::input_parameter< SEXP >::type X(XSEXP);
+    rcpp_result_gen = Rcpp::wrap(decode_age_range(X));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -172,24 +172,45 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// do_rebate_income
+IntegerVector do_rebate_income(SEXP rebateIncome, IntegerVector ic_taxable_income_loss, IntegerVector it_rept_empl_super_cont, IntegerVector sc_empl_cont, IntegerVector ds_pers_super_cont, IntegerVector it_invest_loss, IntegerVector is_net_rent, IntegerVector it_rept_fringe_benefit, int yr);
+RcppExport SEXP _grattan_do_rebate_income(SEXP rebateIncomeSEXP, SEXP ic_taxable_income_lossSEXP, SEXP it_rept_empl_super_contSEXP, SEXP sc_empl_contSEXP, SEXP ds_pers_super_contSEXP, SEXP it_invest_lossSEXP, SEXP is_net_rentSEXP, SEXP it_rept_fringe_benefitSEXP, SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< SEXP >::type rebateIncome(rebateIncomeSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type ic_taxable_income_loss(ic_taxable_income_lossSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type it_rept_empl_super_cont(it_rept_empl_super_contSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type sc_empl_cont(sc_empl_contSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type ds_pers_super_cont(ds_pers_super_contSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type it_invest_loss(it_invest_lossSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type is_net_rent(is_net_rentSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type it_rept_fringe_benefit(it_rept_fringe_benefitSEXP);
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(do_rebate_income(rebateIncome, ic_taxable_income_loss, it_rept_empl_super_cont, sc_empl_cont, ds_pers_super_cont, it_invest_loss, is_net_rent, it_rept_fringe_benefit, yr));
+    return rcpp_result_gen;
+END_RCPP
+}
 // do_income_tax_sf
-DoubleVector do_income_tax_sf(int yr, R_xlen_t N, IntegerVector ic_taxable_income_loss, IntegerVector c_age_30_june, IntegerVector is_net_rent, IntegerVector it_property_loss, IntegerVector it_rept_empl_super_cont, IntegerVector it_rept_fringe_benefit, IntegerVector it_invest_loss, IntegerVector spc_rebate_income, LogicalVector partner_status, IntegerVector n_dependants);
-RcppExport SEXP _grattan_do_income_tax_sf(SEXP yrSEXP, SEXP NSEXP, SEXP ic_taxable_income_lossSEXP, SEXP c_age_30_juneSEXP, SEXP is_net_rentSEXP, SEXP it_property_lossSEXP, SEXP it_rept_empl_super_contSEXP, SEXP it_rept_fringe_benefitSEXP, SEXP it_invest_lossSEXP, SEXP spc_rebate_incomeSEXP, SEXP partner_statusSEXP, SEXP n_dependantsSEXP) {
+DoubleVector do_income_tax_sf(int yr, R_xlen_t N, IntegerVector ic_taxable_income_loss, IntegerVector c_age_30_june, SEXP rebateIncome, IntegerVector is_net_rent, IntegerVector it_property_loss, IntegerVector it_rept_empl_super_cont, IntegerVector sc_empl_cont, IntegerVector it_rept_fringe_benefit, IntegerVector ds_pers_super_cont, IntegerVector it_invest_loss, IntegerVector spc_rebate_income, IntegerVector partner_status, IntegerVector n_dependants);
+RcppExport SEXP _grattan_do_income_tax_sf(SEXP yrSEXP, SEXP NSEXP, SEXP ic_taxable_income_lossSEXP, SEXP c_age_30_juneSEXP, SEXP rebateIncomeSEXP, SEXP is_net_rentSEXP, SEXP it_property_lossSEXP, SEXP it_rept_empl_super_contSEXP, SEXP sc_empl_contSEXP, SEXP it_rept_fringe_benefitSEXP, SEXP ds_pers_super_contSEXP, SEXP it_invest_lossSEXP, SEXP spc_rebate_incomeSEXP, SEXP partner_statusSEXP, SEXP n_dependantsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
     Rcpp::traits::input_parameter< R_xlen_t >::type N(NSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type ic_taxable_income_loss(ic_taxable_income_lossSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type c_age_30_june(c_age_30_juneSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type rebateIncome(rebateIncomeSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type is_net_rent(is_net_rentSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type it_property_loss(it_property_lossSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type it_rept_empl_super_cont(it_rept_empl_super_contSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type sc_empl_cont(sc_empl_contSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type it_rept_fringe_benefit(it_rept_fringe_benefitSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type ds_pers_super_cont(ds_pers_super_contSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type it_invest_loss(it_invest_lossSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type spc_rebate_income(spc_rebate_incomeSEXP);
-    Rcpp::traits::input_parameter< LogicalVector >::type partner_status(partner_statusSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type partner_status(partner_statusSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type n_dependants(n_dependantsSEXP);
-    rcpp_result_gen = Rcpp::wrap(do_income_tax_sf(yr, N, ic_taxable_income_loss, c_age_30_june, is_net_rent, it_property_loss, it_rept_empl_super_cont, it_rept_fringe_benefit, it_invest_loss, spc_rebate_income, partner_status, n_dependants));
+    rcpp_result_gen = Rcpp::wrap(do_income_tax_sf(yr, N, ic_taxable_income_loss, c_age_30_june, rebateIncome, is_net_rent, it_property_loss, it_rept_empl_super_cont, sc_empl_cont, it_rept_fringe_benefit, ds_pers_super_cont, it_invest_loss, spc_rebate_income, partner_status, n_dependants));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -417,7 +438,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_grattan_do_lito", (DL_FUNC) &_grattan_do_lito, 2},
     {"_grattan_do_lmito", (DL_FUNC) &_grattan_do_lmito, 1},
     {"_grattan_verify_NA_ALIAS", (DL_FUNC) &_grattan_verify_NA_ALIAS, 1},
-    {"_grattan_do_income_tax_sf", (DL_FUNC) &_grattan_do_income_tax_sf, 12},
+    {"_grattan_do_rebate_income", (DL_FUNC) &_grattan_do_rebate_income, 9},
+    {"_grattan_do_income_tax_sf", (DL_FUNC) &_grattan_do_income_tax_sf, 15},
     {"_grattan_medicare_levy_2018", (DL_FUNC) &_grattan_medicare_levy_2018, 2},
     {"_grattan_pmax3", (DL_FUNC) &_grattan_pmax3, 3},
     {"_grattan_pmaxC", (DL_FUNC) &_grattan_pmaxC, 2},
