@@ -401,7 +401,7 @@ void apply_lito(double & taxi, int x, double y, double b1, double r1) {
   }
 }
 
-void apply_lito(double & taxi, int x, double y, double b1, double r1, double b2, double r2) {
+void apply_lito(double & taxi, int x, int y, double b1, double r1, double b2, double r2) {
   double lito = y;
   if (x > b1) {
     if (x < b2) {
@@ -434,10 +434,10 @@ DoubleVector do_lito(DoubleVector x, int yr) {
 
 constexpr double LMITO_1ST_OFFSET = 255;
 constexpr double LMITO_2ND_LEVEL = 1080;
-constexpr double LMITO_THRESHOLDS[4] = {37e3, 48e3, 90e3, 126e3};
+constexpr int LMITO_THRESHOLDS[4] = {37000, 48000, 90000, 126000};
 constexpr double LMITO_TAPER_RATES[4] = {0.075, 0, -0.03, 0};
 
-double do_1_lmito(double x) {
+double do_1_lmito(int x) {
   double out = LMITO_1ST_OFFSET;
   if (x < LMITO_THRESHOLDS[0]) {
     return out;
@@ -622,18 +622,19 @@ double do_1_sapto_sf(int &x, int &y, int age, bool is_married, Sapto S) {
   
   // x is rebate income
   // y is spouse rebate income
-  double z = x + y;
+  double z = (double)x;
+  z += y;
   int max_offset = is_married ? S.mxo_couple : S.mxo_single;
   int lwr_thresh = is_married ? S.lwr_couple : S.lwr_single;
   double taper = S.taper;
   // int upr_thresh = is_married ? S.upr_couple : S.upr_single;
   
-  double o = max_offset + taper * max0(z - lwr_thresh);
+  double o = max0(max_offset + taper * max0(z - lwr_thresh));
   
   // The transfer of unused SAPTO is very complex and frankly unknown, even
   // within govt.  This lines up 'better' than known models.
   if (is_married) {
-    double partner_unused_sapto = max_offset + taper * max0(y - lwr_thresh);
+    double partner_unused_sapto = max0(max_offset + taper * max0(y - lwr_thresh));
     double lito = S.lito_max_offset;
     
     // https://www.ato.gov.au/individuals/income-and-deductions/in-detail/transferring-the-seniors-and-pensioners-tax-offset/
@@ -655,8 +656,8 @@ double do_1_sapto_sf(int &x, int &y, int age, bool is_married, Sapto S) {
 }
 
 // apply_sapto(yr, taxi, xd, yd, agei, is_married);
-void apply_sapto(int yr, double & taxi, int x, double y, int age, bool is_married) {
-  double sapto = do_1_sapto_sf(x, (int)y, age, is_married, SaptoSince2000[yr - 2000]);
+void apply_sapto(int yr, double & taxi, int x, int y, int age, bool is_married) {
+  double sapto = do_1_sapto_sf(x, y, age, is_married, SaptoSince2000[yr - 2000]);
   
   if (sapto >= taxi) {
     taxi = 0;
@@ -665,8 +666,14 @@ void apply_sapto(int yr, double & taxi, int x, double y, int age, bool is_marrie
   }
 }
 
-void apply_sapto(double & taxi, int x, double y, int age, bool is_married, Sapto S) {
+bool done_once = false;
+
+void apply_sapto(double & taxi, int x, int y, int age, bool is_married, Sapto S) {
   double sapto = do_1_sapto_sf(x, y, age, is_married, S);
+  if (!done_once) {
+    Rcout << "SAPTO = " << sapto << "\n";
+    done_once = true;
+  }
   
   if (sapto >= taxi) {
     taxi = 0;
@@ -677,6 +684,11 @@ void apply_sapto(double & taxi, int x, double y, int age, bool is_married, Sapto
 
 void apply_sapto(double & taxi, Person P, Sapto S) {
   double sapto = do_1_sapto_sf(P.xi, P.yi, P.agei, P.is_married, S);
+  if (!done_once) {
+    Rcout << "SAPTO = " << sapto << "\n";
+    done_once = true;
+  }
+  
   if (sapto >= taxi) {
     taxi = 0;
   } else {
@@ -686,8 +698,8 @@ void apply_sapto(double & taxi, Person P, Sapto S) {
 
 
 
-void apply_lmito(double & taxi, double xd) {
-  double lmito = do_1_lmito(xd);
+void apply_lmito(double & taxi, int x) {
+  double lmito = do_1_lmito(x);
   if (lmito >= taxi) {
     taxi = 0;
   } else {
@@ -696,37 +708,31 @@ void apply_lmito(double & taxi, double xd) {
 }
 
 double do_1_ML(Person P, Medicare M) {
-  double z = P.xi + P.yi;
-  bool pensioner = M.has_sapto_thr && (P.agei >= M.sapto_age);
-  
-  double lwr_threshold = 
-    pensioner ? 
-    (P.is_family ? M.lwr_family_sapto : M.lwr_single_sapto) :
-    (P.is_family ? M.lwr_family : M.lwr_single);
-  
-  if (z < lwr_threshold) {
+  bool sapto = P.agei >= 65;
+  double lower_threshold = sapto ? M.lwr_single_sapto : M.lwr_single;
+  if (P.xi < lower_threshold) {
     return 0;
   }
-  
-  double upr_threshold = 
-    pensioner ? 
-    (P.is_family ? M.upr_family_sapto : M.upr_single_sapto) :
-    (P.is_family ? M.upr_family : M.upr_single);
-  
-  double upr_over_lwr = upr_threshold / lwr_threshold;
-  if (P.n_child) {
-    lwr_threshold += M.lwr_thr_up_per_child * P.n_child;
-    upr_threshold *= upr_over_lwr;
-    upr_threshold = floor(upr_threshold);
+  if (P.is_family) {
+    // subs.8(5) of Act
+    double upr_over_lwr = M.upr_family / ((double)M.lwr_family);
+    double lower_family_threshold = (sapto ? M.lwr_family_sapto : M.lwr_family) + P.n_child * M.lwr_thr_up_per_child;
+    double upper_family_threshold = upr_over_lwr * lower_family_threshold;
+    double family_income = P.xi + P.yi;
+    // # Levy in the case of small incomes (s.7 of Act)
+    if (family_income <= upper_family_threshold) {
+      double income_share = P.yi > 0 ? (P.xi / family_income) : 1.0;
+      double o1 = max0(M.taper * (family_income - lower_family_threshold));
+      double o2 = M.rate * family_income;
+      double o = (o1 < o2) ? o1 : o2;
+      return income_share * o;
+    }
   }
-  if (z < upr_threshold) {
-    return M.taper * (z - lwr_threshold);
-  } else {
-    return M.rate * z;
-  }
+  
+  double o1 = M.taper * (P.xi - lower_threshold);
+  double o2 = M.rate * P.xi;
+  return (o1 < o2) ? o1 : o2;
 }
-
-
 
 int get_i_N(IntegerVector x, R_xlen_t i, R_xlen_t N) {
   return (x.length() == N) ? x[i] : x[0];
@@ -743,6 +749,10 @@ int c0(IntegerVector x, R_xlen_t xn, R_xlen_t i, R_xlen_t N) {
   }
   
   return 0;
+}
+
+int c0(int x) {
+  return x == NA_INTEGER ? 0 : x;
 }
 
 const double top_marginal_rates_since_1990[43] = 
@@ -858,1127 +868,2519 @@ DoubleVector do_income_tax_sf(int yr,
                      it_rept_fringe_benefit, 
                      yr);
   
-  switch (yr) {
-  case 1990: {
+  
+  
+  
+  switch(yr) {
+  case 1984: {
+      Medicare M1984;
+      M1984.lwr_single = ML_LWR_THRESHOLD_SINGLE_1984;
+      M1984.upr_single = ML_UPR_THRESHOLD_SINGLE_1984;
+      M1984.lwr_family = ML_LWR_THRESHOLD_FAMILY_1984;
+      M1984.upr_family = ML_UPR_THRESHOLD_FAMILY_1984;
+      M1984.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1984;
+      M1984.taper = ML_TAPER_1984;
+      M1984.rate = ML_RATE_1984;
+      M1984.has_sapto_thr = 0;
+      M1984.sapto_age = 65;
       {
         for (R_xlen_t i = 0; i < N; ++i) {
+          Person P;
           int xi = ic_taxable_income_loss[i];
-          int rebate_incomei = rebate_income[i];
-          int n_dependantsi = get_i_N(n_dependants, i, N);
-          double xd = (double)xi;
-          double yd = (double)get_i_N(spc_rebate_income, i, N);
-          bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-          bool is_family = is_married || n_dependantsi;
           double taxi = 0;
-          // ordinary tax
-          taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1990, ORD_TAX_RATES_1990);
-          // Offsets
+          
+          P.xi = xi;
+          P.yi = c0(spc_rebate_income[i]);
+          P.agei = c_age_30_june[i];
+          P.is_married = partner_status[i];
+          P.n_child = n_dependants[i];
+          P.is_family = P.is_married || P.n_child;
+          
+          taxi += income_taxi_nb(xi, ORD_TAX_BRACK_1984, ORD_TAX_RATES_1984);
           
           // Medicare levy
-          double ml = do_1_medicare_levy_1990(xd, yd, is_family, n_dependantsi);
-          // Budget levies
-          out[i] = taxi + ml;
+          double ml = do_1_ML(P, M1984);
+          taxi += ml;
+          
+          
+          // finally
+          out[i] = taxi;
         }
-      }
-    }
+        
+      } // inner case 1984
+    } // outer case 1984
     break;
+    
+  case 1985: {
+    Medicare M1985;
+    M1985.lwr_single = ML_LWR_THRESHOLD_SINGLE_1985;
+    M1985.upr_single = ML_UPR_THRESHOLD_SINGLE_1985;
+    M1985.lwr_family = ML_LWR_THRESHOLD_FAMILY_1985;
+    M1985.upr_family = ML_UPR_THRESHOLD_FAMILY_1985;
+    M1985.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1985;
+    M1985.taper = ML_TAPER_1985;
+    M1985.rate = ML_RATE_1985;
+    M1985.has_sapto_thr = 0;
+    M1985.sapto_age = 65;
+    {
+      for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
+        int xi = ic_taxable_income_loss[i];
+        double taxi = 0;
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_1985, ORD_TAX_RATES_1985);
+        
+        // Medicare levy
+        double ml = do_1_ML(P, M1985);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
+      }
+      
+    } // inner case 1985
+  } // outer case 1985
+    break;
+    
+  case 1986: {
+    Medicare M1986;
+    M1986.lwr_single = ML_LWR_THRESHOLD_SINGLE_1986;
+    M1986.upr_single = ML_UPR_THRESHOLD_SINGLE_1986;
+    M1986.lwr_family = ML_LWR_THRESHOLD_FAMILY_1986;
+    M1986.upr_family = ML_UPR_THRESHOLD_FAMILY_1986;
+    M1986.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1986;
+    M1986.taper = ML_TAPER_1986;
+    M1986.rate = ML_RATE_1986;
+    M1986.has_sapto_thr = 0;
+    M1986.sapto_age = 65;
+    {
+      for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
+        int xi = ic_taxable_income_loss[i];
+        double taxi = 0;
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_1986, ORD_TAX_RATES_1986);
+        
+        // Medicare levy
+        double ml = do_1_ML(P, M1986);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
+      }
+      
+    } // inner case 1986
+  } // outer case 1986
+    break;
+    
+  case 1987: {
+    Medicare M1987;
+    M1987.lwr_single = ML_LWR_THRESHOLD_SINGLE_1987;
+    M1987.upr_single = ML_UPR_THRESHOLD_SINGLE_1987;
+    M1987.lwr_family = ML_LWR_THRESHOLD_FAMILY_1987;
+    M1987.upr_family = ML_UPR_THRESHOLD_FAMILY_1987;
+    M1987.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1987;
+    M1987.taper = ML_TAPER_1987;
+    M1987.rate = ML_RATE_1987;
+    M1987.has_sapto_thr = 0;
+    M1987.sapto_age = 65;
+    {
+      for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
+        int xi = ic_taxable_income_loss[i];
+        double taxi = 0;
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_1987, ORD_TAX_RATES_1987);
+        
+        // Medicare levy
+        double ml = do_1_ML(P, M1987);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
+      }
+      
+    } // inner case 1987
+  } // outer case 1987
+    break;
+    
+  case 1988: {
+    Medicare M1988;
+    M1988.lwr_single = ML_LWR_THRESHOLD_SINGLE_1988;
+    M1988.upr_single = ML_UPR_THRESHOLD_SINGLE_1988;
+    M1988.lwr_family = ML_LWR_THRESHOLD_FAMILY_1988;
+    M1988.upr_family = ML_UPR_THRESHOLD_FAMILY_1988;
+    M1988.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1988;
+    M1988.taper = ML_TAPER_1988;
+    M1988.rate = ML_RATE_1988;
+    M1988.has_sapto_thr = 0;
+    M1988.sapto_age = 65;
+    {
+      for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
+        int xi = ic_taxable_income_loss[i];
+        double taxi = 0;
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_1988, ORD_TAX_RATES_1988);
+        
+        // Medicare levy
+        double ml = do_1_ML(P, M1988);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
+      }
+      
+    } // inner case 1988
+  } // outer case 1988
+    break;
+    
+  case 1989: {
+    Medicare M1989;
+    M1989.lwr_single = ML_LWR_THRESHOLD_SINGLE_1989;
+    M1989.upr_single = ML_UPR_THRESHOLD_SINGLE_1989;
+    M1989.lwr_family = ML_LWR_THRESHOLD_FAMILY_1989;
+    M1989.upr_family = ML_UPR_THRESHOLD_FAMILY_1989;
+    M1989.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1989;
+    M1989.taper = ML_TAPER_1989;
+    M1989.rate = ML_RATE_1989;
+    M1989.has_sapto_thr = 0;
+    M1989.sapto_age = 65;
+    {
+      for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
+        int xi = ic_taxable_income_loss[i];
+        double taxi = 0;
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_1989, ORD_TAX_RATES_1989);
+        
+        // Medicare levy
+        double ml = do_1_ML(P, M1989);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
+      }
+      
+    } // inner case 1989
+  } // outer case 1989
+    break;
+    
+  case 1990: {
+    Medicare M1990;
+    M1990.lwr_single = ML_LWR_THRESHOLD_SINGLE_1990;
+    M1990.upr_single = ML_UPR_THRESHOLD_SINGLE_1990;
+    M1990.lwr_family = ML_LWR_THRESHOLD_FAMILY_1990;
+    M1990.upr_family = ML_UPR_THRESHOLD_FAMILY_1990;
+    M1990.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1990;
+    M1990.taper = ML_TAPER_1990;
+    M1990.rate = ML_RATE_1990;
+    M1990.has_sapto_thr = 0;
+    M1990.sapto_age = 65;
+    {
+      for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
+        int xi = ic_taxable_income_loss[i];
+        double taxi = 0;
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_1990, ORD_TAX_RATES_1990);
+        
+        // Medicare levy
+        double ml = do_1_ML(P, M1990);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
+      }
+      
+    } // inner case 1990
+  } // outer case 1990
+    break;
+    
   case 1991: {
+    Medicare M1991;
+    M1991.lwr_single = ML_LWR_THRESHOLD_SINGLE_1991;
+    M1991.upr_single = ML_UPR_THRESHOLD_SINGLE_1991;
+    M1991.lwr_family = ML_LWR_THRESHOLD_FAMILY_1991;
+    M1991.upr_family = ML_UPR_THRESHOLD_FAMILY_1991;
+    M1991.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1991;
+    M1991.taper = ML_TAPER_1991;
+    M1991.rate = ML_RATE_1991;
+    M1991.has_sapto_thr = 0;
+    M1991.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1991, ORD_TAX_RATES_1991);
-        // Offsets
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_1991, ORD_TAX_RATES_1991);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_1991(xd, yd, is_family, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M1991);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 1991
+  } // outer case 1991
     break;
+    
   case 1992: {
+    Medicare M1992;
+    M1992.lwr_single = ML_LWR_THRESHOLD_SINGLE_1992;
+    M1992.upr_single = ML_UPR_THRESHOLD_SINGLE_1992;
+    M1992.lwr_family = ML_LWR_THRESHOLD_FAMILY_1992;
+    M1992.upr_family = ML_UPR_THRESHOLD_FAMILY_1992;
+    M1992.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1992;
+    M1992.taper = ML_TAPER_1992;
+    M1992.rate = ML_RATE_1992;
+    M1992.has_sapto_thr = 0;
+    M1992.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1992, ORD_TAX_RATES_1992);
-        // Offsets
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_1992, ORD_TAX_RATES_1992);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_1992(xd, yd, is_family, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M1992);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 1992
+  } // outer case 1992
     break;
+    
   case 1993: {
+    Medicare M1993;
+    M1993.lwr_single = ML_LWR_THRESHOLD_SINGLE_1993;
+    M1993.upr_single = ML_UPR_THRESHOLD_SINGLE_1993;
+    M1993.lwr_family = ML_LWR_THRESHOLD_FAMILY_1993;
+    M1993.upr_family = ML_UPR_THRESHOLD_FAMILY_1993;
+    M1993.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1993;
+    M1993.taper = ML_TAPER_1993;
+    M1993.rate = ML_RATE_1993;
+    M1993.has_sapto_thr = 0;
+    M1993.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1993, ORD_TAX_RATES_1993);
-        // Offsets
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_1993, ORD_TAX_RATES_1993);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_1993(xd, yd, is_family, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M1993);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 1993
+  } // outer case 1993
     break;
+    
   case 1994: {
+    Medicare M1994;
+    M1994.lwr_single = ML_LWR_THRESHOLD_SINGLE_1994;
+    M1994.upr_single = ML_UPR_THRESHOLD_SINGLE_1994;
+    M1994.lwr_family = ML_LWR_THRESHOLD_FAMILY_1994;
+    M1994.upr_family = ML_UPR_THRESHOLD_FAMILY_1994;
+    M1994.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1994;
+    M1994.taper = ML_TAPER_1994;
+    M1994.rate = ML_RATE_1994;
+    M1994.has_sapto_thr = 0;
+    M1994.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1994, ORD_TAX_RATES_1994);
-        // Offsets
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_1994, ORD_TAX_RATES_1994);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_1994, LITO_1ST_THRESH_1994, LITO_1ST_TAPER_1994);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_1994(xd, yd, is_family, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M1994);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 1994
+  } // outer case 1994
     break;
+    
   case 1995: {
+    Medicare M1995;
+    M1995.lwr_single = ML_LWR_THRESHOLD_SINGLE_1995;
+    M1995.upr_single = ML_UPR_THRESHOLD_SINGLE_1995;
+    M1995.lwr_family = ML_LWR_THRESHOLD_FAMILY_1995;
+    M1995.upr_family = ML_UPR_THRESHOLD_FAMILY_1995;
+    M1995.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1995;
+    M1995.taper = ML_TAPER_1995;
+    M1995.rate = ML_RATE_1995;
+    M1995.has_sapto_thr = 0;
+    M1995.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1995, ORD_TAX_RATES_1995);
-        // Offsets
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_1995, ORD_TAX_RATES_1995);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_1995, LITO_1ST_THRESH_1995, LITO_1ST_TAPER_1995);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_1995(xd, yd, is_family, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M1995);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 1995
+  } // outer case 1995
     break;
+    
   case 1996: {
+    Medicare M1996;
+    M1996.lwr_single = ML_LWR_THRESHOLD_SINGLE_1996;
+    M1996.upr_single = ML_UPR_THRESHOLD_SINGLE_1996;
+    M1996.lwr_family = ML_LWR_THRESHOLD_FAMILY_1996;
+    M1996.upr_family = ML_UPR_THRESHOLD_FAMILY_1996;
+    M1996.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1996;
+    M1996.taper = ML_TAPER_1996;
+    M1996.rate = ML_RATE_1996;
+    M1996.has_sapto_thr = 0;
+    M1996.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1996, ORD_TAX_RATES_1996);
-        // Offsets
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_1996, ORD_TAX_RATES_1996);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_1996, LITO_1ST_THRESH_1996, LITO_1ST_TAPER_1996);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_1996(xd, yd, is_family, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M1996);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 1996
+  } // outer case 1996
     break;
+    
   case 1997: {
+    Medicare M1997;
+    M1997.lwr_single = ML_LWR_THRESHOLD_SINGLE_1997;
+    M1997.upr_single = ML_UPR_THRESHOLD_SINGLE_1997;
+    M1997.lwr_family = ML_LWR_THRESHOLD_FAMILY_1997;
+    M1997.upr_family = ML_UPR_THRESHOLD_FAMILY_1997;
+    M1997.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1997;
+    M1997.taper = ML_TAPER_1997;
+    M1997.rate = ML_RATE_1997;
+    M1997.has_sapto_thr = 0;
+    M1997.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1997, ORD_TAX_RATES_1997);
-        // Offsets
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_1997, ORD_TAX_RATES_1997);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_1997, LITO_1ST_THRESH_1997, LITO_1ST_TAPER_1997);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_1997(xd, yd, is_family, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M1997);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 1997
+  } // outer case 1997
     break;
+    
   case 1998: {
+    Medicare M1998;
+    M1998.lwr_single = ML_LWR_THRESHOLD_SINGLE_1998;
+    M1998.upr_single = ML_UPR_THRESHOLD_SINGLE_1998;
+    M1998.lwr_family = ML_LWR_THRESHOLD_FAMILY_1998;
+    M1998.upr_family = ML_UPR_THRESHOLD_FAMILY_1998;
+    M1998.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1998;
+    M1998.taper = ML_TAPER_1998;
+    M1998.rate = ML_RATE_1998;
+    M1998.has_sapto_thr = 0;
+    M1998.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1998, ORD_TAX_RATES_1998);
-        // Offsets
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_1998, ORD_TAX_RATES_1998);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_1998, LITO_1ST_THRESH_1998, LITO_1ST_TAPER_1998);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_1998(xd, yd, is_family, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M1998);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 1998
+  } // outer case 1998
     break;
+    
   case 1999: {
+    Medicare M1999;
+    M1999.lwr_single = ML_LWR_THRESHOLD_SINGLE_1999;
+    M1999.upr_single = ML_UPR_THRESHOLD_SINGLE_1999;
+    M1999.lwr_family = ML_LWR_THRESHOLD_FAMILY_1999;
+    M1999.upr_family = ML_UPR_THRESHOLD_FAMILY_1999;
+    M1999.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1999;
+    M1999.taper = ML_TAPER_1999;
+    M1999.rate = ML_RATE_1999;
+    M1999.has_sapto_thr = 0;
+    M1999.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1999, ORD_TAX_RATES_1999);
-        // Offsets
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_1999, ORD_TAX_RATES_1999);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_1999, LITO_1ST_THRESH_1999, LITO_1ST_TAPER_1999);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_1999(xd, yd, is_family, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M1999);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 1999
+  } // outer case 1999
     break;
+    
   case 2000: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2000;
+    Sapto2000.year = 2000;
+    Sapto2000.pension_age = 65;
+    Sapto2000.mxo_single = SAPTO_MAX_SINGLE_2000;
+    Sapto2000.mxo_couple = SAPTO_MAX_MARRIED_2000;
+    Sapto2000.lwr_single = SAPTO_LWR_SINGLE_2000;
+    Sapto2000.lwr_couple = SAPTO_LWR_MARRIED_2000;
+    Sapto2000.upr_single = SAPTO_LWR_SINGLE_2000 + SAPTO_MAX_SINGLE_2000 / SAPTO_TAPER_2000;
+    Sapto2000.upr_couple = SAPTO_LWR_MARRIED_2000 + SAPTO_MAX_MARRIED_2000 / SAPTO_TAPER_2000;
+    Sapto2000.taper = SAPTO_TAPER_2000;
+    Sapto2000.first_tax_rate = ORD_TAX_RATES_2000[1];
+    Sapto2000.tax_free_thresh = ORD_TAX_BRACK_2000[1];
+    Sapto2000.lito_max_offset = LITO_MAX_OFFSET_2000;
+    
+    Medicare M2000;
+    M2000.lwr_single = ML_LWR_THRESHOLD_SINGLE_2000;
+    M2000.upr_single = ML_UPR_THRESHOLD_SINGLE_2000;
+    M2000.lwr_family = ML_LWR_THRESHOLD_FAMILY_2000;
+    M2000.upr_family = ML_UPR_THRESHOLD_FAMILY_2000;
+    M2000.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_2000;
+    M2000.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_2000;
+    M2000.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_2000;
+    M2000.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_2000;
+    M2000.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2000;
+    M2000.taper = ML_TAPER_2000;
+    M2000.rate = ML_RATE_2000;
+    M2000.has_sapto_thr = 0;
+    M2000.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2000, ORD_TAX_RATES_2000);
-        // Offsets
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2000, ORD_TAX_RATES_2000);
+        apply_sapto(taxi, P, Sapto2000);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2000, LITO_1ST_THRESH_2000, LITO_1ST_TAPER_2000);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2000(xd, yd, is_family, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2000);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2000
+  } // outer case 2000
     break;
+    
   case 2001: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2001;
+    Sapto2001.year = 2001;
+    Sapto2001.pension_age = 65;
+    Sapto2001.mxo_single = SAPTO_MAX_SINGLE_2001;
+    Sapto2001.mxo_couple = SAPTO_MAX_MARRIED_2001;
+    Sapto2001.lwr_single = SAPTO_LWR_SINGLE_2001;
+    Sapto2001.lwr_couple = SAPTO_LWR_MARRIED_2001;
+    Sapto2001.upr_single = SAPTO_LWR_SINGLE_2001 + SAPTO_MAX_SINGLE_2001 / SAPTO_TAPER_2001;
+    Sapto2001.upr_couple = SAPTO_LWR_MARRIED_2001 + SAPTO_MAX_MARRIED_2001 / SAPTO_TAPER_2001;
+    Sapto2001.taper = SAPTO_TAPER_2001;
+    Sapto2001.first_tax_rate = ORD_TAX_RATES_2001[1];
+    Sapto2001.tax_free_thresh = ORD_TAX_BRACK_2001[1];
+    Sapto2001.lito_max_offset = LITO_MAX_OFFSET_2001;
+    
+    Medicare M2001;
+    M2001.lwr_single = ML_LWR_THRESHOLD_SINGLE_2001;
+    M2001.upr_single = ML_UPR_THRESHOLD_SINGLE_2001;
+    M2001.lwr_family = ML_LWR_THRESHOLD_FAMILY_2001;
+    M2001.upr_family = ML_UPR_THRESHOLD_FAMILY_2001;
+    M2001.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2001;
+    M2001.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2001;
+    M2001.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2001;
+    M2001.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2001;
+    M2001.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2001;
+    M2001.taper = ML_TAPER_2001;
+    M2001.rate = ML_RATE_2001;
+    M2001.has_sapto_thr = 1;
+    M2001.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2001, ORD_TAX_RATES_2001);
-        // Offsets
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2001, ORD_TAX_RATES_2001);
+        apply_sapto(taxi, P, Sapto2001);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2001, LITO_1ST_THRESH_2001, LITO_1ST_TAPER_2001);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2001(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2001);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2001
+  } // outer case 2001
     break;
+    
   case 2002: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2002;
+    Sapto2002.year = 2002;
+    Sapto2002.pension_age = 65;
+    Sapto2002.mxo_single = SAPTO_MAX_SINGLE_2002;
+    Sapto2002.mxo_couple = SAPTO_MAX_MARRIED_2002;
+    Sapto2002.lwr_single = SAPTO_LWR_SINGLE_2002;
+    Sapto2002.lwr_couple = SAPTO_LWR_MARRIED_2002;
+    Sapto2002.upr_single = SAPTO_LWR_SINGLE_2002 + SAPTO_MAX_SINGLE_2002 / SAPTO_TAPER_2002;
+    Sapto2002.upr_couple = SAPTO_LWR_MARRIED_2002 + SAPTO_MAX_MARRIED_2002 / SAPTO_TAPER_2002;
+    Sapto2002.taper = SAPTO_TAPER_2002;
+    Sapto2002.first_tax_rate = ORD_TAX_RATES_2002[1];
+    Sapto2002.tax_free_thresh = ORD_TAX_BRACK_2002[1];
+    Sapto2002.lito_max_offset = LITO_MAX_OFFSET_2002;
+    
+    Medicare M2002;
+    M2002.lwr_single = ML_LWR_THRESHOLD_SINGLE_2002;
+    M2002.upr_single = ML_UPR_THRESHOLD_SINGLE_2002;
+    M2002.lwr_family = ML_LWR_THRESHOLD_FAMILY_2002;
+    M2002.upr_family = ML_UPR_THRESHOLD_FAMILY_2002;
+    M2002.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2002;
+    M2002.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2002;
+    M2002.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2002;
+    M2002.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2002;
+    M2002.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2002;
+    M2002.taper = ML_TAPER_2002;
+    M2002.rate = ML_RATE_2002;
+    M2002.has_sapto_thr = 1;
+    M2002.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2002, ORD_TAX_RATES_2002);
-        // Offsets
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2002, ORD_TAX_RATES_2002);
+        apply_sapto(taxi, P, Sapto2002);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2002, LITO_1ST_THRESH_2002, LITO_1ST_TAPER_2002);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2002(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2002);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2002
+  } // outer case 2002
     break;
+    
   case 2003: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2003;
+    Sapto2003.year = 2003;
+    Sapto2003.pension_age = 65;
+    Sapto2003.mxo_single = SAPTO_MAX_SINGLE_2003;
+    Sapto2003.mxo_couple = SAPTO_MAX_MARRIED_2003;
+    Sapto2003.lwr_single = SAPTO_LWR_SINGLE_2003;
+    Sapto2003.lwr_couple = SAPTO_LWR_MARRIED_2003;
+    Sapto2003.upr_single = SAPTO_LWR_SINGLE_2003 + SAPTO_MAX_SINGLE_2003 / SAPTO_TAPER_2003;
+    Sapto2003.upr_couple = SAPTO_LWR_MARRIED_2003 + SAPTO_MAX_MARRIED_2003 / SAPTO_TAPER_2003;
+    Sapto2003.taper = SAPTO_TAPER_2003;
+    Sapto2003.first_tax_rate = ORD_TAX_RATES_2003[1];
+    Sapto2003.tax_free_thresh = ORD_TAX_BRACK_2003[1];
+    Sapto2003.lito_max_offset = LITO_MAX_OFFSET_2003;
+    
+    Medicare M2003;
+    M2003.lwr_single = ML_LWR_THRESHOLD_SINGLE_2003;
+    M2003.upr_single = ML_UPR_THRESHOLD_SINGLE_2003;
+    M2003.lwr_family = ML_LWR_THRESHOLD_FAMILY_2003;
+    M2003.upr_family = ML_UPR_THRESHOLD_FAMILY_2003;
+    M2003.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2003;
+    M2003.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2003;
+    M2003.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2003;
+    M2003.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2003;
+    M2003.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2003;
+    M2003.taper = ML_TAPER_2003;
+    M2003.rate = ML_RATE_2003;
+    M2003.has_sapto_thr = 1;
+    M2003.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2003, ORD_TAX_RATES_2003);
-        // Offsets
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2003, ORD_TAX_RATES_2003);
+        apply_sapto(taxi, P, Sapto2003);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2003, LITO_1ST_THRESH_2003, LITO_1ST_TAPER_2003);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2003(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2003);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2003
+  } // outer case 2003
     break;
+    
   case 2004: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2004;
+    Sapto2004.year = 2004;
+    Sapto2004.pension_age = 65;
+    Sapto2004.mxo_single = SAPTO_MAX_SINGLE_2004;
+    Sapto2004.mxo_couple = SAPTO_MAX_MARRIED_2004;
+    Sapto2004.lwr_single = SAPTO_LWR_SINGLE_2004;
+    Sapto2004.lwr_couple = SAPTO_LWR_MARRIED_2004;
+    Sapto2004.upr_single = SAPTO_LWR_SINGLE_2004 + SAPTO_MAX_SINGLE_2004 / SAPTO_TAPER_2004;
+    Sapto2004.upr_couple = SAPTO_LWR_MARRIED_2004 + SAPTO_MAX_MARRIED_2004 / SAPTO_TAPER_2004;
+    Sapto2004.taper = SAPTO_TAPER_2004;
+    Sapto2004.first_tax_rate = ORD_TAX_RATES_2004[1];
+    Sapto2004.tax_free_thresh = ORD_TAX_BRACK_2004[1];
+    Sapto2004.lito_max_offset = LITO_MAX_OFFSET_2004;
+    
+    Medicare M2004;
+    M2004.lwr_single = ML_LWR_THRESHOLD_SINGLE_2004;
+    M2004.upr_single = ML_UPR_THRESHOLD_SINGLE_2004;
+    M2004.lwr_family = ML_LWR_THRESHOLD_FAMILY_2004;
+    M2004.upr_family = ML_UPR_THRESHOLD_FAMILY_2004;
+    M2004.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2004;
+    M2004.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2004;
+    M2004.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2004;
+    M2004.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2004;
+    M2004.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2004;
+    M2004.taper = ML_TAPER_2004;
+    M2004.rate = ML_RATE_2004;
+    M2004.has_sapto_thr = 1;
+    M2004.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2004, ORD_TAX_RATES_2004);
-        // Offsets
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2004, ORD_TAX_RATES_2004);
+        apply_sapto(taxi, P, Sapto2004);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2004, LITO_1ST_THRESH_2004, LITO_1ST_TAPER_2004);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2004(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2004);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2004
+  } // outer case 2004
     break;
+    
   case 2005: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2005;
+    Sapto2005.year = 2005;
+    Sapto2005.pension_age = 65;
+    Sapto2005.mxo_single = SAPTO_MAX_SINGLE_2005;
+    Sapto2005.mxo_couple = SAPTO_MAX_MARRIED_2005;
+    Sapto2005.lwr_single = SAPTO_LWR_SINGLE_2005;
+    Sapto2005.lwr_couple = SAPTO_LWR_MARRIED_2005;
+    Sapto2005.upr_single = SAPTO_LWR_SINGLE_2005 + SAPTO_MAX_SINGLE_2005 / SAPTO_TAPER_2005;
+    Sapto2005.upr_couple = SAPTO_LWR_MARRIED_2005 + SAPTO_MAX_MARRIED_2005 / SAPTO_TAPER_2005;
+    Sapto2005.taper = SAPTO_TAPER_2005;
+    Sapto2005.first_tax_rate = ORD_TAX_RATES_2005[1];
+    Sapto2005.tax_free_thresh = ORD_TAX_BRACK_2005[1];
+    Sapto2005.lito_max_offset = LITO_MAX_OFFSET_2005;
+    
+    Medicare M2005;
+    M2005.lwr_single = ML_LWR_THRESHOLD_SINGLE_2005;
+    M2005.upr_single = ML_UPR_THRESHOLD_SINGLE_2005;
+    M2005.lwr_family = ML_LWR_THRESHOLD_FAMILY_2005;
+    M2005.upr_family = ML_UPR_THRESHOLD_FAMILY_2005;
+    M2005.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2005;
+    M2005.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2005;
+    M2005.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2005;
+    M2005.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2005;
+    M2005.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2005;
+    M2005.taper = ML_TAPER_2005;
+    M2005.rate = ML_RATE_2005;
+    M2005.has_sapto_thr = 1;
+    M2005.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2005, ORD_TAX_RATES_2005);
-        // Offsets
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2005, ORD_TAX_RATES_2005);
+        apply_sapto(taxi, P, Sapto2005);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2005, LITO_1ST_THRESH_2005, LITO_1ST_TAPER_2005);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2005(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2005);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2005
+  } // outer case 2005
     break;
+    
   case 2006: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2006;
+    Sapto2006.year = 2006;
+    Sapto2006.pension_age = 65;
+    Sapto2006.mxo_single = SAPTO_MAX_SINGLE_2006;
+    Sapto2006.mxo_couple = SAPTO_MAX_MARRIED_2006;
+    Sapto2006.lwr_single = SAPTO_LWR_SINGLE_2006;
+    Sapto2006.lwr_couple = SAPTO_LWR_MARRIED_2006;
+    Sapto2006.upr_single = SAPTO_LWR_SINGLE_2006 + SAPTO_MAX_SINGLE_2006 / SAPTO_TAPER_2006;
+    Sapto2006.upr_couple = SAPTO_LWR_MARRIED_2006 + SAPTO_MAX_MARRIED_2006 / SAPTO_TAPER_2006;
+    Sapto2006.taper = SAPTO_TAPER_2006;
+    Sapto2006.first_tax_rate = ORD_TAX_RATES_2006[1];
+    Sapto2006.tax_free_thresh = ORD_TAX_BRACK_2006[1];
+    Sapto2006.lito_max_offset = LITO_MAX_OFFSET_2006;
+    
+    Medicare M2006;
+    M2006.lwr_single = ML_LWR_THRESHOLD_SINGLE_2006;
+    M2006.upr_single = ML_UPR_THRESHOLD_SINGLE_2006;
+    M2006.lwr_family = ML_LWR_THRESHOLD_FAMILY_2006;
+    M2006.upr_family = ML_UPR_THRESHOLD_FAMILY_2006;
+    M2006.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2006;
+    M2006.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2006;
+    M2006.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2006;
+    M2006.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2006;
+    M2006.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2006;
+    M2006.taper = ML_TAPER_2006;
+    M2006.rate = ML_RATE_2006;
+    M2006.has_sapto_thr = 1;
+    M2006.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2006, ORD_TAX_RATES_2006);
-        // Offsets
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2006, ORD_TAX_RATES_2006);
+        apply_sapto(taxi, P, Sapto2006);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2006, LITO_1ST_THRESH_2006, LITO_1ST_TAPER_2006);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2006(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2006);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2006
+  } // outer case 2006
     break;
+    
   case 2007: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2007;
+    Sapto2007.year = 2007;
+    Sapto2007.pension_age = 65;
+    Sapto2007.mxo_single = SAPTO_MAX_SINGLE_2007;
+    Sapto2007.mxo_couple = SAPTO_MAX_MARRIED_2007;
+    Sapto2007.lwr_single = SAPTO_LWR_SINGLE_2007;
+    Sapto2007.lwr_couple = SAPTO_LWR_MARRIED_2007;
+    Sapto2007.upr_single = SAPTO_LWR_SINGLE_2007 + SAPTO_MAX_SINGLE_2007 / SAPTO_TAPER_2007;
+    Sapto2007.upr_couple = SAPTO_LWR_MARRIED_2007 + SAPTO_MAX_MARRIED_2007 / SAPTO_TAPER_2007;
+    Sapto2007.taper = SAPTO_TAPER_2007;
+    Sapto2007.first_tax_rate = ORD_TAX_RATES_2007[1];
+    Sapto2007.tax_free_thresh = ORD_TAX_BRACK_2007[1];
+    Sapto2007.lito_max_offset = LITO_MAX_OFFSET_2007;
+    
+    Medicare M2007;
+    M2007.lwr_single = ML_LWR_THRESHOLD_SINGLE_2007;
+    M2007.upr_single = ML_UPR_THRESHOLD_SINGLE_2007;
+    M2007.lwr_family = ML_LWR_THRESHOLD_FAMILY_2007;
+    M2007.upr_family = ML_UPR_THRESHOLD_FAMILY_2007;
+    M2007.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2007;
+    M2007.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2007;
+    M2007.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2007;
+    M2007.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2007;
+    M2007.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2007;
+    M2007.taper = ML_TAPER_2007;
+    M2007.rate = ML_RATE_2007;
+    M2007.has_sapto_thr = 1;
+    M2007.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2007, ORD_TAX_RATES_2007);
-        // Offsets
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2007, ORD_TAX_RATES_2007);
+        apply_sapto(taxi, P, Sapto2007);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2007, LITO_1ST_THRESH_2007, LITO_1ST_TAPER_2007);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2007(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2007);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2007
+  } // outer case 2007
     break;
+    
   case 2008: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2008;
+    Sapto2008.year = 2008;
+    Sapto2008.pension_age = 65;
+    Sapto2008.mxo_single = SAPTO_MAX_SINGLE_2008;
+    Sapto2008.mxo_couple = SAPTO_MAX_MARRIED_2008;
+    Sapto2008.lwr_single = SAPTO_LWR_SINGLE_2008;
+    Sapto2008.lwr_couple = SAPTO_LWR_MARRIED_2008;
+    Sapto2008.upr_single = SAPTO_LWR_SINGLE_2008 + SAPTO_MAX_SINGLE_2008 / SAPTO_TAPER_2008;
+    Sapto2008.upr_couple = SAPTO_LWR_MARRIED_2008 + SAPTO_MAX_MARRIED_2008 / SAPTO_TAPER_2008;
+    Sapto2008.taper = SAPTO_TAPER_2008;
+    Sapto2008.first_tax_rate = ORD_TAX_RATES_2008[1];
+    Sapto2008.tax_free_thresh = ORD_TAX_BRACK_2008[1];
+    Sapto2008.lito_max_offset = LITO_MAX_OFFSET_2008;
+    
+    Medicare M2008;
+    M2008.lwr_single = ML_LWR_THRESHOLD_SINGLE_2008;
+    M2008.upr_single = ML_UPR_THRESHOLD_SINGLE_2008;
+    M2008.lwr_family = ML_LWR_THRESHOLD_FAMILY_2008;
+    M2008.upr_family = ML_UPR_THRESHOLD_FAMILY_2008;
+    M2008.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2008;
+    M2008.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2008;
+    M2008.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2008;
+    M2008.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2008;
+    M2008.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2008;
+    M2008.taper = ML_TAPER_2008;
+    M2008.rate = ML_RATE_2008;
+    M2008.has_sapto_thr = 1;
+    M2008.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2008, ORD_TAX_RATES_2008);
-        // Offsets
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2008, ORD_TAX_RATES_2008);
+        apply_sapto(taxi, P, Sapto2008);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2008, LITO_1ST_THRESH_2008, LITO_1ST_TAPER_2008);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2008(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2008);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2008
+  } // outer case 2008
     break;
+    
   case 2009: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2009;
+    Sapto2009.year = 2009;
+    Sapto2009.pension_age = 65;
+    Sapto2009.mxo_single = SAPTO_MAX_SINGLE_2009;
+    Sapto2009.mxo_couple = SAPTO_MAX_MARRIED_2009;
+    Sapto2009.lwr_single = SAPTO_LWR_SINGLE_2009;
+    Sapto2009.lwr_couple = SAPTO_LWR_MARRIED_2009;
+    Sapto2009.upr_single = SAPTO_LWR_SINGLE_2009 + SAPTO_MAX_SINGLE_2009 / SAPTO_TAPER_2009;
+    Sapto2009.upr_couple = SAPTO_LWR_MARRIED_2009 + SAPTO_MAX_MARRIED_2009 / SAPTO_TAPER_2009;
+    Sapto2009.taper = SAPTO_TAPER_2009;
+    Sapto2009.first_tax_rate = ORD_TAX_RATES_2009[1];
+    Sapto2009.tax_free_thresh = ORD_TAX_BRACK_2009[1];
+    Sapto2009.lito_max_offset = LITO_MAX_OFFSET_2009;
+    
+    Medicare M2009;
+    M2009.lwr_single = ML_LWR_THRESHOLD_SINGLE_2009;
+    M2009.upr_single = ML_UPR_THRESHOLD_SINGLE_2009;
+    M2009.lwr_family = ML_LWR_THRESHOLD_FAMILY_2009;
+    M2009.upr_family = ML_UPR_THRESHOLD_FAMILY_2009;
+    M2009.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2009;
+    M2009.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2009;
+    M2009.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2009;
+    M2009.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2009;
+    M2009.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2009;
+    M2009.taper = ML_TAPER_2009;
+    M2009.rate = ML_RATE_2009;
+    M2009.has_sapto_thr = 1;
+    M2009.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2009, ORD_TAX_RATES_2009);
-        // Offsets
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2009, ORD_TAX_RATES_2009);
+        apply_sapto(taxi, P, Sapto2009);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2009, LITO_1ST_THRESH_2009, LITO_1ST_TAPER_2009);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2009(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2009);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2009
+  } // outer case 2009
     break;
+    
   case 2010: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2010;
+    Sapto2010.year = 2010;
+    Sapto2010.pension_age = 65;
+    Sapto2010.mxo_single = SAPTO_MAX_SINGLE_2010;
+    Sapto2010.mxo_couple = SAPTO_MAX_MARRIED_2010;
+    Sapto2010.lwr_single = SAPTO_LWR_SINGLE_2010;
+    Sapto2010.lwr_couple = SAPTO_LWR_MARRIED_2010;
+    Sapto2010.upr_single = SAPTO_LWR_SINGLE_2010 + SAPTO_MAX_SINGLE_2010 / SAPTO_TAPER_2010;
+    Sapto2010.upr_couple = SAPTO_LWR_MARRIED_2010 + SAPTO_MAX_MARRIED_2010 / SAPTO_TAPER_2010;
+    Sapto2010.taper = SAPTO_TAPER_2010;
+    Sapto2010.first_tax_rate = ORD_TAX_RATES_2010[1];
+    Sapto2010.tax_free_thresh = ORD_TAX_BRACK_2010[1];
+    Sapto2010.lito_max_offset = LITO_MAX_OFFSET_2010;
+    
+    Medicare M2010;
+    M2010.lwr_single = ML_LWR_THRESHOLD_SINGLE_2010;
+    M2010.upr_single = ML_UPR_THRESHOLD_SINGLE_2010;
+    M2010.lwr_family = ML_LWR_THRESHOLD_FAMILY_2010;
+    M2010.upr_family = ML_UPR_THRESHOLD_FAMILY_2010;
+    M2010.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2010;
+    M2010.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2010;
+    M2010.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2010;
+    M2010.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2010;
+    M2010.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2010;
+    M2010.taper = ML_TAPER_2010;
+    M2010.rate = ML_RATE_2010;
+    M2010.has_sapto_thr = 1;
+    M2010.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2010, ORD_TAX_RATES_2010);
-        // Offsets
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2010, ORD_TAX_RATES_2010);
+        apply_sapto(taxi, P, Sapto2010);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2010, LITO_1ST_THRESH_2010, LITO_1ST_TAPER_2010);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2010(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2010);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2010
+  } // outer case 2010
     break;
+    
   case 2011: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2011;
+    Sapto2011.year = 2011;
+    Sapto2011.pension_age = 65;
+    Sapto2011.mxo_single = SAPTO_MAX_SINGLE_2011;
+    Sapto2011.mxo_couple = SAPTO_MAX_MARRIED_2011;
+    Sapto2011.lwr_single = SAPTO_LWR_SINGLE_2011;
+    Sapto2011.lwr_couple = SAPTO_LWR_MARRIED_2011;
+    Sapto2011.upr_single = SAPTO_LWR_SINGLE_2011 + SAPTO_MAX_SINGLE_2011 / SAPTO_TAPER_2011;
+    Sapto2011.upr_couple = SAPTO_LWR_MARRIED_2011 + SAPTO_MAX_MARRIED_2011 / SAPTO_TAPER_2011;
+    Sapto2011.taper = SAPTO_TAPER_2011;
+    Sapto2011.first_tax_rate = ORD_TAX_RATES_2011[1];
+    Sapto2011.tax_free_thresh = ORD_TAX_BRACK_2011[1];
+    Sapto2011.lito_max_offset = LITO_MAX_OFFSET_2011;
+    
+    Medicare M2011;
+    M2011.lwr_single = ML_LWR_THRESHOLD_SINGLE_2011;
+    M2011.upr_single = ML_UPR_THRESHOLD_SINGLE_2011;
+    M2011.lwr_family = ML_LWR_THRESHOLD_FAMILY_2011;
+    M2011.upr_family = ML_UPR_THRESHOLD_FAMILY_2011;
+    M2011.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2011;
+    M2011.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2011;
+    M2011.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2011;
+    M2011.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2011;
+    M2011.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2011;
+    M2011.taper = ML_TAPER_2011;
+    M2011.rate = ML_RATE_2011;
+    M2011.has_sapto_thr = 1;
+    M2011.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2011, ORD_TAX_RATES_2011);
-        // Offsets
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2011, ORD_TAX_RATES_2011);
+        apply_sapto(taxi, P, Sapto2011);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2011, LITO_1ST_THRESH_2011, LITO_1ST_TAPER_2011);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2011(xd, yd, is_family, pensioner_eligible, n_dependantsi);
+        double ml = do_1_ML(P, M2011);
+        taxi += ml;
+        
         // Budget levies
         // flood levy
-        taxi += 0.005 * (max0(xd - 50e3) * max0(xd - 100e3));
-        out[i] = taxi + ml;
+        taxi += FLOOD_LEVY_TAPER_2011 * (max0(xi - FLOOD_LEVY_1ST_THRESH_2011) * max0(xi - FLOOD_LEVY_2ND_THRESH_2011));
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2011
+  } // outer case 2011
     break;
+    
   case 2012: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2012;
+    Sapto2012.year = 2012;
+    Sapto2012.pension_age = 65;
+    Sapto2012.mxo_single = SAPTO_MAX_SINGLE_2012;
+    Sapto2012.mxo_couple = SAPTO_MAX_MARRIED_2012;
+    Sapto2012.lwr_single = SAPTO_LWR_SINGLE_2012;
+    Sapto2012.lwr_couple = SAPTO_LWR_MARRIED_2012;
+    Sapto2012.upr_single = SAPTO_LWR_SINGLE_2012 + SAPTO_MAX_SINGLE_2012 / SAPTO_TAPER_2012;
+    Sapto2012.upr_couple = SAPTO_LWR_MARRIED_2012 + SAPTO_MAX_MARRIED_2012 / SAPTO_TAPER_2012;
+    Sapto2012.taper = SAPTO_TAPER_2012;
+    Sapto2012.first_tax_rate = ORD_TAX_RATES_2012[1];
+    Sapto2012.tax_free_thresh = ORD_TAX_BRACK_2012[1];
+    Sapto2012.lito_max_offset = LITO_MAX_OFFSET_2012;
+    
+    Medicare M2012;
+    M2012.lwr_single = ML_LWR_THRESHOLD_SINGLE_2012;
+    M2012.upr_single = ML_UPR_THRESHOLD_SINGLE_2012;
+    M2012.lwr_family = ML_LWR_THRESHOLD_FAMILY_2012;
+    M2012.upr_family = ML_UPR_THRESHOLD_FAMILY_2012;
+    M2012.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2012;
+    M2012.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2012;
+    M2012.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2012;
+    M2012.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2012;
+    M2012.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2012;
+    M2012.taper = ML_TAPER_2012;
+    M2012.rate = ML_RATE_2012;
+    M2012.has_sapto_thr = 1;
+    M2012.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2012, ORD_TAX_RATES_2012);
-        // Offsets
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2012, ORD_TAX_RATES_2012);
+        apply_sapto(taxi, P, Sapto2012);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2012, LITO_1ST_THRESH_2012, LITO_1ST_TAPER_2012);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2012(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2012);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2012
+  } // outer case 2012
     break;
+    
   case 2013: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2013;
+    Sapto2013.year = 2013;
+    Sapto2013.pension_age = 65;
+    Sapto2013.mxo_single = SAPTO_MAX_SINGLE_2013;
+    Sapto2013.mxo_couple = SAPTO_MAX_MARRIED_2013;
+    Sapto2013.lwr_single = SAPTO_LWR_SINGLE_2013;
+    Sapto2013.lwr_couple = SAPTO_LWR_MARRIED_2013;
+    Sapto2013.upr_single = SAPTO_LWR_SINGLE_2013 + SAPTO_MAX_SINGLE_2013 / SAPTO_TAPER_2013;
+    Sapto2013.upr_couple = SAPTO_LWR_MARRIED_2013 + SAPTO_MAX_MARRIED_2013 / SAPTO_TAPER_2013;
+    Sapto2013.taper = SAPTO_TAPER_2013;
+    Sapto2013.first_tax_rate = ORD_TAX_RATES_2013[1];
+    Sapto2013.tax_free_thresh = ORD_TAX_BRACK_2013[1];
+    Sapto2013.lito_max_offset = LITO_MAX_OFFSET_2013;
+    
+    Medicare M2013;
+    M2013.lwr_single = ML_LWR_THRESHOLD_SINGLE_2013;
+    M2013.upr_single = ML_UPR_THRESHOLD_SINGLE_2013;
+    M2013.lwr_family = ML_LWR_THRESHOLD_FAMILY_2013;
+    M2013.upr_family = ML_UPR_THRESHOLD_FAMILY_2013;
+    M2013.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2013;
+    M2013.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2013;
+    M2013.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2013;
+    M2013.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2013;
+    M2013.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2013;
+    M2013.taper = ML_TAPER_2013;
+    M2013.rate = ML_RATE_2013;
+    M2013.has_sapto_thr = 1;
+    M2013.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2013, ORD_TAX_RATES_2013);
-        // Offsets
-        // SAPTO
-        if (pensioner_eligible) {
-          // apply_sapto(int yr, double & taxi, double x, double y, int age, bool is_married)
-          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
-        }
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2013, ORD_TAX_RATES_2013);
+        apply_sapto(taxi, P, Sapto2013);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2013, LITO_1ST_THRESH_2013, LITO_1ST_TAPER_2013);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2013(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2013);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2013
+  } // outer case 2013
     break;
+    
   case 2014: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2014;
+    Sapto2014.year = 2014;
+    Sapto2014.pension_age = 65;
+    Sapto2014.mxo_single = SAPTO_MAX_SINGLE_2014;
+    Sapto2014.mxo_couple = SAPTO_MAX_MARRIED_2014;
+    Sapto2014.lwr_single = SAPTO_LWR_SINGLE_2014;
+    Sapto2014.lwr_couple = SAPTO_LWR_MARRIED_2014;
+    Sapto2014.upr_single = SAPTO_LWR_SINGLE_2014 + SAPTO_MAX_SINGLE_2014 / SAPTO_TAPER_2014;
+    Sapto2014.upr_couple = SAPTO_LWR_MARRIED_2014 + SAPTO_MAX_MARRIED_2014 / SAPTO_TAPER_2014;
+    Sapto2014.taper = SAPTO_TAPER_2014;
+    Sapto2014.first_tax_rate = ORD_TAX_RATES_2014[1];
+    Sapto2014.tax_free_thresh = ORD_TAX_BRACK_2014[1];
+    Sapto2014.lito_max_offset = LITO_MAX_OFFSET_2014;
+    
+    Medicare M2014;
+    M2014.lwr_single = ML_LWR_THRESHOLD_SINGLE_2014;
+    M2014.upr_single = ML_UPR_THRESHOLD_SINGLE_2014;
+    M2014.lwr_family = ML_LWR_THRESHOLD_FAMILY_2014;
+    M2014.upr_family = ML_UPR_THRESHOLD_FAMILY_2014;
+    M2014.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2014;
+    M2014.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2014;
+    M2014.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2014;
+    M2014.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2014;
+    M2014.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2014;
+    M2014.taper = ML_TAPER_2014;
+    M2014.rate = ML_RATE_2014;
+    M2014.has_sapto_thr = 1;
+    M2014.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2014, ORD_TAX_RATES_2014);
-        // Offsets
-        // SAPTO
-        if (pensioner_eligible) {
-          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
-        }
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2014, ORD_TAX_RATES_2014);
+        apply_sapto(taxi, P, Sapto2014);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2014, LITO_1ST_THRESH_2014, LITO_1ST_TAPER_2014);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2014(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2014);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2014
+  } // outer case 2014
     break;
+    
   case 2015: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2015;
+    Sapto2015.year = 2015;
+    Sapto2015.pension_age = 65;
+    Sapto2015.mxo_single = SAPTO_MAX_SINGLE_2015;
+    Sapto2015.mxo_couple = SAPTO_MAX_MARRIED_2015;
+    Sapto2015.lwr_single = SAPTO_LWR_SINGLE_2015;
+    Sapto2015.lwr_couple = SAPTO_LWR_MARRIED_2015;
+    Sapto2015.upr_single = SAPTO_LWR_SINGLE_2015 + SAPTO_MAX_SINGLE_2015 / SAPTO_TAPER_2015;
+    Sapto2015.upr_couple = SAPTO_LWR_MARRIED_2015 + SAPTO_MAX_MARRIED_2015 / SAPTO_TAPER_2015;
+    Sapto2015.taper = SAPTO_TAPER_2015;
+    Sapto2015.first_tax_rate = ORD_TAX_RATES_2015[1];
+    Sapto2015.tax_free_thresh = ORD_TAX_BRACK_2015[1];
+    Sapto2015.lito_max_offset = LITO_MAX_OFFSET_2015;
+    
+    Medicare M2015;
+    M2015.lwr_single = ML_LWR_THRESHOLD_SINGLE_2015;
+    M2015.upr_single = ML_UPR_THRESHOLD_SINGLE_2015;
+    M2015.lwr_family = ML_LWR_THRESHOLD_FAMILY_2015;
+    M2015.upr_family = ML_UPR_THRESHOLD_FAMILY_2015;
+    M2015.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2015;
+    M2015.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2015;
+    M2015.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2015;
+    M2015.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2015;
+    M2015.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2015;
+    M2015.taper = ML_TAPER_2015;
+    M2015.rate = ML_RATE_2015;
+    M2015.has_sapto_thr = 1;
+    M2015.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2015, ORD_TAX_RATES_2015);
-        // Offsets
-        // SAPTO
-        if (pensioner_eligible) {
-          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
-        }
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2015, ORD_TAX_RATES_2015);
+        apply_sapto(taxi, P, Sapto2015);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2015, LITO_1ST_THRESH_2015, LITO_1ST_TAPER_2015);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2015(xd, yd, is_family, pensioner_eligible, n_dependantsi);
+        double ml = do_1_ML(P, M2015);
+        taxi += ml;
+        
         // Budget levies
         // temporary budget repair levy
-        taxi += TEMP_BUDGET_REPAIR_LEVY_RATE * max0(xd - TEMP_BUDGET_REPAIR_LEVY_THRESH);
-        out[i] = taxi + ml;
+        taxi += TEMP_BUDGET_REPAIR_LEVY_RATE * max0(xi - TEMP_BUDGET_REPAIR_LEVY_THRESH);
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2015
+  } // outer case 2015
     break;
+    
   case 2016: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2016;
+    Sapto2016.year = 2016;
+    Sapto2016.pension_age = 65;
+    Sapto2016.mxo_single = SAPTO_MAX_SINGLE_2016;
+    Sapto2016.mxo_couple = SAPTO_MAX_MARRIED_2016;
+    Sapto2016.lwr_single = SAPTO_LWR_SINGLE_2016;
+    Sapto2016.lwr_couple = SAPTO_LWR_MARRIED_2016;
+    Sapto2016.upr_single = SAPTO_LWR_SINGLE_2016 + SAPTO_MAX_SINGLE_2016 / SAPTO_TAPER_2016;
+    Sapto2016.upr_couple = SAPTO_LWR_MARRIED_2016 + SAPTO_MAX_MARRIED_2016 / SAPTO_TAPER_2016;
+    Sapto2016.taper = SAPTO_TAPER_2016;
+    Sapto2016.first_tax_rate = ORD_TAX_RATES_2016[1];
+    Sapto2016.tax_free_thresh = ORD_TAX_BRACK_2016[1];
+    Sapto2016.lito_max_offset = LITO_MAX_OFFSET_2016;
+    
+    Medicare M2016;
+    M2016.lwr_single = ML_LWR_THRESHOLD_SINGLE_2016;
+    M2016.upr_single = ML_UPR_THRESHOLD_SINGLE_2016;
+    M2016.lwr_family = ML_LWR_THRESHOLD_FAMILY_2016;
+    M2016.upr_family = ML_UPR_THRESHOLD_FAMILY_2016;
+    M2016.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2016;
+    M2016.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2016;
+    M2016.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2016;
+    M2016.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2016;
+    M2016.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2016;
+    M2016.taper = ML_TAPER_2016;
+    M2016.rate = ML_RATE_2016;
+    M2016.has_sapto_thr = 1;
+    M2016.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2016, ORD_TAX_RATES_2016);
-        // Offsets
-        // SAPTO
-        if (pensioner_eligible) {
-          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
-        }
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2016, ORD_TAX_RATES_2016);
+        apply_sapto(taxi, P, Sapto2016);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2016, LITO_1ST_THRESH_2016, LITO_1ST_TAPER_2016);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2016(xd, yd, is_family, pensioner_eligible, n_dependantsi);
+        double ml = do_1_ML(P, M2016);
+        taxi += ml;
+        
         // Budget levies
         // temporary budget repair levy
-        taxi += TEMP_BUDGET_REPAIR_LEVY_RATE * max0(xd - TEMP_BUDGET_REPAIR_LEVY_THRESH);
-        out[i] = taxi + ml;
+        taxi += TEMP_BUDGET_REPAIR_LEVY_RATE * max0(xi - TEMP_BUDGET_REPAIR_LEVY_THRESH);
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2016
+  } // outer case 2016
     break;
+    
   case 2017: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2017;
+    Sapto2017.year = 2017;
+    Sapto2017.pension_age = 65;
+    Sapto2017.mxo_single = SAPTO_MAX_SINGLE_2017;
+    Sapto2017.mxo_couple = SAPTO_MAX_MARRIED_2017;
+    Sapto2017.lwr_single = SAPTO_LWR_SINGLE_2017;
+    Sapto2017.lwr_couple = SAPTO_LWR_MARRIED_2017;
+    Sapto2017.upr_single = SAPTO_LWR_SINGLE_2017 + SAPTO_MAX_SINGLE_2017 / SAPTO_TAPER_2017;
+    Sapto2017.upr_couple = SAPTO_LWR_MARRIED_2017 + SAPTO_MAX_MARRIED_2017 / SAPTO_TAPER_2017;
+    Sapto2017.taper = SAPTO_TAPER_2017;
+    Sapto2017.first_tax_rate = ORD_TAX_RATES_2017[1];
+    Sapto2017.tax_free_thresh = ORD_TAX_BRACK_2017[1];
+    Sapto2017.lito_max_offset = LITO_MAX_OFFSET_2017;
+    
+    Medicare M2017;
+    M2017.lwr_single = ML_LWR_THRESHOLD_SINGLE_2017;
+    M2017.upr_single = ML_UPR_THRESHOLD_SINGLE_2017;
+    M2017.lwr_family = ML_LWR_THRESHOLD_FAMILY_2017;
+    M2017.upr_family = ML_UPR_THRESHOLD_FAMILY_2017;
+    M2017.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2017;
+    M2017.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2017;
+    M2017.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2017;
+    M2017.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2017;
+    M2017.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2017;
+    M2017.taper = ML_TAPER_2017;
+    M2017.rate = ML_RATE_2017;
+    M2017.has_sapto_thr = 1;
+    M2017.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2017, ORD_TAX_RATES_2017);
-        // Offsets
-        // SAPTO
-        if (pensioner_eligible) {
-          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
-        }
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2017, ORD_TAX_RATES_2017);
+        apply_sapto(taxi, P, Sapto2017);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2017, LITO_1ST_THRESH_2017, LITO_1ST_TAPER_2017);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2017(xd, yd, is_family, pensioner_eligible, n_dependantsi);
+        double ml = do_1_ML(P, M2017);
+        taxi += ml;
+        
         // Budget levies
         // temporary budget repair levy
-        taxi += TEMP_BUDGET_REPAIR_LEVY_RATE * max0(xd - TEMP_BUDGET_REPAIR_LEVY_THRESH);
-        out[i] = taxi + ml;
+        taxi += TEMP_BUDGET_REPAIR_LEVY_RATE * max0(xi - TEMP_BUDGET_REPAIR_LEVY_THRESH);
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2017
+  } // outer case 2017
     break;
+    
   case 2018: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2018;
+    Sapto2018.year = 2018;
+    Sapto2018.pension_age = 65;
+    Sapto2018.mxo_single = SAPTO_MAX_SINGLE_2018;
+    Sapto2018.mxo_couple = SAPTO_MAX_MARRIED_2018;
+    Sapto2018.lwr_single = SAPTO_LWR_SINGLE_2018;
+    Sapto2018.lwr_couple = SAPTO_LWR_MARRIED_2018;
+    Sapto2018.upr_single = SAPTO_LWR_SINGLE_2018 + SAPTO_MAX_SINGLE_2018 / SAPTO_TAPER_2018;
+    Sapto2018.upr_couple = SAPTO_LWR_MARRIED_2018 + SAPTO_MAX_MARRIED_2018 / SAPTO_TAPER_2018;
+    Sapto2018.taper = SAPTO_TAPER_2018;
+    Sapto2018.first_tax_rate = ORD_TAX_RATES_2018[1];
+    Sapto2018.tax_free_thresh = ORD_TAX_BRACK_2018[1];
+    Sapto2018.lito_max_offset = LITO_MAX_OFFSET_2018;
+    
+    Medicare M2018;
+    M2018.lwr_single = ML_LWR_THRESHOLD_SINGLE_2018;
+    M2018.upr_single = ML_UPR_THRESHOLD_SINGLE_2018;
+    M2018.lwr_family = ML_LWR_THRESHOLD_FAMILY_2018;
+    M2018.upr_family = ML_UPR_THRESHOLD_FAMILY_2018;
+    M2018.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2018;
+    M2018.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2018;
+    M2018.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2018;
+    M2018.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2018;
+    M2018.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2018;
+    M2018.taper = ML_TAPER_2018;
+    M2018.rate = ML_RATE_2018;
+    M2018.has_sapto_thr = 1;
+    M2018.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2018, ORD_TAX_RATES_2018);
-        // Offsets
-        // SAPTO
         
-        if (pensioner_eligible) {
-          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
-        }
-        apply_lito(yr, taxi, xd);
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2018, ORD_TAX_RATES_2018);
+        apply_sapto(taxi, P, Sapto2018);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2018, LITO_1ST_THRESH_2018, LITO_1ST_TAPER_2018);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2018(xd, yd, is_family, pensioner_eligible, n_dependantsi);
+        double ml = do_1_ML(P, M2018);
+        taxi += ml;
         
-        // Budget levies
-        out[i] = taxi + ml;
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2018
+  } // outer case 2018
     break;
+    
   case 2019: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2019;
+    Sapto2019.year = 2019;
+    Sapto2019.pension_age = 65;
+    Sapto2019.mxo_single = SAPTO_MAX_SINGLE_2019;
+    Sapto2019.mxo_couple = SAPTO_MAX_MARRIED_2019;
+    Sapto2019.lwr_single = SAPTO_LWR_SINGLE_2019;
+    Sapto2019.lwr_couple = SAPTO_LWR_MARRIED_2019;
+    Sapto2019.upr_single = SAPTO_LWR_SINGLE_2019 + SAPTO_MAX_SINGLE_2019 / SAPTO_TAPER_2019;
+    Sapto2019.upr_couple = SAPTO_LWR_MARRIED_2019 + SAPTO_MAX_MARRIED_2019 / SAPTO_TAPER_2019;
+    Sapto2019.taper = SAPTO_TAPER_2019;
+    Sapto2019.first_tax_rate = ORD_TAX_RATES_2019[1];
+    Sapto2019.tax_free_thresh = ORD_TAX_BRACK_2019[1];
+    Sapto2019.lito_max_offset = LITO_MAX_OFFSET_2019;
+    
+    Medicare M2019;
+    M2019.lwr_single = ML_LWR_THRESHOLD_SINGLE_2019;
+    M2019.upr_single = ML_UPR_THRESHOLD_SINGLE_2019;
+    M2019.lwr_family = ML_LWR_THRESHOLD_FAMILY_2019;
+    M2019.upr_family = ML_UPR_THRESHOLD_FAMILY_2019;
+    M2019.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2019;
+    M2019.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2019;
+    M2019.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2019;
+    M2019.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2019;
+    M2019.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2019;
+    M2019.taper = ML_TAPER_2019;
+    M2019.rate = ML_RATE_2019;
+    M2019.has_sapto_thr = 1;
+    M2019.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2019, ORD_TAX_RATES_2019);
-        // Offsets
-        // SAPTO
-        // apply_sapto(yr, taxi, xd, yd, is_married, agei);
-        apply_lito(yr, taxi, xd);
-        apply_lmito(taxi, xd);
         
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2019, ORD_TAX_RATES_2019);
+        apply_sapto(taxi, P, Sapto2019);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2019, LITO_1ST_THRESH_2019, LITO_1ST_TAPER_2019);
+        apply_lmito(taxi, xi);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2019(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2019);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2019
+  } // outer case 2019
     break;
+    
   case 2020: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2020;
+    Sapto2020.year = 2020;
+    Sapto2020.pension_age = 65;
+    Sapto2020.mxo_single = SAPTO_MAX_SINGLE_2020;
+    Sapto2020.mxo_couple = SAPTO_MAX_MARRIED_2020;
+    Sapto2020.lwr_single = SAPTO_LWR_SINGLE_2020;
+    Sapto2020.lwr_couple = SAPTO_LWR_MARRIED_2020;
+    Sapto2020.upr_single = SAPTO_LWR_SINGLE_2020 + SAPTO_MAX_SINGLE_2020 / SAPTO_TAPER_2020;
+    Sapto2020.upr_couple = SAPTO_LWR_MARRIED_2020 + SAPTO_MAX_MARRIED_2020 / SAPTO_TAPER_2020;
+    Sapto2020.taper = SAPTO_TAPER_2020;
+    Sapto2020.first_tax_rate = ORD_TAX_RATES_2020[1];
+    Sapto2020.tax_free_thresh = ORD_TAX_BRACK_2020[1];
+    Sapto2020.lito_max_offset = LITO_MAX_OFFSET_2020;
+    
+    Medicare M2020;
+    M2020.lwr_single = ML_LWR_THRESHOLD_SINGLE_2020;
+    M2020.upr_single = ML_UPR_THRESHOLD_SINGLE_2020;
+    M2020.lwr_family = ML_LWR_THRESHOLD_FAMILY_2020;
+    M2020.upr_family = ML_UPR_THRESHOLD_FAMILY_2020;
+    M2020.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2020;
+    M2020.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2020;
+    M2020.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2020;
+    M2020.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2020;
+    M2020.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2020;
+    M2020.taper = ML_TAPER_2020;
+    M2020.rate = ML_RATE_2020;
+    M2020.has_sapto_thr = 1;
+    M2020.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2020, ORD_TAX_RATES_2020);
-        // Offsets
-        // SAPTO
-        if (pensioner_eligible) {
-          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
-        }
-        apply_lito(yr, taxi, xd);
-        apply_lmito(taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2020, ORD_TAX_RATES_2020);
+        apply_sapto(taxi, P, Sapto2020);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2020, LITO_1ST_THRESH_2020, LITO_1ST_TAPER_2020);
+        apply_lmito(taxi, xi);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2020(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2020);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2020
+  } // outer case 2020
     break;
+    
   case 2021: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2021;
+    Sapto2021.year = 2021;
+    Sapto2021.pension_age = 65;
+    Sapto2021.mxo_single = SAPTO_MAX_SINGLE_2021;
+    Sapto2021.mxo_couple = SAPTO_MAX_MARRIED_2021;
+    Sapto2021.lwr_single = SAPTO_LWR_SINGLE_2021;
+    Sapto2021.lwr_couple = SAPTO_LWR_MARRIED_2021;
+    Sapto2021.upr_single = SAPTO_LWR_SINGLE_2021 + SAPTO_MAX_SINGLE_2021 / SAPTO_TAPER_2021;
+    Sapto2021.upr_couple = SAPTO_LWR_MARRIED_2021 + SAPTO_MAX_MARRIED_2021 / SAPTO_TAPER_2021;
+    Sapto2021.taper = SAPTO_TAPER_2021;
+    Sapto2021.first_tax_rate = ORD_TAX_RATES_2021[1];
+    Sapto2021.tax_free_thresh = ORD_TAX_BRACK_2021[1];
+    Sapto2021.lito_max_offset = LITO_MAX_OFFSET_2021;
+    
+    Medicare M2021;
+    M2021.lwr_single = ML_LWR_THRESHOLD_SINGLE_2021;
+    M2021.upr_single = ML_UPR_THRESHOLD_SINGLE_2021;
+    M2021.lwr_family = ML_LWR_THRESHOLD_FAMILY_2021;
+    M2021.upr_family = ML_UPR_THRESHOLD_FAMILY_2021;
+    M2021.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2021;
+    M2021.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2021;
+    M2021.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2021;
+    M2021.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2021;
+    M2021.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2021;
+    M2021.taper = ML_TAPER_2021;
+    M2021.rate = ML_RATE_2021;
+    M2021.has_sapto_thr = 1;
+    M2021.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2021, ORD_TAX_RATES_2021);
-        // Offsets
-        // SAPTO
-        if (pensioner_eligible) {
-          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
-        }
-        apply_lito(yr, taxi, xd);
-        apply_lmito(taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2021, ORD_TAX_RATES_2021);
+        apply_sapto(taxi, P, Sapto2021);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2021, LITO_1ST_THRESH_2021, LITO_1ST_TAPER_2021);
+        apply_lmito(taxi, xi);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2021(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2021);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2021
+  } // outer case 2021
     break;
+    
   case 2022: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2022;
+    Sapto2022.year = 2022;
+    Sapto2022.pension_age = 65;
+    Sapto2022.mxo_single = SAPTO_MAX_SINGLE_2022;
+    Sapto2022.mxo_couple = SAPTO_MAX_MARRIED_2022;
+    Sapto2022.lwr_single = SAPTO_LWR_SINGLE_2022;
+    Sapto2022.lwr_couple = SAPTO_LWR_MARRIED_2022;
+    Sapto2022.upr_single = SAPTO_LWR_SINGLE_2022 + SAPTO_MAX_SINGLE_2022 / SAPTO_TAPER_2022;
+    Sapto2022.upr_couple = SAPTO_LWR_MARRIED_2022 + SAPTO_MAX_MARRIED_2022 / SAPTO_TAPER_2022;
+    Sapto2022.taper = SAPTO_TAPER_2022;
+    Sapto2022.first_tax_rate = ORD_TAX_RATES_2022[1];
+    Sapto2022.tax_free_thresh = ORD_TAX_BRACK_2022[1];
+    Sapto2022.lito_max_offset = LITO_MAX_OFFSET_2022;
+    
+    Medicare M2022;
+    M2022.lwr_single = ML_LWR_THRESHOLD_SINGLE_2022;
+    M2022.upr_single = ML_UPR_THRESHOLD_SINGLE_2022;
+    M2022.lwr_family = ML_LWR_THRESHOLD_FAMILY_2022;
+    M2022.upr_family = ML_UPR_THRESHOLD_FAMILY_2022;
+    M2022.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2022;
+    M2022.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2022;
+    M2022.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2022;
+    M2022.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2022;
+    M2022.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2022;
+    M2022.taper = ML_TAPER_2022;
+    M2022.rate = ML_RATE_2022;
+    M2022.has_sapto_thr = 1;
+    M2022.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2022, ORD_TAX_RATES_2022);
-        // Offsets
-        // SAPTO
-        if (pensioner_eligible) {
-          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
-        }
-        apply_lito(yr, taxi, xd);
-        apply_lmito(taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2022, ORD_TAX_RATES_2022);
+        apply_sapto(taxi, P, Sapto2022);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2022, LITO_1ST_THRESH_2022, LITO_1ST_TAPER_2022);
+        apply_lmito(taxi, xi);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2022(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2022);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2022
+  } // outer case 2022
     break;
+    
   case 2023: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2023;
+    Sapto2023.year = 2023;
+    Sapto2023.pension_age = 65;
+    Sapto2023.mxo_single = SAPTO_MAX_SINGLE_2023;
+    Sapto2023.mxo_couple = SAPTO_MAX_MARRIED_2023;
+    Sapto2023.lwr_single = SAPTO_LWR_SINGLE_2023;
+    Sapto2023.lwr_couple = SAPTO_LWR_MARRIED_2023;
+    Sapto2023.upr_single = SAPTO_LWR_SINGLE_2023 + SAPTO_MAX_SINGLE_2023 / SAPTO_TAPER_2023;
+    Sapto2023.upr_couple = SAPTO_LWR_MARRIED_2023 + SAPTO_MAX_MARRIED_2023 / SAPTO_TAPER_2023;
+    Sapto2023.taper = SAPTO_TAPER_2023;
+    Sapto2023.first_tax_rate = ORD_TAX_RATES_2023[1];
+    Sapto2023.tax_free_thresh = ORD_TAX_BRACK_2023[1];
+    Sapto2023.lito_max_offset = LITO_MAX_OFFSET_2023;
+    
+    Medicare M2023;
+    M2023.lwr_single = ML_LWR_THRESHOLD_SINGLE_2023;
+    M2023.upr_single = ML_UPR_THRESHOLD_SINGLE_2023;
+    M2023.lwr_family = ML_LWR_THRESHOLD_FAMILY_2023;
+    M2023.upr_family = ML_UPR_THRESHOLD_FAMILY_2023;
+    M2023.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2023;
+    M2023.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2023;
+    M2023.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2023;
+    M2023.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2023;
+    M2023.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2023;
+    M2023.taper = ML_TAPER_2023;
+    M2023.rate = ML_RATE_2023;
+    M2023.has_sapto_thr = 1;
+    M2023.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2023, ORD_TAX_RATES_2023);
-        // Offsets
-        // SAPTO
-        if (pensioner_eligible) {
-          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
-        }
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2023, ORD_TAX_RATES_2023);
+        apply_sapto(taxi, P, Sapto2023);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2023, LITO_1ST_THRESH_2023, LITO_1ST_TAPER_2023);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2023(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2023);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2023
+  } // outer case 2023
     break;
+    
   case 2024: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2024;
+    Sapto2024.year = 2024;
+    Sapto2024.pension_age = 65;
+    Sapto2024.mxo_single = SAPTO_MAX_SINGLE_2024;
+    Sapto2024.mxo_couple = SAPTO_MAX_MARRIED_2024;
+    Sapto2024.lwr_single = SAPTO_LWR_SINGLE_2024;
+    Sapto2024.lwr_couple = SAPTO_LWR_MARRIED_2024;
+    Sapto2024.upr_single = SAPTO_LWR_SINGLE_2024 + SAPTO_MAX_SINGLE_2024 / SAPTO_TAPER_2024;
+    Sapto2024.upr_couple = SAPTO_LWR_MARRIED_2024 + SAPTO_MAX_MARRIED_2024 / SAPTO_TAPER_2024;
+    Sapto2024.taper = SAPTO_TAPER_2024;
+    Sapto2024.first_tax_rate = ORD_TAX_RATES_2024[1];
+    Sapto2024.tax_free_thresh = ORD_TAX_BRACK_2024[1];
+    Sapto2024.lito_max_offset = LITO_MAX_OFFSET_2024;
+    
+    Medicare M2024;
+    M2024.lwr_single = ML_LWR_THRESHOLD_SINGLE_2024;
+    M2024.upr_single = ML_UPR_THRESHOLD_SINGLE_2024;
+    M2024.lwr_family = ML_LWR_THRESHOLD_FAMILY_2024;
+    M2024.upr_family = ML_UPR_THRESHOLD_FAMILY_2024;
+    M2024.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2024;
+    M2024.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2024;
+    M2024.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2024;
+    M2024.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2024;
+    M2024.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2024;
+    M2024.taper = ML_TAPER_2024;
+    M2024.rate = ML_RATE_2024;
+    M2024.has_sapto_thr = 1;
+    M2024.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2024, ORD_TAX_RATES_2024);
-        // Offsets
-        // SAPTO
-        if (pensioner_eligible) {
-          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
-        }
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2024, ORD_TAX_RATES_2024);
+        apply_sapto(taxi, P, Sapto2024);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2024, LITO_1ST_THRESH_2024, LITO_1ST_TAPER_2024, LITO_2ND_THRESH_2024, LITO_2ND_TAPER_2024);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2024(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2024);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2024
+  } // outer case 2024
     break;
+    
   case 2025: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2025;
+    Sapto2025.year = 2025;
+    Sapto2025.pension_age = 65;
+    Sapto2025.mxo_single = SAPTO_MAX_SINGLE_2025;
+    Sapto2025.mxo_couple = SAPTO_MAX_MARRIED_2025;
+    Sapto2025.lwr_single = SAPTO_LWR_SINGLE_2025;
+    Sapto2025.lwr_couple = SAPTO_LWR_MARRIED_2025;
+    Sapto2025.upr_single = SAPTO_LWR_SINGLE_2025 + SAPTO_MAX_SINGLE_2025 / SAPTO_TAPER_2025;
+    Sapto2025.upr_couple = SAPTO_LWR_MARRIED_2025 + SAPTO_MAX_MARRIED_2025 / SAPTO_TAPER_2025;
+    Sapto2025.taper = SAPTO_TAPER_2025;
+    Sapto2025.first_tax_rate = ORD_TAX_RATES_2025[1];
+    Sapto2025.tax_free_thresh = ORD_TAX_BRACK_2025[1];
+    Sapto2025.lito_max_offset = LITO_MAX_OFFSET_2025;
+    
+    Medicare M2025;
+    M2025.lwr_single = ML_LWR_THRESHOLD_SINGLE_2025;
+    M2025.upr_single = ML_UPR_THRESHOLD_SINGLE_2025;
+    M2025.lwr_family = ML_LWR_THRESHOLD_FAMILY_2025;
+    M2025.upr_family = ML_UPR_THRESHOLD_FAMILY_2025;
+    M2025.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2025;
+    M2025.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2025;
+    M2025.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2025;
+    M2025.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2025;
+    M2025.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2025;
+    M2025.taper = ML_TAPER_2025;
+    M2025.rate = ML_RATE_2025;
+    M2025.has_sapto_thr = 1;
+    M2025.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2025, ORD_TAX_RATES_2025);
-        // Offsets
-        // SAPTO
-        if (pensioner_eligible) {
-          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
-        }
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2025, ORD_TAX_RATES_2025);
+        apply_sapto(taxi, P, Sapto2025);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2025, LITO_1ST_THRESH_2025, LITO_1ST_TAPER_2025, LITO_2ND_THRESH_2025, LITO_2ND_TAPER_2025);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2025(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2025);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2025
+  } // outer case 2025
     break;
+    
   case 2026: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2026;
+    Sapto2026.year = 2026;
+    Sapto2026.pension_age = 65;
+    Sapto2026.mxo_single = SAPTO_MAX_SINGLE_2026;
+    Sapto2026.mxo_couple = SAPTO_MAX_MARRIED_2026;
+    Sapto2026.lwr_single = SAPTO_LWR_SINGLE_2026;
+    Sapto2026.lwr_couple = SAPTO_LWR_MARRIED_2026;
+    Sapto2026.upr_single = SAPTO_LWR_SINGLE_2026 + SAPTO_MAX_SINGLE_2026 / SAPTO_TAPER_2026;
+    Sapto2026.upr_couple = SAPTO_LWR_MARRIED_2026 + SAPTO_MAX_MARRIED_2026 / SAPTO_TAPER_2026;
+    Sapto2026.taper = SAPTO_TAPER_2026;
+    Sapto2026.first_tax_rate = ORD_TAX_RATES_2026[1];
+    Sapto2026.tax_free_thresh = ORD_TAX_BRACK_2026[1];
+    Sapto2026.lito_max_offset = LITO_MAX_OFFSET_2026;
+    
+    Medicare M2026;
+    M2026.lwr_single = ML_LWR_THRESHOLD_SINGLE_2026;
+    M2026.upr_single = ML_UPR_THRESHOLD_SINGLE_2026;
+    M2026.lwr_family = ML_LWR_THRESHOLD_FAMILY_2026;
+    M2026.upr_family = ML_UPR_THRESHOLD_FAMILY_2026;
+    M2026.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2026;
+    M2026.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2026;
+    M2026.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2026;
+    M2026.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2026;
+    M2026.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2026;
+    M2026.taper = ML_TAPER_2026;
+    M2026.rate = ML_RATE_2026;
+    M2026.has_sapto_thr = 1;
+    M2026.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2026, ORD_TAX_RATES_2026);
-        // Offsets
-        // SAPTO
-        if (pensioner_eligible) {
-          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
-        }
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2026, ORD_TAX_RATES_2026);
+        apply_sapto(taxi, P, Sapto2026);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2026, LITO_1ST_THRESH_2026, LITO_1ST_TAPER_2026, LITO_2ND_THRESH_2026, LITO_2ND_TAPER_2026);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2026(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2026);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2026
+  } // outer case 2026
     break;
+    
   case 2027: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2027;
+    Sapto2027.year = 2027;
+    Sapto2027.pension_age = 65;
+    Sapto2027.mxo_single = SAPTO_MAX_SINGLE_2027;
+    Sapto2027.mxo_couple = SAPTO_MAX_MARRIED_2027;
+    Sapto2027.lwr_single = SAPTO_LWR_SINGLE_2027;
+    Sapto2027.lwr_couple = SAPTO_LWR_MARRIED_2027;
+    Sapto2027.upr_single = SAPTO_LWR_SINGLE_2027 + SAPTO_MAX_SINGLE_2027 / SAPTO_TAPER_2027;
+    Sapto2027.upr_couple = SAPTO_LWR_MARRIED_2027 + SAPTO_MAX_MARRIED_2027 / SAPTO_TAPER_2027;
+    Sapto2027.taper = SAPTO_TAPER_2027;
+    Sapto2027.first_tax_rate = ORD_TAX_RATES_2027[1];
+    Sapto2027.tax_free_thresh = ORD_TAX_BRACK_2027[1];
+    Sapto2027.lito_max_offset = LITO_MAX_OFFSET_2027;
+    
+    Medicare M2027;
+    M2027.lwr_single = ML_LWR_THRESHOLD_SINGLE_2027;
+    M2027.upr_single = ML_UPR_THRESHOLD_SINGLE_2027;
+    M2027.lwr_family = ML_LWR_THRESHOLD_FAMILY_2027;
+    M2027.upr_family = ML_UPR_THRESHOLD_FAMILY_2027;
+    M2027.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2027;
+    M2027.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2027;
+    M2027.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2027;
+    M2027.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2027;
+    M2027.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2027;
+    M2027.taper = ML_TAPER_2027;
+    M2027.rate = ML_RATE_2027;
+    M2027.has_sapto_thr = 1;
+    M2027.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2027, ORD_TAX_RATES_2027);
-        // Offsets
-        // SAPTO
-        if (pensioner_eligible) {
-          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
-        }
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2027, ORD_TAX_RATES_2027);
+        apply_sapto(taxi, P, Sapto2027);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2027, LITO_1ST_THRESH_2027, LITO_1ST_TAPER_2027, LITO_2ND_THRESH_2027, LITO_2ND_TAPER_2027);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2027(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2027);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2027
+  } // outer case 2027
     break;
+    
   case 2028: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2028;
+    Sapto2028.year = 2028;
+    Sapto2028.pension_age = 65;
+    Sapto2028.mxo_single = SAPTO_MAX_SINGLE_2028;
+    Sapto2028.mxo_couple = SAPTO_MAX_MARRIED_2028;
+    Sapto2028.lwr_single = SAPTO_LWR_SINGLE_2028;
+    Sapto2028.lwr_couple = SAPTO_LWR_MARRIED_2028;
+    Sapto2028.upr_single = SAPTO_LWR_SINGLE_2028 + SAPTO_MAX_SINGLE_2028 / SAPTO_TAPER_2028;
+    Sapto2028.upr_couple = SAPTO_LWR_MARRIED_2028 + SAPTO_MAX_MARRIED_2028 / SAPTO_TAPER_2028;
+    Sapto2028.taper = SAPTO_TAPER_2028;
+    Sapto2028.first_tax_rate = ORD_TAX_RATES_2028[1];
+    Sapto2028.tax_free_thresh = ORD_TAX_BRACK_2028[1];
+    Sapto2028.lito_max_offset = LITO_MAX_OFFSET_2028;
+    
+    Medicare M2028;
+    M2028.lwr_single = ML_LWR_THRESHOLD_SINGLE_2028;
+    M2028.upr_single = ML_UPR_THRESHOLD_SINGLE_2028;
+    M2028.lwr_family = ML_LWR_THRESHOLD_FAMILY_2028;
+    M2028.upr_family = ML_UPR_THRESHOLD_FAMILY_2028;
+    M2028.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2028;
+    M2028.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2028;
+    M2028.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2028;
+    M2028.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2028;
+    M2028.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2028;
+    M2028.taper = ML_TAPER_2028;
+    M2028.rate = ML_RATE_2028;
+    M2028.has_sapto_thr = 1;
+    M2028.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2028, ORD_TAX_RATES_2028);
-        // Offsets
-        // SAPTO
-        if (pensioner_eligible) {
-          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
-        }
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2028, ORD_TAX_RATES_2028);
+        apply_sapto(taxi, P, Sapto2028);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2028, LITO_1ST_THRESH_2028, LITO_1ST_TAPER_2028, LITO_2ND_THRESH_2028, LITO_2ND_TAPER_2028);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2028(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2028);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2028
+  } // outer case 2028
     break;
+    
   case 2029: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2029;
+    Sapto2029.year = 2029;
+    Sapto2029.pension_age = 65;
+    Sapto2029.mxo_single = SAPTO_MAX_SINGLE_2029;
+    Sapto2029.mxo_couple = SAPTO_MAX_MARRIED_2029;
+    Sapto2029.lwr_single = SAPTO_LWR_SINGLE_2029;
+    Sapto2029.lwr_couple = SAPTO_LWR_MARRIED_2029;
+    Sapto2029.upr_single = SAPTO_LWR_SINGLE_2029 + SAPTO_MAX_SINGLE_2029 / SAPTO_TAPER_2029;
+    Sapto2029.upr_couple = SAPTO_LWR_MARRIED_2029 + SAPTO_MAX_MARRIED_2029 / SAPTO_TAPER_2029;
+    Sapto2029.taper = SAPTO_TAPER_2029;
+    Sapto2029.first_tax_rate = ORD_TAX_RATES_2029[1];
+    Sapto2029.tax_free_thresh = ORD_TAX_BRACK_2029[1];
+    Sapto2029.lito_max_offset = LITO_MAX_OFFSET_2029;
+    
+    Medicare M2029;
+    M2029.lwr_single = ML_LWR_THRESHOLD_SINGLE_2029;
+    M2029.upr_single = ML_UPR_THRESHOLD_SINGLE_2029;
+    M2029.lwr_family = ML_LWR_THRESHOLD_FAMILY_2029;
+    M2029.upr_family = ML_UPR_THRESHOLD_FAMILY_2029;
+    M2029.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2029;
+    M2029.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2029;
+    M2029.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2029;
+    M2029.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2029;
+    M2029.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2029;
+    M2029.taper = ML_TAPER_2029;
+    M2029.rate = ML_RATE_2029;
+    M2029.has_sapto_thr = 1;
+    M2029.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2029, ORD_TAX_RATES_2029);
-        // Offsets
-        // SAPTO
-        if (pensioner_eligible) {
-          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
-        }
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2029, ORD_TAX_RATES_2029);
+        apply_sapto(taxi, P, Sapto2029);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2029, LITO_1ST_THRESH_2029, LITO_1ST_TAPER_2029, LITO_2ND_THRESH_2029, LITO_2ND_TAPER_2029);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2029(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2029);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2029
+  } // outer case 2029
     break;
+    
   case 2030: {
+    // Create a Sapto struct for this year
+    Sapto Sapto2030;
+    Sapto2030.year = 2030;
+    Sapto2030.pension_age = 65;
+    Sapto2030.mxo_single = SAPTO_MAX_SINGLE_2030;
+    Sapto2030.mxo_couple = SAPTO_MAX_MARRIED_2030;
+    Sapto2030.lwr_single = SAPTO_LWR_SINGLE_2030;
+    Sapto2030.lwr_couple = SAPTO_LWR_MARRIED_2030;
+    Sapto2030.upr_single = SAPTO_LWR_SINGLE_2030 + SAPTO_MAX_SINGLE_2030 / SAPTO_TAPER_2030;
+    Sapto2030.upr_couple = SAPTO_LWR_MARRIED_2030 + SAPTO_MAX_MARRIED_2030 / SAPTO_TAPER_2030;
+    Sapto2030.taper = SAPTO_TAPER_2030;
+    Sapto2030.first_tax_rate = ORD_TAX_RATES_2030[1];
+    Sapto2030.tax_free_thresh = ORD_TAX_BRACK_2030[1];
+    Sapto2030.lito_max_offset = LITO_MAX_OFFSET_2030;
+    
+    Medicare M2030;
+    M2030.lwr_single = ML_LWR_THRESHOLD_SINGLE_2030;
+    M2030.upr_single = ML_UPR_THRESHOLD_SINGLE_2030;
+    M2030.lwr_family = ML_LWR_THRESHOLD_FAMILY_2030;
+    M2030.upr_family = ML_UPR_THRESHOLD_FAMILY_2030;
+    M2030.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2030;
+    M2030.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_2030;
+    M2030.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2030;
+    M2030.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_2030;
+    M2030.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2030;
+    M2030.taper = ML_TAPER_2030;
+    M2030.rate = ML_RATE_2030;
+    M2030.has_sapto_thr = 1;
+    M2030.sapto_age = 65;
     {
       for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
         int xi = ic_taxable_income_loss[i];
-        int rebate_incomei = rebate_income[i];
-        int n_dependantsi = get_i_N(n_dependants, i, N);
-        double xd = (double)xi;
-        double yd = (double)get_i_N(spc_rebate_income, i, N);
-        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
-        bool is_family = is_married || n_dependantsi > 0;
-        int agei = get_i_N(c_age_30_june, i, N);
-        bool pensioner_eligible = agei >= 65;
         double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2030, ORD_TAX_RATES_2030);
-        // Offsets
-        // SAPTO
-        if (pensioner_eligible) {
-          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
-        }
-        apply_lito(yr, taxi, xd);
+        
+        P.xi = xi;
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = partner_status[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child;
+        
+        taxi += income_taxi_nb(xi, ORD_TAX_BRACK_2030, ORD_TAX_RATES_2030);
+        apply_sapto(taxi, P, Sapto2030);
+        apply_lito(taxi, xi, LITO_MAX_OFFSET_2030, LITO_1ST_THRESH_2030, LITO_1ST_TAPER_2030, LITO_2ND_THRESH_2030, LITO_2ND_TAPER_2030);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2030(xd, yd, is_family, pensioner_eligible, n_dependantsi);
-        // Budget levies
-        out[i] = taxi + ml;
+        double ml = do_1_ML(P, M2030);
+        taxi += ml;
+        
+        
+        // finally
+        out[i] = taxi;
       }
-    }
-  }
+      
+    } // inner case 2030
+  } // outer case 2030
     break;
   }
+  
+  
+  
   return out;
 }
 

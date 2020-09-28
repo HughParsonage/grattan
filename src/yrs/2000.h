@@ -15,6 +15,7 @@ constexpr double SAPTO_MAX_SINGLE_2000 = 1358;
 constexpr double SAPTO_MAX_MARRIED_2000 = 1960;
 constexpr double SAPTO_LWR_SINGLE_2000 = 12190;
 constexpr double SAPTO_LWR_MARRIED_2000 = 20600;
+constexpr double SAPTO_TAPER_2000 = -0.125;
 constexpr double LITO_MAX_OFFSET_2000 = 150;
 constexpr double LITO_1ST_TAPER_2000 = -0.04;
 constexpr double LITO_1ST_THRESH_2000 = 20700;
