@@ -8,6 +8,6 @@ constexpr double ML_LWR_THRESHOLD_SINGLE_1984 =  6699;
 constexpr double ML_UPR_THRESHOLD_SINGLE_1984 =  7051;
 constexpr double ML_LWR_THRESHOLD_FAMILY_1984 = 11141;
 constexpr double ML_UPR_THRESHOLD_FAMILY_1984 = 11728;
-ML_TAPER_1984 = 0.25;
-ML_RATE_1984 = 0.0125;
+constexpr double ML_TAPER_1984 = 0.25;
+constexpr double ML_RATE_1984 = 0.0125;
 #endif
