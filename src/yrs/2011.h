@@ -12,6 +12,8 @@ constexpr double ML_LWR_THRESHOLD_SINGLE_SAPTO_2011 = 30685;
 constexpr double ML_UPR_THRESHOLD_SINGLE_SAPTO_2011 = 36101;
 constexpr double ML_LWR_THRESHOLD_FAMILY_SAPTO_2011 = 44500;
 constexpr double ML_UPR_THRESHOLD_FAMILY_SAPTO_2011 = 52354;
+ML_TAPER_2011 = 0.1;
+ML_RATE_2011 = 0.015;
 double do_1_medicare_levy_2011(double xd, double yd, bool is_family, bool pensioner, int n_dependants );
 constexpr double LITO_MAX_OFFSET_2011 = 1500;
 constexpr double LITO_1ST_TAPER_2011 = -0.04;

@@ -12,6 +12,8 @@ constexpr double ML_LWR_THRESHOLD_SINGLE_SAPTO_2017 = 34244;
 constexpr double ML_UPR_THRESHOLD_SINGLE_SAPTO_2017 = 42806;
 constexpr double ML_LWR_THRESHOLD_FAMILY_SAPTO_2017 = 47670;
 constexpr double ML_UPR_THRESHOLD_FAMILY_SAPTO_2017 = 59589;
+ML_TAPER_2017 = 0.1;
+ML_RATE_2017 = 0.02;
 double do_1_medicare_levy_2017(double xd, double yd, bool is_family, bool pensioner, int n_dependants );
 constexpr double LITO_MAX_OFFSET_2017 = 445;
 constexpr double LITO_1ST_TAPER_2017 = -0.015;
