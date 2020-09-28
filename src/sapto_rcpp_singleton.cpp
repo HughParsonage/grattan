@@ -1,3 +1,4 @@
+#include "grattan.h"
 #include <Rcpp.h>
 using namespace Rcpp;
 

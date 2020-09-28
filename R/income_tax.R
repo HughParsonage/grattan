@@ -69,7 +69,7 @@ income_tax <- function(income,
                        fy.year = NULL,
                        age = NULL,
                        family_status = "individual",
-                       n_dependants = 0L,
+                       n_dependants = NULL,
                        .dots.ATO = NULL,
                        return.mode = c("numeric", "integer"),
                        allow.forecasts = FALSE,
@@ -88,54 +88,171 @@ income_tax <- function(income,
       }
     }
   }
-  
- 
-  
-  if (is.null(age) &&
-      length(fy.year) == 1L &&
-      fy.year %chin% c("2012-13", "2013-14", 
-                       "2014-15", "2015-16",
-                       "2016-17", "2017-18",
-                       "2018-19", "2019-20",
-                       "2020-21")) {
-    out <- income_tax_cpp(income,
-                          fy.year = fy.year,
-                          .dots.ATO = .dots.ATO,
-                          n_dependants = n_dependants,
-                          .debug = .debug)
-  } else {
-    # Absolutely necessary
-    .dots.ATO.copy <- copy(.dots.ATO)
-    
-    out <- rolling_income_tax(income = income,
-                              fy.year = fy.year,
-                              age = age, 
-                              family_status = family_status,
-                              n_dependants = n_dependants, 
-                              .dots.ATO = .dots.ATO.copy,
-                              allow.forecasts = allow.forecasts, 
-                              .debug = .debug)
-  }
   return.mode <- match.arg(return.mode)
   
-  switch(return.mode, 
-         "numeric" = {
-           return(out)
-         }, 
-         "integer" = {
-           return(as.integer(floor(out)))
-         })
+  fy.year <- fy::validate_fys_permitted(fy.year, min.yr = 1984L, max.yr = 2030L)
+  yr <- fy::fy2yr(fy.year)
+  
+  
+  # Now set values based on arguments, columns in .dots.ATO 
+  # Order of preference:
+  #   aLife variables (most accurate)
+  #   sample file variables
+  #   supplied variables
+  #   defaults
+  
+  # We handle defaults here so that it's more visible to users (rather than
+  # the body() of the function just referring to an Rcpp function), and
+  # because it's easier (and no real damage to performance) to handle 
+  # mixture of NULLs, length-ones, vectors, and symbols
+
+  
+  ic_taxable_income_loss <- 
+    income %||%
+    .subset2(.dots.ATO, "ic_taxable_income_loss") %||%
+    .subset2(.dots.ATO, "Taxable_Income") 
+  
+  c_age_30_june <- 
+    if (hasName(.dots.ATO, "c_age_30_june")) {
+      .subset2(.dots.ATO, "c_age_30_june")
+    } else if (hasName(.dots.ATO, "age_range")) {
+      decode_age_range(.subset2(.dots.ATO, "age_range"))
+    } else if (hasName(.dots.ATO, "Birth_year")) {
+      decode_age_range(.subset2(.dots.ATO, "Birth_year"))
+    } else if (is.null(age)) {
+      42L
+    } else {
+      age
+    }
+    
+  rebateIncome <- 
+    .subset2(.dots.ATO, "ic_rebate_income")
+
+  is_net_rent <- 
+    .subset2(.dots.ATO, "is_net_rent") %||%
+    .subset2(.dots.ATO, "Net_rent_amt") %||%
+    0L
+  
+  it_property_loss <- 
+    if (hasName(.dots.ATO, "it_property_loss")) {
+      .subset2(.dots.ATO, "it_property_loss")
+    } else if (hasName(.dots.ATO, "Net_rent_amt")) {
+      -pmin0(.subset2(.dots.ATO, "Net_rent_amt"))
+    } else {
+      0L
+    }
+  
+  it_rept_empl_super_cont <-
+    .subset2(.dots.ATO, "it_rept_empl_super_cont") %||%
+    .subset2(.dots.ATO, "Rptbl_Empr_spr_cont_amt") %||%
+    0L
+  
+  it_rept_fringe_benefit <-
+    .subset2(.dots.ATO, "it_rept_fringe_benefit") %||%
+    .subset2(.dots.ATO, "Rep_frng_ben_amt") %||%
+    0L
+  
+  it_invest_loss <- 
+    .subset2(.dots.ATO, "it_invest_loss") %||%
+    .subset2(.dots.ATO, "Net_fincl_invstmnt_lss_amt") %||%
+    0L
+  
+  spc_rebate_income <-
+    if (hasName(.dots.ATO, "spc_rebate_income")) {
+      .subset2(.dots.ATO, "spc_rebate_income")
+    } else {
+      0L
+    }
+  
+  partner_status <-
+    .subset2(.dots.ATO, "sp_flag") %||%
+    .subset2(.dots.ATO, "Partner_status") %||%
+    .subset2(.dots.ATO, "Marital_status") %||%
+    family_status != "single"
+  
+  n_dependants <-
+    n_dependants %||%
+    .subset2(.dots.ATO, "c_depend_child") %||%
+    0L
+  
+  sc_empl_cont <-
+    .subset2(.dots.ATO, "sc_empl_cont") %||%
+    .subset2(.dots.ATO, "MCS_Emplr_Contr") %||%
+    (as.integer(0.9 * income))
+  
+  ds_pers_super_cont <-
+    .subset2(.dots.ATO, "ds_pers_super_cont") %||%
+    .subset2(.dots.ATO, "Non_emp_spr_amt") %||%
+    0L
+    
+    
+  
+  
+  out <- 
+    if (length(yr) == 1L) {
+      do_income_tax_sf(yr,
+                       # Arguments
+                       # Length of output
+                       N = length(ic_taxable_income_loss), 
+                       
+                       # Other variables from sample file
+                       ic_taxable_income_loss = ic_taxable_income_loss, 
+                       c_age_30_june = c_age_30_june,
+                       rebateIncome = rebateIncome,
+                       ds_pers_super_cont = ds_pers_super_cont,
+                       is_net_rent = is_net_rent,
+                       it_property_loss = it_property_loss,
+                       it_rept_empl_super_cont = it_rept_empl_super_cont,
+                       it_rept_fringe_benefit = it_rept_fringe_benefit,
+                       it_invest_loss = it_invest_loss,
+                       sc_empl_cont = sc_empl_cont,
+                       spc_rebate_income = spc_rebate_income,
+                       partner_status = partner_status,
+                       n_dependants = n_dependants)
+    } else {
+      accel_repetitive_input(yr, 
+                             do_income_tax_sf, 
+                             # Arguments
+                             # Length of output
+                             N = length(ic_taxable_income_loss), 
+                             
+                             # Other variables from sample file
+                             ic_taxable_income_loss = ic_taxable_income_loss, 
+                             c_age_30_june = c_age_30_june,
+                             rebateIncome = rebateIncome,
+                             ds_pers_super_cont = ds_pers_super_cont,
+                             is_net_rent = is_net_rent,
+                             it_property_loss = it_property_loss,
+                             it_rept_empl_super_cont = it_rept_empl_super_cont,
+                             it_rept_fringe_benefit = it_rept_fringe_benefit,
+                             it_invest_loss = it_invest_loss,
+                             sc_empl_cont = sc_empl_cont,
+                             spc_rebate_income = spc_rebate_income,
+                             partner_status = partner_status,
+                             n_dependants = n_dependants,
+                             THRESHOLD = 1L)
+    }
+  
+  if (return.mode == "integer") {
+    out <- as.integer(out)
+  }
+  return(out)
 }
 
+
+
+
+
+
+
 get_column_from <- function(DT, nom, ..., NULL_OK = FALSE) {
-  stopifnot(is.data.table(DT))
   if (is.character(substitute(nom))) {
     if (!hasName(DT, nom)) {
       if (missing(..1)) {
         if (NULL_OK) {
           return(NULL)
         } else {
-          stop("DT lacked name '", nom, "'.")
+          stop("DT lacked name '", nom, "'.", typeof)
         }
       }
       return(get_column_from(DT, ...))
@@ -150,7 +267,7 @@ get_column_from <- function(DT, nom, ..., NULL_OK = FALSE) {
 
 income_tax_ <- function(.sample.file, yr, n_dependants = 0L) {
   gcf <- function(nom, ...) {
-    get_column_from(.sample.file, nom, ...)
+    eval.parent(substitute(get_column_from(.sample.file, nom, ...)))
   }
   
   do_income_tax_sf(yr,
@@ -158,11 +275,12 @@ income_tax_ <- function(.sample.file, yr, n_dependants = 0L) {
                    ic_taxable_income_loss = gcf("ic_taxable_income_loss", "Taxable_Income"), 
                    c_age_30_june = gcf("c_age_30_june", decode_age_range(age_range)), 
                    is_net_rent = gcf("is_net_rent", "Net_rent_amt"), 
+                   rebateIncome = gcf("ic_rebate_income", "ic_taxable_income_loss"),
                    it_property_loss = gcf("it_property_loss", -pmin0(Net_rent_amt)), 
                    it_rept_empl_super_cont = gcf("it_rept_empl_super_cont", "Rptbl_Empr_spr_cont_amt"), 
                    it_rept_fringe_benefit = gcf("it_rept_fringe_benefit", "Rep_frng_ben_amt"), 
                    it_invest_loss = gcf("it_invest_loss", "Rep_frng_ben_amt"),
-                   spc_rebate_income = gcf("spc_rebate_income", "Spouse_adjusted_taxable_inc", "Partner_status"),
+                   spc_rebate_income = pminC(gcf("spc_rebate_income", "Spouse_adjusted_taxable_inc", "Partner_status"), 1e7L),
                    partner_status = gcf("sp_flag", "Partner_status"),
                    n_dependants = n_dependants %||% gcf("n_dependants", "Partner_status"))
 }

@@ -41,12 +41,10 @@ for (.yr in c(NA, 1990:2030)) {
     cg("// 4. LMITO")
   }
   
-  if (yr >= 2013) {
-    cg("// SAPTO")
-    
-    cl("if (pensioner_eligible) {")
-    cl("apply_sapto(yr >= 2023, taxi, xd, yd, is_married);")
-    cl("}")
+  
+  
+  if (yr >= 2000) {
+    cl("apply_sapto(yr, taxi, xd, yd, is_married, agei);")
   }
   
   if (yr > 2000) {
@@ -76,7 +74,7 @@ for (.yr in c(NA, 1990:2030)) {
     cl("taxi += TEMP_BUDGET_REPAIR_LEVY_RATE * max0(xd - TEMP_BUDGET_REPAIR_LEVY_THRESH);")
   }
   
-  cl("out[i] = taxi + mk;")
+  cl("out[i] = taxi + ml;")
   cl("}") # lint
   cl("}") # for (R_xlen_t ...
   cl("}") # switch
@@ -155,22 +153,210 @@ cl("}")
 library(hutils)
 for (yr in 1984:2030) {
   provide.file(file.yr <- paste0("src/", yr, ".h"))
-  grattan.h <- readLines("src/grattan.h")
-  grattan.h <- if_else(startsWith(trimws(grattan.h), "//"), "//", grattan.h)
-  medicare.h <- readLines("src/grattanMedicareLevy.h")
-  medicare.h <- if_else(startsWith(trimws(medicare.h), "//"), "//", medicare.h)
+  grattan.h <- readLines("grattan.h")
+  medicare.h <- readLines("grattanMedicareLevy.h")
+  
   
   grep.yr <- grep(paste0("_", yr, ".*;"), grattan.h)
   grep.my <- grep(paste0("_", yr, ".*;"), medicare.h)
   if (!length(grep.yr) && !length(grep.my)) {
     next
   }
-  writeLines(unique(grattan.h[-grep.yr]), "src/grattan.h")
-  writeLines(unique(medicare.h[-grep.my]), "src/grattanMedicareLevy.h")
-  writeLines(unique(c(grattan.h[grep.yr], medicare.h[grep.my])), file.yr)
+  # writeLines(grattan.h[-grep.yr], "src/grattan.h")
+  # writeLines(medicare.h[-grep.my], "src/grattanMedicareLevy.h")
+  write(unique(c(grattan.h[grep.yr], medicare.h[grep.my])), file =  file.yr, append = TRUE, sep = "")
 }
 
-for (yr in 1984:2030) {
-  writeLines(unique(readLines(paste0("src/", yr, ".h"))), paste0("src/", yr, ".h"))
+
+
+
+LITO_TBL <- copy(grattan:::lito_tbl)[complete.cases(max_lito)]
+LITO_TBL[, yr := fy::fy2yr(fy_year)]
+for (i in 1:nrow(LITO_TBL)) {
+  out <- LITO_TBL[i, paste0("constexpr double LITO_MAX_OFFSET_", yr, " = ", max_lito, ";\n",
+                            "constexpr double LITO_1ST_THRESH_", yr, " = ", lito_taper, ";\n",
+                            "constexpr double LITO_TAPER_RATE_", yr, " = ", min_bracket, ";\n")]
+  cat(out, file = paste0("src/", LITO_TBL$yr[i], ".h"), append = TRUE)
 }
+
+cg <- function(...) base::cat(g(...), "\n", file = "src/grattanMedicareLevy.h", sep = "", append = TRUE)
+cl <- function(...) base::cat(..., "\n", file = "src/grattanMedicareLevy.h", sep = "", append = TRUE)
+for (yr in 2013:2030) {
+  cat(g("constexpr double SAPTO_MAX_SINGLE_{yr} = 2230;"), "\n", file = g("src/{yr}.h"), append = TRUE, sep = "")
+  cat(g("constexpr double SAPTO_MAX_MARRIED_{yr} = 1602;"), "\n", file = g("src/{yr}.h"), append = TRUE, sep = "")
+  cat(g("constexpr double SAPTO_MAX_ILL_SEP_{yr} = 2040;"), "\n", file = g("src/{yr}.h"), append = TRUE, sep = "")
+  cat(g("constexpr double SAPTO_TAPER_{yr} = -0.125;"), "\n", file = g("src/{yr}.h"), append = TRUE, sep = "")
+  if (yr <= 2022) {
+    cat(g("constexpr double SAPTO_LWR_SINGLE_{yr} = 32279;"), "\n", file = g("src/{yr}.h"), append = TRUE, sep = "")
+    cat(g("constexpr double SAPTO_LWR_MARRIED_{yr} = 28974;"), "\n", file = g("src/{yr}.h"), append = TRUE, sep = "")
+    cat(g("constexpr double SAPTO_LWR_ILL_SEP_{yr} = 28974;"), "\n",  file = g("src/{yr}.h"), append = TRUE, sep = "")
+  } else {
+    cat(g("constexpr double SAPTO_LWR_SINGLE_{yr} = 33622;\n"),"\n",  file = g("src/{yr}.h"), append = TRUE, sep = "")
+    cat(g("constexpr double SAPTO_LWR_MARRIED_{yr} = 30316;\n"),"\n",  file = g("src/{yr}.h"), append = TRUE, sep = "")
+    cat(g("constexpr double SAPTO_LWR_ILL_SEP_{yr} = 32622;\n"), "\n", file = g("src/{yr}.h"), append = TRUE, sep = "")
+  }
+}
+
+cg <- function(..., file) base::cat(g(...), "\n", sep = "", append = TRUE, file = file)
+cl <- function(..., file) base::cat(..., "\n", sep = "", append = TRUE, file = file)
+
+for (yr in 2023:2030) {
+  cg("constexpr double LITO_MAX_OFFSET_{yr} = ",   700L, ";", file = g("src/{yr}.h"))
+  cg("constexpr double LITO_1ST_THRESH_{yr} = ", 37500L, ";", file = g("src/{yr}.h"))
+  cg("constexpr double LITO_2ND_THRESH_{yr} = ", 45000L, ";", file = g("src/{yr}.h"))
+}
+
+for (yr in 2019:2022) {
+  cg("constexpr double LMITO_1ST_OFFSET_{yr} = 255;", file = g("src/{yr}.h"))
+  cg("constexpr double LMITO_THRESHOLDS_{yr}[4] = {{37e3, 48e3, 90e3, 126e3}};", file = g("src/{yr}.h"))
+  cg("constexpr double LMITO_TAPER_RATES_{yr}[4] = {{0.075, 0, -0.03, 0}};", file = g("src/{yr}.h"))
+}
+
+
+for (yr in 1984:2030) {
+  writeLines(grep("20.._((20..)|____)", unique(readLines(paste0("src/", yr, ".h"))), value = TRUE, invert = TRUE), 
+             con = paste0("src/", yr, ".h"))
+}
+
+
+cat("switch (yr) {\n")
+for (yr in 2001:2030) {
+  y <- yr
+  cat("case ", yr, ": {\n", sep = '')
+  cat("{\n")
+  cat("double y = ", "LITO_MAX_OFFSET_", y, ";\n", sep = "")
+  cat("double r = LITO_TAPER_RATE_", y, ";\n", sep = "")
+  cat("double b1 = LITO_1ST_THRESH_", y, ";\n", sep = "")
+  if (yr < 2023) {
+    cat(paste0("return (x < b) ? y : max0(y + r * (x - b));\n"), sep = "")
+  } else {
+    cat("double b2 = LITO_2ND_THRESH_", y, ";\n", sep = "")
+    cat("double r1 = LITO_1ST_THRESH_", y, ";\n", sep = "")
+    cat("double r2 = LITO_2ND_RATE_", y, ";\n", sep = "")
+    cat("if (x > b1) {\n")
+    cat("return y + r1 * (x - b1);\n")
+    cat("} else {\n")
+    cat("return y + r1 * (b2 - b1) + r2 * (x - b2);\n")
+    cat("}\n")
+  }
+  cat("}\n")
+  cat("}\n")
+  cat("break;\n")
+}
+
+g <- glue::glue
+for (YEAR in 2001:2030) {
+  cat("case ", YEAR, ": \n", sep = '')
+  cat(g("sapto = do_1_sapto_(xd, yd, sapto_cd, SAPTO_LWR_{YEAR}, SAPTO_UPR_{YEAR}, SAPTO_MAX_{YEAR}, SAPTO_TAPER_{YEAR}, ", 
+      "ORD_TAX_BRACK_{YEAR}[1], ORD_TAX_RATES_{YEAR}[1], ", sep = "")
+}
+
+
+cg <- function(...) base::cat(g(...), "\n", file = "src/tmp_income_tax.cpp", sep = "", append = TRUE)
+cl <- function(...) base::cat(..., "\n", file = "src/tmp_income_tax.cpp", sep = "", append = TRUE)
+for (YEAR in 1984:2030) {
+  if (YEAR == 1984) {
+    cl("switch(yr) {")
+  }
+  cl("case ", YEAR, ": {")
+  if (YEAR >= 2000L) {
+    cl("// Create a Sapto struct for this year")
+    cg("Sapto Sapto{YEAR};")
+    cg("Sapto{YEAR}.year = {YEAR};")
+    cg("Sapto{YEAR}.pension_age = 65;")
+    cg("Sapto{YEAR}.mxo_single = SAPTO_MAX_SINGLE_{YEAR};")
+    cg("Sapto{YEAR}.mxo_couple = SAPTO_MAX_MARRIED_{YEAR};")
+    cg("Sapto{YEAR}.lwr_single = SAPTO_LWR_SINGLE_{YEAR};")
+    cg("Sapto{YEAR}.lwr_couple = SAPTO_LWR_MARRIED_{YEAR};")
+    cg("Sapto{YEAR}.upr_single = SAPTO_LWR_SINGLE_{YEAR} + SAPTO_MAX_SINGLE_{YEAR} / SAPTO_TAPER_{YEAR};")
+    cg("Sapto{YEAR}.upr_couple = SAPTO_LWR_MARRIED_{YEAR} + SAPTO_MAX_MARRIED_{YEAR} / SAPTO_TAPER_{YEAR};")
+    cg("Sapto{YEAR}.taper = SAPTO_TAPER_{YEAR};")
+    cg("Sapto{YEAR}.first_tax_rate = ORD_TAX_RATES_{YEAR}[1];")
+    cg("Sapto{YEAR}.tax_free_thresh = ORD_TAX_BRACK_{YEAR}[1];")
+    cg("Sapto{YEAR}.lito_max_offset = LITO_MAX_OFFSET_{YEAR};")
+    cl("")
+  }
+  
+  
+  cg("Medicare M{YEAR};")
+  cg("M{YEAR}.lwr_single = ML_LWR_THRESHOLD_SINGLE_{YEAR};")
+  cg("M{YEAR}.upr_single = ML_UPR_THRESHOLD_SINGLE_{YEAR};")
+  cg("M{YEAR}.lwr_family = ML_LWR_THRESHOLD_FAMILY_{YEAR};")
+  cg("M{YEAR}.upr_family = ML_UPR_THRESHOLD_FAMILY_{YEAR};")
+  cg("M{YEAR}.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_{YEAR};")
+  cg("M{YEAR}.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_{YEAR};")
+  cg("M{YEAR}.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_{YEAR};")
+  cg("M{YEAR}.upr_family_sapto = ML_UPR_THRESHOLD_FAMILY_SAPTO_{YEAR};")
+  cg("M{YEAR}.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_{YEAR};")
+  cg("M{YEAR}.taper = ML_TAPER_{YEAR};")
+  cg("M{YEAR}.rate = ML_RATE_{YEAR};")
+  cg("M{YEAR}.has_sapto_thr = {as.double(YEAR >= 2000)};")
+  cg("M{YEAR}.sapto_age = 65;")
+  
+  cl("{")
+  cl("for (R_xlen_t i = 0; i < N; ++i) {")
+  cl("Lodge Person;")
+  cl("int xi = ic_taxable_income_loss[i];")
+  cl("Person.xi = xi;")
+  cl("Person.yi = spc_rebate_income[i];")
+  cl("Person.agei = c_age_30_june[i];")
+  cl("Person.is_married = partner_status[i];")
+  cl("Person.n_child = n_dependants[i];")
+  cl("Person.is_family = Person.is_married() || Person.n_child();")
+  cl("")
+  cg("taxi += income_taxi_nb(xi, ORD_TAX_BRACK_{YEAR}, ORD_TAX_RATES_{YEAR});")
+  # SAPTO
+  cg("apply_sapto(taxi, Person, Sapto{YEAR});")
+  
+  
+  # LITO
+  if (YEAR >= 1994) {
+    if (YEAR <= 2023) {
+      cg("apply_lito(taxi, xi, LITO_MAX_OFFSET_{YEAR}, LITO_THRESHOLD_1ST_THRESH_{YEAR}, LITO_TAPER_1ST_TAPER_{YEAR});")
+    } else {
+      cg("apply_lito(taxi, xi, LITO_MAX_OFFSET_{YEAR}, LITO_THRESHOLD_1ST_THRESH_{YEAR}, LITO_TAPER_1ST_TAPER_{YEAR}, LITO_THRESHOLD_2ND_THRESH_{YEAR}, LITO_TAPER_2ND_TAPER_{YEAR});")
+    }
+  }
+  
+  if (YEAR >= 2019 && YEAR <= 2022) {
+    cl("apply_lmito(taxi, xd);")
+  }
+  cg("")
+  cg("// Medicare levy")
+  cg("double ml = do_medicare(Person, M{YEAR});")
+  cl("taxi += ml;")
+  cl("")
+  if (YEAR == 2011 || YEAR == 2015 || YEAR == 2016 || YEAR == 2017) {
+    cl("// Budget levies")
+  }
+  if (YEAR == 2011) {
+    cl("// flood levy")
+    cl("taxi += 0.005 * (max0(xd - 50e3) * max0(xd - 100e3));")
+  }
+  if (YEAR >= 2015 && YEAR <= 2017) {
+    cl("// temporary budget repair levy")
+    cl("taxi += TEMP_BUDGET_REPAIR_LEVY_RATE * max0(xd - TEMP_BUDGET_REPAIR_LEVY_THRESH);")
+  }
+  cl("")
+  cl("// finally")
+  cl("out[i] = taxi;")
+  cl("}")
+  cl("")
+  cl("} // inner case ", YEAR)
+  cl("} // outer case ", YEAR)
+  cl("break;")
+  if (YEAR == 2030) {
+    cl("}")
+  }
+  cl("")
+}
+
+
+
+
+
+
+
+
+
 

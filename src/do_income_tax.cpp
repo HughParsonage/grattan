@@ -1,7 +1,10 @@
+
 #include "grattan.h"
+#include "Sapto.h"
+#include "Person.h"
+#include "Medicare.h"
 #include "grattanMedicareLevy.h"
-#include <Rcpp.h>
-using namespace Rcpp;
+
 
 const int ages_by_age_range[12] = {72, 67, 62, 57, 52, 47, 42, 37, 32, 27, 22, 17};
 
@@ -21,7 +24,11 @@ void validate_age_range(IntegerVector x, R_xlen_t N) {
 }
 
 // [[Rcpp::export(rng = false)]]
-IntegerVector decode_age_range(IntegerVector x) {
+SEXP decode_age_range(SEXP X) {
+  if (TYPEOF(X) == NILSXP) {
+    return R_NilValue;
+  }
+  IntegerVector x = X;
   R_xlen_t N = x.length();
   validate_age_range(x, N);
   IntegerVector out = no_init(N);
@@ -44,45 +51,366 @@ int max0(int x) {
   return (x > 0) ? x : 0;
 }
 
-double do_1_lito_2001_2012(int yr, double x) {
-  double y = LITO_MAX_OFFSET_2001_2012[yr - 2001];
-  double r = LITO_TAPER_RATE_2001_2012;
-  double b = LITO_1ST_THRESH_2001_2012[yr - 2001];
-  return (x < b) ? y : max0(y + r * (x - b));
+double do_lito_yr(int yr, double x) {
+  switch(yr) {
+  case 2001: {
+  {
+    double y = LITO_MAX_OFFSET_2001;
+    double r = LITO_1ST_TAPER_2001;
+    double b1 = LITO_1ST_THRESH_2001;
+    return (x < b1) ? y : max0(y + r * (x - b1));
+  }
 }
-
-double do_1_lito_2013_2022(double x) {
-  double y = LITO_MAX_OFFSET_2013_2022;
-  double r = LITO_TAPER_RATE_2013_2022;
-  double b = LITO_1ST_THRESH_2013_2022;
-  return (x < b) ? y : max0(y + r * (x - b));
-}
-
-double do_1_lito_2023_____(double x) {
-  double lito_y = LITO_MAX_OFFSET_2013_2022;
-  double lito_b1 = LITO_1ST_THRESH_2023_____;
-  double lito_b2 = LITO_2ND_THRESH_2023_____;
-  double lito_r1 = LITO_1ST_TAPER_2023_____;
-  double lito_r2 = LITO_2ND_TAPER_2023_____;
-  if (x > lito_b1) {
-    if (x > lito_b2) {
-      lito_y += lito_r1 * (lito_b2 - lito_b1) + lito_r2 * (x - lito_b2);
-    } else {
-      lito_y += lito_r1 * (x - lito_b1);
+    break;
+  case 2002: {
+    {
+      double y = LITO_MAX_OFFSET_2002;
+      double r = LITO_1ST_TAPER_2002;
+      double b1 = LITO_1ST_THRESH_2002;
+      return (x < b1) ? y : max0(y + r * (x - b1));
     }
   }
-  return max0(lito_y);
+    break;
+  case 2003: {
+    {
+      double y = LITO_MAX_OFFSET_2003;
+      double r = LITO_1ST_TAPER_2003;
+      double b1 = LITO_1ST_THRESH_2003;
+      return (x < b1) ? y : max0(y + r * (x - b1));
+    }
+  }
+    break;
+  case 2004: {
+    {
+      double y = LITO_MAX_OFFSET_2004;
+      double r = LITO_1ST_TAPER_2004;
+      double b1 = LITO_1ST_THRESH_2004;
+      return (x < b1) ? y : max0(y + r * (x - b1));
+    }
+  }
+    break;
+  case 2005: {
+    {
+      double y = LITO_MAX_OFFSET_2005;
+      double r = LITO_1ST_TAPER_2005;
+      double b1 = LITO_1ST_THRESH_2005;
+      return (x < b1) ? y : max0(y + r * (x - b1));
+    }
+  }
+    break;
+  case 2006: {
+    {
+      double y = LITO_MAX_OFFSET_2006;
+      double r = LITO_1ST_TAPER_2006;
+      double b1 = LITO_1ST_THRESH_2006;
+      return (x < b1) ? y : max0(y + r * (x - b1));
+    }
+  }
+    break;
+  case 2007: {
+    {
+      double y = LITO_MAX_OFFSET_2007;
+      double r = LITO_1ST_TAPER_2007;
+      double b1 = LITO_1ST_THRESH_2007;
+      return (x < b1) ? y : max0(y + r * (x - b1));
+    }
+  }
+    break;
+  case 2008: {
+    {
+      double y = LITO_MAX_OFFSET_2008;
+      double r = LITO_1ST_TAPER_2008;
+      double b1 = LITO_1ST_THRESH_2008;
+      return (x < b1) ? y : max0(y + r * (x - b1));
+    }
+  }
+    break;
+  case 2009: {
+    {
+      double y = LITO_MAX_OFFSET_2009;
+      double r = LITO_1ST_TAPER_2009;
+      double b1 = LITO_1ST_THRESH_2009;
+      return (x < b1) ? y : max0(y + r * (x - b1));
+    }
+  }
+    break;
+  case 2010: {
+    {
+      double y = LITO_MAX_OFFSET_2010;
+      double r = LITO_1ST_TAPER_2010;
+      double b1 = LITO_1ST_THRESH_2010;
+      return (x < b1) ? y : max0(y + r * (x - b1));
+    }
+  }
+    break;
+  case 2011: {
+    {
+      double y = LITO_MAX_OFFSET_2011;
+      double r = LITO_1ST_TAPER_2011;
+      double b1 = LITO_1ST_THRESH_2011;
+      return (x < b1) ? y : max0(y + r * (x - b1));
+    }
+  }
+    break;
+  case 2012: {
+    {
+      double y = LITO_MAX_OFFSET_2012;
+      double r = LITO_1ST_TAPER_2012;
+      double b1 = LITO_1ST_THRESH_2012;
+      return (x < b1) ? y : max0(y + r * (x - b1));
+    }
+  }
+    break;
+  case 2013: {
+    {
+      double y = LITO_MAX_OFFSET_2013;
+      double r = LITO_1ST_TAPER_2013;
+      double b1 = LITO_1ST_THRESH_2013;
+      return (x < b1) ? y : max0(y + r * (x - b1));
+    }
+  }
+    break;
+  case 2014: {
+    {
+      double y = LITO_MAX_OFFSET_2014;
+      double r = LITO_1ST_TAPER_2014;
+      double b1 = LITO_1ST_THRESH_2014;
+      return (x < b1) ? y : max0(y + r * (x - b1));
+    }
+  }
+    break;
+  case 2015: {
+    {
+      double y = LITO_MAX_OFFSET_2015;
+      double r = LITO_1ST_TAPER_2015;
+      double b1 = LITO_1ST_THRESH_2015;
+      return (x < b1) ? y : max0(y + r * (x - b1));
+    }
+  }
+    break;
+  case 2016: {
+    {
+      double y = LITO_MAX_OFFSET_2016;
+      double r = LITO_1ST_TAPER_2016;
+      double b1 = LITO_1ST_THRESH_2016;
+      return (x < b1) ? y : max0(y + r * (x - b1));
+    }
+  }
+    break;
+  case 2017: {
+    {
+      double y = LITO_MAX_OFFSET_2017;
+      double r = LITO_1ST_TAPER_2017;
+      double b1 = LITO_1ST_THRESH_2017;
+      return (x < b1) ? y : max0(y + r * (x - b1));
+    }
+  }
+    break;
+  case 2018: {
+    {
+      double y = LITO_MAX_OFFSET_2018;
+      double r = LITO_1ST_TAPER_2018;
+      double b1 = LITO_1ST_THRESH_2018;
+      return (x < b1) ? y : max0(y + r * (x - b1));
+    }
+  }
+    break;
+  case 2019: {
+    {
+      double y = LITO_MAX_OFFSET_2019;
+      double r = LITO_1ST_TAPER_2019;
+      double b1 = LITO_1ST_THRESH_2019;
+      return (x < b1) ? y : max0(y + r * (x - b1));
+    }
+  }
+    break;
+  case 2020: {
+    {
+      double y = LITO_MAX_OFFSET_2020;
+      double r = LITO_1ST_TAPER_2020;
+      double b1 = LITO_1ST_THRESH_2020;
+      return (x < b1) ? y : max0(y + r * (x - b1));
+    }
+  }
+    break;
+  case 2021: {
+    {
+      double y = LITO_MAX_OFFSET_2021;
+      double r = LITO_1ST_TAPER_2021;
+      double b1 = LITO_1ST_THRESH_2021;
+      return (x < b1) ? y : max0(y + r * (x - b1));
+    }
+  }
+    break;
+  case 2022: {
+    {
+      double y = LITO_MAX_OFFSET_2022;
+      double r = LITO_1ST_TAPER_2022;
+      double b1 = LITO_1ST_THRESH_2022;
+      return (x < b1) ? y : max0(y + r * (x - b1));
+    }
+  }
+    break;
+  case 2023: {
+    {
+      double y = LITO_MAX_OFFSET_2023;
+      
+      double b1 = LITO_1ST_THRESH_2023;
+      double b2 = LITO_2ND_THRESH_2023;
+      double r1 = LITO_1ST_TAPER_2023;
+      double r2 = LITO_2ND_TAPER_2023;
+      if (x > b1) {
+        return y + r1 * (x - b1);
+      } else {
+        return y + r1 * (b2 - b1) + r2 * (x - b2);
+      }
+    }
+  }
+    break;
+  case 2024: {
+    {
+      double y = LITO_MAX_OFFSET_2024;
+      
+      double b1 = LITO_1ST_THRESH_2024;
+      double b2 = LITO_2ND_THRESH_2024;
+      double r1 = LITO_1ST_TAPER_2024;
+      double r2 = LITO_2ND_TAPER_2024;
+      if (x > b1) {
+        return y + r1 * (x - b1);
+      } else {
+        return y + r1 * (b2 - b1) + r2 * (x - b2);
+      }
+    }
+  }
+    break;
+  case 2025: {
+    {
+      double y = LITO_MAX_OFFSET_2025;
+      
+      double b1 = LITO_1ST_THRESH_2025;
+      double b2 = LITO_2ND_THRESH_2025;
+      double r1 = LITO_1ST_TAPER_2025;
+      double r2 = LITO_2ND_TAPER_2025;
+      if (x > b1) {
+        return y + r1 * (x - b1);
+      } else {
+        return y + r1 * (b2 - b1) + r2 * (x - b2);
+      }
+    }
+  }
+    break;
+  case 2026: {
+    {
+      double y = LITO_MAX_OFFSET_2026;
+      
+      double b1 = LITO_1ST_THRESH_2026;
+      double b2 = LITO_2ND_THRESH_2026;
+      double r1 = LITO_1ST_TAPER_2026;
+      double r2 = LITO_2ND_TAPER_2026;
+      if (x > b1) {
+        return y + r1 * (x - b1);
+      } else {
+        return y + r1 * (b2 - b1) + r2 * (x - b2);
+      }
+    }
+  }
+    break;
+  case 2027: {
+    {
+      double y = LITO_MAX_OFFSET_2027;
+      
+      double b1 = LITO_1ST_THRESH_2027;
+      double b2 = LITO_2ND_THRESH_2027;
+      double r1 = LITO_1ST_TAPER_2027;
+      double r2 = LITO_2ND_TAPER_2027;
+      if (x > b1) {
+        return y + r1 * (x - b1);
+      } else {
+        return y + r1 * (b2 - b1) + r2 * (x - b2);
+      }
+    }
+  }
+    break;
+  case 2028: {
+    {
+      double y = LITO_MAX_OFFSET_2028;
+      
+      double b1 = LITO_1ST_THRESH_2028;
+      double b2 = LITO_2ND_THRESH_2028;
+      double r1 = LITO_1ST_TAPER_2028;
+      double r2 = LITO_2ND_TAPER_2028;
+      if (x > b1) {
+        return y + r1 * (x - b1);
+      } else {
+        return y + r1 * (b2 - b1) + r2 * (x - b2);
+      }
+    }
+  }
+    break;
+  case 2029: {
+    {
+      double y = LITO_MAX_OFFSET_2029;
+      
+      double b1 = LITO_1ST_THRESH_2029;
+      double b2 = LITO_2ND_THRESH_2029;
+      double r1 = LITO_1ST_TAPER_2029;
+      double r2 = LITO_2ND_TAPER_2029;
+      if (x > b1) {
+        return y + r1 * (x - b1);
+      } else {
+        return y + r1 * (b2 - b1) + r2 * (x - b2);
+      }
+    }
+  }
+    break;
+  case 2030: {
+    {
+      double y = LITO_MAX_OFFSET_2030;
+      
+      double b1 = LITO_1ST_THRESH_2030;
+      double b2 = LITO_2ND_THRESH_2030;
+      double r1 = LITO_1ST_THRESH_2030;
+      double r2 = LITO_2ND_TAPER_2030;
+      if (x > b1) {
+        return y + r1 * (x - b1);
+      } else {
+        return y + r1 * (b2 - b1) + r2 * (x - b2);
+      }
+    }
+  }
+    break;
+  }
+  return 0;
 }
 
 void apply_lito(int yr, double & taxi, double xd) {
-  double lito = 0;
-  if (yr < 2013) {
-    lito = do_1_lito_2001_2012(yr, xd);
-  } else if (yr < 2022) {
-    lito = do_1_lito_2013_2022(xd);
+  double lito = do_lito_yr(yr, xd);
+  if (taxi <= lito) {
+    taxi = 0;
   } else {
-    lito = do_1_lito_2023_____(xd);
+    taxi -= lito;
   }
+}
+
+void apply_lito(double & taxi, int x, double y, double b1, double r1) {
+  double lito = (x < b1) ? y : max0(y + r1 * (x - b1));
+  if (taxi <= lito) {
+    taxi = 0;
+  } else {
+    taxi -= lito;
+  }
+}
+
+void apply_lito(double & taxi, int x, double y, double b1, double r1, double b2, double r2) {
+  double lito = y;
+  if (x > b1) {
+    if (x < b2) {
+      lito += r1 * (x - b1);
+    } else {
+      lito += r1 * (b2 - b1) + r2 * (x - b2);
+    }
+  }
+  
   if (taxi <= lito) {
     taxi = 0;
   } else {
@@ -98,18 +426,16 @@ DoubleVector do_lito(DoubleVector x, int yr) {
   DoubleVector out = no_init(N);
   for (R_xlen_t i = 0; i < N; ++i) {
     double xd = x[i];
-    double lito = 0;
-    if (yr < 2013) {
-      lito = do_1_lito_2001_2012(yr, xd);
-    } else if (yr < 2022) {
-      lito = do_1_lito_2013_2022(xd);
-    } else {
-      lito = do_1_lito_2023_____(xd);
-    }
+    double lito = do_lito_yr(yr, xd);
     out[i] = lito;
   }
   return out;
 }
+
+constexpr double LMITO_1ST_OFFSET = 255;
+constexpr double LMITO_2ND_LEVEL = 1080;
+constexpr double LMITO_THRESHOLDS[4] = {37e3, 48e3, 90e3, 126e3};
+constexpr double LMITO_TAPER_RATES[4] = {0.075, 0, -0.03, 0};
 
 double do_1_lmito(double x) {
   double out = LMITO_1ST_OFFSET;
@@ -159,8 +485,12 @@ double income_taxi_nb(double& xd, const double (&bracks)[nb], const double (&rat
     if (xd < bracks[b]) {
       break;
     }
-    // above threshold
-    double xa = (b + 1 == nb || xd < bracks[b + 1]) ? (xd - bracks[b]) : (bracks[b + 1] - bracks[b]);
+    // xa = above threshold
+    // We express rates in terms of marginal rates *within* brackets, 
+    // so if xd is larger than the next bracket, we apply this rate 
+    // to the gap between this threshold and the next. First, however,
+    // we need to check whether this is the last bracket "b + 1 == nb"
+    double xa = (b + 1 < nb && xd >= bracks[b + 1]) ? (bracks[b + 1] - bracks[b]) : (xd - bracks[b]);
     out += xa * rates[b];
   }
   return out;
@@ -179,8 +509,6 @@ int verify_NA_ALIAS(int x = 0) {
 
 double income_taxi_yr(double xi, int yr) {
   switch(yr) {
-  case NA_ALIAS:
-    return income_taxi_nb(xi, ORD_TAX_BRACK_CURRENT_YEAR, ORD_TAX_RATES_CURRENT_YEAR);
   case 1990: 
     return income_taxi_nb(xi, ORD_TAX_BRACK_1990, ORD_TAX_RATES_1990);
   case 1991: 
@@ -268,22 +596,32 @@ double income_taxi_yr(double xi, int yr) {
 }
 
 
+
+
 // sapto
-double do_1_sapto_2013_2022(double x, double y, bool is_married) {
+
+
+double do_1_sapto_sf(int &x, int &y, int age, bool is_married, Sapto S) {
+  if (age < S.pension_age) {
+    // ineligible
+    return 0;
+  }
+  
   // x is rebate income
   // y is spouse rebate income
   double z = x + y;
-  int max_offset = is_married ? SAPTO_MAX_MARRIED_2013_____ : SAPTO_MAX_SINGLE_2013_____;
-  int lwr_thresh = is_married ? SAPTO_THRESH_MARRIED_2013_2022 : SAPTO_THRESH_SINGLE_2013_2022;
+  int max_offset = is_married ? S.mxo_couple : S.mxo_single;
+  int lwr_thresh = is_married ? S.lwr_couple : S.lwr_single;
+  double taper = S.taper;
+  // int upr_thresh = is_married ? S.upr_couple : S.upr_single;
   
+  double o = max_offset + taper * max0(z - lwr_thresh);
   
-  static_assert(SAPTO_TAPER < 0, "SAPTO_TAPER < 0");
-  double o = max_offset + SAPTO_TAPER * max0(z - lwr_thresh);
-  
-  
+  // The transfer of unused SAPTO is very complex and frankly unknown, even
+  // within govt.  This lines up 'better' than known models.
   if (is_married) {
-    double partner_unused_sapto = max_offset + SAPTO_TAPER * max0(y - lwr_thresh);
-    double lito = LITO_MAX_OFFSET_2013_2022;
+    double partner_unused_sapto = max_offset + taper * max0(y - lwr_thresh);
+    double lito = S.lito_max_offset;
     
     // https://www.ato.gov.au/individuals/income-and-deductions/in-detail/transferring-the-seniors-and-pensioners-tax-offset/
     // Following the lettering there
@@ -293,54 +631,39 @@ double do_1_sapto_2013_2022(double x, double y, bool is_married) {
     CC = BB + partner_unused_sapto;
     DD = CC + lito;
     // https://www.ato.gov.au/law/view/document?DocID=TXR/TR9331/NAT/ATO/00001&PiT=99991231235958
-    static_assert(ORD_TAX_BRACK_2013[1] == ORD_TAX_BRACK_2020[1],
-                  "Tax-free threshold (ordinary tax brackets) changed between 2013 and 2020");
-    GG = ORD_TAX_BRACK_2013[1] + DD / ORD_TAX_RATES_2013[1];
+    GG = S.tax_free_thresh + DD / S.first_tax_rate;
     HH = max0(AA - GG);
-    II = HH * (-SAPTO_TAPER);
-    JJ = max0(CC - II);
-    o = (x < GG) ? CC : JJ;
-  }
-  return o;
-}
-
-double do_1_sapto_2023_____(double x, double y, bool is_married) {
-  // x is rebate income
-  // y is spouse rebate income
-  double z = x + y;
-  int max_offset = is_married ? SAPTO_MAX_MARRIED_2013_____ : SAPTO_MAX_SINGLE_2013_____;
-  int lwr_thresh = is_married ? SAPTO_THRESH_MARRIED_2023_____ : SAPTO_THRESH_SINGLE_2023_____;
-  
-  
-  static_assert(SAPTO_TAPER < 0, "SAPTO_TAPER < 0");
-  double o = max_offset + SAPTO_TAPER * max0(z - lwr_thresh);
-  
-  
-  if (is_married) {
-    double partner_unused_sapto = max_offset + SAPTO_TAPER * max0(y - lwr_thresh);
-    double lito = LITO_MAX_OFFSET_2023_____;
+    II = HH * (-taper);
     
-    // https://www.ato.gov.au/individuals/income-and-deductions/in-detail/transferring-the-seniors-and-pensioners-tax-offset/
-    // Following the lettering there
-    double AA, BB, CC, DD, GG, HH, II, JJ = 0;
-    AA = x;
-    BB = max_offset / 2;
-    CC = BB + partner_unused_sapto;
-    DD = CC + lito;
-    // https://www.ato.gov.au/law/view/document?DocID=TXR/TR9331/NAT/ATO/00001&PiT=99991231235958
-    static_assert(ORD_TAX_BRACK_2023[1] == ORD_TAX_BRACK_2030[1],
-                  "Tax-free threshold (ordinary tax brackets) changed between 2023 and 2030");
-    GG = ORD_TAX_BRACK_2023[1] + DD / ORD_TAX_BRACK_2023[1];
-    HH = max0(AA - GG);
-    II = HH * (-SAPTO_TAPER);
     JJ = max0(CC - II);
     o = (x < GG) ? CC : JJ;
   }
   return o;
 }
 
-void apply_sapto(bool post2023, double & taxi, double x, double y, bool is_married) {
-  double sapto = post2023 ? do_1_sapto_2023_____(x, y, is_married) :  do_1_sapto_2013_2022(x, y, is_married);
+// apply_sapto(yr, taxi, xd, yd, agei, is_married);
+void apply_sapto(int yr, double & taxi, int x, double y, int age, bool is_married) {
+  double sapto = do_1_sapto_sf(x, (int)y, age, is_married, SaptoSince2000[yr - 2000]);
+  
+  if (sapto >= taxi) {
+    taxi = 0;
+  } else {
+    taxi -= sapto;
+  }
+}
+
+void apply_sapto(double & taxi, int x, double y, int age, bool is_married, Sapto S) {
+  double sapto = do_1_sapto_sf(x, y, age, is_married, S);
+  
+  if (sapto >= taxi) {
+    taxi = 0;
+  } else {
+    taxi -= sapto;
+  }
+}
+
+void apply_sapto(double & taxi, Person P, Sapto S) {
+  double sapto = do_1_sapto_sf(P.xi, P.yi, P.agei, P.is_married, S);
   if (sapto >= taxi) {
     taxi = 0;
   } else {
@@ -359,35 +682,138 @@ void apply_lmito(double & taxi, double xd) {
   }
 }
 
+double do_1_ML(Person P, Medicare M) {
+  double z = P.xi + P.yi;
+  bool pensioner = M.has_sapto_thr && (P.agei >= M.sapto_age);
+  
+  double lwr_threshold = 
+    pensioner ? 
+    (P.is_family ? M.lwr_family_sapto : M.lwr_single_sapto) :
+    (P.is_family ? M.lwr_family : M.lwr_single);
+  
+  if (z < lwr_threshold) {
+    return 0;
+  }
+  
+  double upr_threshold = 
+    pensioner ? 
+    (P.is_family ? M.upr_family_sapto : M.upr_single_sapto) :
+    (P.is_family ? M.upr_family : M.upr_single);
+  
+  double upr_over_lwr = upr_threshold / lwr_threshold;
+  if (P.n_child) {
+    lwr_threshold += M.lwr_thr_up_per_child * P.n_child;
+    upr_threshold *= upr_over_lwr;
+    upr_threshold = floor(upr_threshold);
+  }
+  if (z < upr_threshold) {
+    return M.taper * (z - lwr_threshold);
+  } else {
+    return M.rate * z;
+  }
+}
 
-// Medicare levies
 
 
+int get_i_N(IntegerVector x, R_xlen_t i, R_xlen_t N) {
+  return (x.length() == N) ? x[i] : x[0];
+}
 
+// ds_pers_super_cont == Non_emp_spr_amt
+// coalesce to zero as appropriate
+int c0(IntegerVector x, R_xlen_t xn, R_xlen_t i, R_xlen_t N) {
+  if (xn == N) {
+    return x[i] == NA_INTEGER ? 0 : x[i];
+  }
+  if (xn == 1) {
+    return x[0] == NA_INTEGER ? 0 : x[0];
+  }
+  
+  return 0;
+}
+
+const double top_marginal_rates_since_1990[43] = 
+  {0.48, 0.47, 0.47, 0.47, 0.47, 0.47, 0.47, 0.47, 0.47, 0.47,  
+   0.47, 0.47, 0.47, 0.47, 0.47, 0.47, 0.47, 0.45, 0.45, 0.45, 0.45, 
+   0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45,  
+   0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45
+  };
+
+inline double top_marginal_rate(int yr) {
+  // approximate! need to include accurate medicare levy 
+  return top_marginal_rates_since_1990[yr - 1990] + 0.02;  
+}
+
+// [[Rcpp::export(rng = false)]]
+IntegerVector do_rebate_income(SEXP rebateIncome, 
+                               IntegerVector ic_taxable_income_loss, 
+                               IntegerVector it_rept_empl_super_cont, 
+                               IntegerVector sc_empl_cont,
+                               IntegerVector ds_pers_super_cont,
+                               IntegerVector it_invest_loss,
+                               IntegerVector is_net_rent, 
+                               IntegerVector it_rept_fringe_benefit, 
+                               int yr) {
+  if (TYPEOF(rebateIncome) == INTSXP) {
+    IntegerVector out = rebateIncome;
+    return out;
+  }
+  
+  R_xlen_t N = ic_taxable_income_loss.length();
+  R_xlen_t it_rept_empl_super_cont_length = it_rept_empl_super_cont.length();
+  R_xlen_t sc_empl_cont_length = sc_empl_cont.length();
+  R_xlen_t ds_pers_super_cont_length = ds_pers_super_cont.length();
+  R_xlen_t it_invest_loss_length = it_invest_loss.length();
+  R_xlen_t is_net_rent_length = is_net_rent.length();
+  R_xlen_t it_rept_fringe_benefit_length = it_rept_fringe_benefit.length();
+  
+  IntegerVector out = no_init(N);
+  for (R_xlen_t i = 0; i < N; ++i) {
+    out[i] = ic_taxable_income_loss[i];
+    out[i] += c0(it_rept_empl_super_cont, it_rept_empl_super_cont_length, i, N);
+    out[i] += c0(sc_empl_cont, sc_empl_cont_length, i, N);
+    out[i] += c0(ds_pers_super_cont, ds_pers_super_cont_length, i, N);
+    out[i] += c0(it_invest_loss, it_invest_loss_length, i, N);
+    out[i] += c0(is_net_rent, is_net_rent_length, i, N);
+    out[i] += c0(it_rept_fringe_benefit, it_rept_fringe_benefit_length, i, N) * (1 - top_marginal_rate(yr));
+  }
+  return out;
+}
+
+void check_len(IntegerVector x, R_xlen_t N, std::string msg) {
+  if (x.length() != N) {
+    Rcerr << msg << " had length = " << x.length() << "\n";
+    stop("Internal error: (do_income_tax_sf): lengths differ.");
+  }
+}
 
 
 //' @name do_income_tax
+//' @title Internal function for income tax.
 //' @description Accepts a sample file-like List and a tax year and returns
 //' a double vector.
 //' 
 //' @param c_age_30_june Age of taxpayer at 30 June of the financial year.
 //' @param is_net_rent Net rent amount.
 //' @param it_invest_loss Net financial income loss.
-//' @param 
-//' 
+//' @param rebateIncome (NULL, rebate income).
+//' @noRd
 
 // [[Rcpp::export(rng = false)]]
 DoubleVector do_income_tax_sf(int yr,
                               R_xlen_t N,
                               IntegerVector ic_taxable_income_loss, 
                               IntegerVector c_age_30_june,
+                              SEXP rebateIncome, 
                               IntegerVector is_net_rent,
                               IntegerVector it_property_loss,
                               IntegerVector it_rept_empl_super_cont,
+                              IntegerVector sc_empl_cont,
                               IntegerVector it_rept_fringe_benefit,
+                              IntegerVector ds_pers_super_cont,
                               IntegerVector it_invest_loss,
                               IntegerVector spc_rebate_income,
-                              LogicalVector partner_status,
+                              IntegerVector partner_status,
                               IntegerVector n_dependants) {
   DoubleVector out = no_init(N);
   
@@ -397,43 +823,69 @@ DoubleVector do_income_tax_sf(int yr,
   if (N != ic_taxable_income_loss.length()) {
     stop("(do_income_tax_sf): N != ic_taxable_income_loss.length()");
   }
+  check_len(is_net_rent, N, "is_net_rent");
+  check_len(it_property_loss, N, "it_property_loss");
+  check_len(it_rept_empl_super_cont, N, "it_rept_empl_super_cont");
+  check_len(sc_empl_cont, N, "sc_empl_cont");
+  check_len(it_rept_fringe_benefit, N, "it_rept_fringe_benefit");
+  check_len(ds_pers_super_cont, N, "ds_pers_super_cont");
+  check_len(it_invest_loss, N, "it_invest_loss");
+  check_len(spc_rebate_income, N, "spc_rebate_income");
+  check_len(partner_status, N, "partner_status");
+  check_len(n_dependants, N, "n_dependants");
+  
+  IntegerVector rebate_income = 
+    do_rebate_income(rebateIncome, 
+                     ic_taxable_income_loss, 
+                     it_rept_empl_super_cont, 
+                     sc_empl_cont,
+                     ds_pers_super_cont,
+                     it_invest_loss,
+                     is_net_rent, 
+                     it_rept_fringe_benefit, 
+                     yr);
+  
   switch (yr) {
   case 1990: {
-    {
-      for (R_xlen_t i = 0; i < N; ++i) {
-        int xi = ic_taxable_income_loss[i];
-        double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        double taxi = 0;
-        // ordinary tax
-        taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1990, ORD_TAX_RATES_1990);
-        // Offsets
-        
-        // Medicare levy
-        double ml = do_1_medicare_levy_1990(xd, yd, is_family, n_dependants[i]);
-        // Budget levies
-        out[i] = taxi + ml;
+      {
+        for (R_xlen_t i = 0; i < N; ++i) {
+          int xi = ic_taxable_income_loss[i];
+          int rebate_incomei = rebate_income[i];
+          int n_dependantsi = get_i_N(n_dependants, i, N);
+          double xd = (double)xi;
+          double yd = (double)get_i_N(spc_rebate_income, i, N);
+          bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+          bool is_family = is_married || n_dependantsi;
+          double taxi = 0;
+          // ordinary tax
+          taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1990, ORD_TAX_RATES_1990);
+          // Offsets
+          
+          // Medicare levy
+          double ml = do_1_medicare_levy_1990(xd, yd, is_family, n_dependantsi);
+          // Budget levies
+          out[i] = taxi + ml;
+        }
       }
     }
-  }
     break;
   case 1991: {
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
         double taxi = 0;
         // ordinary tax
         taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1991, ORD_TAX_RATES_1991);
         // Offsets
         
         // Medicare levy
-        double ml = do_1_medicare_levy_1991(xd, yd, is_family, n_dependants[i]);
+        double ml = do_1_medicare_levy_1991(xd, yd, is_family, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -444,17 +896,19 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
         double taxi = 0;
         // ordinary tax
         taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1992, ORD_TAX_RATES_1992);
         // Offsets
         
         // Medicare levy
-        double ml = do_1_medicare_levy_1992(xd, yd, is_family, n_dependants[i]);
+        double ml = do_1_medicare_levy_1992(xd, yd, is_family, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -465,17 +919,19 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
         double taxi = 0;
         // ordinary tax
         taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1993, ORD_TAX_RATES_1993);
         // Offsets
         
         // Medicare levy
-        double ml = do_1_medicare_levy_1993(xd, yd, is_family, n_dependants[i]);
+        double ml = do_1_medicare_levy_1993(xd, yd, is_family, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -486,17 +942,19 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
         double taxi = 0;
         // ordinary tax
         taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1994, ORD_TAX_RATES_1994);
         // Offsets
         
         // Medicare levy
-        double ml = do_1_medicare_levy_1994(xd, yd, is_family, n_dependants[i]);
+        double ml = do_1_medicare_levy_1994(xd, yd, is_family, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -507,17 +965,19 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
         double taxi = 0;
         // ordinary tax
         taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1995, ORD_TAX_RATES_1995);
         // Offsets
         
         // Medicare levy
-        double ml = do_1_medicare_levy_1995(xd, yd, is_family, n_dependants[i]);
+        double ml = do_1_medicare_levy_1995(xd, yd, is_family, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -528,17 +988,19 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
         double taxi = 0;
         // ordinary tax
         taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1996, ORD_TAX_RATES_1996);
         // Offsets
         
         // Medicare levy
-        double ml = do_1_medicare_levy_1996(xd, yd, is_family, n_dependants[i]);
+        double ml = do_1_medicare_levy_1996(xd, yd, is_family, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -549,17 +1011,19 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
         double taxi = 0;
         // ordinary tax
         taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1997, ORD_TAX_RATES_1997);
         // Offsets
         
         // Medicare levy
-        double ml = do_1_medicare_levy_1997(xd, yd, is_family, n_dependants[i]);
+        double ml = do_1_medicare_levy_1997(xd, yd, is_family, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -570,17 +1034,19 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
         double taxi = 0;
         // ordinary tax
         taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1998, ORD_TAX_RATES_1998);
         // Offsets
         
         // Medicare levy
-        double ml = do_1_medicare_levy_1998(xd, yd, is_family, n_dependants[i]);
+        double ml = do_1_medicare_levy_1998(xd, yd, is_family, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -591,17 +1057,19 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
         double taxi = 0;
         // ordinary tax
         taxi += income_taxi_nb(xd, ORD_TAX_BRACK_1999, ORD_TAX_RATES_1999);
         // Offsets
         
         // Medicare levy
-        double ml = do_1_medicare_levy_1999(xd, yd, is_family, n_dependants[i]);
+        double ml = do_1_medicare_levy_1999(xd, yd, is_family, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -612,17 +1080,19 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
         double taxi = 0;
         // ordinary tax
         taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2000, ORD_TAX_RATES_2000);
         // Offsets
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2000(xd, yd, is_family, n_dependants[i]);
+        double ml = do_1_medicare_levy_2000(xd, yd, is_family, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -633,11 +1103,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -646,7 +1118,7 @@ DoubleVector do_income_tax_sf(int yr,
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2001(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2001(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -657,11 +1129,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -670,7 +1144,7 @@ DoubleVector do_income_tax_sf(int yr,
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2002(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2002(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -681,11 +1155,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -694,7 +1170,7 @@ DoubleVector do_income_tax_sf(int yr,
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2003(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2003(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -705,11 +1181,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -718,7 +1196,7 @@ DoubleVector do_income_tax_sf(int yr,
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2004(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2004(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -729,11 +1207,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -742,7 +1222,7 @@ DoubleVector do_income_tax_sf(int yr,
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2005(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2005(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -753,11 +1233,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -766,7 +1248,7 @@ DoubleVector do_income_tax_sf(int yr,
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2006(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2006(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -777,11 +1259,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -790,7 +1274,7 @@ DoubleVector do_income_tax_sf(int yr,
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2007(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2007(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -801,11 +1285,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -814,7 +1300,7 @@ DoubleVector do_income_tax_sf(int yr,
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2008(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2008(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -825,11 +1311,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -838,7 +1326,7 @@ DoubleVector do_income_tax_sf(int yr,
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2009(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2009(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -849,11 +1337,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -862,7 +1352,7 @@ DoubleVector do_income_tax_sf(int yr,
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2010(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2010(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -873,11 +1363,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -886,7 +1378,7 @@ DoubleVector do_income_tax_sf(int yr,
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2011(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2011(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         // flood levy
         taxi += 0.005 * (max0(xd - 50e3) * max0(xd - 100e3));
@@ -899,11 +1391,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -912,7 +1406,7 @@ DoubleVector do_income_tax_sf(int yr,
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2012(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2012(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -923,11 +1417,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -935,12 +1431,13 @@ DoubleVector do_income_tax_sf(int yr,
         // Offsets
         // SAPTO
         if (pensioner_eligible) {
-          apply_sapto(yr >= 2023, taxi, xd, yd, is_married);
+          // apply_sapto(int yr, double & taxi, double x, double y, int age, bool is_married)
+          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
         }
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2013(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2013(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -951,11 +1448,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -963,12 +1462,12 @@ DoubleVector do_income_tax_sf(int yr,
         // Offsets
         // SAPTO
         if (pensioner_eligible) {
-          apply_sapto(yr >= 2023, taxi, xd, yd, is_married);
+          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
         }
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2014(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2014(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -979,11 +1478,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -991,12 +1492,12 @@ DoubleVector do_income_tax_sf(int yr,
         // Offsets
         // SAPTO
         if (pensioner_eligible) {
-          apply_sapto(yr >= 2023, taxi, xd, yd, is_married);
+          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
         }
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2015(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2015(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         // temporary budget repair levy
         taxi += TEMP_BUDGET_REPAIR_LEVY_RATE * max0(xd - TEMP_BUDGET_REPAIR_LEVY_THRESH);
@@ -1009,11 +1510,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -1021,12 +1524,12 @@ DoubleVector do_income_tax_sf(int yr,
         // Offsets
         // SAPTO
         if (pensioner_eligible) {
-          apply_sapto(yr >= 2023, taxi, xd, yd, is_married);
+          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
         }
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2016(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2016(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         // temporary budget repair levy
         taxi += TEMP_BUDGET_REPAIR_LEVY_RATE * max0(xd - TEMP_BUDGET_REPAIR_LEVY_THRESH);
@@ -1039,11 +1542,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -1051,12 +1556,12 @@ DoubleVector do_income_tax_sf(int yr,
         // Offsets
         // SAPTO
         if (pensioner_eligible) {
-          apply_sapto(yr >= 2023, taxi, xd, yd, is_married);
+          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
         }
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2017(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2017(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         // temporary budget repair levy
         taxi += TEMP_BUDGET_REPAIR_LEVY_RATE * max0(xd - TEMP_BUDGET_REPAIR_LEVY_THRESH);
@@ -1069,24 +1574,28 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
         taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2018, ORD_TAX_RATES_2018);
         // Offsets
         // SAPTO
+        
         if (pensioner_eligible) {
-          apply_sapto(yr >= 2023, taxi, xd, yd, is_married);
+          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
         }
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2018(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2018(xd, yd, is_family, pensioner_eligible, n_dependantsi);
+        
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -1097,25 +1606,26 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
         taxi += income_taxi_nb(xd, ORD_TAX_BRACK_2019, ORD_TAX_RATES_2019);
         // Offsets
         // SAPTO
-        if (pensioner_eligible) {
-          apply_sapto(yr >= 2023, taxi, xd, yd, is_married);
-        }
+        // apply_sapto(yr, taxi, xd, yd, is_married, agei);
         apply_lito(yr, taxi, xd);
         apply_lmito(taxi, xd);
         
+        
         // Medicare levy
-        double ml = do_1_medicare_levy_2019(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2019(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -1126,11 +1636,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -1138,13 +1650,13 @@ DoubleVector do_income_tax_sf(int yr,
         // Offsets
         // SAPTO
         if (pensioner_eligible) {
-          apply_sapto(yr >= 2023, taxi, xd, yd, is_married);
+          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
         }
         apply_lito(yr, taxi, xd);
         apply_lmito(taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2020(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2020(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -1155,11 +1667,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -1167,13 +1681,13 @@ DoubleVector do_income_tax_sf(int yr,
         // Offsets
         // SAPTO
         if (pensioner_eligible) {
-          apply_sapto(yr >= 2023, taxi, xd, yd, is_married);
+          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
         }
         apply_lito(yr, taxi, xd);
         apply_lmito(taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2021(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2021(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -1184,11 +1698,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -1196,13 +1712,13 @@ DoubleVector do_income_tax_sf(int yr,
         // Offsets
         // SAPTO
         if (pensioner_eligible) {
-          apply_sapto(yr >= 2023, taxi, xd, yd, is_married);
+          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
         }
         apply_lito(yr, taxi, xd);
         apply_lmito(taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2022(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2022(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -1213,11 +1729,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -1225,12 +1743,12 @@ DoubleVector do_income_tax_sf(int yr,
         // Offsets
         // SAPTO
         if (pensioner_eligible) {
-          apply_sapto(yr >= 2023, taxi, xd, yd, is_married);
+          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
         }
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2023(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2023(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -1241,11 +1759,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -1253,12 +1773,12 @@ DoubleVector do_income_tax_sf(int yr,
         // Offsets
         // SAPTO
         if (pensioner_eligible) {
-          apply_sapto(yr >= 2023, taxi, xd, yd, is_married);
+          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
         }
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2024(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2024(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -1269,11 +1789,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -1281,12 +1803,12 @@ DoubleVector do_income_tax_sf(int yr,
         // Offsets
         // SAPTO
         if (pensioner_eligible) {
-          apply_sapto(yr >= 2023, taxi, xd, yd, is_married);
+          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
         }
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2025(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2025(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -1297,11 +1819,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -1309,12 +1833,12 @@ DoubleVector do_income_tax_sf(int yr,
         // Offsets
         // SAPTO
         if (pensioner_eligible) {
-          apply_sapto(yr >= 2023, taxi, xd, yd, is_married);
+          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
         }
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2026(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2026(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -1325,11 +1849,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -1337,12 +1863,12 @@ DoubleVector do_income_tax_sf(int yr,
         // Offsets
         // SAPTO
         if (pensioner_eligible) {
-          apply_sapto(yr >= 2023, taxi, xd, yd, is_married);
+          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
         }
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2027(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2027(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -1353,11 +1879,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -1365,12 +1893,12 @@ DoubleVector do_income_tax_sf(int yr,
         // Offsets
         // SAPTO
         if (pensioner_eligible) {
-          apply_sapto(yr >= 2023, taxi, xd, yd, is_married);
+          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
         }
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2028(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2028(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -1381,11 +1909,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -1393,12 +1923,12 @@ DoubleVector do_income_tax_sf(int yr,
         // Offsets
         // SAPTO
         if (pensioner_eligible) {
-          apply_sapto(yr >= 2023, taxi, xd, yd, is_married);
+          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
         }
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2029(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2029(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -1409,11 +1939,13 @@ DoubleVector do_income_tax_sf(int yr,
     {
       for (R_xlen_t i = 0; i < N; ++i) {
         int xi = ic_taxable_income_loss[i];
+        int rebate_incomei = rebate_income[i];
+        int n_dependantsi = get_i_N(n_dependants, i, N);
         double xd = (double)xi;
-        double yd = (double)spc_rebate_income[i];
-        bool is_married = yd > 0 || partner_status[i];
-        bool is_family = is_married || n_dependants[i] > 0;
-        int agei = c_age_30_june[i];
+        double yd = (double)get_i_N(spc_rebate_income, i, N);
+        bool is_married = yd > 0 || get_i_N(partner_status, i, N);
+        bool is_family = is_married || n_dependantsi > 0;
+        int agei = get_i_N(c_age_30_june, i, N);
         bool pensioner_eligible = agei >= 65;
         double taxi = 0;
         // ordinary tax
@@ -1421,12 +1953,12 @@ DoubleVector do_income_tax_sf(int yr,
         // Offsets
         // SAPTO
         if (pensioner_eligible) {
-          apply_sapto(yr >= 2023, taxi, xd, yd, is_married);
+          apply_sapto(yr, taxi, rebate_incomei, yd, agei, is_married);
         }
         apply_lito(yr, taxi, xd);
         
         // Medicare levy
-        double ml = do_1_medicare_levy_2030(xd, yd, is_family, pensioner_eligible, n_dependants[i]);
+        double ml = do_1_medicare_levy_2030(xd, yd, is_family, pensioner_eligible, n_dependantsi);
         // Budget levies
         out[i] = taxi + ml;
       }
@@ -1436,3 +1968,8 @@ DoubleVector do_income_tax_sf(int yr,
   }
   return out;
 }
+
+
+
+
+
