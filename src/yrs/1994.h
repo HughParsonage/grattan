@@ -8,6 +8,8 @@ constexpr double ML_UPR_THRESHOLD_SINGLE_1994 = 13643;
 constexpr double ML_LWR_THRESHOLD_FAMILY_1994 = 21367;
 constexpr double ML_UPR_THRESHOLD_FAMILY_1994 = 22974;
 constexpr double ML_LWR_THR_UP_PER_CHILD_1994 =  2100;
+ML_TAPER_1994 = 0.20;
+ML_RATE_1994 = 0.014;
 // Act No. 27 of 1936 as amended, taking into account amendments up to Act No. 125 of 1994
 constexpr double LITO_MAX_OFFSET_1994 = 150;
 constexpr double LITO_1ST_TAPER_1994 = -0.04;

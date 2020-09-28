@@ -8,5 +8,7 @@ constexpr double ML_UPR_THRESHOLD_SINGLE_1991 = 12529;
 constexpr double ML_LWR_THRESHOLD_FAMILY_1991 = 19046;
 constexpr double ML_UPR_THRESHOLD_FAMILY_1991 = 20314;
 constexpr double ML_LWR_THR_UP_PER_CHILD_1991 =  2100;
+ML_TAPER_1991 = 0.25;
+ML_RATE_1991 = 0.0125;
 double do_1_medicare_levy_1991(double xd, double yd, bool is_family, int n_dependants );
 #endif

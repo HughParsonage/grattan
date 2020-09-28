@@ -8,4 +8,6 @@ constexpr double ML_UPR_THRESHOLD_SINGLE_1985 =  7485;
 constexpr double ML_LWR_THRESHOLD_FAMILY_1985 =  11804;
 constexpr double ML_UPR_THRESHOLD_FAMILY_1985 = 12426;
 constexpr double ML_LWR_THR_UP_PER_CHILD_1985 =  1330;
+ML_TAPER_1985 = 0.25;
+ML_RATE_1985 = 0.0125;
 #endif
