@@ -496,6 +496,19 @@ double income_taxi_nb(double& xd, const double (&bracks)[nb], const double (&rat
   return out;
 }
 
+template <int nb>
+double income_taxi_nb(int& xd, const double (&bracks)[nb], const double (&rates)[nb]) {
+  double out = 0;
+  for (int b = 0; b < nb; ++b) {
+    if (xd < bracks[b]) {
+      break;
+    }
+    double xa = (b + 1 < nb && xd >= bracks[b + 1]) ? (bracks[b + 1] - bracks[b]) : (xd - bracks[b]);
+    out += xa * rates[b];
+  }
+  return out;
+}
+
 const int NA_ALIAS = INT_MIN;
 
 // [[Rcpp::export(rng = false)]]
