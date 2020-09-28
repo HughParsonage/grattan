@@ -1,6 +1,11 @@
 #ifndef grattan_2011_H
 #define grattan_2011_H
 
+constexpr int FLOOD_LEVY_1ST_THRESH_2011 = 50e3;
+constexpr int FLOOD_LEVY_2ND_THRESH_2011 = 100e3;
+constexpr double FLOOD_LEVY_TAPER_2011 = 0.005;
+
+
 constexpr double ORD_TAX_BRACK_2011[5] = {0, 6000, 37e3, 80e3, 180e3};
 constexpr double ORD_TAX_RATES_2011[5] = {0, 0.15, 0.3, 0.37, 0.45};
 constexpr double ML_LWR_THRESHOLD_SINGLE_2011 = 18839;
@@ -24,4 +29,5 @@ constexpr double SAPTO_UPR_SINGLE_2011 = 48525;
 constexpr double SAPTO_MAX_MARRIED_2011 = 2230;
 constexpr double SAPTO_LWR_MARRIED_2011 = 30685;
 constexpr double SAPTO_UPR_MARRIED_2011 = 48525;
+constexpr double SAPTO_TAPER_2011 = -0.125;
 #endif

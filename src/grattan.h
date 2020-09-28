@@ -52,7 +52,7 @@ using namespace Rcpp;
 #include "yrs/2029.h"
 #include "yrs/2030.h"
 
-const int TEMP_BUDGET_REPAIR_LEVY_THRESH = 180e3;
+const int TEMP_BUDGET_REPAIR_LEVY_THRESH = 180000;
 const double TEMP_BUDGET_REPAIR_LEVY_RATE = 0.02;
 double sapto_rcpp_singleton(double rebate_income, double max_offset, double lower_threshold, double taper_rate, bool sapto_eligible, double Spouse_income, bool is_married);
 

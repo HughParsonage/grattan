@@ -24,4 +24,5 @@ constexpr double SAPTO_UPR_SINGLE_2009 = 46707;
 constexpr double SAPTO_MAX_MARRIED_2009 = 2230;
 constexpr double SAPTO_LWR_MARRIED_2009 = 28867;
 constexpr double SAPTO_UPR_MARRIED_2009 = 46707;
+constexpr double SAPTO_TAPER_2009 = -0.125;
 #endif
