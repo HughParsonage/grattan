@@ -32,6 +32,15 @@
 #' @importFrom hutils %notchin%
 #' @importFrom hutils weighted_ntile
 #' @importFrom hutils mutate_ntile
+#' 
+#' @importFrom hutilscpp pmin0
+#' @importFrom hutilscpp pmax0
+#' @importFrom hutilscpp pmax3
+#' @importFrom hutilscpp pmaxC
+#' @importFrom hutilscpp pminC
+#' @importFrom hutilscpp pmaxV
+#' @importFrom hutilscpp pminV
+
 
 #' @importFrom fastmatch %fin%
 #' @importFrom fastmatch fmatch

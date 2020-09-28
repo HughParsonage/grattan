@@ -276,6 +276,27 @@ for (YEAR in 1984:2030) {
   writeLines(Year.h, file.h)
 }
 
+for (YEAR in 1984:2030) {
+  Year.h <- readLines(file.h <- file.path("src", "yrs", paste0(YEAR, ".h")))
+  Year.h <- hutils::if_else(startsWith(Year.h, "ML_"), paste0("constexpr double ", Year.h), Year.h)
+  writeLines(Year.h, file.h)
+}
+
+for (YEAR in 1984:2012) {
+  Year.h <- readLines(file.h <- file.path("src", "yrs", paste0(YEAR, ".h")))
+  if (any_grepl(Year.h, "SAPTO_") && !any_grepl(Year.h, "SAPTO_TAPER_[12][0-9]{3}")) {
+    w <- which_last(grepl("SAPTO_", Year.h))
+    if (!w) {
+      stop("YEAR = ", YEAR)
+    }
+      Year.h <- c(Year.h[seq_len(w)], 
+                  paste0("constexpr double SAPTO_TAPER_", YEAR, " = -0.125;"),
+                  Year.h[-seq_len(w)])
+    
+  writeLines(Year.h, file.h)
+  }
+}
+
 
 
 cg <- function(...) base::cat(g(...), "\n", file = "src/tmp_income_tax.cpp", sep = "", append = TRUE)
@@ -318,7 +339,7 @@ for (YEAR in 1984:2030) {
   cg("M{YEAR}.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_{YEAR};")
   cg("M{YEAR}.taper = ML_TAPER_{YEAR};")
   cg("M{YEAR}.rate = ML_RATE_{YEAR};")
-  cg("M{YEAR}.has_sapto_thr = {as.double(YEAR >= 2000)};")
+  cg("M{YEAR}.has_sapto_thr = {as.double(YEAR > 2000)};")
   cg("M{YEAR}.sapto_age = 65;")
   
   cl("{")
@@ -355,7 +376,7 @@ for (YEAR in 1984:2030) {
   }
   cg("")
   cg("// Medicare levy")
-  cg("double ml = do_1_ML(Person, M{YEAR});")
+  cg("double ml = do_1_ML(P, M{YEAR});")
   cl("taxi += ml;")
   cl("")
   if (YEAR == 2011 || YEAR == 2015 || YEAR == 2016 || YEAR == 2017) {
@@ -363,7 +384,7 @@ for (YEAR in 1984:2030) {
   }
   if (YEAR == 2011) {
     cl("// flood levy")
-    cl("taxi += 0.005 * (max0(xd - 50e3) * max0(xd - 100e3));")
+    cl("taxi += 0.005 * (max0(xd - 50000) * max0(xd - 100000));")
   }
   if (YEAR >= 2015 && YEAR <= 2017) {
     cl("// temporary budget repair levy")
