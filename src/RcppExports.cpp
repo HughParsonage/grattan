@@ -5,21 +5,6 @@
 
 using namespace Rcpp;
 
-// AnyWhich
-int AnyWhich(IntegerVector x, int a, bool gt, bool lt, bool eq);
-RcppExport SEXP _grattan_AnyWhich(SEXP xSEXP, SEXP aSEXP, SEXP gtSEXP, SEXP ltSEXP, SEXP eqSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< int >::type a(aSEXP);
-    Rcpp::traits::input_parameter< bool >::type gt(gtSEXP);
-    Rcpp::traits::input_parameter< bool >::type lt(ltSEXP);
-    Rcpp::traits::input_parameter< bool >::type eq(eqSEXP);
-    rcpp_result_gen = Rcpp::wrap(AnyWhich(x, a, gt, lt, eq));
-    return rcpp_result_gen;
-END_RCPP
-}
 // IncomeTax
 NumericVector IncomeTax(NumericVector x, NumericVector thresholds, NumericVector rates);
 RcppExport SEXP _grattan_IncomeTax(SEXP xSEXP, SEXP thresholdsSEXP, SEXP ratesSEXP) {
@@ -118,19 +103,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// anyOutside
-int anyOutside(IntegerVector x, int a, int b);
-RcppExport SEXP _grattan_anyOutside(SEXP xSEXP, SEXP aSEXP, SEXP bSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< int >::type a(aSEXP);
-    Rcpp::traits::input_parameter< int >::type b(bSEXP);
-    rcpp_result_gen = Rcpp::wrap(anyOutside(x, a, b));
-    return rcpp_result_gen;
-END_RCPP
-}
 // decode_age_range
 SEXP decode_age_range(SEXP X);
 RcppExport SEXP _grattan_decode_age_range(SEXP XSEXP) {
@@ -225,123 +197,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// pmax3
-NumericVector pmax3(NumericVector x, NumericVector y, NumericVector z);
-RcppExport SEXP _grattan_pmax3(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type z(zSEXP);
-    rcpp_result_gen = Rcpp::wrap(pmax3(x, y, z));
-    return rcpp_result_gen;
-END_RCPP
-}
-// pmaxC
-NumericVector pmaxC(NumericVector x, double a);
-RcppExport SEXP _grattan_pmaxC(SEXP xSEXP, SEXP aSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< double >::type a(aSEXP);
-    rcpp_result_gen = Rcpp::wrap(pmaxC(x, a));
-    return rcpp_result_gen;
-END_RCPP
-}
-// pmaxCint
-IntegerVector pmaxCint(IntegerVector x, int a);
-RcppExport SEXP _grattan_pmaxCint(SEXP xSEXP, SEXP aSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< int >::type a(aSEXP);
-    rcpp_result_gen = Rcpp::wrap(pmaxCint(x, a));
-    return rcpp_result_gen;
-END_RCPP
-}
-// pmax0
-NumericVector pmax0(NumericVector x);
-RcppExport SEXP _grattan_pmax0(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(pmax0(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// pmaxIPnum0
-NumericVector pmaxIPnum0(NumericVector x);
-RcppExport SEXP _grattan_pmaxIPnum0(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(pmaxIPnum0(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// pmaxIPint0
-IntegerVector pmaxIPint0(IntegerVector x);
-RcppExport SEXP _grattan_pmaxIPint0(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(pmaxIPint0(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// pmaxV
-NumericVector pmaxV(NumericVector x, NumericVector y);
-RcppExport SEXP _grattan_pmaxV(SEXP xSEXP, SEXP ySEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    rcpp_result_gen = Rcpp::wrap(pmaxV(x, y));
-    return rcpp_result_gen;
-END_RCPP
-}
-// pminC
-NumericVector pminC(NumericVector x, double a);
-RcppExport SEXP _grattan_pminC(SEXP xSEXP, SEXP aSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< double >::type a(aSEXP);
-    rcpp_result_gen = Rcpp::wrap(pminC(x, a));
-    return rcpp_result_gen;
-END_RCPP
-}
-// pmin0
-NumericVector pmin0(NumericVector x);
-RcppExport SEXP _grattan_pmin0(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(pmin0(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// pminV
-NumericVector pminV(NumericVector x, NumericVector y);
-RcppExport SEXP _grattan_pminV(SEXP xSEXP, SEXP ySEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
-    rcpp_result_gen = Rcpp::wrap(pminV(x, y));
-    return rcpp_result_gen;
-END_RCPP
-}
 // do_sapto_rcpp
 NumericVector do_sapto_rcpp(NumericVector RebateIncome, NumericVector MaxOffset, NumericVector LowerThreshold, NumericVector TaperRate, LogicalVector SaptoEligible, NumericVector SpouseIncome, LogicalVector IsMarried);
 RcppExport SEXP _grattan_do_sapto_rcpp(SEXP RebateIncomeSEXP, SEXP MaxOffsetSEXP, SEXP LowerThresholdSEXP, SEXP TaperRateSEXP, SEXP SaptoEligibleSEXP, SEXP SpouseIncomeSEXP, SEXP IsMarriedSEXP) {
@@ -426,14 +281,12 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_grattan_AnyWhich", (DL_FUNC) &_grattan_AnyWhich, 5},
     {"_grattan_IncomeTax", (DL_FUNC) &_grattan_IncomeTax, 3},
     {"_grattan_MedicareLevySingle", (DL_FUNC) &_grattan_MedicareLevySingle, 11},
     {"_grattan_MedicareLevySaptoYear", (DL_FUNC) &_grattan_MedicareLevySaptoYear, 5},
     {"_grattan_MedicareLevy", (DL_FUNC) &_grattan_MedicareLevy, 11},
     {"_grattan_Offset", (DL_FUNC) &_grattan_Offset, 4},
     {"_grattan_MultiOffset", (DL_FUNC) &_grattan_MultiOffset, 5},
-    {"_grattan_anyOutside", (DL_FUNC) &_grattan_anyOutside, 3},
     {"_grattan_decode_age_range", (DL_FUNC) &_grattan_decode_age_range, 1},
     {"_grattan_do_lito", (DL_FUNC) &_grattan_do_lito, 2},
     {"_grattan_do_lmito", (DL_FUNC) &_grattan_do_lmito, 1},
@@ -441,16 +294,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_grattan_do_rebate_income", (DL_FUNC) &_grattan_do_rebate_income, 9},
     {"_grattan_do_income_tax_sf", (DL_FUNC) &_grattan_do_income_tax_sf, 15},
     {"_grattan_medicare_levy_2018", (DL_FUNC) &_grattan_medicare_levy_2018, 2},
-    {"_grattan_pmax3", (DL_FUNC) &_grattan_pmax3, 3},
-    {"_grattan_pmaxC", (DL_FUNC) &_grattan_pmaxC, 2},
-    {"_grattan_pmaxCint", (DL_FUNC) &_grattan_pmaxCint, 2},
-    {"_grattan_pmax0", (DL_FUNC) &_grattan_pmax0, 1},
-    {"_grattan_pmaxIPnum0", (DL_FUNC) &_grattan_pmaxIPnum0, 1},
-    {"_grattan_pmaxIPint0", (DL_FUNC) &_grattan_pmaxIPint0, 1},
-    {"_grattan_pmaxV", (DL_FUNC) &_grattan_pmaxV, 2},
-    {"_grattan_pminC", (DL_FUNC) &_grattan_pminC, 2},
-    {"_grattan_pmin0", (DL_FUNC) &_grattan_pmin0, 1},
-    {"_grattan_pminV", (DL_FUNC) &_grattan_pminV, 2},
     {"_grattan_do_sapto_rcpp", (DL_FUNC) &_grattan_do_sapto_rcpp, 7},
     {"_grattan_do_sapto_rcpp2", (DL_FUNC) &_grattan_do_sapto_rcpp2, 10},
     {"_grattan_sapto_rcpp_singleton", (DL_FUNC) &_grattan_sapto_rcpp_singleton, 7},

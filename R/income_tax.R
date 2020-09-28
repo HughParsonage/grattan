@@ -105,12 +105,14 @@ income_tax <- function(income,
   # the body() of the function just referring to an Rcpp function), and
   # because it's easier (and no real damage to performance) to handle 
   # mixture of NULLs, length-ones, vectors, and symbols
-
   
   ic_taxable_income_loss <- 
     income %||%
     .subset2(.dots.ATO, "ic_taxable_income_loss") %||%
     .subset2(.dots.ATO, "Taxable_Income") 
+  
+  N <- length(ic_taxable_income_loss)
+  
   
   c_age_30_june <- 
     if (hasName(.dots.ATO, "c_age_30_june")) {
@@ -186,6 +188,18 @@ income_tax <- function(income,
     0L
     
     
+  rN <- function(x) {
+    if (is.integer(x) && length(x) == N) {
+      return(x)
+    }
+    if (is.double(x)) {
+      # restrict to integer range
+      # (almost always a typo so we just set to arbitrary large number < INT_MAX / 2)
+      x <- pminC(x, 1e8)
+    }
+    rep_len(coalesce(as.integer(x), 0L), N)
+  }
+  
   
   
   out <- 
@@ -193,23 +207,28 @@ income_tax <- function(income,
       do_income_tax_sf(yr,
                        # Arguments
                        # Length of output
-                       N = length(ic_taxable_income_loss), 
+                       N = N,
                        
                        # Other variables from sample file
-                       ic_taxable_income_loss = ic_taxable_income_loss, 
-                       c_age_30_june = c_age_30_june,
+                       ic_taxable_income_loss = rN(ic_taxable_income_loss), 
+                       c_age_30_june = rN(c_age_30_june),
                        rebateIncome = rebateIncome,
-                       ds_pers_super_cont = ds_pers_super_cont,
-                       is_net_rent = is_net_rent,
-                       it_property_loss = it_property_loss,
-                       it_rept_empl_super_cont = it_rept_empl_super_cont,
-                       it_rept_fringe_benefit = it_rept_fringe_benefit,
-                       it_invest_loss = it_invest_loss,
-                       sc_empl_cont = sc_empl_cont,
-                       spc_rebate_income = spc_rebate_income,
-                       partner_status = partner_status,
-                       n_dependants = n_dependants)
+                       ds_pers_super_cont = rN(ds_pers_super_cont),
+                       is_net_rent = rN(is_net_rent),
+                       it_property_loss = rN(it_property_loss),
+                       it_rept_empl_super_cont = rN(it_rept_empl_super_cont),
+                       it_rept_fringe_benefit = rN(it_rept_fringe_benefit),
+                       it_invest_loss = rN(it_invest_loss),
+                       sc_empl_cont = rN(sc_empl_cont),
+                       spc_rebate_income = rN(spc_rebate_income),
+                       partner_status = rN(partner_status),
+                       n_dependants = rN(n_dependants))
     } else {
+      if (length(yr) != N) {
+        stop("`length(fy.year) = ", length(fy.year), "`, but ", 
+             "`length(income) = ", N, ".")
+      }
+      
       accel_repetitive_input(yr, 
                              do_income_tax_sf, 
                              # Arguments
@@ -462,7 +481,7 @@ rolling_income_tax <- function(income,
   # input[["fy_year"]] ensures it matches the length of income if length(fy.year) == 1.
   if (any(c("2014-15", "2015-16", "2016-17") %fin% .subset2(input, "fy_year"))) {
     temp_budget_repair_levy. <-
-      0.02 * pmaxIPnum0(income - 180e3) *
+      0.02 * pmax0(income - 180e3) *
       {.subset2(input, "fy_year") %chin% c("2014-15", "2015-16", "2016-17")}
   } else {
     temp_budget_repair_levy. <- 0
@@ -472,13 +491,13 @@ rolling_income_tax <- function(income,
     flood_levy. <- 
       0.005 *
       {.subset2(input, "fy_year") == "2011-12"} * 
-      {pmaxIPnum0(income - 50e3) + pmaxIPnum0(income - 100e3)}
+      {pmax0(income - 50e3) + pmax0(income - 100e3)}
   } else {
     flood_levy. <- 0
   }
   
   # http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html
-  S4.10_basic_income_tax_liability <- pmaxIPnum0(base_tax. - lito. - sapto.)
+  S4.10_basic_income_tax_liability <- pmax0(base_tax. - lito. - sapto.)
   
   # SBTO can only be calculated off .dots.ATO
   if (is.null(.dots.ATO)) {
@@ -493,7 +512,7 @@ rolling_income_tax <- function(income,
   
   if (.debug && is.data.table(.dots.ATO)) {
     new_tax <-
-      pmaxIPnum0(S4.10_basic_income_tax_liability - sbto.) +
+      pmax0(S4.10_basic_income_tax_liability - sbto.) +
       medicare_levy. +
       temp_budget_repair_levy. +
       flood_levy.
@@ -520,7 +539,7 @@ rolling_income_tax <- function(income,
   }
   
   # SBTO is non-refundable (Para 1.6 of explanatory memo)
-  pmaxIPnum0(S4.10_basic_income_tax_liability - sbto.) +
+  pmax0(S4.10_basic_income_tax_liability - sbto.) +
     medicare_levy. +
     temp_budget_repair_levy. +
     flood_levy.
@@ -712,7 +731,7 @@ income_tax_cpp <- function(income,
   flood_levy. <- 0
   
   # http://classic.austlii.edu.au/au/legis/cth/consol_act/itaa1997240/s4.10.html
-  S4.10_basic_income_tax_liability <- pmaxIPnum0(base_tax. - lito. - sapto.)
+  S4.10_basic_income_tax_liability <- pmax0(base_tax. - lito. - sapto.)
   
   # SBTO can only be calculated off .dots.ATO
   if (is.null(.dots.ATO)) {
