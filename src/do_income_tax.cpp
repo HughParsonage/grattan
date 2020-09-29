@@ -43,6 +43,14 @@ double pmax(double x, double y) {
   return (x >= y) ? x : y;
 }
 
+double amin(double x, double y) {
+  return (x <= y) ? x : y;
+}
+
+int amin(int x, int y) {
+  return (x <= y) ? x : y;
+}
+
 double max0(double x) {
   return (x > 0) ? x : 0;
 }
