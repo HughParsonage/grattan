@@ -27,4 +27,5 @@ constexpr double LITO_1ST_THRESH_2027 = 37500;
 constexpr double LITO_2ND_THRESH_2027 = 45000;
 constexpr double LITO_1ST_TAPER_2027 = -0.050;
 constexpr double LITO_2ND_TAPER_2027 = -0.015;
+constexpr double SBTO_DISCOUNT_2027 = 0.16;
 #endif

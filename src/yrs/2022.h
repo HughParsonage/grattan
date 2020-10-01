@@ -28,4 +28,5 @@ constexpr double LMITO_TAPER_RATES_2022[4] = {0.075, 0, -0.03, 0};
 constexpr double LITO_MAX_OFFSET_2022 = 445;
 constexpr double LITO_1ST_THRESH_2022 = 37000;
 constexpr double LITO_1ST_TAPER_2022 = -0.015;
+constexpr double SBTO_DISCOUNT_2022 = 0.08;
 #endif
