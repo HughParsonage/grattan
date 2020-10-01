@@ -25,4 +25,5 @@ constexpr double SAPTO_TAPER_2016 = -0.125;
 constexpr double SAPTO_LWR_SINGLE_2016 = 32279;
 constexpr double SAPTO_LWR_MARRIED_2016 = 28974;
 constexpr double SAPTO_LWR_ILL_SEP_2016 = 28974;
+constexpr double SBTO_DISCOUNT_2016 = 0.05;
 #endif

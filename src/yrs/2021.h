@@ -28,4 +28,5 @@ constexpr double SAPTO_LWR_ILL_SEP_2021 = 28974;
 constexpr double LMITO_1ST_OFFSET_2021 = 255;
 constexpr double LMITO_THRESHOLDS_2021[4] = {37e3, 48e3, 90e3, 126e3};
 constexpr double LMITO_TAPER_RATES_2021[4] = {0.075, 0, -0.03, 0};
+constexpr double SBTO_DISCOUNT_2021 = 0.08;
 #endif
