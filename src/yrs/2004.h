@@ -18,9 +18,13 @@ double do_1_medicare_levy_2004(double xd, double yd, bool is_family, bool pensio
 constexpr double LITO_MAX_OFFSET_2004 = 235;
 constexpr double LITO_1ST_TAPER_2004 = -0.04;
 constexpr double LITO_1ST_THRESH_2004 = 21600;
-constexpr double SAPTO_MAX_SINGLE_2004 = 1925;
-constexpr double SAPTO_MAX_MARRIED_2004 = 2848;
-constexpr double SAPTO_LWR_SINGLE_2004 = 17342;
-constexpr double SAPTO_LWR_MARRIED_2004 = 28754;
+constexpr double SAPTO_MAX_SINGLE_2004 = 2230;
+constexpr double SAPTO_MAX_MARRIED_2004 = 1602;
+constexpr double SAPTO_LWR_SINGLE_2004 = 20500;
+constexpr double SAPTO_LWR_MARRIED_2004 = 33612;
+constexpr double PTO_MAX_SINGLE_2004 = 1925;
+constexpr double PTO_MAX_MARRIED_2004 = 2848;
+constexpr double PTO_LWR_SINGLE_2004 = 17342;
+constexpr double PTO_LWR_MARRIED_2004 = 28754;
 constexpr double SAPTO_TAPER_2004 = -0.125;
 #endif
