@@ -26,7 +26,7 @@ struct Sapto {
 // s12 of Income Tax Assessment (1936 Act) Regulation 2015
 // specfies 6000 and 0.15 in the regulations
 // http://classic.austlii.edu.au/au/legis/cth/consol_reg/ita1936ar2015352/s12.html
-constexpr int SAPTO_S12_THRESH = 15000;
+constexpr int SAPTO_S12_THRESH = 6000;
 constexpr double SAPTO_S12_TAPER = 0.15;
 
 struct Lodge {

@@ -630,58 +630,62 @@ double do_1_sapto_sf(int &x, int &y, int age, bool is_married, Sapto S) {
   
   // x is rebate income
   // y is spouse rebate income
-  double z = (double)x;
-  z += y;
-  int max_offset = is_married ? S.mxo_couple : S.mxo_single;
-  int lwr_thresh = is_married ? S.lwr_couple : S.lwr_single;
+  double max_offset = is_married ? S.mxo_couple : S.mxo_single;
+  double lwr_thresh = is_married ? S.lwr_couple : S.lwr_single;
   double taper = S.taper;
-  // int upr_thresh = is_married ? S.upr_couple : S.upr_single;
-  
-  double o = max0(max_offset + taper * max0(z - lwr_thresh));
+
+   double o = x < lwr_thresh ? max_offset : max0(max_offset + taper * (x - lwr_thresh));
+  if (!is_married) {
+    return o;
+  }
   
   // The transfer of unused SAPTO is very complex and frankly unknown, even
   // within govt.  This lines up 'better' than known models.
-  if (is_married) {
-    double partner_unused_sapto = max0(max_offset + taper * max0(y - lwr_thresh));
-    double lito = S.lito_max_offset;
-    
-    // https://www.ato.gov.au/individuals/income-and-deductions/in-detail/transferring-the-seniors-and-pensioners-tax-offset/
-    // Following the lettering there
-    double AA, BB, CC, DD, GG, HH, II, JJ = 0;
-    AA = x;
-    BB = max_offset / 2;
-    CC = BB + partner_unused_sapto;
-    DD = CC + lito;
-    // https://www.ato.gov.au/law/view/document?DocID=TXR/TR9331/NAT/ATO/00001&PiT=99991231235958
-    GG = S.tax_free_thresh + DD / S.first_tax_rate;
-    HH = max0(AA - GG);
-    II = HH * (-taper);
-    
-    JJ = max0(CC - II);
-    o = (x < GG) ? CC : JJ;
-  }
-  return o;
-}
 
-// apply_sapto(yr, taxi, xd, yd, agei, is_married);
-void apply_sapto(int yr, double & taxi, int x, int y, int age, bool is_married) {
-  double sapto = do_1_sapto_sf(x, y, age, is_married, SaptoSince2000[yr - 2000]);
+  // If the spouse's income is so high that no spouse SAPTO is 
+  // transferrable, then we just fall back to the original 
+  constexpr double MAX_THR_SPOUSE_XFER_MARRIED = 1602 / SAPTO_S12_TAPER + SAPTO_S12_THRESH;
+  if (y > MAX_THR_SPOUSE_XFER_MARRIED) {
+    return o;
+  }
   
-  if (sapto >= taxi) {
-    taxi = 0;
-  } else {
-    taxi -= sapto;
+  double sp_unused_sapto = 
+  (y < SAPTO_S12_THRESH) ? max_offset : max0(max_offset - SAPTO_S12_TAPER * (y - SAPTO_S12_THRESH));
+  
+  // https://www.ato.gov.au/individuals/income-and-deductions/in-detail/transferring-the-seniors-and-pensioners-tax-offset/
+  // Following the lettering there
+  double A = S.mxo_couple;
+  double B = A + sp_unused_sapto;
+  double C = B + S.lito_max_offset;
+  double D = C / S.first_tax_rate;
+  double E = D + S.tax_free_thresh;
+  double adj_rebate_threshold = E;
+  if (E > S.lito_1st_thresh) {
+    double G = S.second_tax_rate - S.lito_1st_taper; // 0.34
+    double H = G - S.first_tax_rate;                 // 0.15
+    double I = H * S.lito_1st_thresh;                // 5550
+    double J = S.first_tax_rate * S.tax_free_thresh; // 3458
+    double K = J + S.lito_max_offset;                // 3903
+    double L = K + max_offset;
+    double M = L + sp_unused_sapto;
+    double N = I + M;
+    double O = G;
+    double P = N / O;                                // 37226
+    adj_rebate_threshold = P;
   }
+  if (x < adj_rebate_threshold) {
+    return B;
+  }
+  
+  double DD = x - adj_rebate_threshold;
+  double EE = DD * taper;
+  double FF = B + EE;
+  
+  return max0(FF);
 }
-
-bool done_once = false;
 
 void apply_sapto(double & taxi, int x, int y, int age, bool is_married, Sapto S) {
   double sapto = do_1_sapto_sf(x, y, age, is_married, S);
-  if (!done_once) {
-    Rcout << "SAPTO = " << sapto << "\n";
-    done_once = true;
-  }
   
   if (sapto >= taxi) {
     taxi = 0;
@@ -692,11 +696,6 @@ void apply_sapto(double & taxi, int x, int y, int age, bool is_married, Sapto S)
 
 void apply_sapto(double & taxi, Person P, Sapto S) {
   double sapto = do_1_sapto_sf(P.xi, P.yi, P.agei, P.is_married, S);
-  if (!done_once) {
-    Rcout << "SAPTO = " << sapto << "\n";
-    done_once = true;
-  }
-  
   if (sapto >= taxi) {
     taxi = 0;
   } else {
@@ -704,6 +703,47 @@ void apply_sapto(double & taxi, Person P, Sapto S) {
   }
 }
 
+// [[Rcpp::export(rng = false)]]
+DoubleVector do_sapto(IntegerVector x, IntegerVector y, 
+                      IntegerVector Age,
+                      LogicalVector isMarried, 
+                      double max_single = 2230, 
+                      double max_couple = 1602, 
+                      double lwr_single = 32279,
+                      double lwr_couple = 28974,
+                      double taper = -0.125,
+                      double tax_free_thresh = 18200,
+                      double first_tax_rate = 0.19,
+                      double second_tax_rate = 0.325,
+                      double lito_max_offset = 445,
+                      double lito_1st_thresh = 37e3,
+                      double lito_1st_taper = -0.015) {
+  Sapto S;
+  S.mxo_single = max_single;
+  S.mxo_couple = max_couple;
+  S.first_tax_rate = first_tax_rate;
+  S.second_tax_rate = second_tax_rate;
+  S.tax_free_thresh = tax_free_thresh;
+  S.lwr_couple = lwr_couple;
+  S.pension_age = 65;
+  S.taper = taper;
+  S.lito_max_offset = lito_max_offset;
+  S.lito_1st_thresh = lito_1st_thresh;
+  S.lito_1st_taper = lito_1st_taper;
+  
+  R_xlen_t N = x.length();
+  R_xlen_t AN = Age.length();
+  R_xlen_t MN = isMarried.length();
+  DoubleVector out = no_init(N);
+  
+  for (R_xlen_t i = 0; i < N; ++i) {
+    int agei = (AN == N) ? Age[i] : Age[0];
+    bool is_married = (MN == N) ? isMarried[i] : isMarried[0];
+    double sapto = do_1_sapto_sf(x[i], y[i], agei, is_married, S);
+    out[i] = sapto;
+  }
+  return out;
+}
 
 
 void apply_lmito(double & taxi, int x) {
