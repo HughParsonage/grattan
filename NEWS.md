@@ -1,3 +1,12 @@
+## 2.0.0.0
+
+### Breaking changes
+
+* `income_tax` and `medicare_levy` no longer accept `family_status` as an input, since it was giving
+  misleading results. Use `.dots.ATO` with appropriate variables to define the 
+  spouse's income or the number of children.
+  
+
 ## 1.9.0.0
 
 ### New features
