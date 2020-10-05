@@ -17,4 +17,6 @@ struct Medicare {
   double rate;
 };
 
+Medicare medicare_levies(int yr);
+
 #endif
