@@ -12,6 +12,8 @@ constexpr double ML_LWR_THRESHOLD_SINGLE_SAPTO_2003 = 20000;
 constexpr double ML_UPR_THRESHOLD_SINGLE_SAPTO_2003 = 21623;
 constexpr double ML_LWR_THRESHOLD_FAMILY_SAPTO_2003 = 31729;
 constexpr double ML_UPR_THRESHOLD_FAMILY_SAPTO_2003 = 34303;
+constexpr double ML_LWR_THRESHOLD_SINGLE_PTO_2003 = 17164;
+constexpr double ML_LWR_THRESHOLD_FAMILY_PTO_2003 = 31729;
 constexpr double ML_TAPER_2003 = 0.20;
 constexpr double ML_RATE_2003 = 0.015;
 double do_1_medicare_levy_2003(double xd, double yd, bool is_family, bool pensioner, int n_dependants );
