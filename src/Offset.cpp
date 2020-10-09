@@ -107,3 +107,5 @@ DoubleVector MultiOffset(NumericVector x,
 }
 
 
+
+

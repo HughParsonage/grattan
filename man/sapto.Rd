@@ -11,6 +11,7 @@ sapto(
   sapto.eligible = TRUE,
   Spouse_income = 0,
   family_status = "single",
+  on_sapto_cd = "A",
   .check = TRUE
 )
 }
@@ -26,6 +27,12 @@ sapto(
 \item{Spouse_income}{Spouse income whose unutilized SAPTO may be added to the current taxpayer. Must match \code{family_status}; i.e. can only be nonzero when \code{family_status != "single"}.}
 
 \item{family_status}{Family status of the individual.}
+
+\item{on_sapto_cd}{SAPTO claim code type (for non-veterans). A 
+letter A-E. A = single, B = lived apart due to illness and spouse was eligible,
+ C = lived apart but spouse ineligible, D = lived together, both eligible for sapto, 
+ E = lived together, spouse ineligible. Only \code{"A"} and \code{"D"} are supported.
+ An empty string for}
 
 \item{.check}{Run checks for consistency of values. For example, ensuring no 
 single individuals have positive \code{Spouse_income}.}

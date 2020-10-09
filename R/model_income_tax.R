@@ -200,6 +200,8 @@ model_income_tax <- function(sample_file,
   max.length <- length(income)
   prohibit_vector_recycling(income, n_dependants, baseline_fy)
   
+  baseline_yr <- fy::fy2yr(baseline_fy)
+  
   old_tax <- income_tax(income,
                         fy.year = baseline_fy,
                         .dots.ATO = .dots.ATO,
@@ -387,17 +389,12 @@ model_income_tax <- function(sample_file,
   
   if (all(vapply(medicare_args, is.null, FALSE))) {
     medicare_levy. <- 
-      medicare_levy(income, 
-                    Spouse_income = the_spouse_income,
-                    fy.year = baseline_fy, 
-                    sapto.eligible = sapto_eligible, 
-                    family_status = {
-                      FS <- rep_len("individual", max.length)
-                      FS[the_spouse_income > 0] <- "family"
-                      FS
-                    }, 
-                    n_dependants = n_dependants, 
-                    .checks = FALSE)
+      do_medicare_levy(income = income, 
+                       spouse_income = the_spouse_income,
+                       is_married = is_married(baseline_fy),
+                       sapto_eligible = sapto_eligible,
+                       yr = baseline_yr,
+                       n_dependants = n_dependants)
     
   } else {
     medicare_tbl_fy <- medicare_tbl[input, on = c("fy_year", "sapto==SaptoEligible")]
@@ -660,21 +657,19 @@ model_income_tax <- function(sample_file,
     }
     
     medicare_levy. <-
-      MedicareLevy(income = income,
-                   
-                   lowerThreshold = ma,
-                   upperThreshold = mb,
-                   
-                   SpouseIncome = the_spouse_income,
-                   isFamily = the_spouse_income > 0,
-                   NDependants = if (length(n_dependants) == 1) rep_len(n_dependants, max.length) else n_dependants,
-                   
-                   lowerFamilyThreshold = mfa,
-                   upperFamilyThreshold = mfb,
-                   lowerUpForEachChild  = medicare_levy_lower_up_for_each_child %|||% medicare_tbl_fy[["lower_up_for_each_child"]], 
-                   
-                   rate = mr,
-                   taper = mt)
+      do_medicare_levy(income,
+                       spouse_income = the_spouse_income, 
+                       is_married = the_spouse_income > 0, 
+                       n_dependants = if (length(n_dependants) == 1) rep_len(n_dependants, max.length) else n_dependants,
+                       sapto_eligible = sapto_eligible, 
+                       yr = NA_integer_, 
+                       lwr_single = ma, 
+                       lwr_family = mfa, 
+                       lwr_single_sapto = msa,
+                       lwr_family_sapto = msfa, 
+                       lwr_up_per_child = medicare_levy_lower_up_for_each_child,
+                       rate = mr,
+                       taper = mt)
   }
   
   lito_args <- mget(grep("^lito_", arguments, perl = TRUE, value = TRUE))
@@ -695,55 +690,37 @@ model_income_tax <- function(sample_file,
   if (any(sapto_eligible)) {
     sapto_args <- mget(grep("^sapto_(?!eligible)", arguments, perl = TRUE, value = TRUE))
     
+    .dASE <- .dots.ATO[(sapto_eligible),
+                       .SD, 
+                       .SDcols = c("Rptbl_Empr_spr_cont_amt", 
+                                   "Net_fincl_invstmt_lss_amt",
+                                   "Net_rent_amt",
+                                   "Rep_frng_ben_amt")]
+    rebate_income_over_eligible <-
+      do_rebate_income(Taxable_Income = income[sapto_eligible],
+                       it_rept_empl_super_cont = .dASE[["Rptbl_Empr_spr_cont_amt"]],
+                       it_invest_loss = .dASE[["Net_fincl_invstmt_lss_amt"]],
+                       is_net_rent    = .dASE[["Net_rent_amt"]],
+                       it_rept_fringe_benefit = .dASE[["Rep_frng_ben_amt"]],
+                       yr = baseline_yr)
+    
     if (all(vapply(sapto_args, is.null, FALSE))) {
-      # 
-      .dASE <- .dots.ATO[(sapto_eligible),
-                         .SD, 
-                         .SDcols = c("Rptbl_Empr_spr_cont_amt", 
-                                     "Net_fincl_invstmt_lss_amt",
-                                     "Net_rent_amt",
-                                     "Rep_frng_ben_amt")]
-      rebate_income_over_eligible <-
-        rebate_income(Taxable_Income = income[sapto_eligible],
-                      Rptbl_Empr_spr_cont_amt = .dASE[["Rptbl_Empr_spr_cont_amt"]],
-                      Net_fincl_invstmt_lss_amt = .dASE[["Net_fincl_invstmt_lss_amt"]],
-                      Net_rent_amt = .dASE[["Net_rent_amt"]],
-                      Rep_frng_ben_amt = .dASE[["Rep_frng_ben_amt"]])
-      
       sapto.[sapto_eligible] <-
-        sapto(rebate_income = rebate_income_over_eligible, 
-              fy.year = if (length(baseline_fy) > 1) baseline_fy[sapto_eligible] else baseline_fy,
-              Spouse_income = the_spouse_income[sapto_eligible],
-              family_status = {
-                FS_sapto <- rep_len("single", max.length)
-                FS_sapto[the_spouse_income > 0] <- "married"
-                FS_sapto[sapto_eligible]
-              },
-              sapto.eligible = TRUE)
+        do_sapto(rebate_income_over_eligible, 
+                 y = the_spouse_income[sapto_eligible],
+                 Age = rep(67L, sum(sapto_eligible)),
+                 isMarried = .dots.ATO[["Partner_status"]][sapto_eligible])
     } else {
-      sapto_tbl_fy <- sapto_tbl[fy_year == baseline_fy]
-      sapto_married_fy <- sapto_tbl_fy[family_status == "married"]
-      sapto_single_fy <- sapto_tbl_fy[family_status == "single"]
-      sapto_married <- sapto_eligible & the_spouse_income > 0L
-      # Need to expand length-one arguments so that [] subsetting
-      # does not improperly introduce NAs
       sapto. <-
-        do_sapto_rcpp2(RebateIncome = rebate_income(Taxable_Income = income, 
-                                                    Rptbl_Empr_spr_cont_amt = .dots.ATO[["Rptbl_Empr_spr_cont_amt"]],
-                                                    Net_fincl_invstmt_lss_amt = .dots.ATO[["Net_fincl_invstmt_lss_amt"]],
-                                                    Net_rent_amt = .dots.ATO[["Net_rent_amt"]],
-                                                    Rep_frng_ben_amt = .dots.ATO[["Rep_frng_ben_amt"]]),
-                       
-                       maxOffsetSingle =                     sapto_max_offset %||% sapto_single_fy[["max_offset"]],
-                       maxOffsetMarried =            sapto_max_offset_married %||% sapto_married_fy[["max_offset"]],
-                       lowerThresholdSingle =           sapto_lower_threshold %||% sapto_single_fy[["lower_threshold"]],
-                       lowerThresholdMarried = sapto_lower_threshold_married %||% sapto_married_fy[["lower_threshold"]],
-                       taperRateSingle =                          sapto_taper %||% sapto_single_fy[["taper_rate"]],
-                       taperRateMarried =                 sapto_taper_married %||% sapto_married_fy[["taper_rate"]],
-                       SaptoEligible = sapto_eligible,
-                       IsMarried = the_spouse_income > 0L,
-                       SpouseIncome = the_spouse_income)
-      
+        do_sapto(income, 
+                 the_spouse_income, 
+                 Age = 42L + (67L - 42L) * sapto_eligible, 
+                 isMarried = is_married(sample_file), 
+                 max_single = sapto_max_offset              %||% SAPTO_MAX_SINGLE(baseline_yr),
+                 max_couple = sapto_max_offset_married      %||% SAPTO_MAX_MARRIED(baseline_yr),
+                 lwr_single = sapto_lower_threshold         %||% SAPTO_LWR_SINGLE(baseline_yr),
+                 lwr_couple = sapto_lower_threshold_married %||% SAPTO_LWR_MARRIED(baseline_yr),
+                 taper      = sapto_taper                   %||% SAPTO_TAPER(baseline_yr)) 
     }
   }
   

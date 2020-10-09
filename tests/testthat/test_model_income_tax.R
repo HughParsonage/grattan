@@ -46,10 +46,11 @@ test_that("La plus ca meme la plus ca meme: ordinary tax", {
   sample_file_1314_copy <- copy(sample_file_1314)
   original <- income_tax(sample_file_1314$Taxable_Income, "2013-14", .dots.ATO = copy(sample_file_1314))
   
-  new_tax <- model_income_tax(sample_file_1314_copy,
-                              baseline_fy = "2013-14",
-                              ordinary_tax_thresholds = c(0, 18200, 37e3, 80e3, 180e3),
-                              ordinary_tax_rates = c(0, 0.19, 0.325, 0.37, 0.45)) %>%
+  new_tax <- 
+    model_income_tax(sample_file_1314_copy,
+                     baseline_fy = "2013-14",
+                     ordinary_tax_thresholds = c(0, 18200, 37e3, 80e3, 180e3),
+                     ordinary_tax_rates = c(0, 0.19, 0.325, 0.37, 0.45)) %>%
     .subset2("new_tax")
   
   expect_equal(new_tax, original)

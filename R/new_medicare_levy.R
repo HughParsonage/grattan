@@ -32,17 +32,7 @@ new_medicare_levy <- function(parameter_table){
     stopifnot(all(family_status %in% c("family", "individual")))
     prohibit_vector_recycling(income, family_status, Spouse_income, age, n_dependants)
     is_married <- Spouse_income > 0
-    if ("individual" %chin% family_status[is_married]) {
-      if (length(family_status) == 1L) {
-        stop("`family_status = 'individual'` yet `Spouse_income > 0`. ", 
-             "Whenever `Spouse_income` is positive, `family_status` must be set to 'family'.")
-      } else {
-        first_bad <- which(family_status == "individual" & is_married)
-        stop("In entry ", first_bad, " `family_status = 'individual' ", 
-             "yet Spouse_income > 0 for that entry. ",
-             "Whenever `Spouse_income` is positive, `family_status` must be set to 'family'.")
-      }
-    }
+    family_status <- if_else(is_married | n_dependants > 0 | Spouse_income > 0, "family", "individual", "individual")
     
     # CRAN NOTE avoidance
     income_share <- NULL

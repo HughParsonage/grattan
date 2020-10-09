@@ -103,6 +103,348 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// ML_LWR_THR_UP_PER_CHILD
+double ML_LWR_THR_UP_PER_CHILD(int yr);
+RcppExport SEXP _grattan_ML_LWR_THR_UP_PER_CHILD(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(ML_LWR_THR_UP_PER_CHILD(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ML_LWR_THRESHOLD_SINGLE
+double ML_LWR_THRESHOLD_SINGLE(int yr);
+RcppExport SEXP _grattan_ML_LWR_THRESHOLD_SINGLE(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(ML_LWR_THRESHOLD_SINGLE(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ML_UPR_THRESHOLD_SINGLE
+double ML_UPR_THRESHOLD_SINGLE(int yr);
+RcppExport SEXP _grattan_ML_UPR_THRESHOLD_SINGLE(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(ML_UPR_THRESHOLD_SINGLE(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ML_LWR_THRESHOLD_FAMILY
+double ML_LWR_THRESHOLD_FAMILY(int yr);
+RcppExport SEXP _grattan_ML_LWR_THRESHOLD_FAMILY(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(ML_LWR_THRESHOLD_FAMILY(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ML_UPR_THRESHOLD_FAMILY
+double ML_UPR_THRESHOLD_FAMILY(int yr);
+RcppExport SEXP _grattan_ML_UPR_THRESHOLD_FAMILY(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(ML_UPR_THRESHOLD_FAMILY(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ML_TAPER
+double ML_TAPER(int yr);
+RcppExport SEXP _grattan_ML_TAPER(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(ML_TAPER(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ML_RATE
+double ML_RATE(int yr);
+RcppExport SEXP _grattan_ML_RATE(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(ML_RATE(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// LITO_MAX_OFFSET
+double LITO_MAX_OFFSET(int yr);
+RcppExport SEXP _grattan_LITO_MAX_OFFSET(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(LITO_MAX_OFFSET(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// LITO_1ST_TAPER
+double LITO_1ST_TAPER(int yr);
+RcppExport SEXP _grattan_LITO_1ST_TAPER(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(LITO_1ST_TAPER(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// LITO_1ST_THRESH
+double LITO_1ST_THRESH(int yr);
+RcppExport SEXP _grattan_LITO_1ST_THRESH(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(LITO_1ST_THRESH(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SAPTO_MAX_SINGLE
+double SAPTO_MAX_SINGLE(int yr);
+RcppExport SEXP _grattan_SAPTO_MAX_SINGLE(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(SAPTO_MAX_SINGLE(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SAPTO_MAX_MARRIED
+double SAPTO_MAX_MARRIED(int yr);
+RcppExport SEXP _grattan_SAPTO_MAX_MARRIED(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(SAPTO_MAX_MARRIED(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SAPTO_LWR_SINGLE
+double SAPTO_LWR_SINGLE(int yr);
+RcppExport SEXP _grattan_SAPTO_LWR_SINGLE(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(SAPTO_LWR_SINGLE(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SAPTO_LWR_MARRIED
+double SAPTO_LWR_MARRIED(int yr);
+RcppExport SEXP _grattan_SAPTO_LWR_MARRIED(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(SAPTO_LWR_MARRIED(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SAPTO_TAPER
+double SAPTO_TAPER(int yr);
+RcppExport SEXP _grattan_SAPTO_TAPER(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(SAPTO_TAPER(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ML_LWR_THRESHOLD_SINGLE_SAPTO
+double ML_LWR_THRESHOLD_SINGLE_SAPTO(int yr);
+RcppExport SEXP _grattan_ML_LWR_THRESHOLD_SINGLE_SAPTO(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(ML_LWR_THRESHOLD_SINGLE_SAPTO(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ML_UPR_THRESHOLD_SINGLE_SAPTO
+double ML_UPR_THRESHOLD_SINGLE_SAPTO(int yr);
+RcppExport SEXP _grattan_ML_UPR_THRESHOLD_SINGLE_SAPTO(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(ML_UPR_THRESHOLD_SINGLE_SAPTO(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ML_LWR_THRESHOLD_FAMILY_SAPTO
+double ML_LWR_THRESHOLD_FAMILY_SAPTO(int yr);
+RcppExport SEXP _grattan_ML_LWR_THRESHOLD_FAMILY_SAPTO(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(ML_LWR_THRESHOLD_FAMILY_SAPTO(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ML_UPR_THRESHOLD_FAMILY_SAPTO
+double ML_UPR_THRESHOLD_FAMILY_SAPTO(int yr);
+RcppExport SEXP _grattan_ML_UPR_THRESHOLD_FAMILY_SAPTO(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(ML_UPR_THRESHOLD_FAMILY_SAPTO(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ML_LWR_THRESHOLD_SINGLE_PTO
+double ML_LWR_THRESHOLD_SINGLE_PTO(int yr);
+RcppExport SEXP _grattan_ML_LWR_THRESHOLD_SINGLE_PTO(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(ML_LWR_THRESHOLD_SINGLE_PTO(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ML_LWR_THRESHOLD_FAMILY_PTO
+double ML_LWR_THRESHOLD_FAMILY_PTO(int yr);
+RcppExport SEXP _grattan_ML_LWR_THRESHOLD_FAMILY_PTO(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(ML_LWR_THRESHOLD_FAMILY_PTO(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SAPTO_UPR_MARRIED
+double SAPTO_UPR_MARRIED(int yr);
+RcppExport SEXP _grattan_SAPTO_UPR_MARRIED(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(SAPTO_UPR_MARRIED(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SAPTO_UPR_SINGLE
+double SAPTO_UPR_SINGLE(int yr);
+RcppExport SEXP _grattan_SAPTO_UPR_SINGLE(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(SAPTO_UPR_SINGLE(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SAPTO_MAX_ILL_SEP
+double SAPTO_MAX_ILL_SEP(int yr);
+RcppExport SEXP _grattan_SAPTO_MAX_ILL_SEP(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(SAPTO_MAX_ILL_SEP(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SAPTO_LWR_ILL_SEP
+double SAPTO_LWR_ILL_SEP(int yr);
+RcppExport SEXP _grattan_SAPTO_LWR_ILL_SEP(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(SAPTO_LWR_ILL_SEP(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// SBTO_DISCOUNT
+double SBTO_DISCOUNT(int yr);
+RcppExport SEXP _grattan_SBTO_DISCOUNT(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(SBTO_DISCOUNT(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// LITO_2ND_THRESH
+double LITO_2ND_THRESH(int yr);
+RcppExport SEXP _grattan_LITO_2ND_THRESH(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(LITO_2ND_THRESH(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// LITO_2ND_TAPER
+double LITO_2ND_TAPER(int yr);
+RcppExport SEXP _grattan_LITO_2ND_TAPER(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(LITO_2ND_TAPER(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// LMITO_1ST_OFFSET
+double LMITO_1ST_OFFSET(int yr);
+RcppExport SEXP _grattan_LMITO_1ST_OFFSET(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(LMITO_1ST_OFFSET(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// LMITO_THRESHS
+IntegerVector LMITO_THRESHS(int yr);
+RcppExport SEXP _grattan_LMITO_THRESHS(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(LMITO_THRESHS(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// LMITO_TAPERS
+DoubleVector LMITO_TAPERS(int yr);
+RcppExport SEXP _grattan_LMITO_TAPERS(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(LMITO_TAPERS(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ORD_TAX_BRACK
+IntegerVector ORD_TAX_BRACK(int yr);
+RcppExport SEXP _grattan_ORD_TAX_BRACK(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(ORD_TAX_BRACK(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ORD_TAX_RATES
+NumericVector ORD_TAX_RATES(int yr);
+RcppExport SEXP _grattan_ORD_TAX_RATES(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(ORD_TAX_RATES(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// do_rN
+IntegerVector do_rN(DoubleVector x, R_xlen_t N, double max_allowed);
+RcppExport SEXP _grattan_do_rN(SEXP xSEXP, SEXP NSEXP, SEXP max_allowedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< DoubleVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< R_xlen_t >::type N(NSEXP);
+    Rcpp::traits::input_parameter< double >::type max_allowed(max_allowedSEXP);
+    rcpp_result_gen = Rcpp::wrap(do_rN(x, N, max_allowed));
+    return rcpp_result_gen;
+END_RCPP
+}
 // decode_age_range
 SEXP decode_age_range(SEXP X);
 RcppExport SEXP _grattan_decode_age_range(SEXP XSEXP) {
@@ -113,23 +455,12 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// do_lito
-DoubleVector do_lito(DoubleVector x, int yr);
-RcppExport SEXP _grattan_do_lito(SEXP xSEXP, SEXP yrSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< DoubleVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
-    rcpp_result_gen = Rcpp::wrap(do_lito(x, yr));
-    return rcpp_result_gen;
-END_RCPP
-}
 // do_lmito
-DoubleVector do_lmito(DoubleVector x);
+DoubleVector do_lmito(IntegerVector x);
 RcppExport SEXP _grattan_do_lmito(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< DoubleVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(do_lmito(x));
     return rcpp_result_gen;
 END_RCPP
@@ -141,6 +472,66 @@ BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< int >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(verify_NA_ALIAS(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// do_sapto
+DoubleVector do_sapto(IntegerVector x, IntegerVector y, IntegerVector Age, LogicalVector isMarried, double max_single, double max_couple, double lwr_single, double lwr_couple, double taper, double tax_free_thresh, double first_tax_rate, double second_tax_rate, double lito_max_offset, double lito_1st_thresh, double lito_1st_taper);
+RcppExport SEXP _grattan_do_sapto(SEXP xSEXP, SEXP ySEXP, SEXP AgeSEXP, SEXP isMarriedSEXP, SEXP max_singleSEXP, SEXP max_coupleSEXP, SEXP lwr_singleSEXP, SEXP lwr_coupleSEXP, SEXP taperSEXP, SEXP tax_free_threshSEXP, SEXP first_tax_rateSEXP, SEXP second_tax_rateSEXP, SEXP lito_max_offsetSEXP, SEXP lito_1st_threshSEXP, SEXP lito_1st_taperSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type Age(AgeSEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type isMarried(isMarriedSEXP);
+    Rcpp::traits::input_parameter< double >::type max_single(max_singleSEXP);
+    Rcpp::traits::input_parameter< double >::type max_couple(max_coupleSEXP);
+    Rcpp::traits::input_parameter< double >::type lwr_single(lwr_singleSEXP);
+    Rcpp::traits::input_parameter< double >::type lwr_couple(lwr_coupleSEXP);
+    Rcpp::traits::input_parameter< double >::type taper(taperSEXP);
+    Rcpp::traits::input_parameter< double >::type tax_free_thresh(tax_free_threshSEXP);
+    Rcpp::traits::input_parameter< double >::type first_tax_rate(first_tax_rateSEXP);
+    Rcpp::traits::input_parameter< double >::type second_tax_rate(second_tax_rateSEXP);
+    Rcpp::traits::input_parameter< double >::type lito_max_offset(lito_max_offsetSEXP);
+    Rcpp::traits::input_parameter< double >::type lito_1st_thresh(lito_1st_threshSEXP);
+    Rcpp::traits::input_parameter< double >::type lito_1st_taper(lito_1st_taperSEXP);
+    rcpp_result_gen = Rcpp::wrap(do_sapto(x, y, Age, isMarried, max_single, max_couple, lwr_single, lwr_couple, taper, tax_free_thresh, first_tax_rate, second_tax_rate, lito_max_offset, lito_1st_thresh, lito_1st_taper));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sbto_avbl
+IntegerVector sbto_avbl(IntegerVector Total_PP_BE_amt, IntegerVector Total_PP_BI_amt, IntegerVector Total_NPP_BE_amt, IntegerVector Total_NPP_BI_amt);
+RcppExport SEXP _grattan_sbto_avbl(SEXP Total_PP_BE_amtSEXP, SEXP Total_PP_BI_amtSEXP, SEXP Total_NPP_BE_amtSEXP, SEXP Total_NPP_BI_amtSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type Total_PP_BE_amt(Total_PP_BE_amtSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type Total_PP_BI_amt(Total_PP_BI_amtSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type Total_NPP_BE_amt(Total_NPP_BE_amtSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type Total_NPP_BI_amt(Total_NPP_BI_amtSEXP);
+    rcpp_result_gen = Rcpp::wrap(sbto_avbl(Total_PP_BE_amt, Total_PP_BI_amt, Total_NPP_BE_amt, Total_NPP_BI_amt));
+    return rcpp_result_gen;
+END_RCPP
+}
+// do_medicare_levy
+DoubleVector do_medicare_levy(IntegerVector income, IntegerVector spouse_income, IntegerVector is_married, LogicalVector sapto_eligible, IntegerVector n_dependants, bool sapto_const, int yr, int lwr_single, int lwr_family, int lwr_single_sapto, int lwr_family_sapto, int lwr_up_per_child, double taper, double rate);
+RcppExport SEXP _grattan_do_medicare_levy(SEXP incomeSEXP, SEXP spouse_incomeSEXP, SEXP is_marriedSEXP, SEXP sapto_eligibleSEXP, SEXP n_dependantsSEXP, SEXP sapto_constSEXP, SEXP yrSEXP, SEXP lwr_singleSEXP, SEXP lwr_familySEXP, SEXP lwr_single_saptoSEXP, SEXP lwr_family_saptoSEXP, SEXP lwr_up_per_childSEXP, SEXP taperSEXP, SEXP rateSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type income(incomeSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type spouse_income(spouse_incomeSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type is_married(is_marriedSEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type sapto_eligible(sapto_eligibleSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type n_dependants(n_dependantsSEXP);
+    Rcpp::traits::input_parameter< bool >::type sapto_const(sapto_constSEXP);
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    Rcpp::traits::input_parameter< int >::type lwr_single(lwr_singleSEXP);
+    Rcpp::traits::input_parameter< int >::type lwr_family(lwr_familySEXP);
+    Rcpp::traits::input_parameter< int >::type lwr_single_sapto(lwr_single_saptoSEXP);
+    Rcpp::traits::input_parameter< int >::type lwr_family_sapto(lwr_family_saptoSEXP);
+    Rcpp::traits::input_parameter< int >::type lwr_up_per_child(lwr_up_per_childSEXP);
+    Rcpp::traits::input_parameter< double >::type taper(taperSEXP);
+    Rcpp::traits::input_parameter< double >::type rate(rateSEXP);
+    rcpp_result_gen = Rcpp::wrap(do_medicare_levy(income, spouse_income, is_married, sapto_eligible, n_dependants, sapto_const, yr, lwr_single, lwr_family, lwr_single_sapto, lwr_family_sapto, lwr_up_per_child, taper, rate));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -163,8 +554,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // do_income_tax_sf
-DoubleVector do_income_tax_sf(int yr, R_xlen_t N, IntegerVector ic_taxable_income_loss, IntegerVector c_age_30_june, SEXP rebateIncome, IntegerVector is_net_rent, IntegerVector it_property_loss, IntegerVector it_rept_empl_super_cont, IntegerVector sc_empl_cont, IntegerVector it_rept_fringe_benefit, IntegerVector ds_pers_super_cont, IntegerVector it_invest_loss, IntegerVector spc_rebate_income, IntegerVector partner_status, IntegerVector n_dependants);
-RcppExport SEXP _grattan_do_income_tax_sf(SEXP yrSEXP, SEXP NSEXP, SEXP ic_taxable_income_lossSEXP, SEXP c_age_30_juneSEXP, SEXP rebateIncomeSEXP, SEXP is_net_rentSEXP, SEXP it_property_lossSEXP, SEXP it_rept_empl_super_contSEXP, SEXP sc_empl_contSEXP, SEXP it_rept_fringe_benefitSEXP, SEXP ds_pers_super_contSEXP, SEXP it_invest_lossSEXP, SEXP spc_rebate_incomeSEXP, SEXP partner_statusSEXP, SEXP n_dependantsSEXP) {
+DoubleVector do_income_tax_sf(int yr, R_xlen_t N, IntegerVector ic_taxable_income_loss, IntegerVector c_age_30_june, SEXP rebateIncome, IntegerVector is_net_rent, IntegerVector it_property_loss, IntegerVector it_rept_empl_super_cont, IntegerVector sc_empl_cont, IntegerVector it_rept_fringe_benefit, IntegerVector ds_pers_super_cont, IntegerVector it_invest_loss, IntegerVector spc_rebate_income, IntegerVector isn_sbi_net, LogicalVector is_married, IntegerVector n_dependants);
+RcppExport SEXP _grattan_do_income_tax_sf(SEXP yrSEXP, SEXP NSEXP, SEXP ic_taxable_income_lossSEXP, SEXP c_age_30_juneSEXP, SEXP rebateIncomeSEXP, SEXP is_net_rentSEXP, SEXP it_property_lossSEXP, SEXP it_rept_empl_super_contSEXP, SEXP sc_empl_contSEXP, SEXP it_rept_fringe_benefitSEXP, SEXP ds_pers_super_contSEXP, SEXP it_invest_lossSEXP, SEXP spc_rebate_incomeSEXP, SEXP isn_sbi_netSEXP, SEXP is_marriedSEXP, SEXP n_dependantsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
@@ -180,20 +571,49 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< IntegerVector >::type ds_pers_super_cont(ds_pers_super_contSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type it_invest_loss(it_invest_lossSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type spc_rebate_income(spc_rebate_incomeSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type partner_status(partner_statusSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type isn_sbi_net(isn_sbi_netSEXP);
+    Rcpp::traits::input_parameter< LogicalVector >::type is_married(is_marriedSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type n_dependants(n_dependantsSEXP);
-    rcpp_result_gen = Rcpp::wrap(do_income_tax_sf(yr, N, ic_taxable_income_loss, c_age_30_june, rebateIncome, is_net_rent, it_property_loss, it_rept_empl_super_cont, sc_empl_cont, it_rept_fringe_benefit, ds_pers_super_cont, it_invest_loss, spc_rebate_income, partner_status, n_dependants));
+    rcpp_result_gen = Rcpp::wrap(do_income_tax_sf(yr, N, ic_taxable_income_loss, c_age_30_june, rebateIncome, is_net_rent, it_property_loss, it_rept_empl_super_cont, sc_empl_cont, it_rept_fringe_benefit, ds_pers_super_cont, it_invest_loss, spc_rebate_income, isn_sbi_net, is_married, n_dependants));
     return rcpp_result_gen;
 END_RCPP
 }
-// medicare_levy_2018
-DoubleVector medicare_levy_2018(DoubleVector x, DoubleVector y);
-RcppExport SEXP _grattan_medicare_levy_2018(SEXP xSEXP, SEXP ySEXP) {
+// do_income_tax2
+DoubleVector do_income_tax2(IntegerVector ic_taxable_income_loss, int yr, IntegerVector c_age_30_june, SEXP rebateIncome, IntegerVector is_net_rent, IntegerVector it_property_loss, IntegerVector it_rept_empl_super_cont, IntegerVector sc_empl_cont, IntegerVector it_rept_fringe_benefit, IntegerVector ds_pers_super_cont, IntegerVector it_invest_loss, IntegerVector spc_rebate_income, IntegerVector isn_sbi_net, IntegerVector is_married, IntegerVector n_dependants, IntegerVector ordinary_tax_thresholds, DoubleVector ordinary_tax_rates, List offsets, double medicare_levy_taper, double medicare_levy_rate, double medicare_levy_lower_threshold, double medicare_levy_lower_sapto_threshold, double medicare_levy_lower_family_threshold, double medicare_levy_lower_family_sapto_threshold, double medicare_levy_lower_up_for_each_child, double sapto_max_offset, double sapto_lower_threshold, double sapto_taper, double sapto_max_offset_married, double sapto_lower_threshold_married);
+RcppExport SEXP _grattan_do_income_tax2(SEXP ic_taxable_income_lossSEXP, SEXP yrSEXP, SEXP c_age_30_juneSEXP, SEXP rebateIncomeSEXP, SEXP is_net_rentSEXP, SEXP it_property_lossSEXP, SEXP it_rept_empl_super_contSEXP, SEXP sc_empl_contSEXP, SEXP it_rept_fringe_benefitSEXP, SEXP ds_pers_super_contSEXP, SEXP it_invest_lossSEXP, SEXP spc_rebate_incomeSEXP, SEXP isn_sbi_netSEXP, SEXP is_marriedSEXP, SEXP n_dependantsSEXP, SEXP ordinary_tax_thresholdsSEXP, SEXP ordinary_tax_ratesSEXP, SEXP offsetsSEXP, SEXP medicare_levy_taperSEXP, SEXP medicare_levy_rateSEXP, SEXP medicare_levy_lower_thresholdSEXP, SEXP medicare_levy_lower_sapto_thresholdSEXP, SEXP medicare_levy_lower_family_thresholdSEXP, SEXP medicare_levy_lower_family_sapto_thresholdSEXP, SEXP medicare_levy_lower_up_for_each_childSEXP, SEXP sapto_max_offsetSEXP, SEXP sapto_lower_thresholdSEXP, SEXP sapto_taperSEXP, SEXP sapto_max_offset_marriedSEXP, SEXP sapto_lower_threshold_marriedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
-    Rcpp::traits::input_parameter< DoubleVector >::type x(xSEXP);
-    Rcpp::traits::input_parameter< DoubleVector >::type y(ySEXP);
-    rcpp_result_gen = Rcpp::wrap(medicare_levy_2018(x, y));
+    Rcpp::traits::input_parameter< IntegerVector >::type ic_taxable_income_loss(ic_taxable_income_lossSEXP);
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type c_age_30_june(c_age_30_juneSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type rebateIncome(rebateIncomeSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type is_net_rent(is_net_rentSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type it_property_loss(it_property_lossSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type it_rept_empl_super_cont(it_rept_empl_super_contSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type sc_empl_cont(sc_empl_contSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type it_rept_fringe_benefit(it_rept_fringe_benefitSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type ds_pers_super_cont(ds_pers_super_contSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type it_invest_loss(it_invest_lossSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type spc_rebate_income(spc_rebate_incomeSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type isn_sbi_net(isn_sbi_netSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type is_married(is_marriedSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type n_dependants(n_dependantsSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type ordinary_tax_thresholds(ordinary_tax_thresholdsSEXP);
+    Rcpp::traits::input_parameter< DoubleVector >::type ordinary_tax_rates(ordinary_tax_ratesSEXP);
+    Rcpp::traits::input_parameter< List >::type offsets(offsetsSEXP);
+    Rcpp::traits::input_parameter< double >::type medicare_levy_taper(medicare_levy_taperSEXP);
+    Rcpp::traits::input_parameter< double >::type medicare_levy_rate(medicare_levy_rateSEXP);
+    Rcpp::traits::input_parameter< double >::type medicare_levy_lower_threshold(medicare_levy_lower_thresholdSEXP);
+    Rcpp::traits::input_parameter< double >::type medicare_levy_lower_sapto_threshold(medicare_levy_lower_sapto_thresholdSEXP);
+    Rcpp::traits::input_parameter< double >::type medicare_levy_lower_family_threshold(medicare_levy_lower_family_thresholdSEXP);
+    Rcpp::traits::input_parameter< double >::type medicare_levy_lower_family_sapto_threshold(medicare_levy_lower_family_sapto_thresholdSEXP);
+    Rcpp::traits::input_parameter< double >::type medicare_levy_lower_up_for_each_child(medicare_levy_lower_up_for_each_childSEXP);
+    Rcpp::traits::input_parameter< double >::type sapto_max_offset(sapto_max_offsetSEXP);
+    Rcpp::traits::input_parameter< double >::type sapto_lower_threshold(sapto_lower_thresholdSEXP);
+    Rcpp::traits::input_parameter< double >::type sapto_taper(sapto_taperSEXP);
+    Rcpp::traits::input_parameter< double >::type sapto_max_offset_married(sapto_max_offset_marriedSEXP);
+    Rcpp::traits::input_parameter< double >::type sapto_lower_threshold_married(sapto_lower_threshold_marriedSEXP);
+    rcpp_result_gen = Rcpp::wrap(do_income_tax2(ic_taxable_income_loss, yr, c_age_30_june, rebateIncome, is_net_rent, it_property_loss, it_rept_empl_super_cont, sc_empl_cont, it_rept_fringe_benefit, ds_pers_super_cont, it_invest_loss, spc_rebate_income, isn_sbi_net, is_married, n_dependants, ordinary_tax_thresholds, ordinary_tax_rates, offsets, medicare_levy_taper, medicare_levy_rate, medicare_levy_lower_threshold, medicare_levy_lower_sapto_threshold, medicare_levy_lower_family_threshold, medicare_levy_lower_family_sapto_threshold, medicare_levy_lower_up_for_each_child, sapto_max_offset, sapto_lower_threshold, sapto_taper, sapto_max_offset_married, sapto_lower_threshold_married));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -287,13 +707,49 @@ static const R_CallMethodDef CallEntries[] = {
     {"_grattan_MedicareLevy", (DL_FUNC) &_grattan_MedicareLevy, 11},
     {"_grattan_Offset", (DL_FUNC) &_grattan_Offset, 4},
     {"_grattan_MultiOffset", (DL_FUNC) &_grattan_MultiOffset, 5},
+    {"_grattan_ML_LWR_THR_UP_PER_CHILD", (DL_FUNC) &_grattan_ML_LWR_THR_UP_PER_CHILD, 1},
+    {"_grattan_ML_LWR_THRESHOLD_SINGLE", (DL_FUNC) &_grattan_ML_LWR_THRESHOLD_SINGLE, 1},
+    {"_grattan_ML_UPR_THRESHOLD_SINGLE", (DL_FUNC) &_grattan_ML_UPR_THRESHOLD_SINGLE, 1},
+    {"_grattan_ML_LWR_THRESHOLD_FAMILY", (DL_FUNC) &_grattan_ML_LWR_THRESHOLD_FAMILY, 1},
+    {"_grattan_ML_UPR_THRESHOLD_FAMILY", (DL_FUNC) &_grattan_ML_UPR_THRESHOLD_FAMILY, 1},
+    {"_grattan_ML_TAPER", (DL_FUNC) &_grattan_ML_TAPER, 1},
+    {"_grattan_ML_RATE", (DL_FUNC) &_grattan_ML_RATE, 1},
+    {"_grattan_LITO_MAX_OFFSET", (DL_FUNC) &_grattan_LITO_MAX_OFFSET, 1},
+    {"_grattan_LITO_1ST_TAPER", (DL_FUNC) &_grattan_LITO_1ST_TAPER, 1},
+    {"_grattan_LITO_1ST_THRESH", (DL_FUNC) &_grattan_LITO_1ST_THRESH, 1},
+    {"_grattan_SAPTO_MAX_SINGLE", (DL_FUNC) &_grattan_SAPTO_MAX_SINGLE, 1},
+    {"_grattan_SAPTO_MAX_MARRIED", (DL_FUNC) &_grattan_SAPTO_MAX_MARRIED, 1},
+    {"_grattan_SAPTO_LWR_SINGLE", (DL_FUNC) &_grattan_SAPTO_LWR_SINGLE, 1},
+    {"_grattan_SAPTO_LWR_MARRIED", (DL_FUNC) &_grattan_SAPTO_LWR_MARRIED, 1},
+    {"_grattan_SAPTO_TAPER", (DL_FUNC) &_grattan_SAPTO_TAPER, 1},
+    {"_grattan_ML_LWR_THRESHOLD_SINGLE_SAPTO", (DL_FUNC) &_grattan_ML_LWR_THRESHOLD_SINGLE_SAPTO, 1},
+    {"_grattan_ML_UPR_THRESHOLD_SINGLE_SAPTO", (DL_FUNC) &_grattan_ML_UPR_THRESHOLD_SINGLE_SAPTO, 1},
+    {"_grattan_ML_LWR_THRESHOLD_FAMILY_SAPTO", (DL_FUNC) &_grattan_ML_LWR_THRESHOLD_FAMILY_SAPTO, 1},
+    {"_grattan_ML_UPR_THRESHOLD_FAMILY_SAPTO", (DL_FUNC) &_grattan_ML_UPR_THRESHOLD_FAMILY_SAPTO, 1},
+    {"_grattan_ML_LWR_THRESHOLD_SINGLE_PTO", (DL_FUNC) &_grattan_ML_LWR_THRESHOLD_SINGLE_PTO, 1},
+    {"_grattan_ML_LWR_THRESHOLD_FAMILY_PTO", (DL_FUNC) &_grattan_ML_LWR_THRESHOLD_FAMILY_PTO, 1},
+    {"_grattan_SAPTO_UPR_MARRIED", (DL_FUNC) &_grattan_SAPTO_UPR_MARRIED, 1},
+    {"_grattan_SAPTO_UPR_SINGLE", (DL_FUNC) &_grattan_SAPTO_UPR_SINGLE, 1},
+    {"_grattan_SAPTO_MAX_ILL_SEP", (DL_FUNC) &_grattan_SAPTO_MAX_ILL_SEP, 1},
+    {"_grattan_SAPTO_LWR_ILL_SEP", (DL_FUNC) &_grattan_SAPTO_LWR_ILL_SEP, 1},
+    {"_grattan_SBTO_DISCOUNT", (DL_FUNC) &_grattan_SBTO_DISCOUNT, 1},
+    {"_grattan_LITO_2ND_THRESH", (DL_FUNC) &_grattan_LITO_2ND_THRESH, 1},
+    {"_grattan_LITO_2ND_TAPER", (DL_FUNC) &_grattan_LITO_2ND_TAPER, 1},
+    {"_grattan_LMITO_1ST_OFFSET", (DL_FUNC) &_grattan_LMITO_1ST_OFFSET, 1},
+    {"_grattan_LMITO_THRESHS", (DL_FUNC) &_grattan_LMITO_THRESHS, 1},
+    {"_grattan_LMITO_TAPERS", (DL_FUNC) &_grattan_LMITO_TAPERS, 1},
+    {"_grattan_ORD_TAX_BRACK", (DL_FUNC) &_grattan_ORD_TAX_BRACK, 1},
+    {"_grattan_ORD_TAX_RATES", (DL_FUNC) &_grattan_ORD_TAX_RATES, 1},
+    {"_grattan_do_rN", (DL_FUNC) &_grattan_do_rN, 3},
     {"_grattan_decode_age_range", (DL_FUNC) &_grattan_decode_age_range, 1},
-    {"_grattan_do_lito", (DL_FUNC) &_grattan_do_lito, 2},
     {"_grattan_do_lmito", (DL_FUNC) &_grattan_do_lmito, 1},
     {"_grattan_verify_NA_ALIAS", (DL_FUNC) &_grattan_verify_NA_ALIAS, 1},
+    {"_grattan_do_sapto", (DL_FUNC) &_grattan_do_sapto, 15},
+    {"_grattan_sbto_avbl", (DL_FUNC) &_grattan_sbto_avbl, 4},
+    {"_grattan_do_medicare_levy", (DL_FUNC) &_grattan_do_medicare_levy, 14},
     {"_grattan_do_rebate_income", (DL_FUNC) &_grattan_do_rebate_income, 9},
-    {"_grattan_do_income_tax_sf", (DL_FUNC) &_grattan_do_income_tax_sf, 15},
-    {"_grattan_medicare_levy_2018", (DL_FUNC) &_grattan_medicare_levy_2018, 2},
+    {"_grattan_do_income_tax_sf", (DL_FUNC) &_grattan_do_income_tax_sf, 16},
+    {"_grattan_do_income_tax2", (DL_FUNC) &_grattan_do_income_tax2, 30},
     {"_grattan_do_sapto_rcpp", (DL_FUNC) &_grattan_do_sapto_rcpp, 7},
     {"_grattan_do_sapto_rcpp2", (DL_FUNC) &_grattan_do_sapto_rcpp2, 10},
     {"_grattan_sapto_rcpp_singleton", (DL_FUNC) &_grattan_sapto_rcpp_singleton, 7},

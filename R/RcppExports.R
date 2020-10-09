@@ -74,6 +74,138 @@ MultiOffset <- function(x, first_offset, thresholds, tapers, above_zero = TRUE) 
     .Call(`_grattan_MultiOffset`, x, first_offset, thresholds, tapers, above_zero)
 }
 
+ML_LWR_THR_UP_PER_CHILD <- function(yr) {
+    .Call(`_grattan_ML_LWR_THR_UP_PER_CHILD`, yr)
+}
+
+ML_LWR_THRESHOLD_SINGLE <- function(yr) {
+    .Call(`_grattan_ML_LWR_THRESHOLD_SINGLE`, yr)
+}
+
+ML_UPR_THRESHOLD_SINGLE <- function(yr) {
+    .Call(`_grattan_ML_UPR_THRESHOLD_SINGLE`, yr)
+}
+
+ML_LWR_THRESHOLD_FAMILY <- function(yr) {
+    .Call(`_grattan_ML_LWR_THRESHOLD_FAMILY`, yr)
+}
+
+ML_UPR_THRESHOLD_FAMILY <- function(yr) {
+    .Call(`_grattan_ML_UPR_THRESHOLD_FAMILY`, yr)
+}
+
+ML_TAPER <- function(yr) {
+    .Call(`_grattan_ML_TAPER`, yr)
+}
+
+ML_RATE <- function(yr) {
+    .Call(`_grattan_ML_RATE`, yr)
+}
+
+LITO_MAX_OFFSET <- function(yr) {
+    .Call(`_grattan_LITO_MAX_OFFSET`, yr)
+}
+
+LITO_1ST_TAPER <- function(yr) {
+    .Call(`_grattan_LITO_1ST_TAPER`, yr)
+}
+
+LITO_1ST_THRESH <- function(yr) {
+    .Call(`_grattan_LITO_1ST_THRESH`, yr)
+}
+
+SAPTO_MAX_SINGLE <- function(yr) {
+    .Call(`_grattan_SAPTO_MAX_SINGLE`, yr)
+}
+
+SAPTO_MAX_MARRIED <- function(yr) {
+    .Call(`_grattan_SAPTO_MAX_MARRIED`, yr)
+}
+
+SAPTO_LWR_SINGLE <- function(yr) {
+    .Call(`_grattan_SAPTO_LWR_SINGLE`, yr)
+}
+
+SAPTO_LWR_MARRIED <- function(yr) {
+    .Call(`_grattan_SAPTO_LWR_MARRIED`, yr)
+}
+
+SAPTO_TAPER <- function(yr) {
+    .Call(`_grattan_SAPTO_TAPER`, yr)
+}
+
+ML_LWR_THRESHOLD_SINGLE_SAPTO <- function(yr) {
+    .Call(`_grattan_ML_LWR_THRESHOLD_SINGLE_SAPTO`, yr)
+}
+
+ML_UPR_THRESHOLD_SINGLE_SAPTO <- function(yr) {
+    .Call(`_grattan_ML_UPR_THRESHOLD_SINGLE_SAPTO`, yr)
+}
+
+ML_LWR_THRESHOLD_FAMILY_SAPTO <- function(yr) {
+    .Call(`_grattan_ML_LWR_THRESHOLD_FAMILY_SAPTO`, yr)
+}
+
+ML_UPR_THRESHOLD_FAMILY_SAPTO <- function(yr) {
+    .Call(`_grattan_ML_UPR_THRESHOLD_FAMILY_SAPTO`, yr)
+}
+
+ML_LWR_THRESHOLD_SINGLE_PTO <- function(yr) {
+    .Call(`_grattan_ML_LWR_THRESHOLD_SINGLE_PTO`, yr)
+}
+
+ML_LWR_THRESHOLD_FAMILY_PTO <- function(yr) {
+    .Call(`_grattan_ML_LWR_THRESHOLD_FAMILY_PTO`, yr)
+}
+
+SAPTO_UPR_MARRIED <- function(yr) {
+    .Call(`_grattan_SAPTO_UPR_MARRIED`, yr)
+}
+
+SAPTO_UPR_SINGLE <- function(yr) {
+    .Call(`_grattan_SAPTO_UPR_SINGLE`, yr)
+}
+
+SAPTO_MAX_ILL_SEP <- function(yr) {
+    .Call(`_grattan_SAPTO_MAX_ILL_SEP`, yr)
+}
+
+SAPTO_LWR_ILL_SEP <- function(yr) {
+    .Call(`_grattan_SAPTO_LWR_ILL_SEP`, yr)
+}
+
+SBTO_DISCOUNT <- function(yr) {
+    .Call(`_grattan_SBTO_DISCOUNT`, yr)
+}
+
+LITO_2ND_THRESH <- function(yr) {
+    .Call(`_grattan_LITO_2ND_THRESH`, yr)
+}
+
+LITO_2ND_TAPER <- function(yr) {
+    .Call(`_grattan_LITO_2ND_TAPER`, yr)
+}
+
+LMITO_1ST_OFFSET <- function(yr) {
+    .Call(`_grattan_LMITO_1ST_OFFSET`, yr)
+}
+
+LMITO_THRESHS <- function(yr) {
+    .Call(`_grattan_LMITO_THRESHS`, yr)
+}
+
+LMITO_TAPERS <- function(yr) {
+    .Call(`_grattan_LMITO_TAPERS`, yr)
+}
+
+ORD_TAX_BRACK <- function(yr) {
+    .Call(`_grattan_ORD_TAX_BRACK`, yr)
+}
+
+ORD_TAX_RATES <- function(yr) {
+    .Call(`_grattan_ORD_TAX_RATES`, yr)
+}
+
 #' @name do_income_tax
 #' @title Internal function for income tax.
 #' @description Accepts a sample file-like List and a tax year and returns
@@ -86,12 +218,12 @@ MultiOffset <- function(x, first_offset, thresholds, tapers, above_zero = TRUE) 
 #' @noRd
 NULL
 
-decode_age_range <- function(X) {
-    .Call(`_grattan_decode_age_range`, X)
+do_rN <- function(x, N, max_allowed = 99e6) {
+    .Call(`_grattan_do_rN`, x, N, max_allowed)
 }
 
-do_lito <- function(x, yr) {
-    .Call(`_grattan_do_lito`, x, yr)
+decode_age_range <- function(X) {
+    .Call(`_grattan_decode_age_range`, X)
 }
 
 do_lmito <- function(x) {
@@ -102,16 +234,28 @@ verify_NA_ALIAS <- function(x = 0L) {
     .Call(`_grattan_verify_NA_ALIAS`, x)
 }
 
+do_sapto <- function(x, y, Age, isMarried, max_single = 2230, max_couple = 1602, lwr_single = 32279, lwr_couple = 28974, taper = -0.125, tax_free_thresh = 18200, first_tax_rate = 0.19, second_tax_rate = 0.325, lito_max_offset = 445, lito_1st_thresh = 37e3, lito_1st_taper = -0.015) {
+    .Call(`_grattan_do_sapto`, x, y, Age, isMarried, max_single, max_couple, lwr_single, lwr_couple, taper, tax_free_thresh, first_tax_rate, second_tax_rate, lito_max_offset, lito_1st_thresh, lito_1st_taper)
+}
+
+sbto_avbl <- function(Total_PP_BE_amt, Total_PP_BI_amt, Total_NPP_BE_amt, Total_NPP_BI_amt) {
+    .Call(`_grattan_sbto_avbl`, Total_PP_BE_amt, Total_PP_BI_amt, Total_NPP_BE_amt, Total_NPP_BI_amt)
+}
+
+do_medicare_levy <- function(income, spouse_income, is_married, sapto_eligible, n_dependants, sapto_const = FALSE, yr = NA_integer_, lwr_single = 21980L, lwr_family = 37089L, lwr_single_sapto = 34758L, lwr_family_sapto = 48385L, lwr_up_per_child = 2253L, taper = 0.1, rate = 0.02) {
+    .Call(`_grattan_do_medicare_levy`, income, spouse_income, is_married, sapto_eligible, n_dependants, sapto_const, yr, lwr_single, lwr_family, lwr_single_sapto, lwr_family_sapto, lwr_up_per_child, taper, rate)
+}
+
 do_rebate_income <- function(rebateIncome, ic_taxable_income_loss, it_rept_empl_super_cont, sc_empl_cont, ds_pers_super_cont, it_invest_loss, is_net_rent, it_rept_fringe_benefit, yr) {
     .Call(`_grattan_do_rebate_income`, rebateIncome, ic_taxable_income_loss, it_rept_empl_super_cont, sc_empl_cont, ds_pers_super_cont, it_invest_loss, is_net_rent, it_rept_fringe_benefit, yr)
 }
 
-do_income_tax_sf <- function(yr, N, ic_taxable_income_loss, c_age_30_june, rebateIncome, is_net_rent, it_property_loss, it_rept_empl_super_cont, sc_empl_cont, it_rept_fringe_benefit, ds_pers_super_cont, it_invest_loss, spc_rebate_income, partner_status, n_dependants) {
-    .Call(`_grattan_do_income_tax_sf`, yr, N, ic_taxable_income_loss, c_age_30_june, rebateIncome, is_net_rent, it_property_loss, it_rept_empl_super_cont, sc_empl_cont, it_rept_fringe_benefit, ds_pers_super_cont, it_invest_loss, spc_rebate_income, partner_status, n_dependants)
+do_income_tax_sf <- function(yr, N, ic_taxable_income_loss, c_age_30_june, rebateIncome, is_net_rent, it_property_loss, it_rept_empl_super_cont, sc_empl_cont, it_rept_fringe_benefit, ds_pers_super_cont, it_invest_loss, spc_rebate_income, isn_sbi_net, is_married, n_dependants) {
+    .Call(`_grattan_do_income_tax_sf`, yr, N, ic_taxable_income_loss, c_age_30_june, rebateIncome, is_net_rent, it_property_loss, it_rept_empl_super_cont, sc_empl_cont, it_rept_fringe_benefit, ds_pers_super_cont, it_invest_loss, spc_rebate_income, isn_sbi_net, is_married, n_dependants)
 }
 
-medicare_levy_2018 <- function(x, y) {
-    .Call(`_grattan_medicare_levy_2018`, x, y)
+do_income_tax2 <- function(ic_taxable_income_loss, yr, c_age_30_june, rebateIncome, is_net_rent, it_property_loss, it_rept_empl_super_cont, sc_empl_cont, it_rept_fringe_benefit, ds_pers_super_cont, it_invest_loss, spc_rebate_income, isn_sbi_net, is_married, n_dependants, ordinary_tax_thresholds, ordinary_tax_rates, offsets, medicare_levy_taper = 0.1, medicare_levy_rate = 0.02, medicare_levy_lower_threshold = 22801, medicare_levy_lower_sapto_threshold = 36056, medicare_levy_lower_family_threshold = 35474, medicare_levy_lower_family_sapto_threshold = 50191, medicare_levy_lower_up_for_each_child = 3533, sapto_max_offset = 2230, sapto_lower_threshold = 32279, sapto_taper = -0.125, sapto_max_offset_married = 1602, sapto_lower_threshold_married = 41790) {
+    .Call(`_grattan_do_income_tax2`, ic_taxable_income_loss, yr, c_age_30_june, rebateIncome, is_net_rent, it_property_loss, it_rept_empl_super_cont, sc_empl_cont, it_rept_fringe_benefit, ds_pers_super_cont, it_invest_loss, spc_rebate_income, isn_sbi_net, is_married, n_dependants, ordinary_tax_thresholds, ordinary_tax_rates, offsets, medicare_levy_taper, medicare_levy_rate, medicare_levy_lower_threshold, medicare_levy_lower_sapto_threshold, medicare_levy_lower_family_threshold, medicare_levy_lower_family_sapto_threshold, medicare_levy_lower_up_for_each_child, sapto_max_offset, sapto_lower_threshold, sapto_taper, sapto_max_offset_married, sapto_lower_threshold_married)
 }
 
 do_sapto_rcpp <- function(RebateIncome, MaxOffset, LowerThreshold, TaperRate, SaptoEligible, SpouseIncome, IsMarried) {

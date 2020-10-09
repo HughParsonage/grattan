@@ -13,7 +13,8 @@ medicare_levy(
   pto = NULL,
   family_status = "individual",
   n_dependants = 0L,
-  is_married = NULL
+  is_married = NULL,
+  .checks = FALSE
 )
 }
 \arguments{
