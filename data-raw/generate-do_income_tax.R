@@ -54,6 +54,10 @@ for (.yr in c(NA, 1990:2030)) {
     cl("apply_lmito(taxi, xd);")
   }
   
+  if (yr >= 2016) {
+    cg("apply_sbto(taxi, xi, net_sbi, SBTO_DISCOUNT_{YEAR}, 1);")
+  }
+  
   
   cg("\n")
   cg("// Medicare levy")
@@ -298,7 +302,8 @@ for (YEAR in 1984:2012) {
 }
 
 
-
+library(hutils)
+ g <- glue::glue
 cg <- function(...) base::cat(g(...), "\n", file = "src/tmp_income_tax.cpp", sep = "", append = TRUE)
 cl <- function(...) base::cat(..., "\n", file = "src/tmp_income_tax.cpp", sep = "", append = TRUE)
 for (YEAR in 1984:2030) {
@@ -306,7 +311,7 @@ for (YEAR in 1984:2030) {
     cl("switch(yr) {")
   }
   cl("case ", YEAR, ": {")
-  if (YEAR >= 2000L) {
+  if (YEAR > 2000L) {
     cl("// Create a Sapto struct for this year")
     cg("Sapto Sapto{YEAR};")
     cg("Sapto{YEAR}.year = {YEAR};")
@@ -319,18 +324,20 @@ for (YEAR in 1984:2030) {
     cg("Sapto{YEAR}.upr_couple = SAPTO_LWR_MARRIED_{YEAR} + SAPTO_MAX_MARRIED_{YEAR} / SAPTO_TAPER_{YEAR};")
     cg("Sapto{YEAR}.taper = SAPTO_TAPER_{YEAR};")
     cg("Sapto{YEAR}.first_tax_rate = ORD_TAX_RATES_{YEAR}[1];")
+    cg("Sapto{YEAR}.second_tax_rate = ORD_TAX_RATES_{YEAR}[2];")
     cg("Sapto{YEAR}.tax_free_thresh = ORD_TAX_BRACK_{YEAR}[1];")
+    cg("Sapto{YEAR}.tax_2nd_thresh = ORD_TAX_BRACK_{YEAR}[2];")
     cg("Sapto{YEAR}.lito_max_offset = LITO_MAX_OFFSET_{YEAR};")
+    cg("Sapto{YEAR}.lito_1st_thresh = LITO_1ST_THRESH_{YEAR};")
+    cg("Sapto{YEAR}.lito_1st_taper =  LITO_1ST_TAPER_{YEAR};")
     cl("")
   }
-  
-  
   cg("Medicare M{YEAR};")
   cg("M{YEAR}.lwr_single = ML_LWR_THRESHOLD_SINGLE_{YEAR};")
   cg("M{YEAR}.upr_single = ML_UPR_THRESHOLD_SINGLE_{YEAR};")
   cg("M{YEAR}.lwr_family = ML_LWR_THRESHOLD_FAMILY_{YEAR};")
   cg("M{YEAR}.upr_family = ML_UPR_THRESHOLD_FAMILY_{YEAR};")
-  if (YEAR >= 2000L) {
+  if (YEAR > 2000L) {
     cg("M{YEAR}.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_{YEAR};")
     cg("M{YEAR}.upr_single_sapto = ML_UPR_THRESHOLD_SINGLE_SAPTO_{YEAR};")
     cg("M{YEAR}.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_{YEAR};")
@@ -345,50 +352,50 @@ for (YEAR in 1984:2030) {
   cl("{")
   cl("for (R_xlen_t i = 0; i < N; ++i) {")
   cl("Person P;")
-  cl("int xi = ic_taxable_income_loss[i];")
-  cl("double taxi = 0;")
-  cl("")
-  cl("P.xi = xi;")
-  cl("P.yi = spc_rebate_income[i];")
+  cl("P.xi = ic_taxable_income_loss[i];")
+  cl("P.yi = c0(spc_rebate_income[i]);")
   cl("P.agei = c_age_30_june[i];")
   cl("P.is_married = partner_status[i];")
   cl("P.n_child = n_dependants[i];")
   cl("P.is_family = P.is_married || P.n_child;")
   cl("")
-  cg("taxi += income_taxi_nb(xi, ORD_TAX_BRACK_{YEAR}, ORD_TAX_RATES_{YEAR});")
+  cg("double taxi = income_taxi_nb(P.xi, ORD_TAX_BRACK_{YEAR}, ORD_TAX_RATES_{YEAR});")
   # SAPTO
-  if (YEAR >= 2000L) {
-  cg("apply_sapto(taxi, Person, Sapto{YEAR});")
+  if (YEAR > 2000L) {
+  cg("apply_sapto(taxi, P, Sapto{YEAR});")
   }
   
   
   # LITO
   if (YEAR >= 1994) {
     if (YEAR <= 2023) {
-      cg("apply_lito(taxi, xi, LITO_MAX_OFFSET_{YEAR}, LITO_1ST_THRESH_{YEAR}, LITO_1ST_TAPER_{YEAR});")
+      cg("apply_lito(taxi, P.xi, LITO_MAX_OFFSET_{YEAR}, LITO_1ST_THRESH_{YEAR}, LITO_1ST_TAPER_{YEAR});")
     } else {
-      cg("apply_lito(taxi, xi, LITO_MAX_OFFSET_{YEAR}, LITO_1ST_THRESH_{YEAR}, LITO_1ST_TAPER_{YEAR}, LITO_2ND_THRESH_{YEAR}, LITO_2ND_TAPER_{YEAR});")
+      cg("apply_lito(taxi, P.xi, LITO_MAX_OFFSET_{YEAR}, LITO_1ST_THRESH_{YEAR}, LITO_1ST_TAPER_{YEAR}, LITO_2ND_THRESH_{YEAR}, LITO_2ND_TAPER_{YEAR});")
     }
   }
   
   if (YEAR >= 2019 && YEAR <= 2022) {
-    cl("apply_lmito(taxi, xd);")
+    cl("apply_lmito(taxi, P.xi);")
   }
+  if (YEAR >= 2016) {
+    cg("apply_sbto(taxi, P, SBTO_DISCOUNT_{YEAR});")
+  }
+  
   cg("")
   cg("// Medicare levy")
-  cg("double ml = do_1_ML(P, M{YEAR});")
-  cl("taxi += ml;")
+  cg("taxi += do_1_ML(P, M{YEAR});")
   cl("")
   if (YEAR == 2011 || YEAR == 2015 || YEAR == 2016 || YEAR == 2017) {
-    cl("// Budget levies")
+    # cl("// Budget levies")
   }
   if (YEAR == 2011) {
     cl("// flood levy")
-    cl("taxi += 0.005 * (max0(xd - 50000) * max0(xd - 100000));")
+    cl("taxi += FLOOD_LEVY_TAPER_2011 * (max0(P.xi - FLOOD_LEVY_1ST_THRESH_2011) * max0(P.xi - FLOOD_LEVY_2ND_THRESH_2011));")
   }
   if (YEAR >= 2015 && YEAR <= 2017) {
     cl("// temporary budget repair levy")
-    cl("taxi += TEMP_BUDGET_REPAIR_LEVY_RATE * max0(xd - TEMP_BUDGET_REPAIR_LEVY_THRESH);")
+    cl("taxi += TEMP_BUDGET_REPAIR_LEVY_RATE * max0(P.xi - TEMP_BUDGET_REPAIR_LEVY_THRESH);")
   }
   cl("")
   cl("// finally")
@@ -403,6 +410,65 @@ for (YEAR in 1984:2030) {
   }
   cl("")
 }
+
+consts <- 
+  dir(path = "src/yrs/", 
+      pattern = "\\.h$",
+      full.names = TRUE) %>%
+  lapply(readLines) %>%
+  lapply(grep, pattern = "_([12][0-9]{3}) = ", value = TRUE) %>%
+  unlist
+
+uconsts <- (unique(sub("(constexpr double ([A-Z_0-9]+))_[12][0-9]{3} = .*$", "\\1", consts)))
+
+g <- glue::glue
+cat <- function(...) base::cat(..., file = "src/constants.cpp", append = TRUE, sep = "")
+cat("\n\n")
+for (ucon in uconsts) {
+  yrs <- sub("(constexpr double ([A-Z_0-9]+))_([12][0-9]{3}) = .*$", "\\3", 
+             grep(g("^{ucon}_[12][0-9]{{3}} = "), 
+                  consts, 
+                  value = TRUE))
+  if (length(yrs) <= 2) {
+    next
+  }
+  
+  cat("// [[Rcpp::export(rng = false)]]\n")
+  cat(sub("constexpr ", "", ucon),
+      "(int yr) {\n",
+      "switch (yr) {\n")
+      for (yr in yrs) 
+        cat("case ", yr, ": return ", paste0(sub("constexpr double ", "", ucon), "_", yr), ";\n")
+  cat("}\n",
+      "return NA_REAL;\n",
+      "}\n\n")
+      
+}
+
+bracks <- 
+  dir(path = "src/yrs/", 
+      pattern = "\\.h$", 
+      full.names = TRUE) %>%
+  lapply(readLines) %>%
+  unlist %>%
+  grep(pattern = "ORD_TAX_BRACK", x = ., value = TRUE) %>%
+  unique
+  
+cat <- function(...) base::cat(..., file = "src/constants.cpp", append = TRUE, sep = "")
+cat("\n// tax brackets\n")
+
+  cat("// [[Rcpp::export(rng = false)]]\n")
+  cat("NumericVector ORD_TAX_BRACK(int yr) {\n")
+  cat("switch(yr) {\n")
+  
+  for (yr in 1984:2030) {  
+    cat("case ", yr, ":")
+    cat("return array2dbl(ORD_TAX_BRACK_", yr, ");\n")
+  }
+  cat("}\n")
+  cat("}\n")
+}
+
 
 
 

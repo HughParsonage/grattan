@@ -220,3 +220,76 @@ test_that("Errors in sapto_rcpp", {
 })
 
 
+test_that("Specific SAPTO calculator - spouse transfer", {
+  expect_equal(ceiling(do_sapto(29176, 34443, Age = 70, isMarried = TRUE,
+                                max_single = 2230, 
+                                max_couple = 1602, 
+                                lwr_single = 32279, 
+                                lwr_couple = 28974, 
+                                taper = -0.125, 
+                                tax_free_thresh = 18200, 
+                                first_tax_rate = 0.19,
+                                second_tax_rate = 0.325, 
+                                lito_max_offset = 445, 
+                                lito_1st_thresh = 37000, 
+                                lito_1st_taper = -0.015)),
+               1577)
+  expect_equal(ceiling(do_sapto(y = 29176, 34443, Age = 70, isMarried = TRUE,
+                                max_single = 2230, 
+                                max_couple = 1602, 
+                                lwr_single = 32279, 
+                                lwr_couple = 28974, 
+                                taper = -0.125, 
+                                tax_free_thresh = 18200, 
+                                first_tax_rate = 0.19,
+                                second_tax_rate = 0.325, 
+                                lito_max_offset = 445, 
+                                lito_1st_thresh = 37000, 
+                                lito_1st_taper = -0.015)),
+               919)
+  expect_equal(ceiling(do_sapto(37230, 0, Age = 70, isMarried = TRUE,
+                                max_single = 2230, 
+                                max_couple = 1602, 
+                                lwr_single = 32279, 
+                                lwr_couple = 28974, 
+                                taper = -0.125, 
+                                tax_free_thresh = 18200, 
+                                first_tax_rate = 0.19,
+                                second_tax_rate = 0.325, 
+                                lito_max_offset = 445, 
+                                lito_1st_thresh = 37000, 
+                                lito_1st_taper = -0.015)),
+               # ATO Calculator says 570 but
+               # 3204 is more correct
+               # 570)
+               3204)
+  
+  expect_equal(ceiling(do_sapto(37230, 9000, Age = 70, isMarried = TRUE,
+                                max_single = 2230, 
+                                max_couple = 1602, 
+                                lwr_single = 32279, 
+                                lwr_couple = 28974, 
+                                taper = -0.125, 
+                                tax_free_thresh = 18200, 
+                                first_tax_rate = 0.19,
+                                second_tax_rate = 0.325, 
+                                lito_max_offset = 445, 
+                                lito_1st_thresh = 37000, 
+                                lito_1st_taper = -0.015)),
+               2480)
+  
+  expect_equal(ceiling(do_sapto(37230, 10e3, Age = 70, isMarried = TRUE,
+                                max_single = 2230, 
+                                max_couple = 1602, 
+                                lwr_single = 32279, 
+                                lwr_couple = 28974, 
+                                taper = -0.125, 
+                                tax_free_thresh = 18200, 
+                                first_tax_rate = 0.19,
+                                second_tax_rate = 0.325, 
+                                lito_max_offset = 445, 
+                                lito_1st_thresh = 37000, 
+                                lito_1st_taper = -0.015)),
+               2232)
+})
+

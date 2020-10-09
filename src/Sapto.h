@@ -20,7 +20,6 @@ struct Sapto {
   double lito_max_offset;
   double lito_1st_thresh;
   double lito_1st_taper;
-
 };
 
 // s12 of Income Tax Assessment (1936 Act) Regulation 2015

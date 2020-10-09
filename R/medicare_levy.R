@@ -69,7 +69,8 @@ medicare_levy <- function(income,
                           pto = NULL,
                           family_status = "individual", 
                           n_dependants = 0L,
-                          is_married = NULL) {
+                          is_married = NULL,
+                          .checks = FALSE) {
   fy.year <- validate_fys_permitted(fy.year)
   N <- length(income)
   
