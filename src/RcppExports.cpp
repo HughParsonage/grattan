@@ -433,6 +433,26 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// LEVY_BRACK
+IntegerVector LEVY_BRACK(int yr);
+RcppExport SEXP _grattan_LEVY_BRACK(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(LEVY_BRACK(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// LEVY_RATES
+DoubleVector LEVY_RATES(int yr);
+RcppExport SEXP _grattan_LEVY_RATES(SEXP yrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< int >::type yr(yrSEXP);
+    rcpp_result_gen = Rcpp::wrap(LEVY_RATES(yr));
+    return rcpp_result_gen;
+END_RCPP
+}
 // do_rN
 IntegerVector do_rN(DoubleVector x, R_xlen_t N, double max_allowed);
 RcppExport SEXP _grattan_do_rN(SEXP xSEXP, SEXP NSEXP, SEXP max_allowedSEXP) {
@@ -446,12 +466,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // decode_age_range
-SEXP decode_age_range(SEXP X);
-RcppExport SEXP _grattan_decode_age_range(SEXP XSEXP) {
+SEXP decode_age_range(SEXP X, int m);
+RcppExport SEXP _grattan_decode_age_range(SEXP XSEXP, SEXP mSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< SEXP >::type X(XSEXP);
-    rcpp_result_gen = Rcpp::wrap(decode_age_range(X));
+    Rcpp::traits::input_parameter< int >::type m(mSEXP);
+    rcpp_result_gen = Rcpp::wrap(decode_age_range(X, m));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -579,8 +600,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // do_income_tax2
-DoubleVector do_income_tax2(IntegerVector ic_taxable_income_loss, int yr, IntegerVector c_age_30_june, SEXP rebateIncome, IntegerVector is_net_rent, IntegerVector it_property_loss, IntegerVector it_rept_empl_super_cont, IntegerVector sc_empl_cont, IntegerVector it_rept_fringe_benefit, IntegerVector ds_pers_super_cont, IntegerVector it_invest_loss, IntegerVector spc_rebate_income, IntegerVector isn_sbi_net, IntegerVector is_married, IntegerVector n_dependants, IntegerVector ordinary_tax_thresholds, DoubleVector ordinary_tax_rates, List offsets, double medicare_levy_taper, double medicare_levy_rate, double medicare_levy_lower_threshold, double medicare_levy_lower_sapto_threshold, double medicare_levy_lower_family_threshold, double medicare_levy_lower_family_sapto_threshold, double medicare_levy_lower_up_for_each_child, double sapto_max_offset, double sapto_lower_threshold, double sapto_taper, double sapto_max_offset_married, double sapto_lower_threshold_married);
-RcppExport SEXP _grattan_do_income_tax2(SEXP ic_taxable_income_lossSEXP, SEXP yrSEXP, SEXP c_age_30_juneSEXP, SEXP rebateIncomeSEXP, SEXP is_net_rentSEXP, SEXP it_property_lossSEXP, SEXP it_rept_empl_super_contSEXP, SEXP sc_empl_contSEXP, SEXP it_rept_fringe_benefitSEXP, SEXP ds_pers_super_contSEXP, SEXP it_invest_lossSEXP, SEXP spc_rebate_incomeSEXP, SEXP isn_sbi_netSEXP, SEXP is_marriedSEXP, SEXP n_dependantsSEXP, SEXP ordinary_tax_thresholdsSEXP, SEXP ordinary_tax_ratesSEXP, SEXP offsetsSEXP, SEXP medicare_levy_taperSEXP, SEXP medicare_levy_rateSEXP, SEXP medicare_levy_lower_thresholdSEXP, SEXP medicare_levy_lower_sapto_thresholdSEXP, SEXP medicare_levy_lower_family_thresholdSEXP, SEXP medicare_levy_lower_family_sapto_thresholdSEXP, SEXP medicare_levy_lower_up_for_each_childSEXP, SEXP sapto_max_offsetSEXP, SEXP sapto_lower_thresholdSEXP, SEXP sapto_taperSEXP, SEXP sapto_max_offset_marriedSEXP, SEXP sapto_lower_threshold_marriedSEXP) {
+DoubleVector do_income_tax2(IntegerVector ic_taxable_income_loss, int yr, IntegerVector c_age_30_june, SEXP rebateIncome, IntegerVector is_net_rent, IntegerVector it_property_loss, IntegerVector it_rept_empl_super_cont, IntegerVector sc_empl_cont, IntegerVector it_rept_fringe_benefit, IntegerVector ds_pers_super_cont, IntegerVector it_invest_loss, IntegerVector spc_rebate_income, IntegerVector isn_sbi_net, IntegerVector is_married, IntegerVector n_dependants, IntegerVector ordinary_tax_thresholds, DoubleVector ordinary_tax_rates, IntegerVector temp_levy_brack, NumericVector temp_levy_rates, List offsets, double medicare_levy_taper, double medicare_levy_rate, double medicare_levy_lower_threshold, double medicare_levy_lower_sapto_threshold, double medicare_levy_lower_family_threshold, double medicare_levy_lower_family_sapto_threshold, double medicare_levy_lower_up_for_each_child, double sapto_max_offset, double sapto_lower_threshold, double sapto_taper, double sapto_max_offset_married, double sapto_lower_threshold_married);
+RcppExport SEXP _grattan_do_income_tax2(SEXP ic_taxable_income_lossSEXP, SEXP yrSEXP, SEXP c_age_30_juneSEXP, SEXP rebateIncomeSEXP, SEXP is_net_rentSEXP, SEXP it_property_lossSEXP, SEXP it_rept_empl_super_contSEXP, SEXP sc_empl_contSEXP, SEXP it_rept_fringe_benefitSEXP, SEXP ds_pers_super_contSEXP, SEXP it_invest_lossSEXP, SEXP spc_rebate_incomeSEXP, SEXP isn_sbi_netSEXP, SEXP is_marriedSEXP, SEXP n_dependantsSEXP, SEXP ordinary_tax_thresholdsSEXP, SEXP ordinary_tax_ratesSEXP, SEXP temp_levy_brackSEXP, SEXP temp_levy_ratesSEXP, SEXP offsetsSEXP, SEXP medicare_levy_taperSEXP, SEXP medicare_levy_rateSEXP, SEXP medicare_levy_lower_thresholdSEXP, SEXP medicare_levy_lower_sapto_thresholdSEXP, SEXP medicare_levy_lower_family_thresholdSEXP, SEXP medicare_levy_lower_family_sapto_thresholdSEXP, SEXP medicare_levy_lower_up_for_each_childSEXP, SEXP sapto_max_offsetSEXP, SEXP sapto_lower_thresholdSEXP, SEXP sapto_taperSEXP, SEXP sapto_max_offset_marriedSEXP, SEXP sapto_lower_threshold_marriedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< IntegerVector >::type ic_taxable_income_loss(ic_taxable_income_lossSEXP);
@@ -600,6 +621,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< IntegerVector >::type n_dependants(n_dependantsSEXP);
     Rcpp::traits::input_parameter< IntegerVector >::type ordinary_tax_thresholds(ordinary_tax_thresholdsSEXP);
     Rcpp::traits::input_parameter< DoubleVector >::type ordinary_tax_rates(ordinary_tax_ratesSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type temp_levy_brack(temp_levy_brackSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type temp_levy_rates(temp_levy_ratesSEXP);
     Rcpp::traits::input_parameter< List >::type offsets(offsetsSEXP);
     Rcpp::traits::input_parameter< double >::type medicare_levy_taper(medicare_levy_taperSEXP);
     Rcpp::traits::input_parameter< double >::type medicare_levy_rate(medicare_levy_rateSEXP);
@@ -613,7 +636,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type sapto_taper(sapto_taperSEXP);
     Rcpp::traits::input_parameter< double >::type sapto_max_offset_married(sapto_max_offset_marriedSEXP);
     Rcpp::traits::input_parameter< double >::type sapto_lower_threshold_married(sapto_lower_threshold_marriedSEXP);
-    rcpp_result_gen = Rcpp::wrap(do_income_tax2(ic_taxable_income_loss, yr, c_age_30_june, rebateIncome, is_net_rent, it_property_loss, it_rept_empl_super_cont, sc_empl_cont, it_rept_fringe_benefit, ds_pers_super_cont, it_invest_loss, spc_rebate_income, isn_sbi_net, is_married, n_dependants, ordinary_tax_thresholds, ordinary_tax_rates, offsets, medicare_levy_taper, medicare_levy_rate, medicare_levy_lower_threshold, medicare_levy_lower_sapto_threshold, medicare_levy_lower_family_threshold, medicare_levy_lower_family_sapto_threshold, medicare_levy_lower_up_for_each_child, sapto_max_offset, sapto_lower_threshold, sapto_taper, sapto_max_offset_married, sapto_lower_threshold_married));
+    rcpp_result_gen = Rcpp::wrap(do_income_tax2(ic_taxable_income_loss, yr, c_age_30_june, rebateIncome, is_net_rent, it_property_loss, it_rept_empl_super_cont, sc_empl_cont, it_rept_fringe_benefit, ds_pers_super_cont, it_invest_loss, spc_rebate_income, isn_sbi_net, is_married, n_dependants, ordinary_tax_thresholds, ordinary_tax_rates, temp_levy_brack, temp_levy_rates, offsets, medicare_levy_taper, medicare_levy_rate, medicare_levy_lower_threshold, medicare_levy_lower_sapto_threshold, medicare_levy_lower_family_threshold, medicare_levy_lower_family_sapto_threshold, medicare_levy_lower_up_for_each_child, sapto_max_offset, sapto_lower_threshold, sapto_taper, sapto_max_offset_married, sapto_lower_threshold_married));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -740,8 +763,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_grattan_LMITO_TAPERS", (DL_FUNC) &_grattan_LMITO_TAPERS, 1},
     {"_grattan_ORD_TAX_BRACK", (DL_FUNC) &_grattan_ORD_TAX_BRACK, 1},
     {"_grattan_ORD_TAX_RATES", (DL_FUNC) &_grattan_ORD_TAX_RATES, 1},
+    {"_grattan_LEVY_BRACK", (DL_FUNC) &_grattan_LEVY_BRACK, 1},
+    {"_grattan_LEVY_RATES", (DL_FUNC) &_grattan_LEVY_RATES, 1},
     {"_grattan_do_rN", (DL_FUNC) &_grattan_do_rN, 3},
-    {"_grattan_decode_age_range", (DL_FUNC) &_grattan_decode_age_range, 1},
+    {"_grattan_decode_age_range", (DL_FUNC) &_grattan_decode_age_range, 2},
     {"_grattan_do_lmito", (DL_FUNC) &_grattan_do_lmito, 1},
     {"_grattan_verify_NA_ALIAS", (DL_FUNC) &_grattan_verify_NA_ALIAS, 1},
     {"_grattan_do_sapto", (DL_FUNC) &_grattan_do_sapto, 15},
@@ -749,7 +774,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_grattan_do_medicare_levy", (DL_FUNC) &_grattan_do_medicare_levy, 14},
     {"_grattan_do_rebate_income", (DL_FUNC) &_grattan_do_rebate_income, 9},
     {"_grattan_do_income_tax_sf", (DL_FUNC) &_grattan_do_income_tax_sf, 16},
-    {"_grattan_do_income_tax2", (DL_FUNC) &_grattan_do_income_tax2, 30},
+    {"_grattan_do_income_tax2", (DL_FUNC) &_grattan_do_income_tax2, 32},
     {"_grattan_do_sapto_rcpp", (DL_FUNC) &_grattan_do_sapto_rcpp, 7},
     {"_grattan_do_sapto_rcpp2", (DL_FUNC) &_grattan_do_sapto_rcpp2, 10},
     {"_grattan_sapto_rcpp_singleton", (DL_FUNC) &_grattan_sapto_rcpp_singleton, 7},
