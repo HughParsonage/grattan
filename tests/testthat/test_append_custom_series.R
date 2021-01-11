@@ -1,6 +1,7 @@
 context("append series")
 
 test_that("Errors don't refer to internal helper functions", {
+  skip_on_cran()
   expect_error(lf_inflator_fy(from_fy = "2016-17",
                               to_fy = "2020-21",
                               forecast.series = "custom"),
@@ -20,6 +21,7 @@ test_that("Errors don't refer to internal helper functions", {
 
 
 test_that("As applied with inflators", {
+  skip_on_cran()
   expect_error(wage_inflator(from_fy = "2015-16", to_fy = "2020-21",
                              forecast.series = "custom"),
                regexp = '`wage.series = NULL`, yet `forecast.series = "custom"`.',
