@@ -150,8 +150,8 @@ DoubleVector do_lmito(IntegerVector x) {
 void apply_offset(double & taxi, Person P, Offset1 O) {
   double o = O.offset_1st;
   if (P.xi > O.thresh_1st) {
-   o += (O.taper_1st * (P.xi - O.thresh_1st));
- }
+    o += (O.taper_1st * (P.xi - O.thresh_1st));
+  }
   if (o <= 0) {
     // offsets never add to tax
     return;
@@ -3163,17 +3163,17 @@ DoubleVector do_income_tax2(IntegerVector ic_taxable_income_loss,
                             double sapto_max_offset_married = 1602,
                             double sapto_lower_threshold_married = 41790) {
   R_xlen_t N = ic_taxable_income_loss.length();
-
+  
   IntegerVector rebate_income = 
-  do_rebate_income(rebateIncome, 
-                   ic_taxable_income_loss, 
-                   it_rept_empl_super_cont, 
-                   sc_empl_cont,
-                   ds_pers_super_cont,
-                   it_invest_loss,
-                   is_net_rent, 
-                   it_rept_fringe_benefit, 
-                   yr);
+    do_rebate_income(rebateIncome, 
+                     ic_taxable_income_loss, 
+                     it_rept_empl_super_cont, 
+                     sc_empl_cont,
+                     ds_pers_super_cont,
+                     it_invest_loss,
+                     is_net_rent, 
+                     it_rept_fringe_benefit, 
+                     yr);
   
   Medicare M;
   M.has_sapto_thr = 1;
