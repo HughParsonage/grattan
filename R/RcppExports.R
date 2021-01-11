@@ -206,6 +206,14 @@ ORD_TAX_RATES <- function(yr) {
     .Call(`_grattan_ORD_TAX_RATES`, yr)
 }
 
+LEVY_BRACK <- function(yr) {
+    .Call(`_grattan_LEVY_BRACK`, yr)
+}
+
+LEVY_RATES <- function(yr) {
+    .Call(`_grattan_LEVY_RATES`, yr)
+}
+
 #' @name do_income_tax
 #' @title Internal function for income tax.
 #' @description Accepts a sample file-like List and a tax year and returns
@@ -222,8 +230,8 @@ do_rN <- function(x, N, max_allowed = 99e6) {
     .Call(`_grattan_do_rN`, x, N, max_allowed)
 }
 
-decode_age_range <- function(X) {
-    .Call(`_grattan_decode_age_range`, X)
+decode_age_range <- function(X, m = 0L) {
+    .Call(`_grattan_decode_age_range`, X, m)
 }
 
 do_lmito <- function(x) {
@@ -254,8 +262,8 @@ do_income_tax_sf <- function(yr, N, ic_taxable_income_loss, c_age_30_june, rebat
     .Call(`_grattan_do_income_tax_sf`, yr, N, ic_taxable_income_loss, c_age_30_june, rebateIncome, is_net_rent, it_property_loss, it_rept_empl_super_cont, sc_empl_cont, it_rept_fringe_benefit, ds_pers_super_cont, it_invest_loss, spc_rebate_income, isn_sbi_net, is_married, n_dependants)
 }
 
-do_income_tax2 <- function(ic_taxable_income_loss, yr, c_age_30_june, rebateIncome, is_net_rent, it_property_loss, it_rept_empl_super_cont, sc_empl_cont, it_rept_fringe_benefit, ds_pers_super_cont, it_invest_loss, spc_rebate_income, isn_sbi_net, is_married, n_dependants, ordinary_tax_thresholds, ordinary_tax_rates, offsets, medicare_levy_taper = 0.1, medicare_levy_rate = 0.02, medicare_levy_lower_threshold = 22801, medicare_levy_lower_sapto_threshold = 36056, medicare_levy_lower_family_threshold = 35474, medicare_levy_lower_family_sapto_threshold = 50191, medicare_levy_lower_up_for_each_child = 3533, sapto_max_offset = 2230, sapto_lower_threshold = 32279, sapto_taper = -0.125, sapto_max_offset_married = 1602, sapto_lower_threshold_married = 41790) {
-    .Call(`_grattan_do_income_tax2`, ic_taxable_income_loss, yr, c_age_30_june, rebateIncome, is_net_rent, it_property_loss, it_rept_empl_super_cont, sc_empl_cont, it_rept_fringe_benefit, ds_pers_super_cont, it_invest_loss, spc_rebate_income, isn_sbi_net, is_married, n_dependants, ordinary_tax_thresholds, ordinary_tax_rates, offsets, medicare_levy_taper, medicare_levy_rate, medicare_levy_lower_threshold, medicare_levy_lower_sapto_threshold, medicare_levy_lower_family_threshold, medicare_levy_lower_family_sapto_threshold, medicare_levy_lower_up_for_each_child, sapto_max_offset, sapto_lower_threshold, sapto_taper, sapto_max_offset_married, sapto_lower_threshold_married)
+do_income_tax2 <- function(ic_taxable_income_loss, yr, c_age_30_june, rebateIncome, is_net_rent, it_property_loss, it_rept_empl_super_cont, sc_empl_cont, it_rept_fringe_benefit, ds_pers_super_cont, it_invest_loss, spc_rebate_income, isn_sbi_net, is_married, n_dependants, ordinary_tax_thresholds, ordinary_tax_rates, temp_levy_brack, temp_levy_rates, offsets, medicare_levy_taper = 0.1, medicare_levy_rate = 0.02, medicare_levy_lower_threshold = 22801, medicare_levy_lower_sapto_threshold = 36056, medicare_levy_lower_family_threshold = 35474, medicare_levy_lower_family_sapto_threshold = 50191, medicare_levy_lower_up_for_each_child = 3533, sapto_max_offset = 2230, sapto_lower_threshold = 32279, sapto_taper = -0.125, sapto_max_offset_married = 1602, sapto_lower_threshold_married = 41790) {
+    .Call(`_grattan_do_income_tax2`, ic_taxable_income_loss, yr, c_age_30_june, rebateIncome, is_net_rent, it_property_loss, it_rept_empl_super_cont, sc_empl_cont, it_rept_fringe_benefit, ds_pers_super_cont, it_invest_loss, spc_rebate_income, isn_sbi_net, is_married, n_dependants, ordinary_tax_thresholds, ordinary_tax_rates, temp_levy_brack, temp_levy_rates, offsets, medicare_levy_taper, medicare_levy_rate, medicare_levy_lower_threshold, medicare_levy_lower_sapto_threshold, medicare_levy_lower_family_threshold, medicare_levy_lower_family_sapto_threshold, medicare_levy_lower_up_for_each_child, sapto_max_offset, sapto_lower_threshold, sapto_taper, sapto_max_offset_married, sapto_lower_threshold_married)
 }
 
 do_sapto_rcpp <- function(RebateIncome, MaxOffset, LowerThreshold, TaperRate, SaptoEligible, SpouseIncome, IsMarried) {

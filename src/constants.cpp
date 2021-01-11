@@ -1178,3 +1178,30 @@ NumericVector ORD_TAX_RATES(int yr) {
 }
 
 
+// Special/temporary levies
+
+// [[Rcpp::export(rng = false)]]
+IntegerVector LEVY_BRACK(int yr) {
+	if (yr == 2011) {
+		// flood levy
+		return IntegerVector::create(50000, 100000);
+	}
+	if (yr >= 2015 && yr <= 2017) {
+		// temp budget repair levy
+		return IntegerVector::create(180000);
+	}
+	return IntegerVector::create(0);
+}
+
+// [[Rcpp::export(rng = false)]]
+DoubleVector LEVY_RATES(int yr) {
+	if (yr == 2011) {
+		// flood levy
+		return DoubleVector::create(0.005, 0.005);
+	}
+	if (yr >= 2015 && yr <= 2017) {
+		// temp budget repair levy
+		return DoubleVector::create(0.02);
+	}
+	return DoubleVector::create(0);
+}
