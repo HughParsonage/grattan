@@ -39,7 +39,7 @@ IntegerVector do_rN(DoubleVector x, R_xlen_t N, double max_allowed = 99e6) {
 const int ages_by_age_range[12] = {72, 67, 62, 57, 52, 47, 42, 37, 32, 27, 22, 17};
 
 void validate_age_range(IntegerVector x, R_xlen_t N) {
-  unsigned int uN = (unsigned int)N;
+  unsigned int uN = (unsigned int)12;
   for (R_xlen_t i = 0; i < N; ++i) {
     unsigned int xi = x[i];
     // if (xi < 0 || xi > 11) {
@@ -160,9 +160,8 @@ void apply_offset(double & taxi, Person P, Offset1 O) {
   // non-refundable & taxi <  o ==> tax reduce by o to zero
   //     refundable & taxi >= o ==> tax reduce by o
   //     refundable & taxi < o  ==> tax reduce by o [beyond zero]
-  if (O.refundable || taxi >= o) {
-    taxi -= o;
-  } else {
+  taxi -= o;
+  if (!O.refundable && taxi < 0) {
     taxi = 0;
   }
 }
@@ -178,9 +177,8 @@ void apply_offset(double & taxi, Person P, Offset2 O) {
       return;
     }
   }
-  if (O.refundable || taxi >= o) {
-    taxi -= o;
-  } else {
+  taxi -= o;
+  if (!O.refundable && taxi < 0) {
     taxi = 0;
   }
 }
@@ -189,6 +187,9 @@ void apply_offset(double & taxi, Person P, OffsetN O) {
   double o = O.offset_1st;
   for (R_xlen_t b = 1; b < O.nb; ++b) {
     int b0 = O.Thresholds[b - 1];
+    if (P.xi < b0) {
+      break;
+    }
     int b1 = O.Thresholds[b];
     double r0 = O.Tapers[b - 1];
     if (P.xi < b1) {    
@@ -205,9 +206,8 @@ void apply_offset(double & taxi, Person P, OffsetN O) {
   if (o <= 0) {
     return;
   }
-  if (O.refundable || taxi >= o) {
-    taxi -= o;
-  } else {
+  taxi -= o;
+  if (!O.refundable && taxi < 0) {
     taxi = 0;
   }
 }
@@ -258,6 +258,18 @@ double income_taxi_nb(int& xi, const double (&bracks)[nb], const double (&rates)
         out += r1 * (xi - t1); 
       }
     }
+  }
+  return out;
+}
+
+double income_taxi_v(int & xd, IntegerVector bracks, DoubleVector rates, int nb) {
+  double out = 0;
+  for (int b = 0; b < nb; ++b) {
+    if (xd < bracks[b]) {
+      break;
+    }
+    double xa = (b + 1 < nb && xd >= bracks[b + 1]) ? (bracks[b + 1] - bracks[b]) : (xd - bracks[b]);
+    out += xa * rates[b];
   }
   return out;
 }
@@ -3149,6 +3161,8 @@ DoubleVector do_income_tax2(IntegerVector ic_taxable_income_loss,
                             IntegerVector n_dependants,
                             IntegerVector ordinary_tax_thresholds,
                             DoubleVector ordinary_tax_rates,
+                            IntegerVector temp_levy_brack,
+                            NumericVector temp_levy_rates,
                             List offsets,
                             double medicare_levy_taper = 0.1,
                             double medicare_levy_rate = 0.02,
@@ -3181,23 +3195,19 @@ DoubleVector do_income_tax2(IntegerVector ic_taxable_income_loss,
   M.lwr_single = medicare_levy_lower_threshold;
   M.lwr_single_sapto = medicare_levy_lower_sapto_threshold;
   M.lwr_family_sapto = medicare_levy_lower_family_sapto_threshold;
-
+  
   M.taper = medicare_levy_taper;
   M.rate = medicare_levy_rate;
-
+  
   M.upr_single = M.lwr_single / (1 - M.rate / M.taper);
   M.upr_family = M.lwr_family / (1 - M.rate / M.taper);
-  
-
-
-
   
   DoubleVector out = no_init(N);
   int nb = ordinary_tax_thresholds.length();
   if (nb != ordinary_tax_rates.length()) {
     stop("nb != ordinary_tax_rates.length()");
   }
-
+  
   const int n_offsets = offsets.length();
   Offset1 LitoA;
   Offset2 LitoB;
@@ -3205,12 +3215,14 @@ DoubleVector do_income_tax2(IntegerVector ic_taxable_income_loss,
   LitoB.thresh_1st = NA_INTEGER;
   std::vector<OffsetN> voffsets;
   voffsets.reserve(n_offsets);
-
+  
   bool use_LitoA = false;
   bool use_LitoB = false;
   int n_voffsets = 0;
-
+  
   list2offset(offsets, LitoA, LitoB, voffsets, use_LitoA, use_LitoB, n_voffsets);
+
+  const int temp_levy_nb = temp_levy_brack.length();
 
   Sapto S;
   S.pension_age = 65;
@@ -3228,7 +3240,7 @@ DoubleVector do_income_tax2(IntegerVector ic_taxable_income_loss,
   S.lito_max_offset = LitoA.offset_1st;
   S.lito_1st_thresh = LitoA.thresh_1st;
   S.lito_1st_taper = LitoA.taper_1st;
-
+  
   for (R_xlen_t i = 0; i < N; ++i) {
     Person P;
     P.xi = ic_taxable_income_loss[i];
@@ -3237,7 +3249,7 @@ DoubleVector do_income_tax2(IntegerVector ic_taxable_income_loss,
     P.is_married = is_married[i];
     P.n_child = n_dependants[i];
     P.is_family = P.is_married || P.n_child || P.yi;
-
+    
     double taxi = 0;
     for (int b = 1; b < nb; ++b) {
       double t0 = ordinary_tax_thresholds[b - 1];
@@ -3254,26 +3266,29 @@ DoubleVector do_income_tax2(IntegerVector ic_taxable_income_loss,
         }
       }
     }
-    // Rcout << taxi << "\n";
+    
     apply_sapto(taxi, P, S);
-    // Rcout << taxi << "\n";
+    
     if (use_LitoA) {
       apply_offset(taxi, P, LitoA);
     }
-    // Rcout << taxi << "\n";
+    
     if (use_LitoB) {
       apply_offset(taxi, P, LitoB);
     }
-    // Rcout << taxi << "\n";
+    
     if (n_voffsets) {
       for (int e = 0; e < n_voffsets; ++e) {
         OffsetN oe = voffsets[e];
         apply_offset(taxi, P, oe);
       }
     }
-  // Rcout << taxi << "\n";
     taxi += do_1_ML(P, M);
 
+    if (temp_levy_nb) {
+      taxi += income_taxi_v(P.xi, temp_levy_brack, temp_levy_rates, temp_levy_nb);
+    }
+    
     out[i] = taxi;
   }
   return out;

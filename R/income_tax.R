@@ -852,6 +852,8 @@ income_tax2 <- function(income,
                         .dots.ATO = NULL,
                         ordinary_tax_thresholds = NULL,
                         ordinary_tax_rates = NULL,
+                        temp_levy_brack = NULL,
+                        temp_levy_rates = NULL,
                         medicare_levy_taper = NULL, 
                         medicare_levy_rate = NULL,
                         medicare_levy_lower_threshold = NULL,
@@ -860,7 +862,7 @@ income_tax2 <- function(income,
                         medicare_levy_lower_family_sapto_threshold = NULL,
                         medicare_levy_lower_up_for_each_child = NULL,
                         offsets = NULL,
-                        
+                        sbto_discount = NULL,
                         sapto_eligible = NULL,
                         sapto_max_offset = NULL,
                         sapto_lower_threshold = NULL,
@@ -997,8 +999,13 @@ income_tax2 <- function(income,
                               refundable = FALSE))
   }
   stopifnot(is.list(offsets),
-            identical(unique(lengths(offsets)), 4L),
-            all(vapply(offsets, hasName, name = c("offset_1st", "thresholds", "tapers", "refundable"), logical(4))))
+            identical(unique(lengths(offsets)), 4L))
+  lapply(offsets, function(offset) {
+    if (!haveNames(offset, req_names <- c("offset_1st", "thresholds", "tapers", "refundable"))) {
+      stop("`offset` lacks required names: ", toString(req_names), ".")
+    }
+  })
+  
   
   do_income_tax2(ic_taxable_income_loss = rN(ic_taxable_income_loss), 
                  yr = yr,
@@ -1017,6 +1024,8 @@ income_tax2 <- function(income,
                  n_dependants = rN(n_dependants),
                  ordinary_tax_thresholds = ordinary_tax_thresholds %||% ORD_TAX_BRACK(yr),
                  ordinary_tax_rates = ordinary_tax_rates %||% ORD_TAX_RATES(yr),
+                 temp_levy_brack = temp_levy_brack %||% LEVY_BRACK(yr),
+                 temp_levy_rates = temp_levy_rates %||% LEVY_RATES(yr),
                  offsets = offsets,
                  medicare_levy_taper = medicare_levy_taper %||% ML_TAPER(yr), 
                  medicare_levy_rate = medicare_levy_rate   %||% ML_RATE(yr),
@@ -1049,7 +1058,6 @@ set_offset <- function(offset_1st = integer(1),
        tapers = tapers, 
        refundable = refundable)
 }
-
 
 
 

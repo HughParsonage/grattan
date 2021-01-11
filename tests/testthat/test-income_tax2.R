@@ -6,12 +6,17 @@ test_that("income_tax2 works", {
 })
 
 test_that("dots ATO", {
+  skip_on_cran()
   skip_if_not_installed("taxstats")
   skip_if_not_installed("data.table")
   library(data.table)
   s1314 <- copy(taxstats::sample_file_1314)
-  s1314[, tax0 := income_tax(Taxable_Income, "2013-14", .dots.ATO = s1314)]
-  s1314[, tax2 := income_tax2(Taxable_Income, "2013-14", .dots.ATO = s1314)]
-  s1314[, expect_equal(tax0, tax2)]
+  for (fy_ in yr2fy(2014:2022)) {
+    s1314[, tax0 := 0]
+    s1314[, tax2 := 0]
+    s1314[, tax0 := income_tax(Taxable_Income, fy_, .dots.ATO = s1314)]
+    s1314[, tax2 := income_tax2(Taxable_Income, fy_, .dots.ATO = s1314)]
+    s1314[, expect_equal(tax0, tax2, info = paste0("FY = ", fy_))]
+  }
   
 })
