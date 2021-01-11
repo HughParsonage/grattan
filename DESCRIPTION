@@ -24,6 +24,7 @@ Description: Utilities to cost and evaluate Australian tax policy, including fas
 Depends: R (>= 3.5.0)
 License: GPL-2
 Imports:
+    checkmate,
     data.table,
     hutils (>= 1.3.0),
     hutilscpp,
