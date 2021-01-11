@@ -1,6 +1,3 @@
-
-
-
 #include "grattan.h"
 #include "Sapto.h"
 #include "Person.h"
@@ -8,26 +5,9 @@
 #include "Offset.h"
 #include "grattanMedicareLevy.h"
 
-const int ages_by_age_range[12] = {72, 67, 62, 57, 52, 47, 42, 37, 32, 27, 22, 17};
-
-int do_decode_age_range(int age_range) {
-  return ages_by_age_range[age_range];
-}
-
-void validate_age_range(IntegerVector x, R_xlen_t N) {
-  for (R_xlen_t i = 0; i < N; ++i) {
-    int xi = x[i];
-    if (xi < 0 || xi > 11) {
-      Rcerr << "`age_range` had values outside [0, 11]. ";
-      Rcerr << "First such value: " << x[i] << " at position " << i;
-      stop("`age_range` must be an integer vector with values in [0, 11].");
-    }
-  }
-}
-
 // [[Rcpp::export(rng = false)]]
 IntegerVector do_rN(DoubleVector x, R_xlen_t N, double max_allowed = 99e6) {
-
+  
   double b = (max_allowed < INT_MAX) ? max_allowed : INT_MAX - 1;
   
   if (x.length() != 1 && x.length() != N) {
@@ -56,21 +36,36 @@ IntegerVector do_rN(DoubleVector x, R_xlen_t N, double max_allowed = 99e6) {
   return out;
 }
 
+const int ages_by_age_range[12] = {72, 67, 62, 57, 52, 47, 42, 37, 32, 27, 22, 17};
+
+void validate_age_range(IntegerVector x, R_xlen_t N) {
+  unsigned int uN = (unsigned int)N;
+  for (R_xlen_t i = 0; i < N; ++i) {
+    unsigned int xi = x[i];
+    // if (xi < 0 || xi > 11) {
+    if (xi >= uN) {
+      Rcerr << "`age_range` had values outside [0, 11]. ";
+      Rcerr << "First such value: " << x[i] << " at position " << i << "; ";
+        stop("`age_range` must be an integer vector with values in [0, 11].");
+    }
+  }
+}
+
 // [[Rcpp::export(rng = false)]]
-SEXP decode_age_range(SEXP X) {
+SEXP decode_age_range(SEXP X, int m = 0) {
   if (TYPEOF(X) == NILSXP) {
     return R_NilValue;
   }
   IntegerVector x = X;
   R_xlen_t N = x.length();
-  validate_age_range(x, N);
+  
   IntegerVector out = no_init(N);
+  validate_age_range(x, N);
   for (R_xlen_t i = 0; i < N; ++i) {
     out[i] = ages_by_age_range[x[i]]; 
   }
   return out;
 }
-
 
 double pmax(double x, double y) {
   return (x >= y) ? x : y;
