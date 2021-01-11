@@ -304,7 +304,7 @@ double do_1_sapto_sf(int &x, int &y, int age, bool is_married, Sapto S) {
   }
   
   double sp_unused_sapto = 
-  (y < SAPTO_S12_THRESH) ? max_offset : max0(max_offset - SAPTO_S12_TAPER * (y - SAPTO_S12_THRESH));
+    (y < SAPTO_S12_THRESH) ? max_offset : max0(max_offset - SAPTO_S12_TAPER * (y - SAPTO_S12_THRESH));
   
   // https://www.ato.gov.au/individuals/income-and-deductions/in-detail/transferring-the-seniors-and-pensioners-tax-offset/
   // Following the lettering there
@@ -464,7 +464,7 @@ double do_1_ML(Person P, Medicare M) {
     return 0;
   }
   if (P.is_family) {
-
+    
     // subs.8(5) of Act
     double upr_over_lwr = M.upr_family / ((double)M.lwr_family);
     double lower_family_threshold = (sapto ? M.lwr_family_sapto : M.lwr_family) + P.n_child * M.lwr_thr_up_per_child;
@@ -505,8 +505,8 @@ DoubleVector do_medicare_levy(IntegerVector income,
                               double rate = 0.02) {
   R_xlen_t N = income.length();
   const int age0 = sapto_eligible[0] ? 67 : 42;
-
-
+  
+  
   Medicare M = medicare_levies(yr);
   if (yr == NA_INTEGER) {
     M.lwr_single = lwr_single;
@@ -552,11 +552,11 @@ int c0(int x) {
 }
 
 const double top_marginal_rates_since_1990[43] = 
-{0.48, 0.47, 0.47, 0.47, 0.47, 0.47, 0.47, 0.47, 0.47, 0.47,  
- 0.47, 0.47, 0.47, 0.47, 0.47, 0.47, 0.47, 0.45, 0.45, 0.45, 0.45, 
- 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45,  
- 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45
-};
+  {0.48, 0.47, 0.47, 0.47, 0.47, 0.47, 0.47, 0.47, 0.47, 0.47,  
+   0.47, 0.47, 0.47, 0.47, 0.47, 0.47, 0.47, 0.45, 0.45, 0.45, 0.45, 
+   0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45,  
+   0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45
+  };
 
 inline double top_marginal_rate(int yr) {
   // approximate! need to include accurate medicare levy 
