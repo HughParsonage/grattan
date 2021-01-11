@@ -807,8 +807,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 1987
   } // outer case 1987
-  break;
-
+    break;
+    
   case 1988: {
     Medicare M1988;
     M1988.lwr_single = ML_LWR_THRESHOLD_SINGLE_1988;
@@ -842,8 +842,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 1988
   } // outer case 1988
-  break;
-
+    break;
+    
   case 1989: {
     Medicare M1989;
     M1989.lwr_single = ML_LWR_THRESHOLD_SINGLE_1989;
@@ -877,8 +877,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 1989
   } // outer case 1989
-  break;
-
+    break;
+    
   case 1990: {
     Medicare M1990;
     M1990.lwr_single = ML_LWR_THRESHOLD_SINGLE_1990;
@@ -912,8 +912,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 1990
   } // outer case 1990
-  break;
-
+    break;
+    
   case 1991: {
     Medicare M1991;
     M1991.lwr_single = ML_LWR_THRESHOLD_SINGLE_1991;
@@ -947,8 +947,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 1991
   } // outer case 1991
-  break;
-
+    break;
+    
   case 1992: {
     Medicare M1992;
     M1992.lwr_single = ML_LWR_THRESHOLD_SINGLE_1992;
@@ -982,8 +982,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 1992
   } // outer case 1992
-  break;
-
+    break;
+    
   case 1993: {
     Medicare M1993;
     M1993.lwr_single = ML_LWR_THRESHOLD_SINGLE_1993;
@@ -1017,8 +1017,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 1993
   } // outer case 1993
-  break;
-
+    break;
+    
   case 1994: {
     Medicare M1994;
     M1994.lwr_single = ML_LWR_THRESHOLD_SINGLE_1994;
@@ -1053,8 +1053,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 1994
   } // outer case 1994
-  break;
-
+    break;
+    
   case 1995: {
     Medicare M1995;
     M1995.lwr_single = ML_LWR_THRESHOLD_SINGLE_1995;
@@ -1089,8 +1089,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 1995
   } // outer case 1995
-  break;
-
+    break;
+    
   case 1996: {
     Medicare M1996;
     M1996.lwr_single = ML_LWR_THRESHOLD_SINGLE_1996;
@@ -1125,8 +1125,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 1996
   } // outer case 1996
-  break;
-
+    break;
+    
   case 1997: {
     Medicare M1997;
     M1997.lwr_single = ML_LWR_THRESHOLD_SINGLE_1997;
@@ -1161,8 +1161,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 1997
   } // outer case 1997
-  break;
-
+    break;
+    
   case 1998: {
     Medicare M1998;
     M1998.lwr_single = ML_LWR_THRESHOLD_SINGLE_1998;
@@ -1197,8 +1197,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 1998
   } // outer case 1998
-  break;
-
+    break;
+    
   case 1999: {
     Medicare M1999;
     M1999.lwr_single = ML_LWR_THRESHOLD_SINGLE_1999;
@@ -1233,8 +1233,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 1999
   } // outer case 1999
-  break;
-
+    break;
+    
   case 2000: {
     Medicare M2000;
     M2000.lwr_single = ML_LWR_THRESHOLD_SINGLE_2000;
@@ -1269,8 +1269,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2000
   } // outer case 2000
-  break;
-
+    break;
+    
   case 2001: {
     // Create a Sapto struct for this year
     Sapto Sapto2001;
@@ -1329,8 +1329,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2001
   } // outer case 2001
-  break;
-
+    break;
+    
   case 2002: {
     // Create a Sapto struct for this year
     Sapto Sapto2002;
@@ -1389,8 +1389,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2002
   } // outer case 2002
-  break;
-
+    break;
+    
   case 2003: {
     // Create a Sapto struct for this year
     Sapto Sapto2003;
@@ -1449,8 +1449,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2003
   } // outer case 2003
-  break;
-
+    break;
+    
   case 2004: {
     // Create a Sapto struct for this year
     Sapto Sapto2004;
@@ -1509,8 +1509,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2004
   } // outer case 2004
-  break;
-
+    break;
+    
   case 2005: {
     // Create a Sapto struct for this year
     Sapto Sapto2005;
@@ -1569,8 +1569,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2005
   } // outer case 2005
-  break;
-
+    break;
+    
   case 2006: {
     // Create a Sapto struct for this year
     Sapto Sapto2006;
@@ -1629,8 +1629,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2006
   } // outer case 2006
-  break;
-
+    break;
+    
   case 2007: {
     // Create a Sapto struct for this year
     Sapto Sapto2007;
@@ -1689,8 +1689,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2007
   } // outer case 2007
-  break;
-
+    break;
+    
   case 2008: {
     // Create a Sapto struct for this year
     Sapto Sapto2008;
@@ -1749,8 +1749,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2008
   } // outer case 2008
-  break;
-
+    break;
+    
   case 2009: {
     // Create a Sapto struct for this year
     Sapto Sapto2009;
@@ -1809,8 +1809,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2009
   } // outer case 2009
-  break;
-
+    break;
+    
   case 2010: {
     // Create a Sapto struct for this year
     Sapto Sapto2010;
@@ -1869,8 +1869,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2010
   } // outer case 2010
-  break;
-
+    break;
+    
   case 2011: {
     // Create a Sapto struct for this year
     Sapto Sapto2011;
@@ -1931,8 +1931,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2011
   } // outer case 2011
-  break;
-
+    break;
+    
   case 2012: {
     // Create a Sapto struct for this year
     Sapto Sapto2012;
@@ -1991,8 +1991,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2012
   } // outer case 2012
-  break;
-
+    break;
+    
   case 2013: {
     // Create a Sapto struct for this year
     Sapto Sapto2013;
@@ -2051,8 +2051,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2013
   } // outer case 2013
-  break;
-
+    break;
+    
   case 2014: {
     // Create a Sapto struct for this year
     Sapto Sapto2014;
@@ -2111,8 +2111,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2014
   } // outer case 2014
-  break;
-
+    break;
+    
   case 2015: {
     // Create a Sapto struct for this year
     Sapto Sapto2015;
@@ -2173,8 +2173,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2015
   } // outer case 2015
-  break;
-
+    break;
+    
   case 2016: {
     // Create a Sapto struct for this year
     Sapto Sapto2016;
@@ -2235,8 +2235,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2016
   } // outer case 2016
-  break;
-
+    break;
+    
   case 2017: {
     // Create a Sapto struct for this year
     Sapto Sapto2017;
@@ -2280,12 +2280,12 @@ DoubleVector do_income_tax_sf(int yr,
         P.is_married = is_married[i];
         P.n_child = n_dependants[i];
         P.is_family = P.is_married || P.n_child || P.yi;
-
+        
         
         double taxi = income_taxi_nb(P.xi, ORD_TAX_BRACK_2017, ORD_TAX_RATES_2017);
         apply_sapto(taxi, P, Sapto2017);
         apply_lito(taxi, P.xi, LITO_MAX_OFFSET_2017, LITO_1ST_THRESH_2017, LITO_1ST_TAPER_2017);
-
+        
         int net_sbi = isn_sbi_net[i];
         apply_sbto(taxi, P.xi, net_sbi, SBTO_DISCOUNT_2016);
         
@@ -2302,8 +2302,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2017
   } // outer case 2017
-  break;
-
+    break;
+    
   case 2018: {
     // Create a Sapto struct for this year
     Sapto Sapto2018;
@@ -2362,8 +2362,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2018
   } // outer case 2018
-  break;
-
+    break;
+    
   case 2019: {
     // Create a Sapto struct for this year
     Sapto Sapto2019;
@@ -2423,8 +2423,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2019
   } // outer case 2019
-  break;
-
+    break;
+    
   case 2020: {
     // Create a Sapto struct for this year
     Sapto Sapto2020;
@@ -2484,8 +2484,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2020
   } // outer case 2020
-  break;
-
+    break;
+    
   case 2021: {
     // Create a Sapto struct for this year
     Sapto Sapto2021;
@@ -2545,8 +2545,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2021
   } // outer case 2021
-  break;
-
+    break;
+    
   case 2022: {
     // Create a Sapto struct for this year
     Sapto Sapto2022;
@@ -2606,8 +2606,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2022
   } // outer case 2022
-  break;
-
+    break;
+    
   case 2023: {
     // Create a Sapto struct for this year
     Sapto Sapto2023;
@@ -2666,8 +2666,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2023
   } // outer case 2023
-  break;
-
+    break;
+    
   case 2024: {
     // Create a Sapto struct for this year
     Sapto Sapto2024;
@@ -2726,8 +2726,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2024
   } // outer case 2024
-  break;
-
+    break;
+    
   case 2025: {
     // Create a Sapto struct for this year
     Sapto Sapto2025;
@@ -2786,8 +2786,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2025
   } // outer case 2025
-  break;
-
+    break;
+    
   case 2026: {
     // Create a Sapto struct for this year
     Sapto Sapto2026;
@@ -2846,8 +2846,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2026
   } // outer case 2026
-  break;
-
+    break;
+    
   case 2027: {
     // Create a Sapto struct for this year
     Sapto Sapto2027;
@@ -2906,8 +2906,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2027
   } // outer case 2027
-  break;
-
+    break;
+    
   case 2028: {
     // Create a Sapto struct for this year
     Sapto Sapto2028;
@@ -2966,8 +2966,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2028
   } // outer case 2028
-  break;
-
+    break;
+    
   case 2029: {
     // Create a Sapto struct for this year
     Sapto Sapto2029;
@@ -3026,8 +3026,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2029
   } // outer case 2029
-  break;
-
+    break;
+    
   case 2030: {
     // Create a Sapto struct for this year
     Sapto Sapto2030;
@@ -3086,11 +3086,11 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 2030
   } // outer case 2030
-  break;
-}
-
-
-return out;
+    break;
+  }
+  
+  
+  return out;
 }
 
 void list2offset(List offsets, Offset1 & A, Offset2 & B, std::vector<OffsetN> &voffsets,
