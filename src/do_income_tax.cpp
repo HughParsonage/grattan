@@ -287,7 +287,7 @@ double do_1_sapto_sf(int &x, int &y, int age, bool is_married, Sapto S) {
   double max_offset = is_married ? S.mxo_couple : S.mxo_single;
   double lwr_thresh = is_married ? S.lwr_couple : S.lwr_single;
   double taper = S.taper;
-
+  
   double o = x < lwr_thresh ? max_offset : max0(max_offset + taper * (x - lwr_thresh));
   if (!is_married) {
     return o;
@@ -295,7 +295,7 @@ double do_1_sapto_sf(int &x, int &y, int age, bool is_married, Sapto S) {
   
   // The transfer of unused SAPTO is very complex and frankly unknown, even
   // within govt.  This lines up 'better' than known models.
-
+  
   // If the spouse's income is so high that no spouse SAPTO is 
   // transferrable, then we just fall back to the original 
   constexpr double MAX_THR_SPOUSE_XFER_MARRIED = 1602 / SAPTO_S12_TAPER + SAPTO_S12_THRESH;
@@ -657,19 +657,19 @@ DoubleVector do_income_tax_sf(int yr,
   check_len(n_dependants, N, "n_dependants");
   
   IntegerVector rebate_income = 
-  do_rebate_income(rebateIncome, 
-                   ic_taxable_income_loss, 
-                   it_rept_empl_super_cont, 
-                   sc_empl_cont,
-                   ds_pers_super_cont,
-                   it_invest_loss,
-                   is_net_rent, 
-                   it_rept_fringe_benefit, 
-                   yr);
+    do_rebate_income(rebateIncome, 
+                     ic_taxable_income_loss, 
+                     it_rept_empl_super_cont, 
+                     sc_empl_cont,
+                     ds_pers_super_cont,
+                     it_invest_loss,
+                     is_net_rent, 
+                     it_rept_fringe_benefit, 
+                     yr);
   
   
   switch(yr) {
-    case 1984: {
+  case 1984: {
       Medicare M1984;
       M1984.lwr_single = ML_LWR_THRESHOLD_SINGLE_1984;
       M1984.upr_single = ML_UPR_THRESHOLD_SINGLE_1984;
@@ -704,41 +704,41 @@ DoubleVector do_income_tax_sf(int yr,
     } // outer case 1984
     break;
     
-    case 1985: {
-      Medicare M1985;
-      M1985.lwr_single = ML_LWR_THRESHOLD_SINGLE_1985;
-      M1985.upr_single = ML_UPR_THRESHOLD_SINGLE_1985;
-      M1985.lwr_family = ML_LWR_THRESHOLD_FAMILY_1985;
-      M1985.upr_family = ML_UPR_THRESHOLD_FAMILY_1985;
-      M1985.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1985;
-      M1985.taper = ML_TAPER_1985;
-      M1985.rate = ML_RATE_1985;
-      M1985.has_sapto_thr = 0;
-      M1985.sapto_age = 65;
-      {
-        for (R_xlen_t i = 0; i < N; ++i) {
-          Person P;
-          P.xi = ic_taxable_income_loss[i];
-          P.yi = c0(spc_rebate_income[i]);
-          P.agei = c_age_30_june[i];
-          P.is_married = is_married[i];
-          P.n_child = n_dependants[i];
-          P.is_family = P.is_married || P.n_child || P.yi;;
-
-          double taxi = income_taxi_nb(P.xi, ORD_TAX_BRACK_1985, ORD_TAX_RATES_1985);
-
+  case 1985: {
+    Medicare M1985;
+    M1985.lwr_single = ML_LWR_THRESHOLD_SINGLE_1985;
+    M1985.upr_single = ML_UPR_THRESHOLD_SINGLE_1985;
+    M1985.lwr_family = ML_LWR_THRESHOLD_FAMILY_1985;
+    M1985.upr_family = ML_UPR_THRESHOLD_FAMILY_1985;
+    M1985.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1985;
+    M1985.taper = ML_TAPER_1985;
+    M1985.rate = ML_RATE_1985;
+    M1985.has_sapto_thr = 0;
+    M1985.sapto_age = 65;
+    {
+      for (R_xlen_t i = 0; i < N; ++i) {
+        Person P;
+        P.xi = ic_taxable_income_loss[i];
+        P.yi = c0(spc_rebate_income[i]);
+        P.agei = c_age_30_june[i];
+        P.is_married = is_married[i];
+        P.n_child = n_dependants[i];
+        P.is_family = P.is_married || P.n_child || P.yi;;
+        
+        double taxi = income_taxi_nb(P.xi, ORD_TAX_BRACK_1985, ORD_TAX_RATES_1985);
+        
         // Medicare levy
-          taxi += do_1_ML(P, M1985);
-
-
+        taxi += do_1_ML(P, M1985);
+        
+        
         // finally
-          out[i] = taxi;
-        }
-
+        out[i] = taxi;
+      }
+      
     } // inner case 1985
   } // outer case 1985
-  break;
-
+    break;
+    
   case 1986: {
     Medicare M1986;
     M1986.lwr_single = ML_LWR_THRESHOLD_SINGLE_1986;
@@ -772,8 +772,8 @@ DoubleVector do_income_tax_sf(int yr,
       
     } // inner case 1986
   } // outer case 1986
-  break;
-
+    break;
+    
   case 1987: {
     Medicare M1987;
     M1987.lwr_single = ML_LWR_THRESHOLD_SINGLE_1987;
