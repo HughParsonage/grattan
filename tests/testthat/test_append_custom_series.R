@@ -1,6 +1,7 @@
 context("append series")
 
 test_that("Errors don't refer to internal helper functions", {
+  skip_on_cran()
   expect_error(lf_inflator_fy(from_fy = "2016-17",
                               to_fy = "2020-21",
                               forecast.series = "custom"),
@@ -20,6 +21,7 @@ test_that("Errors don't refer to internal helper functions", {
 
 
 test_that("As applied with inflators", {
+  skip_on_cran()
   expect_error(wage_inflator(from_fy = "2015-16", to_fy = "2020-21",
                              forecast.series = "custom"),
                regexp = '`wage.series = NULL`, yet `forecast.series = "custom"`.',
@@ -60,33 +62,33 @@ test_that("As applied with inflators", {
                regexp = 'was a list with mismatching lengths:',
                fixed = TRUE)
   
-  expect_error(wage_inflator(from_fy = "2015-16", to_fy = "2020-21",
+  expect_error(wage_inflator(from_fy = "2015-16", to_fy = next_fy(h = 1),
                              forecast.series = "custom",
-                             wage.series = list(fy_year = yr2fy(2021:2018), r = 1:4/100)),
+                             wage.series = list(fy_year = next_fy(h = 2:-1), r = 1:4/100)),
                regexp = '`wage.series$fy_year` had the required financial years but not in the correct order.',
                fixed = TRUE)
-  expect_error(wage_inflator(from_fy = "2015-16", to_fy = "2020-21",
+  expect_error(wage_inflator(from_fy = prev_fy(h = 1), to_fy = next_fy(h = 1),
                              forecast.series = "custom",
-                             wage.series = list(fy_year = c("2016-17", "2017-18", "2019-20", "2020-21","2018-19", "2020-21"),
-                                                r = 1:6/100)),
+                             wage.series = list(fy_year = next_fy(h = 1:-1),
+                                                r = 1:3/100)),
                regexp = '`wage.series$fy_year` had the required financial years but not in the correct order.',
                fixed = TRUE)
-  expect_error(wage_inflator(from_fy = "2015-16", to_fy = "2020-21",
+  expect_error(wage_inflator(from_fy = prev_fy(), to_fy = next_fy(h = 1),
                              forecast.series = "custom",
-                             wage.series = list(fy_year = c("2020-21", "2019-20", "2018-19"),
+                             wage.series = list(fy_year = c(next_fy(h = 1:-1)),
                                                 r = 1:3/100)),
                regexp = '`wage.series$fy_year` had the required financial years but not in the correct order.',
                fixed = TRUE)
   
-  expect_error(lf_inflator_fy(from_fy = "2015-16", to_fy = "2020-21",
+  expect_error(lf_inflator_fy(from_fy = "2015-16", to_fy = next_fy(h = 2),
                               forecast.series = "custom",
                               lf.series = list(fy_year = next_fy(h = 2), r = 0.01)),
                regexp = "`lf.series$fy_year` did not have the required financial years.",
                fixed = TRUE)
   expect_error(lf_inflator_fy(from_fy = "2015-16", to_fy = next_fy(h = 3),
                               forecast.series = "custom",
-                              lf.series = list(fy_year = c(next_fy(h = c(1, 3, 2))),
-                                               r = 1:3/100)),
+                              lf.series = list(fy_year = c(next_fy(h = c(0, 1, 3, 2))),
+                                               r = 0:3/100)),
                regexp = "`lf.series$fy_year` had the required financial years but not in the correct order.",
                fixed = TRUE)
   expect_error(lf_inflator_fy(from_fy = "2015-16", to_fy = next_fy(h = 3L),

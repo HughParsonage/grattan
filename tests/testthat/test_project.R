@@ -144,6 +144,7 @@ test_that("Coverage", {
   skip_if_not_installed("taxstats1516")
   skip_if_not_installed("taxstats")
   skip_on_circleci(1)
+  skip("Trend unavailable")
   library(taxstats1516)
   library(taxstats)
   s1516 <- as.data.table(sample_file_1516_synth)
