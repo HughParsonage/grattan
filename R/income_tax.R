@@ -337,7 +337,7 @@ income_tax_ <- function(.sample.file, yr, n_dependants = 0L) {
                    it_rept_fringe_benefit = gcf("it_rept_fringe_benefit", "Rep_frng_ben_amt"), 
                    it_invest_loss = gcf("it_invest_loss", "Rep_frng_ben_amt"),
                    spc_rebate_income = pminC(gcf("spc_rebate_income", "Spouse_adjusted_taxable_inc", "Partner_status"), 1e7L),
-                   partner_status = gcf("sp_flag", "Partner_status"),
+                   # partner_status = gcf("sp_flag", "Partner_status"),
                    n_dependants = n_dependants %||% gcf("n_dependants", "Partner_status"))
 }
 

@@ -33,6 +33,7 @@
 #' @importFrom hutils weighted_ntile
 #' @importFrom hutils mutate_ntile
 #' 
+#' @importFrom hutilscpp anyOutside
 #' @importFrom hutilscpp pmin0
 #' @importFrom hutilscpp pmax0
 #' @importFrom hutilscpp pmax3
@@ -55,6 +56,8 @@
 #' @importFrom Rcpp sourceCpp
 #' @importFrom stats complete.cases
 #' @importFrom stats setNames
+#' 
+#' @importFrom utils hasName
 #' 
 #' 
 #' @import data.table
