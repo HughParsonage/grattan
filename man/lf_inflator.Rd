@@ -5,7 +5,7 @@
 \alias{lf_inflator_fy}
 \title{Labour force inflators}
 \source{
-ABS Cat 6202.0 \url{https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/residential-property-price-indexes-eight-capital-cities/latest-release/}.
+ABS Cat 6202.0
 }
 \usage{
 lf_inflator_fy(

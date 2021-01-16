@@ -7,6 +7,6 @@
 #' \item{City}{Capital city (or \code{Australia (weighted average)})}
 #' \item{Residential_property_price_index}{An index (100 = 2011-12-01) measuring the price change in all residential dwellings.}
 #' }
-#' @source ABS Cat 6416.0. \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6416.0}.
+#' @source ABS Cat 6416.0. \code{https://www.abs.gov.au/statistics/economy/price-indexes-and-inflation/residential-property-price-indexes-eight-capital-cities/latest-release}
 
 "residential_property_prices"

@@ -34,7 +34,7 @@
 #'  step increase in `activity_test_1_brackets`.
 #' 
 #' @param income_test_bracket_1,income_test_bracket_2,income_test_bracket_3,income_test_bracket_4,income_test_bracket_5 (numeric) The steps at which income test 1 changes rates.
-#'  Note the strange structure \url{https://www.humanservices.gov.au/individuals/services/centrelink/child-care-subsidy/payments/how-your-income-affects-it}.
+#'  Note the strange structure \code{https://www.servicesaustralia.gov.au/individuals/services/centrelink/child-care-subsidy/how-much-you-can-get/your-income-can-affect-it}.
 #' @param taper_1,taper_2,taper_3 (numeric) The proportion of the hourly cap 
 #' retained. Note that the rate only decreases between each odd bracket.
 #' 

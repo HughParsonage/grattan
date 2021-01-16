@@ -10,13 +10,13 @@
 #' receiving payments for over 9 continuous months?
 #' @param isjspceoalfofcoahodeoc Is the recipient a single job seeker principal carer, either of large family or foster child/ren, or who is a home or distance educator of child/ren?
 #' @param principal_carer Is the individual the parent with most of the day-to-day
-#'  care of child. Defined in \url{https://www.servicesaustralia.gov.au/individuals/services/centrelink/parenting-payment/who-can-get-it/principal-carer-rules/}.
+#'  care of child. Defined in \code{https://www.servicesaustralia.gov.au/individuals/services/centrelink/parenting-payment/who-can-get-it/principal-carer-rules/}.
 #' @param fortnightly_partner_income Partner's 'Ordinary income' received fortnightly. 
 #' @param annual_partner_income Partner's Ordinary income' received annually.
 #' @param age The individual's age.
 #' @param fy.year Financial year. Default is "2015-16".
 #' @param assets_value Total value of household assets. Details can be found at
-#' \url{https://www.servicesaustralia.gov.au/individuals/topics/asset-types/30621/}. 
+#' \code{https://www.servicesaustralia.gov.au/individuals/topics/asset-types/30621}. 
 #' @param homeowner Is the individual a homeowner?
 #' @param taper_lower The amount at which the payment is reduced for each dollar
 #'  earned between the lower and upper bounds for non-principal carers.
