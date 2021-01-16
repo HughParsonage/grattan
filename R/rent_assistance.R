@@ -3,7 +3,7 @@
 #' @param fortnightly_rent The fortnightly rent paid by each individual. By 
 #' default, infinity, so the maximum rent assistance is returned by default, 
 #' since rent assistance is capped at a maximum rate. Note the criteria for board
-#'  and lodging which can be found at \url{http://guides.dss.gov.au/guide-social-security-law/3/8/1/70}
+#'  and lodging which can be found at \url{https://guides.dss.gov.au/guide-social-security-law/3/8/1/70}
 #' @param per Specifies the timeframe in which payments will be made. Can either
 #'  take value "fortnight" or "annual".
 #' @param fy.year (character) The financial year over which rent assistance is 
@@ -22,7 +22,7 @@
 #' @param max_rate If not \code{NULL}, a numeric vector indicating for each individual the maximum rent assistance payable.
 #' @param min_rent If not \code{NULL}, a numeric vector indicating for each individual the minimum fortnightly rent above which rent assistance is payable. \code{max_rate} and \code{min_rent} must not be used when \code{fy.year} is set.
 #' 
-#' @param sharers_provision_applies (logical, default: FALSE) Does the sharers provision apply to the parent payment? The list of functions can be found in table 2 column 4 \url{http://guides.dss.gov.au/guide-social-security-law/3/8/1/10}
+#' @param sharers_provision_applies (logical, default: FALSE) Does the sharers provision apply to the parent payment? The list of functions can be found in table 2 column 4 \url{https://guides.dss.gov.au/guide-social-security-law/3/8/1/10}
 #' @param is_homeowner (logical, default: \code{FALSE}) Does the individual own 
 #' their own home?
 #' @param lives_in_sharehouse (logical, default: \code{FALSE}) Does the individual

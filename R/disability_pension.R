@@ -78,7 +78,7 @@ disability_pension <- function(fortnightly_income = 0,
                         n_dependants = n_dependants,
                         per = "fortnight",
                         ...),
-            # http://guides.dss.gov.au/guide-social-security-law/5/2/2/40
+            # https://guides.dss.gov.au/guide-social-security-law/5/2/2/40
             # possibly more; see
             # https://www.humanservices.gov.au/individuals/services/centrelink/disability-support-pension/payments/payment-rates
             if_else(age >= 18L,

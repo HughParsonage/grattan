@@ -51,9 +51,9 @@ carer_payment(
 
 \item{carer_illness_separated_couple}{Is the couple separated by illness? (Affects the assets test.)}
 
-\item{dclad_eligible}{Is the person receiving care a DCLAD (Disability Care Load Assessment) qualifying child as defined in http://guides.dss.gov.au/guide-social-security-law/1/1/q/17 ?}
+\item{dclad_eligible}{Is the person receiving care a DCLAD (Disability Care Load Assessment) qualifying child as defined in https://guides.dss.gov.au/guide-social-security-law/1/1/q/17 ?}
 
-\item{high_adat}{Does the person receiving care have a high ADAT (Adult Disability Assessment Tool) score as defined in http://guides.dss.gov.au/guide-social-security-law/1/1/a/78 ?}
+\item{high_adat}{Does the person receiving care have a high ADAT (Adult Disability Assessment Tool) score as defined in https://guides.dss.gov.au/guide-social-security-law/1/1/a/78 ?}
 
 \item{living_at_home}{Does the person receiving care live at home with their parents?}
 

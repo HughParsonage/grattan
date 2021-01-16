@@ -53,8 +53,8 @@ family_tax_benefit <- function(.data = NULL,
                                per = 'year', 
                                copy = TRUE) {
   # https://www.humanservices.gov.au/sites/default/files/co029-1603en.pdf
-  # https://web.archive.org/web/20160420184949/http://guides.dss.gov.au/family-assistance-guide/3/1/1/20
-  # historical rates: http://guides.dss.gov.au/family-assistance-guide/3/6/
+  # https://web.archive.org/web/20160420184949/https://guides.dss.gov.au/family-assistance-guide/3/1/1/20
+  # historical rates: https://guides.dss.gov.au/family-assistance-guide/3/6/
   if (is.null(.data)) {
     check_null <- function(x, ...) {
       if (is.null(x)) {
@@ -289,7 +289,7 @@ family_tax_benefit <- function(.data = NULL,
                                       taper_ftbA_2 * (family_income - income_test_ftbA_2_bound))]
     
     # Note: before 2015 income_test_ftbA_2_bound
-    # increased based upon number of ftb children http://guides.dss.gov.au/family-assistance-guide/3/6/1 note 2G
+    # increased based upon number of ftb children https://guides.dss.gov.au/family-assistance-guide/3/6/1 note 2G
   
   # Income test ftbB
   ftbB_eligible <- NULL
