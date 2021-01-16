@@ -35,7 +35,7 @@ model_child_care_subsidy(
 
 \item{Annual_cap_subsidy}{(numeric) Amount at which annual subsidies are capped for those who earn more than `Annual_cap_income`.}
 
-\item{Income_test_bracket_1, Income_test_bracket_2, Income_test_bracket_3, Income_test_bracket_4, Income_test_bracket_5}{(numeric) The steps at which income test 1 changes rates. Note the strange structure \url{https://www.humanservices.gov.au/individuals/services/centrelink/child-care-subsidy/payments/how-your-income-affects-it}.}
+\item{Income_test_bracket_1, Income_test_bracket_2, Income_test_bracket_3, Income_test_bracket_4, Income_test_bracket_5}{(numeric) The steps at which income test 1 changes rates. Note the strange structure \code{https://www.humanservices.gov.au/individuals/services/centrelink/child-care-subsidy/payments/how-your-income-affects-it}.}
 
 \item{Taper_1, Taper_2, Taper_3}{(numeric) The proportion of the hourly cap retained. Note that the rate only decreases between each odd bracket.}
 
