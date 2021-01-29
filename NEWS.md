@@ -1,4 +1,8 @@
-## 1.9.0.1
+## 1.9.0.3
+
+* Maintenance release to avoid svg issues on new Apple OS.
+
+## 1.9.0.2
 
 * Maintenance release with some new data updates.
 

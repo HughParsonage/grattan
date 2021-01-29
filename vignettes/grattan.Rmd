@@ -6,7 +6,7 @@ output:
   rmarkdown::html_document:
     toc: true
     toc_depth: 2
-    dev: svg
+    dev: png
 vignette: >
   %\VignetteIndexEntry{grattan}
   %\VignetteEngine{knitr::rmarkdown}
@@ -77,13 +77,13 @@ To run the vignette, provided you have access to the Internet, set the environme
 # Bracket creep
 
 ```{r loadPackages-1}
+library(hutilscpp)
 library(mgcv)
 library(lattice)
 library(dtplyr)
 library(dplyr)
 library(ggplot2)
 library(scales)
-library(magrittr)
 library(ggrepel)
 library(viridis)
 library(knitr)
@@ -152,6 +152,10 @@ The next step is to calculate the tax paid for each entry in the sample file for
 The `grattan` package provides `income_tax` for this purpose, with the optional argument `.dots.ATO` accepting a sample file to take care of the variables that are needed for the complex calculations of offsets and the Medicare levy.
 The argument `fy.year` specifies what tax scales to use; for future years, we assume the current settings, unless the Government has announced changes in a future year, such as the expected increase to the Medicare levy.
 Since the `income_tax` function only currently works for years as far ahead as 2019-20, we use that year for the 2020-21 projection of the sample file.
+
+```{r gc1, include=FALSE}
+gc()
+```
 
 ```{r add-tax-paid-avg-tax}
 sample_file_1617[, tax_paid := income_tax(Taxable_Income,
@@ -397,32 +401,38 @@ sample_file_prev <- sample_files_all[fy.year == PREV.FY.YEAR]
 sample_file_prev <- merge(sample_file_prev, age_range_decoder, by = "age_range")
 ```
 
+```{r impute_ages}
+impute_ages <- function(DT) {
+  age_range_description <- NULL
+  DT[grepl("to", age_range_description), min_age := as.integer(sub("^([0-9]+).*$", "\\1", age_range_description))]
+  DT[grepl("70", age_range_description), min_age := 70L]
+  DT[, min_age := coalesce(min_age, 15L)]
+  DT[, max_age := min_age + 5L]
+  if (requireNamespace("withr", quietly = TRUE)) {
+    withr::with_seed(48031, {
+      DT[, age_imp := runif(.N, min_age, max_age), by = .(min_age)] 
+    })
+  } else {
+    DT[, age_imp := runif(.N, min_age, max_age), by = .(min_age)] 
+  }
+  DT[, c("min_age", "max_age") := NULL]
+  DT[]
+}
+```
+
 ```{r impute-ages}
-set.seed(48031)
-sample_file <-
-  sample_file %>%
-  lazy_dt %>%
-  group_by(age_range_description) %>%
-  mutate(min_age = if_else(grepl("to", age_range_description), 
-                           as.numeric(gsub("^([0-9]{2}).*$", "\\1", age_range_description)), 
-                           if_else(grepl("70", age_range_description),
-                                   70, 
-                                   15)),
-         max_age = min_age + 5, 
-         age_imp = runif(n(), min_age, max_age)) %>%
-  select(-min_age, -max_age)
+impute_ages(sample_file)
 ```
 
 ```{r tax-bracket}
-sample_file %<>%
-  mutate(Tax_Bracket = cut(Taxable_Income, 
-                           breaks = c(-Inf, 18200, 37e3, 80e3, 180e3, Inf),
-                           include.lowest = TRUE, 
-                           labels = c("$0-$18,200", 
-                                      "$18,201-$37,000", 
-                                      "37,001-$80,000", 
-                                      "$80,001-$180,000", 
-                                      "$180,000+")))
+sample_file[, Tax_Bracket := cut(Taxable_Income, 
+                                 breaks = c(-Inf, 18200, 37e3, 80e3, 180e3, Inf),
+                                 include.lowest = TRUE, 
+                                 labels = c("$0-$18,200", 
+                                            "$18,201-$37,000", 
+                                            "37,001-$80,000", 
+                                            "$80,001-$180,000", 
+                                            "$180,000+"))]
 ```
 
 ```{r texNum}
@@ -726,16 +736,14 @@ Comparing the ratio \textit{Total capital gains} of \textit{Net capital gains} c
 ```{r CG-by-tax-bracket}
 CG_descriptive_by_bracket <- 
   sample_file %>%
-  lazy_dt %>%
-  mutate(tax = income_tax(Taxable_Income, fy.year = FY.YEAR), 
-         tax_wo_CG = income_tax(pmaxC(Taxable_Income - Net_CG_amt, 0), fy.year = FY.YEAR)) %>%
-  group_by(Tax_Bracket) %>%
-  summarise(n_taxpayers = sum(WEIGHT),
-            n_CG = sum(WEIGHT[Net_CG_amt > 0]),
-            val_CG = sum(as.double(Tot_CY_CG_amt * WEIGHT)), 
-            total_CGT = sum(as.double((tax - tax_wo_CG) * WEIGHT))) %>%
-  ungroup %>%
-  arrange(Tax_Bracket) 
+  copy %>%
+  .[, tax := income_tax(Taxable_Income, fy.year = FY.YEAR)] %>%
+  .[, tax_wo_CG := income_tax(pmax0(Taxable_Income - Net_CG_amt), fy.year = FY.YEAR)] %>%
+  .[, .(n_taxpayers = sum(WEIGHT),
+        n_CG = sum(WEIGHT[Net_CG_amt > 0]),
+        val_CG = sum(as.double(Tot_CY_CG_amt * WEIGHT)), 
+        total_CGT = sum(as.double((tax - tax_wo_CG) * WEIGHT))), 
+    keyby = .(Tax_Bracket)]
 ```
 
 ```{r}
@@ -816,54 +824,63 @@ sample_files_all %>%
   theme(axis.title.y = element_blank())
 ```
 
+```{r with_seed}
+with_seed <- function(s, code) {
+  if (requireNamespace("withr", quietly = TRUE)) {
+    eval.parent(withr::with_seed(s, code))
+  } else {
+    code
+  }
+}
+```
+
 ```{r CGT-by-age-weighted-ntile}
-set.seed(24841)
-sample_files_all %>%
-  lazy_dt %>%
-  select(age_range, Net_CG_amt, fy.year) %>%
-  merge(age_range_decoder, by = "age_range") %>%
-  as.data.frame %>%
-  group_by(age_range_description) %>%
-  mutate(min_age = 
-           if (grepl("^([0-9]{2}).*$", first(age_range_description))) {
-             as.numeric(gsub("^([0-9]{2}).*$", "\\1", age_range_description))
-           } else {
-             if_else(grepl("70", age_range_description),
-                     70, 
-                     15)
-           },
-         max_age = min_age + 5, 
-         age_imp = runif(n(), min_age, max_age)) %>%
-  select(-min_age, -max_age) %>%
-  filter(Net_CG_amt > 0) %>%
-  mutate(Age = round(age_imp)) %>%
-  group_by(fy.year, Age) %>%
-  summarise(mean_Net_CG = mean(Net_CG_amt), 
-            sd_Net_CG = sd(Net_CG_amt)) %>%
-  ungroup %>%
-  mutate(last_fy = fy.year == max(fy.year) | fy.year == max(fy.year[fy.year != max(fy.year)])) %>%
-  group_by(fy.year) %>%
-  mutate(label = ifelse(Age == max(Age), fy.year, NA_character_), 
-         label.y = mean(mean_Net_CG[Age > 70])) %>%
-         {
-           ggplot(., aes(x = Age, y = mean_Net_CG, color = factor(fy.year), group = factor(fy.year))) + 
-             scale_y_continuous(label = dollar) + 
-             scale_color_viridis(discrete = TRUE) + 
-             geom_line(stat = "smooth", method = "auto", se = FALSE, size = 1.2) +
-             scale_alpha_discrete(range = c(0.5, 1)) + 
-             geom_text(aes(label = label, y = label.y, size = if_else(last_fy %in% c("2012-13", "2013-14"), 2, 1),
-                                                                      nudge_x = if_else(last_fy, 1, 0)),
-                       hjust = 0, 
-                       vjust = 0, 
-                       fontface = "bold", 
-                       na.rm = TRUE) + 
-             scale_x_continuous(expand = c(0,0)) + 
-             theme_dark() + 
-             annotate("blank", 
-                      x = 85, y = 0) + 
-             theme(axis.title.y = element_blank(), 
-                   plot.margin = unit(c(0,0,5,0), "pt"))
-         }
+with_seed(24841, {
+  sample_files_all %>%
+    .[, .(age_range, Net_CG_amt, fy.year)]%>%
+    merge(age_range_decoder, by = "age_range") %>%
+    .[, 
+      by = .(age_range_description),
+      min_age := 
+        if (grepl("^([0-9]{2}).*$", first(age_range_description))) {
+          as.numeric(gsub("^([0-9]{2}).*$", "\\1", age_range_description))
+        } else {
+          if_else(grepl("70", age_range_description),
+                  70, 
+                  15)
+        }] %>%
+    .[, max_age := min_age + 5] %>%
+    .[, age_imp := runif(.N, min_age, max_age), by = .(age_range_description)]
+}) %>%
+  .[Net_CG_amt > 0] %>%
+  .[, Age := round(age_imp)] %>%
+  
+  .[, .(mean_Net_CG = mean(Net_CG_amt), 
+        sd_Net_CG = sd(Net_CG_amt)),
+    keyby = .(fy.year, Age)] %>%
+  .[, last_fy := fy.year == max(fy.year) | fy.year == max(fy.year[fy.year != max(fy.year)])] %>%
+  .[, label := fifelse(Age == max(Age), as.character(.BY[[1]]), NA_character_),
+    keyby = .(fy.year)] %>%
+  .[, label.y := mean(mean_Net_CG[Age > 70])] %>%
+  {
+    ggplot(., aes(x = Age, y = mean_Net_CG, color = factor(fy.year), group = factor(fy.year))) + 
+      scale_y_continuous(label = dollar) + 
+      scale_color_viridis(discrete = TRUE) + 
+      geom_line(stat = "smooth", method = "auto", se = FALSE, size = 1.2) +
+      scale_alpha_discrete(range = c(0.5, 1)) + 
+      geom_text(aes(label = label, y = label.y, size = if_else(last_fy %in% c("2012-13", "2013-14"), 2, 1),
+                    nudge_x = if_else(last_fy, 1, 0)),
+                hjust = 0, 
+                vjust = 0, 
+                fontface = "bold", 
+                na.rm = TRUE) + 
+      scale_x_continuous(expand = c(0,0)) + 
+      theme_dark() + 
+      annotate("blank", 
+               x = 85, y = 0) + 
+      theme(axis.title.y = element_blank(), 
+            plot.margin = unit(c(0,0,5,0), "pt"))
+  }
 ```
 
 ```{r Age-distribution-ofCG-by-taxable-income-exclCG}
@@ -885,10 +902,10 @@ if (FY.YEAR != "2013-14"){
   stop("Check annotations in this chart before compiling")
 }
 sample_file %>%
-  lazy_dt %>%
-  filter(Net_CG_amt > 0, age_imp > 20) %>% 
-  mutate(marginal_rate = income_tax(Taxable_Income + 1, fy.year = FY.YEAR) - income_tax(Taxable_Income, fy.year = FY.YEAR)) %>%
-  rename(Age = age_imp) %>%
+  .[Net_CG_amt > 0 & age_imp > 20] %>% 
+  .[, marginal_rate := income_tax(Taxable_Income + 1, fy.year = FY.YEAR) - income_tax(Taxable_Income, fy.year = FY.YEAR)] %>%
+  setnames("age_imp", "Age") %>%
+  as.data.frame %>%
   ggplot(aes(x = Age, y = marginal_rate)) + 
   scale_y_continuous(label = percent) + 
   geom_smooth(aes(weight = 1), colour = viridis(2)[1], size = 1.2) + 
@@ -909,11 +926,10 @@ if (FY.YEAR != "2013-14"){
   stop("Check annotations in this chart before compiling")
 }
 sample_file %>%
-  lazy_dt %>%
-  filter(Net_CG_amt > 0, age_imp > 20) %>% 
-  mutate(Taxable_Income_b4_CG = pmaxC(Taxable_Income - Net_CG_amt, 0),
-         marginal_rate_b4_CG = income_tax(Taxable_Income_b4_CG + 1, fy.year = FY.YEAR) - income_tax(Taxable_Income_b4_CG, fy.year = FY.YEAR)) %>% 
-  rename(Age = age_imp) %>%
+  .[Net_CG_amt > 0 & age_imp > 20] %>% 
+  .[, Taxable_Income_b4_CG := pmaxC(Taxable_Income - Net_CG_amt, 0)] %>%
+  .[, marginal_rate_b4_CG := income_tax(Taxable_Income_b4_CG + 1, fy.year = FY.YEAR) - income_tax(Taxable_Income_b4_CG, fy.year = FY.YEAR)] %>% 
+  setnames("age_imp", "Age") %>%
   as.data.frame %>%
   ggplot(aes(x = Age, y = marginal_rate_b4_CG)) + 
   scale_y_continuous(label = percent) +
