@@ -44,7 +44,7 @@
 #' @param partner_is_pensioner (logical, default: \code{FALSE}) Is the 
 #' individual's partner in receipt of a \emph{pension} (or benefit)? 
 #' @param partner_taper The amount by which the payment is reduced for each 
-#' dollar earned by the individual's partner. (See \url{http://guides.dss.gov.au/guide-social-security-law/4/2/8/40}.)
+#' dollar earned by the individual's partner. (See \url{https://guides.dss.gov.au/guide-social-security-law/4/2/8/40}.)
 #' @export youth_allowance 
 
 
@@ -267,7 +267,7 @@ youth_allowance <- function(fortnightly_income = 0,
   #   partners income is added together. Each partner is then assessed 
   #   on half the combined income.
   # 
-  # source: http://guides.dss.gov.au/guide-social-security-law/4/2/8/40
+  # source: https://guides.dss.gov.au/guide-social-security-law/4/2/8/40
   input[, income := if_else(hasPartner & partnerIsPensioner,
                             (income + partnerIncome) / 2,
                             income)]
@@ -415,7 +415,7 @@ youth_allowance <- function(fortnightly_income = 0,
 #   
 #   input <- data.table(do.call(cbind.data.frame, mget(ls())))
 #   
-#   # max rate data: http://guides.dss.gov.au/guide-social-security-law/5/1/1/20
+#   # max rate data: https://guides.dss.gov.au/guide-social-security-law/5/1/1/20
 #   # note: identical for student and jobseeker
 #   max_rate_March_2018 <-
 #     input[, if_else(and(age >= 22, eligible_if_over22),
@@ -507,7 +507,7 @@ youth_allowance <- function(fortnightly_income = 0,
 #   
 # 
 #   # Benefit test
-#   # http://guides.dss.gov.au/guide-social-security-law/4/2/2
+#   # https://guides.dss.gov.au/guide-social-security-law/4/2/2
 #   # https://www.humanservices.gov.au/individuals/enablers/personal-income-test-austudy-and-youth-allowance/30411
 #   
 #   # ordinary_income_excess <- pmaxC(ordinary_income - ordinary_income_free_area)
@@ -539,10 +539,10 @@ youth_allowance <- function(fortnightly_income = 0,
 #                                     # reduce by entire income i.e. dont get YA
 #                                     max_rate_March_2018))))
 #     # personal assets test: 
-#       # http://guides.dss.gov.au/guide-social-security-law/4/2/8/30 
+#       # https://guides.dss.gov.au/guide-social-security-law/4/2/8/30 
 #       # ## The personal assets test for independent YA recipients 
 #       # ##  is the same as the benefits assets tes
-#       # http://guides.dss.gov.au/guide-social-security-law/4/2/3
+#       # https://guides.dss.gov.au/guide-social-security-law/4/2/3
 #       # https://www.legislation.gov.au/Details/C2018C00167
 #   
 #     personal_asset_reduction <-
@@ -563,11 +563,11 @@ youth_allowance <- function(fortnightly_income = 0,
 #                                       0)))]
 #   
 #     # partner income test
-#       # http://guides.dss.gov.au/guide-social-security-law/4/2/2
-#       # http://guides.dss.gov.au/guide-social-security-law/4/2/8/40
-#       # example: http://guides.dss.gov.au/guide-social-security-law/5/5/3/30
+#       # https://guides.dss.gov.au/guide-social-security-law/4/2/2
+#       # https://guides.dss.gov.au/guide-social-security-law/4/2/8/40
+#       # example: https://guides.dss.gov.au/guide-social-security-law/5/5/3/30
 #     partner_income_reduction <- 
-#       # https://web.archive.org/web/20160812171654/http://guides.dss.gov.au/guide-social-security-law/5/5/3/30
+#       # https://web.archive.org/web/20160812171654/https://guides.dss.gov.au/guide-social-security-law/5/5/3/30
 #       if_else(has_partner & (partner_income > max_income_March_2018) & (age >= 22),
 #               0.6 * (partner_income - round((1/0.6) * (max_rate_March_2018 - (upper - lower) * 0.5 + 252 * 0.6))),
 #               0)
@@ -575,18 +575,18 @@ youth_allowance <- function(fortnightly_income = 0,
 #     
 #   # parental income test:  INCOMPLETE
 #     # https://www.humanservices.gov.au/individuals/services/centrelink/youth-allowance-students-and-australian-apprentices/how-much-you-can-get/income-and-assets-test# parentalincome
-#     # http://guides.dss.gov.au/guide-social-security-law/4/2/8/05                          
+#     # https://guides.dss.gov.au/guide-social-security-law/4/2/8/05                          
 #     
 #   MITRA <-
 #       233.94 - 57.68 #ftba max rate - basic rate
 #     
-#   PITR <- # http://guides.dss.gov.au/guide-social-security-law/4/2/8/10
+#   PITR <- # https://guides.dss.gov.au/guide-social-security-law/4/2/8/10
 #       input[, if_else(parents_income > 51027,
 #                     (parents_income - 51027) / 130,
 #                     0)]# NOTE: steps 6-10 not applied as require info on other children who receive payments
 #   
 #   MITR <-  
-#     # MIFA historical rates: http://guides.dss.gov.au/family-assistance-guide/3/6/1# table7
+#     # MIFA historical rates: https://guides.dss.gov.au/family-assistance-guide/3/6/1# table7
 #     if_else(n_siblings_on_ya == 0 & !ftb_children,
 #             1620.60,
 #             if_else(ftb_children,

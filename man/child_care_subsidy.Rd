@@ -37,11 +37,11 @@ child_care_subsidy(
 \item{activity_level}{(numeric) The total number of activity hours of the 
 parent. Note that if there are two parents the one with the lower activity 
 level will be applied. Common activities include work, leave, and study. A 
-full list can be viewed at \url{http://guides.dss.gov.au/family-assistance-guide/3/5/2/10}.}
+full list can be viewed at \url{https://guides.dss.gov.au/family-assistance-guide/3/5/2/10}.}
 
 \item{activity_exemption}{(logical) Whether the parent is exempt from the 
 activity test. Note that in a two parent family both parents must be exempt. 
-A list of exemptions is available at \url{http://guides.dss.gov.au/family-assistance-guide/3/5/2/10}.}
+A list of exemptions is available at \url{https://guides.dss.gov.au/family-assistance-guide/3/5/2/10}.}
 
 \item{child_age}{(numeric) The age of the child in child care.}
 
@@ -70,7 +70,7 @@ calculation of the subsidy.}
 capped for those who earn more than `annual_cap_income`.}
 
 \item{income_test_bracket_1, income_test_bracket_2, income_test_bracket_3, income_test_bracket_4, income_test_bracket_5}{(numeric) The steps at which income test 1 changes rates.
-Note the strange structure \url{https://www.humanservices.gov.au/individuals/services/centrelink/child-care-subsidy/payments/how-your-income-affects-it}.}
+Note the strange structure \code{https://www.servicesaustralia.gov.au/individuals/services/centrelink/child-care-subsidy/how-much-you-can-get/your-income-can-affect-it}.}
 
 \item{taper_1, taper_2, taper_3}{(numeric) The proportion of the hourly cap 
 retained. Note that the rate only decreases between each odd bracket.}

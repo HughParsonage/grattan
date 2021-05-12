@@ -10,8 +10,8 @@
 #' @param carer_assets_value Total value of carer's household assets.
 #' @param carer_is_home_owner (logical, default: \code{FALSE}) Does the carer own their own home? 
 #' @param carer_illness_separated_couple Is the couple separated by illness? (Affects the assets test.)
-#' @param dclad_eligible Is the person receiving care a DCLAD (Disability Care Load Assessment) qualifying child as defined in http://guides.dss.gov.au/guide-social-security-law/1/1/q/17 ?
-#' @param high_adat Does the person receiving care have a high ADAT (Adult Disability Assessment Tool) score as defined in http://guides.dss.gov.au/guide-social-security-law/1/1/a/78 ?
+#' @param dclad_eligible Is the person receiving care a DCLAD (Disability Care Load Assessment) qualifying child as defined in https://guides.dss.gov.au/guide-social-security-law/1/1/q/17 ?
+#' @param high_adat Does the person receiving care have a high ADAT (Adult Disability Assessment Tool) score as defined in https://guides.dss.gov.au/guide-social-security-law/1/1/a/78 ?
 #' @param living_at_home Does the person receiving care live at home with their parents?
 #' @param care_receiver_fortnightly_income Care receiver's fortnightly income
 #' @param care_receiver_annual_income Care receiver's annual income
@@ -99,7 +99,7 @@ carer_payment <- function(Date = NULL,
                       is_home_owner = carer_is_home_owner,
                       illness_separated_couple = carer_illness_separated_couple)
   
-  #http://guides.dss.gov.au/guide-social-security-law/4/2/5
+  #https://guides.dss.gov.au/guide-social-security-law/4/2/5
   #https://www.humanservices.gov.au/sites/default/files/co029-1603en.pdf
   
   care_receiver_income_test <- input[ ,if_else(high_adat,
@@ -117,7 +117,7 @@ carer_payment <- function(Date = NULL,
   assets_eligible <- input[ ,or(high_adat & receiving_other_payment, 
                                 care_receiver_asset_test < 671250)]
   
-  #NOTE: there is discretion to still approve payment even if failed the care receiver asset test. Described in section 'Discretion to decide that the care receivers assets test does not disqualify a person from CP' http://guides.dss.gov.au/guide-social-security-law/4/2/5
+  #NOTE: there is discretion to still approve payment even if failed the care receiver asset test. Described in section 'Discretion to decide that the care receivers assets test does not disqualify a person from CP' https://guides.dss.gov.au/guide-social-security-law/4/2/5
   
   #OUTPUT
   input[ ,if_else(income_eligible & assets_eligible,

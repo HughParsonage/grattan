@@ -1,8 +1,8 @@
 Package: grattan
 Type: Package
 Title: Australian Tax Policy Analysis
-Version: 1.9.0.0
-Date: 2020-07-02
+Version: 1.9.0.4
+Date: 2021-01-29
 Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.parsonage@gmail.com"),
               person("Tim", "Cameron", role = "aut"),
               person("Brendan", "Coates", role = "aut"),
@@ -30,6 +30,7 @@ Imports:
     fastmatch,
     forecast,
     fy (>= 0.2.0),
+    hutilscpp,
     assertthat (>= 0.1),
     magrittr (>= 1.5),
     Rcpp (>= 0.12.3),
@@ -47,7 +48,6 @@ Suggests:
     future.apply,
     ggplot2,
     ggrepel,
-    hutilscpp,
     knitr,
     lattice,
     mgcv,

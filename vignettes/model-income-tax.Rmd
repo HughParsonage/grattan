@@ -1,10 +1,10 @@
 ---
-title: "Model income tax and project"
+title: "Modelling income tax and the project function"
 author: "Hugh Parsonage"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{model_income_tax}
+  %\VignetteIndexEntry{Modelling income tax and the project function}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -64,6 +64,7 @@ do_eval <- function() {
 ```
 
 ```{r loadPackages}
+library(hutilscpp)
 library(knitr)
 library(data.table)
 library(magrittr)

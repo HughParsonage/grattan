@@ -134,6 +134,7 @@ context("Reweighting and imputation successfully reconcile aggregates")
 
 test_that("Imputed, reweighted sample file agrees with aggregates by no less than 1%", {
   skip_if_not_installed("taxstats") 
+  skip("Inflators not useful post-COVID")
   library(taxstats)
   library(magrittr)
   

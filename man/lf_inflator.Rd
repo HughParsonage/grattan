@@ -5,7 +5,7 @@
 \alias{lf_inflator_fy}
 \title{Labour force inflators}
 \source{
-ABS Cat 6202.0 \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocument}.
+ABS Cat 6202.0
 }
 \usage{
 lf_inflator_fy(

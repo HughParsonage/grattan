@@ -51,7 +51,7 @@ test_that("upper/lower higher/lower", {
 
 test_that("Custom wage series", {
   
-  y <- wage_inflator(1, from_fy = "2018-19", to_fy = "2021-22", 
+  y <- wage_inflator(1, from_fy = next_fy(h = 0), to_fy = next_fy(h = 3), 
                      forecast.series = "custom", 
                      wage.series = 0.1)
   
@@ -71,10 +71,10 @@ test_that("Custom wage series error handling", {
                regexp = "`wage.series` had length 2.",
                fixed = TRUE)
   
-  expect_message(wage_inflator(1, from_fy = "2015-16", to_fy = "2019-20", 
+  expect_message(wage_inflator(1, from_fy = next_fy(h = -1), to_fy = next_fy(h = 2), 
                                forecast.series = "custom", 
-                               wage.series = data.table(fy_year = c("2018-19", "2019-20"), 
-                                                        r = c(2.5, 10.0))),
+                               wage.series = data.table(fy_year = next_fy(h = -1:2), 
+                                                        r = rep_len(c(2.5, 10.0), length(-1:2)))),
                  regexp = "unlikely")
 })
 
@@ -102,6 +102,7 @@ test_that("from > to deflates and is not a warning for inflators", {
 })
 
 test_that("ABS connection", {
+  skip("ABS unavbl")
   skip_on_cran()
   skip_on_circleci(2)
   skip_if_not_installed("rsdmx")
@@ -124,6 +125,7 @@ test_that("ABS connection", {
 })
 
 test_that("ABS Connection (extras)", {
+  skip("ABS unavbl")
   skip_on_cran()
   skip_on_appveyor()
   skip_on_travis()
@@ -148,6 +150,7 @@ test_that("ABS Connection (extras)", {
 })
 
 test_that("accelerated", {
+  skip("ABS unavbl")
   skip_on_cran()
   set.seed(1111)
   skip_on_circleci(2)

@@ -17,7 +17,7 @@ Utilities for costing and evaluating Australian tax policy, including high-perfo
 
 ```{r knitrOpts, include=FALSE}
 library(knitr)
-opts_chunk$set(dev = 'svg',
+opts_chunk$set(dev = 'png',
                fig.path = "man/figures/README_")
 ```
 

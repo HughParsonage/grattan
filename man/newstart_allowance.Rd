@@ -48,7 +48,7 @@ receiving payments for over 9 continuous months?}
 \item{isjspceoalfofcoahodeoc}{Is the recipient a single job seeker principal carer, either of large family or foster child/ren, or who is a home or distance educator of child/ren?}
 
 \item{principal_carer}{Is the individual the parent with most of the day-to-day
-care of child. Defined in \url{https://www.humanservices.gov.au/individuals/enablers/principal-carer-rules-parenting-payment/41456}.}
+care of child. Defined in \code{https://www.servicesaustralia.gov.au/individuals/services/centrelink/parenting-payment/who-can-get-it/principal-carer-rules/}.}
 
 \item{fortnightly_partner_income}{Partner's 'Ordinary income' received fortnightly.}
 
@@ -59,7 +59,7 @@ care of child. Defined in \url{https://www.humanservices.gov.au/individuals/enab
 \item{fy.year}{Financial year. Default is "2015-16".}
 
 \item{assets_value}{Total value of household assets. Details can be found at
-\url{https://www.humanservices.gov.au/individuals/enablers/assets/30621}.}
+\code{https://www.servicesaustralia.gov.au/individuals/topics/asset-types/30621}.}
 
 \item{homeowner}{Is the individual a homeowner?}
 

@@ -31,7 +31,7 @@
 #' dramatically. Can be set to \code{Inf} to disable acceleration.
 #' 
 #'   
-#' @source ABS Cat 6202.0 \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocument}.
+#' @source ABS Cat 6202.0 
 #' @details \code{lf_inflator} is used on dates. The underlying data series is available every month. 
 #' @examples
 #' lf_inflator_fy(labour_force = 1, from_fy = "2012-13", to_fy = "2013-14")

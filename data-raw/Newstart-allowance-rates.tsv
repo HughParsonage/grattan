@@ -58,3 +58,4 @@ Date	Rate	is_single	min_age	max_age	PerFortnight
 2019-03-20	277.85	TRUE	21	Inf	FALSE
 2019-09-20	279.5	TRUE	21	Inf	FALSE
 2020-03-20	282.85	TRUE	21	Inf	TRUE
+2020-09-20		TRUE	21	Inf	TRUE

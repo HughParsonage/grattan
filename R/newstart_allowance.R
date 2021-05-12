@@ -10,13 +10,13 @@
 #' receiving payments for over 9 continuous months?
 #' @param isjspceoalfofcoahodeoc Is the recipient a single job seeker principal carer, either of large family or foster child/ren, or who is a home or distance educator of child/ren?
 #' @param principal_carer Is the individual the parent with most of the day-to-day
-#'  care of child. Defined in \url{https://www.humanservices.gov.au/individuals/enablers/principal-carer-rules-parenting-payment/41456}.
+#'  care of child. Defined in \code{https://www.servicesaustralia.gov.au/individuals/services/centrelink/parenting-payment/who-can-get-it/principal-carer-rules/}.
 #' @param fortnightly_partner_income Partner's 'Ordinary income' received fortnightly. 
 #' @param annual_partner_income Partner's Ordinary income' received annually.
 #' @param age The individual's age.
 #' @param fy.year Financial year. Default is "2015-16".
 #' @param assets_value Total value of household assets. Details can be found at
-#' \url{https://www.humanservices.gov.au/individuals/enablers/assets/30621}. 
+#' \code{https://www.servicesaustralia.gov.au/individuals/topics/asset-types/30621}. 
 #' @param homeowner Is the individual a homeowner?
 #' @param taper_lower The amount at which the payment is reduced for each dollar
 #'  earned between the lower and upper bounds for non-principal carers.
@@ -34,8 +34,8 @@
 #' @source \url{http://classic.austlii.edu.au/au/legis/cth/consol_act/ssa1991186/s1068.html}
 #' @export newstart_allowance
 
-#historical rates single: http://guides.dss.gov.au/guide-social-security-law/5/2/1/20
-  #married: http://guides.dss.gov.au/guide-social-security-law/5/2/1/30
+#historical rates single: https://guides.dss.gov.au/guide-social-security-law/5/2/1/20
+  #married: https://guides.dss.gov.au/guide-social-security-law/5/2/1/30
 #better copy of rates and reductions: https://www.humanservices.gov.au/sites/default/files/co029-1603en.pdf
 newstart_allowance <- function(fortnightly_income = 0,
                                annual_income = 0,
@@ -197,7 +197,7 @@ newstart_allowance <- function(fortnightly_income = 0,
                                              assets_value < 348500))]
   
   # Partner income reduction
-  # https://web.archive.org/web/20160812171654/http://guides.dss.gov.au/guide-social-security-law/5/5/3/30
+  # https://web.archive.org/web/20160812171654/https://guides.dss.gov.au/guide-social-security-law/5/5/3/30
   partner_income_reduction <- NULL
   input %>%
     .[, partner_income_reduction := 
