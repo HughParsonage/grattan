@@ -288,7 +288,7 @@ int verify_NA_ALIAS(int x = 0) {
 // sapto
 
 
-double do_1_sapto_sf(int &x, int &y, int age, bool is_married, Sapto S) {
+double do_1_sapto_sf(int x, int y, int age, bool is_married, Sapto S) {
   if (age < S.pension_age) {
     // ineligible
     return 0;
@@ -385,14 +385,18 @@ DoubleVector do_sapto(IntegerVector x, IntegerVector y,
                       double lito_1st_thresh = 37e3,
                       double lito_1st_taper = -0.015) {
   Sapto S;
+  S.pension_age = 65;
   S.mxo_single = max_single;
   S.mxo_couple = max_couple;
+  S.lwr_single = lwr_single;
+  S.lwr_couple = lwr_couple;
+  S.upr_single = lwr_single + max_single / -taper;
+  S.upr_couple = lwr_couple + max_couple / -taper;
+  S.taper = taper;
+  
   S.first_tax_rate = first_tax_rate;
   S.second_tax_rate = second_tax_rate;
   S.tax_free_thresh = tax_free_thresh;
-  S.lwr_couple = lwr_couple;
-  S.pension_age = 65;
-  S.taper = taper;
   S.lito_max_offset = lito_max_offset;
   S.lito_1st_thresh = lito_1st_thresh;
   S.lito_1st_taper = lito_1st_taper;
@@ -588,6 +592,10 @@ IntegerVector do_rebate_income(SEXP rebateIncome,
   if (TYPEOF(rebateIncome) == INTSXP) {
     IntegerVector out = rebateIncome;
     return out;
+  }
+  // don't bound check every i
+  if (yr - 1990 >= 43) {
+    stop("Internal error(do_rebate_income): yr - 1990 >= 43"); // # nocov
   }
   
   R_xlen_t N = ic_taxable_income_loss.length();
