@@ -192,12 +192,15 @@ income_tax <- function(income,
     s2("ds_pers_super_cont",
        "Non_emp_spr_amt")
     
-    
+  integerN <- integer(N)
   rN <- function(x) {
     if (is.integer(x) && length(x) == N && !anyNA(x)) {
       return(x)
     }
     if (is.integer(x)) {
+      if (identical(x, 0L)) {
+        return(integerN)
+      }
       return(rep_len(fcoalesce(x, 0L), N))
     }
     if (is.double(x)) {
@@ -950,12 +953,16 @@ income_tax2 <- function(income,
     s2("ds_pers_super_cont",
        "Non_emp_spr_amt")
   
-  
+  # don't allocate the same vector
+  integerN <- integer(N)
   rN <- function(x) {
     if (is.integer(x) && length(x) == N && !anyNA(x)) {
       return(x)
     }
     if (is.integer(x)) {
+      if (identical(x, 0L)) {
+        return(integerN)
+      }
       return(rep_len(fcoalesce(x, 0L), N))
     }
     if (is.double(x)) {
