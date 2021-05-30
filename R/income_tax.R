@@ -100,6 +100,12 @@ income_tax <- function(income,
             `spc_rebate_income` to more precisely identify the thresholds.")
   }
   
+  if (min(income, na.rm = TRUE) < 0) {
+    warning("`income` has negative values, which will be set to zero.")
+    income <- pmax0(income)
+  }
+  
+  
   # Now set values based on arguments, columns in .dots.ATO 
   # Order of preference:
   #   aLife variables (most accurate)
@@ -142,7 +148,22 @@ income_tax <- function(income,
     s2("ic_taxable_income_loss",
        "Taxable_Income")
   
+  # Normally this is the default ... 
   N <- length(ic_taxable_income_loss)
+  #    ... but we allow
+  # comparisons for a single taxable income across years
+  if (length(yr) != N && length(yr) != 1L) {
+    if (N == 1L) {
+      N <- length(yr)
+      ic_taxable_income_loss <- rep.int(ic_taxable_income_loss, N)
+    } else {
+      stop("`length(fy.year) = ", length(fy.year),
+           "`, yet `length(income) = ", length(income), "`, ",
+           if (NROW(.dots.ATO)) "NROW(.dots.ATO) = ", NROW(.dots.ATO), ". ",
+           "The only permitted lengths for `fy.year` are the length of income, ",
+           "and 1.")
+    }
+  }
   
   c_age_30_june <- age_from_file(.dots.ATO, age)
     
@@ -217,7 +238,7 @@ income_tax <- function(income,
     # default
     isn_sbi_net <- 0L
     if (all(c("Total_PP_BE_amt",
-               "Total_PP_BI_amt",
+              "Total_PP_BI_amt",
               "Total_NPP_BE_amt",
               "Total_NPP_BI_amt") %in% names(.dots.ATO))) {
       isn_sbi_net <-
