@@ -2305,7 +2305,7 @@ DoubleVector do_income_tax_sf(int yr,
         double taxi = income_taxi_nb(P.xi, ORD_TAX_BRACK_2017, ORD_TAX_RATES_2017);
         apply_sapto(taxi, P, Sapto2017);
         apply_lito(taxi, P.xi, LITO_MAX_OFFSET_2017, LITO_1ST_THRESH_2017, LITO_1ST_TAPER_2017);
-        
+
         int net_sbi = isn_sbi_net[i];
         apply_sbto(taxi, P.xi, net_sbi, SBTO_DISCOUNT_2016);
         
@@ -2314,7 +2314,9 @@ DoubleVector do_income_tax_sf(int yr,
         
         
         // temporary budget repair levy
-        taxi += TEMP_BUDGET_REPAIR_LEVY_RATE * max0(P.xi - TEMP_BUDGET_REPAIR_LEVY_THRESH);
+        if (P.xi >= TEMP_BUDGET_REPAIR_LEVY_THRESH) {
+          taxi += TEMP_BUDGET_REPAIR_LEVY_RATE * (P.xi - TEMP_BUDGET_REPAIR_LEVY_THRESH);
+        }
         
         // finally
         out[i] = taxi;
@@ -3185,6 +3187,15 @@ DoubleVector do_income_tax2(IntegerVector ic_taxable_income_loss,
                             double sapto_max_offset_married = 1602,
                             double sapto_lower_threshold_married = 41790) {
   R_xlen_t N = ic_taxable_income_loss.length();
+  check_len(is_net_rent, N, "is_net_rent");
+  check_len(it_property_loss, N, "it_property_loss");
+  check_len(it_rept_empl_super_cont, N, "it_rept_empl_super_cont");
+  check_len(sc_empl_cont, N, "sc_empl_cont");
+  check_len(it_rept_fringe_benefit, N, "it_rept_fringe_benefit");
+  check_len(ds_pers_super_cont, N, "ds_pers_super_cont");
+  check_len(it_invest_loss, N, "it_invest_loss");
+  check_len(spc_rebate_income, N, "spc_rebate_income");
+  check_len(n_dependants, N, "n_dependants");
   
   IntegerVector rebate_income = 
     do_rebate_income(rebateIncome, 
@@ -3249,6 +3260,8 @@ DoubleVector do_income_tax2(IntegerVector ic_taxable_income_loss,
   S.lito_1st_thresh = LitoA.thresh_1st;
   S.lito_1st_taper = LitoA.taper_1st;
   
+  double sbto_discount = SBTO_DISCOUNT(yr);
+  
   for (R_xlen_t i = 0; i < N; ++i) {
     Person P;
     P.xi = ic_taxable_income_loss[i];
@@ -3291,6 +3304,11 @@ DoubleVector do_income_tax2(IntegerVector ic_taxable_income_loss,
         apply_offset(taxi, P, oe);
       }
     }
+    
+    if (!ISNAN(sbto_discount)) {
+      int net_sbi = isn_sbi_net[i];
+      apply_sbto(taxi, P.xi, net_sbi, sbto_discount);
+    }
     taxi += do_1_ML(P, M);
 
     if (temp_levy_nb) {
@@ -3301,7 +3319,4 @@ DoubleVector do_income_tax2(IntegerVector ic_taxable_income_loss,
   }
   return out;
 }
-
-
-
 
