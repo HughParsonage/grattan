@@ -116,6 +116,7 @@ test_that("Custom lf series", {
 })
 
 test_that("ABS connection", {
+  skip("ABS not accepting connections")
   skip_if_not_installed("rsdmx")
   skip_if_not(packageVersion("rsdmx") >= package_version("0.5.10"))
   skip_on_cran()
