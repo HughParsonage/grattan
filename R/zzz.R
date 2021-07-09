@@ -1,4 +1,4 @@
-.onLoad <- function(libname = find.package("grattan"), pkgname = "grattan") {
+.onLoad <- function(libname, pkgname) {
   
   op <- options()
   the_tempdir <- tempdir()
