@@ -2,27 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<link rel="shortlink" href="../../../node/80" />
-<link rel="canonical" href="9" />
-<meta name="viewport" content="width=device-width" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>2.4.9 Assessments when a Parent Has Multiple Child Support Cases (Formulas 3 &amp; 4) | Child Support Guide</title>
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<meta name="viewport" content="width=device-width" />
+<link rel="canonical" href="9" />
+<link rel="shortlink" href="../../../node/80" />
+<title>2.4.9 Assessments when a parent has multiple child support cases (Formulas 3 &amp; 4) | Child Support Guide</title>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_Q4XrxgEkbadGDm1J7AHUHHmbcMJ2_hbMfrrzrm9Ne_I.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
-<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_d905I2WxoGGQW6uS7jkC73mqKhSejey6jciEdxo9cJI.css" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_yMSKTzBO0KmozyLwajzFOrrt_kto_9mtccAkb0rm7gc.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_FA2YSy0R3kB2AU_wIOLoSR0sJX4ZYjdPuPaRFd2ZDyw.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+window.rsConf = { ui: { tools: {translation: false, dictionary: false}}};
 //--><!]]>
 </script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_rsGiM5M1ffe6EhN-RnhM5f3pDyJ8ZAPFJNKpfjtepLk.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_-oEDdwe4XpUqUj4W0KJs96ENaXIrGvjBvIP-WYYBi54.js"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"PQfTnqkzB3P0Nqolna28e8tUxwv07sh8eQWeJYwUqQ4","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/2\/4\/9":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"hC_EcfPbPDxYrZ4NONoi2Ev3VAtHkjtO0EsQQqk57YY","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"https:\/\/cdn1.readspeaker.com\/script\/5931\/webReader\/webReader.js?pids=wr\u0026notools=1\u0026disable=popupplayback":1,"misc\/jquery.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"0":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"1":1,"sites\/all\/modules\/extlink\/js\/extlink.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/2\/4\/9":true},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)","extUseFontAwesome":false}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -35,358 +40,599 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <nav id="global">
 	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
 <div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<ul class="menu"><li class="first leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law.1">Social Security Guide</a></li>
+<li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide.1">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide.1">Paid Parental Leave Guide</a></li>
+<li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide.1" class="active-trail">Child Support Guide</a></li>
+<li class="leaf menu-mlid-7596"><a href="../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
 <li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
-<li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide" class="active-trail">Child Support Guide</a></li>
-<li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law">Guide to Social Security Law</a></li>
-<li class="last leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+<li class="last leaf has-children menu-mlid-19951"><a href="../../../national-redress-guide" title="">National Redress Guide</a></li>
 </ul></div></nav>
 <header role="banner">
 	<a href="../../../index.html" rel="home"><img src="../../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
 <p class="site-name">Guides to Social Policy Law</p>
 <form class="search-form" role="search" action="9" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
- <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+ <input class="custom-search-box form-text" placeholder="Search" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-Ob8jOSlDVCXMXccJHZbvHPecMA5lpPX-XqgaNV9X-vM" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form--ZNY6TBi5gBDmZ-F2-6t3PJjuGfW7uGcday5DWjU0Og" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.32 - Released 7 May 2018</p>
+<p>Version 4.57 - Released 1 July 2021</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7286"><a href="../../../child-support-guide" title="">Using the Child Support Guide</a></li>
-<li class="collapsed menu-mlid-514"><a href="../../updates">What&#039;s New</a></li>
-<li class="collapsed menu-mlid-515"><a href="../../1">1 About the Scheme</a></li>
-<li class="expanded active-trail menu-mlid-518"><a href="../../2" class="active-trail">2 Child Support Assessments</a><ul class="menu"><li class="first collapsed menu-mlid-534"><a href="../1" title="This chapter describes how the Registrar will make a decision on an application for administrative assessment.">2.1 Applying for a Child Support Assessment</a></li>
-<li class="collapsed menu-mlid-547"><a href="../2" title="This chapter explains how the Registrar will determine percentages of care.">2.2 Care</a></li>
-<li class="collapsed menu-mlid-568"><a href="../3" title="This chapter describes the start and end dates of child support periods and which financial year of income the Registrar will use when making an assessment for a child support period.">2.3 Child Support Periods</a></li>
-<li class="expanded active-trail menu-mlid-575"><a href="../4" title="This chapter describes the administrative formulas the Registrar uses to calculate a child support assessment. It explains how the Registrar uses income and care to calculate a child support assessment and how the parents&#039; combined incomes are used to calculate the costs of children. It also includes information about when the minimum annual rate of child support, or the fixed annual rate assessment, will apply." class="active-trail">2.4 Formula Assessment</a><ul class="menu"><li class="first leaf menu-mlid-576"><a href="1">2.4.1 The Formulas</a></li>
-<li class="leaf menu-mlid-577"><a href="2">2.4.2 Formula Tables &amp; Values</a></li>
-<li class="leaf menu-mlid-578"><a href="3">2.4.3 The Steps Involved in Making a Child Support Assessment</a></li>
-<li class="collapsed menu-mlid-579"><a href="4">2.4.4 Child Support Income</a></li>
-<li class="leaf menu-mlid-580"><a href="5">2.4.5 Care, Cost &amp; Child Support Percentages</a></li>
-<li class="leaf menu-mlid-581"><a href="6">2.4.6 The Costs of the Child</a></li>
-<li class="leaf menu-mlid-582"><a href="7">2.4.7 The Basic Formula - a Single Case Assessment (Formula 1)</a></li>
-<li class="leaf menu-mlid-583"><a href="8">2.4.8 Assessment - Single Case with a Non-parent Carer (Formula 2)</a></li>
-<li class="leaf active-trail active menu-mlid-584"><a href="9" class="active-trail active">2.4.9 Assessments when a Parent Has Multiple Child Support Cases (Formulas 3 &amp; 4)</a></li>
-<li class="leaf menu-mlid-585"><a href="10">2.4.10 Assessments Using the Income of Only One Parent (Formulas 5 &amp; 6)</a></li>
-<li class="leaf menu-mlid-586"><a href="11">2.4.11 Fixed Annual Rate of Child Support for Certain Low Income Parents</a></li>
-<li class="last leaf menu-mlid-587"><a href="12">2.4.12 The Minimum Annual Rate of Child Support</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7286"><a href="../../../child-support-guide.1" title="">Using the Child Support Guide</a></li>
+<li class="collapsed menu-mlid-514"><a href="../../updates.1">What&#039;s new</a></li>
+<li class="collapsed menu-mlid-515"><a href="../../1.1">1 About the Scheme</a></li>
+<li class="expanded active-trail menu-mlid-518"><a href="../../2.1" class="active-trail">2 Child support assessments</a><ul class="menu"><li class="first collapsed menu-mlid-534"><a href="../1.1" title="This chapter describes how the Registrar will make a decision on an application for administrative assessment.">2.1 Applying for a child support assessment</a></li>
+<li class="collapsed menu-mlid-547"><a href="../2.1" title="This chapter explains how the Registrar will determine percentages of care.">2.2 Care</a></li>
+<li class="collapsed menu-mlid-568"><a href="../3.1" title="This chapter describes the start and end dates of child support periods and which financial year of income the Registrar will use when making an assessment for a child support period.">2.3 Child support periods</a></li>
+<li class="expanded active-trail menu-mlid-575"><a href="../4.1" title="This chapter describes the administrative formulas the Registrar uses to calculate a child support assessment. It explains how the Registrar uses income and care to calculate a child support assessment and how the parents&#039; combined incomes are used to calculate the costs of children. It also includes information about when the minimum annual rate of child support, or the fixed annual rate assessment, will apply." class="active-trail">2.4 Formula assessment</a><ul class="menu"><li class="first leaf menu-mlid-576"><a href="1">2.4.1 The formulas</a></li>
+<li class="leaf menu-mlid-577"><a href="2">2.4.2 Formula tables &amp; values</a></li>
+<li class="leaf menu-mlid-578"><a href="3">2.4.3 The steps involved in making a child support assessment</a></li>
+<li class="collapsed menu-mlid-579"><a href="4.1">2.4.4 Child support income</a></li>
+<li class="leaf menu-mlid-580"><a href="5">2.4.5 Care, cost &amp; child support percentages</a></li>
+<li class="leaf menu-mlid-581"><a href="6">2.4.6 The costs of the child</a></li>
+<li class="leaf menu-mlid-582"><a href="7">2.4.7 The basic formula - a single case assessment (Formula 1)</a></li>
+<li class="leaf menu-mlid-583"><a href="8">2.4.8 Assessment - single case with a non-parent carer (Formula 2)</a></li>
+<li class="leaf active-trail active menu-mlid-584"><a href="9" class="active-trail active">2.4.9 Assessments when a parent has multiple child support cases (Formulas 3 &amp; 4)</a></li>
+<li class="leaf menu-mlid-585"><a href="10">2.4.10 Assessments using the income of only 1 parent (Formulas 5 &amp; 6)</a></li>
+<li class="leaf menu-mlid-586"><a href="11">2.4.11 Fixed annual rate of child support for certain low income parents</a></li>
+<li class="last leaf menu-mlid-587"><a href="12">2.4.12 The minimum annual rate of child support</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-588"><a href="../5" title="This chapter describes the applications and elections that may be made to amend a child support assessment.">2.5 Applications &amp; Elections to Amend an Assessment</a></li>
-<li class="collapsed menu-mlid-599"><a href="../6" title="This chapter describes the issues that the Registrar has to consider when making a decision to change an assessment under Child Support (Assessment) Act 1989 (CSA Act) part 6A.">2.6 Change of Assessment in Special Circumstances</a></li>
-<li class="collapsed menu-mlid-618"><a href="../7" title="This chapter describes how parents can make child support agreements. It describes the effect of a child support agreement upon a child support assessment.">2.7 Agreements</a></li>
-<li class="collapsed menu-mlid-624"><a href="../8" title="This chapter describes when a court can make orders that affect a child support assessment and how the Registrar interprets court orders which will affect an assessment.">2.8 Court Variation to Assessments</a></li>
-<li class="collapsed menu-mlid-627"><a href="../9" title="This chapter describes the procedural rules for making assessments and notes the information required in a notice of assessment. It also describes when the Registrar will amend an assessment.
-It also describes how an assessment creates a liability to pay child support and when those amounts are payable.">2.9 Making &amp; Amending Child Support Assessments</a></li>
-<li class="last collapsed menu-mlid-633"><a href="../10" title="This chapter contains information about how the liability to pay child support can be suspended when the parents reconcile. If the parents remain reconciled for 6 months the assessment will be ended. This chapter also contains information about how a person entitled to receive child support can elect to end the assessment. Approval to end the assessment may be required from the Secretary of the department. Information about other terminating events which end an assessment is also included.">2.10 Suspending &amp; Ending Assessments</a></li>
+<li class="collapsed menu-mlid-588"><a href="../5.1" title="This chapter describes the applications and elections that may be made to amend a child support assessment.">2.5 Applications &amp; elections to amend an assessment</a></li>
+<li class="collapsed menu-mlid-599"><a href="../6.1" title="This chapter describes the issues that the Registrar has to consider when making a decision to change an assessment under Child Support (Assessment) Act 1989 (CSA Act) part 6A.">2.6 Change of assessment in special circumstances</a></li>
+<li class="collapsed menu-mlid-618"><a href="../7.1" title="This chapter describes how parents can make child support agreements. It describes the effect of a child support agreement upon a child support assessment.">2.7 Agreements</a></li>
+<li class="collapsed menu-mlid-624"><a href="../8.1" title="This chapter describes when a court can make orders that affect a child support assessment and how the Registrar interprets court orders which will affect an assessment.">2.8 Court variation to assessments</a></li>
+<li class="collapsed menu-mlid-627"><a href="../9.1" title="This chapter describes the procedural rules for making assessments and notes the information required in a notice of assessment. It also describes when the Registrar will amend an assessment.
+It also describes how an assessment creates a liability to pay child support and when those amounts are payable.">2.9 Making &amp; amending child support assessments</a></li>
+<li class="last collapsed menu-mlid-633"><a href="../10.1" title="This chapter contains information about how the liability to pay child support can be suspended when the parents reconcile. If the parents remain reconciled for 6 months the assessment will be ended. This chapter also contains information about how a person entitled to receive child support can elect to end the assessment. Information about other terminating events that end an assessment is also included.">2.10 Suspending &amp; ending assessments</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-555"><a href="../../3">3 Registrable Maintenance Liabilities</a></li>
-<li class="collapsed menu-mlid-637"><a href="../../4">4 Objecting, Seeking a Review, Appealing &amp; Applying to Court</a></li>
-<li class="collapsed menu-mlid-678"><a href="../../5">5 Collecting Child Support</a></li>
-<li class="collapsed menu-mlid-716"><a href="../../6">6 Administration</a></li>
-<li class="leaf menu-mlid-10696"><a href="../../acronyms">Acronym List</a></li>
-<li class="leaf menu-mlid-7193"><a href="../../keywords" title="">Keyword Index</a></li>
-<li class="last leaf menu-mlid-7167"><a href="../../sitemap">Site Map</a></li>
+<li class="collapsed menu-mlid-555"><a href="../../3.1">3 Registrable maintenance liabilities</a></li>
+<li class="collapsed menu-mlid-637"><a href="../../4.1">4 Objecting, seeking a review, appealing &amp; applying to court</a></li>
+<li class="collapsed menu-mlid-678"><a href="../../5.1">5 Collecting child support</a></li>
+<li class="collapsed menu-mlid-716"><a href="../../6.1">6 Administration</a></li>
+<li class="leaf menu-mlid-10696"><a href="../../acronyms">Acronym list</a></li>
+<li class="leaf menu-mlid-7193"><a href="../../keywords.1" title="">Keyword index</a></li>
+<li class="last leaf menu-mlid-7167"><a href="../../sitemap">Site map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../child-support-guide">Child Support Guide</a> &raquo; <a href="../../2" class="active-trail">2 Child Support Assessments</a> &raquo; <a href="../4" title="This chapter describes the administrative formulas the Registrar uses to calculate a child support assessment. It explains how the Registrar uses income and care to calculate a child support assessment and how the parents&#039; combined incomes are used to calculate the costs of children. It also includes information about when the minimum annual rate of child support, or the fixed annual rate assessment, will apply." class="active-trail">2.4 Formula Assessment</a> &raquo; 2.4.9 Assessments when a Parent Has Multiple Child Support Cases (Formulas 3 &amp; 4)</div>
+	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../child-support-guide.1">Child Support Guide</a> &raquo; <a href="../../2.1" class="active-trail">2 Child support assessments</a> &raquo; <a href="../4.1" title="This chapter describes the administrative formulas the Registrar uses to calculate a child support assessment. It explains how the Registrar uses income and care to calculate a child support assessment and how the parents&#039; combined incomes are used to calculate the costs of children. It also includes information about when the minimum annual rate of child support, or the fixed annual rate assessment, will apply." class="active-trail">2.4 Formula assessment</a> &raquo; 2.4.9 Assessments when a parent has multiple child support cases (Formulas 3 &amp; 4)</div>
 <div id="utility">
 	
-<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/child-support-guide/2/4/9"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="readspeaker_button" class="rs_skip rsbtn rs_preserve"><a rel="nofollow" class="rsbtn_play" href="https://app-oc.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=https://guides.dss.gov.au/child-support-guide/2/4/9"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsbtn_right rsimg rsplay rspart"></span></a></div></div>
 <div id="content" role="main">
 <article id="node-80">
-<h1 >2.4.9 Assessments when a Parent Has Multiple Child Support Cases (Formulas 3 &amp; 4)</h1>
+<h1 >2.4.9 Assessments when a parent has multiple child support cases (Formulas 3 &amp; 4)</h1>
 <h2>Context</h2>
-<p>Formula 3 is used to calculate the child support assessment when one or both parents have more than one child support case.</p>
-<p>If somebody other than a parent is providing some care for a child and one or both parents have multiple child support cases then formula 4 is used to calculate the assessment for that case.</p>
+<p>Formula 3 is used to calculate the child support assessment when 1 or both parents have more than 1 child support case.</p>
+<p>If somebody other than a parent is providing some care for a child and 1 or both parents have multiple child support cases then Formula 4 is used to calculate the assessment for that case.</p>
 <div class="reference">
 <h2>Act references</h2>
-<p><a href="https://www.legislation.gov.au/Series/C2004A03872" title="Child Support (Assessment) Act 1989">CSA Act</a> section 36 to section 38, section 41, section 42, section 46 to section 48, section 55A to section 55E, section 55HA, section 156</p>
+<p><a href="https://www.legislation.gov.au/Series/C2004A03872" title="Child Support (Assessment) Act 1989">CSA Act</a> section 7B, section 36 to section 38, section 41, section 42, section 46 to section 48, section 55A to section 55E, section 55HA, section 156</p>
 </div>
 <h2>On this page</h2>
-<p>Parents can have more than one child support case, that is, they can have children from different relationships in child support assessments with more than one other parent. To recognise a parent's responsibility to support their children in another child support case, one of two separate mechanisms is used. These mechanisms are:</p>
-<ul><li>the <a href="9#mcallow">multi-case allowance</a>, which is deducted from a parent's adjusted taxable income to reach their child support income at step 1 of the basic formula (CSA Act section 47); and</li>
-<li>the <a href="9#mccap">multi-case cap</a> which is a separate calculation for the paying parent worked out at step 8 (section 55E).</li>
-</ul><p>For each child, the lesser of the 2 amounts calculated will be the assessed rate of child support. Only one mechanism functions at a time - either the child support is worked out using the income after the deduction of the multi-case allowance, or the child support is worked out according to the multi-case cap on child support.</p>
+<p>Parents can have more than 1 child support case, that is, they can have children from different relationships in child support assessments with more than 1 other parent. To recognise a parent's responsibility to support their children in another child support case, 1 of the following mechanisms will be used to calculate child support assessments for parents with multiple child support cases:</p>
+<ul><li>the <a href="9#mcallow">multi-case allowance</a>, which is deducted from a parent's adjusted taxable income to reach their child support income at step 1 of the basic formula (section 47), or</li>
+<li>the <a href="9#mccap">multi-case cap</a>, which is a separate calculation for the paying parent worked out at step 8 (section 55E).</li>
+</ul><p>For each child, a child support amount will be worked out using each of these 2 mechanisms, and the lesser of the 2 amounts will be the assessed rate of child support. Only 1 mechanism functions at a time - either the child support is worked out using the income after the deduction of the multi-case allowance, or the child support is worked out according to the multi-case cap on child support.</p>
 <ul><li><a href="9#mccosts">Multi-case child costs</a></li>
 <li><a href="9#mcallow">Multi-case allowance</a></li>
 <li><a href="9#mccap">Multi-case cap</a></li>
 <li><a href="9#mcallorcap">Multi-case allowance or multi-case cap</a></li>
-<li><a href="9#formula3">Formula 3-Parents in multiple child support cases</a></li>
-<li><a href="9#formula4">Formula 4-Multiple child support cases with a non-parent carer</a></li>
-<li><a href="9#sharemoney">When child support is payable by or to more than one person</a></li>
+<li><a href="9#formula3">Formula 3 - Parents in multiple child support cases</a></li>
+<li><a href="9#formula4">Formula 4 - Multiple child support cases with a non-parent carer</a></li>
+<li><a href="9#sharemoney">When child support is payable by or to more than 1 person under Formula 4</a></li>
 </ul><h2 id="mccosts">Multi-case child costs</h2>
-<p>Both the multi-case cap and the multi-case allowance are calculated using the multi-case costs of the children. The multi-case costs of a child are what it would cost the parent to support the child if all of the children lived with them, based on that parent's income. When calculating the multi-case costs, use the parent's adjusted taxable income less the self-support amount and less the relevant dependent child amount (where appropriate).</p>
-<p>To calculate the multi-case child costs of a 'particular child' determine what the costs of all the parent's child support children would be if they were all the same age as this child and divide the costs by the number of child support children.</p>
-<p>Note: 'all child support children' are all of the parent's children in the child support assessments of the parent for whom you are calculating the multi-case costs.</p>
+<p>Both the multi-case cap and the multi-case allowance are calculated using the multi-case costs of the children.</p>
+<p>The multi-case costs of a child are what it would cost the parent to support the child if all of the parent's child support children lived with them full-time, based on that parent's income.</p>
+<p>When calculating the multi-case costs, use the parent's adjusted taxable income for the child support case, less the self-support amount and less the relevant dependent child amount (where appropriate).</p>
+<p>The multi-case cost of each child is calculated as if all the child support children were the same age as that child. To work out this cost:</p>
+<ul><li>work out the total number of the parent's child support children</li>
+<li>look up the parent's (individual) income and the age of the child on the relevant Costs of the Children Table (<a href="2">2.4.2</a>) to find what all the children would cost if they were all the same age</li>
+<li>divide this amount by the total number of the parent's child support children.</li>
+</ul><p><strong>Note:</strong> 'The parent's child support children' are all of the children currently in the child support assessments of the parent for whom you are calculating the multi-case costs.</p>
 <p>The approach used to calculate the multi-case costs of a child, although similar, differs from the multiple case method (<a href="6">2.4.6</a>) of calculating the costs of a child. This is because the multi-case costs recognise a parent's responsibility for all their children in all their child support cases, whereas the multiple case method calculates a parent's child support responsibility for the child or children in a case.</p>
 <div class="example">
-<p id="mcccexample"><strong>Example:</strong> M has an initial child support income of $20,000 (the adjusted taxable income less the self-support amount). M and F1 have 2 children, A aged 14 and B aged 10. M has another child support case with F2 for child C, aged 5. The multi-case child costs for A and B would be:</p>
-<p>Costs of A (14 years old)<br />
-		=$20,000 × $0.32 (3+ children aged 13+ years from the costs of children tables)<br />
-		=$6,400 ÷ 3 (divide by number of all child support children)<br />
-		=$2,133</p>
-<p>Costs of B (10 years old)<br />
-		=$20,000 × $0.27 (3+ children aged 0 - 12 years from the costs of children tables)<br />
-		=$5,400 ÷ 3 (divide by number of all child support children)<br />
-		=$1,800</p>
+<p id="mcccexample"><strong>Example:</strong> Jonah has an initial child support income of $20,000 (the adjusted taxable income less the self-support amount). Jonah and Sian have 2 children, Koby aged 14 and Ryan aged 10. Jonah has another child support case with Winfried for child Bran, aged 5. The multi-case child costs for Koby and Ryan would be:</p>
+<p>Costs of Koby (14 years old)<br />
+		= $20,000 × $0.32 (3+ children aged 13+ years from the Costs of the Children tables)<br />
+		= $6,400 ÷ 3 (divide by number of all child support children)<br />
+		= $2,133</p>
+<p>Costs of Ryan (10 years old)<br />
+		= $20,000 × $0.27 (3+ children aged 0 - 12 years from the Costs of the Children tables)<br />
+		= $5,400 ÷ 3 (divide by number of all child support children)<br />
+		= $1,800</p>
 </div>
 <h2 id="mcallow">Multi-case allowance</h2>
-<p>The multi-case allowance is an allowance deducted from a parent's adjusted taxable income to recognise a parent's responsibility for child support for their children in another child support case (CSA Act section 47).</p>
+<p>The multi-case allowance is an allowance deducted from a parent's adjusted taxable income to recognise a parent's responsibility for child support for their children in another child support case (section 47).</p>
 <p>The multi-case allowance is the sum of the <a href="9#mccosts">multi-case child costs</a>, excluding the costs of the children of the case to which the assessment relates. That is, the parent has an amount deducted from their income to recognise the costs of supporting the children in their other case or cases. The amount deducted is the total of the multi-case costs of those other children.</p>
 <div class="example">
-<p id="mcexample"><strong>Example:</strong> F has children from 3 relationships. F and M1 have 2 children, A and B. F and M2 have one child, C. M2 also has an assessment with W for their children, Y and Z. F and M3 have 2 children, D and E.</p>
-<p>In calculating F's child support income for the assessment for A and B, the multi-case allowance is the multi-case costs of C, D and E.</p>
-<p>In calculating F's child support income for the assessment for C, the multi-case allowance is the multi-case costs of A, B, D and E. M2 will also have a multi-case allowance, being the multi-case costs of Y and Z.</p>
-<p>In calculating F's child support income for the assessment for D and E, the multi-case allowance is the multi-case costs of A, B and C.</p>
+<p id="mcexample"><strong>Example:</strong> Julie has children from 3 relationships. Julie and Charlton have 2 children, Jesse and Kevin. Julie and Josef have 1 child, Patricia. Josef also has an assessment with Hildegard for their children, Debi and Raul. Julie and Ruben have 2 children, Reginald and Jaron.</p>
+<p>In calculating Julie's child support income for the assessment for Jesse and Kevin, the multi-case allowance is the sum of the multi-case costs of Patricia, Reginald and Jaron.</p>
+<p>In calculating Julie's child support income for the assessment for Patricia, the multi-case allowance is the sum of the multi-case costs of Jesse, Kevin, Reginald and Jaron. Josef will also have a multi-case allowance, being the multi-case costs of Debi and Raul.</p>
+<p>In calculating Julie's child support income for the assessment for Reginald and Jaron, the multi-case allowance is the sum of the multi-case costs of Jesse, Kevin and Patricia.</p>
 </div>
-<p>A parent can meet the costs of each child by paying child support, by directly caring for the child or by a combination of the 2. Therefore the multi-case allowance recognises the costs of a child in another case, not the amount of child support payable.</p>
-<p>The multi-case allowance is rounded to the nearest dollar (CSA Act section 156).</p>
+<p>A parent can meet the costs of each child by paying child support, by directly caring for the child or by a combination of the 2. The multi-case allowance recognises the costs of a child in another case, not the amount of child support payable.</p>
+<p>The multi-case allowance is rounded to the nearest dollar (section 156).</p>
 <div class="example">
-<p><strong>Example:</strong> M has an initial child support income of $20,000 (the adjusted taxable income less the self-support amount). M has no relevant dependent children. M and F1 have 2 children, A aged 14 and B aged 10. M has another child support case with F2 for child C, aged 5. In calculating the assessment for C, the multi-case allowance for A and B is the total of the multi-case costs for A and B. The costs are as calculated in the example <a href="9#mcccexample">above</a>.</p>
-<p>Child support income for M</p>
-<p>Multi-case allowance = multi-case costs of A + B<br />
-		=$2,133 + $1,800<br />
-		=$3,933</p>
+<p><strong>Example:</strong> Sam has an initial child support income of $20,000 (the adjusted taxable income less the self-support amount). Sam has no relevant dependent children. Sam and Marisol have 2 children, Moses aged 14 and Adel aged 10. Sam has another child support case with Hiawatha for child Augustine, aged 5. In calculating the assessment for Augustine, the multi-case allowance for Moses and Adel is the total of the multi-case costs for Moses and Adel. The costs are as calculated in the example <a href="9#mcccexample">above</a>.</p>
+<p>Child support income for Sam</p>
+<p>Multi-case allowance = multi-case costs of Moses + Adel<br />
+		= $2,133 + $1,800<br />
+		= $3,933</p>
 <p>Initial child support income less the multi-case allowance<br />
-		=$20,000 − $3,933<br />
-		=$16,067</p>
+		= $20,000 − $3,933<br />
+		= $16,067</p>
 </div>
 <h2 id="mccap">Multi-case cap</h2>
-<p>The multi-case cap is used to ensure that the parent does not pay more child support for a child than they would if all the children lived in the same household. The cap recognises that the parent may be bearing some of the costs of a child directly through regular or shared care, and is adjusted accordingly. The cap is calculated on a per child basis.</p>
-<p>The multi-case cap for each child is the multi-case child costs for the child, less the costs that the parent meets directly through care (their cost percentage).That is:</p>
-<p>(100% − cost percentage) × multi-case child costs.</p>
+<p>The multi-case cap is used to ensure that the paying parent does not pay more child support for a child than they would if all the children lived in the same household. The cap recognises that the parent may be bearing some of the costs of a child directly through regular or shared care, and is adjusted accordingly. The cap is calculated on a per child basis.</p>
+<p>The multi-case cap for each child is the multi-case child costs for the child, multiplied by the costs that the parent does not meet directly through care (100% less their cost percentage) (section 55E). That is:<br />
+	(100% − cost percentage) × multi-case child costs.</p>
 <div class="example">
-<p><strong>Example: </strong>If M has regular care of child B, and therefore a cost percentage of 24% for B, and B's multi-case child cost is $1,800, then:</p>
-<p>Multi-case cap = (100%-24%) × $1,800<br />
+<p><strong>Example:</strong> If Edward has regular care of child Irene, and therefore a cost percentage of 24% for Irene, and Irene's multi-case child cost is $1,800, then:</p>
+<p>Multi-case cap = (100% − 24%) × $1,800<br />
 		= 76% × $1,800 = $1,368</p>
 </div>
 <h2 id="mcallorcap">Multi-case allowance or multi-case cap</h2>
-<p>The multi-case allowance recognises a parent's responsibility to their other child support children by using an income shares approach. The multi-case cap ensures a parent does not pay more for a child than they would if all children were living in the one household. Both the cap and the allowance are methods of recognising the parent's other obligations, so only one method is needed at any one time.</p>
-<p>Only one method will be used to determine the child support amount payable for each child i.e. either the child support amount is worked out using the income after the deduction of the multi-case allowance, or the child support is worked out according to the cap. For each child, the lesser of the 2 amounts calculated will be the assessed rate of child support.</p>
+<p>The multi-case allowance recognises a parent's responsibility to their other child support children by using an income shares approach. The multi-case cap ensures a parent does not pay more for a child than they would if all children were living in the 1 household. Both the cap and the allowance are methods of recognising the parent's other obligations, so only 1 method is needed at any one time.</p>
+<p>Only 1 method will be used to determine the child support amount payable for each child, i.e. either the child support amount is worked out using the income after the deduction of the multi-case allowance, or the child support is worked out according to the multi-case cap. For each child, the lesser of the 2 amounts calculated will be the assessed rate of child support.</p>
 <h2 id="formula3">Formula 3 - Parents in multiple child support cases</h2>
-<p>When one or both of the parents have at least one other case, and there is no non-parent carer, some variations are made to the basic formula steps to work out the annual rate of child support payable for a child (CSA Act section 36). Additional or changed calculations are made at steps 1, 4, 5, 7 and 8 as explained below.</p>
-<p><strong>Step 1</strong>: To work out each parent's child support income (<a href="7">2.4.7</a>) (section 41), first identify their interim child support income, which is their adjusted taxable income less the self-support amount. Using that income, work out a relevant dependent child (<a href="6">2.4.6</a>) amount (section 46), if required. Deduct that amount from the interim child support income. Then use the interim child support income (less the relevant dependent amount, as required) to calculate the <a href="9#mcallow">multi-case allowance</a> for each parent with more than one case (section 47). The parent's child support income is their adjusted taxable income less the self-support amount, less any relevant dependent child amounts, and less any relevant multi-case allowance.</p>
+<p>This formula is used to work out the annual rate of child support payable for a child when 1 or both of the parents have at least 1 other case, and there is no non-parent carer (section 37).</p>
+<p><strong>Step 1</strong>: Work out each parent's child support income (<a href="7">2.4.7</a>) (section 41), by using the following formula:</p>
+<ul><li>parent's adjusted taxable income in that child support case</li>
+<li>less the self-support amount</li>
+<li>less the parent's relevant dependent child amount (if applicable)</li>
+<li>less the parent's multi-case allowance for the child.</li>
+</ul><p>Where a parent has more than 1 child support case, their child support income needs to be calculated separately for each case, as the parent's adjusted taxable income and multi-case allowance may differ across their child support cases.</p>
+<p>First, take the parent's adjusted taxable income applicable to that child support case and deduct the self-support amount.</p>
+<p>Second, if applicable, work out a relevant dependent child (<a href="6">2.4.6</a>) amount (section 46), and deduct the relevant dependent child amount from the amount above.</p>
+<p>Third, if the parent has more than 1 child support case, work out the parent's multi-case allowance (section 47) and deduct the multi-case allowance from the amount above.</p>
+<p>The final result is the parent's child support income for that case.</p>
 <p><strong>Step 2</strong>: Work out the parents' combined child support income (<a href="7">2.4.7</a>) (section 42).</p>
 <p><strong>Step 3</strong>: Work out each parent's income percentage (<a href="7">2.4.7</a>) (section 55B).</p>
 <p><strong>Step 4</strong>: Work out each parent's percentage of care (<a href="5">2.4.5</a>) for the child (section 48).</p>
 <p><strong>Step 5</strong>: Work out each parent's cost percentage (<a href="5">2.4.5</a>) for the child (section 55C).</p>
 <p><strong>Step 6</strong>: Work out each parent's child support percentage (<a href="5">2.4.5</a>) for the child (section 55D).</p>
 <p><strong>Step 7</strong>: Work out the costs of the child (<a href="6">2.4.6</a>) for the day under section 55HA, calculating the costs for older and younger children separately.</p>
-<p><strong>Step 8</strong>: If a parent has a positive child support percentage under step 6, the annual rate of child support payable by the parent for the child is worked out using the formula:</p>
-<p>Child support percentage × cost of the child</p>
-<p>The outcome of step 8 will be the child support payable if the parent assessed to transfer child support does not have more than one child support case.</p>
-<p>If a parent has more than one child support case and a positive child support percentage under step 6, calculate the multi-case cap for that parent (section 55E):</p>
-<p>Multi-case cap =<br />
-	(100% − Parent's cost percentage (<a href="5">2.4.5</a>) for the particular child) × Multi-case child costs for the particular child</p>
-<p>The child support payable for the child is the lower of the amounts calculated at step 8, or the multi-case cap.</p>
+<p><strong>Step 8</strong>: If a parent has a positive child support percentage under step 6, the annual rate of child support payable by the parent for the child is worked out using the formula:<br />
+	Child support percentage × cost of the child</p>
+<p>The outcome of step 8 will be the child support payable if the parent assessed to pay child support does not have more than 1 child support case.</p>
+<p><strong>Step 9 (if applicable):</strong> If a parent has more than 1 child support case and a positive child support percentage under step 6, calculate the multi-case cap for that parent (section 55E):<br />
+	Multi-case cap = (100% − Parent's cost percentage (<a href="5">2.4.5</a>) for the particular child) × Multi-case child costs for the particular child</p>
+<p>The child support payable for the child is the lower of the annual rate calculated at step 8, or the multi-case cap calculated at step 9.</p>
 <div class="example">
-<p><strong>Example:</strong> Formula 3 calculations</p>
-<p>M and F1 have 2 children, A aged 14 and B aged 10. M has another child support case with F2 for child C, aged 5. M has an adjusted taxable income of $45,000 and F2 has an adjusted taxable income of $40,000. Calculate the assessment for C, who lives mostly with F2, for a child support period commencing on 26 August 2008. M has regular care of C, providing care for 75 nights a year. Neither parent has any relevant dependent children.</p>
-<p><strong>Step 1</strong>: Work out each parent's child support income by deducting the self-support amount and a multi-case allowance for any parent with multiple cases from their adjusted taxable income.</p>
-<p>Child support income for M</p>
-<p>Initial child support income = adjusted taxable income − self-support amount<br />
-		$45,000 − $18,252<br />
-		= $26,748</p>
-<p>Multi-case costs<br />
-		Costs of A (older child):<br />
-		=$26,748 × $0.32 (3+ children aged 13+ years from the 2008 costs of children table)<br />
-		=$8,559 ÷ 3 (divide by number of all child support children)<br />
-		=$2,853</p>
-<p>Costs of B (younger child):<br />
-		=$26,748 × $0.27 (3+ children aged 0 - 12 years from the 2008 costs of children table)<br />
-		=$7,222 ÷ 3 (divide by number of all child support children)<br />
-		=$2,407</p>
-<p>Multi-case allowance = multi-case costs of A + B<br />
-		= $2,853 + $2,407<br />
-		= $5,260</p>
-<p>M's child support income = initial child support income − multi-case allowance<br />
-		= $26,748 − $5,260<br />
-		= $21,488</p>
-<p>F2 has a child support income of $21,748 ($40,000 − $18,252).</p>
-<p><strong>Step 2</strong>: Work out the parents' combined child support income.</p>
-<p>$21,488 + $21,748 = $43,236</p>
-<p><strong>Step 3</strong>: Work out each parent's income percentage.</p>
-<p>M = $21,488 ÷ $43,236 × 100 = 49.70%</p>
-<p>F2 = $21,748 ÷ $43,236 × 100 = 50.30%</p>
-<p><strong>Step 4</strong>: Work out each parent's percentage of care for each child.</p>
-<p>M has care of C for 75 nights = 20.55%, rounded to a percentage of care of 20%.</p>
-<p>F2 has care of C for 290 nights = 79.45%, rounded to a percentage of care of 80%.</p>
-<p><strong>Step 5</strong>: Work out each parent's cost percentage for each child by looking up the table in section 55C.</p>
-<p>M has a cost percentage of 24%.</p>
-<p>F2 has a cost percentage of 76%.</p>
-<p><strong>Step 6</strong>: Work out each parent's child support percentage by subtracting their cost percentage for that child from their income percentage.</p>
-<p>M = 49.70% − 24% = 25.70%</p>
-<p>F2 = 50.30% − 76% = −25.70%</p>
-<p>(This means that M is responsible for 49.70% of C's costs because they have 49.70% of the combined child support income. As M meets only 24% of the costs through care they need to transfer 25.70% of the costs to F2 through child support.)</p>
-<p><strong>Step 7</strong>: Work out the costs of each child.</p>
-<p>The combined child support income is $43,236.</p>
-<p>From the 2008 costs of children table, the total costs of the child (one child 12 or under) =</p>
-<p>$4,654 + ($0.15 for every $1 over $27,378)</p>
-<p>$4,654 + ($43,236 − $27,378 = $15,858 × $0.15 = $2,379)</p>
-<p>Therefore: $4,654 + $2,379= $7,033</p>
-<p>The cost of each child = $7,033.</p>
-<p><strong>Step 8</strong>: Work out the annual rate of child support payable by the parent with a positive child support percentage.</p>
-<p>25.70% × $7,033= $1,807</p>
-<p>OR use the multi-case cap.</p>
-<p>Multi-case cap = (100% − parent's cost percentage for the particular child) × multi-case child costs for the particular child<br />
-		= (100% − 24%) × $2,407<br />
-		= 76% × $2,407<br />
-		=$1,829</p>
-<p>As the amount calculated at step 8 ($1,807) is less than the multi-case cap ($1,829), the step 8 amount should be paid.</p>
-<p>M is liable to pay F2 child support for C of $1,807 (annual rate).</p>
-</div>
+<h3><strong>Example:</strong> Formula 3 calculations</h3>
+<p>Vincent and Faith have 2 children, Geraldine aged 14 and Thomas aged 10. Vincent has another child support case with Sigrid for child Honoria, aged 5. Vincent has an adjusted taxable income of $45,000 and Sigrid has an adjusted taxable income of $40,000. Calculate the assessment for Honoria, who lives mostly with Sigrid, for a child support period commencing on 26 August 2008. Vincent has regular care of Honoria, providing care for 75 nights a year. Neither parent has any relevant dependent children.</p>
+<table><thead><tr><th scope="col">Step 1: Work out each parent's child support income</th>
+<th scope="col">Vincent</th>
+<th scope="col">Sigrid</th>
+</tr></thead><tbody><tr><td>Work out each parent's adjusted taxable income for this case</td>
+<td>$45,000</td>
+<td>$40,000</td>
+</tr><tr><td>Deduct the self-support amount</td>
+<td>− $18,252</td>
+<td>− $18,252</td>
+</tr><tr><td>Deduct a relevant dependent child amount, if applicable</td>
+<td>N/A</td>
+<td>N/A</td>
+</tr><tr><td>
+<p>Determine multi-case child costs for each of the children in each parent's other child support cases:</p>
+<ul><li>Relevant parent's income (adjusted taxable income − self-support amount − relevant dependent child amount)</li>
+<li>Multiply by cost of the child based on child's age and parent's income (refer to Costs of the Children table)</li>
+<li>Divide by number of the parent's child support children</li>
+</ul><p>Multi-case cost of each child</p>
+</td>
+<td>
+<p>Costs of Geraldine (14 years old)<br />
+						$26,748 × $0.32 (fraction of MTAWE = 0.5, children aged 13+ years, 3+ children) ÷ 3<br />
+						= $2,853</p>
+<p>Costs of Thomas (10 years old)<br />
+						$26,748 × $0.27 (fraction of MTAWE = 0.5, children aged 0-12 years, 3+ children) ÷ 3<br />
+						= $2,407</p>
+</td>
+<td>N/A</td>
+</tr><tr><td>
+<p>Deduct a multi-case allowance amount:</p>
+<ul><li>sum of the multi-case child costs for the children of the other case/s</li>
+</ul></td>
+<td>
+<p>− ($2,853 + $2,407)<br />
+						= − $5,260</p>
+</td>
+<td>N/A</td>
+</tr><tr><td>Each parent's child support income</td>
+<td>= $45,000 − $18,252 − $0 − $5,260<br />
+					= $21,488</td>
+<td>= $40,000 − $18,252 − $0 − $0<br />
+					= $21,748</td>
+</tr><tr><th>Step 2: Work out the combined child support income</th>
+<th>Vincent</th>
+<th>Sigrid</th>
+</tr><tr><td>Each parent's child support income</td>
+<td>$21,488</td>
+<td>$21,748</td>
+</tr><tr><td>Combined child support income</td>
+<td colspan="2">
+<p>= $21,488 + $21,748<br />
+						= $43,236</p>
+</td>
+</tr><tr><th>Step 3: Work out each parent's income percentage</th>
+<th>Vincent</th>
+<th>Sigrid</th>
+</tr><tr><td>Each parent's child support income<br />
+					Divide by the combined child support income<br />
+					Multiply the resulting amount by 100<br />
+					Each parent's income percentage</td>
+<td>$21,488<br />
+					÷ $43,236<br />
+					× 100<br />
+					= 49.70%</td>
+<td>$21,748<br />
+					÷ $43,236<br />
+					× 100<br />
+					= 50.30%</td>
+</tr><tr><th>Step 4: Work out each parent's percentage of care</th>
+<th>Vincent</th>
+<th>Sigrid</th>
+</tr><tr><td>Each parent's care percentage<br />
+					To work this out, see <a href="../2/1">2.2.1</a>.</td>
+<td>75 nights = 20.55%<br />
+					Rounded to = 20%</td>
+<td>290 nights = 79.45%<br />
+					Rounded to = 80%</td>
+</tr><tr><th>Step 5: Work out each parent's cost percentage</th>
+<th>Vincent</th>
+<th>Sigrid</th>
+</tr><tr><td>Each parent's cost percentage<br />
+					To work this out, see the Cost percentage table in <a href="5">2.4.5</a>.</td>
+<td>= 24%</td>
+<td>= 76%</td>
+</tr><tr><th>Step 6: Work out each parent's child support percentage</th>
+<th>Vincent</th>
+<th>Sigrid</th>
+</tr><tr><td>Each parent's income percentage<br />
+					Deduct each parent's cost percentage<br />
+					Each parent's child support percentage</td>
+<td>49.70%<br />
+					− 24%<br />
+					= 25.70%</td>
+<td>50.30%<br />
+					− 76%<br />
+					= −25.70%</td>
+</tr><tr><td colspan="3">
+<p>A parent who has a positive child support percentage will need to pay child support.</p>
+<p>					This means that Vincent is responsible for 49.70% of Honoria's costs because Vincent has 49.70% of the combined child support income. As Vincent meets only 24% of the costs through care, Vincent needs to transfer 25.70% of the costs to Sigrid through child support.</p></td>
+</tr><tr><th>Step 7: Work out the costs of each child</th>
+<th colspan="3">Honoria</th>
+</tr><tr><td>Combined child support income</td>
+<td colspan="2">$43,236</td>
+</tr><tr><td>Using the relevant Costs of the Children table, calculate the total costs of the child<br />
+					(for Honoria: 2008, fraction of MTAWE = 1, children aged 0-12 years, 1 child)</td>
+<td colspan="2">= $4,654 + ($0.15 for every $1 over $27,378)<br />
+					= $4,654 + (($43,236 − $27,378) × $0.15)<br />
+					= $4,654 + ($15,858 × $0.15)<br />
+					= $4,654 + $2,379<br />
+					= $7,033</td>
+</tr><tr><th>Step 8: Work out the annual rate of child support payable by the parent with a positive child support percentage</th>
+<th colspan="2">Vincent</th>
+</tr><tr><td>Vincent's child support percentage<br />
+					Multiply by the total cost of the children<br />
+					Amount of child support for each child</td>
+<td colspan="2">25.70%<br />
+					× $7,033<br />
+					= $1,807</td>
+</tr><tr><td colspan="3">If the parent has more than 1 child support case, follow the next step.</td>
+</tr><tr><th>Step 9 (if applicable): Work out the multi-case cap</th>
+<th colspan="2">Vincent</th>
+</tr><tr><td>
+<p>Work out the multi-case child costs for the children in the child support case:</p>
+<ul><li>Paying parent's income (adjusted taxable income − self-support amount − relevant dependent child amount)</li>
+<li>Multiply by cost of the child based on child's age and parent's income (refer to Costs of the Children table)</li>
+<li>Divide by number of the parent's child support children</li>
+</ul><p>Multi-case cost for Honoria</p>
+</td>
+<td colspan="2">Costs of Honoria (5 years old)<br />
+					$26,748<br />
+					× $0.27 (fraction of MTAWE = 0.5, children aged 0-12 years, 3 children)<br />
+					÷ 3<br />
+					= $2,407</td>
+</tr><tr><td>Work out the multi-case cap for Honoria:<br />
+					(100% − cost percentage) × multi-case child costs for Honoria</td>
+<td colspan="3">= (100% − 24%) × $2,407<br />
+					= 76% × $2,407<br />
+					= $1,829</td>
+</tr><tr><td colspan="3">As the amount calculated at Step 8 ($1,807) is less than the multi-case cap ($1,829) calculated at Step 9, the Step 8 amount is payable.<br />
+					Vincent is liable to pay Sigrid child support for Honoria of $1,807 (annual rate).</td>
+</tr></tbody></table></div>
 <h2 id="formula4">Formula 4 - Multiple child support cases with a non-parent carer</h2>
-<p>When one or both of the parents have at least one other case, and one or more non-parent carers has at least 35% percent of care for a child, variations are made to the basic formula steps to work out the annual rate of child support payable for a child (CSA Act section 38). Additional or changed calculations are made at steps 1, 4, 5, 7 and 8 as explained below.</p>
-<p><strong>Step 1</strong>: To work out each parent's child support income (section 41), first identify their interim child support income, which is their adjusted taxable income less the self-support amount. Using that income, work out a relevant dependent child (<a href="6">2.4.6</a>) amount (section 46), if required. Deduct that amount from their interim child support income. Then use the interim child support income (less the relevant dependent amount, as required) to calculate the multi-case allowance for each parent with more than one case (section 47). The parent's child support income, then, is their adjusted taxable income less the self-support amount, less any relevant dependent child amounts, and less any relevant multi-case allowance.</p>
+<p>This formula is used to work out the annual rate of child support payable for a child when 1 or both of the parents have at least 1 other case, and 1 or more non-parent carers has at least 35% care of a child (section 38).</p>
+<p><strong>Step 1</strong>: Work out each parent's child support income (<a href="7">2.4.7</a>) (section 41), by using the following formula:</p>
+<ul><li>Parent's adjusted taxable income in that child support case,</li>
+<li>less the self-support amount,</li>
+<li>less the parent's relevant dependent child amount (if applicable),</li>
+<li>less the parent's multi-case allowance for the child.</li>
+</ul><p>Where a parent has more than 1 child support case, their child support income needs to be calculated separately for each case, as the parent's adjusted taxable income and multi-case allowance may differ across their child support cases.</p>
+<p>First, take the parent's adjusted taxable income applicable to that child support case and deduct the self-support amount.</p>
+<p>Second, if applicable, work out a relevant dependent child (<a href="6">2.4.6</a>) amount (section 46), and deduct the relevant dependent child amount from the amount above.</p>
+<p>Third, if the parent has more than 1 child support case, work out the parent's multi-case allowance (section 47) and deduct the multi-case allowance from the amount above.</p>
+<p>The final result is the parent's child support income for that case.</p>
 <p><strong>Step 2</strong>: Work out the parents' combined child support income (<a href="7">2.4.7</a>) (section 42).</p>
 <p><strong>Step 3</strong>: Work out each parent's income percentage (<a href="7">2.4.7</a>) (section 55B).</p>
 <p><strong>Step 4</strong>: Work out each parent's and non-parent carer's percentage of care (<a href="5">2.4.5</a>) for the child (section 48).</p>
 <p><strong>Step 5</strong>: Work out each parent's and non-parent carer's cost percentage (<a href="5">2.4.5</a>) for the child (section 55C).</p>
 <p><strong>Step 6</strong>: Work out each parent's child support percentage (<a href="5">2.4.5</a>) for the child (section 55D).</p>
 <p><strong>Step 7</strong>: Work out the costs of the child (<a href="6">2.4.6</a>) for the day under section 55HA, calculating the costs for older and younger children separately.</p>
-<p><strong>Step 8</strong>: If a parent has a positive child support percentage under step 7, the annual rate of child support payable by the parent for the child for the day is worked out using the formula:</p>
-<p>Child support percentage × cost of the child</p>
-<div>
-<p>The outcome of step 8 will be the child support payable if the parent assessed to transfer child support does not have more than one child support case.</p>
-<p>If a parent has more than one child support case and a positive child support percentage under step 6, calculate the multi-case cap for that parent (section 55E):</p>
-</div>
-<p>Multi-case cap =<br />
-	(100% − parent's cost percentage (<a href="5">2.4.5</a>) for the particular child) × multi-case child costs for the particular child</p>
-<p>The child support payable is the lower of the amount calculated at step 8 or the multi-case cap.</p>
+<p><strong>Step 8</strong>: If a parent has a positive child support percentage under step 6, the annual rate of child support payable by the parent for the child for the day is worked out using the formula:</p>
+<p style="margin-left:40px">Child support percentage × cost of the child</p>
+<p>The outcome of step 8 will be the child support payable if the parent assessed to pay child support does not have more than 1 child support case.</p>
+<p><strong>Step 9 (if applicable)</strong>: If a parent has more than 1 child support case and a positive child support percentage under step 6, calculate the multi-case cap for that parent (section 55E):</p>
+<p style="margin-left:40px">Multi-case cap = (100% − parent's cost percentage (<a href="5">2.4.5</a>) for the particular child) × multi-case child costs for the particular child</p>
+<p>The child support payable is the lower of the annual rate calculated at step 8, or the multi-case cap calculated at step 9.</p>
 <div class="example">
-<p><strong>Example:</strong> Formula 4 calculations</p>
-<p>F and M1 have 2 children, A aged 14 and B aged 10. F has another child support case with M2 for child C, aged 7. F also has another child D, aged 4, living with them. There is no assessment for D. F has an adjusted taxable income of $45,000 and M1 has an adjusted taxable income of $70,000.</p>
-<p>Calculate the assessment for A and B for a child support period commencing on 26 August 2008. A lives full time with M1 and B lives full time with a grandparent G. G has made an application under section 25A for a child support assessment.</p>
-<p><strong>Step 1</strong>: Work out each parent's child support income by deducting the self-support amount, relevant dependent amount (as required) and a multi-case allowance for any parent with multiple cases from their adjusted taxable income.</p>
-<p><strong>Child support income for F</strong></p>
-<p>Initial child support income = adjusted taxable income − self-support amount<br />
-		= $45,000 − $18,252 = $26,748</p>
-<p>Relevant dependent allowance for D</p>
-<p>Costs of D (younger child):<br />
-		= $26,748 × $0.17 (1 child aged 0-12 years from the 2008 costs of children table)<br />
-		= $4,547</p>
-<p>Initial child support income for this case = adjusted taxable income − self-support amount − relevant dependent allowance<br />
-		= $45,000 − $18,252 − $4,547 = $22,201</p>
-<p>Multi-case costs</p>
-<p>Costs of older child:<br />
-		= $22,201 × $0.32 (3+ children aged 13+ years from the 2008 costs of children table)<br />
-		= $7,104 ÷ 3 (divide by number of all child support children)<br />
-		= $2,368</p>
-<p>Costs of younger child:<br />
-		= $22,201 × $0.27 (3+ children aged 0-12 years from the 2008 costs of children table)<br />
-		= $5,994 ÷ 3 (divide by number of all child support children)<br />
-		= $1,998</p>
-<p>Multi-case allowance = multi-case costs of C (younger child)<br />
-		= $1,998</p>
-<p>Child support income = initial child support income (this case) − multi-case allowance<br />
-		= $22,201 − $1,998<br />
-		= $20,203</p>
-<p>F has a child support income of $20,203.</p>
-<p>M1 has a child support income of $51,748 ($70,000 − $18,252).</p>
-<p><strong>Step 2</strong>: Work out the parents' combined child support income.</p>
-<p>$20,203+ $51,748 = $71,951.</p>
-<p><strong>Step 3</strong>: Work out each parent's income percentage.</p>
-<p>F = $20,203 ÷ $71,951 × 100 = 28.08%</p>
-<p>M1 = $51,748 ÷ $71,951 × 100 = 71.92%</p>
-<p><strong>Step 4</strong>: Work out each parent's percentage of care for each child.</p>
-<p>F has 0% care of A.</p>
-<p>M1 has 100% care of A.</p>
-<p>F has 0% care of B.</p>
-<p>M1 has 0% care of B.</p>
-<p>(G has 100% care of B.)</p>
-<p><strong>Step 5</strong>: Work out each parent's cost percentage for each child by looking up the table in section 55C.</p>
-<p>F has a cost percentage of 0% for both A and B.</p>
-<p>M1 has a cost percentage of 100% for A.</p>
-<p>M1 has a cost percentage of 0% for B.</p>
-<p><strong>Step 6</strong>: Work out each parent's child support percentage by subtracting their cost percentage for that child from their income percentage.</p>
-<p>F = 28.08% − 0% = 28.08% for both A and B</p>
-<p>M1 for A = 71.92% − 100% = −28.08%</p>
-<p>M1 for B = 71.92% − 0% = 71.92%</p>
-<p>(This means that F is responsible for 28.08% of the costs of A and B because they have 28.08% of the combined child support income. As F does not meet any of the costs through care they need to transfer 28.08% of the costs to the carers through child support. M1 is entitled to receive child support from F for A and is required to pay child support for B.)</p>
-<p><strong>Step 7</strong>: Work out the costs of each child.</p>
-<p>The combined child support income is $71,951.</p>
-<p>Costs of A (older child):</p>
-<p>$15,606 + ($0.25 for every $1 over $54,756) (2 children aged 13+ years from the 2008 costs of children table)</p>
-<p>= $15,606 + ($71,951 − $54,756 = $17,195 × $0.25 = $4,299)<br />
-		= $15,606 + $4,299 = $19,905<br />
-		= $19,905 ÷ 2<br />
-		= $9,953</p>
-<p>Costs of B (younger child):</p>
-<p>$12,868 + ($0.20 for every $1 over $54,756) (2 children aged 12 years or under from the 2008 costs of children table)</p>
-<p>= $12,868 + ($71,951 − $54,756 = $17,195 × $0.20 = $3,439)<br />
-		= $12,868 + $3,439= $16,307.<br />
-		= $16,307 ÷ 2<br />
-		= $8,154</p>
-<p><strong>Step 8</strong>: Work out the annual rate of child support payable by the parent with a positive child support percentage.</p>
-<p><strong>Annual Rate payable for A</strong></p>
-<p>F is to pay M1: 28.08 % × $9,953= $2,795</p>
-<p>OR</p>
-<p>Multi-case cap = (100% − parent's cost percentage for the particular child) × multi-case child costs for the particular child<br />
-		= (100% − 0%) × $2,368<br />
-		= 100% × $2,368<br />
-		= $2,368</p>
-<p>As the amount calculated at step 8 ($2,795) is more than the multi-case cap ($2,368) the multi-case cap should be paid.</p>
-<p>F is liable to pay M1 child support for A of $2,368 (multi-case cap).</p>
-<p><strong>Annual Rate payable for B</strong></p>
-<p>Both F and M1 have positive child support percentages for B and therefore both are required to pay child support to G.</p>
-<p>F is to pay G: 28.08 % × $8,154= $2,290</p>
-<p>OR</p>
-<p>Multi-case cap = (100% − parent's cost percentage for the particular child) × multi-case child costs for the particular child<br />
-		= (100%-0%) × $1,998<br />
-		= 100% × $1,998<br />
-		= $1,998</p>
-<p>As the multi-case cap ($1,998) is less than the amount calculated at step 8 ($2,290) then the multi-case cap should be paid.</p>
-<p>F is liable to pay M1 child support for A of $1,998 (annual rate).</p>
-<p>M1 is to pay G: 71.92% × $8,154= $5,864</p>
-<p>G is entitled to receive $1,998 + $5,864 = $7,862</p>
-</div>
-<h2 id="sharemoney">When child support is payable by or to more than one person</h2>
-<p>If both parents have a positive child support percentage at step 6 of the formula calculations then both parents pay child support to the non-parent carer or carers (CSA Act section 38(5)).</p>
+<h3><strong>Example:</strong> Formula 4 calculations</h3>
+<p>Aliya and Edmund have 2 children, Kristina aged 14 and Harriette aged 10. Aliya has another child support case with Marcus for child Claudia, aged 7. Aliya also has another child Louisa, aged 4, living with them. There is no assessment for Louisa. Aliya has an adjusted taxable income of $45,000 and Edmund has an adjusted taxable income of $70,000.</p>
+<p>Calculate the assessment for Kristina and Harriette for a child support period commencing on 26 August 2008. Kristina lives full time with Edmund and Harriette lives full time with a grandparent Ali. Ali has made an application under section 25A for a child support assessment.</p>
+<table><thead><tr><th scope="col">Step 1: Work out each parent's child support income</th>
+<th colspan="2" scope="col">Aliya</th>
+<th colspan="2" scope="col">Edmund</th>
+</tr></thead><tbody><tr><td>Work out each parent's adjusted taxable income for this case</td>
+<td colspan="2">$45,000</td>
+<td colspan="2">$70,000</td>
+</tr><tr><td>Deduct the self-support amount</td>
+<td colspan="2">− $18,252</td>
+<td colspan="2">−$18,252</td>
+</tr><tr><td>
+<p>Deduct a relevant dependent child amount, if applicable.</p>
+<p>					To work this out, see <a href="4/20">2.4.4.20</a>.</p></td>
+<td colspan="2">Costs of Louisa (4 years old)<br />
+					− (($45,000 − $18,252) × $0.17)<br />
+					= − ($26,748 × $0.17) (fraction of MTAWE = 0.5, children aged 0-12 years, 1 child)<br />
+					= − $4,547</td>
+<td colspan="2">N/A</td>
+</tr><tr><td>
+<p>Determine multi-case child costs for each of the children in each parent's other child support cases:</p>
+<ul><li>Relevant parent's income (adjusted taxable income − self-support amount − relevant dependent child amount)</li>
+<li>Multiply by cost of the child based on child's age and parent's income (refer to Costs of the Children table)</li>
+<li>Divide by number of the parent's child support children</li>
+</ul><p>Multi-case cost of each child</p>
+</td>
+<td colspan="2">
+<p>Costs of Claudia (7 years old)</p>
+<p>$22,201</p>
+<p>× $0.27 (fraction of MTAWE = 0.5, children aged 0-12 years, 3+ children)</p>
+<p>÷ 3</p>
+<p>= $1,998</p>
+</td>
+<td colspan="2">N/A</td>
+</tr><tr><td>Deduct a multi-case allowance amount:<br />
+					sum of the multi-case child costs for the children of the other case/s</td>
+<td colspan="2">− $1,998</td>
+<td colspan="2">N/A</td>
+</tr><tr><td>Each parent's child support income</td>
+<td colspan="2">= $45,000 − $18,252 − $4,547 − $1,998<br />
+					= $20,203</td>
+<td colspan="2">= $70,000 − $18,252 − $0 − $0<br />
+					= $51,748</td>
+</tr><tr><th>Step 2: Work out the combined child support income</th>
+<th colspan="2">Aliya</th>
+<th colspan="2">Edmund</th>
+</tr><tr><td>Each parent's child support income</td>
+<td colspan="2">$20,203</td>
+<td colspan="2">$51,748</td>
+</tr><tr><td>Combined child support income</td>
+<td colspan="4">= $20,203 + $51,748<br />
+					= $71,951</td>
+</tr><tr><th>Step 3: Work out each parent's income percentage</th>
+<th colspan="2">Aliya</th>
+<th colspan="2">Edmund</th>
+</tr><tr><td>Each parent's child support income<br />
+					Divide by the combined child support income<br />
+					Multiply the resulting amount by 100<br />
+					Each parent's income percentage</td>
+<td colspan="2">$20,203<br />
+					÷ $71,951<br />
+					× 100<br />
+					= 28.08%</td>
+<td colspan="2">$51,748<br />
+					÷ $71,951<br />
+					× 100<br />
+					= 71.92%</td>
+</tr><tr><th>Step 4: Work out each parent's percentage of care for each child</th>
+<th colspan="2">Aliya</th>
+<th colspan="2">Edmund</th>
+</tr><tr><td>Each parent's care percentage<br />
+					To work this out, see <a href="../2/1">2.2.1</a>.</td>
+<td>Aliya has 0% care of Kristina.</td>
+<td>Aliya has 0% care of Harriette.</td>
+<td>Edmund has 100% care of Kristina.</td>
+<td>Edmund has 0% care of Harriette.</td>
+</tr><tr><th>Step 5: Work out each parent's cost percentage for each child</th>
+<th colspan="2">Aliya</th>
+<th colspan="2">Edmund</th>
+</tr><tr><td>Each parent's cost percentage<br />
+					To work this out, see the Cost percentage table in <a href="5">2.4.5</a>.</td>
+<td>Aliya has a cost percentage of 0% for Kristina.</td>
+<td>Aliya has a cost percentage of 0% for Harriette.</td>
+<td>Edmund has a cost percentage of 100% for Kristina.</td>
+<td>Edmund has a cost percentage of 0% for Harriette.</td>
+</tr><tr><th>Step 6: Work out each parent's child support percentage for each child</th>
+<th colspan="2">Aliya</th>
+<th colspan="2">Edmund</th>
+</tr><tr><td>Each parent's income percentage</td>
+<td colspan="2">28.08%</td>
+<td colspan="2">71.92%</td>
+</tr><tr><td>Deduct each parent's cost percentage</td>
+<td>− 0% for Kristina</td>
+<td>− 0% for Harriette</td>
+<td>− 100% for Kristina</td>
+<td>− 0% for Harriette</td>
+</tr><tr><td>Each parent's child support percentage</td>
+<td colspan="2">= 28.08% for both Kristina and Harriette</td>
+<td>= −28.08% for Kristina</td>
+<td>= 71.92% for Harriette</td>
+</tr><tr><td colspan="5">
+<p>A parent who has a positive child support percentage will need to pay child support.</p>
+<p>This means that Aliya is responsible for 28.08% of the costs of Kristina and Harriette, because Aliyah has 28.08% of the combined child support income. As Aliya does not meet any of the costs through care, they need to transfer 28.08% of the costs to the carers through child support.</p>
+<p>					Edmund is entitled to receive child support from Aliya for Kristina and is required to pay child support for Harriette.</p></td>
+</tr><tr><th>Step 7: Work out the costs of each child</th>
+<th colspan="2">Kristina (14 years old)</th>
+<th colspan="2">Harriette (10 years old)</th>
+</tr><tr><td>Combined child support income of the parents</td>
+<td colspan="2">$71,951</td>
+<td colspan="2">$71,951</td>
+</tr><tr><td>Using the relevant Costs of the Children table, calculate the total costs of the child</td>
+<td colspan="2">
+<p>(for Kristina: 2008, fraction of MTAWE = 1.5, children aged 13+ years, 2 children)<br />
+						= ($15,606 + ($0.25 for every $1 over $54,756)) ÷ 2<br />
+						= ($15,606 + (($71,951 − $54,756) × $0.25)) ÷ 2<br />
+						= ($15,606 + ($17,195 × $0.25)) ÷ 2<br />
+						= ($15,606 + $4,299) ÷ 2<br />
+						= $19,905 ÷ 2<br />
+						= $9,953</p>
+</td>
+<td colspan="2">
+<p>(for Harriette: 2008, fraction of MTAWE = 1.5, children aged 0-12 years, 2 children)<br />
+						= ($12,868 + ($0.20 for every $1 over $54,756)) ÷ 2<br />
+						= ($12,868 + (($71,951 − $54,756) × $0.20)) ÷ 2<br />
+						= ($12,868 + ($17,195 × $0.20)) ÷ 2<br />
+						= ($12,868 + $3,439) ÷ 2<br />
+						= $16,307 ÷ 2<br />
+						= $8,154</p>
+</td>
+</tr><tr><th rowspan="2">Step 8: Work out the annual rate of child support payable by the parent with a positive child support percentage</th>
+<th colspan="2" rowspan="2">
+<p>Kristina<br />
+						(Aliya is liable to pay Edmund)</p>
+</th>
+<th colspan="2">
+<p>Harriette<br />
+						(Both Aliya and Edmund are liable to pay Ali, as they both have positive child support percentages for Harriette)</p>
+</th>
+</tr><tr><th>Aliya</th>
+<th>Edmund</th>
+</tr><tr><td>Paying parent's child support percentage<br />
+					Multiply by the cost of the children<br />
+					Amount of child support for each child</td>
+<td colspan="2">28.08%<br />
+					× $9,953<br />
+					= $2,795</td>
+<td>28.08%<br />
+					× $8,154<br />
+					= $2,290</td>
+<td>71.92%<br />
+					× $8,154<br />
+					= $5,864</td>
+</tr><tr><td colspan="5">If the parent has more than 1 child support case, follow the next step.</td>
+</tr><tr><th>Step 9 (if applicable): Work out the multi-case cap</th>
+<th colspan="2">
+<p>Kristina<br />
+						(This step is applicable only to Aliya)</p>
+</th>
+<th colspan="2">
+<p>Harriette<br />
+						(This step is applicable only to Aliya)</p>
+</th>
+</tr><tr><td>
+<p>Work out the multi-case child costs for the children in the child support case:</p>
+<p>See instructions above in Step 1.</p>
+<p> </p>
+</td>
+<td colspan="2">
+<p>Multi-case costs of Kristina (14 years)<br />
+						(2008, fraction of MTAWE = 0.5, children aged 13+ years, 3 children)</p>
+<p>= ($45,000 − $18,252 − $4,547) × &amp;$0.32 ÷ 3<br />
+						= $22,201 × $0.32 ÷ 3<br />
+						= $2,368</p>
+<p> </p>
+</td>
+<td colspan="2">
+<p>Multi-case costs of Harriette (10 years)<br />
+						(2008, fraction of MTAWE = 0.5, children aged 0-12 years, 3 children)</p>
+<p>= ($45,000 − $18,252 − $4,547) × $0.27 ÷ 3<br />
+						= $22,201 × $0.27 ÷ 3<br />
+						= $1,998</p>
+<p> </p>
+</td>
+</tr><tr><td>
+<p>Work out the multi-case cap for each child:</p>
+<p>(100% − cost percentage) x multi-case child costs</p>
+</td>
+<td colspan="2">= (100% − 0%) × $2,368<br />
+					= 100% × $2,368<br />
+					= $2,368
+<p>As the amount calculated at step 8 ($2,795) is more than the multi-case cap ($2,368) calculated at Step 9, the multi-case cap is payable by Aliya.</p>
+</td>
+<td colspan="2">= (100% − 0%) × $1,998<br />
+					= 100% × $1,998<br />
+					= $1,998
+<p>As the amount calculated at step 8 ($2,290) is more than the multi-case cap ($1,998) calculated at Step 9, the multi-case cap is payable by Aliya.</p>
+</td>
+</tr><tr><td>Child support payable</td>
+<td colspan="4">
+<p>Aliya is liable to pay Edmund child support for Kristina of $2,368 (multi-case cap).</p>
+<p>Aliya is liable to pay Ali child support for Harriette of $1,998 (multi-case cap).</p>
+<p>Edmund is to pay Ali child support for Harriette of $5,864 (annual rate).</p>
+<p>					Ali is entitled to receive $1,998 + $5,864 = $7,862.</p></td>
+</tr></tbody></table></div>
+<h2 id="sharemoney">When child support is payable by or to more than 1 person under Formula 4</h2>
+<table><thead><tr><th scope="col">If …</th>
+<th scope="col">then …</th>
+<th scope="col">
+<div class="example">Example</div>
+</th>
+</tr></thead><tbody><tr><td>both parents have a positive child support percentage at step 6 of the formula calculations</td>
+<td>both parents pay child support to the non-parent carer/s (section 38(5)).</td>
+<td>
 <div class="example">
-<p><strong>Example:</strong> The first parent, M, has a child support percentage of 83.47%.</p>
-<p>The second parent, F, has a child support percentage of 16.53%.<br />
-		The costs of the child are $1,000.</p>
-<p>Both parents are required to pay child support to G, who has full-time care of the child.<br />
-		M will pay $1,000 × 83.47% = $835.<br />
-		F will pay $1,000 × 16.53% = $165.</p>
+<p>The first parent, Ted, has a child support percentage of 83.47%. The second parent, Rita, has a child support percentage of 16.53%.</p>
+<p>The costs of the child are $1,000.</p>
+<p>Both parents are required to pay child support to Valerie, who has full-time care of the child.</p>
+<p>Ted will pay $1,000 × 83.47% = $835.</p>
+<p>Rita will pay $1,000 × 16.53% = $165.</p>
 </div>
-<p>If one parent, the first parent, has a positive child support percentage at step 6 and the other parent has:</p>
-<ul><li>a negative child support percentage, and</li>
-<li>less than shared care</li>
-</ul><p>then the first parent pays child support to the non-parent carer or carers (section 38(5)).</p>
+</td>
+</tr><tr><td>
+<p>1 parent has a positive child support percentage at step 6, and the other parent has:</p>
+<p>a nil or negative child support percentage, and</p>
+<p>less than shared care</p>
+</td>
+<td>only the first parent pays child support to the non-parent carer/s (section 38(5)).</td>
+<td>
 <div class="example">
-<p><strong>Example:</strong> The first parent, M, has a child support percentage of 83.47%.<br />
-		The second parent, F, has regular care of the child and a child support percentage of −7.47% (16.53% − 24%).<br />
-		The costs of the child are $1,000.</p>
-<p>The first parent is required to pay child support to G, who has primary care of the child.<br />
-		M will pay $1,000 × 83.47% = $835.</p>
+<p>The first parent, Arnold, has a child support percentage of 83.47%. The second parent, Olivia, has regular care of the child and a child support percentage of −7.47% (16.53% − 24%).</p>
+<p>The costs of the child are $1,000.</p>
+<p>Arnold is required to pay child support to Robert, who has primary care of the child.</p>
+<p>Arnold will pay $1,000 × 83.47% = $835.</p>
 </div>
-<p>If one parent, the first parent, has a positive child support percentage at step 6 and the other parent has:</p>
-<ul><li>a negative child support percentage, and</li>
-<li>at least shared care</li>
-</ul><p>then the first parent pays child support to the second parent and the non-parent carer (section 38(6)). The child support payable will be divided between the second parent and the non-parent carer by calculating their respective cost percentage as a proportion of their combined cost percentage.</p>
+</td>
+</tr><tr><td>
+<p>1 parent has a positive child support percentage at step 6, and the other parent has:</p>
+<p>a negative child support percentage, and</p>
+<p>				at least shared care</p></td>
+<td>
+<p>the first parent pays child support to the second parent and the non-parent carer (section 38(6)).</p>
+<p>				The child support payable will be divided between the second parent and the non-parent carer by calculating their respective cost percentage as a proportion of their combined cost percentage.</p></td>
+<td>
 <div class="example">
-<p><strong>Example:</strong> The first parent, M, has a child support percentage of 83.47%.<br />
-		The second parent F, has 37% care of the child (shared care) which is a cost percentage of 29% and a child support percentage of −12.47% (16.53% − 29%).</p>
-<p>The non-parent carer, G, has 49% care of the child (shared care) which is a cost percentage of 50%.<br />
-		The costs of the child are $1,000.</p>
-<p>M is liable to pay $1,000 × 83.47% = $835 in total.</p>
-<p>M is required to pay child support to F, using F's cost percentage divided by the combined cost percentages of F and G.<br />
-		M will pay 835 × 29% ÷ (29% + 50%) = $307 to F.<br />
-		M is required to pay child support to G using G's cost percentage divided by the combined cost percentages of G and F.<br />
-		M will pay 835 × 50% ÷ (29% + 50%) = $528 to G.</p>
+<p>The first parent, Marcela, has a child support percentage of 83.47%. The second parent Frederique, has 37% care of the child (shared care) which is a cost percentage of 29% and a child support percentage of −12.47 (16.53% − 29%).</p>
+<p>The non-parent carer, June, has 49% care of the child (shared care) which is a cost percentage of 50%.</p>
+<p>The costs of the child are $1,000.</p>
+<p>Marcela is liable to pay $1,000 × 83.47% = $835 in total.</p>
+<p>Marcela is required to pay child support to Frederique, using Frederique's cost percentage divided by the combined cost percentages of Frederique and June.</p>
+<p>Marcela will pay 835 × 29% ÷ (29% + 50%) = $307 to Frederique.</p>
+<p>Marcela is required to pay child support to June using June's cost percentage divided by the combined cost percentages of June and Frederique.</p>
+<p>Marcela will pay 835 × 50% ÷ (29% + 50%) = $528 to June.</p>
 </div>
-<p>A non-parent carer is not entitled to be paid child support unless they have at least 35% care of the child and they have applied under section 25A (section 40B). If more than one non-parent carer is entitled to receive child support from a parent or both parents, then their share of the entitlement is determined in accordance with section 40A. See <a href="8">2.4.8</a> for information about the calculations required when child support is payable to more than one person.</p>
-<p>Different rules apply if the minimum annual rate of child support is payable to more than one person. See <a href="12">2.4.12</a> for details of the rules that apply, which depend upon the level of care provided by the carer.</p>
+</td>
+</tr></tbody></table><p>A non-parent carer is not entitled to be paid child support unless they have at least 35% care of the child (section 7B) and they have applied under section 25A (section 40B). If more than 1 non-parent carer is entitled to receive child support from a parent or both parents, then their share of the entitlement is determined in accordance with section 40A. See <a href="8">2.4.8</a> for information about the calculations required when child support is payable to more than 1 person.</p>
+<p>Different rules apply if the minimum annual rate of child support is payable to more than 1 person. See <a href="12">2.4.12</a> for details of the rules that apply, which depend upon the level of care provided by the carer.</p>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     11 May 2015  	</div>
+      Last reviewed:     1 July 2019  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../contact-us">Contact us</a></li>
@@ -395,8 +641,7 @@ It also describes how an assessment creates a liability to pay child support and
 <li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
-<script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_IkilKWehdX07Wbi3Cg-T6yf5sLTu5FfOT2__edFF9eM.js"></script>
+<script type="text/javascript" src="https://cdn1.readspeaker.com/script/5931/webReader/webReader.js?pids=wr&amp;notools=1&amp;disable=popupplayback&amp;qrxyi9"></script>
 </body>
 </html>

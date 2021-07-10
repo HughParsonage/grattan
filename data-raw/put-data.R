@@ -4,6 +4,7 @@ renew <- FALSE
 if ("dplyr" %in% .packages()) {
   stop("dplyr is attached. Restart R and source.")
 }
+stopifnot(dir.exists("data-raw"))  # use the project dir
 # Don't have two library paths loaded
 if (length(.libPaths()) > 2 && Sys.getenv("USERNAME") == "hughp") {
   .libPaths(.libPaths()[1])
@@ -17,11 +18,8 @@ if (packageVersion("rsdmx") < package_version("0.5.10")) {
   warning("rsdmx will not properly connect to ABS for versions of rsdmx before 0.5.10")
 }
 library(magrittr)
-library(dplyr)
 library(forecast)
 library(data.table)
-library(tidyr)
-library(dtplyr)
 library(taxstats)
 
 if (requireNamespace("SampleFile1415", quietly = TRUE)) {
@@ -66,7 +64,8 @@ if(exists('sample_15_16', where = 'package:ozTaxData')){
 sample_file_1516[, fy.year := "2015-16"]
 sample_file_1516[, WEIGHT := 50]
 
-if (file.exists(local_1617_path <- "../taxstats1617/2017_sample_file.csv")) {
+if (file.exists(local_1617_path <- "../taxstats1617/2017_sample_file.csv") ||
+    file.exists(local_1617_path <- "../../taxstats1617/2017_sample_file.csv")) {
   sample_file_1617 <- fread(file = local_1617_path)
 } else if (file.exists(local_1617_path <- file.path(Path2Dropbox, 
                                                     'Matt Cowgill',
@@ -129,19 +128,6 @@ git_compare_prev <- function(file.tsv, nomatch = NA_integer_, threshold = 0) {
 tax_tbl <-
   data.table::fread("./data-raw/tax-brackets-and-marginal-rates-by-fy.tsv")
 
-# tax_table2 provides the raw tax tables, but also the amount
-# of tax paid at each bracket, to make the rolling join 
-# calculation later a one liner.
-# tax_table2 <- 
-#   tax_tbl %>%
-#   dplyr::group_by(fy_year) %>%
-#   dplyr::mutate(
-#     tax_at = cumsum(data.table::shift(marginal_rate, type = "lag", fill = 0) * (lower_bracket - data.table::shift(lower_bracket, type = "lag", fill = 0))),
-#     income = lower_bracket) %>%
-#   .[, .(fy_year, income, lower_bracket, marginal_rate, tax_at)] %>%
-#   data.table::as.data.table(.) %>%
-#   data.table::setkey(fy_year, income)  # SETLENGHT ISSUE
-
 shift0 <- function(x) shift(x, fill = 0)
 tax_table2 <- 
   tax_tbl %>%
@@ -152,8 +138,8 @@ tax_table2 <-
 
 lito_tbl <- 
   readxl::read_excel("./data-raw/lito-info.xlsx", sheet = 1) %>% 
-  dplyr::select(-source) %>%
-  as.data.table %>%
+  setDT %>%
+  drop_col("source") %>%
   setkeyv("fy_year") %>%
   unique(by = key(.))
 
@@ -182,18 +168,15 @@ medicare_tbl %>%
 
 sapto_tbl <- 
   readxl::read_excel("./data-raw/SAPTO-rates.xlsx", sheet = 1) %>% 
-  data.table::as.data.table(.) %>% 
-  lazy_dt %>%
-  mutate(max_offset = if_else(family_status == "single", max_offset, max_offset * 2),
-         lower_threshold = if_else(family_status == "single", lower_threshold, lower_threshold * 2)) %>%
-  # Choose maximum
-  group_by(fy_year, family_status) %>%
-  filter(max_offset == max(max_offset)) %>%
   as.data.table %>%
+  .[, max_offset := if_else(family_status == "single", max_offset, max_offset * 2)] %>%
+  .[, lower_threshold := if_else(family_status == "single", lower_threshold, lower_threshold * 2)] %>%
+  # Choose maximum
+  .[, max_max_offset := max(max_offset), by = .(fy_year, family_status)] %>%
+  .[max_offset == max_max_offset] %>%
   setkey(fy_year, family_status) %>% 
   # avoid cartesian joins in income_tax
-  unique %>%
-  as.data.table
+  unique 
 
 sapto_tbl %>%
   readr::write_tsv("./data-raw/sapto_tbl.tsv")
@@ -204,50 +187,14 @@ hecs_tbl <-
 
 # Manually
 cpi_unadj <- 
-  tryCatch({
-    url <- "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.10001.10.Q/ABS?startTime=1948"
-    cpi <- rsdmx::readSDMX(url)
-    message("Using ABS sdmx connection")
-    as.data.frame(cpi) %>%
-      as.data.table %>%
-      .[, list(obsTime, obsValue)] %T>%
-      fwrite("data-raw/cpi-unadjusted-manual.tsv", sep = "\t") %>%
-      .[]
-  },
-  error = function(e) {
-    fread("./data-raw/cpi-unadjusted-manual.tsv")
-  })
+  as.data.table(readabs::read_cpi())
+  
   
 
-cpi_seasonal_adjustment <-
-  tryCatch({
-    url <- "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999901.10+20.Q/ABS?startTime=1948"
-    cpi <- rsdmx::readSDMX(url)
-    message("Using ABS sdmx connection")
-    as.data.frame(cpi) %>%
-      as.data.table %>%
-      .[, list(obsTime, obsValue)] %T>%
-      fwrite("data-raw/cpi-seasonally-adjusted-manual.tsv", sep = "\t") %>%
-      .[]
-  },
-  error = function(e) {
-    fread("./data-raw/cpi-seasonally-adjusted-manual.tsv")
-  })
+cpi_seasonal_adjustment <- cpi_unadj
 
-cpi_trimmed <-
-  tryCatch({
-    url <- "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/CPI/1.50.999902.10+20.Q/ABS?startTime=1948"
-    cpi <- rsdmx::readSDMX(url)
-    message("Using ABS sdmx connection")
-    as.data.frame(cpi) %>%
-      as.data.table %>%
-      .[, list(obsTime, obsValue)] %T>%
-      fwrite("data-raw/cpi-trimmed-mean-manual.tsv", sep = "\t") %>%
-      .[]
-  },
-  error = function(e) {
-    fread("./data-raw/cpi-seasonally-adjusted-manual.tsv")
-  })
+
+cpi_trimmed <- cpi_unadj
 
 cpi_by_adj_fy <-
   list("none" = cpi_unadj, 
@@ -255,9 +202,9 @@ cpi_by_adj_fy <-
        "trimmed.mean" = cpi_trimmed) %>%
   lapply(function(DT) {
     DT %>%
-      .[endsWith(obsTime, "Q1")] %>%
-      .[, .(obsValue),
-        keyby = .(fy_year = yr2fy(as.integer(sub("-Q1", "", obsTime, fixed = TRUE))))]
+      .[month(date) == 3L] %>%
+      .[, .(obsValue = cpi),
+        keyby = .(fy_year = date2fy(date))]
   }) %>%
   rbindlist(idcol = "Adjustment", use.names = TRUE, fill = TRUE) %>%
   setkey(Adjustment, fy_year)
@@ -276,28 +223,31 @@ max.cpi_seasonal_adjustment.yr <- fy2yr(cpi_seasonal_adjustment_fy[, last(fy_yea
 min.cpi_trimmed.yr <- fy2yr(cpi_trimmed_fy[, first(fy_year)])
 max.cpi_trimmed.yr <- fy2yr(cpi_trimmed_fy[, last(fy_year)])
 
+wages_pre_2020Q1 <- 
+  fread("./data-raw/wages-trend.tsv", select = c("obsTime", "obsValue")) %>%
+  .[obsTime <= "2020-Q1"]
+
+payrolls <- as.data.table(readabs::read_payrolls())
 
 wages_trend <- 
-  tryCatch({
-    wage.url <- "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LABOUR_PRICE_INDEX/1.THRPEB.7.-.0.30.Q/all?startTime=1997-Q3"
-    wages <- rsdmx::readSDMX(wage.url)
-    message("Using ABS sdmx connection")
-    wage.indices <- 
-      as.data.frame(wages) %>% 
-      as.data.table %>%
-      .[, list(obsTime, obsValue)]
-    if (!{"2017-Q4" %in% .subset2(wage.indices, "obsTime")}) {
-      wage.indices <- 
-        rbind(wage.indices, 
-              data.table(obsTime = "2017-Q4",
-                         obsValue = 127.6))
-    }
-    fwrite(wage.indices, "./data-raw/wages-trend.tsv", sep = "\t")
-    wage.indices
-  },
-  error = function(e) {
-    data.table::fread("./data-raw/wages-trend.tsv", select = c("obsTime", "obsValue"))
-  })
+  list(old = wages_pre_2020Q1,
+       payroll = {
+         
+         payrolls_aus <-
+           payrolls %>%
+           .[state %ein% "Australia"] %>%
+           .[industry %ein% "All industries"] %>%
+           .[age %ein% "All ages"] %>%
+           .[sex %ein% "Persons"] %>%
+           .[]
+         
+         wages_index_2020Q1 <- wages_pre_2020Q1[, last(obsValue)]
+         
+         payrolls_aus[, value_rel_wages := wages_index_2020Q1 * value / 100]
+         payrolls_aus[, obsTime := format(zoo::as.yearqtr(date), format = "%Y-Q%q")]
+         payrolls_aus[, .(obsValue = mean(value_rel_wages)), keyby = .(obsTime)]
+       }) %>%
+  rbindlist()
 
 stopifnot(is.data.table(wages_trend))
 split2yq <- function(x) {
@@ -322,43 +272,19 @@ wages_trend_fy <-
 max.wage.yr <- wages_trend_fy[, max(fy2yr(fy_year))]
 
 
-lf_trend <- 
-  tryCatch({
-    lf.url.trend <- 
-      # "http://stat.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978-02"
-      # "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/ABS?startTime=1978"
-      "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/LF/0.6.3.1599.30.M/all?startTime=1978-02"
-    lf <- rsdmx::readSDMX(lf.url.trend)
-    lf <- 
-      as.data.frame(lf) %>% 
-      as.data.table %T>%
-      {stopifnot(nrow(.) > 0)} %>%
-      .[, .(obsTime, obsValue = as.integer(obsValue * 1000))]
-    
-    if ("2018-07" %notin% .subset2(lf, "obsTime") &&
-        "2018-06" == lf[, last(obsTime)]) {
-      message("Manually entering 2018-07 in lf")
-      lf <- rbind(lf, 
-                  data.table(obsTime = "2018-07",
-                             obsValue = as.integer(13294.7 * 1000)))
-    }
-    
-    fwrite(lf, "./data-raw/lf-trend.tsv", sep = "\t")
-    lf
-    
-    
-  }, 
-  error = function(e){
-    cat("Labour force retrieve errored: ", crayon::red(e$m), "\n")
-    message("Using old (", as.character(file.mtime("./data-raw/lf-trend.tsv")), ") version of lf-trend.")
-    data.table::fread("./data-raw/lf-trend.tsv" 
-                      , select = c("obsTime", "obsValue"))
-  })
+labour_force <- 
+  setDT(readabs::read_abs("6202.0", tables = "1", check_local = FALSE))
+
+message("Using original series because COVID killed the Trend")
+
+lf_trend <-
+  # Note we are actually using the original series
+  labour_force[series_id %ein% "A84423085A"]
 
 lf_trend_fy <- 
-  lf_trend[endsWith(obsTime, "-01")] %>%
-  .[, .(fy_year = yr2fy(as.integer(substr(obsTime, 1L, 4L))), 
-        obsValue)] %>%
+  lf_trend[month(date) == 1L] %>%
+  .[, .(fy_year = date2fy(date), 
+        obsValue = value)] %>%
   unique(by = "fy_year", fromLast = TRUE) %>%
   setkey(fy_year) %T>%
   # put match hash
@@ -878,22 +804,21 @@ super_contribution_inflator_1314 <-
   library(taxstats)
   funds <- 
     funds_table1_201314 %>%
-    filter(Selected_items == "Assessable contributions") %>%
-    select(fy_year, Assessable_contributions_funds = Sum) %>%
-    as.data.table() %>%
+    as.data.table %>%
+    .[Selected_items == "Assessable contributions"] %>%
+    .[, .(fy_year, Assessable_contributions_funds = Sum)] %>%
     setkey(fy_year)
   
   smsfs <- 
     funds_table2_smsf_201314 %>%
-    filter(Selected_items == "Assessable contributions") %>%
-    select(fy_year, Assessable_contributions_smsfs = Sum) %>%
-    as.data.table() %>%
+    as.data.table %>%
+    .[Selected_items == "Assessable contributions"] %>%
+    .[, .(fy_year, Assessable_contributions_smsfs = Sum)] %>%
     setkey(fy_year)
   
   ato_aggregate_contributions <- 
     smsfs[funds] %>%
-    mutate(total_contributions = Assessable_contributions_smsfs + Assessable_contributions_funds) %>%
-    as.data.table()
+    .[, total_contributions := Assessable_contributions_smsfs + Assessable_contributions_funds]
   
   ato_aggregate_contributions[fy_year == "2013-14"][["total_contributions"]] / sample_file_1314_concessional_contribution_total
 }
@@ -902,7 +827,7 @@ super_contribution_inflator_1314 <-
 salary_by_fy_swtile <- 
   sample_files_all %>%
   .[Sw_amt > 0, .(fy.year, Sw_amt)] %>%
-  .[, Sw_amt_percentile := ntile(Sw_amt, 100), keyby = "fy.year"] %>%
+  .[, Sw_amt_percentile := weighted_ntile(Sw_amt, n = 100L), keyby = "fy.year"] %>%
   .[,
     .(average_salary = mean(Sw_amt), 
       min_salary = min(Sw_amt)),
@@ -944,20 +869,26 @@ differential_sw_uprates <-
              Txt = c("One-tenth", "One-fifth", "One-quarter", 
                      "One-third", "One-half",
                      "Two-thirds", "Three-quarters"))
-rm_comma <- function(x) gsub("[^\\.0-9]", "", gsub(",", "", x, fixed = TRUE))
+rm_comma <- function(x) {
+  if (is.character(x)) {
+    x <- gsub("[^\\.0-9]", "", gsub(",", "", x, fixed = TRUE))
+  }
+  x
+}
 
 # http://guides.dss.gov.au/guide-social-security-law/5/2/2/10
 Age_pension_base_rates_by_year <- 
   if (!file.exists("data-raw/max-basic-rates-of-pension-1963-2016.tsv")){
     fread("data-raw/max-basic-rates-of-pension-1963-2016.csv") %>%
-      mutate_all(funs(rm_comma)) %>%
+      .[, lapply(.SD, rm_comma)] %>%
       setnames(1, "Date") %>%
-      mutate(Date = gsub(" Note .*$", "", Date, perl = TRUE), 
-             Date = as.Date(Date, format = "%d/%m/%Y")) %>%
-      filter(`Standard rate` != "Standard rate") %>%
-      select(Date, `Standard rate`, `Married rate`) %>%
-      mutate_each(funs(as.numeric), -Date) %>%
-      filter(complete.cases(.)) %T>%
+      .[, Date := gsub(" Note .*$", "", Date, perl = TRUE)] %>%
+      .[, Date := as.Date(Date, format = "%d/%m/%Y")] %>%
+      setnames("Standard rate", "StandardRate") %>%
+      .[`Standard rate` != "Standard rate"] %>%
+      .[, .(Date, `Standard rate`, `Married rate`)] %>%
+      .[, lapply(.SD, function(x) if (is.character(x)) as.double(x) else x)] %>%
+      .[complete.cases(.)] %T>%
       write_tsv("data-raw/max-basic-rates-of-pension-1963-2016.tsv") %>%
       .[]
   } else {
@@ -1028,8 +959,9 @@ fwrite(bto_tbl, "data-raw/bto_tbl.tsv", sep = "\t")
 
 Age_pension_permissible_income_by_Date <- 
   read_excel("data-raw/age-pension-permissible-income.xlsx") %>%
-  gather(type, permissible_income, -Date) %>%
-  mutate(type = trimws(gsub("Permissible income ", "", gsub("[^A-Za-z]", " ", type)))) %>%
+  setDT %>%
+  melt.data.table(id.vars = "Date", variable.name = "type", variable.factor = FALSE) %>%
+  .[, type := trimws(gsub("Permissible income ", "", gsub("[^A-Za-z]", " ", type)))] %>%
   as.data.table
 
 Age_pension_deeming_rates_by_Date <-
@@ -1098,17 +1030,6 @@ abs_key_aggregates_url_status <-
                 destfile = "data-raw/5206001_key_aggregates-latest-release.xls")
 
 if (!abs_key_aggregates_url_status) {
-# abs_key_aggregates_names <- 
-#   read_excel("data-raw/5206001_key_aggregates-latest-release.xls",
-#              sheet = "Data1",
-#              range = cell_rows(2:10)) %>%
-#   dplyr::filter(Unit == "Series ID")
-# 
-# units_by_series_id <- 
-#   data.table(Series_ID = as.character(abs_key_aggregates_names), 
-#              units = names(abs_key_aggregates_names)) %>%
-#   .[Series_ID != "Series ID"] %>%  # 'Series ID' and 'units'
-#   .[, units := sub("__.*$", "", units, perl = TRUE)] %>%
 
 
 abs_key_aggregates_metadata <-
@@ -1162,7 +1083,9 @@ read_csv_2col <- function(...) {
     message("ausmacrodata.org unavbl")
     return(NULL)
   }
-  suppressMessages(suppressWarnings(read_csv(...))) %>% select(1:2) %>% setDT
+  suppressMessages(suppressWarnings(read_csv(...))) %>%
+    setDT %>%
+    .[, .SD, .SDcols = c(1:2)]
 }
 
 if (FALSE) {
@@ -1184,7 +1107,6 @@ abs_residential_property_price_Per <-
   
 abs_residential_property_price_Adl <-
   read_csv_2col("http://ausmacrodata.org/Data/6416.0/rppiprppiinpcoq.csv") %>%
-  select(1:2) %>%
   setnames(names(.)[2], "Adl")
   
 abs_residential_property_price_Hob <-
@@ -1207,17 +1129,16 @@ residential_property_prices <-
   Reduce(f = function(X, Y) merge(X, Y, by = names(X)[1]),
          mget(ls(pattern = "^abs_residential_property_"))) %>%
   setnames(1, "Date") %>%
-  mutate(Date = as.Date(paste0("01/", Date), "%d/%m/%Y")) %>%
-  select(Date,
-         Sydney = Syd,
-         Melbourne = Mel,
-         Brisbane = Bne,
-         Perth = Per,
-         Adelaide = Adl,
-         Hobart = Hob,
-         Canberra = Cbr,
-         Darwin = Drw,
-         `Australia (weighted average)` = AVG) %>%
+  .[, .(Date = as.Date(paste0("01/", Date), "%d/%m/%Y"),
+        Sydney = Syd,
+        Melbourne = Mel,
+        Brisbane = Bne,
+        Perth = Per,
+        Adelaide = Adl,
+        Hobart = Hob,
+        Canberra = Cbr,
+        Darwin = Drw,
+        `Australia (weighted average)` = AVG)] %>%
   .[order(Date)] %>%
   melt.data.table(id.vars = "Date",
                   variable.name = "City",

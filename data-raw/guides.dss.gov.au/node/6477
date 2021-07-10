@@ -2,27 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<link rel="shortlink" href="6477" />
-<link rel="canonical" href="../family-assistance-guide/3/5/2/10" />
-<meta name="viewport" content="width=device-width" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>3.5.2.10 CCB Overall Rate Calculation - Approved Care | Guides to Social Policy Law</title>
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<meta name="viewport" content="width=device-width" />
+<link rel="canonical" href="../family-assistance-guide/3/5/2/10" />
+<link rel="shortlink" href="6477" />
+<title>3.5.2.10 CCS - activity test - general | Guides to Social Policy Law</title>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_Q4XrxgEkbadGDm1J7AHUHHmbcMJ2_hbMfrrzrm9Ne_I.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
-<script type="text/javascript" src="../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_d905I2WxoGGQW6uS7jkC73mqKhSejey6jciEdxo9cJI.css" media="all" />
+<script type="text/javascript" src="../sites/default/files/js/js_yMSKTzBO0KmozyLwajzFOrrt_kto_9mtccAkb0rm7gc.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_FA2YSy0R3kB2AU_wIOLoSR0sJX4ZYjdPuPaRFd2ZDyw.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+window.rsConf = { ui: { tools: {translation: false, dictionary: false}}};
 //--><!]]>
 </script>
+<script type="text/javascript" src="../sites/default/files/js/js_rsGiM5M1ffe6EhN-RnhM5f3pDyJ8ZAPFJNKpfjtepLk.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../sites/default/files/js/js_-oEDdwe4XpUqUj4W0KJs96ENaXIrGvjBvIP-WYYBi54.js"></script>
 <script type="text/javascript" src="../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"ju9wXZZ2lTpRXGdAZescV3qMQM1YdyeBHizloWHnd5s","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/6477":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"b9pa39-h9NZY-xkyM5JfGHUHJPW9ij7c8UFys5MWnSI","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"https:\/\/cdn1.readspeaker.com\/script\/5931\/webReader\/webReader.js?pids=wr\u0026notools=1\u0026disable=popupplayback":1,"misc\/jquery.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"0":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"1":1,"sites\/all\/modules\/extlink\/js\/extlink.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/6477":true},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)","extUseFontAwesome":false}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -35,108 +40,308 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <nav id="global">
 	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
 <div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<ul class="menu"><li class="first leaf has-children menu-mlid-489"><a href="../guide-social-security-law.1">Social Security Guide</a></li>
+<li class="leaf has-children active-trail menu-mlid-491"><a href="../family-assistance-guide.1" class="active-trail">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide.1">Paid Parental Leave Guide</a></li>
+<li class="leaf has-children menu-mlid-513"><a href="../child-support-guide.1">Child Support Guide</a></li>
+<li class="leaf menu-mlid-7596"><a href="../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
 <li class="leaf menu-mlid-7597"><a href="../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
-<li class="leaf has-children menu-mlid-513"><a href="../child-support-guide">Child Support Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-491"><a href="../family-assistance-guide" class="active-trail">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../guide-social-security-law">Guide to Social Security Law</a></li>
-<li class="last leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+<li class="last leaf has-children menu-mlid-19951"><a href="../national-redress-guide" title="">National Redress Guide</a></li>
 </ul></div></nav>
 <header role="banner">
 	<a href="../index.html" rel="home"><img src="../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
 <p class="site-name">Guides to Social Policy Law</p>
 <form class="search-form" role="search" action="6477" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
- <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+ <input class="custom-search-box form-text" placeholder="Search" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-f37V1f7-AvVK-n01BLEl1u3tbUGx1nfh79FZdDtQY8U" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-5OHoh3B-ERDYgL-kxRnZhbbsvR99GhtBxPcD0ykTHAk" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Family Assistance Guide</h2>
-<p>Version 1.203 - Released 7 May 2018</p>
+<p>Version 1.230 - Released 1 July 2021</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7283"><a href="../family-assistance-guide" title="">Using the Family Assistance Guide</a></li>
-<li class="collapsed menu-mlid-2274"><a href="../family-assistance-guide/updates">What&#039;s New</a></li>
-<li class="collapsed menu-mlid-2266"><a href="../family-assistance-guide/1">1 Key Terms &amp; Principles</a></li>
-<li class="collapsed menu-mlid-2267"><a href="../family-assistance-guide/2">2 Eligibility</a></li>
-<li class="expanded active-trail menu-mlid-2268"><a href="../family-assistance-guide/3" class="active-trail">3 Rate Calculation</a><ul class="menu"><li class="first collapsed menu-mlid-1826"><a href="../family-assistance-guide/3/1">3.1 FTB Rate Calculation</a></li>
-<li class="collapsed menu-mlid-1829"><a href="../family-assistance-guide/3/2">3.2 Adjusted Taxable Income</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7283"><a href="../family-assistance-guide.1" title="">Using the Family Assistance Guide</a></li>
+<li class="collapsed menu-mlid-2274"><a href="../family-assistance-guide/updates.1">What&#039;s new</a></li>
+<li class="collapsed menu-mlid-2266"><a href="../family-assistance-guide/1.1">1 Key terms &amp; principles</a></li>
+<li class="collapsed menu-mlid-2267"><a href="../family-assistance-guide/2.1">2 Eligibility</a></li>
+<li class="expanded active-trail menu-mlid-2268"><a href="../family-assistance-guide/3.1" class="active-trail">3 Rate calculation</a><ul class="menu"><li class="first collapsed menu-mlid-1826"><a href="../family-assistance-guide/3/1.1">3.1 FTB rate calculation</a></li>
+<li class="collapsed menu-mlid-1829"><a href="../family-assistance-guide/3/2.1">3.2 Adjusted taxable income</a></li>
 <li class="leaf menu-mlid-1830"><a href="../family-assistance-guide/3/3">3.3 Number not currently in use</a></li>
 <li class="leaf menu-mlid-1831"><a href="../family-assistance-guide/3/4">3.4 Number not currently in use</a></li>
-<li class="expanded active-trail menu-mlid-1832"><a href="../family-assistance-guide/3/5" class="active-trail">3.5 CCB Rate Calculation</a><ul class="menu"><li class="first leaf menu-mlid-1745"><a href="../family-assistance-guide/3/5/1">3.5.1 CCB Entitlement - General Provisions</a></li>
-<li class="expanded active-trail menu-mlid-1746"><a href="../family-assistance-guide/3/5/2" class="active-trail">3.5.2 Calculating Approved Care CCB Entitlement</a><ul class="menu"><li class="first leaf active-trail active menu-mlid-1736"><a href="../family-assistance-guide/3/5/2/10" class="active-trail active">3.5.2.10 CCB Overall Rate Calculation - Approved Care</a></li>
-<li class="leaf menu-mlid-1737"><a href="../family-assistance-guide/3/5/2/20">3.5.2.20 Calculating the Approved Care Adjustment Percentage</a></li>
-<li class="leaf menu-mlid-1738"><a href="../family-assistance-guide/3/5/2/30">3.5.2.30 Calculating the Approved Care CCB Percentage</a></li>
-<li class="leaf menu-mlid-1739"><a href="../family-assistance-guide/3/5/2/40">3.5.2.40 Calculating the Approved Care Taxable Income Percentage</a></li>
-<li class="leaf menu-mlid-1740"><a href="../family-assistance-guide/3/5/2/50">3.5.2.50 Calculating the Approved Care Multiple Child Percentage</a></li>
-<li class="leaf menu-mlid-1741"><a href="../family-assistance-guide/3/5/2/60">3.5.2.60 Number not currently in use</a></li>
-<li class="leaf menu-mlid-1742"><a href="../family-assistance-guide/3/5/2/70">3.5.2.70 CCB Adjustment Percentage Example - 1 Child, Income below Upper Threshold</a></li>
-<li class="leaf menu-mlid-1743"><a href="../family-assistance-guide/3/5/2/80">3.5.2.80 CCB Adjustment Percentage Example - 4 Children, Income above Upper Threshold</a></li>
-<li class="last leaf menu-mlid-1744"><a href="../family-assistance-guide/3/5/2/90">3.5.2.90 CCB Adjustment Percentage Example - 2 Children, Income above Upper Threshold</a></li>
+<li class="expanded active-trail menu-mlid-1832"><a href="../family-assistance-guide/3/5.1" class="active-trail">3.5 CCS entitlement</a><ul class="menu"><li class="first leaf menu-mlid-1745"><a href="../family-assistance-guide/3/5/1">3.5.1 CCS - combined annual ATI</a></li>
+<li class="expanded active-trail menu-mlid-1746"><a href="../family-assistance-guide/3/5/2.1" class="active-trail">3.5.2 CCS - activity test</a><ul class="menu"><li class="first leaf active-trail active menu-mlid-1736"><a href="../family-assistance-guide/3/5/2/10" class="active-trail active">3.5.2.10 CCS - activity test - general</a></li>
+<li class="leaf menu-mlid-1737"><a href="../family-assistance-guide/3/5/2/20">3.5.2.20 CCS - activity test exemptions</a></li>
+<li class="leaf menu-mlid-1738"><a href="../family-assistance-guide/3/5/2/30">3.5.2.30 ACCS (transition to work) - activity test</a></li>
+<li class="last leaf menu-mlid-1739"><a href="../family-assistance-guide/3/5/2/40">3.5.2.40 CCS - other recognised activities</a></li>
 </ul></li>
-<li class="leaf menu-mlid-20526"><a href="../family-assistance-guide/3/5/3">3.5.3 Number not currently in use</a></li>
-<li class="leaf menu-mlid-20536"><a href="../family-assistance-guide/3/5/4">3.5.4 Number not currently in use</a></li>
-<li class="last leaf menu-mlid-20801"><a href="../family-assistance-guide/3/5/5">3.5.5 Number not currently in use</a></li>
+<li class="leaf menu-mlid-20526"><a href="../family-assistance-guide/3/5/3">3.5.3 CCS - hourly rate caps</a></li>
+<li class="leaf menu-mlid-20536"><a href="../family-assistance-guide/3/5/4">3.5.4 Calculating CCS entitlement</a></li>
+<li class="last leaf menu-mlid-20801"><a href="../family-assistance-guide/3/5/5">3.5.5 CCS &amp; ACCS - exceptional circumstances</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-1833"><a href="../family-assistance-guide/3/6">3.6 Historical Rates</a></li>
-<li class="collapsed menu-mlid-1837"><a href="../family-assistance-guide/3/7">3.7 JETCCFA Rate Calculation</a></li>
-<li class="collapsed menu-mlid-1834"><a href="../family-assistance-guide/3/8">3.8 CCR Rate Calculation</a></li>
-<li class="leaf menu-mlid-1835"><a href="../family-assistance-guide/3/9">3.9 SKB Rate</a></li>
-<li class="leaf menu-mlid-1827"><a href="../family-assistance-guide/3/10">3.10 Determining the SIFS Rate</a></li>
-<li class="leaf menu-mlid-1836"><a href="../family-assistance-guide/3/11">3.11 NBS Rate</a></li>
-<li class="last leaf menu-mlid-1828"><a href="../family-assistance-guide/3/12">3.12 SBP Rate</a></li>
+<li class="collapsed menu-mlid-1833"><a href="../family-assistance-guide/3/6.1">3.6 Historical rates</a></li>
+<li class="collapsed menu-mlid-1837"><a href="../family-assistance-guide/3/7.1">3.7 ACCS rate calculation</a></li>
+<li class="leaf menu-mlid-1834"><a href="../family-assistance-guide/3/8.1">3.8 Number not currently in use</a></li>
+<li class="leaf menu-mlid-1835"><a href="../family-assistance-guide/3/9">3.9 Number not currently in use</a></li>
+<li class="leaf menu-mlid-1827"><a href="../family-assistance-guide/3/10">3.10 Determining the SIFS rate</a></li>
+<li class="leaf menu-mlid-1836"><a href="../family-assistance-guide/3/11">3.11 NBS rate</a></li>
+<li class="last leaf menu-mlid-1828"><a href="../family-assistance-guide/3/12">3.12 SBP rate</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-2269"><a href="../family-assistance-guide/4">4 Claims &amp; Payments</a></li>
-<li class="collapsed menu-mlid-2270"><a href="../family-assistance-guide/5">5 Gathering Information</a></li>
-<li class="collapsed menu-mlid-2271"><a href="../family-assistance-guide/6">6 Review &amp; Reconciliation</a></li>
-<li class="collapsed menu-mlid-2272"><a href="../family-assistance-guide/7">7 Debts</a></li>
-<li class="collapsed menu-mlid-2273"><a href="../family-assistance-guide/8">8 Transitional Arrangements</a></li>
-<li class="leaf menu-mlid-2264"><a href="../family-assistance-guide/acronyms">Acronym List</a></li>
-<li class="leaf menu-mlid-7296"><a href="../family-assistance-guide/keywords">Keyword Index</a></li>
-<li class="leaf menu-mlid-7371"><a href="../family-assistance-guide/act-references">Act Reference Index</a></li>
-<li class="last leaf menu-mlid-7169"><a href="../family-assistance-guide/sitemap">Site Map</a></li>
+<li class="collapsed menu-mlid-2269"><a href="../family-assistance-guide/4.1">4 Claims &amp; payments</a></li>
+<li class="collapsed menu-mlid-2270"><a href="../family-assistance-guide/5.1">5 Gathering information</a></li>
+<li class="collapsed menu-mlid-2271"><a href="../family-assistance-guide/6.1">6 Review &amp; reconciliation</a></li>
+<li class="collapsed menu-mlid-2272"><a href="../family-assistance-guide/7.1">7 Debts</a></li>
+<li class="collapsed menu-mlid-2273"><a href="../family-assistance-guide/8.1">8 Transitional arrangements</a></li>
+<li class="leaf menu-mlid-2264"><a href="../family-assistance-guide/acronyms">Acronym list</a></li>
+<li class="leaf menu-mlid-7296"><a href="../family-assistance-guide/keywords.1" title="">Keyword index</a></li>
+<li class="leaf menu-mlid-7371"><a href="../family-assistance-guide/act-references.1" title="">Act reference index</a></li>
+<li class="last leaf menu-mlid-7169"><a href="../family-assistance-guide/sitemap">Site map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../family-assistance-guide">Family Assistance Guide</a> &raquo; <a href="../family-assistance-guide/3" class="active-trail">3 Rate Calculation</a> &raquo; <a href="../family-assistance-guide/3/5" class="active-trail">3.5 CCB Rate Calculation</a> &raquo; <a href="../family-assistance-guide/3/5/2" class="active-trail">3.5.2 Calculating Approved Care CCB Entitlement</a> &raquo; 3.5.2.10 CCB Overall Rate Calculation - Approved Care</div>
+	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../family-assistance-guide.1">Family Assistance Guide</a> &raquo; <a href="../family-assistance-guide/3.1" class="active-trail">3 Rate calculation</a> &raquo; <a href="../family-assistance-guide/3/5.1" class="active-trail">3.5 CCS entitlement</a> &raquo; <a href="../family-assistance-guide/3/5/2.1" class="active-trail">3.5.2 CCS - activity test</a> &raquo; 3.5.2.10 CCS - activity test - general</div>
 <div id="utility">
 	
-<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/node/6477"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="readspeaker_button" class="rs_skip rsbtn rs_preserve"><a rel="nofollow" class="rsbtn_play" href="https://app-oc.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=https://guides.dss.gov.au/node/6477"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsbtn_right rsimg rsplay rspart"></span></a></div></div>
 <div id="content" role="main">
 <article id="node-6477">
-<h1 >3.5.2.10 CCB Overall Rate Calculation - Approved Care</h1>
+<h1 >3.5.2.10 CCS - activity test - general</h1>
 <h2>Summary</h2>
-<p>In order to apply an appropriate rate, the calculation process for approved care (<a href="../family-assistance-guide/1/1/a/90">1.1.A.90</a>) <a href="../family-assistance-guide/acronyms#ccb" title="Child care benefit">CCB</a> entitlement (<a href="../family-assistance-guide/1/1/e/30">1.1.E.30</a>) is quite detailed. The most complex part of the calculation is the adjustment percentage (<a href="../family-assistance-guide/1/1/a/40">1.1.A.40</a>), which is based on calculating several other items first. This topic briefly explains the overall calculation in a more simplified form, using a 3 step process. The process begins by calculating the CCB percentage (<a href="../family-assistance-guide/1/1/c/10">1.1.C.10</a>) needed for the adjustment percentage and ends with the final calculation of the CCB entitlement.</p>
-<div class="example"><strong>Explanation:</strong> An individual's CCB hourly rate is calculated using Schedule 2 of the FAAct. This calculation is normally done on the system. This topic only aims to present an overview of the process to:
-<ul><li>show you how it is done, and</li>
-<li>help you to explain it to someone, such as an individual.</li>
-</ul><p>	This topic, however, does not guarantee to produce a completely accurate CCB hourly rate for a particular individual. Normally the CCB percentage will be calculated automatically and sent by Centrelink to the service (<a href="../family-assistance-guide/1/1/a/90">1.1.A.90</a>) nominated by the individual. The service will then calculate the level of fee reduction to be provided to the individual.</p></div>
-<div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00490" title="A New Tax System (Family Assistance) Act 1999">FAAct</a> Schedule 2 CCB rate calculator</p>
-<p><strong>Policy reference:</strong> FA Guide <a href="../family-assistance-guide/3/5/2/20">3.5.2.20</a> Calculating the Approved Care Adjustment Percentage</p>
+<p>The activity test is 1 of the 3 factors that will determine an individual's (<a href="../family-assistance-guide/1/1/i/90">1.1.I.90</a>) level of <a href="../family-assistance-guide/acronyms#ccs" title="Child care subsidy">CCS</a> (the others being the family's combined annual <a href="../family-assistance-guide/acronyms#ati" title="Adjusted taxable income">ATI</a> (<a href="../family-assistance-guide/1/1/a/20">1.1.A.20</a>) and the applicable hourly rate cap (<a href="../family-assistance-guide/1/1/h/20">1.1.H.20</a>) depending on the type of child care service (<a href="../family-assistance-guide/1/1/a/90">1.1.A.90</a>) used).</p>
+<p>This topic includes:</p>
+<ul><li>hours of recognised activity</li>
+<li><a href="../family-assistance-guide/acronyms#accs" title="Additional child care subsidy">ACCS</a> &amp; the CCS activity test</li>
+<li>recognised activities for CCS activity test</li>
+<li>reporting hours of activity
+<ul><li>hours of activity do not need to coincide with child care hours</li>
+<li>combining activities</li>
+<li>reasonable travel time</li>
+<li>starting paid work or increasing hours of paid work</li>
+<li>casual or irregular work</li>
+</ul></li>
+<li>evidentiary requirements</li>
+<li>change in activity.</li>
+</ul><div class="reference">
+<p><strong>Policy reference:</strong> FA Guide <a href="../family-assistance-guide/3/5.1">3.5</a> CCS entitlement, <a href="../family-assistance-guide/3/5/1">3.5.1</a> CCS - combined annual ATI, <a href="../family-assistance-guide/3/5/3">3.5.3</a> CCS - hourly rate caps</p>
 </div>
-<h2>Overall rate calculation diagram</h2>
-<p>The following diagram shows the overall rate calculation process for approved care CCB entitlement in 3 steps. Each step involves either:</p>
-<ul><li>further, minor calculation, or</li>
-<li>application of a rate.</li>
-</ul><p>Click on the relevant link to view the applicable rate or calculation.</p>
-<table><thead><tr><th scope="col">Step</th>
-<th scope="col">Action</th>
-<th scope="col">Formula</th>
+<h2>Hours of recognised activity</h2>
+<p>To be entitled (<a href="../family-assistance-guide/1/1/e/30">1.1.E.30</a>) to subsidised care, an individual must either meet the activity test, or be exempt. If the individual is not exempt from the activity test, the number of hours of subsidised care the individual will be entitled to per fortnight will be determined by the amount of recognised activity the individual, and their partner (<a href="../family-assistance-guide/1/1/p/30">1.1.P.30</a>) if they have one, undertakes in a CCS fortnight (<a href="../family-assistance-guide/1/1/c/10">1.1.C.10</a>). Unless otherwise specified, the activity test result applies to all children in the family.</p>
+<p>In single parent families, the sole parent (<a href="../family-assistance-guide/1/1/p/10">1.1.P.10</a>) must meet the activity test or have an exemption.</p>
+<p>In 2 parent families, each parent must meet the activity test or have an exemption. The parent with the lowest activity test result will determine the hours of subsidised care for the family.</p>
+<p>The following table shows the number of subsidised hours of approved child care (<a href="../family-assistance-guide/1/1/a/90">1.1.A.90</a>) an individual is entitled to receive in a CCS fortnight based on their hours of recognised activity:</p>
+<table><thead><tr><th scope="col">Activity test step</th>
+<th scope="col">Hours of recognised activity per fortnight</th>
+<th scope="col">Maximum number of hours of subsidised child care per CCS fortnight</th>
 </tr></thead><tbody><tr><td>1</td>
-<td>Calculate the CCB percentage</td>
-<td>Taxable Income % (<a href="../family-assistance-guide/3/5/2/40">3.5.2.40</a>) × Multiple Child % (<a href="../family-assistance-guide/3/5/2/50">3.5.2.50</a>)</td>
+<td>8 hours to 16 hours</td>
+<td>36 hours</td>
 </tr><tr><td>2</td>
-<td>Calculate the adjustment percentage</td>
-<td>CCB % (<a href="../family-assistance-guide/3/5/2/30">3.5.2.30</a>) × Part-time % (<a href="../family-assistance-guide/1/1/p/50">1.1.P.50</a>) × Schooling % (<a href="../family-assistance-guide/1/1/s/20">1.1.S.20</a>)</td>
+<td>More than 16 hours to 48 hours</td>
+<td>72 hours</td>
 </tr><tr><td>3</td>
-<td>Calculate the approved care CCB entitlement</td>
-<td>Adjustment % (<a href="../family-assistance-guide/3/5/2/20">3.5.2.20</a>) × Standard Hourly Rate (<a href="../family-assistance-guide/1/1/s/100">1.1.S.100</a>) × Eligible Hours % (<a href="../family-assistance-guide/1/1/e/20">1.1.E.20</a>)</td>
-</tr></tbody></table></article>	<div id="view-last-reviewed-date">
+<td>More than 48 hours</td>
+<td>100 hours</td>
+</tr></tbody></table><p>Families with combined annual ATI of $69,390* or less who do not meet or who are not exempt from the activity test will be entitled to 24 hours of subsidised care per fortnight under the Child Care Safety Net.</p>
+<p>*Figure to be increased by the <a href="../family-assistance-guide/acronyms#cpi" title="Consumer price index">CPI</a> for each financial year</p>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00490" title="A New Tax System (Family Assistance) Act 1999"> FAAct</a> Schedule 2 clause 12 Recognised activity result</p>
+<p><strong>Policy reference:</strong> FA Guide <a href="../family-assistance-guide/3/5/5">3.5.5</a> CCS &amp; ACCS - exceptional circumstances</p>
+</div>
+<h2>ACCS &amp; the CCS activity test</h2>
+<p>Individuals who are eligible for ACCS (child wellbeing), ACCS (temporary financial hardship) and ACCS (grandparent) are exempt from the CCS activity test. Individuals on these payments will automatically be entitled to up to 100 hours of subsidised care per fortnight.</p>
+<p>Individuals will still be required to provide information on their activity:</p>
+<ul><li>to determine the number of subsidisied hours for children not covered by ACCS, or</li>
+<li>in case they need to access CCS once their certificate or determination finishes.</li>
+</ul><p>If an individual has been receiving ACCS (child wellbeing) for 6 months or more they will be exempt from the activity test for a further 18 months for the child, once ACCS (child wellbeing) has ceased.</p>
+<p>Individuals eligible for the ACCS (transition to work) are subject to the CCS activity test.</p>
+<div class="reference">
+<p><strong>Act reference</strong>: <a href="https://www.legislation.gov.au/Series/C2004A00490" title="A New Tax System (Family Assistance) Act 1999">FAAct</a> Schedule 2 clause 11 Individual's activity test result, clause 15 Child wellbeing result</p>
+<p><strong>Policy reference:</strong> FA Guide <a href="../family-assistance-guide/3/5/2/30">3.5.2.30</a> ACCS (transition to work) - activity test, <a href="../family-assistance-guide/2/8/1/30">2.8.1.30</a> ACCS (child wellbeing) - certificates, <a href="../family-assistance-guide/2/8/1/40">2.8.1.40</a> ACCS (child wellbeing) - determinations, <a href="../family-assistance-guide/2/8/3/40">2.8.3.40</a> ACCS (temporary financial hardship) - determinations</p>
+</div>
+<h2>Recognised activities for CCS activity test</h2>
+<p>The following activities are recognised for the CCS activity test:</p>
+<table><thead><tr><th scope="col">What are recognised activities?</th>
+<th scope="col">Considerations</th>
+</tr></thead><tbody><tr><td>Paid work</td>
+<td>
+<ul><li>Includes hours of paid work as an employee and/or self-employed.</li>
+<li>Individuals whose hours of paid work vary unpredictably from fortnight to fortnight can estimate their activity over a 3-month period (see reporting hours of activity below).</li>
+<li>Includes periods of paid and unpaid leave such as parental leave, annual leave, long service leave, leave for illness or injury, or carer's leave.</li>
+<li>Individuals on paid or unpaid leave will have their leave recognised for the same number of hours per fortnight as they worked immediately prior to being on leave.<br /><div class="example">
+<ul><li><strong>Example:</strong> If an individual was working 50 hours per fortnight immediately before their leave, they would (continue to) have an activity test result of 100 hours per fortnight while on leave.</li>
+</ul></div>
+</li>
+<li>Unpaid leave is recognised for a maximum of 6 months, except for unpaid parental leave which is not time limited.</li>
+<li>Individuals who are self-employed and taking paid or unpaid parental leave will only have this leave recognised if their business continues to operate and they have an intention to resume work in their business in the foreseeable future.</li>
+<li>Individuals working from contract to contract or casually for a regular employer (or an employment agency) would also have their unpaid parental leave recognised if they intend to resume work after the period of leave.</li>
+</ul></td>
+</tr><tr><td>Approved course of education or study</td>
+<td>
+<ul><li>The individual must be enrolled in, and actively working towards completing, a secondary or tertiary course of education or study. The list of approved secondary and tertiary courses is as per SSAct section 541B, which is explained in SS Guide <a href="../guide-social-security-law/1/1/a/210">1.1.A.210</a>.</li>
+<li>Includes contact hours and self-directed hours of study.</li>
+<li>Practicums or vocational placements are included.</li>
+<li>Includes term/semester breaks but excludes the term/semester break following completion of the course.</li>
+<li>Breaks that arise because the individual defers starting or continuing the course of education or study are not included.</li>
+</ul></td>
+</tr><tr><td>
+<p>Training to improve work skills and/or employment prospects</p>
+</td>
+<td>
+<ul><li>Includes contact hours and self-directed hours of study.</li>
+<li>Practicums or vocational placements are included.</li>
+<li>Includes term/semester breaks but excludes the term/semester break following completion of the course.</li>
+<li>Breaks that arise because the individual defers starting or continuing the training course are not included.</li>
+</ul></td>
+</tr><tr><td>Unpaid voluntary work</td>
+<td>
+<ul><li>Includes voluntary work:
+<ul><li>that improves work skills, employment prospects (or both)</li>
+<li>for a charitable, welfare or community organisation</li>
+<li>at a school, preschool or <a href="../family-assistance-guide/acronyms#cbdc" title="Centre-based day care">CBDC</a> service if the work directly supports the learning and development of children at the school, preschool or service.</li>
+</ul></li>
+<li>If voluntary work is the only activity being undertaken, the individual will only be entitled to 36 hours of subsidised approved child care per fortnight (step 1 of the activity test) as only the first 16 hours of voluntary work will be recognised per fortnight. To access further hours of subsidised approved child care the individual would need to combine their hours of voluntary work with 1 or more of the other recognised activities.<br /><div class="example">
+<ul><li><strong>Example:</strong> An individual undertaking 20 hours of voluntary work per fortnight and no other recognised activity would be entitled to 36 hours of subsidised approved child care per fortnight (step 1 of the activity test) as voluntary work is the only activity undertaken.</li>
+</ul></div>
+</li>
+</ul></td>
+</tr><tr><td>Unpaid work experience or unpaid internship</td>
+<td>
+<ul><li>Must not be work that would otherwise be undertaken by a paid employee.</li>
+<li>Must provide the individual with a meaningful learning experience, training or skill development.</li>
+<li>Must not be undertaken as a requirement for a course of education or study.<br /><div class="example">
+<ul><li><strong>Explanation:</strong> These placements should be recorded as hours of participating in an approved course of education or study or training to improve work skills and/or employment prospects.</li>
+</ul></div>
+</li>
+</ul></td>
+</tr><tr><td>Unpaid work for a family business owned by an immediate family member</td>
+<td>
+<p>Each of the following is considered a member of the individual's immediate family:</p>
+<ul><li>a parent of the individual</li>
+<li>a partner of a parent of the individual</li>
+<li>a partner of the individual</li>
+<li>a sibling of the individual, including any person (other than the individual) who is a child of a parent of the individual</li>
+<li>a child of the individual</li>
+<li>a partner of a child of the individual</li>
+<li>another particular member of the individual's family determined by the Secretary to be a member of the individual's immediate family for the purpose of this activity.</li>
+</ul><p>Each of the following is a child of the other person:</p>
+<ul><li>an adopted child, or step-child of the other person, within the meaning of the SSAct section 1207A</li>
+<li>a foster-child or ward of the other person, including someone who was the ward of the other person when the ward was under 18 years of age</li>
+<li>someone who is a child of the other person within the meaning of the <cite>Family Law Act 1975</cite> section 65A.</li>
+</ul></td>
+</tr><tr><td>
+<p>Actively looking for work</p>
+</td>
+<td>
+<ul><li>An individual is actively looking for work if they engage in 1 or more of the following activities during the fortnight:
+<ul><li>looking for job vacancies</li>
+<li>preparing résumés and job applications</li>
+<li>contacting potential employers</li>
+<li>preparing for, and attending, job interviews.</li>
+</ul></li>
+<li>Includes individuals who are employed but looking for additional work or more permanent work (for example, casual workers seeking a permanent job).</li>
+<li>If actively looking for work is the only activity being undertaken, the individual will only be entitled to 36 hours of subsidised approved child care per fortnight (step 1 of the activity test) as only the first 16 hours of actively looking for work will be recognised per fortnight. To be entitled to further hours of subsidised approved child care the individual would need to combine their hours of actively looking for work with 1 or more of the other recognised activities.<br /><div class="example">
+<ul><li><strong>Example:</strong> An individual who is actively looking for work for 20 hours per fortnight and not undertaking any other recognised activity would be entitled to 36 hours of subsidised approved child care per fortnight (step 1 of the activity test) as actively looking for work is the only activity undertaken.</li>
+</ul></div>
+</li>
+</ul></td>
+</tr><tr><td>
+<p>Actively setting up a business that has not yet started to operate</p>
+</td>
+<td>
+<ul><li>The individual must engage in 1 or more of the following preparatory activities in relation to the proposed business:
+<ul><li>obtaining finance, advice and support</li>
+<li>attending and organising events, including meetings, networks and seminars</li>
+<li>developing business, marketing or other plans.</li>
+</ul></li>
+<li>Actively setting up a business that has not yet started to operate will only be recognised for a maximum of 6 months in every 12 months.</li>
+<li>The activity does not need to be reported consecutively within the 12 months and may apply to more than 1 business.</li>
+<li>Consecutive 6 month periods will not be recognised.</li>
+</ul></td>
+</tr><tr><td>
+<p><a href="../family-assistance-guide/acronyms#jsp" title="Jobseeker payment">JSP</a>, <a href="../family-assistance-guide/acronyms#ya" title="Youth allowance">YA</a>, <a href="../family-assistance-guide/acronyms#spb" title="Special benefit">SpB</a> or <a href="../family-assistance-guide/acronyms#pp" title="Parenting payment">PP</a>, with a compulsory mutual obligation requirement</p>
+</td>
+<td>
+<ul><li>Recipients (<a href="../family-assistance-guide/1/1/r/07">1.1.R.07</a>) with a compulsory mutual obligation requirement will automatically be entitled to 36 hours of subsidised approved child care per fortnight (step 1 of the activity test).</li>
+<li>Recipients who report more than 16 hours of activity per fortnight, either hours of activity to meet their mutual obligation requirements, or these hours combined with hours of other recognised activities, will be entitled to further hours of subsidised approved child care per fortnight.<br /><div class="example">
+<ul><li><strong>Example:</strong> An individual in receipt of JSP is spending 10 hours per fortnight attending interviews, approaching employers and writing applications to meet their compulsory mutual obligation requirements. This individual would automatically be entitled to 36 hours of subsidised approved child care per fortnight (step 1 of the activity test).<br />
+									In addition to the requirements in their job plan, this individual begins volunteering for 20 hours per fortnight with a local charity. Their 10 hours of activity per fortnight to meet their mutual obligation requirements combined with 20 hours of unpaid voluntary work mean their hours of activity is 30 hours per fortnight, and an entitlement to 72 hours of subsidised care per fortnight (step 2 of the activity test).</li>
+</ul></div>
+</li>
+<li>Recipients of these payments who do not have a compulsory mutual obligation requirement will not be automatically entitled to 36 hours of subsidised approved child care per fortnight (step 1 of the activity test) and must meet or be exempt from the CCS activity test to access hours of subsidised care.</li>
+</ul></td>
+</tr><tr><td>
+<p><a href="../family-assistance-guide/acronyms#ca" title="Carer allowance">CA</a></p>
+</td>
+<td>
+<ul><li>CA recipients will automatically be entitled to 72 hours of subsidised approved child care per fortnight.</li>
+<li>CA recipients who report more than 48 hours of activity per fortnight, either hours of caring or hours of caring combined with hours of other recognised activities, will be entitled to 100 hours of subsidised approved child care per fortnight (step 3 of the activity test).</li>
+</ul></td>
+</tr></tbody></table><h3>Other activities</h3>
+<p>If an individual undertakes another type of activity (not listed above) that would maintain or improve work skills or employment prospects (or both), they can make an application to Centrelink to have these hours of activity recognised for the purpose of the CCS activity test.</p>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00490" title="A New Tax System (Family Assistance) Act 1999">FAAct</a> Schedule 2 clause 12(2) What is recognised activity</p>
+<p><a href="https://www.legislation.gov.au/Series/F2017L01464" title="Child Care Subsidy Minister's Rules 2017">CCSMinRules</a> Part 3 Division 3 Recognised activities</p>
+<p><a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 5(1)-'adopted child', section 1207A-'child'</p>
+<p><a href="https://www.legislation.gov.au/Series/C2004A00275">Family Law Act 1975</a></p>
+<p><strong>Policy reference:</strong> FA Guide <a href="../family-assistance-guide/3/5/2/40">3.5.2.40</a> CCS - other recognised activities</p>
+</div>
+<h2>Reporting hours of activity</h2>
+<p>The following paragraphs explain how individuals should report the number of hours of recognised activity they are participating in each fortnight.</p>
+<h3>Hours of activity do not need to coincide with child care hours</h3>
+<p>When declaring activity hours for CCS, the activity hours do not need to coincide with child care hours. For example, an individual undertaking work on the weekends will be entitled to CCS during the week.</p>
+<h3>Combining activities</h3>
+<p>Individuals can combine recognised activities and the individual's activity test result is determined by counting all the hours of recognised activities undertaken in a fortnight.</p>
+<div class="example">
+<p><strong>Example:</strong> Jane does paid work for 12 hours per fortnight, volunteers at her child's school reading to children for 6 hours per fortnight, and does unpaid work in her family's business for 8 hours per fortnight. Jane's activity would be a combined total of 26 hours per fortnight, which would entitle her to 72 hours of subsidised approved child care per fortnight (step 2 of the activity test).</p>
+</div>
+<h3>Reasonable travel time</h3>
+<p>To support the various distances families need to travel for child care, individuals can include reasonable travel time when declaring their hours of activity. This is the time taken travelling from the approved child care service to the place where they do the activity and travel from this place back to the child care service.</p>
+<p>Travel time where the child is in the care of the individual should not be included when reporting hours of activity; this means:</p>
+<ul><li>travel from home to the child care service to drop the child off, and</li>
+<li>travel time from the service to home or other locations after collecting the child.</li>
+</ul><p>To inform consideration of reasonable travel time, individuals should consider how long it takes to reach their place of work or other activity directly from the child care service, and vice versa. Travel time can include travel via a car, bicycle, public transport and/or walking where appropriate.</p>
+<p>If the place of work or other activity varies day to day, individuals should take this into account when estimating total travel time on a fortnightly basis.</p>
+<div class="example">
+<p><strong>Example 1:</strong> Nadia is a single parent who lives in Western Sydney and works 7 hours a day in a financial services office near the Sydney CBD. Nadia's son Jason attends a CBDC service close to the family home. After she drops Jason at the service, it takes Nadia 1 hour to drive directly to her workplace and 1 hour to return. Nadia bases her activity estimate on 9 hours per day - 7 hours of work and 2 hours of travel.</p>
+</div>
+<div class="example">
+<p><strong>Example 2:</strong> Kate works as a beauty therapist for 6 hours a day in Canberra. Her son Cale attends a CBDC service near the family home. After dropping off her son at the service, Kate has a 30 minute drive to the salon. After finishing her shift, she goes to the gym for an hour-long workout before returning to the service to collect her son. Kate's activity estimate of 7 hours per day includes her hours of work and her 30 minute travel time to and from the service - 6 hours of work and 1 hour of travel. Kate's travel time estimate, however, cannot include her hour at the gym.</p>
+</div>
+<h3>Starting paid work or increasing hours of paid work</h3>
+<p>Individuals starting paid work or increasing their hours of paid work, may have this change in activity recognised from the beginning of the CCS fortnight before the CCS fortnight when work actually commences, or hours of paid work increase.</p>
+<p>Depending on how far into a CCS fortnight the individual begins or increases their hours of paid work, their new activity test result could be applied for at least 14 days, or up to 28 days, before the actual day they commence their new work arrangements.</p>
+<p>To benefit from this rule, individuals must notify Centrelink as soon as possible when they know they are starting a job or increasing their hours of paid work.</p>
+<p>This rule applies to individuals starting or increasing hours of paid work only and cannot be applied to other recognised activities. For activities other than paid work, individuals notifying Centrelink of a change in their activity will have their new activity test result apply from the beginning of the next CCS fortnight.</p>
+<h3>Paid work that varies unpredictably</h3>
+<p>An individual whose hours of paid work vary unpredictably from fortnight to fortnight (such as those in casual employment) can estimate the highest number of hours they expect to work in a single fortnight over a 3‑month period. This estimate will be used to determine their hours of subsidised approved child care per fortnight. Estimating hours on this basis will not be needed by workers with a consistent number of fortnightly hours (who will be required to report their actual hours of activity), and this approach can only be applied to report unpredictable hours of paid work (not for other types of recognised activity).</p>
+<div class="example">
+<p><strong>Example 1:</strong> Suzie is a single parent working at a supermarket. Her hours per fortnight can vary from 15 (2 shifts per fortnight) to 45 (6 shifts per fortnight). Occasionally she can also be called in to work at short notice for extra shifts if they are short staffed on the day.</p>
+<p>Suzie's working hours across 6 fortnights range from 15 hours to 45 hours per fortnight - this would ordinarily give her an activity test result of 36 hours or 72 hours respectively, depending on the hours she worked in that fortnight.</p>
+<p>To support her estimated maximum hours of paid work with access to sufficient hours of subsidised approved child care, Suzie would declare an estimate of 45 hours of paid work per fortnight and would be entitled to 72 hours of subsidised child care per fortnight (step 2 of the activity test).</p>
+<p><strong>Example 2:</strong> Milli works 2 casual jobs in the fast food industry. Her total hours can vary significantly across fortnights - in some fortnights she may not work at all, while in others she can be assigned up to 5 four hour shifts.</p>
+<p>Milli's working hours across 6 fortnights range from 0 hours to 20 hours per fortnight - this would ordinarily give her an activity test result of zero (unless she was entitled to 24 hours of subsidised care under the Child Care Safety Net) or 72 hours respectively, depending on the hours she worked in that fortnight.</p>
+<p>To support her estimated maximum hours of paid work with access to sufficient hours of subsidised approved child care, Milli would declare an estimate of 20 hours of paid work per fortnight and would be entitled to 72 hours of subsidised child care in each fortnight (step 2 of the activity test).</p>
+</div>
+<p>Individuals who estimate activity in this way will need to notify Centrelink of a change where their level of activity, estimated over 3 months, would cause them to move to another step of the activity test. This would include, for example, where the individual stopped working altogether or where the basis of their 3‑month estimate has changed and needs to be updated. In the first example, if Suzie moved to a permanent arrangement of two 7.5 hour shifts per fortnight (15 hours of paid work per fortnight), she should notify Centrelink as this would result in her moving to step 1 of the activity test, and being entitled to 36 hours of subsidised care per fortnight. In the second example, if Milli stopped working, she should notify Centrelink as this would result in her potentially not meeting the activity test, depending on what other recognised activities she is undertaking, or activity test exemptions she may be eligible for.</p>
+<h2>Evidentiary requirements</h2>
+<p>Individuals self-declare activity to Centrelink and generally evidence is not required at the time of claim or when updating their activity information. Centrelink will ask some individuals to provide evidence as part of their normal random spot checks.</p>
+<p>Evidence could include, a copy of a payslip or a letter from the organisation where the individual is a volunteer.</p>
+<h2>Change in activity</h2>
+<p>When an individual (or their partner) experiences a change in activity that would affect their entitlement, for example, that would mean they move from one step of the activity test to the next, they are required to notify Centrelink as soon as possible.</p>
+<p>If an individual reports a change in activity in advance of the change occurring, the new activity test result will take effect from the beginning of the CCS fortnight after the change occurred.</p>
+<p>If the individual reports a change in activity after the change occurred, the change will take effect from the beginning of the CCS fortnight after the change was notified.</p>
+<p>If the change in activity test result is beneficial to the individual (e.g. it caused the individual to be entitled to more hours of subsidised care per fortnight) a review will be conducted, but the higher result will only be applied for a maximum of 28 days prior to the change being reported to Centrelink.</p>
+<p>If the change is not beneficial to the individual (e.g. it caused them to be entitled to fewer hours of subsidised care per fortnight) a review will be conducted, and the lower result will be applied as far back as the change occurred. That is, if the individual reports the change 6 months late they may incur a debt in relation to payments already calculated and made on the basis that they had access to more hours of subsidised care than they were in fact entitled to, for that whole period.</p>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00490" title="A New Tax System (Family Assistance) Act 1999">FAAct</a> Schedule 2 clause 12(7) Changes in the number of hours of recognised activity</p>
+<p><a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 67FB Notice of change of circumstances: individuals, section 105C Review of entitlement to be paid CCS or ACCS-taking account of changes of circumstances etc.</p>
+<p><strong>Policy reference:</strong> FA Guide <a href="../family-assistance-guide/5/2/1/40">5.2.1.40</a> CCS &amp; ACCS - change in activity/income</p>
+</div>
+</article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     20 September 2016  	</div>
+      Last reviewed:     1 July 2020  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../contact-us">Contact us</a></li>
@@ -145,8 +350,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
-<script type="text/javascript" src="../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
-<script type="text/javascript" src="../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_IkilKWehdX07Wbi3Cg-T6yf5sLTu5FfOT2__edFF9eM.js"></script>
+<script type="text/javascript" src="https://cdn1.readspeaker.com/script/5931/webReader/webReader.js?pids=wr&amp;notools=1&amp;disable=popupplayback&amp;qrxyi9"></script>
 </body>
 </html>
