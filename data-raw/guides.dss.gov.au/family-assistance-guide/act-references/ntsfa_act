@@ -2,25 +2,30 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width" />
 <title>A New Tax System (Family Assistance)(Administration) Act 1999 | Family Assistance Guide</title>
-<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_Q4XrxgEkbadGDm1J7AHUHHmbcMJ2_hbMfrrzrm9Ne_I.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
-<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
-<script type="text/javascript" src="../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
-<script type="text/javascript" src="../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
-<script type="text/javascript" src="../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_d905I2WxoGGQW6uS7jkC73mqKhSejey6jciEdxo9cJI.css" media="all" />
+<script type="text/javascript" src="../../sites/default/files/js/js_yMSKTzBO0KmozyLwajzFOrrt_kto_9mtccAkb0rm7gc.js"></script>
+<script type="text/javascript" src="../../sites/default/files/js/js_FA2YSy0R3kB2AU_wIOLoSR0sJX4ZYjdPuPaRFd2ZDyw.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+window.rsConf = { ui: { tools: {translation: false, dictionary: false}}};
 //--><!]]>
 </script>
+<script type="text/javascript" src="../../sites/default/files/js/js_rsGiM5M1ffe6EhN-RnhM5f3pDyJ8ZAPFJNKpfjtepLk.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../sites/default/files/js/js_-oEDdwe4XpUqUj4W0KJs96ENaXIrGvjBvIP-WYYBi54.js"></script>
 <script type="text/javascript" src="../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"6CWP3OyBUZVp23NjEoTGKltctyupWJD4K5VEwtJqUiw","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/family-assistance-guide\/act-references\/ntsfa_act":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"DeJyI8tyJ94KrdSm_uBrS3WAoTBy_Mj-utonwWMW8AE","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"https:\/\/cdn1.readspeaker.com\/script\/5931\/webReader\/webReader.js?pids=wr\u0026notools=1\u0026disable=popupplayback":1,"misc\/jquery.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"0":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"1":1,"sites\/all\/modules\/extlink\/js\/extlink.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/family-assistance-guide\/act-references\/ntsfa_act":true},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)","extUseFontAwesome":false}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -33,1342 +38,1630 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <nav id="global">
 	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
 <div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<ul class="menu"><li class="first leaf has-children menu-mlid-489"><a href="../../guide-social-security-law.1">Social Security Guide</a></li>
+<li class="leaf has-children active-trail menu-mlid-491"><a href="../../family-assistance-guide.1" class="active-trail">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-490"><a href="../../paid-parental-leave-guide.1">Paid Parental Leave Guide</a></li>
+<li class="leaf has-children menu-mlid-513"><a href="../../child-support-guide.1">Child Support Guide</a></li>
+<li class="leaf menu-mlid-7596"><a href="../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
 <li class="leaf menu-mlid-7597"><a href="../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
-<li class="leaf has-children menu-mlid-513"><a href="../../child-support-guide">Child Support Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-491"><a href="../../family-assistance-guide" class="active-trail">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../guide-social-security-law">Guide to Social Security Law</a></li>
-<li class="last leaf has-children menu-mlid-490"><a href="../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+<li class="last leaf has-children menu-mlid-19951"><a href="../../national-redress-guide" title="">National Redress Guide</a></li>
 </ul></div></nav>
 <header role="banner">
 	<a href="../../index.html" rel="home"><img src="../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
 <p class="site-name">Guides to Social Policy Law</p>
 <form class="search-form" role="search" action="ntsfa_act" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
- <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+ <input class="custom-search-box form-text" placeholder="Search" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-erd-0T0O2WovpDihSd8hbcY4UgJiBIeU1bxvzQMFzvk" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-qiAZ3a02ACjKPjlxI50IcQK9at4YuThYymP_816Mu98" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Family Assistance Guide</h2>
-<p>Version 1.203 - Released 7 May 2018</p>
+<p>Version 1.230 - Released 1 July 2021</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7283"><a href="../../family-assistance-guide" title="">Using the Family Assistance Guide</a></li>
-<li class="collapsed menu-mlid-2274"><a href="../updates">What&#039;s New</a></li>
-<li class="collapsed menu-mlid-2266"><a href="../1">1 Key Terms &amp; Principles</a></li>
-<li class="collapsed menu-mlid-2267"><a href="../2">2 Eligibility</a></li>
-<li class="collapsed menu-mlid-2268"><a href="../3">3 Rate Calculation</a></li>
-<li class="collapsed menu-mlid-2269"><a href="../4">4 Claims &amp; Payments</a></li>
-<li class="collapsed menu-mlid-2270"><a href="../5">5 Gathering Information</a></li>
-<li class="collapsed menu-mlid-2271"><a href="../6">6 Review &amp; Reconciliation</a></li>
-<li class="collapsed menu-mlid-2272"><a href="../7">7 Debts</a></li>
-<li class="collapsed menu-mlid-2273"><a href="../8">8 Transitional Arrangements</a></li>
-<li class="leaf menu-mlid-2264"><a href="../acronyms">Acronym List</a></li>
-<li class="leaf menu-mlid-7296"><a href="../keywords">Keyword Index</a></li>
-<li class="leaf active-trail menu-mlid-7371"><a href="../act-references" class="active-trail active">Act Reference Index</a></li>
-<li class="last leaf menu-mlid-7169"><a href="../sitemap">Site Map</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7283"><a href="../../family-assistance-guide.1" title="">Using the Family Assistance Guide</a></li>
+<li class="collapsed menu-mlid-2274"><a href="../updates.1">What&#039;s new</a></li>
+<li class="collapsed menu-mlid-2266"><a href="../1.1">1 Key terms &amp; principles</a></li>
+<li class="collapsed menu-mlid-2267"><a href="../2.1">2 Eligibility</a></li>
+<li class="collapsed menu-mlid-2268"><a href="../3.1">3 Rate calculation</a></li>
+<li class="collapsed menu-mlid-2269"><a href="../4.1">4 Claims &amp; payments</a></li>
+<li class="collapsed menu-mlid-2270"><a href="../5.1">5 Gathering information</a></li>
+<li class="collapsed menu-mlid-2271"><a href="../6.1">6 Review &amp; reconciliation</a></li>
+<li class="collapsed menu-mlid-2272"><a href="../7.1">7 Debts</a></li>
+<li class="collapsed menu-mlid-2273"><a href="../8.1">8 Transitional arrangements</a></li>
+<li class="leaf menu-mlid-2264"><a href="../acronyms">Acronym list</a></li>
+<li class="leaf menu-mlid-7296"><a href="../keywords.1" title="">Keyword index</a></li>
+<li class="leaf active-trail menu-mlid-7371"><a href="../act-references.1" title="" class="active-trail active">Act reference index</a></li>
+<li class="last leaf menu-mlid-7169"><a href="../sitemap">Site map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../index.html">Home</a> &raquo; <a href="../../family-assistance-guide">Family Assistance Guide</a> &raquo; <a href="../act-references">Act Reference Index</a> &raquo; A New Tax System (Family Assistance)(Administration) Act 1999</div>
+	<div id="breadcrumb"><a href="../../index.html">Home</a> &raquo; <a href="../../family-assistance-guide.1">Family Assistance Guide</a> &raquo; <a href="../act-references.1">Act Reference Index</a> &raquo; A New Tax System (Family Assistance)(Administration) Act 1999</div>
 <div id="utility">
 	
-<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/family-assistance-guide/act-references/ntsfa_act"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="readspeaker_button" class="rs_skip rsbtn rs_preserve"><a rel="nofollow" class="rsbtn_play" href="https://app-oc.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=https://guides.dss.gov.au/family-assistance-guide/act-references/ntsfa_act"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsbtn_right rsimg rsplay rspart"></span></a></div></div>
 <div id="content" role="main">
 	<h1>A New Tax System (Family Assistance)(Administration) Act 1999</h1>
 	<div id="view-act-references">
-	<ul><li>3<ul><li><a href="../1/1/m/55">1.1.M.55 Minimum amount (FTB advance)</a></li><li><a href="../1/1/o/10">1.1.O.10 Officer</a></li><li><a href="../1/1/p/140">1.1.P.140 Protected information</a></li><li><a href="../1/1/t/50">1.1.T.50 TFN definitions (FTB, SIFS, SBP)</a></li><li><a href="../4/1/3/30">4.1.3.30 Responsibilities of Nominees</a></li><li><a href="../4/1/4">4.1.4 Early Claims for Family Assistance</a></li><li><a href="../7/1/2">7.1.2 FA Debts - Individuals & ACOs</a></li></ul></li><li>4<ul><li><a href="../4/1/1/10">4.1.1.10 TFN Requirements for FTB</a></li></ul></li><li>5<ul><li><a href="../1/2/18">1.2.18 Newborn Supplement (NBS) - Description</a></li><li><a href="../4/2/1/10">4.2.1.10 Claim Lodgement & Verification</a></li></ul></li><li>6<ul><li><a href="../1/1/a/72">1.1.A.72 Applicant</a></li><li><a href="../4/2/1/10">4.2.1.10 Claim Lodgement & Verification</a></li></ul></li><li>7<ul><li><a href="../1/1/b/20">1.1.B.20 Bereavement claim, claim in substitution</a></li><li><a href="../1/1/e/10">1.1.E.10 Effective claim (FTB)</a></li><li><a href="../1/1/p/60">1.1.P.60 Past period claim (FTB)</a></li><li><a href="../2/2/2">2.2.2 Death of an Individual Eligible for FTB</a></li><li><a href="../4/2/1/10">4.2.1.10 Claim Lodgement & Verification</a></li><li><a href="../4/2/2/10">4.2.2.10 Common FTB Claim Requirements</a></li><li><a href="../4/2/2/30">4.2.2.30 Specific Requirements for Bereavement Claim</a></li><li><a href="../4/2/4/20">4.2.4.20 Claim Action 2 - Claim Not Complete</a></li><li><a href="../5/1/1/10">5.1.1.10 Power to Obtain Information</a></li><li><a href="../5/2/2">5.2.2 Information Required - Instalment Claims</a></li><li><a href="../5/2/3">5.2.3 Information Required - Past Period Instalment Claims</a></li><li><a href="../6/4/3/40">6.4.3.40 Non-payment of FTB Based on an Estimate</a></li><li><a href="../6/4/3/70">6.4.3.70 Non-entitlement to FTB Based on an Estimate Due to 3 or More Non-lodger Decisions</a></li></ul></li><li>7A<ul><li><a href="../4/2/2/40">4.2.2.40 Specific Requirements for FTB Instalment Claims</a></li><li><a href="../4/3/1/10">4.3.1.10 FTB Payment Delivery Choices</a></li><li><a href="../4/3/3">4.3.3 Instalments Paid by Direct Credit</a></li><li><a href="../4/4/1">4.4.1 Reasons for FTB Reassessment</a></li><li><a href="../4/4/5/40">4.4.5.40 Failure to Nominate Bank Account Details</a></li></ul></li><li>8<ul><li><a href="../4/1/1/10">4.1.1.10 TFN Requirements for FTB</a></li><li><a href="../4/1/1/20">4.1.1.20 Exemption from TFN Requirements for FTB</a></li><li><a href="../4/1/1/40">4.1.1.40 TFN Requirements for Non-residents</a></li><li><a href="../4/2/2/10">4.2.2.10 Common FTB Claim Requirements</a></li><li><a href="../4/4/1">4.4.1 Reasons for FTB Reassessment</a></li></ul></li><li>8A<ul><li><a href="../4/1/1/10">4.1.1.10 TFN Requirements for FTB</a></li><li><a href="../4/1/1/20">4.1.1.20 Exemption from TFN Requirements for FTB</a></li><li><a href="../4/1/1/40">4.1.1.40 TFN Requirements for Non-residents</a></li><li><a href="../4/2/2/10">4.2.2.10 Common FTB Claim Requirements</a></li></ul></li><li>9<ul><li><a href="../4/2/2/40">4.2.2.40 Specific Requirements for FTB Instalment Claims</a></li></ul></li><li>10<ul><li><a href="../2/2/3">2.2.3 NBS & NBU Eligibility for Individuals</a></li><li><a href="../4/2">4.2 Claims for FTB</a></li><li><a href="../4/2/1/10">4.2.1.10 Claim Lodgement & Verification</a></li><li><a href="../4/2/2/20">4.2.2.20 Specific Requirements for Past Period Claim</a></li><li><a href="../4/2/3/20">4.2.3.20 Determining an FTB Claim</a></li><li><a href="../4/3/1/10">4.3.1.10 FTB Payment Delivery Choices</a></li><li><a href="../5/2/3">5.2.3 Information Required - Past Period Instalment Claims</a></li><li><a href="../6/4/3/70">6.4.3.70 Non-entitlement to FTB Based on an Estimate Due to 3 or More Non-lodger Decisions</a></li></ul></li><li>11<ul><li><a href="../4/2/2/30">4.2.2.30 Specific Requirements for Bereavement Claim</a></li></ul></li><li>12<ul><li><a href="../4/2/1/10">4.2.1.10 Claim Lodgement & Verification</a></li><li><a href="../4/2/3/10">4.2.3.10 Restrictions on Determining FTB Claims</a></li></ul></li><li>13<ul><li><a href="../1/1/e/10">1.1.E.10 Effective claim (FTB)</a></li><li><a href="../4/2/2/40">4.2.2.40 Specific Requirements for FTB Instalment Claims</a></li><li><a href="../4/2/3/10">4.2.3.10 Restrictions on Determining FTB Claims</a></li></ul></li><li>14<ul><li><a href="../3/2/8/10">3.2.8.10 Initial Estimate When Making a Claim</a></li><li><a href="../4/2/2/30">4.2.2.30 Specific Requirements for Bereavement Claim</a></li><li><a href="../4/2/3/10">4.2.3.10 Restrictions on Determining FTB Claims</a></li><li><a href="../4/2/4/130">4.2.4.130 Claim Action 13 - Taxable Income Not Assessed</a></li><li><a href="../6/4/1/10">6.4.1.10 Individuals Affected by Reconciliation</a></li><li><a href="../6/4/3/40">6.4.3.40 Non-payment of FTB Based on an Estimate</a></li><li><a href="../6/4/3/70">6.4.3.70 Non-entitlement to FTB Based on an Estimate Due to 3 or More Non-lodger Decisions</a></li></ul></li><li>14A<ul><li><a href="../4/2/4/130">4.2.4.130 Claim Action 13 - Taxable Income Not Assessed</a></li></ul></li><li>15<ul><li><a href="../4/2/3/10">4.2.3.10 Restrictions on Determining FTB Claims</a></li><li><a href="../4/4/1">4.4.1 Reasons for FTB Reassessment</a></li></ul></li><li>15A<ul><li><a href="../4/2/3/10">4.2.3.10 Restrictions on Determining FTB Claims</a></li><li><a href="../4/3/3">4.3.3 Instalments Paid by Direct Credit</a></li><li><a href="../4/4/1">4.4.1 Reasons for FTB Reassessment</a></li><li><a href="../4/4/5/40">4.4.5.40 Failure to Nominate Bank Account Details</a></li></ul></li><li>15B<ul><li><a href="../4/1/4">4.1.4 Early Claims for Family Assistance</a></li></ul></li><li>16<ul><li><a href="../1/1/e/30">1.1.E.30 Entitlement (FTB, CCB & CCR)</a></li><li><a href="../4/2/1/10">4.2.1.10 Claim Lodgement & Verification</a></li><li><a href="../4/2/3/20">4.2.3.20 Determining an FTB Claim</a></li><li><a href="../6/4/3/70">6.4.3.70 Non-entitlement to FTB Based on an Estimate Due to 3 or More Non-lodger Decisions</a></li></ul></li><li>17<ul><li><a href="../1/1/e/30">1.1.E.30 Entitlement (FTB, CCB & CCR)</a></li><li><a href="../4/2/3/20">4.2.3.20 Determining an FTB Claim</a></li><li><a href="../6/4/3/70">6.4.3.70 Non-entitlement to FTB Based on an Estimate Due to 3 or More Non-lodger Decisions</a></li></ul></li><li>18<ul><li><a href="../1/1/b/20">1.1.B.20 Bereavement claim, claim in substitution</a></li><li><a href="../4/2/2/30">4.2.2.30 Specific Requirements for Bereavement Claim</a></li><li><a href="../4/2/3/20">4.2.3.20 Determining an FTB Claim</a></li></ul></li><li>19<ul><li><a href="../3/2/8/10">3.2.8.10 Initial Estimate When Making a Claim</a></li><li><a href="../4/2/3/20">4.2.3.20 Determining an FTB Claim</a></li></ul></li><li>20<ul><li><a href="../1/1/m/65">1.1.M.65 Modified entitlement method (FTB)</a></li><li><a href="../3/1/3">3.1.3 Apportioning Income Test Reductions between FTB Part A Components</a></li><li><a href="../3/1/7/20">3.1.7.20 Estimating Maintenance Income</a></li><li><a href="../3/1/7/22">3.1.7.22 Maintenance Income - Disbursement Method</a></li><li><a href="../3/1/7/23">3.1.7.23 Maintenance Income - Modified Entitlement Method</a></li><li><a href="../3/1/9/20">3.1.9.20 Income Test - FTB Part B</a></li><li><a href="../3/2/1">3.2.1 Adjusted Taxable Income - General Provisions</a></li><li><a href="../3/2/8/10">3.2.8.10 Initial Estimate When Making a Claim</a></li><li><a href="../4/2/2/30">4.2.2.30 Specific Requirements for Bereavement Claim</a></li><li><a href="../4/2/3/10">4.2.3.10 Restrictions on Determining FTB Claims</a></li><li><a href="../4/2/3/20">4.2.3.20 Determining an FTB Claim</a></li><li><a href="../4/4/1">4.4.1 Reasons for FTB Reassessment</a></li><li><a href="../4/4/3">4.4.3 Estimate of Income Not Reasonable</a></li><li><a href="../4/9/1">4.9.1 Overview of New Financial Year Assessments</a></li><li><a href="../4/9/3">4.9.3 Outcomes of New Financial Year Assessments</a></li><li><a href="../5/2/2">5.2.2 Information Required - Instalment Claims</a></li><li><a href="../6/4/3/40">6.4.3.40 Non-payment of FTB Based on an Estimate</a></li></ul></li><li>20A<ul><li><a href="../1/1/i/82">1.1.I.82 Indexation factor</a></li><li><a href="../1/1/i/85">1.1.I.85 Indexed income - actual or estimate (FTB)</a></li><li><a href="../3/1/1/10">3.1.1.10 Calculating a Rate of FTB - Overview</a></li><li><a href="../3/1/3">3.1.3 Apportioning Income Test Reductions between FTB Part A Components</a></li><li><a href="../3/1/4/10">3.1.4.10 Method 1 - Calculating the Maximum Rate of FTB Part A</a></li><li><a href="../3/1/4/40">3.1.4.40 Income Test - FTB Part A Method 1</a></li><li><a href="../3/1/8/10">3.1.8.10 Method 2 - Calculating the Maximum Rate of FTB Part A</a></li><li><a href="../3/1/8/20">3.1.8.20 Method 2 - FTB Part A Income Test</a></li><li><a href="../3/1/9/20">3.1.9.20 Income Test - FTB Part B</a></li><li><a href="../3/2/1">3.2.1 Adjusted Taxable Income - General Provisions</a></li><li><a href="../4/4/1">4.4.1 Reasons for FTB Reassessment</a></li><li><a href="../4/9/1">4.9.1 Overview of New Financial Year Assessments</a></li><li><a href="../4/9/3">4.9.3 Outcomes of New Financial Year Assessments</a></li></ul></li><li>20B<ul><li><a href="../1/1/i/82">1.1.I.82 Indexation factor</a></li><li><a href="../1/1/i/85">1.1.I.85 Indexed income - actual or estimate (FTB)</a></li><li><a href="../3/1/1/10">3.1.1.10 Calculating a Rate of FTB - Overview</a></li><li><a href="../3/1/3">3.1.3 Apportioning Income Test Reductions between FTB Part A Components</a></li><li><a href="../3/1/4/10">3.1.4.10 Method 1 - Calculating the Maximum Rate of FTB Part A</a></li><li><a href="../3/1/4/40">3.1.4.40 Income Test - FTB Part A Method 1</a></li><li><a href="../3/1/8/10">3.1.8.10 Method 2 - Calculating the Maximum Rate of FTB Part A</a></li><li><a href="../3/1/8/20">3.1.8.20 Method 2 - FTB Part A Income Test</a></li><li><a href="../3/1/9/20">3.1.9.20 Income Test - FTB Part B</a></li><li><a href="../3/2/1">3.2.1 Adjusted Taxable Income - General Provisions</a></li><li><a href="../4/4/1">4.4.1 Reasons for FTB Reassessment</a></li><li><a href="../4/9/1">4.9.1 Overview of New Financial Year Assessments</a></li><li><a href="../4/9/3">4.9.3 Outcomes of New Financial Year Assessments</a></li></ul></li><li>20C<ul><li><a href="../4/4/1">4.4.1 Reasons for FTB Reassessment</a></li><li><a href="../4/9/1">4.9.1 Overview of New Financial Year Assessments</a></li><li><a href="../4/9/3">4.9.3 Outcomes of New Financial Year Assessments</a></li></ul></li><li>21<ul><li><a href="../4/2/3/20">4.2.3.20 Determining an FTB Claim</a></li><li><a href="../4/4/7">4.4.7 Individual Requests Cancellation of FTB</a></li></ul></li><li>22<ul><li><a href="../4/2/3/30">4.2.3.30 Giving the Individual Notice of the Determination</a></li></ul></li><li>23<ul><li><a href="../1/1/i/100">1.1.I.100 Instalment amount, instalment claim, instalment period (FTB)</a></li><li><a href="../4/3/2">4.3.2 Payment Cycles for FTB Instalments</a></li></ul></li><li>24<ul><li><a href="../2/2/2">2.2.2 Death of an Individual Eligible for FTB</a></li></ul></li><li>24A<ul><li><a href="../1/2/18">1.2.18 Newborn Supplement (NBS) - Description</a></li><li><a href="../4/3/5">4.3.5 Lump Sum Payment through Centrelink</a></li></ul></li><li>25<ul><li><a href="../1/1/n/40">1.1.N.40 Notification period</a></li><li><a href="../2/1/1/60">2.1.1.60 Change of Care of an FTB Child</a></li><li><a href="../3/1/1/50">3.1.1.50 FTB Payments During Absence from Australia before 1 July 2016</a></li><li><a href="../4/4/8">4.4.8 Review of FTB Entitlements</a></li><li><a href="../5/2/1/10">5.2.1.10 Change of Circumstances - General Provisions</a></li><li><a href="../5/2/1/20">5.2.1.20 Change of Eligibility Circumstances</a></li><li><a href="../5/2/1/30">5.2.1.30 Change of Rate Circumstances</a></li><li><a href="../5/2/2">5.2.2 Information Required - Instalment Claims</a></li></ul></li><li>25A<ul><li><a href="../4/4/8">4.4.8 Review of FTB Entitlements</a></li><li><a href="../5/2/2">5.2.2 Information Required - Instalment Claims</a></li></ul></li><li>26A<ul><li><a href="../4/3/3">4.3.3 Instalments Paid by Direct Credit</a></li><li><a href="../4/4/5/40">4.4.5.40 Failure to Nominate Bank Account Details</a></li></ul></li><li>27<ul><li><a href="../4/2/2/20">4.2.2.20 Specific Requirements for Past Period Claim</a></li><li><a href="../4/2/2/40">4.2.2.40 Specific Requirements for FTB Instalment Claims</a></li><li><a href="../4/4/1">4.4.1 Reasons for FTB Reassessment</a></li></ul></li><li>27A<ul><li><a href="../4/2/2/20">4.2.2.20 Specific Requirements for Past Period Claim</a></li><li><a href="../4/2/2/40">4.2.2.40 Specific Requirements for FTB Instalment Claims</a></li><li><a href="../4/3/3">4.3.3 Instalments Paid by Direct Credit</a></li><li><a href="../4/4/1">4.4.1 Reasons for FTB Reassessment</a></li><li><a href="../4/4/5/40">4.4.5.40 Failure to Nominate Bank Account Details</a></li></ul></li><li>28<ul><li><a href="../4/3/1/10">4.3.1.10 FTB Payment Delivery Choices</a></li><li><a href="../4/4/1">4.4.1 Reasons for FTB Reassessment</a></li><li><a href="../4/4/5/20">4.4.5.20 Income Tax Return Not Lodged</a></li><li><a href="../6/4/1/40">6.4.1.40 Outcomes of Reconciliation</a></li><li><a href="../6/4/3/20">6.4.3.20 Non-lodger Process</a></li><li><a href="../6/4/3/30">6.4.3.30 Outcomes of Non-lodger Process</a></li><li><a href="../6/4/3/40">6.4.3.40 Non-payment of FTB Based on an Estimate</a></li><li><a href="../6/4/4/20">6.4.4.20 Reconciliation - Ex-partners</a></li></ul></li><li>28A<ul><li><a href="../3/2/1">3.2.1 Adjusted Taxable Income - General Provisions</a></li><li><a href="../4/2/2/20">4.2.2.20 Specific Requirements for Past Period Claim</a></li><li><a href="../4/2/2/40">4.2.2.40 Specific Requirements for FTB Instalment Claims</a></li><li><a href="../4/4/1">4.4.1 Reasons for FTB Reassessment</a></li><li><a href="../4/4/3">4.4.3 Estimate of Income Not Reasonable</a></li></ul></li><li>28AA<ul><li><a href="../6/4/3">6.4.3 Requirement to Lodge an Income Tax Return</a></li><li><a href="../6/4/3/20">6.4.3.20 Non-lodger Process</a></li></ul></li><li>28B<ul><li><a href="../4/2/2/20">4.2.2.20 Specific Requirements for Past Period Claim</a></li><li><a href="../4/2/2/40">4.2.2.40 Specific Requirements for FTB Instalment Claims</a></li><li><a href="../4/4/1">4.4.1 Reasons for FTB Reassessment</a></li><li><a href="../4/4/6">4.4.6 Income Support Claim Pending for FTB or Regular Care Child</a></li><li><a href="../4/4/7">4.4.7 Individual Requests Cancellation of FTB</a></li></ul></li><li>29<ul><li><a href="../4/2/2/20">4.2.2.20 Specific Requirements for Past Period Claim</a></li><li><a href="../4/2/2/40">4.2.2.40 Specific Requirements for FTB Instalment Claims</a></li><li><a href="../4/4/1">4.4.1 Reasons for FTB Reassessment</a></li><li><a href="../4/4/4">4.4.4 Reassessment of FTB - Income Support Cancelled</a></li><li><a href="../4/4/5/10">4.4.5.10 Failure to Provide Information - General Provisions</a></li></ul></li><li>30<ul><li><a href="../4/2/2/20">4.2.2.20 Specific Requirements for Past Period Claim</a></li><li><a href="../4/2/2/40">4.2.2.40 Specific Requirements for FTB Instalment Claims</a></li><li><a href="../4/4/1">4.4.1 Reasons for FTB Reassessment</a></li><li><a href="../4/4/5/30">4.4.5.30 Failure to Notify Change of Address</a></li></ul></li><li>30A<ul><li><a href="../4/2/2/20">4.2.2.20 Specific Requirements for Past Period Claim</a></li><li><a href="../4/2/2/40">4.2.2.40 Specific Requirements for FTB Instalment Claims</a></li><li><a href="../4/4/1">4.4.1 Reasons for FTB Reassessment</a></li></ul></li><li>30B<ul><li><a href="../4/2/2/20">4.2.2.20 Specific Requirements for Past Period Claim</a></li><li><a href="../4/2/2/40">4.2.2.40 Specific Requirements for FTB Instalment Claims</a></li><li><a href="../4/4/1">4.4.1 Reasons for FTB Reassessment</a></li></ul></li><li>31<ul><li><a href="../1/1/f/60">1.1.F.60 Full-time secondary study (FTB)</a></li><li><a href="../4/4/1">4.4.1 Reasons for FTB Reassessment</a></li><li><a href="../4/4/2/10">4.4.2.10 Change in Non-Income Related Circumstances</a></li><li><a href="../4/4/2/20">4.4.2.20 Change in Income Related Circumstances</a></li><li><a href="../4/4/4">4.4.4 Reassessment of FTB - Income Support Cancelled</a></li><li><a href="../4/4/8">4.4.8 Review of FTB Entitlements</a></li></ul></li><li>31A<ul><li><a href="../3/2/8/30">3.2.8.30 Revised Estimates</a></li><li><a href="../4/4/1">4.4.1 Reasons for FTB Reassessment</a></li><li><a href="../4/4/2/20">4.4.2.20 Change in Income Related Circumstances</a></li><li><a href="../4/9/1">4.9.1 Overview of New Financial Year Assessments</a></li><li><a href="../4/9/3">4.9.3 Outcomes of New Financial Year Assessments</a></li><li><a href="../6/2">6.2 Internal Reviews</a></li></ul></li><li>31B<ul><li><a href="../4/4/2/20">4.4.2.20 Change in Income Related Circumstances</a></li></ul></li><li>31C<ul><li><a href="../4/9/1">4.9.1 Overview of New Financial Year Assessments</a></li></ul></li><li>31D<ul><li><a href="../4/9/1">4.9.1 Overview of New Financial Year Assessments</a></li></ul></li><li>31E<ul><li><a href="../1/2/8/10">1.2.8.10 FTB Advance Payments - Details</a></li><li><a href="../3/2/8/10">3.2.8.10 Initial Estimate When Making a Claim</a></li><li><a href="../3/2/8/30">3.2.8.30 Revised Estimates</a></li></ul></li><li>32<ul><li><a href="../4/4/9">4.4.9 Notices of Reassessment</a></li></ul></li><li>32A<ul><li><a href="../1/2/1">1.2.1 Family Tax Benefit (FTB) - Description</a></li><li><a href="../4/3/1/10">4.3.1.10 FTB Payment Delivery Choices</a></li><li><a href="../6/4/1/40">6.4.1.40 Outcomes of Reconciliation</a></li><li><a href="../6/4/4/20">6.4.4.20 Reconciliation - Ex-partners</a></li></ul></li><li>32AA<ul><li><a href="../1/1/n/31">1.1.N.31 Non-entitlement to FTB due to 3 or more non-lodger decisions</a></li><li><a href="../1/1/n/35">1.1.N.35 Non-payment of FTB based on an estimate</a></li><li><a href="../6/4/3/20">6.4.3.20 Non-lodger Process</a></li><li><a href="../6/4/3/30">6.4.3.30 Outcomes of Non-lodger Process</a></li><li><a href="../6/4/3/40">6.4.3.40 Non-payment of FTB Based on an Estimate</a></li><li><a href="../6/4/3/60">6.4.3.60 Removal of Non-payment of FTB Based on an Estimate</a></li><li><a href="../7/1/1">7.1.1 FA Debts - General Provisions</a></li></ul></li><li>32AB<ul><li><a href="../1/1/n/35">1.1.N.35 Non-payment of FTB based on an estimate</a></li><li><a href="../6/4/3/40">6.4.3.40 Non-payment of FTB Based on an Estimate</a></li><li><a href="../6/4/3/50">6.4.3.50 Deferral of Non-payment of FTB Based on an Estimate</a></li><li><a href="../6/4/3/60">6.4.3.60 Removal of Non-payment of FTB Based on an Estimate</a></li><li><a href="../7/1/1">7.1.1 FA Debts - General Provisions</a></li></ul></li><li>32AC<ul><li><a href="../1/1/n/35">1.1.N.35 Non-payment of FTB based on an estimate</a></li><li><a href="../6/4/3/40">6.4.3.40 Non-payment of FTB Based on an Estimate</a></li><li><a href="../6/4/3/50">6.4.3.50 Deferral of Non-payment of FTB Based on an Estimate</a></li><li><a href="../6/4/3/60">6.4.3.60 Removal of Non-payment of FTB Based on an Estimate</a></li></ul></li><li>32AD<ul><li><a href="../1/1/n/35">1.1.N.35 Non-payment of FTB based on an estimate</a></li><li><a href="../6/4/3/40">6.4.3.40 Non-payment of FTB Based on an Estimate</a></li><li><a href="../6/4/3/60">6.4.3.60 Removal of Non-payment of FTB Based on an Estimate</a></li></ul></li><li>32AE<ul><li><a href="../1/1/n/31">1.1.N.31 Non-entitlement to FTB due to 3 or more non-lodger decisions</a></li><li><a href="../6/4/3/30">6.4.3.30 Outcomes of Non-lodger Process</a></li><li><a href="../6/4/3/40">6.4.3.40 Non-payment of FTB Based on an Estimate</a></li><li><a href="../6/4/3/70">6.4.3.70 Non-entitlement to FTB Based on an Estimate Due to 3 or More Non-lodger Decisions</a></li></ul></li><li>32AF<ul><li><a href="../1/1/n/32">1.1.N.32 Non-entitlement to payment of FTB based on an estimate due to underestimation of income</a></li><li><a href="../6/6/1">6.6.1 Non-entitlement to FTB Based on an Estimate Due to Underestimation of Income</a></li><li><a href="../6/6/2">6.6.2 Effect of Non-entitlement Due to Underestimation of Income</a></li><li><a href="../6/6/3">6.6.3 Non-entitlement to FTB Part A &/or FTB Part B Due to Underestimation of Income</a></li></ul></li><li>32AG<ul><li><a href="../6/6/3">6.6.3 Non-entitlement to FTB Part A &/or FTB Part B Due to Underestimation of Income</a></li></ul></li><li>32AH<ul><li><a href="../6/6/1">6.6.1 Non-entitlement to FTB Based on an Estimate Due to Underestimation of Income</a></li><li><a href="../6/6/3">6.6.3 Non-entitlement to FTB Part A &/or FTB Part B Due to Underestimation of Income</a></li></ul></li><li>32AI<ul><li><a href="../6/6/3">6.6.3 Non-entitlement to FTB Part A &/or FTB Part B Due to Underestimation of Income</a></li></ul></li><li>32AJ<ul><li><a href="../6/6/3">6.6.3 Non-entitlement to FTB Part A &/or FTB Part B Due to Underestimation of Income</a></li></ul></li><li>32AK<ul><li><a href="../6/6/3">6.6.3 Non-entitlement to FTB Part A &/or FTB Part B Due to Underestimation of Income</a></li></ul></li><li>32AL<ul><li><a href="../6/6/3">6.6.3 Non-entitlement to FTB Part A &/or FTB Part B Due to Underestimation of Income</a></li></ul></li><li>32C<ul><li><a href="../6/4/1/10">6.4.1.10 Individuals Affected by Reconciliation</a></li><li><a href="../6/4/1/40">6.4.1.40 Outcomes of Reconciliation</a></li></ul></li><li>32J<ul><li><a href="../6/4/1/40">6.4.1.40 Outcomes of Reconciliation</a></li></ul></li><li>33<ul><li><a href="../1/1/a/55">1.1.A.55 Advance assessment day (FTB advance)</a></li><li><a href="../1/2/8">1.2.8 FTB Advance - Description</a></li><li><a href="../2/7">2.7 Entitlement to FTB Advance Payment</a></li></ul></li><li>34<ul><li><a href="../1/2/8">1.2.8 FTB Advance - Description</a></li><li><a href="../2/7">2.7 Entitlement to FTB Advance Payment</a></li></ul></li><li>35<ul><li><a href="../1/2/8">1.2.8 FTB Advance - Description</a></li><li><a href="../2/7">2.7 Entitlement to FTB Advance Payment</a></li></ul></li><li>35A<ul><li><a href="../1/1/a/55">1.1.A.55 Advance assessment day (FTB advance)</a></li><li><a href="../1/2/8">1.2.8 FTB Advance - Description</a></li><li><a href="../1/2/8/10">1.2.8.10 FTB Advance Payments - Details</a></li><li><a href="../1/2/8/20">1.2.8.20 Variations to FTB Advance Repayment Period</a></li><li><a href="../2/7">2.7 Entitlement to FTB Advance Payment</a></li><li><a href="../4/3/1/10">4.3.1.10 FTB Payment Delivery Choices</a></li><li><a href="../6/4/1/20">6.4.1.20 Payments Affected by Reconciliation</a></li></ul></li><li>35B<ul><li><a href="../1/1/a/55">1.1.A.55 Advance assessment day (FTB advance)</a></li><li><a href="../1/2/8">1.2.8 FTB Advance - Description</a></li><li><a href="../2/7">2.7 Entitlement to FTB Advance Payment</a></li></ul></li><li>35C<ul><li><a href="../1/1/m/25">1.1.M.25 Maximum amount (FTB advance)</a></li><li><a href="../1/1/m/55">1.1.M.55 Minimum amount (FTB advance)</a></li><li><a href="../1/1/s/105">1.1.S.105 Standard reduction (FTB)</a></li><li><a href="../1/2/8">1.2.8 FTB Advance - Description</a></li><li><a href="../3/1/11">3.1.11 Advance Payment of FTB Part A</a></li><li><a href="../4/3/1/10">4.3.1.10 FTB Payment Delivery Choices</a></li><li><a href="../6/4/1/20">6.4.1.20 Payments Affected by Reconciliation</a></li><li><a href="../7/1/2">7.1.2 FA Debts - Individuals & ACOs</a></li></ul></li><li>35D<ul><li><a href="../1/1/m/25">1.1.M.25 Maximum amount (FTB advance)</a></li><li><a href="../2/7">2.7 Entitlement to FTB Advance Payment</a></li></ul></li><li>35E<ul><li><a href="../1/2/8/10">1.2.8.10 FTB Advance Payments - Details</a></li><li><a href="../4/3/1/10">4.3.1.10 FTB Payment Delivery Choices</a></li></ul></li><li>35G<ul><li><a href="../1/2/14">1.2.14 Schoolkids Bonus (SKB) - Description</a></li></ul></li><li>36<ul><li><a href="../4/15/1">4.15.1 Claims for SBP</a></li></ul></li><li>37<ul><li><a href="../4/15/1">4.15.1 Claims for SBP</a></li></ul></li><li>38<ul><li><a href="../3/2/1">3.2.1 Adjusted Taxable Income - General Provisions</a></li><li><a href="../3/2/8/10">3.2.8.10 Initial Estimate When Making a Claim</a></li><li><a href="../4/1/1/70">4.1.1.70 TFN Requirements for SBP</a></li><li><a href="../4/15/1">4.15.1 Claims for SBP</a></li></ul></li><li>38A<ul><li><a href="../4/1/1/70">4.1.1.70 TFN Requirements for SBP</a></li></ul></li><li>39<ul><li><a href="../4/15/1">4.15.1 Claims for SBP</a></li></ul></li><li>40<ul><li><a href="../4/15/2">4.15.2 Determination of SBP Claims</a></li></ul></li><li>41<ul><li><a href="../4/15/1">4.15.1 Claims for SBP</a></li><li><a href="../4/15/2">4.15.2 Determination of SBP Claims</a></li></ul></li><li>41A<ul><li><a href="../4/1/1/70">4.1.1.70 TFN Requirements for SBP</a></li></ul></li><li>42<ul><li><a href="../4/15/2">4.15.2 Determination of SBP Claims</a></li></ul></li><li>43<ul><li><a href="../4/15/2">4.15.2 Determination of SBP Claims</a></li></ul></li><li>44<ul><li><a href="../4/15/2">4.15.2 Determination of SBP Claims</a></li></ul></li><li>45<ul><li><a href="../4/15/2">4.15.2 Determination of SBP Claims</a></li></ul></li><li>47<ul><li><a href="../1/2/19">1.2.19 Stillborn Baby Payment (SBP) - Description</a></li><li><a href="../4/3/3">4.3.3 Instalments Paid by Direct Credit</a></li><li><a href="../4/15/3">4.15.3 Payment of SBP</a></li></ul></li><li>49E<ul><li><a href="../4/1/1/40">4.1.1.40 TFN Requirements for Non-residents</a></li></ul></li><li>49F<ul><li><a href="../4/1/1/40">4.1.1.40 TFN Requirements for Non-residents</a></li></ul></li><li>49G<ul><li><a href="../4/6/1">4.6.1 General Provisions for Individual's Claims & Payments</a></li></ul></li><li>49J<ul><li><a href="../1/2/7">1.2.7 Child Care Rebate (CCR) - Description</a></li><li><a href="../4/6/2">4.6.2 Approved Care CCB - Individual's Claim</a></li></ul></li><li>49K<ul><li><a href="../4/6/3">4.6.3 Registered Care CCB - Individual's Claim</a></li></ul></li><li>50L<ul><li><a href="../4/6/2">4.6.2 Approved Care CCB - Individual's Claim</a></li></ul></li><li>50Q<ul><li><a href="../2/6/8">2.6.8 Grandparent Child Care Benefit (GCCB) - Eligibility Criteria</a></li></ul></li><li>50R<ul><li><a href="../1/1/g/15">1.1.G.15 Grandparent carer (CCB, FTB Part B)</a></li><li><a href="../2/6/8">2.6.8 Grandparent Child Care Benefit (GCCB) - Eligibility Criteria</a></li></ul></li><li>50S<ul><li><a href="../2/6/8">2.6.8 Grandparent Child Care Benefit (GCCB) - Eligibility Criteria</a></li></ul></li><li>50T<ul><li><a href="../2/6/8">2.6.8 Grandparent Child Care Benefit (GCCB) - Eligibility Criteria</a></li></ul></li><li>50U<ul><li><a href="../2/6/8">2.6.8 Grandparent Child Care Benefit (GCCB) - Eligibility Criteria</a></li></ul></li><li>50V<ul><li><a href="../2/6/8">2.6.8 Grandparent Child Care Benefit (GCCB) - Eligibility Criteria</a></li></ul></li><li>50W<ul><li><a href="../2/6/8">2.6.8 Grandparent Child Care Benefit (GCCB) - Eligibility Criteria</a></li></ul></li><li>50X<ul><li><a href="../2/6/8">2.6.8 Grandparent Child Care Benefit (GCCB) - Eligibility Criteria</a></li></ul></li><li>50Y<ul><li><a href="../2/6/8">2.6.8 Grandparent Child Care Benefit (GCCB) - Eligibility Criteria</a></li></ul></li><li>51<ul><li><a href="../6/4/1/30">6.4.1.30 Reconciliation Process</a></li></ul></li><li>51A<ul><li><a href="../6/4/1/30">6.4.1.30 Reconciliation Process</a></li></ul></li><li>51B<ul><li><a href="../1/1/e/30">1.1.E.30 Entitlement (FTB, CCB & CCR)</a></li><li><a href="../6/4/1/30">6.4.1.30 Reconciliation Process</a></li></ul></li><li>51C<ul><li><a href="../6/4/1/30">6.4.1.30 Reconciliation Process</a></li></ul></li><li>51E<ul><li><a href="../6/4/1/30">6.4.1.30 Reconciliation Process</a></li></ul></li><li>52E<ul><li><a href="../1/1/e/30">1.1.E.30 Entitlement (FTB, CCB & CCR)</a></li></ul></li><li>53D<ul><li><a href="../1/1/e/30">1.1.E.30 Entitlement (FTB, CCB & CCR)</a></li></ul></li><li>55A<ul><li><a href="../3/2/8/10">3.2.8.10 Initial Estimate When Making a Claim</a></li></ul></li><li>55C<ul><li><a href="../4/1/1/30">4.1.1.30 TFN Requirements for CCB</a></li><li><a href="../4/6/2">4.6.2 Approved Care CCB - Individual's Claim</a></li></ul></li><li>56<ul><li><a href="../6/4/1/30">6.4.1.30 Reconciliation Process</a></li></ul></li><li>56C<ul><li><a href="../1/1/n/40">1.1.N.40 Notification period</a></li></ul></li><li>57A<ul><li><a href="../4/2/2/40">4.2.2.40 Specific Requirements for FTB Instalment Claims</a></li></ul></li><li>58<ul><li><a href="../4/1/1/30">4.1.1.30 TFN Requirements for CCB</a></li><li><a href="../4/1/1/40">4.1.1.40 TFN Requirements for Non-residents</a></li><li><a href="../4/6/2">4.6.2 Approved Care CCB - Individual's Claim</a></li><li><a href="../6/4/1/10">6.4.1.10 Individuals Affected by Reconciliation</a></li></ul></li><li>60D<ul><li><a href="../6/4/3/30">6.4.3.30 Outcomes of Non-lodger Process</a></li></ul></li><li>60E<ul><li><a href="../3/2/8/30">3.2.8.30 Revised Estimates</a></li></ul></li><li>62<ul><li><a href="../5/2/1/10">5.2.1.10 Change of Circumstances - General Provisions</a></li></ul></li><li>65EA<ul><li><a href="../1/1/e/30">1.1.E.30 Entitlement (FTB, CCB & CCR)</a></li><li><a href="../1/1/p/78">1.1.P.78 Period of payment (CCR)</a></li><li><a href="../1/2/7">1.2.7 Child Care Rebate (CCR) - Description</a></li><li><a href="../4/12">4.12 CCR - Payments</a></li></ul></li><li>65EAA<ul><li><a href="../1/1/p/78">1.1.P.78 Period of payment (CCR)</a></li><li><a href="../1/2/7">1.2.7 Child Care Rebate (CCR) - Description</a></li><li><a href="../4/12">4.12 CCR - Payments</a></li></ul></li><li>65EAAAA<ul><li><a href="../1/1/p/78">1.1.P.78 Period of payment (CCR)</a></li><li><a href="../1/2/7">1.2.7 Child Care Rebate (CCR) - Description</a></li><li><a href="../3/8/2">3.8.2 CCR Limit Calculation - Examples</a></li><li><a href="../4/6/4/20">4.6.4.20 No CCB as Reduced Fees - Any CCB Entitlement at End of Year</a></li><li><a href="../4/12">4.12 CCR - Payments</a></li></ul></li><li>65EAC<ul><li><a href="../4/12">4.12 CCR - Payments</a></li></ul></li><li>65EB<ul><li><a href="../1/1/e/30">1.1.E.30 Entitlement (FTB, CCB & CCR)</a></li><li><a href="../1/1/p/78">1.1.P.78 Period of payment (CCR)</a></li><li><a href="../1/2/7">1.2.7 Child Care Rebate (CCR) - Description</a></li><li><a href="../4/12">4.12 CCR - Payments</a></li></ul></li><li>65EC<ul><li><a href="../1/1/e/30">1.1.E.30 Entitlement (FTB, CCB & CCR)</a></li><li><a href="../1/1/p/78">1.1.P.78 Period of payment (CCR)</a></li><li><a href="../1/2/7">1.2.7 Child Care Rebate (CCR) - Description</a></li><li><a href="../4/12">4.12 CCR - Payments</a></li></ul></li><li>65EE<ul><li><a href="../4/12">4.12 CCR - Payments</a></li></ul></li><li>65EF<ul><li><a href="../1/2/7">1.2.7 Child Care Rebate (CCR) - Description</a></li></ul></li><li>65K<ul><li><a href="../1/2/11">1.2.11 Single Income Family Supplement (SIFS) - Description</a></li><li><a href="../3/10">3.10 Determining the SIFS Rate</a></li><li><a href="../4/14">4.14 Claims for SIFS</a></li></ul></li><li>65KA<ul><li><a href="../1/2/11">1.2.11 Single Income Family Supplement (SIFS) - Description</a></li><li><a href="../3/10">3.10 Determining the SIFS Rate</a></li><li><a href="../4/14">4.14 Claims for SIFS</a></li></ul></li><li>65KB<ul><li><a href="../1/2/11">1.2.11 Single Income Family Supplement (SIFS) - Description</a></li><li><a href="../3/10">3.10 Determining the SIFS Rate</a></li><li><a href="../4/1/1/50">4.1.1.50 TFN Requirements for SIFS</a></li><li><a href="../4/1/1/60">4.1.1.60 Exemption from TFN Requirements for SIFS</a></li><li><a href="../4/14">4.14 Claims for SIFS</a></li></ul></li><li>65KK<ul><li><a href="../1/2/11">1.2.11 Single Income Family Supplement (SIFS) - Description</a></li><li><a href="../3/10">3.10 Determining the SIFS Rate</a></li><li><a href="../4/14">4.14 Claims for SIFS</a></li></ul></li><li>65KP<ul><li><a href="../1/2/11">1.2.11 Single Income Family Supplement (SIFS) - Description</a></li><li><a href="../3/10">3.10 Determining the SIFS Rate</a></li><li><a href="../4/14">4.14 Claims for SIFS</a></li></ul></li><li>65KQ<ul><li><a href="../1/2/11">1.2.11 Single Income Family Supplement (SIFS) - Description</a></li><li><a href="../3/10">3.10 Determining the SIFS Rate</a></li><li><a href="../4/14">4.14 Claims for SIFS</a></li></ul></li><li>65KR<ul><li><a href="../3/10">3.10 Determining the SIFS Rate</a></li><li><a href="../4/14">4.14 Claims for SIFS</a></li></ul></li><li>66<ul><li><a href="../4/1/2">4.1.2 Protection of Payment</a></li><li><a href="../4/3/6">4.3.6 Payments to a Third Party</a></li></ul></li><li>69<ul><li><a href="../7/1/3">7.1.3 FA Debts - Approved Child Care Services</a></li></ul></li><li>70<ul><li><a href="http://guides.dss.gov.au/family-assistance-guide/1/1/d/60">1.1.D.60 Debt, debtor</a></li><li><a href="../4/1/2">4.1.2 Protection of Payment</a></li><li><a href="../7/1/1">7.1.1 FA Debts - General Provisions</a></li><li><a href="../7/2/3">7.2.3 Debt Recovery from FA Entitlement</a></li></ul></li><li>71<ul><li><a href="http://guides.dss.gov.au/family-assistance-guide/1/1/d/60">1.1.D.60 Debt, debtor</a></li><li><a href="../2/1/1/110">2.1.1.110 Death of an FTB or Regular Care Child</a></li><li><a href="../4/4/2/10">4.4.2.10 Change in Non-Income Related Circumstances</a></li><li><a href="../6/4/5/30">6.4.5.30 Death of FTB or Regular Care Child</a></li><li><a href="../7/1/1">7.1.1 FA Debts - General Provisions</a></li><li><a href="../7/1/2">7.1.2 FA Debts - Individuals & ACOs</a></li></ul></li><li>71A<ul><li><a href="http://guides.dss.gov.au/family-assistance-guide/1/1/d/60">1.1.D.60 Debt, debtor</a></li><li><a href="../1/2/8/10">1.2.8.10 FTB Advance Payments - Details</a></li><li><a href="../1/2/8/20">1.2.8.20 Variations to FTB Advance Repayment Period</a></li><li><a href="../6/4/1/20">6.4.1.20 Payments Affected by Reconciliation</a></li><li><a href="../6/4/3/20">6.4.3.20 Non-lodger Process</a></li><li><a href="../6/4/3/30">6.4.3.30 Outcomes of Non-lodger Process</a></li><li><a href="../7/1/2">7.1.2 FA Debts - Individuals & ACOs</a></li><li><a href="../7/6">7.6 FTB Advance Debts</a></li></ul></li><li>71B<ul><li><a href="../6/4/1/30">6.4.1.30 Reconciliation Process</a></li><li><a href="../7/1/1">7.1.1 FA Debts - General Provisions</a></li><li><a href="../7/1/2">7.1.2 FA Debts - Individuals & ACOs</a></li></ul></li><li>71C<ul><li><a href="../6/4/1/30">6.4.1.30 Reconciliation Process</a></li><li><a href="../7/1/1">7.1.1 FA Debts - General Provisions</a></li><li><a href="../7/1/2">7.1.2 FA Debts - Individuals & ACOs</a></li></ul></li><li>71CAA<ul><li><a href="../7/1/2">7.1.2 FA Debts - Individuals & ACOs</a></li></ul></li><li>71CAB<ul><li><a href="../7/1/2">7.1.2 FA Debts - Individuals & ACOs</a></li></ul></li><li>71CAC<ul><li><a href="../7/1/2">7.1.2 FA Debts - Individuals & ACOs</a></li></ul></li><li>71D<ul><li><a href="../7/1/1">7.1.1 FA Debts - General Provisions</a></li><li><a href="../7/1/2">7.1.2 FA Debts - Individuals & ACOs</a></li></ul></li><li>71E<ul><li><a href="../7/1/1">7.1.1 FA Debts - General Provisions</a></li><li><a href="../7/1/3">7.1.3 FA Debts - Approved Child Care Services</a></li></ul></li><li>71F<ul><li><a href="../7/1/1">7.1.1 FA Debts - General Provisions</a></li></ul></li><li>71G<ul><li><a href="../7/1/3">7.1.3 FA Debts - Approved Child Care Services</a></li></ul></li><li>71H<ul><li><a href="../7/1/3">7.1.3 FA Debts - Approved Child Care Services</a></li></ul></li><li>73<ul><li><a href="../7/1/2">7.1.2 FA Debts - Individuals & ACOs</a></li></ul></li><li>75<ul><li><a href="../7/1/2">7.1.2 FA Debts - Individuals & ACOs</a></li></ul></li><li>76<ul><li><a href="../5/1/1/10">5.1.1.10 Power to Obtain Information</a></li><li><a href="../5/1/1/20">5.1.1.20 Obtaining Information about Debtors</a></li><li><a href="../5/1/2">5.1.2 Comparing Information with Other Agencies</a></li></ul></li><li>77<ul><li><a href="../7/1/1">7.1.1 FA Debts - General Provisions</a></li></ul></li><li>78<ul><li><a href="../7/1/1">7.1.1 FA Debts - General Provisions</a></li><li><a href="../7/1/4">7.1.4 FA Debts - Interest Charge on Debts</a></li></ul></li><li>78A<ul><li><a href="../7/1/1">7.1.1 FA Debts - General Provisions</a></li><li><a href="../7/1/4">7.1.4 FA Debts - Interest Charge on Debts</a></li></ul></li><li>78C<ul><li><a href="../7/1/4">7.1.4 FA Debts - Interest Charge on Debts</a></li></ul></li><li>78D<ul><li><a href="../7/1/4">7.1.4 FA Debts - Interest Charge on Debts</a></li></ul></li><li>78E<ul><li><a href="../7/1/4">7.1.4 FA Debts - Interest Charge on Debts</a></li></ul></li><li>80<ul><li><a href="../7/2/7">7.2.7 Debt Recovery by Garnishee</a></li></ul></li><li>82<ul><li><a href="../6/4/1/30">6.4.1.30 Reconciliation Process</a></li><li><a href="../6/4/3/40">6.4.3.40 Non-payment of FTB Based on an Estimate</a></li><li><a href="../7/2/1">7.2.1 Debt Recovery - General Provisions</a></li></ul></li><li>84<ul><li><a href="../6/4/3/40">6.4.3.40 Non-payment of FTB Based on an Estimate</a></li><li><a href="../7/1/1">7.1.1 FA Debts - General Provisions</a></li><li><a href="../7/2/2">7.2.2 Debt Recovery by Deduction</a></li><li><a href="../7/3/1/30">7.3.1.30 Capacity to Pay a Debt</a></li><li><a href="../7/3/2/30">7.3.2.30 Waiving a Small Debt</a></li></ul></li><li>84A<ul><li><a href="../6/4/1/30">6.4.1.30 Reconciliation Process</a></li><li><a href="../6/4/3/60">6.4.3.60 Removal of Non-payment of FTB Based on an Estimate</a></li><li><a href="../7/2/3">7.2.3 Debt Recovery from FA Entitlement</a></li><li><a href="../7/3/1/30">7.3.1.30 Capacity to Pay a Debt</a></li><li><a href="../7/3/2/30">7.3.2.30 Waiving a Small Debt</a></li></ul></li><li>87<ul><li><a href="../6/4/1/30">6.4.1.30 Reconciliation Process</a></li><li><a href="../7/2/5">7.2.5 Debt Recovery from Income Tax Refund</a></li><li><a href="../7/3/1/30">7.3.1.30 Capacity to Pay a Debt</a></li></ul></li><li>87A<ul><li><a href="../7/2/2">7.2.2 Debt Recovery by Deduction</a></li><li><a href="../7/3/1/30">7.3.1.30 Capacity to Pay a Debt</a></li><li><a href="../7/3/2/30">7.3.2.30 Waiving a Small Debt</a></li></ul></li><li>88<ul><li><a href="../7/2/6">7.2.6 Debt Recovery by Legal Proceedings</a></li><li><a href="../7/3/1/20">7.3.1.20 Legally Irrecoverable Debts</a></li></ul></li><li>89<ul><li><a href="../7/2/7">7.2.7 Debt Recovery by Garnishee</a></li></ul></li><li>91<ul><li><a href="../7/1/4">7.1.4 FA Debts - Interest Charge on Debts</a></li><li><a href="../7/2/2">7.2.2 Debt Recovery by Deduction</a></li><li><a href="../7/2/4">7.2.4 Debt Recovery by Cash</a></li></ul></li><li>92<ul><li><a href="../7/2/2">7.2.2 Debt Recovery by Deduction</a></li></ul></li><li>92A<ul><li><a href="../6/4/1/30">6.4.1.30 Reconciliation Process</a></li><li><a href="../7/2/3">7.2.3 Debt Recovery from FA Entitlement</a></li></ul></li><li>93<ul><li><a href="../6/4/1/30">6.4.1.30 Reconciliation Process</a></li><li><a href="../7/2/5">7.2.5 Debt Recovery from Income Tax Refund</a></li></ul></li><li>93A<ul><li><a href="../7/2/9">7.2.9 Recovery from Financial Institutions</a></li></ul></li><li>93B<ul><li><a href="../7/2/1">7.2.1 Debt Recovery - General Provisions</a></li></ul></li><li>95<ul><li><a href="../1/1/g/10">1.1.G.10 Garnishee debtor, garnishee notice</a></li><li><a href="../1/1/s/45">1.1.S.45 Severe financial hardship</a></li><li><a href="../1/1/w/30">1.1.W.30 Write off</a></li><li><a href="../6/4/4/20">6.4.4.20 Reconciliation - Ex-partners</a></li><li><a href="../6/4/5/10">6.4.5.10 Death of Individual</a></li><li><a href="../7/1/4">7.1.4 FA Debts - Interest Charge on Debts</a></li><li><a href="../7/2/8">7.2.8 Effect of Bankruptcy on Debt Recovery</a></li><li><a href="../7/3/1/10">7.3.1.10 Writing-off a Debt</a></li><li><a href="../7/3/1/20">7.3.1.20 Legally Irrecoverable Debts</a></li><li><a href="../7/3/1/30">7.3.1.30 Capacity to Pay a Debt</a></li><li><a href="../7/7/1">7.7.1 Making a Departure Prohibition Order</a></li></ul></li><li>96<ul><li><a href="../1/1/w/10">1.1.W.10 Waive</a></li><li><a href="../7/3/2">7.3.2 Waiver of Debts</a></li></ul></li><li>97<ul><li><a href="../1/1/s/45">1.1.S.45 Severe financial hardship</a></li><li><a href="../1/1/w/10">1.1.W.10 Waive</a></li><li><a href="../7/3/2/10">7.3.2.10 Waiving a Debt Arising from Administrative Error</a></li></ul></li><li>98<ul><li><a href="../1/1/w/10">1.1.W.10 Waive</a></li><li><a href="../7/3/2/20">7.3.2.20 Waiving a Debt Relating to an Offence</a></li></ul></li><li>99<ul><li><a href="../1/1/w/10">1.1.W.10 Waive</a></li><li><a href="../7/3/2/30">7.3.2.30 Waiving a Small Debt</a></li></ul></li><li>100<ul><li><a href="../1/1/w/10">1.1.W.10 Waive</a></li><li><a href="../7/3/2/40">7.3.2.40 Waiver in Relation to Settlements</a></li></ul></li><li>101<ul><li><a href="../1/1/w/10">1.1.W.10 Waive</a></li><li><a href="../2/1/1/110">2.1.1.110 Death of an FTB or Regular Care Child</a></li><li><a href="../6/4/5/30">6.4.5.30 Death of FTB or Regular Care Child</a></li><li><a href="../7/3/2/50">7.3.2.50 Waiver in Special Circumstances</a></li></ul></li><li>102<ul><li><a href="../1/1/w/10">1.1.W.10 Waive</a></li><li><a href="../7/3/2/05">7.3.2.05 Waiver of $1000 - Transitional Arrangements for 2000-01</a></li><li><a href="../7/3/2/60">7.3.2.60 Waiving a Particular Class of Debt</a></li></ul></li><li>102A<ul><li><a href="../7/7/1">7.7.1 Making a Departure Prohibition Order</a></li></ul></li><li>102B<ul><li><a href="../7/7/1">7.7.1 Making a Departure Prohibition Order</a></li></ul></li><li>102C<ul><li><a href="../7/7/1">7.7.1 Making a Departure Prohibition Order</a></li></ul></li><li>102D<ul><li><a href="../7/7/1">7.7.1 Making a Departure Prohibition Order</a></li></ul></li><li>102E<ul><li><a href="../7/7/1">7.7.1 Making a Departure Prohibition Order</a></li></ul></li><li>102F<ul><li><a href="../7/7/1">7.7.1 Making a Departure Prohibition Order</a></li></ul></li><li>102G<ul><li><a href="../7/7/2">7.7.2 Departure Authorisation Certificates</a></li></ul></li><li>102H<ul><li><a href="../7/7/2">7.7.2 Departure Authorisation Certificates</a></li></ul></li><li>102J<ul><li><a href="../7/7/2">7.7.2 Departure Authorisation Certificates</a></li></ul></li><li>102K<ul><li><a href="../7/7/2">7.7.2 Departure Authorisation Certificates</a></li></ul></li><li>102L<ul><li><a href="../7/7/2">7.7.2 Departure Authorisation Certificates</a></li></ul></li><li>102M<ul><li><a href="../7/7/2">7.7.2 Departure Authorisation Certificates</a></li></ul></li><li>102S<ul><li><a href="../7/7/1">7.7.1 Making a Departure Prohibition Order</a></li></ul></li><li>102T<ul><li><a href="../7/7/1">7.7.1 Making a Departure Prohibition Order</a></li></ul></li><li>102U<ul><li><a href="../7/7/1">7.7.1 Making a Departure Prohibition Order</a></li><li><a href="../7/7/2">7.7.2 Departure Authorisation Certificates</a></li></ul></li><li>104<ul><li><a href="../1/4/4">1.4.4 Liability of Decision Makers</a></li><li><a href="../6/1">6.1 Centrelink Review & Appeal Process</a></li><li><a href="../6/2">6.2 Internal Reviews</a></li></ul></li><li>105<ul><li><a href="../1/1/f/60">1.1.F.60 Full-time secondary study (FTB)</a></li><li><a href="../4/3/1/30">4.3.1.30 Mandatory Continuous Adjustment of FTB Instalments</a></li><li><a href="../4/15/2">4.15.2 Determination of SBP Claims</a></li><li><a href="../6/1">6.1 Centrelink Review & Appeal Process</a></li><li><a href="../6/2">6.2 Internal Reviews</a></li><li><a href="../6/4/1">6.4.1 Overview of Reconciliation</a></li><li><a href="../6/4/1/30">6.4.1.30 Reconciliation Process</a></li><li><a href="../6/7">6.7 SIFS Review & Payment Process</a></li></ul></li><li>105B<ul><li><a href="../1/2/10">1.2.10 Energy Supplement (ES) - Description</a></li></ul></li><li>106<ul><li><a href="../6/1">6.1 Centrelink Review & Appeal Process</a></li><li><a href="../6/2">6.2 Internal Reviews</a></li><li><a href="../6/4/1/30">6.4.1.30 Reconciliation Process</a></li></ul></li><li>107<ul><li><a href="../3/1/5/70">3.1.5.70 Exemptions from the Maintenance Action Test</a></li><li><a href="../6/2">6.2 Internal Reviews</a></li><li><a href="../6/4/1/40">6.4.1.40 Outcomes of Reconciliation</a></li></ul></li><li>108<ul><li><a href="../4/2/3/20">4.2.3.20 Determining an FTB Claim</a></li><li><a href="../6/1">6.1 Centrelink Review & Appeal Process</a></li><li><a href="../6/2">6.2 Internal Reviews</a></li></ul></li><li>109A<ul><li><a href="../6/1">6.1 Centrelink Review & Appeal Process</a></li><li><a href="../6/2">6.2 Internal Reviews</a></li><li><a href="../6/4/1/30">6.4.1.30 Reconciliation Process</a></li><li><a href="../6/4/3/50">6.4.3.50 Deferral of Non-payment of FTB Based on an Estimate</a></li><li><a href="../6/7">6.7 SIFS Review & Payment Process</a></li></ul></li><li>109B<ul><li><a href="../6/1">6.1 Centrelink Review & Appeal Process</a></li><li><a href="../6/2">6.2 Internal Reviews</a></li></ul></li><li>109C<ul><li><a href="../1/1/a/140">1.1.A.140 Authorised review officer</a></li><li><a href="../6/1">6.1 Centrelink Review & Appeal Process</a></li></ul></li><li>109D<ul><li><a href="../3/1/6/55">3.1.6.55 Child Support Case Ended - Payer not a Parent of the Child</a></li><li><a href="../6/2">6.2 Internal Reviews</a></li></ul></li><li>109E<ul><li><a href="../6/2">6.2 Internal Reviews</a></li></ul></li><li>109G<ul><li><a href="../6/2">6.2 Internal Reviews</a></li></ul></li><li>109H<ul><li><a href="../6/1">6.1 Centrelink Review & Appeal Process</a></li><li><a href="../6/2">6.2 Internal Reviews</a></li></ul></li><li>110<ul><li><a href="../6/3/1">6.3.1 AAT First Reviews</a></li></ul></li><li>111<ul><li><a href="../6/1">6.1 Centrelink Review & Appeal Process</a></li><li><a href="../6/3/1">6.3.1 AAT First Reviews</a></li></ul></li><li>111A<ul><li><a href="../6/3/1">6.3.1 AAT First Reviews</a></li></ul></li><li>113<ul><li><a href="../6/3/1">6.3.1 AAT First Reviews</a></li></ul></li><li>115<ul><li><a href="../6/3/1">6.3.1 AAT First Reviews</a></li></ul></li><li>123<ul><li><a href="../6/3/1">6.3.1 AAT First Reviews</a></li></ul></li><li>124<ul><li><a href="../6/3/1">6.3.1 AAT First Reviews</a></li></ul></li><li>125<ul><li><a href="../6/3/1">6.3.1 AAT First Reviews</a></li></ul></li><li>128<ul><li><a href="../6/1">6.1 Centrelink Review & Appeal Process</a></li><li><a href="../7/1/2">7.1.2 FA Debts - Individuals & ACOs</a></li></ul></li><li>141<ul><li><a href="../6/3/1">6.3.1 AAT First Reviews</a></li><li><a href="../7/3/2/40">7.3.2.40 Waiver in Relation to Settlements</a></li></ul></li><li>142<ul><li><a href="../6/3/2">6.3.2 AAT Second Reviews</a></li></ul></li><li>154<ul><li><a href="../4/1/1/70">4.1.1.70 TFN Requirements for SBP</a></li><li><a href="../4/2/4/20">4.2.4.20 Claim Action 2 - Claim Not Complete</a></li><li><a href="../4/4/4">4.4.4 Reassessment of FTB - Income Support Cancelled</a></li><li><a href="../4/4/5/10">4.4.5.10 Failure to Provide Information - General Provisions</a></li><li><a href="../4/4/8">4.4.8 Review of FTB Entitlements</a></li><li><a href="../4/15/1">4.15.1 Claims for SBP</a></li><li><a href="../5/1/1/10">5.1.1.10 Power to Obtain Information</a></li><li><a href="../5/1/2">5.1.2 Comparing Information with Other Agencies</a></li><li><a href="../5/1/3/20">5.1.3.20 Exchanging Information within Centrelink</a></li></ul></li><li>155<ul><li><a href="../5/1/1/20">5.1.1.20 Obtaining Information about Debtors</a></li></ul></li><li>156<ul><li><a href="../5/1/1/20">5.1.1.20 Obtaining Information about Debtors</a></li><li><a href="../5/1/3/20">5.1.3.20 Exchanging Information within Centrelink</a></li></ul></li><li>157<ul><li><a href="../4/4/8">4.4.8 Review of FTB Entitlements</a></li><li><a href="../5/1/1/10">5.1.1.10 Power to Obtain Information</a></li><li><a href="../5/1/1/20">5.1.1.20 Obtaining Information about Debtors</a></li><li><a href="../5/1/2">5.1.2 Comparing Information with Other Agencies</a></li><li><a href="../5/1/3/20">5.1.3.20 Exchanging Information within Centrelink</a></li><li><a href="../5/2/3">5.2.3 Information Required - Past Period Instalment Claims</a></li></ul></li><li>158<ul><li><a href="../4/4/4">4.4.4 Reassessment of FTB - Income Support Cancelled</a></li><li><a href="../4/4/5/10">4.4.5.10 Failure to Provide Information - General Provisions</a></li><li><a href="../5/1/1/10">5.1.1.10 Power to Obtain Information</a></li></ul></li><li>159<ul><li><a href="../5/1/3/30">5.1.3.30 Offences & Penalties</a></li></ul></li><li>162<ul><li><a href="../5/1/3">5.1.3 Protection of Information</a></li></ul></li><li>163<ul><li><a href="../5/1/3/30">5.1.3.30 Offences & Penalties</a></li></ul></li><li>164<ul><li><a href="../5/1/3/30">5.1.3.30 Offences & Penalties</a></li></ul></li><li>165<ul><li><a href="../5/1/3/30">5.1.3.30 Offences & Penalties</a></li></ul></li><li>166<ul><li><a href="../2/1/1/90">2.1.1.90 Abducted, Absent or Missing Child</a></li><li><a href="../5/1/3/10">5.1.3.10 Disclosure of Information by Centrelink</a></li><li><a href="../5/1/3/30">5.1.3.30 Offences & Penalties</a></li></ul></li><li>167<ul><li><a href="../5/1/3/10">5.1.3.10 Disclosure of Information by Centrelink</a></li></ul></li><li>168<ul><li><a href="../2/1/1/90">2.1.1.90 Abducted, Absent or Missing Child</a></li><li><a href="../4/1/3/10">4.1.3.10 Payment Nominees</a></li><li><a href="../4/1/3/20">4.1.3.20 Correspondence Nominees</a></li><li><a href="../4/1/3/30">4.1.3.30 Responsibilities of Nominees</a></li><li><a href="../5/1/3/10">5.1.3.10 Disclosure of Information by Centrelink</a></li></ul></li><li>169<ul><li><a href="../5/1/3/10">5.1.3.10 Disclosure of Information by Centrelink</a></li></ul></li><li>170<ul><li><a href="../5/1/3/10">5.1.3.10 Disclosure of Information by Centrelink</a></li></ul></li><li>194<ul><li><a href="../1/1/a/90">1.1.A.90 Approved service, approved care (CCB, CCR)</a></li></ul></li><li>195<ul><li><a href="../1/1/a/90">1.1.A.90 Approved service, approved care (CCB, CCR)</a></li></ul></li><li>209<ul><li><a href="../1/1/r/20">1.1.R.20 Registered care, registered carer (CCB)</a></li><li><a href="../2/6/5/10">2.6.5.10 Becoming a Registered Carer</a></li></ul></li><li>210<ul><li><a href="../1/1/r/20">1.1.R.20 Registered care, registered carer (CCB)</a></li></ul></li><li>219AA<ul><li><a href="../1/1/e/25">1.1.E.25 Enrolment</a></li></ul></li><li>219N<ul><li><a href="../1/1/a/115">1.1.A.115 Attendance record report (CCB)</a></li><li><a href="../1/1/s/120">1.1.S.120 Statements for payment (CCB)</a></li><li><a href="../6/4/2/50">6.4.2.50 CCB Reconciliation & Child Care Usage/Attendance Information</a></li></ul></li><li>219Q<ul><li><a href="../4/1/2">4.1.2 Protection of Payment</a></li></ul></li><li>219QA<ul><li><a href="../4/1/2">4.1.2 Protection of Payment</a></li></ul></li><li>219R<ul><li><a href="../1/1/e/26">1.1.E.26 Enrolment advance</a></li></ul></li><li>219RA<ul><li><a href="../1/1/e/26">1.1.E.26 Enrolment advance</a></li><li><a href="../4/1/2">4.1.2 Protection of Payment</a></li></ul></li><li>219RB<ul><li><a href="../1/1/e/26">1.1.E.26 Enrolment advance</a></li></ul></li><li>219RC<ul><li><a href="../1/1/e/26">1.1.E.26 Enrolment advance</a></li></ul></li><li>219TA<ul><li><a href="../1/1/c/55">1.1.C.55 Correspondence nominee</a></li><li><a href="../1/1/n/20">1.1.N.20 Nominee</a></li><li><a href="../1/1/p/74">1.1.P.74 Payment nominee</a></li></ul></li><li>219TB<ul><li><a href="../2/1/1/110">2.1.1.110 Death of an FTB or Regular Care Child</a></li><li><a href="../4/1/3/10">4.1.3.10 Payment Nominees</a></li><li><a href="../4/3/6">4.3.6 Payments to a Third Party</a></li></ul></li><li>219TD<ul><li><a href="../2/1/1/110">2.1.1.110 Death of an FTB or Regular Care Child</a></li><li><a href="../4/1/3/10">4.1.3.10 Payment Nominees</a></li><li><a href="../4/1/3/20">4.1.3.20 Correspondence Nominees</a></li></ul></li><li>219TE<ul><li><a href="../2/1/1/110">2.1.1.110 Death of an FTB or Regular Care Child</a></li><li><a href="../4/1/3/10">4.1.3.10 Payment Nominees</a></li><li><a href="../4/1/3/30">4.1.3.30 Responsibilities of Nominees</a></li></ul></li><li>219TF<ul><li><a href="../4/12">4.12 CCR - Payments</a></li></ul></li><li>219TG<ul><li><a href="../4/1/3/30">4.1.3.30 Responsibilities of Nominees</a></li></ul></li><li>219TJ<ul><li><a href="../4/1/3/30">4.1.3.30 Responsibilities of Nominees</a></li></ul></li><li>219TK<ul><li><a href="../4/1/3/30">4.1.3.30 Responsibilities of Nominees</a></li></ul></li><li>219TN<ul><li><a href="../4/1/3/10">4.1.3.10 Payment Nominees</a></li></ul></li><li>222<ul><li><a href="../4/4/9">4.4.9 Notices of Reassessment</a></li><li><a href="../6/1">6.1 Centrelink Review & Appeal Process</a></li></ul></li><li>223<ul><li><a href="../6/1">6.1 Centrelink Review & Appeal Process</a></li></ul></li><li>224<ul><li><a href="../4/4/9">4.4.9 Notices of Reassessment</a></li><li><a href="../6/1">6.1 Centrelink Review & Appeal Process</a></li></ul></li><li>225<ul><li><a href="../4/1/2">4.1.2 Protection of Payment</a></li></ul></li><li>226<ul><li><a href="../4/1/2">4.1.2 Protection of Payment</a></li></ul></li><li>227<ul><li><a href="../2/7">2.7 Entitlement to FTB Advance Payment</a></li><li><a href="../4/1/2">4.1.2 Protection of Payment</a></li><li><a href="../7/4">7.4 Child Support Debts</a></li></ul></li><li>228<ul><li><a href="../1/1/d/75">1.1.D.75 Designated child support child (FTB)</a></li><li><a href="../4/1/2">4.1.2 Protection of Payment</a></li><li><a href="../7/4">7.4 Child Support Debts</a></li></ul></li><li>230<ul><li><a href="../4/4/9">4.4.9 Notices of Reassessment</a></li></ul></li><li>235<ul><li><a href="../1/2/8">1.2.8 FTB Advance - Description</a></li></ul></li></ul>	
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            		
-		  
-            	</div>
+	      <h3>3</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/m/55">1.1.M.55 Minimum amount (FTB advance)</a>  </li>
+          <li class="">  
+          <a href="../1/1/o/10">1.1.O.10 Officer</a>  </li>
+          <li class="">  
+          <a href="../1/1/p/140">1.1.P.140 Protected information</a>  </li>
+          <li class="">  
+          <a href="../1/1/t/50">1.1.T.50 TFN definitions (FTB, SIFS, SBP)</a>  </li>
+          <li class="">  
+          <a href="../4/1/3/30">4.1.3.30 Responsibilities of nominees</a>  </li>
+          <li class="">  
+          <a href="../4/1/4">4.1.4 Early claims for family assistance</a>  </li>
+          <li class="">  
+          <a href="../7/1/2">7.1.2 FA debts - individuals &amp; ACOs</a>  </li>
+      </ul>      <h3>5</h3>
+    <ul>          <li class="">  
+          <a href="../1/2/18">1.2.18 Newborn supplement (NBS) - description</a>  </li>
+          <li class="">  
+          <a href="../4/2/1/10">4.2.1.10 Claim lodgement &amp; verification</a>  </li>
+      </ul>      <h3>6</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/a/72">1.1.A.72 Applicant</a>  </li>
+          <li class="">  
+          <a href="../4/2/1/10">4.2.1.10 Claim lodgement &amp; verification</a>  </li>
+      </ul>      <h3>7</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/b/20">1.1.B.20 Bereavement claim, claim in substitution</a>  </li>
+          <li class="">  
+          <a href="../1/1/e/10">1.1.E.10 Effective claim (FTB)</a>  </li>
+          <li class="">  
+          <a href="../1/1/p/60">1.1.P.60 Past period claim (FTB)</a>  </li>
+          <li class="">  
+          <a href="../2/2/2">2.2.2 Death of an individual eligible for FTB</a>  </li>
+          <li class="">  
+          <a href="../4/2/1/10">4.2.1.10 Claim lodgement &amp; verification</a>  </li>
+          <li class="">  
+          <a href="../4/2/2/10">4.2.2.10 Common FTB claim requirements</a>  </li>
+          <li class="">  
+          <a href="../4/2/2/30">4.2.2.30 Specific requirements for bereavement claim</a>  </li>
+          <li class="">  
+          <a href="../4/2/4/20">4.2.4.20 Claim action 2 - claim not complete</a>  </li>
+          <li class="">  
+          <a href="../5/1/1/10">5.1.1.10 Power to obtain information</a>  </li>
+          <li class="">  
+          <a href="../5/2/2">5.2.2 Information required for instalment claims</a>  </li>
+          <li class="">  
+          <a href="../5/2/3">5.2.3 Information required for past period claims - former partners</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/40">6.4.3.40 Prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/70">6.4.3.70 Non-entitlement to FTB based on an estimate due to 3 or more non-lodger decisions</a>  </li>
+      </ul>      <h3>7A</h3>
+    <ul>          <li class="">  
+          <a href="../4/2/2/40">4.2.2.40 Specific requirements for FTB instalment claims</a>  </li>
+          <li class="">  
+          <a href="../4/3/1/10">4.3.1.10 FTB payment delivery choices</a>  </li>
+          <li class="">  
+          <a href="../4/3/3">4.3.3 Instalments paid by direct credit</a>  </li>
+          <li class="">  
+          <a href="../4/3/4">4.3.4 Instalments paid by other means</a>  </li>
+          <li class="">  
+          <a href="../4/4/1">4.4.1 Reasons for FTB reassessment</a>  </li>
+          <li class="">  
+          <a href="../4/4/5/40">4.4.5.40 Failure to nominate bank account details</a>  </li>
+      </ul>      <h3>8</h3>
+    <ul>          <li class="">  
+          <a href="../4/1/1/10">4.1.1.10 TFN requirements for FTB</a>  </li>
+          <li class="">  
+          <a href="../4/1/1/20">4.1.1.20 Exemption from TFN requirements for FTB</a>  </li>
+          <li class="">  
+          <a href="../4/1/1/40">4.1.1.40 TFN requirements for non-residents</a>  </li>
+          <li class="">  
+          <a href="../4/2/2/10">4.2.2.10 Common FTB claim requirements</a>  </li>
+          <li class="">  
+          <a href="../4/4/1">4.4.1 Reasons for FTB reassessment</a>  </li>
+      </ul>      <h3>8A</h3>
+    <ul>          <li class="">  
+          <a href="../4/1/1/10">4.1.1.10 TFN requirements for FTB</a>  </li>
+          <li class="">  
+          <a href="../4/1/1/20">4.1.1.20 Exemption from TFN requirements for FTB</a>  </li>
+          <li class="">  
+          <a href="../4/1/1/40">4.1.1.40 TFN requirements for non-residents</a>  </li>
+          <li class="">  
+          <a href="../4/2/2/10">4.2.2.10 Common FTB claim requirements</a>  </li>
+      </ul>      <h3>9</h3>
+    <ul>          <li class="">  
+          <a href="../4/2/2/20">4.2.2.20 Specific requirements for past period claim</a>  </li>
+          <li class="">  
+          <a href="../4/2/2/40">4.2.2.40 Specific requirements for FTB instalment claims</a>  </li>
+      </ul>      <h3>10</h3>
+    <ul>          <li class="">  
+          <a href="../2/2/3.1">2.2.3 NBS &amp; NBU eligibility for individuals</a>  </li>
+          <li class="">  
+          <a href="../4/2.1">4.2 Claims for FTB</a>  </li>
+          <li class="">  
+          <a href="../4/2/1/10">4.2.1.10 Claim lodgement &amp; verification</a>  </li>
+          <li class="">  
+          <a href="../4/2/2/20">4.2.2.20 Specific requirements for past period claim</a>  </li>
+          <li class="">  
+          <a href="../4/2/3/20">4.2.3.20 Determining an FTB claim</a>  </li>
+          <li class="">  
+          <a href="../4/3/1/10">4.3.1.10 FTB payment delivery choices</a>  </li>
+          <li class="">  
+          <a href="../5/2/3">5.2.3 Information required for past period claims - former partners</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/70">6.4.3.70 Non-entitlement to FTB based on an estimate due to 3 or more non-lodger decisions</a>  </li>
+      </ul>      <h3>11</h3>
+    <ul>          <li class="">  
+          <a href="../4/2/2/30">4.2.2.30 Specific requirements for bereavement claim</a>  </li>
+      </ul>      <h3>12</h3>
+    <ul>          <li class="">  
+          <a href="../4/2/1/10">4.2.1.10 Claim lodgement &amp; verification</a>  </li>
+          <li class="">  
+          <a href="../4/2/3/10">4.2.3.10 Restrictions on determining FTB claims</a>  </li>
+      </ul>      <h3>13</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/e/10">1.1.E.10 Effective claim (FTB)</a>  </li>
+          <li class="">  
+          <a href="../4/2/2/40">4.2.2.40 Specific requirements for FTB instalment claims</a>  </li>
+          <li class="">  
+          <a href="../4/2/3/10">4.2.3.10 Restrictions on determining FTB claims</a>  </li>
+      </ul>      <h3>14</h3>
+    <ul>          <li class="">  
+          <a href="../3/2/8/10">3.2.8.10 Initial estimate when making a claim</a>  </li>
+          <li class="">  
+          <a href="../4/2/2/30">4.2.2.30 Specific requirements for bereavement claim</a>  </li>
+          <li class="">  
+          <a href="../4/2/3/10">4.2.3.10 Restrictions on determining FTB claims</a>  </li>
+          <li class="">  
+          <a href="../4/2/4/130">4.2.4.130 Claim action 13 - taxable income not assessed</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/40">6.4.3.40 Prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/70">6.4.3.70 Non-entitlement to FTB based on an estimate due to 3 or more non-lodger decisions</a>  </li>
+      </ul>      <h3>14A</h3>
+    <ul>          <li class="">  
+          <a href="../4/2/3/10">4.2.3.10 Restrictions on determining FTB claims</a>  </li>
+          <li class="">  
+          <a href="../4/2/4/130">4.2.4.130 Claim action 13 - taxable income not assessed</a>  </li>
+      </ul>      <h3>15</h3>
+    <ul>          <li class="">  
+          <a href="../4/2/3/10">4.2.3.10 Restrictions on determining FTB claims</a>  </li>
+          <li class="">  
+          <a href="../4/4/1">4.4.1 Reasons for FTB reassessment</a>  </li>
+      </ul>      <h3>15A</h3>
+    <ul>          <li class="">  
+          <a href="../4/2/3/10">4.2.3.10 Restrictions on determining FTB claims</a>  </li>
+          <li class="">  
+          <a href="../4/3/3">4.3.3 Instalments paid by direct credit</a>  </li>
+          <li class="">  
+          <a href="../4/4/1">4.4.1 Reasons for FTB reassessment</a>  </li>
+          <li class="">  
+          <a href="../4/4/5/40">4.4.5.40 Failure to nominate bank account details</a>  </li>
+      </ul>      <h3>15B</h3>
+    <ul>          <li class="">  
+          <a href="../4/1/4">4.1.4 Early claims for family assistance</a>  </li>
+      </ul>      <h3>16</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/e/30">1.1.E.30 Entitlement (FTB, CCS, ACCS)</a>  </li>
+          <li class="">  
+          <a href="../4/2/1/10">4.2.1.10 Claim lodgement &amp; verification</a>  </li>
+          <li class="">  
+          <a href="../4/2/3/20">4.2.3.20 Determining an FTB claim</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/70">6.4.3.70 Non-entitlement to FTB based on an estimate due to 3 or more non-lodger decisions</a>  </li>
+      </ul>      <h3>17</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/e/30">1.1.E.30 Entitlement (FTB, CCS, ACCS)</a>  </li>
+          <li class="">  
+          <a href="../4/2/3/20">4.2.3.20 Determining an FTB claim</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/70">6.4.3.70 Non-entitlement to FTB based on an estimate due to 3 or more non-lodger decisions</a>  </li>
+      </ul>      <h3>18</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/b/20">1.1.B.20 Bereavement claim, claim in substitution</a>  </li>
+          <li class="">  
+          <a href="../4/2/2/30">4.2.2.30 Specific requirements for bereavement claim</a>  </li>
+          <li class="">  
+          <a href="../4/2/3/20">4.2.3.20 Determining an FTB claim</a>  </li>
+      </ul>      <h3>19</h3>
+    <ul>          <li class="">  
+          <a href="../3/2/8/10">3.2.8.10 Initial estimate when making a claim</a>  </li>
+          <li class="">  
+          <a href="../4/2/3/20">4.2.3.20 Determining an FTB claim</a>  </li>
+      </ul>      <h3>20</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/m/65">1.1.M.65 Modified entitlement method (FTB)</a>  </li>
+          <li class="">  
+          <a href="../3/1/3">3.1.3 Apportioning income test reductions between FTB Part A components</a>  </li>
+          <li class="">  
+          <a href="../3/1/7/20">3.1.7.20 Estimating maintenance income</a>  </li>
+          <li class="">  
+          <a href="../3/1/7/22">3.1.7.22 Maintenance income - disbursement method</a>  </li>
+          <li class="">  
+          <a href="../3/1/7/23">3.1.7.23 Maintenance income - modified entitlement method</a>  </li>
+          <li class="">  
+          <a href="../3/1/9/20">3.1.9.20 Income test - FTB Part B</a>  </li>
+          <li class="">  
+          <a href="../3/2/1">3.2.1 Adjusted taxable income - general provisions</a>  </li>
+          <li class="">  
+          <a href="../3/2/8/10">3.2.8.10 Initial estimate when making a claim</a>  </li>
+          <li class="">  
+          <a href="../4/2/2/30">4.2.2.30 Specific requirements for bereavement claim</a>  </li>
+          <li class="">  
+          <a href="../4/2/3/10">4.2.3.10 Restrictions on determining FTB claims</a>  </li>
+          <li class="">  
+          <a href="../4/2/3/20">4.2.3.20 Determining an FTB claim</a>  </li>
+          <li class="">  
+          <a href="../4/4/1">4.4.1 Reasons for FTB reassessment</a>  </li>
+          <li class="">  
+          <a href="../4/4/3">4.4.3 Estimate of income not reasonable</a>  </li>
+          <li class="">  
+          <a href="../4/9/1">4.9.1 Overview of new financial year assessments</a>  </li>
+          <li class="">  
+          <a href="../4/9/3">4.9.3 Outcomes of new financial year assessments</a>  </li>
+          <li class="">  
+          <a href="../5/2/2">5.2.2 Information required for instalment claims</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/40">6.4.3.40 Prohibition of FTB based on an estimate</a>  </li>
+      </ul>      <h3>20A</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/i/82">1.1.I.82 Indexation factor</a>  </li>
+          <li class="">  
+          <a href="../1/1/i/85">1.1.I.85 Indexed income - actual or estimate (FTB)</a>  </li>
+          <li class="">  
+          <a href="../3/1/1/10">3.1.1.10 Calculating a rate of FTB - overview</a>  </li>
+          <li class="">  
+          <a href="../3/1/3">3.1.3 Apportioning income test reductions between FTB Part A components</a>  </li>
+          <li class="">  
+          <a href="../3/1/4/10">3.1.4.10 Method 1 - calculating the maximum rate of FTB Part A</a>  </li>
+          <li class="">  
+          <a href="../3/1/4/40">3.1.4.40 Income test - FTB Part A Method 1</a>  </li>
+          <li class="">  
+          <a href="../3/1/8/10">3.1.8.10 Method 2 - calculating the maximum rate of FTB Part A</a>  </li>
+          <li class="">  
+          <a href="../3/1/9/20">3.1.9.20 Income test - FTB Part B</a>  </li>
+          <li class="">  
+          <a href="../3/2/1">3.2.1 Adjusted taxable income - general provisions</a>  </li>
+          <li class="">  
+          <a href="../4/4/1">4.4.1 Reasons for FTB reassessment</a>  </li>
+          <li class="">  
+          <a href="../4/9/1">4.9.1 Overview of new financial year assessments</a>  </li>
+          <li class="">  
+          <a href="../4/9/3">4.9.3 Outcomes of new financial year assessments</a>  </li>
+      </ul>      <h3>20B</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/i/82">1.1.I.82 Indexation factor</a>  </li>
+          <li class="">  
+          <a href="../1/1/i/85">1.1.I.85 Indexed income - actual or estimate (FTB)</a>  </li>
+          <li class="">  
+          <a href="../3/1/1/10">3.1.1.10 Calculating a rate of FTB - overview</a>  </li>
+          <li class="">  
+          <a href="../3/1/3">3.1.3 Apportioning income test reductions between FTB Part A components</a>  </li>
+          <li class="">  
+          <a href="../3/1/4/10">3.1.4.10 Method 1 - calculating the maximum rate of FTB Part A</a>  </li>
+          <li class="">  
+          <a href="../3/1/4/40">3.1.4.40 Income test - FTB Part A Method 1</a>  </li>
+          <li class="">  
+          <a href="../3/1/8/10">3.1.8.10 Method 2 - calculating the maximum rate of FTB Part A</a>  </li>
+          <li class="">  
+          <a href="../3/1/9/20">3.1.9.20 Income test - FTB Part B</a>  </li>
+          <li class="">  
+          <a href="../3/2/1">3.2.1 Adjusted taxable income - general provisions</a>  </li>
+          <li class="">  
+          <a href="../4/4/1">4.4.1 Reasons for FTB reassessment</a>  </li>
+          <li class="">  
+          <a href="../4/9/1">4.9.1 Overview of new financial year assessments</a>  </li>
+          <li class="">  
+          <a href="../4/9/3">4.9.3 Outcomes of new financial year assessments</a>  </li>
+      </ul>      <h3>20C</h3>
+    <ul>          <li class="">  
+          <a href="../4/4/1">4.4.1 Reasons for FTB reassessment</a>  </li>
+          <li class="">  
+          <a href="../4/9/1">4.9.1 Overview of new financial year assessments</a>  </li>
+          <li class="">  
+          <a href="../4/9/3">4.9.3 Outcomes of new financial year assessments</a>  </li>
+      </ul>      <h3>21</h3>
+    <ul>          <li class="">  
+          <a href="../4/2/3/20">4.2.3.20 Determining an FTB claim</a>  </li>
+          <li class="">  
+          <a href="../4/4/7">4.4.7 Individual requests cancellation of FTB</a>  </li>
+      </ul>      <h3>22</h3>
+    <ul>          <li class="">  
+          <a href="../4/2/3/30">4.2.3.30 Giving the individual notice of the determination</a>  </li>
+      </ul>      <h3>23</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/a/30">1.1.A.30 Adjustment payment (FTB)</a>  </li>
+          <li class="">  
+          <a href="../1/1/i/100">1.1.I.100 Instalment amount, instalment claim, instalment period (FTB)</a>  </li>
+          <li class="">  
+          <a href="../4/3/2">4.3.2 Payment cycles for FTB instalments</a>  </li>
+          <li class="">  
+          <a href="../4/3/3">4.3.3 Instalments paid by direct credit</a>  </li>
+      </ul>      <h3>24</h3>
+    <ul>          <li class="">  
+          <a href="../2/2/2">2.2.2 Death of an individual eligible for FTB</a>  </li>
+          <li class="">  
+          <a href="../4/3/5">4.3.5 Lump sum payment through Centrelink</a>  </li>
+      </ul>      <h3>24A</h3>
+    <ul>          <li class="">  
+          <a href="../1/2/18">1.2.18 Newborn supplement (NBS) - description</a>  </li>
+      </ul>      <h3>25</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/n/40">1.1.N.40 Notification period</a>  </li>
+          <li class="">  
+          <a href="../2/1/1/60">2.1.1.60 Change of care of an FTB child</a>  </li>
+          <li class="">  
+          <a href="../3/1/1/50">3.1.1.50 FTB payments during absence from Australia before 1 July 2016</a>  </li>
+          <li class="">  
+          <a href="../4/4/8">4.4.8 Review of FTB entitlements</a>  </li>
+          <li class="">  
+          <a href="../5/2/1/10">5.2.1.10 Change of circumstances - general provisions</a>  </li>
+          <li class="">  
+          <a href="../5/2/1/20">5.2.1.20 Change of eligibility circumstances</a>  </li>
+          <li class="">  
+          <a href="../5/2/1/30">5.2.1.30 Change of rate circumstances</a>  </li>
+          <li class="">  
+          <a href="../5/2/2">5.2.2 Information required for instalment claims</a>  </li>
+      </ul>      <h3>25A</h3>
+    <ul>          <li class="">  
+          <a href="../4/4/8">4.4.8 Review of FTB entitlements</a>  </li>
+          <li class="">  
+          <a href="../5/2/2">5.2.2 Information required for instalment claims</a>  </li>
+      </ul>      <h3>26A</h3>
+    <ul>          <li class="">  
+          <a href="../4/2/2/40">4.2.2.40 Specific requirements for FTB instalment claims</a>  </li>
+          <li class="">  
+          <a href="../4/3/3">4.3.3 Instalments paid by direct credit</a>  </li>
+          <li class="">  
+          <a href="../4/4/5/40">4.4.5.40 Failure to nominate bank account details</a>  </li>
+      </ul>      <h3>27</h3>
+    <ul>          <li class="">  
+          <a href="../4/2/2/20">4.2.2.20 Specific requirements for past period claim</a>  </li>
+          <li class="">  
+          <a href="../4/2/2/40">4.2.2.40 Specific requirements for FTB instalment claims</a>  </li>
+          <li class="">  
+          <a href="../4/4/1">4.4.1 Reasons for FTB reassessment</a>  </li>
+      </ul>      <h3>27A</h3>
+    <ul>          <li class="">  
+          <a href="../4/2/2/20">4.2.2.20 Specific requirements for past period claim</a>  </li>
+          <li class="">  
+          <a href="../4/2/2/40">4.2.2.40 Specific requirements for FTB instalment claims</a>  </li>
+          <li class="">  
+          <a href="../4/3/3">4.3.3 Instalments paid by direct credit</a>  </li>
+          <li class="">  
+          <a href="../4/4/1">4.4.1 Reasons for FTB reassessment</a>  </li>
+          <li class="">  
+          <a href="../4/4/5/40">4.4.5.40 Failure to nominate bank account details</a>  </li>
+      </ul>      <h3>28</h3>
+    <ul>          <li class="">  
+          <a href="../4/3/1/10">4.3.1.10 FTB payment delivery choices</a>  </li>
+          <li class="">  
+          <a href="../4/4/1">4.4.1 Reasons for FTB reassessment</a>  </li>
+          <li class="">  
+          <a href="../4/4/5/20">4.4.5.20 Income tax return not lodged</a>  </li>
+          <li class="">  
+          <a href="../6/4/1/40">6.4.1.40 Outcomes of reconciliation</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/20">6.4.3.20 Non-lodger process</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/30">6.4.3.30 Outcomes of non-lodger process</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/40">6.4.3.40 Prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/60">6.4.3.60 Removal of prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../6/4/4/20">6.4.4.20 Reconciliation - ex-partners</a>  </li>
+      </ul>      <h3>28A</h3>
+    <ul>          <li class="">  
+          <a href="../3/2/1">3.2.1 Adjusted taxable income - general provisions</a>  </li>
+          <li class="">  
+          <a href="../4/2/2/20">4.2.2.20 Specific requirements for past period claim</a>  </li>
+          <li class="">  
+          <a href="../4/2/2/40">4.2.2.40 Specific requirements for FTB instalment claims</a>  </li>
+          <li class="">  
+          <a href="../4/4/1">4.4.1 Reasons for FTB reassessment</a>  </li>
+          <li class="">  
+          <a href="../4/4/3">4.4.3 Estimate of income not reasonable</a>  </li>
+      </ul>      <h3>28AA</h3>
+    <ul>          <li class="">  
+          <a href="../6/4/3.1">6.4.3 Requirement to lodge an income tax return</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/20">6.4.3.20 Non-lodger process</a>  </li>
+      </ul>      <h3>28B</h3>
+    <ul>          <li class="">  
+          <a href="../4/2/2/20">4.2.2.20 Specific requirements for past period claim</a>  </li>
+          <li class="">  
+          <a href="../4/2/2/40">4.2.2.40 Specific requirements for FTB instalment claims</a>  </li>
+          <li class="">  
+          <a href="../4/4/1">4.4.1 Reasons for FTB reassessment</a>  </li>
+          <li class="">  
+          <a href="../4/4/6">4.4.6 Income support claim pending for FTB or regular care child</a>  </li>
+          <li class="">  
+          <a href="../4/4/7">4.4.7 Individual requests cancellation of FTB</a>  </li>
+      </ul>      <h3>29</h3>
+    <ul>          <li class="">  
+          <a href="../4/2/2/20">4.2.2.20 Specific requirements for past period claim</a>  </li>
+          <li class="">  
+          <a href="../4/2/2/40">4.2.2.40 Specific requirements for FTB instalment claims</a>  </li>
+          <li class="">  
+          <a href="../4/4/1">4.4.1 Reasons for FTB reassessment</a>  </li>
+          <li class="">  
+          <a href="../4/4/4">4.4.4 Reassessment of FTB - income support cancelled  or employment income nil rate period</a>  </li>
+          <li class="">  
+          <a href="../4/4/5/10">4.4.5.10 Failure to provide information - general provisions</a>  </li>
+      </ul>      <h3>30</h3>
+    <ul>          <li class="">  
+          <a href="../4/2/2/20">4.2.2.20 Specific requirements for past period claim</a>  </li>
+          <li class="">  
+          <a href="../4/2/2/40">4.2.2.40 Specific requirements for FTB instalment claims</a>  </li>
+          <li class="">  
+          <a href="../4/4/1">4.4.1 Reasons for FTB reassessment</a>  </li>
+          <li class="">  
+          <a href="../4/4/5/30">4.4.5.30 Failure to notify change of address</a>  </li>
+      </ul>      <h3>30A</h3>
+    <ul>          <li class="">  
+          <a href="../4/2/2/20">4.2.2.20 Specific requirements for past period claim</a>  </li>
+          <li class="">  
+          <a href="../4/2/2/40">4.2.2.40 Specific requirements for FTB instalment claims</a>  </li>
+          <li class="">  
+          <a href="../4/4/1">4.4.1 Reasons for FTB reassessment</a>  </li>
+      </ul>      <h3>30B</h3>
+    <ul>          <li class="">  
+          <a href="../4/2/2/20">4.2.2.20 Specific requirements for past period claim</a>  </li>
+          <li class="">  
+          <a href="../4/2/2/40">4.2.2.40 Specific requirements for FTB instalment claims</a>  </li>
+          <li class="">  
+          <a href="../4/4/1">4.4.1 Reasons for FTB reassessment</a>  </li>
+      </ul>      <h3>31</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/f/60">1.1.F.60 Full-time secondary study (FTB)</a>  </li>
+          <li class="">  
+          <a href="../4/4/1">4.4.1 Reasons for FTB reassessment</a>  </li>
+          <li class="">  
+          <a href="../4/4/2/10">4.4.2.10 Change in non-income related circumstances</a>  </li>
+          <li class="">  
+          <a href="../4/4/2/20">4.4.2.20 Change in income related circumstances</a>  </li>
+          <li class="">  
+          <a href="../4/4/4">4.4.4 Reassessment of FTB - income support cancelled  or employment income nil rate period</a>  </li>
+          <li class="">  
+          <a href="../4/4/8">4.4.8 Review of FTB entitlements</a>  </li>
+      </ul>      <h3>31A</h3>
+    <ul>          <li class="">  
+          <a href="../3/2/8/20">3.2.8.20 Estimate following cancellation of income support payment or during employment income nil rate period</a>  </li>
+          <li class="">  
+          <a href="../3/2/8/30">3.2.8.30 Revised estimates</a>  </li>
+          <li class="">  
+          <a href="../4/4/1">4.4.1 Reasons for FTB reassessment</a>  </li>
+          <li class="">  
+          <a href="../4/4/2/20">4.4.2.20 Change in income related circumstances</a>  </li>
+          <li class="">  
+          <a href="../4/9/1">4.9.1 Overview of new financial year assessments</a>  </li>
+          <li class="">  
+          <a href="../4/9/3">4.9.3 Outcomes of new financial year assessments</a>  </li>
+          <li class="">  
+          <a href="../6/2">6.2 Internal reviews</a>  </li>
+      </ul>      <h3>31B</h3>
+    <ul>          <li class="">  
+          <a href="../4/4/2/20">4.4.2.20 Change in income related circumstances</a>  </li>
+      </ul>      <h3>31C</h3>
+    <ul>          <li class="">  
+          <a href="../4/9/1">4.9.1 Overview of new financial year assessments</a>  </li>
+      </ul>      <h3>31D</h3>
+    <ul>          <li class="">  
+          <a href="../4/9/1">4.9.1 Overview of new financial year assessments</a>  </li>
+      </ul>      <h3>31E</h3>
+    <ul>          <li class="">  
+          <a href="../1/2/8/10">1.2.8.10 FTB advance payments - details</a>  </li>
+          <li class="">  
+          <a href="../3/2/8/10">3.2.8.10 Initial estimate when making a claim</a>  </li>
+          <li class="">  
+          <a href="../3/2/8/30">3.2.8.30 Revised estimates</a>  </li>
+          <li class="">  
+          <a href="../4/3/1/30">4.3.1.30 Mandatory continuous adjustment of FTB instalments</a>  </li>
+      </ul>      <h3>32</h3>
+    <ul>          <li class="">  
+          <a href="../4/4/9">4.4.9 Notices of reassessment</a>  </li>
+      </ul>      <h3>32A</h3>
+    <ul>          <li class="">  
+          <a href="../1/2/1">1.2.1 Family tax benefit (FTB) - description</a>  </li>
+          <li class="">  
+          <a href="../4/3/1/10">4.3.1.10 FTB payment delivery choices</a>  </li>
+          <li class="">  
+          <a href="../6/4/1/40">6.4.1.40 Outcomes of reconciliation</a>  </li>
+          <li class="">  
+          <a href="../6/4/4/20">6.4.4.20 Reconciliation - ex-partners</a>  </li>
+      </ul>      <h3>32AA</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/n/31">1.1.N.31 Non-entitlement to FTB due to 3 or more non-lodger decisions</a>  </li>
+          <li class="">  
+          <a href="../1/1/p/135">1.1.P.135 Prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../4/4/5/20">4.4.5.20 Income tax return not lodged</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/20">6.4.3.20 Non-lodger process</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/30">6.4.3.30 Outcomes of non-lodger process</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/40">6.4.3.40 Prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/60">6.4.3.60 Removal of prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../7/1/1">7.1.1 FA debts - general provisions</a>  </li>
+      </ul>      <h3>32AB</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/p/135">1.1.P.135 Prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/40">6.4.3.40 Prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/50">6.4.3.50 Deferral of prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/60">6.4.3.60 Removal of prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../7/1/1">7.1.1 FA debts - general provisions</a>  </li>
+      </ul>      <h3>32AC</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/p/135">1.1.P.135 Prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/40">6.4.3.40 Prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/50">6.4.3.50 Deferral of prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/60">6.4.3.60 Removal of prohibition of FTB based on an estimate</a>  </li>
+      </ul>      <h3>32AD</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/p/135">1.1.P.135 Prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/40">6.4.3.40 Prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/60">6.4.3.60 Removal of prohibition of FTB based on an estimate</a>  </li>
+      </ul>      <h3>32AE</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/n/31">1.1.N.31 Non-entitlement to FTB due to 3 or more non-lodger decisions</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/30">6.4.3.30 Outcomes of non-lodger process</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/40">6.4.3.40 Prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/70">6.4.3.70 Non-entitlement to FTB based on an estimate due to 3 or more non-lodger decisions</a>  </li>
+      </ul>      <h3>32AF</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/n/32">1.1.N.32 Non-entitlement to payment of FTB based on an estimate due to underestimation of income</a>  </li>
+          <li class="">  
+          <a href="../6/6/1">6.6.1 Non-entitlement to FTB based on an estimate due to underestimation of income</a>  </li>
+          <li class="">  
+          <a href="../6/6/2">6.6.2 Effect of non-entitlement due to underestimation of income</a>  </li>
+          <li class="">  
+          <a href="../6/6/3">6.6.3 Non-entitlement to FTB Part A &amp;/or FTB Part B due to underestimation of income</a>  </li>
+      </ul>      <h3>32AG</h3>
+    <ul>          <li class="">  
+          <a href="../6/6/3">6.6.3 Non-entitlement to FTB Part A &amp;/or FTB Part B due to underestimation of income</a>  </li>
+      </ul>      <h3>32AH</h3>
+    <ul>          <li class="">  
+          <a href="../6/6/1">6.6.1 Non-entitlement to FTB based on an estimate due to underestimation of income</a>  </li>
+          <li class="">  
+          <a href="../6/6/3">6.6.3 Non-entitlement to FTB Part A &amp;/or FTB Part B due to underestimation of income</a>  </li>
+      </ul>      <h3>32AI</h3>
+    <ul>          <li class="">  
+          <a href="../6/6/3">6.6.3 Non-entitlement to FTB Part A &amp;/or FTB Part B due to underestimation of income</a>  </li>
+      </ul>      <h3>32AJ</h3>
+    <ul>          <li class="">  
+          <a href="../6/6/3">6.6.3 Non-entitlement to FTB Part A &amp;/or FTB Part B due to underestimation of income</a>  </li>
+      </ul>      <h3>32AK</h3>
+    <ul>          <li class="">  
+          <a href="../6/6/3">6.6.3 Non-entitlement to FTB Part A &amp;/or FTB Part B due to underestimation of income</a>  </li>
+      </ul>      <h3>32AL</h3>
+    <ul>          <li class="">  
+          <a href="../6/6/3">6.6.3 Non-entitlement to FTB Part A &amp;/or FTB Part B due to underestimation of income</a>  </li>
+      </ul>      <h3>32C</h3>
+    <ul>          <li class="">  
+          <a href="../6/4/1/10">6.4.1.10 Individuals affected by reconciliation</a>  </li>
+          <li class="">  
+          <a href="../6/4/1/40">6.4.1.40 Outcomes of reconciliation</a>  </li>
+      </ul>      <h3>32J</h3>
+    <ul>          <li class="">  
+          <a href="../6/4/1/40">6.4.1.40 Outcomes of reconciliation</a>  </li>
+      </ul>      <h3>33</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/a/55">1.1.A.55 Advance assessment day (FTB advance)</a>  </li>
+          <li class="">  
+          <a href="../1/2/8.1">1.2.8 FTB advance - description</a>  </li>
+          <li class="">  
+          <a href="../2/7">2.7 Entitlement to FTB advance payment</a>  </li>
+      </ul>      <h3>34</h3>
+    <ul>          <li class="">  
+          <a href="../1/2/8.1">1.2.8 FTB advance - description</a>  </li>
+          <li class="">  
+          <a href="../2/7">2.7 Entitlement to FTB advance payment</a>  </li>
+      </ul>      <h3>35</h3>
+    <ul>          <li class="">  
+          <a href="../1/2/8.1">1.2.8 FTB advance - description</a>  </li>
+          <li class="">  
+          <a href="../2/7">2.7 Entitlement to FTB advance payment</a>  </li>
+      </ul>      <h3>35A</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/a/55">1.1.A.55 Advance assessment day (FTB advance)</a>  </li>
+          <li class="">  
+          <a href="../1/2/8.1">1.2.8 FTB advance - description</a>  </li>
+          <li class="">  
+          <a href="../1/2/8/10">1.2.8.10 FTB advance payments - details</a>  </li>
+          <li class="">  
+          <a href="../1/2/8/20">1.2.8.20 Variations to FTB advance repayment period</a>  </li>
+          <li class="">  
+          <a href="../2/7">2.7 Entitlement to FTB advance payment</a>  </li>
+          <li class="">  
+          <a href="../4/3/1/10">4.3.1.10 FTB payment delivery choices</a>  </li>
+          <li class="">  
+          <a href="../6/4/1/20">6.4.1.20 Payments affected by reconciliation</a>  </li>
+      </ul>      <h3>35B</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/a/55">1.1.A.55 Advance assessment day (FTB advance)</a>  </li>
+          <li class="">  
+          <a href="../1/2/8.1">1.2.8 FTB advance - description</a>  </li>
+          <li class="">  
+          <a href="../2/7">2.7 Entitlement to FTB advance payment</a>  </li>
+      </ul>      <h3>35C</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/m/25">1.1.M.25 Maximum amount (FTB advance)</a>  </li>
+          <li class="">  
+          <a href="../1/1/m/55">1.1.M.55 Minimum amount (FTB advance)</a>  </li>
+          <li class="">  
+          <a href="../1/1/s/105">1.1.S.105 Standard reduction (FTB)</a>  </li>
+          <li class="">  
+          <a href="../1/2/8.1">1.2.8 FTB advance - description</a>  </li>
+          <li class="">  
+          <a href="../3/1/11">3.1.11 Advance payment of FTB Part A</a>  </li>
+          <li class="">  
+          <a href="../4/3/1/10">4.3.1.10 FTB payment delivery choices</a>  </li>
+          <li class="">  
+          <a href="../6/4/1/20">6.4.1.20 Payments affected by reconciliation</a>  </li>
+          <li class="">  
+          <a href="../7/1/2">7.1.2 FA debts - individuals &amp; ACOs</a>  </li>
+      </ul>      <h3>35D</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/m/25">1.1.M.25 Maximum amount (FTB advance)</a>  </li>
+          <li class="">  
+          <a href="../2/7">2.7 Entitlement to FTB advance payment</a>  </li>
+      </ul>      <h3>35E</h3>
+    <ul>          <li class="">  
+          <a href="../4/3/1/10">4.3.1.10 FTB payment delivery choices</a>  </li>
+      </ul>      <h3>36</h3>
+    <ul>          <li class="">  
+          <a href="../4/15/1">4.15.1 Claims for SBP</a>  </li>
+      </ul>      <h3>37</h3>
+    <ul>          <li class="">  
+          <a href="../4/15/1">4.15.1 Claims for SBP</a>  </li>
+      </ul>      <h3>38</h3>
+    <ul>          <li class="">  
+          <a href="../3/2/1">3.2.1 Adjusted taxable income - general provisions</a>  </li>
+          <li class="">  
+          <a href="../3/2/8/10">3.2.8.10 Initial estimate when making a claim</a>  </li>
+          <li class="">  
+          <a href="../4/1/1/70">4.1.1.70 TFN requirements for SBP</a>  </li>
+          <li class="">  
+          <a href="../4/15/1">4.15.1 Claims for SBP</a>  </li>
+      </ul>      <h3>38A</h3>
+    <ul>          <li class="">  
+          <a href="../4/1/1/70">4.1.1.70 TFN requirements for SBP</a>  </li>
+      </ul>      <h3>39</h3>
+    <ul>          <li class="">  
+          <a href="../4/15/1">4.15.1 Claims for SBP</a>  </li>
+      </ul>      <h3>40</h3>
+    <ul>          <li class="">  
+          <a href="../4/15/2">4.15.2 Determination of SBP claims</a>  </li>
+      </ul>      <h3>41</h3>
+    <ul>          <li class="">  
+          <a href="../4/15/1">4.15.1 Claims for SBP</a>  </li>
+          <li class="">  
+          <a href="../4/15/2">4.15.2 Determination of SBP claims</a>  </li>
+      </ul>      <h3>41A</h3>
+    <ul>          <li class="">  
+          <a href="../4/1/1/70">4.1.1.70 TFN requirements for SBP</a>  </li>
+      </ul>      <h3>42</h3>
+    <ul>          <li class="">  
+          <a href="../4/15/2">4.15.2 Determination of SBP claims</a>  </li>
+      </ul>      <h3>43</h3>
+    <ul>          <li class="">  
+          <a href="../4/15/2">4.15.2 Determination of SBP claims</a>  </li>
+      </ul>      <h3>44</h3>
+    <ul>          <li class="">  
+          <a href="../4/15/2">4.15.2 Determination of SBP claims</a>  </li>
+      </ul>      <h3>45</h3>
+    <ul>          <li class="">  
+          <a href="../4/15/2">4.15.2 Determination of SBP claims</a>  </li>
+      </ul>      <h3>47</h3>
+    <ul>          <li class="">  
+          <a href="../1/2/19">1.2.19 Stillborn baby payment (SBP) - description</a>  </li>
+          <li class="">  
+          <a href="../4/3/3">4.3.3 Instalments paid by direct credit</a>  </li>
+          <li class="">  
+          <a href="../4/15/3">4.15.3 Payment of SBP</a>  </li>
+      </ul>      <h3>50L</h3>
+    <ul>          <li class="">  
+          <a href="../4/6/1/30">4.6.1.30 CCS - initial payments</a>  </li>
+      </ul>      <h3>58</h3>
+    <ul>          <li class="">  
+          <a href="../4/1/1/40">4.1.1.40 TFN requirements for non-residents</a>  </li>
+      </ul>      <h3>65JA</h3>
+    <ul>          <li class="">  
+          <a href="../1/2/20">1.2.20 2020 economic support payment (2020 ESP)</a>  </li>
+      </ul>      <h3>65JB</h3>
+    <ul>          <li class="">  
+          <a href="../1/2/20">1.2.20 2020 economic support payment (2020 ESP)</a>  </li>
+      </ul>      <h3>65K</h3>
+    <ul>          <li class="">  
+          <a href="../1/2/11">1.2.11 Single income family supplement (SIFS) - description</a>  </li>
+          <li class="">  
+          <a href="../4/14">4.14 Claims for SIFS</a>  </li>
+      </ul>      <h3>65KA</h3>
+    <ul>          <li class="">  
+          <a href="../1/2/11">1.2.11 Single income family supplement (SIFS) - description</a>  </li>
+          <li class="">  
+          <a href="../4/14">4.14 Claims for SIFS</a>  </li>
+      </ul>      <h3>65KB</h3>
+    <ul>          <li class="">  
+          <a href="../1/2/11">1.2.11 Single income family supplement (SIFS) - description</a>  </li>
+          <li class="">  
+          <a href="../4/1/1/50">4.1.1.50 TFN requirements for SIFS</a>  </li>
+          <li class="">  
+          <a href="../4/1/1/60">4.1.1.60 Exemption from TFN requirements for SIFS</a>  </li>
+          <li class="">  
+          <a href="../4/14">4.14 Claims for SIFS</a>  </li>
+      </ul>      <h3>65KK</h3>
+    <ul>          <li class="">  
+          <a href="../1/2/11">1.2.11 Single income family supplement (SIFS) - description</a>  </li>
+          <li class="">  
+          <a href="../4/14">4.14 Claims for SIFS</a>  </li>
+      </ul>      <h3>65KP</h3>
+    <ul>          <li class="">  
+          <a href="../1/2/11">1.2.11 Single income family supplement (SIFS) - description</a>  </li>
+          <li class="">  
+          <a href="../4/14">4.14 Claims for SIFS</a>  </li>
+      </ul>      <h3>65KQ</h3>
+    <ul>          <li class="">  
+          <a href="../1/2/11">1.2.11 Single income family supplement (SIFS) - description</a>  </li>
+          <li class="">  
+          <a href="../4/14">4.14 Claims for SIFS</a>  </li>
+      </ul>      <h3>65KR</h3>
+    <ul>          <li class="">  
+          <a href="../4/14">4.14 Claims for SIFS</a>  </li>
+      </ul>      <h3>66</h3>
+    <ul>          <li class="">  
+          <a href="../4/1/2">4.1.2 Protection of payment</a>  </li>
+          <li class="">  
+          <a href="../4/3/6">4.3.6 Payments to a third party</a>  </li>
+      </ul>      <h3>67BD</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/c/27">1.1.C.27 Claim (CCS)</a>  </li>
+          <li class="">  
+          <a href="../2/6/4">2.6.4 CCS eligibility - death of an eligible child or recipient</a>  </li>
+      </ul>      <h3>67BE</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/c/27">1.1.C.27 Claim (CCS)</a>  </li>
+      </ul>      <h3>67CC</h3>
+    <ul>          <li class="">  
+          <a href="../2/6/1">2.6.1 CCS eligibility</a>  </li>
+          <li class="">  
+          <a href="../4/6/1/10">4.6.1.10 CCS - making an effective claim</a>  </li>
+          <li class="">  
+          <a href="../4/6/1/20">4.6.1.20 CCS - determination on effective claim</a>  </li>
+      </ul>      <h3>67CD</h3>
+    <ul>          <li class="">  
+          <a href="../2/6/5/10">2.6.5.10 CCS - individual confirmation of enrolment</a>  </li>
+          <li class="">  
+          <a href="../2/8/2/40">2.8.2.40 ACCS (grandparent) - applications</a>  </li>
+          <li class="">  
+          <a href="../3/5/4">3.5.4 Calculating CCS entitlement</a>  </li>
+          <li class="">  
+          <a href="../5/2/1/50">5.2.1.50 ACCS - change of circumstances</a>  </li>
+          <li class="">  
+          <a href="../6/4/1/30">6.4.1.30 Reconciliation process</a>  </li>
+      </ul>      <h3>67CF</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/c/27">1.1.C.27 Claim (CCS)</a>  </li>
+          <li class="">  
+          <a href="../2/6/4">2.6.4 CCS eligibility - death of an eligible child or recipient</a>  </li>
+      </ul>      <h3>67DB</h3>
+    <ul>          <li class="">  
+          <a href="../3/2/1">3.2.1 Adjusted taxable income - general provisions</a>  </li>
+          <li class="">  
+          <a href="../3/2/8/30">3.2.8.30 Revised estimates</a>  </li>
+          <li class="">  
+          <a href="../4/9/1">4.9.1 Overview of new financial year assessments</a>  </li>
+          <li class="">  
+          <a href="../4/9/3">4.9.3 Outcomes of new financial year assessments</a>  </li>
+          <li class="">  
+          <a href="../5/2/1/40">5.2.1.40 CCS &amp; ACCS - change in activity/income</a>  </li>
+          <li class="">  
+          <a href="../6/2">6.2 Internal reviews</a>  </li>
+      </ul>      <h3>67DC</h3>
+    <ul>          <li class="">  
+          <a href="../4/9/1">4.9.1 Overview of new financial year assessments</a>  </li>
+          <li class="">  
+          <a href="../4/9/3">4.9.3 Outcomes of new financial year assessments</a>  </li>
+      </ul>      <h3>67DD</h3>
+    <ul>          <li class="">  
+          <a href="../4/9/1">4.9.1 Overview of new financial year assessments</a>  </li>
+          <li class="">  
+          <a href="../4/9/3">4.9.3 Outcomes of new financial year assessments</a>  </li>
+      </ul>      <h3>67DE</h3>
+    <ul>          <li class="">  
+          <a href="../4/9/1">4.9.1 Overview of new financial year assessments</a>  </li>
+          <li class="">  
+          <a href="../4/9/3">4.9.3 Outcomes of new financial year assessments</a>  </li>
+      </ul>      <h3>67EB</h3>
+    <ul>          <li class="">  
+          <a href="../1/2/6">1.2.6 Child care subsidy (CCS) - description</a>  </li>
+          <li class="">  
+          <a href="../1/2/7">1.2.7 Additional child care subsidy (ACCS) - description</a>  </li>
+          <li class="">  
+          <a href="../3/2/8/30">3.2.8.30 Revised estimates</a>  </li>
+          <li class="">  
+          <a href="../3/5/4">3.5.4 Calculating CCS entitlement</a>  </li>
+          <li class="">  
+          <a href="../4/1/2">4.1.2 Protection of payment</a>  </li>
+          <li class="">  
+          <a href="../6/4/1/30">6.4.1.30 Reconciliation process</a>  </li>
+      </ul>      <h3>67EC</h3>
+    <ul>          <li class="">  
+          <a href="../1/2/6">1.2.6 Child care subsidy (CCS) - description</a>  </li>
+          <li class="">  
+          <a href="../1/2/7">1.2.7 Additional child care subsidy (ACCS) - description</a>  </li>
+          <li class="">  
+          <a href="../4/6/1/30">4.6.1.30 CCS - initial payments</a>  </li>
+      </ul>      <h3>67FB</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/n/40">1.1.N.40 Notification period</a>  </li>
+          <li class="">  
+          <a href="../2/6/2/10">2.6.2.10 CCS - eligibility for children aged 13 &amp; under &amp; attending secondary school or aged 14 or above</a>  </li>
+          <li class="">  
+          <a href="../2/6/4">2.6.4 CCS eligibility - death of an eligible child or recipient</a>  </li>
+          <li class="">  
+          <a href="../3/5/2/10">3.5.2.10 CCS - activity test - general</a>  </li>
+          <li class="">  
+          <a href="../3/5/2/40">3.5.2.40 CCS - other recognised activities</a>  </li>
+          <li class="">  
+          <a href="../3/5/3">3.5.3 CCS - hourly rate caps</a>  </li>
+          <li class="">  
+          <a href="../5/2/1/10">5.2.1.10 Change of circumstances - general provisions</a>  </li>
+          <li class="">  
+          <a href="../5/2/1/40">5.2.1.40 CCS &amp; ACCS - change in activity/income</a>  </li>
+          <li class="">  
+          <a href="../5/2/1/50">5.2.1.50 ACCS - change of circumstances</a>  </li>
+          <li class="">  
+          <a href="../6/2">6.2 Internal reviews</a>  </li>
+      </ul>      <h3>67FC</h3>
+    <ul>          <li class="">  
+          <a href="../5/2/1/50">5.2.1.50 ACCS - change of circumstances</a>  </li>
+      </ul>      <h3>67FI</h3>
+    <ul>          <li class="">  
+          <a href="../2/8/2/60">2.8.2.60 ACCS (grandparent) - annual reminder to review circumstances</a>  </li>
+          <li class="">  
+          <a href="../2/8/3/40">2.8.3.40 ACCS (temporary financial hardship) - determinations</a>  </li>
+      </ul>      <h3>67GB</h3>
+    <ul>          <li class="">  
+          <a href="../4/1/2">4.1.2 Protection of payment</a>  </li>
+          <li class="">  
+          <a href="../4/3/6">4.3.6 Payments to a third party</a>  </li>
+      </ul>      <h3>67GC</h3>
+    <ul>          <li class="">  
+          <a href="../4/1/2">4.1.2 Protection of payment</a>  </li>
+      </ul>      <h3>69</h3>
+    <ul>          <li class="">  
+          <a href="../7/1/3">7.1.3 FA debts - CCS approved providers</a>  </li>
+      </ul>      <h3>70</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/d/60">1.1.D.60 Debt, debtor</a>  </li>
+          <li class="">  
+          <a href="../4/1/2">4.1.2 Protection of payment</a>  </li>
+          <li class="">  
+          <a href="../7/1/1">7.1.1 FA debts - general provisions</a>  </li>
+          <li class="">  
+          <a href="../7/2/3">7.2.3 Debt recovery from FA entitlement</a>  </li>
+      </ul>      <h3>71</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/d/60">1.1.D.60 Debt, debtor</a>  </li>
+          <li class="">  
+          <a href="../2/1/1/110">2.1.1.110 Death of an FTB or regular care child</a>  </li>
+          <li class="">  
+          <a href="../4/4/2/10">4.4.2.10 Change in non-income related circumstances</a>  </li>
+          <li class="">  
+          <a href="../6/4/5/30">6.4.5.30 Death of FTB or regular care child</a>  </li>
+          <li class="">  
+          <a href="../7/1/1">7.1.1 FA debts - general provisions</a>  </li>
+          <li class="">  
+          <a href="../7/1/2">7.1.2 FA debts - individuals &amp; ACOs</a>  </li>
+      </ul>      <h3>71A</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/d/60">1.1.D.60 Debt, debtor</a>  </li>
+          <li class="">  
+          <a href="../1/2/8/10">1.2.8.10 FTB advance payments - details</a>  </li>
+          <li class="">  
+          <a href="../1/2/8/20">1.2.8.20 Variations to FTB advance repayment period</a>  </li>
+          <li class="">  
+          <a href="../6/4/1/20">6.4.1.20 Payments affected by reconciliation</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/20">6.4.3.20 Non-lodger process</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/30">6.4.3.30 Outcomes of non-lodger process</a>  </li>
+          <li class="">  
+          <a href="../7/1/2">7.1.2 FA debts - individuals &amp; ACOs</a>  </li>
+          <li class="">  
+          <a href="../7/6">7.6 FTB advance debts</a>  </li>
+      </ul>      <h3>71B</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/d/60">1.1.D.60 Debt, debtor</a>  </li>
+          <li class="">  
+          <a href="../6/4/1/30">6.4.1.30 Reconciliation process</a>  </li>
+          <li class="">  
+          <a href="../7/1/1">7.1.1 FA debts - general provisions</a>  </li>
+          <li class="">  
+          <a href="../7/1/2">7.1.2 FA debts - individuals &amp; ACOs</a>  </li>
+          <li class="">  
+          <a href="../7/1/3">7.1.3 FA debts - CCS approved providers</a>  </li>
+      </ul>      <h3>71C</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/d/60">1.1.D.60 Debt, debtor</a>  </li>
+          <li class="">  
+          <a href="../6/4/1/30">6.4.1.30 Reconciliation process</a>  </li>
+          <li class="">  
+          <a href="../7/1/1">7.1.1 FA debts - general provisions</a>  </li>
+          <li class="">  
+          <a href="../7/1/2">7.1.2 FA debts - individuals &amp; ACOs</a>  </li>
+          <li class="">  
+          <a href="../7/1/3">7.1.3 FA debts - CCS approved providers</a>  </li>
+          <li class="">  
+          <a href="../7/2/10">7.2.10 Debt recovery of CCS/ACCS by offsetting - prior to reconciliation</a>  </li>
+      </ul>      <h3>71D</h3>
+    <ul>          <li class="">  
+          <a href="../7/1/3">7.1.3 FA debts - CCS approved providers</a>  </li>
+      </ul>      <h3>71E</h3>
+    <ul>          <li class="">  
+          <a href="../7/1/1">7.1.1 FA debts - general provisions</a>  </li>
+          <li class="">  
+          <a href="../7/1/2">7.1.2 FA debts - individuals &amp; ACOs</a>  </li>
+      </ul>      <h3>71F</h3>
+    <ul>          <li class="">  
+          <a href="../7/1/1">7.1.1 FA debts - general provisions</a>  </li>
+      </ul>      <h3>71G</h3>
+    <ul>          <li class="">  
+          <a href="../7/1/3">7.1.3 FA debts - CCS approved providers</a>  </li>
+      </ul>      <h3>71H</h3>
+    <ul>          <li class="">  
+          <a href="../7/1/1">7.1.1 FA debts - general provisions</a>  </li>
+      </ul>      <h3>72</h3>
+    <ul>          <li class="">  
+          <a href="../1/2/20">1.2.20 2020 economic support payment (2020 ESP)</a>  </li>
+      </ul>      <h3>73</h3>
+    <ul>          <li class="">  
+          <a href="../7/1/2">7.1.2 FA debts - individuals &amp; ACOs</a>  </li>
+      </ul>      <h3>75</h3>
+    <ul>          <li class="">  
+          <a href="../7/1/2">7.1.2 FA debts - individuals &amp; ACOs</a>  </li>
+      </ul>      <h3>76</h3>
+    <ul>          <li class="">  
+          <a href="../5/1/1/10">5.1.1.10 Power to obtain information</a>  </li>
+          <li class="">  
+          <a href="../5/1/1/20">5.1.1.20 Obtaining information about debtors</a>  </li>
+          <li class="">  
+          <a href="../5/1/2">5.1.2 Comparing information with other agencies</a>  </li>
+      </ul>      <h3>77</h3>
+    <ul>          <li class="">  
+          <a href="../7/1/1">7.1.1 FA debts - general provisions</a>  </li>
+      </ul>      <h3>78</h3>
+    <ul>          <li class="">  
+          <a href="../7/1/1">7.1.1 FA debts - general provisions</a>  </li>
+          <li class="">  
+          <a href="../7/1/4">7.1.4 FA debts - interest charge on debts</a>  </li>
+      </ul>      <h3>78A</h3>
+    <ul>          <li class="">  
+          <a href="../7/1/1">7.1.1 FA debts - general provisions</a>  </li>
+          <li class="">  
+          <a href="../7/1/4">7.1.4 FA debts - interest charge on debts</a>  </li>
+      </ul>      <h3>78C</h3>
+    <ul>          <li class="">  
+          <a href="../7/1/4">7.1.4 FA debts - interest charge on debts</a>  </li>
+      </ul>      <h3>78D</h3>
+    <ul>          <li class="">  
+          <a href="../7/1/4">7.1.4 FA debts - interest charge on debts</a>  </li>
+      </ul>      <h3>78E</h3>
+    <ul>          <li class="">  
+          <a href="../7/1/4">7.1.4 FA debts - interest charge on debts</a>  </li>
+      </ul>      <h3>80</h3>
+    <ul>          <li class="">  
+          <a href="../7/2/7">7.2.7 Debt recovery by garnishee</a>  </li>
+      </ul>      <h3>82</h3>
+    <ul>          <li class="">  
+          <a href="../6/4/1/30">6.4.1.30 Reconciliation process</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/40">6.4.3.40 Prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../7/1/1">7.1.1 FA debts - general provisions</a>  </li>
+          <li class="">  
+          <a href="../7/2/1">7.2.1 Debt recovery - general provisions</a>  </li>
+          <li class="">  
+          <a href="../7/2/10">7.2.10 Debt recovery of CCS/ACCS by offsetting - prior to reconciliation</a>  </li>
+      </ul>      <h3>84</h3>
+    <ul>          <li class="">  
+          <a href="../6/4/3/40">6.4.3.40 Prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../7/1/1">7.1.1 FA debts - general provisions</a>  </li>
+          <li class="">  
+          <a href="../7/2/2">7.2.2 Debt recovery by deduction</a>  </li>
+          <li class="">  
+          <a href="../7/3/1/30">7.3.1.30 Capacity to pay a debt</a>  </li>
+          <li class="">  
+          <a href="../7/3/2/30">7.3.2.30 Waiving a small debt</a>  </li>
+      </ul>      <h3>84A</h3>
+    <ul>          <li class="">  
+          <a href="../6/4/1/30">6.4.1.30 Reconciliation process</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/60">6.4.3.60 Removal of prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../7/2/3">7.2.3 Debt recovery from FA entitlement</a>  </li>
+          <li class="">  
+          <a href="../7/3/1/30">7.3.1.30 Capacity to pay a debt</a>  </li>
+          <li class="">  
+          <a href="../7/3/2/30">7.3.2.30 Waiving a small debt</a>  </li>
+      </ul>      <h3>87</h3>
+    <ul>          <li class="">  
+          <a href="../6/4/1/30">6.4.1.30 Reconciliation process</a>  </li>
+          <li class="">  
+          <a href="../7/2/5">7.2.5 Debt recovery from income tax refund</a>  </li>
+          <li class="">  
+          <a href="../7/3/1/30">7.3.1.30 Capacity to pay a debt</a>  </li>
+      </ul>      <h3>87A</h3>
+    <ul>          <li class="">  
+          <a href="../7/1/1">7.1.1 FA debts - general provisions</a>  </li>
+          <li class="">  
+          <a href="../7/2/10">7.2.10 Debt recovery of CCS/ACCS by offsetting - prior to reconciliation</a>  </li>
+          <li class="">  
+          <a href="../7/3/1/30">7.3.1.30 Capacity to pay a debt</a>  </li>
+          <li class="">  
+          <a href="../7/3/2/30">7.3.2.30 Waiving a small debt</a>  </li>
+      </ul>      <h3>88</h3>
+    <ul>          <li class="">  
+          <a href="../7/2/6">7.2.6 Debt recovery by legal proceedings</a>  </li>
+          <li class="">  
+          <a href="../7/3/1/20">7.3.1.20 Legally irrecoverable debts</a>  </li>
+      </ul>      <h3>89</h3>
+    <ul>          <li class="">  
+          <a href="../7/2/7">7.2.7 Debt recovery by garnishee</a>  </li>
+      </ul>      <h3>91</h3>
+    <ul>          <li class="">  
+          <a href="../7/1/4">7.1.4 FA debts - interest charge on debts</a>  </li>
+          <li class="">  
+          <a href="../7/2/2">7.2.2 Debt recovery by deduction</a>  </li>
+          <li class="">  
+          <a href="../7/2/4">7.2.4 Debt recovery by cash</a>  </li>
+      </ul>      <h3>92</h3>
+    <ul>          <li class="">  
+          <a href="../7/2/2">7.2.2 Debt recovery by deduction</a>  </li>
+      </ul>      <h3>92A</h3>
+    <ul>          <li class="">  
+          <a href="../6/4/1/30">6.4.1.30 Reconciliation process</a>  </li>
+          <li class="">  
+          <a href="../7/2/3">7.2.3 Debt recovery from FA entitlement</a>  </li>
+      </ul>      <h3>93</h3>
+    <ul>          <li class="">  
+          <a href="../6/4/1/30">6.4.1.30 Reconciliation process</a>  </li>
+          <li class="">  
+          <a href="../7/2/5">7.2.5 Debt recovery from income tax refund</a>  </li>
+      </ul>      <h3>93A</h3>
+    <ul>          <li class="">  
+          <a href="../7/2/9">7.2.9 Recovery from financial institutions</a>  </li>
+      </ul>      <h3>93B</h3>
+    <ul>          <li class="">  
+          <a href="../7/2/1">7.2.1 Debt recovery - general provisions</a>  </li>
+      </ul>      <h3>95</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/g/10">1.1.G.10 Garnishee debtor, garnishee notice</a>  </li>
+          <li class="">  
+          <a href="../1/1/s/45">1.1.S.45 Severe financial hardship</a>  </li>
+          <li class="">  
+          <a href="../1/1/w/30">1.1.W.30 Write off</a>  </li>
+          <li class="">  
+          <a href="../6/4/4/20">6.4.4.20 Reconciliation - ex-partners</a>  </li>
+          <li class="">  
+          <a href="../6/4/5/10">6.4.5.10 Death of individual</a>  </li>
+          <li class="">  
+          <a href="../7/1/4">7.1.4 FA debts - interest charge on debts</a>  </li>
+          <li class="">  
+          <a href="../7/2/8">7.2.8 Effect of bankruptcy on debt recovery</a>  </li>
+          <li class="">  
+          <a href="../7/3/1/10">7.3.1.10 Writing-off a debt</a>  </li>
+          <li class="">  
+          <a href="../7/3/1/20">7.3.1.20 Legally irrecoverable debts</a>  </li>
+          <li class="">  
+          <a href="../7/3/1/30">7.3.1.30 Capacity to pay a debt</a>  </li>
+          <li class="">  
+          <a href="../7/7/1">7.7.1 Making a departure prohibition order</a>  </li>
+      </ul>      <h3>96</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/w/10">1.1.W.10 Waive</a>  </li>
+          <li class="">  
+          <a href="../7/3/2.1">7.3.2 Waiver of debts</a>  </li>
+      </ul>      <h3>97</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/s/45">1.1.S.45 Severe financial hardship</a>  </li>
+          <li class="">  
+          <a href="../1/1/w/10">1.1.W.10 Waive</a>  </li>
+          <li class="">  
+          <a href="../7/3/2/10">7.3.2.10 Waiving a debt arising from administrative error</a>  </li>
+      </ul>      <h3>98</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/w/10">1.1.W.10 Waive</a>  </li>
+          <li class="">  
+          <a href="../7/3/2/20">7.3.2.20 Waiving a debt relating to an offence</a>  </li>
+      </ul>      <h3>99</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/w/10">1.1.W.10 Waive</a>  </li>
+          <li class="">  
+          <a href="../7/3/2/30">7.3.2.30 Waiving a small debt</a>  </li>
+      </ul>      <h3>100</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/w/10">1.1.W.10 Waive</a>  </li>
+          <li class="">  
+          <a href="../7/3/2/40">7.3.2.40 Waiver in relation to settlements</a>  </li>
+      </ul>      <h3>101</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/w/10">1.1.W.10 Waive</a>  </li>
+          <li class="">  
+          <a href="../2/1/1/110">2.1.1.110 Death of an FTB or regular care child</a>  </li>
+          <li class="">  
+          <a href="../6/4/5/30">6.4.5.30 Death of FTB or regular care child</a>  </li>
+          <li class="">  
+          <a href="../7/3/2/50">7.3.2.50 Waiver in special circumstances</a>  </li>
+      </ul>      <h3>102</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/w/10">1.1.W.10 Waive</a>  </li>
+          <li class="">  
+          <a href="../7/3/2/60">7.3.2.60 Waiving a particular class of debt</a>  </li>
+      </ul>      <h3>102A</h3>
+    <ul>          <li class="">  
+          <a href="../7/7/1">7.7.1 Making a departure prohibition order</a>  </li>
+      </ul>      <h3>102B</h3>
+    <ul>          <li class="">  
+          <a href="../7/7/1">7.7.1 Making a departure prohibition order</a>  </li>
+      </ul>      <h3>102C</h3>
+    <ul>          <li class="">  
+          <a href="../7/7/1">7.7.1 Making a departure prohibition order</a>  </li>
+      </ul>      <h3>102D</h3>
+    <ul>          <li class="">  
+          <a href="../7/7/1">7.7.1 Making a departure prohibition order</a>  </li>
+      </ul>      <h3>102E</h3>
+    <ul>          <li class="">  
+          <a href="../7/7/1">7.7.1 Making a departure prohibition order</a>  </li>
+      </ul>      <h3>102F</h3>
+    <ul>          <li class="">  
+          <a href="../7/7/1">7.7.1 Making a departure prohibition order</a>  </li>
+      </ul>      <h3>102G</h3>
+    <ul>          <li class="">  
+          <a href="../7/7/2">7.7.2 Departure authorisation certificates</a>  </li>
+      </ul>      <h3>102H</h3>
+    <ul>          <li class="">  
+          <a href="../7/7/2">7.7.2 Departure authorisation certificates</a>  </li>
+      </ul>      <h3>102J</h3>
+    <ul>          <li class="">  
+          <a href="../7/7/2">7.7.2 Departure authorisation certificates</a>  </li>
+      </ul>      <h3>102K</h3>
+    <ul>          <li class="">  
+          <a href="../7/7/2">7.7.2 Departure authorisation certificates</a>  </li>
+      </ul>      <h3>102L</h3>
+    <ul>          <li class="">  
+          <a href="../7/7/2">7.7.2 Departure authorisation certificates</a>  </li>
+      </ul>      <h3>102M</h3>
+    <ul>          <li class="">  
+          <a href="../7/7/2">7.7.2 Departure authorisation certificates</a>  </li>
+      </ul>      <h3>102S</h3>
+    <ul>          <li class="">  
+          <a href="../7/7/1">7.7.1 Making a departure prohibition order</a>  </li>
+      </ul>      <h3>102T</h3>
+    <ul>          <li class="">  
+          <a href="../7/7/1">7.7.1 Making a departure prohibition order</a>  </li>
+      </ul>      <h3>102U</h3>
+    <ul>          <li class="">  
+          <a href="../7/7/1">7.7.1 Making a departure prohibition order</a>  </li>
+          <li class="">  
+          <a href="../7/7/2">7.7.2 Departure authorisation certificates</a>  </li>
+      </ul>      <h3>103A</h3>
+    <ul>          <li class="">  
+          <a href="../6/4/1/30">6.4.1.30 Reconciliation process</a>  </li>
+          <li class="">  
+          <a href="../7/2/10">7.2.10 Debt recovery of CCS/ACCS by offsetting - prior to reconciliation</a>  </li>
+      </ul>      <h3>103B</h3>
+    <ul>          <li class="">  
+          <a href="../6/4/1/30">6.4.1.30 Reconciliation process</a>  </li>
+      </ul>      <h3>103C</h3>
+    <ul>          <li class="">  
+          <a href="../6/4/1/30">6.4.1.30 Reconciliation process</a>  </li>
+      </ul>      <h3>104</h3>
+    <ul>          <li class="">  
+          <a href="../1/4/4">1.4.4 Liability of decision makers</a>  </li>
+          <li class="">  
+          <a href="../5/2/1/50">5.2.1.50 ACCS - change of circumstances</a>  </li>
+          <li class="">  
+          <a href="../6/1">6.1 Centrelink review &amp; appeal process</a>  </li>
+          <li class="">  
+          <a href="../6/2">6.2 Internal reviews</a>  </li>
+      </ul>      <h3>105</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/f/60">1.1.F.60 Full-time secondary study (FTB)</a>  </li>
+          <li class="">  
+          <a href="../4/3/1/30">4.3.1.30 Mandatory continuous adjustment of FTB instalments</a>  </li>
+          <li class="">  
+          <a href="../4/15/2">4.15.2 Determination of SBP claims</a>  </li>
+          <li class="">  
+          <a href="../6/1">6.1 Centrelink review &amp; appeal process</a>  </li>
+          <li class="">  
+          <a href="../6/2">6.2 Internal reviews</a>  </li>
+          <li class="">  
+          <a href="../6/4/1.1">6.4.1 Overview of reconciliation</a>  </li>
+          <li class="">  
+          <a href="../6/4/1/30">6.4.1.30 Reconciliation process</a>  </li>
+          <li class="">  
+          <a href="../6/7">6.7 SIFS review &amp; payment process</a>  </li>
+      </ul>      <h3>105A</h3>
+    <ul>          <li class="">  
+          <a href="../6/2">6.2 Internal reviews</a>  </li>
+      </ul>      <h3>105B</h3>
+    <ul>          <li class="">  
+          <a href="../1/2/10">1.2.10 Energy supplement (ES) - description</a>  </li>
+      </ul>      <h3>105C</h3>
+    <ul>          <li class="">  
+          <a href="../3/5/2/10">3.5.2.10 CCS - activity test - general</a>  </li>
+          <li class="">  
+          <a href="../5/2/1/40">5.2.1.40 CCS &amp; ACCS - change in activity/income</a>  </li>
+          <li class="">  
+          <a href="../6/2">6.2 Internal reviews</a>  </li>
+          <li class="">  
+          <a href="../6/4/1/30">6.4.1.30 Reconciliation process</a>  </li>
+      </ul>      <h3>105D</h3>
+    <ul>          <li class="">  
+          <a href="../6/2">6.2 Internal reviews</a>  </li>
+          <li class="">  
+          <a href="../6/4/1/30">6.4.1.30 Reconciliation process</a>  </li>
+      </ul>      <h3>105E</h3>
+    <ul>          <li class="">  
+          <a href="../6/4/1/30">6.4.1.30 Reconciliation process</a>  </li>
+      </ul>      <h3>106</h3>
+    <ul>          <li class="">  
+          <a href="../6/1">6.1 Centrelink review &amp; appeal process</a>  </li>
+          <li class="">  
+          <a href="../6/2">6.2 Internal reviews</a>  </li>
+          <li class="">  
+          <a href="../6/4/1/30">6.4.1.30 Reconciliation process</a>  </li>
+      </ul>      <h3>106A</h3>
+    <ul>          <li class="">  
+          <a href="../6/1">6.1 Centrelink review &amp; appeal process</a>  </li>
+          <li class="">  
+          <a href="../6/2">6.2 Internal reviews</a>  </li>
+          <li class="">  
+          <a href="../6/4/1/30">6.4.1.30 Reconciliation process</a>  </li>
+      </ul>      <h3>107</h3>
+    <ul>          <li class="">  
+          <a href="../3/1/5/70">3.1.5.70 Exemptions from the maintenance action test</a>  </li>
+          <li class="">  
+          <a href="../6/2">6.2 Internal reviews</a>  </li>
+          <li class="">  
+          <a href="../6/4/1/40">6.4.1.40 Outcomes of reconciliation</a>  </li>
+      </ul>      <h3>108</h3>
+    <ul>          <li class="">  
+          <a href="../4/2/3/20">4.2.3.20 Determining an FTB claim</a>  </li>
+          <li class="">  
+          <a href="../6/1">6.1 Centrelink review &amp; appeal process</a>  </li>
+          <li class="">  
+          <a href="../6/2">6.2 Internal reviews</a>  </li>
+      </ul>      <h3>109A</h3>
+    <ul>          <li class="">  
+          <a href="../6/1">6.1 Centrelink review &amp; appeal process</a>  </li>
+          <li class="">  
+          <a href="../6/2">6.2 Internal reviews</a>  </li>
+          <li class="">  
+          <a href="../6/4/3/50">6.4.3.50 Deferral of prohibition of FTB based on an estimate</a>  </li>
+          <li class="">  
+          <a href="../6/7">6.7 SIFS review &amp; payment process</a>  </li>
+      </ul>      <h3>109B</h3>
+    <ul>          <li class="">  
+          <a href="../6/1">6.1 Centrelink review &amp; appeal process</a>  </li>
+          <li class="">  
+          <a href="../6/2">6.2 Internal reviews</a>  </li>
+      </ul>      <h3>109C</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/a/140">1.1.A.140 Authorised review officer</a>  </li>
+          <li class="">  
+          <a href="../6/1">6.1 Centrelink review &amp; appeal process</a>  </li>
+      </ul>      <h3>109D</h3>
+    <ul>          <li class="">  
+          <a href="../3/1/6/55">3.1.6.55 Child support case ended - payer not a parent of the child</a>  </li>
+          <li class="">  
+          <a href="../6/2">6.2 Internal reviews</a>  </li>
+          <li class="">  
+          <a href="../6/7">6.7 SIFS review &amp; payment process</a>  </li>
+      </ul>      <h3>109DB</h3>
+    <ul>          <li class="">  
+          <a href="../6/2">6.2 Internal reviews</a>  </li>
+      </ul>      <h3>109DC</h3>
+    <ul>          <li class="">  
+          <a href="../6/2">6.2 Internal reviews</a>  </li>
+      </ul>      <h3>109E</h3>
+    <ul>          <li class="">  
+          <a href="../6/2">6.2 Internal reviews</a>  </li>
+      </ul>      <h3>109G</h3>
+    <ul>          <li class="">  
+          <a href="../6/2">6.2 Internal reviews</a>  </li>
+      </ul>      <h3>109H</h3>
+    <ul>          <li class="">  
+          <a href="../6/1">6.1 Centrelink review &amp; appeal process</a>  </li>
+          <li class="">  
+          <a href="../6/2">6.2 Internal reviews</a>  </li>
+      </ul>      <h3>110</h3>
+    <ul>          <li class="">  
+          <a href="../6/3/1">6.3.1 AAT first reviews</a>  </li>
+      </ul>      <h3>111</h3>
+    <ul>          <li class="">  
+          <a href="../6/1">6.1 Centrelink review &amp; appeal process</a>  </li>
+          <li class="">  
+          <a href="../6/3/1">6.3.1 AAT first reviews</a>  </li>
+          <li class="">  
+          <a href="../6/7">6.7 SIFS review &amp; payment process</a>  </li>
+      </ul>      <h3>111A</h3>
+    <ul>          <li class="">  
+          <a href="../6/3/1">6.3.1 AAT first reviews</a>  </li>
+          <li class="">  
+          <a href="../6/7">6.7 SIFS review &amp; payment process</a>  </li>
+      </ul>      <h3>113</h3>
+    <ul>          <li class="">  
+          <a href="../6/3/1">6.3.1 AAT first reviews</a>  </li>
+      </ul>      <h3>115</h3>
+    <ul>          <li class="">  
+          <a href="../6/3/1">6.3.1 AAT first reviews</a>  </li>
+      </ul>      <h3>123</h3>
+    <ul>          <li class="">  
+          <a href="../6/3/1">6.3.1 AAT first reviews</a>  </li>
+      </ul>      <h3>124</h3>
+    <ul>          <li class="">  
+          <a href="../6/3/1">6.3.1 AAT first reviews</a>  </li>
+      </ul>      <h3>125</h3>
+    <ul>          <li class="">  
+          <a href="../6/3/1">6.3.1 AAT first reviews</a>  </li>
+      </ul>      <h3>128</h3>
+    <ul>          <li class="">  
+          <a href="../6/1">6.1 Centrelink review &amp; appeal process</a>  </li>
+          <li class="">  
+          <a href="../6/3/2">6.3.2 AAT second reviews</a>  </li>
+          <li class="">  
+          <a href="../6/7">6.7 SIFS review &amp; payment process</a>  </li>
+          <li class="">  
+          <a href="../7/1/2">7.1.2 FA debts - individuals &amp; ACOs</a>  </li>
+      </ul>      <h3>141</h3>
+    <ul>          <li class="">  
+          <a href="../6/3/1">6.3.1 AAT first reviews</a>  </li>
+          <li class="">  
+          <a href="../7/3/2/40">7.3.2.40 Waiver in relation to settlements</a>  </li>
+      </ul>      <h3>154</h3>
+    <ul>          <li class="">  
+          <a href="../4/1/1/70">4.1.1.70 TFN requirements for SBP</a>  </li>
+          <li class="">  
+          <a href="../4/2/4/20">4.2.4.20 Claim action 2 - claim not complete</a>  </li>
+          <li class="">  
+          <a href="../4/4/4">4.4.4 Reassessment of FTB - income support cancelled  or employment income nil rate period</a>  </li>
+          <li class="">  
+          <a href="../4/4/5/10">4.4.5.10 Failure to provide information - general provisions</a>  </li>
+          <li class="">  
+          <a href="../4/4/8">4.4.8 Review of FTB entitlements</a>  </li>
+          <li class="">  
+          <a href="../4/15/1">4.15.1 Claims for SBP</a>  </li>
+          <li class="">  
+          <a href="../5/1/1/10">5.1.1.10 Power to obtain information</a>  </li>
+          <li class="">  
+          <a href="../5/1/2">5.1.2 Comparing information with other agencies</a>  </li>
+          <li class="">  
+          <a href="../5/1/3/20">5.1.3.20 Exchanging Information within Centrelink</a>  </li>
+      </ul>      <h3>155</h3>
+    <ul>          <li class="">  
+          <a href="../5/1/1/20">5.1.1.20 Obtaining information about debtors</a>  </li>
+      </ul>      <h3>156</h3>
+    <ul>          <li class="">  
+          <a href="../5/1/1/20">5.1.1.20 Obtaining information about debtors</a>  </li>
+          <li class="">  
+          <a href="../5/1/3/20">5.1.3.20 Exchanging Information within Centrelink</a>  </li>
+      </ul>      <h3>157</h3>
+    <ul>          <li class="">  
+          <a href="../4/4/8">4.4.8 Review of FTB entitlements</a>  </li>
+          <li class="">  
+          <a href="../5/1/1/10">5.1.1.10 Power to obtain information</a>  </li>
+          <li class="">  
+          <a href="../5/1/2">5.1.2 Comparing information with other agencies</a>  </li>
+          <li class="">  
+          <a href="../5/1/3/20">5.1.3.20 Exchanging Information within Centrelink</a>  </li>
+          <li class="">  
+          <a href="../5/2/3">5.2.3 Information required for past period claims - former partners</a>  </li>
+      </ul>      <h3>157A</h3>
+    <ul>          <li class="">  
+          <a href="../5/1/1/10">5.1.1.10 Power to obtain information</a>  </li>
+          <li class="">  
+          <a href="../5/1/3/20">5.1.3.20 Exchanging Information within Centrelink</a>  </li>
+      </ul>      <h3>158</h3>
+    <ul>          <li class="">  
+          <a href="../4/4/4">4.4.4 Reassessment of FTB - income support cancelled  or employment income nil rate period</a>  </li>
+          <li class="">  
+          <a href="../4/4/5/10">4.4.5.10 Failure to provide information - general provisions</a>  </li>
+          <li class="">  
+          <a href="../5/1/1/10">5.1.1.10 Power to obtain information</a>  </li>
+      </ul>      <h3>159</h3>
+    <ul>          <li class="">  
+          <a href="../5/1/3/30">5.1.3.30 Offences &amp; penalties</a>  </li>
+      </ul>      <h3>162</h3>
+    <ul>          <li class="">  
+          <a href="../5/1/3.1">5.1.3 Protection of information</a>  </li>
+      </ul>      <h3>163</h3>
+    <ul>          <li class="">  
+          <a href="../5/1/3/30">5.1.3.30 Offences &amp; penalties</a>  </li>
+      </ul>      <h3>164</h3>
+    <ul>          <li class="">  
+          <a href="../5/1/3/30">5.1.3.30 Offences &amp; penalties</a>  </li>
+      </ul>      <h3>165</h3>
+    <ul>          <li class="">  
+          <a href="../5/1/3/30">5.1.3.30 Offences &amp; penalties</a>  </li>
+      </ul>      <h3>166</h3>
+    <ul>          <li class="">  
+          <a href="../2/1/1/90">2.1.1.90 Abducted, absent or missing child</a>  </li>
+          <li class="">  
+          <a href="../5/1/3/10">5.1.3.10 Disclosure of information by Centrelink</a>  </li>
+          <li class="">  
+          <a href="../5/1/3/30">5.1.3.30 Offences &amp; penalties</a>  </li>
+      </ul>      <h3>167</h3>
+    <ul>          <li class="">  
+          <a href="../5/1/3/10">5.1.3.10 Disclosure of information by Centrelink</a>  </li>
+      </ul>      <h3>168</h3>
+    <ul>          <li class="">  
+          <a href="../2/1/1/90">2.1.1.90 Abducted, absent or missing child</a>  </li>
+          <li class="">  
+          <a href="../4/1/3/10">4.1.3.10 Payment nominees</a>  </li>
+          <li class="">  
+          <a href="../4/1/3/20">4.1.3.20 Correspondence nominees</a>  </li>
+          <li class="">  
+          <a href="../4/1/3/30">4.1.3.30 Responsibilities of nominees</a>  </li>
+          <li class="">  
+          <a href="../5/1/3/10">5.1.3.10 Disclosure of information by Centrelink</a>  </li>
+      </ul>      <h3>169</h3>
+    <ul>          <li class="">  
+          <a href="../5/1/3/10">5.1.3.10 Disclosure of information by Centrelink</a>  </li>
+      </ul>      <h3>170</h3>
+    <ul>          <li class="">  
+          <a href="../5/1/3/10">5.1.3.10 Disclosure of information by Centrelink</a>  </li>
+      </ul>      <h3>194C</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/a/90">1.1.A.90 Approved provider, approved child care service, approved child care (CCS)</a>  </li>
+      </ul>      <h3>194D</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/a/90">1.1.A.90 Approved provider, approved child care service, approved child care (CCS)</a>  </li>
+      </ul>      <h3>200A</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/e/25">1.1.E.25 Enrolment (CCS)</a>  </li>
+          <li class="">  
+          <a href="../4/13/2/10">4.13.2.10 CCS - CWA enrolment</a>  </li>
+          <li class="">  
+          <a href="../4/13/2/20">4.13.2.20 CCS - relevant arrangement enrolment</a>  </li>
+      </ul>      <h3>200B</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/c/52">1.1.C.52 Complying written arrangement (CCS)</a>  </li>
+          <li class="">  
+          <a href="../2/6/5.1">2.6.5 CCS - requirements relating to CWA</a>  </li>
+      </ul>      <h3>200C</h3>
+    <ul>          <li class="">  
+          <a href="../2/6/5.1">2.6.5 CCS - requirements relating to CWA</a>  </li>
+      </ul>      <h3>200D</h3>
+    <ul>          <li class="">  
+          <a href="../2/6/4">2.6.4 CCS eligibility - death of an eligible child or recipient</a>  </li>
+          <li class="">  
+          <a href="../2/6/5.1">2.6.5 CCS - requirements relating to CWA</a>  </li>
+      </ul>      <h3>201D</h3>
+    <ul>          <li class="">  
+          <a href="../4/6/1/40">4.6.1.40 CCS - statements of entitlement</a>  </li>
+      </ul>      <h3>202A</h3>
+    <ul>          <li class="">  
+          <a href="../2/8/1/30">2.8.1.30 ACCS (child wellbeing) - certificates</a>  </li>
+      </ul>      <h3>202B</h3>
+    <ul>          <li class="">  
+          <a href="../2/8/1/30">2.8.1.30 ACCS (child wellbeing) - certificates</a>  </li>
+      </ul>      <h3>202C</h3>
+    <ul>          <li class="">  
+          <a href="../2/8/1/30">2.8.1.30 ACCS (child wellbeing) - certificates</a>  </li>
+      </ul>      <h3>204B</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/s/35">1.1.S.35 Session reports (CCS)</a>  </li>
+      </ul>      <h3>204K</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/a/75">1.1.A.75 Appropriate state or territory body (ACCS (child wellbeing))</a>  </li>
+          <li class="">  
+          <a href="../1/1/g/13">1.1.G.13 Giving notice (ACCS (child wellbeing))</a>  </li>
+          <li class="">  
+          <a href="../2/8/1/60">2.8.1.60 ACCS (child wellbeing) - giving notice</a>  </li>
+      </ul>      <h3>205A</h3>
+    <ul>          <li class="">  
+          <a href="../4/1/2">4.1.2 Protection of payment</a>  </li>
+      </ul>      <h3>219TA</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/c/55">1.1.C.55 Correspondence nominee</a>  </li>
+          <li class="">  
+          <a href="../1/1/n/20">1.1.N.20 Nominee</a>  </li>
+          <li class="">  
+          <a href="../1/1/p/74">1.1.P.74 Payment nominee</a>  </li>
+      </ul>      <h3>219TB</h3>
+    <ul>          <li class="">  
+          <a href="../2/1/1/110">2.1.1.110 Death of an FTB or regular care child</a>  </li>
+          <li class="">  
+          <a href="../4/1/3/10">4.1.3.10 Payment nominees</a>  </li>
+          <li class="">  
+          <a href="../4/3/6">4.3.6 Payments to a third party</a>  </li>
+      </ul>      <h3>219TD</h3>
+    <ul>          <li class="">  
+          <a href="../2/1/1/110">2.1.1.110 Death of an FTB or regular care child</a>  </li>
+          <li class="">  
+          <a href="../4/1/3/10">4.1.3.10 Payment nominees</a>  </li>
+          <li class="">  
+          <a href="../4/1/3/20">4.1.3.20 Correspondence nominees</a>  </li>
+      </ul>      <h3>219TE</h3>
+    <ul>          <li class="">  
+          <a href="../2/1/1/110">2.1.1.110 Death of an FTB or regular care child</a>  </li>
+          <li class="">  
+          <a href="../4/1/3/10">4.1.3.10 Payment nominees</a>  </li>
+          <li class="">  
+          <a href="../4/1/3/30">4.1.3.30 Responsibilities of nominees</a>  </li>
+      </ul>      <h3>219TG</h3>
+    <ul>          <li class="">  
+          <a href="../4/1/3/30">4.1.3.30 Responsibilities of nominees</a>  </li>
+      </ul>      <h3>219TJ</h3>
+    <ul>          <li class="">  
+          <a href="../4/1/3/30">4.1.3.30 Responsibilities of nominees</a>  </li>
+      </ul>      <h3>219TK</h3>
+    <ul>          <li class="">  
+          <a href="../4/1/3/30">4.1.3.30 Responsibilities of nominees</a>  </li>
+      </ul>      <h3>219TN</h3>
+    <ul>          <li class="">  
+          <a href="../4/1/3/10">4.1.3.10 Payment nominees</a>  </li>
+      </ul>      <h3>222</h3>
+    <ul>          <li class="">  
+          <a href="../4/4/9">4.4.9 Notices of reassessment</a>  </li>
+          <li class="">  
+          <a href="../6/1">6.1 Centrelink review &amp; appeal process</a>  </li>
+      </ul>      <h3>223</h3>
+    <ul>          <li class="">  
+          <a href="../6/1">6.1 Centrelink review &amp; appeal process</a>  </li>
+      </ul>      <h3>224</h3>
+    <ul>          <li class="">  
+          <a href="../4/4/9">4.4.9 Notices of reassessment</a>  </li>
+          <li class="">  
+          <a href="../6/1">6.1 Centrelink review &amp; appeal process</a>  </li>
+      </ul>      <h3>225</h3>
+    <ul>          <li class="">  
+          <a href="../4/1/2">4.1.2 Protection of payment</a>  </li>
+      </ul>      <h3>226</h3>
+    <ul>          <li class="">  
+          <a href="../4/1/2">4.1.2 Protection of payment</a>  </li>
+      </ul>      <h3>227</h3>
+    <ul>          <li class="">  
+          <a href="../2/7">2.7 Entitlement to FTB advance payment</a>  </li>
+          <li class="">  
+          <a href="../4/1/2">4.1.2 Protection of payment</a>  </li>
+          <li class="">  
+          <a href="../7/4">7.4 Child support debts</a>  </li>
+      </ul>      <h3>228</h3>
+    <ul>          <li class="">  
+          <a href="../1/1/d/75">1.1.D.75 Designated child support child (FTB)</a>  </li>
+          <li class="">  
+          <a href="../4/1/2">4.1.2 Protection of payment</a>  </li>
+          <li class="">  
+          <a href="../7/4">7.4 Child support debts</a>  </li>
+      </ul>      <h3>230</h3>
+    <ul>          <li class="">  
+          <a href="../4/4/9">4.4.9 Notices of reassessment</a>  </li>
+      </ul>      <h3>235</h3>
+    <ul>          <li class="">  
+          <a href="../1/2/8.1">1.2.8 FTB advance - description</a>  </li>
+      </ul></div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../contact-us">Contact us</a></li>
@@ -1377,8 +1670,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
-<script type="text/javascript" src="../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
-<script type="text/javascript" src="../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+<script type="text/javascript" src="../../sites/default/files/js/js_IkilKWehdX07Wbi3Cg-T6yf5sLTu5FfOT2__edFF9eM.js"></script>
+<script type="text/javascript" src="https://cdn1.readspeaker.com/script/5931/webReader/webReader.js?pids=wr&amp;notools=1&amp;disable=popupplayback&amp;qrxyi9"></script>
 </body>
 </html>

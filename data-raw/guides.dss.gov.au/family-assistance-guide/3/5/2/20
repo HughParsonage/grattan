@@ -2,27 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<link rel="shortlink" href="../../../../node/6478" />
-<link rel="canonical" href="20" />
-<meta name="viewport" content="width=device-width" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>3.5.2.20 Calculating the Approved Care Adjustment Percentage | Family Assistance Guide</title>
-<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<meta name="viewport" content="width=device-width" />
+<link rel="canonical" href="20" />
+<link rel="shortlink" href="../../../../node/6478" />
+<title>3.5.2.20 CCS - activity test exemptions | Family Assistance Guide</title>
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_Q4XrxgEkbadGDm1J7AHUHHmbcMJ2_hbMfrrzrm9Ne_I.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
-<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
-<script type="text/javascript" src="../../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
-<script type="text/javascript" src="../../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
-<script type="text/javascript" src="../../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_d905I2WxoGGQW6uS7jkC73mqKhSejey6jciEdxo9cJI.css" media="all" />
+<script type="text/javascript" src="../../../../sites/default/files/js/js_yMSKTzBO0KmozyLwajzFOrrt_kto_9mtccAkb0rm7gc.js"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_FA2YSy0R3kB2AU_wIOLoSR0sJX4ZYjdPuPaRFd2ZDyw.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+window.rsConf = { ui: { tools: {translation: false, dictionary: false}}};
 //--><!]]>
 </script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_rsGiM5M1ffe6EhN-RnhM5f3pDyJ8ZAPFJNKpfjtepLk.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_-oEDdwe4XpUqUj4W0KJs96ENaXIrGvjBvIP-WYYBi54.js"></script>
 <script type="text/javascript" src="../../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"Kk6TBDjOI3SnccoxnYv2hoB_sJYJWtYkFg7-M6SXjks","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/family-assistance-guide\/3\/5\/2\/20":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"CD7aFdpcQPUoqXJL0-sAQ1l1fTclM5T1JsRt1069DrQ","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"https:\/\/cdn1.readspeaker.com\/script\/5931\/webReader\/webReader.js?pids=wr\u0026notools=1\u0026disable=popupplayback":1,"misc\/jquery.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"0":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"1":1,"sites\/all\/modules\/extlink\/js\/extlink.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/family-assistance-guide\/3\/5\/2\/20":true},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)","extUseFontAwesome":false}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -35,172 +40,132 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <nav id="global">
 	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
 <div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<ul class="menu"><li class="first leaf has-children menu-mlid-489"><a href="../../../../guide-social-security-law.1">Social Security Guide</a></li>
+<li class="leaf has-children active-trail menu-mlid-491"><a href="../../../../family-assistance-guide.1" class="active-trail">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-490"><a href="../../../../paid-parental-leave-guide.1">Paid Parental Leave Guide</a></li>
+<li class="leaf has-children menu-mlid-513"><a href="../../../../child-support-guide.1">Child Support Guide</a></li>
+<li class="leaf menu-mlid-7596"><a href="../../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
 <li class="leaf menu-mlid-7597"><a href="../../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
-<li class="leaf has-children menu-mlid-513"><a href="../../../../child-support-guide">Child Support Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-491"><a href="../../../../family-assistance-guide" class="active-trail">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../../guide-social-security-law">Guide to Social Security Law</a></li>
-<li class="last leaf has-children menu-mlid-490"><a href="../../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+<li class="last leaf has-children menu-mlid-19951"><a href="../../../../national-redress-guide" title="">National Redress Guide</a></li>
 </ul></div></nav>
 <header role="banner">
 	<a href="../../../../index.html" rel="home"><img src="../../../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
 <p class="site-name">Guides to Social Policy Law</p>
 <form class="search-form" role="search" action="20" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
- <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+ <input class="custom-search-box form-text" placeholder="Search" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-tsUhBSWo0CgLPmkhpUyeZTnwpA3-GI5MxyF9nzB6Dko" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-HExvlg8l1aQ2boOhnAiMBkK25PaGnzjBYYr_oIuwNuc" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Family Assistance Guide</h2>
-<p>Version 1.203 - Released 7 May 2018</p>
+<p>Version 1.230 - Released 1 July 2021</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7283"><a href="../../../../family-assistance-guide" title="">Using the Family Assistance Guide</a></li>
-<li class="collapsed menu-mlid-2274"><a href="../../../updates">What&#039;s New</a></li>
-<li class="collapsed menu-mlid-2266"><a href="../../../1">1 Key Terms &amp; Principles</a></li>
-<li class="collapsed menu-mlid-2267"><a href="../../../2">2 Eligibility</a></li>
-<li class="expanded active-trail menu-mlid-2268"><a href="../../../3" class="active-trail">3 Rate Calculation</a><ul class="menu"><li class="first collapsed menu-mlid-1826"><a href="../../1">3.1 FTB Rate Calculation</a></li>
-<li class="collapsed menu-mlid-1829"><a href="../../2">3.2 Adjusted Taxable Income</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7283"><a href="../../../../family-assistance-guide.1" title="">Using the Family Assistance Guide</a></li>
+<li class="collapsed menu-mlid-2274"><a href="../../../updates.1">What&#039;s new</a></li>
+<li class="collapsed menu-mlid-2266"><a href="../../../1.1">1 Key terms &amp; principles</a></li>
+<li class="collapsed menu-mlid-2267"><a href="../../../2.1">2 Eligibility</a></li>
+<li class="expanded active-trail menu-mlid-2268"><a href="../../../3.1" class="active-trail">3 Rate calculation</a><ul class="menu"><li class="first collapsed menu-mlid-1826"><a href="../../1.1">3.1 FTB rate calculation</a></li>
+<li class="collapsed menu-mlid-1829"><a href="../../2.1">3.2 Adjusted taxable income</a></li>
 <li class="leaf menu-mlid-1830"><a href="../../3">3.3 Number not currently in use</a></li>
 <li class="leaf menu-mlid-1831"><a href="../../4">3.4 Number not currently in use</a></li>
-<li class="expanded active-trail menu-mlid-1832"><a href="../../5" class="active-trail">3.5 CCB Rate Calculation</a><ul class="menu"><li class="first leaf menu-mlid-1745"><a href="../1">3.5.1 CCB Entitlement - General Provisions</a></li>
-<li class="expanded active-trail menu-mlid-1746"><a href="../2" class="active-trail">3.5.2 Calculating Approved Care CCB Entitlement</a><ul class="menu"><li class="first leaf menu-mlid-1736"><a href="10">3.5.2.10 CCB Overall Rate Calculation - Approved Care</a></li>
-<li class="leaf active-trail active menu-mlid-1737"><a href="20" class="active-trail active">3.5.2.20 Calculating the Approved Care Adjustment Percentage</a></li>
-<li class="leaf menu-mlid-1738"><a href="30">3.5.2.30 Calculating the Approved Care CCB Percentage</a></li>
-<li class="leaf menu-mlid-1739"><a href="40">3.5.2.40 Calculating the Approved Care Taxable Income Percentage</a></li>
-<li class="leaf menu-mlid-1740"><a href="50">3.5.2.50 Calculating the Approved Care Multiple Child Percentage</a></li>
-<li class="leaf menu-mlid-1741"><a href="60">3.5.2.60 Number not currently in use</a></li>
-<li class="leaf menu-mlid-1742"><a href="70">3.5.2.70 CCB Adjustment Percentage Example - 1 Child, Income below Upper Threshold</a></li>
-<li class="leaf menu-mlid-1743"><a href="80">3.5.2.80 CCB Adjustment Percentage Example - 4 Children, Income above Upper Threshold</a></li>
-<li class="last leaf menu-mlid-1744"><a href="90">3.5.2.90 CCB Adjustment Percentage Example - 2 Children, Income above Upper Threshold</a></li>
+<li class="expanded active-trail menu-mlid-1832"><a href="../../5.1" class="active-trail">3.5 CCS entitlement</a><ul class="menu"><li class="first leaf menu-mlid-1745"><a href="../1">3.5.1 CCS - combined annual ATI</a></li>
+<li class="expanded active-trail menu-mlid-1746"><a href="../2.1" class="active-trail">3.5.2 CCS - activity test</a><ul class="menu"><li class="first leaf menu-mlid-1736"><a href="10">3.5.2.10 CCS - activity test - general</a></li>
+<li class="leaf active-trail active menu-mlid-1737"><a href="20" class="active-trail active">3.5.2.20 CCS - activity test exemptions</a></li>
+<li class="leaf menu-mlid-1738"><a href="30">3.5.2.30 ACCS (transition to work) - activity test</a></li>
+<li class="last leaf menu-mlid-1739"><a href="40">3.5.2.40 CCS - other recognised activities</a></li>
 </ul></li>
-<li class="leaf menu-mlid-20526"><a href="../3">3.5.3 Number not currently in use</a></li>
-<li class="leaf menu-mlid-20536"><a href="../4">3.5.4 Number not currently in use</a></li>
-<li class="last leaf menu-mlid-20801"><a href="../5">3.5.5 Number not currently in use</a></li>
+<li class="leaf menu-mlid-20526"><a href="../3">3.5.3 CCS - hourly rate caps</a></li>
+<li class="leaf menu-mlid-20536"><a href="../4">3.5.4 Calculating CCS entitlement</a></li>
+<li class="last leaf menu-mlid-20801"><a href="../5">3.5.5 CCS &amp; ACCS - exceptional circumstances</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-1833"><a href="../../6">3.6 Historical Rates</a></li>
-<li class="collapsed menu-mlid-1837"><a href="../../7">3.7 JETCCFA Rate Calculation</a></li>
-<li class="collapsed menu-mlid-1834"><a href="../../8">3.8 CCR Rate Calculation</a></li>
-<li class="leaf menu-mlid-1835"><a href="../../9">3.9 SKB Rate</a></li>
-<li class="leaf menu-mlid-1827"><a href="../../10">3.10 Determining the SIFS Rate</a></li>
-<li class="leaf menu-mlid-1836"><a href="../../11">3.11 NBS Rate</a></li>
-<li class="last leaf menu-mlid-1828"><a href="../../12">3.12 SBP Rate</a></li>
+<li class="collapsed menu-mlid-1833"><a href="../../6.1">3.6 Historical rates</a></li>
+<li class="collapsed menu-mlid-1837"><a href="../../7.1">3.7 ACCS rate calculation</a></li>
+<li class="leaf menu-mlid-1834"><a href="../../8.1">3.8 Number not currently in use</a></li>
+<li class="leaf menu-mlid-1835"><a href="../../9">3.9 Number not currently in use</a></li>
+<li class="leaf menu-mlid-1827"><a href="../../10">3.10 Determining the SIFS rate</a></li>
+<li class="leaf menu-mlid-1836"><a href="../../11">3.11 NBS rate</a></li>
+<li class="last leaf menu-mlid-1828"><a href="../../12">3.12 SBP rate</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-2269"><a href="../../../4">4 Claims &amp; Payments</a></li>
-<li class="collapsed menu-mlid-2270"><a href="../../../5">5 Gathering Information</a></li>
-<li class="collapsed menu-mlid-2271"><a href="../../../6">6 Review &amp; Reconciliation</a></li>
-<li class="collapsed menu-mlid-2272"><a href="../../../7">7 Debts</a></li>
-<li class="collapsed menu-mlid-2273"><a href="../../../8">8 Transitional Arrangements</a></li>
-<li class="leaf menu-mlid-2264"><a href="../../../acronyms">Acronym List</a></li>
-<li class="leaf menu-mlid-7296"><a href="../../../keywords">Keyword Index</a></li>
-<li class="leaf menu-mlid-7371"><a href="../../../act-references">Act Reference Index</a></li>
-<li class="last leaf menu-mlid-7169"><a href="../../../sitemap">Site Map</a></li>
+<li class="collapsed menu-mlid-2269"><a href="../../../4.1">4 Claims &amp; payments</a></li>
+<li class="collapsed menu-mlid-2270"><a href="../../../5.1">5 Gathering information</a></li>
+<li class="collapsed menu-mlid-2271"><a href="../../../6.1">6 Review &amp; reconciliation</a></li>
+<li class="collapsed menu-mlid-2272"><a href="../../../7.1">7 Debts</a></li>
+<li class="collapsed menu-mlid-2273"><a href="../../../8.1">8 Transitional arrangements</a></li>
+<li class="leaf menu-mlid-2264"><a href="../../../acronyms">Acronym list</a></li>
+<li class="leaf menu-mlid-7296"><a href="../../../keywords.1" title="">Keyword index</a></li>
+<li class="leaf menu-mlid-7371"><a href="../../../act-references.1" title="">Act reference index</a></li>
+<li class="last leaf menu-mlid-7169"><a href="../../../sitemap">Site map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../../../index.html">Home</a> &raquo; <a href="../../../../family-assistance-guide">Family Assistance Guide</a> &raquo; <a href="../../../3" class="active-trail">3 Rate Calculation</a> &raquo; <a href="../../5" class="active-trail">3.5 CCB Rate Calculation</a> &raquo; <a href="../2" class="active-trail">3.5.2 Calculating Approved Care CCB Entitlement</a> &raquo; 3.5.2.20 Calculating the Approved Care Adjustment Percentage</div>
+	<div id="breadcrumb"><a href="../../../../index.html">Home</a> &raquo; <a href="../../../../family-assistance-guide.1">Family Assistance Guide</a> &raquo; <a href="../../../3.1" class="active-trail">3 Rate calculation</a> &raquo; <a href="../../5.1" class="active-trail">3.5 CCS entitlement</a> &raquo; <a href="../2.1" class="active-trail">3.5.2 CCS - activity test</a> &raquo; 3.5.2.20 CCS - activity test exemptions</div>
 <div id="utility">
 	
-<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/family-assistance-guide/3/5/2/20"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="readspeaker_button" class="rs_skip rsbtn rs_preserve"><a rel="nofollow" class="rsbtn_play" href="https://app-oc.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=https://guides.dss.gov.au/family-assistance-guide/3/5/2/20"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsbtn_right rsimg rsplay rspart"></span></a></div></div>
 <div id="content" role="main">
 <article id="node-6478">
-<h1 >3.5.2.20 Calculating the Approved Care Adjustment Percentage</h1>
+<h1 >3.5.2.20 CCS - activity test exemptions</h1>
 <h2>Summary</h2>
-<p>This topic shows, in 2 tables, how the adjustment percentage (<a href="../../../1/1/a/40">1.1.A.40</a>) is calculated to determine <a href="../../../acronyms#ccb" title="Child care benefit">CCB</a> entitlement (<a href="../../../1/1/e/30">1.1.E.30</a>) for an individual using approved care (<a href="../../../1/1/a/90">1.1.A.90</a>). Calculating the adjustment percentage is complex and it is advisable to do this as the first step in calculating CCB entitlement. To calculate the adjustment percentage, an individual's <a href="../../../acronyms#mwb" title="Maximum weekly benefit">MWB</a> (<a href="../../../1/1/m/27">1.1.M.27</a>) must be determined in one of 3 ways, depending on the:</p>
-<ul><li>number of children in care, and</li>
-<li>an individual's <a href="../../../acronyms#ati" title="Adjusted taxable income">ATI</a> (<a href="../../../1/1/a/20">1.1.A.20</a>).</li>
-</ul><p>The adjustment percentage calculation in this topic is shown in the following 2 tables:</p>
-<ul><li>calculating an individual's MWB, and</li>
-<li>calculating the adjustment percentage.</li>
-</ul><p>The formula for determining CCB entitlement for approved care is detailed in the first referenced topic. Examples of how to calculate the adjustment percentage are detailed in the other referenced topics.</p>
-<div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00490" title="A New Tax System (Family Assistance) Act 1999">FAAct</a> Schedule 2 clause 2 Adjustment percentage</p>
-<p><strong>Policy reference:</strong> FA Guide <a href="10">3.5.2.10</a> CCB Overall Rate Calculation Approved Care, <a href="70">3.5.2.70</a> CCB Adjustment Percentage Example 1 Child, Income below Upper Threshold, <a href="80">3.5.2.80</a> CCB Adjustment Percentage Example 4 Children, Income above Upper Threshold, <a href="90">3.5.2.90</a> CCB Adjustment Percentage Example 2 Children, Income above Upper Threshold</p>
-</div>
-<h2>Calculating an individual's MWB</h2>
-<p>The following table shows the 5 steps in the calculation of an individual's MWB.</p>
-<table><thead><tr><th scope="col">Step</th>
-<th scope="col">Action</th>
-</tr></thead><tbody><tr><td>1</td>
+<p>Individuals (<a href="../../../1/1/i/90">1.1.I.90</a>) in the following circumstances will be considered exempt from the activity test, with an entitlement (<a href="../../../1/1/e/30">1.1.E.30</a>) to 100 hours of subsidised approved child care (<a href="../../../1/1/a/90">1.1.A.90</a>) per fortnight:</p>
+<table><thead><tr><th scope="col">Exemption applies in these circumstances</th>
+<th scope="col">Considerations</th>
+</tr></thead><tbody><tr><td>Individual has a disability or impairment</td>
 <td>
-<p>Is ATI under the lower income threshold (<a href="../../../1/1/i/70">1.1.I.70</a>)?</p>
-<p>If yes, the taxable income percentage is 100%. Go to step 5.</p>
-<p>If no, go to step 2.</p>
+<p>Individuals with a disability or impairment (<a href="../../../1/1/d/80">1.1.D.80</a>) where the individual is unable to engage in recognised activity to any significant degree, or would be unable to adequately care for the child if the child did not attend sessions of care (<a href="../../../1/1/s/40">1.1.S.40</a>) at an approved child care service (<a href="../../../1/1/a/90">1.1.A.90</a>).</p>
 </td>
-</tr><tr><td>2</td>
+</tr><tr><td>
+<p>Individual is temporarily outside Australia</p>
+</td>
 <td>
-<p>Does the family receive income support (<a href="../../../1/1/i/50">1.1.I.50</a>)?</p>
-<p>If yes, the taxable income percentage is 100%. Go to step 5.</p>
-<p>If no, go to step 3.</p>
+<p>Refers to individuals who are living or travelling outside Australia.</p>
+<p>If the claimant is outside Australia (<a href="../../../1/1/a/10">1.1.A.10</a>), the exemption to the activity test can generally only apply for a maximum of 6 weeks. After 6 weeks outside Australia, <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> portability (<a href="../../../1/1/p/90">1.1.P.90</a>) rules will generally apply and the claimant's eligibility for <a href="../../../acronyms#ccs" title="Child care subsidy">CCS</a> will be affected, noting extensions to the portability rules may be granted in certain circumstances.</p>
+<p>This exemption from the CCS activity test is not time limited if it is the claimant's partner (<a href="../../../1/1/p/30">1.1.P.30</a>) who is outside Australia.</p>
 </td>
-</tr><tr><td>3</td>
-<td>Determine the weekly income excess:
-<ul><li>Determine the income threshold (<a href="../../../1/1/i/70">1.1.I.70</a>).</li>
-<li>Deduct the income threshold from ATI.</li>
-<li>Divide by 52 to express as a weekly amount.</li>
-</ul><p><strong>Result:</strong> Weekly income excess.</p>
+</tr><tr><td><a href="../../../acronyms#jsp" title="Jobseeker payment">JSP</a>, <a href="../../../acronyms#ya" title="Youth allowance">YA</a>, <a href="../../../acronyms#spb" title="Special benefit">SpB</a> or <a href="../../../acronyms#pp" title="Parenting payment">PP</a>, exempt from mutual obligation requirements</td>
+<td>
+<p>This exemption does not apply where income support recipients (<a href="../../../1/1/r/07">1.1.R.07</a>) have an exemption from their mutual obligations because the individual is a home educator, distance educator or because of the number of children for whom the individual is the principal carer or main supporter (large families).</p>
+<p>Exemption does not apply where income support recipients do not have a mutual obligation requirement attached to their payment as they are the primary care giver to 1 or more children under the age of 6 years.</p>
 </td>
-</tr><tr><td>4</td>
-<td>Determine the weekly taper amount:
-<ul><li>Weekly income excess.</li>
-<li>Multiply by the income taper percentage. See <a href="../../../1/1/i/60">1.1.I.60</a> to determine the income taper percentage.</li>
-</ul><p><strong>Result:</strong> Weekly taper amount.</p>
-</td>
-</tr><tr><td>5</td>
-<td>Determine the MWB:
-<ul><li>See <a href="../../../1/1/m/27">1.1.M.27</a> to determine the MWB.</li>
+</tr><tr><td>Individual is in gaol or in psychiatric confinement because they have been charged with an offence</td>
+<td>
+<p>Gaol has the same meaning as the SSAct section 23(5). A person is in gaol if:</p>
+<ul><li>the person is being lawfully detained (in prison or elsewhere) while under sentence for conviction of an offence and not on release on parole or licence, or</li>
+<li>the person is undergoing a period of custody pending trial or sentencing for an offence.</li>
 </ul></td>
-</tr></tbody></table><h2>Calculating the adjustment percentage</h2>
-<p>The following table shows the 6 steps in the calculation of an individual's adjustment percentage.</p>
-<table><thead><tr><th scope="col">Step</th>
-<th scope="col">Action</th>
-</tr></thead><tbody><tr><td>1</td>
-<td>Determine the taxable income percentage:
-<ul><li>Divide the weekly taper amount by the relevant MWB and express the result as a percentage.</li>
-<li>Deduct the resulting percentage from 100%.</li>
-</ul><p><strong>Result:</strong> Taxable income percentage.</p>
+</tr><tr><td>Individual receives a <a href="../../../acronyms#cp" title="Carer payment">CP</a></td>
+<td>
+<p>If the individual also receives <a href="../../../acronyms#ca" title="Carer allowance">CA</a> under the SSAct, the CP exemption applies as this provides a higher entitlement of hours.</p>
 </td>
-</tr><tr><td>2</td>
-<td>Determine the multiple child percentage:
-<ul><li>Take the MWB for one child in that type of care.</li>
-<li>Multiply by the number of children in that type of care.</li>
-<li><strong>Result:</strong> Single child rate.</li>
-<li>Divide the family's MWB by the single child rate and express the result as a percentage.</li>
-</ul><p><strong>Result:</strong> Multiple child percentage.</p>
+</tr><tr><td>
+<p>Individual provides constant care for an adult or child but they or the person they care for do not meet the income or assets tests for CP</p>
 </td>
-</tr><tr><td>3</td>
-<td>Determine the CCB percentage:
-<ul><li>Take the multiple child percentage.</li>
-<li>Multiply by the taxable income percentage.</li>
-</ul><p><strong>Result:</strong> CCB percentage.</p>
+<td>
+<p>Constant care is defined in the SS Guide (<a href="../../../../guide-social-security-law/1/1/c/310">1.1.C.310</a>) for the purposes of CP in the following way:</p>
+<ul><li>A carer is said to be providing constant care if they personally provide care on a daily basis for a 'significant period' during each day. The care may be active, supervisory or monitoring.</li>
+<li>To provide care on a daily basis for a significant period, a carer should reasonably be expected to provide at least the equivalent of a normal working day in personal care, as the policy intent of providing CP is to recognise that the carer is not able to undertake substantial employment because of their caring responsibilities.</li>
+</ul></td>
+</tr><tr><td>Individual or their partner is the grandparent or great-grandparent and principal carer of the child</td>
+<td>
+<p>Applies to grandparents and great-grandparents who are the principal carers of their grandchild/ren or great-grandchild/ren but who do not receive an income support payment (<a href="../../../1/1/i/50">1.1.I.50</a>) and therefore are not eligible to receive <a href="../../../acronyms#accs" title="Additional child care subsidy">ACCS</a> (grandparent).</p>
+<p>The grandparent or great-grandparent is the principal carer of the child if they or their partner:</p>
+<ul><li>provide all or at least 65% of ongoing daily care for the child/ren, and</li>
+<li>have substantial autonomy for the day‑to‑day decisions about the child/ren's care, welfare and development during the week in which entitlement is being determined.</li>
+</ul><p>Documentary evidence is required to establish the individual or their partner is the principal carer and their relationship to the child/ren.</p>
+<p>The exemption only applies in relation to the grandchild/ren and great-grandchild/ren for which the individual is the principal carer. Grandparents and great-grandparents wishing to access CCS for other grandchild/ren and great-grandchild/ren for whom they are not the principal carer, or for their own biological children, will need to undertake sufficient hours of recognised activity in order to meet the activity test or qualify for 1 of the other exemptions to the activity test.</p>
 </td>
-</tr><tr><td>4</td>
-<td>Determine the part-time percentage:
-<ul><li>Is the child:
-<ul><li>a non-school child, and</li>
-<li>in <a href="../../../acronyms#ldc" title="Long day care">LDC</a> for less than 38 hours per week?</li>
-</ul></li>
-</ul><p>If yes, go to <a href="../../../1/1/p/50">1.1.P.50</a> to determine the part-time percentage.</p>
-<p>If no, go to step 5.</p>
-</td>
-</tr><tr><td>5</td>
-<td>Determine the schooling percentage:
-<ul><li>Is the child a non-school child?</li>
-</ul><p>If yes, the schooling percentage is 100%.</p>
-<p>If no, the schooling percentage is 85%.</p>
-</td>
-</tr><tr><td>6</td>
-<td>Determine the adjustment percentage:
-<ul><li>Take the schooling percentage.</li>
-<li>Multiply by the part-time percentage.</li>
-<li>Multiply by the CCB percentage.</li>
-</ul><p><strong>Result:</strong> Adjustment percentage.</p>
-</td>
-</tr></tbody></table></article>	<div id="view-last-reviewed-date">
+</tr></tbody></table><h3>Preschool aged children</h3>
+<p>Families who do not meet, or who are not exempt, from the activity test and have a child/ren attending a preschool program in a <a href="../../../acronyms#cbdc" title="Centre-based day care">CBDC</a> service in the year that is 2 years before grade 1 of school will be entitled to 36 hours of subsidised approved child care per fortnight for their preschool aged child/ren. This particular exemption will only apply for the preschool age child/ren in the family.</p>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/F2017L01464" title="Child Care Subsidy Minister's Rules 2017">CCSMinRules</a> Part 3 Division 4 Minister's rules result</p>
+<p><strong>Policy reference:</strong> FA Guide <a href="../../../2/8/2.1">2.8.2</a> ACCS (grandparent)</p>
+<p>SS Guide <a href="../../../../guide-social-security-law/7/1/2/10">7.1.2.10</a> General rules of portability</p>
+</div>
+</article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     14 August 2017  	</div>
+      Last reviewed:     20 March 2020  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../../contact-us">Contact us</a></li>
@@ -209,8 +174,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
-<script type="text/javascript" src="../../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
-<script type="text/javascript" src="../../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_IkilKWehdX07Wbi3Cg-T6yf5sLTu5FfOT2__edFF9eM.js"></script>
+<script type="text/javascript" src="https://cdn1.readspeaker.com/script/5931/webReader/webReader.js?pids=wr&amp;notools=1&amp;disable=popupplayback&amp;qrxyi9"></script>
 </body>
 </html>
