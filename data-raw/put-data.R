@@ -974,12 +974,34 @@ Age_pension_deeming_rates_by_Date <-
   .[, type := gsub("_", " ", gsub("threshold_", "", type, fixed = TRUE))] %>%
   .[, .(Date, type, threshold, deeming_rate_below, deeming_rate_above)]
 
+aus_pop <- readabs::read_abs("3101.0", table = 59)
+aus_pop_all <- readabs::read_abs("3101.0", check_local = FALSE)
+
+setDT(aus_pop)
+.aus_pop_by_age_date <- aus_pop[series %pin% "Persons", .(value = sum(value)), keyby = .(date)]
+
+.aus_pop_by_age_yearqtr.csv <- tempfile(fileext = ".csv")
+httr::GET("https://api.data.abs.gov.au/data/ABS,ERP_Q/all?startPeriod=2019-Q1&format=csv",
+          httr::write_disk(.aus_pop_by_age_yearqtr.csv))
+
+.aus_pop_by_age_yearqtr_orig <- fread("./data-raw/Estim-Resi-Pop-by-age-1981-present.csv")
 .aus_pop_by_age_yearqtr <-
-  rsdmx::readSDMX(paste0("http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/ERP_QUARTERLY/1.0.3.0",
-                         paste0(c("", 1:100), collapse = "+"),
-                         ".Q/all?startTime=1981-Q3")) %>%
-  as.data.frame %>%
-  as.data.table 
+  fread(file = .aus_pop_by_age_yearqtr.csv) %>%
+  .[UNIT_MEASURE %ein% "PSNS"] %>%
+  .[REGION %ein% "AUS"] %>%
+  .[SEX == 3] %>%
+  .[AGE %chin% as.character(1:100)] %>%
+  .[MEASURE == 1L] %>%
+  drop_constant_cols %>%
+  setnames("TIME_PERIOD", "obsTime") %>%
+  setnames("OBS_VALUE", "obsValue") %>%
+  setnames("AGE", "Age") %>%
+  .[, Age := as.integer(Age)] %>%
+  .[, obsValue := as.integer(obsValue)] %>%
+  rbind(.aus_pop_by_age_yearqtr_orig, use.names = TRUE) %>%
+  setkey(Age, obsTime) %>%
+  .[]
+   
 
 if ("AGE" %in% names(.aus_pop_by_age_yearqtr)) {
   setnames(.aus_pop_by_age_yearqtr, "AGE", "Age")
@@ -991,11 +1013,7 @@ if (nrow(.aus_pop_by_age_yearqtr) > 14e3L) {
 }
 
 .aus_pop_by_yearqtr <-
-  rsdmx::readSDMX("http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/ERP_QUARTERLY/1.0.3.TT.Q/all?startTime=1981-Q3&endTime=2017-Q3") %>%
-  as.data.frame %>%
-  as.data.table
-
-
+  .aus_pop_by_age_yearqtr[, .(obsValue = sum(obsValue)), keyby = .(obsTime)]
 
 if (nrow(.aus_pop_by_yearqtr) > 145) {
   fwrite(drop_constant_cols(.aus_pop_by_yearqtr), 
@@ -1145,40 +1163,40 @@ residential_property_prices <-
                   value.name = "Residential_property_price_index")
 }
 
-residential_property_prices <- 
-"http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/RES_PROP_INDEX/1.3.1GSYD+2GMEL+3GBRI+4GADE+5GPER+6GHOB+7GDAR+8ACTE+100.Q/all?startTime=2002-Q1&endTime=2018-Q2" %>% 
-  readSDMX %>%
-  as.data.frame %>% 
-  setDT %>%
-  .[ASGS_2011 %ein% "3GBRI", City := "Brisbane"] %>%
-  .[ASGS_2011 %ein% "5GPER", City := "Perth"] %>%
-  .[ASGS_2011 %ein% "7GDAR", City := "Darwin"] %>%
-  .[ASGS_2011 %ein% "6GHOB", City := "Hobart"] %>%
-  .[ASGS_2011 %ein% "8ACTE", City := "Canberra"] %>%
-  .[ASGS_2011 %ein% "1GSYD", City := "Sydney"] %>%
-  .[ASGS_2011 %ein% "4GADE", City := "Adelaide"] %>%
-  .[ASGS_2011 %ein% "100", City := "Australia (weighted average)"] %>%
-  .[ASGS_2011 %ein% "2GMEL", City := "Melbourne"] %>%
-  .[, City := factor(City, 
-                     levels = c("Sydney", "Melbourne", "Brisbane",
-                                "Perth", "Adelaide", "Hobart", 
-                                "Canberra", "Darwin",
-                                "Australia (weighted average)"))] %>%
-  .[, Date := as.Date(paste0(substr(obsTime, 1, 4), 
-                             "-",
-                             3L * as.integer(substr(obsTime, 7, 7)),
-                             "-01"))] %>%
-  .[, .(Date, City, Residential_property_price_index = obsValue)] %>%
-  setkey(Date, City) %>%
-  .[]
-
-
-
-usethis::use_data(residential_property_prices, overwrite = TRUE)
-fwrite(residential_property_prices,
-       "data-raw/sysdata/residential_property_prices.tsv", 
-       sep = "\t",
-       logical01 = TRUE)
+# residential_property_prices <- 
+# "http://stat.data.abs.gov.au/restsdmx/sdmx.ashx/GetData/RES_PROP_INDEX/1.3.1GSYD+2GMEL+3GBRI+4GADE+5GPER+6GHOB+7GDAR+8ACTE+100.Q/all?startTime=2002-Q1&endTime=2018-Q2" %>% 
+#   readSDMX %>%
+#   as.data.frame %>% 
+#   setDT %>%
+#   .[ASGS_2011 %ein% "3GBRI", City := "Brisbane"] %>%
+#   .[ASGS_2011 %ein% "5GPER", City := "Perth"] %>%
+#   .[ASGS_2011 %ein% "7GDAR", City := "Darwin"] %>%
+#   .[ASGS_2011 %ein% "6GHOB", City := "Hobart"] %>%
+#   .[ASGS_2011 %ein% "8ACTE", City := "Canberra"] %>%
+#   .[ASGS_2011 %ein% "1GSYD", City := "Sydney"] %>%
+#   .[ASGS_2011 %ein% "4GADE", City := "Adelaide"] %>%
+#   .[ASGS_2011 %ein% "100", City := "Australia (weighted average)"] %>%
+#   .[ASGS_2011 %ein% "2GMEL", City := "Melbourne"] %>%
+#   .[, City := factor(City, 
+#                      levels = c("Sydney", "Melbourne", "Brisbane",
+#                                 "Perth", "Adelaide", "Hobart", 
+#                                 "Canberra", "Darwin",
+#                                 "Australia (weighted average)"))] %>%
+#   .[, Date := as.Date(paste0(substr(obsTime, 1, 4), 
+#                              "-",
+#                              3L * as.integer(substr(obsTime, 7, 7)),
+#                              "-01"))] %>%
+#   .[, .(Date, City, Residential_property_price_index = obsValue)] %>%
+#   setkey(Date, City) %>%
+#   .[]
+# 
+# 
+# 
+# usethis::use_data(residential_property_prices, overwrite = TRUE)
+# fwrite(residential_property_prices,
+#        "data-raw/sysdata/residential_property_prices.tsv", 
+#        sep = "\t",
+#        logical01 = TRUE)
 
 NewstartRatesTable.raw <-
   "http://guides.dss.gov.au/guide-social-security-law/5/2/1/20" %>%
@@ -1264,8 +1282,10 @@ parenting_payment_by_date <-
                    which = 3) %>%
   as.data.table %>%
   setnames("Date rate commenced", "Date") %>%
-  setnames("Pension PPS", "MBR") %>% # for consistency with CAPITA tables
+  setnames("Pension PPS", "MBR", skip_absent = TRUE) %>% # for consistency with CAPITA tables
+  setnames("Pension PPS ($ pf)", "MBR", skip_absent = TRUE) %>% # for consistency with CAPITA tables
   .[, MBR := sub(" Note A", "", MBR, fixed = TRUE)] %>%
+  .[, MBR := sub(" & Note B", "", MBR, fixed = TRUE)] %>%
   .[, MBR := as.double(MBR)] %T>%
   .[, stopifnot(!anyNA(MBR))] %>%
   .[, Date := as.Date(Date, format = "%d/%m/%Y")] %>%
