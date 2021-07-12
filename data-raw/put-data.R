@@ -187,8 +187,11 @@ hecs_tbl <-
 
 # Manually
 cpi_unadj <- 
-  as.data.table(readabs::read_cpi())
-  
+  as.data.table(readabs::read_cpi()) %>%
+  .[, obsTime := zoo::as.yearqtr(date)] %>%
+  setnames("cpi", "obsValue")
+
+cpi_unadj[, obsTime := format(obsTime, "%Y-Q%q")]
   
 
 cpi_seasonal_adjustment <- cpi_unadj
@@ -203,11 +206,15 @@ cpi_by_adj_fy <-
   lapply(function(DT) {
     DT %>%
       .[month(date) == 3L] %>%
-      .[, .(obsValue = cpi),
+      .[, .(obsValue = obsValue),
         keyby = .(fy_year = date2fy(date))]
   }) %>%
   rbindlist(idcol = "Adjustment", use.names = TRUE, fill = TRUE) %>%
   setkey(Adjustment, fy_year)
+
+cpi_trimmed <-
+  cpi_seasonal_adjustment <-
+  cpi_unadj <- cpi_unadj[, .(obsTime, obsValue)]
 
 cpi_unadj_fy <- cpi_by_adj_fy[.("none"), .(fy_year, obsValue)]
 cpi_seasonal_adjustment_fy <- cpi_by_adj_fy[.("seasonal"), .(fy_year, obsValue)]
@@ -273,23 +280,29 @@ max.wage.yr <- wages_trend_fy[, max(fy2yr(fy_year))]
 
 
 labour_force <- 
-  setDT(readabs::read_abs("6202.0", tables = "1", check_local = FALSE))
+  setDT(readabs::read_abs("6202.0", check_local = FALSE))
 
 message("Using original series because COVID killed the Trend")
 
 lf_trend <-
   # Note we are actually using the original series
-  labour_force[series_id %ein% "A84423085A"]
+  labour_force[series_id %ein% "A84423047L"] %>%
+  .[, .(date,
+        obsTime = format(date, "%Y-%m"), 
+        obsValue = as.integer(value * 1000))] %>%
+  .[]
 
 lf_trend_fy <- 
   lf_trend[month(date) == 1L] %>%
   .[, .(fy_year = date2fy(date), 
-        obsValue = value)] %>%
+        obsValue)] %>%
   unique(by = "fy_year", fromLast = TRUE) %>%
   setkey(fy_year) %T>%
   # put match hash
   .[, stopifnot("2015-16" %fin% fy_year)] %>%
   .[]
+
+lf_trend[, date := NULL]
 min.lf.yr <- lf_trend_fy[, min(fy2yr(fy_year))]
 max.lf.yr <- lf_trend_fy[, max(fy2yr(fy_year))]
 
@@ -922,6 +935,7 @@ Age_pension_assets_test_by_year <-
                           "Non-homeowners >> Couple",
                           "Non-homeowners >> Illness separated couple",
                           "Notes")))
+    Age_pension_assets_test_by_year <- 
     as.data.table(age_pension_assets_test_dss_gov_au) %>%
       .[, Notes := NULL] %>%
       melt.data.table(id.vars = "Date", 
@@ -935,8 +949,8 @@ Age_pension_assets_test_by_year <-
             HomeOwner = startsWith(t1, "Homeowner"),
             Date,
             assets_test)] %>%
-      setkeyv(c("HasPartner", "IllnessSeparated", "HomeOwner", "Date")) %T>%
-      .[, stopifnot(has_unique_key(.SD))] %>%
+      setkeyv(c("HasPartner", "IllnessSeparated", "HomeOwner", "Date")) %>%
+      unique(by = key(.)) %>%
       # .[, .(Date, t1, t2, assets_test)] %>%
       # .[]
       .[, Date := as.character(Date)] %T>%
@@ -960,7 +974,8 @@ fwrite(bto_tbl, "data-raw/bto_tbl.tsv", sep = "\t")
 Age_pension_permissible_income_by_Date <- 
   read_excel("data-raw/age-pension-permissible-income.xlsx") %>%
   setDT %>%
-  melt.data.table(id.vars = "Date", variable.name = "type", variable.factor = FALSE) %>%
+  melt.data.table(id.vars = "Date", variable.name = "type", variable.factor = FALSE,
+                  value.name = "permissible_income") %>%
   .[, type := trimws(gsub("Permissible income ", "", gsub("[^A-Za-z]", " ", type)))] %>%
   as.data.table
 

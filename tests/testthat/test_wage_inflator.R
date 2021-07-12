@@ -102,6 +102,7 @@ test_that("from > to deflates and is not a warning for inflators", {
 })
 
 test_that("ABS connection", {
+  skip("No longer supported")
   skip_on_cran()
   skip_on_circleci(2)
   skip_if_not_installed("rsdmx")
@@ -124,6 +125,7 @@ test_that("ABS connection", {
 })
 
 test_that("ABS Connection (extras)", {
+  skip("No longer supported")
   skip_on_cran()
   skip_on_appveyor()
   skip_on_travis()

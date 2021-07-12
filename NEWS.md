@@ -7,6 +7,8 @@
   spouse's income or the number of children.
 * `income_tax` gives a slightly different error message when an invalid 
   financial year is passed. Previously "not in correct form", now "not a valid financial year".
+* `useABSConnection = TRUE` is no longer supported because of ABS server issues   
+
   
 
 ## 1.9.0.0
