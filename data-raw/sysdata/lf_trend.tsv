@@ -1,521 +1,521 @@
-table_no	sheet_no	table_title	date	series	value	series_type	data_type	collection_month	frequency	series_id	unit
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1978-02-01	Employed total ;  Persons ;	5985.6597158	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1978-03-01	Employed total ;  Persons ;	6040.560795	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1978-04-01	Employed total ;  Persons ;	6054.2138586	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1978-05-01	Employed total ;  Persons ;	6038.2647505	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1978-06-01	Employed total ;  Persons ;	6031.3422994	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1978-07-01	Employed total ;  Persons ;	6036.0839263	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1978-08-01	Employed total ;  Persons ;	6005.3614529	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1978-09-01	Employed total ;  Persons ;	6024.3134515	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1978-10-01	Employed total ;  Persons ;	6045.8551024	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1978-11-01	Employed total ;  Persons ;	6033.7974422	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1978-12-01	Employed total ;  Persons ;	6125.3604376	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1979-01-01	Employed total ;  Persons ;	5971.3288253	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1979-02-01	Employed total ;  Persons ;	6050.6934726	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1979-03-01	Employed total ;  Persons ;	6096.1752153	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1979-04-01	Employed total ;  Persons ;	6087.6537083	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1979-05-01	Employed total ;  Persons ;	6075.6109053	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1979-06-01	Employed total ;  Persons ;	6095.7340512	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1979-07-01	Employed total ;  Persons ;	6103.921742	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1979-08-01	Employed total ;  Persons ;	6078.5215923	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1979-09-01	Employed total ;  Persons ;	6157.7891488	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1979-10-01	Employed total ;  Persons ;	6164.0483187	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1979-11-01	Employed total ;  Persons ;	6188.8406484	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1979-12-01	Employed total ;  Persons ;	6257.1652478	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1980-01-01	Employed total ;  Persons ;	6112.9167413	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1980-02-01	Employed total ;  Persons ;	6207.2328905	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1980-03-01	Employed total ;  Persons ;	6278.6501162	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1980-04-01	Employed total ;  Persons ;	6224.8638647	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1980-05-01	Employed total ;  Persons ;	6273.4481769	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1980-06-01	Employed total ;  Persons ;	6269.9050947	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1980-07-01	Employed total ;  Persons ;	6314.0709704	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1980-08-01	Employed total ;  Persons ;	6281.3506348	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1980-09-01	Employed total ;  Persons ;	6360.0313794	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1980-10-01	Employed total ;  Persons ;	6320.229556	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1980-11-01	Employed total ;  Persons ;	6341.9507671	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1980-12-01	Employed total ;  Persons ;	6426.5905508	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1981-01-01	Employed total ;  Persons ;	6252.9567582	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1981-02-01	Employed total ;  Persons ;	6356.5078945	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1981-03-01	Employed total ;  Persons ;	6428.0698898	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1981-04-01	Employed total ;  Persons ;	6426.3493648	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1981-05-01	Employed total ;  Persons ;	6412.3507268	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1981-06-01	Employed total ;  Persons ;	6413.9448045	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1981-07-01	Employed total ;  Persons ;	6425.3216636	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1981-08-01	Employed total ;  Persons ;	6393.7436143	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1981-09-01	Employed total ;  Persons ;	6502.6970811	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1981-10-01	Employed total ;  Persons ;	6445.3353656	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1981-11-01	Employed total ;  Persons ;	6433.3433932	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1981-12-01	Employed total ;  Persons ;	6506.8649371	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1982-01-01	Employed total ;  Persons ;	6355.4986577	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1982-02-01	Employed total ;  Persons ;	6432.3522678	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1982-03-01	Employed total ;  Persons ;	6497.3609838	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1982-04-01	Employed total ;  Persons ;	6431.5625043	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1982-05-01	Employed total ;  Persons ;	6440.9045245	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1982-06-01	Employed total ;  Persons ;	6414.2775552	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1982-07-01	Employed total ;  Persons ;	6425.8984225	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1982-08-01	Employed total ;  Persons ;	6379.3474902	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1982-09-01	Employed total ;  Persons ;	6443.5173213	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1982-10-01	Employed total ;  Persons ;	6421.0676214	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1982-11-01	Employed total ;  Persons ;	6366.813634	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1982-12-01	Employed total ;  Persons ;	6370.1002919	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1983-01-01	Employed total ;  Persons ;	6172.0479179	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1983-02-01	Employed total ;  Persons ;	6263.9474593	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1983-03-01	Employed total ;  Persons ;	6310.3027344	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1983-04-01	Employed total ;  Persons ;	6254.4904395	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1983-05-01	Employed total ;  Persons ;	6272.7942097	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1983-06-01	Employed total ;  Persons ;	6266.4620552	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1983-07-01	Employed total ;  Persons ;	6294.9609844	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1983-08-01	Employed total ;  Persons ;	6241.1547261	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1983-09-01	Employed total ;  Persons ;	6358.1739921	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1983-10-01	Employed total ;  Persons ;	6336.1314212	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1983-11-01	Employed total ;  Persons ;	6377.5222003	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1983-12-01	Employed total ;  Persons ;	6456.4556108	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1984-01-01	Employed total ;  Persons ;	6251.4442636	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1984-02-01	Employed total ;  Persons ;	6365.3636107	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1984-03-01	Employed total ;  Persons ;	6503.2285012	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1984-04-01	Employed total ;  Persons ;	6477.5809158	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1984-05-01	Employed total ;  Persons ;	6489.658756	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1984-06-01	Employed total ;  Persons ;	6499.0236012	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1984-07-01	Employed total ;  Persons ;	6528.6968289	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1984-08-01	Employed total ;  Persons ;	6466.1158232	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1984-09-01	Employed total ;  Persons ;	6579.8395541	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1984-10-01	Employed total ;  Persons ;	6553.1870257	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1984-11-01	Employed total ;  Persons ;	6576.0618183	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1984-12-01	Employed total ;  Persons ;	6636.0402174	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1985-01-01	Employed total ;  Persons ;	6452.3615075	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1985-02-01	Employed total ;  Persons ;	6595.6641925	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1985-03-01	Employed total ;  Persons ;	6657.4406977	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1985-04-01	Employed total ;  Persons ;	6588.8267822	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1985-05-01	Employed total ;  Persons ;	6657.9327706	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1985-06-01	Employed total ;  Persons ;	6659.3625128	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1985-07-01	Employed total ;  Persons ;	6703.429276	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1985-08-01	Employed total ;  Persons ;	6675.5378568	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1985-09-01	Employed total ;  Persons ;	6814.7053585	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1985-10-01	Employed total ;  Persons ;	6771.0533584	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1985-11-01	Employed total ;  Persons ;	6881.9441952	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1985-12-01	Employed total ;  Persons ;	6910.8392317	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1986-01-01	Employed total ;  Persons ;	6753.6197634	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1986-02-01	Employed total ;  Persons ;	6861.855494	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1986-03-01	Employed total ;  Persons ;	6961.8946633	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1986-04-01	Employed total ;  Persons ;	6997.885645	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1986-05-01	Employed total ;  Persons ;	6978.969976	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1986-06-01	Employed total ;  Persons ;	7007.678152	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1986-07-01	Employed total ;  Persons ;	6991.497212	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1986-08-01	Employed total ;  Persons ;	6918.525052	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1986-09-01	Employed total ;  Persons ;	7040.5986	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1986-10-01	Employed total ;  Persons ;	7030.367547	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1986-11-01	Employed total ;  Persons ;	7034.16394	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1986-12-01	Employed total ;  Persons ;	7116.814849	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1987-01-01	Employed total ;  Persons ;	6902.543985	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1987-02-01	Employed total ;  Persons ;	7022.252753	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1987-03-01	Employed total ;  Persons ;	7133.389586	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1987-04-01	Employed total ;  Persons ;	7109.576413	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1987-05-01	Employed total ;  Persons ;	7103.523457	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1987-06-01	Employed total ;  Persons ;	7128.887578	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1987-07-01	Employed total ;  Persons ;	7175.620018	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1987-08-01	Employed total ;  Persons ;	7092.257321	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1987-09-01	Employed total ;  Persons ;	7186.53346	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1987-10-01	Employed total ;  Persons ;	7177.382961	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1987-11-01	Employed total ;  Persons ;	7182.161301	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1987-12-01	Employed total ;  Persons ;	7330.688657	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1988-01-01	Employed total ;  Persons ;	7169.392598	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1988-02-01	Employed total ;  Persons ;	7247.304349	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1988-03-01	Employed total ;  Persons ;	7397.447882	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1988-04-01	Employed total ;  Persons ;	7383.371107	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1988-05-01	Employed total ;  Persons ;	7354.833831	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1988-06-01	Employed total ;  Persons ;	7378.263003	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1988-07-01	Employed total ;  Persons ;	7383.061995	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1988-08-01	Employed total ;  Persons ;	7353.286392	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1988-09-01	Employed total ;  Persons ;	7503.157163	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1988-10-01	Employed total ;  Persons ;	7477.266468	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1988-11-01	Employed total ;  Persons ;	7508.606914	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1988-12-01	Employed total ;  Persons ;	7622.911428	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1989-01-01	Employed total ;  Persons ;	7423.84265	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1989-02-01	Employed total ;  Persons ;	7566.488423	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1989-03-01	Employed total ;  Persons ;	7634.64468	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1989-04-01	Employed total ;  Persons ;	7678.426956	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1989-05-01	Employed total ;  Persons ;	7720.789507	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1989-06-01	Employed total ;  Persons ;	7711.039122	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1989-07-01	Employed total ;  Persons ;	7740.771902	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1989-08-01	Employed total ;  Persons ;	7715.273013	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1989-09-01	Employed total ;  Persons ;	7841.590327	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1989-10-01	Employed total ;  Persons ;	7806.483846	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1989-11-01	Employed total ;  Persons ;	7862.356823	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1989-12-01	Employed total ;  Persons ;	7935.52534	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1990-01-01	Employed total ;  Persons ;	7707.692951	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1990-02-01	Employed total ;  Persons ;	7802.990262	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1990-03-01	Employed total ;  Persons ;	7874.133266	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1990-04-01	Employed total ;  Persons ;	7887.948389	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1990-05-01	Employed total ;  Persons ;	7908.463677	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1990-06-01	Employed total ;  Persons ;	7900.256935	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1990-07-01	Employed total ;  Persons ;	7919.444887	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1990-08-01	Employed total ;  Persons ;	7807.982887	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1990-09-01	Employed total ;  Persons ;	7905.534512	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1990-10-01	Employed total ;  Persons ;	7848.901359	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1990-11-01	Employed total ;  Persons ;	7826.922723	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1990-12-01	Employed total ;  Persons ;	7915.536125	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1991-01-01	Employed total ;  Persons ;	7641.269189	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1991-02-01	Employed total ;  Persons ;	7708.780594	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1991-03-01	Employed total ;  Persons ;	7715.386264	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1991-04-01	Employed total ;  Persons ;	7717.20651	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1991-05-01	Employed total ;  Persons ;	7703.716449	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1991-06-01	Employed total ;  Persons ;	7678.064063	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1991-07-01	Employed total ;  Persons ;	7582.980614	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1991-08-01	Employed total ;  Persons ;	7620.703211	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1991-09-01	Employed total ;  Persons ;	7713.236218	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1991-10-01	Employed total ;  Persons ;	7637.961584	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1991-11-01	Employed total ;  Persons ;	7614.94176	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1991-12-01	Employed total ;  Persons ;	7712.178014	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1992-01-01	Employed total ;  Persons ;	7518.94813	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1992-02-01	Employed total ;  Persons ;	7597.175453	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1992-03-01	Employed total ;  Persons ;	7646.15694	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1992-04-01	Employed total ;  Persons ;	7644.08212	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1992-05-01	Employed total ;  Persons ;	7631.400055	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1992-06-01	Employed total ;  Persons ;	7637.30849	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1992-07-01	Employed total ;  Persons ;	7668.259482	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1992-08-01	Employed total ;  Persons ;	7613.399101	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1992-09-01	Employed total ;  Persons ;	7709.74096	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1992-10-01	Employed total ;  Persons ;	7665.683759	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1992-11-01	Employed total ;  Persons ;	7587.4465	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1992-12-01	Employed total ;  Persons ;	7693.386617	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1993-01-01	Employed total ;  Persons ;	7533.699516	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1993-02-01	Employed total ;  Persons ;	7530.959309	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1993-03-01	Employed total ;  Persons ;	7645.743799	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1993-04-01	Employed total ;  Persons ;	7572.586102	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1993-05-01	Employed total ;  Persons ;	7620.506789	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1993-06-01	Employed total ;  Persons ;	7627.940278	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1993-07-01	Employed total ;  Persons ;	7646.525974	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1993-08-01	Employed total ;  Persons ;	7589.403131	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1993-09-01	Employed total ;  Persons ;	7747.578881	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1993-10-01	Employed total ;  Persons ;	7738.764732	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1993-11-01	Employed total ;  Persons ;	7744.926055	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1993-12-01	Employed total ;  Persons ;	7842.103563	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1994-01-01	Employed total ;  Persons ;	7646.79607	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1994-02-01	Employed total ;  Persons ;	7738.597918	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1994-03-01	Employed total ;  Persons ;	7824.238563	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1994-04-01	Employed total ;  Persons ;	7827.36176	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1994-05-01	Employed total ;  Persons ;	7857.908786	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1994-06-01	Employed total ;  Persons ;	7878.448923	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1994-07-01	Employed total ;  Persons ;	7966.018243	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1994-08-01	Employed total ;  Persons ;	7861.693875	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1994-09-01	Employed total ;  Persons ;	8054.408395	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1994-10-01	Employed total ;  Persons ;	7997.155274	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1994-11-01	Employed total ;  Persons ;	8003.253372	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1994-12-01	Employed total ;  Persons ;	8135.531279	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1995-01-01	Employed total ;  Persons ;	7928.420297	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1995-02-01	Employed total ;  Persons ;	8049.875932	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1995-03-01	Employed total ;  Persons ;	8118.13777	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1995-04-01	Employed total ;  Persons ;	8174.623475	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1995-05-01	Employed total ;  Persons ;	8165.2016	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1995-06-01	Employed total ;  Persons ;	8205.637713	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1995-07-01	Employed total ;  Persons ;	8229.022081	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1995-08-01	Employed total ;  Persons ;	8165.918717	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1995-09-01	Employed total ;  Persons ;	8300.390696	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1995-10-01	Employed total ;  Persons ;	8232.594094	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1995-11-01	Employed total ;  Persons ;	8300.26211	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1995-12-01	Employed total ;  Persons ;	8395.661049	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1996-01-01	Employed total ;  Persons ;	8166.718519	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1996-02-01	Employed total ;  Persons ;	8246.603478	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1996-03-01	Employed total ;  Persons ;	8280.439708	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1996-04-01	Employed total ;  Persons ;	8248.036481	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1996-05-01	Employed total ;  Persons ;	8297.125431	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1996-06-01	Employed total ;  Persons ;	8311.679073	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1996-07-01	Employed total ;  Persons ;	8332.100772	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1996-08-01	Employed total ;  Persons ;	8265.864857	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1996-09-01	Employed total ;  Persons ;	8372.97349	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1996-10-01	Employed total ;  Persons ;	8319.388073	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1996-11-01	Employed total ;  Persons ;	8314.369852	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1996-12-01	Employed total ;  Persons ;	8431.382046	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1997-01-01	Employed total ;  Persons ;	8235.213736	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1997-02-01	Employed total ;  Persons ;	8291.38755	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1997-03-01	Employed total ;  Persons ;	8347.487502	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1997-04-01	Employed total ;  Persons ;	8343.062501	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1997-05-01	Employed total ;  Persons ;	8330.18644	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1997-06-01	Employed total ;  Persons ;	8345.585772	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1997-07-01	Employed total ;  Persons ;	8374.861974	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1997-08-01	Employed total ;  Persons ;	8250.306053	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1997-09-01	Employed total ;  Persons ;	8473.995632	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1997-10-01	Employed total ;  Persons ;	8405.240341	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1997-11-01	Employed total ;  Persons ;	8462.084729	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1997-12-01	Employed total ;  Persons ;	8540.480651	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1998-01-01	Employed total ;  Persons ;	8334.725487	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1998-02-01	Employed total ;  Persons ;	8412.996584	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1998-03-01	Employed total ;  Persons ;	8459.959189	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1998-04-01	Employed total ;  Persons ;	8499.940711	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1998-05-01	Employed total ;  Persons ;	8482.540018	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1998-06-01	Employed total ;  Persons ;	8516.778015	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1998-07-01	Employed total ;  Persons ;	8541.872332	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1998-08-01	Employed total ;  Persons ;	8455.233464	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1998-09-01	Employed total ;  Persons ;	8653.182243	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1998-10-01	Employed total ;  Persons ;	8601.021357	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1998-11-01	Employed total ;  Persons ;	8554.294864	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1998-12-01	Employed total ;  Persons ;	8696.544725	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1999-01-01	Employed total ;  Persons ;	8477.42116	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1999-02-01	Employed total ;  Persons ;	8556.474181	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1999-03-01	Employed total ;  Persons ;	8618.891695	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1999-04-01	Employed total ;  Persons ;	8631.905028	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1999-05-01	Employed total ;  Persons ;	8606.520123	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1999-06-01	Employed total ;  Persons ;	8673.209473	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1999-07-01	Employed total ;  Persons ;	8706.657946	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1999-08-01	Employed total ;  Persons ;	8603.623589	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1999-09-01	Employed total ;  Persons ;	8777.065178	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1999-10-01	Employed total ;  Persons ;	8755.2617	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1999-11-01	Employed total ;  Persons ;	8763.667477	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	1999-12-01	Employed total ;  Persons ;	8900.677203	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2000-01-01	Employed total ;  Persons ;	8628.197875	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2000-02-01	Employed total ;  Persons ;	8754.40422	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2000-03-01	Employed total ;  Persons ;	8830.676211	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2000-04-01	Employed total ;  Persons ;	8882.189323	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2000-05-01	Employed total ;  Persons ;	8864.999781	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2000-06-01	Employed total ;  Persons ;	8921.98407	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2000-07-01	Employed total ;  Persons ;	9020.015797	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2000-08-01	Employed total ;  Persons ;	8911.58789	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2000-09-01	Employed total ;  Persons ;	9061.343432	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2000-10-01	Employed total ;  Persons ;	8973.118411	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2000-11-01	Employed total ;  Persons ;	8912.719473	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2000-12-01	Employed total ;  Persons ;	9059.553065	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2001-01-01	Employed total ;  Persons ;	8834.949496	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2001-02-01	Employed total ;  Persons ;	8920.935432	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2001-03-01	Employed total ;  Persons ;	8956.0495	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2001-04-01	Employed total ;  Persons ;	9023.643403	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2001-05-01	Employed total ;  Persons ;	9004.629114	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2001-06-01	Employed total ;  Persons ;	9021.857545	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2001-07-01	Employed total ;  Persons ;	9048.861765	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2001-08-01	Employed total ;  Persons ;	8971.895396	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2001-09-01	Employed total ;  Persons ;	9105.922387	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2001-10-01	Employed total ;  Persons ;	9058.656494	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2001-11-01	Employed total ;  Persons ;	9055.644025	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2001-12-01	Employed total ;  Persons ;	9177.1309	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2002-01-01	Employed total ;  Persons ;	8993.401124	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2002-02-01	Employed total ;  Persons ;	9092.309936	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2002-03-01	Employed total ;  Persons ;	9128.533155	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2002-04-01	Employed total ;  Persons ;	9129.534371	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2002-05-01	Employed total ;  Persons ;	9134.673081	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2002-06-01	Employed total ;  Persons ;	9180.807296	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2002-07-01	Employed total ;  Persons ;	9194.531289	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2002-08-01	Employed total ;  Persons ;	9150.286149	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2002-09-01	Employed total ;  Persons ;	9303.492599	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2002-10-01	Employed total ;  Persons ;	9249.145202	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2002-11-01	Employed total ;  Persons ;	9286.740904	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2002-12-01	Employed total ;  Persons ;	9439.739589	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2003-01-01	Employed total ;  Persons ;	9281.678566	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2003-02-01	Employed total ;  Persons ;	9372.599387	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2003-03-01	Employed total ;  Persons ;	9362.063319	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2003-04-01	Employed total ;  Persons ;	9365.573718	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2003-05-01	Employed total ;  Persons ;	9380.077847	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2003-06-01	Employed total ;  Persons ;	9370.443195	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2003-07-01	Employed total ;  Persons ;	9363.921283	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2003-08-01	Employed total ;  Persons ;	9326.951052	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2003-09-01	Employed total ;  Persons ;	9486.054655	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2003-10-01	Employed total ;  Persons ;	9447.761582	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2003-11-01	Employed total ;  Persons ;	9427.739637	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2003-12-01	Employed total ;  Persons ;	9573.575382	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2004-01-01	Employed total ;  Persons ;	9363.827661	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2004-02-01	Employed total ;  Persons ;	9434.453805	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2004-03-01	Employed total ;  Persons ;	9506.389698	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2004-04-01	Employed total ;  Persons ;	9512.044937	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2004-05-01	Employed total ;  Persons ;	9533.473324	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2004-06-01	Employed total ;  Persons ;	9543.32482	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2004-07-01	Employed total ;  Persons ;	9553.104944	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2004-08-01	Employed total ;  Persons ;	9462.086553	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2004-09-01	Employed total ;  Persons ;	9668.62688	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2004-10-01	Employed total ;  Persons ;	9662.242149	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2004-11-01	Employed total ;  Persons ;	9652.922702	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2004-12-01	Employed total ;  Persons ;	9807.834475	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2005-01-01	Employed total ;  Persons ;	9634.401564	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2005-02-01	Employed total ;  Persons ;	9744.614596	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2005-03-01	Employed total ;  Persons ;	9828.33476	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2005-04-01	Employed total ;  Persons ;	9856.253247	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2005-05-01	Employed total ;  Persons ;	9850.755076	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2005-06-01	Employed total ;  Persons ;	9896.608919	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2005-07-01	Employed total ;  Persons ;	9912.33429	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2005-08-01	Employed total ;  Persons ;	9870.335511	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2005-09-01	Employed total ;  Persons ;	10004.56892	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2005-10-01	Employed total ;  Persons ;	9949.709731	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2005-11-01	Employed total ;  Persons ;	9944.998167	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2005-12-01	Employed total ;  Persons ;	10074.68744	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2006-01-01	Employed total ;  Persons ;	9842.669757	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2006-02-01	Employed total ;  Persons ;	9961.137391	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2006-03-01	Employed total ;  Persons ;	10048.65918	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2006-04-01	Employed total ;  Persons ;	10041.00611	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2006-05-01	Employed total ;  Persons ;	10082.05587	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2006-06-01	Employed total ;  Persons ;	10120.75617	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2006-07-01	Employed total ;  Persons ;	10170.77652	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2006-08-01	Employed total ;  Persons ;	10105.77323	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2006-09-01	Employed total ;  Persons ;	10299.53075	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2006-10-01	Employed total ;  Persons ;	10212.40229	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2006-11-01	Employed total ;  Persons ;	10201.64505	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2006-12-01	Employed total ;  Persons ;	10404.32187	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2007-01-01	Employed total ;  Persons ;	10156.13864	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2007-02-01	Employed total ;  Persons ;	10276.98334	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2007-03-01	Employed total ;  Persons ;	10349.19917	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2007-04-01	Employed total ;  Persons ;	10362.88052	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2007-05-01	Employed total ;  Persons ;	10412.00734	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2007-06-01	Employed total ;  Persons ;	10436.29256	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2007-07-01	Employed total ;  Persons ;	10456.83246	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2007-08-01	Employed total ;  Persons ;	10406.39754	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2007-09-01	Employed total ;  Persons ;	10588.76367	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2007-10-01	Employed total ;  Persons ;	10520.49142	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2007-11-01	Employed total ;  Persons ;	10535.10005	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2007-12-01	Employed total ;  Persons ;	10710.14023	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2008-01-01	Employed total ;  Persons ;	10524.88516	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2008-02-01	Employed total ;  Persons ;	10622.90664	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2008-03-01	Employed total ;  Persons ;	10677.39619	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2008-04-01	Employed total ;  Persons ;	10706.23241	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2008-05-01	Employed total ;  Persons ;	10690.30636	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2008-06-01	Employed total ;  Persons ;	10744.99968	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2008-07-01	Employed total ;  Persons ;	10761.95083	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2008-08-01	Employed total ;  Persons ;	10710.44114	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2008-09-01	Employed total ;  Persons ;	10854.55036	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2008-10-01	Employed total ;  Persons ;	10807.41191	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2008-11-01	Employed total ;  Persons ;	10757.34464	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2008-12-01	Employed total ;  Persons ;	10915.61593	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2009-01-01	Employed total ;  Persons ;	10681.02118	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2009-02-01	Employed total ;  Persons ;	10776.72881	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2009-03-01	Employed total ;  Persons ;	10775.20182	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2009-04-01	Employed total ;  Persons ;	10792.7373	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2009-05-01	Employed total ;  Persons ;	10786.79871	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2009-06-01	Employed total ;  Persons ;	10770.92392	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2009-07-01	Employed total ;  Persons ;	10808.78138	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2009-08-01	Employed total ;  Persons ;	10707.25729	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2009-09-01	Employed total ;  Persons ;	10882.12388	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2009-10-01	Employed total ;  Persons ;	10845.17258	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2009-11-01	Employed total ;  Persons ;	10829.23153	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2009-12-01	Employed total ;  Persons ;	11010.93644	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2010-01-01	Employed total ;  Persons ;	10809.93025	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2010-02-01	Employed total ;  Persons ;	10889.15449	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2010-03-01	Employed total ;  Persons ;	10928.91847	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2010-04-01	Employed total ;  Persons ;	10940.0966	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2010-05-01	Employed total ;  Persons ;	10957.42661	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2010-06-01	Employed total ;  Persons ;	11009.25116	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2010-07-01	Employed total ;  Persons ;	11030.48682	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2010-08-01	Employed total ;  Persons ;	10973.82293	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2010-09-01	Employed total ;  Persons ;	11159.35996	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2010-10-01	Employed total ;  Persons ;	11128.97087	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2010-11-01	Employed total ;  Persons ;	11144.54524	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2010-12-01	Employed total ;  Persons ;	11294.95718	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2011-01-01	Employed total ;  Persons ;	11063.65263	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2011-02-01	Employed total ;  Persons ;	11146.1761	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2011-03-01	Employed total ;  Persons ;	11217.01905	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2011-04-01	Employed total ;  Persons ;	11186.5476	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2011-05-01	Employed total ;  Persons ;	11196.18107	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2011-06-01	Employed total ;  Persons ;	11221.25443	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2011-07-01	Employed total ;  Persons ;	11225.7164077	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2011-08-01	Employed total ;  Persons ;	11127.2154885	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2011-09-01	Employed total ;  Persons ;	11315.9301478	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2011-10-01	Employed total ;  Persons ;	11270.9275609	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2011-11-01	Employed total ;  Persons ;	11239.4184518	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2011-12-01	Employed total ;  Persons ;	11355.7551112	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2012-01-01	Employed total ;  Persons ;	11160.4515806	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2012-02-01	Employed total ;  Persons ;	11237.7359131	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2012-03-01	Employed total ;  Persons ;	11334.5335101	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2012-04-01	Employed total ;  Persons ;	11331.6316897	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2012-05-01	Employed total ;  Persons ;	11393.1529779	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2012-06-01	Employed total ;  Persons ;	11356.0437073	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2012-07-01	Employed total ;  Persons ;	11368.7583672	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2012-08-01	Employed total ;  Persons ;	11264.1168555	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2012-09-01	Employed total ;  Persons ;	11457.579725	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2012-10-01	Employed total ;  Persons ;	11405.9647716	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2012-11-01	Employed total ;  Persons ;	11378.3335893	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2012-12-01	Employed total ;  Persons ;	11521.3259666	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2013-01-01	Employed total ;  Persons ;	11305.9312673	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2013-02-01	Employed total ;  Persons ;	11425.3118584	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2013-03-01	Employed total ;  Persons ;	11437.3370622	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2013-04-01	Employed total ;  Persons ;	11481.0679374	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2013-05-01	Employed total ;  Persons ;	11491.6647664	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2013-06-01	Employed total ;  Persons ;	11492.4854477	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2013-07-01	Employed total ;  Persons ;	11479.9723996	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2013-08-01	Employed total ;  Persons ;	11361.4097873	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2013-09-01	Employed total ;  Persons ;	11539.2776889	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2013-10-01	Employed total ;  Persons ;	11482.559747	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2013-11-01	Employed total ;  Persons ;	11445.9000442	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2013-12-01	Employed total ;  Persons ;	11537.5922029	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2014-01-01	Employed total ;  Persons ;	11323.7672331	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2014-02-01	Employed total ;  Persons ;	11464.5644341	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2014-03-01	Employed total ;  Persons ;	11535.7075507	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2014-04-01	Employed total ;  Persons ;	11555.0602161	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2014-05-01	Employed total ;  Persons ;	11553.3487631	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2014-06-01	Employed total ;  Persons ;	11553.2234435	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2014-07-01	Employed total ;  Persons ;	11542.1595137	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2014-08-01	Employed total ;  Persons ;	11572.7635314	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2014-09-01	Employed total ;  Persons ;	11533.7784499	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2014-10-01	Employed total ;  Persons ;	11550.1473412	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2014-11-01	Employed total ;  Persons ;	11581.725704	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2014-12-01	Employed total ;  Persons ;	11715.6939143	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2015-01-01	Employed total ;  Persons ;	11467.3810824	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2015-02-01	Employed total ;  Persons ;	11724.132317	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2015-03-01	Employed total ;  Persons ;	11698.2006911	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2015-04-01	Employed total ;  Persons ;	11711.5074593	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2015-05-01	Employed total ;  Persons ;	11781.4409312	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2015-06-01	Employed total ;  Persons ;	11752.901484	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2015-07-01	Employed total ;  Persons ;	11759.9120647	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2015-08-01	Employed total ;  Persons ;	11702.6312549	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2015-09-01	Employed total ;  Persons ;	11771.0386774	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2015-10-01	Employed total ;  Persons ;	11865.7759157	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2015-11-01	Employed total ;  Persons ;	11935.26632	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2015-12-01	Employed total ;  Persons ;	12025.0291789	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2016-01-01	Employed total ;  Persons ;	11759.6157464	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2016-02-01	Employed total ;  Persons ;	11975.8940345	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2016-03-01	Employed total ;  Persons ;	11945.4993755	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2016-04-01	Employed total ;  Persons ;	11968.5115958	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2016-05-01	Employed total ;  Persons ;	11999.9494196	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2016-06-01	Employed total ;  Persons ;	11991.2572457	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2016-07-01	Employed total ;  Persons ;	11995.2894383	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2016-08-01	Employed total ;  Persons ;	11904.7089265	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2016-09-01	Employed total ;  Persons ;	11944.4246667	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2016-10-01	Employed total ;  Persons ;	11988.6870856	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2016-11-01	Employed total ;  Persons ;	12054.0065824	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2016-12-01	Employed total ;  Persons ;	12149.1944711	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2017-01-01	Employed total ;  Persons ;	11885.864417	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2017-02-01	Employed total ;  Persons ;	12103.333139	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2017-03-01	Employed total ;  Persons ;	12121.8015585	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2017-04-01	Employed total ;  Persons ;	12189.5743086	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2017-05-01	Employed total ;  Persons ;	12256.6339114	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2017-06-01	Employed total ;  Persons ;	12254.9613061	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2017-07-01	Employed total ;  Persons ;	12260.8879874	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2017-08-01	Employed total ;  Persons ;	12245.332034	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2017-09-01	Employed total ;  Persons ;	12333.6094107	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2017-10-01	Employed total ;  Persons ;	12350.7037335	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2017-11-01	Employed total ;  Persons ;	12453.6309795	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2017-12-01	Employed total ;  Persons ;	12567.8039179	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2018-01-01	Employed total ;  Persons ;	12305.0646247	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2018-02-01	Employed total ;  Persons ;	12528.1846948	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2018-03-01	Employed total ;  Persons ;	12494.8360791	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2018-04-01	Employed total ;  Persons ;	12525.9119897	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2018-05-01	Employed total ;  Persons ;	12572.697362	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2018-06-01	Employed total ;  Persons ;	12608.3590459	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2018-07-01	Employed total ;  Persons ;	12575.3834137	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2018-08-01	Employed total ;  Persons ;	12547.5377006	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2018-09-01	Employed total ;  Persons ;	12615.4716515	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2018-10-01	Employed total ;  Persons ;	12654.5731961	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2018-11-01	Employed total ;  Persons ;	12741.5867419	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2018-12-01	Employed total ;  Persons ;	12839.1666182	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2019-01-01	Employed total ;  Persons ;	12603.0756129	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2019-02-01	Employed total ;  Persons ;	12802.1577546	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2019-03-01	Employed total ;  Persons ;	12785.2491179	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2019-04-01	Employed total ;  Persons ;	12831.6834261	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2019-05-01	Employed total ;  Persons ;	12921.0607759	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2019-06-01	Employed total ;  Persons ;	12889.6678026	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2019-07-01	Employed total ;  Persons ;	12887.2952927	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2019-08-01	Employed total ;  Persons ;	12858.2903499	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2019-09-01	Employed total ;  Persons ;	12925.8739278	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2019-10-01	Employed total ;  Persons ;	12899.583533	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2019-11-01	Employed total ;  Persons ;	12994.8616718	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2019-12-01	Employed total ;  Persons ;	13096.7097901	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2020-01-01	Employed total ;  Persons ;	12831.3175468	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2020-02-01	Employed total ;  Persons ;	13052.871889	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2020-03-01	Employed total ;  Persons ;	13004.5806431	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2020-04-01	Employed total ;  Persons ;	12412.0023518	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2020-05-01	Employed total ;  Persons ;	12190.8243386	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2020-06-01	Employed total ;  Persons ;	12391.595952	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2020-07-01	Employed total ;  Persons ;	12472.5450606	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2020-08-01	Employed total ;  Persons ;	12563.7263615	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2020-09-01	Employed total ;  Persons ;	12567.9567653	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2020-10-01	Employed total ;  Persons ;	12737.4411016	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2020-11-01	Employed total ;  Persons ;	12884.4582753	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2020-12-01	Employed total ;  Persons ;	12998.7425039	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2021-01-01	Employed total ;  Persons ;	12734.5227921	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2021-02-01	Employed total ;  Persons ;	13031.1644033	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2021-03-01	Employed total ;  Persons ;	13052.3703502	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2021-04-01	Employed total ;  Persons ;	13022.8662644	Original	STOCK	1	Month	A84423085A	000
-6202001	Data1	Table 1. Labour force status by Sex, Australia - Trend, Seasonally adjusted and Original	2021-05-01	Employed total ;  Persons ;	13187.4210321	Original	STOCK	1	Month	A84423085A	000
+obsTime	obsValue
+1978-02	6424684
+1978-03	6407117
+1978-04	6434173
+1978-05	6432940
+1978-06	6439847
+1978-07	6430919
+1978-08	6455495
+1978-09	6432571
+1978-10	6432318
+1978-11	6435748
+1978-12	6467658
+1979-01	6464537
+1979-02	6468448
+1979-03	6463380
+1979-04	6486333
+1979-05	6472100
+1979-06	6506176
+1979-07	6505912
+1979-08	6513501
+1979-09	6523879
+1979-10	6571662
+1979-11	6578227
+1979-12	6587272
+1980-01	6611297
+1980-02	6619076
+1980-03	6626652
+1980-04	6653299
+1980-05	6685824
+1980-06	6699061
+1980-07	6715021
+1980-08	6731657
+1980-09	6731438
+1980-10	6713573
+1980-11	6721975
+1980-12	6760681
+1981-01	6756777
+1981-02	6752248
+1981-03	6765713
+1981-04	6780905
+1981-05	6784574
+1981-06	6785621
+1981-07	6816025
+1981-08	6834235
+1981-09	6858169
+1981-10	6831093
+1981-11	6826288
+1981-12	6842630
+1982-01	6879545
+1982-02	6884911
+1982-03	6878475
+1982-04	6892093
+1982-05	6887109
+1982-06	6886970
+1982-07	6894886
+1982-08	6900482
+1982-09	6914705
+1982-10	6982157
+1982-11	6948926
+1982-12	6949031
+1983-01	6940263
+1983-02	6962067
+1983-03	6947466
+1983-04	6937332
+1983-05	6985103
+1983-06	6983936
+1983-07	7014268
+1983-08	6998401
+1983-09	7045177
+1983-10	7019889
+1983-11	7033390
+1983-12	7045347
+1984-01	7046959
+1984-02	7054394
+1984-03	7101970
+1984-04	7121506
+1984-05	7115590
+1984-06	7152391
+1984-07	7147636
+1984-08	7138493
+1984-09	7163753
+1984-10	7157127
+1984-11	7172608
+1984-12	7164133
+1985-01	7177118
+1985-02	7233114
+1985-03	7227717
+1985-04	7217268
+1985-05	7253942
+1985-06	7284775
+1985-07	7290839
+1985-08	7325067
+1985-09	7365167
+1985-10	7331724
+1985-11	7447388
+1985-12	7398450
+1986-01	7452523
+1986-02	7491860
+1986-03	7497455
+1986-04	7569430
+1986-05	7558207
+1986-06	7586264
+1986-07	7604862
+1986-08	7595214
+1986-09	7630528
+1986-10	7655007
+1986-11	7643897
+1986-12	7665430
+1987-01	7652154
+1987-02	7687953
+1987-03	7722070
+1987-04	7725840
+1987-05	7723327
+1987-06	7746081
+1987-07	7801803
+1987-08	7780409
+1987-09	7737676
+1987-10	7797811
+1987-11	7773731
+1987-12	7840469
+1988-01	7899293
+1988-02	7865522
+1988-03	7925000
+1988-04	7992292
+1988-05	7934354
+1988-06	7963973
+1988-07	7913231
+1988-08	7972113
+1988-09	8006458
+1988-10	8012839
+1988-11	8017876
+1988-12	8072833
+1989-01	8104763
+1989-02	8146126
+1989-03	8139975
+1989-04	8161742
+1989-05	8228018
+1989-06	8204304
+1989-07	8233329
+1989-08	8266129
+1989-09	8283335
+1989-10	8282766
+1989-11	8326379
+1989-12	8315972
+1990-01	8349602
+1990-02	8382398
+1990-03	8379577
+1990-04	8393004
+1990-05	8449094
+1990-06	8459557
+1990-07	8501165
+1990-08	8480849
+1990-09	8468747
+1990-10	8477202
+1990-11	8483965
+1990-12	8493935
+1991-01	8457615
+1991-02	8489656
+1991-03	8480348
+1991-04	8537703
+1991-05	8501926
+1991-06	8467009
+1991-07	8448034
+1991-08	8465037
+1991-09	8497877
+1991-10	8461340
+1991-11	8459786
+1991-12	8507808
+1992-01	8513935
+1992-02	8538717
+1992-03	8526073
+1992-04	8516115
+1992-05	8526352
+1992-06	8559171
+1992-07	8609646
+1992-08	8592367
+1992-09	8542146
+1992-10	8598117
+1992-11	8518021
+1992-12	8559600
+1993-01	8580445
+1993-02	8520589
+1993-03	8561121
+1993-04	8530199
+1993-05	8533731
+1993-06	8568359
+1993-07	8565210
+1993-08	8595740
+1993-09	8593481
+1993-10	8669235
+1993-11	8680342
+1993-12	8678868
+1994-01	8682820
+1994-02	8693931
+1994-03	8710765
+1994-04	8685655
+1994-05	8703390
+1994-06	8733285
+1994-07	8795272
+1994-08	8759900
+1994-09	8804943
+1994-10	8776494
+1994-11	8794473
+1994-12	8822402
+1995-01	8830138
+1995-02	8882851
+1995-03	8866306
+1995-04	8895337
+1995-05	8922261
+1995-06	8948790
+1995-07	8962996
+1995-08	8984241
+1995-09	8974869
+1995-10	8984714
+1995-11	9053704
+1995-12	9024307
+1996-01	9053512
+1996-02	9046141
+1996-03	9026462
+1996-04	9074046
+1996-05	9064323
+1996-06	9052775
+1996-07	9085987
+1996-08	9096452
+1996-09	9073716
+1996-10	9098826
+1996-11	9069384
+1996-12	9110574
+1997-01	9116105
+1997-02	9129481
+1997-03	9121775
+1997-04	9111480
+1997-05	9114029
+1997-06	9093919
+1997-07	9131464
+1997-08	9104304
+1997-09	9132542
+1997-10	9121736
+1997-11	9181171
+1997-12	9157173
+1998-01	9160298
+1998-02	9165710
+1998-03	9179950
+1998-04	9187074
+1998-05	9201211
+1998-06	9229600
+1998-07	9257212
+1998-08	9248429
+1998-09	9283518
+1998-10	9262924
+1998-11	9269990
+1998-12	9250661
+1999-01	9244059
+1999-02	9252647
+1999-03	9271075
+1999-04	9269606
+1999-05	9261427
+1999-06	9279377
+1999-07	9300990
+1999-08	9332594
+1999-09	9360551
+1999-10	9376967
+1999-11	9354778
+1999-12	9415294
+2000-01	9372433
+2000-02	9411982
+2000-03	9457928
+2000-04	9478235
+2000-05	9477897
+2000-06	9490558
+2000-07	9561369
+2000-08	9567946
+2000-09	9555157
+2000-10	9533383
+2000-11	9498868
+2000-12	9540214
+2001-01	9539678
+2001-02	9576796
+2001-03	9582802
+2001-04	9670687
+2001-05	9674792
+2001-06	9675660
+2001-07	9691304
+2001-08	9715413
+2001-09	9689563
+2001-10	9747039
+2001-11	9748275
+2001-12	9732829
+2002-01	9761061
+2002-02	9765114
+2002-03	9759767
+2002-04	9737333
+2002-05	9756831
+2002-06	9797557
+2002-07	9770968
+2002-08	9849485
+2002-09	9847252
+2002-10	9837380
+2002-11	9895253
+2002-12	9942353
+2003-01	9988083
+2003-02	10001512
+2003-03	9970949
+2003-04	9958205
+2003-05	9981177
+2003-06	9954871
+2003-07	9953162
+2003-08	9980842
+2003-09	9984969
+2003-10	10010816
+2003-11	9995893
+2003-12	10029983
+2004-01	10015412
+2004-02	10031336
+2004-03	10044947
+2004-04	10062799
+2004-05	10061507
+2004-06	10080203
+2004-07	10098443
+2004-08	10091851
+2004-09	10135703
+2004-10	10166109
+2004-11	10209628
+2004-12	10210074
+2005-01	10264448
+2005-02	10298438
+2005-03	10350454
+2005-04	10387058
+2005-05	10367695
+2005-06	10400190
+2005-07	10418280
+2005-08	10456740
+2005-09	10450984
+2005-10	10457015
+2005-11	10461086
+2005-12	10489193
+2006-01	10497345
+2006-02	10529997
+2006-03	10547351
+2006-04	10566062
+2006-05	10576806
+2006-06	10619627
+2006-07	10657270
+2006-08	10682470
+2006-09	10723687
+2006-10	10671514
+2006-11	10712843
+2006-12	10774348
+2007-01	10766259
+2007-02	10808499
+2007-03	10819089
+2007-04	10841407
+2007-05	10865321
+2007-06	10895062
+2007-07	10910806
+2007-08	10955271
+2007-09	10976267
+2007-10	10978639
+2007-11	11050346
+2007-12	11058304
+2008-01	11080715
+2008-02	11089784
+2008-03	11120570
+2008-04	11185226
+2008-05	11156572
+2008-06	11208710
+2008-07	11228514
+2008-08	11244866
+2008-09	11261055
+2008-10	11270573
+2008-11	11284441
+2008-12	11305160
+2009-01	11347552
+2009-02	11409165
+2009-03	11422612
+2009-04	11423726
+2009-05	11437834
+2009-06	11424727
+2009-07	11448724
+2009-08	11443437
+2009-09	11459250
+2009-10	11465024
+2009-11	11489122
+2009-12	11519025
+2010-01	11543114
+2010-02	11530757
+2010-03	11551486
+2010-04	11573156
+2010-05	11542806
+2010-06	11589183
+2010-07	11634364
+2010-08	11647308
+2010-09	11678216
+2010-10	11724204
+2010-11	11763630
+2010-12	11740879
+2011-01	11787979
+2011-02	11759793
+2011-03	11795562
+2011-04	11765030
+2011-05	11762766
+2011-06	11785935
+2011-07	11811419
+2011-08	11843345
+2011-09	11866590
+2011-10	11865099
+2011-11	11872999
+2011-12	11846251
+2012-01	11903943
+2012-02	11887568
+2012-03	11951836
+2012-04	11915925
+2012-05	11988194
+2012-06	11957658
+2012-07	11969300
+2012-08	11979010
+2012-09	12052832
+2012-10	12043112
+2012-11	12015788
+2012-12	12049591
+2013-01	12113760
+2013-02	12120361
+2013-03	12117104
+2013-04	12144737
+2013-05	12140107
+2013-06	12165714
+2013-07	12142349
+2013-08	12171818
+2013-09	12170413
+2013-10	12180325
+2013-11	12151993
+2013-12	12132568
+2014-01	12175388
+2014-02	12192987
+2014-03	12250349
+2014-04	12247646
+2014-05	12241362
+2014-06	12274634
+2014-07	12306248
+2014-08	12298972
+2014-09	12315096
+2014-10	12326433
+2014-11	12319853
+2014-12	12349173
+2015-01	12390687
+2015-02	12438074
+2015-03	12452129
+2015-04	12452626
+2015-05	12477192
+2015-06	12482137
+2015-07	12549692
+2015-08	12533991
+2015-09	12559016
+2015-10	12606013
+2015-11	12634820
+2015-12	12627450
+2016-01	12670088
+2016-02	12644429
+2016-03	12656181
+2016-04	12662222
+2016-05	12672053
+2016-06	12692869
+2016-07	12723436
+2016-08	12683779
+2016-09	12669770
+2016-10	12692688
+2016-11	12745085
+2016-12	12775813
+2017-01	12776842
+2017-02	12803623
+2017-03	12871099
+2017-04	12894145
+2017-05	12914947
+2017-06	12960232
+2017-07	12989048
+2017-08	13032182
+2017-09	13055052
+2017-10	13052207
+2017-11	13117413
+2017-12	13182237
+2018-01	13207566
+2018-02	13211609
+2018-03	13220094
+2018-04	13243042
+2018-05	13224567
+2018-06	13293219
+2018-07	13278367
+2018-08	13318501
+2018-09	13294398
+2018-10	13324837
+2018-11	13375939
+2018-12	13381245
+2019-01	13425946
+2019-02	13414240
+2019-03	13467330
+2019-04	13524860
+2019-05	13563947
+2019-06	13578953
+2019-07	13602613
+2019-08	13642826
+2019-09	13646068
+2019-10	13625645
+2019-11	13646032
+2019-12	13654681
+2020-01	13709941
+2020-02	13698300
+2020-03	13718324
+2020-04	13247842
+2020-05	13054450
+2020-06	13359225
+2020-07	13483932
+2020-08	13542578
+2020-09	13508033
+2020-10	13693572
+2020-11	13773067
+2020-12	13776314
+2021-01	13777147
+2021-02	13780636
+2021-03	13828452
+2021-04	13764049
+2021-05	13826286

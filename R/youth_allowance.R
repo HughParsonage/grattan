@@ -118,6 +118,9 @@ youth_allowance <- function(fortnightly_income = 0,
   
   if (is.null(fy.year)) {
     fy.year <- date2fy(Sys.Date())
+    if (fy.year >= "2020-21") {
+      fy.year <- yr2fy(2020L)
+    }
     message('`fy.year` not set, so using `fy.year = "', fy.year, '".')
   } else {
     if (length(fy.year) != 1L && length(fy.year) != max.length) {
