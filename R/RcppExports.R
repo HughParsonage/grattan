@@ -64,6 +64,7 @@ NULL
 #'             255,
 #'             c(37e3, 48e3, 90e3),
 #'             c(0.075, 0, -0.03))
+#' @noRd
 NULL
 
 Offset <- function(x, y, a, m) {

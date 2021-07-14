@@ -46,6 +46,8 @@
 
 #' @importFrom fastmatch %fin%
 #' @importFrom fastmatch fmatch
+#' 
+#' @importFrom fy date2fy
 
 #' @importFrom magrittr %>%
 #' @importFrom magrittr %$%

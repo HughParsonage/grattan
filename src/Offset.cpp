@@ -1,5 +1,4 @@
-#include <Rcpp.h>
-using namespace Rcpp;
+#include "grattan.h"
 
 // y ----
 //       \                        .
@@ -61,6 +60,7 @@ NumericVector Offset(NumericVector x,
 //'             255,
 //'             c(37e3, 48e3, 90e3),
 //'             c(0.075, 0, -0.03))
+//' @noRd
 
 // [[Rcpp::export(rng = false)]]
 DoubleVector MultiOffset(NumericVector x, 

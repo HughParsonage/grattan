@@ -4,10 +4,10 @@
 #' @param activity_level (numeric) The total number of activity hours of the 
 #' parent. Note that if there are two parents the one with the lower activity 
 #' level will be applied. Common activities include work, leave, and study. A 
-#' full list can be viewed at \url{http://guides.dss.gov.au/family-assistance-guide/3/5/2/10}.
+#' full list can be viewed at \url{https://guides.dss.gov.au/family-assistance-guide/3/5/2/10}.
 #' @param activity_exemption (logical) Whether the parent is exempt from the 
 #' activity test. Note that in a two parent family both parents must be exempt. 
-#' A list of exemptions is available at \url{http://guides.dss.gov.au/family-assistance-guide/3/5/2/10}.
+#' A list of exemptions is available at \url{https://guides.dss.gov.au/family-assistance-guide/3/5/2/10}.
 #' @param child_age (numeric) The age of the child in child care.
 #' @param type_of_day_care (character) The type of child care. Acceptable inputs
 #'  are: \code{"cbdc"} Centre Based Day Care, "oshc" Outside School Hours Care,

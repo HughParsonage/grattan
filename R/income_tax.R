@@ -74,6 +74,7 @@ income_tax <- function(income,
                        return.mode = c("numeric", "integer"),
                        allow.forecasts = FALSE,
                        .debug = FALSE) {
+  tax <- NULL
   if (is.null(fy.year)) {
     fy.year <- date2fy(Sys.Date())
     warning("fy.year is missing, using current financial year")
@@ -1011,7 +1012,7 @@ income_tax2 <- function(income,
                        Total_NPP_BI_amt))
     }
   }
-  fy.year <- fy.year %||% fy::date2yr(Sys.Date())
+  fy.year <- fy.year %||% fy::date2fy(Sys.Date())
   fy.year <- validate_fys_permitted(fy.year)
   yr <- fy2yr(fy.year)
   
