@@ -50,7 +50,7 @@ test_that("income_tax on individual sample file reflect historical collections",
   tax.collection <- 
     sample_file_1213[age_decoder] %$%
     {
-      sum(income_tax(income = Taxable_Income, fy.year = "2012-13", age = age)) * 50
+      sum(income_tax(income = Taxable_Income, fy.year = "2012-13", age = as.integer(age))) * 50
     }
   
   expect_lte(abs(tax.collection - actual_collections)/actual_collections, expected = 0.01)
