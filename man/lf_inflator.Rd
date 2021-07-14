@@ -5,7 +5,7 @@
 \alias{lf_inflator_fy}
 \title{Labour force inflators}
 \source{
-ABS Cat 6202.0 \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocument}.
+ABS Cat 6202.0 \url{https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia/latest-release}.
 }
 \usage{
 lf_inflator_fy(
@@ -71,7 +71,8 @@ The relative labour force between \code{to_date} and \code{for_date}
 or \code{to_fy} and \code{from_fy}, multiplied by \code{labour_force}.
 }
 \description{
-Labour force inflators
+This function's behaviour has changed due to COVID-19. In particular,
+the trend labour force status is no longer available.
 }
 \details{
 \code{lf_inflator} is used on dates. The underlying data series is available every month.

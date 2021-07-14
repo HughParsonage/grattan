@@ -36,6 +36,9 @@
 #' whose \code{Spouse_income > 0}) are deemed to be families when determining 
 #' cut-off thresholds.}
 #' }
+#' 
+#' @param .checks Whether or not to perform checks on inputs.
+#' 
 #' @return The Medicare levy payable for that taxpayer.
 #' @details The Medicare levy for individuals is imposed by the \emph{Medicare Levy Act 1986} (Cth).
 #' The function only calculates the levy for individuals (not trusts).

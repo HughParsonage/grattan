@@ -1,6 +1,9 @@
 #' Labour force inflators
 #' 
 #' @name lf_inflator
+#' @description This function's behaviour has changed due to COVID-19. In particular,
+#' the trend labour force status is no longer available.
+#' 
 #' @author Tim Cameron, Matthew Katzen, and Hugh Parsonage 
 #' @rdname lf_inflator
 #' @aliases lf_inflator_fy
@@ -31,7 +34,7 @@
 #' dramatically. Can be set to \code{Inf} to disable acceleration.
 #' 
 #'   
-#' @source ABS Cat 6202.0 \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocument}.
+#' @source ABS Cat 6202.0 \url{https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia/latest-release}.
 #' @details \code{lf_inflator} is used on dates. The underlying data series is available every month. 
 #' @examples
 #' lf_inflator_fy(labour_force = 1, from_fy = "2012-13", to_fy = "2013-14")

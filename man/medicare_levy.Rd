@@ -53,6 +53,8 @@ each dependant child increases the thresholds.}
 whose \code{Spouse_income > 0}) are deemed to be families when determining 
 cut-off thresholds.}
 }}
+
+\item{.checks}{Whether or not to perform checks on inputs.}
 }
 \value{
 The Medicare levy payable for that taxpayer.
