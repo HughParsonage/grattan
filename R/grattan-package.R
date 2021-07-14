@@ -41,6 +41,7 @@
 #' @importFrom hutilscpp pminC
 #' @importFrom hutilscpp pmaxV
 #' @importFrom hutilscpp pminV
+#' @importFrom hutilscpp which_first
 
 
 #' @importFrom fastmatch %fin%
