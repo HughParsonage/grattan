@@ -44,7 +44,7 @@
 #' @param partner_is_pensioner (logical, default: \code{FALSE}) Is the 
 #' individual's partner in receipt of a \emph{pension} (or benefit)? 
 #' @param partner_taper The amount by which the payment is reduced for each 
-#' dollar earned by the individual's partner. (See \url{http://guides.dss.gov.au/guide-social-security-law/4/2/8/40}.)
+#' dollar earned by the individual's partner. (See \url{https://guides.dss.gov.au/guide-social-security-law/4/2/8/40}.)
 #' @export youth_allowance 
 
 

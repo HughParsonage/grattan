@@ -14,6 +14,11 @@
 #' @return \code{date_to_verify} as a Date object, provided it can be converted 
 #' to a Date and all elements are within the bounds \code{from} and \code{to}.
 #' 
+#' @examples
+#' 
+#' validate_date("2020-01-01")
+#' 
+#' @export
 
 validate_date <- function(date_to_verify, from = NULL, to = NULL,
                         deparsed = "Date") {

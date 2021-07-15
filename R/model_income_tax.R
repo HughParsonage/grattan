@@ -71,7 +71,7 @@
 #' library(hutils)
 #' 
 #' # With new tax-free threshold of $20,000:
-#' if (requireNamespace("taxstats", quietly = TRUE)) {
+#' if (requireNamespace("taxstats", quietly = TRUE) && FALSE) {
 #'   library(taxstats)
 #'   library(magrittr)
 #'      
