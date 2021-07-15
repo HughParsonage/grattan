@@ -25,3 +25,8 @@ computationally costly, relative to the core calculations.
 These internal functions provide mechanisms to check validity
 quickly, while still providing clear, accurate error messages.
 }
+\examples{
+
+validate_date("2020-01-01")
+
+}
