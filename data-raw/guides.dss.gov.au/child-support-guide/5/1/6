@@ -2,27 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<link rel="shortlink" href="../../../node/181" />
-<link rel="canonical" href="6" />
-<meta name="viewport" content="width=device-width" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>5.1.6 Late Payment Penalties | Child Support Guide</title>
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<meta name="viewport" content="width=device-width" />
+<link rel="canonical" href="6" />
+<link rel="shortlink" href="../../../node/181" />
+<title>5.1.6 Late payment penalties | Child Support Guide</title>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_Q4XrxgEkbadGDm1J7AHUHHmbcMJ2_hbMfrrzrm9Ne_I.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
-<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_d905I2WxoGGQW6uS7jkC73mqKhSejey6jciEdxo9cJI.css" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_yMSKTzBO0KmozyLwajzFOrrt_kto_9mtccAkb0rm7gc.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_FA2YSy0R3kB2AU_wIOLoSR0sJX4ZYjdPuPaRFd2ZDyw.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+window.rsConf = { ui: { tools: {translation: false, dictionary: false}}};
 //--><!]]>
 </script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_rsGiM5M1ffe6EhN-RnhM5f3pDyJ8ZAPFJNKpfjtepLk.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_-oEDdwe4XpUqUj4W0KJs96ENaXIrGvjBvIP-WYYBi54.js"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"nIMKXTvve-4i_lKrD70XNPsN8WcVJjiBC0SagOsS_p0","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/5\/1\/6":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"VVF_Qt0B_LEBDRNrnN4ylFV-sYsozy6NV15C2e_zbvk","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"https:\/\/cdn1.readspeaker.com\/script\/5931\/webReader\/webReader.js?pids=wr\u0026notools=1\u0026disable=popupplayback":1,"misc\/jquery.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"0":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"1":1,"sites\/all\/modules\/extlink\/js\/extlink.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/5\/1\/6":true},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)","extUseFontAwesome":false}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -35,62 +40,63 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <nav id="global">
 	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
 <div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<ul class="menu"><li class="first leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law.1">Social Security Guide</a></li>
+<li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide.1">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide.1">Paid Parental Leave Guide</a></li>
+<li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide.1" class="active-trail">Child Support Guide</a></li>
+<li class="leaf menu-mlid-7596"><a href="../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
 <li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
-<li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide" class="active-trail">Child Support Guide</a></li>
-<li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law">Guide to Social Security Law</a></li>
-<li class="last leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+<li class="last leaf has-children menu-mlid-19951"><a href="../../../national-redress-guide" title="">National Redress Guide</a></li>
 </ul></div></nav>
 <header role="banner">
 	<a href="../../../index.html" rel="home"><img src="../../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
 <p class="site-name">Guides to Social Policy Law</p>
 <form class="search-form" role="search" action="6" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
- <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+ <input class="custom-search-box form-text" placeholder="Search" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-HB4Rx7USvFUrb--5zYhfpWPRU61Xj7pUgRsDlxjBNJE" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-2MGXjiny_fS-K56xeeHBrqi7pfF_Ck_Yof74HC5isy4" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.32 - Released 7 May 2018</p>
+<p>Version 4.57 - Released 1 July 2021</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7286"><a href="../../../child-support-guide" title="">Using the Child Support Guide</a></li>
-<li class="collapsed menu-mlid-514"><a href="../../updates">What&#039;s New</a></li>
-<li class="collapsed menu-mlid-515"><a href="../../1">1 About the Scheme</a></li>
-<li class="collapsed menu-mlid-518"><a href="../../2">2 Child Support Assessments</a></li>
-<li class="collapsed menu-mlid-555"><a href="../../3">3 Registrable Maintenance Liabilities</a></li>
-<li class="collapsed menu-mlid-637"><a href="../../4">4 Objecting, Seeking a Review, Appealing &amp; Applying to Court</a></li>
-<li class="expanded active-trail menu-mlid-678"><a href="../../5" class="active-trail">5 Collecting Child Support</a><ul class="menu"><li class="first expanded active-trail menu-mlid-679"><a href="../1" title="This chapter describes when the Registrar will accept an application to collect child support, how the Registrar registers enforceable maintenance liabilities and the effect of registration." class="active-trail">5.1 DHS Collection</a><ul class="menu"><li class="first leaf menu-mlid-680"><a href="1">5.1.1 Child Support Registrar &amp; the Child Support Register</a></li>
-<li class="leaf menu-mlid-681"><a href="2">5.1.2 Registrable Maintenance Liabilities &amp; How They are Registered</a></li>
-<li class="leaf menu-mlid-682"><a href="3">5.1.3 Date a Liability First Becomes Enforceable</a></li>
-<li class="leaf menu-mlid-683"><a href="4">5.1.4 Collection of Arrears Accrued During Non-collect Period</a></li>
-<li class="leaf menu-mlid-684"><a href="5">5.1.5 Payment Periods &amp; Payment of Child Support Debts</a></li>
-<li class="last leaf active-trail active menu-mlid-685"><a href="6" class="active-trail active">5.1.6 Late Payment Penalties</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7286"><a href="../../../child-support-guide.1" title="">Using the Child Support Guide</a></li>
+<li class="collapsed menu-mlid-514"><a href="../../updates.1">What&#039;s new</a></li>
+<li class="collapsed menu-mlid-515"><a href="../../1.1">1 About the Scheme</a></li>
+<li class="collapsed menu-mlid-518"><a href="../../2.1">2 Child support assessments</a></li>
+<li class="collapsed menu-mlid-555"><a href="../../3.1">3 Registrable maintenance liabilities</a></li>
+<li class="collapsed menu-mlid-637"><a href="../../4.1">4 Objecting, seeking a review, appealing &amp; applying to court</a></li>
+<li class="expanded active-trail menu-mlid-678"><a href="../../5.1" class="active-trail">5 Collecting child support</a><ul class="menu"><li class="first expanded active-trail menu-mlid-679"><a href="../1.1" title="This chapter describes when the Registrar will accept an application to collect child support, how the Registrar registers enforceable maintenance liabilities and the effect of registration." class="active-trail">5.1 Agency collection</a><ul class="menu"><li class="first leaf menu-mlid-680"><a href="1">5.1.1 Child Support Registrar &amp; the Child Support Register</a></li>
+<li class="leaf menu-mlid-681"><a href="2">5.1.2 Registrable maintenance liabilities &amp; how they are registered</a></li>
+<li class="leaf menu-mlid-682"><a href="3">5.1.3 Date a liability first becomes enforceable</a></li>
+<li class="leaf menu-mlid-683"><a href="4">5.1.4 Collection of arrears accrued during non-collect period</a></li>
+<li class="leaf menu-mlid-684"><a href="5">5.1.5 Payment periods &amp; payment of child support debts</a></li>
+<li class="last leaf active-trail active menu-mlid-685"><a href="6" class="active-trail active">5.1.6 Late payment penalties</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-686"><a href="../2" title="This chapter describes DHS&#039;s administrative methods of collecting child support.">5.2 Administrative Enforcement</a></li>
-<li class="collapsed menu-mlid-698"><a href="../3" title="This chapter explains when the Registrar can apply amounts paid directly between parents or to a third party to satisfy a child support liability and also how the Registrar can offset child support debts between parents and credit lump sum payments.">5.3 Non-agency Payments, Crediting Lump Sum Payments &amp; Offsetting Liabilities</a></li>
-<li class="collapsed menu-mlid-702"><a href="../4" title="This chapter describes the methods available to the Registrar to enforce collection of child support through the courts.">5.4 Court Enforcement</a></li>
-<li class="collapsed menu-mlid-710"><a href="../5" title="This chapter describes how and when payments of child support are made to payees. This chapter also explains when overpayments can be recovered from payees and when amounts overpaid can be refunded to payers.">5.5 Payments to Payees</a></li>
-<li class="collapsed menu-mlid-717"><a href="../6" title="This chapter explains when the Registrar will cease to collect an ongoing child support liability, including arrears of child support payable under that liability. It also explains when the Registrar will accept the payee&#039;s application for DHS to resume collection.">5.6 Ending &amp; Reapplying for Collection</a></li>
-<li class="collapsed menu-mlid-721"><a href="../7" title="This chapter describes when Child Support will not take action to collect a child support debt owed by a payer or payee.">5.7 Non-pursuit of Debts</a></li>
-<li class="last collapsed menu-mlid-723"><a href="../8" title="This chapter describes when the Registrar will not take action to collect a child support debt.">5.8 Obsolete Entries</a></li>
+<li class="collapsed menu-mlid-686"><a href="../2.1" title="This chapter describes DHS&#039;s administrative methods of collecting child support.">5.2 Administrative enforcement</a></li>
+<li class="collapsed menu-mlid-698"><a href="../3.1" title="This chapter explains when the Registrar can apply amounts paid directly between parents or to a third party to satisfy a child support liability and also how the Registrar can offset child support debts between parents and credit lump sum payments.">5.3 Non-agency payments, crediting lump sum payments &amp; offsetting liabilities</a></li>
+<li class="collapsed menu-mlid-702"><a href="../4.1" title="This chapter describes the methods available to the Registrar to enforce collection of child support through the courts.">5.4 Court enforcement</a></li>
+<li class="collapsed menu-mlid-710"><a href="../5.1" title="This chapter describes how and when payments of child support are made to payees. This chapter also explains when overpayments can be recovered from payees and when amounts overpaid can be refunded to payers.">5.5 Payments to payees</a></li>
+<li class="collapsed menu-mlid-717"><a href="../6.1" title="This chapter explains when the Registrar will cease to collect an ongoing child support liability, including arrears of child support payable under that liability. It also explains when the Registrar will accept the payee&#039;s application for DHS to resume collection.">5.6 Ending &amp; reapplying for collection</a></li>
+<li class="collapsed menu-mlid-721"><a href="../7.1" title="This chapter describes when Child Support will not take action to collect a child support debt owed by a payer or payee.">5.7 Non-pursuit of debts</a></li>
+<li class="last collapsed menu-mlid-723"><a href="../8.1" title="This chapter describes when the Registrar will not take action to collect a child support debt.">5.8 Obsolete entries</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-716"><a href="../../6">6 Administration</a></li>
-<li class="leaf menu-mlid-10696"><a href="../../acronyms">Acronym List</a></li>
-<li class="leaf menu-mlid-7193"><a href="../../keywords" title="">Keyword Index</a></li>
-<li class="last leaf menu-mlid-7167"><a href="../../sitemap">Site Map</a></li>
+<li class="collapsed menu-mlid-716"><a href="../../6.1">6 Administration</a></li>
+<li class="leaf menu-mlid-10696"><a href="../../acronyms">Acronym list</a></li>
+<li class="leaf menu-mlid-7193"><a href="../../keywords.1" title="">Keyword index</a></li>
+<li class="last leaf menu-mlid-7167"><a href="../../sitemap">Site map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../child-support-guide">Child Support Guide</a> &raquo; <a href="../../5" class="active-trail">5 Collecting Child Support</a> &raquo; <a href="../1" title="This chapter describes when the Registrar will accept an application to collect child support, how the Registrar registers enforceable maintenance liabilities and the effect of registration." class="active-trail">5.1 DHS Collection</a> &raquo; 5.1.6 Late Payment Penalties</div>
+	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../child-support-guide.1">Child Support Guide</a> &raquo; <a href="../../5.1" class="active-trail">5 Collecting child support</a> &raquo; <a href="../1.1" title="This chapter describes when the Registrar will accept an application to collect child support, how the Registrar registers enforceable maintenance liabilities and the effect of registration." class="active-trail">5.1 Agency collection</a> &raquo; 5.1.6 Late payment penalties</div>
 <div id="utility">
 	
-<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/child-support-guide/5/1/6"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="readspeaker_button" class="rs_skip rsbtn rs_preserve"><a rel="nofollow" class="rsbtn_play" href="https://app-oc.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=https://guides.dss.gov.au/child-support-guide/5/1/6"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsbtn_right rsimg rsplay rspart"></span></a></div></div>
 <div id="content" role="main">
 <article id="node-181">
-<h1 >5.1.6 Late Payment Penalties</h1>
+<h1 >5.1.6 Late payment penalties</h1>
 <h2>Context</h2>
 <p>Late payment penalties apply whenever a parent fails to pay their child support debt by the due date. The Registrar can remit late payment penalties in certain circumstances.</p>
 <div class="reference">
@@ -105,7 +111,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li><a href="6#circswithincontrol">Circumstances within a parent's control</a></li>
 <li><a href="6#mitigation">Reasonable action to mitigate the circumstances that led to late payment, or the effect of those circumstances</a></li>
 <li><a href="6#specialcircs">Special circumstances</a></li>
-<li><a href="6#fairandreasonable">Fair and reasonable to remit the penalty</a></li>
+<li><a href="6#fairandreasonable">Fair &amp; reasonable to remit the penalty</a></li>
 <li><a href="6#late">Late payment penalty incentive offer</a></li>
 <li><a href="6#notification">Notification of decision</a></li>
 </ul><h2 id="applying">Applying a late payment penalty</h2>
@@ -118,7 +124,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li>Late payment penalty for a 4-week payment period is 4/52 of the annual rate of penalty for unpaid income tax.</li>
 </ul><p>Before 1 July 1992, late payment penalties were calculated monthly at the rate of 20% per annum, with a minimum penalty of $20 per month imposed whenever an amount of child support remained unpaid after the due date.</p>
 <p>The Register can be varied to remove any late payment penalties applied because a parent failed to pay an amount of child support that is no longer due. Examples of situations where late payment penalties may be removed include instances where the parent's debt is adjusted to take into account:</p>
-<ul><li>a variation to the liability because of a retrospective court order, or an amended child support assessment,</li>
+<ul><li>a variation to the liability because of a retrospective court order, or an amended child support assessment</li>
 <li>a payment made directly to the payee on or before the due date, or</li>
 <li>the correction of an administrative error.</li>
 </ul><p>Situations where a late payment penalty should be removed in part or in full are not limited to these examples.</p>
@@ -156,10 +162,10 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li>paying in full following resolution of a dispute (e.g. over arrears or a payment made directly to the payee)</li>
 <li>making and meeting an acceptable arrangement for payment.</li>
 </ul><p>Attempts to mitigate the circumstances that contributed to the delay in payment, or mitigate the effects of those circumstances are not limited to these examples.</p>
-<p>Payments received as a result of <a href="../../acronyms#dhs" title="Department of Human Services">DHS</a> enforcement action such as:</p>
-<ul><li>legal action to obtain payment,</li>
+<p>Payments received as a result of Services Australia enforcement action such as:</p>
+<ul><li>legal action to obtain payment</li>
 <li>intercepting an income tax refund, and</li>
-<li>deductions made from Centrelink payments,</li>
+<li>deductions made from Centrelink payments</li>
 </ul><p>are unlikely to be a mitigating circumstance by themselves. This does, however, depend on the circumstances of the case. For example, action may prompt the liable parent to make an acceptable arrangement for payment, or the liable parent may draw the Registrar's attention to an expected refund.</p>
 <h2 id="specialcircs">Special circumstances</h2>
 <p>The Registrar can remit part or all of a late payment penalty if satisfied that there are special circumstances in the case that would make it <a href="6#fairandreasonable">fair and reasonable</a> to do so. Special circumstances include those circumstances all parents face regardless of whether or not they separated.</p>
@@ -175,7 +181,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <h2 id="fairandreasonable">Fair &amp; reasonable to remit the penalty</h2>
 <p>The Registrar must be satisfied that it is fair and reasonable to remit a late payment penalty if the late payment was caused by circumstances within the parent's control, or because of special circumstances. The Registrar will take into account the parent's payment history, current income and necessary commitments, as well as the nature of the circumstances that led to late payment. It would not usually be fair and reasonable to pay other debts or acquire assets in preference to paying child support debts, although this depends on the predictability and nature of the expense.</p>
 <h2 id="late">Late payment penalty incentive offer</h2>
-<p>On 12 April 2010, DHS started a new Late Payment Penalty Incentive Offer aimed at encouraging compliance and rewarding that compliance with an upfront remission of a portion of the late payment penalty.</p>
+<p>On 12 April 2010, Services Australia started a new Late Payment Penalty Incentive Offer aimed at encouraging compliance and rewarding that compliance with an upfront remission of a portion of the late payment penalty.</p>
 <p>This offer replaces the former incentive offer. Guarantees made under the former offer will be honoured where a parent has complied with the terms of that negotiated payment arrangement.</p>
 <p>Under the new Late Payment Penalty Incentive Offer, if a parent enters into a reasonable payment arrangement to pay all arrears while maintaining full and timely payment of any current liability, and they satisfy the requirements of section 68:</p>
 <ul><li>the Registrar will remit 25% of the current late payment penalty immediately, and</li>
@@ -183,11 +189,11 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </ul><p>A 'reasonable payment arrangement' will depend on the circumstances of each case.</p>
 <p>Note: a payment arrangement can be renegotiated if financial circumstances change such that the agreed rate is no longer affordable.</p>
 <h2 id="notification">Notification of decision</h2>
-<p>If the Registrar makes a decision to remit only part of a late payment penalty, or not to remit any part of a penalty, the Registrar must serve written notice of the decision to the parent who is liable to pay the penalty (CSRC Act section 68(2)). The notice must also include, or be accompanied by, a statement that the parent can object to the decision (<a href="../../4/1">4.1</a>) (CSRC Act sections 68(3)(a) and 80) and apply to the <a href="../../acronyms#aat" title="Administrative Appeals Tribunal">AAT</a> for a first review of the objection decision if dissatisfied (CSRC Act sections 68(3)(b) and 89).</p>
+<p>If the Registrar makes a decision to remit only part of a late payment penalty, or not to remit any part of a penalty, the Registrar must serve written notice of the decision to the parent who is liable to pay the penalty (CSRC Act section 68(2)). The notice must also include, or be accompanied by, a statement that the parent can object to the decision (<a href="../../4/1.1">4.1</a>) (CSRC Act sections 68(3)(a) and 80) and apply to the <a href="../../acronyms#aat" title="Administrative Appeals Tribunal">AAT</a> for a first review of the objection decision if dissatisfied (<a href="../../4/2.1">4.2</a>) (CSRC Act sections 68(3)(b) and 89).</p>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     8 February 2016  	</div>
+      Last reviewed:     10 August 2020  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../contact-us">Contact us</a></li>
@@ -196,8 +202,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
-<script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_IkilKWehdX07Wbi3Cg-T6yf5sLTu5FfOT2__edFF9eM.js"></script>
+<script type="text/javascript" src="https://cdn1.readspeaker.com/script/5931/webReader/webReader.js?pids=wr&amp;notools=1&amp;disable=popupplayback&amp;qrxyi9"></script>
 </body>
 </html>

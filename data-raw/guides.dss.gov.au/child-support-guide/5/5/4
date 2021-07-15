@@ -2,27 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<link rel="shortlink" href="../../../node/210" />
-<link rel="canonical" href="4" />
-<meta name="viewport" content="width=device-width" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>5.5.4 Suspending Payments to Payees | Child Support Guide</title>
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<meta name="viewport" content="width=device-width" />
+<link rel="canonical" href="4" />
+<link rel="shortlink" href="../../../node/210" />
+<title>5.5.4 Suspending payments to payees | Child Support Guide</title>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_Q4XrxgEkbadGDm1J7AHUHHmbcMJ2_hbMfrrzrm9Ne_I.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
-<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_d905I2WxoGGQW6uS7jkC73mqKhSejey6jciEdxo9cJI.css" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_yMSKTzBO0KmozyLwajzFOrrt_kto_9mtccAkb0rm7gc.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_FA2YSy0R3kB2AU_wIOLoSR0sJX4ZYjdPuPaRFd2ZDyw.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+window.rsConf = { ui: { tools: {translation: false, dictionary: false}}};
 //--><!]]>
 </script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_rsGiM5M1ffe6EhN-RnhM5f3pDyJ8ZAPFJNKpfjtepLk.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_-oEDdwe4XpUqUj4W0KJs96ENaXIrGvjBvIP-WYYBi54.js"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"iYsbHV4Bm3ym-P6JWfXYK6TG90BzbAkp6iLVHhatSg4","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/5\/5\/4":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"csnG_roV-z0HCoMaF0Rmh4RHK-BqlZeJVqZb_aC8IIU","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"https:\/\/cdn1.readspeaker.com\/script\/5931\/webReader\/webReader.js?pids=wr\u0026notools=1\u0026disable=popupplayback":1,"misc\/jquery.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"0":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"1":1,"sites\/all\/modules\/extlink\/js\/extlink.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/5\/5\/4":true},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)","extUseFontAwesome":false}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -35,61 +40,62 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <nav id="global">
 	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
 <div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<ul class="menu"><li class="first leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law.1">Social Security Guide</a></li>
+<li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide.1">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide.1">Paid Parental Leave Guide</a></li>
+<li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide.1" class="active-trail">Child Support Guide</a></li>
+<li class="leaf menu-mlid-7596"><a href="../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
 <li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
-<li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide" class="active-trail">Child Support Guide</a></li>
-<li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law">Guide to Social Security Law</a></li>
-<li class="last leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+<li class="last leaf has-children menu-mlid-19951"><a href="../../../national-redress-guide" title="">National Redress Guide</a></li>
 </ul></div></nav>
 <header role="banner">
 	<a href="../../../index.html" rel="home"><img src="../../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
 <p class="site-name">Guides to Social Policy Law</p>
 <form class="search-form" role="search" action="4" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
- <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+ <input class="custom-search-box form-text" placeholder="Search" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-XXTaHhOL3-gJ4OrSbpwwBV_1iaNNefS4KVSIHc8aJas" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-uTCGb5G2B0SQEL7SLskpVHZoTULR6dl0Ke7A9ogtM2w" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.32 - Released 7 May 2018</p>
+<p>Version 4.57 - Released 1 July 2021</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7286"><a href="../../../child-support-guide" title="">Using the Child Support Guide</a></li>
-<li class="collapsed menu-mlid-514"><a href="../../updates">What&#039;s New</a></li>
-<li class="collapsed menu-mlid-515"><a href="../../1">1 About the Scheme</a></li>
-<li class="collapsed menu-mlid-518"><a href="../../2">2 Child Support Assessments</a></li>
-<li class="collapsed menu-mlid-555"><a href="../../3">3 Registrable Maintenance Liabilities</a></li>
-<li class="collapsed menu-mlid-637"><a href="../../4">4 Objecting, Seeking a Review, Appealing &amp; Applying to Court</a></li>
-<li class="expanded active-trail menu-mlid-678"><a href="../../5" class="active-trail">5 Collecting Child Support</a><ul class="menu"><li class="first collapsed menu-mlid-679"><a href="../1" title="This chapter describes when the Registrar will accept an application to collect child support, how the Registrar registers enforceable maintenance liabilities and the effect of registration.">5.1 DHS Collection</a></li>
-<li class="collapsed menu-mlid-686"><a href="../2" title="This chapter describes DHS&#039;s administrative methods of collecting child support.">5.2 Administrative Enforcement</a></li>
-<li class="collapsed menu-mlid-698"><a href="../3" title="This chapter explains when the Registrar can apply amounts paid directly between parents or to a third party to satisfy a child support liability and also how the Registrar can offset child support debts between parents and credit lump sum payments.">5.3 Non-agency Payments, Crediting Lump Sum Payments &amp; Offsetting Liabilities</a></li>
-<li class="collapsed menu-mlid-702"><a href="../4" title="This chapter describes the methods available to the Registrar to enforce collection of child support through the courts.">5.4 Court Enforcement</a></li>
-<li class="expanded active-trail menu-mlid-710"><a href="../5" title="This chapter describes how and when payments of child support are made to payees. This chapter also explains when overpayments can be recovered from payees and when amounts overpaid can be refunded to payers." class="active-trail">5.5 Payments to Payees</a><ul class="menu"><li class="first leaf menu-mlid-711"><a href="1">5.5.1 Child Support Account</a></li>
-<li class="leaf menu-mlid-712"><a href="2">5.5.2 Entitlement to Payment &amp; Disbursement Cycle</a></li>
-<li class="leaf menu-mlid-713"><a href="3">5.5.3 Top Up</a></li>
-<li class="leaf active-trail active menu-mlid-714"><a href="4" class="active-trail active">5.5.4 Suspending Payments to Payees</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7286"><a href="../../../child-support-guide.1" title="">Using the Child Support Guide</a></li>
+<li class="collapsed menu-mlid-514"><a href="../../updates.1">What&#039;s new</a></li>
+<li class="collapsed menu-mlid-515"><a href="../../1.1">1 About the Scheme</a></li>
+<li class="collapsed menu-mlid-518"><a href="../../2.1">2 Child support assessments</a></li>
+<li class="collapsed menu-mlid-555"><a href="../../3.1">3 Registrable maintenance liabilities</a></li>
+<li class="collapsed menu-mlid-637"><a href="../../4.1">4 Objecting, seeking a review, appealing &amp; applying to court</a></li>
+<li class="expanded active-trail menu-mlid-678"><a href="../../5.1" class="active-trail">5 Collecting child support</a><ul class="menu"><li class="first collapsed menu-mlid-679"><a href="../1.1" title="This chapter describes when the Registrar will accept an application to collect child support, how the Registrar registers enforceable maintenance liabilities and the effect of registration.">5.1 Agency collection</a></li>
+<li class="collapsed menu-mlid-686"><a href="../2.1" title="This chapter describes DHS&#039;s administrative methods of collecting child support.">5.2 Administrative enforcement</a></li>
+<li class="collapsed menu-mlid-698"><a href="../3.1" title="This chapter explains when the Registrar can apply amounts paid directly between parents or to a third party to satisfy a child support liability and also how the Registrar can offset child support debts between parents and credit lump sum payments.">5.3 Non-agency payments, crediting lump sum payments &amp; offsetting liabilities</a></li>
+<li class="collapsed menu-mlid-702"><a href="../4.1" title="This chapter describes the methods available to the Registrar to enforce collection of child support through the courts.">5.4 Court enforcement</a></li>
+<li class="expanded active-trail menu-mlid-710"><a href="../5.1" title="This chapter describes how and when payments of child support are made to payees. This chapter also explains when overpayments can be recovered from payees and when amounts overpaid can be refunded to payers." class="active-trail">5.5 Payments to payees</a><ul class="menu"><li class="first leaf menu-mlid-711"><a href="1">5.5.1 Child Support Account</a></li>
+<li class="leaf menu-mlid-712"><a href="2">5.5.2 Entitlement to payment &amp; disbursement cycle</a></li>
+<li class="leaf menu-mlid-713"><a href="3">5.5.3 Top up</a></li>
+<li class="leaf active-trail active menu-mlid-714"><a href="4" class="active-trail active">5.5.4 Suspending payments to payees</a></li>
 <li class="last leaf menu-mlid-715"><a href="5">5.5.5 Overpayments</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-717"><a href="../6" title="This chapter explains when the Registrar will cease to collect an ongoing child support liability, including arrears of child support payable under that liability. It also explains when the Registrar will accept the payee&#039;s application for DHS to resume collection.">5.6 Ending &amp; Reapplying for Collection</a></li>
-<li class="collapsed menu-mlid-721"><a href="../7" title="This chapter describes when Child Support will not take action to collect a child support debt owed by a payer or payee.">5.7 Non-pursuit of Debts</a></li>
-<li class="last collapsed menu-mlid-723"><a href="../8" title="This chapter describes when the Registrar will not take action to collect a child support debt.">5.8 Obsolete Entries</a></li>
+<li class="collapsed menu-mlid-717"><a href="../6.1" title="This chapter explains when the Registrar will cease to collect an ongoing child support liability, including arrears of child support payable under that liability. It also explains when the Registrar will accept the payee&#039;s application for DHS to resume collection.">5.6 Ending &amp; reapplying for collection</a></li>
+<li class="collapsed menu-mlid-721"><a href="../7.1" title="This chapter describes when Child Support will not take action to collect a child support debt owed by a payer or payee.">5.7 Non-pursuit of debts</a></li>
+<li class="last collapsed menu-mlid-723"><a href="../8.1" title="This chapter describes when the Registrar will not take action to collect a child support debt.">5.8 Obsolete entries</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-716"><a href="../../6">6 Administration</a></li>
-<li class="leaf menu-mlid-10696"><a href="../../acronyms">Acronym List</a></li>
-<li class="leaf menu-mlid-7193"><a href="../../keywords" title="">Keyword Index</a></li>
-<li class="last leaf menu-mlid-7167"><a href="../../sitemap">Site Map</a></li>
+<li class="collapsed menu-mlid-716"><a href="../../6.1">6 Administration</a></li>
+<li class="leaf menu-mlid-10696"><a href="../../acronyms">Acronym list</a></li>
+<li class="leaf menu-mlid-7193"><a href="../../keywords.1" title="">Keyword index</a></li>
+<li class="last leaf menu-mlid-7167"><a href="../../sitemap">Site map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../child-support-guide">Child Support Guide</a> &raquo; <a href="../../5" class="active-trail">5 Collecting Child Support</a> &raquo; <a href="../5" title="This chapter describes how and when payments of child support are made to payees. This chapter also explains when overpayments can be recovered from payees and when amounts overpaid can be refunded to payers." class="active-trail">5.5 Payments to Payees</a> &raquo; 5.5.4 Suspending Payments to Payees</div>
+	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../child-support-guide.1">Child Support Guide</a> &raquo; <a href="../../5.1" class="active-trail">5 Collecting child support</a> &raquo; <a href="../5.1" title="This chapter describes how and when payments of child support are made to payees. This chapter also explains when overpayments can be recovered from payees and when amounts overpaid can be refunded to payers." class="active-trail">5.5 Payments to payees</a> &raquo; 5.5.4 Suspending payments to payees</div>
 <div id="utility">
 	
-<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/child-support-guide/5/5/4"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="readspeaker_button" class="rs_skip rsbtn rs_preserve"><a rel="nofollow" class="rsbtn_play" href="https://app-oc.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=https://guides.dss.gov.au/child-support-guide/5/5/4"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsbtn_right rsimg rsplay rspart"></span></a></div></div>
 <div id="content" role="main">
 <article id="node-210">
-<h1 >5.5.4 Suspending Payments to Payees</h1>
+<h1 >5.5.4 Suspending payments to payees</h1>
 <h2>Context</h2>
 <p>If a payer applies to a court for a declaration that the payer should not be assessed in respect of the costs of a child because the payer is not a parent of the child concerned, the Registrar must suspend payments to the payee while the court considers the application.</p>
 <p>The Registrar has the discretion to suspend payments to the payee while considering the payer's objection to the validity of a child support assessment for reasons other than the parentage of the child concerned. The Registrar may also exercise this discretion to suspend payments to the payee while a court or the <a href="../../acronyms#aat" title="Administrative Appeals Tribunal">AAT</a> considers a payer's application in proceedings challenging the validity of the child support assessment for reasons other than the parentage of the child concerned.</p>
@@ -102,12 +108,13 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </div>
 <h2>Suspension determination pending a payer's application to court about parentage</h2>
 <p>A payer can apply to a court for a declaration that they should not be assessed in respect of the costs of a child because he or she is not a parent of that child (a declaration under CSA Act section 107). See <a href="../../4/3/2">4.3.2</a> for more information. A payer must serve a copy of their application for a section 107 declaration upon the Registrar (Family Law Rules 2004 rule 4.23).</p>
-<p>Unless the court grants a stay order (<a href="../../4/3/6">4.3.6</a>), the payer is obliged to continue making child support payments for the child pending the court's decision. However, when the Registrar is notified about the payer's application to court for a declaration under section 107 for a child, the Registrar is obliged to suspend payments to the payee for that child (CSRC Act section 79A).</p>
-<p>While the suspension remains in force, the Registrar will not disburse to the payee any payments received from the payer for the child who is the subject of the payer's application. The Registrar will hold these payments in credit on the payer's account. The Registrar will continue to disburse to the payee any amounts that relate to any other child (or children) for whom the payer is liable to pay child support.</p>
+<p>Unless the court grants a stay order (<a href="../../4/3/2">4.3.2</a>), the payer is obliged to continue making child support payments for the child pending the court's decision. However, when the Registrar is notified about the payer's application to court for a declaration under section 107 for a child, the Registrar is obliged to suspend payments to the payee for that child (CSRC Act section 79A).</p>
+<p>While the suspension remains in force, the Registrar will not disburse any payments received from the payer to the payee for the child who is the subject of the payer's application. Instead, the Registrar will hold these payments in credit on the payer's account. The Registrar will continue to disburse any amounts to the payee that relate to any other child (or children) in the assessment for whom the payer is liable to pay child support.</p>
 <div class="example">
-<p><strong>Example:</strong> M has a child support assessment for 2 children, A and B, payable to F. M applies to a court for a section 107 declaration in relation to child support payable for B. The Registrar makes a suspension determination that results in F being paid a proportion of the child support received from M, and the remainder being held in the Account. This proportion is calculated by comparing the child support that would be payable for 1 child with the child support payable for 2 children.</p>
+<p><strong>Example:</strong> Max has a child support assessment for 2 children, Anna and Bradley, payable to Emma. Max applies to a court for a section 107 declaration in relation to child support payable for Bradley. The Registrar makes a suspension determination that results in Emma being paid a proportion of the child support received from Max, and the remainder being held in the Account. This proportion is calculated by comparing the child support that would be payable for 1 child with the child support payable for 2 children.</p>
 </div>
 <p>The Registrar cannot make a 'partial' suspension determination. The Registrar must hold all child support for the child subject to the section 107 application when a suspension determination is made.</p>
+<p>The particulars of the Child Support Register must be varied to give effect to the suspension determination (CSRC Act section 79C(1)).</p>
 <h2>Suspension determination pending a payer's objection or application to the AAT or a court about the validity of the assessment on other grounds (i.e. not parentage)</h2>
 <p>The Registrar may make a suspension determination if a payer objects or applies to the AAT to review the validity of the Registrar's assessment on any of the following grounds (CSRC Act section 79B(1)(a)):</p>
 <ul><li>that the child was not a child for whom an application for an administrative assessment of child support was entitled to be made,</li>
@@ -118,19 +125,17 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <ul><li>the merit of the payer's objection or application,</li>
 <li>the particular circumstances of the individual case (including the interests of the payer, the payee and the child for whom child support is payable), and</li>
 <li>the objects of the CSRC Act (<a href="../../1/3/2">1.3.2</a>).</li>
-</ul><h2>Resumption determinations</h2>
-<p>The Registrar can resume payments to the payee for the child by making a resumption determination.</p>
+</ul><p>The particulars of the Child Support Register must be varied to give effect to the suspension determination (CSRC Act section 79C(1)).</p>
+<p>The payer can apply to court for a stay order if the Registrar has refused to make a suspension determination (see <a href="../../4/3/6">4.3.6</a> for information about stay orders pending review of a decision made by the AAT in relation to the payee's entitlement to an administrative assessment of child support for a child).</p>
+<h2>Resumption determinations</h2>
+<p>The Registrar must resume payments to the payee for the child when a resumption determination is made.</p>
 <p>The Registrar is obliged to make a resumption determination when:</p>
-<ul><li>a court has finally refused the payer's application or it has been withdrawn, struck out or dismissed, or</li>
-<li>the Registrar or AAT has finally refused the objection or application or it has been withdrawn or dismissed (CSRC Act section 79A(3) in the case of an application for a declaration under CSA Act section 107 or section 79B(3) for an objection, AAT application or application to court for review of a decision made by the AAT in relation to the payee's entitlement to an administrative assessment of child support for a child).</li>
-</ul><p>The Registrar has discretion to make a resumption determination in circumstances other than those set out above. The Registrar will consider doing so only when requested to do so by the payee. In deciding whether a resumption determination is appropriate in circumstances other than those set out above, the Registrar will take into account:</p>
-<ul><li>the merit of the payer's objection or application,</li>
-<li>the particular circumstances of the individual case (including the interests of the payer, the payee and the child for whom child support is payable), and</li>
-<li>the objects of the CSRC Act (<a href="../../1/3/2">1.3.2</a>).</li>
+<ul><li>a court has finally refused the payer's application or it has been withdrawn, struck out or dismissed (CSRC Act sections 79A(3) and 79B(3)), or</li>
+<li>the Registrar or AAT has finally refused the objection or application or it has been withdrawn or dismissed (CSRC Act section 79B(3)).</li>
 </ul><p>When the Registrar makes a resumption determination, the payee must be paid any child support retained as a result of the suspension (CSRC Act sections 79A(3)(d) or 79B(3)(d)). The particulars of the Child Support Register must be varied to give effect to the resumption determination (CSRC Act section 79C(2)).</p>
 <h2>When a refusal becomes final</h2>
 <p>The Registrar is obliged to make a resumption determination when the Registrar, the AAT or a court has finally refused the payer's application (CSRC Act section 79B(3)).</p>
-<p>If an application for an AAT first review of an objection decision is not made within the time for doing so, the objection decision becomes final at the end of that period (CSRC Act section 110W(4)). The usual time restrictions on making an application to the AAT do not apply for a care percentage decision (CSRC Act section 90(1)).</p>
+<p>If an application for an AAT first review of an objection decision is not made within the time for doing so, the objection decision becomes final at the end of that period (CSRC Act section 110W(4)).</p>
 <p>Where an AAT first review decision has been made and the next right of appeal is to a court, if an appeal to court is not made within the period for doing so, the AAT first review decision becomes final at the end of that period (CSRC Act section 110W(1)).</p>
 <p>Where an AAT first review decision has been made, and an application can be made through the AAT for a second review, if the application is not made within the time for doing so, the first review decision becomes final at the end of that period (CSRC Act section 110W(1A)).</p>
 <p>A decision of a court is final if an appeal is not made within the time for doing so, or in the case of a decision of the Full Court of the Family Court, no application for special leave to appeal to the High Court has been made within 30 days of the decision (CSA Act section 144 in the case of an application for a declaration under CSA Act section 107 or CSRC Act section 110W(2) or (3)).</p>
@@ -140,13 +145,12 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li>a resumption determination is made.</li>
 </ul><p>The Registrar will include information in the notice about each parent's right to object to that decision.</p>
 <h2>Objection rights</h2>
-<p>The Registrar must vary the particulars of the Register when a suspension determination or a resumption determination is made (CSRC Act section 79C). A parent can object to either of these decisions (see <a href="../../4/1">4.1</a>).</p>
-<p>A parent cannot object to the Registrar deciding not to make a suspension determination or a resumption determination as these are not appealable refusal decisions (CSRC Act section 4(1)). The payer can apply to court for a stay order if the Registrar has refused to make a suspension determination (see <a href="../../4/3/2">4.3.2</a> for a stay order pending a court decision on a payer's application for a declaration under CSA Act section 107 and <a href="../../4/3/6">4.3.6</a> for information about stay orders pending review of a decision made by the AAT in relation to the payee's entitlement to an administrative assessment of child support for a child).</p>
-<p>If the Registrar allows a payee's objection to a suspension determination, the suspension determination is considered never to have been made. It is not necessary for the Registrar to make a formal resumption determination. The Registrar will simply vary the Register to give effect to the objection decision.</p>
+<p>A parent can object to decisions as to particulars entered in the Child Support Register, or to particulars varied in the Child Support Register (see <a href="../../4/1.1">4.1</a>). If a parent disagrees with decisions to suspend or resume, or to not suspend or resume, a parent's entitlement to be paid an amount under a registered maintenance liability under either section 79A or 79B of the CSRC Act, the parent may lodge an objection either to the particulars that are varied in the Register, or to the particulars that are entered in the Register.</p>
+<p>If the Registrar allows the objection, the particulars of the Register will be varied or restored to their original state to reflect the objection decision.</p>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     1 July 2015  	</div>
+      Last reviewed:     10 February 2020  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../contact-us">Contact us</a></li>
@@ -155,8 +159,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
-<script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_IkilKWehdX07Wbi3Cg-T6yf5sLTu5FfOT2__edFF9eM.js"></script>
+<script type="text/javascript" src="https://cdn1.readspeaker.com/script/5931/webReader/webReader.js?pids=wr&amp;notools=1&amp;disable=popupplayback&amp;qrxyi9"></script>
 </body>
 </html>

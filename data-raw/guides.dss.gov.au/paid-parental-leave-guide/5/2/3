@@ -2,27 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<link rel="shortlink" href="../../../node/4735" />
-<link rel="canonical" href="3" />
-<meta name="viewport" content="width=device-width" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>5.2.3 DAPP Payment - General | Paid Parental Leave Guide</title>
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<meta name="viewport" content="width=device-width" />
+<link rel="canonical" href="3" />
+<link rel="shortlink" href="../../../node/4735" />
+<title>5.2.3 DAPP payment - general | Paid Parental Leave Guide</title>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_Q4XrxgEkbadGDm1J7AHUHHmbcMJ2_hbMfrrzrm9Ne_I.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
-<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_d905I2WxoGGQW6uS7jkC73mqKhSejey6jciEdxo9cJI.css" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_yMSKTzBO0KmozyLwajzFOrrt_kto_9mtccAkb0rm7gc.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_FA2YSy0R3kB2AU_wIOLoSR0sJX4ZYjdPuPaRFd2ZDyw.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+window.rsConf = { ui: { tools: {translation: false, dictionary: false}}};
 //--><!]]>
 </script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_rsGiM5M1ffe6EhN-RnhM5f3pDyJ8ZAPFJNKpfjtepLk.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_-oEDdwe4XpUqUj4W0KJs96ENaXIrGvjBvIP-WYYBi54.js"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"cBH14aQHP4a-FZ3bNJcH_0NjYK4B2cgS5kXj0B1OZ9w","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/paid-parental-leave-guide\/5\/2\/3":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"kV4zn616jsgwWzv91d0JgEnoLKkzgPrdqTiADqw7Ttc","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"https:\/\/cdn1.readspeaker.com\/script\/5931\/webReader\/webReader.js?pids=wr\u0026notools=1\u0026disable=popupplayback":1,"misc\/jquery.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"0":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"1":1,"sites\/all\/modules\/extlink\/js\/extlink.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/paid-parental-leave-guide\/5\/2\/3":true},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)","extUseFontAwesome":false}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -35,70 +40,72 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <nav id="global">
 	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
 <div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<ul class="menu"><li class="first leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law.1">Social Security Guide</a></li>
+<li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide.1">Family Assistance Guide</a></li>
+<li class="leaf has-children active-trail menu-mlid-490"><a href="../../../paid-parental-leave-guide.1" class="active-trail">Paid Parental Leave Guide</a></li>
+<li class="leaf has-children menu-mlid-513"><a href="../../../child-support-guide.1">Child Support Guide</a></li>
+<li class="leaf menu-mlid-7596"><a href="../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
 <li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
-<li class="leaf has-children menu-mlid-513"><a href="../../../child-support-guide">Child Support Guide</a></li>
-<li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law">Guide to Social Security Law</a></li>
-<li class="last leaf has-children active-trail menu-mlid-490"><a href="../../../paid-parental-leave-guide" class="active-trail">Paid Parental Leave Guide</a></li>
+<li class="last leaf has-children menu-mlid-19951"><a href="../../../national-redress-guide" title="">National Redress Guide</a></li>
 </ul></div></nav>
 <header role="banner">
 	<a href="../../../index.html" rel="home"><img src="../../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
 <p class="site-name">Guides to Social Policy Law</p>
 <form class="search-form" role="search" action="3" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
- <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+ <input class="custom-search-box form-text" placeholder="Search" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-DWjTAJLPRXxgkWFRPqxZxc5il_5aC1LSPwVWWKaR9hc" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-PQJ08wyqVDyWDhSIQZ3HoC3awq--G1MHjt1nZKEL0u0" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Paid Parental Leave Guide</h2>
-<p>Version 1.50 - Released 7 May 2018</p>
+<p>Version 1.71 - Released 1 July 2021</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7284"><a href="../../../paid-parental-leave-guide" title="">Using the Paid Parental Leave Guide</a></li>
-<li class="collapsed menu-mlid-492"><a href="../../updates">What&#039;s New</a></li>
-<li class="collapsed menu-mlid-1320"><a href="../../1">1 Key Terms &amp; Principles</a></li>
-<li class="collapsed menu-mlid-1321"><a href="../../2">2 Eligibility for PLP &amp; DAPP</a></li>
-<li class="collapsed menu-mlid-1322"><a href="../../3">3 Rate Calculation for PLP &amp; DAPP</a></li>
-<li class="collapsed menu-mlid-1323"><a href="../../4">4 Claims &amp; Payments for PLP</a></li>
-<li class="expanded active-trail menu-mlid-1324"><a href="../../5" class="active-trail">5 Claims &amp; Payments for DAPP</a><ul class="menu"><li class="first collapsed menu-mlid-948"><a href="../1">5.1 Claims for DAPP</a></li>
-<li class="last expanded active-trail menu-mlid-949"><a href="../2" class="active-trail">5.2 Payment of DAPP</a><ul class="menu"><li class="first leaf menu-mlid-940"><a href="1">5.2.1 How DAPP is Paid</a></li>
-<li class="leaf menu-mlid-941"><a href="2">5.2.2 When DAPP is Paid</a></li>
-<li class="last leaf active-trail active menu-mlid-942"><a href="3" class="active-trail active">5.2.3 DAPP Payment - General</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7284"><a href="../../../paid-parental-leave-guide.1" title="">Using the Paid Parental Leave Guide</a></li>
+<li class="collapsed menu-mlid-492"><a href="../../updates.1">What&#039;s new</a></li>
+<li class="collapsed menu-mlid-1320"><a href="../../1.1">1 Key terms &amp; principles</a></li>
+<li class="collapsed menu-mlid-1321"><a href="../../2.1">2 Eligibility for PLP &amp; DAPP</a></li>
+<li class="collapsed menu-mlid-1322"><a href="../../3.1">3 Rate calculation for PLP &amp; DAPP</a></li>
+<li class="collapsed menu-mlid-1323"><a href="../../4.1">4 Claims &amp; payments for PLP</a></li>
+<li class="expanded active-trail menu-mlid-1324"><a href="../../5.1" class="active-trail">5 Claims &amp; payments for DAPP</a><ul class="menu"><li class="first collapsed menu-mlid-948"><a href="../1.1">5.1 Claims for DAPP</a></li>
+<li class="last expanded active-trail menu-mlid-949"><a href="../2.1" class="active-trail">5.2 Payment of DAPP</a><ul class="menu"><li class="first leaf menu-mlid-940"><a href="1">5.2.1 How DAPP is paid</a></li>
+<li class="leaf menu-mlid-941"><a href="2">5.2.2 When DAPP is paid</a></li>
+<li class="last leaf active-trail active menu-mlid-942"><a href="3" class="active-trail active">5.2.3 DAPP payment - general</a></li>
 </ul></li>
 </ul></li>
-<li class="collapsed menu-mlid-1325"><a href="../../6">6 Determinations</a></li>
-<li class="collapsed menu-mlid-1326"><a href="../../7">7 Compliance &amp; Enforcement</a></li>
-<li class="collapsed menu-mlid-1327"><a href="../../8">8 Review of Decisions</a></li>
-<li class="collapsed menu-mlid-1328"><a href="../../9">9 Miscellaneous</a></li>
-<li class="leaf menu-mlid-1317"><a href="../../acronyms">Acronym List</a></li>
-<li class="leaf menu-mlid-7162"><a href="../../keywords">Keyword Index</a></li>
-<li class="leaf menu-mlid-7369"><a href="../../act-references">Act Reference Index</a></li>
-<li class="last leaf menu-mlid-7170"><a href="../../sitemap">Site Map</a></li>
+<li class="collapsed menu-mlid-1325"><a href="../../6.1">6 Determinations</a></li>
+<li class="collapsed menu-mlid-1326"><a href="../../7.1">7 Compliance &amp; enforcement</a></li>
+<li class="collapsed menu-mlid-1327"><a href="../../8.1">8 Review of decisions</a></li>
+<li class="collapsed menu-mlid-1328"><a href="../../9.1">9 Miscellaneous</a></li>
+<li class="leaf menu-mlid-25176"><a href="../../10">10 Transitional arrangements</a></li>
+<li class="leaf menu-mlid-1317"><a href="../../acronyms">Acronym list</a></li>
+<li class="leaf menu-mlid-7162"><a href="../../keywords.1" title="">Keyword index</a></li>
+<li class="leaf menu-mlid-7369"><a href="../../act-references.1" title="">Act reference index</a></li>
+<li class="last leaf menu-mlid-7170"><a href="../../sitemap">Site map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a> &raquo; <a href="../../5" class="active-trail">5 Claims &amp; Payments for DAPP</a> &raquo; <a href="../2" class="active-trail">5.2 Payment of DAPP</a> &raquo; 5.2.3 DAPP Payment - General</div>
+	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../paid-parental-leave-guide.1">Paid Parental Leave Guide</a> &raquo; <a href="../../5.1" class="active-trail">5 Claims &amp; payments for DAPP</a> &raquo; <a href="../2.1" class="active-trail">5.2 Payment of DAPP</a> &raquo; 5.2.3 DAPP payment - general</div>
 <div id="utility">
 	
-<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/paid-parental-leave-guide/5/2/3"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="readspeaker_button" class="rs_skip rsbtn rs_preserve"><a rel="nofollow" class="rsbtn_play" href="https://app-oc.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=https://guides.dss.gov.au/paid-parental-leave-guide/5/2/3"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsbtn_right rsimg rsplay rspart"></span></a></div></div>
 <div id="content" role="main">
 <article id="node-4735">
-<h1 >5.2.3 DAPP Payment - General</h1>
+<h1 >5.2.3 DAPP payment - general</h1>
 <h2><a href="../../acronyms#dapp" title="Dad and partner pay">DAPP</a> payment</h2>
 <p>DAPP is funded by the Australian Government out of consolidated revenue. DAPP is taxable income and counts as income for family assistance purposes. DAPP is also counted as income for income support payments for children born or entrusted into a person's care on or after 1 October 2016. DAPP is not to be taken into account for the purposes of workers compensation or accident compensation.</p>
-<p>A DAPP payment is protected from sale, assignment, charge, execution, bankruptcy or otherwise by making it inalienable. However, this protection is subject to a deduction for <a href="../../acronyms#payg" title="Pay as you go">PAYG</a> withholding - see <a href="../../4/3/2/20">4.3.2.20</a>.</p>
+<p>A DAPP payment is protected from sale, assignment, charge, execution and bankruptcy or otherwise by making it inalienable. However, this protection is subject to a deduction for <a href="../../acronyms#payg" title="Pay as you go">PAYG</a> withholding - see <a href="../../4/3/2/20">4.3.2.20</a>.</p>
 <p>In addition, from 1 October 2016, the Secretary may deduct an amount from DAPP to avoid overpayment of an income support payment due to the assessment of DAPP under the income support income test.</p>
 <p>There are no other amounts that can be deducted by the Secretary or employer from a DAPP payment.</p>
 <p>See <a href="../../4/3/8/70">4.3.8.70</a> for information relating to protection from garnishee for an account into which a DAPP payment is paid.</p>
 <p>When DAPP is paid to a claimant, Centrelink is required to provide the person with a record of payment.</p>
 <p>The PPL Rules prescribe that Centrelink is to give a person the following information at the time of making the DAPP payment or as soon as possible after that date:</p>
-<ul><li>a statement to the effect that the payment is made by Centrelink and is a DAPP payment,</li>
-<li>the name of the person (claimant) to whom the DAPP payment is made,</li>
-<li>the period to which the DAPP payment applies,</li>
-<li>the date on which the DAPP payment is paid,</li>
-<li>the gross amount of the DAPP payment,</li>
+<ul><li>a statement to the effect that the payment is made by Centrelink and is a DAPP payment</li>
+<li>the name of the person (claimant) to whom the DAPP payment is made</li>
+<li>the period to which the DAPP payment applies</li>
+<li>the date on which the DAPP payment is paid</li>
+<li>the gross amount of the DAPP payment</li>
 <li>the net amount of the DAPP payment, and</li>
 <li>the total amount of income tax withheld from the gross DAPP payment amount.</li>
 </ul><p>If, after Centrelink pays DAPP, Centrelink makes a variation to the payability determination (<a href="../1/5">5.1.5</a>) that a higher amount of DAPP is payable to the person, then this amount will be paid by Centrelink as soon as practicable after the decision has been made.</p>
@@ -106,13 +113,13 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <div class="reference">
 <p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2010A00104" title="Paid Parental Leave Act 2010">PPLAct</a> section 115EE Giving person record of payment, section 115EF Effect of extending DAPP period after review, section 115EG Protection of payment, section 115EH Deductions for PAYG withholding, section 115EI Deductions to avoid overpayment of income support payment, section 115EJ No other deductions, section 115EK Effect of garnishee etc. order, section 115EL Exemption from operation of workers' compensation and accident compensation laws</p>
 <p><a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 8(1A) Income test definitions</p>
-<p><a href="https://www.legislation.gov.au/Series/F2010L03428" title="Paid Parental Leave Rules 2010">PPL Rules</a> rule 3A.15 Record of payment</p>
-<p><strong>Policy reference:</strong> PPL Guide <a href="../../2/3">2.3</a> DAPP Eligibility, <a href="../../4/3/1/30">4.3.1.30</a> Protection of Instalment for PLP, <a href="../../4/3/2/20">4.3.2.20</a> Deductions from PLP for PAYG Withholding, <a href="../../4/3/2/35">4.3.2.35</a> Deductions from PLP to Avoid Overpayment of ISP, <a href="../1/5">5.1.5</a> Withdrawal or Variation of a Claim for DAPP</p>
+<p><a href="https://www.legislation.gov.au/Series/F2021L00384" title="Paid Parental Leave Rules 2021">PPL Rules</a> section 51 Record of payment</p>
+<p><strong>Policy reference:</strong> PPL Guide <a href="../../2/3.1">2.3</a> DAPP eligibility, <a href="../../4/3/1/30">4.3.1.30</a> Protection of instalment of PLP, <a href="../../4/3/2/20">4.3.2.20</a> Deductions from PLP for PAYG withholding, <a href="../../4/3/2/35">4.3.2.35</a> Deductions from PLP to avoid overpayment of ISP, <a href="../1/5">5.1.5</a> Withdrawal or variation of a claim for DAPP</p>
 </div>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     4 October 2016  	</div>
+      Last reviewed:     10 May 2021  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../contact-us">Contact us</a></li>
@@ -121,8 +128,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
-<script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_IkilKWehdX07Wbi3Cg-T6yf5sLTu5FfOT2__edFF9eM.js"></script>
+<script type="text/javascript" src="https://cdn1.readspeaker.com/script/5931/webReader/webReader.js?pids=wr&amp;notools=1&amp;disable=popupplayback&amp;qrxyi9"></script>
 </body>
 </html>

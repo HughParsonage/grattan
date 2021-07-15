@@ -28,7 +28,7 @@ If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{fro
 If the SDMX connection fails, a message is emitted (not a warning) and
 the function contines as if \code{useABSConnection = FALSE}.
 
-The internal data was updated on 2020-07-02 to 2020-Q1.}
+The internal data was updated on 2021-07-12 to 2021-Q2.}
 
 \item{allow.projection}{If set to \code{TRUE} the \code{forecast} package is used to project forward, if required.}
 

@@ -2,27 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<link rel="shortlink" href="../../../node/140" />
-<link rel="canonical" href="6" />
-<meta name="viewport" content="width=device-width" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>4.1.6 Making a Decision to Allow or Disallow an Objection | Child Support Guide</title>
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<meta name="viewport" content="width=device-width" />
+<link rel="canonical" href="6" />
+<link rel="shortlink" href="../../../node/140" />
+<title>4.1.6 Making a decision to allow or disallow an objection | Child Support Guide</title>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_Q4XrxgEkbadGDm1J7AHUHHmbcMJ2_hbMfrrzrm9Ne_I.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
-<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_d905I2WxoGGQW6uS7jkC73mqKhSejey6jciEdxo9cJI.css" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_yMSKTzBO0KmozyLwajzFOrrt_kto_9mtccAkb0rm7gc.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_FA2YSy0R3kB2AU_wIOLoSR0sJX4ZYjdPuPaRFd2ZDyw.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+window.rsConf = { ui: { tools: {translation: false, dictionary: false}}};
 //--><!]]>
 </script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_rsGiM5M1ffe6EhN-RnhM5f3pDyJ8ZAPFJNKpfjtepLk.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_-oEDdwe4XpUqUj4W0KJs96ENaXIrGvjBvIP-WYYBi54.js"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"DYnBG0XVzyTYe2ik0g9VApyAy0Wi9WmuzAewaBxYBFg","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/4\/1\/6":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"nD2jfzYE47jT-iSI1o8aQWnn5WcHE3Io04NSnEv-GlM","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"https:\/\/cdn1.readspeaker.com\/script\/5931\/webReader\/webReader.js?pids=wr\u0026notools=1\u0026disable=popupplayback":1,"misc\/jquery.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"0":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"1":1,"sites\/all\/modules\/extlink\/js\/extlink.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/4\/1\/6":true},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)","extUseFontAwesome":false}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -35,62 +40,63 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <nav id="global">
 	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
 <div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<ul class="menu"><li class="first leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law.1">Social Security Guide</a></li>
+<li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide.1">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide.1">Paid Parental Leave Guide</a></li>
+<li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide.1" class="active-trail">Child Support Guide</a></li>
+<li class="leaf menu-mlid-7596"><a href="../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
 <li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
-<li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide" class="active-trail">Child Support Guide</a></li>
-<li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law">Guide to Social Security Law</a></li>
-<li class="last leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+<li class="last leaf has-children menu-mlid-19951"><a href="../../../national-redress-guide" title="">National Redress Guide</a></li>
 </ul></div></nav>
 <header role="banner">
 	<a href="../../../index.html" rel="home"><img src="../../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
 <p class="site-name">Guides to Social Policy Law</p>
 <form class="search-form" role="search" action="6" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
- <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+ <input class="custom-search-box form-text" placeholder="Search" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-ajXeiNRY69zgdUso6dSuTSu6a88Yzei7jlbkfx6PpQA" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-tgbSibGAzd2vkx_NUcbRenB20OUgwDTR-1jz_IbPFvs" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.32 - Released 7 May 2018</p>
+<p>Version 4.57 - Released 1 July 2021</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7286"><a href="../../../child-support-guide" title="">Using the Child Support Guide</a></li>
-<li class="collapsed menu-mlid-514"><a href="../../updates">What&#039;s New</a></li>
-<li class="collapsed menu-mlid-515"><a href="../../1">1 About the Scheme</a></li>
-<li class="collapsed menu-mlid-518"><a href="../../2">2 Child Support Assessments</a></li>
-<li class="collapsed menu-mlid-555"><a href="../../3">3 Registrable Maintenance Liabilities</a></li>
-<li class="expanded active-trail menu-mlid-637"><a href="../../4" class="active-trail">4 Objecting, Seeking a Review, Appealing &amp; Applying to Court</a><ul class="menu"><li class="first expanded active-trail menu-mlid-638"><a href="../1" title="This chapter describes the objections process in the Child Support (Registration and Collection) Act 1988 and what parents can do if they think the Registrar has made a wrong decision on their case." class="active-trail">4.1 Objections</a><ul class="menu"><li class="first leaf menu-mlid-639"><a href="1">4.1.1 Overview</a></li>
-<li class="leaf menu-mlid-640"><a href="2">4.1.2 Decisions Made under the CSA Act to Which a Person May Object</a></li>
-<li class="leaf menu-mlid-641"><a href="3">4.1.3 Decisions Made under the CSRC Act to Which a Person May Object</a></li>
-<li class="leaf menu-mlid-642"><a href="4">4.1.4 Can an Objection Decision Be Made?</a></li>
-<li class="leaf menu-mlid-643"><a href="5">4.1.5 Extensions of Time to Lodge Objections</a></li>
-<li class="leaf active-trail active menu-mlid-644"><a href="6" class="active-trail active">4.1.6 Making a Decision to Allow or Disallow an Objection</a></li>
-<li class="leaf menu-mlid-645"><a href="7">4.1.7 Effect of Objection on Original Decision</a></li>
-<li class="last leaf menu-mlid-646"><a href="8">4.1.8 Care Percentage Decisions</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7286"><a href="../../../child-support-guide.1" title="">Using the Child Support Guide</a></li>
+<li class="collapsed menu-mlid-514"><a href="../../updates.1">What&#039;s new</a></li>
+<li class="collapsed menu-mlid-515"><a href="../../1.1">1 About the Scheme</a></li>
+<li class="collapsed menu-mlid-518"><a href="../../2.1">2 Child support assessments</a></li>
+<li class="collapsed menu-mlid-555"><a href="../../3.1">3 Registrable maintenance liabilities</a></li>
+<li class="expanded active-trail menu-mlid-637"><a href="../../4.1" class="active-trail">4 Objecting, seeking a review, appealing &amp; applying to court</a><ul class="menu"><li class="first expanded active-trail menu-mlid-638"><a href="../1.1" title="This chapter describes the objections process in the Child Support (Registration and Collection) Act 1988 and what parents can do if they think the Registrar has made a wrong decision on their case." class="active-trail">4.1 Objections</a><ul class="menu"><li class="first leaf menu-mlid-639"><a href="1">4.1.1 Overview</a></li>
+<li class="leaf menu-mlid-640"><a href="2">4.1.2 Decisions made under the CSA Act to which a person may object</a></li>
+<li class="leaf menu-mlid-641"><a href="3">4.1.3 Decisions made under the CSRC Act to which a person may object</a></li>
+<li class="leaf menu-mlid-642"><a href="4">4.1.4 Can an objection decision be made?</a></li>
+<li class="leaf menu-mlid-643"><a href="5">4.1.5 Extensions of time to lodge objections</a></li>
+<li class="leaf active-trail active menu-mlid-644"><a href="6" class="active-trail active">4.1.6 Making a decision to allow or disallow an objection</a></li>
+<li class="leaf menu-mlid-645"><a href="7">4.1.7 Effect of objection on original decision</a></li>
+<li class="last leaf menu-mlid-646"><a href="8">4.1.8 Care percentage decisions</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-647"><a href="../2" title="A parent can apply to the AAT for an AAT first review of most objection decisions made by the Registrar. This chapter explains which decisions the AAT can review and the process involved.">4.2 External Review Applications to the AAT</a></li>
-<li class="last collapsed menu-mlid-657"><a href="../3" title="This chapter explains:
+<li class="collapsed menu-mlid-647"><a href="../2.1" title="A parent can apply to the AAT for an AAT first review of most objection decisions made by the Registrar. This chapter explains which decisions the AAT can review and the process involved.">4.2 External review applications to the AAT</a></li>
+<li class="last collapsed menu-mlid-657"><a href="../3.1" title="This chapter explains:
 •what court applications a parent can make if they are not satisfied with the Registrar&#039;s decisions or an outcome of the AAT first or second review of a decision. This includes applications under the child support legislation and the Administrative Decisions (Judicial Review) Act 1977,
 •the orders a court can make on those applications,
-•orders that a court may make under the FL Act that affect a child support assessment or the details entered in the Register...">4.3 Court Applications, Appeals &amp; Orders</a></li>
+•orders that a court may make under the FL Act that affect a child support assessment or the details entered in the Register...">4.3 Court applications, appeals &amp; orders</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-678"><a href="../../5">5 Collecting Child Support</a></li>
-<li class="collapsed menu-mlid-716"><a href="../../6">6 Administration</a></li>
-<li class="leaf menu-mlid-10696"><a href="../../acronyms">Acronym List</a></li>
-<li class="leaf menu-mlid-7193"><a href="../../keywords" title="">Keyword Index</a></li>
-<li class="last leaf menu-mlid-7167"><a href="../../sitemap">Site Map</a></li>
+<li class="collapsed menu-mlid-678"><a href="../../5.1">5 Collecting child support</a></li>
+<li class="collapsed menu-mlid-716"><a href="../../6.1">6 Administration</a></li>
+<li class="leaf menu-mlid-10696"><a href="../../acronyms">Acronym list</a></li>
+<li class="leaf menu-mlid-7193"><a href="../../keywords.1" title="">Keyword index</a></li>
+<li class="last leaf menu-mlid-7167"><a href="../../sitemap">Site map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../child-support-guide">Child Support Guide</a> &raquo; <a href="../../4" class="active-trail">4 Objecting, Seeking a Review, Appealing &amp; Applying to Court</a> &raquo; <a href="../1" title="This chapter describes the objections process in the Child Support (Registration and Collection) Act 1988 and what parents can do if they think the Registrar has made a wrong decision on their case." class="active-trail">4.1 Objections</a> &raquo; 4.1.6 Making a Decision to Allow or Disallow an Objection</div>
+	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../child-support-guide.1">Child Support Guide</a> &raquo; <a href="../../4.1" class="active-trail">4 Objecting, seeking a review, appealing &amp; applying to court</a> &raquo; <a href="../1.1" title="This chapter describes the objections process in the Child Support (Registration and Collection) Act 1988 and what parents can do if they think the Registrar has made a wrong decision on their case." class="active-trail">4.1 Objections</a> &raquo; 4.1.6 Making a decision to allow or disallow an objection</div>
 <div id="utility">
 	
-<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/child-support-guide/4/1/6"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="readspeaker_button" class="rs_skip rsbtn rs_preserve"><a rel="nofollow" class="rsbtn_play" href="https://app-oc.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=https://guides.dss.gov.au/child-support-guide/4/1/6"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsbtn_right rsimg rsplay rspart"></span></a></div></div>
 <div id="content" role="main">
 <article id="node-140">
-<h1 >4.1.6 Making a Decision to Allow or Disallow an Objection</h1>
+<h1 >4.1.6 Making a decision to allow or disallow an objection</h1>
 <h2>Context</h2>
 <p>Objection decisions must follow the requirements set out in the child support legislation. Objection decisions must also follow general administrative law principles.</p>
 <div class="reference">
@@ -113,11 +119,11 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p>The Registrar will not send a copy of a proposed objection or supporting documents to the other party if those documents include obscene or otherwise offensive material. Such documents are not regarded as objections as they have not been made in the manner specified by the Registrar (CSRC Act section 16A) and no further action will be taken on them. The Registrar will contact the parent lodging the objection and give them an opportunity to re-submit the objection and supporting documents, without the offensive material, if they choose to.</p>
 <p>The Registrar is not required to provide a copy of the objection to the other parent if the objection is to a decision to refuse to remit penalties imposed on the payer or an employer or, for an objection to a decision to make, or refuse to make, a departure determination under Part 6A of the CSA Act, if the Registrar is satisfied that the rights of the other parent will not be affected by any possible decision on the objection (CSRC Act section 85(2)). The Registrar may be satisfied that an objection decision will not affect the rights of the other parent where the objection raises no new issues and the original change of assessment decision is the correct or preferable decision.</p>
 <div class="example">
-<p><strong>Example:</strong> A parent objects to a change of assessment decision on the grounds that the decision did not take into account his moral duty to provide financial support for his mother. The original decision maker considered this matter and decided correctly that it could not be taken into account under any of the change of assessment reasons. The decision is otherwise the correct or preferable decision. The Registrar is satisfied that the rights of the other parent will not be affected by the objection decision and is therefore not required to serve a copy of the objection on the other parent.</p>
+<p><strong>Example:</strong> A parent objects to a change of assessment decision on the grounds that the decision did not take into account their moral duty to provide financial support for their mother. The original decision maker considered this matter and decided correctly that it could not be taken into account under any of the change of assessment reasons. The decision is otherwise the correct or preferable decision. The Registrar is satisfied that the rights of the other parent will not be affected by the objection decision and is therefore not required to serve a copy of the objection on the other parent.</p>
 </div>
 <div class="example">
-<p><strong>Example:</strong> M and F have one child, A. M has regular care of A. M does not live close to F and it costs 3% of M's adjusted taxable income travelling to see and care for A. M applies for a change to the assessment to have their high travel costs taken into account. Because M's travel costs are less than 5% of their adjusted taxable income they cannot be taken into account and the decision maker correctly decides that they are not able to make a change to the assessment.</p>
-<p>M objects to the decision. The only grounds relied upon by M are the same travel costs previously stated. The Objections Officer decides that no new grounds have been raised by M and therefore disallows the objection. The decision is the correct decision. The Registrar is satisfied that the rights of the other parent will not be affected by the objection decision and is therefore not required to serve a copy of the objection on the other parent.</p>
+<p><strong>Example:</strong> Eric and Laura have one child, Arthur. Eric has regular care of Arthur. Eric does not live close to Laura and it costs 3% of Eric's adjusted taxable income travelling to see and care for Arthur. Eric applies for a change to the assessment to have their high travel costs taken into account. Because Eric's travel costs are less than 5% of their adjusted taxable income they cannot be taken into account and the decision maker correctly decides that they are not able to make a change to the assessment.</p>
+<p>Eric objects to the decision. The only grounds relied upon by Eric are the same travel costs previously stated. The Objections Officer decides that no new grounds have been raised by Eric and therefore disallows the objection. The decision is the correct decision. The Registrar is satisfied that the rights of the other parent will not be affected by the objection decision and is therefore not required to serve a copy of the objection on the other parent.</p>
 </div>
 <p>Where the other parent is served with a copy of the objection, they may lodge a notice in response to the objection within 28 days of receiving the copy of the objection and any document that accompanied the objection (CSRC Act sections 86(1) and (2)). The time for lodging a response is extended to 90 days where the parent lodging the response resides overseas in a reciprocating jurisdiction (CSRC Act section 86(2A)).</p>
 <p>The Registrar must consider any information provided by both parents about the decision that is the subject of the objection. The Registrar will not make a decision on an objection before a notice in response is received, unless the period for returning the notice to the Registrar has ended. The exception would be where a parent advises that they do not wish to lodge a notice in response to an objection.</p>
@@ -135,9 +141,9 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <ul><li>make a new decision (either to change the assessment, or refusing to change the assessment) taking into account all information including a change of circumstances or new reason, or</li>
 <li>where the objection is to a section 98E, 98F or 98J refusal decision made under the CSA Act, set aside the original decision to refuse to change the assessment and refer the application to a decision maker to consider the application afresh. (This two-step process is necessary because the Registrar must arrange for exchange of documents between the parents and for each parent to be heard before a change of assessment decision can be made).</li>
 </ul><div class="example">
-<p><strong>Example:</strong> M makes a change of assessment application because of the high costs involved in enabling the parent to spend time with, or communicate with, the child in the assessment. The decision maker finds that there is no reason to change the assessment because M's costs do not amount to more than 5% of M's adjusted taxable income amount.</p>
-<p>M objects because the decision maker did not take into account all of M's air fares. M also provides details of significant medical costs for a new relevant dependent child who was born after the original decision was made.</p>
-<p>The Objections Officer considers all the information that is relevant to the costs M incurs in spending time with or communicating with the child and finds that the costs do exceed 5% of M's adjusted taxable income amount. In making a decision to change the assessment the Objections Officer also takes into account the information about the medical costs for M's new relevant dependent child.</p>
+<p><strong>Example:</strong> Fynn makes a change of assessment application because of the high costs involved in enabling the parent to spend time with, or communicate with, the child in the assessment. The decision maker finds that there is no reason to change the assessment because Fynn's costs do not amount to more than 5% of Fynn's adjusted taxable income amount.</p>
+<p>Fynn objects because the decision maker did not take into account all of Fynn's air fares. Fynn also provides details of significant medical costs for a new relevant dependent child who was born after the original decision was made.</p>
+<p>The Objections Officer considers all the information that is relevant to the costs Fynn incurs in spending time with or communicating with the child and finds that the costs do exceed 5% of Fynn's adjusted taxable income amount. In making a decision to change the assessment the Objections Officer also takes into account the information about the medical costs for Fynn's new relevant dependent child.</p>
 </div>
 <p>The Objections Officer will ensure that the process followed is procedurally fair and will give parents an opportunity to respond to information that is being taken into account.</p>
 <h2 id="Decisions_an_Objections_Officer_can_make">Decisions an Objections Officer can make</h2>
@@ -148,16 +154,16 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <h2 id="Decisions_involving_discretion">Decisions involving discretion</h2>
 <p>If the original decision involved the exercise of discretion, the Objections Officer may find that the original decision was technically correct but that it was not the best exercise of the discretion. The Objections Officer must allow an objection in these circumstances and replace the decision with the preferable decision.</p>
 <div class="example">
-<p><strong>Example:</strong> F, the payer, makes an application to change the assessment because of the costs involved in enabling him to spend time with, or communicate with the child in the assessment. The decision maker finds that this is a reason to change the assessment and that it is fair to reduce the annual rate by $500 per year. F objects because the decision maker did not take into account significant medical costs for a relevant dependent child.</p>
-<p>The Objections Officer considers the available information pertinent to the finding that F's relevant costs exceed 5% of his adjusted taxable income amount. The Objections Officer agrees with the decision maker's finding that this is a reason to change the assessment. The Objections Officer provides M, the payee, with an opportunity to comment on the new information about F's medical costs for his relevant dependent child and further information from the child's treating specialist. The Objections Officer takes the new information and any information provided by the other parent into account when considering whether a change to the assessment would be just and equitable and otherwise proper.</p>
+<p><strong>Example:</strong> Fatima, the payer, makes an application to change the assessment because of the costs involved in enabling them to spend time with, or communicate with the child in the assessment. The decision maker finds that this is a reason to change the assessment and that it is fair to reduce the annual rate by $500 per year. Fatima objects because the decision maker did not take into account significant medical costs for a relevant dependent child.</p>
+<p>The Objections Officer considers the available information pertinent to the finding that Fatima's relevant costs exceed 5% of their adjusted taxable income amount. The Objections Officer agrees with the decision maker's finding that this is a reason to change the assessment. The Objections Officer provides Harry, the payee, with an opportunity to comment on the new information about Fatima's medical costs for their relevant dependent child and further information from the child's treating specialist. The Objections Officer takes the new information and any information provided by the other parent into account when considering whether a change to the assessment would be just and equitable and otherwise proper.</p>
 </div>
 <h2 id="Review_of_an_Objection_Officers_decision">Review of an Objection Officer's decision</h2>
 <h3>The objection decision</h3>
-<p>A parent who disagrees with an objection decision (including a decision to refuse to change an assessment because the matters are too complex) can make an application to the <a href="../../acronyms#aat" title="Administrative Appeals Tribunal">AAT</a> for an AAT first review of the decision. See <a href="../2">4.2</a>.</p>
+<p>A parent who disagrees with an objection decision (including a decision to refuse to change an assessment because the matters are too complex) can make an application to the <a href="../../acronyms#aat" title="Administrative Appeals Tribunal">AAT</a> for an AAT first review of the decision. See <a href="../2.1">4.2</a>.</p>
 <h3>Other decisions made by an Objections Officer</h3>
 <p>An Objections Officer can also be authorised to make decisions about other matters raised by the parents, which are not related to the objection. Any decision made by the Objections Officer, except the decision on the objection, is a new decision and either parent may object to the new decision. Another Objections Officer will make a decision on that subsequent objection.</p>
 <h2 id="Notifying_parents_of_the_decision">Notifying parents of the decision</h2>
-<p>The Registrar must serve written notice of the objection decision on the parent who lodged the objection and on the other parent if the other parent was entitled to be served a copy of the objection and accompanying documents (CSRC Act section 87(2)). The notice of decision must include a statement that the parent may apply to the AAT for an AAT first review of the decision if they are dissatisfied with the outcome of the objection (CSRC Act section 87(3)).</p>
+<p>The Registrar must serve written notice of the objection decision on the parent who lodged the objection and on the other parent if the other parent was entitled to be served a copy of the objection and accompanying documents (CSRC Act section 87(2)). The notice of decision must include a statement that the parent may apply to the AAT for an AAT first review of the decision if they are dissatisfied with the outcome of the objection (CSRC Act section <span class="nobr">87(3)).</span></p>
 <p>The notice must include or be accompanied by the reasons for the decision (CSRC Act section 87(3)).</p>
 <p>The reasons for decision will include:</p>
 <ul><li>the Objections Officer's understanding of the relevant legislation,</li>
@@ -166,7 +172,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </ul></article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     4 January 2016  	</div>
+      Last reviewed:     20 September 2018  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../contact-us">Contact us</a></li>
@@ -175,8 +181,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
-<script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_IkilKWehdX07Wbi3Cg-T6yf5sLTu5FfOT2__edFF9eM.js"></script>
+<script type="text/javascript" src="https://cdn1.readspeaker.com/script/5931/webReader/webReader.js?pids=wr&amp;notools=1&amp;disable=popupplayback&amp;qrxyi9"></script>
 </body>
 </html>

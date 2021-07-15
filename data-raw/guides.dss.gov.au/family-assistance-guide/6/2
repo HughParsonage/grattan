@@ -2,27 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<link rel="shortlink" href="../../node/6317" />
-<link rel="canonical" href="2" />
-<meta name="viewport" content="width=device-width" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>6.2 Internal Reviews | Family Assistance Guide</title>
-<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<meta name="viewport" content="width=device-width" />
+<link rel="canonical" href="2" />
+<link rel="shortlink" href="../../node/6317" />
+<title>6.2 Internal reviews | Family Assistance Guide</title>
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_Q4XrxgEkbadGDm1J7AHUHHmbcMJ2_hbMfrrzrm9Ne_I.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
-<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
-<script type="text/javascript" src="../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
-<script type="text/javascript" src="../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
-<script type="text/javascript" src="../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<link type="text/css" rel="stylesheet" href="../../sites/default/files/css/css_d905I2WxoGGQW6uS7jkC73mqKhSejey6jciEdxo9cJI.css" media="all" />
+<script type="text/javascript" src="../../sites/default/files/js/js_yMSKTzBO0KmozyLwajzFOrrt_kto_9mtccAkb0rm7gc.js"></script>
+<script type="text/javascript" src="../../sites/default/files/js/js_FA2YSy0R3kB2AU_wIOLoSR0sJX4ZYjdPuPaRFd2ZDyw.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+window.rsConf = { ui: { tools: {translation: false, dictionary: false}}};
 //--><!]]>
 </script>
+<script type="text/javascript" src="../../sites/default/files/js/js_rsGiM5M1ffe6EhN-RnhM5f3pDyJ8ZAPFJNKpfjtepLk.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../sites/default/files/js/js_-oEDdwe4XpUqUj4W0KJs96ENaXIrGvjBvIP-WYYBi54.js"></script>
 <script type="text/javascript" src="../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"ksJzyh-VzfZUPtJzN9xq1s85lkx9nW_MSN8c16rksvI","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/family-assistance-guide\/6\/2":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"GrXhxc39gId6ibPBbIqRXepIumbBY36ftRzRuFvcxLc","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"https:\/\/cdn1.readspeaker.com\/script\/5931\/webReader\/webReader.js?pids=wr\u0026notools=1\u0026disable=popupplayback":1,"misc\/jquery.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"0":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"1":1,"sites\/all\/modules\/extlink\/js\/extlink.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/family-assistance-guide\/6\/2":true},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)","extUseFontAwesome":false}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -35,68 +40,70 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <nav id="global">
 	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
 <div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<ul class="menu"><li class="first leaf has-children menu-mlid-489"><a href="../../guide-social-security-law.1">Social Security Guide</a></li>
+<li class="leaf has-children active-trail menu-mlid-491"><a href="../../family-assistance-guide.1" class="active-trail">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-490"><a href="../../paid-parental-leave-guide.1">Paid Parental Leave Guide</a></li>
+<li class="leaf has-children menu-mlid-513"><a href="../../child-support-guide.1">Child Support Guide</a></li>
+<li class="leaf menu-mlid-7596"><a href="../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
 <li class="leaf menu-mlid-7597"><a href="../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
-<li class="leaf has-children menu-mlid-513"><a href="../../child-support-guide">Child Support Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-491"><a href="../../family-assistance-guide" class="active-trail">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../guide-social-security-law">Guide to Social Security Law</a></li>
-<li class="last leaf has-children menu-mlid-490"><a href="../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+<li class="last leaf has-children menu-mlid-19951"><a href="../../national-redress-guide" title="">National Redress Guide</a></li>
 </ul></div></nav>
 <header role="banner">
 	<a href="../../index.html" rel="home"><img src="../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
 <p class="site-name">Guides to Social Policy Law</p>
 <form class="search-form" role="search" action="2" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
- <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+ <input class="custom-search-box form-text" placeholder="Search" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-LkRpTkldsp2ucJ4VCTSheSZbPsc6hwiXaAUbXVPFe4M" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-DIyldwLIhYhzwu2DYhqa43bLi0-Q50qWyt1Ybc1ei24" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Family Assistance Guide</h2>
-<p>Version 1.203 - Released 7 May 2018</p>
+<p>Version 1.230 - Released 1 July 2021</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7283"><a href="../../family-assistance-guide" title="">Using the Family Assistance Guide</a></li>
-<li class="collapsed menu-mlid-2274"><a href="../updates">What&#039;s New</a></li>
-<li class="collapsed menu-mlid-2266"><a href="../1">1 Key Terms &amp; Principles</a></li>
-<li class="collapsed menu-mlid-2267"><a href="../2">2 Eligibility</a></li>
-<li class="collapsed menu-mlid-2268"><a href="../3">3 Rate Calculation</a></li>
-<li class="collapsed menu-mlid-2269"><a href="../4">4 Claims &amp; Payments</a></li>
-<li class="collapsed menu-mlid-2270"><a href="../5">5 Gathering Information</a></li>
-<li class="expanded active-trail menu-mlid-2271"><a href="../6" class="active-trail">6 Review &amp; Reconciliation</a><ul class="menu"><li class="first leaf menu-mlid-1575"><a href="1">6.1 Centrelink Review &amp; Appeal Process</a></li>
-<li class="leaf active-trail active menu-mlid-1576"><a href="2" class="active-trail active">6.2 Internal Reviews</a></li>
-<li class="collapsed menu-mlid-1577"><a href="3">6.3 External Reviews</a></li>
-<li class="collapsed menu-mlid-1578"><a href="4">6.4 Reconciliation</a></li>
-<li class="leaf menu-mlid-1581"><a href="5">6.5 JETCCFA Review &amp; Appeal Process</a></li>
-<li class="collapsed menu-mlid-1579"><a href="6">6.6 Non-entitlement to FTB Based on an Estimate Due to 2 Consecutive Zero Entitlement Reconciliations</a></li>
-<li class="last leaf menu-mlid-1580"><a href="7">6.7 SIFS Review &amp; Payment Process</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7283"><a href="../../family-assistance-guide.1" title="">Using the Family Assistance Guide</a></li>
+<li class="collapsed menu-mlid-2274"><a href="../updates.1">What&#039;s new</a></li>
+<li class="collapsed menu-mlid-2266"><a href="../1.1">1 Key terms &amp; principles</a></li>
+<li class="collapsed menu-mlid-2267"><a href="../2.1">2 Eligibility</a></li>
+<li class="collapsed menu-mlid-2268"><a href="../3.1">3 Rate calculation</a></li>
+<li class="collapsed menu-mlid-2269"><a href="../4.1">4 Claims &amp; payments</a></li>
+<li class="collapsed menu-mlid-2270"><a href="../5.1">5 Gathering information</a></li>
+<li class="expanded active-trail menu-mlid-2271"><a href="../6.1" class="active-trail">6 Review &amp; reconciliation</a><ul class="menu"><li class="first leaf menu-mlid-1575"><a href="1">6.1 Centrelink review &amp; appeal process</a></li>
+<li class="leaf active-trail active menu-mlid-1576"><a href="2" class="active-trail active">6.2 Internal reviews</a></li>
+<li class="collapsed menu-mlid-1577"><a href="3.1">6.3 External reviews</a></li>
+<li class="collapsed menu-mlid-1578"><a href="4.1">6.4 Reconciliation</a></li>
+<li class="leaf menu-mlid-1581"><a href="5">6.5 Number not currently in use</a></li>
+<li class="collapsed menu-mlid-1579"><a href="6.1">6.6 Non-entitlement to FTB based on an estimate due to 2 consecutive zero entitlement reconciliations</a></li>
+<li class="last leaf menu-mlid-1580"><a href="7">6.7 SIFS review &amp; payment process</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-2272"><a href="../7">7 Debts</a></li>
-<li class="collapsed menu-mlid-2273"><a href="../8">8 Transitional Arrangements</a></li>
-<li class="leaf menu-mlid-2264"><a href="../acronyms">Acronym List</a></li>
-<li class="leaf menu-mlid-7296"><a href="../keywords">Keyword Index</a></li>
-<li class="leaf menu-mlid-7371"><a href="../act-references">Act Reference Index</a></li>
-<li class="last leaf menu-mlid-7169"><a href="../sitemap">Site Map</a></li>
+<li class="collapsed menu-mlid-2272"><a href="../7.1">7 Debts</a></li>
+<li class="collapsed menu-mlid-2273"><a href="../8.1">8 Transitional arrangements</a></li>
+<li class="leaf menu-mlid-2264"><a href="../acronyms">Acronym list</a></li>
+<li class="leaf menu-mlid-7296"><a href="../keywords.1" title="">Keyword index</a></li>
+<li class="leaf menu-mlid-7371"><a href="../act-references.1" title="">Act reference index</a></li>
+<li class="last leaf menu-mlid-7169"><a href="../sitemap">Site map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../index.html">Home</a> &raquo; <a href="../../family-assistance-guide">Family Assistance Guide</a> &raquo; <a href="../6" class="active-trail">6 Review &amp; Reconciliation</a> &raquo; 6.2 Internal Reviews</div>
+	<div id="breadcrumb"><a href="../../index.html">Home</a> &raquo; <a href="../../family-assistance-guide.1">Family Assistance Guide</a> &raquo; <a href="../6.1" class="active-trail">6 Review &amp; reconciliation</a> &raquo; 6.2 Internal reviews</div>
 <div id="utility">
 	
-<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/family-assistance-guide/6/2"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="readspeaker_button" class="rs_skip rsbtn rs_preserve"><a rel="nofollow" class="rsbtn_play" href="https://app-oc.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=https://guides.dss.gov.au/family-assistance-guide/6/2"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsbtn_right rsimg rsplay rspart"></span></a></div></div>
 <div id="content" role="main">
 <article id="node-6317">
-<h1 >6.2 Internal Reviews</h1>
+<h1 >6.2 Internal reviews</h1>
 <h2>Summary</h2>
-<p>This chapter explains Centrelink internal review process and covers:</p>
-<ul><li>initiating a review,</li>
-<li>Centrelink initiated review,</li>
-<li>date of effect of favourable decision for Centrelink initiated review,</li>
-<li>reviews initiated by affected persons,</li>
-<li>review relating to care percentage decisions - initiated by affected persons,</li>
-<li>time limit for a review initiated by affected persons,</li>
-<li>date of effect of a favourable decision for a review initiated by affected persons,</li>
-<li>further requirement for review request relating to an income estimate,</li>
+<p>This chapter explains Centrelink's internal review process and covers:</p>
+<ul><li>initiating a review</li>
+<li>Centrelink initiated review</li>
+<li>date of effect and result of favourable decision for Centrelink initiated review</li>
+<li>reviews relating to the <a href="../acronyms#ccs" title="Child care subsidy">CCS</a> activity test</li>
+<li>reviews initiated by affected persons (<a href="../1/1/p/80">1.1.P.80</a>)</li>
+<li>review relating to care percentage decisions - initiated by affected persons</li>
+<li>time limit for a review initiated by affected persons</li>
+<li>date of effect of a favourable decision for a review initiated by an affected person</li>
+<li>further requirement for review request relating to an income estimate</li>
 <li>continuation of payment during a review, and</li>
 <li>notification of the decision.</li>
 </ul><h2>Initiating a review</h2>
@@ -107,47 +114,71 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 105 Secretary may review certain decisions on own initiative, section 109A Review of certain decisions may be initiated by applicant</p>
 </div>
 <h2>Centrelink initiated review</h2>
-<p>Centrelink may review an <a href="../acronyms#fa" title="Family assistance">FA</a> decision where there is sufficient reason to do so. The decision maker may affirm, vary or set aside the original decision.</p>
-<div class="example">
+<p>Centrelink may review an <a href="../acronyms#fa" title="Family assistance">FA</a> decision where there is sufficient reason to do so. The decision maker may affirm, vary or set aside the original decision. This includes deemed refusals, where Centrelink has neither made a determination nor refused the original application for <a href="../acronyms#accs" title="Additional child care subsidy">ACCS</a> (child wellbeing) (<a href="../2/8/1/50">2.8.1.50</a>) or (temporary financial hardship) (<a href="../2/8/3/40">2.8.3.40</a>) within 28 days after the day of application. Centrelink will undertake a review on its own initiative in circumstances where an application has:</p>
+<ul><li>been made and received</li>
+<li>meets the 'form and manner' requirement, and</li>
+<li>contains the required information and accompanying documentation.</li>
+</ul><div class="example">
 <p><strong>Example:</strong> Reconciliation of entitlement is one example of a review initiated by Centrelink.</p>
 </div>
 <div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 105 Secretary may review certain decisions on own initiative, section 104 Decisions that may be reviewed by the Secretary on own initiative</p>
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 105 Secretary may review certain decisions on own initiative, section 105A Review of determination or variation-taking account of FTB Part A supplement or FTB Part B supplement, section 104 Decisions that may be reviewed by Secretary on own initiative</p>
 </div>
-<h2>Date of effect of favourable decision for Centrelink initiated review</h2>
+<h2>Date of effect &amp; result of favourable decision for Centrelink initiated review</h2>
 <p>Generally, where the review is initiated by Centrelink, the date of effect of a review decision that is favourable to the person affected by the decision is the date from which full effect is given to the review decision (full arrears).</p>
-<p>However, if the review decision:</p>
-<ul><li>relates to:
-<ul><li><a href="../acronyms#ftb" title="Family tax benefit">FTB</a> by instalment,</li>
-<li><a href="../acronyms#sbp" title="Stillborn baby payment">SBP</a> (paid under the FTB Part A eligibility test),</li>
-<li>a weekly limit of hours (<a href="../acronyms#ccb" title="Child care benefit">CCB</a>),</li>
-<li>CCB %,</li>
-<li>schooling (CCB) %, or</li>
-<li>no entitlement to CCB by fee reduction, and</li>
-</ul></li>
-<li>the decision is made on a date later than 52 weeks after the person concerned was given notice of the original decision then the date that the review decision comes into effect is the later of:
+<h3>FTB by instalment or <a href="../acronyms#sbp" title="Stillborn baby payment">SBP</a></h3>
+<p>However, if the review decision relates to <a href="../acronyms#ftb" title="Family tax benefit">FTB</a> by instalment, or SBP (paid under the FTB Part A eligibility test), and the decision is made on a date later than 52 weeks after the person concerned was given notice of the original decision then the date that the review decision comes into effect is the later of:</p>
 <ul><li>the date from which full arrears are payable, or</li>
 <li>1 July of the income year before the income year in which the review decision is made.</li>
-</ul></li>
-</ul><p><strong>Note:</strong> Centrelink can only initiate reviews for CCB on behalf of an individual and not on behalf of a child care service.</p>
-<div class="example">
-<p><strong>Explanation:</strong> For decisions in all cases listed above, full arrears are payable as long as the review decision is made before the end of the income year following the income year in which the notice of the original decision was given. Otherwise, arrears can only be paid back to the beginning of the previous income year.</p>
+</ul><div class="example">
+<p><strong>Explanation:</strong> For decisions in all cases listed above, full arrears are payable as long as the review decision is made before the end of the income year following the income year that contains the first day of the period to which the original decision relates. Otherwise, arrears can only be paid back to the beginning of the previous income year.</p>
 </div>
-<p>The limitation on the date of effect does not apply in the following circumstances:</p>
-<ul><li>Where a review of the decision was triggered by an income assessment by the <a href="../acronyms#ato" title="Australian Taxation Office">ATO</a> (including FTB by instalment cases, or CCB by fee reduction), provided that the tax return was lodged on or before the end of the income year following the income year to which the assessment relates.<br /><div class="example">
-<ul><li><strong>Explanation:</strong> For decisions relating to the individual's income, full arrears are payable where the tax return is lodged on or before the end of the next income year even if Centrelink does not make a review decision until after that income year.</li>
-</ul></div>
-</li>
-<li>Where the review decision is triggered by information that immunisation requirements have been met for a child for whom immunisation requirements apply during the income year to which the review relates, provided that the information is received before the end of the first income year after that income year.</li>
-<li>Where the review decision is triggered by information that health check requirements have been met for a child who turned 4 years during the income year to which the review relates, provided that the information is received before the end of the first income year after that income year.</li>
-<li>Where the review decision is triggered by information that the health check or immunisation requirement should not have applied for the income year to which the review relates.</li>
-</ul><div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 107 Date of effect of certain decisions made under section 105</p>
+<p>The limitation on the date of effect does not apply where a review of the decision was triggered because the reconciliation conditions were met (including FTB by instalment cases), because the tax return was lodged, or Centrelink was notified that the individual was not required to lodge a tax return, on or before the end of the income year following the income year to which the assessment relates. The limitation on the date of effect also does not apply in cases of re‑reconciliation. That is, if the income used in reconciliation for an income year is retrospectively changed (e.g. the Commissioner of Taxation makes an amended notice of assessment), increased amounts of FTB can be paid so long as reconciliation conditions were originally met for the relevant income year.</p>
+<div class="example">
+<p><strong>Explanation:</strong> For decisions relating to the individual's income (including reconciliation and re-reconciliation), full arrears are payable where reconciliation conditions are met on or before the end of the next income year following the relevant year of entitlement even if Centrelink does not make a review decision until after that income year.</p>
+</div>
+<div class="reference">
+<p><strong>Policy reference:</strong> FA Guide <a href="4/1/40">6.4.1.40</a> Outcomes of reconciliation</p>
+</div>
+<h3>CCS &amp; ACCS</h3>
+<p>For Centrelink initiated review decisions in relation to individuals' (<a href="../1/1/i/90">1.1.I.90</a>) eligibility and entitlement (<a href="../1/1/e/30">1.1.E.30</a>) for CCS or ACCS, or an approved provider's (<a href="../1/1/a/90">1.1.A.90</a>) entitlement to be paid ACCS (wellbeing), the date of effect for beneficial changes cannot be earlier than the beginning of the previous financial year. This time limit does not apply where a decision on review:</p>
+<ul><li>changes an individual's <a href="../acronyms#ati" title="Adjusted taxable income">ATI</a> (<a href="../1/1/a/20">1.1.A.20</a>) for the relevant income year (<a href="../1/1/r/23">1.1.R.23</a>), or the individual's activity test result for a CCS fortnight due to the individual meeting the CCS reconciliation (<a href="../1/1/r/10">1.1.R.10</a>) conditions, or</li>
+<li>is affected by a review conducted by the <a href="../acronyms#ato" title="Australian Taxation Office">ATO</a>.</li>
+</ul><p><strong>Note:</strong> If an individual reports a change to their combined annual estimated ATI after the change occurred (whether it is favourable or unfavourable), a review of entitlement is not undertaken, as actual CCS entitlement based on actual ATI is confirmed at reconciliation.</p>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 67DB Determinations when adjusted taxable income is not known, section 67FB Notice of change of circumstances: individuals, section 105A Review of determination or variation-taking account of FTB Part A supplement or FTB Part B supplement, section 105C Review of entitlement to be paid CCS or ACCS-taking account of changes of circumstances etc., section 105D Review of entitlement to be paid CCS or ACCS-time limit on increase, section 107 Date of effect of certain decisions made under section 105 in relation to FTB by instalment</p>
+<p><strong>Policy reference:</strong> FA Guide <a href="../5/2/1/40">5.2.1.40</a> CCS &amp; ACCS - change in activity/income, <a href="4/1.1">6.4.1</a> Overview of reconciliation</p>
+</div>
+<h2>Reviews relating to the CCS activity test</h2>
+<p>Individuals are obliged to notify Centrelink as soon as practicable if there is a change in their activity that would cause them to move to a different step of the activity test. An individual must also notify Centrelink as soon as practicable if there is a change in their circumstances that would mean they are no longer eligible for an exemption to the activity test, or would now be eligible for an exemption to the activity test.</p>
+<p>For Centrelink initiated review decisions relating to activity notified after the change occurred:</p>
+<ul><li>A change in activity level that is FAVOURABLE to the individual (i.e. that causes the individual to be entitled to more hours of subsidised care per fortnight), will be backdated a maximum of 28 days to the beginning of a CCS fortnight from the date of notification.</li>
+<li>A change in activity level that is UNFAVOURABLE to the individual (i.e. that causes the individual to be entitled to fewer hours of subsidised care per fortnight), will be applied as far back as the date of event, from the beginning of the next CCS fortnight (even if this is in a previous financial year).</li>
+</ul><p>For the purpose of CCS:</p>
+<ul><li>the date of notification is the date Centrelink receives the notification regarding a change in an individual's circumstances</li>
+<li>the date of event is the date that a change in an individual's circumstances actually occurred</li>
+<li>the date of effect is the date that particular information about an individual's circumstances will be taken into account.</li>
+</ul><div class="example">
+<p><strong>Example 1:</strong> On Sunday 15 July 2018, Victor, a single parent, increased his paid work hours from part time to full time, which increased his entitlement (activity test result) from 72, to 100 hours of subsidised care per fortnight. However, Victor only notified Centrelink of this change on Tuesday 16 October 2018, around 3 months after it occurred. As such, the increase in Victor's entitlement is only applied from Monday 24 September 2018, which is 28 days before he notified Centrelink of the new information about his circumstances, to the beginning of the CCS fortnight.</p>
+</div>
+<div class="example">
+<p><strong>Example 2:</strong> On Tuesday 16 October 2018, Cecily, a single parent, notified Centrelink that on Sunday 15 July 2018 she decreased her paid work hours from full-time to part-time, which decreases her entitlement (activity test result) from 100, to 72 hours of subsidised care per fortnight. The decrease in Cecily's entitlement is applied from Monday 16 July 2018, which is the beginning of the CCS fortnight after the change occurred.</p>
+</div>
+<h3>Beneficial changes in entitlement (activity related) that are taken into account back more than 28 days</h3>
+<p>In certain circumstances, if an individual is late in reporting a change in their activity level or circumstances that is beneficial in terms of increasing their entitlement to hours of subsidy per fortnight (activity test result), and the delegate believes in their circumstances they have provided the information as soon as practicable, the delegate can take the information into account back more than 28 days. The delegate can take the information into account as far back as the date the change occurred, but not further back than the beginning of the previous financial year (i.e. the review could never extend back more than 2 years).</p>
+<p>Circumstances in which the delegate may take beneficial activity test information into account back more than 28 days where the individual notified of the change after it occurred could be for reasons such as, but not limited to, the parent, their partner (<a href="../1/1/p/30">1.1.P.30</a>) or the child experience a natural disaster, domestic violence, serious illness or medical condition including hospitalisation or significant trauma.</p>
+<div class="example">
+<p><strong>Example:</strong> Taylor is a single parent who is working part-time (16 hours per fortnight), which entitles her to 36 hours of subsidised care per fortnight. On Monday 9 July 2018, Taylor begins doing a training program in accounting (for 22 hours per fortnight), which brings her total hours of recognised activity to 38 hours per fortnight, increasing her activity test result to 72 hours of subsidised care per fortnight. However, Taylor does not notify Centrelink of this change until Saturday 25 August 2018 because there is major flooding in her town that affects her house on Friday 13 July 2018. As a result of the flood, Taylor has not had access to the internet or her home phone, and has not been able to visit a Centrelink office as access to roads have been cut off. Afterwards Taylor contacts Centrelink to explain her circumstances and the delegate agrees her new activity test result of 72 hours of subsidised care per fortnight will be applied from Monday 16 July 2018 (the CCS fortnight after the change occurred).</p>
+</div>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00490" title="A New Tax System (Family Assistance) Act 1999">FAAct</a> Schedule 2 clause 12(7) Changes in the number of hours of recognised activity</p>
+<p><a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 67FB Notice of change of circumstances: individuals, section 105C Review of entitlement to be paid CCS or ACCS-taking account of changes of circumstances etc.</p>
+<p><strong>Policy reference:</strong> FA Guide <a href="../5/2/1/40">5.2.1.40</a> CCS &amp; ACCS - change in activity/income</p>
 </div>
 <h2>Reviews initiated by affected persons</h2>
 <p>Generally, a person affected by a decision made by an officer under FA law can request a review. The decision will be quality checked by a subject matter expert (SME) and if the person is not satisfied with the outcome they can request a review by an <a href="../acronyms#aro" title="Authorised review officer">ARO</a>.</p>
 <p>The ARO may affirm, vary or set aside the original decision.</p>
-<h2>Review relating to care percentage decisions - initiated by affected individuals</h2>
+<h2>Review relating to care percentage decisions - initiated by affected persons</h2>
 <p>From 1 July 2010, changes to child support and FTB legislation align determinations about care between child support and FTB. This means where a care determination needs to be made in respect of a child, the determination can be made by either a delegate of the Child Support Registrar or the Secretary (CSA Act section 54K and FAAct section 35T).</p>
 <p>Where either the Registrar or the Secretary conducts an internal review of a care decision, any new decision made on review will be used by both the Registrar and the Secretary. Where the AAT amends a decision or substitutes a new decision about a care percentage, that amended or substituted decision will be used by both the Registrar and the Secretary.</p>
 <div class="example">
@@ -158,74 +189,66 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 109A Review of certain decisions may be initiated by applicant</p>
 </div>
 <h2>Time limit for a review initiated by affected persons</h2>
-<p>Generally, an application for a review by a person in relation to FA should be lodged within 52 weeks after the individual is notified of the original decision. This time limit does not apply to FTB by instalment decisions, and some other decisions. However, there are time limits for full arrears to be payable depending upon the circumstances. (For more information, refer to 'Date of effect of a favourable decision for a review initiated by an affected individual'.)</p>
+<p>Generally, an application for a review by a person in relation to FA should be lodged within 52 weeks after the individual is notified of the original decision, noting:</p>
+<ul><li>this time limit does not apply to FTB by instalment decisions, and some other decisions</li>
+<li>applications for a review in relation to CCS and ACCS, including requirements of approved providers under FA(Admin)Act Part 8A, must be made within 13 weeks after the applicant is notified of the decision.</li>
+</ul><p>However, there are time limits for full arrears to be payable depending upon the circumstances. (For more information, refer to <a href="2#doefavourable">'Date of effect of a favourable decision for a review initiated by an affected individual'</a>.)</p>
 <p>The table below indicates decisions other than instalment decisions where a 52 week time limit may not apply.</p>
-<table><thead><tr><th>If these circumstances apply…</th>
-<th>Then the time limit to request a review is…</th>
-</tr></thead><tbody><tr><td>special circumstances that prevented the person from making a review application,</td>
-<td>extended past 52 weeks to such further period as determined appropriate by Centrelink.</td>
-</tr><tr><td>FTB and <a href="../acronyms#sifs" title="Single income family supplement">SIFS</a> past period decision,</td>
+<table><thead><tr><th><strong>If these circumstances apply …</strong></th>
+<th><strong>then the time limit to request a review is …</strong></th>
+</tr></thead><tbody><tr><td>special circumstances that prevented the person from making a review application</td>
+<td>extended past 52 weeks (or 13 weeks for CCS and ACCS) to such further period as determined appropriate by Centrelink.</td>
+</tr><tr><td>FTB past period decision</td>
 <td>the later of the end of the income year after the income year in which the past period occurred or 52 weeks after the original decision was made.</td>
-</tr><tr><td>determination of entitlement or no entitlement to FTB by single payment in substitution because of the death of another person,</td>
+</tr><tr><td>determination of entitlement or no entitlement to FTB by single payment in substitution because of the death of another person</td>
 <td>to the end of the income year after the income year in which the death occurred.</td>
-</tr><tr><td>decision that relates to a period involving 2 income years,</td>
+</tr><tr><td>decision that relates to a period involving 2 income years (noting limitations associated with CCS and ACCS - see the introduction to this section above or <a href="2#doefavourable">'Date of effect of a favourable decision for a review initiated by an affected individual'</a>)</td>
 <td>the later of the end of the income year after the income year in which the period ended or 52 weeks after the original decision was made.</td>
-</tr><tr><td>decision relating to an assessment of taxable income by the ATO (including FTB by instalment cases) and the individual lodged their income tax return before the end of the income year following the income year to which the assessment relates,</td>
+</tr><tr><td>decision relating to an assessment of taxable income by the ATO (including FTB by instalment cases) and the individual lodged their income tax return before the end of the income year following the income year to which the assessment relates</td>
 <td>there is no time limit.</td>
-</tr><tr><td>review of an assessment of taxable income by the ATO and the individual initially lodged their income tax return before the end of the income year following the income year to which the assessment relates,</td>
+</tr><tr><td>review of an assessment of taxable income by the ATO and the individual initially lodged their income tax return before the end of the income year following the income year to which the assessment relates</td>
 <td>the later of 13 weeks after the individual receives notification of the review from the ATO or 52 weeks after the original decision was made.</td>
-</tr><tr><td>review of child support entitlement,</td>
+</tr><tr><td>review of child support entitlement</td>
 <td>the later of 13 weeks after the individual receives notification of the review from Child Support or 52 weeks after the original decision was made.</td>
-</tr><tr><td>determination of a weekly limit of hours (CCB) in relation to a specified period,</td>
-<td>to the end of the income year after the income year in which the determination ceased to have effect.</td>
-</tr><tr><td>weekly limit of hours, CCB% or schooling % decision,</td>
-<td>to the end of the income year after the income year in which the decision took effect.</td>
-</tr><tr><td>CCB rate decision in relation to a specified period,</td>
-<td>to the end of the income year after the income year in which the period subject to the rate ended.</td>
-</tr><tr><td>determination of entitlement or no entitlement to CCB for grandparent carers,</td>
-<td>to the end of the income year after the income year in which the determination took effect.</td>
-</tr><tr><td>determination of no entitlement to CCB by fee reduction,</td>
-<td>to the end of the income year after the income year in which the determination took effect.</td>
-</tr><tr><td>determination of entitlement or no entitlement to CCB for care provided by a registered carer,</td>
-<td>to the end of the income year after the income year in which the determination ceased to have effect.</td>
-</tr><tr><td>determination of entitlement or no entitlement to CCB by single payment/in substitution because of the death of another person for care provided by a registered carer,</td>
-<td>to the end of the income year after the income year when the death occurred.</td>
+</tr><tr><td>determination of an individual's eligibility or entitlement for CCS or ACCS</td>
+<td>13 weeks after the applicant is notified of the decision.</td>
 </tr></tbody></table><div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 108 Decisions that may be reviewed under section 109A, section 109D Review applications-time limits applicable to review of certain decisions, section 109E Date of effect of certain decisions relating to payment of FTB by instalment</p>
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 108 Decisions that may be reviewed under section 109A, section 109D Review applications-time limits applicable to review of certain decisions, section 109DB Review of entitlement to be paid CCS or ACCS-taking account of changes of circumstances etc, section 109DC Review of entitlement to be paid CCS or ACCS-time limit on increase, section 109E Date of effect of certain decisions relating to payment of FTB by instalment</p>
 </div>
 <h2 id="doefavourable">Date of effect of a favourable decision for a review initiated by an affected person</h2>
-<p>Provided the person requests the review within the prescribed timeframe as described above, and the outcome of the review is in their favour, the decision takes effect from the date of the previous decision if:</p>
-<ul><li>a previous decision is varied, or</li>
-<li>a new decision is submitted.</li>
-</ul><p>Arrears payable as a result of the review are backdated to the date of effect.</p>
-<p>However, for a review decision relating to FTB by instalment, where the request for review is made more than 52 weeks after notice was given of the original decision, then the date of effect is generally the later of:</p>
+<p>Except for CCS and ACCS decisions, provided the person requests the review within the prescribed timeframe as described above, and the outcome of the review is in their favour, because Centrelink varies or sets the original decision aside, the decision takes effect from the first day of the period to which the original decision relates. This means arrears are payable from that day, giving the decision full effect.</p>
+<p>However, for a review decision relating to FTB by instalment, where the request for review is made more than 52 weeks after notice was given of the original decision, or a further period if Centrelink is satisfied there are special circumstances that prevented the applicant from making an application for review on time, then the date of effect is generally the later of:</p>
 <ul><li>the date from which full arrears are payable, or</li>
-<li>1 July of the income year before the income year in which the review decision is made.</li>
+<li>1 July of the income year before the income year in which the application for review is made.</li>
 </ul><div class="example">
 <p><strong>Explanation:</strong> For FTB by instalment cases, full arrears are payable as long as the review request is made before the end of the income year following the income year in which the notice of the original decision was given. Otherwise, arrears can only be paid back to the beginning of the previous income year.</p>
 </div>
 <p>This limitation on the date of effect does not apply where the request for review is the result of:</p>
-<ul><li>an assessment or review of taxable income by the ATO, provided the application for review is made within 13 weeks of when the individual received notification of the ATO decision and the individual had lodged their tax return before the end of the income year after the income year to which the review relates, or</li>
-<li>a review of child support entitlement, provided the person makes the application for review within 13 weeks of receiving notification of the revised child support assessment, or</li>
-<li>immunisation requirements being met for a child for whom immunisation requirements apply during the income year to which the review relates, provided that the application for review is made before the end of the income year after that income year, or</li>
-<li>health check requirements being met for a child who turned 4 years during the income year to which the review relates, provided that the application for review is made before the end of the income year after that income year, or</li>
-<li>information that the health check or immunisation requirement should not have applied for the income year to which the review relates.</li>
-</ul><div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 109E Date of effect of certain decisions relating to payment of FTB by instalment</p>
+<ul><li>the individual meeting the reconciliation conditions and requesting a review of their annual entitlement (i.e. asking for reconciliation to occur), or</li>
+<li>an assessment or review of taxable income by the ATO, provided the application for review is made within 13 weeks of when the individual received notification of the ATO decision and the individual had lodged their tax return before the end of the income year after the income year to which the review relates, or</li>
+<li>a review of child support entitlement, provided the person makes the application for review within 13 weeks of receiving notification of the revised child support assessment.</li>
+</ul><h3>CCS &amp; ACCS</h3>
+<p>In relation to CCS and ACCS decisions the decision takes effect from the date of the previous decision, if that date is not earlier than the previous financial year, provided the person:</p>
+<ul><li>requests the review within 13 weeks of a decision relating to eligibility and entitlements, and</li>
+<li>the outcome of the review is in their favour, and</li>
+<li>the individual had provided all the information required for Centrelink to determine their eligibility or entitlement to CCS and ACCS as soon as practicable.</li>
+</ul><p>There is no time restriction where the review is the result of the individual meeting the CCS reconciliation conditions or an ATO review.</p>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 105C Review of entitlement to be paid CCS or ACCS-taking account of changes of circumstances etc, section 109D Review applications-time limits applicable to review of certain decisions, section 109DB Review of entitlement to be paid CCS or ACCS-taking account of changes of circumstances etc, section 109DC Review of entitlement to be paid CCS or ACCS-time limit on increase, section 109E Date of effect of certain decisions relating to payment of FTB by instalment</p>
 </div>
 <h2>Further requirement for review request relating to an income estimate</h2>
-<p>A request for a review of a decision in regard to eligibility for or entitlement to FA (other than SBP) or a CCB percentage to the extent that the decision was based on an estimate of the person's taxable income cannot be made until after the end of the income year and where the person is required to lodge a tax return, after the ATO has made an assessment of the person's taxable income for that year.</p>
+<p>A request for a review of a decision in regard to eligibility for or entitlement to FA (other than SBP) or a CCS percentage to the extent that the decision was based on an estimate of the person's taxable income cannot be made until after the end of the income year and where the person is required to lodge a tax return, after the ATO has made an assessment of the person's taxable income for that year.</p>
 <p>A request for a review of a decision in regard to eligibility for or entitlement to FTB to the extent that the decision was based on an estimate of maintenance income for an income year cannot be made until after the end of that income year.</p>
 <div class="example">
-<p><strong>Explanation:</strong> This restriction only allows a review of a decision to the extent that it is based on an income estimate to occur after actual income is available so that correct entitlement can be determined.</p>
+<p><strong>Explanation:</strong> This restriction only allows a review of a decision to the extent that it is based on an income estimate to occur after actual income is available so that correct entitlement can be determined. This stops individuals from retrospectively adjusting their income estimates to derive arrears that may later become a debt when actual income is known.</p>
 </div>
 <p>This restriction does not preclude the person from providing a revised estimate of income at any time during the income year. If a revised estimate is provided and considered reasonable, the rate paid can be varied from the date the revised estimate is provided.</p>
 <p>If an FTB instalment claim is rejected due to the income estimate being too high and the income estimate subsequently decreases, the person can lodge a new claim which contains a revised estimate and, if eligible, be paid prospectively from the date of the new claim. However, the individual will need to wait until their actual income is known to be paid for the past period (i.e. period from the date the first rejected claim is lodged up to the date the new claim is lodged).</p>
 <p>Where a claim for SBP has been rejected because of the income estimate, the person's eligibility for each payment can be reviewed if they provide a revised estimate within 52 weeks of being notified of the rejection. The revised estimate must include the person's income and, if the person was partnered on the day the claim was initially lodged, the income of the person to whom they were partnered on the day the claim was lodged. This means that if the individual has separated since lodging the claim, their former partner's income for the 6 month income test period needs to be included in the revised estimate.</p>
 <div class="reference">
 <p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00490" title="A New Tax System (Family Assistance) Act 1999">FAAct</a> section 36 When an individual is eligible for SBP in normal circumstances</p>
-<p><a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 108 Decisions that may be reviewed under section 109A, section 109A Review of certain decisions may be initiated by applicant, section 31A Variation of instalment entitlement determination to reflect revised adjusted taxable income estimates</p>
-<p><strong>Policy reference:</strong> FA Guide <a href="../4/4/2/20">4.4.2.20</a> Change in Income Related Circumstances, <a href="../4/2/2/20">4.2.2.20</a> Specific Requirements for Past Period Claim</p>
+<p><a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 31A Variation of instalment entitlement determination to reflect revised ATI estimates, section 108 Decisions that may be reviewed under section 109A, section 109A Review of certain decisions may be initiated by applicant</p>
+<p><strong>Policy reference:</strong> FA Guide <a href="../4/4/2/20">4.4.2.20</a> Change in income related circumstances, <a href="../4/2/2/20">4.2.2.20</a> Specific requirements for past period claim</p>
 </div>
 <h2>Continuation of payment during a review</h2>
 <p>If an unfavourable decision is made and the decision depends upon the exercise of discretion, the person's entitlement to FA may continue during the review process.</p>
@@ -241,12 +264,12 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </ul></li>
 <li>advise the affected person that they may seek further review by the <a href="../acronyms#aat" title="Administrative Appeals Tribunal">AAT</a>.</li>
 </ul><div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 106 Notice of review decision to be given, section 109B Notice to be given of decisions under section 109A, section 109H Notification of further rights of review</p>
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A00491" title="A New Tax System (Family Assistance) (Administration) Act 1999">FA(Admin)Act</a> section 106 Notice of review decision not relating to CCS or ACCS, section 106A Notice of certain review decisions relating to CCS or ACCS, section 109B Notice to be given of decisions under section 109A, section 109H Notification of further rights of review</p>
 </div>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     3 January 2017  	</div>
+      Last reviewed:     10 May 2021  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../contact-us">Contact us</a></li>
@@ -255,8 +278,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
-<script type="text/javascript" src="../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
-<script type="text/javascript" src="../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+<script type="text/javascript" src="../../sites/default/files/js/js_IkilKWehdX07Wbi3Cg-T6yf5sLTu5FfOT2__edFF9eM.js"></script>
+<script type="text/javascript" src="https://cdn1.readspeaker.com/script/5931/webReader/webReader.js?pids=wr&amp;notools=1&amp;disable=popupplayback&amp;qrxyi9"></script>
 </body>
 </html>

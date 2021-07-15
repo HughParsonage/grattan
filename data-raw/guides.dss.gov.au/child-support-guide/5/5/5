@@ -2,27 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<link rel="shortlink" href="../../../node/211" />
-<link rel="canonical" href="5" />
-<meta name="viewport" content="width=device-width" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width" />
+<link rel="canonical" href="5" />
+<link rel="shortlink" href="../../../node/211" />
 <title>5.5.5 Overpayments | Child Support Guide</title>
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_Q4XrxgEkbadGDm1J7AHUHHmbcMJ2_hbMfrrzrm9Ne_I.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
-<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_d905I2WxoGGQW6uS7jkC73mqKhSejey6jciEdxo9cJI.css" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_yMSKTzBO0KmozyLwajzFOrrt_kto_9mtccAkb0rm7gc.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_FA2YSy0R3kB2AU_wIOLoSR0sJX4ZYjdPuPaRFd2ZDyw.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+window.rsConf = { ui: { tools: {translation: false, dictionary: false}}};
 //--><!]]>
 </script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_rsGiM5M1ffe6EhN-RnhM5f3pDyJ8ZAPFJNKpfjtepLk.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_-oEDdwe4XpUqUj4W0KJs96ENaXIrGvjBvIP-WYYBi54.js"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"WJNWKn9ZCKMrEONoVxkTEeQMUtsbygVOCp4CSfXNYUw","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/5\/5\/5":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"MkI8a_8m2OyPl-U0CjPQdUUAL05Z0VM4-rIxGwpJQ5s","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"https:\/\/cdn1.readspeaker.com\/script\/5931\/webReader\/webReader.js?pids=wr\u0026notools=1\u0026disable=popupplayback":1,"misc\/jquery.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"0":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"1":1,"sites\/all\/modules\/extlink\/js\/extlink.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/5\/5\/5":true},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)","extUseFontAwesome":false}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -35,137 +40,139 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <nav id="global">
 	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
 <div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<ul class="menu"><li class="first leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law.1">Social Security Guide</a></li>
+<li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide.1">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide.1">Paid Parental Leave Guide</a></li>
+<li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide.1" class="active-trail">Child Support Guide</a></li>
+<li class="leaf menu-mlid-7596"><a href="../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
 <li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
-<li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide" class="active-trail">Child Support Guide</a></li>
-<li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law">Guide to Social Security Law</a></li>
-<li class="last leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+<li class="last leaf has-children menu-mlid-19951"><a href="../../../national-redress-guide" title="">National Redress Guide</a></li>
 </ul></div></nav>
 <header role="banner">
 	<a href="../../../index.html" rel="home"><img src="../../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
 <p class="site-name">Guides to Social Policy Law</p>
 <form class="search-form" role="search" action="5" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
- <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+ <input class="custom-search-box form-text" placeholder="Search" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-wV5hLSYhuaD_OeKNhc4B46GZzyg62GdWyT4WfrAvJ0Q" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-BhxnVz1-NssMG3AWkV0lUDsvWNpQygbDqLZzX75FCfo" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.32 - Released 7 May 2018</p>
+<p>Version 4.57 - Released 1 July 2021</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7286"><a href="../../../child-support-guide" title="">Using the Child Support Guide</a></li>
-<li class="collapsed menu-mlid-514"><a href="../../updates">What&#039;s New</a></li>
-<li class="collapsed menu-mlid-515"><a href="../../1">1 About the Scheme</a></li>
-<li class="collapsed menu-mlid-518"><a href="../../2">2 Child Support Assessments</a></li>
-<li class="collapsed menu-mlid-555"><a href="../../3">3 Registrable Maintenance Liabilities</a></li>
-<li class="collapsed menu-mlid-637"><a href="../../4">4 Objecting, Seeking a Review, Appealing &amp; Applying to Court</a></li>
-<li class="expanded active-trail menu-mlid-678"><a href="../../5" class="active-trail">5 Collecting Child Support</a><ul class="menu"><li class="first collapsed menu-mlid-679"><a href="../1" title="This chapter describes when the Registrar will accept an application to collect child support, how the Registrar registers enforceable maintenance liabilities and the effect of registration.">5.1 DHS Collection</a></li>
-<li class="collapsed menu-mlid-686"><a href="../2" title="This chapter describes DHS&#039;s administrative methods of collecting child support.">5.2 Administrative Enforcement</a></li>
-<li class="collapsed menu-mlid-698"><a href="../3" title="This chapter explains when the Registrar can apply amounts paid directly between parents or to a third party to satisfy a child support liability and also how the Registrar can offset child support debts between parents and credit lump sum payments.">5.3 Non-agency Payments, Crediting Lump Sum Payments &amp; Offsetting Liabilities</a></li>
-<li class="collapsed menu-mlid-702"><a href="../4" title="This chapter describes the methods available to the Registrar to enforce collection of child support through the courts.">5.4 Court Enforcement</a></li>
-<li class="expanded active-trail menu-mlid-710"><a href="../5" title="This chapter describes how and when payments of child support are made to payees. This chapter also explains when overpayments can be recovered from payees and when amounts overpaid can be refunded to payers." class="active-trail">5.5 Payments to Payees</a><ul class="menu"><li class="first leaf menu-mlid-711"><a href="1">5.5.1 Child Support Account</a></li>
-<li class="leaf menu-mlid-712"><a href="2">5.5.2 Entitlement to Payment &amp; Disbursement Cycle</a></li>
-<li class="leaf menu-mlid-713"><a href="3">5.5.3 Top Up</a></li>
-<li class="leaf menu-mlid-714"><a href="4">5.5.4 Suspending Payments to Payees</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7286"><a href="../../../child-support-guide.1" title="">Using the Child Support Guide</a></li>
+<li class="collapsed menu-mlid-514"><a href="../../updates.1">What&#039;s new</a></li>
+<li class="collapsed menu-mlid-515"><a href="../../1.1">1 About the Scheme</a></li>
+<li class="collapsed menu-mlid-518"><a href="../../2.1">2 Child support assessments</a></li>
+<li class="collapsed menu-mlid-555"><a href="../../3.1">3 Registrable maintenance liabilities</a></li>
+<li class="collapsed menu-mlid-637"><a href="../../4.1">4 Objecting, seeking a review, appealing &amp; applying to court</a></li>
+<li class="expanded active-trail menu-mlid-678"><a href="../../5.1" class="active-trail">5 Collecting child support</a><ul class="menu"><li class="first collapsed menu-mlid-679"><a href="../1.1" title="This chapter describes when the Registrar will accept an application to collect child support, how the Registrar registers enforceable maintenance liabilities and the effect of registration.">5.1 Agency collection</a></li>
+<li class="collapsed menu-mlid-686"><a href="../2.1" title="This chapter describes DHS&#039;s administrative methods of collecting child support.">5.2 Administrative enforcement</a></li>
+<li class="collapsed menu-mlid-698"><a href="../3.1" title="This chapter explains when the Registrar can apply amounts paid directly between parents or to a third party to satisfy a child support liability and also how the Registrar can offset child support debts between parents and credit lump sum payments.">5.3 Non-agency payments, crediting lump sum payments &amp; offsetting liabilities</a></li>
+<li class="collapsed menu-mlid-702"><a href="../4.1" title="This chapter describes the methods available to the Registrar to enforce collection of child support through the courts.">5.4 Court enforcement</a></li>
+<li class="expanded active-trail menu-mlid-710"><a href="../5.1" title="This chapter describes how and when payments of child support are made to payees. This chapter also explains when overpayments can be recovered from payees and when amounts overpaid can be refunded to payers." class="active-trail">5.5 Payments to payees</a><ul class="menu"><li class="first leaf menu-mlid-711"><a href="1">5.5.1 Child Support Account</a></li>
+<li class="leaf menu-mlid-712"><a href="2">5.5.2 Entitlement to payment &amp; disbursement cycle</a></li>
+<li class="leaf menu-mlid-713"><a href="3">5.5.3 Top up</a></li>
+<li class="leaf menu-mlid-714"><a href="4">5.5.4 Suspending payments to payees</a></li>
 <li class="last leaf active-trail active menu-mlid-715"><a href="5" class="active-trail active">5.5.5 Overpayments</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-717"><a href="../6" title="This chapter explains when the Registrar will cease to collect an ongoing child support liability, including arrears of child support payable under that liability. It also explains when the Registrar will accept the payee&#039;s application for DHS to resume collection.">5.6 Ending &amp; Reapplying for Collection</a></li>
-<li class="collapsed menu-mlid-721"><a href="../7" title="This chapter describes when Child Support will not take action to collect a child support debt owed by a payer or payee.">5.7 Non-pursuit of Debts</a></li>
-<li class="last collapsed menu-mlid-723"><a href="../8" title="This chapter describes when the Registrar will not take action to collect a child support debt.">5.8 Obsolete Entries</a></li>
+<li class="collapsed menu-mlid-717"><a href="../6.1" title="This chapter explains when the Registrar will cease to collect an ongoing child support liability, including arrears of child support payable under that liability. It also explains when the Registrar will accept the payee&#039;s application for DHS to resume collection.">5.6 Ending &amp; reapplying for collection</a></li>
+<li class="collapsed menu-mlid-721"><a href="../7.1" title="This chapter describes when Child Support will not take action to collect a child support debt owed by a payer or payee.">5.7 Non-pursuit of debts</a></li>
+<li class="last collapsed menu-mlid-723"><a href="../8.1" title="This chapter describes when the Registrar will not take action to collect a child support debt.">5.8 Obsolete entries</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-716"><a href="../../6">6 Administration</a></li>
-<li class="leaf menu-mlid-10696"><a href="../../acronyms">Acronym List</a></li>
-<li class="leaf menu-mlid-7193"><a href="../../keywords" title="">Keyword Index</a></li>
-<li class="last leaf menu-mlid-7167"><a href="../../sitemap">Site Map</a></li>
+<li class="collapsed menu-mlid-716"><a href="../../6.1">6 Administration</a></li>
+<li class="leaf menu-mlid-10696"><a href="../../acronyms">Acronym list</a></li>
+<li class="leaf menu-mlid-7193"><a href="../../keywords.1" title="">Keyword index</a></li>
+<li class="last leaf menu-mlid-7167"><a href="../../sitemap">Site map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../child-support-guide">Child Support Guide</a> &raquo; <a href="../../5" class="active-trail">5 Collecting Child Support</a> &raquo; <a href="../5" title="This chapter describes how and when payments of child support are made to payees. This chapter also explains when overpayments can be recovered from payees and when amounts overpaid can be refunded to payers." class="active-trail">5.5 Payments to Payees</a> &raquo; 5.5.5 Overpayments</div>
+	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../child-support-guide.1">Child Support Guide</a> &raquo; <a href="../../5.1" class="active-trail">5 Collecting child support</a> &raquo; <a href="../5.1" title="This chapter describes how and when payments of child support are made to payees. This chapter also explains when overpayments can be recovered from payees and when amounts overpaid can be refunded to payers." class="active-trail">5.5 Payments to payees</a> &raquo; 5.5.5 Overpayments</div>
 <div id="utility">
 	
-<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/child-support-guide/5/5/5"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="readspeaker_button" class="rs_skip rsbtn rs_preserve"><a rel="nofollow" class="rsbtn_play" href="https://app-oc.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=https://guides.dss.gov.au/child-support-guide/5/5/5"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsbtn_right rsimg rsplay rspart"></span></a></div></div>
 <div id="content" role="main">
 <article id="node-211">
 <h1 >5.5.5 Overpayments</h1>
-<h2>Summary</h2>
-<p>An overpayment refers to payment of an amount for a period that exceeds the amount payable for that period (including where no amount is payable). An overpayment would generally relate to a liability arising under a child support assessment. However, an overpayment may also relate to a liability arising under other registrable maintenance liabilities, such as a court order for the maintenance of a child or a spouse/partner (see <a href="../1/2">5.1.2</a> for registrable maintenance liabilities).</p>
+<h2>Context</h2>
+<p>An overpayment refers to payment of an amount for a period that exceeds the amount payable for that period (including where no amount is payable). Overpayments generally relate to a liability arising under a child support assessment. However, an overpayment may also relate to a liability arising under other registrable maintenance liabilities, such as a court order for the maintenance of a child or a spouse/partner (see <a href="../1/2">5.1.2</a> for registrable maintenance liabilities and how they are registered). Where an overpayment is recoverable by Services Australia, the payer can request that Services Australia not recover the payment.</p>
 <p>In this topic, the following terms are used:</p>
-<ul><li>'receiving person' - the person who received the overpayment (from <a href="../../acronyms#dhs" title="Department of Human Services">DHS</a> or directly from the paying person),</li>
-<li>'paying person' - the person who paid the overpayment (to DHS or directly to the receiving person).</li>
-</ul><p>An overpayment is recovered by DHS from the receiving person as a debt due to the Commonwealth if:</p>
-<ul><li>an amount of a registered maintenance liability is paid to the receiving person by DHS, and:
-<ul><li>the receiving person was not entitled to be paid the amount at the time it was paid (CSRC Act, section 79(1)(b)(i)), or</li>
-<li>the overpaid amount results from a decision with retrospective effect that causes a variation to particulars of the entry in the Child Support Register in relation to the liability, and the amount is repayable by the Registrar to the paying person (CSRC Act, section 79(1)(b)(ii)), or</li>
-</ul></li>
-<li>a court declares that the paying person in relation to a child support assessment (DHS collection or private collection) is not a parent of a child and makes a recovery order (CSA Act, section 107 and 143), and the recovery order is registered for collection by DHS (CSRC Act, section 17A).</li>
-</ul><p>Where the above does not apply to an overpayment, the amount may be privately recovered by the paying person from the receiving person if:</p>
-<ul><li>the 2 parties agree that the receiving person is to repay the amount to the paying person (as a voluntary acceptance or settlement for repayment), or</li>
-<li>in relation to a child support assessment - a court with jurisdiction under the CSA Act makes a recovery order in relation to the receiving person (CSA Act, section 143), or</li>
-<li>in relation to a registrable maintenance liability that does not arise under a child support assessment - a court with jurisdiction to enforce recovery of the overpayment makes a recovery order in relation to the receiving person (under court enforcement powers existing outside child support legislation).</li>
+<ul><li>'payee' - the person who received the overpayment (from Services Australia or directly from the payer),</li>
+<li>'payer' - the person who paid the overpayment (to Services Australia or directly to the payee).</li>
 </ul><div class="reference">
 <h2>Act references</h2>
-<p><a href="https://www.legislation.gov.au/Series/C2004A03596" title="Child Support (Registration and Collection) Act 1988">CSRC Act</a> section 17A, section 72, section 79</p>
-<p><a href="https://www.legislation.gov.au/Series/C2004A03872" title="Child Support (Assessment) Act 1989">CSA Act</a> section 107, section 143</p>
-<p><a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 1228(2B), section 1231(1)(bb)</p>
+<p><a href="https://www.legislation.gov.au/Series/C2004A03596" title="Child Support (Registration and Collection) Act 1988">CSRC Act</a> section 4(1), section 69B</p>
+<p><a href="https://www.legislation.gov.au/Series/C2004A03872" title="Child Support (Assessment) Act 1989">CSA Act</a> section 143</p>
 </div>
 <h2>On this page</h2>
-<ul><li><a href="5#overpaymentunder">Overpayments under section 79(1)(b)(i) of CSRC Act</a></li>
-<li><a href="5#overpayment">Overpayments under section 79(1)(b)(ii) of CSRC Act</a></li>
-<li><a href="5#method">Method of recovery of section 79 debt from receiving person</a></li>
-<li><a href="5#parentage">Parentage overpayments</a></li>
-<li><a href="5#private">Private recovery</a></li>
+<ul><li><a href="5#overpaymentunder">Overpayments under section 69B of CSRC Act</a></li>
+<li><a href="5#overpayment">Overpayments not repayable to the payer under section 69B of CSRC Act</a></li>
+<li><a href="5#method">Methods of recovering carer debt from a payee</a></li>
+<li><a href="5#private">Private methods of recovering overpayments</a></li>
+<li><a href="5#recovery">Recovery in private collect cases</a></li>
 <li><a href="5#voluntarily">Overpayments voluntarily repaid</a></li>
-<li><a href="5#recoverable">Overpayments recoverable under section 143 of CSA Act</a></li>
+<li><a href="5#recoverable">Amounts recoverable under section 143 of CSA Act</a></li>
 <li><a href="5#enforcement">Overpayments recoverable under enforcement powers outside child support law</a></li>
-</ul><h2 id="overpaymentunder">Overpayments under section 79(1)(b)(i) of CSRC Act</h2>
-<p>An overpayment of a registered maintenance liability occurs if the receiving person was not entitled to be paid an amount at the time it was paid. The overpayment comes within section 79(1)(b)(i) of the CSRC Act. The overpayment is recovered by DHS as it is a debt due by the receiving person to the Commonwealth.</p>
+</ul><h2 id="overpaymentunder">Overpayments under section 69B of CSRC Act</h2>
+<p>Under CSRC Act section 69B(1), an amount is a debt due by the payee to the Commonwealth (subject to CSRC Act section 69B(2)):</p>
+<ul><li>if a payee of a registered maintenance liability is paid an amount, or is taken to be paid an amount because of CSRC Act sections 71AA or 71AB, and</li>
+<li>the payee was not entitled to be paid an amount at the time it was paid (including because of a subsequent variation to particulars of the entry in the Child Support Register in relation to the registered maintenance liability).</li>
+</ul><p>The debt due by the payee to the Commonwealth is a 'carer debt'. The payee of the registered maintenance liability becomes the payer of a carer debt and has a 'carer liability' (CSRC Act section 4(1)).</p>
 <div class="example">
-<p><strong>Example 1:</strong> The monthly liability is $300, and DHS collected the full amount due by the payer for the month of September. The receiving person is entitled to be paid the amount collected of $300. However, DHS incorrectly pays $3000 to the receiving person in October. This results in an overpayment of $2700 under section 79(1)(b)(i), as the receiving person was not entitled to be paid this amount when it was paid in October.</p>
+<p><strong>Example:</strong> The monthly liability is $100, and Services Australia collected the full amount due by the payer for the month of March. The payee is entitled to be paid the amount collected of $100. However, the monthly liability was later found to be inaccurate and retrospectively changed to $80 for the month of March. This results in an overpayment of $20 under CSRC Act section 69B(1), as the payee was not entitled to be paid this amount when it was paid in March. Services Australia contacts the payee and explains that they owe a carer debt. The payee pays the amount of $20 to Services Australia under CSRC Act section 69B(1).</p>
 </div>
-<div class="example">
-<p><strong>Example 2:</strong> An amount of $500 is collected by DHS from a payer in a child support case, and mistakenly paid to a person who is not the payee for that case (but is a payee in a different case). The receiving person (payee in the different case) was not entitled to be paid the amount collected of $500, and it is an overpayment under section 79(1)(b)(i).</p>
-<p>The payee to whom the amount collected should have been paid will receive payment of that amount from DHS, as it is required under section 76 to pay the amount collected of $500 to the payee for that case (regardless of any mistaken payment to a different person).</p>
-</div>
-<div class="example">
-<p><strong>Example 3:</strong> An amount of $500 is received by DHS from <a href="../../acronyms#ato" title="Australian Taxation Office">ATO</a> in relation to a taxpayer who is originally considered to be a payer in a child support case, and paid to the receiving person for that case. Subsequently, it is determined that the taxpayer is not the payer in the child support case as they are two different people, and DHS refunds the amount of $500 to ATO. The receiving person was not entitled to be paid the amount of $500, and it is an overpayment under section 79(1)(b)(i).</p>
-</div>
-<h2 id="overpayment">Overpayments under section 79(1)(b)(ii) of CSRC Act</h2>
-<p>An overpayment of a registered maintenance liability may result from a subsequent variation to particulars of the entry in the Child Support Register in relation to the liability. For example, this may occur due to a decision with retrospective effect that decreases the annual rate of child support payable under a child support assessment or that ends the assessment. Similarly, it may occur due to a court order with retrospective effect that decreases or ends the amount payable under a registered maintenance liability.</p>
-<p>This type of overpayment comes within section 79(1)(b)(ii) of the CSRC Act if the amount is repayable by the Registrar to the paying person. As this assessment may be complex, the individual circumstances of a case may need additional consideration to assess whether this provision applies. The processes for administering overpayments allow for either party to discuss with DHS any concerns the person may have about an overpayment decision.</p>
-<h2 id="method">Method of recovery of section 79 debt from receiving person</h2>
-<p>An overpayment of a registered maintenance liability that is recoverable by DHS from the receiving person as a debt due to the Commonwealth under section 79 of the CSRC Act may be recovered by the following methods:</p>
-<ul><li>the receiving person making a payment to DHS,</li>
-<li>applying a tax refund for the receiving person against the debt (CSRC Act, section 72),</li>
-<li>if the receiving person is entitled to receive further payments of amounts collected by DHS for a registered maintenance liability - reducing the payments by an amount determined by DHS (CSRC Act, section 79(2)),</li>
-<li>by making deductions of an amount determined by DHS from a social security payment to the receiving person (SSAct section 1228(2B), section 1231(1)(bb)),</li>
-<li>applying to a court for an order to enforce recovery of the debt.</li>
-</ul><h2 id="parentage">Parentage overpayments</h2>
-<p>Parentage overpayments occur where a court with jurisdiction under the CSA Act declares under section 107 of that Act that a paying person in relation to a child support assessment is not a parent of a child, and makes a recovery order under section 143 of that Act. Unlike other orders made under section 143 of the CSA Act, parentage overpayment orders can be registered for collection by DHS under section 17A of the CSRC Act.</p>
-<p>For further details, see <a href="../../3/1/2">3.1.2</a>.</p>
-<h2 id="private">Private recovery</h2>
-<p>Generally, an overpaid amount that was privately collected can only be recovered by the paying person from the receiving person. The exception is a parentage overpayment.</p>
-<p>In relation to an overpaid amount that was collected by DHS, if the overpayment is not recoverable by DHS from the receiving person as a debt due to the Commonwealth under section 79 of the CSRC Act, the overpayment may be privately recovered by the paying person from the receiving person.</p>
-<p>A paying person may recover an overpaid amount directly from the receiving person, either by reaching agreement that the amount should be repaid, or by applying to a court for a recovery order.</p>
+<p>CSRC Act section 69B(3) requires any amount that is collected by Services Australia under section 69B(1) to be paid to the payer of the registered maintenance liability.</p>
+<h2 id="overpayment">Overpayments not repayable to the payer under section 69B of CSRC Act</h2>
+<p>An amount is not repayable by the payee, and is not a debt due to the Commonwealth, under CSRC Act section 69B(1) if:</p>
+<ul><li>the payee was not entitled to be paid the amount because of a subsequent variation to the particulars of the entry in the Child Support Register in relation to the registered maintenance liability (CSRC Act section 69B(2)(a)), and</li>
+<li>the variation was a result of
+<ul><li>a decision that the registered maintenance liability should never have existed (CSRC Act section 69B(2)(b)(i)), or</li>
+<li>the payer of the registered maintenance liability ceasing to be a resident of Australia or a reciprocating jurisdiction (CSRC Act section 69B(2)(b)(ii)).</li>
+</ul></li>
+</ul><p>While these amounts are not a debt to the Commonwealth and would therefore not be recovered by the Registrar, an amount covered by CSRC Act section 69B(2)(b)(i) may be recovered by the payer if a court makes an order under CSA Act section 143 (<a href="../../3/1/2">3.1.2</a>). A payer cannot recover amounts under CSA Act section 143 that were overpaid due to a payer ceasing to be a resident of Australia.</p>
+<h2 id="method">Methods of recovering carer debt from a payee</h2>
+<p>A carer debt may be recovered by the following methods:</p>
+<ul><li>the payee making a payment to Services Australia (<a href="../2/2">5.2.2</a>)</li>
+<li>collecting from salary or wages (<a href="../2/3">5.2.3</a>)</li>
+<li>collecting from social security pensions and benefits (<a href="../2/5">5.2.5</a>)</li>
+<li>collecting from <a href="../../acronyms#ftb" title="Family tax benefit">FTB</a> (<a href="../2/6">5.2.6</a>)</li>
+<li>collecting from veterans' pensions and allowances (<a href="../2/7">5.2.7</a>)</li>
+<li>applying a tax refund for the payee against the debt (<a href="../2/8">5.2.8</a>)</li>
+<li>collecting from third parties (<a href="../2/9">5.2.9</a>)</li>
+<li>collecting from parental leave payments (<a href="../2/10">5.2.10</a>)</li>
+<li>issuing a departure prohibition order (<a href="../2/11">5.2.11</a>)</li>
+<li>offsetting debts between payees and payers (including ongoing child support liabilities) (<a href="../3/2">5.3.2</a>)</li>
+<li>reducing carer debts when other debts are paid back (<a href="../3/4">5.3.4</a>), and/or</li>
+<li>applying to a court for an order to enforce recovery of the debt (<a href="../4/2">5.4.2</a>).</li>
+</ul><p>A payee of a carer liability (who is the payer of the registered maintenance liability that resulted in the overpayment) cannot enforce the carer debt, except by instituting a proceeding to recover the debt under CSRC Act section 113A (<a href="../4/7">5.4.7</a>).</p>
+<h2 id="private">Private methods of recovering overpayments</h2>
+<p>An overpayment amount may be privately recovered by the payer from the payee if:</p>
+<ul><li>the 2 parties agree that the payee is to repay the amount to the payer (as a voluntary acceptance or settlement for repayment), or</li>
+<li>in relation to registered maintenance liabilities (which can include other types of child maintenance liabilities that originate outside the CSA Act but are collected under the CSRC Act) - a court with jurisdiction under the CSA Act makes a recovery order in relation to the payee of the debt (CSA Act section 143), or</li>
+<li>in relation to a registrable maintenance liability that does not arise under a child support assessment - a court with jurisdiction to enforce recovery of the overpayment makes a recovery order in relation to the receiving person (under court enforcement powers existing outside child support legislation).</li>
+</ul><h2 id="recovery">Recovery in private collect cases</h2>
+<p>Generally, if child support is being collected privately and an overpayment occurs, only the payer can recover the overpayment from the payee.</p>
+<p>A payer may recover an overpaid amount directly from the payee, either by reaching agreement that the amount should be repaid, or by applying to a court for a recovery order.</p>
 <h2 id="voluntarily">Overpayments voluntarily repaid</h2>
-<p>An overpayment may be voluntarily repaid by the receiving person to the paying person. This is where the two parties agree that the receiving person is to repay an amount to the paying person, without the paying person obtaining a recovery order from a court under section 143 of the CSA Act. Such an agreement is a voluntary acceptance or settlement for repayment by the receiving person.</p>
+<p>An overpayment may be voluntarily repaid by the payee to the payer. This is where the 2 parties agree that the payee is to repay an amount to the payer, without the payer obtaining a recovery order from a court under section 143 of the CSA Act. Such an agreement is a voluntary acceptance or settlement for repayment by the payee.</p>
 <div class="example">
-<p><strong>Example 1:</strong> A receiving person considers that a court would be likely to consider that it would be just and equitable in the circumstances for a recovery order to be made, as the cause of the overpayment was a delay by the receiving person in notifying DHS of a change of circumstances. The receiving person also wants to avoid incurring legal costs. The receiving person voluntarily agrees to repay the overpayment.</p>
+<p><strong>Example 1:</strong> A payee considers that a court would be likely to consider that it would be just and equitable in the circumstances for a recovery order to be made, as the cause of the overpayment was a delay by the payee in notifying Services Australia of a change of circumstances. The payee also wants to avoid incurring legal costs. The payee voluntarily agrees to repay the overpayment.</p>
 </div>
 <div class="example">
-<p><strong>Example 2:</strong> A receiving person considers that a court would be likely to consider that it would not be just and equitable in the circumstances for a recovery order to be made, as the cause of the overpayment was a delay by the paying person in notifying DHS of a change of circumstances. The receiving person does not agree to repay the overpayment.</p>
+<p><strong>Example 2:</strong> A payee considers that a court would be likely to consider that it would not be just and equitable in the circumstances for a recovery order to be made, as the cause of the overpayment was a delay by the payer in notifying Services Australia of a change of circumstances. The payee does not agree to repay the overpayment.</p>
 </div>
-<h2 id="recoverable">Overpayments recoverable under section 143 of CSA Act</h2>
-<p>If the receiving person and paying person do not agree that an overpaid amount should be repaid, the paying person may apply to a court for a recovery order.</p>
-<p>An overpayment of child support under the CSA Act may be recovered from the receiving person in a court having jurisdiction under the CSA Act. This is provided for under section 143 of the CSA Act. The court will consider whether it would be just and equitable for a recovery order to be made.</p>
+<h2 id="recoverable">Amounts recoverable under section 143 of CSA Act</h2>
+<p>If the payee and payer do not agree that an amount should be repaid, the payer may apply to a court for a recovery order.</p>
+<p>An amount of child support under the CSA Act or the CSRC Act may be recovered from the payee in a court having jurisdiction under the CSA Act. This is provided for under section 143 of the CSA Act. The court will consider whether it would be just and equitable for a recovery order to be made.</p>
+<p>See <a href="../../3/1/2">3.1.2</a> for further information.</p>
 <h2 id="enforcement">Overpayments recoverable under enforcement powers outside child support law</h2>
-<p>An overpayment of a registered maintenance liability that is not a child support assessment and not recoverable by DHS may be recovered from the receiving person by the paying person applying to a court with jurisdiction to enforce recovery of the overpayment. This would occur under court enforcement powers existing outside child support legislation.</p>
+<p>An overpayment of a registered maintenance liability that is not a child support assessment and not recoverable by Services Australia may be recovered from the payee by the payer applying to a court with jurisdiction to enforce recovery of the overpayment. This would occur under court enforcement powers existing outside child support legislation.</p>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     3 January 2017  	</div>
+      Last reviewed:     1 July 2021  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../contact-us">Contact us</a></li>
@@ -174,8 +181,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
-<script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_IkilKWehdX07Wbi3Cg-T6yf5sLTu5FfOT2__edFF9eM.js"></script>
+<script type="text/javascript" src="https://cdn1.readspeaker.com/script/5931/webReader/webReader.js?pids=wr&amp;notools=1&amp;disable=popupplayback&amp;qrxyi9"></script>
 </body>
 </html>

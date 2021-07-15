@@ -2,27 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<link rel="shortlink" href="../../../../node/16351" />
-<link rel="canonical" href="40" />
-<meta name="viewport" content="width=device-width" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>4.3.1.40 Determining the Rate of Income for PP | Guide to Social Security Law</title>
-<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<meta name="viewport" content="width=device-width" />
+<link rel="canonical" href="40" />
+<link rel="shortlink" href="../../../../node/16351" />
+<title>4.3.1.40 Determining the rate of income for PP | Social Security Guide</title>
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_Q4XrxgEkbadGDm1J7AHUHHmbcMJ2_hbMfrrzrm9Ne_I.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
-<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
-<script type="text/javascript" src="../../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
-<script type="text/javascript" src="../../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
-<script type="text/javascript" src="../../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_d905I2WxoGGQW6uS7jkC73mqKhSejey6jciEdxo9cJI.css" media="all" />
+<script type="text/javascript" src="../../../../sites/default/files/js/js_yMSKTzBO0KmozyLwajzFOrrt_kto_9mtccAkb0rm7gc.js"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_FA2YSy0R3kB2AU_wIOLoSR0sJX4ZYjdPuPaRFd2ZDyw.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+window.rsConf = { ui: { tools: {translation: false, dictionary: false}}};
 //--><!]]>
 </script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_rsGiM5M1ffe6EhN-RnhM5f3pDyJ8ZAPFJNKpfjtepLk.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_-oEDdwe4XpUqUj4W0KJs96ENaXIrGvjBvIP-WYYBi54.js"></script>
 <script type="text/javascript" src="../../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"9adD-m3ZxXFfpVHxZdLXvIJBnyWwSi15JvDkfBxoDT4","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/guide-social-security-law\/4\/3\/1\/40":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"okJE-UXbeflZrXSJR4PGaMb2z6Csi7jQoON4tKf-lac","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"https:\/\/cdn1.readspeaker.com\/script\/5931\/webReader\/webReader.js?pids=wr\u0026notools=1\u0026disable=popupplayback":1,"misc\/jquery.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"0":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"1":1,"sites\/all\/modules\/extlink\/js\/extlink.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/guide-social-security-law\/4\/3\/1\/40":true},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)","extUseFontAwesome":false}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -35,240 +40,157 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <nav id="global">
 	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
 <div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<ul class="menu"><li class="first leaf has-children active-trail menu-mlid-489"><a href="../../../../guide-social-security-law.1" class="active-trail">Social Security Guide</a></li>
+<li class="leaf has-children menu-mlid-491"><a href="../../../../family-assistance-guide.1">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-490"><a href="../../../../paid-parental-leave-guide.1">Paid Parental Leave Guide</a></li>
+<li class="leaf has-children menu-mlid-513"><a href="../../../../child-support-guide.1">Child Support Guide</a></li>
+<li class="leaf menu-mlid-7596"><a href="../../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
 <li class="leaf menu-mlid-7597"><a href="../../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
-<li class="leaf has-children menu-mlid-513"><a href="../../../../child-support-guide">Child Support Guide</a></li>
-<li class="leaf has-children menu-mlid-491"><a href="../../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-489"><a href="../../../../guide-social-security-law" class="active-trail">Guide to Social Security Law</a></li>
-<li class="last leaf has-children menu-mlid-490"><a href="../../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+<li class="last leaf has-children menu-mlid-19951"><a href="../../../../national-redress-guide" title="">National Redress Guide</a></li>
 </ul></div></nav>
 <header role="banner">
 	<a href="../../../../index.html" rel="home"><img src="../../../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
 <p class="site-name">Guides to Social Policy Law</p>
 <form class="search-form" role="search" action="40" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
- <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+ <input class="custom-search-box form-text" placeholder="Search" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-sTS_HGjC3z8JH2PgB5Se_Ug7lW275Tf7hH4zPBAq1Hw" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-fWbCT_CYHVidqoC6NBlQ-aZtoXLUgB6stdquy7YM1A4" />
 <input type="hidden" name="form_id" value="search_block_form" />
-</div></form>	<h2>Guide to Social Security Law</h2>
-<p>Version 1.245 - Released 1 June 2018</p>
+</div></form>	<h2>Social Security Guide</h2>
+<p>Version 1.283 - Released 1 July 2021</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../../../../guide-social-security-law" title="">Using the Guide to Social Security Law</a></li>
-<li class="collapsed menu-mlid-493"><a href="../../../updates">What&#039;s New</a></li>
-<li class="collapsed menu-mlid-2295"><a href="../../../1">1 Key Terms &amp; Principles</a></li>
-<li class="collapsed menu-mlid-2294"><a href="../../../2">2 Claim Verification</a></li>
-<li class="collapsed menu-mlid-2293"><a href="../../../3">3 Qualification &amp; Payability</a></li>
-<li class="expanded active-trail menu-mlid-2292"><a href="../../../4" class="active-trail">4 Income &amp; Assets</a><ul class="menu"><li class="first collapsed menu-mlid-3512"><a href="../../1">4.1 Deprivation of Income &amp; Assets</a></li>
-<li class="collapsed menu-mlid-3517"><a href="../../2">4.2 Means Tests &amp; Limits</a></li>
-<li class="expanded active-trail menu-mlid-3518"><a href="../../3" class="active-trail">4.3 Ordinary Income</a><ul class="menu"><li class="first expanded active-trail menu-mlid-3339"><a href="../1" class="active-trail">4.3.1 Income Rates &amp; Definitions</a><ul class="menu"><li class="first leaf menu-mlid-3333"><a href="10">4.3.1.10 Determining the Rate of Income for Benefits</a></li>
-<li class="leaf menu-mlid-3334"><a href="20">4.3.1.20 Determining the Rate of Income for Pensioners of Age Pension Age from 20/09/2009</a></li>
-<li class="leaf menu-mlid-3335"><a href="21">4.3.1.21 Determining the Rate of Income for Pensioners of Age Pension Age pre-20/09/2009</a></li>
-<li class="leaf menu-mlid-3336"><a href="25">4.3.1.25 Determining the Assessable Income for Pensioners Below Age Pension Age</a></li>
-<li class="leaf menu-mlid-3337"><a href="30">4.3.1.30 Rate of Income - Couples, Blind Pensioners &amp; Children</a></li>
-<li class="last leaf active-trail active menu-mlid-3338"><a href="40" class="active-trail active">4.3.1.40 Determining the Rate of Income for PP</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../../../../guide-social-security-law.1" title="">Using the Social Security Guide</a></li>
+<li class="collapsed menu-mlid-493"><a href="../../../updates.1">What&#039;s new</a></li>
+<li class="leaf menu-mlid-24666"><a href="../../../coronavirus">Government response to Coronavirus</a></li>
+<li class="collapsed menu-mlid-2295"><a href="../../../1.1">1 Key terms &amp; principles</a></li>
+<li class="collapsed menu-mlid-2294"><a href="../../../2.1">2 Claim verification</a></li>
+<li class="collapsed menu-mlid-2293"><a href="../../../3.1">3 Qualification &amp; payability</a></li>
+<li class="expanded active-trail menu-mlid-2292"><a href="../../../4.1" class="active-trail">4 Income &amp; assets</a><ul class="menu"><li class="first collapsed menu-mlid-3512"><a href="../../1.1">4.1 Deprivation of income &amp; assets</a></li>
+<li class="collapsed menu-mlid-3517"><a href="../../2.1">4.2 Means Tests &amp; Limits</a></li>
+<li class="expanded active-trail menu-mlid-3518"><a href="../../3.1" class="active-trail">4.3 Ordinary Income</a><ul class="menu"><li class="first expanded active-trail menu-mlid-3339"><a href="../1.1" class="active-trail">4.3.1 Income rates &amp; definitions</a><ul class="menu"><li class="first leaf menu-mlid-3333"><a href="10">4.3.1.10 Determining the rate of income for benefits</a></li>
+<li class="leaf menu-mlid-3334"><a href="20">4.3.1.20 Determining the rate of income for pensioners of age pension age from 20/09/2009</a></li>
+<li class="leaf menu-mlid-3336"><a href="25">4.3.1.25 Determining the assessable income for pensioners below age pension age</a></li>
+<li class="leaf menu-mlid-3337"><a href="30">4.3.1.30 Rate of income - couples, blind pensioners &amp; children</a></li>
+<li class="last leaf active-trail active menu-mlid-3338"><a href="40" class="active-trail active">4.3.1.40 Determining the rate of income for PP</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-3340"><a href="../2">4.3.2 Income Exempt from Assessment</a></li>
-<li class="collapsed menu-mlid-3341"><a href="../3">4.3.3 Income from Employment</a></li>
-<li class="collapsed menu-mlid-3342"><a href="../4">4.3.4 Income Maintenance Period</a></li>
-<li class="collapsed menu-mlid-3343"><a href="../5">4.3.5 Income from DVA</a></li>
-<li class="collapsed menu-mlid-3344"><a href="../6">4.3.6 Income from Overseas, Including Pensions, War Pensions &amp; Restitution Payments</a></li>
+<li class="collapsed menu-mlid-3340"><a href="../2.1">4.3.2 Income exempt from assessment</a></li>
+<li class="collapsed menu-mlid-3341"><a href="../3.1">4.3.3 Income from employment</a></li>
+<li class="collapsed menu-mlid-3342"><a href="../4.1">4.3.4 Income Maintenance Period</a></li>
+<li class="collapsed menu-mlid-3343"><a href="../5.1">4.3.5 Income from DVA</a></li>
+<li class="collapsed menu-mlid-3344"><a href="../6.1">4.3.6 Income from Overseas, Including Pensions, War Pensions &amp; Restitution Payments</a></li>
 <li class="leaf menu-mlid-3345"><a href="../7">4.3.7 Number not currently in use</a></li>
-<li class="collapsed menu-mlid-3346"><a href="../8">4.3.8 Income from Property</a></li>
-<li class="last collapsed menu-mlid-3347"><a href="../9">4.3.9 Income from Other Sources</a></li>
+<li class="collapsed menu-mlid-3346"><a href="../8.1">4.3.8 Income from Property</a></li>
+<li class="last collapsed menu-mlid-3347"><a href="../9.1">4.3.9 Income from Other Sources</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-3519"><a href="../../4">4.4 Deeming Provisions</a></li>
+<li class="collapsed menu-mlid-3519"><a href="../../4.1">4.4 Deeming Provisions</a></li>
 <li class="leaf menu-mlid-3520"><a href="../../5">4.5 Number not currently in use</a></li>
-<li class="collapsed menu-mlid-3521"><a href="../../6">4.6 Assets</a></li>
-<li class="collapsed menu-mlid-3522"><a href="../../7">4.7 Business Structures, Primary Production &amp; pre-01/01/2002 Assessment of Trusts &amp; Private Companies</a></li>
-<li class="collapsed menu-mlid-3523"><a href="../../8">4.8 Superannuation Funds</a></li>
-<li class="collapsed menu-mlid-3524"><a href="../../9">4.9 Income Streams</a></li>
-<li class="collapsed menu-mlid-3513"><a href="../../10">4.10 Historical Income &amp; Assets Limits &amp; Information</a></li>
+<li class="collapsed menu-mlid-3521"><a href="../../6.1">4.6 Assets</a></li>
+<li class="collapsed menu-mlid-3522"><a href="../../7.1">4.7 Business Structures, Primary Production &amp; pre-01/01/2002 Assessment of Trusts &amp; Private Companies</a></li>
+<li class="collapsed menu-mlid-3523"><a href="../../8.1">4.8 Superannuation funds</a></li>
+<li class="collapsed menu-mlid-3524"><a href="../../9.1">4.9 Income streams</a></li>
+<li class="collapsed menu-mlid-3513"><a href="../../10.1">4.10 Historical income &amp; assets limits &amp; information</a></li>
 <li class="leaf menu-mlid-3514"><a href="../../11">4.11 Number not currently in use</a></li>
-<li class="collapsed menu-mlid-3515"><a href="../../12">4.12 Means Test Treatment of Private Trusts &amp; Private Companies from 01/01/2002</a></li>
-<li class="collapsed menu-mlid-3516"><a href="../../13">4.13 Compensation</a></li>
-<li class="last collapsed menu-mlid-3511"><a href="../../14">4.14 Means Test Concessions for Special Disability Trusts</a></li>
+<li class="collapsed menu-mlid-3515"><a href="../../12.1">4.12 Means Test Treatment of Private Trusts &amp; Private Companies from 01/01/2002</a></li>
+<li class="collapsed menu-mlid-3516"><a href="../../13.1">4.13 Compensation</a></li>
+<li class="last collapsed menu-mlid-3511"><a href="../../14.1">4.14 Means Test Concessions for Special Disability Trusts</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-2291"><a href="../../../5">5 Payment Rates</a></li>
-<li class="collapsed menu-mlid-2290"><a href="../../../6">6 Reviews, Debts &amp; Payment Recovery</a></li>
-<li class="collapsed menu-mlid-2289"><a href="../../../7">7 Portability &amp; CFP</a></li>
-<li class="collapsed menu-mlid-2288"><a href="../../../8">8 Administration Act Provisions</a></li>
-<li class="collapsed menu-mlid-2278"><a href="../../../9">9 Visas, Entitlements &amp; Assurances of Support</a></li>
-<li class="collapsed menu-mlid-2296"><a href="../../../10">10 Australian Social Security Agreements</a></li>
-<li class="collapsed menu-mlid-2297"><a href="../../../11">11 Income Management</a></li>
-<li class="leaf menu-mlid-2298"><a href="../../../acronyms">Acronym List</a></li>
-<li class="leaf menu-mlid-7297"><a href="../../../keywords">Keyword Index</a></li>
-<li class="leaf menu-mlid-7372"><a href="../../../act-references">Act Reference Index</a></li>
-<li class="last leaf menu-mlid-7168"><a href="../../../sitemap">Site Map</a></li>
+<li class="collapsed menu-mlid-2291"><a href="../../../5.1">5 Payment rates</a></li>
+<li class="collapsed menu-mlid-2290"><a href="../../../6.1">6 Reviews, debts &amp; payment recovery</a></li>
+<li class="collapsed menu-mlid-2289"><a href="../../../7.1">7 Portability &amp; comparable foreign payment (CFP)</a></li>
+<li class="collapsed menu-mlid-2288"><a href="../../../8.1">8 Administration Act Provisions</a></li>
+<li class="collapsed menu-mlid-2278"><a href="../../../9.1">9 Visas, entitlements &amp; assurances of support</a></li>
+<li class="collapsed menu-mlid-2296"><a href="../../../10.1">10 Australian Social Security Agreements</a></li>
+<li class="collapsed menu-mlid-2297"><a href="../../../11.1">11 Income Management</a></li>
+<li class="leaf menu-mlid-2298"><a href="../../../acronyms">Acronym list</a></li>
+<li class="leaf menu-mlid-7297"><a href="../../../keywords.1" title="">Keyword index</a></li>
+<li class="leaf menu-mlid-7372"><a href="../../../act-references.1" title="">Act reference index</a></li>
+<li class="last leaf menu-mlid-7168"><a href="../../../sitemap">Site map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../../../index.html">Home</a> &raquo; <a href="../../../../guide-social-security-law">Guide to Social Security Law</a> &raquo; <a href="../../../4" class="active-trail">4 Income &amp; Assets</a> &raquo; <a href="../../3" class="active-trail">4.3 Ordinary Income</a> &raquo; <a href="../1" class="active-trail">4.3.1 Income Rates &amp; Definitions</a> &raquo; 4.3.1.40 Determining the Rate of Income for PP</div>
+	<div id="breadcrumb"><a href="../../../../index.html">Home</a> &raquo; <a href="../../../../guide-social-security-law.1">Social Security Guide</a> &raquo; <a href="../../../4.1" class="active-trail">4 Income &amp; assets</a> &raquo; <a href="../../3.1" class="active-trail">4.3 Ordinary Income</a> &raquo; <a href="../1.1" class="active-trail">4.3.1 Income rates &amp; definitions</a> &raquo; 4.3.1.40 Determining the rate of income for PP</div>
 <div id="utility">
 	
-<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/guide-social-security-law/4/3/1/40"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="readspeaker_button" class="rs_skip rsbtn rs_preserve"><a rel="nofollow" class="rsbtn_play" href="https://app-oc.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=https://guides.dss.gov.au/guide-social-security-law/4/3/1/40"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsbtn_right rsimg rsplay rspart"></span></a></div></div>
 <div id="content" role="main">
 <article id="node-16351">
-<h1 >4.3.1.40 Determining the Rate of Income for PP</h1>
+<h1 >4.3.1.40 Determining the rate of income for PP</h1>
 <h2>Income test</h2>
-<p><a href="../../../acronyms#pp" title="Parenting payment">PP</a> rates may be affected by the ordinary income (<a href="../../../1/1/o/30">1.1.O.30</a>) of the recipient, or, in some cases, their partner. The rate of ordinary income is a required input to the rate calculation process for social security parenting payments. This rate of ordinary income is the sum of the rates of the components of ordinary income. Employment income (<a href="../../../1/1/e/102">1.1.E.102</a>) is a component of ordinary income, as are financial investment income, deemed income and various other types of income.</p>
-<p>PP uses income assessment methods that are generally the same as those applying to other social security income support payments. Taxable income concepts, as used for <a href="../../../acronyms#ftb" title="Family tax benefit">FTB</a>, DO NOT apply to PP.</p>
+<p><a href="../../../acronyms#pp" title="Parenting payment">PP</a> rates may be affected by the ordinary income (<a href="../../../1/1/o/30">1.1.O.30</a>) of the recipient, or, in some cases, their partner. The rate of ordinary income is a required input to the rate calculation process for social security PPs. This rate of ordinary income is the sum of the rates of the components of ordinary income. Employment income (<a href="../../../1/1/e/102">1.1.E.102</a>) is a component of ordinary income, as are financial investment income, deemed income and various other types of income.</p>
+<p>PP uses income assessment methods that are generally the same as those applying to other social security income support payments. Taxable income concepts, as used for <a href="../../../acronyms#ftb" title="Family tax benefit">FTB</a>, do not apply to PP.</p>
 <div class="reference">
-<p><strong>Policy reference:</strong> SS Guide <a href="../../2/4">4.2.4</a> PP Means Tests &amp; Limits, <a href="../../1">4.1</a> Deprivation of Income &amp; Assets, <a href="../../3">4.3</a> Ordinary Income, <a href="../../4">4.4</a> Deeming Provisions, <a href="../../7">4.7</a> Business Structures, Primary Production &amp; pre-01/01/2002 Assessment of Trusts &amp; Private Companies, <a href="../../8">4.8</a> Superannuation Funds, <a href="../../9">4.9</a> Income Streams, <a href="../../12">4.12</a> Means Test Treatment of Private Trusts &amp; Private Companies from 01/01/2002, <a href="../../13">4.13</a> Compensation</p>
+<p><strong>Policy reference:</strong> SS Guide <a href="../../2/4.1">4.2.4</a> PP means tests &amp; limits, <a href="../../1.1">4.1</a> Deprivation of income &amp; assets, <a href="../../3.1">4.3</a> Ordinary Income, <a href="../../4.1">4.4</a> Deeming Provisions, <a href="../../7.1">4.7</a> Business Structures, Primary Production &amp; pre-01/01/2002 Assessment of Trusts &amp; Private Companies, <a href="../../8.1">4.8</a> Superannuation funds, <a href="../../9.1">4.9</a> Income streams, <a href="../../12.1">4.12</a> Means Test Treatment of Private Trusts &amp; Private Companies from 01/01/2002, <a href="../../13.1">4.13</a> Compensation</p>
 </div>
-<h2>How is employment income assessed?</h2>
-<p>Generally PP recipients have employment income assessed fortnightly.</p>
-<p><strong>Note:</strong> For <a href="../../../acronyms#ppp" title="Parenting payment (partnered)">PPP</a> recipients of age pension age only, the assessment of employment income may be different.</p>
-<h2>Employment income assessment for PP recipients</h2>
-<p>PP recipients have their employment income assessed in the instalment period in which it is earned, derived, or received, i.e. on a fortnight-by-fortnight basis. The fortnightly amount of employment income is spread evenly across all days in the instalment period, regardless of which days, or the number of days, worked. Because a <a href="../../../acronyms#pps" title="Parenting payment (single)">PPS</a> rate is calculated as an annual rate, the fortnightly rate of employment income is converted to an annual rate for input to the rate calculation process.</p>
+<h2>Assessment of income from employment for PP recipients</h2>
+<p>PP recipients have their employment income assessed in the instalment period in which it is paid, i.e. on a fortnight-by-fortnight basis. The fortnightly amount of employment income is apportioned forward from the first day of the instalment period, regardless of which days, or the number of days, worked. Because a <a href="../../../acronyms#pps" title="Parenting payment (single)">PPS</a> rate is calculated as an annual rate, the fortnightly rate of employment income is converted to an annual rate for input to the rate calculation process.</p>
 <p><strong>Note:</strong> PP recipients of age pension age receive a higher pension supplement component for the rate calculation.</p>
-<p>If a recipient has a positive working credit balance, the rate of ordinary income will be reduced by the available working credits.</p>
-<p>Employment income lump sums that represent a period greater than a fortnight are spread over the period to which the work relates.</p>
+<p>If a recipient is below age pension age and has a positive working credit balance, the rate of ordinary income will be reduced by the available working credits.</p>
+<p>Employment income lump sums that represent a period greater than a fortnight are apportioned forward for the period to which the work relates, up to a maximum of 52 weeks.</p>
 <div class="example">
 <p><strong>Example:</strong> A contract-related employment income lump sum is spread over the period of the contract.</p>
 </div>
-<p>Employment income lump sums that do not represent a period at all but are paid for remunerative work are spread over 12 months from the date the recipient became entitled to receive the lump sum. The date earned, derived or received is the date the recipient becomes entitled to receive the amount.</p>
+<p>In limited circumstances where employment income is paid to a person but is not paid in respect of a particular period a delegate of the Secretary will attribute this employment income over a period not exceeding 52 weeks, as appropriate in the circumstances. In most situations, the basis of determining the length of apportionment will depend on the nature of the employment income. The lump sum will be apportioned forward from the beginning of the entitlement period in which it was paid for the relevant number of days.</p>
+<p>When determining the period, the delegate may take into consideration the following:</p>
+<ul><li>the nature of the person's remunerative work</li>
+<li>the nature of the person's employment income</li>
+<li>the person's financial interests</li>
+<li>any financial hardship which may be caused to the person</li>
+<li>whether the employment income relates to remunerative work that was undertaken at a time when the person was not receiving a social security pension or a social security benefit.</li>
+</ul><div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 1073A Attribution of employment income paid in respect of a particular period or periods, section 1073BA Attribution of employment income paid not in respect of a particular period, section 1073C Fortnightly or yearly expression of attributed employment income</p>
+<p><strong>Policy reference:</strong> SS Guide <a href="../../../3/1/11/30">3.1.11.30</a> Working credit depletion</p>
+</div>
+<h2><a href="../../../acronyms#jsp" title="Jobseeker payment">JSP</a> partner - zero rate provision</h2>
+<p>During a period when the recipient's partner on JSP is receiving nil payment, the partner's income will be passed to the PP system, and will affect PP. If the PP is also reduced to nil as a result of the couple's combined income, then the PP remains current while the JSP remains current.</p>
 <div class="example">
-<p><strong>Example:</strong> A commission employment income lump sum is spread over 12 months</p>
+<p><strong>Explanation:</strong> A JSP recipient is allowed 6 fortnights of nil payment before the payment is cancelled.</p>
 </div>
-<div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 1073B Daily attribution of employment income, section 1073C Fortnightly or yearly expression of attributed employment income</p>
-<p><strong>Policy reference:</strong> SS Guide <a href="../../../3/1/11/30">3.1.11.30</a> Working Credit Depletion</p>
-</div>
-<h2>Employment income assessment for PPP recipients of age pension age</h2>
-<p>The assessment of employment income (<a href="../../../1/1/e/102">1.1.E.102</a>) for PPP recipients of age pension age is explained in the following table:</p>
-<table><thead><tr><th>If the PPP recipient…</th>
-<th>Then employment income is assessed…</th>
-</tr></thead><tbody><tr><td>has a partner who receives an allowance,</td>
-<td>on a fortnight-by-fortnight basis.</td>
-</tr><tr><td>- has a partner NOT in receipt of an allowance,</td>
-<td>using a continuing rate of income at any point in time - expressed fortnightly.</td>
-</tr></tbody></table><h2>Determining a rate of income - regular income</h2>
-<p>To determine a rate of income, a delegate must:</p>
-<ul><li>take into account all sources of the recipient's income at the time of claim, AND</li>
-<li>find out what each of those sources would pay over the period of a year or fortnight, as appropriate, if the current income were to continue.</li>
-</ul><p>The following table explains when income is included in the PP assessment:</p>
-<table><thead><tr><th>If the recipient…</th>
-<th>Then that…</th>
-</tr></thead><tbody><tr><td>has income before the lodgement of a claim, OR</td>
-<td>income is irrelevant.</td>
-</tr><tr><td>is likely to have a change in circumstances in the future,</td>
-<td>is not relevant until that change occurs.
+<h2>Apportioning non-remunerative non-periodic lump sums over 12 months</h2>
+<p>One-off, irregular or non-periodical lump sum amounts, are apportioned as income over a 12 month period in 52 weekly amounts, if they are not remuneration, periodic payments, or an exempt lump sum.</p>
 <div class="example">
-<p><strong>Explanation:</strong> The relevant rate of income is the CURRENT rate of income even though it may be expressed as an annual rate.</p>
-</div>
-</td>
-</tr><tr><td>lodges the claim up to 4 weeks after becoming qualified,</td>
-<td>income earned during the period between becoming qualified and lodging the claim, IS assessed to determine the rate payable during that period.</td>
-</tr></tbody></table><div class="example">
-<p><strong>Example 1:</strong> A recipient who stops work immediately before claiming. Their income from that employment is NOT part of their current rate of income and should NOT be used to calculate the rate of PP.</p>
-</div>
-<div class="example">
-<p><strong>Example 2:</strong> Meg claims PP 3 weeks after the birth of her first child. The income from her casual employment between having the child and claiming PP is assessed for her rate during that period.</p>
-</div>
-<div class="example">
-<p><strong>Example 3:</strong> Robyn is returning to work in 4 weeks time. The income from her intended employment is NOT taken into account until her income actually changes.</p>
-</div>
-<h2>Self-employed or business recipients</h2>
-<p>Income from self-employment or a business is calculated based on the most recent taxation return available, providing this gives a good indication of the current income. If there has been a significant change affecting the business since the last available taxation return, or if relevant taxation returns are not yet available, recent profit and loss statements can be used.</p>
-<h2>Income estimates</h2>
-<p>If a recipient does not know how much they will be earning, they should be asked to estimate the amount they are likely to receive for the first week or fortnight. The following table explains the treatment of an income estimate:</p>
-<table><thead><tr><th>If the estimate…</th>
-<th>Then…</th>
-</tr></thead><tbody><tr><td>appears to be a reasonable estimate of the maximum a recipient could reasonably earn,</td>
-<td>
-<p>it should be used and the case reviewed when actual details are available.</p>
-<p>See the example following this table.</p>
-</td>
-</tr><tr><td>is near or over the cut off point for PP,</td>
-<td>it may be more appropriate to suspend the PP entitlement. Once earnings details are provided, a more accurate rate of income can be used from the original date of effect and any arrears paid.</td>
-</tr><tr><td>is unrealistic or not provided by the recipient,</td>
-<td>
-<p>- PP should be suspended, and</p>
-<p>- the recipient should be asked to provide information on actual income as soon as possible.</p>
-</td>
-</tr></tbody></table><div class="example">
-<p><strong>Example:</strong> Liz advises that she is commencing work next week. As the work is 'on call' Liz does not know what hours will be worked and so cannot give an indication of earnings. Further discussion establishes that the most work Liz is likely to get is 3 afternoons per week, for 6 hours each afternoon, at $10.00 per hour. This gives a maximum of $360.00 per fortnight. The PP rate is set using that amount.</p>
-<p>After 2 weeks, the actual time worked was:</p>
-<ul><li>2 days in week one for 6 hours each day, and</li>
-<li>2 days in week 2 for 4 hours each day.</li>
-</ul><p>The rate of income is then reassessed as $200.00 that fortnight, and PP arrears are paid.</p>
-</div>
-<div class="example">
-<p><strong>Explanation:</strong> The objective underlying the use of maximum earnings as an interim assessment is to set a rate of income which is not unrealistically high, in order to continue providing income support, while at the same time minimising the chance of excess payment occurring.</p>
-</div>
-<h2>Use of income in the previous fortnight</h2>
-<p>If a PP recipient is a notification reporter (<a href="../../../1/1/n/126">1.1.N.126</a>) and if income in the previous fortnight is maintained as the continuing level of current income, the recipient should be strongly advised of the need to inform Centrelink immediately of any changes to this income level.</p>
-<p>If a recipient advises a change to the level of income from this source, the earnings over the preceding 2 weeks should be recalculated and this new amount maintained as the fortnightly current income level.</p>
-<h2>PPP recipients of age pension age - determining a rate of income - irregular or intermittent income</h2>
-<p><strong>Note:</strong> From 20 September 2009, the following information applies only to PPP recipients who are over age pension age.</p>
-<p>If a recipient's income is intermittent, it may be possible to treat the employment as constant and take an average of earnings over a period of time. This method will establish a constant rate.</p>
-<div class="example">
-<p><strong>Example:</strong> Steven's earnings from casual employment could be averaged over a period of 13 weeks.</p>
-</div>
-<p>While a period of 13 weeks is suggested, an average should be made over a period of time most suited to the pattern of employment.</p>
-<div class="example">
-<p><strong>Example:</strong> It may be deemed that 4 or 8 weeks may be more appropriate.</p>
-</div>
-<p>Generally, an average should be used where there is an evident pattern to the employment. If the recipient cannot establish that a continuing pattern of employment exists for a particular income source, the income over the preceding 2 weeks should be calculated and this amount maintained as the fortnightly current income level.</p>
-<h2>PPP recipients of age pension age - determining a rate of income - multiple short periods of employment</h2>
-<p>Depending on the circumstances, it may be more appropriate to treat each employment period and the consequent earnings separately.</p>
-<div class="example">
-<p><strong>Explanation:</strong> This is in line with the concept of administering the income test provisions in a flexible way, as allowed in relation to other social security payments.</p>
-</div>
-<div class="example">
-<p><strong>Example:</strong> Karen works for 8 weeks continuously, and then does not work for the next 8 weeks. This means that the annual rate of income would have to change as Karen goes into and out of employment.</p>
-</div>
-<h2>PPP recipients of age pension age - determining a rate of income - 'one-off' income amounts</h2>
-<p>Generally, one-off earnings are not limited to income from employment for one day. The employment may last several days, but must have the characteristics of 'one-off' or never likely to be repeated. Sometimes this evaluation can only be made in hindsight.</p>
-<p>Amounts of one-off income received are not taken into account UNLESS they are part of a pattern of income. This income should be recorded so that any pattern of one-off payments can be established.</p>
-<p>If it is established that a pattern of employment exists, income from that employment should be assessed on either an averaged or continuing fortnightly basis, as appropriate.</p>
-<p><strong>Note:</strong> The Rolley Decision (<a href="20">4.3.1.20</a>), where the total amount MAY equal the annual rate, does NOT apply to partnered PP recipients.</p>
-<div class="reference">
-<p><strong>Policy reference:</strong> SS Guide <a href="20">4.3.1.20</a> Determining the Rate of Income for Pensioners of Age Pension Age from 20/09/2009, <a href="21">4.3.1.21</a> Determining the Rate of Income for Pensioners of Age Pension Age pre-20/09/2009</p>
-</div>
-<h2>Notification of income for <a href="../../../acronyms#nsa" title="Newstart allowance">NSA</a>/benefit PPP couples</h2>
-<p>If the benefit PPP recipient has a partner in receipt of NSA, Centrelink is notified of the PP recipient's income, usually fortnightly, on the partner's NSA continuation form. This information is used rather than requiring the recipient to independently advise the same information. A notice issued to the recipient in this situation requires the recipient to advise separately IF their partner's form will be lodged late or not at all.</p>
-<h2>NSA partner - zero rate provision</h2>
-<p>During a period when the recipient's NSA partner is receiving nil payment, the partner's income will be passed to the PP system, and will affect PP. If the PP is also reduced to nil as a result of the couple's combined income, then the PP remains current while the NSA remains current.</p>
-<div class="example">
-<p><strong>Explanation:</strong> An NSA recipient is allowed 6 fortnights of nil payment before the payment is cancelled.</p>
-</div>
-<h2>Apportioning lump sums over 12 months</h2>
-<p>One-off, irregular or non-periodical LUMP SUM amounts, are apportioned as income over a 12 month period in 52 weekly amounts, if they are:</p>
-<ul><li>NOT remuneration, periodic payments, or an exempt lump sum (see example 1),</li>
-<li>remuneration and received AFTER the date of claim (see example 2).</li>
-</ul><div class="example">
-<p><strong>Example 1:</strong></p>
-<ul><li>family trust distributions,</li>
+<p><strong>Examples:</strong></p>
+<ul><li>family trust distributions</li>
 <li>certain 'loan' arrangements i.e. NOT a bona fide loan to recipients, and</li>
-<li>dividend distributions from a private company.</li>
-</ul></div>
-<div class="example">
-<p><strong>Example 2:</strong></p>
-<ul><li>commissions,</li>
-<li>royalties,</li>
-<li>signing on fees or endorsements for professional sports people,</li>
+<li>dividend distributions from a private company</li>
+<li>royalties</li>
+<li>signing on fees or endorsements for professional sports people</li>
 <li>an industry related payment such as a dairy cash bonus, or payments to leave the industry, and</li>
 <li>profit sharing.</li>
 </ul></div>
 <p>The date earned, derived or received is the date the recipient becomes entitled to receive the amount.</p>
-<p>Some lump sum payments are exempt from the income test.</p>
-<div class="example">
-<p><strong>Example:</strong> Lottery winnings and commutations from a superannuation fund.</p>
-</div>
+<p>Some lump sum payments are exempt from the income test. For example, lottery winnings and commutations from a superannuation fund.</p>
 <p><strong>Exception:</strong> Periodical lottery winnings that are a series of payments under one contract - each instalment is assessed as income over the period it represents. For example, each instalment of $50,000 paid once a year would be held as income over 12 months.</p>
-<p>Specific exemptions under section 8(11) can be found in the referenced topic.</p>
-<p><strong>Note:</strong> The initial exemption of the lump sum amount from the income test does NOT mean that any on-going income generated by the lump sum is exempt, nor does it mean that the asset the lump sum turns into is exempt. The continuing assets and income tests treatment will be determined by how a person makes use of the funds. The funds may be used to obtain additional assets such as a car. For a purchase such as this the assets test would apply. Or, the funds may be invested with a financial institution. The funds have then become a financial asset (refer to SSAct 9(1) for all the types of financial assets), assessable as an asset and subject to the income test deeming rules.</p>
-<p>When a lump sum amount is apportioned for a 12-month period [under section 1073 (PPS) or section 1068B-D19 (PPP)], and a person is cancelled and reclaims, the previously apportioned amount continues to be maintained until the end of the 12-month period.</p>
+<p>Specific exemptions under section 8(11) can be found in <a href="../2/35">4.3.2.35</a>.</p>
+<p><strong>Note:</strong> The initial exemption of the lump sum amount from the income test does not mean that any on-going income generated by the lump sum is exempt, nor does it mean that the asset the lump sum turns into is exempt. The continuing assets and income tests treatment will be determined by how a person makes use of the funds. The funds may be used to obtain additional assets such as a car. For a purchase such as this the assets test would apply. Or, the funds may be invested with a financial institution. The funds have then become a financial asset (refer to SSAct 9(1) for all the types of financial assets), assessable as an asset and subject to the income test deeming rules.</p>
+<p>When a lump sum amount is apportioned for a 12-month period (under section 1073 (PPS) or section 1068B-D19 (<a href="../../../acronyms#ppp" title="Parenting payment (partnered)">PPP</a>)), and a person is cancelled and reclaims, the previously apportioned amount continues to be maintained until the end of the 12-month period.</p>
 <div class="reference">
-<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 8(8) Excluded amounts - general, section 8(11) An amount received by a person is an exempt lump sum…, section 9(1) Financial assets and income streams definitions, section 1068B-D19 Period over which ordinary income taken into account, section 1073 Certain amounts taken to be received over 12 months</p>
-<p><strong>Policy reference:</strong> SS Guide <a href="../../4/1/30">4.4.1.30</a> Scope of Deeming, <a href="../2/30">4.3.2.30</a> Income Exempt from Assessment - Legislated</p>
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 8(8) Excluded amounts - general, section 8(11) An amount received by a person is an exempt lump sum …, section 9(1) Financial assets and income streams definitions, section 1068B-D19 Period over which ordinary income taken into account, section 1073 Certain amounts taken to be received over 12 months</p>
+<p><strong>Policy reference:</strong> SS Guide <a href="../../4/1/30">4.4.1.30</a> Scope of deeming, <a href="../2/30">4.3.2.30</a> Income exempt from assessment - legislated</p>
+</div>
+<h2>Apportioning non-remunerative periodic lump sums over relevant period (up to 12 months)</h2>
+<p>Lump sum payments that are made up of past periodic payments, where the income support recipient did not have notification obligations during the relevant past period, are apportioned, going forward, over a period the Secretary determines, not exceeding 52 weeks, in equal daily amounts. The Secretary will usually determine the period over which the lump sum is apportioned with reference to the past period to which the lump sum relates. The lump sum is apportioned from the day the person receives the lump sum until the end of the relevant period going forward, not exceeding 52 weeks.</p>
+<div class="example">
+<p><strong>Example:</strong></p>
+<ul><li>Back pay of income protection claims (where an offset clause has not been applied).</li>
+</ul></div>
+<p>Please note that this does not apply to lump sums that are remunerative, one-off, non-periodical, or exempt lump sums.</p>
+<div class="example">
+<p><strong>Example 1:</strong> Caitlin is injured at work, and submits a claim for her income protection payment on 1 January 2021. Her claim is initially rejected on 1 March 2021. Caitlin appeals the original decision, and after 6 months of appeal process, her claim for income protection is granted on 1 September 2021. On 1 October 2021, she is paid a lump sum payment for the 8-month period from the date of claim (1 January 2021) and the date her claim was granted (1 September 2021). The Secretary determined that the lump sum is to be apportioned over 8 months from 1 October 2021. This means that Caitlin's assessable income will increase for the next 8 months.</p>
+</div>
+<p><strong>Note:</strong> Application of this rule under section 1072A of the SSAct differs from section 1073 of the SSAct in that, this rule applies to lump sums that comprise of past periodic non-remunerative payments. Whereas, section 1073 applies to lump sum payments that are non-remunerative payment, that do not reflect periodic payments.</p>
+<div class="example">
+<p><strong>Example 2:</strong> Dom was receiving income from his defined benefit pension until it was suspended on 1 January 2021. While his defined benefit is suspended, Dom applies for the <a href="../../../acronyms#jsp" title="Jobseeker payment">Age</a>, and begins receiving the maximum rate of pension because he has no other income and his assets are below the assets test threshold.</p>
+<p>On 1 July 2021, his defined benefit pension is reinstated. On 1 August 2021, Dom also receives a lump sum arears payment of the income he was entitled to while his defined benefit income stream was suspended. The Secretary determined that the lump sum payment is apportioned over 6 months from 1 August 2021, which means that one-thirteenth of the lump sum is added to Dom's other assessable income for the next 6 months.</p>
+</div>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 8(8) Excluded amounts-general, section 8(11) An amount received by a person is an exempt lump sum …, section 9(1) Financial assets and income streams definitions, section 1072A Treatment of certain lump sum payments, section 1073 Certain amounts taken to be received over 12 months</p>
+<p><strong>Policy reference:</strong> SS Guide <a href="../2/35">4.3.2.35</a> Income exempt from assessment - s 8(11) exempt lump sums</p>
 </div>
 <h2>Borrowings/loans</h2>
-<p>Bona fide recipient borrowings (loans) are not income. A bona fide borrowing is one where money moves from the lender to the borrower, and there is an intention that the money be repaid.</p>
+<p>Bona fide borrowings (loans) are not income. A bona fide borrowing is one where money moves from the lender to the borrower, and there is an intention that the money be repaid.</p>
 <div class="example">
 <p><strong>Examples:</strong></p>
 <ul><li>credit card borrowings, or</li>
@@ -277,7 +199,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     20 March 2015  	</div>
+      Last reviewed:     7 December 2020  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../../contact-us">Contact us</a></li>
@@ -286,8 +208,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
-<script type="text/javascript" src="../../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
-<script type="text/javascript" src="../../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_IkilKWehdX07Wbi3Cg-T6yf5sLTu5FfOT2__edFF9eM.js"></script>
+<script type="text/javascript" src="https://cdn1.readspeaker.com/script/5931/webReader/webReader.js?pids=wr&amp;notools=1&amp;disable=popupplayback&amp;qrxyi9"></script>
 </body>
 </html>

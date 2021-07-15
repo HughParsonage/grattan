@@ -2,27 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<link rel="shortlink" href="../../../../node/21766" />
-<link rel="canonical" href="70" />
-<meta name="viewport" content="width=device-width" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>2.8.4.70 Number not currently in use | Family Assistance Guide</title>
-<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<meta name="viewport" content="width=device-width" />
+<link rel="canonical" href="70" />
+<link rel="shortlink" href="../../../../node/21766" />
+<title>2.8.4.70 ACCS (transition to work) - time limits | Family Assistance Guide</title>
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_Q4XrxgEkbadGDm1J7AHUHHmbcMJ2_hbMfrrzrm9Ne_I.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
-<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
-<script type="text/javascript" src="../../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
-<script type="text/javascript" src="../../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
-<script type="text/javascript" src="../../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_d905I2WxoGGQW6uS7jkC73mqKhSejey6jciEdxo9cJI.css" media="all" />
+<script type="text/javascript" src="../../../../sites/default/files/js/js_yMSKTzBO0KmozyLwajzFOrrt_kto_9mtccAkb0rm7gc.js"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_FA2YSy0R3kB2AU_wIOLoSR0sJX4ZYjdPuPaRFd2ZDyw.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+window.rsConf = { ui: { tools: {translation: false, dictionary: false}}};
 //--><!]]>
 </script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_rsGiM5M1ffe6EhN-RnhM5f3pDyJ8ZAPFJNKpfjtepLk.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_-oEDdwe4XpUqUj4W0KJs96ENaXIrGvjBvIP-WYYBi54.js"></script>
 <script type="text/javascript" src="../../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"R12JdpclDWUIXZM2zL6HUsQ0D2C4mKMXsj0iuKZXoOY","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/family-assistance-guide\/2\/8\/4\/70":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"jbDsvQaPO3i7lxAwPWA7g_W7GGqBxraG3uC60IGy7hI","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"https:\/\/cdn1.readspeaker.com\/script\/5931\/webReader\/webReader.js?pids=wr\u0026notools=1\u0026disable=popupplayback":1,"misc\/jquery.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"0":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"1":1,"sites\/all\/modules\/extlink\/js\/extlink.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/family-assistance-guide\/2\/8\/4\/70":true},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)","extUseFontAwesome":false}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -35,78 +40,239 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <nav id="global">
 	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
 <div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<ul class="menu"><li class="first leaf has-children menu-mlid-489"><a href="../../../../guide-social-security-law.1">Social Security Guide</a></li>
+<li class="leaf has-children active-trail menu-mlid-491"><a href="../../../../family-assistance-guide.1" class="active-trail">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-490"><a href="../../../../paid-parental-leave-guide.1">Paid Parental Leave Guide</a></li>
+<li class="leaf has-children menu-mlid-513"><a href="../../../../child-support-guide.1">Child Support Guide</a></li>
+<li class="leaf menu-mlid-7596"><a href="../../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
 <li class="leaf menu-mlid-7597"><a href="../../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
-<li class="leaf has-children menu-mlid-513"><a href="../../../../child-support-guide">Child Support Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-491"><a href="../../../../family-assistance-guide" class="active-trail">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../../guide-social-security-law">Guide to Social Security Law</a></li>
-<li class="last leaf has-children menu-mlid-490"><a href="../../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+<li class="last leaf has-children menu-mlid-19951"><a href="../../../../national-redress-guide" title="">National Redress Guide</a></li>
 </ul></div></nav>
 <header role="banner">
 	<a href="../../../../index.html" rel="home"><img src="../../../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
 <p class="site-name">Guides to Social Policy Law</p>
 <form class="search-form" role="search" action="70" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
- <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+ <input class="custom-search-box form-text" placeholder="Search" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-SGOhTpGDzHpLBF7N5GGyBhODNjTy7SFLxqmp7s5vLsg" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-uI3kleVz5o3t06xcjjBcVDkp3_HTZWIa2yelZALin2c" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Family Assistance Guide</h2>
-<p>Version 1.203 - Released 7 May 2018</p>
+<p>Version 1.230 - Released 1 July 2021</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7283"><a href="../../../../family-assistance-guide" title="">Using the Family Assistance Guide</a></li>
-<li class="collapsed menu-mlid-2274"><a href="../../../updates">What&#039;s New</a></li>
-<li class="collapsed menu-mlid-2266"><a href="../../../1">1 Key Terms &amp; Principles</a></li>
-<li class="expanded active-trail menu-mlid-2267"><a href="../../../2" class="active-trail">2 Eligibility</a><ul class="menu"><li class="first collapsed menu-mlid-1929"><a href="../../1">2.1 General Provisions</a></li>
-<li class="collapsed menu-mlid-1932"><a href="../../2">2.2 FTB Eligibility for Individuals</a></li>
-<li class="collapsed menu-mlid-1933"><a href="../../3">2.3 FTB Eligibility for Approved Care Organisations (ACOs)</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7283"><a href="../../../../family-assistance-guide.1" title="">Using the Family Assistance Guide</a></li>
+<li class="collapsed menu-mlid-2274"><a href="../../../updates.1">What&#039;s new</a></li>
+<li class="collapsed menu-mlid-2266"><a href="../../../1.1">1 Key terms &amp; principles</a></li>
+<li class="expanded active-trail menu-mlid-2267"><a href="../../../2.1" class="active-trail">2 Eligibility</a><ul class="menu"><li class="first collapsed menu-mlid-1929"><a href="../../1.1">2.1 General provisions</a></li>
+<li class="collapsed menu-mlid-1932"><a href="../../2.1">2.2 FTB eligibility for individuals</a></li>
+<li class="collapsed menu-mlid-1933"><a href="../../3.1">2.3 FTB eligibility for approved care organisations (ACOs)</a></li>
 <li class="leaf menu-mlid-1934"><a href="../../4">2.4 Number not currently in use</a></li>
 <li class="leaf menu-mlid-1935"><a href="../../5">2.5 Number not currently in use</a></li>
-<li class="collapsed menu-mlid-1936"><a href="../../6">2.6 CCB Eligibility</a></li>
-<li class="leaf menu-mlid-1937"><a href="../../7">2.7 Entitlement to FTB Advance Payment</a></li>
-<li class="expanded active-trail menu-mlid-1939"><a href="../../8" class="active-trail">2.8 JETCCFA Eligibility</a><ul class="menu"><li class="first collapsed menu-mlid-1862"><a href="../1">2.8.1 JETCCFA Eligibility Criteria</a></li>
-<li class="collapsed menu-mlid-1863"><a href="../2">2.8.2 JETCCFA Eligibility Exceptions</a></li>
-<li class="collapsed menu-mlid-1864"><a href="../3">2.8.3 JETCCFA Eligibility Requirements Relating to Activities &amp; Activity Limits</a></li>
-<li class="expanded active-trail menu-mlid-1865"><a href="../4" class="active-trail">2.8.4 JETCCFA Eligibility Requirements Relating to the Period of Approval</a><ul class="menu"><li class="first leaf menu-mlid-1845"><a href="10">2.8.4.10 Requirements for Determining the JETCCFA Assessment Period</a></li>
-<li class="leaf menu-mlid-1846"><a href="20">2.8.4.20 Backdating JETCCFA</a></li>
-<li class="leaf menu-mlid-1847"><a href="30">2.8.4.30 Cancelling JETCCFA</a></li>
-<li class="leaf menu-mlid-20706"><a href="40">2.8.4.40 Number not currently in use</a></li>
-<li class="leaf menu-mlid-20711"><a href="50">2.8.4.50 Number not currently in use</a></li>
-<li class="leaf menu-mlid-20716"><a href="60">2.8.4.60 Number not currently in use</a></li>
-<li class="leaf active-trail active menu-mlid-20726"><a href="70" class="active-trail active">2.8.4.70 Number not currently in use</a></li>
-<li class="last leaf menu-mlid-20731"><a href="80">2.8.4.80 Number not currently in use</a></li>
+<li class="collapsed menu-mlid-1936"><a href="../../6.1">2.6 CCS eligibility</a></li>
+<li class="leaf menu-mlid-1937"><a href="../../7">2.7 Entitlement to FTB advance payment</a></li>
+<li class="expanded active-trail menu-mlid-1939"><a href="../../8.1" class="active-trail">2.8 ACCS overview</a><ul class="menu"><li class="first collapsed menu-mlid-1862"><a href="../1.1">2.8.1 ACCS (child wellbeing)</a></li>
+<li class="collapsed menu-mlid-1863"><a href="../2.1">2.8.2 ACCS (grandparent)</a></li>
+<li class="collapsed menu-mlid-1864"><a href="../3.1">2.8.3 ACCS (temporary financial hardship)</a></li>
+<li class="last expanded active-trail menu-mlid-1865"><a href="../4.1" class="active-trail">2.8.4 ACCS (transition to work)</a><ul class="menu"><li class="first leaf menu-mlid-1845"><a href="10">2.8.4.10 ACCS (transition to work) - eligibility</a></li>
+<li class="leaf menu-mlid-1846"><a href="20">2.8.4.20 ACCS (transition to work) - income support payments &amp; income requirements</a></li>
+<li class="leaf menu-mlid-1847"><a href="30">2.8.4.30 ACCS (transition to work) - Job Plan requirements</a></li>
+<li class="leaf menu-mlid-20706"><a href="40">2.8.4.40 ACCS (transition to work) - activity requirements</a></li>
+<li class="leaf menu-mlid-20711"><a href="50">2.8.4.50 ACCS (transition to work) - applications</a></li>
+<li class="leaf menu-mlid-20716"><a href="60">2.8.4.60 ACCS (transition to work) - evidentiary requirements</a></li>
+<li class="leaf active-trail active menu-mlid-20726"><a href="70" class="active-trail active">2.8.4.70 ACCS (transition to work) - time limits</a></li>
+<li class="last leaf menu-mlid-20731"><a href="80">2.8.4.80 ACCS (transition to work) - most beneficial activity principle</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-1866"><a href="../5">2.8.5 JETCCFA Eligibility Requirements Relating to Hours</a></li>
-<li class="last collapsed menu-mlid-1867"><a href="../6">2.8.6 JETCCFA Eligibility - JETCCFA Job Plans</a></li>
 </ul></li>
-<li class="leaf menu-mlid-1938"><a href="../../9">2.9 CCR Eligibility</a></li>
-<li class="collapsed menu-mlid-1930"><a href="../../10">2.10 SKB Eligibility</a></li>
-<li class="collapsed menu-mlid-1931"><a href="../../11">2.11 SIFS Eligibility</a></li>
-<li class="last collapsed menu-mlid-7345"><a href="../../12">2.12 SBP Eligibility</a></li>
+<li class="leaf menu-mlid-1938"><a href="../../9">2.9 Number not currently in use</a></li>
+<li class="leaf menu-mlid-1930"><a href="../../10.1">2.10 Number not currently in use</a></li>
+<li class="collapsed menu-mlid-1931"><a href="../../11.1">2.11 SIFS eligibility</a></li>
+<li class="last collapsed menu-mlid-7345"><a href="../../12.1">2.12 SBP eligibility</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-2268"><a href="../../../3">3 Rate Calculation</a></li>
-<li class="collapsed menu-mlid-2269"><a href="../../../4">4 Claims &amp; Payments</a></li>
-<li class="collapsed menu-mlid-2270"><a href="../../../5">5 Gathering Information</a></li>
-<li class="collapsed menu-mlid-2271"><a href="../../../6">6 Review &amp; Reconciliation</a></li>
-<li class="collapsed menu-mlid-2272"><a href="../../../7">7 Debts</a></li>
-<li class="collapsed menu-mlid-2273"><a href="../../../8">8 Transitional Arrangements</a></li>
-<li class="leaf menu-mlid-2264"><a href="../../../acronyms">Acronym List</a></li>
-<li class="leaf menu-mlid-7296"><a href="../../../keywords">Keyword Index</a></li>
-<li class="leaf menu-mlid-7371"><a href="../../../act-references">Act Reference Index</a></li>
-<li class="last leaf menu-mlid-7169"><a href="../../../sitemap">Site Map</a></li>
+<li class="collapsed menu-mlid-2268"><a href="../../../3.1">3 Rate calculation</a></li>
+<li class="collapsed menu-mlid-2269"><a href="../../../4.1">4 Claims &amp; payments</a></li>
+<li class="collapsed menu-mlid-2270"><a href="../../../5.1">5 Gathering information</a></li>
+<li class="collapsed menu-mlid-2271"><a href="../../../6.1">6 Review &amp; reconciliation</a></li>
+<li class="collapsed menu-mlid-2272"><a href="../../../7.1">7 Debts</a></li>
+<li class="collapsed menu-mlid-2273"><a href="../../../8.1">8 Transitional arrangements</a></li>
+<li class="leaf menu-mlid-2264"><a href="../../../acronyms">Acronym list</a></li>
+<li class="leaf menu-mlid-7296"><a href="../../../keywords.1" title="">Keyword index</a></li>
+<li class="leaf menu-mlid-7371"><a href="../../../act-references.1" title="">Act reference index</a></li>
+<li class="last leaf menu-mlid-7169"><a href="../../../sitemap">Site map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../../../index.html">Home</a> &raquo; <a href="../../../../family-assistance-guide">Family Assistance Guide</a> &raquo; <a href="../../../2" class="active-trail">2 Eligibility</a> &raquo; <a href="../../8" class="active-trail">2.8 JETCCFA Eligibility</a> &raquo; <a href="../4" class="active-trail">2.8.4 JETCCFA Eligibility Requirements Relating to the Period of Approval</a> &raquo; 2.8.4.70 Number not currently in use</div>
+	<div id="breadcrumb"><a href="../../../../index.html">Home</a> &raquo; <a href="../../../../family-assistance-guide.1">Family Assistance Guide</a> &raquo; <a href="../../../2.1" class="active-trail">2 Eligibility</a> &raquo; <a href="../../8.1" class="active-trail">2.8 ACCS overview</a> &raquo; <a href="../4.1" class="active-trail">2.8.4 ACCS (transition to work)</a> &raquo; 2.8.4.70 ACCS (transition to work) - time limits</div>
 <div id="utility">
 	
-<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/family-assistance-guide/2/8/4/70"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="readspeaker_button" class="rs_skip rsbtn rs_preserve"><a rel="nofollow" class="rsbtn_play" href="https://app-oc.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=https://guides.dss.gov.au/family-assistance-guide/2/8/4/70"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsbtn_right rsimg rsplay rspart"></span></a></div></div>
 <div id="content" role="main">
 <article id="node-21766">
-<h1 >2.8.4.70 Number not currently in use</h1>
-</article></div></div>
+<h1 >2.8.4.70 ACCS (transition to work) - time limits</h1>
+<h2>Summary</h2>
+<p>This topic describes the time limits that apply to <a href="../../../acronyms#accs" title="Additional child care subsidy">ACCS</a> (transition to work).</p>
+<p>This topic includes:</p>
+<ul><li>periods of ACCS (transition to work),</li>
+<li>limits on periods of ACCS (transition to work),</li>
+<li>start date,</li>
+<li>change of start date,</li>
+<li>in receipt of another kind of ACCS,</li>
+<li>exceeding allowable absences (<a href="../../../1/1/a/05">1.1.A.05</a>),</li>
+<li>time limits for:
+<ul><li>study,</li>
+<li>job search,</li>
+<li>work,</li>
+<li>training and other programs.</li>
+</ul></li>
+</ul><h2>Periods of ACCS (transition to work)</h2>
+<p>ACCS (transition to work) is applied for a continuous period of whole weeks and time limits will apply for the period specified (even if a session of care (<a href="../../../1/1/s/40">1.1.S.40</a>) did not take place for a particular week during that period).</p>
+<h2>Limits on periods of ACCS (transition to work)</h2>
+<table><thead><tr><th scope="col">If an individual is…</th>
+<th scope="col">They can receive ACCS (transition to work) for…</th>
+</tr></thead><tbody><tr><td>working (paid or unpaid) or setting up a business,</td>
+<td>up to 26 weeks.</td>
+</tr><tr><td>studying a secondary course,</td>
+<td>up to 104 weeks for full-time study, or<br />
+				up to 208 weeks for part-time study.</td>
+</tr><tr><td>studying a preparatory course,</td>
+<td>up to 104 weeks for full-time study, or<br />
+				up to 208 weeks for part-time study.</td>
+</tr><tr><td>studying a Certificate II to an advanced diploma,</td>
+<td>up to 104 weeks for full-time study, or<br />
+				up to 208 weeks for part-time study<br />
+				for each level of the AQF.</td>
+</tr><tr><td>studying a bachelor degree,</td>
+<td>up to 156 weeks for full-time study, or<br />
+				up to 312 weeks for part-time study.</td>
+</tr><tr><td>studying a bachelor honours degree to graduate diploma,</td>
+<td>up to 104 weeks for full-time study, or<br />
+				up to 208 weeks for part-time study.</td>
+</tr><tr><td>vocational training,</td>
+<td>up to 52 weeks for full-time or<br />
+				up to 104 weeks part-time.</td>
+</tr><tr><td>program improving employment prospects,</td>
+<td>up to 52 weeks full-time.</td>
+</tr><tr><td>participating in a job search activity,</td>
+<td>up to 26 weeks.</td>
+</tr><tr><td>no longer in receipt of an income support payment (<a href="../../../1/1/i/50">1.1.I.50</a>) (in a nil rate period) due to employment,</td>
+<td>up to 12 weeks.</td>
+</tr></tbody></table><p>ACCS (transition to work) can only be approved for a period of time up to the activity time limits for the activity requirements being met.</p>
+<h2>Start date</h2>
+<p>The earliest start date for a period of ACCS (transition to work) is from the date of application. The start date must be the first Monday of a <a href="../../../acronyms#ccs" title="Child care subsidy">CCS</a> fortnight (<a href="../../../1/1/c/10">1.1.C.10</a>), and the period of ACCS (transition to work) must be whole weeks. ACCS (transition to work) cannot be backdated beyond the date of application.</p>
+<p>An application for ACCS (transition to work) can be made prior to commencement of an activity with a future start date. As there are no backdating provisions, an individual (<a href="../../../1/1/i/90">1.1.I.90</a>) may prefer to apply prior to commencement of their activity. Time limits on future start dates have not been prescribed, but are limited by evidentiary requirements. For study activities, evidence is to be dated within 6 months of the date of application. For other activities the validity of the evidence would determine the timeframe. For some job search and some work activities, such as setting up a business, the individual may have to commence the activity to be able to provide evidence of their participation.</p>
+<p>It is also important to note that entitlement (<a href="../../../1/1/e/30">1.1.E.30</a>) for ACCS (transition to work) is determined at the start of each CCS fortnight, meaning that if an individual does not meet any of the eligibility criteria for ACCS (transition to work) on that Monday, they are ineligible for ACCS (transition to work) and will have to reapply, this includes being in receipt of an income support payment, having a Job Plan (<a href="../../../1/1/j/20">1.1.J.20</a>) in effect and meeting the ACCS (transition to work) activity requirements. This also means that if an individual becomes ineligible during a CCS fortnight, and is eligible again before the start of the next CCS fortnight, entitlement to ACCS (transition to work) will continue. For example, if an individual's Job Plan becomes inactive after the Monday of a CCS fortnight, and a new Job Plan is entered into before the start of the next CCS fortnight, entitlement to ACCS (transition to work) will continue. If an individual's Job Plan becomes inactive after the Monday of a CCS fortnight, and a new Job Plan is not entered into before the start of the next CCS fortnight, the individual will become ineligible for ACCS (transition to work) and will have to reapply.</p>
+<p>Activities that commence during a week are taken to have commenced from the start of that week; as an example, if a term starts on a Monday, but the individual attends classes on Tuesdays and Thursdays, they will be taken to have commenced the activity on the Monday of the week their first Tuesday class occurs. Similarly, if an individual starts a new job, and their first shift is on a Wednesday, they will be taken to have started their job from the Monday of that week. This means they may be entitled to ACCS (transition to work) from the start of that week if that Monday is the start of a CCS fortnight, or from the Monday of the next week at the start of the next CCS fortnight.</p>
+<h2>Change of start date</h2>
+<p>If an individual needs to change their ACCS (transition to work) start date it may be amended to the first Monday of a future CCS fortnight. This can only be allowed due to a change of circumstances and only if no sessions of care have occurred and no payments have been made.</p>
+<h2>In receipt of another kind of ACCS</h2>
+<p>If an individual's circumstances change, and they are eligible for another kind of ACCS, they will no longer be eligible for ACCS (transition to work) and the period during which they are receiving the other subsidy will not be included in the calculation of ACCS (transition to work) time limits. If they want to continue to receive ACCS (transition to work) they will need to reapply.</p>
+<div class="example">
+<p><strong>Example:</strong> Laura is approved for ACCS (transition to work) for a period of 26 weeks. After 12 weeks, Laura experiences a financial hardship event and is granted ACCS (temporary financial hardship) for a period of 13 weeks. Laura would receive ACCS (transition to work) for 12 weeks, ACCS (temporary financial hardship) for 13 weeks, and then Laura could reapply for ACCS (transition to work) for the remaining 14 weeks of her (transition to work) entitlement.</p>
+</div>
+<h2>Exceeding allowable absences</h2>
+<p>To be eligible for ACCS (transition to work) for a session of care, an individual must be eligible for CCS for that same session of care. As such, if an individual ceases to be eligible for CCS for a session of care due to exceeding allowable absences (or any other reason) they will not be eligible for ACCS (transition to work) for that session of care.</p>
+<div class="reference">
+<p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/F2017L01464" title="Child Care Subsidy Minister's Rules 2017">CCSMinRules</a> section 13(12) Time limits</p>
+</div>
+<h2>Time limits - study</h2>
+<p>For activities that relate to study requirements the time period relates to the level of each new course of education or study that the individual studies:</p>
+<ul><li>studying a secondary course, such as year 12 or similar,</li>
+<li>studying a preparatory course (to prepare for tertiary study),</li>
+<li>studying a Certificate II to an advanced diploma or associate degree (level 2 to 6 of the Australian Qualifications Framework (AQF)),</li>
+<li>studying a bachelor degree,</li>
+<li>studying a bachelor honours degree, graduate certificate, graduate diploma (level 8 of the AQF).</li>
+</ul><p>The following time limits apply for study activities for ACCS (transition to work):</p>
+<table><thead><tr><th scope="col">If an individual is…</th>
+<th scope="col">They can receive ACCS (transition to work) for…</th>
+</tr></thead><tbody><tr><td>studying a secondary course,</td>
+<td>up to 104 weeks for full-time study, or<br />
+				up to 208 weeks for part-time study.</td>
+</tr><tr><td>studying a preparatory course,</td>
+<td>up to 104 weeks for full-time study, or<br />
+				up to 208 weeks for part-time study.</td>
+</tr><tr><td>studying a Certificate II to an advanced diploma,</td>
+<td>up to 104 weeks for full-time study, or<br />
+				up to 208 weeks for part-time study<br />
+				for each level of the AQF.</td>
+</tr><tr><td>studying a bachelor degree,</td>
+<td>up to 156 weeks for full-time study, or<br />
+				up to 312 weeks for part-time study.</td>
+</tr><tr><td>studying a bachelor honours degree to graduate diploma,</td>
+<td>up to 104 weeks for full-time study, or<br />
+				up to 208 weeks for part-time study.</td>
+</tr></tbody></table><p>If an individual received assistance under the Jobs, Education and Training Child Care Fee Assistance (JETCCFA) program within the last 10 years (was in receipt of JETCCFA from 2 July 2008), the time limit for ACCS (transition to work) will be reduced by the time period the individual has received JETCCFA to study at that level.</p>
+<div class="example">
+<p><strong>Example:</strong> Melanie studied but did not complete a diploma course in 2010. To be eligible for ACCS (transition to work), Melanie is required to study at the diploma level or above. As Melanie received JETCCFA assistance to study at the diploma level for 26 weeks in 2010, her ACCS (transition to work) allowable time period to study at the diploma level of 104 weeks will be reduced by the 26 weeks Melanie has already received JETCCFA assistance. This leaves Melanie with an available balance of 78 weeks of ACCS (transition to work) to study at the diploma level.</p>
+</div>
+<h3>Study breaks</h3>
+<p>Time limits for study are applied in a period of continuous weeks, and include study breaks that are during but not after the end of the course.</p>
+<div class="example">
+<p><strong>Example:</strong> Peter is studying a 2 year course with mid-year and end of year semester breaks. He will be taken to be participating in a study activity from the start of the course through until the end of the course, including the mid-year semester breaks and the first end of year semester break.</p>
+</div>
+<h3>Changes in study load</h3>
+<p>An individual in receipt of ACCS (transition to work) is able to change their study load for their study activity.</p>
+<h3>Calculating changes in study load</h3>
+<p>The method for calculating changes in study load will be used to work out how many weeks of ACCS (transition to work) entitlement remain when an individual transitions from full-time study to part-time study (or vice versa).</p>
+<p>As the part-time study quota (208 weeks for AQF Levels 2 to 6) is double the quota of full-time study (104 weeks for AQF Levels 2 to 6) the following formula applies:</p>
+<ul><li>Transitioning from full time to part time study<br />
+		Number of weeks already used × 2 = A<br />
+		208 weeks - A = remaining (converted) eligibility period</li>
+<li>Transitioning from part time to full time study<br />
+		Number of weeks already used ÷ 2 = A<br />
+		104 weeks - A = remaining (converted) eligibility period</li>
+</ul><div class="example">
+<p><strong>Example 1:</strong> Leah has used 50 weeks of full-time study for transition to work but will commence studying on a part-time basis at the beginning of next term. When Leah's new study load is updated, her ACCS (transition to work) eligibility period will be converted to show that she has used 100 weeks (50 x 2) of her part-time study allocation, and that there are 108 weeks of part-time study allocation remaining.</p>
+</div>
+<div class="example">
+<p><strong>Example 2:</strong> Luke has used 186 weeks of part-time study for ACCS (transition to work) but will commence studying on a full-time basis at the beginning of next term. When Luke's new study load is updated, his ACCS (transition to work) eligibility period will be converted to show that he has used 93 weeks (186 ÷ 2) of his full-time study allocation, and that there are 11 weeks of full-time study allocation remaining.</p>
+</div>
+<h2>Time limits - job search</h2>
+<p>The time limits for job search activities for ACCS (transition to work) are as follows:</p>
+<table><thead><tr><th scope="col">If an individual is…</th>
+<th scope="col">They can receive ACCS (transition to work) for…</th>
+</tr></thead><tbody><tr><td>participating in a job search activity,</td>
+<td>up to 26 weeks.</td>
+</tr></tbody></table><h3>Time limits - job search activity limits</h3>
+<p>The time limit of 26 weeks for job search activities is a cumulative limit over an individual's lifetime. This means that a job search activity can be undertaken for 26 consecutive weeks, or a number of job search activities for a shorter time period can be undertaken until a total of 26 weeks is reached. Once the time limit of 26 weeks is reached that individual cannot apply for another job search activity under ACCS (transition to work).</p>
+<div class="example"><strong>Example:</strong> Scott applies for ACCS (transition to work) for a job search activity, and receives ACCS (transition to work) for 4 weeks until he takes a summer job for 12 weeks. Scott then applies for ACCS (transition to work) for a job search activity for another 6 weeks. At that stage, Scott has used 10 weeks of job search under ACCS (transition to work) and can access another 16 weeks in the future if needed.</div>
+<h2>Time limits - work</h2>
+<p>The time limits for work activities for ACCS (transition to work) are as follows:</p>
+<table><thead><tr><th scope="col">If an individual is…</th>
+<th scope="col">They can receive ACCS (transition to work) for…</th>
+</tr></thead><tbody><tr><td>working (paid or unpaid) or setting up a business,</td>
+<td>up to 26 weeks.</td>
+</tr></tbody></table><h3>Time limits - work activity limits</h3>
+<p>The time limit of 26 weeks for work related activities is a cumulative limit over an individual's lifetime. This means that a work related activity can be undertaken for 26 consecutive weeks, or a number of work related activities for a shorter time period can be undertaken until a total of 26 weeks is reached. Once the time limit of 26 weeks is reached, that individual cannot apply for another work related activity under ACCS (transition to work).</p>
+<p>For a paid work activity, if an individual's child/ren will be attending child care on a trial basis, up to 2 weeks of the time limit for a work activity may be used immediately before the activity start date to support the children into child care.</p>
+<h2>Time limits - training &amp; other programs</h2>
+<p>The time limits for training activities for ACCS (transition to work) are as follows:</p>
+<table><thead><tr><th scope="col">If an individual is…</th>
+<th scope="col">They can receive ACCS (transition to work) for…</th>
+</tr></thead><tbody><tr><td>vocational training,</td>
+<td>
+<p>up to 52 weeks for full-time, or</p>
+<p>up to 104 weeks part-time.</p>
+</td>
+</tr><tr><td>program improving employment prospects,</td>
+<td>up to 52 weeks full-time.</td>
+</tr></tbody></table><h3>Time limits - training activity limits</h3>
+<p>The time limit of 52 weeks (104 weeks' part-time) for vocational training activities, and 52 weeks for other programs that improve employment prospects, is a cumulative limit over an individual's lifetime. This means that a training activity can be undertaken for 52 consecutive weeks, or a number of training activities for a shorter time period can be undertaken until a total of 52 weeks is reached. Once the time limit of 52 weeks is reached for a vocational training activity, and the time limit of 52 weeks is reached for other programs the individual cannot apply for a further training activity under ACCS (transition to work).</p>
+<div class="example">
+<p><strong>Example:</strong> Belinda does a 6-week vocational training course; she will have used 6 weeks of the available 52 weeks for a vocational training activity. She will have a balance of 46 weeks to use for further vocational training activities. Once she has used the balance of 46 weeks, she will be unable to access any further ACCS (transition to work) for a vocational training activity.</p>
+</div>
+<h3>Where an activity may be training or study</h3>
+<p>In some cases, vocational training courses meet the AQF level requirements. In this case the activity could be assessed as a study activity instead of a training activity (<a href="80">2.8.4.80</a>)</p>
+<div class="reference">
+<p><strong>Act reference</strong>: <a href="https://www.legislation.gov.au/Series/C2004A00490" title="A New Tax System (Family Assistance) Act 1999">FAAct</a> section 85CK(1) Eligibility of individual receiving transition to work payment</p>
+<p><a href="https://www.legislation.gov.au/Series/F2017L01464" title="Child Care Subsidy Minister's Rules 2017">CCSMinRules</a> section 13(12) Time limits, section 24 Preparing for paid work</p>
+<p><strong>Policy reference:</strong> FA Guide <a href="40">2.8.4.40</a> ACCS (transition to work) - activity requirements</p>
+</div>
+</article>	<div id="view-last-reviewed-date">
+		
+		  
+      Last reviewed:     5 November 2018  	</div>
+</div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../../contact-us">Contact us</a></li>
 <li class="leaf"><a href="https://www.dss.gov.au/copyright-disclaimer" title="">Copyright &amp; Disclaimer</a></li>
@@ -114,8 +280,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
-<script type="text/javascript" src="../../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
-<script type="text/javascript" src="../../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_IkilKWehdX07Wbi3Cg-T6yf5sLTu5FfOT2__edFF9eM.js"></script>
+<script type="text/javascript" src="https://cdn1.readspeaker.com/script/5931/webReader/webReader.js?pids=wr&amp;notools=1&amp;disable=popupplayback&amp;qrxyi9"></script>
 </body>
 </html>

@@ -29,7 +29,7 @@
 #' @source 
 #' \emph{Social Security Guide} by the Department of Social Services. 
 #' Chapter 5, \sQuote{Payment rates}, s. 5.1.10.20 \dQuote{Clean Energy Household Assistance: current rates}.
-#' \url{http://guides.dss.gov.au/guide-social-security-law/5/1/10/20}
+#' \url{https://guides.dss.gov.au/guide-social-security-law/5/1/10/20}
 #' 
 
 energy_supplement <- function(qualifying_payment, 

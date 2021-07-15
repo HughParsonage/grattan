@@ -32,9 +32,22 @@
 #' @importFrom hutils %notchin%
 #' @importFrom hutils weighted_ntile
 #' @importFrom hutils mutate_ntile
+#' 
+#' @importFrom hutilscpp anyOutside
+#' @importFrom hutilscpp pmin0
+#' @importFrom hutilscpp pmax0
+#' @importFrom hutilscpp pmax3
+#' @importFrom hutilscpp pmaxC
+#' @importFrom hutilscpp pminC
+#' @importFrom hutilscpp pmaxV
+#' @importFrom hutilscpp pminV
+#' @importFrom hutilscpp which_first
+
 
 #' @importFrom fastmatch %fin%
 #' @importFrom fastmatch fmatch
+#' 
+#' @importFrom fy date2fy
 
 #' @importFrom magrittr %>%
 #' @importFrom magrittr %$%
@@ -46,6 +59,8 @@
 #' @importFrom Rcpp sourceCpp
 #' @importFrom stats complete.cases
 #' @importFrom stats setNames
+#' 
+#' @importFrom utils hasName
 #' 
 #' 
 #' @import data.table

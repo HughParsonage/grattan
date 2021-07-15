@@ -2,27 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<link rel="shortlink" href="16099" />
-<link rel="canonical" href="../guide-social-security-law/5/1/4/30" />
-<meta name="viewport" content="width=device-width" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>5.1.4.30 Calculating a Rate of PP - Partnered | Guides to Social Policy Law</title>
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<meta name="viewport" content="width=device-width" />
+<link rel="canonical" href="../guide-social-security-law/5/1/4/30" />
+<link rel="shortlink" href="16099" />
+<title>5.1.4.30 Calculating a rate of PP - partnered | Guides to Social Policy Law</title>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_Q4XrxgEkbadGDm1J7AHUHHmbcMJ2_hbMfrrzrm9Ne_I.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
-<script type="text/javascript" src="../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
-<script type="text/javascript" src="../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<link type="text/css" rel="stylesheet" href="../sites/default/files/css/css_d905I2WxoGGQW6uS7jkC73mqKhSejey6jciEdxo9cJI.css" media="all" />
+<script type="text/javascript" src="../sites/default/files/js/js_yMSKTzBO0KmozyLwajzFOrrt_kto_9mtccAkb0rm7gc.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_FA2YSy0R3kB2AU_wIOLoSR0sJX4ZYjdPuPaRFd2ZDyw.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+window.rsConf = { ui: { tools: {translation: false, dictionary: false}}};
 //--><!]]>
 </script>
+<script type="text/javascript" src="../sites/default/files/js/js_rsGiM5M1ffe6EhN-RnhM5f3pDyJ8ZAPFJNKpfjtepLk.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../sites/default/files/js/js_-oEDdwe4XpUqUj4W0KJs96ENaXIrGvjBvIP-WYYBi54.js"></script>
 <script type="text/javascript" src="../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"rNqOJhHZQB85mfR_eVSRWrBo_vvnV1ZMhCC6ftM-aBU","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/16099":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"R4l6AT6UAehRKsJgX34k1-LU7FhjEvnmI-JETzfOStc","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"https:\/\/cdn1.readspeaker.com\/script\/5931\/webReader\/webReader.js?pids=wr\u0026notools=1\u0026disable=popupplayback":1,"misc\/jquery.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"0":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"1":1,"sites\/all\/modules\/extlink\/js\/extlink.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/node\/16099":true},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)","extUseFontAwesome":false}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -35,114 +40,116 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <nav id="global">
 	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
 <div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<ul class="menu"><li class="first leaf has-children active-trail menu-mlid-489"><a href="../guide-social-security-law.1" class="active-trail">Social Security Guide</a></li>
+<li class="leaf has-children menu-mlid-491"><a href="../family-assistance-guide.1">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide.1">Paid Parental Leave Guide</a></li>
+<li class="leaf has-children menu-mlid-513"><a href="../child-support-guide.1">Child Support Guide</a></li>
+<li class="leaf menu-mlid-7596"><a href="../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
 <li class="leaf menu-mlid-7597"><a href="../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
-<li class="leaf has-children menu-mlid-513"><a href="../child-support-guide">Child Support Guide</a></li>
-<li class="leaf has-children menu-mlid-491"><a href="../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-489"><a href="../guide-social-security-law" class="active-trail">Guide to Social Security Law</a></li>
-<li class="last leaf has-children menu-mlid-490"><a href="../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+<li class="last leaf has-children menu-mlid-19951"><a href="../national-redress-guide" title="">National Redress Guide</a></li>
 </ul></div></nav>
 <header role="banner">
 	<a href="../index.html" rel="home"><img src="../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
 <p class="site-name">Guides to Social Policy Law</p>
 <form class="search-form" role="search" action="16099" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
- <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+ <input class="custom-search-box form-text" placeholder="Search" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-6mSWmNpmZt_4IylaU44b8zFcG6wCOWInW1eiyf4TAPk" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-SJ5kKmZjuI-ECkB8UbLm4x0CNBsEET8ldyRCgHoV4UA" />
 <input type="hidden" name="form_id" value="search_block_form" />
-</div></form>	<h2>Guide to Social Security Law</h2>
-<p>Version 1.245 - Released 1 June 2018</p>
+</div></form>	<h2>Social Security Guide</h2>
+<p>Version 1.283 - Released 1 July 2021</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../guide-social-security-law" title="">Using the Guide to Social Security Law</a></li>
-<li class="collapsed menu-mlid-493"><a href="../guide-social-security-law/updates">What&#039;s New</a></li>
-<li class="collapsed menu-mlid-2295"><a href="../guide-social-security-law/1">1 Key Terms &amp; Principles</a></li>
-<li class="collapsed menu-mlid-2294"><a href="../guide-social-security-law/2">2 Claim Verification</a></li>
-<li class="collapsed menu-mlid-2293"><a href="../guide-social-security-law/3">3 Qualification &amp; Payability</a></li>
-<li class="collapsed menu-mlid-2292"><a href="../guide-social-security-law/4">4 Income &amp; Assets</a></li>
-<li class="expanded active-trail menu-mlid-2291"><a href="../guide-social-security-law/5" class="active-trail">5 Payment Rates</a><ul class="menu"><li class="first expanded active-trail menu-mlid-2946"><a href="../guide-social-security-law/5/1" class="active-trail">5.1 Current Rates</a><ul class="menu"><li class="first collapsed menu-mlid-2947"><a href="../guide-social-security-law/5/1/1">5.1.1 Newstart &amp; Youth Allowance - Current Rates</a></li>
-<li class="collapsed menu-mlid-2955"><a href="../guide-social-security-law/5/1/2">5.1.2 Other Labour Market &amp; Older Students - Current Rates</a></li>
-<li class="collapsed menu-mlid-2959"><a href="../guide-social-security-law/5/1/3">5.1.3 Retirement &amp; Widows - Current Rates</a></li>
-<li class="expanded active-trail menu-mlid-2966"><a href="../guide-social-security-law/5/1/4" class="active-trail">5.1.4 Families &amp; Parenting - Current Rates</a><ul class="menu"><li class="first leaf menu-mlid-2967"><a href="../guide-social-security-law/5/1/4/10">5.1.4.10 PP - Current Rates</a></li>
-<li class="leaf menu-mlid-2968"><a href="../guide-social-security-law/5/1/4/20">5.1.4.20 PP - Calculating a Rate for PP - General</a></li>
-<li class="leaf active-trail active menu-mlid-2969"><a href="../guide-social-security-law/5/1/4/30" class="active-trail active">5.1.4.30 Calculating a Rate of PP - Partnered</a></li>
-<li class="leaf menu-mlid-2970"><a href="../guide-social-security-law/5/1/4/40">5.1.4.40 DOP - Current Rate</a></li>
-<li class="last leaf menu-mlid-2971"><a href="../guide-social-security-law/5/1/4/50">5.1.4.50 DOP - Additional Component</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7285"><a href="../guide-social-security-law.1" title="">Using the Social Security Guide</a></li>
+<li class="collapsed menu-mlid-493"><a href="../guide-social-security-law/updates.1">What&#039;s new</a></li>
+<li class="leaf menu-mlid-24666"><a href="../guide-social-security-law/coronavirus">Government response to Coronavirus</a></li>
+<li class="collapsed menu-mlid-2295"><a href="../guide-social-security-law/1.1">1 Key terms &amp; principles</a></li>
+<li class="collapsed menu-mlid-2294"><a href="../guide-social-security-law/2.1">2 Claim verification</a></li>
+<li class="collapsed menu-mlid-2293"><a href="../guide-social-security-law/3.1">3 Qualification &amp; payability</a></li>
+<li class="collapsed menu-mlid-2292"><a href="../guide-social-security-law/4.1">4 Income &amp; assets</a></li>
+<li class="expanded active-trail menu-mlid-2291"><a href="../guide-social-security-law/5.1" class="active-trail">5 Payment rates</a><ul class="menu"><li class="first expanded active-trail menu-mlid-2946"><a href="../guide-social-security-law/5/1.1" class="active-trail">5.1 Current rates</a><ul class="menu"><li class="first collapsed menu-mlid-2947"><a href="../guide-social-security-law/5/1/1.1">5.1.1 Jobseeker payment &amp; youth allowance - current rates</a></li>
+<li class="collapsed menu-mlid-2955"><a href="../guide-social-security-law/5/1/2.1">5.1.2 Other labour market &amp; older students - current rates</a></li>
+<li class="collapsed menu-mlid-2959"><a href="../guide-social-security-law/5/1/3.1">5.1.3 Retirement &amp; widows - current rates</a></li>
+<li class="expanded active-trail menu-mlid-2966"><a href="../guide-social-security-law/5/1/4.1" class="active-trail">5.1.4 Families &amp; parenting - current rates</a><ul class="menu"><li class="first leaf menu-mlid-2967"><a href="../guide-social-security-law/5/1/4/10">5.1.4.10 PP - current rates</a></li>
+<li class="leaf menu-mlid-2968"><a href="../guide-social-security-law/5/1/4/20">5.1.4.20 PP - calculating a rate for PP - general</a></li>
+<li class="leaf active-trail active menu-mlid-2969"><a href="../guide-social-security-law/5/1/4/30" class="active-trail active">5.1.4.30 Calculating a rate of PP - partnered</a></li>
+<li class="leaf menu-mlid-2970"><a href="../guide-social-security-law/5/1/4/40">5.1.4.40 DOP - current rate</a></li>
+<li class="last leaf menu-mlid-2971"><a href="../guide-social-security-law/5/1/4/50">5.1.4.50 DOP - additional component</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-2972"><a href="../guide-social-security-law/5/1/5">5.1.5 Disability &amp; Carer - Current Rates</a></li>
-<li class="collapsed menu-mlid-2978"><a href="../guide-social-security-law/5/1/6">5.1.6 Special Payments - Current Rates</a></li>
-<li class="collapsed menu-mlid-2982"><a href="../guide-social-security-law/5/1/7">5.1.7 Supplementary Benefits - Current Rates</a></li>
-<li class="collapsed menu-mlid-2996"><a href="../guide-social-security-law/5/1/8">5.1.8 Common Rates Tables</a></li>
-<li class="collapsed menu-mlid-3002"><a href="../guide-social-security-law/5/1/9">5.1.9 Pension Supplement - Current Rates</a></li>
-<li class="last collapsed menu-mlid-2950"><a href="../guide-social-security-law/5/1/10">5.1.10 Clean Energy Household Assistance - Current Rates</a></li>
+<li class="collapsed menu-mlid-2972"><a href="../guide-social-security-law/5/1/5.1">5.1.5 Disability &amp; Carer - Current Rates</a></li>
+<li class="collapsed menu-mlid-2978"><a href="../guide-social-security-law/5/1/6.1">5.1.6 Special payments - current rates</a></li>
+<li class="collapsed menu-mlid-2982"><a href="../guide-social-security-law/5/1/7.1">5.1.7 Supplementary benefits - current rates</a></li>
+<li class="collapsed menu-mlid-2996"><a href="../guide-social-security-law/5/1/8.1">5.1.8 Common rates tables</a></li>
+<li class="collapsed menu-mlid-3002"><a href="../guide-social-security-law/5/1/9.1">5.1.9 Pension supplement - current rates</a></li>
+<li class="last collapsed menu-mlid-2950"><a href="../guide-social-security-law/5/1/10.1">5.1.10 Clean energy household assistance - current rates</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-3005"><a href="../guide-social-security-law/5/2">5.2 Historical Rates</a></li>
-<li class="collapsed menu-mlid-3058"><a href="../guide-social-security-law/5/3">5.3 Taxation</a></li>
-<li class="collapsed menu-mlid-3063"><a href="../guide-social-security-law/5/4">5.4 Advance Payments</a></li>
-<li class="last collapsed menu-mlid-3082"><a href="../guide-social-security-law/5/5">5.5 Samples of Rate Calculations</a></li>
+<li class="collapsed menu-mlid-3005"><a href="../guide-social-security-law/5/2.1">5.2 Historical rates</a></li>
+<li class="collapsed menu-mlid-3058"><a href="../guide-social-security-law/5/3.1">5.3 Taxation</a></li>
+<li class="collapsed menu-mlid-3063"><a href="../guide-social-security-law/5/4.1">5.4 Advance payments</a></li>
+<li class="last collapsed menu-mlid-3082"><a href="../guide-social-security-law/5/5.1">5.5 Samples of rate calculations</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-2290"><a href="../guide-social-security-law/6">6 Reviews, Debts &amp; Payment Recovery</a></li>
-<li class="collapsed menu-mlid-2289"><a href="../guide-social-security-law/7">7 Portability &amp; CFP</a></li>
-<li class="collapsed menu-mlid-2288"><a href="../guide-social-security-law/8">8 Administration Act Provisions</a></li>
-<li class="collapsed menu-mlid-2278"><a href="../guide-social-security-law/9">9 Visas, Entitlements &amp; Assurances of Support</a></li>
-<li class="collapsed menu-mlid-2296"><a href="../guide-social-security-law/10">10 Australian Social Security Agreements</a></li>
-<li class="collapsed menu-mlid-2297"><a href="../guide-social-security-law/11">11 Income Management</a></li>
-<li class="leaf menu-mlid-2298"><a href="../guide-social-security-law/acronyms">Acronym List</a></li>
-<li class="leaf menu-mlid-7297"><a href="../guide-social-security-law/keywords">Keyword Index</a></li>
-<li class="leaf menu-mlid-7372"><a href="../guide-social-security-law/act-references">Act Reference Index</a></li>
-<li class="last leaf menu-mlid-7168"><a href="../guide-social-security-law/sitemap">Site Map</a></li>
+<li class="collapsed menu-mlid-2290"><a href="../guide-social-security-law/6.1">6 Reviews, debts &amp; payment recovery</a></li>
+<li class="collapsed menu-mlid-2289"><a href="../guide-social-security-law/7.1">7 Portability &amp; comparable foreign payment (CFP)</a></li>
+<li class="collapsed menu-mlid-2288"><a href="../guide-social-security-law/8.1">8 Administration Act Provisions</a></li>
+<li class="collapsed menu-mlid-2278"><a href="../guide-social-security-law/9.1">9 Visas, entitlements &amp; assurances of support</a></li>
+<li class="collapsed menu-mlid-2296"><a href="../guide-social-security-law/10.1">10 Australian Social Security Agreements</a></li>
+<li class="collapsed menu-mlid-2297"><a href="../guide-social-security-law/11.1">11 Income Management</a></li>
+<li class="leaf menu-mlid-2298"><a href="../guide-social-security-law/acronyms">Acronym list</a></li>
+<li class="leaf menu-mlid-7297"><a href="../guide-social-security-law/keywords.1" title="">Keyword index</a></li>
+<li class="leaf menu-mlid-7372"><a href="../guide-social-security-law/act-references.1" title="">Act reference index</a></li>
+<li class="last leaf menu-mlid-7168"><a href="../guide-social-security-law/sitemap">Site map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../guide-social-security-law">Guide to Social Security Law</a> &raquo; <a href="../guide-social-security-law/5" class="active-trail">5 Payment Rates</a> &raquo; <a href="../guide-social-security-law/5/1" class="active-trail">5.1 Current Rates</a> &raquo; <a href="../guide-social-security-law/5/1/4" class="active-trail">5.1.4 Families &amp; Parenting - Current Rates</a> &raquo; 5.1.4.30 Calculating a Rate of PP - Partnered</div>
+	<div id="breadcrumb"><a href="../index.html">Home</a> &raquo; <a href="../guide-social-security-law.1">Social Security Guide</a> &raquo; <a href="../guide-social-security-law/5.1" class="active-trail">5 Payment rates</a> &raquo; <a href="../guide-social-security-law/5/1.1" class="active-trail">5.1 Current rates</a> &raquo; <a href="../guide-social-security-law/5/1/4.1" class="active-trail">5.1.4 Families &amp; parenting - current rates</a> &raquo; 5.1.4.30 Calculating a rate of PP - partnered</div>
 <div id="utility">
 	
-<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/node/16099"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="readspeaker_button" class="rs_skip rsbtn rs_preserve"><a rel="nofollow" class="rsbtn_play" href="https://app-oc.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=https://guides.dss.gov.au/node/16099"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsbtn_right rsimg rsplay rspart"></span></a></div></div>
 <div id="content" role="main">
 <article id="node-16099">
-<h1 >5.1.4.30 Calculating a Rate of PP - Partnered</h1>
+<h1 >5.1.4.30 Calculating a rate of PP - partnered</h1>
 <h2>Summary</h2>
 <p>This topic explains the way in which the rate of <a href="../guide-social-security-law/acronyms#pp" title="Parenting payment">PP</a> is calculated for a recipient with a partner, and the effect of factors that apply only to <a href="../guide-social-security-law/acronyms#ppp" title="Parenting payment (partnered)">PPP</a>. The rate calculation for PPP uses the same principles as are applied to social security benefits, except that in some cases income may be brought to account for periods of up to 12 months, rather than fortnightly (except for employment income (<a href="../guide-social-security-law/1/1/e/102">1.1.E.102</a>) which is always assessed fortnightly).</p>
 <div class="reference">
 <p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 1068B Rate of PP-PP (partnered)</p>
-<p><strong>Policy reference:</strong> SS Guide <a href="../guide-social-security-law/5/1/4/10">5.1.4.10</a> PP - Current Rates, <a href="../guide-social-security-law/4/3/1/40">4.3.1.40</a> Determining the Rate of Income for PP</p>
+<p><strong>Policy reference:</strong> SS Guide <a href="../guide-social-security-law/5/1/4/10">5.1.4.10</a> PP - current rates, <a href="../guide-social-security-law/4/3/1/40">4.3.1.40</a> Determining the rate of income for PP</p>
 </div>
 <h2>Income assessment period</h2>
 <p>The period over which income is brought to account for PPP depends on the individual circumstances of the recipient:</p>
-<ul><li>for partners of allowees, income is assessed over the fortnight of the payment period,</li>
+<ul><li>for partners of allowees, income is assessed over the fortnight of the payment period</li>
 <li>for all other recipients, income is assessed over whatever period is appropriate to the particular income type (except for employment income).</li>
 </ul><div class="example">
 <p><strong>Explanation:</strong> The income of recipients partnered to allowees is assessed in the same way as their partner's income. The income of all other PP recipients is assessed in the same way as for pensioners.</p>
 </div>
 <div class="example">
-<p><strong>Example:</strong> Casual earnings income for the partner of an allowee is taken into account in the fortnight the income is first earned, derived or received.</p>
+<p><strong>Example:</strong> Casual employment income for the partner of an allowee is taken into account in the fortnight the income is paid (by being assessed from the beginning of the fortnight in which it is paid and apportioned forward for the relevant number of days).</p>
 </div>
 <div class="reference">
 <p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 1068B-D19 Period over which ordinary income taken into account</p>
-<p><strong>Policy reference:</strong> SS Guide <a href="../guide-social-security-law/4/3">4.3</a> Ordinary Income, <a href="../guide-social-security-law/4/3/1/10">4.3.1.10</a> Determining the Rate of Income for Benefits, <a href="../guide-social-security-law/4/3/1/20">4.3.1.20</a> Determining the Rate of Income for Pensioners of Age Pension Age from 20/09/2009, <a href="../guide-social-security-law/4/3/1/25">4.3.1.25</a> Determining the Assessable Income for Pensioners Below Age Pension Age, <a href="../guide-social-security-law/4/3/1/30">4.3.1.30</a> Rate of Income - Couples, Blind Pensioners &amp; Children, <a href="../guide-social-security-law/4/3/1/40">4.3.1.40</a> Determining the Rate of Income for PP</p>
+<p><strong>Policy reference:</strong> SS Guide <a href="../guide-social-security-law/4/3.1">4.3</a> Ordinary Income, <a href="../guide-social-security-law/4/3/1/10">4.3.1.10</a> Determining the rate of income for benefits, <a href="../guide-social-security-law/4/3/1/20">4.3.1.20</a> Determining the rate of income for pensioners of age pension age from 20/09/2009, <a href="../guide-social-security-law/4/3/1/25">4.3.1.25</a> Determining the assessable income for pensioners below age pension age, <a href="../guide-social-security-law/4/3/1/30">4.3.1.30</a> Rate of income - couples, blind pensioners &amp; children, <a href="../guide-social-security-law/4/3/1/40">4.3.1.40</a> Determining the rate of income for PP</p>
 </div>
 <h2>Income test tapers</h2>
 <p>The income test for PPP comprises:</p>
-<ul><li>a personal income free area of $102 per fortnight (pf),</li>
-<li>a lower personal income taper of 50 cents in the dollar for income between $102 and $252 pf,</li>
-<li>an upper personal income taper of 60 cents in the dollar for income above $252 pf,</li>
+<ul><li>a personal income free area of $150 per fortnight (pf)</li>
+<li>a lower personal income taper of 50 cents in the dollar for income between $150 and $256 pf</li>
+<li>an upper personal income taper of 60 cents in the dollar for income above $256 pf</li>
 <li>a partner income free area, and</li>
 <li>a partner excess income taper of 60 cents in the dollar.</li>
 </ul><div class="reference">
 <p><strong>Act reference:</strong> <a href="https://www.legislation.gov.au/Series/C2004A04121" title="Social Security Act 1991">SSAct</a> section 1068B-D1 Effect of income on maximum payment rate</p>
-<p><strong>Policy reference:</strong> SS Guide <a href="../guide-social-security-law/4/2/2">4.2.2</a> Benefits Income Test &amp; Limits, <a href="../guide-social-security-law/4/2/4/20">4.2.4.20</a> PPP Income &amp; Assets Tests &amp; Limits</p>
+<p><strong>Policy reference:</strong> SS Guide <a href="../guide-social-security-law/4/2/2">4.2.2</a> Benefits income test &amp; limits, <a href="../guide-social-security-law/4/2/4/20">4.2.4.20</a> PPP income &amp; assets tests &amp; limits</p>
 </div>
-<h2><a href="../guide-social-security-law/acronyms#nsa" title="Newstart allowance">NSA</a> partner - zero rate provision</h2>
-<p>If a PPP recipient has a current NSA partner and as a result of casual earnings the PP is reduced to nil, then the PP remains current while the NSA remains current.</p>
+<h2><a href="../guide-social-security-law/acronyms#jsp" title="Jobseeker payment">JSP</a> partner - zero rate provision</h2>
+<p>If a PPP recipient has a current JSP partner and as a result of casual employment income the PP is reduced to nil, the PP recipient remains current while their JSP partner remains current.</p>
 <div class="reference">
-<p><strong>Policy reference:</strong> SS Guide <a href="../guide-social-security-law/3/1/12">3.1.12</a> Employment Income Nil Rate Period</p>
+<p><strong>Policy reference:</strong> SS Guide <a href="../guide-social-security-law/3/1/12">3.1.12</a> Employment income nil rate period</p>
 </div>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     1 July 2015  	</div>
+      Last reviewed:     1 April 2021  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../contact-us">Contact us</a></li>
@@ -151,8 +158,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
-<script type="text/javascript" src="../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
-<script type="text/javascript" src="../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+<script type="text/javascript" src="../sites/default/files/js/js_IkilKWehdX07Wbi3Cg-T6yf5sLTu5FfOT2__edFF9eM.js"></script>
+<script type="text/javascript" src="https://cdn1.readspeaker.com/script/5931/webReader/webReader.js?pids=wr&amp;notools=1&amp;disable=popupplayback&amp;qrxyi9"></script>
 </body>
 </html>

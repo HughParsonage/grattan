@@ -2,27 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<link rel="shortlink" href="../../../node/239" />
-<link rel="canonical" href="6" />
-<meta name="viewport" content="width=device-width" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>6.3.6 Authorised Representatives | Child Support Guide</title>
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<meta name="viewport" content="width=device-width" />
+<link rel="canonical" href="6" />
+<link rel="shortlink" href="../../../node/239" />
+<title>6.3.6 Authorised representatives | Child Support Guide</title>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_Q4XrxgEkbadGDm1J7AHUHHmbcMJ2_hbMfrrzrm9Ne_I.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
-<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_d905I2WxoGGQW6uS7jkC73mqKhSejey6jciEdxo9cJI.css" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_yMSKTzBO0KmozyLwajzFOrrt_kto_9mtccAkb0rm7gc.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_FA2YSy0R3kB2AU_wIOLoSR0sJX4ZYjdPuPaRFd2ZDyw.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+window.rsConf = { ui: { tools: {translation: false, dictionary: false}}};
 //--><!]]>
 </script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_rsGiM5M1ffe6EhN-RnhM5f3pDyJ8ZAPFJNKpfjtepLk.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_-oEDdwe4XpUqUj4W0KJs96ENaXIrGvjBvIP-WYYBi54.js"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"2iU7y4StZ4-SpnfLM7ewOoaKdycvsMzD8FErXPtb2n8","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/6\/3\/6":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"qVj_Duauv6vLkiFWogChmk8lEa4I3R8gwedo0HaJJ1w","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"https:\/\/cdn1.readspeaker.com\/script\/5931\/webReader\/webReader.js?pids=wr\u0026notools=1\u0026disable=popupplayback":1,"misc\/jquery.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"0":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"1":1,"sites\/all\/modules\/extlink\/js\/extlink.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/6\/3\/6":true},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)","extUseFontAwesome":false}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -35,66 +40,66 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <nav id="global">
 	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
 <div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<ul class="menu"><li class="first leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law.1">Social Security Guide</a></li>
+<li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide.1">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide.1">Paid Parental Leave Guide</a></li>
+<li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide.1" class="active-trail">Child Support Guide</a></li>
+<li class="leaf menu-mlid-7596"><a href="../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
 <li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
-<li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide" class="active-trail">Child Support Guide</a></li>
-<li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law">Guide to Social Security Law</a></li>
-<li class="last leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+<li class="last leaf has-children menu-mlid-19951"><a href="../../../national-redress-guide" title="">National Redress Guide</a></li>
 </ul></div></nav>
 <header role="banner">
 	<a href="../../../index.html" rel="home"><img src="../../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
 <p class="site-name">Guides to Social Policy Law</p>
 <form class="search-form" role="search" action="6" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
- <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+ <input class="custom-search-box form-text" placeholder="Search" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-LxFUh6LVfKFEXe9CJmW5LkB-vSL3NkxVkk3Go0iDYYg" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-bp-lWlftBCIb5zFIXZb3Zokmt9Z02chKZTevvcXWglM" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.32 - Released 7 May 2018</p>
+<p>Version 4.57 - Released 1 July 2021</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7286"><a href="../../../child-support-guide" title="">Using the Child Support Guide</a></li>
-<li class="collapsed menu-mlid-514"><a href="../../updates">What&#039;s New</a></li>
-<li class="collapsed menu-mlid-515"><a href="../../1">1 About the Scheme</a></li>
-<li class="collapsed menu-mlid-518"><a href="../../2">2 Child Support Assessments</a></li>
-<li class="collapsed menu-mlid-555"><a href="../../3">3 Registrable Maintenance Liabilities</a></li>
-<li class="collapsed menu-mlid-637"><a href="../../4">4 Objecting, Seeking a Review, Appealing &amp; Applying to Court</a></li>
-<li class="collapsed menu-mlid-678"><a href="../../5">5 Collecting Child Support</a></li>
-<li class="expanded active-trail menu-mlid-716"><a href="../../6" class="active-trail">6 Administration</a><ul class="menu"><li class="first collapsed menu-mlid-726"><a href="../1" title="This chapter explains the legal basis for the Child Support Registrar and authorised DHS employees to make decisions under child support legislation.">6.1 Authorisation &amp; Delegation</a></li>
-<li class="collapsed menu-mlid-730"><a href="../2" title="This chapter explains how DHS obtains information to administer the child support legislation.">6.2 Collecting Information</a></li>
-<li class="expanded active-trail menu-mlid-737"><a href="../3" title="This chapter describes DHS&#039;s responsibility to meet the secrecy provisions in the Child Support (Registration and Collection) Act 1988 and the Child Support (Assessment) Act 1989, and the Australian Privacy Principles (APPs) in the Privacy Act 1988. It explains the proof of identity requirements and the circumstances when an authorised representative can obtain or provide information on behalf of a parent or non-parent carer. It also explains the special measures that DHS uses to protect the personal information of certain high-risk individuals." class="active-trail">6.3 Privacy, Secrecy &amp; Proof of Identity</a><ul class="menu"><li class="first leaf menu-mlid-738"><a href="1">6.3.1 Privacy Act</a></li>
-<li class="leaf menu-mlid-739"><a href="http://guides.dss.gov.au/child-support-guide/6/3/2">6.3.2 Tax File Numbers &amp; Taxation Information</a></li>
-<li class="leaf menu-mlid-740"><a href="3">6.3.3 Secrecy Provisions</a></li>
-<li class="leaf menu-mlid-741"><a href="4">6.3.4 Collection &amp; Use of Third Party Information</a></li>
-<li class="leaf menu-mlid-742"><a href="5">6.3.5 Proof of Identity</a></li>
-<li class="leaf active-trail active menu-mlid-743"><a href="6" class="active-trail active">6.3.6 Authorised Representatives</a></li>
-<li class="last leaf menu-mlid-744"><a href="7">6.3.7 Restricted Access to Certain Information</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7286"><a href="../../../child-support-guide.1" title="">Using the Child Support Guide</a></li>
+<li class="collapsed menu-mlid-514"><a href="../../updates.1">What&#039;s new</a></li>
+<li class="collapsed menu-mlid-515"><a href="../../1.1">1 About the Scheme</a></li>
+<li class="collapsed menu-mlid-518"><a href="../../2.1">2 Child support assessments</a></li>
+<li class="collapsed menu-mlid-555"><a href="../../3.1">3 Registrable maintenance liabilities</a></li>
+<li class="collapsed menu-mlid-637"><a href="../../4.1">4 Objecting, seeking a review, appealing &amp; applying to court</a></li>
+<li class="collapsed menu-mlid-678"><a href="../../5.1">5 Collecting child support</a></li>
+<li class="expanded active-trail menu-mlid-716"><a href="../../6.1" class="active-trail">6 Administration</a><ul class="menu"><li class="first collapsed menu-mlid-726"><a href="../1.1" title="This chapter explains the legal basis for the Child Support Registrar and authorised DHS employees to make decisions under child support legislation.">6.1 Authorisation &amp; delegation</a></li>
+<li class="collapsed menu-mlid-730"><a href="../2.1" title="This chapter explains how DHS obtains information to administer the child support legislation.">6.2 Collecting information</a></li>
+<li class="expanded active-trail menu-mlid-25456"><a href="../3.1" title="This chapter describes Services Australia&#039;s responsibility to meet the secrecy provisions in the Child Support (Registration and Collection) Act 1988 and the Child Support (Assessment) Act 1989, and the Australian Privacy Principles (APPs) in the Privacy Act 1988. It also explains the proof of identity requirements and the circumstances when an authorised representative can obtain or provide information on behalf of a parent or non-parent carer." class="active-trail">6.3 Privacy, secrecy &amp; proof of identity</a><ul class="menu"><li class="first leaf menu-mlid-738"><a href="1">6.3.1 Privacy Act</a></li>
+<li class="leaf menu-mlid-739"><a href="2">6.3.2 Tax file numbers &amp; taxation information</a></li>
+<li class="leaf menu-mlid-740"><a href="3">6.3.3 Secrecy provisions</a></li>
+<li class="leaf menu-mlid-741"><a href="4">6.3.4 Collection &amp; use of third party information</a></li>
+<li class="leaf menu-mlid-742"><a href="5">6.3.5 Proof of identity</a></li>
+<li class="last leaf active-trail active menu-mlid-743"><a href="6" class="active-trail active">6.3.6 Authorised representatives</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-745"><a href="../4" title="This chapter describes when the Registrar must provide information to a court in response to a subpoena or a notice to produce documents.">6.4 Subpoenas</a></li>
-<li class="collapsed menu-mlid-747"><a href="../5" title="This chapter describes when DHS will forward documents to a parent at the request of the other parent or a court.">6.5 Forwarding Documents</a></li>
-<li class="collapsed menu-mlid-749"><a href="../6" title="This chapter describes the kinds of documents held by DHS and the process for access to those documents, both on an informal basis and by a formal request for access under the Freedom of Information Act 1982 (FOI Act).">6.6 Freedom of Information</a></li>
-<li class="collapsed menu-mlid-752"><a href="../7" title="This chapter describes how the Registrar serves a document upon a person.">6.7 Service of Documents</a></li>
-<li class="collapsed menu-mlid-757"><a href="../8" title="This chapter describes the offence provisions contained in the child support legislation. It does not deal with offences under the Crimes Act 1914 and the Criminal Code Act 1995 (e.g. forgery).">6.8 Offences &amp; Prosecution</a></li>
+<li class="collapsed menu-mlid-745"><a href="../4.1" title="This chapter describes when the Registrar must provide information to a court in response to a subpoena or a notice to produce documents.">6.4 Subpoenas</a></li>
+<li class="collapsed menu-mlid-747"><a href="../5.1" title="This chapter describes when Services Australia will forward documents to a parent at the request of the other parent or a court.">6.5 Forwarding documents</a></li>
+<li class="collapsed menu-mlid-749"><a href="../6.1" title="This chapter describes the kinds of documents held by DHS and the process for access to those documents, both on an informal basis and by a formal request for access under the Freedom of Information Act 1982 (FOI Act).">6.6 Freedom of information</a></li>
+<li class="collapsed menu-mlid-752"><a href="../7.1" title="This chapter describes how the Registrar serves a document upon a person.">6.7 Service of documents</a></li>
+<li class="collapsed menu-mlid-757"><a href="../8.1" title="This chapter describes the offence provisions contained in the child support legislation. It does not deal with offences under the Crimes Act 1914 and the Criminal Code Act 1995 (e.g. forgery).">6.8 Offences &amp; prosecution</a></li>
 <li class="leaf menu-mlid-765"><a href="../9">6.9 Number not currently in use</a></li>
-<li class="collapsed menu-mlid-769"><a href="../10" title="This chapter describes how DHS will manage child support cases where there is a risk of family and domestic violence.">6.10 Family &amp; Domestic Violence</a></li>
-<li class="last leaf menu-mlid-771"><a href="../11" title="This chapter describes the circumstances in which the department can pay compensation to customers. It explains how customers can make a claim for compensation and what they can expect from the department. It also explains the circumstances in which a debt owed to the Commonwealth can be waived.">6.11 Compensation &amp; Waiver of Debts</a></li>
+<li class="collapsed menu-mlid-769"><a href="../10.1" title="This chapter describes how DHS will manage child support cases where there is a risk of family and domestic violence.">6.10 Family &amp; domestic violence</a></li>
+<li class="last leaf menu-mlid-771"><a href="../11" title="This chapter describes the circumstances in which the department can pay compensation to customers. It explains how customers can make a claim for compensation and what they can expect from the department. It also explains the circumstances in which a debt owed to the Commonwealth can be waived.">6.11 Compensation &amp; waiver of debts</a></li>
 </ul></li>
-<li class="leaf menu-mlid-10696"><a href="../../acronyms">Acronym List</a></li>
-<li class="leaf menu-mlid-7193"><a href="../../keywords" title="">Keyword Index</a></li>
-<li class="last leaf menu-mlid-7167"><a href="../../sitemap">Site Map</a></li>
+<li class="leaf menu-mlid-10696"><a href="../../acronyms">Acronym list</a></li>
+<li class="leaf menu-mlid-7193"><a href="../../keywords.1" title="">Keyword index</a></li>
+<li class="last leaf menu-mlid-7167"><a href="../../sitemap">Site map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../child-support-guide">Child Support Guide</a> &raquo; <a href="../../6" class="active-trail">6 Administration</a> &raquo; <a href="../3" title="This chapter describes DHS&#039;s responsibility to meet the secrecy provisions in the Child Support (Registration and Collection) Act 1988 and the Child Support (Assessment) Act 1989, and the Australian Privacy Principles (APPs) in the Privacy Act 1988. It explains the proof of identity requirements and the circumstances when an authorised representative can obtain or provide information on behalf of a parent or non-parent carer. It also explains the special measures that DHS uses to protect the personal information of certain high-risk individuals." class="active-trail">6.3 Privacy, Secrecy &amp; Proof of Identity</a> &raquo; 6.3.6 Authorised Representatives</div>
+	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../child-support-guide.1">Child Support Guide</a> &raquo; <a href="../../6.1" class="active-trail">6 Administration</a> &raquo; <a href="../3.1" title="This chapter describes Services Australia&#039;s responsibility to meet the secrecy provisions in the Child Support (Registration and Collection) Act 1988 and the Child Support (Assessment) Act 1989, and the Australian Privacy Principles (APPs) in the Privacy Act 1988. It also explains the proof of identity requirements and the circumstances when an authorised representative can obtain or provide information on behalf of a parent or non-parent carer." class="active-trail">6.3 Privacy, secrecy &amp; proof of identity</a> &raquo; 6.3.6 Authorised representatives</div>
 <div id="utility">
 	
-<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/child-support-guide/6/3/6"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="readspeaker_button" class="rs_skip rsbtn rs_preserve"><a rel="nofollow" class="rsbtn_play" href="https://app-oc.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=https://guides.dss.gov.au/child-support-guide/6/3/6"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsbtn_right rsimg rsplay rspart"></span></a></div></div>
 <div id="content" role="main">
 <article id="node-239">
-<h1 >6.3.6 Authorised Representatives</h1>
+<h1 >6.3.6 Authorised representatives</h1>
 <h2>Context</h2>
 <p>Parents and carers in the child support scheme may specifically authorise a third person to make enquiries on their behalf.</p>
 <div class="reference">
@@ -104,79 +109,82 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p><a href="https://www.legislation.gov.au/Series/C2004A03712">Privacy Act 1988</a></p>
 </div>
 <h2>On this page</h2>
-<p><a href="../../acronyms#dhs" title="Department of Human Services">DHS</a> will communicate with a representative who has been authorised to act on behalf of a child support parent or carer and is able to provide sufficient information to identify themselves. This may involve DHS disclosing protected information to the representative, including information about the other party in the child support case that would otherwise be disclosed to the person who provided the authorisation (see 'Disclosure to the other parent' in <a href="3">6.3.3</a>). This is permitted under the secrecy provisions because the disclosure is for the purposes of the child support legislation (CSRC Act section 16(2A) and CSA Act section 150(2A)).</p>
-<p>DHS will also communicate with a person's representative who is legally entitled to act on their behalf.</p>
-<p>DHS is not obliged to recognise the authority of a nominated representative, but will usually do so. If DHS considers that an authorised representative is not acting in the best interests of the person they are representing, or is otherwise concerned about their actions, DHS will refuse to deal with the representative. The person who provided the authorisation will be requested to make more suitable communication arrangements.</p>
-<p>While not an exhaustive list, DHS may consider refusing to accept as a representative a person or organisation:</p>
-<ul><li>who routinely broadcasts information in the public domain, for example, media personalities,</li>
-<li>whose behaviour is threatening towards the other parent or to DHS, or</li>
+<p>Services Australia will communicate with a representative who has been authorised to act on behalf of a child support parent or carer and is able to provide sufficient information to identify themselves. This may involve Services Australia disclosing protected information to the representative, including information about the other party in the child support case that would otherwise be disclosed to the person who provided the authorisation (see 'Disclosure to the other parent' in <a href="3">6.3.3</a>). This is permitted under the secrecy provisions because the disclosure is for the purposes of the child support legislation (CSRC Act section 16(2A) and CSA Act section 150(2A)).</p>
+<p>Services Australia will also communicate with a person's representative who is legally entitled to act on their behalf.</p>
+<p>Services Australia is not obliged to recognise the authority of a nominated representative, but will usually do so. If Services Australia considers that an authorised representative is not acting in the best interests of the person they are representing, or is otherwise concerned about their actions, Services Australia will refuse to deal with the representative. The person who provided the authorisation will be requested to make more suitable communication arrangements.</p>
+<p>While not an exhaustive list, Services Australia may consider refusing to accept as a representative a person or organisation:</p>
+<ul><li>who routinely broadcasts information in the public domain, for example, media personalities</li>
+<li>whose behaviour is threatening towards the other parent or to Services Australia, or</li>
 <li>who attempts to undermine the integrity of the child support scheme.</li>
-</ul><p>DHS will not accept a person as a representative if they are under the age of 18. DHS will strongly advise against a parent having either a child over the age of 18 years or the other parent in their case as a representative. However, if they insist, DHS will not refuse to treat the person as a representative.</p>
+</ul><p>Services Australia will not accept a person as a representative if they are under the age of 18. Services Australia will strongly advise against a parent having either a child over the age of 18 years or the other parent in their case as a representative. However, if they insist, Services Australia may agree to treat the person as a representative.</p>
 <ul><li><a href="6#typesofreps">Types of authorised representatives</a></li>
 <li><a href="6#authorisation">Authorisation</a></li>
-<li><a href="6#extentofauthority">Extent of a person's authority to act</a></li>
-<li><a href="6#interpreters">Interpreters and telephone assistance services</a></li>
+<li><a href="6#extentofauthority">Extent of a person's authority to act - ordinary authority</a></li>
+<li><a href="6#extentofpersonsauthority">Extent of a person's authority to act - power of attorney or legal authority</a></li>
+<li><a href="6#interpreters">Interpreters &amp; telephone assistance services</a></li>
 </ul><h2 id="typesofreps">Types of authorised representatives</h2>
-<p>DHS can deal with 2 types of authorised representatives:</p>
+<p>Services Australia can communicate with 2 types of authorised representatives:</p>
 <ul><li>authorised agents with power of attorney, or other legal authority to act on a person's behalf, and</li>
 <li>representatives with ordinary authority, including solicitors.</li>
 </ul><p>Possession of a power of attorney is sufficient authorisation if it confers on the recipient authority to do anything that he or she can lawfully do on behalf of a person as an attorney.</p>
-<p>The representative must be able to provide a written document conferring a general power of attorney to act on behalf of a person, or a power of attorney to act on behalf of a person for child support purposes. DHS will accept as a representative someone who is able to provide this documentation.</p>
+<p>The representative must provide a written document to Services Australia conferring a general power of attorney to act on behalf of a person, or a power of attorney to act on behalf of a person for child support purposes. Services Australia will accept as a representative someone who is able to provide this documentation.</p>
 <p>An administrator or financial manager may be appointed (by a court or a tribunal) if a person has a condition which renders them incapable of making decisions. An administrator or financial manager may be given full or limited powers and the extent of the power will be fully set out in the relevant order.</p>
-<p>Where such an order covers child support matters of a parent, the decision of the administrator or the financial manager is taken to be the decision of the parent. In these cases, DHS will be dealing with the appointee only and not the parent.</p>
-<p>Representatives with ordinary authority have been authorised by a person to act on their behalf. They could be the solicitor of the child support parent, their partner, friend, or any third party authorised by the parent to act on their behalf, including Members of Parliament and their electorate staff making representations on behalf of their constituent. An authorised representative does not need to be an individual but can be an organisation or a position within an organisation. For example, a parent who is in prison may authorise the social worker of the particular prison to be their representative. It should be noted that the Commonwealth Ombudsman does not act as a representative. The Ombudsman is authorised by legislation to investigate the administrative actions of Commonwealth agencies (<a href="3">6.3.3</a>) including DHS.</p>
+<p>Where such an order covers child support matters of a parent, the decision of the administrator or the financial manager is taken to be the decision of the parent. In these cases, Services Australia will be dealing with the appointee only and not the parent.</p>
+<p>Representatives with ordinary authority have been authorised by a person to act on their behalf. They could be the solicitor of the child support parent, their partner, friend, or any third party authorised by the parent to act on their behalf, including Members of Parliament and their electorate staff making representations on behalf of their constituent. An authorised representative does not need to be an individual but can be an organisation or a position within an organisation. For example, a parent who is in prison may authorise the social worker of the particular prison to be their representative. It should be noted that the Commonwealth Ombudsman does not act as a representative. The Ombudsman is authorised by legislation to investigate the administrative actions of Commonwealth agencies (<a href="3">6.3.3</a>) including Services Australia.</p>
 <h2 id="authorisation">Authorisation</h2>
-<p>DHS must be satisfied that a representative has authorisation from a person to represent them in child support matters. For example, tax agents can act on behalf of a parent in relation to their taxation affairs, but would not generally represent their clients in child support matters.</p>
-<p>A representative can be authorised by the parent to talk to DHS on a single occasion by handing over the telephone, or they can give that authorisation to DHS in person. DHS will require written authorisation if the arrangement is to continue. DHS may also collect identity information for the representative, and assign an identification number, to verify the representative's identity.</p>
+<p>Services Australia must be satisfied that a representative has authorisation from a person to represent them in child support matters. For example, tax agents can act on behalf of a parent in relation to their taxation affairs, but would not generally represent their clients in child support matters.</p>
+<p>A representative can be authorised by the parent to talk to Services Australia on a single occasion by handing over the telephone, or they can give that authorisation to Services Australia in person. Services Australia will require written authorisation if the arrangement is to continue. Services Australia may also collect identity information for the representative, and assign an identification number, to verify the representative's identity.</p>
 <p>The best proof that a representative has of their authority is for the representative to produce a letter of authorisation from the parent. A letter of authorisation would preferably:</p>
-<ul><li>identify the parent and the representative,</li>
-<li>be signed and dated by the parent and the representative,</li>
-<li>specify the extent to which the representative represents the parent,</li>
+<ul><li>identify the parent and the representative</li>
+<li>be signed and dated by the parent and the representative</li>
+<li>specify the extent to which the representative represents the parent</li>
 <li>specify the period for which it is valid, and</li>
 <li>contain sufficient information to identify the representative (over the telephone or in person).</li>
-</ul><p>Alternatively, a <a href="https://www.humanservices.gov.au/individuals/forms/cs3042">Child Support representative authority form</a> is available, permitting a representative to enquire or act on the parent's behalf when dealing with DHS.</p>
-<p>The authorisation must be current. If no period is specified, DHS will decide whether it is current based on its wording and the circumstances, such as the nature of the relationship between the representative and the parent. In so doing, consideration will be given to whether the parent might reasonably expect DHS to give the representative particular information, depending on the nature of the enquiry and the nature of their relationship. For example, the name of the parent's employer or the parent's address would be particularly sensitive and irrelevant to satisfying any inquiry.</p>
-<p>In some circumstances, the parent may not be able to sign an authority (e.g. if the parent has a physical or mental incapacity that means they are unable to deal with their own affairs) but the representative must still be able to satisfy DHS that they are responsible for the parent's affairs. A medical certificate or a statutory declaration signed by the representative may be appropriate.</p>
-<p>DHS will accept that a Member of Parliament (or a member of their electorate staff) is authorised to act on behalf of their constituent if they can produce written authorisation. If they have no written authorisation, DHS will assume an authorisation exists if they can:</p>
-<ul><li>satisfactorily prove their identity and position,</li>
+</ul><p>Alternatively, a <a href="https://www.servicesaustralia.gov.au/individuals/forms/cs3042">Child Support representative authority form</a> is available, permitting a representative to enquire or act on the parent's behalf when dealing with Services Australia.</p>
+<p>The authorisation must be current. If no period is specified, Services Australia will decide whether it is current based on its wording and the circumstances, such as the nature of the relationship between the representative and the parent. In so doing, consideration will be given to whether the parent might reasonably expect Services Australia to give the representative particular information, depending on the nature of the enquiry and the nature of their relationship. For example, the name of the parent's employer or the parent's address would be particularly sensitive and irrelevant to satisfying any inquiry.</p>
+<p>In some circumstances, the parent may not be able to sign an authority (e.g. if the parent has a physical or mental incapacity that means they are unable to deal with their own affairs) but the representative must still be able to satisfy Services Australia that they are responsible for the parent's affairs. A medical certificate or a statutory declaration signed by the representative may be appropriate.</p>
+<p>Services Australia will accept that a Member of Parliament (or a member of their electorate staff) is authorised to act on behalf of their constituent if they can produce written authorisation. If they have no written authorisation, Services Australia will assume an authorisation exists if they can:</p>
+<ul><li>satisfactorily prove their identity and position</li>
 <li>identify the constituent who has made the complaint, and</li>
-<li>quote information that DHS knows could only have come from their constituent.</li>
-</ul><h2 id="extentofauthority">Extent of a person's authority to act</h2>
-<p>DHS will accept that a representative with ordinary authority can act for a person in matters that are limited to certain enquiries and actions. This generally involves providing or seeking information, lodging forms and making enquiries. A representative with ordinary authority cannot make applications or elections under child support legislation on behalf of the person who has given the authority.</p>
-<p>A representative with ordinary authority can provide, seek or enquire about the following:</p>
-<ul><li>provide or seek information regarding a change in percentage of care,</li>
-<li>provide information in relation to an objection,</li>
-<li>make enquiries regarding pending or missed payments,</li>
-<li>make enquiries regarding penalties, the debt amount or recovery action,</li>
-<li>provide information concerning relevant dependent children (see <a href="../../2/9/5">2.9.5</a> for information on adding a relevant dependent child to a child support assessment),</li>
-<li>request account statements or notices of assessment, and</li>
-<li>provide address information.</li>
+<li>quote information that Services Australia knows could only have come from their constituent.</li>
+</ul><h2 id="extentofauthority">Extent of a person's authority to act - ordinary authority</h2>
+<p>Services Australia will accept that a representative with ordinary authority can act for a person in matters that are limited to certain enquiries and actions. This generally involves providing or seeking information, lodging forms and making enquiries.</p>
+<p>A representative with ordinary authority can perform actions including, but not limited to the following:</p>
+<ul><li>provide or seek information regarding a change in percentage of care</li>
+<li>provide information in relation to an objection</li>
+<li>make enquiries regarding pending or missed payments</li>
+<li>make enquiries regarding penalties, the debt amount or recovery action</li>
+<li>provide information concerning relevant dependent children (see <a href="../../2/9/5">2.9.5</a> for information on adding a relevant dependent child to a child support assessment)</li>
+<li>request account statements, notices of assessment or decision letters, and</li>
+<li>provide new contact information for the parent (if the parent has specified that the representative may do so).</li>
 </ul><p>A representative with ordinary authority can lodge forms signed by the person whom they represent, including for:</p>
-<ul><li>objections,</li>
+<ul><li>objections</li>
 <li>change of assessment applications, and</li>
 <li>child support agreements.</li>
-</ul><p>A representative with ordinary authority can also enter into payment arrangements (limited to situations where DHS has not commenced and does not intend to commence enforcement action).</p>
-<p>DHS will accept that a person with a power of attorney or other legal authority can act for a person in more complex matters. These are matters relating to processes which may alter the child support liability and obligations, or matters where a representative could make an application or election provided for under child support legislation on behalf of a person, such as the child support parent. They include, but are not limited to:</p>
-<ul><li>elections to end or resume collection,</li>
-<li>an application for a child support assessment,</li>
-<li>an application that the fixed annual rate not apply,</li>
-<li>an application to reduce a minimum assessment,</li>
-<li>an application for non-agency payments to be credited,</li>
-<li>debt negotiations when DHS is contemplating enforcement actions (e.g. litigation, making a departure prohibition order),</li>
+</ul><p>A representative with ordinary authority can also enter into payment arrangements (limited to situations where Services Australia has not commenced and does not intend to commence enforcement action).</p>
+<p>A representative with ordinary authority cannot make applications or elections under child support legislation on behalf of the parent.</p>
+<p>A representative with ordinary authority cannot represent the parent in a change of assessment process. This includes where the change of assessment application is being reconsidered following an objection. However, in limited circumstances, a person with legal authority may represent a parent in a change of assessment process (see below and 2.6.5 for further information).</p>
+<h2 id="extentofpersonsauthority">Extent of a person's authority to act - power of attorney or legal authority</h2>
+<p>Services Australia will accept that a person with a power of attorney or other legal authority can act for a person in more complex matters (in addition to being able to perform actions that a representative with ordinary authority can perform). These complex matters relate to processes which may alter the child support liability and obligations, or matters where a representative could make an application or election provided for under child support legislation on behalf of a payer or payee. They include, but are not limited to:</p>
+<ul><li>elections to end or resume collection</li>
+<li>an application for a child support assessment</li>
+<li>an application that the fixed annual rate not apply</li>
+<li>an application to reduce a minimum assessment</li>
+<li>an application for non-agency payments to be credited</li>
+<li>debt negotiations when Services Australia is contemplating enforcement actions (e.g. litigation, making a departure prohibition order)</li>
 <li>elections that employer withholding not apply, and</li>
 <li>estimate of income elections.</li>
-</ul><p>A representative with ordinary authority cannot represent a party to an assessment in a change of assessment process. This includes where the change of assessment application is being reconsidered following an objection to a change of assessment decision. However, in limited circumstances, a person with legal authority may represent a party to an assessment in this process (for further information see <a href="../../2/6/5">2.6.5</a>).</p>
+</ul><p>In limited circumstances, a person with power of attorney or legal authority may also apply for a change of assessment in the name of the parent or represent the parent during the change of assessment process.</p>
 <h2 id="interpreters">Interpreters &amp; telephone assistance services</h2>
-<p>DHS uses interpreters and telephone assistance services to help communicate with parents and carers in the child support scheme, where appropriate. Such services do not involve representation, but enable DHS to better communicate with the parents and carers with whom it deals. DHS must be satisfied that any interpreter or translator is only relaying the conversation between DHS and the person, and not interposing their own views or altering the information.</p>
-<p>Where the National Relay Service or Telephone Interpreter Service is used, translation only will occur. Where, for example, a parent wants a relative or friend to act as their translator, and it is clear that more than mere translation is occurring, DHS will treat that person as a representative and require specific authorisation from the parent.</p>
-<p>The National Relay Service (NRS), operated by Australian Communication Exchange Ltd, is a service that allows people who are deaf, or have a speech, hearing or other communication impairment, to communicate with other people over the telephone. They can do this by typing a message on a keyboard of a telephone typewriter (TTY). The message is sent to a TTY at the NRS. An NRS Operator will relay the conversation between the TTY user and the voice telephone user.</p>
-<p>The NRS is bound by confidentiality and privacy principles. The NRS is contacted by the user on their general number 13 3677. The NRS operator will then dial DHS and introduce themselves. Thereafter, the operator speaks only the words of the TTY user. Similarly, if DHS wishes to contact a parent using the NRS, DHS will call the same general number, and ask for the call to be placed to the parent.</p>
-<p>A DHS staff member contacted by a parent using the NRS should initially note the name of the NRS operator and time of the call. The staff member should then proceed to establish proof of identity of the caller in the usual manner. Similarly, where a staff member needs to contact a parent who uses NRS, DHS will call the NRS, and ask for the call to be relayed to the parent. Proof of identity procedures should then be followed once the parent has accepted the communication mode.</p>
-<p>The Telephone Interpreter Service (TIS) is another service that DHS and parents use to help communicate. Providing the parent has given the staff member consent to use the TIS to communicate and can satisfy the proof of identity requirements, DHS will deal with the parent through the TIS as though dealing with the parent directly.</p>
+<p>Services Australia may use interpreters and telephone assistance services to help communicate with parents and carers in the child support scheme. Such services do not involve representation, but enable Services Australia to better communicate with parents and carers. Services Australia must be satisfied that any interpreter or translator is only relaying the conversation between Services Australia and the person, and not interposing their own views or altering the information.</p>
+<p>Where the National Relay Service (NRS) or Telephone Interpreter Service is used, translation only will occur. Where, for example, a parent wants a relative or friend to act as their translator, and it is clear that more than mere translation is occurring, Services Australia will treat that person as a representative and require specific authorisation from the parent.</p>
+<p>The NRS is a service that allows people who are deaf, or have a speech, hearing or other communication impairment, to communicate with other people over the telephone. The NRS is bound by confidentiality and privacy principles.</p>
+<p>A Services Australia staff member contacted by a parent using the NRS should initially note the name of the NRS operator and time of the call. The staff member should then proceed to establish proof of identity of the caller in the usual manner. Similarly, where a staff member needs to contact a parent who uses NRS, Services Australia will call the NRS, and ask for the call to be relayed to the parent. Proof of identity procedures should then be followed once the parent has accepted the communication mode.</p>
+<p>The Telephone Interpreter Service (TIS) is another service that Services Australia and parents use to help communicate. Providing the parent has given the staff member consent to use the TIS to communicate and can satisfy the proof of identity requirements, Services Australia will deal with the parent through the TIS as though dealing with the parent directly.</p>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     4 January 2016  	</div>
+      Last reviewed:     10 February 2020  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../contact-us">Contact us</a></li>
@@ -185,8 +193,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
-<script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_IkilKWehdX07Wbi3Cg-T6yf5sLTu5FfOT2__edFF9eM.js"></script>
+<script type="text/javascript" src="https://cdn1.readspeaker.com/script/5931/webReader/webReader.js?pids=wr&amp;notools=1&amp;disable=popupplayback&amp;qrxyi9"></script>
 </body>
 </html>

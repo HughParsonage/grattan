@@ -5,7 +5,7 @@
 \alias{lf_inflator_fy}
 \title{Labour force inflators}
 \source{
-ABS Cat 6202.0 \url{http://www.abs.gov.au/ausstats/abs@.nsf/mf/6202.0?OpenDocument}.
+ABS Cat 6202.0 \url{https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia/latest-release}.
 }
 \usage{
 lf_inflator_fy(
@@ -41,7 +41,7 @@ If both \code{from_fy} and \code{to_fy} are \code{NULL} (the default), \code{fro
 If the SDMX connection fails, a message is emitted (not a warning) and
 the function contines as if \code{useABSConnection = FALSE}.
 
-The internal data was updated on 2020-07-02 to 2020-05-01.}
+The internal data was updated on 2021-07-12 to 2021-05-01.}
 
 \item{allow.projection}{Logical. Should projections be allowed?}
 
@@ -71,7 +71,8 @@ The relative labour force between \code{to_date} and \code{for_date}
 or \code{to_fy} and \code{from_fy}, multiplied by \code{labour_force}.
 }
 \description{
-Labour force inflators
+This function's behaviour has changed due to COVID-19. In particular,
+the trend labour force status is no longer available.
 }
 \details{
 \code{lf_inflator} is used on dates. The underlying data series is available every month.

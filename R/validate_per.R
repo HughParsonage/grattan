@@ -23,7 +23,7 @@
 #' z(per = "sidfh")      # error
 #' }
 #' 
-#' 
+#' @noRd
 
 validate_per <- function(per, missing_per, .fortnights_per_yr = 26) {
   if (missing_per) {

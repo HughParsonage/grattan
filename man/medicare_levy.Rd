@@ -7,33 +7,54 @@
 medicare_levy(
   income,
   fy.year = "2013-14",
-  Spouse_income = 0,
+  Spouse_income = 0L,
   sapto.eligible = FALSE,
   sato = NULL,
   pto = NULL,
   family_status = "individual",
-  n_dependants = 0,
-  .checks = TRUE
+  n_dependants = 0L,
+  is_married = NULL,
+  .checks = FALSE
 )
 }
 \arguments{
-\item{income}{The taxable income. A vector of numeric values.}
+\item{income}{\describe{
+\item{\code{numeric(N)}}{The income for medicare levy purposes of the taxpayer.}
+}}
 
-\item{fy.year}{The financial year. A character vector satisfying \code{is.fy}.}
+\item{fy.year}{\describe{
+\item{\code{character(1)} or \code{character(N)} or \code{fy(N)} or \code{fy(1)}}{
+The tax year in which \code{income} was earned. A vector satisfying \code{fy::validate_fys_permitted}.}
+}}
 
-\item{Spouse_income}{The spouse's adjusted income.}
+\item{Spouse_income}{\describe{
+\item{\code{numeric(1)} or \code{numeric(N)}}{The income of the taxpayer's spouse. Missing values are
+imputed to zeroes. Values are truncated to integer.}
+}}
 
-\item{sapto.eligible}{(logical) Is the taxpayer eligible for SAPTO? See Details.}
+\item{sapto.eligible}{\describe{
+\item{\code{logical(1)} or \code{logical(N)}}{Is the taxpayer entitled to the SAPTO thresholds? Missing
+values are imputed to \code{FALSE}.}
+}}
 
-\item{sato}{Is the taxpayer eligible for the Senior Australians Tax Offset?}
+\item{sato, pto}{Is the taxpayer eligible for the Senior Australians Tax Offset or Pensions Tax Offset?
+\code{pto = TRUE} not supported and will be set to \code{FALSE}, with a warning.}
 
-\item{pto}{Is the taxpayer eligible for the Pensions Tax Offset?}
+\item{family_status}{(Deprecated: use `is_married` and `n_dependants` instead)}
 
-\item{family_status}{What is the taxpayer's family status: family or individual?}
+\item{n_dependants}{\describe{
+\item{\code{integer(N)} or \code{integer(1)}}{Number of dependants the taxpayer has. If nonzero, 
+the taxpayer is entitled to the family thresholds of the Medicare levy, and
+each dependant child increases the thresholds.}
+}}
 
-\item{n_dependants}{Number of children dependant on the taxpayer.}
+\item{is_married}{\describe{
+\item{\code{logical(N)}}{Is the taxpayer married? Married individuals (or those 
+whose \code{Spouse_income > 0}) are deemed to be families when determining 
+cut-off thresholds.}
+}}
 
-\item{.checks}{Should checks of certain arguments be made? Provided to improve performance when checks are not necessary.}
+\item{.checks}{Whether or not to perform checks on inputs.}
 }
 \value{
 The Medicare levy payable for that taxpayer.
@@ -50,9 +71,10 @@ s 8 \emph{Amount of levy---person who has spouse or dependants} (though the numb
 is not a variable in the sample files).
 
 The function does \strong{not} include the Medicare levy surcharge; it assumes that all 
-persons (who would potentially be liable for it) avoided it.#' 
+persons (who would potentially be liable for it) avoided it.
 
-The Seniors and Pensioners Tax Offset was formed in 2012-13 as an amalgam of the Senior Australians Tax Offset and the Pensions Tax Offset. 
+The Seniors and Pensioners Tax Offset was formed in 2012-13 as an amalgam
+ of the Senior Australians Tax Offset and the Pensions Tax Offset. 
 Medicare rates before 2012-13 were different based on these offsets. 
 For most taxpayers, eligibility would be based on whether your age is over the pension age (currently 65).
 If \code{sato} and \code{pto} are \code{NULL}, \code{sapto.eligible} stands for eligibility for the \code{sato} and not \code{pto}.

@@ -2,15 +2,43 @@
 #' 
 #' @description The (actual) amount payable for the Medicare levy.
 #' 
-#' @param income The taxable income. A vector of numeric values.
-#' @param fy.year The financial year. A character vector satisfying \code{is.fy}.
-#' @param Spouse_income The spouse's adjusted income.
-#' @param sapto.eligible (logical) Is the taxpayer eligible for SAPTO? See Details.
-#' @param sato Is the taxpayer eligible for the Senior Australians Tax Offset?
-#' @param pto Is the taxpayer eligible for the Pensions Tax Offset?
-#' @param family_status What is the taxpayer's family status: family or individual?
-#' @param n_dependants Number of children dependant on the taxpayer.
-#' @param .checks Should checks of certain arguments be made? Provided to improve performance when checks are not necessary.
+#' @param income 
+#' \describe{
+#' \item{\code{numeric(N)}}{The income for medicare levy purposes of the taxpayer.}
+#' }
+#' @param fy.year 
+#' \describe{
+#' \item{\code{character(1)} or \code{character(N)} or \code{fy(N)} or \code{fy(1)}}{
+#' The tax year in which \code{income} was earned. A vector satisfying \code{fy::validate_fys_permitted}.}
+#' }
+#' 
+#' @param Spouse_income 
+#' \describe{
+#' \item{\code{numeric(1)} or \code{numeric(N)}}{The income of the taxpayer's spouse. Missing values are
+#' imputed to zeroes. Values are truncated to integer.}
+#' }
+#' @param sapto.eligible 
+#' \describe{
+#' \item{\code{logical(1)} or \code{logical(N)}}{Is the taxpayer entitled to the SAPTO thresholds? Missing
+#' values are imputed to \code{FALSE}.}
+#' }
+#' 
+#' @param sato,pto Is the taxpayer eligible for the Senior Australians Tax Offset or Pensions Tax Offset?
+#' \code{pto = TRUE} not supported and will be set to \code{FALSE}, with a warning.
+#' @param family_status (Deprecated: use `is_married` and `n_dependants` instead)
+#' @param n_dependants \describe{
+#' \item{\code{integer(N)} or \code{integer(1)}}{Number of dependants the taxpayer has. If nonzero, 
+#' the taxpayer is entitled to the family thresholds of the Medicare levy, and
+#' each dependant child increases the thresholds.}
+#' }
+#' @param is_married \describe{
+#' \item{\code{logical(N)}}{Is the taxpayer married? Married individuals (or those 
+#' whose \code{Spouse_income > 0}) are deemed to be families when determining 
+#' cut-off thresholds.}
+#' }
+#' 
+#' @param .checks Whether or not to perform checks on inputs.
+#' 
 #' @return The Medicare levy payable for that taxpayer.
 #' @details The Medicare levy for individuals is imposed by the \emph{Medicare Levy Act 1986} (Cth).
 #' The function only calculates the levy for individuals (not trusts).
@@ -20,9 +48,10 @@
 #' is not a variable in the sample files).
 #' 
 #' The function does \strong{not} include the Medicare levy surcharge; it assumes that all 
-#' persons (who would potentially be liable for it) avoided it.#' 
+#' persons (who would potentially be liable for it) avoided it.
 #' 
-#' The Seniors and Pensioners Tax Offset was formed in 2012-13 as an amalgam of the Senior Australians Tax Offset and the Pensions Tax Offset. 
+#' The Seniors and Pensioners Tax Offset was formed in 2012-13 as an amalgam
+#'  of the Senior Australians Tax Offset and the Pensions Tax Offset. 
 #' Medicare rates before 2012-13 were different based on these offsets. 
 #' For most taxpayers, eligibility would be based on whether your age is over the pension age (currently 65).
 #' If \code{sato} and \code{pto} are \code{NULL}, \code{sapto.eligible} stands for eligibility for the \code{sato} and not \code{pto}.
@@ -37,88 +66,56 @@
 
 medicare_levy <- function(income, 
                           fy.year = "2013-14",
-                          Spouse_income = 0,
+                          Spouse_income = 0L,
                           sapto.eligible = FALSE,
                           sato = NULL,
                           pto = NULL,
                           family_status = "individual", 
-                          n_dependants = 0, 
-                          .checks = TRUE){
-  if (.checks) {
-    fy.year <- validate_fys_permitted(fy.year)
-    stopifnot(all(family_status %in% c("family", "individual")))
-    prohibit_vector_recycling(income, fy.year, family_status, Spouse_income, sapto.eligible, n_dependants)
-  }
-  if (any(Spouse_income > 0 & family_status == "individual")) {
-    stop("If Spouse_income is nonzero, family_status cannot be 'individual'.")
-  }
+                          n_dependants = 0L,
+                          is_married = NULL,
+                          .checks = FALSE) {
+  fy.year <- validate_fys_permitted(fy.year)
+  N <- length(income)
   
-  # If sapto.eligible = TRUE, sato = TRUE, pto = FALSE
-  stopifnot(is.null(sato) || is.logical(sato), 
-            is.null(pto)  || is.logical(pto))
-  
-  # Allow a join on a complete sato, pto, sapto key
-  # To do this we need to make sato = sapto.eligible
-  # and pto = !sato when required. 
-  if (is.null(sato) && is.null(pto)) {
-    sato <- sapto.eligible
-    pto <- sapto.eligible & !sato
+  # A person is entitled to the family thresholds if they are married
+  # their spouse has nonzero income or they have children.
+  if (missing(family_status)) {
+    # Assume to be (all) individuals (unmarried, no children)
+    is_married <- is_married %||% logical(N)
+    n_dependants <- n_dependants %||% integer(N)
   } else {
-    if (is.null(sato)){
+    warning("argument `family_status` is deprecated. Use `is_married` and `n_dependants` instead.")
+    is_married <- is_married %||% rep_len(family_status != "individual", N)
+    n_dependants <- n_dependants %||% integer(N)
+  }
+  
+  if (!is.null(sato) || !is.null(pto)) {
+    # sato and pto are not really supported but we assume that sato and
+    # sapto are the same thing, and warn if pto is provided.
+    if (is.null(sato) && !is.null(pto)) {
       sato <- !pto
-    } else {
-      if (is.null(pto)){
-        pto <- !sato
-      }
+    }
+    if (is.null(pto) && !is.null(sato)) {
+      pto <- !sato
     }
     if (any(sato & pto)) {
-      stop("pto and sato must not both be TRUE")
+      stop("`pto` and `sato` must not both be TRUE. First bad position: ",
+           which.max(sato & pto), ".")
     }
     sapto.eligible <- sato | pto
     if (any(pto)){
-      warning("pto assumed to be FALSE")
+      warning("`pto` includes TRUE values but will be assumed to be FALSE")
     }
   }
   
+  Spouse_income <- do_rN(Spouse_income, N)
+  n_dependants <- do_rN(n_dependants, N)
   
-  income_share <- NULL
-  
-  # It is no faster in the case of single-length fy.year
-  # or sapto.eligble etc and then selecting the table as required. 
-  # if (AND(length(fy.year) == 1L,
-  #         AND(length(sapto.eligible) == 1L,
-  
-  input_with_parameters <-
-    data.table(income = income, 
-               Spouse_income = Spouse_income,
-               fy_year = fy.year,
-               sapto = sapto.eligible, 
-               sato = sato, 
-               pto = pto,
-               family_status = family_status) %>%
-    # Assume spouse income is included irrespective of Partner_status
-    # This appears to be the correct treatment (e.g. if the Partner dies 
-    # before the end of the tax year, they would have status 0 but 
-    # income that is relevant for medicare income).  There are details
-    # (such as if the partner is in gaol) that are overlooked here.
-    # 
-    # Enhancement: family taxable income should exclude super lump sums.
-    .[, family_income := income + Spouse_income ] %>%
-    medicare_tbl[., on = c("fy_year", "sapto", "sato", "pto")]
-    
-  input_with_parameters %>%
-    # Person who has spouse or dependants
-    ## subs.8(5) of Act
-    .[, lower_family_threshold := lower_family_threshold + n_dependants * lower_up_for_each_child] %>%
-    .[, upper_family_threshold := upper_family_threshold + n_dependants * lower_up_for_each_child] %>%
-    .[, income_share := if_else(Spouse_income > 0, income / (income + Spouse_income), 1)] %>%
-    # Levy in the case of small incomes (s.7 of Act)
-    .[, if_else(and(family_status == "family",
-                    and(family_income <= upper_family_threshold,
-                        income > lower_threshold)),
-                # subs.8(2)(c) of Medicare Levy Act 1986
-                income_share * pminV(pmax0(taper * (family_income - lower_family_threshold)),
-                                     rate * family_income),
-                pminV(pmax0(taper * (income - lower_threshold)), 
-                      rate * income))]
+  do_medicare_levy(income = income, 
+                   yr = fy2yr(fy.year),
+                   spouse_income = Spouse_income, 
+                   sapto_eligible = sapto.eligible,
+                   is_married = is_married,
+                   n_dependants = n_dependants,
+                   sapto_const = hutilscpp::is_constant(sapto.eligible))
 }

@@ -2,27 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<link rel="shortlink" href="../../../../node/6549" />
-<link rel="canonical" href="31" />
-<meta name="viewport" content="width=device-width" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>3.1.1.31 Shared Care Rate Calculation | Family Assistance Guide</title>
-<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<meta name="viewport" content="width=device-width" />
+<link rel="canonical" href="31" />
+<link rel="shortlink" href="../../../../node/6549" />
+<title>3.1.1.31 Shared care rate calculation | Family Assistance Guide</title>
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_Q4XrxgEkbadGDm1J7AHUHHmbcMJ2_hbMfrrzrm9Ne_I.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
-<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
-<script type="text/javascript" src="../../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
-<script type="text/javascript" src="../../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
-<script type="text/javascript" src="../../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../../sites/default/files/css/css_d905I2WxoGGQW6uS7jkC73mqKhSejey6jciEdxo9cJI.css" media="all" />
+<script type="text/javascript" src="../../../../sites/default/files/js/js_yMSKTzBO0KmozyLwajzFOrrt_kto_9mtccAkb0rm7gc.js"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_FA2YSy0R3kB2AU_wIOLoSR0sJX4ZYjdPuPaRFd2ZDyw.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+window.rsConf = { ui: { tools: {translation: false, dictionary: false}}};
 //--><!]]>
 </script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_rsGiM5M1ffe6EhN-RnhM5f3pDyJ8ZAPFJNKpfjtepLk.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_-oEDdwe4XpUqUj4W0KJs96ENaXIrGvjBvIP-WYYBi54.js"></script>
 <script type="text/javascript" src="../../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"4Ri9Gw873sipH2qhFctIyuhAsYpozrMo_ILIVibfVoM","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/family-assistance-guide\/3\/1\/1\/31":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"BEZX48-LdtHSfrEhnoKtClE32vP-r8BykzLnY3ueUnw","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"https:\/\/cdn1.readspeaker.com\/script\/5931\/webReader\/webReader.js?pids=wr\u0026notools=1\u0026disable=popupplayback":1,"misc\/jquery.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"0":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"1":1,"sites\/all\/modules\/extlink\/js\/extlink.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/family-assistance-guide\/3\/1\/1\/31":true},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)","extUseFontAwesome":false}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -35,84 +40,85 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <nav id="global">
 	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
 <div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<ul class="menu"><li class="first leaf has-children menu-mlid-489"><a href="../../../../guide-social-security-law.1">Social Security Guide</a></li>
+<li class="leaf has-children active-trail menu-mlid-491"><a href="../../../../family-assistance-guide.1" class="active-trail">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-490"><a href="../../../../paid-parental-leave-guide.1">Paid Parental Leave Guide</a></li>
+<li class="leaf has-children menu-mlid-513"><a href="../../../../child-support-guide.1">Child Support Guide</a></li>
+<li class="leaf menu-mlid-7596"><a href="../../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
 <li class="leaf menu-mlid-7597"><a href="../../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
-<li class="leaf has-children menu-mlid-513"><a href="../../../../child-support-guide">Child Support Guide</a></li>
-<li class="leaf has-children active-trail menu-mlid-491"><a href="../../../../family-assistance-guide" class="active-trail">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../../guide-social-security-law">Guide to Social Security Law</a></li>
-<li class="last leaf has-children menu-mlid-490"><a href="../../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+<li class="last leaf has-children menu-mlid-19951"><a href="../../../../national-redress-guide" title="">National Redress Guide</a></li>
 </ul></div></nav>
 <header role="banner">
 	<a href="../../../../index.html" rel="home"><img src="../../../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
 <p class="site-name">Guides to Social Policy Law</p>
 <form class="search-form" role="search" action="31" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
- <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+ <input class="custom-search-box form-text" placeholder="Search" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-wQi3qU6C4BPNFJFbJClRONeyUGdPFNz9Qu-QVY_pWjQ" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-yUZtvJf9yfflBJwtHS3lwHL_MtgMGziiU-RhgEJbyrw" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Family Assistance Guide</h2>
-<p>Version 1.203 - Released 7 May 2018</p>
+<p>Version 1.230 - Released 1 July 2021</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7283"><a href="../../../../family-assistance-guide" title="">Using the Family Assistance Guide</a></li>
-<li class="collapsed menu-mlid-2274"><a href="../../../updates">What&#039;s New</a></li>
-<li class="collapsed menu-mlid-2266"><a href="../../../1">1 Key Terms &amp; Principles</a></li>
-<li class="collapsed menu-mlid-2267"><a href="../../../2">2 Eligibility</a></li>
-<li class="expanded active-trail menu-mlid-2268"><a href="../../../3" class="active-trail">3 Rate Calculation</a><ul class="menu"><li class="first expanded active-trail menu-mlid-1826"><a href="../../1" class="active-trail">3.1 FTB Rate Calculation</a><ul class="menu"><li class="first expanded active-trail menu-mlid-1815"><a href="../1" class="active-trail">3.1.1 Rate Provisions for FTB</a><ul class="menu"><li class="first leaf menu-mlid-1804"><a href="10">3.1.1.10 Calculating a Rate of FTB - Overview</a></li>
-<li class="leaf menu-mlid-1805"><a href="20">3.1.1.20 Current FTB Rates &amp; Income Test Amounts</a></li>
-<li class="leaf menu-mlid-1806"><a href="25">3.1.1.25 Current ES Rates</a></li>
-<li class="leaf menu-mlid-1807"><a href="30">3.1.1.30 Shared Care Rate for FTB</a></li>
-<li class="leaf active-trail active menu-mlid-1808"><a href="31" class="active-trail active">3.1.1.31 Shared Care Rate Calculation</a></li>
-<li class="leaf menu-mlid-1809"><a href="32">3.1.1.32 Sharing FTB in Blended Families</a></li>
-<li class="leaf menu-mlid-1811"><a href="34">3.1.1.34 Sharing FTB for Separated Couples</a></li>
-<li class="leaf menu-mlid-1812"><a href="40">3.1.1.40 Calculating FTB Bereavement Payment</a></li>
-<li class="leaf menu-mlid-1813"><a href="50">3.1.1.50 FTB Payments During Absence from Australia before 1 July 2016</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7283"><a href="../../../../family-assistance-guide.1" title="">Using the Family Assistance Guide</a></li>
+<li class="collapsed menu-mlid-2274"><a href="../../../updates.1">What&#039;s new</a></li>
+<li class="collapsed menu-mlid-2266"><a href="../../../1.1">1 Key terms &amp; principles</a></li>
+<li class="collapsed menu-mlid-2267"><a href="../../../2.1">2 Eligibility</a></li>
+<li class="expanded active-trail menu-mlid-2268"><a href="../../../3.1" class="active-trail">3 Rate calculation</a><ul class="menu"><li class="first expanded active-trail menu-mlid-1826"><a href="../../1.1" class="active-trail">3.1 FTB rate calculation</a><ul class="menu"><li class="first expanded active-trail menu-mlid-1815"><a href="../1.1" class="active-trail">3.1.1 Rate provisions for FTB</a><ul class="menu"><li class="first leaf menu-mlid-1804"><a href="10">3.1.1.10 Calculating a rate of FTB - overview</a></li>
+<li class="leaf menu-mlid-1805"><a href="20">3.1.1.20 Current FTB rates &amp; income test amounts</a></li>
+<li class="leaf menu-mlid-1806"><a href="25">3.1.1.25 Current ES rates</a></li>
+<li class="leaf menu-mlid-1807"><a href="30">3.1.1.30 Shared care rate for FTB</a></li>
+<li class="leaf active-trail active menu-mlid-1808"><a href="31" class="active-trail active">3.1.1.31 Shared care rate calculation</a></li>
+<li class="leaf menu-mlid-1809"><a href="32">3.1.1.32 Sharing FTB in blended families</a></li>
+<li class="leaf menu-mlid-1811"><a href="34">3.1.1.34 Sharing FTB for separated couples</a></li>
+<li class="leaf menu-mlid-1812"><a href="40">3.1.1.40 Calculating FTB bereavement payment</a></li>
+<li class="leaf menu-mlid-1813"><a href="50">3.1.1.50 FTB payments during absence from Australia before 1 July 2016</a></li>
 <li class="last leaf menu-mlid-1814"><a href="60">3.1.1.60 Indexation of FTB</a></li>
 </ul></li>
-<li class="leaf menu-mlid-1818"><a href="../2">3.1.2 FTB Rate for ACOs</a></li>
-<li class="leaf menu-mlid-1819"><a href="../3">3.1.3 Apportioning Income Test Reductions between FTB Part A Components</a></li>
-<li class="collapsed menu-mlid-1820"><a href="../4">3.1.4 FTB Part A Rate Calculation - Method 1</a></li>
-<li class="collapsed menu-mlid-1821"><a href="../5">3.1.5 Maintenance Action Test for FTB Part A</a></li>
-<li class="collapsed menu-mlid-1822"><a href="../6">3.1.6 Child Support Assessments &amp; Agreements</a></li>
-<li class="collapsed menu-mlid-1823"><a href="../7">3.1.7 Maintenance Income Test</a></li>
-<li class="collapsed menu-mlid-1824"><a href="../8">3.1.8 FTB Part A Rate Calculation - Method 2</a></li>
-<li class="collapsed menu-mlid-1825"><a href="../9">3.1.9 FTB Part B Rate Calculation</a></li>
+<li class="leaf menu-mlid-1818"><a href="../2">3.1.2 FTB rate for ACOs</a></li>
+<li class="leaf menu-mlid-1819"><a href="../3">3.1.3 Apportioning income test reductions between FTB Part A components</a></li>
+<li class="collapsed menu-mlid-1820"><a href="../4.1">3.1.4 FTB Part A rate calculation - Method 1</a></li>
+<li class="collapsed menu-mlid-1821"><a href="../5.1">3.1.5 Maintenance action test for FTB Part A</a></li>
+<li class="collapsed menu-mlid-1822"><a href="../6.1">3.1.6 Child support assessments &amp; agreements</a></li>
+<li class="collapsed menu-mlid-1823"><a href="../7.1">3.1.7 Maintenance income test</a></li>
+<li class="collapsed menu-mlid-1824"><a href="../8.1">3.1.8 FTB Part A rate calculation - Method 2</a></li>
+<li class="collapsed menu-mlid-1825"><a href="../9.1">3.1.9 FTB Part B rate calculation</a></li>
 <li class="leaf menu-mlid-1816"><a href="../10">3.1.10 Number not currently in use</a></li>
-<li class="last leaf menu-mlid-1817"><a href="../11">3.1.11 Advance Payment of FTB Part A</a></li>
+<li class="last leaf menu-mlid-1817"><a href="../11">3.1.11 Advance payment of FTB Part A</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-1829"><a href="../../2">3.2 Adjusted Taxable Income</a></li>
+<li class="collapsed menu-mlid-1829"><a href="../../2.1">3.2 Adjusted taxable income</a></li>
 <li class="leaf menu-mlid-1830"><a href="../../3">3.3 Number not currently in use</a></li>
 <li class="leaf menu-mlid-1831"><a href="../../4">3.4 Number not currently in use</a></li>
-<li class="collapsed menu-mlid-1832"><a href="../../5">3.5 CCB Rate Calculation</a></li>
-<li class="collapsed menu-mlid-1833"><a href="../../6">3.6 Historical Rates</a></li>
-<li class="collapsed menu-mlid-1837"><a href="../../7">3.7 JETCCFA Rate Calculation</a></li>
-<li class="collapsed menu-mlid-1834"><a href="../../8">3.8 CCR Rate Calculation</a></li>
-<li class="leaf menu-mlid-1835"><a href="../../9">3.9 SKB Rate</a></li>
-<li class="leaf menu-mlid-1827"><a href="../../10">3.10 Determining the SIFS Rate</a></li>
-<li class="leaf menu-mlid-1836"><a href="../../11">3.11 NBS Rate</a></li>
-<li class="last leaf menu-mlid-1828"><a href="../../12">3.12 SBP Rate</a></li>
+<li class="collapsed menu-mlid-1832"><a href="../../5.1">3.5 CCS entitlement</a></li>
+<li class="collapsed menu-mlid-1833"><a href="../../6.1">3.6 Historical rates</a></li>
+<li class="collapsed menu-mlid-1837"><a href="../../7.1">3.7 ACCS rate calculation</a></li>
+<li class="leaf menu-mlid-1834"><a href="../../8.1">3.8 Number not currently in use</a></li>
+<li class="leaf menu-mlid-1835"><a href="../../9">3.9 Number not currently in use</a></li>
+<li class="leaf menu-mlid-1827"><a href="../../10">3.10 Determining the SIFS rate</a></li>
+<li class="leaf menu-mlid-1836"><a href="../../11">3.11 NBS rate</a></li>
+<li class="last leaf menu-mlid-1828"><a href="../../12">3.12 SBP rate</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-2269"><a href="../../../4">4 Claims &amp; Payments</a></li>
-<li class="collapsed menu-mlid-2270"><a href="../../../5">5 Gathering Information</a></li>
-<li class="collapsed menu-mlid-2271"><a href="../../../6">6 Review &amp; Reconciliation</a></li>
-<li class="collapsed menu-mlid-2272"><a href="../../../7">7 Debts</a></li>
-<li class="collapsed menu-mlid-2273"><a href="../../../8">8 Transitional Arrangements</a></li>
-<li class="leaf menu-mlid-2264"><a href="../../../acronyms">Acronym List</a></li>
-<li class="leaf menu-mlid-7296"><a href="../../../keywords">Keyword Index</a></li>
-<li class="leaf menu-mlid-7371"><a href="../../../act-references">Act Reference Index</a></li>
-<li class="last leaf menu-mlid-7169"><a href="../../../sitemap">Site Map</a></li>
+<li class="collapsed menu-mlid-2269"><a href="../../../4.1">4 Claims &amp; payments</a></li>
+<li class="collapsed menu-mlid-2270"><a href="../../../5.1">5 Gathering information</a></li>
+<li class="collapsed menu-mlid-2271"><a href="../../../6.1">6 Review &amp; reconciliation</a></li>
+<li class="collapsed menu-mlid-2272"><a href="../../../7.1">7 Debts</a></li>
+<li class="collapsed menu-mlid-2273"><a href="../../../8.1">8 Transitional arrangements</a></li>
+<li class="leaf menu-mlid-2264"><a href="../../../acronyms">Acronym list</a></li>
+<li class="leaf menu-mlid-7296"><a href="../../../keywords.1" title="">Keyword index</a></li>
+<li class="leaf menu-mlid-7371"><a href="../../../act-references.1" title="">Act reference index</a></li>
+<li class="last leaf menu-mlid-7169"><a href="../../../sitemap">Site map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../../../index.html">Home</a> &raquo; <a href="../../../../family-assistance-guide">Family Assistance Guide</a> &raquo; <a href="../../../3" class="active-trail">3 Rate Calculation</a> &raquo; <a href="../../1" class="active-trail">3.1 FTB Rate Calculation</a> &raquo; <a href="../1" class="active-trail">3.1.1 Rate Provisions for FTB</a> &raquo; 3.1.1.31 Shared Care Rate Calculation</div>
+	<div id="breadcrumb"><a href="../../../../index.html">Home</a> &raquo; <a href="../../../../family-assistance-guide.1">Family Assistance Guide</a> &raquo; <a href="../../../3.1" class="active-trail">3 Rate calculation</a> &raquo; <a href="../../1.1" class="active-trail">3.1 FTB rate calculation</a> &raquo; <a href="../1.1" class="active-trail">3.1.1 Rate provisions for FTB</a> &raquo; 3.1.1.31 Shared care rate calculation</div>
 <div id="utility">
 	
-<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/family-assistance-guide/3/1/1/31"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="readspeaker_button" class="rs_skip rsbtn rs_preserve"><a rel="nofollow" class="rsbtn_play" href="https://app-oc.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=https://guides.dss.gov.au/family-assistance-guide/3/1/1/31"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsbtn_right rsimg rsplay rspart"></span></a></div></div>
 <div id="content" role="main">
 <article id="node-6549">
-<h1 >3.1.1.31 Shared Care Rate Calculation</h1>
+<h1 >3.1.1.31 Shared care rate calculation</h1>
 <h2>Summary</h2>
 <p>This topic provides an example of the shared care rate calculation for <a href="../../../acronyms#ftb" title="Family tax benefit">FTB</a> Part A and FTB Part B where an individual shares the care of their FTB child with another individual who is not their partner.</p>
 <p><strong>Note:</strong> From 1 July 2008, the term 'shared care' only applies where an individual has care of an FTB child between 35% and 65% of the relevant care period. An FTB shared care percentage will be used to work out an individual's FTB Part A rate. The FTB shared care percentage will be worked out as shown in the table below:</p>
@@ -147,11 +153,11 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <td>100%</td>
 </tr></tbody></table><p>The rate calculations are used to illustrate the principles of sharing a rate. See the references given below for more detailed information about applying the FTB income tests for FTB Part A Method 1 and Method 2 and FTB Part B.</p>
 <div class="reference">
-<p><strong>Policy reference:</strong> FA Guide <a href="20">3.1.1.20</a> Current FTB Rates &amp; Income Test Amounts, <a href="../4">3.1.4</a> FTB Part A Rate Calculation - Method 1, <a href="../8">3.1.8</a> FTB Part A Rate Calculation - Method 2, <a href="../9">3.1.9</a> FTB Part B Rate Calculation, <a href="../7">3.1.7</a> Maintenance Income Test</p>
+<p><strong>Policy reference:</strong> FA Guide <a href="20">3.1.1.20</a> Current FTB rates &amp; income test amounts, <a href="../4.1">3.1.4</a> FTB Part A rate calculation - Method 1, <a href="../8.1">3.1.8</a> FTB Part A rate calculation - Method 2, <a href="../9.1">3.1.9</a> FTB Part B rate calculation, <a href="../7.1">3.1.7</a> Maintenance income test</p>
 </div>
 <h2>Example - calculating shared care FTB rate</h2>
-<p>Hilary has 2 FTB children, Daniel aged 3, and Jessica aged 5. Hilary has full care of Jessica, and shares the care of Daniel with her ex-partner Matt. Her percentage of care for Daniel has been determined to be 58%. Hilary's <a href="../../../acronyms#ati" title="Adjusted taxable income">ATI</a> is $5,692, and her combined ATI with her current partner is $98,000.</p>
-<p>The following tables show how to calculate Hilary's rate of FTB Part A and FTB Part B.</p>
+<p>Hilary has 2 FTB children, Daniel aged 3, and Jessica aged 5. Hilary has full care of Jessica, and shares the care of Daniel with her ex-partner Matt. Her percentage of care for Daniel has been determined to be 58%. Hilary's <a href="../../../acronyms#ati" title="Adjusted taxable income">ATI</a> is $5,911, and her combined ATI with her current partner is $100,000.</p>
+<p>The following tables show how to calculate Hilary's rate of FTB Part A and FTB Part B. As Hilary's combined ATI is greater that the higher income free area, her rate of FTB Part A will be calculated using Method 2. However, as Step 3 of Method 2 requires a comparative adjusted Method 1 calculation, the Method 1 FTB child rates have also been calculated. The higher of the 2 rates calculated under adjusted Method 1 and Method 2 will be Hilary's rate.</p>
 <table><thead><tr><th colspan="3" scope="col">FTB Part A rate</th>
 </tr><tr><th scope="col">Step</th>
 <th scope="col">Action</th>
@@ -159,11 +165,11 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 </tr></thead><tbody><tr><td>1</td>
 <td>
 <p>Determine the FTB child rate (<a href="../../../1/1/f/57">1.1.F.57</a>) for each child under Method 1 and Method 2.</p>
-<p><strong>Note:</strong> This calculation uses maximum and base standard rates as at 1 July 2016.</p>
+<p><strong>Note:</strong> This calculation uses maximum and base standard rates as at 1 July 2019.</p>
 </td>
 <td>
-<p>Method 1 $4,766.90</p>
-<p>Method 2 $1,529.35 each for Daniel and Jessica</p>
+<p>Method 1 $4,854.50</p>
+<p>Method 2 $1,558.55 each for Daniel and Jessica</p>
 </td>
 </tr><tr><td>2</td>
 <td>Determine percentage of care for Daniel.</td>
@@ -173,17 +179,19 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <td>Hilary 61%; Matt 39%</td>
 </tr><tr><td>4</td>
 <td>Multiply the rate for Daniel by Hilary's FTB shared care percentage.</td>
-<td>Method 1<br />
-				$4,766.90 × 61% = $2,907.81<br />
-				Method 2<br />
-				$1,529.35 × 61% = $932.90</td>
+<td>
+<p>Method 1<br />
+					$4,854.50 × 61% = $2,961.25</p>
+<p>Method 2<br />
+					$1,558.55 × 61% = $950.72</p>
+</td>
 </tr><tr><td>5</td>
 <td>Add the FTB child rate for Jessica.
 <p>				The result is Hilary's FTB Part A standard rate.</p></td>
 <td>Method 1<br />
-				$2,907.81 + $4,766.90 = $7,674.71<br />
+				$2,961.25 + $4,854.50 = $7,815.75<br />
 				Method 2<br />
-				$932.90 + $1,529.35 = $2,462.25</td>
+				$950.72 + $1,558.55 = $2,509.27</td>
 </tr><tr><td>6</td>
 <td>Determine the <a href="../../../acronyms#es" title="Energy supplement">ES</a> child rate (<a href="25">3.1.1.25</a>) payable for each FTB child of the individual under Method 1 and Method 2.</td>
 <td>Method 1 $91.25<br />
@@ -193,17 +201,19 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <td>
 <p>Method 1<br />
 					Hilary 61% for Daniel<br />
-					$91.25 × 61% = $55.66</p>
-<p>Jessica 100% = $91.25<br />
-					Method 2<br />
+					$91.25 × 61% = $55.66<br />
+					Jessica 100% = $91.25</p>
+<p>Method 2<br />
 					Hilary 61% for Daniel<br />
 					$36.50 × 61% = $22.27<br />
 					Jessica 100% = $36.50</p>
 </td>
 </tr><tr><td>8</td>
 <td>Add the shared care rates payable for all FTB children for the individual. The result is Hilary's ES Part A standard rate.</td>
-<td>Method 1 $146.91<br />
-				Method 2 $58.77</td>
+<td>
+<p>Method 1 $146.91</p>
+<p>Method 2 $58.77</p>
+</td>
 </tr><tr><td>9</td>
 <td>Determine the FTB Part A supplements for Daniel and Jessica.</td>
 <td>Not eligible</td>
@@ -215,54 +225,65 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <td>Not eligible</td>
 </tr><tr><td>12</td>
 <td>Maximum rate (including FTB Part A supplement and ES Part A).</td>
-<td>Method 1 $7,821.62<br />
-				Method 2 $2,521.02</td>
+<td>
+<p>Method 1 $7,962.66</p>
+<p>Method 2 $2,568.04</p>
+</td>
 </tr><tr><td>13</td>
 <td>
 <p>Apply ATI test</p>
-<p>					Method 1<br />
-					- Income excess = ATI less the income free area: $98,000.00 − $51,903.00 = $46,097.00<br />
-					- Reduction for ATI = 20% of the income excess: $46,097.00 × 20% = $9,219.40</p>
-<p>- Income tested rate: $7,821.62 − $9,219.40 = nil</p>
-<p>					Method 2<br />
-					Income excess = ATI less the higher income free area: $98,000.00 − $94,316.00 = $3,684.00</p>
-<p>Apply income reduction: $3,684.00 × 0.3 = $1,105.20</p>
-<p>$2,521.02 − $1,105.20 = $1,415.82</p>
+<p>Adjusted Method 1 (using 30% taper for income above the higher income free area)<br />
+					Calculate income excess<br />
+					- Higher income free area less the income free area: $98,988 − $54,677 = $44,311<br />
+					- Reduction for ATI = 20% of the income excess: $44,311 × 20% = $8,862.20<br />
+					- ATI less the higher income free area: $100,000 -$98,988 = $1,012<br />
+					- Reduction for ATI = 30% of the income excess: $1,012.00 x 30% = $303.60<br />
+					Income excess = $8,862.20 + $303.60 = $9,165.80<br />
+					- Income tested rate: $7,962.66 − $9,165.80 = nil</p>
+<p>Method 2<br />
+					Calculate income excess<br />
+					- ATI less the higher income free area: $100,000 − $98,988 = $1,012<br />
+					- Apply income reduction: $1,012.00 × 30% = $303.60<br />
+					- $2,568.04 − $303.60 = $2,264.44</p>
 </td>
 <td>
 <p>Rate using Method 1 = nil</p>
-<p>Rate using Method 2 = $1,415.82</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>Rate using Method 2 = $2,264.44</p>
 </td>
 </tr><tr><td>14</td>
-<td>Maintenance income test is not applicable as the result for Method 1 is nil.</td>
+<td>Maintenance income test is not applicable as the result of the adjusted Method 1 calculation in step 13 is nil.</td>
 <td>-</td>
 </tr><tr><td>15</td>
 <td>Hilary's rate of FTB Part A is the higher of the rates worked out using Method 1 and Method 2.</td>
-<td>$1,415.82</td>
-</tr></tbody></table><table><thead><tr><th colspan="3" scope="col">FTB Part B rate (3.1.9.10)</th>
+<td>$2,264.44</td>
+</tr></tbody></table><table><thead><tr><th colspan="3" scope="col">FTB Part B rate (<a href="../9/10">3.1.9.10</a>)</th>
 </tr><tr><th scope="col">Step</th>
 <th scope="col">Action</th>
 <th scope="col">Amount</th>
 </tr></thead><tbody><tr><td>1</td>
 <td>Determine standard rate of FTB Part B payable for Jessica as if she was the only FTB child.</td>
-<td>$2,832.40</td>
+<td>$2,883.50</td>
 </tr><tr><td>2</td>
-<td>Determine percentage of care for Daniel</td>
+<td>Determine percentage of care for Daniel.</td>
 <td>Hilary 58%; Matt 42%</td>
 </tr><tr><td>3</td>
-<td>Determine FTB shared care percentages</td>
+<td>Determine FTB shared care percentages.</td>
 <td>Hilary 61%; Matt 39%</td>
 </tr><tr><td>4</td>
 <td>Determine the standard rate of FTB Part B payable for Daniel as if he was the only FTB child.</td>
-<td>$4,055.15</td>
+<td>$4,128.15</td>
 </tr><tr><td>5</td>
-<td>Multiply the rate for Daniel by percentage of care = $4,055.15 × 61%<br />
+<td>Multiply the rate for Daniel by percentage of care = $4,128.15 × 61%<br />
 				This is the shared standard rate of FTB Part B for Daniel.</td>
-<td>$2,473.64</td>
+<td>$2,518.17</td>
 </tr><tr><td>6</td>
 <td>Compare the rate for Jessica to the shared rate for Daniel. The higher of the 2 rates is the standard rate payable.
 <p>				Hilary's standard rate is the amount worked out for Jessica.</p></td>
-<td>$2,832.40</td>
+<td>$2,883.50</td>
 </tr><tr><td>7</td>
 <td>Work out the ES Part B standard rate payable for each of the FTB children of the individual whose care is not shared (Jessica), as if they were an only child.</td>
 <td>$51.10</td>
@@ -276,28 +297,31 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <td>Compare the results from Step 7 and Step 9. The highest rate payable for any of the FTB children is the individual's standard rate of ES Part B.</td>
 <td>$51.10</td>
 </tr><tr><td>11</td>
-<td>Calculate the maximum FTB Part B rate by adding the FTB Part B supplement and the ES Part B amount from Step 10.
-<p>				If the individual has at least one unshared FTB child, the rate of FTB Part B supplement is the FTB Part B gross supplement amount.</p></td>
-<td>$2,832.40 + $354.05 + $51.10 = $3,237.55</td>
+<td>Calculate the maximum FTB Part B rate by adding the FTB Part B supplement and the ES Part B amount from Step 10.<br />
+				If the individual has at least one unshared FTB child, the rate of FTB Part B supplement is the FTB Part B gross supplement amount.</td>
+<td>$2,883.50 + $372.30 + $51.10 = $3,306.90</td>
 </tr><tr><td>12</td>
 <td>Hilary is not a single parent, therefore the ATI test must be applied.</td>
 <td> </td>
 </tr><tr><td>13</td>
-<td>The FTB Part B income test is applied to the income of the secondary earner (<a href="../../../1/1/s/25">1.1.S.25</a>).
-<p>				- Income excess = ATI less the income free area: $5,692.00 − $5,475.00 = $217.00<br />
+<td>The FTB Part B income test is applied to the income of the secondary earner (<a href="../../../1/1/s/25">1.1.S.25</a>).<br />
+				- Income excess = ATI less the income free area: $5,911.00 − $5,694.00 = $217.00<br />
 				- Reduction for ATI = 20% of the income excess: $217.00 × 20% = $43.40<br />
-				- Income tested rate of FTB Part B: $3,237.55 − $43.40</p></td>
-<td>$3,194.15</td>
-</tr></tbody></table><table><tbody><tr><td>Hilary's total amount of FTB</td>
-<td>= FTB Part A + FTB Part B</td>
-</tr><tr><td> </td>
-<td>= $1,415.82 + $3,194.15</td>
-</tr><tr><td> </td>
-<td>= $4,609.97</td>
-</tr></tbody></table></article>	<div id="view-last-reviewed-date">
+				- Income tested rate of FTB Part B: $3,306.90 − $43.40</td>
+<td>$3,263.50</td>
+</tr></tbody></table><table><tbody><tr><th>Hilary's total amount of FTB</th>
+<td>
+<p>= FTB Part A + FTB Part B<br />
+					= $2,264.44 + $3,263.50<br />
+					= $5,527.94</p>
+</td>
+</tr></tbody></table><div class="reference">
+<p><strong>Policy reference:</strong> FA Guide <a href="20">3.1.1.20</a> Current FTB rates &amp; income test amounts, <a href="../4.1">3.1.4</a> FTB Part A rate calculation - Method 1, <a href="../8.1">3.1.8</a> FTB Part A rate calculation - Method 2, <a href="../9.1">3.1.9</a> FTB Part B rate calculation, <a href="../7.1">3.1.7</a> Maintenance income test</p>
+</div>
+</article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     20 March 2017  	</div>
+      Last reviewed:     1 July 2019  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../../contact-us">Contact us</a></li>
@@ -306,8 +330,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
-<script type="text/javascript" src="../../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
-<script type="text/javascript" src="../../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+<script type="text/javascript" src="../../../../sites/default/files/js/js_IkilKWehdX07Wbi3Cg-T6yf5sLTu5FfOT2__edFF9eM.js"></script>
+<script type="text/javascript" src="https://cdn1.readspeaker.com/script/5931/webReader/webReader.js?pids=wr&amp;notools=1&amp;disable=popupplayback&amp;qrxyi9"></script>
 </body>
 </html>

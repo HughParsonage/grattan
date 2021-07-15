@@ -15,9 +15,9 @@ test_that("income_tax on individual sample file reflect historical collections",
   # basic taxable income to tax
   test1 <- 
     sample_file_1213 %>%
-    mutate(tax0 = income_tax(Taxable_Income, "2012-13"),
-           tax1 = income_tax(Taxable_Income, "2012-13", age = 42)) %>%
-    as.data.table
+    copy %>%
+    .[, tax0 := income_tax(Taxable_Income, "2012-13")] %>%
+    .[, tax1 := income_tax(Taxable_Income, "2012-13", age = 42)] 
   
   expect_lte(prop_c(sum(test1$tax0) * 50, actual_collections), 0.02)
   expect_lte(prop_c(sum(test1$tax1) * 50, actual_collections), 0.02)
@@ -43,14 +43,13 @@ test_that("income_tax on individual sample file reflect historical collections",
              11	16 to 20", header = TRUE, sep = "\t") %>%
     as.data.table %>%
     setnames(old = names(.), new = c("age_range", "age")) %>%
-    mutate(age = sub("\\sto.*$", "", age)) %>%
-    as.data.table %>%
+    .[, age := sub("\\sto.*$", "", age)] %>%
     setkey(age_range)
   setkey(sample_file_1213, age_range)
   tax.collection <- 
     sample_file_1213[age_decoder] %$%
     {
-      sum(income_tax(income = Taxable_Income, fy.year = "2012-13", age = age)) * 50
+      sum(income_tax(income = Taxable_Income, fy.year = "2012-13", age = as.integer(age))) * 50
     }
   
   expect_lte(abs(tax.collection - actual_collections)/actual_collections, expected = 0.01)

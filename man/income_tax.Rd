@@ -9,7 +9,7 @@ income_tax(
   fy.year = NULL,
   age = NULL,
   family_status = "individual",
-  n_dependants = 0L,
+  n_dependants = NULL,
   .dots.ATO = NULL,
   return.mode = c("numeric", "integer"),
   allow.forecasts = FALSE,

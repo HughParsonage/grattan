@@ -44,7 +44,7 @@
 #' @param partner_is_pensioner (logical, default: \code{FALSE}) Is the 
 #' individual's partner in receipt of a \emph{pension} (or benefit)? 
 #' @param partner_taper The amount by which the payment is reduced for each 
-#' dollar earned by the individual's partner. (See \url{http://guides.dss.gov.au/guide-social-security-law/4/2/8/40}.)
+#' dollar earned by the individual's partner. (See \url{https://guides.dss.gov.au/guide-social-security-law/4/2/8/40}.)
 #' @export youth_allowance 
 
 
@@ -118,6 +118,9 @@ youth_allowance <- function(fortnightly_income = 0,
   
   if (is.null(fy.year)) {
     fy.year <- date2fy(Sys.Date())
+    if (fy.year >= "2020-21") {
+      fy.year <- yr2fy(2020L)
+    }
     message('`fy.year` not set, so using `fy.year = "', fy.year, '".')
   } else {
     if (length(fy.year) != 1L && length(fy.year) != max.length) {

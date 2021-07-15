@@ -2,27 +2,32 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<link rel="shortlink" href="../../../node/203" />
-<link rel="canonical" href="5" />
-<meta name="viewport" content="width=device-width" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width" />
+<link rel="canonical" href="5" />
+<link rel="shortlink" href="../../../node/203" />
 <title>5.4.5 Bankruptcy | Child Support Guide</title>
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_xjtZ-Ze_nXX14siI6UcWyLnJAKHhjvEDqK_zLmSalF8.css" media="all" />
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_Q4XrxgEkbadGDm1J7AHUHHmbcMJ2_hbMfrrzrm9Ne_I.css" media="all" />
 <link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_0hVT-eQ_hQ1_vPtlbKr_16aMTqeH9xiAEGAuESOLq8Q.css" media="print" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_rsXrRrKt1HzlCloo2V09Nqzwjd-hqyC_GgaZSlc2800.css" media="all" />
-<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css_injector/css_injector_1.css@p9iv4w" media="all" />
-<script type="text/javascript" src="../../../sites/default/files/js/js_vDrW3Ry_4gtSYaLsh77lWhWjIC6ml2QNkcfvfP5CVFs.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_Tik8PIaz_eQ5I4FMzmjkWoPEs9jKBgTSauo1jgsNa6g.js"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js_PA8oslJtjjT2umrMGC1WlXUZfkdvlLMRlH4F6iufpAI.js"></script>
+<link type="text/css" rel="stylesheet" href="../../../sites/default/files/css/css_d905I2WxoGGQW6uS7jkC73mqKhSejey6jciEdxo9cJI.css" media="all" />
+<script type="text/javascript" src="../../../sites/default/files/js/js_yMSKTzBO0KmozyLwajzFOrrt_kto_9mtccAkb0rm7gc.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_FA2YSy0R3kB2AU_wIOLoSR0sJX4ZYjdPuPaRFd2ZDyw.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("send", "pageview");
+window.rsConf = { ui: { tools: {translation: false, dictionary: false}}};
 //--><!]]>
 </script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_rsGiM5M1ffe6EhN-RnhM5f3pDyJ8ZAPFJNKpfjtepLk.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+(function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga");ga("create", "UA-6986514-92", {"cookieDomain":"auto"});ga("set", "anonymizeIp", true);ga("send", "pageview");
+//--><!]]>
+</script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_-oEDdwe4XpUqUj4W0KJs96ENaXIrGvjBvIP-WYYBi54.js"></script>
 <script type="text/javascript" src="../../../sites/default/files/js/js_hO1gcRl2STVMiDN99V_-iAiOAW2mYAdKEiQSxxV0Q5c.js"></script>
 <script type="text/javascript">
 <!--//--><![CDATA[//><!--
-jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"zglbvobagiJ_QJlwW7yPNhMLqYCkABIxVXONAq2V1lA","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"http:\/\/f1.as.readspeaker.com\/script\/5931\/ReadSpeaker.js?pids=embhl":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.js":1,"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/extlink\/extlink.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"0":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"sites\/all\/modules\/dss_readspeakerblock\/readspeaker.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)"},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/5\/4\/5":true}});
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"guidesacts","theme_token":"FRppFIxMw8K3kEn15HQTjcOxx9gz1ve_MnLfyWiioxw","js":{"sites\/all\/themes\/guidesacts\/calls.js":1,"https:\/\/cdn1.readspeaker.com\/script\/5931\/webReader\/webReader.js?pids=wr\u0026notools=1\u0026disable=popupplayback":1,"misc\/jquery.js":1,"misc\/jquery-extend-3.4.0.js":1,"misc\/jquery-html-prefilter-3.5.0-backport.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"sites\/all\/modules\/custom_search\/js\/custom_search.js":1,"0":1,"sites\/all\/modules\/google_analytics\/googleanalytics.js":1,"1":1,"sites\/all\/modules\/extlink\/js\/extlink.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.easing.js":1,"sites\/all\/themes\/guidesacts\/js\/jquery.hoverIntent.js":1},"css":{"sites\/all\/themes\/guidesacts\/style.css":1,"sites\/all\/themes\/guidesacts\/print.css":1,"public:\/\/css_injector\/css_injector_1.css":1}},"custom_search":{"form_target":"_self","solr":0},"googleanalytics":{"trackOutbound":1,"trackMailto":1,"trackDownload":1,"trackDownloadExtensions":"7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip"},"urlIsAjaxTrusted":{"\/child-support-guide\/5\/4\/5":true},"extlink":{"extTarget":0,"extClass":"ext","extLabel":"(link is external)","extImgClass":0,"extIconPlacement":"append","extSubdomains":1,"extExclude":"(gov.au)|(readspeaker.com)","extInclude":"","extCssExclude":"","extCssExplicit":"","extAlert":"_blank","extAlertText":"This link will take you to an external web site. The Department is not responsible for their content.","mailtoClass":"mailto","mailtoLabel":"(link sends e-mail)","extUseFontAwesome":false}});
 //--><!]]>
 </script>
 <!--[if lt IE 9]><script src="/sites/all/themes/guidesacts/js/html5.js" type="text/javascript"></script><![endif]-->
@@ -35,60 +40,61 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <nav id="global">
 	<button role="button" aria-label="Show and Hide Guide List" id="_guidenav">Guide List</button>
 <div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7596"><a href="../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
+<ul class="menu"><li class="first leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law.1">Social Security Guide</a></li>
+<li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide.1">Family Assistance Guide</a></li>
+<li class="leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide.1">Paid Parental Leave Guide</a></li>
+<li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide.1" class="active-trail">Child Support Guide</a></li>
+<li class="leaf menu-mlid-7596"><a href="../../../abstudy-policy-manual">ABSTUDY Policy Manual</a></li>
 <li class="leaf menu-mlid-7597"><a href="../../../assistance-isolated-children-scheme-guidelines">Assistance for Isolated Children Scheme Guidelines</a></li>
-<li class="leaf has-children active-trail menu-mlid-513"><a href="../../../child-support-guide" class="active-trail">Child Support Guide</a></li>
-<li class="leaf has-children menu-mlid-491"><a href="../../../family-assistance-guide">Family Assistance Guide</a></li>
-<li class="leaf has-children menu-mlid-489"><a href="../../../guide-social-security-law">Guide to Social Security Law</a></li>
-<li class="last leaf has-children menu-mlid-490"><a href="../../../paid-parental-leave-guide">Paid Parental Leave Guide</a></li>
+<li class="last leaf has-children menu-mlid-19951"><a href="../../../national-redress-guide" title="">National Redress Guide</a></li>
 </ul></div></nav>
 <header role="banner">
 	<a href="../../../index.html" rel="home"><img src="../../../sites/all/themes/guidesacts/logo.png" alt="Australian Government: Guides to Social Policy Law - link to homepage" id="logo"/></a>
 <p class="site-name">Guides to Social Policy Law</p>
 <form class="search-form" role="search" action="5" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="form-item form-type-textfield form-item-search-block-form">
   <label class="element-invisible" for="edit-search-block-form--2">Search this site </label>
- <input class="custom-search-box form-text" placeholder="" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
+ <input class="custom-search-box form-text" placeholder="Search" type="text" id="edit-search-block-form--2" name="search_block_form" value="" size="15" maxlength="128" />
 </div>
-<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-ebEXIuuiC-gowlEaH5Fcxwm_M1lIsfY1yeWJYzwQi5c" />
+<div class="form-actions form-wrapper" id="edit-actions"><input type="submit" id="edit-submit" name="op" value="Search" class="form-submit" /></div><input type="hidden" name="form_build_id" value="form-Uz1WD3VbntVJEqDk9ksH2Ye7OyPIcpy7A3CQE5OaM80" />
 <input type="hidden" name="form_id" value="search_block_form" />
 </div></form>	<h2>Child Support Guide</h2>
-<p>Version 4.32 - Released 7 May 2018</p>
+<p>Version 4.57 - Released 1 July 2021</p>
 	<button role="button" aria-label="Show and Hide Navigation" id="_navigation">Navigation</button>
 </header>
 <div id="contentwrap">
 	<nav role="navigation" id="navigation">
 	<div class="menu-block">
-<ul class="menu"><li class="first leaf menu-mlid-7286"><a href="../../../child-support-guide" title="">Using the Child Support Guide</a></li>
-<li class="collapsed menu-mlid-514"><a href="../../updates">What&#039;s New</a></li>
-<li class="collapsed menu-mlid-515"><a href="../../1">1 About the Scheme</a></li>
-<li class="collapsed menu-mlid-518"><a href="../../2">2 Child Support Assessments</a></li>
-<li class="collapsed menu-mlid-555"><a href="../../3">3 Registrable Maintenance Liabilities</a></li>
-<li class="collapsed menu-mlid-637"><a href="../../4">4 Objecting, Seeking a Review, Appealing &amp; Applying to Court</a></li>
-<li class="expanded active-trail menu-mlid-678"><a href="../../5" class="active-trail">5 Collecting Child Support</a><ul class="menu"><li class="first collapsed menu-mlid-679"><a href="../1" title="This chapter describes when the Registrar will accept an application to collect child support, how the Registrar registers enforceable maintenance liabilities and the effect of registration.">5.1 DHS Collection</a></li>
-<li class="collapsed menu-mlid-686"><a href="../2" title="This chapter describes DHS&#039;s administrative methods of collecting child support.">5.2 Administrative Enforcement</a></li>
-<li class="collapsed menu-mlid-698"><a href="../3" title="This chapter explains when the Registrar can apply amounts paid directly between parents or to a third party to satisfy a child support liability and also how the Registrar can offset child support debts between parents and credit lump sum payments.">5.3 Non-agency Payments, Crediting Lump Sum Payments &amp; Offsetting Liabilities</a></li>
-<li class="expanded active-trail menu-mlid-702"><a href="../4" title="This chapter describes the methods available to the Registrar to enforce collection of child support through the courts." class="active-trail">5.4 Court Enforcement</a><ul class="menu"><li class="first leaf menu-mlid-703"><a href="1">5.4.1 Choice of Court</a></li>
-<li class="leaf menu-mlid-704"><a href="2">5.4.2 The Registrar&#039;s Power to Bring Proceedings</a></li>
-<li class="leaf menu-mlid-705"><a href="3">5.4.3 Enforcement by Civil Action</a></li>
+<ul class="menu"><li class="first leaf menu-mlid-7286"><a href="../../../child-support-guide.1" title="">Using the Child Support Guide</a></li>
+<li class="collapsed menu-mlid-514"><a href="../../updates.1">What&#039;s new</a></li>
+<li class="collapsed menu-mlid-515"><a href="../../1.1">1 About the Scheme</a></li>
+<li class="collapsed menu-mlid-518"><a href="../../2.1">2 Child support assessments</a></li>
+<li class="collapsed menu-mlid-555"><a href="../../3.1">3 Registrable maintenance liabilities</a></li>
+<li class="collapsed menu-mlid-637"><a href="../../4.1">4 Objecting, seeking a review, appealing &amp; applying to court</a></li>
+<li class="expanded active-trail menu-mlid-678"><a href="../../5.1" class="active-trail">5 Collecting child support</a><ul class="menu"><li class="first collapsed menu-mlid-679"><a href="../1.1" title="This chapter describes when the Registrar will accept an application to collect child support, how the Registrar registers enforceable maintenance liabilities and the effect of registration.">5.1 Agency collection</a></li>
+<li class="collapsed menu-mlid-686"><a href="../2.1" title="This chapter describes DHS&#039;s administrative methods of collecting child support.">5.2 Administrative enforcement</a></li>
+<li class="collapsed menu-mlid-698"><a href="../3.1" title="This chapter explains when the Registrar can apply amounts paid directly between parents or to a third party to satisfy a child support liability and also how the Registrar can offset child support debts between parents and credit lump sum payments.">5.3 Non-agency payments, crediting lump sum payments &amp; offsetting liabilities</a></li>
+<li class="expanded active-trail menu-mlid-702"><a href="../4.1" title="This chapter describes the methods available to the Registrar to enforce collection of child support through the courts." class="active-trail">5.4 Court enforcement</a><ul class="menu"><li class="first leaf menu-mlid-703"><a href="1">5.4.1 Choice of court</a></li>
+<li class="leaf menu-mlid-704"><a href="2">5.4.2 The Registrar&#039;s power to bring proceedings</a></li>
+<li class="leaf menu-mlid-705"><a href="3">5.4.3 Enforcement by civil action</a></li>
 <li class="leaf menu-mlid-706"><a href="4">5.4.4 Enforcement under the FL Act</a></li>
 <li class="leaf active-trail active menu-mlid-707"><a href="5" class="active-trail active">5.4.5 Bankruptcy</a></li>
-<li class="leaf menu-mlid-708"><a href="6">5.4.6 Setting Aside a Transaction</a></li>
-<li class="last leaf menu-mlid-709"><a href="7">5.4.7 Payee&#039;s Right to Enforce Debt Via Court Proceedings</a></li>
+<li class="leaf menu-mlid-708"><a href="6">5.4.6 Setting aside a transaction</a></li>
+<li class="last leaf menu-mlid-709"><a href="7">5.4.7 Payee&#039;s right to enforce debt via court proceedings</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-710"><a href="../5" title="This chapter describes how and when payments of child support are made to payees. This chapter also explains when overpayments can be recovered from payees and when amounts overpaid can be refunded to payers.">5.5 Payments to Payees</a></li>
-<li class="collapsed menu-mlid-717"><a href="../6" title="This chapter explains when the Registrar will cease to collect an ongoing child support liability, including arrears of child support payable under that liability. It also explains when the Registrar will accept the payee&#039;s application for DHS to resume collection.">5.6 Ending &amp; Reapplying for Collection</a></li>
-<li class="collapsed menu-mlid-721"><a href="../7" title="This chapter describes when Child Support will not take action to collect a child support debt owed by a payer or payee.">5.7 Non-pursuit of Debts</a></li>
-<li class="last collapsed menu-mlid-723"><a href="../8" title="This chapter describes when the Registrar will not take action to collect a child support debt.">5.8 Obsolete Entries</a></li>
+<li class="collapsed menu-mlid-710"><a href="../5.1" title="This chapter describes how and when payments of child support are made to payees. This chapter also explains when overpayments can be recovered from payees and when amounts overpaid can be refunded to payers.">5.5 Payments to payees</a></li>
+<li class="collapsed menu-mlid-717"><a href="../6.1" title="This chapter explains when the Registrar will cease to collect an ongoing child support liability, including arrears of child support payable under that liability. It also explains when the Registrar will accept the payee&#039;s application for DHS to resume collection.">5.6 Ending &amp; reapplying for collection</a></li>
+<li class="collapsed menu-mlid-721"><a href="../7.1" title="This chapter describes when Child Support will not take action to collect a child support debt owed by a payer or payee.">5.7 Non-pursuit of debts</a></li>
+<li class="last collapsed menu-mlid-723"><a href="../8.1" title="This chapter describes when the Registrar will not take action to collect a child support debt.">5.8 Obsolete entries</a></li>
 </ul></li>
-<li class="collapsed menu-mlid-716"><a href="../../6">6 Administration</a></li>
-<li class="leaf menu-mlid-10696"><a href="../../acronyms">Acronym List</a></li>
-<li class="leaf menu-mlid-7193"><a href="../../keywords" title="">Keyword Index</a></li>
-<li class="last leaf menu-mlid-7167"><a href="../../sitemap">Site Map</a></li>
+<li class="collapsed menu-mlid-716"><a href="../../6.1">6 Administration</a></li>
+<li class="leaf menu-mlid-10696"><a href="../../acronyms">Acronym list</a></li>
+<li class="leaf menu-mlid-7193"><a href="../../keywords.1" title="">Keyword index</a></li>
+<li class="last leaf menu-mlid-7167"><a href="../../sitemap">Site map</a></li>
 </ul></div>	</nav>
-	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../child-support-guide">Child Support Guide</a> &raquo; <a href="../../5" class="active-trail">5 Collecting Child Support</a> &raquo; <a href="../4" title="This chapter describes the methods available to the Registrar to enforce collection of child support through the courts." class="active-trail">5.4 Court Enforcement</a> &raquo; 5.4.5 Bankruptcy</div>
+	<div id="breadcrumb"><a href="../../../index.html">Home</a> &raquo; <a href="../../../child-support-guide.1">Child Support Guide</a> &raquo; <a href="../../5.1" class="active-trail">5 Collecting child support</a> &raquo; <a href="../4.1" title="This chapter describes the methods available to the Registrar to enforce collection of child support through the courts." class="active-trail">5.4 Court enforcement</a> &raquo; 5.4.5 Bankruptcy</div>
 <div id="utility">
 	
-<div id="readspeaker_button" class="rs_skip rsbtn_colorskin rs_preserve"><a class="rsbtn_play" href="http://app.as.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=http://guides.dss.gov.au/child-support-guide/5/4/5"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsgrad"><span class="rsbtn_right rsplay rspart"></span></span></a></div></div>
+<div id="readspeaker_button" class="rs_skip rsbtn rs_preserve"><a rel="nofollow" class="rsbtn_play" href="https://app-oc.readspeaker.com/cgi-bin/rsent?customerid=5931&amp;lang=en_au&amp;readid=content&amp;url=https://guides.dss.gov.au/child-support-guide/5/4/5"><span class="rsbtn_left rspart rsimg"><span class="rsbtn_text"><span>Listen</span></span></span><span class="rsbtn_right rsimg rsplay rspart"></span></a></div></div>
 <div id="content" role="main">
 <article id="node-203">
 <h1 >5.4.5 Bankruptcy</h1>
@@ -97,6 +103,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <div class="reference">
 <h2>Act references</h2>
 <p><a href="https://www.legislation.gov.au/Series/C1966A00033">Bankruptcy Act 1966</a> section 5(1), section 27, section 40, section 58(5A), section 82(1), section 122(2)(c), section 153(2)(c), section 153(2A), Part IX, Part X</p>
+<p><a href="https://www.legislation.gov.au/Series/F2014L00911">Public Governance, Performance and Accountability Rule 2014</a> section 11</p>
 </div>
 <h2>On this page</h2>
 <ul><li><a href="5#child">Child support liabilities for bankrupt payers</a></li>
@@ -109,15 +116,15 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li><a href="5#amending">Amending proof of debt</a></li>
 <li><a href="5#effect">Effect of discharge</a></li>
 <li><a href="5#alternatives">Alternatives to bankruptcy</a></li>
+<li><a href="5#carer">Carer liabilities</a></li>
 </ul><h2 id="child">Child support liabilities for bankrupt payers</h2>
-<p>Most registrable maintenance liabilities (<a href="../1/2">5.1.2</a>) receive special treatment under the <cite><a href="https://www.legislation.gov.au/Series/C1966A00033">Bankruptcy Act 1966</a></cite>. This means they can still be enforced despite the payer's bankruptcy (Bankruptcy Act section 58(5A)). This puts the Registrar in a different position to other creditors. In addition, a bankrupt is not released from child support or child or spousal maintenance arrears on discharge from bankruptcy (Bankruptcy Act section 153(2)(c)). A liability for child support or child or spousal maintenance arrears continues despite a bankrupt's release from bankruptcy.</p>
+<p>Most registrable maintenance liabilities (<a href="../1/2">5.1.2</a>) receive special treatment under the <cite><a href="https://www.legislation.gov.au/Series/C1966A00033">Bankruptcy Act 1966</a></cite>. This means they can still be enforced despite the payer's bankruptcy (Bankruptcy Act section 58(5A)). This puts the Registrar in a different position to other creditors. In addition, a bankrupt is not released from child support, or child or spousal maintenance arrears, on discharge from bankruptcy (Bankruptcy Act section 153(2)(c)). A liability for child support or child or spousal maintenance arrears continues despite a bankrupt's release from bankruptcy.</p>
 <p>The Registrar may still collect child support, or child or spousal maintenance, from a bankrupt payer by negotiating voluntary payment arrangements, by deductions from salary or wages and by intercepting and applying taxation refunds (<a href="../2/8">5.2.8</a>).</p>
-<p>The Registrar may also be asked to participate in other agreements and arrangements under the Bankruptcy Act that are alternatives to bankruptcy, if the bankrupt payer has other debts apart from his or her debt to the Registrar.</p>
+<p>The Registrar may also be asked to participate in other agreements and arrangements under the Bankruptcy Act that are alternatives to bankruptcy, if the bankrupt payer has other debts apart from their debt to the Registrar.</p>
 <h2 id="enforcement">Enforcement against bankrupts</h2>
-<p>Bankrupts are people who are unable to pay their debts and have been forced into bankruptcy (by a creditor's petition), or declared themselves bankrupt (by a debtor's petition for bankruptcy). The Bankruptcy Act 1966 is a Commonwealth Act. It applies in all states and territories.</p>
-<p>A bankruptcy notice can be issued where the debtor has committed an 'act of bankruptcy'. The Bankruptcy Act sets out the various acts of bankruptcy which can be committed (Bankruptcy Act section 40) e.g. failing to satisfy a warrant of execution (see discussion on civil enforcement action (<a href="3">5.4.3</a>)).</p>
-<p>Anyone who owes a debt to another person can enter bankruptcy voluntarily by filing a debtor's petition. There is no minimum debt level required before a voluntary debtor's petition can be filed. When the court accepts the petition, the debtor is automatically declared bankrupt.</p>
-<p>Where a creditor takes court action the debt must be at least $5,000. The creditor needs to file a creditor's petition in the Federal Court or Federal Circuit Court. The court can make an order declaring the debtor bankrupt. Once a debtor is declared bankrupt:</p>
+<p>Bankrupts are people who are unable to pay their debts and have been forced into bankruptcy (by a creditor's petition), or declared themselves bankrupt (by a debtor's petition for bankruptcy).</p>
+<p>A bankruptcy notice can be issued where the debtor has committed an 'act of bankruptcy'. The Bankruptcy Act sets out the various acts of bankruptcy which can be committed (Bankruptcy Act section 40), for example, failing to satisfy a warrant of execution (see discussion on civil enforcement action (<a href="3">5.4.3</a>)).</p>
+<p>Once a debtor is declared bankrupt by the Federal Court or Federal Circuit Court:</p>
 <ul><li>a trustee in bankruptcy will take ownership of most of the debtor's assets,</li>
 <li>creditors are generally unable to take legal action to collect their debts, and</li>
 <li>all debts are notified to the trustee, and it becomes their responsibility to sell the assets and distribute any funds among the creditors in accordance with the provisions of the Bankruptcy Act.</li>
@@ -126,28 +133,21 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li>debts relating to child support and child and spousal maintenance are afforded some concessional treatment under the Bankruptcy Act. The Registrar may continue to recover these debts even though a payer is bankrupt,</li>
 <li>the bankrupt is responsible for debts incurred after the date of bankruptcy,</li>
 <li>any property acquired by the debtor after the date of the bankruptcy will generally become a part of the bankruptcy estate for distribution among the creditors, for example, lottery winnings.</li>
-</ul><p>Other effects of bankruptcy can include:</p>
-<ul><li>losing most assets, including a house (but not furniture, clothing or tools of trade),</li>
-<li>only being able to keep a car up to a <a href="https://www.afsa.gov.au/insolvency/how-we-can-help/indexed-amounts-0">prescribed value</a>,</li>
-<li>giving up passports,</li>
-<li>not being able to obtain credit of more than a <a href="https://www.afsa.gov.au/insolvency/how-we-can-help/indexed-amounts-0">prescribed value</a> without disclosing the bankruptcy to the financial institution,</li>
-<li>not being able to remain a director of a company, become a director of a company or administer a trust account (e.g. as a solicitor or accountant) during bankruptcy, and</li>
-<li>having to make payments to the bankrupt estate from ongoing earnings.</li>
 </ul><p>Bankruptcy usually lasts for 3 years, but a debtor can apply to the court to be discharged earlier. Creditors and the trustee can also apply to the court for a bankruptcy to be extended past 3 years.</p>
-<p>Debts arising from a child support assessment, or for child or spousal maintenance, are not released automatically by a discharge from bankruptcy. The Bankruptcy Act specifies that a bankrupt is not automatically released from these debts at the time of discharge (Bankruptcy Act section 153 (2)(c)). This means that all registrable maintenance liabilities (except for those arising from a parentage overpayment order (<a href="../../3/1/2">3.1.2</a>)) will survive the payer's bankruptcy. However, a bankrupt may apply to the Federal Court or Federal Circuit Court for discharge from debts of these types (Bankruptcy Act sections 27 and 153(2A)).</p>
+<p>Debts arising from a child support assessment, or for child or spousal maintenance, are not released automatically by a discharge from bankruptcy. The Bankruptcy Act specifies that a bankrupt is not automatically released from these debts at the time of discharge (Bankruptcy Act section 153(2)(c)). This means that all registrable maintenance liabilities (except for those arising from a recovery order (<a href="../../3/1/2">3.1.2</a>)) will survive the payer's bankruptcy. However, a bankrupt may apply to the Federal Court or Federal Circuit Court for discharge from debts of these types (Bankruptcy Act section 27 and section 153(2A)).</p>
 <p>While the payer remains bankrupt, the Registrar is able to take action to enforce any child support or spousal or child maintenance arrears that accrued before the payer's bankruptcy. This enforcement action may include:</p>
 <ul><li>legal action against any property which does not vest in the trustee of the bankrupt. Any property which the payer is entitled to keep can be the subject of proceedings by the Registrar to try and satisfy a child support debt. However, the property left with a debtor after bankruptcy is usually of very little value and unlikely to produce much towards satisfying any child support debt,</li>
-<li>the use of specific powers such as tax intercepts, salary deduction, payment arrangements and deduction of arrears from salary (<a href="../2">5.2</a>), and</li>
+<li>the use of specific powers such as tax intercepts, salary deduction, payment arrangements and deduction of arrears from salary (<a href="../2.1">5.2</a>), and</li>
 <li>lodging a claim with the trustee.</li>
-</ul><p>After a bankrupt is released from bankruptcy, the Registrar is entitled to collect the surviving debt (i.e. arrears of child support or child or spousal maintenance) using all the usual methods available.</p>
+</ul><p>After a bankrupt is released from bankruptcy, the Registrar is entitled to collect the surviving debt (i.e. arrears of child support or child or spousal maintenance) using all the usual enforcement methods available under the CSRC Act.</p>
 <h2 id="proof">Proof of debt</h2>
 <p>Upon being notified that a child support debtor has become bankrupt, the Registrar may lodge a proof of debt with the trustee. It is generally unnecessary to lodge a proof of debt until the trustee asks. The trustee will usually do this only where there is a likelihood of a dividend being paid to the creditors.</p>
-<p>The Registrar can prove in the bankruptcy for all of the payer's debt outstanding at the date of bankruptcy. A debt due under the CSRC Act is a provable debt (Bankruptcy Act section 82(1)). This includes any late payment penalties which accrued up to that date and amounts recoverable from the payer through a registered parentage overpayment order.</p>
-<p>The proof of debt should specify the amount being claimed from the trustee (the 'provable debt'). It should also give a breakdown of the amounts of the debt which are for child support and maintenance; parentage overpayment orders; and penalties.</p>
+<p>The Registrar can prove in the bankruptcy for all of the payer's debt outstanding at the date of bankruptcy. A debt due under the CSRC Act is a provable debt (Bankruptcy Act section 82(1)). This includes any late payment penalties which accrued up to that date and amounts recoverable from the payer through a registered recovery order.</p>
+<p>The proof of debt should specify the amount being claimed from the trustee (the 'provable debt'). It should also give a breakdown of the amounts of the debt which are for child support and maintenance; recovery orders; and penalties.</p>
 <h2 id="collection">Collection during bankruptcy</h2>
-<p>Most liabilities registered under the CSRC Act fall within the term 'maintenance agreement or maintenance order' (Bankruptcy Act section 5(1)). Debts falling within that definition are given some special protection where a debtor becomes bankrupt. The exception is amounts recoverable by the Registrar from a former payee under a parentage overpayment order (<a href="../../3/1/2">3.1.2</a>). These concessional provisions do not allow the Registrar to continue to take action to recover penalties or to recover debts arising from a parentage overpayment order.</p>
+<p>Most liabilities registered under the CSRC Act fall within the term 'maintenance agreement or maintenance order' (Bankruptcy Act section 5(1)). Debts falling within that definition are given some special protection where a debtor becomes bankrupt. The exception is amounts recoverable by the Registrar from a former payee under a recovery order (<a href="../../3/1/2">3.1.2</a>). These concessional provisions do not allow the Registrar to continue to take action to recover penalties or to recover debts arising from a recovery order.</p>
 <h2 id="administrative">Administrative collection</h2>
-<p>The Registrar can continue to collect the provable debt for child support, child or spousal maintenance (not penalties or debts arising from a parentage overpayment order), by salary deduction arrears by auto-withholding (<a href="../2/3">5.2.3</a>) and by intercepting tax refunds (<a href="../2/8">5.2.8</a>). The Registrar will also collect any ongoing liability for child support, child maintenance or spousal maintenance through salary deductions (<a href="../2/3">5.2.3</a>).</p>
+<p>The Registrar can continue to collect the provable debt for child support, child or spousal maintenance (not penalties or debts arising from a recovery order), by salary deduction arrears by auto-withholding (<a href="../2/3">5.2.3</a>) and by intercepting tax refunds (<a href="../2/8">5.2.8</a>). The Registrar will also collect any ongoing liability for child support, child maintenance or spousal maintenance through salary deductions (<a href="../2/3">5.2.3</a>).</p>
 <p>A notice to a third party under CSRC Act section 72A (<a href="../2/9">5.2.9</a>) is effective against the divisible property of the bankrupt if it was served before the date of bankruptcy. If a notice is served after the date of bankruptcy, it only has effect against any non-divisible property (i.e. property which does not vest in the trustee and remains in the possession and control of the bankrupt).</p>
 <h2 id="voluntary">Voluntary payments</h2>
 <p>The Registrar can continue to accept voluntary payments made by a bankrupt during bankruptcy. These payments do not constitute a preference (Bankruptcy Act section 122(2)(c)).</p>
@@ -159,16 +159,20 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <p>An amended proof of debt can be lodged at any stage during the administration of the bankrupt estate. If the Registrar has lodged a proof of debt with the trustee and subsequently collects any part of the provable debt during bankruptcy, an amended proof of debt will be lodged.</p>
 <h2 id="effect">Effect of discharge</h2>
 <p>After a discharge from bankruptcy, the Registrar is still able to recover the child support or maintenance debt relating to the period before the bankruptcy.</p>
-<p>The bankrupt may apply to court for a specific order discharging him or her from all or part of the surviving debt (i.e. that part of the provable debt which relates to child support, or child or spousal maintenance) (Bankruptcy Act section 153(2A)). The Registrar will not discharge the child support or maintenance portion of a registered child support debt unless the court has made an order under Bankruptcy Act section 153(2A).</p>
-<p>The Registrar cannot recover any pre-bankruptcy debt relating to a parentage overpayment order, or any penalties relating to that period, as these debts are not specially protected under the Bankruptcy Act. They are automatically discharged upon the bankrupt's discharge from bankruptcy. After the bankrupt is discharged, the Registrar will vary the child support Register to remove any amounts relating to penalties or registered parentage overpayment orders that were included in the provable debt, as these are not recoverable at law.</p>
+<p>The bankrupt may apply to court for a specific order discharging them from all or part of the surviving debt (i.e. that part of the provable debt which relates to child support, or child or spousal maintenance) (Bankruptcy Act section 153(2A)). The Registrar will not discharge the child support or maintenance portion of a registered child support debt unless the court has made an order under Bankruptcy Act section 153(2A).</p>
+<p>The Registrar cannot recover any pre-bankruptcy debt relating to a recovery order, or any penalties relating to that period, as these debts are not specially protected under the Bankruptcy Act. They are automatically discharged upon the bankrupt's discharge from bankruptcy. After the bankrupt is discharged, the Registrar will vary the Child Support Register to remove any amounts relating to penalties or registered recovery orders that were included in the provable debt, as these are not recoverable at law.</p>
 <h2 id="alternatives">Alternatives to bankruptcy</h2>
 <p>Creditors can be asked to participate in debt agreements and arrangements under Parts IX and X of the Bankruptcy Act as alternatives to bankruptcy. These arrangements or agreements limit the collection of provable debts.</p>
 <p>The Registrar will not take part in making an agreement under Part IX and is not bound by any Part IX agreement made which affects the collection of amounts payable for child support, child or spousal maintenance, that are registered under the CSRC Act (Bankruptcy Act section 185K).</p>
 <p>An arrangement under Part X of the Bankruptcy Act is a formal process in which creditors vote on the proposed arrangement. The Registrar is not bound by any Part X arrangement made which affects the collection of liabilities registered under the CSRC Act (Bankruptcy Act section 229(4)).</p>
+<h2 id="carer">Carer liabilities</h2>
+<p>Carer liabilities that arise under CSRC Act section 69B (<a href="../5/5">5.5.5</a>) are treated differently to child support liabilities in relation to bankruptcy.</p>
+<p>Carer liabilities that arise and are due before the date of bankruptcy are provable during the payee's bankruptcy, but do not receive special treatment under the Bankruptcy Act. This is because carer liabilities do not arise under a maintenance agreement or maintenance order. Ordinarily, the Registrar may lodge a proof of debt in these circumstances unless it is considered that it is not economical to pursue the debt, or the Registrar is satisfied that the debt is not legally recoverable, or the debt has been written off as authorised by an Act (Public Governance, Performance and Accountability Rule 2014 section 11). The Registrar cannot take administrative enforcement action under the CSRC Act against these provable debts during the payee's bankruptcy. In addition, a bankrupt is released from these provable debts on discharge from bankruptcy.</p>
+<p>Carer liabilities that arise and are due on or after the date of bankruptcy are generally not provable during the payee's bankruptcy, regardless of whether the period to which the debt relates is before, or on or after, the date of bankruptcy. However, the Registrar can take administrative enforcement action under the CSRC Act against these debts during the payee's bankruptcy. A bankrupt is not released from these debts on discharge from bankruptcy.</p>
 </article>	<div id="view-last-reviewed-date">
 		
 		  
-      Last reviewed:     20 September 2016  	</div>
+      Last reviewed:     10 May 2021  	</div>
 </div></div>
 <footer role="contentinfo" id="footer">
 	<ul class="menu"><li class="first leaf"><a href="../../../contact-us">Contact us</a></li>
@@ -177,8 +181,7 @@ jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":
 <li class="leaf"><a href="https://www.dss.gov.au/accessibility" title="">Accessibility</a></li>
 <li class="last leaf"><a href="https://www.dss.gov.au/how-to-use-the-listen-function/readspeaker" title="">Readspeaker</a></li>
 </ul></footer>
-<script type="text/javascript" src="../../../sites/default/files/js/js_WcRBCDSwNPoTVUapWstYVr1gzTb8SC5WUFi9efuVQ74.js"></script>
-<script type="text/javascript" src="http://f1.as.readspeaker.com/script/5931/ReadSpeaker.js?pids=embhl&amp;p9iv4w"></script>
-<script type="text/javascript" src="../../../sites/default/files/js/js__YiNPTwBUrG-ajd3s8bSrsy4vgVdxBhV1SfTCSyCXSc.js"></script>
+<script type="text/javascript" src="../../../sites/default/files/js/js_IkilKWehdX07Wbi3Cg-T6yf5sLTu5FfOT2__edFF9eM.js"></script>
+<script type="text/javascript" src="https://cdn1.readspeaker.com/script/5931/webReader/webReader.js?pids=wr&amp;notools=1&amp;disable=popupplayback&amp;qrxyi9"></script>
 </body>
 </html>

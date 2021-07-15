@@ -4,8 +4,8 @@
 #' @param to_qtr (date in quarters) the date to be inflated to, where nominal price = real price. Must be of the form "YYYY-Qq" e.g. "1066-Q2".
 #' @param adjustment Should there be an adjustment made to the index? Adjustments include 'none' (no adjustment), 'seasonal', or 'trimmed' [referring to trimmed mean]. By default, \code{seasonal}.
 #' @param useABSConnection Should the function connect with ABS.Stat via an SDMX connection? By default set to \code{FALSE} in which case a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.
-#' The internal data was updated on 2020-07-02 to 2020-Q1.
-#' If using \code{useABSConnection = TRUE}, ensure you have \code{rsdmx (>= 0.5-10)} up-to-date.
+#' The internal data was updated on 2021-07-12 to 2021-Q1.
+#' Using \code{useABSConnection = TRUE} is no longer supported for server issues. 
 #' @return A vector of real prices.
 #' @export
 

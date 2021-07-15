@@ -1,4 +1,4 @@
-.onLoad <- function(libname = find.package("grattan"), pkgname = "grattan") {
+.onLoad <- function(libname, pkgname) {
   
   op <- options()
   the_tempdir <- tempdir()
@@ -114,7 +114,7 @@
   }, 
   error = function(e) NULL)
   
-  
+  verify_NA_ALIAS(0L)
   invisible(NULL)
 }
 
@@ -122,6 +122,7 @@ gessage <- function(...) {
   if (identical(Sys.info()[["user"]], "hughp") &&
       identical(.Platform$GUI, "RStudio") &&
       !isNamespaceLoaded("pkgdown") &&
+      FALSE &&
       file.exists("~/grattan_1.4.0.2.tar.gz")) {
     packageStartupMessage(...)
   } else {
