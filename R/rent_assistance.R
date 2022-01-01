@@ -36,8 +36,6 @@
 #' # current annual rent assistance
 #' rent_assistance()  
 #' 
-#' # current fortnightly payment
-#' rent_assistance(Date = Sys.Date())  
 #' 
 #' # zero since no rent
 #' rent_assistance(0, Date = "2016-01-02") 
