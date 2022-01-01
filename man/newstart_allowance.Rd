@@ -59,7 +59,7 @@ care of child. Defined in \url{https://www.humanservices.gov.au/individuals/enab
 \item{fy.year}{Financial year. Default is "2015-16".}
 
 \item{assets_value}{Total value of household assets. Details can be found at
-\url{https://www.servicesaustralia.gov.au/individuals/topics/asset-types/30621}.}
+\url{https://www.servicesaustralia.gov.au/asset-types}.}
 
 \item{homeowner}{Is the individual a homeowner?}
 

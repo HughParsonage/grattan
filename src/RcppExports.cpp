@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // IncomeTax
 NumericVector IncomeTax(NumericVector x, NumericVector thresholds, NumericVector rates);
 RcppExport SEXP _grattan_IncomeTax(SEXP xSEXP, SEXP thresholdsSEXP, SEXP ratesSEXP) {

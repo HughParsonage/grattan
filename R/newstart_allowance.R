@@ -16,7 +16,7 @@
 #' @param age The individual's age.
 #' @param fy.year Financial year. Default is "2015-16".
 #' @param assets_value Total value of household assets. Details can be found at
-#' \url{https://www.servicesaustralia.gov.au/individuals/topics/asset-types/30621}. 
+#' \url{https://www.servicesaustralia.gov.au/asset-types}. 
 #' @param homeowner Is the individual a homeowner?
 #' @param taper_lower The amount at which the payment is reduced for each dollar
 #'  earned between the lower and upper bounds for non-principal carers.
