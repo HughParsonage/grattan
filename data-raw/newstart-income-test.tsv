@@ -40,3 +40,4 @@ Date	income_free_area	income_threshold	Rate	is_single	min_age	max_age	PerFortnig
 2020-09-20	108	252	282.85	TRUE	21	Inf	TRUE	527.125
 2021-03-20	110	252	285.4	TRUE	21	Inf	TRUE	536
 2021-04-01	110	252	310.4	TRUE	21	Inf	TRUE	598.5
+2021-09-20	111	252	314.75	TRUE	21	Inf	TRUE	610.625
