@@ -1,5 +1,6 @@
 test_that("CJ model", {
   skip_on_cran()
+  skip_on_circleci()
   skip_if_not_installed("data.table")
   library(data.table)
   
