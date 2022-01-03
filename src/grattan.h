@@ -4,6 +4,7 @@
 #include <Rcpp.h>
 using namespace Rcpp;
 
+
 #include "yrs/1984.h"
 #include "yrs/1985.h"
 #include "yrs/1986.h"

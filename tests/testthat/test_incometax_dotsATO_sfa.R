@@ -5,6 +5,7 @@ test_that("sfa", {
   library(data.table)
   library(taxstats)
   library(magrittr)
+  expect_true(TRUE)
   sfa <- get_sample_files_all2()
   
   sfa200304 <- 

@@ -279,18 +279,21 @@ wages_trend_fy <-
 max.wage.yr <- wages_trend_fy[, max(fy2yr(fy_year))]
 
 
-labour_force <- 
-  setDT(readabs::read_abs("6202.0", check_local = FALSE))
-
 message("Using original series because COVID killed the Trend")
 
-lf_trend <-
-  # Note we are actually using the original series
-  labour_force[series_id %ein% "A84423047L"] %>%
-  .[, .(date,
-        obsTime = format(date, "%Y-%m"), 
-        obsValue = as.integer(value * 1000))] %>%
+lf_orig <- fread("data-raw/sysdata/lf_trend.tsv")[, date := as.Date(paste0(obsTime, "-01"), "%Y-%m-%d")]
+suppressMessages({lfs_grossflows <- readabs::read_lfs_grossflows()})
+
+lfs_gross_flows <- 
+  lfs_grossflows %>%
+  as.data.table %>%
+  .[startsWith(lfs_current, "Employed") | startsWith(lfs_current, "Unemployed")] %>%
+  .[, .(obsValue = as.integer(sum(1000 * persons))), 
+    keyby = .(date)] %>%
+  .[, obsTime := format(date, "%Y-%m")] %>%
   .[]
+
+lf_trend <- unique(rbind(lf_orig, copy(lfs_gross_flows)), by = "obsTime")
 
 lf_trend_fy <- 
   lf_trend[month(date) == 1L] %>%
@@ -990,7 +993,7 @@ Age_pension_deeming_rates_by_Date <-
   .[, .(Date, type, threshold, deeming_rate_below, deeming_rate_above)]
 
 aus_pop <- readabs::read_abs("3101.0", table = 59)
-aus_pop_all <- readabs::read_abs("3101.0", check_local = FALSE)
+# aus_pop_all <- readabs::read_abs("3101.0", check_local = FALSE)
 
 setDT(aus_pop)
 .aus_pop_by_age_date <- aus_pop[series %pin% "Persons", .(value = sum(value)), keyby = .(date)]
@@ -1015,6 +1018,8 @@ httr::GET("https://api.data.abs.gov.au/data/ABS,ERP_Q/all?startPeriod=2019-Q1&fo
   .[, obsValue := as.integer(obsValue)] %>%
   rbind(.aus_pop_by_age_yearqtr_orig, use.names = TRUE) %>%
   setkey(Age, obsTime) %>%
+  # Idempotency in case of multiple instances of dates
+  unique(by = key(.)) %>%
   .[]
    
 
