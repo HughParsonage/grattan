@@ -114,7 +114,7 @@
   }, 
   error = function(e) NULL)
   
-  verify_NA_ALIAS(0L)
+  # verify_NA_ALIAS(0L)
   invisible(NULL)
 }
 
@@ -131,5 +131,5 @@ gessage <- function(...) {
 }
 
 .onUnload <- function (libpath) {
-  library.dynam.unload("grattan", libpath)
+  library.dynam.unload("grattanDev", libpath)
 }

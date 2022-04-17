@@ -5,7 +5,7 @@
 #' <https://grattan.edu.au>
 #' 
 #' @name grattan-package
-#' @aliases grattan
+#' @aliases grattanDev
 #' @docType package
 #' @title The grattan package.
 #' @author \email{hugh.parsonage+grattanpackage@@grattan.edu.au}
@@ -56,7 +56,6 @@
 #' @importFrom magrittr and
 #' @importFrom magrittr or
 
-#' @importFrom Rcpp sourceCpp
 #' @importFrom stats complete.cases
 #' @importFrom stats setNames
 #' 
@@ -64,5 +63,5 @@
 #' 
 #' 
 #' @import data.table
-#' @useDynLib grattan, .registration = TRUE
+#' @useDynLib grattanDev, .registration = TRUE
 "_PACKAGE"
