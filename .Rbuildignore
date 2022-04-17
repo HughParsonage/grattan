@@ -1,6 +1,7 @@
 ^CRAN-RELEASE$
 ^Meta$
 ^doc$
+^src-old$
 ^\.circleci$
 ^.*\.Rproj$
 ^\.Rproj\.user$
