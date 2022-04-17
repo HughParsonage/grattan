@@ -1,8 +1,8 @@
-Package: grattan
+Package: grattanDev
 Type: Package
 Title: Australian Tax Policy Analysis
 Version: 1.9.0.10
-Date: 2022-01-01
+Date: 2022-04-18
 Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.parsonage@gmail.com"),
               person("Tim", "Cameron", role = "aut"),
               person("Brendan", "Coates", role = "aut"),
@@ -34,11 +34,8 @@ Imports:
     fy (>= 0.2.0),
     assertthat (>= 0.1),
     magrittr (>= 1.5),
-    Rcpp (>= 0.12.3),
     utils,
     zoo (>= 1.5-5)
-LinkingTo: 
-    Rcpp
 RoxygenNote: 7.1.1
 Suggests:
     curl,

@@ -1017,57 +1017,70 @@ income_tax2 <- function(income,
   yr <- fy2yr(fy.year)
   
   if (is.null(offsets)) {
-    offsets <- 
-      list(LITO = set_offset(offset_1st = LITO_MAX_OFFSET(yr),
-                             thresholds = LITO_1ST_THRESH(yr),
-                             tapers = LITO_1ST_TAPER(yr), 
-                             refundable = FALSE),
-           LMITO = set_offset(offset_1st = LMITO_1ST_OFFSET(yr),
-                              thresholds = LMITO_THRESHS(yr), 
-                              tapers = LMITO_TAPERS(yr), 
-                              refundable = FALSE))
+    # offsets <- 
+    #   list(LITO = set_offset(offset_1st = LITO_MAX_OFFSET(yr),
+    #                          thresholds = LITO_1ST_THRESH(yr),
+    #                          tapers = LITO_1ST_TAPER(yr), 
+    #                          refundable = FALSE),
+    #        LMITO = set_offset(offset_1st = LMITO_1ST_OFFSET(yr),
+    #                           thresholds = LMITO_THRESHS(yr), 
+    #                           tapers = LMITO_TAPERS(yr), 
+    #                           refundable = FALSE))
   }
-  stopifnot(is.list(offsets),
-            identical(unique(lengths(offsets)), 4L))
-  lapply(offsets, function(offset) {
-    if (!haveNames(offset, req_names <- c("offset_1st", "thresholds", "tapers", "refundable"))) {
-      stop("`offset` lacks required names: ", toString(req_names), ".")
-    }
-  })
+  # stopifnot(is.list(offsets),
+  #           identical(unique(lengths(offsets)), 4L))
+  # lapply(offsets, function(offset) {
+  #   if (!haveNames(offset, req_names <- c("offset_1st", "thresholds", "tapers", "refundable"))) {
+  #     stop("`offset` lacks required names: ", toString(req_names), ".")
+  #   }
+  # })
   
   
-  do_income_tax2(ic_taxable_income_loss = rN(ic_taxable_income_loss), 
-                 yr = yr,
-                 c_age_30_june = rN(c_age_30_june),
-                 rebateIncome = rebateIncome,
-                 ds_pers_super_cont = rN(ds_pers_super_cont),
-                 is_net_rent = rN(is_net_rent),
-                 it_property_loss = rN(it_property_loss),
-                 it_rept_empl_super_cont = rN(it_rept_empl_super_cont),
-                 it_rept_fringe_benefit = rN(it_rept_fringe_benefit),
-                 it_invest_loss = rN(it_invest_loss),
-                 sc_empl_cont = rN(sc_empl_cont),
-                 spc_rebate_income = rN(spc_rebate_income),
-                 isn_sbi_net = rN(isn_sbi_net),
-                 is_married = is_married,
-                 n_dependants = rN(n_dependants),
-                 ordinary_tax_thresholds = ordinary_tax_thresholds %||% ORD_TAX_BRACK(yr),
-                 ordinary_tax_rates = ordinary_tax_rates %||% ORD_TAX_RATES(yr),
-                 temp_levy_brack = temp_levy_brack %||% LEVY_BRACK(yr),
-                 temp_levy_rates = temp_levy_rates %||% LEVY_RATES(yr),
-                 offsets = offsets,
-                 medicare_levy_taper = medicare_levy_taper %||% ML_TAPER(yr), 
-                 medicare_levy_rate = medicare_levy_rate   %||% ML_RATE(yr),
-                 medicare_levy_lower_threshold = medicare_levy_lower_threshold %||% ML_LWR_THRESHOLD_SINGLE(yr),
-                 medicare_levy_lower_sapto_threshold = medicare_levy_lower_sapto_threshold %||% ML_LWR_THRESHOLD_SINGLE_SAPTO(yr),
-                 medicare_levy_lower_family_threshold = medicare_levy_lower_family_threshold %||% ML_LWR_THRESHOLD_FAMILY(yr),
-                 medicare_levy_lower_family_sapto_threshold = medicare_levy_lower_family_sapto_threshold %||% ML_LWR_THRESHOLD_FAMILY_SAPTO(yr),
-                 medicare_levy_lower_up_for_each_child = medicare_levy_lower_up_for_each_child %||% ML_LWR_THR_UP_PER_CHILD(yr),
-                 
-                 sapto_max_offset = sapto_max_offset %||% SAPTO_MAX_SINGLE(yr),
-                 sapto_max_offset_married = sapto_max_offset_married %||% SAPTO_MAX_MARRIED(yr),
-                 sapto_lower_threshold = sapto_lower_threshold %||% SAPTO_LWR_SINGLE(yr),
-                 sapto_lower_threshold_married = sapto_lower_threshold_married %||% SAPTO_LWR_MARRIED(yr))
+  # do_income_tax2(ic_taxable_income_loss = rN(ic_taxable_income_loss), 
+  #                yr = yr,
+  #                c_age_30_june = rN(c_age_30_june),
+  #                rebateIncome = rebateIncome,
+  #                ds_pers_super_cont = rN(ds_pers_super_cont),
+  #                is_net_rent = rN(is_net_rent),
+  #                it_property_loss = rN(it_property_loss),
+  #                it_rept_empl_super_cont = rN(it_rept_empl_super_cont),
+  #                it_rept_fringe_benefit = rN(it_rept_fringe_benefit),
+  #                it_invest_loss = rN(it_invest_loss),
+  #                sc_empl_cont = rN(sc_empl_cont),
+  #                spc_rebate_income = rN(spc_rebate_income),
+  #                isn_sbi_net = rN(isn_sbi_net),
+  #                is_married = is_married,
+  #                n_dependants = rN(n_dependants),
+  #                ordinary_tax_thresholds = ordinary_tax_thresholds %||% ORD_TAX_BRACK(yr),
+  #                ordinary_tax_rates = ordinary_tax_rates %||% ORD_TAX_RATES(yr),
+  #                temp_levy_brack = temp_levy_brack %||% LEVY_BRACK(yr),
+  #                temp_levy_rates = temp_levy_rates %||% LEVY_RATES(yr),
+  #                offsets = offsets,
+  #                medicare_levy_taper = medicare_levy_taper %||% ML_TAPER(yr), 
+  #                medicare_levy_rate = medicare_levy_rate   %||% ML_RATE(yr),
+  #                medicare_levy_lower_threshold = medicare_levy_lower_threshold %||% ML_LWR_THRESHOLD_SINGLE(yr),
+  #                medicare_levy_lower_sapto_threshold = medicare_levy_lower_sapto_threshold %||% ML_LWR_THRESHOLD_SINGLE_SAPTO(yr),
+  #                medicare_levy_lower_family_threshold = medicare_levy_lower_family_threshold %||% ML_LWR_THRESHOLD_FAMILY(yr),
+  #                medicare_levy_lower_family_sapto_threshold = medicare_levy_lower_family_sapto_threshold %||% ML_LWR_THRESHOLD_FAMILY_SAPTO(yr),
+  #                medicare_levy_lower_up_for_each_child = medicare_levy_lower_up_for_each_child %||% ML_LWR_THR_UP_PER_CHILD(yr),
+  #                
+  #                sapto_max_offset = sapto_max_offset %||% SAPTO_MAX_SINGLE(yr),
+  #                sapto_max_offset_married = sapto_max_offset_married %||% SAPTO_MAX_MARRIED(yr),
+  #                sapto_lower_threshold = sapto_lower_threshold %||% SAPTO_LWR_SINGLE(yr),
+  #                sapto_lower_threshold_married = sapto_lower_threshold_married %||% SAPTO_LWR_MARRIED(yr))
+  Yr <- yr
+   
+  .Call("Cincome_tax",
+        Yr,
+        ic_taxable_income_loss,
+        rN(c_age_30_june),
+        rN(is_married),
+        rN(n_dependants),
+        rN(spc_rebate_income),
+        NULL,
+        PAKCAGE = "grattan")
+  
+  
 }
 
 set_offset <- function(offset_1st = integer(1),
@@ -1087,6 +1100,8 @@ set_offset <- function(offset_1st = integer(1),
        tapers = tapers, 
        refundable = refundable)
 }
+
+
 
 
 

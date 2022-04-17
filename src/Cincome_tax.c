@@ -1,39 +1,7 @@
 #include "grattan.h"
 
-
-
-// s12 of Income Tax Assessment (1936 Act) Regulation 2015
-// specfies 6000 and 0.15 in the regulations
-// http://classic.austlii.edu.au/au/legis/cth/consol_reg/ita1936ar2015352/s12.html
-const int SAPTO_S12_THRESH = 6000;
-const double SAPTO_S12_TAPER = 0.15;
-const double SAPTO_TAPER = 0.125;
-
-
-
-
-double pmax(double x, double y) {
-  return (x >= y) ? x : y;
-}
-
-double amin(double x, double y) {
-  return (x <= y) ? x : y;
-}
-
-int amin(int x, int y) {
-  return (x <= y) ? x : y;
-}
-
-double max0(double x) {
-  return (x > 0) ? x : 0;
-}
-
-int max0(int x) {
-  return (x > 0) ? x : 0;
-}
-
-static void apply_lito(double * taxi, int x, double y, double b1, double r1) {
-  double lito = (x < b1) ? y : max0(y + r1 * (x - b1));
+static void apply_lito1(double * taxi, int x, double y, double b1, double r1) {
+  double lito = (x < b1) ? y : dmax0(y + r1 * (x - b1));
   if (*taxi <= lito) {
     *taxi = 0;
   } else {
@@ -41,7 +9,7 @@ static void apply_lito(double * taxi, int x, double y, double b1, double r1) {
   }
 }
 
-static void apply_lito(double * taxi, int x, int y, double b1, double r1, double b2, double r2) {
+static void apply_lito2(double * taxi, int x, int y, double b1, double r1, double b2, double r2) {
   double lito = y;
   if (x > b1) {
     if (x < b2) {
@@ -78,7 +46,7 @@ double do_1_lmito(int x) {
   if (x >= LMITO_THRESHOLDS[2]) {
     out += LMITO_TAPER_RATES[2] * (x - LMITO_THRESHOLDS[2]);
   }
-  return max0(out);
+  return dmax0(out);
 }
 
 
@@ -119,7 +87,7 @@ static double do_1_ML(Person P, Medicare M) {
     // # Levy in the case of small incomes (s.7 of Act)
     if (family_income <= upper_family_threshold) {
       double income_share = P.yi > 0 ? (P.xi / family_income) : 1.0;
-      double o1 = max0(M.taper * (family_income - lower_family_threshold));
+      double o1 = dmax0(M.taper * (family_income - lower_family_threshold));
       double o2 = M.rate * family_income;
       double o = (o1 < o2) ? o1 : o2;
       return income_share * o;
@@ -143,7 +111,7 @@ static double do_1_sapto_sf(int x, int y, int age, bool is_married, Sapto S) {
   double lwr_thresh = is_married ? S.lwr_couple : S.lwr_single;
   double taper = S.taper;
   
-  double o = x < lwr_thresh ? max_offset : max0(max_offset + taper * (x - lwr_thresh));
+  double o = x < lwr_thresh ? max_offset : dmax0(max_offset + taper * (x - lwr_thresh));
   if (!is_married) {
     return o;
   }
@@ -159,7 +127,7 @@ static double do_1_sapto_sf(int x, int y, int age, bool is_married, Sapto S) {
   }
   
   double sp_unused_sapto = 
-    (y < SAPTO_S12_THRESH) ? max_offset : max0(max_offset - SAPTO_S12_TAPER * (y - SAPTO_S12_THRESH));
+    (y < SAPTO_S12_THRESH) ? max_offset : dmax0(max_offset - SAPTO_S12_TAPER * (y - SAPTO_S12_THRESH));
   
   // https://www.ato.gov.au/individuals/income-and-deductions/in-detail/transferring-the-seniors-and-pensioners-tax-offset/
   // Following the lettering there
@@ -190,7 +158,7 @@ static double do_1_sapto_sf(int x, int y, int age, bool is_married, Sapto S) {
   double EE = DD * taper;
   double FF = B + EE;
   
-  return max0(FF);
+  return dmax0(FF);
 }
 
 static void apply_sapto(double * taxi, Person P, Sapto S) {
@@ -202,10 +170,39 @@ static void apply_sapto(double * taxi, Person P, Sapto S) {
   }
 }
 
-static double tax1(Person P, System S) {
+void apply_lmito(double * taxi, int x) {
+  double lmito = do_1_lmito(x);
+  if (lmito >= *taxi) {
+    *taxi = 0;
+  } else {
+    *taxi -= lmito;
+  }
+}
+
+
+static double tax(Person P, System Sys) {
+  double taxi = do_ordinary_PIT(P, Sys.BRACKETS, Sys.RATES, Sys.nb);
   
-  double taxi = do_ordinary_PIT(P, S.BRACKETS, S.RATES, S.nb);
-  taxi += do_1_ML(P, S.M);
+  if (Sys.has_sapto) {
+    apply_sapto(&taxi, P, Sys.S);
+  }
+  if (Sys.has_offset1) {
+    apply_offset1(&taxi, P, Sys.O1);
+  }
+  if (Sys.has_offset2) {
+    apply_offset2(&taxi, P, Sys.O2);
+  }
+  if (Sys.has_lmito) {
+    apply_lmito(&taxi, P.xi);
+  }
+  if (Sys.has_lito) {
+    apply_lito(&taxi, P, Sys.yr);
+  }
+  taxi += do_1_ML(P, Sys.M);
+  if (Sys.has_temp_budget_repair_levy && P.xi >= TEMP_BUDGET_REPAIR_LEVY_THRESH) {
+    taxi += TEMP_BUDGET_REPAIR_LEVY_RATE * (P.xi - TEMP_BUDGET_REPAIR_LEVY_THRESH);
+  }
+  
   return taxi;
 }
 
@@ -213,15 +210,12 @@ int c0(int x) {
   return x == NA_INTEGER ? 0 : x;
 }
 
-System yr2System(int yr) {
-  System Sys;
-  
-  Sys.M = yr2Medicare(yr);
-  return Sys;
-}
+
+
+
 
 SEXP Cincome_tax(SEXP Yr, SEXP IcTaxableIncome, SEXP Age, SEXP IsMarried, SEXP nDependants,
-                 SEXP SpcRebateIncome) {
+                 SEXP SpcRebateIncome, SEXP RSystem) {
   if (xlength(Yr) != 1) {
     error("Yr must be length-one."); // # nocov
   }
@@ -237,9 +231,11 @@ SEXP Cincome_tax(SEXP Yr, SEXP IcTaxableIncome, SEXP Age, SEXP IsMarried, SEXP n
   const int * is_married = INTEGER(IsMarried);
   const int * n_dependants = INTEGER(nDependants);
   
-  Medicare M = yr2Medicare(yr);
-  System Sys;
+  System Sys = yr2System(yr);
+  SEXP ans = PROTECT(allocVector(REALSXP, N));
+  double * ansp = REAL(ans);
   
+#pragma omp parallel for
   for (R_xlen_t i = 0; i < N; ++i) {
     Person P;
     P.xi = ic_taxable_income_loss[i];
@@ -249,9 +245,11 @@ SEXP Cincome_tax(SEXP Yr, SEXP IcTaxableIncome, SEXP Age, SEXP IsMarried, SEXP n
     P.n_child = n_dependants[i];
     P.is_family = P.is_married || P.n_child || P.yi;
     
+    ansp[i] = tax(P, Sys);
+    
   }
-  
-  return R_NilValue;
+  UNPROTECT(1);
+  return ans;
 }
 
 
