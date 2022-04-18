@@ -363,6 +363,21 @@ System yr2System(int yr) {
   return Sys;
 }
 
+// quick trunc
+int qtrunc(double x) {
+  if (x > INT_MAX) {
+    return INT_MAX;
+  }
+  if (x <= -INT_MAX) {
+    return -INT_MAX;
+  }
+  return (int)x;
+}
+
+bool safe2int(double x) {
+  return !ISNAN(x) && x > -INT_MAX && x < INT_MAX;
+}
+
 bool hazName(SEXP list, const char * str) {
   int n = length(list);
   SEXP names = getAttrib(list, R_NamesSymbol);
@@ -386,6 +401,80 @@ SEXP getListElement(SEXP list, const char *str) {
   return elmt;
 }
 
+void setIntElement(int * o, SEXP list, const char * str) {
+  SEXP elmt = getListElement(list, str);
+  if (isReal(elmt)) {
+    double delmt = asReal(elmt);
+    if (!safe2int(delmt)) {
+      return;
+    }
+    *o = (int)delmt;
+    return;
+  }
+  if (isInteger(elmt)) {
+    *o = asInteger(elmt);
+  }
+}
+
+void setIntElements(int * o, int n, SEXP list, const char * str) {
+  SEXP elmt = getListElement(list, str);
+  int M = length(elmt); // elements to assign
+  if (n < M) {
+    M = n; // in case there are more elements
+  }
+  if (isReal(elmt)) {
+    const double * xp = REAL(elmt);
+    for (int j = 0; j < M; ++j) {
+      if (safe2int(xp[j])) {
+        o[j] = xp[j];
+      }
+    }
+    return;
+  }
+  if (isInteger(elmt)) {
+    const int * xp = INTEGER(elmt);
+    for (int j = 0; j < M; ++j) {
+      if (xp[j] != NA_INTEGER) {
+        o[j] = xp[j];
+      }
+    }
+  }
+}
+
+void setDblElement(double * o, SEXP list, const char * str) {
+  SEXP elmt = getListElement(list, str);
+  if (isReal(elmt)) {
+    *o = asReal(elmt);
+  }
+  if (isInteger(elmt)) {
+    *o = (double)asInteger(elmt);
+  }
+}
+
+void setDblElements(double * o, int n, SEXP list, const char * str) {
+  SEXP elmt = getListElement(list, str);
+  int M = length(elmt); // elements to assign
+  if (n < M) {
+    M = n; // in case there are more elements
+  }
+  if (isReal(elmt)) {
+    const double * xp = REAL(elmt);
+    for (int j = 0; j < M; ++j) {
+      if (!ISNAN(xp[j])) {
+        o[j] = xp[j];
+      }
+    }
+  }
+  if (isInteger(elmt)) {
+    const int * xp = INTEGER(elmt);
+    for (int j = 0; j < M; ++j) {
+      if (xp[j] != NA_INTEGER) {
+        o[j] = xp[j];
+      }
+    }
+  }
+}
+
 System Sexp2System(SEXP RSystem, SEXP Year) {
   if (!isList(RSystem)) {
     error("(Sexp2System): RSystem was type '%s' but must be type list",
@@ -399,46 +488,93 @@ System Sexp2System(SEXP RSystem, SEXP Year) {
   
   int n = length(RSystem);
   System Sys = yr2System(yr);
+  if (n == 0) {
+    return Sys;
+  }
   // Sapto S = yr2Medicare(yr);
-  if (n && hazName(RSystem, "yr")) {
+  if (hazName(RSystem, "yr")) {
     int yr = asInteger(getListElement(RSystem, "yr"));
     Sys.yr = yr;
     // Sys.
   }
   Sys.has_sapto = yr >= 2000;
-  if (hazName(RSystem, "medicare_levy_taper")) {
-    Sys.M.taper = asReal(getListElement(RSystem, "medicare_levy_taper"));
+  
+  // tax thresholds
+  setIntElements(&Sys.BRACKETS, MAX_NBRACK, RSystem, "ordinary_tax_thresholds");
+  setDblElements(&Sys.RATES, MAX_NBRACK, RSystem, "ordinary_tax_rates");
+  
+  // Set Medicare levy
+  setDblElement(&Sys.M.taper, RSystem, "medicare_levy_taper");
+  setDblElement(&Sys.M.rate, RSystem, "medicare_levy_rate");
+  
+  setIntElement(&Sys.M.lwr_single, RSystem, "medicare_levy_lower_threshold");
+  setIntElement(&Sys.M.upr_single, RSystem, "medicare_levy_upper_threshold");
+  
+  setIntElement(&Sys.M.lwr_single_sapto, RSystem, "medicare_levy_lower_sapto_threshold");
+  setIntElement(&Sys.M.upr_single_sapto, RSystem, "medicare_levy_upper_sapto_threshold");
+  
+  setIntElement(&Sys.M.lwr_family, RSystem, "medicare_levy_lower_family_threshold");
+  setIntElement(&Sys.M.upr_family, RSystem, "medicare_levy_upper_family_threshold");
+  
+  setIntElement(&Sys.M.lwr_family_sapto, RSystem, "medicare_levy_lower_family_sapto_threshold");
+  setIntElement(&Sys.M.upr_family_sapto, RSystem, "medicare_levy_upper_family_sapto_threshold");
+  
+  setIntElement(&Sys.M.lwr_thr_up_per_child, RSystem, "medicare_levy_lower_up_for_each_child");
+  
+  if (hazName(RSystem, "offsets")) {
+    SEXP Offsets = getListElement(RSystem, "offsets");
+    if (isList(Offsets)) {
+      if (hazName(Offsets, "LITO")) {
+        SEXP Offsets_LITO = getListElement(Offsets, "LITO");
+        if (isLogical(Offsets_LITO)) {
+          bool offsets_has_lito = asLogical(Offsets_LITO);
+          Sys.has_lito = offsets_has_lito;
+        }
+        if (isList(Offsets_LITO)) {
+          if (length(Offsets_LITO) != 4) {
+            error("Internal error: Offsets_LITO had wrong length = %d.", length(Offsets_LITO));
+          }
+          
+          setIntElement(&Sys.O1.offset_1st, Offsets_LITO, "offset_1st");
+          setIntElement(&Sys.O1.thresh_1st, Offsets_LITO, "thresh_1st");
+          setDblElement(&Sys.O1.taper_1st, Offsets_LITO, "taper_1st");
+          Sys.O1.refundable = false;
+          Sys.has_lito = false; // replaced with O1
+        }
+      }
+      if (hazName(Offsets, "LMITO")) {
+        SEXP Offsets_LMITO = getListElement(Offsets, "LMITO");
+        if (isLogical(Offsets_LMITO)) {
+          bool offsets_has_lmito = asLogical(Offsets_LMITO);
+          Sys.has_lmito = offsets_has_lmito;
+        }
+      }
+      int nOffsets = length(Offsets);
+      if (nOffsets > (hazName(Offsets, "LITO") + hazName(Offsets, "LMITO"))) {
+        warning("Not yet implemented nOffsets > 2"); // # nocov
+      }
+    }
   }
-  if (hazName(RSystem, "medicare_levy_rate")) {
-    Sys.M.rate = asReal(getListElement(RSystem, "medicare_levy_rate"));
+
+  // Set Sapto
+  setDblElement(&Sys.S.first_tax_rate, RSystem, "sapto_first_tax_rate");
+  setIntElement(&Sys.S.lwr_couple, RSystem, "sapto_lower_threshold_married");
+  setIntElement(&Sys.S.lwr_single, RSystem, "sapto_lower_threshold");
+  
+  setIntElement(&Sys.S.mxo_single, RSystem, "sapto_max_offset");
+  setIntElement(&Sys.S.mxo_couple, RSystem, "sapto_max_offset_married");
+  setIntElement(&Sys.S.pension_age, RSystem, "sapto_pension_age");
+  setDblElement(&Sys.S.second_tax_rate, RSystem, "sapto_second_tax_rate");
+  setDblElement(&Sys.S.taper, RSystem, "sapto_taper");
+  setIntElement(&Sys.S.tax_free_thresh, RSystem, "sapto_tax_free_thresh");
+  if (Sys.S.taper < 0) {
+    Sys.S.taper = - Sys.S.taper;
   }
-  if (hazName(RSystem, "medicare_levy_lower_threshold")) {
-    Sys.M.lwr_single = asReal(getListElement(RSystem, "medicare_levy_lower_threshold"));
-  }
-  if (hazName(RSystem, "medicare_levy_upper_threshold")) {
-    Sys.M.upr_single = asReal(getListElement(RSystem, "medicare_levy_upper_threshold"));
-  }
-  if (hazName(RSystem, "medicare_levy_lower_sapto_threshold")) {
-    Sys.M.lwr_single_sapto = asReal(getListElement(RSystem, "medicare_levy_lower_sapto_threshold"));
-  }
-  if (hazName(RSystem, "medicare_levy_upper_sapto_threshold")) {
-    Sys.M.upr_single_sapto = asReal(getListElement(RSystem, "medicare_levy_upper_sapto_threshold"));
-  }
-  if (hazName(RSystem, "medicare_levy_lower_family_threshold")) {
-    Sys.M.lwr_family = asReal(getListElement(RSystem, "medicare_levy_lower_family_threshold"));
-  }
-  if (hazName(RSystem, "medicare_levy_upper_family_threshold")) {
-    Sys.M.upr_family = asReal(getListElement(RSystem, "medicare_levy_upper_family_threshold"));
-  }
-  if (hazName(RSystem, "medicare_levy_lower_family_sapto_threshold")) {
-    Sys.M.lwr_family_sapto = asReal(getListElement(RSystem, "medicare_levy_lower_family_sapto_threshold"));
-  }
-  if (hazName(RSystem, "medicare_levy_upper_family_sapto_threshold")) {
-    Sys.M.upr_family_sapto = asReal(getListElement(RSystem, "medicare_levy_upper_family_sapto_threshold"));
-  }
-  if (hazName(RSystem, "medicare_levy_lower_up_for_each_child")) {
-    Sys.M.lwr_thr_up_per_child = asReal(getListElement(RSystem, "medicare_levy_lower_up_for_each_child"));
-  }
+  
+  Sys.S.upr_single = Sys.S.lwr_single + Sys.S.mxo_single / Sys.S.taper;
+  Sys.S.upr_couple = Sys.S.lwr_couple + Sys.S.mxo_couple / Sys.S.taper;
+  
+  Sys.S.year = yr;
   
   
   

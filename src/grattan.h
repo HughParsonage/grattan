@@ -14,6 +14,19 @@
 #include <math.h>
 #include <ctype.h>
 
+#if defined _OPENMP && _OPENMP >= 201511
+#define FORLOOP(content)                                                \
+_Pragma("omp parallel for num_threads(nThread)")                        \
+  for (R_xlen_t i = 0; i < N; ++i) {                                    \
+    content                                                             \
+  }
+#else
+#define FORLOOP(content)                                       \
+for (R_xlen_t i = 0; i < N; ++i) {                             \
+  content                                                      \
+}
+#endif
+
 #include "1984.h"
 #include "1985.h"
 #include "1986.h"
@@ -170,6 +183,7 @@ typedef struct {
 typedef struct {
   int xi;
   int yi;
+  int ri; // rebate income
   int agei;
   bool is_married;
   int n_child;
@@ -261,8 +275,12 @@ double dmin0(double x);
 void apply_offset1(double * tax, Person P, Offset1 O);
 void apply_offset2(double * tax, Person P, Offset2 O);
 
+// omp_diagnose.c
+int as_nThread(SEXP x);
+
 // sapto.c
 Sapto yr2Sapto(int yr);
+void apply_sapto(double * taxi, Person P, Sapto S);
 
 // tax-system.c
 System yr2System(int yr);

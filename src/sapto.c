@@ -458,3 +458,76 @@ Sapto yr2Sapto(int yr) {
   
   return SaptoSince2000[yr - 2000];
 }
+
+
+static double do_1_sapto_sf(int x, int y, int age, bool is_married, Sapto S) {
+  // x is rebate income
+  // y is spouse rebate income
+  if (age < S.pension_age) {
+    // ineligible
+    return 0;
+  }
+  
+  
+  double max_offset = is_married ? S.mxo_couple : S.mxo_single;
+  double lwr_thresh = is_married ? S.lwr_couple : S.lwr_single;
+  double taper = S.taper;
+  
+  double o = x < lwr_thresh ? max_offset : dmax0(max_offset + taper * (x - lwr_thresh));
+  if (!is_married) {
+    return o;
+  }
+  
+  // The transfer of unused SAPTO is very complex and frankly unknown, even
+  // within govt.  This lines up 'better' than known models.
+  
+  // If the spouse's income is so high that no spouse SAPTO is 
+  // transferrable, then we just fall back to the original 
+  const double MAX_THR_SPOUSE_XFER_MARRIED = 1602.0 / SAPTO_S12_TAPER + SAPTO_S12_THRESH;
+  if (y > MAX_THR_SPOUSE_XFER_MARRIED) {
+    return o;
+  }
+  
+  double sp_unused_sapto = 
+    (y < SAPTO_S12_THRESH) ? max_offset : dmax0(max_offset - SAPTO_S12_TAPER * (y - SAPTO_S12_THRESH));
+  
+  // https://www.ato.gov.au/individuals/income-and-deductions/in-detail/transferring-the-seniors-and-pensioners-tax-offset/
+  // Following the lettering there
+  double A = S.mxo_couple;
+  double B = A + sp_unused_sapto;
+  double C = B + S.lito_max_offset;
+  double D = C / S.first_tax_rate;
+  double E = D + S.tax_free_thresh;
+  double adj_rebate_threshold = E;
+  if (E > S.lito_1st_thresh) {
+    double G = S.second_tax_rate - S.lito_1st_taper; // 0.34
+    double H = G - S.first_tax_rate;                 // 0.15
+    double I = H * S.lito_1st_thresh;                // 5550
+    double J = S.first_tax_rate * S.tax_free_thresh; // 3458
+    double K = J + S.lito_max_offset;                // 3903
+    double L = K + max_offset;
+    double M = L + sp_unused_sapto;
+    double N = I + M;
+    double O = G;
+    double P = N / O;                                // 37226
+    adj_rebate_threshold = P;
+  }
+  if (x < adj_rebate_threshold) {
+    return B;
+  }
+  
+  double DD = x - adj_rebate_threshold;
+  double EE = DD * taper;
+  double FF = B + EE;
+  
+  return dmax0(FF);
+}
+
+void apply_sapto(double * taxi, Person P, Sapto S) {
+  double sapto = do_1_sapto_sf(P.ri, P.yi, P.agei, P.is_married, S);
+  if (sapto >= *taxi) {
+    *taxi = 0;
+  } else {
+    *taxi -= sapto;
+  }
+}

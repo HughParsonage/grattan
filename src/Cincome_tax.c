@@ -99,76 +99,7 @@ static double do_1_ML(Person P, Medicare M) {
   return (o1 < o2) ? o1 : o2;
 }
 
-static double do_1_sapto_sf(int x, int y, int age, bool is_married, Sapto S) {
-  if (age < S.pension_age) {
-    // ineligible
-    return 0;
-  }
-  
-  // x is rebate income
-  // y is spouse rebate income
-  double max_offset = is_married ? S.mxo_couple : S.mxo_single;
-  double lwr_thresh = is_married ? S.lwr_couple : S.lwr_single;
-  double taper = S.taper;
-  
-  double o = x < lwr_thresh ? max_offset : dmax0(max_offset + taper * (x - lwr_thresh));
-  if (!is_married) {
-    return o;
-  }
-  
-  // The transfer of unused SAPTO is very complex and frankly unknown, even
-  // within govt.  This lines up 'better' than known models.
-  
-  // If the spouse's income is so high that no spouse SAPTO is 
-  // transferrable, then we just fall back to the original 
-  const double MAX_THR_SPOUSE_XFER_MARRIED = 1602.0 / SAPTO_S12_TAPER + SAPTO_S12_THRESH;
-  if (y > MAX_THR_SPOUSE_XFER_MARRIED) {
-    return o;
-  }
-  
-  double sp_unused_sapto = 
-    (y < SAPTO_S12_THRESH) ? max_offset : dmax0(max_offset - SAPTO_S12_TAPER * (y - SAPTO_S12_THRESH));
-  
-  // https://www.ato.gov.au/individuals/income-and-deductions/in-detail/transferring-the-seniors-and-pensioners-tax-offset/
-  // Following the lettering there
-  double A = S.mxo_couple;
-  double B = A + sp_unused_sapto;
-  double C = B + S.lito_max_offset;
-  double D = C / S.first_tax_rate;
-  double E = D + S.tax_free_thresh;
-  double adj_rebate_threshold = E;
-  if (E > S.lito_1st_thresh) {
-    double G = S.second_tax_rate - S.lito_1st_taper; // 0.34
-    double H = G - S.first_tax_rate;                 // 0.15
-    double I = H * S.lito_1st_thresh;                // 5550
-    double J = S.first_tax_rate * S.tax_free_thresh; // 3458
-    double K = J + S.lito_max_offset;                // 3903
-    double L = K + max_offset;
-    double M = L + sp_unused_sapto;
-    double N = I + M;
-    double O = G;
-    double P = N / O;                                // 37226
-    adj_rebate_threshold = P;
-  }
-  if (x < adj_rebate_threshold) {
-    return B;
-  }
-  
-  double DD = x - adj_rebate_threshold;
-  double EE = DD * taper;
-  double FF = B + EE;
-  
-  return dmax0(FF);
-}
 
-static void apply_sapto(double * taxi, Person P, Sapto S) {
-  double sapto = do_1_sapto_sf(P.xi, P.yi, P.agei, P.is_married, S);
-  if (sapto >= *taxi) {
-    *taxi = 0;
-  } else {
-    *taxi -= sapto;
-  }
-}
 
 void apply_lmito(double * taxi, int x) {
   double lmito = do_1_lmito(x);
@@ -214,18 +145,28 @@ int c0(int x) {
 
 
 
-SEXP Cincome_tax(SEXP Yr, SEXP IcTaxableIncome, SEXP Age, SEXP IsMarried, SEXP nDependants,
-                 SEXP SpcRebateIncome, SEXP RSystem) {
+SEXP Cincome_tax(SEXP Yr, SEXP IcTaxableIncome,
+                 SEXP RebateIncome,
+                 SEXP Age, SEXP IsMarried, SEXP nDependants,
+                 SEXP SpcRebateIncome, 
+                 SEXP RSystem,
+                 SEXP nthreads) {
   if (xlength(Yr) != 1) {
     error("Yr must be length-one."); // # nocov
   }
+  if (!isNull(RSystem) && !isList(RSystem)) {
+    error("RSystem must be NULL or a list.");
+  }
+  int nThread = as_nThread(nthreads);
   R_xlen_t N = xlength(IcTaxableIncome);
   isEquiInt(IcTaxableIncome, Age);
+  isEquiInt(IcTaxableIncome, RebateIncome);
   isEquiInt(IcTaxableIncome, IsMarried);
   isEquiInt(IcTaxableIncome, nDependants);
   isEquiInt(IcTaxableIncome, SpcRebateIncome);
   const int yr = asInteger(Yr);
   const int * ic_taxable_income_loss = INTEGER(IcTaxableIncome);
+  const int * rebate_income = INTEGER(RebateIncome);
   const int * spc_rebate_income = INTEGER(SpcRebateIncome);
   const int * c_age_30_june = INTEGER(Age);
   const int * is_married = INTEGER(IsMarried);
@@ -240,6 +181,7 @@ SEXP Cincome_tax(SEXP Yr, SEXP IcTaxableIncome, SEXP Age, SEXP IsMarried, SEXP n
     Person P;
     P.xi = ic_taxable_income_loss[i];
     P.yi = c0(spc_rebate_income[i]);
+    P.ri = rebate_income[i];
     P.agei = c_age_30_june[i];
     P.is_married = is_married[i];
     P.n_child = n_dependants[i];
