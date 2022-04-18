@@ -1083,7 +1083,7 @@ income_tax2 <- function(income,
             is_net_rent, 
             it_rept_fringe_benefit,
             nThread,
-            PACKAGE = "grattan")
+            PACKAGE = "grattanDev")
   }
    
   .Call("Cincome_tax",
@@ -1096,7 +1096,7 @@ income_tax2 <- function(income,
         rN(spc_rebate_income),
         NULL, # RSystem
         nThread,
-        PAKCAGE = "grattan")
+        PAKCAGE = "grattanDev")
   
   
 }
@@ -1160,8 +1160,9 @@ set_offset <- function(offset_1st = integer(1),
                     sapto_lower_threshold_married = NULL,
                     sapto_taper_married = NULL) {
   RSystem <- mget(ls(sorted = FALSE))
+  Filter(length, RSystem)
   
-  .Call("C_RSystem", Filter(length, RSystem), PACKAGE = "grattan")
+  # .Call("C_RSystem", Filter(length, RSystem), PACKAGE = "grattanDev")
 }
 
 
