@@ -113,7 +113,7 @@ void apply_lmito(double * taxi, int x) {
 
 static double tax(Person P, System Sys) {
   double taxi = do_ordinary_PIT(P, Sys.BRACKETS, Sys.RATES, Sys.nb);
-  
+  Rprintf("%d\n", (int)taxi);
   if (Sys.has_sapto) {
     apply_sapto(&taxi, P, Sys.S);
   }
@@ -129,7 +129,9 @@ static double tax(Person P, System Sys) {
   if (Sys.has_lito) {
     apply_lito(&taxi, P, Sys.yr);
   }
+  Rprintf("%d\n", (int)taxi);
   taxi += do_1_ML(P, Sys.M);
+  Rprintf("%d\n", (int)taxi);
   if (Sys.has_temp_budget_repair_levy && P.xi >= TEMP_BUDGET_REPAIR_LEVY_THRESH) {
     taxi += TEMP_BUDGET_REPAIR_LEVY_RATE * (P.xi - TEMP_BUDGET_REPAIR_LEVY_THRESH);
   }
@@ -145,9 +147,12 @@ int c0(int x) {
 
 
 
-SEXP Cincome_tax(SEXP Yr, SEXP IcTaxableIncome,
+SEXP Cincome_tax(SEXP Yr,
+                 SEXP IcTaxableIncome,
                  SEXP RebateIncome,
-                 SEXP Age, SEXP IsMarried, SEXP nDependants,
+                 SEXP Age, 
+                 SEXP IsMarried,
+                 SEXP nDependants,
                  SEXP SpcRebateIncome, 
                  SEXP RSystem,
                  SEXP nthreads) {
@@ -172,11 +177,14 @@ SEXP Cincome_tax(SEXP Yr, SEXP IcTaxableIncome,
   const int * is_married = INTEGER(IsMarried);
   const int * n_dependants = INTEGER(nDependants);
   
-  System Sys = yr2System(yr);
+  System Sys = Sexp2System(RSystem, yr);
   SEXP ans = PROTECT(allocVector(REALSXP, N));
   double * ansp = REAL(ans);
+  FORLOOP({
+    ansp[i] = 0;
+  })
   
-#pragma omp parallel for
+
   for (R_xlen_t i = 0; i < N; ++i) {
     Person P;
     P.xi = ic_taxable_income_loss[i];

@@ -44,6 +44,7 @@ void apply_offset1(double * tax, Person P, Offset1 O) {
   int b1 = O.thresh_1st;
   double r1 = O.taper_1st;
   double offset =  (x < b1) ? y : dmax0(y + r1 * (x - b1));
+  Rprintf("o = %d\n", offset);
   if (*tax > offset || O.refundable) {
     *tax -= offset;
   } else {

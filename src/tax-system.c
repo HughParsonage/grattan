@@ -359,6 +359,9 @@ System yr2System(int yr) {
   Sys.S = yr2Sapto(yr);
   Sys.has_lito = yr >= 1994;
   Sys.has_lmito = yr >= 2019;
+  Sys.has_offset1 = false;
+  Sys.has_offset2 = false;
+  Sys.has_offsetn = false;
   Sys.has_temp_budget_repair_levy = yr >= 2015 && yr <= 2017;
   return Sys;
 }
@@ -475,16 +478,14 @@ void setDblElements(double * o, int n, SEXP list, const char * str) {
   }
 }
 
-System Sexp2System(SEXP RSystem, SEXP Year) {
+System Sexp2System(SEXP RSystem, int yr) {
+  if (isNull(RSystem)) {
+    return yr2System(yr);
+  }
   if (!isList(RSystem)) {
     error("(Sexp2System): RSystem was type '%s' but must be type list",
           type2char(TYPEOF(RSystem)));
   }
-  if (!isInteger(Year)) {
-    error("(Sexp2System): Year was type '%s' but must be type integer",
-          type2char(TYPEOF(Year)));
-  }
-  int yr = asInteger(Year);
   
   int n = length(RSystem);
   System Sys = yr2System(yr);
@@ -500,26 +501,28 @@ System Sexp2System(SEXP RSystem, SEXP Year) {
   Sys.has_sapto = yr >= 2000;
   
   // tax thresholds
-  setIntElements(&Sys.BRACKETS, MAX_NBRACK, RSystem, "ordinary_tax_thresholds");
-  setDblElements(&Sys.RATES, MAX_NBRACK, RSystem, "ordinary_tax_rates");
+  setIntElements(Sys.BRACKETS, MAX_NBRACK, RSystem, "ordinary_tax_thresholds");
+  setDblElements(Sys.RATES, MAX_NBRACK, RSystem, "ordinary_tax_rates");
   
   // Set Medicare levy
   setDblElement(&Sys.M.taper, RSystem, "medicare_levy_taper");
   setDblElement(&Sys.M.rate, RSystem, "medicare_levy_rate");
   
-  setIntElement(&Sys.M.lwr_single, RSystem, "medicare_levy_lower_threshold");
-  setIntElement(&Sys.M.upr_single, RSystem, "medicare_levy_upper_threshold");
+  setDblElement(&Sys.M.lwr_single, RSystem, "medicare_levy_lower_threshold");
+  setDblElement(&Sys.M.upr_single, RSystem, "medicare_levy_upper_threshold");
   
-  setIntElement(&Sys.M.lwr_single_sapto, RSystem, "medicare_levy_lower_sapto_threshold");
-  setIntElement(&Sys.M.upr_single_sapto, RSystem, "medicare_levy_upper_sapto_threshold");
+  setDblElement(&Sys.M.lwr_single_sapto, RSystem, "medicare_levy_lower_sapto_threshold");
+  setDblElement(&Sys.M.upr_single_sapto, RSystem, "medicare_levy_upper_sapto_threshold");
   
-  setIntElement(&Sys.M.lwr_family, RSystem, "medicare_levy_lower_family_threshold");
-  setIntElement(&Sys.M.upr_family, RSystem, "medicare_levy_upper_family_threshold");
+  setDblElement(&Sys.M.lwr_family, RSystem, "medicare_levy_lower_family_threshold");
+  setDblElement(&Sys.M.upr_family, RSystem, "medicare_levy_upper_family_threshold");
   
-  setIntElement(&Sys.M.lwr_family_sapto, RSystem, "medicare_levy_lower_family_sapto_threshold");
-  setIntElement(&Sys.M.upr_family_sapto, RSystem, "medicare_levy_upper_family_sapto_threshold");
+  setDblElement(&Sys.M.lwr_family_sapto, RSystem, "medicare_levy_lower_family_sapto_threshold");
+  setDblElement(&Sys.M.upr_family_sapto, RSystem, "medicare_levy_upper_family_sapto_threshold");
   
-  setIntElement(&Sys.M.lwr_thr_up_per_child, RSystem, "medicare_levy_lower_up_for_each_child");
+  setDblElement(&Sys.M.lwr_thr_up_per_child, RSystem, "medicare_levy_lower_up_for_each_child");
+  
+  setIntElement(&Sys.M.sapto_age, RSystem, "sapto_pension_age");
   
   if (hazName(RSystem, "offsets")) {
     SEXP Offsets = getListElement(RSystem, "offsets");
@@ -558,12 +561,12 @@ System Sexp2System(SEXP RSystem, SEXP Year) {
 
   // Set Sapto
   setDblElement(&Sys.S.first_tax_rate, RSystem, "sapto_first_tax_rate");
-  setIntElement(&Sys.S.lwr_couple, RSystem, "sapto_lower_threshold_married");
-  setIntElement(&Sys.S.lwr_single, RSystem, "sapto_lower_threshold");
+  setDblElement(&Sys.S.lwr_couple, RSystem, "sapto_lower_threshold_married");
+  setDblElement(&Sys.S.lwr_single, RSystem, "sapto_lower_threshold");
   
-  setIntElement(&Sys.S.mxo_single, RSystem, "sapto_max_offset");
-  setIntElement(&Sys.S.mxo_couple, RSystem, "sapto_max_offset_married");
-  setIntElement(&Sys.S.pension_age, RSystem, "sapto_pension_age");
+  setDblElement(&Sys.S.mxo_single, RSystem, "sapto_max_offset");
+  setDblElement(&Sys.S.mxo_couple, RSystem, "sapto_max_offset_married");
+  setDblElement(&Sys.S.pension_age, RSystem, "sapto_pension_age");
   setDblElement(&Sys.S.second_tax_rate, RSystem, "sapto_second_tax_rate");
   setDblElement(&Sys.S.taper, RSystem, "sapto_taper");
   setIntElement(&Sys.S.tax_free_thresh, RSystem, "sapto_tax_free_thresh");

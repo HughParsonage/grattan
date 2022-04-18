@@ -284,5 +284,6 @@ void apply_sapto(double * taxi, Person P, Sapto S);
 
 // tax-system.c
 System yr2System(int yr);
+System Sexp2System(SEXP RSystem, int yr);
 
 #endif
