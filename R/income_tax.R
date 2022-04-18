@@ -894,7 +894,8 @@ income_tax2 <- function(income,
                         sapto_taper = NULL,
                         sapto_max_offset_married = NULL,
                         sapto_lower_threshold_married = NULL,
-                        sapto_taper_married = NULL) {
+                        sapto_taper_married = NULL, 
+                        nThread = getOption("grattan.nThread", 1L)) {
   
   has_nom <- function(x) {
     is.character(x) && length(x) == 1L && !is.na(x) && hasName(.dots.ATO, x)
@@ -933,8 +934,7 @@ income_tax2 <- function(income,
   
   c_age_30_june <- age_from_file(.dots.ATO)
   
-  rebateIncome <- 
-    .subset2(.dots.ATO, "ic_rebate_income")
+
   
   is_net_rent <- 
     s2("is_net_rent", "Net_rent_amt")
@@ -1069,15 +1069,33 @@ income_tax2 <- function(income,
   #                sapto_lower_threshold = sapto_lower_threshold %||% SAPTO_LWR_SINGLE(yr),
   #                sapto_lower_threshold_married = sapto_lower_threshold_married %||% SAPTO_LWR_MARRIED(yr))
   Yr <- yr
+  
+  rebateIncome <- 
+    .subset2(.dots.ATO, "ic_rebate_income")
+  if (is.null(rebateIncome)) {
+    rebateIncome <- 
+      .Call("Crebate_income", 
+            ic_taxable_income_loss,  
+            it_rept_empl_super_cont, 
+            sc_empl_cont,
+            ds_pers_super_cont,
+            it_invest_loss,
+            is_net_rent, 
+            it_rept_fringe_benefit,
+            nThread,
+            PACKAGE = "grattan")
+  }
    
   .Call("Cincome_tax",
         Yr,
         ic_taxable_income_loss,
+        rebateIncome,
         rN(c_age_30_june),
         rN(is_married),
         rN(n_dependants),
         rN(spc_rebate_income),
-        NULL,
+        NULL, # RSystem
+        nThread,
         PAKCAGE = "grattan")
   
   
@@ -1101,7 +1119,50 @@ set_offset <- function(offset_1st = integer(1),
        refundable = refundable)
 }
 
+.Medicare <- function(yr,
+                      medicare_levy_taper = NULL, 
+                      medicare_levy_rate = NULL,
+                      medicare_levy_lower_threshold = NULL,
+                      medicare_levy_lower_sapto_threshold = NULL,
+                      medicare_levy_lower_family_threshold = NULL,
+                      medicare_levy_lower_family_sapto_threshold = NULL,
+                      medicare_levy_lower_up_for_each_child = NULL) {
+  
+}
 
+.Sapto <- function(yr,
+                   sapto_max_offset = NULL,
+                   sapto_lower_threshold = NULL,
+                   sapto_taper = NULL,
+                   sapto_max_offset_married = NULL,
+                   sapto_lower_threshold_married = NULL,
+                   sapto_taper_married = NULL) {
+  
+}
+
+.System <- function(yr, 
+                    ordinary_tax_thresholds = NULL,
+                    ordinary_tax_rates = NULL,
+                    temp_levy_brack = NULL,
+                    temp_levy_rates = NULL,
+                    medicare_levy_taper = NULL, 
+                    medicare_levy_rate = NULL,
+                    medicare_levy_lower_threshold = NULL,
+                    medicare_levy_lower_sapto_threshold = NULL,
+                    medicare_levy_lower_family_threshold = NULL,
+                    medicare_levy_lower_family_sapto_threshold = NULL,
+                    medicare_levy_lower_up_for_each_child = NULL,
+                    offsets = NULL,
+                    sapto_max_offset = NULL,
+                    sapto_lower_threshold = NULL,
+                    sapto_taper = NULL,
+                    sapto_max_offset_married = NULL,
+                    sapto_lower_threshold_married = NULL,
+                    sapto_taper_married = NULL) {
+  RSystem <- mget(ls(sorted = FALSE))
+  
+  .Call("C_RSystem", Filter(length, RSystem), PACKAGE = "grattan")
+}
 
 
 
