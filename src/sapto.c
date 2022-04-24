@@ -473,7 +473,7 @@ static double do_1_sapto_sf(int x, int y, int age, bool is_married, Sapto S) {
   double lwr_thresh = is_married ? S.lwr_couple : S.lwr_single;
   double taper = S.taper;
   
-  double o = x < lwr_thresh ? max_offset : dmax0(max_offset + taper * (x - lwr_thresh));
+  double o = x < lwr_thresh ? max_offset : dmax0(max_offset - taper * (x - lwr_thresh));
   if (!is_married) {
     return o;
   }
