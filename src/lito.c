@@ -71,7 +71,7 @@ void apply_lito(double * tax, Person P, int yr) {
   O.taper_1st = -0.05;
   O.taper_2nd = -0.015;
   O.thresh_1st = 37500;
-  O.thresh_2nd = 66667;
+  O.thresh_2nd = 45000;
   apply_offset2(tax, P, O);
 }
 

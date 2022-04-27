@@ -113,7 +113,7 @@ void apply_lmito(double * taxi, int x) {
 
 static double tax(Person P, System Sys) {
   double taxi = do_ordinary_PIT(P, Sys.BRACKETS, Sys.RATES, Sys.nb);
-  Rprintf("%d\n", (int)taxi);
+  
   if (Sys.has_sapto) {
     apply_sapto(&taxi, P, Sys.S);
   }
@@ -129,13 +129,13 @@ static double tax(Person P, System Sys) {
   if (Sys.has_lito) {
     apply_lito(&taxi, P, Sys.yr);
   }
-  Rprintf("%d\n", (int)taxi);
+  
   taxi += do_1_ML(P, Sys.M);
-  Rprintf("%d\n", (int)taxi);
+  
   if (Sys.has_temp_budget_repair_levy && P.xi >= TEMP_BUDGET_REPAIR_LEVY_THRESH) {
     taxi += TEMP_BUDGET_REPAIR_LEVY_RATE * (P.xi - TEMP_BUDGET_REPAIR_LEVY_THRESH);
   }
-  
+
   return taxi;
 }
 
@@ -180,12 +180,9 @@ SEXP Cincome_tax(SEXP Yr,
   System Sys = Sexp2System(RSystem, yr);
   SEXP ans = PROTECT(allocVector(REALSXP, N));
   double * ansp = REAL(ans);
-  FORLOOP({
-    ansp[i] = 0;
-  })
   
 
-  for (R_xlen_t i = 0; i < N; ++i) {
+FORLOOP({
     Person P;
     P.xi = ic_taxable_income_loss[i];
     P.yi = c0(spc_rebate_income[i]);
@@ -197,9 +194,109 @@ SEXP Cincome_tax(SEXP Yr,
     
     ansp[i] = tax(P, Sys);
     
-  }
+})
   UNPROTECT(1);
   return ans;
+}
+
+
+
+SEXP Cincome2022(SEXP x, SEXP y, SEXP age, SEXP isMarried, SEXP nDependants,
+                 SEXP nthreads) {
+  
+  int nThread = as_nThread(nthreads);
+  R_xlen_t N = xlength(x);
+  const int * xp = INTEGER(x);
+  const int * yp = INTEGER(y);
+  const int * ap = INTEGER(age);
+  const int * mp = INTEGER(isMarried);
+  const int * cp = INTEGER(nDependants);
+  SEXP ans = PROTECT(allocVector(REALSXP, N));
+  double * restrict ansp = REAL(ans);
+  
+  FORLOOP({
+    Person P;
+    P.xi = xp[i];
+    P.yi = yp[i];
+    P.ri = xp[i];
+    P.agei = ap[i];
+    P.is_married = mp[i];
+    P.n_child = cp[i];
+    P.is_family = P.is_married || P.n_child || P.yi;
+    ansp[i] = 0;
+    double o = 0;
+    int xpi = xp[i];
+    int api = ap[i];
+    if (P.xi <= 18200 || (api >= 65 && xpi <= 32279)) {
+      continue;
+    }
+    if (xpi <= 37000) {
+      o += 0.19 * (xpi - 18200);
+    } else {
+      o += 3572;
+      if (xpi <= 90000) {
+        o += 0.325 * (xpi - 37000);
+      } else {
+        o += 17225;
+        if (xpi <= 180000) {
+         o += 0.37 * (xpi - 90000);
+        } else {
+          o += 33300;
+          o += 0.45 * (xpi - 180000);
+        }
+      }
+    }
+    
+    double lmitoi = do_1_lmito(xpi);
+    o -= lmitoi;
+    
+    if (xpi <= 66667) {
+      double litoi = 700;
+      if (xpi > 37500) {
+        if (xpi <= 45000) {
+          litoi -= 0.05 * (xpi - 37500);
+        } else {
+          litoi = 325 - 0.015 * (xpi - 45000);
+        }
+      }
+      o -= litoi;
+    }
+    if (o < 0) {
+      o = 0;
+    }
+    
+    if (xpi <= 22801) {
+      ansp[i] = o;
+      continue;
+    }
+    
+    int ypi = yp[i];
+    double o2 = 0.02 * xpi;
+    if (api >= 65 && xpi <= 50119) {
+      double sapto = (2230 - 0.125 * (xpi - 32279));
+      o -= sapto;
+      if (o < 0) {
+        o = 0;
+      }
+      if (xpi > 36056) {
+        double o1 = 0.1 * (xpi - 36056);
+        o += (o1 < o2) ? o1 : o2;
+      }
+      ansp[i] = o;
+      continue;
+    }
+    if (xpi > 22801) {
+      double o1 = 0.1 * (xpi - 22801);
+      o += (o1 < o2) ? o1 : o2;
+    }
+    ansp[i] = o;
+    
+    
+    
+  })
+  UNPROTECT(1);
+  return ans;
+  
 }
 
 

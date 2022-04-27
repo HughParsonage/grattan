@@ -77,9 +77,14 @@ for (R_xlen_t i = 0; i < N; ++i) {                             \
 
 #define MAX_NBRACK 8
 #define MAX_OFFSETN 31
+#define MIN_YEAR 1984
+#define MAX_YEAR 2030
 #define NA_INT -2147483648
 #define TEMP_BUDGET_REPAIR_LEVY_THRESH 180000
 #define TEMP_BUDGET_REPAIR_LEVY_RATE 0.02
+#ifndef NaN
+  #define NaN NAN
+#endif
 
 extern int ORDINARY_TAX_BRACKETS_1984[MAX_NBRACK];
 extern int ORDINARY_TAX_BRACKETS_1985[MAX_NBRACK];
@@ -165,17 +170,17 @@ extern double SAPTO_S12_TAPER;
 extern double SAPTO_TAPER;
 
 typedef struct {
-  double lwr_single;
-  double upr_single;
-  double lwr_family;
-  double upr_family;
+  int lwr_single;
+  int upr_single;
+  int lwr_family;
+  int upr_family;
   bool has_sapto_thr;
   int sapto_age;
-  double lwr_single_sapto;
-  double upr_single_sapto;
-  double lwr_family_sapto;
-  double upr_family_sapto;
-  double lwr_thr_up_per_child;
+  int lwr_single_sapto;
+  int upr_single_sapto;
+  int lwr_family_sapto;
+  int upr_family_sapto;
+  int lwr_thr_up_per_child;
   double taper;
   double rate;
 } Medicare;
@@ -193,12 +198,12 @@ typedef struct {
 typedef struct {
   int year;
   double pension_age;
-  double mxo_single;
-  double mxo_couple;
-  double lwr_single;
-  double lwr_couple;
-  double upr_single;
-  double upr_couple;
+  int mxo_single;
+  int mxo_couple;
+  int lwr_single;
+  int lwr_couple;
+  int upr_single;
+  int upr_couple;
   double taper;
   
   // Defined in the regulations (relating to spouse transfers)

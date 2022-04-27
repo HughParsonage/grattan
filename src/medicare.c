@@ -6,16 +6,16 @@ Medicare yr2Medicare(int yr) {
   Medicare M;
   switch(yr) {
   case 1984: {
-  M.lwr_single = ML_LWR_THRESHOLD_SINGLE_1984;
-  M.upr_single = ML_UPR_THRESHOLD_SINGLE_1984;
-  M.lwr_family = ML_LWR_THRESHOLD_FAMILY_1984;
-  M.upr_family = ML_UPR_THRESHOLD_FAMILY_1984;
-  M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1984;
-  M.taper = ML_TAPER_1984;
-  M.rate = ML_RATE_1984;
-  M.has_sapto_thr = 0;
-  M.sapto_age = 65;
-}
+    M.lwr_single = ML_LWR_THRESHOLD_SINGLE_1984;
+    M.upr_single = ML_UPR_THRESHOLD_SINGLE_1984;
+    M.lwr_family = ML_LWR_THRESHOLD_FAMILY_1984;
+    M.upr_family = ML_UPR_THRESHOLD_FAMILY_1984;
+    M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1984;
+    M.taper = ML_TAPER_1984;
+    M.rate = ML_RATE_1984;
+    M.has_sapto_thr = 0;
+    M.sapto_age = 65;
+  }
     break;
   case 1985: {
     M.lwr_single = ML_LWR_THRESHOLD_SINGLE_1985;
@@ -570,9 +570,185 @@ Medicare yr2Medicare(int yr) {
   }
     break;
   }
+  switch(yr) {
+  case 2000: {
+    // M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2000;
+    // M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2000;
+  }
+    break;
+  case 2001: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2001;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2001;
+  }
+    break;
+  case 2002: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2002;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2002;
+  }
+    break;
+  case 2003: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2003;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2003;
+  }
+    break;
+  case 2004: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2004;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2004;
+  }
+    break;
+  case 2005: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2005;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2005;
+  }
+    break;
+  case 2006: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2006;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2006;
+  }
+    break;
+  case 2007: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2007;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2007;
+  }
+    break;
+  case 2008: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2008;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2008;
+  }
+    break;
+  case 2009: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2009;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2009;
+  }
+    break;
+  case 2010: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2010;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2010;
+  }
+    break;
+  case 2011: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2011;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2011;
+  }
+    break;
+  case 2012: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2012;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2012;
+  }
+    break;
+  case 2013: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2013;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2013;
+  }
+    break;
+  case 2014: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2014;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2014;
+  }
+    break;
+  case 2015: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2015;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2015;
+  }
+    break;
+  case 2016: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2016;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2016;
+  }
+    break;
+  case 2017: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2017;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2017;
+  }
+    break;
+  case 2018: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2018;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2018;
+  }
+    break;
+  case 2019: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2019;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2019;
+  }
+    break;
+  case 2020: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2020;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2020;
+  }
+    break;
+  case 2021: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2021;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2021;
+  }
+    break;
+  case 2022: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2022;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2022;
+  }
+    break;
+  case 2023: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2023;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2023;
+  }
+    break;
+  case 2024: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2024;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2024;
+  }
+    break;
+  case 2025: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2025;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2025;
+  }
+    break;
+  case 2026: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2026;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2026;
+  }
+    break;
+  case 2027: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2027;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2027;
+  }
+    break;
+  case 2028: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2028;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2028;
+  }
+    break;
+  case 2029: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2029;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2029;
+  }
+    break;
+  case 2030: {
+    M.lwr_single_sapto = ML_LWR_THRESHOLD_SINGLE_SAPTO_2030;
+    M.lwr_family_sapto = ML_LWR_THRESHOLD_FAMILY_SAPTO_2030;
+  }
+    break;
+  }
   return M;
 }
 
+static bool valid_lwr_upr_taper(int mxo, int lwr, int upr, double taper) {
+  return lwr + (mxo / taper) == upr;
+}
+
+static bool valid_lwr_upr_125(int mxo, int lwr, int upr) {
+  return lwr + (mxo << 3) == upr;
+}
+
+static bool valid_lwr_upr_010_002(int lwr, int upr) {
+  return 0.02 * upr == (upr - lwr) * 0.1;
+}
+
+
+void validate_medicare(Medicare M) {
+  if (M.taper == 0.1 && M.rate == 0.02)
+  if (!valid_lwr_upr_010_002(M.lwr_single, M.upr_single)) {
+    error("Lower and upper single Medicare thresholds");
+  }
+}
 
 
 
