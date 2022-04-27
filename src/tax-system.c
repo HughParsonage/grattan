@@ -41,45 +41,45 @@ int ORDINARY_TAX_BRACKETS_2020[MAX_NBRACK] = {0, 18200, 37000, 90000, 180000, NA
 int ORDINARY_TAX_BRACKETS_2021[MAX_NBRACK] = {0, 18200, 37000, 90000, 180000, NA_INT, NA_INT, NA_INT};
 int ORDINARY_TAX_BRACKETS_2022[MAX_NBRACK] = {0, 18200, 37000, 90000, 180000, NA_INT, NA_INT, NA_INT};
 
-double ORDINARY_TAX_RATES_1984[MAX_NBRACK] = {0, 0.30, 0.46, 0.60, NAN, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_1985[MAX_NBRACK] = {0, 0.2667, 0.30, 0.46, 0.4733, 0.5533, 0.60, NAN};
-double ORDINARY_TAX_RATES_1986[MAX_NBRACK] = {0, 0.25, 0.30, 0.46, 0.48, 0.60, NAN, NAN};
-double ORDINARY_TAX_RATES_1987[MAX_NBRACK] = {0, 0.2442, 0.2650, 0.2942, 0.4425, 0.4683, 0.5708, NAN};
-double ORDINARY_TAX_RATES_1988[MAX_NBRACK] = {0, 0.24, 0.29, 0.40, 0.49, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_1989[MAX_NBRACK] = {0, 0.24, 0.29, 0.40, 0.49, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_1990[MAX_NBRACK] = {0, 0.21, 0.29, 0.39, 0.47, 0.48, NAN, NAN};
+double ORDINARY_TAX_RATES_1984[MAX_NBRACK] = {0, 0.30, 0.46, 0.60, NaN, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_1985[MAX_NBRACK] = {0, 0.2667, 0.30, 0.46, 0.4733, 0.5533, 0.60, NaN};
+double ORDINARY_TAX_RATES_1986[MAX_NBRACK] = {0, 0.25, 0.30, 0.46, 0.48, 0.60, NaN, NaN};
+double ORDINARY_TAX_RATES_1987[MAX_NBRACK] = {0, 0.2442, 0.2650, 0.2942, 0.4425, 0.4683, 0.5708, NaN};
+double ORDINARY_TAX_RATES_1988[MAX_NBRACK] = {0, 0.24, 0.29, 0.40, 0.49, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_1989[MAX_NBRACK] = {0, 0.24, 0.29, 0.40, 0.49, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_1990[MAX_NBRACK] = {0, 0.21, 0.29, 0.39, 0.47, 0.48, NaN, NaN};
 double ORDINARY_TAX_RATES_1991[MAX_NBRACK] = {0, 0.205, 0.245, 0.295, 0.385, 0.425, 0.465, 0.47};
-double ORDINARY_TAX_RATES_1992[MAX_NBRACK] = {0, 0.2, 0.38, 0.46, 0.47, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_1993[MAX_NBRACK] = {0, 0.2, 0.38, 0.46, 0.47, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_1994[MAX_NBRACK] = {0, 0.2, 0.355, 0.385, 0.44125, 0.47, NAN, NAN};
-double ORDINARY_TAX_RATES_1995[MAX_NBRACK] = {0, 0.2, 0.34, 0.43, 0.47, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_1996[MAX_NBRACK] = {0, 0.2, 0.34, 0.43, 0.47, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_1997[MAX_NBRACK] = {0, 0.2, 0.34, 0.43, 0.47, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_1998[MAX_NBRACK] = {0, 0.2, 0.34, 0.43, 0.47, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_1999[MAX_NBRACK] = {0, 0.2, 0.34, 0.43, 0.47, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2000[MAX_NBRACK] = {0, 0.2, 0.34, 0.43, 0.47, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2001[MAX_NBRACK] = {0, 0.17, 0.3, 0.42, 0.47, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2002[MAX_NBRACK] = {0, 0.17, 0.3, 0.42, 0.47, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2003[MAX_NBRACK] = {0, 0.17, 0.3, 0.42, 0.47, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2004[MAX_NBRACK] = {0, 0.17, 0.3, 0.42, 0.47, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2005[MAX_NBRACK] = {0, 0.17, 0.3, 0.42, 0.47, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2006[MAX_NBRACK] = {0, 0.15, 0.3, 0.42, 0.47, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2007[MAX_NBRACK] = {0, 0.15, 0.3, 0.4, 0.45, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2008[MAX_NBRACK] = {0, 0.15, 0.3, 0.4, 0.45, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2009[MAX_NBRACK] = {0, 0.15, 0.3, 0.4, 0.45, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2010[MAX_NBRACK] = {0, 0.15, 0.3, 0.38, 0.45, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2011[MAX_NBRACK] = {0, 0.15, 0.3, 0.37, 0.45, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2012[MAX_NBRACK] = {0, 0.15, 0.3, 0.37, 0.45, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2013[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2014[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2015[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2016[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2017[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2018[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2019[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2020[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2021[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NAN, NAN, NAN};
-double ORDINARY_TAX_RATES_2022[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NAN, NAN, NAN};
+double ORDINARY_TAX_RATES_1992[MAX_NBRACK] = {0, 0.2, 0.38, 0.46, 0.47, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_1993[MAX_NBRACK] = {0, 0.2, 0.38, 0.46, 0.47, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_1994[MAX_NBRACK] = {0, 0.2, 0.355, 0.385, 0.44125, 0.47, NaN, NaN};
+double ORDINARY_TAX_RATES_1995[MAX_NBRACK] = {0, 0.2, 0.34, 0.43, 0.47, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_1996[MAX_NBRACK] = {0, 0.2, 0.34, 0.43, 0.47, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_1997[MAX_NBRACK] = {0, 0.2, 0.34, 0.43, 0.47, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_1998[MAX_NBRACK] = {0, 0.2, 0.34, 0.43, 0.47, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_1999[MAX_NBRACK] = {0, 0.2, 0.34, 0.43, 0.47, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2000[MAX_NBRACK] = {0, 0.2, 0.34, 0.43, 0.47, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2001[MAX_NBRACK] = {0, 0.17, 0.3, 0.42, 0.47, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2002[MAX_NBRACK] = {0, 0.17, 0.3, 0.42, 0.47, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2003[MAX_NBRACK] = {0, 0.17, 0.3, 0.42, 0.47, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2004[MAX_NBRACK] = {0, 0.17, 0.3, 0.42, 0.47, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2005[MAX_NBRACK] = {0, 0.17, 0.3, 0.42, 0.47, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2006[MAX_NBRACK] = {0, 0.15, 0.3, 0.42, 0.47, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2007[MAX_NBRACK] = {0, 0.15, 0.3, 0.4, 0.45, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2008[MAX_NBRACK] = {0, 0.15, 0.3, 0.4, 0.45, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2009[MAX_NBRACK] = {0, 0.15, 0.3, 0.4, 0.45, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2010[MAX_NBRACK] = {0, 0.15, 0.3, 0.38, 0.45, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2011[MAX_NBRACK] = {0, 0.15, 0.3, 0.37, 0.45, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2012[MAX_NBRACK] = {0, 0.15, 0.3, 0.37, 0.45, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2013[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2014[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2015[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2016[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2017[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2018[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2019[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2020[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2021[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NaN, NaN, NaN};
+double ORDINARY_TAX_RATES_2022[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NaN, NaN, NaN};
 
 int nb_by_year(unsigned int yr) {
   int NB[40] = 
@@ -508,19 +508,19 @@ System Sexp2System(SEXP RSystem, int yr) {
   setDblElement(&Sys.M.taper, RSystem, "medicare_levy_taper");
   setDblElement(&Sys.M.rate, RSystem, "medicare_levy_rate");
   
-  setDblElement(&Sys.M.lwr_single, RSystem, "medicare_levy_lower_threshold");
-  setDblElement(&Sys.M.upr_single, RSystem, "medicare_levy_upper_threshold");
+  setIntElement(&Sys.M.lwr_single, RSystem, "medicare_levy_lower_threshold");
+  setIntElement(&Sys.M.upr_single, RSystem, "medicare_levy_upper_threshold");
   
-  setDblElement(&Sys.M.lwr_single_sapto, RSystem, "medicare_levy_lower_sapto_threshold");
-  setDblElement(&Sys.M.upr_single_sapto, RSystem, "medicare_levy_upper_sapto_threshold");
+  setIntElement(&Sys.M.lwr_single_sapto, RSystem, "medicare_levy_lower_sapto_threshold");
+  setIntElement(&Sys.M.upr_single_sapto, RSystem, "medicare_levy_upper_sapto_threshold");
   
-  setDblElement(&Sys.M.lwr_family, RSystem, "medicare_levy_lower_family_threshold");
-  setDblElement(&Sys.M.upr_family, RSystem, "medicare_levy_upper_family_threshold");
+  setIntElement(&Sys.M.lwr_family, RSystem, "medicare_levy_lower_family_threshold");
+  setIntElement(&Sys.M.upr_family, RSystem, "medicare_levy_upper_family_threshold");
   
-  setDblElement(&Sys.M.lwr_family_sapto, RSystem, "medicare_levy_lower_family_sapto_threshold");
-  setDblElement(&Sys.M.upr_family_sapto, RSystem, "medicare_levy_upper_family_sapto_threshold");
+  setIntElement(&Sys.M.lwr_family_sapto, RSystem, "medicare_levy_lower_family_sapto_threshold");
+  setIntElement(&Sys.M.upr_family_sapto, RSystem, "medicare_levy_upper_family_sapto_threshold");
   
-  setDblElement(&Sys.M.lwr_thr_up_per_child, RSystem, "medicare_levy_lower_up_for_each_child");
+  setIntElement(&Sys.M.lwr_thr_up_per_child, RSystem, "medicare_levy_lower_up_for_each_child");
   
   setIntElement(&Sys.M.sapto_age, RSystem, "sapto_pension_age");
   
@@ -561,11 +561,11 @@ System Sexp2System(SEXP RSystem, int yr) {
 
   // Set Sapto
   setDblElement(&Sys.S.first_tax_rate, RSystem, "sapto_first_tax_rate");
-  setDblElement(&Sys.S.lwr_couple, RSystem, "sapto_lower_threshold_married");
-  setDblElement(&Sys.S.lwr_single, RSystem, "sapto_lower_threshold");
+  setIntElement(&Sys.S.lwr_couple, RSystem, "sapto_lower_threshold_married");
+  setIntElement(&Sys.S.lwr_single, RSystem, "sapto_lower_threshold");
   
-  setDblElement(&Sys.S.mxo_single, RSystem, "sapto_max_offset");
-  setDblElement(&Sys.S.mxo_couple, RSystem, "sapto_max_offset_married");
+  setIntElement(&Sys.S.mxo_single, RSystem, "sapto_max_offset");
+  setIntElement(&Sys.S.mxo_couple, RSystem, "sapto_max_offset_married");
   setDblElement(&Sys.S.pension_age, RSystem, "sapto_pension_age");
   setDblElement(&Sys.S.second_tax_rate, RSystem, "sapto_second_tax_rate");
   setDblElement(&Sys.S.taper, RSystem, "sapto_taper");

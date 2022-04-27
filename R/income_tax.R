@@ -228,7 +228,8 @@ income_tax <- function(income,
     if (is.double(x)) {
       # Some doubles are almost certainly integers
       # that have been mistranscribed (like phone numbers)
-      return(do_rN(x, N, max_allowed = 99e6))
+      # return(do_rN(x, N, max_allowed = 99e6))
+      return(rep_len(as.integer(pminC(x, .Machine$integer.max)), N))
     }
     x
   }
@@ -978,6 +979,9 @@ income_tax2 <- function(income,
   # don't allocate the same vector
   integerN <- integer(N)
   rN <- function(x) {
+    if (is.logical(x)) {
+      return(as.integer(x))
+    }
     if (is.integer(x) && length(x) == N && !anyNA(x)) {
       return(x)
     }
@@ -990,7 +994,7 @@ income_tax2 <- function(income,
     if (is.double(x)) {
       # Some doubles are almost certainly integers
       # that have been mistranscribed (like phone numbers)
-      return(do_rN(x, N, max_allowed = 99e6))
+      return(rep_len(as.integer(pminC(x, .Machine$integer.max)), N))
     }
     x
   }
@@ -1070,8 +1074,8 @@ income_tax2 <- function(income,
   #                sapto_lower_threshold_married = sapto_lower_threshold_married %||% SAPTO_LWR_MARRIED(yr))
   Yr <- yr
   
-  rebateIncome <- 
-    .subset2(.dots.ATO, "ic_rebate_income")
+  rebateIncome <- .subset2(.dots.ATO, "ic_rebate_income")
+  
   if (is.null(rebateIncome)) {
     rebateIncome <- 
       .Call("Crebate_income", 
@@ -1085,7 +1089,11 @@ income_tax2 <- function(income,
             nThread,
             PACKAGE = "grattanDev")
   }
-   
+  stopifnot(is.integer(c_age_30_june))
+  # stopifnot(is.integer(is_married))
+  stopifnot(is.integer(n_dependants))
+  # stopifnot(is.integer(spc_rebate_income))
+  
   .Call("Cincome_tax",
         Yr,
         ic_taxable_income_loss,
@@ -1163,6 +1171,11 @@ set_offset <- function(offset_1st = integer(1),
   Filter(length, RSystem)
   
   # .Call("C_RSystem", Filter(length, RSystem), PACKAGE = "grattanDev")
+}
+
+income_tax222 <- function(income, yincome, age) {
+  zero <- integer(length(income))
+  .Call("Cincome2022", income, as.integer(yincome), age, zero, zero, 1L, PACKAGE = "grattanDev")
 }
 
 

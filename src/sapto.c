@@ -469,8 +469,8 @@ static double do_1_sapto_sf(int x, int y, int age, bool is_married, Sapto S) {
   }
   
   
-  double max_offset = is_married ? S.mxo_couple : S.mxo_single;
-  double lwr_thresh = is_married ? S.lwr_couple : S.lwr_single;
+  int max_offset = is_married ? S.mxo_couple : S.mxo_single;
+  int lwr_thresh = is_married ? S.lwr_couple : S.lwr_single;
   double taper = S.taper;
   
   double o = x < lwr_thresh ? max_offset : dmax0(max_offset - taper * (x - lwr_thresh));
@@ -483,7 +483,7 @@ static double do_1_sapto_sf(int x, int y, int age, bool is_married, Sapto S) {
   
   // If the spouse's income is so high that no spouse SAPTO is 
   // transferrable, then we just fall back to the original 
-  const double MAX_THR_SPOUSE_XFER_MARRIED = 1602.0 / SAPTO_S12_TAPER + SAPTO_S12_THRESH;
+  const int MAX_THR_SPOUSE_XFER_MARRIED = ceil(1602.0 / SAPTO_S12_TAPER + SAPTO_S12_THRESH);
   if (y > MAX_THR_SPOUSE_XFER_MARRIED) {
     return o;
   }
@@ -531,3 +531,113 @@ void apply_sapto(double * taxi, Person P, Sapto S) {
     *taxi -= sapto;
   }
 }
+
+inline bool bw01(double x) {
+  return !ISNAN(x) && x >= 0 && x <= 1;
+}
+
+static void errifnan(double x, bool warn, const char * var) {
+  if (ISNAN(x)) {
+    if (warn) {
+      warning("%s is NaN", var);
+    } else {
+      error("%s was NaN", var);
+    }
+  }
+}
+
+int lwr_threshold(int mxo, int ord_thresh1, double ord_rate1, int max_lito) {
+  double o = max_lito + mxo;
+  o /= ord_rate1;
+  o += ord_thresh1;
+  return ceil(o); 
+}
+
+static bool valid_sapto_rel(int mxo, int lwr, int upr,
+                            int ord_thresh1, double ord_rate1,
+                            int max_lito, double taper) {
+  int expected_lwr = lwr_threshold(mxo, ord_thresh1, ord_rate1, max_lito);
+  if (expected_lwr != lwr) {
+    return false;
+  }
+  if (taper == 0.125) {
+    int expected_upr = lwr + (mxo << 3);
+    if (expected_upr != upr) {
+      return false;
+    }
+  } else {
+    int expected_upr = ceil(lwr + ((double)mxo) / taper);
+    if (expected_upr != upr) {
+      return false;
+    }
+  }
+  return true;
+}
+
+void validate_sapto(Sapto * S, int fix) {
+  int year = S->year;
+  if (year < MIN_YEAR) {
+    error("Sapto.year = %d but must be %d or later", year, MIN_YEAR);
+  }
+  
+  double pension_age = S->pension_age;
+  if (ISNAN(pension_age)) {
+    error("pension_age was NaN.");
+  }
+  if (R_finite(pension_age)) {
+    if (pension_age > 150) {
+      if (fix) {
+        warning("`Sapto.pension_age = %f` and so will be set to positive infinity");
+        S->pension_age = R_PosInf;
+      } else {
+        error("`Sapto.pension_age = %f` which is an unlikely value.");
+      }
+    }
+  }
+  
+  int mxo_single = S->mxo_single;
+  int mxo_couple = S->mxo_couple;
+  
+  int lwr_single = S->lwr_single;
+  int lwr_couple = S->lwr_couple;
+  
+  int upr_single = S->upr_single;
+  int upr_couple = S->upr_couple;
+  double taper = S->taper;
+  if (taper < 0) {
+    if (fix) {
+      warning("Sapto.taper < 0 and so sign will be reversed.");  
+      S->taper = -taper;
+    } else {
+      error("S.taper < 0.");
+    }
+  }
+  
+  if (upr_single <= lwr_single) {
+    S->upr_single = S->mxo_single / S->taper;
+  }
+  if (upr_couple <= lwr_couple) {
+    S->upr_couple = S->mxo_couple / S->taper;
+  }
+  double first_tax_rate = S->first_tax_rate;
+  double second_tax_rate = S->second_tax_rate;
+  int tax_free_thresh = S->tax_free_thresh;
+  int tax_2nd_thresh = S->tax_2nd_thresh;
+  double lito_max_offset = S->lito_max_offset;
+  double lito_1st_thresh = S->lito_1st_thresh;
+  double lito_1st_taper = S->lito_1st_taper;
+  
+  
+  if (!bw01(second_tax_rate)) {
+    error("Sapto.second_tax_rate not in [0, 1]");
+  }
+  if (!bw01(first_tax_rate) || first_tax_rate > second_tax_rate) {
+    error("Sapto.first_tax_rate must be between 0 and S.second_tax_rate");
+  }
+  
+  
+  
+}
+
+
+
