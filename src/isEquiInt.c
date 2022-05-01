@@ -1,8 +1,8 @@
 #include "grattan.h"
 
-void isEquiInt(SEXP x, SEXP y) {
+void isEquiInt(SEXP x, SEXP y, const char * str) {
   if (!isInteger(x) || !isInteger(y) || xlength(x) != xlength(y)) {
-    error("Internal error: isntEquiInt");
+    error("Internal error: '%s' isntEquiInt", str);
   }
 }
 
