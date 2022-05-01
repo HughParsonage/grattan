@@ -189,10 +189,10 @@ typedef struct {
   int xi;
   int yi;
   int ri; // rebate income
-  int agei;
-  bool is_married;
-  int n_child;
-  bool is_family;
+  unsigned int agei : 7;
+  int is_married : 1;
+  unsigned int n_child : 4;
+  int is_family : 1;
 } Person;
 
 typedef struct {
@@ -260,7 +260,7 @@ typedef struct {
 } System;
 
 // isEquiInt
-void isEquiInt(SEXP x, SEXP y);
+void isEquiInt(SEXP x, SEXP y, const char * str);
 
 // lito.c
 void apply_lito(double * tax, Person P, int yr);
