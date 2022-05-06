@@ -204,7 +204,7 @@ SEXP Cincome_tax(SEXP Yr,
   if (xlength(Yr) != 1) {
     error("Yr must be length-one."); // # nocov
   }
-  if (!isNull(RSystem) && !isList(RSystem)) {
+  if (!isNull(RSystem) && !isVectorList(RSystem)) {
     error("RSystem must be NULL or a list.");
   }
   int nThread = as_nThread(nthreads);

@@ -82,17 +82,24 @@ double ORDINARY_TAX_RATES_2021[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NaN, N
 double ORDINARY_TAX_RATES_2022[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, NaN, NaN, NaN};
 
 int nb_by_year(unsigned int yr) {
-  int NB[40] = 
-    {4, 7, 6, 7, 5, 5,
-     6, 8, 5, 5, 6, 5, 5, 5, 5, 5,
-     5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
-     5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 
-     5, 5};
-  unsigned int i = yr - 1984u;
-  if (i > 39) {
-    return NB[39];
+  if (yr > 1995) {
+    return 5;
   }
-  return NB[i];
+  switch(yr) {
+  case 1984:
+    return 4;
+  case 1985:
+  case 1987:
+    return 7;
+  case 1986:
+  case 1990:
+  case 1994:
+    return 6;
+  case 1991:
+    return 8;
+  default:
+    return 5;
+  }
 }
 
 unsigned int brack_by_yr(int b, int yr) {
@@ -392,8 +399,19 @@ bool hazName(SEXP list, const char * str) {
   return false;
 }
 
+bool starts_with_medicare(const char * str) {
+  return 
+    str[0] == 'm' && str[1] == 'e' && str[2] == 'd' &&
+    str[3] == 'i' && str[4] == 'c' && str[5] == 'a' &&
+    str[6] == 'r' && str[7] == 'e';
+}
+
 // from stats package
-SEXP getListElement(SEXP list, const char *str) {
+SEXP getListElement(SEXP list, const char * str) {
+  if (starts_with_medicare(str) && hazName(list, "Medicare")) {
+    SEXP MedicareList = getListElement(list, "Medicare");
+    return getListElement(MedicareList, str);
+  }
   SEXP elmt = R_NilValue, names = getAttrib(list, R_NamesSymbol);
   for (int i = 0; i < length(list); i++) {
     if (strcmp(CHAR(STRING_ELT(names, i)), str) == 0) {
@@ -482,7 +500,7 @@ System Sexp2System(SEXP RSystem, int yr) {
   if (isNull(RSystem)) {
     return yr2System(yr);
   }
-  if (!isList(RSystem)) {
+  if (!isVectorList(RSystem)) {
     error("(Sexp2System): RSystem was type '%s' but must be type list",
           type2char(TYPEOF(RSystem)));
   }
