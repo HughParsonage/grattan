@@ -212,14 +212,8 @@ income_tax2 <- function(income,
        "Non_emp_spr_amt")
   
   # don't allocate the same vector
-  integerN <- integer(N)
-  rN <- function(x) {
-    if (is.logical(x)) {
-      return(as.integer(x))
-    }
-    return(.Call("Cdo_rn", x, integerN, PACKAGE = utils::packageName()))
-  }
-  
+  zero <- integer(N)
+  rN <- function(x) .rN(x, zero, nThread)
   
   fy.year <- fy.year %||% fy::date2fy(Sys.Date())
   fy.year <- validate_fys_permitted(fy.year)
@@ -229,7 +223,7 @@ income_tax2 <- function(income,
   if (is.null(rebateIncome)) {
     rebateIncome <- 
       .Call("Crebate_income", 
-            ic_taxable_income_loss,  
+            rN(ic_taxable_income_loss),  
             it_rept_empl_super_cont, 
             sc_empl_cont,
             ds_pers_super_cont,
@@ -258,7 +252,7 @@ income_tax2 <- function(income,
                              n_dependants,
                              spc_rebate_income,
                              System, # RSystem
-                             1L,
+                             nThread,
                              PACKAGE = "grattanDev"),
               by = "yr"]
     return(.subset2(ans, "tax"))
