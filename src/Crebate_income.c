@@ -21,7 +21,7 @@ void add_recycle0(int * restrict ansp, R_xlen_t N, int nThread, SEXP x) {
       return;
     }
     FORLOOP({
-      ansp[i] += xp[0];
+      ansp[i] += xp0;
     })
   }
 }
@@ -55,6 +55,7 @@ SEXP Crebate_income(SEXP iic_taxable_income_loss,
   const int * yr = INTEGER(Yr);
   // # nocov end
   R_xlen_t N = xlength(iic_taxable_income_loss);
+  const int * ic_taxable_income_loss = INTEGER(iic_taxable_income_loss);
   SEXP ans = PROTECT(allocVector(INTSXP, N));
   int * restrict ansp = INTEGER(ans);
   int nThread = as_nThread(nthreads);
@@ -66,12 +67,20 @@ SEXP Crebate_income(SEXP iic_taxable_income_loss,
   add_recycle0(ansp, N, nThread, ssc_empl_cont);
   add_recycle0(ansp, N, nThread, dds_pers_super_cont);
   add_recycle0(ansp, N, nThread, iit_invest_loss);
-  add_recycle0(ansp, N, nThread, iis_net_rent);
+  if (isInteger(iis_net_rent)) {
+    const int * is_net_rent = INTEGER(iis_net_rent);
+    FORLOOP({
+      if (is_net_rent[i] > 0) {
+        ansp[i] += is_net_rent[i];
+      }
+    })
+  }
   // add_recycle0(ansp, N, nThread, iit_rept_fringe_benefit);
   if (isInteger(iit_rept_fringe_benefit)) {
     double r_fbt = 1 - top_marginal_rate(yr[0]);
     const int * fbtp = INTEGER(iit_rept_fringe_benefit);
     if (xlength(Yr) == 1) {
+      
       if (xlength(iit_rept_fringe_benefit) == N) {
         FORLOOP({
           ansp[i] += r_fbt * fbtp[i];
@@ -88,13 +97,12 @@ SEXP Crebate_income(SEXP iic_taxable_income_loss,
       }
     } else {
       if (xlength(iit_rept_fringe_benefit) == N) {
-        
         FORLOOP({
           unsigned int yri = yr[i] - 1990;
           if (yri >= 43) {
             yri = 42;
           }
-          double r_fbt = 1 - top_marginal_rates_since_1990[yri];
+          r_fbt = 1 - (top_marginal_rates_since_1990[yri] + 0.02);
           ansp[i] += r_fbt * fbtp[i];
         })
       } else {

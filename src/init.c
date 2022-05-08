@@ -9,14 +9,14 @@
 
 /* .Call calls */
 extern SEXP Cdecode_age_range(SEXP, SEXP);
-extern SEXP Cdo_rn(SEXP, SEXP);
+extern SEXP Cdo_rn(SEXP, SEXP, SEXP);
 extern SEXP Cincome_tax(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Cincome2022(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Crebate_income(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
     {"Cdecode_age_range", (DL_FUNC) &Cdecode_age_range, 2},
-    {"Cdo_rn",            (DL_FUNC) &Cdo_rn,            2},
+    {"Cdo_rn",            (DL_FUNC) &Cdo_rn,            3},
     {"Cincome_tax",       (DL_FUNC) &Cincome_tax,       9},
     {"Cincome2022",       (DL_FUNC) &Cincome2022,       7},
     {"Crebate_income",    (DL_FUNC) &Crebate_income,    9},
