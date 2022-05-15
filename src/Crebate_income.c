@@ -35,7 +35,8 @@ const double top_marginal_rates_since_1990[43] =
 
 inline double top_marginal_rate(int yr) {
   // approximate! need to include accurate medicare levy 
-  return top_marginal_rates_since_1990[yr - 1990] + 0.02;  
+  // return top_marginal_rates_since_1990[yr - 1990] + 0.02;  
+  return 0.47;
 }
 
 SEXP Crebate_income(SEXP iic_taxable_income_loss,  
@@ -63,17 +64,27 @@ SEXP Crebate_income(SEXP iic_taxable_income_loss,
     ansp[i] = 0;
   })
   
+  
   add_recycle0(ansp, N, nThread, iit_rept_empl_super_cont);
   add_recycle0(ansp, N, nThread, ssc_empl_cont);
   add_recycle0(ansp, N, nThread, dds_pers_super_cont);
   add_recycle0(ansp, N, nThread, iit_invest_loss);
   if (isInteger(iis_net_rent)) {
     const int * is_net_rent = INTEGER(iis_net_rent);
-    FORLOOP({
-      if (is_net_rent[i] > 0) {
-        ansp[i] += is_net_rent[i];
+    if (xlength(iis_net_rent) == 1) {
+      const int is_net_rent0 = is_net_rent[0];
+      if (is_net_rent0 > 0) {
+        FORLOOP({
+          ansp[i] += is_net_rent0;
+        })
       }
-    })
+    } else if (xlength(iis_net_rent) == N) {
+      FORLOOP({
+        if (is_net_rent[i] > 0) {
+          ansp[i] += is_net_rent[i];
+        }
+      })
+    }
   }
   // add_recycle0(ansp, N, nThread, iit_rept_fringe_benefit);
   if (isInteger(iit_rept_fringe_benefit)) {
