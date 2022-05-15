@@ -1,6 +1,6 @@
 #include "grattan.h"
 
-SEXP COffset(SEXP x, double y, double a, double m) {
+SEXP Offset(SEXP x, double y, double a, double m) {
   R_xlen_t N = xlength(x);
   double b = y / m + a;
   SEXP ans = PROTECT(allocVector(REALSXP, N));
@@ -103,6 +103,12 @@ void apply_offsetn(double * tax, Person P, OffsetN O) {
   } else {
     *tax -= y;
   }
+}
+
+
+
+SEXP COffset(SEXP x, SEXP y, SEXP a, SEXP m) {
+  return Offset(x, asReal(y), asReal(a), asReal(m));
 }
 
 
