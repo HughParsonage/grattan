@@ -88,7 +88,7 @@ get_column_from <- function(DT, nom, ..., NULL_OK = FALSE) {
         if (NULL_OK) {
           return(NULL)
         } else {
-          stop("DT lacked name '", nom, "'.", typeof)
+          stop("DT lacked name '", nom, "'.")
         }
       }
       return(get_column_from(DT, ...))

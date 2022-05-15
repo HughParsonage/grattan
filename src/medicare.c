@@ -13,7 +13,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1984;
     M.taper = ML_TAPER_1984;
     M.rate = ML_RATE_1984;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -25,7 +25,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1985;
     M.taper = ML_TAPER_1985;
     M.rate = ML_RATE_1985;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -37,7 +37,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1986;
     M.taper = ML_TAPER_1986;
     M.rate = ML_RATE_1986;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -49,7 +49,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1987;
     M.taper = ML_TAPER_1987;
     M.rate = ML_RATE_1987;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -61,7 +61,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1988;
     M.taper = ML_TAPER_1988;
     M.rate = ML_RATE_1988;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -73,7 +73,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1989;
     M.taper = ML_TAPER_1989;
     M.rate = ML_RATE_1989;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -85,7 +85,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1990;
     M.taper = ML_TAPER_1990;
     M.rate = ML_RATE_1990;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -97,7 +97,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1991;
     M.taper = ML_TAPER_1991;
     M.rate = ML_RATE_1991;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -109,7 +109,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1992;
     M.taper = ML_TAPER_1992;
     M.rate = ML_RATE_1992;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -121,7 +121,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1993;
     M.taper = ML_TAPER_1993;
     M.rate = ML_RATE_1993;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -133,7 +133,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1994;
     M.taper = ML_TAPER_1994;
     M.rate = ML_RATE_1994;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -145,7 +145,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1995;
     M.taper = ML_TAPER_1995;
     M.rate = ML_RATE_1995;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -157,7 +157,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1996;
     M.taper = ML_TAPER_1996;
     M.rate = ML_RATE_1996;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -169,7 +169,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1997;
     M.taper = ML_TAPER_1997;
     M.rate = ML_RATE_1997;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -181,7 +181,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1998;
     M.taper = ML_TAPER_1998;
     M.rate = ML_RATE_1998;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -193,7 +193,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_1999;
     M.taper = ML_TAPER_1999;
     M.rate = ML_RATE_1999;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -205,7 +205,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2000;
     M.taper = ML_TAPER_2000;
     M.rate = ML_RATE_2000;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -217,7 +217,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2001;
     M.taper = ML_TAPER_2001;
     M.rate = ML_RATE_2001;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -229,7 +229,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2002;
     M.taper = ML_TAPER_2002;
     M.rate = ML_RATE_2002;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -241,7 +241,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2003;
     M.taper = ML_TAPER_2003;
     M.rate = ML_RATE_2003;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -253,7 +253,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2004;
     M.taper = ML_TAPER_2004;
     M.rate = ML_RATE_2004;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -265,7 +265,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2005;
     M.taper = ML_TAPER_2005;
     M.rate = ML_RATE_2005;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -277,7 +277,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2006;
     M.taper = ML_TAPER_2006;
     M.rate = ML_RATE_2006;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -289,7 +289,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2007;
     M.taper = ML_TAPER_2007;
     M.rate = ML_RATE_2007;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -301,7 +301,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2008;
     M.taper = ML_TAPER_2008;
     M.rate = ML_RATE_2008;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -313,7 +313,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2009;
     M.taper = ML_TAPER_2009;
     M.rate = ML_RATE_2009;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -325,7 +325,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2010;
     M.taper = ML_TAPER_2010;
     M.rate = ML_RATE_2010;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -337,7 +337,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2011;
     M.taper = ML_TAPER_2011;
     M.rate = ML_RATE_2011;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -349,7 +349,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2012;
     M.taper = ML_TAPER_2012;
     M.rate = ML_RATE_2012;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -361,7 +361,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2013;
     M.taper = ML_TAPER_2013;
     M.rate = ML_RATE_2013;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -373,7 +373,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2014;
     M.taper = ML_TAPER_2014;
     M.rate = ML_RATE_2014;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -385,7 +385,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2015;
     M.taper = ML_TAPER_2015;
     M.rate = ML_RATE_2015;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -397,7 +397,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2016;
     M.taper = ML_TAPER_2016;
     M.rate = ML_RATE_2016;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -409,7 +409,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2017;
     M.taper = ML_TAPER_2017;
     M.rate = ML_RATE_2017;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -421,7 +421,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2018;
     M.taper = ML_TAPER_2018;
     M.rate = ML_RATE_2018;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -433,7 +433,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2019;
     M.taper = ML_TAPER_2019;
     M.rate = ML_RATE_2019;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -445,7 +445,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2020;
     M.taper = ML_TAPER_2020;
     M.rate = ML_RATE_2020;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -457,7 +457,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2021;
     M.taper = ML_TAPER_2021;
     M.rate = ML_RATE_2021;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -469,7 +469,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2022;
     M.taper = ML_TAPER_2022;
     M.rate = ML_RATE_2022;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -481,7 +481,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2023;
     M.taper = ML_TAPER_2023;
     M.rate = ML_RATE_2023;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -493,7 +493,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2024;
     M.taper = ML_TAPER_2024;
     M.rate = ML_RATE_2024;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -505,7 +505,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2025;
     M.taper = ML_TAPER_2025;
     M.rate = ML_RATE_2025;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -517,7 +517,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2026;
     M.taper = ML_TAPER_2026;
     M.rate = ML_RATE_2026;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -529,7 +529,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2027;
     M.taper = ML_TAPER_2027;
     M.rate = ML_RATE_2027;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -541,7 +541,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2028;
     M.taper = ML_TAPER_2028;
     M.rate = ML_RATE_2028;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -553,7 +553,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2029;
     M.taper = ML_TAPER_2029;
     M.rate = ML_RATE_2029;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -565,7 +565,7 @@ Medicare yr2Medicare(int yr) {
     M.lwr_thr_up_per_child = ML_LWR_THR_UP_PER_CHILD_2030;
     M.taper = ML_TAPER_2030;
     M.rate = ML_RATE_2030;
-    M.has_sapto_thr = 0;
+    M.has_sapto_thr = 1;
     M.sapto_age = 65;
   }
     break;
@@ -750,6 +750,22 @@ void validate_medicare(Medicare M) {
   }
 }
 
+void print_Medicare(Medicare M) {
+  Rprintf("Medicare:\n");
+  Rprintf("\t%d\n", M.lwr_single);
+  Rprintf("\t%d\n", M.upr_single);
+  Rprintf("\t%d\n", M.lwr_family);
+  Rprintf("\t%d\n", M.upr_family);
+  Rprintf("\t%d\n", M.has_sapto_thr);
+  Rprintf("\t%d\n", M.sapto_age);
+  Rprintf("\t%d\n", M.lwr_single_sapto);
+  Rprintf("\t%d\n", M.upr_single_sapto);
+  Rprintf("\t%d\n", M.lwr_family_sapto);
+  Rprintf("\t%d\n", M.upr_family_sapto);
+  Rprintf("\t%d\n", M.lwr_thr_up_per_child);
+  Rprintf("\t%f\n", M.taper);
+  Rprintf("\t%f\n", M.rate);
+}
 
 
 

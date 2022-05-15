@@ -84,7 +84,6 @@ test_that("Medicare with dependants", {
 test_that("Agrees with Master tax guide", {
   expect_equal(medicare_levy(44000, fy.year = "2014-15", Spouse_income = 0, n_dependants = 2), 226.30)
   expect_lte(abs(medicare_levy(29000, fy.year = "2014-15", Spouse_income = 27000, n_dependants = 4) - 403.25), 0.05)
-  expect_lte(abs(MedicareLevySaptoYear(29000, 27000, 4, FALSE, 2015) - 403.25), 0.05)
   expect_lte(abs(medicare_levy(27000, fy.year = "2014-15", Spouse_income = 29000, n_dependants = 4) - 375.44), 0.05)
 })
 
@@ -123,21 +122,7 @@ test_that("new_medicare_levy matches", {
 })
 
 
-test_that("Medicare levy C++ constant", {
-  expect_equal(MedicareLevySaptoYear(47900, 15e3, 1L, TRUE, 2017), 
-               medicare_levy(47900,
-                             fy.year = "2016-17",
-                             sapto.eligible = TRUE,
-                             Spouse_income = 15e3,
-                             n_dependants = 1L))
-  
-  expect_equal(MedicareLevySaptoYear(47900, 15e3, 1L, TRUE, 2019), 
-               medicare_levy(47900,
-                             fy.year = "2018-19",
-                             sapto.eligible = TRUE,
-                             Spouse_income = 15e3,
-                             n_dependants = 1L))
-})
+
 
 
 
