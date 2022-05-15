@@ -1,3 +1,6 @@
+#ifndef grattan_2022_H
+#define grattan_2022_H
+#include "grattan.h"
 double ML_LWR_THRESHOLD_SINGLE_2022 = 22801;
 double ML_UPR_THRESHOLD_SINGLE_2022 = 28503;
 double ML_LWR_THRESHOLD_FAMILY_2022 = 38474;
@@ -21,3 +24,73 @@ double LITO_MAX_OFFSET_2022 = 445;
 double LITO_1ST_THRESH_2022 = 37000;
 double LITO_1ST_TAPER_2022 = -0.015;
 double SBTO_DISCOUNT_2022 = 0.08;
+
+System System2022 = {
+  .yr = 2022,
+  .nb = 5,
+  .BRACKETS = {0, 18200, 37000, 90000, 180000, INT_MAX, INT_MAX, INT_MAX},
+  .RATES = {0, 0.19, 0.325, 0.37, 0.45, 0.45, 0.45, 0.45},
+  .M = {
+  .lwr_single = 22801,
+  .upr_single = 28503,
+  .lwr_family = 38474,
+  .upr_family = 48094,
+  .has_sapto_thr = true,
+  .sapto_age = 65,
+  .lwr_single_sapto = 36056,
+  .upr_single_sapto = 45071,
+  .lwr_family_sapto = 50191,
+  .upr_family_sapto = 62740,
+  .lwr_thr_up_per_child = 3533,
+  .taper = 0.1,
+  .rate = 0.02
+  },
+  .has_sapto = true,
+  .S = {
+  .year = 2022,
+  .pension_age = 65,
+  .mxo_single = 2230,
+  .mxo_couple = 1602,
+  .lwr_single = 33622,
+  .lwr_couple = 30316,
+  .upr_single = 51462,
+  .upr_couple = 43132,
+  .taper = 0.125,
+  .first_tax_rate = 0.19,
+  .second_tax_rate = 0.325,
+  .tax_free_thresh = 6000,
+  .tax_2nd_thresh = 37000,
+  .lito_max_offset = 445,
+  .lito_1st_thresh = 37000,
+  .lito_1st_taper = 0.015
+  
+  },
+  .has_lito = true,
+  .has_lmito = true,
+  .has_offset1 = false,
+  .O1 = {
+  .offset_1st = 0,
+  .thresh_1st = 0,
+  .taper_1st = 0,
+  .refundable = false
+  },
+  .has_offset2 = false,
+  .O2 = {
+  .offset_1st = 0,
+  .thresh_1st = 0,
+  .taper_1st = 0,
+  .thresh_2nd = 0,
+  .taper_2nd = 0,
+  .refundable = 0
+  },
+  .has_offsetn = false,
+  .Offsets = {
+  .offset_1st = 0,
+  .Thresholds = {0, 0, 0, 0, 0, 0, 0, 0},
+  .Tapers = {0, 0, 0, 0, 0, 0, 0, 0},
+  .nb = 0,
+  .refundable = false,
+  },
+  .has_temp_budget_repair_levy = false
+};
+#endif

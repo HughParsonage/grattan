@@ -27,9 +27,11 @@ SEXP Cdecode_age_range(SEXP x, SEXP nthreads) {
   FORLOOP({
     ansp[i] = 0;
     unsigned int xpi = xp[i];
+    unsigned int api = 42;
     if (xpi < 12) {
-      ansp[i] = ages_by_age_range[xpi];
+      api = ages_by_age_range[xpi];
     }
+    ansp[i] = api;
   })
   UNPROTECT(1);
   return ans;

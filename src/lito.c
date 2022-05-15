@@ -50,7 +50,7 @@ int threshold_lito1(int yr) {
   return 0;
 }
 
-void apply_lito(double * tax, Person P, int yr) {
+void apply_lito(double * tax, int x, int yr) {
   if (yr < 1994) {
     return;
   }
@@ -61,7 +61,7 @@ void apply_lito(double * tax, Person P, int yr) {
     O.offset_1st = max_lito1(yr);
     O.refundable = false;
     O.thresh_1st = threshold_lito1(yr);
-    apply_offset1(tax, P, O);
+    apply_offset1(tax, x, O);
     return;
   }
   
@@ -72,7 +72,7 @@ void apply_lito(double * tax, Person P, int yr) {
   O.taper_2nd = -0.015;
   O.thresh_1st = 37500;
   O.thresh_2nd = 45000;
-  apply_offset2(tax, P, O);
+  apply_offset2(tax, x, O);
 }
 
 Offset1 LITO_ante2020(int yr) {

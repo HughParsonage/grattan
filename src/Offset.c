@@ -38,8 +38,7 @@ SEXP COffset(SEXP x, double y, double a, double m) {
   return ans;
 } 
 
-void apply_offset1(double * tax, Person P, Offset1 O) {
-  int x = P.xi;
+void apply_offset1(double * tax, int x, Offset1 O) {
   double y = O.offset_1st;
   int b1 = O.thresh_1st;
   double r1 = O.taper_1st;
@@ -52,8 +51,7 @@ void apply_offset1(double * tax, Person P, Offset1 O) {
   }
 }
 
-void apply_offset2(double * tax, Person P, Offset2 O) {
-  int x = P.xi;
+void apply_offset2(double * tax, int x, Offset2 O) {
   double y = O.offset_1st;
   double offset = y;
   int b1 = O.thresh_1st;
