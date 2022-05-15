@@ -108,14 +108,27 @@ medicare_levy <- function(income,
     }
   }
   
-  Spouse_income <- do_rN(Spouse_income, N)
-  n_dependants <- do_rN(n_dependants, N)
+  Spouse_income <- do_rN(Spouse_income, integer(N))
+  n_dependants <- do_rN(n_dependants, integer(N))
   
   do_medicare_levy(income = income, 
                    yr = fy2yr(fy.year),
                    spouse_income = Spouse_income, 
                    sapto_eligible = sapto.eligible,
                    is_married = is_married,
-                   n_dependants = n_dependants,
-                   sapto_const = hutilscpp::is_constant(sapto.eligible))
+                   n_dependants = n_dependants)
 }
+
+
+do_medicare_levy <- function(income, yr, spouse_income, sapto_eligible, is_married, n_dependants) {
+  zero <- integer(length(income))
+  .Call("Cdo_medicare_levy", 
+        do_rN(income, zero),
+        yr, 
+        do_rN(spouse_income, zero),
+        do_rN(sapto_eligible, zero),
+        do_rN(is_married, zero),
+        do_rN(n_dependants, zero),
+        PACKAGE = packageName())
+}
+

@@ -115,7 +115,7 @@ static void do_ordinary_PITs(double * restrict ansp, R_xlen_t N, const int * xp,
   do_ordinary_PITs5(ansp, N, xp, BRACKS, RATES, nThread);
 }
 
-static double do_1_ML(Person P, Medicare M) {
+static double do_1_ML(const Person P, const Medicare M) {
   bool sapto = P.agei >= 65;
   double lower_threshold = sapto ? M.lwr_single_sapto : M.lwr_single;
   if (P.xi < lower_threshold) {
@@ -126,6 +126,7 @@ static double do_1_ML(Person P, Medicare M) {
     // subs.8(5) of Act
     double upr_over_lwr = M.upr_family / ((double)M.lwr_family);
     double lower_family_threshold = (sapto ? M.lwr_family_sapto : M.lwr_family) + P.n_child * M.lwr_thr_up_per_child;
+    
     double upper_family_threshold = upr_over_lwr * lower_family_threshold;
     double family_income = P.xi + P.yi;
     if (family_income <= lower_family_threshold) {
@@ -350,6 +351,36 @@ SEXP Cincome2022(SEXP x, SEXP y, SEXP rb, SEXP age, SEXP isMarried, SEXP nDepend
   UNPROTECT(1);
   return ans;
   
+}
+
+SEXP Cdo_medicare_levy(SEXP x, SEXP Year, SEXP y, SEXP Eligible, SEXP IsMarried, SEXP nDependants) {
+  R_xlen_t N = xlength(x);
+  const int * xp = INTEGER(x);
+  const int * yp = INTEGER(y);
+  const int * ep = INTEGER(Eligible);
+  const int * mp = INTEGER(IsMarried);
+  const int * cp = INTEGER(nDependants);
+  SEXP ans = PROTECT(allocVector(REALSXP, N));
+  double * restrict ansp = REAL(ans);
+  int nThread = 1;
+  int yr = asInteger(Year);
+  const Medicare M = yr2Medicare(yr);
+  
+  FORLOOP({
+    ansp[i] = 0;
+    
+    Person P;
+    P.xi = xp[i];
+    P.yi = yp[i]; 
+    P.ri = xp[i];
+    P.n_child = cp[i];
+    P.is_married = mp[i];
+    P.is_family = P.n_child || P.yi || P.is_married;
+    P.agei = ep[i] ? 70 : 42;
+    ansp[i] = do_1_ML((const Person)P, M);
+  })
+  UNPROTECT(1);
+  return ans;
 }
 
 

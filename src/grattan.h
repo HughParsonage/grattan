@@ -267,6 +267,7 @@ void apply_lito(double * tax, Person P, int yr);
 
 // medicare.c
 Medicare yr2Medicare(int yr);
+void print_Medicare(Medicare M);
 
 // minmax.c
 double dmax(double x, double y);
