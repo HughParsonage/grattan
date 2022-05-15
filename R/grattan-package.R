@@ -34,6 +34,7 @@
 #' @importFrom hutils mutate_ntile
 #' 
 #' @importFrom hutilscpp anyOutside
+#' @importFrom hutilscpp coalesce0
 #' @importFrom hutilscpp isntConstant
 #' @importFrom hutilscpp pmin0
 #' @importFrom hutilscpp pmax0

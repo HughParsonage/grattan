@@ -18,62 +18,16 @@
 #define FORLOOP(content)                                                \
 _Pragma("omp parallel for num_threads(nThread)")                        \
   for (R_xlen_t i = 0; i < N; ++i) {                                    \
-    content                                                             \
+    (content);                                                             \
   }
 #else
 #define FORLOOP(content)                                       \
 for (R_xlen_t i = 0; i < N; ++i) {                             \
-  content                                                      \
+  (content);                                                      \
 }
 #endif
 
-#include "1984.h"
-#include "1985.h"
-#include "1986.h"
-#include "1987.h"
-#include "1988.h"
-#include "1989.h"
-#include "1990.h"
-#include "1991.h"
-#include "1992.h"
-#include "1993.h"
-#include "1994.h"
-#include "1995.h"
-#include "1996.h"
-#include "1997.h"
-#include "1998.h"
-#include "1999.h"
-#include "2000.h"
-#include "2001.h"
-#include "2002.h"
-#include "2003.h"
-#include "2004.h"
-#include "2005.h"
-#include "2006.h"
-#include "2007.h"
-#include "2008.h"
-#include "2009.h"
-#include "2010.h"
-#include "2011.h"
-#include "2012.h"
-#include "2013.h"
-#include "2014.h"
-#include "2015.h"
-#include "2016.h"
-#include "2017.h"
-#include "2018.h"
-#include "2019.h"
-#include "2020.h"
-#include "2021.h"
-#include "2022.h"
-#include "2023.h"
-#include "2024.h"
-#include "2025.h"
-#include "2026.h"
-#include "2027.h"
-#include "2028.h"
-#include "2029.h"
-#include "2030.h"
+
 
 #define MAX_NBRACK 8
 #define MAX_OFFSETN 31
@@ -259,11 +213,62 @@ typedef struct {
   bool has_temp_budget_repair_levy;
 } System;
 
+#include "1984.h"
+#include "1985.h"
+#include "1986.h"
+#include "1987.h"
+#include "1988.h"
+#include "1989.h"
+#include "1990.h"
+#include "1991.h"
+#include "1992.h"
+#include "1993.h"
+#include "1994.h"
+#include "1995.h"
+#include "1996.h"
+#include "1997.h"
+#include "1998.h"
+#include "1999.h"
+#include "2000.h"
+#include "2001.h"
+#include "2002.h"
+#include "2003.h"
+#include "2004.h"
+#include "2005.h"
+#include "2006.h"
+#include "2007.h"
+#include "2008.h"
+#include "2009.h"
+#include "2010.h"
+#include "2011.h"
+#include "2012.h"
+#include "2013.h"
+#include "2014.h"
+#include "2015.h"
+#include "2016.h"
+#include "2017.h"
+extern System System2017;
+#include "2018.h"
+#include "2019.h"
+#include "2020.h"
+#include "2021.h"
+#include "2022.h"
+extern System System2022;
+#include "2023.h"
+#include "2024.h"
+#include "2025.h"
+#include "2026.h"
+#include "2027.h"
+#include "2028.h"
+#include "2029.h"
+#include "2030.h"
+
+
 // isEquiInt
 void isEquiInt(SEXP x, SEXP y, const char * str);
 
 // lito.c
-void apply_lito(double * tax, Person P, int yr);
+void apply_lito(double * tax, int x, int yr);
 
 // medicare.c
 Medicare yr2Medicare(int yr);
@@ -278,8 +283,8 @@ double dmax0(double x);
 double dmin0(double x);
 
 // Offset.c
-void apply_offset1(double * tax, Person P, Offset1 O);
-void apply_offset2(double * tax, Person P, Offset2 O);
+void apply_offset1(double * tax, int x, Offset1 O);
+void apply_offset2(double * tax, int x, Offset2 O);
 
 // omp_diagnose.c
 int as_nThread(SEXP x);

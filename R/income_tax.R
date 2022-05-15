@@ -279,7 +279,7 @@ income_tax2 <- function(income,
 
 income_tax222 <- function(income, yincome, age, rebate) {
   zero <- integer(length(income))
-  .Call("Cincome2022", income, as.integer(yincome), rebate, age, zero, zero, 4L, PACKAGE = "grattanDev")
+  .Call("Cincome2022", income, do_rN(yincome, zero, 1L), rebate, age, zero, zero, 1L, PACKAGE = "grattanDev")
 }
 
 

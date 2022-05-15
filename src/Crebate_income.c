@@ -109,11 +109,7 @@ SEXP Crebate_income(SEXP iic_taxable_income_loss,
     } else {
       if (xlength(iit_rept_fringe_benefit) == N) {
         FORLOOP({
-          unsigned int yri = yr[i] - 1990;
-          if (yri >= 43) {
-            yri = 42;
-          }
-          r_fbt = 1 - (top_marginal_rates_since_1990[yri] + 0.02);
+          r_fbt = 1 - 0.47;
           ansp[i] += r_fbt * fbtp[i];
         })
       } else {

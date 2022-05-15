@@ -353,6 +353,12 @@ double rates_by_yr(int b, int yr) {
 }
 
 System yr2System(int yr) {
+  switch(yr) {
+  case 2017:
+    return System2017;
+  case 2020:
+    return System2022;
+  }
   System Sys;
   Sys.yr = yr;
   int nb = nb_by_year(yr);

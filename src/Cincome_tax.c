@@ -160,28 +160,28 @@ void apply_lmito(double * taxi, int x) {
 
 
 static void tax(double * taxi, Person P, const System Sys) {
-  if (Sys.has_sapto) {
-    apply_sapto(taxi, P, Sys.S);
-  }
-  if (Sys.has_offset1) {
-    apply_offset1(taxi, P, Sys.O1);
-  }
-  if (Sys.has_offset2) {
-    apply_offset2(taxi, P, Sys.O2);
-  }
-  if (Sys.has_lmito) {
-    apply_lmito(taxi, P.xi);
-  }
-  if (Sys.has_lito) {
-    apply_lito(taxi, P, Sys.yr);
-  }
-
-  *taxi += do_1_ML(P, Sys.M);
-
-  if (Sys.has_temp_budget_repair_levy && P.xi >= TEMP_BUDGET_REPAIR_LEVY_THRESH) {
-    *taxi += TEMP_BUDGET_REPAIR_LEVY_RATE * (P.xi - TEMP_BUDGET_REPAIR_LEVY_THRESH);
-  }
-
+  // if (Sys.has_sapto) {
+  //   apply_sapto(taxi, P, Sys.S);
+  // }
+  // if (Sys.has_offset1) {
+  //   apply_offset1(taxi, P, Sys.O1);
+  // }
+  // if (Sys.has_offset2) {
+  //   apply_offset2(taxi, P, Sys.O2);
+  // }
+  // if (Sys.has_lmito) {
+  //   apply_lmito(taxi, P.xi);
+  // }
+  // if (Sys.has_lito) {
+  //   apply_lito(taxi, P, Sys.yr);
+  // }
+  // 
+  // *taxi += do_1_ML(P, Sys.M);
+  // 
+  // if (Sys.has_temp_budget_repair_levy && P.xi >= TEMP_BUDGET_REPAIR_LEVY_THRESH) {
+  //   *taxi += TEMP_BUDGET_REPAIR_LEVY_RATE * (P.xi - TEMP_BUDGET_REPAIR_LEVY_THRESH);
+  // }
+  
   
 }
 
@@ -189,7 +189,10 @@ int c0(int x) {
   return x == NA_INTEGER ? 0 : x;
 }
 
-
+inline Person pp(int x, int y, int r, unsigned int age, bool is_married, int n_child) {
+  const Person P = { .xi = x, .yi = y, .ri = r, .agei = age, .is_married = is_married, .n_child = n_child, .is_family = n_child || is_married || y };
+  return P;
+}
 
 
 
@@ -227,23 +230,74 @@ SEXP Cincome_tax(SEXP Yr,
   SEXP ans = PROTECT(allocVector(REALSXP, N));
   double * restrict ansp = REAL(ans);
   
+  
+  if (Sys.has_sapto) {
+    FORLOOP({
+      int xpi = ic_taxable_income_loss[i];
+      int ypi = spc_rebate_income[i];
+      unsigned int api = c_age_30_june[i] & 127;
+      int rpi = rebate_income[i];
+      unsigned int cpi = n_dependants[i] & 15;
+      bool is_marriedi = is_married[i];
+      bool is_familyi = is_married || cpi || ypi;
+      const Person P = pp(xpi, ypi, rpi, api, is_marriedi, cpi);
+      ansp[i] = do_ordinary_PIT(P, Sys.BRACKETS, Sys.RATES, Sys.nb);
+      apply_sapto(&ansp[i], P, Sys.S);
+    })
+  } else {
+    FORLOOP({
+      int xpi = ic_taxable_income_loss[i];
+      int ypi = spc_rebate_income[i];
+      unsigned int api = c_age_30_june[i] & 127;
+      int rpi = rebate_income[i];
+      unsigned int cpi = n_dependants[i] & 15;
+      bool is_marriedi = is_married[i];
+      bool is_familyi = is_married || cpi || ypi;
+      const Person P = pp(xpi, ypi, rpi, api, is_marriedi, cpi);
+      ansp[i] = do_ordinary_PIT(P, Sys.BRACKETS, Sys.RATES, Sys.nb);
+      // no sapto
+    })
+  }
+  if (Sys.has_offset1) {
+    FORLOOP({
+      int xpi = ic_taxable_income_loss[i];
+      apply_offset1(&ansp[i], xpi, Sys.O1);
+    })
+    
+  }
+  if (Sys.has_offset2) {
+    FORLOOP({
+      int xpi = ic_taxable_income_loss[i];
+      apply_offset2(&ansp[i], xpi, Sys.O2);
+    })
+  }
+  if (Sys.has_lmito) {
+    FORLOOP({
+      int xpi = ic_taxable_income_loss[i];
+      apply_lmito(&ansp[i], xpi);
+    })
+    
+  }
+  if (Sys.has_lito) {
+    FORLOOP({
+      int xpi = ic_taxable_income_loss[i];
+      apply_lito(&ansp[i], xpi, yr);
+    })
+  }
   FORLOOP({
     int xpi = ic_taxable_income_loss[i];
-    int api = c_age_30_june[i];
-    Person P;
-    P.xi = xpi;
-    P.yi = c0(spc_rebate_income[i]);
-    P.ri = rebate_income[i];
-    P.agei = c_age_30_june[i];
-    P.is_married = is_married[i];
-    P.n_child = n_dependants[i];
-    P.is_family = P.is_married || P.n_child || P.yi;
+    int ypi = spc_rebate_income[i];
+    unsigned int api = c_age_30_june[i] & 127;
+    int rpi = rebate_income[i];
+    unsigned int cpi = n_dependants[i] & 15;
+    bool is_marriedi = is_married[i];
+    bool is_familyi = is_married || cpi || ypi;
+    const Person P = pp(xpi, ypi, rpi, api, is_marriedi, cpi);
+    ansp[i] += do_1_ML(P, Sys.M);
+  })
     
-    ansp[i] = do_ordinary_PIT(P, Sys.BRACKETS, Sys.RATES, Sys.nb);
-    tax(&ansp[i], P, Sys);
-
-})
-  UNPROTECT(1);
+    
+    UNPROTECT(1);
   return ans;
 }
 
@@ -289,7 +343,7 @@ SEXP Cincome2022(SEXP x, SEXP y, SEXP rb, SEXP age, SEXP isMarried, SEXP nDepend
       } else {
         o += 17225;
         if (xpi <= 180000) {
-         o += 0.37 * (xpi - 90000);
+          o += 0.37 * (xpi - 90000);
         } else {
           o += 33300;
           o += 0.45 * (xpi - 180000);
@@ -321,25 +375,25 @@ SEXP Cincome2022(SEXP x, SEXP y, SEXP rb, SEXP age, SEXP isMarried, SEXP nDepend
     }
     
     if (false) {
-    int ypi = yp[i];
-    double o2 = 0.02 * xpi;
-    if (Sys.has_sapto && api >= 65 && xpi <= 50119) {
-      double sapto = (2230 - 0.125 * (xpi - 32279));
-      o -= sapto;
-      if (o < 0) {
-        o = 0;
+      int ypi = yp[i];
+      double o2 = 0.02 * xpi;
+      if (Sys.has_sapto && api >= 65 && xpi <= 50119) {
+        double sapto = (2230 - 0.125 * (xpi - 32279));
+        o -= sapto;
+        if (o < 0) {
+          o = 0;
+        }
+        if (xpi > 36056) {
+          double o1 = 0.1 * (xpi - 36056);
+          o += (o1 < o2) ? o1 : o2;
+        }
+        ansp[i] = o;
+        continue;
       }
-      if (xpi > 36056) {
-        double o1 = 0.1 * (xpi - 36056);
+      if (xpi > 22801) {
+        double o1 = 0.1 * (xpi - 22801);
         o += (o1 < o2) ? o1 : o2;
       }
-      ansp[i] = o;
-      continue;
-    }
-    if (xpi > 22801) {
-      double o1 = 0.1 * (xpi - 22801);
-      o += (o1 < o2) ? o1 : o2;
-    }
     } else {
       o += do_1_ML(P, Sys.M);
     }
@@ -348,7 +402,7 @@ SEXP Cincome2022(SEXP x, SEXP y, SEXP rb, SEXP age, SEXP isMarried, SEXP nDepend
     
     
   })
-  UNPROTECT(1);
+    UNPROTECT(1);
   return ans;
   
 }
@@ -379,7 +433,7 @@ SEXP Cdo_medicare_levy(SEXP x, SEXP Year, SEXP y, SEXP Eligible, SEXP IsMarried,
     P.agei = ep[i] ? 70 : 42;
     ansp[i] = do_1_ML((const Person)P, M);
   })
-  UNPROTECT(1);
+    UNPROTECT(1);
   return ans;
 }
 

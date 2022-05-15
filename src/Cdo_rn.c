@@ -5,32 +5,12 @@
 
 
 static R_xlen_t first_NA(const int * xp, R_xlen_t N, int nThread) {
-  if (N < 1000) {
-    for (int i = 0; i < N; ++i) {
-      if (xp[i] == NA_INTEGER) {
-        return i+ 1;
-      }
-    }
-    return 0;
-  }
-  for (int i = 0; i < 1000; ++i) {
+  for (R_xlen_t i = 0; i < N; ++i) {
     if (xp[i] == NA_INTEGER) {
       return i + 1;
     }
   }
-  R_xlen_t j = N + 1;
-#if defined _OPENMP && _OPENMP >= 201511 
-#pragma omp parallel for reduction(min : j) schedule(static)
-#endif
-  for (R_xlen_t i = N; i >= 1000; --i) {
-    if (xp[i] == NA_INTEGER) {
-      j = i + 1;
-    }
-  }
-  if (j == N + 1) {
-    return 0;
-  }
-  return j;
+  return 0;
 }
 
 SEXP Cdo_rn_int1(const int xp, R_xlen_t N, int nThread, SEXP along) {
@@ -46,12 +26,12 @@ SEXP Cdo_rn_int1(const int xp, R_xlen_t N, int nThread, SEXP along) {
   return ans;
 }
 
-SEXP Cdo_rn_intN(const int * xp, R_xlen_t N, int nThread, SEXP along) {
-  R_xlen_t j = first_NA(xp, N, nThread);
+SEXP Cdo_rn_intN(const int * xp, R_xlen_t N, int nThread, SEXP along, R_xlen_t j) {
   SEXP ans = PROTECT(allocVector(INTSXP, N));
   int * restrict ansp = INTEGER(ans);
+  const R_xlen_t j0 = j - 1;
   FORLOOP({
-    if (i >= j && xp[i] == NA_INTEGER) {
+    if (i >= j0 && xp[i] == NA_INTEGER) {
       ansp[i] = 0;
       continue;
     }
@@ -122,7 +102,12 @@ SEXP Cdo_rn(SEXP x, SEXP along, SEXP nthreads) {
     if (xlength(x) == 1) {
       return Cdo_rn_int1(asInteger(x), N, nThread, along);
     } else {
-      return Cdo_rn_intN(INTEGER(x), N, nThread, along);
+      R_xlen_t j = first_NA(INTEGER(x), xlength(x), nThread);
+      if (j) {
+        return Cdo_rn_intN(INTEGER(x), N, nThread, along, j);
+      } else {
+        return x;
+      }
     }
     break;
   case REALSXP: 

@@ -120,7 +120,15 @@ medicare_levy <- function(income,
 }
 
 
-do_medicare_levy <- function(income, yr, spouse_income, sapto_eligible, is_married, n_dependants) {
+do_medicare_levy <- function(income, yr, spouse_income, sapto_eligible, is_married, n_dependants,
+                             sapto_const = FALSE,
+                             lwr_single = 21980,
+                             lwr_family = 37089,
+                             lwr_single_sapto = 34758,
+                             lwr_family_sapto = 48385,
+                             lwr_up_per_child = 2253,
+                             taper = 0.1,
+                             rate = 0.02) {
   zero <- integer(length(income))
   .Call("Cdo_medicare_levy", 
         do_rN(income, zero),
