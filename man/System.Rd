@@ -25,6 +25,10 @@ Medicare(
   medicare_levy_lower_family_threshold = NULL,
   medicare_levy_lower_family_sapto_threshold = NULL,
   medicare_levy_lower_up_for_each_child = NULL,
+  medicare_levy_upper_sapto_threshold = NULL,
+  medicare_levy_upper_family_threshold = NULL,
+  medicare_levy_upper_family_sapto_threshold = NULL,
+  medicare_levy_upper_threshold = NULL,
   ...
 )
 
@@ -70,6 +74,8 @@ Since the temporary budget repair levy was imposed on a discrete tax bracket whe
 
 \item{medicare_levy_lower_up_for_each_child}{The amount to add to the \code{_family_threshold}s for each dependant child.}
 
+\item{medicare_levy_upper_threshold}{Minimum taxable income at which the Medicare levy will be applied at the full Medicare levy rate (2\% in 2015-16). Between this threshold and the \code{medicare_levy_lower_threshold}, a tapered rate applies, starting from zero and climbing to \code{medicare_levy_rate}.}
+
 \item{sapto_max_offset}{The maximum offset available through SAPTO.}
 
 \item{sapto_lower_threshold}{The threshold at which SAPTO begins to reduce (from \code{sapto_max_offset}).}
@@ -78,8 +84,6 @@ Since the temporary budget repair levy was imposed on a discrete tax bracket whe
 
 \item{sapto_max_offset_married, sapto_lower_threshold_married, sapto_taper_married}{As above,
 but applied to members of a couple}
-
-\item{medicare_levy_upper_threshold}{Minimum taxable income at which the Medicare levy will be applied at the full Medicare levy rate (2\% in 2015-16). Between this threshold and the \code{medicare_levy_lower_threshold}, a tapered rate applies, starting from zero and climbing to \code{medicare_levy_rate}.}
 }
 \description{
 FUNCTION_DESCRIPTION

@@ -78,7 +78,11 @@ income_tax <- function(income,
     .dots.ATO <- data.table(ic_taxable_income_loss = income, 
                             c_age_30_june = age)
   }
-  income_tax2(income, fy.year = fy.year, .dots.ATO = .dots.ATO)
+  ans <- income_tax2(income, fy.year = fy.year, .dots.ATO = .dots.ATO)
+  if (match.arg(return.mode) == "integer") {
+    ans <- as.integer(ans)
+  }
+  ans
 }
 
 get_column_from <- function(DT, nom, ..., NULL_OK = FALSE) {
