@@ -74,8 +74,7 @@ test_that("Projections match collections", {
     project_to(to_fy = "2016-17") %>%
     .[, tax := income_tax(Taxable_Income, 
                           "2016-17",
-                          .dots.ATO = copy(.),
-                          .debug = FALSE)] %>%
+                          .dots.ATO = copy(.))] %>%
     .[, .(total = sum(tax * WEIGHT))] %$%
     total %>%
     divide_by(193863 * 1e6) %>%

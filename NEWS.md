@@ -1,7 +1,19 @@
+## 2.0.0.0
+
+### Breaking changes
+
+* `income_tax` no longer accepts `family_status`, `n_dependants`, 
+  `allow.forecasts` and `.debug`
+
+### API changes
+
+* `income_tax` now uses `System`
+
 ## 1.9.0.10
 
 * New data changes to 2022
 * `rent_assistance()` example no longer works because of outdated data.
+
 
 ### Breaking changes anticipated in 2.0.0.0
 

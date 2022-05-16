@@ -4,18 +4,12 @@
 #' @param income The individual assessable income.
 #' @param fy.year The financial year in which the income was earned. Tax years 2000-01 to 2018-19 are supported, as well as the tax year 2019-20, for convenience. 
 #' If \code{fy.year} is not given, the current financial year is used by default.
-#' @param age The individual's age. Ignored if \code{.dots.ATO} is provided (and contains
-#' an age variable such as \code{age_range} or \code{Birth_year}).
-#' @param family_status For Medicare and SAPTO purposes.
-#' @param n_dependants An integer for the number of children of the taxpayer (for the purposes of the Medicare levy).
 #' @param return.mode The mode (numeric or integer) of the returned vector.
 #' @param .dots.ATO A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files.
 #' 
 #' Age variables in \code{.dots.ATO} take precedence over \code{age} and providing both
 #' is a warning.
 #' 
-#' @param allow.forecasts should dates beyond 2019-20 be permitted? Currently, not permitted.
-#' @param .debug (logical, default: \code{FALSE})  If \code{TRUE}, returns a \code{data.table} containing the components of income tax calculated. (This argument and its result is liable to change in future versions, possibly without notice.)
 #' @author Tim Cameron, Brendan Coates, Matthew Katzen, Hugh Parsonage, William Young
 #' @return The total personal income tax payable.
 #' @details The function is inflexible by design.
@@ -68,12 +62,8 @@
 income_tax <- function(income,
                        fy.year = NULL,
                        age = NULL,
-                       family_status = "individual",
-                       n_dependants = NULL,
                        .dots.ATO = NULL,
-                       return.mode = c("numeric", "integer"),
-                       allow.forecasts = FALSE,
-                       .debug = FALSE) {
+                       return.mode = c("numeric", "integer")) {
   if (is.null(.dots.ATO)) {
     .dots.ATO <- data.table(ic_taxable_income_loss = income, 
                             c_age_30_june = age)
