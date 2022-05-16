@@ -65,6 +65,10 @@ Medicare <- function(yr,
                      medicare_levy_lower_family_threshold = NULL,
                      medicare_levy_lower_family_sapto_threshold = NULL,
                      medicare_levy_lower_up_for_each_child = NULL,
+                     medicare_levy_upper_sapto_threshold = NULL,
+                     medicare_levy_upper_family_threshold = NULL,
+                     medicare_levy_upper_family_sapto_threshold = NULL,
+                     medicare_levy_upper_threshold = NULL,
                      ...) {
   RSystem <- mget(ls(sorted = FALSE))
   Filter(length, RSystem)

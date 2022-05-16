@@ -62,6 +62,7 @@
 #' @importFrom stats setNames
 #' 
 #' @importFrom utils hasName
+#' @importFrom utils packageName
 #' 
 #' 
 #' @import data.table
