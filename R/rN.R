@@ -11,6 +11,9 @@
 
 
 do_rN <- .rN <- function(x, zero, nThread = getOption("grattan.nThread", 1L)) {
+  if (is.integer(x) && length(x) == length(zero) && !anyNA(x)) {
+    return(x)
+  }
   if (is.logical(x)) {
     return(as.integer(coalesce0(x)))
   }
