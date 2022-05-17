@@ -1,3 +1,4 @@
+
 #include "grattan.h"
 
 
@@ -353,10 +354,21 @@ double rates_by_yr(int b, int yr) {
 }
 
 System yr2System(int yr) {
+  if (yr > 2022) {
+    return System2022;
+  }
   switch(yr) {
   case 2017:
     return System2017;
+  case 2018:
+    return System2018;
+  case 2019:
+    return System2019;
   case 2020:
+    return System2020;
+  case 2021:
+    return System2021;
+  case 2022:
     return System2022;
   }
   System Sys;

@@ -49,7 +49,7 @@ System System2019 = {
 },
 .has_sapto = true,
 .S = {
-.year = 2021,
+.year = 2019,
 .pension_age = 65,
 .mxo_single = 2230,
 .mxo_couple = 1602,

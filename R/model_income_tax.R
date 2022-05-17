@@ -14,7 +14,6 @@
 #' the \code{Taxable_Income} is reduced by 0.2\% before the tax rates are applied.
 #' 
 #' If \code{NULL}, an elasticity of 0 is used. 
-#' @param n_dependants The number of dependants for each entry in \code{sample_file}.
 #' @param ordinary_tax_thresholds A numeric vector specifying the lower bounds of the brackets for "ordinary tax" as defined by the Regulations.
 #' The first element should be zero if there is a tax-free threshold.
 #' @param ordinary_tax_rates The marginal rates of ordinary tax. The first element should be zero if there is a tax-free threshold. 
@@ -88,7 +87,6 @@
 
 model_income_tax <- function(sample_file,
                              baseline_fy,
-                             n_dependants = 0L,
                              elasticity_of_taxable_income = NULL,
                              ordinary_tax_thresholds = NULL,
                              ordinary_tax_rates = NULL,
@@ -194,8 +192,7 @@ model_income_tax <- function(sample_file,
   
   old_tax <- income_tax(income,
                         fy.year = baseline_fy,
-                        .dots.ATO = .dots.ATO,
-                        n_dependants = n_dependants)
+                        .dots.ATO = .dots.ATO)
   if (calc_baseline_tax && return. != "tax") {
     set(sample_file,
         j = "baseline_tax",

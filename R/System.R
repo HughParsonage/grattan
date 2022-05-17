@@ -31,6 +31,7 @@
 #' but applied to members of a couple
 #' @param ... Other parameters that may be supported in future versions. 
 #' 
+#' @export
 
 System <- function(yr, 
                    ordinary_tax_thresholds = NULL,

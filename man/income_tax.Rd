@@ -9,6 +9,7 @@ income_tax(
   fy.year = NULL,
   age = NULL,
   .dots.ATO = NULL,
+  System = NULL,
   return.mode = c("numeric", "integer")
 )
 }
@@ -18,10 +19,16 @@ income_tax(
 \item{fy.year}{The financial year in which the income was earned. Tax years 2000-01 to 2018-19 are supported, as well as the tax year 2019-20, for convenience. 
 If \code{fy.year} is not given, the current financial year is used by default.}
 
+\item{age}{The individual's age. Ignored if \code{.dots.ATO} is provided (and contains
+an age variable such as \code{age_range} or \code{Birth_year}).}
+
 \item{.dots.ATO}{A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files.
 
 Age variables in \code{.dots.ATO} take precedence over \code{age} and providing both
 is a warning.}
+
+\item{System}{A \code{tax-system} created by \code{System()} or \code{NULL}, the default,
+corresponding to the tax system of the given year.}
 
 \item{return.mode}{The mode (numeric or integer) of the returned vector.}
 }
