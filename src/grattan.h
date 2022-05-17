@@ -249,9 +249,13 @@ typedef struct {
 #include "2017.h"
 extern System System2017;
 #include "2018.h"
+extern System System2018;
 #include "2019.h"
+extern System System2019;
 #include "2020.h"
+extern System System2020;
 #include "2021.h"
+extern System System2021;
 #include "2022.h"
 extern System System2022;
 #include "2023.h"

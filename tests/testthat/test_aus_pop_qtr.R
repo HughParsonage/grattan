@@ -1,8 +1,8 @@
 context("Aus pop qtr")
 
 test_that("Returns correct values", {
-  skip("Slight differences temporarily")
-  expect_equal(aus_pop_qtr("2016-Q1"), 24122701)
+  
+  expect_equal(aus_pop_qtr("2016-Q1"), 24103425)
   expect_gte(aus_pop_qtr("2018-Q1"), 24122701)
   expect_gte(aus_pop_qtr("2018-Q4"), 25e6)
   # by age

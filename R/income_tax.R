@@ -4,11 +4,16 @@
 #' @param income The individual assessable income.
 #' @param fy.year The financial year in which the income was earned. Tax years 2000-01 to 2018-19 are supported, as well as the tax year 2019-20, for convenience. 
 #' If \code{fy.year} is not given, the current financial year is used by default.
+#' @param age The individual's age. Ignored if \code{.dots.ATO} is provided (and contains
+#' an age variable such as \code{age_range} or \code{Birth_year}).
 #' @param return.mode The mode (numeric or integer) of the returned vector.
 #' @param .dots.ATO A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files.
 #' 
 #' Age variables in \code{.dots.ATO} take precedence over \code{age} and providing both
 #' is a warning.
+#' 
+#' @param System A \code{tax-system} created by \code{System()} or \code{NULL}, the default,
+#' corresponding to the tax system of the given year.
 #' 
 #' @author Tim Cameron, Brendan Coates, Matthew Katzen, Hugh Parsonage, William Young
 #' @return The total personal income tax payable.
@@ -63,12 +68,16 @@ income_tax <- function(income,
                        fy.year = NULL,
                        age = NULL,
                        .dots.ATO = NULL,
+                       System = NULL,
                        return.mode = c("numeric", "integer")) {
   if (is.null(.dots.ATO)) {
     .dots.ATO <- data.table(ic_taxable_income_loss = income, 
                             c_age_30_june = age)
   }
-  ans <- income_tax2(income, fy.year = fy.year, .dots.ATO = .dots.ATO)
+  ans <- income_tax2(income, 
+                     fy.year = fy.year,
+                     .dots.ATO = .dots.ATO,
+                     System = NULL)
   if (match.arg(return.mode) == "integer") {
     ans <- as.integer(ans)
   }
@@ -164,7 +173,7 @@ income_tax2 <- function(income,
   
   c_age_30_june <- age_from_file(.dots.ATO)
   
-
+  
   
   is_net_rent <- 
     s2("is_net_rent", "Net_rent_amt")
@@ -237,17 +246,17 @@ income_tax2 <- function(income,
                      is_married = rN(is_married),
                      n_dependants = rN(n_dependants),
                      spc_rebate_income = rN(spc_rebate_income))
-    ans <- DT[, tax := .Call("Cincome_tax",
-                             .BY[[1]],
-                             ic_taxable_income_loss,
-                             rebateIncome,
-                             c_age_30_june,
-                             is_married,
-                             n_dependants,
-                             spc_rebate_income,
-                             System, # RSystem
-                             nThread,
-                             PACKAGE = "grattanDev"),
+    ans <- DT[, "tax" := .Call("Cincome_tax",
+                               .BY[[1]],
+                               ic_taxable_income_loss,
+                               rebateIncome,
+                               c_age_30_june,
+                               is_married,
+                               n_dependants,
+                               spc_rebate_income,
+                               System, # RSystem
+                               nThread,
+                               PACKAGE = "grattanDev"),
               by = "yr"]
     return(.subset2(ans, "tax"))
   }
@@ -271,9 +280,16 @@ income_tax2 <- function(income,
 
 
 
-income_tax222 <- function(income, yincome, age, rebate) {
+income_tax222 <- function(alife) {
+  income <- .subset2(alife, "ic_taxable_income_loss")
+  rebateIncome <- .subset2(alife, "ic_rebate_income")
   zero <- integer(length(income))
-  .Call("Cincome2022", income, do_rN(yincome, zero, 1L), rebate, age, zero, zero, 1L, PACKAGE = "grattanDev")
+  .Call("Cincome2022", income, 
+        .subset2(alife, "spc_rebate_income"),
+        rebateIncome, 
+        .subset2(alife, "c_age_30_june"), 
+        .subset2(alife, "sp_flag"), 
+        .subset2(alife, "c_depend_child"), 1L, PACKAGE = "grattanDev")
 }
 
 

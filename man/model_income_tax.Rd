@@ -7,7 +7,6 @@
 model_income_tax(
   sample_file,
   baseline_fy,
-  n_dependants = 0L,
   elasticity_of_taxable_income = NULL,
   ordinary_tax_thresholds = NULL,
   ordinary_tax_rates = NULL,
@@ -53,8 +52,6 @@ model_income_tax(
 \item{baseline_fy}{If a parameter is not selected, the parameter's value in this tax year is used.
 
 Must be a valid tax year and one for which \code{income_tax} has been programmed.}
-
-\item{n_dependants}{The number of dependants for each entry in \code{sample_file}.}
 
 \item{elasticity_of_taxable_income}{Either \code{NULL} (the default), or a numeric vector the same length of \code{sample_file} (or length-1) providing the elasticity of taxable income for each observation in \code{sample_file}; 
 \deqn{\frac{\Delta z / z}{\Delta \tau / (1 - \tau)}} 
