@@ -132,13 +132,14 @@ SEXP Cincome_tax(SEXP Yr,
   const int * n_dependants = INTEGER(nDependants);
   
   const System Sys = Sexp2System(RSystem, yr);
-  SEXP ans = PROTECT(allocVector(REALSXP, N));
-  double * restrict ansp = REAL(ans);
+  
   
   Person * PP = malloc(sizeof(Person) * N);
   if (PP == NULL) {
     return R_NilValue;
   }
+  SEXP ans = PROTECT(allocVector(REALSXP, N));
+  double * restrict ansp = REAL(ans);
   FORLOOP({
     int xpi = ic_taxable_income_loss[i];
     int ypi = spc_rebate_income[i];
