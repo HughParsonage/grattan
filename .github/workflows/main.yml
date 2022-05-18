@@ -1,0 +1,73 @@
+name: Check
+'on': push
+jobs:
+  build:
+    name: covr
+    runs-on: ubuntu-latest
+    env:
+      TT_AT_HOME: "TRUE"
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@master
+      - name: Install Package Dependencies
+        run: |-
+          Rscript -e "install.packages(c('rcmdcheck', 'remotes', 'covr'), repos = 'https://demo.rstudiopm.com/all/__linux__/bionic/latest')"
+          Rscript -e "remotes::install_deps(dependencies = TRUE, repos = 'https://demo.rstudiopm.com/all/__linux__/bionic/latest')"
+      - name: codecov
+        run: Rscript -e "covr::codecov(quiet = FALSE)"
+    container: rocker/verse:latest
+  rcmdchecker:
+    name: Rcmdcheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@master
+      - name: Install Package Dependencies
+        run: |-
+            Rscript -e "install.packages(c('rcmdcheck', 'remotes'), repos = 'https://demo.rstudiopm.com/all/__linux__/bionic/latest')"
+            Rscript -e "remotes::install_deps(dependencies = TRUE, repos = 'https://demo.rstudiopm.com/all/__linux__/bionic/latest')"
+      - name: Run Check
+        run: Rscript -e "rcmdcheck::rcmdcheck(args = '--no-manual', build_args = '--no-manual', error_on = 'note')"
+    container: rocker/verse:latest
+  rchk:
+    runs-on: ubuntu-latest
+    container:
+      image: rhub/ubuntu-rchk
+      options: --user=root
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install glue only
+      env:
+        LLVM_COMPILER: "clang"
+      run: |-
+         Rscript -e "install.packages('glue', repos ='https://demo.rstudiopm.com/all/__linux__/bionic/latest')"
+    - uses: r-lib/actions/run-rchk@v2
+      with:
+        setup-only: true
+    - name: Install package
+      run: |-
+         install.packages('remotes', repos = 'https://cran.rstudio.com/')
+         remotes::install_local()
+      shell: Rscript {0}
+    - uses: r-lib/actions/run-rchk@v2
+      with:
+        run-only: true
+
+  test-r-sanitizers:
+    name: ASAN-UBSAN
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    container:
+      image: rhub/rocker-gcc-san
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 5
+          submodules: true
+      - name: Install packages
+        shell: bash
+        run: |
+          Rdevel -q -e "ip <- function(x) install.packages(x[!sapply(x, requireNamespace, quietly = TRUE)], quiet = TRUE, repos = 'https://cran.r-project.org'); ip(c('grattan'))"
+          Rdevel CMD build .
+          Rdevel CMD INSTALL --install-tests grattan*.tar.gz
