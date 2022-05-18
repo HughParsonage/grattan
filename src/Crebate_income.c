@@ -33,7 +33,7 @@ const double top_marginal_rates_since_1990[43] =
    0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45, 0.45
   };
 
-inline double top_marginal_rate(int yr) {
+double top_marginal_rate(int yr) {
   // approximate! need to include accurate medicare levy 
   // return top_marginal_rates_since_1990[yr - 1990] + 0.02;  
   return 0.47;

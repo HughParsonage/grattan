@@ -532,7 +532,7 @@ void apply_sapto(double * taxi, Person P, Sapto S) {
   }
 }
 
-inline bool bw01(double x) {
+bool bw01(double x) {
   return !ISNAN(x) && x >= 0 && x <= 1;
 }
 
