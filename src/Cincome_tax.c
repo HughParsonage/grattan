@@ -69,6 +69,7 @@ static double do_1_ML(const Person P, const Medicare M) {
       double o2 = M.rate * family_income;
       double o = (o1 < o2) ? o1 : o2;
       if (P.yi > 0) {
+        // The fraction of
         return (o * P.xi) / family_income;
       }
       return o;
