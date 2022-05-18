@@ -96,7 +96,7 @@ int c0(int x) {
   return x == NA_INTEGER ? 0 : x;
 }
 
-inline Person pp(int x, int y, int r, unsigned int age, bool is_married, int n_child) {
+Person pp(int x, int y, int r, unsigned int age, bool is_married, int n_child) {
   const Person P = { .xi = x, .yi = y, .ri = r, .agei = age, .is_married = is_married, .n_child = n_child, .is_family = n_child || is_married || y };
   return P;
 }
