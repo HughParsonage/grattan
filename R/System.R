@@ -94,6 +94,7 @@ rate_by_year <- function(yr, b = 1:8) {
 }
 
 sapto_dat <- function(yr, e = 0L) {
-  .Call("Csapto_dat", yr, as.integer(e), PACKAGE = packageName())
+  
+  .Call("Csapto_dat", max(2001L, yr), as.integer(e), PACKAGE = packageName())
 }
 
