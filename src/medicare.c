@@ -730,6 +730,30 @@ Medicare yr2Medicare(int yr) {
   return M;
 }
 
+SEXP Cml_lwr(SEXP Yr, SEXP fam) {
+  int f = asInteger(fam);
+  int yr = asInteger(Yr);
+  System Sys = yr2System(yr);
+  switch(f) {
+  case 0:
+    return ScalarInteger(Sys.M.lwr_single);
+  case 1:
+    return ScalarInteger(Sys.M.lwr_family);
+  case 2:
+    return ScalarInteger(Sys.M.lwr_single_sapto);
+  case 3:
+    return ScalarInteger(Sys.M.lwr_family_sapto);
+  }
+  error("Unsupported.");
+  return R_NilValue;
+}
+
+SEXP Cml_child(SEXP Yr) {
+  int yr = asInteger(Yr);
+  System Sys = yr2System(yr);
+  return ScalarInteger(Sys.M.lwr_thr_up_per_child);
+}
+
 static bool valid_lwr_upr_taper(int mxo, int lwr, int upr, double taper) {
   return lwr + (mxo / taper) == upr;
 }
@@ -742,12 +766,39 @@ static bool valid_lwr_upr_010_002(int lwr, int upr) {
   return 0.02 * upr == (upr - lwr) * 0.1;
 }
 
+static int upper_threshold(int lower, double r, double t) {
+  double ratio = t / (t - r);
+  return ceil(lower * ratio);
+}
+static int lower_threshold(int upper, double r, double t) {
+  double ratio = (t - r) / t;
+  return ceil(upper * ratio);
+}
+static double rate(int lower, int upper, double t) {
+  double o = t * (upper - lower);
+  return o / (double)upper;
+}
 
-void validate_medicare(Medicare M) {
-  if (M.taper == 0.1 && M.rate == 0.02)
-  if (!valid_lwr_upr_010_002(M.lwr_single, M.upr_single)) {
-    error("Lower and upper single Medicare thresholds");
+static void validate_lwr_upr(int * lwr, int * upr, double * r, double * t, const char * str, int fix, int yr) {
+  double ratio = t[0]/(t[0] - r[0]);
+  int exp_upr = lwr[0] * ratio;
+  int dxp_upr = upr[0] - exp_upr;
+  if (dxp_upr > 1 || dxp_upr < -1) {
+    if (!fix) {
+      error("`%s = %d`, but %d was expected", str, upr[0], exp_upr);
+    }
+    upr[0] = exp_upr;
   }
+  
+}
+
+
+void validate_medicare(Medicare * M, int fix, int yr) {
+  validate_lwr_upr(&(M->lwr_single), &(M->upr_single), &(M->rate), &(M->taper), "medicare_levy_upper_threshold", fix, yr);
+  validate_lwr_upr(&(M->lwr_single_sapto), &(M->upr_single_sapto), &(M->rate), &(M->taper), "medicare_levy_upper_sapto_threshold", fix, yr);
+  validate_lwr_upr(&(M->lwr_family), &(M->upr_family), &(M->rate), &(M->taper), "medicare_levy_upper_family_threshold", fix, yr);
+  validate_lwr_upr(&(M->lwr_family_sapto), &(M->upr_family_sapto), &(M->rate), &(M->taper), "medicare_levy_upper_sapto_family_threshold", fix, yr);
+  
 }
 
 void print_Medicare(Medicare M) {

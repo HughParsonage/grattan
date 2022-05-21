@@ -2,22 +2,12 @@
 % Please edit documentation in R/System.R
 \name{System}
 \alias{System}
-\alias{Medicare}
-\alias{Sapto}
 \title{FUNCTION_TITLE}
 \usage{
 System(
   yr,
   ordinary_tax_thresholds = NULL,
   ordinary_tax_rates = NULL,
-  Medicare = NULL,
-  offsets = NULL,
-  Sapto = NULL,
-  ...
-)
-
-Medicare(
-  yr,
   medicare_levy_taper = NULL,
   medicare_levy_rate = NULL,
   medicare_levy_lower_threshold = NULL,
@@ -29,18 +19,15 @@ Medicare(
   medicare_levy_upper_family_threshold = NULL,
   medicare_levy_upper_family_sapto_threshold = NULL,
   medicare_levy_upper_threshold = NULL,
-  ...
-)
-
-Sapto(
-  yr,
+  offsets = NULL,
   sapto_max_offset = NULL,
   sapto_lower_threshold = NULL,
   sapto_taper = NULL,
   sapto_max_offset_married = NULL,
   sapto_lower_threshold_married = NULL,
   sapto_taper_married = NULL,
-  ...
+  ...,
+  fix = 0L
 )
 }
 \arguments{
@@ -51,14 +38,6 @@ The first element should be zero if there is a tax-free threshold.}
 
 \item{ordinary_tax_rates}{The marginal rates of ordinary tax. The first element should be zero if there is a tax-free threshold. 
 Since the temporary budget repair levy was imposed on a discrete tax bracket when it applied, it is not included in this function.}
-
-\item{Medicare}{A list created by \code{Medicare()}.}
-
-\item{offsets}{PARAM_DESCRIPTION, Default: NULL}
-
-\item{Sapto}{A list created by \code{Sapto()}.}
-
-\item{...}{Other parameters that may be supported in future versions.}
 
 \item{medicare_levy_taper}{The taper that applies between the \code{_lower} and \code{_upper} thresholds.}
 
@@ -76,6 +55,8 @@ Since the temporary budget repair levy was imposed on a discrete tax bracket whe
 
 \item{medicare_levy_upper_threshold}{Minimum taxable income at which the Medicare levy will be applied at the full Medicare levy rate (2\% in 2015-16). Between this threshold and the \code{medicare_levy_lower_threshold}, a tapered rate applies, starting from zero and climbing to \code{medicare_levy_rate}.}
 
+\item{offsets}{PARAM_DESCRIPTION, Default: NULL}
+
 \item{sapto_max_offset}{The maximum offset available through SAPTO.}
 
 \item{sapto_lower_threshold}{The threshold at which SAPTO begins to reduce (from \code{sapto_max_offset}).}
@@ -84,6 +65,15 @@ Since the temporary budget repair levy was imposed on a discrete tax bracket whe
 
 \item{sapto_max_offset_married, sapto_lower_threshold_married, sapto_taper_married}{As above,
 but applied to members of a couple}
+
+\item{...}{Other parameters that may be supported in future versions.}
+
+\item{fix}{\code{integer(1)} If \code{0L}, the default, an error will be emitted if
+parameters are inconsistent; if \code{1L}, inconsistencies will be fixed.}
+
+\item{Sapto}{A list created by \code{Sapto()}.}
+
+\item{Medicare}{A list created by \code{Medicare()}.}
 }
 \description{
 FUNCTION_DESCRIPTION

@@ -228,6 +228,21 @@ unsigned int brack_by_yr(int b, int yr) {
   return 0;
 }
 
+SEXP Cbracks_by_year(SEXP Yr, SEXP bb) {
+  int yr = asInteger(Yr);
+  const int * b = INTEGER(bb);
+  int n = length(bb);
+  if (n > 8) {
+    n = 8;
+  }
+  SEXP ans = PROTECT(allocVector(INTSXP, n));
+  for (int i = 0; i < n; ++i) {
+    INTEGER(ans)[i] = brack_by_yr(b[i] - 1, yr);
+  }
+  UNPROTECT(1);
+  return ans;
+}
+
 double rates_by_yr(int b, int yr) {
   switch(yr) {
   case 1984:
@@ -353,11 +368,28 @@ double rates_by_yr(int b, int yr) {
   return 0; // # nocov
 }
 
+SEXP Crates_by_yr(SEXP Yr, SEXP bb) {
+  int yr = asInteger(Yr);
+  const int * b = INTEGER(bb);
+  int n = length(bb);
+  if (n > 8) {
+    n = 8;
+  }
+  SEXP ans = PROTECT(allocVector(REALSXP, n));
+  for (int i = 0; i < n; ++i) {
+    REAL(ans)[i] = rates_by_yr(b[i] - 1, yr);
+  }
+  UNPROTECT(1);
+  return ans;
+}
+
 System yr2System(int yr) {
   if (yr > 2022) {
     return System2022;
   }
   switch(yr) {
+  case 2011:
+    return System2011;
   case 2017:
     return System2017;
   case 2018:
@@ -530,7 +562,7 @@ System Sexp2System(SEXP RSystem, int yr) {
   }
   // Sapto S = yr2Medicare(yr);
   if (hazName(RSystem, "yr")) {
-    int yr = asInteger(getListElement(RSystem, "yr"));
+    yr = asInteger(getListElement(RSystem, "yr"));
     Sys.yr = yr;
     // Sys.
   }
@@ -619,6 +651,25 @@ System Sexp2System(SEXP RSystem, int yr) {
   
   
   return Sys;
+}
+
+
+SEXP CvalidateSystem(SEXP RSystem, SEXP Fix) {
+  if (isNull(RSystem)) {
+    return R_NilValue;
+  }
+  
+  if (!isVectorList(RSystem) || !isInteger(Fix)) {
+    error("(CvalidateSystem): RSystem was type '%s' but must be type list",
+          type2char(TYPEOF(RSystem)));
+  }
+  int fix = asInteger(Fix);
+  int yr = asInteger(getListElement(RSystem, "yr"));
+  System Sys = Sexp2System(RSystem, yr);
+  print_Medicare(Sys.M);
+  validate_medicare(&Sys.M, fix, yr);
+  
+  return RSystem;
 }
 
 
