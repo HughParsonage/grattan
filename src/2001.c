@@ -1,3 +1,7 @@
+#ifndef grattan_2001_H
+#define grattan_2001_H
+#include "grattan.h"
+
 double ML_LWR_THRESHOLD_SINGLE_2001 = 13808;
 double ML_UPR_THRESHOLD_SINGLE_2001 = 14927;
 double ML_LWR_THRESHOLD_FAMILY_2001 = 23300;
@@ -19,3 +23,71 @@ double SAPTO_MAX_MARRIED_2001 = 1155;
 double SAPTO_LWR_SINGLE_2001 = 15459;
 double SAPTO_LWR_MARRIED_2001 = 25590;
 double SAPTO_TAPER_2001 = -0.125;
+System System2001 = {
+    .yr = 2001,
+  .nb = 5,
+  .BRACKETS = 0, 6000, 20000, 50000, 60000, INT_MAX, INT_MAX, INT_MAX,
+  .RATES = 0, 0.17, 0.3, 0.42, 0.47, 0.47, 0.47, 0.47,
+  .M = {
+  .lwr_single = 13808,
+  .upr_single = 16245,
+  .lwr_family = 23300,
+  .upr_family = 27412,
+  .has_sapto_thr = true,
+  .sapto_age = 65,
+  .lwr_single_sapto = 20000,
+  .upr_single_sapto = 23530,
+  .lwr_family_sapto = 31729,
+  .upr_family_sapto = 37329,
+  .lwr_thr_up_per_child = 2140,
+  .taper = 0.1,
+  .rate = 0.015
+  },
+  .has_sapto = true,
+  .S = {
+  .year = 2001,
+  .pension_age = 65,
+  .mxo_single = 1608,
+  .mxo_couple = 1155,
+  .lwr_single = 15459,
+  .lwr_couple = 25590,
+  .upr_single = 28323,
+  .upr_couple = 34830,
+  .taper = 0.125,
+  .first_tax_rate = 0.17,
+  .second_tax_rate = 0.3,
+  .tax_free_thresh = 6000,
+  .tax_2nd_thresh = 20000,
+  .lito_max_offset = 150,
+  .lito_1st_thresh = 20700,
+  .lito_1st_taper = 0.04
+  },
+  .has_lito = true,
+  .has_lmito = false,
+  .has_offset1 = false,
+  .O1 = {
+  .offset_1st = 0,
+  .thresh_1st = 0,
+  .taper_1st = 0,
+  .refundable = false
+  },
+  .has_offset2 = false,
+  .O2 = {
+  .offset_1st = 0,
+  .thresh_1st = 0,
+  .taper_1st = 0,
+  .thresh_2nd = 0,
+  .taper_2nd = 0,
+  .refundable = 0
+  },
+  .has_offsetn = false,
+  .Offsets = {
+  .offset_1st = 0,
+  .Thresholds = {0, 0, 0, 0, 0, 0, 0, 0},
+  .Tapers = {0, 0, 0, 0, 0, 0, 0, 0},
+  .nb = 0,
+  .refundable = false,
+  },
+  .has_temp_budget_repair_levy = false
+};
+#endif
