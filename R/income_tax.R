@@ -130,7 +130,7 @@ age_from_file <- function(.dots.ATO, age = NULL) {
 
 
 
-income_tax2 <- function(income, 
+income_tax2 <- function(income = NULL, 
                         fy.year = NULL, 
                         .dots.ATO = NULL,
                         System = NULL,
@@ -164,7 +164,10 @@ income_tax2 <- function(income,
   ic_taxable_income_loss <- 
     income %||%
     s2("ic_taxable_income_loss",
-       "Taxable_Income")
+       "Taxable_Income", default = NULL)
+  if (is.null(ic_taxable_income_loss)) {
+    stop("Unable to determine taxable income: .dots.ATO lacked names: 'Taxable_Income' or 'ic_taxable_income_loss'.")
+  }
   
   N <- length(ic_taxable_income_loss)
   if (is.data.frame(.dots.ATO) && N != nrow(.dots.ATO)) {

@@ -639,5 +639,30 @@ void validate_sapto(Sapto * S, int fix) {
   
 }
 
+SEXP Csapto_dat(SEXP Yr, SEXP ee) {
+  int y = asInteger(Yr);
+  int e = asInteger(ee);
+  System Sys = yr2System(y);
+  switch(e) {
+  case 0:
+    return ScalarReal(Sys.S.pension_age);
+  case 1:
+    return ScalarInteger(Sys.S.mxo_single);
+  case 2:
+    return ScalarInteger(Sys.S.mxo_couple);
+  case 3:
+    return ScalarInteger(Sys.S.lwr_single);
+  case 4:
+    return ScalarInteger(Sys.S.lwr_couple);
+  case 5:
+    return ScalarInteger(Sys.S.upr_single);
+  case 6:
+    return ScalarInteger(Sys.S.upr_couple);
+  }
+  return ScalarReal(0.125);
+}
+
+
+
 
 

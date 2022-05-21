@@ -31,62 +31,36 @@
 #' but applied to members of a couple
 #' @param ... Other parameters that may be supported in future versions. 
 #' 
+#' @param fix \code{integer(1)} If \code{0L}, the default, an error will be emitted if
+#' parameters are inconsistent; if \code{1L}, inconsistencies will be fixed.
+#' 
 #' @export
 
 System <- function(yr, 
                    ordinary_tax_thresholds = NULL,
                    ordinary_tax_rates = NULL,
-                   Medicare = NULL,
+                   medicare_levy_taper = NULL, 
+                   medicare_levy_rate = NULL,
+                   medicare_levy_lower_threshold = NULL,
+                   medicare_levy_lower_sapto_threshold = NULL,
+                   medicare_levy_lower_family_threshold = NULL,
+                   medicare_levy_lower_family_sapto_threshold = NULL,
+                   medicare_levy_lower_up_for_each_child = NULL,
+                   medicare_levy_upper_sapto_threshold = NULL,
+                   medicare_levy_upper_family_threshold = NULL,
+                   medicare_levy_upper_family_sapto_threshold = NULL,
+                   medicare_levy_upper_threshold = NULL,
                    offsets = NULL,
-                   Sapto = NULL, 
-                   ...) {
+                   sapto_max_offset = NULL,
+                   sapto_lower_threshold = NULL,
+                   sapto_taper = NULL,
+                   sapto_max_offset_married = NULL,
+                   sapto_lower_threshold_married = NULL,
+                   sapto_taper_married = NULL, 
+                   ...,
+                   fix = 0L) {
   RSystem <- mget(ls(sorted = FALSE))
-  if (is.null(Medicare) && !missing(..1)) {
-    Medicare <- Medicare(...)
-  }
-  if (is.null(Sapto) && !missing(..1)) {
-    Sapto <- Sapto(...)
-  }
-  for (m in names(Medicare)) {
-    RSystem[[m]] <- Medicare[[m]]
-  }
-  for (s in names(Sapto)) {
-    RSystem[[s]] <- Medicare[[s]]
-  }
-  Filter(length, RSystem)
-}
-
-#' @rdname System
-#' @export
-Medicare <- function(yr,
-                     medicare_levy_taper = NULL, 
-                     medicare_levy_rate = NULL,
-                     medicare_levy_lower_threshold = NULL,
-                     medicare_levy_lower_sapto_threshold = NULL,
-                     medicare_levy_lower_family_threshold = NULL,
-                     medicare_levy_lower_family_sapto_threshold = NULL,
-                     medicare_levy_lower_up_for_each_child = NULL,
-                     medicare_levy_upper_sapto_threshold = NULL,
-                     medicare_levy_upper_family_threshold = NULL,
-                     medicare_levy_upper_family_sapto_threshold = NULL,
-                     medicare_levy_upper_threshold = NULL,
-                     ...) {
-  RSystem <- mget(ls(sorted = FALSE))
-  Filter(length, RSystem)
-}
-
-#' @rdname System
-#' @export
-Sapto <- function(yr,
-                  sapto_max_offset = NULL,
-                  sapto_lower_threshold = NULL,
-                  sapto_taper = NULL,
-                  sapto_max_offset_married = NULL,
-                  sapto_lower_threshold_married = NULL,
-                  sapto_taper_married = NULL,
-                  ...) {
-  RSystem <- mget(ls(sorted = FALSE))
-  Filter(length, RSystem)
+  .validateSystem(Filter(length, RSystem), fix = fix)
 }
 
 Offsets <- function(offset_1st = integer(1),
@@ -106,3 +80,20 @@ Offsets <- function(offset_1st = integer(1),
        tapers = tapers, 
        refundable = refundable)
 }
+
+.validateSystem <- function(RSystem, fix = 0L) {
+  .Call("CvalidateSystem", RSystem, as.integer(fix), PACKAGE = packageName())
+}
+
+brack_by_year <- function(yr, b = 1:8) {
+  .Call("Cbracks_by_year", yr, b, PACKAGE = packageName())
+}
+
+rate_by_year <- function(yr, b = 1:8) {
+  .Call("Crates_by_yr", yr, b, PACKAGE = packageName())
+}
+
+sapto_dat <- function(yr, e = 0L) {
+  .Call("Csapto_dat", yr, as.integer(e), PACKAGE = packageName())
+}
+

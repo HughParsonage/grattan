@@ -241,11 +241,16 @@ typedef struct {
 #include "2009.h"
 #include "2010.h"
 #include "2011.h"
+
+extern System System2011;
 #include "2012.h"
 #include "2013.h"
 #include "2014.h"
+extern System System2014;
 #include "2015.h"
+extern System System2015;
 #include "2016.h"
+extern System System2016;
 #include "2017.h"
 extern System System2017;
 #include "2018.h"
@@ -277,6 +282,7 @@ void apply_lito(double * tax, int x, int yr);
 // medicare.c
 Medicare yr2Medicare(int yr);
 void print_Medicare(Medicare M);
+void validate_medicare(Medicare * M, int fix, int yr);
 
 // minmax.c
 double dmax(double x, double y);
