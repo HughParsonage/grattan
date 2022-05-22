@@ -1,3 +1,7 @@
+#ifndef grattan_2008_H
+#define grattan_2008_H
+#include "grattan.h"
+
 double ML_LWR_THRESHOLD_SINGLE_2008 = 17309;
 double ML_UPR_THRESHOLD_SINGLE_2008 = 20365;
 double ML_LWR_THRESHOLD_FAMILY_2008 = 29207;
@@ -24,8 +28,8 @@ double SAPTO_TAPER_2008 = -0.125;
 System System2008 = {
     .yr = 2008,
   .nb = 5,
-  .BRACKETS = 0, 6000, 30000, 75000, 150000, INT_MAX, INT_MAX, INT_MAX,
-  .RATES = 0, 0.15, 0.3, 0.4, 0.45, 0.45, 0.45, 0.45,
+  .BRACKETS = {0, 6000, 30000, 75000, 150000, INT_MAX, INT_MAX, INT_MAX},
+  .RATES = {0, 0.15, 0.3, 0.4, 0.45, 0.45, 0.45, 0.45},
   .M = {
   .lwr_single = 17309,
   .upr_single = 20364,
@@ -88,4 +92,4 @@ System System2008 = {
   },
   .has_temp_budget_repair_levy = false
 };
-  }#endif
+#endif

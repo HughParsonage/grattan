@@ -1,3 +1,7 @@
+#ifndef grattan_1990_H
+#define grattan_1990_H
+#include "grattan.h"
+
 double ML_LWR_THRESHOLD_SINGLE_1990 = 10331;
 double ML_UPR_THRESHOLD_SINGLE_1990 = 11019;
 double ML_LWR_THRESHOLD_FAMILY_1990 = 17401;
@@ -40,9 +44,9 @@ System System1990 = {
   .second_tax_rate = 0.29,
   .tax_free_thresh = 6000,
   .tax_2nd_thresh = 17650,
-  .lito_max_offset = NA,
-  .lito_1st_thresh = NA,
-  .lito_1st_taper = NA
+  .lito_max_offset = 0,
+  .lito_1st_thresh = 0,
+  .lito_1st_taper = 0
   },
   .has_lito = false,
   .has_lmito = false,

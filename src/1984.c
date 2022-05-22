@@ -44,9 +44,9 @@ System System1984 = {
   .second_tax_rate = 0.46,
   .tax_free_thresh = 6000,
   .tax_2nd_thresh = 19500,
-  .lito_max_offset = NA,
-  .lito_1st_thresh = NA,
-  .lito_1st_taper = NA
+  .lito_max_offset = 0,
+  .lito_1st_thresh = 0,
+  .lito_1st_taper = 0
   },
   .has_lito = false,
   .has_lmito = false,
