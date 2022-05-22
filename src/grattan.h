@@ -18,7 +18,7 @@
 #define FORLOOP(content)                                                \
 _Pragma("omp parallel for num_threads(nThread)")                        \
   for (R_xlen_t i = 0; i < N; ++i) {                                    \
-    (content);                                                             \
+    (content);                                                          \
   }
 #else
 #define FORLOOP(content)                                       \
@@ -214,6 +214,7 @@ typedef struct {
 } System;
 
 #include "1984.h"
+extern System System1984;
 #include "1985.h"
 #include "1986.h"
 #include "1987.h"

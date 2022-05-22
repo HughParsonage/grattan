@@ -1,3 +1,7 @@
+#ifndef grattan_1987_H
+#define grattan_1987_H
+#include "grattan.h"
+
 double ML_LWR_THRESHOLD_SINGLE_1987 =  8031;
 double ML_UPR_THRESHOLD_SINGLE_1987 =  8518;
 double ML_LWR_THRESHOLD_FAMILY_1987 = 13371;
@@ -40,9 +44,9 @@ System System1987 = {
   .second_tax_rate = 0.265,
   .tax_free_thresh = 6000,
   .tax_2nd_thresh = 12500,
-  .lito_max_offset = NA,
-  .lito_1st_thresh = NA,
-  .lito_1st_taper = NA
+  .lito_max_offset = 0,
+  .lito_1st_thresh = 0,
+  .lito_1st_taper = 0
   },
   .has_lito = false,
   .has_lmito = false,
