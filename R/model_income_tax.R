@@ -167,10 +167,15 @@ model_income_tax <- function(sample_file,
            sapto_taper = sapto_taper,
            sapto_max_offset_married = sapto_max_offset_married,
            sapto_lower_threshold_married = sapto_lower_threshold_married,
-           sapto_taper_married = sapto_taper_married)
+           sapto_taper_married = sapto_taper_married, 
+           fix = 1L)
   
   old_tax <- income_tax2(.dots.ATO = .dots.ATO,
                          fy.year = baseline_fy)
+  if (!is.null(sapto_eligible)) {
+    .dots.ATO[, "c_age_30_june" := fifelse(sapto_eligible, 67L, 42L)]
+  }
+  
   new_tax <- income_tax2(.dots.ATO = .dots.ATO,
                          fy.year = baseline_fy,
                          System = .System)

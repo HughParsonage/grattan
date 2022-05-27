@@ -536,15 +536,7 @@ bool bw01(double x) {
   return !ISNAN(x) && x >= 0 && x <= 1;
 }
 
-static void errifnan(double x, bool warn, const char * var) {
-  if (ISNAN(x)) {
-    if (warn) {
-      warning("%s is NaN", var);
-    } else {
-      error("%s was NaN", var);
-    }
-  }
-}
+
 
 int lwr_threshold(int mxo, int ord_thresh1, double ord_rate1, int max_lito) {
   double o = max_lito + mxo;

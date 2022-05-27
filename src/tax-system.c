@@ -390,6 +390,16 @@ System yr2System(int yr) {
   switch(yr) {
   case 2011:
     return System2011;
+  case 2012:
+    return System2012;
+  case 2013:
+    return System2013;
+  case 2014:
+    return System2014;
+  case 2015:
+    return System2015;
+  case 2016:
+    return System2016;
   case 2017:
     return System2017;
   case 2018:
@@ -451,7 +461,7 @@ bool hazName(SEXP list, const char * str) {
 
 bool starts_with_medicare(const char * str) {
   return 
-    str[0] == 'm' && str[1] == 'e' && str[2] == 'd' &&
+  str[0] == 'm' && str[1] == 'e' && str[2] == 'd' &&
     str[3] == 'i' && str[4] == 'c' && str[5] == 'a' &&
     str[6] == 'r' && str[7] == 'e';
 }
@@ -546,6 +556,20 @@ void setDblElements(double * o, int n, SEXP list, const char * str) {
   }
 }
 
+int getIntElement(SEXP List, const char * str, int ifnotfound) {
+  if (!hazName(List, str)) {
+    return ifnotfound;
+  }
+  return asInteger(getListElement(List, str));
+}
+
+double getDblElement(SEXP List, const char * str, double ifnotfound) {
+  if (!hazName(List, str)) {
+    return ifnotfound;
+  }
+  return asReal(getListElement(List, str));
+}
+
 System Sexp2System(SEXP RSystem, int yr) {
   if (isNull(RSystem)) {
     return yr2System(yr);
@@ -626,7 +650,7 @@ System Sexp2System(SEXP RSystem, int yr) {
       }
     }
   }
-
+  
   // Set Sapto
   setDblElement(&Sys.S.first_tax_rate, RSystem, "sapto_first_tax_rate");
   setIntElement(&Sys.S.lwr_couple, RSystem, "sapto_lower_threshold_married");
@@ -647,12 +671,14 @@ System Sexp2System(SEXP RSystem, int yr) {
   
   Sys.S.year = yr;
   
-  
-  
-  
   return Sys;
 }
 
+static bool invalid_medicare_params(int ma, int mb, double mt, double mr) {
+  int lhs = mt * (mb - ma);
+  int rhs = mr * mb;
+  return lhs != rhs;
+}
 
 SEXP CvalidateSystem(SEXP RSystem, SEXP Fix) {
   if (isNull(RSystem)) {
@@ -665,12 +691,165 @@ SEXP CvalidateSystem(SEXP RSystem, SEXP Fix) {
   }
   int fix = asInteger(Fix);
   int yr = asInteger(getListElement(RSystem, "yr"));
+  SEXP Bracks = getListElement(RSystem, "ordinary_tax_thresholds");
+  SEXP Rates = getListElement(RSystem, "ordinary_tax_rates");
+  if (length(Bracks) && length(Rates) && length(Bracks) != length(Rates)) {
+    error("`length(ordinary_tax_thresholds) = %d` yet `length(ordinary_tax_rates) = %d`. Both lengths must be equal.",
+          length(Bracks), length(Rates));
+  }
   System Sys = Sexp2System(RSystem, yr);
-  print_Medicare(Sys.M);
+  
+  // # Individuals
+  //   ma <- medicare_levy_lower_threshold %|||% medicare_tbl_fy[["lower_threshold"]]
+  //   mb <- medicare_levy_upper_threshold %|||% medicare_tbl_fy[["upper_threshold"]]
+  //   mt <- medicare_levy_taper %|||% medicare_tbl_fy[["taper"]]
+  //   mr <- medicare_levy_rate  %|||% medicare_tbl_fy[["rate"]]
+  int ma = getIntElement(RSystem, "medicare_levy_lower_threshold", ml_lower_thresh(yr, false, false));
+  int mb = getIntElement(RSystem, "medicare_levy_upper_threshold", ml_upper_thresh(yr, false, false));
+  double mt = getDblElement(RSystem, "medicare_levy_taper", ml_taper(yr));
+  double mr = getDblElement(RSystem, "medicare_levy_rate", ml_rate(yr));
+  //   
+  // # Individuals - SAPTO
+  // # N.B. medicare_tbl_fy[["lower/upper_threshold"]] since the join above correctly identifies which ones
+  //   msa <- medicare_levy_lower_sapto_threshold %|||% medicare_tbl_fy[["lower_threshold"]]
+  //   msb <- medicare_levy_upper_sapto_threshold %|||% medicare_tbl_fy[["upper_threshold"]]
+  int msa = getIntElement(RSystem, "medicare_levy_lower_sapto_threshold", ml_lower_thresh(yr, false, true));
+  int msb = getIntElement(RSystem, "medicare_levy_upper_sapto_threshold", ml_upper_thresh(yr, false, true)); 
+  //   
+  //   ma <- as.integer(ma)
+  //     msa <- as.integer(msa)
+  //     mb <- as.integer(mb - 1)
+  //     msb <- as.integer(msb - 1)
+  
+  // # Families
+  // mfa <- medicare_levy_lower_family_threshold %|||% medicare_tbl_fy[["lower_family_threshold"]]
+  // mfb <- medicare_levy_upper_family_threshold %|||% medicare_tbl_fy[["upper_family_threshold"]]
+  int mfa = getIntElement(RSystem, "medicare_levy_lower_family_threshold", ml_lower_thresh(yr, true, false));
+  int mfb = getIntElement(RSystem, "medicare_levy_upper_family_threshold", ml_upper_thresh(yr, true, false));
+  // 
+  // # Families - SAPTO
+  // mfsa <- medicare_levy_lower_family_sapto_threshold %|||% medicare_tbl_fy[["lower_family_threshold"]]
+  // mfsb <- medicare_levy_upper_family_sapto_threshold %|||% medicare_tbl_fy[["upper_family_threshold"]]
+  int mfsa = getIntElement(RSystem, "medicare_levy_lower_family_sapto_threshold", ml_lower_thresh(yr, true, true));
+  int mfsb = getIntElement(RSystem, "medicare_levy_upper_family_sapto_threshold", ml_upper_thresh(yr, true, true));
+  
+  errif_nonnegative(ma, "medicare_levy_lower_threshold");
+  errif_nonnegative(mb, "medicare_levy_upper_threshold");
+  errif_nonnegative(mfa, "medicare_levy_lower_family_threshold");
+  errif_nonnegative(mfb, "medicare_levy_upper_family_threshold");
+  errif_nonnegative(msa, "medicare_levy_lower_sapto_threshold");
+  errif_nonnegative(msb, "medicare_levy_upper_sapto_threshold");
+  errif_nonnegative(mfsa, "medicare_levy_lower_family_sapto_threshold");
+  errif_nonnegative(mfsb, "medicare_levy_upper_family_sapto_threshold");
+  
+  if (invalid_medicare_params(ma, mb, mt, mr)) {
+    if (!hazName(RSystem, "medicare_levy_upper_threshold")) {
+      mb = mt * ma / (mt - mr);
+      // TODO: warningcall
+      warning("`medicare_levy_upper_threshold` was not specified "
+                "but its default value would be inconsistent with the parameters that were specified.\n" 
+                "Its value has been set to:\n\t"
+                "medicare_levy_upper_threshold = %d", mb);
+    } else if (!hazName(RSystem, "medicare_levy_lower_threshold")) {
+      ma = mb * (mt - mr) / mt;
+      warning("`medicare_levy_lower_threshold` was not specified "
+                "but its default value would be inconsistent with the parameters that were specified.\n"
+                "Its value has been set to:\n\t"
+                "medicare_levy_lower_threshold = %d", ma);
+    } else if (!hazName(RSystem, "medicare_levy_taper")) {
+      mt = mr * mb / (mb - ma);
+      warning("`medicare_levy_taper` was not specified "
+                "but its default value would be inconsistent with the parameters that were specified.\n"
+                "Its value has been set to:\n\t"
+                "medicare_levy_taper = %f", mt);
+    } else if (!hazName(RSystem, "medicare_levy_rate")) {
+      mr = mt * (mb - ma) / mb;
+      warning("`medicare_levy_rate` was not specified "
+                "but its default value would be inconsistent with the parameters that were specified.\n"
+                "Its value has been set to:\n\t"
+                "medicare_levy_rate = %f", mr);
+    }
+  }
+  if (invalid_medicare_params(msa, msb, mt, mr)) {
+    if (!hazName(RSystem, "medicare_levy_upper_sapto_threshold")) {
+      msb = mt * msa / (mt - mr);
+      warning("`medicare_levy_upper_sapto_threshold` was not specified "
+                "but its default value would be inconsistent with the parameters that were specified.\n" 
+                "Its value has been set to:\n\t"
+                "medicare_levy_upper_sapto_threshold = %d", msb);
+    } else if (!hazName(RSystem, "medicare_levy_lower_sapto_threshold")) {
+      msa = msb * (mt - mr) / mt;
+      warning("`medicare_levy_lower_sapto_threshold` was not specified "
+                "but its default value would be inconsistent with the parameters that were specified.\n"
+                "Its value has been set to:\n\t"
+                "medicare_levy_lower_sapto_threshold = %d", msa);
+    } else {
+      double medicare_levy_taper_stop = mr * msb / (msb - msa);
+      error("Medicare levy parameter mismatch could not be safely resolved.\n\n"
+            "`medicare_levy_lower_sapto_threshold = %d` and "
+            "`medicare_levy_upper_sapto_threshold = %d` were both supplied, "
+            "but imply a Medicare taper rate of %f\n\t",
+            msa, msb,
+            medicare_levy_taper_stop);
+    }
+  }
+  if (invalid_medicare_params(mfa, mfb, mt, mr)) {
+    if (!hazName(RSystem, "medicare_levy_upper_family_threshold")) {
+      mfb = mt * mfa / (mt - mr);
+      warning("`medicare_levy_upper_family_threshold` was not specified "
+                "but its default value would be inconsistent with the parameters that were specified.\n" 
+                "Its value has been set to:\n\t"
+                "medicare_levy_upper_family_threshold = %d", mfb);
+    } else if (!hazName(RSystem, "medicare_levy_lower_family_threshold")) {
+      mfa = mfb * (mt - mr) / mt;
+      warning("`medicare_levy_lower_family_threshold` was not specified "
+                "but its default value would be inconsistent with the parameters that were specified.\n"
+                "Its value has been set to:\n\t"
+                "medicare_levy_lower_family_threshold = %d", mfa);
+    } else {
+      double medicare_levy_taper_stop = mr * mfb / (mfb - mfa);
+      error("Medicare levy parameter mismatch could not be safely resolved.\n\n"
+              "`medicare_levy_lower_family_threshold = %d` and "
+              "`medicare_levy_upper_family_threshold = %d` were both supplied, "
+              "but imply a Medicare taper rate of %f\n\t",
+              mfa, mfb,
+              medicare_levy_taper_stop);
+    }
+  }
+  if (invalid_medicare_params(mfsa, mfsb, mt, mr)) {
+    if (!hazName(RSystem, "medicare_levy_upper_family_sapto_threshold")) {
+      mfsb = mt * mfsa / (mt - mr);
+      warning("`medicare_levy_upper_family_sapto_threshold` was not specified "
+                "but its default value would be inconsistent with the parameters that were specified.\n" 
+                "Its value has been set to:\n\t"
+                "medicare_levy_upper_family_sapto_threshold = %d", mfsb);
+    } else if (!hazName(RSystem, "medicare_levy_lower_family_sapto_threshold")) {
+      mfsa = mfsb * (mt - mr) / mt;
+      warning("`medicare_levy_lower_family_sapto_threshold` was not specified "
+                "but its default value would be inconsistent with the parameters that were specified.\n"
+                "Its value has been set to:\n\t"
+                "medicare_levy_lower_family_sapto_threshold = %d", mfsa);
+    } else {
+      double medicare_levy_taper_stop = mr * mfsb / (mfsb - mfa);
+      error("Medicare levy parameter mismatch could not be safely resolved.\n\n"
+              "`medicare_levy_lower_family_sapto_threshold` and "
+              "`medicare_levy_upper_family_sapto_threshold` were both supplied, "
+              "but imply a Medicare taper rate of %f\n\t",
+              medicare_levy_taper_stop);
+    }
+  }
+  
+ 
+  if (false) {
+    print_Medicare(Sys.M);
+  }
   validate_medicare(&Sys.M, fix, yr);
   
   return RSystem;
 }
+
+
+
 
 
 

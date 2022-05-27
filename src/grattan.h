@@ -245,7 +245,9 @@ extern System System1984;
 
 extern System System2011;
 #include "2012.h"
+extern System System2012;
 #include "2013.h"
+extern System System2013;
 #include "2014.h"
 extern System System2014;
 #include "2015.h"
@@ -273,6 +275,8 @@ extern System System2022;
 #include "2029.h"
 #include "2030.h"
 
+// errif
+void errif_nonnegative(int x, const char * var);
 
 // isEquiInt
 void isEquiInt(SEXP x, SEXP y, const char * str);
@@ -284,6 +288,10 @@ void apply_lito(double * tax, int x, int yr);
 Medicare yr2Medicare(int yr);
 void print_Medicare(Medicare M);
 void validate_medicare(Medicare * M, int fix, int yr);
+double ml_rate(int yr);
+double ml_taper(int yr);
+int ml_lower_thresh(int yr, bool family, bool sapto);
+int ml_upper_thresh(int yr, bool family, bool sapto);
 
 // minmax.c
 double dmax(double x, double y);
