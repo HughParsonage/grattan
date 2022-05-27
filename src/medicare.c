@@ -784,8 +784,11 @@ static void validate_lwr_upr(int * lwr, int * upr, double * r, double * t, const
   int exp_upr = lwr[0] * ratio;
   int dxp_upr = upr[0] - exp_upr;
   if (dxp_upr > 1 || dxp_upr < -1) {
-    if (!fix) {
+    if (fix == 0) {
       error("`%s = %d`, but %d was expected", str, upr[0], exp_upr);
+    }
+    if (fix == 1) {
+      warning("`%s = %d`, but %d was expected and so will be set as such", str, upr[0], exp_upr);
     }
     upr[0] = exp_upr;
   }
@@ -818,5 +821,30 @@ void print_Medicare(Medicare M) {
   Rprintf("\t%f\n", M.rate);
 }
 
+double ml_rate(int yr) {
+  System Sys = yr2System(yr);
+  return Sys.M.rate;
+}
+
+double ml_taper(int yr) {
+  System Sys = yr2System(yr);
+  return Sys.M.taper;
+}
+
+int ml_lower_thresh(int yr, bool family, bool sapto) {
+  System Sys = yr2System(yr);
+  if (family) {
+    return sapto ? Sys.M.lwr_family_sapto : Sys.M.lwr_family;
+  }
+  return sapto ? Sys.M.lwr_single_sapto : Sys.M.lwr_single;
+}
+
+int ml_upper_thresh(int yr, bool family, bool sapto) {
+  System Sys = yr2System(yr);
+  if (family) {
+    return sapto ? Sys.M.upr_family_sapto : Sys.M.upr_family;
+  }
+  return sapto ? Sys.M.upr_single_sapto : Sys.M.upr_single;
+}
 
 

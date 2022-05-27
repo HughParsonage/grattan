@@ -59,6 +59,14 @@ System <- function(yr,
                    sapto_taper_married = NULL, 
                    ...,
                    fix = 0L) {
+  yr
+  if (is.character(yr) || is.fy(yr)) {
+    yr <- fy::fy2yr(yr)
+  }
+  
+  
+  
+  
   RSystem <- mget(ls(sorted = FALSE))
   .validateSystem(Filter(length, RSystem), fix = fix)
 }
@@ -82,6 +90,7 @@ Offsets <- function(offset_1st = integer(1),
 }
 
 .validateSystem <- function(RSystem, fix = 0L) {
+  # if (length(RSystem$))
   .Call("CvalidateSystem", RSystem, as.integer(fix), PACKAGE = packageName())
 }
 
@@ -97,4 +106,8 @@ sapto_dat <- function(yr, e = 0L) {
   
   .Call("Csapto_dat", max(2001L, yr), as.integer(e), PACKAGE = packageName())
 }
+
+
+
+
 
