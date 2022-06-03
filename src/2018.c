@@ -30,7 +30,7 @@ System System2018 = {
   .nb = 5,
   .BRACKETS = {0, 18200, 37000, 87000, 180000, INT_MAX, INT_MAX, INT_MAX},
   .RATES = {0, 0.19, 0.325, 0.37, 0.45, 0.45, 0.45, 0.45},
-  .M = 
+  .M =
   {
     .lwr_single = 21980,
     .upr_single = 27476,
@@ -47,7 +47,7 @@ System System2018 = {
     .rate = 0.02
   },
   .has_sapto = true,
-  .S = 
+  .S =
   {
     .year = 2018,
     .pension_age = 65,
@@ -68,24 +68,24 @@ System System2018 = {
   },
   .n_offsetn = 2,
   .Offsets = {
-  {
-    // LITO
-    .offset_1st = 445,
-    .Thresholds = {37000},
-    .Tapers = {0.015},
-    .nb = 1,
-    .refundable = false
-  },
-  {
-    // LMITO
-    .offset_1st = 255,
-    .Thresholds = {37000, 48000, 90000},
-    .Tapers = {-0.075, 0, 0.03},
-    .nb = 3,
-    .refundable = false
-  }
+    {
+      // LITO
+      .offset_1st = 445,
+      .Thresholds = {37000},
+      .Tapers = {0.015},
+      .nb = 1,
+      .refundable = false
+    },
+    {
+      // LMITO
+      .offset_1st = 255,
+      .Thresholds = {37000, 48000, 90000},
+      .Tapers = {-0.075, 0, 0.03},
+      .nb = 3,
+      .refundable = false
+    }
   },
   .has_temp_budget_repair_levy = false
-  };
+};
 
 #endif
