@@ -160,21 +160,7 @@ SEXP Cincome_tax(SEXP Yr,
       apply_sapto(&ansp[i], PP[i], Sys.S);
     })
   }
-  
-  
-  if (Sys.has_offset1) {
-    FORLOOP({
-      int xpi = ic_taxable_income_loss[i];
-      apply_offset1(&ansp[i], xpi, Sys.O1);
-    })
-    
-  }
-  if (Sys.has_offset2) {
-    FORLOOP({
-      int xpi = ic_taxable_income_loss[i];
-      apply_offset2(&ansp[i], xpi, Sys.O2);
-    })
-  }
+
   if (Sys.has_lmito) {
     FORLOOP({
       int xpi = ic_taxable_income_loss[i];

@@ -30,7 +30,8 @@ for (R_xlen_t i = 0; i < N; ++i) {                             \
 
 
 #define MAX_NBRACK 8
-#define MAX_OFFSETN 31
+#define MAX_OFFSETN 15
+#define MAX_N_OFFSETN 15
 #define MIN_YEAR 1984
 #define MAX_YEAR 2030
 #define NA_INT -2147483648
@@ -202,14 +203,8 @@ typedef struct {
   Medicare M;
   bool has_sapto;
   Sapto S;
-  bool has_lito;
-  bool has_lmito;
-  bool has_offset1;
-  Offset1 O1;
-  bool has_offset2;
-  Offset2 O2;
-  bool has_offsetn;
-  OffsetN Offsets;
+  int n_offsetn;
+  OffsetN Offsets[MAX_N_OFFSETN];
   bool has_temp_budget_repair_levy;
 } System;
 
