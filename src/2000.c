@@ -60,8 +60,8 @@ System System2000 = {
     {
       // LITO
       .offset_1st = 150,
-      .Thresholds = 20700,
-      .Tapers = -0.04,
+      .Thresholds = {20700},
+      .Tapers = {-0.04},
       .nb = 1,
       .refundable = false
     }
