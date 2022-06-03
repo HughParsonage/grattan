@@ -69,8 +69,8 @@ System System2007 = {
     {
       // LITO
       .offset_1st = 600,
-      .Thresholds = 25000,
-      .Tapers = -0.04,
+      .Thresholds = {25000},
+      .Tapers = {-0.04},
       .nb = 1,
       .refundable = false
     }
