@@ -279,6 +279,9 @@ SEXP getListElement(SEXP list, const char * str);
 // isEquiInt
 void isEquiInt(SEXP x, SEXP y, const char * str);
 
+// hazName
+bool hazName(SEXP list, const char * str);
+
 // lito.c
 void apply_lito(double * tax, int x, int yr);
 
@@ -302,6 +305,13 @@ double dmin0(double x);
 // Offset.c
 void apply_offset1(double * tax, int x, Offset1 O);
 void apply_offset2(double * tax, int x, Offset2 O);
+void do_multiOffsets(double * ansp,
+                     R_xlen_t N,
+                     const OffsetN mOffsets[MAX_N_OFFSETN],
+                     int n_offsets,
+                     const int * xp, 
+                     int nThread,
+                     bool apply);
 
 // omp_diagnose.c
 int as_nThread(SEXP x);

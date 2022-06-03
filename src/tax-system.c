@@ -424,8 +424,6 @@ System yr2System(int yr) {
   Sys.M = yr2Medicare(yr);
   Sys.has_sapto = yr >= 2000;
   Sys.S = yr2Sapto(yr);
-  Sys.has_lito = yr >= 1994;
-  Sys.has_lmito = yr >= 2019;
   Sys.has_temp_budget_repair_levy = yr >= 2015 && yr <= 2017;
   return Sys;
 }
@@ -445,16 +443,7 @@ bool safe2int(double x) {
   return !ISNAN(x) && x > -INT_MAX && x < INT_MAX;
 }
 
-bool hazName(SEXP list, const char * str) {
-  int n = length(list);
-  SEXP names = getAttrib(list, R_NamesSymbol);
-  for (int i = 0; i < n; ++i) {
-    if (strcmp(CHAR(STRING_ELT(names, i)), str) == 0) {
-      return true;
-    }
-  }
-  return false;
-}
+
 
 
 
@@ -596,37 +585,7 @@ System Sexp2System(SEXP RSystem, int yr) {
   
   if (hazName(RSystem, "offsets")) {
     SEXP Offsets = getListElement(RSystem, "offsets");
-    if (isList(Offsets)) {
-      if (hazName(Offsets, "LITO")) {
-        SEXP Offsets_LITO = getListElement(Offsets, "LITO");
-        if (isLogical(Offsets_LITO)) {
-          bool offsets_has_lito = asLogical(Offsets_LITO);
-          Sys.has_lito = offsets_has_lito;
-        }
-        if (isList(Offsets_LITO)) {
-          if (length(Offsets_LITO) != 4) {
-            error("Internal error: Offsets_LITO had wrong length = %d.", length(Offsets_LITO));
-          }
-          
-          setIntElement(&Sys.O1.offset_1st, Offsets_LITO, "offset_1st");
-          setIntElement(&Sys.O1.thresh_1st, Offsets_LITO, "thresh_1st");
-          setDblElement(&Sys.O1.taper_1st, Offsets_LITO, "taper_1st");
-          Sys.O1.refundable = false;
-          Sys.has_lito = false; // replaced with O1
-        }
-      }
-      if (hazName(Offsets, "LMITO")) {
-        SEXP Offsets_LMITO = getListElement(Offsets, "LMITO");
-        if (isLogical(Offsets_LMITO)) {
-          bool offsets_has_lmito = asLogical(Offsets_LMITO);
-          Sys.has_lmito = offsets_has_lmito;
-        }
-      }
-      int nOffsets = length(Offsets);
-      if (nOffsets > (hazName(Offsets, "LITO") + hazName(Offsets, "LMITO"))) {
-        warning("Not yet implemented nOffsets > 2"); // # nocov
-      }
-    }
+    
   }
   
   // Set Sapto

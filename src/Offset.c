@@ -114,20 +114,18 @@ double value_OffsetN(int x, const OffsetN O) {
   if (x < O.Thresholds[0]) {
     return O.offset_1st;
   }
-  if (x > O.Thresholds[nb - 1]) {
-    return 0;
-  }
+  
   double y = O.offset_1st;
-  for (int t = 1; t < nb - 1; ++t) {
-    if (x < O.Thresholds[t - 1]) {
-      return y;
-    }
+  for (int t = 0; t < nb; ++t) {
     if (x < O.Thresholds[t]) {
-      return y + O.Tapers[t - 1] * (x - O.Thresholds[t - 1]);
+      break;
     }
-    y += O.Tapers[t - 1] * (O.Thresholds[t] - O.Thresholds[t - 1]);
+    if (t == nb - 1 || x < O.Thresholds[t + 1]) {
+      return y - O.Tapers[t] * (x - O.Thresholds[t]);
+    }
+    y -= O.Tapers[t] * (O.Thresholds[t + 1] - O.Thresholds[t]);
   }
-  return y + O.Tapers[nb - 1] * (x - O.Thresholds[nb - 1]);
+  return y;
 }
 
 
@@ -311,7 +309,7 @@ SEXP Ctest_nOffset_upper_threshold(SEXP OffsetList, SEXP jj) {
   return ScalarInteger(o);
 }
 
-static int mOffsets_max_upper_threshold(OffsetN * mOffsets, int n_offsets) {
+static int mOffsets_max_upper_threshold(const OffsetN * mOffsets, int n_offsets) {
   int o = 0;
   for (int j = 0; j < n_offsets; ++j) {
     int j_upper_threshold = nOffset_upper_threshold(mOffsets[j]);
@@ -322,37 +320,62 @@ static int mOffsets_max_upper_threshold(OffsetN * mOffsets, int n_offsets) {
 
 //' @noRd
 //' @description applies multiple offsets
-//' @param apply Whether or not to apply the offset to ansp (i.e. subtract from it)
-void do_multiOffsets(double * ansp,
+//' @param apply Whether or not to apply the offset to ansp (i.e. subtract from it),
+//' as if it were the tax to be offset
+void do_multiOffsets(double * restrict ansp,
                      R_xlen_t N,
-                     OffsetN * mOffsets,
+                     const OffsetN mOffsets[MAX_N_OFFSETN],
                      int n_offsets,
                      const int * xp, 
                      int nThread,
                      bool apply) {
+  // For efficiency, we memoize the elements for each x
+  // Originally we used a floating pointer but this was risky
+  // (since it might provide results sufficiently inaccurate
+  // to violate unit tests) and appeared to offer little performance
+  // benefit so we just went to double but kept the name 'fmem'.
+  
+  // n_fmem is the number of memoized elements to allocate
+  // it will be equal to the maximum upper threshold among the offsets
   unsigned int n_fmem = mOffsets_max_upper_threshold(mOffsets, n_offsets);
   
-  if (n_fmem > 1048576) {
-    FORLOOP({
-      double o_i = 0;
-      for (int j = 0; j < n_offsets; ++j) {
-        o_i += value_OffsetN(xp[i], mOffsets[j]);
-      }
-      ansp[i] = o_i;
-    })
-    return;
+  // currently cannot apply refundable and non-refundable offsets 
+  bool any_refundable = false;
+  bool all_refundable = true;
+  for (int j = 0; j < n_offsets; ++j) {
+    any_refundable |= mOffsets[j].refundable;
+    all_refundable &= mOffsets[j].refundable;
   }
-  double * fmem = malloc(sizeof(double) * (n_fmem + 1u));
+  
+  // In addition, if n_fmem is large, memoization is unlikely to provide 
+  // benefits (in fact is likely to be an error -- i.e.
+  // the offset never gets to zero
+  
+  bool dont_memoize = 
+    n_fmem > 1048576 || (apply && any_refundable && !all_refundable);
+  
+  // fmem[i] is the (total) offsets for [income] i
+  double * fmem = dont_memoize ? NULL : malloc(sizeof(double) * (n_fmem + 1u));
+  
   if (fmem == NULL) {
-      free(fmem);
-      FORLOOP({
+    
+    FORLOOP({
+      if (apply) {
+        for (int j = 0; j < n_offsets; ++j) {
+          ansp[i] -= value_OffsetN(xp[i], mOffsets[j]);
+          if (ansp[i] < 0 && !mOffsets[j].refundable) {
+            ansp[i] = 0;
+          }
+        }
+      } else {
         double o_i = 0;
         for (int j = 0; j < n_offsets; ++j) {
           o_i += value_OffsetN(xp[i], mOffsets[j]);
         }
         ansp[i] = o_i;
-      })
-        return;
+      }
+    })
+    return;
   }
   
   for (int i = 0; i < n_fmem; ++i) {
@@ -364,15 +387,24 @@ void do_multiOffsets(double * ansp,
   }
   fmem[n_fmem] = 0;
   if (apply) {
-    FORLOOP({
-      unsigned int xpi = xp[i];
-      if (xpi < n_fmem) {
-        ansp[i] -= fmem[xpi];
-        if (ansp[i] < 0) {
-          ansp[i] = 0;
+    if (all_refundable) {
+      FORLOOP({
+        unsigned int xpi = xp[i];
+        if (xpi < n_fmem) {
+          ansp[i] -= fmem[xpi];
         }
-      }
-    })
+      })
+    } else {
+      FORLOOP({
+        unsigned int xpi = xp[i];
+        if (xpi < n_fmem) {
+          ansp[i] -= fmem[xpi];
+          if (ansp[i] < 0) {
+            ansp[i] = 0;
+          }
+        }
+      })
+    }
   } else {
     FORLOOP({
       unsigned int xpi = xp[i];
