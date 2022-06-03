@@ -114,7 +114,6 @@ double value_OffsetN(int x, const OffsetN O) {
   if (x < O.Thresholds[0]) {
     return O.offset_1st;
   }
-  
   double y = O.offset_1st;
   for (int t = 0; t < nb; ++t) {
     if (x < O.Thresholds[t]) {
@@ -150,6 +149,55 @@ static int last_positive_offset(const double * tapers,
   }
   return j;
 }
+
+OffsetN yr2OffsetN(int yr, int j) {
+  System SysYr = yr2System(yr);
+  return SysYr.Offsets[j];
+}
+
+SEXP Offsets2List(OffsetN O) {
+  int np = 0;
+  SEXP ans = PROTECT(allocVector(VECSXP, 4)); ++np;
+  SEXP Offset1st = PROTECT(ScalarInteger(O.offset_1st)); ++np;
+  SET_VECTOR_ELT(ans, 0, Offset1st);
+  int nb = O.nb;
+  SEXP Thresholds = PROTECT(allocVector(INTSXP, nb)); ++np;
+  SEXP Tapers = PROTECT(allocVector(REALSXP, nb)); ++np;
+  SEXP Refundable = PROTECT(ScalarLogical(O.refundable)); ++np;
+  for (int t = 0; t < nb; ++t) {
+    INTEGER(Thresholds)[t] = O.Thresholds[t];
+    REAL(Tapers)[t] = O.Tapers[t];
+  }
+  SET_VECTOR_ELT(ans, 1, Thresholds);
+  SET_VECTOR_ELT(ans, 2, Tapers);
+  SET_VECTOR_ELT(ans, 3, Refundable);
+  
+  SEXP nms = PROTECT(allocVector(STRSXP, 4)); ++np;
+  SET_STRING_ELT(nms, 0, mkCharCE("offset_1st", CE_UTF8));
+  SET_STRING_ELT(nms, 1, mkCharCE("thresholds", CE_UTF8));
+  SET_STRING_ELT(nms, 2, mkCharCE("tapers", CE_UTF8));
+  SET_STRING_ELT(nms, 3, mkCharCE("refundable", CE_UTF8));
+  setAttrib(ans, R_NamesSymbol, nms);
+  UNPROTECT(np);
+  return ans;
+}
+
+SEXP C_yr2Offsets(SEXP Yr) {
+  int yr = asInteger(Yr);
+  System Sys = yr2System(yr);
+  int n_offsetn = Sys.n_offsetn;
+  SEXP ans = PROTECT(allocVector(VECSXP, n_offsetn));
+  if (n_offsetn == 0) {
+    UNPROTECT(1);
+    return ans;
+  }
+  for (int j = 0; j < n_offsetn; ++j) {
+    SET_VECTOR_ELT(ans, j, Offsets2List(Sys.Offsets[j]));
+  }
+  UNPROTECT(1);
+  return ans;
+}
+
 
 static void SEXP2Offset(OffsetN * O, int nO, SEXP List) {
   if (length(List) != nO) {

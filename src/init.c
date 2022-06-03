@@ -10,6 +10,7 @@
 /* .Call calls */
 extern SEXP C_moffset(SEXP, SEXP, SEXP, SEXP);
 extern SEXP C_multiOffset(SEXP, SEXP, SEXP);
+extern SEXP C_yr2Offsets(SEXP);
 extern SEXP Cbracks_by_year(SEXP, SEXP);
 extern SEXP Cdecode_age_range(SEXP, SEXP);
 extern SEXP Cdo_medicare_levy(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -29,6 +30,7 @@ extern SEXP TestCurrency(SEXP, SEXP);
 static const R_CallMethodDef CallEntries[] = {
     {"C_moffset",                     (DL_FUNC) &C_moffset,                     4},
     {"C_multiOffset",                 (DL_FUNC) &C_multiOffset,                 3},
+    {"C_yr2Offsets",                  (DL_FUNC) &C_yr2Offsets,                  1},
     {"Cbracks_by_year",               (DL_FUNC) &Cbracks_by_year,               2},
     {"Cdecode_age_range",             (DL_FUNC) &Cdecode_age_range,             2},
     {"Cdo_medicare_levy",             (DL_FUNC) &Cdo_medicare_levy,             6},
