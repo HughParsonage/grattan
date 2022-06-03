@@ -62,32 +62,17 @@ System System2001 = {
   .lito_1st_thresh = 20700,
   .lito_1st_taper = 0.04
   },
-  .has_lito = true,
-  .has_lmito = false,
-  .has_offset1 = false,
-  .O1 = {
-  .offset_1st = 0,
-  .thresh_1st = 0,
-  .taper_1st = 0,
+  .n_offsetn = 1,
+.Offsets = {
+{
+  // LITO
+  .offset_1st = 150,
+  .Thresholds = 20700,
+  .Tapers = -0.04,
+  .nb = 1,
   .refundable = false
-  },
-  .has_offset2 = false,
-  .O2 = {
-  .offset_1st = 0,
-  .thresh_1st = 0,
-  .taper_1st = 0,
-  .thresh_2nd = 0,
-  .taper_2nd = 0,
-  .refundable = 0
-  },
-  .has_offsetn = false,
-  .Offsets = {
-  .offset_1st = 0,
-  .Thresholds = {0, 0, 0, 0, 0, 0, 0, 0},
-  .Tapers = {0, 0, 0, 0, 0, 0, 0, 0},
-  .nb = 0,
-  .refundable = false,
-  },
+}
+},
   .has_temp_budget_repair_levy = false
 };
 #endif
