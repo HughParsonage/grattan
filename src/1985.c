@@ -48,11 +48,11 @@ System System1985 = {
   .lito_1st_thresh = 0,
   .lito_1st_taper = 0
   },
-  .n_offsetn = 0
+  .n_offsetn = 0,
 .Offsets = {
 {
   // DUMMY
-  .offset_1st = 0
+  .offset_1st = 0,
   .Thresholds = {0},
   .Tapers = {0},
   .nb = 0,
