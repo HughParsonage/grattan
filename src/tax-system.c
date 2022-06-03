@@ -426,9 +426,6 @@ System yr2System(int yr) {
   Sys.S = yr2Sapto(yr);
   Sys.has_lito = yr >= 1994;
   Sys.has_lmito = yr >= 2019;
-  Sys.has_offset1 = false;
-  Sys.has_offset2 = false;
-  Sys.has_offsetn = false;
   Sys.has_temp_budget_repair_levy = yr >= 2015 && yr <= 2017;
   return Sys;
 }

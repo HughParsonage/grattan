@@ -342,7 +342,7 @@ void do_multiOffsets(double * ansp,
     })
     return;
   }
-  float * fmem = malloc(sizeof(float) * (n_fmem + 1u));
+  double * fmem = malloc(sizeof(double) * (n_fmem + 1u));
   if (fmem == NULL) {
       free(fmem);
       FORLOOP({
@@ -362,6 +362,7 @@ void do_multiOffsets(double * ansp,
     }
     fmem[i] = o_i;
   }
+  fmem[n_fmem] = 0;
   if (apply) {
     FORLOOP({
       unsigned int xpi = xp[i];

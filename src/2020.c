@@ -65,31 +65,24 @@ System System2020 = {
   .lito_1st_thresh = 37000,
   .lito_1st_taper = 0.015
   },
-  .has_lito = true,
-  .has_lmito = true,
-  .has_offset1 = false,
-  .O1 = {
-  .offset_1st = 0,
-  .thresh_1st = 0,
-  .taper_1st = 0,
-  .refundable = false
-  },
-  .has_offset2 = false,
-  .O2 = {
-  .offset_1st = 0,
-  .thresh_1st = 0,
-  .taper_1st = 0,
-  .thresh_2nd = 0,
-  .taper_2nd = 0,
-  .refundable = 0
-  },
-  .has_offsetn = false,
+  .n_offsetn = 2,
   .Offsets = {
-  .offset_1st = 0,
-  .Thresholds = {0, 0, 0, 0, 0, 0, 0, 0},
-  .Tapers = {0, 0, 0, 0, 0, 0, 0, 0},
-  .nb = 0,
-  .refundable = false,
+  {
+    // LITO
+    .offset_1st = 445,
+    .Thresholds = {37000},
+    .Tapers = {0.015},
+    .nb = 1,
+    .refundable = false
+  },
+  {
+    // LMITO
+    .offset_1st = 255,
+    .Thresholds = {37000, 48000, 90000},
+    .Tapers = {-0.075, 0, 0.03},
+    .nb = 3,
+    .refundable = false
+  }
   },
   .has_temp_budget_repair_levy = false
 };
