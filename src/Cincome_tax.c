@@ -160,20 +160,10 @@ SEXP Cincome_tax(SEXP Yr,
       apply_sapto(&ansp[i], PP[i], Sys.S);
     })
   }
+  if (Sys.n_offsetn) {
+    do_multiOffsets(ansp, N, Sys.Offsets, Sys.n_offsetn, ic_taxable_income_loss, nThread, true);
+  }
 
-  if (Sys.has_lmito) {
-    FORLOOP({
-      int xpi = ic_taxable_income_loss[i];
-      apply_lmito(&ansp[i], xpi);
-    })
-    
-  }
-  if (Sys.has_lito) {
-    FORLOOP({
-      int xpi = ic_taxable_income_loss[i];
-      apply_lito(&ansp[i], xpi, yr);
-    })
-  }
   FORLOOP({
     const Person P = PP[i];
     ansp[i] += do_1_ML(P, Sys.M);
