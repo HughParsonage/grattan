@@ -143,7 +143,7 @@ model_income_tax <- function(sample_file,
   
   stopifnot(is.data.table(sample_file))
   max.length <- nrow(sample_file)
-  .dots.ATO <-  copy(sample_file)
+  .dots.ATO <-  sample_file
   sample_file_noms <- copy(names(sample_file))
   
   .System <-
@@ -162,6 +162,7 @@ model_income_tax <- function(sample_file,
            medicare_levy_lower_family_sapto_threshold = medicare_levy_lower_family_sapto_threshold,
            medicare_levy_upper_family_sapto_threshold = medicare_levy_upper_family_sapto_threshold,
            medicare_levy_lower_up_for_each_child = medicare_levy_lower_up_for_each_child,
+           offsets = Offsets(),
            sapto_max_offset = sapto_max_offset,
            sapto_lower_threshold = sapto_lower_threshold,
            sapto_taper = sapto_taper,
@@ -170,11 +171,18 @@ model_income_tax <- function(sample_file,
            sapto_taper_married = sapto_taper_married, 
            fix = 1L)
   
+  if (hasName(.dots.ATO, "Taxable_Income") && !hasName(.dots.ATO, "ic_taxable_income_loss")) {
+    # for elasticity
+    .dots.ATO[, "ic_taxable_income_loss" := Taxable_Income]
+  }
+  
   old_tax <- income_tax2(.dots.ATO = .dots.ATO,
                          fy.year = baseline_fy)
   if (!is.null(sapto_eligible)) {
     .dots.ATO[, "c_age_30_june" := fifelse(sapto_eligible, 67L, 42L)]
   }
+  .apply_elasticity(.dots.ATO, old_tax, baseline_fy, .System, elasticity_of_taxable_income)
+  
   
   new_tax <- income_tax2(.dots.ATO = .dots.ATO,
                          fy.year = baseline_fy,
@@ -192,6 +200,30 @@ model_income_tax <- function(sample_file,
          "sample_file" = set(sample_file, j = "new_tax", value = new_tax),
          "sample_file.int" = set(sample_file, j = "new_tax", value = as.integer(new_tax)))
   
+}
+
+.elast_income <- function(income, old_tax, new_tax, elasticity_of_taxable_income) {
+  D_tax <- new_tax - old_tax
+  # Change in net income
+  coalesce0(income * (1 - elasticity_of_taxable_income * D_tax / (income - old_tax)))
+  
+}
+
+.apply_elasticity <- function(.dots.ATO, old_tax, fy_year, System, elasticity_of_taxable_income) {
+  if (!is.numeric(elasticity_of_taxable_income)) {
+    return(invisible(.dots.ATO))
+  }
+  
+  stopifnot(hasName(.dots.ATO, "ic_taxable_income_loss"))
+  ic_taxable_income_loss <- .subset2(.dots.ATO, "ic_taxable_income_loss")
+  .dots.ATO[, "new_taxable_income" := copy(ic_taxable_income_loss)]
+  new_tax <- income_tax2(.dots.ATO = .dots.ATO, System = System, fy.year = fy_year)
+  D_tax <- new_tax - old_tax
+  i0 <- .subset2(.dots.ATO, "ic_taxable_income_loss")
+  i1 <- .elast_income(i0, old_tax, new_tax, elasticity_of_taxable_income)
+  
+  # Change in net income, coalesce0 due to likely NaNs
+  set(.dots.ATO, j = "ic_taxable_income_loss", value = i1)
 }
 
 
