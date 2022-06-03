@@ -332,7 +332,7 @@ void do_multiOffsets(double * ansp,
                      bool apply) {
   unsigned int n_fmem = mOffsets_max_upper_threshold(mOffsets, n_offsets);
   
-  if (n_fmem > 65535) {
+  if (n_fmem > 1048576) {
     FORLOOP({
       double o_i = 0;
       for (int j = 0; j < n_offsets; ++j) {
