@@ -32,3 +32,11 @@ test_that("Offset internals", {
   expect_equal(nOffset_upper_threshold( set_offsets( set_offset(offset_1st = 675L, thresholds =as.integer(c(37e3, 48e3, 90e3, 126e3)), tapers = c(-0.075, 0, 0.03, Inf)))), 
                126e3)
 })
+
+test_that("set_offsets (with yr)", {
+  o <- set_offsets(set_offset(445, 37e3 + 1, 0.015), yr = 2019L)
+  expect_equal(length(o), 3)
+  expect_equal(o[[3]]$thresholds, 37001)
+  expect_true(is.integer(o[[3]]$thresholds))
+})
+

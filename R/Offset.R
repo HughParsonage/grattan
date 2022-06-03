@@ -27,14 +27,29 @@ set_offset <- function(offset_1st = integer(1),
   if (is.unsorted(thresholds)) {
     stop("`thresholds = ", thresholds, "` was unsorted.")
   }
-  list(offset_1st = offset_1st,
-       thresholds = thresholds,
+  list(offset_1st = as.integer(offset_1st),
+       thresholds = as.integer(thresholds),
        tapers = tapers, 
        refundable = refundable)
 }
 
-set_offsets <- function(...) {
-  list(...)
+
+
+set_offsets <- function(..., yr = NULL) {
+  if (is.null(yr)) {
+    return(list(...))
+  }
+  stopifnot(is.integer(yr))
+  DefaultOffsets <- .Call("C_yr2Offsets", yr, PACKAGE = packageName())
+  if (missing(..1)) {
+    return(DefaultOffsets)
+  }
+  Dots <- list(...)
+  n <- length(DefaultOffsets)
+  for (j in seq_along(Dots)) {
+    DefaultOffsets[[n + j]] <- Dots[[j]]
+  }
+  DefaultOffsets
 }
 
 multiOffsets <- function(x, Offsets = set_offsets(), nThread = getOption("grattan.nThread", 1L)) {
