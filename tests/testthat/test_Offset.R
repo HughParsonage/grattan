@@ -25,3 +25,10 @@ test_that("Offset basics", {
                rep_len(Y, 10), info = the.seed)
   
 })
+
+test_that("Offset internals", {
+  expect_equal(nOffset_upper_threshold( set_offsets( set_offset(offset_1st = 255L, thresholds =as.integer(c(37e3, 48e3, 90e3)), tapers = c(-0.075, 0, 0.03)))), 
+               126e3)
+  expect_equal(nOffset_upper_threshold( set_offsets( set_offset(offset_1st = 675L, thresholds =as.integer(c(37e3, 48e3, 90e3, 126e3)), tapers = c(-0.075, 0, 0.03, Inf)))), 
+               126e3)
+})

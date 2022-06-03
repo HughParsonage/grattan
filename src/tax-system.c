@@ -459,28 +459,9 @@ bool hazName(SEXP list, const char * str) {
   return false;
 }
 
-bool starts_with_medicare(const char * str) {
-  return 
-  str[0] == 'm' && str[1] == 'e' && str[2] == 'd' &&
-    str[3] == 'i' && str[4] == 'c' && str[5] == 'a' &&
-    str[6] == 'r' && str[7] == 'e';
-}
 
-// from stats package
-SEXP getListElement(SEXP list, const char * str) {
-  if (starts_with_medicare(str) && hazName(list, "Medicare")) {
-    SEXP MedicareList = getListElement(list, "Medicare");
-    return getListElement(MedicareList, str);
-  }
-  SEXP elmt = R_NilValue, names = getAttrib(list, R_NamesSymbol);
-  for (int i = 0; i < length(list); i++) {
-    if (strcmp(CHAR(STRING_ELT(names, i)), str) == 0) {
-      elmt = VECTOR_ELT(list, i);
-      break;
-    }
-  }
-  return elmt;
-}
+
+
 
 void setIntElement(int * o, SEXP list, const char * str) {
   SEXP elmt = getListElement(list, str);
@@ -677,7 +658,7 @@ System Sexp2System(SEXP RSystem, int yr) {
 static bool invalid_medicare_params(int ma, int mb, double mt, double mr) {
   int lhs = mt * (mb - ma);
   int rhs = mr * mb;
-  return lhs != rhs;
+  return lhs != rhs && lhs != (rhs - 1) && lhs != (rhs + 1);
 }
 
 SEXP CvalidateSystem(SEXP RSystem, SEXP Fix) {
@@ -747,7 +728,7 @@ SEXP CvalidateSystem(SEXP RSystem, SEXP Fix) {
       mb = mt * ma / (mt - mr);
       // TODO: warningcall
       warning("`medicare_levy_upper_threshold` was not specified "
-                "but its default value would be inconsistent with the parameters that were specified.\n" 
+                "but its default value would be inconsistent with the parameters that were specified.\n"
                 "Its value has been set to:\n\t"
                 "medicare_levy_upper_threshold = %d", mb);
     } else if (!hazName(RSystem, "medicare_levy_lower_threshold")) {

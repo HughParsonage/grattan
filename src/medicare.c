@@ -781,13 +781,15 @@ static double rate(int lower, int upper, double t) {
 
 static void validate_lwr_upr(int * lwr, int * upr, double * r, double * t, const char * str, int fix, int yr) {
   double ratio = t[0]/(t[0] - r[0]);
-  int exp_upr = lwr[0] * ratio;
+  int exp_upr = ceil(lwr[0] * ratio);
   int dxp_upr = upr[0] - exp_upr;
-  if (dxp_upr > 1 || dxp_upr < -1) {
+  int delta = abs(dxp_upr);
+  if (delta > 1) {
     if (fix == 0) {
       error("`%s = %d`, but %d was expected", str, upr[0], exp_upr);
     }
-    if (fix == 1) {
+    // don't want to warn on small difference
+    if (fix == 1 && delta > 10) {
       warning("`%s = %d`, but %d was expected and so will be set as such", str, upr[0], exp_upr);
     }
     upr[0] = exp_upr;

@@ -190,7 +190,7 @@ typedef struct {
   int offset_1st;
   int Thresholds[MAX_OFFSETN];
   double Tapers[MAX_OFFSETN];
-  R_xlen_t nb;
+  int nb;
   bool refundable;
 } OffsetN;
 
@@ -278,6 +278,9 @@ extern System System2022;
 // errif
 void errif_nonnegative(int x, const char * var);
 
+// getListElement
+SEXP getListElement(SEXP list, const char * str);
+
 // isEquiInt
 void isEquiInt(SEXP x, SEXP y, const char * str);
 
@@ -311,6 +314,9 @@ int as_nThread(SEXP x);
 // sapto.c
 Sapto yr2Sapto(int yr);
 void apply_sapto(double * taxi, Person P, Sapto S);
+
+// starts_with_medicare
+bool starts_with_medicare(const char * str);
 
 // tax-system.c
 System yr2System(int yr);

@@ -4,7 +4,7 @@
 #' @description FUNCTION_DESCRIPTION
 #' @param yr \code{integer(1)} A year.
 #' @param Sapto A list created by \code{Sapto()}.
-#' @param offsets A list as created by \code{Offsets()}.
+#' @param offsets A list as created by \code{set_offsets()}.
 #' @param Medicare A list created by \code{Medicare()}.
 #' 
 #' @param ordinary_tax_thresholds A numeric vector specifying the lower bounds of the brackets for "ordinary tax" as defined by the Regulations.
@@ -71,23 +71,7 @@ System <- function(yr,
   .validateSystem(Filter(length, RSystem), fix = fix)
 }
 
-Offsets <- function(offset_1st = integer(1),
-                    thresholds = integer(), 
-                    tapers = double(), 
-                    refundable = logical(1)) {
-  checkmate::assert_integerish(offset_1st)
-  stopifnot(length(thresholds) == length(tapers),
-            is.numeric(thresholds), 
-            is.numeric(tapers))
-  check_TF(refundable)
-  if (is.unsorted(thresholds)) {
-    stop("`thresholds = ", thresholds, "` was unsorted.")
-  }
-  list(offset_1st = offset_1st,
-       thresholds = thresholds,
-       tapers = tapers, 
-       refundable = refundable)
-}
+
 
 .validateSystem <- function(RSystem, fix = 0L) {
   # if (length(RSystem$))
