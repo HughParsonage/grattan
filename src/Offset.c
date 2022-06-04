@@ -199,7 +199,7 @@ SEXP C_yr2Offsets(SEXP Yr) {
 }
 
 
-static void SEXP2Offset(OffsetN * O, int nO, SEXP List) {
+void SEXP2Offset(OffsetN * O, int nO, SEXP List) {
   if (length(List) != nO) {
     warning("length(List) != length(nO)");
     return;

@@ -77,7 +77,7 @@ income_tax <- function(income,
   ans <- income_tax2(income, 
                      fy.year = fy.year,
                      .dots.ATO = .dots.ATO,
-                     System = NULL)
+                     System = System)
   if (match.arg(return.mode) == "integer") {
     ans <- as.integer(ans)
   }

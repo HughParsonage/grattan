@@ -538,9 +538,11 @@ double getDblElement(SEXP List, const char * str, double ifnotfound) {
 }
 
 System Sexp2System(SEXP RSystem, int yr) {
+  
   if (isNull(RSystem)) {
     return yr2System(yr);
   }
+  
   if (!isVectorList(RSystem)) {
     error("(Sexp2System): RSystem was type '%s' but must be type list",
           type2char(TYPEOF(RSystem)));
@@ -584,8 +586,21 @@ System Sexp2System(SEXP RSystem, int yr) {
   setIntElement(&Sys.M.sapto_age, RSystem, "sapto_pension_age");
   
   if (hazName(RSystem, "offsets")) {
-    SEXP Offsets = getListElement(RSystem, "offsets");
+    SEXP ROffsets = getListElement(RSystem, "offsets");
+    OffsetN COffsets[MAX_N_OFFSETN] = {0};
+    SEXP2Offset(COffsets, length(ROffsets), ROffsets);
     
+    for (int j = 0; j < length(ROffsets); ++j) {
+      int nb = COffsets[j].nb;
+      Sys.Offsets[j].nb = nb;
+      Sys.Offsets[j].offset_1st = COffsets[j].offset_1st;
+      Sys.Offsets[j].refundable = COffsets[j].refundable;
+      for (int k = 0; k < MAX_OFFSETN; ++k) {
+        int kk = (k < nb) ? k : nb - 1;
+        Sys.Offsets[j].Thresholds[k] = COffsets[j].Thresholds[kk];
+        Sys.Offsets[j].Tapers[k] = COffsets[j].Tapers[kk];
+      }
+    }
   }
   
   // Set Sapto

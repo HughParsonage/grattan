@@ -305,6 +305,7 @@ double dmin0(double x);
 // Offset.c
 void apply_offset1(double * tax, int x, Offset1 O);
 void apply_offset2(double * tax, int x, Offset2 O);
+void SEXP2Offset(OffsetN * O, int nO, SEXP List);
 void do_multiOffsets(double * ansp,
                      R_xlen_t N,
                      const OffsetN mOffsets[MAX_N_OFFSETN],
