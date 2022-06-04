@@ -5,9 +5,18 @@
 * `income_tax` no longer accepts `family_status`, `n_dependants`, 
   `allow.forecasts` and `.debug`
 
+* `model_income_tax` Arguments prefixed `Budget_` and `lito_` are deprecated and
+  now `offsets = set_offsets` are preferred.  However, using `System` with
+  `income_tax` is likely to be just as convenient.
+
 ### API changes
 
 * `income_tax` now uses `System`
+
+### Other changes
+
+* `model_income_tax` does not throw an error for incorrect specification
+  of `lito_` arguments (which are deprecated)
 
 ## 1.9.0.10
 

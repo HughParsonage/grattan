@@ -649,51 +649,7 @@ test_that("sample_file.int", {
   expect_identical(res[["new_tax"]], res[["baseline_tax"]])
 })
 
-test_that("lito_multi", {
-  skip_on_cran()
-  skip_if_not_installed("taxstats")
-  skip_on_circleci(2)
-  library(taxstats)
-  s1314 <- as.data.table(sample_file_1314)
-  base <- model_income_tax(s1314, "2013-14")
-  
-  expect_error(model_income_tax(s1314, "2013-14",
-                                lito_max_offset = 445, 
-                                lito_multi = list()), 
-               regexp = "`lito_multi` is not NULL, yet neither is `lito_max_offset`.", 
-               fixed = TRUE)
-  expect_error(model_income_tax(s1314, "2013-14",
-                                lito_taper = 445, 
-                                lito_multi = list()), 
-               regexp = "`lito_multi` is not NULL, yet neither is `lito_taper`.", 
-               fixed = TRUE)
-  expect_error(model_income_tax(s1314, "2013-14",
-                                lito_min_bracket = 445, 
-                                lito_multi = list()), 
-               regexp = "`lito_multi` is not NULL, yet neither is `lito_min_bracket`.", 
-               fixed = TRUE)
-  expect_error(model_income_tax(s1314, "2013-14",
-                                lito_multi = 445), 
-               regexp = "`lito_multi` had class numeric. Must be a list.", 
-               fixed = TRUE)
-  expect_error(model_income_tax(s1314, "2013-14",
-                                lito_multi = list()), 
-               regexp = "`lito_multi` had no names.", 
-               fixed = TRUE)
-  expect_error(model_income_tax(s1314, "2013-14",
-                                lito_multi = list(a = 1, b = 2)), 
-               regexp = "Set the names as 'x' and 'y'.", 
-               fixed = TRUE)
-  
-  mult <- model_income_tax(s1314, "2013-14", 
-                           lito_multi = list(x = c(-Inf, 37e3, 200e3/3, Inf), 
-                                             y = c(445, 445, 0, 0)), 
-                           return. = "sample_file.int")
-  
-  
-  expect_identical(mult[["new_tax"]], mult[["baseline_tax"]])
-  
-})
+
 
 
 test_that("Keyed data.table", {

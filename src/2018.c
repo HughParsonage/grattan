@@ -66,7 +66,7 @@ System System2018 = {
     .lito_1st_thresh = 37000,
     .lito_1st_taper = 0.015
   },
-  .n_offsetn = 2,
+  .n_offsetn = 1,
   .Offsets = {
     {
       // LITO
