@@ -77,3 +77,9 @@ CG_inflator <- function(x = 1, from_fy, to_fy, forecast.series = "mean"){
   # totals.
   raw_out / CG_population_inflator(1, from_fy = from_fy, to_fy = to_fy)
 }
+
+CGT_DISCOUNT <- function(yr) {
+  # A constant
+  if_else(yr >= 1985L, 0.5, 0)
+}
+

@@ -125,6 +125,7 @@ model_income_tax <- function(sample_file,
                              clear_tax_cols = TRUE,
                              warn_upper_thresholds = TRUE,
                              .debug = FALSE) {
+  yr <- fy::fy2yr(baseline_fy)
   if (!missing(Budget2018_lamington) || 
       !missing(Budget2019_lamington) || 
       !missing(Budget2018_lito_202223) ||
@@ -141,7 +142,29 @@ model_income_tax <- function(sample_file,
                                                        48000L,
                                                        90000L),
                                         tapers = c(-0.03, 0, 0.015)),
-                             yr = 2018L)
+                             yr = yr)
+    }
+    if (isTRUE(Budget2018_watr) && is.null(offsets)) {
+      offsets <- set_offsets(set_offset(offset_1st = 350L,
+                                        thresholds = c(37000L, 
+                                                       48000L,
+                                                       90000L),
+                                        tapers = c(-0.0525, 0, 0.02625)),
+                             yr = yr)
+    }
+    if (isTRUE(Budget2019_watr) && is.null(offsets)) {
+      offsets <- set_offsets(set_offset(offset_1st = 350L,
+                                        thresholds = c(37000L, 
+                                                       48000L,
+                                                       90000L),
+                                        tapers = c((1080-350)/11000, 0, -0.03)),
+                             yr = yr)
+    }
+    if (isTRUE(Budget2018_lito_202223) && is.null(offsets)) {
+      offsets <- set_offsets(set_offset(offset_1st = 645L, 
+                                        tapers = c(0.065, 0.015), 
+                                        thresholds = c(37000L, 41000L)),
+                             yr = NULL)
     }
   }
   
@@ -157,7 +180,7 @@ model_income_tax <- function(sample_file,
     }
   }
   
-  yr <- fy::fy2yr(baseline_fy)
+  
   
   stopifnot(is.data.table(sample_file))
   max.length <- nrow(sample_file)
@@ -204,6 +227,8 @@ model_income_tax <- function(sample_file,
   
   old_tax <- income_tax2(.dots.ATO = .dots.ATO,
                          fy.year = baseline_fy)
+  
+  set_cgt_rate(.dots.ATO, yr, cgt_discount_rate)
   if (!is.null(sapto_eligible)) {
     .dots.ATO[, "c_age_30_june" := fifelse(sapto_eligible, 67L, 42L)]
   }
@@ -250,6 +275,41 @@ model_income_tax <- function(sample_file,
   
   # Change in net income, coalesce0 due to likely NaNs
   set(.dots.ATO, j = "ic_taxable_income_loss", value = i1)
+}
+
+set_cgt_rate <- function(.dots.ATO, yr, new_cgt_discount) {
+  stopifnot(is.data.table(.dots.ATO))
+  if (is.null(new_cgt_discount)) {
+    return(invisible(.dots.ATO))
+  }
+  if (!is.numeric(new_cgt_discount)) {
+    stop("`cgt_discount_rate` was type ", typeof(new_cgt_discount), ", ",
+         "but must be numeric. Ensure `cgt_discount_rate`, if used, is numeric.")
+  }
+  if (length(new_cgt_discount) != 1 && length(new_cgt_discount) != nrow(.dots.ATO)) {
+    stop("`length(cgt_discount_rate) = ", length(new_cgt_discount), "`, ", 
+         "yet `nrow(sample_file) = ", nrow(.dots.ATO), "`. ",
+         "Ensure `cgt_discount_rate` has length one.")
+  }
+  ic_taxable_income_loss <- 
+    .subset2(.dots.ATO, "ic_taxable_income_loss") %||%
+    .subset2(.dots.ATO, "Taxable_Income")
+  is_cg_net <- 
+    .subset2(.dots.ATO, "is_cg_net") %||%
+    .subset2(.dots.ATO, "Net_CG_amt")
+  if (is.null(is_cg_net)) {
+    return(invisible(.dots.ATO))
+  }
+  # isn_tot_current <-
+  #   .subset2(.dots.ATO, "isn_cg_tot_current") %||%
+  #   .subset2(.dots.ATO, "Tot_CY_CG_amt") %||%
+  #   is_cg_net
+  
+  # assume that every one with cg_event
+  tot_cg <- is_cg_net / (1 - CGT_DISCOUNT(yr))
+  new_cg_net <- ((1 - new_cgt_discount) * tot_cg)
+  new_taxable_income <- ic_taxable_income_loss +  new_cg_net - is_cg_net
+  set(.dots.ATO, j = "ic_taxable_income_loss", value = as.integer(new_taxable_income))
 }
 
 

@@ -120,9 +120,13 @@ double value_OffsetN(int x, const OffsetN O) {
       break;
     }
     if (t == nb - 1 || x < O.Thresholds[t + 1]) {
-      return y - O.Tapers[t] * (x - O.Thresholds[t]);
+      y -= O.Tapers[t] * (x - O.Thresholds[t]);
+      break;
     }
     y -= O.Tapers[t] * (O.Thresholds[t + 1] - O.Thresholds[t]);
+  }
+  if (y < 0 && !O.refundable) {
+    return 0;
   }
   return y;
 }
@@ -433,6 +437,7 @@ void do_multiOffsets(double * restrict ansp,
     }
     fmem[i] = o_i;
   }
+
   fmem[n_fmem] = 0;
   if (apply) {
     if (all_refundable) {
