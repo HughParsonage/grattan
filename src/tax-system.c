@@ -588,8 +588,8 @@ System Sexp2System(SEXP RSystem, int yr) {
   if (hazName(RSystem, "offsets")) {
     SEXP ROffsets = getListElement(RSystem, "offsets");
     OffsetN COffsets[MAX_N_OFFSETN] = {0};
+    Sys.n_offsetn = length(ROffsets);
     SEXP2Offset(COffsets, length(ROffsets), ROffsets);
-    
     for (int j = 0; j < length(ROffsets); ++j) {
       int nb = COffsets[j].nb;
       Sys.Offsets[j].nb = nb;

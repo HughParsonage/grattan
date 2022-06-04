@@ -135,6 +135,14 @@ model_income_tax <- function(sample_file,
               " Budget2018_watr, Budget2019_watr no longer supported and will",
               " be ignored.")
     }
+    if (isTRUE(Budget2018_lamington) && is.null(offsets)) {
+      offsets <- set_offsets(set_offset(offset_1st = 200L,
+                                        thresholds = c(37000L, 
+                                                       48000L,
+                                                       90000L),
+                                        tapers = c(-0.03, 0, 0.015)),
+                             yr = 2018L)
+    }
   }
   
   arguments <- ls()
@@ -161,7 +169,7 @@ model_income_tax <- function(sample_file,
                           lito_taper = lito_taper,
                           lito_min_bracket = lito_min_bracket)
   if (!is.null(offsets)) {
-    .Offsets <- .offsets
+    .Offsets <- offsets
   }
   
   
