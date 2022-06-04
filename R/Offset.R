@@ -35,12 +35,36 @@ set_offset <- function(offset_1st = integer(1),
 
 
 
-set_offsets <- function(..., yr = NULL) {
+set_offsets <- function(..., 
+                        yr = NULL, 
+                        lito_max_offset = NULL,
+                        lito_taper = NULL,
+                        lito_min_bracket = NULL,
+                        lito_multi = NULL) {
   if (is.null(yr)) {
     return(list(...))
   }
   stopifnot(is.integer(yr))
   DefaultOffsets <- .Call("C_yr2Offsets", yr, PACKAGE = packageName())
+  if (yr > 1994 && length(DefaultOffsets)) {
+    lito_not_NULL <- FALSE
+    # LITO only available after 1994, we assume LITO is always first
+    if (!is.null(lito_max_offset)) {
+      lito_not_NULL <- TRUE
+      DefaultOffsets[[1]]$offset_1st <- as.integer(lito_max_offset)
+    }
+    if (!is.null(lito_taper)) {
+      lito_not_NULL <- TRUE
+      DefaultOffsets[[1]]$tapers <- lito_taper
+    }
+    if (!is.null(lito_min_bracket)) {
+      lito_not_NULL <- TRUE
+      DefaultOffsets[[1]]$thresholds <- as.integer(lito_min_bracket)
+    }
+    if (lito_not_NULL) {
+      message("lito_ arguments are deprecated. Use set_offsets instead.")
+    }
+  }
   if (missing(..1)) {
     return(DefaultOffsets)
   }

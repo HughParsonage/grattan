@@ -29,20 +29,17 @@
 #' @param medicare_levy_lower_sapto_threshold,medicare_levy_upper_sapto_threshold The equivalent values for SAPTO-eligible individuals (not families).
 #' @param medicare_levy_lower_family_sapto_threshold,medicare_levy_upper_family_sapto_threshold The equivalent values for SAPTO-eligible individuals in a family.
 #' @param medicare_levy_lower_up_for_each_child The amount to add to the \code{_family_threshold}s for each dependant child.
-#' @param lito_max_offset The maximum offset available for low incomes.
-#' @param lito_taper The taper to apply beyond \code{lito_min_bracket}.
-#' @param lito_min_bracket The taxable income at which the value of the offset starts to reduce (from \code{lito_max_offset}).
-#' @param lito_multi A list of two components, named \code{x} and \code{y}, giving the value of a \emph{replacement} for \code{lito} at specified points, which will be linked by a piecewise linear curve between the points specified. For example, to mimic LITO in 2015-16 (when the offset was \$445 for incomes below \$37,000, and afterwards tapered off to \$66,667), one would use \code{lito_multi = list(x = c(-Inf, 37e3, 200e3/3, Inf), y = c(445, 445, 0, 0))}. The reason the argument ends with \code{multi} is that it is intended to extend the original parameters of LITO so that multiple kinks (including ones of positive and negative gradients) can be modelled. 
+#' @param lito_max_offset (deprecated) The maximum offset available for low incomes.
+#' @param lito_taper (deprecated) The taper to apply beyond \code{lito_min_bracket}.
+#' @param lito_min_bracket (deprecated) The taxable income at which the value of the offset starts to reduce (from \code{lito_max_offset}).
+#' @param lito_multi No longer supported.
 #' 
-#' @param Budget2018_lamington logical; default is `FALSE`. If set to `TRUE`, calculates the amount that taxpayers would be entitled to under the Low and Middle Income Tax Offset as contained in the 2018 Budget.
-#' @param Budget2019_lamington logical. If set to `TRUE`, calculates the amount that taxpayers would be entitled to under the Low and Middle Income Tax Offset as amended by the 2019 Budget.
+#' @param Budget2018_lamington No longer supported
+#' @param Budget2019_lamington No longer supported.
 #' 
-#' The default, `NA`, means `TRUE` if `baseline_fy` is set to a year where the LMITO
-#' is in effect, viz. 2017-18, 2018-19, 2019-20 or 2020-21, and `FALSE` otherwise.
-#' 
-#' @param Budget2018_lito_202223 The LITO proposed to start in 2022-23 as announced in the 2018 Budget.
-#' @param Budget2018_watr logical; default is `FALSE`. If set to `TRUE`, calculates the "Working Australian Tax Refund" as proposed in the Labor Opposition Leader's Budget Reply Speech 2018.
-#' @param Budget2019_watr logical; default is `FALSE`. If set to `TRUE`, calculates the "Working Australian Tax Refund" as revised in the Labor Opposition Leader's Budget Reply Speech 2019.
+#' @param Budget2018_lito_202223 No longer supported.
+#' @param Budget2018_watr No longer supported
+#' @param Budget2019_watr No longer supported.
 #' 
 #' @param sapto_eligible Whether or not each taxpayer in \code{sample_file} is eligible for \code{SAPTO}. 
 #' If \code{NULL}, the default, then eligibility is determined by \code{age_range} in \code{sample_file};
@@ -105,6 +102,7 @@ model_income_tax <- function(sample_file,
                              lito_taper = NULL,
                              lito_min_bracket = NULL,
                              lito_multi = NULL,
+                             offsets = NULL,
                              Budget2018_lamington = FALSE,
                              Budget2019_lamington = NA,
                              Budget2018_lito_202223 = FALSE,
@@ -127,6 +125,18 @@ model_income_tax <- function(sample_file,
                              clear_tax_cols = TRUE,
                              warn_upper_thresholds = TRUE,
                              .debug = FALSE) {
+  if (!missing(Budget2018_lamington) || 
+      !missing(Budget2019_lamington) || 
+      !missing(Budget2018_lito_202223) ||
+      !missing(Budget2018_watr) ||
+      !missing(Budget2019_watr) ) {
+    if (!is_testing()) {
+      warning("Budget2018_lamington, Budget2019_lamington, Budget2018_lito_202223,",
+              " Budget2018_watr, Budget2019_watr no longer supported and will",
+              " be ignored.")
+    }
+  }
+  
   arguments <- ls()
   argument_vals <- as.list(environment())
   return. <- match.arg(return.)
@@ -146,10 +156,18 @@ model_income_tax <- function(sample_file,
   .dots.ATO <-  sample_file
   sample_file_noms <- copy(names(sample_file))
   
+  .Offsets <- set_offsets(yr = yr, 
+                          lito_max_offset = lito_max_offset, 
+                          lito_taper = lito_taper,
+                          lito_min_bracket = lito_min_bracket)
+  if (!is.null(offsets)) {
+    .Offsets <- .offsets
+  }
+  
+  
   .System <-
     System(ordinary_tax_thresholds = ordinary_tax_thresholds,
            ordinary_tax_rates = ordinary_tax_rates,
-           
            yr = yr,
            medicare_levy_taper = medicare_levy_taper,
            medicare_levy_rate = medicare_levy_rate,
@@ -162,7 +180,7 @@ model_income_tax <- function(sample_file,
            medicare_levy_lower_family_sapto_threshold = medicare_levy_lower_family_sapto_threshold,
            medicare_levy_upper_family_sapto_threshold = medicare_levy_upper_family_sapto_threshold,
            medicare_levy_lower_up_for_each_child = medicare_levy_lower_up_for_each_child,
-           offsets = set_offsets(yr),
+           offsets = .Offsets,
            sapto_max_offset = sapto_max_offset,
            sapto_lower_threshold = sapto_lower_threshold,
            sapto_taper = sapto_taper,
