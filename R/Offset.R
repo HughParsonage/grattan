@@ -1,19 +1,29 @@
-
-
-Offset <- function(x, y, a, m) {
-  .Call("COffset", x, y, a, m, PACKAGE = packageName())
-}
-
-memOffset <- function(x, offset_1st = 445L, 
-                      thresholds = 37000L,
-                      tapers = 0.015) {
-  .Call("C_moffset", x, offset_1st, thresholds, tapers, 
-        PACKAGE = packageName())
-}
-
-test_currency <- function(x, taper) {
-  .Call("TestCurrency", as.integer(x), as.double(taper), PACKAGE = packageName())
-}
+#' Set offsets
+#' @description Create parameters for tax offsets.
+#' @param offset_1st \code{integer(1)} The offset available for zero income.
+#' @param thresholds \code{integer(N)} An sorted integer vector, the thresholds
+#' above which each taper applies.
+#' @param tapers \code{double(N)} The tapers above each \code{threshold}. Positive
+#' tapers mean that the offset reduces for every dollar above the corresponding
+#' threshold.
+#' @param refundable \code{bool(1)} If \code{FALSE}, the default, offsets are 
+#' non-refundable, meaning that the offset cannot reduce the tax below zero.
+#' 
+#' @param ... A set of offsets created by \code{set_offset}.
+#' @param yr \code{NULL / integer(1)} If \code{NULL}, only the offsets created
+#' by \code{...} are used. Otherwise, inherits offsets (such as LITO and LMITO)
+#' from the corresponding year.
+#' @param lito_max_offset,lito_taper,lito_min_bracket,lito_multi deprecated
+#' arguments to adjust (single-threshold) LITO.
+#' 
+#' @return 
+#' \describe{
+#' \item{\code{set_offset}}{A list of four elements, \code{offset_1st}, 
+#' \code{thresholds}, \code{tapers}, \code{refundable}.}
+#' \item{\code{set_offset}}{A list of lists created by \code{set_offset}.}
+#' }
+#' 
+#' @export
 
 set_offset <- function(offset_1st = integer(1),
                        thresholds = integer(), 
@@ -34,7 +44,8 @@ set_offset <- function(offset_1st = integer(1),
 }
 
 
-
+#' @rdname set_offset
+#' @export
 set_offsets <- function(..., 
                         yr = NULL, 
                         lito_max_offset = NULL,
@@ -75,6 +86,23 @@ set_offsets <- function(...,
   }
   DefaultOffsets
 }
+
+Offset <- function(x, y, a, m) {
+  .Call("COffset", x, y, a, m, PACKAGE = packageName())
+}
+
+memOffset <- function(x, offset_1st = 445L, 
+                      thresholds = 37000L,
+                      tapers = 0.015) {
+  .Call("C_moffset", x, offset_1st, thresholds, tapers, 
+        PACKAGE = packageName())
+}
+
+test_currency <- function(x, taper) {
+  .Call("TestCurrency", as.integer(x), as.double(taper), PACKAGE = packageName())
+}
+
+
 
 multiOffsets <- function(x, Offsets = set_offsets(), nThread = getOption("grattan.nThread", 1L)) {
   .Call("C_multiOffset", x, Offsets, nThread, PACKAGE = packageName())
