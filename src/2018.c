@@ -75,14 +75,6 @@ System System2018 = {
       .Tapers = {0.015},
       .nb = 1,
       .refundable = false
-    },
-    {
-      // LMITO
-      .offset_1st = 255,
-      .Thresholds = {37000, 48000, 90000},
-      .Tapers = {-0.075, 0, 0.03},
-      .nb = 3,
-      .refundable = false
     }
   },
   .has_temp_budget_repair_levy = false
