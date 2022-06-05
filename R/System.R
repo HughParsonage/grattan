@@ -63,10 +63,6 @@ System <- function(yr,
   if (is.character(yr) || is.fy(yr)) {
     yr <- fy::fy2yr(yr)
   }
-  
-  
-  
-  
   RSystem <- mget(ls(sorted = FALSE))
   .validateSystem(Filter(length, RSystem), fix = fix)
 }

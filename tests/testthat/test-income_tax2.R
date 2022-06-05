@@ -1,6 +1,7 @@
 test_that("income_tax2 works", {
   expect_equal(income_tax2(180e3, "2017-18"), 57832)
-  expect_equal(income_tax2(180e3, "2017-18", System = System(medicare_levy_rate = 0.01)), 57832 - 0.01 * 180e3)
+  expect_equal(income_tax2(180e3, "2017-18", System = System(2018L, medicare_levy_rate = 0.01, fix = 2L)),
+               57832 - 0.01 * 180e3)
   expect_equal(income_tax2(38e3, "2018-19"),
                income_tax(38e3, "2018-19"))
 })
