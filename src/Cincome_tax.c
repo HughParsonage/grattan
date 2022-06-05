@@ -160,6 +160,8 @@ SEXP Cincome_tax(SEXP Yr,
       apply_sapto(&ansp[i], PP[i], Sys.S);
     })
   }
+
+  
   if (Sys.n_offsetn) {
     do_multiOffsets(ansp, N, Sys.Offsets, Sys.n_offsetn, ic_taxable_income_loss, nThread, true);
   }

@@ -258,7 +258,7 @@ income_tax2 <- function(income = NULL,
                                n_dependants,
                                spc_rebate_income,
                                System, # RSystem
-                               nThread,
+                               1L,
                                PACKAGE = "grattanDev"),
               by = "yr"]
     return(.subset2(ans, "tax"))

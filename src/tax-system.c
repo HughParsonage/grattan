@@ -388,6 +388,60 @@ System yr2System(int yr) {
     return System2022;
   }
   switch(yr) {
+  case 1984:
+    return System1984;
+  case 1985:
+    return System1985;
+  case 1986:
+    return System1986;
+  case 1987:
+    return System1987;
+  case 1988:
+    return System1988;
+  case 1989:
+    return System1989;
+  case 1990:
+    return System1990;
+  case 1991:
+    return System1991;
+  case 1992:
+    return System1992;
+  case 1993:
+    return System1993;
+  case 1994:
+    return System1994;
+  case 1995:
+    return System1995;
+  case 1996:
+    return System1996;
+  case 1997:
+    return System1997;
+  case 1998:
+    return System1998;
+  case 1999:
+    return System1999;
+  case 2000:
+    return System2000;
+  case 2001:
+    return System2001;
+  case 2002:
+    return System2002;
+  case 2003:
+    return System2003;
+  case 2004:
+    return System2004;
+  case 2005:
+    return System2005;
+  case 2006:
+    return System2006;
+  case 2007:
+    return System2007;
+  case 2008:
+    return System2008;
+  case 2009:
+    return System2009;
+  case 2010:
+    return System2010;
   case 2011:
     return System2011;
   case 2012:
@@ -421,6 +475,12 @@ System yr2System(int yr) {
     Sys.BRACKETS[b] = brack_by_yr(b, yr);
     Sys.RATES[b] = rates_by_yr(b, yr);
   }
+  Sys.n_offsetn = 1;
+  Sys.Offsets[0].nb = 1;
+  Sys.Offsets[0].offset_1st = (yr >= 1994) ? 445 : 0;
+  Sys.Offsets[0].Thresholds[0] = 37000;
+  Sys.Offsets[0].Tapers[0] = 0.015;
+  Sys.Offsets[0].refundable = false;
   Sys.M = yr2Medicare(yr);
   Sys.has_sapto = yr >= 2000;
   Sys.S = yr2Sapto(yr);

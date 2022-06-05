@@ -211,33 +211,58 @@ typedef struct {
 #include "1984.h"
 extern System System1984;
 #include "1985.h"
+extern System System1985;
 #include "1986.h"
+extern System System1986;
 #include "1987.h"
+extern System System1987;
 #include "1988.h"
+extern System System1988;
 #include "1989.h"
+extern System System1989;
 #include "1990.h"
+extern System System1990;
 #include "1991.h"
+extern System System1991;
 #include "1992.h"
+extern System System1992;
 #include "1993.h"
+extern System System1993;
 #include "1994.h"
+extern System System1994;
 #include "1995.h"
+extern System System1995;
 #include "1996.h"
+extern System System1996;
 #include "1997.h"
+extern System System1997;
 #include "1998.h"
+extern System System1998;
 #include "1999.h"
+extern System System1999;
 #include "2000.h"
+extern System System2000;
 #include "2001.h"
+extern System System2001;
 #include "2002.h"
+extern System System2002;
 #include "2003.h"
+extern System System2003;
 #include "2004.h"
+extern System System2004;
 #include "2005.h"
+extern System System2005;
 #include "2006.h"
+extern System System2006;
 #include "2007.h"
+extern System System2007;
 #include "2008.h"
+extern System System2008;
 #include "2009.h"
+extern System System2009;
 #include "2010.h"
+extern System System2010;
 #include "2011.h"
-
 extern System System2011;
 #include "2012.h"
 extern System System2012;
