@@ -758,43 +758,55 @@ SEXP CvalidateSystem(SEXP RSystem, SEXP Fix) {
     if (!hazName(RSystem, "medicare_levy_upper_threshold")) {
       mb = mt * ma / (mt - mr);
       // TODO: warningcall
-      warning("`medicare_levy_upper_threshold` was not specified "
-                "but its default value would be inconsistent with the parameters that were specified.\n"
-                "Its value has been set to:\n\t"
-                "medicare_levy_upper_threshold = %d", mb);
+      if (fix == 1) {
+        warning("`medicare_levy_upper_threshold` was not specified "
+                  "but its default value would be inconsistent with the parameters that were specified.\n"
+                  "Its value has been set to:\n\t"
+                  "medicare_levy_upper_threshold = %d", mb);
+      }
     } else if (!hazName(RSystem, "medicare_levy_lower_threshold")) {
       ma = mb * (mt - mr) / mt;
-      warning("`medicare_levy_lower_threshold` was not specified "
-                "but its default value would be inconsistent with the parameters that were specified.\n"
-                "Its value has been set to:\n\t"
-                "medicare_levy_lower_threshold = %d", ma);
+      if (fix == 1) {
+        warning("`medicare_levy_lower_threshold` was not specified "
+                  "but its default value would be inconsistent with the parameters that were specified.\n"
+                  "Its value has been set to:\n\t"
+                  "medicare_levy_lower_threshold = %d", ma);
+      }
     } else if (!hazName(RSystem, "medicare_levy_taper")) {
       mt = mr * mb / (mb - ma);
-      warning("`medicare_levy_taper` was not specified "
-                "but its default value would be inconsistent with the parameters that were specified.\n"
-                "Its value has been set to:\n\t"
-                "medicare_levy_taper = %f", mt);
+      if (fix == 1) {
+        warning("`medicare_levy_taper` was not specified "
+                  "but its default value would be inconsistent with the parameters that were specified.\n"
+                  "Its value has been set to:\n\t"
+                  "medicare_levy_taper = %f", mt);
+      }
     } else if (!hazName(RSystem, "medicare_levy_rate")) {
       mr = mt * (mb - ma) / mb;
-      warning("`medicare_levy_rate` was not specified "
-                "but its default value would be inconsistent with the parameters that were specified.\n"
-                "Its value has been set to:\n\t"
-                "medicare_levy_rate = %f", mr);
+      if (fix == 1) {
+        warning("`medicare_levy_rate` was not specified "
+                  "but its default value would be inconsistent with the parameters that were specified.\n"
+                  "Its value has been set to:\n\t"
+                  "medicare_levy_rate = %f", mr);
+      }
     }
   }
   if (invalid_medicare_params(msa, msb, mt, mr)) {
     if (!hazName(RSystem, "medicare_levy_upper_sapto_threshold")) {
       msb = mt * msa / (mt - mr);
-      warning("`medicare_levy_upper_sapto_threshold` was not specified "
-                "but its default value would be inconsistent with the parameters that were specified.\n" 
-                "Its value has been set to:\n\t"
-                "medicare_levy_upper_sapto_threshold = %d", msb);
+      if (fix == 1) {
+        warning("`medicare_levy_upper_sapto_threshold` was not specified "
+                  "but its default value would be inconsistent with the parameters that were specified.\n" 
+                  "Its value has been set to:\n\t"
+                  "medicare_levy_upper_sapto_threshold = %d", msb);
+      }
     } else if (!hazName(RSystem, "medicare_levy_lower_sapto_threshold")) {
       msa = msb * (mt - mr) / mt;
-      warning("`medicare_levy_lower_sapto_threshold` was not specified "
-                "but its default value would be inconsistent with the parameters that were specified.\n"
-                "Its value has been set to:\n\t"
-                "medicare_levy_lower_sapto_threshold = %d", msa);
+      if (fix == 1) {
+        warning("`medicare_levy_lower_sapto_threshold` was not specified "
+                  "but its default value would be inconsistent with the parameters that were specified.\n"
+                  "Its value has been set to:\n\t"
+                  "medicare_levy_lower_sapto_threshold = %d", msa);
+      }
     } else {
       double medicare_levy_taper_stop = mr * msb / (msb - msa);
       error("Medicare levy parameter mismatch could not be safely resolved.\n\n"
@@ -808,16 +820,20 @@ SEXP CvalidateSystem(SEXP RSystem, SEXP Fix) {
   if (invalid_medicare_params(mfa, mfb, mt, mr)) {
     if (!hazName(RSystem, "medicare_levy_upper_family_threshold")) {
       mfb = mt * mfa / (mt - mr);
-      warning("`medicare_levy_upper_family_threshold` was not specified "
-                "but its default value would be inconsistent with the parameters that were specified.\n" 
-                "Its value has been set to:\n\t"
-                "medicare_levy_upper_family_threshold = %d", mfb);
+      if (fix == 1) {
+        warning("`medicare_levy_upper_family_threshold` was not specified "
+                  "but its default value would be inconsistent with the parameters that were specified.\n" 
+                  "Its value has been set to:\n\t"
+                  "medicare_levy_upper_family_threshold = %d", mfb);
+      }
     } else if (!hazName(RSystem, "medicare_levy_lower_family_threshold")) {
       mfa = mfb * (mt - mr) / mt;
-      warning("`medicare_levy_lower_family_threshold` was not specified "
-                "but its default value would be inconsistent with the parameters that were specified.\n"
-                "Its value has been set to:\n\t"
-                "medicare_levy_lower_family_threshold = %d", mfa);
+      if (fix == 1) {
+        warning("`medicare_levy_lower_family_threshold` was not specified "
+                  "but its default value would be inconsistent with the parameters that were specified.\n"
+                  "Its value has been set to:\n\t"
+                  "medicare_levy_lower_family_threshold = %d", mfa);
+      }
     } else {
       double medicare_levy_taper_stop = mr * mfb / (mfb - mfa);
       error("Medicare levy parameter mismatch could not be safely resolved.\n\n"
@@ -831,16 +847,20 @@ SEXP CvalidateSystem(SEXP RSystem, SEXP Fix) {
   if (invalid_medicare_params(mfsa, mfsb, mt, mr)) {
     if (!hazName(RSystem, "medicare_levy_upper_family_sapto_threshold")) {
       mfsb = mt * mfsa / (mt - mr);
-      warning("`medicare_levy_upper_family_sapto_threshold` was not specified "
-                "but its default value would be inconsistent with the parameters that were specified.\n" 
-                "Its value has been set to:\n\t"
-                "medicare_levy_upper_family_sapto_threshold = %d", mfsb);
+      if (fix == 1) {
+        warning("`medicare_levy_upper_family_sapto_threshold` was not specified "
+                  "but its default value would be inconsistent with the parameters that were specified.\n" 
+                  "Its value has been set to:\n\t"
+                  "medicare_levy_upper_family_sapto_threshold = %d", mfsb);
+      }
     } else if (!hazName(RSystem, "medicare_levy_lower_family_sapto_threshold")) {
       mfsa = mfsb * (mt - mr) / mt;
-      warning("`medicare_levy_lower_family_sapto_threshold` was not specified "
-                "but its default value would be inconsistent with the parameters that were specified.\n"
-                "Its value has been set to:\n\t"
-                "medicare_levy_lower_family_sapto_threshold = %d", mfsa);
+      if (fix == 1) {
+        warning("`medicare_levy_lower_family_sapto_threshold` was not specified "
+                  "but its default value would be inconsistent with the parameters that were specified.\n"
+                  "Its value has been set to:\n\t"
+                  "medicare_levy_lower_family_sapto_threshold = %d", mfsa);
+      }
     } else {
       double medicare_levy_taper_stop = mr * mfsb / (mfsb - mfa);
       error("Medicare levy parameter mismatch could not be safely resolved.\n\n"

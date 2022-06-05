@@ -211,4 +211,7 @@ age2age_range <- function(age) {
   pmax.int(pmin.int(11L - {(age - 15L) %/% 5L}, 11L), 0L)
 }
 
+is_testing <- function() {
+  requireNamespace("testthat", quietly = TRUE) && testthat::is_testing()
+}
 
