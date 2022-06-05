@@ -40,7 +40,7 @@ System System2014 = {
     .upr_single_sapto = 37976,
     .lwr_family_sapto = 46000,
     .upr_family_sapto = 54118,
-    .lwr_thr_up_per_child = 3238,
+    .lwr_thr_up_per_child = 3156,
     .taper = 0.1,
     .rate = 0.015
   },
