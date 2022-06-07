@@ -22,7 +22,7 @@ cpi_inflator_quarters(
 \item{adjustment}{Should there be an adjustment made to the index? Adjustments include 'none' (no adjustment), 'seasonal', or 'trimmed' [referring to trimmed mean]. By default, \code{seasonal}.}
 
 \item{useABSConnection}{Should the function connect with ABS.Stat via an SDMX connection? By default set to \code{FALSE} in which case a pre-prepared index table is used. This is much faster and more reliable (in terms of errors), though of course relies on the package maintainer to keep the tables up-to-date.
-The internal data was updated on 2022-02-03 to 2021-Q3.
+The internal data was updated on 2022-01-03 to 2021-Q3.
 Using \code{useABSConnection = TRUE} is no longer supported for server issues.}
 }
 \value{
