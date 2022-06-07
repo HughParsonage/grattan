@@ -2,7 +2,7 @@ context("(General) Inflator")
 
 test_that("inflator matches cpi", {
   my_data <- 
-    grattan:::cpi_seasonal_adjustment %>% 
+    cpi_seasonal_adjustment %>% 
     data.table::copy(.) %>%
     setnames(old = c("obsValue", "obsTime"), 
              new = c("Index", "Time"))
@@ -14,7 +14,7 @@ test_that("inflator matches cpi", {
 
 test_that("Switching order of to and from causes inverse", {
   my_data <- 
-    grattan:::cpi_seasonal_adjustment %>% 
+    cpi_seasonal_adjustment %>% 
     data.table::copy(.) %>%
     setnames(old = c("obsValue", "obsTime"), 
              new = c("Index", "Time"))
@@ -28,7 +28,7 @@ test_that("rolling inflator", {
   skip_if_not_installed("dplyr")
   skip_if_not_installed("zoo")
   my_data <- 
-    grattan:::cpi_seasonal_adjustment %>% 
+    cpi_seasonal_adjustment %>% 
     data.table::copy(.) %>%
     setnames(old = c("obsValue", "obsTime"), 
              new = c("Index", "Time")) %>%

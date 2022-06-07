@@ -214,7 +214,7 @@ test_that("accelerating both from and to", {
 test_that("lf_indices", {
   skip_on_cran()
   library(data.table)
-  LL_inds <- as.data.table(grattan:::lf_trend)
+  LL_inds <- as.data.table(lf_trend)
   LL_inds[, obsDate := as.Date(paste0(obsTime, "-01"))]
   LL_inds_month1 <- LL_inds[month(obsDate) == 1L]
   LL_inds_month1[, fy_year := date2fy(obsDate)]

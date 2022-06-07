@@ -95,6 +95,10 @@ Since the temporary budget repair levy was imposed on a discrete tax bracket whe
 
 \item{lito_multi}{No longer supported.}
 
+\item{offsets}{A list of lists created by \code{\link{set_offsets}}. If
+\code{NULL}, the default, the list is populated by the offsets
+in \code{baseline_fy}.}
+
 \item{Budget2018_lamington}{No longer supported}
 
 \item{Budget2019_lamington}{No longer supported.}

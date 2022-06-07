@@ -3,9 +3,7 @@
 #' @title FUNCTION_TITLE
 #' @description FUNCTION_DESCRIPTION
 #' @param yr \code{integer(1)} A year.
-#' @param Sapto A list created by \code{Sapto()}.
 #' @param offsets A list as created by \code{set_offsets()}.
-#' @param Medicare A list created by \code{Medicare()}.
 #' 
 #' @param ordinary_tax_thresholds A numeric vector specifying the lower bounds of the brackets for "ordinary tax" as defined by the Regulations.
 #' The first element should be zero if there is a tax-free threshold.

@@ -7,7 +7,7 @@ test_that("Returns correct values", {
   expect_gte(aus_pop_qtr("2018-Q4"), 25e6)
   # by age
   
-  expect_equivalent(grattan:::aust_pop_by_age_yearqtr, aus_pop_qtr_age(tbl = TRUE))
+  # expect_equivalent(grattan:::aust_pop_by_age_yearqtr, aus_pop_qtr_age(tbl = TRUE))
   expect_equal(aus_pop_qtr_age(age = 1)[1:139], c(226775L, 228838L, 230676L, 232589L, 233901L, 235023L, 236046L, 
                                            237097L, 238209L, 239285L, 240219L, 241246L, 241007L, 240648L, 
                                            240264L, 239865L, 240552L, 241269L, 241865L, 242597L, 242144L, 

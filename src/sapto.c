@@ -654,6 +654,79 @@ SEXP Csapto_dat(SEXP Yr, SEXP ee) {
   return ScalarReal(0.125);
 }
 
+static bool FamilyStatus_is_single(SEXP x, R_xlen_t i) {
+  const char * xi = CHAR(STRING_ELT(x, i));
+  return xi[0] == 's';
+}
+
+static unsigned char code_OnSaptoCd(SEXP x, R_xlen_t i) {
+  const char * xi = CHAR(STRING_ELT(x, i));
+  return xi[0];
+}
+
+static void set_on_sapto_cd(unsigned char * on_sapto_cd, R_xlen_t N, 
+                            SEXP FamilyStatus, SEXP OnSaptoCd) {
+  if (xlength(FamilyStatus) == 1 &&
+      xlength(OnSaptoCd) == 1) {
+    unsigned char family_status0 = FamilyStatus_is_single(FamilyStatus, 0) ? 'A' : 'D';
+    unsigned char on_sapto_cd0 = code_OnSaptoCd(OnSaptoCd, 0);
+    if (family_status0 != on_sapto_cd0) {
+      REprintf("family status and on_sapto_cd differ and so will on_sapto_cd = '%uc'"
+                 " will be used.", on_sapto_cd0);
+    }
+    memset(on_sapto_cd, on_sapto_cd0, N);
+    return;
+  }
+  if (xlength(OnSaptoCd) == N) {
+    int nThread = 1;
+    FORLOOP({
+      on_sapto_cd[i] = code_OnSaptoCd(FamilyStatus, i);
+    })
+      return;
+  }
+  if (xlength(FamilyStatus) == N) {
+    int nThread = 1;
+    FORLOOP({
+      on_sapto_cd[i] = FamilyStatus_is_single(FamilyStatus, i) ? 'A' : 'D';
+    })
+    return;
+  }
+  error("FamilyStatus and OnSaptoCd had different lengths.");
+}
+
+SEXP Csapto(SEXP RebateIncome, SEXP Yr, SEXP Fill, SEXP SaptoEligible, SEXP SpcRebateIncome, SEXP FamilyStatus,
+            SEXP OnSaptoCd) {
+  R_xlen_t N = xlength(RebateIncome);
+  int yr = asInteger(Yr);
+  System Sys = yr2System(yr);
+  SEXP ans = PROTECT(allocVector(REALSXP, N));
+  double * restrict ansp = REAL(ans);
+  int nThread = 1;
+  if (!Sys.has_sapto) {
+    double fill = asReal(Fill);
+    FORLOOP({
+      ansp[i] = fill;
+    })
+    UNPROTECT(1);
+    return ans;
+  }
+  Sapto S = Sys.S; 
+  const int * xp = INTEGER(RebateIncome);
+  const int * se = LOGICAL(SaptoEligible);
+  const bool nse = xlength(SaptoEligible) == N;
+  const int * sp = INTEGER(SpcRebateIncome);
+  const bool nsp = xlength(SpcRebateIncome) == N;
+  unsigned char * is_married = malloc(sizeof(char) * N);
+  if (is_married == NULL) {
+    UNPROTECT(1);
+    return R_NilValue;
+  }
+  FORLOOP({
+    ansp[i] = do_1_sapto_sf(xp[i], nsp ? sp[i] : sp[0], (nse ? se[i] : se[0]) ? 67 : 42, is_married[i], S);
+  })
+  UNPROTECT(1);
+  return ans;
+}
 
 
 
