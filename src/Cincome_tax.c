@@ -116,7 +116,8 @@ SEXP Cincome_tax(SEXP Yr,
   if (!isNull(RSystem) && !isVectorList(RSystem)) {
     error("RSystem must be NULL or a list.");
   }
-  int nThread = as_nThread(nthreads);
+  AS_NTHREAD;
+    
   R_xlen_t N = xlength(IcTaxableIncome);
   isEquiInt(IcTaxableIncome, Age, "Age");
   isEquiInt(IcTaxableIncome, RebateIncome, "RebateIncome");
@@ -180,7 +181,7 @@ SEXP Cincome_tax(SEXP Yr,
 SEXP Cincome2022(SEXP x, SEXP y, SEXP rb, SEXP age, SEXP isMarried, SEXP nDependants,
                  SEXP nthreads) {
   
-  int nThread = as_nThread(nthreads);
+  AS_NTHREAD;
   R_xlen_t N = xlength(x);
   const int * xp = INTEGER(x);
   const int * yp = INTEGER(y);
