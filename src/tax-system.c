@@ -1,387 +1,4 @@
-
 #include "grattan.h"
-
-
-int ORDINARY_TAX_BRACKETS_1984[MAX_NBRACK] = {0, 4595, 19500, 35788, INT_MAX, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_1985[MAX_NBRACK] = {0, 4595, 12500, 19500, 28000, 35000, 35788, INT_MAX};
-int ORDINARY_TAX_BRACKETS_1986[MAX_NBRACK] = {0, 4595, 12500, 19500, 28000, 35000, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_1987[MAX_NBRACK] = {0, 4890, 12500, 12600, 19500, 28000, 35000, INT_MAX};
-int ORDINARY_TAX_BRACKETS_1988[MAX_NBRACK] = {0, 5100, 12600, 19500, 35000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_1989[MAX_NBRACK] = {0, 5100, 12600, 19500, 35000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_1990[MAX_NBRACK] = {0, 5100, 17650, 20600, 35000, 50000, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_1991[MAX_NBRACK] = {0, 5250, 17650, 20600, 20700, 35000, 36000, 50000};
-int ORDINARY_TAX_BRACKETS_1992[MAX_NBRACK] = {0, 5400, 20700, 36000, 50000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_1993[MAX_NBRACK] = {0, 5400, 20700, 36000, 50000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_1994[MAX_NBRACK] = {0, 5400, 20700, 36000, 38000, 50000, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_1995[MAX_NBRACK] = {0, 5400, 20700, 38000, 50000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_1996[MAX_NBRACK] = {0, 5400, 20700, 38000, 50000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_1997[MAX_NBRACK] = {0, 5400, 20700, 38000, 50000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_1998[MAX_NBRACK] = {0, 5400, 20700, 38000, 50000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_1999[MAX_NBRACK] = {0, 5400, 20700, 38000, 50000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2000[MAX_NBRACK] = {0, 5400, 20700, 38000, 50000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2001[MAX_NBRACK] = {0, 6000, 20000, 50000, 60000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2002[MAX_NBRACK] = {0, 6000, 20000, 50000, 60000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2003[MAX_NBRACK] = {0, 6000, 20000, 50000, 60000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2004[MAX_NBRACK] = {0, 6000, 21600, 52000, 62500, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2005[MAX_NBRACK] = {0, 6000, 21600, 58000, 70000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2006[MAX_NBRACK] = {0, 6000, 21600, 63000, 95000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2007[MAX_NBRACK] = {0, 6000, 25000, 75000, 150000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2008[MAX_NBRACK] = {0, 6000, 30000, 75000, 150000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2009[MAX_NBRACK] = {0, 6000, 34000, 80000, 180000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2010[MAX_NBRACK] = {0, 6000, 35000, 80000, 180000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2011[MAX_NBRACK] = {0, 6000, 37000, 80000, 180000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2012[MAX_NBRACK] = {0, 6000, 37000, 80000, 180000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2013[MAX_NBRACK] = {0, 18200, 37000, 80000, 180000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2014[MAX_NBRACK] = {0, 18200, 37000, 80000, 180000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2015[MAX_NBRACK] = {0, 18200, 37000, 80000, 180000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2016[MAX_NBRACK] = {0, 18200, 37000, 80000, 180000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2017[MAX_NBRACK] = {0, 18200, 37000, 87000, 180000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2018[MAX_NBRACK] = {0, 18200, 37000, 87000, 180000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2019[MAX_NBRACK] = {0, 18200, 37000, 90000, 180000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2020[MAX_NBRACK] = {0, 18200, 37000, 90000, 180000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2021[MAX_NBRACK] = {0, 18200, 37000, 90000, 180000, INT_MAX, INT_MAX, INT_MAX};
-int ORDINARY_TAX_BRACKETS_2022[MAX_NBRACK] = {0, 18200, 37000, 90000, 180000, INT_MAX, INT_MAX, INT_MAX};
-
-double ORDINARY_TAX_RATES_1984[MAX_NBRACK] = {0, 0.30, 0.46, 0.60, 0.60, 0.60, 0.60, 0.60};
-double ORDINARY_TAX_RATES_1985[MAX_NBRACK] = {0, 0.2667, 0.30, 0.46, 0.4733, 0.5533, 0.60, 0.60};
-double ORDINARY_TAX_RATES_1986[MAX_NBRACK] = {0, 0.25, 0.30, 0.46, 0.48, 0.60, 0.60, 0.60};
-double ORDINARY_TAX_RATES_1987[MAX_NBRACK] = {0, 0.2442, 0.2650, 0.2942, 0.4425, 0.4683, 0.5708, 0.5708};
-double ORDINARY_TAX_RATES_1988[MAX_NBRACK] = {0, 0.24, 0.29, 0.40, 0.49, 0.49, 0.49, 0.49};
-double ORDINARY_TAX_RATES_1989[MAX_NBRACK] = {0, 0.24, 0.29, 0.40, 0.49, 0.49, 0.49, 0.49};
-double ORDINARY_TAX_RATES_1990[MAX_NBRACK] = {0, 0.21, 0.29, 0.39, 0.47, 0.48, 0.48, 0.48};
-double ORDINARY_TAX_RATES_1991[MAX_NBRACK] = {0, 0.205, 0.245, 0.295, 0.385, 0.425, 0.465, 0.47};
-double ORDINARY_TAX_RATES_1992[MAX_NBRACK] = {0, 0.2, 0.38, 0.46, 0.47, 0.47, 0.47, 0.47};
-double ORDINARY_TAX_RATES_1993[MAX_NBRACK] = {0, 0.2, 0.38, 0.46, 0.47, 0.47, 0.47, 0.47};
-double ORDINARY_TAX_RATES_1994[MAX_NBRACK] = {0, 0.2, 0.355, 0.385, 0.44125, 0.47, 0.47, 0.47};
-double ORDINARY_TAX_RATES_1995[MAX_NBRACK] = {0, 0.2, 0.34, 0.43, 0.47, 0.47, 0.47, 0.47};
-double ORDINARY_TAX_RATES_1996[MAX_NBRACK] = {0, 0.2, 0.34, 0.43, 0.47, 0.47, 0.47, 0.47};
-double ORDINARY_TAX_RATES_1997[MAX_NBRACK] = {0, 0.2, 0.34, 0.43, 0.47, 0.47, 0.47, 0.47};
-double ORDINARY_TAX_RATES_1998[MAX_NBRACK] = {0, 0.2, 0.34, 0.43, 0.47, 0.47, 0.47, 0.47};
-double ORDINARY_TAX_RATES_1999[MAX_NBRACK] = {0, 0.2, 0.34, 0.43, 0.47, 0.47, 0.47, 0.47};
-double ORDINARY_TAX_RATES_2000[MAX_NBRACK] = {0, 0.2, 0.34, 0.43, 0.47, 0.47, 0.47, 0.47};
-double ORDINARY_TAX_RATES_2001[MAX_NBRACK] = {0, 0.17, 0.3, 0.42, 0.47, 0.47, 0.47, 0.47};
-double ORDINARY_TAX_RATES_2002[MAX_NBRACK] = {0, 0.17, 0.3, 0.42, 0.47, 0.47, 0.47, 0.47};
-double ORDINARY_TAX_RATES_2003[MAX_NBRACK] = {0, 0.17, 0.3, 0.42, 0.47, 0.47, 0.47, 0.47};
-double ORDINARY_TAX_RATES_2004[MAX_NBRACK] = {0, 0.17, 0.3, 0.42, 0.47, 0.47, 0.47, 0.47};
-double ORDINARY_TAX_RATES_2005[MAX_NBRACK] = {0, 0.17, 0.3, 0.42, 0.47, 0.47, 0.47, 0.47};
-double ORDINARY_TAX_RATES_2006[MAX_NBRACK] = {0, 0.15, 0.3, 0.42, 0.47, 0.47, 0.47, 0.47};
-double ORDINARY_TAX_RATES_2007[MAX_NBRACK] = {0, 0.15, 0.3, 0.4, 0.45, 0.45, 0.45, 0.45};
-double ORDINARY_TAX_RATES_2008[MAX_NBRACK] = {0, 0.15, 0.3, 0.4, 0.45, 0.45, 0.45, 0.45};
-double ORDINARY_TAX_RATES_2009[MAX_NBRACK] = {0, 0.15, 0.3, 0.4, 0.45, 0.45, 0.45, 0.45};
-double ORDINARY_TAX_RATES_2010[MAX_NBRACK] = {0, 0.15, 0.3, 0.38, 0.45, 0.45, 0.45, 0.45};
-double ORDINARY_TAX_RATES_2011[MAX_NBRACK] = {0, 0.15, 0.3, 0.37, 0.45, 0.45, 0.45, 0.45};
-double ORDINARY_TAX_RATES_2012[MAX_NBRACK] = {0, 0.15, 0.3, 0.37, 0.45, 0.45, 0.45, 0.45};
-double ORDINARY_TAX_RATES_2013[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, 0.45, 0.45, 0.45};
-double ORDINARY_TAX_RATES_2014[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, 0.45, 0.45, 0.45};
-double ORDINARY_TAX_RATES_2015[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, 0.45, 0.45, 0.45};
-double ORDINARY_TAX_RATES_2016[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, 0.45, 0.45, 0.45};
-double ORDINARY_TAX_RATES_2017[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, 0.45, 0.45, 0.45};
-double ORDINARY_TAX_RATES_2018[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, 0.45, 0.45, 0.45};
-double ORDINARY_TAX_RATES_2019[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, 0.45, 0.45, 0.45};
-double ORDINARY_TAX_RATES_2020[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, 0.45, 0.45, 0.45};
-double ORDINARY_TAX_RATES_2021[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, 0.45, 0.45, 0.45};
-double ORDINARY_TAX_RATES_2022[MAX_NBRACK] = {0, 0.19, 0.325, 0.37, 0.45, 0.45, 0.45, 0.45};
-
-int nb_by_year(unsigned int yr) {
-  if (yr > 1995) {
-    return 5;
-  }
-  switch(yr) {
-  case 1984:
-    return 4;
-  case 1985:
-  case 1987:
-    return 7;
-  case 1986:
-  case 1990:
-  case 1994:
-    return 6;
-  case 1991:
-    return 8;
-  default:
-    return 5;
-  }
-}
-
-unsigned int brack_by_yr(int b, int yr) {
-  switch(yr) {
-  case 1984:
-    return ORDINARY_TAX_BRACKETS_1984[b];
-    break;
-  case 1985:
-    return ORDINARY_TAX_BRACKETS_1985[b];
-    break;
-  case 1986:
-    return ORDINARY_TAX_BRACKETS_1986[b];
-    break;
-  case 1987:
-    return ORDINARY_TAX_BRACKETS_1987[b];
-    break;
-  case 1988:
-    return ORDINARY_TAX_BRACKETS_1988[b];
-    break;
-  case 1989:
-    return ORDINARY_TAX_BRACKETS_1989[b];
-    break;
-  case 1990:
-    return ORDINARY_TAX_BRACKETS_1990[b];
-    break;
-  case 1991:
-    return ORDINARY_TAX_BRACKETS_1991[b];
-    break;
-  case 1992:
-    return ORDINARY_TAX_BRACKETS_1992[b];
-    break;
-  case 1993:
-    return ORDINARY_TAX_BRACKETS_1993[b];
-    break;
-  case 1994:
-    return ORDINARY_TAX_BRACKETS_1994[b];
-    break;
-  case 1995:
-    return ORDINARY_TAX_BRACKETS_1995[b];
-    break;
-  case 1996:
-    return ORDINARY_TAX_BRACKETS_1996[b];
-    break;
-  case 1997:
-    return ORDINARY_TAX_BRACKETS_1997[b];
-    break;
-  case 1998:
-    return ORDINARY_TAX_BRACKETS_1998[b];
-    break;
-  case 1999:
-    return ORDINARY_TAX_BRACKETS_1999[b];
-    break;
-  case 2000:
-    return ORDINARY_TAX_BRACKETS_2000[b];
-    break;
-  case 2001:
-    return ORDINARY_TAX_BRACKETS_2001[b];
-    break;
-  case 2002:
-    return ORDINARY_TAX_BRACKETS_2002[b];
-    break;
-  case 2003:
-    return ORDINARY_TAX_BRACKETS_2003[b];
-    break;
-  case 2004:
-    return ORDINARY_TAX_BRACKETS_2004[b];
-    break;
-  case 2005:
-    return ORDINARY_TAX_BRACKETS_2005[b];
-    break;
-  case 2006:
-    return ORDINARY_TAX_BRACKETS_2006[b];
-    break;
-  case 2007:
-    return ORDINARY_TAX_BRACKETS_2007[b];
-    break;
-  case 2008:
-    return ORDINARY_TAX_BRACKETS_2008[b];
-    break;
-  case 2009:
-    return ORDINARY_TAX_BRACKETS_2009[b];
-    break;
-  case 2010:
-    return ORDINARY_TAX_BRACKETS_2010[b];
-    break;
-  case 2011:
-    return ORDINARY_TAX_BRACKETS_2011[b];
-    break;
-  case 2012:
-    return ORDINARY_TAX_BRACKETS_2012[b];
-    break;
-  case 2013:
-    return ORDINARY_TAX_BRACKETS_2013[b];
-    break;
-  case 2014:
-    return ORDINARY_TAX_BRACKETS_2014[b];
-    break;
-  case 2015:
-    return ORDINARY_TAX_BRACKETS_2015[b];
-    break;
-  case 2016:
-    return ORDINARY_TAX_BRACKETS_2016[b];
-    break;
-  case 2017:
-    return ORDINARY_TAX_BRACKETS_2017[b];
-    break;
-  case 2018:
-    return ORDINARY_TAX_BRACKETS_2018[b];
-    break;
-  case 2019:
-    return ORDINARY_TAX_BRACKETS_2019[b];
-    break;
-  case 2020:
-    return ORDINARY_TAX_BRACKETS_2020[b];
-    break;
-  case 2021:
-    return ORDINARY_TAX_BRACKETS_2021[b];
-    break;
-  case 2022:
-    return ORDINARY_TAX_BRACKETS_2022[b];
-    break;
-  default:
-    return ORDINARY_TAX_BRACKETS_2022[b];
-  }
-  return 0;
-}
-
-SEXP Cbracks_by_year(SEXP Yr, SEXP bb) {
-  int yr = asInteger(Yr);
-  const int * b = INTEGER(bb);
-  int n = length(bb);
-  if (n > 8) {
-    n = 8;
-  }
-  SEXP ans = PROTECT(allocVector(INTSXP, n));
-  for (int i = 0; i < n; ++i) {
-    INTEGER(ans)[i] = brack_by_yr(b[i] - 1, yr);
-  }
-  UNPROTECT(1);
-  return ans;
-}
-
-double rates_by_yr(int b, int yr) {
-  switch(yr) {
-  case 1984:
-    return ORDINARY_TAX_RATES_1984[b];
-    break;
-  case 1985:
-    return ORDINARY_TAX_RATES_1985[b];
-    break;
-  case 1986:
-    return ORDINARY_TAX_RATES_1986[b];
-    break;
-  case 1987:
-    return ORDINARY_TAX_RATES_1987[b];
-    break;
-  case 1988:
-    return ORDINARY_TAX_RATES_1988[b];
-    break;
-  case 1989:
-    return ORDINARY_TAX_RATES_1989[b];
-    break;
-  case 1990:
-    return ORDINARY_TAX_RATES_1990[b];
-    break;
-  case 1991:
-    return ORDINARY_TAX_RATES_1991[b];
-    break;
-  case 1992:
-    return ORDINARY_TAX_RATES_1992[b];
-    break;
-  case 1993:
-    return ORDINARY_TAX_RATES_1993[b];
-    break;
-  case 1994:
-    return ORDINARY_TAX_RATES_1994[b];
-    break;
-  case 1995:
-    return ORDINARY_TAX_RATES_1995[b];
-    break;
-  case 1996:
-    return ORDINARY_TAX_RATES_1996[b];
-    break;
-  case 1997:
-    return ORDINARY_TAX_RATES_1997[b];
-    break;
-  case 1998:
-    return ORDINARY_TAX_RATES_1998[b];
-    break;
-  case 1999:
-    return ORDINARY_TAX_RATES_1999[b];
-    break;
-  case 2000:
-    return ORDINARY_TAX_RATES_2000[b];
-    break;
-  case 2001:
-    return ORDINARY_TAX_RATES_2001[b];
-    break;
-  case 2002:
-    return ORDINARY_TAX_RATES_2002[b];
-    break;
-  case 2003:
-    return ORDINARY_TAX_RATES_2003[b];
-    break;
-  case 2004:
-    return ORDINARY_TAX_RATES_2004[b];
-    break;
-  case 2005:
-    return ORDINARY_TAX_RATES_2005[b];
-    break;
-  case 2006:
-    return ORDINARY_TAX_RATES_2006[b];
-    break;
-  case 2007:
-    return ORDINARY_TAX_RATES_2007[b];
-    break;
-  case 2008:
-    return ORDINARY_TAX_RATES_2008[b];
-    break;
-  case 2009:
-    return ORDINARY_TAX_RATES_2009[b];
-    break;
-  case 2010:
-    return ORDINARY_TAX_RATES_2010[b];
-    break;
-  case 2011:
-    return ORDINARY_TAX_RATES_2011[b];
-    break;
-  case 2012:
-    return ORDINARY_TAX_RATES_2012[b];
-    break;
-  case 2013:
-    return ORDINARY_TAX_RATES_2013[b];
-    break;
-  case 2014:
-    return ORDINARY_TAX_RATES_2014[b];
-    break;
-  case 2015:
-    return ORDINARY_TAX_RATES_2015[b];
-    break;
-  case 2016:
-    return ORDINARY_TAX_RATES_2016[b];
-    break;
-  case 2017:
-    return ORDINARY_TAX_RATES_2017[b];
-    break;
-  case 2018:
-    return ORDINARY_TAX_RATES_2018[b];
-    break;
-  case 2019:
-    return ORDINARY_TAX_RATES_2019[b];
-    break;
-  case 2020:
-    return ORDINARY_TAX_RATES_2020[b];
-    break;
-  case 2021:
-    return ORDINARY_TAX_RATES_2021[b];
-    break;
-  case 2022:
-    return ORDINARY_TAX_RATES_2022[b];
-    break;
-  default:
-    return ORDINARY_TAX_RATES_2022[b];
-  }
-  return 0; // # nocov
-}
-
-SEXP Crates_by_yr(SEXP Yr, SEXP bb) {
-  int yr = asInteger(Yr);
-  const int * b = INTEGER(bb);
-  int n = length(bb);
-  if (n > 8) {
-    n = 8;
-  }
-  SEXP ans = PROTECT(allocVector(REALSXP, n));
-  for (int i = 0; i < n; ++i) {
-    REAL(ans)[i] = rates_by_yr(b[i] - 1, yr);
-  }
-  UNPROTECT(1);
-  return ans;
-}
 
 System yr2System(int yr) {
   if (yr > 2022) {
@@ -467,25 +84,53 @@ System yr2System(int yr) {
   case 2022:
     return System2022;
   }
-  System Sys;
-  Sys.yr = yr;
-  int nb = nb_by_year(yr);
-  Sys.nb = nb;
-  for (int b = 0; b < MAX_NBRACK; ++b) {
-    Sys.BRACKETS[b] = brack_by_yr(b, yr);
-    Sys.RATES[b] = rates_by_yr(b, yr);
+  return System2022; // # nocov
+}
+
+unsigned int nb_by_year(int yr) {
+  System Sys = yr2System(yr);
+  return Sys.nb;
+}
+
+int brack_by_yr(int b, int yr) {
+  System Sys = yr2System(yr);
+  return Sys.BRACKETS[b % MAX_NBRACK];
+}
+
+double rates_by_yr(int b, int yr) {
+  System Sys = yr2System(yr);
+  return Sys.RATES[b % MAX_NBRACK];
+}
+
+SEXP Cbracks_by_year(SEXP Yr, SEXP bb) {
+  int yr = asInteger(Yr);
+  const int * b = INTEGER(bb);
+  int n = length(bb);
+  if (n > 8) {
+    n = 8;
   }
-  Sys.n_offsetn = 1;
-  Sys.Offsets[0].nb = 1;
-  Sys.Offsets[0].offset_1st = (yr >= 1994) ? 445 : 0;
-  Sys.Offsets[0].Thresholds[0] = 37000;
-  Sys.Offsets[0].Tapers[0] = 0.015;
-  Sys.Offsets[0].refundable = false;
-  Sys.M = yr2Medicare(yr);
-  Sys.has_sapto = yr >= 2000;
-  Sys.S = yr2Sapto(yr);
-  Sys.has_temp_budget_repair_levy = yr >= 2015 && yr <= 2017;
-  return Sys;
+  
+  SEXP ans = PROTECT(allocVector(INTSXP, n));
+  for (int i = 0; i < n; ++i) {
+    INTEGER(ans)[i] = brack_by_yr((b[i] - 1) % MAX_NBRACK, yr);
+  }
+  UNPROTECT(1);
+  return ans;
+}
+
+SEXP Crates_by_yr(SEXP Yr, SEXP bb) {
+  int yr = asInteger(Yr);
+  const int * b = INTEGER(bb);
+  int n = length(bb);
+  if (n > 8) {
+    n = 8;
+  }
+  SEXP ans = PROTECT(allocVector(REALSXP, n));
+  for (int i = 0; i < n; ++i) {
+    REAL(ans)[i] = rates_by_yr((b[i] - 1) % MAX_NBRACK, yr);
+  }
+  UNPROTECT(1);
+  return ans;
 }
 
 // quick trunc
