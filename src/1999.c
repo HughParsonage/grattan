@@ -2,16 +2,6 @@
 #define grattan_1999_H
 #include "grattan.h"
 
-double ML_LWR_THRESHOLD_SINGLE_1999 = 13390;
-double ML_UPR_THRESHOLD_SINGLE_1999 = 14474;
-double ML_LWR_THRESHOLD_FAMILY_1999 = 22595;
-double ML_UPR_THRESHOLD_FAMILY_1999 = 24425;
-double ML_LWR_THR_UP_PER_CHILD_1999 =  2100;
-double ML_TAPER_1999 = 0.20;
-double ML_RATE_1999 = 0.015;
-double LITO_MAX_OFFSET_1999 = 150;
-double LITO_1ST_TAPER_1999 = -0.04;
-double LITO_1ST_THRESH_1999 = 20700;
 System System1999 = {
   .yr = 1999,
   .nb = 5,
