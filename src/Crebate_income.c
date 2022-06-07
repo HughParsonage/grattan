@@ -59,7 +59,7 @@ SEXP Crebate_income(SEXP iic_taxable_income_loss,
   const int * ic_taxable_income_loss = INTEGER(iic_taxable_income_loss);
   SEXP ans = PROTECT(allocVector(INTSXP, N));
   int * restrict ansp = INTEGER(ans);
-  int nThread = as_nThread(nthreads);
+  AS_NTHREAD;
   FORLOOP({
     ansp[i] = ic_taxable_income_loss[i];
   })

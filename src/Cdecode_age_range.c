@@ -12,7 +12,7 @@ static bool not_age_range(const int * xp, R_xlen_t N) {
 }
 
 SEXP Cdecode_age_range(SEXP x, SEXP nthreads) {
-  int nThread = as_nThread(nthreads);
+  AS_NTHREAD;
   R_xlen_t N = xlength(x);
   
   if (!isInteger(x)) {

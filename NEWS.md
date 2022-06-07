@@ -9,6 +9,8 @@
   now `offsets = set_offsets` are preferred.  However, using `System` with
   `income_tax` is likely to be just as convenient.
 
+* `sapto_rcpp` has now been removed
+
 ### API changes
 
 * `income_tax` now uses `System`

@@ -3,7 +3,11 @@
 
 #if _OPENMP
 #include <omp.h>
+#define AS_NTHREAD int nThread = as_nThread(nthreads);
+#else
+#define AS_NTHREAD
 #endif
+
 
 #include <R.h>
 #define USE_RINTERNALS
