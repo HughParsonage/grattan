@@ -2,13 +2,6 @@
 #define grattan_1990_H
 #include "grattan.h"
 
-double ML_LWR_THRESHOLD_SINGLE_1990 = 10331;
-double ML_UPR_THRESHOLD_SINGLE_1990 = 11019;
-double ML_LWR_THRESHOLD_FAMILY_1990 = 17401;
-double ML_UPR_THRESHOLD_FAMILY_1990 = 18560;
-double ML_LWR_THR_UP_PER_CHILD_1990 =  2100;
-double ML_TAPER_1990 = 0.25;
-double ML_RATE_1990 = 0.0125;
 System System1990 = {
   .yr = 1990,
   .nb = 6,
