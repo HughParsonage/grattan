@@ -18,7 +18,7 @@ test_that("Repayment never exceeds debt", {
   fy.year = "2012-13"
   while (student_repayment(repayment_income, fy.year, debt) < 1){
     repayment_income <- 30e3 * abs(rcauchy(1))
-    fy.year <- sample(grattan:::hecs_tbl$fy_year, size = 1, replace = TRUE)
+    fy.year <- sample(hecs_tbl$fy_year, size = 1, replace = TRUE)
     debt <- 30e3 * abs(rcauchy(1))
   }
   expect_lte(student_repayment(repayment_income, fy.year, debt), debt)

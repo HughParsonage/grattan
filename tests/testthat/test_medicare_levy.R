@@ -100,7 +100,7 @@ test_that("new_medicare_levy matches", {
   library(taxstats)
   sa <- sample_file_1314
   par_tbl <- 
-    as.data.table(grattan:::medicare_tbl) %>%
+    as.data.table(medicare_tbl) %>%
     .[fy_year == "2013-14"] %>%
     setnames(old = "sapto", new = "switches")
   

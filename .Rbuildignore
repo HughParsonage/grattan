@@ -17,6 +17,7 @@
 ^travisBeforeInstall.R$
 ^timings$
 ^docs$
+^.github$
 ^vignettes/lito-analysis-budget2018\\.R$
 ^vignettes/long-vignettes$
 

@@ -34,6 +34,10 @@
 #' @param lito_min_bracket (deprecated) The taxable income at which the value of the offset starts to reduce (from \code{lito_max_offset}).
 #' @param lito_multi No longer supported.
 #' 
+#' @param offsets A list of lists created by \code{\link{set_offsets}}. If
+#' \code{NULL}, the default, the list is populated by the offsets
+#' in \code{baseline_fy}.
+#' 
 #' @param Budget2018_lamington No longer supported
 #' @param Budget2019_lamington No longer supported.
 #' 
