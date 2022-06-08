@@ -131,5 +131,5 @@ gessage <- function(...) {
 }
 
 .onUnload <- function (libpath) {
-  library.dynam.unload("grattanDev", libpath)
+  library.dynam.unload("grattan", libpath)
 }

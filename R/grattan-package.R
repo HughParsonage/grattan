@@ -5,7 +5,7 @@
 #' <https://grattan.edu.au>
 #' 
 #' @name grattan-package
-#' @aliases grattanDev
+#' @aliases grattan
 #' @docType package
 #' @title The grattan package.
 #' @author \email{hugh.parsonage+grattanpackage@@grattan.edu.au}
@@ -66,5 +66,5 @@
 #' 
 #' 
 #' @import data.table
-#' @useDynLib grattanDev, .registration = TRUE
+#' @useDynLib grattan, .registration = TRUE
 "_PACKAGE"
