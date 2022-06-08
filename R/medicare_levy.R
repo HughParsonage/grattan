@@ -140,12 +140,24 @@ do_medicare_levy <- function(income, yr, spouse_income, sapto_eligible, is_marri
         PACKAGE = packageName())
 }
 
-ml_lwr <- function(yr, f) {
-  .Call("Cml_lwr", as.integer(yr), as.integer(f) %% 4L, PACKAGE = packageName())
+ML_LWR_THRESH <- function(yr, family = FALSE, sapto = FALSE) {
+  .Call("C_ml_lower_thresh", as.integer(yr), family, sapto, PACKAGE = packageName())
 }
 
-ml_child <- function(yr, f) {
+ML_UPR_THRESH <- function(yr, family = FALSE, sapto = FALSE) {
+  .Call("C_ml_upper_thresh", as.integer(yr), family, sapto, PACKAGE = packageName())
+}
+
+ML_CHILD_UPPER <- function(yr) {
   .Call("Cml_child", as.integer(yr), PACKAGE = packageName())
+}
+
+ML_TAPER <- function(yr) {
+  .Call("C_ml_taper", as.integer(yr), PACKAGE = packageName())
+}
+
+ML_RATE <- function(yr) {
+  .Call("C_ml_rate", as.integer(yr), PACKAGE = packageName())
 }
 
 
