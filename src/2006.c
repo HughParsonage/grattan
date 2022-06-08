@@ -19,7 +19,7 @@ System System2006 = {
     .lwr_family_sapto = 31729,
     .upr_family_sapto = 37329,
     .lwr_thr_up_per_child = 2523,
-    .taper = 0.1,
+    .taper = 0.2,
     .rate = 0.015
   },
   .has_sapto = true,
