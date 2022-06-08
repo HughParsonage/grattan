@@ -125,7 +125,7 @@ typedef struct {
   int BRACKETS[MAX_NBRACK];
   double RATES[MAX_NBRACK];
   Medicare M;
-  bool has_sapto;
+  bool has_sapto : 1;
   Sapto S;
   int n_offsetn;
   OffsetN Offsets[MAX_N_OFFSETN];
