@@ -482,3 +482,6 @@ expr	time	Date
 "cpi_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	1757867000	2020-07-01
 "wage_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	79514700	2020-07-01
 "lf_inflator_fy(from_fy = ""2014-15"", to_fy = the_next_fy)"	279426900	2020-07-01
+"cpi_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	2872314001	2022-06-08
+"wage_inflator(from_fy = ""2014-15"", to_fy = the_next_fy)"	220830301	2022-06-08
+"lf_inflator_fy(from_fy = ""2014-15"", to_fy = the_next_fy)"	210723702	2022-06-08

@@ -283,3 +283,5 @@ sfall[, income_tax(Taxable_Income, fy.year, .dots.ATO = .SD)]	1189562800	2019-05
 sfall[, income_tax(Taxable_Income, fy.year, .dots.ATO = .SD)]	1656669700	2020-07-01
 "s1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	48896400	2020-07-01
 sfall[, income_tax(Taxable_Income, fy.year, .dots.ATO = .SD)]	1626194600	2020-07-01
+"s1314[, income_tax(Taxable_Income, ""2013-14"", .dots.ATO = .SD)]"	22007402	2022-06-08
+sfall[, income_tax(Taxable_Income, fy.year, .dots.ATO = .SD)]	204101101	2022-06-08
