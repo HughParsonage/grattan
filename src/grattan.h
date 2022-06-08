@@ -5,7 +5,7 @@
 #include <omp.h>
 #define AS_NTHREAD int nThread = as_nThread(nthreads);
 #else
-#define AS_NTHREAD
+#define AS_NTHREAD __unused int nThread = 1;
 #endif
 
 #include <R.h>
