@@ -95,7 +95,7 @@ SEXP Cdo_rn(SEXP x, SEXP along, SEXP nthreads) {
   if (xlength(x) != N && xlength(x) != 1) {
     return along;
   }
-  AS_NTHREAD;
+  int nThread = as_nThread(nthreads);
   
   switch(TYPEOF(x)) {
   case INTSXP: 

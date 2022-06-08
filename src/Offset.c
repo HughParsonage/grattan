@@ -472,7 +472,7 @@ SEXP C_multiOffset(SEXP x, SEXP OffsetList, SEXP nthreads) {
   if (!isInteger(x)) {
     error("(C_multiOffset): `x` was type '%s' but must be type integer.", type2char(TYPEOF(x)));
   }
-  AS_NTHREAD;
+  int nThread = as_nThread(nthreads);
   int n_offsets = length(OffsetList);
   OffsetN * mOffsets = malloc(sizeof(OffsetN) * n_offsets);
   if (mOffsets == NULL) {
