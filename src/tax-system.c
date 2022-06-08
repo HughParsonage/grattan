@@ -515,15 +515,11 @@ SEXP CvalidateSystem(SEXP RSystem, SEXP Fix) {
               medicare_levy_taper_stop);
     }
   }
-  
- 
-  if (false) {
-    print_Medicare(Sys.M);
-  }
   validate_medicare(&Sys.M, fix, yr);
   
   return RSystem;
 }
+
 
 
 
