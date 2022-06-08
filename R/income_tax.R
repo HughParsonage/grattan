@@ -238,7 +238,7 @@ income_tax2 <- function(income = NULL,
             it_rept_fringe_benefit,
             yr, 
             nThread,
-            PACKAGE = "grattanDev")
+            PACKAGE = "grattan")
   }
   
   if (isntConstant(yr)) {
@@ -259,7 +259,7 @@ income_tax2 <- function(income = NULL,
                                spc_rebate_income,
                                System, # RSystem
                                1L,
-                               PACKAGE = "grattanDev"),
+                               PACKAGE = "grattan"),
               by = "yr"]
     return(.subset2(ans, "tax"))
   }
@@ -274,7 +274,7 @@ income_tax2 <- function(income = NULL,
         rN(spc_rebate_income),
         System, # RSystem
         nThread,
-        PACKAGE = "grattanDev")
+        PACKAGE = "grattan")
   
   
 }
@@ -292,7 +292,7 @@ income_tax222 <- function(alife) {
         rebateIncome, 
         .subset2(alife, "c_age_30_june"), 
         .subset2(alife, "sp_flag"), 
-        .subset2(alife, "c_depend_child"), 1L, PACKAGE = "grattanDev")
+        .subset2(alife, "c_depend_child"), 1L, PACKAGE = "grattan")
 }
 
 

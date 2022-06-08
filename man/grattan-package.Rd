@@ -4,7 +4,7 @@
 \name{grattan-package}
 \alias{grattan-package}
 \alias{_PACKAGE}
-\alias{grattanDev}
+\alias{grattan}
 \title{The grattan package.}
 \description{
 Grattan package

@@ -8,7 +8,6 @@
 #define AS_NTHREAD
 #endif
 
-
 #include <R.h>
 #define USE_RINTERNALS
 #include <Rinternals.h>
