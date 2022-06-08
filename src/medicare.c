@@ -7,53 +7,60 @@ Medicare yr2Medicare(int yr) {
   return Sys.M;
 }
 
-SEXP Cml_lwr(SEXP Yr, SEXP fam) {
-  int f = asInteger(fam);
-  int yr = asInteger(Yr);
+double ml_rate(int yr) {
   System Sys = yr2System(yr);
-  switch(f) {
-  case 0:
-    return ScalarInteger(Sys.M.lwr_single);
-  case 1:
-    return ScalarInteger(Sys.M.lwr_family);
-  case 2:
-    return ScalarInteger(Sys.M.lwr_single_sapto);
-  case 3:
-    return ScalarInteger(Sys.M.lwr_family_sapto);
+  return Sys.M.rate;
+}
+
+double ml_taper(int yr) {
+  System Sys = yr2System(yr);
+  return Sys.M.taper;
+}
+
+int ml_lower_thresh(int yr, bool family, bool sapto) {
+  System Sys = yr2System(yr);
+  if (family) {
+    return sapto ? Sys.M.lwr_family_sapto : Sys.M.lwr_family;
   }
-  error("Unsupported.");
-  return R_NilValue;
+  return sapto ? Sys.M.lwr_single_sapto : Sys.M.lwr_single;
+}
+
+int ml_upper_thresh(int yr, bool family, bool sapto) {
+  System Sys = yr2System(yr);
+  if (family) {
+    return sapto ? Sys.M.upr_family_sapto : Sys.M.upr_family;
+  }
+  return sapto ? Sys.M.upr_single_sapto : Sys.M.upr_single;
+}
+
+SEXP C_ml_rate(SEXP Yr) {
+  int yr = asInteger(Yr);
+  return ScalarReal(ml_rate(yr));
+}
+
+SEXP C_ml_taper(SEXP Yr) {
+  int yr = asInteger(Yr);
+  return ScalarReal(ml_taper(yr));
+}
+
+SEXP C_ml_lower_thresh(SEXP Yr, SEXP Family, SEXP Sapto) {
+  int yr = asInteger(Yr);
+  bool family = asLogical(Family);
+  bool sapto = asLogical(Sapto);
+  return ScalarInteger(ml_lower_thresh(yr, family, sapto));
+}
+
+SEXP C_ml_upper_thresh(SEXP Yr, SEXP Family, SEXP Sapto) {
+  int yr = asInteger(Yr);
+  bool family = asLogical(Family);
+  bool sapto = asLogical(Sapto);
+  return ScalarInteger(ml_upper_thresh(yr, family, sapto));
 }
 
 SEXP Cml_child(SEXP Yr) {
   int yr = asInteger(Yr);
   System Sys = yr2System(yr);
   return ScalarInteger(Sys.M.lwr_thr_up_per_child);
-}
-
-static bool valid_lwr_upr_taper(int mxo, int lwr, int upr, double taper) {
-  return lwr + (mxo / taper) == upr;
-}
-
-static bool valid_lwr_upr_125(int mxo, int lwr, int upr) {
-  return lwr + (mxo << 3) == upr;
-}
-
-static bool valid_lwr_upr_010_002(int lwr, int upr) {
-  return 0.02 * upr == (upr - lwr) * 0.1;
-}
-
-static int upper_threshold(int lower, double r, double t) {
-  double ratio = t / (t - r);
-  return ceil(lower * ratio);
-}
-static int lower_threshold(int upper, double r, double t) {
-  double ratio = (t - r) / t;
-  return ceil(upper * ratio);
-}
-static double rate(int lower, int upper, double t) {
-  double o = t * (upper - lower);
-  return o / (double)upper;
 }
 
 static void validate_lwr_upr(int * lwr, int * upr, double * r, double * t, const char * str, int fix, int yr) {
@@ -100,30 +107,6 @@ void print_Medicare(Medicare M) {
   Rprintf("\t%f\n", M.rate);
 }
 
-double ml_rate(int yr) {
-  System Sys = yr2System(yr);
-  return Sys.M.rate;
-}
 
-double ml_taper(int yr) {
-  System Sys = yr2System(yr);
-  return Sys.M.taper;
-}
-
-int ml_lower_thresh(int yr, bool family, bool sapto) {
-  System Sys = yr2System(yr);
-  if (family) {
-    return sapto ? Sys.M.lwr_family_sapto : Sys.M.lwr_family;
-  }
-  return sapto ? Sys.M.lwr_single_sapto : Sys.M.lwr_single;
-}
-
-int ml_upper_thresh(int yr, bool family, bool sapto) {
-  System Sys = yr2System(yr);
-  if (family) {
-    return sapto ? Sys.M.upr_family_sapto : Sys.M.upr_family;
-  }
-  return sapto ? Sys.M.upr_single_sapto : Sys.M.upr_single;
-}
 
 
