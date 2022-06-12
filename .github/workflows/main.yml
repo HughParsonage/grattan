@@ -68,6 +68,7 @@ jobs:
       - name: Install packages
         shell: bash
         run: |
-          Rdevel -q -e "ip <- function(x) install.packages(x[!sapply(x, requireNamespace, quietly = TRUE)], quiet = TRUE, repos = 'https://cran.r-project.org'); ip(c('forecast', 'hutils', 'grattan'))"
+          Rdevel -q -e "ip <- function(x) install.packages(x[!sapply(x, requireNamespace, quietly = TRUE)], quiet = TRUE, repos = 'https://cran.r-project.org'); ip(c('forecast', 'hutils', 'testthat', 'grattan'))"
           Rdevel CMD build .
           Rdevel CMD INSTALL --install-tests grattan*.tar.gz
+          Rdevel -e "testthat::test_local('tests')"
