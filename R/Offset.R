@@ -98,13 +98,10 @@ memOffset <- function(x, offset_1st = 445L,
         PACKAGE = packageName())
 }
 
-test_currency <- function(x, taper) {
-  .Call("TestCurrency", as.integer(x), as.double(taper), PACKAGE = packageName())
-}
 
 
 
-multiOffsets <- function(x, Offsets = set_offsets(), nThread = getOption("grattan.nThread", 1L)) {
+multiOffset <- function(x, Offsets = set_offsets(), nThread = getOption("grattan.nThread", 1L)) {
   .Call("C_multiOffset", x, Offsets, nThread, PACKAGE = packageName())
 }
 

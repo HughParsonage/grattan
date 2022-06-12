@@ -50,30 +50,30 @@ int threshold_lito1(int yr) {
   return 0;
 }
 
-void apply_lito(double * tax, int x, int yr) {
-  if (yr < 1994) {
-    return;
-  }
-  
-  if (yr < 2021) {
-    Offset1 O;
-    O.taper_1st = yr < 2013 ? -0.04 : -0.015;
-    O.offset_1st = max_lito1(yr);
-    O.refundable = false;
-    O.thresh_1st = threshold_lito1(yr);
-    apply_offset1(tax, x, O);
-    return;
-  }
-  
-  Offset2 O;
-  O.offset_1st = 700;
-  O.refundable = false;
-  O.taper_1st = -0.05;
-  O.taper_2nd = -0.015;
-  O.thresh_1st = 37500;
-  O.thresh_2nd = 45000;
-  apply_offset2(tax, x, O);
-}
+// void apply_lito(double * tax, int x, int yr) {
+//   if (yr < 1994) {
+//     return;
+//   }
+//   
+//   if (yr < 2021) {
+//     Offset1 O;
+//     O.taper_1st = yr < 2013 ? -0.04 : -0.015;
+//     O.offset_1st = max_lito1(yr);
+//     O.refundable = false;
+//     O.thresh_1st = threshold_lito1(yr);
+//     apply_offset1(tax, x, O);
+//     return;
+//   }
+//   
+//   Offset2 O;
+//   O.offset_1st = 700;
+//   O.refundable = false;
+//   O.taper_1st = -0.05;
+//   O.taper_2nd = -0.015;
+//   O.thresh_1st = 37500;
+//   O.thresh_2nd = 45000;
+//   apply_offset2(tax, x, O);
+// }
 
 Offset1 LITO_ante2020(int yr) {
   Offset1 O;

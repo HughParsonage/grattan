@@ -40,3 +40,16 @@ test_that("set_offsets (with yr)", {
   expect_true(is.integer(o[[3]]$thresholds))
 })
 
+test_that("multi-offsets", {
+  x <- 1:100e3
+  o <- multiOffset(x, Offsets = set_offsets(set_offset(offset_1st = 5000L,
+                                                        thresholds = c(10e3L, 50e3L, 70e3L),
+                                                        tapers = c(0.05, 0, 0)),
+                                             set_offset(offset_1st = 700L,
+                                                        thresholds = c(40e3L, 50e3L, 70e3L),
+                                                        tapers = c(0.015, 0, 0.025))))
+  expect_equal(o[1], 5700)
+  expect_equal(o[11000] - o[11001], 0.05)
+})
+
+

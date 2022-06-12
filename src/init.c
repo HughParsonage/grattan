@@ -29,7 +29,6 @@ extern SEXP Csapto(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Csapto_dat(SEXP, SEXP);
 extern SEXP Ctest_nOffset_upper_threshold(SEXP, SEXP);
 extern SEXP CvalidateSystem(SEXP, SEXP);
-extern SEXP TestCurrency(SEXP, SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
     {"C_ml_lower_thresh",             (DL_FUNC) &C_ml_lower_thresh,             3},
@@ -53,7 +52,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"Csapto_dat",                    (DL_FUNC) &Csapto_dat,                    2},
     {"Ctest_nOffset_upper_threshold", (DL_FUNC) &Ctest_nOffset_upper_threshold, 2},
     {"CvalidateSystem",               (DL_FUNC) &CvalidateSystem,               2},
-    {"TestCurrency",                  (DL_FUNC) &TestCurrency,                  2},
     {NULL, NULL, 0}
 };
 
