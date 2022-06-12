@@ -34,7 +34,7 @@ unemployment_benefit <- function(income = 0,
   
   if (is.null(Date)) {
     if (is.null(fy.year)) {
-      fy.year <- date2fy(Sys.Date())
+      fy.year <- "2020-21"
       message("`fy.year` not set, so using fy.year = ", fy.year)
     }
     
