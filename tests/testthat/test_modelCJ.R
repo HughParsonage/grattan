@@ -29,10 +29,18 @@ test_that("CJ model", {
   # w0 <- scj[, which_first(original != new_tax)]
   # expect_equal(w0, 0)
   options(grattan.nThread = getOption("hutilscpp.nThread", 1L))
-  scj <- 
-    CJ(Taxable_Income = 20e3:30e3,
-       age_range = 1:2,
-       Spouse_adjusted_taxable_inc = 0:30e3)
+  if (grepl("hugh", Sys.getenv("USERNAME"), ignore.case = TRUE)) {
+    scj <- 
+      CJ(Taxable_Income = 20e3:30e3,
+         age_range = 1:2,
+         Spouse_adjusted_taxable_inc = 0:30e3)
+  } else {
+    # for UBSAN
+    scj <- 
+      CJ(Taxable_Income = seq.int(20e3L, 30e3L, by = 11L),
+         age_range = 1:2,
+         Spouse_adjusted_taxable_inc = seq.int(0L, 30e3L, by = 11L)) 
+  }
   scj[, Partner_status := as.integer(as.logical(Spouse_adjusted_taxable_inc))]
   expect_true(TRUE)
   scj[, original := as.integer(income_tax(Taxable_Income, fy.year = "2016-17", .dots.ATO = .SD))]
