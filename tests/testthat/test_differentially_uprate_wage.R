@@ -14,10 +14,11 @@ test_that("Differential uprate factor preserves order", {
 test_that("Wage growth is higher for extreme salaries", {
   skip_on_cran()
   skip_if_not_installed("taxstats")
-  skip_if_not_installed("dplyr")
+  skip_if_not_installed("hutils")
   skip_on_travis()
   library(taxstats)
-  library(dplyr)
+  library(hutils)
+  library(magrittr)
   skip_if_not(exists("get_sample_files_all"))
   if (!exists("sample_files_all")) {
     try(sample_files_all <- get_sample_files_all())
@@ -43,22 +44,21 @@ test_that("Wage growth is higher for extreme salaries", {
   
   salaries <- 
     sample_files_all %>%
-    as.data.frame() %>%
-    select(fy.year, Sw_amt) %>%
-    filter(fy.year == from_fy, Sw_amt > 0) %>%
-    mutate(tile = ntile(Sw_amt, 100)) %>%
+    as.data.table() %>%
+    .[, .(fy.year, Sw_amt)] %>%
+    .[and(fy.year == from_fy, Sw_amt > 0)] %>%
+    .[, tile := weighted_ntile(Sw_amt, n = 100L)] %>%
     as.data.table()
   
   extreme_salary <- 
     salaries %>%
-    as.data.frame() %>%
-    filter(tile == extreme_tile) %$%
+    .[tile == extreme_tile] %$%
     sample(Sw_amt, size = 1)
   
   moderate_salary <- 
     salaries %>%
     as.data.frame() %>%
-    filter(tile == moderate_tile) %$%
+    .[tile == moderate_tile] %$%
     sample(Sw_amt, size = 1)
   
   basic_inflation <- wage_inflator(c(extreme_salary, moderate_salary), from_fy = from_fy, to_fy = to_fy)
@@ -95,17 +95,15 @@ test_that("Differentially uprated wage growth is *up*", {
 
 test_that("Less than 0.1% of individuals move more than one percentile over 10 years", {
   skip_if_not_installed("taxstats")
-  skip_if_not_installed("dplyr")
-  library(dplyr)
   library(taxstats)
+  library(hutils)
   skip_on_cran()
   prop_move <- 
     sample_file_1314 %>%
-    as.data.frame() %>%
-    select(Sw_amt) %>%
-    mutate(percentile = ntile(Sw_amt, 100)) %>%
-    mutate(Sw_amt_2324 = differentially_uprate_wage(Sw_amt, "2013-14", "2023-24"), 
-           percentile_2324 = ntile(Sw_amt_2324, 100)) %$%
+    .[, .(Sw_amt)] %>%
+    .[, percentile := weighted_ntile(Sw_amt,  n = 100L)] %>%
+    .[, Sw_amt_2324 := differentially_uprate_wage(Sw_amt, "2013-14", "2023-24")] %>% 
+    .[, percentile_2324 := weighted_ntile(Sw_amt_2324, n = 100L)] %$%
     mean(percentile != percentile_2324)
   
   expect_lt(prop_move, 0.001)

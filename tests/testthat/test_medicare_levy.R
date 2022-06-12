@@ -95,8 +95,7 @@ test_that("Medicare error handling", {
 
 test_that("new_medicare_levy matches", {
   skip_if_not_installed("taxstats") 
-  skip_if_not_installed("dplyr")
-  library(dplyr)
+
   library(taxstats)
   sa <- sample_file_1314
   par_tbl <- 

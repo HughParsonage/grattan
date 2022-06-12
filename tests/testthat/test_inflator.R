@@ -25,7 +25,6 @@ test_that("Switching order of to and from causes inverse", {
 })
 
 test_that("rolling inflator", {
-  skip_if_not_installed("dplyr")
   skip_if_not_installed("zoo")
   my_data <- 
     cpi_seasonal_adjustment %>% 

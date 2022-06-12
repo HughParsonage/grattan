@@ -39,8 +39,6 @@ Imports:
 RoxygenNote: 7.1.1
 Suggests:
     curl,
-    dplyr,
-    dtplyr,
     fst (>= 0.8.4),
     future,
     future.apply,

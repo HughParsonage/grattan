@@ -60,7 +60,7 @@ test_that("Inverse income long on zero", {
   skip_on_cran()
   expect_true(all(abs(inverse_income(c(0, 0), "2012-13", zero.tax.income = "maximum") - 20542) < 2))
   expect_true(all(inverse_income(c(0, 0), "2014-15", zero.tax.income = 5) %>% near(5)))
-  expect_true(all(inverse_income(c(0, 0), "2014-15", zero.tax.income = "zero") %>% dplyr::near(0)))
+  expect_true(all(inverse_income(c(0, 0), "2014-15", zero.tax.income = "zero") %>% near(0)))
   expect_true(all(inverse_income(c(0, 0), "2014-15", zero.tax.income = "uniform") %>% between(0, 20543)))
 })
 
