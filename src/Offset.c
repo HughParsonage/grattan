@@ -42,44 +42,7 @@ SEXP Offset(SEXP x, double y, double a, double m) {
   return ans;
 } 
 
-void apply_offset1(double * tax, int x, Offset1 O) {
-  double y = O.offset_1st;
-  int b1 = O.thresh_1st;
-  double r1 = O.taper_1st;
-  double offset =  (x < b1) ? y : dmax0(y + r1 * (x - b1));
-  
-  if (*tax > offset || O.refundable) {
-    *tax -= offset;
-  } else {
-    *tax = 0;
-  }
-}
 
-void apply_offset2(double * tax, int x, Offset2 O) {
-  double y = O.offset_1st;
-  double offset = y;
-  int b1 = O.thresh_1st;
-  int b2 = O.thresh_2nd;
-  double r1 = O.taper_1st;
-  double r2 = O.taper_2nd;
-      
-  if (x > b1) {
-    if (x < b2) {
-      offset += r1 * (x - b1);
-    } else {
-      offset += r1 * (b2 - b1) + r2 * (x - b2);
-    }
-  }
-  if (offset <= 0) {
-    return;
-  }
-  
-  if (*tax <= offset) {
-    *tax = 0;
-  } else {
-    *tax -= offset;
-  }
-}
 
 void apply_offsetn(double * tax, Person P, OffsetN O) {
   int nb = O.nb;
@@ -111,9 +74,6 @@ void apply_offsetn(double * tax, Person P, OffsetN O) {
 
 double value_OffsetN(int x, const OffsetN O) {
   int nb = O.nb;
-  if (x < O.Thresholds[0]) {
-    return O.offset_1st;
-  }
   double y = O.offset_1st;
   for (int t = 0; t < nb; ++t) {
     if (x < O.Thresholds[t]) {
@@ -489,50 +449,6 @@ SEXP C_multiOffset(SEXP x, SEXP OffsetList, SEXP nthreads) {
   UNPROTECT(1);
   return ans;
 }
-
-
-
-typedef struct {
-  int dollar;
-  unsigned char frac;
-} Currency;
-
-Currency add_currency(Currency a, Currency b) {
-  int xa = a.dollar;
-  int xb = b.dollar;
-  unsigned char fa = a.frac;
-  unsigned char fb = b.frac;
-  
-  unsigned char fab = fa + fb;
-  int dab = xa + xb + (fab >= 100);
-  fab %= 100;
-  Currency o = {.dollar = dab, .frac = fab};
-  return o;
-}
-
-float Currency2float(Currency C) {
-  return C.dollar + 0.01 * ((int)C.frac);
-}
-
-SEXP TestCurrency(SEXP x, SEXP Taper) {
-  R_xlen_t N = xlength(x);
-  const int * xp = INTEGER(x);
-  SEXP ans = PROTECT(allocVector(REALSXP, N));
-  double * restrict ansp = REAL(ans);
-  
-  unsigned char taper = 100 * asReal(Taper);
-  Currency CTaper = {.dollar = 0, .frac = taper};
-  ansp[0] = xp[0];
-  Currency C2 = {.dollar = xp[0], .frac = 0};
-  for (R_xlen_t i = 1; i < N; ++i) {
-    C2 = add_currency(C2, CTaper);
-    ansp[i] = Currency2float(C2);
-  }
-  UNPROTECT(1);
-  return ans;
-  
-}
-
 
 
 
