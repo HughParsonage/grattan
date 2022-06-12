@@ -57,7 +57,6 @@ test_that("Wage growth is higher for extreme salaries", {
   
   moderate_salary <- 
     salaries %>%
-    as.data.frame() %>%
     .[tile == moderate_tile] %$%
     sample(Sw_amt, size = 1)
   

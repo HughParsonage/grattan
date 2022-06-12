@@ -22,13 +22,13 @@ test_that("Errors", {
 
 test_that("Values", {
   expect_equal(child_care_subsidy(family_annual_income = 175000,
-                     activity_level = 40,
-                     activity_exemption = FALSE,
-                     child_age = 3,
-                     type_of_day_care = "cbdc",
-                     cost_hour = 20,
-                     hours_day_care_fortnight = 80,
-                     early_education_program = FALSE),
+                                  activity_level = 40,
+                                  activity_exemption = FALSE,
+                                  child_age = 3,
+                                  type_of_day_care = "cbdc",
+                                  cost_hour = 20,
+                                  hours_day_care_fortnight = 80,
+                                  early_education_program = FALSE),
                11046.99,
                tol = 0.01)
   # Income tests
