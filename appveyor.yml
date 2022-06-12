@@ -31,7 +31,7 @@ environment:
 
 build_script:
   - travis-tool.sh install_deps
-  - cmd: Rscript -e "install.packages('grattan');is.null(install.packages(c('taxstats', 'taxstats1516'), repos = 'https://hughparsonage.github.io/tax-drat'))"
+  - cmd: Rscript -e "install.packages('grattan', repos = 'https://cran.rstudio.com');is.null(install.packages(c('taxstats', 'taxstats1516'), repos = 'https://hughparsonage.github.io/tax-drat'))"
 
 test_script:
   - travis-tool.sh run_tests
