@@ -1,5 +1,5 @@
 
-all.pkgs <- c("testthat", "dplyr", "dtplyr", "data.table", "magrittr", "survey", "zoo")
+all.pkgs <- c("testthat", "data.table", "magrittr", "survey", "zoo")
 
 
 if (all(vapply(all.pkgs, requireNamespace, logical(1L), quietly = TRUE))) {

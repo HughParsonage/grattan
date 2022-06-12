@@ -178,9 +178,7 @@ test_that("Imputed, reweighted sample file agrees with aggregates by no less tha
 
 test_that("Error handling", {
   skip_if_not_installed("taxstats") 
-  skip_if_not_installed("dplyr") 
   library(taxstats)
-  library(dplyr)
   sample_file <- 
     sample_file_1314 %>%
     head(.) %>% 

@@ -2,9 +2,7 @@ context("utils")
 
 test_that("unselect_", {
   skip_if_not_installed("taxstats")
-  skip_if_not_installed("dplyr")
   library(taxstats)
-  library(dplyr)
   y <- sample_file_1314 %>% copy %>% unselect_(.dots = "Sw_amt")
   expect_false("Sw_amt" %in% names(y))
 })

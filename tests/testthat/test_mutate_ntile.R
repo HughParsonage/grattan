@@ -1,8 +1,8 @@
 context("mutate ntile")
 
 test_that("Error handling", {
-  skip_if_not_installed("dplyr")
   library(data.table)
+  skip_if_not_installed("hutils")
   DT <- data.table(x = 1:101)
   expect_error(mutate_ntile(DT, n = 1:2),
                regexp = "length(n) = 2", 
@@ -41,7 +41,7 @@ test_that("Error handling", {
   DT[5L, x := NA_integer_]
   expect_equal(mutate_ntile(DT, "x", n = 2L, new.col = "x1", check.na = FALSE)[-5],
                # Not guaranteed:
-               data.table(x = DT$x, x1 = dplyr::ntile(DT$x, 2))[-5])
+               data.table(x = DT$x, x1 = hutils::weighted_ntile(DT$x, n = 2))[-5])
   expect_error(mutate_ntile(DT, "x", n = 4L, new.col = "x1", check.na = TRUE),
                regexp = "check.na = TRUE",
                fixed = TRUE)
@@ -52,17 +52,5 @@ test_that("Error handling", {
   
 })
 
-test_that("tibble", {
-  skip_on_cran()
-  skip_if_not_installed("tibble")
-  TIB <- tibble::tibble(hadley = 1:4)
-  expect_identical(mutate_ntile(TIB, "hadley", n = 2, new.col = "hadleyTile"),
-                   tibble::tibble(hadley = 1:4, hadleyTile = rep(1:2, each = 2L)))
-  asf <- function(x) as.data.frame(x)
-  TIB <- asf(tibble::tibble(hadley = 1:4))
-  expect_identical(mutate_ntile(TIB, "hadley", n = 2, new.col = "hadleyTile"),
-                   asf(tibble::tibble(hadley = 1:4, hadleyTile = rep(1:2, each = 2L))))
-  
-})
 
 
