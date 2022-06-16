@@ -64,6 +64,8 @@ typedef struct {
   double rate;
 } Medicare;
 
+#define MEDICARE_LEN 13
+
 typedef struct {
   int xi;
   int yi;
@@ -94,6 +96,10 @@ typedef struct {
   double lito_1st_thresh;
   double lito_1st_taper;
 } Sapto;
+
+#define SAPTO_LEN 16
+
+SEXP Sapto2Sexp(Sapto S);
 
 typedef struct {
   int offset_1st;
@@ -131,6 +137,8 @@ typedef struct {
   OffsetN Offsets[MAX_N_OFFSETN];
   bool has_temp_budget_repair_levy;
 } System;
+
+#define SYSTEM_LEN 10
 
 extern System System1984;
 extern System System1985;
@@ -195,6 +203,7 @@ double ml_rate(int yr);
 double ml_taper(int yr);
 int ml_lower_thresh(int yr, bool family, bool sapto);
 int ml_upper_thresh(int yr, bool family, bool sapto);
+SEXP Medicare2Sexp(Medicare M) ;
 
 // minmax.c
 double dmax(double x, double y);
@@ -208,6 +217,7 @@ double dmin0(double x);
 void apply_offset1(double * tax, int x, Offset1 O);
 void apply_offset2(double * tax, int x, Offset2 O);
 void SEXP2Offset(OffsetN * O, int nO, SEXP List);
+SEXP nOffsets2List(OffsetN const O[MAX_N_OFFSETN], int noffsets);
 void do_multiOffsets(double * ansp,
                      R_xlen_t N,
                      const OffsetN mOffsets[MAX_N_OFFSETN],

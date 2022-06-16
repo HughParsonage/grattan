@@ -107,6 +107,40 @@ void print_Medicare(Medicare M) {
   Rprintf("\t%f\n", M.rate);
 }
 
+SEXP Medicare2Sexp(Medicare M) {
+  int np = 0;
+  SEXP ans = PROTECT(allocVector(VECSXP, MEDICARE_LEN)); ++np;
+  SET_VECTOR_ELT(ans, 0, ScalarInteger(M.lwr_single));
+  SET_VECTOR_ELT(ans, 1, ScalarInteger(M.upr_single));
+  SET_VECTOR_ELT(ans, 2, ScalarInteger(M.lwr_family));
+  SET_VECTOR_ELT(ans, 3, ScalarInteger(M.upr_family));
+  SET_VECTOR_ELT(ans, 4, ScalarLogical(M.has_sapto_thr));
+  SET_VECTOR_ELT(ans, 5, ScalarReal(M.sapto_age));
+  SET_VECTOR_ELT(ans, 6, ScalarInteger(M.lwr_single_sapto));
+  SET_VECTOR_ELT(ans, 7, ScalarInteger(M.upr_single_sapto));
+  SET_VECTOR_ELT(ans, 8, ScalarInteger(M.lwr_family_sapto));
+  SET_VECTOR_ELT(ans, 9, ScalarInteger(M.upr_family_sapto));
+  SET_VECTOR_ELT(ans, 10, ScalarInteger(M.lwr_thr_up_per_child));
+  SET_VECTOR_ELT(ans, 11, ScalarReal(M.taper));
+  SET_VECTOR_ELT(ans, 12, ScalarReal(M.rate));
+  SEXP nms = PROTECT(allocVector(STRSXP, MEDICARE_LEN)); ++np;
+  SET_STRING_ELT(nms, 0, mkCharCE("lwr_single", CE_UTF8));
+  SET_STRING_ELT(nms, 1, mkCharCE("upr_single", CE_UTF8));
+  SET_STRING_ELT(nms, 2, mkCharCE("lwr_family", CE_UTF8));
+  SET_STRING_ELT(nms, 3, mkCharCE("upr_family", CE_UTF8));
+  SET_STRING_ELT(nms, 4, mkCharCE("has_sapto_thr", CE_UTF8));
+  SET_STRING_ELT(nms, 5, mkCharCE("sapto_age", CE_UTF8));
+  SET_STRING_ELT(nms, 6, mkCharCE("lwr_single_sapto", CE_UTF8));
+  SET_STRING_ELT(nms, 7, mkCharCE("upr_single_sapto", CE_UTF8));
+  SET_STRING_ELT(nms, 8, mkCharCE("lwr_family_sapto", CE_UTF8));
+  SET_STRING_ELT(nms, 9, mkCharCE("upr_family_sapto", CE_UTF8));
+  SET_STRING_ELT(nms, 10, mkCharCE("lwr_thr_up_per_child", CE_UTF8));
+  SET_STRING_ELT(nms, 11, mkCharCE("taper", CE_UTF8));
+  SET_STRING_ELT(nms, 12, mkCharCE("rate", CE_UTF8));
+  setAttrib(ans, R_NamesSymbol, nms);
+  UNPROTECT(np);
+  return ans;
+}
 
 
 
