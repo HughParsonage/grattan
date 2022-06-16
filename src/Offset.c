@@ -146,6 +146,15 @@ SEXP Offsets2List(OffsetN O) {
   return ans;
 }
 
+SEXP nOffsets2List(OffsetN const O[MAX_N_OFFSETN], int noffsets) {
+  SEXP ans = PROTECT(allocVector(VECSXP, noffsets));
+  for (int i = 0; i < noffsets; ++i) {
+    SET_VECTOR_ELT(ans, i, Offsets2List(O[i]));
+  }
+  UNPROTECT(1);
+  return ans;
+}
+
 SEXP C_yr2Offsets(SEXP Yr) {
   int yr = asInteger(Yr);
   System Sys = yr2System(yr);

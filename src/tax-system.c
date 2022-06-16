@@ -337,6 +337,42 @@ static bool invalid_medicare_params(int ma, int mb, double mt, double mr) {
   return lhs != rhs && lhs != (rhs - 1) && lhs != (rhs + 1);
 }
 
+SEXP System2Sexp(const System Sys) {
+  int np = 0;
+  SEXP ans = PROTECT(allocVector(VECSXP, SYSTEM_LEN)); ++np;
+  SET_VECTOR_ELT(ans, 0, ScalarInteger(Sys.yr));
+  SEXP Bracks = PROTECT(allocVector(INTSXP, Sys.nb)); ++np;
+  SEXP Rates = PROTECT(allocVector(REALSXP, Sys.nb)); ++np;
+  for (int b = 0; b < Sys.nb; ++b) {
+    INTEGER(Bracks)[b] = Sys.BRACKETS[b];
+    REAL(Rates)[b] = Sys.RATES[b];
+  }
+  SET_VECTOR_ELT(ans, 1, ScalarInteger(Sys.nb));
+  SET_VECTOR_ELT(ans, 2, Bracks);
+  SET_VECTOR_ELT(ans, 3, Rates);
+  SET_VECTOR_ELT(ans, 4, Medicare2Sexp(Sys.M));
+  SET_VECTOR_ELT(ans, 5, ScalarLogical(Sys.has_sapto));
+  SET_VECTOR_ELT(ans, 6, Sapto2Sexp(Sys.S));
+  SET_VECTOR_ELT(ans, 7, ScalarInteger(Sys.n_offsetn));
+  SET_VECTOR_ELT(ans, 8, nOffsets2List(Sys.Offsets, Sys.n_offsetn));
+  SET_VECTOR_ELT(ans, 9, ScalarLogical(Sys.has_temp_budget_repair_levy));
+  
+  SEXP nms = PROTECT(allocVector(STRSXP, SYSTEM_LEN)); ++np;
+  SET_STRING_ELT(nms, 0, mkCharCE("yr", CE_UTF8));
+  SET_STRING_ELT(nms, 1, mkCharCE("nb", CE_UTF8));
+  SET_STRING_ELT(nms, 2, mkCharCE("BRACKETS", CE_UTF8));
+  SET_STRING_ELT(nms, 3, mkCharCE("TAPERS", CE_UTF8));
+  SET_STRING_ELT(nms, 4, mkCharCE("Medicare", CE_UTF8));
+  SET_STRING_ELT(nms, 5, mkCharCE("has_sapto", CE_UTF8));
+  SET_STRING_ELT(nms, 6, mkCharCE("Sapto", CE_UTF8));
+  SET_STRING_ELT(nms, 7, mkCharCE("n_offsetn", CE_UTF8));
+  SET_STRING_ELT(nms, 8, mkCharCE("Offsets", CE_UTF8));
+  SET_STRING_ELT(nms, 9, mkCharCE("has_temp_budget_repair_levy", CE_UTF8));
+  setAttrib(ans, R_NamesSymbol, nms);
+  UNPROTECT(np);
+  return ans;
+}
+
 SEXP CvalidateSystem(SEXP RSystem, SEXP Fix) {
   if (isNull(RSystem)) {
     return R_NilValue;
@@ -517,7 +553,7 @@ SEXP CvalidateSystem(SEXP RSystem, SEXP Fix) {
   }
   validate_medicare(&Sys.M, fix, yr);
   
-  return RSystem;
+  return System2Sexp(Sys);
 }
 
 

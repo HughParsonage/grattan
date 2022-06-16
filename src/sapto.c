@@ -8,7 +8,45 @@ int SAPTO_S12_THRESH = 6000;
 double SAPTO_S12_TAPER = 0.15;
 double SAPTO_TAPER = 0.125;
 
-
+SEXP Sapto2Sexp(Sapto S) {
+  SEXP ans = PROTECT(allocVector(VECSXP, SAPTO_LEN));
+  SEXP nms = PROTECT(allocVector(STRSXP, SAPTO_LEN));
+  SET_VECTOR_ELT(ans, 0, ScalarInteger(S.year));
+  SET_STRING_ELT(nms, 0, mkCharCE("year", CE_UTF8));
+  SET_VECTOR_ELT(ans, 1, ScalarReal(S.pension_age));
+  SET_STRING_ELT(nms, 1, mkCharCE("pension_age", CE_UTF8));
+  SET_VECTOR_ELT(ans, 2, ScalarInteger(S.mxo_single));
+  SET_STRING_ELT(nms, 2, mkCharCE("mxo_single", CE_UTF8));
+  SET_VECTOR_ELT(ans, 3, ScalarInteger(S.mxo_couple));
+  SET_STRING_ELT(nms, 3, mkCharCE("mxo_couple", CE_UTF8));
+  SET_VECTOR_ELT(ans, 4, ScalarInteger(S.lwr_single));
+  SET_STRING_ELT(nms, 4, mkCharCE("lwr_single", CE_UTF8));
+  SET_VECTOR_ELT(ans, 5, ScalarInteger(S.lwr_couple));
+  SET_STRING_ELT(nms, 5, mkCharCE("lwr_couple", CE_UTF8));
+  SET_VECTOR_ELT(ans, 6, ScalarInteger(S.upr_single));
+  SET_STRING_ELT(nms, 6, mkCharCE("upr_single", CE_UTF8));
+  SET_VECTOR_ELT(ans, 7, ScalarInteger(S.upr_couple));
+  SET_STRING_ELT(nms, 7, mkCharCE("upr_couple", CE_UTF8));
+  SET_VECTOR_ELT(ans, 8, ScalarReal(S.taper));
+  SET_STRING_ELT(nms, 8, mkCharCE("taper", CE_UTF8));
+  SET_VECTOR_ELT(ans, 9, ScalarReal(S.first_tax_rate));
+  SET_STRING_ELT(nms, 9, mkCharCE("first_tax_rate", CE_UTF8));
+  SET_VECTOR_ELT(ans, 10, ScalarReal(S.second_tax_rate));
+  SET_STRING_ELT(nms, 10, mkCharCE("second_tax_rate", CE_UTF8));
+  SET_VECTOR_ELT(ans, 11, ScalarReal(S.tax_free_thresh));
+  SET_STRING_ELT(nms, 11, mkCharCE("tax_free_thresh", CE_UTF8));
+  SET_VECTOR_ELT(ans, 12, ScalarReal(S.tax_2nd_thresh));
+  SET_STRING_ELT(nms, 12, mkCharCE("tax_2nd_thresh", CE_UTF8));
+  SET_VECTOR_ELT(ans, 13, ScalarReal(S.lito_max_offset));
+  SET_STRING_ELT(nms, 13, mkCharCE("lito_max_offset", CE_UTF8));
+  SET_VECTOR_ELT(ans, 14, ScalarReal(S.lito_1st_thresh));
+  SET_STRING_ELT(nms, 14, mkCharCE("lito_1st_thresh", CE_UTF8));
+  SET_VECTOR_ELT(ans, 15, ScalarReal(S.lito_1st_taper));
+  SET_STRING_ELT(nms, 15, mkCharCE("lito_1st_taper", CE_UTF8));
+  setAttrib(ans, R_NamesSymbol, nms);
+  UNPROTECT(2);
+  return ans;
+}
 
 static double do_1_sapto_sf(int x, int y, int age, bool is_married, Sapto S) {
   // x is rebate income
