@@ -184,6 +184,7 @@ void setIntElements(int * o, int n, SEXP list, const char * str) {
     }
     return;
   }
+  
   if (isInteger(elmt)) {
     const int * xp = INTEGER(elmt);
     for (int j = 0; j < M; ++j) {
@@ -196,6 +197,20 @@ void setIntElements(int * o, int n, SEXP list, const char * str) {
 
 void setDblElement(double * o, SEXP list, const char * str) {
   SEXP elmt = getListElement(list, str);
+  if (isReal(elmt)) {
+    *o = asReal(elmt);
+  }
+  if (isInteger(elmt)) {
+    *o = (double)asInteger(elmt);
+  }
+}
+
+void setDblElement2(double * o, SEXP list, const char * str, const char * str2) {
+  SEXP list2 = getListElement(list, str);
+  if (!isVectorList(list)) {
+    return;
+  }
+  SEXP elmt = getListElement(list2, str2);
   if (isReal(elmt)) {
     *o = asReal(elmt);
   }
@@ -290,8 +305,8 @@ System Sexp2System(SEXP RSystem, int yr) {
   
   setIntElement(&Sys.M.sapto_age, RSystem, "sapto_pension_age");
   
-  if (hazName(RSystem, "offsets")) {
-    SEXP ROffsets = getListElement(RSystem, "offsets");
+  if (hazName(RSystem, "Offsets")) {
+    SEXP ROffsets = getListElement(RSystem, "Offsets");
     OffsetN COffsets[MAX_N_OFFSETN] = {0};
     Sys.n_offsetn = length(ROffsets);
     SEXP2Offset(COffsets, length(ROffsets), ROffsets);
@@ -327,7 +342,6 @@ System Sexp2System(SEXP RSystem, int yr) {
   Sys.S.upr_couple = Sys.S.lwr_couple + Sys.S.mxo_couple / Sys.S.taper;
   
   Sys.S.year = yr;
-  
   return Sys;
 }
 
@@ -360,8 +374,8 @@ SEXP System2Sexp(const System Sys) {
   SEXP nms = PROTECT(allocVector(STRSXP, SYSTEM_LEN)); ++np;
   SET_STRING_ELT(nms, 0, mkCharCE("yr", CE_UTF8));
   SET_STRING_ELT(nms, 1, mkCharCE("nb", CE_UTF8));
-  SET_STRING_ELT(nms, 2, mkCharCE("BRACKETS", CE_UTF8));
-  SET_STRING_ELT(nms, 3, mkCharCE("TAPERS", CE_UTF8));
+  SET_STRING_ELT(nms, 2, mkCharCE("ordinary_tax_thresholds", CE_UTF8));
+  SET_STRING_ELT(nms, 3, mkCharCE("ordinary_tax_rates", CE_UTF8));
   SET_STRING_ELT(nms, 4, mkCharCE("Medicare", CE_UTF8));
   SET_STRING_ELT(nms, 5, mkCharCE("has_sapto", CE_UTF8));
   SET_STRING_ELT(nms, 6, mkCharCE("Sapto", CE_UTF8));
@@ -391,6 +405,7 @@ SEXP CvalidateSystem(SEXP RSystem, SEXP Fix) {
           length(Bracks), length(Rates));
   }
   System Sys = Sexp2System(RSystem, yr);
+  
   
   // # Individuals
   //   ma <- medicare_levy_lower_threshold %|||% medicare_tbl_fy[["lower_threshold"]]

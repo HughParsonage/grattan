@@ -236,6 +236,9 @@ void apply_sapto(double * taxi, Person P, Sapto S);
 // starts_with_medicare
 bool starts_with_medicare(const char * str);
 
+// starts_with_sapto
+bool starts_with_sapto(const char * str);
+
 // tax-system.c
 System yr2System(int yr);
 System Sexp2System(SEXP RSystem, int yr);
