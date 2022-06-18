@@ -67,8 +67,6 @@ but applied to members of a couple}
 
 \item{fix}{\code{integer(1)} If \code{0L}, the default, an error will be emitted if
 parameters are inconsistent; if \code{1L}, inconsistencies will be fixed.}
-
-\item{offsets}{A list as created by \code{set_offsets()}.}
 }
 \description{
 FUNCTION_DESCRIPTION
