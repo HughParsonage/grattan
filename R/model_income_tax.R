@@ -215,7 +215,7 @@ model_income_tax <- function(sample_file,
            medicare_levy_lower_family_sapto_threshold = medicare_levy_lower_family_sapto_threshold,
            medicare_levy_upper_family_sapto_threshold = medicare_levy_upper_family_sapto_threshold,
            medicare_levy_lower_up_for_each_child = medicare_levy_lower_up_for_each_child,
-           offsets = .Offsets,
+           Offsets = .Offsets,
            sapto_max_offset = sapto_max_offset,
            sapto_lower_threshold = sapto_lower_threshold,
            sapto_taper = sapto_taper,
@@ -237,7 +237,7 @@ model_income_tax <- function(sample_file,
     .dots.ATO[, "c_age_30_june" := fifelse(sapto_eligible, 67L, 42L)]
   }
   .apply_elasticity(.dots.ATO, old_tax, baseline_fy, .System, elasticity_of_taxable_income)
-  
+  System__ <<- .System
   
   new_tax <- income_tax2(.dots.ATO = .dots.ATO,
                          fy.year = baseline_fy,

@@ -16,13 +16,13 @@ SEXP Sapto2Sexp(Sapto S) {
   SET_VECTOR_ELT(ans, 1, ScalarReal(S.pension_age));
   SET_STRING_ELT(nms, 1, mkCharCE("pension_age", CE_UTF8));
   SET_VECTOR_ELT(ans, 2, ScalarInteger(S.mxo_single));
-  SET_STRING_ELT(nms, 2, mkCharCE("mxo_single", CE_UTF8));
+  SET_STRING_ELT(nms, 2, mkCharCE("max_offset", CE_UTF8));
   SET_VECTOR_ELT(ans, 3, ScalarInteger(S.mxo_couple));
-  SET_STRING_ELT(nms, 3, mkCharCE("mxo_couple", CE_UTF8));
+  SET_STRING_ELT(nms, 3, mkCharCE("max_offset_married", CE_UTF8));
   SET_VECTOR_ELT(ans, 4, ScalarInteger(S.lwr_single));
-  SET_STRING_ELT(nms, 4, mkCharCE("lwr_single", CE_UTF8));
+  SET_STRING_ELT(nms, 4, mkCharCE("lower_threshold", CE_UTF8));
   SET_VECTOR_ELT(ans, 5, ScalarInteger(S.lwr_couple));
-  SET_STRING_ELT(nms, 5, mkCharCE("lwr_couple", CE_UTF8));
+  SET_STRING_ELT(nms, 5, mkCharCE("lower_threshold_married", CE_UTF8));
   SET_VECTOR_ELT(ans, 6, ScalarInteger(S.upr_single));
   SET_STRING_ELT(nms, 6, mkCharCE("upr_single", CE_UTF8));
   SET_VECTOR_ELT(ans, 7, ScalarInteger(S.upr_couple));

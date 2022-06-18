@@ -20,14 +20,13 @@
 #' @param medicare_levy_lower_sapto_threshold,medicare_levy_upper_sapto_threshold The equivalent values for SAPTO-eligible individuals (not families).
 #' @param medicare_levy_lower_family_sapto_threshold,medicare_levy_upper_family_sapto_threshold The equivalent values for SAPTO-eligible individuals in a family.
 #' @param medicare_levy_lower_up_for_each_child The amount to add to the \code{_family_threshold}s for each dependant child.
-#' @param offsets PARAM_DESCRIPTION, Default: NULL
+#' @param Offsets List of offsets created by \code{set_offsets}.
 #' @param sapto_max_offset The maximum offset available through SAPTO. 
 #' @param sapto_lower_threshold The threshold at which SAPTO begins to reduce (from \code{sapto_max_offset}).
 #' @param sapto_taper The taper rate beyond \code{sapto_lower_threshold}.
 #' 
 #' @param sapto_max_offset_married,sapto_lower_threshold_married,sapto_taper_married As above,
 #' but applied to members of a couple
-#' @param ... Other parameters that may be supported in future versions. 
 #' 
 #' @param fix \code{integer(1)} If \code{0L}, the default, an error will be emitted if
 #' parameters are inconsistent; if \code{1L}, inconsistencies will be fixed.
@@ -48,14 +47,13 @@ System <- function(yr,
                    medicare_levy_upper_family_threshold = NULL,
                    medicare_levy_upper_family_sapto_threshold = NULL,
                    medicare_levy_upper_threshold = NULL,
-                   offsets = NULL,
+                   Offsets = NULL,
                    sapto_max_offset = NULL,
                    sapto_lower_threshold = NULL,
                    sapto_taper = NULL,
                    sapto_max_offset_married = NULL,
                    sapto_lower_threshold_married = NULL,
                    sapto_taper_married = NULL, 
-                   ...,
                    fix = 0L) {
   yr
   if (is.character(yr) || is.fy(yr)) {
@@ -68,6 +66,9 @@ System <- function(yr,
 
 
 .validateSystem <- function(RSystem, fix = 0L) {
+  if (anyDuplicated(tolower(names(RSystem)))) {
+    stop("names(System) has duplicated names (case-insensitively)")
+  }
   # if (length(RSystem$))
   .Call("CvalidateSystem", RSystem, as.integer(fix), PACKAGE = packageName())
 }

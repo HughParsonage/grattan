@@ -19,14 +19,13 @@ System(
   medicare_levy_upper_family_threshold = NULL,
   medicare_levy_upper_family_sapto_threshold = NULL,
   medicare_levy_upper_threshold = NULL,
-  offsets = NULL,
+  Offsets = NULL,
   sapto_max_offset = NULL,
   sapto_lower_threshold = NULL,
   sapto_taper = NULL,
   sapto_max_offset_married = NULL,
   sapto_lower_threshold_married = NULL,
   sapto_taper_married = NULL,
-  ...,
   fix = 0L
 )
 }
@@ -55,7 +54,7 @@ Since the temporary budget repair levy was imposed on a discrete tax bracket whe
 
 \item{medicare_levy_upper_threshold}{Minimum taxable income at which the Medicare levy will be applied at the full Medicare levy rate (2\% in 2015-16). Between this threshold and the \code{medicare_levy_lower_threshold}, a tapered rate applies, starting from zero and climbing to \code{medicare_levy_rate}.}
 
-\item{offsets}{PARAM_DESCRIPTION, Default: NULL}
+\item{Offsets}{List of offsets created by \code{set_offsets}.}
 
 \item{sapto_max_offset}{The maximum offset available through SAPTO.}
 
@@ -66,10 +65,10 @@ Since the temporary budget repair levy was imposed on a discrete tax bracket whe
 \item{sapto_max_offset_married, sapto_lower_threshold_married, sapto_taper_married}{As above,
 but applied to members of a couple}
 
-\item{...}{Other parameters that may be supported in future versions.}
-
 \item{fix}{\code{integer(1)} If \code{0L}, the default, an error will be emitted if
 parameters are inconsistent; if \code{1L}, inconsistencies will be fixed.}
+
+\item{offsets}{A list as created by \code{set_offsets()}.}
 }
 \description{
 FUNCTION_DESCRIPTION
