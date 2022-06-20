@@ -71,9 +71,11 @@ typedef struct {
   int yi;
   int ri; // rebate income
   unsigned int agei : 7;
-  int is_married : 1;
   unsigned int n_child : 4;
+  int on_sapto_cd : 3;
+  int is_married : 1;
   int is_family : 1;
+  
 } Person;
 
 typedef struct {
