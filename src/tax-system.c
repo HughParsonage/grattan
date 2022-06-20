@@ -334,9 +334,6 @@ System Sexp2System(SEXP RSystem, int yr) {
   setDblElement(&Sys.S.second_tax_rate, RSystem, "sapto_second_tax_rate");
   setDblElement(&Sys.S.taper, RSystem, "sapto_taper");
   setIntElement(&Sys.S.tax_free_thresh, RSystem, "sapto_tax_free_thresh");
-  if (Sys.S.taper < 0) {
-    Sys.S.taper = - Sys.S.taper;
-  }
   
   Sys.S.upr_single = Sys.S.lwr_single + Sys.S.mxo_single / Sys.S.taper;
   Sys.S.upr_couple = Sys.S.lwr_couple + Sys.S.mxo_couple / Sys.S.taper;
@@ -567,6 +564,7 @@ SEXP CvalidateSystem(SEXP RSystem, SEXP Fix) {
     }
   }
   validate_medicare(&Sys.M, fix, yr);
+  validate_sapto(&Sys.S, fix);
   
   return System2Sexp(Sys);
 }

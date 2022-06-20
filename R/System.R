@@ -26,7 +26,9 @@
 #' @param sapto_taper The taper rate beyond \code{sapto_lower_threshold}.
 #' 
 #' @param sapto_max_offset_married,sapto_lower_threshold_married,sapto_taper_married As above,
-#' but applied to members of a couple
+#' but applied to members of a couple.
+#' 
+#' @param sapto_pension_age The age at and above which the SAPTO is to apply.
 #' 
 #' @param fix \code{integer(1)} If \code{0L}, the default, an error will be emitted if
 #' parameters are inconsistent; if \code{1L}, inconsistencies will be fixed.
@@ -54,6 +56,7 @@ System <- function(yr,
                    sapto_max_offset_married = NULL,
                    sapto_lower_threshold_married = NULL,
                    sapto_taper_married = NULL, 
+                   sapto_pension_age = NULL,
                    fix = 0L) {
   yr
   if (is.character(yr) || is.fy(yr)) {

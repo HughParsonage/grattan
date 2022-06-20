@@ -157,20 +157,22 @@ static bool valid_sapto_rel(int mxo, int lwr, int upr,
 void validate_sapto(Sapto * S, int fix) {
   int year = S->year;
   if (year < MIN_YEAR) {
-    error("Sapto.year = %d but must be %d or later", year, MIN_YEAR);
+    error("(validate_sapto)Sapto.year = %d but must be %d or later", year, MIN_YEAR);
   }
   
   double pension_age = S->pension_age;
   if (ISNAN(pension_age)) {
-    error("pension_age was NaN.");
+    error("(validate_sapto)pension_age was NaN.");
   }
   if (R_finite(pension_age)) {
     if (pension_age > 150) {
       if (fix) {
-        warning("`Sapto.pension_age = %f` and so will be set to positive infinity");
+        warning("(validate_sapto)`Sapto.pension_age = %.1f` and so will be set to positive infinity",
+                pension_age);
         S->pension_age = R_PosInf;
       } else {
-        error("`Sapto.pension_age = %f` which is an unlikely value.");
+        error("(validate_sapto)`Sapto.pension_age = %.1f` which is an unlikely value.",
+              pension_age);
       }
     }
   }
@@ -186,19 +188,40 @@ void validate_sapto(Sapto * S, int fix) {
   double taper = S->taper;
   if (taper < 0) {
     if (fix) {
-      warning("Sapto.taper < 0 and so sign will be reversed.");  
+      warning("(validate_sapto)Sapto.taper < 0 and so sign will be reversed.");  
       S->taper = -taper;
     } else {
-      error("S.taper < 0.");
+      error("(validate_sapto)S.taper < 0.");
     }
   }
   
   if (upr_single <= lwr_single) {
-    S->upr_single = S->mxo_single / S->taper;
+    if (fix) {
+      if (fix == 1) {
+        warning("(validate_sapto)upr_single = %d, yet lwr_single = %d"
+                  " and so upr_single will be reset to %d.",
+              upr_single, lwr_single, S->mxo_single / S->taper);
+      }
+      S->upr_single = S->mxo_single / S->taper;
+    } else {
+      error("(validate_sapto)upr_single = %d, yet lwr_single = %d", 
+            upr_single, lwr_single);
+    }
   }
   if (upr_couple <= lwr_couple) {
-    S->upr_couple = S->mxo_couple / S->taper;
+    if (fix) {
+      if (fix == 1) {
+        warning("(validate_sapto)upr_couple = %d, yet lwr_couple = %d"
+                  " and so upr_couple will be reset to %d.",
+                  upr_couple, lwr_couple, S->mxo_couple / S->taper);
+      }
+      S->upr_couple = S->mxo_couple / S->taper;
+    } else {
+      error("(validate_sapto)upr_couple = %d, yet lwr_couple = %d", 
+            upr_couple, lwr_couple);
+    }
   }
+  
   double first_tax_rate = S->first_tax_rate;
   double second_tax_rate = S->second_tax_rate;
   int tax_free_thresh = S->tax_free_thresh;
@@ -209,10 +232,10 @@ void validate_sapto(Sapto * S, int fix) {
   
   
   if (!bw01(second_tax_rate)) {
-    error("Sapto.second_tax_rate not in [0, 1]");
+    error("(validate_sapto)Sapto.second_tax_rate not in [0, 1]");
   }
   if (!bw01(first_tax_rate) || first_tax_rate > second_tax_rate) {
-    error("Sapto.first_tax_rate must be between 0 and S.second_tax_rate");
+    error("(validate_sapto)Sapto.first_tax_rate must be between 0 and S.second_tax_rate");
   }
   
   
@@ -295,7 +318,7 @@ SEXP Csapto(SEXP RebateIncome, SEXP Yr, SEXP Fill,
   double * restrict ansp = REAL(ans);
   int nThread = 1;
   if (xlength(Fill) != 1 || !(isReal(Fill) || isInteger(Fill))) {
-    error("fill was a '%s' vector of length-%lld  must be a length-one numeric vector.",
+    error("`fill` was a %s vector of length-%lld, but must be a length-one numeric vector.",
           type2char(TYPEOF(Fill)), xlength(Fill));
   }
   const double fill = asReal(Fill);

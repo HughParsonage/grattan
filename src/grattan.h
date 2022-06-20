@@ -48,20 +48,26 @@ extern int SAPTO_S12_THRESH;
 extern double SAPTO_S12_TAPER;
 extern double SAPTO_TAPER;
 
+// 0-127 with months
 typedef struct {
+  unsigned int years : 7;
+  unsigned int month : 4;
+} Age;
+
+typedef struct {
+  double taper;
+  double rate;
   int lwr_single;
   int upr_single;
   int lwr_family;
   int upr_family;
-  bool has_sapto_thr;
   int sapto_age;
   int lwr_single_sapto;
   int upr_single_sapto;
   int lwr_family_sapto;
   int upr_family_sapto;
   int lwr_thr_up_per_child;
-  double taper;
-  double rate;
+  bool has_sapto_thr : 1;
 } Medicare;
 
 #define MEDICARE_LEN 13
@@ -234,6 +240,7 @@ int as_nThread(SEXP x);
 // sapto.c
 Sapto yr2Sapto(int yr);
 void apply_sapto(double * taxi, Person P, Sapto S);
+void validate_sapto(Sapto * S, int fix);
 
 // starts_with_medicare
 bool starts_with_medicare(const char * str);
