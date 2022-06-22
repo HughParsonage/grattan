@@ -14,6 +14,12 @@ test_that("Offset basics", {
                       a = 500,
                       m = 0.1),
                c(200, 200, 200, 170, 0.1, 0, 0))
+  ci <- function(...) as.integer(c(...))
+  expect_equal(Offset(ci(0, 250, 500, 800, 2499, 2500, 2501),
+                      y = 200,
+                      a = 500,
+                      m = 0.1),
+               c(200, 200, 200, 170, 0.1, 0, 0))
   
   the.seed <- sample.int(100000L, size = 1L)
   set.seed(the.seed)

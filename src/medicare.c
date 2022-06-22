@@ -86,7 +86,7 @@ void validate_medicare(Medicare * M, int fix, int yr) {
   validate_lwr_upr(&(M->lwr_single), &(M->upr_single), &(M->rate), &(M->taper), "medicare_levy_upper_threshold", fix, yr);
   validate_lwr_upr(&(M->lwr_single_sapto), &(M->upr_single_sapto), &(M->rate), &(M->taper), "medicare_levy_upper_sapto_threshold", fix, yr);
   validate_lwr_upr(&(M->lwr_family), &(M->upr_family), &(M->rate), &(M->taper), "medicare_levy_upper_family_threshold", fix, yr);
-  validate_lwr_upr(&(M->lwr_family_sapto), &(M->upr_family_sapto), &(M->rate), &(M->taper), "medicare_levy_upper_sapto_family_threshold", fix, yr);
+  validate_lwr_upr(&(M->lwr_family_sapto), &(M->upr_family_sapto), &(M->rate), &(M->taper), "medicare_levy_upper_family_sapto_threshold", fix, yr);
   
 }
 
