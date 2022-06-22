@@ -26,7 +26,6 @@ extern SEXP COffset(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Crates_by_yr(SEXP, SEXP);
 extern SEXP Crebate_income(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Csapto(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
-extern SEXP Csapto_dat(SEXP, SEXP);
 extern SEXP Ctest_nOffset_upper_threshold(SEXP, SEXP);
 extern SEXP CvalidateSystem(SEXP, SEXP);
 
@@ -49,7 +48,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"Crates_by_yr",                  (DL_FUNC) &Crates_by_yr,                  2},
     {"Crebate_income",                (DL_FUNC) &Crebate_income,                9},
     {"Csapto",                        (DL_FUNC) &Csapto,                        7},
-    {"Csapto_dat",                    (DL_FUNC) &Csapto_dat,                    2},
     {"Ctest_nOffset_upper_threshold", (DL_FUNC) &Ctest_nOffset_upper_threshold, 2},
     {"CvalidateSystem",               (DL_FUNC) &CvalidateSystem,               2},
     {NULL, NULL, 0}
