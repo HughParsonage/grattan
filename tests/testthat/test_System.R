@@ -28,6 +28,8 @@ test_that("Validation of System", {
                       Offsets = set_offsets(set_offset(thresholds = integer(5),
                                                        tapers = double(4)))),
                "length")
+  expect_warning(System(2018L, sapto_taper = -0.5, fix = 1L),
+                 "taper")
 })
 
 test_that("Misc functions", {
