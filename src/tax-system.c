@@ -133,16 +133,7 @@ SEXP Crates_by_yr(SEXP Yr, SEXP bb) {
   return ans;
 }
 
-// quick trunc
-int qtrunc(double x) {
-  if (x > INT_MAX) {
-    return INT_MAX;
-  }
-  if (x <= -INT_MAX) {
-    return -INT_MAX;
-  }
-  return (int)x;
-}
+
 
 bool safe2int(double x) {
   return !ISNAN(x) && x > -INT_MAX && x < INT_MAX;

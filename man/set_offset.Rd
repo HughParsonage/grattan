@@ -3,6 +3,7 @@
 \name{set_offset}
 \alias{set_offset}
 \alias{set_offsets}
+\alias{the_MAX_N_OFFSETN}
 \title{Set offsets}
 \usage{
 set_offset(
@@ -20,6 +21,8 @@ set_offsets(
   lito_min_bracket = NULL,
   lito_multi = NULL
 )
+
+the_MAX_N_OFFSETN()
 }
 \arguments{
 \item{offset_1st}{\code{integer(1)} The offset available for zero income.}
@@ -34,7 +37,8 @@ threshold.}
 \item{refundable}{\code{bool(1)} If \code{FALSE}, the default, offsets are 
 non-refundable, meaning that the offset cannot reduce the tax below zero.}
 
-\item{...}{A set of offsets created by \code{set_offset}.}
+\item{...}{A set of offsets created by \code{set_offset}. May not exceed
+\code{the_MAX_N_OFFSETN()}.}
 
 \item{yr}{\code{NULL / integer(1)} If \code{NULL}, only the offsets created
 by \code{...} are used. Otherwise, inherits offsets (such as LITO and LMITO)
@@ -47,7 +51,8 @@ arguments to adjust (single-threshold) LITO.}
 \describe{
 \item{\code{set_offset}}{A list of four elements, \code{offset_1st}, 
 \code{thresholds}, \code{tapers}, \code{refundable}.}
-\item{\code{set_offset}}{A list of lists created by \code{set_offset}.}
+\item{\code{set_offsets}}{A list of lists created by \code{set_offset}.}
+\item{\code{the_MAX_N_OFFSETN}}{The maximum number of offsets that may be used.}
 }
 }
 \description{

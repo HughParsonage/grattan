@@ -8,11 +8,11 @@
 */
 
 /* .Call calls */
+extern SEXP C_MAX_N_OFFSETN();
 extern SEXP C_ml_lower_thresh(SEXP, SEXP, SEXP);
 extern SEXP C_ml_rate(SEXP);
 extern SEXP C_ml_taper(SEXP);
 extern SEXP C_ml_upper_thresh(SEXP, SEXP, SEXP);
-extern SEXP C_moffset(SEXP, SEXP, SEXP, SEXP);
 extern SEXP C_multiOffset(SEXP, SEXP, SEXP);
 extern SEXP C_yr2Offsets(SEXP);
 extern SEXP Cbracks_by_year(SEXP, SEXP);
@@ -31,11 +31,11 @@ extern SEXP Ctest_nOffset_upper_threshold(SEXP, SEXP);
 extern SEXP CvalidateSystem(SEXP, SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
+    {"C_MAX_N_OFFSETN",               (DL_FUNC) &C_MAX_N_OFFSETN,               0},
     {"C_ml_lower_thresh",             (DL_FUNC) &C_ml_lower_thresh,             3},
     {"C_ml_rate",                     (DL_FUNC) &C_ml_rate,                     1},
     {"C_ml_taper",                    (DL_FUNC) &C_ml_taper,                    1},
     {"C_ml_upper_thresh",             (DL_FUNC) &C_ml_upper_thresh,             3},
-    {"C_moffset",                     (DL_FUNC) &C_moffset,                     4},
     {"C_multiOffset",                 (DL_FUNC) &C_multiOffset,                 3},
     {"C_yr2Offsets",                  (DL_FUNC) &C_yr2Offsets,                  1},
     {"Cbracks_by_year",               (DL_FUNC) &Cbracks_by_year,               2},

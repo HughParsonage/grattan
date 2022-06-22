@@ -1,5 +1,9 @@
 #include "grattan.h"
 
+SEXP C_MAX_N_OFFSETN() {
+  return ScalarInteger(MAX_N_OFFSETN);
+}
+
 static bool taper_nonzeroish(double x) {
   return x > 1e-8 || x < -1e-8;
 }
@@ -42,36 +46,6 @@ SEXP Offset(SEXP x, double y, double a, double m) {
   return ans;
 } 
 
-
-
-void apply_offsetn(double * tax, Person P, OffsetN O) {
-  int nb = O.nb;
-  double y = O.offset_1st;
-  int xi = P.xi;
-  for (int b = 0; b < nb; ++b) {
-    if (xi < O.Thresholds[b]) {
-      break;
-    }
-    double taper = O.Tapers[b];
-    double above_threshold = xi - O.Thresholds[b];
-    if ((b + 1) < nb) {
-      double next_threshold = O.Thresholds[b + 1];
-      if (xi > next_threshold) {
-        above_threshold = next_threshold - O.Thresholds[b];
-      }
-    }
-    y += above_threshold * taper;
-  }
-  if (!O.refundable && y < 0) {
-    y = 0;
-  }
-  if (*tax <= y) {
-    *tax = 0;
-  } else {
-    *tax -= y;
-  }
-}
-
 double value_OffsetN(int x, const OffsetN O) {
   int nb = O.nb;
   double y = O.offset_1st;
@@ -95,23 +69,6 @@ double value_OffsetN(int x, const OffsetN O) {
 
 SEXP COffset(SEXP x, SEXP y, SEXP a, SEXP m) {
   return Offset(x, asReal(y), asReal(a), asReal(m));
-}
-
-static int last_positive_offset(const double * tapers, 
-                                const int * thresholds, 
-                                const int * offset_1st, 
-                                int n_tapers) {
-  double o = offset_1st[0];
-  int j = thresholds[0];
-  int t = 0;
-  while (o > 0 && j < 999999) {
-    o -= tapers[t];
-    ++j;
-    if (t + 1 < n_tapers) {
-      t += j > thresholds[t + 1];
-    }
-  }
-  return j;
 }
 
 OffsetN yr2OffsetN(int yr, int j) {
@@ -219,68 +176,6 @@ void SEXP2Offset(OffsetN * O, int nO, SEXP List) {
     Oj.refundable = asLogical(getListElement(el, "refundable"));
     O[j] = Oj;
   }
-}
-
-
-
-SEXP C_moffset(SEXP x, SEXP Offset1st, SEXP Thresholds, SEXP Tapers) {
-  int n_tapers = length(Tapers);
-  if (n_tapers != length(Offset1st) || n_tapers != length(Thresholds)) {
-    error("n_tapers disagree with length(Thresholds) or length(Offset1st)");
-  }
-  const double * tapers  = REAL(Tapers);
-  const int * thresholds = INTEGER(Thresholds);
-  const int * offset_1st = INTEGER(Offset1st);
-  int final_offset = last_positive_offset(tapers, thresholds, offset_1st, n_tapers);
-  float * fmem = malloc(sizeof(float) * (final_offset));
-  if (fmem == NULL) {
-    return R_NilValue;
-  }
-  for (int j = 0, t = 0; j < final_offset; ++j) {
-    if (j <= thresholds[0]) {
-      fmem[j] = offset_1st[0];
-      continue;
-    }
-    fmem[j] = fmem[j - 1] - tapers[t];
-    if ((t + 1) < n_tapers) {
-      t += j > thresholds[t + 1];
-    }
-  }
-  R_xlen_t N = xlength(x);
-  SEXP ans = PROTECT(allocVector(REALSXP, N));
-  double * restrict ansp = REAL(ans);
-  switch(TYPEOF(x)) {
-  case INTSXP:
-  {
-    const int * xp = INTEGER(x);
-    for (R_xlen_t i = 0; i < N; ++i) {
-      unsigned int xpi = xp[i];
-      if (xpi >= final_offset) {
-        ansp[i] = 0;
-        continue;
-      }
-      ansp[i] = fmem[xpi];
-    }
-  }
-    break;
-  case REALSXP:
-  {
-    const double * xp = REAL(x);
-    for (R_xlen_t i = 0; i < N; ++i) {
-      if (ISNAN(xp[i]) || xp[i] < 0 || xp[i] >= final_offset) {
-        ansp[i] = 0;
-        continue;
-      }
-      unsigned int xpi = xp[i];
-      ansp[i] = fmem[xpi];
-    }
-  }
-    
-  }
-  
-  free(fmem);
-  UNPROTECT(1);
-  return ans;
 }
 
 static int nthOffset(OffsetN O, unsigned int j) {

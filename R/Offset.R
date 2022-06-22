@@ -9,7 +9,8 @@
 #' @param refundable \code{bool(1)} If \code{FALSE}, the default, offsets are 
 #' non-refundable, meaning that the offset cannot reduce the tax below zero.
 #' 
-#' @param ... A set of offsets created by \code{set_offset}.
+#' @param ... A set of offsets created by \code{set_offset}. May not exceed
+#' \code{the_MAX_N_OFFSETN()}.
 #' @param yr \code{NULL / integer(1)} If \code{NULL}, only the offsets created
 #' by \code{...} are used. Otherwise, inherits offsets (such as LITO and LMITO)
 #' from the corresponding year.
@@ -20,7 +21,8 @@
 #' \describe{
 #' \item{\code{set_offset}}{A list of four elements, \code{offset_1st}, 
 #' \code{thresholds}, \code{tapers}, \code{refundable}.}
-#' \item{\code{set_offset}}{A list of lists created by \code{set_offset}.}
+#' \item{\code{set_offsets}}{A list of lists created by \code{set_offset}.}
+#' \item{\code{the_MAX_N_OFFSETN}}{The maximum number of offsets that may be used.}
 #' }
 #' 
 #' @export
@@ -87,16 +89,18 @@ set_offsets <- function(...,
   DefaultOffsets
 }
 
+#' @rdname set_offset
+#' @export
+the_MAX_N_OFFSETN <- function() {
+  .Call("C_MAX_N_OFFSETN", PACKAGE = packageName())
+}
+
+
 Offset <- function(x, y, a, m) {
   .Call("COffset", x, y, a, m, PACKAGE = packageName())
 }
 
-memOffset <- function(x, offset_1st = 445L, 
-                      thresholds = 37000L,
-                      tapers = 0.015) {
-  .Call("C_moffset", x, offset_1st, thresholds, tapers, 
-        PACKAGE = packageName())
-}
+
 
 
 
