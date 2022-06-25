@@ -11,6 +11,13 @@
 
 * `sapto_rcpp` has now been removed
 
+* The `grattan v2` package will be more focused on income tax with other elements
+  being spun off into other packages. In particular, `_inflator` functions
+  and related forecasting methods, functions essentially accessing ABS data,
+  and functions relating to tranfers will be put in other packages, and imported
+  later. Functions that are made available in the `grattan` NAMESPACE may have
+  changes to their API when this happens.
+
 ### API changes
 
 * `income_tax` now uses `System`
