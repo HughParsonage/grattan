@@ -36,8 +36,8 @@ age_grouper <- function(age,
     }
     
     if (length(age) > threshold &&
-        min(age) >= exp_min_age &&
-        max(age) <= exp_max_age) {
+        min(age, na.rm = TRUE) >= exp_min_age &&
+        max(age, na.rm = TRUE) <= exp_max_age) {
       
       i <- age - exp_min_age + 1L
       

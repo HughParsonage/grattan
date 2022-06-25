@@ -20,12 +20,13 @@
 
 ### API changes
 
-* `income_tax` now uses `System`
+* `income_tax` now uses `System` to define the tax system
 
 ### Other changes
 
 * `model_income_tax` does not throw an error for incorrect specification
   of `lito_` arguments (which are deprecated)
+* `age_grouper` now works with long vectors containing missing values
 
 ## 1.9.0.10
 

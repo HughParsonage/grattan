@@ -28,4 +28,12 @@ test_that("Alternate usage: years of birth", {
                       ordered = TRUE))
 })
 
+test_that("Long age grouper with NAs", {
+  y <- rep(c(NA, 1:100), times = 1000L)
+  expect_equal(age_grouper(y),
+               rep(age_grouper(c(NA, 1:100)), times = 1000L))
+  Age20M <- as.character(age_grouper(20L, below = "Below "))
+  expect_equal(Age20M, "Below 25")
+})
+
 
