@@ -8,6 +8,8 @@
 * `model_income_tax` Arguments prefixed `Budget_` and `lito_` are deprecated and
   now `offsets = set_offsets` are preferred.  However, using `System` with
   `income_tax` is likely to be just as convenient.
+  
+* `lito` and `lmito` no longer accept varying parameters, but `lmito` is now exported
 
 * `sapto_rcpp`, `income_tax_sapto`, `new_income_tax`, `new_medicare_levy`, 
   and `new_sapto` have now been removed. Use `System`.

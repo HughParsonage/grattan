@@ -2,34 +2,21 @@
 % Please edit documentation in R/LITO.R
 \name{lito}
 \alias{lito}
-\alias{.lito}
 \title{Low Income Tax Offset}
 \usage{
-.lito(input)
-
-lito(income, max_lito = 445, lito_taper = 0.015, min_bracket = 37000)
+lito(income, fy.year = NULL)
 }
 \arguments{
-\item{input}{A keyed data.table containing the financial year and the input of every observation for which the LITO should be calculated.
-The input must have the following structure. \strong{The structure will not be checked.}
-\describe{
-\item{fy_year}{The financial year the LITO parameters should be obtained. This must be the key of the data.table.}
-\item{income}{The Taxable Income of the individual.}
-\item{ordering}{An integer sequence from 1 to \code{nrow(input)} which will be the order of the output.}
-}}
+\item{income}{The income on which the offset is applied.}
 
-\item{income}{Income of taxpayer}
-
-\item{max_lito}{The maximum LITO available.}
-
-\item{lito_taper}{The amount by which LITO should be shaded out or reduced for every additional dollar of taxable income.}
-
-\item{min_bracket}{The income at which the \code{lito_taper} applies.}
+\item{fy.year}{The financial year for which the LITO is desired.}
 }
 \value{
-For \code{.lito}, the a numeric vector equal to the offset for each income and each financial year in \code{input}. 
-For \code{lito}, a numeric vector equal to the offset for each income given the LITO parameters.
+The LITO or LMITO for the given income and tax year.
 }
 \description{
 The Low Income Tax Offset (LITO) is a non-refundable tax offset to reduce ordinary personal income tax for low-income earners.
+
+N.B. Since v2.0.0, \code{lito} only calculates the actual LITO, rather than
+an offset with custom parameters. For such functionality, use (unexported) \code{Offset}.
 }

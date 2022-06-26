@@ -3,6 +3,14 @@
 // lito1 ~=> single taper lito
 // lito2 ~=> double taper lito
 
+bool has_lito(int yr) {
+  return yr >= 1994;
+}
+
+bool has_lmito(int yr) {
+  return yr >= 2019;
+}
+
 int max_lito1(int yr) {
   if (yr >= 2013) {
     return 445;
@@ -93,6 +101,51 @@ Offset2 LITO_post2020(int yr) {
   O.thresh_1st = 37500;
   O.thresh_2nd = 66667;
   return O;
+}
+
+static OffsetN LITO_Par(int yr) {
+  System Sys = yr2System(yr);
+  return Sys.Offsets[0];
+}
+
+static OffsetN LMITO_Par(int yr) {
+  System Sys = yr2System(yr);
+  return Sys.Offsets[1];
+}
+
+SEXP C_lito(SEXP x, SEXP Year, SEXP doLmito) {
+  if (!isInteger(x) && !isReal(x)) {
+    error("`x` was type '%s' but must be numeric.", type2char(TYPEOF(x)));
+  }
+  R_xlen_t N = xlength(x);
+  SEXP ans = PROTECT(allocVector(REALSXP, N));
+  double * restrict ansp = REAL(ans);
+  int yr = asInteger(Year);
+  const bool do_lmito = asInteger(doLmito);
+  bool offset_applies = do_lmito ? has_lmito(yr) : has_lito(yr);
+  if (!offset_applies) {
+    memset(ansp, 0, sizeof(double) * N);
+    UNPROTECT(1);
+    return ans;
+  }
+  OffsetN O = do_lmito ? LMITO_Par(yr) : LITO_Par(yr);
+  if (isInteger(x)) {
+    const int * xp = INTEGER(x);
+    // double value_OffsetN(int x, const OffsetN O)
+    for (R_xlen_t i = 0; i < N; ++i) {
+      ansp[i] = value_OffsetN(xp[i], O);
+    }
+  } else {
+    const double * xp = REAL(x);
+    for (R_xlen_t i = 0; i < N; ++i) {
+      ansp[i] = 0;
+      if (xp[i] > 0 && xp[i] < INT_MAX) {
+        ansp[i] = value_OffsetN(xp[i], O);
+      }
+    }
+  }
+  UNPROTECT(1);
+  return ans;
 }
 
 

@@ -227,6 +227,7 @@ double dmin0(double x);
 void apply_offset1(double * tax, int x, Offset1 O);
 void apply_offset2(double * tax, int x, Offset2 O);
 void SEXP2Offset(OffsetN * O, int nO, SEXP List);
+double value_OffsetN(int x, const OffsetN O);
 SEXP nOffsets2List(OffsetN const O[MAX_N_OFFSETN], int noffsets);
 void do_multiOffsets(double * ansp,
                      R_xlen_t N,
