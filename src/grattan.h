@@ -18,16 +18,19 @@
 #include <ctype.h>
 
 #if defined _OPENMP && _OPENMP >= 201511
-#define FORLOOP(content)                                                \
+#define FORLOOP(content) do {                                  \
 _Pragma("omp parallel for num_threads(nThread)")                        \
   for (R_xlen_t i = 0; i < N; ++i) {                                    \
     (content);                                                          \
-  }
+  }                                                            \
+} while (0);                                                   \
+
 #else
-#define FORLOOP(content)                                       \
+#define FORLOOP(content) do {                                       \
 for (R_xlen_t i = 0; i < N; ++i) {                             \
   (content);                                                      \
-}
+}                                                              \
+} while (0);
 #endif
 
 

@@ -305,7 +305,7 @@ SEXP Cdo_medicare_levy(SEXP x, SEXP Year, SEXP y, SEXP Eligible, SEXP IsMarried,
     P.is_married = mp[i];
     P.is_family = P.n_child || P.yi || P.is_married;
     P.agei = ep[i] ? 70 : 42;
-    ansp[i] = do_1_ML((const Person)P, M);
+    ansp[i] = do_1_ML(P, M);
   })
     UNPROTECT(1);
   return ans;
