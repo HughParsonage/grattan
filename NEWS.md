@@ -24,6 +24,7 @@
   - `pension_supplement`
   - `rent_assistance`
   - `student_repayment`
+  - `unemployment_benefit`
   - `youth_allowance`
   - `youth_unemployment`
   
