@@ -2,9 +2,12 @@
 % Please edit documentation in R/LITO.R
 \name{lito}
 \alias{lito}
+\alias{lmito}
 \title{Low Income Tax Offset}
 \usage{
 lito(income, fy.year = NULL)
+
+lmito(income, fy.year = NULL)
 }
 \arguments{
 \item{income}{The income on which the offset is applied.}

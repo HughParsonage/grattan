@@ -22,7 +22,7 @@ lito <- function(income, fy.year = NULL) {
   .Call("C_lito", income, Year, 0L, PACKAGE = "grattan")
 }
 
-
+#' @rdname lito
 lmito <- function(income, fy.year = NULL) {
   if (is.null(fy.year)) {
     fy.year <- fy::date2fy(Sys.Date())
