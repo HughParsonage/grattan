@@ -34,7 +34,6 @@ for (R_xlen_t i = 0; i < N; ++i) {                             \
 #endif
 
 
-
 #define MAX_NBRACK 8
 #define MAX_OFFSETN 15
 #define MAX_N_OFFSETN 15

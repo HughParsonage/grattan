@@ -9,7 +9,24 @@
   now `offsets = set_offsets` are preferred.  However, using `System` with
   `income_tax` is likely to be just as convenient.
 
-* `sapto_rcpp` has now been removed
+* `sapto_rcpp` has now been removed.
+
+* The transfer functions have been removed as they became unreliable / difficult to maintain.
+  See repository `hughparsonage/grattanTransfers` for possible future development
+  - `age_pension`
+  - `carer_payment`
+  - `child_care_subsidy`
+  - `energy_supplement`
+  - `family_tax_benefit`
+  - `model_child_care_subsidy`
+  - `model_rent_assistance`
+  - `newstart_allowance`
+  - `pension_supplement`
+  - `rent_assistance`
+  - `student_repayment`
+  - `youth_allowance`
+  - `youth_unemployment`
+  
 
 * The `grattan v2` package will be more focused on income tax with other elements
   being spun off into other packages. In particular, `_inflator` functions
