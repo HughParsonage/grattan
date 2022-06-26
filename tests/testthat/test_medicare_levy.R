@@ -93,33 +93,6 @@ test_that("Medicare error handling", {
 })
 
 
-test_that("new_medicare_levy matches", {
-  skip_if_not_installed("taxstats") 
-
-  library(taxstats)
-  sa <- sample_file_1314
-  par_tbl <- 
-    as.data.table(medicare_tbl) %>%
-    .[fy_year == "2013-14"] %>%
-    setnames(old = "sapto", new = "switches")
-  
-  expect_equal(new_medicare_levy(par_tbl)(income = 23e3,
-                                          switch = FALSE, 
-                                          Spouse_income = 750,
-                                          n_dependants = 0), 
-               medicare_levy(income = 23e3,
-                             fy.year = "2015-16",
-                             sapto.eligible = TRUE,
-                             Spouse_income = 750,
-                             n_dependants = 0))
-  
-  expect_error(new_medicare_levy(parameter_table = as.data.frame(par_tbl)))
-  expect_error(new_medicare_levy(parameter_table = hutils::drop_cols(par_tbl, "taper")),
-               regexp = "parameter_table must contain certain columns")
-  
-  
-})
-
 
 
 

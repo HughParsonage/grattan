@@ -9,7 +9,8 @@
   now `offsets = set_offsets` are preferred.  However, using `System` with
   `income_tax` is likely to be just as convenient.
 
-* `sapto_rcpp` has now been removed.
+* `sapto_rcpp`, `income_tax_sapto`, `new_income_tax`, `new_medicare_levy`, 
+  and `new_sapto` have now been removed. Use `System`.
 
 * The transfer functions have been removed as they became unreliable / difficult to maintain.
   See repository `hughparsonage/grattanTransfers` for possible future development
