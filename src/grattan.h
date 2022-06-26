@@ -21,14 +21,14 @@
 #define FORLOOP(content) do {                                  \
 _Pragma("omp parallel for num_threads(nThread)")                        \
   for (R_xlen_t i = 0; i < N; ++i) {                                    \
-    (content);                                                          \
+    content;                                                          \
   }                                                            \
 } while (0);                                                   \
 
 #else
 #define FORLOOP(content) do {                                       \
 for (R_xlen_t i = 0; i < N; ++i) {                             \
-  (content);                                                      \
+  content;                                                      \
 }                                                              \
 } while (0);
 #endif
