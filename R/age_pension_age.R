@@ -8,7 +8,7 @@
 #' age_pension_age()  # Current age of eligiblity
 #' age_pension_age("1995-12-31")
 #' age_pension_age("2013-14")
-#' @source \url{https://guides.dss.gov.au/guide-social-security-law/3/4/1/10}
+#' @source \url{https://guides.dss.gov.au/social-security-guide/3/4/1/10}
 #' @export
 
 age_pension_age <- function(when = Sys.Date(),

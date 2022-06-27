@@ -4,7 +4,7 @@
 \alias{age_pension_age}
 \title{Age of eligibility for the Age Pension}
 \source{
-\url{https://guides.dss.gov.au/guide-social-security-law/3/4/1/10}
+\url{https://guides.dss.gov.au/social-security-guide/3/4/1/10}
 }
 \usage{
 age_pension_age(when = Sys.Date(), sex = "male")

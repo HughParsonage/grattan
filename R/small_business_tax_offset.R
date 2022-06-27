@@ -2,8 +2,8 @@
 #' @param taxable_income Individual's assessable income.
 #' @param basic_income_tax_liability Tax liability (in dollars) according to the method in the box in s 4.10(3) of the \emph{Income Tax Assessment Act 1997} (Cth). In general, \code{basic_income_tax_liability} is the ordinary tax minus offsets. In particular, it does not include levies (such as the Medicare levy or the Temporary Budget Repair Levy). 
 #' \if{latex}{\deqn{\mathrm{Income\;Tax} = \mathrm{Taxable\;income\times\mathrm{Rate}-\mathrm{Tax\;offsets}}}}
-#' For example, in 2015-16, an individual with an assessable income of \$100,000 had a basic tax liability of 
-#' approximately \$25,000.
+#' For example, in 2015-16, an individual with an assessable income of 100,000 had a basic tax liability of 
+#' approximately 25,000.
 #' 
 #' @param .dots.ATO A \code{data.table} of tax returns.
 #' If provided, it must contain the variables
@@ -18,7 +18,7 @@
 #' 
 #' @param aggregated_turnover A numeric vector the same length as \code{taxable_income}.
 #' Only used to determine whether or not the offset is applicable; that is, the offset only
-#' applies if aggregated turnover is less than \$2M.
+#' applies if aggregated turnover is less than 2 million.
 #' 
 #' Aggregated turnover of a taxpayer is the sum of the following:
 #' \itemize{
