@@ -9,7 +9,7 @@
 
 /* .Call calls */
 extern SEXP C_lito(SEXP, SEXP, SEXP);
-extern SEXP C_MAX_N_OFFSETN();
+extern SEXP C_MAX_N_OFFSETN(void);
 extern SEXP C_ml_lower_thresh(SEXP, SEXP, SEXP);
 extern SEXP C_ml_rate(SEXP);
 extern SEXP C_ml_taper(SEXP);
