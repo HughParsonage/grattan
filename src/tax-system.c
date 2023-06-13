@@ -1,9 +1,6 @@
 #include "grattan.h"
 
 System yr2System(int yr) {
-  if (yr > 2022) {
-    return System2022;
-  }
   switch(yr) {
   case 1984:
     return System1984;
@@ -83,8 +80,10 @@ System yr2System(int yr) {
     return System2021;
   case 2022:
     return System2022;
+  case 2023:
+    return System2023;
   }
-  return System2022; // # nocov
+  return System2023; // # nocov
 }
 
 unsigned int nb_by_year(int yr) {
