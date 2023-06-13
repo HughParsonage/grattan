@@ -1,24 +1,24 @@
-#ifndef grattan_2022_H
-#define grattan_2022_H
+#ifndef grattan_2023_H
+#define grattan_2023_H
 #include "grattan.h"
 
-System System2022 = {
-  .yr = 2022,
+System System2023 = {
+  .yr = 2023,
   .nb = 5,
   .BRACKETS = {0, 18200, 45000, 120000, 180000, INT_MAX, INT_MAX, INT_MAX},
   .RATES = {0, 0.19, 0.325, 0.37, 0.45, 0.45, 0.45, 0.45},
   .M = {
-    .lwr_single = 23365,
-    .upr_single = 29206,
-    .lwr_family = 39402,
-    .upr_family = 49252,
+    .lwr_single = 24276,
+    .upr_single = 30345,
+    .lwr_family = 40939,
+    .upr_family = 51174,
     .has_sapto_thr = true,
     .sapto_age = 66,
-    .lwr_single_sapto = 36925,
-    .upr_single_sapto = 46156,
-    .lwr_family_sapto = 51401,
-    .upr_family_sapto = 64251,
-    .lwr_thr_up_per_child = 3619,
+    .lwr_single_sapto = 38365,
+    .upr_single_sapto = 47956,
+    .lwr_family_sapto = 53406,
+    .upr_family_sapto = 66757,
+    .lwr_thr_up_per_child = 3760,
     .taper = 0.1,
     .rate = 0.02
   },
@@ -41,7 +41,7 @@ System System2022 = {
     .lito_1st_thresh = 37000,
     .lito_1st_taper = 0.015
   },
-  .n_offsetn = 2,
+  .n_offsetn = 1,
   .Offsets = {
     {
       // LITO
@@ -49,14 +49,6 @@ System System2022 = {
       .Thresholds = {37500, 45000},
       .Tapers = {0.05, 0.015},
       .nb = 2,
-      .refundable = false
-    },
-    {
-      // LMITO
-      .offset_1st = 675,
-      .Thresholds = {37000, 48000, 90000},
-      .Tapers = {-0.075, 0, 0.03},
-      .nb = 3,
       .refundable = false
     }
   },
