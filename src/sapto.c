@@ -133,26 +133,26 @@ int lwr_threshold(int mxo, int ord_thresh1, double ord_rate1, int max_lito) {
   return ceil(o); 
 }
 
-static bool valid_sapto_rel(int mxo, int lwr, int upr,
-                            int ord_thresh1, double ord_rate1,
-                            int max_lito, double taper) {
-  int expected_lwr = lwr_threshold(mxo, ord_thresh1, ord_rate1, max_lito);
-  if (expected_lwr != lwr) {
-    return false;
-  }
-  if (taper == 0.125) {
-    int expected_upr = lwr + (mxo << 3);
-    if (expected_upr != upr) {
-      return false;
-    }
-  } else {
-    int expected_upr = ceil(lwr + ((double)mxo) / taper);
-    if (expected_upr != upr) {
-      return false;
-    }
-  }
-  return true;
-}
+// static bool valid_sapto_rel(int mxo, int lwr, int upr,
+//                             int ord_thresh1, double ord_rate1,
+//                             int max_lito, double taper) {
+//   int expected_lwr = lwr_threshold(mxo, ord_thresh1, ord_rate1, max_lito);
+//   if (expected_lwr != lwr) {
+//     return false;
+//   }
+//   if (taper == 0.125) {
+//     int expected_upr = lwr + (mxo << 3);
+//     if (expected_upr != upr) {
+//       return false;
+//     }
+//   } else {
+//     int expected_upr = ceil(lwr + ((double)mxo) / taper);
+//     if (expected_upr != upr) {
+//       return false;
+//     }
+//   }
+//   return true;
+// }
 
 void validate_sapto(Sapto * S, int fix) {
   int year = S->year;
@@ -177,8 +177,8 @@ void validate_sapto(Sapto * S, int fix) {
     }
   }
   
-  int mxo_single = S->mxo_single;
-  int mxo_couple = S->mxo_couple;
+  // int mxo_single = S->mxo_single;
+  // int mxo_couple = S->mxo_couple;
   
   int lwr_single = S->lwr_single;
   int lwr_couple = S->lwr_couple;
@@ -226,6 +226,10 @@ void validate_sapto(Sapto * S, int fix) {
   double second_tax_rate = S->second_tax_rate;
   int tax_free_thresh = S->tax_free_thresh;
   int tax_2nd_thresh = S->tax_2nd_thresh;
+  if (tax_free_thresh > tax_2nd_thresh) {
+    error("(validate_sapto)tax_free_thresh > tax_2nd_thresh");
+  }
+  
   double lito_max_offset = S->lito_max_offset;
   double lito_1st_thresh = S->lito_1st_thresh;
   double lito_1st_taper = S->lito_1st_taper;
@@ -237,6 +241,16 @@ void validate_sapto(Sapto * S, int fix) {
   if (!bw01(first_tax_rate) || first_tax_rate > second_tax_rate) {
     error("(validate_sapto)Sapto.first_tax_rate must be between 0 and S.second_tax_rate");
   }
+  if (ISNAN(lito_max_offset)) {
+    error("(validate_sapto)Sapto.lito_max_offset is NaN.");
+  }
+  if (ISNAN(lito_1st_thresh)) {
+    error("(validate_sapto)Sapto.lito_1st_thresh is NaN.");
+  }
+  if (!bw01(lito_1st_taper)) {
+    error("(validate_sapto)Sapto.lito_1st_taper must be between 0 and 1.");
+  }
+  
   
   
   
