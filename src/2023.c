@@ -24,7 +24,7 @@ System System2023 = {
   },
   .has_sapto = true,
   .S = {
-    .year = 2022,
+    .year = 2023,
     .pension_age = 66.5,
     .mxo_single = 2230,
     .mxo_couple = 1602,
