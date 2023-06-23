@@ -1,0 +1,69 @@
+
+tax_dir <- function(...) {
+  file.path(Sys.getenv("R_TAXSTATS_RDA_DIR"), ...)
+}
+
+sf_env <- new.env()
+
+GET <- function(x, value) {
+  if (exists(x, envir = sf_env, inherits = FALSE)) {
+    return(get(x, envir = sf_env))
+  }
+  assign(x, value, envir = sf_env)
+  value
+}
+
+CLEAR_ENV <- function() {
+  rm(list = ls(envir = sf_env), envir = sf_env)
+}
+
+skip_without_sample_files <- function(file = NULL) {
+  if (requireNamespace("testthat", quietly = TRUE)) {
+    if (dir.exists(tax_dir())) {
+      if (is.character(file) && file.access(tax_dir(file), mode = 4L)) {
+        testthat::skip("No file access")
+      }
+    } else {
+      testthat::skip("no sample file")
+    }
+  }
+}
+
+.load_all_sample_files <- function() {
+  skip_without_sample_files()
+  files.rda <- dir(tax_dir(), pattern = "\\.rda$", full.names = TRUE)
+  for (f in files.rda) {
+    load(f, envir = sf_env)
+  }
+}
+
+.sample_file_1516 <- function() {
+  GET("sample_file_1516", {
+    skip_if_not(file.exists("~/Data/ato/2015-16/Sample_file_1516/2016_sample_file.csv"))
+    fread(file = "~/Data/ato/2015-16/Sample_file_1516/2016_sample_file.csv")
+  })
+}
+.sample_file_1617 <- function() {
+  GET("sample_file_1617", {
+    skip_if_not(file.exists("~/Data/ato/2016-17/Sample_file_1617/2017_sample_file.csv"))
+    fread(file = "~/Data/ato/2016-17/Sample_file_1617/2017_sample_file.csv")
+  })
+}
+
+.sample_file_1314 <- function() {
+  GET("sample_file_1314", {
+    skip_without_sample_files("sample_file_1314.rda")
+    load(tax_dir("sample_file_1314.rda"), envir = sf_env)
+    GET("sample_file_1314")
+  })
+}
+
+.sample_file_ <- function(x) {
+  z <- paste0("sample_file_", x)
+  GET(z, {
+    skip_without_sample_files(paste0(z, ".rda"))
+    load(tax_dir(paste0(z, ".rda")), envir = sf_env)
+    GET(z)
+  })
+}
+

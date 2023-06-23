@@ -36,7 +36,7 @@ Imports:
     magrittr (>= 1.5),
     utils,
     zoo (>= 1.5-5)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.0
 Suggests:
     curl,
     fst (>= 0.8.4),
