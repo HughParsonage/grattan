@@ -45,7 +45,7 @@ skip_without_sample_files <- function(file = NULL) {
     }
     dt
   }
-  
+  Year <- NULL
   rbindlist(lapply(ls(pattern = "sample_file_[0-9]{4}", envir = sf_env), function(obj) {
     out <- GET(obj)
     do_setnames(out, "Birth_year", "age_range")
@@ -57,14 +57,18 @@ skip_without_sample_files <- function(file = NULL) {
 
 .sample_file_1516 <- function() {
   GET("sample_file_1516", {
-    skip_if_not(file.exists("~/Data/ato/2015-16/Sample_file_1516/2016_sample_file.csv"))
+    if (requireNamespace("testthat", quietly = TRUE)) {
+      skip_if_not(file.exists("~/Data/ato/2015-16/Sample_file_1516/2016_sample_file.csv"))
+    }
     fread(file = "~/Data/ato/2015-16/Sample_file_1516/2016_sample_file.csv")
   })
 }
 .sample_file_1617 <- function() {
   GET("sample_file_1617", {
-    skip_if_not(file.exists("~/Data/ato/2016-17/Sample_file_1617/2017_sample_file.csv"))
-    fread(file = "~/Data/ato/2016-17/Sample_file_1617/2017_sample_file.csv")
+    if (requireNamespace("testthat", quietly = TRUE)) {
+      testthat::skip_if_not(file.exists("~/Data/ato/2016-17/Sample_file_1617/2017_sample_file.csv"))
+      fread(file = "~/Data/ato/2016-17/Sample_file_1617/2017_sample_file.csv")
+    }
   })
 }
 
