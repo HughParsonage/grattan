@@ -37,6 +37,14 @@ skip_without_sample_files <- function(file = NULL) {
   }
 }
 
+.sfa <- function() {
+  .load_all_sample_files()
+  rbindlist(lapply(ls(pattern = "sample_file_[0-9]{4}", envir = sf_env), function(obj) {
+    GET(obj)
+  }), use.names = TRUE, fill = TRUE, idcol = "Year") %>%
+    .[, "fy.year" := yr2fy(Year + 2003L)]
+}
+
 .sample_file_1516 <- function() {
   GET("sample_file_1516", {
     skip_if_not(file.exists("~/Data/ato/2015-16/Sample_file_1516/2016_sample_file.csv"))

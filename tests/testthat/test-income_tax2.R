@@ -8,14 +8,13 @@ test_that("income_tax2 works", {
 
 test_that("dots ATO", {
   skip_on_cran()
-  skip_if_not_installed("taxstats")
   skip_if_not_installed("data.table")
   library(data.table)
   
   s1314 <- 
     # ignore sbto for now
     # Ind 202215 seems strange
-    copy(taxstats::sample_file_1314)[Total_NPP_BI_amt == 0][Ind != 202215L]
+    .sample_file_1314()[Total_NPP_BI_amt == 0][Ind != 202215L]
   
   for (fy_ in yr2fy(2014:2022)) {
     s1314[, tax0 := 0]
