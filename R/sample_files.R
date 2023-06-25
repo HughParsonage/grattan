@@ -39,8 +39,18 @@ skip_without_sample_files <- function(file = NULL) {
 
 .sfa <- function() {
   .load_all_sample_files()
+  do_setnames <- function(dt, old, new) {
+    if (old %in% names(dt)) {
+      setnames(dt, old, new)
+    }
+    dt
+  }
+  
   rbindlist(lapply(ls(pattern = "sample_file_[0-9]{4}", envir = sf_env), function(obj) {
-    GET(obj)
+    out <- GET(obj)
+    do_setnames(out, "Birth_year", "age_range")
+    do_setnames(out, "Marital_status", "Partner_status")
+    do_setnames(out, "HECS_accum_ind", "Help_debt")
   }), use.names = TRUE, fill = TRUE, idcol = "Year") %>%
     .[, "fy.year" := yr2fy(Year + 2003L)]
 }

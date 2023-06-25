@@ -1,19 +1,18 @@
 context("sample files all")
 
 test_that("sfa", {
-  skip_if_not_installed("taxstats", minimum_version = "0.1.0.1415")
   library(data.table)
-  library(taxstats)
+  
   library(magrittr)
   expect_true(TRUE)
-  sfa <- get_sample_files_all2()
+  sfa <- .sfa()[, "fy_year" := .SD[["fy.year"]]][, WEIGHT := fifelse(fy_year <= "2011-12", 100L, 50L)]
   
   sfa200304 <- 
     sfa[fy_year == "2003-04"] %>%
     .[, tax := income_tax(Taxable_Income, "2003-04", .dots.ATO = .SD)]
 
   
-  s0304 <- copy(sample_file_0304)
+  s0304 <- copy(.sample_file_("0304"))
   s0304[, tax := income_tax(Taxable_Income, "2003-04", .dots.ATO = .SD)]
   
   
