@@ -55,6 +55,15 @@ skip_without_sample_files <- function(file = NULL) {
     .[, "fy.year" := yr2fy(Year + 2003L)]
 }
 
+.sample_file_1415 <- function() {
+  GET("sample_file_1415", {
+    if (requireNamespace("testthat", quietly = TRUE)) {
+      skip_if_not(file.exists("~/SampleFile1415/data-raw/sample_file_1415.tsv"))
+    }
+    fread(file = "~/SampleFile1415/data-raw/sample_file_1415.tsv")
+  })
+}
+
 .sample_file_1516 <- function() {
   GET("sample_file_1516", {
     if (requireNamespace("testthat", quietly = TRUE)) {
