@@ -1,7 +1,6 @@
 context("Tax receipts")
 
 test_that("income_tax on individual sample file reflect historical collections", {
-  skip_if_not_installed("taxstats") 
   # testthat::skip_on_travis()
   
   # True value of personal income tax receipts was $159.021 billion
@@ -14,7 +13,7 @@ test_that("income_tax on individual sample file reflect historical collections",
   
   # basic taxable income to tax
   test1 <- 
-    sample_file_1213 %>%
+    .sample_file_("1213") %>%
     copy %>%
     .[, tax0 := income_tax(Taxable_Income, "2012-13")] %>%
     .[, tax1 := income_tax(Taxable_Income, "2012-13", age = 42)] 
@@ -45,9 +44,9 @@ test_that("income_tax on individual sample file reflect historical collections",
     setnames(old = names(.), new = c("age_range", "age")) %>%
     .[, age := sub("\\sto.*$", "", age)] %>%
     setkey(age_range)
-  setkey(sample_file_1213, age_range)
+  setkey(.sample_file_("1213"), age_range)
   tax.collection <- 
-    sample_file_1213[age_decoder] %$%
+    .sample_file_("1213")[age_decoder] %$%
     {
       sum(income_tax(income = Taxable_Income, fy.year = "2012-13", age = as.integer(age))) * 50
     }

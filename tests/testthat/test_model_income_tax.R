@@ -22,7 +22,7 @@ test_that("Error handling", {
   
   
 
-  original <- income_tax(sample_file_1314$Taxable_Income, "2013-14", .dots.ATO = copy(sample_file_1314))
+  original <- income_tax(sample_file_1314$Taxable_Income, "2013-14", .dots.ATO = copy(.sample_file_1314()))
   
   new_tax <- model_income_tax(sample_file_1314_copy,
                               baseline_fy = "2013-14",
@@ -246,9 +246,9 @@ test_that("Medicare options", {
   skip_on_circleci(2)
   
   sample_file_1314_copy <- copy(.sample_file_1314())
-  original <- income_tax(sample_file_1314$Taxable_Income,
+  original <- income_tax(sample_file_1314_copy$Taxable_Income,
                          fy.year = "2013-14",
-                         .dots.ATO = copy(sample_file_1314))
+                         .dots.ATO = copy(sample_file_1314_copy))
   
   expect_warning(model_income_tax(sample_file_1314_copy,
                                   baseline_fy = "2013-14",
@@ -258,7 +258,7 @@ test_that("Medicare options", {
                  regexp = "medicare_levy_upper_threshold = 25677")
   
   sample_file_1314_if_2pc_ML <-
-    sample_file_1314 %>%
+    sample_file_1314_copy %>%
     copy %>%
     .[, old_tax := income_tax(Taxable_Income, "2013-14", .dots.ATO = .)] %>%
     .[, new_tax := model_income_tax(sample_file_1314_copy,

@@ -17,6 +17,12 @@ CLEAR_ENV <- function() {
   rm(list = ls(envir = sf_env), envir = sf_env)
 }
 
+skip_if_not <- function(...) {
+  if (requireNamespace("testthat", quietly = TRUE)) {
+    testthat::skip_if_not(...)
+  }
+}
+
 skip_without_sample_files <- function(file = NULL) {
   if (requireNamespace("testthat", quietly = TRUE)) {
     if (dir.exists(tax_dir())) {
