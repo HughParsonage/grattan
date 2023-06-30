@@ -1,12 +1,11 @@
 context("project aus pop")
 
 test_that("project using australian population", {
-  skip_if_not_installed("taxstats")
   skip_if_not_installed("data.table")
   skip_if_not_installed("magrittr")
   library(magrittr)
   library(data.table)
-  library(taxstats)
+
   
  
   # sample_file_1516[, .(WEIGHT = .N * 100), keyby = "age_range"]
@@ -15,8 +14,8 @@ test_that("project using australian population", {
                WEIGHT = c(802750, 606600, 918950, 1150250, 1266400, 1313150, 
                           1348750, 1343100, 1509050, 1498700, 1266700, 457550))
   
-  s1516_orig <- project(sample_file_1314, h = 2L)
-  s1516_new <- project(sample_file_1314, h = 2L, use_age_pop_forecast = TRUE)
+  s1516_orig <- project(.sample_file_1314(), h = 2L)
+  s1516_new <- project(.sample_file_1314(), h = 2L, use_age_pop_forecast = TRUE)
   
   
   err_orig <- 

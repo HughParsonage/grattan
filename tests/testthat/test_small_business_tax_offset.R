@@ -65,10 +65,10 @@ test_that("Error handling", {
 
 test_that("Warnings with dotsATO", {
   skip_on_cran()
-  skip_if_not_installed("taxstats", minimum_version = "0.0.5")
-  library(taxstats)
+
+
   library(data.table)
-  s1314 <- as.data.table(sample_file_1314)
+  s1314 <- as.data.table(.sample_file_1314())
   expect_warning(s1314[, small_business_tax_offset(Taxable_Income,
                                                    0.3 * Taxable_Income, 
                                                    .dots.ATO = .SD,
@@ -94,10 +94,8 @@ test_that("Warnings with dotsATO", {
 
 test_that("Results with .dots.ATO", {
   skip_on_cran()
-  skip_if_not_installed("taxstats", minimum_version = "0.0.5")
-  library(taxstats)
   library(data.table)
-  s1314 <- as.data.table(sample_file_1314)
+  s1314 <- as.data.table(.sample_file_1314())
   sbto_s1314 <- 
     s1314 %>%
     .[order(Taxable_Income)] %>%

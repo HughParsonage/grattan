@@ -98,3 +98,25 @@ skip_without_sample_files <- function(file = NULL) {
   })
 }
 
+.funds_table1_201314 <- function() {
+  z <- "funds_table1_201314"
+  GET(z, {
+    if (requireNamespace("testthat", quietly = TRUE)) {
+      skip_if_not(file.exists("~/taxstats/data/funds_table1_201314.rda"))
+      load("~/taxstats/data/funds_table1_201314.rda", envir = sf_env)
+      GET(z)
+    }
+  })
+}
+
+.funds_table2_smsf_201314 <- function() {
+  z <- "funds_table2_smsf_201314"
+  GET(z, {
+    if (requireNamespace("testthat", quietly = TRUE)) {
+      skip_if_not(file.exists("~/taxstats/data/funds_table2_smsf_201314.rda"))
+      load("~/taxstats/data/funds_table2_smsf_201314.rda", envir = sf_env)
+      GET(z)
+    }
+  })
+}
+

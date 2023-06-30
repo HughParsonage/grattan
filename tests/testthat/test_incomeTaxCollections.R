@@ -15,7 +15,6 @@ test_that("income_tax collections in 2003-04 match final budget outcome by 1%", 
 })
 
 test_that("income_tax collections in 2006-07 match final budget outcome by 1%", {
-  skip_if_not_installed("taxstats", minimum_version = package_version("0.0.5")) 
   skip_on_cran()
   skip_on_appveyor()
   skip_on_circleci(2)

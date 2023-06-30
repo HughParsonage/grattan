@@ -112,11 +112,11 @@ test_that("La plus ca meme la plus ca meme: SBTO doesn't interfere with SBTO", {
 })
 
 test_that("Increase in a rate results in more tax", {
-  skip_if_not_installed("taxstats"); skip_on_cran()
+  skip_on_cran()
   skip_on_circleci(2)
-  library(taxstats)
-  sample_file_1314_copy <- copy(sample_file_1314)
-  original <- income_tax(sample_file_1314$Taxable_Income, "2013-14", .dots.ATO = copy(sample_file_1314))
+  
+  sample_file_1314_copy <- copy(.sample_file_1314())
+  original <- income_tax(.sample_file_1314()$Taxable_Income, "2013-14", .dots.ATO = copy(.sample_file_1314()))
   original <- round(original)
   
   new_tax <-
@@ -359,7 +359,7 @@ test_that("Medicare families", {
 test_that("SAPTO modelled", {
   skip_on_cran()
   skip_on_circleci(2)
-  sample_file_1415_copy <- copy(.sample_file_("1415_synth"))
+  sample_file_1415_copy <- copy(.sample_file_1415())
   
   expect_warning({
     model_income_tax(sample_file_1415_copy,
@@ -414,7 +414,7 @@ test_that("SAPTO modelled", {
   
   
   sapto_only_psnn <-
-    copy(sample_file_1415_synth) %>%
+    copy(.sample_file_1415()) %>%
     project_to(to_fy = "2016-17") %>%
     .[, saptoEligible := and(age_range <= 1L, Aust_govt_pnsn_allw_amt > 1)] %>%
     # The partner contribution makes the extra revenue much higher
@@ -435,7 +435,6 @@ test_that("SAPTO modelled", {
 test_that("LITO", {
   skip_on_cran()
   skip_on_circleci(2)
-  library(taxstats)
   sample_file_1213_copy <- copy(.sample_file_("1213"))
   
   old_taxes <-
@@ -782,9 +781,7 @@ test_that("SAPTO parameters should not go out of range (causing NAs)", {
 })
 
 test_that("Issue #176", {
-  skip_if_not_installed("taxstats")
   skip_on_circleci(3)
-  library(taxstats)
   # Just no error
   expect_silent(model_income_tax(copy(.sample_file_1314()), 
                                  "2016-17", 
@@ -795,9 +792,7 @@ test_that("Issue #176", {
 
 test_that("SAPTO modelling done for Age of entitlement report", {
   skip_on_cran()
-  skip_if_not_installed("taxstats")
   skip_on_circleci(2)
-  library(taxstats)
   library(data.table)
   library(hutils)
   library(hutilscpp)

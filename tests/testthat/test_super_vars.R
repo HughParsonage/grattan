@@ -6,28 +6,22 @@ test_that("Error handling", {
 })
 
 test_that("Div293 tax is bounded by cap @ 25k", {
-  skip_if_not_installed("taxstats") 
-  library(taxstats)
   cap1 <- 25e3
-  new_sample_file <- apply_super_caps_and_div293(sample_file_1314,
+  new_sample_file <- apply_super_caps_and_div293(.sample_file_1314(),
                                                  cap = cap1,
                                                  age_based_cap = FALSE)
   expect_true(all(new_sample_file$div293_tax <= cap1 * 0.15 + .Machine$double.eps ^ 0.5))
 })
 test_that("Div293 tax is bounded by cap @ 20k", {
-  skip_if_not_installed("taxstats") 
-  library(taxstats)
   cap1 <- 20e3
   new_sample_file <-
-    apply_super_caps_and_div293(sample_file_1314, cap = cap1, age_based_cap = FALSE)
+    apply_super_caps_and_div293(.sample_file_1314(), cap = cap1, age_based_cap = FALSE)
   expect_true(all(new_sample_file$div293_tax <= cap1 * 0.15 + .Machine$double.eps ^ 0.5))
 })
 test_that("Div293 tax is bounded by cap @ 30k", {
-  skip_if_not_installed("taxstats") 
-  library(taxstats)
   cap1 <- 30e3
   new_sample_file <-
-    apply_super_caps_and_div293(sample_file_1314,
+    apply_super_caps_and_div293(.sample_file_1314(),
                                 cap = cap1,
                                 age_based_cap = FALSE)
   expect_true(all(new_sample_file$div293_tax <= cap1 * 0.15 + .Machine$double.eps ^ 0.5),
@@ -35,8 +29,7 @@ test_that("Div293 tax is bounded by cap @ 30k", {
 })
 
 test_that("Div293 tax is bounded by an arbitrary cap", {
-  skip_if_not_installed("taxstats") 
-  library(taxstats)
+  skip_on_cran()
   caps <- sort(abs(rcauchy(2, location = 30e3, scale = 20e3)))
   cap1 <- caps[1]
   cap2 <- caps[2]
@@ -45,7 +38,7 @@ test_that("Div293 tax is bounded by an arbitrary cap", {
   div293_threshold <- abs(rcauchy(1, 300e3, 100e3))
   cap2_age <- sample(25:65, size = 1)
   
-  new_sample_file <- apply_super_caps_and_div293(sample_file_1314, 
+  new_sample_file <- apply_super_caps_and_div293(.sample_file_1314(), 
                                                  cap = cap1,
                                                  cap2 = cap2,
                                                  age_based_cap = age_based_cap, 
@@ -56,8 +49,7 @@ test_that("Div293 tax is bounded by an arbitrary cap", {
 
 # Adjusted Taxable Income (for surcharge purposes < 300e3)
 test_that("Surchargeable income and low tax contributions less than 300,000 implies no Div293 tax", {
-  skip_if_not_installed("taxstats")
-  library(taxstats)
+  skip_on_cran()
   caps <- sort(abs(rcauchy(2, location = 30e3, scale = 20e3)))
   cap1 <- caps[1]
   cap2 <- caps[2]
@@ -66,7 +58,7 @@ test_that("Surchargeable income and low tax contributions less than 300,000 impl
   div293_threshold <- abs(rcauchy(1, 300e3, 100e3))
   cap2_age <- sample(25:65, size = 1)
   
-  new_sample_file <- apply_super_caps_and_div293(sample_file_1314, 
+  new_sample_file <- apply_super_caps_and_div293(.sample_file_1314(), 
                                                  cap = cap1, cap2 = cap2, age_based_cap = age_based_cap, 
                                                  div293_threshold = div293_threshold, cap2_age = cap2_age)
   
@@ -85,10 +77,10 @@ test_that("Surchargeable income and low tax contributions less than 300,000 impl
 })
 
 test_that("Counts for Div 293 at 250e3 not at odds with PBO", {
-  skip_if_not_installed("taxstats") 
+  skip_on_cran()
   skip_on_appveyor()
   sample_file_1718 <- 
-    sample_file_1314 %>%
+    .sample_file_1314() %>%
     project_to(to_fy = "2017-18", fy.year.of.sample.file = "2013-14")
   
   n_adversely_affected_201718 <- 
@@ -133,18 +125,16 @@ test_that("Counts for Div 293 at 250e3 not at odds with PBO", {
 context("Reweighting and imputation successfully reconcile aggregates")
 
 test_that("Imputed, reweighted sample file agrees with aggregates by no less than 1%", {
-  skip_if_not_installed("taxstats") 
-  library(taxstats)
   library(magrittr)
   
   funds <- 
-    funds_table1_201314 %>%
+    .funds_table1_201314() %>%
     .[Selected_items == "Assessable contributions"] %>%
     .[, .(fy_year, Assessable_contributions_funds = Sum)] %>%
     setkey(fy_year)
   
   smsfs <- 
-    funds_table2_smsf_201314 %>%
+    .funds_table2_smsf_201314() %>%
     .[Selected_items == "Assessable contributions"] %>%
     .[, .(fy_year, Assessable_contributions_smsfs = Sum)] %>%
     setkey(fy_year)
@@ -153,7 +143,7 @@ test_that("Imputed, reweighted sample file agrees with aggregates by no less tha
     smsfs[funds] %>%
     .[, total_contributions := Assessable_contributions_smsfs + Assessable_contributions_funds]
     
-  s1314 <- as.data.table(sample_file_1314)
+  s1314 <- as.data.table(.sample_file_1314())
   
   # Now test imputation using defaults.
   imputed_concessional_contributions <- 
@@ -177,18 +167,14 @@ test_that("Imputed, reweighted sample file agrees with aggregates by no less tha
 })
 
 test_that("Error handling", {
-  skip_if_not_installed("taxstats") 
-  library(taxstats)
   sample_file <- 
-    sample_file_1314 %>%
-    head(.) %>% 
+    head(.sample_file_1314()) %>%
     as.data.frame(.)
   expect_error(apply_super_caps_and_div293(sample_file), 
                regexp = "data.table")
   
   sample_file_dt <-
-    sample_file_1314 %>%
-    head %>% 
+    head(.sample_file_1314()) %>%
     .[, concessional_cap := 25e3]
   
   expect_warning(apply_super_caps_and_div293(sample_file_dt))
@@ -197,14 +183,14 @@ test_that("Error handling", {
                                              colname_new_Taxable_Income = "Taxable_Income"), 
                  regexp = "Dropping Taxable.Income")
   
-  expect_error(apply_super_caps_and_div293(sample_file_1213),
+  expect_error(apply_super_caps_and_div293(.sample_file_("1213")),
                regexp = "does not have the variables needed")
   
   expect_warning(apply_super_caps_and_div293(sample_file_dt,
                                              colname_div293_tax = "Sw_amt"))
   
   sample_file_old <-
-    sample_file_1314 %>%
+    .sample_file_1314() %>%
     copy %>%
     hutils::drop_col("Rptbl_Empr_spr_cont_amt")
   
@@ -220,31 +206,29 @@ test_that("Error handling", {
 
 
 test_that("Corner cases", {
-  skip_if_not_installed("taxstats") 
-  library(taxstats)
   library(magrittr)
   n_low_age <- 
-    sample_file_1314 %>%
+    .sample_file_1314() %>%
     apply_super_caps_and_div293(cap2_age = 19) %$%
     sum(concessional_cap == max(concessional_cap))
     
   n_high_age <- 
-    sample_file_1314 %>%
+    .sample_file_1314() %>%
     apply_super_caps_and_div293(cap2_age = 68) %$%
     sum(concessional_cap == max(concessional_cap))
   
   expect_gte(n_low_age, n_high_age)
   
-  expect_false("div293_income" %in% names(apply_super_caps_and_div293(sample_file_1314,
+  expect_false("div293_income" %in% names(apply_super_caps_and_div293(.sample_file_1314(),
                                                                       drop_helpers = TRUE)))
   
   low_tax_contributions_no_Other_contr <- 
-    sample_file_1314 %>%
+    .sample_file_1314() %>%
     apply_super_caps_and_div293 %$%
     sum(low_tax_contributions_div293)
   
   low_tax_contributions_with_Other_contr <- 
-    sample_file_1314 %>%
+    .sample_file_1314() %>%
     apply_super_caps_and_div293(use_other_contr = TRUE) %$%
     sum(low_tax_contributions_div293)
   
@@ -253,18 +237,13 @@ test_that("Corner cases", {
 })
 
 test_that("Warning with no WEIGHT.", {
-  skip_if_not_installed("taxstats")
-  library(taxstats)
-  expect_warning(revenue_from_new_cap_and_div293(sample_file_1314, fy.year = "2013-14"))
+  expect_warning(revenue_from_new_cap_and_div293(.sample_file_1314(), fy.year = "2013-14"))
 })
 
 test_that("Marginals Rate", {
-  skip_if_not_installed("taxstats")
-  skip_if_not_installed("hutilscpp")
-  library(taxstats)
   library(data.table)
   library(hutilscpp)
-  s1314 <- copy(taxstats::sample_file_1314)[, WEIGHT := 50L]
+  s1314 <- copy(.sample_file_1314())[, WEIGHT := 50L]
   expect_error(model_new_caps_and_div293(.sample.file = s1314, fy.year = "2013-14", new_contr_tax = "mr/"),
                regexp = "not of the form mr -",
                fixed = TRUE)
