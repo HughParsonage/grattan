@@ -12,7 +12,7 @@
 #' from <- "2013-14"
 #' to <- "2016-17"
 #' differentially_uprate_wage(ws, from, to)
-#' differentially_uprate_wage(ws, from, to) / wage_inflator(ws, from, to)
+#' differentially_uprate_wage(ws, from, to) / (ws * wage_inflator(from, to))
 #' 
 #' # Use a wage series:
 #' if (requireNamespace("taxstats", quietly = TRUE)) {
@@ -56,7 +56,7 @@ differentially_uprate_wage <- function(wage = 1, from_fy, to_fy, ...){
     setnames(old = "min_salary", new = "wage") %>%
     setkeyv(cols = c("fy.year", "wage")) %>%
     .[input, roll = "nearest"] %>%
-    .[, `_out` := wage * (uprate_factor * (wage_inflator(from_fy = from_fy, to_fy = to_fy, ...) - 1) + 1)] %>%
+    .[, `_out` := wage * (uprate_factor * (wage_inflator(from = from_fy, to = to_fy, ...) - 1) + 1)] %>%
     setkeyv("_order") %>%
     .[["_out"]]
 }

@@ -220,21 +220,20 @@ project <- function(sample_file,
   to.fy <- yr2fy(fy2yr(current.fy) + h)
   
   if (is.null(wage.series)){
-    wage.inflator <- wage_inflator(1, from_fy = current.fy, to_fy = to.fy)
+    wage.inflator <- wage_inflator(from = current.fy, to = to.fy)
   } else {
-    wage.inflator <- wage_inflator(1, from_fy = current.fy, to_fy = to.fy, 
-                                   forecast.series = "custom", wage.series = wage.series)
+    wage.inflator <- wage_inflator(from = current.fy, to = to.fy)
   }
   
   if (is.null(lf.series)) {
-    lf.inflator <- lf_inflator_fy(from_fy = current.fy, to_fy = to.fy)
+    lf.inflator <- lf_inflator(from = current.fy, to = to.fy)
   } else {
-    lf.inflator <- lf_inflator_fy(from_fy = current.fy, to_fy = to.fy, 
-                                  forecast.series = "custom", 
-                                  lf.series = lf.series)
+    lf.inflator <- lf_inflator(from = current.fy, to = to.fy, 
+                               forecast.series = "custom", 
+                               lf.series = lf.series)
   }
   
-  cpi.inflator <- cpi_inflator(1, from_fy = current.fy, to_fy = to.fy)
+  cpi.inflator <- cpi_inflator(from = current.fy, to = to.fy)
   
   if (!is.logical(.recalculate.inflators)) {
     stop("`.recalculate.inflators` was type ", typeof(.recalculate.inflators), ", ",
@@ -250,7 +249,7 @@ project <- function(sample_file,
   }
   
   if (.recalculate.inflators) {
-    CG.inflator <- CG_inflator(1, from_fy = current.fy, to_fy = to.fy)
+    CG.inflator <- CG_inflator(1, from = current.fy, to = to.fy)
   } else {
     if (current.fy %notin% c("2012-13", "2013-14", 
                              "2014-15", "2015-16", "2016-17")) {
@@ -439,12 +438,12 @@ project <- function(sample_file,
              "differential" = {
                if (is.null(wage.series)) {
                  differentially_uprate_wage(v, 
-                                            from_fy = current.fy,
-                                            to_fy = to.fy)
+                                            from = current.fy,
+                                            to = to.fy)
                } else {
                  differentially_uprate_wage(v, 
-                                            from_fy = current.fy,
-                                            to_fy = to.fy,
+                                            from = current.fy,
+                                            to = to.fy,
                                             forecast.series = "custom",
                                             wage.series = wage.series)
                }

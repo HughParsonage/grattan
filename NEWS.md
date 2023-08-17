@@ -1,3 +1,8 @@
+## 2023.0
+
+* `_inflator` functions have been moved to grattanInflator, breaking (for example)
+  `cpi_inflator_general_date`  which are now `cpi_inflator`.
+
 ## 2.0.0.0
 
 ### Breaking changes
