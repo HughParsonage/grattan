@@ -26,7 +26,7 @@ License: GPL-2
 Imports:
     checkmate,
     data.table,
-    grattanInflators,
+    grattanInflators (>= 0.4.0),
     hutils (>= 1.3.0),
     hutilscpp (>= 0.9.0),
     ineq (>= 0.2-10),
