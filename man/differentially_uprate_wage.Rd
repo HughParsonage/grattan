@@ -4,14 +4,14 @@
 \alias{differentially_uprate_wage}
 \title{Differential uprating}
 \usage{
-differentially_uprate_wage(wage = 1, from_fy, to_fy, ...)
+differentially_uprate_wage(wage = 1, from, to, ...)
 }
 \arguments{
 \item{wage}{A numeric vector to be uprated.}
 
-\item{from_fy}{The financial year contemporaneous to wage, which must be a financial year of an available sample file -- in particular, not after 2016-17.}
+\item{from}{The financial year contemporaneous to wage, which must be a financial year of an available sample file -- in particular, not after 2016-17.}
 
-\item{to_fy}{The target of the uprating. Passed to \code{\link{wage_inflator}}.}
+\item{to}{The target of the uprating. Passed to \code{\link{wage_inflator}}.}
 
 \item{...}{Other arguments passed \code{\link{wage_inflator}}.}
 }
@@ -31,21 +31,6 @@ to <- "2016-17"
 differentially_uprate_wage(ws, from, to)
 differentially_uprate_wage(ws, from, to) / (ws * wage_inflator(from, to))
 
-# Use a wage series:
-if (requireNamespace("taxstats", quietly = TRUE)) {
-  library(data.table)
-  library(taxstats)
-  WageGrowth <- data.table(fy_year = c("2017-18", "2018-19"),
-                           r = c(0.0, 0.1))
-  Wage201314 <- sample_file_1314[["Sw_amt"]]
-  
-  data.table(Wage_201314 = Wage201314,
-             Wage_201819 = 
-               differentially_uprate_wage(Wage201314, 
-                                          from_fy = "2013-14",
-                                          to_fy = "2018-19",
-                                          wage.series = WageGrowth))
-}
 }
 \author{
 Hugh Parsonage and William Young

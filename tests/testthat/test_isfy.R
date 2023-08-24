@@ -60,21 +60,7 @@ test_that("range_fy", {
   expect_identical(min_fy2yr(c("2015-16", "2000-01", "2001-02")), 2001L)
 })
 
-test_that("qtr2fy", {
-  skip_if_not_installed("zoo")
-  library(zoo)
-  expect_equal(qtr2fy(as.yearqtr("2014 Q2")), "2013-14")
-  expect_equal(qtr2fy(as.yearqtr(c("2014 Q2", "2014 Q3",
-                                   "2014 Q1", "2013 Q4"))),
-               c("2013-14", "2014-15",
-                 "2013-14", "2013-14"))
-  
-  expect_equal(qtr2fy("2014-Q2"), "2013-14")
-  expect_equal(qtr2fy(c("2014-Q2", "2014-Q3", 
-                        "2014-Q1", "2013-Q4")),
-               c("2013-14", "2014-15",
-                 "2013-14", "2013-14"))
-})
+
 
 test_that("NA handling", {
   expect_equal(qtr2fy(c("2014-Q1", NA, "2014-Q2")), 

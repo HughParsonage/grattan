@@ -2,8 +2,8 @@
 #' @description Apply differential uprating to projections of the \code{Sw_amt} variable.
 #' @author Hugh Parsonage and William Young
 #' @param wage A numeric vector to be uprated.
-#' @param from_fy The financial year contemporaneous to wage, which must be a financial year of an available sample file -- in particular, not after 2016-17.
-#' @param to_fy The target of the uprating. Passed to \code{\link{wage_inflator}}.
+#' @param from The financial year contemporaneous to wage, which must be a financial year of an available sample file -- in particular, not after 2016-17.
+#' @param to The target of the uprating. Passed to \code{\link{wage_inflator}}.
 #' @param ... Other arguments passed \code{\link{wage_inflator}}.
 #' @return The vector \code{wage} differentially uprated to \code{to_fy}.
 #' @details See \code{vignette("differential-uprating")}.
@@ -17,7 +17,9 @@
 #' @export
 
 
-differentially_uprate_wage <- function(wage = 1, from_fy, to_fy, ...){
+differentially_uprate_wage <- function(wage = 1, from, to, ...){
+  from_fy <- from
+  to_fy <- to
   stopifnot(all(from_fy %in% c("2003-04", "2004-05", "2005-06", 
                                "2006-07", "2007-08", "2008-09", 
                                "2009-10", "2010-11", "2011-12", 

@@ -228,9 +228,12 @@ project <- function(sample_file,
   if (is.null(lf.series)) {
     lf.inflator <- lf_inflator(from = current.fy, to = to.fy)
   } else {
+    if (is.data.table(lf.series)) {
+      stop("lf.series should be a series as defined by lf_inflator.")
+    }
+    
     lf.inflator <- lf_inflator(from = current.fy, to = to.fy, 
-                               forecast.series = "custom", 
-                               lf.series = lf.series)
+                               series = lf.series)
   }
   
   cpi.inflator <- cpi_inflator(from = current.fy, to = to.fy)
@@ -249,7 +252,7 @@ project <- function(sample_file,
   }
   
   if (.recalculate.inflators) {
-    CG.inflator <- CG_inflator(1, from = current.fy, to = to.fy)
+    CG.inflator <- CG_inflator(1, from_fy = current.fy, to_fy = to.fy)
   } else {
     if (current.fy %notin% c("2012-13", "2013-14", 
                              "2014-15", "2015-16", "2016-17")) {
