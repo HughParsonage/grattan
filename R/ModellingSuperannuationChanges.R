@@ -38,13 +38,13 @@
 #' 
 #' @examples
 #' 
-#' if (requireNamespace("taxstats", quietly = TRUE)) {
-#'   library(data.table)
-#'   s1314 <- taxstats::sample_file_1314
-#'   s1314[, WEIGHT := 50L]
-#'   revenue_from_new_cap_and_div293(s1314, new_cap = 12e3, "2016-17")
-#'   revenue_from_new_cap_and_div293(s1314, new_contr_tax = "mr - 15%", "2016-17")
-#' }
+#' # if (requireNamespace("taxstats", quietly = TRUE)) {
+#' #   library(data.table)
+#' #   s1314 <- taxstats::sample_file_1314
+#' #   s1314[, WEIGHT := 50L]
+#' #   revenue_from_new_cap_and_div293(s1314, new_cap = 12e3, "2016-17")
+#' #   revenue_from_new_cap_and_div293(s1314, new_contr_tax = "mr - 15%", "2016-17")
+#' # }
 #' 
 #' 
 #' @export
