@@ -15,7 +15,7 @@ model_new_caps_and_div293(
   new_cap2_age = 49,
   new_ecc = FALSE,
   new_contr_tax = "15\%",
-  new_div293_threshold = 300000,
+  new_div293_threshold = 3e+05,
   use_other_contr = FALSE,
   scale_contr_match_ato = FALSE,
   .lambda = 0,
@@ -29,7 +29,7 @@ model_new_caps_and_div293(
   prv_age_based_cap = TRUE,
   prv_cap2_age = 49,
   prv_ecc = FALSE,
-  prv_div293_threshold = 300000
+  prv_div293_threshold = 3e+05
 )
 
 n_affected_from_new_cap_and_div293(..., adverse_only = TRUE)

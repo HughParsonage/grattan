@@ -13,11 +13,11 @@ cpi_inflator_general_date(from_nominal_price = 1, from_date, to_date, ...)
 
 \item{to_date}{(character, date-like) the date at which the real price is valued (where the nominal price equals the real price). Same forms as for \code{from_date}}
 
-\item{...}{other arguments passed to \code{\link{cpi_inflator_quarters}}}
+\item{...}{other arguments passed to \code{\link{cpi_inflator}}}
 }
 \value{
 A vector of real prices in \code{to_date} dollars.
 }
 \description{
-CPI for general dates
+Deprecated in favour of \code{grattanInflators::cpi_inflator}
 }

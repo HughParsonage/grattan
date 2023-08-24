@@ -29,7 +29,7 @@ ws <- c(20e3, 50e3, 100e3)
 from <- "2013-14"
 to <- "2016-17"
 differentially_uprate_wage(ws, from, to)
-differentially_uprate_wage(ws, from, to) / wage_inflator(ws, from, to)
+differentially_uprate_wage(ws, from, to) / (ws * wage_inflator(from, to))
 
 # Use a wage series:
 if (requireNamespace("taxstats", quietly = TRUE)) {
