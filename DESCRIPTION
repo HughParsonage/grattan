@@ -1,8 +1,8 @@
 Package: grattan
 Type: Package
 Title: Australian Tax Policy Analysis
-Version: 2023.0.0
-Date: 2023-06-05
+Version: 2023.1.0
+Date: 2023-08-25
 Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.parsonage@gmail.com"),
               person("Tim", "Cameron", role = "aut"),
               person("Brendan", "Coates", role = "aut"),
@@ -45,12 +45,10 @@ Suggests:
     rmarkdown,
     scales,
     survey,
-    taxstats,
     testthat,
     tibble,
     yaml,
     withr,
     covr
-Additional_repositories: https://hughparsonage.github.io/tax-drat/
 LazyData: true
 Encoding: UTF-8
