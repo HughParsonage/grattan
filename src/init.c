@@ -9,7 +9,7 @@
 
 /* .Call calls */
 extern SEXP C_lito(SEXP, SEXP, SEXP);
-extern SEXP C_MAX_N_OFFSETN();
+extern SEXP C_MAX_N_OFFSETN(SEXP);
 extern SEXP C_ml_lower_thresh(SEXP, SEXP, SEXP);
 extern SEXP C_ml_rate(SEXP);
 extern SEXP C_ml_taper(SEXP);
@@ -32,7 +32,7 @@ extern SEXP CvalidateSystem(SEXP, SEXP);
 
 static const R_CallMethodDef CallEntries[] = {
     {"C_lito",                        (DL_FUNC) &C_lito,                        3},
-    {"C_MAX_N_OFFSETN",               (DL_FUNC) &C_MAX_N_OFFSETN,               0},
+    {"C_MAX_N_OFFSETN",               (DL_FUNC) &C_MAX_N_OFFSETN,               1},
     {"C_ml_lower_thresh",             (DL_FUNC) &C_ml_lower_thresh,             3},
     {"C_ml_rate",                     (DL_FUNC) &C_ml_rate,                     1},
     {"C_ml_taper",                    (DL_FUNC) &C_ml_taper,                    1},

@@ -6,7 +6,7 @@
 #' @param Net_fincl_invstmt_lss_amt Net financial investment loss
 #' @param Net_rent_amt (for Rental deductions)
 #' @param Rep_frng_ben_amt Reportable fringe-benefits
-#' @source \url{https://www.ato.gov.au/Individuals/Tax-return/2015/Tax-return/Tax-offset-questions-T1-T2/Rebate-income-2015/}
+#' @source Original URL was {https://www.ato.gov.au/Individuals/Tax-return/2015/Tax-return/Tax-offset-questions-T1-T2/Rebate-income-2015/}
 
 rebate_income <- function(Taxable_Income, 
                           Rptbl_Empr_spr_cont_amt = 0,

@@ -4,7 +4,7 @@
 \alias{rebate_income}
 \title{Rebate income}
 \source{
-\url{https://www.ato.gov.au/Individuals/Tax-return/2015/Tax-return/Tax-offset-questions-T1-T2/Rebate-income-2015/}
+Original URL was {https://www.ato.gov.au/Individuals/Tax-return/2015/Tax-return/Tax-offset-questions-T1-T2/Rebate-income-2015/}
 }
 \usage{
 rebate_income(

@@ -1,6 +1,6 @@
 #include "grattan.h"
 
-SEXP C_MAX_N_OFFSETN(void) {
+SEXP C_MAX_N_OFFSETN(SEXP x) {
   return ScalarInteger(MAX_N_OFFSETN);
 }
 

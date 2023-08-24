@@ -92,7 +92,7 @@ set_offsets <- function(...,
 #' @rdname set_offset
 #' @export
 the_MAX_N_OFFSETN <- function() {
-  .Call("C_MAX_N_OFFSETN", PACKAGE = packageName())
+  .Call("C_MAX_N_OFFSETN", NULL, PACKAGE = packageName())
 }
 
 

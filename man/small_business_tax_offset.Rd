@@ -52,7 +52,7 @@ Aggregated turnover of a taxpayer is the sum of the following:
 \item{amounts resulting from any dealings between these entities for that part of the income year that the entity is connected or affiliated with the taxpayer.}
 }
 }
-\url{https://www.ato.gov.au/Business/Research-and-development-tax-incentive/Claiming-the-tax-offset/Steps-to-claiming-the-tax-offset/Step-3---Calculate-your-aggregated-turnover/}}
+Original URL was {https://www.ato.gov.au/Business/Research-and-development-tax-incentive/Claiming-the-tax-offset/Steps-to-claiming-the-tax-offset/Step-3---Calculate-your-aggregated-turnover/}}
 
 \item{total_net_small_business_income}{Total net business income within the meaning of the Act. For most taxpayers, this is simply any net income from a business they own (or their share of net income from a business in which they have an interest). The only difference being in the calculation of the net business income of some minors (vide Division 6AA of Part III of the Act).}
 
