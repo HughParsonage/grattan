@@ -1,17 +1,14 @@
 [![Coverage
-status](https://codecov.io/gh/HughParsonage/grattan/branch/master/graph/badge.svg)](https://codecov.io/github/HughParsonage/grattan?branch=master)
-[![Build
-Status](https://travis-ci.org/HughParsonage/grattan.svg?branch=master)](https://travis-ci.org/HughParsonage/grattan)
+status](https://codecov.io/gh/HughParsonage/grattan/branch/master/graph/badge.svg)](https://app.codecov.io/github/HughParsonage/grattan?branch=master)
 
 grattan
 =======
 
-> Important temporary notice (2019-02-09): The vignettes do not run on
-> pandoc v2.4 (or take a very long time). Please upgrade to v2.6
-> (2019-01-30) if building vignettes. You may need to modify the PATH or
-> change the RSTUDIO\_PANDOC env. var after installing.
-
-Australian Tax Policy Analysis
+Utilities for costing and evaluating Australian tax policy, including
+high-performance tax and transfer calculators, a fast method of
+projecting tax collections from ATO sample files, and an interface to
+common indices from the Australian Bureau of Statistics. Written to
+support Grattan Institute’s Australian Perspectives program.
 
 Overview
 ========
@@ -23,8 +20,6 @@ install.packages("grattan")
 ``` r
 library(grattan)
 ```
-
-    ## Last change: sysdata.rda at 2019-02-09 16:11:51 (2 mins ago).
 
 `income_tax`
 ------------
@@ -93,17 +88,17 @@ s1314 %>%
 ```
 
     ##         Taxable_Income baseline_tax   new_tax
-    ##      1:           4800            0     0.000
-    ##      2:         126122        36503 36503.970
-    ##      3:          39742         4655  4655.410
-    ##      4:         108123        29574 29574.355
-    ##      5:          85957        21040 21040.445
+    ##      1:           4800        0.000     0.000
+    ##      2:         126122    36503.970 36503.970
+    ##      3:          39742     4655.410  4655.410
+    ##      4:         108123    29574.355 29574.355
+    ##      5:          85957    21040.445 21040.445
     ##     ---                                      
-    ## 258770:          24462         1111  1111.710
-    ## 258771:          37055         3701  3701.525
-    ## 258772:          45024         6530  6530.520
-    ## 258773:           5134            0     0.000
-    ## 258774:          46368         7007  7007.640
+    ## 258770:          24462     1111.710  1111.710
+    ## 258771:          37055     3701.525  3701.525
+    ## 258772:          45024     6530.520  6530.520
+    ## 258773:           5134        0.000     0.000
+    ## 258774:          46368     7007.640  7007.640
 
 `project`
 ---------
@@ -133,7 +128,7 @@ sample_file_1314 %>%
   revenue_foregone
 ```
 
-    ## [1] "$1.8 billion"
+    ## [1] "$1.7 billion"
 
 ### `compare_avg_tax_rates`:
 
@@ -164,13 +159,151 @@ lapply(list("30k" = 30e3,
   geom_line()
 ```
 
-![](man/figures/README_compare-30-37-42-thresholds-1.svg)
+    ## Warning: Removed 6 row(s) containing missing values (geom_path).
 
-Access ABS data
----------------
+![](man/figures/README_compare-30-37-42-thresholds-1.svg)
 
 NEWS
 ====
+
+2023.0
+------
+
+-   `_inflator` functions have been moved to grattanInflator, breaking
+    (for example) `cpi_inflator_general_date` which are now
+    `cpi_inflator`.
+
+2.0.0.0
+-------
+
+### Breaking changes
+
+-   `income_tax` no longer accepts `family_status`, `n_dependants`,
+    `allow.forecasts` and `.debug`
+
+-   `model_income_tax` Arguments prefixed `Budget_` and `lito_` are
+    deprecated and now `offsets = set_offsets` are preferred. However,
+    using `System` with `income_tax` is likely to be just as convenient.
+
+-   `lito` and `lmito` no longer accept varying parameters, but `lmito`
+    is now exported
+
+-   `sapto_rcpp`, `income_tax_sapto`, `new_income_tax`,
+    `new_medicare_levy`, and `new_sapto` have now been removed. Use
+    `System`.
+
+-   The transfer functions have been removed as they became unreliable /
+    difficult to maintain. See repository
+    `hughparsonage/grattanTransfers` for possible future development
+
+    -   `age_pension`
+    -   `carer_payment`
+    -   `child_care_subsidy`
+    -   `energy_supplement`
+    -   `family_tax_benefit`
+    -   `model_child_care_subsidy`
+    -   `model_rent_assistance`
+    -   `newstart_allowance`
+    -   `pension_supplement`
+    -   `rent_assistance`
+    -   `student_repayment`
+    -   `unemployment_benefit`
+    -   `youth_allowance`
+    -   `youth_unemployment`
+
+-   The `grattan v2` package will be more focused on income tax with
+    other elements being spun off into other packages. In particular,
+    `_inflator` functions and related forecasting methods, functions
+    essentially accessing ABS data, and functions relating to tranfers
+    will be put in other packages, and imported later. Functions that
+    are made available in the `grattan` NAMESPACE may have changes to
+    their API when this happens.
+
+### API changes
+
+-   `income_tax` now uses `System` to define the tax system
+
+### Other changes
+
+-   `model_income_tax` does not throw an error for incorrect
+    specification of `lito_` arguments (which are deprecated)
+-   `age_grouper` now works with long vectors containing missing values
+
+1.9.0.10
+--------
+
+-   New data changes to 2022
+-   `rent_assistance()` example no longer works because of outdated
+    data.
+
+### Breaking changes anticipated in 2.0.0.0
+
+-   `income_tax` and `medicare_levy` no longer accept `family_status` as
+    an input, since it was giving misleading results. Use `.dots.ATO`
+    with appropriate variables to define the spouse’s income or the
+    number of children.
+-   `income_tax` gives a slightly different error message when an
+    invalid financial year is passed. Previously “not in correct form”,
+    now “not a valid financial year”.
+-   `useABSConnection = TRUE` is no longer supported because of ABS
+    server issues
+
+1.9.0.8
+-------
+
+-   Maintenance release for the new financial year.
+
+1.9.0.0
+-------
+
+### New features
+
+-   2017-18 sample file now contemplated as an input to `project`
+-   `project` now has `r_super_balance` to project super balances by a
+    user-supplied factor, rather than a hard-coded 1.05.
+-   Modelling superannuation changes now accepts contributions taxes
+    relative to marginal rates.
+
+### Data
+
+-   Data updated to 2020-06-30
+
+### Internal:
+
+-   `package:rsdmx` is now Suggested, since a dependency has been
+    orphaned.
+
+1.8.0.1
+-------
+
+### Bug fixes
+
+-   Fixed issue with stringsAsFactors = FALSE being inconsistently
+    applied with R 4.0
+
+### Data
+
+-   Update wage, CPI, and labour force data
+
+1.7.1.4
+-------
+
+-   Fixed minor error that affected tax liability calculations for
+    2010-11 and 2011-12 financial years
+
+1.7.1.3
+-------
+
+-   `grattan`’s tax modelling functions now work with the 2016-17 ATO
+    sample file
+
+1.7.1.1
+-------
+
+-   `grattan` now depends on R 3.5.0 due to serialization format version
+    3 becoming the default in R 3.6.0.
+-   `cpi_inflator` fails more gracefully when the ABS’s website is not
+    available
 
 1.7.1.0
 -------
@@ -179,6 +312,15 @@ NEWS
 
 -   `income_tax` now gives consistent results modulo the existence of
     completely empty columns that are inputs for `sapto` (\#158)
+-   `income_tax` will work if `.dots.ATO` is a non-data.table
+    data.frame.
+-   `model_income_tax`:
+    -   Correctly imputes SAPTO vs non-SAPTO family thresholds when both
+        provided.
+    -   `sapto_rcpp` is now more careful about passing length-one
+        vectors to vectorized C++ functions.
+-   `project` now correctly prioritizes `excl_vars` over variables with
+    otherwise predefined uprating mechanisms (such as `Sw_amt`).
 
 ### New functions:
 
@@ -190,14 +332,14 @@ NEWS
     faster when `length(age)` is large.
 -   `income_tax` now emits a warning when both age and `.dots.ATO` are
     provided, indicating that `age` will be ignored.
--   The data has been updated to 2019-02-09.
+-   The data has been updated to 2019-02-23.
 
 ### Internal
 
 -   `mutate_ntile` and `weighted_ntile` now use the `hutils`
     equivalents. This broke 3 unit tests because of the specific
     phrasing of some error messages.
--   The vignette requires pandoc &gt; 2.4. Some chunks have been
+-   The vignette requires pandoc \> 2.4. Some chunks have been
     refactored to avoid excess memory usage.
 
 1.7.0.0
@@ -212,7 +354,7 @@ NEWS
     business income resulted in a negative offset.
 -   `*_inflator` functions now return correct results for non-standard
     but supported financial years.
--   `inflator` no longer fails when `to_fy` is length &gt; 1 and
+-   `inflator` no longer fails when `to_fy` is length \> 1 and
     unordered.
 
 ### New features
@@ -430,33 +572,13 @@ Use `yr2fy(x, assume1901_2100 = FALSE)` if you need the old behaviour.
 CRAN Notes
 ==========
 
+This is a package update
+
 Test results
 ------------
 
 0 ERRORS \| 0 WARNINGS \| 1-2 NOTEs
 
-### Test environments:
-
--   Local Windows CRAN 3.5.1
--   Travis-CI: Ubuntu 14.04. R 3.4, 3.5, and dev (r75443)
--   Appveyor: dev (r75439) and release.
--   winbuilder: dev (r75434) and release.
-
 NOTES:
 
-Possibly mis-spelled words in DESCRIPTION: … ==&gt; Spellings are
-correct: ‘repos’ and ‘taxstats’ cannot be quoted as they are within R
-code.
-
-URLs in angle brackets: ==&gt; Not appropriate since the URL is within R
-code.
-
-Suggests or Enhances not in mainstream repositories: … ==&gt; Normal due
-to taxstats dependency
-
-Note to CRAN: moderately-large vignette
----------------------------------------
-
-The vignette is quite lengthy and, while it will run on CRAN, requires
-the installation of ‘taxstats’, a 58 MB source package, each time the
-package is checked.
+Notes for taxstats are routine
