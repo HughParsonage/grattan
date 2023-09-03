@@ -96,9 +96,35 @@ int c0(int x) {
   return x == NA_INTEGER ? 0 : x;
 }
 
-Person pp(int x, int y, int r, unsigned int age, bool is_married, int n_child) {
-  const Person P = { .xi = x, .yi = y, .ri = r, .agei = age, .is_married = is_married, .n_child = n_child, .is_family = n_child || is_married || y };
+Person pp(int x, int y, int r, unsigned int age, bool is_married, unsigned int n_child) {
+  Person P = 
+    { .xi = x,
+      .yi = y, 
+      .ri = r,
+      .agei = age,
+      .n_child = n_child,
+      .on_sapto_cd = 0,
+      .is_married = is_married,
+      .is_family = n_child || is_married || y };
   return P;
+}
+
+static unsigned int sapto_bitwise(unsigned char x) {
+  switch(x) {
+  case 'A':
+    return SAPTO_A;
+  case 'B':
+    return SAPTO_B;
+  case 'C':
+    return SAPTO_C;
+  case 'D':
+    return SAPTO_D;
+  case 'E':
+    return SAPTO_E;
+  default:
+    return 0;
+  }
+  return 0;
 }
 
 SEXP Cincome_tax(SEXP Yr,
@@ -108,13 +134,14 @@ SEXP Cincome_tax(SEXP Yr,
                  SEXP IsMarried,
                  SEXP nDependants,
                  SEXP SpcRebateIncome, 
+                 SEXP OnSaptoCd,
                  SEXP RSystem,
                  SEXP nthreads) {
   if (xlength(Yr) != 1) {
     error("Yr must be length-one."); // # nocov
   }
   if (!isNull(RSystem) && !isVectorList(RSystem)) {
-    error("RSystem must be NULL or a list.");
+    error("RSystem was type '%s', but must be NULL or a list.", type2char(TYPEOF(RSystem)));
   }
   int nThread = as_nThread(nthreads);
     
@@ -131,9 +158,12 @@ SEXP Cincome_tax(SEXP Yr,
   const int * c_age_30_june = INTEGER(Age);
   const int * is_married = INTEGER(IsMarried);
   const int * n_dependants = INTEGER(nDependants);
+  if (N != xlength(OnSaptoCd)) {
+    error("xlength(OnSaptoCd) = %lld, yet N = %lld", xlength(OnSaptoCd), N);
+  }
+  const unsigned char * on_sapto_cdp = RAW(OnSaptoCd);
   
   const System Sys = Sexp2System(RSystem, yr);
-  
   
   Person * PP = malloc(sizeof(Person) * N);
   if (PP == NULL) {
@@ -148,20 +178,31 @@ SEXP Cincome_tax(SEXP Yr,
     int rpi = rebate_income[i];
     unsigned int cpi = n_dependants[i] & 15;
     bool is_marriedi = is_married[i];
-    const Person P = pp(xpi, ypi, rpi, api, is_marriedi, cpi);
+    unsigned char z = on_sapto_cdp[i];
+    Person P;
+    P.agei = api;
+    P.is_family = is_marriedi || cpi || ypi;
+    P.is_married = is_marriedi;
+    P.n_child = cpi;
+    P.on_sapto_cd = z;
+    P.ri = rpi;
+    P.xi = xpi;
+    P.yi = ypi;
     PP[i] = P;
   })
+    
   
   FORLOOP({
     ansp[i] = do_ordinary_PIT(PP[i], Sys.BRACKETS, Sys.RATES, Sys.nb);
   })
+    
   
   if (Sys.has_sapto) {
     FORLOOP({
       apply_sapto(&ansp[i], PP[i], Sys.S);
     })
   }
-
+  
   
   if (Sys.n_offsetn) {
     do_multiOffsets(ansp, N, Sys.Offsets, Sys.n_offsetn, ic_taxable_income_loss, nThread, true);

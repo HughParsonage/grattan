@@ -317,9 +317,13 @@ System Sexp2System(SEXP RSystem, int yr) {
   setDblElement(&Sys.S.first_tax_rate, RSystem, "sapto_first_tax_rate");
   setIntElement(&Sys.S.lwr_couple, RSystem, "sapto_lower_threshold_married");
   setIntElement(&Sys.S.lwr_single, RSystem, "sapto_lower_threshold");
+  setIntElement(&Sys.S.lwr_illness, RSystem, "sapto_lower_illness");
   
   setIntElement(&Sys.S.mxo_single, RSystem, "sapto_max_offset");
   setIntElement(&Sys.S.mxo_couple, RSystem, "sapto_max_offset_married");
+  setIntElement(&Sys.S.mxo_illness, RSystem, "sapto_max_offset_illness");
+  
+  
   setDblElement(&Sys.S.pension_age, RSystem, "sapto_pension_age");
   setDblElement(&Sys.S.second_tax_rate, RSystem, "sapto_second_tax_rate");
   setDblElement(&Sys.S.taper, RSystem, "sapto_taper");
@@ -327,6 +331,9 @@ System Sexp2System(SEXP RSystem, int yr) {
   
   Sys.S.upr_single = Sys.S.lwr_single + Sys.S.mxo_single / Sys.S.taper;
   Sys.S.upr_couple = Sys.S.lwr_couple + Sys.S.mxo_couple / Sys.S.taper;
+  Sys.S.upr_couple *= 2;
+  Sys.S.upr_illness = Sys.S.lwr_illness + Sys.S.mxo_illness / Sys.S.taper;
+  Sys.S.upr_illness *= 2;
   
   Sys.S.year = yr;
   return Sys;

@@ -70,7 +70,8 @@ income_tax <- function(income,
                        return.mode = c("numeric", "integer")) {
   if (is.null(.dots.ATO)) {
     .dots.ATO <- data.table(ic_taxable_income_loss = income, 
-                            c_age_30_june = age)
+                            sp_flag = FALSE,
+                            c_age_30_june = as.integer(age %||% 42L))
   }
   ans <- income_tax2(income, 
                      fy.year = fy.year,
@@ -215,6 +216,24 @@ income_tax2 <- function(income = NULL,
     s2("ds_pers_super_cont",
        "Non_emp_spr_amt")
   
+  # Want this to totally dictate sapto eligibility and rates
+  on_sapto_cd <-
+    if (is.data.table(.dots.ATO)) {
+      if (hasName(.dots.ATO, "on_sapto_cd")) {
+        rep_len(as_raw_sapto_cd(.subset2(.dots.ATO, "on_sapto_cd")), N)
+      } else {
+        rep_len(sf2osc(.dots.ATO), N)
+      } 
+    } else if (is.null(c_age_30_june)) {
+      # Assume never get SAPTO
+      rep.int(as.raw(0), N)
+    } else {
+      # Assume based on Age, no couples
+      rep_len(as_raw_sapto_cd(fifelse(c_age_30_june > 65, "A", "")), N)
+    }
+  
+  # on_sapto_cd <- rep_len(as_raw_sapto_cd("A"), N)
+  
   # don't allocate the same vector
   zero <- integer(N)
   rN <- function(x) .rN(x, zero, nThread)
@@ -246,6 +265,7 @@ income_tax2 <- function(income = NULL,
                      c_age_30_june = rN(c_age_30_june),
                      is_married = rN(is_married),
                      n_dependants = rN(n_dependants),
+                     on_sapto_cd = on_sapto_cd %||% charToRaw('A'),
                      spc_rebate_income = rN(spc_rebate_income))
     ans <- DT[, "tax" := .Call("Cincome_tax",
                                .BY[[1]],
@@ -255,6 +275,7 @@ income_tax2 <- function(income = NULL,
                                is_married,
                                n_dependants,
                                spc_rebate_income,
+                               on_sapto_cd,
                                System, # RSystem
                                1L,
                                PACKAGE = "grattan"),
@@ -270,6 +291,7 @@ income_tax2 <- function(income = NULL,
         rN(is_married),
         rN(n_dependants),
         rN(spc_rebate_income),
+        on_sapto_cd %||% rep.int(charToRaw('A'), N),
         System, # RSystem
         nThread,
         PACKAGE = "grattan")

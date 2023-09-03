@@ -50,6 +50,12 @@ extern int SAPTO_S12_THRESH;
 extern double SAPTO_S12_TAPER;
 extern double SAPTO_TAPER;
 
+#define SAPTO_A 1
+#define SAPTO_B 2
+#define SAPTO_C 3
+#define SAPTO_D 4
+#define SAPTO_E 5
+
 // 0-127 with months
 typedef struct {
   unsigned int years : 7;
@@ -78,23 +84,31 @@ typedef struct {
   int xi;
   int yi;
   int ri; // rebate income
-  unsigned int agei : 7;
-  unsigned int n_child : 4;
-  int on_sapto_cd : 3;
-  int is_married : 1;
-  int is_family : 1;
-  
+  unsigned int agei;
+  unsigned int n_child;
+  unsigned int on_sapto_cd;
+  int is_married;
+  int is_family;
 } Person;
+
+// unsigned int agei : 7;
+// unsigned int n_child : 4;
+// unsigned int on_sapto_cd : 3;
+// int is_married : 1;
+// int is_family : 1;
 
 typedef struct {
   int year;
   double pension_age;
   int mxo_single;
   int mxo_couple;
+  int mxo_illness;
   int lwr_single;
   int lwr_couple;
+  int lwr_illness;
   int upr_single;
   int upr_couple;
+  int upr_illness;
   double taper;
   
   // Defined in the regulations (relating to spouse transfers)

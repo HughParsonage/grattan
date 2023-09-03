@@ -26,6 +26,8 @@ System(
   sapto_max_offset_married = NULL,
   sapto_lower_threshold_married = NULL,
   sapto_taper_married = NULL,
+  sapto_max_offset_illness = NULL,
+  sapto_lower_threshold_illness = NULL,
   sapto_pension_age = NULL,
   fix = 0L
 )
@@ -63,7 +65,7 @@ Since the temporary budget repair levy was imposed on a discrete tax bracket whe
 
 \item{sapto_taper}{The taper rate beyond \code{sapto_lower_threshold}.}
 
-\item{sapto_max_offset_married, sapto_lower_threshold_married, sapto_taper_married}{As above,
+\item{sapto_max_offset_married, sapto_lower_threshold_married, sapto_taper_married, sapto_lower_threshold_illness, sapto_max_offset_illness}{As above,
 but applied to members of a couple.}
 
 \item{sapto_pension_age}{The age at and above which the SAPTO is to apply.}

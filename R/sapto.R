@@ -27,6 +27,7 @@ sapto <- function(rebate_income,
   if (!is.integer(rebate_income)) {
     rebate_income <- as.integer(rebate_income)
   }
+  
   # 
   .Call("Csapto",
         rebate_income,
@@ -35,9 +36,28 @@ sapto <- function(rebate_income,
         sapto.eligible,
         do_rN(Spouse_income, integer(N), 1L),
         family_status,
-        on_sapto_cd,
+        as_raw_sapto_cd(on_sapto_cd),
         PACKAGE = packageName())
 
+}
+
+as_raw_sapto_cd <- function(x, nThread = getOption("grattan.nThread", 1L)) {
+  .Call("C_asraw_OnSaptoCd", x, nThread, PACKAGE = packageName())
+}
+
+# sample file 2 on_sapto_cd
+sf2osc <- function(.dots.ATO) {
+  stopifnot(is.data.table(.dots.ATO))
+  age <- age_from_file(.dots.ATO)
+  is_married <- 
+    if (hasName(.dots.ATO, "Marital_status")) {
+      .subset2(.dots.ATO, "Marital_status")
+    } else if (hasName(.dots.ATO, "Partner_status")) {
+      .subset2(.dots.ATO, "Partner_status")
+    } else {
+      integer(length(age))
+    }
+  .Call("C_sf2osc", rep_len(as.integer(age), length(is_married)), as.integer(is_married), PACKAGE = packageName())
 }
 
 
