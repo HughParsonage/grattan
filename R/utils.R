@@ -126,7 +126,7 @@ qtrs_ahead <- function(x, y) {
   qtrs_ahead
 }
 
-seq.qtr <- function(from, length.out) {
+seq_qtr <- function(from, length.out) {
   out <- character(length.out)
   if (length.out < 1) {
     return(out)
