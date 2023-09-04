@@ -7,4 +7,5 @@ NOTES:
 
 Spelling of 'Grattan' and 'indices' are correct
 Previous CRAN failure has been fixed (void in C functions)
+setDTthreads(1) to ensure single-thread ops during testing
 
