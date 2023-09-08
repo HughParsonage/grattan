@@ -71,7 +71,7 @@ jobs:
           apt install -y g++
           Rdevel -e "install.packages('hutils', repos = 'https://cran.rstudio.com', type = 'source')"
           Rdevel -e "hutils::provide.file('~/.R/Makevars'); cat('CXX_STD = CXX11', file = '~/.R/Makevars')"
-          Rdevel -e "hutils::provide.file('~/.R/Makevars'); cat('CXX_FLAGS = -std=gnu++11', file = '~/.R/Makevars')"
+          Rdevel -e "hutils::provide.file('~/.R/Makevars'); cat('CXXFLAGS += -std=gnu++11', file = '~/.R/Makevars')"
           Rdevel -e "install.packages('RcppArmadillo', repos = 'https://cran.rstudio.com', type = 'source')"
           Rdevel -q -e "ip <- function(x) install.packages(x[!sapply(x, requireNamespace, quietly = TRUE)], quiet = TRUE, repos = 'https://cran.r-project.org'); ip('forecast'); cat('-\n'); ip(c('forecast', 'pkgbuild', 'hutils', 'hutilscpp', 'testthat', 'data.table', 'grattanInflators', 'fy', 'ineq', 'checkmate', 'assertthat'))"
           Rdevel CMD build .
