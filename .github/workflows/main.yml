@@ -68,6 +68,7 @@ jobs:
       - name: Install packages
         shell: bash
         run: |
+          sudo apt install g++
           Rdevel -e "install.packages('hutils', repos = 'https://cran.rstudio.com', type = 'source')"
           Rdevel -e "hutils::provide.file('~/.R/Makevars'); cat('CXX_STD = CXX11', file = '~/.R/Makevars')"
           Rdevel -e "install.packages('RcppArmadillo', repos = 'https://cran.rstudio.com', type = 'source')"
