@@ -122,7 +122,9 @@ SEXP C_yr2Offsets(SEXP Yr) {
     return ans;
   }
   for (int j = 0; j < n_offsetn; ++j) {
-    SET_VECTOR_ELT(ans, j, Offsets2List(Sys.Offsets[j]));
+    SEXP x_j = PROTECT(Offsets2List(Sys.Offsets[j]));
+    SET_VECTOR_ELT(ans, j, x_j);
+    UNPROTECT(1);
   }
   UNPROTECT(1);
   return ans;
