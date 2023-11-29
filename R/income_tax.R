@@ -216,6 +216,9 @@ income_tax2 <- function(income = NULL,
     s2("ds_pers_super_cont",
        "Non_emp_spr_amt")
   
+  i_frank_cr <-
+    s2("i_frank_cr")
+  
   # Want this to totally dictate sapto eligibility and rates
   on_sapto_cd <-
     if (is.data.table(.dots.ATO)) {
@@ -266,6 +269,7 @@ income_tax2 <- function(income = NULL,
                      is_married = rN(is_married),
                      n_dependants = rN(n_dependants),
                      on_sapto_cd = on_sapto_cd %||% charToRaw('A'),
+                     i_frank_cr = i_frank_cr %||% 0L,
                      spc_rebate_income = rN(spc_rebate_income))
     ans <- DT[, "tax" := .Call("Cincome_tax",
                                .BY[[1]],
@@ -276,6 +280,7 @@ income_tax2 <- function(income = NULL,
                                n_dependants,
                                spc_rebate_income,
                                on_sapto_cd,
+                               i_frank_cr,
                                System, # RSystem
                                1L,
                                PACKAGE = "grattan"),
@@ -292,6 +297,7 @@ income_tax2 <- function(income = NULL,
         rN(n_dependants),
         rN(spc_rebate_income),
         on_sapto_cd %||% rep.int(charToRaw('A'), N),
+        i_frank_cr,
         System, # RSystem
         nThread,
         PACKAGE = "grattan")

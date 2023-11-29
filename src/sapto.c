@@ -265,7 +265,7 @@ void validate_sapto(Sapto * S, int fix) {
       if (fix == 1) {
         warning("(validate_sapto)upr_single = %d, yet lwr_single = %d"
                   " and so upr_single will be reset to %d.",
-              upr_single, lwr_single, S->mxo_single / S->taper);
+                  upr_single, lwr_single, (int)(S->mxo_single / S->taper));
       }
       S->upr_single = S->mxo_single / S->taper;
     } else {
@@ -278,7 +278,7 @@ void validate_sapto(Sapto * S, int fix) {
       if (fix == 1) {
         warning("(validate_sapto)upr_couple = %d, yet lwr_couple = %d"
                   " and so upr_couple will be reset to %d.",
-                  upr_couple, lwr_couple, S->mxo_couple / S->taper);
+                  upr_couple, lwr_couple, (int)(S->mxo_couple / S->taper));
       }
       S->upr_couple = S->mxo_couple / S->taper;
     } else {
@@ -388,7 +388,7 @@ SEXP Csapto(SEXP RebateIncome, SEXP Yr, SEXP Fill,
   int nThread = 1;
   if (xlength(Fill) != 1 || !(isReal(Fill) || isInteger(Fill))) {
     error("`fill` was a %s vector of length-%lld, but must be a length-one numeric vector.",
-          type2char(TYPEOF(Fill)), xlength(Fill));
+          type2char(TYPEOF(Fill)), (long long)xlength(Fill));
   }
   const double fill = asReal(Fill);
   if (!Sys.has_sapto) {

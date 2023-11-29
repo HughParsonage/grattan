@@ -23,6 +23,10 @@ double do_1_lmito(int x) {
   return dmax0(out);
 }
 
+static double temp_budget_repair_levy(int x) {
+  return (x <= 180000) ? 0 : (0.02 * x);
+}
+
 
 static double do_ordinary_PIT(Person P, int const bracks[MAX_NBRACK], double const rates[MAX_NBRACK], int nb) {
   int xd = P.xi;
@@ -135,6 +139,7 @@ SEXP Cincome_tax(SEXP Yr,
                  SEXP nDependants,
                  SEXP SpcRebateIncome, 
                  SEXP OnSaptoCd,
+                 SEXP iFrankCr,
                  SEXP RSystem,
                  SEXP nthreads) {
   if (xlength(Yr) != 1) {
@@ -159,7 +164,7 @@ SEXP Cincome_tax(SEXP Yr,
   const int * is_married = INTEGER(IsMarried);
   const int * n_dependants = INTEGER(nDependants);
   if (N != xlength(OnSaptoCd)) {
-    error("xlength(OnSaptoCd) = %lld, yet N = %lld", xlength(OnSaptoCd), N);
+    error("xlength(OnSaptoCd) = %lld, yet N = %lld", (long long)xlength(OnSaptoCd), (long long)N);
   }
   const unsigned char * on_sapto_cdp = RAW(OnSaptoCd);
   
@@ -212,9 +217,26 @@ SEXP Cincome_tax(SEXP Yr,
     const Person P = PP[i];
     ansp[i] += do_1_ML(P, Sys.M);
   })
-  free(PP);
-  UNPROTECT(1);
-  return ans;
+    
+    
+    if (Sys.has_temp_budget_repair_levy) {
+      FORLOOP({
+        ansp[i] += temp_budget_repair_levy(ic_taxable_income_loss[i]);
+      })
+    }
+    
+    if (xlength(iFrankCr) == N && isInteger(iFrankCr)) {
+      const int * ifrank = INTEGER(iFrankCr);
+      FORLOOP({
+        ansp[i] -= ifrank[i];
+      })
+    }
+    
+    
+    
+    free(PP);
+    UNPROTECT(1);
+    return ans;
 }
 
 

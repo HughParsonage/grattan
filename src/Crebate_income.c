@@ -51,7 +51,7 @@ SEXP Crebate_income(SEXP iic_taxable_income_loss,
   // # nocov start
   if (!isInteger(Yr)) {
     error("Internal error(Crebate_income): Yr was type '%s' and length %lld but must be a length-1 int", 
-          type2char(TYPEOF(Yr)), xlength(Yr));
+          type2char(TYPEOF(Yr)), (long long)xlength(Yr));
   }
   const int * yr = INTEGER(Yr);
   // # nocov end
