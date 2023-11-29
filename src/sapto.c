@@ -119,7 +119,7 @@ static double do_1_sapto_sf(int x, int y, int age, unsigned int on_sapto_cd, Sap
   // D | both elig, live together
   // E | you elig, live together, spouse inelig
   
-  bool is_married = on_sapto_cd != SAPTO_A;
+  // bool is_married = on_sapto_cd != SAPTO_A;
   bool spouse_elig = on_sapto_cd == SAPTO_B || on_sapto_cd == SAPTO_D;
   int max_offset = smax_offset(S, on_sapto_cd);
   int lwr_thresh = slwr_thresh(S, on_sapto_cd);
