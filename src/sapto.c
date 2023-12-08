@@ -392,7 +392,6 @@ SEXP Csapto(SEXP RebateIncome, SEXP Yr, SEXP Fill,
   }
   const double fill = asReal(Fill);
   if (!Sys.has_sapto) {
-    
     FORLOOP({
       ansp[i] = fill;
     })

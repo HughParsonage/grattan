@@ -10,7 +10,8 @@ income_tax(
   age = NULL,
   .dots.ATO = NULL,
   System = NULL,
-  return.mode = c("numeric", "integer")
+  return.mode = c("numeric", "integer"),
+  nThread = getOption("grattan.nThread", 1L)
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ is a warning.}
 corresponding to the tax system of the given year.}
 
 \item{return.mode}{The mode (numeric or integer) of the returned vector.}
+
+\item{nThread}{Number of threads to use.}
 }
 \value{
 The total personal income tax payable.

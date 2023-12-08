@@ -217,26 +217,22 @@ SEXP Cincome_tax(SEXP Yr,
     const Person P = PP[i];
     ansp[i] += do_1_ML(P, Sys.M);
   })
-    
-    
-    if (Sys.has_temp_budget_repair_levy) {
-      FORLOOP({
-        ansp[i] += temp_budget_repair_levy(ic_taxable_income_loss[i]);
-      })
-    }
-    
-    if (xlength(iFrankCr) == N && isInteger(iFrankCr)) {
-      const int * ifrank = INTEGER(iFrankCr);
-      FORLOOP({
-        ansp[i] -= ifrank[i];
-      })
-    }
-    
-    
-    
-    free(PP);
-    UNPROTECT(1);
-    return ans;
+  
+  if (Sys.has_temp_budget_repair_levy) {
+    FORLOOP({
+      ansp[i] += temp_budget_repair_levy(ic_taxable_income_loss[i]);
+    })
+  }
+  
+  if (xlength(iFrankCr) == N && isInteger(iFrankCr)) {
+    const int * ifrank = INTEGER(iFrankCr);
+    FORLOOP({
+      ansp[i] -= ifrank[i];
+    })
+  }
+  free(PP);
+  UNPROTECT(1);
+  return ans;
 }
 
 

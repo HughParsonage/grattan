@@ -15,6 +15,8 @@
 #' @param System A \code{tax-system} created by \code{System()} or \code{NULL}, the default,
 #' corresponding to the tax system of the given year.
 #' 
+#' @param nThread Number of threads to use.
+#' 
 #' @author Tim Cameron, Brendan Coates, Matthew Katzen, Hugh Parsonage, William Young
 #' @return The total personal income tax payable.
 #' @details The function is inflexible by design.
@@ -67,7 +69,8 @@ income_tax <- function(income,
                        age = NULL,
                        .dots.ATO = NULL,
                        System = NULL,
-                       return.mode = c("numeric", "integer")) {
+                       return.mode = c("numeric", "integer"),
+                       nThread = getOption("grattan.nThread", 1L)) {
   if (is.null(.dots.ATO)) {
     .dots.ATO <- data.table(ic_taxable_income_loss = income, 
                             sp_flag = FALSE,
@@ -76,7 +79,8 @@ income_tax <- function(income,
   ans <- income_tax2(income, 
                      fy.year = fy.year,
                      .dots.ATO = .dots.ATO,
-                     System = System)
+                     System = System, 
+                     nThread = nThread)
   if (match.arg(return.mode) == "integer") {
     ans <- as.integer(ans)
   }
