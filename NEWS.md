@@ -1,3 +1,7 @@
+## 2023.1.2
+
+* `-Wformat` issue for CRAN
+
 ## 2023.1
 
 * `sapto` now operates on the `on_sapto_cd` variable from Alife

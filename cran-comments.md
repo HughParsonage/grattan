@@ -1,4 +1,4 @@
-This is a package update, fixing the issues from before
+This is a package update, fixing the -Wformat issues
 
 ## Test results
 0 ERRORS | 0 WARNINGS | 1-2 NOTEs
@@ -6,6 +6,5 @@ This is a package update, fixing the issues from before
 NOTES:
 
 Spelling of 'Grattan' and 'indices' are correct
-Previous CRAN failure has been fixed (void in C functions)
-setDTthreads(1) to ensure single-thread ops during testing
+
 
