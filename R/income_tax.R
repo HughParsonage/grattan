@@ -69,7 +69,7 @@ income_tax <- function(income,
                        age = NULL,
                        .dots.ATO = NULL,
                        System = NULL,
-                       return.mode = c("numeric", "integer"),
+                       return.mode = c("numeric", "integer", "sum"),
                        nThread = getOption("grattan.nThread", 1L)) {
   if (is.null(.dots.ATO)) {
     .dots.ATO <- data.table(ic_taxable_income_loss = income, 
@@ -80,7 +80,8 @@ income_tax <- function(income,
                      fy.year = fy.year,
                      .dots.ATO = .dots.ATO,
                      System = System, 
-                     nThread = nThread)
+                     nThread = nThread,
+                     summary = identical(return.mode, "sum"))
   if (match.arg(return.mode) == "integer") {
     ans <- as.integer(ans)
   }
@@ -137,8 +138,9 @@ income_tax2 <- function(income = NULL,
                         fy.year = NULL, 
                         .dots.ATO = NULL,
                         System = NULL,
-                        nThread = getOption("grattan.nThread", 1L)) {
-  
+                        nThread = getOption("grattan.nThread", 1L),
+                        summary = 0L) {
+  summary <- as.integer(summary)
   has_nom <- function(x) {
     is.character(x) && length(x) == 1L && !is.na(x) && hasName(.dots.ATO, x)
   }
@@ -287,6 +289,7 @@ income_tax2 <- function(income = NULL,
                                i_frank_cr,
                                System, # RSystem
                                1L,
+                               summary,
                                PACKAGE = "grattan"),
               by = "yr"]
     return(.subset2(ans, "tax"))
@@ -304,6 +307,7 @@ income_tax2 <- function(income = NULL,
         i_frank_cr,
         System, # RSystem
         nThread,
+        summary,
         PACKAGE = "grattan")
   
   

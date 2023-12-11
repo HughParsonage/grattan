@@ -22,7 +22,7 @@ extern SEXP Cbracks_by_year(SEXP, SEXP);
 extern SEXP Cdecode_age_range(SEXP, SEXP);
 extern SEXP Cdo_medicare_levy(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Cdo_rn(SEXP, SEXP, SEXP);
-extern SEXP Cincome_tax(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP Cincome_tax(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Cincome2022(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Cml_child(SEXP);
 extern SEXP COffset(SEXP, SEXP, SEXP, SEXP);
@@ -47,7 +47,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Cdecode_age_range",             (DL_FUNC) &Cdecode_age_range,              2},
     {"Cdo_medicare_levy",             (DL_FUNC) &Cdo_medicare_levy,              6},
     {"Cdo_rn",                        (DL_FUNC) &Cdo_rn,                         3},
-    {"Cincome_tax",                   (DL_FUNC) &Cincome_tax,                   11},
+    {"Cincome_tax",                   (DL_FUNC) &Cincome_tax,                   12},
     {"Cincome2022",                   (DL_FUNC) &Cincome2022,                    7},
     {"Cml_child",                     (DL_FUNC) &Cml_child,                      1},
     {"COffset",                       (DL_FUNC) &COffset,                        4},

@@ -141,7 +141,8 @@ SEXP Cincome_tax(SEXP Yr,
                  SEXP OnSaptoCd,
                  SEXP iFrankCr,
                  SEXP RSystem,
-                 SEXP nthreads) {
+                 SEXP nthreads, 
+                 SEXP Summary) {
   if (xlength(Yr) != 1) {
     error("Yr must be length-one."); // # nocov
   }
@@ -149,6 +150,10 @@ SEXP Cincome_tax(SEXP Yr,
     error("RSystem was type '%s', but must be NULL or a list.", type2char(TYPEOF(RSystem)));
   }
   int nThread = as_nThread(nthreads);
+  if (!isInteger(Summary)) {
+    error("Internal error(Cincome_tax):`Summary` was type '%s' but must be integer.", type2char(TYPEOF(Summary)));
+  }
+  const int summary = asInteger(Summary);
     
   R_xlen_t N = xlength(IcTaxableIncome);
   isEquiInt(IcTaxableIncome, Age, "Age");
@@ -170,11 +175,11 @@ SEXP Cincome_tax(SEXP Yr,
   
   const System Sys = Sexp2System(RSystem, yr);
   
-  Person * PP = malloc(sizeof(Person) * N);
+  Person * PP = malloc(sizeof(Person) * (summary ? 1 : N));
   if (PP == NULL) {
     return R_NilValue;
   }
-  SEXP ans = PROTECT(allocVector(REALSXP, N));
+  SEXP ans = PROTECT(allocVector(REALSXP, summary ? 1 : N));
   double * restrict ansp = REAL(ans);
   FORLOOP({
     int xpi = ic_taxable_income_loss[i];
@@ -193,8 +198,28 @@ SEXP Cincome_tax(SEXP Yr,
     P.ri = rpi;
     P.xi = xpi;
     P.yi = ypi;
+    if (summary) {
+      double taxi = do_ordinary_PIT(P, Sys.BRACKETS, Sys.RATES, Sys.nb);
+      if (Sys.has_sapto) {
+        apply_sapto(&taxi, P, Sys.S);
+      }
+      if (Sys.n_offsetn) {
+        do_multiOffsets(&taxi, 1, Sys.Offsets, Sys.n_offsetn, &xpi, /*nThread*/ 1, true);
+      }
+      taxi += do_1_ML(P, Sys.M);
+      if (Sys.has_temp_budget_repair_levy) {
+        taxi += temp_budget_repair_levy(xpi);
+      }
+      ansp[0] += taxi;
+      continue;
+    }
     PP[i] = P;
   })
+  if (summary) {
+    free(PP);
+    UNPROTECT(1);
+    return ans;
+  }
     
   
   FORLOOP({
