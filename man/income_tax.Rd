@@ -10,7 +10,7 @@ income_tax(
   age = NULL,
   .dots.ATO = NULL,
   System = NULL,
-  return.mode = c("numeric", "integer", "sum"),
+  return.mode = c("numeric", "integer", "sum", "mean"),
   nThread = getOption("grattan.nThread", 1L)
 )
 }

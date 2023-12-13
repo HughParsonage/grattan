@@ -1,3 +1,9 @@
+## 2024.1.1
+
+* Update for 2024 tax year
+* Rebate income is now nonnegative
+* Experimental `return.mode` `"sum", "mean"` in `income_tax` for potentially memory efficiency
+
 ## 2023.1.2
 
 * `-Wformat` issue for CRAN

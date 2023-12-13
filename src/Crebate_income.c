@@ -124,6 +124,11 @@ SEXP Crebate_income(SEXP iic_taxable_income_loss,
       }
     }
   }
+  FORLOOP({
+    if (ansp[i] < 0) {
+      ansp[i] = 0;
+    }
+  })
   UNPROTECT(1);
   return ans;
 }

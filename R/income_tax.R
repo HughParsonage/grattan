@@ -69,7 +69,7 @@ income_tax <- function(income,
                        age = NULL,
                        .dots.ATO = NULL,
                        System = NULL,
-                       return.mode = c("numeric", "integer", "sum"),
+                       return.mode = c("numeric", "integer", "sum", "mean"),
                        nThread = getOption("grattan.nThread", 1L)) {
   if (is.null(.dots.ATO)) {
     .dots.ATO <- data.table(ic_taxable_income_loss = income, 
@@ -81,7 +81,7 @@ income_tax <- function(income,
                      .dots.ATO = .dots.ATO,
                      System = System, 
                      nThread = nThread,
-                     summary = identical(return.mode, "sum"))
+                     summary = identical(return.mode, "sum") + 2L * identical(return.mode, "mean"))
   if (match.arg(return.mode) == "integer") {
     ans <- as.integer(ans)
   }
