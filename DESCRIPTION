@@ -2,7 +2,7 @@ Package: grattan
 Type: Package
 Title: Australian Tax Policy Analysis
 Version: 2024.0.0
-Date: 2024-01-11
+Date: 2023-12-21
 Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.parsonage@gmail.com"),
               person("Tim", "Cameron", role = "aut"),
               person("Brendan", "Coates", role = "aut"),

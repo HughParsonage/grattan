@@ -9,7 +9,7 @@ apply_super_caps_and_div293(
   colname_concessional = "concessional_contributions",
   colname_div293_tax = "div293_tax",
   colname_new_Taxable_Income = "Taxable_income_for_ECT",
-  div293_threshold = 300000,
+  div293_threshold = 3e+05,
   cap = 30000,
   cap2 = 35000,
   age_based_cap = TRUE,
