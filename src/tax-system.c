@@ -84,8 +84,10 @@ System yr2System(int yr) {
     return System2023;
   case 2024:
     return System2024;
+  case 2025:
+    return System2025;
   }
-  return System2024; // # nocov
+  return System2025; // # nocov
 }
 
 unsigned int nb_by_year(int yr) {
