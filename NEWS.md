@@ -1,3 +1,7 @@
+## 2024.1.0
+
+* Update for new TREASURY LAWS AMENDMENT (COST OF LIVING TAX CUTS) thresholds
+
 ## 2024.0.0
 
 * Update for 2024 tax year

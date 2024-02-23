@@ -1,12 +1,12 @@
-#ifndef grattan_2024_H
-#define grattan_2024_H
+#ifndef grattan_2025_H
+#define grattan_2025_H
 #include "grattan.h"
 
-System System2024 = {
-  .yr = 2024,
-  .nb = 4,
-  .BRACKETS = {0, 18200, 45000, 200000, INT_MAX, INT_MAX, INT_MAX, INT_MAX},
-  .RATES = {0, 0.19, 0.300, 0.45, 0.45, 0.45, 0.45, 0.45},
+System System2025 = {
+  .yr = 2025,
+  .nb = 5,
+  .BRACKETS = {0, 18200, 45000, 135000, 200000, INT_MAX, INT_MAX, INT_MAX},
+  .RATES = {0, 0.16, 0.300, 0.37, 0.45, 0.45, 0.45, 0.45},
   .M = {
     .lwr_single = 26000,
     .upr_single = 32500,
