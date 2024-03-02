@@ -121,6 +121,23 @@ test_that("Budget Speech 2003-04", {
 
 test_that("Previous years (intel compiler trigger)", {
   expect_true(TRUE)
+  expect_true(hutilscpp::is_sorted(income_tax(1e3:151e3, fy::yr2fy(1984))))
+  expect_true(hutilscpp::is_sorted(income_tax(1e3:151e3, fy::yr2fy(1985))))
+  expect_true(hutilscpp::is_sorted(income_tax(1e3:151e3, fy::yr2fy(1986))))
+  expect_true(hutilscpp::is_sorted(income_tax(1e3:151e3, fy::yr2fy(1987))))
+  expect_true(hutilscpp::is_sorted(income_tax(1e3:151e3, fy::yr2fy(1988))))
+  expect_true(hutilscpp::is_sorted(income_tax(1e3:151e3, fy::yr2fy(1989))))
+  expect_true(hutilscpp::is_sorted(income_tax(1e3:151e3, fy::yr2fy(1990))))
+  expect_true(hutilscpp::is_sorted(income_tax(1e3:151e3, fy::yr2fy(1991))))
+  expect_true(hutilscpp::is_sorted(income_tax(1e3:151e3, fy::yr2fy(1992))))
+  expect_true(hutilscpp::is_sorted(income_tax(1e3:151e3, fy::yr2fy(1993))))
+  expect_true(hutilscpp::is_sorted(income_tax(1e3:151e3, fy::yr2fy(1994))))
+  expect_true(hutilscpp::is_sorted(income_tax(1e3:151e3, fy::yr2fy(1995))))
+  expect_true(hutilscpp::is_sorted(income_tax(1e3:151e3, fy::yr2fy(1996))))
+  expect_true(hutilscpp::is_sorted(income_tax(1e3:151e3, fy::yr2fy(1997))))
+  expect_true(hutilscpp::is_sorted(income_tax(1e3:151e3, fy::yr2fy(1998))))
+  expect_true(hutilscpp::is_sorted(income_tax(1e3:151e3, fy::yr2fy(1999))))
+  expect_true(hutilscpp::is_sorted(income_tax(1e3:151e3, fy::yr2fy(2000))))
   List <-
     lapply(1984:2000, function(yr) {
       income_tax(1e3:151e3, fy::yr2fy(yr))
