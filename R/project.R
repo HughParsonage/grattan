@@ -85,7 +85,8 @@ project <- function(sample_file,
                     .copyDT = TRUE,
                     check_fy_sample_file = TRUE,
                     differentially_uprate_Sw = NA,
-                    r_super_balance = 1.05) {
+                    r_super_balance = 1.05,
+                    r_generic = 1) {
   if (length(h) != 1L) {
     stop("`h` had length-", length(h), ", ", 
          "but must be a length-1 positive integer.")
@@ -138,7 +139,7 @@ project <- function(sample_file,
     # without updating the fy.year.of.sample.file
     if (is.null(fy.year.of.sample.file)) {
       fy.year.of.sample.file <-
-        match(nrow(sample_file), c(254318L, 258774L, 263339L, 269639L,  277202L, 284925L))
+        match(nrow(sample_file), c(254318L, 258774L, 263339L, 269639L,  277202L, 284925L, 301687L))
       if (is.na(fy.year.of.sample.file)) {
         stop("`fy.year.of.sample.file` was not provided, and its value could not be ",
              "inferred from nrow(sample_file) = ", nrow(sample_file), ". Either use ", 
@@ -146,7 +147,7 @@ project <- function(sample_file,
              "supply `fy.year.of.sample.file` manually.")
       }
       fy.year.of.sample.file <- 
-        c("2012-13", "2013-14", "2014-15", "2015-16", "2016-17", "2017-18")[fy.year.of.sample.file]
+        c("2012-13", "2013-14", "2014-15", "2015-16", "2016-17", "2017-18", "2020-21")[fy.year.of.sample.file]
     }
     
     
@@ -179,6 +180,11 @@ project <- function(sample_file,
            "2017-18" = {
              if (nrow(sample_file) != 284925) {
                warning("nrow(sample_file) != 284925. Should you choose a different fy.year.of.sample.file?")
+             }
+           },
+           "2020-21" = {
+             if (nrow(sample_file) != 301687) {
+               warning("nrow(sample_file) != 301687 Should you choose a different fy.year.of.sample.file?")
              }
            },
            stop("`fy.year.of.sample.file` must be '2012-13', '2013-14', '2014-15', '2015-16', '2016-17',
@@ -454,7 +460,11 @@ project <- function(sample_file,
              },
              "generic" = {
                if (.recalculate.inflators) {
-                 generic.inflators[variable == j]$inflator * v
+                 if (nrow(generic.inflators)) {
+                   generic.inflators[variable == j]$inflator * v
+                 } else {
+                   v
+                 }
                } else {
                  generic.inflators[.(H, j), inflator] * v
                }

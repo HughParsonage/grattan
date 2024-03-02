@@ -18,7 +18,8 @@ project(
   .copyDT = TRUE,
   check_fy_sample_file = TRUE,
   differentially_uprate_Sw = NA,
-  r_super_balance = 1.05
+  r_super_balance = 1.05,
+  r_generic = 1
 )
 }
 \arguments{
