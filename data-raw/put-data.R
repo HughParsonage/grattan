@@ -992,6 +992,13 @@ Age_pension_deeming_rates_by_Date <-
   .[, type := gsub("_", " ", gsub("threshold_", "", type, fixed = TRUE))] %>%
   .[, .(Date, type, threshold, deeming_rate_below, deeming_rate_above)]
 
+aus_delta <-
+  abs31[series_id %chin% c("A2133244X", "A2133245A", "A2133252X", "A2133246C", "A2133247F", "A2133248J")] %>%
+  drop_constant_cols %>%
+  .[, title := gsub(" ", "", trim_common_affixes(series))] %>%
+  .[]
+  .[, .(date, )]
+
 aus_pop <- readabs::read_abs("3101.0", table = 59)
 # aus_pop_all <- readabs::read_abs("3101.0", check_local = FALSE)
 
