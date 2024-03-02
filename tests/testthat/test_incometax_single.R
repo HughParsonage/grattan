@@ -119,6 +119,21 @@ test_that("Budget Speech 2003-04", {
   expect_equal(tax_cut(65000), 573)
 })
 
+test_that("Previous years (intel compiler trigger)", {
+  expect_true(TRUE)
+  List <-
+    lapply(1984:2000, function(yr) {
+      income_tax(1e3:151e3, fy::yr2fy(yr))
+    })
+  expect_true(all(vapply(List, hutilscpp::is_sorted, FUN.VALUE = NA)))
+  expect_true(TRUE)
+  List <-
+    lapply(2000:2030, function(yr) {
+      income_tax(1e3:151e3, fy::yr2fy(yr))
+    })
+  expect_true(all(vapply(List, hutilscpp::is_sorted, FUN.VALUE = NA)))
+})
+
 test_that("Previous years", {
   skip_if_not_installed("hutilscpp")
   List <-
