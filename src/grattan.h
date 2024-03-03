@@ -35,7 +35,7 @@ for (R_xlen_t i = 0; i < N; ++i) {                             \
 
 
 #define MAX_NBRACK 8
-#define MAX_OFFSETN 15
+#define MAX_OFFSETN 7
 #define MAX_N_OFFSETN 15
 #define MIN_YEAR 1984
 #define MAX_YEAR 2030
