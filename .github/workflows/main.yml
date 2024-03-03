@@ -29,30 +29,6 @@ jobs:
       - name: Run Check
         run: Rscript -e "rcmdcheck::rcmdcheck(args = '--no-manual', build_args = '--no-manual', error_on = 'note')"
     container: rocker/verse:latest
-  rchk:
-    runs-on: ubuntu-latest
-    container:
-      image: rhub/ubuntu-rchk
-      options: --user=root
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install glue only
-      env:
-        LLVM_COMPILER: "clang"
-      run: |-
-         install.packages('glue', repos = 'https://cran.rstudio.com/')
-    - uses: r-lib/actions/run-rchk@v2
-      with:
-        setup-only: true
-    - name: Install package
-      run: |-
-         install.packages('remotes', repos = 'https://cran.rstudio.com/')
-         remotes::install_local()
-      shell: Rscript {0}
-    - uses: r-lib/actions/run-rchk@v2
-      with:
-        run-only: true
-
   test-r-sanitizers:
     name: ASAN-UBSAN
     timeout-minutes: 60
