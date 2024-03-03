@@ -271,6 +271,7 @@ void do_multiOffsets(double * restrict ansp,
   
   bool dont_memoize = 
     N < 1000 || n_fmem > 1048576 || (apply && any_refundable && !all_refundable);
+  dont_memoize = true;
   
   // fmem[i] is the (total) offsets for [income] i
   double * fmem = dont_memoize ? NULL : malloc(sizeof(double) * (n_fmem + 1u));
