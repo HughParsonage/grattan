@@ -14,6 +14,6 @@ if (all(vapply(all.pkgs, requireNamespace, logical(1L), quietly = TRUE))) {
     test_check("grattan",
                reporter = JunitReporter$new(file = "junit_result.xml"))
   } else {
-    test_check("grattan")
+    test_check("grattan", reporter = LocationReporter)
   }
 }

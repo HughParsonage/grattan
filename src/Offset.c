@@ -227,15 +227,6 @@ SEXP Ctest_nOffset_upper_threshold(SEXP OffsetList, SEXP jj) {
   return ScalarInteger(o);
 }
 
-static int mOffsets_max_upper_threshold(const OffsetN * mOffsets, int n_offsets) {
-  int o = 0;
-  for (int j = 0; j < n_offsets; ++j) {
-    int j_upper_threshold = nOffset_upper_threshold(mOffsets[j]);
-    o = j_upper_threshold > o ? j_upper_threshold : o;
-  }
-  return o;
-}
-
 //' @noRd
 //' @description applies multiple offsets
 //' @param apply Whether or not to apply the offset to ansp (i.e. subtract from it),
@@ -247,90 +238,28 @@ void do_multiOffsets(double * restrict ansp,
                      const int * xp, 
                      int nThread,
                      bool apply) {
-  // For efficiency, we memoize the elements for each x
-  // Originally we used a floating pointer but this was risky
-  // (since it might provide results sufficiently inaccurate
-  // to violate unit tests) and appeared to offer little performance
-  // benefit so we just went to double but kept the name 'fmem'.
+  // 2024-03-03
+  // This was originally VERY CLEVER and used memoization. However, shock horror
+  // it was too clever and caused a stack overflow on the Intel compiler for 
+  // reasons which I'm not sure about, but which I suspect were to do with an
+  // aggressive paralellization.  Tthat was abandoned for this straightforward method.
   
-  // n_fmem is the number of memoized elements to allocate
-  // it will be equal to the maximum upper threshold among the offsets
-  unsigned int n_fmem = mOffsets_max_upper_threshold(mOffsets, n_offsets);
-  
-  // currently cannot apply refundable and non-refundable offsets 
-  bool any_refundable = false;
-  bool all_refundable = true;
-  for (int j = 0; j < n_offsets; ++j) {
-    any_refundable |= mOffsets[j].refundable;
-    all_refundable &= mOffsets[j].refundable;
-  }
-  
-  // In addition, if n_fmem is large, memoization is unlikely to provide 
-  // benefits (in fact is likely to be an error -- i.e.
-  // the offset never gets to zero
-  
-  bool dont_memoize = 
-    N < 1000 || n_fmem > 1048576 || (apply && any_refundable && !all_refundable);
-  
-  // fmem[i] is the (total) offsets for [income] i
-  double * fmem = dont_memoize ? NULL : malloc(sizeof(double) * (n_fmem + 1u));
-  
-  if (fmem == NULL) {
-    
-    FORLOOP({
-      if (apply) {
-        for (int j = 0; j < n_offsets; ++j) {
-          ansp[i] -= value_OffsetN(xp[i], mOffsets[j]);
-          if (ansp[i] < 0 && !mOffsets[j].refundable) {
-            ansp[i] = 0;
-          }
+  FORLOOP({
+    if (apply) {
+      for (int j = 0; j < n_offsets; ++j) {
+        ansp[i] -= value_OffsetN(xp[i], mOffsets[j]);
+        if (ansp[i] < 0 && !mOffsets[j].refundable) {
+          ansp[i] = 0;
         }
-      } else {
-        double o_i = 0;
-        for (int j = 0; j < n_offsets; ++j) {
-          o_i += value_OffsetN(xp[i], mOffsets[j]);
-        }
-        ansp[i] = o_i;
       }
-    })
-    return;
-  }
-  
-  for (int i = 0; i < n_fmem; ++i) {
-    double o_i = 0;
-    for (int j = 0; j < n_offsets; ++j) {
-      o_i += value_OffsetN(i, mOffsets[j]);
-    }
-    fmem[i] = o_i;
-  }
-
-  fmem[n_fmem] = 0;
-  if (apply) {
-    if (all_refundable) {
-      FORLOOP({
-        unsigned int xpi = xp[i];
-        if (xpi < n_fmem) {
-          ansp[i] -= fmem[xpi];
-        }
-      })
     } else {
-      FORLOOP({
-        unsigned int xpi = xp[i];
-        if (xpi < n_fmem) {
-          ansp[i] -= fmem[xpi];
-          if (ansp[i] < 0) {
-            ansp[i] = 0;
-          }
-        }
-      })
+      double o_i = 0;
+      for (int j = 0; j < n_offsets; ++j) {
+        o_i += value_OffsetN(xp[i], mOffsets[j]);
+      }
+      ansp[i] = o_i;
     }
-  } else {
-    FORLOOP({
-      unsigned int xpi = xp[i];
-      ansp[i] = xpi < n_fmem ? fmem[xpi] : 0;
-    })
-  }
-  free(fmem);
+  })
 }
 
 SEXP C_multiOffset(SEXP x, SEXP OffsetList, SEXP nthreads) {
