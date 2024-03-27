@@ -43,7 +43,6 @@ Suggests:
     knitr,
     rlang,
     rmarkdown,
-    scales,
     survey,
     testthat,
     tibble,

@@ -33,7 +33,7 @@ test_that("Performance regression: wage_inflator", {
                          identical(Sys.getenv("TRAVIS_R_VERSION_STRING"), "devel")),
                      Sys.getenv("TRAVIS_PULL_REQUEST") != "true")))
   set.seed(19992014)
-  from_fys10K <- sample(yr2fy(1999:2014), size = 10e3, replace = TRUE)
+  from_fys10K <- sample(grattan::yr2fy(1999:2014), size = 10e3, replace = TRUE)
   from_fys100M <- rep(from_fys10K, times = 100e6/10e3)
   wage_infl_time10K <- system.time(wage_inflator(from = from_fys10K,
                                                  to = "2015-16"))
