@@ -19,7 +19,7 @@ project(
   check_fy_sample_file = TRUE,
   differentially_uprate_Sw = NA,
   r_super_balance = 1.05,
-  r_generic = 1
+  r_generic = NULL
 )
 }
 \arguments{
@@ -78,6 +78,10 @@ Set to \code{1.05} for backwards compatibility. The annual superannuation
 bulletin of June 2019 from APRA reported 7.3\% growth of funds with more than
 fund members over the previous 5 years and 7.9\% growth over the 
 previous ten years.}
+
+\item{r_generic}{(Present from version 2024.1.0) The factor to inflate other
+columns. Subject to change in future versions. If \code{NULL}, the default,
+an internal factor is used.}
 }
 \value{
 A sample file with the same number of rows as \code{sample_file} but 

@@ -215,3 +215,48 @@ is_testing <- function() {
   requireNamespace("testthat", quietly = TRUE) && testthat::is_testing()
 }
 
+doubleExponentialSmoothing <- function(x, alpha, beta, h = 5) {
+  # x: Numeric vector representing the time series data
+  # alpha: Smoothing parameter for the level
+  # beta: Smoothing parameter for the trend
+  # h: Forecast horizon
+  if (!is.numeric(h) || length(h) != 1 || !is.finite(h) || h < 1) {
+    stop("h must be a positive integer.")
+  }
+  
+  # Validate inputs
+  if (alpha <= 0 || alpha >= 1) {
+    stop("alpha must be between 0 and 1")
+  }
+  if (beta <= 0 || beta >= 1) {
+    stop("beta must be between 0 and 1")
+  }
+  if (length(x) < 2) {
+    stop("Time series must have at least two observations")
+  }
+  
+  n <- length(x)
+  level <- numeric(n)
+  trend <- numeric(n)
+  forecast <- numeric(n + h)
+  
+  # Initialize components
+  level[1] <- x[1]
+  trend[1] <- x[2] - x[1]
+  
+  # Apply Double Exponential Smoothing
+  for(t in 2:n) {
+    level[t] <- alpha * x[t] + (1 - alpha) * (level[t-1] + trend[t-1])
+    trend[t] <- beta * (level[t] - level[t-1]) + (1 - beta) * trend[t-1]
+  }
+  
+  # Generate forecasts
+  for (i in 1:h) {
+    forecast[n + i] <- level[n] + i * trend[n]
+  }
+  
+  # Return only the forecasts
+  return(forecast[(n+1):(n+h)])
+}
+
+

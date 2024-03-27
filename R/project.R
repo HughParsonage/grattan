@@ -45,6 +45,10 @@
 #' fund members over the previous 5 years and 7.9\% growth over the 
 #' previous ten years.
 #' 
+#' @param r_generic (Present from version 2024.1.0) The factor to inflate other
+#' columns. Subject to change in future versions. If \code{NULL}, the default,
+#' an internal factor is used.
+#' 
 #' 
 #' @return A sample file with the same number of rows as \code{sample_file} but 
 #' with inflated values as a forecast for the sample file in \code{to_fy}. 
@@ -86,7 +90,7 @@ project <- function(sample_file,
                     check_fy_sample_file = TRUE,
                     differentially_uprate_Sw = NA,
                     r_super_balance = 1.05,
-                    r_generic = 1) {
+                    r_generic = NULL) {
   if (length(h) != 1L) {
     stop("`h` had length-", length(h), ", ", 
          "but must be a length-1 positive integer.")
@@ -132,6 +136,8 @@ project <- function(sample_file,
   if (.copyDT) {
     sample_file <- copy(sample_file)
   }
+  
+  
   
   
   if (check_fy_sample_file) {
@@ -212,16 +218,32 @@ project <- function(sample_file,
   H <- h
   current.fy <- fy.year.of.sample.file
   
-  to.fy <- yr2fy(fy2yr(current.fy) + h)
+  to.fy <- yr2fy(to.yr <- (fy2yr(current.fy) + h))
+  
+  
+  
   
   if (is.null(wage.series)){
-    wage.inflator <- wage_inflator(from = current.fy, to = to.fy)
+    wage.inflator <- wage_inflator(from = current.fy, to = to.fy,
+                                   series = grattanInflators::wpi_original(FORECAST = TRUE))
   } else {
-    wage.inflator <- wage_inflator(from = current.fy, to = to.fy)
+    wage.inflator <- wage_inflator(from = current.fy, to = to.fy,
+                                   series = wage.series)
   }
-  
+  dont_inflate_WEIGHT <- FALSE
   if (is.null(lf.series)) {
-    lf.inflator <- lf_inflator(from = current.fy, to = to.fy)
+    n_taxpayers_2022_2034 <-
+      c(16216182, 16543257, 16826686, 17076658, 17326098, 17573757, 
+        18006023, 18438289, 18870556, 19144750, 19409635, 19669543, 19917470)
+    if (to.yr %in% 2022:2034) {
+      dont_inflate_WEIGHT <- TRUE
+      WEIGHT <- NULL
+      sample_file[, WEIGHT := as.double(WEIGHT)]
+      set(sample_file, j = "WEIGHT", value = as.double(n_taxpayers_2022_2034[to.yr - 2021] / nrow(sample_file)))
+    } else {
+      lf.inflator <- lf_inflator(from = current.fy, to = to.fy, 
+                                 series = grattanInflators::lfi_original(FORECAST = TRUE))
+    }
   } else {
     if (is.data.table(lf.series)) {
       stop("lf.series should be a series as defined by lf_inflator.")
@@ -231,7 +253,14 @@ project <- function(sample_file,
                                series = lf.series)
   }
   
-  cpi.inflator <- cpi_inflator(from = current.fy, to = to.fy)
+  cpi.inflator <- cpi_inflator(from = current.fy, to = to.fy, 
+                               series = grattanInflators::cpi_seasonal(FORECAST = TRUE))
+  
+  if (is.null(r_generic)) {
+    r_generic <- cpi.inflator
+  } else if (!is.numeric(r_generic) || length(r_generic) != 1 || !is.finite(r_generic)) {
+    stop("r_generic must be NULL or a length-one numeric.") # nocov
+  }
   
   if (!is.logical(.recalculate.inflators)) {
     stop("`.recalculate.inflators` was type ", typeof(.recalculate.inflators), ", ",
@@ -355,24 +384,24 @@ project <- function(sample_file,
                                     derived.cols,
                                     Not.Inflated)]
   
-  if (.recalculate.inflators) {
-    generic.inflators <- 
-      generic_inflator(vars = generic.cols,
-                       h = h,
-                       fy.year.of.sample.file = fy.year.of.sample.file, 
-                       estimator = forecast.dots$estimator,
-                       pred_interval = forecast.dots$pred_interval)
-  } else {
-    generic.inflators <- 
-      switch(current.fy, 
-             "2012-13" = generic_inflators_1213, 
-             "2013-14" = generic_inflators_1314, 
-             "2014-15" = generic_inflators_1415, 
-             "2015-16" = generic_inflators_1516, 
-             "2016-17" = generic_inflators_1617, 
-             stop("Precalculated inflators only available when projecting from ",
-                  "2012-13, 2013-14, 2014-15, 2015-16, and 2016-17."))
-  }
+  # if (.recalculate.inflators) {
+  #   generic.inflators <- 
+  #     generic_inflator(vars = generic.cols,
+  #                      h = h,
+  #                      fy.year.of.sample.file = fy.year.of.sample.file, 
+  #                      estimator = forecast.dots$estimator,
+  #                      pred_interval = forecast.dots$pred_interval)
+  # } else {
+  #   generic.inflators <- 
+  #     switch(current.fy, 
+  #            "2012-13" = generic_inflators_1213, 
+  #            "2013-14" = generic_inflators_1314, 
+  #            "2014-15" = generic_inflators_1415, 
+  #            "2015-16" = generic_inflators_1516, 
+  #            "2016-17" = generic_inflators_1617, 
+  #            stop("Precalculated inflators only available when projecting from ",
+  #                 "2012-13, 2013-14, 2014-15, 2015-16, and 2016-17."))
+  # }
   
   ## Inflate:
   
@@ -430,6 +459,9 @@ project <- function(sample_file,
     if (j %chin% Not.Inflated) {
       next
     }
+    if (j == "WEIGHT" && dont_inflate_WEIGHT) {
+      next
+    }
     v <- .subset2(sample_file, j)
     v_new <- 
       switch(inflator_switch(j),
@@ -459,15 +491,16 @@ project <- function(sample_file,
                CG.inflator * v
              },
              "generic" = {
-               if (.recalculate.inflators) {
-                 if (nrow(generic.inflators)) {
-                   generic.inflators[variable == j]$inflator * v
-                 } else {
-                   v
-                 }
-               } else {
-                 generic.inflators[.(H, j), inflator] * v
-               }
+               r_generic * v
+               # if (.recalculate.inflators) {
+               #   if (nrow(generic.inflators)) {
+               #     generic.inflators[variable == j]$inflator * v
+               #   } else {
+               #     v
+               #   }
+               # } else {
+               #   generic.inflators[.(H, j), inflator] * v
+               # }
              },
              "super" = {
                {r_super_balance ^ h} * v
