@@ -1,3 +1,7 @@
+## 2025.5.0
+
+* Updated income tax thresholds
+
 ## 2024.1.0
 
 * Update for new TREASURY LAWS AMENDMENT (COST OF LIVING TAX CUTS) thresholds

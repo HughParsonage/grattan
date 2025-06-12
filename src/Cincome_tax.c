@@ -113,7 +113,7 @@ Person pp(int x, int y, int r, unsigned int age, bool is_married, unsigned int n
   return P;
 }
 
-static unsigned int sapto_bitwise(unsigned char x) {
+unsigned int sapto_bitwise(unsigned char x) {
   switch(x) {
   case 'A':
     return SAPTO_A;
