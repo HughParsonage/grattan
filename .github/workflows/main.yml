@@ -11,8 +11,8 @@ jobs:
         uses: actions/checkout@master
       - name: Install Package Dependencies
         run: |-
-          Rscript -e "install.packages(c('rcmdcheck', 'remotes', 'covr'), repos = 'https://demo.rstudiopm.com/all/__linux__/bionic/latest')"
-          Rscript -e "remotes::install_deps(dependencies = TRUE, repos = 'https://demo.rstudiopm.com/all/__linux__/bionic/latest')"
+          Rscript -e "install.packages(c('rcmdcheck', 'remotes', 'covr'), repos = 'https://cran.rstudio.com')"
+          Rscript -e "remotes::install_deps(dependencies = TRUE, repos = 'https://cran.rstudio.com')"
       - name: codecov
         run: Rscript -e "covr::codecov(quiet = FALSE)"
     container: rocker/verse:latest
@@ -24,8 +24,8 @@ jobs:
         uses: actions/checkout@master
       - name: Install Package Dependencies
         run: |-
-            Rscript -e "install.packages(c('rcmdcheck', 'remotes'), repos = 'https://demo.rstudiopm.com/all/__linux__/bionic/latest')"
-            Rscript -e "remotes::install_deps(dependencies = TRUE, repos = 'https://demo.rstudiopm.com/all/__linux__/bionic/latest')"
+            Rscript -e "install.packages(c('rcmdcheck', 'remotes'), repos = 'https://cran.rstudio.com')"
+            Rscript -e "remotes::install_deps(dependencies = TRUE, repos = 'https://cran.rstudio.com')"
       - name: Run Check
         run: Rscript -e "rcmdcheck::rcmdcheck(args = '--no-manual', build_args = '--no-manual', error_on = 'note')"
     container: rocker/verse:latest
