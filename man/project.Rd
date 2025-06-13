@@ -40,7 +40,7 @@ number of rows of \code{sample_file} to be one of \code{2012-13}, \code{2013-14}
 \item{wage.series}{See \code{\link{wage_inflator}}. Note that the \code{Sw_amt}
 will uprated by \code{\link{differentially_uprate_wage}} (if requested).}
 
-\item{lf.series}{See \code{\link{lf_inflator_fy}}.}
+\item{lf.series}{See \code{\link{lf_inflator}}.}
 
 \item{use_age_pop_forecast}{Should the inflation of the number of taxpayers be 
 moderated by the number of resident persons born in a certain year? If \code{TRUE},
@@ -100,7 +100,7 @@ exception of:
 \item{inflated using \code{\link{differentially_uprate_wage}}.}{\code{Sw_amt}}
 \item{inflated using \code{\link{wage_inflator}}}{\code{Alow_ben_amt}, \code{ETP_txbl_amt}, \code{Rptbl_Empr_spr_cont_amt}, \code{Non_emp_spr_amt}, \code{MCS_Emplr_Contr}, \code{MCS_Prsnl_Contr}, \code{MCS_Othr_Contr}}
 \item{inflated using \code{\link{cpi_inflator}}}{\code{WRE_car_amt}, \code{WRE_trvl_amt}, \code{WRE_uniform_amt}, \code{WRE_self_amt}, \code{WRE_other_amt}}
-\item{inflated by \code{\link{lf_inflator_fy}}}{\code{WEIGHT}}
+\item{inflated by \code{\link{lf_inflator}}}{\code{WEIGHT}}
 \item{inflated by \code{\link{CG_inflator}}}{\code{Net_CG_amt}, \code{Tot_CY_CG_amt}}
 }
 

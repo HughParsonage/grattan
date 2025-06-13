@@ -10,7 +10,7 @@
 #' @param forecast.dots A list containing parameters to be passed to \code{generic_inflator}.
 #' @param wage.series See \code{\link{wage_inflator}}. Note that the \code{Sw_amt}
 #'  will uprated by \code{\link{differentially_uprate_wage}} (if requested).
-#' @param lf.series See \code{\link{lf_inflator_fy}}.
+#' @param lf.series See \code{\link{lf_inflator}}.
 #' @param use_age_pop_forecast Should the inflation of the number of taxpayers be 
 #' moderated by the number of resident persons born in a certain year? If \code{TRUE},
 #' younger ages will grow at a slightly higher rate beyond 2018 than older ages.
@@ -64,7 +64,7 @@
 #' \item{inflated using \code{\link{differentially_uprate_wage}}.}{\code{Sw_amt}}
 #' \item{inflated using \code{\link{wage_inflator}}}{\code{Alow_ben_amt}, \code{ETP_txbl_amt}, \code{Rptbl_Empr_spr_cont_amt}, \code{Non_emp_spr_amt}, \code{MCS_Emplr_Contr}, \code{MCS_Prsnl_Contr}, \code{MCS_Othr_Contr}}
 #' \item{inflated using \code{\link{cpi_inflator}}}{\code{WRE_car_amt}, \code{WRE_trvl_amt}, \code{WRE_uniform_amt}, \code{WRE_self_amt}, \code{WRE_other_amt}}
-#' \item{inflated by \code{\link{lf_inflator_fy}}}{\code{WEIGHT}}
+#' \item{inflated by \code{\link{lf_inflator}}}{\code{WEIGHT}}
 #' \item{inflated by \code{\link{CG_inflator}}}{\code{Net_CG_amt}, \code{Tot_CY_CG_amt}}
 #' }
 #' 
