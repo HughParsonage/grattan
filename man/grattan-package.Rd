@@ -3,7 +3,6 @@
 \docType{package}
 \name{grattan-package}
 \alias{grattan-package}
-\alias{_PACKAGE}
 \alias{grattan}
 \title{The grattan package.}
 \description{
