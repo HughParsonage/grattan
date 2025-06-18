@@ -81,6 +81,6 @@ If \code{sato} and \code{pto} are \code{NULL}, \code{sapto.eligible} stands for 
 If \code{sato} or \code{pto} are not \code{NULL} for such years, only \code{sato} is currently considered. 
 Supplying \code{pto} independently is currently a warning.
 
-See \url{https://classic.austlii.edu.au/au/legis/cth/consol_act/mla1986131/}
+See \code{https://classic.austlii.edu.au/au/legis/cth/consol_act/mla1986131/}
 for the \emph{Medicare Levy Act 1986} (Cth).
 }
