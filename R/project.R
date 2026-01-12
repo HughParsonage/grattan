@@ -222,10 +222,11 @@ project <- function(sample_file,
   
   
   
-  
+  date <- NULL
   if (is.null(wage.series)){
+    wpi_orig_ <- grattanInflators::wpi_original(FORECAST = TRUE)[date <= as.IDate("2075-12-31")]
     wage.inflator <- wage_inflator(from = current.fy, to = to.fy,
-                                   series = grattanInflators::wpi_original(FORECAST = TRUE))
+                                   series = wpi_orig_)
   } else {
     wage.inflator <- wage_inflator(from = current.fy, to = to.fy,
                                    series = wage.series)
@@ -242,7 +243,7 @@ project <- function(sample_file,
       set(sample_file, j = "WEIGHT", value = as.double(n_taxpayers_2022_2034[to.yr - 2021] / nrow(sample_file)))
     } else {
       lf.inflator <- lf_inflator(from = current.fy, to = to.fy, 
-                                 series = grattanInflators::lfi_original(FORECAST = TRUE))
+                                 series = grattanInflators::lfi_original(FORECAST = TRUE)[date <= as.IDate("2075-12-31")])
     }
   } else {
     if (is.data.table(lf.series)) {
@@ -253,8 +254,10 @@ project <- function(sample_file,
                                series = lf.series)
   }
   
+  cpi_orig_ <- grattanInflators::cpi_seasonal(FORECAST = TRUE)[date <= as.IDate("2075-12-31")]
+  
   cpi.inflator <- cpi_inflator(from = current.fy, to = to.fy, 
-                               series = grattanInflators::cpi_seasonal(FORECAST = TRUE))
+                               series = cpi_orig_)
   
   if (is.null(r_generic)) {
     r_generic <- cpi.inflator
