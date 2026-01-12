@@ -5,8 +5,8 @@
 System System2024 = {
   .yr = 2024,
   .nb = 4,
-  .BRACKETS = {0, 18200, 45000, 200000, INT_MAX, INT_MAX, INT_MAX, INT_MAX},
-  .RATES = {0, 0.19, 0.300, 0.45, 0.45, 0.45, 0.45, 0.45},
+  .BRACKETS = {0, 18200, 45000, 120000, 180000, INT_MAX, INT_MAX, INT_MAX},
+  .RATES = {0, 0.19, 0.325, 0.37, 0.45, 0.45, 0.45, 0.45},
   .M = {
     .lwr_single = 26000,
     .upr_single = 32500,

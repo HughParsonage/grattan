@@ -307,10 +307,13 @@ System Sexp2System(SEXP RSystem, int yr) {
     for (int j = 0; j < length(ROffsets); ++j) {
       int nb = COffsets[j].nb;
       Sys.Offsets[j].nb = nb;
+      if (nb < 1) {
+        continue;
+      }
       Sys.Offsets[j].offset_1st = COffsets[j].offset_1st;
       Sys.Offsets[j].refundable = COffsets[j].refundable;
       for (int k = 0; k < MAX_OFFSETN; ++k) {
-        int kk = (k < nb) ? k : nb - 1;
+        int kk = (k < nb) ? k : (nb - 1);
         Sys.Offsets[j].Thresholds[k] = COffsets[j].Thresholds[kk];
         Sys.Offsets[j].Tapers[k] = COffsets[j].Tapers[kk];
       }

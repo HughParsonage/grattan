@@ -1,3 +1,8 @@
+## 2025.5.0
+
+* Updated income tax thresholds
+* `lf_inflator_fy` has been removed
+
 ## 2024.1.0
 
 * Update for new TREASURY LAWS AMENDMENT (COST OF LIVING TAX CUTS) thresholds
