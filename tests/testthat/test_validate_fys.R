@@ -7,6 +7,7 @@ expect_equal <- function(left, right, check.attributes = FALSE) {
 }
 
 test_that("Error handling", {
+  skip_on_cran() # data.table sisue
   expect_error(validate_fys_permitted(c("2015-16", "2015-17", "2010-9"), c("2015-16", "2016-17")), 
                regexp = "contained invalid FYs.",
                fixed = TRUE)

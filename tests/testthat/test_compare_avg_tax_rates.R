@@ -1,6 +1,7 @@
 context("compare_avg_tax_rates")
 
 test_that("Error handling", {
+  skip_on_cran() # data.table VECTOR_ELT issue
   dt1 <- data.table(Taxable_Income = c(50e3, 100e3, 150e3, 200e3), 
                     baseline_tax = c(50e3, 100e3, 150e3, 200e3) * 0.2,
                     new_tax = c(50e3, 100e3, 150e3, 200e3) * 0.3, 

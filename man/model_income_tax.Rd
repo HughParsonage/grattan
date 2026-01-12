@@ -143,18 +143,16 @@ The income tax payable if tax settings are changed.
 }
 \examples{
 
-library(data.table)
-library(hutils)
 
 # With new tax-free threshold of $20,000:
 # if (requireNamespace("taxstats", quietly = TRUE) && FALSE) {
-# library(taxstats)
-# library(magrittr)
+# library(taxstats); library(data.table);
+# library(magrittr); library(hutils)
 #    
 # model_income_tax(sample_file_1314,
 #                  "2013-14",
 #                  ordinary_tax_thresholds = c(0, 20e3, 37e3, 80e3, 180e3)) \%>\%
- #   select_grep("tax", "Taxable_Income")
+#   select_grep("tax", "Taxable_Income")
 #
 # }
 
