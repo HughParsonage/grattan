@@ -5,9 +5,9 @@
 
 System System2011 = {
   .yr = 2011,
-  .nb = 7,
-  .BRACKETS = {0, 6000, 37000, 50000, 80000, 100000, 180000, INT_MAX}, // includes flood levy
-  .RATES =    {0, 0.15, 0.300, 0.305, 0.375, 0.3800, 0.4600, 0.46000},
+  .nb = 5,
+  .BRACKETS = {0, 6000, 37000, 80000, 180000, INT_MAX, INT_MAX, INT_MAX},
+  .RATES = {0, 0.15, 0.30, 0.37, 0.45, 0.45, 0.45, 0.45},
   .M = {
     .lwr_single = 19404,
     .upr_single = 22829,
@@ -25,7 +25,7 @@ System System2011 = {
   },
   .has_sapto = true,
   .S = {
-    .year = 2014,
+    .year = 2011,
     .pension_age = 65,
     .mxo_single = 2230,
     .mxo_couple = 1602,

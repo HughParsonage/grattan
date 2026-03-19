@@ -6,7 +6,7 @@
 System System2010 = {
   .yr = 2010,
   .nb = 5,
-  .BRACKETS = {0, 6000, 37000, 80000, 180000, INT_MAX, INT_MAX, INT_MAX},
+  .BRACKETS = {0, 6000, 35000, 80000, 180000, INT_MAX, INT_MAX, INT_MAX},
   .RATES = {0, 0.15, 0.30, 0.38, 0.45, 0.45, 0.45, 0.45},
   .M = {
     .lwr_single = 18488,
@@ -37,7 +37,7 @@ System System2010 = {
     .first_tax_rate = 0.15,
     .second_tax_rate = 0.30,
     .tax_free_thresh = 6000,
-    .tax_2nd_thresh = 37000,
+    .tax_2nd_thresh = 35000,
     .lito_max_offset = 1500,
     .lito_1st_thresh = 30000,
     .lito_1st_taper = 0.04

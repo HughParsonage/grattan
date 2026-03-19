@@ -8,7 +8,7 @@
 System System2021 = {
   .yr = 2021,
   .nb = 5,
-  .BRACKETS = {0, 18200, 37000, 90000, 180000, INT_MAX, INT_MAX, INT_MAX},
+  .BRACKETS = {0, 18200, 45000, 120000, 180000, INT_MAX, INT_MAX, INT_MAX},
   .RATES = {0, 0.19, 0.325, 0.37, 0.45, 0.45, 0.45, 0.45},
   .M =
   {
