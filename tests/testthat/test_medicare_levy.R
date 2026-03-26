@@ -17,6 +17,11 @@ test_that("medicare_levy monotonic", {
                            sapto.eligible = TRUE))
 } )
 
+test_that("2020-21 SAPTO Medicare thresholds match parameters workbook", {
+  expect_equal(ML_LWR_THRESH(2021, family = FALSE, sapto = TRUE), 36705L)
+  expect_equal(ML_UPR_THRESH(2021, family = FALSE, sapto = TRUE), 45882L)
+})
+
 test_that("medicare_levy returns known values", {
   # https://www.ato.gov.au/calculators-and-tools/medicare-levy/
   expect_equal(medicare_levy(income = 40e3, fy.year = "2013-14", sapto.eligible = TRUE , n_dependants = 1), 0)
@@ -91,7 +96,6 @@ test_that("Medicare error handling", {
   expect_error(medicare_levy(20e3, "2004-05", sato = TRUE, pto = TRUE))
   expect_warning(medicare_levy(20e3, "2004-05", sato = FALSE, pto = TRUE), regexp = "pto")
 })
-
 
 
 

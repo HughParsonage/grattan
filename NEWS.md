@@ -1,7 +1,6 @@
-## 2025.5.0
+## 2026.3.1
 
-* Updated income tax thresholds against the TS23 historical tax rates workbook,
-  including corrections to `2009-10`, `2010-11`, and `2020-21`, and added
+* Updated income tax thresholds including corrections to `2009-10`, `2010-11`, and `2020-21`, and added
   `2021-22` and `2022-23` to the raw threshold table.
 * `lf_inflator_fy` has been removed
 
