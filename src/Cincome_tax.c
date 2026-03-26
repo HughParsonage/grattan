@@ -53,7 +53,7 @@ static double do_ordinary_PIT(Person P, int const bracks[MAX_NBRACK], double con
 
 
 static double do_1_ML(const Person P, const Medicare M) {
-  bool sapto = P.agei >= 65;
+  bool sapto = P.agei >= M.sapto_age;
   double lower_threshold = sapto ? M.lwr_single_sapto : M.lwr_single;
   if (P.xi < lower_threshold) {
     return 0;
@@ -287,25 +287,10 @@ SEXP Cincome2022(SEXP x, SEXP y, SEXP rb, SEXP age, SEXP isMarried, SEXP nDepend
     double o = 0;
     int xpi = xp[i];
     int api = ap[i];
-    if (P.xi <= 18200 || (api >= 65 && xpi <= 32279)) {
+    if (P.xi <= Sys.BRACKETS[1] || (api >= Sys.S.pension_age && xpi <= Sys.S.lwr_single)) {
       continue;
     }
-    if (xpi <= 37000) {
-      o += 0.19 * (xpi - 18200);
-    } else {
-      o += 3572;
-      if (xpi <= 90000) {
-        o += 0.325 * (xpi - 37000);
-      } else {
-        o += 17225;
-        if (xpi <= 180000) {
-          o += 0.37 * (xpi - 90000);
-        } else {
-          o += 33300;
-          o += 0.45 * (xpi - 180000);
-        }
-      }
-    }
+    o = do_ordinary_PIT(P, Sys.BRACKETS, Sys.RATES, Sys.nb);
     
     double lmitoi = do_1_lmito(xpi);
     o -= lmitoi;
@@ -325,29 +310,29 @@ SEXP Cincome2022(SEXP x, SEXP y, SEXP rb, SEXP age, SEXP isMarried, SEXP nDepend
       o = 0;
     }
     
-    if (xpi <= 22801) {
+    if (xpi <= Sys.M.lwr_single) {
       ansp[i] = o;
       continue;
     }
     
     
     
-    double o2 = 0.02 * xpi;
-    if (Sys.has_sapto && api >= 65 && xpi <= 50119) {
-      double sapto = (2230 - 0.125 * (xpi - 32279));
+    double o2 = Sys.M.rate * xpi;
+    if (Sys.has_sapto && api >= Sys.S.pension_age && xpi <= Sys.S.upr_single) {
+      double sapto = (Sys.S.mxo_single - Sys.S.taper * (xpi - Sys.S.lwr_single));
       o -= sapto;
       if (o < 0) {
         o = 0;
       }
-      if (xpi > 36056) {
-        double o1 = 0.1 * (xpi - 36056);
+      if (xpi > Sys.M.lwr_single_sapto) {
+        double o1 = Sys.M.taper * (xpi - Sys.M.lwr_single_sapto);
         o += (o1 < o2) ? o1 : o2;
       }
       ansp[i] = o;
       continue;
     }
-    if (xpi > 22801) {
-      double o1 = 0.1 * (xpi - 22801);
+    if (xpi > Sys.M.lwr_single) {
+      double o1 = Sys.M.taper * (xpi - Sys.M.lwr_single);
       o += (o1 < o2) ? o1 : o2;
     }
     
