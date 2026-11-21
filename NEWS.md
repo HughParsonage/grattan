@@ -1,3 +1,9 @@
+## 2026.3.2
+
+* Fixed `2023-24` income tax above $180,000 to apply the 45% top marginal rate.
+  Thanks to [Lexifina](https://lexifina.com/blog/formalizing-taxation-across-38-nations)
+  for identifying this error.
+
 ## 2026.3.1
 
 * Updated income tax thresholds including corrections to `2009-10`, `2010-11`, and `2020-21`, and added
