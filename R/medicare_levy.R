@@ -15,7 +15,9 @@
 #' @param Spouse_income 
 #' \describe{
 #' \item{\code{numeric(1)} or \code{numeric(N)}}{The income of the taxpayer's spouse. Missing values are
-#' imputed to zeroes. Values are truncated to integer.}
+#' imputed to zeroes. Values are truncated to integer; losses are treated as zero.
+#' The spouse's ordinary low-income threshold is used, since this function does
+#' not receive the spouse's SAPTO entitlement.}
 #' }
 #' @param sapto.eligible 
 #' \describe{
@@ -53,7 +55,7 @@
 #' The Seniors and Pensioners Tax Offset was formed in 2012-13 as an amalgam
 #'  of the Senior Australians Tax Offset and the Pensions Tax Offset. 
 #' Medicare rates before 2012-13 were different based on these offsets. 
-#' For most taxpayers, eligibility would be based on whether your age is over the pension age (currently 65).
+#' Age-based entitlement must use the pension age for the relevant financial year.
 #' If \code{sato} and \code{pto} are \code{NULL}, \code{sapto.eligible} stands for eligibility for the \code{sato} and not \code{pto}.
 #' If \code{sato} or \code{pto} are not \code{NULL} for such years, only \code{sato} is currently considered. 
 #' Supplying \code{pto} independently is currently a warning.
@@ -132,7 +134,7 @@ do_medicare_levy <- function(income, yr, spouse_income, sapto_eligible, is_marri
   zero <- integer(length(income))
   .Call("Cdo_medicare_levy", 
         do_rN(income, zero),
-        yr, 
+        as.integer(yr),
         do_rN(spouse_income, zero),
         do_rN(sapto_eligible, zero),
         do_rN(is_married, zero),

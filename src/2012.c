@@ -17,9 +17,9 @@ System System2012 = {
     .has_sapto_thr = true,
     .sapto_age = 65,
     .lwr_single_sapto = 30685,
-    .upr_single_sapto = 36101,
+    .upr_single_sapto = 36100,
     .lwr_family_sapto = 44500,
-    .upr_family_sapto = 52352,
+    .upr_family_sapto = 52353,
     .lwr_thr_up_per_child = 3007,
     .taper = 0.1,
     .rate = 0.015
@@ -31,15 +31,15 @@ System System2012 = {
     .mxo_single = 2230,
     .mxo_couple = 1602,
     .mxo_illness = 2040,
-    .lwr_single = 32279,
-    .lwr_couple = 28974,
-    .lwr_illness = 31279,
-    .upr_single = 50119,
-    .upr_couple = 83580,
-    .upr_illness = 95198,
+    .lwr_single = 30685,
+    .lwr_couple = 26680,
+    .lwr_illness = 29600,
+    .upr_single = 48525,
+    .upr_couple = 78992,
+    .upr_illness = 91840,
     .taper = 0.125,
     .first_tax_rate = 0.15,
-    .second_tax_rate = 0.30,
+    .second_tax_rate = 0.3,
     .tax_free_thresh = 6000,
     .tax_2nd_thresh = 37000,
     .lito_max_offset = 1500,
@@ -57,6 +57,7 @@ System System2012 = {
       .refundable = false
     }
   },
+  .has_flood_levy = true,
   .has_temp_budget_repair_levy = false
 };
 #endif

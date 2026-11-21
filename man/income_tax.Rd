@@ -15,9 +15,11 @@ income_tax(
 )
 }
 \arguments{
-\item{income}{The individual assessable income.}
+\item{income}{The individual's taxable income.}
 
-\item{fy.year}{The financial year in which the income was earned. Tax years 2000-01 to 2018-19 are supported, as well as the tax year 2019-20, for convenience. 
+\item{fy.year}{The financial year in which the income was earned. Native schedules
+are available from 1983-84 through 2029-30. For future years, enacted rates
+are used and annually indexed amounts remain at their latest enacted values.
 If \code{fy.year} is not given, the current financial year is used by default.}
 
 \item{age}{The individual's age. Ignored if \code{.dots.ATO} is provided (and contains
@@ -26,12 +28,19 @@ an age variable such as \code{age_range} or \code{Birth_year}).}
 \item{.dots.ATO}{A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files.
 
 Age variables in \code{.dots.ATO} take precedence over \code{age} and providing both
-is a warning.}
+is a warning.
+Supply \code{sp_taxable_income_loss} separately from \code{spc_rebate_income}
+when both are available: Medicare uses the former and SAPTO the latter.
+An explicit \code{on_sapto_cd} supplies actual SAPTO eligibility; otherwise
+eligibility is inferred from age and family status. Supply \code{ic_rebate_income}
+when the aggregate fringe-benefit field cannot identify the exempt-employer
+amount or other rebate-income adjustments are required.}
 
 \item{System}{A \code{tax-system} created by \code{System()} or \code{NULL}, the default,
 corresponding to the tax system of the given year.}
 
-\item{return.mode}{The mode (numeric or integer) of the returned vector.}
+\item{return.mode}{Return the numeric or integer assessment vector, or its
+\code{"sum"} or \code{"mean"}.}
 
 \item{nThread}{Number of threads to use.}
 }
@@ -59,9 +68,9 @@ For the 2018-19 tax year, the function calculates
 \emph{Income Tax Rates Act 1986} (Cth).}
 \item{Medicare levy}{See \code{\link{medicare_levy}} for details.}
 \item{LITO}{See \code{\link{lito}} for details.}
-\item{SAPTO}{See \code{\link{sapto}}. For years preceding the introduction of SAPTO, 
-the maximum offset is assumed to apply to those above age 65 (since the sample files only provide 5-year 
-age groups).}
+\item{SAPTO}{See \code{\link{sapto}}. Earlier years use the implemented senior
+Australian offset schedule. Without an explicit claim code, eligibility is
+inferred from the available age and family-status variables.}
 \item{SBTO}{See \code{\link{small_business_tax_offset}} for details.}
 \item{Historical levies}{The flood levy and the temporary budget repair levy.}
 }

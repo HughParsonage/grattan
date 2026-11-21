@@ -10,7 +10,8 @@
 #' @param on_sapto_cd SAPTO claim code type (for non-veterans). A 
 #' letter A-E. A = single, B = lived apart due to illness and spouse was eligible,
 #'  C = lived apart but spouse ineligible, D = lived together, both eligible for sapto, 
-#'  E = lived together, spouse ineligible. Only \code{"A"} and \code{"D"} are supported.
+#'  E = lived together, spouse ineligible. A supplied code denotes actual
+#' eligibility; the standalone function does not infer eligibility from age.
 #' @param .check Run checks for consistency of values. For example, ensuring no 
 #' single individuals have positive \code{Spouse_income}.
 #' @export
@@ -26,6 +27,14 @@ sapto <- function(rebate_income,
   N <- length(rebate_income)
   if (!is.integer(rebate_income)) {
     rebate_income <- as.integer(rebate_income)
+  }
+  if (missing(on_sapto_cd)) {
+    on_sapto_cd <- ifelse(family_status == "single", "A",
+                          ifelse(family_status == "separated_due_illness", "B", "D"))
+  }
+  if (!is.logical(sapto.eligible) ||
+      !(length(sapto.eligible) %in% c(1L, N)) || anyNA(sapto.eligible)) {
+    stop("`sapto.eligible` must be non-missing logical, of length one or length(rebate_income).")
   }
   
   # 
@@ -46,18 +55,24 @@ as_raw_sapto_cd <- function(x, nThread = getOption("grattan.nThread", 1L)) {
 }
 
 # sample file 2 on_sapto_cd
-sf2osc <- function(.dots.ATO) {
-  stopifnot(is.data.table(.dots.ATO))
+sf2osc <- function(.dots.ATO, yr = NULL, System = NULL) {
+  stopifnot(is.data.frame(.dots.ATO))
+  N <- nrow(.dots.ATO)
   age <- age_from_file(.dots.ATO)
   is_married <- 
-    if (hasName(.dots.ATO, "Marital_status")) {
+    if (hasName(.dots.ATO, "sp_flag")) {
+      .subset2(.dots.ATO, "sp_flag")
+    } else if (hasName(.dots.ATO, "Marital_status")) {
       .subset2(.dots.ATO, "Marital_status")
     } else if (hasName(.dots.ATO, "Partner_status")) {
       .subset2(.dots.ATO, "Partner_status")
     } else {
       integer(length(age))
     }
-  .Call("C_sf2osc", rep_len(as.integer(age), length(is_married)), as.integer(is_married), PACKAGE = packageName())
+  yr <- yr %||% fy::fy2yr(fy::date2fy(Sys.Date()))
+  .Call("C_sf2osc", rep_len(as.integer(age), N),
+        rep_len(as.integer(is_married), N), as.integer(yr), System,
+        PACKAGE = packageName())
 }
 
 

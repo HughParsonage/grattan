@@ -1,16 +1,25 @@
 #' Income tax payable
 #' 
 #' @name income_tax
-#' @param income The individual assessable income.
-#' @param fy.year The financial year in which the income was earned. Tax years 2000-01 to 2018-19 are supported, as well as the tax year 2019-20, for convenience. 
+#' @param income The individual's taxable income.
+#' @param fy.year The financial year in which the income was earned. Native schedules
+#' are available from 1983-84 through 2029-30. For future years, enacted rates
+#' are used and annually indexed amounts remain at their latest enacted values.
 #' If \code{fy.year} is not given, the current financial year is used by default.
 #' @param age The individual's age. Ignored if \code{.dots.ATO} is provided (and contains
 #' an age variable such as \code{age_range} or \code{Birth_year}).
-#' @param return.mode The mode (numeric or integer) of the returned vector.
+#' @param return.mode Return the numeric or integer assessment vector, or its
+#' \code{"sum"} or \code{"mean"}.
 #' @param .dots.ATO A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files.
 #' 
 #' Age variables in \code{.dots.ATO} take precedence over \code{age} and providing both
 #' is a warning.
+#' Supply \code{sp_taxable_income_loss} separately from \code{spc_rebate_income}
+#' when both are available: Medicare uses the former and SAPTO the latter.
+#' An explicit \code{on_sapto_cd} supplies actual SAPTO eligibility; otherwise
+#' eligibility is inferred from age and family status. Supply \code{ic_rebate_income}
+#' when the aggregate fringe-benefit field cannot identify the exempt-employer
+#' amount or other rebate-income adjustments are required.
 #' 
 #' @param System A \code{tax-system} created by \code{System()} or \code{NULL}, the default,
 #' corresponding to the tax system of the given year.
@@ -36,9 +45,9 @@
 #' \emph{Income Tax Rates Act 1986} (Cth).}
 #' \item{Medicare levy}{See \code{\link{medicare_levy}} for details.}
 #' \item{LITO}{See \code{\link{lito}} for details.}
-#' \item{SAPTO}{See \code{\link{sapto}}. For years preceding the introduction of SAPTO, 
-#' the maximum offset is assumed to apply to those above age 65 (since the sample files only provide 5-year 
-#' age groups).}
+#' \item{SAPTO}{See \code{\link{sapto}}. Earlier years use the implemented senior
+#' Australian offset schedule. Without an explicit claim code, eligibility is
+#' inferred from the available age and family-status variables.}
 #' \item{SBTO}{See \code{\link{small_business_tax_offset}} for details.}
 #' \item{Historical levies}{The flood levy and the temporary budget repair levy.}
 #' }
@@ -134,183 +143,107 @@ age_from_file <- function(.dots.ATO, age = NULL) {
 
 
 
-income_tax2 <- function(income = NULL, 
-                        fy.year = NULL, 
+income_tax2 <- function(income = NULL,
+                        fy.year = NULL,
                         .dots.ATO = NULL,
                         System = NULL,
                         nThread = getOption("grattan.nThread", 1L),
                         summary = 0L) {
   summary <- as.integer(summary)
-  has_nom <- function(x) {
-    is.character(x) && length(x) == 1L && !is.na(x) && hasName(.dots.ATO, x)
+  if (!is.null(.dots.ATO) && !is.data.frame(.dots.ATO)) {
+    stop("`.dots.ATO` must be a data.frame or data.table.")
   }
-  
-  s2 <- function(x, ..., default = 0L, .r = FALSE) {
-    if (is.null(.dots.ATO)) {
-      return(default)
+  column <- function(..., default = 0L) {
+    for (name in c(...)) {
+      value <- .subset2(.dots.ATO, name)
+      if (!is.null(value)) return(value)
     }
-    # Takes column names returning the first (without evaluting the others)
-    # then uses the defaults
-    if (has_nom(x)) {
-      return(.subset2(.dots.ATO, x))
-    }
-    if (missing(..1)) {
-      return(eval(default))
-    }
-    if (.r) {
-      # necessary to avoid returning substitute 
-      # while also not prematurely evaluating
-      return(s2(..., default = default, .r = TRUE))
-    } else {
-      s2(..., default = substitute(default), .r = TRUE)
-    }
+    default
   }
-  
-  ic_taxable_income_loss <- 
-    income %||%
-    s2("ic_taxable_income_loss",
-       "Taxable_Income", default = NULL)
-  if (is.null(ic_taxable_income_loss)) {
+  taxable <- income %||% column("ic_taxable_income_loss", "Taxable_Income", default = NULL)
+  if (is.null(taxable)) {
     stop("Unable to determine taxable income: .dots.ATO lacked names: 'Taxable_Income' or 'ic_taxable_income_loss'.")
   }
-  
-  N <- length(ic_taxable_income_loss)
-  if (is.data.frame(.dots.ATO) && N != nrow(.dots.ATO)) {
-    stop("`length(income) = ", length(income), "` yet `nrow(.dots.ATO) = ", nrow(.dots.ATO), ".")
+  if (!length(taxable)) return(if (summary == 2L) NaN else if (summary == 1L) 0 else numeric())
+  fy.year <- validate_fys_permitted(fy.year %||% fy::date2fy(Sys.Date()))
+  yr <- fy2yr(fy.year)
+  N <- max(length(taxable), length(yr), nrow(.dots.ATO) %||% 0L)
+  if (!(length(taxable) %in% c(1L, N)) || !(length(yr) %in% c(1L, N))) {
+    stop("`income` and `fy.year` must have length 1 or the number of records.")
   }
-  
-  c_age_30_june <- age_from_file(.dots.ATO)
-  
-  
-  
-  is_net_rent <- 
-    s2("is_net_rent", "Net_rent_amt")
-  
-  it_property_loss <- 
-    s2("it_property_loss",
-       "Net_rent_amt")
-  
-  it_rept_empl_super_cont <-
-    s2("it_rept_empl_super_cont",
-       "Rptbl_Empr_spr_cont_amt")
-  
-  it_rept_fringe_benefit <-
-    s2("it_rept_fringe_benefit",
-       "Rep_frng_ben_amt")
-  
-  it_invest_loss <- 
-    s2("it_invest_loss",
-       "Net_fincl_invstmnt_lss_amt")
-  
-  spc_rebate_income <- 
-    s2("spc_rebate_income",
-       "sp_taxable_income_loss",
-       "Spouse_adjusted_taxable_inc")
-  
-  is_married <-
-    s2("sp_flag", 
-       "Partner_status",
-       "Marital_status")
-  
-  n_dependants <- .subset2(.dots.ATO, "c_depend_child") %||% 0L
-  
-  sc_empl_cont <-
-    s2("sc_empl_cont",
-       "MCS_Emplr_Contr")
-  
-  ds_pers_super_cont <-
-    s2("ds_pers_super_cont",
-       "Non_emp_spr_amt")
-  
-  i_frank_cr <-
-    s2("i_frank_cr")
-  
-  # Want this to totally dictate sapto eligibility and rates
-  on_sapto_cd <-
-    if (is.data.table(.dots.ATO)) {
-      if (hasName(.dots.ATO, "on_sapto_cd")) {
-        rep_len(as_raw_sapto_cd(.subset2(.dots.ATO, "on_sapto_cd")), N)
-      } else {
-        rep_len(sf2osc(.dots.ATO), N)
-      } 
-    } else if (is.null(c_age_30_june)) {
-      # Assume never get SAPTO
-      rep.int(as.raw(0), N)
-    } else {
-      # Assume based on Age, no couples
-      rep_len(as_raw_sapto_cd(fifelse(c_age_30_june > 65, "A", "")), N)
+  if (is.data.frame(.dots.ATO)) {
+    if (!(nrow(.dots.ATO) %in% c(1L, N))) {
+      stop("The number of rows in `.dots.ATO` must be 1 or the number of records.")
     }
-  
-  # on_sapto_cd <- rep_len(as_raw_sapto_cd("A"), N)
-  
-  # don't allocate the same vector
+    if (nrow(.dots.ATO) == 1L && N > 1L) {
+      rows <- rep.int(1L, N)
+      .dots.ATO <- if (is.data.table(.dots.ATO)) .dots.ATO[rows] else .dots.ATO[rows, , drop = FALSE]
+    }
+  }
   zero <- integer(N)
   rN <- function(x) .rN(x, zero, nThread)
-  
-  fy.year <- fy.year %||% fy::date2fy(Sys.Date())
-  fy.year <- validate_fys_permitted(fy.year)
-  yr <- fy2yr(fy.year)
-  rebateIncome <- .subset2(.dots.ATO, "ic_rebate_income")
-  
-  if (is.null(rebateIncome)) {
-    rebateIncome <- 
-      .Call("Crebate_income", 
-            rN(ic_taxable_income_loss),  
-            it_rept_empl_super_cont, 
-            sc_empl_cont,
-            ds_pers_super_cont,
-            it_invest_loss,
-            is_net_rent, 
-            it_rept_fringe_benefit,
-            yr, 
-            nThread,
-            PACKAGE = "grattan")
+  taxable <- rN(taxable)
+  age <- rN(age_from_file(.dots.ATO))
+  married <- rN(column("sp_flag", "Partner_status", "Marital_status"))
+  children <- rN(column("c_depend_child"))
+  spouse_rebate <- rN(column("spc_rebate_income", "Spouse_adjusted_taxable_inc",
+                             "sp_taxable_income_loss"))
+  # Medicare uses taxable income, while SAPTO uses rebate income. With only
+  # the older adjusted-income column available, retain that approximation.
+  spouse_taxable <- rN(column("sp_taxable_income_loss", "Spouse_taxable_income",
+                              default = spouse_rebate))
+  claim <- column("on_sapto_cd", default = NULL)
+  claim <- if (is.null(claim)) {
+    claim_data <- .dots.ATO %||% data.table(c_age_30_june = age, sp_flag = married)
+    sf2osc(claim_data, yr = yr, System = System)
+  } else {
+    as_raw_sapto_cd(claim)
   }
-  
-  if (isntConstant(yr)) {
-    DT <- data.table(yr,
-                     ic_taxable_income_loss = rN(ic_taxable_income_loss),
-                     rebateIncome,
-                     c_age_30_june = rN(c_age_30_june),
-                     is_married = rN(is_married),
-                     n_dependants = rN(n_dependants),
-                     on_sapto_cd = on_sapto_cd %||% charToRaw('A'),
-                     i_frank_cr = i_frank_cr %||% 0L,
-                     spc_rebate_income = rN(spc_rebate_income))
-    ans <- DT[, "tax" := .Call("Cincome_tax",
-                               .BY[[1]],
-                               ic_taxable_income_loss,
-                               rebateIncome,
-                               c_age_30_june,
-                               is_married,
-                               n_dependants,
-                               spc_rebate_income,
-                               on_sapto_cd,
-                               i_frank_cr,
-                               System, # RSystem
-                               1L,
-                               summary,
-                               PACKAGE = "grattan"),
-              by = "yr"]
-    return(.subset2(ans, "tax"))
+  if (length(claim) != 1L && length(claim) != N) {
+    stop("`on_sapto_cd` must have length 1 or the number of incomes.")
   }
-  
-  .Call("Cincome_tax",
-        yr[1],
-        rN(ic_taxable_income_loss),
-        rebateIncome,
-        rN(c_age_30_june),
-        rN(is_married),
-        rN(n_dependants),
-        rN(spc_rebate_income),
-        on_sapto_cd %||% rep.int(charToRaw('A'), N),
-        i_frank_cr,
-        System, # RSystem
-        nThread,
-        summary,
-        PACKAGE = "grattan")
-  
-  
+  claim <- rep_len(claim, N)
+  rebate <- column("ic_rebate_income", default = NULL)
+  if (is.null(rebate)) {
+    rebate <- .Call("Crebate_income", taxable,
+                    column("it_rept_empl_super_cont", "Rptbl_Empr_spr_cont_amt"),
+                    NULL, # Total employer contributions include compulsory SG.
+                    column("ds_pers_super_cont", "Non_emp_spr_amt"),
+                    column("it_invest_loss", "Net_fincl_invstmt_lss_amt",
+                           "Net_fincl_invstmnt_lss_amt"),
+                    column("is_net_rent", "Net_rent_amt"),
+                    column("it_rept_fringe_benefit", "Rep_frng_ben_amt"),
+                    yr, nThread, PACKAGE = "grattan")
+  } else {
+    rebate <- rN(rebate)
+  }
+  franking <- rN(column("i_frank_cr"))
+  business_fields <- c("Total_PP_BE_amt", "Total_PP_BI_amt",
+                       "Total_NPP_BE_amt", "Total_NPP_BI_amt")
+  has_business <- all(business_fields %in% names(.dots.ATO))
+  assess <- function(rows, year, summarise = 0L) {
+    business_offset <- NULL
+    if (has_business && year >= 2016L) {
+      basic_tax <- .Call("Cordinary_tax", year, taxable[rows], System,
+                         PACKAGE = "grattan")
+      returns <- if (is.data.table(.dots.ATO)) .dots.ATO[rows] else .dots.ATO[rows, , drop = FALSE]
+      business_offset <- small_business_tax_offset(
+        taxable[rows], basic_tax, .dots.ATO = returns, fy_year = yr2fy(year))
+    }
+    .Call("Cincome_tax", year, taxable[rows], rebate[rows], age[rows],
+          married[rows], children[rows], spouse_rebate[rows], spouse_taxable[rows],
+          claim[rows], franking[rows], business_offset, System,
+          nThread, as.integer(summarise), PACKAGE = "grattan")
+  }
+  if (length(yr) == 1L || !isntConstant(yr)) {
+    return(assess(seq_len(N), yr[1L], summary))
+  }
+  tax <- numeric(N)
+  for (year in unique(yr)) {
+    rows <- which(yr == year)
+    tax[rows] <- assess(rows, year)
+  }
+  if (summary == 1L) sum(tax) else if (summary == 2L) mean(tax) else tax
 }
 
 

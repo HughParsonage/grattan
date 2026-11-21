@@ -43,6 +43,12 @@ SEXP Sapto2Sexp(Sapto S) {
   SET_STRING_ELT(nms, 14, mkCharCE("lito_1st_thresh", CE_UTF8));
   SET_VECTOR_ELT(ans, 15, ScalarReal(S.lito_1st_taper));
   SET_STRING_ELT(nms, 15, mkCharCE("lito_1st_taper", CE_UTF8));
+  SET_VECTOR_ELT(ans, 16, ScalarInteger(S.mxo_illness));
+  SET_STRING_ELT(nms, 16, mkCharCE("max_offset_illness", CE_UTF8));
+  SET_VECTOR_ELT(ans, 17, ScalarInteger(S.lwr_illness));
+  SET_STRING_ELT(nms, 17, mkCharCE("lower_threshold_illness", CE_UTF8));
+  SET_VECTOR_ELT(ans, 18, ScalarInteger(S.upr_illness));
+  SET_STRING_ELT(nms, 18, mkCharCE("upr_illness", CE_UTF8));
   setAttrib(ans, R_NamesSymbol, nms);
   UNPROTECT(2);
   return ans;
@@ -99,85 +105,63 @@ static int supr_thresh(Sapto S, unsigned int on_sapto_cd) {
   }
 }
 
-static double do_1_sapto_sf(int x, int y, int age, unsigned int on_sapto_cd, Sapto S) {
-  // x is rebate income
-  // y is spouse rebate income
-  if (age < S.pension_age) {
-    // ineligible
+static unsigned char normalise_sapto_code(unsigned int code) {
+  if (code >= SAPTO_A && code <= SAPTO_E) {
+    return code;
+  }
+  return code >= 'A' && code <= 'E' ? code - 'A' + SAPTO_A : 0;
+}
+
+static bool sapto_income_eligible(int x, int y, unsigned int code, Sapto S) {
+  if (code < SAPTO_A || code > SAPTO_E || x == NA_INTEGER || y == NA_INTEGER) {
+    return false;
+  }
+  // The annual couple/illness ceilings are combined amounts. ITAA36
+  // s160AAAA(4) tests half of combined income against the individual ceiling.
+  int64_t income = code == SAPTO_A ? x : (int64_t)x + y;
+  return income < supr_thresh(S, code);
+}
+
+static double do_1_sapto_sf(int x, int y, int spouse_taxable, unsigned int on_sapto_cd, Sapto S) {
+  unsigned char code = normalise_sapto_code(on_sapto_cd);
+  if (!sapto_income_eligible(x, y, code, S)) {
     return 0;
   }
-  
-  int upr_thresh = supr_thresh(S, on_sapto_cd);
-  if (((x / 2) + (y / 2)) > upr_thresh) {
-    return 0;
+  double base = smax_offset(S, code);
+  double threshold = slwr_thresh(S, code);
+  bool spouse_eligible = code == SAPTO_B || code == SAPTO_D;
+  if (spouse_eligible) {
+    // Regulation 12: disregard the spouse's other offsets when calculating
+    // the unused base amount. The $6,000 / 15% transfer rule is prescribed
+    // separately from the year's ordinary tax schedule.
+    double unused = dmax0(base - SAPTO_S12_TAPER *
+      dmax0((double)spouse_taxable - SAPTO_S12_THRESH));
+    if (unused > 0) {
+      base += unused;
+      // Regulation 9(5)-(8). These are the prescribed 159N constants,
+      // which are distinct from the current-year LITO schedule.
+      threshold = S.tax_free_thresh + (S.lito_max_offset + base) / S.first_tax_rate;
+      if (threshold > S.lito_1st_thresh) {
+        double rate = S.second_tax_rate + S.lito_1st_taper;
+        threshold = (S.first_tax_rate * S.tax_free_thresh + S.lito_max_offset + base +
+          S.lito_1st_thresh * (rate - S.first_tax_rate)) / rate;
+      }
+      threshold = ceil(threshold);
+    }
   }
-  
-  // on_sapto_cd
-  // A | single
-  // B | couple, both eligible lived apart, nursing home illness
-  // C | meets cond, partner doesn't, nursing home illness
-  // D | both elig, live together
-  // E | you elig, live together, spouse inelig
-  
-  // bool is_married = on_sapto_cd != SAPTO_A;
-  bool spouse_elig = on_sapto_cd == SAPTO_B || on_sapto_cd == SAPTO_D;
-  int max_offset = smax_offset(S, on_sapto_cd);
-  int lwr_thresh = slwr_thresh(S, on_sapto_cd);
-  double taper = S.taper;
-  
-  double o = x < lwr_thresh ? max_offset : dmax0(max_offset - taper * (x - lwr_thresh));
-  
-  if (!spouse_elig) {
-    return o;
-  }
-  
-  // The transfer of unused SAPTO is very complex and frankly unknown, even
-  // within govt.  This lines up 'better' than known models.
-  
-  // If the spouse's income is so high that no spouse SAPTO is 
-  // transferrable, then we just fall back to the original 
-  const int MAX_THR_SPOUSE_XFER_MARRIED = ceil(1602.0 / SAPTO_S12_TAPER + SAPTO_S12_THRESH);
-  if (y > MAX_THR_SPOUSE_XFER_MARRIED) {
-    return o;
-  }
-  
-  double sp_unused_sapto = 
-    (y < SAPTO_S12_THRESH) ? max_offset : dmax0(max_offset - SAPTO_S12_TAPER * (y - SAPTO_S12_THRESH));
-  
-  // https://www.ato.gov.au/individuals/income-and-deductions/in-detail/transferring-the-seniors-and-pensioners-tax-offset/
-  // Following the lettering there
-  double A = S.mxo_couple;
-  double B = A + sp_unused_sapto;
-  double C = B + S.lito_max_offset;
-  double D = C / S.first_tax_rate;
-  double E = D + S.tax_free_thresh;
-  double adj_rebate_threshold = E;
-  if (E > S.lito_1st_thresh) {
-    double G = S.second_tax_rate - S.lito_1st_taper; // 0.34
-    double H = G - S.first_tax_rate;                 // 0.15
-    double I = H * S.lito_1st_thresh;                // 5550
-    double J = S.first_tax_rate * S.tax_free_thresh; // 3458
-    double K = J + S.lito_max_offset;                // 3903
-    double L = K + max_offset;
-    double M = L + sp_unused_sapto;
-    double N = I + M;
-    double O = G;
-    double P = N / O;                                // 37226
-    adj_rebate_threshold = P;
-  }
-  if (x < adj_rebate_threshold) {
-    return B;
-  }
-  
-  double DD = x - adj_rebate_threshold;
-  double EE = DD * taper;
-  double FF = B + EE;
-  
-  return dmax0(FF);
+  // Regulation 11: the increased base is reduced, not increased, by the
+  // taper above the (possibly increased) rebate threshold.
+  return dmax0(base - S.taper * dmax0((double)x - threshold));
+}
+
+bool sapto_entitled(Person P, Sapto S) {
+  // Explicit claim codes identify actual eligibility, including qualifying
+  // pensioners below age-pension age. Age is used only when inferring codes.
+  return do_1_sapto_sf(P.ri, P.yi, P.yti, P.on_sapto_cd, S) >= 1;
 }
 
 void apply_sapto(double * taxi, Person P, Sapto S) {
-  double sapto = do_1_sapto_sf(P.ri, P.yi, P.agei, P.on_sapto_cd, S);
+  double sapto = do_1_sapto_sf(P.ri, P.yi, P.yti, P.on_sapto_cd, S);
   if (sapto >= *taxi) {
     *taxi = 0;
   } else {
@@ -323,21 +307,18 @@ void validate_sapto(Sapto * S, int fix) {
 
 
 
-static bool FamilyStatus_is_single(SEXP x, R_xlen_t i) {
-  const char * xi = CHAR(STRING_ELT(x, i));
-  return xi[0] == 's';
-}
-
 static unsigned char code_OnSaptoCd(SEXP x, R_xlen_t i) {
   switch(TYPEOF(x)) {
   case STRSXP: {
     const char * xi = CHAR(STRING_ELT(x, i));
-    return xi[0];
+    return STRING_ELT(x, i) == NA_STRING ? 0 : normalise_sapto_code(xi[0]);
   }
     break;
   case RAWSXP:
-    return RAW_ELT(x, i);
+    return normalise_sapto_code(RAW_ELT(x, i));
     break;
+  case INTSXP:
+    return normalise_sapto_code(INTEGER_ELT(x, i));
   default:
     return 0;
   }
@@ -345,34 +326,17 @@ static unsigned char code_OnSaptoCd(SEXP x, R_xlen_t i) {
 
 static void set_on_sapto_cd(unsigned char * on_sapto_cd, R_xlen_t N, 
                             SEXP FamilyStatus, SEXP OnSaptoCd) {
-  if (xlength(FamilyStatus) == 1 &&
-      xlength(OnSaptoCd) == 1) {
-    unsigned char family_status0 = FamilyStatus_is_single(FamilyStatus, 0) ? 'A' : 'D';
-    unsigned char on_sapto_cd0 = code_OnSaptoCd(OnSaptoCd, 0);
-    if (family_status0 != on_sapto_cd0) {
-      REprintf("family status == %c and on_sapto_cd == %c differ and so will on_sapto_cd = '%c'"
-                 " will be used.\n", (char)family_status0, (char)on_sapto_cd0,
-                 (char)on_sapto_cd0);
-    }
-    
-    memset(on_sapto_cd, on_sapto_cd0 == 'A' ? SAPTO_A : SAPTO_D, N);
+  if (xlength(OnSaptoCd) == 1) {
+    memset(on_sapto_cd, code_OnSaptoCd(OnSaptoCd, 0), N);
     return;
   }
   if (xlength(OnSaptoCd) == N) {
-    int nThread = 1;
-    FORLOOP({
+    for (R_xlen_t i = 0; i < N; ++i) {
       on_sapto_cd[i] = code_OnSaptoCd(OnSaptoCd, i);
-    })
-      return;
-  }
-  if (xlength(FamilyStatus) == N) {
-    int nThread = 1;
-    FORLOOP({
-      on_sapto_cd[i] = FamilyStatus_is_single(FamilyStatus, i) ? SAPTO_A : SAPTO_D;
-    })
+    }
     return;
   }
-  error("FamilyStatus and OnSaptoCd had different lengths.");
+  error("on_sapto_cd must have length one or the length of rebate_income.");
 }
 
 SEXP Csapto(SEXP RebateIncome, SEXP Yr, SEXP Fill, 
@@ -415,7 +379,7 @@ SEXP Csapto(SEXP RebateIncome, SEXP Yr, SEXP Fill,
     if (nse ? se[i] : se[0]) {
       ansp[i] = do_1_sapto_sf(xp[i],
                               (nsp ? sp[i] : sp[0]), 
-                              99,
+                              (nsp ? sp[i] : sp[0]),
                               on_sapto_cd[i],  // is married
                               S);
     }
@@ -427,44 +391,54 @@ SEXP Csapto(SEXP RebateIncome, SEXP Yr, SEXP Fill,
 }
 
 SEXP C_asraw_OnSaptoCd(SEXP x, SEXP nthreads) {
-  if (TYPEOF(x) == RAWSXP) {
-    return x;
-  }
-  if (!isString(x) && !isInteger(x)) {
+  if (!isString(x) && !isInteger(x) && TYPEOF(x) != RAWSXP) {
     error("x was type '%s' but must be either RAWSXP or integer or character.", type2char(TYPEOF(x)));
   }
   
-  int nThread = as_nThread(nthreads);
+  as_nThread(nthreads);
   R_xlen_t N = xlength(x);
   SEXP ans = PROTECT(allocVector(RAWSXP, N));
   unsigned char * ansp = RAW(ans);
-  if (isInteger(x)) {
-    const int * xp = INTEGER(x);
-    FORLOOP({
-      ansp[i] = xp[i];
-    })
-    UNPROTECT(1);
-    return ans;
+  // STRING_ELT/INTEGER_ELT may materialize ALTREP data. Keep all R API
+  // access on the R thread rather than inside an OpenMP worker.
+  for (R_xlen_t i = 0; i < N; ++i) {
+    ansp[i] = code_OnSaptoCd(x, i);
   }
-  
-  FORLOOP({
-    ansp[i] = CHAR(STRING_ELT(x, i))[0];
-  })
   UNPROTECT(1);
   return ans;
 }
 
-SEXP C_sf2osc(SEXP Age, SEXP isMarried) {
+SEXP C_sf2osc(SEXP Age, SEXP isMarried, SEXP Yr, SEXP RSystem) {
   R_xlen_t N = xlength(isMarried);
   isEquiInt(Age, isMarried, "age");
   const int * age = INTEGER(Age);
   const int * is_married = INTEGER(isMarried);
+  if (!isInteger(Yr) || (xlength(Yr) != 1 && xlength(Yr) != N)) {
+    error("yr must be an integer with length one or the number of records.");
+  }
+  const int * year = INTEGER(Yr);
+  bool scalar_year = xlength(Yr) == 1;
+  double required_age[MAX_YEAR - MIN_YEAR + 1] = {0};
+  bool initialized[MAX_YEAR - MIN_YEAR + 1] = {false};
+  for (R_xlen_t i = 0; i < N; ++i) {
+    int yr = year[scalar_year ? 0 : i];
+    if (yr < MIN_YEAR || yr > MAX_YEAR) {
+      error("yr must be between %d and %d.", MIN_YEAR, MAX_YEAR);
+    }
+    if (!initialized[yr - MIN_YEAR]) {
+      System Sys = Sexp2System(RSystem, yr);
+      required_age[yr - MIN_YEAR] = Sys.has_sapto ? Sys.S.pension_age : R_PosInf;
+      initialized[yr - MIN_YEAR] = true;
+    }
+  }
   SEXP ans = PROTECT(allocVector(RAWSXP, N));
   unsigned char * restrict ansp = RAW(ans);
   int nThread = 1;
   FORLOOP({
     ansp[i] = 0;
-    if (age[i] >= 65) {
+    int yr = year[scalar_year ? 0 : i];
+    if (age[i] != NA_INTEGER && is_married[i] != NA_INTEGER &&
+        age[i] >= required_age[yr - MIN_YEAR]) {
       ansp[i] = (is_married[i] == 0) ? SAPTO_A : SAPTO_D;
     }
   })

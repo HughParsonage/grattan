@@ -19,6 +19,7 @@ double ml_taper(int yr) {
 
 int ml_lower_thresh(int yr, bool family, bool sapto) {
   System Sys = yr2System(yr);
+  sapto = sapto && Sys.M.has_sapto_thr;
   if (family) {
     return sapto ? Sys.M.lwr_family_sapto : Sys.M.lwr_family;
   }
@@ -27,6 +28,7 @@ int ml_lower_thresh(int yr, bool family, bool sapto) {
 
 int ml_upper_thresh(int yr, bool family, bool sapto) {
   System Sys = yr2System(yr);
+  sapto = sapto && Sys.M.has_sapto_thr;
   if (family) {
     return sapto ? Sys.M.upr_family_sapto : Sys.M.upr_family;
   }
@@ -123,6 +125,7 @@ SEXP Medicare2Sexp(Medicare M) {
   SET_VECTOR_ELT(ans, 10, ScalarInteger(M.lwr_thr_up_per_child));
   SET_VECTOR_ELT(ans, 11, ScalarReal(M.taper));
   SET_VECTOR_ELT(ans, 12, ScalarReal(M.rate));
+  SET_VECTOR_ELT(ans, 13, ScalarReal(M.max_levy));
   SEXP nms = PROTECT(allocVector(STRSXP, MEDICARE_LEN)); ++np;
   SET_STRING_ELT(nms, 0, mkCharCE("lower_single_threshold", CE_UTF8));
   SET_STRING_ELT(nms, 1, mkCharCE("upper_single_threshold", CE_UTF8));
@@ -137,6 +140,7 @@ SEXP Medicare2Sexp(Medicare M) {
   SET_STRING_ELT(nms, 10, mkCharCE("lower_up_for_each_child", CE_UTF8));
   SET_STRING_ELT(nms, 11, mkCharCE("taper", CE_UTF8));
   SET_STRING_ELT(nms, 12, mkCharCE("rate", CE_UTF8));
+  SET_STRING_ELT(nms, 13, mkCharCE("max_levy", CE_UTF8));
   setAttrib(ans, R_NamesSymbol, nms);
   UNPROTECT(np);
   return ans;

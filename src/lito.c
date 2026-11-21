@@ -8,7 +8,7 @@ bool has_lito(int yr) {
 }
 
 bool has_lmito(int yr) {
-  return yr >= 2019;
+  return yr >= 2019 && yr <= 2022;
 }
 
 int max_lito1(int yr) {
@@ -53,7 +53,7 @@ int threshold_lito1(int yr) {
     return 21600;
   }
   if (yr == 2003) {
-    return 18575;
+    return 20700;
   }
   return 0;
 }
@@ -139,7 +139,9 @@ SEXP C_lito(SEXP x, SEXP Year, SEXP doLmito) {
     const double * xp = REAL(x);
     for (R_xlen_t i = 0; i < N; ++i) {
       ansp[i] = 0;
-      if (xp[i] > 0 && xp[i] < INT_MAX) {
+      if (ISNAN(xp[i])) {
+        ansp[i] = NA_REAL;
+      } else if (xp[i] >= 0 && xp[i] < INT_MAX) {
         ansp[i] = value_OffsetN(xp[i], O);
       }
     }

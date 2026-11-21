@@ -16,7 +16,8 @@ bto(
 \arguments{
 \item{benefit_amount}{The amount of Tax Offsetable benefit received by the taxpayer during the income year.}
 
-\item{fy.year}{The income year. Not used by default.}
+\item{fy.year}{The income year. If supplied, selects the legislated
+coefficients and the threshold at the end of the lowest positive-rate band.}
 
 \item{rate1}{The coefficient in Division 2, section 13(2) of the Income Tax Assessment (1936 Act) Regulation 2015
 (the regulations).}
@@ -34,8 +35,3 @@ The beneficiary tax offset.
 \description{
 Beneficiary tax offset
 }
-\section{WARNING}{
-
-This function disagrees with the ATO online calculator.
-}
-

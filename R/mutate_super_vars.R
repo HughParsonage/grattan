@@ -190,9 +190,9 @@ apply_super_caps_and_div293 <- function(.sample.file,
   .sample.file[ , rental_losses := -1 * pminC(Net_rent_amt, 0)]
   .sample.file[ , surchargeable_income_div293 := Taxable_Income + Net_fincl_invstmt_lss_amt + rental_losses + Rep_frng_ben_amt]
   if (use_other_contr){
-    .sample.file[ , low_tax_contributions_div293 := pmaxC(concessional_contributions + MCS_Othr_Contr - excess_concessional_contributions, 0)]
+    .sample.file[ , low_tax_contributions_div293 := pmaxC(concessional_contributions + MCS_Othr_Contr, 0)]
   } else {
-    .sample.file[ , low_tax_contributions_div293 := pmaxC(concessional_contributions - excess_concessional_contributions, 0)]
+    .sample.file[ , low_tax_contributions_div293 := pmaxC(concessional_contributions, 0)]
   }
   .sample.file[ , div293_income := surchargeable_income_div293 + low_tax_contributions_div293]
   .sample.file[ , div293_tax := if_else(div293_income > div293_threshold, 

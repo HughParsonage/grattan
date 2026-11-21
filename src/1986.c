@@ -1,5 +1,5 @@
-#ifndef grattan_1985_H
-#define grattan_1985_H
+#ifndef grattan_1986_H
+#define grattan_1986_H
 #include "grattan.h"
 
 System System1986 = {
@@ -8,19 +8,19 @@ System System1986 = {
   .BRACKETS = { 0, 4595, 12500, 19500, 28000, 35000, INT_MAX, INT_MAX },
   .RATES = { 0, 0.25, 0.3, 0.46, 0.48, 0.6, 0.6, 0.6 },
   .M = {
-    .lwr_single = 7527,
-    .upr_single = 8856,
-    .lwr_family = 12505,
-    .upr_family = 14712,
-    .has_sapto_thr = true,
+    .lwr_single = 7526,
+    .upr_single = 7923,
+    .lwr_family = 12504,
+    .upr_family = 13163,
+    .has_sapto_thr = false,
     .sapto_age = 65,
-    .lwr_single_sapto = 1986,
-    .upr_single_sapto = 2337,
-    .lwr_family_sapto = 16843008,
-    .upr_family_sapto = 19815304,
+    .lwr_single_sapto = 7526,
+    .upr_single_sapto = 7923,
+    .lwr_family_sapto = 12504,
+    .upr_family_sapto = 13163,
     .lwr_thr_up_per_child = 1530,
-    .taper = 0.25,
-    .rate = 0.0125
+    .taper = .20,
+    .rate = .01
   },
   .has_sapto = false,
   .S = {

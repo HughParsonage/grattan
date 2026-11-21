@@ -1,0 +1,133 @@
+Tax-law corrections in grattan 2026.3.3
+
+This source register accompanies the regression tests named test-law-*.R.
+The audit baseline was afc57647cc73631507bd11a7df7c00bffb1cd997. Expected
+amounts in the tests are derived from the provisions and dated worksheets
+below, rather than copied from the former package output or internal tables.
+
+Ordinary tax and temporary levies (test-law-annual.R / test-law-medicare.R)
+
+The independent boundary sweep in test-law-schedules.R transcribes full-year
+resident schedules from Parliamentary Library Table 3 and the ATO tables:
+https://www.aph.gov.au/~/media/05%20About%20Parliament/54%20Parliamentary%20Depts/544%20Parliamentary%20Library/Browse%20by%20topic/CarbonPricing_Tax.pdf
+https://www.ato.gov.au/tax-rates-and-codes/tax-rates-australian-residents
+
+* Temporary budget repair levy: 2% of the part exceeding $180,000 during
+  2014-15 through 2016-17. Income Tax Rates Act 1986 former s34:
+  https://www.legislation.gov.au/C2014A00045/asmade/2014-06-25/text/original/epub/OEBPS/document_1/document_1.html
+* Flood levy: 2011-12, 0.5% between $50,000 and $100,000 and 1% thereafter;
+  the separate levy is not extinguished by ordinary non-refundable offsets:
+  https://www.legislation.gov.au/C2011A00015/asmade/2011-04-12/text/original/epub/OEBPS/document_1/document_1.html
+* Enacted first positive marginal rates: 16% in 2024-25/2025-26, 15% in
+  2026-27 and 14% from 2027-28. Income Tax Rates Act 1986 Schedule 7:
+  https://www.legislation.gov.au/C2004A03348/2026-07-01/2026-07-01/text/original/epub/OEBPS/document_1/document_1.html
+  Future annually indexed values remain at their latest enacted amounts;
+  these schedules do not invent future legislation or CPI adjustments.
+
+Medicare (test-law-medicare.R / test-law-annual.R)
+
+* Sections 7 and 8 limit the individual's liability first, then reduce it
+  using family income. Proration depends on the spouse owing levy, and
+  unused reductions can transfer. Family income uses taxable income, not
+  rebate income. Senior thresholds require actual SAPTO entitlement:
+  https://www.legislation.gov.au/C2004A03351/2025-03-28/2025-03-28/text/original/epub/OEBPS/document_1/document_1.html
+  https://www.ato.gov.au/individuals-and-families/income-deductions-offsets-and-records/tax-offsets/seniors-and-pensioners-tax-offset
+* 2024-25 and 2025-26 annual thresholds:
+  https://www.legislation.gov.au/C2004A03351/2025-03-28/2025-03-28/text/original/epub/OEBPS/document_1/document_1.html
+  https://www.legislation.gov.au/C2004A03351/2026-07-01/2026-07-01/text/original/epub/OEBPS/document_1/document_1.html
+* Early rates, phase-in rules and historical individual/married ceilings:
+  https://www.legislation.gov.au/C2004A02769/asmade/1983-10-01/text/original/pdf
+  https://www.legislation.gov.au/C2004A02965/asmade/1984-10-10/text/original/pdf
+  https://www.legislation.gov.au/C2004A03351/asmade/1986-11-04/text/original/pdf
+  https://iorder.com.au/publication/Download.aspx?ProdID=0668-6.1986
+* Corrected historical lower-threshold endpoints and year assignments:
+  https://www.legislation.gov.au/C2004A00646/asmade/2000-05-30/text/original/pdf
+  https://www.legislation.gov.au/C2004A00973/asmade/2002-06-26/text/original/pdf
+  https://www.legislation.gov.au/C2011A00044/asmade/2011-06-27/text/original/pdf
+  https://www.legislation.gov.au/C2016A00039/asmade/2016-05-04/text/original/epub/OEBPS/document_1/document_1.html
+  https://www.legislation.gov.au/C2017A00058/asmade/2017-06-22/text/original/pdf
+  Unverified older one-dollar endpoints were not all reconstructed.
+  The stored upper-threshold API denotes the first whole-dollar income at
+  the full rate, which can be one dollar above the Act's inclusive phase-in
+  limit. The levy itself is calculated from the exact minimum formula.
+  https://www.legislation.gov.au/bills/C2021B00055EM_1.pdf
+
+LITO, LMITO, SAPTO and beneficiary offset (test-law-offsets.R)
+
+* 2021-22 LMITO's $420 increase excludes exactly $126,000; eligibility does
+  not continue at higher incomes. ITAA 1997 ss61-105/61-107 and Schedule 6:
+  https://www.legislation.gov.au/C2022A00014/asmade/2022-03-31/text/original/epub/OEBPS/document_1/document_1.html
+  https://www.legislation.gov.au/C2004A05138/2021-09-01/2021-09-01/text/original/epub/OEBPS/document_2/document_2.html
+* SAPTO base, transfer and recalculated threshold/taper: regulations 9-12.
+  The $445 / $37,000 / 0.015 values are prescribed 159N constants, distinct
+  from the current LITO. The transfer's $6,000 / 15% constants are also
+  prescribed separately from ordinary tax. Beneficiary offset regulation 13
+  uses the dated next-band threshold and floors benefits before computing
+  and rounding up the offset:
+  https://www.legislation.gov.au/F2015L01415/2022-12-09/2022-12-09/text/original/pdf
+* SAPTO current worked transfer example and income limits:
+  https://www.ato.gov.au/individuals-and-families/income-deductions-offsets-and-records/tax-offsets/seniors-and-pensioners-tax-offset
+  https://www.ato.gov.au/about-ato/new-legislation/in-detail/individuals/personal-income-tax-new-tax-cuts-for-every-australian-taxpayer
+* Historical senior schedules are distinct from pensioner offset schedules:
+  https://www.ato.gov.au/api/public/content/d2954399-b472-417d-b989-66d5b0f3c6be_Taxpack_2003_retirees_pdf
+  https://archive.budget.gov.au/2001-02/bp2/bp2.pdf
+  https://www.dss.gov.au/sites/default/files/documents/06_2012/tax2003-04.pdf
+  https://www.dss.gov.au/sites/default/files/documents/06_2012/tax2004-05.pdf
+  https://www.dss.gov.au/sites/default/files/documents/06_2012/tax_2005-06.pdf
+  https://archive.budget.gov.au/2008-09/bp2/bp2.pdf
+  https://www.ato.gov.au/forms-and-instructions/do-you-need-to-lodge-a-tax-return-2010
+  https://www.ato.gov.au/api/public/content/0-65ac9160-a3de-49cc-9fa6-cc6486246890
+* Historical 2002-03 LITO threshold $20,700, before the July 2003 increase:
+  https://treasury.gov.au/publication/treasury-annual-report-2002-2003/part-2-performance-report-outcome-2
+  https://treasury.gov.au/publication/tax-expenditures-statement-2004/chapter-6-tax-expenditures-part-1
+
+Small-business offset (test-law-offsets.R / test-law-integration.R)
+
+Rates 5%, 8%, 13%, 16% apply from 2015-16, 2016-17, 2020-21 and 2021-22
+respectively. Turnover limit rises from $2m to $5m from 2016-17. The business
+income fraction cannot exceed one. The offset is non-refundable, capped at
+$1,000 and reduces ordinary tax before Medicare and temporary levies:
+https://www.ato.gov.au/businesses-and-organisations/income-deductions-and-concessions/income-and-deductions-for-business/concessions-offsets-and-rebates/small-business-income-tax-offset
+https://www.legislation.gov.au/C2004A05138/2026-07-01/2026-07-01/text/original/epub/OEBPS/document_7/document_7.html
+https://www.legislation.gov.au/bills/C2018B00199EM_1.pdf
+
+Rebate income and Division 293 (test-law-rebate-super.R)
+
+ITAA 1936 s6 includes reportable super contributions and total net investment
+losses. Compulsory SG is not a reportable employer contribution. Negative
+net rent is a loss to add back; positive rent must not be added twice:
+https://www.legislation.gov.au/C2009A00027/asmade/2009-03-26/text/original/pdf
+https://www.ato.gov.au/businesses-and-organisations/super-for-employers/setting-up-super-for-your-business/identify-reportable-employer-super-contributions
+Historical ATO rebate worksheets use fringe adjustment .535 in 2013-14,
+.53 in 2014-15, .51 in 2015-16/2016-17 and .53 subsequently:
+https://www.ato.gov.au/law/view/document?PiT=99991231235958&locid=%27TXR%2FTR20012%2FNAT%2FATO%27
+https://iorder.com.au/publication/Download.aspx?ProdID=71050-6.2014&dl=Y
+https://iorder.com.au/publication/Download.aspx?ProdID=71050-6.2016
+
+ITAA 1997 s293-25 excludes excess concessional contributions exactly once;
+s293-20 selects the lesser of low-tax contributions and income above the
+threshold. The tests use explicit historical cap/threshold settings, exclude
+defined-benefit and carry-forward complications, and do not claim current
+policy defaults from the older modelling helper:
+https://www.legislation.gov.au/C2004A05138/2026-08-27/2026-08-27/text/original/epub/OEBPS/document_6/document_6.html
+
+Pension-age helper (test-law-rebate-super.R)
+
+Before July 2013 the male pension age was 65 while women's ages increased
+in stages. Financial-year and date inputs must agree for each sex:
+https://guides.dss.gov.au/social-security-guide/3/4/1/10
+
+Remaining input assumptions
+
+An explicit SAPTO claim code denotes actual entitlement, including eligible
+under-age pensioners. Without it the package infers from available age and
+family status; it cannot reconstruct missing pension/veteran/residency facts.
+Medicare's standalone API has no spouse-entitlement argument and uses the
+spouse's ordinary threshold. income_tax can use the paired claim codes.
+When spouse taxable income is absent, the older adjusted-income field remains
+an approximation; separate supplied taxable and rebate fields remain separate.
+Aggregate modern fringe-benefit fields do not identify exempt versus other
+employers; an explicitly supplied ic_rebate_income overrides reconstruction.
+Historical CGT policy rescaling outside the clearly documented supported
+period, asset-level reconstruction, population costing and unavailable facts
+are outside these fixes.

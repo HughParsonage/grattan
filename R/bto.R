@@ -1,6 +1,7 @@
 #' Beneficiary tax offset
 #' @param benefit_amount The amount of Tax Offsetable benefit received by the taxpayer during the income year.
-#' @param fy.year The income year. Not used by default.
+#' @param fy.year The income year. If supplied, selects the legislated
+#' coefficients and the threshold at the end of the lowest positive-rate band.
 #' @param rate1 The coefficient in Division 2, section 13(2) of the Income Tax Assessment (1936 Act) Regulation 2015
 #' (the regulations).
 #' @param benefit_threshold The amount of benefits above which the offset applies.
@@ -9,8 +10,6 @@
 #' @param rate2 The second coefficient in section 13(3) of the regulations.
 
 #' @return The beneficiary tax offset. 
-#' @section WARNING:
-#' This function disagrees with the ATO online calculator. 
 #' @export
 
 bto <- function(benefit_amount,
@@ -19,35 +18,34 @@ bto <- function(benefit_amount,
                 benefit_threshold = 6000,
                 tax_threshold = 37000,
                 rate2 = 0.15) {
-  if (is.null(fy.year) || all(fy.year > "2005-06")) {
-    pmaxC(ceiling(rate1 * (benefit_amount - benefit_threshold) + rate2 * pmaxC(benefit_amount - tax_threshold, 0)), 0)
-  } else {
-    fys_with_bto <- .subset2(bto_tbl, "fy_year")
-    if (any(fy.year %notin% fys_with_bto)) {
-      stop("fy.year must be in the range ", min(fys_with_bto), " to ", max(fys_with_bto))
-    }
-    
-    # Taxpayer's benefit amount is the amount of Tax Offsetable benefit received by the taxpayer during 
-    # the income year, rounded down to the nearest whole dollar.
-    
-    input <- 
-      data.table(benefit_amount = floor(benefit_amount), 
-                 fy_year = fy.year)
-    
-    # names(bto_tbl) for CRAN Note avoidance
-    lowest_marginal_rate <-
-      tax_free_threshold <-
-      next_threshold <-
-      coefficient_abv_next_threshold <- NULL
-    
-    output <- 
-      bto_tbl[input,
-              j = .(out = lowest_marginal_rate * (benefit_amount - tax_free_threshold) + 
-                      coefficient_abv_next_threshold * pmaxC(benefit_amount - next_threshold, 0)),
-              on = "fy_year"]
-    
-    # If the Tax Offset amount calculated using the above formulae is not a whole dollar amount, it is rounded 
-    # up to the nearest whole dollar.
-    pmaxC(ceiling(.subset2(output, "out")), 0)
+  if (!length(benefit_amount)) {
+    return(numeric())
   }
+  if (!is.null(fy.year)) {
+    yr <- fy::fy2yr(fy.year)
+    if (anyNA(yr) || any(yr < 1997)) {
+      stop("fy.year must be 1996-97 or later.")
+    }
+    previous <- match(yr, fy::fy2yr(.subset2(bto_tbl, "fy_year")))
+    # Since 2005-06 the 15% coefficients and $6,000 allowance are fixed
+    # by regulation; the next-band threshold still follows the tax year.
+    if (missing(rate1)) {
+      rate1 <- ifelse(yr <= 2006, .subset2(bto_tbl, "lowest_marginal_rate")[previous], 0.15)
+    }
+    if (missing(benefit_threshold)) {
+      benefit_threshold <- ifelse(yr <= 2006, .subset2(bto_tbl, "tax_free_threshold")[previous], 6000)
+    }
+    if (missing(rate2)) {
+      rate2 <- ifelse(yr <= 2006, .subset2(bto_tbl, "coefficient_abv_next_threshold")[previous], 0.15)
+    }
+    if (missing(tax_threshold)) {
+      tax_threshold <- vapply(yr, function(y) brack_by_year(as.integer(y), 3L), integer(1))
+    }
+  }
+  prohibit_vector_recycling(benefit_amount, rate1, benefit_threshold, tax_threshold, rate2)
+  # Regulation 13(4)-(5): floor benefits before calculating and rounding up
+  # the offset. The order matters for benefit amounts containing cents.
+  benefit_amount <- floor(benefit_amount)
+  pmax(ceiling(rate1 * (benefit_amount - benefit_threshold) +
+                rate2 * pmax(benefit_amount - tax_threshold, 0)), 0)
 }

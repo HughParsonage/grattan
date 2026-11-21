@@ -31,7 +31,8 @@ sapto(
 \item{on_sapto_cd}{SAPTO claim code type (for non-veterans). A 
 letter A-E. A = single, B = lived apart due to illness and spouse was eligible,
  C = lived apart but spouse ineligible, D = lived together, both eligible for sapto, 
- E = lived together, spouse ineligible. Only \code{"A"} and \code{"D"} are supported.}
+ E = lived together, spouse ineligible. A supplied code denotes actual
+eligibility; the standalone function does not infer eligibility from age.}
 
 \item{.check}{Run checks for consistency of values. For example, ensuring no 
 single individuals have positive \code{Spouse_income}.}

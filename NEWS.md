@@ -1,3 +1,20 @@
+## 2026.3.3
+
+* Corrected the temporary budget repair levy base and the year of the flood levy,
+  and added the legislated 2026-27 and 2027-28 income tax rates.
+* Corrected Medicare family reductions, senior eligibility, historical rates and
+  ceilings, and annual thresholds. Mixed-year vectors now use each year's rules.
+* Corrected LMITO's 2021-22 cutoff, historical LITO and senior offset parameters,
+  SAPTO spouse transfers and claim codes, and beneficiary offset calculations.
+* Updated the small-business income tax offset's rates and turnover threshold,
+  capped its income fraction, and restored its application in `income_tax()`.
+* Corrected rebate-income addbacks and historical fringe-benefit adjustments,
+  the Division 293 excess-contribution calculation, and historical male pension
+  ages supplied as financial years. Numeric and integer addback columns agree.
+* Added statutory boundary and public-assessment regression tests. Legal sources
+  and the remaining input-data assumptions are recorded in
+  `inst/law-audit-sources.txt`.
+
 ## 2026.3.2
 
 * Fixed `2023-24` income tax above $180,000 to apply the 45% top marginal rate.

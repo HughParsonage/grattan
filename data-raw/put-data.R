@@ -125,61 +125,11 @@ git_compare_prev <- function(file.tsv, nomatch = NA_integer_, threshold = 0) {
   
 }
 
-tax_tbl <-
-  data.table::fread("./data-raw/tax-brackets-and-marginal-rates-by-fy.tsv")
-
-shift0 <- function(x) shift(x, fill = 0)
-tax_table2 <- 
-  tax_tbl %>%
-  copy %>%
-  .[, tax_at := cumsum(shift0(marginal_rate) * (lower_bracket - shift0(lower_bracket))), by = "fy_year"] %>%
-  .[, .(fy_year, income = lower_bracket, lower_bracket, marginal_rate, tax_at)] %>%
-  setkey(fy_year, income)
-
-lito_tbl <- 
-  readxl::read_excel("./data-raw/lito-info.xlsx", sheet = 1) %>% 
-  setDT %>%
-  drop_col("source") %>%
-  setkeyv("fy_year") %>%
-  unique(by = key(.))
-
-lito_tbl %>% 
-  readr::write_tsv("./data-raw/lito-info.tsv")
-
-medicare_tbl_indiv <- 
-  readxl::read_excel("./data-raw/medicare-tables.xlsx", sheet = "indiv") %>%
-  data.table::as.data.table(.)
-
-medicare_tbl <- 
-  medicare_tbl_indiv %>%
-  .[, sato := as.logical(sato)] %>%
-  .[, pto := as.logical(pto)] %>%
-  .[, sapto := as.logical(sapto)] %>%
-  data.table::setkey(fy_year, sapto) %>%
-  # avoid cartesian joins
-  unique
-
-# To ensure faster versions of calculations do not evaluate NA.
-set(medicare_tbl, which(is.na(medicare_tbl[["lower_up_for_each_child"]])), "lower_up_for_each_child", 0)
-set(medicare_tbl, which(is.na(medicare_tbl[["upper_threshold"]])), "upper_threshold", 0)
-
-medicare_tbl %>% 
-  readr::write_tsv("./data-raw/medicare_tbl.tsv")
-
-sapto_tbl <- 
-  readxl::read_excel("./data-raw/SAPTO-rates.xlsx", sheet = 1) %>% 
-  as.data.table %>%
-  .[, max_offset := if_else(family_status == "single", max_offset, max_offset * 2)] %>%
-  .[, lower_threshold := if_else(family_status == "single", lower_threshold, lower_threshold * 2)] %>%
-  # Choose maximum
-  .[, max_max_offset := max(max_offset), by = .(fy_year, family_status)] %>%
-  .[max_offset == max_max_offset] %>%
-  setkey(fy_year, family_status) %>% 
-  # avoid cartesian joins in income_tax
-  unique 
-
-sapto_tbl %>%
-  readr::write_tsv("./data-raw/sapto_tbl.tsv")
+# The reviewed TSV law tables are authoritative. Keep this full-data rebuild
+# and the lightweight law-only cache refresh on the same loading path.
+.law_tables_env <- new.env(parent = baseenv())
+sys.source("data-raw/update-law-data.R", envir = .law_tables_env)
+list2env(.law_tables_env$read_law_tables("."), envir = environment())
 
 hecs_tbl <- 
   fread("./data-raw/Student-repayment-thresholds-HELP.tsv") %>%
