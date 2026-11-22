@@ -90,10 +90,12 @@ System yr2System(int yr) {
     return System2024;
   case 2025:
     return System2025;
-  case 2026:
+  case 2026: {
     return System2026;
-  case 2027:
+  }
+  case 2027: {
     return System2027;
+  }
   case 2028:
   case 2029:
   case 2030: {

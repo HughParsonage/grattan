@@ -4,7 +4,9 @@
 test_that("resident schedules and separate levies match independent annual scales", {
   scales <- list()
   add <- function(years, thresholds, rates) {
-    for (yr in years) scales[[as.character(yr)]] <<- list(b = c(0, thresholds), r = c(0, rates))
+    for (yr in years) {
+      scales[[as.character(yr)]] <<- list(b = c(0, thresholds), r = c(0, rates))
+    }
   }
   add(1984, c(4595,19500,35788), c(.30,.46,.60))
   add(1985, c(4595,12500,19500,28000,35000,35788), c(.2667,.30,.46,.4733,.5533,.60))
@@ -36,9 +38,15 @@ test_that("resident schedules and separate levies match independent annual scale
     vapply(x, function(z) sum(pmax(0, pmin(z, c(b[-1], Inf)) - b) * r), numeric(1))
   }
   legal_levies <- function(x, yr) {
-    if (yr == 2012L) .005 * pmax(0, pmin(x, 100000) - 50000) + .01 * pmax(0, x - 100000)
-    else if (yr %in% 2015:2017) .02 * pmax(0, x - 180000)
-    else rep(0, length(x))
+    if (yr == 2012L) {
+      .005 * pmax(0, pmin(x, 100000) - 50000) + .01 * pmax(0, x - 100000)
+    }
+    else if (yr %in% 2015:2017) {
+      .02 * pmax(0, x - 180000)
+    }
+    else {
+      rep(0, length(x))
+    }
   }
   for (yr in 1984:2030) {
     s <- scales[[as.character(yr)]]

@@ -11,23 +11,31 @@ static Amount amount_view(SEXP x) {
   Amount out = {0};
   out.length = xlength(x);
   if (out.length) {
-    if (isReal(x)) out.real = REAL(x);
-    else if (isInteger(x)) out.integer = INTEGER(x);
-    else if (isLogical(x)) out.integer = LOGICAL(x);
+    if (isReal(x)) {
+      out.real = REAL(x);
+    } else if (isInteger(x)) {
+      out.integer = INTEGER(x);
+    } else if (isLogical(x)) {
+      out.integer = LOGICAL(x);
+    }
   }
   return out;
 }
 
 // Missing addbacks are zero. Worker threads only read plain pointers.
 static double amount_at(Amount x, R_xlen_t i) {
-  if (!x.length) return NA_REAL;
+  if (!x.length) {
+    return NA_REAL;
+  }
   R_xlen_t j = x.length == 1 ? 0 : i;
   double out = NA_REAL;
   if (x.real) {
     out = x.real[j];
   } else if (x.integer) {
     int value = x.integer[j];
-    if (value != NA_INTEGER) out = value;
+    if (value != NA_INTEGER) {
+      out = value;
+    }
   }
   return out;
 }
@@ -49,8 +57,12 @@ static void check_amount(SEXP x, R_xlen_t n, const char * name) {
 static double fringe_adjustment(int year) {
   // ITAA 1936 s6: complement of the applicable FBT rate. These are the
   // 2014/2016/2017 ATO rebate-income worksheet multipliers, not PIT rates.
-  if (year <= 2014) return 0.535;
-  if (year == 2016 || year == 2017) return 0.51;
+  if (year <= 2014) {
+    return 0.535;
+  }
+  if (year == 2016 || year == 2017) {
+    return 0.51;
+  }
   return 0.53;
 }
 
@@ -93,7 +105,9 @@ SEXP Crebate_income(SEXP Income, SEXP ReportableEmployerSuper,
       out[i] = (int)rebate;
       continue;
     }
-    if (year >= 2019) rebate = fmax(0, rebate - amount0(fhss, i));
+    if (year >= 2019) {
+      rebate = fmax(0, rebate - amount0(fhss, i));
+    }
     rebate += amount0(employer, i);
     rebate += amount0(personal, i);
     rebate += amount0(investment, i);
@@ -102,8 +116,12 @@ SEXP Crebate_income(SEXP Income, SEXP ReportableEmployerSuper,
     double e = amount_at(exempt, i);
     double o = amount_at(other, i);
     if (R_FINITE(e) || R_FINITE(o)) {
-      if (!R_FINITE(e)) e = fmax(0, total - o);
-      if (!R_FINITE(o)) o = fmax(0, total - e);
+      if (!R_FINITE(e)) {
+        e = fmax(0, total - o);
+      }
+      if (!R_FINITE(o)) {
+        o = fmax(0, total - e);
+      }
       if (year <= 2017) {
         rebate += floor(fringe_adjustment(year) * (e + o));
       } else {

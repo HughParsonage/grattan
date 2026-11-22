@@ -239,7 +239,9 @@ SEXP Ctest_nOffset_upper_threshold(SEXP OffsetList, SEXP jj) {
 double apply_offsets(double tax, int income, const OffsetN *offsets, int count) {
   for (int j = 0; j < count; ++j) {
     tax -= value_OffsetN(income, offsets[j]);
-    if (tax < 0 && !offsets[j].refundable) tax = 0;
+    if (tax < 0 && !offsets[j].refundable) {
+      tax = 0;
+    }
   }
   return tax;
 }

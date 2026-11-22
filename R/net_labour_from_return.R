@@ -1,16 +1,25 @@
 # ITAA 1997 ss 61-155, 61-160 and 25-130. Historical return items
 # support projections. The complete supplied statutory amount takes priority.
 net_labour_from_return <- function(data) {
-  if (is.null(data)) return(NULL)
+  if (is.null(data)) {
+    return(NULL)
+  }
   columns <- names(data)
   # Each argument describes one amount and its aliases. Absent items do not
   # need a zero vector or an addition. A double accumulator avoids overflow.
   sum_fields <- function(...) {
     total <- NULL
     for (aliases in list(...)) {
-      if (!any(aliases %chin% columns)) next
+      if (!any(aliases %chin% columns)) {
+        next
+      }
       x <- return_field(data, aliases, default = 0)
-      total <- if (is.null(total)) as.double(x) else total + x
+      total <-
+        if (is.null(total)) {
+          as.double(x)
+        } else {
+          total + x
+        }
     }
     total
   }
@@ -22,13 +31,22 @@ net_labour_from_return <- function(data) {
                            c("d_wre_other", "WRE_other_amt"))
     deduction <- hutilscpp::squish(wages, 0, 1000)
     if (!is.null(expenses)) {
-      deduction <- if (length(deduction) == length(expenses)) pmaxV(expenses, deduction) else pmaxC(expenses, deduction)
+      deduction <-
+        if (length(deduction) == length(expenses)) {
+          pmaxV(expenses, deduction)
+        } else {
+          pmaxC(expenses, deduction)
+        }
     }
     amount <- wages - deduction
     sole_trade <- sum_fields(c("is_bus_pp", "Net_PP_BI_amt"), c("is_bus_npp", "Net_NPP_BI_amt"))
-    if (!is.null(sole_trade)) amount <- amount + sole_trade
+    if (!is.null(sole_trade)) {
+      amount <- amount + sole_trade
+    }
     psi <- sum_fields("i_attributed_psi", "is_psi_net")
-    if (!is.null(psi)) amount <- amount + psi
+    if (!is.null(psi)) {
+      amount <- amount + psi
+    }
     # Total assessable discounts exclude the upfront reduction. Remove the
     # deferred and pre-2009 amounts when the return identifies them.
     if (all(c("i_ess", "in_ess_disc_defer") %chin% columns)) {
@@ -47,13 +65,21 @@ net_labour_from_return <- function(data) {
     pmax0(amount, in_place = TRUE)
   })
   resident <- data[["c_resident"]]
-  if (is.null(resident)) return(net)
+  if (is.null(resident)) {
+    return(net)
+  }
   nonresident <- if (is.numeric(resident) || is.logical(resident)) {
     flag <- resident == 0
-    if (anyNA(flag)) coalesce0(flag) else flag
+    if (anyNA(flag)) {
+      coalesce0(flag)
+    } else {
+      flag
+    }
   } else {
     as.character(resident) %chin% c("N", "0", "FALSE")
   }
-  if (length(net) == length(nonresident) && !any(nonresident)) return(net)
+  if (length(net) == length(nonresident) && !any(nonresident)) {
+    return(net)
+  }
   fifelse(nonresident, 0, net)
 }

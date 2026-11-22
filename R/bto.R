@@ -23,16 +23,40 @@ bto <- function(benefit_amount,
   }
   if (!is.null(fy.year)) {
     yr <- fy::fy2yr(fy.year)
-    bounds <- if (anyNA(yr)) NA_integer_ else if (length(yr) > 1L) hutilscpp::range_rcpp(yr) else yr
+    bounds <-
+      if (anyNA(yr)) {
+        NA_integer_
+      } else if (length(yr) > 1L) {
+        hutilscpp::range_rcpp(yr)
+      } else {
+        yr
+      }
+
     if (length(yr) && !isTRUE(bounds[1L] >= 1997L)) {
       stop("fy.year must be 1996-97 or later.")
     }
     # Build each annual schedule once, including for an interleaved panel.
-    years <- if (length(yr) > 1L) seq.int(bounds[1L], bounds[2L]) else yr
+    years <-
+      if (length(yr) > 1L) {
+        seq.int(bounds[1L], bounds[2L])
+      } else {
+        yr
+      }
+
     by_person <- length(yr) == length(benefit_amount)
-    row <- if (by_person && length(years) == 1L) 1L else fmatch(yr, years)
+    row <-
+      if (by_person && length(years) == 1L) {
+        1L
+      } else {
+        fmatch(yr, years)
+      }
+
     annual <- function(values) {
-      if (by_person && !isntConstant(values)) values[1L] else values[row]
+      if (by_person && !isntConstant(values)) {
+        values[1L]
+      } else {
+        values[row]
+      }
     }
     previous <- fmatch(years, fy::fy2yr(.subset2(bto_tbl, "fy_year")))
     # Since 2005-06 the 15% coefficients and $6,000 allowance are fixed
@@ -71,6 +95,8 @@ bto <- function(benefit_amount,
     }
   }
   amount <- pmax0(ceiling(amount))
-  if (!is.null(attributes(use_points))) attributes(amount) <- attributes(use_points)
+  if (!is.null(attributes(use_points))) {
+    attributes(amount) <- attributes(use_points)
+  }
   amount
 }

@@ -46,11 +46,15 @@ sapto <- function(rebate_income,
   # The native calculation accepts scalar spouse amounts. Keep those small,
   # and share the normalized amount when the transfer uses the same income.
   amount <- function(x) {
-    if (length(x) == 1L) return(do_rN(x, 0L, 1L))
+    if (length(x) == 1L) {
+      return(do_rN(x, 0L, 1L))
+    }
     if (length(x) != N) {
       stop("`", deparse(substitute(x)), "` must have length one or the length of `rebate_income`.")
     }
-    if (is.integer(x) && !anyNA(x)) return(x)
+    if (is.integer(x) && !anyNA(x)) {
+      return(x)
+    }
     do_rN(x, integer(N), 1L)
   }
   Spouse_income <- amount(Spouse_income)
@@ -61,16 +65,30 @@ sapto <- function(rebate_income,
         sapto.eligible,
         Spouse_income,
         amount(taxable_income),
-        if (missing(spouse_taxable_income)) Spouse_income else amount(spouse_taxable_income),
-        if (is.raw(on_sapto_cd)) on_sapto_cd else as_raw_sapto_cd(on_sapto_cd),
+        if (missing(spouse_taxable_income)) {
+          Spouse_income
+        } else {
+          amount(spouse_taxable_income)
+        },
+        if (is.raw(on_sapto_cd)) {
+          on_sapto_cd
+        } else {
+          as_raw_sapto_cd(on_sapto_cd)
+        },
         PACKAGE = packageName())
 
 }
 
 as_raw_sapto_cd <- function(x, nThread = getOption("grattan.nThread", 1L), legacy = FALSE) {
-  if (is.factor(x)) return(as_raw_sapto_cd(levels(x), nThread, legacy)[as.integer(x)])
-  if (legacy && is.character(x)) x <- chartr("RTUK", "ABDE", x)
-  if (is.double(x)) x <- as.integer(x)
+  if (is.factor(x)) {
+    return(as_raw_sapto_cd(levels(x), nThread, legacy)[as.integer(x)])
+  }
+  if (legacy && is.character(x)) {
+    x <- chartr("RTUK", "ABDE", x)
+  }
+  if (is.double(x)) {
+    x <- as.integer(x)
+  }
   .Call("C_asraw_OnSaptoCd", x, nThread, PACKAGE = packageName())
 }
 
@@ -81,18 +99,28 @@ sf2osc <- function(.dots.ATO, yr = NULL, System = NULL) {
   yr <- yr %||% fy::fy2yr(fy::date2fy(Sys.Date()))
   married <- return_field(.dots.ATO, "sp_flag", "Partner_status", "Marital_status", default = 0L)
   married <- as.integer(married)
-  if (length(married) != N) married <- rep_len(married, N)
+  if (length(married) != N) {
+    married <- rep_len(married, N)
+  }
   return_claim_codes(.dots.ATO, age_from_file(.dots.ATO), married, yr, System)
 }
 
 return_claim_codes <- function(data, age, married, yr, System, eligible = NULL) {
   N <- length(married)
-  if (!N) return(raw())
+  if (!N) {
+    return(raw())
+  }
   if (!is.null(eligible) && (!is.logical(eligible) || !(length(eligible) %in% c(1L, N)) ||
                              anyNA(eligible))) {
     stop("sapto_eligible must be a non-missing logical per taxpayer or a scalar.")
   }
-  years <- if (length(yr) == 1L) c(yr, yr) else hutilscpp::minmax(yr)
+  years <-
+    if (length(yr) == 1L) {
+      c(yr, yr)
+    } else {
+      hutilscpp::minmax(yr)
+    }
+
   first_year <- years[1L]
   claim <-
     if (isTRUE(years[2L] >= 2013L)) {
@@ -113,16 +141,32 @@ return_claim_codes <- function(data, age, married, yr, System, eligible = NULL) 
   if (forced_off || complete) {
     # Validate the annual schedules even when no age inference is needed.
     infer(NULL)
-    if (forced_off) return(raw(N))
-    inferred <- if (complete_modern) as_raw_sapto_cd(claim) else as_raw_sapto_cd(legacy, legacy = TRUE)
-    if (length(inferred) != N) inferred <- rep_len(inferred, N)
-    if (is.null(eligible)) return(inferred)
+    if (forced_off) {
+      return(raw(N))
+    }
+    inferred <-
+      if (complete_modern) {
+        as_raw_sapto_cd(claim)
+      } else {
+        as_raw_sapto_cd(legacy, legacy = TRUE)
+      }
+
+    if (length(inferred) != N) {
+      inferred <- rep_len(inferred, N)
+    }
+    if (is.null(eligible)) {
+      return(inferred)
+    }
   }
 
   # The native age pass can consume integer and logical flags directly.
   pension_flag <- function(x) {
-    if (is.null(x) || is.logical(x) || (is.integer(x) && !is.factor(x))) return(x)
-    if (is.double(x)) return(fmatch(x, c(0L, 1L)) == 2L)
+    if (is.null(x) || is.logical(x) || (is.integer(x) && !is.factor(x))) {
+      return(x)
+    }
+    if (is.double(x)) {
+      return(fmatch(x, c(0L, 1L)) == 2L)
+    }
     fmatch(x, c("0", "FALSE", "N", "1", "TRUE", "Y")) > 3L
   }
   spouse_age <- pension_flag(data$sp_pension_age_eligible)
@@ -133,8 +177,12 @@ return_claim_codes <- function(data, age, married, yr, System, eligible = NULL) 
     if (isTRUE(first_year <= 2013L)) {
       if (!is.null(data$c_gender)) {
         female <- data$c_gender == 0L
-        if (anyNA(female) && !is.null(data$Gender)) female <- fcoalesce(female, data$Gender == 1L)
-      } else if (!is.null(data$Gender)) female <- data$Gender == 1L
+        if (anyNA(female) && !is.null(data$Gender)) {
+          female <- fcoalesce(female, data$Gender == 1L)
+        }
+      } else if (!is.null(data$Gender)) {
+        female <- data$Gender == 1L
+      }
     }
     pension_age <- data$c_pension_age_eligible
     required_age <- System$Sapto$pension_age %||% System$sapto_pension_age
@@ -143,14 +191,22 @@ return_claim_codes <- function(data, age, married, yr, System, eligible = NULL) 
         !all(age_pension_age(fy::yr2fy(unique(years)), "male") == required_age)) {
       pension_age <- NULL
     }
-    if (is.object(age) || (!is.integer(age) && !is.double(age))) age <- as.double(age)
+    if (is.object(age) || (!is.integer(age) && !is.double(age))) {
+      age <- as.double(age)
+    }
     inferred <- infer(age, female, pension_flag(pension_age), spouse_age)
   }
 
-  senior_status <- if (!complete && first_year <= 2012L) data$on_sato_eligibility
+  senior_status <-
+    if (!complete && first_year <= 2012L) {
+      data$on_sato_eligibility
+    }
+
   if (!is.null(senior_status) || !is.null(eligible)) {
     family_code <- fifelse(married != 0L, 4L, 1L, na = 0L)
-    if (!is.null(spouse_age)) family_code[married != 0L & spouse_age == 0L] <- 5L
+    if (!is.null(spouse_age)) {
+      family_code[married != 0L & spouse_age == 0L] <- 5L
+    }
   }
   if (!complete) {
     if (first_year <= 2000L) {
@@ -158,7 +214,9 @@ return_claim_codes <- function(data, age, married, yr, System, eligible = NULL) 
       payments <- return_field(data, "Aust_govt_pnsn_allw_amt", default =
         as.double(return_field(data, "i_gov_payments", default = 0)) +
           return_field(data, "i_gov_pension", default = 0))
-      if (length(payments) != 1L || payments > 0) inferred[yr <= 2000L & payments > 0] <- as.raw(0)
+      if (length(payments) != 1L || payments > 0) {
+        inferred[yr <= 2000L & payments > 0] <- as.raw(0)
+      }
     }
     if (!is.null(senior_status)) {
       status <- fmatch(senior_status, c("N", "Y"), nomatch = 0L)
@@ -168,20 +226,36 @@ return_claim_codes <- function(data, age, married, yr, System, eligible = NULL) 
     }
     if (!is.null(legacy) && first_year <= 2012L) {
       rows <- yr <= 2012L & !is.na(legacy)
-      codes <- if (length(legacy) == 1L) legacy else legacy[rows]
+      codes <-
+        if (length(legacy) == 1L) {
+          legacy
+        } else {
+          legacy[rows]
+        }
+
       inferred[rows] <- as_raw_sapto_cd(codes, legacy = TRUE)
     }
     if (!is.null(claim)) {
       rows <- !is.na(claim)
-      if (!modern_years) rows <- rows & yr >= 2013L
-      codes <- if (length(claim) == 1L) claim else claim[rows]
+      if (!modern_years) {
+        rows <- rows & yr >= 2013L
+      }
+      codes <-
+        if (length(claim) == 1L) {
+          claim
+        } else {
+          claim[rows]
+        }
+
       inferred[rows] <- as_raw_sapto_cd(codes)
     }
   }
   if (!is.null(eligible)) {
     add <- eligible & inferred == as.raw(0)
     inferred[add] <- as.raw(family_code[add])
-    if (length(eligible) > 1L) inferred[!eligible] <- as.raw(0)
+    if (length(eligible) > 1L) {
+      inferred[!eligible] <- as.raw(0)
+    }
   }
   inferred
 }

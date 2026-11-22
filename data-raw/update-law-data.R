@@ -72,7 +72,9 @@ update_law_data <- function(root = ".") {
   }
 
   after <- new.env(parent = baseenv())
-  for (name in object_names) assign(name, before[[name]], envir = after)
+  for (name in object_names) {
+    assign(name, before[[name]], envir = after)
+  }
   list2env(law_tables, envir = after)
   temporary <- tempfile("sysdata-law-", tmpdir = dirname(cache_file))
   on.exit(unlink(temporary), add = TRUE)
@@ -92,10 +94,14 @@ update_law_data <- function(root = ".") {
               identical(data.table::key(law_tables[[name]]),
                         data.table::key(verified[[name]])))
   }
-  if (!file.rename(temporary, cache_file)) stop("Could not replace ", cache_file)
+  if (!file.rename(temporary, cache_file)) {
+    stop("Could not replace ", cache_file)
+  }
   message("Updated ", length(law_tables), " law tables; verified ", length(untouched),
           " other cached objects unchanged.")
   invisible(names(law_tables))
 }
 
-if (sys.nframe() == 0L) update_law_data()
+if (sys.nframe() == 0L) {
+  update_law_data()
+}

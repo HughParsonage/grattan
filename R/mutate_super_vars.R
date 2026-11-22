@@ -43,9 +43,19 @@
 #' @export 
 
 apply_super_caps_and_div293 <- function(.sample.file, colname_concessional = "concessional_contributions", colname_div293_tax = "div293_tax", colname_new_Taxable_Income = "Taxable_income_for_ECT", div293_threshold = 300e3, cap = 30e3, cap2 = 35e3, age_based_cap = TRUE, cap2_age = 59, ecc = FALSE, use_other_contr = FALSE, scale_contr_match_ato = FALSE, .lambda = 0, reweight_late_lodgers = FALSE, .mu = 1.05, impute_zero_concess_contr = FALSE, .min.Sw.for.SG = 450 * 12, .SG_rate = 0.0925, warn_if_colnames_overwritten = TRUE, drop_helpers = FALSE, copyDT = TRUE) {
-  if (!identical(ecc, FALSE)) stop("ECC not implemented.")
-  if (!is.data.table(.sample.file)) stop(".sample.file must be a data.table")
-  d <- if (copyDT) copy(.sample.file) else .sample.file
+  if (!identical(ecc, FALSE)) {
+    stop("ECC not implemented.")
+  }
+  if (!is.data.table(.sample.file)) {
+    stop(".sample.file must be a data.table")
+  }
+  d <-
+    if (copyDT) {
+      copy(.sample.file)
+    } else {
+      .sample.file
+    }
+
   field <- function(..., default = 0) return_field(d, ..., default = default)
   n <- nrow(d)
   # Clamp only the freshly computed difference in place. The public amount
@@ -61,16 +71,27 @@ apply_super_caps_and_div293 <- function(.sample.file, colname_concessional = "co
   deductible <- field("ds_pers_super_cont", "Non_emp_spr_amt", "sc_pers_cont_deductible")
   reportable <- field("it_rept_empl_super_cont", "Rptbl_Empr_spr_cont_amt", default = NULL)
   classified_other <- field("sc_other_concess_cont", default = NULL)
-  other <- if (use_other_contr) {
-    field("sc_other_cont", "Spr_Othr_Contr", "MCS_Othr_Contr", default = classified_other %||% 0)
-  } else classified_other
+  other <-
+    if (use_other_contr) {
+      field("sc_other_cont", "Spr_Othr_Contr", "MCS_Othr_Contr", default = classified_other %||% 0)
+    } else {
+      classified_other
+    }
 
   outputs <- c(colname_concessional, colname_div293_tax, colname_new_Taxable_Income)
   helpers <- c("concessional_cap", "excess_concessional_contributions", "rental_losses",
                "surchargeable_income_div293", "low_tax_contributions_div293", "div293_income")
-  dropped <- if (drop_helpers) setdiff(helpers[-1L], outputs) else character()
+  dropped <-
+    if (drop_helpers) {
+      setdiff(helpers[-1L], outputs)
+    } else {
+      character()
+    }
+
   put <- function(name, value) {
-    if (name %chin% dropped) return(invisible(NULL))
+    if (name %chin% dropped) {
+      return(invisible(NULL))
+    }
     # set() recycles scalars for new columns. For an existing column use a
     # full-length replacement to preserve the result type on overwrite.
     if (length(value) != n && (length(value) != 1L || hasName(d, name))) {
@@ -103,33 +124,57 @@ apply_super_caps_and_div293 <- function(.sample.file, colname_concessional = "co
   put("personal_deductible_contributions", deductible)
   put("non_concessional_contributions", positive_difference(personal, deductible))
   gross <- as.double(employer) + deductible
-  if (!is.null(other)) gross <- gross + other
+  if (!is.null(other)) {
+    gross <- gross + other
+  }
   if (impute_zero_concess_contr) {
     wage <- field("i_salary_wage", "Sw_amt", default = NULL)
-    if (is.null(wage) || is.null(reportable)) stop("Salary and reportable employer super are required to impute.")
+    if (is.null(wage) || is.null(reportable)) {
+      stop("Salary and reportable employer super are required to impute.")
+    }
     impute <- which(near(gross, 0) & wage > .min.Sw.for.SG)
     gross[impute] <- wage[impute] * .SG_rate + reportable[impute]
   }
   if (reweight_late_lodgers) {
-    if (is.null(d$WEIGHT)) warning("No WEIGHT found; using WEIGHT=50 in reweighting.")
+    if (is.null(d$WEIGHT)) {
+      warning("No WEIGHT found; using WEIGHT=50 in reweighting.")
+    }
     put("WEIGHT", field("WEIGHT", default = 50) * .mu)
   }
 
   # Use the reported cap for an observed assessment unless the caller has
   # specified a policy cap. A single closing balance cannot establish carry-forward.
   policy_cap <- function() {
-    if (!age_based_cap) return(cap)
+    if (!age_based_cap) {
+      return(cap)
+    }
     age <- d$c_age_30_june
-    above <- if (!is.null(age)) age > cap2_age
+    above <-
+      if (!is.null(age)) {
+        age > cap2_age
+      }
+
     if (is.null(age) || anyNA(age)) {
       band <- field("Age_range", "age_range", "Birth_year", default = NULL)
-      lower <- if (!is.null(band)) positive_difference(70, 5 * band)
+      lower <-
+        if (!is.null(band)) {
+          positive_difference(70, 5 * band)
+        }
+
       if (!is.null(d$age_range_description) && (is.null(lower) || anyNA(lower))) {
         parse_lower <- function(x) as.numeric(sub(" .*", "", sub("^under .*", "0", as.character(x))))
         labels <- accel_repetitive_input(d$age_range_description, parse_lower)
-        lower <- if (is.null(lower)) labels else fcoalesce(lower, labels)
+        lower <-
+          if (is.null(lower)) {
+            labels
+          } else {
+            fcoalesce(lower, labels)
+          }
       }
-      if (is.null(age) && is.null(lower)) stop("An age or age band is required for an age-based cap.")
+
+      if (is.null(age) && is.null(lower)) {
+        stop("An age or age band is required for an age-based cap.")
+      }
       band_eligible <- FALSE
       if (!is.null(lower)) {
         # Use the sample file's historical band convention, including its
@@ -137,9 +182,16 @@ apply_super_caps_and_div293 <- function(.sample.file, colname_concessional = "co
         first_band <- fifelse(cap2_age < 20, 0,
                               fifelse(cap2_age >= 65, 70, 5 * ceiling(cap2_age / 5)))
         band_eligible <- lower >= first_band
-        if (anyNA(lower)) band_eligible[is.na(lower)] <- FALSE
+        if (anyNA(lower)) {
+          band_eligible[is.na(lower)] <- FALSE
+        }
       }
-      above <- if (is.null(age)) band_eligible else fifelse(is.na(age), band_eligible, above)
+      above <-
+        if (is.null(age)) {
+          band_eligible
+        } else {
+          fifelse(is.na(age), band_eligible, above)
+        }
     }
     if (length(above) && typeof(cap2) == typeof(cap) && length(cap) %in% c(1L, length(above)) &&
         length(cap2) %in% c(1L, length(above))) {
@@ -148,9 +200,13 @@ apply_super_caps_and_div293 <- function(.sample.file, colname_concessional = "co
       ifelse(above, cap2, cap)
     }
   }
-  annual_cap <- if (missing(cap) && missing(cap2) && missing(cap2_age)) {
-    field("sn_concess_cont_cap", default = policy_cap())
-  } else policy_cap()
+  annual_cap <-
+    if (missing(cap) && missing(cap2) && missing(cap2_age)) {
+      field("sn_concess_cont_cap", default = policy_cap())
+    } else {
+      policy_cap()
+    }
+
   if (!(length(annual_cap) %in% c(1L, n)) || (length(annual_cap) && !isTRUE(min(annual_cap) >= 0))) {
     stop("Supply one nonnegative cap or a cap per taxpayer.")
   }
@@ -181,11 +237,17 @@ apply_super_caps_and_div293 <- function(.sample.file, colname_concessional = "co
   above_threshold <- positive_difference(total, div293_threshold)
   # A missing low-tax contribution also makes the total missing. pminV
   # requires equal lengths and canonicalizes NaN to NA on missing records.
-  tax_base <- if (length(low_tax) == length(above_threshold) && !anyNA(above_threshold)) {
-    pminV(low_tax, above_threshold)
-  } else pmin(low_tax, above_threshold)
+  tax_base <-
+    if (length(low_tax) == length(above_threshold) && !anyNA(above_threshold)) {
+      pminV(low_tax, above_threshold)
+    } else {
+      pmin(low_tax, above_threshold)
+    }
+
   put(colname_div293_tax, 0.15 * tax_base)
   put(colname_new_Taxable_Income, new_taxable)
-  for (name in intersect(dropped, names(d))) set(d, j = name, value = NULL)
+  for (name in intersect(dropped, names(d))) {
+    set(d, j = name, value = NULL)
+  }
   d
 }

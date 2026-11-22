@@ -50,8 +50,16 @@
 
 
 small_business_tax_offset <- function(taxable_income, basic_income_tax_liability, .dots.ATO = NULL, aggregated_turnover = NULL, total_net_small_business_income = NULL, fy_year = NULL, tax_discount = NULL, previous_aggregated_turnover = NULL) {
-  if (is.null(fy_year) && is.null(tax_discount)) stop("`fy_year` and `tax_discount` are both NULL.")
-  year <- if (is.null(fy_year)) NULL else fy::fy2yr(fy_year)
+  if (is.null(fy_year) && is.null(tax_discount)) {
+    stop("`fy_year` and `tax_discount` are both NULL.")
+  }
+  year <-
+    if (is.null(fy_year)) {
+      NULL
+    } else {
+      fy::fy2yr(fy_year)
+    }
+
   if (is.null(tax_discount) &&
       length(year) &&
       isTRUE(year[1L] < 2016L) &&
@@ -72,15 +80,23 @@ small_business_tax_offset <- function(taxable_income, basic_income_tax_liability
 
   if (!is.null(.dots.ATO)) {
     if (!is.null(aggregated_turnover) || !is.null(previous_aggregated_turnover)) {
-      warning("Both `.dots.ATO` and `", if (is.null(aggregated_turnover)) "previous_aggregated_turnover" else "aggregated_turnover",
-              "` were provided. The return fields take precedence.")
+      turnover_argument <-
+        if (is.null(aggregated_turnover)) {
+          "previous_aggregated_turnover"
+        } else {
+          "aggregated_turnover"
+        }
+
+      warning("Both `.dots.ATO` and `", turnover_argument, "` were provided. The return fields take precedence.")
     }
     if (!is.null(total_net_small_business_income)) {
       warning("Both `.dots.ATO` and `total_net_small_business_income` were provided. The return fields take precedence.")
     }
     prohibit_arg_recycling.MAXLENGTH(Filter(length, list(taxable_income, basic_income_tax_liability, year)))
     net <- business_income_from_return(.dots.ATO, year %||% 2017L)
-    if (is.null(net)) stop("`.dots.ATO` does not contain the necessary variables for small business income.")
+    if (is.null(net)) {
+      stop("`.dots.ATO` does not contain the necessary variables for small business income.")
+    }
   } else {
     if (is.null(aggregated_turnover) && is.null(previous_aggregated_turnover)) {
       stop("Supply `aggregated_turnover` or `previous_aggregated_turnover` when calculating from separate arguments.")
@@ -107,12 +123,20 @@ business_offset_amount <- function(taxable, basic_tax, net, year, discount) {
     rates <- c(0, 0.05, 0.08, 0.08, 0.08, 0.08, 0.13, 0.16)
     discount <- rates[hutilscpp::squish(year, 2015L, 2022L) - 2014L]
   } else {
-    if (!is.numeric(discount)) stop("`tax_discount` was class '", storage.mode(discount), "'.")
-    if (!(length(discount) %in% c(1L, n))) stop("Provide a single value or a value for every observation.")
+    if (!is.numeric(discount)) {
+      stop("`tax_discount` was class '", storage.mode(discount), "'.")
+    }
+    if (!(length(discount) %in% c(1L, n))) {
+      stop("Provide a single value or a value for every observation.")
+    }
   }
   # Cap fresh arithmetic results in place. Caller-owned inputs can be shared.
-  if (is.logical(net)) net <- as.integer(net)
-  if (is.logical(taxable)) taxable <- as.integer(taxable)
+  if (is.logical(net)) {
+    net <- as.integer(net)
+  }
+  if (is.logical(taxable)) {
+    taxable <- as.integer(taxable)
+  }
   share <- pmax0(net, keep_nas = is.integer(net)) / pmaxC(taxable, 1L, keep_nas = is.integer(taxable))
   share <- pminC(share, 1, in_place = TRUE, keep_nas = TRUE)
   amount <- basic_tax * discount * share * (taxable > 0)
@@ -120,7 +144,9 @@ business_offset_amount <- function(taxable, basic_tax, net, year, discount) {
 }
 
 business_income_from_return <- function(data, year) {
-  if (is.null(data)) return(NULL)
+  if (is.null(data)) {
+    return(NULL)
+  }
   columns <- names(data)
   has_gross <- all(c("Total_PP_BI_amt", "Total_NPP_BI_amt") %chin% columns)
   has_expenses <- all(c("Total_PP_BE_amt", "Total_NPP_BE_amt") %chin% columns)
@@ -129,17 +155,23 @@ business_income_from_return <- function(data, year) {
   can_test <- has_gross || any(c("small_business_eligible", "aggregated_turnover",
                                   "previous_aggregated_turnover") %chin% columns)
   if (!any(reported_fields %chin% columns) &&
-      !(can_test && (any(net_fields %chin% columns) || (has_gross && has_expenses)))) return(NULL)
+      !(can_test && (any(net_fields %chin% columns) || (has_gross && has_expenses)))) {
+    return(NULL)
+  }
 
   # Only construct a proxy for missing label 15A amounts. gross is shared
   # lazily between the turnover test and the receipts-minus-expenses fallback.
   estimate_sole <- function(gross) {
-    if (!can_test) return(0)
+    if (!can_test) {
+      return(0)
+    }
     eligible <- return_field(data, "small_business_eligible", default = {
       limit <- fifelse(year == 2016L, 2e6, 5e6)
       turnover <- return_field(data, "aggregated_turnover", default = gross)
       qualifies <- turnover < limit
-      if (anyNA(qualifies)) qualifies <- coalesce0(qualifies)
+      if (anyNA(qualifies)) {
+        qualifies <- coalesce0(qualifies)
+      }
       if ("previous_aggregated_turnover" %chin% columns) {
         qualifies <- qualifies | return_field(data, "previous_aggregated_turnover", default = Inf) < limit
       }
@@ -160,28 +192,59 @@ business_income_from_return <- function(data, year) {
       }
     }
     if (is.null(net) || anyNA(net)) {
-      from_gross <- if (has_gross && has_expenses) {
-        gross - return_field(data, "Total_PP_BE_amt", default = 0) -
-          return_field(data, "Total_NPP_BE_amt", default = 0)
-      } else 0
-      net <- if (is.null(net)) from_gross else fcoalesce(as.double(net), from_gross)
-      if (anyNA(net)) net <- coalesce0(net)
+      from_gross <-
+        if (has_gross && has_expenses) {
+          gross - return_field(data, "Total_PP_BE_amt", default = 0) -
+            return_field(data, "Total_NPP_BE_amt", default = 0)
+        } else {
+          0
+        }
+
+      net <-
+        if (is.null(net)) {
+          from_gross
+        } else {
+          fcoalesce(as.double(net), from_gross)
+        }
+
+      if (anyNA(net)) {
+        net <- coalesce0(net)
+      }
     }
     eligible <- as.logical(eligible)
     if (length(eligible) == 1L && !is.na(eligible)) {
-      if (eligible) net else 0
-    } else fifelse(eligible, net, 0)
+      if (eligible) {
+        net
+      } else {
+        0
+      }
+    } else {
+      fifelse(eligible, net, 0)
+    }
   }
   # The complete reported total supersedes all three components. Label 15A
   # already qualifies; the partnership and trust amounts have their own tests.
   total <- return_field(data, "Tot_net_small_business_inc", default = {
-    sole <- return_field(data, "isn_sbi_net", default = estimate_sole(
-      if (has_gross) as.double(data$Total_PP_BI_amt) + data$Total_NPP_BI_amt else NA_real_))
+    sole <-
+      return_field(data,
+                   "isn_sbi_net",
+                   default = estimate_sole(if (has_gross) {
+                     as.double(data$Total_PP_BI_amt) + data$Total_NPP_BI_amt
+                   } else {
+                     NA_real_
+                   }))
+
     amount <- pmax0(as.double(sole))
     for (share in c("pt_share_sbi_pships", "pt_share_sbi_trusts")) {
-      if (share %chin% columns) amount <- amount + return_field(data, share, default = 0)
+      if (share %chin% columns) {
+        amount <- amount + return_field(data, share, default = 0)
+      }
     }
     amount
   })
-  if (length(total) == 1L && nrow(data) > 1L) rep_len(total, nrow(data)) else total
+  if (length(total) == 1L && nrow(data) > 1L) {
+    rep_len(total, nrow(data))
+  } else {
+    total
+  }
 }

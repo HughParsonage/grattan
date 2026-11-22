@@ -120,8 +120,9 @@ SEXP C_lito(SEXP x, SEXP Year, SEXP doLmito) {
   R_xlen_t N = xlength(x);
   SEXP ans = PROTECT(allocVector(REALSXP, N));
   double * restrict ansp = REAL(ans);
-  if (!isInteger(Year) || (xlength(Year) != 1 && xlength(Year) != N))
+  if (!isInteger(Year) || (xlength(Year) != 1 && xlength(Year) != N)) {
     error("fy.year must have length one or the number of incomes.");
+  }
   const int *years = INTEGER(Year);
   bool single_year = xlength(Year) == 1;
   bool lmito = asInteger(doLmito);
@@ -131,20 +132,28 @@ SEXP C_lito(SEXP x, SEXP Year, SEXP doLmito) {
   bool loaded[MAX_YEAR - MIN_YEAR + 1] = {false};
   for (R_xlen_t i = 0; i < N; ++i) {
     int yr = years[single_year ? 0 : i];
-    if (yr == NA_INTEGER) error("Missing financial year.");
+    if (yr == NA_INTEGER) {
+      error("Missing financial year.");
+    }
     if (lmito ? !has_lmito(yr) : !has_lito(yr)) {
       ansp[i] = 0;
       continue;
     }
-    if (yr < MIN_YEAR || yr > MAX_YEAR) error("Unsupported offset year %d.", yr);
+    if (yr < MIN_YEAR || yr > MAX_YEAR) {
+      error("Unsupported offset year %d.", yr);
+    }
     int j = yr - MIN_YEAR;
     if (!loaded[j]) {
       schedules[j] = lmito ? LMITO_Par(yr) : LITO_Par(yr);
       loaded[j] = true;
     }
-    if (ix) ansp[i] = ix[i] < 0 && ix[i] != NA_INTEGER ? 0 : value_OffsetN(ix[i], schedules[j]);
-    else if (ISNAN(dx[i])) ansp[i] = NA_REAL;
-    else ansp[i] = dx[i] >= 0 && dx[i] < INT_MAX ? value_OffsetN((int)dx[i], schedules[j]) : 0;
+    if (ix) {
+      ansp[i] = ix[i] < 0 && ix[i] != NA_INTEGER ? 0 : value_OffsetN(ix[i], schedules[j]);
+    } else if (ISNAN(dx[i])) {
+      ansp[i] = NA_REAL;
+    } else {
+      ansp[i] = dx[i] >= 0 && dx[i] < INT_MAX ? value_OffsetN((int)dx[i], schedules[j]) : 0;
+    }
   }
   UNPROTECT(1);
   return ans;

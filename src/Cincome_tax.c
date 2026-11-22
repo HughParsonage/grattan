@@ -220,7 +220,9 @@ SEXP Cincome_tax(SEXP Yr,
       (!isReal(IncomeOffsets) || (xlength(IncomeOffsets) != 1 && xlength(IncomeOffsets) != N))) {
     error("IncomeOffsets must be NULL, one numeric amount or a numeric vector matching income.");
   }
-  if (!isNull(FloodExempt)) isEquiInt(IcTaxableIncome, FloodExempt, "FloodExempt");
+  if (!isNull(FloodExempt)) {
+    isEquiInt(IcTaxableIncome, FloodExempt, "FloodExempt");
+  }
   if (!isInteger(Age) || (xlength(Age) != 1 && xlength(Age) != N)) {
     error("Age must be an integer scalar or match income.");
   }
@@ -277,22 +279,40 @@ SEXP Cincome_tax(SEXP Yr,
 
     double tax = do_ordinary_PIT(P, Sys.BRACKETS, Sys.RATES, Sys.nb);
     bool senior = Sys.has_sapto && apply_sapto(&tax, P, Sys.S);
-    if (offsets) tax = dmax0(tax - offsets[scalar_offset ? 0 : i]);
-    if (Sys.n_offsetn) tax = apply_offsets(tax, P.xi, Sys.Offsets, Sys.n_offsetn);
+    if (offsets) {
+      tax = dmax0(tax - offsets[scalar_offset ? 0 : i]);
+    }
+    if (Sys.n_offsetn) {
+      tax = apply_offsets(tax, P.xi, Sys.Offsets, Sys.n_offsetn);
+    }
     tax += do_1_ML(P, Sys.M, senior, Sys.has_sapto && spouse_sapto_entitled(P, Sys.S));
-    if (Sys.has_temp_budget_repair_levy) tax += temp_budget_repair_levy(P.xi);
-    if (Sys.has_flood_levy && (!exempt || !exempt[i])) tax += flood_levy(P.xi);
-    if (franking) tax -= franking[i];
-    if (summary) total += tax; else out[i] = tax;
+    if (Sys.has_temp_budget_repair_levy) {
+      tax += temp_budget_repair_levy(P.xi);
+    }
+    if (Sys.has_flood_levy && (!exempt || !exempt[i])) {
+      tax += flood_levy(P.xi);
+    }
+    if (franking) {
+      tax -= franking[i];
+    }
+    if (summary) {
+      total += tax;
+    } else {
+      out[i] = tax;
+    }
   }
 
-  if (summary) out[0] = summary == 2 ? total / (double)N : total;
+  if (summary) {
+    out[0] = summary == 2 ? total / (double)N : total;
+  }
   UNPROTECT(1);
   return ans;
 }
 
 SEXP Cwhole_dollar_tax(SEXP x) {
-  if (!isReal(x)) return coerceVector(x, INTSXP);
+  if (!isReal(x)) {
+    return coerceVector(x, INTSXP);
+  }
   const R_xlen_t N = xlength(x);
   const double *tax = REAL(x);
   SEXP ans = PROTECT(allocVector(INTSXP, N));
@@ -305,7 +325,9 @@ SEXP Cwhole_dollar_tax(SEXP x) {
       continue;
     }
     double nearest = nearbyint(value);
-    if (fabs(value - nearest) <= 2 * DBL_EPSILON * fmax(1, fabs(value))) value = nearest;
+    if (fabs(value - nearest) <= 2 * DBL_EPSILON * fmax(1, fabs(value))) {
+      value = nearest;
+    }
     if (value >= (double)INT_MAX + 1 || value <= (double)INT_MIN) {
       out[i] = NA_INTEGER;
       out_of_range = true;
@@ -313,7 +335,9 @@ SEXP Cwhole_dollar_tax(SEXP x) {
       out[i] = (int)value;
     }
   }
-  if (out_of_range) warning("NAs introduced by coercion to integer range");
+  if (out_of_range) {
+    warning("NAs introduced by coercion to integer range");
+  }
   UNPROTECT(1);
   return ans;
 }
@@ -378,7 +402,9 @@ SEXP Cdo_medicare_levy(SEXP x, SEXP Year, SEXP y, SEXP Eligible, SEXP IsMarried,
   // Resolve each schedule and report invalid inputs on the R thread.
   for (R_xlen_t i = 0; i < n_years; ++i) {
     int yr = year[i];
-    if (yr < MIN_YEAR || yr > MAX_YEAR) error("Unsupported Medicare year %d.", yr);
+    if (yr < MIN_YEAR || yr > MAX_YEAR) {
+      error("Unsupported Medicare year %d.", yr);
+    }
     int j = yr - MIN_YEAR;
     if (!loaded[j]) {
       schedules[j] = yr2Medicare(yr);

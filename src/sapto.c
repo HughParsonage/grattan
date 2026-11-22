@@ -9,7 +9,9 @@ double SAPTO_S12_TAPER = 0.15;
 double SAPTO_TAPER = 0.125;
 
 void set_sapto_cutoffs(Sapto *S) {
-  if (!R_FINITE(S->taper)) error("sapto_taper must be finite.");
+  if (!R_FINITE(S->taper)) {
+    error("sapto_taper must be finite.");
+  }
   if (S->taper == 0) {
     S->upr_single = S->upr_couple = S->upr_illness = R_PosInf;
     return;
@@ -163,7 +165,9 @@ static double transferred_threshold(double base, Sapto S) {
 static double do_1_sapto_sf(int x, int y, int taxable, int spouse_taxable,
                              unsigned int on_sapto_cd, Sapto S) {
   unsigned char code = normalise_sapto_code(on_sapto_cd);
-  if (!sapto_income_eligible(x, y, code, S)) return 0;
+  if (!sapto_income_eligible(x, y, code, S)) {
+    return 0;
+  }
   double base = smax_offset(S, code);
   double threshold = slwr_thresh(S, code);
   bool paired = code == SAPTO_B || code == SAPTO_D;
@@ -178,16 +182,24 @@ static double do_1_sapto_sf(int x, int y, int taxable, int spouse_taxable,
         spouse_unused = dmax0(original - SAPTO_S12_TAPER * (spouse_taxable - SAPTO_S12_THRESH));
       }
       base += spouse_unused;
-      if (S.year == 1997) base = dmin(base, own_tax);
+      if (S.year == 1997) {
+        base = dmin(base, own_tax);
+      }
     }
     // Reg 12(3)(a) reduces the transferor's base by the excess over basic
     // tax, even when the spouse's separate reg 12(3)(b) increase is nil.
-    if (y > threshold) base -= dmax0(original - own_tax);
-    if (base != original) threshold = transferred_threshold(base, S);
+    if (y > threshold) {
+      base -= dmax0(original - own_tax);
+    }
+    if (base != original) {
+      threshold = transferred_threshold(base, S);
+    }
   }
   double amount = dmax0(base - S.taper * dmax0((double)x - threshold));
   // The low income aged persons rebate began at half rate in 1996-97.
-  if (S.year == 1997) amount *= 0.5;
+  if (S.year == 1997) {
+    amount *= 0.5;
+  }
   return S.year <= 2000 ? amount : ceil(amount);
 }
 
@@ -356,8 +368,9 @@ static unsigned char code_OnSaptoCd(SEXP x, R_xlen_t i) {
   case RAWSXP:
     return normalise_sapto_code(RAW_ELT(x, i));
     break;
-  case INTSXP:
+  case INTSXP: {
     return normalise_sapto_code(INTEGER_ELT(x, i));
+  }
   default:
     return 0;
   }
@@ -371,7 +384,9 @@ static SEXP raw_sapto_codes(SEXP x) {
   SEXP ans = PROTECT(allocVector(RAWSXP, N));
   unsigned char * out = RAW(ans);
   // STRING_ELT/INTEGER_ELT may materialize ALTREP data on the R thread.
-  for (R_xlen_t i = 0; i < N; ++i) out[i] = code_OnSaptoCd(x, i);
+  for (R_xlen_t i = 0; i < N; ++i) {
+    out[i] = code_OnSaptoCd(x, i);
+  }
   UNPROTECT(1);
   return ans;
 }
@@ -387,8 +402,9 @@ SEXP Csapto(SEXP RebateIncome, SEXP Yr, SEXP Fill,
             SEXP TaxableIncome, SEXP SpouseTaxableIncome,
             SEXP OnSaptoCd) {
   R_xlen_t N = xlength(RebateIncome);
-  if (!isInteger(Yr) || (xlength(Yr) != 1 && xlength(Yr) != N))
+  if (!isInteger(Yr) || (xlength(Yr) != 1 && xlength(Yr) != N)) {
     error("fy.year must have length one or the number of rebate incomes.");
+  }
   const int *years = INTEGER(Yr);
   bool scalar = xlength(Yr) == 1;
   bool loaded[MAX_YEAR - MIN_YEAR + 1] = {false};
@@ -396,7 +412,9 @@ SEXP Csapto(SEXP RebateIncome, SEXP Yr, SEXP Fill,
   Sapto schedules[MAX_YEAR - MIN_YEAR + 1];
   for (R_xlen_t i = 0; i < xlength(Yr); ++i) {
     int yr = years[i];
-    if (yr < MIN_YEAR || yr > MAX_YEAR) error("Unsupported SAPTO year %d.", yr);
+    if (yr < MIN_YEAR || yr > MAX_YEAR) {
+      error("Unsupported SAPTO year %d.", yr);
+    }
     int j = yr - MIN_YEAR;
     if (!loaded[j]) {
       System sys = yr2System(yr);
@@ -423,11 +441,13 @@ SEXP Csapto(SEXP RebateIncome, SEXP Yr, SEXP Fill,
   const int * sp = INTEGER(SpcRebateIncome);
   const bool nsp = xlength(SpcRebateIncome) == N;
   const bool single_code = xlength(OnSaptoCd) == 1;
-  if (!single_code && xlength(OnSaptoCd) != N)
+  if (!single_code && xlength(OnSaptoCd) != N) {
     error("on_sapto_cd must have length one or the length of rebate_income.");
+  }
   if ((!single_taxable && xlength(TaxableIncome) != N) ||
-      (!single_spouse_taxable && xlength(SpouseTaxableIncome) != N))
+      (!single_spouse_taxable && xlength(SpouseTaxableIncome) != N)) {
     error("Taxable incomes must have length one or the length of rebate_income.");
+  }
   SEXP codes = PROTECT(TYPEOF(OnSaptoCd) == RAWSXP ? OnSaptoCd : raw_sapto_codes(OnSaptoCd));
   const unsigned char * on_sapto_cd = RAW(codes);
   FORLOOP({
@@ -447,9 +467,12 @@ SEXP Csapto(SEXP RebateIncome, SEXP Yr, SEXP Fill,
 }
 
 static const int * pension_flag(SEXP x, R_xlen_t n) {
-  if (isNull(x)) return NULL;
-  if ((!isLogical(x) && !isInteger(x)) || (xlength(x) != 1 && xlength(x) != n))
+  if (isNull(x)) {
+    return NULL;
+  }
+  if ((!isLogical(x) && !isInteger(x)) || (xlength(x) != 1 && xlength(x) != n)) {
     error("Incompatible pension-age flag.");
+  }
   return isLogical(x) ? LOGICAL(x) : INTEGER(x);
 }
 
@@ -475,12 +498,15 @@ SEXP C_sf2osc(SEXP Age, SEXP isMarried, SEXP Female, SEXP Yr, SEXP RSystem,
       initialized[yr - MIN_YEAR] = true;
     }
   }
-  if (isNull(Age)) return R_NilValue;
+  if (isNull(Age)) {
+    return R_NilValue;
+  }
   const bool single_age = xlength(Age) == 1;
   const bool single_female = xlength(Female) == 1;
   if ((!isReal(Age) && !isInteger(Age)) || (!single_age && xlength(Age) != N) ||
-      !isLogical(Female) || (!single_female && xlength(Female) != N))
+      !isLogical(Female) || (!single_female && xlength(Female) != N)) {
     error("Incompatible age and sex vectors.");
+  }
   const double * real_age = isReal(Age) ? REAL(Age) : NULL;
   const int * int_age = isInteger(Age) ? INTEGER(Age) : NULL;
   const int * female = LOGICAL(Female);
