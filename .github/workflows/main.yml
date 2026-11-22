@@ -60,7 +60,10 @@ jobs:
         run: |
           R --version
           R CMD config CC
+          # R-hub's Fedora binaries (including fracdiff) link this BLAS runtime.
+          dnf install -y openblas-threads
           Rscript -e 'pak::pkg_install("deps::.", dependencies = TRUE)'
+          Rscript -e 'library(fracdiff); library(forecast)'
       - name: Build and install with sanitizers
         shell: bash
         run: |
