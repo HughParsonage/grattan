@@ -63,6 +63,26 @@ test_that("Division 293 excludes excess contributions exactly once", {
   expect_equal(a$div293_tax, c(0, 1500))
 })
 
+test_that("super output names and types survive dropping helpers by reference", {
+  d <- data.table::data.table(Taxable_Income = 249000L, MCS_Emplr_Contr = c(30000L, 35000L),
+                              concessional_cap = 0L, div293_income = 0L, rental_losses = 0L)
+  apply_super_caps_and_div293(d, cap = 30000.5, age_based_cap = FALSE, div293_threshold = 250000,
+                              copyDT = FALSE, drop_helpers = TRUE, colname_div293_tax = "div293_income",
+                              warn_if_colnames_overwritten = FALSE)
+  expect_identical(d$concessional_cap, c(30000.5, 30000.5))
+  expect_equal(d$div293_income, 0.15 * c(29000, 30000.5))
+  expect_null(d$rental_losses)
+  missing <- data.table::data.table(Taxable_Income = c(NA_real_, NaN), MCS_Emplr_Contr = 30000)
+  expect_identical(apply_super_caps_and_div293(missing, cap = 30000, age_based_cap = FALSE)$div293_tax,
+                   c(NA_real_, NaN))
+})
+
+test_that("beneficiary offsets preserve interleaved years and custom rates", {
+  expect_equal(bto(rep(6300.8, 3), c("2004-05", "2024-25", "2004-05")), c(51, 45, 51))
+  expect_identical(bto(c(6300, 6300, Inf, NaN), rate1 = c(.17, .123, .15, .15)),
+                   c(51, 37, Inf, NaN))
+})
+
 test_that("historical pension ages agree for dates and financial years", {
   years <- c("1995-96", "2003-04", "2011-12", "2023-24")
   for (sex in c("male", "m", "M", "female", "f", "F")) {

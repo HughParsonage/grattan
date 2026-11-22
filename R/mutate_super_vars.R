@@ -65,7 +65,9 @@ apply_super_caps_and_div293 <- function(.sample.file,
   d <- if (copyDT) copy(.sample.file) else .sample.file
   field <- function(..., default = 0) return_field(d, ..., default = default)
   n <- nrow(d)
-  put <- function(name, value) set(d, j = name, value = rep_len(value, n))
+  # Clamp only the freshly computed difference in place. The public amount
+  # columns are double, including when both source fields are integer.
+  positive_difference <- function(x, y) pmax0(as.double(x - y), in_place = TRUE)
 
   employer <- field("sc_empl_cont", "Spr_Emplr_Contr", "MCS_Emplr_Contr", default = NULL)
   taxable <- field("ic_taxable_income_loss", "Taxable_Income", default = NULL)
@@ -78,11 +80,21 @@ apply_super_caps_and_div293 <- function(.sample.file,
   classified_other <- field("sc_other_concess_cont", default = NULL)
   other <- if (use_other_contr) {
     field("sc_other_cont", "Spr_Othr_Contr", "MCS_Othr_Contr", default = classified_other %||% 0)
-  } else classified_other %||% 0
+  } else classified_other
 
   outputs <- c(colname_concessional, colname_div293_tax, colname_new_Taxable_Income)
   helpers <- c("concessional_cap", "excess_concessional_contributions", "rental_losses",
                "surchargeable_income_div293", "low_tax_contributions_div293", "div293_income")
+  dropped <- if (drop_helpers) setdiff(helpers[-1L], outputs) else character()
+  put <- function(name, value) {
+    if (name %chin% dropped) return(invisible(NULL))
+    # set() recycles scalars for new columns. For an existing column use a
+    # full-length replacement to preserve the result type on overwrite.
+    if (length(value) != n && (length(value) != 1L || hasName(d, name))) {
+      value <- rep_len(value, n)
+    }
+    set(d, j = name, value = value)
+  }
   collisions <- intersect(c(outputs, helpers), names(d))
   if (colname_new_Taxable_Income == "Taxable_Income" && "Taxable_Income" %in% collisions) {
     warning("Dropping Taxable Income. Replacing it with modelled taxable income.")
@@ -92,7 +104,7 @@ apply_super_caps_and_div293 <- function(.sample.file,
     warning("Overwriting ", paste(collisions, collapse = ", "), " in .sample.file")
   }
   if (!is.null(reportable)) {
-    put("SG_contributions", pmax(0, employer - reportable))
+    put("SG_contributions", positive_difference(employer, reportable))
     put("salary_sacrifice_contributions", reportable)
   }
   put("personal_deductible_contributions", deductible)
@@ -105,8 +117,9 @@ apply_super_caps_and_div293 <- function(.sample.file,
       set(d, j = name, value = d[[name]] * scale)
     }
   }
-  put("non_concessional_contributions", pmax(0, personal - deductible))
-  gross <- as.double(employer) + deductible + other
+  put("non_concessional_contributions", positive_difference(personal, deductible))
+  gross <- as.double(employer) + deductible
+  if (!is.null(other)) gross <- gross + other
   if (impute_zero_concess_contr) {
     wage <- field("i_salary_wage", "Sw_amt", default = NULL)
     if (is.null(wage) || is.null(reportable)) stop("Salary and reportable employer super are required to impute.")
@@ -120,36 +133,51 @@ apply_super_caps_and_div293 <- function(.sample.file,
 
   # Use the reported cap for an observed assessment unless the caller has
   # specified a policy cap. A single closing balance cannot establish carry-forward.
-  reported_cap <- if (missing(cap) && missing(cap2) && missing(cap2_age)) d$sn_concess_cont_cap
-  annual_cap <- cap
-  if (age_based_cap && (is.null(reported_cap) || anyNA(reported_cap))) {
-    band <- field("Age_range", "age_range", "Birth_year", default = NULL)
-    age <- if (!is.null(band)) pmax(0, 70 - 5 * band)
-    if (!is.null(d$age_range_description)) {
-      description <- as.character(d$age_range_description)
-      lower <- as.numeric(sub(" .*", "", sub("^under .*", "0", description)))
-      age <- if (is.null(age)) lower else ifelse(is.na(age), lower, age)
-    }
-    age <- field("c_age_30_june", default = age)
+  policy_cap <- function() {
+    if (!age_based_cap) return(cap)
+    age <- field("c_age_30_june", default = {
+      band <- field("Age_range", "age_range", "Birth_year", default = NULL)
+      lower <- if (!is.null(band)) positive_difference(70, 5 * band)
+      if (!is.null(d$age_range_description) && (is.null(lower) || anyNA(lower))) {
+        parse_lower <- function(x) as.numeric(sub(" .*", "", sub("^under .*", "0", as.character(x))))
+        labels <- accel_repetitive_input(d$age_range_description, parse_lower)
+        lower <- if (is.null(lower)) labels else fcoalesce(lower, labels)
+      }
+      lower
+    })
     if (is.null(age)) stop("An age or age band is required for an age-based cap.")
-    annual_cap <- ifelse(age > cap2_age & !is.na(age), cap2, cap)
+    above <- age > cap2_age
+    if (anyNA(age)) above[is.na(age)] <- FALSE
+    if (length(above) && typeof(cap2) == typeof(cap) && length(cap) %in% c(1L, length(above)) &&
+        length(cap2) %in% c(1L, length(above))) {
+      fifelse(above, cap2, cap)
+    } else {
+      ifelse(above, cap2, cap)
+    }
   }
-  if (!is.null(reported_cap)) annual_cap <- ifelse(is.na(reported_cap), annual_cap, reported_cap)
-  if (!(length(annual_cap) %in% c(1L, n)) || anyNA(annual_cap) || any(annual_cap < 0)) {
+  annual_cap <- if (missing(cap) && missing(cap2) && missing(cap2_age)) {
+    field("sn_concess_cont_cap", default = policy_cap())
+  } else policy_cap()
+  if (!(length(annual_cap) %in% c(1L, n)) || (length(annual_cap) && !isTRUE(min(annual_cap) >= 0))) {
     stop("Supply one nonnegative cap or a cap per taxpayer.")
   }
   put("concessional_cap", annual_cap)
 
-  excess <- pmax(0, gross - annual_cap)
-  low_tax <- pmax(0, gross - excess)
+  excess <- positive_difference(gross, annual_cap)
+  low_tax <- positive_difference(gross, excess)
   previous_excess <- field("i_excess_super", "sc_excess_concess_cont")
   new_taxable <- as.double(taxable) - previous_excess + excess
-  rent_loss <- field("it_property_loss", default = pmax(0, -field("is_net_rent", "Net_rent_amt")))
+  rent_loss <- field("it_property_loss", default = positive_difference(0L, field("is_net_rent", "Net_rent_amt")))
   fringe <- field("it_rept_fringe_benefit", "Rep_frng_ben_amt",
                   default = field("it_rept_fringe_benefit_exe") + field("it_rept_fringe_benefit_nexe"))
-  surchargeable <- pmax(0, new_taxable) + fringe + rent_loss +
-    field("it_invest_loss", "Net_fincl_invstmt_lss_amt", "Net_fincl_invstmnt_lss_amt") +
-    field("as_family_trust_inc_txd") - field("zero_rate_super_lump_sum") - field("is_other_cat3_fhss")
+  surchargeable <- pmax0(new_taxable) + fringe + rent_loss +
+    field("it_invest_loss", "Net_fincl_invstmt_lss_amt", "Net_fincl_invstmnt_lss_amt")
+  if (hasName(d, "as_family_trust_inc_txd")) {
+    surchargeable <- surchargeable + field("as_family_trust_inc_txd")
+  }
+  for (deduction in intersect(c("zero_rate_super_lump_sum", "is_other_cat3_fhss"), names(d))) {
+    surchargeable <- surchargeable - field(deduction)
+  }
   total <- surchargeable + low_tax
   put("excess_concessional_contributions", excess)
   put("rental_losses", rent_loss)
@@ -157,10 +185,14 @@ apply_super_caps_and_div293 <- function(.sample.file,
   put("low_tax_contributions_div293", low_tax)
   put("div293_income", total)
   put(colname_concessional, low_tax)
-  put(colname_div293_tax, 0.15 * pmin(low_tax, pmax(0, total - div293_threshold)))
+  above_threshold <- positive_difference(total, div293_threshold)
+  # A missing low-tax contribution also makes the total missing. pminV
+  # requires equal lengths and canonicalizes NaN to NA on missing records.
+  tax_base <- if (length(low_tax) == length(above_threshold) && !anyNA(above_threshold)) {
+    pminV(low_tax, above_threshold)
+  } else pmin(low_tax, above_threshold)
+  put(colname_div293_tax, 0.15 * tax_base)
   put(colname_new_Taxable_Income, new_taxable)
-  if (drop_helpers) {
-    for (name in setdiff(helpers[-1L], outputs)) set(d, j = name, value = NULL)
-  }
+  for (name in intersect(dropped, names(d))) set(d, j = name, value = NULL)
   d
 }

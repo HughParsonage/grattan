@@ -178,13 +178,14 @@ bool sapto_entitled(Person P, Sapto S) {
   return do_1_sapto_sf(P.ri, P.yi, P.transfer_taxable, P.spouse_transfer_taxable, P.on_sapto_cd, S) >= 1;
 }
 
-void apply_sapto(double * taxi, Person P, Sapto S) {
+bool apply_sapto(double * taxi, Person P, Sapto S) {
   double sapto = do_1_sapto_sf(P.ri, P.yi, P.transfer_taxable, P.spouse_transfer_taxable, P.on_sapto_cd, S);
   if (sapto >= *taxi) {
     *taxi = 0;
   } else {
     *taxi -= sapto;
   }
+  return sapto >= 1;
 }
 
 bool bw01(double x) {
@@ -342,19 +343,22 @@ static unsigned char code_OnSaptoCd(SEXP x, R_xlen_t i) {
   }
 }
 
-static void set_on_sapto_cd(unsigned char * on_sapto_cd, R_xlen_t N, 
-                            SEXP OnSaptoCd) {
-  if (xlength(OnSaptoCd) == 1) {
-    memset(on_sapto_cd, code_OnSaptoCd(OnSaptoCd, 0), N);
-    return;
+static SEXP raw_sapto_codes(SEXP x) {
+  if (!isString(x) && !isInteger(x) && TYPEOF(x) != RAWSXP) {
+    error("x was type '%s' but must be either RAWSXP or integer or character.", type2char(TYPEOF(x)));
   }
-  if (xlength(OnSaptoCd) == N) {
-    for (R_xlen_t i = 0; i < N; ++i) {
-      on_sapto_cd[i] = code_OnSaptoCd(OnSaptoCd, i);
-    }
-    return;
-  }
-  error("on_sapto_cd must have length one or the length of rebate_income.");
+  R_xlen_t N = xlength(x);
+  SEXP ans = PROTECT(allocVector(RAWSXP, N));
+  unsigned char * out = RAW(ans);
+  // STRING_ELT/INTEGER_ELT may materialize ALTREP data on the R thread.
+  for (R_xlen_t i = 0; i < N; ++i) out[i] = code_OnSaptoCd(x, i);
+  UNPROTECT(1);
+  return ans;
+}
+
+SEXP C_asraw_OnSaptoCd(SEXP x, SEXP nthreads) {
+  as_nThread(nthreads);
+  return raw_sapto_codes(x);
 }
 
 SEXP Csapto(SEXP RebateIncome, SEXP Yr, SEXP Fill, 
@@ -392,67 +396,56 @@ SEXP Csapto(SEXP RebateIncome, SEXP Yr, SEXP Fill,
   const int * xp = INTEGER(RebateIncome);
   const int * taxable = INTEGER(TaxableIncome);
   const int * spouse_taxable = INTEGER(SpouseTaxableIncome);
+  const bool single_taxable = xlength(TaxableIncome) == 1;
+  const bool single_spouse_taxable = xlength(SpouseTaxableIncome) == 1;
   const int * se = LOGICAL(SaptoEligible);
   const bool nse = xlength(SaptoEligible) == N;
   const int * sp = INTEGER(SpcRebateIncome);
   const bool nsp = xlength(SpcRebateIncome) == N;
-  unsigned char * on_sapto_cd = malloc(sizeof(char) * N);
-  if (on_sapto_cd == NULL) {
-    UNPROTECT(1);
-    return R_NilValue;
-  }
-  set_on_sapto_cd(on_sapto_cd, N, OnSaptoCd);
+  const bool single_code = xlength(OnSaptoCd) == 1;
+  if (!single_code && xlength(OnSaptoCd) != N)
+    error("on_sapto_cd must have length one or the length of rebate_income.");
+  if ((!single_taxable && xlength(TaxableIncome) != N) ||
+      (!single_spouse_taxable && xlength(SpouseTaxableIncome) != N))
+    error("Taxable incomes must have length one or the length of rebate_income.");
+  SEXP codes = PROTECT(TYPEOF(OnSaptoCd) == RAWSXP ? OnSaptoCd : raw_sapto_codes(OnSaptoCd));
+  const unsigned char * on_sapto_cd = RAW(codes);
   FORLOOP({
     ansp[i] = fill;
     int j = years[scalar ? 0 : i] - MIN_YEAR;
     if (applies[j] && (nse ? se[i] : se[0])) {
       ansp[i] = do_1_sapto_sf(xp[i],
-                              (nsp ? sp[i] : sp[0]), taxable[i],
-                              spouse_taxable[i],
-                              on_sapto_cd[i],
+                              (nsp ? sp[i] : sp[0]), taxable[single_taxable ? 0 : i],
+                              spouse_taxable[single_spouse_taxable ? 0 : i],
+                              on_sapto_cd[single_code ? 0 : i],
                               schedules[j]);
     }
   })
     
-  free(on_sapto_cd);
-  UNPROTECT(1);
+  UNPROTECT(2);
   return ans;
 }
 
-SEXP C_asraw_OnSaptoCd(SEXP x, SEXP nthreads) {
-  if (!isString(x) && !isInteger(x) && TYPEOF(x) != RAWSXP) {
-    error("x was type '%s' but must be either RAWSXP or integer or character.", type2char(TYPEOF(x)));
-  }
-  
-  as_nThread(nthreads);
-  R_xlen_t N = xlength(x);
-  SEXP ans = PROTECT(allocVector(RAWSXP, N));
-  unsigned char * ansp = RAW(ans);
-  // STRING_ELT/INTEGER_ELT may materialize ALTREP data. Keep all R API
-  // access on the R thread rather than inside an OpenMP worker.
-  for (R_xlen_t i = 0; i < N; ++i) {
-    ansp[i] = code_OnSaptoCd(x, i);
-  }
-  UNPROTECT(1);
-  return ans;
+static const int * pension_flag(SEXP x, R_xlen_t n) {
+  if (isNull(x)) return NULL;
+  if ((!isLogical(x) && !isInteger(x)) || (xlength(x) != 1 && xlength(x) != n))
+    error("Incompatible pension-age flag.");
+  return isLogical(x) ? LOGICAL(x) : INTEGER(x);
 }
 
-SEXP C_sf2osc(SEXP Age, SEXP isMarried, SEXP Female, SEXP Yr, SEXP RSystem) {
+SEXP C_sf2osc(SEXP Age, SEXP isMarried, SEXP Female, SEXP Yr, SEXP RSystem,
+              SEXP PensionAge, SEXP SpouseAge) {
   R_xlen_t N = xlength(isMarried);
-  if (!isReal(Age) || !isLogical(Female) || xlength(Age) != N || xlength(Female) != N)
-    error("Incompatible age and sex vectors.");
-  const double * age = REAL(Age);
-  const int * female = LOGICAL(Female);
-  const int * is_married = INTEGER(isMarried);
-  if (!isInteger(Yr) || (xlength(Yr) != 1 && xlength(Yr) != N)) {
+  const R_xlen_t n_year = xlength(Yr);
+  if (!isInteger(Yr) || (n_year != 1 && n_year != N)) {
     error("yr must be an integer with length one or the number of records.");
   }
   const int * year = INTEGER(Yr);
-  bool scalar_year = xlength(Yr) == 1;
+  bool scalar_year = n_year == 1;
   double required_age[MAX_YEAR - MIN_YEAR + 1] = {0};
   bool initialized[MAX_YEAR - MIN_YEAR + 1] = {false};
-  for (R_xlen_t i = 0; i < N; ++i) {
-    int yr = year[scalar_year ? 0 : i];
+  for (R_xlen_t i = 0; i < n_year; ++i) {
+    int yr = year[i];
     if (yr < MIN_YEAR || yr > MAX_YEAR) {
       error("yr must be between %d and %d.", MIN_YEAR, MAX_YEAR);
     }
@@ -462,6 +455,20 @@ SEXP C_sf2osc(SEXP Age, SEXP isMarried, SEXP Female, SEXP Yr, SEXP RSystem) {
       initialized[yr - MIN_YEAR] = true;
     }
   }
+  if (isNull(Age)) return R_NilValue;
+  const bool single_age = xlength(Age) == 1;
+  const bool single_female = xlength(Female) == 1;
+  if ((!isReal(Age) && !isInteger(Age)) || (!single_age && xlength(Age) != N) ||
+      !isLogical(Female) || (!single_female && xlength(Female) != N))
+    error("Incompatible age and sex vectors.");
+  const double * real_age = isReal(Age) ? REAL(Age) : NULL;
+  const int * int_age = isInteger(Age) ? INTEGER(Age) : NULL;
+  const int * female = LOGICAL(Female);
+  const int * is_married = INTEGER(isMarried);
+  const int * attained = pension_flag(PensionAge, N);
+  const int * spouse_attained = pension_flag(SpouseAge, N);
+  const bool single_attained = xlength(PensionAge) == 1;
+  const bool single_spouse = xlength(SpouseAge) == 1;
   SEXP ans = PROTECT(allocVector(RAWSXP, N));
   unsigned char * restrict ansp = RAW(ans);
   int nThread = 1;
@@ -469,11 +476,17 @@ SEXP C_sf2osc(SEXP Age, SEXP isMarried, SEXP Female, SEXP Yr, SEXP RSystem) {
     ansp[i] = 0;
     int yr = year[scalar_year ? 0 : i];
     double minimum = required_age[yr - MIN_YEAR];
-    if (female[i] == TRUE && yr <= 2013 && minimum == 65) {
+    if (yr <= 2013 && female[single_female ? 0 : i] == TRUE && minimum == 65) {
       minimum = 60 + 0.5 * (imax(yr - 1994, 0) / 2);
     }
-    if (R_FINITE(age[i]) && is_married[i] != NA_INTEGER && age[i] >= minimum) {
-      ansp[i] = (is_married[i] == 0) ? SAPTO_A : SAPTO_D;
+    R_xlen_t a = single_age ? 0 : i;
+    int recorded = attained ? attained[single_attained ? 0 : i] : NA_INTEGER;
+    bool eligible = (recorded == 0 || recorded == 1) ? recorded :
+      (real_age ? R_FINITE(real_age[a]) && real_age[a] >= minimum
+                : int_age[a] != NA_INTEGER && int_age[a] >= minimum);
+    if (eligible && is_married[i] != NA_INTEGER) {
+      ansp[i] = is_married[i] == 0 ? SAPTO_A :
+        (spouse_attained && spouse_attained[single_spouse ? 0 : i] == 0 ? SAPTO_E : SAPTO_D);
     }
   })
   UNPROTECT(1);

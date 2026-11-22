@@ -32,6 +32,16 @@ test_that("Always zero for fy_year", {
                double(100e3))
 })
 
+test_that("a single business return can use different annual turnover thresholds", {
+  record <- data.frame(aggregated_turnover = 3e6, Net_PP_BI_amt = 25000L,
+                       isn_sbi_net = NA_integer_, Tot_net_small_business_inc = NA_integer_)
+  years <- c("2015-16", "2016-17")
+  expect_equal(small_business_tax_offset(50000L, 7797, .dots.ATO = record, fy_year = years),
+               c(0, 7797 * 0.08 * 0.5))
+  expect_equal(small_business_tax_offset(NA, 7797, .dots.ATO = record, fy_year = years),
+               c(NA_real_, NA_real_))
+})
+
 test_that("Error handling", {
   expect_error(small_business_tax_offset(100e3,
                                          basic_income_tax_liability = 25e3,

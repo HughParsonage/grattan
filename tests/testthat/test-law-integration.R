@@ -44,3 +44,33 @@ test_that("mixed-year assessments preserve record order and summary arithmetic",
   expect_equal(income_tax(income, years, return.mode = "sum"), sum(expected))
   expect_equal(income_tax(income, years, return.mode = "mean"), mean(expected))
 })
+
+test_that("a single return supplies fields across incomes and assessment years", {
+  row <- data.table::data.table(c_age_30_june = NA_integer_, age_range = NA_integer_,
+    ic_rebate_income = NA_real_, it_property_loss = 1200L, sp_flag = TRUE,
+    sp_taxable_income_loss = 12000L, spc_rebate_income = NA_integer_,
+    net_labour_income = 40000L, i_frank_cr = 35L, tn_flood_levy_exempt = "Y")
+  income <- c(34000L, 42000L, 70000L, 55000L)
+  age <- c(40, 64, 65.75, 72)
+  years <- c("2027-28", "2011-12", "2017-18", "2008-09")
+  assess <- function(d, year, mode = "numeric") {
+    suppressWarnings(income_tax(income, year, age, d, return.mode = mode))
+  }
+  full <- row[rep(1L, length(income))]
+  original <- data.table::copy(row)
+  expect_identical(assess(row, years), assess(full, years))
+  expect_identical(assess(row, "2027-28"), assess(full, rep("2027-28", length(income))))
+  expect_equal(assess(row, "2027-28", "sum"), sum(assess(row, "2027-28")))
+  expect_identical(row, original)
+})
+
+test_that("integer assessments snap rounding noise and truncate genuine fractions", {
+  delta <- .Machine$double.eps * 200
+  amounts <- c(200 - delta, -200 + delta, 200 - 5 * delta, -200 + 5 * delta,
+               1.75, -1.75, NA_real_, NaN)
+  expect_identical(whole_dollar_tax(amounts), c(200L, -200L, 199L, -199L, 1L, -1L,
+                                                 NA_integer_, NA_integer_))
+  expect_warning(result <- whole_dollar_tax(c(Inf, -Inf, 2^31, -2^31)),
+                 "NAs introduced by coercion to integer range")
+  expect_identical(result, rep(NA_integer_, 4))
+})

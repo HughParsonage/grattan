@@ -254,6 +254,7 @@ void apply_offset1(double * tax, int x, Offset1 O);
 void apply_offset2(double * tax, int x, Offset2 O);
 void SEXP2Offset(OffsetN * O, int nO, SEXP List);
 double value_OffsetN(int x, const OffsetN O);
+double apply_offsets(double tax, int income, const OffsetN *offsets, int count);
 SEXP nOffsets2List(OffsetN const O[MAX_N_OFFSETN], int noffsets);
 void do_multiOffsets(double * ansp,
                      R_xlen_t N,
@@ -268,7 +269,7 @@ int as_nThread(SEXP x);
 
 // sapto.c
 Sapto yr2Sapto(int yr);
-void apply_sapto(double * taxi, Person P, Sapto S);
+bool apply_sapto(double * taxi, Person P, Sapto S);
 bool sapto_entitled(Person P, Sapto S);
 void validate_sapto(Sapto * S, int fix);
 

@@ -1,4 +1,5 @@
 #include "grattan.h"
+#include <float.h>
 
 const double LMITO_1ST_OFFSET = 255;
 const double LMITO_2ND_LEVEL = 1080;
@@ -216,11 +217,13 @@ SEXP Cincome_tax(SEXP Yr,
     
   R_xlen_t N = xlength(IcTaxableIncome);
   if (!isNull(IncomeOffsets) &&
-      (!isReal(IncomeOffsets) || xlength(IncomeOffsets) != N)) {
-    error("IncomeOffsets must be NULL or a numeric vector matching income.");
+      (!isReal(IncomeOffsets) || (xlength(IncomeOffsets) != 1 && xlength(IncomeOffsets) != N))) {
+    error("IncomeOffsets must be NULL, one numeric amount or a numeric vector matching income.");
   }
   if (!isNull(FloodExempt)) isEquiInt(IcTaxableIncome, FloodExempt, "FloodExempt");
-  isEquiInt(IcTaxableIncome, Age, "Age");
+  if (!isInteger(Age) || (xlength(Age) != 1 && xlength(Age) != N)) {
+    error("Age must be an integer scalar or match income.");
+  }
   isEquiInt(IcTaxableIncome, RebateIncome, "RebateIncome");
   isEquiInt(IcTaxableIncome, IsMarried, "IsMarried");
   isEquiInt(IcTaxableIncome, nDependants, "nDependants");
@@ -245,108 +248,75 @@ SEXP Cincome_tax(SEXP Yr,
   
   const System Sys = Sexp2System(RSystem, yr);
   
-  Person * PP = malloc(sizeof(Person) * N);
-  if (PP == NULL) {
-    return R_NilValue;
-  }
-  SEXP ans = PROTECT(allocVector(REALSXP, N));
-  double * restrict ansp = REAL(ans);
-  FORLOOP({
-    int xpi = ic_taxable_income_loss[i];
-    int ypi = spc_rebate_income[i];
-    unsigned int api = c_age_30_june[i] & 127;
-    int rpi = rebate_income[i];
-    unsigned int cpi = n_dependants[i] & 15;
-    bool is_marriedi = is_married[i];
-    unsigned char z = on_sapto_cdp[i];
+  const double *offsets = isNull(IncomeOffsets) ? NULL : REAL(IncomeOffsets);
+  const int *exempt = isNull(FloodExempt) ? NULL : INTEGER(FloodExempt);
+  const int *franking = isInteger(iFrankCr) && xlength(iFrankCr) == N ? INTEGER(iFrankCr) : NULL;
+  const bool scalar_age = xlength(Age) == 1;
+  const bool scalar_offset = xlength(IncomeOffsets) == 1;
+  SEXP ans = PROTECT(allocVector(REALSXP, summary ? 1 : N));
+  double *out = REAL(ans);
+  double total = 0;
+
+  // Consume each person's fields together. Summary modes need only a scalar.
+#if defined _OPENMP && _OPENMP >= 201511
+#pragma omp parallel for num_threads(nThread) reduction(+:total)
+#endif
+  for (R_xlen_t i = 0; i < N; ++i) {
     Person P = {0};
-    P.agei = api;
+    P.xi = ic_taxable_income_loss[i];
+    P.ri = rebate_income[i];
+    P.yi = spc_rebate_income[i];
     P.yti = imax(spouse_taxable_income[i], 0);
     P.transfer_taxable = transfer[i];
     P.spouse_transfer_taxable = spouse_transfer[i];
-    P.is_family = is_marriedi || cpi || P.yti;
-    P.is_married = is_marriedi || P.yti > 0;
-    P.n_child = cpi;
-    P.on_sapto_cd = sapto_bitwise(z);
-    P.ri = rpi;
-    P.xi = xpi;
-    P.yi = ypi;
-    PP[i] = P;
-  })
+    P.agei = c_age_30_june[scalar_age ? 0 : i] & 127;
+    P.n_child = n_dependants[i] & 15;
+    P.is_married = is_married[i] || P.yti > 0;
+    P.is_family = P.is_married || P.n_child;
+    P.on_sapto_cd = sapto_bitwise(on_sapto_cdp[i]);
 
-    
-  
-  FORLOOP({
-    ansp[i] = do_ordinary_PIT(PP[i], Sys.BRACKETS, Sys.RATES, Sys.nb);
-  })
-    
-  
-  if (Sys.has_sapto) {
-    FORLOOP({
-      apply_sapto(&ansp[i], PP[i], Sys.S);
-    })
-  }
-  
-  
-  if (!isNull(IncomeOffsets)) {
-    const double * offsets = REAL(IncomeOffsets);
-    FORLOOP({
-      // Apply this non-refundable offset before any custom refundable credit.
-      ansp[i] = dmax0(ansp[i] - offsets[i]);
-    })
+    double tax = do_ordinary_PIT(P, Sys.BRACKETS, Sys.RATES, Sys.nb);
+    bool senior = Sys.has_sapto && apply_sapto(&tax, P, Sys.S);
+    if (offsets) tax = dmax0(tax - offsets[scalar_offset ? 0 : i]);
+    if (Sys.n_offsetn) tax = apply_offsets(tax, P.xi, Sys.Offsets, Sys.n_offsetn);
+    tax += do_1_ML(P, Sys.M, senior, Sys.has_sapto && spouse_sapto_entitled(P, Sys.S));
+    if (Sys.has_temp_budget_repair_levy) tax += temp_budget_repair_levy(P.xi);
+    if (Sys.has_flood_levy && (!exempt || !exempt[i])) tax += flood_levy(P.xi);
+    if (franking) tax -= franking[i];
+    if (summary) total += tax; else out[i] = tax;
   }
 
-  if (Sys.n_offsetn) {
-    do_multiOffsets(ansp, N, Sys.Offsets, Sys.n_offsetn, ic_taxable_income_loss, nThread, true);
-  }
-
-  FORLOOP({
-    const Person P = PP[i];
-    ansp[i] += do_1_ML(P, Sys.M,
-                      Sys.has_sapto && sapto_entitled(P, Sys.S),
-                      Sys.has_sapto && spouse_sapto_entitled(P, Sys.S));
-  })
-  
-  if (Sys.has_temp_budget_repair_levy) {
-    FORLOOP({
-      ansp[i] += temp_budget_repair_levy(ic_taxable_income_loss[i]);
-    })
-  }
-
-  if (Sys.has_flood_levy) {
-    const int * exempt = isNull(FloodExempt) ? NULL : INTEGER(FloodExempt);
-    FORLOOP({
-      if (exempt == NULL || !exempt[i]) ansp[i] += flood_levy(ic_taxable_income_loss[i]);
-    })
-  }
-  
-  if (xlength(iFrankCr) == N && isInteger(iFrankCr)) {
-    const int * ifrank = INTEGER(iFrankCr);
-    FORLOOP({
-      ansp[i] -= ifrank[i];
-    })
-  }
-  free(PP);
-
-  if (summary) {
-    double o = 0;
-    if (summary <= 2) {
-#pragma omp parallel for num_threads(nThread) reduction(+ : o)
-      for (R_xlen_t i = 0; i < N; ++i) {
-        o += ansp[i];
-      }
-      if (summary == 2) {
-        o /= (double)N;
-      }
-    }
-    UNPROTECT(1);
-    return ScalarReal(o);
-  }
+  if (summary) out[0] = summary == 2 ? total / (double)N : total;
   UNPROTECT(1);
   return ans;
 }
 
-
+SEXP Cwhole_dollar_tax(SEXP x) {
+  if (!isReal(x)) return coerceVector(x, INTSXP);
+  const R_xlen_t N = xlength(x);
+  const double *tax = REAL(x);
+  SEXP ans = PROTECT(allocVector(INTSXP, N));
+  int *out = INTEGER(ans);
+  bool out_of_range = false;
+  for (R_xlen_t i = 0; i < N; ++i) {
+    double value = tax[i];
+    if (ISNAN(value)) {
+      out[i] = NA_INTEGER;
+      continue;
+    }
+    double nearest = nearbyint(value);
+    if (fabs(value - nearest) <= 2 * DBL_EPSILON * fmax(1, fabs(value))) value = nearest;
+    if (value >= (double)INT_MAX + 1 || value <= (double)INT_MIN) {
+      out[i] = NA_INTEGER;
+      out_of_range = true;
+    } else {
+      out[i] = (int)value;
+    }
+  }
+  if (out_of_range) warning("NAs introduced by coercion to integer range");
+  UNPROTECT(1);
+  return ans;
+}
 
 SEXP Cordinary_tax(SEXP Yr, SEXP Income, SEXP RSystem) {
   if (xlength(Yr) != 1 || !isInteger(Income)) {

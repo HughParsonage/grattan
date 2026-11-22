@@ -236,6 +236,14 @@ SEXP Ctest_nOffset_upper_threshold(SEXP OffsetList, SEXP jj) {
 
 //' @noRd
 //' @description applies multiple offsets
+double apply_offsets(double tax, int income, const OffsetN *offsets, int count) {
+  for (int j = 0; j < count; ++j) {
+    tax -= value_OffsetN(income, offsets[j]);
+    if (tax < 0 && !offsets[j].refundable) tax = 0;
+  }
+  return tax;
+}
+
 //' @param apply Whether or not to apply the offset to ansp (i.e. subtract from it),
 //' as if it were the tax to be offset
 void do_multiOffsets(double * restrict ansp,
@@ -253,12 +261,7 @@ void do_multiOffsets(double * restrict ansp,
   
   FORLOOP({
     if (apply) {
-      for (int j = 0; j < n_offsets; ++j) {
-        ansp[i] -= value_OffsetN(xp[i], mOffsets[j]);
-        if (ansp[i] < 0 && !mOffsets[j].refundable) {
-          ansp[i] = 0;
-        }
-      }
+      ansp[i] = apply_offsets(ansp[i], xp[i], mOffsets, n_offsets);
     } else {
       double o_i = 0;
       for (int j = 0; j < n_offsets; ++j) {

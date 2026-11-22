@@ -16,7 +16,7 @@ extern SEXP C_ml_rate(SEXP);
 extern SEXP C_ml_taper(SEXP);
 extern SEXP C_ml_upper_thresh(SEXP, SEXP, SEXP);
 extern SEXP C_multiOffset(SEXP, SEXP, SEXP);
-extern SEXP C_sf2osc(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP C_sf2osc(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP C_yr2Offsets(SEXP);
 extern SEXP Cbracks_by_year(SEXP, SEXP);
 extern SEXP Cdecode_age_range(SEXP, SEXP);
@@ -27,6 +27,7 @@ extern SEXP Cincome2022(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Cml_child(SEXP);
 extern SEXP COffset(SEXP, SEXP, SEXP, SEXP);
 extern SEXP Cordinary_tax(SEXP, SEXP, SEXP);
+extern SEXP Cwhole_dollar_tax(SEXP);
 extern SEXP Crates_by_yr(SEXP, SEXP);
 extern SEXP Crebate_income(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
 extern SEXP Csapto(SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP, SEXP);
@@ -42,7 +43,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"C_ml_taper",                    (DL_FUNC) &C_ml_taper,                     1},
     {"C_ml_upper_thresh",             (DL_FUNC) &C_ml_upper_thresh,              3},
     {"C_multiOffset",                 (DL_FUNC) &C_multiOffset,                  3},
-    {"C_sf2osc",                      (DL_FUNC) &C_sf2osc,                       5},
+    {"C_sf2osc",                      (DL_FUNC) &C_sf2osc,                       7},
     {"C_yr2Offsets",                  (DL_FUNC) &C_yr2Offsets,                   1},
     {"Cbracks_by_year",               (DL_FUNC) &Cbracks_by_year,                2},
     {"Cdecode_age_range",             (DL_FUNC) &Cdecode_age_range,              2},
@@ -53,6 +54,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"Cml_child",                     (DL_FUNC) &Cml_child,                      1},
     {"COffset",                       (DL_FUNC) &COffset,                        4},
     {"Cordinary_tax",                 (DL_FUNC) &Cordinary_tax,                  3},
+    {"Cwhole_dollar_tax",             (DL_FUNC) &Cwhole_dollar_tax,              1},
     {"Crates_by_yr",                  (DL_FUNC) &Crates_by_yr,                   2},
     {"Crebate_income",                (DL_FUNC) &Crebate_income,                11},
     {"Csapto",                        (DL_FUNC) &Csapto,                         8},

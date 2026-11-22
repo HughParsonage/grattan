@@ -176,6 +176,22 @@ test_that("SAPTO age inference uses the year and preserves explicit eligibility"
   expect_equal(income_tax(33000L, "2023-24", .dots.ATO = younger), 0)
 })
 
+test_that("one return supplies claim evidence across tax years", {
+  years <- c(2008L, 2012L, 2013L, 2024L)
+  married <- rep(1L, length(years))
+  claims <- data.frame(on_sato_cd = factor("K"), on_sapto_cd = "C")
+  expect_identical(return_claim_codes(claims, 42L, married, years, NULL),
+                   as.raw(c(5, 5, 3, 3)))
+  expect_identical(return_claim_codes(claims, 42L, married, 2024L, NULL), as.raw(rep(3, 4)))
+  recorded <- data.frame(on_sato_eligibility = "Y", sp_pension_age_eligible = "N")
+  expect_identical(return_claim_codes(recorded, 42L, married, years, NULL),
+                   as.raw(c(5, 5, 0, 0)))
+  expect_identical(return_claim_codes(recorded, 42L, married, 2012L, NULL), as.raw(rep(5, 4)))
+  expect_error(return_claim_codes(claims, 42L, married, 9999L, NULL), "yr must be")
+  expect_error(return_claim_codes(NULL, 42L, married, 9999L, NULL, FALSE), "yr must be")
+  expect_identical(sf2osc(data.frame(), 2024L), raw())
+})
+
 test_that("beneficiary offsets use the year-specific band and prescribed rounding", {
   expect_equal(bto(c(40000, 45000, 50000), "2020-21"), c(5100, 5850, 7350))
   expect_equal(bto(c(6000.99, 25000.5), "2020-21"), c(0, 2850))
