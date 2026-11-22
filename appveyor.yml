@@ -14,7 +14,8 @@ install:
   - cmd: rig default release
   - cmd: rig add rtools
   - cmd: Rscript -e "dir.create(Sys.getenv('R_LIBS_USER'), recursive = TRUE, showWarnings = FALSE); .libPaths(Sys.getenv('R_LIBS_USER')); install.packages(c('remotes', 'rcmdcheck'), repos = 'https://cloud.r-project.org'); remotes::install_deps(dependencies = TRUE, upgrade = 'never', repos = 'https://cloud.r-project.org')"
-  - cmd: Rscript -e "install.packages(c('taxstats', 'taxstats1516'), repos = 'https://hughparsonage.github.io/tax-drat')"
+  - cmd: R CMD INSTALL --preclean --clean .
+  - cmd: Rscript -e "install.packages(c('taxstats', 'taxstats1516'), repos = 'https://hughparsonage.github.io/tax-drat', type = 'source'); stopifnot(requireNamespace('taxstats', quietly = TRUE), requireNamespace('taxstats1516', quietly = TRUE))"
 
 cache:
   - C:\RLibrary -> appveyor.yml
