@@ -63,6 +63,42 @@ test_that("Division 293 excludes excess contributions exactly once", {
   expect_equal(a$div293_tax, c(0, 1500))
 })
 
+test_that("exact ages and historical sample bands select the higher contribution cap", {
+  caps <- function(d, cutoff) {
+    apply_super_caps_and_div293(d, cap = 25000, cap2 = 35000, cap2_age = cutoff)$concessional_cap
+  }
+  d <- data.table::data.table(MCS_Emplr_Contr = 40000L, Taxable_Income = 50000L,
+                              age_range = c(11L, 10L, 4L, 2L, 1L, 0L))
+  expect_equal(caps(d, 19), rep(35000, 6))
+  expect_equal(caps(d, 50), c(25000, 25000, 35000, 35000, 35000, 35000))
+  expect_equal(caps(d, 60), c(25000, 25000, 25000, 35000, 35000, 35000))
+  expect_equal(caps(d, 65), c(rep(25000, 5), 35000))
+  expect_equal(caps(d, 70), caps(d, 65))
+
+  d[, c_age_30_june := c(61L, 60L, NA, NA, NA, NA)]
+  d[, age_range := c(3L, 2L, 2L, 3L, NA, NA)]
+  d[, age_range_description := c(NA, NA, NA, NA, "60 to 64", NA)]
+  expect_equal(caps(d, 60), c(35000, 25000, 35000, 25000, 35000, 25000))
+})
+
+test_that("SAPTO requires one transfer income or one per record", {
+  args <- list(rebate_income = rep(40000L, 3), fy.year = "2017-18",
+               on_sapto_cd = "D", Spouse_income = 0L, spouse_taxable_income = 30000L)
+  expect_equal(do.call(sapto, args), rep(224, 3))
+  args$spouse_taxable_income <- rep(30000L, 3)
+  expect_equal(do.call(sapto, args), rep(224, 3))
+  for (name in c("Spouse_income", "taxable_income", "spouse_taxable_income")) {
+    for (n in c(0L, 2L, 4L)) {
+      bad <- args
+      bad[[name]] <- rep(30000L, n)
+      expect_error(do.call(sapto, bad), paste0("`", name, "` must have length one"))
+    }
+  }
+  expect_identical(sapto(integer(), "2017-18", Spouse_income = integer(),
+                         taxable_income = 0L, spouse_taxable_income = integer()), numeric())
+  expect_error(sapto(integer(), "2017-18", Spouse_income = c(0L, 0L)), "Spouse_income")
+})
+
 test_that("super output names and types survive dropping helpers by reference", {
   d <- data.table::data.table(Taxable_Income = 249000L, MCS_Emplr_Contr = c(30000L, 35000L),
                               concessional_cap = 0L, div293_income = 0L, rental_losses = 0L)

@@ -142,7 +142,7 @@ SEXP C_lito(SEXP x, SEXP Year, SEXP doLmito) {
       schedules[j] = lmito ? LMITO_Par(yr) : LITO_Par(yr);
       loaded[j] = true;
     }
-    if (ix) ansp[i] = value_OffsetN(ix[i], schedules[j]);
+    if (ix) ansp[i] = ix[i] < 0 && ix[i] != NA_INTEGER ? 0 : value_OffsetN(ix[i], schedules[j]);
     else if (ISNAN(dx[i])) ansp[i] = NA_REAL;
     else ansp[i] = dx[i] >= 0 && dx[i] < INT_MAX ? value_OffsetN((int)dx[i], schedules[j]) : 0;
   }

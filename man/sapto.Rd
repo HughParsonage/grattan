@@ -26,7 +26,8 @@ sapto(
 
 \item{sapto.eligible}{Is the individual eligible for sapto?}
 
-\item{Spouse_income}{Spouse income whose unutilized SAPTO may be added to the current taxpayer. Must match \code{family_status}; i.e. can only be nonzero when \code{family_status != "single"}.}
+\item{Spouse_income}{Spouse income used to calculate the unused SAPTO available for transfer.
+Supply one amount or one per rebate income. For a single taxpayer supply zero.}
 
 \item{family_status}{Family status of the individual.}
 
@@ -41,7 +42,8 @@ single individuals have positive \code{Spouse_income}.}
 
 \item{taxable_income, spouse_taxable_income}{Taxable incomes used to calculate the unused
 rebate available for transfer, including any exempt pensions specified by
-regulation 12(5). Each defaults to the corresponding rebate income.}
+regulation 12(5). Each defaults to the corresponding rebate income and accepts
+one amount or one per rebate income.}
 }
 \description{
 Seniors and Pensioner Tax Offset

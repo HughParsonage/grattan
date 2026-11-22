@@ -78,6 +78,9 @@ medicare_levy <- function(income,
                           .checks = FALSE) {
   fy.year <- validate_fys_permitted(fy.year)
   N <- length(income)
+  if (length(Spouse_income) != 1L && length(Spouse_income) != N) {
+    stop("`Spouse_income` must have length one or the length of `income`.")
+  }
   
   # A person is entitled to the family thresholds if they are married
   # their spouse has nonzero income or they have children.
@@ -109,9 +112,6 @@ medicare_levy <- function(income,
       warning("`pto` includes TRUE values but will be assumed to be FALSE")
     }
   }
-  
-  Spouse_income <- do_rN(Spouse_income, integer(N))
-  n_dependants <- do_rN(n_dependants, integer(N))
   
   do_medicare_levy(income = income, 
                    yr = fy2yr(fy.year),

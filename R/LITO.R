@@ -4,7 +4,8 @@
 #' 
 #' N.B. Since v2.0.0, \code{lito} only calculates the actual LITO, rather than
 #' an offset with custom parameters. For such functionality, use (unexported) \code{Offset}.
-#' @param income The income on which the offset is applied.
+#' @param income The income on which the offset is applied. A negative income
+#' (a loss) returns zero. At zero income the functions return the scheduled offset.
 #' @param fy.year The financial year for which the LITO is desired. 
 #' @return
 #' The LITO or LMITO for the given income and tax year.

@@ -128,6 +128,29 @@ test_that("SAPTO spouse transfers follow the statutory decreasing taper", {
                1291.02)
 })
 
+test_that("SAPTO applies the transferor and recipient formulas separately", {
+  taxable <- c(24000L, 25000L, 25000L)
+  records <- data.frame(ic_rebate_income = c(36000L, 37000L, 36000L), sp_flag = TRUE,
+                        on_sapto_cd = "D", sp_taxable_income_loss = 40000L,
+                        spc_rebate_income = 40000L)
+  # Regs 9, 11 and 12. The transferor's basic tax is $1,102 or $1,292.
+  # Those reduced bases give thresholds of $26,343 and $27,343 respectively.
+  # At $24,000 the nil offset leaves ordinary Medicare of $202. At $25,000,
+  # rising rebate income gives $85 SAPTO and constant rebate income gives $210.
+  expect_equal(sapto(records$ic_rebate_income, "2017-18", Spouse_income = 40000L,
+                     on_sapto_cd = "D", taxable_income = taxable), c(0, 85, 210))
+  expect_equal(income_tax(taxable, "2017-18", .dots.ATO = records), c(859, 762, 637))
+
+  # Neither donor income supplies a positive increase under reg 12(3)(b)(ii).
+  expect_equal(sapto(rep(40000L, 3), "2017-18", on_sapto_cd = "D",
+                     Spouse_income = records$ic_rebate_income,
+                     spouse_taxable_income = taxable), c(224, 224, 224))
+
+  # An ineligible spouse leaves the original $1,602 base and $28,974 threshold.
+  records$on_sapto_cd <- "E"
+  expect_equal(income_tax(taxable, "2017-18", .dots.ATO = records), c(0, 248, 123))
+})
+
 test_that("SAPTO categories agree across scalar, vector and raw claim codes", {
   codes <- c("A", "B", "C", "D", "E")
   # D transfers its unused base to the spouse, retaining basic tax of $342.

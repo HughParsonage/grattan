@@ -185,3 +185,6 @@ defined-benefit interests, special contribution exclusions and the zero-rate
 lump-sum component. The helper models accumulation contributions with the
 specified cap and threshold. Its historical defaults are $30,000/$35,000
 and $300,000. Specify the settings for the assessment year.
+For a custom age-based cap, aLife's c_age_30_june allows the exact age
+test. The 2% sample supplies only a band. For example, a cutoff of 60
+includes the whole 60-64 band. See cap2_age in apply_super_caps_and_div293().

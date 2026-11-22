@@ -65,6 +65,18 @@ LITO, LMITO, SAPTO and beneficiary offset (test-law-offsets.R)
   uses the dated next-band threshold and floors benefits before computing
   and rounding up the offset:
   https://www.legislation.gov.au/F2015L01415/2022-12-09/2022-12-09/text/original/pdf
+* In 2017-18, reg 12(1)(b) tests the transferor's base against ordinary
+  tax before offsets. Reg 12(3)(a) reduces that base by the excess. Regs
+  9(4)-(8) and 11(2) then calculate the threshold and taper from the
+  reduced base. Under reg 12(3)(b)(ii) the recipient's increase can be
+  zero even when the transferor's base falls. With spouse taxable and rebate
+  income of $40,000 and own rebate-income addbacks of $12,000, the code D
+  transferor owes $859 on $24,000 taxable income and $762 on $25,000.
+  The latter attracts $85 of SAPTO and the senior Medicare levy threshold.
+  If rebate income stays at $36,000 as taxable income rises to $25,000,
+  the offset is $210 and the assessment is $637.
+  https://www.legislation.gov.au/F2015L01415/2017-05-24/2017-05-24/text/original/pdf
+  https://www.ato.gov.au/law/view/pdf/acts/20180069.pdf
 * SAPTO current worked transfer example and income limits:
   https://www.ato.gov.au/individuals-and-families/income-deductions-offsets-and-records/tax-offsets/seniors-and-pensioners-tax-offset
   https://www.ato.gov.au/about-ato/new-legislation/in-detail/individuals/personal-income-tax-new-tax-cuts-for-every-australian-taxpayer

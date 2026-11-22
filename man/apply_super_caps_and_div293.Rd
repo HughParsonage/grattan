@@ -54,7 +54,10 @@ over the historical defaults when no cap or age threshold is specified.}
 
 \item{age_based_cap}{Is the cap on concessional contributions age-based?}
 
-\item{cap2_age}{The age above which \code{cap2} applies.}
+\item{cap2_age}{With an exact age, \code{cap2} applies above this age.
+With a sample age band, a threshold from 20 to below 65 is rounded up to
+a multiple of five, and the band starting at that age qualifies. Thresholds
+below 20 include all bands. Thresholds of 65 or more include the 70+ band.}
 
 \item{ecc}{(logical) Should an excess concessional contributions charge be calculated? (Not implemented.)}
 

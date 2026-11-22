@@ -20,6 +20,7 @@
 #' @param previous_aggregated_turnover Prior-year aggregated turnover for a
 #' continuing business. Either year's turnover can establish eligibility.
 #' @param aggregated_turnover A numeric vector the same length as \code{taxable_income}.
+#' When calculating from separate arguments, supply current or prior turnover.
 #' The current or prior turnover must be below 2 million in 2015-16, or
 #' 5 million from 2016-17 onward. With a custom discount and no year supplied,
 #' the 5 million threshold is used.
@@ -71,10 +72,13 @@ small_business_tax_offset <- function(taxable_income,
     net <- business_income_from_return(.dots.ATO, year %||% 2017L)
     if (is.null(net)) stop("`.dots.ATO` does not contain the necessary variables for small business income.")
   } else {
+    if (is.null(aggregated_turnover) && is.null(previous_aggregated_turnover)) {
+      stop("Supply `aggregated_turnover` or `previous_aggregated_turnover` when calculating from separate arguments.")
+    }
     limit <- fifelse((year %||% 2017L) == 2016L, 2e6, 5e6)
     prohibit_arg_recycling.MAXLENGTH(Filter(length, list(taxable_income, basic_income_tax_liability,
       total_net_small_business_income, aggregated_turnover, previous_aggregated_turnover, year)))
-    eligible <- (aggregated_turnover %||% previous_aggregated_turnover %||% Inf) < limit
+    eligible <- (aggregated_turnover %||% previous_aggregated_turnover) < limit
     if (!is.null(aggregated_turnover) && !is.null(previous_aggregated_turnover)) {
       eligible <- eligible | previous_aggregated_turnover < limit
     }

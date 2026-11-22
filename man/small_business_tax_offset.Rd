@@ -41,6 +41,7 @@ take precedence over separately supplied turnover and income arguments.
 See \code{system.file("tax-return-fields.txt", package = "grattan")}.}
 
 \item{aggregated_turnover}{A numeric vector the same length as \code{taxable_income}.
+When calculating from separate arguments, supply current or prior turnover.
 The current or prior turnover must be below 2 million in 2015-16, or
 5 million from 2016-17 onward. With a custom discount and no year supplied,
 the 5 million threshold is used.

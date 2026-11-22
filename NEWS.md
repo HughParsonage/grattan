@@ -21,6 +21,13 @@
 * Added statutory boundary and public-assessment regression tests. Legal sources
   and the remaining input-data assumptions are recorded in
   `inst/law-audit-sources.txt`.
+* Custom systems now retain single-person Medicare thresholds and support a
+  flat senior offset with a zero taper. Oversized offset lists raise an R error.
+* Restored the sample-file age-band boundaries for concessional caps.
+  `sapto()` and `medicare_levy()` check spouse income lengths, and standalone
+  small-business calculations require current or prior turnover.
+* Standalone LITO and LMITO return zero for losses in both integer and double
+  income vectors. Medicare validates mixed-year schedules before calculation.
 
 ## 2026.3.2
 

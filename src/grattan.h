@@ -110,9 +110,9 @@ typedef struct {
   int lwr_single;
   int lwr_couple;
   int lwr_illness;
-  int upr_single;
-  int upr_couple;
-  int upr_illness;
+  double upr_single;
+  double upr_couple;
+  double upr_illness;
   double taper;
   
   // Defined in the regulations (relating to spouse transfers)
@@ -272,6 +272,7 @@ Sapto yr2Sapto(int yr);
 bool apply_sapto(double * taxi, Person P, Sapto S);
 bool sapto_entitled(Person P, Sapto S);
 void validate_sapto(Sapto * S, int fix);
+void set_sapto_cutoffs(Sapto *S);
 
 // starts_with_medicare
 bool starts_with_medicare(const char * str);

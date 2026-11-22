@@ -8,6 +8,23 @@ int SAPTO_S12_THRESH = 6000;
 double SAPTO_S12_TAPER = 0.15;
 double SAPTO_TAPER = 0.125;
 
+void set_sapto_cutoffs(Sapto *S) {
+  if (!R_FINITE(S->taper)) error("sapto_taper must be finite.");
+  if (S->taper == 0) {
+    S->upr_single = S->upr_couple = S->upr_illness = R_PosInf;
+    return;
+  }
+  S->upr_single = trunc(S->lwr_single + S->mxo_single / S->taper);
+  S->upr_couple = 2 * trunc(S->lwr_couple + S->mxo_couple / S->taper);
+  S->upr_illness = 2 * trunc(S->lwr_illness + S->mxo_illness / S->taper);
+}
+
+static SEXP sapto_cutoff_scalar(double cutoff) {
+  // Preserve the integer fields of existing annual systems. Uncapped and
+  // large combined-income thresholds use the full numeric range.
+  return cutoff >= -INT_MAX && cutoff <= INT_MAX ? ScalarInteger((int)cutoff) : ScalarReal(cutoff);
+}
+
 SEXP Sapto2Sexp(Sapto S) {
   SEXP ans = PROTECT(allocVector(VECSXP, SAPTO_LEN));
   SEXP nms = PROTECT(allocVector(STRSXP, SAPTO_LEN));
@@ -23,9 +40,9 @@ SEXP Sapto2Sexp(Sapto S) {
   SET_STRING_ELT(nms, 4, mkCharCE("lower_threshold", CE_UTF8));
   SET_VECTOR_ELT(ans, 5, ScalarInteger(S.lwr_couple));
   SET_STRING_ELT(nms, 5, mkCharCE("lower_threshold_married", CE_UTF8));
-  SET_VECTOR_ELT(ans, 6, ScalarInteger(S.upr_single));
+  SET_VECTOR_ELT(ans, 6, sapto_cutoff_scalar(S.upr_single));
   SET_STRING_ELT(nms, 6, mkCharCE("upr_single", CE_UTF8));
-  SET_VECTOR_ELT(ans, 7, ScalarInteger(S.upr_couple));
+  SET_VECTOR_ELT(ans, 7, sapto_cutoff_scalar(S.upr_couple));
   SET_STRING_ELT(nms, 7, mkCharCE("upr_couple", CE_UTF8));
   SET_VECTOR_ELT(ans, 8, ScalarReal(S.taper));
   SET_STRING_ELT(nms, 8, mkCharCE("taper", CE_UTF8));
@@ -47,7 +64,7 @@ SEXP Sapto2Sexp(Sapto S) {
   SET_STRING_ELT(nms, 16, mkCharCE("max_offset_illness", CE_UTF8));
   SET_VECTOR_ELT(ans, 17, ScalarInteger(S.lwr_illness));
   SET_STRING_ELT(nms, 17, mkCharCE("lower_threshold_illness", CE_UTF8));
-  SET_VECTOR_ELT(ans, 18, ScalarInteger(S.upr_illness));
+  SET_VECTOR_ELT(ans, 18, sapto_cutoff_scalar(S.upr_illness));
   SET_STRING_ELT(nms, 18, mkCharCE("upr_illness", CE_UTF8));
   setAttrib(ans, R_NamesSymbol, nms);
   UNPROTECT(2);
@@ -88,7 +105,7 @@ static int slwr_thresh(Sapto S, unsigned int on_sapto_cd) {
   }
 }
 
-static int supr_thresh(Sapto S, unsigned int on_sapto_cd) {
+static double supr_thresh(Sapto S, unsigned int on_sapto_cd) {
   switch(on_sapto_cd) {
   case SAPTO_A:
     return S.upr_single;
@@ -150,7 +167,7 @@ static double do_1_sapto_sf(int x, int y, int taxable, int spouse_taxable,
   double base = smax_offset(S, code);
   double threshold = slwr_thresh(S, code);
   bool paired = code == SAPTO_B || code == SAPTO_D;
-  if (paired) {
+  if (paired && S.taper > 0) {
     // Regulations 11-12 and former regs 150AD-150AE. The recipient must
     // already be shading out. The statutory test disregards other offsets.
     double original = base;
@@ -163,6 +180,8 @@ static double do_1_sapto_sf(int x, int y, int taxable, int spouse_taxable,
       base += spouse_unused;
       if (S.year == 1997) base = dmin(base, own_tax);
     }
+    // Reg 12(3)(a) reduces the transferor's base by the excess over basic
+    // tax, even when the spouse's separate reg 12(3)(b) increase is nil.
     if (y > threshold) base -= dmax0(original - own_tax);
     if (base != original) threshold = transferred_threshold(base, S);
   }
@@ -251,41 +270,42 @@ void validate_sapto(Sapto * S, int fix) {
   int lwr_single = S->lwr_single;
   int lwr_couple = S->lwr_couple;
   
-  int upr_single = S->upr_single;
-  int upr_couple = S->upr_couple;
   double taper = S->taper;
   if (taper < 0) {
     if (fix) {
       warning("(validate_sapto)Sapto.taper < 0 and so sign will be reversed.");  
       S->taper = -taper;
+      set_sapto_cutoffs(S);
     } else {
       error("(validate_sapto)S.taper < 0.");
     }
   }
   
+  double upr_single = S->upr_single;
+  double upr_couple = S->upr_couple;
   if (upr_single <= lwr_single) {
     if (fix) {
       if (fix == 1) {
-        warning("(validate_sapto)upr_single = %d, yet lwr_single = %d"
-                  " and so upr_single will be reset to %d.",
-                  upr_single, lwr_single, (int)(S->mxo_single / S->taper));
+        warning("(validate_sapto)upr_single = %.0f, yet lwr_single = %d"
+                  " and so upr_single will be reset to %.0f.",
+                  upr_single, lwr_single, trunc(S->mxo_single / S->taper));
       }
-      S->upr_single = S->mxo_single / S->taper;
+      S->upr_single = trunc(S->mxo_single / S->taper);
     } else {
-      error("(validate_sapto)upr_single = %d, yet lwr_single = %d", 
+      error("(validate_sapto)upr_single = %.0f, yet lwr_single = %d",
             upr_single, lwr_single);
     }
   }
   if (upr_couple <= lwr_couple) {
     if (fix) {
       if (fix == 1) {
-        warning("(validate_sapto)upr_couple = %d, yet lwr_couple = %d"
-                  " and so upr_couple will be reset to %d.",
-                  upr_couple, lwr_couple, (int)(S->mxo_couple / S->taper));
+        warning("(validate_sapto)upr_couple = %.0f, yet lwr_couple = %d"
+                  " and so upr_couple will be reset to %.0f.",
+                  upr_couple, lwr_couple, trunc(S->mxo_couple / S->taper));
       }
-      S->upr_couple = S->mxo_couple / S->taper;
+      S->upr_couple = trunc(S->mxo_couple / S->taper);
     } else {
-      error("(validate_sapto)upr_couple = %d, yet lwr_couple = %d", 
+      error("(validate_sapto)upr_couple = %.0f, yet lwr_couple = %d",
             upr_couple, lwr_couple);
     }
   }

@@ -1,5 +1,17 @@
 context("Medicare levy")
 
+test_that("Medicare requires one spouse income or one per record", {
+  incomes <- rep(30000L, 3)
+  expect_equal(medicare_levy(incomes, "2023-24", Spouse_income = 23000L), rep(255.4, 3))
+  expect_equal(medicare_levy(incomes, "2023-24", Spouse_income = rep(23000L, 3)), rep(255.4, 3))
+  for (n in c(0L, 2L, 4L)) {
+    expect_error(medicare_levy(incomes, "2023-24", Spouse_income = rep(23000L, n)), "Spouse_income")
+  }
+  expect_identical(medicare_levy(integer(), "2023-24", Spouse_income = integer()), numeric())
+  expect_identical(medicare_levy(integer(), "2023-24", Spouse_income = 0L), numeric())
+  expect_error(medicare_levy(integer(), "2023-24", Spouse_income = c(0L, 0L)), "Spouse_income")
+})
+
 test_that("medicare_levy error handling / deprecated", {
   expect_error(medicare_levy(income = 123, fy.year = c("2015-16", "2015-17")))
   expect_warning(medicare_levy(income = 123, fy.year = "2014-15", family_status = "couple"),

@@ -329,6 +329,15 @@ System Sexp2System(SEXP RSystem, int yr) {
   
   setIntElement(&Sys.M.lwr_single, RSystem, "medicare_levy_lower_threshold");
   setIntElement(&Sys.M.upr_single, RSystem, "medicare_levy_upper_threshold");
+  setIntElement(&Sys.M.sapto_age, RSystem, "sapto_pension_age");
+  // System() includes "single" in these threshold names and keeps Medicare's
+  // whole-year age separately from the fractional SAPTO pension age.
+  SEXP medicare = getListElement(RSystem, "Medicare");
+  if (!isNull(medicare)) {
+    setIntElement(&Sys.M.lwr_single, medicare, "lower_single_threshold");
+    setIntElement(&Sys.M.upr_single, medicare, "upper_single_threshold");
+    setIntElement(&Sys.M.sapto_age, medicare, "sapto_age");
+  }
   
   setIntElement(&Sys.M.lwr_single_sapto, RSystem, "medicare_levy_lower_sapto_threshold");
   setIntElement(&Sys.M.upr_single_sapto, RSystem, "medicare_levy_upper_sapto_threshold");
@@ -341,28 +350,16 @@ System Sexp2System(SEXP RSystem, int yr) {
   
   setIntElement(&Sys.M.lwr_thr_up_per_child, RSystem, "medicare_levy_lower_up_for_each_child");
   
-  setIntElement(&Sys.M.sapto_age, RSystem, "sapto_pension_age");
-  
   if (hazName(RSystem, "Offsets")) {
     SEXP ROffsets = getListElement(RSystem, "Offsets");
-    OffsetN COffsets[MAX_N_OFFSETN] = {0};
-    Sys.n_offsetn = length(ROffsets);
-    SEXP2Offset(COffsets, length(ROffsets), ROffsets);
-    for (int j = 0; j < length(ROffsets); ++j) {
-      int nb = COffsets[j].nb;
-      Sys.Offsets[j].nb = nb;
-      Sys.Offsets[j].offset_1st = COffsets[j].offset_1st;
-      Sys.Offsets[j].cutoff = COffsets[j].cutoff;
-      Sys.Offsets[j].refundable = COffsets[j].refundable;
-      if (nb < 1) {
-        continue;
-      }
-      for (int k = 0; k < MAX_OFFSETN; ++k) {
-        int kk = (k < nb) ? k : (nb - 1);
-        Sys.Offsets[j].Thresholds[k] = COffsets[j].Thresholds[kk];
-        Sys.Offsets[j].Tapers[k] = COffsets[j].Tapers[kk];
-      }
+    if (!isNull(ROffsets) && !isVectorList(ROffsets)) {
+      error("Offsets must be a list.");
     }
+    if (xlength(ROffsets) > MAX_N_OFFSETN) {
+      error("A System supports at most %d offsets.", MAX_N_OFFSETN);
+    }
+    Sys.n_offsetn = (int)xlength(ROffsets);
+    SEXP2Offset(Sys.Offsets, Sys.n_offsetn, ROffsets);
   }
   
   // Set Sapto
@@ -381,11 +378,7 @@ System Sexp2System(SEXP RSystem, int yr) {
   setDblElement(&Sys.S.taper, RSystem, "sapto_taper");
   setIntElement(&Sys.S.tax_free_thresh, RSystem, "sapto_tax_free_thresh");
   
-  Sys.S.upr_single = Sys.S.lwr_single + Sys.S.mxo_single / Sys.S.taper;
-  Sys.S.upr_couple = Sys.S.lwr_couple + Sys.S.mxo_couple / Sys.S.taper;
-  Sys.S.upr_couple *= 2;
-  Sys.S.upr_illness = Sys.S.lwr_illness + Sys.S.mxo_illness / Sys.S.taper;
-  Sys.S.upr_illness *= 2;
+  set_sapto_cutoffs(&Sys.S);
   
   Sys.S.year = yr;
   return Sys;

@@ -5,10 +5,12 @@
 #' @param fy.year The financial year in which sapto is to be calculated.
 #' @param fill If SAPTO was not applicable, what value should be used?
 #' @param sapto.eligible Is the individual eligible for sapto?
-#' @param Spouse_income Spouse income whose unutilized SAPTO may be added to the current taxpayer. Must match \code{family_status}; i.e. can only be nonzero when \code{family_status != "single"}.
+#' @param Spouse_income Spouse income used to calculate the unused SAPTO available for transfer.
+#' Supply one amount or one per rebate income. For a single taxpayer supply zero.
 #' @param taxable_income,spouse_taxable_income Taxable incomes used to calculate the unused
 #' rebate available for transfer, including any exempt pensions specified by
-#' regulation 12(5). Each defaults to the corresponding rebate income.
+#' regulation 12(5). Each defaults to the corresponding rebate income and accepts
+#' one amount or one per rebate income.
 #' @param family_status Family status of the individual. 
 #' @param on_sapto_cd SAPTO claim code type (for non-veterans). A 
 #' letter A-E. A = single, B = lived apart due to illness and spouse was eligible,
@@ -45,7 +47,9 @@ sapto <- function(rebate_income,
   # and share the normalized amount when the transfer uses the same income.
   amount <- function(x) {
     if (length(x) == 1L) return(do_rN(x, 0L, 1L))
-    if (length(x) != N) return(0L)
+    if (length(x) != N) {
+      stop("`", deparse(substitute(x)), "` must have length one or the length of `rebate_income`.")
+    }
     if (is.integer(x) && !anyNA(x)) return(x)
     do_rN(x, integer(N), 1L)
   }

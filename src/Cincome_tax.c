@@ -362,7 +362,8 @@ SEXP Cdo_medicare_levy(SEXP x, SEXP Year, SEXP y, SEXP Eligible, SEXP IsMarried,
   isEquiInt(x, Eligible, "sapto.eligible");
   isEquiInt(x, IsMarried, "is_married");
   isEquiInt(x, nDependants, "n_dependants");
-  if (!isInteger(Year) || (xlength(Year) != 1 && xlength(Year) != N)) {
+  const R_xlen_t n_years = xlength(Year);
+  if (!isInteger(Year) || (n_years != 1 && n_years != N)) {
     error("fy.year must have length one or match income.");
   }
   const int * xp = INTEGER(x);
@@ -370,17 +371,26 @@ SEXP Cdo_medicare_levy(SEXP x, SEXP Year, SEXP y, SEXP Eligible, SEXP IsMarried,
   const int * ep = INTEGER(Eligible);
   const int * mp = INTEGER(IsMarried);
   const int * cp = INTEGER(nDependants);
+  const int * year = INTEGER(Year);
+  const bool constant_year = n_years == 1;
+  Medicare schedules[MAX_YEAR - MIN_YEAR + 1];
+  bool loaded[MAX_YEAR - MIN_YEAR + 1] = {false};
+  // Resolve each schedule and report invalid inputs on the R thread.
+  for (R_xlen_t i = 0; i < n_years; ++i) {
+    int yr = year[i];
+    if (yr < MIN_YEAR || yr > MAX_YEAR) error("Unsupported Medicare year %d.", yr);
+    int j = yr - MIN_YEAR;
+    if (!loaded[j]) {
+      schedules[j] = yr2Medicare(yr);
+      loaded[j] = true;
+    }
+  }
   SEXP ans = PROTECT(allocVector(REALSXP, N));
   double * restrict ansp = REAL(ans);
   int nThread = 1;
-  const int * year = INTEGER(Year);
-  const bool constant_year = xlength(Year) == 1;
-  const Medicare constant_M = constant_year ? yr2Medicare(year[0]) : (Medicare){0};
   
   FORLOOP({
-    ansp[i] = 0;
-    
-    const Medicare M = constant_year ? constant_M : yr2Medicare(year[i]);
+    const Medicare M = schedules[year[constant_year ? 0 : i] - MIN_YEAR];
     Person P = {0};
     P.xi = xp[i];
     P.yi = yp[i];

@@ -45,6 +45,8 @@ test_that("senior Medicare thresholds require actual SAPTO entitlement", {
 })
 
 test_that("Medicare vectors select each record's financial year", {
+  expect_error(medicare_levy(c(30000, 40000), c("2014-15", "2030-31")),
+               "Unsupported Medicare year 2031")
   expect_equal(medicare_levy(c(30000, 40000), c("2014-15", "2013-14")),
                c(600, 600))
   expect_equal(medicare_levy(c(30000, 40000), c("2013-14", "2014-15")),

@@ -19,7 +19,10 @@
 #' over the historical defaults when no cap or age threshold is specified.
 #' @param cap2 The cap on concessional contributions for those above the age threshold. No effect if \code{age_based_cap} is FALSE.
 #' @param age_based_cap Is the cap on concessional contributions age-based? 
-#' @param cap2_age The age above which \code{cap2} applies.
+#' @param cap2_age With an exact age, \code{cap2} applies above this age.
+#' With a sample age band, a threshold from 20 to below 65 is rounded up to
+#' a multiple of five, and the band starting at that age qualifies. Thresholds
+#' below 20 include all bands. Thresholds of 65 or more include the 70+ band.
 #' @param ecc (logical) Should an excess concessional contributions charge be calculated? (Not implemented.)
 #' @param use_other_contr Treat all other contributions as concessional before
 #' applying the cap. The default includes only separately identified other
@@ -135,7 +138,9 @@ apply_super_caps_and_div293 <- function(.sample.file,
   # specified a policy cap. A single closing balance cannot establish carry-forward.
   policy_cap <- function() {
     if (!age_based_cap) return(cap)
-    age <- field("c_age_30_june", default = {
+    age <- d$c_age_30_june
+    above <- if (!is.null(age)) age > cap2_age
+    if (is.null(age) || anyNA(age)) {
       band <- field("Age_range", "age_range", "Birth_year", default = NULL)
       lower <- if (!is.null(band)) positive_difference(70, 5 * band)
       if (!is.null(d$age_range_description) && (is.null(lower) || anyNA(lower))) {
@@ -143,11 +148,18 @@ apply_super_caps_and_div293 <- function(.sample.file,
         labels <- accel_repetitive_input(d$age_range_description, parse_lower)
         lower <- if (is.null(lower)) labels else fcoalesce(lower, labels)
       }
-      lower
-    })
-    if (is.null(age)) stop("An age or age band is required for an age-based cap.")
-    above <- age > cap2_age
-    if (anyNA(age)) above[is.na(age)] <- FALSE
+      if (is.null(age) && is.null(lower)) stop("An age or age band is required for an age-based cap.")
+      band_eligible <- FALSE
+      if (!is.null(lower)) {
+        # Use the sample file's historical band convention, including its
+        # open-ended groups. An exact age still uses the strict cutoff above.
+        first_band <- fifelse(cap2_age < 20, 0,
+                              fifelse(cap2_age >= 65, 70, 5 * ceiling(cap2_age / 5)))
+        band_eligible <- lower >= first_band
+        if (anyNA(lower)) band_eligible[is.na(lower)] <- FALSE
+      }
+      above <- if (is.null(age)) band_eligible else fifelse(is.na(age), band_eligible, above)
+    }
     if (length(above) && typeof(cap2) == typeof(cap) && length(cap) %in% c(1L, length(above)) &&
         length(cap2) %in% c(1L, length(above))) {
       fifelse(above, cap2, cap)

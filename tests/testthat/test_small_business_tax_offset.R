@@ -1,5 +1,14 @@
 context("Small business tax offset")
 
+test_that("standalone business income requires turnover evidence", {
+  offset <- function(...) small_business_tax_offset(100000, 25000,
+    total_net_small_business_income = 50000, fy_year = "2017-18", ...)
+  expect_error(offset(), "aggregated_turnover.*previous_aggregated_turnover")
+  expect_equal(offset(aggregated_turnover = 1e6), 1000)
+  expect_equal(offset(previous_aggregated_turnover = 1e6), 1000)
+  expect_equal(offset(aggregated_turnover = 5e6), 0)
+})
+
 test_that("Example in explanatory memo", {
   expect_equal(small_business_tax_offset(100e3,
                                          basic_income_tax_liability = 25e3,
