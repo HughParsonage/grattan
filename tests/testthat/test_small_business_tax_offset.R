@@ -143,10 +143,11 @@ test_that("Results with .dots.ATO", {
 })
 
 
-test_that("pre-commencement years require no turnover evidence", {
-  years <- c("2013-14", "2014-15")
-  expect_identical(small_business_tax_offset(c(5e4, 5e4), 1e4, fy_year = years), double(2))
-  expect_identical(small_business_tax_offset(5e4, 1e4, fy_year = years), double(2))
-  expect_error(small_business_tax_offset(5e4, 1e4, fy_year = c("2014-15", "2015-16")), "turnover")
-  expect_error(small_business_tax_offset(1:3, 1e4, fy_year = years), "length")
-})
+test_that("pre-commencement years require no turnover evidence",
+          {
+            years <- c("2013-14", "2014-15")
+            expect_identical(small_business_tax_offset(c(5e4, 5e4), 1e4, fy_year = years), double(2))
+            expect_identical(small_business_tax_offset(5e4, 1e4, fy_year = years), double(2))
+            expect_error(small_business_tax_offset(5e4, 1e4, fy_year = c("2014-15", "2015-16")), "turnover")
+            expect_error(small_business_tax_offset(1:3, 1e4, fy_year = years), "length")
+          })

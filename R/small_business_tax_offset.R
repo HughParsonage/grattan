@@ -49,27 +49,27 @@
 #' @export
 
 
-small_business_tax_offset <- function(taxable_income,
-                                      basic_income_tax_liability,
-                                      .dots.ATO = NULL,
-                                      aggregated_turnover = NULL,
-                                      total_net_small_business_income = NULL,
-                                      fy_year = NULL,
-                                      tax_discount = NULL,
-                                      previous_aggregated_turnover = NULL) {
+small_business_tax_offset <- function(taxable_income, basic_income_tax_liability, .dots.ATO = NULL, aggregated_turnover = NULL, total_net_small_business_income = NULL, fy_year = NULL, tax_discount = NULL, previous_aggregated_turnover = NULL) {
   if (is.null(fy_year) && is.null(tax_discount)) stop("`fy_year` and `tax_discount` are both NULL.")
   year <- if (is.null(fy_year)) NULL else fy::fy2yr(fy_year)
-  if (is.null(tax_discount) && length(year) && isTRUE(year[1L] < 2016L) &&
+  if (is.null(tax_discount) &&
+      length(year) &&
+      isTRUE(year[1L] < 2016L) &&
       (length(year) == 1L || isTRUE(max(year) < 2016L))) {
-    if (!length(taxable_income)) return(double())
+    if (!length(taxable_income)) {
+      return(double())
+    }
+
     inputs <- list(taxable_income, basic_income_tax_liability, year)
     if (is.null(.dots.ATO)) {
       inputs <- c(inputs, list(aggregated_turnover, previous_aggregated_turnover, total_net_small_business_income))
     } else {
       inputs <- c(inputs, list(seq_len(nrow(.dots.ATO))))
     }
+
     return(double(prohibit_arg_recycling.MAXLENGTH(Filter(length, inputs))))
   }
+
   if (!is.null(.dots.ATO)) {
     if (!is.null(aggregated_turnover) || !is.null(previous_aggregated_turnover)) {
       warning("Both `.dots.ATO` and `", if (is.null(aggregated_turnover)) "previous_aggregated_turnover" else "aggregated_turnover",

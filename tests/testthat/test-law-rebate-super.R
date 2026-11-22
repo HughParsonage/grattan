@@ -142,11 +142,16 @@ test_that("logical scalar inputs are recycled before native indexing", {
   expect_identical(do_rN(NA, integer(4)), integer(4))
 })
 
-test_that("scaled deductible contributions reconcile with the returned amounts", {
-  d <- data.table::data.table(Taxable_Income = 70000L, MCS_Emplr_Contr = 10000L,
-                              Non_emp_spr_amt = 3000L, MCS_Prsnl_Contr = 5000L)
-  out <- apply_super_caps_and_div293(d, age_based_cap = FALSE, scale_contr_match_ato = TRUE, .lambda = 1)
-  expect_equal(out$personal_deductible_contributions, 3000 * super_contribution_inflator_1314)
-  expect_equal(out$personal_deductible_contributions, out$Non_emp_spr_amt)
-  expect_equal(out$personal_deductible_contributions + out$non_concessional_contributions, 5000)
-})
+test_that("scaled deductible contributions reconcile with the returned amounts",
+          {
+            d <-
+              data.table::data.table(Taxable_Income = 70000L,
+                                     MCS_Emplr_Contr = 10000L,
+                                     Non_emp_spr_amt = 3000L,
+                                     MCS_Prsnl_Contr = 5000L)
+
+            out <- apply_super_caps_and_div293(d, age_based_cap = FALSE, scale_contr_match_ato = TRUE, .lambda = 1)
+            expect_equal(out$personal_deductible_contributions, 3000 * super_contribution_inflator_1314)
+            expect_equal(out$personal_deductible_contributions, out$Non_emp_spr_amt)
+            expect_equal(out$personal_deductible_contributions + out$non_concessional_contributions, 5000)
+          })

@@ -42,27 +42,7 @@
 #' 
 #' @export 
 
-apply_super_caps_and_div293 <- function(.sample.file, 
-                                        colname_concessional = "concessional_contributions",
-                                        colname_div293_tax = "div293_tax", 
-                                        colname_new_Taxable_Income = "Taxable_income_for_ECT",
-                                        div293_threshold = 300e3, 
-                                        cap = 30e3, 
-                                        cap2 = 35e3, 
-                                        age_based_cap = TRUE, 
-                                        cap2_age = 59, 
-                                        ecc = FALSE,
-                                        use_other_contr = FALSE,
-                                        scale_contr_match_ato = FALSE, 
-                                        .lambda = 0, 
-                                        reweight_late_lodgers = FALSE,
-                                        .mu = 1.05,
-                                        impute_zero_concess_contr = FALSE,
-                                        .min.Sw.for.SG = 450 * 12,
-                                        .SG_rate = 0.0925,
-                                        warn_if_colnames_overwritten = TRUE, 
-                                        drop_helpers = FALSE, 
-                                        copyDT = TRUE) {
+apply_super_caps_and_div293 <- function(.sample.file, colname_concessional = "concessional_contributions", colname_div293_tax = "div293_tax", colname_new_Taxable_Income = "Taxable_income_for_ECT", div293_threshold = 300e3, cap = 30e3, cap2 = 35e3, age_based_cap = TRUE, cap2_age = 59, ecc = FALSE, use_other_contr = FALSE, scale_contr_match_ato = FALSE, .lambda = 0, reweight_late_lodgers = FALSE, .mu = 1.05, impute_zero_concess_contr = FALSE, .min.Sw.for.SG = 450 * 12, .SG_rate = 0.0925, warn_if_colnames_overwritten = TRUE, drop_helpers = FALSE, copyDT = TRUE) {
   if (!identical(ecc, FALSE)) stop("ECC not implemented.")
   if (!is.data.table(.sample.file)) stop(".sample.file must be a data.table")
   d <- if (copyDT) copy(.sample.file) else .sample.file
@@ -119,6 +99,7 @@ apply_super_caps_and_div293 <- function(.sample.file,
       set(d, j = name, value = d[[name]] * scale)
     }
   }
+
   put("personal_deductible_contributions", deductible)
   put("non_concessional_contributions", positive_difference(personal, deductible))
   gross <- as.double(employer) + deductible
