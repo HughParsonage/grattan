@@ -4,6 +4,9 @@ jobs:
   build:
     name: covr
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     env:
       TT_AT_HOME: "TRUE"
     steps:
@@ -13,8 +16,15 @@ jobs:
         run: |-
           Rscript -e "install.packages(c('rcmdcheck', 'remotes', 'covr'), repos = 'https://cran.rstudio.com')"
           Rscript -e "remotes::install_deps(dependencies = TRUE, repos = 'https://cran.rstudio.com')"
-      - name: codecov
-        run: Rscript -e "covr::codecov(quiet = FALSE)"
+      - name: Measure coverage
+        run: Rscript -e "coverage <- covr::package_coverage(quiet = FALSE); print(coverage); covr::to_cobertura(coverage, filename = 'coverage.xml')"
+      - name: Upload coverage
+        uses: codecov/codecov-action@f9fe539f5290016afa014f8ef31597d3a61c2dea # v7
+        with:
+          files: coverage.xml
+          disable_search: true
+          use_oidc: true
+          fail_ci_if_error: true
     container: rocker/verse:latest
   rcmdchecker:
     name: Rcmdcheck
@@ -34,24 +44,30 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     container:
-      image: rhub/rocker-gcc-san
+      image: ghcr.io/r-hub/containers/gcc-asan:latest
+    env:
+      ASAN_OPTIONS: detect_leaks=0:halt_on_error=1
+      UBSAN_OPTIONS: print_stacktrace=1:halt_on_error=1
+      NOT_CRAN: 'true'
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
         with:
           fetch-depth: 5
           submodules: true
-      - name: Install packages
+      - name: Install package dependencies
         shell: bash
         run: |
-          apt install -y g++
-          Rdevel -e "install.packages('hutils', repos = 'https://cran.rstudio.com', type = 'source')"
-          Rdevel -e "hutils::provide.file('~/.R/Makevars'); cat('CXX_STD = CXX11', file = '~/.R/Makevars')"
-          Rdevel -e "hutils::provide.file('~/.R/Makevars'); cat('CXXFLAGS += -std=gnu++11', file = '~/.R/Makevars')"
-          Rdevel -e "install.packages('RcppArmadillo', repos = 'https://cran.rstudio.com', type = 'source')"
-          Rdevel -e "install.packages('lmtest', repos = 'https://cran.rstudio.com', type = 'source')"
-          Rdevel -e "install.packages('ggplot2', repos = 'https://cran.rstudio.com', type = 'source')"
-          Rdevel -q -e "ip <- function(x) install.packages(x[!sapply(x, requireNamespace, quietly = TRUE)], quiet = TRUE, repos = 'https://cran.r-project.org'); ip('forecast'); cat('-\n'); ip(c('forecast', 'pkgbuild', 'hutils', 'hutilscpp', 'testthat', 'data.table', 'grattanInflators', 'fy', 'ineq', 'checkmate', 'assertthat'))"
-          Rdevel CMD build .
-          Rdevel CMD INSTALL --install-tests grattan*.tar.gz
-          Rdevel -e "testthat::test_local('tests')"
+          R --version
+          R CMD config CC
+          Rscript -e 'pak::pkg_install("deps::.", dependencies = TRUE)'
+      - name: Build and install with sanitizers
+        shell: bash
+        run: |
+          R CMD build --no-manual --no-build-vignettes .
+          R CMD INSTALL --install-tests grattan_*.tar.gz
+          Rscript -e 'dll <- system.file("libs", paste0("grattan", .Platform$dynlib.ext), package = "grattan"); symbols <- system2("nm", c("-D", dll), stdout = TRUE); stopifnot(any(grepl("__asan_", symbols)), any(grepl("__ubsan_", symbols)))'
+      - name: Run installed tests with sanitizers
+        shell: bash
+        run: |
+          Rscript -e 'library(grattan); library(hutils); library(data.table); library(magrittr); data.table::setDTthreads(1L); tests <- system.file("tests", "testthat", package = "grattan"); stopifnot(dir.exists(tests), length(list.files(tests, pattern = "^test")) > 0L); testthat::test_package("grattan", reporter = "summary", stop_on_failure = TRUE)'
