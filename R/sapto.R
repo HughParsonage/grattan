@@ -94,9 +94,9 @@ return_claim_codes <- function(data, age, married, yr, System, eligible = NULL) 
   }
   years <- if (length(yr) == 1L) c(yr, yr) else hutilscpp::minmax(yr)
   first_year <- years[1L]
-  claim <- data$on_sapto_cd
+  claim <- if (isTRUE(years[2L] >= 2013L)) data$on_sapto_cd
   legacy <- data$on_sato_cd
-  modern_years <- is.null(legacy) || isTRUE(first_year >= 2013L)
+  modern_years <- isTRUE(first_year >= 2013L)
   complete_modern <- !is.null(claim) && modern_years && !anyNA(claim)
   complete_legacy <- !is.null(legacy) && isTRUE(years[2L] <= 2012L) && !anyNA(legacy)
   complete <- complete_modern || complete_legacy

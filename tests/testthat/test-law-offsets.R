@@ -223,3 +223,12 @@ test_that("beneficiary offsets use the year-specific band and prescribed roundin
   expect_equal(bto(40000, "2020-21", tax_threshold = 37000), 5550)
   expect_equal(bto(10000, "2020-21", rate1 = 0.1, benefit_threshold = 9000), 100)
 })
+
+test_that("a modern aLife code applies only from 2012-13", {
+  records <- data.frame(c_age_30_june = 75L, on_sapto_cd = c("", ""))
+  years <- c("2010-11", "2017-18")
+  expected <- c(1790.5, income_tax(35000L, years[2L], age = 42))
+  expect_equal(income_tax(35000L, years, .dots.ATO = records), expected)
+  expect_equal(income_tax(35000L, years[1L], .dots.ATO = records[1L, ]), expected[1L])
+  expect_identical(sf2osc(records, c(2012L, 2013L)), as.raw(c(1, 0)))
+})

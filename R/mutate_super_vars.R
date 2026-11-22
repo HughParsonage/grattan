@@ -110,7 +110,6 @@ apply_super_caps_and_div293 <- function(.sample.file,
     put("SG_contributions", positive_difference(employer, reportable))
     put("salary_sacrifice_contributions", reportable)
   }
-  put("personal_deductible_contributions", deductible)
   if (scale_contr_match_ato) {
     scale <- 1 + (super_contribution_inflator_1314 - 1) * .lambda
     employer <- employer * scale
@@ -120,6 +119,7 @@ apply_super_caps_and_div293 <- function(.sample.file,
       set(d, j = name, value = d[[name]] * scale)
     }
   }
+  put("personal_deductible_contributions", deductible)
   put("non_concessional_contributions", positive_difference(personal, deductible))
   gross <- as.double(employer) + deductible
   if (!is.null(other)) gross <- gross + other
