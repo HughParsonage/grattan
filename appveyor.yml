@@ -1,60 +1,37 @@
-# DO NOT CHANGE the "init" and "install" sections below
-
-# Download script file from GitHub
-init:
-  ps: |
-        $ErrorActionPreference = "Stop"
-        Invoke-WebRequest http://raw.github.com/krlmlr/r-appveyor/master/scripts/appveyor-tool.ps1 -OutFile "..\appveyor-tool.ps1"
-        Import-Module '..\appveyor-tool.ps1'
-
-install:
-  ps: Bootstrap
-
-cache:
-  - C:\RLibrary
+image: Visual Studio 2022
 
 environment:
   global:
-    _R_CHECK_CRAN_INCOMING_: 0
+    _R_CHECK_CRAN_INCOMING_: "false"
+    R_LIBS_USER: 'C:\RLibrary\%v'
 
-  matrix:
-  #- R_VERSION: release
-  #  R_ARCH: i386
-  #  R_BUILD_ARGS: --no-build-vignettes
-  #  R_CHECK_ARGS: --ignore-vignettes --no-vignettes --no-manual
-    
-  - R_VERSION: release
-    R_ARCH: x64
+# rig installs the current R release and its matching UCRT toolchain.
+# The former r-appveyor bootstrap selected Rtools40 for every R 4.x release.
+install:
+  - cmd: choco install rig --version=0.11.1 --yes --no-progress
+  - ps: $env:PATH = "C:\Program Files\rig;C:\Program Files\R\bin;$env:PATH"
+  - cmd: rig add release
+  - cmd: rig default release
+  - cmd: rig add rtools
+  - cmd: Rscript -e "dir.create(Sys.getenv('R_LIBS_USER'), recursive = TRUE, showWarnings = FALSE); .libPaths(Sys.getenv('R_LIBS_USER')); install.packages(c('remotes', 'rcmdcheck'), repos = 'https://cloud.r-project.org'); remotes::install_deps(dependencies = TRUE, upgrade = 'never', repos = 'https://cloud.r-project.org')"
+  - cmd: Rscript -e "install.packages(c('taxstats', 'taxstats1516'), repos = 'https://hughparsonage.github.io/tax-drat')"
 
-
-# Adapt as necessary starting from here
+cache:
+  - C:\RLibrary -> appveyor.yml
 
 build_script:
-  - travis-tool.sh install_deps
-  - cmd: Rscript -e "install.packages('grattan', repos = 'https://cran.rstudio.com');is.null(install.packages(c('taxstats', 'taxstats1516'), repos = 'https://hughparsonage.github.io/tax-drat'))"
+  - cmd: Rscript -e "rcmdcheck::rcmdcheck(args = c('--no-manual', '--as-cran'), build_args = '--no-manual', error_on = 'warning', check_dir = 'check')"
 
-test_script:
-  - travis-tool.sh run_tests
-
-on_failure:
-  - 7z a failure.zip *.Rcheck\*
-  - appveyor PushArtifact failure.zip
+test: off
 
 artifacts:
-  - path: '*.Rcheck\**\*.log'
+  - path: 'check\**\*.log'
     name: Logs
-
-  - path: '*.Rcheck\**\*.out'
+  - path: 'check\**\*.out'
     name: Logs
-
-  - path: '*.Rcheck\**\*.fail'
+  - path: 'check\**\*.fail'
     name: Logs
-
-  - path: '*.Rcheck\**\*.Rout'
+  - path: 'check\**\*.Rout'
     name: Logs
-
-  - path: '\*_*.tar.gz'
-    name: Bits
-
-  - path: '\*_*.zip'
-    name: Bits
+  - path: 'check\*.tar.gz'
+    name: Source
