@@ -12,7 +12,9 @@ sapto(
   Spouse_income = 0,
   family_status = "single",
   on_sapto_cd = "A",
-  .check = TRUE
+  .check = TRUE,
+  taxable_income = rebate_income,
+  spouse_taxable_income = Spouse_income
 )
 }
 \arguments{
@@ -36,6 +38,10 @@ eligibility; the standalone function does not infer eligibility from age.}
 
 \item{.check}{Run checks for consistency of values. For example, ensuring no 
 single individuals have positive \code{Spouse_income}.}
+
+\item{taxable_income, spouse_taxable_income}{Taxable incomes used to calculate the unused
+rebate available for transfer, including any exempt pensions specified by
+regulation 12(5). Each defaults to the corresponding rebate income.}
 }
 \description{
 Seniors and Pensioner Tax Offset

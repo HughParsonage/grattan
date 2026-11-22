@@ -131,3 +131,49 @@ employers; an explicitly supplied ic_rebate_income overrides reconstruction.
 Historical CGT policy rescaling outside the clearly documented supported
 period, asset-level reconstruction, population costing and unavailable facts
 are outside these fixes.
+
+Annual return inputs and follow-up cases (test-law-return-fields.R)
+
+The installed guide tax-return-fields.txt lists the two data dictionaries,
+annual coverage and the effect of unavailable fields. Additional authorities
+for the regression cases are listed below.
+
+* Low income aged persons rebate. The contemporaneous TaxPacks give the
+  maxima and individual and combined thresholds for each family category.
+  The half-rate 1996-97 schedule has a $614.50 single maximum. The 1997-98
+  illness-separated full-rate threshold is $11,385 (TaxPack 98, page 111).
+  https://iorder.com.au/publication/Download.aspx?ProdID=0976-6.1997
+  https://iorder.com.au/publication/Download.aspx?ProdID=0976-6.1998
+  https://iorder.com.au/publication/Download.aspx?ProdID=0976-6.1999
+  https://iorder.com.au/publication/Download.aspx?ProdID=0976-6.2000
+* Historical transfer and threshold provisions are regs 150AB, 150AD and
+  150AE. The 2012 amendment introduced the $6,000/15% transfer calculation.
+  https://www.legislation.gov.au/F1997B00235/2000-03-29/2000-03-29/text/original/pdf
+  https://www.legislation.gov.au/F1997B00235/2010-07-01/2010-07-01/text/original/pdf
+  https://www.ato.gov.au/law/view/pdf/reg/r20120091.pdf
+* Current senior threshold formula and the ATO's whole-dollar SAPTO example.
+  https://www.legislation.gov.au/F2025L01060/asmade/2025-09-09/text/original/epub/OEBPS/document_1/document_1.html
+  https://www.ato.gov.au/api/public/content/0-2319183b-9958-4848-88f9-ea9dc64b121e
+* The 2016-17 rebate worksheet adjusts both IT1 labels together. The
+  2017-18 worksheet applies the adjustment only to the exempt employer.
+  https://iorder.com.au/publication/Download.aspx?ProdID=71050-6.2017
+  https://www.ato.gov.au/api/public/content/0-5ec32c80-7ce7-4317-a7ca-e474c38ca96d
+* Flood exemption determination and the 2012 individual return.
+  https://www.legislation.gov.au/F2011L00981/asmade/2011-06-08/text/original/pdf
+  https://iorder.com.au/publication/Download.aspx?ProdID=2541-6.2012
+* Working Australians tax offset and standard work-related deduction.
+  Act 49 of 2026, Schedules 3 and 4 (ITAA 1997 ss61-155, 61-160, 25-130).
+  https://www.legislation.gov.au/C2026A00049/asmade/2026-06-26/text/original/epub/OEBPS/document_1/document_1.html
+* Ordinary Medicare thresholds, 1990-91 through 1998-99. Sections 7 and 8
+  phase in the levy above the single and family thresholds. The 1996-97
+  rate was 1.7% and reverted to 1.5% in 1997-98.
+  https://www.legislation.gov.au/C2004A04017/asmade/1990-11-06/text/original/pdf
+  https://www.legislation.gov.au/C2004A04287/asmade/1991-12-24/text/original/pdf
+  https://www.legislation.gov.au/C2004A04446/asmade/1992-12-11/text/original/pdf
+  https://www.legislation.gov.au/C2004A04612/asmade/1993-10-27/text/original/pdf
+  https://www.legislation.gov.au/C2004A04909/asmade/1995-06-28/text/original/pdf
+  https://www.legislation.gov.au/C2004A05162/asmade/1997-04-17/text/original/pdf
+  https://www.legislation.gov.au/C2004A05340/asmade/1998-04-17/text/original/pdf
+  https://treasury.gov.au/publication/tax-expenditures-statement-2000/appendix-a-description-of-tax-expenditures
+* Division 293 income base.
+  https://www.ato.gov.au/individuals-and-families/super-for-individuals-and-families/super/growing-and-keeping-track-of-your-super/caps-limits-and-tax-on-super-contributions/division-293-tax-on-concessional-contributions-by-high-income-earners

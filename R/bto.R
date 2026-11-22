@@ -46,6 +46,15 @@ bto <- function(benefit_amount,
   # Regulation 13(4)-(5): floor benefits before calculating and rounding up
   # the offset. The order matters for benefit amounts containing cents.
   benefit_amount <- floor(benefit_amount)
-  pmax(ceiling(rate1 * (benefit_amount - benefit_threshold) +
-                rate2 * pmax(benefit_amount - tax_threshold, 0)), 0)
+  # Prescribed coefficients are whole percentages. Multiply in percentage
+  # points before dividing to preserve exact whole-dollar boundaries.
+  first <- benefit_amount - benefit_threshold
+  second <- pmax(benefit_amount - tax_threshold, 0)
+  points1 <- round(100 * rate1)
+  points2 <- round(100 * rate2)
+  exact <- rate1 == points1 / 100 & rate2 == points2 / 100
+  amount <- ifelse(exact & is.finite(first + second),
+                   (points1 * first + points2 * second) / 100,
+                   rate1 * first + rate2 * second)
+  pmax(ceiling(amount), 0)
 }

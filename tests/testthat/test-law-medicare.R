@@ -76,6 +76,19 @@ test_that("annual Medicare thresholds use their enacted income year", {
   expect_equal(medicare_levy(14000, "2000-01"), 38.6)
 })
 
+test_that("Medicare phases in on the first dollar above each 1990s threshold", {
+  years <- yr2fy(1991:1999)
+  single <- c(11745, 11745, 11887, 12688, 12688, 12870, 13127, 13389, 13389)
+  family <- c(19045, 19674, 20070, 21366, 21366, 21718, 22152, 22594, 22594)
+  rates <- c(0.0125, 0.0125, 0.0125, 0.014, 0.014, 0.015, 0.017, 0.015, 0.015)
+  expect_equal(medicare_levy(single, years), rep(0, 9))
+  expect_equal(medicare_levy(single + 1, years), rep(0.20, 9))
+  expect_equal(medicare_levy(family, years, is_married = TRUE), rep(0, 9))
+  expect_equal(medicare_levy(family + 1, years, is_married = TRUE), rep(0.20, 9))
+  expect_equal(medicare_levy(family + 2101, years, n_dependants = 1L), rep(0.20, 9))
+  expect_equal(medicare_levy(rep(50000, 9), years), 50000 * rates)
+})
+
 test_that("temporary budget repair levy taxes only the excess over $180000", {
   expect_equal(income_tax(c(179999, 180000, 180001, 200000), "2014-15"),
                c(58146.61, 58147, 58147.49, 67947))

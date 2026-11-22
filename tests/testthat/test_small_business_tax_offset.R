@@ -83,7 +83,8 @@ test_that("Warnings with dotsATO", {
                                                    total_net_small_business_income = 1)],
                  regexp = "Both `.dots.ATO` and `total_net_small_business_income` were provided.", 
                  fixed = TRUE)
-  s1314[, Total_PP_BE_amt := NULL]
+  # Without a turnover or an eligible amount, a net profit alone is insufficient.
+  s1314 <- s1314[, .(Taxable_Income, Net_NPP_BI_amt)]
   expect_error(s1314[, small_business_tax_offset(Taxable_Income, 
                                                  0.3 * Taxable_Income, 
                                                  fy_year = "2015-16",

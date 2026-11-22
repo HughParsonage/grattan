@@ -73,5 +73,5 @@ test_that("SATO uses senior schedules and year-specific shading thresholds", {
   # ATO2025instructions and enacted15%/14% ordinary rates (reg9 formula).
   expect_equal(sapto(35007, "2024-25"), 2219)
   expect_equal(sapto(36122, "2026-27"), 2219)
-  expect_equal(sapto(37396, "2027-28"), 2219)
+  expect_equal(sapto(c(37137, 37225, 54976, 54977), "2027-28"), c(2230, 2219, 1, 0))
 })

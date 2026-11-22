@@ -85,6 +85,8 @@ typedef struct {
   int xi;
   int yi;
   int yti; // spouse taxable income (yi is spouse rebate income)
+  int transfer_taxable; // taxable income for the senior offset transfer test
+  int spouse_transfer_taxable;
   int ri; // rebate income
   unsigned int agei : 7;
   unsigned int n_child : 4;

@@ -19,17 +19,22 @@ static Amount amount_view(SEXP x) {
 }
 
 // Missing addbacks are zero. Worker threads only read plain pointers.
-static double amount0(Amount x, R_xlen_t i) {
-  if (!x.length) return 0;
+static double amount_at(Amount x, R_xlen_t i) {
+  if (!x.length) return NA_REAL;
   R_xlen_t j = x.length == 1 ? 0 : i;
-  double out = 0;
+  double out = NA_REAL;
   if (x.real) {
     out = x.real[j];
   } else if (x.integer) {
     int value = x.integer[j];
     if (value != NA_INTEGER) out = value;
   }
-  return R_FINITE(out) ? out : 0;
+  return out;
+}
+
+static double amount0(Amount x, R_xlen_t i) {
+  double value = amount_at(x, i);
+  return R_FINITE(value) ? value : 0;
 }
 
 static void check_amount(SEXP x, R_xlen_t n, const char * name) {
@@ -50,8 +55,9 @@ static double fringe_adjustment(int year) {
 }
 
 SEXP Crebate_income(SEXP Income, SEXP ReportableEmployerSuper,
-                    SEXP EmployerSuper, SEXP DeductiblePersonalSuper,
+                    SEXP DeductiblePersonalSuper,
                     SEXP InvestmentLoss, SEXP NetRent, SEXP FringeBenefits,
+                    SEXP ExemptFringe, SEXP OtherFringe, SEXP FHSS,
                     SEXP Year, SEXP nthreads) {
   R_xlen_t N = xlength(Income);
   if (!isInteger(Income) || !isInteger(Year) ||
@@ -63,14 +69,17 @@ SEXP Crebate_income(SEXP Income, SEXP ReportableEmployerSuper,
   check_amount(InvestmentLoss, N, "investment loss");
   check_amount(NetRent, N, "net rent");
   check_amount(FringeBenefits, N, "reportable fringe benefits");
+  check_amount(ExemptFringe, N, "exempt employer benefits");
+  check_amount(OtherFringe, N, "other employer benefits");
+  check_amount(FHSS, N, "assessable FHSS release");
   const Amount employer = amount_view(ReportableEmployerSuper);
   const Amount personal = amount_view(DeductiblePersonalSuper);
   const Amount investment = amount_view(InvestmentLoss);
   const Amount rent = amount_view(NetRent);
   const Amount fringe = amount_view(FringeBenefits);
-  // Total employer contributions include compulsory SG, which is not RESC.
-  // Retain the private argument position, but do not add these contributions.
-  (void) EmployerSuper;
+  const Amount exempt = amount_view(ExemptFringe);
+  const Amount other = amount_view(OtherFringe);
+  const Amount fhss = amount_view(FHSS);
   int nThread = as_nThread(nthreads);
   const int * xp = INTEGER(Income);
   const int * years = INTEGER(Year);
@@ -79,12 +88,30 @@ SEXP Crebate_income(SEXP Income, SEXP ReportableEmployerSuper,
   int * out = INTEGER(ans);
   FORLOOP({
     int year = years[constant_year ? 0 : i];
-    double rebate = xp[i] == NA_INTEGER ? 0 : xp[i];
+    double rebate = xp[i] == NA_INTEGER ? 0 : imax(xp[i], 0);
+    if (year <= 2009) {
+      out[i] = (int)rebate;
+      continue;
+    }
+    if (year >= 2019) rebate = fmax(0, rebate - amount0(fhss, i));
     rebate += amount0(employer, i);
     rebate += amount0(personal, i);
     rebate += amount0(investment, i);
     rebate += fmax(0, -amount0(rent, i));
-    rebate += floor(fringe_adjustment(year) * amount0(fringe, i));
+    double total = amount0(fringe, i);
+    double e = amount_at(exempt, i);
+    double o = amount_at(other, i);
+    if (R_FINITE(e) || R_FINITE(o)) {
+      if (!R_FINITE(e)) e = fmax(0, total - o);
+      if (!R_FINITE(o)) o = fmax(0, total - e);
+      if (year <= 2017) {
+        rebate += floor(fringe_adjustment(year) * (e + o));
+      } else {
+        rebate += floor(fringe_adjustment(year) * e) + o;
+      }
+    } else {
+      rebate += floor(fringe_adjustment(year) * total);
+    }
     out[i] = rebate >= INT_MAX ? INT_MAX : (rebate <= 0 ? 0 : (int)rebate);
   })
   UNPROTECT(1);

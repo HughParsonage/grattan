@@ -14,7 +14,10 @@ rebate_income(
   Net_fincl_invstmt_lss_amt = 0,
   Net_rent_amt = 0,
   Rep_frng_ben_amt = 0,
-  fy.year = NULL
+  fy.year = NULL,
+  exempt_fringe_benefits = NULL,
+  nonexempt_fringe_benefits = NULL,
+  assessable_fhss = NULL
 )
 }
 \arguments{
@@ -29,10 +32,15 @@ rebate_income(
 \item{Net_rent_amt}{Signed net rental income; a loss is negative.}
 
 \item{Rep_frng_ben_amt}{Aggregate reportable fringe benefits. For modern years
-these are assumed to be from exempt employers; supply an independently
-calculated rebate income to \code{income_tax()} when that assumption does not hold.}
+the aggregate alone is treated as exempt-employer benefits.}
 
 \item{fy.year}{Financial year, defaulting to the current financial year.}
+
+\item{exempt_fringe_benefits, nonexempt_fringe_benefits}{Separate IT1 amounts by
+employer exemption status. The 2016-17 worksheet adjusts their sum. From
+2017-18 the adjustment applies only to exempt-employer benefits.}
+
+\item{assessable_fhss}{Assessable first home super saver released amount from 2018-19.}
 }
 \description{
 Rebate income

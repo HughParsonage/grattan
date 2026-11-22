@@ -95,16 +95,16 @@ medicare_levy <- function(income,
     # sato and pto are not really supported but we assume that sato and
     # sapto are the same thing, and warn if pto is provided.
     if (is.null(sato) && !is.null(pto)) {
-      sato <- !pto
+      sato <- FALSE
     }
     if (is.null(pto) && !is.null(sato)) {
-      pto <- !sato
+      pto <- FALSE
     }
     if (any(sato & pto)) {
       stop("`pto` and `sato` must not both be TRUE. First bad position: ",
            which.max(sato & pto), ".")
     }
-    sapto.eligible <- sato | pto
+    sapto.eligible <- sato
     if (any(pto)){
       warning("`pto` includes TRUE values but will be assumed to be FALSE")
     }

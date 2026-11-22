@@ -126,6 +126,8 @@ static bool spouse_sapto_entitled(Person P, Sapto S) {
   Person spouse = P;
   spouse.xi = P.yti;
   spouse.yti = P.xi;
+  spouse.transfer_taxable = P.spouse_transfer_taxable;
+  spouse.spouse_transfer_taxable = P.transfer_taxable;
   spouse.ri = P.yi;
   spouse.yi = P.ri;
   return sapto_entitled(spouse, S);
@@ -150,6 +152,8 @@ Person pp(int x, int y, int r, unsigned int age, bool is_married, unsigned int n
     { .xi = x,
       .yi = y,
       .yti = y,
+      .transfer_taxable = x,
+      .spouse_transfer_taxable = y,
       .ri = r,
       .agei = age,
       .n_child = n_child,
@@ -192,7 +196,9 @@ SEXP Cincome_tax(SEXP Yr,
                  SEXP SpouseTaxableIncome,
                  SEXP OnSaptoCd,
                  SEXP iFrankCr,
-                 SEXP SmallBusinessOffset,
+                 SEXP IncomeOffsets,
+                 SEXP FloodExempt,
+                 SEXP TransferTaxable, SEXP SpouseTransferTaxable,
                  SEXP RSystem,
                  SEXP nthreads, 
                  SEXP Summary) {
@@ -209,10 +215,11 @@ SEXP Cincome_tax(SEXP Yr,
   const int summary = asInteger(Summary);
     
   R_xlen_t N = xlength(IcTaxableIncome);
-  if (!isNull(SmallBusinessOffset) &&
-      (!isReal(SmallBusinessOffset) || xlength(SmallBusinessOffset) != N)) {
-    error("SmallBusinessOffset must be NULL or a numeric vector matching income.");
+  if (!isNull(IncomeOffsets) &&
+      (!isReal(IncomeOffsets) || xlength(IncomeOffsets) != N)) {
+    error("IncomeOffsets must be NULL or a numeric vector matching income.");
   }
+  if (!isNull(FloodExempt)) isEquiInt(IcTaxableIncome, FloodExempt, "FloodExempt");
   isEquiInt(IcTaxableIncome, Age, "Age");
   isEquiInt(IcTaxableIncome, RebateIncome, "RebateIncome");
   isEquiInt(IcTaxableIncome, IsMarried, "IsMarried");
@@ -224,6 +231,10 @@ SEXP Cincome_tax(SEXP Yr,
   const int * rebate_income = INTEGER(RebateIncome);
   const int * spc_rebate_income = INTEGER(SpcRebateIncome);
   const int * spouse_taxable_income = INTEGER(SpouseTaxableIncome);
+  isEquiInt(IcTaxableIncome, TransferTaxable, "transfer taxable income");
+  isEquiInt(IcTaxableIncome, SpouseTransferTaxable, "spouse transfer taxable income");
+  const int * transfer = INTEGER(TransferTaxable);
+  const int * spouse_transfer = INTEGER(SpouseTransferTaxable);
   const int * c_age_30_june = INTEGER(Age);
   const int * is_married = INTEGER(IsMarried);
   const int * n_dependants = INTEGER(nDependants);
@@ -251,6 +262,8 @@ SEXP Cincome_tax(SEXP Yr,
     Person P = {0};
     P.agei = api;
     P.yti = imax(spouse_taxable_income[i], 0);
+    P.transfer_taxable = transfer[i];
+    P.spouse_transfer_taxable = spouse_transfer[i];
     P.is_family = is_marriedi || cpi || P.yti;
     P.is_married = is_marriedi || P.yti > 0;
     P.n_child = cpi;
@@ -275,11 +288,11 @@ SEXP Cincome_tax(SEXP Yr,
   }
   
   
-  if (!isNull(SmallBusinessOffset)) {
-    const double * small_business_offset = REAL(SmallBusinessOffset);
+  if (!isNull(IncomeOffsets)) {
+    const double * offsets = REAL(IncomeOffsets);
     FORLOOP({
       // Apply this non-refundable offset before any custom refundable credit.
-      ansp[i] = dmax0(ansp[i] - small_business_offset[i]);
+      ansp[i] = dmax0(ansp[i] - offsets[i]);
     })
   }
 
@@ -301,8 +314,9 @@ SEXP Cincome_tax(SEXP Yr,
   }
 
   if (Sys.has_flood_levy) {
+    const int * exempt = isNull(FloodExempt) ? NULL : INTEGER(FloodExempt);
     FORLOOP({
-      ansp[i] += flood_levy(ic_taxable_income_loss[i]);
+      if (exempt == NULL || !exempt[i]) ansp[i] += flood_levy(ic_taxable_income_loss[i]);
     })
   }
   
@@ -367,7 +381,7 @@ SEXP Cincome2022(SEXP x, SEXP y, SEXP rb, SEXP age, SEXP isMarried, SEXP nDepend
       (INTEGER(isMarried)[i] ? SAPTO_D : SAPTO_A) : 0;
   }
   SEXP ans = Cincome_tax(year, x, rb, age, isMarried, nDependants, y, y,
-                        claim, R_NilValue, R_NilValue, R_NilValue, nthreads, summary);
+                        claim, R_NilValue, R_NilValue, R_NilValue, x, y, R_NilValue, nthreads, summary);
   UNPROTECT(3);
   return ans;
 }

@@ -8,20 +8,19 @@
 #' For example, in 2015-16, an individual with an assessable income of 100,000 had a basic tax liability of 
 #' approximately 25,000.
 #' 
-#' @param .dots.ATO A \code{data.table} of tax returns.
-#' If provided, it must contain the variables
-#'  \code{Total_PP_BE_amt},
-#'  \code{Total_PP_BI_amt},
-#'  \code{Total_NPP_BE_amt},
-#'  \code{Total_NPP_BI_amt}.
-#' If both \code{.dots.ATO} and either \code{aggregated_turnover} or \code{total_net_small_business_income} are provided, 
-#' \code{.dots.ATO} takes precedence, with a warning.
-#' 
-#' If \code{.dots.ATO} contains the variable \code{Tot_net_small_business_inc}, it is used instead of the income variables.
-#' 
+#' @param .dots.ATO A data frame with eligible sole-trader income (aLife
+#' \code{isn_sbi_net}) and qualifying partnership and trust shares
+#' (\code{pt_share_sbi_pships}, \code{pt_share_sbi_trusts}). A supplied
+#' \code{Tot_net_small_business_inc} is the complete eligible total. For
+#' 2\% sample records, gross business receipts approximate turnover and net
+#' sole-trader income approximates the eligible amount. General partnership
+#' and trust distributions do not identify qualifying shares. Return fields
+#' take precedence over separately supplied turnover and income arguments.
+#' See \code{system.file("tax-return-fields.txt", package = "grattan")}.
+#' @param previous_aggregated_turnover Prior-year aggregated turnover for a
+#' continuing business. Either year's turnover can establish eligibility.
 #' @param aggregated_turnover A numeric vector the same length as \code{taxable_income}.
-#' Only used to determine whether or not the offset is applicable; that is, the offset only
-#' applies if aggregated turnover is less than 2 million in 2015-16, or
+#' The current or prior turnover must be below 2 million in 2015-16, or
 #' 5 million from 2016-17 onward. With a custom discount and no year supplied,
 #' the 5 million threshold is used.
 #' 
@@ -55,101 +54,82 @@ small_business_tax_offset <- function(taxable_income,
                                       aggregated_turnover = NULL,
                                       total_net_small_business_income = NULL,
                                       fy_year = NULL,
-                                      tax_discount = NULL) {
-  
-  if (is.null(tax_discount) && !is.null(fy_year) && length(fy_year) == 1L && fy_year < "2015-16") {
-    double(length(taxable_income))
+                                      tax_discount = NULL,
+                                      previous_aggregated_turnover = NULL) {
+  if (is.null(fy_year) && is.null(tax_discount)) stop("`fy_year` and `tax_discount` are both NULL.")
+  year <- if (is.null(fy_year)) NULL else fy::fy2yr(fy_year)
+  if (length(year) == 1L && year < 2016L && is.null(tax_discount)) return(double(length(taxable_income)))
+  if (!is.null(.dots.ATO)) {
+    if (!is.null(aggregated_turnover) || !is.null(previous_aggregated_turnover)) {
+      warning("Both `.dots.ATO` and `", if (is.null(aggregated_turnover)) "previous_aggregated_turnover" else "aggregated_turnover",
+              "` were provided. The return fields take precedence.")
+    }
+    if (!is.null(total_net_small_business_income)) {
+      warning("Both `.dots.ATO` and `total_net_small_business_income` were provided. The return fields take precedence.")
+    }
+    n <- prohibit_arg_recycling.MAXLENGTH(Filter(length, list(taxable_income, basic_income_tax_liability, year)))
+    if (nrow(.dots.ATO) == 1L && n > 1L) {
+      rows <- rep.int(1L, n)
+      .dots.ATO <- if (is.data.table(.dots.ATO)) .dots.ATO[rows] else .dots.ATO[rows, , drop = FALSE]
+    }
+    net <- business_income_from_return(.dots.ATO, year %||% 2017L)
+    if (is.null(net)) stop("`.dots.ATO` does not contain the necessary variables for small business income.")
   } else {
-    if (!is.null(.dots.ATO)) {
-      if (!is.null(aggregated_turnover)) {
-        warning("Both `.dots.ATO` and `aggregated_turnover` were provided. ",
-                "`aggregated_turnover` will be ignored.")
-      }
-      if (!is.null(total_net_small_business_income)) {
-        warning("Both `.dots.ATO` and `total_net_small_business_income` were provided. ",
-                "`total_net_small_business_income` will be ignored.")
-      }
-      
-      if (all(c("Total_PP_BE_amt", 
-                "Total_PP_BI_amt", 
-                "Total_NPP_BE_amt",
-                "Total_NPP_BI_amt") %chin% names(.dots.ATO))) {
-        aggregated_turnover <-
-          as.double(.subset2(.dots.ATO, "Total_PP_BI_amt")) +
-          as.double(.subset2(.dots.ATO, "Total_NPP_BI_amt"))
-        
-        if ("Tot_net_small_business_inc" %chin% names(.dots.ATO)) {
-          total_net_small_business_income <-
-            .subset2(.dots.ATO, "Tot_net_small_business_inc")
-        } else {
-          total_net_small_business_income <-
-            aggregated_turnover -
-            as.double(.subset2(.dots.ATO, "Total_PP_BE_amt")) -
-            as.double(.subset2(.dots.ATO, "Total_NPP_BE_amt"))
-        }
-      } else {
-        stop("\n`.dots.ATO` was provided but does not contain the necessary variables. ", 
-             "Ensure `.dots.ATO`, if provided, has the following variables:\n\n\t",
-             paste0(c("Total_PP_BE_amt", 
-                      "Total_PP_BI_amt", 
-                      "Total_NPP_BE_amt",
-                      "Total_NPP_BI_amt"), sep = "\n\t"))
-      }
-    }
-    max.length <- prohibit_arg_recycling.MAXLENGTH(Filter(length, list(
-      taxable_income = taxable_income,
-      basic_income_tax_liability = basic_income_tax_liability,
-      aggregated_turnover = aggregated_turnover,
-      total_net_small_business_income = total_net_small_business_income,
-      fy_year = fy_year)))
-    
-    # 1.26 explanatory memorandum
-    total_net_small_business_income <- pmax0(total_net_small_business_income)
-    
-    # See explanatory memorandum: p. 16
-    prop_business_income <- pmin(1, total_net_small_business_income / pmax0(taxable_income))
-    prop_business_income[taxable_income <= 0] <- 0
-    prop_tax_for_biz <- prop_business_income * basic_income_tax_liability 
-    
-    # Legislated rates
-    if (is.null(tax_discount)) {
-      if (is.null(fy_year)) {
-        stop("`fy_year` and `tax_discount` are both NULL. ", 
-             "Provide one of arguments: fy_year for the settings ", 
-             "as legislated in a particular tax year, or ", 
-             "tax_discount for a custom discount.")
-      } else {
-        yr <- fy::fy2yr(fy_year)
-        smbto_p <- ifelse(yr < 2016, 0,
-                          ifelse(yr == 2016, 0.05,
-                                 ifelse(yr <= 2020, 0.08,
-                                        ifelse(yr == 2021, 0.13, 0.16))))
-      }
-    } else {
-      
-      if (!is.numeric(tax_discount)) {
-        stop("`tax_discount` was class '", storage.mode(tax_discount), "'. ",
-             "Replace `tax_discount` with a numeric vector.")
-      }
-      
-      if (length(tax_discount) > 1 && length(tax_discount) != max.length) {
-        stop("length(tax_discount) = ", length(tax_discount), ", ", 
-             "but the only permissible lengths are 1 or ", max.length, ". ", 
-             "Provide a single value or a value for every observation.")
-      }
-      
-      if (!is.null(fy_year)) {
-        warning("Both `fy_year` and `tax_discount` are provided. ",
-                "The rate from `fy_year` will be ignored.")
-      }
-      smbto_p <- tax_discount
-    }
-    out <- rep_len(prop_tax_for_biz * smbto_p, max.length)
-    out[is.nan(out)] <- 0
-    out <- pminC(out, 1000)
-    
-    turnover_limit <- if (is.null(fy_year)) 5e6 else ifelse(fy::fy2yr(fy_year) == 2016, 2e6, 5e6)
-    out[aggregated_turnover >= turnover_limit] <- 0
-    return(out)
+    limit <- ifelse((year %||% 2017L) == 2016L, 2e6, 5e6)
+    prohibit_arg_recycling.MAXLENGTH(Filter(length, list(taxable_income, basic_income_tax_liability,
+      total_net_small_business_income, aggregated_turnover, previous_aggregated_turnover, year)))
+    eligible <- (aggregated_turnover %||% Inf) < limit |
+      (previous_aggregated_turnover %||% Inf) < limit
+    net <- (total_net_small_business_income %||% 0) * eligible
   }
+  if (!is.null(tax_discount) && !is.null(fy_year)) {
+    warning("Both `fy_year` and `tax_discount` were provided. Using the supplied discount.")
+  }
+  business_offset_amount(taxable_income, basic_income_tax_liability, net, year, tax_discount)
+}
+
+business_offset_amount <- function(taxable, basic_tax, net, year, discount) {
+  n <- prohibit_arg_recycling.MAXLENGTH(Filter(length, list(taxable, basic_tax, net, year)))
+  if (is.null(discount)) {
+    discount <- ifelse(year < 2016L, 0, ifelse(year == 2016L, 0.05,
+                       ifelse(year <= 2020L, 0.08, ifelse(year == 2021L, 0.13, 0.16))))
+  } else {
+    if (!is.numeric(discount)) stop("`tax_discount` was class '", storage.mode(discount), "'.")
+    if (!(length(discount) %in% c(1L, n))) stop("Provide a single value or a value for every observation.")
+  }
+  share <- pmin(1, pmax(net, 0) / pmax(taxable, 1))
+  pmin(1000, basic_tax * discount * share * (taxable > 0))
+}
+
+business_income_from_return <- function(data, year) {
+  if (is.null(data)) return(NULL)
+  field <- function(...) as.double(return_field(data, ..., default = 0))
+  gross_fields <- c("Total_PP_BI_amt", "Total_NPP_BI_amt")
+  expense_fields <- c("Total_PP_BE_amt", "Total_NPP_BE_amt")
+  net_fields <- c("is_bus_pp", "is_bus_npp", "Net_PP_BI_amt", "Net_NPP_BI_amt")
+  reported_fields <- c("Tot_net_small_business_inc", "isn_sbi_net", "pt_share_sbi_pships", "pt_share_sbi_trusts")
+  has_gross <- all(gross_fields %in% names(data))
+  has_expenses <- all(expense_fields %in% names(data))
+  can_test <- has_gross || any(c("small_business_eligible", "aggregated_turnover",
+                                  "previous_aggregated_turnover") %in% names(data))
+  if (!any(reported_fields %in% names(data)) &&
+      !(can_test && (any(net_fields %in% names(data)) || (has_gross && has_expenses)))) return(NULL)
+  gross <- if (has_gross) as.double(data$Total_PP_BI_amt) + data$Total_NPP_BI_amt else NA_real_
+  turnover <- return_field(data, "aggregated_turnover", default = gross)
+  prior <- return_field(data, "previous_aggregated_turnover", default = Inf)
+  limit <- ifelse(year == 2016L, 2e6, 5e6)
+  eligible <- return_field(data, "small_business_eligible",
+                           default = (!is.na(turnover) & turnover < limit) | prior < limit)
+  estimated <- if (has_expenses) gross - field("Total_PP_BE_amt") - field("Total_NPP_BE_amt") else 0
+  pp <- return_field(data, "is_bus_pp", "Net_PP_BI_amt", default = NA_real_)
+  npp <- return_field(data, "is_bus_npp", "Net_NPP_BI_amt", default = NA_real_)
+  have_net <- rep_len(!is.na(pp) | !is.na(npp), nrow(data))
+  estimated <- ifelse(!have_net, estimated,
+                      as.double(ifelse(is.na(pp), 0, pp)) + ifelse(is.na(npp), 0, npp))
+  estimated[is.na(estimated)] <- 0
+  # Label 15A already identifies eligible sole-trader income. Labels 13D
+  # and 13E belong to the distributing entities, each tested separately.
+  sole <- return_field(data, "isn_sbi_net", default = ifelse(eligible, pmax(0, estimated), 0))
+  total <- pmax(sole, 0) + field("pt_share_sbi_pships") + field("pt_share_sbi_trusts")
+  rep_len(return_field(data, "Tot_net_small_business_inc", default = total), nrow(data))
 }

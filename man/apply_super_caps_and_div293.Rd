@@ -29,7 +29,13 @@ apply_super_caps_and_div293(
 )
 }
 \arguments{
-\item{.sample.file}{A data.table containing at least the variables \code{sample_file_1314} from the taxstats package.}
+\item{.sample.file}{A data.table with taxable income and employer contributions.
+Accepts 2\% sample MCS or Spr columns and aLife return and super fields
+matched to one row per person and year. Previous assessed excess in
+\code{i_excess_super} (or \code{sc_excess_concess_cont}) is replaced when
+modelling a different cap. If absent, taxable income is assumed to precede
+any modelled excess inclusion. See
+\code{system.file("tax-return-fields.txt", package = "grattan")}.}
 
 \item{colname_concessional}{The name for concessional contributions.}
 
@@ -39,7 +45,10 @@ apply_super_caps_and_div293(
 
 \item{div293_threshold}{The Division 293 threshold.}
 
-\item{cap}{The cap on concessional contributions for all taxpayers if \code{age_based_cap} is FALSE, or for those below the age threshold otherwise.}
+\item{cap}{Concessional cap in dollars. With \code{age_based_cap = FALSE},
+supply a scalar or an effective cap per person, including available
+carry-forward. A reported aLife \code{sn_concess_cont_cap} takes precedence
+over the historical defaults when no cap or age threshold is specified.}
 
 \item{cap2}{The cap on concessional contributions for those above the age threshold. No effect if \code{age_based_cap} is FALSE.}
 
@@ -49,7 +58,9 @@ apply_super_caps_and_div293(
 
 \item{ecc}{(logical) Should an excess concessional contributions charge be calculated? (Not implemented.)}
 
-\item{use_other_contr}{Make a (poor) assumption that all 'Other contributions' (\code{MCS_Othr_Contr}) are concessional contributions. This may be a useful upper bound should such contributions be considered important.}
+\item{use_other_contr}{Treat all other contributions as concessional before
+applying the cap. The default includes only separately identified other
+concessional contributions (aLife \code{sc_other_concess_cont}).}
 
 \item{scale_contr_match_ato}{(logical) Should concessional contributions be inflated to match aggregates in 2013-14? That is, should concessional contributions by multiplied by \code{grattan:::super_contribution_inflator_1314}, which was defined to be: \deqn{\frac{\textrm{Total assessable contributions in SMSF and funds}}{\textrm{Total contributions in 2013-14 sample file}}}{Total assessable contributions in SMSF and funds / Total contributions in 2013-14 sample file.}.}
 

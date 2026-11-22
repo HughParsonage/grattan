@@ -110,8 +110,8 @@ in \code{baseline_fy}.}
 \item{Budget2019_watr}{No longer supported.}
 
 \item{sapto_eligible}{Whether or not each taxpayer in \code{sample_file} is eligible for \code{SAPTO}. 
-If \code{NULL}, the default, then eligibility is determined by \code{age_range} in \code{sample_file};
-\emph{i.e.}, if \code{age_range <= 1} then the taxpayer is assumed to be eligible for SAPTO.}
+The default uses the reported claim or the age and family evidence described in
+\code{\link{income_tax}}. An explicit eligibility vector applies to the policy assessment.}
 
 \item{sapto_max_offset}{The maximum offset available through SAPTO.}
 

@@ -1,4 +1,16 @@
 fy_year	family_status_index	family_status	max_offset	lower_threshold	upper_threshold	taper_rate	source	sapto	sato	pto	max_max_offset
+1996-97	1	single	614.5	11545	21377	0.0625	ATO TaxPack 1997 low income aged person rebate	FALSE	TRUE	FALSE	614.5
+1996-97	2	married	434	9740	16684	0.0625	ATO TaxPack 1997 low income aged person rebate	FALSE	TRUE	FALSE	868
+1996-97	3	separated_due_illness	583	11230	20558	0.0625	ATO TaxPack 1997 low income aged person rebate	FALSE	TRUE	FALSE	1166
+1997-98	1	single	1260	11700	21780	0.125	ATO TaxPack 1998 low income aged person rebate	FALSE	TRUE	FALSE	1260
+1997-98	2	married	896	9880	17048	0.125	ATO TaxPack 1998 low income aged person rebate	FALSE	TRUE	FALSE	1792
+1997-98	3	separated_due_illness	1197	11385	20961	0.125	ATO TaxPack 1998 low income aged person rebate	FALSE	TRUE	FALSE	2394
+1998-99	1	single	1301	11905	22313	0.125	ATO TaxPack 1999 low income aged person rebate	FALSE	TRUE	FALSE	1301
+1998-99	2	married	930	10050	17490	0.125	ATO TaxPack 1999 low income aged person rebate	FALSE	TRUE	FALSE	1860
+1998-99	3	separated_due_illness	1238	11590	21494	0.125	ATO TaxPack 1999 low income aged person rebate	FALSE	TRUE	FALSE	2476
+1999-00	1	single	1358	12190	23054	0.125	ATO TaxPack 2000 low income aged person rebate	FALSE	TRUE	FALSE	1358
+1999-00	2	married	980	10300	18140	0.125	ATO TaxPack 2000 low income aged person rebate	FALSE	TRUE	FALSE	1960
+1999-00	3	separated_due_illness	1296	11880	22248	0.125	ATO TaxPack 2000 low income aged person rebate	FALSE	TRUE	FALSE	2592
 2000-01	1	single	2230	20000	37840	0.125	Income Tax Assessment Regulations: annual senior schedule	FALSE	TRUE	FALSE	2230
 2000-01	2	married	1602	16306	29122	0.125	Income Tax Assessment Regulations: annual senior schedule	FALSE	TRUE	FALSE	3204
 2000-01	3	separated_due_illness	2040	18883	35203	0.125	Income Tax Assessment Regulations: annual senior schedule	FALSE	TRUE	FALSE	4080
@@ -89,12 +101,12 @@ fy_year	family_status_index	family_status	max_offset	lower_threshold	upper_thres
 2026-27	1	single	2230	36034	53874	0.125	Income Tax Assessment Regulations: annual senior schedule	TRUE	FALSE	FALSE	2230
 2026-27	2	married	1602	31847	44663	0.125	Income Tax Assessment Regulations: annual senior schedule	TRUE	FALSE	FALSE	3204
 2026-27	3	separated_due_illness	2040	34767	51087	0.125	Income Tax Assessment Regulations: annual senior schedule	TRUE	FALSE	FALSE	4080
-2027-28	1	single	2230	37308	55148	0.125	Income Tax Assessment Regulations: annual senior schedule	TRUE	FALSE	FALSE	2230
+2027-28	1	single	2230	37137	54977	0.125	Income Tax Assessment Regulations: annual senior schedule	TRUE	FALSE	FALSE	2230
 2027-28	2	married	1602	32822	45638	0.125	Income Tax Assessment Regulations: annual senior schedule	TRUE	FALSE	FALSE	3204
 2027-28	3	separated_due_illness	2040	35950	52270	0.125	Income Tax Assessment Regulations: annual senior schedule	TRUE	FALSE	FALSE	4080
-2028-29	1	single	2230	37308	55148	0.125	Income Tax Assessment Regulations: annual senior schedule	TRUE	FALSE	FALSE	2230
+2028-29	1	single	2230	37137	54977	0.125	Income Tax Assessment Regulations: annual senior schedule	TRUE	FALSE	FALSE	2230
 2028-29	2	married	1602	32822	45638	0.125	Income Tax Assessment Regulations: annual senior schedule	TRUE	FALSE	FALSE	3204
 2028-29	3	separated_due_illness	2040	35950	52270	0.125	Income Tax Assessment Regulations: annual senior schedule	TRUE	FALSE	FALSE	4080
-2029-30	1	single	2230	37308	55148	0.125	Income Tax Assessment Regulations: annual senior schedule	TRUE	FALSE	FALSE	2230
+2029-30	1	single	2230	37137	54977	0.125	Income Tax Assessment Regulations: annual senior schedule	TRUE	FALSE	FALSE	2230
 2029-30	2	married	1602	32822	45638	0.125	Income Tax Assessment Regulations: annual senior schedule	TRUE	FALSE	FALSE	3204
 2029-30	3	separated_due_illness	2040	35950	52270	0.125	Income Tax Assessment Regulations: annual senior schedule	TRUE	FALSE	FALSE	4080

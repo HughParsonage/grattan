@@ -81,8 +81,7 @@ test_that("large integer business turnover cannot overflow into eligibility", {
                                     sp_flag = FALSE, Total_PP_BI_amt = 1500000000L,
                                     Total_PP_BE_amt = 1499975000L,
                                     Total_NPP_BI_amt = 1500000000L,
-                                    Total_NPP_BE_amt = 1499975000L,
-                                    Tot_net_small_business_inc = 50000L)
+                                    Total_NPP_BE_amt = 1499975000L)
   expect_equal(small_business_tax_offset(50000L, 7797, .dots.ATO = records,
                                          fy_year = "2018-19"), 0)
   expect_equal(income_tax(50000L, "2018-19", .dots.ATO = records), 7467)
@@ -108,7 +107,7 @@ test_that("SAPTO spouse transfers follow the statutory decreasing taper", {
   # Regulations9/11/12: base3204, recalculated threshold37227 after ceiling.
   expect_equal(sapto(c(37226, 37227, 40003, 62858, 62859, 70000), "2017-18",
                      Spouse_income = 0, family_status = "married", on_sapto_cd = "D"),
-               c(3204, 3204, 2857, 0.125, 0, 0))
+               c(3204, 3204, 2857, 1, 0, 0))
   # ATO2025-26 worked example: illness-separated couple, spouse unused1440,
   # increased base3480, rebate threshold39912 and own rebate income48000.
   expect_equal(sapto(48000, "2025-26", Spouse_income = 10000,
@@ -116,7 +115,7 @@ test_that("SAPTO spouse transfers follow the statutory decreasing taper", {
   expect_equal(sapto(30000, "2017-18", Spouse_income = 60000,
                      family_status = "married", on_sapto_cd = "D"), 0)
   expect_equal(sapto(c(30000, 30000), "2017-18", Spouse_income = c(53579, 53580),
-                     family_status = "married", on_sapto_cd = "D"), c(1473.75, 0))
+                     family_status = "married", on_sapto_cd = "D"), c(1474, 0))
   # Combined eligibility uses spouse rebate income, while the unused
   # transfer uses spouse taxable income (not reportable super/loss add-backs).
   records <- data.table::data.table(Taxable_Income = 40003L, c_age_30_june = 70L,
@@ -131,7 +130,8 @@ test_that("SAPTO spouse transfers follow the statutory decreasing taper", {
 
 test_that("SAPTO categories agree across scalar, vector and raw claim codes", {
   codes <- c("A", "B", "C", "D", "E")
-  expected <- c(2230, 2040, 2040, 1602, 1602)
+  # D transfers its unused base to the spouse, retaining basic tax of $342.
+  expected <- c(2230, 2040, 2040, 342, 1602)
   expect_equal(sapto(rep(20000, 5), "2017-18", Spouse_income = 30000,
                      on_sapto_cd = codes), expected)
   scalar <- vapply(codes, function(code) sapto(20000, "2017-18", Spouse_income = 30000,
@@ -158,7 +158,7 @@ test_that("custom illness-separated SAPTO parameters survive System serializatio
                                     sp_flag = TRUE, on_sapto_cd = "B",
                                     sp_taxable_income_loss = 30000L,
                                     spc_rebate_income = 30000L)
-  expect_equal(income_tax(35000L, "2023-24", .dots.ATO = records), 917.125)
+  expect_equal(income_tax(35000L, "2023-24", .dots.ATO = records), 917)
   expect_equal(income_tax(35000L, "2023-24", .dots.ATO = records, System = system), 0)
 })
 
