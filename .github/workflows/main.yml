@@ -63,6 +63,14 @@ jobs:
           # R-hub's Fedora binaries (including fracdiff) link this BLAS runtime.
           dnf install -y openblas-threads
           Rscript -e 'pak::pkg_install("deps::.", dependencies = TRUE)'
+      - name: Rebuild forecast libraries for the sanitizer R
+        shell: bash
+        run: |
+          R CMD config BLAS_LIBS
+          R CMD config LAPACK_LIBS
+          # Fedora's R binaries can require distro-specific libRlapack.so.
+          # Build the forecast native stack using this R's own link settings.
+          Rscript -e 'withCallingHandlers(for (package in c("urca", "fracdiff", "forecast")) install.packages(package, repos = "https://cloud.r-project.org", type = "source"), warning = function(w) stop(w))'
           Rscript -e 'library(fracdiff); library(forecast)'
       - name: Build and install with sanitizers
         shell: bash
