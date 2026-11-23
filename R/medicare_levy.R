@@ -15,7 +15,9 @@
 #' @param Spouse_income 
 #' \describe{
 #' \item{\code{numeric(1)} or \code{numeric(N)}}{The income of the taxpayer's spouse. Missing values are
-#' imputed to zeroes. Values are truncated to integer.}
+#' imputed to zeroes. Values are truncated to integer; losses are treated as zero.
+#' The spouse's ordinary low-income threshold is used, since this function does
+#' not receive the spouse's SAPTO entitlement.}
 #' }
 #' @param sapto.eligible 
 #' \describe{
@@ -53,7 +55,7 @@
 #' The Seniors and Pensioners Tax Offset was formed in 2012-13 as an amalgam
 #'  of the Senior Australians Tax Offset and the Pensions Tax Offset. 
 #' Medicare rates before 2012-13 were different based on these offsets. 
-#' For most taxpayers, eligibility would be based on whether your age is over the pension age (currently 65).
+#' Age-based entitlement must use the pension age for the relevant financial year.
 #' If \code{sato} and \code{pto} are \code{NULL}, \code{sapto.eligible} stands for eligibility for the \code{sato} and not \code{pto}.
 #' If \code{sato} or \code{pto} are not \code{NULL} for such years, only \code{sato} is currently considered. 
 #' Supplying \code{pto} independently is currently a warning.
@@ -76,6 +78,9 @@ medicare_levy <- function(income,
                           .checks = FALSE) {
   fy.year <- validate_fys_permitted(fy.year)
   N <- length(income)
+  if (length(Spouse_income) != 1L && length(Spouse_income) != N) {
+    stop("`Spouse_income` must have length one or the length of `income`.")
+  }
   
   # A person is entitled to the family thresholds if they are married
   # their spouse has nonzero income or they have children.
@@ -93,23 +98,20 @@ medicare_levy <- function(income,
     # sato and pto are not really supported but we assume that sato and
     # sapto are the same thing, and warn if pto is provided.
     if (is.null(sato) && !is.null(pto)) {
-      sato <- !pto
+      sato <- FALSE
     }
     if (is.null(pto) && !is.null(sato)) {
-      pto <- !sato
+      pto <- FALSE
     }
     if (any(sato & pto)) {
       stop("`pto` and `sato` must not both be TRUE. First bad position: ",
            which.max(sato & pto), ".")
     }
-    sapto.eligible <- sato | pto
+    sapto.eligible <- sato
     if (any(pto)){
       warning("`pto` includes TRUE values but will be assumed to be FALSE")
     }
   }
-  
-  Spouse_income <- do_rN(Spouse_income, integer(N))
-  n_dependants <- do_rN(n_dependants, integer(N))
   
   do_medicare_levy(income = income, 
                    yr = fy2yr(fy.year),
@@ -132,7 +134,7 @@ do_medicare_levy <- function(income, yr, spouse_income, sapto_eligible, is_marri
   zero <- integer(length(income))
   .Call("Cdo_medicare_levy", 
         do_rN(income, zero),
-        yr, 
+        as.integer(yr),
         do_rN(spouse_income, zero),
         do_rN(sapto_eligible, zero),
         do_rN(is_married, zero),

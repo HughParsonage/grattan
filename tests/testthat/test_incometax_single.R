@@ -92,7 +92,7 @@ test_that("income_tax returns known results",{
 test_that("2020-21 income_tax uses the workbook SAPTO age boundary", {
   expect_equal(income_tax(33000, fy.year = "2020-21", age = 65), 2517)
   expect_equal(income_tax(33000, fy.year = "2020-21", age = 66), 0)
-  expect_equal(income_tax(36500, fy.year = "2020-21", age = 66), 819.625)
+  expect_equal(income_tax(36500, fy.year = "2020-21", age = 66), 819)
 })
 
 test_that("income_tax is not NA for any years)", {

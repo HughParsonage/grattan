@@ -15,23 +15,33 @@ income_tax(
 )
 }
 \arguments{
-\item{income}{The individual assessable income.}
+\item{income}{The individual's taxable income.}
 
-\item{fy.year}{The financial year in which the income was earned. Tax years 2000-01 to 2018-19 are supported, as well as the tax year 2019-20, for convenience. 
+\item{fy.year}{The financial year in which the income was earned. Native schedules
+are available from 1983-84 through 2029-30. For future years, enacted rates
+are used and annually indexed amounts remain at their latest enacted values.
 If \code{fy.year} is not given, the current financial year is used by default.}
 
-\item{age}{The individual's age. Ignored if \code{.dots.ATO} is provided (and contains
-an age variable such as \code{age_range} or \code{Birth_year}).}
+\item{age}{Age at 30 June, including fractions of a year when known.
+A return age takes precedence where present.}
 
-\item{.dots.ATO}{A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files.
-
-Age variables in \code{.dots.ATO} take precedence over \code{age} and providing both
-is a warning.}
+\item{.dots.ATO}{A data frame with ATO 2\% sample or aLife individual-return
+fields. Supply one record per person and assessment year. The installed guide
+\code{system.file("tax-return-fields.txt", package = "grattan")} lists the
+source fields, years of coverage, assumptions and optional inputs.
+\code{sp_taxable_income_loss} supplies spouse taxable income for Medicare
+and SAPTO transfers. \code{spc_rebate_income} supplies spouse rebate income
+for the SAPTO income test. Use a reported senior claim code where available.
+When the 2\% file supplies only age bands, family and age eligibility are
+approximate. \code{ic_rebate_income} takes precedence over reconstructed
+rebate income. For working Australians tax offset projections from 2027-28,
+\code{net_labour_income} supplies the complete statutory amount if known.}
 
 \item{System}{A \code{tax-system} created by \code{System()} or \code{NULL}, the default,
 corresponding to the tax system of the given year.}
 
-\item{return.mode}{The mode (numeric or integer) of the returned vector.}
+\item{return.mode}{Return the numeric or integer assessment vector, or its
+\code{"sum"} or \code{"mean"}.}
 
 \item{nThread}{Number of threads to use.}
 }
@@ -59,16 +69,18 @@ For the 2018-19 tax year, the function calculates
 \emph{Income Tax Rates Act 1986} (Cth).}
 \item{Medicare levy}{See \code{\link{medicare_levy}} for details.}
 \item{LITO}{See \code{\link{lito}} for details.}
-\item{SAPTO}{See \code{\link{sapto}}. For years preceding the introduction of SAPTO, 
-the maximum offset is assumed to apply to those above age 65 (since the sample files only provide 5-year 
-age groups).}
+\item{SAPTO}{See \code{\link{sapto}}. Earlier years use the implemented senior
+Australian offset schedule. Without an explicit claim code, eligibility is
+inferred from the available age and family-status variables.}
 \item{SBTO}{See \code{\link{small_business_tax_offset}} for details.}
 \item{Historical levies}{The flood levy and the temporary budget repair levy.}
 }
 
-Notably, when used with a 2\% sample file, the function will not be able to correctly account
-for different tax rates and offsets among taxpayers with dependants since the sample files
-(as of 2015-16) do not have this information.
+Missing spouse income and dependant counts can affect Medicare, even at
+the same taxable income. The published 2\% indexes for 2011-12 through
+2023-24 omit the dependant count. aLife supplies \code{c_depend_child}.
+From 2027-28 the working Australians tax offset uses identified net labour
+income. Supply taxable income after the deductions applying in that year.
 }
 \examples{
 

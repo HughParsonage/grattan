@@ -7,20 +7,23 @@ System System1984 = {
   .nb = 4,
   .BRACKETS = { 0, 4595, 19500, 35788, INT_MAX, INT_MAX, INT_MAX, INT_MAX },
   .RATES = { 0, 0.3, 0.46, 0.6, 0.6, 0.6, 0.6, 0.6 },
+  // Upper thresholds are the first integer incomes at the full levy rate,
+  // rather than inclusive statutory phase-in limits (last reduced income).
   .M = {
-    .lwr_single = 7111, // 6699,
-    .upr_single = 7485, // 7882, not sure where this came from
-    .lwr_family = 11804, //11141,
-    .upr_family = 12426, // 13108,
-    .has_sapto_thr = true,
+    .lwr_single = 6698,
+    .upr_single = 7051,
+    .lwr_family = 11141,
+    .upr_family = 11728,
+    .has_sapto_thr = false,
     .sapto_age = 65,
-    .lwr_single_sapto = 1984,
-    .upr_single_sapto = 2335,
-    .lwr_family_sapto = 16843008,
-    .upr_family_sapto = 19815304,
+    .lwr_single_sapto = 6698,
+    .upr_single_sapto = 7051,
+    .lwr_family_sapto = 11141,
+    .upr_family_sapto = 11728,
     .lwr_thr_up_per_child = 1100,
-    .taper = 0.25,
-    .rate = 0.01
+    .taper = .0832,
+    .rate = .00416,
+    .max_levy = 291.20
   },
   .has_sapto = false,
   .S = {

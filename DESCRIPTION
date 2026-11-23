@@ -1,7 +1,7 @@
 Package: grattan
 Type: Package
 Title: Australian Tax Policy Analysis
-Version: 2026.3.2
+Version: 2026.3.3
 Date: 2026-11-22
 Authors@R: c(person("Hugh", "Parsonage", role = c("aut", "cre"), email = "hugh.parsonage@gmail.com"),
               person("Tim", "Cameron", role = "aut"),
@@ -25,7 +25,7 @@ Depends: R (>= 3.5.0)
 License: GPL-2
 Imports:
     checkmate,
-    data.table,
+    data.table (>= 1.12.4),
     grattanInflators (>= 0.4.0),
     hutils (>= 1.3.0),
     hutilscpp (>= 0.9.0),

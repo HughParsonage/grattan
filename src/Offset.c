@@ -47,6 +47,12 @@ SEXP Offset(SEXP x, double y, double a, double m) {
 } 
 
 double value_OffsetN(int x, const OffsetN O) {
+  if (x == NA_INTEGER) {
+    return NA_REAL;
+  }
+  if (O.cutoff > 0 && x >= O.cutoff) {
+    return 0;
+  }
   int nb = O.nb;
   double y = O.offset_1st;
   for (int t = 0; t < nb; ++t) {
@@ -78,7 +84,7 @@ OffsetN yr2OffsetN(int yr, int j) {
 
 SEXP Offsets2List(OffsetN O) {
   int np = 0;
-  SEXP ans = PROTECT(allocVector(VECSXP, 4)); ++np;
+  SEXP ans = PROTECT(allocVector(VECSXP, 5)); ++np;
   SEXP Offset1st = PROTECT(ScalarInteger(O.offset_1st)); ++np;
   SET_VECTOR_ELT(ans, 0, Offset1st);
   int nb = O.nb;
@@ -92,12 +98,14 @@ SEXP Offsets2List(OffsetN O) {
   SET_VECTOR_ELT(ans, 1, Thresholds);
   SET_VECTOR_ELT(ans, 2, Tapers);
   SET_VECTOR_ELT(ans, 3, Refundable);
+  SET_VECTOR_ELT(ans, 4, ScalarInteger(O.cutoff));
   
-  SEXP nms = PROTECT(allocVector(STRSXP, 4)); ++np;
+  SEXP nms = PROTECT(allocVector(STRSXP, 5)); ++np;
   SET_STRING_ELT(nms, 0, mkCharCE("offset_1st", CE_UTF8));
   SET_STRING_ELT(nms, 1, mkCharCE("thresholds", CE_UTF8));
   SET_STRING_ELT(nms, 2, mkCharCE("tapers", CE_UTF8));
   SET_STRING_ELT(nms, 3, mkCharCE("refundable", CE_UTF8));
+  SET_STRING_ELT(nms, 4, mkCharCE("cutoff", CE_UTF8));
   setAttrib(ans, R_NamesSymbol, nms);
   UNPROTECT(np);
   return ans;
@@ -167,10 +175,21 @@ void SEXP2Offset(OffsetN * O, int nO, SEXP List) {
       error("In element %d of Offset, nb = %d, yet the maximum supported number of "
               "offset thresholds is %d", j, nb, MAX_OFFSETN);
     }
-    OffsetN Oj;
+    OffsetN Oj = {0};
     Oj.nb = nb;
     Oj.offset_1st = j_offset_1st;
-    for (int t = 0; t < MAX_OFFSETN; ++t) {
+    SEXP Cutoff = getListElement(el, "cutoff");
+    if (!isNull(Cutoff)) {
+      if (xlength(Cutoff) != 1 || (!isInteger(Cutoff) && !isReal(Cutoff))) {
+        error("Offset cutoff must be a length-one nonnegative integer.");
+      }
+      double cutoff = asReal(Cutoff);
+      if (!R_FINITE(cutoff) || cutoff < 0 || cutoff > INT_MAX || cutoff != floor(cutoff)) {
+        error("Offset cutoff must be a length-one nonnegative integer.");
+      }
+      Oj.cutoff = (int)cutoff;
+    }
+    for (int t = 0; nb > 0 && t < MAX_OFFSETN; ++t) {
       int tt = (t < nb) ? t : nb - 1;
       Oj.Thresholds[t] = INTEGER_ELT(jThresholds, tt);
       Oj.Tapers[t] = REAL_ELT(jTapers, tt);
@@ -180,34 +199,22 @@ void SEXP2Offset(OffsetN * O, int nO, SEXP List) {
   }
 }
 
-static int nthOffset(OffsetN O, unsigned int j) {
-  // how high the offset is at the j'th threshold
-  if (j > 32) {
-    return nthOffset(O, j & 31);
-  }
-  if (j == 0) {
-    return O.offset_1st;
-  }
-  int o = O.offset_1st;
-  
-  for (unsigned int i = 1; i < j; ++i) {
-    int d_threshold_i = O.Thresholds[i] - O.Thresholds[i - 1];
-    double taper_i = O.Tapers[i - 1];
-    if (taper_nonzeroish(taper_i)) {
-      o -= d_threshold_i * taper_i;
-    }
-  }
-  return o;
-}
-
 static int nOffset_upper_threshold(const OffsetN O) {
   int nb = O.nb;
-  int last_offset = nthOffset(O, nb - 1);
-  double last_taper = O.Tapers[nb - 1];
-  if (!taper_nonzeroish(last_taper)) {
-    return INT_MAX - 1;
+  int upper = O.cutoff > 0 ? O.cutoff : INT_MAX - 1;
+  if (nb == 0) {
+    return upper;
   }
-  return O.Thresholds[nb - 1] + last_offset / last_taper;
+  double last_taper = O.Tapers[nb - 1];
+  if (last_taper > 0 && !R_FINITE(last_taper)) {
+    return O.Thresholds[nb - 1] < upper ? O.Thresholds[nb - 1] : upper;
+  }
+  if (!taper_nonzeroish(last_taper) || last_taper < 0) {
+    return upper;
+  }
+  double last_offset = value_OffsetN(O.Thresholds[nb - 1], O);
+  double natural_upper = O.Thresholds[nb - 1] + last_offset / last_taper;
+  return natural_upper < upper ? (int)natural_upper : upper;
 }
 
 SEXP Ctest_nOffset_upper_threshold(SEXP OffsetList, SEXP jj) {
@@ -229,6 +236,16 @@ SEXP Ctest_nOffset_upper_threshold(SEXP OffsetList, SEXP jj) {
 
 //' @noRd
 //' @description applies multiple offsets
+double apply_offsets(double tax, int income, const OffsetN *offsets, int count) {
+  for (int j = 0; j < count; ++j) {
+    tax -= value_OffsetN(income, offsets[j]);
+    if (tax < 0 && !offsets[j].refundable) {
+      tax = 0;
+    }
+  }
+  return tax;
+}
+
 //' @param apply Whether or not to apply the offset to ansp (i.e. subtract from it),
 //' as if it were the tax to be offset
 void do_multiOffsets(double * restrict ansp,
@@ -246,12 +263,7 @@ void do_multiOffsets(double * restrict ansp,
   
   FORLOOP({
     if (apply) {
-      for (int j = 0; j < n_offsets; ++j) {
-        ansp[i] -= value_OffsetN(xp[i], mOffsets[j]);
-        if (ansp[i] < 0 && !mOffsets[j].refundable) {
-          ansp[i] = 0;
-        }
-      }
+      ansp[i] = apply_offsets(ansp[i], xp[i], mOffsets, n_offsets);
     } else {
       double o_i = 0;
       for (int j = 0; j < n_offsets; ++j) {

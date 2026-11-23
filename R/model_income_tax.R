@@ -46,8 +46,8 @@
 #' @param Budget2019_watr No longer supported.
 #' 
 #' @param sapto_eligible Whether or not each taxpayer in \code{sample_file} is eligible for \code{SAPTO}. 
-#' If \code{NULL}, the default, then eligibility is determined by \code{age_range} in \code{sample_file};
-#' \emph{i.e.}, if \code{age_range <= 1} then the taxpayer is assumed to be eligible for SAPTO.
+#' The default uses the reported claim or the age and family evidence described in
+#' \code{\link{income_tax}}. An explicit eligibility vector applies to the policy assessment.
 #' @param sapto_max_offset The maximum offset available through SAPTO. 
 #' @param sapto_lower_threshold The threshold at which SAPTO begins to reduce (from \code{sapto_max_offset}).
 #' @param sapto_taper The taper rate beyond \code{sapto_lower_threshold}.
@@ -231,26 +231,25 @@ model_income_tax <- function(sample_file,
                          fy.year = baseline_fy)
   
   set_cgt_rate(.dots.ATO, yr, cgt_discount_rate)
-  if (!is.null(sapto_eligible)) {
-    .dots.ATO[, "c_age_30_june" := fifelse(sapto_eligible, 67L, 42L)]
-  }
-  .apply_elasticity(.dots.ATO, old_tax, baseline_fy, .System, elasticity_of_taxable_income)
+  .apply_elasticity(.dots.ATO, old_tax, baseline_fy, .System, elasticity_of_taxable_income,
+                    sapto_eligible, sbto_discount)
   
   new_tax <- income_tax2(.dots.ATO = .dots.ATO,
                          fy.year = baseline_fy,
-                         System = .System)
+                         System = .System, sapto_eligible = sapto_eligible,
+                         sbto_discount = sbto_discount)
   
   switch(return.,
          "tax" = NULL,
          "sample_file" = set(sample_file, j = "baseline_tax", value = old_tax),
-         "sample_file.int" = set(sample_file, j = "baseline_tax", value = as.integer(old_tax)))
+         "sample_file.int" = set(sample_file, j = "baseline_tax", value = whole_dollar_tax(old_tax)))
                          
   
   
   switch(return.,
          "tax" = new_tax,
          "sample_file" = set(sample_file, j = "new_tax", value = new_tax),
-         "sample_file.int" = set(sample_file, j = "new_tax", value = as.integer(new_tax)))
+         "sample_file.int" = set(sample_file, j = "new_tax", value = whole_dollar_tax(new_tax)))
   
 }
 
@@ -261,7 +260,8 @@ model_income_tax <- function(sample_file,
   
 }
 
-.apply_elasticity <- function(.dots.ATO, old_tax, fy_year, System, elasticity_of_taxable_income) {
+.apply_elasticity <- function(.dots.ATO, old_tax, fy_year, System, elasticity_of_taxable_income,
+                              sapto_eligible, sbto_discount) {
   if (!is.numeric(elasticity_of_taxable_income)) {
     return(invisible(.dots.ATO))
   }
@@ -269,7 +269,8 @@ model_income_tax <- function(sample_file,
   stopifnot(hasName(.dots.ATO, "ic_taxable_income_loss"))
   ic_taxable_income_loss <- .subset2(.dots.ATO, "ic_taxable_income_loss")
   .dots.ATO[, "new_taxable_income" := copy(ic_taxable_income_loss)]
-  new_tax <- income_tax2(.dots.ATO = .dots.ATO, System = System, fy.year = fy_year)
+  new_tax <- income_tax2(.dots.ATO = .dots.ATO, System = System, fy.year = fy_year,
+                         sapto_eligible = sapto_eligible, sbto_discount = sbto_discount)
   D_tax <- new_tax - old_tax
   i0 <- .subset2(.dots.ATO, "ic_taxable_income_loss")
   i1 <- .elast_income(i0, old_tax, new_tax, elasticity_of_taxable_income)

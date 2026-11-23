@@ -15,31 +15,36 @@ small_business_tax_offset(
   aggregated_turnover = NULL,
   total_net_small_business_income = NULL,
   fy_year = NULL,
-  tax_discount = NULL
+  tax_discount = NULL,
+  previous_aggregated_turnover = NULL
 )
 }
 \arguments{
-\item{taxable_income}{Individual's assessable income.}
+\item{taxable_income}{Individual's taxable income.}
 
-\item{basic_income_tax_liability}{Tax liability (in dollars) according to the method in the box in s 4.10(3) of the \emph{Income Tax Assessment Act 1997} (Cth). In general, \code{basic_income_tax_liability} is the ordinary tax minus offsets. In particular, it does not include levies (such as the Medicare levy or the Temporary Budget Repair Levy). 
+\item{basic_income_tax_liability}{Ordinary income tax (in dollars) before
+subtracting tax offsets, as used in s 4-10(3) of the
+\emph{Income Tax Assessment Act 1997} (Cth). It does not include levies
+such as the Medicare levy or the Temporary Budget Repair Levy.
 \if{latex}{\deqn{\mathrm{Income\;Tax} = \mathrm{Taxable\;income\times\mathrm{Rate}-\mathrm{Tax\;offsets}}}}
 For example, in 2015-16, an individual with an assessable income of 100,000 had a basic tax liability of 
 approximately 25,000.}
 
-\item{.dots.ATO}{A \code{data.table} of tax returns.
-If provided, it must contain the variables
- \code{Total_PP_BE_amt},
- \code{Total_PP_BI_amt},
- \code{Total_NPP_BE_amt},
- \code{Total_NPP_BI_amt}.
-If both \code{.dots.ATO} and either \code{aggregated_turnover} or \code{total_net_small_business_income} are provided, 
-\code{.dots.ATO} takes precedence, with a warning.
-
-If \code{.dots.ATO} contains the variable \code{Tot_net_small_business_inc}, it is used instead of the income variables.}
+\item{.dots.ATO}{A data frame with eligible sole-trader income (aLife
+\code{isn_sbi_net}) and qualifying partnership and trust shares
+(\code{pt_share_sbi_pships}, \code{pt_share_sbi_trusts}). A supplied
+\code{Tot_net_small_business_inc} is the complete eligible total. For
+2\% sample records, gross business receipts approximate turnover and net
+sole-trader income approximates the eligible amount. General partnership
+and trust distributions do not identify qualifying shares. Return fields
+take precedence over separately supplied turnover and income arguments.
+See \code{system.file("tax-return-fields.txt", package = "grattan")}.}
 
 \item{aggregated_turnover}{A numeric vector the same length as \code{taxable_income}.
-Only used to determine whether or not the offset is applicable; that is, the offset only
-applies if aggregated turnover is less than 2 million.
+When calculating from separate arguments, supply current or prior turnover.
+The current or prior turnover must be below 2 million in 2015-16, or
+5 million from 2016-17 onward. With a custom discount and no year supplied,
+the 5 million threshold is used.
 
 Aggregated turnover of a taxpayer is the sum of the following:
 \itemize{
@@ -59,7 +64,12 @@ Original URL was https://www.ato.gov.au/Business/Research-and-development-tax-in
 \item{fy_year}{The financial year for which the small business tax offset is to apply.}
 
 \item{tax_discount}{If you do not wish to use the legislated discount rate from a particular \code{fy_year}, 
-you can specify it via \code{tax_discount}. If both are provided, \code{tax_discount} prevails, with a warning.}
+you can specify it via \code{tax_discount}. If both are provided,
+\code{tax_discount} overrides the rate, with a warning; the year still
+determines the turnover threshold.}
+
+\item{previous_aggregated_turnover}{Prior-year aggregated turnover for a
+continuing business. Either year's turnover can establish eligibility.}
 }
 \description{
 Small Business Tax Offset

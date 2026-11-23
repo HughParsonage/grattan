@@ -15,7 +15,7 @@ do_rN <- .rN <- function(x, zero, nThread = getOption("grattan.nThread", 1L)) {
     return(x)
   }
   if (is.logical(x)) {
-    return(as.integer(coalesce0(x)))
+    x <- as.integer(coalesce0(x))
   }
   .Call("Cdo_rn", x, zero, nThread, PACKAGE = utils::packageName())
 }

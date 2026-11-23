@@ -63,7 +63,9 @@ Since the temporary budget repair levy was imposed on a discrete tax bracket whe
 
 \item{sapto_lower_threshold}{The threshold at which SAPTO begins to reduce (from \code{sapto_max_offset}).}
 
-\item{sapto_taper}{The taper rate beyond \code{sapto_lower_threshold}.}
+\item{sapto_taper}{The taper rate beyond \code{sapto_lower_threshold}.
+A zero taper keeps each eligible taxpayer's category amount flat and gives
+the single and combined income cutoffs a value of \code{Inf}.}
 
 \item{sapto_max_offset_married, sapto_lower_threshold_married, sapto_taper_married, sapto_lower_threshold_illness, sapto_max_offset_illness}{As above,
 but applied to members of a couple.}

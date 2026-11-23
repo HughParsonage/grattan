@@ -1,5 +1,14 @@
 context("Small business tax offset")
 
+test_that("standalone business income requires turnover evidence", {
+  offset <- function(...) small_business_tax_offset(100000, 25000,
+    total_net_small_business_income = 50000, fy_year = "2017-18", ...)
+  expect_error(offset(), "aggregated_turnover.*previous_aggregated_turnover")
+  expect_equal(offset(aggregated_turnover = 1e6), 1000)
+  expect_equal(offset(previous_aggregated_turnover = 1e6), 1000)
+  expect_equal(offset(aggregated_turnover = 5e6), 0)
+})
+
 test_that("Example in explanatory memo", {
   expect_equal(small_business_tax_offset(100e3,
                                          basic_income_tax_liability = 25e3,
@@ -30,6 +39,16 @@ test_that("Always zero for fy_year", {
                                          total_net_small_business_income =  50e3,
                                          fy_year = rep("2014-15", times = 100e3)),
                double(100e3))
+})
+
+test_that("a single business return can use different annual turnover thresholds", {
+  record <- data.frame(aggregated_turnover = 3e6, Net_PP_BI_amt = 25000L,
+                       isn_sbi_net = NA_integer_, Tot_net_small_business_inc = NA_integer_)
+  years <- c("2015-16", "2016-17")
+  expect_equal(small_business_tax_offset(50000L, 7797, .dots.ATO = record, fy_year = years),
+               c(0, 7797 * 0.08 * 0.5))
+  expect_equal(small_business_tax_offset(NA, 7797, .dots.ATO = record, fy_year = years),
+               c(NA_real_, NA_real_))
 })
 
 test_that("Error handling", {
@@ -83,7 +102,8 @@ test_that("Warnings with dotsATO", {
                                                    total_net_small_business_income = 1)],
                  regexp = "Both `.dots.ATO` and `total_net_small_business_income` were provided.", 
                  fixed = TRUE)
-  s1314[, Total_PP_BE_amt := NULL]
+  # Without a turnover or an eligible amount, a net profit alone is insufficient.
+  s1314 <- s1314[, .(Taxable_Income, Net_NPP_BI_amt)]
   expect_error(s1314[, small_business_tax_offset(Taxable_Income, 
                                                  0.3 * Taxable_Income, 
                                                  fy_year = "2015-16",
@@ -122,3 +142,12 @@ test_that("Results with .dots.ATO", {
                625)
 })
 
+
+test_that("pre-commencement years require no turnover evidence",
+          {
+            years <- c("2013-14", "2014-15")
+            expect_identical(small_business_tax_offset(c(5e4, 5e4), 1e4, fy_year = years), double(2))
+            expect_identical(small_business_tax_offset(5e4, 1e4, fy_year = years), double(2))
+            expect_error(small_business_tax_offset(5e4, 1e4, fy_year = c("2014-15", "2015-16")), "turnover")
+            expect_error(small_business_tax_offset(1:3, 1e4, fy_year = years), "length")
+          })

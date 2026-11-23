@@ -1,3 +1,34 @@
+## 2026.3.3
+
+* Corrected the temporary budget repair levy base and the year of the flood levy,
+  and added the legislated 2026-27 and 2027-28 income tax rates.
+* Corrected Medicare family reductions, senior eligibility, historical rates and
+  ceilings, and annual thresholds, including the first dollar of levy for singles
+  and families in 1990-91 through 1997-98. Mixed-year vectors use each year's rules.
+* Corrected LMITO's 2021-22 cutoff, historical LITO and senior offset parameters,
+  SAPTO spouse transfers and claim codes, and beneficiary offset calculations.
+* Updated the small-business income tax offset's rates and turnover threshold,
+  capped its income fraction, and restored its application in `income_tax()`.
+* Corrected rebate-income addbacks and historical fringe-benefit adjustments,
+  the Division 293 excess-contribution calculation, and historical male pension
+  ages supplied as financial years. Numeric and integer addback columns agree.
+* Added the working Australians tax offset from 2027-28, the 1996-97 to
+  1999-2000 low income aged persons rebate and the 2011-12 flood exemption.
+  Assessments use reported aLife eligibility and income components when supplied.
+* Documented field availability and fallbacks for the ATO 2% samples and aLife
+  in `inst/tax-return-fields.txt`, including the treatment of an assessed
+  excess already included in taxable income under Division 293.
+* Added statutory boundary and public-assessment regression tests. Legal sources
+  and the remaining input-data assumptions are recorded in
+  `inst/law-audit-sources.txt`.
+* Custom systems now retain single-person Medicare thresholds and support a
+  flat senior offset with a zero taper. Oversized offset lists raise an R error.
+* Restored the sample-file age-band boundaries for concessional caps.
+  `sapto()` and `medicare_levy()` check spouse income lengths, and standalone
+  small-business calculations require current or prior turnover.
+* Standalone LITO and LMITO return zero for losses in both integer and double
+  income vectors. Medicare validates mixed-year schedules before calculation.
+
 ## 2026.3.2
 
 * Fixed `2023-24` income tax above $180,000 to apply the 45% top marginal rate.

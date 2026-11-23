@@ -1,6 +1,10 @@
 #include "grattan.h"
 
 System yr2System(int yr) {
+  if (yr < MIN_YEAR || yr > MAX_YEAR) {
+    error("Tax year ending %d is unsupported; supported years end in %d through %d.",
+          yr, MIN_YEAR, MAX_YEAR);
+  }
   switch(yr) {
   case 1984:
     return System1984;
@@ -86,8 +90,24 @@ System yr2System(int yr) {
     return System2024;
   case 2025:
     return System2025;
+  case 2026: {
+    return System2026;
   }
-  return System2025; // # nocov
+  case 2027: {
+    return System2027;
+  }
+  case 2028:
+  case 2029:
+  case 2030: {
+    // Apply enacted ongoing rates, without assuming future indexation.
+    System Sys = System2028;
+    Sys.yr = yr;
+    Sys.S.year = yr;
+    return Sys;
+  }
+  }
+  error("Tax year ending %d has no implemented schedule.", yr); // # nocov
+  return System2025; // # nocov: unreachable after error
 }
 
 unsigned int nb_by_year(int yr) {
@@ -273,18 +293,53 @@ System Sexp2System(SEXP RSystem, int yr) {
     Sys.yr = yr;
     // Sys.
   }
-  Sys.has_sapto = yr >= 2000;
+  SEXP has_sapto = getListElement(RSystem, "has_sapto");
+  if (!isNull(has_sapto)) {
+    Sys.has_sapto = asLogical(has_sapto) == TRUE;
+  }
+  SEXP has_flood_levy = getListElement(RSystem, "has_flood_levy");
+  if (!isNull(has_flood_levy)) {
+    Sys.has_flood_levy = asLogical(has_flood_levy) == TRUE;
+  }
+  SEXP has_repair_levy = getListElement(RSystem, "has_temp_budget_repair_levy");
+  if (!isNull(has_repair_levy)) {
+    Sys.has_temp_budget_repair_levy = asLogical(has_repair_levy) == TRUE;
+  }
   
   // tax thresholds
+  SEXP authored_brackets = getListElement(RSystem, "ordinary_tax_thresholds");
+  if (length(authored_brackets)) {
+    if (length(authored_brackets) > MAX_NBRACK) {
+      error("ordinary_tax_thresholds exceeds the supported number of bands.");
+    }
+    Sys.nb = length(authored_brackets);
+    for (int b = Sys.nb; b < MAX_NBRACK; ++b) {
+      Sys.BRACKETS[b] = INT_MAX;
+    }
+  }
   setIntElements(Sys.BRACKETS, MAX_NBRACK, RSystem, "ordinary_tax_thresholds");
   setDblElements(Sys.RATES, MAX_NBRACK, RSystem, "ordinary_tax_rates");
   
   // Set Medicare levy
   setDblElement(&Sys.M.taper, RSystem, "medicare_levy_taper");
   setDblElement(&Sys.M.rate, RSystem, "medicare_levy_rate");
+  setDblElement(&Sys.M.max_levy, RSystem, "medicare_levy_max_levy");
+  SEXP has_sapto_thr = getListElement(RSystem, "medicare_levy_has_sapto_thr");
+  if (!isNull(has_sapto_thr)) {
+    Sys.M.has_sapto_thr = asLogical(has_sapto_thr) == TRUE;
+  }
   
   setIntElement(&Sys.M.lwr_single, RSystem, "medicare_levy_lower_threshold");
   setIntElement(&Sys.M.upr_single, RSystem, "medicare_levy_upper_threshold");
+  setIntElement(&Sys.M.sapto_age, RSystem, "sapto_pension_age");
+  // System() includes "single" in these threshold names and keeps Medicare's
+  // whole-year age separately from the fractional SAPTO pension age.
+  SEXP medicare = getListElement(RSystem, "Medicare");
+  if (!isNull(medicare)) {
+    setIntElement(&Sys.M.lwr_single, medicare, "lower_single_threshold");
+    setIntElement(&Sys.M.upr_single, medicare, "upper_single_threshold");
+    setIntElement(&Sys.M.sapto_age, medicare, "sapto_age");
+  }
   
   setIntElement(&Sys.M.lwr_single_sapto, RSystem, "medicare_levy_lower_sapto_threshold");
   setIntElement(&Sys.M.upr_single_sapto, RSystem, "medicare_levy_upper_sapto_threshold");
@@ -297,34 +352,23 @@ System Sexp2System(SEXP RSystem, int yr) {
   
   setIntElement(&Sys.M.lwr_thr_up_per_child, RSystem, "medicare_levy_lower_up_for_each_child");
   
-  setIntElement(&Sys.M.sapto_age, RSystem, "sapto_pension_age");
-  
   if (hazName(RSystem, "Offsets")) {
     SEXP ROffsets = getListElement(RSystem, "Offsets");
-    OffsetN COffsets[MAX_N_OFFSETN] = {0};
-    Sys.n_offsetn = length(ROffsets);
-    SEXP2Offset(COffsets, length(ROffsets), ROffsets);
-    for (int j = 0; j < length(ROffsets); ++j) {
-      int nb = COffsets[j].nb;
-      Sys.Offsets[j].nb = nb;
-      if (nb < 1) {
-        continue;
-      }
-      Sys.Offsets[j].offset_1st = COffsets[j].offset_1st;
-      Sys.Offsets[j].refundable = COffsets[j].refundable;
-      for (int k = 0; k < MAX_OFFSETN; ++k) {
-        int kk = (k < nb) ? k : (nb - 1);
-        Sys.Offsets[j].Thresholds[k] = COffsets[j].Thresholds[kk];
-        Sys.Offsets[j].Tapers[k] = COffsets[j].Tapers[kk];
-      }
+    if (!isNull(ROffsets) && !isVectorList(ROffsets)) {
+      error("Offsets must be a list.");
     }
+    if (xlength(ROffsets) > MAX_N_OFFSETN) {
+      error("A System supports at most %d offsets.", MAX_N_OFFSETN);
+    }
+    Sys.n_offsetn = (int)xlength(ROffsets);
+    SEXP2Offset(Sys.Offsets, Sys.n_offsetn, ROffsets);
   }
   
   // Set Sapto
   setDblElement(&Sys.S.first_tax_rate, RSystem, "sapto_first_tax_rate");
   setIntElement(&Sys.S.lwr_couple, RSystem, "sapto_lower_threshold_married");
   setIntElement(&Sys.S.lwr_single, RSystem, "sapto_lower_threshold");
-  setIntElement(&Sys.S.lwr_illness, RSystem, "sapto_lower_illness");
+  setIntElement(&Sys.S.lwr_illness, RSystem, "sapto_lower_threshold_illness");
   
   setIntElement(&Sys.S.mxo_single, RSystem, "sapto_max_offset");
   setIntElement(&Sys.S.mxo_couple, RSystem, "sapto_max_offset_married");
@@ -336,11 +380,7 @@ System Sexp2System(SEXP RSystem, int yr) {
   setDblElement(&Sys.S.taper, RSystem, "sapto_taper");
   setIntElement(&Sys.S.tax_free_thresh, RSystem, "sapto_tax_free_thresh");
   
-  Sys.S.upr_single = Sys.S.lwr_single + Sys.S.mxo_single / Sys.S.taper;
-  Sys.S.upr_couple = Sys.S.lwr_couple + Sys.S.mxo_couple / Sys.S.taper;
-  Sys.S.upr_couple *= 2;
-  Sys.S.upr_illness = Sys.S.lwr_illness + Sys.S.mxo_illness / Sys.S.taper;
-  Sys.S.upr_illness *= 2;
+  set_sapto_cutoffs(&Sys.S);
   
   Sys.S.year = yr;
   return Sys;
@@ -371,6 +411,7 @@ SEXP System2Sexp(const System Sys) {
   SET_VECTOR_ELT(ans, 7, ScalarInteger(Sys.n_offsetn));
   SET_VECTOR_ELT(ans, 8, nOffsets2List(Sys.Offsets, Sys.n_offsetn));
   SET_VECTOR_ELT(ans, 9, ScalarLogical(Sys.has_temp_budget_repair_levy));
+  SET_VECTOR_ELT(ans, 10, ScalarLogical(Sys.has_flood_levy));
   
   SEXP nms = PROTECT(allocVector(STRSXP, SYSTEM_LEN)); ++np;
   SET_STRING_ELT(nms, 0, mkCharCE("yr", CE_UTF8));
@@ -383,6 +424,7 @@ SEXP System2Sexp(const System Sys) {
   SET_STRING_ELT(nms, 7, mkCharCE("n_offsetn", CE_UTF8));
   SET_STRING_ELT(nms, 8, mkCharCE("Offsets", CE_UTF8));
   SET_STRING_ELT(nms, 9, mkCharCE("has_temp_budget_repair_levy", CE_UTF8));
+  SET_STRING_ELT(nms, 10, mkCharCE("has_flood_levy", CE_UTF8));
   setAttrib(ans, R_NamesSymbol, nms);
   UNPROTECT(np);
   return ans;
@@ -568,7 +610,9 @@ SEXP CvalidateSystem(SEXP RSystem, SEXP Fix) {
     }
   }
   validate_medicare(&Sys.M, fix, yr);
-  validate_sapto(&Sys.S, fix);
+  if (Sys.has_sapto) {
+    validate_sapto(&Sys.S, fix);
+  }
   
   return System2Sexp(Sys);
 }

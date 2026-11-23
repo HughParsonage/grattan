@@ -10,7 +10,8 @@ lito(income, fy.year = NULL)
 lmito(income, fy.year = NULL)
 }
 \arguments{
-\item{income}{The income on which the offset is applied.}
+\item{income}{The income on which the offset is applied. A negative income
+(a loss) returns zero. At zero income the functions return the scheduled offset.}
 
 \item{fy.year}{The financial year for which the LITO is desired.}
 }

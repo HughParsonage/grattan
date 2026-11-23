@@ -1,0 +1,190 @@
+Tax return fields used in grattan assessments
+=============================================
+
+Scope and sources
+-----------------
+The ATO individuals' sample indexes checked here cover all 13 income years
+from 2011-12 to 2023-24. Earlier public files were 1% samples. The aLife
+variable manual snapshot (27 March 2026) covers 1990-91 to 2022-23. A catalogue entry
+identifies a variable available for selection in that year. An extract can
+omit it or contain missing values. Names below are column names, without the
+aLife catalogue's itr_ or mcs_ table prefix. The taxstats 0.1.0.1415
+files for 2011-12 through 2013-14 use the alias age_range. Supply one row per person and
+year, with spouse and super data aligned to that same person and year.
+
+ATO sample coverage and selected annual indexes:
+https://www.ato.gov.au/api/public/content/0-d1b89d6b-2f98-49cd-bc0f-9827777b11a4
+https://data.gov.au/data/dataset/95d9e550-8b36-4273-8df7-2b76c140e73a/resource/6e8e20eb-1981-4363-8dfd-4052e9f2ec79/download/taxstats2012samplefile2012.xlsx
+https://data.gov.au/data/dataset/25e81c18-2083-4abe-81b6-0f530053c63f/resource/38a7cded-b3d6-41ec-bf33-b320801331e5/download/variables-in-2013-14-sample-file.xlsx
+https://data.gov.au/data/dataset/2805b28d-2c3b-47e2-87c3-50aacc6ea212/resource/7c2fdef7-ac39-4f6f-9e0e-3358a7de2c95/download/variables-in-2018-19-sample-file.xlsx
+https://data.gov.au/data/dataset/faea4485-f407-457d-97f8-3f0822ccd654/resource/96fe69c5-65cb-4d92-bf9d-ec600e78c4df/download/variables-in-2023-24-sample-file.xlsx
+
+aLife Individuals variable manual, searchable by the column names below:
+https://alife-research.app/research/search
+
+Senior eligibility, family status and Medicare
+---------------------------------------------
+2% sample. Age_range gives five-year age groups, with open-ended youngest
+and oldest groups. Gender is 0 for male and 1 for female. Partner_status
+records whether a spouse date of birth was reported. The indexes contain
+no senior claim code, exact age, spouse age or dependant count.
+Spouse_adjusted_taxable_inc occurs in 2011-12 through 2013-14 only. It is
+a proxy for spouse taxable and rebate income. Later indexes omit even this
+amount. A single-year sample cannot link a spouse's return reliably.
+
+aLife. c_age_30_june is age in completed years. c_gender uses the opposite
+coding (0 female, 1 male). c_pension_age_eligible and sp_pension_age_eligible
+can resolve age eligibility where a half-year threshold falls within an age
+in completed years. on_sato_cd identifies the historical category through
+2011-12 and on_sapto_cd identifies the category from 2012-13. These codes
+distinguish illness separation and spouse eligibility. sp_flag and
+c_depend_child describe family circumstances. sp_taxable_income_loss supplies
+the spouse income for Medicare and the basic-tax test for unused senior
+offsets. spc_rebate_income supplies the senior combined-income test from
+2009-10. Through 2008-09 the senior test uses taxable income. Standalone
+sapto() accepts taxable_income and spouse_taxable_income separately.
+From 2012-13 the transfer test includes the exempt pensions specified in
+reg 12(5). sp_pension_exempt supplies the spouse's amount. A caller can
+supply sapto_exempt_pension for the individual. The broader it_gov_pension
+can include other payments. Neither addback changes Medicare taxable income.
+
+Fallback. Without a claim category, income_tax() infers it from age and
+family information. A partnered taxpayer is assumed to live with an eligible
+spouse unless supplied evidence indicates otherwise. Age bands use the
+package's representative ages. A caller can provide fractional age where
+the return supplies no age, or add c_age_30_june alongside a sample band.
+Missing sex uses the male pension age. Missing age defaults to 42, missing dependants
+to zero, and missing spouse income to the other available spouse measure or
+zero. Spouse_taxable_income is a caller alias, absent from the checked 2%
+indexes. Either source may lack the facts for pension residence, an eligible
+under-age pension, illness separation, part-year family circumstances, or
+trustee-assessed income. The supplementary veteran codes V/W/X identify
+which spouse was a veteran and do not establish all those conditions.
+Standalone medicare_levy() accepts the taxpayer's senior status. It uses the
+ordinary spouse threshold unless spouse entitlement can be derived in
+income_tax(). Its historical pto flag does not calculate the pensioner rebate.
+
+Rebate income
+-------------
+2% sample. Net_rent_amt is signed. Net_fincl_invstmt_lss_amt,
+Rptbl_Empr_spr_cont_amt and Non_emp_spr_amt identify financial losses,
+reportable employer super and deductible personal super. Rep_frng_ben_amt
+combines the employer classes. The field can reproduce the 2016-17 worksheet,
+which adjusts both classes together. From 2017-18 the calculation needs the
+split. With only a total the package treats it as exempt-employer benefits.
+The indexes omit the assessable first home super saver (FHSS) release.
+
+aLife. ic_rebate_income and spc_rebate_income supply ATO-calculated rebate
+income from 2009-10 and take priority. For reconstruction, it_property_loss
+is a positive rental loss and is_net_rent is signed. it_invest_loss,
+it_rept_empl_super_cont and ds_pers_super_cont are the other addbacks.
+it_rept_fringe_benefit_exe and it_rept_fringe_benefit_nexe are separate
+from 2016-17. From 2017-18 only the exempt-employer amount is discounted.
+From 2018-19 is_other_cat3_fhss is the assessable release. tws_assessable_fhss
+records withholding. Spouse components include sp_rept_super_cont,
+sp_net_invest_loss (already includes rental loss), sp_rept_fringe_benefit
+and its _exe/_nexe split. A caller can supply spouse_assessable_fhss. Without
+the calculated spouse total either source may lack a spouse adjustment.
+Missing components contribute zero.
+
+Small business income tax offset
+--------------------------------
+2% sample. Net_PP_BI_amt and Net_NPP_BI_amt are net sole-trader amounts.
+Total_PP_BI_amt and Total_NPP_BI_amt approximate turnover, and the comparable
+BE columns supply expenses if net fields are absent. Net_PT_PP_dsn and
+Net_PT_NPP_dsn include general distributions and cannot identify eligible
+partnership or trust business income. The sample-based estimate therefore
+omits qualifying shares and can misclassify a sole trader.
+
+aLife. From 2015-16 isn_sbi_net (label 15A) and pt_share_sbi_pships and
+pt_share_sbi_trusts (labels 13D and 13E) identify the return's eligible
+amounts. The entity-level turnover test is already reflected in these
+labels. Reported zero is respected. Tot_net_small_business_inc is an optional
+complete eligible total, rather than a field in the annual 2% indexes.
+
+Either source can lack current or prior aggregated turnover including
+connected entities and affiliates, the facts for the reasonable-estimate
+test, or the adjustments making an ordinary business profit eligible.
+Supply small_business_eligible as a determined status, or aggregated_turnover
+and previous_aggregated_turnover for a continuing business. The eligible
+partnership and trust shares are independent of the sole trader's turnover.
+
+Working Australians tax offset, from 2027-28
+------------------------------------------
+Neither series reviewed contains a return from a year of operation or a
+complete statutory net labour income field. For projections, supply amounts
+appropriate to the model year. income_tax() takes taxable income after all
+applicable deductions. It does not deduct the standard amount a second time
+from that taxable income. net_labour_income is a caller-supplied complete
+amount after the deductions in ITAA 1997 s61-155(2).
+
+2% sample. Sw_amt, Alow_ben_amt and ETP_txbl_amt identify employment items.
+WRE_car_amt, WRE_trvl_amt, WRE_uniform_amt, WRE_self_amt and WRE_other_amt
+supply work expenses. Net_PP_BI_amt and Net_NPP_BI_amt supply net sole-trader
+income. Broad partnership/trust distributions and passive income are excluded.
+
+aLife. i_salary_wage, i_allowances, i_etp and assessable i_lsum_a/i_lsum_b
+identify employment income. The five d_wre_ fields supply work expenses.
+is_bus_pp/is_bus_npp give net sole-trader results. i_attributed_psi and
+is_psi_net cover distinct personal services income. Upfront employee share
+discounts are derived from i_ess after removing deferred and pre-2009 amounts
+when the breakdown permits. Otherwise only in_ess_disc_inelgbl is included.
+A known nonresident c_resident value excludes this offset.
+
+For both sources the calculation assumes that the identified work expenses
+compete with the standard deduction, and uses the greater of those expenses
+and up to $1,000 of qualifying employment income. Sole-trader income alone
+does not attract that deduction. Either source may omit or aggregate paid
+parental leave, labour-hire receipts, ESS discounts and deduction attribution.
+Use net_labour_income for those cases. With no identified labour amounts the
+offset is zero. Its maximum is $250 and it cannot reduce Medicare.
+
+Flood levy and beneficiary offset
+---------------------------------
+2% sample. The 2011-12 index omits the flood-exemption box. With no supplied
+indicator income_tax() applies the ordinary flood levy. aLife's 2011-12
+tn_flood_levy_exempt supplies the exemption. Neither postcode nor levy-year
+income alone establishes disaster eligibility when the indicator is missing.
+
+bto() accepts the amount of qualifying benefits. The 2% field
+Aust_govt_pnsn_allw_amt combines return items 5 and 6. aLife separates
+i_gov_payments from i_gov_pension. The combined public field alone cannot
+establish the amount of rebatable benefits for this standalone calculation.
+
+Concessional contributions and Division 293
+-------------------------------------------
+2% sample. The checked indexes for 2011-12 and 2012-13 omit the employer
+and personal fund totals. From 2013-14 through 2017-18 the field prefixes
+are MCS_ (Emplr_Contr, Prsnl_Contr, Othr_Contr, Ttl_Acnt_Bal). From 2018-19
+through 2023-24 they are Spr_ with the same suffixes. Non_emp_spr_amt is the
+personal contribution deduction. The sample does not identify previously
+assessed excess, the concessional part of other contributions, or the
+person's available carry-forward cap. A closing balance alone is insufficient.
+
+aLife. Match ITR and super data at person/year level. sc_empl_cont,
+sc_pers_cont, ds_pers_super_cont (or sc_pers_cont_deductible) and, from
+2018-19, sc_other_concess_cont distinguish contribution types. use_other_contr
+counts the entire other bucket as concessional, an explicit upper-bound
+assumption. Apply it before calculating the excess. An observed cap field
+sn_concess_cont_cap is used when no cap policy parameters are supplied.
+Check whether the delivered cap covers each person's unused amounts. A
+separate effective cap vector can be supplied with age_based_cap = FALSE.
+
+For an assessment containing i_excess_super, replace that included amount
+with the newly modelled excess. For a matched post-2013 reform assessment,
+sc_excess_concess_cont is a fallback. Without either, the helper assumes
+input taxable income before any excess inclusion. The 2% sample cannot tell
+whether its taxable income already includes an excess. The income test uses
+the resulting taxable income, full reportable fringes and net investment
+losses. aLife adds as_family_trust_inc_txd and subtracts is_other_cat3_fhss
+where present. A caller can supply zero_rate_super_lump_sum. The full
+taxable lump-sum field does not identify its zero-rated portion.
+
+Both sources may need additional information about contribution history,
+defined-benefit interests, special contribution exclusions and the zero-rate
+lump-sum component. The helper models accumulation contributions with the
+specified cap and threshold. Its historical defaults are $30,000/$35,000
+and $300,000. Specify the settings for the assessment year.
+For a custom age-based cap, aLife's c_age_30_june allows the exact age
+test. The 2% sample supplies only a band. For example, a cutoff of 60
+includes the whole 60-64 band. See cap2_age in apply_super_caps_and_div293().

@@ -65,6 +65,7 @@ typedef struct {
 typedef struct {
   double taper;
   double rate;
+  double max_levy; // zero means no annual ceiling
   int lwr_single;
   int upr_single;
   int lwr_family;
@@ -78,11 +79,14 @@ typedef struct {
   bool has_sapto_thr : 1;
 } Medicare;
 
-#define MEDICARE_LEN 13
+#define MEDICARE_LEN 14
 
 typedef struct {
   int xi;
   int yi;
+  int yti; // spouse taxable income (yi is spouse rebate income)
+  int transfer_taxable; // taxable income for the senior offset transfer test
+  int spouse_transfer_taxable;
   int ri; // rebate income
   unsigned int agei : 7;
   unsigned int n_child : 4;
@@ -106,9 +110,9 @@ typedef struct {
   int lwr_single;
   int lwr_couple;
   int lwr_illness;
-  int upr_single;
-  int upr_couple;
-  int upr_illness;
+  double upr_single;
+  double upr_couple;
+  double upr_illness;
   double taper;
   
   // Defined in the regulations (relating to spouse transfers)
@@ -121,7 +125,7 @@ typedef struct {
   double lito_1st_taper;
 } Sapto;
 
-#define SAPTO_LEN 16
+#define SAPTO_LEN 19
 
 SEXP Sapto2Sexp(Sapto S);
 
@@ -147,6 +151,7 @@ typedef struct {
   double Tapers[MAX_OFFSETN];
   int nb;
   bool refundable;
+  int cutoff; // no entitlement at or above this income; zero means no cutoff
 } OffsetN;
 
 typedef struct {
@@ -160,9 +165,10 @@ typedef struct {
   int n_offsetn;
   OffsetN Offsets[MAX_N_OFFSETN];
   bool has_temp_budget_repair_levy;
+  bool has_flood_levy;
 } System;
 
-#define SYSTEM_LEN 10
+#define SYSTEM_LEN 11
 
 extern System System1984;
 extern System System1985;
@@ -206,6 +212,9 @@ extern System System2022;
 extern System System2023;
 extern System System2024;
 extern System System2025;
+extern System System2026;
+extern System System2027;
+extern System System2028;
 
 // errif
 void errif_nonnegative(int x, const char * var);
@@ -245,6 +254,7 @@ void apply_offset1(double * tax, int x, Offset1 O);
 void apply_offset2(double * tax, int x, Offset2 O);
 void SEXP2Offset(OffsetN * O, int nO, SEXP List);
 double value_OffsetN(int x, const OffsetN O);
+double apply_offsets(double tax, int income, const OffsetN *offsets, int count);
 SEXP nOffsets2List(OffsetN const O[MAX_N_OFFSETN], int noffsets);
 void do_multiOffsets(double * ansp,
                      R_xlen_t N,
@@ -259,8 +269,10 @@ int as_nThread(SEXP x);
 
 // sapto.c
 Sapto yr2Sapto(int yr);
-void apply_sapto(double * taxi, Person P, Sapto S);
+bool apply_sapto(double * taxi, Person P, Sapto S);
+bool sapto_entitled(Person P, Sapto S);
 void validate_sapto(Sapto * S, int fix);
+void set_sapto_cutoffs(Sapto *S);
 
 // starts_with_medicare
 bool starts_with_medicare(const char * str);

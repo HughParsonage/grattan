@@ -1,17 +1,27 @@
 #' Income tax payable
 #' 
 #' @name income_tax
-#' @param income The individual assessable income.
-#' @param fy.year The financial year in which the income was earned. Tax years 2000-01 to 2018-19 are supported, as well as the tax year 2019-20, for convenience. 
+#' @param income The individual's taxable income.
+#' @param fy.year The financial year in which the income was earned. Native schedules
+#' are available from 1983-84 through 2029-30. For future years, enacted rates
+#' are used and annually indexed amounts remain at their latest enacted values.
 #' If \code{fy.year} is not given, the current financial year is used by default.
-#' @param age The individual's age. Ignored if \code{.dots.ATO} is provided (and contains
-#' an age variable such as \code{age_range} or \code{Birth_year}).
-#' @param return.mode The mode (numeric or integer) of the returned vector.
-#' @param .dots.ATO A data.frame that contains additional information about the individual's circumstances, with columns the same as in the ATO sample files.
-#' 
-#' Age variables in \code{.dots.ATO} take precedence over \code{age} and providing both
-#' is a warning.
-#' 
+#' @param age Age at 30 June, including fractions of a year when known.
+#' A return age takes precedence where present.
+#' @param return.mode Return the numeric or integer assessment vector, or its
+#' \code{"sum"} or \code{"mean"}.
+#' @param .dots.ATO A data frame with ATO 2\% sample or aLife individual-return
+#' fields. Supply one record per person and assessment year. The installed guide
+#' \code{system.file("tax-return-fields.txt", package = "grattan")} lists the
+#' source fields, years of coverage, assumptions and optional inputs.
+#' \code{sp_taxable_income_loss} supplies spouse taxable income for Medicare
+#' and SAPTO transfers. \code{spc_rebate_income} supplies spouse rebate income
+#' for the SAPTO income test. Use a reported senior claim code where available.
+#' When the 2\% file supplies only age bands, family and age eligibility are
+#' approximate. \code{ic_rebate_income} takes precedence over reconstructed
+#' rebate income. For working Australians tax offset projections from 2027-28,
+#' \code{net_labour_income} supplies the complete statutory amount if known.
+#'
 #' @param System A \code{tax-system} created by \code{System()} or \code{NULL}, the default,
 #' corresponding to the tax system of the given year.
 #' 
@@ -36,18 +46,19 @@
 #' \emph{Income Tax Rates Act 1986} (Cth).}
 #' \item{Medicare levy}{See \code{\link{medicare_levy}} for details.}
 #' \item{LITO}{See \code{\link{lito}} for details.}
-#' \item{SAPTO}{See \code{\link{sapto}}. For years preceding the introduction of SAPTO, 
-#' the maximum offset is assumed to apply to those above age 65 (since the sample files only provide 5-year 
-#' age groups).}
+#' \item{SAPTO}{See \code{\link{sapto}}. Earlier years use the implemented senior
+#' Australian offset schedule. Without an explicit claim code, eligibility is
+#' inferred from the available age and family-status variables.}
 #' \item{SBTO}{See \code{\link{small_business_tax_offset}} for details.}
 #' \item{Historical levies}{The flood levy and the temporary budget repair levy.}
 #' }
 #' 
-#' Notably, when used with a 2\% sample file, the function will not be able to correctly account
-#' for different tax rates and offsets among taxpayers with dependants since the sample files
-#' (as of 2015-16) do not have this information.
-#' 
-#' 
+#' Missing spouse income and dependant counts can affect Medicare, even at
+#' the same taxable income. The published 2\% indexes for 2011-12 through
+#' 2023-24 omit the dependant count. aLife supplies \code{c_depend_child}.
+#' From 2027-28 the working Australians tax offset uses identified net labour
+#' income. Supply taxable income after the deductions applying in that year.
+#'
 #' @examples 
 #' 
 #' ## Income tax payable on a taxable income of 50,000 
@@ -71,21 +82,23 @@ income_tax <- function(income,
                        System = NULL,
                        return.mode = c("numeric", "integer", "sum", "mean"),
                        nThread = getOption("grattan.nThread", 1L)) {
-  if (is.null(.dots.ATO)) {
-    .dots.ATO <- data.table(ic_taxable_income_loss = income, 
-                            sp_flag = FALSE,
-                            c_age_30_june = as.integer(age %||% 42L))
-  }
   ans <- income_tax2(income, 
                      fy.year = fy.year,
                      .dots.ATO = .dots.ATO,
                      System = System, 
                      nThread = nThread,
+                     age = age,
                      summary = identical(return.mode, "sum") + 2L * identical(return.mode, "mean"))
   if (match.arg(return.mode) == "integer") {
-    ans <- as.integer(ans)
+    ans <- whole_dollar_tax(ans)
   }
   ans
+}
+
+# Preserve truncation of genuine fractions when arithmetic lands one or two
+# floating-point units below an exact dollar.
+whole_dollar_tax <- function(x) {
+  .Call("Cwhole_dollar_tax", x, PACKAGE = "grattan")
 }
 
 get_column_from <- function(DT, nom, ..., NULL_OK = FALSE) {
@@ -108,209 +121,320 @@ get_column_from <- function(DT, nom, ..., NULL_OK = FALSE) {
   get_column_from(DT, ...)
 }
 
+# Accept aLife and published sample spellings, including when different
+# releases have been stacked. A reported zero takes precedence over a proxy.
+return_field <- function(data, ..., default = NULL) {
+  out <- NULL
+  for (name in c(...)) {
+    value <- data[[name]]
+    if (is.null(value)) {
+      next
+    }
+    if (is.null(out)) {
+      out <- value
+    } else {
+      if (!anyNA(out)) {
+        return(out)
+      }
+      out <- fill_return_field(out, value)
+    }
+  }
+  if (is.null(out)) {
+    return(default)
+  }
+  if (missing(default) || !anyNA(out) || is.null(default)) {
+    return(out)
+  }
+  fill_return_field(out, default)
+}
+
+fill_return_field <- function(x, fallback) {
+  if (length(x) == 1L && is.na(x)) {
+    return(fallback)
+  }
+  if (!is.object(x) && !is.object(fallback)) {
+    if (typeof(x) == typeof(fallback)) {
+      return(fcoalesce(x, fallback))
+    }
+    if ((is.numeric(x) || is.logical(x)) && (is.numeric(fallback) || is.logical(fallback))) {
+      if (is.double(x) || is.double(fallback)) {
+        return(fcoalesce(as.double(x), as.double(fallback)))
+      }
+      return(fcoalesce(as.integer(x), as.integer(fallback)))
+    }
+  }
+  # Keep the coercions of the historical interface for classed/mixed fields.
+  ifelse(is.na(x), fallback, x)
+}
+
 age_from_file <- function(.dots.ATO, age = NULL) {
-  if (is.null(.dots.ATO)) {
-    return(age %||% 42L)
+  if (!is.null(age) && any(c("c_age_30_june", "Age_range", "age_range", "Birth_year") %chin% names(.dots.ATO))) {
+    warning("Return age fields take precedence over the age argument where supplied.")
   }
-  if (!is.null(age)) {
-    warning("`age` is not NULL but `.dots.ATO` is supplied with an age variable, so age will be ignored.")
-  }
-  if (hasName(.dots.ATO, "c_age_30_june")) {
-    return(.subset2(.dots.ATO, "c_age_30_june"))
-  }
-  if (!is.null(v1 <- .subset2(.dots.ATO, "age_range")) &  # single amp so v2 occurs
-      !is.null(v2 <- .subset2(.dots.ATO, "Birth_year"))) {
-    return(decode_age_range(coalesce(v1, v2, 6L))) # 6 decoded to 42
-  }
-  if (!is.null(v1)) {
-    return(decode_age_range(v1))
-  }
-  if (!is.null(v2)) {
-    return(decode_age_range(v2))
-  } 
-  age %||% 42L
+  return_field(.dots.ATO, "c_age_30_june", default = {
+    band <- return_field(.dots.ATO, "Age_range", "age_range", "Birth_year")
+    if (is.null(band) || (length(band) == 1L && is.na(band))) {
+      age %||% 42L
+    } else {
+      decoded <- decode_age_range(as.integer(band))
+      if (anyNA(band)) {
+        missing_band <- is.na(band)
+        fallback <- age %||% 42L
+        decoded[missing_band] <-
+          if (length(fallback) == 1L) {
+            fallback
+          } else {
+            fallback[missing_band]
+          }
+      }
+      decoded
+    }
+  })
 }
 
 
 
 
-income_tax2 <- function(income = NULL, 
-                        fy.year = NULL, 
+income_tax2 <- function(income = NULL,
+                        fy.year = NULL,
                         .dots.ATO = NULL,
                         System = NULL,
                         nThread = getOption("grattan.nThread", 1L),
-                        summary = 0L) {
+                        summary = 0L, age = NULL, sbto_discount = NULL,
+                        sapto_eligible = NULL) {
   summary <- as.integer(summary)
-  has_nom <- function(x) {
-    is.character(x) && length(x) == 1L && !is.na(x) && hasName(.dots.ATO, x)
+  if (!is.null(.dots.ATO) && !is.data.frame(.dots.ATO)) {
+    stop("`.dots.ATO` must be a data.frame or data.table.")
   }
-  
-  s2 <- function(x, ..., default = 0L, .r = FALSE) {
-    if (is.null(.dots.ATO)) {
-      return(default)
-    }
-    # Takes column names returning the first (without evaluting the others)
-    # then uses the defaults
-    if (has_nom(x)) {
-      return(.subset2(.dots.ATO, x))
-    }
-    if (missing(..1)) {
-      return(eval(default))
-    }
-    if (.r) {
-      # necessary to avoid returning substitute 
-      # while also not prematurely evaluating
-      return(s2(..., default = default, .r = TRUE))
-    } else {
-      s2(..., default = substitute(default), .r = TRUE)
-    }
-  }
-  
-  ic_taxable_income_loss <- 
-    income %||%
-    s2("ic_taxable_income_loss",
-       "Taxable_Income", default = NULL)
-  if (is.null(ic_taxable_income_loss)) {
+  column <- function(..., default = 0L) return_field(.dots.ATO, ..., default = default)
+  taxable <- income %||% column("ic_taxable_income_loss", "Taxable_Income", default = NULL)
+  if (is.null(taxable)) {
     stop("Unable to determine taxable income: .dots.ATO lacked names: 'Taxable_Income' or 'ic_taxable_income_loss'.")
   }
-  
-  N <- length(ic_taxable_income_loss)
-  if (is.data.frame(.dots.ATO) && N != nrow(.dots.ATO)) {
-    stop("`length(income) = ", length(income), "` yet `nrow(.dots.ATO) = ", nrow(.dots.ATO), ".")
-  }
-  
-  c_age_30_june <- age_from_file(.dots.ATO)
-  
-  
-  
-  is_net_rent <- 
-    s2("is_net_rent", "Net_rent_amt")
-  
-  it_property_loss <- 
-    s2("it_property_loss",
-       "Net_rent_amt")
-  
-  it_rept_empl_super_cont <-
-    s2("it_rept_empl_super_cont",
-       "Rptbl_Empr_spr_cont_amt")
-  
-  it_rept_fringe_benefit <-
-    s2("it_rept_fringe_benefit",
-       "Rep_frng_ben_amt")
-  
-  it_invest_loss <- 
-    s2("it_invest_loss",
-       "Net_fincl_invstmnt_lss_amt")
-  
-  spc_rebate_income <- 
-    s2("spc_rebate_income",
-       "sp_taxable_income_loss",
-       "Spouse_adjusted_taxable_inc")
-  
-  is_married <-
-    s2("sp_flag", 
-       "Partner_status",
-       "Marital_status")
-  
-  n_dependants <- .subset2(.dots.ATO, "c_depend_child") %||% 0L
-  
-  sc_empl_cont <-
-    s2("sc_empl_cont",
-       "MCS_Emplr_Contr")
-  
-  ds_pers_super_cont <-
-    s2("ds_pers_super_cont",
-       "Non_emp_spr_amt")
-  
-  i_frank_cr <-
-    s2("i_frank_cr")
-  
-  # Want this to totally dictate sapto eligibility and rates
-  on_sapto_cd <-
-    if (is.data.table(.dots.ATO)) {
-      if (hasName(.dots.ATO, "on_sapto_cd")) {
-        rep_len(as_raw_sapto_cd(.subset2(.dots.ATO, "on_sapto_cd")), N)
-      } else {
-        rep_len(sf2osc(.dots.ATO), N)
-      } 
-    } else if (is.null(c_age_30_june)) {
-      # Assume never get SAPTO
-      rep.int(as.raw(0), N)
-    } else {
-      # Assume based on Age, no couples
-      rep_len(as_raw_sapto_cd(fifelse(c_age_30_june > 65, "A", "")), N)
+  if (!length(taxable)) {
+    if (summary == 2L) {
+      return(NaN)
     }
-  
-  # on_sapto_cd <- rep_len(as_raw_sapto_cd("A"), N)
-  
-  # don't allocate the same vector
+    if (summary == 1L) {
+      return(0)
+    }
+    return(numeric())
+  }
+
+  fy.year <- fy.year %||% fy::date2fy(Sys.Date())
+  n_years <- length(fy.year)
+  N <- max(length(taxable), n_years, nrow(.dots.ATO) %||% 0L, length(age))
+  if (!is.null(age) && !(length(age) %in% c(1L, N))) {
+    stop("Incompatible age length.")
+  }
+  if (!(length(taxable) %in% c(1L, N)) || !(n_years %in% c(1L, N))) {
+    stop("`income` and `fy.year` must have length 1 or the number of records.")
+  }
+  if (!is.null(.dots.ATO) && !(nrow(.dots.ATO) %in% c(1L, N))) {
+    stop("The number of rows in `.dots.ATO` must be 1 or the number of records.")
+  }
+  if (n_years > 1L && is.character(fy.year) && !isntConstant(fy.year)) {
+    fy.year <- fy.year[1L]
+  }
+  yr <- fy2yr(fy.year)
+  # Keep each row index once. Annual returns need no indices or column copies.
+  groups <-
+    if (length(yr) > 1L) {
+      setDT(list(fy = yr))[, list(rows = list(.I)), by = "fy"]
+    }
+
+  years <-
+    if (is.null(groups)) {
+      yr
+    } else {
+      groups$fy
+    }
+
+  min_year <- min(years)
+  max_year <- max(years)
+
   zero <- integer(N)
   rN <- function(x) .rN(x, zero, nThread)
-  
-  fy.year <- fy.year %||% fy::date2fy(Sys.Date())
-  fy.year <- validate_fys_permitted(fy.year)
-  yr <- fy2yr(fy.year)
-  rebateIncome <- .subset2(.dots.ATO, "ic_rebate_income")
-  
-  if (is.null(rebateIncome)) {
-    rebateIncome <- 
-      .Call("Crebate_income", 
-            rN(ic_taxable_income_loss),  
-            it_rept_empl_super_cont, 
-            sc_empl_cont,
-            ds_pers_super_cont,
-            it_invest_loss,
-            is_net_rent, 
-            it_rept_fringe_benefit,
-            yr, 
-            nThread,
-            PACKAGE = "grattan")
+  taxable <- rN(taxable)
+  age <- age_from_file(.dots.ATO, age)
+  spouse_status <- return_field(.dots.ATO, "sp_flag", "Partner_status", "Marital_status")
+  married <- rN(spouse_status %||% 0L)
+  children <- rN(column("c_depend_child"))
+  spouse_amount <- return_field(.dots.ATO, "sp_taxable_income_loss", "Spouse_taxable_income",
+                                "Spouse_adjusted_taxable_inc", "spc_rebate_income")
+  spouse_taxable <- rN(spouse_amount %||% 0L)
+  infer_status <- is.null(spouse_status) || anyNA(spouse_status)
+  if (infer_status) {
+    unknown_status <-
+      if (is.null(spouse_status)) {
+        TRUE
+      } else {
+        is.na(spouse_status)
+      }
+
+    if (!is.null(spouse_amount)) {
+      married[unknown_status & spouse_taxable > 0L] <- 1L
+    }
   }
-  
-  if (isntConstant(yr)) {
-    DT <- data.table(yr,
-                     ic_taxable_income_loss = rN(ic_taxable_income_loss),
-                     rebateIncome,
-                     c_age_30_june = rN(c_age_30_june),
-                     is_married = rN(is_married),
-                     n_dependants = rN(n_dependants),
-                     on_sapto_cd = on_sapto_cd %||% charToRaw('A'),
-                     i_frank_cr = i_frank_cr %||% 0L,
-                     spc_rebate_income = rN(spc_rebate_income))
-    ans <- DT[, "tax" := .Call("Cincome_tax",
-                               .BY[[1]],
-                               ic_taxable_income_loss,
-                               rebateIncome,
-                               c_age_30_june,
-                               is_married,
-                               n_dependants,
-                               spc_rebate_income,
-                               on_sapto_cd,
-                               i_frank_cr,
-                               System, # RSystem
-                               1L,
-                               summary,
-                               PACKAGE = "grattan"),
-              by = "yr"]
-    return(.subset2(ans, "tax"))
+  claim <- return_claim_codes(.dots.ATO, age, married, yr, System, sapto_eligible)
+  # A reported partnered claim also identifies couples with zero spouse income.
+  if (infer_status && any(c("on_sapto_cd", "on_sato_cd") %chin% names(.dots.ATO))) {
+    married[unknown_status & claim > as.raw(1L)] <- 1L
   }
-  
-  .Call("Cincome_tax",
-        yr[1],
-        rN(ic_taxable_income_loss),
-        rebateIncome,
-        rN(c_age_30_june),
-        rN(is_married),
-        rN(n_dependants),
-        rN(spc_rebate_income),
-        on_sapto_cd %||% rep.int(charToRaw('A'), N),
-        i_frank_cr,
-        System, # RSystem
-        nThread,
-        summary,
-        PACKAGE = "grattan")
-  
-  
+
+  if (max_year <= 2009L || is.null(.dots.ATO)) {
+    rebate <- pmax0(taxable, nThread = nThread)
+    spouse_rebate <-
+      if (is.null(spouse_amount)) {
+        zero
+      } else {
+        pmax0(spouse_taxable, nThread = nThread)
+      }
+
+  } else {
+    # Reported complete amounts bypass reconstruction. NULL addbacks are zero
+    # in the native calculation, including for records from stacked releases.
+    spouse_rebate <- column("spc_rebate_income", default = {
+      spouse_fields <- c("sp_rept_super_cont", "sp_net_invest_loss", "sp_rept_fringe_benefit",
+                         "sp_rept_fringe_benefit_exe", "sp_rept_fringe_benefit_nexe", "spouse_assessable_fhss")
+      if (any(spouse_fields %chin% names(.dots.ATO))) {
+        .Call("Crebate_income", spouse_taxable, .dots.ATO[["sp_rept_super_cont"]], NULL,
+              .dots.ATO[["sp_net_invest_loss"]], NULL, .dots.ATO[["sp_rept_fringe_benefit"]],
+              .dots.ATO[["sp_rept_fringe_benefit_exe"]], .dots.ATO[["sp_rept_fringe_benefit_nexe"]],
+              .dots.ATO[["spouse_assessable_fhss"]], yr, nThread, PACKAGE = "grattan")
+      } else if (is.null(spouse_amount)) {
+        zero
+      } else {
+        pmax0(spouse_taxable, nThread = nThread)
+      }
+
+    })
+    rebate <- column("ic_rebate_income", default = {
+      loss <- .dots.ATO[["it_property_loss"]]
+      rent <- if (is.null(loss)) {
+        return_field(.dots.ATO, "is_net_rent", "Net_rent_amt")
+      } else {
+        signed <- -pmax0(loss, keep_nas = TRUE, nThread = nThread)
+        if (anyNA(signed)) {
+          fill_return_field(signed, column("is_net_rent", "Net_rent_amt"))
+        } else {
+          signed
+        }
+      }
+      .Call("Crebate_income", taxable,
+            return_field(.dots.ATO, "it_rept_empl_super_cont", "Rptbl_Empr_spr_cont_amt"),
+            return_field(.dots.ATO, "ds_pers_super_cont", "Non_emp_spr_amt"),
+            return_field(.dots.ATO, "it_invest_loss", "Net_fincl_invstmt_lss_amt", "Net_fincl_invstmnt_lss_amt"),
+            rent, return_field(.dots.ATO, "it_rept_fringe_benefit", "Rep_frng_ben_amt"),
+            .dots.ATO[["it_rept_fringe_benefit_exe"]], .dots.ATO[["it_rept_fringe_benefit_nexe"]],
+            .dots.ATO[["is_other_cat3_fhss"]], yr, nThread, PACKAGE = "grattan")
+    })
+    rebate <- rN(rebate)
+    spouse_rebate <- rN(spouse_rebate)
+    if (min_year <= 2009L) {
+      historical <- yr <= 2009L
+      rebate[historical] <- pmax0(taxable[historical], nThread = nThread)
+      spouse_rebate[historical] <- pmax0(spouse_taxable[historical], nThread = nThread)
+    }
+  }
+  # Reg 12(5) includes specified exempt pensions in the transfer tax test.
+  transfer_taxable <- function(income, pension) {
+    if (max_year < 2013L || is.null(pension)) {
+      return(income)
+    }
+    if (anyNA(pension)) {
+      pension <- coalesce0(pension, nThread = nThread)
+    }
+    if (min_year < 2013L) {
+      pension <- (yr >= 2013L) * pension
+    }
+    rN(as.double(income) + pension)
+  }
+  own_transfer <- transfer_taxable(taxable, .dots.ATO[["sapto_exempt_pension"]])
+  spouse_transfer <- transfer_taxable(spouse_taxable, .dots.ATO[["sp_pension_exempt"]])
+  franking <- .dots.ATO[["i_frank_cr"]]
+  if (!is.null(franking)) {
+    franking <- rN(franking)
+  }
+  flood_exempt <- .dots.ATO[["tn_flood_levy_exempt"]]
+  if (!is.null(flood_exempt)) {
+    flood_exempt <-
+      if (is.character(flood_exempt) || is.factor(flood_exempt)) {
+        as.character(flood_exempt) %chin% c("1", "TRUE", "X", "Y")
+      } else {
+        flood_exempt == 1L
+      }
+
+    flood_exempt <- rN(flood_exempt)
+  }
+  if (!is.null(sbto_discount) && !(length(sbto_discount) %in% c(1L, N))) {
+    stop("Supply one business discount or a discount per taxpayer.")
+  }
+  business <-
+    if (max_year >= 2016L) {
+      business_income_from_return(.dots.ATO, yr)
+    }
+
+  labour <-
+    if (max_year >= 2028L) {
+      net_labour_from_return(.dots.ATO)
+    }
+
+  if (!is.null(labour)) {
+    labour_default <-
+      if (length(labour) == 1L) {
+        0L
+      } else {
+        zero
+      }
+
+    labour <- .rN(labour, labour_default, nThread)
+  }
+
+  assess <- function(year, rows = NULL, summarise = 0L) {
+    take <-
+      if (is.null(rows)) {
+        identity
+      } else {
+        function(x) {
+          if (length(x) > 1L) {
+            x[rows]
+          } else {
+            x
+          }
+        }
+      }
+
+    income <- take(taxable)
+    income_offsets <- NULL
+    if (year >= 2016L && !is.null(business)) {
+      basic_tax <- .Call("Cordinary_tax", year, income, System, PACKAGE = "grattan")
+      income_offsets <- business_offset_amount(income, basic_tax, take(business), year, take(sbto_discount))
+    }
+    if (year >= 2028L && !is.null(labour)) {
+      labour_tax <- .Call("Cordinary_tax", year, take(labour), System, PACKAGE = "grattan")
+      income_offsets <- (income_offsets %||% 0) + pminC(labour_tax, 250, nThread = nThread)
+    }
+    .Call("Cincome_tax", year, income, take(rebate), as.integer(take(age)), take(married),
+          take(children), take(spouse_rebate), take(spouse_taxable), take(claim), take(franking),
+          income_offsets, take(flood_exempt), take(own_transfer), take(spouse_transfer), System,
+          nThread, as.integer(summarise), PACKAGE = "grattan")
+  }
+  if (length(years) == 1L) {
+    return(assess(years, summarise = summary))
+  }
+  tax <- numeric(N)
+  for (g in seq_along(years)) {
+    rows <- groups$rows[[g]]
+    tax[rows] <- assess(years[g], rows)
+  }
+  if (summary == 1L) {
+    sum(tax)
+  } else if (summary == 2L) {
+    mean(tax)
+  } else {
+    tax
+  }
 }
 
 

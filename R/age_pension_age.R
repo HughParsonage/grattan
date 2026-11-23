@@ -51,40 +51,10 @@ age_pension_age <- function(when = Sys.Date(),
       max(nchar(x)) == nchar("2015-16")
   }
   
-  o <- rep_len(65, max.length)
-  
   if (fy_ish(when)) {
-    o[when == "2017-18"] <- 65.5
-    o[when == "2018-19"] <- 65.5
-    o[when == "2019-20"] <- 66
-    o[when == "2020-21"] <- 66
-    o[when == "2021-22"] <- 66.5
-    o[when == "2022-23"] <- 66.5
-    o[when >= "2023-24"] <- 67
-    Switch(sex,
-           DEFAULT = o,
-           "f" = {
-             o[when <= "1993-94"] <- 60
-             o[when == "1994-95"] <- 60
-             o[when == "1995-96"] <- 60.5
-             o[when == "1996-97"] <- 60.5
-             o[when == "1997-98"] <- 61
-             o[when == "1998-99"] <- 61
-             o[when == "1999-00"] <- 61.5
-             o[when == "2000-01"] <- 61.5
-             o[when == "2001-02"] <- 62
-             o[when == "2002-03"] <- 62
-             o[when == "2003-04"] <- 62.5
-             o[when == "2004-05"] <- 62.5
-             o[when == "2005-06"] <- 63
-             o[when == "2006-07"] <- 63
-             o[when == "2007-08"] <- 63.5
-             o[when == "2008-09"] <- 63.5
-             o[when == "2009-10"] <- 64
-             o[when == "2010-11"] <- 64
-             o[when == "2011-12"] <- 64.5
-             o[when == "2012-13"] <- 64.5
-           })
+    # Use the same date/sex lookup for both representations, avoiding eager
+    # evaluation of assignments in the former vectorized Switch call.
+    return(age_pension_age(fy2date(when), sex = rep_len(.sex, max.length)))
   } else {
     if (!inherits(when, "Date")) {
       when <- 

@@ -1,0 +1,157 @@
+test_that("SAPTO rebate income adds losses and reportable super only", {
+  person <- function(...) data.table::data.table(
+    c_age_30_june = 70L, sp_flag = FALSE, on_sapto_cd = "A", ...)
+  tax <- function(d) income_tax(35000, "2023-24", .dots.ATO = d)
+  # Ordinary tax 3192, LITO 700, SAPTO 2230 - .125 * (rebate - 32279).
+  expect_equal(tax(person()), 602)
+  expect_equal(tax(person(Net_rent_amt = -5000L)), 1227)
+  expect_equal(tax(person(Net_rent_amt = 5000L)), 602)
+  expect_equal(tax(person(MCS_Emplr_Contr = 5000L)), 602)
+  for (amount in list(5000, 5000L)) {
+    expect_equal(tax(person(Net_fincl_invstmt_lss_amt = amount)), 1227)
+    expect_equal(tax(person(it_invest_loss = amount)), 1227)
+    expect_equal(tax(person(Rptbl_Empr_spr_cont_amt = amount)), 1227)
+    expect_equal(tax(person(Non_emp_spr_amt = amount)), 1227)
+    expect_equal(tax(person(ic_rebate_income = 40000 + 0 * amount)), 1227)
+  }
+  expect_equal(tax(person(MCS_Emplr_Contr = 10000L,
+                         Rptbl_Empr_spr_cont_amt = 5000L)), 1227)
+})
+
+test_that("rebate fringe adjustment uses the income year's FBT rate", {
+  # ATO annual rebate worksheets: .535, .53, .51, .51, .53.
+  years <- c("2013-14", "2014-15", "2015-16", "2016-17", "2017-18")
+  expect_equal(rebate_income(rep(35000, 5), Rep_frng_ben_amt = 5000,
+                            fy.year = years),
+               c(37675, 37650, 37550, 37550, 37650))
+  d <- data.table::data.table(c_age_30_june = 70L, sp_flag = FALSE,
+                              on_sapto_cd = "A", Rep_frng_ben_amt = 5000)
+  # 3192 - LITO445 - SAPTO1572 + Medicare126.20.
+  expect_equal(income_tax(35000, "2015-16", .dots.ATO = d), 1301.20)
+  d[, Rep_frng_ben_amt := NA_real_]
+  expect_equal(income_tax(35000, "2015-16", .dots.ATO = d),
+               income_tax(35000, "2015-16", age = 70))
+})
+
+test_that("compact numeric addbacks give the same legal result across threads", {
+  losses <- seq_len(1000)
+  records <- data.frame(c_age_30_june = 70L, sp_flag = FALSE,
+                         on_sapto_cd = "A", it_invest_loss = losses)
+  expected <- 3192 - 700 - ceiling(2230 - (35000 + losses - 32279) / 8)
+  expect_equal(income_tax(rep(35000L, 1000), "2023-24",
+                          .dots.ATO = records, nThread = 1L), expected)
+  expect_equal(income_tax(rep(35000L, 1000), "2023-24",
+                          .dots.ATO = records, nThread = 2L), expected)
+})
+
+test_that("Division 293 excludes excess contributions exactly once", {
+  d <- data.table::data.table(
+    MCS_Emplr_Contr = c(20000, 30000, 40000, 70000),
+    MCS_Prsnl_Contr = 0, MCS_Othr_Contr = 0, MCS_Ttl_Acnt_Bal = 0,
+    Non_emp_spr_amt = 0, Net_rent_amt = 0, Net_fincl_invstmt_lss_amt = 0,
+    Rep_frng_ben_amt = 0, Taxable_Income = 310000,
+    Rptbl_Empr_spr_cont_amt = 0)
+  a <- apply_super_caps_and_div293(d, cap = 30000, age_based_cap = FALSE,
+                                  div293_threshold = 300000)
+  expect_equal(a$low_tax_contributions_div293, c(20000, 30000, 30000, 30000))
+  expect_equal(a$div293_tax, c(3000, 4500, 4500, 4500))
+  expect_equal(a$Taxable_income_for_ECT, c(310000, 310000, 320000, 350000))
+  d <- d[1:2]
+  d[, Taxable_Income := 280000]
+  a <- apply_super_caps_and_div293(d, cap = 30000, age_based_cap = FALSE,
+                                  div293_threshold = 300000)
+  expect_equal(a$div293_tax, c(0, 1500))
+})
+
+test_that("exact ages and historical sample bands select the higher contribution cap", {
+  caps <- function(d, cutoff) {
+    apply_super_caps_and_div293(d, cap = 25000, cap2 = 35000, cap2_age = cutoff)$concessional_cap
+  }
+  d <- data.table::data.table(MCS_Emplr_Contr = 40000L, Taxable_Income = 50000L,
+                              age_range = c(11L, 10L, 4L, 2L, 1L, 0L))
+  expect_equal(caps(d, 19), rep(35000, 6))
+  expect_equal(caps(d, 50), c(25000, 25000, 35000, 35000, 35000, 35000))
+  expect_equal(caps(d, 60), c(25000, 25000, 25000, 35000, 35000, 35000))
+  expect_equal(caps(d, 65), c(rep(25000, 5), 35000))
+  expect_equal(caps(d, 70), caps(d, 65))
+
+  d[, c_age_30_june := c(61L, 60L, NA, NA, NA, NA)]
+  d[, age_range := c(3L, 2L, 2L, 3L, NA, NA)]
+  d[, age_range_description := c(NA, NA, NA, NA, "60 to 64", NA)]
+  expect_equal(caps(d, 60), c(35000, 25000, 35000, 25000, 35000, 25000))
+})
+
+test_that("SAPTO requires one transfer income or one per record", {
+  args <- list(rebate_income = rep(40000L, 3), fy.year = "2017-18",
+               on_sapto_cd = "D", Spouse_income = 0L, spouse_taxable_income = 30000L)
+  expect_equal(do.call(sapto, args), rep(224, 3))
+  args$spouse_taxable_income <- rep(30000L, 3)
+  expect_equal(do.call(sapto, args), rep(224, 3))
+  for (name in c("Spouse_income", "taxable_income", "spouse_taxable_income")) {
+    for (n in c(0L, 2L, 4L)) {
+      bad <- args
+      bad[[name]] <- rep(30000L, n)
+      expect_error(do.call(sapto, bad), paste0("`", name, "` must have length one"))
+    }
+  }
+  expect_identical(sapto(integer(), "2017-18", Spouse_income = integer(),
+                         taxable_income = 0L, spouse_taxable_income = integer()), numeric())
+  expect_error(sapto(integer(), "2017-18", Spouse_income = c(0L, 0L)), "Spouse_income")
+})
+
+test_that("super output names and types survive dropping helpers by reference", {
+  d <- data.table::data.table(Taxable_Income = 249000L, MCS_Emplr_Contr = c(30000L, 35000L),
+                              concessional_cap = 0L, div293_income = 0L, rental_losses = 0L)
+  apply_super_caps_and_div293(d, cap = 30000.5, age_based_cap = FALSE, div293_threshold = 250000,
+                              copyDT = FALSE, drop_helpers = TRUE, colname_div293_tax = "div293_income",
+                              warn_if_colnames_overwritten = FALSE)
+  expect_identical(d$concessional_cap, c(30000.5, 30000.5))
+  expect_equal(d$div293_income, 0.15 * c(29000, 30000.5))
+  expect_null(d$rental_losses)
+  missing <- data.table::data.table(Taxable_Income = c(NA_real_, NaN), MCS_Emplr_Contr = 30000)
+  expect_identical(apply_super_caps_and_div293(missing, cap = 30000, age_based_cap = FALSE)$div293_tax,
+                   c(NA_real_, NaN))
+})
+
+test_that("beneficiary offsets preserve interleaved years and custom rates", {
+  expect_equal(bto(rep(6300.8, 3), c("2004-05", "2024-25", "2004-05")), c(51, 45, 51))
+  expect_identical(bto(c(6300, 6300, Inf, NaN), rate1 = c(.17, .123, .15, .15)),
+                   c(51, 37, Inf, NaN))
+})
+
+test_that("historical pension ages agree for dates and financial years", {
+  years <- c("1995-96", "2003-04", "2011-12", "2023-24")
+  for (sex in c("male", "m", "M", "female", "f", "F")) {
+    expect_equal(age_pension_age(years, sex), age_pension_age(fy2date(years), sex))
+  }
+  expect_equal(age_pension_age(years, "male"), c(65, 65, 65, 67))
+  expect_equal(age_pension_age(years, "female"), c(60.5, 62.5, 64.5, 67))
+  expect_equal(age_pension_age(rep("1995-96", 2), c("male", "female")), c(65, 60.5))
+})
+
+test_that("inferred pension ages advance in the legislated half-year steps", {
+  people <- data.frame(c_age_30_june = c(65L, 66L, 66L, 67L), sp_flag = FALSE)
+  expect_equal(sf2osc(people, c(2018L, 2018L, 2022L, 2022L)),
+               as.raw(c(0, 1, 0, 1)))
+  expect_equal(sf2osc(people[1:2, ], 2020L), as.raw(c(0, 1)))
+})
+
+test_that("logical scalar inputs are recycled before native indexing", {
+  expect_identical(do_rN(FALSE, integer(4)), integer(4))
+  expect_identical(do_rN(TRUE, integer(4)), rep(1L, 4))
+  expect_identical(do_rN(NA, integer(4)), integer(4))
+})
+
+test_that("scaled deductible contributions reconcile with the returned amounts",
+          {
+            d <-
+              data.table::data.table(Taxable_Income = 70000L,
+                                     MCS_Emplr_Contr = 10000L,
+                                     Non_emp_spr_amt = 3000L,
+                                     MCS_Prsnl_Contr = 5000L)
+
+            out <- apply_super_caps_and_div293(d, age_based_cap = FALSE, scale_contr_match_ato = TRUE, .lambda = 1)
+            expect_equal(out$personal_deductible_contributions, 3000 * super_contribution_inflator_1314)
+            expect_equal(out$personal_deductible_contributions, out$Non_emp_spr_amt)
+            expect_equal(out$personal_deductible_contributions + out$non_concessional_contributions, 5000)
+          })

@@ -8,7 +8,7 @@ bool has_lito(int yr) {
 }
 
 bool has_lmito(int yr) {
-  return yr >= 2019;
+  return yr >= 2019 && yr <= 2022;
 }
 
 int max_lito1(int yr) {
@@ -53,7 +53,7 @@ int threshold_lito1(int yr) {
     return 21600;
   }
   if (yr == 2003) {
-    return 18575;
+    return 20700;
   }
   return 0;
 }
@@ -120,28 +120,39 @@ SEXP C_lito(SEXP x, SEXP Year, SEXP doLmito) {
   R_xlen_t N = xlength(x);
   SEXP ans = PROTECT(allocVector(REALSXP, N));
   double * restrict ansp = REAL(ans);
-  int yr = asInteger(Year);
-  const bool do_lmito = asInteger(doLmito);
-  bool offset_applies = do_lmito ? has_lmito(yr) : has_lito(yr);
-  if (!offset_applies) {
-    memset(ansp, 0, sizeof(double) * N);
-    UNPROTECT(1);
-    return ans;
+  if (!isInteger(Year) || (xlength(Year) != 1 && xlength(Year) != N)) {
+    error("fy.year must have length one or the number of incomes.");
   }
-  OffsetN O = do_lmito ? LMITO_Par(yr) : LITO_Par(yr);
-  if (isInteger(x)) {
-    const int * xp = INTEGER(x);
-    // double value_OffsetN(int x, const OffsetN O)
-    for (R_xlen_t i = 0; i < N; ++i) {
-      ansp[i] = value_OffsetN(xp[i], O);
+  const int *years = INTEGER(Year);
+  bool single_year = xlength(Year) == 1;
+  bool lmito = asInteger(doLmito);
+  const int *ix = isInteger(x) ? INTEGER(x) : NULL;
+  const double *dx = isReal(x) ? REAL(x) : NULL;
+  OffsetN schedules[MAX_YEAR - MIN_YEAR + 1];
+  bool loaded[MAX_YEAR - MIN_YEAR + 1] = {false};
+  for (R_xlen_t i = 0; i < N; ++i) {
+    int yr = years[single_year ? 0 : i];
+    if (yr == NA_INTEGER) {
+      error("Missing financial year.");
     }
-  } else {
-    const double * xp = REAL(x);
-    for (R_xlen_t i = 0; i < N; ++i) {
+    if (lmito ? !has_lmito(yr) : !has_lito(yr)) {
       ansp[i] = 0;
-      if (xp[i] > 0 && xp[i] < INT_MAX) {
-        ansp[i] = value_OffsetN(xp[i], O);
-      }
+      continue;
+    }
+    if (yr < MIN_YEAR || yr > MAX_YEAR) {
+      error("Unsupported offset year %d.", yr);
+    }
+    int j = yr - MIN_YEAR;
+    if (!loaded[j]) {
+      schedules[j] = lmito ? LMITO_Par(yr) : LITO_Par(yr);
+      loaded[j] = true;
+    }
+    if (ix) {
+      ansp[i] = ix[i] < 0 && ix[i] != NA_INTEGER ? 0 : value_OffsetN(ix[i], schedules[j]);
+    } else if (ISNAN(dx[i])) {
+      ansp[i] = NA_REAL;
+    } else {
+      ansp[i] = dx[i] >= 0 && dx[i] < INT_MAX ? value_OffsetN((int)dx[i], schedules[j]) : 0;
     }
   }
   UNPROTECT(1);

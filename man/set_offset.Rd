@@ -10,7 +10,8 @@ set_offset(
   offset_1st = integer(1),
   thresholds = integer(),
   tapers = double(),
-  refundable = logical(1)
+  refundable = logical(1),
+  cutoff = 0L
 )
 
 set_offsets(
@@ -37,6 +38,9 @@ threshold.}
 \item{refundable}{\code{bool(1)} If \code{FALSE}, the default, offsets are 
 non-refundable, meaning that the offset cannot reduce the tax below zero.}
 
+\item{cutoff}{\code{integer(1)} An exclusive income limit: the offset is zero
+at or above this income. The default, zero, means no separate income limit.}
+
 \item{...}{A set of offsets created by \code{set_offset}. May not exceed
 \code{the_MAX_N_OFFSETN()}.}
 
@@ -49,8 +53,8 @@ arguments to adjust (single-threshold) LITO.}
 }
 \value{
 \describe{
-\item{\code{set_offset}}{A list of four elements, \code{offset_1st}, 
-\code{thresholds}, \code{tapers}, \code{refundable}.}
+\item{\code{set_offset}}{A list containing \code{offset_1st},
+\code{thresholds}, \code{tapers}, \code{refundable}, and \code{cutoff}.}
 \item{\code{set_offsets}}{A list of lists created by \code{set_offset}.}
 \item{\code{the_MAX_N_OFFSETN}}{The maximum number of offsets that may be used.}
 }
