@@ -8,8 +8,15 @@ environment:
 # rig installs the current R release and its matching UCRT toolchain.
 # The former r-appveyor bootstrap selected Rtools40 for every R 4.x release.
 install:
-  - cmd: choco install rig --version=0.11.1 --yes --no-progress
-  - ps: $env:PATH = "C:\Program Files\rig;C:\Program Files\R\bin;$env:PATH"
+  - ps: |
+      $archive = Join-Path $env:TEMP 'rig-windows-x86_64-0.11.1.zip'
+      $rigDir = Join-Path $env:ProgramFiles 'rig'
+      Invoke-WebRequest -UseBasicParsing -Uri 'https://github.com/r-lib/rig/releases/download/v0.11.1/rig-windows-x86_64-0.11.1.zip' -OutFile $archive
+      if ((Get-FileHash $archive -Algorithm SHA256).Hash -ne 'a0ce65f2afb2f016488523818d14c4596080c61f32d0dab4c123c7f5e1db8910') {
+        throw 'Unexpected SHA-256 for the rig Windows archive.'
+      }
+      Expand-Archive -LiteralPath $archive -DestinationPath $rigDir -Force
+      $env:PATH = "$rigDir\bin;C:\Program Files\R\bin;$env:PATH"
   - cmd: rig add release
   - cmd: rig default release
   - cmd: rig add rtools
